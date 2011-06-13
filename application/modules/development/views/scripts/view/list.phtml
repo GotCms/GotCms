@@ -1,0 +1,21 @@
+<table>
+	<tr>
+		<th><?php echo $this->escape($this->translate('Id')); ?></th>
+		<th><?php echo $this->escape($this->translate('Name')); ?></th>
+		<th><?php echo $this->escape($this->translate('Identifier')); ?></th>
+		<th><?php echo $this->escape($this->translate('Description')); ?></th>
+		<th><?php echo $this->escape($this->translate('Edit')); ?></th>
+		<th><?php echo $this->escape($this->translate('Delete')); ?></th>
+	</tr>
+	<?php foreach($this->views as $view): ?>
+		<tr>
+			<td><?php echo $view->getId(); ?></td>
+			<td><?php echo $this->escape($view->getName()); ?></td>
+			<td><?php echo $this->escape($view->getIdentifier()); ?></td>
+			<td><?php echo $this->escape($view->getDescription()); ?></td>
+			<td><a href="<?php echo $this->url(array('id' => $view->getId()), 'viewEdit'); ?>">img edit</a></td>
+			<td><a href="<?php echo $this->url(array('id' => $view->getId()), 'viewDelete'); ?>">img delete</a></td>
+		</tr>
+	<?php endforeach; ?>
+</table>
+

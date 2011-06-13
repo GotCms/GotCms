@@ -1,0 +1,40 @@
+body {background-image:url(../images/bg.png);background-repeat:repeat-x;background-color:#0d0d0d;font-size:11px;font-family:Arial, Helvetica, sans-serif;width:1031px;margin:auto;}
+
+#header {height:145px;}
+#header #logo {background-image:url(../images/logo.png);background-repeat:no-repeat;width:335px;height:145px;margin-left:212px;margin-right:35px;float:left;}
+#header #connexion a { color:#FFF; text-decoration:none; }
+#header #connexion a:hover { color:#FFF; text-decoration:underline; }
+#header #connexion {padding-top:45px;color:#FFF;}
+
+#navigation {background-image:url(../images/navbar.png);background-repeat:no-repeat;width:1031px;height:60px;}
+#navigation .part {width:206px;height:60px;color:#FFF;float:left;background-image:url(../images/separateur.png);background-repeat:no-repeat;background-position:right;margin-top:-1px;}
+#navigation .part p {margin-left:55px; padding-top:8px;}
+#navigation .part a {color:#FFF; text-decoration:none;}
+#navigation .part a:hover {color:#FFF; text-decoration:underline;}
+#navigation .part .icone {margin-left:10px; margin-top:10px; float:left; }
+
+#main-top {background-image:url(../images/corpshaut.png);background-repeat:no-repeat;height:69px;width:1031px;margin-bottom:-11px;}
+
+#main {background-color:#FFF;background-repeat:repeat-y;width:1011px;padding-left:10px;padding-right:10px;}
+
+#content {float:right;width:755px;}
+#content h2 {background-image:url(../images/h2txt.png);background-repeat:no-repeat;width:652px;height:25px;color:#FFF;font-size:11px;padding-top:5px;padding-left:10px;margin-left:45px;}
+
+#menu {width:189px;float:left;margin-left:5px;}
+#menu a {color:#000; text-decoration:none; }
+#menu a:hover {color:#000; text-decoration:underline; }
+#menu h2 {background-image:url(../images/h2.png);background-repeat:no-repeat;width:189px;height:25px;color:#FFF;font-size:11px;text-align:center;padding-top:5px;}
+#menu ul li {list-style-image:url(../images/liststyle.png);background-image:url(../images/separateur2.png);background-position:bottom;background-repeat:no-repeat;margin-left:-20px;padding-bottom:7px;padding-top:7px;}
+
+#footer {background-image:url(../images/footer.png);background-repeat:no-repeat;width:100%;height:32px;margin-bottom:10px;color:#939393;font-size:10px;padding-top:10px;padding-left:10px;}
+#footer a {color:#939393; font-style:italic; text-decoration:none; }
+#footer a:hover {text-decoration:underline;}
+#footer .creativegfx {width:150px;height:24px;display:block;float:right;}
+
+.error {background-image:url(../images/error.png);background-repeat:no-repeat;margin-left:150px;width:417px;height:47px;margin-top:15px;padding-top:12px;padding-left:10px;}
+.success {background-image:url(../images/success.png);background-repeat:no-repeat;margin-left:150px;width:417px;height:47px;margin-top:15px;padding-top:12px;padding-left:10px;}
+.warning {background-image:url(../images/warning.png);background-repeat:no-repeat;margin-left:150px;width:417px;height:47px;margin-top:15px;padding-top:12px;padding-left:10px;}
+
+.input-text {background-image:url(../images/input.png);background-repeat:no-repeat;width:280px;height:32px;border:hidden;color:#FFF;}
+.textarea {background-image:url(../images/textearea.png);background-repeat:no-repeat;width:500px;height:194px;border:hidden;color:#FFF;font-family:Arial, Helvetica, sans-serif;font-size:11px;}
+.input-submit {background-image:url(../images/valider.png);background-repeat:no-repeat;width:123px;height:24px;border:hidden;color:#FFF;cursor:pointer;}

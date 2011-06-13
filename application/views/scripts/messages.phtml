@@ -1,0 +1,5 @@
+<?php if(!empty($this->messages)):?>
+	<?php foreach($this->messages as $type => $message):?>
+		<div class="<?php echo $type; ?>"><img src="image/ico-<?php echo $type; ?>.png" width="22" height="24" /> Lorem Ipsum dolor sit amet</div>
+	<?php endforeach; ?>
+<?php endif; ?>
