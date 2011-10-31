@@ -13,8 +13,12 @@
 			<td><?php echo $this->escape($layout->getName()); ?></td>
 			<td><?php echo $this->escape($layout->getIdentifier()); ?></td>
 			<td><?php echo $this->escape($layout->getDescription()); ?></td>
-			<td><a href="<?php echo $this->url(array('id' => $layout->getId()), 'layoutEdit'); ?>">img edit</a></td>
-			<td><a href="<?php echo $this->url(array('id' => $layout->getId()), 'layoutDelete'); ?>">img delete</a></td>
+			<td><a href="<?php echo $this->url(array('id' => $layout->getId()), 'layoutEdit'); ?>">
+				<img src="<?php echo $this->image('icones/edit.png'); ?>" alt="<?php echo $this->escape($this->translate('Edit')); ?>" />
+			</a></td>
+			<td><a href="<?php echo $this->url(array('id' => $layout->getId()), 'layoutDelete'); ?>">
+				<img src="<?php echo $this->image('icones/delete.png'); ?>" alt="<?php echo $this->escape($this->translate('Delete')); ?>" />
+			</a></td>
 		</tr>
 	<?php endforeach; ?>
 </table>

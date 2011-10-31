@@ -4,12 +4,11 @@ class Es_Model_DbTable_View_Collection extends Es_Db_Table implements Es_Interfa
 
 	protected $_views;
 	protected $_views_elements;
-	protected $_document_type_id;
 	protected $_name = 'views';
 
 	public function init($document_type_id = NULL)
 	{
-		$this->_document_type_id = $document_type_id;
+		$this->setDocumentTypeId($document_type_id);
 		$this->setViews();
 	}
 
@@ -18,10 +17,10 @@ class Es_Model_DbTable_View_Collection extends Es_Db_Table implements Es_Interfa
 		$select = $this->select()
 			->order('name');
 
-		if($this->_document_type_id !== NULL)
+		if($this->getDocumentTypeId() !== NULL)
 		{
 			$select->join(array('dtv'=>'document_types_views'),'dtv.view_id = v.view_id');
-			$select->where('dtv.document_type_id = ?', $this->_document_type_id);
+			$select->where('dtv.document_type_id = ?', $this->getDocumentTypeId());
 		}
 
 		$rows = $this->fetchAll($select);
@@ -70,12 +69,12 @@ class Es_Model_DbTable_View_Collection extends Es_Db_Table implements Es_Interfa
 
 	public function save()
 	{
-		if(!empty($this->_data['id']))
+		if(!empty($this->_data['document_type_id']))
 		{
 			$this->delete();
 			foreach($this->getElements() as $view)
 			{
-				$this->insert(array('document_type_id' => $this->_document_type_id, 'view_id' => $view->getId()));
+				$this->getAdapter()->insert('document_type_views', array('document_type_id' => $this->getDocumentTypeId(), 'view_id' => $view->getId()));
 			}
 
 			return TRUE;
@@ -86,9 +85,9 @@ class Es_Model_DbTable_View_Collection extends Es_Db_Table implements Es_Interfa
 
 	public function delete()
 	{
-		if(!empty($this->_data['id']))
+		if(!empty($this->_data['document_type_id']))
 		{
-			parent::delete('document_type_id = '.$this->_document_type_id);
+			$this->getApdater()->delete('document_type_views', 'document_type_id = '.$this->getDocumentTypeId());
 			return TRUE;
 		}
 

@@ -30,18 +30,15 @@ class Es_Model_DbTable_View_Model extends Es_Db_Table implements Es_Interface_It
 		return $view;
 	}
 
-
-
 	/**
  	* @param integer $id
  	* @return Es_Model_DbTable_View_Model
  	*/
 	static function fromId($id)
 	{
-		$view_table = new Es_Model_DbTable_View_Model();
-		$select = $view_table->select();
-		$select->where('id = ?', $id);
-		$view = $view_table->fetchRow($select);
+		$select = $this->select()
+			->where('id = ?', $id);
+		$view = $this->fetchRow($select);
 		if(!empty($view))
 		{
 			return self::fromArray($view->toArray());

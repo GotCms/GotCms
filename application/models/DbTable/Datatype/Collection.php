@@ -31,7 +31,7 @@ class Es_Model_DbTable_Datatype_Collection extends Es_Db_Table implements Es_Int
 
 	public function getDatatypesSelect()
 	{
-		$arrayReturn = array('' => '-- Datatypes -- ');
+		$arrayReturn = array();
 		foreach($this->getDatatypes() as $key=>$value)
 		{
 			$arrayReturn[$value->getId()] = $value->getName();

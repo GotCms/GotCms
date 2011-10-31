@@ -28,3 +28,4 @@ class Es_Controller_Plugin_Messages extends Zend_Controller_Plugin_Abstract
 		$view->flashMessages = $messages;
 	}
 }
+

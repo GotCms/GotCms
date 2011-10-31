@@ -2,11 +2,11 @@
 
 class Es_Validate_Identifier extends Zend_Validate_Abstract
 {
-    const NOT_IDENTIFIER    = 'notIdentifier';
+	const NOT_IDENTIFIER	= 'notIdentifier';
 
 	protected $_pattern = '~^[a-zA-Z_]+$~';
 	protected $_messageTemplates = array(
-		self::NOT_IDENTIFIER    => "'%value%' can only contains alphabetic characters and '_'"
+		self::NOT_IDENTIFIER => "'%value%' can only contains alphabetic characters and '_'"
 	);
 
 	public function isValid($value)

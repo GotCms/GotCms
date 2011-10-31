@@ -1,9 +1,10 @@
 <?php
 class Datatypes_Textstring_Editor extends Es_Model_DbTable_Datatype_Abstract_Editor
 {
-	public function save(Zend_Controller_Request_Abstract $request = NULL)
+	protected $_name = 'textstring';
+	public function save()
 	{
-		$value = $request->getParam('textstring'.$this->_property->getId());
+		$value = $request->getParam($this->getName());
 		$this->setValue($value);
 		return $this->saveValue();
 	}
@@ -12,7 +13,7 @@ class Datatypes_Textstring_Editor extends Es_Model_DbTable_Datatype_Abstract_Edi
 	{
 		$parameters = $this->getParameters();
 		$property = $this->_property;
-		$textstring = new Zend_Form_Element_Text('textstring'.$property->getId());
+		$textstring = new Zend_Form_Element_Text($this->getName());
 		$textstring->setLabel($property->getName());
 		$textstring->setValue($this->getValue());
 		if(!empty($parameters['length']))

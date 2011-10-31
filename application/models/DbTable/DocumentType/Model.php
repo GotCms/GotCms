@@ -10,15 +10,6 @@
 class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Interface_Iterable
 {
 	protected $_name = 'document_types';
-	protected $_views;
-
-	/**
-	 * @param integer $defaultId
-	 */
-	public function __construct($defaultId = -1)
-	{
-		$this->setId($defaultId);
-	}
 
 	public function getUser()
 	{
@@ -33,6 +24,12 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
 	public function addView($view_id)
 	{
 		$this->_views[] = $view_id;
+		return $this;
+	}
+
+	public function addViews($views)
+	{
+		$this->_views += $views;
 		return $this;
 	}
 
@@ -59,10 +56,9 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
 
 	public function save()
 	{
-		$arraySave = array(
+		$array_save = array(
 			'name' => $this->getName()
-			, 'created_at' => $this->getCreatedAt()
-			, 'updated_at' => $this->getUpdatedAt()
+			, 'updated_at' => new Zend_Db_Expr('NOW()')
 			, 'description' => $this->getDescription()
 			, 'icon_id' => $this->getIconId()
 			, 'default_view_id' => $this->getDefaultViewId()
@@ -71,15 +67,28 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
 
 		try
 		{
-			if($this->getId() == -1)
+			$id = $this->getId();
+			if(empty($id))
 			{
-				$this->insert('document_types', $arraySave);
-				$this->setId($this->lastInsertId('document_types','id'));
+				$array_save['created_at'] = new Zend_Db_Expr('NOW()');
+				$id = $this->insert($array_save);
+				$this->setId($id);
 			}
 			else
 			{
-				$this->update('document_types', $arraySave, 'id = '.$this->getId());
+				$this->update($array_save, $this->getAdapter()->quoteInto('id = ? ', $id));
 	 		}
+
+			$views = $this->getViews();
+			if(!empty($views))
+			{
+				$db = $this->getAdapter();
+				$db->delete('document_type_views', $db->quoteInto('document_type_id = ?', $this->getId()));
+				foreach($views as $view);
+				{
+					$db->insert('document_type_views', array('document_type_id' => $this->getId(), 'view_id' => $view));
+				}
+			}
 
 			return TRUE;
 		}
@@ -88,7 +97,7 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
 			/**
 			 * TODO(Make Es_Error)
 			 */
-			Es_Error::set(get_class($this),$e);
+			Es_Error::set(get_class($this), $e);
 		}
 
 		return FALSE;
@@ -98,9 +107,16 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
 	{
 		if(!empty($this->_documentType_id))
 		{
-			if(parent::delete('id = '.$this->getId()))
+			$document_type_id = $this->getId();
+			if($this->delete('id = '.$document_type_id))
 			{
+				$tab_model = new Es_Model_DbTable_Tab_Model();
+				$tab_model->delete();
+				$tab_model = new Es_Model_DbTable_Property_Model();
+				$tab_model->delete();
+				$this->getAdapter()->delete('document_type_views', $this->getAdapter()->quoteInto('document_type_id = ?', $document_type_id));
 				unset($this);
+
 				return TRUE;
 			}
 		}

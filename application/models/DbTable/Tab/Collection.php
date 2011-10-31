@@ -1,62 +1,63 @@
 <?php
-class Es_Component_Tab_Collection {
-	private $_tabs;
-	private $_document_type_id;
-	private $_tabs_elements = array();
+class Es_Model_DbTable_Tab_Collection extends Es_Db_Table
+{
+	protected $_name = 'tabs';
 
-	public function __construct($document_type_id = -1) {
+	public function init($document_type_id = NULL)
+	{
 		$this->setDocumentTypeId($document_type_id);
-		$this->setTabs();
 	}
-	private function setTabs() {
-		$db = Zend_Registry::get('db');
-		$db->setFetchMode(Zend_Db::FETCH_ASSOC);
-		$select = $db->select();
-		$select->from(array('t'=>'tabs'));
-		$select->order(array('tab_name ASC'));
-		if($this->_document_type_id != -1) {
-			$select->where('t.document_type_id = ? ', $this->getDocumentTypeId());
+
+	public function getTabs($force_reload = FALSE)
+	{
+		$tabs = $this->getData('tabs');
+		$document_type_id = $this->getDocumentTypeId();
+		if(empty($tabs) or $force_reload == TRUE)
+		{
+			$select = $this->select();
+			if(!empty($document_type_id))
+			{
+				$select->where('document_type_id = ?', $document_type_id);
+			}
+
+			$rows = $this->fetchAll($select);
+			$tabs = array();
+			foreach($rows as $value)
+			{
+				$tabs[] = Es_Model_DbTable_Tab_Model::fromArray($value);
+			}
+
+			$this->setData('tabs', $tabs);
 		}
-		$statement = $db->query($select);
-		$rows = $statement->fetchAll();
-		$tabs = array();
-		foreach($rows as $value) {
-			$tabs[] = Es_Component_Tab_Model::fromArray($value);
+
+		return $this->getData('tabs');
+	}
+
+	public function setTabs(Array $tabs)
+	{
+		$array = array();
+		foreach($tabs as $tab)
+		{
+			$array[] = Es_Model_DbTable_Tab_Model::fromArray($tab);
 		}
-		$this->_tabs = $tabs;
-	}
-	public function getTabs() {
-		return $this->_tabs;
-	}
-	public function setDocumentTypeId($value) {
-		$this->_document_type_id = (int)$value;
-		return $this;
+
+		$this->setData('tabs', $array);
 	}
 
-	public function getDocumentTypeId() {
-		return $this->_document_type_id;
+	public function addTab(Array $tab)
+	{
+		$tabs = $this->getTabs();
+		$tabs[] = Es_Model_DbTable_Tab_Model::fromArray($tab);
+
+		$this->setData('tabs', $tabs);
 	}
-	public function cleanUp() {
-		try {
-			$db = Zend_Registry::get('db');
-			$db->delete('tabs','document_type_id = '.$this->getDocumentTypeId());
-		} catch (Exception $e) {
-			Es_Error::set(get_class($this), $e);
+
+	public function save()
+	{
+		$tabs = $this->getTabs();
+		foreach($tabs as $tab)
+		{
+			$tab->save();
 		}
-		return true;
-	}
-
-	public function addElement($tab) {
-		$this->_tabs_elements[] = $tab;
-		return $this;
-	}
-
-	public function getElements() {
-		return $this->_tabs_elements;
-	}
-
-	public function cleanElements() {
-		$this->_tabs_elements = array();
-		return $this;
 	}
 }

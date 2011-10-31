@@ -1,5 +1,6 @@
 <?php
-class Es_Component_Property_Value_Model extends Es_Core_Object{
+class Es_Model_DbTable_Property_Value_Model extends Es_Core_Object
+{
 	public function __construct($property_value_id = null, $document_id = null, $property_id = null) {
 		$this->setPropertyValueId($property_value_id);
 		$this->setDocumentId($document_id);

@@ -3,7 +3,7 @@
 class Development_Form_DocumentType extends Es_Form
 {
 
-	private $_subDocumentTypeForms = array(
+	protected $_subDocumentTypeForms = array(
 		'infos' => array(
 			'legend' => 'Infos'
 			, 'decorators' => array(
@@ -46,87 +46,191 @@ class Development_Form_DocumentType extends Es_Form
 		)))
 	);
 
-	private $_subDocumentTypeForms = array();
-
-
-	/**
-	 * @param unknown_type $values
-	 * @return unknown_type
-	 */
 	public function init()
 	{
-		$this->getInfos()
-			->getViews()
-			->getProperties()
-			->getTabs();
+		$this->getInfos();
+		$this->getViews();
+		$this->getProperties();
+		$this->getTabs();
 
-		$this->addDecorator('FormElements')
-		     ->addDecorator('HtmlTag', array('tag'  =>  'div', 'class'  =>  'zend-form'))
-		     ->addDecorator('Form');
-	}
+		$this->setAttrib('id', 'development-form');
+		$this->addDecorator('ViewScript', array('viewScript' => 'forms/document-type.phtml'));
 
-	/**
-	 * @param unknown_type $values
-	 * @return unknown_type
-	 */
-	private function getInfos($values = array())
-	{
-		$sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['infos']);
-		$sub_form->addElement('text', 'name', array('label' => 'Name','value' => ''));
-		$sub_form->addElement('text', 'description', array('label' => 'Description','value' => ''));
-		$sub_form->addElement('select', 'icon_id', array('label' => 'Icon', 'multioptions' => $options));
-
-		return $this->addSubForm($sub_form, 'infos');
-	}
-
-	/**
-	 * @param unknown_type $values
-	 * @return unknown_type
-	 */
-	private function getViews($values = array())
-	{
-		$sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['views']);
-		$sub_form->addElement('select', 'default_view_id', array('label' => 'Default view','value' => $selected,'multioptions' => $options,'required'  =>  true, 'requiredSuffix' => ' * '));
-		$sub_form->addElement('select', 'all_views', array('id' => 'view_name','label' => 'Add view','value' => $selected,'multioptions' => $options));
-		$sub_form->addElement('button', 'icon_id', array('id' => 'button_add','label' => 'Add view','alt' => 'Add view','class' => 'button-add button-add-view'));
-
-		return $this->addSubForm($sub_form, 'infos');
-	}
-
-	/**
-	 * @param unknown_type $values
-	 * @return unknown_type
-	 */
-	private function getProperties($values = array())
-	{
-		$tabs = array('' => '-- Select tab --');
-		$collection =  new Es_Model_DbTable_Datatype_Collection();
+		$collection = new Es_Model_DbTable_Datatype_Collection();
 		$datatypes = $collection->getDatatypesSelect();
+		$this->getSubForm('properties')->getElement('datatype')->addMultioptions($datatypes);
+
+		$views_collection = new Es_Model_DbTable_View_Collection();
+		$views = $views_collection->getViewsSelect();
+		$this->getSubForm('views')->getElement('default_view')->addMultioptions($views);
+		$this->getSubForm('views')->getElement('available_views')->addMultioptions($views);
+
+		$this->getDecorator('ViewScript')->setOption('datatypes', $datatypes);
+		$this->getDecorator('ViewScript')->setOption('views', $views);
+
+	}
+
+	/**
+	 * @param unknown_type $values
+	 * @return Development_Form_DocumentType
+	 */
+	private function getInfos()
+	{
+		$sub_form = $this->getSubForm('infos');
+		if(!empty($sub_form))
+		{
+			return $sub_form;
+		}
+
+		$sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['infos']);
+
+		$name = new Zend_Form_Element_Text('name');
+		$name->setLabel('Name')
+			->setValue('');
+
+		$description = new Zend_Form_Element_Text('description');
+		$description->setLabel('Description')
+			->setValue('');
+
+		$icon_id = new Zend_Form_Element_Select('icon_id');
+		$icon_id->setLabel('Icon');
+
+		$sub_form->addElements(array($name, $description, $icon_id));
+
+		return $this->addSubForm($sub_form, 'infos');
+	}
+
+	/**
+	 * @param unknown_type $values
+	 * @return Development_Form_DocumentType
+	 */
+	private function getViews()
+	{
+		$sub_form = $this->getSubForm('views');
+		if(!empty($sub_form))
+		{
+			return $sub_form;
+		}
+		$sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['views']);
+
+		$default_view = new Zend_Form_Element_Select('default_view');
+		$default_view->setLabel('Default view')
+			->setRequired(TRUE);
+
+		$available_views = new Zend_Form_Element_Multiselect('available_views');
+		$available_views->setLabel('Available views');
+
+
+		$sub_form->addElements(array($default_view, $available_views));
+
+		return $this->addSubForm($sub_form, 'views');
+	}
+
+	/**
+	 * @param unknown_type $values
+	 * @return Development_Form_DocumentType
+	 */
+	private function getProperties()
+	{
+		$sub_form = $this->getSubForm('properties');
+		if(!empty($sub_form))
+		{
+			return $sub_form;
+		}
 
 		$sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['properties']);
-		$sub_form->addElement('text', 'name', array('label' => 'Name','value' => ''));
-		$sub_form->addElement('text', 'identifier', array('label' => 'Alias','value' => ''));
-		$sub_form->addElement('select', 'tabs', array('label' => 'Tab','class' => 'select-options','value' => '','multioptions' => $tabs));
-		$sub_form->addElement('select', 'datatype', array('label' => 'Datatype','value' => '','multioptions' => $datatypes));
-		$sub_form->addElement('text', 'description', array('label' => 'Description','value' => ''));
-		$sub_form->addElement('checkbox', 'required', array('label' => 'Required'));
-		$sub_form->addElement('button', 'add', array('id' => 'property_add','label' => 'Add property','alt' => 'Add property','class' => 'button-add button-add-property'));
+
+		$name = new Zend_Form_Element_Text('name');
+		$name->setLabel('Name')
+			->setIsArray(TRUE);
+
+		$identifier = new Zend_Form_Element_Text('identifier');
+		$identifier->setLabel('Identifier')
+			->setIsArray(TRUE);
+
+		$tab = new Zend_Form_Element_Select('tab');
+		$tab->setLabel('Tab')
+			->setAttrib('class', 'select-tab')
+			->addMultioptions(array())
+			->setRegisterInArrayValidator(FALSE)
+			->setRequired(TRUE)
+			->setIsArray(TRUE);
+
+		$datatype = new Zend_Form_Element_Select('datatype');
+		$datatype->setLabel('Datatype')
+			->setAttrib('class', 'select-datatype')
+			->addMultioptions(array())
+			->setRequired(TRUE)
+			->setIsArray(TRUE);
+
+		$description = new Zend_Form_Element_Text('description');
+		$description->setLabel('Description')
+			->setIsArray(TRUE);
+
+		$required = new Zend_Form_Element_Checkbox('required');
+		$required->setLabel('Required')
+			->setIsArray(TRUE);
+
+
+		$sub_form->addElements(array($name, $identifier, $tab, $datatype, $description, $required));
 
 		return $this->addSubForm($sub_form, 'properties');
 	}
 
 	/**
-	 * @param unknown_type $values
-	 * @return unknown_type
+	 * @param array $values
+	 * @return Development_Form_DocumentType
 	 */
-	private function getTabs($values = array())
+	private function getTabs()
 	{
+		$sub_form = $this->getSubForm('tabs');
+		if(!empty($sub_form))
+		{
+			return $sub_form;
+		}
+
 		$sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['tabs']);
-		$sub_form->addElement('text', 'name', array('label' => 'Name','value' => ''));
-		$sub_form->addElement('text', 'description', array('label' => 'Description','value' => ''));
-		$sub_form->addElement('text', 'description', array('label' => 'Description','value' => ''));
-		$sub_form->addElement('button', 'add', array('button', array('value' => 'addTab','id' => 'tab_img_add','class' => 'button-add button-add-tab','label' => 'Add tab', 'alt' => 'Add tab')));
+
+		$add_name = new Zend_Form_Element_Text('name');
+		$add_name->setLabel('Name')
+			->setIsArray(TRUE)
+			->setRequired(TRUE);
+
+		$description = new Zend_Form_Element_Text('description');
+		$description->setLabel('Description')
+			->setIsArray(TRUE)
+			->setRequired(TRUE);
+
+		$sub_form->addElements(array($add_name, $description));
 
 		return $this->addSubForm($sub_form, 'tabs');
+	}
+
+	public function setValueFromSession($session)
+	{
+		if(empty($session['tabs']))
+		{
+			continue;
+		}
+
+		$tab_select = array();
+		foreach($session['tabs'] as $tab_id => $tab)
+		{
+			//@TODO Change content here to elements depends of session values
+			$tab_form = $this->getSubForm('tabs');
+			$tab_form->getElement('name')->setValue($tab['name']);
+			$tab_form->getElement('description')->setValue($tab['description']);
+			$tab_select[$tab_id] = $tab['name'];
+			foreach($tab['properties'] as $property)
+			{
+				$property_form = $this->getSubForm('properties');
+				$property_form->getElement('name')->setValue($property['name']);
+				$property_form->getElement('identifier')->setValue($property['identifier']);
+				$property_form->getElement('tab')->addMultiOptions($tab_select)->setValue($property['tab']);
+				$property_form->getElement('datatype')->setValue($property['datatype']);
+				$property_form->getElement('description')->setValue($property['description']);
+				$property_form->getElement('required')->setValue($property['is_required']);
+			}
+		}
 	}
 }

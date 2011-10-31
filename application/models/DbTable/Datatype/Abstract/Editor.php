@@ -1,7 +1,7 @@
 <?php
 abstract class Es_Model_DbTable_Datatype_Abstract_Editor extends Es_Core_Object
 {
-	protected $_datatype, $_property;
+	protected $_datatype, $_property, $_name;
 
 	public function __construct(Es_Model_DbTable_Datatype_Abstract $datatype)
 	{
@@ -56,4 +56,8 @@ abstract class Es_Model_DbTable_Datatype_Abstract_Editor extends Es_Core_Object
 		return $this->_datatype->getUploadUrl().'/property/'.$this->_property->getId();
 	}
 
+	public function getName()
+	{
+		return $this->_name.$this->$this->_property->getId();
+	}
 }
