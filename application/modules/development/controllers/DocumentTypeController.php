@@ -63,6 +63,7 @@ class Development_DocumentTypeController extends Es_Controller_Action
 				{
 					$t = Es_Model_DbTable_Tab_Model::fromArray($tab);
 					$t->setDocumentTypeId($document_type->getId());
+					$t->setOrder();
 					$t->save();
 					$tabs[$tab_id] = $t->getId();
 				}

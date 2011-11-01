@@ -44,6 +44,8 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
 		{
 			$this->setData('order', 1);
 		}
+
+		return $this->getData('order');
 	}
 
 	/**
