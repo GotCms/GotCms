@@ -1,22 +1,22 @@
 <table>
-	<tr>
-		<th><?php echo $this->escape($this->translate('Id')); ?></th>
-		<th><?php echo $this->escape($this->translate('Name')); ?></th>
-		<th><?php echo $this->escape($this->translate('Model')); ?></th>
-		<th><?php echo $this->escape($this->translate('Edit')); ?></th>
-		<th><?php echo $this->escape($this->translate('Delete')); ?></th>
-	</tr>
-	<?php foreach($this->datatypes as $datatype): ?>
-		<tr>
-			<td><?php echo $datatype->getId(); ?></td>
-			<td><?php echo $this->escape($datatype->getName()); ?></td>
-			<td><?php echo $this->escape($datatype->getModel()->getName()); ?></td>
-			<td><a href="<?php echo $this->url(array('id' => $datatype->getId()), 'datatypeEdit'); ?>">
-				<img src="<?php echo $this->image('icones/edit.png'); ?>" alt="<?php echo $this->escape($this->translate('Edit')); ?>" />
-			</a></td>
-			<td><a href="<?php echo $this->url(array('id' => $datatype->getId()), 'datatypeDelete'); ?>">
-				<img src="<?php echo $this->image('icones/delete.png'); ?>" alt="<?php echo $this->escape($this->translate('Delete')); ?>" />
-			</a></td>
-		</tr>
-	<?php endforeach; ?>
+    <tr>
+        <th><?php echo $this->escape($this->translate('Id')); ?></th>
+        <th><?php echo $this->escape($this->translate('Name')); ?></th>
+        <th><?php echo $this->escape($this->translate('Model')); ?></th>
+        <th><?php echo $this->escape($this->translate('Edit')); ?></th>
+        <th><?php echo $this->escape($this->translate('Delete')); ?></th>
+    </tr>
+    <?php foreach($this->datatypes as $datatype): ?>
+        <tr>
+            <td><?php echo $datatype->getId(); ?></td>
+            <td><?php echo $this->escape($datatype->getName()); ?></td>
+            <td><?php echo $this->escape($datatype->getModel()->getName()); ?></td>
+            <td><a href="<?php echo $this->url(array('id' => $datatype->getId()), 'datatypeEdit'); ?>">
+                <img src="<?php echo $this->image('icones/edit.png'); ?>" alt="<?php echo $this->escape($this->translate('Edit')); ?>" />
+            </a></td>
+            <td><a href="<?php echo $this->url(array('id' => $datatype->getId()), 'datatypeDelete'); ?>">
+                <img src="<?php echo $this->image('icones/delete.png'); ?>" alt="<?php echo $this->escape($this->translate('Delete')); ?>" />
+            </a></td>
+        </tr>
+    <?php endforeach; ?>
 </table>

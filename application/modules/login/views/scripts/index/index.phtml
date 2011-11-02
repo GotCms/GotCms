@@ -1,19 +1,19 @@
 <h1><?php echo $this->escape($this->title); ?></h1>
 <?php if(!empty($this->message)) :?>
-	<div id="message">
-		<?php echo $this->escape($this->message);?>
-	</div>
+    <div id="message">
+        <?php echo $this->escape($this->message);?>
+    </div>
 <?php endif; ?>
 <form action="<?php echo $this->baseUrl('admin/login/connect'); ?>" method="post">
-	<div>
-		<label for="email">E-mail</label>
-		<input id="email"type="text" name="email" value=""/>
-	</div>
-	<div>
-		<label for="password">Password</label>
-		<input type="password" name="password" value=""/>
-	</div>
-	<div id="formbutton">
-		<input type="submit" name="login" value="Login" />
-	</div>
+    <div>
+        <label for="email">E-mail</label>
+        <input id="email"type="text" name="email" value=""/>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" value=""/>
+    </div>
+    <div id="formbutton">
+        <input type="submit" name="login" value="Login" />
+    </div>
 </form>

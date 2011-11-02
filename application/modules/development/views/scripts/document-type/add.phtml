@@ -1,9 +1,9 @@
 <?php echo $this->partial('html-message.phtml'); ?>
 <div class="tabs">
-	<?php echo $this->form; ?>
+    <?php echo $this->form; ?>
 </div>
 
 <script type="text/javascript">
-	ES.getInstance().developmentForm('<?php echo $this->url(array(), 'addTab') ?>', '<?php echo $this->url(array(), 'addProperty') ?>', '<?php echo $this->url(array(), 'deleteTab') ?>', '<?php echo $this->url(array(), 'deleteProperty') ?>');
+    ES.getInstance().developmentForm('<?php echo $this->url(array(), 'addTab') ?>', '<?php echo $this->url(array(), 'addProperty') ?>', '<?php echo $this->url(array(), 'deleteTab') ?>', '<?php echo $this->url(array(), 'deleteProperty') ?>');
 </script>
 
