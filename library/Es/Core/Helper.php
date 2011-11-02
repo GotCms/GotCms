@@ -1,13 +1,13 @@
 <?php
 class Es_Core_Helper {
-	protected 	$_helper;
-    private 	$_loaders = array();  	
-    private 	$_loaderTypes = array('filter', 'helper');
-    
-	public function __construct() {
-		
-	}
- 	/**
+    protected     $_helper;
+    private     $_loaders = array();
+    private     $_loaderTypes = array('filter', 'helper');
+
+    public function __construct() {
+
+    }
+    /**
      * Get a helper by name
      *
      * @param  string $name
@@ -17,7 +17,7 @@ class Es_Core_Helper {
     {
         return $this->_getPlugin('helper', $name);
     }
-    
+
     /**
      * Retrieve a plugin object
      *
@@ -42,7 +42,7 @@ class Es_Core_Helper {
 
         return $store[$name];
     }
-    
+
     /**
      * Retrieve plugin loader for a specific plugin type
      *
