@@ -3,32 +3,27 @@
  * @author Rambaud Pierre
  *
  */
-class Es_DocumentType_Collection implements Es_Interface_Iterable {
+class Es_Model_DbTable_DocumentType_Collection extends Es_Db_Table implements Es_Interface_Iterable
+{
+    protected $_name = 'document_types';
 
-    private $_documentTypes;
-    private $_sort;
-
-    public function __construct($sort = 'ASC') {
-        if($sort!='DESC')$sort = 'ASC';
-        $this->_sort = $sort;
+    public function init($sort = 'ASC')
+    {
         $this->setDocumentTypes();
     }
-    private function setDocumentTypes(){
-        $db = Zend_Registry::get('db');
-        $db->setFetchMode(Zend_Db::FETCH_ASSOC);
-        $select = $db->select();
-        $select->from(array('dt'=>'document_types'));
-        $select->order(array('document_type_name '.$this->_sort));
-        $statement = $db->query($select);
-        $rows = $statement->fetchAll();
+
+    private function setDocumentTypes()
+    {
+        $select = $this->select();
+        $select->order(array('document_type_name ASC'));
+        $rows = $this->fetchAll();
         $documentTypes = array();
-        foreach($rows as $row){
-            $documentTypes[] = Es_DocumentType_Model::fromArray($row);
+        foreach($rows as $row)
+        {
+            $documentTypes[] = Es_Model_DbTable_DocumentType_Model::fromArray($row->toArray());
         }
-        $this->_documentTypes = $documentTypes;
-    }
-    public function getDocumentTypes(){
-        return $this->_documentTypes;
+
+        $this->setData('document_types', $documentTypes);
     }
 
     /*
@@ -37,19 +32,22 @@ class Es_DocumentType_Collection implements Es_Interface_Iterable {
     /* (non-PHPdoc)
     * @see include/Es/Interface/Es_Interface_Iterable#getParent()
     */
-    public function getParent() {
+    public function getParent()
+    {
         return null;
     }
     /* (non-PHPdoc)
     * @see include/Es/Interface/Es_Interface_Iterable#getChildren()
     */
-    public function getChildren() {
+    public function getChildren()
+    {
         return $this->getDocumentTypes();
     }
     /* (non-PHPdoc)
     * @see include/Es/Interface/Es_Interface_Iterable#getId()
     */
-    public function getId() {
+    public function getId()
+    {
         return null;
     }
     /* TODO Finish icon in Es_DocumentType_Collection
@@ -57,25 +55,29 @@ class Es_DocumentType_Collection implements Es_Interface_Iterable {
     /* (non-PHPdoc)
     * @see include/Es/Interface/Es_Interface_Iterable#getIcon()
     */
-    public function getIcon() {
+    public function getIcon()
+    {
         return 'folder';
     }
     /* (non-PHPdoc)
     * @see include/Es/Interface/Es_Interface_Iterable#getIterableId()
     */
-    public function getIterableId() {
+    public function getIterableId()
+    {
         return 'documenttypes';
     }
     /* (non-PHPdoc)
     * @see include/Es/Interface/Es_Interface_Iterable#getName()
     */
-    public function getName() {
+    public function getName()
+    {
         return 'Document Types';
     }
     /* (non-PHPdoc)
     * @see include/Es/Interface/Es_Interface_Iterable#getUrl()
     */
-    public function getUrl() {
+    public function getUrl()
+    {
         return 'javascript:loadController(\''.Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('controller'=>'development', 'action'=>'documenttypes')).'\')';
     }
 

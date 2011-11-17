@@ -130,7 +130,8 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
     */
     static function fromArray(Array $array)
     {
-        $dt = new Es_Model_Dbtable_DocumentType_Model($array['id']);
+        $dt = new Es_Model_Dbtable_DocumentType_Model();
+        $dt->setId($array['id']);
         $dt->setName($array['name']);
         $dt->setDescription($array['description']);
         $dt->setIcon($array['icon_id']);

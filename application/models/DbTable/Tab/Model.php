@@ -63,8 +63,8 @@ class Es_Model_DbTable_Tab_Model extends Es_Db_Table
     */
     private function checkOrder(&$order)
     {
-        $select = $this->select()
-            ->columns(array('max_order'=>'MAX(order)'));
+        $select = $this->getAdapter()->select()
+            ->from($this->_name, array('max_order'=>'MAX("order")'));
         if($this->getDocumentTypeId() !== NULL)
         {
             $select->where('document_type_id = ?',$this->getDocumentTypeId());
@@ -75,10 +75,10 @@ class Es_Model_DbTable_Tab_Model extends Es_Db_Table
             $select->where('id = ?', $this->getId());
         }
 
-        $row = $this->fetchRow($select);
+        $row = $this->getAdapter()->fetchRow($select);
         if(!empty($row))
         {
-            $order = $row->max_order + 1;
+            $order = $row['max_order'] + 1;
         }
         else
         {

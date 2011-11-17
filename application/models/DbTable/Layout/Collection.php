@@ -1,7 +1,6 @@
 <?php
-class Es_Model_DbTable_Layout_Collection extends Es_Db_Table implements Es_Interface_Iterable {
-
-    protected $_layouts;
+class Es_Model_DbTable_Layout_Collection extends Es_Db_Table implements Es_Interface_Iterable
+{
     protected $_name = 'layouts';
 
     public function init()
@@ -21,13 +20,9 @@ class Es_Model_DbTable_Layout_Collection extends Es_Db_Table implements Es_Inter
             $layout[] = Es_Model_DbTable_Layout_Model::fromArray($row->toArray());
         }
 
-        $this->_layouts = $layout;
+        $this->setData('layouts', $layout);
     }
 
-    public function getLayouts()
-    {
-        return $this->_layouts;
-    }
 
     public function getLayoutsSelect()
     {

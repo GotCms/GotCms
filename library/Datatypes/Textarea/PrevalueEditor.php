@@ -1,46 +1,59 @@
 <?php
-class Datatypes_Textarea_PrevalueEditor extends Es_Datatype_Abstract_PrevalueEditor  {
-
-    public function save($request = null) {
+class Datatypes_Textarea_PrevalueEditor extends Es_Model_DbTable_Datatype_Abstract_PrevalueEditor
+{
+    public function save()
+    {
         //Save prevalue in column datatypes_prevalue_value
-        $rows = $request->getParam('rows', '');
-        $cols = $request->getParam('cols','');
-        $wrap = $request->getParam('wrap','');
-        $options = $request->getParam('Options','');
+        $rows = $this->getParam('rows', '');
+        $cols = $this->getParam('cols','');
+        $wrap = $this->getParam('wrap','');
+        $options = $this->getParam('Options','');
         $disabled = !empty($options[0]) ? $options[0] : '';
         $readonly = !empty($options[1]) ? $options[1] : '';
 
-        $this->setConfiguration(array('cols'=>$cols,'rows'=> $rows, 'wrap'=>$wrap, 'disabled'=>$disabled, 'readonly'=>$readonly));
-
-        return $this->getConfiguration();
+        $this->setConfig(array(
+            'cols' => $cols
+            , 'rows' => $rows
+            , 'wrap' => $wrap
+            , 'disabled' => $disabled
+            , 'readonly' => $readonly)
+        );
     }
 
-    public function load() {
+    public function load()
+    {
         /*
-            - cols  :      number of caracters display per line
-            - rows :     define the number of line visible in text zone
-            - wrap :     Possible values are : hard / off / soft
-                        define if line returns are automatic (hard / soft)
-                        or if the horizontal display if exceeded (off)
-            - disabled :     render the zone grey and unmodifiable
-            - readonly :     render the zone unmodifiable but don't change appearance
+            - cols     :   Number of caracters display per line
+            - rows     :   Define the number of line visible in text zone
+            - wrap     :   Possible values are : hard / off / soft
+                                define if line returns are automatic (hard / soft)
+                                or if the horizontal display if exceeded (off)
+            - disabled :   Render the zone grey and unmodifiable
+            - readonly :   Render the zone unmodifiable but don't change appearance
         */
-        $parameters = $this->getParameters();
+
+        $config = $this->getConfig();
         $cols = new Zend_Form_Element_Text('cols');
         $cols->setLabel('Cols');
-        if(isset($parameters['cols']))
-            $cols->setValue($parameters['cols']);
+        if(!empty($config['cols']))
+        {
+            $cols->setValue($config['cols']);
+        }
 
         $rows = new Zend_Form_Element_Text('rows');
         $rows->setLabel('Rows');
-        if(isset($parameters['rows']))
-            $rows->setValue($parameters['rows']);
+        if(!empty($config['rows']))
+        {
+            $rows->setValue($config['rows']);
+        }
 
         $wrap = new Zend_Form_Element_Select('wrap');
         $wrap->setLabel('Wrap');
         $wrap->addMultiOptions(array('hard'=>'hard', 'off'=>'off', 'soft'=>'soft'));
-        if(isset($parameters['wrap']))
-            $wrap->setValue($parameters['wrap']);
+        if(!empty($config['wrap']))
+        {
+            $wrap->setValue($config['wrap']);
+        }
 
 
         $options = new Zend_Form_Element_MultiCheckbox('Options', array(
@@ -49,11 +62,18 @@ class Datatypes_Textarea_PrevalueEditor extends Es_Datatype_Abstract_PrevalueEdi
                 'readonly' => 'Readonly'
             )
         ));
+
         $arrayOptions = array();
-        if(isset($parameters['disabled']))
-            $arrayOptions[] = $parameters['disabled'];
-        if(isset($parameters['readonly']))
-            $arrayOptions[] = $parameters['readonly'];
+        if(!empty($config['disabled']))
+        {
+            $arrayOptions[] = $config['disabled'];
+        }
+
+        if(!empty($config['readonly']))
+        {
+            $arrayOptions[] = $config['readonly'];
+        }
+
         $options->setValue($arrayOptions);
 
         return array($cols, $rows, $wrap, $options);

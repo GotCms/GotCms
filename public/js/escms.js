@@ -201,8 +201,8 @@ ES.prototype = {
 
                             jQuery('#tabs-properties-'+$tab.val()).find('ul').append('<li>'+$t.evaluate($data)+'</li>');
 
-                            jQuery('#properties-tab-'+$data.tab+'-'+$data.id).html(jQuery('#properties-tab').clone().html()).val($data.tab);
-                            jQuery('#properties-datatype-'+$data.tab+'-'+$data.id).html(jQuery('#properties-datatype').clone().html()).val($data.datatype);
+                            jQuery('#properties-tab-'+$data.tab+'-'+$data.id).html(jQuery('#properties-tab').html()).val($data.tab);
+                            jQuery('#properties-datatype-'+$data.tab+'-'+$data.id).html(jQuery('#properties-datatype').html()).val($data.datatype);
                             jQuery('#properties-required-'+$data.tab+'-'+$data.id).attr('checked', $isRequired.val());
                         }
                     }

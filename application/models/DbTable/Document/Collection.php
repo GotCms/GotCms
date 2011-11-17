@@ -9,10 +9,9 @@
  */
 class Es_Model_DbTable_Document_Collection extends Es_Db_Table implements Es_Interface_Iterable
 {
-    protected $_documents = array();
     protected $_name = 'documents';
 
-    public function __construct($parent_id = 0)
+    public function init($parent_id = 0)
     {
         $this->setData('parent_id', $parent_id);
         $this->setDocuments();
@@ -29,7 +28,7 @@ class Es_Model_DbTable_Document_Collection extends Es_Db_Table implements Es_Int
             $documents[] = Es_Document_Model::fromArray($row);
         }
 
-        $this->_documents = $documents;
+        $this->setData('documents', $documents);
     }
 
     /* (non-PHPdoc)

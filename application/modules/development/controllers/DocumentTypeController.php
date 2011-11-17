@@ -41,7 +41,9 @@ class Development_DocumentTypeController extends Es_Controller_Action
                 $tabs_subform = $form->getSubForm('tabs');
 
                 $document_type->addData(array(
-                    'name' => $infos_subform->getValue('name')
+                    //@TODO change user_id
+                    'user_id' => 1
+                    , 'name' => $infos_subform->getValue('name')
                     , 'description' => $infos_subform->getValue('description')
                     , 'default_view_id' => $views_subform->getValue('default_view')
                 ));
@@ -105,6 +107,12 @@ class Development_DocumentTypeController extends Es_Controller_Action
 
 
         $this->view->form = $form;
+    }
+
+    public function listAction()
+    {
+        $documents = new Es_Model_DbTable_DocumentType_Collection();
+        $this->view->documents = $documents->getDocumentTypes();
     }
 
     public function addTabAction()
