@@ -19,7 +19,7 @@ class Es_Model_DbTable_Property_Collection extends Es_Db_Table
         {
             $select = $this->getAdapter()->select()
             ->from(array('t'=>'tabs'), array())
-            ->joinInner(array('p'=>'properties'), 't.tab_id = p.tab_id');
+            ->joinInner(array('p'=>'properties'), 't.id = p.tab_id');
 
             if($this->getDocumentId() !== NULL)
             {
@@ -30,11 +30,15 @@ class Es_Model_DbTable_Property_Collection extends Es_Db_Table
 
             if($this->getTabId() != NULL)
             {
-                $select->where('t.tab_id = ?', array($this->getTabId()));
+                $select->where('t.id = ?', array($this->getTabId()));
             }
 
-            $select->where('t.document_type_id = ? ',$this->getDocumentTypeId());
-            $select->order('p.property_order ASC');
+            if($this->getDocumentTypeId() != NULL)
+            {
+                $select->where('t.document_type_id = ? ',$this->getDocumentTypeId());
+            }
+
+            $select->order('p.order ASC');
 
             $rows = $this->getAdapter()->fetchAll($select);
 
@@ -83,7 +87,24 @@ class Es_Model_DbTable_Property_Collection extends Es_Db_Table
         catch(Exception $e)
         {
             $this->getAdapter()->rollBack();
-            Es_Exception($e->getMessage());
+            throw new Es_Exception($e->getMessage());
+        }
+    }
+
+    public function delete()
+    {
+        $properties = $this->getProperties();
+        try
+        {
+            foreach($properties as $property)
+            {
+                $property->delete();
+
+            }
+        }
+        catch(Exception $e)
+        {
+            throw new Es_Exception($e->getMessage());
         }
     }
 }

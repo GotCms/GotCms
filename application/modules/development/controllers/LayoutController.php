@@ -76,14 +76,13 @@ class Development_LayoutController extends Es_Controller_Action
     {
         $layout_id = $this->getRequest()->getParam('id', NULL);
         $layout = Es_Model_DbTable_Layout_Model::fromId($layout_id);
-        if(empty($layout_id) or empty($layout))
+        if(empty($layout_id) or empty($layout) or !$layout->delete())
         {
             $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can not delete this layout');
         }
         else
         {
             $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This layout has been deleted');
-            $layout->delete();
         }
 
         return $this->_helper->redirector->goToRoute(array(), 'layoutList');

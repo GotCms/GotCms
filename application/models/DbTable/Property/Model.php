@@ -139,9 +139,16 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
         $id = $this->getId();
         if(!empty($id))
         {
-            $this->delete($this->getAdapter()->quoteInto('id = ?', $id));
-            $this->getAdapter()->delete('properties_value', $this->getAdapter()->quoteInto('property_id = ?', $id));
-            unset($this);
+            try
+            {
+                parent::delete('id = ?', $id);
+                $this->getAdapter()->delete('properties_value', $this->getAdapter()->quoteInto('property_id = ?', $id));
+            }
+            catch(Exception $e)
+            {
+                throw new Es_Exception($e->getMessage());
+
+            }
             return TRUE;
         }
 

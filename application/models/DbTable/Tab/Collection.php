@@ -6,6 +6,8 @@ class Es_Model_DbTable_Tab_Collection extends Es_Db_Table
     public function init($document_type_id = NULL)
     {
         $this->setDocumentTypeId($document_type_id);
+
+        return $this;
     }
 
     public function getTabs($force_reload = FALSE)
@@ -24,7 +26,7 @@ class Es_Model_DbTable_Tab_Collection extends Es_Db_Table
             $tabs = array();
             foreach($rows as $value)
             {
-                $tabs[] = Es_Model_DbTable_Tab_Model::fromArray($value);
+                $tabs[] = Es_Model_DbTable_Tab_Model::fromArray($value->toArray());
             }
 
             $this->setData('tabs', $tabs);
@@ -59,5 +61,16 @@ class Es_Model_DbTable_Tab_Collection extends Es_Db_Table
         {
             $tab->save();
         }
+    }
+
+    public function delete()
+    {
+        $tabs = $this->getTabs();
+        foreach($tabs as $tab)
+        {
+            $tab->delete();
+        }
+
+        return TRUE;
     }
 }

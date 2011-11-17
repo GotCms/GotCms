@@ -129,11 +129,20 @@ class Es_Model_DbTable_Tab_Model extends Es_Db_Table
     */
     public function delete()
     {
-        $id = $this->getId();
-        if(!empty($id))
+        $tab_id = $this->getId();
+        if(!empty($tab_id))
         {
-            $this->delete('id = '.$id);
-            unset($this);
+            try
+            {
+                $properties_collection = new Es_Model_DbTable_Property_Collection();
+                $properties_collection->load(NULL, $tab_id);
+                $properties_collection->delete();
+                parent::delete('id = '.$tab_id);
+            }
+            catch(Exception $e)
+            {
+                throw new Es_Exception($e->getMessage());
+            }
 
             return TRUE;
         }

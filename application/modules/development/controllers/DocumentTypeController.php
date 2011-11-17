@@ -115,6 +115,22 @@ class Development_DocumentTypeController extends Es_Controller_Action
         $this->view->documents = $documents->getDocumentTypes();
     }
 
+    public function deleteAction()
+    {
+        $document_type_id = $this->getRequest()->getParam('id', NULL);
+        $document_type = Es_Model_DbTable_DocumentType_Model::fromId($document_type_id);
+        if(empty($document_type_id) or empty($document_type) or !$document_type->delete())
+        {
+            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can not delete this document type');
+        }
+        else
+        {
+            $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This document type has been deleted');
+        }
+
+        return $this->_helper->redirector->goToRoute(array(), 'documentTypeList');
+    }
+
     public function addTabAction()
     {
         if($this->_request->isPost())

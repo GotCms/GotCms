@@ -105,20 +105,16 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
 
     public function delete()
     {
-        if(!empty($this->_documentType_id))
+        $document_type_id = $this->getId();
+        if(!empty($document_type_id))
         {
-            $document_type_id = $this->getId();
-            if($this->delete('id = '.$document_type_id))
-            {
-                $tab_model = new Es_Model_DbTable_Tab_Model();
-                $tab_model->delete();
-                $tab_model = new Es_Model_DbTable_Property_Model();
-                $tab_model->delete();
-                $this->getAdapter()->delete('document_type_views', $this->getAdapter()->quoteInto('document_type_id = ?', $document_type_id));
-                unset($this);
+            $tab_collection = new Es_Model_DbTable_Tab_Collection();
+            $tab_collection->init($document_type_id)->getTabs();
+            $tab_collection->delete();
+            $this->getAdapter()->delete('document_type_views', $this->getAdapter()->quoteInto('document_type_id = ?', $document_type_id));
+            parent::delete('id = '.$document_type_id);
 
-                return TRUE;
-            }
+            return TRUE;
         }
 
         return FALSE;
@@ -148,12 +144,13 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
     */
     static function fromId($documentType_id)
     {
-        $select = $this->select()
-            ->where('id = ?', (int)$this->getId());
-        $documentType = $this->fetchRow($select);
+        $dt = new Es_Model_DbTable_DocumentType_Model();
+        $select = $dt->select()
+            ->where('id = ?', (int)$documentType_id);
+        $documentType = $dt->fetchRow($select);
         if(!empty($documentType))
         {
-            return self::fromArray($documentType);
+            return self::fromArray($documentType->toArray());
         }
         else
         {
