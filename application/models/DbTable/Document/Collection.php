@@ -25,10 +25,23 @@ class Es_Model_DbTable_Document_Collection extends Es_Db_Table implements Es_Int
         $documents = array();
         foreach($rows as $row)
         {
-            $documents[] = Es_Document_Model::fromArray($row);
+            $documents[] = Es_Model_DbTable_Document_Model::fromArray($row);
         }
 
         $this->setData('documents', $documents);
+    }
+
+    public function getSelect()
+    {
+        $documents = $this->getDocuments();
+
+        $array = array();
+        foreach($documents as $document)
+        {
+            $array[$document->getId()] = $document->getName();
+        }
+
+        return $array;
     }
 
     /* (non-PHPdoc)

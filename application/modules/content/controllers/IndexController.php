@@ -9,6 +9,7 @@ class Content_IndexController extends Es_Controller_Action
 
     public function indexAction()
     {
+
     }
 }
 

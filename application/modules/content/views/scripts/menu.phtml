@@ -1,13 +1,6 @@
-<h2>..:: <?php echo $this->escape($this->translate('Managing Users')); ?> ::..</h2>
+<h2>..:: <?php echo $this->escape($this->translate('Managing documents')); ?> ::..</h2>
 
 <ul>
-    <li><a href="" title=""><?php echo $this->escape($this->translate('Users list')); ?></a></li>
-    <li><a href="" title=""><?php echo $this->escape($this->translate('Add')); ?></a></li>
-</ul>
-
-<h2>..:: <?php echo $this->escape($this->translate('Website Configuration')); ?> ::..</h2>
-
-<ul>
-    <li><a href="" title=""><?php echo $this->escape($this->translate('Managing Users')); ?></a></li>
-    <li><a href="" title=""><?php echo $this->escape($this->translate('Managing Users')); ?></a></li>
+    <li><a href="<?php echo $this->url(array(), 'documentAdd'); ?>" title=""><?php echo $this->escape($this->translate('Add')); ?></a></li>
+    <li><a href="<?php echo $this->url(array(), 'documentList'); ?>" title=""><?php echo $this->escape($this->translate('List')); ?></a></li>
 </ul>
