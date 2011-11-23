@@ -3,45 +3,53 @@
  * @author Rambaud Pierre
  *
  */
-class Es_Component_Tabs {
-    private $_item;
+class Es_Component_Tabs
+{
+    private $_data;
 
     /**
-    * @param array $tab
+    * @param array $array
     */
-    public function __construct(Array $tab) {
-        $this->_item = $tab;
+    public function __construct(Array $array)
+    {
+        $this->_data = $array;
     }
 
-
     /**
-    * @param array $tab contains objects
+    * @param array $tabs contains objects
     * @return string
     */
-    public function render(Array $tab = NULL) {
+    public function render(Array $tabs = NULL)
+    {
         $i = 0;
         $html = '<ul>';
-        if($tab === NULL) {
-            $tab = $this->_item;
+        if($tabs === NULL)
+        {
+            $tabs = $this->_item;
         }
+
         $i = 1;
-        foreach($tab as $iterator) {
-            if(!is_object($iterator)) {
-                $html .= '<li>
-                        <a href="#tabs-'.$i.'">'.$iterator.'</a>
-                    </li>';
-            } else {
-                $html .= '<li>
-                        <a href="#tabs-'.$iterator->getId().'">'.$iterator->getName().'</a>
-                    </li>';
+        foreach($tabs as $iterator)
+        {
+            if(!is_object($iterator))
+            {
+                $html .= '<li><a href="#tabs-'.$i.'">'.$iterator.'</a></li>';
             }
+            else
+            {
+                $html .= '<li><a href="#tabs-'.$iterator->getId().'">'.$iterator->getName().'</a></li>';
+            }
+
             $i++;
         }
+
         $html .= '</ul>';
+
         return $html;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->render();
     }
 }

@@ -1,20 +1,18 @@
 <?php
 /**
- * @author GoT
+ * @author Pierre RAMBAUD
  *
  */
 class ES_Component_TreeView
 {
-    protected $_item;
-    protected $_baseUrl;
+    protected $_data;
 
     /**
-    * @param array $tab
+    * @param array $array
     */
-    public function __construct(Array $tab)
+    public function __construct(Array $array)
     {
-        $this->_item = $tab;
-        $this->_baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $this->_data = $array;
     }
 
 
@@ -22,18 +20,18 @@ class ES_Component_TreeView
     * @param array $tab contains objects
     * @return string
     */
-    public function render(Array $tab = NULL)
+    public function render(Array $treeview_data = NULL)
     {
         $html = '<ul';
-        if($tab === NULL)
+        if($treeview_data === NULL)
         {
-            $tab = $this->_item;
+            $treeview_data = $this->_data;
             $html .= ' id="browser" class="treeview filetree"';
         }
 
         $html .= '>';
 
-        foreach($tab as $iterator)
+        foreach($treeview_data as $iterator)
         {
             $children = $iterator->getChildren();
 
@@ -56,7 +54,7 @@ class ES_Component_TreeView
             }
             else
             {
-                $icon = 'style="background:url('.$this->_baseUrl.'medias/icon/'.$iterator->getIcon().') no-repeat scroll 0 0;padding-left:20px;"';
+                $icon = 'style="background:url(medias/icon/'.$iterator->getIcon().') no-repeat scroll 0 0;padding-left:20px;"';
             }
 
             $html .= $class.'><span class="'.$iterator->getIcon().'" '.($icon !== false ? $icon : '').'>';
@@ -82,5 +80,4 @@ class ES_Component_TreeView
             return FALSE;
         }
     }
-
 }
