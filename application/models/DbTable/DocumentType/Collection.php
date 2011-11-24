@@ -26,6 +26,18 @@ class Es_Model_DbTable_DocumentType_Collection extends Es_Db_Table implements Es
         $this->setData('document_types', $documentTypes);
     }
 
+    public function getSelect()
+    {
+        $documents = $this->getDocumentTypes();
+
+        $array = array();
+        foreach($documents as $document)
+        {
+            $array[$document->getId()] = $document->getName();
+        }
+
+        return $array;
+    }
     /*
     * Es_Interfaces_Iterable methods
     */

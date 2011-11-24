@@ -23,10 +23,15 @@ class Content_Form_DocumentAdd extends Es_Form
         $parent_id->addMultiOption('', 'Select parent');
         $parent_id->addMultiOptions($document_collection->getSelect());
 
+        $document_type_collection = new Es_Model_DbTable_DocumentType_Collection();
+        $document_type = new Zend_Form_Element_Select('document_type');
+        $document_type->addMultiOption('', 'Select document type');
+        $document_type->addMultiOptions($document_type_collection->getSelect());
+
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('class', 'input-submit')
             ->setLabel('Create');
 
-        $this->addElements(array($name, $url_key, $parent_id, $submit));
+        $this->addElements(array($name, $url_key, $parent_id, $document_type, $submit));
     }
 }
