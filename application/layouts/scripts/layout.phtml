@@ -17,6 +17,7 @@
         ->appendFile('/js/codemirror/mode/css/css.js', 'text/javascript')
         ->appendFile('/js/codemirror/mode/clike/clike.js', 'text/javascript')
         ->appendFile('/js/codemirror/mode/php/php.js', 'text/javascript')
+        ->appendFile('/js/jquery.treeview.js', 'text/javascript')
         ->appendFile('/js/escms.js', 'text/javascript').PHP_EOL;
 
     echo $this->HeadLink()
@@ -26,11 +27,17 @@
         ->appendStylesheet('/js/codemirror/mode/javascript/javascript.css')
         ->appendStylesheet('/js/codemirror/mode/css/css.css')
         ->appendStylesheet('/js/codemirror/mode/clike/clike.css')
-        ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css');
+        ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
+        ->appendStylesheet('/css/jquery.treeview.css');
     ?>
 </head>
 <body>
-
+<script type="text/javascript">
+    jQuery(document).ready(function()
+    {
+        jQuery("#browser").treeview();
+    });
+</script>
     <div id="header">
         <div id="logo"></div>
         <div id="connexion">
