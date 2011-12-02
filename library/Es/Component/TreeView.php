@@ -3,16 +3,16 @@
  * @author Pierre RAMBAUD
  *
  */
-class ES_Component_TreeView
+class Es_Component_TreeView
 {
     protected $_data;
 
     /**
     * @param array $array
     */
-    public function __construct(Array $array)
+    public function __construct(Array $treeview_data)
     {
-        $this->_data = $array;
+        $this->_data = $treeview_data;
     }
 
 
@@ -20,12 +20,11 @@ class ES_Component_TreeView
     * @param array $tab contains objects
     * @return string
     */
-    public function render(Array $treeview_data = NULL)
+    static function render(Array $treeview_data = NULL, $init = TRUE)
     {
         $html = '<ul';
-        if($treeview_data === NULL)
+        if($init)
         {
-            $treeview_data = $this->_data;
             $html .= ' id="browser" class="treeview filetree"';
         }
 
@@ -40,7 +39,7 @@ class ES_Component_TreeView
             if($haveChildren)
             {
                 $class = ' class="closed"';
-                $renderChildren = $this->render($children);
+                $renderChildren = self::render($children, FALSE);
             }
             else
             {
@@ -58,7 +57,16 @@ class ES_Component_TreeView
             }
 
             $html .= $class.'><span class="'.$iterator->getIcon().'" '.($icon !== false ? $icon : '').'>';
-            $html = '<a id="'.$iterator->getIterableId().'" href="'.$iterator->getUrl().'">'.$iterator->getName().'</a></span>';
+            if($iterator->getUrl() == NULL)
+            {
+                $html .= $iterator->getName();
+            }
+            else
+            {
+                $html .= '<a id="'.$iterator->getIterableId().'" href="'.$iterator->getUrl().'">'.$iterator->getName().'</a></span>';
+            }
+
+            $html .='</span>';
             $html .= $renderChildren;
             $html .='</li>';
         }

@@ -97,7 +97,7 @@ class Es_Model_DbTable_Document_Collection extends Es_Db_Table implements Es_Int
     */
     public function getUrl()
     {
-        return 'javascript:loadController(\''.Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('controller'=>'content', 'action'=>'documents')).'\')';
+        return NULL;
     }
 
 }

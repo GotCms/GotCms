@@ -6,7 +6,7 @@
     echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
     echo $this->headScript()
         ->appendFile('/js/prototype.js', 'text/javascript')
-        ->appendFile('/js/jquery-1.5.1.min.js', 'text/javascript')
+        ->appendFile('/js/jquery-1.7.1.min.js', 'text/javascript')
         ->appendFile('/js/jquery-ui-1.8.14.js', 'text/javascript')
         ->appendFile('/js/translate.js', 'text/javascript')
         ->appendFile('/js/validate.js', 'text/javascript')
@@ -18,6 +18,7 @@
         ->appendFile('/js/codemirror/mode/clike/clike.js', 'text/javascript')
         ->appendFile('/js/codemirror/mode/php/php.js', 'text/javascript')
         ->appendFile('/js/jquery.treeview.js', 'text/javascript')
+        ->appendFile('/js/jquery.contextMenu.js', 'text/javascript')
         ->appendFile('/js/escms.js', 'text/javascript').PHP_EOL;
 
     echo $this->HeadLink()
@@ -28,16 +29,11 @@
         ->appendStylesheet('/js/codemirror/mode/css/css.css')
         ->appendStylesheet('/js/codemirror/mode/clike/clike.css')
         ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
-        ->appendStylesheet('/css/jquery.treeview.css');
+        ->appendStylesheet('/css/jquery.treeview.css')
+        ->appendStylesheet('/css/jquery.contextMenu.css');
     ?>
 </head>
 <body>
-<script type="text/javascript">
-    jQuery(document).ready(function()
-    {
-        jQuery("#browser").treeview();
-    });
-</script>
     <div id="header">
         <div id="logo"></div>
         <div id="connexion">
@@ -67,7 +63,7 @@
     <div id="main">
 
         <div id="menu">
-            <?php echo $this->partial('menu.phtml'); ?>
+            <?php echo $this->partial('menu.phtml', array('treeview' => $this->layout()->treeview)); ?>
         </div>
 
         <div id="content">
@@ -81,5 +77,34 @@
         © 2011 <a href="">EsCMS</a>
     </div>
 
+    <?php if($this->layout()->treeview): ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function()
+            {
+                jQuery("#browser").treeview();
+                jQuery("#browser").contextMenu({
+                    menu: 'contextMenu'
+                },
+                    function(action, el, pos) {
+                    alert(
+                        'Action: ' + action + '\n\n' +
+                        'Element ID: ' + jQuery(el).attr('id') + '\n\n' +
+                        'X: ' + pos.x + '  Y: ' + pos.y + ' (relative to element)\n\n' +
+                        'X: ' + pos.docX + '  Y: ' + pos.docY+ ' (relative to document)'
+                        );
+                });
+            });
+        </script>
+
+        <ul id="contextMenu" class="contextMenu">
+            <li class="new"><a href="#new"><?php echo $this->escape($this->translate('New')); ?></a></li>
+            <li class="edit"><a href="#edit"><?php echo $this->escape($this->translate('Edit')); ?></a></li>
+            <li class="cut separator"><a href="#cut"><?php echo $this->escape($this->translate('Cut')); ?></a></li>
+            <li class="copy"><a href="#copy"><?php echo $this->escape($this->translate('Copy')); ?></a></li>
+            <li class="paste"><a href="#paste"><?php echo $this->escape($this->translate('Paste')); ?></a></li>
+            <li class="delete"><a href="#delete"><?php echo $this->escape($this->translate('Delete')); ?></a></li>
+            <li class="quit separator"><a href="#quit"><?php echo $this->escape($this->translate('Quit')); ?></a></li>
+        </ul>
+    <?php endif; ?>
 </body>
 </html>
