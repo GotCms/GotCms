@@ -27,6 +27,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $router->addConfig(new Zend_Config_Ini(APPLICATION_PATH.'/configs/routes-general.ini', APPLICATION_ENV), 'routes');
         $router->addConfig(new Zend_Config_Ini(APPLICATION_PATH.'/configs/routes-development.ini', APPLICATION_ENV), 'routes');
+        $router->addConfig(new Zend_Config_Ini(APPLICATION_PATH.'/configs/routes-content.ini', APPLICATION_ENV), 'routes');
 
         $front->setParam('useControllerDefaultAlways', TRUE);
 
@@ -43,6 +44,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Zend_Registry::set('Zend_Translate', new Zend_Translate(Zend_Translate::AN_ARRAY, $translate_data, $language));
         }
 
+        Zend_Registry::set('user_id', 1);
 
         parent::run();
     }

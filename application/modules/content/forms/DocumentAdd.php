@@ -13,10 +13,11 @@ class Content_Form_DocumentAdd extends Es_Form
             ->addValidator(new Zend_Validate_NotEmpty());
 
         $url_key  = new Zend_Form_Element_Text('url_key');
-        $url_key->setRequired(TRUE)
+        $url_key->setRequired(FALSE)
             ->setLabel('Url key')
             ->setAttrib('class', 'input-text')
-            ->addValidator(new Zend_Validate_NotEmpty());
+            ->addValidator(new Zend_Validate_NotEmpty())
+            ->addValidator(new Zend_Validate_Db_NoRecordExists(array('table' => 'documents', 'field' => 'id')));
 
         $document_collection = new Es_Model_DbTable_Document_Collection();
         $parent_id = new Zend_Form_Element_Select('parent_id');

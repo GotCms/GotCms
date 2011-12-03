@@ -15,53 +15,23 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     /**
     * @param integer $document_id
     */
-    public function __construct($document_id = -1)
+    public function init($document_id = NULL)
     {
-        $this->setData('document_id', $document_id);
+        if(!empty($document_id))
+        {
+            $this->setData('document_id', $document_id);
+        }
+
         $this->getChildren();
     }
 
-    /**
-    * @param integer $view_id
-    * @return Es_Document_Model
-    */
-    public function setDocumentUrlKey($value)
-    {
-        $select = $this->select()
-            ->where('url_key = ?', $value)
-            ->where('parent_id = ? ', (int)$this->getParentId())
-            ->where('document_id != ?', (int)$this->getDocumentId());
-        $url_key = $this->fetchRow($select);
-        if(count($url_key) > 0)
-        {
-            return FALSE;
-        }
-
-        $this->setData('document_url_key', strtolower($value));
-        return $this;
-    }
-    /**
-    * @param integer $view_id
-    * @return Es_Document_Model
-    */
-    public function setViewId($view_id)
-    {
-        if($view_id === null || $view_id == 0)
-        {
-            $document_type = Es_Model_DbTable_DocumentType_Model::fromId($this->getDocumentTypeId());
-            $view_id = $document_type->getDefaultViewId();
-        }
-
-        $this->setData('view_id', $view_id);
-        return $this;
-    }
 
     public function getView()
     {
-        if($this->getData('view') == null)
+        if($this->getData('view') == NULL)
         {
             $view = Es_Model_DbTable_View_Model::fromId($this->getViewId());
-            if($view !== null)
+            if($view !== NULL)
             {
                 $this->setData('view',$view->getContent());
             }
@@ -71,88 +41,43 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     }
 
     /**
-    * @param Boolean $flag
-    * @return Es_Document_Model
+    * @return boolean
     */
-    public function setDocumentStatus($flag)
+    public function showInNav()
     {
-        if((bool)$flag === TRUE)
-        {
-            $flag = 'TRUE';
-        }
-        else
-        {
-            $flag = 'FALSE';
-        }
-
-        $this->setData('document_status', $flag);
-        return $this;
-    }
-
-    /**
-    * @param Boolean $flag
-    * @return Es_Document_Model
-    */
-    public function setDocumentShowInNav($flag)
-    {
-        if((bool)$flag === TRUE)
-        {
-            $flag = 'TRUE';
-        }
-        else
-        {
-            $flag = 'FALSE';
-        }
-
-        $this->setData('document_show_in_nav', $flag);
-        return $this;
+        return (bool)$this->getData('show_in_nav') != FALSE ? TRUE : FALSE;
     }
 
     /**
     * @return boolean
     */
-    public function canShowInNav()
+    public function getStatus()
     {
-        return  ($this->getDocumentShowInNav() == 'TRUE' ? TRUE : FALSE);
-    }
-
-    /**
-    * @return boolean
-    */
-    public function isPublished()
-    {
-        return  ($this->getDocumentStatus() == 'TRUE' ? TRUE : FALSE);
+        return (bool)$this->getData('status') != FALSE ? TRUE : FALSE;
     }
 
     /**
     * @param array $values
-    * @return Es_Document_Model
+    * @return Es_Model_DbTable_Document_Model
     */
     static function fromArray(array $array)
     {
-        $d = new Es_Document_Model($array['document_id']);
-        $d->setDocumentName($array['document_name'])
-        ->setDocumentTypeId($array['document_type_id'])
-        ->setDocumentStatus($array['document_status'])
-        ->setDocumentDateCreated($array['document_date_created'])
-        ->setDocumentShowInNav($array['document_show_in_nav'])
-        ->setUserId($array['user_id'])
-        ->setLayoutId($array['layout_id'])
-        ->setParentId($array['parent_id'])
-        ->setViewId($array['view_id'])
-        ->setDocumentUrlKey($array['document_url_key']);
-        return $d;
+        $document = new Es_Model_DbTable_Document_Model();
+        $document->setData($array);
+
+        return $document;
     }
 
     /**
     * @param array $document_id
-    * @return Es_Document_Model|null
+    * @return Es_Model_DbTable_Document_Model | FALSE
     */
     static function fromId($document_id)
     {
-        $select = $this->select()
+        $document = new Es_Model_DbTable_Document_Model();
+        $select = $document->select()
             ->where('id = ?', (int)$document_id);
-        $document = $this->fetchRow($select);
+        $document = $document->fetchRow($select);
         if(!empty($document))
         {
             return self::fromArray($document);
@@ -164,12 +89,25 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     }
 
     /**
+    * @return Integer
+    */
+    public function getUserId()
+    {
+        $user_id = $this->getData('user_id');
+        if(empty($user_id))
+        {
+            $this->setData('user_id', Zend_Registry::get('user_id'));
+        }
+
+        return $this->getData('user_id');
+    }
+
+    /**
     * @param array $urlKey
-    * @return Es_Document_Model|null
+    * @return Es_Model_DbTable_Document_Model | FALSE
     */
     static function fromUrlKey($urlKey)
     {
-        $this = Zend_Registry::get('db');
         $select = $this->select()
             ->where('url_key = ?', $urlKey);
         $document = $this->fetchRow($select);
@@ -188,28 +126,29 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     */
     public function save()
     {
-        $arraySave = array(
+        $array_save = array(
             'name' => $this->getName()
-            , 'document_url_key' => $this->getDocumentUrlKey()
-            , 'document_status' => $this->getDocumentStatus()
-            , 'document_show_in_nav' => $this->getDocumentShowInNav()
+            , 'url_key' => $this->getUrlKey()
+            , 'status' => $this->getStatus() === TRUE ? 'TRUE' : 'FALSE'
+            , 'show_in_nav' => $this->showInNav() === TRUE ? 'TRUE' : 'FALSE'
             , 'user_id' => (int)$this->getUserId()
-            , 'document_type_id' => (int)$this->getDocumentTypeId()
-            , 'view_id' => (int)$this->getViewId()
-            , 'layout_id' => (int)$this->getLayoutId()
-            , 'parent_id' => (int)$this->getParentId()
+            , 'document_type_id' => (int)$this->getDocumentTypeId() == 0 ? NULL : (int)$this->getDocumentTypeId()
+            , 'view_id' => (int)$this->getViewId() == 0 ? NULL : (int)$this->getViewId()
+            , 'layout_id' => (int)$this->getLayoutId() == 0 ? NULL : (int)$this->getLayoutId()
+            , 'parent_id' => (int)$this->getParentId() == 0 ? NULL : (int)$this->getParentId()
         );
 
         try
         {
-            if($this->getId() == -1)
+            $document_id = $this->getId();
+            if(empty($document_id))
             {
                 $arraySave['created_at'] = new Zend_Db_Expr('NOW()');
-                $this->setId($this->insert($arraySave));
+                $this->setId($this->insert($array_save));
             }
             else
             {
-                $this->update($arraySave, 'id = '.$this->getId());
+                $this->update($array_save, 'id = '.$this->getId());
             }
 
             return TRUE;
@@ -230,7 +169,8 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     */
     public function delete()
     {
-        if($this->getDocumentId() !== null)
+        $document_id = $this->getId();
+        if(!empty($document_id))
         {
             $this->beginTransaction();
             try
@@ -256,6 +196,22 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
 
 
     /* (non-PHPdoc)
+    * @see include/Es/Interface/Es_Interface_Iterable#getName()
+    */
+    public function getName()
+    {
+        return $this->getData('name');
+    }
+
+    /* (non-PHPdoc)
+    * @see include/Es/Interface/Es_Interface_Iterable#getId()
+    */
+    public function getId()
+    {
+        return $this->getData('id');
+    }
+
+    /* (non-PHPdoc)
     * @see include/Es/Interface/Es_Interface_Iterable#getParent()
     */
     public function getParent()
@@ -268,7 +224,7 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     */
     public function getChildren()
     {
-        if($this->getData('children') === null)
+        if($this->getData('children') === NULL)
         {
             $children = new Es_Model_DbTable_Document_Collection($this->getId());
             $this->setData('children', $children->getChildren());
@@ -282,7 +238,7 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     */
     public function getIcon()
     {
-        if($this->_icon === null)
+        if($this->_icon === NULL)
         {
             $select = $this->select()
                 ->where('document_type_id = ?', $this->getDocumentTypeId());
@@ -310,7 +266,6 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     */
     public function getUrl()
     {
-        return 'javascript:loadController(\''.Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('action' => 'edit')).'/type/document/id/'.$this->getId().'\')';
+        return '';
     }
-
 }

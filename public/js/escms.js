@@ -227,6 +227,80 @@ ES.prototype = {
                     }
             );
         });
+    },
+
+    initDocumentMenu: function($routes)
+    {
+        $this = this;
+        jQuery("#browser").treeview();
+        jQuery("#browser").contextMenu(
+            {
+                menu: 'contextMenu'
+            },
+
+            function($action, $element, $position)
+            {
+                switch($action){
+                    case 'new':
+                        if($element.attr('rel') != undefined)
+                        {
+                            $parentId = $element.attr('rel');
+                        }
+                    break;
+
+                    case 'edit':
+                    break;
+
+                    case 'copy':
+                    case 'cut':
+                    break;
+
+                    case 'paste':
+                    case 'delete':
+                        $this.showDialogConfirm('test', $url);
+                    break;
+
+                    case 'quit':
+                    break;
+
+                    default:
+                        return false;
+                    break;
+                }
+
+                document.location.href = url;
+            }
+        );
+    },
+
+    showDialogConfirm: function($title, $url)
+    {
+        jQuery('#dialog').attr('title', $title).dialog({
+            bgiframe        : false,
+            resizable       : false,
+            height          : 150,
+            modal           : true,
+            overlay         :
+                {
+                    backgroundColor: '#000',
+                    opacity: 0.5
+                },
+            buttons         : {
+                'Confirm': function()
+                {
+                    document.location.href = url;
+                    jQuery(this).dialog('close');
+
+                    return true;
+                },
+                'Cancel': function()
+                {
+                    jQuery(this).dialog('close');
+
+                    return false;
+                }
+            }
+        });
     }
 };
 

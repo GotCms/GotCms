@@ -63,7 +63,7 @@ class Es_Component_TreeView
             }
             else
             {
-                $html .= '<a id="'.$iterator->getIterableId().'" href="'.$iterator->getUrl().'">'.$iterator->getName().'</a></span>';
+                $html .= '<a rel="'.$iterator->getId().'" id="'.$iterator->getIterableId().'" href="'.$iterator->getUrl().'">'.$iterator->getName().'</a></span>';
             }
 
             $html .='</span>';

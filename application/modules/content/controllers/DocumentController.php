@@ -9,81 +9,49 @@ class Content_DocumentController extends Es_Controller_Action
 
     public function addAction()
     {
-        $form = new Content_Form_DocumentAdd();
+        $document_form = new Content_Form_DocumentAdd();
 
-        if(!$this->_request->isPost())
+        if($this->_request->isPost())
         {
-            $this->view->form = $form;
-        }
-        else
-        {
-            $name = $this->_request->getParam('name', '');
-            $url_key = $this->_request->getParam('url_key', $this->checkUrlKey($name));
-            $document_type_id = $this->_request->getParam('document_type_id', '');
-            $parent_id = $this->_request->getParam('parent_id', 0);
-            if(empty($name) or empty($document_type_id))
+            if(!$document_form->isValid($this->_request->getPost()))
             {
-                echo 'There are errors !';
+                $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Invalid document data');
             }
             else
             {
-                $document = new Es_Document_Model();
-                $document->setDocumentName($name)
-                        ->setDocumentTypeId($document_type_id)
-                        ->setParentId($parent_id)
-                        ->setDocumentUrlKey($url_key);
-                if(!$document->save())
+                $document_name = $this->_request->getParam('name', '');
+                $document_url_key = $this->_request->getParam('url_key', $this->checkUrlKey($document_name));
+                $document_type_id = $this->_request->getParam('document_type_id', '');
+                $parent_id = $this->_request->getParam('parent_id', 0);
+                $document = new Es_Model_DbTable_Document_Model();
+                $document->setName($document_name)
+                    ->setDocumentTypeId($document_type_id)
+                    ->setParentId($parent_id)
+                    ->setUrlKey($document_url_key);
+
+                $document_id = $document->save();
+                if(empty($document_id))
                 {
-                    throw new Es_Core_Exception(get_class($this).' -> Method : '.__METHOD__);
+                    $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can not add document');
                 }
                 else
                 {
-                    $tabs = $this->loadTabs($document_type_id);
-                    $tabs_array = array();
-                    $datatypes = array();
-
-                    $i = 1;
-                    foreach($tabs as $tab)
-                    {
-                        $tabs_array[] = $tab->getName();
-                        $properties = $this->loadProperties($document_type_id, $tab->getId(), $document->getId());
-                        $subForm = new Zend_Form_SubForm();
-                        $subForm->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$i))));
-                        $subForm->removeDecorator('Fieldset');
-                        $subForm->removeDecorator('DtDdWrapper');
-                        $subForm->setIsArray(false);
-                        foreach($properties as $property)
-                        {
-                            if($this->_request->isPost())
-                            {
-                                $this->saveDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property);
-                            }
-
-                            Es_Form_Model::addFormContent($subForm, $this->loadDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property));
-                        }
-
-                        $formDocument->addSubForm($subForm, 'tabs-'.$i, $i);
-                        $i++;
-                    }
-
-                    $tabs_array[] = 'Document information';
-
-                    $formDocument->addSubForm(new Form_Content($document, $i), 'tabs-'.$i, $i);
-
-                    $this->view->tabs = new Es_Component_Tabs($tabs_array);
-                    $this->view->content = $formDocument;
+                    $this->_helper->flashMessenger->setNameSpace('success')->addMessage('Document successfuly add');
+                    $this->_helper->redirector->goToRoute(array('id' => $document_id), 'documentEdit');
                 }
             }
         }
+
+        $this->view->form = $document_form;
 
     }
 
     public function deleteAction()
     {
-        $document = Es_Document_Model::fromId($this->_request->getParam('id', ''));
-        if($document === null)
+        $document = Es_Model_DbTable_Document_Model::fromId($this->_request->getParam('id', ''));
+        if(empty($document))
         {
-            $this->message = "This document don't exist !";
+            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Document does not exists !');
         }
         else
         {
@@ -91,11 +59,11 @@ class Content_DocumentController extends Es_Controller_Action
             {
                 if($document->delete())
                 {
-                    $this->message = "This document was succefully delete";
+                    $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This document was succefully delete');
                 }
                 else
                 {
-                    $this->message = "There were problems during the removal of this document";
+                    $this->_helper->flashMessenger->setNameSpace('success')->addMessage('There were problems during the removal of this document');
                 }
             }
             catch (Exception $e)
@@ -107,13 +75,11 @@ class Content_DocumentController extends Es_Controller_Action
 
     public function editAction()
     {
-        //Init for required fields
-        $hasError = false;
 
-        $document = Es_Document_Model::fromId($this->_request->getParam('id', ''));
-        if($document === null)
+        $document = Es_Model_DbTable_Document_Model::fromId($this->_request->getParam('id', ''));
+        if(empty($document))
         {
-            echo 'There are errors !';
+            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Document does not exists !');
         }
         else
         {
@@ -170,13 +136,13 @@ class Content_DocumentController extends Es_Controller_Action
                     Es_Form_Model::addFormContent($subForm, $this->loadDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property));
                 }
 
-                $formDocument->addSubForm($subForm, 'tabs-'.$i, $i);
+                $document_form->addSubForm($subForm, 'tabs-'.$i, $i);
                 $i++;
             }
 
             $tabs_array[] = 'Document information';
 
-            $formDocument->addSubForm(new Form_Content($document, $i), 'tabs-'.$i, $i);
+            $document_form->addSubForm(new Form_Content($document, $i), 'tabs-'.$i, $i);
             if($hasError)
             {
                 $document->setDocumentShowInNav(false);
@@ -186,7 +152,7 @@ class Content_DocumentController extends Es_Controller_Action
 
             $document->save();
             $this->view->tabs = new Es_Component_Tabs($tabs_array);
-            $this->view->content = $formDocument;
+            $this->view->content = $document_form;
         }
     }
 

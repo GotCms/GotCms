@@ -81,18 +81,7 @@
         <script type="text/javascript">
             jQuery(document).ready(function()
             {
-                jQuery("#browser").treeview();
-                jQuery("#browser").contextMenu({
-                    menu: 'contextMenu'
-                },
-                    function(action, el, pos) {
-                    alert(
-                        'Action: ' + action + '\n\n' +
-                        'Element ID: ' + jQuery(el).attr('id') + '\n\n' +
-                        'X: ' + pos.x + '  Y: ' + pos.y + ' (relative to element)\n\n' +
-                        'X: ' + pos.docX + '  Y: ' + pos.docY+ ' (relative to document)'
-                        );
-                });
+                ES.getInstance().initDocumentMenu();
             });
         </script>
 
