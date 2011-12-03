@@ -3,7 +3,7 @@ class Es_Model_DbTable_Tab_Collection extends Es_Db_Table
 {
     protected $_name = 'tabs';
 
-    public function init($document_type_id = NULL)
+    public function load($document_type_id = NULL)
     {
         $this->setDocumentTypeId($document_type_id);
 

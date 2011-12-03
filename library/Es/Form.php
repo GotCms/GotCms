@@ -33,7 +33,7 @@ abstract class Es_Form extends Zend_Form
         return $this;
     }
 
-    public function addFormContent($elements)
+    public function addContent($elements)
     {
         if(is_array($elements))
         {

@@ -40,16 +40,10 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
     {
         if($this->getData('tabs') === NULL )
         {
-            $select = $this->select()
-                ->where('id = ? ', array($this->getId()));
-            $tabs = $this->fetchAll($select);
-            $tabs_array = array();
-            foreach($tabs as $tab)
-            {
-                $tabs_array[] = Es_Model_DbTable_Tab_Model::fromArray($tab->toArray());
-            }
+            $tabs_collection = new Es_Model_DbTable_Tab_Collection();
+            $tabs_collection->load($this->getId());
 
-            $this->setData('tabs', $tabs_array);
+            $this->setData('tabs', $tabs_collection->getTabs());
         }
 
         return $this->getData('tabs');
@@ -128,13 +122,7 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
     static function fromArray(Array $array)
     {
         $dt = new Es_Model_Dbtable_DocumentType_Model();
-        $dt->setId($array['id']);
-        $dt->setName($array['name']);
-        $dt->setDescription($array['description']);
-        $dt->setIcon($array['icon_id']);
-        $dt->setCreatedAt($array['created_at']);
-        $dt->setUpdatedAt($array['updated_at']);
-        $dt->setDefaultViewId($array['default_view_id']);
+        $dt->setData($array);
 
         return $dt;
     }

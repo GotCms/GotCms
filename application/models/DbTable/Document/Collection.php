@@ -11,10 +11,13 @@ class Es_Model_DbTable_Document_Collection extends Es_Db_Table implements Es_Int
 {
     protected $_name = 'documents';
 
-    public function load($parent_id = 0)
+    public function load($parent_id = NULL)
     {
-        $this->setData('parent_id', $parent_id);
-        $this->setDocuments();
+        if(!is_null($parent_id))
+        {
+            $this->setData('parent_id', $parent_id);
+            $this->setDocuments();
+        }
     }
 
     private function setDocuments()
@@ -45,6 +48,10 @@ class Es_Model_DbTable_Document_Collection extends Es_Db_Table implements Es_Int
     public function getSelect()
     {
         $documents = $this->getDocuments();
+        if(!is_array($documents))
+        {
+            $documents = array();
+        }
 
         $array = array();
         foreach($documents as $document)
@@ -68,7 +75,7 @@ class Es_Model_DbTable_Document_Collection extends Es_Db_Table implements Es_Int
     */
     public function getChildren()
     {
-        return $this->_documents;
+        return $this->getDocuments();
     }
 
     /* (non-PHPdoc)

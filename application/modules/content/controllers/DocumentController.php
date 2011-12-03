@@ -4,7 +4,9 @@ class Content_DocumentController extends Es_Controller_Action
 {
     public function init()
     {
-        $this->_helper->layout->assign('treeview', Es_Component_TreeView::render(array(new Es_Model_DbTable_Document_Collection())));
+        $documents = new Es_Model_DbTable_Document_Collection();
+        $documents->load(0);
+        $this->_helper->layout->assign('treeview', Es_Component_TreeView::render(array($documents)));
 
         $router = $this->getFrontController()->getRouter();
         $routes = array(
@@ -107,14 +109,9 @@ class Content_DocumentController extends Es_Controller_Action
         {
             $has_error = FALSE;
             $document_type_id = $document->getDocumentTypeId();
-            $isPost = $this->getRequest()->isPost();
             $layout_id = $this->getRequest()->getParam('layout_id', '');
-            if($layout_id === null OR $layout_id == '')
-            {
-                $isPost = FALSE;
-            }
 
-            if($isPost)
+            if($this->getRequest()->isPost())
             {
                 $document->setName($this->getRequest()->getPost('document_name', $document->getDocumentName()));
                 $document->setStatus($this->getRequest()->getPost('document_status', FALSE));
@@ -123,7 +120,7 @@ class Content_DocumentController extends Es_Controller_Action
                 $view_id = $this->getRequest()->getPost('view_id', $document->getViewId());
                 if($view_id == "null")
                 {
-                    $view_id = null;
+                    $view_id = NULL;
                 }
 
                 $document->setViewId($view_id);
@@ -149,14 +146,14 @@ class Content_DocumentController extends Es_Controller_Action
                 $subForm->setIsArray(FALSE);
                 foreach($properties as $property)
                 {
-                    if($isPost)
+                    if($this->getRequest()->isPost())
                     {
                         if($this->saveDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property) == FALSE) {
                             $hasError = TRUE;
                         }
                     }
 
-                    Es_Form_Model::addFormContent($subForm, $this->loadDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property));
+                    Es_Form::addContent($subForm, $this->loadDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property));
                 }
 
                 $document_form->addSubForm($subForm, 'tabs-'.$i, $i);
@@ -171,9 +168,9 @@ class Content_DocumentController extends Es_Controller_Action
             $document_form->addSubForm($form_document_add, 'tabs-'.$i, $i);
             if($has_error)
             {
-                $document->setDocumentShowInNav(FALSE);
-                $document->setDocumentStatus(FALSE);
-                $this->view->message = 'This document cannot be published and show in nav because one or more properties are required !';
+                $document->showInNav(FALSE);
+                $document->setStatus(FALSE);
+                $this->_helper->flashMessenger->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties are required !');
             }
 
             $document->save();
@@ -219,7 +216,7 @@ class Content_DocumentController extends Es_Controller_Action
 
     protected function loadDatatype($datatype_id, $document_id)
     {
-        $datatype = Es_Datatype_Model::fromId($datatype_id);
+        $datatype = Es_Model_DbTable_Datatype_Model::fromId($datatype_id);
         $model = $datatype->getModel();
         $class = 'Datatypes_'.$model->getAlias().'_Datatype';
 

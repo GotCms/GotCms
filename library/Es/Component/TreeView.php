@@ -33,7 +33,6 @@ class Es_Component_TreeView
         foreach($treeview_data as $iterator)
         {
             $children = $iterator->getChildren();
-
             $haveChildren = !empty($children);
             $html .= '<li';
             if($haveChildren)

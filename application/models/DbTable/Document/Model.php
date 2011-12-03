@@ -242,17 +242,31 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     */
     public function getIcon()
     {
-        if($this->_icon === NULL)
+        if($this->getData('icon') === NULL)
         {
-            $select = $this->select()
-                ->where('document_type_id = ?', $this->getDocumentTypeId());
-            $icon = $this->fetchRow($select);
-            if(!empty($icon))
+            if($this->getIconId() === NULL)
             {
-                $icon = Es_Model_DbTable_Media_Icon_Model::fromId($icon);
-                $this->_icon = $icon->getIconUrl();
+                $children = $this->getChildren();
+                if(empty($children))
+                {
+                    $this->setData('icon', 'file');
+                }
+                else
+                {
+                    $this->setData('icon', 'folder');
+                }
+            }
+            else
+            {
+                $db = $this->getAdapter();
+                $select_icon = $db->select()->from(array('i' => 'icons'))
+                    ->where('id = ?', $this->getIconId());
+                $icon = $db->fetchRow($select_icon);
+                $this->setData('icon', $icon['filename']);
             }
         }
+
+        return $this->getData('icon');
 
         return $this->_icon;
     }
