@@ -13,7 +13,7 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
 
     public function getUser()
     {
-        if($this->_user === null AND $this->getUserId() != null)
+        if($this->_user === NULL AND $this->getUserId() != NULL)
         {
             $this->_user = new Es_Model_DbTable_User_Model($this->getUserId());
         }
@@ -38,20 +38,21 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
     */
     public function getTabs()
     {
-        if($this->_tabs === null )
+        if($this->getData('tabs') === NULL )
         {
             $select = $this->select()
-                ->where('id = ? ', array($this->getId()))
-                ->order('order');
+                ->where('id = ? ', array($this->getId()));
             $tabs = $this->fetchAll($select);
-            $this->_tabs = array();
+            $tabs_array = array();
             foreach($tabs as $tab)
             {
-                $this->_tabs[] = Es_Model_DbTable_Tab_Model::fromArray($tab);
+                $tabs_array[] = Es_Model_DbTable_Tab_Model::fromArray($tab->toArray());
             }
+
+            $this->setData('tabs', $tabs_array);
         }
 
-        return $this->_tabs;
+        return $this->getData('tabs');
     }
 
     public function save()
@@ -205,7 +206,7 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
     */
     public function getIcon()
     {
-        if($this->_icon_url === null)
+        if($this->_icon_url === NULL)
         {
             $icon = Es_Media_Icon_Model::fromId($this->_documentType_icon);
             $this->_icon_url = $icon->getIconUrl();

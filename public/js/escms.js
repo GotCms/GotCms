@@ -2,7 +2,12 @@ var ES = Class.create();
 ES.prototype = {
     initialize: function($options)
     {
-        this.options = $H($options);
+        this._options = $H($options);
+    },
+
+    setOption: function($name, $value)
+    {
+        this._options.set($name, $value)
     },
 
     setHtmlMessage: function($message)
@@ -261,14 +266,13 @@ ES.prototype = {
                     break;
 
                     case 'quit':
-                    break;
-
                     default:
                         return false;
                     break;
                 }
 
-                document.location.href = url;
+                $routes = $this._options.get('routes');
+                document.location.href = $routes[$action];
             }
         );
     },

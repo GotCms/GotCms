@@ -12,6 +12,9 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     protected $_icon;
     protected $_name = 'documents';
 
+    const STATUS_DISABLE     = 0;
+    const STATUS_ENABLE      = 1;
+
     /**
     * @param integer $document_id
     */
@@ -80,7 +83,7 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
         $document = $document->fetchRow($select);
         if(!empty($document))
         {
-            return self::fromArray($document);
+            return self::fromArray($document->toArray());
         }
         else
         {
@@ -151,7 +154,7 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
                 $this->update($array_save, 'id = '.$this->getId());
             }
 
-            return TRUE;
+            return $this->getId();
         }
         catch (Exception $e)
         {
@@ -226,7 +229,8 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     {
         if($this->getData('children') === NULL)
         {
-            $children = new Es_Model_DbTable_Document_Collection($this->getId());
+            $children = new Es_Model_DbTable_Document_Collection();
+            $children->load($this->getId());
             $this->setData('children', $children->getChildren());
         }
 

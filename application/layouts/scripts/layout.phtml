@@ -32,6 +32,14 @@
         ->appendStylesheet('/css/jquery.treeview.css')
         ->appendStylesheet('/css/jquery.contextMenu.css');
     ?>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function()
+        {
+            ES.getInstance().setOption('routes', <?php echo $this->jsQuoteEscape($this->layout()->routes); ?>);
+            ES.getInstance().initDocumentMenu();
+        });
+    </script>
 </head>
 <body>
     <div id="header">
@@ -78,13 +86,6 @@
     </div>
 
     <?php if($this->layout()->treeview): ?>
-        <script type="text/javascript">
-            jQuery(document).ready(function()
-            {
-                ES.getInstance().initDocumentMenu();
-            });
-        </script>
-
         <ul id="contextMenu" class="contextMenu">
             <li class="new"><a href="#new"><?php echo $this->escape($this->translate('New')); ?></a></li>
             <li class="edit"><a href="#edit"><?php echo $this->escape($this->translate('Edit')); ?></a></li>

@@ -4,7 +4,7 @@ class Es_Model_DbTable_Property_Collection extends Es_Db_Table
     protected $_name = 'properties';
     private $_document_id;
 
-    public function load($document_type_id = NULL, $tab_id = NULL, $document_id = null)
+    public function init($document_type_id = NULL, $tab_id = NULL, $document_id = null)
     {
         $this->setDocumentTypeId($document_type_id);
         $this->setTabId($tab_id);
@@ -23,9 +23,9 @@ class Es_Model_DbTable_Property_Collection extends Es_Db_Table
 
             if($this->getDocumentId() !== NULL)
             {
-                $select->joinInner(array('d'=>'documents'), 'd.document_type_id = t.document_type_id', array('d.document_id'));
-                $select->joinLeft(array('pv'=>'properties_value'), 'd.document_id = pv.document_id AND p.property_id = pv.property_id', array('pv.value', 'pv.property_value_id'));
-                $select->where('d.document_id = ?', $this->_document_id);
+                $select->joinInner(array('d'=>'documents'), 'd.document_type_id = t.document_type_id', array('id'));
+                $select->joinLeft(array('pv'=>'properties_values'), 'd.id = pv.document_id AND p.id = pv.property_id', array('value', 'id'));
+                $select->where('d.id = ?', $this->getDocumentId());
             }
 
             if($this->getTabId() != NULL)

@@ -1,6 +1,8 @@
 <?php
 class Content_Form_DocumentAdd extends Es_Form
 {
+    protected $_document;
+
     public function init()
     {
         $this->setMethod(self::METHOD_POST);
@@ -17,7 +19,7 @@ class Content_Form_DocumentAdd extends Es_Form
             ->setLabel('Url key')
             ->setAttrib('class', 'input-text')
             ->addValidator(new Zend_Validate_NotEmpty())
-            ->addValidator(new Zend_Validate_Db_NoRecordExists(array('table' => 'documents', 'field' => 'id')));
+            ->addValidator(new Zend_Validate_Db_NoRecordExists(array('table' => 'documents', 'field' => 'url_key')));
 
         $document_collection = new Es_Model_DbTable_Document_Collection();
         $parent_id = new Zend_Form_Element_Select('parent_id');
@@ -34,5 +36,13 @@ class Content_Form_DocumentAdd extends Es_Form
             ->setLabel('Create');
 
         $this->addElements(array($name, $url_key, $parent_id, $document_type, $submit));
+    }
+
+    public function load(Es_Model_DbTable_Document_Model $document, $index)
+    {
+        $this->_document = $document;
+        $this->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$index))));
+        $this->removeDecorator('Fieldset');
+        $this->removeDecorator('DtDdWrapper');
     }
 }

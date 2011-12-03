@@ -4,30 +4,52 @@ class Content_DocumentController extends Es_Controller_Action
 {
     public function init()
     {
-        /* Initialize action controller here */
+        $this->_helper->layout->assign('treeview', Es_Component_TreeView::render(array(new Es_Model_DbTable_Document_Collection())));
+
+        $router = $this->getFrontController()->getRouter();
+        $routes = array(
+            'edit' => 'documentEdit'
+            , 'new' => 'documentAdd'
+            , 'delete' => 'documentDelete'
+            , 'copy' => 'documentCopy'
+            , 'cut' => 'documentCut'
+            , 'paste' => 'documentPaste'
+        );
+
+        $array_routes = array();
+        foreach($routes as $key => $route)
+        {
+            if($router->hasRoute($route))
+            {
+                $array_routes[$key] = $router->assemble(array('id' => ':id'), $route);
+            }
+        }
+
+        $this->_helper->layout->assign('routes', Zend_Json::encode($array_routes));
     }
 
     public function addAction()
     {
         $document_form = new Content_Form_DocumentAdd();
+        $document_form->setAction($this->getFrontController()->getRouter()->assemble(array(), 'documentAdd'));
 
-        if($this->_request->isPost())
+        if($this->getRequest()->isPost())
         {
-            if(!$document_form->isValid($this->_request->getPost()))
+            if(!$document_form->isValid($this->getRequest()->getPost()))
             {
                 $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Invalid document data');
             }
             else
             {
-                $document_name = $this->_request->getParam('name', '');
-                $document_url_key = $this->_request->getParam('url_key', $this->checkUrlKey($document_name));
-                $document_type_id = $this->_request->getParam('document_type_id', '');
-                $parent_id = $this->_request->getParam('parent_id', 0);
+                $document_name = $document_form->getValue('name');
+                $document_url_key = $document_form->getValue('url_key');
+                $document_type_id = $document_form->getValue('document_type');
+                $parent_id = $this->getRequest()->getPost('parent_id');
                 $document = new Es_Model_DbTable_Document_Model();
                 $document->setName($document_name)
                     ->setDocumentTypeId($document_type_id)
                     ->setParentId($parent_id)
-                    ->setUrlKey($document_url_key);
+                    ->setUrlKey(!empty($document_url_key) ? $document_url_key : $this->checkUrlKey($document_name));
 
                 $document_id = $document->save();
                 if(empty($document_id))
@@ -48,7 +70,7 @@ class Content_DocumentController extends Es_Controller_Action
 
     public function deleteAction()
     {
-        $document = Es_Model_DbTable_Document_Model::fromId($this->_request->getParam('id', ''));
+        $document = Es_Model_DbTable_Document_Model::fromId($this->getRequest()->getParam('id', ''));
         if(empty($document))
         {
             $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Document does not exists !');
@@ -75,38 +97,39 @@ class Content_DocumentController extends Es_Controller_Action
 
     public function editAction()
     {
-
-        $document = Es_Model_DbTable_Document_Model::fromId($this->_request->getParam('id', ''));
+        $document = Es_Model_DbTable_Document_Model::fromId($this->getRequest()->getParam('id', ''));
+        $document_form = new Zend_Form();
         if(empty($document))
         {
             $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Document does not exists !');
         }
         else
         {
+            $has_error = FALSE;
             $document_type_id = $document->getDocumentTypeId();
             $isPost = $this->getRequest()->isPost();
-            $layout_id = $this->_request->getParam('layout_id', '');
+            $layout_id = $this->getRequest()->getParam('layout_id', '');
             if($layout_id === null OR $layout_id == '')
             {
-                $isPost = false;
+                $isPost = FALSE;
             }
 
             if($isPost)
             {
-                $document->setDocumentName($this->getRequest()->getParam('document_name', $document->getDocumentName()));
-                $document->setDocumentStatus($this->getRequest()->getParam('document_status', false));
-                $document->setDocumentShowInNav($this->getRequest()->getParam('document_show_in_nav', false));
-                $document->setLayoutId($this->getRequest()->getParam('layout_id', false));
-                $view_id = $this->getRequest()->getParam('view_id', $document->getViewId());
+                $document->setName($this->getRequest()->getPost('document_name', $document->getDocumentName()));
+                $document->setStatus($this->getRequest()->getPost('document_status', FALSE));
+                $document->showInNav($this->getRequest()->getPost('document_show_in_nav', FALSE));
+                $document->setLayoutId($this->getRequest()->getPost('layout_id', FALSE));
+                $view_id = $this->getRequest()->getPost('view_id', $document->getViewId());
                 if($view_id == "null")
                 {
                     $view_id = null;
                 }
 
                 $document->setViewId($view_id);
-                if($document->setDocumentUrlKey($this->getRequest()->getParam('document_url_key', $document->getDocumentUrlKey()))=== false)
+                if($document->setUrlKey($this->getRequest()->getParam('document_url_key', $document->getDocumentUrlKey()))=== FALSE)
                 {
-                    $document->setDocumentUrlKey($this->setNameToUrlKey($document->getDocumentName()));
+                    $document->setUrlKey($this->checkUrlKey($document->getDocumentName()));
                 }
             }
 
@@ -123,13 +146,13 @@ class Content_DocumentController extends Es_Controller_Action
                 $subForm->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$i))));
                 $subForm->removeDecorator('Fieldset');
                 $subForm->removeDecorator('DtDdWrapper');
-                $subForm->setIsArray(false);
+                $subForm->setIsArray(FALSE);
                 foreach($properties as $property)
                 {
                     if($isPost)
                     {
-                        if($this->saveDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property) == false) {
-                            $hasError = true;
+                        if($this->saveDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property) == FALSE) {
+                            $hasError = TRUE;
                         }
                     }
 
@@ -142,17 +165,20 @@ class Content_DocumentController extends Es_Controller_Action
 
             $tabs_array[] = 'Document information';
 
-            $document_form->addSubForm(new Form_Content($document, $i), 'tabs-'.$i, $i);
-            if($hasError)
+            $form_document_add = new Content_Form_DocumentAdd();
+            $form_document_add->init($document, $i);
+
+            $document_form->addSubForm($form_document_add, 'tabs-'.$i, $i);
+            if($has_error)
             {
-                $document->setDocumentShowInNav(false);
-                $document->setDocumentStatus(false);
+                $document->setDocumentShowInNav(FALSE);
+                $document->setDocumentStatus(FALSE);
                 $this->view->message = 'This document cannot be published and show in nav because one or more properties are required !';
             }
 
             $document->save();
             $this->view->tabs = new Es_Component_Tabs($tabs_array);
-            $this->view->content = $document_form;
+            $this->view->form = $document_form;
         }
     }
 
@@ -167,7 +193,7 @@ class Content_DocumentController extends Es_Controller_Action
 
     protected function loadTabs($document_type_id)
     {
-        $document_type = Es_DocumentType_Model::fromId($document_type_id);
+        $document_type = Es_Model_DbTable_DocumentType_Model::fromId($document_type_id);
         $tabs = $document_type->getTabs();
 
         return $tabs;
@@ -175,14 +201,15 @@ class Content_DocumentController extends Es_Controller_Action
 
     protected function loadProperties($document_type_id, $tab_id, $document_id)
     {
-        $properties = new Es_Component_Property_Collection($document_type_id, $tab_id, $document_id);
+        $properties = new Es_Model_DbTable_Property_Collection();
+        $properties->init($document_type_id, $tab_id, $document_id);
 
         return $properties->getProperties();
     }
 
     protected function saveEditor(Es_Datatype_Abstract $datatype, $property_id)
     {
-        return $datatype->getEditor($property_id)->save($this->_request);
+        return $datatype->getEditor($property_id)->save($this->getRequest());
     }
 
     protected function loadEditor(Es_Datatype_Abstract $datatype, $property_id)
