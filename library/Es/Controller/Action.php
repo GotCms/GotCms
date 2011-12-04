@@ -2,6 +2,8 @@
 class Es_Controller_Action extends Zend_Controller_Action
 {
     protected $_session = NULL;
+    protected $_db;
+
     public function preDispatch()
     {
         Zend_Session::start();
@@ -23,6 +25,19 @@ class Es_Controller_Action extends Zend_Controller_Action
         }
 
         return $this->_session;
+    }
+
+    /**
+    * @return Zend_Db_Adapter_Abstract
+    */
+    public function getAdapter()
+    {
+        if(empty($this->_db))
+        {
+            $this->_db = Zend_Registry::get('Zend_Db');
+        }
+
+        return $this->_db;
     }
 }
 

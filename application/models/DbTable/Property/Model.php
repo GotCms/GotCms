@@ -101,7 +101,7 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
             'name' => $this->getName()
             , 'description' => $this->getDescription()
             , 'identifier' => $this->getIdentifier()
-            , 'required' => $this->isRequired()
+            , 'required' => $this->isRequired() == TRUE ? 'TRUE' : 'FALSE'
             , 'order' => $this->getOrder()
             , 'tab_id' => $this->getTabId()
             , 'datatype_id' => $this->getDatatypeId()
@@ -141,8 +141,8 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
         {
             try
             {
-                parent::delete('id = ?', $id);
-                $this->getAdapter()->delete('properties_value', $this->getAdapter()->quoteInto('property_id = ?', $id));
+                parent::delete($this->getAdapter()->quoteInto('id = ?', $id));
+                $this->getAdapter()->delete('properties_values', $this->getAdapter()->quoteInto('property_id = ?', $id));
             }
             catch(Exception $e)
             {

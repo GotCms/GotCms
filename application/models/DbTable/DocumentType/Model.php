@@ -104,7 +104,7 @@ class Es_Model_DbTable_DocumentType_Model extends Es_Db_Table implements Es_Inte
         if(!empty($document_type_id))
         {
             $tab_collection = new Es_Model_DbTable_Tab_Collection();
-            $tab_collection->init($document_type_id)->getTabs();
+            $tab_collection->load($document_type_id);
             $tab_collection->delete();
             $this->getAdapter()->delete('document_type_views', $this->getAdapter()->quoteInto('document_type_id = ?', $document_type_id));
             parent::delete('id = '.$document_type_id);

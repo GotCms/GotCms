@@ -7,10 +7,6 @@ class Es_Model_DbTable_Tab_Model extends Es_Db_Table
 {
     protected $_name = 'tabs';
 
-    public function init()
-    {
-    }
-
     /**
     * @return FALSE|Es_Model_DbTable_Tab_Model
     */
@@ -45,48 +41,6 @@ class Es_Model_DbTable_Tab_Model extends Es_Db_Table
     }
 
     /**
-    * @param string $value
-    */
-    public function setOrder($order = NULL)
-    {
-        if(empty($order))
-        {
-            $this->checkOrder($order);
-        }
-
-        $this->setData('order', $order);
-        return $this;
-    }
-
-    /**
-    * @return integer
-    */
-    private function checkOrder(&$order)
-    {
-        $select = $this->getAdapter()->select()
-            ->from($this->_name, array('max_order'=>'MAX("order")'));
-        if($this->getDocumentTypeId() !== NULL)
-        {
-            $select->where('document_type_id = ?',$this->getDocumentTypeId());
-        }
-
-        if($this->getId() !== NULL)
-        {
-            $select->where('id = ?', $this->getId());
-        }
-
-        $row = $this->getAdapter()->fetchRow($select);
-        if(!empty($row))
-        {
-            $order = $row['max_order'] + 1;
-        }
-        else
-        {
-            $order = 1;
-        }
-    }
-
-    /**
     * @return boolean
     */
     public function save()
@@ -111,7 +65,7 @@ class Es_Model_DbTable_Tab_Model extends Es_Db_Table
                 $this->update($array_save, $this->getAdapter()->quoteInto('id = ?', $id));
             }
 
-            return TRUE;
+            return $this->getId();
         }
         catch (Exception $e)
         {

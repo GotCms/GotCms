@@ -25,7 +25,6 @@ class Development_DocumentTypeController extends Es_Controller_Action
 
         if($request->isPost())
         {
-
             if(Zend_Session::namespaceIsset('documentType'))
             {
                 $form->setValueFromSession(Zend_Session::namespaceGet('documentType'));
@@ -42,61 +41,86 @@ class Development_DocumentTypeController extends Es_Controller_Action
 
                 $document_type->addData(array(
                     //@TODO change user_id
-                    'user_id' => 1
+                    'user_id' => Zend_Registry::get('user_id')
                     , 'name' => $infos_subform->getValue('name')
                     , 'description' => $infos_subform->getValue('description')
                     , 'default_view_id' => $views_subform->getValue('default_view')
                 ));
 
-                $document_type->addViews($views_subform->getValue('available_views'));
-                $document_type->save();
-
-                $tabs_array = array();
-                foreach($tabs_subform->getValues(TRUE) as $tabs_name => $tab_values)
+                $this->getAdapter()->beginTransaction();
+                try
                 {
-                    foreach($tab_values as $id => $value)
+                    $document_type->addViews($views_subform->getValue('available_views'));
+                    $document_type->save();
+
+                    $tabs_array = array();
+                    foreach($tabs_subform->getValues(TRUE) as $tabs_name => $tab_values)
                     {
-                        $tabs_array[$id][$tabs_name] = $value;
-                    }
-                }
-
-                $tabs = array();
-                foreach($tabs_array as $tab_id => $tab)
-                {
-                    $t = Es_Model_DbTable_Tab_Model::fromArray($tab);
-                    $t->setDocumentTypeId($document_type->getId());
-                    $t->setOrder();
-                    $t->save();
-                    $tabs[$tab_id] = $t->getId();
-                }
-
-                $properties_array = array();
-                $properties_values = $this->getRequest()->getPost('properties');
-                foreach($properties_values as $property_name => $property_value)
-                {
-
-                    foreach($property_value as $id => $value)
-                    {
-                        if($property_name == 'tab')
+                        foreach($tab_values as $id => $value)
                         {
-                            $properties_array[$id]['tab_id'] = $tabs[$value];
-                            continue;
+                            $tabs_array[$id][$tabs_name] = $value;
+                        }
+                    }
+
+                    $tabs = array();
+                    $idx = 0;
+                    foreach($tabs_array as $tab_id => $tab)
+                    {
+                        $t = Es_Model_DbTable_Tab_Model::fromArray($tab);
+                        $t->setDocumentTypeId($document_type->getId());
+                        $t->setOrder(++$idx);
+                        $t->save();
+                        $tabs[$tab_id] = $t->getId();
+                    }
+
+                    $properties = array();
+                    $properties_values = $this->getRequest()->getPost('properties');
+
+                    foreach($properties_values as $property_name => $property_value)
+                    {
+
+                        foreach($property_value as $id => $value)
+                        {
+                            if($property_name == 'tab')
+                            {
+                                $properties[$id]['tab_id'] = $tabs[$value];
+                            }
+                            elseif($property_name == 'datatype')
+                            {
+                                $properties[$id]['datatype_id'] = $value;
+                            }
+                            elseif($property_name == 'required')
+                            {
+                                $properties[$id]['is_required'] = $value == 1 ? TRUE : FALSE;
+                            }
+                            else
+                            {
+                                $properties[$id][$property_name] = $value;
+                            }
                         }
 
-                        $properties_array[$id][$property_name] = $value;
                     }
-                }
 
-                $property_collection->setProperties($properties_array);
-                $property_collection->save();
+                    $idx = 0;
+                    foreach($properties as $property)
+                    {
+                        $properties[$id]['order'] = ++$idx;
+                    }
+
+                    $property_collection->setProperties($properties);
+                    $property_collection->save();
+
+                    $this->getAdapter()->commit();
+                }
+                catch(Exception $e)
+                {
+                    $this->getAdapter()->rollBack();
+                    throw new Es_Exception("Error Processing Request ".print_r($e, TRUE), 1);
+                }
             }
             else
             {
-                echo 'Post'.PHP_EOL;
-                var_dump($this->_request->getPost());
-                echo 'FORM ERRORS'.PHP_EOL;
-                var_dump($form->getErrors());
-                die();
+                $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can save document_type');
             }
         }
 
@@ -229,7 +253,7 @@ class Development_DocumentTypeController extends Es_Controller_Action
             }
             else
             {
-                $last_id = array_search($last_element, $session->tabs);
+                $last_id = array_search($last_element, $properties);
             }
 
             foreach($tabs as $tab)
@@ -247,27 +271,22 @@ class Development_DocumentTypeController extends Es_Controller_Action
                     }
                 }
             }
+
             $current_id = $last_id + 1;
             $properties[$current_id] = array(
                 'name' => $name
                 , 'identifier' => $identifier
                 , 'tab' => $tab_id
                 , 'description' => $description
-                , 'is_required' => $is_required
+                , 'is_required' => $is_required == 1 ? TRUE : FALSE
                 , 'datatype' => $datatype_id
             );
-            $session->tabs[$tab_id]['properties'] = $properties;
 
-            $this->_helper->json(array(
-                'success' => TRUE
-                , 'id' => $current_id
-                , 'name' => $name
-                , 'identifier' => $identifier
-                , 'tab' => $tab_id
-                , 'description' => $description
-                , 'is_required' => $is_required
-                , 'datatype' => $datatype_id
-            ));
+            $session->tabs[$tab_id]['properties'] = $properties;
+            $properties[$current_id]['success'] = TRUE;
+            $properties[$current_id]['id'] = $current_id;
+
+            return $this->_helper->json($properties[$current_id]);
         }
 
         return $this->_helper->json(array('success' => FALSE, 'message' => 'Error'));

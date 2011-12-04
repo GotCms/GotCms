@@ -175,21 +175,18 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
         $document_id = $this->getId();
         if(!empty($document_id))
         {
-            $this->beginTransaction();
             try
             {
                 if(parent::delete('id = '.$this->getId()))
                 {
                     $this->getAdapter()->delete('properties_value', 'document_id = '.$this->getId());
                     unset($this);
-                    $this->commit();
 
                     return TRUE;
                 }
             }
             catch (Exception $e)
             {
-                $this->rollBack();
                 Es_Error::set(get_class($this), $e);
             }
         }

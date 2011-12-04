@@ -4,7 +4,7 @@ class Es_Model_DbTable_Property_Collection extends Es_Db_Table
     protected $_name = 'properties';
     private $_document_id;
 
-    public function init($document_type_id = NULL, $tab_id = NULL, $document_id = null)
+    public function load($document_type_id = NULL, $tab_id = NULL, $document_id = null)
     {
         $this->setDocumentTypeId($document_type_id);
         $this->setTabId($tab_id);
@@ -76,17 +76,14 @@ class Es_Model_DbTable_Property_Collection extends Es_Db_Table
         $properties = $this->getProperties();
         try
         {
-            $this->getAdapter()->beginTransaction();
             foreach($properties as $property)
             {
                 $property->save();
             }
 
-            $this->getAdapter()->commit();
         }
         catch(Exception $e)
         {
-            $this->getAdapter()->rollBack();
             throw new Es_Exception($e->getMessage());
         }
     }
