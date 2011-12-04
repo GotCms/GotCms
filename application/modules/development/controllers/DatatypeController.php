@@ -65,7 +65,7 @@ class Development_DatatypeController extends Zend_Controller_Action
 
         $form = new Development_Form_Datatype();
         $form->setAction($this->_helper->url->url(array(), 'datatypeEdit'));
-        $form->addFormContent($this->loadDatatypePrevalueEditor($datatype));
+        $form->addContent($this->loadDatatypePrevalueEditor($datatype));
         $form->loadValues($datatype);
 
         if($this->_request->isPost())
@@ -74,10 +74,9 @@ class Development_DatatypeController extends Zend_Controller_Action
             {
                 $datatype->addData($form->getValues(TRUE));
 
-                if($datatype->getModelId() != $form->getValue('model_id'))
+                if($datatype->getModel() != $form->getValue('model'))
                 {
                     $datatype->setValue(array());
-                    $datatype->setModelId($form->getValue('model_id'));
                 }
                 else
                 {
@@ -136,10 +135,9 @@ class Development_DatatypeController extends Zend_Controller_Action
     */
     private function loadDatatype(Es_Model_DbTable_Datatype_Model $datatype_model)
     {
-        if($this->_datatype === null OR $this->_datatype->getModelId() != $datatype_model->getId())
+        if($this->_datatype === null OR $this->_datatype->getId() != $datatype_model->getId())
         {
-            $model = $datatype_model->getModel();
-            $class = 'Datatypes_'.$model->getIdentifier().'_Datatype';
+            $class = 'Datatypes_'.$datatype_model->getName().'_Datatype';
             $datatype =  new $class();
             $datatype->init($datatype_model);
             $this->_datatype = $datatype;

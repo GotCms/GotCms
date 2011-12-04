@@ -8,14 +8,6 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
     protected $_name = 'datatypes';
     protected $_model;
 
-    /**
-    * @param integer $defaultId
-    */
-    public function init($id = NULL)
-    {
-        $this->setId($id);
-    }
-
     public function setModelId($value)
     {
         $this->setData('model_id', $value);
@@ -23,21 +15,6 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
         $this->setModel();
 
         return $this;
-    }
-
-    private function setModel()
-    {
-        if($this->_model === null)
-        {
-            $this->_model = Es_Model_DbTable_Model_Model::fromId($this->getModelId());
-        }
-
-        return $this;
-    }
-
-    public function getModel()
-    {
-        return $this->_model;
     }
 
     public function setPrevalueValue($value)
@@ -55,10 +32,7 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
     static function fromArray(Array $array)
     {
         $datatype = new Es_Model_DbTable_Datatype_Model();
-        $datatype->init($array['id']);
-        $datatype->setName($array['name']);
-        $datatype->setModelId($array['model_id']);
-        $datatype->setPrevalueValue($array['prevalue_value']);
+        $datatype->setData($array);
         return $datatype;
     }
 
@@ -71,6 +45,7 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
         $datatype = new Es_Model_DbTable_Datatype_Model();
         $select = $datatype->select()
             ->where('id = ?', $datatype_id);
+
         $datatype = $datatype->fetchRow($select);
         if(!empty($datatype))
         {
@@ -87,7 +62,7 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
         $arraySave = array(
             'name' => $this->getName()
             , 'prevalue_value' => serialize($this->getPrevalueValue())
-            , 'model_id' => $this->getModelId()
+            , 'model' => $this->getModel()
         );
 
         try

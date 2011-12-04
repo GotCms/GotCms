@@ -15,7 +15,7 @@ abstract class Es_Model_DbTable_Datatype_Abstract_PrevalueEditor extends Es_Core
 
     protected function getConfig()
     {
-        return $this->getDatatypeAbstract()->getConfig();
+        return unserialize($this->getDatatypeAbstract()->getConfig());
     }
 
     protected function setConfig($value)
