@@ -36,8 +36,10 @@
     <script type="text/javascript">
         jQuery(document).ready(function()
         {
-            ES.getInstance().setOption('routes', <?php echo $this->jsQuoteEscape($this->layout()->routes); ?>);
-            ES.getInstance().initDocumentMenu();
+            <?php if(!empty($this->layout()->routes)): ?>
+                ES.getInstance().setOption('routes', <?php echo $this->jsQuoteEscape($this->layout()->routes); ?>);
+                ES.getInstance().initDocumentMenu();
+            <?php endif; ?>
         });
     </script>
 </head>

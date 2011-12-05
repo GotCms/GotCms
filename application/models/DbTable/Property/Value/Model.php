@@ -1,7 +1,10 @@
 <?php
-class Es_Model_DbTable_Property_Value_Model extends Es_Core_Object
+class Es_Model_DbTable_Property_Value_Model extends Es_Db_Table
 {
-    public function __construct($property_value_id = null, $document_id = null, $property_id = null) {
+    protected $_name = 'properties_values';
+
+    public function load($property_value_id = NULL, $document_id = NULL, $property_id = NULL)
+    {
         $this->setPropertyValueId($property_value_id);
         $this->setDocumentId($document_id);
         $this->setPropertyId($property_id);
@@ -11,15 +14,18 @@ class Es_Model_DbTable_Property_Value_Model extends Es_Core_Object
     * @param array $array
     * @return Es_Component_Property_Model
     */
-    static function fromArray(Array $array){
-        if(!empty($array['property_value_id']) && !empty($array['document_id']) && !empty($array['property_id'])) {
-            $pv = new Es_Component_Property_Value_Model($array['property_value_id']);
-            $pv->setDocumentId($array['document_id']);
-            $pv->setPropertyId($array['property_id']);
-            $pv->setValue($array['value']);
-        }else {
-            $pv = null;
+    static function fromArray(Array $array)
+    {
+        if(!empty($array['property_value_id']) and !empty($array['document_id']) and !empty($array['property_id']))
+        {
+            $pv = new Es_Component_Property_Value_Model($array);
+            $pv->setData($array);
         }
+        else
+        {
+            $pv = NULL;
+        }
+
         return $pv;
     }
 
@@ -27,40 +33,51 @@ class Es_Model_DbTable_Property_Value_Model extends Es_Core_Object
     * @param integer $property_id
     * @return Es_Component_Property_Model
     */
-    static function fromId($property_value_id){
-        $db = Zend_Registry::get('db');
-        $db->setFetchMode(Zend_Db::FETCH_ASSOC);
-        $select = $db->select();
-        $select->from(array('t'=>'properties_value'));
+    static function fromId($property_value_id)
+    {
+        $pv = new Es_Component_Property_Value_Model($array);
+        $select = $pv->select();
         $select->where('property_value_id = ?', (int)$property_value_id);
-        $property = $db->query($select)->fetchAll();
-        if(count($property) > 0) {
-            return self::fromArray($property[0]);
-        } else {
-            return null;
+        $property = $pv->fetchRow($select);
+        if(!empty($property))
+        {
+            return self::fromArray($property->toArray());
+        }
+        else
+        {
+            return NULL;
         }
     }
-    public function save() {
-        $db = $this->getResource();
-        $arraySave = array('value'=>$this->getvalue(),
-                            'document_id'=>$this->getDocumentId(),
-                            'property_id'=>$this->getpropertyId()
-                            );
-        try {
-            if($this->getPropertyValueId() === NULL ){
-                $db->insert('properties_value', $arraySave);
-                $this->setPropertyValueId($db->lastInsertId('properties_value','property_value_id'));
+
+    public function save()
+    {
+        $array_save = array('value'=>$this->getvalue(),
+            'document_id'=>$this->getDocumentId(),
+            'property_id'=>$this->getpropertyId()
+        );
+
+        $id = $this->getId();
+        try
+        {
+            if(empty($id))
+            {
+                $this->setId($this->insert($array_save));
             }
-            else{
-                $db->update('properties_value', $arraySave, 'property_value_id = '.$this->getPropertyValueId());
+            else
+            {
+                $this->update($array_save, $this->getAdapter()->quoteInto('property_value_id = ?', $id));
             }
-            return true;
-        } catch (Exception $e){
+
+            return $id;
+        }
+        catch (Exception $e)
+        {
             /**
             * TODO(Make Es_Error)
             */
             Es_Error::set(get_class($this),$e);
         }
-        return false;
+
+        return FALSE;
     }
 }

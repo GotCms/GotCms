@@ -139,11 +139,11 @@ class Content_DocumentController extends Es_Controller_Action
             {
                 $tabs_array[] = $tab->getName();
                 $properties = $this->loadProperties($document_type_id, $tab->getId(), $document->getId());
-                $subForm = new Zend_Form_SubForm();
-                $subForm->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$i))));
-                $subForm->removeDecorator('Fieldset');
-                $subForm->removeDecorator('DtDdWrapper');
-                $subForm->setIsArray(FALSE);
+                $sub_form = new Zend_Form_SubForm();
+                $sub_form->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$i))));
+                $sub_form->removeDecorator('Fieldset');
+                $sub_form->removeDecorator('DtDdWrapper');
+                $sub_form->setIsArray(FALSE);
                 foreach($properties as $property)
                 {
                     if($this->getRequest()->isPost())
@@ -153,17 +153,17 @@ class Content_DocumentController extends Es_Controller_Action
                         }
                     }
 
-                    Es_Form::addContent($subForm, $this->loadDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property));
+                    Es_Form::addContent($sub_form, $this->loadEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property));
                 }
 
-                $document_form->addSubForm($subForm, 'tabs-'.$i, $i);
+                $document_form->addSubForm($sub_form, 'tabs-'.$i, $i);
                 $i++;
             }
 
             $tabs_array[] = 'Document information';
 
             $form_document_add = new Content_Form_DocumentAdd();
-            $form_document_add->init($document, $i);
+            $form_document_add->load($document, $i);
 
             $document_form->addSubForm($form_document_add, 'tabs-'.$i, $i);
             if($has_error)
@@ -204,12 +204,12 @@ class Content_DocumentController extends Es_Controller_Action
         return $properties->getProperties();
     }
 
-    protected function saveEditor(Es_Datatype_Abstract $datatype, $property_id)
+    protected function saveEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
     {
         return $datatype->getEditor($property_id)->save($this->getRequest());
     }
 
-    protected function loadEditor(Es_Datatype_Abstract $datatype, $property_id)
+    protected function loadEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
     {
         return $datatype->getEditor($property_id)->load();
     }
@@ -217,9 +217,10 @@ class Content_DocumentController extends Es_Controller_Action
     protected function loadDatatype($datatype_id, $document_id)
     {
         $datatype = Es_Model_DbTable_Datatype_Model::fromId($datatype_id);
-        $model = $datatype->getModel();
-        $class = 'Datatypes_'.$model->getAlias().'_Datatype';
+        $class = 'Datatypes_'.$datatype->getModel().'_Datatype';
 
-        return new $class($datatype->getId(), $document_id);
+        $object = new $class();
+        $object->load($datatype, $document_id);
+        return new $object;
     }
 }

@@ -1,7 +1,9 @@
 <?php
-class Datatypes_Textarea_Datatype extends Es_Model_DbTable_Datatype_Abstract {
+class Datatypes_Textarea_Datatype extends Es_Model_DbTable_Datatype_Abstract
+{
+    protected $_name = 'textarea';
 
-    public function getEditor(Es_Component_Property_Model $property)
+    public function getEditor(Es_Model_DbTable_Property_Model $property)
     {
         $this->_property = $property;
         if($this->_editor === null)

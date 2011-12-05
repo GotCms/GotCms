@@ -16,19 +16,19 @@ abstract class Es_Model_DbTable_Datatype_Abstract extends Es_Db_Table
     protected     $_helper;
     protected     $_loaders = array();
     protected     $_loaderTypes = array('filter', 'helper');
-    protected    $_name = 'datatypes';
+    protected     $_name = 'datatypes';
 
     /**
     * @param Es_Component_Property_Model $property
     * @return Es_Model_DbTable_Datatype_Abstract_Editor
     */
-    abstract public function getEditor(Es_Component_Property_Model $property);
+    abstract public function getEditor(Es_Model_DbTable_Property_Model $property);
     /**
     * @return Es_Model_DbTable_Datatype_Abstract_PrevalueEditor
     */
     abstract public function getPrevalueEditor();
 
-    public function init($datatype = NULL, $document_id = NULL)
+    public function load($datatype = NULL, $document_id = NULL)
     {
         if(empty($datatype))
         {
@@ -137,4 +137,13 @@ abstract class Es_Model_DbTable_Datatype_Abstract extends Es_Db_Table
         return $this->_loaders[$type];
     }
 
+    public function getProperty()
+    {
+        return $this->_property;
+    }
+
+    public function getName()
+    {
+        return $this->_name;
+    }
 }

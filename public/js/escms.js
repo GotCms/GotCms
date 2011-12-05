@@ -203,9 +203,11 @@ ES.prototype = {
                                 +'</dl>';
 
                             $t = new Template($c);
-
+console.log($data);
                             jQuery('#tabs-properties-'+$tab.val()).find('ul').append('<li>'+$t.evaluate($data)+'</li>');
-
+console.log('#properties-tab-'+$data.tab+'-'+$data.id);
+console.log('#properties-datatype-'+$data.tab+'-'+$data.id);
+console.log('#properties-required-'+$data.tab+'-'+$data.id);
                             jQuery('#properties-tab-'+$data.tab+'-'+$data.id).html(jQuery('#properties-tab').html()).val($data.tab);
                             jQuery('#properties-datatype-'+$data.tab+'-'+$data.id).html(jQuery('#properties-datatype').html()).val($data.datatype);
                             jQuery('#properties-required-'+$data.tab+'-'+$data.id).attr('checked', $isRequired.val());

@@ -6,8 +6,8 @@
 class Es_Model_DbTable_Property_Model extends Es_Db_Table
 {
 
-    private $_value;
-    protected $_name = 'properties';
+    protected         $_value;
+    protected         $_name = 'properties';
     /**
     * @param integer $defaultId
     */
@@ -63,8 +63,15 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
     */
     public function getValue()
     {
-        return $this->_value->getValue();
-        return FALSE;
+        if($this->_value == NULL)
+        {
+            $property_value = new Es_Model_DbTable_Property_Value_Model();
+            $property_value->load(NULL, $this->getDocumentId(), $this->getId());
+
+            $this->_value = $property_value;
+        }
+
+        return $property_value->getValue();
     }
 
     public function saveValue()

@@ -1,16 +1,25 @@
 <?php
 abstract class Es_Model_DbTable_Datatype_Abstract_Editor extends Es_Core_Object
 {
-    protected $_datatype, $_property, $_name;
+    /**
+    * @var Es_Model_DbTable_Datatype_Abstract
+    */
+    protected $_datatype;
+
+    /**
+    * @var Es_Model_DbTable_Property_Model
+    */
+    protected $_property;
+
+    protected $_name;
 
     public function __construct(Es_Model_DbTable_Datatype_Abstract $datatype)
     {
         $this->_datatype = $datatype;
-        $this->_property = $this->_datatype->_property;
-        $this->_construct();
+        $this->_property = $this->_datatype->getProperty();
     }
 
-    abstract public function save(Zend_Controller_Request_Abstract $request = NULL);
+    abstract public function save();
     abstract public function load();
 
     protected function getValue()
@@ -58,6 +67,22 @@ abstract class Es_Model_DbTable_Datatype_Abstract_Editor extends Es_Core_Object
 
     public function getName()
     {
-        return $this->_name.$this->$this->_property->getId();
+        return $this->_datatype->getName().$this->_property->getId();
+    }
+
+    /**
+    * @return Es_Model_DbTable_Property_Model
+    */
+    public function getProperty()
+    {
+        return $this->_property;
+    }
+
+    /**
+    * @return Es_Model_DbTable_Property_Model
+    */
+    public function getDatatype()
+    {
+        return $this->_datatype;
     }
 }

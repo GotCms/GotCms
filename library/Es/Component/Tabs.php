@@ -25,7 +25,7 @@ class Es_Component_Tabs
         $html = '<ul>';
         if($tabs === NULL)
         {
-            $tabs = $this->_item;
+            $tabs = $this->_data;
         }
 
         $i = 1;

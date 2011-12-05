@@ -33,13 +33,13 @@ abstract class Es_Form extends Zend_Form
         return $this;
     }
 
-    public function addContent($elements)
+    static function addContent(Zend_Form $form, $elements)
     {
         if(is_array($elements))
         {
             foreach($elements as $element)
             {
-                $this->addFormContent($element);
+                self::addContent($element);
             }
         }
         elseif($elements instanceof Zend_Form_Element)
@@ -49,20 +49,18 @@ abstract class Es_Form extends Zend_Form
                 $elements->setIsArray(FALSE);
             }
 
-            $this->addElement($elements);
+            $form->addElement($elements);
         }
         elseif(is_string($elements))
         {
             $hiddenElement = new Zend_Form_Element_Hidden('hidden'.mt_rand());
             $hiddenElement->addDecorator('Description', array('escape' => false));
             $hiddenElement->setDescription($elements);
-            $this->addElement($hiddenElement);
+            $form->addElement($hiddenElement);
         }
         else
         {
             throw new Es_Exception("Invalid element ".get_class($this)."::".__METHOD__.")");
         }
-
-        return $this;
     }
 }

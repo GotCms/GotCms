@@ -1,7 +1,9 @@
 <?php
 class Datatypes_Textstring_Datatype extends Es_Model_DbTable_Datatype_Abstract
 {
-    public function getEditor(Es_Component_Property_Model $property)
+    protected $_name = 'textstring';
+
+    public function getEditor(Es_Model_DbTable_Property_Model $property)
     {
         $this->_property = $property;
         if($this->_editor === null)

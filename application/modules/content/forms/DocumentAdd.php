@@ -21,11 +21,6 @@ class Content_Form_DocumentAdd extends Es_Form
             ->addValidator(new Zend_Validate_NotEmpty())
             ->addValidator(new Zend_Validate_Db_NoRecordExists(array('table' => 'documents', 'field' => 'url_key')));
 
-        $document_collection = new Es_Model_DbTable_Document_Collection();
-        $parent_id = new Zend_Form_Element_Select('parent_id');
-        $parent_id->addMultiOption('', 'Select parent');
-        $parent_id->addMultiOptions($document_collection->getSelect());
-
         $document_type_collection = new Es_Model_DbTable_DocumentType_Collection();
         $document_type = new Zend_Form_Element_Select('document_type');
         $document_type->addMultiOption('', 'Select document type');
@@ -35,7 +30,7 @@ class Content_Form_DocumentAdd extends Es_Form
         $submit->setAttrib('class', 'input-submit')
             ->setLabel('Create');
 
-        $this->addElements(array($name, $url_key, $parent_id, $document_type, $submit));
+        $this->addElements(array($name, $url_key, $document_type, $submit));
     }
 
     public function load(Es_Model_DbTable_Document_Model $document, $index)
@@ -44,5 +39,11 @@ class Content_Form_DocumentAdd extends Es_Form
         $this->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$index))));
         $this->removeDecorator('Fieldset');
         $this->removeDecorator('DtDdWrapper');
+
+        $this->getElement('name')->setValue($document->getName());
+        $this->getElement('url_key')->setValue($document->getUrlKey());
+
+        $this->removeElement('document_type');
+        $this->removeElement('submit');
     }
 }
