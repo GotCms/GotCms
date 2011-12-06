@@ -57,37 +57,38 @@ class Development_DatatypeController extends Zend_Controller_Action
 
     public function editAction()
     {
-        $datatype = Es_Model_DbTable_Datatype_Model::fromId($this->getRequest()->getParam('id'));
+        $datatype = Es_Model_DbTable_Datatype_Model::loadDatatype($this->getRequest()->getParam('id'));
         if(empty($datatype))
         {
             return $this->_helper->redirector->goToRoute(array(), 'datatypeList');
         }
 
+        $datatype_model = $datatype->getDatatype();
+
         $form = new Development_Form_Datatype();
         $form->setAction($this->_helper->url->url(array(), 'datatypeEdit'));
-        $form->addContent($this->loadDatatypePrevalueEditor($datatype));
-        $form->loadValues($datatype);
+
+        Es_Form::addContent($form, Es_Model_DbTable_Datatype_Model::loadPrevalueEditor($datatype));
+        $form->loadValues($datatype_model);
 
         if($this->_request->isPost())
         {
             if($form->isValid($this->_request->getPost()))
             {
-                $datatype->addData($form->getValues(TRUE));
-
-                if($datatype->getModel() != $form->getValue('model'))
+                if($datatype_model->getModel() != $form->getValue('model'))
                 {
-                    $datatype->setValue(array());
+                    $datatype_model->setValue(array());
                 }
                 else
                 {
-                    $datatype->setValue($this->saveDatatypePrevalueEditor($datatype));
+                    $datatype_model->setValue(Es_Model_DbTable_Datatype_Model::savePrevalueEditor($datatype));
                 }
 
                 try
                 {
-                    if($datatype->save())
+                    if($datatype_model->save())
                     {
-                        return $this->_helper->redirector->goToRoute(array('id' => $datatype->getId()), 'datatypeEdit');
+                        return $this->_helper->redirector->goToRoute(array('id' => $datatype_model->getId()), 'datatypeEdit');
                     }
                 }
                 catch(Exception $e)
@@ -122,54 +123,6 @@ class Development_DatatypeController extends Zend_Controller_Action
         }
 
         return $this->_helper->redirector->goToRoute(array(), 'datatypeList');
-    }
-
-
-
-
-    /**
-    *
-    * @param Es_Model_DbTable_Datatype_Model $datatype_model
-    *
-    * @return Es_Model_DbTable_Datatype_Abstract
-    */
-    private function loadDatatype(Es_Model_DbTable_Datatype_Model $datatype_model)
-    {
-        if($this->_datatype === null OR $this->_datatype->getId() != $datatype_model->getId())
-        {
-            $class = 'Datatypes_'.$datatype_model->getName().'_Datatype';
-            $datatype =  new $class();
-            $datatype->init($datatype_model);
-            $this->_datatype = $datatype;
-        }
-
-        return $this->_datatype;
-    }
-
-    /**
-    *
-    * @param Es_Model_DbTable_Datatype_Model $datatype_model
-    *
-    * @return Es_Model_DbTable_Datatype_Abstract_PrevalueEditor
-    */
-    private function loadDatatypePrevalueEditor(Es_Model_DbTable_Datatype_Model $datatype_model)
-    {
-        $datatype = $this->loadDatatype($datatype_model);
-        return $datatype->getPrevalueEditor()->load();
-    }
-
-    /**
-    *
-    * @param Es_Model_DbTable_Datatype_Model $datatype_model
-    *
-    * @return Es_Model_DbTable_Datatype_Abstract_Editor
-    */
-    private function saveDatatypePrevalueEditor(Es_Model_DbTable_Datatype_Model $datatype_model)
-    {
-        $datatype = $this->loadDatatype($datatype_model);
-        $datatype->getPrevalueEditor()->save();
-
-        return $datatype->getConfig();
     }
 }
 

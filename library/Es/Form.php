@@ -39,7 +39,7 @@ abstract class Es_Form extends Zend_Form
         {
             foreach($elements as $element)
             {
-                self::addContent($element);
+                self::addContent($form, $element);
             }
         }
         elseif($elements instanceof Zend_Form_Element)

@@ -4,7 +4,6 @@ class Development_Form_Datatype extends Es_Form
     public function init()
     {
         $this->setMethod(self::METHOD_POST);
-        $this->setElementsBelongTo('datatype');
 
         $name = new Zend_Form_Element_Text('name');
         $name->setRequired(TRUE)

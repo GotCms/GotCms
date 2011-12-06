@@ -3,7 +3,7 @@ class Datatypes_Textstring_PrevalueEditor extends Es_Model_DbTable_Datatype_Abst
 {
     public function save()
     {
-        $length = $this->getParam('length');
+        $length = $this->getRequest()->getPost('length');
         $this->setConfig(array('length' => $length));
     }
 

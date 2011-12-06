@@ -4,10 +4,11 @@ class Datatypes_Textarea_PrevalueEditor extends Es_Model_DbTable_Datatype_Abstra
     public function save()
     {
         //Save prevalue in column datatypes_prevalue_value
-        $rows = $this->getParam('rows', '');
-        $cols = $this->getParam('cols','');
-        $wrap = $this->getParam('wrap','');
-        $options = $this->getParam('Options','');
+        $request = $this->getRequest();
+        $rows = $request->getPost('rows', '');
+        $cols = $request->getPost('cols','');
+        $wrap = $request->getPost('wrap','');
+        $options = $request->getPost('Options','');
         $disabled = !empty($options[0]) ? $options[0] : '';
         $readonly = !empty($options[1]) ? $options[1] : '';
 

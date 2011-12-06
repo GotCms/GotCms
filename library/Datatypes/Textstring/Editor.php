@@ -3,9 +3,8 @@ class Datatypes_Textstring_Editor extends Es_Model_DbTable_Datatype_Abstract_Edi
 {
     public function save()
     {
-        $value = $request->getParam($this->getName());
+        $value = $this->getRequest()->getPost($this->getName());
         $this->setValue($value);
-        return $this->saveValue();
     }
 
     public function load()

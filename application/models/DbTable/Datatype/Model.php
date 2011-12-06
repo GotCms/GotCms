@@ -155,4 +155,67 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
     {
         return 'file';
     }
+
+    /**
+    *
+    * @param Es_Model_DbTable_Datatype_Abstract $datatype_model
+    *
+    * @return Es_Model_DbTable_Datatype_Model
+    */
+    static function savePrevalueEditor(Es_Model_DbTable_Datatype_Abstract $datatype)
+    {
+        $datatype->getPrevalueEditor()->save();
+        return $datatype->getConfig();
+    }
+
+    /**
+    *
+    * @param Es_Model_DbTable_Datatype_Model $datatype_model
+    *
+    * @return Es_Model_DbTable_Datatype_Abstract_Editor
+    */
+    static function saveEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
+    {
+        return $datatype->getEditor($property_id)->save($this->getRequest());
+    }
+
+    /**
+    *
+    * @param Es_Model_DbTable_Datatype_Abstract $datatype_model
+    *
+    * @return Es_Model_DbTable_Datatype_Abstract_PrevalueEditor
+    */
+    static function loadPrevalueEditor(Es_Model_DbTable_Datatype_Abstract $datatype)
+    {
+        return $datatype->getPrevalueEditor()->load();
+    }
+
+    /**
+    *
+    * @param Es_Model_DbTable_Datatype_Model $datatype_model
+    *
+    * @return Es_Model_DbTable_Datatype_Abstract_Editor
+    */
+    static function loadEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
+    {
+        return $datatype->getEditor($property_id)->load();
+    }
+
+    /**
+    *
+    * @param integer $datatype_id
+    * @param option integer $document_id
+    *
+    * @return Es_Model_DbTable_Datatype_Abstract
+    */
+    static function loadDatatype($datatype_id, $document_id = NULL)
+    {
+        $datatype = Es_Model_DbTable_Datatype_Model::fromId($datatype_id);
+        $class = 'Datatypes_'.$datatype->getModel().'_Datatype';
+
+        $object = new $class();
+        $object->load($datatype, $document_id, Zend_Controller_Front::getInstance()->getRequest());
+
+        return $object;
+    }
 }
