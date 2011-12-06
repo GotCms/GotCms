@@ -51,7 +51,7 @@ class Content_DocumentController extends Es_Controller_Action
                 $document->setName($document_name)
                     ->setDocumentTypeId($document_type_id)
                     ->setParentId($parent_id)
-                    ->setUrlKey(!empty($document_url_key) ? $document_url_key : $this->checkUrlKey($document_name));
+                    ->setUrlKey(!empty($document_url_key) ? $document_url_key : $this->_checkUrlKey($document_name));
 
                 $document_id = $document->save();
                 if(empty($document_id))
@@ -126,11 +126,11 @@ class Content_DocumentController extends Es_Controller_Action
                 $document->setViewId($view_id);
                 if($document->setUrlKey($this->getRequest()->getParam('document_url_key', $document->getDocumentUrlKey()))=== FALSE)
                 {
-                    $document->setUrlKey($this->checkUrlKey($document->getDocumentName()));
+                    $document->setUrlKey($this->_checkUrlKey($document->getDocumentName()));
                 }
             }
 
-            $tabs = $this->loadTabs($document_type_id);
+            $tabs = $this->_loadTabs($document_type_id);
             $tabs_array = array();
             $datatypes = array();
 
@@ -138,7 +138,7 @@ class Content_DocumentController extends Es_Controller_Action
             foreach($tabs as $tab)
             {
                 $tabs_array[] = $tab->getName();
-                $properties = $this->loadProperties($document_type_id, $tab->getId(), $document->getId());
+                $properties = $this->_loadProperties($document_type_id, $tab->getId(), $document->getId());
                 $sub_form = new Zend_Form_SubForm();
                 $sub_form->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$i))));
                 $sub_form->removeDecorator('Fieldset');
@@ -148,12 +148,12 @@ class Content_DocumentController extends Es_Controller_Action
                 {
                     if($this->getRequest()->isPost())
                     {
-                        if($this->saveDatatypeEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property) == FALSE) {
+                        if(Es_Model_DbTable_Datatype_Model::saveEditor(Es_Model_DbTable_Datatype_Model::loadDatatype($property->getDatatypeId(), $document->getId()), $property) == FALSE) {
                             $hasError = TRUE;
                         }
                     }
 
-                    Es_Form::addContent($sub_form, $this->loadEditor($this->loadDatatype($property->getDatatypeId(), $document->getId()), $property));
+                    Es_Form::addContent($sub_form, Es_Model_DbTable_Datatype_Model::loadEditor(Es_Model_DbTable_Datatype_Model::loadDatatype($property->getDatatypeId(), $document->getId()), $property));
                 }
 
                 $document_form->addSubForm($sub_form, 'tabs-'.$i, $i);
@@ -166,6 +166,11 @@ class Content_DocumentController extends Es_Controller_Action
             $form_document_add->load($document, $i);
 
             $document_form->addSubForm($form_document_add, 'tabs-'.$i, $i);
+
+            $submit = new Zend_Form_Element_Submit('submit-form');
+            $submit->setLabel('Save');
+            $document_form->addElement($submit);
+
             if($has_error)
             {
                 $document->showInNav(FALSE);
@@ -179,7 +184,7 @@ class Content_DocumentController extends Es_Controller_Action
         }
     }
 
-    public function checkUrlKey($string)
+    protected function _checkUrlKey($string)
     {
         $replace = array(' ', 'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ');
         $to = array('-', 'aaaaaceeeeiiiinooooouuuuyyaaaaaceeeeiiiinooooouuuuy');
@@ -188,7 +193,7 @@ class Content_DocumentController extends Es_Controller_Action
         return $string;
     }
 
-    protected function loadTabs($document_type_id)
+    protected function _loadTabs($document_type_id)
     {
         $document_type = Es_Model_DbTable_DocumentType_Model::fromId($document_type_id);
         $tabs = $document_type->getTabs();
@@ -196,31 +201,11 @@ class Content_DocumentController extends Es_Controller_Action
         return $tabs;
     }
 
-    protected function loadProperties($document_type_id, $tab_id, $document_id)
+    protected function _loadProperties($document_type_id, $tab_id, $document_id)
     {
         $properties = new Es_Model_DbTable_Property_Collection();
         $properties->init($document_type_id, $tab_id, $document_id);
 
         return $properties->getProperties();
-    }
-
-    protected function saveEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
-    {
-        return $datatype->getEditor($property_id)->save($this->getRequest());
-    }
-
-    protected function loadEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
-    {
-        return $datatype->getEditor($property_id)->load();
-    }
-
-    protected function loadDatatype($datatype_id, $document_id)
-    {
-        $datatype = Es_Model_DbTable_Datatype_Model::fromId($datatype_id);
-        $class = 'Datatypes_'.$datatype->getModel().'_Datatype';
-
-        $object = new $class();
-        $object->load($datatype, $document_id);
-        return new $object;
     }
 }
