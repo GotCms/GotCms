@@ -8,27 +8,21 @@
  * @author          RAMBAUD Pierre
  */
 
-class Es_Db_Table extends Zend_Db_Table_Abstract
+abstract class Es_Db_Table
 {
+	/**
+	* Zend_Db_Table collection
+	*
+	* @var Zend_Db_Table_Abstract
+	*/
+    static $_tables = array();
+
     /**
     * Object attributes
     *
     * @var array
     */
     protected $_data = array();
-
-    /**
-    * Data changes flag (TRUE after setData|unsetData call)
-    * @var $_hasDataChange bool
-    */
-    protected $_hasDataChanges = FALSE;
-
-    /**
-    * Original data that was loaded
-    *
-    * @var array
-    */
-    protected $_origData;
 
     /**
     * Setter/Getter underscore transformation cache
@@ -38,22 +32,27 @@ class Es_Db_Table extends Zend_Db_Table_Abstract
     protected static $_underscoreCache = array();
 
     /**
-    * Get data change status
-    *
-    * @return bool
-    */
-    public function hasDataChanges()
-    {
-        return $this->_hasDataChanges;
-    }
-
-    /**
     * Set Id
     * @return Es_Db_Table
     */
     protected function setId($id = NULL)
     {
         return $this->setData('id', $id);
+    }
+
+    /**
+    * Initialize constructor and save instance of Zend_Db_Table($_name) in 
+	* self::$_tables
+    *
+    */
+    public function __construct()
+    {
+        if(!empty($this->_name) and !in_array($this->_name, self::$_tables))
+        {
+            self::$_tables[$this->_name] = new Zend_Db_Table($this->_name);
+
+            $this->init();
+        }
     }
 
     /**
@@ -88,7 +87,6 @@ class Es_Db_Table extends Zend_Db_Table_Abstract
     */
     public function setData($key, $value = NULL)
     {
-        $this->_hasDataChanges = TRUE;
         if(is_array($key))
         {
             $this->_data = $key;
@@ -111,7 +109,6 @@ class Es_Db_Table extends Zend_Db_Table_Abstract
     */
     public function unsetData($key = NULL)
     {
-        $this->_hasDataChanges = TRUE;
         if (is_null($key))
         {
             $this->_data = array();
@@ -413,10 +410,15 @@ class Es_Db_Table extends Zend_Db_Table_Abstract
     *
     * @param   string $method
     * @param   array $args
-    * @return  mixed
+    * @return  Zend_Db_Table
     */
     public function __call($method, $args)
     {
+        if(method_exists(self::$_tables[$this->_name], $method))
+        {
+            return call_user_func_array(array(self::$_tables[$this->_name], $method), $args);
+        }
+
         switch (substr($method, 0, 3))
         {
             case 'get' :
