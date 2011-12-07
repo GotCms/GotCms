@@ -176,7 +176,7 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
     */
     static function saveEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
     {
-        return $datatype->getEditor($property_id)->save($this->getRequest());
+        return $datatype->getEditor($property_id)->save();
     }
 
     /**
@@ -214,7 +214,7 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
         $class = 'Datatypes_'.$datatype->getModel().'_Datatype';
 
         $object = new $class();
-        $object->load($datatype, $document_id, Zend_Controller_Front::getInstance()->getRequest());
+        $object->load($datatype, $document_id);
 
         return $object;
     }

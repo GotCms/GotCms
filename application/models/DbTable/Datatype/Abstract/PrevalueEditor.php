@@ -27,6 +27,6 @@ abstract class Es_Model_DbTable_Datatype_Abstract_PrevalueEditor extends Es_Core
     */
     public function getRequest()
     {
-        return $this->getDatatypeAbstract()->getRequest();
+        return Zend_Controller_Front::getInstance()->getRequest();
     }
 }

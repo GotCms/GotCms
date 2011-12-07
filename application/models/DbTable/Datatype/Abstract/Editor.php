@@ -13,10 +13,11 @@ abstract class Es_Model_DbTable_Datatype_Abstract_Editor extends Es_Core_Object
 
     protected $_name;
 
-    public function __construct(Es_Model_DbTable_Datatype_Abstract $datatype)
+    public function __construct(Es_Model_DbTable_Datatype_Abstract $datatype_abstract)
     {
-        $this->_datatype = $datatype;
+        $this->_datatype = $datatype_abstract;
         $this->_property = $this->_datatype->getProperty();
+        $this->_construct();
     }
 
     abstract public function save();
@@ -36,9 +37,9 @@ abstract class Es_Model_DbTable_Datatype_Abstract_Editor extends Es_Core_Object
     protected function saveValue()
     {
         $value = $this->getValue();
-        if($this->_property->getRequired() && empty($value))
+        if($this->_property->isRequired() and empty($value))
         {
-            return false;
+            return FALSE;
         }
 
         return $this->_property->saveValue();
@@ -84,5 +85,13 @@ abstract class Es_Model_DbTable_Datatype_Abstract_Editor extends Es_Core_Object
     public function getDatatype()
     {
         return $this->_datatype;
+    }
+
+    /**
+    * @return Zend_Controller_Request_Http
+    */
+    public function getRequest()
+    {
+        return Zend_Controller_Front::getInstance()->getRequest();
     }
 }

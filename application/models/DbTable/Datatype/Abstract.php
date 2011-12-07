@@ -28,7 +28,7 @@ abstract class Es_Model_DbTable_Datatype_Abstract extends Es_Db_Table
     */
     abstract public function getPrevalueEditor();
 
-    public function load($datatype = NULL, $document_id = NULL, $request)
+    public function load($datatype = NULL, $document_id = NULL)
     {
         if(empty($datatype))
         {
@@ -37,7 +37,6 @@ abstract class Es_Model_DbTable_Datatype_Abstract extends Es_Db_Table
 
         $this->setData('datatype', $datatype);
         $this->setData('document_id', $document_id);
-        $this->setData('request', $request);
     }
 
     public function getConfig()
