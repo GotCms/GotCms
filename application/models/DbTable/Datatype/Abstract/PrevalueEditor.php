@@ -1,9 +1,12 @@
 <?php
 abstract class Es_Model_DbTable_Datatype_Abstract_PrevalueEditor extends Es_Core_Object
 {
+    protected $_datatype;
+    protected $_config;
+
     public function __construct(Es_Model_DbTable_Datatype_Abstract $datatype_abstract)
     {
-        $this->setData('datatype_abstract', $datatype_abstract);
+        $this->_datatype = $datatype_abstract;
         $this->_construct();
     }
 
@@ -13,12 +16,17 @@ abstract class Es_Model_DbTable_Datatype_Abstract_PrevalueEditor extends Es_Core
 
     protected function getConfig()
     {
-        return unserialize($this->getDatatypeAbstract()->getConfig());
+        if(empty($this->_config))
+        {
+            $this->_config = unserialize($this->getDatatype()->getConfig());
+        }
+
+        return $this->_config;
     }
 
     protected function setConfig($value)
     {
-        $this->getDatatypeAbstract()->setConfig($value);
+        $this->getDatatype()->setConfig($value);
         return $this;
     }
 
@@ -28,5 +36,13 @@ abstract class Es_Model_DbTable_Datatype_Abstract_PrevalueEditor extends Es_Core
     public function getRequest()
     {
         return Zend_Controller_Front::getInstance()->getRequest();
+    }
+
+    /**
+    * @return Es_Model_DbTable_Datatype_Abstract
+    */
+    public function getDatatype()
+    {
+        return $this->_datatype;
     }
 }

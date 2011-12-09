@@ -106,11 +106,17 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
         return FALSE;
     }
 
+    /* (non-PHPdoc)
+    * @see include/Es/Interface/Es_Interface_Iterable#getId()
+    */
     public function getId()
     {
         return $this->getData('id');
     }
 
+    /* (non-PHPdoc)
+    * @see include/Es/Interface/Es_Interface_Iterable#getName()
+    */
     public function getName()
     {
         return $this->getData('name');
@@ -145,7 +151,7 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
     */
     public function getUrl()
     {
-        return 'javascript:loadController(\''.Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('datatype' => 'development', 'action' => 'edit')).'/type/datatype/id/'.$this->getId().'\')';
+        return '';
     }
 
     /* (non-PHPdoc)
@@ -170,9 +176,9 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
 
     /**
     *
-    * @param Es_Model_DbTable_Datatype_Model $datatype_model
+    * @param Es_Model_DbTable_Datatype_Abstract $datatype
     *
-    * @return Es_Model_DbTable_Datatype_Abstract_Editor
+    * @return mixte
     */
     static function saveEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
     {
@@ -181,9 +187,9 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
 
     /**
     *
-    * @param Es_Model_DbTable_Datatype_Abstract $datatype_model
+    * @param Es_Model_DbTable_Datatype_Abstract $datatype
     *
-    * @return Es_Model_DbTable_Datatype_Abstract_PrevalueEditor
+    * @return mxite
     */
     static function loadPrevalueEditor(Es_Model_DbTable_Datatype_Abstract $datatype)
     {
@@ -192,9 +198,9 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
 
     /**
     *
-    * @param Es_Model_DbTable_Datatype_Model $datatype_model
+    * @param Es_Model_DbTable_Datatype_Abstract $datatype
     *
-    * @return Es_Model_DbTable_Datatype_Abstract_Editor
+    * @return mixte
     */
     static function loadEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
     {
@@ -204,7 +210,7 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
     /**
     *
     * @param integer $datatype_id
-    * @param option integer $document_id
+    * @param optional integer $document_id
     *
     * @return Es_Model_DbTable_Datatype_Abstract
     */

@@ -11,64 +11,70 @@ abstract class Es_Model_DbTable_Datatype_Abstract_Editor extends Es_Core_Object
     */
     protected $_property;
 
+    /**
+    * get name of datatype
+    * @var string
+    */
     protected $_name;
-
-    public function __construct(Es_Model_DbTable_Datatype_Abstract $datatype_abstract)
-    {
-        $this->_datatype = $datatype_abstract;
-        $this->_property = $this->_datatype->getProperty();
-        $this->_construct();
-    }
 
     abstract public function save();
     abstract public function load();
 
+    public function __construct(Es_Model_DbTable_Datatype_Abstract $datatype_abstract)
+    {
+        $this->_datatype = $datatype_abstract;
+        $this->_property = $datatype_abstract->getProperty();
+        $this->_construct();
+    }
+
     protected function getValue()
     {
-        return $this->_property->getValue();
+        return $this->getProperty()->getValue();
     }
 
     protected function setValue($value)
     {
-        $this->_property->setValue($value);
+        $this->getProperty()->setValue($value);
+
         return $this;
     }
 
     protected function saveValue()
     {
         $value = $this->getValue();
-        if($this->_property->isRequired() and empty($value))
+        if($this->getProperty()->isRequired() and empty($value))
         {
             return FALSE;
         }
 
-        return $this->_property->saveValue();
+        return $this->getProperty()->saveValue();
     }
 
-    protected function getParameters()
+    protected function getConfiguration()
     {
-        return $this->_datatype->getParameters();
+        return $this->getDatatype()->getParameters();
     }
 
-    protected function setParameters($value)
+    protected function setConfiguration($value)
     {
-        $this->_datatype->setParameters($value);
+        $this->getDatatype()->setParameters($value);
+
         return $this;
     }
 
     protected function getHelper($helper)
     {
-        return $this->_datatype->getHelper($helper);
+        return $this->getDatatype()->getHelper($helper);
     }
 
     public function getUploadUrl()
     {
-        return $this->_datatype->getUploadUrl().'/property/'.$this->_property->getId();
+        return $this->getDatatype()->getUploadUrl().'/property/'.$this->getProperty()->getId();
     }
 
     public function getName()
     {
-        return $this->_datatype->getName().$this->_property->getId();
+        return $this->getDatatype()->getName().$this->getProperty()->getId();
     }
 
     /**
