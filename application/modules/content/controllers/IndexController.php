@@ -4,7 +4,9 @@ class Content_IndexController extends Es_Controller_Action
 {
     public function init()
     {
-        $this->_helper->layout->assign('treeview', Es_Component_TreeView::render(array(new Es_Model_DbTable_Document_Collection())));
+        $documents = new Es_Model_DbTable_Document_Collection();
+        $documents->load(0);
+        $this->_helper->layout->assign('treeview', Es_Component_TreeView::render(array($documents)));
 
         $router = $this->getFrontController()->getRouter();
         $routes = array(
@@ -21,7 +23,7 @@ class Content_IndexController extends Es_Controller_Action
         {
             if($router->hasRoute($route))
             {
-                $array_routes[$key] = $router->assemble(array('id' => ':id'), $route);
+                $array_routes[$key] = $router->assemble(array('id' => 'itemId'), $route);
             }
         }
 

@@ -240,21 +240,24 @@ console.log('#properties-required-'+$data.tab+'-'+$data.id);
     {
         $this = this;
         jQuery("#browser").treeview();
-        jQuery("#browser").contextMenu(
+        jQuery("#browser a").contextMenu(
             {
                 menu: 'contextMenu'
             },
 
             function($action, $element, $position)
             {
+                $routes = $this._options.get('routes');
+                $url = $routes[$action];
+
+                if($element.attr('rel') != undefined)
+                {
+                    $id = $element.attr('rel');
+                    $url = $url.replace('itemId', $id);
+                }
+
                 switch($action){
                     case 'new':
-                        if($element.attr('rel') != undefined)
-                        {
-                            $parentId = $element.attr('rel');
-                        }
-                    break;
-
                     case 'edit':
                     break;
 
@@ -264,7 +267,8 @@ console.log('#properties-required-'+$data.tab+'-'+$data.id);
 
                     case 'paste':
                     case 'delete':
-                        $this.showDialogConfirm('test', $url);
+                        $this.showDialogConfirm('Delete element', $url);
+                        return false;
                     break;
 
                     case 'quit':
@@ -273,8 +277,7 @@ console.log('#properties-required-'+$data.tab+'-'+$data.id);
                     break;
                 }
 
-                $routes = $this._options.get('routes');
-                document.location.href = $routes[$action];
+                document.location.href = $url;
             }
         );
     },
@@ -294,7 +297,7 @@ console.log('#properties-required-'+$data.tab+'-'+$data.id);
             buttons         : {
                 'Confirm': function()
                 {
-                    document.location.href = url;
+                    document.location.href = $url;
                     jQuery(this).dialog('close');
 
                     return true;

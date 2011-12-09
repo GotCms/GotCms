@@ -39,9 +39,33 @@ class Content_Form_DocumentAdd extends Es_Form
         $this->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$index))));
         $this->removeDecorator('Fieldset');
         $this->removeDecorator('DtDdWrapper');
+        $this->setIsArray(FALSE);
+        $this->setElementsBelongTo('a');//@TODO here
 
         $this->getElement('name')->setValue($document->getName());
         $this->getElement('url_key')->setValue($document->getUrlKey());
+
+        $show_in_nav = new Zend_Form_Element_Checkbox('show_in_nav');
+        $show_in_nav->setLabel('Show in nav');
+        $show_in_nav->setValue($document->showInNav());
+
+        $this->addElement($show_in_nav);
+
+        $views_collection = new Es_Model_DbTable_View_Collection();
+        $view = new Zend_Form_Element_Select('view');
+        $view->addMultiOptions($views_collection->getSelect());
+        $view->setValue($document->getViewId());
+        $view->setLabel('View');
+
+        $this->addElement($view);
+
+        $layouts_collection = new Es_Model_DbTable_View_Collection();
+        $layout = new Zend_Form_Element_Select('layout');
+        $layout->addMultiOptions($layouts_collection->getSelect());
+        $layout->setValue($document->getViewId());
+        $layout->setLabel('Layout');
+
+        $this->addElement($layout);
 
         $this->removeElement('document_type');
         $this->removeElement('submit');

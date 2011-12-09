@@ -56,14 +56,7 @@ class Es_Component_TreeView
             }
 
             $html .= $class.'><span class="'.$iterator->getIcon().'" '.($icon !== false ? $icon : '').'>';
-            if($iterator->getUrl() == NULL)
-            {
-                $html .= $iterator->getName();
-            }
-            else
-            {
-                $html .= '<a rel="'.$iterator->getId().'" id="'.$iterator->getIterableId().'" href="'.$iterator->getUrl().'">'.$iterator->getName().'</a></span>';
-            }
+            $html .= '<a rel="'.$iterator->getId().'" id="'.$iterator->getIterableId().'" href="'.$iterator->getUrl().'">'.$iterator->getName().'</a></span>';
 
             $html .='</span>';
             $html .= $renderChildren;

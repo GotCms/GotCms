@@ -54,6 +54,11 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
     */
     public function setValue($value)
     {
+        if(empty($this->_value))
+        {
+            $this->getValue();
+        }
+
         $this->_value->setValue($value);
         return $this;
     }
@@ -63,7 +68,7 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
     */
     public function getValue()
     {
-        if($this->_value == NULL)
+        if(empty($this->_value))
         {
             $property_value = new Es_Model_DbTable_Property_Value_Model();
             $property_value->load(NULL, $this->getDocumentId(), $this->getId());
@@ -71,7 +76,7 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
             $this->_value = $property_value;
         }
 
-        return $property_value->getValue();
+        return $this->_value->getValue();
     }
 
     public function saveValue()

@@ -23,7 +23,7 @@ class Content_DocumentController extends Es_Controller_Action
         {
             if($router->hasRoute($route))
             {
-                $array_routes[$key] = $router->assemble(array('id' => ':id'), $route);
+                $array_routes[$key] = $router->assemble(array('id' => 'itemId'), $route);
             }
         }
 
@@ -95,6 +95,8 @@ class Content_DocumentController extends Es_Controller_Action
                 Es_Error::set(get_class($this), $e);
             }
         }
+
+        return $this->_helper->redirector->goToRoute(array(), 'conent');
     }
 
     public function editAction()
@@ -113,9 +115,10 @@ class Content_DocumentController extends Es_Controller_Action
 
             if($this->getRequest()->isPost())
             {
-                $document->setName($this->getRequest()->getPost('document_name', $document->getDocumentName()));
-                $document->setStatus($this->getRequest()->getPost('document_status', FALSE));
-                $document->showInNav($this->getRequest()->getPost('document_show_in_nav', FALSE));
+                var_dump($this->getRequest()->getPost());
+                $document->setName($this->getRequest()->getPost('name', $document->getName()));
+                $document->setStatus($this->getRequest()->getPost('status', FALSE));
+                $document->showInNav($this->getRequest()->getPost('show_in_nav', FALSE));
                 $document->setLayoutId($this->getRequest()->getPost('layout_id', FALSE));
                 $view_id = $this->getRequest()->getPost('view_id', $document->getViewId());
                 if($view_id == "null")

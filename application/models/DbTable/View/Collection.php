@@ -39,15 +39,15 @@ class Es_Model_DbTable_View_Collection extends Es_Db_Table implements Es_Interfa
         return $this->_views;
     }
 
-    public function getViewsSelect()
+    public function getSelect()
     {
-        $arrayReturn = array();
+        $array_views = array();
         foreach($this->_views as $key => $value)
         {
-            $arrayReturn[$value->getId()] = $value->getName();
+            $array_views[$value->getId()] = $value->getName();
         }
 
-        return $arrayReturn;
+        return $array_views;
     }
 
     public function addElement(Es_Model_DbTable_View_Model $view)
