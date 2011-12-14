@@ -9,7 +9,7 @@ class Datatypes_Textstring_Editor extends Es_Model_DbTable_Datatype_Abstract_Edi
 
     public function load()
     {
-        $parameters = $this->getParameters();
+        $parameters = $this->getConfiguration();
         $property = $this->getProperty();
         $textstring = new Zend_Form_Element_Text($this->getName());
         $textstring->setLabel($property->getName());

@@ -5,7 +5,6 @@ class Datatypes_Textarea_Editor extends Es_Model_DbTable_Datatype_Abstract_Edito
     {
         $value = $this->getRequest()->getParam($this->getName());
         $this->setValue($value);
-        return $this->saveValue();
     }
 
     public function load()
