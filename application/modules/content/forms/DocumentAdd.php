@@ -39,8 +39,6 @@ class Content_Form_DocumentAdd extends Es_Form
         $this->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$index))));
         $this->removeDecorator('Fieldset');
         $this->removeDecorator('DtDdWrapper');
-        $this->setIsArray(FALSE);
-        $this->setElementsBelongTo('a');//@TODO here
 
         $this->getElement('name')->setValue($document->getName());
         $this->getElement('url_key')->setValue($document->getUrlKey());

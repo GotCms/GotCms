@@ -23,16 +23,16 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
     {
         if($value === NULL)
         {
-            return $this->getData('is_required');
+            return $this->getData('required');
         }
 
         if($value === TRUE)
         {
-            $this->setData('is_required', TRUE);
+            $this->setData('required', TRUE);
         }
         else
         {
-            $this->setData('is_required', FALSE);
+            $this->setData('required', FALSE);
         }
 
         return $this;
@@ -54,54 +54,38 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
     */
     public function setValue($value)
     {
-        if(empty($this->_value))
-        {
-            $this->getValue();
-        }
-
         $this->_value->setValue($value);
+
         return $this;
     }
 
+    public function loadValue()
+    {
+        $property_value = new Es_Model_DbTable_Property_Value_Model();
+        $property_value->load(NULL, $this->getDocumentId(), $this->getId());
+
+        $this->_value = $property_value;
+    }
     /**
     * @return mixte
     */
     public function getValue()
     {
-        if(empty($this->_value))
-        {
-            $property_value = new Es_Model_DbTable_Property_Value_Model();
-            $property_value->load(NULL, $this->getDocumentId(), $this->getId());
-
-            $this->_value = $property_value;
-        }
-
         return $this->_value->getValue();
     }
 
     public function saveValue()
     {
-        return $this->_value->save();
-        return FALSE;
-    }
-
-    /**
-    * @param unknown_type $value
-    * @return Es_Component_Model
-    */
-    public function setPropertyValue($value)
-    {
-        $this->_value = $value;
-        return $this;
-    }
-
-    /**
-    * @param unknown_type $value
-    * @return Es_Component_Value_Model
-    */
-    public function getPropertyValue($value = FALSE)
-    {
-        return $this->_value;
+        $value = $this->getValue();
+        $this->_value->save();
+        if(empty($value) and $this->isRequired())
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
     }
 
     /**
@@ -174,6 +158,7 @@ class Es_Model_DbTable_Property_Model extends Es_Db_Table
     {
         $property = new Es_Model_Dbtable_Property_Model();
         $property->setData($array);
+
         return $property;
     }
 

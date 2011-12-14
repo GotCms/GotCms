@@ -111,12 +111,13 @@ class Es_Model_DbTable_Document_Model extends Es_Db_Table implements Es_Interfac
     */
     static function fromUrlKey($urlKey)
     {
-        $select = $this->select()
+        $document = new Es_Model_DbTable_Document_Model();
+        $select = $document->select()
             ->where('url_key = ?', $urlKey);
-        $document = $this->fetchRow($select);
+        $document = $document->fetchRow($select);
         if(!empty($document))
         {
-            return self::fromArray($document);
+            return self::fromArray($document->toArray());
         }
         else
         {

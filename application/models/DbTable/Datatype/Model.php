@@ -176,13 +176,22 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
 
     /**
     *
-    * @param Es_Model_DbTable_Datatype_Abstract $datatype
+    * @param Es_Model_DbTable_Property_Model $property
     *
     * @return mixte
     */
-    static function saveEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
+    static function saveEditor(Es_Model_DbTable_Property_Model $property)
     {
-        return $datatype->getEditor($property_id)->save();
+        $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
+        $datatype->getEditor($property)->save();
+        if(!$property->saveValue())
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
     }
 
     /**
@@ -198,13 +207,15 @@ class Es_Model_DbTable_Datatype_Model extends Es_Db_Table implements Es_Interfac
 
     /**
     *
-    * @param Es_Model_DbTable_Datatype_Abstract $datatype
+    * @param Es_Model_DbTable_Property_Model $property
+    * @param Es_Model_DbTable_Document_Model $document
     *
     * @return mixte
     */
-    static function loadEditor(Es_Model_DbTable_Datatype_Abstract $datatype, $property_id)
+    static function loadEditor(Es_Model_DbTable_Property_Model $property)
     {
-        return $datatype->getEditor($property_id)->load();
+        $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
+        return $datatype->getEditor($property)->load();
     }
 
     /**

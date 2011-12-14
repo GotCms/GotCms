@@ -109,28 +109,20 @@ class Content_DocumentController extends Es_Controller_Action
         }
         else
         {
-            $has_error = FALSE;
             $document_type_id = $document->getDocumentTypeId();
             $layout_id = $this->getRequest()->getParam('layout_id', '');
 
             if($this->getRequest()->isPost())
             {
-                var_dump($this->getRequest()->getPost());
-                $document->setName($this->getRequest()->getPost('name', $document->getName()));
-                $document->setStatus($this->getRequest()->getPost('status', FALSE));
-                $document->showInNav($this->getRequest()->getPost('show_in_nav', FALSE));
-                $document->setLayoutId($this->getRequest()->getPost('layout_id', FALSE));
-                $view_id = $this->getRequest()->getPost('view_id', $document->getViewId());
-                if($view_id == "null")
-                {
-                    $view_id = NULL;
-                }
+                $has_error = FALSE;
+                $document_vars = $this->getRequest()->getPost('document');
 
-                $document->setViewId($view_id);
-                if($document->setUrlKey($this->getRequest()->getParam('document_url_key', $document->getDocumentUrlKey()))=== FALSE)
-                {
-                    $document->setUrlKey($this->_checkUrlKey($document->getDocumentName()));
-                }
+                $document->setName(empty($document_vars['name']) ? $document->getName() : $document_vars['name']);
+                $document->setStatus(empty($document_vars['status']) ? FALSE : $document_vars['status']);
+                $document->showInNav(empty($document_vars['show_in_nav']) ? FALSE : $document_vars['show_in_nav']);
+                $document->setLayoutId(empty($document_vars['layout']) ? FALSE : $document_vars['layout']);
+                $document->setViewId(empty($document_vars['view']) ? $document->getViewId() : $document_vars['view']);
+                $document->setUrlKey(empty($document_vars['url_key']) ? $document->getUrlKey() : $document_vars['url_key']);
             }
 
             $tabs = $this->_loadTabs($document_type_id);
@@ -149,14 +141,16 @@ class Content_DocumentController extends Es_Controller_Action
                 $sub_form->setIsArray(FALSE);
                 foreach($properties as $property)
                 {
+                    $property->setDocumentId($document->getId())->loadValue();
                     if($this->getRequest()->isPost())
                     {
-                        if(Es_Model_DbTable_Datatype_Model::saveEditor(Es_Model_DbTable_Datatype_Model::loadDatatype($property->getDatatypeId(), $document->getId()), $property) == FALSE) {
-                            $hasError = TRUE;
+                        if(!Es_Model_DbTable_Datatype_Model::saveEditor($property, $document))
+                        {
+                            $has_error = TRUE;
                         }
                     }
 
-                    Es_Form::addContent($sub_form, Es_Model_DbTable_Datatype_Model::loadEditor(Es_Model_DbTable_Datatype_Model::loadDatatype($property->getDatatypeId(), $document->getId()), $property));
+                    Es_Form::addContent($sub_form, Es_Model_DbTable_Datatype_Model::loadEditor($property, $document));
                 }
 
                 $document_form->addSubForm($sub_form, 'tabs-'.$i, $i);
@@ -174,14 +168,20 @@ class Content_DocumentController extends Es_Controller_Action
             $submit->setLabel('Save');
             $document_form->addElement($submit);
 
-            if($has_error)
+            if($this->getRequest()->isPost())
             {
-                $document->showInNav(FALSE);
-                $document->setStatus(FALSE);
-                $this->_helper->flashMessenger->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties are required !');
+                if($has_error)
+                {
+                    $document->showInNav(FALSE);
+                    $document->setStatus(FALSE);
+                    $this->_helper->flashMessenger->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties are required !');
+
+                }
+
+                $document->save();
+                $this->_helper->redirector->goToRoute(array('id' => $document->getId()), 'documentEdit');
             }
 
-            $document->save();
             $this->view->tabs = new Es_Component_Tabs($tabs_array);
             $this->view->form = $document_form;
         }
@@ -207,7 +207,7 @@ class Content_DocumentController extends Es_Controller_Action
     protected function _loadProperties($document_type_id, $tab_id, $document_id)
     {
         $properties = new Es_Model_DbTable_Property_Collection();
-        $properties->init($document_type_id, $tab_id, $document_id);
+        $properties->load($document_type_id, $tab_id, $document_id);
 
         return $properties->getProperties();
     }

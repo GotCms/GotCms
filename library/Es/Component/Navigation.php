@@ -11,6 +11,7 @@ class Es_Component_Navigation
     {
         $this->_baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
         $documents = new Es_Model_DbTable_Document_Collection();
+        $documents->load(0);
         $this->_documents = $documents->getDocuments();
     }
 
@@ -31,7 +32,7 @@ class Es_Component_Navigation
         foreach($documents as $document)
         {
             $children = $document->getChildren();
-            if($document->canShowInNav() && $document->isPublished())
+            if($document->showInNav() && $document->isPublished())
             {
                 $navigation .= '<document-'.$document->getUrlKey().'>';
                 $navigation .= '<label>'.$document->getName().'</label>';
