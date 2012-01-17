@@ -1,12 +1,12 @@
 <?php
 return array(
     'modules' => array(
-        'Application'
-        , 'Admin'
+        'Admin'
         , 'Config'
         , 'Content'
         , 'Development'
         , 'Statistics'
+        , 'Application'
     ),
     'module_listener_options' => array(
         'config_cache_enabled' => false
