@@ -60,12 +60,9 @@ class Module implements AutoloaderProvider
             return $this->_viewListener;
         }
 
-        $namespace_layout_name = strtolower($this->_getNamespace()).'-layout';
-        $layout = empty($config->$namespace_layout_name) ? $config->layout : $config->$namespace_layout_name;
-
         $class = $this->_getNamespace().'\View\Listener';
 
-        $viewListener       = new $class($view, $layout);
+        $viewListener       = new $class($view, $config->layout);
         $viewListener->setDisplayExceptionsFlag($config->display_exceptions);
 
         $this->_viewListener = $viewListener;

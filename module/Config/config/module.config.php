@@ -22,7 +22,7 @@ return array(
         'config' => array(
             'type'    => 'Zend\Mvc\Router\Http\Literal',
             'options' => array(
-                'route' => '/admin/config',
+                'route' => '/config',
                 'defaults' => array(
                     'module' => 'config',
                     'controller' => 'config-index',

@@ -1,24 +1,23 @@
 <?php
 return array(
     'modules' => array(
-        'Admin'
+        'Application'
+        , 'Admin'
         , 'Config'
         , 'Content'
         , 'Development'
         , 'Statistics'
-        , 'Application'
     ),
     'module_listener_options' => array(
         'config_cache_enabled' => false
         , 'cache_dir'            => 'data/cache'
         , 'module_paths' => array(
             './module'
-
         ),
     ),
     'autoloader' => array(
         'namespaces' => array(
-            'Es\\' => __DIR__ . '/../vendor/Es',
+            'Es' => __DIR__ . '/../vendor/Es',
         ),
     ),
     'database' => array(

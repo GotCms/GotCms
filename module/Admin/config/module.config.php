@@ -1,7 +1,6 @@
 <?php
 
 return array(
-    'layout'                => 'layouts/layout.phtml',
     'di' => array(
         'instance' => array(
             'alias' => array(
