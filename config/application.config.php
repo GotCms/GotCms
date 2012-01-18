@@ -20,14 +20,4 @@ return array(
             'Es' => __DIR__ . '/../vendor/Es',
         ),
     ),
-    'database' => array(
-        'parameters' => array(
-            'config' => array(
-                'host' => 'localhost',
-                'username' => 'got',
-                'password' => 'x8maoxfp',
-                'dbname' => 'escms',
-            ),
-        ),
-    ),
 );

@@ -4,7 +4,6 @@ require_once (getenv('ZF2_PATH') ?: 'vendor/ZendFramework/library') . '/Zend/Loa
 
 $app_config = include 'config/application.config.php';
 Zend\Loader\AutoloaderFactory::factory(array('Zend\Loader\StandardAutoloader' => $app_config['autoloader']));
-Zend\Registry::set('database_connection', $app_config['database']);
 
 $listenerOptions  = new Zend\Module\Listener\ListenerOptions($app_config['module_listener_options']);
 $defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerOptions);

@@ -20,6 +20,16 @@ return array(
                     ),
                 ),
             ),
+           'Zend\Db\Adapter\Pgsql' => array(
+                'parameters' => array(
+                    'config' => array(
+                        'host' => 'localhost',
+                        'username' => 'got',
+                        'password' => 'x8maoxfp',
+                        'dbname' => 'escms',
+                    ),
+                ),
+            ),
         ),
     ),
     'routes' => array(

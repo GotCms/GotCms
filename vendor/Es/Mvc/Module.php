@@ -37,7 +37,6 @@ class Module implements AutoloaderProvider
     public function getConfig()
     {
         $config = include $this->_getDir() . '/config/module.config.php';
-        $config['di']['instance']['Zend\Db\Adapter\Pgsql'] = Zend\Registry::get('database_connection');
 
         return $config;
     }
