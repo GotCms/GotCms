@@ -16,9 +16,6 @@ return array(
                     ),
                 ),
             ),
-            'Zend\Mvc\Router\RouteStack' => array(
-                'parameters' => array()
-            )
         ),
     ),
 );
