@@ -10,11 +10,11 @@
 
 abstract class Es_Db_Table
 {
-	/**
-	* Zend_Db_Table collection
-	*
-	* @var Zend_Db_Table_Abstract
-	*/
+    /**
+    * Zend_Db_Table collection
+    *
+    * @var Zend_Db_Table_Abstract
+    */
     static $_tables = array();
 
     /**
@@ -42,7 +42,7 @@ abstract class Es_Db_Table
 
     /**
     * Initialize constructor and save instance of Zend_Db_Table($_name) in 
-	* self::$_tables
+    * self::$_tables
     *
     */
     public function __construct()

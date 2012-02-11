@@ -1,0 +1,323 @@
+<?php
+
+namespace Development\Controller;
+
+use Es\Mvc\Controller\Action;
+
+class DocumentTypeController extends Action
+{
+    protected $_session = NULL;
+
+    public function init()
+    {
+        $contextSwitch = $this->_helper->getHelper('contextSwitch');
+        $contextSwitch->addActionContext('add-tab', 'json')
+            ->addActionContext('add-property', 'json')
+            ->setAutoJsonSerialization(true)
+            ->initContext();
+    }
+
+    public function indexAction()
+    {
+        // action body
+    }
+
+    public function addAction()
+    {
+        $form = new Development_Form_DocumentType();
+        $request = $this->getRequest();
+
+        if($request->isPost())
+        {
+            if(Zend_Session::namespaceIsset('documentType'))
+            {
+                $form->setValueFromSession(Zend_Session::namespaceGet('documentType'));
+            }
+
+            if($form->isValid($this->_request->getPost()))
+            {
+                $document_type = new Es_Model_DbTable_DocumentType_Model();
+                $property_collection = new Es_Model_DbTable_Property_Collection();
+
+                $infos_subform = $form->getSubForm('infos');
+                $views_subform = $form->getSubForm('views');
+                $tabs_subform = $form->getSubForm('tabs');
+
+                $document_type->addData(array(
+                    //@TODO change user_id
+                    'user_id' => Zend_Registry::get('user_id')
+                    , 'name' => $infos_subform->getValue('name')
+                    , 'description' => $infos_subform->getValue('description')
+                    , 'default_view_id' => $views_subform->getValue('default_view')
+                ));
+
+                $this->getAdapter()->beginTransaction();
+                try
+                {
+                    $document_type->addViews($views_subform->getValue('available_views'));
+                    $document_type->save();
+
+                    $tabs_array = array();
+                    foreach($tabs_subform->getValues(TRUE) as $tabs_name => $tab_values)
+                    {
+                        foreach($tab_values as $id => $value)
+                        {
+                            $tabs_array[$id][$tabs_name] = $value;
+                        }
+                    }
+
+                    $tabs = array();
+                    $idx = 0;
+                    foreach($tabs_array as $tab_id => $tab)
+                    {
+                        $t = Es_Model_DbTable_Tab_Model::fromArray($tab);
+                        $t->setDocumentTypeId($document_type->getId());
+                        $t->setOrder(++$idx);
+                        $t->save();
+                        $tabs[$tab_id] = $t->getId();
+                    }
+
+                    $properties = array();
+                    $properties_values = $this->getRequest()->getPost('properties');
+
+                    foreach($properties_values as $property_name => $property_value)
+                    {
+
+                        foreach($property_value as $id => $value)
+                        {
+                            if($property_name == 'tab')
+                            {
+                                $properties[$id]['tab_id'] = $tabs[$value];
+                            }
+                            elseif($property_name == 'datatype')
+                            {
+                                $properties[$id]['datatype_id'] = $value;
+                            }
+                            elseif($property_name == 'required')
+                            {
+                                $properties[$id]['is_required'] = $value == 1 ? TRUE : FALSE;
+                            }
+                            else
+                            {
+                                $properties[$id][$property_name] = $value;
+                            }
+                        }
+
+                    }
+
+                    $idx = 0;
+                    foreach($properties as $property)
+                    {
+                        $properties[$id]['order'] = ++$idx;
+                    }
+
+                    $property_collection->setProperties($properties);
+                    $property_collection->save();
+
+                    $this->getAdapter()->commit();
+                }
+                catch(Exception $e)
+                {
+                    $this->getAdapter()->rollBack();
+                    throw new Es_Exception("Error Processing Request ".print_r($e, TRUE), 1);
+                }
+            }
+            else
+            {
+                $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can save document_type');
+            }
+        }
+
+        if(Zend_Session::namespaceIsset('documentType'))
+        {
+            Zend_Session::namespaceUnset('documentType');
+        }
+
+
+        $this->view->form = $form;
+    }
+
+    public function listAction()
+    {
+        $documents = new Es_Model_DbTable_DocumentType_Collection();
+        $this->view->documents = $documents->getDocumentTypes();
+    }
+
+    public function deleteAction()
+    {
+        $document_type_id = $this->getRequest()->getParam('id', NULL);
+        $document_type = Es_Model_DbTable_DocumentType_Model::fromId($document_type_id);
+        if(empty($document_type_id) or empty($document_type) or !$document_type->delete())
+        {
+            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can not delete this document type');
+        }
+        else
+        {
+            $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This document type has been deleted');
+        }
+
+        return $this->redirect->toRoute(array(), 'documentTypeList');
+    }
+
+    public function addTabAction()
+    {
+        if($this->_request->isPost())
+        {
+            $session = new Zend_Session_Namespace('documentType');
+            $name = $this->_request->getPost('name');
+            $description = $this->_request->getPost('description');
+
+            $tabs = empty($session->tabs) ? array() : $session->tabs;
+            $last_element = end($tabs);
+            if(empty($last_element))
+            {
+                $last_id = 0;
+            }
+            else
+            {
+                $last_id = array_search($last_element, $tabs);
+            }
+
+            foreach($tabs as $tab)
+            {
+                if($name == $tab['name'])
+                {
+
+                    $this->_helper->json(array('success' => FALSE, 'message' => 'Already exists'));
+                    return;
+                }
+            }
+
+            $current_id = $last_id + 1;
+            $tabs[$current_id] = array('name' => $name, 'description' => $description);
+            $session->tabs = $tabs;
+
+            return $this->_helper->json(array(
+                'success' => TRUE
+                , 'id' => $current_id
+                , 'name' => $name
+                , 'description' => $description
+            ));
+        }
+
+        return $this->_helper->json(array('success' => FALSE, 'message' => 'Error'));
+    }
+
+    public function deleteTabAction()
+    {
+        if($this->_request->isPost())
+        {
+            $session = new Zend_Session_Namespace('documentType');
+            $id = $this->_request->getPost('tab');
+            $description = $this->_request->getPost('description');
+
+            $tabs = empty($session->tabs) ? array() : $session->tabs;
+            if(array_key_exists($id, $tabs))
+            {
+                unset($session->tabs[$id]);
+                return $this->_helper->json(array('success' => TRUE, 'message' => 'Tab successfullty deleted'));
+
+            }
+        }
+
+        return $this->_helper->json(array('success' => FALSE, 'message' => 'Error'));
+    }
+
+    public function addPropertyAction()
+    {
+        if($this->_request->isPost())
+        {
+            $session = new Zend_Session_Namespace('documentType');
+            $name = $this->_request->getPost('name');
+            $identifier = $this->_request->getPost('identifier');
+            $tab_id = $this->_request->getPost('tab');
+            $description = $this->_request->getPost('description');
+            $is_required = $this->_request->getPost('is_required');
+            $datatype_id = $this->_request->getPost('datatype');
+
+            $tabs = $session->tabs;
+
+            if(empty($session->tabs[$tab_id]))
+            {
+                $this->_helper->json(array('success' => FALSE, 'message' => 'Tab does not exists'));
+                return;
+            }
+
+            $tab = $session->tabs[$tab_id];
+            if(empty($tab['properties']))
+            {
+                $tab['properties'] = array();
+            }
+
+            $properties = $tab['properties'];
+            $last_element = end($properties);
+            if(empty($last_element))
+            {
+                $last_id = 0;
+            }
+            else
+            {
+                $last_id = array_search($last_element, $properties);
+            }
+
+            foreach($tabs as $tab)
+            {
+                if(empty($tab['properties']))
+                {
+                    continue;
+                }
+
+                foreach($tab['properties'] as $property)
+                {
+                    if(!empty($property['identifier']) and $identifier == $property['identifier'])
+                    {
+                        return $this->_helper->json(array('success' => FALSE, 'message' => 'Identifier already exists'));
+                    }
+                }
+            }
+
+            $current_id = $last_id + 1;
+            $properties[$current_id] = array(
+                'name' => $name
+                , 'identifier' => $identifier
+                , 'tab' => $tab_id
+                , 'description' => $description
+                , 'is_required' => $is_required == 1 ? TRUE : FALSE
+                , 'datatype' => $datatype_id
+            );
+
+            $session->tabs[$tab_id]['properties'] = $properties;
+            $properties[$current_id]['success'] = TRUE;
+            $properties[$current_id]['id'] = $current_id;
+
+            return $this->_helper->json($properties[$current_id]);
+        }
+
+        return $this->_helper->json(array('success' => FALSE, 'message' => 'Error'));
+    }
+
+
+    public function deletePropertyAction()
+    {
+        if($this->_request->isPost())
+        {
+            $id = $this->_request->getPost('property');
+            $session = new Zend_Session_Namespace('documentType');
+            foreach($session->tabs as $tab_id => $tab)
+            {
+                if(empty($tab['properties']))
+                {
+                    continue;
+                }
+
+                if(array_key_exists($id, $tab['properties']))
+                {
+                    unset($session->tabs[$tab_id]['properties'][$id]);
+                    return $this->_helper->json(array('success' => TRUE, 'message' => 'Property successfullty deleted'));
+                }
+            }
+        }
+
+        return $this->_helper->json(array('success' => FALSE, 'message' => 'Error'));
+    }
+}

@@ -20,7 +20,7 @@ return array(
                     ),
                 ),
             ),
-           'Zend\Db\Adapter\Pgsql' => array(
+           'Zend\Db\Adapter\Pdo\Pgsql' => array(
                 'parameters' => array(
                     'config' => array(
                         'host' => 'localhost',

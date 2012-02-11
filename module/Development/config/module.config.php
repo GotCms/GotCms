@@ -5,6 +5,10 @@ return array(
         'instance' => array(
             'alias' => array(
                 'development-index' => 'Development\Controller\IndexController',
+                'development-datatype' => 'Development\Controller\DatatypeController',
+                'development-document-type' => 'Development\Controller\DocumentTypeController',
+                'development-layout' => 'Development\Controller\LayoutController',
+                'development-view' => 'Development\Controller\ViewController',
             ),
             'Zend\View\PhpRenderer' => array(
                 'parameters' => array(
@@ -15,6 +19,16 @@ return array(
                         ),
                     ),
                 ),
+            ),
+            'Development\Controller\ViewController' => array(
+                'parameters' => array(
+                    'userTable' => 'Application\Model\UserTable',
+                ),
+            ),
+            'Application\Model\UserTable' => array(
+                'parameters' => array(
+                    'config' => 'Zend\Db\Adapter\Pdo\Pgsql',
+                )
             ),
         ),
     ),

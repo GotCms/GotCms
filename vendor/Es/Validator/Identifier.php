@@ -1,10 +1,12 @@
 <?php
+namespace Es\Validator;
 
-class Es_Validate_Identifier extends Zend_Validate_Abstract
+use Zend\Validator\AbstractValidator;
+class Identifier extends AbstractValidator
 {
     const NOT_IDENTIFIER    = 'notIdentifier';
 
-    protected $_pattern = '~^[a-zA-Z_]+$~';
+    protected $_pattern = '~^[a-zA-Z0-9_-]+$~';
     protected $_messageTemplates = array(
         self::NOT_IDENTIFIER => "'%value%' can only contains alphabetic characters and '_'"
     );
