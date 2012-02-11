@@ -10,4 +10,5 @@ class IndexController extends Action
     {
         return array('message' => 'azdazd');
     }
+
 }

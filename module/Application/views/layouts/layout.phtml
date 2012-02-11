@@ -67,7 +67,7 @@
     </div>
 
     <div id="navigation">
-        <?php echo $this->partial('navigation.phtml', 'default'); ?>
+        <?php echo $this->partial('navigation.phtml', 'default', 'test'); ?>
     </div>
 
     <div id="main-top"></div>
@@ -90,13 +90,13 @@
 
     <?php if($this->layout()->treeview): ?>
         <ul id="contextMenu" class="contextMenu">
-            <li class="new"><a href="#new"><?php echo $this->escape($this->translate('New')); ?></a></li>
-            <li class="edit"><a href="#edit"><?php echo $this->escape($this->translate('Edit')); ?></a></li>
-            <li class="cut separator"><a href="#cut"><?php echo $this->escape($this->translate('Cut')); ?></a></li>
-            <li class="copy"><a href="#copy"><?php echo $this->escape($this->translate('Copy')); ?></a></li>
-            <li class="paste"><a href="#paste"><?php echo $this->escape($this->translate('Paste')); ?></a></li>
-            <li class="delete"><a href="#delete"><?php echo $this->escape($this->translate('Delete')); ?></a></li>
-            <li class="quit separator"><a href="#quit"><?php echo $this->escape($this->translate('Quit')); ?></a></li>
+            <li class="new"><a href="#new"><?php echo $this->escape($this->translator('New')); ?></a></li>
+            <li class="edit"><a href="#edit"><?php echo $this->escape($this->translator('Edit')); ?></a></li>
+            <li class="cut separator"><a href="#cut"><?php echo $this->escape($this->translator('Cut')); ?></a></li>
+            <li class="copy"><a href="#copy"><?php echo $this->escape($this->translator('Copy')); ?></a></li>
+            <li class="paste"><a href="#paste"><?php echo $this->escape($this->translator('Paste')); ?></a></li>
+            <li class="delete"><a href="#delete"><?php echo $this->escape($this->translator('Delete')); ?></a></li>
+            <li class="quit separator"><a href="#quit"><?php echo $this->escape($this->translator('Quit')); ?></a></li>
         </ul>
     <?php endif; ?>
 </body>

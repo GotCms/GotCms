@@ -18,17 +18,4 @@ return array(
             ),
         ),
     ),
-    'routes' => array(
-        'content' => array(
-            'type'    => 'Zend\Mvc\Router\Http\Literal',
-            'options' => array(
-                'route' => '/content',
-                'defaults' => array(
-                    'module' => 'content',
-                    'controller' => 'content-index',
-                    'action'     => 'index'
-                )
-            )
-        ),
-    ),
 );

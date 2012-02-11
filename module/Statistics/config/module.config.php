@@ -18,17 +18,4 @@ return array(
             ),
         ),
     ),
-    'routes' => array(
-        'statistics' => array(
-            'type'    => 'Zend\Mvc\Router\Http\Literal',
-            'options' => array(
-                'route' => '/statistics',
-                'defaults' => array(
-                    'module' => 'statistics',
-                    'controller' => 'statistics-index',
-                    'action'     => 'index'
-                )
-            )
-        ),
-    ),
 );

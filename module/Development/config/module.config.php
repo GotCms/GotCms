@@ -18,17 +18,4 @@ return array(
             ),
         ),
     ),
-    'routes' => array(
-        'development' => array(
-            'type'    => 'Zend\Mvc\Router\Http\Literal',
-            'options' => array(
-                'route' => '/development',
-                'defaults' => array(
-                    'module' => 'development',
-                    'controller' => 'development-index',
-                    'action'     => 'index'
-                )
-            )
-        ),
-    ),
 );

@@ -16,18 +16,8 @@ return array(
                     ),
                 ),
             ),
-        ),
-    ),
-    'routes' => array(
-        'admin' => array(
-            'type'    => 'Zend\Mvc\Router\Http\Literal',
-            'options' => array(
-                'route' => '/admin',
-                'defaults' => array(
-                    'module' => 'admin',
-                    'controller' => 'admin-index',
-                    'action'     => 'index'
-                )
+            'Zend\Mvc\Router\RouteStack' => array(
+                'parameters' => array()
             )
         ),
     ),

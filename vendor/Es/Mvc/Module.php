@@ -3,8 +3,10 @@
 namespace Es\Mvc;
 
 use Zend,
+    Zend\Config,
     Zend\View,
     Zend\Module\Manager,
+    Zend\EventManager\Event,
     Zend\EventManager\StaticEventManager,
     Zend\Module\Consumer\AutoloaderProvider;
 
@@ -13,6 +15,7 @@ class Module implements AutoloaderProvider
     protected $_view;
     protected $_viewListener;
     protected $_directory;
+    protected $_config;
 
     public function init(Manager $moduleManager)
     {
@@ -36,17 +39,34 @@ class Module implements AutoloaderProvider
 
     public function getConfig()
     {
-        $config = include $this->_getDir() . '/config/module.config.php';
+        if(empty($this->_config))
+        {
+            $config = include $this->_getDir() . '/config/module.config.php';
+            $routes = new Config\Ini($this->_getDir() . '/config/routes.ini');
+            $routes = $routes->get($_SERVER['APPLICATION_ENV'])->toArray();
+            if(empty($config['di']['instance']['Zend\Mvc\Router\RouteStack']))
+            {
+                $config['di']['instance']['Zend\Mvc\Router\RouteStack'] = array('parameters' => array('routes'=> array()));
+            }
 
-        return $config;
+            if(!empty($routes['routes']))
+            {
+                $config['di']['instance']['Zend\Mvc\Router\RouteStack']['parameters']['routes'] += $routes['routes'];
+            }
+
+            $this->_config = $config;
+        }
+
+        return $this->_config;
     }
 
-    public function initializeView($e)
+    public function initializeView(Event $e)
     {
         $app          = $e->getParam('application');
         $locator      = $app->getLocator();
         $config       = $e->getParam('config');
         $view         = $this->getView($app);
+
         $viewListener = $this->getViewListener($view, $config);
         $app->events()->attachAggregate($viewListener);
         $events       = StaticEventManager::getInstance();
@@ -61,7 +81,7 @@ class Module implements AutoloaderProvider
 
         $class = $this->_getNamespace().'\View\Listener';
 
-        $viewListener       = new $class($view, $config->layout);
+        $viewListener = new $class($view, $config->layout);
         $viewListener->setDisplayExceptionsFlag($config->display_exceptions);
 
         $this->_viewListener = $viewListener;
@@ -76,6 +96,8 @@ class Module implements AutoloaderProvider
 
         $locator = $app->getLocator();
         $view    = $locator->get('view');
+        $base_path = $view->plugin('basePath');
+        $base_path->setBasePath('http://www.escms.dev');
         $url     = $view->plugin('url');
         $url->setRouter($app->getRouter());
 

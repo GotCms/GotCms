@@ -18,17 +18,4 @@ return array(
             ),
         ),
     ),
-    'routes' => array(
-        'config' => array(
-            'type'    => 'Zend\Mvc\Router\Http\Literal',
-            'options' => array(
-                'route' => '/config',
-                'defaults' => array(
-                    'module' => 'config',
-                    'controller' => 'config-index',
-                    'action'     => 'index'
-                )
-            )
-        ),
-    ),
 );
