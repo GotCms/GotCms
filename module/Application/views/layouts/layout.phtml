@@ -74,7 +74,7 @@
     <div id="main">
 
         <div id="menu">
-            <?php echo $this->partial('menu.phtml', array('treeview' => $this->layout()->treeview)); ?>
+            <?php echo $this->partial($this->raw('module') . '-menu.phtml', array('treeview' => $this->layout()->treeview)); ?>
         </div>
 
         <div id="content">

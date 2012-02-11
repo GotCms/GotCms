@@ -1,8 +1,9 @@
 <?php
-
-class Es_View_Helper_JsQuoteEscape extends Zend_View_Helper_Abstract
+namespace Es\Mvc\View\Helper;
+use Zend\View\Helper\AbstractHelper;
+class JsQuoteEscape extends AbstractHelper
 {
-    public function jsQuoteEscape($data, $quote = "'")
+    public function __invoke($data, $quote = "'")
     {
         if(is_array($data))
         {

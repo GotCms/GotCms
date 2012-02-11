@@ -116,6 +116,8 @@ class Listener implements EventManager\ListenerAggregate
             $vars['content'] = $contentParam;
         }
 
+        $vars['module'] = $e->getParam('route-match')->getParam('module');
+
         $layout   = $this->view->render($this->layout, $vars);
         $response->setContent($layout);
         return $response;
