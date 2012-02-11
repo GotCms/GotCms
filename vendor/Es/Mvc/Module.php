@@ -96,23 +96,13 @@ class Module implements AutoloaderProvider
 
         $locator = $app->getLocator();
         $view    = $locator->get('view');
-        $base_path = $view->plugin('basePath');
-        $base_path->setBasePath('http://www.escms.dev');
-        $url     = $view->plugin('url');
-        $url->setRouter($app->getRouter());
 
-        $view->plugin('headTitle')->setSeparator(' - ')
-                                  ->setAutoEscape(false)
-                                  ->append('ZF2 Skeleton Application');
+        // Set up view helpers
+        $view->plugin('url')->setRouter($app->getRouter());
+        $view->doctype()->setDoctype('HTML5');
 
-        $basePath = $app->getRequest()->getBaseUrl();
-
-        $view->plugin('headLink')->appendStylesheet($basePath . '/css/bootstrap.min.css');
-
-        $html5js = '<script src="' . $basePath . 'js/html5.js"></script>';
-        $view->plugin('placeHolder')->__invoke('html5js')->set($html5js);
-        $favicon = '<link rel="shortcut icon" href="' . $basePath . 'images/favicon.ico">';
-        $view->plugin('placeHolder')->__invoke('favicon')->set($favicon);
+        $basePath = $app->getRequest()->getBasePath();
+        $view->plugin('basePath')->setBasePath($basePath);
 
         $this->_view = $view;
         return $view;
