@@ -20,16 +20,6 @@ return array(
                     ),
                 ),
             ),
-            'Development\Controller\ViewController' => array(
-                'parameters' => array(
-                    'userTable' => 'Application\Model\UserTable',
-                ),
-            ),
-            'Application\Model\UserTable' => array(
-                'parameters' => array(
-                    'config' => 'Zend\Db\Adapter\Pdo\Pgsql',
-                )
-            ),
         ),
     ),
 );

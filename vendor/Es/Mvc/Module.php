@@ -67,6 +67,9 @@ class Module implements AutoloaderProvider
         $config       = $e->getParam('config');
         $view         = $this->getView($app);
 
+        //@TODO change to module.config.php
+        Zend\Db\Table\AbstractTable::setDefaultAdapter($locator->get('Zend\Db\Adapter\Pdo\Pgsql'));
+
         $viewListener = $this->getViewListener($view, $config);
         $app->events()->attachAggregate($viewListener);
         $events       = StaticEventManager::getInstance();

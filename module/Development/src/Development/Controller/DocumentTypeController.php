@@ -156,7 +156,7 @@ class DocumentTypeController extends Action
             $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This document type has been deleted');
         }
 
-        return $this->redirect->toRoute(array(), 'documentTypeList');
+        return $this->redirect()->toRoute('documentTypeList');
     }
 
     public function addTabAction()

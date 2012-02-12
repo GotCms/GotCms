@@ -23,7 +23,7 @@ class DatatypeController extends Action
     {
         $datatype = new Es_Model_DbTable_Datatype_Model();
         $form = new Development_Form_Datatype();
-        $form->setAction($this->_helper->url->url(array(), 'datatypeAdd'));
+        $form->setAction($this->url()->fromRoute('datatypeAdd'));
         if($this->_request->isPost() AND $form->isValid($this->_request->getPost()))
         {
             $datatype->addData($form->getValues(TRUE));
@@ -31,7 +31,7 @@ class DatatypeController extends Action
             {
                 if($id = $datatype->save())
                 {
-                    $this->redirect->toRoute(array('id' => $id), 'datatypeEdit');
+                    $this->redirect()->toRoute('datatypeEdit', array('id' => $id));
                 }
                 else
                 {
@@ -64,13 +64,13 @@ class DatatypeController extends Action
         $datatype = Es_Model_DbTable_Datatype_Model::loadDatatype($this->getRequest()->getParam('id'));
         if(empty($datatype))
         {
-            return $this->redirect->toRoute(array(), 'datatypeList');
+            return $this->redirect()->toRoute('datatypeList');
         }
 
         $datatype_model = $datatype->getDatatype();
 
         $form = new Development_Form_Datatype();
-        $form->setAction($this->_helper->url->url(array(), 'datatypeEdit'));
+        $form->setAction($this->url()->fromRoute('datatypeEdit'));
 
         Es_Form::addContent($form, Es_Model_DbTable_Datatype_Model::loadPrevalueEditor($datatype));
         $form->loadValues($datatype_model);
@@ -92,7 +92,7 @@ class DatatypeController extends Action
                 {
                     if($datatype_model->save())
                     {
-                        return $this->redirect->toRoute(array('id' => $datatype_model->getId()), 'datatypeEdit');
+                        return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
                     }
                 }
                 catch(Exception $e)
@@ -126,7 +126,7 @@ class DatatypeController extends Action
             $datatype->delete();
         }
 
-        return $this->redirect->toRoute(array(), 'datatypeList');
+        return $this->redirect()->toRoute('datatypeList');
     }
 }
 

@@ -1,19 +1,23 @@
 <?php
 
 /**
- * Es_Db_Table
+ * AbstractTable
  *
  * @category       Es
- * @package        Es_Db_Table
- * @author          RAMBAUD Pierre
+ * @package        AbstractTable
+ * @author         RAMBAUD Pierre
  */
+namespace Es\Db;
 
-abstract class Es_Db_Table
+use Es\Exception,
+    Zend\Db\Table\Table;
+
+abstract class AbstractTable
 {
     /**
     * Zend_Db_Table collection
     *
-    * @var Zend_Db_Table_Abstract
+    * @var Zend\Db\Table\AbstractTable
     */
     static $_tables = array();
 
@@ -33,7 +37,7 @@ abstract class Es_Db_Table
 
     /**
     * Set Id
-    * @return Es_Db_Table
+    * @return AbstractTable
     */
     protected function setId($id = NULL)
     {
@@ -41,7 +45,7 @@ abstract class Es_Db_Table
     }
 
     /**
-    * Initialize constructor and save instance of Zend_Db_Table($_name) in 
+    * Initialize constructor and save instance of Zend\Db\Table($_name) in
     * self::$_tables
     *
     */
@@ -49,7 +53,7 @@ abstract class Es_Db_Table
     {
         if(!empty($this->_name) and !in_array($this->_name, self::$_tables))
         {
-            self::$_tables[$this->_name] = new Zend_Db_Table($this->_name);
+            self::$_tables[$this->_name] = new Table($this->_name);
 
             $this->init();
         }
@@ -61,7 +65,7 @@ abstract class Es_Db_Table
     * Retains previous data in the object.
     *
     * @param array $arr
-    * @return Es_Db_Table
+    * @return AbstractTable
     */
     public function addData(array $arr)
     {
@@ -83,7 +87,7 @@ abstract class Es_Db_Table
     *
     * @param string|array $key
     * @param mixed $value
-    * @return Es_Db_Table
+    * @return AbstractTable
     */
     public function setData($key, $value = NULL)
     {
@@ -105,7 +109,7 @@ abstract class Es_Db_Table
     * $key can be a string only. Array will be ignored.
     *
     * @param string $key
-    * @return Es_Db_Table
+    * @return AbstractTable
     */
     public function unsetData($key = NULL)
     {
@@ -164,7 +168,7 @@ abstract class Es_Db_Table
 
                     $data = $data[$k];
                 }
-                elseif ($data instanceof Es_Object)
+                elseif ($data instanceof AbstractTable)
                 {
                     $data = $data->getData($k);
                 }
@@ -200,7 +204,7 @@ abstract class Es_Db_Table
                 $arr = explode("\n", $value);
                 return (isset($arr[$index]) && (!empty($arr[$index]) || strlen($arr[$index]) > 0)) ? $arr[$index] : NULL;
             }
-            elseif ($value instanceof Es_Object)
+            elseif ($value instanceof AbstractTable)
             {
                 return $value->getData($index);
             }
@@ -316,7 +320,7 @@ abstract class Es_Db_Table
             $xml.= '<'.$rootName.'>'."\n";
         }
 
-        $xmlModel = new Es_Simplexml_Element('<node></node>');
+        $xmlModel = new SimpleXMLElement('<node></node>');
         $arrData = $this->toArray($arrAttributes);
         foreach ($arrData as $fieldName => $fieldValue)
         {
@@ -422,34 +426,26 @@ abstract class Es_Db_Table
         switch (substr($method, 0, 3))
         {
             case 'get' :
-                //Es_Profiler::start('GETTER: '.get_class($this).'::'.$method);
                 $key = $this->_underscore(substr($method,3));
                 $data = $this->getData($key, isset($args[0]) ? $args[0] : NULL);
-                //Es_Profiler::stop('GETTER: '.get_class($this).'::'.$method);
                 return $data;
 
             case 'set' :
-                //Es_Profiler::start('SETTER: '.get_class($this).'::'.$method);
                 $key = $this->_underscore(substr($method,3));
                 $result = $this->setData($key, isset($args[0]) ? $args[0] : NULL);
-                //Es_Profiler::stop('SETTER: '.get_class($this).'::'.$method);
                 return $result;
 
             case 'uns' :
-                //Es_Profiler::start('UNS: '.get_class($this).'::'.$method);
                 $key = $this->_underscore(substr($method,3));
                 $result = $this->unsetData($key);
-                //Es_Profiler::stop('UNS: '.get_class($this).'::'.$method);
                 return $result;
 
             case 'has' :
-                //Es_Profiler::start('HAS: '.get_class($this).'::'.$method);
                 $key = $this->_underscore(substr($method,3));
-                //Es_Profiler::stop('HAS: '.get_class($this).'::'.$method);
                 return isset($this->_data[$key]);
         }
 
-        throw new Es_Exception("Invalid method ".get_class($this)."::".$method."(".print_r($args,1).")");
+        throw new Exception("Invalid method ".get_class($this)."::".$method."(".print_r($args,1).")");
     }
 
     /**
@@ -525,7 +521,7 @@ abstract class Es_Db_Table
     *
     * @param string $key
     * @param mixed $data
-    * @return Es_Object
+    * @return AbstractTable
     */
     public function setOrigData($key = NULL, $data = NULL)
     {
@@ -572,7 +568,7 @@ abstract class Es_Db_Table
             {
                 $debug[$key] = $this->debug($value, $objects);
             }
-            elseif ($value instanceof Es_Db_Table)
+            elseif ($value instanceof AbstractTable)
             {
                 $debug[$key.' ('.get_class($value).')'] = $value->debug(NULL, $objects);
             }

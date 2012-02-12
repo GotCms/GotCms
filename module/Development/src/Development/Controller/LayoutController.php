@@ -17,7 +17,7 @@ class LayoutController extends Action
     public function addAction()
     {
         $layout_form = new Development_Form_Layout();
-        $layout_form->setAction($this->_helper->url->url(array(), 'layoutAdd'));
+        $layout_form->setAction($this->url()->fromRoute('layoutAdd'));
 
         if($this->_request->isPost())
         {
@@ -33,7 +33,7 @@ class LayoutController extends Action
                 $layout->setContent($layout_form->getValue('content'));
                 $layout->save();
 
-                $this->redirect->toRoute(array(), 'layoutAdd');
+                $this->redirect()->toRoute('layoutAdd');
                 return;
             }
         }
@@ -53,11 +53,11 @@ class LayoutController extends Action
         $layout = Es_Model_DbTable_Layout_Model::fromId($layout_id);
         if(empty($layout_id) or empty($layout))
         {
-            return $this->redirect->toRoute(array(), 'layoutList');
+            return $this->redirect()->toRoute('layoutList');
         }
 
         $form = new Development_Form_Layout();
-        $form->setAction($this->_helper->url->url(array('id' => $layout_id), 'layoutEdit'));
+        $form->setAction($this->url()->fromRoute('layoutEdit', array('id' => $layout_id)));
         $form->loadValues($layout);
 
         if($this->getRequest()->isPost())
@@ -67,7 +67,7 @@ class LayoutController extends Action
             {
                 $layout->addData($form->getValues(TRUE));
                 $layout->save();
-                $this->redirect->toRoute(array('id' => $layout_id), 'layoutEdit');
+                $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
             }
 
             $form->populate($data);
@@ -89,7 +89,7 @@ class LayoutController extends Action
             $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This layout has been deleted');
         }
 
-        return $this->redirect->toRoute(array(), 'layoutList');
+        return $this->redirect()->toRoute('layoutList');
     }
 }
 
