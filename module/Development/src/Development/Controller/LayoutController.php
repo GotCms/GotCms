@@ -2,7 +2,9 @@
 
 namespace Development\Controller;
 
-use Es\Mvc\Controller\Action;
+use Es\Mvc\Controller\Action,
+    Development\Form\Layout as LayoutForm,
+    Application\Model\Layout;
 
 class LayoutController extends Action
 {
@@ -16,17 +18,17 @@ class LayoutController extends Action
 
     public function addAction()
     {
-        $layout_form = new Development_Form_Layout();
+        $layout_form = new LayoutForm();
         $layout_form->setAction($this->url()->fromRoute('layoutAdd'));
 
-        if($this->_request->isPost())
+        if($this->getRequest()->isPost())
         {
-            if(!$layout_form->isValid($this->_request->getPost()))
+            if(!$layout_form->isValid($this->getRequest()->post()->toArray()))
             {
             }
             else
             {
-                $layout = new Es_Model_DbTable_Layout_Model();
+                $layout = new Layout\Model();
                 $layout->setName($layout_form->getValue('name'));
                 $layout->setIdentifier($layout_form->getValue('identifier'));
                 $layout->setDescription($layout_form->getValue('description'));
@@ -38,55 +40,55 @@ class LayoutController extends Action
             }
         }
 
-        $this->view->form = $layout_form;
+        return array('form' => $layout_form);
     }
 
     public function listAction()
     {
-        $layouts = new Es_Model_DbTable_Layout_Collection();
-        $this->view->layouts = $layouts->getLayouts();
+        $layouts = new Layout\Collection();
+        return array('layouts' => $layouts->getLayouts());
     }
 
     public function editAction()
     {
-        $layout_id = $this->getRequest()->getParam('id', NULL);
-        $layout = Es_Model_DbTable_Layout_Model::fromId($layout_id);
+        $layout_id = $this->getRouteMatch()->getParam('id', NULL);
+        $layout = Layout\Model::fromId($layout_id);
         if(empty($layout_id) or empty($layout))
         {
             return $this->redirect()->toRoute('layoutList');
         }
 
-        $form = new Development_Form_Layout();
-        $form->setAction($this->url()->fromRoute('layoutEdit', array('id' => $layout_id)));
-        $form->loadValues($layout);
+        $layout_form = new LayoutForm();
+        $layout_form->setAction($this->url()->fromRoute('layoutEdit', array('id' => $layout_id)));
+        $layout_form->loadValues($layout);
 
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->getPost();
-            if($form->isValid($data))
+            $data = $this->getRequest()->post()->toArray();
+            if($layout_form->isValid($data))
             {
-                $layout->addData($form->getValues(TRUE));
+                $layout->addData($layout_form->getValues(TRUE));
                 $layout->save();
                 $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
             }
 
-            $form->populate($data);
+            $layout_form->populate($data);
         }
 
-        $this->view->form = $form;
+        return array('form' => $layout_form);
     }
 
     public function deleteAction()
     {
-        $layout_id = $this->getRequest()->getParam('id', NULL);
-        $layout = Es_Model_DbTable_Layout_Model::fromId($layout_id);
+        $layout_id = $this->getRouteMatch()->getParam('id', NULL);
+        $layout = Layout\Model::fromId($layout_id);
         if(empty($layout_id) or empty($layout) or !$layout->delete())
         {
-            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can not delete this layout');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not delete this layout');
         }
         else
         {
-            $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This layout has been deleted');
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This layout has been deleted');
         }
 
         return $this->redirect()->toRoute('layoutList');

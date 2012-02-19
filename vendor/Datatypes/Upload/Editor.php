@@ -1,5 +1,10 @@
 <?php
-class Datatypes_Upload_Editor extends Es_Datatype_Abstract_Editor {
+namespace Datatypes\Upload;
+
+use Application\Model\Datatype;
+
+class Editor extends AbstractDatatpye\PrevalueEditor
+{
     protected $_request;
 
     public function save($request = null) {

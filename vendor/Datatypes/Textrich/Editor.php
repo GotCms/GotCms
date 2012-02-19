@@ -1,6 +1,11 @@
 <?php
-class Datatypes_Textrich_Editor extends Es_Datatype_Abstract_Editor {
+namespace Datatypes\Textrich;
 
+use Application\Model\Datatype,
+    Zend\Form\Element;
+
+class Editor extends AbstractDatatpye\Editor
+{
     public function save($request = null) {
         $value = $request->getParam('textrich'.$this->_property->getId());
         $this->setValue($value);
@@ -8,7 +13,7 @@ class Datatypes_Textrich_Editor extends Es_Datatype_Abstract_Editor {
     }
 
     public function load() {
-        $textrich = new Zend_Form_Element_Textarea('textrich'.$this->_property->getId());
+        $textrich = new Element\Textarea('textrich'.$this->_property->getId());
         $textrich->setLabel($this->_property->getName());
         $textrich->setAttrib('id', 'textrich'.$this->_property->getId());
         $textrich->setValue($this->_property->getValue());

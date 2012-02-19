@@ -1,10 +1,12 @@
 <?php
 namespace Development\Form;
 
-use Es\Form,
+use Es\Form\AbstractForm,
+    Es\Validator,
+    Zend\Validator\Db,
     Zend\Form\Element;
 
-class Datatype extends Form
+class Datatype extends AbstractForm
 {
     public function init()
     {
@@ -23,7 +25,7 @@ class Datatype extends Form
 
         $model  = new Element\Select('model');
 
-        $path = APPLICATION_PATH.'/../library/Datatypes/';
+        $path = getcwd().'/vendor/Datatypes/';
         $list_dir = glob($path.'*', GLOB_ONLYDIR);
         foreach($list_dir as $dir)
         {

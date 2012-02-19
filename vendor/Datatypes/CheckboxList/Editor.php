@@ -1,5 +1,9 @@
 <?php
-class Datatypes_CheckboxList_Editor extends Es_Model_DbTable_Datatype_Abstract_Editor
+namespace Datatypes\CheckboxList;
+
+use Application\Model\Datatype;
+
+class Editor extends AbstractDatatpye\Editor
 {
 
     public function save()

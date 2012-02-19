@@ -1,5 +1,10 @@
 <?php
-class Datatypes_Textstring_Editor extends Es_Model_DbTable_Datatype_Abstract_Editor
+namespace Datatypes\Textstring;
+
+use Application\Model\Datatype,
+    Zend\Form\Element;
+
+class Editor extends AbstractDatatpye\Editor
 {
     public function save()
     {
@@ -11,7 +16,7 @@ class Datatypes_Textstring_Editor extends Es_Model_DbTable_Datatype_Abstract_Edi
     {
         $parameters = $this->getConfiguration();
         $property = $this->getProperty();
-        $textstring = new Zend_Form_Element_Text($this->getName());
+        $textstring = new Element\Text($this->getName());
         $textstring->setLabel($property->getName());
         $textstring->setValue($this->getValue());
         if(!empty($parameters['length']))

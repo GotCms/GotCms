@@ -1,6 +1,15 @@
 <?php
+namespace Development\Form;
 
-class Development_Form_DocumentType extends Es_Form
+use Es\Form\AbstractForm,
+    Es\Validator,
+    Application\Model\Datatype,
+    Application\Model\View,
+    Zend\Validator\Db,
+    Zend\Form\Element,
+    Zend\Form\SubForm;
+
+class DocumentType extends AbstractForm
 {
 
     protected $_subDocumentTypeForms = array(
@@ -56,12 +65,13 @@ class Development_Form_DocumentType extends Es_Form
         $this->setAttrib('id', 'development-form');
         $this->addDecorator('ViewScript', array('viewScript' => 'forms/document-type.phtml'));
 
-        $collection = new Es_Model_DbTable_Datatype_Collection();
-        $datatypes = $collection->getDatatypesSelect();
+        $collection = new Datatype\Collection();
+        $datatypes = $collection->getSelect();
         $this->getSubForm('properties')->getElement('datatype')->addMultioptions($datatypes);
 
-        $views_collection = new Es_Model_DbTable_View_Collection();
-        $views = $views_collection->getViewsSelect();
+        $views_collection = new View\Collection();
+        $views = $views_collection->getSelect();
+
         $this->getSubForm('views')->getElement('default_view')->addMultioptions($views);
         $this->getSubForm('views')->getElement('available_views')->addMultioptions($views);
 
@@ -82,7 +92,7 @@ class Development_Form_DocumentType extends Es_Form
             return $sub_form;
         }
 
-        $sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['infos']);
+        $sub_form = new SubForm($this->_subDocumentTypeForms['infos']);
 
         $name = new Element\Text('name');
         $name->setLabel('Name')
@@ -111,13 +121,13 @@ class Development_Form_DocumentType extends Es_Form
         {
             return $sub_form;
         }
-        $sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['views']);
+        $sub_form = new SubForm($this->_subDocumentTypeForms['views']);
 
         $default_view = new Element\Select('default_view');
         $default_view->setLabel('Default view')
             ->setRequired(TRUE);
 
-        $available_views = new Zend_Form_Element_Multiselect('available_views');
+        $available_views = new Element\Multiselect('available_views');
         $available_views->setLabel('Available views');
 
 
@@ -138,7 +148,7 @@ class Development_Form_DocumentType extends Es_Form
             return $sub_form;
         }
 
-        $sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['properties']);
+        $sub_form = new SubForm($this->_subDocumentTypeForms['properties']);
 
         $name = new Element\Text('name');
         $name->setLabel('Name')
@@ -167,7 +177,7 @@ class Development_Form_DocumentType extends Es_Form
         $description->setLabel('Description')
             ->setIsArray(TRUE);
 
-        $required = new Zend_Form_Element_Checkbox('required');
+        $required = new Element\Checkbox('required');
         $required->setLabel('Required')
             ->setIsArray(TRUE);
 
@@ -189,7 +199,7 @@ class Development_Form_DocumentType extends Es_Form
             return $sub_form;
         }
 
-        $sub_form = new Zend_Form_SubForm($this->_subDocumentTypeForms['tabs']);
+        $sub_form = new SubForm($this->_subDocumentTypeForms['tabs']);
 
         $add_name = new Element\Text('name');
         $add_name->setLabel('Name')

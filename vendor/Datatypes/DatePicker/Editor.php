@@ -1,5 +1,10 @@
 <?php
-class Datatypes_Textrich_Editor extends Es_Datatype_Abstract_Editor {
+namespace Datatypes\DatePicker;
+
+use Application\Model\Datatype;
+
+class Editor extends AbstractDatatpye\Editor
+{
 
     public function save() {
         //sauvegarde des informations

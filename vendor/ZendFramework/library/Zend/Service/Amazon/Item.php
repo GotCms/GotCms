@@ -29,7 +29,7 @@ use Zend\Service\Amazon\Exception;
  * @uses       DOMXPath
  * @uses       Zend_Service_Amazon_Accessories
  * @uses       Zend_Service_Amazon_CustomerReview
- * @uses       Zend_Service_Amazon_EditorialReview
+ * @uses       Zend_Service_Amazon\EditorialReview
  * @uses       Zend_Service_Amazon_Image
  * @uses       Zend_Service_Amazon_ListmaniaList
  * @uses       Zend_Service_Amazon_OfferSet

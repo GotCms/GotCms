@@ -1,17 +1,30 @@
 <?php
-class Datatypes_Textrich_Datatype extends Es_Model_DbTable_Datatype_Abstract {
+namespace Datatypes\RadioButtonList;
 
-    public function getEditor() {
-        if($this->_editor === null) {
-            $this->_editor = new Datatypes_Textrich_Editor($this);
+use Application\Model\Datatype\AbstractDatatype
+    , Application\Model\Property\Model as PropertyModel;
+
+class Datatype extends AbstractDatatype
+{
+    protected $_name = 'radio-button-list';
+
+    public function getEditor(PropertyModel $property)
+    {
+        if($this->_editor === null)
+        {
+            $this->_editor = new Editor($this);
         }
+
         return $this->_editor;
     }
 
-    public function getPrevalueEditor() {
-        if($this->_prevalueEditor === null) {
-            $this->_prevalueEditor = new Datatypes_Textrich_PrevalueEditor($this);
+    public function getPrevalueEditor()
+    {
+        if($this->_prevalueEditor === null)
+        {
+            $this->_prevalueEditor = new PrevalueEditor($this);
         }
+
         return $this->_prevalueEditor;
     }
 }

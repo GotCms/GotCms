@@ -1,5 +1,10 @@
 <?php
-class Datatypes_Textarea_Editor extends Es_Model_DbTable_Datatype_Abstract_Editor
+namespace Datatypes\Textarea;
+
+use Application\Model\Datatype,
+    Zend\Form\Element;
+
+class Editor extends AbstractDatatpye\Editor
 {
     public function save()
     {
@@ -9,7 +14,7 @@ class Datatypes_Textarea_Editor extends Es_Model_DbTable_Datatype_Abstract_Edito
 
     public function load()
     {
-        $textarea = new Zend_Form_Element_Textarea($this->getName());
+        $textarea = new Element\Textarea($this->getName());
         $textarea->setLabel($this->getProperty()->getName());
         $textarea->setValue($this->getProperty()->getValue());
 

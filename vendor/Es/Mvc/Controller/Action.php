@@ -2,11 +2,22 @@
 namespace Es\Mvc\Controller;
 
 use Zend\Mvc\Controller\ActionController,
-    Zend\Session;
+    Zend\Session,
+    Zend\Mvc\MvcEvent;
 
 class Action extends ActionController
 {
     protected $_session = NULL;
+    protected $_routeMatch = NULL;
+
+    public function execute(MvcEvent $e)
+    {
+        $this->getRouteMatch();
+        $this->init();
+        return parent::execute($e);
+    }
+
+    public function init(){}
 
     public function preDispatch()
     {
@@ -18,6 +29,15 @@ class Action extends ActionController
         }*/
     }
 
+    public function getRouteMatch()
+    {
+        if(empty($this->_routeMatch))
+        {
+            $this->_routeMatch = $this->getEvent()->getRouteMatch();
+        }
+
+        return $this->_routeMatch;
+    }
     /**
     *@return Zend_Session
     */

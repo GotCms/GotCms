@@ -3,7 +3,7 @@
 namespace Development\Controller;
 
 use Es\Mvc\Controller\Action,
-    Development\Form\View as viewForm,
+    Development\Form\View as ViewForm,
     Application\Model\View;
 
 class ViewController extends Action
@@ -20,12 +20,12 @@ class ViewController extends Action
 
     public function addAction()
     {
-        $view_form = new viewForm();
+        $view_form = new ViewForm();
         $view_form->setAction($this->url()->fromRoute('viewAdd'));
 
         if($this->getRequest()->isPost())
         {
-            if(!$view_form->isValid($this->getRequest()->getPost()))
+            if(!$view_form->isValid($this->getRequest()->post()->toArray()))
             {
             }
             else
@@ -53,20 +53,20 @@ class ViewController extends Action
 
     public function editAction()
     {
-        $view_id = $this->getRequest()->getParam('id', NULL);
+        $view_id = $this->getRouteMatch()->getParam('id', NULL);
         $view = View\Model::fromId($view_id);
         if(empty($view_id) or empty($view))
         {
             return $this->redirect()->toRoute('viewList');
         }
 
-        $form = new viewForm();
+        $form = new ViewForm();
         $form->setAction($this->url()->fromRoute('viewEdit',array('id' => $view_id)));
         $form->loadValues($view);
 
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->getPost();
+            $data = $this->getRequest()->post()->toArray();
             if($form->isValid($data))
             {
                 $view->addData($form->getValues(TRUE));
@@ -82,15 +82,15 @@ class ViewController extends Action
 
     public function deleteAction()
     {
-        $view_id = $this->getRequest()->getParam('id', NULL);
+        $view_id = $this->getRouteMatch()->getParam('id', NULL);
         $view = View\Model::fromId($view_id);
         if(empty($view_id) or empty($view))
         {
-            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can not delete this view');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not delete this view');
         }
         else
         {
-            $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This view has been deleted');
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This view has been deleted');
             $view->delete();
         }
 

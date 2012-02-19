@@ -1,9 +1,13 @@
 <?php
-class Datatypes_Textrich_PrevalueEditor extends Es_Model_DbTable_Datatype_Abstract_PrevalueEditor
+namespace Datatypes\RadioButtonList;
+
+use Application\Model\Datatype\AbstractDatatype;
+
+class PrevalueEditor extends AbstractDatatype\PrevalueEditor
 {
     public function save($request = null)
     {
-        //Save prevalue in column datatypes_prevalue_value
+        //Save prevalue in column Datatypes\prevalue_value
         $this->setConfiguration(array());
 
         return $this->getConfiguration();

@@ -2,7 +2,9 @@
 
 namespace Development\Controller;
 
-use Es\Mvc\Controller\Action;
+use Es\Mvc\Controller\Action,
+    Development\Form\DocumentType as DocumentTypeForm,
+    Application\Model\DocumentType;
 
 class DocumentTypeController extends Action
 {
@@ -24,7 +26,7 @@ class DocumentTypeController extends Action
 
     public function addAction()
     {
-        $form = new Development_Form_DocumentType();
+        $form = new DocumentTypeForm();
         $request = $this->getRequest();
 
         if($request->isPost())
@@ -34,9 +36,9 @@ class DocumentTypeController extends Action
                 $form->setValueFromSession(Zend_Session::namespaceGet('documentType'));
             }
 
-            if($form->isValid($this->_request->getPost()))
+            if($form->isValid($this->getRequest()->post()->toArray()))
             {
-                $document_type = new Es_Model_DbTable_DocumentType_Model();
+                $document_type = new DocumentType\Model();
                 $property_collection = new Es_Model_DbTable_Property_Collection();
 
                 $infos_subform = $form->getSubForm('infos');
@@ -124,7 +126,7 @@ class DocumentTypeController extends Action
             }
             else
             {
-                $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can save document_type');
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can save document_type');
             }
         }
 
@@ -134,26 +136,26 @@ class DocumentTypeController extends Action
         }
 
 
-        $this->view->form = $form;
+        return array('form' => $form);
     }
 
     public function listAction()
     {
-        $documents = new Es_Model_DbTable_DocumentType_Collection();
-        $this->view->documents = $documents->getDocumentTypes();
+        $documents = new DocumentType\Collection();
+        return array('documents' => $documents->getDocumentTypes());
     }
 
     public function deleteAction()
     {
-        $document_type_id = $this->getRequest()->getParam('id', NULL);
-        $document_type = Es_Model_DbTable_DocumentType_Model::fromId($document_type_id);
+        $document_type_id = $this->getRouteMatch()->getParam('id', NULL);
+        $document_type = DocumentType\Model::fromId($document_type_id);
         if(empty($document_type_id) or empty($document_type) or !$document_type->delete())
         {
-            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can not delete this document type');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not delete this document type');
         }
         else
         {
-            $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This document type has been deleted');
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This document type has been deleted');
         }
 
         return $this->redirect()->toRoute('documentTypeList');
@@ -161,11 +163,11 @@ class DocumentTypeController extends Action
 
     public function addTabAction()
     {
-        if($this->_request->isPost())
+        if($this->getRequest()->isPost())
         {
             $session = new Zend_Session_Namespace('documentType');
-            $name = $this->_request->getPost('name');
-            $description = $this->_request->getPost('description');
+            $name = $this->getRequest()->getPost('name');
+            $description = $this->getRequest()->getPost('description');
 
             $tabs = empty($session->tabs) ? array() : $session->tabs;
             $last_element = end($tabs);
@@ -205,11 +207,11 @@ class DocumentTypeController extends Action
 
     public function deleteTabAction()
     {
-        if($this->_request->isPost())
+        if($this->getRequest()->isPost())
         {
             $session = new Zend_Session_Namespace('documentType');
-            $id = $this->_request->getPost('tab');
-            $description = $this->_request->getPost('description');
+            $id = $this->getRequest()->getPost('tab');
+            $description = $this->getRequest()->getPost('description');
 
             $tabs = empty($session->tabs) ? array() : $session->tabs;
             if(array_key_exists($id, $tabs))
@@ -225,15 +227,15 @@ class DocumentTypeController extends Action
 
     public function addPropertyAction()
     {
-        if($this->_request->isPost())
+        if($this->getRequest()->isPost())
         {
             $session = new Zend_Session_Namespace('documentType');
-            $name = $this->_request->getPost('name');
-            $identifier = $this->_request->getPost('identifier');
-            $tab_id = $this->_request->getPost('tab');
-            $description = $this->_request->getPost('description');
-            $is_required = $this->_request->getPost('is_required');
-            $datatype_id = $this->_request->getPost('datatype');
+            $name = $this->getRequest()->getPost('name');
+            $identifier = $this->getRequest()->getPost('identifier');
+            $tab_id = $this->getRequest()->getPost('tab');
+            $description = $this->getRequest()->getPost('description');
+            $is_required = $this->getRequest()->getPost('is_required');
+            $datatype_id = $this->getRequest()->getPost('datatype');
 
             $tabs = $session->tabs;
 
@@ -299,9 +301,9 @@ class DocumentTypeController extends Action
 
     public function deletePropertyAction()
     {
-        if($this->_request->isPost())
+        if($this->getRequest()->isPost())
         {
-            $id = $this->_request->getPost('property');
+            $id = $this->getRequest()->getPost('property');
             $session = new Zend_Session_Namespace('documentType');
             foreach($session->tabs as $tab_id => $tab)
             {

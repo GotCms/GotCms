@@ -1,5 +1,10 @@
 <?php
-class Datatypes_Textstring_PrevalueEditor extends Es_Model_DbTable_Datatype_Abstract_PrevalueEditor
+namespace Datatypes\Textstring;
+
+use Application\Model\Datatype\AbstractDatatype,
+    Zend\Form\Element;
+
+class PrevalueEditor extends AbstractDatatype\PrevalueEditor
 {
     public function save()
     {
@@ -11,7 +16,7 @@ class Datatypes_Textstring_PrevalueEditor extends Es_Model_DbTable_Datatype_Abst
     {
         $config = $this->getConfig();
 
-        $length = new Zend_Form_Element_Text('length');
+        $length = new Element\Text('length');
         $length->setLabel('Length')->setValue(isset($config['length']) ? $config['length'] : '');
 
         return array($length);

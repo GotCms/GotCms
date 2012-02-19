@@ -11,9 +11,14 @@ class Identifier extends AbstractValidator
         self::NOT_IDENTIFIER => "'%value%' can only contains alphabetic characters and '_'"
     );
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
         if(!preg_match($this->_pattern, $value))
         {

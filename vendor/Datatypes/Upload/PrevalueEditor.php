@@ -1,9 +1,14 @@
 <?php
-class Datatypes_Upload_PrevalueEditor extends Es_Datatype_Abstract_PrevalueEditor  {
+namespace Datatypes\Upload;
+
+use Application\Model\Datatype;
+
+class PrevalueEditor extends AbstractDatatpye\PrevalueEditor
+{
 
     public function save($request = null)
     {
-        //Save prevalue in column datatypes_prevalue_value
+        //Save prevalue in column Datatypes\prevalue_value
         $mime_list = $request->getParam('mime_list');
         $options_post = $request->getParam('options', array());
         $options = array();
@@ -18,7 +23,7 @@ class Datatypes_Upload_PrevalueEditor extends Es_Datatype_Abstract_PrevalueEdito
 
     public function load()
     {
-        $mime_list = new Zend_Form_Element_MultiCheckbox('mime_list',array(
+        $mime_list = new Element\MultiCheckbox('mime_list',array(
                 'multiOptions' => array(
                 'image/gif'=>'image/gif',
                 'image/jpeg'=>'image/jpeg',
@@ -49,7 +54,7 @@ class Datatypes_Upload_PrevalueEditor extends Es_Datatype_Abstract_PrevalueEdito
         $mime_list->setLabel('Type Mime accepted:');
 
         $options_values = isset($parameters['options']) ? $parameters['options'] : '';
-        $upload_options = new Zend_Form_Element_MultiCheckbox('options',array(
+        $upload_options = new Element\MultiCheckbox('options',array(
                 'multiOptions' => array(
                 'multiple'=>'multiple',
                 'title'=>'has title',

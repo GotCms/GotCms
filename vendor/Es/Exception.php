@@ -1,12 +1,14 @@
 <?php
-class Es_Exception extends Exception
+namespace Es;
+
+class Exception 
 {
     public function __construct($msg = '', $code = 0, Exception $previous = null)
     {
         /*
         * TODO Es_Core_Exception
         */
-        Zend_Debug::dump($msg);
+        var_dump($msg);
         die();
     }
 }

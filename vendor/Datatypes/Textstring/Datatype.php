@@ -1,14 +1,19 @@
 <?php
-class Datatypes_Textstring_Datatype extends Es_Model_DbTable_Datatype_Abstract
+namespace Datatypes\Textstring;
+
+use Application\Model\Datatype\AbstractDatatype
+    , Application\Model\Property\Model as PropertyModel;
+
+class Datatype extends AbstractDatatype
 {
     protected $_name = 'textstring';
 
-    public function getEditor(Es_Model_DbTable_Property_Model $property)
+    public function getEditor(PropertyModel $property)
     {
         $this->_property = $property;
         if($this->_editor === null)
         {
-            $this->_editor = new Datatypes_Textstring_Editor($this);
+            $this->_editor = new Editor($this);
         }
 
         return $this->_editor;
@@ -18,7 +23,7 @@ class Datatypes_Textstring_Datatype extends Es_Model_DbTable_Datatype_Abstract
     {
         if($this->_prevalueEditor === null)
         {
-            $this->_prevalueEditor = new Datatypes_Textstring_PrevalueEditor($this);
+            $this->_prevalueEditor = new PrevalueEditor($this);
         }
 
         return $this->_prevalueEditor;

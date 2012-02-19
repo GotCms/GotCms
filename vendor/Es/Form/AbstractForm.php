@@ -3,7 +3,8 @@ namespace Es\Form;
 
 use Zend\Form\Form,
     Zend\Form\Element,
-    Es\Exception;
+    Es\Exception,
+    Es\Db\AbstractTable;
 
 abstract class AbstractForm extends Form
 {
@@ -16,7 +17,7 @@ abstract class AbstractForm extends Form
         return Zend_Registry::get('Zend_Db');
     }
 
-    public function loadValues(Es_Db_Table $table)
+    public function loadValues(AbstractTable $table)
     {
         $data = $table->getData();
         if(is_array($data))
@@ -26,8 +27,7 @@ abstract class AbstractForm extends Form
                 if($element = $this->getElement($element_name))
                 {
                     $element->setValue($element_value);
-
-                    if($validator = $element->getValidator('Zend_Validate_Db_NoRecordExists'))
+                    if($validator = $element->getValidator('Zend\Validator\Db\NoRecordExists'))
                     {
                         $validator->setExclude(array('field' => 'id', 'value' => $table->getId()));
                     }

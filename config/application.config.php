@@ -18,6 +18,7 @@ return array(
     'autoloader' => array(
         'namespaces' => array(
             'Es' => __DIR__ . '/../vendor/Es',
+            'Datatypes' => __DIR__ . '/../vendor/Datatypes'
         ),
     ),
 );

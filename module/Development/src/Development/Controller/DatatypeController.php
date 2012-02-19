@@ -2,7 +2,9 @@
 
 namespace Development\Controller;
 
-use Es\Mvc\Controller\Action;
+use Es\Mvc\Controller\Action,
+    Development\Form\Datatype as DatatypeForm,
+    Application\Model\Datatype;
 
 class DatatypeController extends Action
 {
@@ -21,10 +23,10 @@ class DatatypeController extends Action
 
     public function addAction()
     {
-        $datatype = new Es_Model_DbTable_Datatype_Model();
-        $form = new Development_Form_Datatype();
+        $datatype = new Datatype\Model();
+        $form = new DatatypeForm();
         $form->setAction($this->url()->fromRoute('datatypeAdd'));
-        if($this->_request->isPost() AND $form->isValid($this->_request->getPost()))
+        if($this->getRequest()->isPost() AND $form->isValid($this->getRequest()->post()->toArray()))
         {
             $datatype->addData($form->getValues(TRUE));
             try
@@ -49,19 +51,19 @@ class DatatypeController extends Action
             $form->populate($data);
         }
 
-        $this->view->form = $form;
+        return array('form' => $form);
 
     }
 
     public function listAction()
     {
-        $datatypes = new Es_Model_DbTable_Datatype_Collection();
-        $this->view->datatypes = $datatypes->getDatatypes();
+        $datatypes = new Datatype\Collection();
+        return array('datatypes' => $datatypes->getDatatypes());
     }
 
     public function editAction()
     {
-        $datatype = Es_Model_DbTable_Datatype_Model::loadDatatype($this->getRequest()->getParam('id'));
+        $datatype = Datatype\Model::loadDatatype($this->_routeMatch->getParam('id'));
         if(empty($datatype))
         {
             return $this->redirect()->toRoute('datatypeList');
@@ -69,15 +71,15 @@ class DatatypeController extends Action
 
         $datatype_model = $datatype->getDatatype();
 
-        $form = new Development_Form_Datatype();
-        $form->setAction($this->url()->fromRoute('datatypeEdit'));
+        $form = new DatatypeForm();
+        $form->setAction($this->url()->fromRoute('datatypeEdit', array('id' => $this->_routeMatch->getParam('id'))));
 
-        Es_Form::addContent($form, Es_Model_DbTable_Datatype_Model::loadPrevalueEditor($datatype));
+        DatatypeForm::addContent($form, Datatype\Model::loadPrevalueEditor($datatype));
         $form->loadValues($datatype_model);
 
-        if($this->_request->isPost())
+        if($this->getRequest()->isPost())
         {
-            if($form->isValid($this->_request->getPost()))
+            if($form->isValid($this->getRequest()->post()->toArray()))
             {
                 if($datatype_model->getModel() != $form->getValue('model'))
                 {
@@ -85,7 +87,7 @@ class DatatypeController extends Action
                 }
                 else
                 {
-                    $datatype_model->setValue(Es_Model_DbTable_Datatype_Model::savePrevalueEditor($datatype));
+                    $datatype_model->setValue(Datatype\Model::savePrevalueEditor($datatype));
                 }
 
                 try
@@ -109,20 +111,20 @@ class DatatypeController extends Action
             }
         }
 
-        $this->view->form = $form;
+        return array('form' => $form);
     }
 
     public function deleteAction()
     {
-        $datatype_id = $this->getRequest()->getParam('id', NULL);
-        $datatype = Es_Model_DbTable_Datatype_Model::fromId($datatype_id);
+        $datatype_id = $this->getRouteMatch()->getParam('id', NULL);
+        $datatype = Datatype\Model::fromId($datatype_id);
         if(empty($datatype))
         {
-            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can not delete this view');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not delete this view');
         }
         else
         {
-            $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This view has been deleted');
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This view has been deleted');
             $datatype->delete();
         }
 

@@ -1,9 +1,14 @@
 <?php
-class Datatypes_Textarea_PrevalueEditor extends Es_Model_DbTable_Datatype_Abstract_PrevalueEditor
+namespace Datatypes\Textarea;
+
+use Application\Model\Datatype\AbstractDatatype,
+    Zend\Form\Element;
+
+class PrevalueEditor extends AbstractDatatype\PrevalueEditor
 {
     public function save()
     {
-        //Save prevalue in column datatypes_prevalue_value
+        //Save prevalue in column Datatypes\prevalue_value
         $request = $this->getRequest();
         $rows = $request->getPost('rows', '');
         $cols = $request->getPost('cols','');
@@ -34,21 +39,21 @@ class Datatypes_Textarea_PrevalueEditor extends Es_Model_DbTable_Datatype_Abstra
         */
 
         $config = $this->getConfig();
-        $cols = new Zend_Form_Element_Text('cols');
+        $cols = new Element\Text('cols');
         $cols->setLabel('Cols');
         if(!empty($config['cols']))
         {
             $cols->setValue($config['cols']);
         }
 
-        $rows = new Zend_Form_Element_Text('rows');
+        $rows = new Element\Text('rows');
         $rows->setLabel('Rows');
         if(!empty($config['rows']))
         {
             $rows->setValue($config['rows']);
         }
 
-        $wrap = new Zend_Form_Element_Select('wrap');
+        $wrap = new Element\Select('wrap');
         $wrap->setLabel('Wrap');
         $wrap->addMultiOptions(array('hard'=>'hard', 'off'=>'off', 'soft'=>'soft'));
         if(!empty($config['wrap']))
@@ -57,7 +62,7 @@ class Datatypes_Textarea_PrevalueEditor extends Es_Model_DbTable_Datatype_Abstra
         }
 
 
-        $options = new Zend_Form_Element_MultiCheckbox('Options', array(
+        $options = new Element\MultiCheckbox('Options', array(
                 'multiOptions' => array(
                 'disabled' => 'Disabled',
                 'readonly' => 'Readonly'

@@ -1,18 +1,31 @@
 <?php
-class Datatypes_Textrich_Datatype extends Es_Datatype_Abstract {
+namespace Datatypes\ImageList;
 
-    public function getEditor(Es_Component_Property_Model $property) {
+use Application\Model\Datatype\AbstractDatatype
+    , Application\Model\Property\Model as PropertyModel;
+
+class Datatype extends AbstractDatatype
+{
+    protected $_name = 'image-list';
+
+    public function getEditor(PropertyModel $property)
+    {
         $this->_property = $property;
-        if($this->_editor === null) {
-            $this->_editor = new Datatypes_Textrich_Editor($this);
+        if($this->_editor === null)
+        {
+            $this->_editor = new Editor($this);
         }
+
         return $this->_editor;
     }
 
-    public function getPrevalueEditor() {
-        if($this->_prevalueEditor === null) {
-            $this->_prevalueEditor = new Datatypes_Textrich_PrevalueEditor($this);
+    public function getPrevalueEditor()
+    {
+        if($this->_prevalueEditor === null)
+        {
+            $this->_prevalueEditor = new PrevalueEditor($this);
         }
+
         return $this->_prevalueEditor;
     }
 }
