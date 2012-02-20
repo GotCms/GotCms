@@ -2,7 +2,7 @@
 namespace Es\Mvc\Controller;
 
 use Zend\Mvc\Controller\ActionController,
-    Zend\Session,
+    Zend\Session\Storage\SessionStorage,
     Zend\Mvc\MvcEvent;
 
 class Action extends ActionController
@@ -18,16 +18,6 @@ class Action extends ActionController
     }
 
     public function init(){}
-
-    public function preDispatch()
-    {
-        Zend_Session::start();
-        $auth = Zend_Auth::getInstance();
-        /*if(!$auth->hasIdentity() and $this->getRequest()->getModuleName() != 'login')
-        {
-            return $this->_redirect('admin/login');
-        }*/
-    }
 
     public function getRouteMatch()
     {
@@ -45,7 +35,7 @@ class Action extends ActionController
     {
         if($this->_session === NULL)
         {
-            $this->_session = new Session();
+            $this->_session = new SessionStorage();
         }
 
         return $this->_session;

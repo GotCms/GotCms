@@ -4,8 +4,7 @@
     <li><a href="#tabs-3"><?php echo $this->escape($this->translator('Properties')); ?></a></li>
     <li><a href="#tabs-4"><?php echo $this->escape($this->translator('Tabs')); ?></a></li>
 </ul>
-
-<form id="development-form" enctype="application/x-www-form-urlencoded" action="" method="post">
+<form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->url('documentTypeAdd'); ?>" method="post">
     <dl id="tabs-1">
         <dt id="name-label">
             <label for="infos-name" class="optional"><?php echo $this->escape($this->translator('Name')); ?></label>
@@ -37,7 +36,7 @@
         <dd id="default_view_id-element">
             <select name="views[default_view]" id="views-default_view">
                 <option value=""><?php echo $this->escape($this->translator('-- Select --')); ?></option>
-                <?php foreach($this->views as $view_id => $view_name): ?>
+                <?php foreach($views as $view_id => $view_name): ?>
                     <option value="<?php echo $view_id; ?>"><?php echo $this->escape($view_name); ?> </option>
                 <?php endforeach; ?>
             </select>
@@ -47,7 +46,7 @@
         </dt>
         <dd id="all_views-element">
             <select name="views[available_views]" id="views-available_views" multiple="multiple">
-                <?php foreach($this->views as $view_id => $view_name): ?>
+                <?php foreach($views as $view_id => $view_name): ?>
                     <option value="<?php echo $view_id; ?>"><?php echo $this->escape($view_name); ?> </option>
                 <?php endforeach; ?>
             </select>
@@ -87,7 +86,7 @@
         <dd id="datatype-element">
             <select name="properties[datatype]" id="properties-datatype" class="select-datatype">
                 <option value=""><?php echo $this->escape($this->translator('-- Select --')); ?></option>
-                <?php foreach($this->datatypes as $datatype_id => $datatype_name): ?>
+                <?php foreach($datatypes as $datatype_id => $datatype_name): ?>
                     <option value="<?php echo $datatype_id; ?>"><?php echo $this->escape($datatype_name); ?> </option>
                 <?php endforeach; ?>
             </select>

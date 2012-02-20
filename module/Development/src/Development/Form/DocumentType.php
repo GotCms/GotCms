@@ -63,7 +63,7 @@ class DocumentType extends AbstractForm
         $this->getTabs();
 
         $this->setAttrib('id', 'development-form');
-        $this->addDecorator('ViewScript', array('viewScript' => 'forms/document-type.phtml'));
+        $this->addDecorator('ViewScript', array('viewScript' => 'development-forms/document-type.phtml'));
 
         $collection = new Datatype\Collection();
         $datatypes = $collection->getSelect();

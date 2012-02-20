@@ -12,11 +12,11 @@ class DocumentTypeController extends Action
 
     public function init()
     {
-        $contextSwitch = $this->_helper->getHelper('contextSwitch');
+        /*$contextSwitch = $this->_helper->getHelper('contextSwitch');
         $contextSwitch->addActionContext('add-tab', 'json')
             ->addActionContext('add-property', 'json')
             ->setAutoJsonSerialization(true)
-            ->initContext();
+            ->initContext();*/
     }
 
     public function indexAction()
@@ -27,13 +27,15 @@ class DocumentTypeController extends Action
     public function addAction()
     {
         $form = new DocumentTypeForm();
+        $form->setView($this->getLocator()->get('view'));
         $request = $this->getRequest();
+        $session = $this->getSession()->toArray();
 
         if($request->isPost())
         {
-            if(Zend_Session::namespaceIsset('documentType'))
+            if(!empty($session['document-type']))
             {
-                $form->setValueFromSession(Zend_Session::namespaceGet('documentType'));
+                $form->setValueFromSession($session['document-type']);
             }
 
             if($form->isValid($this->getRequest()->post()->toArray()))
@@ -80,7 +82,7 @@ class DocumentTypeController extends Action
                     }
 
                     $properties = array();
-                    $properties_values = $this->getRequest()->getPost('properties');
+                    $properties_values = $this->getRequest()->post()->get('properties');
 
                     foreach($properties_values as $property_name => $property_value)
                     {
@@ -130,9 +132,9 @@ class DocumentTypeController extends Action
             }
         }
 
-        if(Zend_Session::namespaceIsset('documentType'))
+        if(!empty($session['document-type']))
         {
-            Zend_Session::namespaceUnset('documentType');
+            $session->clear('document-type');
         }
 
 
@@ -166,10 +168,10 @@ class DocumentTypeController extends Action
         if($this->getRequest()->isPost())
         {
             $session = new Zend_Session_Namespace('documentType');
-            $name = $this->getRequest()->getPost('name');
-            $description = $this->getRequest()->getPost('description');
+            $name = $this->getRequest()->post()->get('name');
+            $description = $this->getRequest()->post()->get('description');
 
-            $tabs = empty($session->tabs) ? array() : $session->tabs;
+            $tabs = empty($session['document-type']['tabs']) ? array() : $session['document-type']['tabs'];
             $last_element = end($tabs);
             if(empty($last_element))
             {
@@ -192,7 +194,7 @@ class DocumentTypeController extends Action
 
             $current_id = $last_id + 1;
             $tabs[$current_id] = array('name' => $name, 'description' => $description);
-            $session->tabs = $tabs;
+            $session['document-type']['tabs'] = $tabs;
 
             return $this->_helper->json(array(
                 'success' => TRUE
@@ -209,14 +211,19 @@ class DocumentTypeController extends Action
     {
         if($this->getRequest()->isPost())
         {
-            $session = new Zend_Session_Namespace('documentType');
-            $id = $this->getRequest()->getPost('tab');
-            $description = $this->getRequest()->getPost('description');
+            $session = $this->getSession();
+            if(empty($session['document-type']))
+            {
+                $session['document-type'] = array();
+            }
 
-            $tabs = empty($session->tabs) ? array() : $session->tabs;
+            $id = $this->getRequest()->post()->get('tab');
+            $description = $this->getRequest()->post()->get('description');
+
+            $tabs = empty($session['document-type']) ? array() : $session['document-type']['tabs'];
             if(array_key_exists($id, $tabs))
             {
-                unset($session->tabs[$id]);
+                unset($session['document-type']['tabs'][$id]);
                 return $this->_helper->json(array('success' => TRUE, 'message' => 'Tab successfullty deleted'));
 
             }
@@ -229,23 +236,24 @@ class DocumentTypeController extends Action
     {
         if($this->getRequest()->isPost())
         {
-            $session = new Zend_Session_Namespace('documentType');
-            $name = $this->getRequest()->getPost('name');
-            $identifier = $this->getRequest()->getPost('identifier');
-            $tab_id = $this->getRequest()->getPost('tab');
-            $description = $this->getRequest()->getPost('description');
-            $is_required = $this->getRequest()->getPost('is_required');
-            $datatype_id = $this->getRequest()->getPost('datatype');
+            $session = $this->getSession();
 
-            $tabs = $session->tabs;
+            $name = $this->getRequest()->post()->get('name');
+            $identifier = $this->getRequest()->post()->get('identifier');
+            $tab_id = $this->getRequest()->post()->get('tab');
+            $description = $this->getRequest()->post()->get('description');
+            $is_required = $this->getRequest()->post()->get('is_required');
+            $datatype_id = $this->getRequest()->post()->get('datatype');
 
-            if(empty($session->tabs[$tab_id]))
+            $tabs = $session['document-type']['tabs'];
+
+            if(empty($session['document-type']['tabs'][$tab_id]))
             {
                 $this->_helper->json(array('success' => FALSE, 'message' => 'Tab does not exists'));
                 return;
             }
 
-            $tab = $session->tabs[$tab_id];
+            $tab = $session['document-type']['tabs'][$tab_id];
             if(empty($tab['properties']))
             {
                 $tab['properties'] = array();
@@ -288,7 +296,7 @@ class DocumentTypeController extends Action
                 , 'datatype' => $datatype_id
             );
 
-            $session->tabs[$tab_id]['properties'] = $properties;
+            $session['document-type']['tabs'][$tab_id]['properties'] = $properties;
             $properties[$current_id]['success'] = TRUE;
             $properties[$current_id]['id'] = $current_id;
 
@@ -303,9 +311,10 @@ class DocumentTypeController extends Action
     {
         if($this->getRequest()->isPost())
         {
-            $id = $this->getRequest()->getPost('property');
-            $session = new Zend_Session_Namespace('documentType');
-            foreach($session->tabs as $tab_id => $tab)
+            $id = $this->getRequest()->post()->get('property');
+            $session = $this->getSession();
+
+            foreach($session['document-type']['tabs'] as $tab_id => $tab)
             {
                 if(empty($tab['properties']))
                 {
@@ -314,7 +323,7 @@ class DocumentTypeController extends Action
 
                 if(array_key_exists($id, $tab['properties']))
                 {
-                    unset($session->tabs[$tab_id]['properties'][$id]);
+                    unset($session['document-type']['tabs'][$tab_id]['properties'][$id]);
                     return $this->_helper->json(array('success' => TRUE, 'message' => 'Property successfullty deleted'));
                 }
             }
