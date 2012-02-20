@@ -5,6 +5,7 @@ return array(
         'instance' => array(
             'alias' => array(
                 'admin-index' => 'Admin\Controller\IndexController',
+                'admin-user' => 'Admin\Controller\UserController',
             ),
             'Zend\View\PhpRenderer' => array(
                 'parameters' => array(

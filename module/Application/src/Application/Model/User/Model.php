@@ -3,7 +3,9 @@
 namespace Application\Model\User;
 
 use Es\Db\AbstractTable,
-    Es\Component\IterableInterface;
+    Es\Component\IterableInterface,
+    Zend\Authentication\Adapter,
+    Zend\Authentication\AuthenticationService;
 
 class Model extends AbstractTable implements IterableInterface
 {
@@ -11,16 +13,15 @@ class Model extends AbstractTable implements IterableInterface
 
     public function authenticate($email, $password)
     {
-        $authAdapter = new Zend_Auth_Adapter_DbTable($this->getAdapter());
+        $authAdapter = new Adapter\DbTable($this->getAdapter());
         $authAdapter->setTableName($this->_name);
         $authAdapter->setIdentityColumn('email');
         $authAdapter->setCredentialColumn('password');
 
         $authAdapter->setIdentity($email);
-        //@TODO password with sha1
         $authAdapter->setCredential($password);
 
-        $auth = Zend_Auth::getInstance();
+        $auth = new AuthenticationService();
         $result = $auth->authenticate($authAdapter);
 
         if($result->isValid())
@@ -28,11 +29,7 @@ class Model extends AbstractTable implements IterableInterface
             $data = $authAdapter->getResultRowObject(null, 'password');
             $auth->getStorage()->write($data);
 
-            $storage = $auth->getStorage();
-            $storage->write($authAdapter->getResultRowObject(array('id')));
-            $storage->write($authAdapter->getResultRowObject(null, 'password'));
-
-            self::fromArray($data);
+            $this->setData((array)$data);
             return TRUE;
         }
 
@@ -40,17 +37,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param integer $defaultId
-    */
-    public function __construct($defaultId = -1)
-    {
-        $this->setId($defaultId);
-    }
-
-    /**
     * @param integer $user_id
     */
-    private function setId($user_id)
+    protected function setId($user_id)
     {
         $this->setData('id', (int) $user_id);
     }

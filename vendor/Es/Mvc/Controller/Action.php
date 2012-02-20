@@ -2,13 +2,15 @@
 namespace Es\Mvc\Controller;
 
 use Zend\Mvc\Controller\ActionController,
-    Zend\Session\Storage\SessionStorage,
-    Zend\Mvc\MvcEvent;
+    Zend\Authentication\AuthenticationService,
+    Zend\Mvc\MvcEvent,
+    Zend\Session\Storage\SessionStorage;
 
 class Action extends ActionController
 {
-    protected $_session = NULL;
+    protected $_auth = NULL;
     protected $_routeMatch = NULL;
+    protected $_session = NULL;
 
     public function execute(MvcEvent $e)
     {
@@ -17,7 +19,14 @@ class Action extends ActionController
         return parent::execute($e);
     }
 
-    public function init(){}
+    public function init()
+    {
+        $auth = $this->getAuth();
+        if(!$auth->hasIdentity() and $this->_routeMatch->getParam('action') != 'login' and $this->_routeMatch->getParam('module') != 'admin-user')
+        {
+            $this->redirect()->toRoute('login');
+        }
+    }
 
     public function getRouteMatch()
     {
@@ -35,10 +44,20 @@ class Action extends ActionController
     {
         if($this->_session === NULL)
         {
-            $this->_session = new SessionStorage();
+            $this->_session = new SessionStorage($this->getAuth()->getStorage());
         }
 
         return $this->_session;
+    }
+
+    protected function getAuth()
+    {
+        if($this->_auth === NULL)
+        {
+            $this->_auth = new AuthenticationService();
+        }
+
+        return $this->_auth;
     }
 }
 
