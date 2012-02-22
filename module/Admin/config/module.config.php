@@ -7,7 +7,7 @@ return array(
                 'admin-index' => 'Admin\Controller\IndexController',
                 'admin-user' => 'Admin\Controller\UserController',
             ),
-            'Zend\View\PhpRenderer' => array(
+            'Zend\View\Renderer\PhpRenderer' => array(
                 'parameters' => array(
                     'resolver' => 'Zend\View\TemplatePathStack',
                     'options'  => array(

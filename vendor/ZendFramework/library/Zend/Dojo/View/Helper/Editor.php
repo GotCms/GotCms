@@ -146,7 +146,7 @@ class Editor extends Dijit
         foreach ($plugins as $commandName) {
             if (isset($this->_pluginsModules[$commandName])) {
                 $pluginName = $this->_pluginsModules[$commandName];
-                $modules[] = 'dijit.\Editor.plugins.' . $pluginName;
+                $modules[] = 'dijit._editor.plugins.' . $pluginName;
             }
         }
 
@@ -186,7 +186,7 @@ function() {
     dojo.connect(form, 'submit', function(e) {
         var value = dijit.byId('$editorId').getValue(false);
         if(dojo.isFF) {
-            value = value.replace(/<br _moz\Editor_bogus_node="TRUE" \/>/, '');
+            value = value.replace(/<br _moz_editor_bogus_node="TRUE" \/>/, '');
         }
         dojo.byId('$hiddenId').value = value;
     });

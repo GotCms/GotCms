@@ -44,14 +44,23 @@ class Module implements AutoloaderProvider
             $config = include $this->_getDir() . '/config/module.config.php';
             $routes = new Config\Ini($this->_getDir() . '/config/routes.ini');
             $routes = $routes->get($_SERVER['APPLICATION_ENV'])->toArray();
-            if(empty($config['di']['instance']['Zend\Mvc\Router\RouteStack']))
+            if(empty($config['di']['instance']['Zend\Mvc\Router\SimpleRouteStack']))
             {
-                $config['di']['instance']['Zend\Mvc\Router\RouteStack'] = array('parameters' => array('routes'=> array()));
+                var_dump($config['di']);
+                $config['di']['instance']['Zend\Mvc\Router\SimpleRouteStack'] = array(
+                    'instantiator' => array(
+                        'Zend\Mvc\Router\Http\TreeRouteStack',
+                        'factory'
+                    ),
+                    'parameters' => array(
+                        'routes' => array()
+                    )
+                );
             }
 
             if(!empty($routes['routes']))
             {
-                $config['di']['instance']['Zend\Mvc\Router\RouteStack']['parameters']['routes'] += $routes['routes'];
+                $config['di']['instance']['Zend\Mvc\Router\SimpleRouteStack']['parameters']['routes'] += $routes['routes'];
             }
 
             $this->_config = $config;

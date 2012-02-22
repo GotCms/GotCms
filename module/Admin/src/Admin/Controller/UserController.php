@@ -24,10 +24,8 @@ class UserController extends Action
             {
                 $this->redirect()->toRoute('admin');
             }
-            else
-            {
-                //ERROR
-            }
+
+            $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
         }
 
         return array('form' => $login_form);
