@@ -6,13 +6,10 @@ return array(
             'alias' => array(
                 'config-index' => 'Config\Controller\IndexController',
             ),
-            'Zend\View\PhpRenderer' => array(
+            'Zend\View\Resolver\TemplatePathStack' => array(
                 'parameters' => array(
-                    'resolver' => 'Zend\View\TemplatePathStack',
-                    'options'  => array(
-                        'script_paths' => array(
-                            'config' => __DIR__ . '/../views',
-                        ),
+                    'paths'  => array(
+                        'config' => __DIR__ . '/../views',
                     ),
                 ),
             ),

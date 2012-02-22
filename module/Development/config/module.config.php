@@ -10,13 +10,10 @@ return array(
                 'development-layout' => 'Development\Controller\LayoutController',
                 'development-view' => 'Development\Controller\ViewController',
             ),
-            'Zend\View\PhpRenderer' => array(
+            'Zend\View\Resolver\TemplatePathStack' => array(
                 'parameters' => array(
-                    'resolver' => 'Zend\View\TemplatePathStack',
-                    'options'  => array(
-                        'script_paths' => array(
-                            'development' => __DIR__ . '/../views',
-                        ),
+                    'paths'  => array(
+                        'development' => __DIR__ . '/../views',
                     ),
                 ),
             ),
