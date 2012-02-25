@@ -14,18 +14,20 @@ class Action extends ActionController
 
     public function execute(MvcEvent $e)
     {
-        $this->getRouteMatch();
-        $this->init();
+        $this->initialize();
         return parent::execute($e);
     }
 
-    public function init()
+    public function initialize()
     {
         $auth = $this->getAuth();
-        if(!$auth->hasIdentity() and $this->_routeMatch->getParam('action') != 'login' and $this->_routeMatch->getParam('module') != 'admin-user')
+        $module = $this->getRouteMatch()->getParam('module');
+        if(!$auth->hasIdentity() and $this->_routeMatch->getParam('action') != 'login' and $module != 'admin-user')
         {
             $this->redirect()->toRoute('login');
         }
+
+        $this->layout()->module = $module;
     }
 
     public function getRouteMatch()
@@ -37,8 +39,9 @@ class Action extends ActionController
 
         return $this->_routeMatch;
     }
+
     /**
-    *@return Zend_Session
+    * @return SessionStorage
     */
     protected function getSession()
     {
@@ -50,6 +53,9 @@ class Action extends ActionController
         return $this->_session;
     }
 
+    /**
+    * @return AuthenticationService
+    */
     protected function getAuth()
     {
         if($this->_auth === NULL)

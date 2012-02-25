@@ -4,7 +4,8 @@ namespace Development\Controller;
 
 use Es\Mvc\Controller\Action,
     Development\Form\Datatype as DatatypeForm,
-    Application\Model\Datatype;
+    Application\Model\Datatype,
+    Zend\View\Model\ViewModel;
 
 class DatatypeController extends Action
 {
@@ -52,12 +53,12 @@ class DatatypeController extends Action
         }
 
         return array('form' => $form);
-
     }
 
     public function listAction()
     {
         $datatypes = new Datatype\Collection();
+
         return array('datatypes' => $datatypes->getDatatypes());
     }
 

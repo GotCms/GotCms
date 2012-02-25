@@ -63,52 +63,14 @@ class Module implements AutoloaderProvider
     public function initializeView(Event $e)
     {
         $app          = $e->getParam('application');
+        $basePath     = $app->getRequest()->getBasePath();
         $locator      = $app->getLocator();
-        $config       = $e->getParam('config');
-        $view         = $this->getView($app);
-
         //@TODO change to module.config.php
         Zend\Db\Table\AbstractTable::setDefaultAdapter($locator->get('Zend\Db\Adapter\Pdo\Pgsql'));
-
-        $viewListener = $this->getViewListener($view, $config);
-        $app->events()->attachAggregate($viewListener);
-        $events       = StaticEventManager::getInstance();
-        $viewListener->registerStaticListeners($events, $locator);
-    }
-
-    protected function getViewListener($view, $config)
-    {
-        if ($this->_viewListener instanceof ListenerAggregate) {
-            return $this->_viewListener;
-        }
-
-        $class = $this->_getNamespace().'\View\Listener';
-
-        $viewListener = new $class($view, $config->layout);
-        $viewListener->setDisplayExceptionsFlag($config->display_exceptions);
-
-        $this->_viewListener = $viewListener;
-        return $viewListener;
-    }
-
-    protected function getView($app)
-    {
-        if ($this->_view) {
-            return $this->_view;
-        }
-
-        $locator = $app->getLocator();
-        $view    = $locator->get('view');
-
-        // Set up view helpers
-        $view->plugin('url')->setRouter($app->getRouter());
-        $view->doctype()->setDoctype('HTML5');
-
-        $basePath = $app->getRequest()->getBasePath();
-        $view->plugin('basePath')->setBasePath($basePath);
-
-        $this->_view = $view;
-        return $view;
+        $renderer     = $locator->get('Zend\View\Renderer\PhpRenderer');
+        $renderer->plugin('url')->setRouter($app->getRouter());
+        $renderer->doctype()->setDoctype('HTML5');
+        $renderer->plugin('basePath')->setBasePath($basePath);
     }
 
     protected function _getDir()
