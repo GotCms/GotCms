@@ -31,7 +31,7 @@ class Model extends AbstractTable implements IterableInterface
     {
         if($this->getData('view') == NULL)
         {
-            $view = Es_Model_DbTable_View_Model::fromId($this->getViewId());
+            $view = Model::fromId($this->getViewId());
             if($view !== NULL)
             {
                 $this->setData('view',$view->getContent());
@@ -59,11 +59,11 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
     * @param array $values
-    * @return Es_Model_DbTable_Document_Model
+    * @return Model
     */
     static function fromArray(array $array)
     {
-        $document = new Es_Model_DbTable_Document_Model();
+        $document = new Model();
         $document->setData($array);
 
         return $document;
@@ -71,17 +71,17 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
     * @param array $document_id
-    * @return Es_Model_DbTable_Document_Model | FALSE
+    * @return Model | FALSE
     */
     static function fromId($document_id)
     {
-        $document = new Es_Model_DbTable_Document_Model();
+        $document = new Model();
         $select = $document->select()
             ->where('id = ?', (int)$document_id);
         $document = $document->fetchRow($select);
         if(!empty($document))
         {
-            return self::fromArray($document->toArray());
+            return $document->setData($document->toArray());
         }
         else
         {
@@ -105,17 +105,17 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
     * @param array $urlKey
-    * @return Es_Model_DbTable_Document_Model | FALSE
+    * @return Model | FALSE
     */
     static function fromUrlKey($urlKey)
     {
-        $document = new Es_Model_DbTable_Document_Model();
+        $document = new Model();
         $select = $document->select()
             ->where('url_key = ?', $urlKey);
         $document = $document->fetchRow($select);
         if(!empty($document))
         {
-            return self::fromArray($document->toArray());
+            return Model::fromArray($document->toArray());
         }
         else
         {
@@ -225,7 +225,7 @@ class Model extends AbstractTable implements IterableInterface
     {
         if($this->getData('children') === NULL)
         {
-            $children = new Es_Model_DbTable_Document_Collection();
+            $children = new Collection();
             $children->load($this->getId());
             $this->setData('children', $children->getChildren());
         }

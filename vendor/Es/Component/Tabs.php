@@ -1,9 +1,11 @@
 <?php
 /**
- * @author Rambaud Pierre
+ * @author Pierre RAMBAUD
  *
  */
-class Es_Component_Tabs
+namespace Es\Component;
+
+class Tabs
 {
     private $_data;
 

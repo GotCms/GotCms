@@ -11,7 +11,7 @@ class Collection extends AbstractTable implements IterableInterface
 
     public function load($parent_id = NULL)
     {
-        if(!is_null($parent_id))
+        if($parent_id !== NULL)
         {
             $this->setData('parent_id', $parent_id);
             $this->setDocuments();
@@ -37,7 +37,7 @@ class Collection extends AbstractTable implements IterableInterface
         foreach($rows as $row)
         {
 
-            $documents[] = Es_Model_DbTable_Document_Model::fromArray($row->toArray());
+            $documents[] = Model::fromArray($row->toArray());
         }
 
         $this->setData('documents', $documents);

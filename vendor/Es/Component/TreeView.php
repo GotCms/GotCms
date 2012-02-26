@@ -3,7 +3,9 @@
  * @author Pierre RAMBAUD
  *
  */
-class Es_Component_TreeView
+namespace Es\Component;
+
+class TreeView
 {
     protected $_data;
 

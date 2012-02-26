@@ -14,11 +14,14 @@ class Action extends ActionController
 
     public function execute(MvcEvent $e)
     {
-        $this->initialize();
+        $this->_construct();
+        $this->init();
         return parent::execute($e);
     }
 
-    public function initialize()
+    public function init(){}
+
+    protected function _construct()
     {
         $auth = $this->getAuth();
         $module = $this->getRouteMatch()->getParam('module');
@@ -66,4 +69,3 @@ class Action extends ActionController
         return $this->_auth;
     }
 }
-

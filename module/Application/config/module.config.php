@@ -20,6 +20,24 @@ return array(
                 'error' => 'Application\Controller\ErrorController',
                 'view'  => 'Zend\View\Renderer\PhpRenderer',
             ),
+
+           'Zend\Db\Adapter\Pdo\Pgsql' => array(
+                'parameters' => array(
+                    'config' => array(
+                        'host' => 'localhost',
+                        'username' => 'got',
+                        'password' => 'x8maoxfp',
+                        'dbname' => 'escms',
+                    ),
+                ),
+            ),
+            'Zend\View\HelperLoader' => array(
+                'parameters' => array(
+                    'map' => array(
+                        'JsQuoteEscape' => 'Es\View\Helper\JsQuoteEscape'
+                    )
+                ),
+            ),
             // Inject the plugin broker for controller plugins into
             // the action controller for use by all controllers that
             // extend it.
@@ -65,16 +83,6 @@ return array(
             'Zend\Mvc\View\RouteNotFoundStrategy' => array(
                 'parameters' => array(
                     'notFoundTemplate' => 'error/404',
-                ),
-            ),
-           'Zend\Db\Adapter\Pdo\Pgsql' => array(
-                'parameters' => array(
-                    'config' => array(
-                        'host' => 'localhost',
-                        'username' => 'got',
-                        'password' => 'x8maoxfp',
-                        'dbname' => 'escms',
-                    ),
                 ),
             ),
         ),

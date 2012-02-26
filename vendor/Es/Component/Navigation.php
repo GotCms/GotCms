@@ -1,5 +1,11 @@
 <?php
-class Es_Component_Navigation
+/**
+ * @author Pierre RAMBAUD
+ *
+ */
+namespace Es\Component;
+
+class Navigation
 {
     const XML_NAV_HEADER = '<?xml version="1.0" encoding="UTF-8"?><configdata><nav>';
     const XML_NAV_FOOTER = '</nav></configdata>';
