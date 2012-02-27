@@ -1,7 +1,7 @@
 <?php
 namespace Datatypes\Textarea;
 
-use Application\Model\Datatype\AbstractDatatype,
+use Application\Model\Datatype\AbstractDatatype as AbstractDatatype,
     Zend\Form\Element;
 
 class PrevalueEditor extends AbstractDatatype\PrevalueEditor

@@ -1,7 +1,7 @@
 <?php
 namespace Datatypes\RadioButtonList;
 
-use Application\Model\Datatype\AbstractDatatype
+use Application\Model\Datatype\AbstractDatatype as AbstractDatatype
     , Application\Model\Property\Model as PropertyModel;
 
 class Datatype extends AbstractDatatype

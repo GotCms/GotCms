@@ -31,7 +31,7 @@ class Collection extends AbstractTable
             $tabs = array();
             foreach($rows as $value)
             {
-                $tabs[] = Es_Model_DbTable_Tab_Model::fromArray($value->toArray());
+                $tabs[] = Model::fromArray($value->toArray());
             }
 
             $this->setData('tabs', $tabs);
@@ -45,7 +45,7 @@ class Collection extends AbstractTable
         $array = array();
         foreach($tabs as $tab)
         {
-            $array[] = Es_Model_DbTable_Tab_Model::fromArray($tab);
+            $array[] = Model::fromArray($tab);
         }
 
         $this->setData('tabs', $array);
@@ -54,7 +54,7 @@ class Collection extends AbstractTable
     public function addTab(Array $tab)
     {
         $tabs = $this->getTabs();
-        $tabs[] = Es_Model_DbTable_Tab_Model::fromArray($tab);
+        $tabs[] = Model::fromArray($tab);
 
         $this->setData('tabs', $tabs);
     }

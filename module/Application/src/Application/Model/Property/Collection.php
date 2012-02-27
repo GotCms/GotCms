@@ -50,7 +50,7 @@ class Collection extends AbstractTable
             $properties = array();
             foreach($rows as $row)
             {
-                $properties[] = Es_Model_DbTable_Property_Model::fromArray($row);
+                $properties[] = Model::fromArray($row);
             }
 
             $this->setData('properties', $properties);
@@ -70,7 +70,7 @@ class Collection extends AbstractTable
         $array = array();
         foreach($properties as $property)
         {
-            $array[] = Es_Model_DbTable_Property_Model::fromArray($property);
+            $array[] = Model::fromArray($property);
         }
 
         $this->setData('properties', $array);

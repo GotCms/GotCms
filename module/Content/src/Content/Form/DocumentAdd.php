@@ -1,10 +1,10 @@
 <?php
-namespace Development\Form;
+namespace Content\Form;
 
 use Application\Model\Document,
+    Application\Model\DocumentType,
     Application\Model\View,
     Es\Form\AbstractForm,
-    Es\Validator,
     Zend\Validator,
     Zend\Form\Element;
 
@@ -30,12 +30,12 @@ class DocumentAdd extends AbstractForm
             ->addValidator(new Validator\NotEmpty())
             ->addValidator(new Validator\Db\NoRecordExists(array('table' => 'documents', 'field' => 'url_key')));
 
-        $document_type_collection = new Es_Model_DbTable_DocumentType_Collection();
+        $document_type_collection = new DocumentType\Collection();
         $document_type = new Element\Select('document_type');
         $document_type->addMultiOption('', 'Select document type');
         $document_type->addMultiOptions($document_type_collection->getSelect());
 
-        $submit = new Zend_Form_Element_Submit('submit');
+        $submit = new Element\Submit('submit');
         $submit->setAttrib('class', 'input-submit')
             ->setLabel('Create');
 
@@ -58,7 +58,7 @@ class DocumentAdd extends AbstractForm
 
         $this->addElement($show_in_nav);
 
-        $views_collection = new Es_Model_DbTable_View_Collection();
+        $views_collection = new View\Collection();
         $view = new Element\Select('view');
         $view->addMultiOptions($views_collection->getSelect());
         $view->setValue($document->getViewId());
@@ -66,7 +66,7 @@ class DocumentAdd extends AbstractForm
 
         $this->addElement($view);
 
-        $layouts_collection = new Es_Model_DbTable_View_Collection();
+        $layouts_collection = new View\Collection();
         $layout = new Element\Select('layout');
         $layout->addMultiOptions($layouts_collection->getSelect());
         $layout->setValue($document->getViewId());

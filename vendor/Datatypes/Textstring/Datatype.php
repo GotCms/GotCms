@@ -1,8 +1,8 @@
 <?php
 namespace Datatypes\Textstring;
 
-use Application\Model\Datatype\AbstractDatatype
-    , Application\Model\Property\Model as PropertyModel;
+use Application\Model\Datatype\AbstractDatatype as AbstractDatatype,
+    Application\Model\Property\Model as PropertyModel;
 
 class Datatype extends AbstractDatatype
 {

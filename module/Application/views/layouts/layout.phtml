@@ -37,7 +37,7 @@
         jQuery(document).ready(function()
         {
             <?php if(!empty($this->layout()->routes)): ?>
-                ES.getInstance().setOption('routes', <?php echo $this->jsQuoteEscape($this->layout()->routes); ?>);
+                ES.getInstance().setOption('routes', <?php echo $this->jsQuoteEscape($this->raw('routes')); ?>);
                 ES.getInstance().initDocumentMenu();
             <?php endif; ?>
         });
@@ -75,7 +75,7 @@
 
         <div id="menu">
             <?php if($this->raw('module') !== NULL): ?>
-                <?php echo $this->partial($this->raw('module') . '-menu.phtml', array('treeview' => $this->layout()->treeview)); ?>
+                <?php echo $this->partial($this->raw('module') . '-menu.phtml', array('treeview' => $this->vars()->getRawValue('treeview'))); ?>
             <?php endif; ?>
         </div>
 
@@ -101,5 +101,13 @@
             <li class="quit separator"><a href="#quit"><?php echo $this->escape($this->translator('Quit')); ?></a></li>
         </ul>
     <?php endif; ?>
+
+    <div id="dialog" title="" style="display:none">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;">&nbsp;</span>
+            These items will be permanently deleted and cannot be recovered. Are you sure?
+        </p>
+    </div>
+</div>
 </body>
 </html>

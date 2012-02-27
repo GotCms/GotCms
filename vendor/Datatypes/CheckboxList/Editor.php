@@ -3,7 +3,7 @@ namespace Datatypes\CheckboxList;
 
 use Application\Model\Datatype;
 
-class Editor extends AbstractDatatpye\Editor
+class Editor extends AbstractEditor
 {
 
     public function save()

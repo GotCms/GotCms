@@ -3,7 +3,8 @@
 namespace Application\Model\DocumentType;
 
 use Es\Db\AbstractTable,
-    Es\Component\IterableInterface;
+    Es\Component\IterableInterface,
+    Application\Model\Tab;
 
 class Model extends AbstractTable implements IterableInterface
 {
@@ -38,7 +39,7 @@ class Model extends AbstractTable implements IterableInterface
     {
         if($this->getData('tabs') === NULL )
         {
-            $tabs_collection = new Es_Model_DbTable_Tab_Collection();
+            $tabs_collection = new Tab\Collection();
             $tabs_collection->load($this->getId());
 
             $this->setData('tabs', $tabs_collection->getTabs());
@@ -122,7 +123,7 @@ class Model extends AbstractTable implements IterableInterface
         $document_type_table = new Model();
         $document_type_table->setData($array);
 
-        return $dt;
+        return $document_type_table;
     }
 
     /**

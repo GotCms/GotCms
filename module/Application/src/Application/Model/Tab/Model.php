@@ -9,7 +9,7 @@ class Model extends AbstractTable
     protected $_name = 'tabs';
 
     /**
-    * @return FALSE|Es_Model_DbTable_Tab_Model
+    * @return FALSE|Model
     */
     public function load($tab_id = NULL, $document_type_id = NULL)
     {
@@ -107,11 +107,11 @@ class Model extends AbstractTable
 
     /**
     * @param array $array
-    * @return Es_Model_DbTable_Tab_Model
+    * @return Model
     */
     static function fromArray(Array $array)
     {
-        $tab_table = new Es_Model_DbTable_Tab_Model();
+        $tab_table = new Model();
         $tab_table->setData($array);
 
         return $tab_table;
@@ -119,11 +119,11 @@ class Model extends AbstractTable
 
     /**
     * @param integer $id
-    * @return Es_Model_DbTable_Tab_Model
+    * @return Model
     */
     static function fromId($id)
     {
-        $tab_table = new Es_Model_DbTable_Tab_Model();
+        $tab_table = new Model();
         $select = $tab_table->select()
             ->where('id = ?', $id);
         $row = $tab_table->fetchRow($select);

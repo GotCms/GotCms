@@ -61,7 +61,7 @@ class Model extends AbstractTable
 
     public function loadValue()
     {
-        $property_value = new Property\Value\Model();
+        $property_value = new Value\Model();
         $property_value->load(NULL, $this->getDocumentId(), $this->getId());
 
         $this->_value = $property_value;

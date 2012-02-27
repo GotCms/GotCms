@@ -1,10 +1,10 @@
 <?php
 namespace Datatypes\ImageList;
 
-use Application\Model\Datatype,
+use Application\Model\Datatype\AbstractDatatype\AbstractEditor,
     Zend\Form\Element;
 
-class Editor extends AbstractDatatpye\Editor
+class Editor extends AbstractEditor
 {
 
     public function save() {

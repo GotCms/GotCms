@@ -1,10 +1,10 @@
 <?php
 namespace Datatypes\Textrich;
 
-use Application\Model\Datatype,
+use Application\Model\Datatype\AbstractDatatype\AbstractEditor,
     Zend\Form\Element;
 
-class Editor extends AbstractDatatpye\Editor
+class Editor extends AbstractEditor
 {
     public function save($request = null) {
         $value = $request->getParam('textrich'.$this->_property->getId());

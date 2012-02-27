@@ -18,7 +18,8 @@ class DocumentController extends Action
     {
         $documents = new DocumentCollection();
         $documents->load(0);
-        $this->layout()->treeview = Component\TreeView::render(array($documents));
+
+        $this->layout()->setVariable('treeview',  Component\TreeView::render(array($documents)));
 
         $routes = array(
             'edit' => 'documentEdit'
@@ -32,7 +33,7 @@ class DocumentController extends Action
         $array_routes = array();
         foreach($routes as $key => $route)
         {
-            $array_routes[$key] = $this->url($route, array('id' => ':itemId'));
+            $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
         }
 
         $this->layout()->routes = Json::encode($array_routes);
@@ -46,13 +47,13 @@ class DocumentController extends Action
     public function addAction()
     {
         $document_form = new Form\DocumentAdd();
-        $document_form->setAction($this->getFrontController()->getRouter()->assemble(array(), 'documentAdd'));
+        $document_form->setAction($this->url()->fromRoute('documentAdd'));
 
         if($this->getRequest()->isPost())
         {
-            if(!$document_form->isValid($this->getRequest()->getPost()))
+            if(!$document_form->isValid($this->getRequest()->post()))
             {
-                $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Invalid document data');
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid document data');
             }
             else
             {
@@ -69,26 +70,25 @@ class DocumentController extends Action
                 $document_id = $document->save();
                 if(empty($document_id))
                 {
-                    $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Can not add document');
+                    $this->flashMessenger()->setNameSpace('error')->addMessage('Can not add document');
                 }
                 else
                 {
-                    $this->_helper->flashMessenger->setNameSpace('success')->addMessage('Document successfuly add');
-                    $this->_helper->redirector->goToRoute(array('id' => $document_id), 'documentEdit');
+                    $this->flashMessenger()->setNameSpace('success')->addMessage('Document successfuly add');
+                    $this->redirect()->toRoute('documentEdit', array('id' => $document_id));
                 }
             }
         }
 
-        $this->view->form = $document_form;
-
+        return array('form' => $document_form);
     }
 
     public function deleteAction()
     {
-        $document = DocumentModel::fromId($this->getRequest()->getParam('id', ''));
+        $document = DocumentModel::fromId($this->getRouteMatch()->getParam('id', ''));
         if(empty($document))
         {
-            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Document does not exists !');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Document does not exists !');
         }
         else
         {
@@ -96,11 +96,11 @@ class DocumentController extends Action
             {
                 if($document->delete())
                 {
-                    $this->_helper->flashMessenger->setNameSpace('success')->addMessage('This document was succefully delete');
+                    $this->flashMessenger()->setNameSpace('success')->addMessage('This document was succefully delete');
                 }
                 else
                 {
-                    $this->_helper->flashMessenger->setNameSpace('success')->addMessage('There were problems during the removal of this document');
+                    $this->flashMessenger()->setNameSpace('success')->addMessage('There were problems during the removal of this document');
                 }
             }
             catch (Exception $e)
@@ -109,26 +109,26 @@ class DocumentController extends Action
             }
         }
 
-        return $this->_helper->redirector->goToRoute(array(), 'conent');
+        return $this->redirect()->toRoute('content');
     }
 
     public function editAction()
     {
-        $document = DocumentModel::fromId($this->getRequest()->getParam('id', ''));
-        $document_form = new Zend_Form();
+        $document = DocumentModel::fromId($this->getRouteMatch()->getParam('id', ''));
+        $document_form = new \Zend\Form\Form();
         if(empty($document))
         {
-            $this->_helper->flashMessenger->setNameSpace('error')->addMessage('Document does not exists !');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Document does not exists !');
         }
         else
         {
             $document_type_id = $document->getDocumentTypeId();
-            $layout_id = $this->getRequest()->getParam('layout_id', '');
+            $layout_id = $this->getRouteMatch()->getParam('layout_id', '');
 
             if($this->getRequest()->isPost())
             {
                 $has_error = FALSE;
-                $document_vars = $this->getRequest()->getPost('document');
+                $document_vars = $this->getRequest()->post()->get('document');
 
                 $document->setName(empty($document_vars['name']) ? $document->getName() : $document_vars['name']);
                 $document->setStatus(empty($document_vars['status']) ? FALSE : $document_vars['status']);
@@ -147,7 +147,7 @@ class DocumentController extends Action
             {
                 $tabs_array[] = $tab->getName();
                 $properties = $this->_loadProperties($document_type_id, $tab->getId(), $document->getId());
-                $sub_form = new Zend_Form_SubForm();
+                $sub_form = new \Zend\Form\SubForm();
                 $sub_form->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$i))));
                 $sub_form->removeDecorator('Fieldset');
                 $sub_form->removeDecorator('DtDdWrapper');
@@ -163,7 +163,7 @@ class DocumentController extends Action
                         }
                     }
 
-                    Es_Form::addContent($sub_form, Datatype\Model::loadEditor($property, $document));
+                    \Es\Form\AbstractForm::addContent($sub_form, Datatype\Model::loadEditor($property, $document));
                 }
 
                 $document_form->addSubForm($sub_form, 'tabs-'.$i, $i);
@@ -172,12 +172,12 @@ class DocumentController extends Action
 
             $tabs_array[] = 'Document information';
 
-            $form_document_add = new Content_Form_DocumentAdd();
+            $form_document_add = new Form\DocumentAdd();
             $form_document_add->load($document, $i);
 
             $document_form->addSubForm($form_document_add, 'tabs-'.$i, $i);
 
-            $submit = new Zend_Form_Element_Submit('submit-form');
+            $submit = new \Zend\Form\Element\Submit('submit-form');
             $submit->setLabel('Save');
             $document_form->addElement($submit);
 
@@ -187,16 +187,16 @@ class DocumentController extends Action
                 {
                     $document->showInNav(FALSE);
                     $document->setStatus(FALSE);
-                    $this->_helper->flashMessenger->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties are required !');
+                    $this->flashMessenger()->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties are required !');
 
                 }
 
                 $document->save();
-                $this->_helper->redirector->goToRoute(array('id' => $document->getId()), 'documentEdit');
+                $this->redirect()->toRoute('documentEdit', array('id' => $document->getId()));
             }
 
-            $this->view->tabs = new Component\Tabs($tabs_array);
-            $this->view->form = $document_form;
+            $tabs = new Component\Tabs($tabs_array);
+            return array('form' => $document_form, 'tabs' => $tabs);
         }
     }
 

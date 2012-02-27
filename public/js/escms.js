@@ -266,6 +266,8 @@ console.log('#properties-required-'+$data.tab+'-'+$data.id);
                     break;
 
                     case 'paste':
+                    break;
+
                     case 'delete':
                         $this.showDialogConfirm('Delete element', $url);
                         return false;
@@ -290,11 +292,12 @@ console.log('#properties-required-'+$data.tab+'-'+$data.id);
             height          : 150,
             modal           : true,
             overlay         :
-                {
-                    backgroundColor: '#000',
-                    opacity: 0.5
-                },
-            buttons         : {
+            {
+                backgroundColor: '#000',
+                opacity: 0.5
+            },
+            buttons         :
+            {
                 'Confirm': function()
                 {
                     document.location.href = $url;
