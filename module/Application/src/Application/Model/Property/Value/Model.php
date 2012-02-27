@@ -30,17 +30,10 @@ class Model extends AbstractTable
     */
     static function fromArray(Array $array)
     {
-        if(!empty($array['id']) and !empty($array['document_id']) and !empty($array['property_id']))
-        {
-            $pv = new Es_Component_Property_Value_Model($array);
-            $pv->setData($array);
-        }
-        else
-        {
-            $pv = NULL;
-        }
+        $property_value_table = new Model($array);
+        $property_value_table->setData($array);
 
-        return $pv;
+        return $property_value_table;
     }
 
     /**
@@ -49,13 +42,13 @@ class Model extends AbstractTable
     */
     static function fromId($property_value_id)
     {
-        $pv = new Es_Component_Property_Value_Model($array);
-        $select = $pv->select();
+        $property_value_table = new Model($array);
+        $select = $property_value_table->select();
         $select->where('id = ?', (int)$property_value_id);
-        $property = $pv->fetchRow($select);
-        if(!empty($property))
+        $row = $property_value_table->fetchRow($select);
+        if(!empty($row))
         {
-            return self::fromArray($property->toArray());
+            return $property_value_table->setData($row->toArray());
         }
         else
         {

@@ -61,7 +61,7 @@ class Model extends AbstractTable
 
     public function loadValue()
     {
-        $property_value = new Es_Model_DbTable_Property_Value_Model();
+        $property_value = new Property\Value\Model();
         $property_value->load(NULL, $this->getDocumentId(), $this->getId());
 
         $this->_value = $property_value;
@@ -156,7 +156,7 @@ class Model extends AbstractTable
     */
     static function fromArray(Array $array)
     {
-        $property = new Es_Model_Dbtable_Property_Model();
+        $property = new Model();
         $property->setData($array);
 
         return $property;
@@ -168,13 +168,13 @@ class Model extends AbstractTable
     */
     static function fromId($id)
     {
-        $property = new Es_Model_Dbtable_Property_Model();
-        $select = $property->select();
+        $property_table = new Model();
+        $select = $property_table->select();
         $select->where('id = ?', (int)$id);
-        $property = $this->fetchRow($select);
-        if(!empty($property))
+        $row = $property_table->fetchRow($select);
+        if(!empty($row))
         {
-            return self::fromArray($property);
+            return $property_table->setData($row);
         }
         else
         {

@@ -119,25 +119,25 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function fromArray(Array $array)
     {
-        $dt = new Model();
-        $dt->setData($array);
+        $document_type_table = new Model();
+        $document_type_table->setData($array);
 
         return $dt;
     }
 
     /**
-    * @param integer $documentType_id
+    * @param integer $document_type_id
     * @return Es_DocumentType_Model
     */
-    static function fromId($documentType_id)
+    static function fromId($document_type_id)
     {
-        $dt = new Model();
-        $select = $dt->select()
-            ->where('id = ?', (int)$documentType_id);
-        $documentType = $dt->fetchRow($select);
-        if(!empty($documentType))
+        $document_type_table = new Model();
+        $select = $document_type_table->select()
+            ->where('id = ?', (int)$document_type_id);
+        $row = $document_type_table->fetchRow($select);
+        if(!empty($row))
         {
-            return self::fromArray($documentType->toArray());
+            return $document_type_table->setData($row->toArray());
         }
         else
         {

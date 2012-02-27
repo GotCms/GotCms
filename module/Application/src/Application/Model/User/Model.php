@@ -143,13 +143,8 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function fromArray(Array $array)
     {
-        $u = new Es_Model_DbTable_User_Model($array['id']);
-        $u->setFirstName($array['firstname']);
-        $u->setLastName($array['lastname']);
-        $u->setEmail($array['email']);
-        $u->setDateCreated($array['date_created']);
-        $u->setPassword($array['password'], FALSE);
-        $u->setUserTypeId($array['user_type_id']);
+        $user_table = new Model();
+        $user_table->setData($array);
 
         return $u;
     }
@@ -160,12 +155,13 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function fromId($id)
     {
-        $select = $this->select()
+        $user_table = new Model();
+        $select = $user_table->select()
             ->where('id = ?', $id);
-        $user = $this->fetchRow($select);
-        if(!empty($user))
+        $row = $user_table->fetchRow($select);
+        if(!empty($row))
         {
-            return self::fromArray($user);
+            return $user_table->setData($row->toArray());
         }
         else
         {

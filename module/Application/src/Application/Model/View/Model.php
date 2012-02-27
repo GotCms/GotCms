@@ -23,16 +23,10 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function fromArray(Array $array)
     {
-        $view = new Model();
-        $view->init($array['id']);
-        $view->setName($array['name']);
-        $view->setIdentifier($array['identifier']);
-        $view->setDescription($array['description']);
-        $view->setContent($array['content']);
-        $view->setCreatedAt($array['created_at']);
-        $view->setUpdatedAt($array['updated_at']);
+        $view_table = new Model();
+        $view_table->setData($array);
 
-        return $view;
+        return $view_table;
     }
 
     /**
@@ -44,10 +38,10 @@ class Model extends AbstractTable implements IterableInterface
         $view_table = new Model();
         $select = $view_table->select()
             ->where('id = ?', $id);
-        $view = $view_table->fetchRow($select);
-        if(!empty($view))
+        $row = $view_table->fetchRow($select);
+        if(!empty($row))
         {
-            return self::fromArray($view->toArray());
+            return $view_table->setData($row->toArray());
         }
         else
         {

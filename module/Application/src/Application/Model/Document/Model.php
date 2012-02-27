@@ -63,10 +63,10 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function fromArray(array $array)
     {
-        $document = new Model();
-        $document->setData($array);
+        $document_table = new Model();
+        $document_table->setData($array);
 
-        return $document;
+        return $document_table;
     }
 
     /**
@@ -75,13 +75,13 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function fromId($document_id)
     {
-        $document = new Model();
-        $select = $document->select()
+        $document_table = new Model();
+        $select = $document_table->select()
             ->where('id = ?', (int)$document_id);
-        $document = $document->fetchRow($select);
-        if(!empty($document))
+        $row = $document_table->fetchRow($select);
+        if(!empty($row))
         {
-            return $document->setData($document->toArray());
+            return $document_table->setData($row->toArray());
         }
         else
         {
@@ -112,10 +112,10 @@ class Model extends AbstractTable implements IterableInterface
         $document = new Model();
         $select = $document->select()
             ->where('url_key = ?', $urlKey);
-        $document = $document->fetchRow($select);
-        if(!empty($document))
+        $row = $document->fetchRow($select);
+        if(!empty($row))
         {
-            return Model::fromArray($document->toArray());
+            return $document->setData($row->toArray());
         }
         else
         {

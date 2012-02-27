@@ -26,14 +26,8 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function fromArray(Array $array)
     {
-        $layout = new Model();
-        $layout->init($array['id']);
-        $layout->setName($array['name']);
-        $layout->setIdentifier($array['identifier']);
-        $layout->setDescription($array['description']);
-        $layout->setContent($array['content']);
-        $layout->setCreatedAt($array['created_at']);
-        $layout->setUpdatedAt($array['updated_at']);
+        $layout_table = new Model();
+        $layout->setData($array);
 
         return $layout;
     }
@@ -46,12 +40,12 @@ class Model extends AbstractTable implements IterableInterface
     static function fromId($id)
     {
         $layout_table = new Model();
-        $select = $layout_table->select();
-        $select->where('id = ?', $id);
-        $layout = $layout_table->fetchRow($select);
-        if(!empty($layout))
+        $select = $layout_table->select()
+                ->where('id = ?', $id);
+        $row = $layout_table->fetchRow($select);
+        if(!empty($row))
         {
-            return self::fromArray($layout->toArray());
+            return $row->setData($row->toArray());
         }
         else
         {

@@ -111,10 +111,10 @@ class Model extends AbstractTable
     */
     static function fromArray(Array $array)
     {
-        $tab = new Es_Model_DbTable_Tab_Model();
-        $tab->setData($array);
+        $tab_table = new Es_Model_DbTable_Tab_Model();
+        $tab_table->setData($array);
 
-        return $tab;
+        return $tab_table;
     }
 
     /**
@@ -126,10 +126,10 @@ class Model extends AbstractTable
         $tab_table = new Es_Model_DbTable_Tab_Model();
         $select = $tab_table->select()
             ->where('id = ?', $id);
-        $tab = $tab_table->fetchRow($select);
-        if(!empty($tab))
+        $row = $tab_table->fetchRow($select);
+        if(!empty($row))
         {
-            return self::fromArray($tab->toArray());
+            return $tab_table->setData($row->toArray());
         }
         else
         {

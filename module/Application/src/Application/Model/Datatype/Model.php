@@ -36,9 +36,10 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function fromArray(Array $array)
     {
-        $datatype = new Model();
-        $datatype->setData($array);
-        return $datatype;
+        $datatype_table = new Model();
+        $datatype_table->setData($array);
+
+        return $datatype_table;
     }
 
     /**
@@ -47,14 +48,14 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function fromId($datatype_id)
     {
-        $datatype = new Model();
-        $select = $datatype->select()
+        $datatype_table = new Model();
+        $select = $datatype_table->select()
             ->where('id = ?', $datatype_id);
 
-        $datatype = $datatype->fetchRow($select);
-        if(!empty($datatype))
+        $row = $datatype_table->fetchRow($select);
+        if(!empty($row))
         {
-            return self::fromArray($datatype->toArray());
+            return $datatype_table->setData($row->toArray());
         }
         else
         {
