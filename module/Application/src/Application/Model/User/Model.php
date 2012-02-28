@@ -198,7 +198,7 @@ class Model extends AbstractTable implements IterableInterface
     */
     public function getId()
     {
-        return $this->_id;
+        return $this->getData('id');
     }
 
     /* (non-PHPdoc)

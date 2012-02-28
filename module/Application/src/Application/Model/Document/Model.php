@@ -97,7 +97,7 @@ class Model extends AbstractTable implements IterableInterface
         $user_id = $this->getData('user_id');
         if(empty($user_id))
         {
-            $this->setData('user_id', Zend_Registry::get('user_id'));
+            $this->setData('user_id', \Zend\Registry::get('user')->getId());
         }
 
         return $this->getData('user_id');

@@ -51,7 +51,7 @@ class DocumentController extends Action
 
         if($this->getRequest()->isPost())
         {
-            if(!$document_form->isValid($this->getRequest()->post()))
+            if(!$document_form->isValid($this->getRequest()->post()->toArray()))
             {
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid document data');
             }
@@ -60,7 +60,7 @@ class DocumentController extends Action
                 $document_name = $document_form->getValue('name');
                 $document_url_key = $document_form->getValue('url_key');
                 $document_type_id = $document_form->getValue('document_type');
-                $parent_id = $this->getRequest()->getPost('parent_id');
+                $parent_id = $this->getRequest()->post()->get('parent_id');
                 $document = new DocumentModel();
                 $document->setName($document_name)
                     ->setDocumentTypeId($document_type_id)

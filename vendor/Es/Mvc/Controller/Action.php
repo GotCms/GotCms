@@ -1,7 +1,8 @@
 <?php
 namespace Es\Mvc\Controller;
 
-use Zend\Mvc\Controller\ActionController,
+use Application\Model\User\Model,
+    Zend\Mvc\Controller\ActionController,
     Zend\Authentication\AuthenticationService,
     Zend\Mvc\MvcEvent,
     Zend\Session\Storage\SessionStorage;
@@ -19,7 +20,10 @@ class Action extends ActionController
         return parent::execute($e);
     }
 
-    public function init(){}
+    public function init()
+    {
+
+    }
 
     protected function _construct()
     {
@@ -29,6 +33,9 @@ class Action extends ActionController
         {
             $this->redirect()->toRoute('login');
         }
+
+        $user = Model::fromId($auth->getIdentity()->id);
+        \Zend\Registry::set('user', $user);
 
         $this->layout()->module = $module;
     }
