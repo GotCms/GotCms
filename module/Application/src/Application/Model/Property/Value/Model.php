@@ -61,7 +61,7 @@ class Model extends AbstractTable
         $array_save = array(
             'value' => $this->getValue()
             , 'document_id' => $this->getDocumentId()
-            , 'property_id' => $this->getpropertyId()
+            , 'property_id' => $this->getPropertyId()
         );
 
         $id = $this->getId();

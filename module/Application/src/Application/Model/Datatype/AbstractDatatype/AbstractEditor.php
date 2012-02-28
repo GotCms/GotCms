@@ -3,7 +3,8 @@
 namespace Application\Model\Datatype\AbstractDatatype;
 
 use Es\Core\Object,
-    Application\Model\Datatype;
+    Application\Model\Datatype,
+    Zend\EventManager\StaticEventManager;
 
 abstract class AbstractEditor extends Object
 {
@@ -13,7 +14,7 @@ abstract class AbstractEditor extends Object
     protected $_datatype;
 
     /**
-    * @var Es_Model_DbTable_Property_Model
+    * @var Application\Model\Property\Model
     */
     protected $_property;
 
@@ -84,7 +85,7 @@ abstract class AbstractEditor extends Object
     }
 
     /**
-    * @return Es_Model_DbTable_Property_Model
+    * @return Application\Model\Property\Model
     */
     public function getProperty()
     {
@@ -92,7 +93,7 @@ abstract class AbstractEditor extends Object
     }
 
     /**
-    * @return Es_Model_DbTable_Property_Model
+    * @return Application\Model\Property\Model
     */
     public function getDatatype()
     {
@@ -104,6 +105,6 @@ abstract class AbstractEditor extends Object
     */
     public function getRequest()
     {
-        return Zend_Controller_Front::getInstance()->getRequest();
+        return $GLOBALS['application']->getRequest();
     }
 }

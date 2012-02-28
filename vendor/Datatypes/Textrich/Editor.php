@@ -6,23 +6,26 @@ use Application\Model\Datatype\AbstractDatatype\AbstractEditor,
 
 class Editor extends AbstractEditor
 {
-    public function save($request = null) {
-        $value = $request->getParam('textrich'.$this->_property->getId());
+    public function save($request = null)
+    {
+        $value = $request->getRequest()->post()->get($this->getName());
         $this->setValue($value);
-        return $this->saveValue();
     }
 
-    public function load() {
+    public function load()
+    {
         $textrich = new Element\Textarea('textrich'.$this->_property->getId());
         $textrich->setLabel($this->_property->getName());
         $textrich->setAttrib('id', 'textrich'.$this->_property->getId());
         $textrich->setValue($this->_property->getValue());
         $textrich->getDecorator('description')->setEscape(false)->setTag(false);
         $script = '';
-        if(!Zend_Registry::isRegistered('textrich')) {
+        if(!Zend_Registry::isRegistered('textrich'))
+        {
             Zend_Registry::set('textrich', '<script type="text/javascript" src="'.$this->getHelper('getSkinUrl')->getSkinUrl('js/tiny_mce/jquery.tinymce.js').'"></script>');
             $script = Zend_Registry::get('textrich');
         }
+
         $script .= '<script type="text/javascript">
                     $(document).ready(function() {
                         $(\'#textrich'.$this->_property->getId().'\').tinymce({

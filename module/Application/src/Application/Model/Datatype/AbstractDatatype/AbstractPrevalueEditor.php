@@ -40,7 +40,7 @@ abstract class AbstractPrevalueEditor extends Object
     */
     public function getRequest()
     {
-        return Zend_Controller_Front::getInstance()->getRequest();
+        return $GLOBALS['application']->getRequest();
     }
 
     /**

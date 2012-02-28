@@ -182,11 +182,11 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
     *
-    * @param Es_Model_DbTable_Property_Model $property
+    * @param Application\Model\Property\Model $property
     *
     * @return mixte
     */
-    static function saveEditor(Es_Model_DbTable_Property_Model $property)
+    static function saveEditor(\Application\Model\Property\Model $property)
     {
         $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
         $datatype->getEditor($property)->save();

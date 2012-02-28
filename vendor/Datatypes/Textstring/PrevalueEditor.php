@@ -8,7 +8,7 @@ class PrevalueEditor extends AbstractDatatype\PrevalueEditor
 {
     public function save()
     {
-        $length = $this->getRequest()->getPost('length');
+        $length = $this->getRequest()->post()->get('length');
         $this->setConfig(array('length' => $length));
     }
 

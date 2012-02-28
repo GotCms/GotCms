@@ -28,8 +28,8 @@ class Collection extends AbstractTable
 
             if($this->getDocumentId() !== NULL)
             {
-                $select->joinInner(array('d'=>'documents'), 'd.document_type_id = t.document_type_id', array('id'));
-                $select->joinLeft(array('pv'=>'properties_values'), 'd.id = pv.document_id AND p.id = pv.property_id', array('value', 'id'));
+                $select->joinInner(array('d'=>'documents'), 'd.document_type_id = t.document_type_id', array());
+                $select->joinLeft(array('pv'=>'properties_values'), 'd.id = pv.document_id AND p.id = pv.property_id', array('value'));
                 $select->where('d.id = ?', $this->getDocumentId());
             }
 

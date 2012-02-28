@@ -9,11 +9,11 @@ class PrevalueEditor extends AbstractDatatype\PrevalueEditor
     public function save()
     {
         //Save prevalue in column Datatypes\prevalue_value
-        $request = $this->getRequest();
-        $rows = $request->getPost('rows', '');
-        $cols = $request->getPost('cols','');
-        $wrap = $request->getPost('wrap','');
-        $options = $request->getPost('Options','');
+        $post = $this->getRequest()->post();
+        $rows = $request->get('rows', '');
+        $cols = $request->get('cols','');
+        $wrap = $request->get('wrap','');
+        $options = $request->get('options','');
         $disabled = !empty($options[0]) ? $options[0] : '';
         $readonly = !empty($options[1]) ? $options[1] : '';
 

@@ -8,7 +8,7 @@ class Editor extends AbstractEditor
 {
     public function save()
     {
-        $value = $this->getRequest()->getPost($this->getName());
+        $value = $this->getRequest()->post()->get($this->getName());
         $this->setValue($value);
     }
 
