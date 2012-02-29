@@ -1,9 +1,9 @@
 <?php
 namespace Datatypes\ImageList;
 
-use Application\Model\Datatype\AbstractDatatype as AbstractDatatype;
+use Application\Model\Datatype\AbstractDatatype\AbstractPrevalueEditor;
 
-class PrevalueEditor extends AbstractDatatype\PrevalueEditor
+class PrevalueEditor extends AbstractPrevalueEditor
 {
 
     public function save($request = null) {

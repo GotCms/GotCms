@@ -3,7 +3,7 @@ namespace Datatypes\Upload;
 
 use Application\Model\Datatype;
 
-class PrevalueEditor extends AbstractDatatype\PrevalueEditor
+class PrevalueEditor extends AbstractPrevalueEditor
 {
 
     public function save($request = null)

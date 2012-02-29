@@ -3,7 +3,7 @@ namespace Datatypes\Upload;
 
 use Application\Model\Datatype;
 
-class Editor extends AbstractDatatype\PrevalueEditor
+class Editor AbstractPrevalueEditor
 {
     protected $_request;
 
