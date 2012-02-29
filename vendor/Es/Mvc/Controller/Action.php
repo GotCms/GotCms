@@ -29,13 +29,19 @@ class Action extends ActionController
     {
         $auth = $this->getAuth();
         $module = $this->getRouteMatch()->getParam('module');
-        if(!$auth->hasIdentity() and $this->_routeMatch->getParam('action') != 'login' and $module != 'admin-user')
+        if(!$auth->hasIdentity())
         {
-            $this->redirect()->toRoute('login');
+            if($this->getRouteMatch()->getParam('action') != 'login' and $module != 'admin-user')
+            {
+                return $this->redirect()->toRoute('login');
+            }
+        }
+        else
+        {
+            $user = Model::fromId($auth->getIdentity()->id);
+            \Zend\Registry::set('user', $user);
         }
 
-        $user = Model::fromId($auth->getIdentity()->id);
-        \Zend\Registry::set('user', $user);
 
         $this->layout()->module = $module;
     }
