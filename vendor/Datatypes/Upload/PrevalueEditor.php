@@ -1,7 +1,8 @@
 <?php
 namespace Datatypes\Upload;
 
-use Application\Model\Datatype;
+use Application\Model\Datatype\AbstractDatatype\AbstractPrevalueEditor,
+    Zend\Form\Element;
 
 class PrevalueEditor extends AbstractPrevalueEditor
 {
