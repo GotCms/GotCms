@@ -29,9 +29,10 @@ class Action extends ActionController
     {
         $auth = $this->getAuth();
         $module = $this->getRouteMatch()->getParam('module');
+        $route_name = $this->getRouteMatch()->getMatchedRouteName();
         if(!$auth->hasIdentity())
         {
-            if($this->getRouteMatch()->getParam('action') != 'login' and $module != 'admin-user')
+            if($route_name != 'login' and $route_name != 'renderWebsite')
             {
                 return $this->redirect()->toRoute('login');
             }
