@@ -57,6 +57,11 @@ class Model extends AbstractTable implements IterableInterface
         return (bool)$this->getData('status') != FALSE ? TRUE : FALSE;
     }
 
+    public function isPublished()
+    {
+        return $this->getStatus();
+    }
+
     /**
     * @param array $values
     * @return Model
@@ -216,7 +221,9 @@ class Model extends AbstractTable implements IterableInterface
     */
     public function getParent()
     {
-        return FALSE;
+        $parent_id = $this->getData('parent_id');
+
+        return Model::fromId($parent_id);
     }
 
     /* (non-PHPdoc)

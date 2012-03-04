@@ -27,9 +27,9 @@ class Model extends AbstractTable implements IterableInterface
     static function fromArray(Array $array)
     {
         $layout_table = new Model();
-        $layout->setData($array);
+        $layout_table->setData($array);
 
-        return $layout;
+        return $layout_table;
     }
 
 
@@ -45,7 +45,7 @@ class Model extends AbstractTable implements IterableInterface
         $row = $layout_table->fetchRow($select);
         if(!empty($row))
         {
-            return $row->setData($row->toArray());
+            return $layout_table->setData($row->toArray());
         }
         else
         {

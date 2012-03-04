@@ -77,7 +77,7 @@ class ViewController extends Action
             $form->populate($data);
         }
 
-        $this->view->form = $form;
+        return array('form' => $form);
     }
 
     public function deleteAction()
