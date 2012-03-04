@@ -71,6 +71,11 @@ class Model extends AbstractTable
     */
     public function getValue()
     {
+        if(empty($this->_value))
+        {
+            $this->loadValue();
+        }
+
         return $this->_value->getValue();
     }
 
