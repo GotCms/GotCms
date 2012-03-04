@@ -5,21 +5,18 @@
  */
 namespace Es\Component;
 
-use Application\Model\Document;
-
 class Navigation
 {
     const XML_NAV_HEADER = '<?xml version="1.0" encoding="UTF-8"?><configdata><nav>';
     const XML_NAV_FOOTER = '</nav></configdata>';
 
     protected $_documents;
-    protected $_basePath;
+    protected $_baseUrl;
 
     public function __construct()
     {
-
-        $this->_basePath = $GLOBALS['application']->getRequest()->getBasePath();
-        $documents = new Document\Collection();
+        $this->_baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $documents = new Es_Model_DbTable_Document_Collection();
         $documents->load(0);
         $this->_documents = $documents->getDocuments();
     }
