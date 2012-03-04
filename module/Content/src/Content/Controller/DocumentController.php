@@ -36,7 +36,7 @@ class DocumentController extends Action
             $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
         }
 
-        $this->layout()->routes = Json::encode($array_routes);
+        $this->layout()->setVariable('routes', Json::encode($array_routes));
     }
 
     public function indexAction()
