@@ -1,7 +1,6 @@
 <?php
 
 return array(
-    'layout'                => 'layouts/layout.phtml',
     'display_exceptions'    => true,
     'di' => array(
         'definition' => array(
@@ -21,13 +20,14 @@ return array(
                 'view'  => 'Zend\View\Renderer\PhpRenderer',
             ),
 
-           'Zend\Db\Adapter\Pdo\Pgsql' => array(
+           'Zend\Db\Adapter\Adapter' => array(
                 'parameters' => array(
-                    'config' => array(
+                    'driver' => array(
+                        'driver' => 'pdo_pgsql',
                         'host' => 'localhost',
                         'username' => 'got',
                         'password' => 'x8maoxfp',
-                        'dbname' => 'escms',
+                        'dbname' => 'dbname=escms;host=localhost',
                     ),
                 ),
             ),
@@ -69,9 +69,16 @@ return array(
                     'resolver' => 'Zend\View\Resolver\AggregateResolver',
                 ),
             ),
+            'Zend\View\Resolver\TemplateMapResolver' => array(
+                'parameters' => array(
+                    'map'  => array(
+                        'layouts/layout' => __DIR__ . '/../views/layouts/layout.phtml',
+                    ),
+                ),
+            ),
             'Zend\Mvc\View\DefaultRenderingStrategy' => array(
                 'parameters' => array(
-                    'baseTemplate' => 'layouts/layout',
+                    'layoutTemplate' => 'layouts/layout',
                 ),
             ),
             'Zend\Mvc\View\ExceptionStrategy' => array(

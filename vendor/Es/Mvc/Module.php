@@ -3,7 +3,7 @@
 namespace Es\Mvc;
 
 use Zend,
-    Zend\Config,
+    Zend\Config\Reader\Ini,
     Zend\View,
     Zend\Module\Manager,
     Zend\EventManager\Event,
@@ -12,9 +12,6 @@ use Zend,
 
 class Module implements AutoloaderProvider
 {
-    protected $_view;
-    protected $_viewListener;
-    protected $_directory;
     protected $_config;
 
     public function init(Manager $moduleManager)
@@ -42,8 +39,9 @@ class Module implements AutoloaderProvider
         if(empty($this->_config))
         {
             $config = include $this->_getDir() . '/config/module.config.php';
-            $routes = new Config\Ini($this->_getDir() . '/config/routes.ini');
-            $routes = $routes->get($_SERVER['APPLICATION_ENV'])->toArray();
+            $ini = new Ini();
+            $routes = $ini->fromFile($this->_getDir() . '/config/routes.ini');
+            $routes = $routes['production'];
             if(empty($config['di']['instance']['Zend\Mvc\Router\RouteStack']))
             {
                 $config['di']['instance']['Zend\Mvc\Router\RouteStack'] = array('parameters' => array('routes' => array()));
@@ -66,7 +64,7 @@ class Module implements AutoloaderProvider
         $basePath     = $app->getRequest()->getBasePath();
         $locator      = $app->getLocator();
         //@TODO change to module.config.php
-        Zend\Db\Table\AbstractTable::setDefaultAdapter($locator->get('Zend\Db\Adapter\Pdo\Pgsql'));
+        Zend\Db\TableGateway\StaticAdapterTableGateway::setStaticAdapter($locator->get('Zend\Db\Adapter\Adapter'));
         $renderer     = $locator->get('Zend\View\Renderer\PhpRenderer');
         $renderer->plugin('url')->setRouter($app->getRouter());
         $renderer->doctype()->setDoctype('HTML5');

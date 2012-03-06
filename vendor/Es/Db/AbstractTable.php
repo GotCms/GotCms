@@ -11,7 +11,7 @@ namespace Es\Db;
 
 use Es\Exception,
     Es\Core\Object,
-    Zend\Db\Table\Table;
+    Zend\Db\TableGateway;
 
 abstract class AbstractTable extends Object
 {
@@ -31,7 +31,7 @@ abstract class AbstractTable extends Object
     {
         if(!empty($this->_name) and !in_array($this->_name, self::$_tables))
         {
-            self::$_tables[$this->_name] = new Table($this->_name);
+            self::$_tables[$this->_name] = new TableGateway\TableGateway($this->_name, TableGateway\StaticAdapterTableGateway::getStaticAdapter());
         }
 
         $this->init();
