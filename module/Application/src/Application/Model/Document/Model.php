@@ -3,7 +3,8 @@
 namespace Application\Model\Document;
 
 use Es\Db\AbstractTable,
-    Es\Component\IterableInterface;
+    Es\Component\IterableInterface,
+    Application\Model\View;
 
 class Model extends AbstractTable implements IterableInterface
 {
@@ -31,7 +32,7 @@ class Model extends AbstractTable implements IterableInterface
     {
         if($this->getData('view') == NULL)
         {
-            $view = Model::fromId($this->getViewId());
+            $view = View\Model::fromId($this->getViewId());
             if($view !== NULL)
             {
                 $this->setData('view',$view->getContent());
@@ -81,12 +82,11 @@ class Model extends AbstractTable implements IterableInterface
     static function fromId($document_id)
     {
         $document_table = new Model();
-        $select = $document_table->select()
-            ->where('id = ?', (int)$document_id);
-        $row = $document_table->fetchRow($select);
+        $rowset = $document->select(array('id' => $document_id));
+        $row = $rowset->current();
         if(!empty($row))
         {
-            return $document_table->setData($row->toArray());
+            return $document_table->setData((array)$row);
         }
         else
         {
@@ -112,15 +112,14 @@ class Model extends AbstractTable implements IterableInterface
     * @param array $urlKey
     * @return Model | FALSE
     */
-    static function fromUrlKey($urlKey)
+    static function fromUrlKey($url_key)
     {
-        $document = new Model();
-        $select = $document->select()
-            ->where('url_key = ?', $urlKey);
-        $row = $document->fetchRow($select);
+        $document_table = new Model();
+        $rowset = $document_table->select(array('url_key' => $url_key));
+        $row = $rowset->current();
         if(!empty($row))
         {
-            return $document->setData($row->toArray());
+            return $document_table->setData((array)$row);
         }
         else
         {
@@ -151,7 +150,8 @@ class Model extends AbstractTable implements IterableInterface
             if(empty($document_id))
             {
                 $array_save['created_at'] = new \Zend\Db\Expr('NOW()');
-                $this->setId($this->insert($array_save));
+                $this->insert($array_save);
+                $this->setId($this->getLastInsertId());
             }
             else
             {
@@ -184,7 +184,7 @@ class Model extends AbstractTable implements IterableInterface
                 if(parent::delete('id = '.$this->getId()))
                 {
                     $properties_table = new \Zend\Db\Table\Table('properties_value');
-                    $properties_table->delete('document_id = '.$this->getId());
+                    $properties_table->delete(array('document_id' => $this->getId()));
                     unset($this);
 
                     return TRUE;

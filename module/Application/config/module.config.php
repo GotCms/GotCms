@@ -24,10 +24,10 @@ return array(
                 'parameters' => array(
                     'driver' => array(
                         'driver' => 'pdo_pgsql',
-                        'host' => 'localhost',
                         'username' => 'got',
                         'password' => 'x8maoxfp',
-                        'dbname' => 'dbname=escms;host=localhost',
+                        'database' => 'escms',
+                        'hostname' => 'localhost'
                     ),
                 ),
             ),
