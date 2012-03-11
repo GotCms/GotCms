@@ -16,14 +16,12 @@ class Collection extends AbstractTable implements IterableInterface
 
     private function setLayouts()
     {
-        $select = $this->select();
-        $select->order(array('name ASC'));
-        $rows = $this->fetchAll($select);
-
+        $rows = $this->select();
+        //$select->order(array('name ASC'));
         $layout = array();
         foreach($rows as $row)
         {
-            $layout[] = Model::fromArray($row->toArray());
+            $layout[] = Model::fromArray((array)$row);
         }
 
         $this->setData('layouts', $layout);

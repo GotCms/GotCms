@@ -46,7 +46,7 @@ class Collection extends AbstractTable implements IterableInterface
         $users = array();
         foreach($rows as $row)
         {
-            $users[] = Es_Model_DbTable_User_Model::fromArray($row);
+            $users[] = Es_Model_DbTable_User_Model::fromArray((array)$row);
         }
 
         $this->_users = $users;

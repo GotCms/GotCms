@@ -21,17 +21,19 @@ class Collection extends AbstractTable
         $document_type_id = $this->getDocumentTypeId();
         if(empty($tabs) or $force_reload == TRUE)
         {
-            $select = $this->select();
-            if(!empty($document_type_id))
+            if(empty($document_type_id))
             {
-                $select->where('document_type_id = ?', $document_type_id);
+                $rows = $this->select('document_type_id = ?', $document_type_id);
+            }
+            else
+            {
+                $rows = $this->select();
             }
 
-            $rows = $this->fetchAll($select);
             $tabs = array();
-            foreach($rows as $value)
+            foreach($rows as $row)
             {
-                $tabs[] = Model::fromArray($value->toArray());
+                $tabs[] = Model::fromArray((array)$row);
             }
 
             $this->setData('tabs', $tabs);

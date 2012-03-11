@@ -147,6 +147,7 @@ class DocumentController extends Action
             {
                 $tabs_array[] = $tab->getName();
                 $properties = $this->_loadProperties($document_type_id, $tab->getId(), $document->getId());
+
                 $sub_form = new \Zend\Form\SubForm();
                 $sub_form->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$i))));
                 $sub_form->removeDecorator('Fieldset');

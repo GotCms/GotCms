@@ -174,12 +174,10 @@ class Model extends AbstractTable
     static function fromId($id)
     {
         $property_table = new Model();
-        $select = $property_table->select();
-        $select->where('id = ?', (int)$id);
-        $row = $property_table->fetchRow($select);
+        $row = $property_table->select(array('id' => $id));
         if(!empty($row))
         {
-            return $property_table->setData($row);
+            return $property_table->setData((array)$row->current());
         }
         else
         {

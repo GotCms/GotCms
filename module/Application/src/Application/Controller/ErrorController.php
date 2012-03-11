@@ -18,7 +18,7 @@ class ErrorController extends ActionController
                 'message' => 'Page not found',
             );
         }
-        
+
         switch ($error['type']) {
             case self::ERROR_NO_ROUTE:
             case self::ERROR_NO_CONTROLLER:
@@ -27,7 +27,7 @@ class ErrorController extends ActionController
                 $this->response->setStatusCode(404);
                 break;
         }
-        
+
         return array('message' => $error['message']);
     }
 }

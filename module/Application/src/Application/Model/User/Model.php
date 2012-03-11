@@ -156,12 +156,10 @@ class Model extends AbstractTable implements IterableInterface
     static function fromId($id)
     {
         $user_table = new Model();
-        $select = $user_table->select()
-            ->where('id = ?', $id);
-        $row = $user_table->fetchRow($select);
+        $row = $user_table->select(array('id' => $id));
         if(!empty($row))
         {
-            return $user_table->setData($row->toArray());
+            return $user_table->setData((array)$row->current());
         }
         else
         {

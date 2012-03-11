@@ -124,12 +124,10 @@ class Model extends AbstractTable
     static function fromId($id)
     {
         $tab_table = new Model();
-        $select = $tab_table->select()
-            ->where('id = ?', $id);
-        $row = $tab_table->fetchRow($select);
+        $row = $tab_table->select(array('id' => $id));
         if(!empty($row))
         {
-            return $tab_table->setData($row->toArray());
+            return $tab_table->setData((array)$row->current());
         }
         else
         {

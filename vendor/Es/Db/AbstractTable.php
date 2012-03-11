@@ -11,6 +11,7 @@ namespace Es\Db;
 
 use Es\Exception,
     Es\Core\Object,
+    Zend\Db\ResultSet\ResultSet,
     Zend\Db\TableGateway;
 
 abstract class AbstractTable extends Object
@@ -52,5 +53,40 @@ abstract class AbstractTable extends Object
         }
 
         return parent::__call($method, $args);
+    }
+
+    public function fetchRow($query)
+    {
+        if($query instanceof ResultSet)
+        {
+            return $query->current();
+        }
+
+        return $this->_executeQuery($query)->current();
+    }
+
+    public function fetchAll($query)
+    {
+        if($query instanceof ResultSet)
+        {
+            return $query->toArray();
+        }
+
+        return $this->_executeQuery($query)->toArray();
+    }
+
+    protected function _executeQuery($query)
+    {
+        // create a statement to use
+        $statment = $this->getAdapter()->createStatement();
+
+        // prepare statement with $select
+        $query->prepareStatement($this->getAdapter(), $statment);
+
+        // instantiate a result set for result-as-object iteration
+        $result_set = new ResultSet();
+        $result_set->setDataSource($statment->execute());
+
+        return $result_set;
     }
 }

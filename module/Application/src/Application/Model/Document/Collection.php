@@ -21,23 +21,20 @@ class Collection extends AbstractTable implements IterableInterface
     private function setDocuments()
     {
         $parent_id = $this->getParentId();
-        $select = $this->select();
 
         if(!empty($parent_id))
         {
-            $select->where('parent_id = ? ', $this->getParentId());
+            $rows = $this->select(array('parent_id = ? ' => $this->getParentId()));
         }
         else
         {
-            $select->where('parent_id IS NULL');
+            $rows = $this->select('parent_id IS NULL');
         }
 
-        $rows = $this->fetchAll($select);
         $documents = array();
         foreach($rows as $row)
         {
-
-            $documents[] = Model::fromArray($row->toArray());
+            $documents[] = Model::fromArray((array)$row);
         }
 
         $this->setData('documents', $documents);

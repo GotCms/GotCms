@@ -4,7 +4,8 @@ namespace Application\Model\DocumentType;
 
 use Es\Db\AbstractTable,
     Es\Component\IterableInterface,
-    Application\Model\Tab;
+    Application\Model\Tab,
+    Application\Model\User;
 
 class Model extends AbstractTable implements IterableInterface
 {
@@ -12,12 +13,12 @@ class Model extends AbstractTable implements IterableInterface
 
     public function getUser()
     {
-        if($this->_user === NULL AND $this->getUserId() != NULL)
+        if($this->getData('user') === NULL AND $this->getUserId() != NULL)
         {
-            $this->_user = new Es_Model_DbTable_User_Model($this->getUserId());
+            $this->setData('user', new User\Model($this->getUserId()));
         }
 
-        return $this->_user;
+        return $this->getData('user');
     }
 
     public function addView($view_id)
@@ -133,12 +134,10 @@ class Model extends AbstractTable implements IterableInterface
     static function fromId($document_type_id)
     {
         $document_type_table = new Model();
-        $select = $document_type_table->select()
-            ->where('id = ?', (int)$document_type_id);
-        $row = $document_type_table->fetchRow($select);
+        $row = $document_type_table->select(array('id' => $document_type_id));
         if(!empty($row))
         {
-            return $document_type_table->setData($row->toArray());
+            return $document_type_table->setData((array)$row->current());
         }
         else
         {

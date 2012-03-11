@@ -16,8 +16,9 @@ use Es\Mvc\Controller\Action,
 class IndexController extends Action
 {
     protected $_viewStream  = 'zend.view';
-    protected $_viewName = 'index/view_content.phtml';
-    protected $_layoutName = 'index/layout_content.phtml';
+    protected $_viewName = 'index/view_content';
+    protected $_layoutName = 'index/layout_content';
+    protected $_extension = '.phtml';
     protected $_viewPath;
     protected $_layoutPath;
 
@@ -112,12 +113,14 @@ class IndexController extends Action
             $view = View\Model::fromId($document->getViewId());
             $layout = Layout\Model::fromId($document->getLayoutId());
             $this->_layoutPath = $template_path_stack->resolve($this->_layoutName);
-            $layout_file = file_put_contents($this->_layoutPath, $layout->getContent());
-            $layout_file = file_put_contents($this->_viewPath, $view->getContent());
+
+            file_put_contents($this->_layoutPath, $layout->getContent());
+            file_put_contents($this->_viewPath, $view->getContent());
+            $this->layout()->setTemplate($this->_layoutName);
+            $view_model->setCaptureTo('content');
         }
 
         $view_model->setTemplate($this->_viewName);
-
         return $view_model;
     }
 

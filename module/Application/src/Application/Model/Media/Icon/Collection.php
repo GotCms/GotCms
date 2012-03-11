@@ -16,7 +16,7 @@ class Es_Media_Icon_Collection implements Es_Interface_Iterable{
         $rows = $statement->fetchAll();
         $icons = array();
         foreach($rows as $row) {
-            $icons[] = Es_Media_Icon_Model::fromArray($row);
+            $icons[] = Es_Media_Icon_Model::fromArray((array)$row);
         }
         $this->_icons = $icons;
     }

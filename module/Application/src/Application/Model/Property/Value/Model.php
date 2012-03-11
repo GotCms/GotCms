@@ -15,7 +15,7 @@ class Model extends AbstractTable
         $this->setPropertyId($property_id);
         if(!empty($document_id) and !empty($property_id))
         {
-            $prevalue_value = $this->fetchRow($this->select()->where('property_id = ?', $property_id)->where('document_id = ?', $document_id));
+            $prevalue_value = $this->fetchRow($this->select(array('property_id' => $property_id, 'document_id' => $document_id)));
             if(!empty($prevalue_value->id))
             {
                 $this->setId($prevalue_value->id);
@@ -48,7 +48,7 @@ class Model extends AbstractTable
         $row = $property_value_table->fetchRow($select);
         if(!empty($row))
         {
-            return $property_value_table->setData($row->toArray());
+            return $property_value_table->setData($row);
         }
         else
         {

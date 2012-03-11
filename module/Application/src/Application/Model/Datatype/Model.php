@@ -49,13 +49,10 @@ class Model extends AbstractTable implements IterableInterface
     static function fromId($datatype_id)
     {
         $datatype_table = new Model();
-        $select = $datatype_table->select()
-            ->where('id = ?', $datatype_id);
-
-        $row = $datatype_table->fetchRow($select);
+        $row = $datatype_table->select(array('id' => $datatype_id));
         if(!empty($row))
         {
-            return $datatype_table->setData($row->toArray());
+            return $datatype_table->setData((array)$row->current());
         }
         else
         {

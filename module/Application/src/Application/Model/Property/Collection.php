@@ -2,7 +2,8 @@
 
 namespace Application\Model\Property;
 
-use Es\Db\AbstractTable;
+use Es\Db\AbstractTable,
+    Zend\Db\Sql\Select;
 
 class Collection extends AbstractTable
 {
@@ -22,35 +23,36 @@ class Collection extends AbstractTable
     {
         if($this->getData('properties') == NULL or $force_reload)
         {
-            $select = $this->getAdapter()->select()
-            ->from(array('t'=>'tabs'), array())
-            ->joinInner(array('p'=>'properties'), 't.id = p.tab_id');
+            $select = $this->getSqlSelect()
+            ->from('tabs')
+            ->columns(array())
+            ->join('properties', 'tabs.id = properties.tab_id', '*', Select::JOIN_INNER);
 
             if($this->getDocumentId() !== NULL)
             {
-                $select->joinInner(array('d'=>'documents'), 'd.document_type_id = t.document_type_id', array());
-                $select->joinLeft(array('pv'=>'properties_values'), 'd.id = pv.document_id AND p.id = pv.property_id', array('value'));
-                $select->where('d.id = ?', $this->getDocumentId());
+                $select->join('documents', 'documents.document_type_id = tabs.document_type_id', array(), Select::JOIN_INNER);
+                $select->join('properties_values', 'documents.id = properties_values.document_id AND properties.id = properties_values.property_id', array('value'), Select::JOIN_LEFT);
+                $select->where(array('documents.id' => $this->getDocumentId()));
             }
 
             if($this->getTabId() != NULL)
             {
-                $select->where('t.id = ?', array($this->getTabId()));
+                $select->where(array('tabs.id' => $this->getTabId()));
             }
 
             if($this->getDocumentTypeId() != NULL)
             {
-                $select->where('t.document_type_id = ? ',$this->getDocumentTypeId());
+                $select->where(array('tabs.document_type_id' => $this->getDocumentTypeId()));
             }
 
-            $select->order('p.order ASC');
+            //$select->order('properties.order ASC'); @TODO order statments
 
-            $rows = $this->getAdapter()->fetchAll($select);
+            $rows = $this->fetchAll($select);
 
             $properties = array();
             foreach($rows as $row)
             {
-                $properties[] = Model::fromArray($row);
+                $properties[] = Model::fromArray((array)$row);
             }
 
             $this->setData('properties', $properties);

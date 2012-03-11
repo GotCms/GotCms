@@ -18,8 +18,9 @@ class Collection extends AbstractTable implements IterableInterface
 
     private function setViews()
     {
-        $select = $this->select()
-            ->order('name');
+        $select = $this->getSqlSelect();
+        $select->from('views');
+            //->order('name');  @TODO execute order
 
         if($this->getDocumentTypeId() !== NULL)
         {
@@ -31,7 +32,7 @@ class Collection extends AbstractTable implements IterableInterface
         $views = array();
         foreach($rows as $row)
         {
-            $views[] = Model::fromArray($row->toArray());
+            $views[] = Model::fromArray((array)$row);
         }
 
         $this->_views = $views;
@@ -78,7 +79,7 @@ class Collection extends AbstractTable implements IterableInterface
             $this->delete();
             foreach($this->getElements() as $view)
             {
-                $this->getAdapter()->insert('document_type_views', array('document_type_id' => $this->getDocumentTypeId(), 'view_id' => $view->getId()));
+                $this->getSqlInsert()->into('document_type_views')->values(array('document_type_id' => $this->getDocumentTypeId(), 'view_id' => $view->getId()));
             }
 
             return TRUE;

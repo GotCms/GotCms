@@ -16,13 +16,11 @@ class Collection extends AbstractTable implements IterableInterface
 
     private function setDocumentTypes()
     {
-        $select = $this->select();
-        $select->order(array('document_type_name ASC'));
-        $rows = $this->fetchAll();
+        $rows = $this->select();
         $documentTypes = array();
         foreach($rows as $row)
         {
-            $documentTypes[] = Model::fromArray($row->toArray());
+            $documentTypes[] = Model::fromArray((array)$row);
         }
 
         $this->setData('document_types', $documentTypes);

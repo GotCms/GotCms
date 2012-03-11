@@ -16,13 +16,11 @@ class Collection extends AbstractTable implements IterableInterface
 
     private function setDatatypes()
     {
-        $select = $this->select()
-            ->order('name');
-        $rows = $this->fetchAll($select);
+        $rows = $this->select();
         $datatypes = array();
         foreach($rows as $row)
         {
-            $datatypes[] = Model::fromArray($row->toArray());
+            $datatypes[] = Model::fromArray((array)$row);
         }
 
         $this->_datatypes = $datatypes;

@@ -36,8 +36,8 @@
     <script type="text/javascript">
         jQuery(document).ready(function()
         {
-            <?php if(!empty($this->layout()->routes)): ?>
-                ES.getInstance().setOption('routes', <?php echo $this->jsQuoteEscape($this->raw('routes')); ?>);
+            <?php if(!empty($this->routes)): ?>
+                ES.getInstance().setOption('routes', <?php echo $this->jsQuoteEscape($this->routes); ?>);
                 ES.getInstance().initDocumentMenu();
             <?php endif; ?>
         });
@@ -74,13 +74,13 @@
     <div id="main">
 
         <div id="menu">
-            <?php if($this->raw('module') !== NULL): ?>
-                <?php echo $this->partial($this->raw('module') . '-menu.phtml', array('treeview' => $this->vars()->getRawValue('treeview'))); ?>
+            <?php if($this->module !== NULL): ?>
+                <?php echo $this->partial($this->module . '-menu.phtml', array('treeview' => $this->treeview)); ?>
             <?php endif; ?>
         </div>
 
         <div id="content">
-            <?php echo $this->raw('content'); ?>
+            <?php echo $this->content; ?>
         </div>
 
         <div style="clear:both;"></div>
