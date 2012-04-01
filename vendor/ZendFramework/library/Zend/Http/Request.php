@@ -86,7 +86,7 @@ class Request extends Message implements RequestDescription
     {
         $request = new static();
 
-        $lines = preg_split('/\r\n/', $string);
+        $lines = explode("\r\n", $string);
 
         // first line must be Method/Uri/Version string
         $matches = null;
@@ -94,7 +94,7 @@ class Request extends Message implements RequestDescription
             self::METHOD_OPTIONS, self::METHOD_GET, self::METHOD_HEAD, self::METHOD_POST,
             self::METHOD_PUT, self::METHOD_DELETE, self::METHOD_TRACE, self::METHOD_CONNECT
         ));
-        $regex = '^(?P<method>' . $methods . ')\s(?<uri>[^ ]*)(?:\sHTTP\/(?<version>\d+\.\d+)){0,1}';
+        $regex = '^(?P<method>' . $methods . ')\s(?P<uri>[^ ]*)(?:\sHTTP\/(?P<version>\d+\.\d+)){0,1}';
         $firstLine = array_shift($lines);
         if (!preg_match('#' . $regex . '#', $firstLine, $matches)) {
             throw new Exception\InvalidArgumentException('A valid request line was not found in the provided string');
@@ -489,6 +489,30 @@ class Request extends Message implements RequestDescription
     public function isConnect()
     {
         return ($this->method === self::METHOD_CONNECT);
+    }
+
+    /**
+     * Is the request a Javascript XMLHttpRequest?
+     *
+     * Should work with Prototype/Script.aculo.us, possibly others.
+     *
+     * @return boolean
+     */
+    public function isXmlHttpRequest()
+    {
+        $header = $this->headers()->get('X_REQUESTED_WITH');
+        return false !== $header && $header->getFieldValue() == 'XMLHttpRequest';
+    }
+
+    /**
+     * Is this a Flash request?
+     *
+     * @return boolean
+     */
+    public function isFlashRequest()
+    {
+        $header = $this->headers()->get('USER_AGENT');
+        return false !== $header && stristr($header->getFieldValue(), ' flash');
     }
 
     /**

@@ -23,7 +23,8 @@
  */
 namespace Zend\Http;
 
-use Zend\Config\Config,
+use ArrayIterator,
+    Zend\Config\Config,
     Zend\Uri\Http,
     Zend\Http\Header\Cookie,
     Zend\Http\Header\SetCookie,
@@ -43,21 +44,19 @@ use Zend\Config\Config,
  */
 class Client implements Dispatchable
 {
-    /**#@+
+    /**
      * @const string Supported HTTP Authentication methods
      */
     const AUTH_BASIC  = 'basic';
     const AUTH_DIGEST = 'digest';  // not implemented yet
-    /**#@-*/
 
-    /**#@+
+    /**
      * @const string POST data encoding methods
      */
     const ENC_URLENCODED = 'application/x-www-form-urlencoded';
     const ENC_FORMDATA   = 'multipart/form-data';
-    /**#@-*/
 
-    /**#@+
+    /**
      * @const string DIGEST Authentication
      */
     const DIGEST_REALM  = 'realm';
@@ -66,7 +65,6 @@ class Client implements Dispatchable
     const DIGEST_OPAQUE = 'opaque';
     const DIGEST_NC     = 'nc';
     const DIGEST_CNONCE = 'cnonce';
-    /**#@-*/
 
     /**
      * @var Response
@@ -467,7 +465,7 @@ class Client implements Dispatchable
     /**
      * Add a cookie
      *
-     * @param ArrayIterator|SetCookie|string $cookie
+     * @param array|ArrayIterator|SetCookie|string $cookie
      * @param string  $value
      * @param string  $domain
      * @param string  $expire
@@ -478,7 +476,7 @@ class Client implements Dispatchable
      */
     public function addCookie($cookie, $value = null, $domain = null, $expire = null, $path = null, $secure = false, $httponly = true)
     {
-        if ($cookie instanceof \ArrayIterator) {
+        if (is_array($cookie) || $cookie instanceof ArrayIterator) {
             foreach ($cookie as $setCookie) {
                 if ($setCookie instanceof SetCookie) {
                     $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
@@ -508,7 +506,7 @@ class Client implements Dispatchable
         if (is_array($cookies)) {
             $this->clearCookies();
             foreach ($cookies as $name => $value) {
-                $this->addCookie($name,$value);
+                $this->addCookie($name, $value);
             }
         } else {
             throw new Exception\InvalidArgumentException('Invalid cookies passed as parameter, it must be an array');
@@ -609,7 +607,7 @@ class Client implements Dispatchable
     {
         $this->streamName = $this->config['outputstream'];
 
-        if(!is_string($this->streamName)) {
+        if (!is_string($this->streamName)) {
             // If name is not given, create temp name
             $this->streamName = tempnam(
                 isset($this->config['streamtmpdir']) ? $this->config['streamtmpdir'] : sys_get_temp_dir(),
@@ -698,9 +696,9 @@ class Client implements Dispatchable
                      $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath() . ':' . md5($entityBody));
                 }
                 if (empty($digest['qop'])) {
-                    $response = md5 ($ha1 . ':' . $digest['nonce'] . ':' . $ha2);
+                    $response = md5($ha1 . ':' . $digest['nonce'] . ':' . $ha2);
                 } else {
-                    $response = md5 ($ha1 . ':' . $digest['nonce'] . ':' . $digest['nc']
+                    $response = md5($ha1 . ':' . $digest['nonce'] . ':' . $digest['nc']
                                     . ':' . $digest['cnonce'] . ':' . $digest['qoc'] . ':' . $ha2);
                 }
                 break;
@@ -785,7 +783,7 @@ class Client implements Dispatchable
                         $queryString = str_replace('+', '%20', $queryString);
                     }
 
-                    if (strpos($newUri,'?') !== false) {
+                    if (strpos($newUri, '?') !== false) {
                         $newUri .= '&' . $queryString;
                     } else {
                         $newUri .= '?' . $queryString;
@@ -806,7 +804,7 @@ class Client implements Dispatchable
             $body = $this->prepareBody();
 
             // headers
-            $headers = $this->prepareHeaders($body,$uri);
+            $headers = $this->prepareHeaders($body, $uri);
 
             $secure = $uri->getScheme() == 'https';
 
@@ -817,27 +815,14 @@ class Client implements Dispatchable
             }
 
             // check that adapter supports streaming before using it
-            if(is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
+            if (is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
 
-            // Open the connection, send the request and read the response
-            $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
+            // calling protected method to allow extending classes
+            // to wrap the interaction with the adapter
+            $response = $this->doRequest($uri, $method, $secure, $headers, $body);
 
-            if($this->config['outputstream']) {
-                if($this->adapter instanceof Client\Adapter\Stream) {
-                    $stream = $this->openTempStream();
-                    $this->adapter->setOutputStream($stream);
-                } else {
-                    throw new Exception\RuntimeException('Adapter does not support streaming');
-                }
-            }
-
-            // HTTP connection
-            $this->lastRawRequest = $this->adapter->write($method,
-                $uri, $this->config['httpversion'], $headers, $body);
-
-            $response = $this->adapter->read();
             if (! $response) {
                 throw new Exception\RuntimeException('Unable to read response, or response is empty');
             }
@@ -848,7 +833,7 @@ class Client implements Dispatchable
                 $this->lastRawResponse = null;
             }
 
-            if($this->config['outputstream']) {
+            if ($this->config['outputstream']) {
                 $streamMetaData = stream_get_meta_data($stream);
                 if ($streamMetaData['seekable']) {
                     rewind($stream);
@@ -857,7 +842,7 @@ class Client implements Dispatchable
                 $this->adapter->setOutputStream(null);
                 $response = Response\Stream::fromStream($response, $stream);
                 $response->setStreamName($this->streamName);
-                if(!is_string($this->config['outputstream'])) {
+                if (!is_string($this->config['outputstream'])) {
                     // we used temp name, will need to clean up
                     $response->setCleanup(true);
                 }
@@ -903,7 +888,7 @@ class Client implements Dispatchable
                     $this->getUri()->setQuery($query);
 
                     // Else, if we got just an absolute path, set it
-                    if(strpos($location, '/') === 0) {
+                    if (strpos($location, '/') === 0) {
                         $this->getUri()->setPath($location);
                         // Else, assume we have a relative path
                     } else {
@@ -977,7 +962,7 @@ class Client implements Dispatchable
     {
         $file = $this->getRequest()->file()->get($filename);
         if (!empty($file)) {
-            $this->getRequest()->file()->set($filename,null);
+            $this->getRequest()->file()->set($filename, null);
             return true;
         }
         return false;
@@ -1250,8 +1235,7 @@ class Client implements Dispatchable
 
         $parameters = array();
 
-        foreach($parray as $name => $value) {
-
+        foreach ($parray as $name => $value) {
             // Calculate array key
             if ($prefix) {
                 if (is_int($name)) {
@@ -1272,6 +1256,39 @@ class Client implements Dispatchable
         }
 
         return $parameters;
+    }
+
+    /**
+     * Separating this from send method allows subclasses to wrap
+     * the interaction with the adapter
+     *
+     * @param Http $uri
+     * @param string $secure
+     * @param string $method
+     * @param array $headers
+     * @param string $body
+     * @return string the raw response
+     * @throws Exception\RuntimeException
+     */
+    protected function doRequest(Http $uri, $method, $secure = false, $headers = array(), $body = '')
+    {
+        // Open the connection, send the request and read the response
+        $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
+
+        if ($this->config['outputstream']) {
+            if ($this->adapter instanceof Client\Adapter\Stream) {
+                $stream = $this->openTempStream();
+                $this->adapter->setOutputStream($stream);
+            } else {
+                throw new Exception\RuntimeException('Adapter does not support streaming');
+            }
+        }
+
+        // HTTP connection
+        $this->lastRawRequest = $this->adapter->write($method,
+            $uri, $this->config['httpversion'], $headers, $body);
+
+        return $this->adapter->read();
     }
 
     /**
