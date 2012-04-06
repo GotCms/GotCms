@@ -37,14 +37,6 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param integer $user_id
-    */
-    protected function setId($user_id)
-    {
-        $this->setData('id', (int) $user_id);
-    }
-
-    /**
     * @param string $user_email
     * @return boolean
     */

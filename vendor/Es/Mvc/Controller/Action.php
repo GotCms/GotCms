@@ -34,7 +34,7 @@ class Action extends ActionController
         {
             if($route_name != 'login' and $route_name != 'renderWebsite')
             {
-                //return $this->redirect()->toRoute('login');
+                return $this->redirect()->toRoute('login');
             }
         }
         else

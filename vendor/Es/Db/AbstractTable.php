@@ -77,15 +77,12 @@ abstract class AbstractTable extends Object
 
     protected function _executeQuery($query)
     {
-        // create a statement to use
-        $statment = $this->getAdapter()->createStatement();
+        $statement = $this->getAdapter()->createStatement();
+        $query->prepareStatement($this->getAdapter(), $statement);
 
-        // prepare statement with $select
-        $query->prepareStatement($this->getAdapter(), $statment);
-
-        // instantiate a result set for result-as-object iteration
+        $result = $statement->execute();
         $result_set = new ResultSet();
-        $result_set->setDataSource($statment->execute());
+        $result_set->setDataSource($result);
 
         return $result_set;
     }

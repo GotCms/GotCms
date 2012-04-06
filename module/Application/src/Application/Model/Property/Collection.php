@@ -23,7 +23,7 @@ class Collection extends AbstractTable
     {
         if($this->getData('properties') == NULL or $force_reload)
         {
-            $select = $this->getSqlSelect()
+            $select = $this->getAdapter()->select()
             ->from('tabs')
             ->columns(array())
             ->join('properties', 'tabs.id = properties.tab_id', '*', Select::JOIN_INNER);

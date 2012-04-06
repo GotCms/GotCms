@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'display_exceptions'    => true,
+    'display_exceptions'    => TRUE,
     'di' => array(
         'definition' => array(
             'class' => array(
@@ -25,7 +25,7 @@ return array(
                     'driver' => array(
                         'driver' => 'pdo_pgsql',
                         'username' => 'got',
-                        'password' => 'x8maoxfp',
+                        'password' => 'x8maoxfp;',
                         'database' => 'escms',
                         'hostname' => 'localhost'
                     ),
@@ -105,15 +105,15 @@ return array(
             // View script rendered in case of 404 exception
             'Zend\Mvc\View\RouteNotFoundStrategy' => array(
                 'parameters' => array(
-                    'displayNotFoundReason' => true,
-                    'displayExceptions'     => true,
+                    'displayNotFoundReason' => TRUE,
+                    'displayExceptions'     => TRUE,
                     'notFoundTemplate'      => 'error/404',
                 ),
             ),
             // View script rendered in case of other exceptions
             'Zend\Mvc\View\ExceptionStrategy' => array(
                 'parameters' => array(
-                    'displayExceptions' => true,
+                    'displayExceptions' => TRUE,
                     'exceptionTemplate' => 'error/index',
                 ),
             ),

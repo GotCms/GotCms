@@ -18,9 +18,7 @@ class Collection extends AbstractTable implements IterableInterface
 
     private function setViews()
     {
-        $select = $this->getSqlSelect();
-        $select->from('views');
-            //->order('name');  @TODO execute order
+        $select = $this->getSqlSelectPrototype()->order(array('name'));
 
         if($this->getDocumentTypeId() !== NULL)
         {

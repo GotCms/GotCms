@@ -9,7 +9,7 @@ use Es\Mvc\Controller\Action,
     Application\Model\Layout,
     Application\Model\Property,
     Application\Model\View,
-    Zend\Config\Xml,
+    Zend\Config\Reader\Xml,
     Zend\Navigation\Navigation,
     Zend\View\Model\ViewModel;
 
@@ -18,13 +18,13 @@ class IndexController extends Action
     protected $_viewStream  = 'zend.view';
     protected $_viewName = 'index/view_content';
     protected $_layoutName = 'index/layout_content';
-    protected $_extension = '.phtml';
     protected $_viewPath;
     protected $_layoutPath;
 
     public function indexAction()
     {
-        $path = $this->getRequest()->getRequestUri();
+        $url = parse_url($this->getRequest()->getRequestUri());
+        $path = $url['path'];
         if($path == '/')
         {
             $document = Document\Model::fromUrlKey('home');
@@ -60,10 +60,14 @@ class IndexController extends Action
         }
 
         //construct the tree menu
-        //$nav = new Component\Navigation();
-        //$config = new Xml($nav->render(), 'nav');
-        //$this->view->navigation(new Navigation($config));
+        /*
+        * @TODO
+        $nav = new Component\Navigation();
+        $config = new Xml();
+        $config->fromString($nav->render());
 
+        //var_dump(get_class_methods($this->getLocator()->get('Zend\View\Renderer\PhpRenderer')->navigation()->setContainer(new Navigation($config))));
+        */
         $view_model = new ViewModel();
         $existed = in_array($this->_viewStream, stream_get_wrappers());
         if ($existed)
@@ -75,11 +79,15 @@ class IndexController extends Action
         $template_path_stack = $this->getLocator()->get('Zend\View\Resolver\TemplatePathStack');
         $template_path_stack->setUseStreamWrapper(TRUE);
         $this->_viewPath = $template_path_stack->resolve($this->_viewName);
+        $this->_layoutPath = $template_path_stack->resolve($this->_layoutName);
 
-        if($document === NULL or !$document->isPublished())
+        $view_model->setTemplate($this->_viewName);
+        $this->layout()->setTemplate($this->_layoutName);
+
+        if(empty($document) or !$document->isPublished())
         {
             // 404
-            file_put_contents($this->_viewPath, 'Error 404 - page not found');
+            file_put_contents($this->_layoutPath, 'Error 404 - page not found');
         }
         else
         {
@@ -112,15 +120,11 @@ class IndexController extends Action
             //Set view from database
             $view = View\Model::fromId($document->getViewId());
             $layout = Layout\Model::fromId($document->getLayoutId());
-            $this->_layoutPath = $template_path_stack->resolve($this->_layoutName);
 
             file_put_contents($this->_layoutPath, $layout->getContent());
             file_put_contents($this->_viewPath, $view->getContent());
-            $this->layout()->setTemplate($this->_layoutName);
-            $view_model->setCaptureTo('content');
         }
 
-        $view_model->setTemplate($this->_viewName);
         return $view_model;
     }
 

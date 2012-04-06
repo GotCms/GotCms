@@ -1,13 +1,7 @@
 <h2>..:: <?php echo $this->escape($this->translator('Managing Users')); ?> ::..</h2>
 
 <ul>
-    <li><a href="" title=""><?php echo $this->escape($this->translator('Users list')); ?></a></li>
-    <li><a href="" title=""><?php echo $this->escape($this->translator('Add')); ?></a></li>
-</ul>
-
-<h2>..:: <?php echo $this->escape($this->translator('Website Configuration')); ?> ::..</h2>
-
-<ul>
-    <li><a href="" title=""><?php echo $this->escape($this->translator('Managing Users')); ?></a></li>
-    <li><a href="" title=""><?php echo $this->escape($this->translator('Managing Users')); ?></a></li>
+    <li><a href="<?php echo $this->url('userList'); ?>" title=""><?php echo $this->escape($this->translator('Users list')); ?></a></li>
+    <li><a href="<?php echo $this->url('userCreate'); ?>" title=""><?php echo $this->escape($this->translator('Add')); ?></a></li>
+    <li><a href="<?php echo $this->url('userAcl'); ?>" title=""><?php echo $this->escape($this->translator('Acl')); ?></a></li>
 </ul>

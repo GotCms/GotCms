@@ -111,14 +111,18 @@ class Connection implements ConnectionInterface
 
         /** @var $result \PDOStatement */
         $result = $this->resource->query('SELECT DATABASE()');
-        $r = $result->fetch_row();
-        return $r[0];
+        if ($result instanceof \PDOStatement) {
+            $r = $result->fetch_row();
+            return $r[0];
+        }
+        return false;
     }
+
     /**
      * Set resource
-     * 
+     *
      * @param  \PDO $resource
-     * @return Connection 
+     * @return Connection
      */
     public function setResource(\PDO $resource)
     {
@@ -194,11 +198,13 @@ class Connection implements ConnectionInterface
 
         if (!isset($dsn) && isset($pdoDriver)) {
             $dsn = $pdoDriver . ':';
-            if (isset($hostname)) {
-                $dsn .= "hostname=$hostname;";
-            }
-            if (isset($database)) {
-                $dsn .= "dbname=$database;";
+            switch ($pdoDriver) {
+                case 'sqlite':
+                    $dsn .= $database;
+                    break;
+                default:
+                    $dsn .= (isset($hostname)) ? 'host=' . $hostname . ';' : '';
+                    $dsn .= (isset($database)) ? 'dbname=' . $database : '';
             }
         } elseif (!isset($dsn)) {
             throw new \Exception('A dsn was not provided or could not be constructed from your parameters');
@@ -316,8 +322,8 @@ class Connection implements ConnectionInterface
     }
     /**
      * Get last generated id
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getLastGeneratedId()
     {
