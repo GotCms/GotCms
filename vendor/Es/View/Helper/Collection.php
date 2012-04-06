@@ -1,5 +1,5 @@
 <?php
-namespace Application\Model\View;
+namespace Es\View;
 
 use Es\Db\AbstractTable,
     Es\Component\IterableInterface;
