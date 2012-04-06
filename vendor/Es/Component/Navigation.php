@@ -5,7 +5,7 @@
  */
 namespace Es\Component;
 
-use Application\Model\Document;
+use Es\Document;
 
 class Navigation
 {

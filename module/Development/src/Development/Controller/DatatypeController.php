@@ -4,7 +4,7 @@ namespace Development\Controller;
 
 use Es\Mvc\Controller\Action,
     Development\Form\Datatype as DatatypeForm,
-    Application\Model\Datatype,
+    Es\Datatype,
     Zend\View\Model\ViewModel;
 
 class DatatypeController extends Action

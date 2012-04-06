@@ -1,8 +1,8 @@
 <?php
 namespace Datatypes\Upload;
 
-use Application\Model\Datatype\AbstractDatatype\AbstractPrevalueEditor
-    , Application\Model\Property\Model as PropertyModel;
+use Es\Datatype\AbstractDatatype\AbstractPrevalueEditor
+    , Es\Property\Model as PropertyModel;
 
 class Datatype extends AbstractDatatype
 {

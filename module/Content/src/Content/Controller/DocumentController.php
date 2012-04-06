@@ -3,11 +3,11 @@
 namespace Content\Controller;
 
 use Es\Mvc\Controller\Action,
-    Application\Model\Datatype,
-    Application\Model\Document\Collection as DocumentCollection,
-    Application\Model\Document\Model as DocumentModel,
-    Application\Model\DocumentType,
-    Application\Model\Property,
+    Es\Datatype,
+    Es\Document\Collection as DocumentCollection,
+    Es\Document\Model as DocumentModel,
+    Es\DocumentType,
+    Es\Property,
     Content\Form,
     Es\Component,
     Zend\Json\Json;

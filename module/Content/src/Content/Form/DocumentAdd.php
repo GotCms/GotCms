@@ -1,9 +1,9 @@
 <?php
 namespace Content\Form;
 
-use Application\Model\Document,
-    Application\Model\DocumentType,
-    Application\Model\View,
+use Es\Document,
+    Es\DocumentType,
+    Es\View,
     Es\Form\AbstractForm,
     Zend\Validator,
     Zend\Form\Element;

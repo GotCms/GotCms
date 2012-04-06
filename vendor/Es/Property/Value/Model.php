@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Model\Property\Value;
+namespace Es\Property\Value;
 
 use Es\Db\AbstractTable;
 

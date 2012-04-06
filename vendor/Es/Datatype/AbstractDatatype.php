@@ -1,9 +1,9 @@
 <?php
 
-namespace Application\Model\Datatype;
+namespace Es\Datatype;
 
 use Es\Db\AbstractTable,
-    Application\Model\Property;
+    Es\Property;
 
 abstract class AbstractDatatype extends AbstractTable
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Datatypes\RadioButtonList;
 
-use Application\Model\Datatype\AbstractDatatype\AbstractEditor,
-    Application\Model\Datatype;
+use Es\Datatype\AbstractDatatype\AbstractEditor,
+    Es\Datatype;
 
 class Editor extends AbstractEditor
 {

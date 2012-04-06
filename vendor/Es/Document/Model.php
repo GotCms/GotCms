@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Model\Document;
+namespace Es\Document;
 
 use Es\Db\AbstractTable,
     Es\Component\IterableInterface,
-    Application\Model\View;
+    Es\View;
 
 class Model extends AbstractTable implements IterableInterface
 {

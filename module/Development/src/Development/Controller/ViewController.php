@@ -4,7 +4,7 @@ namespace Development\Controller;
 
 use Es\Mvc\Controller\Action,
     Development\Form\View as ViewForm,
-    Application\Model\View;
+    Es\View;
 
 class ViewController extends Action
 {

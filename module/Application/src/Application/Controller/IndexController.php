@@ -4,11 +4,11 @@ namespace Application\Controller;
 
 use Es\Mvc\Controller\Action,
     Es\Component,
-    Application\Model\Document,
-    Application\Model\DocumentType,
-    Application\Model\Layout,
-    Application\Model\Property,
-    Application\Model\View,
+    Es\Document,
+    Es\DocumentType,
+    Es\Layout,
+    Es\Property,
+    Es\View,
     Zend\Config\Reader\Xml,
     Zend\Navigation\Navigation,
     Zend\View\Model\ViewModel;

@@ -1,7 +1,7 @@
 <?php
 namespace Datatypes\Textrich;
 
-use Application\Model\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Es\Datatype\AbstractDatatype\AbstractPrevalueEditor;
 
 class PrevalueEditor extends AbstractPrevalueEditor
 {

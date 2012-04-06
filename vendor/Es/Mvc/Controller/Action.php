@@ -1,7 +1,7 @@
 <?php
 namespace Es\Mvc\Controller;
 
-use Application\Model\User\Model,
+use Es\User\Model,
     Zend\Mvc\Controller\ActionController,
     Zend\Authentication\AuthenticationService,
     Zend\Mvc\MvcEvent,

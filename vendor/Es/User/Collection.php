@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Model\User;
+namespace Es\User;
 
 use Es\Db\AbstractTable,
     Es\Component\IterableInterface;

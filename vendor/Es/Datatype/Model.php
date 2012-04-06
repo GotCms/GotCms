@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Model\Datatype;
+namespace Es\Datatype;
 
 use Es\Db\AbstractTable,
     Es\Component\IterableInterface,
-    Application\Model\Property\Model as PropertyModel,
+    Es\Property\Model as PropertyModel,
     Datatypes;
 
 class Model extends AbstractTable implements IterableInterface
@@ -179,11 +179,11 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
     *
-    * @param Application\Model\Property\Model $property
+    * @param Es\Property\Model $property
     *
     * @return mixte
     */
-    static function saveEditor(\Application\Model\Property\Model $property)
+    static function saveEditor(\Es\Property\Model $property)
     {
         $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
         $datatype->getEditor($property)->save();

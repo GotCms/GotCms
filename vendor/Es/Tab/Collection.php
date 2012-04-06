@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Model\Tab;
+namespace Es\Tab;
 
 use Es\Db\AbstractTable;
 

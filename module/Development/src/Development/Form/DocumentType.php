@@ -3,8 +3,8 @@ namespace Development\Form;
 
 use Es\Form\AbstractForm,
     Es\Validator,
-    Application\Model\Datatype,
-    Application\Model\View,
+    Es\Datatype,
+    Es\View,
     Zend\Validator\Db,
     Zend\Form\Element,
     Zend\Form\SubForm;

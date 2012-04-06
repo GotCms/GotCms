@@ -1,7 +1,7 @@
 <?php
 namespace Datatypes\RadioButtonList;
 
-use Application\Model\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Es\Datatype\AbstractDatatype\AbstractPrevalueEditor;
 
 class PrevalueEditor extends AbstractPrevalueEditor
 {

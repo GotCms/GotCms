@@ -1,7 +1,7 @@
 <?php
 namespace Datatypes\Textstring;
 
-use Application\Model\Datatype\AbstractDatatype\AbstractEditor,
+use Es\Datatype\AbstractDatatype\AbstractEditor,
     Zend\Form\Element;
 
 class Editor extends AbstractEditor

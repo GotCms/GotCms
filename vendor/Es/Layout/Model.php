@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Model\Layout;
+namespace Es\Layout;
 
 use Es\Db\AbstractTable,
     Es\Component\IterableInterface;

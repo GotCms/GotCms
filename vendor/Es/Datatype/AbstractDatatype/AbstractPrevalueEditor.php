@@ -1,8 +1,8 @@
 <?php
-namespace Application\Model\Datatype\AbstractDatatype;
+namespace Es\Datatype\AbstractDatatype;
 
 use Es\Core\Object,
-    Application\Model\Datatype;
+    Es\Datatype;
 
 abstract class AbstractPrevalueEditor extends Object
 {

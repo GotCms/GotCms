@@ -4,7 +4,7 @@ namespace Development\Controller;
 
 use Es\Mvc\Controller\Action,
     Development\Form\DocumentType as DocumentTypeForm,
-    Application\Model\DocumentType;
+    Es\DocumentType;
 
 class DocumentTypeController extends Action
 {

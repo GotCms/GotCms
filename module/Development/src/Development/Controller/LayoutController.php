@@ -4,7 +4,7 @@ namespace Development\Controller;
 
 use Es\Mvc\Controller\Action,
     Development\Form\Layout as LayoutForm,
-    Application\Model\Layout;
+    Es\Layout;
 
 class LayoutController extends Action
 {

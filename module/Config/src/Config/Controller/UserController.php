@@ -3,7 +3,7 @@
 namespace Config\Controller;
 
 use Es\Mvc\Controller\Action,
-    Application\Model\User,
+    Es\User,
     Config\Form\UserLogin;
 
 class UserController extends Action
