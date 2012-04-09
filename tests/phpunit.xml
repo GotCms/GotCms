@@ -1,0 +1,10 @@
+<phpunit bootstrap="./Bootstrap.php" colors="true">
+    <testsuite name="EsCMS Test Suite">
+        <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">./vendor/</directory>
+    </testsuite>
+    <logging>
+        <log type="coverage-html" target="./logs/coverage" charset="UTF-8"
+             yui="true" highlight="false" lowUpperBound="35" highLowerBound="80" />
+        <log type="testdox-html" target="./logs/testdox.html" />
+    </logging>
+</phpunit>

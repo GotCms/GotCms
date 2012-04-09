@@ -1,0 +1,2 @@
+<?php
+define('TESTS_GENERATE_REPORT', TRUE);
