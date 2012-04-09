@@ -1,7 +1,7 @@
 <?php
 namespace Datatypes\CheckboxList;
 
-use Es\Datatype;
+use Es\Datatype\AbstractDatatype\AbstractEditor;
 
 class Editor extends AbstractEditor
 {
