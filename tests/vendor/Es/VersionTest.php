@@ -22,23 +22,13 @@ class VersionTest extends \PHPUnit_Framework_TestCase
         $this->_object = new Version;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
 
     /**
      * @todo Implement testCompareVersion().
      */
     public function testCompareVersion()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals('0', Version::compareVersion(Version::VERSION));
     }
 
     /**
@@ -46,10 +36,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLatest()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals('0.1a', Version::getLatest());
     }
 
     /**
@@ -57,10 +44,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsLatest()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals(TRUE, Version::isLatest());
     }
 }
 ?>

@@ -20,6 +20,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        $GLOBALS['appliaction'] =
         $this->_object = new Navigation;
     }
 
@@ -40,6 +41,25 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $this->markTestIncomplete(
           'This test has not been implemented yet.'
         );
+    }
+
+    /**
+     * @todo Implement testSetBasePath
+     */
+    public function testSetBasePath()
+    {
+        $this->_object->setBasePath('http://www.escms.com');
+        $this->assertEquals('http://www.escms.com', $this->_object->getBasePath());
+    }
+
+
+    /**
+     * @todo Implement testSetBasePath
+     */
+    public function testGetBasePath()
+    {
+        $this->_object->setBasePath('http://www.escms.com');
+        $this->assertEquals('http://www.escms.com', $this->_object->getBasePath());
     }
 
     /**

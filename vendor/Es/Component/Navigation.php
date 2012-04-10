@@ -17,11 +17,20 @@ class Navigation
 
     public function __construct()
     {
-
-        $this->_basePath = $GLOBALS['application']->getRequest()->getBasePath();
         $documents = new Document\Collection();
         $documents->load(0);
         $this->_documents = $documents->getDocuments();
+    }
+
+    public function setBasePath($path)
+    {
+        $this->_basePath = $path;
+        return $this;
+    }
+
+    public function getBasePath()
+    {
+        return $this->_basePath;
     }
 
     /**
@@ -45,7 +54,7 @@ class Navigation
             {
                 $navigation .= '<document-'.$document->getUrlKey().'>';
                 $navigation .= '<label>'.$document->getName().'</label>';
-                $navigation .= '<uri>'.($parent_url !== NULL ? $parent_url : '').'/'.$document->getUrlKey().'</uri>';
+                $navigation .= '<uri>' . $this->getBasePath() . ($parent_url !== NULL ? $parent_url : '').'/'.$document->getUrlKey().'</uri>';
                 if(!empty($children) && is_array($children))
                 {
                     $navigation .= '<pages>';

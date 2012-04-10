@@ -54,6 +54,7 @@ final class Version
     {
         if (null === self::$latestVersion) {
             //@TODO
+            self::$latestVersion = self::VERSION;
         }
 
         return self::$latestVersion;
