@@ -485,7 +485,7 @@ class Client implements Dispatchable
         } elseif ($cookie instanceof SetCookie) {
             $this->cookies[$this->getCookieId($cookie)] = $cookie;
         } elseif (is_string($cookie) && $value !== null) {
-            $setCookie = new SetCookie($cookie, $value, $domain, $expire, $path, $secure, $httponly);
+            $setCookie = new SetCookie($cookie, $value, null, null, $domain, $expire, $path, $secure, $httponly);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
         } else {
             throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookie');
@@ -832,6 +832,14 @@ class Client implements Dispatchable
             }
 
             if ($this->config['outputstream']) {
+                $stream = $this->getStream();
+                if (!is_resource($stream) && is_string($stream)) {
+                    $stream = fopen($stream, 'r');
+                }
+                if (!is_resource($stream)) {
+                    $stream = $this->getUri()->toString();
+                    $stream = fopen($stream, 'r');
+                }
                 $streamMetaData = stream_get_meta_data($stream);
                 if ($streamMetaData['seekable']) {
                     rewind($stream);
