@@ -120,9 +120,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set resource
-     *
+     * 
      * @param  \PDO $resource
-     * @return Connection
+     * @return Connection 
      */
     public function setResource(\PDO $resource)
     {
@@ -203,8 +203,8 @@ class Connection implements ConnectionInterface
                     $dsn .= $database;
                     break;
                 default:
-                    $dsn .= (isset($hostname)) ? 'host=' . $hostname : '';
-                    $dsn .= (isset($database)) ? ';dbname=' . $database : '';
+                    $dsn .= (isset($hostname)) ? 'hostname=' . $hostname : '';
+                    $dsn .= (isset($database)) ? 'dbname=' . $database : '';
             }
         } elseif (!isset($dsn)) {
             throw new \Exception('A dsn was not provided or could not be constructed from your parameters');
@@ -276,7 +276,7 @@ class Connection implements ConnectionInterface
         }
 
         if (!$this->inTransaction) {
-            throw new \Exception('Must call commit() before you can rollback');
+            throw new \Exception('Must call beginTransaction() before you can rollback');
         }
 
         $this->resource->rollBack();
@@ -322,8 +322,8 @@ class Connection implements ConnectionInterface
     }
     /**
      * Get last generated id
-     *
-     * @return integer
+     * 
+     * @return integer 
      */
     public function getLastGeneratedId()
     {
