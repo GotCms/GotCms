@@ -1,7 +1,7 @@
 <?php
 namespace Datatypes\Textstring;
 
-use Es\Datatype\AbstractDatatype\AbstractPrevalueEditor,
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
     Zend\Form\Element;
 
 class PrevalueEditor extends AbstractPrevalueEditor

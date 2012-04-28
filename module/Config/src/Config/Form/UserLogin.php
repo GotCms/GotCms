@@ -1,7 +1,7 @@
 <?php
 namespace Config\Form;
 
-use Es\Form\AbstractForm,
+use Gc\Form\AbstractForm,
     Zend\Validator\Db,
     Zend\Form\Element;
 

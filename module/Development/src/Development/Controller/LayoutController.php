@@ -2,9 +2,9 @@
 
 namespace Development\Controller;
 
-use Es\Mvc\Controller\Action,
+use Gc\Mvc\Controller\Action,
     Development\Form\Layout as LayoutForm,
-    Es\Layout;
+    Gc\Layout;
 
 class LayoutController extends Action
 {

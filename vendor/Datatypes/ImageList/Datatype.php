@@ -1,8 +1,8 @@
 <?php
 namespace Datatypes\ImageList;
 
-use Es\Datatype\AbstractDatatype as AbstractDatatype
-    , Es\Property\Model as PropertyModel;
+use Gc\Datatype\AbstractDatatype as AbstractDatatype
+    , Gc\Property\Model as PropertyModel;
 
 class Datatype extends AbstractDatatype
 {

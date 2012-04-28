@@ -2,9 +2,9 @@
 
 namespace Development\Controller;
 
-use Es\Mvc\Controller\Action,
+use Gc\Mvc\Controller\Action,
     Development\Form\View as ViewForm,
-    Es\View;
+    Gc\View;
 
 class ViewController extends Action
 {

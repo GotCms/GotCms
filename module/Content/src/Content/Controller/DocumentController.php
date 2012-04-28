@@ -2,14 +2,14 @@
 
 namespace Content\Controller;
 
-use Es\Mvc\Controller\Action,
-    Es\Datatype,
-    Es\Document\Collection as DocumentCollection,
-    Es\Document\Model as DocumentModel,
-    Es\DocumentType,
-    Es\Property,
+use Gc\Mvc\Controller\Action,
+    Gc\Datatype,
+    Gc\Document\Collection as DocumentCollection,
+    Gc\Document\Model as DocumentModel,
+    Gc\DocumentType,
+    Gc\Property,
     Content\Form,
-    Es\Component,
+    Gc\Component,
     Zend\Json\Json;
 
 class DocumentController extends Action
@@ -105,7 +105,7 @@ class DocumentController extends Action
             }
             catch (Exception $e)
             {
-                Gc_Error::set(get_class($this), $e);
+                \Gc\Error::set(get_class($this), $e);
             }
         }
 
@@ -164,7 +164,7 @@ class DocumentController extends Action
                         }
                     }
 
-                    \Es\Form\AbstractForm::addContent($sub_form, Datatype\Model::loadEditor($property, $document));
+                    \Gc\Form\AbstractForm::addContent($sub_form, Datatype\Model::loadEditor($property, $document));
                 }
 
                 $document_form->addSubForm($sub_form, 'tabs-'.$i, $i);

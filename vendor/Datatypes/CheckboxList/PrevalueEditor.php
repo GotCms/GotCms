@@ -1,7 +1,7 @@
 <?php
 namespace Datatypes\CheckboxList;
 
-use Es\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
 
 class PrevalueEditor extends AbstractPrevalueEditor
 {

@@ -2,7 +2,7 @@
 
 namespace Statistics\Controller;
 
-use Es\Mvc\Controller\Action;
+use Gc\Mvc\Controller\Action;
 
 class IndexController extends Action
 {

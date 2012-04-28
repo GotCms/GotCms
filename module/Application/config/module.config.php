@@ -34,7 +34,7 @@ return array(
             'Zend\View\HelperLoader' => array(
                 'parameters' => array(
                     'map' => array(
-                        'JsQuoteEscape' => 'Es\View\Helper\JsQuoteEscape'
+                        'JsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape'
                     )
                 ),
             ),

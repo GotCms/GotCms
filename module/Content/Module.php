@@ -2,7 +2,7 @@
 
 namespace Content;
 
-use Es\Mvc;
+use Gc\Mvc;
 
 class Module extends Mvc\Module
 {

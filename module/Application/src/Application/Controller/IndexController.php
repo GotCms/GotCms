@@ -2,13 +2,13 @@
 
 namespace Application\Controller;
 
-use Es\Mvc\Controller\Action,
-    Es\Component,
-    Es\Document,
-    Es\DocumentType,
-    Es\Layout,
-    Es\Property,
-    Es\View,
+use Gc\Mvc\Controller\Action,
+    Gc\Component,
+    Gc\Document,
+    Gc\DocumentType,
+    Gc\Layout,
+    Gc\Property,
+    Gc\View,
     Zend\Config\Reader\Xml,
     Zend\Navigation\Navigation,
     Zend\View\Model\ViewModel;
@@ -75,7 +75,7 @@ class IndexController extends Action
             stream_wrapper_unregister($this->_viewStream);
         }
 
-        stream_wrapper_register($this->_viewStream, "Es\View\Stream");
+        stream_wrapper_register($this->_viewStream, "Gc\View\Stream");
         $template_path_stack = $this->getLocator()->get('Zend\View\Resolver\TemplatePathStack');
         $template_path_stack->setUseStreamWrapper(TRUE);
         $this->_viewPath = $template_path_stack->resolve($this->_viewName);
@@ -130,7 +130,7 @@ class IndexController extends Action
 
     /**
      * @param integer $document_type_id
-     * @return Gc_Component_Tab_Model
+     * @return Gc\Component\Tab\Model
      */
     private function loadTabs($document_type_id)
     {
@@ -144,7 +144,7 @@ class IndexController extends Action
     * @param integer $document_type_id
     * @param integer $tab_id
     * @param integer $document_id
-    * @return Gc_Component_Property_Model
+    * @return Gc\Component\Property\Model
     */
     private function loadProperties($document_type_id, $tab_id, $document_id)
     {

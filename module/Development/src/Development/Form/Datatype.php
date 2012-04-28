@@ -1,8 +1,8 @@
 <?php
 namespace Development\Form;
 
-use Es\Form\AbstractForm,
-    Es\Validator,
+use Gc\Form\AbstractForm,
+    Gc\Validator,
     Zend\Validator\Db,
     Zend\Form\Element;
 

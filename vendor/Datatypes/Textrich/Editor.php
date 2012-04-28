@@ -1,7 +1,7 @@
 <?php
 namespace Datatypes\Textrich;
 
-use Es\Datatype\AbstractDatatype\AbstractEditor,
+use Gc\Datatype\AbstractDatatype\AbstractEditor,
     Zend\Form\Element;
 
 class Editor extends AbstractEditor

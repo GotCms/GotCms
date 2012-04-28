@@ -2,8 +2,8 @@
 
 namespace Config\Controller;
 
-use Es\Mvc\Controller\Action,
-    Es\User,
+use Gc\Mvc\Controller\Action,
+    Gc\User,
     Config\Form\UserLogin,
     Config\Form\User as UserForm;
 
@@ -17,9 +17,9 @@ class UserController extends Action
     public function loginAction()
     {
         $login_form = new UserLogin();
-        if($this->getRequest()->isPost())
+        $post = $this->getRequest()->post();
+        if($this->getRequest()->isPost() and $login_form->isValid($post->toArray()))
         {
-            $post = $this->getRequest()->post();
             $user_table = new User\Model();
             if($user_id = $user_table->authenticate($post->get('email'), $post->get('password')))
             {

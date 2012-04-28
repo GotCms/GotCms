@@ -2,7 +2,7 @@
 
 namespace Statistics;
 
-use Es\Mvc;
+use Gc\Mvc;
 
 class Module extends Mvc\Module
 {

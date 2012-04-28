@@ -1,10 +1,10 @@
 <?php
 namespace Content\Form;
 
-use Es\Document,
-    Es\DocumentType,
-    Es\View,
-    Es\Form\AbstractForm,
+use Gc\Document,
+    Gc\DocumentType,
+    Gc\View,
+    Gc\Form\AbstractForm,
     Zend\Validator,
     Zend\Form\Element;
 

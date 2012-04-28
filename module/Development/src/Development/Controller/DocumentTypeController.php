@@ -2,9 +2,11 @@
 
 namespace Development\Controller;
 
-use Es\Mvc\Controller\Action,
+use Gc\Mvc\Controller\Action,
     Development\Form\DocumentType as DocumentTypeForm,
-    Es\DocumentType;
+    Gc\Property,
+    Gc\Tab,
+    Gc\DocumentType;
 
 class DocumentTypeController extends Action
 {
@@ -41,7 +43,7 @@ class DocumentTypeController extends Action
             if($form->isValid($this->getRequest()->post()->toArray()))
             {
                 $document_type = new DocumentType\Model();
-                $property_collection = new Gc_Model_DbTable_Property_Collection();
+                $property_collection = new Gc\Property\Collection();
 
                 $infos_subform = $form->getSubForm('infos');
                 $views_subform = $form->getSubForm('views');
@@ -74,7 +76,7 @@ class DocumentTypeController extends Action
                     $idx = 0;
                     foreach($tabs_array as $tab_id => $tab)
                     {
-                        $t = Gc_Model_DbTable_Tab_Model::fromArray($tab);
+                        $t = Gc\Tab\Model::fromArray($tab);
                         $t->setDocumentTypeId($document_type->getId());
                         $t->setOrder(++$idx);
                         $t->save();
@@ -123,7 +125,7 @@ class DocumentTypeController extends Action
                 catch(Exception $e)
                 {
                     $this->getAdapter()->rollBack();
-                    throw new Gc_Exception("Error Processing Request ".print_r($e, TRUE), 1);
+                    throw new \Gc\Exception("Error Processing Request ".print_r($e, TRUE), 1);
                 }
             }
             else
