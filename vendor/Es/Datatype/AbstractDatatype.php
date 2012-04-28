@@ -17,13 +17,13 @@ abstract class AbstractDatatype extends AbstractTable
     protected     $_name = 'datatypes';
 
     /**
-    * @param Es_Component_Property_Model $property
-    * @return Es_Model_DbTable_Datatype_Abstract_Editor
+    * @param Gc_Component_Property_Model $property
+    * @return Gc_Model_DbTable_Datatype_Abstract_Editor
     */
     abstract public function getEditor(Property\Model $property);
 
     /**
-    * @return Es_Model_DbTable_Datatype_Abstract_PrevalueEditor
+    * @return Gc_Model_DbTable_Datatype_Abstract_PrevalueEditor
     */
     abstract public function getPrevalueEditor();
 

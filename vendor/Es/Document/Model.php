@@ -162,9 +162,9 @@ class Model extends AbstractTable implements IterableInterface
         catch (Exception $e)
         {
             /**
-            * TODO(Make Es_Error)
+            * TODO(Make Gc_Error)
             */
-            Es_Error::set(get_class($this),$e);
+            Gc_Error::set(get_class($this),$e);
         }
 
         return FALSE;
@@ -191,7 +191,7 @@ class Model extends AbstractTable implements IterableInterface
             }
             catch (Exception $e)
             {
-                Es_Error::set(get_class($this), $e);
+                Gc_Error::set(get_class($this), $e);
             }
         }
 
@@ -200,7 +200,7 @@ class Model extends AbstractTable implements IterableInterface
 
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getName()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getName()
     */
     public function getName()
     {
@@ -208,7 +208,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getId()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getId()
     */
     public function getId()
     {
@@ -216,7 +216,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getParent()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getParent()
     */
     public function getParent()
     {
@@ -226,7 +226,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getChildren()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getChildren()
     */
     public function getChildren()
     {
@@ -241,7 +241,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getIcon()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getIcon()
     */
     public function getIcon()
     {
@@ -275,7 +275,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getIterableId()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getIterableId()
     */
     public function getIterableId()
     {
@@ -283,7 +283,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getUrl()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getUrl()
     */
     public function getUrl()
     {

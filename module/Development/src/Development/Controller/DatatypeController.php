@@ -38,15 +38,15 @@ class DatatypeController extends Action
                 }
                 else
                 {
-                    throw new Es_Core_Exception("Error during insert new datatype");
+                    throw new Gc_Core_Exception("Error during insert new datatype");
                 }
             }
             catch(Exception $e)
             {
                 /**
-                * TODO(Make Es_Error)
+                * TODO(Make Gc_Error)
                 */
-                Es_Error::set(get_class($this), $e);
+                Gc_Error::set(get_class($this), $e);
             }
 
             $form->populate($data);
@@ -101,9 +101,9 @@ class DatatypeController extends Action
                 catch(Exception $e)
                 {
                     /**
-                    * TODO(Make Es_Error)
+                    * TODO(Make Gc_Error)
                     */
-                    Es_Error::set(get_class($this), $e);
+                    Gc_Error::set(get_class($this), $e);
                 }
             }
             else

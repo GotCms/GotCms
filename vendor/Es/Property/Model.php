@@ -125,9 +125,9 @@ class Model extends AbstractTable
         catch (Exception $e)
         {
             /**
-            * TODO(Make Es_Error)
+            * TODO(Make Gc_Error)
             */
-            Es_Error::set(get_class($this),$e);
+            Gc_Error::set(get_class($this),$e);
         }
 
         return FALSE;
@@ -147,7 +147,7 @@ class Model extends AbstractTable
             }
             catch(Exception $e)
             {
-                throw new Es_Exception($e->getMessage());
+                throw new Gc_Exception($e->getMessage());
 
             }
             return TRUE;
@@ -157,7 +157,7 @@ class Model extends AbstractTable
     }
     /**
     * @param array $array
-    * @return Es_Component_Model
+    * @return Gc_Component_Model
     */
     static function fromArray(Array $array)
     {
@@ -169,7 +169,7 @@ class Model extends AbstractTable
 
     /**
     * @param integer $id
-    * @return Es_Component_Model
+    * @return Gc_Component_Model
     */
     static function fromId($id)
     {

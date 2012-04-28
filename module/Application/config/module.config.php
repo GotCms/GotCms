@@ -26,7 +26,7 @@ return array(
                         'driver' => 'pdo_pgsql',
                         'username' => 'got',
                         'password' => 'x8maoxfp;',
-                        'database' => 'escms',
+                        'database' => 'gotcms',
                         'hostname' => 'localhost'
                     ),
                 ),

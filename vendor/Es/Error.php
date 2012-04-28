@@ -1,5 +1,5 @@
 <?php
-class Es_Error
+class Gc_Error
 {
     static function set($title, $content)
     {

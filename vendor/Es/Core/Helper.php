@@ -1,5 +1,5 @@
 <?php
-class Es_Core_Helper {
+class Gc_Core_Helper {
     protected     $_helper;
     private     $_loaders = array();
     private     $_loaderTypes = array('filter', 'helper');

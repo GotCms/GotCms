@@ -39,54 +39,54 @@ class Collection extends AbstractTable implements IterableInterface
         return $array;
     }
     /*
-    * Es_Interfaces_Iterable methods
+    * Gc_Interfaces_Iterable methods
     */
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getParent()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getParent()
     */
     public function getParent()
     {
         return null;
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getChildren()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getChildren()
     */
     public function getChildren()
     {
         return $this->getDocumentTypes();
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getId()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getId()
     */
     public function getId()
     {
         return null;
     }
-    /* TODO Finish icon in Es_DocumentType_Collection
+    /* TODO Finish icon in Gc_DocumentType_Collection
     */
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getIcon()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getIcon()
     */
     public function getIcon()
     {
         return 'folder';
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getIterableId()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getIterableId()
     */
     public function getIterableId()
     {
         return 'documenttypes';
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getName()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getName()
     */
     public function getName()
     {
         return 'Document Types';
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getUrl()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getUrl()
     */
     public function getUrl()
     {

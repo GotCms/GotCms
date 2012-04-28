@@ -71,9 +71,9 @@ class Model extends AbstractTable
         catch (Exception $e)
         {
             /**
-            * TODO(Make Es_Error)
+            * TODO(Make Gc_Error)
             */
-            Es_Error::set(get_class($this),$e);
+            Gc_Error::set(get_class($this),$e);
         }
 
         return FALSE;
@@ -89,14 +89,14 @@ class Model extends AbstractTable
         {
             try
             {
-                $properties_collection = new Es_Model_DbTable_Property_Collection();
+                $properties_collection = new Gc_Model_DbTable_Property_Collection();
                 $properties_collection->load(NULL, $tab_id);
                 $properties_collection->delete();
                 parent::delete('id = '.$tab_id);
             }
             catch(Exception $e)
             {
-                throw new Es_Exception($e->getMessage());
+                throw new Gc_Exception($e->getMessage());
             }
 
             return TRUE;

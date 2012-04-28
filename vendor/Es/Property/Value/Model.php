@@ -26,7 +26,7 @@ class Model extends AbstractTable
 
     /**
     * @param array $array
-    * @return Es_Component_Property_Model
+    * @return Gc_Component_Property_Model
     */
     static function fromArray(Array $array)
     {
@@ -38,7 +38,7 @@ class Model extends AbstractTable
 
     /**
     * @param integer $property_id
-    * @return Es_Component_Property_Model
+    * @return Gc_Component_Property_Model
     */
     static function fromId($property_value_id)
     {
@@ -81,9 +81,9 @@ class Model extends AbstractTable
         catch (Exception $e)
         {
             /**
-            * TODO(Make Es_Error)
+            * TODO(Make Gc_Error)
             */
-            Es_Error::set(get_class($this),$e);
+            Gc_Error::set(get_class($this),$e);
         }
         return FALSE;
     }

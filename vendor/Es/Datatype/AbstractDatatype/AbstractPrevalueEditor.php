@@ -44,7 +44,7 @@ abstract class AbstractPrevalueEditor extends Object
     }
 
     /**
-    * @return Es_Model_DbTable_Datatype_Abstract
+    * @return Gc_Model_DbTable_Datatype_Abstract
     */
     public function getDatatype()
     {

@@ -17,7 +17,7 @@ while [ -n "$1" ] ; do
      shift ;;
 
     *)
-     PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}Es_$1"
+     PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}Gc_$1"
      shift ;;
   esac
 done

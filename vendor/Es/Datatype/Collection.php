@@ -43,24 +43,24 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /*
-    * Es_Interfaces_Iterable methods
+    * Gc_Interfaces_Iterable methods
     */
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getParent()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getParent()
     */
     public function getParent()
     {
         return FALSE;
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getChildren()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getChildren()
     */
     public function getChildren()
     {
         return $this->getDatatypes();
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getId()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getId()
     */
     public function getId()
     {
@@ -69,7 +69,7 @@ class Collection extends AbstractTable implements IterableInterface
 
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getIcon()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getIcon()
     */
     public function getIcon()
     {
@@ -77,7 +77,7 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getIterableId()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getIterableId()
     */
     public function getIterableId()
     {
@@ -85,7 +85,7 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getName()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getName()
     */
     public function getName()
     {
@@ -93,7 +93,7 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getUrl()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getUrl()
     */
     public function getUrl()
     {

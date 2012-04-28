@@ -1,5 +1,5 @@
 <?php
-class Es_Datatype_Upload extends Es_Core_Object {
+class Gc_Datatype_Upload extends Gc_Core_Object {
     protected $_property, $_datatype, $_request, $_document_id, $_file, $_name;
 
     /**
@@ -55,11 +55,11 @@ class Es_Datatype_Upload extends Es_Core_Object {
 
     /**
     * @param integer $property_id
-    * @return Es_Component_Property_Model
+    * @return Gc_Component_Property_Model
     */
     protected function getProperty($property_id = null) {
         if($this->_property === null) {
-            $this->_property = Es_Component_Property_Model::fromId($property_id);
+            $this->_property = Gc_Component_Property_Model::fromId($property_id);
             if($this->_property === null) {
                 return false;
             }
@@ -68,12 +68,12 @@ class Es_Datatype_Upload extends Es_Core_Object {
     }
 
     /**
-    * @return Es_Datatype_Model
+    * @return Gc_Datatype_Model
     */
     protected function getDatatype() {
         if($this->_datatype === null) {
             $datatype_id = $this->_property->getDatatypeId();
-            $this->_datatype = Es_Datatype_Model::fromId($datatype_id);
+            $this->_datatype = Gc_Datatype_Model::fromId($datatype_id);
         }
         return $this->_datatype;
     }

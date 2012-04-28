@@ -91,7 +91,7 @@ class Collection extends AbstractTable
         }
         catch(Exception $e)
         {
-            throw new Es_Exception($e->getMessage());
+            throw new Gc_Exception($e->getMessage());
         }
     }
 
@@ -108,7 +108,7 @@ class Collection extends AbstractTable
         }
         catch(Exception $e)
         {
-            throw new Es_Exception($e->getMessage());
+            throw new Gc_Exception($e->getMessage());
         }
     }
 }

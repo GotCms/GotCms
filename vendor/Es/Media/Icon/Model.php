@@ -1,6 +1,6 @@
 <?php
 //@TODO
-class Es_Media_Icon_Model implements Es_Interface_Iterable {
+class Gc_Media_Icon_Model implements Gc_Interface_Iterable {
 
     private $_icon_id;
     private $_icon_name;
@@ -16,10 +16,10 @@ class Es_Media_Icon_Model implements Es_Interface_Iterable {
 
     /**
     * @param array $icon
-    * @return Es_Media_Icon_Model
+    * @return Gc_Media_Icon_Model
     */
     static function fromArray($icon = array()) {
-        $i = new Es_Media_Icon_Model($icon['icon_id']);
+        $i = new Gc_Media_Icon_Model($icon['icon_id']);
         $i->setName($icon['icon_name']);
         $i->setIconUrl($icon['icon_url']);
         return $i;
@@ -28,7 +28,7 @@ class Es_Media_Icon_Model implements Es_Interface_Iterable {
 
     /**
     * @param integer $icon_id
-    * @return Es_Layout_Model
+    * @return Gc_Layout_Model
     */
     static function fromId($icon_id){
         $db = Zend_Registry::get('db');
@@ -90,9 +90,9 @@ class Es_Media_Icon_Model implements Es_Interface_Iterable {
             return true;
         } catch (Exception $e){
             /**
-            * TODO(Make Es_Error)
+            * TODO(Make Gc_Error)
             */
-            Es_Error::set(get_class($this), $e);
+            Gc_Error::set(get_class($this), $e);
         }
         return false;
     }
@@ -107,46 +107,46 @@ class Es_Media_Icon_Model implements Es_Interface_Iterable {
         return false;
     }
     /*
-    * Es_Interface Methods
+    * Gc_Interface Methods
     */
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getParent()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getParent()
     */
     public function getParent() {
         return null;
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getChildren()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getChildren()
     */
     public function getChildren() {
         return null;
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getId()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getId()
     */
     public function getId() {
         return $this->_icon_id;
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getIterableId()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getIterableId()
     */
     public function getIterableId() {
         return 'icon_'.$this->getId();
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getName()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getName()
     */
     public function getName() {
         return $this->_icon_name;
     }
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getUrl()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getUrl()
     */
     public function getUrl() {
         return 'javascript:loadController(\''.Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('controller'=>'media','action'=>'edit')).'/type/icon/id/'.$this->getId().'\')';
     }
     /* (non-PHPdoc)
-    * @see library/Es/Interface/Es_Interface_Iterable#getIcon()
+    * @see library/Es/Interface/Gc_Interface_Iterable#getIcon()
     */
     public function getIcon() {
         return 'file';

@@ -1,6 +1,6 @@
 <?php
 //@TODO
-class Es_Media_Icon_Collection implements Es_Interface_Iterable{
+class Gc_Media_Icon_Collection implements Gc_Interface_Iterable{
     private $_icons;
 
     public function __construct() {
@@ -16,7 +16,7 @@ class Es_Media_Icon_Collection implements Es_Interface_Iterable{
         $rows = $statement->fetchAll();
         $icons = array();
         foreach($rows as $row) {
-            $icons[] = Es_Media_Icon_Model::fromArray((array)$row);
+            $icons[] = Gc_Media_Icon_Model::fromArray((array)$row);
         }
         $this->_icons = $icons;
     }
@@ -69,7 +69,7 @@ class Es_Media_Icon_Collection implements Es_Interface_Iterable{
 
 
 /*
-    * Es_Interfaces_Iterable methods
+    * Gc_Interfaces_Iterable methods
     */
     public function getParent() {
         return null;

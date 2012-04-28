@@ -41,7 +41,7 @@ class DocumentTypeController extends Action
             if($form->isValid($this->getRequest()->post()->toArray()))
             {
                 $document_type = new DocumentType\Model();
-                $property_collection = new Es_Model_DbTable_Property_Collection();
+                $property_collection = new Gc_Model_DbTable_Property_Collection();
 
                 $infos_subform = $form->getSubForm('infos');
                 $views_subform = $form->getSubForm('views');
@@ -74,7 +74,7 @@ class DocumentTypeController extends Action
                     $idx = 0;
                     foreach($tabs_array as $tab_id => $tab)
                     {
-                        $t = Es_Model_DbTable_Tab_Model::fromArray($tab);
+                        $t = Gc_Model_DbTable_Tab_Model::fromArray($tab);
                         $t->setDocumentTypeId($document_type->getId());
                         $t->setOrder(++$idx);
                         $t->save();
@@ -123,7 +123,7 @@ class DocumentTypeController extends Action
                 catch(Exception $e)
                 {
                     $this->getAdapter()->rollBack();
-                    throw new Es_Exception("Error Processing Request ".print_r($e, TRUE), 1);
+                    throw new Gc_Exception("Error Processing Request ".print_r($e, TRUE), 1);
                 }
             }
             else

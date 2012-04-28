@@ -40,7 +40,7 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /*
-    * Es_Interfaces_Iterable methods
+    * Gc_Interfaces_Iterable methods
     */
     public function getParent()
     {

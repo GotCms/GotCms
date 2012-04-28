@@ -105,7 +105,7 @@ class DocumentController extends Action
             }
             catch (Exception $e)
             {
-                Es_Error::set(get_class($this), $e);
+                Gc_Error::set(get_class($this), $e);
             }
         }
 

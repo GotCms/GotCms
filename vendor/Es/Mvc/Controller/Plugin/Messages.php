@@ -1,6 +1,6 @@
 <?php
 
-class Es_Controller_Plugin_Messages extends Zend_Controller_Plugin_Abstract
+class Gc_Controller_Plugin_Messages extends Zend_Controller_Plugin_Abstract
 {
     protected $_flashMessengerNamespace = array('error', 'success', 'warning', 'info');
 

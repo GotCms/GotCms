@@ -130,7 +130,7 @@ class IndexController extends Action
 
     /**
      * @param integer $document_type_id
-     * @return Es_Component_Tab_Model
+     * @return Gc_Component_Tab_Model
      */
     private function loadTabs($document_type_id)
     {
@@ -144,7 +144,7 @@ class IndexController extends Action
     * @param integer $document_type_id
     * @param integer $tab_id
     * @param integer $document_id
-    * @return Es_Component_Property_Model
+    * @return Gc_Component_Property_Model
     */
     private function loadProperties($document_type_id, $tab_id, $document_id)
     {

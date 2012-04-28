@@ -34,7 +34,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @return Es_Component_Tab_Model
+    * @return Gc_Component_Tab_Model
     */
     public function getTabs()
     {
@@ -90,9 +90,9 @@ class Model extends AbstractTable implements IterableInterface
         catch (Exception $e)
         {
             /**
-            * TODO(Make Es_Error)
+            * TODO(Make Gc_Error)
             */
-            Es_Error::set(get_class($this), $e);
+            Gc_Error::set(get_class($this), $e);
         }
 
         return FALSE;
@@ -103,7 +103,7 @@ class Model extends AbstractTable implements IterableInterface
         $document_type_id = $this->getId();
         if(!empty($document_type_id))
         {
-            $tab_collection = new Es_Model_DbTable_Tab_Collection();
+            $tab_collection = new Gc_Model_DbTable_Tab_Collection();
             $tab_collection->load($document_type_id);
             $tab_collection->delete();
             $this->getAdapter()->delete('document_type_views', $this->getAdapter()->quoteInto('document_type_id = ?', $document_type_id));
@@ -117,7 +117,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
     * @param array $array
-    * @return Es_DocumentType_Model
+    * @return Gc_DocumentType_Model
     */
     static function fromArray(Array $array)
     {
@@ -129,7 +129,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
     * @param integer $document_type_id
-    * @return Es_DocumentType_Model
+    * @return Gc_DocumentType_Model
     */
     static function fromId($document_type_id)
     {
@@ -146,7 +146,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getParent()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getParent()
     */
     public function getParent()
     {
@@ -154,7 +154,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getChildren()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getChildren()
     */
     public function getChildren()
     {
@@ -172,7 +172,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getIterableId()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getIterableId()
     */
     public function getIterableId()
     {
@@ -180,7 +180,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getUrl()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getUrl()
     */
     public function getUrl()
     {
@@ -188,13 +188,13 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interface/Es_Interface_Iterable#getIcon()
+    * @see include/Es/Interface/Gc_Interface_Iterable#getIcon()
     */
     public function getIcon()
     {
         if($this->_icon_url === NULL)
         {
-            $icon = Es_Media_Icon_Model::fromId($this->_documentType_icon);
+            $icon = Gc_Media_Icon_Model::fromId($this->_documentType_icon);
             $this->_icon_url = $icon->getIconUrl();
         }
 
