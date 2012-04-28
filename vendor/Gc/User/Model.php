@@ -16,7 +16,7 @@ class Model extends AbstractTable implements IterableInterface
     {
         $authAdapter = new Adapter\DbTable($this->getAdapter());
         $authAdapter->setTableName($this->_name);
-        $authAdapter->setIdentityColumn('email');
+        $authAdapter->setIdentityColumn('login');
         $authAdapter->setCredentialColumn('password');
 
         $authAdapter->setIdentity($email);
@@ -85,8 +85,10 @@ class Model extends AbstractTable implements IterableInterface
             'firstname' => $this->getFirstname()
             , 'lastname' => $this->getLastname()
             , 'email' => $this->getEmail()
+            , 'login' => $this->getLogin()
             , 'password' => $this->getPassword()
-            , 'user_type_id' => 1//@TODO Use ACL to declare User_type_id
+            , 'updated_at' => new Expression('NOW()')
+            , 'user_role_id' => 1//@TODO Use ACL to declare User_type_id
         );
 
         try

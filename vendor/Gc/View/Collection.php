@@ -8,7 +8,7 @@ class Collection extends AbstractTable implements IterableInterface
 {
     protected $_views;
     protected $_views_elements;
-    protected $_name = 'views';
+    protected $_name = 'view';
 
     public function init($document_type_id = NULL)
     {

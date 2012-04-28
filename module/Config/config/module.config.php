@@ -6,6 +6,8 @@ return array(
             'alias' => array(
                 'config-index' => 'Config\Controller\IndexController',
                 'config-user' => 'Config\Controller\UserController',
+                'config-role' => 'Config\Controller\RoleController',
+                'config-rule' => 'Config\Controller\RuleController',
             ),
             'Zend\View\Resolver\TemplatePathStack' => array(
                 'parameters' => array(

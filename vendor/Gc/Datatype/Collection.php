@@ -7,7 +7,7 @@ use Gc\Db\AbstractTable,
 class Collection extends AbstractTable implements IterableInterface
 {
     protected $_datatypes;
-    protected $_name = 'datatypes';
+    protected $_name = 'datatype';
 
     public function init()
     {

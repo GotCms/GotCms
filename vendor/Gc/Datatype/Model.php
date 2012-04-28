@@ -9,7 +9,7 @@ use Gc\Db\AbstractTable,
 
 class Model extends AbstractTable implements IterableInterface
 {
-    protected $_name = 'datatypes';
+    protected $_name = 'datatype';
     protected $_model;
     static protected $_datatypes = array();
 

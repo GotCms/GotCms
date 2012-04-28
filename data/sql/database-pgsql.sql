@@ -16,8 +16,7 @@ SET default_with_oids = true;
 CREATE TABLE datatypes (
     id integer NOT NULL,
     name character varying(50) NOT NULL,
-    prevalue_value text,
-    model_id integer
+    prevalue_value text
 );
 
 --
@@ -83,11 +82,11 @@ CREATE TABLE documents (
     url_key character varying(50) NOT NULL,
     status boolean DEFAULT false,
     show_in_nav boolean DEFAULT false,
-    user_id integer,
-    document_type_id integer,
-    view_id integer,
-    layout_id integer,
-    parent_id integer DEFAULT 0
+    user_id integer NOT NULL,
+    document_type_id integer NOT NULL,
+    view_id integer NOT NULL,
+    layout_id integer NOT NULL,
+    parent_id integer DEFAULT 0 NOT NULL
 );
 
 --
@@ -135,7 +134,7 @@ CREATE TABLE layouts (
     id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    name character varying(50),
+    name character varying(50) NOT NULL,
     identifier character varying(50) NOT NULL,
     content text,
     description character varying(255)
@@ -157,31 +156,6 @@ CREATE SEQUENCE layouts_id_seq
 SELECT pg_catalog.setval('layouts_id_seq', 1, false);
 
 --
--- Name: models; Type: TABLE; Schema: public; Tablespace: 
---
-CREATE TABLE models (
-    id integer NOT NULL,
-    name character varying(50) NOT NULL,
-    identifier character varying(50) NOT NULL,
-    description character varying(255)
-);
-
---
--- Name: models_id_seq; Type: SEQUENCE; Schema: public;
---
-CREATE SEQUENCE models_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
---
--- Name: models_id_seq; Type: SEQUENCE SET; Schema: public;
---
-SELECT pg_catalog.setval('models_id_seq', 1, false);
-
---
 -- Name: properties; Type: TABLE; Schema: public; Tablespace: 
 --
 CREATE TABLE properties (
@@ -189,10 +163,10 @@ CREATE TABLE properties (
     name character varying(50),
     identifier character varying(50) NOT NULL,
     description character varying(255),
-    required boolean,
-    "order" integer,
-    tab_id integer,
-    datatype_id integer
+    required boolean DEFAULT false NOT NULL,
+    "order" integer DEFAULT 0,
+    tab_id integer NOT NULL,
+    datatype_id integer NOT NULL
 );
 --
 -- Name: properties_id_seq; Type: SEQUENCE; Schema: public;
@@ -229,8 +203,8 @@ SELECT pg_catalog.setval('properties_value_id_seq', 1, false);
 --
 CREATE TABLE properties_values (
     id integer NOT NULL,
-    document_id integer,
-    property_id integer,
+    document_id integer NOT NULL,
+    property_id integer NOT NULL,
     value text
 );
 
@@ -292,7 +266,7 @@ CREATE TABLE translate_language (
     id integer NOT NULL,
     destination character varying(255) NOT NULL,
     language character varying(2) NOT NULL,
-    translate_id integer,
+    translate_id integer NOT NULL,
     hash character varying(40) NOT NULL
 );
 
@@ -311,19 +285,18 @@ CREATE SEQUENCE translate_language_id_seq
 --
 SELECT pg_catalog.setval('translate_language_id_seq', 1, false);
 
-SET default_with_oids = false;
 --
--- Name: user_roles; Type: TABLE; Schema: public; Tablespace: 
+-- Name: user_acl_roles; Type: TABLE; Schema: public; Tablespace: 
 --
-CREATE TABLE user_roles (
+CREATE TABLE user_acl_roles (
     id integer NOT NULL,
     name character varying(50),
     description character varying(255)
 );
 --
--- Name: user_roles_id_seq; Type: SEQUENCE; Schema: public;
+-- Name: user_acl_roles_id_seq; Type: SEQUENCE; Schema: public;
 --
-CREATE SEQUENCE user_roles_id_seq
+CREATE SEQUENCE user_acl_roles_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -331,16 +304,76 @@ CREATE SEQUENCE user_roles_id_seq
     CACHE 1;
 
 --
--- Name: user_roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public;
+-- Name: user_acl_roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public;
 --
-ALTER SEQUENCE user_roles_id_seq OWNED BY user_roles.id;
+ALTER SEQUENCE user_acl_roles_id_seq OWNED BY user_acl_roles.id;
 
 --
--- Name: user_roles_id_seq; Type: SEQUENCE SET; Schema: public;
+-- Name: user_acl_roles_id_seq; Type: SEQUENCE SET; Schema: public;
 --
-SELECT pg_catalog.setval('user_roles_id_seq', 1, false);
+SELECT pg_catalog.setval('user_acl_roles_id_seq', 1, false);
 
-SET default_with_oids = true;
+--
+-- Name: user_acl_permissions; Type: TABLE; Schema: public; Tablespace: 
+--
+CREATE TABLE user_acl_permissions (
+    id integer NOT NULL,
+    permission character varying(50) NOT NULL,
+    user_acl_role_id integer NOT NULL,
+    user_acl_resource_id integer NOT NULL
+);
+--
+-- Name: user_acl_permissions_id_seq; Type: SEQUENCE; Schema: public;
+--
+CREATE SEQUENCE user_acl_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+--
+-- Name: user_acl_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public;
+--
+ALTER SEQUENCE user_acl_permissions_id_seq OWNED BY user_acl_permissions.id;
+
+--
+-- Name: user_acl_permissions_id_seq; Type: SEQUENCE SET; Schema: public;
+--
+SELECT pg_catalog.setval('user_acl_permissions_id_seq', 1, false);
+
+--
+-- Name: user_acl_roles_id_seq; Type: SEQUENCE SET; Schema: public;
+--
+SELECT pg_catalog.setval('user_acl_resources_id_seq', 1, false);
+
+--
+-- Name: user_acl_resources; Type: TABLE; Schema: public; Tablespace: 
+--
+CREATE TABLE user_acl_resources (
+    id integer NOT NULL,
+    resource character varying(50)
+);
+--
+-- Name: user_acl_resources_id_seq; Type: SEQUENCE; Schema: public;
+--
+CREATE SEQUENCE user_acl_resources_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+--
+-- Name: user_acl_resources_id_seq; Type: SEQUENCE OWNED BY; Schema: public;
+--
+ALTER SEQUENCE user_acl_resources_id_seq OWNED BY user_acl_resources.id;
+
+--
+-- Name: user_acl_resources_id_seq; Type: SEQUENCE SET; Schema: public;
+--
+SELECT pg_catalog.setval('user_acl_resources_id_seq', 1, false);
+
 --
 -- Name: users; Type: TABLE; Schema: public; Tablespace: 
 --
@@ -353,7 +386,7 @@ CREATE TABLE users (
     email character varying(50) NOT NULL,
     login character varying(50)  NOT NULL,
     password character varying(50) NOT NULL,
-    user_role_id integer DEFAULT 0 NOT NULL
+    user_acl_role_id integer DEFAULT 0 NOT NULL
 );
 
 --
@@ -400,11 +433,6 @@ CREATE SEQUENCE views_id_seq
 SELECT pg_catalog.setval('views_id_seq', 1, false);
 
 --
--- Name: id; Type: DEFAULT; Schema: public;
---
-ALTER TABLE ONLY user_roles ALTER COLUMN id SET DEFAULT nextval('user_roles_id_seq'::regclass);
-
---
 -- Name: datatypes_pk; Type: CONSTRAINT; Schema: public; Tablespace: 
 --
 ALTER TABLE ONLY datatypes
@@ -441,12 +469,6 @@ ALTER TABLE ONLY layouts
     ADD CONSTRAINT layouts_pk PRIMARY KEY (id);
 
 --
--- Name: models_pk; Type: CONSTRAINT; Schema: public; Tablespace: 
---
-ALTER TABLE ONLY models
-    ADD CONSTRAINT models_pk PRIMARY KEY (id);
-
---
 -- Name: properties_pk; Type: CONSTRAINT; Schema: public; Tablespace: 
 --
 ALTER TABLE ONLY properties
@@ -477,16 +499,26 @@ ALTER TABLE ONLY translate
     ADD CONSTRAINT translate_pk PRIMARY KEY (id);
 
 --
--- Name: user_roles_name_key; Type: CONSTRAINT; Schema: public; Tablespace: 
+-- Name: user_acl_roles_name_key; Type: CONSTRAINT; Schema: public; Tablespace: 
 --
-ALTER TABLE ONLY user_roles
-    ADD CONSTRAINT user_roles_name_key UNIQUE (name);
+ALTER TABLE ONLY user_acl_roles
+    ADD CONSTRAINT user_acl_roles_name_key UNIQUE (name);
 
 --
--- Name: user_roles_pkey; Type: CONSTRAINT; Schema: public; Tablespace: 
+-- Name: user_acl_roles_pkey; Type: CONSTRAINT; Schema: public; Tablespace: 
 --
-ALTER TABLE ONLY user_roles
-    ADD CONSTRAINT user_roles_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY user_acl_roles
+    ADD CONSTRAINT user_acl_roles_pkey PRIMARY KEY (id);
+
+-- Name: _role_rules; Type: CONSTRAINT; Schema: public; Tablespace: 
+--
+ALTER TABLE ONLY user_acl_permissions
+    ADD CONSTRAINT user_acl_permissions_pk PRIMARY KEY (id);
+
+-- Name: _role_rules; Type: CONSTRAINT; Schema: public; Tablespace: 
+--
+ALTER TABLE ONLY user_acl_resources
+    ADD CONSTRAINT user_acl_resources_pk PRIMARY KEY (id);
 
 --
 -- Name: users_pk; Type: CONSTRAINT; Schema: public; Tablespace: 
@@ -536,16 +568,6 @@ CREATE UNIQUE INDEX layout_identifier_idx ON layouts USING btree (identifier);
 CREATE UNIQUE INDEX layout_name_idx ON layouts USING btree (name);
 
 --
--- Name: model_identifier_idx; Type: INDEX; Schema: public; Tablespace: 
---
-CREATE UNIQUE INDEX model_identifier_idx ON models USING btree (identifier);
-
---
--- Name: model_name_idx; Type: INDEX; Schema: public; Tablespace: 
---
-CREATE UNIQUE INDEX model_name_idx ON models USING btree (name);
-
---
 -- Name: properties_identifier_idx; Type: INDEX; Schema: public; Tablespace: 
 --
 CREATE UNIQUE INDEX properties_identifier_idx ON properties USING btree (identifier);
@@ -580,11 +602,6 @@ CREATE UNIQUE INDEX views_identifier_idx ON views USING btree (identifier);
 --
 CREATE UNIQUE INDEX views_name_idx ON views USING btree (name);
 
---
--- Name: datatypes_model_id; Type: FK CONSTRAINT; Schema: public;
---
-ALTER TABLE ONLY datatypes
-    ADD CONSTRAINT fk_datatypes_model FOREIGN KEY (model_id) REFERENCES models(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 --
 -- Name: document_type_views_document_types_id; Type: FK CONSTRAINT; Schema: public;

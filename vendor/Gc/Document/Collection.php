@@ -7,7 +7,7 @@ use Gc\Db\AbstractTable,
 
 class Collection extends AbstractTable implements IterableInterface
 {
-    protected $_name = 'documents';
+    protected $_name = 'document';
 
     public function load($parent_id = NULL)
     {

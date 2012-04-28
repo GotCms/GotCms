@@ -4,44 +4,22 @@ namespace Config\Controller;
 
 use Gc\Mvc\Controller\Action,
     Gc\User,
-    Config\Form\UserLogin,
-    Config\Form\User as UserForm;
+    Gc\User\Role,
+    Gc\User\Role\Rule,
+    Config\Form\Role as RoleForm;
 
-class UserController extends Action
+class RoleController extends Action
 {
     public function indexAction()
     {
-
-    }
-
-    public function loginAction()
-    {
-        $login_form = new UserLogin();
-        $post = $this->getRequest()->post();
-        if($this->getRequest()->isPost() and $login_form->isValid($post->toArray()))
-        {
-            $user_table = new User\Model();
-            if($user_id = $user_table->authenticate($post->get('email'), $post->get('password')))
-            {
-                return $this->redirect()->toRoute('admin');
-            }
-
-            $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
-        }
-
-        return array('form' => $login_form);
-    }
-
-    public function logoutAction()
-    {
-        $this->getAuth()->getStorage()->clear();
-        $this->getSession()->clear();
-        return $this->redirect()->toRoute('admin');
+        $roles = new Role\Collection();
+        $roles->init();
+        return array('roles' => $roles->getRoles());
     }
 
     public function createAction()
     {
-        $form = new UserForm();
+        $form = new RoleForm();
         $post = $this->getRequest()->post()->toArray();
         if($this->getRequest()->isPost() and $form->isValid($post))
         {
@@ -72,18 +50,20 @@ class UserController extends Action
 
     public function editAction()
     {
-        $user_id = $this->getRouteMatch()->getParam('id');
-        $user_model = User\Model::fromId($user_id);
+        $role_id = $this->getRouteMatch()->getParam('id');
+        $role_model = Role\Model::fromId($role_id);
 
-        $form = new UserForm();
+        $form = new RoleForm();
+        $form->initPermissions($role_model->getPermissions());
+        $form->setAction($this->url()->fromRoute('userRoleEdit', array('id' => $role_id)));
+        $form->populate($role_model->getData());
         $post = $this->getRequest()->post()->toArray();
         if($this->getRequest()->isPost() and $form->isValid($post))
         {
-            $user_table = new User\Model();
-            $user_table->setData($post);
-            $user_table->save();
+            $role_model->addData($post);
+            $role_model->save();
 
-            $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
+            return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
         }
 
         return array('form' => $form);

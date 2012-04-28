@@ -1,7 +1,13 @@
 <h2>..:: <?php echo $this->escape($this->translator('Managing Users')); ?> ::..</h2>
 
 <ul>
-    <li><a href="<?php echo $this->url('userList'); ?>" title=""><?php echo $this->escape($this->translator('Users list')); ?></a></li>
-    <li><a href="<?php echo $this->url('userCreate'); ?>" title=""><?php echo $this->escape($this->translator('Add')); ?></a></li>
-    <li><a href="<?php echo $this->url('userAcl'); ?>" title=""><?php echo $this->escape($this->translator('Acl')); ?></a></li>
+    <li><a href="<?php echo $this->url('userList'); ?>" title=""><?php echo $this->escape($this->translator('List')); ?></a></li>
+    <li><a href="<?php echo $this->url('userCreate'); ?>" title=""><?php echo $this->escape($this->translator('Create')); ?></a></li>
+</ul>
+
+<h2>..:: <?php echo $this->escape($this->translator('Managing Roles')); ?> ::..</h2>
+
+<ul>
+    <li><a href="<?php echo $this->url('userRole'); ?>" title=""><?php echo $this->escape($this->translator('List')); ?></a></li>
+    <li><a href="<?php echo $this->url('userRoleCreate'); ?>" title=""><?php echo $this->escape($this->translator('Create')); ?></a></li>
 </ul>

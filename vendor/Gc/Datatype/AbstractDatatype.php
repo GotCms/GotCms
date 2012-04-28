@@ -14,7 +14,7 @@ abstract class AbstractDatatype extends AbstractTable
     protected     $_helper;
     protected     $_loaders = array();
     protected     $_loaderTypes = array('filter', 'helper');
-    protected     $_name = 'datatypes';
+    protected     $_name = 'datatype';
 
     /**
     * @param Gc\Component\Property\Model $property

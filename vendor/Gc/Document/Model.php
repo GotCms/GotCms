@@ -9,7 +9,7 @@ use Gc\Db\AbstractTable,
 class Model extends AbstractTable implements IterableInterface
 {
     protected $_icon;
-    protected $_name = 'documents';
+    protected $_name = 'document';
 
     const STATUS_DISABLE     = 0;
     const STATUS_ENABLE      = 1;
