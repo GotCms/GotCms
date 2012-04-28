@@ -5,7 +5,8 @@ namespace Es\User;
 use Es\Db\AbstractTable,
     Es\Component\IterableInterface,
     Zend\Authentication\Adapter,
-    Zend\Authentication\AuthenticationService;
+    Zend\Authentication\AuthenticationService,
+    Zend\Db\Sql\Expression;
 
 class Model extends AbstractTable implements IterableInterface
 {
@@ -81,18 +82,18 @@ class Model extends AbstractTable implements IterableInterface
     public function save()
     {
         $array_save = array(
-            'firstname'=>$this->getFirstName()
-            , 'lastname'=>$this->getLastName()
-            , 'email'=>$this->getEmail()
-            , 'date_created'=>$this->getDateCreated()
-            , 'password'=>$this->getPassword()
-            , 'user_type_id'=>$this->getUserTypeId()
+            'firstname' => $this->getFirstname()
+            , 'lastname' => $this->getLastname()
+            , 'email' => $this->getEmail()
+            , 'password' => $this->getPassword()
+            , 'user_type_id' => 1//@TODO Use ACL to declare User_type_id
         );
 
         try
         {
-            if($this->getId() == -1)
+            if($this->getId() === NULL)
             {
+                $array_save['created_at'] = new Expression('NOW()');
                 $this->insert($array_save);
             }
             else

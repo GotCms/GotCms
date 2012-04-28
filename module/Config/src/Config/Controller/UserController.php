@@ -4,7 +4,8 @@ namespace Config\Controller;
 
 use Es\Mvc\Controller\Action,
     Es\User,
-    Config\Form\UserLogin;
+    Config\Form\UserLogin,
+    Config\Form\User as UserForm;
 
 class UserController extends Action
 {
@@ -40,6 +41,18 @@ class UserController extends Action
 
     public function createAction()
     {
+        $form = new UserForm();
+        $post = $this->getRequest()->post()->toArray();
+        if($this->getRequest()->isPost() and $form->isValid($post))
+        {
+            $user_model = new User\Model();
+            $user_model->setData($post);
+            $user_model->save();
+
+            $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
+        }
+
+        return array('form' => $form);
     }
 
     public function deleteAction()
@@ -59,7 +72,21 @@ class UserController extends Action
 
     public function editAction()
     {
+        $user_id = $this->getRouteMatch()->getParam('id');
+        $user_model = User\Model::fromId($user_id);
 
+        $form = new UserForm();
+        $post = $this->getRequest()->post()->toArray();
+        if($this->getRequest()->isPost() and $form->isValid($post))
+        {
+            $user_table = new User\Model();
+            $user_table->setData($post);
+            $user_table->save();
+
+            $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
+        }
+
+        return array('form' => $form);
     }
 
     public function aclAction()

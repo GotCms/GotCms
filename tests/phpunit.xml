@@ -7,4 +7,9 @@
              yui="true" highlight="false" lowUpperBound="35" highLowerBound="80" />
         <log type="testdox-html" target="./logs/testdox.html" />
     </logging>
+    <filter>
+        <blacklist>
+            <directory suffix=".php">../vendor/ZendFramework</directory>
+        </blacklist>
+    </filter>
 </phpunit>

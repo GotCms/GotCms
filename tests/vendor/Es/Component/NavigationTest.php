@@ -20,7 +20,6 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $GLOBALS['appliaction'] =
         $this->_object = new Navigation;
     }
 
