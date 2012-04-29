@@ -1,5 +1,7 @@
 <?php
-class \Gc\Error
+namespace Gc;
+
+class Error
 {
     static function set($title, $content)
     {
