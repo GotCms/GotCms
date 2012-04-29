@@ -1,24 +1,24 @@
 <div class="part">
-    <a href=""><img src="<?php echo $this->basePath('images/icones/accueil.png'); ?>" width="36" height="36" border="0" class="icone" /></a>
-    <p><a href="<?php echo $this->url('admin'); ?>">Accueil <br /> Panneau d'administration</a></p>
+    <a href=""><img src="<?php echo $this->basePath('images/icones/accueil.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escape($this->translator('Dashboard')); ?>"></a>
+    <p><a href="<?php echo $this->url('admin'); ?>"><?php echo $this->escape($this->translator('Dashboard')); ?> <br /> Panneau d'administration</a></p>
 </div>
 
 <div class="part">
-    <a href=""><img src="<?php echo $this->basePath('images/icones/blog.png'); ?>" width="36" height="36" border="0" class="icone" /></a>
-    <p><a href="<?php echo $this->url('content'); ?>">Contenu <br /> Gestion du site</a></p>
+    <a href=""><img src="<?php echo $this->basePath('images/icones/blog.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escape($this->translator('Content')); ?>"></a>
+    <p><a href="<?php echo $this->url('content'); ?>"><?php echo $this->escape($this->translator('Content')); ?> <br /> <?php echo $this->escape($this->translator('Manage content')); ?></a></p>
 </div>
 
 <div class="part">
-    <a href=""><img src="<?php echo $this->basePath('images/icones/user.png'); ?>" width="36" height="36" border="0" class="icone" /></a>
-    <p><a href="<?php echo $this->url('development'); ?>">Development <br /> Gestion des documents</a></p>
+    <a href=""><img src="<?php echo $this->basePath('images/icones/user.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escape($this->translator('Development')); ?>"></a>
+    <p><a href="<?php echo $this->url('development'); ?>"><?php echo $this->escape($this->translator('Development')); ?> <br /> <?php echo $this->escape($this->translator('Manage documents')); ?></a></p>
 </div>
 
 <div class="part">
-    <a href=""><img src="<?php echo $this->basePath('images/icones/stat.png'); ?>" width="36" height="36" border="0" class="icone" /></a>
-    <p><a href="<?php echo $this->url('statistics'); ?>">Statistiques <br /> Les Statistiques du site</a></p>
+    <a href=""><img src="<?php echo $this->basePath('images/icones/stat.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escape($this->translator('Stats')); ?>"></a>
+    <p><a href="<?php echo $this->url('statistics'); ?>"><?php echo $this->escape($this->translator('Stats')); ?> <br /> <?php echo $this->escape($this->translator('Website statistics')); ?></a></p>
 </div>
 
 <div class="part">
-    <a href=""><img src="<?php echo $this->basePath('images/icones/config.png'); ?>" width="36" height="36" border="0" class="icone" /></a>
-    <p><a href="<?php echo $this->url('config'); ?>">Configuration <br /> Configuration du site</a></p>
+    <a href=""><img src="<?php echo $this->basePath('images/icones/config.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escape($this->translator('System')); ?>"></a>
+    <p><a href="<?php echo $this->url('config'); ?>"><?php echo $this->escape($this->translator('Configuration')); ?> <br /> <?php echo $this->escape($this->translator('System configuration')); ?></a></p>
 </div>

@@ -1,66 +1,51 @@
-<?php echo $this->doctype('XHTML1_STRICT').PHP_EOL; ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width">
     <?php
     echo $this->headTitle();
     echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
     echo $this->headScript()
-        ->appendFile('/js/jquery-1.7.2.min.js', 'text/javascript')
-        ->appendFile('/js/jquery-ui-1.8.14.js', 'text/javascript')
-        ->appendFile('/js/codemirror/lib/codemirror.js', 'text/javascript')
-        ->appendFile('/js/codemirror/mode/xml/xml.js', 'text/javascript')
-        ->appendFile('/js/codemirror/mode/javascript/javascript.js', 'text/javascript')
-        ->appendFile('/js/codemirror/mode/css/css.js', 'text/javascript')
-        ->appendFile('/js/codemirror/mode/clike/clike.js', 'text/javascript')
-        ->appendFile('/js/codemirror/mode/php/php.js', 'text/javascript')
-        ->appendFile('/js/jquery.treeview.js', 'text/javascript')
-        ->appendFile('/js/jquery.contextMenu.js', 'text/javascript')
-        ->appendFile('/js/escms.js', 'text/javascript').PHP_EOL;
+        ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
+        ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
+        ->appendFile('/js/plugins.js', 'text/javascript')
+        ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
+        ->appendFile('/js/libs/codemirror/lib/codemirror.js', 'text/javascript')
+        ->appendFile('/js/libs/codemirror/mode/xml/xml.js', 'text/javascript')
+        ->appendFile('/js/libs/codemirror/mode/javascript/javascript.js', 'text/javascript')
+        ->appendFile('/js/libs/codemirror/mode/css/css.js', 'text/javascript')
+        ->appendFile('/js/libs/codemirror/mode/clike/clike.js', 'text/javascript')
+        ->appendFile('/js/libs/codemirror/mode/php/php.js', 'text/javascript')
+        ->appendFile('/js/libs/jquery.treeview.js', 'text/javascript')
+        ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
+        ->appendFile('/js/gotcms.js', 'text/javascript');
 
     echo $this->HeadLink()
         ->appendStylesheet('/css/style.css')
-        ->appendStylesheet('/js/codemirror/lib/codemirror.css')
-        ->appendStylesheet('/js/codemirror/mode/xml/xml.css')
-        ->appendStylesheet('/js/codemirror/mode/javascript/javascript.css')
-        ->appendStylesheet('/js/codemirror/mode/css/css.css')
-        ->appendStylesheet('/js/codemirror/mode/clike/clike.css')
+        ->appendStylesheet('/js/libs/codemirror/lib/codemirror.css')
         ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
         ->appendStylesheet('/css/jquery.treeview.css')
         ->appendStylesheet('/css/jquery.contextMenu.css');
     ?>
-
-    <script type="text/javascript">
-        jQuery(document).ready(function()
-        {
-            <?php if(!empty($this->routes)): ?>
-                Gc.setOption('routes', <?php echo $this->jsQuoteEscape($this->routes); ?>);
-                Gc.initDocumentMenu();
-            <?php endif; ?>
-        });
-    </script>
-    <?php echo $this->placeholder('favicon') ?>
 </head>
 <body>
-    <div id="header">
+    <header>
         <div id="logo"></div>
         <div id="connexion">
-            <table width="316" border="0">
-                <tr>
-                    <td colspan="2" rowspan="3" align="center" valign="middle">&nbsp;</td>
-                    <td width="10">&nbsp;</td>
-                    <td width="227" height="22">Bienvenue “Admin” - <a href="#">MP (0/6)</a></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td height="19"><a href="#">Voir les derniers signalements</a></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td><a href="<?php echo $this->url('logout'); ?>">[ Deconnexion ]</a></td>
-                </tr>
-            </table>
+            <ul>
+                <li>Bienvenue “Admin” - <a href="#">MP (0/6)</a></li>
+                <li><a href="#">Voir les derniers signalements</a></li>
+                <li><a href="<?php echo $this->url('logout'); ?>">[ Deconnexion ]</a></li>
+            </ul>
         </div>
-    </div>
+    </header>
 
     <div id="navigation">
         <?php echo $this->partial('navigation.phtml', 'default', 'test'); ?>
@@ -82,9 +67,9 @@
         <div style="clear:both;"></div>
     </div>
 
-    <div id="footer">
-        © 2011 <a href="">EsCMS</a>
-    </div>
+    <footer>
+        © 2011 <a href="">GotCms</a>
+    </footer>
 
     <?php if($this->layout()->treeview): ?>
         <ul id="contextMenu" class="contextMenu">
@@ -104,6 +89,5 @@
             These items will be permanently deleted and cannot be recovered. Are you sure?
         </p>
     </div>
-</div>
 </body>
 </html>

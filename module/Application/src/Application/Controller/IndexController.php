@@ -87,6 +87,7 @@ class IndexController extends Action
         if(empty($document) or !$document->isPublished())
         {
             // 404
+            $this->getResponse()->setStatusCode(404);
             file_put_contents($this->_layoutPath, 'Error 404 - page not found');
         }
         else
