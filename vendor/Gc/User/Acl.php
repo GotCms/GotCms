@@ -2,8 +2,7 @@
 
 namespace Gc\User;
 
-use Zend\Db\Sql\Expression,
-    Gc\User\Role\Model as RoleModel,
+use Gc\User\Role\Model as RoleModel,
     Gc\User\Model as UserModel,
     Zend\Acl as ZendAcl,
     Zend\Db\TableGateway\TableGateway,

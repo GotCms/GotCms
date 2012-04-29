@@ -56,14 +56,14 @@ class Model extends AbstractTable implements IterableInterface
             'identifier' => $this->getIdentifier(),
             'description' => $this->getDescription(),
             'content' => $this->getContent(),
-            'updated_at' => new \Zend\Db\Expr('NOW()')
+            'updated_at' => date('Y-m-d H:i:s')
         );
 
         try
         {
             if($this->getId() == NULL)
             {
-                $array_save['created_at'] = new \Zend\Db\Expr('NOW()');
+                $array_save['created_at'] = date('Y-m-d H:i:s');
                 $id = $this->insert($array_save);
                 $this->setId($id);
             }

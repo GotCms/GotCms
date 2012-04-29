@@ -19,7 +19,7 @@ class View extends AbstractForm
             ->setAttrib('class', 'input-text')
             ->addValidator('NotEmpty')
             ->addValidator(new Db\NoRecordExists(array(
-                'table' => 'views'
+                'table' => 'view'
                 , 'field' => 'name'
                 ))
             );
@@ -31,7 +31,7 @@ class View extends AbstractForm
             ->addValidator('NotEmpty')
             ->addValidator(new Validator\Identifier())
             ->addValidator(new Db\NoRecordExists(array(
-                'table' => 'views'
+                'table' => 'view'
                 , 'field' => 'identifier'
                 ))
             );

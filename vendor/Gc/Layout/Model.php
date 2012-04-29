@@ -60,7 +60,7 @@ class Model extends AbstractTable implements IterableInterface
             'identifier' => $this->getIdentifier(),
             'description' => $this->getDescription(),
             'content' => $this->getContent(),
-            'updated_at' => new \Zend\Db\Expr('NOW()')
+            'updated_at' => date('Y-m-d H:i:s')
         );
 
         try
@@ -68,7 +68,7 @@ class Model extends AbstractTable implements IterableInterface
             $id = $this->getId();
             if(empty($id))
             {
-                $array_save['created_at'] = new \Zend\Db\Expr('NOW()');
+                $array_save['created_at'] = date('Y-m-d H:i:s');
                 $this->setId($this->insert($array_save));
             }
             else

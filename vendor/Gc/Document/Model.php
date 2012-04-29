@@ -148,7 +148,7 @@ class Model extends AbstractTable implements IterableInterface
             $document_id = $this->getId();
             if(empty($document_id))
             {
-                $array_save['created_at'] = new \Zend\Db\Expr('NOW()');
+                $array_save['created_at'] = date('Y-m-d H:i:s');
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             }

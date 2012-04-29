@@ -5,8 +5,7 @@ namespace Gc\User;
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Zend\Authentication\Adapter,
-    Zend\Authentication\AuthenticationService,
-    Zend\Db\Sql\Expression;
+    Zend\Authentication\AuthenticationService;
 
 class Model extends AbstractTable implements IterableInterface
 {
@@ -87,7 +86,7 @@ class Model extends AbstractTable implements IterableInterface
             , 'email' => $this->getEmail()
             , 'login' => $this->getLogin()
             , 'password' => $this->getPassword()
-            , 'updated_at' => new Expression('NOW()')
+            , 'updated_at' => date('Y-m-d H:i:s')
             , 'user_role_id' => 1//@TODO Use ACL to declare User_type_id
         );
 
@@ -95,7 +94,7 @@ class Model extends AbstractTable implements IterableInterface
         {
             if($this->getId() === NULL)
             {
-                $array_save['created_at'] = new Expression('NOW()');
+                $array_save['created_at'] = date('Y-m-d H:i:s');
                 $this->insert($array_save);
             }
             else
@@ -167,9 +166,7 @@ class Model extends AbstractTable implements IterableInterface
         $role = $this->getData('role');
         if(empty($role))
         {
-            $role = new Role\Model();
-            $role->setId($this->getId());
-
+            $role = Role\Model::fromId($this->getId());
             $this->setData('role', $role);
         }
 
