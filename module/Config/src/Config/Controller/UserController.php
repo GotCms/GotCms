@@ -11,7 +11,9 @@ class UserController extends Action
 {
     public function indexAction()
     {
+        $user_collection = new User\Collection();
 
+        return array('users' => $user_collection->getUsers());
     }
 
     public function loginAction()

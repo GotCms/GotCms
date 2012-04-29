@@ -20,14 +20,16 @@ class RoleController extends Action
     public function createAction()
     {
         $form = new RoleForm();
+        $form->initPermissions();
+        $form->setAction($this->url()->fromRoute('userRoleCreate'));
         $post = $this->getRequest()->post()->toArray();
         if($this->getRequest()->isPost() and $form->isValid($post))
         {
-            $user_model = new User\Model();
-            $user_model->setData($post);
-            $user_model->save();
+            $role_table = new Role\Model();
+            $role_table->addData($post);
+            $role_table->save();
 
-            $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
+            return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_table->getId()));
         }
 
         return array('form' => $form);

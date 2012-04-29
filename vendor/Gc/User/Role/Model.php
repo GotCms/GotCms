@@ -22,26 +22,27 @@ class Model extends AbstractTable
 
         try
         {
-            if($this->getId() === NULL)
+            $role_id = $this->getId();
+            if(empty($role_id))
             {
-                $this->insert($array_save);
+                $this->setId($this->insert($array_save));
             }
             else
             {
-                $this->update($array_save, 'id = '.$this->getId());
+                $this->update($array_save, 'id = '.$role_id);
             }
 
             $permissions = $this->getPermissions();
             if(!empty($permissions))
             {
                 $acl_table = new TableGateway('user_acl', $this->getAdapter());
-                $acl_table->delete(sprintf('user_acl_role_id = %s', $this->getId()));
+                $acl_table->delete(sprintf('user_acl_role_id = %s', $role_id));
 
                 foreach($permissions as $permission_id => $value)
                 {
                     if(!empty($value))
                     {
-                        $acl_table->insert(array('user_acl_role_id' => $this->getId(), 'user_acl_permission_id' => $permission_id));
+                        $acl_table->insert(array('user_acl_role_id' => $role_id, 'user_acl_permission_id' => $permission_id));
                     }
                 }
             }

@@ -32,7 +32,7 @@ class Role extends AbstractForm
     }
 
 
-    public function initPermissions($user_permissions)
+    public function initPermissions($user_permissions = NULL)
     {
         $permissions_table = new Permission\Collection();
         $resources = $permissions_table->getPermissions();
