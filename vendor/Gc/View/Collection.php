@@ -22,7 +22,7 @@ class Collection extends AbstractTable implements IterableInterface
 
         if($this->getDocumentTypeId() !== NULL)
         {
-            $select->join(array('dtv'=>'document_types_views'),'dtv.view_id = v.view_id');
+            $select->join(array('dtv'=>'document_type_views'),'dtv.view_id = v.view_id');
             $select->where('dtv.document_type_id = ?', $this->getDocumentTypeId());
         }
 

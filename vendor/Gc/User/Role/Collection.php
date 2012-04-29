@@ -7,7 +7,7 @@ use Gc\Db\AbstractTable;
 class Collection extends AbstractTable
 {
     protected $_roles;
-    protected $_name = 'user_acl_roles';
+    protected $_name = 'user_acl_role';
 
     /**
     * @param unknown_type $order

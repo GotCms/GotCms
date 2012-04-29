@@ -7,7 +7,7 @@ use Gc\Db\AbstractTable,
 
 class Collection extends AbstractTable implements IterableInterface
 {
-    protected $_name = 'document_types';
+    protected $_name = 'document_type';
 
     public function init($sort = 'ASC')
     {

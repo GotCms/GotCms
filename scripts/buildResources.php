@@ -18,9 +18,9 @@ $resources = $ini->fromFile('scripts/resources.ini');
 try
 {
     echo "\n>>> Delete acl_resources table\n";
-    $statement = $adapter->createStatement("TRUNCATE user_acl_resources CASCADE");
+    $statement = $adapter->createStatement("TRUNCATE user_acl_resource CASCADE");
     $result = $statement->execute();
-    $statement = $adapter->createStatement("TRUNCATE user_acl_permissions CASCADE");
+    $statement = $adapter->createStatement("TRUNCATE user_acl_permission CASCADE");
     $result = $statement->execute();
 }
 catch(Exception $e)
@@ -32,22 +32,46 @@ try
 {
     foreach($resources as $key => $value)
     {
-        $statement = $adapter->createStatement("INSERT INTO user_acl_resources (resource) VALUES ('" . $key . "')");
+        $statement = $adapter->createStatement("INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')");
         $result = $statement->execute();
 
-        $statement = $adapter->createStatement("SELECT id FROM user_acl_resources WHERE resource =  '" . $key . "'");
+        $statement = $adapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
         $result = $statement->execute();
         $lastInsertId = $result->current();
         $lastInsertId = $lastInsertId['id'];
 
+        $permissions = array();
         foreach($value as $key2 => $value2)
         {
-            $statement = $adapter->createStatement("SELECT id FROM user_acl_roles WHERE name = '" . $value2 . "'");
+            if(!in_array($key2, $permissions))
+            {
+                $statement = $adapter->createStatement("INSERT INTO user_acl_permission (permission, user_acl_resource_id) VALUES ('".$key2."', '".$lastInsertId."')");
+                $result = $statement->execute();
+                $permissions[] = $key2;
+            }
+        }
+    }
+
+    foreach($resources as $key => $value)
+    {
+        $statement = $adapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
+        $result = $statement->execute();
+        $lastResourceInsertId = $result->current();
+        $lastResourceInsertId = $lastResourceInsertId['id'];
+
+        foreach($value as $key2 => $value2)
+        {
+            $statement = $adapter->createStatement("SELECT id FROM user_acl_permission WHERE permission =  '" . $key2 . "' AND user_acl_resource_id = '" .$lastResourceInsertId . "'");
+            $result = $statement->execute();
+            $lastInsertId = $result->current();
+            $lastInsertId = $lastInsertId['id'];
+
+            $statement = $adapter->createStatement("SELECT id FROM user_acl_role WHERE name = '" . $value2 . "'");
             $result = $statement->execute();
             $role = $result->current();
             if(!empty($role['id']))
             {
-                $statement = $adapter->createStatement("INSERT INTO user_acl_permissions (user_acl_role_id, user_acl_resource_id, permission) VALUES ('".$role['id']."', '" . $lastInsertId . "', '" . $key2 . "')");
+                $statement = $adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('".$role['id']."', " . $lastInsertId . ")");
                 $result = $statement->execute();
             }
             else

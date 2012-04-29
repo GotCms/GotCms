@@ -2,7 +2,7 @@
 -- pgDesigner 1.2.17
 --
 -- Project    : GotCms
--- Date       : 04/28/2012 23:15:49.323
+-- Date       : 04/29/2012 00:06:28.459
 -- Description: 
 ------------------------------
 
@@ -56,24 +56,24 @@ CREATE SEQUENCE "views_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE
 -- End Séquence's declaration
 
 -- Start Table's declaration
-DROP TABLE IF EXISTS "datatypes" CASCADE;
-CREATE TABLE "datatypes" (
+DROP TABLE IF EXISTS "datatype" CASCADE;
+CREATE TABLE "datatype" (
 "id" serial NOT NULL,
 "name" character varying NOT NULL,
 "prevalue_value" text
 ) WITH OIDS;
-ALTER TABLE "datatypes" ADD CONSTRAINT "datatypes_pk" PRIMARY KEY("id");
+ALTER TABLE "datatype" ADD CONSTRAINT "datatype_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "document_type_views" CASCADE;
-CREATE TABLE "document_type_views" (
+DROP TABLE IF EXISTS "document_type_view" CASCADE;
+CREATE TABLE "document_type_view" (
 "id" serial NOT NULL,
 "view_id" integer NOT NULL,
 "document_type_id" integer NOT NULL
 ) WITH OIDS;
-ALTER TABLE "document_type_views" ADD CONSTRAINT "document_type_views_pk" PRIMARY KEY("id","view_id","document_type_id");
+ALTER TABLE "document_type_view" ADD CONSTRAINT "document_type_view_pk" PRIMARY KEY("id","view_id","document_type_id");
 
-DROP TABLE IF EXISTS "document_types" CASCADE;
-CREATE TABLE "document_types" (
+DROP TABLE IF EXISTS "document_type" CASCADE;
+CREATE TABLE "document_type" (
 "id" serial NOT NULL,
 "created_at" timestamp without time zone NOT NULL,
 "updated_at" timestamp without time zone NOT NULL,
@@ -83,10 +83,10 @@ CREATE TABLE "document_types" (
 "default_view_id" integer,
 "user_id" integer NOT NULL
 ) WITH OIDS;
-ALTER TABLE "document_types" ADD CONSTRAINT "document_types_pk" PRIMARY KEY("id");
+ALTER TABLE "document_type" ADD CONSTRAINT "document_type_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "documents" CASCADE;
-CREATE TABLE "documents" (
+DROP TABLE IF EXISTS "document" CASCADE;
+CREATE TABLE "document" (
 "id" serial NOT NULL,
 "created_at" timestamp without time zone NOT NULL,
 "updated_at" timestamp without time zone NOT NULL,
@@ -100,18 +100,18 @@ CREATE TABLE "documents" (
 "layout_id" integer NOT NULL,
 "parent_id" integer NOT NULL DEFAULT 0
 ) WITH OIDS;
-ALTER TABLE "documents" ADD CONSTRAINT "documents_pk" PRIMARY KEY("id");
+ALTER TABLE "document" ADD CONSTRAINT "document_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "icons" CASCADE;
-CREATE TABLE "icons" (
+DROP TABLE IF EXISTS "icon" CASCADE;
+CREATE TABLE "icon" (
 "id" serial NOT NULL,
 "name" character varying NOT NULL,
 "url" character varying NOT NULL
 ) WITH OIDS;
-ALTER TABLE "icons" ADD CONSTRAINT "icons_pk" PRIMARY KEY("id");
+ALTER TABLE "icon" ADD CONSTRAINT "icon_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "layouts" CASCADE;
-CREATE TABLE "layouts" (
+DROP TABLE IF EXISTS "layout" CASCADE;
+CREATE TABLE "layout" (
 "id" serial NOT NULL,
 "created_at" timestamp without time zone NOT NULL,
 "updated_at" timestamp without time zone NOT NULL,
@@ -120,10 +120,10 @@ CREATE TABLE "layouts" (
 "content" text,
 "description" character varying
 ) WITH OIDS;
-ALTER TABLE "layouts" ADD CONSTRAINT "layouts_pk" PRIMARY KEY("id");
+ALTER TABLE "layout" ADD CONSTRAINT "layout_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "properties" CASCADE;
-CREATE TABLE "properties" (
+DROP TABLE IF EXISTS "property" CASCADE;
+CREATE TABLE "property" (
 "id" serial NOT NULL,
 "name" character varying,
 "identifier" character varying NOT NULL,
@@ -133,26 +133,26 @@ CREATE TABLE "properties" (
 "tab_id" integer NOT NULL,
 "datatype_id" integer NOT NULL
 ) WITH OIDS;
-ALTER TABLE "properties" ADD CONSTRAINT "properties_pk" PRIMARY KEY("id");
+ALTER TABLE "property" ADD CONSTRAINT "property_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "properties_values" CASCADE;
-CREATE TABLE "properties_values" (
+DROP TABLE IF EXISTS "properties_value" CASCADE;
+CREATE TABLE "properties_value" (
 "id" serial NOT NULL,
 "document_id" integer NOT NULL,
 "property_id" integer NOT NULL,
 "value" text
 ) WITH OIDS;
-ALTER TABLE "properties_values" ADD CONSTRAINT "properties_values_pk" PRIMARY KEY("id");
+ALTER TABLE "properties_value" ADD CONSTRAINT "properties_value_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "tabs" CASCADE;
-CREATE TABLE "tabs" (
+DROP TABLE IF EXISTS "tab" CASCADE;
+CREATE TABLE "tab" (
 "id" serial NOT NULL,
 "name" character varying NOT NULL,
 "description" character varying,
 "order" integer DEFAULT 0,
 "document_type_id" integer NOT NULL
 ) WITH OIDS;
-ALTER TABLE "tabs" ADD CONSTRAINT "tabs_pk" PRIMARY KEY("id");
+ALTER TABLE "tab" ADD CONSTRAINT "tab_pk" PRIMARY KEY("id");
 
 DROP TABLE IF EXISTS "translate" CASCADE;
 CREATE TABLE "translate" (
@@ -172,33 +172,32 @@ CREATE TABLE "translate_language" (
 ) WITH OIDS;
 ALTER TABLE "translate_language" ADD CONSTRAINT "translate_language_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "user_acl_roles" CASCADE;
-CREATE TABLE "user_acl_roles" (
+DROP TABLE IF EXISTS "user_acl_role" CASCADE;
+CREATE TABLE "user_acl_role" (
 "id" serial NOT NULL,
 "name" character varying,
 "description" character varying
 ) WITH OIDS;
-ALTER TABLE "user_acl_roles" ADD CONSTRAINT "user_acl_roles_pkey" PRIMARY KEY("id");
-CREATE UNIQUE INDEX "user_acl_roles_name_key" ON "user_acl_roles" USING btree ("name");
+ALTER TABLE "user_acl_role" ADD CONSTRAINT "user_acl_role_pk" PRIMARY KEY("id");
+CREATE UNIQUE INDEX "user_acl_roles_name_key" ON "user_acl_role" USING btree ("name");
 
 DROP TABLE IF EXISTS "user_acl" CASCADE;
 CREATE TABLE "user_acl" (
 "id" serial NOT NULL,
 "user_acl_permission_id" integer NOT NULL,
-"user_acl_role_id" integer NOT NULL,
-"user_acl_resource_id" integer NOT NULL
+"user_acl_role_id" integer NOT NULL
 ) WITH OIDS;
 ALTER TABLE "user_acl" ADD CONSTRAINT "user_acl_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "user_acl_resources" CASCADE;
-CREATE TABLE "user_acl_resources" (
+DROP TABLE IF EXISTS "user_acl_resource" CASCADE;
+CREATE TABLE "user_acl_resource" (
 "id" serial NOT NULL,
 "resource" character varying
 ) WITH OIDS;
-ALTER TABLE "user_acl_resources" ADD CONSTRAINT "user_acl_resources_pk" PRIMARY KEY("id");
+ALTER TABLE "user_acl_resource" ADD CONSTRAINT "user_acl_resource_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "users" CASCADE;
-CREATE TABLE "users" (
+DROP TABLE IF EXISTS "user" CASCADE;
+CREATE TABLE "user" (
 "id" serial NOT NULL,
 "created_at" timestamp without time zone NOT NULL,
 "updated_at" timestamp without time zone NOT NULL,
@@ -209,10 +208,10 @@ CREATE TABLE "users" (
 "password" character varying NOT NULL,
 "user_acl_role_id" integer NOT NULL DEFAULT 0
 ) WITH OIDS;
-ALTER TABLE "users" ADD CONSTRAINT "users_pk" PRIMARY KEY("id");
+ALTER TABLE "user" ADD CONSTRAINT "user_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "views" CASCADE;
-CREATE TABLE "views" (
+DROP TABLE IF EXISTS "view" CASCADE;
+CREATE TABLE "view" (
 "id" serial NOT NULL,
 "created_at" timestamp without time zone NOT NULL,
 "updated_at" timestamp without time zone NOT NULL,
@@ -221,49 +220,50 @@ CREATE TABLE "views" (
 "content" text,
 "description" character varying
 ) WITH OIDS;
-ALTER TABLE "views" ADD CONSTRAINT "views_pk" PRIMARY KEY("id");
+ALTER TABLE "view" ADD CONSTRAINT "view_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "user_acl_permissions" CASCADE;
-CREATE TABLE "user_acl_permissions" (
+DROP TABLE IF EXISTS "user_acl_permission" CASCADE;
+CREATE TABLE "user_acl_permission" (
 "id" serial NOT NULL,
-"permission" character varying(50)[] NOT NULL
+"permission" character varying(50)[] NOT NULL,
+"user_acl_resource_id" integer NOT NULL
 ) WITH OIDS;
-ALTER TABLE "user_acl_permissions" ADD CONSTRAINT "user_acl_permissions_pk" PRIMARY KEY("id");
+ALTER TABLE "user_acl_permission" ADD CONSTRAINT "user_acl_permission_pk" PRIMARY KEY("id");
 
 -- End Table's declaration
 
 -- Start Relation's declaration
-ALTER TABLE "document_type_views" ADD CONSTRAINT "fk_document_type_views_views" FOREIGN KEY ("view_id") REFERENCES "views"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "document_type_view" ADD CONSTRAINT "fk_document_type_views_views" FOREIGN KEY ("view_id") REFERENCES "view"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "properties" ADD CONSTRAINT "fk_properties_datatypes" FOREIGN KEY ("datatype_id") REFERENCES "datatypes"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "property" ADD CONSTRAINT "fk_property_datatype" FOREIGN KEY ("datatype_id") REFERENCES "datatype"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "properties" ADD CONSTRAINT "fk_properties_tabs" FOREIGN KEY ("tab_id") REFERENCES "tabs"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "property" ADD CONSTRAINT "fk_property_tab" FOREIGN KEY ("tab_id") REFERENCES "tab"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "documents" ADD CONSTRAINT "fk_documents_layouts" FOREIGN KEY ("layout_id") REFERENCES "layouts"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "document" ADD CONSTRAINT "fk_document_layout" FOREIGN KEY ("layout_id") REFERENCES "layout"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "documents" ADD CONSTRAINT "fk_documents_documents" FOREIGN KEY ("parent_id") REFERENCES "documents"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "document" ADD CONSTRAINT "fk_document_document" FOREIGN KEY ("parent_id") REFERENCES "document"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "documents" ADD CONSTRAINT "fk_documents_views" FOREIGN KEY ("view_id") REFERENCES "views"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "document" ADD CONSTRAINT "fk_documents_view" FOREIGN KEY ("view_id") REFERENCES "view"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "documents" ADD CONSTRAINT "fk_documents_document_types" FOREIGN KEY ("document_type_id") REFERENCES "document_types"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "document" ADD CONSTRAINT "fk_document_document_type" FOREIGN KEY ("document_type_id") REFERENCES "document_type"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "document_types" ADD CONSTRAINT "fk_document_types_views" FOREIGN KEY ("default_view_id") REFERENCES "views"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "document_type" ADD CONSTRAINT "fk_document_type_view" FOREIGN KEY ("default_view_id") REFERENCES "view"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "document_types" ADD CONSTRAINT "fk_document_types_icons" FOREIGN KEY ("icon_id") REFERENCES "icons"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "document_type" ADD CONSTRAINT "fk_document_type_icon" FOREIGN KEY ("icon_id") REFERENCES "icon"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "documents" ADD CONSTRAINT "fk_documents_users" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "document" ADD CONSTRAINT "fk_document_user" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
-ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_permissions_user_acl_roles" FOREIGN KEY ("user_acl_role_id") REFERENCES "user_acl_roles"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_permission_user_acl_role" FOREIGN KEY ("user_acl_role_id") REFERENCES "user_acl_role"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_permissions_user_acl_resources" FOREIGN KEY ("user_acl_resource_id") REFERENCES "user_acl_resources"("id") ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE "users" ADD CONSTRAINT "fk_users_user_acl_roles" FOREIGN KEY ("user_acl_role_id") REFERENCES "user_acl_roles"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "user" ADD CONSTRAINT "fk_user_user_acl_role" FOREIGN KEY ("user_acl_role_id") REFERENCES "user_acl_role"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE "translate_language" ADD CONSTRAINT "fk_translate_language_translate" FOREIGN KEY ("translate_id") REFERENCES "translate"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_user_acl_permission" FOREIGN KEY ("user_acl_permission_id") REFERENCES "user_acl_permissions"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_user_acl_permission" FOREIGN KEY ("user_acl_permission_id") REFERENCES "user_acl_permission"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "document_type_views" ADD CONSTRAINT "fk_document_type_views_document_type" FOREIGN KEY ("document_type_id") REFERENCES "document_types"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "document_type_view" ADD CONSTRAINT "fk_document_type_view_document_type" FOREIGN KEY ("document_type_id") REFERENCES "document_type"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE "user_acl_permission" ADD CONSTRAINT "fk_user_acl_permission_user_acl_resource" FOREIGN KEY ("user_acl_resource_id") REFERENCES "user_acl_resource"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 -- End Relation's declaration
 

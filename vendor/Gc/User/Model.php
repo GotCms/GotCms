@@ -10,7 +10,7 @@ use Gc\Db\AbstractTable,
 
 class Model extends AbstractTable implements IterableInterface
 {
-    protected $_name = 'users';
+    protected $_name = 'user';
 
     public function authenticate($email, $password)
     {
@@ -160,6 +160,20 @@ class Model extends AbstractTable implements IterableInterface
         {
             return FALSE;
         }
+    }
+
+    public function getRole()
+    {
+        $role = $this->getData('role');
+        if(empty($role))
+        {
+            $role = new Role\Model();
+            $role->setId($this->getId());
+
+            $this->setData('role', $role);
+        }
+
+        return $this->getData('role');
     }
 
     /** (non-PHPdoc)

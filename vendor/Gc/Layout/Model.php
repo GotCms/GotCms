@@ -7,7 +7,7 @@ use Gc\Db\AbstractTable,
 
 class Model extends AbstractTable implements IterableInterface
 {
-    protected $_name = 'layouts';
+    protected $_name = 'layout';
 
     /**
     * @param integer $id

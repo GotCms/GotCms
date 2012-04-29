@@ -8,6 +8,7 @@ use Gc\Mvc\Controller\Action,
 
 class LayoutController extends Action
 {
+    protected $_acl_page = array('resource' => 'Development', 'permission' => 'layouts');
     public function init()
     {
     }

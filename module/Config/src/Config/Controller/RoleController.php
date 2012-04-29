@@ -51,17 +51,17 @@ class RoleController extends Action
     public function editAction()
     {
         $role_id = $this->getRouteMatch()->getParam('id');
-        $role_model = Role\Model::fromId($role_id);
+        $role_table = Role\Model::fromId($role_id);
 
         $form = new RoleForm();
-        $form->initPermissions($role_model->getPermissions());
+        $form->initPermissions($role_table->getUserPermissions());
         $form->setAction($this->url()->fromRoute('userRoleEdit', array('id' => $role_id)));
-        $form->populate($role_model->getData());
+        $form->populate($role_table->getData());
         $post = $this->getRequest()->post()->toArray();
         if($this->getRequest()->isPost() and $form->isValid($post))
         {
-            $role_model->addData($post);
-            $role_model->save();
+            $role_table->addData($post);
+            $role_table->save();
 
             return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
         }

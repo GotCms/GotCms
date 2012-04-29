@@ -4,11 +4,12 @@ namespace Gc\User\Role;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Expression,
-    Zend\Db\Sql\Select;
+    Zend\Db\Sql\Select,
+    Zend\Db\TableGateway\TableGateway;
 
 class Model extends AbstractTable
 {
-    protected $_name = 'user_acl_roles';
+    protected $_name = 'user_acl_role';
 
     /**
     * @desc Save user
@@ -29,6 +30,21 @@ class Model extends AbstractTable
             else
             {
                 $this->update($array_save, 'id = '.$this->getId());
+            }
+
+            $permissions = $this->getPermissions();
+            if(!empty($permissions))
+            {
+                $acl_table = new TableGateway('user_acl', $this->getAdapter());
+                $acl_table->delete(sprintf('user_acl_role_id = %s', $this->getId()));
+
+                foreach($permissions as $permission_id => $value)
+                {
+                    if(!empty($value))
+                    {
+                        $acl_table->insert(array('user_acl_role_id' => $this->getId(), 'user_acl_permission_id' => $permission_id));
+                    }
+                }
             }
 
             return TRUE;
@@ -90,14 +106,31 @@ class Model extends AbstractTable
         }
     }
 
-    public function getPermissions()
+    public function getUserPermissions()
     {
         $select = new Select();
-        $select->from('user_acl_roles')
-            ->join('user_acl_permissions', 'user_acl_permissions.user_acl_role_id = user_acl_roles.id')
-            ->join('user_acl_resources', 'user_acl_resources.id = user_acl_permissions.user_acl_resource_id')
-            ->where(sprintf('user_acl_roles.id = %s', $this->getId()));
+        $select->from('user_acl_role')
+            ->columns(array(
+                'user_acl_permission.id AS userPermissionId'
+            ), FALSE)
+            ->join('user_acl', 'user_acl.user_acl_role_id = user_acl_role.id', array())
+            ->join('user_acl_permission', 'user_acl_permission.id = user_acl.user_acl_permission_id', array('permission'))
+            ->join('user_acl_resource', 'user_acl_resource.id = user_acl_permission.user_acl_resource_id', array('resource'))
+            ->where(sprintf('user_acl_role.id = %s', $this->getId()));
 
-        return $this->fetchAll($select);
+        $permissions = $this->fetchAll($select);
+
+        $return = array();
+        foreach($permissions as $permission)
+        {
+            if(empty($return[$permission['resource']]))
+            {
+                $return[$permission['resource']] = array();
+            }
+
+            $return[$permission['resource']][$permission['userPermissionId']] = $permission['permission'];
+        }
+
+        return $return;
     }
 }

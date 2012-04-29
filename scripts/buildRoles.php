@@ -18,7 +18,7 @@ $roles = $ini->fromFile('scripts/roles.ini');
 try
 {
     echo "\n>>> Delete user_acl_roles table\n";
-    $statement = $adapter->createStatement('TRUNCATE user_acl_roles CASCADE');
+    $statement = $adapter->createStatement('TRUNCATE user_acl_role CASCADE');
     $result = $statement->execute();
 }
 catch (Exception $e)
@@ -30,7 +30,7 @@ try
 {
     foreach ($roles['role'] as $key=>$value)
     {
-        $statement = $adapter->createStatement("INSERT INTO user_acl_roles (name) VALUES ('" . $value . "')");
+        $statement = $adapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
         $result = $statement->execute();
     }
 

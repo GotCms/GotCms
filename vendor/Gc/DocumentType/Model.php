@@ -9,7 +9,7 @@ use Gc\Db\AbstractTable,
 
 class Model extends AbstractTable implements IterableInterface
 {
-    protected $_name = 'document_types';
+    protected $_name = 'document_type';
 
     public function getUser()
     {

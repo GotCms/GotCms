@@ -4,7 +4,8 @@ namespace Config\Form;
 use Gc\Form\AbstractForm,
     Zend\Validator\Db,
     Zend\Validator\Identical,
-    Zend\Form\Element;
+    Zend\Form\Element,
+    Gc\User\Permission;
 
 class Role extends AbstractForm
 {
@@ -33,12 +34,25 @@ class Role extends AbstractForm
     }
 
 
-    public function initPermissions($permissions)
+    public function initPermissions($user_permissions)
     {
-        foreach($permissions as $permission)
+        $permissions_table = new Permission\Collection();
+        $resources = $permissions_table->getPermissions();
+        foreach($resources as $resource => $permissions)
         {
-            var_dump($permission);
+            foreach($permissions as $permission_id => $permission)
+            {
+                $element = new Element\Checkbox((string)$permission_id);
+                $element->setBelongsTo('permissions');
+                $element->setLabel($permission);
+
+                if(!empty($user_permissions[$resource]) and array_key_exists($permission_id, $user_permissions[$resource]))
+                {
+                    $element->setValue(TRUE);
+                }
+
+                $this->addElement($element);
+            }
         }
-        die();
     }
 }

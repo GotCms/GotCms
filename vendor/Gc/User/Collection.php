@@ -9,7 +9,7 @@ class Collection extends AbstractTable implements IterableInterface
 {
     protected $_users;
     protected $_sort;
-    protected $_name = 'users';
+    protected $_name = 'user';
 
     /**
     * @param unknown_type $order
