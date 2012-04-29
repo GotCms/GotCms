@@ -5,12 +5,8 @@
     echo $this->headTitle();
     echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
     echo $this->headScript()
-        ->appendFile('/js/prototype.js', 'text/javascript')
-        ->appendFile('/js/jquery-1.7.1.min.js', 'text/javascript')
+        ->appendFile('/js/jquery-1.7.2.min.js', 'text/javascript')
         ->appendFile('/js/jquery-ui-1.8.14.js', 'text/javascript')
-        ->appendFile('/js/translate.js', 'text/javascript')
-        ->appendFile('/js/validate.js', 'text/javascript')
-        ->appendFile('/js/form.js', 'text/javascript')
         ->appendFile('/js/codemirror/lib/codemirror.js', 'text/javascript')
         ->appendFile('/js/codemirror/mode/xml/xml.js', 'text/javascript')
         ->appendFile('/js/codemirror/mode/javascript/javascript.js', 'text/javascript')
@@ -37,8 +33,8 @@
         jQuery(document).ready(function()
         {
             <?php if(!empty($this->routes)): ?>
-                ES.getInstance().setOption('routes', <?php echo $this->jsQuoteEscape($this->routes); ?>);
-                ES.getInstance().initDocumentMenu();
+                Gc.setOption('routes', <?php echo $this->jsQuoteEscape($this->routes); ?>);
+                Gc.initDocumentMenu();
             <?php endif; ?>
         });
     </script>

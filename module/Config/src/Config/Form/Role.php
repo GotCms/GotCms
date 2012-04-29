@@ -20,10 +20,8 @@ class Role extends AbstractForm
             ->addValidator('NotEmpty');
 
         $description  = new Element\Text('description');
-        $description->setRequired(TRUE)
-            ->setLabel('Description')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
+        $description->setLabel('Description')
+            ->setAttrib('class', 'input-text');
 
         $submit = new Element\Submit('submit');
         $submit->setAttrib('class', 'input-submit')
