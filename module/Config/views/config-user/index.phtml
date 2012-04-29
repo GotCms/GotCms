@@ -11,8 +11,10 @@
     <?php foreach($this->users as $user): ?>
         <tr>
             <td><?php echo $user->getId(); ?></td>
-            <td><?php echo $this->escape($user->getName()); ?></td>
-            <td><?php echo $this->escape($user->getDescription()); ?></td>
+            <td><?php echo $this->escape($user->getLastname()); ?></td>
+            <td><?php echo $this->escape($user->getFirstname()); ?></td>
+            <td><?php echo $this->escape($user->getEmail()); ?></td>
+            <td><?php echo $this->escape($user->getLogin()); ?></td>
             <td><a href="<?php echo $this->url('userEdit', array('id' => $user->getId())); ?>">
                 <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escape($this->translator('Edit')); ?>" />
             </a></td>

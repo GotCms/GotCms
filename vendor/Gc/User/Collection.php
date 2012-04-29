@@ -8,21 +8,14 @@ use Gc\Db\AbstractTable,
 class Collection extends AbstractTable implements IterableInterface
 {
     protected $_users;
-    protected $_sort;
     protected $_name = 'user';
 
     /**
     * @param unknown_type $order
     * @desc create instance
     */
-    public function init($order = 'ASC')
+    public function init()
     {
-        if($order != 'DESC')
-        {
-            $order = 'ASC';
-        }
-
-        $this->_sort = $order;
         $this->setUsers();
     }
 
@@ -40,13 +33,12 @@ class Collection extends AbstractTable implements IterableInterface
     */
     private function setUsers()
     {
-        $select = $this->select()
-            ->order(array('lastname '.$this->_sort));
+        $select = $this->select();
         $rows = $this->fetchAll($select);
         $users = array();
         foreach($rows as $row)
         {
-            $users[] = Gc\User\Model::fromArray((array)$row);
+            $users[] = Model::fromArray((array)$row);
         }
 
         $this->_users = $users;

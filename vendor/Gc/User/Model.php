@@ -87,7 +87,7 @@ class Model extends AbstractTable implements IterableInterface
             , 'login' => $this->getLogin()
             , 'password' => $this->getPassword()
             , 'updated_at' => date('Y-m-d H:i:s')
-            , 'user_role_id' => 1//@TODO Use ACL to declare User_type_id
+            , 'user_acl_role_id' => $this->getUserAclRoleId()
         );
 
         try
@@ -123,7 +123,7 @@ class Model extends AbstractTable implements IterableInterface
         $id = $this->getId();
         if(!empty($id))
         {
-            parent::delete('id = '.$this->getId());
+            parent::delete('id = '.$id);
             unset($this);
             return TRUE;
         }
@@ -140,7 +140,7 @@ class Model extends AbstractTable implements IterableInterface
         $user_table = new Model();
         $user_table->setData($array);
 
-        return $u;
+        return $user_table;
     }
 
     /**
