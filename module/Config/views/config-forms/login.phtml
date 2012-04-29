@@ -1,0 +1,11 @@
+<form id="login-form" action="<?php echo $this->url('login'); ?>" method="post">
+    <h1><?php echo $this->escape($this->translator('Log In')); ?></h1>
+    <fieldset id="inputs">
+        <input name="login" id="login" type="text" placeholder="<?php echo $this->escape($this->translator('Login')); ?>" autofocus required>
+        <input name="password" id="password" type="password" placeholder="<?php echo $this->escape($this->translator('Password')); ?>" required>
+    </fieldset>
+    <fieldset id="actions">
+        <input type="submit" id="submit" value="Log in">
+        <a href=""><?php echo $this->escape($this->translator('Forgot your password?')); ?></a>
+    </fieldset>
+</form>
