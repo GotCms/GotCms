@@ -42,7 +42,6 @@ class Action extends ActionController
         else
         {
             $user_table = Model::fromId($auth->getIdentity()->id);
-            \Zend\Registry::set('user', $user_table);
 
             $this->_acl = new Acl($user_table);
             $permissions = $user_table->getRole()->getUserPermissions();

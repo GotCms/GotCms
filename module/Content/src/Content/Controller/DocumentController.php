@@ -44,7 +44,7 @@ class DocumentController extends Action
 
     }
 
-    public function addAction()
+    public function createAction()
     {
         $document_form = new Form\DocumentAdd();
         $document_form->setAction($this->url()->fromRoute('documentAdd'));

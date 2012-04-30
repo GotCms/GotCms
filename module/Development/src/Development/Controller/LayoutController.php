@@ -17,7 +17,7 @@ class LayoutController extends Action
     {
     }
 
-    public function addAction()
+    public function createAction()
     {
         $layout_form = new LayoutForm();
         $layout_form->setAction($this->url()->fromRoute('layoutAdd'));

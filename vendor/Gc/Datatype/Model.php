@@ -10,17 +10,7 @@ use Gc\Db\AbstractTable,
 class Model extends AbstractTable implements IterableInterface
 {
     protected $_name = 'datatype';
-    protected $_model;
     static protected $_datatypes = array();
-
-    public function setModelId($value)
-    {
-        $this->setData('model_id', $value);
-        $this->_model = null;
-        $this->setModel();
-
-        return $this;
-    }
 
     public function setPrevalueValue($value)
     {

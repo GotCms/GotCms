@@ -22,12 +22,13 @@ class DatatypeController extends Action
         // action body
     }
 
-    public function addAction()
+    public function createAction()
     {
         $datatype = new Datatype\Model();
         $form = new DatatypeForm();
         $form->setAction($this->url()->fromRoute('datatypeAdd'));
-        if($this->getRequest()->isPost() AND $form->isValid($this->getRequest()->post()->toArray()))
+        $post = $this->getRequest()->post()->toArray();
+        if($this->getRequest()->isPost() AND $form->isValid($post))
         {
             $datatype->addData($form->getValues(TRUE));
             try
@@ -49,7 +50,7 @@ class DatatypeController extends Action
                 \Gc\Error::set(get_class($this), $e);
             }
 
-            $form->populate($data);
+            $form->populate($post);
         }
 
         return array('form' => $form);

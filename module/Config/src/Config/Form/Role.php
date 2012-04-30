@@ -31,7 +31,6 @@ class Role extends AbstractForm
         $this->addElements(array($name, $description, $submit));
     }
 
-
     public function initPermissions($user_permissions = NULL)
     {
         $permissions_table = new Permission\Collection();

@@ -220,9 +220,12 @@ var Gc = (function($)
                                         +'</dd>'
                                     +'</dl>';
 
-                                $t = new Template($c);
+                                jQuery.each($data, function($key, $value)
+                                {
+                                    $c = $c.replace(/'#{'+$key+}'/ig, $value);
+                                });
     console.log($data);
-                                $('#tabs-properties-'+$tab.val()).find('ul').append('<li>'+$t.evaluate($data)+'</li>');
+                                $('#tabs-properties-'+$tab.val()).find('ul').append('<li>'+$c+'</li>');
     console.log('#properties-tab-'+$data.tab+'-'+$data.id);
     console.log('#properties-datatype-'+$data.tab+'-'+$data.id);
     console.log('#properties-required-'+$data.tab+'-'+$data.id);

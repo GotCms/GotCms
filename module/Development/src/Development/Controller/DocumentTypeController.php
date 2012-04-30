@@ -15,8 +15,8 @@ class DocumentTypeController extends Action
     public function init()
     {
         /*$contextSwitch = $this->_helper->getHelper('contextSwitch');
-        $contextSwitch->addActionContext('add-tab', 'json')
-            ->addActionContext('add-property', 'json')
+        $contextSwitch->createActionContext('add-tab', 'json')
+            ->createActionContext('add-property', 'json')
             ->setAutoJsonSerialization(true)
             ->initContext();*/
     }
@@ -26,7 +26,7 @@ class DocumentTypeController extends Action
         // action body
     }
 
-    public function addAction()
+    public function createAction()
     {
         $form = new DocumentTypeForm();
         $form->setView($this->getLocator()->get('view'));
@@ -50,8 +50,7 @@ class DocumentTypeController extends Action
                 $tabs_subform = $form->getSubForm('tabs');
 
                 $document_type->addData(array(
-                    //@TODO change user_id
-                    'user_id' => Zend_Registry::get('user_id')
+                    'user_id' => $this->getAuth()->getIdentity()->id
                     , 'name' => $infos_subform->getValue('name')
                     , 'description' => $infos_subform->getValue('description')
                     , 'default_view_id' => $views_subform->getValue('default_view')
@@ -134,10 +133,10 @@ class DocumentTypeController extends Action
             }
         }
 
-        if(!empty($session['document-type']))
+        /*if(!empty($session['document-type']))
         {
             $session->clear('document-type');
-        }
+        }*/
 
 
         return array('form' => $form);

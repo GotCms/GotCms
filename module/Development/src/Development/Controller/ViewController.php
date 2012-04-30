@@ -18,7 +18,7 @@ class ViewController extends Action
 
     }
 
-    public function addAction()
+    public function createAction()
     {
         $view_form = new ViewForm();
         $view_form->setAction($this->url()->fromRoute('viewAdd'));
