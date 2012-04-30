@@ -34,9 +34,9 @@ class Action extends ActionController
         $route_name = $this->getRouteMatch()->getMatchedRouteName();
         if(!$auth->hasIdentity())
         {
-            if($route_name != 'login' and $route_name != 'renderWebsite')
+            if(!in_array($route_name, array('userLogin', 'userForgotPassword')) and $route_name != 'renderWebsite')
             {
-                return $this->redirect()->toRoute('login');
+                return $this->redirect()->toRoute('userLogin');
             }
         }
         else

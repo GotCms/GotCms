@@ -1,4 +1,4 @@
-<form id="login-form" action="<?php echo $this->url('login'); ?>" method="post">
+<form id="one-page-form" action="<?php echo $this->url('userLogin'); ?>" method="post">
     <h1><?php echo $this->escape($this->translator('Log In')); ?></h1>
     <fieldset id="inputs">
         <input name="login" id="login" type="text" placeholder="<?php echo $this->escape($this->translator('Login')); ?>" autofocus required>
@@ -6,6 +6,6 @@
     </fieldset>
     <fieldset id="actions">
         <input type="submit" id="submit" value="Log in">
-        <a href=""><?php echo $this->escape($this->translator('Forgot your password?')); ?></a>
+        <a href="<?php echo $this->url('userForgotPassword'); ?>"><?php echo $this->escape($this->translator('Forgot your password?')); ?></a>
     </fieldset>
 </form>

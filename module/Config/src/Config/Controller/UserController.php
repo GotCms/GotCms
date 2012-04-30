@@ -6,6 +6,7 @@ use Gc\Mvc\Controller\Action,
     Gc\User,
     Config\Form\UserLogin,
     Config\Form\User as UserForm,
+    Config\Form\UserForgotPassword as UserForgotForm,
     Zend\View\Model\ViewModel;
 
 class UserController extends Action
@@ -19,7 +20,7 @@ class UserController extends Action
 
     public function loginAction()
     {
-        $this->layout()->setTemplate('layouts/one-form.phtml');
+        $this->layout()->setTemplate('layouts/one-page.phtml');
         $login_form = new UserLogin();
         $login_form->setView($this->getLocator()->get('view'));
         $post = $this->getRequest()->post();
@@ -35,6 +36,23 @@ class UserController extends Action
         }
 
         return array('form' => $login_form);
+    }
+
+    public function forgotPasswordAction()
+    {
+        $this->layout()->setTemplate('layouts/one-page.phtml');
+        $forgot_password_form = new UserForgotForm();
+        $forgot_password_form->setView($this->getLocator()->get('view'));
+        $post = $this->getRequest()->post();
+        if($this->getRequest()->isPost() and $forgot_password_form->isValid($post->toArray()))
+        {
+            $user_model = new User\Model();
+            $user_model->sendForgotPasswordEmail($forgot_password_form->getValue('email'));
+            //@TODO send mail to retrieve password
+            $this->redirect()->toRoute('admin');
+        }
+
+        return array('form' => $forgot_password_form);
     }
 
     public function logoutAction()
@@ -83,13 +101,14 @@ class UserController extends Action
         $form->setAction($this->url()->fromRoute('userEdit', array('id' => $user_id)));
         $form->loadValues($user_model);
         $post = $this->getRequest()->post()->toArray();
+
+        if(!empty($post['password']))
+        {
+            $form->passwordRequired();
+        }
+
         if($this->getRequest()->isPost() and $form->isValid($post))
         {
-            $password_value = $form->getValue('password');
-            if(!empty($password_value))
-            {
-                $form->passwordRequired();
-            }
 
             $user_model->addData($post);
             $user_model->save();

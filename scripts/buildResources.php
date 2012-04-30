@@ -6,10 +6,11 @@ $app_config = include 'config/application.config.php';
 Zend\Loader\AutoloaderFactory::factory(array('Zend\Loader\StandardAutoloader' => $app_config['autoloader']));
 
 $adapter = new Zend\Db\Adapter\Adapter(array(
-    'driver' => 'pdo_pgsql',
+    'hostname' => 'localhost',
+    'driver'   => 'pdo_pgsql',
     'database' => 'gotcms',
     'username' => 'got',
-    'password' => ''
+    'password' => 'x8maoxfp;'
 ));
 
 $ini = new Zend\Config\Reader\Ini();

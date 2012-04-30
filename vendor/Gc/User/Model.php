@@ -173,6 +173,12 @@ class Model extends AbstractTable implements IterableInterface
         return $this->getData('role');
     }
 
+    public function sendForgotPasswordEmail($email)
+    {
+        $row = $this->select(array('email' => $email));
+        var_dump($row->current());
+    }
+
     /** (non-PHPdoc)
     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getParent()
     */

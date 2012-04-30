@@ -17,7 +17,8 @@ class User extends AbstractForm
         $email->setRequired(TRUE)
             ->setLabel('Email')
             ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
+            ->addValidator('NotEmpty')
+            ->addValidator('EmailAddress');
 
         $login = new Element\Text('login');
         $login->setLabel('Login')
