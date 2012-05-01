@@ -2,8 +2,9 @@
 namespace Development\Form;
 
 use Gc\Form\AbstractForm,
-    Gc\Validator,
+    Gc\DocumentType\Model as DocumentTypeModel,
     Gc\Datatype,
+    Gc\Validator,
     Gc\View,
     Zend\Validator\Db,
     Zend\Form\Element,
@@ -208,6 +209,7 @@ class DocumentType extends AbstractForm
 
         $description = new Element\Text('description');
         $description->setLabel('Description')
+            ->setBelongsTo('description')
             ->setIsArray(TRUE)
             ->setRequired(TRUE);
 
@@ -216,30 +218,68 @@ class DocumentType extends AbstractForm
         return $this->addSubForm($sub_form, 'tabs');
     }
 
-    public function setValueFromSession($session)
+    public function setValues($element)
     {
-        if(empty($session['tabs']))
+        if($element instanceof DocumentTypeModel)
         {
-            continue;
-        }
+            $infos_form = $this->getInfos();
+            $infos_form->getElement('name')->setValue($element->getName());
+            $infos_form->getElement('description')->setValue($element->getDescription());
 
-        $tab_select = array();
-        foreach($session['tabs'] as $tab_id => $tab)
-        {
-            //@TODO Change content here to elements depends of session values
-            $tab_form = $this->getSubForm('tabs');
-            $tab_form->getElement('name')->setValue($tab['name']);
-            $tab_form->getElement('description')->setValue($tab['description']);
-            $tab_select[$tab_id] = $tab['name'];
-            foreach($tab['properties'] as $property)
+            $views_form = $this->getViews();
+            $views_form->getElement('default_view')->setValue($element->getDefaultViewId());
+            $views_collection = $element->getAvailableViews();
+            $views_form->getElement('available_views')->setValue($views_collection->getSelect());
+
+            $tabs = $element->getTabs();
+            $session = $element;
+            $tab_select = array();
+            foreach($tabs as $tab_id => $tab)
             {
-                $property_form = $this->getSubForm('properties');
-                $property_form->getElement('name')->setValue($property['name']);
-                $property_form->getElement('identifier')->setValue($property['identifier']);
-                $property_form->getElement('tab')->addMultiOptions($tab_select)->setValue($property['tab']);
-                $property_form->getElement('datatype')->setValue($property['datatype']);
-                $property_form->getElement('description')->setValue($property['description']);
-                $property_form->getElement('required')->setValue($property['is_required']);
+                //@TODO Change content here to elements depends of session values
+                $tab_form = $this->getTabs();
+                $tab_form->getElement('name')->setValue($tab->getName());
+                $tab_form->getElement('description')->setValue($tab->getDescription());
+                $tab_select[$tab_id] = $tab->getName();
+                $properties = $tab->getProperties();
+                foreach($properties as $property)
+                {
+                    $property_form = $this->getProperties();
+                    $property_form->getElement('name')->setValue($property->getName());
+                    $property_form->getElement('identifier')->setValue($property->getIdentifier());
+                    $property_form->getElement('tab')->addMultiOptions($tab_select)->setValue($property->getTabId());
+                    $property_form->getElement('datatype')->setValue($property->getDatatypeId());
+                    $property_form->getElement('description')->setValue($property->getDescription());
+                    $property_form->getElement('required')->setValue($property->isRequired());
+                }
+            }
+        }
+        else
+        {
+            if(empty($element['tabs']))
+            {
+                return;
+            }
+
+            $session = $element;
+            $tab_select = array();
+            foreach($session['tabs'] as $tab_id => $tab)
+            {
+                //@TODO Change content here to elements depends of session values
+                $tab_form = $this->getTabs();
+                $tab_form->getElement('name')->setValue($tab['name']);
+                $tab_form->getElement('description')->setValue($tab['description']);
+                $tab_select[$tab_id] = $tab['name'];
+                foreach($tab['properties'] as $property)
+                {
+                    $property_form = $this->getProperties();
+                    $property_form->getElement('name')->setValue($property['name']);
+                    $property_form->getElement('identifier')->setValue($property['identifier']);
+                    $property_form->getElement('tab')->addMultiOptions($tab_select)->setValue($property['tab']);
+                    $property_form->getElement('datatype')->setValue($property['datatype']);
+                    $property_form->getElement('description')->setValue($property['description']);
+                    $property_form->getElement('required')->setValue($property['is_required']);
+                }
             }
         }
     }

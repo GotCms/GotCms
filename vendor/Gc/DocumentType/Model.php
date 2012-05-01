@@ -4,8 +4,9 @@ namespace Gc\DocumentType;
 
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
+    Gc\User,
     Gc\Tab,
-    Gc\User;
+    Gc\View;
 
 class Model extends AbstractTable implements IterableInterface
 {
@@ -34,7 +35,7 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @return Gc\Tab\Model
+    * @return Gc\Tab\Collection
     */
     public function getTabs()
     {
@@ -47,6 +48,19 @@ class Model extends AbstractTable implements IterableInterface
         }
 
         return $this->getData('tabs');
+    }
+
+    public function getAvailableViews()
+    {
+        if($this->getData('available_views') === NULL)
+        {
+            $views_collection = new View\Collection();
+            $views_collection->init($this->getId());
+
+            $this->setData('available_views', $views_collection);
+        }
+
+        return $this->getData('available_views');
     }
 
     public function save()

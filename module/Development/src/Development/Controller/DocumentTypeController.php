@@ -32,12 +32,123 @@ class DocumentTypeController extends Action
         {
             if(!empty($session['document-type']))
             {
-                $form->setValueFromSession($session['document-type']);
+                $form->setValues($session['document-type']);
             }
 
             if($form->isValid($this->getRequest()->post()->toArray()))
             {
                 $document_type = new DocumentType\Model();
+                $property_collection = new Property\Collection();
+
+                $infos_subform = $form->getSubForm('infos');
+                $views_subform = $form->getSubForm('views');
+                $tabs_subform = $form->getSubForm('tabs');
+
+                $document_type->addData(array(
+                    'user_id' => $this->getAuth()->getIdentity()->id
+                    , 'name' => $infos_subform->getValue('name')
+                    , 'description' => $infos_subform->getValue('description')
+                    , 'default_view_id' => $views_subform->getValue('default_view')
+                ));
+
+                $document_type->getAdapter()->getDriver()->getConnection()->beginTransaction();
+                try
+                {
+                    $document_type->addViews($views_subform->getValue('available_views'));
+                    $document_type->save();
+
+                    $tabs_array = array();
+                    foreach($tabs_subform->getValues(TRUE) as $tabs_name => $tab_values)
+                    {
+                        foreach($tab_values as $id => $value)
+                        {
+                            $tabs_array[$id][$tabs_name] = $value;
+                        }
+                    }
+
+                    $tabs = array();
+                    $idx = 0;
+                    foreach($tabs_array as $tab_id => $tab)
+                    {
+                        $tab_model = Tab\Model::fromArray($tab);
+                        $tab_model->setDocumentTypeId($document_type->getId());
+                        $tab_model->setOrder(++$idx);
+                        $tab_model->save();
+                        $tabs[$tab_id] = $tab_model->getId();
+                    }
+
+                    $properties = array();
+                    $properties_values = $this->getRequest()->post()->get('properties');
+
+                    foreach($properties_values as $property_name => $property_value)
+                    {
+
+                        foreach($property_value as $id => $value)
+                        {
+                            if($property_name == 'tab')
+                            {
+                                $properties[$id]['tab_id'] = $tabs[$value];
+                            }
+                            elseif($property_name == 'datatype')
+                            {
+                                $properties[$id]['datatype_id'] = $value;
+                            }
+                            elseif($property_name == 'required')
+                            {
+                                $properties[$id]['is_required'] = $value == 1 ? TRUE : FALSE;
+                            }
+                            else
+                            {
+                                $properties[$id][$property_name] = $value;
+                            }
+                        }
+
+                    }
+
+                    $idx = 0;
+                    foreach($properties as $property)
+                    {
+                        $properties[$id]['order'] = ++$idx;
+                    }
+
+                    $property_collection->setProperties($properties);
+                    $property_collection->save();
+
+                    $document_type->getAdapter()->getDriver()->getConnection()->commit();
+                }
+                catch(Exception $e)
+                {
+                    $document_type->getAdapter()->getDriver()->getConnection()->rollBack();
+                    throw new \Gc\Exception("Error Processing Request ".print_r($e, TRUE), 1);
+                }
+            }
+            else
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can save document_type');
+            }
+        }
+
+        $session['document-type'] = array();
+
+        return array('form' => $form);
+    }
+
+    public function editAction()
+    {
+        $document_type_id = $this->getRouteMatch()->getParam('id');
+        $document_type = DocumentType\Model::fromId($document_type_id);
+        $form = new DocumentTypeForm();
+        $form->setView($this->getLocator()->get('view'));
+        $request = $this->getRequest();
+        $session = $this->getSession();
+
+        $form->setValues($document_type);
+
+        if($request->isPost())
+        {
+
+            if($form->isValid($this->getRequest()->post()->toArray()))
+            {
                 $property_collection = new Property\Collection();
 
                 $infos_subform = $form->getSubForm('infos');

@@ -4,19 +4,21 @@
     <li><a href="#tabs-3"><?php echo $this->escape($this->translator('Properties')); ?></a></li>
     <li><a href="#tabs-4"><?php echo $this->escape($this->translator('Tabs')); ?></a></li>
 </ul>
+
 <form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->url('documentTypeAdd'); ?>" method="post">
+    <?php $infos_form = $this->element->infos; ?>
     <dl id="tabs-1">
         <dt id="name-label">
             <label for="infos-name" class="optional"><?php echo $this->escape($this->translator('Name')); ?></label>
         </dt>
         <dd id="name-element">
-            <input type="text" name="infos[name]" id="infos-name" value="">
+            <input type="text" name="infos[name]" id="infos-name" value="<?php echo $infos_form->getValue('name'); ?>">
         </dd>
         <dt id="description-label">
             <label for="infos-description" class="optional"><?php echo $this->escape($this->translator('Description')); ?></label>
         </dt>
         <dd id="description-element">
-            <input type="text" name="infos[description]" id="infos-description" value="">
+            <input type="text" name="infos[description]" id="infos-description" value="<?php echo $infos_form->getValue('description'); ?>">
         </dd>
         <dt id="icon_id-label">
             <label for="infos-icon_id" class="optional"><?php echo $this->escape($this->translator('Icon')); ?></label>
@@ -28,6 +30,7 @@
         </dd>
     </dl>
 
+    <?php $views_form = $this->element->views; ?>
     <dl id="tabs-2">
         <dt id="default_view_id-label">
             <label for="views-default_view_id" class="required"><?php echo $this->escape($this->translator('Default view')); ?></label>
@@ -37,7 +40,7 @@
             <select name="views[default_view]" id="views-default_view">
                 <option value=""><?php echo $this->escape($this->translator('-- Select --')); ?></option>
                 <?php foreach($views as $view_id => $view_name): ?>
-                    <option value="<?php echo $view_id; ?>"><?php echo $this->escape($view_name); ?> </option>
+                    <option value="<?php echo $view_id; ?>"<?php if($views_form->getValue('default_view') == $view_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escape($view_name); ?> </option>
                 <?php endforeach; ?>
             </select>
         </dd>
@@ -127,6 +130,9 @@
         <dd id="add-element">
             <button name="tabs[add]" id="tabs-add" type="button" class="button-add button-add-tab"><?php echo $this->escape($this->translator('Add Tab')); ?></button>
         </dd>
+        <?php $tabs_form = $this->element->tabs; ?>
+
+        <?php var_dump($tabs_form->getValue('name')); ?>
     </dl>
 
     <div>

@@ -2,50 +2,51 @@
 namespace Gc\View;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+    Gc\Component\IterableInterface,
+    Zend\Db\Sql\Select;
 
 class Collection extends AbstractTable implements IterableInterface
 {
-    protected $_views;
     protected $_views_elements;
     protected $_name = 'view';
 
     public function init($document_type_id = NULL)
     {
         $this->setDocumentTypeId($document_type_id);
-        $this->setViews();
+        $this->getViews(TRUE);
     }
 
-    private function setViews()
+    private function getViews($force_reload = FALSE)
     {
-        $select = $this->getSqlSelectPrototype()->order(array('name'));
-
-        if($this->getDocumentTypeId() !== NULL)
+        if($force_reload)
         {
-            $select->join(array('dtv'=>'document_type_views'),'dtv.view_id = v.view_id');
-            $select->where('dtv.document_type_id = ?', $this->getDocumentTypeId());
+            $select = new Select();
+            $select->order(array('name'));
+            $select->from('view');
+
+            if($this->getDocumentTypeId() !== NULL)
+            {
+                $select->join('document_type_view', 'document_type_view.view_id = view.id');
+                $select->where(sprintf('document_type_view.document_type_id = %s', $this->getDocumentTypeId()));
+            }
+
+            $rows = $this->fetchAll($select);
+            $views = array();
+            foreach($rows as $row)
+            {
+                $views[] = Model::fromArray((array)$row);
+            }
+
+            $this->setData('views', $views);
         }
 
-        $rows = $this->fetchAll($select);
-        $views = array();
-        foreach($rows as $row)
-        {
-            $views[] = Model::fromArray((array)$row);
-        }
-
-        $this->_views = $views;
-        return $this;
-    }
-
-    public function getViews()
-    {
-        return $this->_views;
+        return $this->getData('views');
     }
 
     public function getSelect()
     {
         $array_views = array();
-        foreach($this->_views as $key => $value)
+        foreach($this->getViews() as $key => $value)
         {
             $array_views[$value->getId()] = $value->getName();
         }

@@ -135,4 +135,20 @@ class Model extends AbstractTable
             return FALSE;
         }
     }
+
+    /**
+    * @return Gc\Tab\Model
+    */
+    public function getProperties()
+    {
+        if($this->getData('properties') === NULL )
+        {
+            $properties_collection = new Property\Collection();
+            $properties_collection->load($this->getDocumentTypeId(), $this->getId());
+
+            $this->setData('properties', $properties_collection->getProperties());
+        }
+
+        return $this->getData('properties');
+    }
 }
