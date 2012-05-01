@@ -275,7 +275,6 @@ var Gc = (function($)
                         $url = $url.replace('itemId', $id);
                     }
 
-
                     switch($action){
                         case 'new':
                         case 'edit':

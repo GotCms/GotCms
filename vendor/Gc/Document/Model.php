@@ -286,6 +286,6 @@ class Model extends AbstractTable implements IterableInterface
     */
     public function getUrl()
     {
-        return '';
+        return $GLOBALS['application']->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));
     }
 }
