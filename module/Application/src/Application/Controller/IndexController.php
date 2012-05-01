@@ -41,20 +41,22 @@ class IndexController extends Action
             foreach($explode_path as $url_key)
             {
                 $document_tmp = NULL;
-                if($has_document == FALSE)
+                if($has_document === FALSE)
                 {
                     $document_tmp = Document\Model::fromUrlKey($url_key);
-                    break; //No document, 404 errors
                 }
 
                 if((is_array($children) and !empty($children) and !in_array($document_tmp, $children) and $children !== NULL) or $document_tmp === NULL)
                 {
-                    $has_document = true;
+                    $has_document = TRUE;
                 }
                 else
                 {
-                    $children = $document_tmp->getChildren();
                     $document = $document_tmp;
+                    if(!empty($document_tmp))
+                    {
+                        $children = $document_tmp->getChildren();
+                    }
                 }
             }
         }

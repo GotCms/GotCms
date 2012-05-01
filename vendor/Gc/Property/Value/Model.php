@@ -70,6 +70,7 @@ class Model extends AbstractTable
             $id = $this->getId();
             if(empty($id))
             {
+                var_dump($array_save);
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             }
