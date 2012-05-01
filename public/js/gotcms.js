@@ -220,7 +220,7 @@ var Gc = (function($)
                                         +'</dd>'
                                     +'</dl>';
 
-                                jQuery.each($data, function($key, $value)
+                                $.each($data, function($key, $value)
                                 {
                                     $regexp = new RegExp('#{'+$key+'}', 'ig');
                                     $c = $c.replace($regexp, $value);
@@ -266,7 +266,7 @@ var Gc = (function($)
 
                 function($action, $element, $position)
                 {
-                    $routes = $this._options.get('routes');
+                    $routes = $this.getOption('routes');
                     $url = $routes[$action];
 
                     if($element.attr('rel') != undefined)
@@ -274,6 +274,7 @@ var Gc = (function($)
                         $id = $element.attr('rel');
                         $url = $url.replace('itemId', $id);
                     }
+
 
                     switch($action){
                         case 'new':

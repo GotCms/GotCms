@@ -71,6 +71,17 @@
         © 2011 <a href="">GotCms</a>
     </footer>
 
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+
+            <?php if(!empty($this->routes)): ?>
+                Gc.setOption('routes', <?php echo $this->jsQuoteEscape($this->routes); ?>);
+                Gc.initDocumentMenu();
+            <?php endif; ?>
+        });
+    </script>
+
     <?php if($this->layout()->treeview): ?>
         <ul id="contextMenu" class="contextMenu">
             <li class="new"><a href="#new"><?php echo $this->escape($this->translator('New')); ?></a></li>
