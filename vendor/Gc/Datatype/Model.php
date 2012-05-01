@@ -63,15 +63,15 @@ class Model extends AbstractTable implements IterableInterface
             $id = $this->getId();
             if(empty($id))
             {
-                $this->setId($this->insert($array_save));
-                $id = $this->getId();
+                $this->insert($array_save);
+                $this->setId($this->getLastInsertId());
             }
             else
             {
-                $this->update($array_save, sprintf('id = %d', $id));
+                $this->update($array_save, sprintf('id = %d', $this->getId()));
             }
 
-            return $id;
+            return $this->getId();
         }
         catch (Exception $e)
         {

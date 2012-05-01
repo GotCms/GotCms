@@ -7,7 +7,7 @@ use Gc\Db\AbstractTable,
 
 class Model extends AbstractTable
 {
-    protected $_name = 'tabs';
+    protected $_name = 'tab';
 
     /**
     * @return FALSE|Model
@@ -59,12 +59,12 @@ class Model extends AbstractTable
             $id = $this->getId();
             if(empty($id))
             {
-                $id = $this->insert($array_save);
-                $this->setId($id);
+                $this->insert($array_save);
+                $this->setId($this->getLastInsertId());
             }
             else
             {
-                $this->update($array_save, $this->getAdapter()->quoteInto('id = ?', $id));
+                $this->update($array_save, $this->getAdapter()->quoteInto('id = ?', $this->getId()));
             }
 
             return $this->getId();

@@ -3,10 +3,10 @@
 namespace Development\Controller;
 
 use Development\Form\DocumentType as DocumentTypeForm,
+    Gc\DocumentType,
     Gc\Mvc\Controller\Action,
     Gc\Property,
-    Gc\Tab,
-    Gc\DocumentType;
+    Gc\Tab;
 
 class DocumentTypeController extends Action
 {
@@ -27,10 +27,6 @@ class DocumentTypeController extends Action
         $form->setView($this->getLocator()->get('view'));
         $request = $this->getRequest();
         $session = $this->getSession();
-        if(empty($session['document-type']))
-        {
-            $session['document-type'] = array();
-        }
 
         if($request->isPost())
         {
@@ -42,7 +38,7 @@ class DocumentTypeController extends Action
             if($form->isValid($this->getRequest()->post()->toArray()))
             {
                 $document_type = new DocumentType\Model();
-                $property_collection = new Gc\Property\Collection();
+                $property_collection = new Property\Collection();
 
                 $infos_subform = $form->getSubForm('infos');
                 $views_subform = $form->getSubForm('views');
@@ -55,7 +51,7 @@ class DocumentTypeController extends Action
                     , 'default_view_id' => $views_subform->getValue('default_view')
                 ));
 
-                $this->getAdapter()->beginTransaction();
+                $document_type->getAdapter()->getDriver()->getConnection()->beginTransaction();
                 try
                 {
                     $document_type->addViews($views_subform->getValue('available_views'));
@@ -74,11 +70,11 @@ class DocumentTypeController extends Action
                     $idx = 0;
                     foreach($tabs_array as $tab_id => $tab)
                     {
-                        $t = Gc\Tab\Model::fromArray($tab);
-                        $t->setDocumentTypeId($document_type->getId());
-                        $t->setOrder(++$idx);
-                        $t->save();
-                        $tabs[$tab_id] = $t->getId();
+                        $tab_model = Tab\Model::fromArray($tab);
+                        $tab_model->setDocumentTypeId($document_type->getId());
+                        $tab_model->setOrder(++$idx);
+                        $tab_model->save();
+                        $tabs[$tab_id] = $tab_model->getId();
                     }
 
                     $properties = array();
@@ -118,11 +114,11 @@ class DocumentTypeController extends Action
                     $property_collection->setProperties($properties);
                     $property_collection->save();
 
-                    $this->getAdapter()->commit();
+                    $document_type->getAdapter()->getDriver()->getConnection()->commit();
                 }
                 catch(Exception $e)
                 {
-                    $this->getAdapter()->rollBack();
+                    $document_type->getAdapter()->getDriver()->getConnection()->rollBack();
                     throw new \Gc\Exception("Error Processing Request ".print_r($e, TRUE), 1);
                 }
             }
@@ -132,11 +128,7 @@ class DocumentTypeController extends Action
             }
         }
 
-        if(!empty($session['document-type']))
-        {
-            $session->clear('document-type');
-        }
-
+        $session['document-type'] = array();
 
         return array('form' => $form);
     }
@@ -240,6 +232,7 @@ class DocumentTypeController extends Action
             $is_required    = $post->get('is_required');
             $datatype_id    = $post->get('datatype');
 
+            $session = $this->getSession();
             $tabs = $session['document-type']['tabs'];
 
             if(empty($session['document-type']['tabs'][$tab_id]))

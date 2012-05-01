@@ -77,13 +77,26 @@ abstract class AbstractTable extends Object
 
     protected function _executeQuery($query)
     {
-        $statement = $this->getAdapter()->createStatement();
-        $query->prepareStatement($this->getAdapter(), $statement);
+        if(is_string($query))
+        {
+            $statement = $this->getAdapter()->createStatement($query);
+        }
+        else
+        {
+            $statement = $this->getAdapter()->createStatement();
+            $query->prepareStatement($this->getAdapter(), $statement);
+        }
 
         $result = $statement->execute();
         $result_set = new ResultSet();
         $result_set->setDataSource($result);
 
         return $result_set;
+    }
+
+    public function getLastInsertId()
+    {
+        $row = $this->fetchRow(sprintf("SELECT currval('%s_id_seq') AS value", $this->_name));
+        return $row['value'];
     }
 }

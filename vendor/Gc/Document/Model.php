@@ -41,12 +41,24 @@ class Model extends AbstractTable implements IterableInterface
 
         return $this->getData('view');
     }
+    /**
+    * @return boolean
+    */
+    public function setShowInNav($is_show = NULL)
+    {
+       return $this->showInNav($is_show);
+    }
 
     /**
     * @return boolean
     */
-    public function showInNav()
+    public function showInNav($is_show = NULL)
     {
+        if(!empty($is_show))
+        {
+            $this->setData('show_in_nav', $is_show);
+        }
+
         return (bool)$this->getData('show_in_nav') != FALSE ? TRUE : FALSE;
     }
 
@@ -94,20 +106,6 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @return Integer
-    */
-    public function getUserId()
-    {
-        $user_id = $this->getData('user_id');
-        if(empty($user_id))
-        {
-            $this->setData('user_id', \Zend\Registry::get('user')->getId());
-        }
-
-        return $this->getData('user_id');
-    }
-
-    /**
     * @param array $urlKey
     * @return Model | FALSE
     */
@@ -134,6 +132,7 @@ class Model extends AbstractTable implements IterableInterface
         $array_save = array(
             'name' => $this->getName()
             , 'url_key' => $this->getUrlKey()
+            , 'updated_at' => date('Y-m-d H:i:s')
             , 'status' => $this->getStatus() === TRUE ? 'TRUE' : 'FALSE'
             , 'show_in_nav' => $this->showInNav() === TRUE ? 'TRUE' : 'FALSE'
             , 'user_id' => (int)$this->getUserId()

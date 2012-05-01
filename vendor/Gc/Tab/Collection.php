@@ -6,7 +6,7 @@ use Gc\Db\AbstractTable;
 
 class Collection extends AbstractTable
 {
-    protected $_name = 'tabs';
+    protected $_name = 'tab';
 
     public function load($document_type_id = NULL)
     {

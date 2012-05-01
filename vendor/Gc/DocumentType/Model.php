@@ -66,12 +66,12 @@ class Model extends AbstractTable implements IterableInterface
             if(empty($id))
             {
                 $array_save['created_at'] = date('Y-m-d H:i:s');
-                $id = $this->insert($array_save);
-                $this->setId($id);
+                $this->insert($array_save);
+                $this->setId($this->getLastInsertId());
             }
             else
             {
-                $this->update($array_save, $this->getAdapter()->quoteInto('id = ? ', $id));
+                $this->update($array_save, $this->getAdapter()->quoteInto('id = ? ', $this->getId()));
             }
 
             $views = $this->getViews();
@@ -85,7 +85,7 @@ class Model extends AbstractTable implements IterableInterface
                 }
             }
 
-            return TRUE;
+            return $this->getId();
         }
         catch (Exception $e)
         {

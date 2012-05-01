@@ -65,7 +65,8 @@ class DocumentController extends Action
                 $document->setName($document_name)
                     ->setDocumentTypeId($document_type_id)
                     ->setParentId($parent_id)
-                    ->setUrlKey(!empty($document_url_key) ? $document_url_key : $this->_checkUrlKey($document_name));
+                    ->setUrlKey(!empty($document_url_key) ? $document_url_key : $this->_checkUrlKey($document_name))
+                    ->setUserId($this->getAuth()->getIdentity()->id);
 
                 $document_id = $document->save();
                 if(empty($document_id))
@@ -135,7 +136,7 @@ class DocumentController extends Action
                 $document->showInNav(empty($document_vars['show_in_nav']) ? FALSE : $document_vars['show_in_nav']);
                 $document->setLayoutId(empty($document_vars['layout']) ? FALSE : $document_vars['layout']);
                 $document->setViewId(empty($document_vars['view']) ? $document->getViewId() : $document_vars['view']);
-                $document->setUrlKey(empty($document_vars['url_key']) ? $document->getUrlKey() : $document_vars['url_key']);
+                $document->setUrlKey(empty($document_vars['url_key']) ? '' : $document_vars['url_key']);
             }
 
             $tabs = $this->_loadTabs($document_type_id);

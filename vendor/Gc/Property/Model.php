@@ -7,7 +7,7 @@ use Gc\Db\AbstractTable;
 class Model extends AbstractTable
 {
     protected         $_value;
-    protected         $_name = 'properties';
+    protected         $_name = 'property';
     /**
     * @param integer $defaultId
     */
@@ -113,14 +113,15 @@ class Model extends AbstractTable
             $id = $this->getId();
             if(empty($id))
             {
-                $this->setId($this->insert($array_save));
+                $this->insert($array_save);
+                $this->setId($this->getLastInsertId());
             }
             else
             {
-                $this->update($array_save, $this->getAdapter()->quoteInto('id =  ?',$id));
+                $this->update($array_save, $this->getAdapter()->quoteInto('id =  ?',$this->getId()));
             }
 
-            return TRUE;
+            return $this->getId();
         }
         catch (Exception $e)
         {
@@ -143,7 +144,7 @@ class Model extends AbstractTable
             try
             {
                 parent::delete($this->getAdapter()->quoteInto('id = ?', $id));
-                $this->getAdapter()->delete('properties_values', $this->getAdapter()->quoteInto('property_id = ?', $id));
+                $this->getAdapter()->delete('property_value', $this->getAdapter()->quoteInto('property_id = ?', $id));
             }
             catch(Exception $e)
             {

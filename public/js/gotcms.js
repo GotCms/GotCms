@@ -222,13 +222,11 @@ var Gc = (function($)
 
                                 jQuery.each($data, function($key, $value)
                                 {
-                                    $c = $c.replace(/'#{'+$key+}'/ig, $value);
+                                    $regexp = new RegExp('#{'+$key+'}', 'ig');
+                                    $c = $c.replace($regexp, $value);
                                 });
-    console.log($data);
+
                                 $('#tabs-properties-'+$tab.val()).find('ul').append('<li>'+$c+'</li>');
-    console.log('#properties-tab-'+$data.tab+'-'+$data.id);
-    console.log('#properties-datatype-'+$data.tab+'-'+$data.id);
-    console.log('#properties-required-'+$data.tab+'-'+$data.id);
                                 $('#properties-tab-'+$data.tab+'-'+$data.id).html($('#properties-tab').html()).val($data.tab);
                                 $('#properties-datatype-'+$data.tab+'-'+$data.id).html($('#properties-datatype').html()).val($data.datatype);
                                 $('#properties-required-'+$data.tab+'-'+$data.id).attr('checked', $isRequired.val());

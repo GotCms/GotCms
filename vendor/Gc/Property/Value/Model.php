@@ -6,7 +6,7 @@ use Gc\Db\AbstractTable;
 
 class Model extends AbstractTable
 {
-    protected $_name = 'properties_values';
+    protected $_name = 'property_value';
 
     public function load($value_id = NULL, $document_id = NULL, $property_id = NULL)
     {
@@ -15,7 +15,8 @@ class Model extends AbstractTable
         $this->setPropertyId($property_id);
         if(!empty($document_id) and !empty($property_id))
         {
-            $prevalue_value = $this->fetchRow($this->select(array('property_id' => $property_id, 'document_id' => $document_id)));
+            $prevalue_value = $this->select(array('property_id' => $property_id, 'document_id' => $document_id))->current();
+
             if(!empty($prevalue_value->id))
             {
                 $this->setId($prevalue_value->id);
@@ -64,19 +65,20 @@ class Model extends AbstractTable
             , 'property_id' => $this->getPropertyId()
         );
 
-        $id = $this->getId();
         try
         {
+            $id = $this->getId();
             if(empty($id))
             {
-                $this->setId($this->insert($array_save));
+                $this->insert($array_save);
+                $this->setId($this->getLastInsertId());
             }
             else
             {
-                $this->update($array_save, $this->getAdapter()->quoteInto('id = ?', $id));
+                $this->update($array_save, sprintf('id = %s', $this->getId()));
             }
 
-            return $id;
+            return $this->getId();
         }
         catch (Exception $e)
         {

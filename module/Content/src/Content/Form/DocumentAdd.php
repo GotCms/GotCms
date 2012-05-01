@@ -28,7 +28,7 @@ class DocumentAdd extends AbstractForm
             ->setLabel('Url key')
             ->setAttrib('class', 'input-text')
             ->addValidator(new Validator\NotEmpty())
-            ->addValidator(new Validator\Db\NoRecordExists(array('table' => 'documents', 'field' => 'url_key')));
+            ->addValidator(new Validator\Db\NoRecordExists(array('table' => 'document', 'field' => 'url_key')));
 
         $document_type_collection = new DocumentType\Collection();
         $document_type = new Element\Select('document_type');

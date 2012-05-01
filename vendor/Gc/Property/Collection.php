@@ -7,7 +7,7 @@ use Gc\Db\AbstractTable,
 
 class Collection extends AbstractTable
 {
-    protected $_name = 'properties';
+    protected $_name = 'property';
     private $_document_id;
 
     public function load($document_type_id = NULL, $tab_id = NULL, $document_id = null)
@@ -23,26 +23,26 @@ class Collection extends AbstractTable
     {
         if($this->getData('properties') == NULL or $force_reload)
         {
-            $select = $this->getAdapter()->select()
-            ->from('tabs')
+            $select = new Select();
+            $select->from('tab')
             ->columns(array())
-            ->join('properties', 'tabs.id = properties.tab_id', '*', Select::JOIN_INNER);
+            ->join('property', 'tab.id = property.tab_id', '*', Select::JOIN_INNER);
 
             if($this->getDocumentId() !== NULL)
             {
-                $select->join('documents', 'documents.document_type_id = tabs.document_type_id', array(), Select::JOIN_INNER);
-                $select->join('properties_values', 'documents.id = properties_values.document_id AND properties.id = properties_values.property_id', array('value'), Select::JOIN_LEFT);
-                $select->where(array('documents.id' => $this->getDocumentId()));
+                $select->join('document', 'document.document_type_id = tab.document_type_id', array(), Select::JOIN_INNER);
+                $select->join('property_value', 'document.id = property_value.document_id AND property.id = property_value.property_id', array('value'), Select::JOIN_LEFT);
+                $select->where(array('document.id' => $this->getDocumentId()));
             }
 
             if($this->getTabId() != NULL)
             {
-                $select->where(array('tabs.id' => $this->getTabId()));
+                $select->where(array('tab.id' => $this->getTabId()));
             }
 
             if($this->getDocumentTypeId() != NULL)
             {
-                $select->where(array('tabs.document_type_id' => $this->getDocumentTypeId()));
+                $select->where(array('tab.document_type_id' => $this->getDocumentTypeId()));
             }
 
             //$select->order('properties.order ASC'); @TODO order statments
@@ -52,7 +52,13 @@ class Collection extends AbstractTable
             $properties = array();
             foreach($rows as $row)
             {
-                $properties[] = Model::fromArray((array)$row);
+                $property_model = Model::fromArray((array)$row);
+                if($this->getDocumentId() !== NULL)
+                {
+                    $property_model->setDocumentId($this->getDocumentId());
+                }
+
+                $properties[] = $property_model;
             }
 
             $this->setData('properties', $properties);

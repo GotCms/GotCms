@@ -149,7 +149,8 @@ class IndexController extends Action
     */
     private function loadProperties($document_type_id, $tab_id, $document_id)
     {
-        $properties = new Property\Collection($document_type_id, $tab_id, $document_id);
+        $properties = new Property\Collection();
+        $properties->load($document_type_id, $tab_id, $document_id);
 
         return $properties->getProperties();
     }

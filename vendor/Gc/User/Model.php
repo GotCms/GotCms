@@ -92,7 +92,8 @@ class Model extends AbstractTable implements IterableInterface
 
         try
         {
-            if($this->getId() === NULL)
+            $id = $this->getId();
+            if(!empty($id))
             {
                 $array_save['created_at'] = date('Y-m-d H:i:s');
                 $this->insert($array_save);
