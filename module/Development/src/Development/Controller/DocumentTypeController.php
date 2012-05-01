@@ -2,8 +2,8 @@
 
 namespace Development\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Development\Form\DocumentType as DocumentTypeForm,
+use Development\Form\DocumentType as DocumentTypeForm,
+    Gc\Mvc\Controller\Action,
     Gc\Property,
     Gc\Tab,
     Gc\DocumentType;
@@ -14,11 +14,6 @@ class DocumentTypeController extends Action
 
     public function init()
     {
-        /*$contextSwitch = $this->_helper->getHelper('contextSwitch');
-        $contextSwitch->createActionContext('add-tab', 'json')
-            ->createActionContext('add-property', 'json')
-            ->setAutoJsonSerialization(true)
-            ->initContext();*/
     }
 
     public function indexAction()
@@ -31,7 +26,11 @@ class DocumentTypeController extends Action
         $form = new DocumentTypeForm();
         $form->setView($this->getLocator()->get('view'));
         $request = $this->getRequest();
-        $session = $this->getSession()->toArray();
+        $session = $this->getSession();
+        if(empty($session['document-type']))
+        {
+            $session['document-type'] = array();
+        }
 
         if($request->isPost())
         {
@@ -133,10 +132,10 @@ class DocumentTypeController extends Action
             }
         }
 
-        /*if(!empty($session['document-type']))
+        if(!empty($session['document-type']))
         {
             $session->clear('document-type');
-        }*/
+        }
 
 
         return array('form' => $form);
@@ -168,7 +167,7 @@ class DocumentTypeController extends Action
     {
         if($this->getRequest()->isPost())
         {
-            $session = new Zend_Session_Namespace('documentType');
+            $session = $this->getSession();
             $name = $this->getRequest()->post()->get('name');
             $description = $this->getRequest()->post()->get('description');
 
@@ -187,9 +186,7 @@ class DocumentTypeController extends Action
             {
                 if($name == $tab['name'])
                 {
-
-                    $this->_helper->json(array('success' => FALSE, 'message' => 'Already exists'));
-                    return;
+                    return $this->_returnJson(array('success' => FALSE, 'message' => 'Already exists'));
                 }
             }
 
@@ -197,15 +194,13 @@ class DocumentTypeController extends Action
             $tabs[$current_id] = array('name' => $name, 'description' => $description);
             $session['document-type']['tabs'] = $tabs;
 
-            return $this->_helper->json(array(
-                'success' => TRUE
+            return $this->_returnJson(array('success' => TRUE
                 , 'id' => $current_id
                 , 'name' => $name
-                , 'description' => $description
-            ));
+                , 'description' => $description));
         }
 
-        return $this->_helper->json(array('success' => FALSE, 'message' => 'Error'));
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
     public function deleteTabAction()
@@ -225,33 +220,31 @@ class DocumentTypeController extends Action
             if(array_key_exists($id, $tabs))
             {
                 unset($session['document-type']['tabs'][$id]);
-                return $this->_helper->json(array('success' => TRUE, 'message' => 'Tab successfullty deleted'));
 
+                return $this->_returnJson(array('success' => TRUE, 'message' => 'Tab successfullty deleted'));
             }
         }
 
-        return $this->_helper->json(array('success' => FALSE, 'message' => 'Error'));
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
     public function addPropertyAction()
     {
         if($this->getRequest()->isPost())
         {
-            $session = $this->getSession();
-
-            $name = $this->getRequest()->post()->get('name');
-            $identifier = $this->getRequest()->post()->get('identifier');
-            $tab_id = $this->getRequest()->post()->get('tab');
-            $description = $this->getRequest()->post()->get('description');
-            $is_required = $this->getRequest()->post()->get('is_required');
-            $datatype_id = $this->getRequest()->post()->get('datatype');
+            $post = $this->getRequest()->post();
+            $name           = $post->get('name');
+            $identifier     = $post->get('identifier');
+            $tab_id         = $post->get('tab');
+            $description    = $post->get('description');
+            $is_required    = $post->get('is_required');
+            $datatype_id    = $post->get('datatype');
 
             $tabs = $session['document-type']['tabs'];
 
             if(empty($session['document-type']['tabs'][$tab_id]))
             {
-                $this->_helper->json(array('success' => FALSE, 'message' => 'Tab does not exists'));
-                return;
+                return $this->_returnJson(array('success' => FALSE, 'message' => 'Tab does not exists'));
             }
 
             $tab = $session['document-type']['tabs'][$tab_id];
@@ -282,7 +275,7 @@ class DocumentTypeController extends Action
                 {
                     if(!empty($property['identifier']) and $identifier == $property['identifier'])
                     {
-                        return $this->_helper->json(array('success' => FALSE, 'message' => 'Identifier already exists'));
+                        return $this->_returnJson(array('success' => FALSE, 'message' => 'Identifier already exists'));
                     }
                 }
             }
@@ -301,10 +294,10 @@ class DocumentTypeController extends Action
             $properties[$current_id]['success'] = TRUE;
             $properties[$current_id]['id'] = $current_id;
 
-            return $this->_helper->json($properties[$current_id]);
+            return $this->_returnJson($properties[$current_id]);
         }
 
-        return $this->_helper->json(array('success' => FALSE, 'message' => 'Error'));
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
 
@@ -325,11 +318,11 @@ class DocumentTypeController extends Action
                 if(array_key_exists($id, $tab['properties']))
                 {
                     unset($session['document-type']['tabs'][$tab_id]['properties'][$id]);
-                    return $this->_helper->json(array('success' => TRUE, 'message' => 'Property successfullty deleted'));
+                    return $this->_returnJson(array('success' => TRUE, 'message' => 'Property successfullty deleted'));
                 }
             }
         }
 
-        return $this->_helper->json(array('success' => FALSE, 'message' => 'Error'));
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 }

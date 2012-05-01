@@ -63,6 +63,9 @@ class Module implements AutoloaderProvider
         $app          = $e->getParam('application');
         $basePath     = $app->getRequest()->getBasePath();
         $locator      = $app->getLocator();
+        $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
+        $view         = $locator->get('Zend\View\View');
+        $view->events()->attach($jsonStrategy, 100);
         //@TODO change to module.config.php
         Zend\Db\TableGateway\StaticAdapterTableGateway::setStaticAdapter($locator->get('Zend\Db\Adapter\Adapter'));
         $renderer     = $locator->get('Zend\View\Renderer\PhpRenderer');

@@ -6,7 +6,8 @@ use Gc\User\Model,
     Zend\Mvc\Controller\ActionController,
     Zend\Authentication\AuthenticationService,
     Zend\Mvc\MvcEvent,
-    Zend\Session\Storage\SessionStorage;
+    Zend\Session\Storage\SessionStorage,
+    Zend\View\Model\JsonModel;
 
 class Action extends ActionController
 {
@@ -73,7 +74,8 @@ die('here');
     {
         if($this->_session === NULL)
         {
-            $this->_session = new SessionStorage($this->getAuth()->getStorage());
+            $session = new SessionStorage();
+            $this->_session = $session;
         }
 
         return $this->_session;
@@ -90,5 +92,13 @@ die('here');
         }
 
         return $this->_auth;
+    }
+
+    protected function _returnJson($data)
+    {
+        $json_model = new JsonModel();
+        $json_model->setVariables($data);
+        $json_model->setTerminal(TRUE);
+        return $json_model;
     }
 }
