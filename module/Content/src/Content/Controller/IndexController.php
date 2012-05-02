@@ -18,7 +18,7 @@ class IndexController extends Action
 
         $routes = array(
             'edit' => 'documentEdit'
-            , 'new' => 'documentAdd'
+            , 'new' => 'documentCreate'
             , 'delete' => 'documentDelete'
             , 'copy' => 'documentCopy'
             , 'cut' => 'documentCut'

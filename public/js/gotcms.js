@@ -277,6 +277,10 @@ var Gc = (function($)
 
                     switch($action){
                         case 'new':
+                            if($id != undefined)
+                            {
+                                $url += '/parent/'+$id;
+                            }
                         case 'edit':
                         break;
 

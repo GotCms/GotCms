@@ -35,11 +35,13 @@ class DocumentAdd extends AbstractForm
         $document_type->addMultiOption('', 'Select document type');
         $document_type->addMultiOptions($document_type_collection->getSelect());
 
+        $parent = new Element\Hidden('parent');
+
         $submit = new Element\Submit('submit');
         $submit->setAttrib('class', 'input-submit')
             ->setLabel('Create');
 
-        $this->addElements(array($name, $url_key, $document_type, $submit));
+        $this->addElements(array($name, $url_key, $document_type, $parent, $submit));
     }
 
     public function load(Document\Model $document, $index)

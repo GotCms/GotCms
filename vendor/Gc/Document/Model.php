@@ -181,7 +181,7 @@ class Model extends AbstractTable implements IterableInterface
             {
                 if(parent::delete('id = '.$this->getId()))
                 {
-                    $properties_table = new \Zend\Db\Table\Table('properties_value');
+                    $properties_table = new \Zend\Db\TableGateway\TableGateway('property_value', $this->getAdapter());
                     $properties_table->delete(array('document_id' => $this->getId()));
                     unset($this);
 

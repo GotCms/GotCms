@@ -23,7 +23,7 @@ class DocumentController extends Action
 
         $routes = array(
             'edit' => 'documentEdit'
-            , 'new' => 'documentAdd'
+            , 'new' => 'documentCreate'
             , 'delete' => 'documentDelete'
             , 'copy' => 'documentCopy'
             , 'cut' => 'documentCut'
@@ -47,7 +47,12 @@ class DocumentController extends Action
     public function createAction()
     {
         $document_form = new Form\DocumentAdd();
-        $document_form->setAction($this->url()->fromRoute('documentAdd'));
+        $document_form->setAction($this->url()->fromRoute('documentCreate'));
+        $parent_id = $this->getRouteMatch()->getParam('id');
+        if(!empty($parent_id))
+        {
+            $document_form->getElement('parent')->setValue($parent_id);
+        }
 
         if($this->getRequest()->isPost())
         {
@@ -60,7 +65,7 @@ class DocumentController extends Action
                 $document_name = $document_form->getValue('name');
                 $document_url_key = $document_form->getValue('url_key');
                 $document_type_id = $document_form->getValue('document_type');
-                $parent_id = $this->getRequest()->post()->get('parent_id');
+                $parent_id = $document_form->getValue('parent');
                 $document = new DocumentModel();
                 $document->setName($document_name)
                     ->setDocumentTypeId($document_type_id)
