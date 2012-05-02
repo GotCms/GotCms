@@ -1,14 +1,14 @@
 <?php
 namespace Content\Form;
 
-use Gc\Document,
+use Gc\Document\Model as DocumentModel,
     Gc\DocumentType,
     Gc\View,
     Gc\Form\AbstractForm,
     Zend\Validator,
     Zend\Form\Element;
 
-class DocumentAdd extends AbstractForm
+class Document extends AbstractForm
 {
     protected $_document;
 
@@ -44,7 +44,7 @@ class DocumentAdd extends AbstractForm
         $this->addElements(array($name, $url_key, $document_type, $parent, $submit));
     }
 
-    public function load(Document\Model $document, $index)
+    public function load(DocumentModel $document, $index)
     {
         $this->_document = $document;
         $this->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$index))));
@@ -53,6 +53,12 @@ class DocumentAdd extends AbstractForm
 
         $this->getElement('name')->setValue($document->getName());
         $this->getElement('url_key')->setValue($document->getUrlKey());
+
+        $status = new Element\Checkbox('status');
+        $status->setLabel('Publish');
+        $status->setValue($document->getStatus());
+
+        $this->addElement($status);
 
         $show_in_nav = new Element\Checkbox('show_in_nav');
         $show_in_nav->setLabel('Show in nav');
@@ -75,7 +81,6 @@ class DocumentAdd extends AbstractForm
         $layout->setLabel('Layout');
 
         $this->addElement($layout);
-
         $this->removeElement('document_type');
         $this->removeElement('submit');
     }

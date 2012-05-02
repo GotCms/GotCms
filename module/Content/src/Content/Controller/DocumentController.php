@@ -46,7 +46,7 @@ class DocumentController extends Action
 
     public function createAction()
     {
-        $document_form = new Form\DocumentAdd();
+        $document_form = new Form\Document();
         $document_form->setAction($this->url()->fromRoute('documentCreate'));
         $parent_id = $this->getRouteMatch()->getParam('id');
         if(!empty($parent_id))
@@ -137,7 +137,7 @@ class DocumentController extends Action
                 $document_vars = $this->getRequest()->post()->get('document');
 
                 $document->setName(empty($document_vars['name']) ? $document->getName() : $document_vars['name']);
-                $document->setStatus(empty($document_vars['status']) ? FALSE : $document_vars['status']);
+                $document->setStatus(empty($document_vars['status']) ? DocumentModel::STATUS_DISABLE : $document_vars['status']);
                 $document->showInNav(empty($document_vars['show_in_nav']) ? FALSE : $document_vars['show_in_nav']);
                 $document->setLayoutId(empty($document_vars['layout']) ? FALSE : $document_vars['layout']);
                 $document->setViewId(empty($document_vars['view']) ? $document->getViewId() : $document_vars['view']);
@@ -179,7 +179,7 @@ class DocumentController extends Action
 
             $tabs_array[] = 'Document information';
 
-            $form_document_add = new Form\DocumentAdd();
+            $form_document_add = new Form\Document();
             $form_document_add->load($document, $i);
 
             $document_form->addSubForm($form_document_add, 'tabs-'.$i, $i);
