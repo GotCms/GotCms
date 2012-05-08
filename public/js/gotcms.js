@@ -60,6 +60,7 @@ var Gc = (function($)
         {
             var $this = this;
             $('.tabs').tabs();
+            $('#tabs').sortable({placeholder: "ui-state-highlight"});
 
             //tabs
             $('#tabs-add').click(function()
@@ -72,12 +73,6 @@ var Gc = (function($)
                 }
                 else
                 {
-                    if($('#tabs').html() == null)
-                    {
-                        $(this).after('<ul class="sortable" id="tabs"></ul>');
-                        $('#tabs').sortable({placeholder: "ui-state-highlight"});
-                    }
-
                     $.post($addTabUrl, {name:$name.val(),description:$description.val()}
                     , function($data, textStatus, jqXHR){
                             if($data.message != undefined)
@@ -88,14 +83,13 @@ var Gc = (function($)
                             {
                                 $tabs = $('#tabs');
                                 $e = '<li>'
-                                    +'<input type="hidden" name="tabs[name]['+$data.id+']" value="'+$name.val()+'" />'
-                                    +'<input type="hidden" name="tabs[description]['+$data.id+']" value="'+$description.val()+'" />'
-                                    +'<span>'+$name.val()+'</span><span>'+$description.val()+'</span>'
+                                    +'<input type="hidden" name="tab['+$data.id+'][name]" value="'+$name.val()+'" />'
+                                    +'<input type="hidden" name="tab['+$data.id+'][description]" value="'+$description.val()+'" />'
+                                    +'<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>'
                                     +'<button type="button" value="'+$data.id+'" class="delete-tab">delete</button>'
                                     +'</li>';
                                 $tabs.append($e);
                                 $('.select-tab').append(new Option($name.val(),$data.id));
-
 
                                 if($('#properties-tabs-content').html() != null)
                                 {
@@ -105,13 +99,13 @@ var Gc = (function($)
                                 {
                                     //add tab if does not exist
                                     $('#property_add').after('<div id="properties-tabs-content" class="tabs">'
-                                            +'<ul>'
-                                                +'<li><a href="#tabs-properties-1">'+$name.val()+'</a></li>'
-                                            +'</ul>'
-                                            +'<div id="tabs-properties-1">'
-                                                +'<ul></ul>'
-                                            +'</div>'
-                                            +'</div>');
+                                        +'<ul>'
+                                            +'<li><a href="#tabs-properties-1">'+$name.val()+'</a></li>'
+                                        +'</ul>'
+                                        +'<div id="tabs-properties-1">'
+                                            +'<ul></ul>'
+                                        +'</div>'
+                                    +'</div>');
                                     $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
                                 }
                             }

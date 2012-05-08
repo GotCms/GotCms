@@ -130,9 +130,25 @@
         <dd id="add-element">
             <button name="tabs[add]" id="tabs-add" type="button" class="button-add button-add-tab"><?php echo $this->escape($this->translator('Add Tab')); ?></button>
         </dd>
-        <?php $tabs_form = $this->element->tabs; ?>
+        <?php $tabs_form = $this->element->tabs->getSubForms(); ?>
 
-        <?php var_dump($tabs_form->getValue('name')); ?>
+        <dt><?php echo $this->escape($this->translator('Tabs')); ?></dt>
+        <dd>
+            <ul id="tabs" class="sortable ui-sortable">
+            <?php foreach($tabs_form as $form): ?>
+                <li>
+                    <?php $name = $form->getElement('name')->getValue(); ?>
+                    <?php $description = $form->getElement('description')->getValue(); ?>
+                    <?php $tab_id = $form->getElement('description')->getValue(); ?>
+                    <input type="hidden" value="<?php echo $name; ?>" name="tab[<?php echo $tab_id; ?>][name]">
+                    <input type="hidden" value="<?php echo $description; ?>" name="tab[<?php echo $tab_id; ?>][description]">
+                    <span><?php echo $name; ?></span>
+                    <span><?php echo $description; ?></span>
+                    <button class="delete-tab" type="button">delete</button>
+                </li>
+            <?php endforeach; ?>
+            </ul>
+        </dd>
     </dl>
 
     <div>

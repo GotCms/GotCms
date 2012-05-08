@@ -144,9 +144,14 @@ class DocumentTypeController extends Action
 
         $form->setValues($document_type);
 
+        if(!empty($session['document-type']))
+        {
+            $form->setValues($session['document-type']);
+        }
+
+
         if($request->isPost())
         {
-
             if($form->isValid($this->getRequest()->post()->toArray()))
             {
                 $property_collection = new Property\Collection();
@@ -240,6 +245,24 @@ class DocumentTypeController extends Action
         }
 
         $session['document-type'] = array();
+        $session['document-type']['tabs'] = array();
+        foreach($document_type->getTabs() as $tab)
+        {
+            $session['document-type']['tabs'][$tab->getId()] = array('name' => $tab->getName(), 'description' => $tab->getDescription());
+            $session['document-type']['tabs'][$tab->getId()]['properties'] = array();
+
+            foreach($tab->getProperties() as $property)
+            {
+                $session['document-type']['tabs'][$tab->getId()]['properties'][$property->getId()] = array(
+                    'name' => $property->getName()
+                    , 'identifier' => $property->getIdentifier()
+                    , 'tab' => $property->getTabId()
+                    , 'description' => $property->getDescription()
+                    , 'is_required' => $property->isRequired()
+                    , 'datatype' => $property->getDatatypeId()
+                );
+            }
+        }
 
         return array('form' => $form);
     }

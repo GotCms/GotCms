@@ -120,9 +120,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set resource
-     *
+     * 
      * @param  \PDO $resource
-     * @return Connection
+     * @return Connection 
      */
     public function setResource(\PDO $resource)
     {
@@ -203,8 +203,9 @@ class Connection implements ConnectionInterface
                     $dsn .= $database;
                     break;
                 default:
-                    $dsn .= (isset($hostname)) ? 'host=' . $hostname : '';
-                    $dsn .= (isset($database)) ? ';dbname=' . $database : '';
+                    $dsn .= (isset($hostname)) ? 'hostname=' . $hostname : '';
+                    $dsn .= (isset($hostname) && isset($database)) ? ';' : '';
+                    $dsn .= (isset($database)) ? 'dbname=' . $database : '';
             }
         } elseif (!isset($dsn)) {
             throw new \Exception('A dsn was not provided or could not be constructed from your parameters');
@@ -320,14 +321,20 @@ class Connection implements ConnectionInterface
         $statement = $this->driver->createStatement($sql);
         return $statement;
     }
+
     /**
      * Get last generated id
-     *
-     * @return integer
+     * 
+     * @return integer 
      */
-    public function getLastGeneratedId()
+    public function getLastGeneratedValue()
     {
-        return $this->resource->lastInsertId();
+        try {
+            return $this->resource->lastInsertId();
+        } catch (\Exception $e) {
+            // do nothing
+        }
+        return false;
     }
 
 }
