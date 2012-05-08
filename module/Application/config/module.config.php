@@ -5,7 +5,7 @@ return array(
     'di' => array(
         'definition' => array(
             'class' => array(
-                'Zend\Mvc\Router\RouteStack' => array(
+                'Zend\Mvc\Router\RouteStackInterface' => array(
                     'instantiator' => array(
                         'Zend\Mvc\Router\Http\TreeRouteStack',
                         'factory'
@@ -93,7 +93,7 @@ return array(
             // Injecting the router into the url helper
             'Zend\View\Helper\Url' => array(
                 'parameters' => array(
-                    'router' => 'Zend\Mvc\Router\RouteStack',
+                    'router' => 'Zend\Mvc\Router\RouteStackInterface',
                 ),
             ),
             // Configuration for the doctype helper

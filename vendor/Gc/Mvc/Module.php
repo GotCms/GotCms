@@ -16,8 +16,9 @@ class Module implements AutoloaderProvider
 
     public function init(Manager $moduleManager)
     {
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'initializeView'), 100);
+        $events = $moduleManager->events();
+        $sharedEvents = $events->getSharedManager();
+        $sharedEvents->attach('bootstrap', 'bootstrap', array($this, 'initializeView'), 100);
     }
 
     public function getAutoloaderConfig()
@@ -42,14 +43,14 @@ class Module implements AutoloaderProvider
             $ini = new Ini();
             $routes = $ini->fromFile($this->_getDir() . '/config/routes.ini');
             $routes = $routes['production'];
-            if(empty($config['di']['instance']['Zend\Mvc\Router\RouteStack']))
+            if(empty($config['di']['instance']['Zend\Mvc\Router\RouteStackInterface']))
             {
-                $config['di']['instance']['Zend\Mvc\Router\RouteStack'] = array('parameters' => array('routes' => array()));
+                $config['di']['instance']['Zend\Mvc\Router\RouteStackInterface'] = array('parameters' => array('routes' => array()));
             }
 
             if(!empty($routes['routes']))
             {
-                $config['di']['instance']['Zend\Mvc\Router\RouteStack']['parameters']['routes'] += $routes['routes'];
+                $config['di']['instance']['Zend\Mvc\Router\RouteStackInterface']['parameters']['routes'] += $routes['routes'];
             }
 
             $this->_config = $config;
@@ -69,7 +70,6 @@ class Module implements AutoloaderProvider
         //@TODO change to module.config.php
         Zend\Db\TableGateway\StaticAdapterTableGateway::setStaticAdapter($locator->get('Zend\Db\Adapter\Adapter'));
         $renderer     = $locator->get('Zend\View\Renderer\PhpRenderer');
-        $renderer->plugin('url')->setRouter($app->getRouter());
         $renderer->doctype()->setDoctype('HTML5');
         $renderer->plugin('basePath')->setBasePath($basePath);
     }

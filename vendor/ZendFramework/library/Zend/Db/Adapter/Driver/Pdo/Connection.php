@@ -120,9 +120,9 @@ class Connection implements ConnectionInterface
 
     /**
      * Set resource
-     * 
+     *
      * @param  \PDO $resource
-     * @return Connection 
+     * @return Connection
      */
     public function setResource(\PDO $resource)
     {
@@ -203,7 +203,7 @@ class Connection implements ConnectionInterface
                     $dsn .= $database;
                     break;
                 default:
-                    $dsn .= (isset($hostname)) ? 'hostname=' . $hostname : '';
+                    $dsn .= (isset($hostname)) ? 'host=' . $hostname : '';
                     $dsn .= (isset($hostname) && isset($database)) ? ';' : '';
                     $dsn .= (isset($database)) ? 'dbname=' . $database : '';
             }
@@ -324,8 +324,8 @@ class Connection implements ConnectionInterface
 
     /**
      * Get last generated id
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getLastGeneratedValue()
     {
