@@ -4,9 +4,10 @@
     <li><a href="#tabs-3"><?php echo $this->escape($this->translator('Properties')); ?></a></li>
     <li><a href="#tabs-4"><?php echo $this->escape($this->translator('Tabs')); ?></a></li>
 </ul>
-
+<?php $infos_form = $this->element->infos; ?>
+<?php $views_form = $this->element->views; ?>
+<?php $tabs_form = $this->element->tabs->getSubForms(); ?>
 <form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->url('documentTypeAdd'); ?>" method="post">
-    <?php $infos_form = $this->element->infos; ?>
     <dl id="tabs-1">
         <dt id="name-label">
             <label for="infos-name" class="optional"><?php echo $this->escape($this->translator('Name')); ?></label>
@@ -30,7 +31,6 @@
         </dd>
     </dl>
 
-    <?php $views_form = $this->element->views; ?>
     <dl id="tabs-2">
         <dt id="default_view_id-label">
             <label for="views-default_view_id" class="required"><?php echo $this->escape($this->translator('Default view')); ?></label>
@@ -111,6 +111,25 @@
         <dd id="add-element">
             <button name="properties[add]" id="property_add" type="button" class="button-add button-add-property"><?php echo $this->escape($this->translator('Add property')); ?></button>
         </dd>
+        <dt><?php echo $this->escape($this->translator('Properties')); ?></dt>
+        <dd>
+            <div id="properties-tabs-content" class="tabs">
+                <ul>
+                    <?php foreach($tabs_form as $form): ?>
+                        <li>
+                            <?php $name = $form->getElement('name')->getValue(); ?>
+                            <?php echo $name; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+
+                <?php foreach($tabs_form as $form): ?>
+                    <div id="tabs-properties-1">
+                        <ul></ul>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </dd>
     </dl>
 
     <dl id="tabs-4">
@@ -130,7 +149,6 @@
         <dd id="add-element">
             <button name="tabs[add]" id="tabs-add" type="button" class="button-add button-add-tab"><?php echo $this->escape($this->translator('Add Tab')); ?></button>
         </dd>
-        <?php $tabs_form = $this->element->tabs->getSubForms(); ?>
 
         <dt><?php echo $this->escape($this->translator('Tabs')); ?></dt>
         <dd>

@@ -248,8 +248,11 @@ class DocumentTypeController extends Action
         $session['document-type']['tabs'] = array();
         foreach($document_type->getTabs() as $tab)
         {
-            $session['document-type']['tabs'][$tab->getId()] = array('name' => $tab->getName(), 'description' => $tab->getDescription());
-            $session['document-type']['tabs'][$tab->getId()]['properties'] = array();
+            $session['document-type']['tabs'][$tab->getId()] = array(
+                'name' => $tab->getName()
+                , 'description' => $tab->getDescription()
+                , 'properties' => array()
+            );
 
             foreach($tab->getProperties() as $property)
             {
@@ -317,7 +320,7 @@ class DocumentTypeController extends Action
             }
 
             $current_id = $last_id + 1;
-            $tabs[$current_id] = array('name' => $name, 'description' => $description);
+            $tabs[$current_id] = array('name' => $name, 'description' => $description, 'properties' => array());
             $session['document-type']['tabs'] = $tabs;
 
             return $this->_returnJson(array('success' => TRUE
@@ -375,11 +378,6 @@ class DocumentTypeController extends Action
             }
 
             $tab = $session['document-type']['tabs'][$tab_id];
-            if(empty($tab['properties']))
-            {
-                $tab['properties'] = array();
-            }
-
             $properties = $tab['properties'];
             $last_element = end($properties);
             if(empty($last_element))

@@ -61,6 +61,7 @@ var Gc = (function($)
             var $this = this;
             $('.tabs').tabs();
             $('#tabs').sortable({placeholder: "ui-state-highlight"});
+        $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
 
             //tabs
             $('#tabs-add').click(function()
