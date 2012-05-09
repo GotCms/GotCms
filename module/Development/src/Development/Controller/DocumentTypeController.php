@@ -348,7 +348,9 @@ class DocumentTypeController extends Action
             $tabs = empty($session['document-type']) ? array() : $session['document-type']['tabs'];
             if(array_key_exists($id, $tabs))
             {
-                unset($session['document-type']['tabs'][$id]);
+                $document_type = $session['document-type'];
+                unset($document_type['tabs'][$id]);
+                $session->offsetSet('document-type', $document_type);
 
                 return $this->_returnJson(array('success' => TRUE, 'message' => 'Tab successfullty deleted'));
             }
@@ -361,7 +363,7 @@ class DocumentTypeController extends Action
     {
         if($this->getRequest()->isPost())
         {
-            $post = $this->getRequest()->post();
+            $post           = $this->getRequest()->post();
             $name           = $post->get('name');
             $identifier     = $post->get('identifier');
             $tab_id         = $post->get('tab');
@@ -442,7 +444,11 @@ class DocumentTypeController extends Action
 
                 if(array_key_exists($id, $tab['properties']))
                 {
-                    unset($session['document-type']['tabs'][$tab_id]['properties'][$id]);
+
+                    $document_type = $session['document-type'];
+                    unset($document_type['tabs'][$tab_id]['properties'][$id]);
+                    $session->offsetSet('document-type', $document_type);
+
                     return $this->_returnJson(array('success' => TRUE, 'message' => 'Property successfullty deleted'));
                 }
             }
