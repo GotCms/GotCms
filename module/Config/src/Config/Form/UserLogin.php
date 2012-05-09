@@ -20,6 +20,8 @@ class UserLogin extends AbstractForm
         $password->setRequired(TRUE)
             ->addValidator('NotEmpty');
 
-        $this->addElements(array($email, $password));
+        $redirect  = new Element\Hidden('redirect');
+
+        $this->addElements(array($email, $password, $redirect));
     }
 }

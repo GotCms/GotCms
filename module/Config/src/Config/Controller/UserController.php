@@ -2,11 +2,12 @@
 
 namespace Config\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Gc\User,
-    Config\Form\UserLogin,
+use Config\Form\UserLogin,
     Config\Form\User as UserForm,
     Config\Form\UserForgotPassword as UserForgotForm,
+    Gc\Mvc\Controller\Action,
+    Gc\User,
+    Zend\Http\Request,
     Zend\View\Model\ViewModel;
 
 class UserController extends Action
@@ -23,17 +24,27 @@ class UserController extends Action
         $this->layout()->setTemplate('layouts/one-page.phtml');
         $login_form = new UserLogin();
         $login_form->setView($this->getLocator()->get('view'));
+
         $post = $this->getRequest()->post();
         if($this->getRequest()->isPost() and $login_form->isValid($post->toArray()))
         {
             $user_model = new User\Model();
             if($user_id = $user_model->authenticate($post->get('login'), $post->get('password')))
             {
+                $redirect = $login_form->getValue('redirect');
+                if(!empty($redirect))
+                {
+                    return $this->redirect()->toUrl(base64_decode($redirect));
+                }
+
                 return $this->redirect()->toRoute('admin');
             }
 
             $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
         }
+
+        $redirect = $this->getRouteMatch()->getParam('redirect');
+        $login_form->getElement('redirect')->setValue($redirect);
 
         return array('form' => $login_form);
     }

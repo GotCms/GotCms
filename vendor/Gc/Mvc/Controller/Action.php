@@ -3,8 +3,8 @@ namespace Gc\Mvc\Controller;
 
 use Gc\User\Model,
     Gc\User\Acl,
-    Zend\Mvc\Controller\ActionController,
     Zend\Authentication\AuthenticationService,
+    Zend\Mvc\Controller\ActionController,
     Zend\Mvc\MvcEvent,
     Zend\Session\Storage\SessionStorage,
     Zend\View\Model\JsonModel;
@@ -37,7 +37,7 @@ class Action extends ActionController
         {
             if(!in_array($route_name, array('userLogin', 'userForgotPassword')) and $route_name != 'renderWebsite')
             {
-                return $this->redirect()->toRoute('userLogin');
+                return $this->redirect()->toRoute('userLogin', array('redirect' => base64_encode($this->getRequest()->getRequestUri())));
             }
         }
         else
