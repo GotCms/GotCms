@@ -26,6 +26,11 @@ abstract class AbstractForm extends Form
             {
                 if($element = $this->getElement($element_name))
                 {
+                    if($element->getType() == 'Zend\Form\Element\Password')
+                    {
+                        continue;
+                    }
+
                     $element->setValue($element_value);
                     if($validator = $element->getValidator('Zend\Validator\Db\NoRecordExists'))
                     {

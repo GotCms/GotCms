@@ -26,11 +26,13 @@ class User extends AbstractForm
 
         $password  = new Element\Password('password');
         $password->setLabel('Password')
-            ->setAttrib('class', 'input-text');
+            ->setAttrib('class', 'input-text')
+			->setAttrib('autocomplete', 'off');
 
         $password_confirm  = new Element\Password('password_confirm');
         $password_confirm->setLabel('Password Confirm')
-            ->setAttrib('class', 'input-text');
+            ->setAttrib('class', 'input-text')
+			->setAttrib('autocomplete', 'off');
 
         $lastname  = new Element\Text('lastname');
         $lastname->setRequired(TRUE)
