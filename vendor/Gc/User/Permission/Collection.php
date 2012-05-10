@@ -29,9 +29,9 @@ class Collection extends AbstractTable
             $select = new Select();
             $select->from('user_acl_permission')
                 ->columns(array(
-                    'id' => 'user_acl_permission.id'
-                    , 'permission' => 'user_acl_permission.permission'
-                ), FALSE)
+                    'id'
+                    , 'permission'
+                ), TRUE)
                 ->join('user_acl_resource', 'user_acl_resource.id = user_acl_permission.user_acl_resource_id', array('resource'));
 
             $rows = $this->fetchAll($select);
