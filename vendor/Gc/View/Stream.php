@@ -146,4 +146,9 @@ class Stream
                 return false;
         }
     }
+
+	public function url_stat($path, $flags)
+	{
+		return FALSE;
+	}
 }
