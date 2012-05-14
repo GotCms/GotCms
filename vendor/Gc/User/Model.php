@@ -11,14 +11,14 @@ class Model extends AbstractTable implements IterableInterface
 {
     protected $_name = 'user';
 
-    public function authenticate($email, $password)
+    public function authenticate($login, $password)
     {
         $authAdapter = new Adapter\DbTable($this->getAdapter());
         $authAdapter->setTableName($this->_name);
         $authAdapter->setIdentityColumn('login');
         $authAdapter->setCredentialColumn('password');
 
-        $authAdapter->setIdentity($email);
+        $authAdapter->setIdentity($login);
         $authAdapter->setCredential($password);
 
         $auth = new AuthenticationService();

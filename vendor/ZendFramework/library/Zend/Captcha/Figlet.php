@@ -28,8 +28,6 @@ use Zend\View\Renderer\RendererInterface as Renderer;
  *
  * Note that this engine seems not to like numbers
  *
- * @uses       Zend\Captcha\Word
- * @uses       Zend\Text\Figlet\Figlet
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -48,8 +46,7 @@ class Figlet extends Word
     /**
      * Constructor
      *
-     * @param  null|string|array|\Zend\Config\Config $options
-     * @return void
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {

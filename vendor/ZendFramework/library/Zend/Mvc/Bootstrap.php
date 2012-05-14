@@ -1,9 +1,10 @@
 <?php
+
 namespace Zend\Mvc;
 
+use Traversable;
 use Zend\Di\Configuration as DiConfiguration,
     Zend\Di\Di,
-    Zend\Config\Config,
     Zend\EventManager\EventManagerInterface as Events,
     Zend\EventManager\EventManager,
     Zend\EventManager\EventManagerAwareInterface,
@@ -13,22 +14,21 @@ use Zend\Di\Configuration as DiConfiguration,
 class Bootstrap implements BootstrapInterface, EventManagerAwareInterface, EventsCapableInterface
 {
     /**
-     * @var \Zend\Config\Config
+     * @var Traversable
      */
     protected $config;
 
     /**
-     * @var EventManagerInterface
+     * @var Events
      */
     protected $events;
 
     /**
      * Constructor
      *
-     * @param Config $config
-     * @return void
+     * @param Traversable $config
      */
-    public function __construct(Config $config)
+    public function __construct(Traversable $config)
     {
         $this->config = $config;
     }
@@ -101,6 +101,7 @@ class Bootstrap implements BootstrapInterface, EventManagerAwareInterface, Event
 
         $di = new Di;
         $di->instanceManager()->addTypePreference('Zend\Di\LocatorInterface', $di);
+        $di->instanceManager()->addTypePreference('Zend\EventManager\SharedEventManagerInterface', $sharedEvents);
         $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventManager');
         $di->instanceManager()->addSharedInstance($sharedEvents, 'Zend\EventManager\SharedEventManagerInterface');
 

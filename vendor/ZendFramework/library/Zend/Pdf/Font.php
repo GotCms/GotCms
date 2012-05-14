@@ -20,6 +20,7 @@
  */
 
 namespace Zend\Pdf;
+
 use Zend\Pdf\Exception;
 
 /**
@@ -32,13 +33,6 @@ use Zend\Pdf\Exception;
  * the true base class ({@link \Zend\Pdf\Resource\Font\AbstractFont}) is not intuitive
  * for the end user.
  *
- * @uses       \Zend\Pdf\Exception
- * @uses       \Zend\Pdf\BinaryParser\DataSource\File
- * @uses       \Zend\Pdf\Resource\Font\CidFont\TrueType
- * @uses       \Zend\Pdf\Resource\Font\OpenType\TrueType
- * @uses       \Zend\Pdf\Resource\Font\Simple\Parsed\TrueType
- * @uses       \Zend\Pdf\Resource\Font\Simple\Standard
- * @uses       \Zend\Pdf\Resource\Font\Type0
  * @package    Zend_PDF
  * @subpackage Zend_PDF_Fonts
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -481,7 +475,7 @@ abstract class Font
          *   file paths in a configuration file for frequently used custom
          *   fonts. This would allow a user to use custom fonts without having
          *   to hard-code file paths all over the place. Table this idea until
-         *   {@link \Zend\Config} is ready.
+         *   {@link \Traversable} is ready.
          */
 
         /* Not an existing font and no mapping in the config file. Check to see

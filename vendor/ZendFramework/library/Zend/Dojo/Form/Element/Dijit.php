@@ -26,7 +26,6 @@ use Zend\View\Renderer\RendererInterface as View;
 /**
  * Base element for dijit elements
  *
- * @uses       \Zend\Form\Element
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element
@@ -51,9 +50,8 @@ abstract class Dijit extends \Zend\Form\Element
      * Constructor
      *
      * @todo Should we set dojo view helper paths here?
-     * @param  mixed $spec
-     * @param  mixed $options
-     * @return void
+     * @param  array|string|\Traversable $spec
+     * @param  array|string|\Traversable $options
      */
     public function __construct($spec, $options = null)
     {

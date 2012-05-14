@@ -246,8 +246,7 @@ class Form implements Iterator, Countable, ValidatorInterface
      *
      * Registers form view helper as decorator
      *
-     * @param mixed $options
-     * @return void
+     * @param  array|Traversable $options
      */
     public function __construct($options = null)
     {
@@ -1836,8 +1835,13 @@ class Form implements Iterator, Countable, ValidatorInterface
         }
 
         if (!class_exists($class)) {
-            Loader::loadClass($class);
+            throw new Exception\UnexpectedValueException(
+                sprintf('%s expects a valid registry class name; received "%s", which did not resolve',
+                        __METHOD__,
+                        $class
+                ));
         }
+
         $this->_displayGroups[$name] = new $class(
             $name,
             $this->getPluginLoader(self::DECORATOR),
