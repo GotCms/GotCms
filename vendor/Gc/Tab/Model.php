@@ -64,7 +64,7 @@ class Model extends AbstractTable
             }
             else
             {
-                $this->update($array_save, $this->getAdapter()->quoteInto('id = ?', $this->getId()));
+                $this->update($array_save, sprintf('id = %s', (int)$this->getId()));
             }
 
             return $this->getId();

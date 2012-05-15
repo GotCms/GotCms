@@ -85,14 +85,14 @@ class Model extends AbstractTable implements IterableInterface
             }
             else
             {
-                $this->update($array_save, $this->getAdapter()->quoteInto('id = ? ', $this->getId()));
+                $this->update($array_save, sprintf('id = %d', (int)$this->getId()));
             }
 
             $views = $this->getViews();
             if(!empty($views))
             {
                 $db = $this->getAdapter();
-                $db->delete('document_type_views', $db->quoteInto('document_type_id = ?', $this->getId()));
+                $db->delete('document_type_views', sprintf('document_type_id = %s', (int)$this->getId()));
                 foreach($views as $view);
                 {
                     $db->insert('document_type_views', array('document_type_id' => $this->getId(), 'view_id' => $view));
@@ -120,7 +120,7 @@ class Model extends AbstractTable implements IterableInterface
             $tab_collection = new Gc\Tab\Collection();
             $tab_collection->load($document_type_id);
             $tab_collection->delete();
-            $this->getAdapter()->delete('document_type_views', $this->getAdapter()->quoteInto('document_type_id = ?', $document_type_id));
+            $this->getAdapter()->delete('document_type_views', sprintf('document_type_id = %s', (int)$document_type_id));
             parent::delete('id = '.$document_type_id);
 
             return TRUE;

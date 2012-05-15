@@ -118,7 +118,7 @@ class Model extends AbstractTable
             }
             else
             {
-                $this->update($array_save, $this->getAdapter()->quoteInto('id =  ?',$this->getId()));
+                $this->update($array_save, sprintf('id =  %s', (int)$this->getId()));
             }
 
             return $this->getId();
@@ -143,8 +143,8 @@ class Model extends AbstractTable
         {
             try
             {
-                parent::delete($this->getAdapter()->quoteInto('id = ?', $id));
-                $this->getAdapter()->delete('property_value', $this->getAdapter()->quoteInto('property_id = ?', $id));
+                parent::delete(sprintf('id = %s', (int)$id));
+                $this->getAdapter()->delete('property_value', sprintf('property_id = %s', (int)$id));
             }
             catch(Exception $e)
             {

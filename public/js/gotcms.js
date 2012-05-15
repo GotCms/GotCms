@@ -64,7 +64,7 @@ var Gc = (function($)
         $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
 
             //tabs
-            $('#tabs-add').click(function()
+            $('#tabs-add').on('click', function()
             {
                 $name = $('#tabs-addname');
                 $description = $('#tabs-adddescription');
@@ -84,8 +84,8 @@ var Gc = (function($)
                             {
                                 $tabs = $('#tabs');
                                 $e = '<li>'
-                                    +'<input type="hidden" name="tab['+$data.id+'][name]" value="'+$name.val()+'" />'
-                                    +'<input type="hidden" name="tab['+$data.id+'][description]" value="'+$description.val()+'" />'
+                                    +'<input type="hidden" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'" />'
+                                    +'<input type="hidden" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'" />'
                                     +'<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>'
                                     +'<button type="button" value="'+$data.id+'" class="delete-tab">delete</button>'
                                     +'</li>';
@@ -115,7 +115,7 @@ var Gc = (function($)
                 }
             });
 
-            $('.delete-tab').live('click', function()
+            $(document).on('click', '.delete-tab', function()
             {
                 $button = $(this);
                 $.post($deleteTabUrl, {
@@ -187,13 +187,6 @@ var Gc = (function($)
                                         +'<dd id="tabs-element-#{tab}-#{id}">'
                                         +'<select class="select-tab" id="properties-tab-#{tab}-#{id}" name="properties[tab][]">'
                                         +'</select>'
-                                        +'</dd>'
-                                        +'<dt id="datatype-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-datatype-#{tab}-#{id}">datatype</label>'
-                                        +'</dt>'
-                                        +'<dd id="datatype-element-#{tab}-#{id}">'
-                                            +'<select class="select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[datatype][]">'
-                                            +'</select>'
                                         +'</dd>'
                                         +'<dt id="description-label-#{tab}-#{id}">'
                                             +'<label class="optional" for="properties-description-#{tab}-#{id}">Description</label>'

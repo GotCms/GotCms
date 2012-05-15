@@ -57,6 +57,8 @@ class DocumentType extends AbstractForm
         )))
     );
 
+    protected $_datatypeValues = NULL;
+
     public function init()
     {
         $this->getInfos();
@@ -68,8 +70,7 @@ class DocumentType extends AbstractForm
         $this->addDecorator('ViewScript', array('viewScript' => 'development-forms/document-type.phtml'));
 
         $collection = new Datatype\Collection();
-        $datatypes = $collection->getSelect();
-        $this->getSubForm('properties')->getElement('datatype')->addMultioptions($datatypes);
+        $this->_datatypeValues = $collection->getSelect();
 
         $views_collection = new View\Collection();
         $views = $views_collection->getSelect();
@@ -77,7 +78,7 @@ class DocumentType extends AbstractForm
         $this->getSubForm('views')->getElement('default_view')->addMultioptions($views);
         $this->getSubForm('views')->getElement('available_views')->addMultioptions($views);
 
-        $this->getDecorator('ViewScript')->setOption('datatypes', $datatypes);
+        $this->getDecorator('ViewScript')->setOption('datatypes', $this->_datatypeValues);
         $this->getDecorator('ViewScript')->setOption('views', $views);
 
     }
@@ -97,15 +98,8 @@ class DocumentType extends AbstractForm
         $sub_form = new SubForm($this->_subDocumentTypeForms['infos']);
 
         $name = new Element\Text('name');
-        $name->setLabel('Name')
-            ->setValue('');
-
         $description = new Element\Text('description');
-        $description->setLabel('Description')
-            ->setValue('');
-
         $icon_id = new Element\Select('icon_id');
-        $icon_id->setLabel('Icon');
 
         $sub_form->addElements(array($name, $description, $icon_id));
 
@@ -125,13 +119,9 @@ class DocumentType extends AbstractForm
         }
         $sub_form = new SubForm($this->_subDocumentTypeForms['views']);
 
-        $default_view = new Element\Select('default_view');
-        $default_view->setLabel('Default view')
-            ->setRequired(TRUE);
-
         $available_views = new Element\Multiselect('available_views');
-        $available_views->setLabel('Available views');
-
+        $default_view = new Element\Select('default_view');
+        $default_view->setRequired(TRUE);
 
         $sub_form->addElements(array($default_view, $available_views));
 
@@ -152,59 +142,62 @@ class DocumentType extends AbstractForm
 
         $sub_form = new SubForm($this->_subDocumentTypeForms['properties']);
         $this->addSubForm($sub_form, 'properties');
-        $this->addProperty();
 
-        return $this;
+        return $sub_form;
     }
 
-    public function addProperty(Property\Model $property = NULL)
+    public function addProperty($property)
     {
+        if(!is_array($property) and !$property instanceof Property\Model)
+        {
+            return $this;
+        }
+
         $sub_form = $this->getSubForm('properties');
 
         $name = new Element\Text('name');
-        $name->setLabel('Name');
-
         $identifier = new Element\Text('identifier');
-        $identifier->setLabel('Identifier');
 
         $tab = new Element\Select('tab');
-        $tab->setLabel('Tab')
-            ->setAttrib('class', 'select-tab')
+        $tab->setAttrib('class', 'select-tab')
             ->addMultioptions(array())
             ->setRegisterInArrayValidator(FALSE)
             ->setRequired(TRUE);
 
         $datatype = new Element\Select('datatype');
-        $datatype->setLabel('Datatype')
-            ->setAttrib('class', 'select-datatype')
-            ->addMultioptions(array())
+        $datatype->setAttrib('class', 'select-datatype')
+            ->addMultioptions($this->_datatypeValues)
             ->setRequired(TRUE);
 
         $description = new Element\Text('description');
-        $description->setLabel('Description');
-
         $required = new Element\Checkbox('required');
-        $required->setLabel('Required');
+        $property_id = new Element\Hidden('property_id');
 
+        $property_form = new SubForm();
 
-        if(!empty($property))
+        if($property instanceof Property\Model)
         {
+            $sub_form->addSubForm($property_form, $property->getId());
             $name->setValue($property->getName());
             $identifier->setValue($property->getIdentifier());
             $tab->setValue($property->getTabId());
             $datatype->setValue($property->getDatatypeId());
             $description->setValue($property->getDescription());
             $required->setValue($property->isRequired());
-
-            $property_form = new SubForm();
-            $property_form->addElements(array($name, $identifier, $tab, $datatype, $description, $required));
-
-            $sub_form->addSubForm($property_form, 'property'. $tab->getId());
-
-            return $this;
+            $property_id->setValue($property->getId());
+        }
+        elseif(is_array($property))
+        {
+            $sub_form->addSubForm($property_form, $property['id']);
+            $name->setValue($property['name']);
+            $identifier->setValue($property['identifier']);
+            $tab->setValue($property['tab']);
+            $datatype->setValue($property['datatype']);
+            $description->setValue($property['description']);
+            $required->setValue(!empty($property['is_required']));
         }
 
-        $sub_form->addElements(array($name, $identifier, $tab, $datatype, $description, $required));
+        $property_form->addElements(array($property_id, $name, $identifier, $tab, $datatype, $description, $required));
 
         return $this;
     }
@@ -223,40 +216,44 @@ class DocumentType extends AbstractForm
 
         $sub_form = new SubForm($this->_subDocumentTypeForms['tabs']);
         $this->addSubForm($sub_form, 'tabs');
-        $this->addTab();
 
-        return $this;
+        return $sub_form;
     }
 
-    public function addTab(Tab\Model $tab = NULL)
+    public function addTab($tab)
     {
+        if(!is_array($tab) and !$tab instanceof Tab\Model)
+        {
+            return $this;
+        }
         $sub_form = $this->getSubForm('tabs');
 
         $name = new Element\Text('name');
-        $name->setLabel('Name')
-            ->setRequired(TRUE);
+        $name->setRequired(TRUE);
 
         $description = new Element\Text('description');
-        $description->setLabel('Description')
-            ->setRequired(TRUE);
+        $description->setRequired(TRUE);
 
         $tab_id = new Element\Hidden('tab_id');
-        $tab_id->setRequired(TRUE);
 
-        if(!empty($tab))
+        $tab_form = new SubForm();
+
+        if($tab instanceof Tab\Model)
         {
+            $sub_form->addSubForm($tab_form, $tab->getId());
             $name->setValue($tab->getName());
             $description->setValue($tab->getDescription());
             $tab_id->setValue($tab->getId());
-            $tab_form = new SubForm();
-            $tab_form->addElements(array($name, $description, $tab_id));
-
-            $sub_form->addSubForm($tab_form, 'tab'. $tab->getId());
-
-            return $this;
+        }
+        elseif(is_array($tab))
+        {
+            $sub_form->addSubForm($tab_form, $tab['id']);
+            $name->setValue($tab['name']);
+            $description->setValue($tab['description']);
         }
 
-        $sub_form->addElements(array($name, $description));
+        $tab_form->addElements(array($name, $description, $tab_id));
+
         return $this;
     }
 
@@ -277,7 +274,6 @@ class DocumentType extends AbstractForm
             $session = $element;
             foreach($tabs as $tab_id => $tab)
             {
-                //@TODO Change content here to elements depends of session values
                 $this->addTab($tab);
                 $properties = $tab->getProperties();
                 foreach($properties as $property)
@@ -293,26 +289,36 @@ class DocumentType extends AbstractForm
                 return;
             }
 
-            $session = $element;
             $tab_select = array();
-            foreach($session['tabs'] as $tab_id => $tab)
+            foreach($element['tabs'] as $tab_id => $tab)
             {
-                //@TODO Change content here to elements depends of session values
-                $tab_form = $this->getTabs();
-                $tab_form->getElement('name')->setValue($tab['name']);
-                $tab_form->getElement('description')->setValue($tab['description']);
-                $tab_select[$tab_id] = $tab['name'];
-                foreach($tab['properties'] as $property)
+                if(!is_array($tab))
                 {
-                    $property_form = $this->getProperties();
-                    $property_form->getElement('name')->setValue($property['name']);
-                    $property_form->getElement('identifier')->setValue($property['identifier']);
-                    $property_form->getElement('tab')->addMultiOptions($tab_select)->setValue($property['tab']);
-                    $property_form->getElement('datatype')->setValue($property['datatype']);
-                    $property_form->getElement('description')->setValue($property['description']);
-                    $property_form->getElement('required')->setValue($property['is_required']);
+                    continue;
                 }
+
+                $tab['id'] = $tab_id;
+                $this->addTab($tab);
+                $tab_select[$tab_id] = $tab['name'];
+            }
+
+            foreach($element['properties'] as $property_id => $property)
+            {
+                if(!is_array($property))
+                {
+                    continue;
+                }
+
+                $property['id'] = $property_id;
+                $this->addProperty($property);
             }
         }
+    }
+
+    public function isValid($data)
+    {
+        $this->setValues($data);
+
+        return parent::isValid($data);
     }
 }
