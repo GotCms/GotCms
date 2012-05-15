@@ -34,13 +34,6 @@ class RecordExists extends AbstractDb
 {
     public function isValid($value)
     {
-        /*
-         * Check for an adapter being defined. If not, throw an exception.
-         */
-        if (null === $this->_adapter) {
-            throw new Exception\RuntimeException('No database adapter present');
-        }
-
         $valid = true;
         $this->setValue($value);
 
