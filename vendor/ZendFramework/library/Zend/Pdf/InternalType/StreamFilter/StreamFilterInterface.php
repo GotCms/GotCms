@@ -13,19 +13,41 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json
+ * @package    Zend_PDF
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Json\Server;
+namespace Zend\Pdf\InternalType\StreamFilter;
 
 /**
- * @category   Zend
- * @package    Zend_Json
- * @subpackage Server
+ * PDF stream filter
+ *
+ * @package    Zend_PDF
+ * @subpackage Zend_PDF_Internal
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception extends \Zend\Json\Exception
-{}
+interface StreamFilterInterface
+{
+    /**
+     * Encode data
+     *
+     * @param string $data
+     * @param array $params
+     * @return string
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
+     */
+    public static function encode($data, $params = null);
+
+    /**
+     * Decode data
+     *
+     * @param string $data
+     * @param array $params
+     * @return string
+     * @throws \Zend\Pdf\Exception\ExceptionInterface
+     */
+    public static function decode($data, $params = null);
+}

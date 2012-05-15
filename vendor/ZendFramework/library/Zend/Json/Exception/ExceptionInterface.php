@@ -13,32 +13,18 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OAuth
+ * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\OAuth;
+namespace Zend\Json\Exception;
 
-interface Signature
-{
-    /**
-     * Constructor
-     * 
-     * @param  string $consumerSecret 
-     * @param  null|string $tokenSecret 
-     * @param  null|string $hashAlgo 
-     * @return void
-     */
-    public function __construct($consumerSecret, $tokenSecret = null, $hashAlgo = null);
-
-    /**
-     * Sign a request
-     * 
-     * @param  array $params 
-     * @param  null|string $method 
-     * @param  null|string $url 
-     * @return string
-     */
-    public function sign(array $params, $method = null, $url = null);
-}
+/**
+ * @category   Zend
+ * @package    Zend_Json
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+interface ExceptionInterface
+{}

@@ -94,7 +94,7 @@ die('here');
         return $this->_auth;
     }
 
-    protected function _returnJson($data)
+    protected function _returnJson(array $data)
     {
         $json_model = new JsonModel();
         $json_model->setVariables($data);

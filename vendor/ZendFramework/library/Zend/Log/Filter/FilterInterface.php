@@ -13,18 +13,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json
+ * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Json;
+namespace Zend\Log\Filter;
 
 /**
  * @category   Zend
- * @package    Zend_Json
+ * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
-{}
+interface FilterInterface
+{
+    /**
+     * Returns TRUE to accept the message, FALSE to block it.
+     *
+     * @param array $event event data
+     * @return boolean accepted?
+     */
+    public function filter(array $event);
+}

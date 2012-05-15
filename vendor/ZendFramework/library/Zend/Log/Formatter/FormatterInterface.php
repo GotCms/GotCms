@@ -13,17 +13,26 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_OAuth
+ * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\OAuth;
+namespace Zend\Log\Formatter;
 
 /**
  * @category   Zend
- * @package    Zend_OAuth
+ * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Exception {}
+interface FormatterInterface
+{
+    /**
+     * Formats data into a single line to be written by the writer.
+     *
+     * @param  array    $event    event data
+     * @return string             formatted line to write to the log
+     */
+    public function format($event);
+}
