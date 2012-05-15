@@ -119,20 +119,18 @@
         <dd>
             <div id="properties-tabs-content" class="tabs">
                 <ul>
-                    <?php $idx = 1; ?>
                     <?php foreach($tabs_form as $form): ?>
                         <li>
                             <?php $name = $form->getValue('name'); ?>
-                            <a href="#tabs-properties-<?php echo $idx++; ?>">
+                            <a href="#tabs-properties-<?php echo $form->getValue('tab_id'); ?>">
                                 <?php echo $name; ?>
                             </a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
 
-                <?php $idx = 1; ?>
                 <?php foreach($tabs_form as $form): ?>
-                    <div id="tabs-properties-<?php echo $idx++; ?>">
+                    <div id="tabs-properties-<?php echo $form->getValue('tab_id'); ?>">
                         <ul>
                             <?php foreach($properties_forms as $property): ?>
                                 <?php if($property->getValue('tab') != $form->getValue('tab_id')): ?>

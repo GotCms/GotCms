@@ -84,8 +84,8 @@ var Gc = (function($)
                             {
                                 $tabs = $('#tabs');
                                 $e = '<li>'
-                                    +'<input type="hidden" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'" />'
-                                    +'<input type="hidden" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'" />'
+                                    +'<input type="hidden" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'">'
+                                    +'<input type="hidden" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'">'
                                     +'<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>'
                                     +'<button type="button" value="'+$data.id+'" class="delete-tab">delete</button>'
                                     +'</li>';
@@ -136,7 +136,7 @@ var Gc = (function($)
             //views
 
             //properties
-            $('#property_add').click(function()
+            $('#property_add').on('click', function()
             {
                 $name = $('#properties-name');
                 $identifier = $('#properties-identifier');
@@ -173,38 +173,33 @@ var Gc = (function($)
                                             +'<label class="optional" for="properties-name-#{tab}-#{id}">Name</label>'
                                         +'</dt>'
                                         +'<dd id="name-element-#{tab}-#{id}">'
-                                            +'<input type="text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[name][]">'
+                                            +'<input type="text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">'
                                         +'</dd>'
                                         +'<dt id="identifier-label-#{tab}-#{id}">'
                                             +'<label class="optional" for="properties-identifier-#{tab}-#{id}">Identifier</label>'
                                         +'</dt>'
                                         +'<dd id="identifier-element-#{tab}-#{id}">'
-                                            +'<input type="text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[identifier][]">'
+                                            +'<input type="text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">'
                                         +'</dd>'
-                                        +'<dt id="tabs-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-tab-#{tab}-#{id}">Tab</label>'
-                                        +'</dt>'
-                                        +'<dd id="tabs-element-#{tab}-#{id}">'
-                                        +'<select class="select-tab" id="properties-tab-#{tab}-#{id}" name="properties[tab][]">'
-                                        +'</select>'
+                                        +'<dd id="datatype-element-#{tab}-#{id}">'
+                                            +'<select class="select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">'
+                                            +'</select>'
                                         +'</dd>'
                                         +'<dt id="description-label-#{tab}-#{id}">'
                                             +'<label class="optional" for="properties-description-#{tab}-#{id}">Description</label>'
                                         +'</dt>'
                                         +'<dd id="description-element-#{tab}-#{id}">'
-                                            +'<input type="text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[description][]">'
+                                            +'<input type="text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">'
                                         +'</dd>'
                                         +'<dt id="required-label-#{tab}-#{id}">'
                                             +'<label class="optional" for="properties-required-#{tab}-#{id}">Required</label>'
                                         +'</dt>'
                                         +'<dd id="required-element-#{tab}-#{id}">'
-                                            +'<input type="checkbox" value="1" id="properties-required-#{tab}-#{id}" name="properties[required][]">'
+                                            +'<input type="checkbox" value="1" id="properties-required-#{tab}-#{id}" name="properties[property#{id}][required]">'
                                         +'</dd>'
-                                        +'<dt id="delete-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-delete-#{tab}-#{id}">Required</label>'
-                                        +'</dt>'
                                         +'<dd id="required-element-#{tab}-#{id}">'
-                                            +'<button type="button" value="'+$data.id+'" class="delete-property">delete</button>'
+                                            +'<input type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">'
+                                            +'<button type="button" value="#{id}" class="delete-property">delete</button>'
                                         +'</dd>'
                                     +'</dl>';
 
@@ -224,7 +219,7 @@ var Gc = (function($)
                 }
             });
 
-            $('.delete-property').live('click', function()
+            $(document).on('click', '.delete-property', function()
             {
                 $button = $(this);
                 $.post($deletePropertyUrl, {
