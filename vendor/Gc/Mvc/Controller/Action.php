@@ -33,6 +33,7 @@ class Action extends ActionController
         $auth = $this->getAuth();
         $module = $this->getRouteMatch()->getParam('module');
         $route_name = $this->getRouteMatch()->getMatchedRouteName();
+
         if(!$auth->hasIdentity())
         {
             if(!in_array($route_name, array('userLogin', 'userForgotPassword')) and $route_name != 'renderWebsite')
@@ -42,12 +43,12 @@ class Action extends ActionController
         }
         else
         {
-            $user_table = Model::fromId($auth->getIdentity()->id);
+            $user_model = $auth->getIdentity();
 
-            $this->_acl = new Acl($user_table);
-            $permissions = $user_table->getRole()->getUserPermissions();
+            $this->_acl = new Acl($user_model);
+            $permissions = $user_model->getRole()->getUserPermissions();
 
-            if(!empty($this->_acl_page) and !$this->_acl->isAllowed($user_table->getRole()->getName(), $this->_acl_page['resource'], $this->_acl_page['permission']))
+            if(!empty($this->_acl_page) and !$this->_acl->isAllowed($user_model->getRole()->getName(), $this->_acl_page['resource'], $this->_acl_page['permission']))
             {
                 //@TODO Do something to specify user has no access
 die('here');

@@ -175,9 +175,6 @@
                                     <dd>
                                         <input type="checkbox" value="<?php echo $property->getValue('required'); ?>" id="properties-required-<?php echo (int)$property->getValue('property_id'); ?>" name="properties[required][]">
                                     </dd>
-                                    <dt>
-                                        <label class="optional" for="properties-delete-<?php echo (int)$property->getValue('property_id'); ?>"><?php echo $this->escape($this->translator('Required')); ?></label>
-                                    </dt>
                                     <dd>
                                         <button type="button" value="<?php echo (int)$property->getValue('property_id'); ?>" class="delete-property"><?php echo $this->escape($this->translator('Delete')); ?></button>
                                     </dd>

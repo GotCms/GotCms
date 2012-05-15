@@ -27,9 +27,9 @@ class Model extends AbstractTable implements IterableInterface
         if($result->isValid())
         {
             $data = $authAdapter->getResultRowObject(null, 'password');
-            $auth->getStorage()->write($data);
-
             $this->setData((array)$data);
+            $auth->getStorage()->write($this);
+
             return TRUE;
         }
 

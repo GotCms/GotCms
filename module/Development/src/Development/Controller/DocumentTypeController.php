@@ -45,7 +45,7 @@ class DocumentTypeController extends Action
                 $tabs_subform = $form->getSubForm('tabs');
 
                 $document_type->addData(array(
-                    'user_id' => $this->getAuth()->getIdentity()->id
+                    'user_id' => $this->getAuth()->getIdentity()->getId()
                     , 'name' => $infos_subform->getValue('name')
                     , 'description' => $infos_subform->getValue('description')
                     , 'default_view_id' => $views_subform->getValue('default_view')
@@ -161,7 +161,7 @@ class DocumentTypeController extends Action
                 $tabs_subform = $form->getSubForm('tabs');
 
                 $document_type->addData(array(
-                    'user_id' => $this->getAuth()->getIdentity()->id
+                    'user_id' => $this->getAuth()->getIdentity()->getId()
                     , 'name' => $infos_subform->getValue('name')
                     , 'description' => $infos_subform->getValue('description')
                     , 'default_view_id' => $views_subform->getValue('default_view')

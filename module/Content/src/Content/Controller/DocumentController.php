@@ -71,7 +71,7 @@ class DocumentController extends Action
                     ->setDocumentTypeId($document_type_id)
                     ->setParentId($parent_id)
                     ->setUrlKey(!empty($document_url_key) ? $document_url_key : $this->_checkUrlKey($document_name))
-                    ->setUserId($this->getAuth()->getIdentity()->id);
+                    ->setUserId($this->getAuth()->getIdentity()->getId());
 
                 $document_id = $document->save();
                 if(empty($document_id))
