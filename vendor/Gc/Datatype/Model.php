@@ -208,6 +208,7 @@ class Model extends AbstractTable implements IterableInterface
     static function loadEditor(PropertyModel $property)
     {
         $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
+
         return $datatype->getEditor($property)->load();
     }
 
@@ -220,21 +221,11 @@ class Model extends AbstractTable implements IterableInterface
     */
     static function loadDatatype($datatype_id, $document_id = NULL)
     {
-        if(empty(self::$_datatypes[$datatype_id][$document_id]))
-        {
-            if(empty(self::$_datatypes[$datatype_id]))
-            {
-                self::$_datatypes[$datatype_id] = array();
-            }
+        $datatype = Model::fromId($datatype_id);
+        $class = 'Datatypes\\'.$datatype->getModel().'\Datatype';
 
-            $datatype = Model::fromId($datatype_id);
-            $class = 'Datatypes\\'.$datatype->getModel().'\Datatype';
-
-            $object = new $class();
-            $object->load($datatype, $document_id);
-            self::$_datatypes[$datatype_id][$document_id] = $object;
-        }
-
-        return self::$_datatypes[$datatype_id][$document_id];
+        $object = new $class();
+        $object->load($datatype, $document_id);
+        return $object;
     }
 }

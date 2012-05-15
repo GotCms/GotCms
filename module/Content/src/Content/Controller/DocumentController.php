@@ -148,17 +148,18 @@ class DocumentController extends Action
             $tabs_array = array();
             $datatypes = array();
 
-            $i = 1;
+            $idx = 1;
             foreach($tabs as $tab)
             {
                 $tabs_array[] = $tab->getName();
                 $properties = $this->_loadProperties($document_type_id, $tab->getId(), $document->getId());
 
                 $sub_form = new \Zend\Form\SubForm();
-                $sub_form->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$i))));
+                $sub_form->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$idx))));
                 $sub_form->removeDecorator('Fieldset');
                 $sub_form->removeDecorator('DtDdWrapper');
                 $sub_form->setIsArray(FALSE);
+
                 foreach($properties as $property)
                 {
                     $property->setDocumentId($document->getId())->loadValue();
@@ -173,16 +174,16 @@ class DocumentController extends Action
                     \Gc\Form\AbstractForm::addContent($sub_form, Datatype\Model::loadEditor($property, $document));
                 }
 
-                $document_form->addSubForm($sub_form, 'tabs-'.$i, $i);
-                $i++;
+                $document_form->addSubForm($sub_form, 'tabs-'.$idx, $idx);
+                $idx++;
             }
 
             $tabs_array[] = 'Document information';
 
             $form_document_add = new Form\Document();
-            $form_document_add->load($document, $i);
+            $form_document_add->load($document, $idx);
 
-            $document_form->addSubForm($form_document_add, 'tabs-'.$i, $i);
+            $document_form->addSubForm($form_document_add, 'tabs-'.$idx, $idx);
 
             $submit = new \Zend\Form\Element\Submit('submit-form');
             $submit->setLabel('Save');
