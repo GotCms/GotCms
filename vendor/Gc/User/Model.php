@@ -85,10 +85,15 @@ class Model extends AbstractTable implements IterableInterface
             , 'lastname' => $this->getLastname()
             , 'email' => $this->getEmail()
             , 'login' => $this->getLogin()
-            , 'password' => $this->getPassword()
             , 'updated_at' => date('Y-m-d H:i:s')
             , 'user_acl_role_id' => $this->getUserAclRoleId()
         );
+
+        $password = $this->getPassword();
+        if(!empty($password))
+        {
+            $array_save['password'] = $password;
+        }
 
         try
         {
