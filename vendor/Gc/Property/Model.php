@@ -145,7 +145,7 @@ class Model extends AbstractTable
             {
                 parent::delete(sprintf('id = %s', (int)$id));
                 $table = new \Zend\Db\TableGateway\TableGateway('property_value', $this->getAdapter());
-                $result = $table->delete(array('property_id' => (int)$property_id));
+                $result = $table->delete(array('property_id' => (int)$id));
             }
             catch(Exception $e)
             {

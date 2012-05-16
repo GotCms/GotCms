@@ -110,6 +110,11 @@ class DocumentType extends AbstractForm
         $sub_form = new SubForm($this->_subDocumentTypeForms['infos']);
 
         $name = new Element\Text('name');
+        $name->addValidator(new Db\NoRecordExists(array(
+                'table' => 'document_type'
+                , 'field' => 'name'
+                ))
+            );
         $description = new Element\Text('description');
         $icon_id = new Element\Select('icon_id');
 
