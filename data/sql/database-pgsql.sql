@@ -8,6 +8,9 @@
 
 
 -- Start Séquence's declaration
+DROP SEQUENCE IF EXISTS "core_config_data_id_seq" CASCADE;
+CREATE SEQUENCE "core_config_data_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
+
 DROP SEQUENCE IF EXISTS "datatypes_id_seq" CASCADE;
 CREATE SEQUENCE "datatypes_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
 
@@ -32,11 +35,11 @@ CREATE SEQUENCE "properties_value_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE ST
 DROP SEQUENCE IF EXISTS "tabs_id_seq" CASCADE;
 CREATE SEQUENCE "tabs_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
 
-DROP SEQUENCE IF EXISTS "translate_id_seq" CASCADE;
-CREATE SEQUENCE "translate_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
+DROP SEQUENCE IF EXISTS "core_translate_id_seq" CASCADE;
+CREATE SEQUENCE "core_translate_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
 
-DROP SEQUENCE IF EXISTS "translate_language_id_seq" CASCADE;
-CREATE SEQUENCE "translate_language_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
+DROP SEQUENCE IF EXISTS "core_translate_locale_id_seq" CASCADE;
+CREATE SEQUENCE "core_translate_locale_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
 
 DROP SEQUENCE IF EXISTS "user_acl_roles_id_seq" CASCADE;
 CREATE SEQUENCE "user_acl_roles_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
@@ -56,10 +59,28 @@ CREATE SEQUENCE "views_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE
 -- End Séquence's declaration
 
 -- Start Table's declaration
+DROP TABLE IF EXISTS "core_config_data" CASCADE;
+CREATE TABLE "core_config_data" (
+  "id" character varying NOT NULL,
+  "identifier" character varying NOT NULL,
+  "value" character varying
+) WITH OIDS;
+ALTER TABLE "core_config_data" ADD CONSTRAINT "core_config_data_pk" PRIMARY KEY("id");
+CREATE UNIQUE INDEX "core_config_data_identifier" ON "core_config_data" USING btree ("identifier");
+
+DROP TABLE IF EXISTS "core_session" CASCADE;
+CREATE TABLE "core_session" (
+  "id" character varying(255) NOT NULL,
+  "expires" integer NOT NULL,
+  "data" bytea
+) WITH OIDS;
+ALTER TABLE "core_session" ADD CONSTRAINT "core_session_pk" PRIMARY KEY("id");
+
 DROP TABLE IF EXISTS "datatype" CASCADE;
 CREATE TABLE "datatype" (
 "id" serial NOT NULL,
 "name" character varying NOT NULL,
+"model" character varying NOT NULL,
 "prevalue_value" text
 ) WITH OIDS;
 ALTER TABLE "datatype" ADD CONSTRAINT "datatype_pk" PRIMARY KEY("id");
@@ -96,9 +117,9 @@ CREATE TABLE "document" (
 "show_in_nav" boolean DEFAULT false,
 "user_id" integer NOT NULL,
 "document_type_id" integer NOT NULL,
-"view_id" integer NOT NULL,
-"layout_id" integer NOT NULL,
-"parent_id" integer NOT NULL DEFAULT 0
+"view_id" integer,
+"layout_id" integer,
+"parent_id" integer DEFAULT 0
 ) WITH OIDS;
 ALTER TABLE "document" ADD CONSTRAINT "document_pk" PRIMARY KEY("id");
 
@@ -154,23 +175,23 @@ CREATE TABLE "tab" (
 ) WITH OIDS;
 ALTER TABLE "tab" ADD CONSTRAINT "tab_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "translate" CASCADE;
-CREATE TABLE "translate" (
+DROP TABLE IF EXISTS "core_translate" CASCADE;
+CREATE TABLE "core_translate" (
 "id" serial NOT NULL,
 "source" character varying NOT NULL,
 "hash" character varying NOT NULL
 ) WITH OIDS;
-ALTER TABLE "translate" ADD CONSTRAINT "translate_pk" PRIMARY KEY("id");
+ALTER TABLE "core_translate" ADD CONSTRAINT "core_translate_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "translate_language" CASCADE;
-CREATE TABLE "translate_language" (
+DROP TABLE IF EXISTS "core_translate_locale" CASCADE;
+CREATE TABLE "core_translate_locale" (
 "id" serial NOT NULL,
 "destination" character varying NOT NULL,
 "language" character varying NOT NULL,
-"translate_id" integer NOT NULL,
+"core_translate_id" integer NOT NULL,
 "hash" character varying NOT NULL
 ) WITH OIDS;
-ALTER TABLE "translate_language" ADD CONSTRAINT "translate_language_pk" PRIMARY KEY("id");
+ALTER TABLE "core_translate_locale" ADD CONSTRAINT "core_translate_locale_pk" PRIMARY KEY("id");
 
 DROP TABLE IF EXISTS "user_acl_role" CASCADE;
 CREATE TABLE "user_acl_role" (
@@ -257,7 +278,7 @@ ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_permission_user_acl_role" FOR
 
 ALTER TABLE "user" ADD CONSTRAINT "fk_user_user_acl_role" FOREIGN KEY ("user_acl_role_id") REFERENCES "user_acl_role"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
-ALTER TABLE "translate_language" ADD CONSTRAINT "fk_translate_language_translate" FOREIGN KEY ("translate_id") REFERENCES "translate"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "core_translate_locale" ADD CONSTRAINT "fk_core_translate_locale_core_translate" FOREIGN KEY ("core_translate_id") REFERENCES "core_translate"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
 ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_user_acl_permission" FOREIGN KEY ("user_acl_permission_id") REFERENCES "user_acl_permission"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 

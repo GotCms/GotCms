@@ -42,10 +42,10 @@ class Config extends AbstractForm
         $this->addSubForm($general);
     }
 
-    public function initServer()
+    public function initSystem()
     {
         //Session settings
-        $session_settings = new SubForm('Cookie and sessions');
+        $session_settings = new SubForm();
 
         $cookie_domain = new Element\Text('cookie_domain');
         $cookie_domain->setRequired(TRUE)
@@ -71,10 +71,25 @@ class Config extends AbstractForm
             ->addMultiOptions(array('Database', 'Files'));
 
         $session_settings->addElements(array($cookie_domain, $cookie_path, $session_handler, $session_lifetime));
-        $this->addSubForm($session_settings);
+        $this->addSubForm($session_settings, 'session');
 
+        //Debug settings
+        $debug_settings = new SubForm();
+
+        $debug_is_active = new Element\Text('is_active');
+        $debug_is_active->setRequired(TRUE)
+            ->setLabel('Is active')
+            ->setAttrib('class', 'input-text')
+            ->addValidator('NotEmpty');
+
+        $debug_settings->addElements(array($debug_is_active));
+        $this->addSubForm($debug_settings, 'debug');
+    }
+
+    public function initServer()
+    {
         //Local settings
-        $locale_settings = new SubForm('Locale settings');
+        $locale_settings = new SubForm();
 
         $locale = new Element\Select();
         $locale->setRequired(TRUE)
@@ -82,7 +97,7 @@ class Config extends AbstractForm
             ->addMultiOptions(Locale::getLocaleList());
 
         $locale_settings->addElements(array($locale));
-        $this->addSubForm($locale_settings);
+        $this->addSubForm($locale_settings, 'locale');
 
         //Mail settings
         $mail_settings = new SubForm();
@@ -100,6 +115,6 @@ class Config extends AbstractForm
             ->addValidator('NotEmpty');
 
         $mail_settings->addElements(array($mail_from, $mail_from_name));
-        $this->addSubForm($mail_settings);
+        $this->addSubForm($mail_settings, 'mail');
     }
 }
