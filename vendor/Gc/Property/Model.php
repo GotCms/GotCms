@@ -144,6 +144,7 @@ class Model extends AbstractTable
             try
             {
                 parent::delete(sprintf('id = %s', (int)$id));
+                //@TODO delete method
                 $this->getAdapter()->delete('property_value', sprintf('property_id = %s', (int)$id));
             }
             catch(Exception $e)
