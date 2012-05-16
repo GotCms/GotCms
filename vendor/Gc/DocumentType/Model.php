@@ -117,10 +117,11 @@ class Model extends AbstractTable implements IterableInterface
         $document_type_id = $this->getId();
         if(!empty($document_type_id))
         {
-            $tab_collection = new Gc\Tab\Collection();
+            $tab_collection = new Tab\Collection();
             $tab_collection->load($document_type_id);
             $tab_collection->delete();
-            $this->getAdapter()->delete('document_type_views', sprintf('document_type_id = %s', (int)$document_type_id));
+			$table = new \Zend\Db\TableGateway\TableGateway('document_type_view', $this->getAdapter());
+			$result = $table->delete(array('document_type_id' => (int)$document_type_id));
             parent::delete('id = '.$document_type_id);
 
             return TRUE;
