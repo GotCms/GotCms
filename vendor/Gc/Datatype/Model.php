@@ -160,7 +160,7 @@ class Model extends AbstractTable implements IterableInterface
     *
     * @return Model
     */
-    static function savePrevalueEditor(Gc\Datatype\AbstractDatatype $datatype)
+    static function savePrevalueEditor(AbstractDatatype $datatype)
     {
         $datatype->getPrevalueEditor()->save();
         return $datatype->getConfig();
