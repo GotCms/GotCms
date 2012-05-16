@@ -14,6 +14,16 @@ use Gc\Mvc\Controller\Action,
 
 class DocumentController extends Action
 {
+    /**
+     * Contains information about acl
+     * @var array $_acl_page
+     */
+    protected $_acl_page = array('resource' => 'Content', 'permission' => 'document');
+
+    /**
+     * Initialize Document Controller
+     * @return void
+     */
     public function init()
     {
         $documents = new DocumentCollection();
@@ -39,11 +49,21 @@ class DocumentController extends Action
         $this->layout()->setVariable('routes', Json::encode($array_routes));
     }
 
+    /**
+     *
+     *
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function indexAction()
     {
 
     }
 
+    /**
+     * Create document
+     *
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function createAction()
     {
         $document_form = new Form\Document();
@@ -89,6 +109,11 @@ class DocumentController extends Action
         return array('form' => $document_form);
     }
 
+    /**
+     * Delete document
+     *
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function deleteAction()
     {
         $document = DocumentModel::fromId($this->getRouteMatch()->getParam('id', ''));
@@ -118,6 +143,11 @@ class DocumentController extends Action
         return $this->redirect()->toRoute('content');
     }
 
+    /**
+     * Edit Document
+     *
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function editAction()
     {
         $document = DocumentModel::fromId($this->getRouteMatch()->getParam('id', ''));
@@ -208,6 +238,11 @@ class DocumentController extends Action
         }
     }
 
+    /**
+     * Check url key with deleted space and special chars
+     * @param string $string
+     * @return string
+     */
     protected function _checkUrlKey($string)
     {
         $replace = array(' ', 'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ');
@@ -217,6 +252,11 @@ class DocumentController extends Action
         return $string;
     }
 
+    /**
+     * Load tabs from document type
+     * @param integer $document_type_id
+     * @return \Gc\Tab\Collection
+     */
     protected function _loadTabs($document_type_id)
     {
         $document_type = DocumentType\Model::fromId($document_type_id);
@@ -225,6 +265,13 @@ class DocumentController extends Action
         return $tabs;
     }
 
+    /**
+     * Load properties from document type, tab and document
+     * @param integer $document_type_id
+     * @param integer $tab_id
+     * @param integer $document_id
+     * @return \Gc\Property\Collection
+     */
     protected function _loadProperties($document_type_id, $tab_id, $document_id)
     {
         $properties = new Property\Collection();

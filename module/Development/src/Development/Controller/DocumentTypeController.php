@@ -10,28 +10,29 @@ use Development\Form\DocumentType as DocumentTypeForm,
 
 class DocumentTypeController extends Action
 {
-    protected $_session = NULL;
-
-    public function init()
-    {
-    }
+    /**
+     * Contains information about acl
+     * @var array $_acl_page
+     */
+    protected $_acl_page = array('resource' => 'Development', 'permission' => 'document-type');
 
     public function indexAction()
     {
         // action body
     }
 
+    /**
+     * Create document type
+     */
     public function createAction()
     {
         $document_type = new DocumentType\Model();
-
 
         $form = new DocumentTypeForm();
         $form->setView($this->getLocator()->get('view'));
         $form->setAction($this->url()->fromRoute('documentTypeCreate', array()));
         $request = $this->getRequest();
         $session = $this->getSession();
-
 
         if(!$request->isPost())
         {
@@ -135,6 +136,9 @@ class DocumentTypeController extends Action
         return array('form' => $form);
     }
 
+    /**
+     * Edit document type
+     */
     public function editAction()
     {
         $document_type_id = $this->getRouteMatch()->getParam('id');
@@ -282,12 +286,18 @@ class DocumentTypeController extends Action
         return array('form' => $form);
     }
 
+    /**
+     * List all document types
+     */
     public function listAction()
     {
         $documents = new DocumentType\Collection();
         return array('documents' => $documents->getDocumentTypes());
     }
 
+    /**
+     * Delete Document type
+     */
     public function deleteAction()
     {
         $document_type_id = $this->getRouteMatch()->getParam('id', NULL);
@@ -304,6 +314,9 @@ class DocumentTypeController extends Action
         return $this->redirect()->toRoute('documentTypeList');
     }
 
+    /**
+     * Add tab in session
+     */
     public function addTabAction()
     {
         if($this->getRequest()->isPost())
@@ -344,6 +357,9 @@ class DocumentTypeController extends Action
         return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
+    /**
+     * Delete tab in session
+     */
     public function deleteTabAction()
     {
         if($this->getRequest()->isPost())
@@ -371,6 +387,9 @@ class DocumentTypeController extends Action
         return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
+    /**
+     * Add property in session
+     */
     public function addPropertyAction()
     {
         if($this->getRequest()->isPost())
@@ -439,7 +458,9 @@ class DocumentTypeController extends Action
         return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
-
+    /**
+     * Delete property in session
+     */
     public function deletePropertyAction()
     {
         if($this->getRequest()->isPost())

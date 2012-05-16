@@ -9,6 +9,10 @@ use Gc\Form\AbstractForm,
 
 class User extends AbstractForm
 {
+    /**
+     * Initialize User form
+     * @return void
+     */
     public function init()
     {
         $this->setMethod(self::METHOD_POST);
@@ -27,12 +31,12 @@ class User extends AbstractForm
         $password  = new Element\Password('password');
         $password->setLabel('Password')
             ->setAttrib('class', 'input-text')
-			->setAttrib('autocomplete', 'off');
+            ->setAttrib('autocomplete', 'off');
 
         $password_confirm  = new Element\Password('password_confirm');
         $password_confirm->setLabel('Password Confirm')
             ->setAttrib('class', 'input-text')
-			->setAttrib('autocomplete', 'off');
+            ->setAttrib('autocomplete', 'off');
 
         $lastname  = new Element\Text('lastname');
         $lastname->setRequired(TRUE)
@@ -67,6 +71,12 @@ class User extends AbstractForm
         $this->addElements(array($email, $login, $password, $password_confirm, $lastname, $firstname, $role, $submit));
     }
 
+    /**
+     * Validate the form
+     *
+     * @param  array $data
+     * @return boolean
+     */
     public function isvalid($data)
     {
         if(!empty($data['password']))
@@ -77,9 +87,16 @@ class User extends AbstractForm
         return parent::isValid($data);
     }
 
+    /**
+     * Set if yes or no password is required when user click on Save
+     *
+     * @return \Config\Form\User
+     */
     public function passwordRequired()
     {
         $this->getElement('password')->setRequired(TRUE)->addValidator('NotEmpty');
         $this->getElement('password_confirm')->setRequired(TRUE)->addValidator('NotEmpty')->addValidator('Identical');
+
+        return $this;
     }
 }

@@ -21,6 +21,10 @@ class IndexController extends Action
     protected $_viewPath;
     protected $_layoutPath;
 
+    /**
+     * Generate frontend from url key
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function indexAction()
     {
         $url = parse_url($this->getRequest()->getRequestUri());

@@ -10,8 +10,6 @@ use Gc\Document\Model as DocumentModel,
 
 class Document extends AbstractForm
 {
-    protected $_document;
-
     public function init()
     {
         $this->setMethod(self::METHOD_POST);
@@ -46,7 +44,6 @@ class Document extends AbstractForm
 
     public function load(DocumentModel $document, $index)
     {
-        $this->_document = $document;
         $this->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$index))));
         $this->removeDecorator('Fieldset');
         $this->removeDecorator('DtDdWrapper');

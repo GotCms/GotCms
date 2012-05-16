@@ -9,6 +9,9 @@ use Gc\Mvc\Controller\Action,
 
 class IndexController extends Action
 {
+    /**
+     * Initialize Content Index Controller
+     */
     public function init()
     {
         $documents = new DocumentCollection();
@@ -36,6 +39,5 @@ class IndexController extends Action
 
     public function indexAction()
     {
-        return array('message' => 'azdazd');
     }
 }

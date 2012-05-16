@@ -14,6 +14,11 @@ use Gc\Form\AbstractForm,
 
 class DocumentType extends AbstractForm
 {
+    /**
+     * Contains configuration of all sub forms
+     * @var $_subDocumentTypeForms array
+     *
+     */
     protected $_subDocumentTypeForms = array(
         'infos' => array(
             'legend' => 'Infos'
@@ -57,8 +62,15 @@ class DocumentType extends AbstractForm
         )))
     );
 
+    /**
+     * @var $_datatypeValues array
+     * Contains datatype values key => value for select input
+     */
     protected $_datatypeValues = NULL;
 
+    /**
+     * Init document type form
+     */
     public function init()
     {
         $this->getInfos();
@@ -84,9 +96,9 @@ class DocumentType extends AbstractForm
     }
 
     /**
-    * @param unknown_type $values
-    * @return Development_Form_DocumentType
-    */
+     * Initialize infos sub form
+     * @return \Zend\Form\SubForm
+     */
     private function getInfos()
     {
         $sub_form = $this->getSubForm('infos');
@@ -103,13 +115,15 @@ class DocumentType extends AbstractForm
 
         $sub_form->addElements(array($name, $description, $icon_id));
 
-        return $this->addSubForm($sub_form, 'infos');
+        $this->addSubForm($sub_form, 'infos');
+
+        return $sub_form;
     }
 
     /**
-    * @param unknown_type $values
-    * @return Development_Form_DocumentType
-    */
+     * Initialize views sub form
+     * @return \Zend\Form\SubForm
+     */
     private function getViews()
     {
         $sub_form = $this->getSubForm('views');
@@ -125,13 +139,15 @@ class DocumentType extends AbstractForm
 
         $sub_form->addElements(array($default_view, $available_views));
 
-        return $this->addSubForm($sub_form, 'views');
+        $this->addSubForm($sub_form, 'views');
+
+        return $sub_form;
     }
 
     /**
-    * @param unknown_type $values
-    * @return Development_Form_DocumentType
-    */
+     * Initialize properties sub form
+     * @return \Zend\Form\SubForm
+     */
     private function getProperties()
     {
         $sub_form = $this->getSubForm('properties');
@@ -146,6 +162,11 @@ class DocumentType extends AbstractForm
         return $sub_form;
     }
 
+    /**
+     * Add property sub form
+     * @param mixte \Gc\Property\Model | array
+     * @return \Developpement\Form\DocumentType
+     */
     public function addProperty($property)
     {
         if(!is_array($property) and !$property instanceof Property\Model)
@@ -203,9 +224,9 @@ class DocumentType extends AbstractForm
     }
 
     /**
-    * @param array $values
-    * @return Development_Form_DocumentType
-    */
+     * Initialize tabs sub form
+     * @return \Zend\Form\SubForm
+     */
     private function getTabs()
     {
         $sub_form = $this->getSubForm('tabs');
@@ -220,6 +241,11 @@ class DocumentType extends AbstractForm
         return $sub_form;
     }
 
+    /**
+     * Add tab sub form
+     * @param mixte \Gc\Tab\Model | array
+     * @return \Developpement\Form\DocumentType
+     */
     public function addTab($tab)
     {
         if(!is_array($tab) and !$tab instanceof Tab\Model)
@@ -257,6 +283,12 @@ class DocumentType extends AbstractForm
         return $this;
     }
 
+    /**
+     * Set values and create tabs and properties subform
+     * from parameter
+     * @param mixte \Gc\DocumentType\Model | array
+     * @return \Developpement\Form\DocumentType
+     */
     public function setValues($element)
     {
         if($element instanceof DocumentTypeModel)
@@ -313,8 +345,16 @@ class DocumentType extends AbstractForm
                 $this->addProperty($property);
             }
         }
+
+        return $this;
     }
 
+    /**
+     * Validate the form
+     *
+     * @param  array $data
+     * @return boolean
+     */
     public function isValid($data)
     {
         $this->setValues($data);

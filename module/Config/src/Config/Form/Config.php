@@ -11,12 +11,20 @@ use Gc\Form\AbstractForm,
 
 class Config extends AbstractForm
 {
+    /**
+     * Initialize Config form
+     * @return void
+     */
     public function init()
     {
         $this->setMethod(self::METHOD_POST);
-
     }
 
+    /**
+     * Initialize General sub form
+     *
+     * @return \Config\Form\Config
+     */
     protected function initGeneral()
     {
         //General settings
@@ -40,8 +48,15 @@ class Config extends AbstractForm
         $general_settings->addElements(array($name, $is_offline));
 
         $this->addSubForm($general);
+
+        return $this;
     }
 
+    /**
+     * Initialize System sub form
+     *
+     * @return \Config\Form\Config
+     */
     public function initSystem()
     {
         //Session settings
@@ -84,8 +99,15 @@ class Config extends AbstractForm
 
         $debug_settings->addElements(array($debug_is_active));
         $this->addSubForm($debug_settings, 'debug');
+
+        return $this;
     }
 
+    /**
+     * Initialize Server sub form
+     *
+     * @return \Config\Form\Config
+     */
     public function initServer()
     {
         //Local settings
@@ -116,5 +138,7 @@ class Config extends AbstractForm
 
         $mail_settings->addElements(array($mail_from, $mail_from_name));
         $this->addSubForm($mail_settings, 'mail');
+
+        return $this;
     }
 }

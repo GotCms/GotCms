@@ -10,6 +10,16 @@ use Gc\Mvc\Controller\Action,
 
 class RoleController extends Action
 {
+    /**
+     * Contains information about acl
+     * @var array $_acl_page
+     */
+    protected $_acl_page = array('resource' => 'Config', 'permission' => 'role');
+
+    /**
+     * List all roles
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function indexAction()
     {
         $roles = new Role\Collection();
@@ -17,6 +27,10 @@ class RoleController extends Action
         return array('roles' => $roles->getRoles());
     }
 
+    /**
+     * Create role
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function createAction()
     {
         $form = new RoleForm();
@@ -35,6 +49,10 @@ class RoleController extends Action
         return array('form' => $form);
     }
 
+    /**
+     * Delete role
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function deleteAction()
     {
         if($this->getRequest()->isPost())
@@ -50,6 +68,10 @@ class RoleController extends Action
         return $this->redirect()->toRoute('admin');
     }
 
+    /**
+     * Edit role
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function editAction()
     {
         $role_id = $this->getRouteMatch()->getParam('id');

@@ -12,6 +12,16 @@ use Config\Form\UserLogin,
 
 class UserController extends Action
 {
+    /**
+     * Contains information about acl
+     * @var array $_acl_page
+     */
+    protected $_acl_page = array('resource' => 'Config', 'permission' => 'user');
+
+    /**
+     * List all roles
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function indexAction()
     {
         $user_collection = new User\Collection();
@@ -19,6 +29,10 @@ class UserController extends Action
         return array('users' => $user_collection->getUsers());
     }
 
+    /**
+     * Login user
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function loginAction()
     {
         $this->layout()->setTemplate('layouts/one-page.phtml');
@@ -49,6 +63,10 @@ class UserController extends Action
         return array('form' => $login_form);
     }
 
+    /**
+     * Forgot password action
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function forgotPasswordAction()
     {
         $this->layout()->setTemplate('layouts/one-page.phtml');
@@ -66,6 +84,10 @@ class UserController extends Action
         return array('form' => $forgot_password_form);
     }
 
+    /**
+     * Logout action
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function logoutAction()
     {
         $this->getAuth()->getStorage()->clear();
@@ -73,6 +95,10 @@ class UserController extends Action
         return $this->redirect()->toRoute('admin');
     }
 
+    /**
+     * Craete user
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function createAction()
     {
         $form = new UserForm();
@@ -91,6 +117,10 @@ class UserController extends Action
         return array('form' => $form);
     }
 
+    /**
+     * Delete user
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function deleteAction()
     {
         $user_id = $this->getRouteMatch()->getParam('id');
@@ -103,6 +133,10 @@ class UserController extends Action
         return $this->redirect()->toRoute('userList');
     }
 
+    /**
+     * Edit user
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function editAction()
     {
         $user_id = $this->getRouteMatch()->getParam('id');

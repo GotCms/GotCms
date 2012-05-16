@@ -8,16 +8,20 @@ use Gc\Mvc\Controller\Action,
 
 class ViewController extends Action
 {
-    public function init()
-    {
-        /* Initialize action controller here */
-    }
+    /**
+     * Contains information about acl
+     * @var array $_acl_page
+     */
+    protected $_acl_page = array('resource' => 'Development', 'permission' => 'view');
 
     public function indexAction()
     {
 
     }
 
+    /**
+     * Create view
+     */
     public function createAction()
     {
         $view_form = new ViewForm();
@@ -45,12 +49,18 @@ class ViewController extends Action
         return array('form' => $view_form);
     }
 
+    /**
+     * List all views
+     */
     public function listAction()
     {
         $view_collection = new View\Collection();
         return array('views' => $view_collection->getViews());
     }
 
+    /**
+     * Edit view
+     */
     public function editAction()
     {
         $view_id = $this->getRouteMatch()->getParam('id', NULL);
@@ -80,6 +90,9 @@ class ViewController extends Action
         return array('form' => $form);
     }
 
+    /**
+     * Delete View
+     */
     public function deleteAction()
     {
         $view_id = $this->getRouteMatch()->getParam('id', NULL);

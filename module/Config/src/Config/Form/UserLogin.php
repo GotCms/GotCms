@@ -7,6 +7,10 @@ use Gc\Form\AbstractForm,
 
 class UserLogin extends AbstractForm
 {
+    /**
+     * Initialize UserLogin form
+     * @return void
+     */
     public function init()
     {
         $this->setMethod(self::METHOD_POST);

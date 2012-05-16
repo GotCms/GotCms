@@ -7,6 +7,10 @@ use Gc\Form\AbstractForm,
 
 class UserForgotPassword extends AbstractForm
 {
+    /**
+     * Initialize UserForgotPassword form
+     * @return void
+     */
     public function init()
     {
         $this->setMethod(self::METHOD_POST);

@@ -8,6 +8,10 @@ use Gc\Form\AbstractForm,
 
 class Datatype extends AbstractForm
 {
+    /**
+     * Init Datatype form
+     * @return void
+     */
     public function init()
     {
         $this->setMethod(self::METHOD_POST);

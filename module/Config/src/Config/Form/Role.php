@@ -9,6 +9,10 @@ use Gc\Form\AbstractForm,
 
 class Role extends AbstractForm
 {
+    /**
+     * Initialize Role form
+     * @return void
+     */
     public function init()
     {
         $this->setMethod(self::METHOD_POST);
@@ -31,6 +35,11 @@ class Role extends AbstractForm
         $this->addElements(array($name, $description, $submit));
     }
 
+    /**
+     * Initialize permissions
+     *
+     * @return \Config\Form\Role
+     */
     public function initPermissions($user_permissions = NULL)
     {
         $permissions_table = new Permission\Collection();

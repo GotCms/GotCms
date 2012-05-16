@@ -9,19 +9,20 @@ use Gc\Mvc\Controller\Action,
 
 class DatatypeController extends Action
 {
-
-    protected $_datatype;
-
-    public function init()
-    {
-        /* Initialize action controller here */
-    }
+    /**
+     * Contains information about acl
+     * @var array $_acl_page
+     */
+    protected $_acl_page = array('resource' => 'Development', 'permission' => 'datatype');
 
     public function indexAction()
     {
         // action body
     }
 
+    /**
+     * Create Datatype
+     */
     public function createAction()
     {
         $datatype = new Datatype\Model();
@@ -56,6 +57,9 @@ class DatatypeController extends Action
         return array('form' => $form);
     }
 
+    /**
+     * List all datatypes
+     */
     public function listAction()
     {
         $datatypes = new Datatype\Collection();
@@ -63,6 +67,9 @@ class DatatypeController extends Action
         return array('datatypes' => $datatypes->getDatatypes());
     }
 
+    /**
+     * Edit datatype
+     */
     public function editAction()
     {
         $datatype = Datatype\Model::loadDatatype($this->_routeMatch->getParam('id'));
@@ -116,6 +123,9 @@ class DatatypeController extends Action
         return array('form' => $form);
     }
 
+    /**
+     * Delete datatype
+     */
     public function deleteAction()
     {
         $datatype_id = $this->getRouteMatch()->getParam('id', NULL);

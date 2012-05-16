@@ -8,15 +8,19 @@ use Gc\Mvc\Controller\Action,
 
 class LayoutController extends Action
 {
-    protected $_acl_page = array('resource' => 'Development', 'permission' => 'layouts');
-    public function init()
-    {
-    }
+    /**
+     * Contains information about acl
+     * @var array $_acl_page
+     */
+    protected $_acl_page = array('resource' => 'Development', 'permission' => 'layout');
 
     public function indexAction()
     {
     }
 
+    /**
+     * Create Layout
+     */
     public function createAction()
     {
         $layout_form = new LayoutForm();
@@ -44,12 +48,18 @@ class LayoutController extends Action
         return array('form' => $layout_form);
     }
 
+    /**
+     * List all layouts
+     */
     public function listAction()
     {
         $layouts = new Layout\Collection();
         return array('layouts' => $layouts->getLayouts());
     }
 
+    /**
+     * Edit layout
+     */
     public function editAction()
     {
         $layout_id = $this->getRouteMatch()->getParam('id', NULL);
@@ -79,6 +89,9 @@ class LayoutController extends Action
         return array('form' => $layout_form);
     }
 
+    /**
+     * Delete layout
+     */
     public function deleteAction()
     {
         $layout_id = $this->getRouteMatch()->getParam('id', NULL);
