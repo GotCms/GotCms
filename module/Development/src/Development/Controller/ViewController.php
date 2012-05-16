@@ -21,7 +21,7 @@ class ViewController extends Action
     public function createAction()
     {
         $view_form = new ViewForm();
-        $view_form->setAction($this->url()->fromRoute('viewAdd'));
+        $view_form->setAction($this->url()->fromRoute('viewCreate'));
 
         if($this->getRequest()->isPost())
         {
@@ -37,7 +37,7 @@ class ViewController extends Action
                 $view_model->setContent($view_form->getValue('content'));
                 $view_model->save();
 
-                $this->redirect()->toRoute('viewAdd');
+                $this->redirect()->toRoute('viewCreate');
                 return;
             }
         }

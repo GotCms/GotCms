@@ -26,7 +26,7 @@ class DatatypeController extends Action
     {
         $datatype = new Datatype\Model();
         $form = new DatatypeForm();
-        $form->setAction($this->url()->fromRoute('datatypeAdd'));
+        $form->setAction($this->url()->fromRoute('datatypeCreate'));
         $post = $this->getRequest()->post()->toArray();
         if($this->getRequest()->isPost() AND $form->isValid($post))
         {

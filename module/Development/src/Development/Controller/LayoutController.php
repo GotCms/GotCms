@@ -20,7 +20,7 @@ class LayoutController extends Action
     public function createAction()
     {
         $layout_form = new LayoutForm();
-        $layout_form->setAction($this->url()->fromRoute('layoutAdd'));
+        $layout_form->setAction($this->url()->fromRoute('layoutCreate'));
 
         if($this->getRequest()->isPost())
         {
@@ -36,7 +36,7 @@ class LayoutController extends Action
                 $layout->setContent($layout_form->getValue('content'));
                 $layout->save();
 
-                $this->redirect()->toRoute('layoutAdd');
+                $this->redirect()->toRoute('layoutCreate');
                 return;
             }
         }

@@ -10,7 +10,6 @@ use Gc\Db\AbstractTable,
 class Model extends AbstractTable implements IterableInterface
 {
     protected $_name = 'datatype';
-    static protected $_datatypes = array();
 
     public function setPrevalueValue($value)
     {
