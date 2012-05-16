@@ -260,7 +260,7 @@ var Gc = (function($)
 
                     switch($action){
                         case 'new':
-                            if($id != undefined)
+                            if(!$this.isEmpty($id))
                             {
                                 $url += '/parent/'+$id;
                             }
