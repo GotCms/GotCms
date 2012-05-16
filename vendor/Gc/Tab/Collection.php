@@ -21,9 +21,9 @@ class Collection extends AbstractTable
         $document_type_id = $this->getDocumentTypeId();
         if(empty($tabs) or $force_reload == TRUE)
         {
-            if(empty($document_type_id))
+            if(!empty($document_type_id))
             {
-                $rows = $this->select('document_type_id = ?', $document_type_id);
+                $rows = $this->select(array('document_type_id' => $document_type_id));
             }
             else
             {
