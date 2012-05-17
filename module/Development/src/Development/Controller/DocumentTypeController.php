@@ -41,9 +41,13 @@ class DocumentTypeController extends Action
      */
     protected $_acl_page = array('resource' => 'Development', 'permission' => 'document-type');
 
+    /**
+     * List all document types
+     */
     public function indexAction()
     {
-        // action body
+        $documents = new DocumentType\Collection();
+        return array('documents' => $documents->getDocumentTypes());
     }
 
     /**
@@ -309,15 +313,6 @@ class DocumentTypeController extends Action
         }
 
         return array('form' => $form);
-    }
-
-    /**
-     * List all document types
-     */
-    public function listAction()
-    {
-        $documents = new DocumentType\Collection();
-        return array('documents' => $documents->getDocumentTypes());
     }
 
     /**

@@ -39,8 +39,13 @@ class LayoutController extends Action
      */
     protected $_acl_page = array('resource' => 'Development', 'permission' => 'layout');
 
+    /**
+     * List all layouts
+     */
     public function indexAction()
     {
+        $layouts = new Layout\Collection();
+        return array('layouts' => $layouts->getLayouts());
     }
 
     /**
@@ -71,15 +76,6 @@ class LayoutController extends Action
         }
 
         return array('form' => $layout_form);
-    }
-
-    /**
-     * List all layouts
-     */
-    public function listAction()
-    {
-        $layouts = new Layout\Collection();
-        return array('layouts' => $layouts->getLayouts());
     }
 
     /**

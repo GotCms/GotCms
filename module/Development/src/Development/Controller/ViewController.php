@@ -39,9 +39,13 @@ class ViewController extends Action
      */
     protected $_acl_page = array('resource' => 'Development', 'permission' => 'view');
 
+    /**
+     * List all views
+     */
     public function indexAction()
     {
-
+        $view_collection = new View\Collection();
+        return array('views' => $view_collection->getViews());
     }
 
     /**
@@ -72,15 +76,6 @@ class ViewController extends Action
         }
 
         return array('form' => $view_form);
-    }
-
-    /**
-     * List all views
-     */
-    public function listAction()
-    {
-        $view_collection = new View\Collection();
-        return array('views' => $view_collection->getViews());
     }
 
     /**

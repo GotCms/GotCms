@@ -40,9 +40,14 @@ class DatatypeController extends Action
      */
     protected $_acl_page = array('resource' => 'Development', 'permission' => 'datatype');
 
+    /**
+     * List all datatypes
+     */
     public function indexAction()
     {
-        // action body
+        $datatypes = new Datatype\Collection();
+
+        return array('datatypes' => $datatypes->getDatatypes());
     }
 
     /**
@@ -80,16 +85,6 @@ class DatatypeController extends Action
         }
 
         return array('form' => $form);
-    }
-
-    /**
-     * List all datatypes
-     */
-    public function listAction()
-    {
-        $datatypes = new Datatype\Collection();
-
-        return array('datatypes' => $datatypes->getDatatypes());
     }
 
     /**
