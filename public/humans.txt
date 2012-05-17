@@ -3,7 +3,7 @@
 
 
 /* TEAM */
-  GotCMS:
+  Got CMS:
   Site owner and maintainer
   http://got-cms.com
 
@@ -20,5 +20,5 @@
 /* SITE */
   Standards: HTML5, CSS3
   Components: Modernizr, jQuery
-  Software: PostgreSQL / jQuery / PHP5 / GotCMS / CodeMirror
+  Software: PostgreSQL / jQuery / PHP5 / Got CMS / CodeMirror
 
