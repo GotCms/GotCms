@@ -42,6 +42,7 @@ class DatatypeController extends Action
 
     /**
      * List all datatypes
+     * @return \Zend\View\Model\ViewModel|array
      */
     public function indexAction()
     {
@@ -52,6 +53,7 @@ class DatatypeController extends Action
 
     /**
      * Create Datatype
+     * @return \Zend\View\Model\ViewModel|array
      */
     public function createAction()
     {
@@ -89,6 +91,7 @@ class DatatypeController extends Action
 
     /**
      * Edit datatype
+     * @return \Zend\View\Model\ViewModel|array
      */
     public function editAction()
     {
@@ -145,6 +148,7 @@ class DatatypeController extends Action
 
     /**
      * Delete datatype
+     * @return \Zend\View\Model\ViewModel|array
      */
     public function deleteAction()
     {

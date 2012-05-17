@@ -41,6 +41,7 @@ class ViewController extends Action
 
     /**
      * List all views
+     * @return \Zend\View\Model\ViewModel
      */
     public function indexAction()
     {
@@ -50,6 +51,7 @@ class ViewController extends Action
 
     /**
      * Create view
+     * @return \Zend\View\Model\ViewModel
      */
     public function createAction()
     {
@@ -80,6 +82,7 @@ class ViewController extends Action
 
     /**
      * Edit view
+     * @return \Zend\View\Model\ViewModel
      */
     public function editAction()
     {
@@ -112,6 +115,7 @@ class ViewController extends Action
 
     /**
      * Delete View
+     * @return \Zend\View\Model\ViewModel
      */
     public function deleteAction()
     {

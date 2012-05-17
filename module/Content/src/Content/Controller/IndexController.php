@@ -62,6 +62,9 @@ class IndexController extends Action
         $this->layout()->setVariable('routes', Json::encode($array_routes));
     }
 
+    /**
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function indexAction()
     {
     }

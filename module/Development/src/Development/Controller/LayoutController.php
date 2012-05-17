@@ -41,6 +41,7 @@ class LayoutController extends Action
 
     /**
      * List all layouts
+     * @return \Zend\View\Model\ViewModel
      */
     public function indexAction()
     {
@@ -50,6 +51,7 @@ class LayoutController extends Action
 
     /**
      * Create Layout
+     * @return \Zend\View\Model\ViewModel
      */
     public function createAction()
     {
@@ -80,6 +82,7 @@ class LayoutController extends Action
 
     /**
      * Edit layout
+     * @return \Zend\View\Model\ViewModel
      */
     public function editAction()
     {
@@ -112,6 +115,7 @@ class LayoutController extends Action
 
     /**
      * Delete layout
+     * @return \Zend\View\Model\ViewModel
      */
     public function deleteAction()
     {

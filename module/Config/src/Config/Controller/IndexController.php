@@ -36,7 +36,6 @@ class IndexController extends Action
      */
     public function indexAction()
     {
-        return array('message' => 'azdazd');
     }
 
 }

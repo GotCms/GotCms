@@ -31,6 +31,9 @@ use Gc\Mvc\Controller\Action;
 
 class IndexController extends Action
 {
+    /**
+     * @return \Zend\View\Model\ViewModel
+     */
     public function indexAction()
     {
     }

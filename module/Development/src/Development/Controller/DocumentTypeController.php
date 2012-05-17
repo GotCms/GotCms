@@ -43,6 +43,7 @@ class DocumentTypeController extends Action
 
     /**
      * List all document types
+     * @return \Zend\View\Model\ViewModel|array
      */
     public function indexAction()
     {
@@ -52,6 +53,7 @@ class DocumentTypeController extends Action
 
     /**
      * Create document type
+     * @return \Zend\View\Model\ViewModel|array
      */
     public function createAction()
     {
@@ -167,6 +169,7 @@ class DocumentTypeController extends Action
 
     /**
      * Edit document type
+     * @return \Zend\View\Model\ViewModel|array
      */
     public function editAction()
     {
@@ -317,6 +320,7 @@ class DocumentTypeController extends Action
 
     /**
      * Delete Document type
+     * @return \Zend\View\Model\ViewModel|array
      */
     public function deleteAction()
     {
@@ -336,6 +340,7 @@ class DocumentTypeController extends Action
 
     /**
      * Add tab in session
+     * @return \Zend\View\Model\JsonModel
      */
     public function addTabAction()
     {
@@ -379,6 +384,7 @@ class DocumentTypeController extends Action
 
     /**
      * Delete tab in session
+     * @return \Zend\View\Model\JsonModel
      */
     public function deleteTabAction()
     {
@@ -409,6 +415,7 @@ class DocumentTypeController extends Action
 
     /**
      * Add property in session
+     * @return \Zend\View\Model\JsonModel
      */
     public function addPropertyAction()
     {
@@ -480,6 +487,7 @@ class DocumentTypeController extends Action
 
     /**
      * Delete property in session
+     * @return \Zend\View\Model\JsonModel
      */
     public function deletePropertyAction()
     {
