@@ -10,20 +10,15 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         //Save prevalue in column Datatypes\prevalue_value
         $post = $this->getRequest()->post();
-        $rows = $request->get('rows', '');
-        $cols = $request->get('cols','');
-        $wrap = $request->get('wrap','');
-        $options = $request->get('options','');
-        $disabled = !empty($options[0]) ? $options[0] : '';
-        $readonly = !empty($options[1]) ? $options[1] : '';
+        $rows = $post->get('rows', NULL);
+        $cols = $post->get('cols', NULL);
+        $wrap = $post->get('wrap', NULL);
 
         $this->setConfig(array(
             'cols' => $cols
             , 'rows' => $rows
             , 'wrap' => $wrap
-            , 'disabled' => $disabled
-            , 'readonly' => $readonly)
-        );
+        ));
     }
 
     public function load()
@@ -34,8 +29,6 @@ class PrevalueEditor extends AbstractPrevalueEditor
             - wrap     :   Possible values are : hard / off / soft
                                 define if line returns are automatic (hard / soft)
                                 or if the horizontal display if exceeded (off)
-            - disabled :   Render the zone grey and unmodifiable
-            - readonly :   Render the zone unmodifiable but don't change appearance
         */
 
         $config = $this->getConfig();
@@ -61,27 +54,6 @@ class PrevalueEditor extends AbstractPrevalueEditor
             $wrap->setValue($config['wrap']);
         }
 
-
-        $options = new Element\MultiCheckbox('Options', array(
-                'multiOptions' => array(
-                'disabled' => 'Disabled',
-                'readonly' => 'Readonly'
-            )
-        ));
-
-        $arrayOptions = array();
-        if(!empty($config['disabled']))
-        {
-            $arrayOptions[] = $config['disabled'];
-        }
-
-        if(!empty($config['readonly']))
-        {
-            $arrayOptions[] = $config['readonly'];
-        }
-
-        $options->setValue($arrayOptions);
-
-        return array($cols, $rows, $wrap, $options);
+        return array($cols, $rows, $wrap);
     }
 }

@@ -14,9 +14,18 @@ class Editor extends AbstractEditor
 
     public function load()
     {
+        $config = $this->getConfig();
         $textarea = new Element\Textarea($this->getName());
         $textarea->setLabel($this->getProperty()->getName());
         $textarea->setValue($this->getProperty()->getValue());
+
+        foreach($config as $key => $value)
+        {
+            if(!empty($value))
+            {
+                $textarea->setAttrib($key, $value);
+            }
+        }
 
         return $textarea;
     }

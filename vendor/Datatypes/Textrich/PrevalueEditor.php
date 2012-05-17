@@ -11,7 +11,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $this->setConfiguration(array());
 
-        return $this->getConfiguration();
+        return $this->getConfig();
     }
 
     public function load() {

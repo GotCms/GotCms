@@ -57,12 +57,12 @@ abstract class AbstractEditor extends Object
         return $this->getProperty()->saveValue();
     }
 
-    protected function getConfiguration()
+    protected function getConfig()
     {
         return $this->getDatatype()->getParameters();
     }
 
-    protected function setConfiguration($value)
+    protected function setConfig($value)
     {
         $this->getDatatype()->setParameters($value);
 

@@ -14,7 +14,7 @@ class Editor extends AbstractEditor
 
     public function load()
     {
-        $parameters = $this->getConfiguration();
+        $parameters = $this->getConfig();
         $property = $this->getProperty();
         $textstring = new Element\Text($this->getName());
         $textstring->setLabel($property->getName());
