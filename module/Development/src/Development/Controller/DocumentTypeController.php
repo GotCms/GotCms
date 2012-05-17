@@ -215,10 +215,18 @@ class DocumentTypeController extends Action
         }
         else
         {
+            if($validator = $form->getSubForm('infos')->getElement('name')->getValidator('Zend\Validator\Db\NoRecordExists'))
+            {
+                $validator->setExclude(array('field' => 'id', 'value' => $document_type->getId()));
+            }
+
             $post_data = $this->getRequest()->post()->toArray();
             if(!$form->isValid($post_data))
             {
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Can save document_type');
+                var_dump($post_data);
+                var_dump($form->getErrors());
+                die();
             }
             else
             {
