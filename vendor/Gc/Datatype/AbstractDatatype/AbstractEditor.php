@@ -59,7 +59,7 @@ abstract class AbstractEditor extends Object
 
     protected function getConfig()
     {
-        return $this->getDatatype()->getParameters();
+        return @unserialize($this->getDatatype()->getConfig());
     }
 
     protected function setConfig($value)
