@@ -138,7 +138,7 @@ class Config extends AbstractForm
 		//Local settings
 		$locale_settings = new SubForm();
 
-		$locale = new Element\Select();
+		$locale = new Element\Select('locale');
 		$locale->setRequired(TRUE)
 			->setLabel('Server locale')
 			->addMultiOptions(Locale::getLocaleList());
