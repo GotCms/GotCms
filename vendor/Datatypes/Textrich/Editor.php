@@ -6,9 +6,9 @@ use Gc\Datatype\AbstractDatatype\AbstractEditor,
 
 class Editor extends AbstractEditor
 {
-    public function save($request = null)
+    public function save()
     {
-        $value = $request->getRequest()->post()->get($this->getName());
+        $value = $this->getRequest()->post()->get($this->getName());
         $this->setValue($value);
     }
 

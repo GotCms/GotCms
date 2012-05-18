@@ -6,15 +6,12 @@ use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
 class PrevalueEditor extends AbstractPrevalueEditor
 {
 
-    public function save($request = null) {
-        //Save prevalue in column Datatypes\prevalue_value
-
-        $this->setConfiguration(array());
-
-        return $this->getConfig();
+    public function save()
+    {
     }
 
-    public function load() {
+    public function load()
+    {
         $parameters = $this->getParameters();
         $element = new Element\MultiCheckbox('textrich', array(
                 'multiOptions' => array(
@@ -22,6 +19,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             )
         ));
         $element->setValue(array('bar', 'bat'));
+
         return array($element);
     }
 }
