@@ -27,70 +27,65 @@
 namespace Config\Controller;
 
 use Gc\Mvc\Controller\Action,
-	Gc\Core\Config,
-	Config\Form\Config as configForm;
+    Gc\Core\Config,
+    Config\Form\Config as configForm;
 
 class CmsController extends Action
 {
-	/**
-	 * @var \Config\Form\Config $_form
-	 */
-	protected $_form;
+    /**
+     * @var \Config\Form\Config $_form
+     */
+    protected $_form;
 
-	/**
-	 * Contains information about acl
-	 * @var array
-	 */
-	protected $_acl_page = array('resource' => 'Config', 'permission' => 'system');
+    /**
+     * Contains information about acl
+     * @var array
+     */
+    protected $_acl_page = array('resource' => 'Config', 'permission' => 'system');
 
-	/**
-	 * Initialize controller
-	 * @return void
-	 */
-	public function init()
-	{
-		$this->_form = new configForm();
-	}
+    /**
+     * Generate general configuration form
+     *
+     * @return void
+     */
+    public function editGeneralAction()
+    {
+        $this->_form = new configForm();
+        $this->_form->initGeneral();
+        return $this->forward()->dispatch('config-cms', array('controller' => 'config-cms', 'action' => 'edit'));
+    }
 
-	/**
-	 * Generate general configuration form
-	 *
-	 * @return void
-	 */
-	public function editGeneralAction()
-	{
-		$this->_form->initGeneral();
-		return $this->forward()->dispatch('config-cms', array('controller' => 'config-cms', 'action' => 'edit'));
-	}
+    /**
+     * Generate system configuration form
+     *
+     * @return void
+     */
+    public function editSystemAction()
+    {
+        $this->_form = new configForm();
+        $this->_form->initSystem();
+        return $this->forward()->dispatch('config-cms', array('controller' => 'config-cms', 'action' => 'edit'));
+    }
 
-	/**
-	 * Generate system configuration form
-	 *
-	 * @return void
-	 */
-	public function editSystemAction()
-	{
-		$this->_form->initSystem();
-		return $this->forward()->dispatch('config-cms', array('controller' => 'config-cms', 'action' => 'edit'));
-	}
+    /**
+     * Generate server configuration form
+     *
+     * @return void
+     */
+    public function editServerAction()
+    {
+        $this->_form = new configForm();
+        $this->_form->initServer();
+        return $this->forward()->dispatch('config-cms', array('controller' => 'config-cms', 'action' => 'edit'));
+    }
 
-	/**
-	 * Generate server configuration form
-	 *
-	 * @return void
-	 */
-	public function editServerAction()
-	{
-		$this->_form->initServer();
-		return $this->forward()->dispatch('config-cms', array('controller' => 'config-cms', 'action' => 'edit'));
-	}
-
-	/**
-	 * Generate form and display
-	 *
-	 * @return \Zend\View\Model\ViewModel|array
-	 */
-	public function editAction()
-	{
-	}
+    /**
+     * Generate form and display
+     *
+     * @return \Zend\View\Model\ViewModel|array
+     */
+    public function editAction()
+    {
+        return array('form' => $this->_form);
+    }
 }
