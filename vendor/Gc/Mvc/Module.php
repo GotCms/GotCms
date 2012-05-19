@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Mvc
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\Mvc;
 
@@ -12,8 +37,16 @@ use Zend,
 
 class Module implements AutoloaderProvider
 {
+    /**
+     * @var array
+     */
     protected $_config;
 
+    /**
+     * Initialize module
+     * @param \Zend\Module\Manager $moduleManager
+     * @return void
+     */
     public function init(Manager $moduleManager)
     {
         $events = $moduleManager->events();
@@ -21,6 +54,10 @@ class Module implements AutoloaderProvider
         $sharedEvents->attach('bootstrap', 'bootstrap', array($this, 'initializeView'), 100);
     }
 
+    /**
+     * get autoloader config
+     * @return array
+     */
     public function getAutoloaderConfig()
     {
         return array(
@@ -35,6 +72,10 @@ class Module implements AutoloaderProvider
         );
     }
 
+    /**
+     * Get module configuration
+     * @return array
+     */
     public function getConfig()
     {
         if(empty($this->_config))
@@ -59,6 +100,11 @@ class Module implements AutoloaderProvider
         return $this->_config;
     }
 
+    /**
+     * Initialize view
+     * @param \Zend\EventManager\Event $e
+     * @return void
+     */
     public function initializeView(Event $e)
     {
         $app          = $e->getParam('application');
@@ -74,11 +120,19 @@ class Module implements AutoloaderProvider
         $renderer->plugin('basePath')->setBasePath($basePath);
     }
 
+    /**
+     * Get module dir
+     * @return string
+     */
     protected function _getDir()
     {
         return $this->_directory;
     }
 
+    /**
+     * get module namespace
+     * @return string
+     */
     protected function _getNamespace()
     {
         return $this->_namespace;

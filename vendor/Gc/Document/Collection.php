@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Document
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\Document;
 
@@ -7,8 +32,16 @@ use Gc\Db\AbstractTable,
 
 class Collection extends AbstractTable implements IterableInterface
 {
+    /**
+     * @var string
+     */
     protected $_name = 'document';
 
+    /**
+     * Load document collection
+     * @param integer @parent_id
+     * @return void
+     */
     public function load($parent_id = NULL)
     {
         if($parent_id !== NULL)
@@ -18,6 +51,10 @@ class Collection extends AbstractTable implements IterableInterface
         }
     }
 
+    /**
+     * Initialize documents
+     * @return \Gc\Document\Collection
+     */
     private function setDocuments()
     {
         $parent_id = $this->getParentId();
@@ -38,8 +75,14 @@ class Collection extends AbstractTable implements IterableInterface
         }
 
         $this->setData('documents', $documents);
+
+        return $this;
     }
 
+    /**
+     * Return array for input select
+     * @return array
+     */
     public function getSelect()
     {
         $documents = $this->getDocuments();
@@ -58,56 +101,56 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getParent()
-    */
+     * @see include \Gc\Component\IterableInterface#getParent()
+     */
     public function getParent()
     {
         return FALSE;
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getChildren()
-    */
+     * @see include \Gc\Component\IterableInterface#getChildren()
+     */
     public function getChildren()
     {
         return $this->getDocuments();
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getId()
-    */
+     * @see include \Gc\Component\IterableInterface#getId()
+     */
     public function getId()
     {
         return FALSE;
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getIcon()
-    */
+     * @see include \Gc\Component\IterableInterface#getIcon()
+     */
     public function getIcon()
     {
         return 'folder';
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getIterableId()
-    */
+     * @see include \Gc\Component\IterableInterface#getIterableId()
+     */
     public function getIterableId()
     {
         return 'documents';
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getName()
-    */
+     * @see include \Gc\Component\IterableInterface#getName()
+     */
     public function getName()
     {
         return 'Website';
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getUrl()
-    */
+     * @see include \Gc\Component\IterableInterface#getUrl()
+     */
     public function getUrl()
     {
         return NULL;

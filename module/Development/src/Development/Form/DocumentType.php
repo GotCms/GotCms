@@ -194,7 +194,7 @@ class DocumentType extends AbstractForm
 
     /**
      * Add property sub form
-     * @param mixte \Gc\Property\Model | array
+     * @param mixed \Gc\Property\Model | array
      * @return \Developpement\Form\DocumentType
      */
     public function addProperty($property)
@@ -273,7 +273,7 @@ class DocumentType extends AbstractForm
 
     /**
      * Add tab sub form
-     * @param mixte \Gc\Tab\Model | array
+     * @param mixed \Gc\Tab\Model | array
      * @return \Developpement\Form\DocumentType
      */
     public function addTab($tab)
@@ -316,7 +316,7 @@ class DocumentType extends AbstractForm
     /**
      * Set values and create tabs and properties subform
      * from parameter
-     * @param mixte \Gc\DocumentType\Model | array
+     * @param mixed \Gc\DocumentType\Model | array
      * @return \Developpement\Form\DocumentType
      */
     public function setValues($element)

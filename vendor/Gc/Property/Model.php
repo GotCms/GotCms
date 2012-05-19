@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Property
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\Property;
 
@@ -6,19 +31,21 @@ use Gc\Db\AbstractTable;
 
 class Model extends AbstractTable
 {
-    protected         $_value;
-    protected         $_name = 'property';
     /**
-    * @param integer $defaultId
-    */
-    public function load()
-    {
-    }
+     * @var \Gc\Property\Value\Model
+     */
+    protected         $_value;
 
     /**
-    * @param Boolean $value
-    * @return mixte boolean, this
-    */
+     * @var string
+     */
+    protected         $_name = 'property';
+
+    /**
+     * Get if property is required or not
+     * @param Boolean $value to set value
+     * @return mixte
+     */
     public function isRequired($value = NULL)
     {
         if($value === NULL)
@@ -38,6 +65,10 @@ class Model extends AbstractTable
         return $this;
     }
 
+    /**
+     * Get property order
+     * @return integer
+     */
     public function getOrder()
     {
         if($this->getData('order') === NULL)
@@ -49,9 +80,10 @@ class Model extends AbstractTable
     }
 
     /**
-    * @param mixte $value
-    * @return $this
-    */
+     * Set property value
+     * @param mixte $value
+     * @return \Gc\Property\Model
+     */
     public function setValue($value)
     {
         $this->_value->setValue($value);
@@ -59,6 +91,10 @@ class Model extends AbstractTable
         return $this;
     }
 
+    /**
+     * Load property value
+     * @return void
+     */
     public function loadValue()
     {
         $property_value = new Value\Model();
@@ -66,9 +102,11 @@ class Model extends AbstractTable
 
         $this->_value = $property_value;
     }
+
     /**
-    * @return mixte
-    */
+     * Return property value
+     * @return mixte
+     */
     public function getValue()
     {
         if(empty($this->_value))
@@ -79,6 +117,10 @@ class Model extends AbstractTable
         return $this->_value->getValue();
     }
 
+    /**
+     * Save property value
+     * @return boolean
+     */
     public function saveValue()
     {
         $value = $this->getValue();
@@ -94,8 +136,9 @@ class Model extends AbstractTable
     }
 
     /**
-    * @return boolean
-    */
+     * Save property
+     * @return integer
+     */
     public function save()
     {
         $array_save = array(
@@ -133,9 +176,11 @@ class Model extends AbstractTable
 
         return FALSE;
     }
+
     /**
-    * @return boolean
-    */
+     * Delete property
+     * @return boolean
+     */
     public function delete()
     {
         $id = $this->getId();
@@ -157,10 +202,12 @@ class Model extends AbstractTable
 
         return FALSE;
     }
+
     /**
-    * @param array $array
-    * @return Model
-    */
+     * Initiliaze model from array
+     * @param array $array
+     * @return \Gc\Property\Model
+     */
     static function fromArray(Array $array)
     {
         $property = new Model();
@@ -170,9 +217,10 @@ class Model extends AbstractTable
     }
 
     /**
-    * @param integer $id
-    * @return Model
-    */
+     * Initiliaze model from id
+     * @param integer $id
+     * @return \Gc\Property\Model
+     */
     static function fromId($id)
     {
         $property_table = new Model();

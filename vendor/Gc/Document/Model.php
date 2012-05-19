@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Document
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\Document;
 
@@ -8,15 +33,31 @@ use Gc\Db\AbstractTable,
 
 class Model extends AbstractTable implements IterableInterface
 {
+    /**
+     * @TODO set icon
+     */
     protected $_icon;
+
+    /**
+     * @var string
+     */
     protected $_name = 'document';
 
+    /**
+     * @const STATUS_DISABLE
+     */
     const STATUS_DISABLE     = 0;
+
+    /**
+     * @const STATUS_ENABLE
+     */
     const STATUS_ENABLE      = 1;
 
     /**
-    * @param integer $document_id
-    */
+     * Initiliaz document
+     * @param integer $document_id
+     * @return void
+     */
     public function init($document_id = NULL)
     {
         if(!empty($document_id))
@@ -27,7 +68,10 @@ class Model extends AbstractTable implements IterableInterface
         $this->getChildren();
     }
 
-
+    /**
+     * get View Model
+     * @return \Gc\View\Model
+     */
     public function getView()
     {
         if($this->getData('view') == NULL)
@@ -41,17 +85,12 @@ class Model extends AbstractTable implements IterableInterface
 
         return $this->getData('view');
     }
-    /**
-    * @return boolean
-    */
-    public function setShowInNav($is_show = NULL)
-    {
-       return $this->showInNav($is_show);
-    }
 
     /**
-    * @return boolean
-    */
+     * Define if document is show in navigation
+     * @param optional $is_show
+     * @return boolean
+     */
     public function showInNav($is_show = NULL)
     {
         if(!empty($is_show))
@@ -63,22 +102,27 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @return boolean
-    */
+     * Get document status
+     * @return boolean
+     */
     public function getStatus()
     {
         return (bool)$this->getData('status') != FALSE ? TRUE : FALSE;
     }
 
+    /**
+     * @return $this->getStatus
+     */
     public function isPublished()
     {
         return $this->getStatus();
     }
 
     /**
-    * @param array $values
-    * @return Model
-    */
+     * Initialize document from array
+     * @param array $values
+     * @return \Gc\Document\Model
+     */
     static function fromArray(array $array)
     {
         $document_table = new Model();
@@ -88,9 +132,10 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param array $document_id
-    * @return Model | FALSE
-    */
+     * Initiliaze document from id
+     * @param array $document_id
+     * @return \Gc\Document\Model
+     */
     static function fromId($document_id)
     {
         $document_table = new Model();
@@ -106,9 +151,10 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param array $urlKey
-    * @return Model | FALSE
-    */
+     * Initiliaze from url
+     * @param string $url_key
+     * @return \Gc\Document\Model
+     */
     static function fromUrlKey($url_key)
     {
         $document_table = new Model();
@@ -125,8 +171,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @return boolean
-    */
+     * Save Model
+     * @return integer
+     */
     public function save()
     {
         $array_save = array(
@@ -161,8 +208,8 @@ class Model extends AbstractTable implements IterableInterface
         catch (Exception $e)
         {
             /**
-            * TODO(Make \Gc\Error)
-            */
+             * TODO(Make \Gc\Error)
+             */
             \Gc\Error::set(get_class($this),$e);
         }
 
@@ -170,8 +217,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @return boolean
-    */
+     * Delete document
+     * @return boolean
+     */
     public function delete()
     {
         $document_id = $this->getId();
@@ -197,26 +245,25 @@ class Model extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getName()
-    */
+     * @see include \Gc\Component\IterableInterface#getName()
+     */
     public function getName()
     {
         return $this->getData('name');
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getId()
-    */
+     * @see include \Gc\Component\IterableInterface#getId()
+     */
     public function getId()
     {
         return $this->getData('id');
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getParent()
-    */
+     * @see include \Gc\Component\IterableInterface#getParent()
+     */
     public function getParent()
     {
         $parent_id = $this->getData('parent_id');
@@ -225,8 +272,8 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getChildren()
-    */
+     * @see include \Gc\Component\IterableInterface#getChildren()
+     */
     public function getChildren()
     {
         if($this->getData('children') === NULL)
@@ -240,8 +287,8 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getIcon()
-    */
+     * @see include \Gc\Component\IterableInterface#getIcon()
+     */
     public function getIcon()
     {
         if($this->getData('icon') === NULL)
@@ -274,16 +321,16 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getIterableId()
-    */
+     * @see include \Gc\Component\IterableInterface#getIterableId()
+     */
     public function getIterableId()
     {
         return 'document_'.$this->getId();
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getUrl()
-    */
+     * @see include \Gc\Component\IterableInterface#getUrl()
+     */
     public function getUrl()
     {
         return $GLOBALS['application']->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));

@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  DocumentType
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\DocumentType;
 
@@ -10,8 +35,20 @@ use Gc\Db\AbstractTable,
 
 class Model extends AbstractTable implements IterableInterface
 {
+    /**
+     * @var string
+     */
     protected $_name = 'document_type';
 
+    /**
+     * @var integer
+     */
+    protected $_views = array();
+
+    /**
+     * Get user model
+     * @return \Gc\Model\user
+     */
     public function getUser()
     {
         if($this->getData('user') === NULL AND $this->getUserId() != NULL)
@@ -22,12 +59,20 @@ class Model extends AbstractTable implements IterableInterface
         return $this->getData('user');
     }
 
+    /**
+     * Add view
+     * @return \Gc\DocumentType\Model
+     */
     public function addView($view_id)
     {
         $this->_views[] = $view_id;
         return $this;
     }
 
+    /**
+     * Add views
+     * @return \Gc\DocumentType\Model
+     */
     public function addViews($views)
     {
         $this->_views += $views;
@@ -35,8 +80,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @return Gc\Tab\Collection
-    */
+     * Get Tabs
+     * @return \Gc\Tab\Collection
+     */
     public function getTabs()
     {
         if($this->getData('tabs') === NULL )
@@ -50,6 +96,10 @@ class Model extends AbstractTable implements IterableInterface
         return $this->getData('tabs');
     }
 
+    /**
+     * Get available views
+     * @return array of \Gc\View\Collection
+     */
     public function getAvailableViews()
     {
         if($this->getData('available_views') === NULL)
@@ -63,6 +113,10 @@ class Model extends AbstractTable implements IterableInterface
         return $this->getData('available_views');
     }
 
+    /**
+     * Save document type model
+     * @return integer
+     */
     public function save()
     {
         $array_save = array(
@@ -104,14 +158,18 @@ class Model extends AbstractTable implements IterableInterface
         catch (Exception $e)
         {
             /**
-            * TODO(Make \Gc\Error)
-            */
+             * TODO(Make \Gc\Error)
+             */
             \Gc\Error::set(get_class($this), $e);
         }
 
         return FALSE;
     }
 
+    /**
+     * delete document type model
+     * @return boolean
+     */
     public function delete()
     {
         $document_type_id = $this->getId();
@@ -120,8 +178,8 @@ class Model extends AbstractTable implements IterableInterface
             $tab_collection = new Tab\Collection();
             $tab_collection->load($document_type_id);
             $tab_collection->delete();
-			$table = new \Zend\Db\TableGateway\TableGateway('document_type_view', $this->getAdapter());
-			$result = $table->delete(array('document_type_id' => (int)$document_type_id));
+            $table = new \Zend\Db\TableGateway\TableGateway('document_type_view', $this->getAdapter());
+            $result = $table->delete(array('document_type_id' => (int)$document_type_id));
             parent::delete('id = '.$document_type_id);
 
             return TRUE;
@@ -131,9 +189,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param array $array
-    * @return Gc\DocumentType\Model
-    */
+     * @param array $array
+     * @return \Gc\DocumentType\Model
+     */
     static function fromArray(Array $array)
     {
         $document_type_table = new Model();
@@ -143,9 +201,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param integer $document_type_id
-    * @return Gc\DocumentType\Model
-    */
+     * @param integer $document_type_id
+     * @return \Gc\DocumentType\Model
+     */
     static function fromId($document_type_id)
     {
         $document_type_table = new Model();
@@ -161,16 +219,16 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getParent()
-    */
+     * @see include \Gc\Component\IterableInterface#getParent()
+     */
     public function getParent()
     {
         return FALSE;
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getChildren()
-    */
+     * @see include \Gc\Component\IterableInterface#getChildren()
+     */
     public function getChildren()
     {
         return FALSE;
@@ -187,24 +245,24 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getIterableId()
-    */
+     * @see include \Gc\Component\IterableInterface#getIterableId()
+     */
     public function getIterableId()
     {
         return 'documenttype_'.$this->getId();
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getUrl()
-    */
+     * @see include \Gc\Component\IterableInterface#getUrl()
+     */
     public function getUrl()
     {
-        return 'javascript:loadController(\''.Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('action' => 'edit')).'/type/documenttype/id/'.$this->getId().'\')';
+        return '';
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getIcon()
-    */
+     * @see include \Gc\Component\IterableInterface#getIcon()
+     */
     public function getIcon()
     {
         if($this->_icon_url === NULL)

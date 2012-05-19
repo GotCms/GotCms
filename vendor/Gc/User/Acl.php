@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  User
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\User;
 
@@ -10,11 +35,30 @@ use Gc\User\Role\Model as RoleModel,
 
 class Acl extends ZendAcl\Acl
 {
+    /**
+     * @var \Gc\User\Role\Model
+     */
     protected $_role_table = NULL;
+
+    /**
+     * @var integer role_id
+     */
     protected $_user_role = NULL;
+
+    /**
+     * @var mixed role name
+     */
     protected $_user_role_name = NULL;
+
+    /**
+     * @var \Gc\User\Model
+     */
     protected $_user = NULL;
 
+    /**
+     * Initiliaze Acl
+     * @return void
+     */
     public function __construct(UserModel $user_model)
     {
         $this->_role_table = new RoleModel();
@@ -30,9 +74,12 @@ class Acl extends ZendAcl\Acl
 
         $this->_user_role = empty($user_role['role_id']) ? 0 : $user_role['role_id'];
         $this->_user_role_name = empty($user_role['name']) ? NULL : $user_role['name'];
-
     }
 
+    /**
+     * Initiliaze Roles
+     * @return void
+     */
     private function initRoles()
     {
         $roles = $this->_role_table->fetchAll($this->_role_table->select());
@@ -40,6 +87,11 @@ class Acl extends ZendAcl\Acl
             $this->addRole(new ZendAcl\Role\GenericRole($role['name']));
         }
     }
+
+    /**
+     * Initiliaze resources
+     * @return void
+     */
     protected function initResources()
     {
         $this->initRoles();
@@ -54,6 +106,10 @@ class Acl extends ZendAcl\Acl
         }
     }
 
+    /**
+     * Initiliaze role resource
+     * @return void
+     */
     private function roleResource()
     {
         $this->initResources();
@@ -73,6 +129,10 @@ class Acl extends ZendAcl\Acl
         }
     }
 
+    /**
+     * List Roles
+     * @return array
+     */
     public function listRoles()
     {
         return $this->_role_table->fetchAll(
@@ -80,6 +140,11 @@ class Acl extends ZendAcl\Acl
             ->from('acl_roles'));
     }
 
+    /**
+     * Get role id from role name
+     * @param string $role_name
+     * @return array|Zend\Db\ResultSet\RowObjectInterface
+     */
     public function getRoleId($role_name)
     {
         return $this->_role_table->fetchRow(
@@ -87,6 +152,10 @@ class Acl extends ZendAcl\Acl
         );
     }
 
+    /**
+     * List resources
+     * @return array
+     */
     public function listResources()
     {
         return $this->_role_table->fetchAll(
@@ -95,6 +164,10 @@ class Acl extends ZendAcl\Acl
         );
     }
 
+    /**
+     * List all resources by group
+     * @return array
+     */
     public function listResourcesByGroup($group)
     {
         $result = null;

@@ -1,4 +1,30 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Mvc\Controller
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
+
 namespace Gc\Mvc\Controller;
 
 use Gc\User\Model,
@@ -11,11 +37,32 @@ use Gc\User\Model,
 
 class Action extends ActionController
 {
+    /**
+     * @var \Zend\Authentication\AuthenticationService
+     */
     protected $_auth = NULL;
+
+    /**
+     * @var \Zend\Mvc\Router\Http\RouteMatch
+     */
     protected $_routeMatch = NULL;
+
+    /**
+     * @var \Zend\Session\Storage\SessionStorage
+     */
     protected $_session = NULL;
+
+    /**
+     * @var \Gc\User\Acl
+     */
     protected $_acl = NULL;
 
+    /**
+     * Execute the request
+     *
+     * @param  MvcEvent $e
+     * @return mixed
+     */
     public function execute(MvcEvent $e)
     {
         $this->_construct();
@@ -23,11 +70,19 @@ class Action extends ActionController
         return parent::execute($e);
     }
 
+    /**
+     * Initiliaze
+     * @return void
+     */
     public function init()
     {
 
     }
 
+    /**
+     * Constructor
+     * @return void
+     */
     protected function _construct()
     {
         $auth = $this->getAuth();
@@ -58,6 +113,10 @@ die('here');
         $this->layout()->module = $module;
     }
 
+    /**
+     * Return matched route
+     * @return \Zend\Mvc\Router\Http\RouteMatch
+     */
     public function getRouteMatch()
     {
         if(empty($this->_routeMatch))
@@ -69,22 +128,23 @@ die('here');
     }
 
     /**
-    * @return SessionStorage
-    */
+     * Get session storage
+     * @return \Zend\Session\Storage\SessionStorage
+     */
     protected function getSession()
     {
         if($this->_session === NULL)
         {
-            $session = new SessionStorage();
-            $this->_session = $session;
+            $this->_session = new SessionStorage();
         }
 
         return $this->_session;
     }
 
     /**
-    * @return AuthenticationService
-    */
+     * Get authentication
+     * @return \Zend\Authentication\AuthenticationService
+     */
     protected function getAuth()
     {
         if($this->_auth === NULL)
@@ -95,6 +155,10 @@ die('here');
         return $this->_auth;
     }
 
+    /**
+     * Return json model
+     * @return \Zend\View\Model\JsonModel
+     */
     protected function _returnJson(array $data)
     {
         $json_model = new JsonModel();

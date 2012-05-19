@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Property
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\Property;
 
@@ -7,9 +32,18 @@ use Gc\Db\AbstractTable,
 
 class Collection extends AbstractTable
 {
+    /**
+     * @var string
+     */
     protected $_name = 'property';
-    private $_document_id;
 
+    /**
+     * Load property
+     * @param optional integer $document_type_id
+     * @param optional integer $tab_id
+     * @param optional integer $document_id
+     * @return void
+     */
     public function load($document_type_id = NULL, $tab_id = NULL, $document_id = null)
     {
         $this->setDocumentTypeId($document_type_id);
@@ -19,6 +53,11 @@ class Collection extends AbstractTable
         $this->getProperties(TRUE);
     }
 
+    /**
+     * Get properties
+     * @param boolean $force_reload to initiliaze properties
+     * @return array
+     */
     public function getProperties($force_reload = FALSE)
     {
         if($this->getData('properties') == NULL or $force_reload)
@@ -67,12 +106,22 @@ class Collection extends AbstractTable
         return $this->getData('properties');
     }
 
+    /**
+     * Add property
+     * @param mixed $property
+     * @return void
+     */
     public function addProperty($property)
     {
         $this->_properties_elements[] = $property;
         return $this;
     }
 
+    /**
+     * Set properties
+     * @param array $properties
+     * @return void
+     */
     public function setProperties(Array $properties)
     {
         $array = array();
@@ -84,6 +133,10 @@ class Collection extends AbstractTable
         $this->setData('properties', $array);
     }
 
+    /**
+     * Save properties
+     * @return void
+     */
     public function save()
     {
         $properties = $this->getProperties();
@@ -101,6 +154,10 @@ class Collection extends AbstractTable
         }
     }
 
+    /**
+     * Delete properties
+     * @return void
+     */
     public function delete()
     {
         $properties = $this->getProperties();

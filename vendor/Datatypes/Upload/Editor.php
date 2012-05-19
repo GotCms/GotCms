@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Datatype
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+
 namespace Datatypes\Upload;
 
 use Gc\Datatype\AbstractDatatype\AbstractEditor,
@@ -85,11 +110,11 @@ class Editor extends AbstractEditor
     }
 
     /**
-    * @param boolean $title
-    * @param boolean $content
-    * @param boolean $multiple
-    * @return string
-    */
+     * @param boolean $title
+     * @param boolean $content
+     * @param boolean $multiple
+     * @return string
+     */
     private function addForm($title, $content, $multiple) {
         $values = $this->getValue();
         if($multiple === true) {
@@ -289,27 +314,27 @@ class Editor extends AbstractEditor
     }
 
     /**
-    * @param string $value
-    * @param integer $key
-    */
+     * @param string $value
+     * @param integer $key
+     */
     private function addTitle($value, $key) {
         return 'Title: <input type="text" value="'.$value.'" name="upload-file-title-'.$this->_property->getId().'['.$key.']" />';
     }
 
     /**
-    * @param string $value
-    * @param integer $key
-    */
+     * @param string $value
+     * @param integer $key
+     */
     private function addContent($value, $key) {
         return 'Content: <textarea name="upload-file-content-'.$this->_property->getId().'['.$key.']">'.$value.'</textarea>';
     }
 
     /**
-    * @param mixte $key
-    * @param mixte $value
-    * @param mixte $default
-    * @return unknown
-    */
+     * @param mixte $key
+     * @param mixte $value
+     * @param mixte $default
+     * @return unknown
+     */
     private function getParam($key, $value, $default) {
         $array = $this->_request->getParam($key);
         return is_array($array) && isset($array[$value]) ? $array[$value] : $default;

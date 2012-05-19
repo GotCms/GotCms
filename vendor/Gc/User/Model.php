@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  User
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\User;
 
@@ -9,8 +34,17 @@ use Gc\Db\AbstractTable,
 
 class Model extends AbstractTable implements IterableInterface
 {
+    /**
+     * @var string
+     */
     protected $_name = 'user';
 
+    /**
+     * Authenticate user
+     * @param string $login
+     * @param string $password
+     * @return boolean
+     */
     public function authenticate($login, $password)
     {
         $authAdapter = new Adapter\DbTable($this->getAdapter());
@@ -37,9 +71,10 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param string $user_email
-    * @return boolean
-    */
+     * Set User email
+     * @param string $user_email
+     * @return boolean
+     */
     public function setEmail($user_email)
     {
         $value = trim($user_email);
@@ -66,18 +101,21 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param string $user_password
-    * @param boolean $encrypt
-    */
-    public function setPassword($user_password,$encrypt = TRUE)
+     * Set user password
+     * @param string $user_password
+     * @param boolean $encrypt
+     * @return void
+     */
+    public function setPassword($user_password, $encrypt = TRUE)
     {
         $this->_password = ($encrypt) ? sha1($user_password) : trim($user_password);
     }
 
 
     /**
-    * @desc Save user
-    */
+     * Save user
+     * @return integer
+     */
     public function save()
     {
         $array_save = array(
@@ -122,8 +160,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @desc Delete user
-    */
+     * Delete user
+     * @return boolean
+     */
     public function delete()
     {
         $id = $this->getId();
@@ -138,9 +177,10 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param array $array
-    * @return Gc\User
-    */
+     * Initiliaze from array
+     * @param array $array
+     * @return Gc\User\Model
+     */
     static function fromArray(Array $array)
     {
         $user_table = new Model();
@@ -150,9 +190,10 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param integer $id
-    * @return Gc\User
-    */
+     * Initiliaze from id
+     * @param integer $id
+     * @return Gc\User\Model
+     */
     static function fromId($id)
     {
         $user_table = new Model();
@@ -167,6 +208,10 @@ class Model extends AbstractTable implements IterableInterface
         }
     }
 
+    /**
+     * Get User Role
+     * @return \Gc\User\Role\Model
+     */
     public function getRole()
     {
         $role = $this->getData('role');
@@ -179,6 +224,9 @@ class Model extends AbstractTable implements IterableInterface
         return $this->getData('role');
     }
 
+    /**
+     * @TODO set forgot password email
+     */
     public function sendForgotPasswordEmail($email)
     {
         $row = $this->select(array('email' => $email));
@@ -186,56 +234,56 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getParent()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getParent()
+     */
     public function getParent()
     {
         return FALSE;
     }
 
     /** (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getChildren()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getChildren()
+     */
     public function getChildren()
     {
         return array();
     }
 
     /** (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getName()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getName()
+     */
     public function getName()
     {
         return $this->getFirstName().' '.$this->getLastName();
     }
 
     /** (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getId()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getId()
+     */
     public function getId()
     {
         return $this->getData('id');
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getTreeViewId()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getTreeViewId()
+     */
     public function getIterableId()
     {
         return 'user_'.$this->getId();
     }
 
     /** (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getUrl()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getUrl()
+     */
     public function getUrl()
     {
-        return 'javascript:loadController(\''.Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('controller'=>'config','action'=>'edit')).'/type/user/id/'.$this->getId().'\')';
+        return '';
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getIcon()
-    */
+     * @see include \Gc\Component\IterableInterface#getIcon()
+     */
     public function getIcon()
     {
         return 'file';

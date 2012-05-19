@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Layout
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\Layout;
 
@@ -7,12 +32,16 @@ use Gc\Db\AbstractTable,
 
 class Model extends AbstractTable implements IterableInterface
 {
+    /**
+     * @var string
+     */
     protected $_name = 'layout';
 
     /**
-    * @param integer $id
-    * @return Model
-    */
+     * Initiliaze layout
+     * @param integer $id
+     * @return \Gc\Layout\Model
+     */
     public function init($id = NULL)
     {
         $this->setId($id);
@@ -21,9 +50,10 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @param array $layout
-    * @return Model
-    */
+     * Initiliaze from array
+     * @param array $layout
+     * @return \Gc\Layout\Model
+     */
     static function fromArray(Array $array)
     {
         $layout_table = new Model();
@@ -32,11 +62,11 @@ class Model extends AbstractTable implements IterableInterface
         return $layout_table;
     }
 
-
     /**
-    * @param integer $id
-    * @return Model
-    */
+     * Initiliaze from id
+     * @param integer $id
+     * @return \Gc\Layout\Model
+     */
     static function fromId($id)
     {
         $layout_table = new Model();
@@ -52,8 +82,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-    * @return unknown_type
-    */
+     * Save layout
+     * @return integer
+     */
     public function save()
     {
         $array_save = array('name' => $this->getName(),
@@ -82,14 +113,18 @@ class Model extends AbstractTable implements IterableInterface
         catch (Exception $e)
         {
             /**
-            * TODO(Make \Gc\Error)
-            */
+             * TODO(Make \Gc\Error)
+             */
             \Gc\Error::set(get_class($this), $e);
         }
 
         return FALSE;
     }
 
+    /**
+     * Delete layout
+     * @return boolean
+     */
     public function delete()
     {
         $id = $this->getId();
@@ -106,54 +141,54 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /*
-    * Gc\Component\IterableInterface Methods
-    */
+     * Gc\Component\IterableInterface Methods
+     */
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getParent()
-    */
+     * @see include \Gc\Component\IterableInterface#getParent()
+     */
     public function getParent()
     {
         return FALSE;
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getChildren()
-    */
+     * @see include \Gc\Component\IterableInterface#getChildren()
+     */
     public function getChildren()
     {
         return FALSE;
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getId()
-    */
+     * @see include \Gc\Component\IterableInterface#getId()
+     */
     public function getId()
     {
         return $this->getData('id');
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getIterableId()
-    */
+     * @see include \Gc\Component\IterableInterface#getIterableId()
+     */
     public function getIterableId()
     {
         return 'layout-'.$this->getId();
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getName()
-    */
+     * @see include \Gc\Component\IterableInterface#getName()
+     */
     public function getName()
     {
         return $this->getData('name');
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getUrl()
-    */
+     * @see include \Gc\Component\IterableInterface#getUrl()
+     */
     public function getUrl()
     {
-        return 'javascript:loadController(\''.Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('controller'=>'development','action'=>'edit')).'/type/layout/id/'.$this->getId().'\')';
+        return '';
     }
 
     public function getIcon()

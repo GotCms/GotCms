@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  User
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\User;
 
@@ -7,30 +32,33 @@ use Gc\Db\AbstractTable,
 
 class Collection extends AbstractTable implements IterableInterface
 {
-    protected $_users;
+    /**
+     * @var string
+     */
     protected $_name = 'user';
 
     /**
-    * @param unknown_type $order
-    * @desc create instance
-    */
+     * Initiliaze User collection
+     * @return void
+     */
     public function init()
     {
         $this->setUsers();
     }
 
     /**
-    * @return array of Gc\User
-    */
+     * Get users
+     * @return array of Gc\User\Model
+     */
     public function getUsers()
     {
-        return $this->_users;
+        return $this->getData('users');
     }
 
     /**
-    * @desc create an array of Gc\User\Model
-    * @return Gc\User\Model
-    */
+     * Set users collection
+     * @return void
+     */
     private function setUsers()
     {
         $select = $this->select();
@@ -41,60 +69,59 @@ class Collection extends AbstractTable implements IterableInterface
             $users[] = Model::fromArray((array)$row);
         }
 
-        $this->_users = $users;
+        $this->setUsers($users);
     }
 
-
     /** (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getName()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getName()
+     */
     public function getName()
     {
         return 'Users';
     }
 
     /** (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getChildren()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getChildren()
+     */
     public function getChildren()
     {
         return $this->getUsers();
     }
     /** (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getParent()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getParent()
+     */
     public function getParent()
     {
         return FALSE;
     }
 
     /** (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getId()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getId()
+     */
     public function getId()
     {
         return FALSE;
     }
 
     /* (non-PHPdoc)
-    * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getTreeViewId()
-    */
+     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getTreeViewId()
+     */
     public function getIterableId()
     {
         return 'users';
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getUrl()
-    */
+     * @see include \Gc\Component\IterableInterface#getUrl()
+     */
     public function getUrl()
     {
-        return 'javascript:loadController(\''.Zend_Controller_Action_HelperBroker::getStaticHelper('url')->url(array('controller'=>'config', 'action'=>'users')).'\')';
+        return '';
     }
 
     /* (non-PHPdoc)
-    * @see include/Gc/Interface/Gc\Component\IterableInterface#getIcon()
-    */
+     * @see include \Gc\Component\IterableInterface#getIcon()
+     */
     public function getIcon()
     {
         return 'folder';

@@ -46,9 +46,9 @@ class IndexController extends Action
     protected $_layoutPath;
 
     /**
-     * Generate frontend from url key
-     * @return \Zend\View\Model\ViewModel|array
-     */
+      * Generate frontend from url key
+      * @return \Zend\View\Model\ViewModel|array
+      */
     public function indexAction()
     {
         $url = parse_url($this->getRequest()->getRequestUri());
@@ -91,13 +91,13 @@ class IndexController extends Action
 
         //construct the tree menu
         /*
-        * @TODO
+         * @TODO
         $nav = new Component\Navigation();
         $config = new Xml();
         $config->fromString($nav->render());
 
         //var_dump(get_class_methods($this->getLocator()->get('Zend\View\Renderer\PhpRenderer')->navigation()->setContainer(new Navigation($config))));
-        */
+         */
         $view_model = new ViewModel();
         $existed = in_array($this->_viewStream, stream_get_wrappers());
         if ($existed)
@@ -160,9 +160,9 @@ class IndexController extends Action
     }
 
     /**
-     * @param integer $document_type_id
-     * @return Gc\Component\Tab\Model
-     */
+      * @param integer $document_type_id
+      * @return Gc\Component\Tab\Model
+      */
     private function loadTabs($document_type_id)
     {
         $document_type = DocumentType\Model::fromId($document_type_id);
@@ -172,11 +172,11 @@ class IndexController extends Action
 
 
     /**
-    * @param integer $document_type_id
-    * @param integer $tab_id
-    * @param integer $document_id
-    * @return Gc\Component\Property\Model
-    */
+     * @param integer $document_type_id
+     * @param integer $tab_id
+     * @param integer $document_id
+     * @return Gc\Component\Property\Model
+     */
     private function loadProperties($document_type_id, $tab_id, $document_id)
     {
         $properties = new Property\Collection();
@@ -186,8 +186,8 @@ class IndexController extends Action
     }
 
     /**
-    * @param string $path
-    */
+     * @param string $path
+     */
     private function explodePath($path)
     {
         $explode_path = explode('/', substr($path, 1));
@@ -200,9 +200,9 @@ class IndexController extends Action
     }
 
     /**
-    * @param mixte $data
-    * @return boolean
-    */
+     * @param mixed $data
+     * @return boolean
+     */
     private  function is_serialized($data)
     {
         if (trim($data) == "")

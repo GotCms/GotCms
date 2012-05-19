@@ -1,4 +1,30 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
+
 namespace Gc\View;
 
 use Gc\Db\AbstractTable,
@@ -8,14 +34,28 @@ use Gc\Db\AbstractTable,
 class Collection extends AbstractTable implements IterableInterface
 {
     protected $_views_elements;
+
+    /**
+     * @var string
+     */
     protected $_name = 'view';
 
+    /**
+     * Initiliaze collection
+     * @param optional integer $document_type_id
+     * @return void
+     */
     public function init($document_type_id = NULL)
     {
         $this->setDocumentTypeId($document_type_id);
         $this->getViews(TRUE);
     }
 
+    /**
+     * Get views
+     * @param boolean $force_reload to initiliaze views
+     * @return array
+     */
     private function getViews($force_reload = FALSE)
     {
         if($force_reload)
@@ -43,6 +83,10 @@ class Collection extends AbstractTable implements IterableInterface
         return $this->getData('views');
     }
 
+    /**
+     * Get array for input select
+     * @return array
+     */
     public function getSelect()
     {
         $array_views = array();
@@ -54,23 +98,39 @@ class Collection extends AbstractTable implements IterableInterface
         return $array_views;
     }
 
+    /**
+     * Add view
+     * @param \gc\View\Model
+     */
     public function addElement(Model $view)
     {
         $this->_views_elements[] = $view;
         return $this;
     }
 
+    /**
+     * Clear elements
+     * @return \Gc\View\Collection
+     */
     public function clearElements()
     {
         $this->_views_elements = array();
         return $this;
     }
 
+    /**
+     * get all elements store in $_views_elements
+     * @return array
+     */
     public function getElements()
     {
         return $this->_views_elements;
     }
 
+    /**
+     * Save properties
+     * @return boolean
+     */
     public function save()
     {
         if(!empty($this->_data['document_type_id']))
@@ -87,6 +147,10 @@ class Collection extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
+    /**
+     * delete properties
+     * @return boolean
+     */
     public function delete()
     {
         if(!empty($this->_data['document_type_id']))
@@ -98,36 +162,57 @@ class Collection extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
+    /* (non-PHPdoc)
+     * @see include \Gc\Component\IterableInterface#getParent()
+     */
     public function getParent()
     {
         return FALSE;
     }
 
+    /* (non-PHPdoc)
+     * @see include \Gc\Component\IterableInterface#getChildren()
+     */
     public function getChildren()
     {
         return $this->getViews();
     }
 
+    /* (non-PHPdoc)
+     * @see include \Gc\Component\IterableInterface#getId()
+     */
     public function getId()
     {
         return FALSE;
     }
 
+    /* (non-PHPdoc)
+     * @see include \Gc\Component\IterableInterface#getIterableId()
+     */
     public function getIterableId()
     {
-        return "views";
+        return 'views';
     }
 
+    /* (non-PHPdoc)
+     * @see include \Gc\Component\IterableInterface#getName()
+     */
     public function getName()
     {
-        return "Views";
+        return 'Views';
     }
 
+    /* (non-PHPdoc)
+     * @see include \Gc\Component\IterableInterface#getUrl()
+     */
     public function getUrl()
     {
         return '';
     }
 
+    /* (non-PHPdoc)
+     * @see include \Gc\Component\IterableInterface#getIcon()
+     */
     public function getIcon()
     {
         return 'folder';

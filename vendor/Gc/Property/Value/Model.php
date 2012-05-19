@@ -1,4 +1,29 @@
 <?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Property\Value
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
+ */
 
 namespace Gc\Property\Value;
 
@@ -6,8 +31,18 @@ use Gc\Db\AbstractTable;
 
 class Model extends AbstractTable
 {
+    /**
+     * @var string
+     */
     protected $_name = 'property_value';
 
+    /**
+     * Load property value
+     * @param optional integer $value_id
+     * @param optional integer $document_id
+     * @param optional integer $property_id
+     * @return void
+     */
     public function load($value_id = NULL, $document_id = NULL, $property_id = NULL)
     {
         $this->setId($value_id);
@@ -26,9 +61,10 @@ class Model extends AbstractTable
     }
 
     /**
-    * @param array $array
-    * @return Gc\Component\Property\Model
-    */
+     * Initialize from array
+     * @param array $array
+     * @return \Gc\Property\Value\Model
+     */
     static function fromArray(Array $array)
     {
         $property_value_table = new Model($array);
@@ -38,9 +74,10 @@ class Model extends AbstractTable
     }
 
     /**
-    * @param integer $property_id
-    * @return Gc\Component\Property\Model
-    */
+     * Initialize from id
+     * @param integer $property_value_id
+     * @return \Gc\Property\Value\Model
+     */
     static function fromId($property_value_id)
     {
         $property_value_table = new Model($array);
@@ -57,6 +94,10 @@ class Model extends AbstractTable
         }
     }
 
+    /**
+     * Save property value
+     * @return integer
+     */
     public function save()
     {
         $array_save = array(

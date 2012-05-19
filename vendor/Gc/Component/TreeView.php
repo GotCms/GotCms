@@ -1,8 +1,30 @@
 <?php
 /**
- * @author Pierre RAMBAUD
+ * This source file is part of Got CMS.
  *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Component
+ * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link        http://www.got-cms.com
  */
+
 namespace Gc\Component;
 
 class TreeView
@@ -10,8 +32,8 @@ class TreeView
     protected $_data;
 
     /**
-    * @param array $array
-    */
+     * @param array $array
+     */
     public function __construct(Array $treeview_data)
     {
         $this->_data = $treeview_data;
@@ -19,9 +41,9 @@ class TreeView
 
 
     /**
-    * @param array $tab contains objects
-    * @return string
-    */
+     * @param array $tab contains objects
+     * @return string
+     */
     static function render(Array $treeview_data = NULL, $init = TRUE)
     {
         $html = '<ul';
