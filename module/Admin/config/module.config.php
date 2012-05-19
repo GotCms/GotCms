@@ -25,18 +25,15 @@
  */
 
 return array(
-	'di' => array(
-		'instance' => array(
-			'alias' => array(
-				'admin-index' => 'Admin\Controller\IndexController',
-			),
-			'Zend\View\Resolver\TemplatePathStack' => array(
-				'parameters' => array(
-					'paths'  => array(
-						'admin' => __DIR__ . '/../views',
-					),
-				),
-			),
-		),
-	),
+    'controller' => array(
+        'classes' => array(
+            'AdminController' => 'Admin\Controller\IndexController'
+        ),
+    ),
+    'view_manager' => array(
+        'template_path_stack' => array(
+            'admin' => __DIR__ . '/../views',
+        ),
+    ),
 );
+

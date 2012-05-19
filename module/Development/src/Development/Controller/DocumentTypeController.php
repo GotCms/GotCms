@@ -59,7 +59,6 @@ class DocumentTypeController extends Action
         $document_type = new DocumentType\Model();
 
         $form = new DocumentTypeForm();
-        $form->setView($this->getLocator()->get('view'));
         $form->setAction($this->url()->fromRoute('documentTypeCreate', array()));
         $request = $this->getRequest();
         $session = $this->getSession();
@@ -180,7 +179,6 @@ class DocumentTypeController extends Action
         }
 
         $form = new DocumentTypeForm();
-        $form->setView($this->getLocator()->get('view'));
         $form->setAction($this->url()->fromRoute('documentTypeEdit', array('id' => $document_type_id)));
         $request = $this->getRequest();
         $session = $this->getSession();

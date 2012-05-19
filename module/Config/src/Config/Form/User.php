@@ -38,45 +38,53 @@ class User extends AbstractForm
      * Initialize User form
      * @return void
      */
-    public function init()
+    public function __construct()
     {
+        parent::__construct();
         $this->setMethod(self::METHOD_POST);
 
-        $email = new Element\Text('email');
+        $email = new Element('email');
         $email->setRequired(TRUE)
+            ->setAttrib('type', 'text')
             ->setLabel('Email')
             ->setAttrib('class', 'input-text')
             ->addValidator('NotEmpty')
             ->addValidator('EmailAddress');
 
-        $login = new Element\Text('login');
+        $login = new Element('login');
         $login->setLabel('Login')
+            ->setAttrib('type', 'text')
             ->setAttrib('class', 'input-text');
 
-        $password  = new Element\Password('password');
+        $password  = new Element('password');
         $password->setLabel('Password')
+            ->setAttrib('type', 'password')
             ->setAttrib('class', 'input-text')
             ->setAttrib('autocomplete', 'off');
 
-        $password_confirm  = new Element\Password('password_confirm');
+        $password_confirm  = new Element('password_confirm');
         $password_confirm->setLabel('Password Confirm')
+            ->setAttrib('type', 'password')
             ->setAttrib('class', 'input-text')
             ->setAttrib('autocomplete', 'off');
 
-        $lastname  = new Element\Text('lastname');
+        $lastname  = new Element('lastname');
         $lastname->setRequired(TRUE)
+            ->setAttrib('type', 'text')
             ->setLabel('Lastname')
             ->setAttrib('class', 'input-text')
             ->addValidator('NotEmpty');
 
-        $firstname  = new Element\Text('firstname');
+        $firstname  = new Element('firstname');
         $firstname->setRequired(TRUE)
+            ->setAttrib('type', 'text')
             ->setLabel('Firstname')
             ->setAttrib('class', 'input-text')
             ->addValidator('NotEmpty');
 
-        $role = new Element\Select('user_acl_role_id');
+        $role = new Element('user_acl_role_id');
         $role->setRequired(TRUE)
+            ->setAttrib('type', 'select')
             ->setLabel('Role')
             ->setAttrib('class', 'input-select')
             ->addValidator('NotEmpty');
@@ -88,12 +96,12 @@ class User extends AbstractForm
             $role->addMultiOption($role_model->getId(), $role_model->getName());
         }
 
-        $submit = new Element\Submit('submit');
+        $submit = new Element('submit');
         $submit->setAttrib('class', 'input-submit')
+            ->setAttrib('type', 'submit')
             ->setLabel('Save');
 
-
-        $this->addElements(array($email, $login, $password, $password_confirm, $lastname, $firstname, $role, $submit));
+        $this->add(array($email, $login, $password, $password_confirm, $lastname, $firstname, $role, $submit));
     }
 
     /**

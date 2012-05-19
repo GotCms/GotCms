@@ -1,28 +1,21 @@
 <?php
 chdir(dirname(__DIR__));
 require_once (getenv('ZF2_PATH') ?: 'vendor/ZendFramework/library') . '/Zend/Loader/AutoloaderFactory.php';
-$app_config = include 'config/application.config.php';
-Zend\Loader\AutoloaderFactory::factory(array('Zend\Loader\StandardAutoloader' => $app_config['autoloader']));
 
-if (!($env = getenv('APPLICATION_ENV')))
-{
-    $env = 'local';
-}
+use Zend\Loader\AutoloaderFactory,
+Zend\ServiceManager\ServiceManager,
+Zend\Mvc\Service\ServiceManagerConfiguration;
 
-$appConfig = include 'config/application.config.php';
-
-$listenerOptions  = new Zend\Module\Listener\ListenerOptions($app_config['module_listener_options']);
-$defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerOptions);
-$defaultListeners->getConfigListener()->addConfigGlobPath("config/autoload/{module.*,global,$env,local}.config.php");
+// get application stack configuration
+$configuration = include 'config/application.config.php';
+// setup autoloader
+AutoloaderFactory::factory(array('Zend\Loader\StandardAutoloader' => $configuration['autoloader']));
 
 
-$moduleManager = new Zend\Module\Manager($app_config['modules']);
-$moduleManager->events()->attachAggregate($defaultListeners);
-$moduleManager->loadModules();
+// setup service manager
+$serviceManager = new ServiceManager(new ServiceManagerConfiguration($configuration['service_manager']));
+$serviceManager->setService('ApplicationConfiguration', $configuration);
+$serviceManager->get('ModuleManager')->loadModules();
 
-// Create application, bootstrap, and run
-$bootstrap   = new Zend\Mvc\Bootstrap($defaultListeners->getConfigListener()->getMergedConfig());
-$application = new Zend\Mvc\Application();
-$bootstrap->bootstrap($application);
-
-$application->run()->send();
+// run application
+$serviceManager->get('Application')->bootstrap()->run()->send();

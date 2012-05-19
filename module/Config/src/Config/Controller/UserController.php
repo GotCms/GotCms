@@ -61,7 +61,6 @@ class UserController extends Action
     {
         $this->layout()->setTemplate('layouts/one-page.phtml');
         $login_form = new UserLogin();
-        $login_form->setView($this->getLocator()->get('view'));
 
         $post = $this->getRequest()->post();
         if($this->getRequest()->isPost() and $login_form->isValid($post->toArray()))
@@ -82,7 +81,8 @@ class UserController extends Action
         }
 
         $redirect = $this->getRouteMatch()->getParam('redirect');
-        $login_form->getElement('redirect')->setValue($redirect);
+        var_dump(get_class_methods($login_form));die();
+        $login_form->get('redirect')->setValue($redirect);
 
         return array('form' => $login_form);
     }
@@ -95,7 +95,6 @@ class UserController extends Action
     {
         $this->layout()->setTemplate('layouts/one-page.phtml');
         $forgot_password_form = new UserForgotForm();
-        $forgot_password_form->setView($this->getLocator()->get('view'));
         $post = $this->getRequest()->post();
         if($this->getRequest()->isPost() and $forgot_password_form->isValid($post->toArray()))
         {

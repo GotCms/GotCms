@@ -29,30 +29,14 @@ namespace Gc\Mvc;
 
 use Zend,
     Zend\Config\Reader\Ini,
-    Zend\View,
-    Zend\Module\Manager,
-    Zend\EventManager\Event,
-    Zend\EventManager\StaticEventManager,
-    Zend\Module\Consumer\AutoloaderProvider;
+    Zend\View;
 
-class Module implements AutoloaderProvider
+class Module
 {
     /**
      * @var array
      */
     protected $_config;
-
-    /**
-     * Initialize module
-     * @param \Zend\Module\Manager $moduleManager
-     * @return void
-     */
-    public function init(Manager $moduleManager)
-    {
-        $events = $moduleManager->events();
-        $sharedEvents = $events->getSharedManager();
-        $sharedEvents->attach('bootstrap', 'bootstrap', array($this, 'initializeView'), 100);
-    }
 
     /**
      * get autoloader config
@@ -84,40 +68,20 @@ class Module implements AutoloaderProvider
             $ini = new Ini();
             $routes = $ini->fromFile($this->_getDir() . '/config/routes.ini');
             $routes = $routes['production'];
-            if(empty($config['di']['instance']['Zend\Mvc\Router\RouteStackInterface']))
+            if(empty($config['router']['routes']))
             {
-                $config['di']['instance']['Zend\Mvc\Router\RouteStackInterface'] = array('parameters' => array('routes' => array()));
+                $config['router']['routes'] = array();
             }
 
             if(!empty($routes['routes']))
             {
-                $config['di']['instance']['Zend\Mvc\Router\RouteStackInterface']['parameters']['routes'] += $routes['routes'];
+                $config['router']['routes'] += $routes['routes'];
             }
 
             $this->_config = $config;
         }
 
         return $this->_config;
-    }
-
-    /**
-     * Initialize view
-     * @param \Zend\EventManager\Event $e
-     * @return void
-     */
-    public function initializeView(Event $e)
-    {
-        $app          = $e->getParam('application');
-        $basePath     = $app->getRequest()->getBasePath();
-        $locator      = $app->getLocator();
-        $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
-        $view         = $locator->get('Zend\View\View');
-        $view->events()->attach($jsonStrategy, 100);
-        //@TODO change to module.config.php
-        Zend\Db\TableGateway\StaticAdapterTableGateway::setStaticAdapter($locator->get('Zend\Db\Adapter\Adapter'));
-        $renderer     = $locator->get('Zend\View\Renderer\PhpRenderer');
-        $renderer->doctype()->setDoctype('HTML5');
-        $renderer->plugin('basePath')->setBasePath($basePath);
     }
 
     /**

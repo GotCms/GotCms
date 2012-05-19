@@ -36,9 +36,10 @@ class UserLogin extends AbstractForm
      * Initialize UserLogin form
      * @return void
      */
-    public function init()
+    public function __construct()
     {
-        $this->setMethod(self::METHOD_POST);
+        parent::__construct();
+        $this->setAttribute('method', 'post');
         $this->addDecorator('ViewScript', array('viewScript' => 'config-forms/login.phtml'));
 
         $email = new Element\Text('login');

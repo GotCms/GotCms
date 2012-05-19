@@ -25,7 +25,6 @@ use Zend\Stdlib\ArrayUtils;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\Adapter\Driver\DriverInterface as DbDriverInterface;
 use Zend\Db\Sql\Select as DbSelect;
-use Zend\Db\TableGateway;
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
 
@@ -171,16 +170,6 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function getAdapter()
     {
-        /**
-         * Check for an adapter being defined. If not, fetch the default adapter.
-         */
-        if ($this->_adapter === null) {
-            $this->_adapter = TableGateway\StaticAdapterTableGateway::getStaticAdapter();
-            if (null === $this->_adapter) {
-                throw new Exception\RuntimeException('No database adapter present');
-            }
-        }
-
         return $this->_adapter;
     }
 
@@ -307,34 +296,34 @@ abstract class AbstractDb extends AbstractValidator
     public function getSelect()
     {
         if (null === $this->_select) {
-            $adapter = $this->getAdapter();
+            $adapter  = $this->getAdapter();
             $driver   = $adapter->getDriver();
             $platform = $adapter->getPlatform();
 
             /**
              * Build select object
              */
-            $select = new DBSelect();
+            $select = new DbSelect();
             $select->from($this->_table, $this->_schema)->columns(
                 array($this->_field)
             );
 
             // Support both named and positional parameters
-            if ('named' == $driver->getPrepareType()) {
+            if (DbDriverInterface::PARAMETERIZATION_NAMED == $driver->getPrepareType()) {
                 $select->where(
-                    $platform->quoteIdentifier($this->_field) . ' = :value'
+                    $platform->quoteIdentifier($this->_field, true) . ' = :value'
                 );
             } else {
                 $select->where(
-                    $platform->quoteIdentifier($this->_field) . ' = ?'
+                    $platform->quoteIdentifier($this->_field, true) . ' = ?'
                 );
             }
 
             if ($this->_exclude !== null) {
                 if (is_array($this->_exclude)) {
-                    $select->where(sprintf("%s != '%s'",
-                          $platform->quoteIdentifier($this->_exclude['field']), $this->_exclude['value']
-                       )
+                    $select->where(
+                        $platform->quoteIdentifier($this->_exclude['field'], true) .
+                        ' != ?', $this->_exclude['value']
                     );
                 } else {
                     $select->where($this->_exclude);
@@ -355,10 +344,10 @@ abstract class AbstractDb extends AbstractValidator
      */
     protected function _query($value)
     {
-        $adapter = $this->getAdapter();
-        $statment = $adapter->createStatement();
-        $this->getSelect()->prepareStatement($adapter, $statment);
+        $adapter  = $this->getAdapter();
+        $statement = $adapter->createStatement();
+        $this->getSelect()->prepareStatement($adapter, $statement);
 
-        return $statment->execute(array('value' => $value))->current();
+        return $statement->execute(array('value' => $value))->current();
     }
 }

@@ -25,19 +25,16 @@
  */
 
 return array(
-    'di' => array(
-        'instance' => array(
-            'alias' => array(
-                'content-index' => 'Content\Controller\IndexController',
-                'content-document' => 'Content\Controller\DocumentController',
-            ),
-            'Zend\View\Resolver\TemplatePathStack' => array(
-                'parameters' => array(
-                    'paths'  => array(
-                        'content' => __DIR__ . '/../views',
-                    ),
-                ),
-            ),
+    'controller' => array(
+        'classes' => array(
+            'IndexController' => 'Content\Controller\IndexController'
+            , 'DocumentController' => 'Content\Controller\DocumentController'
+        ),
+    ),
+    'view_manager' => array(
+        'template_path_stack' => array(
+            'content' => __DIR__ . '/../views',
         ),
     ),
 );
+

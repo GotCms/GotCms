@@ -55,7 +55,7 @@ abstract class AbstractForm extends Form
         {
             foreach($data as $element_name => $element_value)
             {
-                if($element = $this->getElement($element_name))
+                if($element = $this->get($element_name))
                 {
                     if($element->getType() == 'Zend\Form\Element\Password')
                     {
