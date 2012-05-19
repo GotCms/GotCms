@@ -69,7 +69,7 @@ class Collection extends AbstractTable implements IterableInterface
             $users[] = Model::fromArray((array)$row);
         }
 
-        $this->setUsers($users);
+        $this->setData('users', $users);
     }
 
     /** (non-PHPdoc)
