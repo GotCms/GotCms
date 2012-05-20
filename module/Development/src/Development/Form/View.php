@@ -56,6 +56,7 @@ class View extends AbstractForm
                 'required'=> TRUE
                 , 'validators' => array(
                     array('name' => 'not_empty')
+                    , array('name' => 'identifier')
                     , array(
                         'name' => 'db\\no_record_exists'
                         , 'options' => array(

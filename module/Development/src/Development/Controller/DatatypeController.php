@@ -57,12 +57,12 @@ class DatatypeController extends Action
     public function createAction()
     {
         $datatype = new Datatype\Model();
-        $form = new DatatypeForm();
-        $form->setAction($this->url()->fromRoute('datatypeCreate'));
+        $datatype_form = new DatatypeForm();
+        $datatype_form->setAttribute('action', $this->url()->fromRoute('datatypeCreate'));
         $post = $this->getRequest()->post()->toArray();
-        if($this->getRequest()->isPost() AND $form->isValid($post))
+        if($this->getRequest()->isPost() AND $datatype_form->isValid($post))
         {
-            $datatype->addData($form->getValues(TRUE));
+            $datatype->addData($datatype_form->getValues(TRUE));
             try
             {
                 if($id = $datatype->save())
@@ -82,10 +82,10 @@ class DatatypeController extends Action
                 \Gc\Error::set(get_class($this), $e);
             }
 
-            $form->populate($post);
+            $datatype_form->populate($post);
         }
 
-        return array('form' => $form);
+        return array('form' => $datatype_form);
     }
 
     /**
@@ -102,17 +102,17 @@ class DatatypeController extends Action
 
         $datatype_model = $datatype->getDatatype();
 
-        $form = new DatatypeForm();
-        $form->setAction($this->url()->fromRoute('datatypeEdit', array('id' => $this->_routeMatch->getParam('id'))));
+        $datatype_form = new DatatypeForm();
+        $datatype_form->setAttribute('action', $this->url()->fromRoute('datatypeEdit', array('id' => $this->_routeMatch->getParam('id'))));
 
-        DatatypeForm::addContent($form, Datatype\Model::loadPrevalueEditor($datatype));
-        $form->loadValues($datatype_model);
+        DatatypeForm::addContent($datatype_form, Datatype\Model::loadPrevalueEditor($datatype));
+        $datatype_form->loadValues($datatype_model);
 
         if($this->getRequest()->isPost())
         {
-            if($form->isValid($this->getRequest()->post()->toArray()))
+            if($datatype_form->isValid($this->getRequest()->post()->toArray()))
             {
-                if($datatype_model->getModel() != $form->getValue('model'))
+                if($datatype_model->getModel() != $datatype_form->getValue('model'))
                 {
                     $datatype_model->setValue(array());
                 }
@@ -142,7 +142,7 @@ class DatatypeController extends Action
             }
         }
 
-        return array('form' => $form);
+        return array('form' => $datatype_form);
     }
 
     /**

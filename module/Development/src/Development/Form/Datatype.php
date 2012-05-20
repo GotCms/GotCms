@@ -40,38 +40,19 @@ class Datatype extends AbstractForm
      */
     public function init()
     {
-        $name = new Element\Text('name');
-        $name->setRequired(TRUE)
-            ->setLabel('Name')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty')
-            ->addValidator(new Db\NoRecordExists(array(
-                'table' => 'datatype'
-                , 'field' => 'name'
-                ))
-            );
 
-        $model  = new Element\Select('model');
+        $model  = new Element('model');
 
         $path = getcwd().'/vendor/Datatypes/';
         $list_dir = glob($path.'*', GLOB_ONLYDIR);
+        $options = array();
         foreach($list_dir as $dir)
         {
             $dir = str_replace($path, '', $dir);
-            $model->addMultiOption($dir, $dir);
+            $options[$dir] = $dir;
         }
 
-        $model->setRequired(TRUE)
-            ->setLabel('Identifier')
-            ->addValidator('NotEmpty')
-            ->addValidator(new Validator\Identifier());
-
-        $submit = new Element\Submit('submit', array('order' => 999));
-        $submit->setAttrib('class', 'input-submit')
-            ->setLabel('Save');
-
-
-        $this->addElements(array($name, $model, $submit));
+        $model->setAttribute('options', $options);
 
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
@@ -93,9 +74,6 @@ class Datatype extends AbstractForm
                 'required'=> TRUE
                 , 'validators' => array(
                     array('name' => 'not_empty')
-                    , array(
-                        'name' => 'identifier'
-                    )
                 )
             )
         ));
@@ -103,6 +81,6 @@ class Datatype extends AbstractForm
         $this->setInputFilter($inputFilter);
 
         $this->add(new Element('name'));
-        $this->add(new Element('identifier'));
+        $this->add($model);
     }
 }

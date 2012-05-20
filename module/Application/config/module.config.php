@@ -60,10 +60,11 @@ return array(
                     ),
                 ),
             ),
+            //@TODO Check if it works
             'Zend\View\HelperLoader' => array(
                 'parameters' => array(
                     'map' => array(
-                        'JsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape'
+                        'jsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape'
                     )
                 ),
             ),

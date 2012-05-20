@@ -59,7 +59,7 @@ class RoleController extends Action
     {
         $form = new RoleForm();
         $form->initPermissions();
-        $form->setAction($this->url()->fromRoute('userRoleCreate'));
+        $form->setAttribute('action', $this->url()->fromRoute('userRoleCreate'));
         $post = $this->getRequest()->post()->toArray();
         if($this->getRequest()->isPost() and $form->isValid($post))
         {
@@ -103,7 +103,7 @@ class RoleController extends Action
 
         $form = new RoleForm();
         $form->initPermissions($role_table->getUserPermissions());
-        $form->setAction($this->url()->fromRoute('userRoleEdit', array('id' => $role_id)));
+        $form->setAttribute('action', $this->url()->fromRoute('userRoleEdit', array('id' => $role_id)));
         $form->populate($role_table->getData());
         $post = $this->getRequest()->post()->toArray();
         if($this->getRequest()->isPost() and $form->isValid($post))
