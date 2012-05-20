@@ -61,14 +61,14 @@ return array(
                 ),
             ),
             'Zend\View\HelperLoader' => array(
-                'registerPlugins' => array(
+                'parameters' => array(
                     'map' => array(
                         'JsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape'
                     )
                 ),
             ),
             'Zend\Validator\ValidatorLoader' => array(
-                'registerPlugins' => array(
+                'parameters' => array(
                     'map' => array(
                         'identifier' => 'Gc\Validator\Identifier'
                     )
