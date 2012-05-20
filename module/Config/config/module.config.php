@@ -25,20 +25,39 @@
  */
 
 return array(
+    'display_exceptions'    => TRUE,
+    'controller' => array(
+        'classes' => array(
+            'IndexController'   => 'Config\Controller\IndexController',
+            'UserController'    => 'Config\Controller\UserController',
+            'RoleController'    => 'Config\Controller\RoleController',
+            'RuleController'    => 'Config\Controller\RuleController',
+            'CmsController'     => 'Config\Controller\CmsController',
+        ),
+    ),
+    'view_manager' => array(
+        'template_path_stack' => array(
+            'config' => __DIR__ . '/../views',
+        ),
+    ),
     'di' => array(
         'instance' => array(
-            'alias' => array(
-                'IndexController'   => 'Config\Controller\IndexController',
-                'UserController'    => 'Config\Controller\UserController',
-                'RoleController'    => 'Config\Controller\RoleController',
-                'RuleController'    => 'Config\Controller\RuleController',
-                'CmsController'     => 'Config\Controller\CmsController',
-            ),
-            'Zend\View\Resolver\TemplatePathStack' => array(
+           'Zend\Db\Adapter\Adapter' => array(
                 'parameters' => array(
-                    'paths'  => array(
-                        'config' => __DIR__ . '/../views',
+                    'driver' => array(
+                        'driver' => 'pdo_pgsql',
+                        'username' => 'got',
+                        'password' => 'x8maoxfp;',
+                        'database' => 'gotcms',
+                        'hostname' => 'localhost'
                     ),
+                ),
+            ),
+            'Zend\View\HelperLoader' => array(
+                'parameters' => array(
+                    'map' => array(
+                        'JsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape'
+                    )
                 ),
             ),
         ),

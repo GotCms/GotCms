@@ -63,7 +63,7 @@ class UserController extends Action
         $login_form = new UserLogin();
 
         $post = $this->getRequest()->post();
-        if($this->getRequest()->isPost() and $login_form->isValid($post->toArray()))
+        if($this->getRequest()->isPost() and $login_form->setData($post->toArray()) and $login_form->isValid())
         {
             $user_model = new User\Model();
             if($user_id = $user_model->authenticate($post->get('login'), $post->get('password')))
@@ -81,8 +81,7 @@ class UserController extends Action
         }
 
         $redirect = $this->getRouteMatch()->getParam('redirect');
-        var_dump(get_class_methods($login_form));die();
-        $login_form->get('redirect')->setValue($redirect);
+        $login_form->get('redirect')->setAttribute('value', $redirect);
 
         return array('form' => $login_form);
     }
@@ -125,16 +124,25 @@ class UserController extends Action
     public function createAction()
     {
         $form = new UserForm();
-        $form->setAction($this->url()->fromRoute('userCreate'));
+        $form->setAttribute('action', $this->url()->fromRoute('userCreate'));
         $form->passwordRequired();
         $post = $this->getRequest()->post()->toArray();
-        if($this->getRequest()->isPost() and $form->isValid($post))
+        if($this->getRequest()->isPost())
         {
-            $user_model = new User\Model();
-            $user_model->setData($post);
-            $user_model->save();
+            $form->setData($post);
+            $form->getInputFilter()->setData($post);
+            if($form->isValid())
+            {
+                $user_model = new User\Model();
+                $user_model->setData($post);
+                $user_model->save();
+                $this->flashMessenger()->setNamespace('success')->addMessage('Success');
 
-            $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
+                return $this->redirect()->toRoute('userEdit', array('id' => $user_model->getId()));
+            }
+
+            $form->getMessages();
+            $this->flashMessenger()->setNamespace('error')->addMessage('Error');
         }
 
         return array('form' => $form);
@@ -166,22 +174,35 @@ class UserController extends Action
         $user_model = User\Model::fromId($user_id);
 
         $form = new UserForm();
-        $form->setAction($this->url()->fromRoute('userEdit', array('id' => $user_id)));
+        $form->setAttribute('action', $this->url()->fromRoute('userEdit', array('id' => $user_id)));
         $form->loadValues($user_model);
         $post = $this->getRequest()->post()->toArray();
-
-        if(!empty($post['password']))
+        if($this->getRequest()->isPost())
         {
-            $form->passwordRequired();
-        }
+            if(!empty($post['password']))
+            {
+                $form->passwordRequired();
+                $validators = $form->get('password_confirm')->getAttribute('validators');
+                foreach($validators as $validator)
+                {
+                    if($validator instanceof \Zend\Validator\Identical)
+                    {
+                        $validator->setToken($post['password']);
+                    }
+                }
+            }
 
-        if($this->getRequest()->isPost() and $form->isValid($post))
-        {
+            $form->setData($post);
+            $form->getInputFilter()->setData($post);
+            if($form->isValid())
+            {
+                $user_model->addData($post);
+                $user_model->save();
+                $this->flashMessenger()->setNamespace('success')->addMessage('Success');
+                return $this->redirect()->toRoute('userEdit', array('id' => $user_id));
+            }
 
-            $user_model->addData($post);
-            $user_model->save();
-
-            $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
+            $this->flashMessenger()->setNamespace('error')->addMessage('Error');
         }
 
         return array('form' => $form);

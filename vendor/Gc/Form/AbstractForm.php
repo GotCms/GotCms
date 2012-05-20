@@ -29,18 +29,26 @@ namespace Gc\Form;
 
 use Zend\Form\Form,
     Zend\Form\Element,
+    Zend\InputFilter\InputFilter,
     Gc\Exception,
     Gc\Db\AbstractTable;
 
 abstract class AbstractForm extends Form
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setAttribute('method', 'post');
+        $this->init();
+    }
     /**
      * Get db adapter
      * @return Zend_Db_Adapter_Abstract
      */
     public function getAdapter()
     {
-        return TableGateway\StaticAdapterTableGateway::getStaticAdapter();
+        return \Zend\Db\TableGateway\StaticAdapterTableGateway::getStaticAdapter();
     }
 
     /**
@@ -57,15 +65,22 @@ abstract class AbstractForm extends Form
             {
                 if($element = $this->get($element_name))
                 {
-                    if($element->getType() == 'Zend\Form\Element\Password')
+                    if($element->getAttribute('type') == 'Zend\Form\Element\Password')
                     {
                         continue;
                     }
 
-                    $element->setValue($element_value);
-                    if($validator = $element->getValidator('Zend\Validator\Db\NoRecordExists'))
+                    $element->setAttribute('value', $element_value);
+                    $validators = $element->getAttribute('validators');
+                    if(!empty($validators))
                     {
-                        $validator->setExclude(array('field' => 'id', 'value' => $table->getId()));
+                        foreach($validators as $validator)
+                        {
+                            if($validator instanceof \Zend\Validator\Db\NoRecordExists)
+                            {
+                                $validator->setExclude(array('field' => 'id', 'value' => $table->getId()));
+                            }
+                        }
                     }
                 }
             }
@@ -110,5 +125,21 @@ abstract class AbstractForm extends Form
         {
             throw new Exception("Invalid element ".__CLASS__."::".__METHOD__.")");
         }
+    }
+
+    /**
+     * Return element value
+     * @param string $name
+     * @return string
+     */
+    public function getValue($name)
+    {
+        if($this->getInputFilter()->has($name))
+        {
+            $element = $this->getInputFilter()->get($name);
+            return $element->getValue();
+        }
+
+        return NULL;
     }
 }

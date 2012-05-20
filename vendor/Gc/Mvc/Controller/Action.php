@@ -65,7 +65,12 @@ class Action extends ActionController
      */
     public function execute(MvcEvent $e)
     {
-        $this->_construct();
+        $result_response = $this->_construct();
+        if(!empty($result_response))
+        {
+            return $result_response;
+        }
+
         $this->init();
         return parent::execute($e);
     }
@@ -85,6 +90,7 @@ class Action extends ActionController
      */
     protected function _construct()
     {
+        \Zend\Db\TableGateway\StaticAdapterTableGateway::setStaticAdapter($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
         $auth = $this->getAuth();
         $module = $this->getRouteMatch()->getParam('module');
         $route_name = $this->getRouteMatch()->getMatchedRouteName();

@@ -140,13 +140,14 @@ class Model extends AbstractTable implements IterableInterface
             {
                 $array_save['created_at'] = date('Y-m-d H:i:s');
                 $this->insert($array_save);
+                $this->setId($this->getLastInsertId());
             }
             else
             {
                 $this->update($array_save, 'id = '.$this->getId());
             }
 
-            return TRUE;
+            return $this->getId();
         }
         catch (Exception $e)
         {

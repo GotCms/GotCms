@@ -27,7 +27,6 @@
 namespace Config\Form;
 
 use Gc\Form\AbstractForm,
-    Zend\Validator\Db,
     Zend\Form\Element;
 
 class UserLogin extends AbstractForm
@@ -36,22 +35,31 @@ class UserLogin extends AbstractForm
      * Initialize UserLogin form
      * @return void
      */
-    public function __construct()
+    public function init()
     {
-        parent::__construct();
-        $this->setAttribute('method', 'post');
-        $this->addDecorator('ViewScript', array('viewScript' => 'config-forms/login.phtml'));
+        $email = new Element('login');
+        $email->setAttributes(array(
+            'required'=> TRUE
+            , 'type'=> 'text'
+            , 'validators' => array(
+                array('name' => 'not_empty')
+            )
+        ));
 
-        $email = new Element\Text('login');
-        $email->setRequired(TRUE)
-            ->addValidator('NotEmpty');
+        $password  = new Element('password');
+        $password->setAttributes(array(
+            'required'=> TRUE
+            , 'type'=> 'password'
+            , 'validators' => array(
+                array('name' => 'not_empty')
+            )
+        ));
 
-        $password  = new Element\Password('password');
-        $password->setRequired(TRUE)
-            ->addValidator('NotEmpty');
+        $redirect  = new Element('redirect');
+        $email->setAttribute('type', 'hidden');
 
-        $redirect  = new Element\Hidden('redirect');
-
-        $this->addElements(array($email, $password, $redirect));
+        $this->add($email);
+        $this->add($password);
+        $this->add($redirect);
     }
 }

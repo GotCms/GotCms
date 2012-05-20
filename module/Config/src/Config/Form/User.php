@@ -29,8 +29,9 @@ namespace Config\Form;
 use Gc\Form\AbstractForm,
     Gc\User\Role\Collection as RoleCollection,
     Zend\Validator\Db,
-    Zend\Validator\Identical,
-    Zend\Form\Element;
+    Zend\Validator,
+    Zend\Form\Element,
+    Zend\InputFilter\Factory as InputFilterFactory;
 
 class User extends AbstractForm
 {
@@ -38,86 +39,71 @@ class User extends AbstractForm
      * Initialize User form
      * @return void
      */
-    public function __construct()
+    public function init()
     {
-        parent::__construct();
-        $this->setMethod(self::METHOD_POST);
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'email' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                    , array('name' => 'email_address')
+                )
+            )
+            , 'login' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                    , array(
+                        'name' => 'db\\no_record_exists'
+                        , 'options' => array(
+                            'table' => 'user'
+                            , 'field' => 'login'
+                            , 'adapter' => $this->getAdapter()
+                        )
+                    )
+                )
+            )
+            , 'lastname' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+            , 'firstname' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+            , 'role' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+        ));
+        $this->setInputFilter($inputFilter);
 
-        $email = new Element('email');
-        $email->setRequired(TRUE)
-            ->setAttrib('type', 'text')
-            ->setLabel('Email')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty')
-            ->addValidator('EmailAddress');
-
-        $login = new Element('login');
-        $login->setLabel('Login')
-            ->setAttrib('type', 'text')
-            ->setAttrib('class', 'input-text');
-
-        $password  = new Element('password');
-        $password->setLabel('Password')
-            ->setAttrib('type', 'password')
-            ->setAttrib('class', 'input-text')
-            ->setAttrib('autocomplete', 'off');
-
-        $password_confirm  = new Element('password_confirm');
-        $password_confirm->setLabel('Password Confirm')
-            ->setAttrib('type', 'password')
-            ->setAttrib('class', 'input-text')
-            ->setAttrib('autocomplete', 'off');
-
-        $lastname  = new Element('lastname');
-        $lastname->setRequired(TRUE)
-            ->setAttrib('type', 'text')
-            ->setLabel('Lastname')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
-
-        $firstname  = new Element('firstname');
-        $firstname->setRequired(TRUE)
-            ->setAttrib('type', 'text')
-            ->setLabel('Firstname')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
 
         $role = new Element('user_acl_role_id');
-        $role->setRequired(TRUE)
-            ->setAttrib('type', 'select')
-            ->setLabel('Role')
-            ->setAttrib('class', 'input-select')
-            ->addValidator('NotEmpty');
-
         $role_collection = new RoleCollection();
         $roles_list = $role_collection->getRoles();
+        $select_options = array();
         foreach($roles_list as $role_model)
         {
-            $role->addMultiOption($role_model->getId(), $role_model->getName());
+            $select_options[$role_model->getId()] = $role_model->getName();
         }
 
-        $submit = new Element('submit');
-        $submit->setAttrib('class', 'input-submit')
-            ->setAttrib('type', 'submit')
-            ->setLabel('Save');
+        $role->setAttribute('options', $select_options);
 
-        $this->add(array($email, $login, $password, $password_confirm, $lastname, $firstname, $role, $submit));
-    }
-
-    /**
-     * Validate the form
-     *
-     * @param  array $data
-     * @return boolean
-     */
-    public function isvalid($data)
-    {
-        if(!empty($data['password']))
-        {
-            $this->getElement('password_confirm')->getValidator('Identical')->setToken($data['password']);
-        }
-
-        return parent::isValid($data);
+        $this->add(new Element('email'));
+        $this->add(new Element('login'));
+        $this->add(new Element('password'));
+        $this->add(new Element('password_confirm'));
+        $this->add(new Element('lastname'));
+        $this->add(new Element('firstname'));
+        $this->add($role);
     }
 
     /**
@@ -127,8 +113,8 @@ class User extends AbstractForm
      */
     public function passwordRequired()
     {
-        $this->getElement('password')->setRequired(TRUE)->addValidator('NotEmpty');
-        $this->getElement('password_confirm')->setRequired(TRUE)->addValidator('NotEmpty')->addValidator('Identical');
+        $this->get('password')->setAttribute('required', TRUE)->setAttribute('validators', array(new Validator\NotEmpty()));
+        $this->get('password_confirm')->setAttribute('required', TRUE)->setAttribute('validators', array(new Validator\NotEmpty(), new Validator\Identical()));
 
         return $this;
     }

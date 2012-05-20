@@ -44,7 +44,7 @@ return array(
     'service_manager' => array(
         'use_defaults' => true
         , 'factories' => array(
-        )
+        ),
     ),
     'autoloader' => array(
         'namespaces' => array(
