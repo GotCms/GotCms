@@ -131,6 +131,8 @@ class UserController extends Action
         {
             $form->setData($post);
             $form->getInputFilter()->setData($post);
+            $form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new \Zend\Validator\Identical($post['password']));
+
             if($form->isValid())
             {
                 $user_model = new User\Model();
@@ -141,7 +143,6 @@ class UserController extends Action
                 return $this->redirect()->toRoute('userEdit', array('id' => $user_model->getId()));
             }
 
-            $form->getMessages();
             $this->flashMessenger()->setNamespace('error')->addMessage('Error');
         }
 
@@ -182,14 +183,7 @@ class UserController extends Action
             if(!empty($post['password']))
             {
                 $form->passwordRequired();
-                $validators = $form->get('password_confirm')->getAttribute('validators');
-                foreach($validators as $validator)
-                {
-                    if($validator instanceof \Zend\Validator\Identical)
-                    {
-                        $validator->setToken($post['password']);
-                    }
-                }
+                $form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new \Zend\Validator\Identical($post['password']));
             }
 
             $form->setData($post);

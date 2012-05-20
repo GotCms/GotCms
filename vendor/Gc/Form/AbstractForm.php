@@ -59,19 +59,15 @@ abstract class AbstractForm extends Form
     public function loadValues(AbstractTable $table)
     {
         $data = $table->getData();
+        $input_filter = $this->getInputFilter();
         if(is_array($data))
         {
             foreach($data as $element_name => $element_value)
             {
-                if($element = $this->get($element_name))
+                if($input_filter->has($element_name))
                 {
-                    if($element->getAttribute('type') == 'Zend\Form\Element\Password')
-                    {
-                        continue;
-                    }
-
-                    $element->setAttribute('value', $element_value);
-                    $validators = $element->getAttribute('validators');
+                    $element = $input_filter->get($element_name)->setValue($element_value);
+                    $validators = $element->getValidatorChain();
                     if(!empty($validators))
                     {
                         foreach($validators as $validator)

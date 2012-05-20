@@ -76,12 +76,14 @@ class User extends AbstractForm
                     array('name' => 'not_empty')
                 )
             )
-            , 'role' => array(
+            , 'user_acl_role_id' => array(
                 'required'=> TRUE
                 , 'validators' => array(
                     array('name' => 'not_empty')
                 )
             )
+            , 'password' => array()
+            , 'password_confirm' => array()
         ));
         $this->setInputFilter($inputFilter);
 
@@ -113,8 +115,8 @@ class User extends AbstractForm
      */
     public function passwordRequired()
     {
-        $this->get('password')->setAttribute('required', TRUE)->setAttribute('validators', array(new Validator\NotEmpty()));
-        $this->get('password_confirm')->setAttribute('required', TRUE)->setAttribute('validators', array(new Validator\NotEmpty(), new Validator\Identical()));
+        $this->getInputfilter()->get('password')->setRequired(TRUE)->getValidatorChain()->addValidator(new Validator\NotEmpty());
+        $this->getInputfilter()->get('password_confirm')->setRequired(TRUE)->getValidatorChain()->addValidator(new Validator\NotEmpty());
 
         return $this;
     }
