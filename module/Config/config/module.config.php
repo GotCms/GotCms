@@ -28,7 +28,7 @@ return array(
     'display_exceptions'    => TRUE,
     'controller' => array(
         'classes' => array(
-            'IndexController'   => 'Config\Controller\IndexController',
+            'ConfigController'  => 'Config\Controller\IndexController',
             'UserController'    => 'Config\Controller\UserController',
             'RoleController'    => 'Config\Controller\RoleController',
             'RuleController'    => 'Config\Controller\RuleController',

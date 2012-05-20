@@ -18,4 +18,5 @@ $serviceManager->setService('ApplicationConfiguration', $configuration);
 $serviceManager->get('ModuleManager')->loadModules();
 
 // run application
-$serviceManager->get('Application')->bootstrap()->run()->send();
+$application = $serviceManager->get('Application');
+$application->bootstrap()->run()->send();

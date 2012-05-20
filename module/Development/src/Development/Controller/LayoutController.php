@@ -55,14 +55,14 @@ class LayoutController extends Action
     public function createAction()
     {
         $layout_form = new LayoutForm();
-        $layout_form->setAction($this->url()->fromRoute('layoutCreate'));
+        $layout_form->setAttribute('action', $this->url()->fromRoute('layoutCreate'));
 
         if($this->getRequest()->isPost())
         {
-            if(!$layout_form->isValid($this->getRequest()->post()->toArray()))
-            {
-            }
-            else
+            $data = $this->getRequest()->post()->toArray();
+            $layout_form->setData($data);
+            $layout_form->getInputFilter()->setData($data);
+            if($layout_form->isValid())
             {
                 $layout = new Layout\Model();
                 $layout->setName($layout_form->getValue('name'));
@@ -93,20 +93,21 @@ class LayoutController extends Action
         }
 
         $layout_form = new LayoutForm();
-        $layout_form->setAction($this->url()->fromRoute('layoutEdit', array('id' => $layout_id)));
+        $layout_form->setAttribute('action', $this->url()->fromRoute('layoutEdit', array('id' => $layout_id)));
         $layout_form->loadValues($layout);
 
         if($this->getRequest()->isPost())
         {
             $data = $this->getRequest()->post()->toArray();
-            if($layout_form->isValid($data))
+
+            $layout_form->setData($data);
+            $layout_form->getInputFilter()->setData($data);
+            if($layout_form->isValid())
             {
                 $layout->addData($layout_form->getValues(TRUE));
                 $layout->save();
-                $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+                return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
             }
-
-            $layout_form->populate($data);
         }
 
         return array('form' => $layout_form);

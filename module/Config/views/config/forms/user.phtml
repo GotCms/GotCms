@@ -1,8 +1,36 @@
+<?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Design
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
+
+?>
 <?php $errors = $this->form->getMessages(); ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <div>
         <label class="required" for="email"><?php echo $this->escape($this->translator('Email')); ?></label>
-        <input type="text" class="input-text" value="<?php echo $this->escape($this->form->getValue('email')); ?>" id="email" name="email">
+        <input type="email" class="input-text" value="<?php echo $this->escape($this->form->getValue('email')); ?>" id="email" name="email">
         <?php if(!empty($errors['email'])): ?>
             <?php echo $this->formErrors($errors['email']); ?>
         <?php endif; ?>

@@ -38,19 +38,18 @@ class UserForgotPassword extends AbstractForm
      */
     public function init()
     {
-        $this->setMethod(self::METHOD_POST);
-        $this->addDecorator('ViewScript', array('viewScript' => 'config-forms/forgot-password.phtml'));
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'email' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+        ));
 
-        $email = new Element\Text('email');
-        $email->setRequired(TRUE)
-            ->addValidator('NotEmpty')
-            ->addValidator('EmailAddress');
+        $this->setInputFilter($inputFilter);
 
-        $submit = new Element\Submit('submit');
-        $submit->setAttrib('class', 'input-submit')
-            ->setLabel('Save');
-
-
-        $this->addElements(array($email, $submit));
+        $this->add(new Element('email'));
     }
 }

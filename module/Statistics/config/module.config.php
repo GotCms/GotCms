@@ -23,20 +23,16 @@
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
-
 return array(
-    'di' => array(
-        'instance' => array(
-            'alias' => array(
-                'statistics-index' => 'Statistics\Controller\IndexController',
-            ),
-            'Zend\View\Resolver\TemplatePathStack' => array(
-                'parameters' => array(
-                    'paths'  => array(
-                        'statistics' => __DIR__ . '/../views',
-                    ),
-                ),
-            ),
+    'controller' => array(
+        'classes' => array(
+            'StatisticsController' => 'Admin\Controller\IndexController'
+        ),
+    ),
+    'view_manager' => array(
+        'template_path_stack' => array(
+            'statistics' => __DIR__ . '/../views',
         ),
     ),
 );
+

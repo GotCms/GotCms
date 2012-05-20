@@ -26,7 +26,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php echo $this->form; ?>
+<?php echo $this->partial('development/forms/layout.phtml', array('form' => $this->form)); ?>
 <script type="text/javascript">
 var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('layout-content'), {
     lineNumbers: true,

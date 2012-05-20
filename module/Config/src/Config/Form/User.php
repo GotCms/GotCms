@@ -85,8 +85,8 @@ class User extends AbstractForm
             , 'password' => array()
             , 'password_confirm' => array()
         ));
-        $this->setInputFilter($inputFilter);
 
+        $this->setInputFilter($inputFilter);
 
         $role = new Element('user_acl_role_id');
         $role_collection = new RoleCollection();

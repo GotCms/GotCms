@@ -55,14 +55,14 @@ class ViewController extends Action
     public function createAction()
     {
         $view_form = new ViewForm();
-        $view_form->setAction($this->url()->fromRoute('viewCreate'));
+        $view_form->setAttribute('action', $this->url()->fromRoute('viewCreate'));
 
         if($this->getRequest()->isPost())
         {
-            if(!$view_form->isValid($this->getRequest()->post()->toArray()))
-            {
-            }
-            else
+            $data = $this->getRequest()->post()->toArray();
+            $view_form->setData($data);
+            $view_form->getInputFilter()->setData($data);
+            if($view_form->isValid())
             {
                 $view_model = new View\Model();
                 $view_model->setName($view_form->getValue('name'));
@@ -71,8 +71,7 @@ class ViewController extends Action
                 $view_model->setContent($view_form->getValue('content'));
                 $view_model->save();
 
-                $this->redirect()->toRoute('viewCreate');
-                return;
+                return $this->redirect()->toRoute('viewCreate');
             }
         }
 
@@ -92,24 +91,24 @@ class ViewController extends Action
             return $this->redirect()->toRoute('viewList');
         }
 
-        $form = new ViewForm();
-        $form->setAction($this->url()->fromRoute('viewEdit',array('id' => $view_id)));
-        $form->loadValues($view);
+        $view_form = new ViewForm();
+        $view_form->setAttribute('action', $this->url()->fromRoute('viewEdit',array('id' => $view_id)));
+        $view_form->loadValues($view);
 
         if($this->getRequest()->isPost())
         {
             $data = $this->getRequest()->post()->toArray();
-            if($form->isValid($data))
+            $view_form->setData($data);
+            $view_form->getInputFilter()->setData($data);
+            if($view_form->isValid())
             {
-                $view->addData($form->getValues(TRUE));
+                $view->addData($view_form->getValues(TRUE));
                 $view->save();
-                $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+                return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
             }
-
-            $form->populate($data);
         }
 
-        return array('form' => $form);
+        return array('form' => $view_form);
     }
 
     /**

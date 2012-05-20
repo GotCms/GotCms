@@ -333,6 +333,6 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getUrl()
     {
-        return $GLOBALS['application']->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));
+        return $GLOBALS['application']->getMvcEvent()->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));
     }
 }

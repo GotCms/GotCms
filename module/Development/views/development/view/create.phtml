@@ -26,15 +26,15 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php echo $this->form; ?>
+<?php echo $this->partial('development/forms/view.phtml', array('form' => $this->form)); ?>
 <script type="text/javascript">
-var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("view-content"), {
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('view-content'), {
     lineNumbers: true,
     matchBrackets: true,
     mode: "application/x-httpd-php",
     indentUnit: 4,
     indentWithTabs: true,
     enterMode: "keep",
-    tabMode: "default"
+    tabMode: "spaces"
 });
 </script>

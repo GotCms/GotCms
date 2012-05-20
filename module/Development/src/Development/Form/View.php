@@ -29,50 +29,58 @@ namespace Development\Form;
 use Gc\Form\AbstractForm,
     Gc\Validator,
     Zend\Validator\Db,
-    Zend\Form\Element;
+    Zend\Form\Element,
+    Zend\InputFilter\Factory as InputFilterFactory;
 
 class View extends AbstractForm
 {
     public function init()
     {
-        $this->setMethod(self::METHOD_POST);
-        $this->setElementsBelongTo('view');
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'name' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                    , array(
+                        'name' => 'db\\no_record_exists'
+                        , 'options' => array(
+                            'table' => 'view'
+                            , 'field' => 'name'
+                            , 'adapter' => $this->getAdapter()
+                        )
+                    )
+                )
+            )
+            , 'identifier' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                    , array(
+                        'name' => 'db\\no_record_exists'
+                        , 'options' => array(
+                            'table' => 'view'
+                            , 'field' => 'identifier'
+                            , 'adapter' => $this->getAdapter()
+                        )
+                    )
+                )
+            )
+            , 'description' => array(
+            )
+            , 'content' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+        ));
 
-        $name = new Element\Text('name');
-        $name->setRequired(TRUE)
-            ->setLabel('Name')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty')
-            ->addValidator(new Db\NoRecordExists(array(
-                'table' => 'view'
-                , 'field' => 'name'
-                ))
-            );
+        $this->setInputFilter($inputFilter);
 
-        $identifier  = new Element\Text('identifier');
-        $identifier->setRequired(TRUE)
-            ->setLabel('Identifier')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty')
-            ->addValidator(new Validator\Identifier())
-            ->addValidator(new Db\NoRecordExists(array(
-                'table' => 'view'
-                , 'field' => 'identifier'
-                ))
-            );
-
-        $description  = new Element\Text('description');
-        $description->setLabel('Description')
-            ->setAttrib('class', 'input-text');
-
-        $content  = new Element\Textarea('content');
-        $content->setLabel('Content');
-
-        $submit = new Element\Submit('submit');
-        $submit->setAttrib('class', 'input-submit')
-            ->setLabel('Add');
-
-
-        $this->addElements(array($name, $identifier, $description, $content, $submit));
+        $this->add(new Element('name'));
+        $this->add(new Element('identifier'));
+        $this->add(new Element('description'));
+        $this->add(new Element('content'));
     }
 }

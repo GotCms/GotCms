@@ -27,7 +27,8 @@
 namespace Config\Form;
 
 use Gc\Form\AbstractForm,
-    Zend\Form\Element;
+    Zend\Form\Element,
+    Zend\InputFilter\Factory as InputFilterFactory;
 
 class UserLogin extends AbstractForm
 {
@@ -37,29 +38,26 @@ class UserLogin extends AbstractForm
      */
     public function init()
     {
-        $email = new Element('login');
-        $email->setAttributes(array(
-            'required'=> TRUE
-            , 'type'=> 'text'
-            , 'validators' => array(
-                array('name' => 'not_empty')
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'login' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+            , 'password' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
             )
         ));
 
-        $password  = new Element('password');
-        $password->setAttributes(array(
-            'required'=> TRUE
-            , 'type'=> 'password'
-            , 'validators' => array(
-                array('name' => 'not_empty')
-            )
-        ));
+        $this->setInputFilter($inputFilter);
 
-        $redirect  = new Element('redirect');
-        $email->setAttribute('type', 'hidden');
-
-        $this->add($email);
-        $this->add($password);
-        $this->add($redirect);
+        $this->add(new Element('login'));
+        $this->add(new Element('password'));
+        $this->add(new Element('redirect'));
     }
 }

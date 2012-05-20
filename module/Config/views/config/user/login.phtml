@@ -6,7 +6,7 @@
         <input name="redirect" id="redirect" type="hidden" value="<?php echo $this->escape($this->form->get('redirect')->getAttribute('value')); ?>">
     </fieldset>
     <fieldset id="actions">
-        <input type="submit" id="submit" value="Log in">
+        <input type="submit" id="submit" value="<?php echo $this->escape($this->translator('Log in')); ?>">
         <a href="<?php echo $this->url('userForgotPassword'); ?>"><?php echo $this->escape($this->translator('Forgot your password?')); ?></a>
     </fieldset>
 </form>

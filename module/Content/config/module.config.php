@@ -27,7 +27,7 @@
 return array(
     'controller' => array(
         'classes' => array(
-            'IndexController' => 'Content\Controller\IndexController'
+            'ContentController' => 'Content\Controller\IndexController'
             , 'DocumentController' => 'Content\Controller\DocumentController'
         ),
     ),
