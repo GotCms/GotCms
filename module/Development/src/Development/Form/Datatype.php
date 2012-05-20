@@ -29,7 +29,8 @@ namespace Development\Form;
 use Gc\Form\AbstractForm,
     Gc\Validator,
     Zend\Validator\Db,
-    Zend\Form\Element;
+    Zend\Form\Element,
+    Zend\InputFilter\Factory as InputFilterFactory;
 
 class Datatype extends AbstractForm
 {
@@ -39,8 +40,6 @@ class Datatype extends AbstractForm
      */
     public function init()
     {
-        $this->setMethod(self::METHOD_POST);
-
         $name = new Element\Text('name');
         $name->setRequired(TRUE)
             ->setLabel('Name')
@@ -73,5 +72,37 @@ class Datatype extends AbstractForm
 
 
         $this->addElements(array($name, $model, $submit));
+
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'name' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                    , array(
+                        'name' => 'db\\no_record_exists'
+                        , 'options' => array(
+                            'table' => 'datatype'
+                            , 'field' => 'name'
+                            , 'adapter' => $this->getAdapter()
+                        )
+                    )
+                )
+            )
+            , 'model' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                    , array(
+                        'name' => 'identifier'
+                    )
+                )
+            )
+        ));
+
+        $this->setInputFilter($inputFilter);
+
+        $this->add(new Element('name'));
+        $this->add(new Element('identifier'));
     }
 }
