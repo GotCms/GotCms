@@ -113,8 +113,22 @@ class User extends AbstractForm
      */
     public function passwordRequired()
     {
-        $this->getInputfilter()->get('password')->setRequired(TRUE)->getValidatorChain()->addValidator(new Validator\NotEmpty());
-        $this->getInputfilter()->get('password_confirm')->setRequired(TRUE)->getValidatorChain()->addValidator(new Validator\NotEmpty());
+        $filter = $this->getInputFilter();
+        $filter->add(array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+        , 'password');
+
+        $filter->add(array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+        , 'password_confirm');
 
         return $this;
     }

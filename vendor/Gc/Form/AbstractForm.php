@@ -66,7 +66,7 @@ abstract class AbstractForm extends Form
             {
                 if($this->has($element_name))
                 {
-                    $element = $this->get($element_name)->setAttribute('value', $element_value);
+                    $this->get($element_name)->setAttribute('value', $element_value);
                 }
 
                 if($input_filter->has($element_name))
