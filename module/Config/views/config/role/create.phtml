@@ -26,4 +26,4 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php echo $this->form; ?>
+<?php echo $this->partial('config/forms/role.phtml', array('form' => $this->form)); ?>

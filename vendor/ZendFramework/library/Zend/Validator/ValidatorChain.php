@@ -30,8 +30,8 @@ use Zend\Loader\Pluggable;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ValidatorChain implements 
-    Countable, 
+class ValidatorChain implements
+    Countable,
     Pluggable,
     ValidatorInterface
 {
@@ -64,7 +64,7 @@ class ValidatorChain implements
 
     /**
      * Return the count of attached valicators
-     * 
+     *
      * @return int
      */
     public function count()
@@ -74,7 +74,7 @@ class ValidatorChain implements
 
     /**
      * Get plugin broker instance
-     * 
+     *
      * @return Zend\Loader\Broker
      */
     public function getBroker()
@@ -87,7 +87,7 @@ class ValidatorChain implements
 
     /**
      * Set plugin broker instance
-     * 
+     *
      * @param  string|Broker $broker Plugin broker to load plugins
      * @return ValidatorChain
      */
@@ -106,7 +106,7 @@ class ValidatorChain implements
 
     /**
      * Retrieve a validator by name
-     * 
+     *
      * @param  string     $plugin  Name of validator to return
      * @param  null|array $options Options to pass to validator constructor (if not already instantiated)
      * @return ValidatorInterface
@@ -157,10 +157,10 @@ class ValidatorChain implements
 
     /**
      * Use the plugin broker to add a validator by name
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $breakChainOnFailure 
+     *
+     * @param  string $name
+     * @param  array $options
+     * @param  bool $breakChainOnFailure
      * @return ValidatorChain
      */
     public function addByName($name, $options = array(), $breakChainOnFailure = false)
@@ -172,10 +172,10 @@ class ValidatorChain implements
 
     /**
      * Use the plugin broker to prepend a validator by name
-     * 
-     * @param  string $name 
-     * @param  array $options 
-     * @param  bool $breakChainOnFailure 
+     *
+     * @param  string $name
+     * @param  array $options
+     * @param  bool $breakChainOnFailure
      * @return ValidatorChain
      */
     public function prependByName($name, $options = array(), $breakChainOnFailure = false)
@@ -238,12 +238,25 @@ class ValidatorChain implements
 
     /**
      * Invoke chain as command
-     * 
-     * @param  mixed $value 
+     *
+     * @param  mixed $value
      * @return boolean
      */
     public function __invoke($value)
     {
         return $this->isValid($value);
+    }
+
+    public function getValidator($name)
+    {
+        foreach($this->validators as $validator)
+        {
+            if($validator['instance'] instanceof $name)
+            {
+                return $validator['instance'];
+            }
+        }
+
+        return NULL;
     }
 }

@@ -104,7 +104,7 @@ class RoleController extends Action
         $form = new RoleForm();
         $form->initPermissions($role_table->getUserPermissions());
         $form->setAttribute('action', $this->url()->fromRoute('userRoleEdit', array('id' => $role_id)));
-        $form->populate($role_table->getData());
+        $form->loadValues($role_table);
         $post = $this->getRequest()->post()->toArray();
         if($this->getRequest()->isPost() and $form->isValid($post))
         {

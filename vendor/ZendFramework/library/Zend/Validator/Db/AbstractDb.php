@@ -323,7 +323,7 @@ abstract class AbstractDb extends AbstractValidator
                 if (is_array($this->_exclude)) {
                     $select->where(
                         $platform->quoteIdentifier($this->_exclude['field'], true) .
-                        ' != ?', $this->_exclude['value']
+                        ' != ' . $this->_exclude['value']
                     );
                 } else {
                     $select->where($this->_exclude);

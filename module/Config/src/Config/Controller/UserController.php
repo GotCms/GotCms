@@ -194,7 +194,6 @@ class UserController extends Action
                 return $this->redirect()->toRoute('userEdit', array('id' => $user_id));
             }
 
-
             $this->flashMessenger()->setNamespace('error')->addMessage('Error');
         }
 

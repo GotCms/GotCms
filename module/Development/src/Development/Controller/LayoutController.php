@@ -63,12 +63,12 @@ class LayoutController extends Action
             $layout_form->setData($data);
             if($layout_form->isValid())
             {
-                $layout = new Layout\Model();
-                $layout->setName($layout_form->getValue('name'));
-                $layout->setIdentifier($layout_form->getValue('identifier'));
-                $layout->setDescription($layout_form->getValue('description'));
-                $layout->setContent($layout_form->getValue('content'));
-                $layout->save();
+                $layout_model = new Layout\Model();
+                $layout_model->setName($layout_form->getValue('name'));
+                $layout_model->setIdentifier($layout_form->getValue('identifier'));
+                $layout_model->setDescription($layout_form->getValue('description'));
+                $layout_model->setContent($layout_form->getValue('content'));
+                $layout_model->save();
 
                 $this->redirect()->toRoute('layoutCreate');
                 return;
@@ -85,15 +85,15 @@ class LayoutController extends Action
     public function editAction()
     {
         $layout_id = $this->getRouteMatch()->getParam('id', NULL);
-        $layout = Layout\Model::fromId($layout_id);
-        if(empty($layout_id) or empty($layout))
+        $layout_model = Layout\Model::fromId($layout_id);
+        if(empty($layout_id) or empty($layout_model))
         {
             return $this->redirect()->toRoute('layoutList');
         }
 
         $layout_form = new LayoutForm();
         $layout_form->setAttribute('action', $this->url()->fromRoute('layoutEdit', array('id' => $layout_id)));
-        $layout_form->loadValues($layout);
+        $layout_form->loadValues($layout_model);
 
         if($this->getRequest()->isPost())
         {
@@ -102,8 +102,11 @@ class LayoutController extends Action
             $layout_form->setData($data);
             if($layout_form->isValid())
             {
-                $layout->addData($layout_form->getValues(TRUE));
-                $layout->save();
+                $layout_model->setName($layout_form->getValue('name'));
+                $layout_model->setIdentifier($layout_form->getValue('identifier'));
+                $layout_model->setDescription($layout_form->getValue('description'));
+                $layout_model->setContent($layout_form->getValue('content'));
+                $layout_model->save();
                 return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
             }
         }

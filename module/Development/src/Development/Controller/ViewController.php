@@ -84,15 +84,15 @@ class ViewController extends Action
     public function editAction()
     {
         $view_id = $this->getRouteMatch()->getParam('id', NULL);
-        $view = View\Model::fromId($view_id);
-        if(empty($view_id) or empty($view))
+        $view_model = View\Model::fromId($view_id);
+        if(empty($view_id) or empty($view_model))
         {
             return $this->redirect()->toRoute('viewList');
         }
 
         $view_form = new ViewForm();
         $view_form->setAttribute('action', $this->url()->fromRoute('viewEdit',array('id' => $view_id)));
-        $view_form->loadValues($view);
+        $view_form->loadValues($view_model);
 
         if($this->getRequest()->isPost())
         {
@@ -100,8 +100,11 @@ class ViewController extends Action
             $view_form->setData($data);
             if($view_form->isValid())
             {
-                $view->addData($view_form->getValues(TRUE));
-                $view->save();
+                $view_model->setName($view_form->getValue('name'));
+                $view_model->setIdentifier($view_form->getValue('identifier'));
+                $view_model->setDescription($view_form->getValue('description'));
+                $view_model->setContent($view_form->getValue('content'));
+                $view_model->save();
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
             }
         }
