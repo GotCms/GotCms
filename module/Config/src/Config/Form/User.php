@@ -82,8 +82,12 @@ class User extends AbstractForm
                     array('name' => 'not_empty')
                 )
             )
-            , 'password' => array()
-            , 'password_confirm' => array()
+            , 'password' => array(
+                'required'=> FALSE
+            )
+            , 'password_confirm' => array(
+                'required'=> FALSE
+            )
         ));
 
         $this->setInputFilter($inputFilter);

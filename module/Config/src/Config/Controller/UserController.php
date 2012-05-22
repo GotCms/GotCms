@@ -187,7 +187,6 @@ class UserController extends Action
             }
 
             $form->setData($post);
-            $form->getInputFilter()->setData($post);
             if($form->isValid())
             {
                 $user_model->addData($post);
@@ -195,6 +194,7 @@ class UserController extends Action
                 $this->flashMessenger()->setNamespace('success')->addMessage('Success');
                 return $this->redirect()->toRoute('userEdit', array('id' => $user_id));
             }
+
 
             $this->flashMessenger()->setNamespace('error')->addMessage('Error');
         }
