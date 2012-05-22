@@ -32,23 +32,24 @@
     <li><a href="#tabs-3"><?php echo $this->escape($this->translator('Properties')); ?></a></li>
     <li><a href="#tabs-4"><?php echo $this->escape($this->translator('Tabs')); ?></a></li>
 </ul>
-<?php $infos_form = $this->element->infos; ?>
-<?php $views_form = $this->element->views; ?>
-<?php $tabs_form = $this->element->tabs->getSubForms(); ?>
-<?php $properties_forms = $this->element->properties->getSubForms(); ?>
-<form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->element->getAction(); ?>" method="post">
+<?php $input_filter = $this->form->getInputFilter(); ?>
+<?php $infos_form = $input_filter->get('infos'); ?>
+<?php $views_form = $input_filter->get('views'); ?>
+<?php $tabs_form = $input_filter->get('tabs'); ?>
+<?php $properties_forms = $input_filter->get('properties'); ?>
+<form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->form->getAttribute('action'); ?>" method="post">
     <dl id="tabs-1">
         <dt id="name-label">
             <label for="infos-name" class="optional"><?php echo $this->escape($this->translator('Name')); ?></label>
         </dt>
         <dd id="name-element">
-            <input type="text" name="infos[name]" id="infos-name" value="<?php echo $infos_form->getValue('name'); ?>">
+            <input type="text" name="infos[name]" id="infos-name" value="<?php echo $this->form->getValue('name'); ?>">
         </dd>
         <dt id="description-label">
             <label for="infos-description" class="optional"><?php echo $this->escape($this->translator('Description')); ?></label>
         </dt>
         <dd id="description-element">
-            <input type="text" name="infos[description]" id="infos-description" value="<?php echo $infos_form->getValue('description'); ?>">
+            <input type="text" name="infos[description]" id="infos-description" value="<?php echo $this->form->getValue('description'); ?>">
         </dd>
         <dt id="icon_id-label">
             <label for="infos-icon_id" class="optional"><?php echo $this->escape($this->translator('Icon')); ?></label>
@@ -69,7 +70,7 @@
             <select name="views[default_view]" id="views-default_view">
                 <option value=""><?php echo $this->escape($this->translator('-- Select --')); ?></option>
                 <?php foreach($views as $view_id => $view_name): ?>
-                    <option value="<?php echo $view_id; ?>"<?php if($views_form->getValue('default_view') == $view_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escape($view_name); ?> </option>
+                    <option value="<?php echo $view_id; ?>"<?php if($this->form->getValue('default_view') == $view_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escape($view_name); ?> </option>
                 <?php endforeach; ?>
             </select>
         </dd>
@@ -110,7 +111,7 @@
             <select name="properties[tab]" id="properties-tab" class="select-tab">
                 <option value="" label="-- Select tab --" selected="selected">-- Select tab --</option>
                 <?php foreach($tabs_form as $form): ?>
-                    <option value="<?php echo $form->getValue('tab_id'); ?>"><?php echo $form->getValue('name'); ?></option>
+                    <option value="<?php echo $this->form->getValue('tab_id'); ?>"><?php echo $this->form->getValue('name'); ?></option>
                 <?php endforeach; ?>
             </select>
         </dd>
@@ -149,8 +150,8 @@
                 <ul>
                     <?php foreach($tabs_form as $form): ?>
                         <li>
-                            <?php $name = $form->getValue('name'); ?>
-                            <a href="#tabs-properties-<?php echo $form->getValue('tab_id'); ?>">
+                            <?php $name = $this->form->getValue('name'); ?>
+                            <a href="#tabs-properties-<?php echo $this->form->getValue('tab_id'); ?>">
                                 <?php echo $name; ?>
                             </a>
                         </li>
@@ -158,12 +159,13 @@
                 </ul>
 
                 <?php foreach($tabs_form as $form): ?>
-                    <div id="tabs-properties-<?php echo $form->getValue('tab_id'); ?>">
+                    <div id="tabs-properties-<?php echo $this->form->getValue('tab_id'); ?>">
                         <ul>
                             <?php foreach($properties_forms as $property): ?>
-                                <?php if($property->getValue('tab') != $form->getValue('tab_id')): ?>
+                                <?php if($property->getValue('tab') != $this->form->getValue('tab_id')): ?>
                                     <?php continue; ?>
                                 <?php endif; ?>
+
                                 <?php $property_id = 'property'.$property->getValue('property_id'); ?>
 
                                 <dl>
@@ -238,14 +240,14 @@
             <ul id="tabs" class="sortable ui-sortable">
             <?php foreach($tabs_form as $form): ?>
                 <li>
-                    <?php $name = $form->getValue('name'); ?>
-                    <?php $description = $form->getValue('description'); ?>
-                    <?php $tab_id = 'tab'.$form->getValue('tab_id'); ?>
+                    <?php $name = $this->form->getValue('name'); ?>
+                    <?php $description = $this->form->getValue('description'); ?>
+                    <?php $tab_id = 'tab'.$this->form->getValue('tab_id'); ?>
                     <input type="hidden" value="<?php echo $name; ?>" name="tabs[<?php echo $tab_id; ?>][name]">
                     <input type="hidden" value="<?php echo $description; ?>" name="tabs[<?php echo $tab_id; ?>][description]">
                     <span><?php echo $name; ?></span>
                     <span><?php echo $description; ?></span>
-                    <button value="<?php echo (int)$form->getValue('tab_id'); ?>" class="delete-tab" type="button">delete</button>
+                    <button value="<?php echo (int)$this->form->getValue('tab_id'); ?>" class="delete-tab" type="button">delete</button>
                 </li>
             <?php endforeach; ?>
             </ul>

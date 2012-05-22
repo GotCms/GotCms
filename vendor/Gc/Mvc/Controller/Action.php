@@ -90,7 +90,7 @@ class Action extends ActionController
      */
     protected function _construct()
     {
-        \Zend\Db\TableGateway\StaticAdapterTableGateway::setStaticAdapter($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
         $this->getServiceLocator()->get('Zend\View\HelperLoader')->registerPlugin('jsQuoteEscape', 'Gc\View\Helper\JsQuoteEscape');
         $this->getServiceLocator()->get('Zend\Validator\ValidatorLoader')->registerPlugin('Identifier', 'Gc\Validator\Identifier');
 

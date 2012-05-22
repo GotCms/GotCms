@@ -48,7 +48,7 @@ abstract class AbstractForm extends Form
      */
     public function getAdapter()
     {
-        return \Zend\Db\TableGateway\StaticAdapterTableGateway::getStaticAdapter();
+        return \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
     }
 
     /**

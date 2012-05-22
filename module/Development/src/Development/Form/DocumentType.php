@@ -35,159 +35,148 @@ use Gc\Form\AbstractForm,
     Gc\Property,
     Zend\Validator\Db,
     Zend\Form\Element,
-    Zend\Form\SubForm;
+    Zend\InputFilter\InputFilter,
+    Zend\Form\FieldSet;
 
 class DocumentType extends AbstractForm
 {
     /**
-     * Contains configuration of all sub forms
-     * @var $_subDocumentTypeForms array
-     *
+     * @var \Zend\InputFilter\Factory $_inputFilterFactory
      */
-    protected $_subDocumentTypeForms = array(
-        'infos' => array(
-            'legend' => 'Infos'
-            , 'decorators' => array(
-                'FormElements'
-                , array(
-                    'HtmlTag'
-                    , array(
-                        'tag' => 'dl'
-                        , 'id' => 'tabs-1')
-            )))
-        , 'views' => array(
-            'legend' => 'View'
-            ,'decorators' => array(
-                'FormElements'
-                , array(
-                    'HtmlTag'
-                    , array(
-                        'tag' => 'dl'
-                        , 'id' => 'tabs-2')
-            )))
-        , 'properties' => array(
-            'legend' => 'Properties'
-            , 'decorators' => array(
-                'FormElements'
-                , array(
-                    'HtmlTag'
-                    , array(
-                        'tag' => 'dl'
-                        , 'id' => 'tabs-3')
-            )))
-        , 'tabs' => array(
-            'legend' => 'Tabs'
-            , 'decorators' => array(
-                'FormElements'
-                , array(
-                    'HtmlTag'
-                    , array(
-                        'tag' => 'dl'
-                        , 'id' => 'tabs-4')
-        )))
-    );
+    protected $_inputFilter = NULL;
 
     /**
-     * @var $_datatypeValues array
-     * Contains datatype values key => value for select input
+     * @var \Gc\View\Collection
      */
-    protected $_datatypeValues = NULL;
+     protected $_viewCollection;
+
+     /**
+      * @var \Gc\Datatype\Collection
+      */
+     protected $_datatypeCollection;
 
     /**
      * Init document type form
      */
     public function init()
     {
+        $this->_inputFilter = new InputFilter();
+        $this->_datatypeCollection = new Datatype\Collection();
+        $this->_viewCollection = new View\Collection();
+
         $this->getInfos();
         $this->getViews();
         $this->getProperties();
         $this->getTabs();
 
-        $this->setAttrib('id', 'development-form');
-        $this->addDecorator('ViewScript', array('viewScript' => 'development-forms/document-type.phtml'));
-
-        $collection = new Datatype\Collection();
-        $this->_datatypeValues = $collection->getSelect();
-
-        $views_collection = new View\Collection();
-        $views = $views_collection->getSelect();
-
-        $this->getSubForm('views')->getElement('default_view')->addMultioptions($views);
-        $this->getSubForm('views')->getElement('available_views')->addMultioptions($views);
-
-        $this->getDecorator('ViewScript')->setOption('datatypes', $this->_datatypeValues);
-        $this->getDecorator('ViewScript')->setOption('views', $views);
+        $this->setInputFilter($this->_inputFilter);
 
     }
 
     /**
      * Initialize infos sub form
-     * @return \Zend\Form\SubForm
+     * @return \Zend\Form\FieldSet
      */
     private function getInfos()
     {
-        $sub_form = $this->getSubForm('infos');
-        if(!empty($sub_form))
+        $fieldsets = $this->getFieldSets();
+        if(!empty($sub_form['infos']))
         {
-            return $sub_form;
+            return $sub_form['infos'];
         }
 
-        $sub_form = new SubForm($this->_subDocumentTypeForms['infos']);
+        $sub_form = new FieldSet('infos');
 
-        $name = new Element\Text('name');
-        $name->addValidator(new Db\NoRecordExists(array(
-                'table' => 'document_type'
-                , 'field' => 'name'
-                ))
-            );
-        $description = new Element\Text('description');
-        $icon_id = new Element\Select('icon_id');
+        $this->_inputFilter->add(array(
+            'infos' => array(
+                'type'   => 'Zend\InputFilter\InputFilter',
+                'name' => array(
+                    'name'    => 'name',
+                    'required'=> TRUE
+                    , 'validators' => array(
+                        array('name' => 'not_empty')
+                        , array(
+                            'name' => 'db\\no_record_exists'
+                            , 'options' => array(
+                                'table' => 'document_type'
+                                , 'field' => 'name'
+                                , 'adapter' => $this->getAdapter()
+                            )
+                        )
+                    )
+                ),
+                'description' => array(
+                    'required'=> TRUE
+                    , 'validators' => array(
+                        array('name' => 'not_empty')
+                    )
+                ),
+                'icon_id' => array()
+            ),
+        ));
 
-        $sub_form->addElements(array($name, $description, $icon_id));
+        $sub_form->add(new Element('name'));
+        $sub_form->add(new Element('description'));
+        $sub_form->add(new Element('icon_id'));
 
-        $this->addSubForm($sub_form, 'infos');
+
+        $this->add($sub_form);
 
         return $sub_form;
     }
 
     /**
      * Initialize views sub form
-     * @return \Zend\Form\SubForm
+     * @return \Zend\Form\FieldSet
      */
     private function getViews()
     {
-        $sub_form = $this->getSubForm('views');
-        if(!empty($sub_form))
+        $fieldsets = $this->getFieldSets();
+        if(!empty($sub_form['views']))
         {
-            return $sub_form;
+            return $sub_form['views'];
         }
-        $sub_form = new SubForm($this->_subDocumentTypeForms['views']);
 
-        $available_views = new Element\Multiselect('available_views');
-        $default_view = new Element\Select('default_view');
-        $default_view->setRequired(TRUE);
+        $sub_form = new FieldSet('views');
 
-        $sub_form->addElements(array($default_view, $available_views));
+        $this->_inputFilter->add(array(), 'available_views');
+        $this->_inputFilter->add(array(), 'icon_id');
+        $this->_inputFilter->add(array(
+            'required'=> TRUE
+            , 'validators' => array(
+                array('name' => 'not_empty')
+            )
+        ), 'default_view');
 
-        $this->addSubForm($sub_form, 'views');
+        $available_views = new Element('available_views');
+        $available_views->setAttribute('options', $this->_viewCollection->getSelect());
+        $sub_form->add($available_views);
+
+        $default_view = new Element('default_view');
+        $default_view->setAttribute('options', $this->_viewCollection->getSelect());
+        $sub_form->add($default_view);
+
+        $sub_form->add(new Element('icon_id'));
+
+        $this->add($sub_form);
 
         return $sub_form;
     }
 
     /**
      * Initialize properties sub form
-     * @return \Zend\Form\SubForm
+     * @return \Zend\Form\FieldSet
      */
     private function getProperties()
     {
-        $sub_form = $this->getSubForm('properties');
-        if(!empty($sub_form))
+        $fieldsets = $this->getFieldSets();
+        if(!empty($sub_form['properties']))
         {
-            return $sub_form;
+            return $sub_form['properties'];
         }
 
-        $sub_form = new SubForm($this->_subDocumentTypeForms['properties']);
-        $this->addSubForm($sub_form, 'properties');
+        $sub_form = new FieldSet('properties');
+        $this->add($sub_form);
 
         return $sub_form;
     }
@@ -204,7 +193,7 @@ class DocumentType extends AbstractForm
             return $this;
         }
 
-        $sub_form = $this->getSubForm('properties');
+        $sub_form = $this->getProperties();
 
         $name = new Element\Text('name');
         $identifier = new Element\Text('identifier');
@@ -217,18 +206,18 @@ class DocumentType extends AbstractForm
 
         $datatype = new Element\Select('datatype');
         $datatype->setAttrib('class', 'select-datatype')
-            ->addMultioptions($this->_datatypeValues)
+            ->addMultioptions($this->_datatypeCollection->getSelect())
             ->setRequired(TRUE);
 
         $description = new Element\Text('description');
         $required = new Element\Checkbox('required');
         $property_id = new Element\Hidden('property_id');
 
-        $property_form = new SubForm();
+        $property_form = new FieldSet();
 
         if($property instanceof Property\Model)
         {
-            $sub_form->addSubForm($property_form, $property->getId());
+            $sub_form->add($property_form, $property->getId());
             $name->setValue($property->getName());
             $identifier->setValue($property->getIdentifier());
             $tab->setValue($property->getTabId());
@@ -239,7 +228,7 @@ class DocumentType extends AbstractForm
         }
         elseif(is_array($property))
         {
-            $sub_form->addSubForm($property_form, $property['id']);
+            $sub_form->add($property_form, $property['id']);
             $name->setValue($property['name']);
             $identifier->setValue($property['identifier']);
             $tab->setValue($property['tab']);
@@ -255,18 +244,19 @@ class DocumentType extends AbstractForm
 
     /**
      * Initialize tabs sub form
-     * @return \Zend\Form\SubForm
+     * @return \Zend\Form\FieldSet
      */
     private function getTabs()
     {
-        $sub_form = $this->getSubForm('tabs');
-        if(!empty($sub_form))
+        $fieldsets = $this->getFieldSets();
+        if(!empty($sub_form['tabs']))
         {
-            return $sub_form;
+            return $sub_form['tabs'];
         }
 
-        $sub_form = new SubForm($this->_subDocumentTypeForms['tabs']);
-        $this->addSubForm($sub_form, 'tabs');
+        $sub_form = new FieldSet('tabs');
+
+        $this->add($sub_form);
 
         return $sub_form;
     }
@@ -282,7 +272,8 @@ class DocumentType extends AbstractForm
         {
             return $this;
         }
-        $sub_form = $this->getSubForm('tabs');
+
+        $sub_form = $this->getTabs();
 
         $name = new Element\Text('name');
         $name->setRequired(TRUE);
@@ -292,18 +283,18 @@ class DocumentType extends AbstractForm
 
         $tab_id = new Element\Hidden('tab_id');
 
-        $tab_form = new SubForm();
+        $tab_form = new FieldSet();
 
         if($tab instanceof Tab\Model)
         {
-            $sub_form->addSubForm($tab_form, $tab->getId());
+            $sub_form->addFieldSet($tab_form, $tab->getId());
             $name->setValue($tab->getName());
             $description->setValue($tab->getDescription());
             $tab_id->setValue($tab->getId());
         }
         elseif(is_array($tab))
         {
-            $sub_form->addSubForm($tab_form, $tab['id']);
+            $sub_form->addFieldSet($tab_form, $tab['id']);
             $name->setValue($tab['name']);
             $description->setValue($tab['description']);
         }
@@ -314,7 +305,7 @@ class DocumentType extends AbstractForm
     }
 
     /**
-     * Set values and create tabs and properties subform
+     * Set values and create tabs and properties FieldSet
      * from parameter
      * @param mixed \Gc\DocumentType\Model | array
      * @return \Developpement\Form\DocumentType
@@ -377,18 +368,5 @@ class DocumentType extends AbstractForm
         }
 
         return $this;
-    }
-
-    /**
-     * Validate the form
-     *
-     * @param  array $data
-     * @return boolean
-     */
-    public function isValid($data)
-    {
-        $this->setValues($data);
-
-        return parent::isValid($data);
     }
 }

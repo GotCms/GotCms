@@ -50,7 +50,7 @@ abstract class AbstractTable extends Object
     {
         if(!empty($this->_name) and !in_array($this->_name, self::$_tables))
         {
-            self::$_tables[$this->_name] = new TableGateway\TableGateway($this->_name, TableGateway\StaticAdapterTableGateway::getStaticAdapter());
+            self::$_tables[$this->_name] = new TableGateway\TableGateway($this->_name, TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter());
         }
 
         $this->init();
