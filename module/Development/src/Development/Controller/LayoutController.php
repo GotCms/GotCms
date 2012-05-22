@@ -61,7 +61,6 @@ class LayoutController extends Action
         {
             $data = $this->getRequest()->post()->toArray();
             $layout_form->setData($data);
-            $layout_form->getInputFilter()->setData($data);
             if($layout_form->isValid())
             {
                 $layout = new Layout\Model();
@@ -101,7 +100,6 @@ class LayoutController extends Action
             $data = $this->getRequest()->post()->toArray();
 
             $layout_form->setData($data);
-            $layout_form->getInputFilter()->setData($data);
             if($layout_form->isValid())
             {
                 $layout->addData($layout_form->getValues(TRUE));
