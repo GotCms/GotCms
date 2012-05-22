@@ -130,7 +130,6 @@ class UserController extends Action
         if($this->getRequest()->isPost())
         {
             $form->setData($post);
-            $form->getInputFilter()->setData($post);
             $form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new \Zend\Validator\Identical($post['password']));
 
             if($form->isValid())
