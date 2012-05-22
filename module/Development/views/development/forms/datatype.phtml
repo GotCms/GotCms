@@ -1,0 +1,54 @@
+<?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Design
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
+
+?>
+<?php $errors = $this->form->getMessages(); ?>
+<form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
+    <div>
+        <label class="required" for="name"><?php echo $this->escape($this->translator('Name')); ?></label>
+        <input type="name" class="input-text" value="<?php echo $this->escape($this->form->getValue('name')); ?>" id="name" name="name">
+        <?php if(!empty($errors['name'])): ?>
+            <?php echo $this->formErrors($errors['name']); ?>
+        <?php endif; ?>
+    </div>
+    <div>
+        <label class="required" for="model"><?php echo $this->escape($this->translator('Model')); ?></label>
+        <select class="input-select" id="model" name="model">
+            <?php $options = $this->form->get('model')->getAttribute('options'); ?>
+            <?php foreach($options as $option_id => $option_value): ?>
+                <option <?php if($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escape($this->translator($option_value)); ?>" value="<?php echo (int) $option_id; ?>"><?php echo $this->escape($this->translator($option_value)); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <?php if(!empty($errors['model'])): ?>
+            <?php echo $this->formErrors($errors['model']); ?>
+        <?php endif; ?>
+    </div>
+    <div>
+        <input type="submit" class="input-submit" value="<?php echo $this->escape($this->translator('Save')); ?>" id="submit" name="submit">
+    </div>
+</form>
+
