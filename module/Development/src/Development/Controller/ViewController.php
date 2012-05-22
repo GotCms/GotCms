@@ -61,7 +61,6 @@ class ViewController extends Action
         {
             $data = $this->getRequest()->post()->toArray();
             $view_form->setData($data);
-            $view_form->getInputFilter()->setData($data);
             if($view_form->isValid())
             {
                 $view_model = new View\Model();
@@ -99,7 +98,6 @@ class ViewController extends Action
         {
             $data = $this->getRequest()->post()->toArray();
             $view_form->setData($data);
-            $view_form->getInputFilter()->setData($data);
             if($view_form->isValid())
             {
                 $view->addData($view_form->getValues(TRUE));
