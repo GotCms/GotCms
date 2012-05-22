@@ -60,14 +60,19 @@ class RoleController extends Action
         $form = new RoleForm();
         $form->initPermissions();
         $form->setAttribute('action', $this->url()->fromRoute('userRoleCreate'));
-        $post = $this->getRequest()->post()->toArray();
-        if($this->getRequest()->isPost() and $form->isValid($post))
-        {
-            $role_table = new Role\Model();
-            $role_table->addData($post);
-            $role_table->save();
 
-            return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_table->getId()));
+        if($this->getRequest()->isPost())
+        {
+            $post = $this->getRequest()->post()->toArray();
+            $form->setData($post);
+            if($form->isValid())
+            {
+                $role_model = new Role\Model();
+                $role_model->addData($form->getInputFilter()->getValues());
+                $role_model->save();
+            }
+
+            return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
         }
 
         return array('form' => $form);
@@ -81,15 +86,10 @@ class RoleController extends Action
     {
         if($this->getRequest()->isPost())
         {
-            $user_id = $this->getRequest()->post()->get('id');
-            if(!empty($user_id) and $this->getAuth()->getId() == $user_id)
-            {
-                User\Model::fromId($user_id)->delete();
-                $this->flashMessenger()->setNamespace('success')->addMessage('User deleted');
-            }
+            //@TODO delete role action
         }
 
-        return $this->redirect()->toRoute('admin');
+        return $this->redirect()->toRoute('userRoleList');
     }
 
     /**
@@ -99,17 +99,21 @@ class RoleController extends Action
     public function editAction()
     {
         $role_id = $this->getRouteMatch()->getParam('id');
-        $role_table = Role\Model::fromId($role_id);
+        $role_model = Role\Model::fromId($role_id);
 
         $form = new RoleForm();
-        $form->initPermissions($role_table->getUserPermissions());
+        $form->initPermissions($role_model->getUserPermissions());
         $form->setAttribute('action', $this->url()->fromRoute('userRoleEdit', array('id' => $role_id)));
-        $form->loadValues($role_table);
-        $post = $this->getRequest()->post()->toArray();
-        if($this->getRequest()->isPost() and $form->isValid($post))
+        $form->loadValues($role_model);
+        if($this->getRequest()->isPost())
         {
-            $role_table->addData($post);
-            $role_table->save();
+            $post = $this->getRequest()->post()->toArray();
+            $form->setData($post);
+            if($form->isValid())
+            {
+                $role_model->addData($form->getInputFilter()->getValues());
+                $role_model->save();
+            }
 
             return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
         }

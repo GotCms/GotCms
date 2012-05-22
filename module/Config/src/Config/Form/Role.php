@@ -50,6 +50,9 @@ class Role extends AbstractForm
                     array('name' => 'not_empty')
                 )
             )
+            , 'permissions' => array(
+                'required'=> FALSE
+            )
         ));
 
         $this->setInputFilter($inputFilter);
@@ -68,19 +71,22 @@ class Role extends AbstractForm
         $filter = $this->getInputFilter();
         $permissions_table = new Permission\Collection();
         $resources = $permissions_table->getPermissions();
+        $element = new Element('permissions');
+
+        $data = $resources;
         foreach($resources as $resource => $permissions)
         {
             foreach($permissions as $permission_id => $permission)
             {
-                $name = 'permission['.(string)$permission_id.']';
-                $element = new Element($name);
+                $data[$resource][$permission_id] = array('name' => $permission, 'value' => FALSE);
                 if(!empty($user_permissions[$resource]) and array_key_exists($permission_id, $user_permissions[$resource]))
                 {
-                    $element->setAttribute('value', TRUE);
+                    $data[$resource][$permission_id]['value'] = TRUE;
                 }
-
-                $this->add($element);
             }
         }
+
+        $element->setAttribute('value', $data);
+        $this->add($element);
     }
 }

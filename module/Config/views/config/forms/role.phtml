@@ -1,0 +1,56 @@
+<?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Design
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
+
+?>
+<form class="simple-form" action="<?php echo $this->escape($this->form->getAttribute('value')); ?>" method="post" enctype="application/x-www-form-urlencoded">
+    <div>
+        <label class="required" for="name"><?php echo $this->escape($this->translator('Name')); ?></label>
+        <input type="text" class="input-text" value="<?php echo $this->escape($this->form->getValue('name')); ?>" id="name" name="name">
+    </div>
+
+    <div>
+        <label class="optional" for="description"><?php echo $this->escape($this->translator('Description')); ?></label>
+        <input type="text" class="input-text" value="<?php echo $this->escape($this->form->getValue('description')); ?>" id="description" name="description">
+    </div>
+
+
+    <?php $permissions = $this->form->getValue('permissions'); ?>
+
+    <?php foreach($permissions as $resource => $permissions): ?>
+        <?php foreach($permissions as $permission_id => $permission): ?>
+            <div>
+                <label class="optional" for="permissions-<?php echo (int)$permission_id; ?>">
+                    <?php echo $this->escape($this->translator($permission['name'])); ?>
+                </label>
+
+                <input type="checkbox" value="1" <?php if($permission['value']): ?>checked="checked" <?php endif; ?>id="permissions-<?php echo (int)$permission_id; ?>" name="permissions[<?php echo (int)$permission_id; ?>]">
+            </div>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+
+    <input type="submit" class="input-submit" value="Save" id="submit" name="submit">
+</form>
