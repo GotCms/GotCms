@@ -40,8 +40,8 @@ use Gc\Mvc\Controller\Action,
 class IndexController extends Action
 {
     protected $_viewStream  = 'zend.view';
-    protected $_viewName = 'index/view_content';
-    protected $_layoutName = 'index/layout_content';
+    protected $_viewName = 'application/index/view-content';
+    protected $_layoutName = 'application/index/layout-content';
     protected $_viewPath;
     protected $_layoutPath;
 
@@ -106,7 +106,7 @@ class IndexController extends Action
         }
 
         stream_wrapper_register($this->_viewStream, "Gc\View\Stream");
-        $template_path_stack = $this->getLocator()->get('Zend\View\Resolver\TemplatePathStack');
+        $template_path_stack = $this->getServiceLocator()->get('Zend\View\Resolver\TemplatePathStack');
         $template_path_stack->setUseStreamWrapper(TRUE);
         $this->_viewPath = $template_path_stack->resolve($this->_viewName);
         $this->_layoutPath = $template_path_stack->resolve($this->_layoutName);
