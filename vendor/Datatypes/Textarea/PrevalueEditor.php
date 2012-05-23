@@ -63,6 +63,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'type' => 'text'
             , 'label' => 'Cols'
             , 'value' => isset($config['cols']) ? $config['cols'] : ''
+            , 'class' => 'input-text'
         ));
 
         $rows = new Element('rows');
@@ -70,6 +71,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'type' => 'text'
             , 'label' => 'Rows'
             , 'value' => isset($config['rows']) ? $config['rows'] : ''
+            , 'class' => 'input-text'
         ));
 
         $wrap = new Element('wrap');

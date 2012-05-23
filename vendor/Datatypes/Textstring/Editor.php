@@ -41,12 +41,12 @@ class Editor extends AbstractEditor
     {
         $parameters = $this->getConfig();
         $property = $this->getProperty();
-        $textstring = new Element\Text($this->getName());
-        $textstring->setLabel($property->getName());
-        $textstring->setValue($this->getValue());
+        $textstring = new Element($this->getName());
+        $textstring->setAttribute('label', $property->getName());
+        $textstring->setAttribute('value', $this->getValue());
         if(!empty($parameters['length']))
         {
-            $textstring->setAttrib('maxlength', $parameters['length']);
+            $textstring->setAttribute('maxlength', $parameters['length']);
         }
 
         return $textstring;

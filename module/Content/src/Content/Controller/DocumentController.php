@@ -208,12 +208,7 @@ class DocumentController extends Action
                 $tabs_array[] = $tab->getName();
                 $properties = $this->_loadProperties($document_type_id, $tab->getId(), $document->getId());
 
-                $sub_form = new \Zend\Form\SubForm();
-                $sub_form->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$idx))));
-                $sub_form->removeDecorator('Fieldset');
-                $sub_form->removeDecorator('DtDdWrapper');
-                $sub_form->setIsArray(FALSE);
-
+                $fieldset = new \Zend\Form\Fieldset('tabs-'.$idx, $idx);
                 foreach($properties as $property)
                 {
                     $property->setDocumentId($document->getId())->loadValue();
@@ -225,10 +220,10 @@ class DocumentController extends Action
                         }
                     }
 
-                    \Gc\Form\AbstractForm::addContent($sub_form, Datatype\Model::loadEditor($property, $document));
+                    \Gc\Form\AbstractForm::addContent($fieldset, Datatype\Model::loadEditor($property, $document));
                 }
 
-                $document_form->addSubForm($sub_form, 'tabs-'.$idx, $idx);
+                $document_form->add($fieldset);
                 $idx++;
             }
 
@@ -236,12 +231,9 @@ class DocumentController extends Action
 
             $form_document_add = new Form\Document();
             $form_document_add->load($document, $idx);
+            $form_document_add->setAttribute('name', 'tabs-'.$idx, $idx);
 
-            $document_form->addSubForm($form_document_add, 'tabs-'.$idx, $idx);
-
-            $submit = new \Zend\Form\Element\Submit('submit-form');
-            $submit->setLabel('Save');
-            $document_form->addElement($submit);
+            $document_form->add($form_document_add);
 
             if($this->getRequest()->isPost())
             {
@@ -249,8 +241,7 @@ class DocumentController extends Action
                 {
                     $document->showInNav(FALSE);
                     $document->setStatus(FALSE);
-                    $this->flashMessenger()->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties are required !');
-
+                    $this->flashMessenger()->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties values are required !');
                 }
 
                 $document->save();
@@ -258,6 +249,7 @@ class DocumentController extends Action
             }
 
             $tabs = new Component\Tabs($tabs_array);
+
             return array('form' => $document_form, 'tabs' => $tabs);
         }
     }

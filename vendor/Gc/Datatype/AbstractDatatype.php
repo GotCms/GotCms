@@ -80,7 +80,7 @@ abstract class AbstractDatatype extends AbstractTable
             return FALSE;
         }
 
-        $this->setData('datatype', $datatype);
+        $this->setData('datatype_model', $datatype);
         $this->setData('document_id', $document_id);
     }
 
@@ -90,7 +90,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getConfig()
     {
-        return $this->getDatatype()->getData('prevalue_value');
+        return $this->getDatatypeModel()->getData('prevalue_value');
     }
 
     /**
@@ -100,7 +100,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function setConfig($value)
     {
-        $this->getDatatype()->setData('prevalue_value', $value);
+        $this->getDatatypeModel()->setData('prevalue_value', $value);
         return $this;
     }
 

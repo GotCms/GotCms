@@ -26,10 +26,29 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<div id="tabs" style="margin-bottom:20px">
-    <?php echo $this->tabs; ?>
-    <?php echo $this->form; ?>
-</div>
+<form action="<?php echo $this->escape($this->form->getAttribute('action')); ?>" class="simple-form">
+    <div id="tabs" style="margin-bottom:20px">
+        <?php echo $this->tabs; ?>
+        <?php $fieldsets = $this->form->getFieldsets(); ?>
+        <?php foreach($fieldsets as $tab_id => $fieldset): ?>
+            <div id="<?php echo $this->escape($tab_id); ?>">
+                <?php $elements = $fieldset->getElements(); ?>
+                <?php foreach($elements as $element): ?>
+                    <div>
+                        <?php $content = $element->getAttribute('content'); ?>
+                        <?php if(!empty($content)): ?>
+                            <?php echo $content; ?>
+                        <?php else: ?>
+                            <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+
+                            <?php echo $this->formElement($element); ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</form>
 <script type="text/javascript">
     jQuery('#tabs').tabs();
 </script>

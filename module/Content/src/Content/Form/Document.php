@@ -31,79 +31,115 @@ use Gc\Document\Model as DocumentModel,
     Gc\View,
     Gc\Form\AbstractForm,
     Zend\Validator,
-    Zend\Form\Element;
+    Zend\Form\Element,
+    Zend\InputFilter\Factory as InputFilterFactory;
 
 class Document extends AbstractForm
 {
     public function init()
     {
-        $this->setMethod(self::METHOD_POST);
-        $this->setElementsBelongTo('document');
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter = $inputFilterFactory->createInputFilter(array(
+            'name' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+            , 'url_key' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                    //, array('name' => 'identifier') @TODO test it
+                    , array(
+                        'name' => 'db\\no_record_exists'
+                        , 'options' => array(
+                            'table' => 'document'
+                            , 'field' => 'url_key'
+                            , 'adapter' => $this->getAdapter()
+                        )
+                    )
+                )
+            )
+            , 'document_type' => array(
+                'required'=> TRUE
+                , 'validators' => array(
+                    array('name' => 'not_empty')
+                )
+            )
+        ));
 
-        $name = new Element\Text('name');
-        $name->setRequired(TRUE)
-            ->setLabel('Name')
-            ->setAttrib('class', 'input-text')
-            ->addValidator(new Validator\NotEmpty());
+        $this->setInputFilter($inputFilter);
 
-        $url_key  = new Element\Text('url_key');
-        $url_key->setRequired(FALSE)
-            ->setLabel('Url key')
-            ->setAttrib('class', 'input-text')
-            ->addValidator(new Validator\NotEmpty())
-            ->addValidator(new Validator\Db\NoRecordExists(array('table' => 'document', 'field' => 'url_key')));
+        $name = new Element('name');
+        $name->setAttribute('label', 'Name')
+            ->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text');
+
+        $url_key = new Element('url_key');
+        $url_key->setAttribute('label', 'Url key')
+            ->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text');
 
         $document_type_collection = new DocumentType\Collection();
-        $document_type = new Element\Select('document_type');
-        $document_type->addMultiOption('', 'Select document type');
-        $document_type->addMultiOptions($document_type_collection->getSelect());
+        $document_type = new Element('document_type');
+        $document_type->setAttribute('label', 'Document Type')
+            ->setAttribute('type', 'select')
+            ->setAttribute('options', array('' => 'Select document type') + $document_type_collection->getSelect());
 
-        $parent = new Element\Hidden('parent');
+        $parent = new Element('parent');
+        $parent->setAttribute('type', 'hidden');
 
-        $submit = new Element\Submit('submit');
-        $submit->setAttrib('class', 'input-submit')
-            ->setLabel('Create');
+        $submit = new Element('submit');
+        $submit->setAttribute('class', 'input-submit')
+            ->setAttribute('type', 'submit')
+            ->setAttribute('label', 'Save');
 
-        $this->addElements(array($name, $url_key, $document_type, $parent, $submit));
+        $this->add($name);
+        $this->add($url_key);
+        $this->add($document_type);
+        $this->add($parent);
+        $this->add($submit);
     }
 
     public function load(DocumentModel $document, $index)
     {
-        $this->addDecorators(array('FormElements',array('HtmlTag', array('tag' => 'dl','id' => 'tabs-'.$index))));
-        $this->removeDecorator('Fieldset');
-        $this->removeDecorator('DtDdWrapper');
+        $this->get('name')->setAttribute('value', $document->getName());
+        $this->get('url_key')->setAttribute('value', $document->getUrlKey());
 
-        $this->getElement('name')->setValue($document->getName());
-        $this->getElement('url_key')->setValue($document->getUrlKey());
+        $status = new Element('status');
+        $status->setAttribute('type', 'checkbox')
+            ->setAttribute('label', 'Publish')
+            ->setAttribute('value', $document->getStatus());
 
-        $status = new Element\Checkbox('status');
-        $status->setLabel('Publish');
-        $status->setValue($document->getStatus());
+        $this->add($status);
 
-        $this->addElement($status);
+        $show_in_nav = new Element('show_in_nav');
+        $show_in_nav->setAttribute('type', 'checkbox')
+            ->setAttribute('label', 'Show in nav')
+            ->setAttribute('value', $document->showInNav());
 
-        $show_in_nav = new Element\Checkbox('show_in_nav');
-        $show_in_nav->setLabel('Show in nav');
-        $show_in_nav->setValue($document->showInNav());
-
-        $this->addElement($show_in_nav);
+        $this->add($show_in_nav);
 
         $views_collection = new View\Collection();
-        $view = new Element\Select('view');
-        $view->addMultiOptions($views_collection->getSelect());
-        $view->setValue($document->getViewId());
-        $view->setLabel('View');
+        $view = new Element('view');
+        $view->setAttribute('type', 'select')
+            ->setAttribute('options', $views_collection->getSelect())
+            ->setAttribute('value', $document->getViewId())
+            ->setAttribute('label', 'View');
 
-        $this->addElement($view);
+        $this->add($view);
 
         $layouts_collection = new View\Collection();
-        $layout = new Element\Select('layout');
-        $layout->addMultiOptions($layouts_collection->getSelect());
-        $layout->setValue($document->getViewId());
-        $layout->setLabel('Layout');
+        $layout = new Element('layout');
+        $layout->setAttribute('type', 'select')
+            ->setAttribute('options', $layouts_collection->getSelect())
+            ->setAttribute('value', $document->getViewId())
+            ->setAttribute('label', 'Layout');
 
-        $this->addElement($layout);
-        $this->removeElement('document_type');
-        $this->removeElement('submit');
+        $this->add($layout);
+        $this->remove('document_type');
+        $this->remove('parent');
+        $this->remove('submit');
     }
 }
