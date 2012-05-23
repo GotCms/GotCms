@@ -127,6 +127,7 @@ class DatatypeController extends Action
 
                 try
                 {
+                    $datatype_model->addData($datatype_form->getInputFilter()->getValues());
                     if($datatype_model->save())
                     {
                         return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));

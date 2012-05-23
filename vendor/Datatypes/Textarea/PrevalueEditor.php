@@ -49,35 +49,36 @@ class PrevalueEditor extends AbstractPrevalueEditor
     public function load()
     {
         /*
-            - cols     :   Number of caracters display per line
-            - rows     :   Define the number of line visible in text zone
-            - wrap     :   Possible values are : hard / off / soft
-                                define if line returns are automatic (hard / soft)
-                                or if the horizontal display if exceeded (off)
+        - cols     :   Number of caracters display per line
+        - rows     :   Define the number of line visible in text zone
+        - wrap     :   Possible values are : hard / off / soft
+                            define if line returns are automatic (hard / soft)
+                            or if the horizontal display if exceeded (off)
         */
 
         $config = $this->getConfig();
-        $cols = new Element\Text('cols');
-        $cols->setLabel('Cols');
-        if(!empty($config['cols']))
-        {
-            $cols->setValue($config['cols']);
-        }
 
-        $rows = new Element\Text('rows');
-        $rows->setLabel('Rows');
-        if(!empty($config['rows']))
-        {
-            $rows->setValue($config['rows']);
-        }
+        $cols = new Element('cols');
+        $cols->setAttributes(array(
+            'type' => 'text'
+            , 'label' => 'Cols'
+            , 'value' => isset($config['cols']) ? $config['cols'] : ''
+        ));
 
-        $wrap = new Element\Select('wrap');
-        $wrap->setLabel('Wrap');
-        $wrap->addMultiOptions(array('hard'=>'hard', 'off'=>'off', 'soft'=>'soft'));
-        if(!empty($config['wrap']))
-        {
-            $wrap->setValue($config['wrap']);
-        }
+        $rows = new Element('rows');
+        $rows->setAttributes(array(
+            'type' => 'text'
+            , 'label' => 'Rows'
+            , 'value' => isset($config['rows']) ? $config['rows'] : ''
+        ));
+
+        $wrap = new Element('wrap');
+        $wrap->setAttributes(array(
+            'type' => 'select'
+            , 'label' => 'Wrap'
+            , 'options' => array('hard'=>'hard', 'off'=>'off', 'soft'=>'soft')
+            , 'value' => isset($config['wrap']) ? $config['wrap'] : ''
+        ));
 
         return array($cols, $rows, $wrap);
     }
