@@ -131,13 +131,15 @@ abstract class AbstractEditor extends Object
     }
 
     /**
-     * Get \Zend\View\Helper elements
-     * @return mixed
+     * Retrieve helper from $name
+     * @param strin $name
+     * @return mixte
      */
-    protected function getHelper($helper)
+    public function getHelper($name)
     {
-        return $this->getDatatype()->getHelper($helper);
+        return $this->getDatatype()->getHelper($name);
     }
+
     /**
      * Upload dir path
      * @return string

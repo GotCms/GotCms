@@ -40,13 +40,28 @@
         <select class="input-select" id="model" name="model">
             <?php $options = $this->form->get('model')->getAttribute('options'); ?>
             <?php foreach($options as $option_id => $option_value): ?>
-                <option <?php if($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escape($this->translator($option_value)); ?>" value="<?php echo (int) $option_id; ?>"><?php echo $this->escape($this->translator($option_value)); ?></option>
+                <option <?php if($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escape($this->translator($option_value)); ?>" value="<?php echo $this->escape($option_value); ?>"><?php echo $this->escape($option_value); ?></option>
             <?php endforeach; ?>
         </select>
         <?php if(!empty($errors['model'])): ?>
             <?php echo $this->formErrors($errors['model']); ?>
         <?php endif; ?>
     </div>
+
+    <?php $elements = $this->form->get('prevalue-editor')->getElements(); ?>
+    <?php foreach($elements as $element): ?>
+        <div>
+            <?php $content = $element->getAttribute('content'); ?>
+            <?php if(!empty($content)): ?>
+                <?php echo $content; ?>
+            <?php else: ?>
+                <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+
+                <?php echo $this->formElement($element); ?>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+
     <div>
         <input type="submit" class="input-submit" value="<?php echo $this->escape($this->translator('Save')); ?>" id="submit" name="submit">
     </div>

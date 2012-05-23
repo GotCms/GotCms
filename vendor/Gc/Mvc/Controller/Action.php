@@ -91,11 +91,6 @@ class Action extends ActionController
     protected function _construct()
     {
         \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-        $this->getServiceLocator()->get('Zend\View\HelperLoader')->registerPlugins(array(
-            'jsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape'
-            , 'formErrors' => 'Gc\View\Helper\FormErrors'
-        ));
-        $this->getServiceLocator()->get('Zend\Validator\ValidatorLoader')->registerPlugin('identifier', 'Gc\Validator\Identifier');
 
         $auth = $this->getAuth();
         $module = $this->getRouteMatch()->getParam('module');

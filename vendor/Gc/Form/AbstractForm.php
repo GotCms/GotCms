@@ -28,6 +28,7 @@
 namespace Gc\Form;
 
 use Zend\Form\Form,
+    Zend\Form\Fieldset,
     Zend\Form\Element,
     Zend\InputFilter\InputFilter,
     Gc\Exception,
@@ -91,7 +92,7 @@ abstract class AbstractForm extends Form
      * @static
      * @return void
      */
-    static function addContent(Form $form, $elements)
+    static function addContent(Fieldset $form, $elements)
     {
         if(is_array($elements))
         {
@@ -102,19 +103,13 @@ abstract class AbstractForm extends Form
         }
         elseif($elements instanceof Element)
         {
-            if($elements->getBelongsTo() === NULL)
-            {
-                $elements->setIsArray(FALSE);
-            }
-
-            $form->addElement($elements);
+            $form->add($elements);
         }
         elseif(is_string($elements))
         {
-            $hiddenElement = new Element\Hidden('hidden'.uniqid());
-            $hiddenElement->addDecorator('Description', array('escape' => false));
-            $hiddenElement->setDescription($elements);
-            $form->addElement($hiddenElement);
+            $hidden_element = new Element('hidden'.uniqid());
+            $hidden_element->setAttribute('content', $elements);
+            $form->add($hidden_element);
         }
         else
         {

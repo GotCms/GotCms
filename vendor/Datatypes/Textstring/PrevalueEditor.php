@@ -34,6 +34,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     public function save()
     {
         $length = $this->getRequest()->post()->get('length');
+
         $this->setConfig(array('length' => $length));
     }
 
@@ -41,9 +42,13 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $config = $this->getConfig();
 
-        $length = new Element\Text('length');
-        $length->setLabel('Length')->setValue(isset($config['length']) ? $config['length'] : '');
+        $length = new Element('length');
+        $length->setAttributes(array(
+            'type' => 'text'
+            , 'label' => 'Length'
+            , 'value' => isset($config['length']) ? $config['length'] : ''
+        ));
 
-        return array($length);
+        return $length;
     }
 }

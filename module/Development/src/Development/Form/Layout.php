@@ -67,12 +67,6 @@ class Layout extends AbstractForm
                     )
                 )
             )
-            , 'content' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
-            )
         ));
 
         $this->setInputFilter($inputFilter);

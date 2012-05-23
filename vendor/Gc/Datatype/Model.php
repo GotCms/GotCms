@@ -30,7 +30,8 @@ namespace Gc\Datatype;
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Gc\Property\Model as PropertyModel,
-    Datatypes;
+    Datatypes,
+    Zend\Form\Fieldset;
 
 class Model extends AbstractTable implements IterableInterface
 {
@@ -234,7 +235,9 @@ class Model extends AbstractTable implements IterableInterface
      */
     static function loadPrevalueEditor(AbstractDatatype $datatype)
     {
-        return $datatype->getPrevalueEditor()->load();
+        $fieldset = new Fieldset('prevalue-editor');
+        \Gc\Form\AbstractForm::addContent($fieldset, $datatype->getPrevalueEditor()->load());
+        return $fieldset;
     }
 
     /**

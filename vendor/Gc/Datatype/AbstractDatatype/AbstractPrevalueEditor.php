@@ -106,4 +106,14 @@ abstract class AbstractPrevalueEditor extends Object
     {
         return $this->_datatype;
     }
+
+    /**
+     * Retrieve helper from $name
+     * @param strin $name
+     * @return mixte
+     */
+    public function getHelper($name)
+    {
+        return $this->getDatatype()->getHelper($name);
+    }
 }

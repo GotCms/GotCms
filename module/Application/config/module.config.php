@@ -37,6 +37,10 @@ return array(
         'doctype'                   => 'HTML5',
         'not_found_template'        => 'error/404',
         'exception_template'        => 'error/index',
+        'helper_map' => array(
+            'jsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape',
+            'formErrors' => 'Gc\View\Helper\FormErrors',
+        ),
         'template_map' => array(
             'layout/layout'     => __DIR__ . '/../views/layouts/layout.phtml',
             'index/index'       => __DIR__ . '/../views/index/index.phtml',
@@ -58,14 +62,6 @@ return array(
                         'database' => 'gotcms',
                         'hostname' => 'localhost'
                     ),
-                ),
-            ),
-            //@TODO Check if it works
-            'Zend\View\HelperLoader' => array(
-                'parameters' => array(
-                    'map' => array(
-                        'jsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape'
-                    )
                 ),
             ),
             'Zend\Validator\ValidatorLoader' => array(
