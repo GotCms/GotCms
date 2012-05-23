@@ -28,8 +28,9 @@ namespace Content\Form;
 
 use Gc\Document\Model as DocumentModel,
     Gc\DocumentType,
-    Gc\View,
     Gc\Form\AbstractForm,
+    Gc\Layout,
+    Gc\View,
     Zend\Validator,
     Zend\Form\Element,
     Zend\InputFilter\Factory as InputFilterFactory;
@@ -130,7 +131,7 @@ class Document extends AbstractForm
 
         $this->add($view);
 
-        $layouts_collection = new View\Collection();
+        $layouts_collection = new Layout\Collection();
         $layout = new Element('layout');
         $layout->setAttribute('type', 'select')
             ->setAttribute('options', $layouts_collection->getSelect())

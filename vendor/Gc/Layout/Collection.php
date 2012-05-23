@@ -69,10 +69,11 @@ class Collection extends AbstractTable implements IterableInterface
      * Return array for input select
      * @return array
      */
-    public function getLayoutsSelect()
+    public function getSelect()
     {
         $arrayReturn = array();
-        foreach($this->_layouts as $key=>$value)
+        $layouts = $this->getLayouts();
+        foreach($layouts as $key=>$value)
         {
             $arrayReturn[$value->getId()] = $value->getName();
         }

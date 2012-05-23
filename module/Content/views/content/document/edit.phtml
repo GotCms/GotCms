@@ -29,6 +29,7 @@
 <form action="<?php echo $this->escape($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
     <div id="tabs" style="margin-bottom:20px">
         <?php echo $this->tabs; ?>
+
         <?php $fieldsets = $this->form->getFieldsets(); ?>
         <?php foreach($fieldsets as $tab_id => $fieldset): ?>
             <div id="<?php echo $this->escape($tab_id); ?>">
