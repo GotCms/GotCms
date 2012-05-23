@@ -26,7 +26,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form action="<?php echo $this->escape($this->form->getAttribute('action')); ?>" class="simple-form">
+<form action="<?php echo $this->escape($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
     <div id="tabs" style="margin-bottom:20px">
         <?php echo $this->tabs; ?>
         <?php $fieldsets = $this->form->getFieldsets(); ?>
@@ -48,6 +48,7 @@
             </div>
         <?php endforeach; ?>
     </div>
+    <input type="submit" class="input-submit" value="<?php echo $this->escape($this->translator('Save')); ?>">
 </form>
 <script type="text/javascript">
     jQuery('#tabs').tabs();

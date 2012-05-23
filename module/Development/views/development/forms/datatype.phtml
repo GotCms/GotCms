@@ -48,19 +48,21 @@
         <?php endif; ?>
     </div>
 
-    <?php $elements = $this->form->get('prevalue-editor')->getElements(); ?>
-    <?php foreach($elements as $element): ?>
-        <div>
-            <?php $content = $element->getAttribute('content'); ?>
-            <?php if(!empty($content)): ?>
-                <?php echo $content; ?>
-            <?php else: ?>
-                <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+    <?php $fieldset = $this->form->get('prevalue-editor'); ?>
+    <?php if(!empty($fieldset)): ?>
+        <?php foreach($fieldset->getElements() as $element): ?>
+            <div>
+                <?php $content = $element->getAttribute('content'); ?>
+                <?php if(!empty($content)): ?>
+                    <?php echo $content; ?>
+                <?php else: ?>
+                    <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
 
-                <?php echo $this->formElement($element); ?>
-            <?php endif; ?>
-        </div>
-    <?php endforeach; ?>
+                    <?php echo $this->formElement($element); ?>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 
     <div>
         <input type="submit" class="input-submit" value="<?php echo $this->escape($this->translator('Save')); ?>" id="submit" name="submit">

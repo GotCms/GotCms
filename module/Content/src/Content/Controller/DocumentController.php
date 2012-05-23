@@ -208,7 +208,7 @@ class DocumentController extends Action
                 $tabs_array[] = $tab->getName();
                 $properties = $this->_loadProperties($document_type_id, $tab->getId(), $document->getId());
 
-                $fieldset = new \Zend\Form\Fieldset('tabs-'.$idx, $idx);
+                $fieldset = new \Zend\Form\Fieldset('tabs-'.$idx);
                 foreach($properties as $property)
                 {
                     $property->setDocumentId($document->getId())->loadValue();
@@ -230,18 +230,23 @@ class DocumentController extends Action
             $tabs_array[] = 'Document information';
 
             $form_document_add = new Form\Document();
-            $form_document_add->load($document, $idx);
-            $form_document_add->setAttribute('name', 'tabs-'.$idx, $idx);
+            $form_document_add->load($document);
+            $form_document_add->setAttribute('name', 'tabs-'.$idx);
 
             $document_form->add($form_document_add);
 
             if($this->getRequest()->isPost())
             {
-                if($has_error)
+                $form_document_add->setData($this->getRequest()->post()->toArray());
+                if($has_error or !$form_document_add->isValid())
                 {
                     $document->showInNav(FALSE);
                     $document->setStatus(FALSE);
                     $this->flashMessenger()->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties values are required !');
+                }
+                else
+                {
+                    $document->addData($form_document_add->getInputFilter()->getValues());
                 }
 
                 $document->save();

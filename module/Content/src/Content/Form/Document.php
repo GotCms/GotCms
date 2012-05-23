@@ -102,7 +102,7 @@ class Document extends AbstractForm
         $this->add($submit);
     }
 
-    public function load(DocumentModel $document, $index)
+    public function load(DocumentModel $document)
     {
         $this->get('name')->setAttribute('value', $document->getName());
         $this->get('url_key')->setAttribute('value', $document->getUrlKey());
