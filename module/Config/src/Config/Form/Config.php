@@ -27,24 +27,23 @@
 namespace Config\Form;
 
 use Gc\Form\AbstractForm,
+    Gc\User\Permission,
+    Zend\Form\Element,
+    Zend\Form\Fieldset,
+    Zend\InputFilter\InputFilter,
     Zend\Validator\Db,
     Zend\Validator\Identical,
-    Zend\Form\Element,
-    Zend\Form\SubForm,
-    Zend\Locale\Locale,
-    Gc\User\Permission;
+    Zend\Locale\Locale;
 
 class Config extends AbstractForm
 {
     /**
-     * Initialize Config form
-     * @return void
+     * Initialize form
      */
     public function init()
     {
-        $this->setMethod(self::METHOD_POST);
+        $this->setInputFilter(new InputFilter());
     }
-
     /**
      * Initialize General sub form
      *
@@ -53,26 +52,43 @@ class Config extends AbstractForm
     public function initGeneral()
     {
         //General settings
-        $general_settings = new SubForm();
-        $name = new Element\Text('site_name');
-        $name->setRequired(TRUE)
-            ->setLabel('Site name')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
+        $general_fieldset = new Fieldset('general');
+        $name = new Element('site_name');
+        $name->setAttribute('label', 'Site name')
+            ->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text');
 
-        $is_offline = new Element\Radio('is_offline');
-        $is_offline->setLabel('Is offline')
-            ->addMultiOptions(array('Yes', 'No'))
-            ->setAttrib('class', 'input-text');
+        $is_offline = new Element('is_offline');
+        $is_offline->setAttribute('label', 'Is offline')
+            ->setAttribute('type', 'checkbox');
 
-        $offline_document = new Element\Select('offline_document');
-        $offline_document->setLabel('Offline document')
-            ->addMultiOptions(array())
-            ->setAttrib('class', 'input-text');
+        $offline_document = new Element('offline_document');
+        $offline_document->setAttribute('label', 'Offline document')
+            ->setAttribute('type', 'select')
+            ->setAttribute('options', array())
+            ->setAttribute('class', 'input-text');
 
-        $general_settings->addElements(array($name, $is_offline));
+        $general_fieldset->add($name);
+        $general_fieldset->add($is_offline);
+        $this->add($general_fieldset);
 
-        $this->addSubForm($general_settings, 'general');
+        $this->getInputFilter()->add(array(
+            'site_name' => array(
+                'name' => 'site_name',
+                'required' => TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'is_offline' => array(
+                'name' => 'site_name',
+                'required' => TRUE,
+            ),
+            'offline_document' => array(
+                'name' => 'site_name',
+                'required' => TRUE,
+            ),
+        ));
 
         return $this;
     }
@@ -85,45 +101,78 @@ class Config extends AbstractForm
     public function initSystem()
     {
         //Session settings
-        $session_settings = new SubForm();
+        $session_fieldset = new Fieldset('session');
+        $cookie_domain = new Element('cookie_domain');
+        $cookie_domain->setAttribute('label', 'Cookie domain')
+            ->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text');
 
-        $cookie_domain = new Element\Text('cookie_domain');
-        $cookie_domain->setRequired(TRUE)
-            ->setLabel('Cookie domain')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
+        $cookie_path = new Element('cookie_path');
+        $cookie_path->setAttribute('label', 'Cookie path')
+            ->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text');
 
-        $cookie_path = new Element\Text('cookie_path');
-        $cookie_path->setRequired(TRUE)
-            ->setLabel('Cookie path')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
+        $session_lifetime = new Element('session_lifetime');
+        $session_lifetime->setAttribute('label', 'Session lifetime')
+            ->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text');
 
-        $session_lifetime = new Element\Text('session_lifetime');
-        $session_lifetime->setRequired(TRUE)
-            ->setLabel('Session lifetime')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
+        $session_handler = new Element('session_handler');
+        $session_handler->setAttribute('label', 'Session handler')
+            ->setAttribute('type', 'select')
+            ->setAttribute('options', array('Files' => '0', 'Database' => '1'));
 
-        $session_handler = new Element\Select('session_handler');
-        $session_handler->setRequired(TRUE)
-            ->setLabel('Session handler')
-            ->addMultiOptions(array('Database', 'Files'));
-
-        $session_settings->addElements(array($cookie_domain, $cookie_path, $session_handler, $session_lifetime));
-        $this->addSubForm($session_settings, 'session');
+        $session_fieldset->add($cookie_domain);
+        $session_fieldset->add($cookie_path);
+        $session_fieldset->add($session_handler);
+        $session_fieldset->add($session_lifetime);
+        $this->add($session_fieldset);
 
         //Debug settings
-        $debug_settings = new SubForm();
+        $general_fieldset = new Fieldset('debug');
+        $debug_is_active = new Element('debug_is_active');
+        $debug_is_active->setAttribute('label', 'Is active')
+            ->setAttribute('class', 'input-text');
 
-        $debug_is_active = new Element\Text('is_active');
-        $debug_is_active->setRequired(TRUE)
-            ->setLabel('Is active')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
+        $this->add($debug_is_active);
 
-        $debug_settings->addElements(array($debug_is_active));
-        $this->addSubForm($debug_settings, 'debug');
+        $this->getInputFilter()->add(array(
+            'cookie_domain' => array(
+                'name' => 'cookie_domain',
+                'required' => TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'cookie_path' => array(
+                'name' => 'cookie_path',
+                'required' => TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'session_lifetime' => array(
+                'name' => 'session_lifetime',
+                'required' => TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'session_handler' => array(
+                'name' => 'session_handler',
+                'required' => TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'debug_is_active' => array(
+                'name' => 'is_active',
+                'required' => TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+        ));
 
         return $this;
     }
@@ -136,33 +185,54 @@ class Config extends AbstractForm
     public function initServer()
     {
         //Local settings
-        $locale_settings = new SubForm();
+        $locale_fieldset = new Fieldset('locale');
+        $locale = new Element('locale');
+        $locale->setAttribute('type', 'select')
+            ->setAttribute('label', 'Server locale')
+            ->setAttribute('options', Locale::getTranslation());
 
-        $locale = new Element\Select('locale');
-        $locale->setRequired(TRUE)
-            ->setLabel('Server locale')
-            ->addMultiOptions(Locale::getTranslation());
-
-        $locale_settings->addElements(array($locale));
-        $this->addSubForm($locale_settings, 'locale');
+        $locale_settings->add(array($locale));
+        $this->add($locale_settings);
 
         //Mail settings
-        $mail_settings = new SubForm();
+        $mail_fieldset = new Fieldset('mail');
+        $mail_from = new Element('mail_from');
+        $mail_from->setAttribute('type', 'text')
+            ->setAttribute('label', 'From E-mail')
+            ->setAttribute('class', 'input-text');
 
-        $mail_from = new Element\Text('mail_from');
-        $mail_from->setRequired(TRUE)
-            ->setLabel('From E-mail')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
+        $mail_from_name = new Element('mail_from_name');
+        $mail_from_name->setAttribute('type', 'text')
+            ->setAttribute('label', 'From name')
+            ->setAttribute('class', 'input-text');
 
-        $mail_from_name = new Element\Text('mail_from_name');
-        $mail_from_name->setRequired(TRUE)
-            ->setLabel('From name')
-            ->setAttrib('class', 'input-text')
-            ->addValidator('NotEmpty');
+        $mail_fieldset->add($mail_from);
+        $mail_fieldset->add($mail_from_name);
+        $this->add($mail_fieldset);
 
-        $mail_settings->addElements(array($mail_from, $mail_from_name));
-        $this->addSubForm($mail_settings, 'mail');
+        $this->getInputFilter()->add(array(
+            'locale' => array(
+                'name' => 'locale',
+                'required' => TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'mail_from' => array(
+                'name' => 'mail_from',
+                'required' => TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'mail_from_name' => array(
+                'name' => 'mail_from_name',
+                'required' => TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+        ));
 
         return $this;
     }

@@ -37,12 +37,23 @@ use Zend\Form\Form,
 abstract class AbstractForm extends Form
 {
 
-    public function __construct()
+    /**
+     * Constructor
+     *
+     * @param null|string|int $name Optional name for the element
+     */
+    public function __construct($name = null)
     {
-        parent::__construct();
+        parent::__construct($name);
         $this->setAttribute('method', 'post');
         $this->init();
     }
+
+    /**
+     * Initialize form
+     */
+    public function init(){}
+
     /**
      * Get db adapter
      * @return Zend_Db_Adapter_Abstract

@@ -52,7 +52,7 @@ class CmsController extends Action
     {
         $this->_form = new configForm();
         $this->_form->initGeneral();
-        return $this->forward()->dispatch('config-cms', array('controller' => 'config-cms', 'action' => 'edit'));
+        return $this->forward()->dispatch('CmsController', array('action' => 'edit'));
     }
 
     /**
@@ -64,7 +64,7 @@ class CmsController extends Action
     {
         $this->_form = new configForm();
         $this->_form->initSystem();
-        return $this->forward()->dispatch('config-cms', array('controller' => 'config-cms', 'action' => 'edit'));
+        return $this->forward()->dispatch('CmsController', array('action' => 'edit'));
     }
 
     /**
@@ -76,7 +76,7 @@ class CmsController extends Action
     {
         $this->_form = new configForm();
         $this->_form->initServer();
-        return $this->forward()->dispatch('config-cms', array('controller' => 'config-cms', 'action' => 'edit'));
+        return $this->forward()->dispatch('CmsController', array('action' => 'edit'));
     }
 
     /**

@@ -26,4 +26,16 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php echo $this->partial('config/forms/config.phtml', array('form' => $this->form)); ?>
+<form class="simple-form" action="<?php echo $this->escape($this->form->getAttribute('value')); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<?php $fieldsets = $this->form->getFieldsets(); ?>
+
+<?php foreach($fieldsets as $fieldset): ?>
+    <?php foreach($fieldset->getElements() as $element): ?>
+        <div>
+            <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+
+            <?php echo $this->formElement($element); ?>
+        </div>
+    <?php endforeach; ?>
+<?php endforeach; ?>
+</form>
