@@ -212,26 +212,30 @@ class DocumentTypeController extends Action
         }
         else
         {
-            if($validator = $form->getSubForm('infos')->getElement('name')->getValidator('Zend\Validator\Db\NoRecordExists'))
+
+            if($validator = $form->getInputFilter()->get('infos')->get('name')->getValidatorChain()->getValidator('Zend\Validator\Db\NoRecordExists'))
             {
                 $validator->setExclude(array('field' => 'id', 'value' => $document_type->getId()));
             }
 
             $post_data = $this->getRequest()->post()->toArray();
-            if(!$form->isValid($post_data))
+            $form->setData($post_data);
+            $form->setValues($post_data);
+            if(!$form->isValid())
             {
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Can save document_type');
-                var_dump($post_data);
-                var_dump($form->getErrors());
                 die();
             }
             else
             {
                 $property_collection = new Property\Collection();
 
-                $infos_subform = $form->getSubForm('infos');
-                $views_subform = $form->getSubForm('views');
-                $tabs_subform = $form->getSubForm('tabs');
+                $input = $form->getInputFilter();
+
+                $infos_subform = $input->get('infos');
+                $views_subform = $input->get('views');
+                $tabs_subform = $input->get('tabs');
+                $properties_subform = $input->get('properties');
 
                 $document_type->addData(array(
                     'name' => $infos_subform->getValue('name')
@@ -245,11 +249,11 @@ class DocumentTypeController extends Action
                     $document_type->addViews($views_subform->getValue('available_views'));
                     $document_type->save();
 
-                    $values = $form->getValues();
                     $tabs_array = array();
                     $existing_tabs = array();
                     $idx = 0;
-                    foreach($values['tabs'] as $tab_id => $tab_values)
+
+                    foreach($tabs_subform->getValidInput() as $tab_id => $tab_values)
                     {
                         if(!preg_match('~^tab(\d+)$~', $tab_id, $matches))
                         {
@@ -264,8 +268,8 @@ class DocumentTypeController extends Action
                             $tab_model = new Tab\Model();
                         }
 
-                        $tab_model->setDescription($tab_values['description']);
-                        $tab_model->setName($tab_values['name']);
+                        $tab_model->setDescription($tab_values->getValue('description'));
+                        $tab_model->setName($tab_values->getValue('name'));
                         $tab_model->setDocumentTypeId($document_type->getId());
                         $tab_model->setOrder(++$idx);
                         $tab_model->save();
@@ -283,7 +287,7 @@ class DocumentTypeController extends Action
                     }
 
                     $idx = 0;
-                    foreach($values['properties'] as $property_id => $property_values)
+                    foreach($properties_subform->getValidInput() as $property_id => $property_values)
                     {
                         if(!preg_match('~^property(\d+)$~', $property_id, $matches))
                         {
@@ -298,12 +302,13 @@ class DocumentTypeController extends Action
                             $property_model = new Property\Model();
                         }
 
-                        $property_model->setDescription($property_values['description']);
-                        $property_model->setName($property_values['name']);
-                        $property_model->setIdentifier($property_values['identifier']);
-                        $property_model->setTabId($existing_tabs[$property_values['tab']]);
-                        $property_model->setDatatypeId($property_values['datatype']);
-                        $property_model->isRequired(!empty($property_values['required']) ? TRUE : FALSE);
+                        $property_model->setDescription($property_values->getValue('description'));
+                        $property_model->setName($property_values->getValue('name'));
+                        $property_model->setIdentifier($property_values->getValue('identifier'));
+                        $property_model->setTabId($existing_tabs[$property_values->getValue('tab')]);
+                        $property_model->setDatatypeId($property_values->getValue('datatype'));
+                        $required = $property_values->getValue('required');
+                        $property_model->isRequired(!empty($required) ? TRUE : FALSE);
                         $property_model->setOrder(++$idx);
                         $property_model->save();
                     }

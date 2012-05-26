@@ -28,7 +28,7 @@
 ?>
 <?php echo $this->partial('html-message.phtml'); ?>
 <div class="tabs">
-    <?php echo $this->form; ?>
+    <?php echo $this->partial('development/forms/document-type.phtml', array('form' => $this->form)); ?>
 </div>
 
 <script type="text/javascript">

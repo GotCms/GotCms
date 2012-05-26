@@ -75,7 +75,11 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function addViews($views)
     {
-        $this->_views += $views;
+        if(!empty($views))
+        {
+            $this->_views += $views;
+        }
+
         return $this;
     }
 

@@ -26,30 +26,30 @@
 
 return array(
     'modules' => array(
-        'Application'
-        , 'Admin'
-        , 'Config'
-        , 'Content'
-        , 'Development'
-        , 'Statistics'
+        'Application',
+        'Admin',
+        'Config',
+        'Content',
+        'Development',
+        'Statistics',
     ),
     'module_listener_options' => array(
-        'config_cache_enabled' => false
-        , 'cache_dir' => 'data/cache'
-        , 'module_paths' => array(
-            './module'
-            , './vendor'
+        'config_cache_enabled' => FALSE,
+        'cache_dir' => 'data/cache',
+        'module_paths' => array(
+            './module',
+            './vendor',
         ),
     ),
     'service_manager' => array(
-        'use_defaults' => true
-        , 'factories' => array(
+        'use_defaults' => TRUE,
+        'factories' => array(
         ),
     ),
     'autoloader' => array(
         'namespaces' => array(
             'Gc'        => __DIR__ . '/../vendor/Gc',
-            'Datatypes' => __DIR__ . '/../vendor/Datatypes'
+            'Datatypes' => __DIR__ . '/../vendor/Datatypes',
         ),
     ),
 );

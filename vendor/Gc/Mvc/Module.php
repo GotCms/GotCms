@@ -28,8 +28,7 @@
 namespace Gc\Mvc;
 
 use Zend,
-    Zend\Config\Reader\Ini,
-    Zend\View;
+    Zend\Config\Reader\Ini;
 
 class Module
 {
