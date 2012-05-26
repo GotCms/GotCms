@@ -249,6 +249,7 @@ class DocumentType extends AbstractForm
             $datatype->setAttribute('value', $property['datatype']);
             $description->setAttribute('value', $property['description']);
             $required->setAttribute('value', !empty($property['is_required']));
+            $property_id->setAttribute('value', str_replace('property', '', $property['id']));
             $property_fieldset_name = $property['id'];
         }
 
@@ -362,6 +363,7 @@ class DocumentType extends AbstractForm
         {
             $name->setAttribute('value', $tab['name']);
             $description->setAttribute('value', $tab['description']);
+            $tab_id->setAttribute('value', str_replace('tab', '', $tab['id']));
             $tab_fieldset_name = $tab['id'];
         }
 

@@ -56,8 +56,6 @@ class DocumentTypeController extends Action
      */
     public function createAction()
     {
-        $document_type = new DocumentType\Model();
-
         $form = new DocumentTypeForm();
         $form->setAttribute('action', $this->url()->fromRoute('documentTypeCreate', array()));
         $request = $this->getRequest();
@@ -71,7 +69,9 @@ class DocumentTypeController extends Action
         else
         {
             $post_data = $this->getRequest()->post()->toArray();
-            if(!$form->isValid($post_data))
+            $form->setData($post_data);
+            $form->setValues($post_data);
+            if(!$form->isValid())
             {
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Can save document_type');
             }
@@ -79,15 +79,20 @@ class DocumentTypeController extends Action
             {
                 $property_collection = new Property\Collection();
 
-                $infos_subform = $form->getSubForm('infos');
-                $views_subform = $form->getSubForm('views');
-                $tabs_subform = $form->getSubForm('tabs');
+                $input = $form->getInputFilter();
+
+                $infos_subform = $input->get('infos');
+                $views_subform = $input->get('views');
+                $tabs_subform = $input->get('tabs');
+                $properties_subform = $input->get('properties');
+
+                $document_type = new DocumentType\Model();
 
                 $document_type->addData(array(
-                    'user_id' => $this->getAuth()->getIdentity()->getId()
-                    , 'name' => $infos_subform->getValue('name')
+                    'name' => $infos_subform->getValue('name')
                     , 'description' => $infos_subform->getValue('description')
                     , 'default_view_id' => $views_subform->getValue('default_view')
+                    , 'user_id' => $this->getAuth()->getIdentity()->getId()
                 ));
 
                 $document_type->getAdapter()->getDriver()->getConnection()->beginTransaction();
@@ -95,13 +100,12 @@ class DocumentTypeController extends Action
                 {
                     $document_type->addViews($views_subform->getValue('available_views'));
                     $document_type->save();
-                    $document_type_id = $document_type->getId();
 
-                    $values = $form->getValues();
                     $tabs_array = array();
                     $existing_tabs = array();
                     $idx = 0;
-                    foreach($values['tabs'] as $tab_id => $tab_values)
+
+                    foreach($tabs_subform->getValidInput() as $tab_id => $tab_values)
                     {
                         if(!preg_match('~^tab(\d+)$~', $tab_id, $matches))
                         {
@@ -109,15 +113,10 @@ class DocumentTypeController extends Action
                         }
 
                         $tab_id = $matches[1];
+                        $tab_model = new Tab\Model();
 
-                        $tab_model = Tab\Model::fromId($tab_id);
-                        if(empty($tab_model) or $tab_model->getDocumentTypeId() != $document_type->getId())
-                        {
-                            $tab_model = new Tab\Model();
-                        }
-
-                        $tab_model->setDescription($tab_values['description']);
-                        $tab_model->setName($tab_values['name']);
+                        $tab_model->setDescription($tab_values->getValue('description'));
+                        $tab_model->setName($tab_values->getValue('name'));
                         $tab_model->setDocumentTypeId($document_type->getId());
                         $tab_model->setOrder(++$idx);
                         $tab_model->save();
@@ -125,7 +124,7 @@ class DocumentTypeController extends Action
                     }
 
                     $idx = 0;
-                    foreach($values['properties'] as $property_id => $property_values)
+                    foreach($properties_subform->getValidInput() as $property_id => $property_values)
                     {
                         if(!preg_match('~^property(\d+)$~', $property_id, $matches))
                         {
@@ -133,26 +132,22 @@ class DocumentTypeController extends Action
                         }
 
                         $property_id = $matches[1];
+                        $property_model = new Property\Model();
 
-                        $property_model = Property\Model::fromId($property_id);
-                        if(empty($property_model))
-                        {
-                            $property_model = new Property\Model();
-                        }
-
-                        $property_model->setDescription($property_values['description']);
-                        $property_model->setName($property_values['name']);
-                        $property_model->setIdentifier($property_values['identifier']);
-                        $property_model->setTabId($existing_tabs[$property_values['tab']]);
-                        $property_model->setDatatypeId($property_values['datatype']);
-                        $property_model->isRequired(!empty($property_values['required']) ? TRUE : FALSE);
+                        $property_model->setDescription($property_values->getValue('description'));
+                        $property_model->setName($property_values->getValue('name'));
+                        $property_model->setIdentifier($property_values->getValue('identifier'));
+                        $property_model->setTabId($existing_tabs[$property_values->getValue('tab')]);
+                        $property_model->setDatatypeId($property_values->getValue('datatype'));
+                        $required = $property_values->getValue('required');
+                        $property_model->isRequired(!empty($required) ? TRUE : FALSE);
                         $property_model->setOrder(++$idx);
                         $property_model->save();
                     }
 
                     $document_type->getAdapter()->getDriver()->getConnection()->commit();
 
-                    return $this->redirect()->toRoute('documentTypeEdit', array('id' => $document_type_id));
+                    return $this->redirect()->toRoute('documentTypeEdit', array('id' => $document_type->getId()));
                 }
                 catch(Exception $e)
                 {
@@ -224,7 +219,6 @@ class DocumentTypeController extends Action
         }
         else
         {
-
             if($validator = $form->getInputFilter()->get('infos')->get('name')->getValidatorChain()->getValidator('Zend\Validator\Db\NoRecordExists'))
             {
                 $validator->setExclude(array('field' => 'id', 'value' => $document_type->getId()));
@@ -236,7 +230,6 @@ class DocumentTypeController extends Action
             if(!$form->isValid())
             {
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Can save document_type');
-                die();
             }
             else
             {
@@ -373,7 +366,6 @@ class DocumentTypeController extends Action
             $description = $this->getRequest()->post()->get('description');
 
             $tabs = empty($session['document-type']['tabs']) ? array() : $session['document-type']['tabs'];
-            $last_id = $session['document-type']['max-tab-id'];
 
             foreach($tabs as $tab)
             {
@@ -383,7 +375,9 @@ class DocumentTypeController extends Action
                 }
             }
 
+            $last_id = empty($session['document-type']['max-tab-id']) ? 0 : $session['document-type']['max-tab-id'];
             $current_id = $last_id + 1;
+            $session['document-type']['max-tab-id'] = $current_id;
             $tabs[$current_id] = array('name' => $name, 'description' => $description, 'properties' => array());
             $session['document-type']['tabs'] = $tabs;
 
@@ -472,8 +466,9 @@ class DocumentTypeController extends Action
                 }
             }
 
-            $last_id = $session['document-type']['max-property-id'];
+            $last_id = empty($session['document-type']['max-property-id']) ? 0 : $session['document-type']['max-property-id'];
             $current_id = $last_id + 1;
+            $session['document-type']['max-property-id'] = $current_id;
             $properties[$current_id] = array(
                 'name' => $name,
                 'identifier' => $identifier,
