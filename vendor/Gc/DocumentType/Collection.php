@@ -69,15 +69,19 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getSelect()
     {
-        $documents = $this->getDocumentTypes();
-
-        $array = array();
-        foreach($documents as $document)
+        $select = array();
+        $document_types = $this->getDocumentTypes();
+        if(!is_array($document_types))
         {
-            $array[$document->getId()] = $document->getName();
+            return $select;
         }
 
-        return $array;
+        foreach($document_types as $document_type)
+        {
+            $select[$document_type->getName()] = (string)$document_type->getId();
+        }
+
+        return $select;
     }
 
     /*

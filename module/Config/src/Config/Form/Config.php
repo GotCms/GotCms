@@ -27,6 +27,7 @@
 namespace Config\Form;
 
 use Gc\Form\AbstractForm,
+    Gc\Document,
     Gc\User\Permission,
     Zend\Form\Element,
     Zend\Form\Fieldset,
@@ -58,37 +59,41 @@ class Config extends AbstractForm
             ->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text');
 
-        $is_offline = new Element('is_offline');
+        $is_offline = new Element('site_is_offline');
         $is_offline->setAttribute('label', 'Is offline')
+            ->setAttribute('value', '1')
             ->setAttribute('type', 'checkbox');
 
-        $offline_document = new Element('offline_document');
+        $offline_document = new Element('site_offline_document');
         $offline_document->setAttribute('label', 'Offline document')
-            ->setAttribute('type', 'select')
-            ->setAttribute('options', array())
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('type', 'select');
+        $document_collection = new Document\Collection();
+        $document_collection->load(0);
+        $offline_document->setAttribute('options', $document_collection->getSelect());
 
         $general_fieldset->add($name);
         $general_fieldset->add($is_offline);
+        $general_fieldset->add($offline_document);
         $this->add($general_fieldset);
 
         $this->getInputFilter()->add(array(
-            'site_name' => array(
-                'name' => 'site_name',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
+            'name' => 'site_name',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
             ),
-            'is_offline' => array(
-                'name' => 'site_name',
-                'required' => TRUE,
-            ),
-            'offline_document' => array(
-                'name' => 'site_name',
-                'required' => TRUE,
-            ),
-        ));
+        ), 'site_name');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'site_is_offline',
+            'required' => FALSE,
+            'allow_empty' => TRUE
+        ), 'site_is_offline');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'site_offline_document',
+            'required' => TRUE,
+        ), 'site_offline_document');
 
         return $this;
     }
@@ -129,50 +134,54 @@ class Config extends AbstractForm
         $this->add($session_fieldset);
 
         //Debug settings
-        $general_fieldset = new Fieldset('debug');
+        $debug_fieldset = new Fieldset('debug');
         $debug_is_active = new Element('debug_is_active');
         $debug_is_active->setAttribute('label', 'Is active')
+            ->setAttribute('type', 'checkbox')
             ->setAttribute('class', 'input-text');
 
-        $this->add($debug_is_active);
+        $debug_fieldset->add($debug_is_active);
+        $this->add($debug_fieldset);
 
         $this->getInputFilter()->add(array(
-            'cookie_domain' => array(
-                'name' => 'cookie_domain',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
+            'name' => 'cookie_domain',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
             ),
-            'cookie_path' => array(
-                'name' => 'cookie_path',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
+        ), 'cookie_domain');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'cookie_path',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
             ),
-            'session_lifetime' => array(
-                'name' => 'session_lifetime',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
+        ), 'cookie_path');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'session_lifetime',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
             ),
-            'session_handler' => array(
-                'name' => 'session_handler',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
+        ), 'session_lifetime');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'session_handler',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
             ),
-            'debug_is_active' => array(
-                'name' => 'is_active',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
+        ), 'session_handler');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'debug_is_active',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
             ),
-        ));
+        ), 'debug_is_active');
 
         return $this;
     }
@@ -185,14 +194,20 @@ class Config extends AbstractForm
     public function initServer()
     {
         //Local settings
+        $locale_list = Locale::getLocaleList();
+        foreach($locale_list as $locale => $locale_value)
+        {
+            $locale_list[$locale] = $locale;
+        }
+
         $locale_fieldset = new Fieldset('locale');
         $locale = new Element('locale');
         $locale->setAttribute('type', 'select')
             ->setAttribute('label', 'Server locale')
-            ->setAttribute('options', Locale::getTranslation());
+            ->setAttribute('options', $locale_list);
 
-        $locale_settings->add(array($locale));
-        $this->add($locale_settings);
+        $locale_fieldset->add($locale);
+        $this->add($locale_fieldset);
 
         //Mail settings
         $mail_fieldset = new Fieldset('mail');
@@ -211,29 +226,60 @@ class Config extends AbstractForm
         $this->add($mail_fieldset);
 
         $this->getInputFilter()->add(array(
-            'locale' => array(
-                'name' => 'locale',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
+            'name' => 'locale',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
             ),
-            'mail_from' => array(
-                'name' => 'mail_from',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
+        ), 'locale');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'mail_from',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
             ),
-            'mail_from_name' => array(
-                'name' => 'mail_from_name',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
+        ), 'mail_from');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'mail_from_name',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
             ),
-        ));
+        ), 'mail_from_name');
 
         return $this;
+    }
+
+    /**
+     * Set config values from database result
+     * @param array $data
+     */
+    public function setValues(array $data)
+    {
+        foreach($data as $config)
+        {
+            foreach($this->getFieldsets() as $fieldset)
+            {
+                if($fieldset->has($config['identifier']))
+                {
+                    $element = $fieldset->get($config['identifier']);
+                    if($element->getAttribute('type') == 'checkbox')
+                    {
+                        if(!empty($config['value']))
+                        {
+                            $element->setAttribute('checked', 'checked');
+                        }
+                    }
+                    else
+                    {
+                        $element->setAttribute('value', $config['value']);
+                    }
+
+                    break;
+                }
+            }
+        }
     }
 }

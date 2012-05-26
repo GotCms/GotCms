@@ -86,6 +86,30 @@ class CmsController extends Action
      */
     public function editAction()
     {
+        $values = Config::getValues();
+        $this->_form->setValues($values);
+
+        if($this->getRequest()->isPost())
+        {
+            $this->_form->setData($this->getRequest()->post()->toArray());
+            if(!$this->_form->isValid())
+            {
+                var_dump($this->_form->getInputFilter()->getInvalidInput());
+                var_dump($this->_form->getMessages());
+                die();
+            }
+            else
+            {
+                $inputs = $this->_form->getInputFilter()->getValidInput();
+                foreach($inputs as $input)
+                {
+                    Config::setValue($input->getName(), $input->getValue());
+                }
+
+                return $this->redirect()->toRoute($this->getRouteMatch()->getMatchedRouteName());
+            }
+
+        }
         return array('form' => $this->_form);
     }
 }

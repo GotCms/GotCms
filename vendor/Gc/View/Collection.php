@@ -89,13 +89,19 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getSelect()
     {
-        $array_views = array();
-        foreach($this->getViews() as $key => $value)
+        $select = array();
+        $views = $this->getViews();
+        if(!is_array($views))
         {
-            $array_views[$value->getId()] = $value->getName();
+            return $select;
         }
 
-        return $array_views;
+        foreach($views as $view)
+        {
+            $select[$view->getName()] = (string)$view->getId();
+        }
+
+        return $select;
     }
 
     /**
