@@ -27,11 +27,11 @@
 return array(
     'controller' => array(
         'classes' => array(
-            'DevelopmentController'     => 'Development\Controller\IndexController'
-            , 'DatatypeController'      => 'Development\Controller\DatatypeController'
-            , 'DocumentTypeController'  => 'Development\Controller\DocumentTypeController'
-            , 'LayoutController'        => 'Development\Controller\LayoutController'
-            , 'ViewController'          => 'Development\Controller\ViewController'
+            'DevelopmentController'     => 'Development\Controller\IndexController',
+            'DatatypeController'      => 'Development\Controller\DatatypeController',
+            'DocumentTypeController'  => 'Development\Controller\DocumentTypeController',
+            'LayoutController'        => 'Development\Controller\LayoutController',
+            'ViewController'          => 'Development\Controller\ViewController',
         ),
     ),
     'view_manager' => array(

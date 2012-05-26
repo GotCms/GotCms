@@ -27,8 +27,8 @@
 return array(
     'controller' => array(
         'classes' => array(
-            'ContentController' => 'Content\Controller\IndexController'
-            , 'DocumentController' => 'Content\Controller\DocumentController'
+            'ContentController' => 'Content\Controller\IndexController',
+            'DocumentController' => 'Content\Controller\DocumentController',
         ),
     ),
     'view_manager' => array(

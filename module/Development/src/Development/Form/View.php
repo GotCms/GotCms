@@ -39,34 +39,34 @@ class View extends AbstractForm
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'name' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                    , array(
-                        'name' => 'db\\no_record_exists'
-                        , 'options' => array(
-                            'table' => 'view'
-                            , 'field' => 'name'
-                            , 'adapter' => $this->getAdapter()
-                        )
-                    )
-                )
-            )
-            , 'identifier' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                    array(
+                        'name' => 'db\\no_record_exists',
+                        'options' => array(
+                            'table' => 'view',
+                            'field' => 'name',
+                            'adapter' => $this->getAdapter(),
+                        ),
+                    ),
+                ),
+            ),
+            'identifier' => array(
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
                     //, array('name' => 'identifier') @TODO test it
-                    , array(
-                        'name' => 'db\\no_record_exists'
-                        , 'options' => array(
-                            'table' => 'view'
-                            , 'field' => 'identifier'
-                            , 'adapter' => $this->getAdapter()
-                        )
-                    )
-                )
-            )
+                    array(
+                        'name' => 'db\\no_record_exists',
+                        'options' => array(
+                            'table' => 'view',
+                            'field' => 'identifier',
+                            'adapter' => $this->getAdapter(),
+                        ),
+                    ),
+                ),
+            ),
         ));
 
         $this->setInputFilter($inputFilter);

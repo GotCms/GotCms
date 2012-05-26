@@ -44,44 +44,44 @@ class User extends AbstractForm
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'email' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                    , array('name' => 'email_address')
-                )
-            )
-            , 'login' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                    , array(
-                        'name' => 'db\\no_record_exists'
-                        , 'options' => array(
-                            'table' => 'user'
-                            , 'field' => 'login'
-                            , 'adapter' => $this->getAdapter()
-                        )
-                    )
-                )
-            )
-            , 'lastname' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
-            )
-            , 'firstname' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
-            )
-            , 'user_acl_role_id' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
-            )
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                    array('name' => 'email_address'),
+                ),
+            ),
+            'login' => array(
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                    array(
+                        'name' => 'db\\no_record_exists',
+                        'options' => array(
+                            'table' => 'user',
+                            'field' => 'login',
+                            'adapter' => $this->getAdapter(),
+                        ),
+                    ),
+                ),
+            ),
+            'lastname' => array(
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'firstname' => array(
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'user_acl_role_id' => array(
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
         ));
 
         $this->setInputFilter($inputFilter);
@@ -115,18 +115,18 @@ class User extends AbstractForm
     {
         $filter = $this->getInputFilter();
         $filter->add(array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             )
         , 'password');
 
         $filter->add(array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             )
         , 'password_confirm');
 

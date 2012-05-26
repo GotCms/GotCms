@@ -27,7 +27,7 @@
 return array(
     'controller' => array(
         'classes' => array(
-            'AdminController' => 'Admin\Controller\IndexController'
+            'AdminController' => 'Admin\Controller\IndexController',
         ),
     ),
     'view_manager' => array(

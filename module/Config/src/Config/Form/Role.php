@@ -45,14 +45,14 @@ class Role extends AbstractForm
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'name' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
-            )
-            , 'permissions' => array(
-                'required'=> FALSE
-            )
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'permissions' => array(
+                'required'=> FALSE,
+            ),
         ));
 
         $this->setInputFilter($inputFilter);

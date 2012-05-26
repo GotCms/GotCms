@@ -41,17 +41,17 @@ class UserLogin extends AbstractForm
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'login' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
                 )
             )
             , 'password' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
-            )
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
         ));
 
         $this->setInputFilter($inputFilter);

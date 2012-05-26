@@ -41,11 +41,11 @@ class UserForgotPassword extends AbstractForm
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'email' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
-            )
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
         ));
 
         $this->setInputFilter($inputFilter);

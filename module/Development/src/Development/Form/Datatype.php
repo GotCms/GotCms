@@ -57,23 +57,23 @@ class Datatype extends AbstractForm
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'name' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                    , array(
-                        'name' => 'db\\no_record_exists'
-                        , 'options' => array(
-                            'table' => 'datatype'
-                            , 'field' => 'name'
-                            , 'adapter' => $this->getAdapter()
-                        )
-                    )
-                )
-            )
-            , 'model' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                    array(
+                        'name' => 'db\\no_record_exists',
+                        'options' => array(
+                            'table' => 'datatype',
+                            'field' => 'name',
+                            'adapter' => $this->getAdapter(),
+                        ),
+                    ),
+                ),
+            ),
+            'model' => array(
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
                 )
             )
         ));

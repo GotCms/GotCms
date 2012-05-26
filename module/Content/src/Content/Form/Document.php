@@ -42,32 +42,32 @@ class Document extends AbstractForm
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'name' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
-            )
-            , 'url_key' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'url_key' => array(
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
                     //, array('name' => 'identifier') @TODO test it
-                    , array(
-                        'name' => 'db\\no_record_exists'
-                        , 'options' => array(
-                            'table' => 'document'
-                            , 'field' => 'url_key'
-                            , 'adapter' => $this->getAdapter()
-                        )
-                    )
-                )
-            )
-            , 'document_type' => array(
-                'required'=> TRUE
-                , 'validators' => array(
-                    array('name' => 'not_empty')
-                )
-            )
+                    array(
+                        'name' => 'db\\no_record_exists',
+                        'options' => array(
+                            'table' => 'document',
+                            'field' => 'url_key',
+                            'adapter' => $this->getAdapter(),
+                        ),
+                    ),
+                ),
+            ),
+            'document_type' => array(
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
         ));
 
         $this->setInputFilter($inputFilter);
