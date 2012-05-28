@@ -199,4 +199,15 @@ class UserController extends Action
 
         return array('form' => $form);
     }
+
+    /**
+     * This action is used when user has no access to display one page
+     * @return \Zend\View\Model\ViewModel|array
+     */
+    public function forbiddenAction()
+    {
+        $this->getResponse()->setStatusCode(403);
+        $this->getResponse()->isForbidden(TRUE);
+        $this->layout()->module = NULL;
+    }
 }

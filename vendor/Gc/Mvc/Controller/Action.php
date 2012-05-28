@@ -109,10 +109,9 @@ class Action extends ActionController
             $this->_acl = new Acl($user_model);
             $permissions = $user_model->getRole()->getUserPermissions();
 
-            if(!empty($this->_acl_page) and !$this->_acl->isAllowed($user_model->getRole()->getName(), $this->_acl_page['resource'], $this->_acl_page['permission']))
+            if($route_name != 'userForbidden' and !empty($this->_acl_page) and !$this->_acl->isAllowed($user_model->getRole()->getName(), $this->_acl_page['resource'], $this->_acl_page['permission']))
             {
-                //@TODO Do something to specify user has no access
-die('here');
+                return $this->redirect()->toRoute('userForbidden');
             }
         }
 
