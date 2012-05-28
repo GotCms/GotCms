@@ -84,12 +84,14 @@ class RoleController extends Action
      */
     public function deleteAction()
     {
-        if($this->getRequest()->isPost())
+        $role_id = $this->getRouteMatch()->getParam('id');
+        if(!empty($role_id))
         {
-            //@TODO delete role action
+            Role\Model::fromId($role_id)->delete();
+            $this->flashMessenger()->setNamespace('success')->addMessage('User deleted');
         }
 
-        return $this->redirect()->toRoute('userRoleList');
+        return $this->redirect()->toRoute('userRole');
     }
 
     /**
@@ -99,6 +101,7 @@ class RoleController extends Action
     public function editAction()
     {
         $role_id = $this->getRouteMatch()->getParam('id');
+
         $role_model = Role\Model::fromId($role_id);
 
         $form = new RoleForm();

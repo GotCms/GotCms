@@ -99,7 +99,7 @@ class Model extends AbstractTable
         $id = $this->getId();
         if(!empty($id))
         {
-            parent::delete('id = '.$this->getId());
+            parent::delete('id = '.$id);
             unset($this);
             return TRUE;
         }
