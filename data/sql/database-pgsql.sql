@@ -2,15 +2,12 @@
 -- pgDesigner 1.2.17
 --
 -- Project    : GotCms
--- Date       : 04/29/2012 20:01:22.718
+-- Date       : 05/28/2012 12:33:34.97
 -- Description: 
 ------------------------------
 
 
 -- Start Séquence's declaration
-DROP SEQUENCE IF EXISTS "core_config_data_id_seq" CASCADE;
-CREATE SEQUENCE "core_config_data_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
 DROP SEQUENCE IF EXISTS "datatypes_id_seq" CASCADE;
 CREATE SEQUENCE "datatypes_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
 
@@ -35,11 +32,11 @@ CREATE SEQUENCE "properties_value_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE ST
 DROP SEQUENCE IF EXISTS "tabs_id_seq" CASCADE;
 CREATE SEQUENCE "tabs_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
 
-DROP SEQUENCE IF EXISTS "core_translate_id_seq" CASCADE;
-CREATE SEQUENCE "core_translate_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
+DROP SEQUENCE IF EXISTS "translate_id_seq" CASCADE;
+CREATE SEQUENCE "translate_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
 
-DROP SEQUENCE IF EXISTS "core_translate_locale_id_seq" CASCADE;
-CREATE SEQUENCE "core_translate_locale_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
+DROP SEQUENCE IF EXISTS "translate_language_id_seq" CASCADE;
+CREATE SEQUENCE "translate_language_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
 
 DROP SEQUENCE IF EXISTS "user_acl_roles_id_seq" CASCADE;
 CREATE SEQUENCE "user_acl_roles_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
@@ -59,29 +56,12 @@ CREATE SEQUENCE "views_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE
 -- End Séquence's declaration
 
 -- Start Table's declaration
-DROP TABLE IF EXISTS "core_config_data" CASCADE;
-CREATE TABLE "core_config_data" (
-  "id" character varying NOT NULL,
-  "identifier" character varying NOT NULL,
-  "value" character varying
-) WITH OIDS;
-ALTER TABLE "core_config_data" ADD CONSTRAINT "core_config_data_pk" PRIMARY KEY("id");
-CREATE UNIQUE INDEX "core_config_data_identifier" ON "core_config_data" USING btree ("identifier");
-
-DROP TABLE IF EXISTS "core_session" CASCADE;
-CREATE TABLE "core_session" (
-  "id" character varying(255) NOT NULL,
-  "expires" integer NOT NULL,
-  "data" bytea
-) WITH OIDS;
-ALTER TABLE "core_session" ADD CONSTRAINT "core_session_pk" PRIMARY KEY("id");
-
 DROP TABLE IF EXISTS "datatype" CASCADE;
 CREATE TABLE "datatype" (
 "id" serial NOT NULL,
 "name" character varying NOT NULL,
-"model" character varying NOT NULL,
-"prevalue_value" text
+"prevalue_value" text,
+"model" character varying NOT NULL
 ) WITH OIDS;
 ALTER TABLE "datatype" ADD CONSTRAINT "datatype_pk" PRIMARY KEY("id");
 
@@ -116,7 +96,7 @@ CREATE TABLE "document" (
 "status" boolean DEFAULT false,
 "show_in_nav" boolean DEFAULT false,
 "user_id" integer NOT NULL,
-"document_type_id" integer NOT NULL,
+"document_type_id" integer,
 "view_id" integer,
 "layout_id" integer,
 "parent_id" integer DEFAULT 0
@@ -156,14 +136,14 @@ CREATE TABLE "property" (
 ) WITH OIDS;
 ALTER TABLE "property" ADD CONSTRAINT "property_pk" PRIMARY KEY("id");
 
-DROP TABLE IF EXISTS "properties_value" CASCADE;
-CREATE TABLE "properties_value" (
+DROP TABLE IF EXISTS "property_value" CASCADE;
+CREATE TABLE "property_value" (
 "id" serial NOT NULL,
 "document_id" integer NOT NULL,
 "property_id" integer NOT NULL,
 "value" text
 ) WITH OIDS;
-ALTER TABLE "properties_value" ADD CONSTRAINT "properties_value_pk" PRIMARY KEY("id");
+ALTER TABLE "property_value" ADD CONSTRAINT "property_value_pk" PRIMARY KEY("id");
 
 DROP TABLE IF EXISTS "tab" CASCADE;
 CREATE TABLE "tab" (
@@ -187,9 +167,9 @@ DROP TABLE IF EXISTS "core_translate_locale" CASCADE;
 CREATE TABLE "core_translate_locale" (
 "id" serial NOT NULL,
 "destination" character varying NOT NULL,
-"language" character varying NOT NULL,
-"core_translate_id" integer NOT NULL,
-"hash" character varying NOT NULL
+"locale" character varying NOT NULL,
+"hash" character varying NOT NULL,
+"core_translate_id" integer NOT NULL
 ) WITH OIDS;
 ALTER TABLE "core_translate_locale" ADD CONSTRAINT "core_translate_locale_pk" PRIMARY KEY("id");
 
@@ -251,6 +231,23 @@ CREATE TABLE "user_acl_permission" (
 ) WITH OIDS;
 ALTER TABLE "user_acl_permission" ADD CONSTRAINT "user_acl_permission_pk" PRIMARY KEY("id");
 
+DROP TABLE IF EXISTS "core_config_data" CASCADE;
+CREATE TABLE "core_config_data" (
+"id" serial NOT NULL,
+"identifier" character varying NOT NULL,
+"value" character varying
+) WITH OIDS;
+ALTER TABLE "core_config_data" ADD CONSTRAINT "core_config_data_pk" PRIMARY KEY("id");
+CREATE UNIQUE INDEX "core_config_data_id" ON "core_config_data" USING btree ("identifier");
+
+DROP TABLE IF EXISTS "core_session" CASCADE;
+CREATE TABLE "core_session" (
+"id" character varying NOT NULL,
+"expires" integer NOT NULL,
+"data" bytea
+) WITH OIDS;
+ALTER TABLE "core_session" ADD CONSTRAINT "core_session_pk" PRIMARY KEY("id");
+
 -- End Table's declaration
 
 -- Start Relation's declaration
@@ -274,7 +271,7 @@ ALTER TABLE "document_type" ADD CONSTRAINT "fk_document_type_icon" FOREIGN KEY (
 
 ALTER TABLE "document" ADD CONSTRAINT "fk_document_user" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
-ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_permission_user_acl_role" FOREIGN KEY ("user_acl_role_id") REFERENCES "user_acl_role"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_permission_user_acl_role" FOREIGN KEY ("user_acl_role_id") REFERENCES "user_acl_role"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE "user" ADD CONSTRAINT "fk_user_user_acl_role" FOREIGN KEY ("user_acl_role_id") REFERENCES "user_acl_role"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
@@ -284,7 +281,11 @@ ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_user_acl_permission" FOREIGN 
 
 ALTER TABLE "document_type_view" ADD CONSTRAINT "fk_document_type_view_document_type" FOREIGN KEY ("document_type_id") REFERENCES "document_type"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "user_acl_permission" ADD CONSTRAINT "fk_user_acl_permission_user_acl_resource" FOREIGN KEY ("user_acl_resource_id") REFERENCES "user_acl_resource"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "user_acl_permission" ADD CONSTRAINT "fk_user_acl_permission_user_acl_resource" FOREIGN KEY ("user_acl_resource_id") REFERENCES "user_acl_resource"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE "property_value" ADD CONSTRAINT "fk_property_value_document" FOREIGN KEY ("document_id") REFERENCES "document"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+
+ALTER TABLE "property_value" ADD CONSTRAINT "fk_property_value_property" FOREIGN KEY ("property_id") REFERENCES "property"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
 -- End Relation's declaration
 
