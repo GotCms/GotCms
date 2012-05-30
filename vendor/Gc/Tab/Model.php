@@ -80,10 +80,10 @@ class Model extends AbstractTable
     public function save()
     {
         $array_save = array(
-            'name' => $this->getName()
-            , 'description' => $this->getDescription()
-            , 'order' => $this->getOrder()
-            , 'document_type_id' => $this->getDocumentTypeId()
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'order' => $this->getOrder(),
+            'document_type_id' => $this->getDocumentTypeId(),
         );
 
         try

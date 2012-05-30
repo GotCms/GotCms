@@ -45,8 +45,8 @@ class Model extends AbstractTable
     public function save()
     {
         $array_save = array(
-            'name' => $this->getName()
-            , 'description' => $this->getDescription()
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
         );
 
         try

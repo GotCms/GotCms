@@ -85,11 +85,12 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function save()
     {
-        $array_save = array('name' => $this->getName(),
+        $array_save = array(
+            'name' => $this->getName(),
             'identifier' => $this->getIdentifier(),
             'description' => $this->getDescription(),
             'content' => $this->getContent(),
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' => date('Y-m-d H:i:s'),
         );
 
         try

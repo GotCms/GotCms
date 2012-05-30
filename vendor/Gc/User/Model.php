@@ -119,12 +119,12 @@ class Model extends AbstractTable implements IterableInterface
     public function save()
     {
         $array_save = array(
-            'firstname' => $this->getFirstname()
-            , 'lastname' => $this->getLastname()
-            , 'email' => $this->getEmail()
-            , 'login' => $this->getLogin()
-            , 'updated_at' => date('Y-m-d H:i:s')
-            , 'user_acl_role_id' => $this->getUserAclRoleId()
+            'firstname' => $this->getFirstname(),
+            'lastname' => $this->getLastname(),
+            'email' => $this->getEmail(),
+            'login' => $this->getLogin(),
+            'updated_at' => date('Y-m-d H:i:s'),
+            'user_acl_role_id' => $this->getUserAclRoleId(),
         );
 
         $password = $this->getPassword();

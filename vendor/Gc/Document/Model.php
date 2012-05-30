@@ -177,16 +177,16 @@ class Model extends AbstractTable implements IterableInterface
     public function save()
     {
         $array_save = array(
-            'name' => $this->getName()
-            , 'url_key' => $this->getUrlKey()
-            , 'updated_at' => date('Y-m-d H:i:s')
-            , 'status' => $this->getStatus() === TRUE ? 'TRUE' : 'FALSE'
-            , 'show_in_nav' => $this->showInNav() === TRUE ? 'TRUE' : 'FALSE'
-            , 'user_id' => (int)$this->getUserId()
-            , 'document_type_id' => (int)$this->getDocumentTypeId() == 0 ? NULL : (int)$this->getDocumentTypeId()
-            , 'view_id' => (int)$this->getViewId() == 0 ? NULL : (int)$this->getViewId()
-            , 'layout_id' => (int)$this->getLayoutId() == 0 ? NULL : (int)$this->getLayoutId()
-            , 'parent_id' => (int)$this->getParentId() == 0 ? NULL : (int)$this->getParentId()
+            'name' => $this->getName(),
+            'url_key' => $this->getUrlKey(),
+            'updated_at' => date('Y-m-d H:i:s'),
+            'status' => $this->getStatus() === TRUE ? 'TRUE' : 'FALSE',
+            'show_in_nav' => $this->showInNav() === TRUE ? 'TRUE' : 'FALSE',
+            'user_id' => (int)$this->getUserId(),
+            'document_type_id' => (int)$this->getDocumentTypeId() == 0 ? NULL : (int)$this->getDocumentTypeId(),
+            'view_id' => (int)$this->getViewId() == 0 ? NULL : (int)$this->getViewId(),
+            'layout_id' => (int)$this->getLayoutId() == 0 ? NULL : (int)$this->getLayoutId(),
+            'parent_id' => (int)$this->getParentId() == 0 ? NULL : (int)$this->getParentId(),
         );
 
         try

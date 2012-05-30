@@ -34,7 +34,7 @@ class Identifier extends AbstractValidator
 
     protected $_pattern = '~^[a-zA-Z0-9_]+$~';
     protected $_messageTemplates = array(
-        self::NOT_IDENTIFIER => "'%value%' can only contains alphabetic characters and '_'"
+        self::NOT_IDENTIFIER => "'%value%' can only contains alphabetic characters and '_'",
     );
 
     public function isValid($value)

@@ -92,9 +92,9 @@ class Model extends AbstractTable implements IterableInterface
     public function save()
     {
         $array_save = array(
-            'name' => $this->getName()
-            , 'prevalue_value' => serialize($this->getPrevalueValue())
-            , 'model' => $this->getModel()
+            'name' => $this->getName(),
+            'prevalue_value' => serialize($this->getPrevalueValue()),
+            'model' => $this->getModel(),
         );
 
         try

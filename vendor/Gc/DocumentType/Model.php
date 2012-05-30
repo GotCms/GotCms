@@ -124,12 +124,12 @@ class Model extends AbstractTable implements IterableInterface
     public function save()
     {
         $array_save = array(
-            'name' => $this->getName()
-            , 'updated_at' => date('Y-m-d H:i:s')
-            , 'description' => $this->getDescription()
-            , 'icon_id' => $this->getIconId()
-            , 'default_view_id' => $this->getDefaultViewId()
-            , 'user_id' => $this->getUserId()
+            'name' => $this->getName(),
+            'updated_at' => date('Y-m-d H:i:s'),
+            'description' => $this->getDescription(),
+            'icon_id' => $this->getIconId(),
+            'default_view_id' => $this->getDefaultViewId(),
+            'user_id' => $this->getUserId(),
         );
 
         try

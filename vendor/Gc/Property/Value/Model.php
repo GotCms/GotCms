@@ -101,9 +101,9 @@ class Model extends AbstractTable
     public function save()
     {
         $array_save = array(
-            'value' => $this->getValue()
-            , 'document_id' => $this->getDocumentId()
-            , 'property_id' => $this->getPropertyId()
+            'value' => $this->getValue(),
+            'document_id' => $this->getDocumentId(),
+            'property_id' => $this->getPropertyId(),
         );
 
         try

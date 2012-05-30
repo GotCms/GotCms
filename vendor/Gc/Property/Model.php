@@ -142,13 +142,13 @@ class Model extends AbstractTable
     public function save()
     {
         $array_save = array(
-            'name' => $this->getName()
-            , 'description' => $this->getDescription()
-            , 'identifier' => $this->getIdentifier()
-            , 'required' => $this->isRequired() == TRUE ? 'TRUE' : 'FALSE'
-            , 'order' => $this->getOrder()
-            , 'tab_id' => $this->getTabId()
-            , 'datatype_id' => $this->getDatatypeId()
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'identifier' => $this->getIdentifier(),
+            'required' => $this->isRequired() == TRUE ? 'TRUE' : 'FALSE',
+            'order' => $this->getOrder(),
+            'tab_id' => $this->getTabId(),
+            'datatype_id' => $this->getDatatypeId(),
         );
 
         try
