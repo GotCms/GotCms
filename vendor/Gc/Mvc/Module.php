@@ -105,6 +105,11 @@ class Module
         return $this->_namespace;
     }
 
+    /**
+     * initiliaze database connexion for every modules
+     * @param ModuleManager $module_manager
+     * @return void
+     */
     public function init(ModuleManager $module_manager)
     {
         if(self::$_db === NULL)
