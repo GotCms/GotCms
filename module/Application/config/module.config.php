@@ -51,26 +51,4 @@ return array(
             'application' => __DIR__ . '/../views',
         ),
     ),
-    'di' => array(
-        'instance' => array(
-           'Zend\Db\Adapter\Adapter' => array(
-                'parameters' => array(
-                    'driver' => array(
-                        'driver' => 'pdo_pgsql',
-                        'username' => 'got',
-                        'password' => 'x8maoxfp;',
-                        'database' => 'gotcms',
-                        'hostname' => 'localhost'
-                    ),
-                ),
-            ),
-            'Zend\Validator\ValidatorLoader' => array(
-                'parameters' => array(
-                    'map' => array(
-                        'identifier' => 'Gc\Validator\Identifier'
-                    )
-                ),
-            ),
-        ),
-    ),
 );

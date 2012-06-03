@@ -28,10 +28,14 @@
 namespace Gc\Mvc;
 
 use Zend,
-    Zend\Config\Reader\Ini;
+    Zend\Config\Reader\Ini,
+    Zend\ModuleManager\ModuleManager,
+    Zend\Db\Adapter\Adapter as DbAdapter;
 
 class Module
 {
+
+    static protected $_db;
     /**
      * @var array
      */
@@ -99,5 +103,25 @@ class Module
     protected function _getNamespace()
     {
         return $this->_namespace;
+    }
+
+    public function init(ModuleManager $module_manager)
+    {
+        if(self::$_db === NULL)
+        {
+            $config_paths = $module_manager->getEvent()->getConfigListener()->getOptions()->getConfigGlobPaths();
+            $config = array();
+            foreach($config_paths as $path)
+            {
+                foreach(glob(realpath(__DIR__.'/../../../').'/'.$path, GLOB_BRACE) as $filename)
+                {
+                    $config = include_once($filename);
+                }
+            }
+
+            $db_adapter = new DbAdapter($config['db']);
+            self::$_db = $db_adapter;
+            \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
+        }
     }
 }

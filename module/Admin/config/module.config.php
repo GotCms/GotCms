@@ -28,6 +28,7 @@ return array(
     'controller' => array(
         'classes' => array(
             'AdminController' => 'Admin\Controller\IndexController',
+            'InstallController' => 'Admin\Controller\IndexController',
         ),
     ),
     'view_manager' => array(

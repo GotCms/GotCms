@@ -17,41 +17,25 @@
  *
  * PHP Version >=5.3
  *
- * @category Gc
- * @package  Config
+ * @category Controller
+ * @package  Application\Controller
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
 
-return array(
-    'modules' => array(
-        'Application',
-        'Admin',
-        'Config',
-        'Content',
-        'Development',
-        'Statistics',
-    ),
-    'module_listener_options' => array(
-        'config_glob_paths'    => array(
-            'config/autoload/{,*.}{global,local}.php',
-        ),
-        'config_cache_enabled' => FALSE,
-        'cache_dir' => 'data/cache',
-        'module_paths' => array(
-            './module',
-            './vendor',
-        ),
-    ),
-    'service_manager' => array(
-        'use_defaults' => TRUE,
-        'factories' => array(),
-    ),
-    'autoloader' => array(
-        'namespaces' => array(
-            'Gc'        => __DIR__ . '/../vendor/Gc',
-            'Datatypes' => __DIR__ . '/../vendor/Datatypes',
-        ),
-    ),
-);
+namespace Application\Controller;
+
+use Gc\Mvc\Controller\Action;
+
+class IndexController extends Action
+{
+
+    /**
+      * Generate frontend from url key
+      * @return \Zend\View\Model\ViewModel|array
+      */
+    public function indexAction()
+    {
+    }
+}

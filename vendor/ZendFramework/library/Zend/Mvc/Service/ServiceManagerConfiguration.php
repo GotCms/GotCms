@@ -107,7 +107,6 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * Merges internal arrays with those passed via configuration
      * 
      * @param  array $configuration 
-     * @return void
      */
     public function __construct(array $configuration = array())
     {
@@ -174,7 +173,7 @@ class ServiceManagerConfiguration implements ConfigurationInterface
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
             if ($instance instanceof ServiceManagerAwareInterface) {
-                $instance->setServiceManager($instance);
+                $instance->setServiceManager($serviceManager);
             }
         });
 

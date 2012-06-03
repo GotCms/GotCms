@@ -210,9 +210,11 @@ class ServiceManager implements ServiceLocatorInterface
         $name = $this->canonicalizeName($name);
 
         if ($this->allowOverride === false && $this->has($name)) {
-            throw new Exception\InvalidServiceNameException(
-                'A service by this name or alias already exists and cannot be overridden, please use an alternate name.'
-            );
+            throw new Exception\InvalidServiceNameException(sprintf(
+                '%s: A service by the name "%s" or alias already exists and cannot be overridden, please use an alternate name.',
+                __METHOD__,
+                $name
+            ));
         }
 
         /**
@@ -268,38 +270,37 @@ class ServiceManager implements ServiceLocatorInterface
 
         if (isset($this->instances[$cName])) {
             $instance = $this->instances[$cName];
-        } 
+        }
 
         $selfException = null;
 
-        if (!$instance) {
+        if (!$instance && !is_array($instance)) {
             try {
                 $instance = $this->create(array($cName, $rName));
             } catch (Exception\ServiceNotCreatedException $selfException) {
-                foreach ($this->peeringServiceManagers as $peeringServiceManager) {
-                    try {
-                        $instance = $peeringServiceManager->get($name);
-                        break;
-                    } catch (Exception\ServiceNotCreatedException $e) {
-                        continue;
+                if($usePeeringServiceManagers) {
+                    foreach ($this->peeringServiceManagers as $peeringServiceManager) {
+                        try {
+                            $instance = $peeringServiceManager->get($name);
+                            break;
+                        } catch (Exception\ServiceNotCreatedException $e) {
+                            continue;
+                        }
                     }
                 }
             }
         }
 
+        // Still no instance? raise an exception
         if (!$instance) {
-
-            // Still no instance? raise an exception
-            if (!$instance) {
-                throw new Exception\ServiceNotCreatedException(sprintf(
-                        '%s was unable to fetch or create an instance for %s',
-                        __METHOD__,
-                        $name
-                    ),
-                    null,
-                    ($selfException === null) ? null : $selfException->getPrevious()
-                );
-            }
+            throw new Exception\ServiceNotCreatedException(sprintf(
+                '%s was unable to fetch or create an instance for %s',
+                    __METHOD__,
+                    $name
+                ),
+                null,
+                ($selfException === null) ? null : $selfException->getPrevious()
+            );
         }
 
         if (isset($this->shared[$cName]) && $this->shared[$cName] === true) {
@@ -437,7 +438,7 @@ class ServiceManager implements ServiceLocatorInterface
             if (!$abstractFactory instanceof AbstractFactoryInterface) {
                 continue;
             }
-            
+
             if ($abstractFactory->canCreateServiceWithName($cName, $rName)) {
                 return true;
             }

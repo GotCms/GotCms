@@ -90,8 +90,6 @@ class Action extends ActionController
      */
     protected function _construct()
     {
-        \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-
         $auth = $this->getAuth();
         $module = $this->getRouteMatch()->getParam('module');
         $route_name = $this->getRouteMatch()->getMatchedRouteName();

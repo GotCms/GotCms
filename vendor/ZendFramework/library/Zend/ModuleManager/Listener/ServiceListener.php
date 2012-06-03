@@ -51,7 +51,7 @@ class ServiceListener implements ListenerAggregateInterface
 
     /**
      * Service configuration
-     * 
+     *
      * @var array
      */
     protected $serviceConfig = array(
@@ -69,7 +69,7 @@ class ServiceListener implements ListenerAggregateInterface
     protected $services;
 
     /**
-     * @param  ServiceLocatorInterface $services 
+     * @param  ServiceLocatorInterface $services
      * @return void
      */
     public function __construct(ServiceLocatorInterface $services)
@@ -78,7 +78,7 @@ class ServiceListener implements ListenerAggregateInterface
     }
 
     /**
-     * @param  EventManagerInterface $events 
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function attach(EventManagerInterface $events)
@@ -89,7 +89,7 @@ class ServiceListener implements ListenerAggregateInterface
     }
 
     /**
-     * @param  EventManagerInterface $events 
+     * @param  EventManagerInterface $events
      * @return void
      */
     public function detach(EventManagerInterface $events)
@@ -102,15 +102,15 @@ class ServiceListener implements ListenerAggregateInterface
     }
 
     /**
-     * Retrieve service manager configuration from module, and 
+     * Retrieve service manager configuration from module, and
      * configure the service manager.
      *
      * If the module does not implement ServiceProviderInterface and does not
      * implement the "getServiceConfiguration()" method, does nothing. Also,
      * if the return value of that method is not a ServiceConfiguration object,
      * or not an array or Traversable that can seed one, does nothing.
-     * 
-     * @param  ModuleEvent $e 
+     *
+     * @param  ModuleEvent $e
      * @return void
      */
     public function onLoadModule(ModuleEvent $e)
@@ -144,11 +144,11 @@ class ServiceListener implements ListenerAggregateInterface
     /**
      * Use merged configuration to configure service manager
      *
-     * If the merged configuration has a non-empty, array 'service_manager' 
+     * If the merged configuration has a non-empty, array 'service_manager'
      * key, it will be passed to a ServiceManager Configuration object, and
      * used to configure the service manager.
-     * 
-     * @param  ModuleEvent $e 
+     *
+     * @param  ModuleEvent $e
      * @return void
      */
     public function onLoadModulesPost(ModuleEvent $e)
@@ -170,7 +170,7 @@ class ServiceListener implements ListenerAggregateInterface
      *
      * Configures the service manager based on the internal, merged
      * service configuration.
-     * 
+     *
      * @return void
      */
     public function configureServiceManager()
@@ -189,8 +189,8 @@ class ServiceListener implements ListenerAggregateInterface
      *
      * Extracts the various service configuration arrays, and then merges with
      * the internal service configuration.
-     * 
-     * @param  ServiceConfiguration $config 
+     *
+     * @param  ServiceConfiguration $config
      * @return void
      */
     protected function mergeServiceConfiguration(ServiceConfiguration $config)
