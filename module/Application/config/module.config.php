@@ -50,5 +50,8 @@ return array(
         'template_path_stack' => array(
             'application' => __DIR__ . '/../views',
         ),
+        'strategies' => array(
+            'ViewJsonStrategy',
+        ),
     ),
 );

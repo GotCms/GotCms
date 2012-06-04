@@ -100,7 +100,16 @@ class DocumentController extends Action
 
         if($this->getRequest()->isPost())
         {
-            if(!$document_form->isValid($this->getRequest()->post()->toArray()))
+            $document_form->getInputFilter()->add(
+                array(
+                    'required'=> TRUE,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    ),
+                )
+            , 'document_type');
+            $document_form->setData($this->getRequest()->post()->toArray());
+            if(!$document_form->isValid())
             {
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid document data');
             }
@@ -188,10 +197,9 @@ class DocumentController extends Action
             if($this->getRequest()->isPost())
             {
                 $has_error = FALSE;
-                $document_vars = $this->getRequest()->post()->get('document');
-
+                $document_vars = $this->getRequest()->post()->toArray();
                 $document->setName(empty($document_vars['name']) ? $document->getName() : $document_vars['name']);
-                $document->setStatus(empty($document_vars['status']) ? DocumentModel::STATUS_DISABLE : $document_vars['status']);
+                $document->setStatus(empty($document_vars['status']) ? DocumentModel::STATUS_DISABLE : DocumentModel::STATUS_ENABLE);
                 $document->showInNav(empty($document_vars['show_in_nav']) ? FALSE : $document_vars['show_in_nav']);
                 $document->setLayoutId(empty($document_vars['layout']) ? FALSE : $document_vars['layout']);
                 $document->setViewId(empty($document_vars['view']) ? $document->getViewId() : $document_vars['view']);
@@ -241,7 +249,7 @@ class DocumentController extends Action
                 if($has_error or !$form_document_add->isValid())
                 {
                     $document->showInNav(FALSE);
-                    $document->setStatus(FALSE);
+                    $document->setStatus(DocumentModel::STATUS_DISABLE);
                     $this->flashMessenger()->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties values are required !');
                 }
                 else
@@ -250,7 +258,7 @@ class DocumentController extends Action
                 }
 
                 $document->save();
-                $this->redirect()->toRoute('documentEdit', array('id' => $document->getId()));
+                return $this->redirect()->toRoute('documentEdit', array('id' => $document->getId()));
             }
 
             $tabs = new Component\Tabs($tabs_array);

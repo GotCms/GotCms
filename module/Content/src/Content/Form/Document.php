@@ -62,12 +62,6 @@ class Document extends AbstractForm
                     ),
                 ),
             ),
-            'document_type' => array(
-                'required'=> TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
-            ),
         ));
 
         $this->setInputFilter($inputFilter);
@@ -91,16 +85,10 @@ class Document extends AbstractForm
         $parent = new Element('parent');
         $parent->setAttribute('type', 'hidden');
 
-        $submit = new Element('submit');
-        $submit->setAttribute('class', 'input-submit')
-            ->setAttribute('type', 'submit')
-            ->setAttribute('label', 'Save');
-
         $this->add($name);
         $this->add($url_key);
         $this->add($document_type);
         $this->add($parent);
-        $this->add($submit);
     }
 
     public function load(DocumentModel $document)
@@ -111,14 +99,24 @@ class Document extends AbstractForm
         $status = new Element('status');
         $status->setAttribute('type', 'checkbox')
             ->setAttribute('label', 'Publish')
-            ->setAttribute('value', $document->getStatus());
+            ->setAttribute('value', '1');
+
+        if($document->getStatus() == TRUE)
+        {
+            $status->setAttribute('checked', 'checked');
+        }
 
         $this->add($status);
 
         $show_in_nav = new Element('show_in_nav');
         $show_in_nav->setAttribute('type', 'checkbox')
             ->setAttribute('label', 'Show in nav')
-            ->setAttribute('value', $document->showInNav());
+            ->setAttribute('value', '1');
+
+        if($document->showInNav() == DocumentModel::STATUS_ENABLE)
+        {
+            $show_in_nav->setAttribute('checked', 'checked');
+        }
 
         $this->add($show_in_nav);
 
@@ -141,6 +139,7 @@ class Document extends AbstractForm
         $this->add($layout);
         $this->remove('document_type');
         $this->remove('parent');
-        $this->remove('submit');
+
+        $this->loadValues($document);
     }
 }

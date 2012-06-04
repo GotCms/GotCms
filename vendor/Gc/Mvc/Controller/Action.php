@@ -164,11 +164,6 @@ class Action extends ActionController
      */
     protected function _returnJson(array $data)
     {
-        $service_locator = $this->getServiceLocator();
-        $jsonStrategy = $service_locator->get('Zend\View\Strategy\JsonStrategy');
-        $view         = $service_locator->get('Zend\View\View');
-        $view->events()->attach($jsonStrategy, 100);
-
         $json_model = new JsonModel();
         $json_model->setVariables($data);
         $json_model->setTerminal(TRUE);

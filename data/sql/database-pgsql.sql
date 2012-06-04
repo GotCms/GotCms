@@ -93,7 +93,7 @@ CREATE TABLE "document" (
 "updated_at" timestamp without time zone NOT NULL,
 "name" character varying NOT NULL,
 "url_key" character varying NOT NULL,
-"status" boolean DEFAULT false,
+"status" integer NOT NULL DEFAULT 0,
 "show_in_nav" boolean DEFAULT false,
 "user_id" integer NOT NULL,
 "document_type_id" integer,

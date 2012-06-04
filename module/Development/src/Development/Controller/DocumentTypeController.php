@@ -291,6 +291,7 @@ class DocumentTypeController extends Action
                         }
                     }
 
+                    $existing_properties = array();
                     $idx = 0;
                     foreach($properties_subform->getValidInput() as $property_id => $property_values)
                     {
@@ -316,6 +317,17 @@ class DocumentTypeController extends Action
                         $property_model->isRequired(!empty($required) ? TRUE : FALSE);
                         $property_model->setOrder(++$idx);
                         $property_model->save();
+                        $existing_properties[] = $property_model->getId();
+                    }
+
+                    $property_collection = new Property\Collection();
+                    $properties = $property_collection->load($document_type->getId())->getProperties();
+                    foreach($properties as $property)
+                    {
+                        if(!in_array($property->getId(), $existing_properties))
+                        {
+                            $property->delete();
+                        }
                     }
 
                     $document_type->getAdapter()->getDriver()->getConnection()->commit();

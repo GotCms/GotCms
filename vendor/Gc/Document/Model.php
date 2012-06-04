@@ -102,20 +102,11 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-     * Get document status
-     * @return boolean
-     */
-    public function getStatus()
-    {
-        return (bool)$this->getData('status') != FALSE ? TRUE : FALSE;
-    }
-
-    /**
      * @return $this->getStatus
      */
     public function isPublished()
     {
-        return $this->getStatus();
+        return $this->getStatus() == self::STATUS_ENABLE;
     }
 
     /**
@@ -180,7 +171,7 @@ class Model extends AbstractTable implements IterableInterface
             'name' => $this->getName(),
             'url_key' => $this->getUrlKey(),
             'updated_at' => date('Y-m-d H:i:s'),
-            'status' => $this->getStatus() === TRUE ? 'TRUE' : 'FALSE',
+            'status' => ($this->getStatus() === NULL ? self::STATUS_DISABLE : $this->getStatus()),
             'show_in_nav' => $this->showInNav() === TRUE ? 'TRUE' : 'FALSE',
             'user_id' => (int)$this->getUserId(),
             'document_type_id' => (int)$this->getDocumentTypeId() == 0 ? NULL : (int)$this->getDocumentTypeId(),

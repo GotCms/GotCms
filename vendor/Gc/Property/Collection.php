@@ -42,7 +42,7 @@ class Collection extends AbstractTable
      * @param optional integer $document_type_id
      * @param optional integer $tab_id
      * @param optional integer $document_id
-     * @return void
+     * @return \Gc\Property\Collection
      */
     public function load($document_type_id = NULL, $tab_id = NULL, $document_id = null)
     {
@@ -51,6 +51,8 @@ class Collection extends AbstractTable
         $this->setDocumentId($document_id);
 
         $this->getProperties(TRUE);
+
+        return $this;
     }
 
     /**

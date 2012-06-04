@@ -223,17 +223,17 @@ var Gc = (function($)
             {
                 $button = $(this);
                 $.post($deletePropertyUrl, {
-                            property:    $button.val()
-                        },
-                        function($data)
+                        property:    $button.val()
+                    },
+                    function($data)
+                    {
+                        if($data.success == true)
                         {
-                            if($data.success == true)
-                            {
-                                $button.parent().parent().parent().remove();
-                            }
-
-                            $this.setHtmlMessage($data.message);
+                            $button.parent().parent().remove();
                         }
+
+                        $this.setHtmlMessage($data.message);
+                    }
                 );
             });
         },
