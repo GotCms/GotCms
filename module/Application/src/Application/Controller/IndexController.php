@@ -55,7 +55,7 @@ class IndexController extends Action
         $path = $url['path'];
         if($path == '/')
         {
-            $document = Document\Model::fromUrlKey('home');
+            $document = Document\Model::fromUrlKey('');
         }
         else
         {
@@ -100,7 +100,7 @@ class IndexController extends Action
          */
         $view_model = new ViewModel();
         $existed = in_array($this->_viewStream, stream_get_wrappers());
-        if ($existed)
+        if($existed)
         {
             stream_wrapper_unregister($this->_viewStream);
         }

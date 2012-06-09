@@ -32,6 +32,7 @@
 
         <?php $fieldsets = $this->form->getFieldsets(); ?>
         <?php foreach($fieldsets as $tab_id => $fieldset): ?>
+            <?php $errors = $fieldset->getMessages(); ?>
             <div id="<?php echo $this->escape($tab_id); ?>">
                 <?php $elements = $fieldset->getElements(); ?>
                 <?php foreach($elements as $element): ?>
@@ -43,6 +44,9 @@
                             <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
 
                             <?php echo $this->formElement($element); ?>
+                            <?php if(!empty($errors[$element->getAttribute('name')])): ?>
+                                <?php echo $this->formErrors($errors[$element->getAttribute('name')]); ?>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>

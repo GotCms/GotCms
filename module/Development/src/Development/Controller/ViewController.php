@@ -70,7 +70,7 @@ class ViewController extends Action
                 $view_model->setContent($view_form->getValue('content'));
                 $view_model->save();
 
-                return $this->redirect()->toRoute('viewCreate');
+                return $this->redirect()->toRoute('viewEdit', array('id' => $view_model->getId()));
             }
         }
 

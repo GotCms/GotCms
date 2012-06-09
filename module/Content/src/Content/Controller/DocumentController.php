@@ -198,6 +198,7 @@ class DocumentController extends Action
             {
                 $has_error = FALSE;
                 $document_vars = $this->getRequest()->post()->toArray();
+                $old_url_key = $document->getUrlKey();
                 $document->setName(empty($document_vars['name']) ? $document->getName() : $document_vars['name']);
                 $document->setStatus(empty($document_vars['status']) ? DocumentModel::STATUS_DISABLE : DocumentModel::STATUS_ENABLE);
                 $document->showInNav(empty($document_vars['show_in_nav']) ? FALSE : $document_vars['show_in_nav']);
@@ -246,10 +247,11 @@ class DocumentController extends Action
             if($this->getRequest()->isPost())
             {
                 $form_document_add->setData($this->getRequest()->post()->toArray());
+
                 if($has_error or !$form_document_add->isValid())
                 {
-                    $document->showInNav(FALSE);
                     $document->setStatus(DocumentModel::STATUS_DISABLE);
+                    $document->setUrlKey($old_url_key);
                     $this->flashMessenger()->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties values are required !');
                 }
                 else
@@ -258,7 +260,6 @@ class DocumentController extends Action
                 }
 
                 $document->save();
-                return $this->redirect()->toRoute('documentEdit', array('id' => $document->getId()));
             }
 
             $tabs = new Component\Tabs($tabs_array);

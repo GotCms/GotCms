@@ -77,7 +77,11 @@ abstract class AbstractForm extends Form
             {
                 if($this->has($element_name))
                 {
-                    $this->get($element_name)->setAttribute('value', $element_value);
+                    $element = $this->get($element_name);
+                    if($element->getAttribute('type') !== 'checkbox')
+                    {
+                        $this->get($element_name)->setAttribute('value', $element_value);
+                    }
                 }
 
                 if($input_filter->has($element_name))

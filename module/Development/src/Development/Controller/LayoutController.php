@@ -70,8 +70,7 @@ class LayoutController extends Action
                 $layout_model->setContent($layout_form->getValue('content'));
                 $layout_model->save();
 
-                $this->redirect()->toRoute('layoutCreate');
-                return;
+                return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_model->getId()));
             }
         }
 

@@ -93,7 +93,7 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function showInNav($is_show = NULL)
     {
-        if(!empty($is_show))
+        if(!is_null($is_show))
         {
             $this->setData('show_in_nav', $is_show);
         }

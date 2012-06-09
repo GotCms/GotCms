@@ -42,15 +42,17 @@ class Document extends AbstractForm
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'name' => array(
+                'name' => 'name',
                 'required'=> TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
             ),
             'url_key' => array(
-                'required'=> TRUE,
+                'name' => 'url_key',
+                'required'=> FALSE,
+                'allow_empty' => TRUE,
                 'validators' => array(
-                    array('name' => 'not_empty'),
                     //, array('name' => 'identifier') @TODO test it
                     array(
                         'name' => 'db\\no_record_exists',
@@ -101,7 +103,7 @@ class Document extends AbstractForm
             ->setAttribute('label', 'Publish')
             ->setAttribute('value', '1');
 
-        if($document->getStatus() == TRUE)
+        if($document->getStatus() == DocumentModel::STATUS_ENABLE)
         {
             $status->setAttribute('checked', 'checked');
         }
@@ -113,7 +115,7 @@ class Document extends AbstractForm
             ->setAttribute('label', 'Show in nav')
             ->setAttribute('value', '1');
 
-        if($document->showInNav() == DocumentModel::STATUS_ENABLE)
+        if($document->showInNav() == TRUE)
         {
             $show_in_nav->setAttribute('checked', 'checked');
         }
@@ -124,7 +126,7 @@ class Document extends AbstractForm
         $view = new Element('view');
         $view->setAttribute('type', 'select')
             ->setAttribute('options', $views_collection->getSelect())
-            ->setAttribute('value', $document->getViewId())
+            ->setAttribute('value', (string)$document->getViewId())
             ->setAttribute('label', 'View');
 
         $this->add($view);
@@ -133,7 +135,7 @@ class Document extends AbstractForm
         $layout = new Element('layout');
         $layout->setAttribute('type', 'select')
             ->setAttribute('options', $layouts_collection->getSelect())
-            ->setAttribute('value', $document->getViewId())
+            ->setAttribute('value', (string)$document->getLayoutId())
             ->setAttribute('label', 'Layout');
 
         $this->add($layout);
