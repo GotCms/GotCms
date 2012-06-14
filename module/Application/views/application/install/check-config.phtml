@@ -1,0 +1,102 @@
+<?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Design
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
+
+?>
+
+<h2><?php echo $this->escape(sprintf($this->translator('Pre-installation check for GotCms %s'), $this->cmsVersion)); ?></h2>
+<div class="install-text">
+    <p><?php echo $this->escape($this->translator('Please make sure all parameters are set to "Yes" before continue installation')); ?></p>
+</div>
+<div class="install-body">
+    <div class="m">
+        <fieldset>
+            <table class="content">
+                <tbody>
+                    <?php foreach($this->phpData as $data): ?>
+                        <tr>
+                            <td class="item">
+                                <?php echo $this->escape($this->translator($data['label'])); ?>
+                            </td>
+                            <td>
+                                <span>
+                                    <?php echo $this->escape($this->translator($data['value'] === TRUE ? 'Yes' : 'No')); ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>
+
+<h3><?php echo $this->escape($this->translator('Recommended settings:')); ?></h3>
+<div class="install-text">
+    <?php echo $this->escape($this->translator('These settings are recommended for PHP in order to ensure full compatibility.')); ?>
+</div>
+<div class="install-body">
+    <div class="m">
+        <fieldset>
+            <table class="content">
+                <thead>
+                <tr>
+                    <td class="toggle">
+                        <?php echo $this->escape($this->translator('Directive')); ?>
+                    </td>
+                    <td class="toggle">
+                        <?php echo $this->escape($this->translator('Recommended')); ?>
+                    </td>
+                    <td class="toggle">
+                        <?php echo $this->escape($this->translator('Actual')); ?>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($this->phpDirective as $data): ?>
+                        <tr>
+                            <td class="item">
+                                <?php echo $this->escape($this->translator($data['label'])); ?>
+                            </td>
+
+                            <td class="toggle">
+                                <span>
+                                    <?php echo $this->escape($this->translator($data['needed'] === TRUE ? 'On' : 'Off')); ?>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="green">
+                                    <?php echo $this->escape($this->translator($data['value'] === TRUE ? 'On' : 'Off')); ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>
+<div class="clr"></div>

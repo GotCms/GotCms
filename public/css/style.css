@@ -119,7 +119,7 @@ header {height:145px;}
 
 #main-top {background-image:url(../images/corpshaut.png);background-repeat:no-repeat;height:69px;width:1031px;margin-bottom:-11px;}
 
-#main {background-color:#FFF;background-repeat:repeat-y;width:1011px;padding-left:10px;padding-right:10px;}
+#main {background-color:#FFF;width:1011px;padding-left:10px;padding-right:10px;}
 
 #content {float:right;width:755px;}
 #content h2 {background-image:url(../images/h2txt.png);background-repeat:no-repeat;width:652px;height:25px;color:#FFF;font-size:11px;padding-top:5px;padding-left:10px;margin-left:45px;}
@@ -166,3 +166,11 @@ footer .creativegfx {width:150px;height:24px;display:block;float:right;}
 #one-page-form #submit::-moz-focus-inner{border:0}
 #one-page-form #actions a{color:#3151a2;float:right;line-height:35px;margin-left:10px}
 #one-page-form #back{display:block;text-align:center;position:relative;top:60px;color:#999}
+
+#main-installer {overflow:hidden;background-color:#FFF;width:1011px;padding-left:10px;padding-right:10px;}
+#main-installer h1 {text-align:center}
+#main-installer h2 {margin-top:0}
+#main-installer nav {float:left;width:200px}
+#main-installer nav .active{font-weight:bold}
+#main-installer section {float:left;width:800px}
+#main-installer .license {width:100%;height:500px}

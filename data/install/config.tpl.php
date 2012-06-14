@@ -25,15 +25,12 @@
  */
 
 return array(
-    'controller' => array(
-        'classes' => array(
-            'AdminController' => 'Admin\Controller\IndexController',
-        ),
-    ),
-    'view_manager' => array(
-        'template_path_stack' => array(
-            'admin' => __DIR__ . '/../views',
-        ),
+    'db' => array(
+        'driver' => '__DRIVER__',
+        'username' => '__USERNAME__',
+        'password' => '__PASSWORD__',
+        'database' => '__DATABASE__',
+        'hostname' => '__HOSTNAME__'
     ),
 );
 

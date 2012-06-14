@@ -96,21 +96,20 @@
     </div>
 
     <footer>
-        © 2011 <a href="">GotCms</a>
+        © 2012 <a href="">GotCms</a>
     </footer>
 
     <script type="text/javascript">
-        $(document).ready(function()
-        {
-
-            <?php if(!empty($this->routes)): ?>
+        <?php if(!empty($this->routes)): ?>
+            $(document).ready(function()
+            {
                 Gc.setOption('routes', <?php echo $this->jsQuoteEscape($this->routes); ?>);
                 Gc.initDocumentMenu();
-            <?php endif; ?>
-        });
+            });
+        <?php endif; ?>
     </script>
 
-    <?php if($this->layout()->treeview): ?>
+    <?php if($this->treeview): ?>
         <ul id="contextMenu" class="contextMenu">
             <li class="new"><a href="#new"><?php echo $this->escape($this->translator('New')); ?></a></li>
             <li class="edit"><a href="#edit"><?php echo $this->escape($this->translator('Edit')); ?></a></li>
@@ -125,7 +124,7 @@
     <div id="dialog" title="" style="display:none">
         <p>
             <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;">&nbsp;</span>
-            These items will be permanently deleted and cannot be recovered. Are you sure?
+            <?php echo $this->escape($this->translator('These items will be permanently deleted and cannot be recovered. Are you sure?')); ?>
         </p>
     </div>
 </body>

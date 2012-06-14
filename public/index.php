@@ -26,6 +26,8 @@
  */
 
 chdir(dirname(__DIR__));
+define('GC_APPLICATION_PATH', getcwd());
+
 require_once (getenv('ZF2_PATH') ?: 'vendor/ZendFramework/library') . '/Zend/Loader/AutoloaderFactory.php';
 
 use Zend\Loader\AutoloaderFactory,

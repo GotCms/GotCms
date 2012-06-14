@@ -28,7 +28,8 @@ return array(
     'display_exceptions'    => TRUE,
     'controller' => array(
         'classes' => array(
-            'IndexController' => 'Application\Controller\IndexController'
+            'IndexController' => 'Application\Controller\IndexController',
+            'InstallController' => 'Application\Controller\InstallController',
         ),
     ),
     'view_manager' => array(

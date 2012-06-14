@@ -1,0 +1,86 @@
+<?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Design
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
+
+?>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width">
+    <?php
+    echo $this->headTitle();
+    echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
+    echo $this->headScript()
+        ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
+        ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
+        ->appendFile('/js/plugins.js', 'text/javascript')
+        ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
+        ->appendFile('/js/gotcms.js', 'text/javascript');
+
+    echo $this->HeadLink()
+        ->appendStylesheet('/css/style.css')
+        ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css');
+    ?>
+</head>
+<body>
+    <header>
+        <div id="logo">&nbsp;</div>
+    </header>
+    <div id="main-installer">
+        <h1><?php echo $this->escape($this->translator('Installation')); ?></h1>
+        <nav>
+            <?php echo $this->partial('application/install/steps.phtml', array('currentRoute' => $this->currentRoute)); ?>
+        </nav>
+        <section>
+            <?php if(!empty($this->currentRoute)): ?>
+                <form action="<?php echo $this->url($this->currentRoute); ?>" method="post" autocomplete="off">
+            <?php endif; ?>
+
+            <?php echo $this->content; ?>
+
+            <?php if(!empty($this->currentRoute)): ?>
+                    <div>
+                        <input type="submit" value="<?php echo $this->escape($this->translator('Next')); ?>">
+                    </div>
+                </form>
+            <?php endif; ?>
+        </section>
+
+        <div style="clear:both;"></div>
+    </div>
+
+    <footer>
+        © 2012 <a href="">GotCms</a>
+    </footer>
+</body>
+</html>

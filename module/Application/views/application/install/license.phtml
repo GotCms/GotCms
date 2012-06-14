@@ -18,22 +18,20 @@
  * PHP Version >=5.3
  *
  * @category Gc
- * @package  Config
+ * @package  Design
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
 
-return array(
-    'controller' => array(
-        'classes' => array(
-            'AdminController' => 'Admin\Controller\IndexController',
-        ),
-    ),
-    'view_manager' => array(
-        'template_path_stack' => array(
-            'admin' => __DIR__ . '/../views',
-        ),
-    ),
-);
+?>
 
+<h2><?php echo $this->escape($this->translator('License')); ?></h2>
+
+<iframe class="license" src="/LICENSE.txt"></iframe>
+
+<label>
+    <?php echo $this->formElement($this->form->get('accept-license')); ?>
+    <?php echo $this->escape($this->translator('You must accept this license for continue to install this software.')); ?>
+</label>

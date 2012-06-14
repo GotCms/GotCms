@@ -18,22 +18,26 @@
  * PHP Version >=5.3
  *
  * @category Gc
- * @package  Config
+ * @package  Design
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
 
-return array(
-    'controller' => array(
-        'classes' => array(
-            'AdminController' => 'Admin\Controller\IndexController',
-        ),
-    ),
-    'view_manager' => array(
-        'template_path_stack' => array(
-            'admin' => __DIR__ . '/../views',
-        ),
-    ),
-);
+?>
+<h2><?php echo $this->escape($this->translator('Configuration')); ?></h2>
 
+<?php $elements = $this->form->getElements(); ?>
+<?php $errors = $this->form->getMessages(); ?>
+<?php foreach($elements as $element): ?>
+    <div>
+        <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+
+        <?php echo $this->formElement($element); ?>
+
+        <?php if(!empty($errors[$element->getAttribute('name')])): ?>
+            <?php echo $this->formErrors($errors[$element->getAttribute('name')]); ?>
+        <?php endif; ?>
+    </div>
+<?php endforeach; ?>

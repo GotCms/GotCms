@@ -18,22 +18,18 @@
  * PHP Version >=5.3
  *
  * @category Gc
- * @package  Config
+ * @package  Design
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
 
-return array(
-    'controller' => array(
-        'classes' => array(
-            'AdminController' => 'Admin\Controller\IndexController',
-        ),
-    ),
-    'view_manager' => array(
-        'template_path_stack' => array(
-            'admin' => __DIR__ . '/../views',
-        ),
-    ),
-);
-
+?>
+<h2><?php echo $this->escape($this->translator('Steps:')); ?></h2>
+<ul>
+    <li<?php if($this->currentRoute == 'install'): ?> class="active"<?php endif; ?>><?php echo $this->escape($this->translator('Language')); ?></li>
+    <li<?php if($this->currentRoute == 'installLicense'): ?> class="active"<?php endif; ?>><?php echo $this->escape($this->translator('License')); ?></li>
+    <li<?php if($this->currentRoute == 'installCheckConfig'): ?> class="active"<?php endif; ?>><?php echo $this->escape($this->translator('Pre-configuration')); ?></li>
+    <li<?php if($this->currentRoute == 'installDatabase'): ?> class="active"<?php endif; ?>><?php echo $this->escape($this->translator('Database')); ?></li>
+</ul>

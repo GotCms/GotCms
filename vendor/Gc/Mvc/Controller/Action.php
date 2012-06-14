@@ -32,11 +32,16 @@ use Gc\User\Model,
     Zend\Authentication\AuthenticationService,
     Zend\Mvc\Controller\ActionController,
     Zend\Mvc\MvcEvent,
-    Zend\Session\Storage\SessionStorage,
+    Zend\Session\Container as SessionContainer,
     Zend\View\Model\JsonModel;
 
 class Action extends ActionController
 {
+    /**
+     * @var array route available for installer
+     */
+    protected $_installerRoutes = array('install', 'installCheckConfig', 'installLicense', 'installDatabase', 'installConfiguration', 'installComplete');
+
     /**
      * @var \Zend\Authentication\AuthenticationService
      */
@@ -90,26 +95,37 @@ class Action extends ActionController
      */
     protected function _construct()
     {
-        $auth = $this->getAuth();
         $module = $this->getRouteMatch()->getParam('module');
         $route_name = $this->getRouteMatch()->getMatchedRouteName();
-        if(!$auth->hasIdentity())
+
+        /**
+         * Installation check, and check on removal of the install directory.
+         */
+        if (!file_exists(GC_APPLICATION_PATH . '/config/autoload/global.php') and !in_array($route_name, $this->_installerRoutes))
         {
-            if(!in_array($route_name, array('userLogin', 'userForgotPassword')) and $route_name != 'renderWebsite')
-            {
-                return $this->redirect()->toRoute('userLogin', array('redirect' => base64_encode($this->getRequest()->getRequestUri())));
-            }
+            return $this->redirect()->toRoute('install');
         }
-        else
+        elseif(!in_array($route_name, $this->_installerRoutes))
         {
-            $user_model = $auth->getIdentity();
-
-            $this->_acl = new Acl($user_model);
-            $permissions = $user_model->getRole()->getUserPermissions();
-
-            if($route_name != 'userForbidden' and !empty($this->_acl_page) and !$this->_acl->isAllowed($user_model->getRole()->getName(), $this->_acl_page['resource'], $this->_acl_page['permission']))
+            $auth = $this->getAuth();
+            if(!$auth->hasIdentity())
             {
-                return $this->redirect()->toRoute('userForbidden');
+                if(!in_array($route_name, array('userLogin', 'userForgotPassword')) and $route_name != 'renderWebsite')
+                {
+                    return $this->redirect()->toRoute('userLogin', array('redirect' => base64_encode($this->getRequest()->getRequestUri())));
+                }
+            }
+            else
+            {
+                $user_model = $auth->getIdentity();
+
+                $this->_acl = new Acl($user_model);
+                $permissions = $user_model->getRole()->getUserPermissions();
+
+                if($route_name != 'userForbidden' and !empty($this->_acl_page) and !$this->_acl->isAllowed($user_model->getRole()->getName(), $this->_acl_page['resource'], $this->_acl_page['permission']))
+                {
+                    return $this->redirect()->toRoute('userForbidden');
+                }
             }
         }
 
@@ -138,7 +154,7 @@ class Action extends ActionController
     {
         if($this->_session === NULL)
         {
-            $this->_session = new SessionStorage();
+            $this->_session = new SessionContainer();
         }
 
         return $this->_session;

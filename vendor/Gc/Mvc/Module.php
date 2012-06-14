@@ -34,8 +34,11 @@ use Zend,
 
 class Module
 {
+    /**
+     * @var array
+     */
+    static protected $_globalConfig;
 
-    static protected $_db;
     /**
      * @var array
      */
@@ -112,21 +115,27 @@ class Module
      */
     public function init(ModuleManager $module_manager)
     {
-        if(self::$_db === NULL)
+        if(self::$_globalConfig === NULL)
         {
             $config_paths = $module_manager->getEvent()->getConfigListener()->getOptions()->getConfigGlobPaths();
-            $config = array();
-            foreach($config_paths as $path)
+            if(!empty($config_paths))
             {
-                foreach(glob(realpath(__DIR__.'/../../../').'/'.$path, GLOB_BRACE) as $filename)
+                $config = array();
+                foreach($config_paths as $path)
                 {
-                    $config = include_once($filename);
+                    foreach(glob(realpath(__DIR__.'/../../../').'/'.$path, GLOB_BRACE) as $filename)
+                    {
+                        $config = include_once($filename);
+                    }
+                }
+
+                if(!empty($config))
+                {
+                    $db_adapter = new DbAdapter($config['db']);
+                    self::$_globalConfig = $config;
+                    \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
                 }
             }
-
-            $db_adapter = new DbAdapter($config['db']);
-            self::$_db = $db_adapter;
-            \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
         }
     }
 }
