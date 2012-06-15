@@ -45,6 +45,10 @@ class InstallController extends Action
     {
         $this->layout()->setTemplate('layouts/install.phtml');
         $this->_installForm = new Install();
+        if(file_exists(GC_APPLICATION_PATH . '/config/autoload/global.php'))
+        {
+            return $this->redirect()->toUrl('/');
+        }
     }
 
     /**
@@ -237,15 +241,15 @@ class InstallController extends Action
                         $configuration = $session['install']['configuration'];
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_name', ?);", array($configuration['site_name']));
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_is_offline', ?);", array($configuration['site_is_offline']));
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_offline_document', '');");
+                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_offline_document', '');", array());
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_domain', ?);", array($this->getRequest()->uri()->getHost()));
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_path', '/');");
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_lifetime', '3600');");
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_handler', '0');");
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('debug_is_active', '0');");
+                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_path', '/');", array());
+                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_lifetime', '3600');", array());
+                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_handler', '0');", array());
+                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('debug_is_active', '0');", array());
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('locale', ?);", array($session['install']['lang']));
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from', '');");
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from_name', '');");
+                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from', '');", array());
+                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from_name', '');", array());
 
                     break;
 
@@ -265,7 +269,7 @@ class InstallController extends Action
                         }
                         catch (Exception $e)
                         {
-                            echo $e->getMessage();
+                            return $this->_returnJson(array('messages' => $e->getMessage()));
                         }
 
                         //resources
@@ -318,16 +322,12 @@ class InstallController extends Action
                                         $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('".$role['id']."', " . $lastInsertId . ")");
                                         $result = $statement->execute();
                                     }
-                                    else
-                                    {
-                                        echo "ERROR! resource " . $value2 . " not found!";
-                                    }
                                 }
                             }
                         }
                         catch(Exception $e)
                         {
-                            echo $e->getMessage();
+                            return $this->_returnJson(array('messages' => $e->getMessage()));
                         }
 
                         //Add admin user
@@ -357,7 +357,11 @@ class InstallController extends Action
                             )
                         , $file);
 
-                        file_put_contents(GC_APPLICATION_PATH . '/config/autoload/global.php', $file);
+                        $config_filename = GC_APPLICATION_PATH . '/config/autoload/global.php';
+                        file_put_contents($config_filename, $file);
+                        chmod($config_filename, 0774);
+
+                        return $this->_returnJson(array('message' => 'Installation complete'));
                     break;
                 }
 

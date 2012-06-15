@@ -32,10 +32,11 @@
     <li id="c-db" class="active"><?php echo $this->escape($this->translator('Create database')); ?></li>
     <li id="i-d"><?php echo $this->escape($this->translator('Insert data')); ?></li>
     <li id="c-uar"><?php echo $this->escape($this->translator('Create users and roles')); ?></li>
+    <li id="c-cf"><?php echo $this->escape($this->translator('Create configuration file')); ?></li>
 </ul>
 
 <div id="installation-data">
-
+    <img src="/images/treeview/ajax-loader.gif">
 </div>
 <script type="text/javascript">
     $(document).ready(function()
@@ -59,6 +60,10 @@
                     if(data.success == true)
                     {
                         nextStep(++$step);
+                    }
+                    else
+                    {
+                        $('#installation-data').html(data.message);
                     }
                 }
             });

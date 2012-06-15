@@ -69,7 +69,10 @@ class Config extends AbstractTable
         if(!empty($row))
         {
             $current = (array) $row->current();
-            return $current['value'];
+            if(!empty($current))
+            {
+                return $current['value'];
+            }
         }
 
         return NULL;

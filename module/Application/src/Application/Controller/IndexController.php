@@ -27,6 +27,7 @@
 namespace Application\Controller;
 
 use Gc\Mvc\Controller\Action,
+    Gc\Core\Config as CoreConfig,
     Gc\Component,
     Gc\Document,
     Gc\DocumentType,
@@ -51,6 +52,12 @@ class IndexController extends Action
       */
     public function indexAction()
     {
+        if(CoreConfig::getValue('site_is_offline') == 1)
+        {
+            //Site is offline
+            die('Site offline');
+        }
+
         $url = parse_url($this->getRequest()->getRequestUri());
         $path = $url['path'];
         if($path == '/')
