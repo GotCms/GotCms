@@ -1,2 +1,4 @@
 .project
 .settings
+config/autoload/global.php
+
