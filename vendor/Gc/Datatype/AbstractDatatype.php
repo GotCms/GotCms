@@ -124,12 +124,8 @@ abstract class AbstractDatatype extends AbstractTable
     public function getHelper($name)
     {
         $helper_broker = $GLOBALS['application']->getServiceManager()->get('Zend\View\HelperBroker');
-        if($helper_broker->isLoaded($name))
-        {
-            return $helper_broker->load($name);
-        }
 
-        return FALSE;
+        return $helper_broker->load($name);
     }
 
     /**

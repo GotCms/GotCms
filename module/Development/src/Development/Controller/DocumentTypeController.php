@@ -63,8 +63,7 @@ class DocumentTypeController extends Action
 
         if(!$request->isPost())
         {
-            $session['document-type'] = array();
-            $session['document-type']['tabs'] = array();
+            $session['document-type'] = array('tabs' => array());
         }
         else
         {
@@ -183,25 +182,28 @@ class DocumentTypeController extends Action
         {
             $form->setValues($document_type);
 
-            $session['document-type']['tabs'] = array();
-            $session['document-type']['max-property-id'] = 0;
-            $session['document-type']['max-tab-id'] = 0;
+            $document_type_session = array(
+                'tabs' => array(),
+                'max-property-id' => 0,
+                'max-tab-id' => 0,
+            );
+
             foreach($document_type->getTabs() as $tab)
             {
-                $session['document-type']['tabs'][$tab->getId()] = array(
+                $document_type_session['tabs'][$tab->getId()] = array(
                     'name' => $tab->getName(),
                     'description' => $tab->getDescription(),
                     'properties' => array(),
                 );
 
-                if($tab->getId() > $session['document-type']['max-tab-id'])
+                if($tab->getId() > $document_type_session['max-tab-id'])
                 {
-                    $session['document-type']['max-tab-id'] = $tab->getId();
+                    $document_type_session['max-tab-id'] = $tab->getId();
                 }
 
                 foreach($tab->getProperties() as $property)
                 {
-                    $session['document-type']['tabs'][$tab->getId()]['properties'][$property->getId()] = array(
+                    $document_type_session['tabs'][$tab->getId()]['properties'][$property->getId()] = array(
                         'name' => $property->getName(),
                         'identifier' => $property->getIdentifier(),
                         'tab' => $property->getTabId(),
@@ -210,12 +212,14 @@ class DocumentTypeController extends Action
                         'datatype' => $property->getDatatypeId(),
                     );
 
-                    if($property->getId() > $session['document-type']['max-property-id'])
+                    if($property->getId() > $document_type_session['max-property-id'])
                     {
-                        $session['document-type']['max-property-id'] = $property->getId();
+                        $document_type_session['max-property-id'] = $property->getId();
                     }
                 }
             }
+
+            $session['document-type'] = $document_type_session;
         }
         else
         {
@@ -376,8 +380,9 @@ class DocumentTypeController extends Action
             $session = $this->getSession();
             $name = $this->getRequest()->post()->get('name');
             $description = $this->getRequest()->post()->get('description');
+            $document_type_session = $session['document-type'];
 
-            $tabs = empty($session['document-type']['tabs']) ? array() : $session['document-type']['tabs'];
+            $tabs = empty($document_type_session['tabs']) ? array() : $document_type_session['tabs'];
 
             foreach($tabs as $tab)
             {
@@ -387,11 +392,13 @@ class DocumentTypeController extends Action
                 }
             }
 
-            $last_id = empty($session['document-type']['max-tab-id']) ? 0 : $session['document-type']['max-tab-id'];
+            $last_id = empty($document_type_session['max-tab-id']) ? 0 : $document_type_session['max-tab-id'];
             $current_id = $last_id + 1;
-            $session['document-type']['max-tab-id'] = $current_id;
+
+            $document_type_session['max-tab-id'] = $current_id;
             $tabs[$current_id] = array('name' => $name, 'description' => $description, 'properties' => array());
-            $session['document-type']['tabs'] = $tabs;
+            $document_type_session['tabs'] = $tabs;
+            $session['document-type'] = $document_type_session;
 
             return $this->_returnJson(array(
                 'success' => TRUE,
@@ -413,20 +420,15 @@ class DocumentTypeController extends Action
         if($this->getRequest()->isPost())
         {
             $session = $this->getSession();
-            if(empty($session['document-type']))
-            {
-                $session['document-type'] = array();
-            }
-
             $id = $this->getRequest()->post()->get('tab');
             $description = $this->getRequest()->post()->get('description');
 
             $tabs = empty($session['document-type']) ? array() : $session['document-type']['tabs'];
             if(array_key_exists($id, $tabs))
             {
-                $document_type = $session['document-type'];
-                unset($document_type['tabs'][$id]);
-                $session->offsetSet('document-type', $document_type);
+                $document_type_session = $session['document-type'];
+                unset($document_type_session['tabs'][$id]);
+                $session->offsetSet('document-type', $document_type_session);
 
                 return $this->_returnJson(array('success' => TRUE, 'message' => 'Tab successfullty deleted'));
             }
@@ -452,14 +454,16 @@ class DocumentTypeController extends Action
             $datatype_id    = $post->get('datatype');
 
             $session = $this->getSession();
-            $tabs = $session['document-type']['tabs'];
 
-            if(empty($session['document-type']['tabs'][$tab_id]))
+            $document_type_session = $session['document-type'];
+            $tabs = $document_type_session['tabs'];
+
+            if(empty($document_type_session['tabs'][$tab_id]))
             {
                 return $this->_returnJson(array('success' => FALSE, 'message' => 'Tab does not exists'));
             }
 
-            $tab = $session['document-type']['tabs'][$tab_id];
+            $tab = $document_type_session['tabs'][$tab_id];
             $properties = $tab['properties'];
 
             foreach($tabs as $tab)
@@ -478,9 +482,9 @@ class DocumentTypeController extends Action
                 }
             }
 
-            $last_id = empty($session['document-type']['max-property-id']) ? 0 : $session['document-type']['max-property-id'];
+            $last_id = empty($document_type_session['max-property-id']) ? 0 : $document_type_session['max-property-id'];
             $current_id = $last_id + 1;
-            $session['document-type']['max-property-id'] = $current_id;
+            $document_type_session['max-property-id'] = $current_id;
             $properties[$current_id] = array(
                 'name' => $name,
                 'identifier' => $identifier,
@@ -490,7 +494,8 @@ class DocumentTypeController extends Action
                 'datatype' => $datatype_id,
             );
 
-            $session['document-type']['tabs'][$tab_id]['properties'] = $properties;
+            $document_type_session['tabs'][$tab_id]['properties'] = $properties;
+            $session['document-type'] = $document_type_session;
             $properties[$current_id]['success'] = TRUE;
             $properties[$current_id]['id'] = $current_id;
 
@@ -521,9 +526,9 @@ class DocumentTypeController extends Action
                 if(array_key_exists($id, $tab['properties']))
                 {
 
-                    $document_type = $session['document-type'];
-                    unset($document_type['tabs'][$tab_id]['properties'][$id]);
-                    $session->offsetSet('document-type', $document_type);
+                    $document_type_session = $session['document-type'];
+                    unset($document_type_session['tabs'][$tab_id]['properties'][$id]);
+                    $session->offsetSet('document-type', $document_type_session);
 
                     return $this->_returnJson(array('success' => TRUE, 'message' => 'Property successfullty deleted'));
                 }
