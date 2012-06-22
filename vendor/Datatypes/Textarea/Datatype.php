@@ -31,8 +31,15 @@ use Gc\Datatype\AbstractDatatype as AbstractDatatype,
 
 class Datatype extends AbstractDatatype
 {
+    /**
+     * @var string name of datatype
+     */
     protected $_name = 'textarea';
 
+    /**
+     * Retrieve editor
+     * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
+     */
     public function getEditor(PropertyModel $property)
     {
         $this->_property = $property;
@@ -44,6 +51,10 @@ class Datatype extends AbstractDatatype
         return $this->_editor;
     }
 
+    /**
+     * Retrieve prevalue editor
+     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
+     */
     public function getPrevalueEditor()
     {
         if($this->_prevalueEditor === null)

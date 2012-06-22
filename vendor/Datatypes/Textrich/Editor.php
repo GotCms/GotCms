@@ -31,16 +31,29 @@ use Gc\Datatype\AbstractDatatype\AbstractEditor,
 
 class Editor extends AbstractEditor
 {
+    /**
+     * Save textrich editor
+     * @return void
+     */
     public function save()
     {
         $value = $this->getRequest()->post()->get($this->getName());
         $this->setValue($value);
     }
 
+    /**
+     * load textrich editor
+     * @return mixte
+     */
     public function load()
     {
         $this->getHelper('headscript')->appendFile('/js/ckeditor/ckeditor.js', 'text/javascript');
         $this->getHelper('headscript')->appendFile('/js/ckeditor/ckeditor-adapters-jquery.js', 'text/javascript');
+
+
+        $parameters = $this->getConfig();
+        $ckeditor = new CkEditor();
+        $ckeditor->setParameters($parameters);
 
         $id = 'textrich'.$this->_property->getId();
         $textrich = new Element($this->getName());
@@ -53,7 +66,8 @@ class Editor extends AbstractEditor
             $(function()
             {
                 var config = {
-                    skin:"v2"
+                    skin: "v2",
+                    toolbar: '.$ckeditor->getToolbarAsJs().'
                 };
 
                 $("#'.$id.'").ckeditor(config);
@@ -63,4 +77,3 @@ class Editor extends AbstractEditor
         return array($textrich, $script);
     }
 }
-

@@ -31,6 +31,10 @@ use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
 
 class PrevalueEditor extends AbstractPrevalueEditor
 {
+    /**
+     * Save textarea prevalue editor
+     * @return void
+     */
     public function save()
     {
         //Save prevalue in column Datatypes\prevalue_value
@@ -46,6 +50,10 @@ class PrevalueEditor extends AbstractPrevalueEditor
         ));
     }
 
+    /**
+     * Load textarea prevalue editor
+     * @return mixte
+     */
     public function load()
     {
         /*

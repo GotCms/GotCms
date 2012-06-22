@@ -31,12 +31,20 @@ use Gc\Datatype\AbstractDatatype\AbstractEditor,
 
 class Editor extends AbstractEditor
 {
+    /**
+     * Save textarea editor
+     * @return mixte
+     */
     public function save()
     {
         $value = $this->getRequest()->post()->get($this->getName());
         $this->setValue($value);
     }
 
+    /**
+     * Load textarea editor
+     * @return mixte
+     */
     public function load()
     {
         $config = $this->getConfig();
@@ -55,4 +63,3 @@ class Editor extends AbstractEditor
         return $textarea;
     }
 }
-

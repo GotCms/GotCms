@@ -28,7 +28,8 @@
 namespace Gc\Datatype;
 
 use Gc\Db\AbstractTable,
-    Gc\Property;
+    Gc\Property,
+    Zend\View\Model\ViewModel;
 
 abstract class AbstractDatatype extends AbstractTable
 {
@@ -51,9 +52,6 @@ abstract class AbstractDatatype extends AbstractTable
      * @var integer
      */
     protected     $_document_id;
-    protected     $_helper;
-    protected     $_loaders = array();
-    protected     $_loaderTypes = array('filter', 'helper');
 
     /**
      * @var string
@@ -139,10 +137,49 @@ abstract class AbstractDatatype extends AbstractTable
     }
 
     /**
+     * get datatype name, construct with datatype name and property_id
+     *
      * @return string
      */
     public function getName()
     {
         return $this->_name;
+    }
+
+    /**
+     * Render template
+     *
+     * @param string $name
+     * @return string
+     */
+    public function render($name, Array $data = array())
+    {
+        $renderer = $GLOBALS['application']->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+
+        $view_model = new ViewModel();
+        $view_model->setTemplate($name);
+        $view_model->setVariables($data);
+        return $renderer->render($view_model);
+    }
+
+    /**
+     * Add path in Zend\View\Resolver\TemplatePathStack
+     *
+     * @param string $name
+     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
+     */
+    public function addPath($dir)
+    {
+        $renderer = $GLOBALS['application']->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+        $iterators = $renderer->resolver()->getIterator()->toArray();
+        foreach($iterators as $iterator)
+        {
+            if($iterator instanceof \Zend\View\Resolver\TemplatePathStack)
+            {
+                $iterator->addPath($dir);
+            }
+        }
+
+        return $this;
     }
 }

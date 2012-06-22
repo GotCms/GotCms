@@ -31,66 +31,98 @@ use Gc\Core\Object,
 
 class CkEditor extends Object
 {
-    public function setParameters($parameters = NULL)
+    /**
+     * Set parameters
+     * @param array $parameters
+     * @return \Datatypes\Textrich\Ckeditor
+     */
+    public function setParameters(array $parameters = NULL)
     {
         if(!empty($parameters['toolbar-items']))
         {
             $this->setToolbarItems($parameters['toolbar-items']);
         }
+
+        return $this;
     }
 
-    public function getToolbarAsJs(array $toolbar){
+    /**
+     * Get toolbar as js to initialize ckeditor
+     * @return string
+     */
+    public function getToolbarAsJs()
+    {
         $js = '';
-        foreach($toolbar as $group)
+        $all_toolbar_items = $this->getAllToolbarItems();
+        $toolbar_items = $this->getToolbarItems();
+        foreach($all_toolbar_items as $group)
         {
-            if(is_array($group))
+            if(!empty($group['items']) and is_array($group['items']))
             {
-                if(count($group) > 0)
+                $content = array();
+                foreach($group['items'] as $item)
                 {
-                    $js .= '[\''.implode('\', \'', $group).'\'],';
+                    if(in_array($item, $toolbar_items))
+                    {
+                        $content[] = $item;
+                    }
+                }
+
+                if(!empty($content))
+                {
+                    $js .= '[\''.implode('\', \'', $content).'\'], ';
                 }
             }
             else
             {
                 if(strlen($group) > 0)
                 {
-                    $js .= '[\'/\'],';
+                    $js .= '[\'/\'], ';
                 }
             }
         }
+
         return '[' . substr($js, 0, -1) . ']';
     }
 
+    /**
+     * List all toolbar items
+     * @return array
+     */
     public function getAllToolbarItems()
     {
         return array(
-            array('Source','-','Save','NewPage','Preview','-','Templates'),
-            array('Cut','Copy','Paste','PasteText','PasteFromWord','-','Print', 'SpellChecker', 'Scayt'),
-            array('Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'),
-            array('Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'),
+            array('name' => 'document', 'items' => array('Source', '-', 'Save', 'NewPage', 'DocProps', 'Preview', 'Print', '-', 'Templates')),
+            array('name' => 'clipboard', 'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo')),
+            array('name' => 'editing', 'items' => array('Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt')),
+            array('name' => 'forms', 'items' => array('Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField')),
             '/',
-            array('Bold','Italic','Underline','Strike','-','Subscript','Superscript'),
-            array('NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'),
-            array('JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'),
-            array('BidiLtr', 'BidiRtl'),
-            array('Link','Unlink','Anchor'),
-            array('Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe'),
+            array('name' => 'basicstyles', 'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat')),
+            array('name' => 'paragraph', 'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv',
+            '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl')),
+            array('name' => 'links', 'items' => array('Link', 'Unlink', 'Anchor')),
+            array('name' => 'insert', 'items' => array('Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe')),
             '/',
-            array('Styles','Format','Font','FontSize'),
-            array('TextColor','BGColor'),
-            array('Maximize', 'ShowBlocks','-','About')
+            array('name' => 'styles', 'items' => array('Styles', 'Format', 'Font', 'FontSize')),
+            array('name' => 'colors', 'items' => array('TextColor', 'BGColor')),
+            array('name' => 'tools', 'items' => array('Maximize', 'ShowBlocks', '-', 'About')),
         );
     }
 
+    /**
+     * get all items as form
+     * @return array
+     */
     public function getAllItems()
     {
         $elements = array();
         $items = $this->getAllToolbarItems();
-        foreach($items as $idx_group => $group_items)
+        foreach($items as $group)
         {
-            if(is_array($group_items))
+            if(!empty($group['items']) and is_array($group['items']))
             {
-                foreach($group_items as $idx_item => $item)
+                $fieldset = new \Zend\Form\Fieldset($group['name']);
+                foreach($group['items'] as $idx_item => $item)
                 {
                     if($item == '-')
                     {
@@ -98,7 +130,7 @@ class CkEditor extends Object
                     }
 
                     $element = new Element('toolbar-items['.$item.']');
-                    $element->setAttribute('id', 'i' . $idx_group . $idx_item)
+                    $element->setAttribute('id', 'i' . $group['name'] . $idx_item)
                         ->setAttribute('value', $item)
                         ->setAttribute('type', 'checkbox')
                         ->setAttribute('label', $item);
@@ -108,24 +140,13 @@ class CkEditor extends Object
                         $element->setAttribute('checked', 'checked');
                     }
 
-                    $elements[] = $element;
+                    $fieldset->add($element);
                 }
+
+                $elements[] = $fieldset;
             }
         }
 
         return $elements;
-    }
-
-    public function hasItem($item)
-    {
-        foreach($this->toolbar as $group)
-        {
-            if(is_array($group) && in_array($item, $group))
-            {
-                return TRUE;
-            }
-        }
-
-        return FALSE;
     }
 }

@@ -31,18 +31,26 @@ use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
 
 class PrevalueEditor extends AbstractPrevalueEditor
 {
+    /**
+     * load prevalue editor
+     * @return void
+     */
     public function save()
     {
         $toolbar_items = $this->getRequest()->post()->get('toolbar-items');
         $this->setConfig(array('toolbar-items' => $toolbar_items));
     }
 
+    /**
+     * save prevalue editor
+     * @return mixte
+     */
     public function load()
     {
         $parameters = $this->getConfig();
         $ckeditor = new CkEditor();
         $ckeditor->setParameters($parameters);
 
-        return $ckeditor->getAllItems();
+        return $this->addPath(__DIR__)->render('ckeditor-prevalue.phtml', array('textrich' => $ckeditor->getAllItems()));
     }
 }

@@ -31,6 +31,10 @@ use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
 
 class PrevalueEditor extends AbstractPrevalueEditor
 {
+    /**
+     * Save textstring prevalue editor
+     * @return void
+     */
     public function save()
     {
         $length = $this->getRequest()->post()->get('length');
@@ -38,6 +42,10 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $this->setConfig(array('length' => $length));
     }
 
+    /**
+     * Load textstring prevalue editor
+     * @return mixte
+     */
     public function load()
     {
         $config = $this->getConfig();

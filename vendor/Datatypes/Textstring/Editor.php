@@ -31,12 +31,20 @@ use Gc\Datatype\AbstractDatatype\AbstractEditor,
 
 class Editor extends AbstractEditor
 {
+    /**
+     * Save textstring editor
+     * @return mixte
+     */
     public function save()
     {
         $value = $this->getRequest()->post()->get($this->getName());
         $this->setValue($value);
     }
 
+    /**
+     * Load textstring editor
+     * @return mixte
+     */
     public function load()
     {
         $parameters = $this->getConfig();

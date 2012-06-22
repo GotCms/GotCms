@@ -83,6 +83,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Set Configuration
+     * @param mixte $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     protected function setConfig($value)
@@ -92,6 +93,7 @@ abstract class AbstractPrevalueEditor extends Object
     }
 
     /**
+     * Get request object
      * @return \Zend\Http\Request
      */
     public function getRequest()
@@ -100,6 +102,7 @@ abstract class AbstractPrevalueEditor extends Object
     }
 
     /**
+     * Get current datatype
      * @return \Gc\Datatype\AbstractDatatype
      */
     public function getDatatype()
@@ -108,8 +111,30 @@ abstract class AbstractPrevalueEditor extends Object
     }
 
     /**
+     * Render template
+     * @param string $name
+     * @return string
+     */
+    public function render($name, Array $data = array())
+    {
+        return $this->getDatatype()->render($name, $data);
+    }
+
+    /**
+     * Add path in Zend\View\Resolver\TemplatePathStack
+     * @param string $name
+     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
+     */
+    public function addPath($dir)
+    {
+        $this->getDatatype()->addPath($dir);
+
+        return $this;
+    }
+
+    /**
      * Retrieve helper from $name
-     * @param strin $name
+     * @param string $name
      * @return mixte
      */
     public function getHelper($name)

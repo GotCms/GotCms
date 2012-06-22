@@ -131,16 +131,6 @@ abstract class AbstractEditor extends Object
     }
 
     /**
-     * Retrieve helper from $name
-     * @param strin $name
-     * @return mixte
-     */
-    public function getHelper($name)
-    {
-        return $this->getDatatype()->getHelper($name);
-    }
-
-    /**
      * Upload dir path
      * @return string
      */
@@ -160,6 +150,7 @@ abstract class AbstractEditor extends Object
     }
 
     /**
+     * Return property model
      * @return \Gc\Property\Model
      */
     public function getProperty()
@@ -168,7 +159,8 @@ abstract class AbstractEditor extends Object
     }
 
     /**
-     * @return \Gc\Property\Model
+     * Get datatype
+     * @return \Gc\Datatype\AbstractDatatype
      */
     public function getDatatype()
     {
@@ -176,10 +168,43 @@ abstract class AbstractEditor extends Object
     }
 
     /**
+     * Get request object
      * @return \Zend\Http\Request
      */
     public function getRequest()
     {
         return $GLOBALS['application']->getRequest();
+    }
+
+    /**
+     * Render template
+     * @param string $name
+     * @return string
+     */
+    public function render($name, Array $data = array())
+    {
+        return $this->getDatatype()->render($name, $data);
+    }
+
+    /**
+     * Add path in Zend\View\Resolver\TemplatePathStack
+     * @param string $name
+     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
+     */
+    public function addPath($dir)
+    {
+        $this->getDatatype()->addPath($dir);
+
+        return $this;
+    }
+
+    /**
+     * Retrieve helper from $name
+     * @param string $name
+     * @return mixte
+     */
+    public function getHelper($name)
+    {
+        return $this->getDatatype()->getHelper($name);
     }
 }
