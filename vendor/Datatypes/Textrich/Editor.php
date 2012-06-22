@@ -39,17 +39,11 @@ class Editor extends AbstractEditor
 
     public function load()
     {
-        $textrich = new Element\Textarea('textrich'.$this->_property->getId());
-        $textrich->setLabel($this->_property->getName());
-        $textrich->setAttrib('id', 'textrich'.$this->_property->getId());
-        $textrich->setValue($this->_property->getValue());
-        $textrich->getDecorator('description')->setEscape(false)->setTag(false);
-        $script = '';
-        if(!Zend_Registry::isRegistered('textrich'))
-        {
-            Zend_Registry::set('textrich', '<script type="text/javascript" src="'.$this->getHelper('getSkinUrl')->getSkinUrl('js/tiny_mce/jquery.tinymce.js').'"></script>');
-            $script = Zend_Registry::get('textrich');
-        }
+        $textrich = new Element($this->getName());
+        $textrich->setAttribute('label', $this->_property->getName());
+        $textrich->setAttribute('id', 'textrich'.$this->_property->getId());
+        $textrich->setAttribute('value', $this->_property->getValue());
+        $this->getHelper('headScript')->appendFile('/js/tiny_mce/jquery.tinymce.js', 'text/javascript');
 
         $script .= '<script type="text/javascript">
                     $(document).ready(function() {
@@ -75,8 +69,8 @@ class Editor extends AbstractEditor
                         });
                     });
                 </script>';
-        $textrich->setDescription($script);
-        return $textrich;
+
+        return array($textrich, $script);
     }
 }
 

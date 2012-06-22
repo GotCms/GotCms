@@ -26,25 +26,23 @@
 
 namespace Datatypes\Textrich;
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
+    Zend\Form\Element;
 
 class PrevalueEditor extends AbstractPrevalueEditor
 {
-
     public function save()
     {
+        $toolbar_items = $this->getRequest()->post()->get('toolbar-items');
+        $this->setConfig(array('toolbar-items' => $toolbar_items));
     }
 
     public function load()
     {
-        $parameters = $this->getParameters();
-        $element = new Element\MultiCheckbox('textrich', array(
-                'multiOptions' => array(
-                'resize' => 'Resize',
-            )
-        ));
-        $element->setValue(array('bar', 'bat'));
+        $parameters = $this->getConfig();
+        $ckeditor = new CkEditor();
+        $ckeditor->setParameters($parameters);
 
-        return array($element);
+        return $ckeditor->getAllItems();
     }
 }

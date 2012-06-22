@@ -65,7 +65,7 @@ class DatatypeController extends Action
             $datatype_form->setData($post);
             if($datatype_form->isValid())
             {
-                $datatype->addData($form->getInputFilter()->getValues());
+                $datatype->addData($datatype_form->getInputFilter()->getValues());
                 try
                 {
                     if($id = $datatype->save())
@@ -118,11 +118,11 @@ class DatatypeController extends Action
             {
                 if($datatype_model->getModel() != $datatype_form->getValue('model'))
                 {
-                    $datatype_model->setValue(array());
+                    $datatype_model->setPrevalueValue(array());
                 }
                 else
                 {
-                    $datatype_model->setValue(Datatype\Model::savePrevalueEditor($datatype));
+                    $datatype_model->setPrevalueValue(Datatype\Model::savePrevalueEditor($datatype));
                 }
 
                 try

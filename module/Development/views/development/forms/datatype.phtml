@@ -56,7 +56,7 @@
                 <?php if(!empty($content)): ?>
                     <?php echo $content; ?>
                 <?php else: ?>
-                    <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+                    <label class="required" for="<?php echo $this->escape($this->translator($element->getAttribute('id'))); ?>"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
 
                     <?php echo $this->formElement($element); ?>
                 <?php endif; ?>

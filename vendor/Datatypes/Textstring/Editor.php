@@ -52,4 +52,3 @@ class Editor extends AbstractEditor
         return $textstring;
     }
 }
-
