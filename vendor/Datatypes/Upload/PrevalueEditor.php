@@ -31,67 +31,95 @@ use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
 
 class PrevalueEditor extends AbstractPrevalueEditor
 {
-
-    public function save($request = null)
+    /**
+     * Save textstring prevalue editor
+     * @return void
+     */
+    public function save()
     {
-        //Save prevalue in column Datatypes\prevalue_value
-        $mime_list = $request->getParam('mime_list');
-        $options_post = $request->getParam('options', array());
+        $post = $this->getRequest()->post();
+        $mime_list = $post->get('mime_list');
+        $options_post = $post->get('options', array());
         $options = array();
-        $options['multiple'] = in_array('multiple', $options_post) ? true : false;
-        $options['title'] = in_array('title', $options_post)  ? true : false;
-        $options['content'] = in_array('content', $options_post)  ? true : false;
+        $options['multiple'] = in_array('multiple', $options_post) ? TRUE : FALSE;
+        $options['title'] = in_array('title', $options_post)  ? TRUE : FALSE;
+        $options['content'] = in_array('content', $options_post)  ? TRUE : FALSE;
 
-        $this->setParameters(array('mime_list'=>$mime_list, 'options'=>$options));
-
-        return $this->getParameters();
+        $this->setConfig(array('mime_list' => $mime_list, 'options' => $options));
     }
 
+    /**
+     * Load textstring prevalue editor
+     * @return mixte
+     */
     public function load()
     {
-        $mime_list = new Element\MultiCheckbox('mime_list',array(
-                'multiOptions' => array(
-                'image/gif'=>'image/gif',
-                'image/jpeg'=>'image/jpeg',
-                'image/png'=>'image/png',
-                'image/tiff'=>'image/tiff',
-                'image/svg+xml'=>'image/svg+xml',
-                'text/css'=>'text/css',
-                'text/csv'=>'text/csv',
-                'text/html'=>'text/html',
-                'text/javascript'=>'text/javascript',
-                'text/plain'=>'text/plain',
-                'text/xml'=>'text/xml',
-                'video/mpeg'=>'video/mpeg',
-                'video/mp4'=>'video/mp4',
-                'video/quicktime'=>'video/quicktime',
-                'video/x-ms-wmv'=>'video/x-ms-wmv',
-                'video/x-msvideo'=>'video/x-msvideo',
-                'video/x-flv'=>'video/x-flv',
-                'audio/mpeg'=>'audio/mpeg',
-                'audio/x-ms-wma'=>'audio/x-ms-wma',
-                'audio/vnd.rn-realaudio'=>'audio/vnd.rn-realaudio',
-                'audio/x-wav'=>'audio/x-wav'
-            )
-        ));
-        $parameters = $this->getParameters();
-        $mime_list_values = isset($parameters['mime_list']) ? $parameters['mime_list'] : '';
-        $mime_list->setValue($mime_list_values);
-        $mime_list->setLabel('Type Mime accepted:');
+        $parameters = $this->getConfig();
+        $elements = array();
 
-        $options_values = isset($parameters['options']) ? $parameters['options'] : '';
-        $upload_options = new Element\MultiCheckbox('options',array(
-                'multiOptions' => array(
-                'multiple'=>'multiple',
-                'title'=>'has title',
-                'content'=>'has content text'
-            )
-        ));
-        $options = array();
-        $options[] = isset($options_values['multiple']) && $options_values['multiple'] == true ? 'multiple' : '';
-        $options[] = isset($options_values['title']) && $options_values['title'] == true ? 'title' : '';
-        $options[] = isset($options_values['content']) && $options_values['content'] == true ? 'content' : '';
-        $upload_options->setValue($options_values)->setLabel('Upload options:');
-        return array($upload_options, $mime_list);
+        $options_values = !empty($parameters['options']) ? $parameters['options'] : array();
+        $fieldset = new \Zend\Form\Fieldset('Available options');
+        foreach(array('multiple' => 'is multiple', 'title' => 'has title', 'content' => 'has content text') as $option_value => $option_label)
+        {
+            $element = new Element('options['.$option_value.']');
+            $element->setAttribute('type', 'checkbox')
+                ->setAttribute('value', $option_value)
+                ->setAttribute('label', $option_label)
+                ->setAttribute('id', 'upload-options');
+
+            if(in_array($option_value, $options_values))
+            {
+                $element->setAttribute('checked', 'checked');
+            }
+
+            $fieldset->add($element);
+        }
+
+        $elements[] = $fieldset;
+        $mime_list = array(
+            'image/gif',
+            'image/jpeg',
+            'image/png',
+            'image/tiff',
+            'image/svg+xml',
+            'text/css',
+            'text/csv',
+            'text/html',
+            'text/javascript',
+            'text/plain',
+            'text/xml',
+            'video/mpeg',
+            'video/mp4',
+            'video/quicktime',
+            'video/x-ms-wmv',
+            'video/x-msvideo',
+            'video/x-flv',
+            'audio/mpeg',
+            'audio/x-ms-wma',
+            'audio/vnd.rn-realaudio',
+            'audio/x-wav'
+        );
+
+        $mime_list_values = !empty($parameters['mime_list']) ? $parameters['mime_list'] : array();
+
+        $fieldset = new \Zend\Form\Fieldset('Mime list');
+        foreach($mime_list as $mime_idx => $mime_value)
+        {
+            $element = new Element('mime_list['.$mime_idx.']');
+            $element->setAttribute('type', 'checkbox')
+                ->setAttribute('value', $mime_value)
+                ->setAttribute('id', 'upload' . $mime_idx)
+                ->setAttribute('label', $mime_value);
+            if(in_array($mime_value, $mime_list_values))
+            {
+                $element->setAttribute('checked', 'checked');
+            }
+
+            $fieldset->add($element);
+        }
+
+        $elements[] = $fieldset;
+
+        return $this->addPath(__DIR__)->render('upload-prevalue.phtml', array('elements' => $elements));
     }
 }

@@ -23,30 +23,24 @@
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
 
-namespace Datatypes\ImageList;
+?>
+<?php $fieldsets = $this->elements; ?>
+<?php foreach($fieldsets as $fieldset): ?>
+    <?php if(!empty($fieldset)): ?>
+        <h3><?php echo $this->escape($this->translator($fieldset->getName())); ?></h3>
+        <?php foreach($fieldset->getElements() as $element): ?>
+            <div>
+                <?php $content = $element->getAttribute('content'); ?>
+                <?php if(!empty($content)): ?>
+                    <?php echo $content; ?>
+                <?php else: ?>
+                    <label class="required" for="<?php echo $this->escape($this->translator($element->getAttribute('id'))); ?>"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
-
-class PrevalueEditor extends AbstractPrevalueEditor
-{
-
-    public function save($request = null) {
-        //Save prevalue in column Datatypes\prevalue_value
-
-        $this->setConfiguration(array());
-
-        return $this->getConfiguration();
-    }
-
-    public function load() {
-        $parameters = $this->getParameters();
-        $element = new Element\MultiCheckbox('textrich', array(
-                'multiOptions' => array(
-                'resize' => 'Resize',
-            )
-        ));
-        $element->setValue(array('bar', 'bat'));
-        return array($element);
-    }
-}
+                    <?php echo $this->formElement($element); ?>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+<?php endforeach; ?>

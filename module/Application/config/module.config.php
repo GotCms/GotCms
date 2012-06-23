@@ -41,6 +41,8 @@ return array(
         'helper_map' => array(
             'jsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape',
             'formErrors' => 'Gc\View\Helper\FormErrors',
+            'documents' => 'Gc\View\Helper\Documents',
+            'document' => 'Gc\View\Helper\document',
         ),
         'template_map' => array(
             'layout/layout'     => __DIR__ . '/../views/layouts/layout.phtml',

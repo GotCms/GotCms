@@ -97,14 +97,6 @@ class IndexController extends Action
         }
 
         //construct the tree menu
-        /*
-         * @TODO
-        $nav = new Component\Navigation();
-        $config = new Xml();
-        $config->fromString($nav->render());
-
-        //var_dump(get_class_methods($this->getLocator()->get('Zend\View\Renderer\PhpRenderer')->navigation()->setContainer(new Navigation($config))));
-         */
         $view_model = new ViewModel();
         $existed = in_array($this->_viewStream, stream_get_wrappers());
         if($existed)
@@ -129,13 +121,6 @@ class IndexController extends Action
         }
         else
         {
-            //set current page active
-            //$page = $this->view->navigation()->findOneByLabel($document->getName()); /* @var $page Zend_Navigation_Page */
-            //if($page)
-            //{
-            //    $page->setActive();
-            //}
-
             //Get all tabs of document
             $tabs = $this->loadTabs($document->getDocumentTypeId());
             //get Tabs and Properties to construct property in view

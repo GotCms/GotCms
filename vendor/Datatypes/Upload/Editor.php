@@ -31,20 +31,20 @@ use Gc\Datatype\AbstractDatatype\AbstractEditor,
 
 class Editor extends AbstractEditor
 {
-    protected $_request;
 
-    public function save($request = null) {
-        $this->_request = $request;
-        $value_ids = $request->getParam('upload-file-id-'.$this->_property->getId(), array());
+    public function save()
+    {
+        $post = $this->getRequest()->post();
+        $value_ids = $post->get('upload-file-id-'.$this->getProperty()->getId(), array());
         $parameters = $this->getParameters();
         $options  = $parameters['options'];
         $arrayValues = array();
         if(is_array($value_ids) && count($value_ids) > 1 && isset($options['content']) && $options['content'] === true) {
             $i = 0;
             foreach($value_ids as $value_id) {
-                $value = $this->getParam('upload-file-link-'.$this->_property->getId().'', $value_id, '');
-                $content = $this->getParam('upload-file-content-'.$this->_property->getId().'', $value_id, '');
-                $title = $this->getParam('upload-file-title-'.$this->_property->getId().'', $value_id, '');
+                $value = $this->getParam('upload-file-link-'.$this->getProperty()->getId().'', $value_id, '');
+                $content = $this->getParam('upload-file-content-'.$this->getProperty()->getId().'', $value_id, '');
+                $title = $this->getParam('upload-file-title-'.$this->getProperty()->getId().'', $value_id, '');
                 $file = '..'.$value;// .. to go to parent directory
                 if(!empty($value) && is_file($file)) {
                     $arrayValues[$i] = array();
@@ -66,15 +66,15 @@ class Editor extends AbstractEditor
         } else {
             $value_id = $value_ids[0];
 
-            $value = $this->getParam('upload-file-link-'.$this->_property->getId().'', $value_id, '');
+            $value = $this->getParam('upload-file-link-'.$this->getProperty()->getId().'', $value_id, '');
 
             if((isset($options['content'] )&& $options['content'] === true) or (isset($options['title']) && $options['title'] === true)) {
                 if($options['content'] === true) {
-                    $content = $this->getParam('upload-file-title-'.$this->_property->getId().'', $value_id, '');
+                    $content = $this->getParam('upload-file-title-'.$this->getProperty()->getId().'', $value_id, '');
                     $arrayValues['content'] = $content;
                 }
                 if($options['title'] === true){
-                    $title = $this->getParam('upload-file-content-'.$this->_property->getId().'', $value_id, '');
+                    $title = $this->getParam('upload-file-content-'.$this->getProperty()->getId().'', $value_id, '');
                     $arrayValues['title'] = $title;
                 }
                 $arrayValues['value'] = $value;
@@ -115,23 +115,23 @@ class Editor extends AbstractEditor
      * @param boolean $multiple
      * @return string
      */
-    private function addForm($title, $content, $multiple) {
+    protected function addForm($title, $content, $multiple) {
         $values = $this->getValue();
         if($multiple === true) {
             $values = unserialize($values);
-            $templateHtml = '<div id="multiple-'.$this->_property->getId().'">
-                <ul class="multiple-ul-'.$this->_property->getId().'">';
+            $templateHtml = '<div id="multiple-'.$this->getProperty()->getId().'">
+                <ul class="multiple-ul-'.$this->getProperty()->getId().'">';
             if(!empty($values)):
                 $nbValues = count($values);
                 $index = 1;
                 foreach($values as $key=>$value):
                     $templateHtml .= '<li>
-                        <input type="hidden" value="'.$key.'" name="upload-file-id-'.$this->_property->getId().'[]" class="upload-file-id" />
-                        <input type="hidden" value="'.(isset($value['value']) ? $value['value'] : '').'" name="upload-file-link-'.$this->_property->getId().'['.$key.']" id="upload-file-link-'.$this->_property->getId().'-'.$key.'" />
-                        <div class="upload-file-'.$this->_property->getId().'">
-                            <span id="spanButton'.$this->_property->getId().'-'.$key.'"></span>
+                        <input type="hidden" value="'.$key.'" name="upload-file-id-'.$this->getProperty()->getId().'[]" class="upload-file-id" />
+                        <input type="hidden" value="'.(isset($value['value']) ? $value['value'] : '').'" name="upload-file-link-'.$this->getProperty()->getId().'['.$key.']" id="upload-file-link-'.$this->getProperty()->getId().'-'.$key.'" />
+                        <div class="upload-file-'.$this->getProperty()->getId().'">
+                            <span id="spanButton'.$this->getProperty()->getId().'-'.$key.'"></span>
                         </div>
-                        <div id="contentProgress'.$this->_property->getId().'-'.$key.'"></div>';
+                        <div id="contentProgress'.$this->getProperty()->getId().'-'.$key.'"></div>';
                     $templateHtml .= $title === true ? ($this->addTitle(isset($value['title']) ? $value['title'] : '', $key)) :'';
                     $templateHtml .= $content === true ? ($this->addContent(isset($value['content']) ? $value['content'] : '', $key)) : '';
                     if($nbValues == $index) {
@@ -144,12 +144,12 @@ class Editor extends AbstractEditor
             else:
                 $key = 0;
                 $templateHtml .= '<li>
-                    <input type="hidden" value="'.$key.'" name="upload-file-id-'.$this->_property->getId().'[]" class="upload-file-id" />
-                    <input type="hidden" value="" name="upload-file-link-'.$this->_property->getId().'['.$key.']" id="upload-file-link-'.$this->_property->getId().'-'.$key.'" value="" />
-                    <div class="upload-file-'.$this->_property->getId().'">
-                        <span id="spanButton'.$this->_property->getId().'-'.$key.'"></span>
+                    <input type="hidden" value="'.$key.'" name="upload-file-id-'.$this->getProperty()->getId().'[]" class="upload-file-id" />
+                    <input type="hidden" value="" name="upload-file-link-'.$this->getProperty()->getId().'['.$key.']" id="upload-file-link-'.$this->getProperty()->getId().'-'.$key.'" value="" />
+                    <div class="upload-file-'.$this->getProperty()->getId().'">
+                        <span id="spanButton'.$this->getProperty()->getId().'-'.$key.'"></span>
                     </div>
-                    <div id="contentProgress-'.$this->_property->getId().'-'.$key.'"></div>';
+                    <div id="contentProgress-'.$this->getProperty()->getId().'-'.$key.'"></div>';
 
                 $templateHtml .= $title === true ? ($this->addTitle('', $key)) :'';
                 $templateHtml .= $content === true ? ($this->addContent('', $key)) :'';
@@ -185,13 +185,13 @@ class Editor extends AbstractEditor
                         }
                         $(".button-add").live("click", function() {
                             key+=1;
-                            var newImage = \'<li><input type="hidden" value="\'+key+\'" name="upload-file-id-'.$this->_property->getId().'[]" class="upload-file-id" /><input type="hidden" value="" name="upload-file-link-'.$this->_property->getId().'[\'+key+\']" id="upload-file-link-'.$this->_property->getId().'-\'+key+\'" value="" /><div class="upload-file-'.$this->_property->getId().'">    <span id="spanButton'.$this->_property->getId().'-\'+key+\'"></span></div><div id="contentProgress-'.$this->_property->getId().'-\'+key+\'"></div>'.$this->addTitle('', '\'+key+\'').$this->addContent('', '\'+key+\'').'<button class="button-add">Add</button></li>\';
-                            $(".multiple-ul-'.$this->_property->getId().'").append(newImage);
+                            var newImage = \'<li><input type="hidden" value="\'+key+\'" name="upload-file-id-'.$this->getProperty()->getId().'[]" class="upload-file-id" /><input type="hidden" value="" name="upload-file-link-'.$this->getProperty()->getId().'[\'+key+\']" id="upload-file-link-'.$this->getProperty()->getId().'-\'+key+\'" value="" /><div class="upload-file-'.$this->getProperty()->getId().'">    <span id="spanButton'.$this->getProperty()->getId().'-\'+key+\'"></span></div><div id="contentProgress-'.$this->getProperty()->getId().'-\'+key+\'"></div>'.$this->addTitle('', '\'+key+\'').$this->addContent('', '\'+key+\'').'<button class="button-add">Add</button></li>\';
+                            $(".multiple-ul-'.$this->getProperty()->getId().'").append(newImage);
                             $(this).removeClass("ui-state-focus");
                             $(this).removeClass("button-add").addClass("button-delete");
                             $(this).find(".ui-button-text").html("Delete");
                             setButtons();
-                            swfUpload'.$this->_property->getId().'();
+                            swfUpload'.$this->getProperty()->getId().'();
                             return false;
                         });
                         $(".button-delete").live("click", function() {
@@ -207,19 +207,19 @@ class Editor extends AbstractEditor
             $key = 0;
             $value = $values;
             $templateHtml = '
-                <input type="hidden" value="'.$key.'" name="upload-file-id-'.$this->_property->getId().'[]" class="upload-file-id" />
-                <input type="hidden" value="'.($title === true || $content === true ? $value['value'] : $value).'" name="upload-file-link-'.$this->_property->getId().'['.$key.']" id="upload-file-link-'.$this->_property->getId().'-'.$key.'" />
-                <div class="upload-file-'.$this->_property->getId().'">
-                    <span id="spanButton'.$this->_property->getId().'-'.$key.'"></span>
+                <input type="hidden" value="'.$key.'" name="upload-file-id-'.$this->getProperty()->getId().'[]" class="upload-file-id" />
+                <input type="hidden" value="'.($title === true || $content === true ? $value['value'] : $value).'" name="upload-file-link-'.$this->getProperty()->getId().'['.$key.']" id="upload-file-link-'.$this->getProperty()->getId().'-'.$key.'" />
+                <div class="upload-file-'.$this->getProperty()->getId().'">
+                    <span id="spanButton'.$this->getProperty()->getId().'-'.$key.'"></span>
                 </div>
-                <div id="contentProgress-'.$this->_property->getId().'-'.$key.'"></div>';
+                <div id="contentProgress-'.$this->getProperty()->getId().'-'.$key.'"></div>';
             $templateHtml .= $title === true ? ($this->addTitle(isset($value['title']) ? $value['title'] : '', $key)) :'';
             $templateHtml .= $content === true ? ($this->addContent(isset($value['content']) ? $value['content'] : '', $key)) : '';
         }
         return $templateHtml;
     }
 
-    private function addScript(&$string) {
+    protected function addScript(&$string) {
         if(!Zend_Registry::isRegistered('upload')) {
             Zend_Registry::set('upload', '<script type="text/javascript" src="'.$this->getHelper('getSkinUrl')->getSkinUrl('js/swfupload/swfupload.js').'"></script>
                                             <script type="text/javascript" src="'.$this->getHelper('getSkinUrl')->getSkinUrl('js/swfupload/jquery.swfupload.js').'"></script>');
@@ -228,8 +228,8 @@ class Editor extends AbstractEditor
         }
         $string .='
             <script type="text/javascript">
-                function swfUpload'.$this->_property->getId().'() {
-                    $(".upload-file-'.$this->_property->getId().'").each(function() {
+                function swfUpload'.$this->getProperty()->getId().'() {
+                    $(".upload-file-'.$this->getProperty()->getId().'").each(function() {
 
                         var elementId = $(this).parent().find(\'.upload-file-id\').val();
                         endOfName = "";
@@ -270,8 +270,8 @@ class Editor extends AbstractEditor
                             if(elementId != "") {
                                 endOfName = "-"+elementId;
                             }
-                            $("#upload-file-link-'.$this->_property->getId().'"+endOfName).val("");
-                            $("#contentProgress-'.$this->_property->getId().'"+endOfName).html("Upload Error").attr("class", "");
+                            $("#upload-file-link-'.$this->getProperty()->getId().'"+endOfName).val("");
+                            $("#contentProgress-'.$this->getProperty()->getId().'"+endOfName).html("Upload Error").attr("class", "");
                         })
                         .bind("uploadSuccess", function(file, data, response){
                             var elementId = $(this).parent().find(\'.upload-file-id\').val();
@@ -279,8 +279,8 @@ class Editor extends AbstractEditor
                             if(elementId != "") {
                                 endOfName = "-"+elementId;
                             }
-                            $("#upload-file-link-'.$this->_property->getId().'"+endOfName).val(response);
-                            $("#contentProgress-'.$this->_property->getId().'"+endOfName).html("Upload Success").attr("class", "");
+                            $("#upload-file-link-'.$this->getProperty()->getId().'"+endOfName).val(response);
+                            $("#contentProgress-'.$this->getProperty()->getId().'"+endOfName).html("Upload Success").attr("class", "");
                         })
                         .bind("uploadStart", function(file){
                             var elementId = $(this).parent().find(\'.upload-file-id\').val();
@@ -288,8 +288,8 @@ class Editor extends AbstractEditor
                             if(elementId != "") {
                                 endOfName = "-"+elementId;
                             }
-                            $("#contentProgress-'.$this->_property->getId().'"+endOfName).html("<div id=\"progressbar-'.$this->_property->getId().'"+endOfName+"\"></div>");
-                            $("#progressbar-'.$this->_property->getId().'"+endOfName).progressbar({
+                            $("#contentProgress-'.$this->getProperty()->getId().'"+endOfName).html("<div id=\"progressbar-'.$this->getProperty()->getId().'"+endOfName+"\"></div>");
+                            $("#progressbar-'.$this->getProperty()->getId().'"+endOfName).progressbar({
                                 value: 0
                             });
                         })
@@ -300,7 +300,7 @@ class Editor extends AbstractEditor
                                 endOfName = "-"+elementId;
                             }
                             value = (bytesLoaded * 100) / bytesTotal.size;
-                            $("#progressbar-'.$this->_property->getId().'"+endOfName).progressbar({
+                            $("#progressbar-'.$this->getProperty()->getId().'"+endOfName).progressbar({
                                 value: parseInt(value)
                             });
                         })
@@ -309,24 +309,30 @@ class Editor extends AbstractEditor
                         });
                     });
                 }
-                setTimeout("swfUpload'.$this->_property->getId().'()", 1000);
+                setTimeout("swfUpload'.$this->getProperty()->getId().'()", 1000);
             </script>';
     }
 
     /**
+     * Add title
      * @param string $value
      * @param integer $key
+     * @return string
      */
-    private function addTitle($value, $key) {
-        return 'Title: <input type="text" value="'.$value.'" name="upload-file-title-'.$this->_property->getId().'['.$key.']" />';
+    protected function addTitle($value, $key)
+    {
+        return 'Title: <input type="text" value="'.$value.'" name="upload-file-title-'.$this->getProperty()->getId().'['.$key.']" />';
     }
 
     /**
+     * Add content description
      * @param string $value
      * @param integer $key
+     * @return string
      */
-    private function addContent($value, $key) {
-        return 'Content: <textarea name="upload-file-content-'.$this->_property->getId().'['.$key.']">'.$value.'</textarea>';
+    protected function addContent($value, $key)
+    {
+        return 'Content: <textarea name="upload-file-content-'.$this->getProperty()->getId().'['.$key.']">'.$value.'</textarea>';
     }
 
     /**
@@ -335,8 +341,10 @@ class Editor extends AbstractEditor
      * @param mixte $default
      * @return unknown
      */
-    private function getParam($key, $value, $default) {
-        $array = $this->_request->getParam($key);
+    protected function getParam($key, $value, $default)
+    {
+        $array = $this->getRequest()->post()->get($key);
+
         return is_array($array) && isset($array[$value]) ? $array[$value] : $default;
     }
 
