@@ -110,7 +110,7 @@ class CkEditor extends Object
     }
 
     /**
-     * get all items as form
+     * Get all items as form
      * @return array
      */
     public function getAllItems()
