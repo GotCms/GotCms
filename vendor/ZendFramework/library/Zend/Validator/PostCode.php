@@ -19,13 +19,11 @@
  */
 
 namespace Zend\Validator;
-use Zend;
+
 use Zend\Locale;
+use Zend\Registry;
 
 /**
- * @see        Zend_Locale
- * @see        Zend_Locale_Format
- * @see        Zend_Registry
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +39,7 @@ class PostCode extends AbstractValidator
     /**
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::INVALID        => "Invalid type given. String or integer expected",
         self::NO_MATCH       => "'%value%' does not appear to be a postal code",
         self::SERVICE        => "'%value%' does not appear to be a postal code",
@@ -66,15 +64,13 @@ class PostCode extends AbstractValidator
      * Zend_Config object containing the keys "locale" and/or "format".
      *
      * @param string|\Zend\Locale\Locale|array|\Traversable $options
-     * @throws \Zend\Validator\Exception On empty format
+     * @throws Exception\InvalidArgumentException On empty format
      */
     public function __construct($options = null)
     {
-        if (empty($options)) {
-            if (\Zend\Registry::isRegistered('Zend_Locale')) {
-                $this->setLocale(\Zend\Registry::get('Zend_Locale'));
-            }
-        } elseif ($options instanceof Locale\Locale || is_string($options)) {
+        if (!empty($options)
+            && ($options instanceof Locale\Locale || is_string($options))
+        ) {
             // Received Locale object or string locale
             $this->setLocale($options);
         }
@@ -100,9 +96,8 @@ class PostCode extends AbstractValidator
      * Sets the locale to use
      *
      * @param string|\Zend\Locale\Locale $locale
-     * @throws \Zend\Validator\Exception On unrecognised region
-     * @throws \Zend\Validator\Exception On not detected format
-     * @return \Zend\Validator\PostCode  Provides fluid interface
+     * @throws Exception\InvalidArgumentException On unrecognised region or on not detected format
+     * @return PostCode  Provides fluid interface
      */
     public function setLocale($locale = null)
     {
@@ -141,8 +136,8 @@ class PostCode extends AbstractValidator
      * Sets a self defined postal format as regex
      *
      * @param string $format
-     * @throws \Zend\Validator\Exception On empty format
-     * @return \Zend\Validator\PostCode  Provides fluid interface
+     * @throws Exception\InvalidArgumentException On empty format
+     * @return PostCode  Provides fluid interface
      */
     public function setFormat($format)
     {
@@ -176,6 +171,8 @@ class PostCode extends AbstractValidator
      * Sets a new callback for service validation
      *
      * @param string|array $service
+     * @return PostCode
+     * @throws Exception\InvalidArgumentException
      */
     public function setService($service)
     {

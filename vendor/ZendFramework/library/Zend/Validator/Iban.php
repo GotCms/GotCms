@@ -20,10 +20,9 @@
 
 namespace Zend\Validator;
 
-use Traversable,
-    Zend\Locale\Locale,
-    Zend\Registry,
-    Zend\Stdlib\ArrayUtils;
+use Traversable;
+use Zend\Locale\Locale;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Validates IBAN Numbers (International Bank Account Numbers)
@@ -44,7 +43,7 @@ class Iban extends AbstractValidator
      *
      * @var array
      */
-    protected $_messageTemplates = array(
+    protected $messageTemplates = array(
         self::NOTSUPPORTED => "Unknown country within the IBAN '%value%'",
         self::FALSEFORMAT  => "'%value%' has a false IBAN format",
         self::CHECKFAILED  => "'%value%' has failed the IBAN check",
@@ -108,7 +107,6 @@ class Iban extends AbstractValidator
      * Sets validator options
      *
      * @param  null|string|Locale|array|Traversable $options OPTIONAL
-     * @return void
      */
     public function __construct($options = null)
     {
@@ -117,7 +115,6 @@ class Iban extends AbstractValidator
         }
 
         if (is_array($options)) {
-            $options = $options;
             if (array_key_exists('locale', $options)) {
                 $options  = $options['locale'];
                 unset($options['locale']);
@@ -126,16 +123,10 @@ class Iban extends AbstractValidator
             }
         }
 
-        if (empty($options) && ($options !== false)) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $options = Registry::get('Zend_Locale');
-            }
-        }
-
         if ($options !== null) {
             $this->setLocale($options);
         }
-        
+
         parent::__construct($options);
     }
 
@@ -154,6 +145,7 @@ class Iban extends AbstractValidator
      *
      * @param  string|Locale $locale
      * @return Iban provides a fluent interface
+     * @throws Exception\InvalidArgumentException
      */
     public function setLocale($locale = null)
     {

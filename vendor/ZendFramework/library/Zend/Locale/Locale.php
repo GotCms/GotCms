@@ -20,8 +20,7 @@
 
 namespace Zend\Locale;
 
-use Zend\Cache\Storage\Adapter\AdapterInterface as CacheAdapter,
-    Zend\Registry;
+use Zend\Cache\Storage\StorageInterface as CacheStorage;
 
 /**
  * Base class for localization
@@ -588,7 +587,7 @@ class Locale
             if (is_array($_SERVER)) {
                 if (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER)) {
                     $httplanguages = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-                }   
+                }
             }
         }
 
@@ -899,12 +898,6 @@ class Locale
     public static function findLocale($locale = null)
     {
         if ($locale === null) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $locale = Registry::get('Zend_Locale');
-            }
-        }
-
-        if ($locale === null) {
             $locale = new Locale();
         }
 
@@ -957,7 +950,7 @@ class Locale
     /**
      * Returns the set cache
      *
-     * @return CacheAdapter The set cache
+     * @return CacheStorage The set cache
      */
     public static function getCache()
     {
@@ -967,10 +960,10 @@ class Locale
     /**
      * Sets a cache
      *
-     * @param  CacheAdapter $cache Cache to set
+     * @param  CacheStorage $cache Cache to set
      * @return void
      */
-    public static function setCache(CacheAdapter $cache)
+    public static function setCache(CacheStorage $cache)
     {
         Data\Cldr::setCache($cache);
     }
@@ -993,17 +986,6 @@ class Locale
     public static function removeCache()
     {
         Data\Cldr::removeCache();
-    }
-
-    /**
-     * Clears all set cache data
-     *
-     * @param string $tag Tag to clear when the default tag name is not used (Optional)
-     * @return void
-     */
-    public static function clearCache($tag = null)
-    {
-        Data\Cldr::clearCache($tag);
     }
 
     /**

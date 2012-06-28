@@ -70,13 +70,11 @@ class Adapter
      * @param Platform\PlatformInterface $platform
      * @param ResultSet\ResultSet $queryResultPrototype
      */
-    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSet $queryResultPrototype = null)
+    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSetInterface $queryResultPrototype = null)
     {
         if (is_array($driver)) {
             $driver = $this->createDriverFromParameters($driver);
-        }
-
-        if (!$driver instanceof Driver\DriverInterface) {
+        } elseif (!$driver instanceof Driver\DriverInterface) {
             throw new Exception\InvalidArgumentException(
                 'The supplied or instantiated driver object does not implement Zend\Db\Adapter\Driver\DriverInterface'
             );
@@ -137,9 +135,9 @@ class Adapter
         return $this->platform;
     }
 
-    public function getDefaultSchema()
+    public function getCurrentSchema()
     {
-        return $this->driver->getConnection()->getDefaultSchema();
+        return $this->driver->getConnection()->getCurrentSchema();
     }
 
     /**
@@ -177,7 +175,7 @@ class Adapter
 
         if ($result instanceof Driver\ResultInterface && $result->isQueryResult()) {
             $resultSet = clone $this->queryResultSetPrototype;
-            $resultSet->setDataSource($result);
+            $resultSet->initialize($result);
             return $resultSet;
         }
 
@@ -283,6 +281,8 @@ class Adapter
                 return new Platform\SqlServer();
             case 'Sqlite':
                 return new Platform\Sqlite();
+            case 'Postgresql':
+                return new Platform\Postgresql();
             default:
                 return new Platform\Sql92();
         }

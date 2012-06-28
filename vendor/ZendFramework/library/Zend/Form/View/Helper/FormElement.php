@@ -23,7 +23,6 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element;
 use Zend\Form\ElementInterface;
-use Zend\Loader\Pluggable;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 
 /**
@@ -47,7 +46,7 @@ class FormElement extends BaseAbstractHelper
     public function render(ElementInterface $element)
     {
         $renderer = $this->getView();
-        if (!$renderer instanceof Pluggable) {
+        if (!method_exists($renderer, 'plugin')) {
             // Bail early if renderer is not pluggable
             return '';
         }
@@ -76,12 +75,12 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'checkbox') {
-            $helper = $renderer->plugin('form_multi_checkbox');
+        if ($type == 'checkbox') {
+            $helper = $renderer->plugin('form_checkbox');
             return $helper($element);
         }
 
-        if (is_array($options) && $type == 'checkbox') {
+        if (is_array($options) && $type == 'multi_checkbox') {
             $helper = $renderer->plugin('form_multi_checkbox');
             return $helper($element);
         }
@@ -106,11 +105,15 @@ class FormElement extends BaseAbstractHelper
      *
      * Proxies to {@link render()}.
      * 
-     * @param  ElementInterface $element 
+     * @param  ElementInterface|null $element 
      * @return string
      */
-    public function __invoke(ElementInterface $element)
+    public function __invoke(ElementInterface $element = null)
     {
+        if (!$element) {
+            return $this;
+        }
+
         return $this->render($element);
     }
 }

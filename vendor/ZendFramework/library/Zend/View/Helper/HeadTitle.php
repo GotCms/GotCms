@@ -31,7 +31,7 @@ use Zend\View\Exception;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HeadTitle extends Placeholder\Container\Standalone
+class HeadTitle extends Placeholder\Container\AbstractStandalone
 {
     /**
      * Registry key for placeholder
@@ -152,11 +152,6 @@ class HeadTitle extends Placeholder\Container\Standalone
      */
     public function getTranslator()
     {
-        if (null === $this->_translator) {
-            if (\Zend\Registry::isRegistered('Zend_Translator')) {
-                $this->setTranslator(\Zend\Registry::get('Zend_Translator'));
-            }
-        }
         return $this->_translator;
     }
 

@@ -2,6 +2,8 @@
 
 namespace Zend\Di;
 
+use Closure;
+
 class Di implements DependencyInjectionInterface
 {
     /**
@@ -34,10 +36,11 @@ class Di implements DependencyInjectionInterface
     protected $references = array();
 
     /**
+     * Constructor
+     *
      * @param null|DefinitionList $definitions
      * @param null|InstanceManager $instanceManager
      * @param null|Configuration $config
-     * @return Di
      */
     public function __construct(DefinitionList $definitions = null, InstanceManager $instanceManager = null, Configuration $config = null)
     {
@@ -144,6 +147,8 @@ class Di implements DependencyInjectionInterface
      * @param array $params Parameters to pass to the constructor
      * @param bool $isShared
      * @return object|null
+     * @throws Exception\ClassNotFoundException
+     * @throws Exception\RuntimeException
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
@@ -169,11 +174,11 @@ class Di implements DependencyInjectionInterface
         }
 
         $instantiator     = $definitions->getInstantiator($class);
-        $injectionMethods = $definitions->getMethods($class);
+        $injectionMethods = array();
+        $injectionMethods[$class] = $definitions->getMethods($class);
 
-        $supertypeInjectionMethods = array();
         foreach ($definitions->getClassSupertypes($class) as $supertype) {
-            $supertypeInjectionMethods[$supertype] = $definitions->getMethods($supertype);
+            $injectionMethods[$supertype] = $definitions->getMethods($supertype);
         }
 
         if ($instantiator === '__construct') {
@@ -208,13 +213,15 @@ class Di implements DependencyInjectionInterface
             }
         }
 
-        $this->handleInjectDependencies($instance, $injectionMethods, $supertypeInjectionMethods, $params, $class, $alias, $name);
+        $this->handleInjectDependencies($instance, $injectionMethods, $params, $class, $alias, $name);
 
         array_pop($this->instanceContext);
         return $instance;
     }
 
     /**
+     * Inject dependencies
+     *
      * @param object $instance
      * @param array $params
      * @return void
@@ -223,40 +230,38 @@ class Di implements DependencyInjectionInterface
     {
         $definitions = $this->definitions();
         $class = get_class($instance);
-        $injectionMethods = ($definitions->hasClass($class)) ? $definitions->getMethods($class) : array();
-        $superTypeInjectionMethods = array();
+        $injectionMethods = array(
+            $class => ($definitions->hasClass($class)) ? $definitions->getMethods($class) : array()
+        );
         $parent = $class;
         while ($parent = get_parent_class($parent)) {
             if ($definitions->hasClass($parent)) {
-                $superTypeInjectionMethods[$parent] = $definitions->getMethods($parent);
+                $injectionMethods[$parent] = $definitions->getMethods($parent);
             }
         }
         foreach (class_implements($class) as $interface) {
             if ($definitions->hasClass($interface)) {
-                $superTypeInjectionMethods[$interface] = $definitions->getMethods($interface);
+                $injectionMethods[$interface] = $definitions->getMethods($interface);
             }
         }
-        $this->handleInjectDependencies($instance, $injectionMethods, $superTypeInjectionMethods, $params, $class, null, null);
+        $this->handleInjectDependencies($instance, $injectionMethods, $params, $class, null, null);
     }
 
-
-    protected function handleInjectDependencies($instance, $injectionMethods, $supertypeInjectionMethods, $params, $instanceClass, $instanceAlias, $requestedName)
+    protected function handleInjectDependencies($instance, $injectionMethods, $params, $instanceClass, $instanceAlias, $requestedName)
     {
-
         // localize dependencies
         $definitions     = $this->definitions;
         $instanceManager = $this->instanceManager();
 
-        if ($injectionMethods || $supertypeInjectionMethods) {
-            foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
-                if ($injectionMethod !== '__construct'){
-                    $this->resolveAndCallInjectionMethodForInstance($instance, $injectionMethod, $params, $instanceAlias, $methodIsRequired, $instanceClass);
-                }
-            }
-            foreach ($supertypeInjectionMethods as $supertype => $supertypeInjectionMethod) {
-                foreach ($supertypeInjectionMethod as $injectionMethod => $methodIsRequired) {
-                    if ($injectionMethod !== '__construct') {
-                        $this->resolveAndCallInjectionMethodForInstance($instance, $injectionMethod, $params, $instanceAlias, $methodIsRequired, $supertype);
+        $calledMethods = array('__construct' => true);
+
+        if ($injectionMethods) {
+            foreach ($injectionMethods as $type => $typeInjectionMethods) {
+                foreach ($typeInjectionMethods as $typeInjectionMethod => $methodIsRequired) {
+                    if (!isset($calledMethods[$typeInjectionMethod])) {
+                        if ($this->resolveAndCallInjectionMethodForInstance($instance, $typeInjectionMethod, $params, $instanceAlias, $methodIsRequired, $type)) {
+                            $calledMethods[$typeInjectionMethod] = true;
+                        }
                     }
                 }
             }
@@ -288,13 +293,20 @@ class Di implements DependencyInjectionInterface
                     }
                     if ($objectsToInject) {
                         foreach ($objectsToInject as $objectToInject) {
-                            foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
-                                $methodParams = $definitions->getMethodParameters($instanceClass, $injectionMethod);
-                                if ($methodParams) {
-                                    foreach ($methodParams as $methodParam) {
-                                        if (get_class($objectToInject) == $methodParam[1] || $this->isSubclassOf(get_class($objectToInject), $methodParam[1])) {
-                                            $this->resolveAndCallInjectionMethodForInstance($instance, $injectionMethod, array($methodParam[0] => $objectToInject), $instanceAlias, true, get_class($instance));
-                                            continue 3;
+                            $calledMethods = array('__construct' => true);
+                            foreach ($injectionMethods as $type => $typeInjectionMethods) {
+                                foreach ($typeInjectionMethods as $typeInjectionMethod => $methodIsRequired) {
+                                    if (!isset($calledMethods[$typeInjectionMethod])) {
+                                        $methodParams = $definitions->getMethodParameters($type, $typeInjectionMethod);
+                                        if ($methodParams) {
+                                            foreach ($methodParams as $methodParam) {
+                                                if (get_class($objectToInject) == $methodParam[1] || $this->isSubclassOf(get_class($objectToInject), $methodParam[1])) {
+                                                    if ($this->resolveAndCallInjectionMethodForInstance($instance, $typeInjectionMethod, array($methodParam[0] => $objectToInject), $instanceAlias, true, $type)) {
+                                                        $calledMethods[$typeInjectionMethod] = true;
+                                                    }
+                                                    continue 3;
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -354,6 +366,7 @@ class Di implements DependencyInjectionInterface
      * @param string $alias
      * @return object
      * @throws Exception\InvalidCallbackException
+     * @throws Exception\RuntimeException
      */
     protected function createInstanceViaCallback($callback, $params, $alias)
     {
@@ -385,17 +398,20 @@ class Di implements DependencyInjectionInterface
      * @param string $method
      * @param array $params
      * @param string $alias
+     * @return bool
      */
     protected function resolveAndCallInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
     {
         $methodClass = ($methodClass) ?: get_class($instance);
         $callParameters = $this->resolveMethodParameters($methodClass, $method, $params, $alias, $methodIsRequired);
         if ($callParameters == false) {
-            return;
+            return false;
         }
         if ($callParameters !== array_fill(0, count($callParameters), null)) {
             call_user_func_array(array($instance, $method), $callParameters);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -407,6 +423,7 @@ class Di implements DependencyInjectionInterface
      * @param bool $isInstantiator
      * @param string $alias
      * @return array
+     * @throws Exception\CircularDependencyException
      */
     protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $alias, $methodIsRequired, $isInstantiator = false)
     {
@@ -473,7 +490,7 @@ class Di implements DependencyInjectionInterface
                     $callTimeCurValue =& $callTimeUserParams[$name];
                 }
 
-                if (is_string($callTimeCurValue)) {
+                if ($type !== false && is_string($callTimeCurValue)) {
                     if ($this->instanceManager->hasAlias($callTimeCurValue)) {
                         // was an alias provided?
                         $computedParams['required'][$fqParamPos] = array(
@@ -517,8 +534,7 @@ class Di implements DependencyInjectionInterface
                         $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$name];
                     }
 
-                    if (is_string($iConfigCurValue)
-                        && $type === false) {
+                    if ($type === false && is_string($iConfigCurValue)) {
                         $computedParams['value'][$fqParamPos] = $iConfigCurValue;
                     } elseif (is_string($iConfigCurValue)
                         && isset($aliases[$iConfigCurValue])) {
@@ -533,7 +549,7 @@ class Di implements DependencyInjectionInterface
                             $iConfigCurValue
                         );
                     } elseif (is_object($iConfigCurValue)
-                        && $iConfigCurValue instanceof \Closure
+                        && $iConfigCurValue instanceof Closure
                         && $type !== 'Closure') {
                         $computedParams['value'][$fqParamPos] = $iConfigCurValue();
                     } else {

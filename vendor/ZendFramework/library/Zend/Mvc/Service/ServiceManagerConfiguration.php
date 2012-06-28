@@ -24,6 +24,8 @@ namespace Zend\Mvc\Service;
 use Zend\ServiceManager\ConfigurationInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManagerAwareInterface;
 
 /**
  * @category   Zend
@@ -53,19 +55,18 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      * @var array
      */
     protected $factories = array(
-        'Application'            => 'Zend\Mvc\Service\ApplicationFactory',
-        'Configuration'          => 'Zend\Mvc\Service\ConfigurationFactory',
-        'ControllerLoader'       => 'Zend\Mvc\Service\ControllerLoaderFactory',
-        'ControllerPluginBroker' => 'Zend\Mvc\Service\ControllerPluginBrokerFactory',
-        'ControllerPluginLoader' => 'Zend\Mvc\Service\ControllerPluginLoaderFactory',
-        'DependencyInjector'     => 'Zend\Mvc\Service\DiFactory',
-        'EventManager'           => 'Zend\Mvc\Service\EventManagerFactory',
-        'ModuleManager'          => 'Zend\Mvc\Service\ModuleManagerFactory',
-        'Router'                 => 'Zend\Mvc\Service\RouterFactory',
-        'ViewFeedRenderer'       => 'Zend\Mvc\Service\ViewFeedRendererFactory',
-        'ViewFeedStrategy'       => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
-        'ViewJsonRenderer'       => 'Zend\Mvc\Service\ViewJsonRendererFactory',
-        'ViewJsonStrategy'       => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
+        'Application'             => 'Zend\Mvc\Service\ApplicationFactory',
+        'Configuration'           => 'Zend\Mvc\Service\ConfigurationFactory',
+        'ControllerLoader'        => 'Zend\Mvc\Service\ControllerLoaderFactory',
+        'ControllerPluginManager' => 'Zend\Mvc\Service\ControllerPluginManagerFactory',
+        'DependencyInjector'      => 'Zend\Mvc\Service\DiFactory',
+        'EventManager'            => 'Zend\Mvc\Service\EventManagerFactory',
+        'ModuleManager'           => 'Zend\Mvc\Service\ModuleManagerFactory',
+        'Router'                  => 'Zend\Mvc\Service\RouterFactory',
+        'ViewFeedRenderer'        => 'Zend\Mvc\Service\ViewFeedRendererFactory',
+        'ViewFeedStrategy'        => 'Zend\Mvc\Service\ViewFeedStrategyFactory',
+        'ViewJsonRenderer'        => 'Zend\Mvc\Service\ViewJsonRendererFactory',
+        'ViewJsonStrategy'        => 'Zend\Mvc\Service\ViewJsonStrategyFactory',
     );
 
     /**
@@ -82,11 +83,12 @@ class ServiceManagerConfiguration implements ConfigurationInterface
      */
     protected $aliases = array(
         'Config'                                  => 'Configuration',
+        'ControllerPluginBroker'                  => 'ControllerPluginManager',
         'Di'                                      => 'DependencyInjector',
         'Zend\Di\LocatorInterface'                => 'DependencyInjector',
         'Zend\EventManager\EventManagerInterface' => 'EventManager',
-        'Zend\Mvc\Controller\PluginLoader'        => 'ControllerPluginLoader',
         'Zend\Mvc\Controller\PluginBroker'        => 'ControllerPluginBroker',
+        'Zend\Mvc\Controller\PluginManager'       => 'ControllerPluginManager',
     );
 
     /**
@@ -166,7 +168,9 @@ class ServiceManagerConfiguration implements ConfigurationInterface
         }
 
         $serviceManager->addInitializer(function ($instance) use ($serviceManager) {
-            if ($instance instanceof EventManagerAwareInterface) {
+            if ($instance instanceof EventManagerAwareInterface
+                && !$instance->events() instanceof EventManagerInterface
+            ) {
                 $instance->setEventManager($serviceManager->get('EventManager'));
             }
         });

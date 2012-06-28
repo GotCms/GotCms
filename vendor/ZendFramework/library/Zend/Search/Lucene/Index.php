@@ -20,12 +20,12 @@
 
 namespace Zend\Search\Lucene;
 
-use Zend\Search\Lucene\Search\Similarity,
-	Zend\Search\Lucene\Storage\Directory,
-	Zend\Search\Lucene\Exception\InvalidArgumentException,
-	Zend\Search\Lucene\Exception\RuntimeException,
-	Zend\Search\Lucene\Exception\InvalidFileFormatException,
-    Zend\Search\Lucene\Exception\OutOfRangeException;
+use Zend\Search\Lucene\Search\Similarity\AbstractSimilarity;
+use Zend\Search\Lucene\Storage\Directory;
+use Zend\Search\Lucene\Exception\InvalidArgumentException;
+use Zend\Search\Lucene\Exception\RuntimeException;
+use Zend\Search\Lucene\Exception\InvalidFileFormatException;
+use Zend\Search\Lucene\Exception\OutOfRangeException;
 
 /**
  * @category   Zend
@@ -668,9 +668,7 @@ class Index implements SearchIndexInterface
     {
         if (is_string($query)) {
             $query = Search\QueryParser::parse($query);
-        }
-
-        if (!$query instanceof Search\Query\AbstractQuery) {
+        } elseif (!$query instanceof Search\Query\AbstractQuery) {
             throw new InvalidArgumentException('Query must be a string or Zend\Search\Lucene\Search\Query object');
         }
 
@@ -1049,11 +1047,11 @@ class Index implements SearchIndexInterface
     /**
      * Retrive similarity used by index reader
      *
-     * @return \Zend\Search\Lucene\Search\Similarity
+     * @return \Zend\Search\Lucene\Search\Similarity\AbstractSimilarity
      */
     public function getSimilarity()
     {
-        return Similarity::getDefault();
+        return AbstractSimilarity::getDefault();
     }
 
 

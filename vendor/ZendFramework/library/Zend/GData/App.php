@@ -22,9 +22,9 @@
 
 namespace Zend\GData;
 
-use Zend\Http,
-    Zend\Http\Header\Etag,
-    Zend\Uri;
+use Zend\Http;
+use Zend\Http\Header\Etag;
+use Zend\Uri;
 
 /**
  * Provides Atom Publishing Protocol (APP) functionality.  This class and all
@@ -146,12 +146,12 @@ class App
      *
      * @var boolean
      */
-    protected $_useObjectMapping = true;
+    protected static $_useObjectMapping = true;
 
     /**
      * Create Gdata object
      *
-     * @param \Zend\Http\Client $client
+     * @param Http\Client $client
      * @param string $applicationId
      */
     public function __construct($client = null, $applicationId = 'MyCompany-MyApp-1.0')
@@ -227,22 +227,18 @@ class App
     }
 
     /**
-     * Set the \Zend\Http\Client object used for communication
+     * Set the Zend\Http\Client object used for communication
      *
-     * @param \Zend\Http\Client $client The client to use for communication
+     * @param Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
-     * @return \Zend\GData\App Provides a fluent interface
+     * @return App Provides a fluent interface
      */
-    public function setHttpClient($client,
-        $applicationId = 'MyCompany-MyApp-1.0')
+    public function setHttpClient(Http\Client $client = null, $applicationId = 'MyCompany-MyApp-1.0')
     {
         if ($client === null) {
             $client = new Http\Client();
         }
-        if (!$client instanceof Http\Client) {
-            throw new App\HttpException(
-                'Argument is not an instance of Zend\Http\Client.');
-        }
+
         $userAgent = $applicationId . ' Zend_Framework_Gdata/' .
             \Zend\Version::VERSION;
         $client->getRequest()->headers()->addHeaderLine('User-Agent', $userAgent);
@@ -393,7 +389,7 @@ class App
 
     /**
      * Set the major protocol version that should be used. Values < 1 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a \Zend\GData\App\InvalidArgumentException to be thrown.
      *
      * @see _majorProtocolVersion
      * @param int $value The major protocol version to use.
@@ -422,7 +418,7 @@ class App
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
+     * cause a \Zend\GData\App\InvalidArgumentException to be thrown.
      *
      * @see _minorProtocolVersion
      * @param (int|NULL) $value The minor protocol version to use.
@@ -606,7 +602,9 @@ class App
             throw new App\InvalidArgumentException(
                 'You must specify an URI to which to post.');
         }
-        //$headers['Content-Type'] = $contentType;
+        if ($contentType != null){
+            $headers['Content-Type'] = $contentType;
+        }
         if (self::getGzipEnabled()) {
             // some services require the word 'gzip' to be in the user-agent
             // header in addition to the accept-encoding header
@@ -719,7 +717,7 @@ class App
             $requestData['method'], $requestData['url']);
 
         $feedContent = $response->getBody();
-        if (!$this->_useObjectMapping) {
+        if (!self::$_useObjectMapping) {
             return $feedContent;
         }
         $feed = self::importString($feedContent, $className);
@@ -748,7 +746,7 @@ class App
         $response = $this->get($url, $extraHeaders);
 
         $feedContent = $response->getBody();
-        if (!$this->_useObjectMapping) {
+        if (!self::$_useObjectMapping) {
             return $feedContent;
         }
 
@@ -1038,7 +1036,7 @@ class App
             if ($foundClassName != null) {
                 $reflectionObj = new \ReflectionClass($foundClassName);
                 $instance = $reflectionObj->newInstanceArgs($args);
-                if ($instance instanceof App\FeedEntryParent) {
+                if ($instance instanceof App\AbstractFeedEntryParent) {
                     $instance->setHttpClient($this->_httpClient);
 
                     // Propogate version data
@@ -1063,9 +1061,9 @@ class App
      * significant amount of time to complete. In some cases this may cause
      * execution to timeout without proper precautions in place.
      *
-     * @param $feed The feed to iterate through.
+     * @param object $feed The feed to iterate through.
      * @return mixed A new feed of the same type as the one originally
-     *          passed in, containing all relevent entries.
+     *          passed in, containing all relevant entries.
      */
     public function retrieveAllEntriesForFeed($feed) {
         $feedClass = get_class($feed);
@@ -1093,7 +1091,7 @@ class App
      * NOTE: This will not work if you have customized the adapter
      * already to use a proxy server or other interface.
      *
-     * @param $logfile The logfile to use when logging the requests
+     * @param string $logfile The logfile to use when logging the requests
      */
     public function enableRequestDebugLogging($logfile)
     {
@@ -1174,7 +1172,7 @@ class App
             $etag = $data->getEtag();
             if ($etag instanceof Etag) {
                 $etag = $etag->getFieldValue();
-                if (!empty($etag) 
+                if (!empty($etag)
                     && ($allowWeek || (substr($etag, 0, 2) != 'W/'))
                 ) {
                     $result = $etag;
@@ -1191,9 +1189,9 @@ class App
      * @return boolean True if service object is using XML to object mapping,
      *                 false otherwise.
      */
-    public function usingObjectMapping()
+    public static function usingObjectMapping()
     {
-        return $this->_useObjectMapping;
+        return self::$_useObjectMapping;
     }
 
     /**
@@ -1203,13 +1201,9 @@ class App
      *                       Pass in false or null to disable it.
      * @return void
      */
-    public function useObjectMapping($value)
+    public static function useObjectMapping($value)
     {
-        if ($value === True) {
-            $this->_useObjectMapping = true;
-        } else {
-            $this->_useObjectMapping = false;
-        }
+        self::$_useObjectMapping = (bool) $value;
     }
 
 }
