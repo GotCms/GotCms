@@ -66,13 +66,10 @@ class Config extends AbstractTable
     {
         $instance = self::getInstance();
         $row = $instance->select(array($field => $data));
-        if(!empty($row))
+        $current = $row->current();
+        if(!empty($current))
         {
-            $current = (array) $row->current();
-            if(!empty($current))
-            {
-                return $current['value'];
-            }
+            return $current['value'];
         }
 
         return NULL;

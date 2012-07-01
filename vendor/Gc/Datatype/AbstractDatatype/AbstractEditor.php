@@ -137,7 +137,7 @@ abstract class AbstractEditor extends Object
 
     public function getUploadUrl()
     {
-        return $this->getDatatype()->getUploadUrl().'/property/'.$this->getProperty()->getId();
+        return $this->getDatatype()->getUploadUrl($this->getProperty()->getId());
     }
 
     /**

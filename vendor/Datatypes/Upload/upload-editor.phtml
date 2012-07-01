@@ -26,21 +26,157 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php $fieldsets = $this->elements; ?>
-<?php foreach($fieldsets as $fieldset): ?>
-    <?php if(!empty($fieldset)): ?>
-        <h3><?php echo $this->escape($this->translator($fieldset->getName())); ?></h3>
-        <?php foreach($fieldset->getElements() as $element): ?>
-            <div>
-                <?php $content = $element->getAttribute('content'); ?>
-                <?php if(!empty($content)): ?>
-                    <?php echo $content; ?>
-                <?php else: ?>
-                    <label class="required" for="<?php echo $this->escape($this->translator($element->getAttribute('id'))); ?>"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
-
-                    <?php echo $this->formElement($element); ?>
-                <?php endif; ?>
+<div id="<?php echo $this->name; ?>">
+    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="row fileupload-buttonbar">
+        <div class="span7">
+            <!-- The fileinput-button span is used to style the file input field as button -->
+            <span class="btn btn-success fileinput-button">
+                <i class="icon-plus icon-white"></i>
+                <span><?php echo $this->escape($this->translator('Add files...')); ?></span>
+                <input type="file" name="files[]" multiple autocomplete="off">
+            </span>
+            <button type="submit" class="btn btn-primary start">
+                <i class="icon-upload icon-white"></i>
+                <span><?php echo $this->escape($this->translator('Start upload')); ?></span>
+            </button>
+            <button type="reset" class="btn btn-warning cancel">
+                <i class="icon-ban-circle icon-white"></i>
+                <span><?php echo $this->escape($this->translator('Cancel upload')); ?></span>
+            </button>
+            <button type="button" class="btn btn-danger delete">
+                <i class="icon-trash icon-white"></i>
+                <span><?php echo $this->escape($this->translator('Delete')); ?></span>
+            </button>
+            <input type="checkbox" class="toggle">
+        </div>
+        <!-- The global progress information -->
+        <div class="span5 fileupload-progress fade">
+            <!-- The global progress bar -->
+            <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <div class="bar" style="width:0%;"></div>
             </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
-<?php endforeach; ?>
+            <!-- The extended global progress information -->
+            <div class="progress-extended">&nbsp;</div>
+        </div>
+    </div>
+    <!-- The loading indicator is shown during file processing -->
+    <div class="fileupload-loading"></div>
+    <br>
+    <!-- The table listing the files available for upload/download -->
+    <table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+</div>
+
+<script type="text/javascript">
+    $(function ()
+    {
+        'use strict';
+
+        $('#<?php echo $this->name; ?>').fileupload({
+            <?php if(!$this->isMultiple): ?>
+                maxNumberOfFiles:   1,
+            <?php endif; ?>
+
+            previewMaxWidth:        80,
+            previewMaxHeight:       80,
+            url:                    '<?php echo $this->jsQuoteEscape($this->escape($this->uploadUrl)); ?>',
+            uploadTemplateId:       null,
+            downloadTemplateId:     null,
+            uploadTemplate:         function (o)
+            {
+                var rows = $();
+                $.each(o.files, function (index, file)
+                {
+                    var row = $('<tr class="template-upload fade">' +
+                        '<td class="preview"><span class="fade"></span></td>' +
+                        '<td class="size"></td>' +
+                        (file.error ? '<td class="error" colspan="2"></td>' :
+                                '<td><div class="progress">' +
+                                    '<div class="bar" style="width:0%;"></div></div></td>' +
+                                    '<td class="start"><button class="btn btn-primary">' +
+                                        '<i class="icon-upload icon-white"></i>' +
+                                        '<span><?php echo $this->escape($this->translator('Start')); ?></span>' +
+                                    '</button></td>'
+                        ) + '<td class="cancel">' +
+                            '<button class="btn btn-warning">' +
+                                '<i class="icon-ban-circle icon-white"></i>' +
+                                '<span><?php echo $this->escape($this->translator('Cancel')); ?></span>' +
+                            '</button>' +
+                        '</td></tr>');
+                    row.find('.name').text(file.name);
+                    row.find('.size').text(o.formatFileSize(file.size));
+                    if (file.error)
+                    {
+                        row.find('.error').text(
+                            locale.fileupload.errors[file.error] || file.error
+                        );
+                    }
+
+                    rows = rows.add(row);
+                });
+
+                return rows;
+            },
+            downloadTemplate:       function (o)
+            {
+                var rows = $();
+                $.each(o.files, function (index, file)
+                {
+                    var row = $('<tr class="template-download fade">' +
+                        (file.error ? '<td></td><td class="name"></td>' +
+                            '<td class="size"></td><td class="error" colspan="2"></td>' :
+                                '<td class="preview"></td>' +
+                                    '<td class="name"><a></a></td>' +
+                                    '<td class="size"></td><td colspan="2"></td>'
+                        ) + '<td class="delete">' +
+                            '<button type="button" class="btn btn-danger delete">' +
+                                '<i class="icon-trash icon-white"></i>' +
+                                '<span><?php echo $this->escape($this->translator('Delete')); ?></span>' +
+                            '</button>' +
+                            '<input type="checkbox" name="delete" value="1">'+
+                            '<input type="hidden" name="<?php echo $this->name; ?>['+index+'][name]" value="'+file.filename+'">' +
+                            '</td></tr>');
+                    row.find('.size').text(o.formatFileSize(file.size));
+                    if (file.error)
+                    {
+                        row.find('.name').text(file.name);
+                        row.find('.error').text(
+                            locale.fileupload.errors[file.error] || file.error
+                        );
+                    }
+                    else
+                    {
+                        row.find('.name a').text(file.name);
+                        if (file.thumbnail_url)
+                        {
+                            row.find('.preview').append('<a><img></a>')
+                                .find('img').prop('src', file.thumbnail_url);
+                            row.find('a').prop('rel', 'gallery');
+                        }
+
+                        row.find('a').prop('href', file.url);
+                        row.find('.delete button')
+                            .attr('data-type', file.delete_type)
+                            .attr('data-url', file.delete_url);
+                    }
+
+                    rows = rows.add(row);
+                });
+
+                return rows;
+            }
+        });
+
+        // Load existing files:
+        $('#<?php echo $this->name; ?>').each(function ()
+        {
+            var that = this;
+            var result = $.parseJSON('<?php echo $this->files; ?>');
+            if (result && result.length)
+            {
+                $(that).fileupload('option', 'done')
+                    .call(that, null, {result: result});
+            }
+        });
+    });
+</script>

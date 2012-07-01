@@ -161,9 +161,10 @@ class Model extends AbstractTable
     {
         $tab_table = new Model();
         $row = $tab_table->select(array('id' => $id));
-        if(!empty($row))
+        $current = $row->current();
+        if(!empty($current))
         {
-            return $tab_table->setData((array)$row->current());
+            return $tab_table->setData((array)$current);
         }
         else
         {

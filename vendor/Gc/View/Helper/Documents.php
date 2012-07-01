@@ -36,8 +36,7 @@ class Documents extends AbstractHelper
      * Returns documents
      * $data can be mixte
      * if data is an array, return all documents
-     * if data is numeric, return all documents
-     * with parent_id equal to $data
+     * if data is numeric, return all documents with parent_id equal to $data
      *
      * @param  integer $data
      * @return array of \Gc\Document\Collection

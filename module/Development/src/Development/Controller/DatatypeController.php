@@ -61,7 +61,7 @@ class DatatypeController extends Action
         $datatype_form->setAttribute('action', $this->url()->fromRoute('datatypeCreate'));
         if($this->getRequest()->isPost())
         {
-            $post = $this->getRequest()->post()->toArray();
+            $post = $this->getRequest()->getPost()->toArray();
             $datatype_form->setData($post);
             if($datatype_form->isValid())
             {
@@ -112,7 +112,7 @@ class DatatypeController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $post = $this->getRequest()->post()->toArray();
+            $post = $this->getRequest()->getPost()->toArray();
             $datatype_form->setData($post);
             if($datatype_form->isValid())
             {

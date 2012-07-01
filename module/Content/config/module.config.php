@@ -29,6 +29,7 @@ return array(
         'classes' => array(
             'ContentController' => 'Content\Controller\IndexController',
             'DocumentController' => 'Content\Controller\DocumentController',
+            'MediaController' => 'Content\Controller\MediaController',
         ),
     ),
     'view_manager' => array(

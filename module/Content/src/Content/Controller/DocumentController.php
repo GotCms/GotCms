@@ -108,7 +108,7 @@ class DocumentController extends Action
                     ),
                 )
             , 'document_type');
-            $document_form->setData($this->getRequest()->post()->toArray());
+            $document_form->setData($this->getRequest()->getPost()->toArray());
             if(!$document_form->isValid())
             {
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid document data');
@@ -197,7 +197,7 @@ class DocumentController extends Action
             if($this->getRequest()->isPost())
             {
                 $has_error = FALSE;
-                $document_vars = $this->getRequest()->post()->toArray();
+                $document_vars = $this->getRequest()->getPost()->toArray();
                 $old_url_key = $document->getUrlKey();
                 $document->setName(empty($document_vars['name']) ? $document->getName() : $document_vars['name']);
                 $document->setStatus(empty($document_vars['status']) ? DocumentModel::STATUS_DISABLE : DocumentModel::STATUS_ENABLE);
@@ -246,7 +246,7 @@ class DocumentController extends Action
 
             if($this->getRequest()->isPost())
             {
-                $form_document_add->setData($this->getRequest()->post()->toArray());
+                $form_document_add->setData($this->getRequest()->getPost()->toArray());
 
                 if($has_error or !$form_document_add->isValid())
                 {

@@ -65,4 +65,3 @@ class Datatype extends AbstractDatatype
         return $this->_prevalueEditor;
     }
 }
-

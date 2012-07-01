@@ -67,7 +67,7 @@ class DocumentTypeController extends Action
         }
         else
         {
-            $post_data = $this->getRequest()->post()->toArray();
+            $post_data = $this->getRequest()->getPost()->toArray();
             $form->setData($post_data);
             $form->setValues($post_data);
             if(!$form->isValid())
@@ -228,7 +228,7 @@ class DocumentTypeController extends Action
                 $validator->setExclude(array('field' => 'id', 'value' => $document_type->getId()));
             }
 
-            $post_data = $this->getRequest()->post()->toArray();
+            $post_data = $this->getRequest()->getPost()->toArray();
             $form->setData($post_data);
             $form->setValues($post_data);
             if(!$form->isValid())
@@ -378,8 +378,8 @@ class DocumentTypeController extends Action
         if($this->getRequest()->isPost())
         {
             $session = $this->getSession();
-            $name = $this->getRequest()->post()->get('name');
-            $description = $this->getRequest()->post()->get('description');
+            $name = $this->getRequest()->getPost()->get('name');
+            $description = $this->getRequest()->getPost()->get('description');
             $document_type_session = $session['document-type'];
 
             $tabs = empty($document_type_session['tabs']) ? array() : $document_type_session['tabs'];
@@ -420,8 +420,8 @@ class DocumentTypeController extends Action
         if($this->getRequest()->isPost())
         {
             $session = $this->getSession();
-            $id = $this->getRequest()->post()->get('tab');
-            $description = $this->getRequest()->post()->get('description');
+            $id = $this->getRequest()->getPost()->get('tab');
+            $description = $this->getRequest()->getPost()->get('description');
 
             $tabs = empty($session['document-type']) ? array() : $session['document-type']['tabs'];
             if(array_key_exists($id, $tabs))
@@ -445,7 +445,7 @@ class DocumentTypeController extends Action
     {
         if($this->getRequest()->isPost())
         {
-            $post           = $this->getRequest()->post();
+            $post           = $this->getRequest()->getPost();
             $name           = $post->get('name');
             $identifier     = $post->get('identifier');
             $tab_id         = $post->get('tab');
@@ -513,7 +513,7 @@ class DocumentTypeController extends Action
     {
         if($this->getRequest()->isPost())
         {
-            $id = $this->getRequest()->post()->get('property');
+            $id = $this->getRequest()->getPost()->get('property');
             $session = $this->getSession();
 
             foreach($session['document-type']['tabs'] as $tab_id => $tab)

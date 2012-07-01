@@ -49,11 +49,6 @@ abstract class AbstractDatatype extends AbstractTable
     protected     $_property;
 
     /**
-     * @var integer
-     */
-    protected     $_document_id;
-
-    /**
      * @var string
      */
     protected     $_name = 'datatype';
@@ -103,14 +98,14 @@ abstract class AbstractDatatype extends AbstractTable
     }
 
     /**
-     * @TODO Finish uploadURL
      * Get upload url path
      * @return string
      */
-    public function getUploadUrl()
+    public function getUploadUrl($property_id)
     {
-        $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
-        return $baseUrl.'/media/upload/document/'.$this->_document_id;
+        $router = $GLOBALS['application']->getMvcEvent()->getRouter();
+
+        return $router->assemble(array('document_id' => $this->getDocumentId(), 'property_id' => $property_id), array('name' => 'documentUploadMedia'));
     }
 
     /**
@@ -121,9 +116,12 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getHelper($name)
     {
-        $helper_broker = $GLOBALS['application']->getServiceManager()->get('Zend\View\HelperBroker');
+        if($this->getHelperBroker() === NULL)
+        {
+            $this->setHelperBroker($GLOBALS['application']->getServiceManager()->get('viewhelperbroker'));
+        }
 
-        return $helper_broker->load($name);
+        return $this->getHelperBroker()->get($name);
     }
 
     /**
@@ -181,5 +179,15 @@ abstract class AbstractDatatype extends AbstractTable
         }
 
         return $this;
+    }
+
+    public function getDocument()
+    {
+        if($this->getData('document') === NULL)
+        {
+            $this->setData('document', \Gc\Document\Model::fromId($this->getDocumentId()));
+        }
+
+        return $this->getData('document');
     }
 }

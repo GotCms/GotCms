@@ -53,5 +53,6 @@ return array(
             'Gc'        => __DIR__ . '/../vendor/Gc',
             'Datatypes' => __DIR__ . '/../vendor/Datatypes',
         ),
+        'autoregister_zf' => TRUE,
     ),
 );

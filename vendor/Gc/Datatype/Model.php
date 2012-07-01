@@ -75,9 +75,10 @@ class Model extends AbstractTable implements IterableInterface
     {
         $datatype_table = new Model();
         $row = $datatype_table->select(array('id' => $datatype_id));
-        if(!empty($row))
+        $current = $row->current();
+        if(!empty($current))
         {
-            return $datatype_table->setData((array)$row->current());
+            return $datatype_table->setData((array)$current);
         }
         else
         {

@@ -91,7 +91,7 @@ class CmsController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $this->_form->setData($this->getRequest()->post()->toArray());
+            $this->_form->setData($this->getRequest()->getPost()->toArray());
             if(!$this->_form->isValid())
             {
                 var_dump($this->_form->getInputFilter()->getInvalidInput());

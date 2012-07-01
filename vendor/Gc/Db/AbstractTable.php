@@ -122,7 +122,7 @@ abstract class AbstractTable extends Object
 
         $result = $statement->execute();
         $result_set = new ResultSet();
-        $result_set->setDataSource($result);
+        $result_set->initialize($result);
 
         return $result_set;
     }

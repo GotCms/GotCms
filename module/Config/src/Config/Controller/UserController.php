@@ -62,7 +62,7 @@ class UserController extends Action
         $this->layout()->setTemplate('layouts/one-page.phtml');
         $login_form = new UserLogin();
 
-        $post = $this->getRequest()->post();
+        $post = $this->getRequest()->getPost();
         if($this->getRequest()->isPost() and $login_form->setData($post->toArray()) and $login_form->isValid())
         {
             $user_model = new User\Model();
@@ -94,7 +94,7 @@ class UserController extends Action
     {
         $this->layout()->setTemplate('layouts/one-page.phtml');
         $forgot_password_form = new UserForgotForm();
-        $post = $this->getRequest()->post();
+        $post = $this->getRequest()->getPost();
         if($this->getRequest()->isPost() and $forgot_password_form->isValid($post->toArray()))
         {
             $user_model = new User\Model();
@@ -126,7 +126,7 @@ class UserController extends Action
         $form = new UserForm();
         $form->setAttribute('action', $this->url()->fromRoute('userCreate'));
         $form->passwordRequired();
-        $post = $this->getRequest()->post()->toArray();
+        $post = $this->getRequest()->getPost()->toArray();
         if($this->getRequest()->isPost())
         {
             $form->setData($post);
@@ -176,7 +176,7 @@ class UserController extends Action
         $form = new UserForm();
         $form->setAttribute('action', $this->url()->fromRoute('userEdit', array('id' => $user_id)));
         $form->loadValues($user_model);
-        $post = $this->getRequest()->post()->toArray();
+        $post = $this->getRequest()->getPost()->toArray();
         if($this->getRequest()->isPost())
         {
             if(!empty($post['password']))

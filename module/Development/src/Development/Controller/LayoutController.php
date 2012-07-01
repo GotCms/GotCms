@@ -59,7 +59,7 @@ class LayoutController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->post()->toArray();
+            $data = $this->getRequest()->getPost()->toArray();
             $layout_form->setData($data);
             if($layout_form->isValid())
             {
@@ -96,7 +96,7 @@ class LayoutController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->post()->toArray();
+            $data = $this->getRequest()->getPost()->toArray();
 
             $layout_form->setData($data);
             if($layout_form->isValid())

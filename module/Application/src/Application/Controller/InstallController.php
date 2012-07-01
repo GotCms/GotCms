@@ -62,7 +62,7 @@ class InstallController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $post_data = $this->getRequest()->post()->toArray();
+            $post_data = $this->getRequest()->getPost()->toArray();
             $this->_installForm->setData($post_data);
             if($this->_installForm->isValid())
             {
@@ -88,7 +88,7 @@ class InstallController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $post_data = $this->getRequest()->post()->toArray();
+            $post_data = $this->getRequest()->getPost()->toArray();
             $this->_installForm->setData($post_data);
             if($this->_installForm->isValid())
             {
@@ -149,7 +149,7 @@ class InstallController extends Action
         $messages = array();
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->post()->toArray();
+            $data = $this->getRequest()->getPost()->toArray();
             $this->_installForm->setData($data);
             if($this->_installForm->isValid())
             {
@@ -195,7 +195,7 @@ class InstallController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->post()->toArray();
+            $data = $this->getRequest()->getPost()->toArray();
             $this->_installForm->setData($data);
             if($this->_installForm->isValid())
             {
@@ -226,7 +226,7 @@ class InstallController extends Action
                 $db_adapter = new DbAdapter($session['install']['db']);
                 $db_adapter->getDriver()->getConnection()->connect();
 
-                $step = $this->getRequest()->post()->get('step');
+                $step = $this->getRequest()->getPost()->get('step');
                 $sql_type = str_replace('pdo_', '', $session['install']['db']['driver']);
                 switch($step)
                 {

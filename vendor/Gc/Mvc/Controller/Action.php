@@ -30,12 +30,12 @@ namespace Gc\Mvc\Controller;
 use Gc\User\Model,
     Gc\User\Acl,
     Zend\Authentication\AuthenticationService,
-    Zend\Mvc\Controller\ActionController,
+    Zend\Mvc\Controller\AbstractActionController,
     Zend\Mvc\MvcEvent,
     Zend\Session\Container as SessionContainer,
     Zend\View\Model\JsonModel;
 
-class Action extends ActionController
+class Action extends AbstractActionController
 {
     /**
      * @var array route available for installer
@@ -134,7 +134,8 @@ class Action extends ActionController
         /**
          * Prepare all resources
          */
-        $headscript = $this->getServiceLocator()->get('Zend\View\HelperBroker')->load('HeadScript');
+        $helper_broker = $this->getServiceLocator()->get('viewhelperbroker');
+        $headscript = $helper_broker->get('HeadScript');
         $headscript
         ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
         ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
@@ -150,7 +151,7 @@ class Action extends ActionController
         ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
         ->appendFile('/js/gotcms.js', 'text/javascript');
 
-        $headlink = $this->getServiceLocator()->get('Zend\View\HelperBroker')->load('HeadLink');
+        $headlink = $helper_broker->get('HeadLink');
         $headlink
         ->appendStylesheet('/css/style.css')
         ->appendStylesheet('/js/libs/codemirror/lib/codemirror.css')

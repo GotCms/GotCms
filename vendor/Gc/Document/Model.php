@@ -131,9 +131,10 @@ class Model extends AbstractTable implements IterableInterface
     {
         $document_table = new Model();
         $row = $document_table->select(array('id' => $document_id));
-        if(!empty($row))
+        $current = $row->current();
+        if(!empty($current))
         {
-            return $document_table->setData((array)$row->current());
+            return $document_table->setData((array)$current);
         }
         else
         {

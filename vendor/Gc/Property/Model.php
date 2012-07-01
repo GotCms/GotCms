@@ -225,9 +225,10 @@ class Model extends AbstractTable
     {
         $property_table = new Model();
         $row = $property_table->select(array('id' => $id));
-        if(!empty($row))
+        $current = $row->current();
+        if(!empty($current))
         {
-            return $property_table->setData((array)$row->current());
+            return $property_table->setData((array)$current);
         }
         else
         {

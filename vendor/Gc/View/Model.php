@@ -69,9 +69,10 @@ class Model extends AbstractTable implements IterableInterface
     {
         $view_table = new Model();
         $row = $view_table->select(array('id' => $id));
-        if(!empty($row))
+        $current = $row->current();
+        if(!empty($current))
         {
-            return $view_table->setData((array)$row->current());
+            return $view_table->setData((array)$current);
         }
         else
         {

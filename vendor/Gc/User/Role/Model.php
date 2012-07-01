@@ -129,9 +129,10 @@ class Model extends AbstractTable
     {
         $role_table = new Model();
         $row = $role_table->select(array('id' => $id));
-        if(!empty($row))
+        $current = $row->current();
+        if(!empty($current))
         {
-            return $role_table->setData((array)$row->current());
+            return $role_table->setData((array)$current);
         }
         else
         {

@@ -63,7 +63,7 @@ class RoleController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $post = $this->getRequest()->post()->toArray();
+            $post = $this->getRequest()->getPost()->toArray();
             $form->setData($post);
             if($form->isValid())
             {
@@ -110,7 +110,7 @@ class RoleController extends Action
         $form->loadValues($role_model);
         if($this->getRequest()->isPost())
         {
-            $post = $this->getRequest()->post()->toArray();
+            $post = $this->getRequest()->getPost()->toArray();
             $form->setData($post);
             if($form->isValid())
             {

@@ -212,9 +212,10 @@ class Model extends AbstractTable implements IterableInterface
     {
         $document_type_table = new Model();
         $row = $document_type_table->select(array('id' => $document_type_id));
-        if(!empty($row))
+        $current = $row->current();
+        if(!empty($current))
         {
-            return $document_type_table->setData((array)$row->current());
+            return $document_type_table->setData((array)$current);
         }
         else
         {

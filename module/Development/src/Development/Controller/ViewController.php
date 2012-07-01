@@ -59,7 +59,7 @@ class ViewController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->post()->toArray();
+            $data = $this->getRequest()->getPost()->toArray();
             $view_form->setData($data);
             if($view_form->isValid())
             {
@@ -96,7 +96,7 @@ class ViewController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $data = $this->getRequest()->post()->toArray();
+            $data = $this->getRequest()->getPost()->toArray();
             $view_form->setData($data);
             if($view_form->isValid())
             {

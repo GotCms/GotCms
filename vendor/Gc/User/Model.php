@@ -199,9 +199,10 @@ class Model extends AbstractTable implements IterableInterface
     {
         $user_table = new Model();
         $row = $user_table->select(array('id' => $id));
-        if(!empty($row))
+        $current = $row->current();
+        if(!empty($current))
         {
-            return $user_table->setData((array)$row->current());
+            return $user_table->setData((array)$current);
         }
         else
         {
@@ -231,7 +232,6 @@ class Model extends AbstractTable implements IterableInterface
     public function sendForgotPasswordEmail($email)
     {
         $row = $this->select(array('email' => $email));
-        var_dump($row->current());
     }
 
     /** (non-PHPdoc)

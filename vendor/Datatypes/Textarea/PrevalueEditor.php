@@ -38,7 +38,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     public function save()
     {
         //Save prevalue in column Datatypes\prevalue_value
-        $post = $this->getRequest()->post();
+        $post = $this->getRequest()->getPost();
         $rows = $post->get('rows', NULL);
         $cols = $post->get('cols', NULL);
         $wrap = $post->get('wrap', NULL);
