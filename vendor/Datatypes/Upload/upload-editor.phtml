@@ -68,12 +68,13 @@
 </div>
 
 <script type="text/javascript">
+    var $index<?php echo $this->name; ?> = 0;
     $(function ()
     {
         'use strict';
 
         $('#<?php echo $this->name; ?>').fileupload({
-            <?php if(!$this->isMultiple): ?>
+            <?php if(empty($this->options['maxNumberOfFiles'])): ?>
                 maxNumberOfFiles:   1,
             <?php endif; ?>
 
@@ -127,18 +128,18 @@
                             '<td class="size"></td><td class="error" colspan="2"></td>' :
                                 '<td class="preview"></td>' +
                                     '<td><div class="name"><a></a></div>' +
-                                    '<input type="hidden" name="<?php echo $this->name; ?>['+index+'][name]" value="'+file.filename+'">' +
+                                    '<input type="hidden" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][name]" value="'+file.filename+'">' +
                                     <?php if(!empty($this->options['title'])): ?>
                                         '<label>' +
                                             '<?php echo $this->escape($this->translator('Title:')); ?>' +
-                                            '<input type="text" name="<?php echo $this->name; ?>['+index+'][title]" value="'+file.title+'"">' +
+                                            '<input type="text" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][title]" value="'+(file.title != undefined ? file.title : '')+'"">' +
                                         '</label>' +
                                     <?php endif; ?>
 
                                     <?php if(!empty($this->options['content'])): ?>
                                         '<label>' +
                                             '<?php echo $this->escape($this->translator('Content:')); ?>' +
-                                            '<input type="text" name="<?php echo $this->name; ?>['+index+'][content]" value="'+file.content+'"">' +
+                                            '<input type="text" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][content]" value="'+(file.content != undefined ? file.content : '')+'"">' +
                                         '</label>' +
                                     <?php endif; ?>
                                     '</td>' +
@@ -176,6 +177,7 @@
                     }
 
                     rows = rows.add(row);
+                    $index<?php echo $this->name; ?>++;
                 });
 
                 return rows;
@@ -187,7 +189,7 @@
         {
             var that = this;
             var result = $.parseJSON('<?php echo $this->files; ?>');
-            if (result && result.length)
+            if(result && result.length)
             {
                 $(that).fileupload('option', 'done')
                     .call(that, null, {result: result});
