@@ -32,14 +32,7 @@
         <h3><?php echo $this->escape($this->translator($fieldset->getName())); ?></h3>
         <?php foreach($fieldset->getElements() as $element): ?>
             <div>
-                <?php $content = $element->getAttribute('content'); ?>
-                <?php if(!empty($content)): ?>
-                    <?php echo $content; ?>
-                <?php else: ?>
-                    <label class="required" for="<?php echo $this->escape($this->translator($element->getAttribute('id'))); ?>"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
-
-                    <?php echo $this->formElement($element); ?>
-                <?php endif; ?>
+                <?php echo $this->formElement($element); ?>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>

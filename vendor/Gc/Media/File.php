@@ -81,6 +81,7 @@ class File extends Object
         $info = pathinfo($file_name);
         $file->addFilter('Rename', array(
             'target' => $file->getDestination() . '/' . uniqid() . '.' . $info['extension'], 'overwrite' => TRUE));
+
         if($file->receive())
         {
             $data = array();
@@ -114,7 +115,7 @@ class File extends Object
 
     public function remove($filename)
     {
-         $file = $this->$this->getDirectory() . '/' . $filename;
+         $file = $this->getDirectory() . '/' . $filename;
          if(file_exists($file))
          {
              @unlink($file);

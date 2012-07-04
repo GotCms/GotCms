@@ -41,9 +41,9 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $mime_list = $post->get('mime_list');
         $options_post = $post->get('options', array());
         $options = array();
-        $options['maxNumberOfFiles'] = array_key_exists('maxNumberOfFiles', $options_post) ? TRUE : FALSE;
-        $options['title'] = array_key_exists('title', $options_post)  ? TRUE : FALSE;
-        $options['content'] = array_key_exists('content', $options_post)  ? TRUE : FALSE;
+        $options['maxNumberOfFiles'] = in_array('maxNumberOfFiles', $options_post) ? TRUE : FALSE;
+        $options['title'] = in_array('title', $options_post) ? TRUE : FALSE;
+        $options['content'] = in_array('content', $options_post) ? TRUE : FALSE;
 
         $this->setConfig(array('mime_list' => $mime_list, 'options' => $options));
     }
@@ -59,23 +59,34 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $options_values = !empty($parameters['options']) ? $parameters['options'] : array();
         $fieldset = new \Zend\Form\Fieldset('Available options');
-        foreach(array('maxNumberOfFiles' => 'Max number of files', 'title' => 'has title', 'content' => 'has content text') as $option_value => $option_label)
-        {
-            $element = new Element('options['.$option_value.']');
-            $element->setAttribute('type', 'checkbox')
-                ->setAttribute('value', 1)
-                ->setAttribute('label', $option_label)
-                ->setAttribute('id', 'upload-options-' . $option_value);
-
-            if(!empty($options_values[$option_value]))
-            {
-                $element->setAttribute('checkedValue', TRUE);
-            }
-
-            $fieldset->add($element);
-        }
+        $element = new Element('options');
+        $element->setAttribute('type', 'multi_checkbox');
+        $element->setAttribute('label', 'test');
+        $element->setAttribute('selected', $options_values);
+        $element->setAttribute('options', array(
+            array(
+                'value' => 'maxNumberOfFiles',
+                'label' => 'Is multiple',
+                'selected' => empty($options_values['maxNumberOfFiles']) ? NULL : $options_values['maxNumberOfFiles'],
+            ),
+            array(
+                'value' => 'title',
+                'label' => 'Has title',
+                'selected' => empty($options_values['maxNumberOfFiles']) ? NULL : $options_values['maxNumberOfFiles'],
+            ),
+            array(
+                'value' => 'content',
+                'label' => 'has content text',
+                'selected' => empty($options_values['maxNumberOfFiles']) ?  FALSE : TRUE,
+            ),
+        ));
+        $fieldset->add($element);
 
         $elements[] = $fieldset;
+
+        $element = new Element('mime_list');
+        $element->setAttribute('type', 'multi_checkbox');
+        $element->setAttribute('label', 'test');
         $mime_list = array(
             'image/gif',
             'image/jpeg',
@@ -99,26 +110,19 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'audio/vnd.rn-realaudio',
             'audio/x-wav'
         );
-
-        $mime_list_values = !empty($parameters['mime_list']) ? $parameters['mime_list'] : array();
+        $options = array();
+        foreach($mime_list as $mime)
+        {
+            $options[] = array(
+                'value' => $mime,
+                'label' => $mime,
+                'selected' => !in_array($mime, $parameters['mime_list']) ? FALSE : TRUE,
+            );
+        }
+        $element->setAttribute('options', $options);
 
         $fieldset = new \Zend\Form\Fieldset('Mime list');
-        foreach($mime_list as $mime_idx => $mime_value)
-        {
-            $element = new Element('mime_list['.$mime_value.']');
-            $element->setAttribute('type', 'checkbox')
-                ->setAttribute('value', 1)
-                ->setAttribute('id', 'upload' . $mime_idx)
-                ->setAttribute('label', $mime_value);
-
-            if(!empty($mime_list_values[$mime_value]))
-            {
-                $element->setAttribute('checkedValue', TRUE);
-            }
-
-            $fieldset->add($element);
-        }
-
+        $fieldset->add($element);
         $elements[] = $fieldset;
 
         return $this->addPath(__DIR__)->render('upload-prevalue.phtml', array('elements' => $elements));

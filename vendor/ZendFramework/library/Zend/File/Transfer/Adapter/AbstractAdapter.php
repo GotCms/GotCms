@@ -717,6 +717,8 @@ abstract class AbstractAdapter
                         $tocheck = $content['tmp_name'];
                     }
 
+                    $validator->setFiles($this->files);
+
                     if (!$validator->isValid($tocheck, $content)) {
                         $fileerrors += $validator->getMessages();
                     }

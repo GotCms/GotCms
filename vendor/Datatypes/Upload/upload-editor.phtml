@@ -126,7 +126,22 @@
                         (file.error ? '<td></td><td class="name"></td>' +
                             '<td class="size"></td><td class="error" colspan="2"></td>' :
                                 '<td class="preview"></td>' +
-                                    '<td class="name"><a></a></td>' +
+                                    '<td><div class="name"><a></a></div>' +
+                                    '<input type="hidden" name="<?php echo $this->name; ?>['+index+'][name]" value="'+file.filename+'">' +
+                                    <?php if(!empty($this->options['title'])): ?>
+                                        '<label>' +
+                                            '<?php echo $this->escape($this->translator('Title:')); ?>' +
+                                            '<input type="text" name="<?php echo $this->name; ?>['+index+'][title]" value="'+file.title+'"">' +
+                                        '</label>' +
+                                    <?php endif; ?>
+
+                                    <?php if(!empty($this->options['content'])): ?>
+                                        '<label>' +
+                                            '<?php echo $this->escape($this->translator('Content:')); ?>' +
+                                            '<input type="text" name="<?php echo $this->name; ?>['+index+'][content]" value="'+file.content+'"">' +
+                                        '</label>' +
+                                    <?php endif; ?>
+                                    '</td>' +
                                     '<td class="size"></td><td colspan="2"></td>'
                         ) + '<td class="delete">' +
                             '<button type="button" class="btn btn-danger delete">' +
@@ -134,7 +149,7 @@
                                 '<span><?php echo $this->escape($this->translator('Delete')); ?></span>' +
                             '</button>' +
                             '<input type="checkbox" name="delete" value="1">'+
-                            '<input type="hidden" name="<?php echo $this->name; ?>['+index+'][name]" value="'+file.filename+'">' +
+
                             '</td></tr>');
                     row.find('.size').text(o.formatFileSize(file.size));
                     if (file.error)

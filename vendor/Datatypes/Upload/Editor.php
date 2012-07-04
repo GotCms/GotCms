@@ -54,12 +54,9 @@ class Editor extends AbstractEditor
                     continue;
                 }
 
-                $content = empty($value['content']) ? '' : $value['content'];
-                $title = empty($value['title']) ? '' : $value['title'];
                 $file = $file_class->getDirectory() . '/' . $value['name'];
                 if(!empty($value) && file_exists($file))
                 {
-                    $array_values[$i] = array();
                     $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
                     $finfo = finfo_open($const); // return mimetype extension
                     if(!in_array(finfo_file($finfo, $file), $parameters['mime_list']))
@@ -68,9 +65,20 @@ class Editor extends AbstractEditor
                     }
                     else
                     {
+                        $array_values[$i] = array();
                         $array_values[$i]['name'] = $value['name'];
-                        $array_values[$i]['title'] = $title;
-                        $array_values[$i]['content'] = $content;
+                        if(!empty($options['title']))
+                        {
+                            $title = empty($value['title']) ? '' : $value['title'];
+                            $array_values[$i]['title'] = $title;
+                        }
+
+                        if(!empty($options['content']))
+                        {
+                            $content = empty($value['content']) ? '' : $value['content'];
+                            $array_values[$i]['content'] = $content;
+                        }
+
                         $i++;
                     }
 
@@ -107,6 +115,16 @@ class Editor extends AbstractEditor
                 $file_object->size = empty($file_data['size']) ? '' : $file_data['size'];
                 $file_object->type = empty($file_data['type']) ? '' : $file_data['type'];
 
+                if(!empty($options['title']))
+                {
+                    $file_object->title = empty($file_data['title']) ? '' : $file_data['title'];
+                }
+
+                if(!empty($options['content']))
+                {
+                    $file_object->content = empty($file_data['content']) ? '' : $file_data['content'];
+                }
+
                 //$fileclass->error = 'null';
                 $file_object->thumbnail_url = str_replace(GC_APPLICATION_PATH . '/public', '', $file_class->getDirectory()) . '/' . $file_data['name'];
 
@@ -126,6 +144,7 @@ class Editor extends AbstractEditor
             'uploadUrl' => $this->getUploadUrl(),
             'name' => $this->getName(),
             'files' => json_encode($file_list),
+            'options' => $options
         ));
     }
 
