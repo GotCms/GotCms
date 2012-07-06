@@ -15,7 +15,7 @@ var Gc = (function($)
     return {
         initialize: function()
         {
-            this._options = new Array();
+            this._options = {};
         },
 
         setOption: function($key, $value)

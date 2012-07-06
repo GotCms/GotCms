@@ -56,9 +56,25 @@
                 <?php if(!empty($content)): ?>
                     <?php echo $content; ?>
                 <?php else: ?>
-                    <label class="required" for="<?php echo $this->escape($this->translator($element->getAttribute('id'))); ?>"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+                    <?php $id = $element->getAttribute('id'); ?>
+                    <?php $label = $element->getAttribute('label'); ?>
+                    <?php if(!empty($id)): ?>
+                        <?php if(!empty($label)): ?>
+                            <label class="required" for="<?php echo $this->escape($this->translator($id)); ?>"><?php echo $this->escape($this->translator($label)); ?></label>
+                        <?php endif; ?>
 
-                    <?php echo $this->formElement($element); ?>
+                        <?php echo $this->formElement($element); ?>
+                    <?php else: ?>
+                        <?php if(!empty($label)): ?>
+                            <label><?php echo $this->escape($this->translator($label)); ?>
+                        <?php endif; ?>
+
+                        <?php echo $this->formElement($element); ?>
+
+                        <?php if(!empty($label)): ?>
+                            </label>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>
