@@ -50,9 +50,9 @@
         <div id="logo"></div>
         <div id="connexion">
             <ul>
-                <li>Bienvenue “Admin” - <a href="#">MP (0/6)</a></li>
+                <li><?php echo $this->escape($this->translator('Welcome %s', $this->adminName)); ?> - <a href="#">MP (0/6)</a></li>
                 <li><a href="#">Voir les derniers signalements</a></li>
-                <li><a href="<?php echo $this->url('userLogout'); ?>">[ Deconnexion ]</a></li>
+                <li><a href="<?php echo $this->url('userLogout'); ?>">[ <?php echo $this->escape($this->translator('Disconnect')); ?> ]</a></li>
             </ul>
         </div>
     </header>
@@ -86,7 +86,7 @@
             $(document).ready(function()
             {
                 Gc.setOption('routes', <?php echo $this->jsQuoteEscape($this->routes); ?>);
-                Gc.initDocumentMenu();
+                Gc.initDocumentMenu(<?php echo $this->documentId; ?>);
             });
         <?php endif; ?>
     </script>

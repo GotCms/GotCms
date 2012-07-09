@@ -238,56 +238,61 @@ var Gc = (function($)
             });
         },
 
-        initDocumentMenu: function($routes)
+        initDocumentMenu: function($document_id)
         {
             $this = this;
-            $("#browser").treeview();
-            $("#browser a").contextMenu(
-                {
-                    menu: 'contextMenu'
-                },
+            $("#browser").jstree({
+                "plugins" : ["themes","html_data"],
+                "core" : { "initially_open" : [ $('#document_' + $document_id).parent().parent('li').prop('id') ] }
+            }).bind("loaded.jstree", function (event, data) {
 
-                function($action, $element, $position)
-                {
-                    $routes = $this.getOption('routes');
-                    $url = $routes[$action];
-
-                    if($element.attr('rel') != undefined)
+                $("#browser").find('a').contextMenu(
                     {
-                        $id = $element.attr('rel');
-                        $url = $url.replace('itemId', $id);
+                        menu: 'contextMenu'
+                    },
+
+                    function($action, $element, $position)
+                    {
+                        $routes = $this.getOption('routes');
+                        $url = $routes[$action];
+
+                        if($element.attr('rel') != undefined)
+                        {
+                            $id = $element.attr('rel');
+                            $url = $url.replace('itemId', $id);
+                        }
+
+                        switch($action){
+                            case 'new':
+                                if(!$this.isEmpty($id))
+                                {
+                                    $url += '/parent/'+$id;
+                                }
+                            case 'edit':
+                            break;
+
+                            case 'copy':
+                            case 'cut':
+                            break;
+
+                            case 'paste':
+                            break;
+
+                            case 'delete':
+                                $this.showDialogConfirm('Delete element', $url);
+                                return false;
+                            break;
+
+                            case 'quit':
+                            default:
+                                return false;
+                            break;
+                        }
+
+                        document.location.href = $url;
                     }
-
-                    switch($action){
-                        case 'new':
-                            if(!$this.isEmpty($id))
-                            {
-                                $url += '/parent/'+$id;
-                            }
-                        case 'edit':
-                        break;
-
-                        case 'copy':
-                        case 'cut':
-                        break;
-
-                        case 'paste':
-                        break;
-
-                        case 'delete':
-                            $this.showDialogConfirm('Delete element', $url);
-                            return false;
-                        break;
-
-                        case 'quit':
-                        default:
-                            return false;
-                        break;
-                    }
-
-                    document.location.href = $url;
-                }
-            );
+                );
+            });
         },
 
         showDialogConfirm: function($title, $url)

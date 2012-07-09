@@ -95,7 +95,7 @@ class DocumentController extends Action
         $parent_id = $this->getRouteMatch()->getParam('id');
         if(!empty($parent_id))
         {
-            $document_form->getElement('parent')->setValue($parent_id);
+            $document_form->get('parent')->setAttribute('value', $parent_id);
         }
 
         if($this->getRequest()->isPost())
@@ -183,14 +183,16 @@ class DocumentController extends Action
      */
     public function editAction()
     {
-        $document = DocumentModel::fromId($this->getRouteMatch()->getParam('id', ''));
-        $document_form = new \Zend\Form\Form();
+        $document_id = $this->getRouteMatch()->getParam('id');
+        $document = DocumentModel::fromId($document_id);
         if(empty($document))
         {
             $this->flashMessenger()->setNameSpace('error')->addMessage('Document does not exists !');
         }
         else
         {
+            $document_form = new \Zend\Form\Form();
+            $this->layout()->setVariable('documentId', $document_id);
             $document_type_id = $document->getDocumentTypeId();
             $layout_id = $this->getRouteMatch()->getParam('layout_id', '');
 

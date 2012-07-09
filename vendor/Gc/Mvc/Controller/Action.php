@@ -147,7 +147,7 @@ class Action extends AbstractActionController
         ->appendFile('/js/libs/codemirror/mode/css/css.js', 'text/javascript')
         ->appendFile('/js/libs/codemirror/mode/clike/clike.js', 'text/javascript')
         ->appendFile('/js/libs/codemirror/mode/php/php.js', 'text/javascript')
-        ->appendFile('/js/libs/jquery.treeview.js', 'text/javascript')
+        ->appendFile('/js/libs/jquery.jstree.js', 'text/javascript')
         ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
         ->appendFile('/js/gotcms.js', 'text/javascript');
 
