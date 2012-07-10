@@ -36,12 +36,11 @@ class Script extends AbstractHelper
     /**
      * Returns script from identifier.
      *
-     * @param  integer $document_id
-     * @return \Gc\Document\Model
+     * @param string $identifier
+     * @return mixte
      */
     public function __invoke($identifier)
     {
-
         $existed = in_array('gc.script', stream_get_wrappers());
         if(!$existed)
         {
