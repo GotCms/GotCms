@@ -64,4 +64,12 @@ return array(
             'ViewJsonStrategy',
         ),
     ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'formErrors' => 'Gc\View\Helper\FormErrors',
+            'documents' => 'Gc\View\Helper\Documents',
+            'document' => 'Gc\View\Helper\Document',
+            'script' => 'Gc\View\Helper\Script',
+        ),
+    ),
 );
