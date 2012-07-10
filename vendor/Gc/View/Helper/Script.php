@@ -48,6 +48,11 @@ class Script extends AbstractHelper
         }
 
         $script =  ScriptModel::fromIdentifier($identifier);
+        if(empty($script))
+        {
+            return FALSE;
+        }
+
         file_put_contents('gc.script://' . $identifier, $script->getContent());
 
         return include('gc.script://' . $identifier);
