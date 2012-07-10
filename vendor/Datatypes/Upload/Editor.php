@@ -43,7 +43,6 @@ class Editor extends AbstractEditor
         $parameters = $this->getConfig();
         $options  = $parameters['options'];
         $array_values = array();
-        $return_values = NULL;
         if(!empty($values))
         {
             $i = 0;
@@ -87,9 +86,8 @@ class Editor extends AbstractEditor
             }
 
             $return_values = serialize($array_values);
+            $this->setValue($return_values);
         }
-
-        $this->setValue($return_values);
     }
 
     public function load()

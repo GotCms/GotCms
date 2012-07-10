@@ -28,18 +28,30 @@
 namespace Gc\View\Helper;
 
 use Zend\View\Helper\AbstractHelper,
-    Gc\Document\Model as DocumentModel;
+    Gc\Script\Model as ScriptModel,
+    Gc\View\Stream;
 
-class Document extends AbstractHelper
+class Script extends AbstractHelper
 {
     /**
-     * Returns document from id.
+     * Returns script from identifier.
      *
      * @param  integer $document_id
      * @return \Gc\Document\Model
      */
-    public function __invoke($document_id)
+    public function __invoke($identifier)
     {
-        return DocumentModel::fromId($document_id);
+
+        $existed = in_array('gc.script', stream_get_wrappers());
+        if(!$existed)
+        {
+            stream_wrapper_register('gc.script', 'Gc\View\Stream');
+        }
+
+        $script =  ScriptModel::fromIdentifier($identifier);
+        file_put_contents('gc.script.' . $identifier, $script->getContent());
+
+        return include('gc.script.' . $identifier);
+
     }
 }

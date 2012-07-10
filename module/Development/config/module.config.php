@@ -27,10 +27,11 @@
 return array(
     'controller' => array(
         'classes' => array(
-            'DevelopmentController'     => 'Development\Controller\IndexController',
             'DatatypeController'      => 'Development\Controller\DatatypeController',
+            'DevelopmentController'     => 'Development\Controller\IndexController',
             'DocumentTypeController'  => 'Development\Controller\DocumentTypeController',
             'LayoutController'        => 'Development\Controller\LayoutController',
+            'ScriptController'          => 'Development\Controller\ScriptController',
             'ViewController'          => 'Development\Controller\ViewController',
         ),
     ),
