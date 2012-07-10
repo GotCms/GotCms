@@ -26,13 +26,13 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form class="simple-form" action="<?php echo $this->escape($this->form->getAttribute('value')); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<form class="simple-form" action="<?php echo $this->escapeHtml($this->form->getAttribute('value')); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <?php $fieldsets = $this->form->getFieldsets(); ?>
 
     <?php foreach($fieldsets as $fieldset): ?>
         <?php foreach($fieldset->getElements() as $element): ?>
             <div>
-                <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+                <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
                 <?php echo $this->formElement($element); ?>
             </div>

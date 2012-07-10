@@ -29,34 +29,34 @@
 <?php $errors = $this->form->getMessages(); ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <div>
-        <label class="required" for="email"><?php echo $this->escape($this->translator('Name')); ?></label>
-        <input type="text" class="input-text" value="<?php echo $this->escape($this->form->getValue('name')); ?>" id="name" name="name">
+        <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+        <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
         <?php if(!empty($errors['name'])): ?>
             <?php echo $this->formErrors($errors['name']); ?>
         <?php endif; ?>
     </div>
     <div>
-        <label class="required" for="email"><?php echo $this->escape($this->translator('Identifier')); ?></label>
-        <input type="text" class="input-text" value="<?php echo $this->escape($this->form->getValue('identifier')); ?>" id="identifier" name="identifier">
+        <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
+        <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('identifier')); ?>" id="identifier" name="identifier">
         <?php if(!empty($errors['identifier'])): ?>
             <?php echo $this->formErrors($errors['identifier']); ?>
         <?php endif; ?>
     </div>
     <div>
-        <label class="required" for="email"><?php echo $this->escape($this->translator('Description')); ?></label>
-        <input type="text" class="input-text" value="<?php echo $this->escape($this->form->getValue('description')); ?>" id="description" name="description">
+        <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+        <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('description')); ?>" id="description" name="description">
         <?php if(!empty($errors['description'])): ?>
             <?php echo $this->formErrors($errors['description']); ?>
         <?php endif; ?>
     </div>
     <div>
-        <label class="required" for="email"><?php echo $this->escape($this->translator('Content')); ?></label>
-        <textarea cols="80" rows="24" id="layout-content" name="content"><?php echo $this->escape($this->form->getValue('content')); ?></textarea>
+        <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Content')); ?></label>
+        <textarea cols="80" rows="24" id="layout-content" name="content"><?php echo $this->escapeHtml($this->form->getValue('content')); ?></textarea>
         <?php if(!empty($errors['content'])): ?>
             <?php echo $this->formErrors($errors['content']); ?>
         <?php endif; ?>
     </div>
     <div>
-        <input type="submit" class="input-submit" value="<?php echo $this->escape($this->translator('Save')); ?>" id="submit" name="submit">
+        <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
     </div>
 </form>

@@ -33,20 +33,20 @@
             <!-- The fileinput-button span is used to style the file input field as button -->
             <span class="btn btn-success fileinput-button">
                 <i class="icon-plus icon-white"></i>
-                <span><?php echo $this->escape($this->translator('Add files...')); ?></span>
+                <span><?php echo $this->escapeHtml($this->translate('Add files...')); ?></span>
                 <input type="file" name="files[]" multiple autocomplete="off">
             </span>
             <button type="submit" class="btn btn-primary start">
                 <i class="icon-upload icon-white"></i>
-                <span><?php echo $this->escape($this->translator('Start upload')); ?></span>
+                <span><?php echo $this->escapeHtml($this->translate('Start upload')); ?></span>
             </button>
             <button type="reset" class="btn btn-warning cancel">
                 <i class="icon-ban-circle icon-white"></i>
-                <span><?php echo $this->escape($this->translator('Cancel upload')); ?></span>
+                <span><?php echo $this->escapeHtml($this->translate('Cancel upload')); ?></span>
             </button>
             <button type="button" class="btn btn-danger delete">
                 <i class="icon-trash icon-white"></i>
-                <span><?php echo $this->escape($this->translator('Delete')); ?></span>
+                <span><?php echo $this->escapeHtml($this->translate('Delete')); ?></span>
             </button>
             <input type="checkbox" class="toggle">
         </div>
@@ -80,7 +80,7 @@
 
             previewMaxWidth:        80,
             previewMaxHeight:       80,
-            url:                    '<?php echo $this->jsQuoteEscape($this->escape($this->uploadUrl)); ?>',
+            url:                    '<?php echo $this->escapeJs($this->escapeHtml($this->uploadUrl)); ?>',
             uploadTemplateId:       null,
             downloadTemplateId:     null,
             uploadTemplate:         function (o)
@@ -96,12 +96,12 @@
                                     '<div class="bar" style="width:0%;"></div></div></td>' +
                                     '<td class="start"><button class="btn btn-primary">' +
                                         '<i class="icon-upload icon-white"></i>' +
-                                        '<span><?php echo $this->escape($this->translator('Start')); ?></span>' +
+                                        '<span><?php echo $this->escapeHtml($this->translate('Start')); ?></span>' +
                                     '</button></td>'
                         ) + '<td class="cancel">' +
                             '<button class="btn btn-warning">' +
                                 '<i class="icon-ban-circle icon-white"></i>' +
-                                '<span><?php echo $this->escape($this->translator('Cancel')); ?></span>' +
+                                '<span><?php echo $this->escapeHtml($this->translate('Cancel')); ?></span>' +
                             '</button>' +
                         '</td></tr>');
                     row.find('.name').text(file.name);
@@ -131,14 +131,14 @@
                                     '<input type="hidden" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][name]" value="'+file.filename+'">' +
                                     <?php if(!empty($this->options['title'])): ?>
                                         '<label>' +
-                                            '<?php echo $this->escape($this->translator('Title:')); ?>' +
+                                            '<?php echo $this->escapeHtml($this->translate('Title:')); ?>' +
                                             '<input type="text" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][title]" value="'+(file.title != undefined ? file.title : '')+'"">' +
                                         '</label>' +
                                     <?php endif; ?>
 
                                     <?php if(!empty($this->options['content'])): ?>
                                         '<label>' +
-                                            '<?php echo $this->escape($this->translator('Content:')); ?>' +
+                                            '<?php echo $this->escapeHtml($this->translate('Content:')); ?>' +
                                             '<input type="text" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][content]" value="'+(file.content != undefined ? file.content : '')+'"">' +
                                         '</label>' +
                                     <?php endif; ?>
@@ -147,7 +147,7 @@
                         ) + '<td class="delete">' +
                             '<button type="button" class="btn btn-danger delete">' +
                                 '<i class="icon-trash icon-white"></i>' +
-                                '<span><?php echo $this->escape($this->translator('Delete')); ?></span>' +
+                                '<span><?php echo $this->escapeHtml($this->translate('Delete')); ?></span>' +
                             '</button>' +
                             '<input type="checkbox" name="delete" value="1">'+
 

@@ -30,7 +30,9 @@ namespace Gc\Mvc;
 use Zend,
     Zend\Config\Reader\Ini,
     Zend\ModuleManager\ModuleManager,
-    Zend\Db\Adapter\Adapter as DbAdapter;
+    Zend\Db\Adapter\Adapter as DbAdapter,
+    Zend\I18n\Translator\Translator,
+    Zend\Mvc\ModuleRouteListener;
 
 class Module
 {
@@ -43,6 +45,18 @@ class Module
      * @var array
      */
     protected $_config;
+
+    public function onBootstrap($e)
+    {
+        /*
+         * @TODO translator
+            ->addTranslationPattern($translator);
+         */
+        $e->getApplication()->getServiceManager()->get('translator');
+        $eventManager = $e->getApplication()->getEventManager();
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
+    }
 
     /**
      * get autoloader config

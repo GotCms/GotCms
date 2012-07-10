@@ -24,8 +24,8 @@
  * @link     http://www.got-cms.com
  */
 return array(
-    'controller' => array(
-        'classes' => array(
+    'controllers' => array(
+        'invokables' => array(
             'StatisticsController' => 'Admin\Controller\IndexController',
         ),
     ),

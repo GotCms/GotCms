@@ -25,8 +25,8 @@
  */
 
 return array(
-    'controller' => array(
-        'classes' => array(
+    'controllers' => array(
+        'invokables' => array(
             'AdminController' => 'Admin\Controller\IndexController',
         ),
     ),

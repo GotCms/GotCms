@@ -33,7 +33,8 @@ use Gc\User\Model,
     Zend\Mvc\Controller\AbstractActionController,
     Zend\Mvc\MvcEvent,
     Zend\Session\Container as SessionContainer,
-    Zend\View\Model\JsonModel;
+    Zend\View\Model\JsonModel,
+    Zend\I18n\Translator\Translator;
 
 class Action extends AbstractActionController
 {
@@ -129,35 +130,35 @@ class Action extends AbstractActionController
             }
         }
 
-        $this->layout()->module = $module;
+        $this->layout()->module = strtolower($module);
 
         /**
          * Prepare all resources
          */
-        $helper_broker = $this->getServiceLocator()->get('viewhelperbroker');
+        $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
         $headscript = $helper_broker->get('HeadScript');
         $headscript
-        ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
-        ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
-        ->appendFile('/js/plugins.js', 'text/javascript')
-        ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
-        ->appendFile('/js/libs/codemirror/lib/codemirror.js', 'text/javascript')
-        ->appendFile('/js/libs/codemirror/mode/xml/xml.js', 'text/javascript')
-        ->appendFile('/js/libs/codemirror/mode/javascript/javascript.js', 'text/javascript')
-        ->appendFile('/js/libs/codemirror/mode/css/css.js', 'text/javascript')
-        ->appendFile('/js/libs/codemirror/mode/clike/clike.js', 'text/javascript')
-        ->appendFile('/js/libs/codemirror/mode/php/php.js', 'text/javascript')
-        ->appendFile('/js/libs/jquery.jstree.js', 'text/javascript')
-        ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
-        ->appendFile('/js/gotcms.js', 'text/javascript');
+            ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
+            ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
+            ->appendFile('/js/plugins.js', 'text/javascript')
+            ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
+            ->appendFile('/js/libs/codemirror/lib/codemirror.js', 'text/javascript')
+            ->appendFile('/js/libs/codemirror/mode/xml/xml.js', 'text/javascript')
+            ->appendFile('/js/libs/codemirror/mode/javascript/javascript.js', 'text/javascript')
+            ->appendFile('/js/libs/codemirror/mode/css/css.js', 'text/javascript')
+            ->appendFile('/js/libs/codemirror/mode/clike/clike.js', 'text/javascript')
+            ->appendFile('/js/libs/codemirror/mode/php/php.js', 'text/javascript')
+            ->appendFile('/js/libs/jquery.jstree.js', 'text/javascript')
+            ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
+            ->appendFile('/js/gotcms.js', 'text/javascript');
 
         $headlink = $helper_broker->get('HeadLink');
         $headlink
-        ->appendStylesheet('/css/style.css')
-        ->appendStylesheet('/js/libs/codemirror/lib/codemirror.css')
-        ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
-        ->appendStylesheet('/css/jquery.treeview.css')
-        ->appendStylesheet('/css/jquery.contextMenu.css');
+            ->appendStylesheet('/css/style.css')
+            ->appendStylesheet('/js/libs/codemirror/lib/codemirror.css')
+            ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
+            ->appendStylesheet('/css/jquery.treeview.css')
+            ->appendStylesheet('/css/jquery.contextMenu.css');
     }
 
     /**

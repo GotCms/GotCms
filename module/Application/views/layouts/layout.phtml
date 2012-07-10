@@ -50,9 +50,9 @@
         <div id="logo"></div>
         <div id="connexion">
             <ul>
-                <li><?php echo $this->escape($this->translator('Welcome %s', $this->adminName)); ?> - <a href="#">MP (0/6)</a></li>
+                <li><?php echo $this->escapeHtml($this->translate('Welcome %s', $this->adminName)); ?> - <a href="#">MP (0/6)</a></li>
                 <li><a href="#">Voir les derniers signalements</a></li>
-                <li><a href="<?php echo $this->url('userLogout'); ?>">[ <?php echo $this->escape($this->translator('Disconnect')); ?> ]</a></li>
+                <li><a href="<?php echo $this->url('userLogout'); ?>">[ <?php echo $this->escapeHtml($this->translate('Disconnect')); ?> ]</a></li>
             </ul>
         </div>
     </header>
@@ -85,7 +85,7 @@
         <?php if(!empty($this->routes)): ?>
             $(document).ready(function()
             {
-                Gc.setOption('routes', <?php echo $this->jsQuoteEscape($this->routes); ?>);
+                Gc.setOption('routes', '<?php echo $this->escapeJs($this->routes); ?>');
                 Gc.initDocumentMenu(<?php echo $this->documentId; ?>);
             });
         <?php endif; ?>
@@ -93,20 +93,20 @@
 
     <?php if($this->treeview): ?>
         <ul id="contextMenu" class="contextMenu">
-            <li class="new"><a href="#new"><?php echo $this->escape($this->translator('New')); ?></a></li>
-            <li class="edit"><a href="#edit"><?php echo $this->escape($this->translator('Edit')); ?></a></li>
-            <li class="cut separator"><a href="#cut"><?php echo $this->escape($this->translator('Cut')); ?></a></li>
-            <li class="copy"><a href="#copy"><?php echo $this->escape($this->translator('Copy')); ?></a></li>
-            <li class="paste"><a href="#paste"><?php echo $this->escape($this->translator('Paste')); ?></a></li>
-            <li class="delete"><a href="#delete"><?php echo $this->escape($this->translator('Delete')); ?></a></li>
-            <li class="quit separator"><a href="#quit"><?php echo $this->escape($this->translator('Quit')); ?></a></li>
+            <li class="new"><a href="#new"><?php echo $this->escapeHtml($this->translate('New')); ?></a></li>
+            <li class="edit"><a href="#edit"><?php echo $this->escapeHtml($this->translate('Edit')); ?></a></li>
+            <li class="cut separator"><a href="#cut"><?php echo $this->escapeHtml($this->translate('Cut')); ?></a></li>
+            <li class="copy"><a href="#copy"><?php echo $this->escapeHtml($this->translate('Copy')); ?></a></li>
+            <li class="paste"><a href="#paste"><?php echo $this->escapeHtml($this->translate('Paste')); ?></a></li>
+            <li class="delete"><a href="#delete"><?php echo $this->escapeHtml($this->translate('Delete')); ?></a></li>
+            <li class="quit separator"><a href="#quit"><?php echo $this->escapeHtml($this->translate('Quit')); ?></a></li>
         </ul>
     <?php endif; ?>
 
     <div id="dialog" title="" style="display:none">
         <p>
             <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;">&nbsp;</span>
-            <?php echo $this->escape($this->translator('These items will be permanently deleted and cannot be recovered. Are you sure?')); ?>
+            <?php echo $this->escapeHtml($this->translate('These items will be permanently deleted and cannot be recovered. Are you sure?')); ?>
         </p>
     </div>
 </body>

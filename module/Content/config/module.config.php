@@ -25,8 +25,8 @@
  */
 
 return array(
-    'controller' => array(
-        'classes' => array(
+    'controllers' => array(
+        'invokables' => array(
             'ContentController' => 'Content\Controller\IndexController',
             'DocumentController' => 'Content\Controller\DocumentController',
             'MediaController' => 'Content\Controller\MediaController',

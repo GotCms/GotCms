@@ -10,9 +10,9 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Driver\DriverInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -122,6 +122,8 @@ class Connection implements ConnectionInterface
             case 'mysql':
                 $sql = 'SELECT DATABASE()';
                 break;
+            case 'sqlite':
+                return 'main';
             case 'pgsql':
             default:
                 $sql = 'SELECT CURRENT_SCHEMA';
@@ -353,10 +355,14 @@ class Connection implements ConnectionInterface
      * 
      * @return integer 
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
+        if ($name === null && $this->driverName == 'pgsql') {
+            return null;
+        }
+
         try {
-            return $this->resource->lastInsertId();
+            return $this->resource->lastInsertId($name);
         } catch (\Exception $e) {
             // do nothing
         }

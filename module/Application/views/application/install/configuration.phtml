@@ -26,13 +26,13 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<h2><?php echo $this->escape($this->translator('Configuration')); ?></h2>
+<h2><?php echo $this->escapeHtml($this->translate('Configuration')); ?></h2>
 
 <?php $elements = $this->form->getElements(); ?>
 <?php $errors = $this->form->getMessages(); ?>
 <?php foreach($elements as $element): ?>
     <div>
-        <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+        <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
         <?php echo $this->formElement($element); ?>
 

@@ -26,11 +26,19 @@
 
 return array(
     'display_exceptions'    => TRUE,
-    'controller' => array(
-        'classes' => array(
+    'controllers' => array(
+        'invokables' => array(
             'IndexController' => 'Application\Controller\IndexController',
             'InstallController' => 'Application\Controller\InstallController',
         ),
+    ),
+    'service_manager' => array(
+        'factories' => array(
+            'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+        ),
+    ),
+    'translator' => array(
+        'locale' => 'en_US',
     ),
     'view_manager' => array(
         'display_not_found_reason'  => true,
@@ -38,8 +46,7 @@ return array(
         'doctype'                   => 'HTML5',
         'not_found_template'        => 'error/404',
         'exception_template'        => 'error/index',
-        'helper_map' => array(
-            'jsQuoteEscape' => 'Gc\View\Helper\JsQuoteEscape',
+        'Zend\View\HelperPluginManager' => array(
             'formErrors' => 'Gc\View\Helper\FormErrors',
             'documents' => 'Gc\View\Helper\Documents',
             'document' => 'Gc\View\Helper\Document',
@@ -47,7 +54,6 @@ return array(
         ),
         'template_map' => array(
             'layout/layout'     => __DIR__ . '/../views/layouts/layout.phtml',
-            'index/index'       => __DIR__ . '/../views/index/index.phtml',
             'error/404'         => __DIR__ . '/../views/error/404.phtml',
             'error/index'       => __DIR__ . '/../views/error/index.phtml',
         ),

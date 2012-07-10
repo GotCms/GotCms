@@ -25,8 +25,8 @@
  */
 
 return array(
-    'controller' => array(
-        'classes' => array(
+    'controllers' => array(
+        'invokables' => array(
             'DatatypeController'      => 'Development\Controller\DatatypeController',
             'DevelopmentController'     => 'Development\Controller\IndexController',
             'DocumentTypeController'  => 'Development\Controller\DocumentTypeController',

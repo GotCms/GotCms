@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
@@ -29,8 +18,6 @@ use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class FormElement extends BaseAbstractHelper
 {
@@ -39,8 +26,8 @@ class FormElement extends BaseAbstractHelper
      *
      * Introspects the element type and attributes to determine which
      * helper to utilize when rendering.
-     * 
-     * @param  ElementInterface $element 
+     *
+     * @param  ElementInterface $element
      * @return string
      */
     public function render(ElementInterface $element)
@@ -61,19 +48,13 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
+        if ($element instanceof Element\Collection) {
+            $helper = $renderer->plugin('form_collection');
+            return $helper($element);
+        }
+
         $type    = $element->getAttribute('type');
         $options = $element->getAttribute('options');
-        $captcha = $element->getAttribute('captcha');
-
-        if (!empty($captcha)) {
-            $helper = $renderer->plugin('form_captcha');
-            return $helper($element);
-        }
-
-        if (is_array($options) && $type == 'radio') {
-            $helper = $renderer->plugin('form_radio');
-            return $helper($element);
-        }
 
         if ($type == 'checkbox') {
             $helper = $renderer->plugin('form_checkbox');
@@ -82,6 +63,11 @@ class FormElement extends BaseAbstractHelper
 
         if (is_array($options) && $type == 'multi_checkbox') {
             $helper = $renderer->plugin('form_multi_checkbox');
+            return $helper($element);
+        }
+
+        if (is_array($options) && $type == 'radio') {
+            $helper = $renderer->plugin('form_radio');
             return $helper($element);
         }
 
@@ -95,7 +81,6 @@ class FormElement extends BaseAbstractHelper
             return $helper($element);
         }
 
-
         $helper = $renderer->plugin('form_input');
         return $helper($element);
     }
@@ -104,9 +89,9 @@ class FormElement extends BaseAbstractHelper
      * Invoke helper as function
      *
      * Proxies to {@link render()}.
-     * 
-     * @param  ElementInterface|null $element 
-     * @return string
+     *
+     * @param  ElementInterface|null $element
+     * @return string|FormElement
      */
     public function __invoke(ElementInterface $element = null)
     {

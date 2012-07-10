@@ -114,7 +114,7 @@ class InstallController extends Action
         }
 
         $php_data = array();
-        $php_data[] = array('label' => 'Php version >= 5.3.0', 'value' => PHP_VERSION_ID > 50300);
+        $php_data[] = array('label' => 'Php version >= 5.3.3', 'value' => PHP_VERSION_ID > 50303);
         $php_data[] = array('label' => 'Pdo', 'value' => extension_loaded('pdo'));
         $php_data[] = array('label' => 'Xml', 'value' => extension_loaded('xml'));
         $php_data[] = array('label' => 'Database (Mysql, Pgsql)', 'value' => extension_loaded('pdo_mysql') or extension_loaded('pdo_pgsql'));

@@ -26,15 +26,15 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form class="simple-form" action="<?php echo $this->escape($this->form->getAttribute('value')); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<form class="simple-form" action="<?php echo $this->escapeHtml($this->form->getAttribute('value')); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <div>
-        <label class="required" for="name"><?php echo $this->escape($this->translator('Name')); ?></label>
-        <input type="text" class="input-text" value="<?php echo $this->escape($this->form->getValue('name')); ?>" id="name" name="name">
+        <label class="required" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+        <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
     </div>
 
     <div>
-        <label class="optional" for="description"><?php echo $this->escape($this->translator('Description')); ?></label>
-        <input type="text" class="input-text" value="<?php echo $this->escape($this->form->getValue('description')); ?>" id="description" name="description">
+        <label class="optional" for="description"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+        <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('description')); ?>" id="description" name="description">
     </div>
 
 
@@ -44,7 +44,7 @@
         <?php foreach($permissions as $permission_id => $permission): ?>
             <div>
                 <label class="optional" for="permissions-<?php echo (int)$permission_id; ?>">
-                    <?php echo $this->escape($this->translator($permission['name'])); ?>
+                    <?php echo $this->escapeHtml($this->translate($permission['name'])); ?>
                 </label>
 
                 <input type="checkbox" value="1" <?php if($permission['value']): ?>checked="checked" <?php endif; ?>id="permissions-<?php echo (int)$permission_id; ?>" name="permissions[<?php echo (int)$permission_id; ?>]">

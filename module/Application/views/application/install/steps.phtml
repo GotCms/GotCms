@@ -26,10 +26,10 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<h2><?php echo $this->escape($this->translator('Steps:')); ?></h2>
+<h2><?php echo $this->escapeHtml($this->translate('Steps:')); ?></h2>
 <ul>
-    <li<?php if($this->currentRoute == 'install'): ?> class="active"<?php endif; ?>><?php echo $this->escape($this->translator('Language')); ?></li>
-    <li<?php if($this->currentRoute == 'installLicense'): ?> class="active"<?php endif; ?>><?php echo $this->escape($this->translator('License')); ?></li>
-    <li<?php if($this->currentRoute == 'installCheckConfig'): ?> class="active"<?php endif; ?>><?php echo $this->escape($this->translator('Pre-configuration')); ?></li>
-    <li<?php if($this->currentRoute == 'installDatabase'): ?> class="active"<?php endif; ?>><?php echo $this->escape($this->translator('Database')); ?></li>
+    <li<?php if($this->currentRoute == 'install'): ?> class="active"<?php endif; ?>><?php echo $this->escapeHtml($this->translate('Language')); ?></li>
+    <li<?php if($this->currentRoute == 'installLicense'): ?> class="active"<?php endif; ?>><?php echo $this->escapeHtml($this->translate('License')); ?></li>
+    <li<?php if($this->currentRoute == 'installCheckConfig'): ?> class="active"<?php endif; ?>><?php echo $this->escapeHtml($this->translate('Pre-configuration')); ?></li>
+    <li<?php if($this->currentRoute == 'installDatabase'): ?> class="active"<?php endif; ?>><?php echo $this->escapeHtml($this->translate('Database')); ?></li>
 </ul>

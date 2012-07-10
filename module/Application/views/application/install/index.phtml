@@ -27,9 +27,9 @@
 
 ?>
 
-<h2><?php echo $this->escape($this->translator('Language')); ?></h2>
+<h2><?php echo $this->escapeHtml($this->translate('Language')); ?></h2>
 
-<p><?php echo $this->escape($this->translator('Please select language')); ?></p>
+<p><?php echo $this->escapeHtml($this->translate('Please select language')); ?></p>
 
 <div>
     <?php echo $this->formElement($this->form->get('lang')); ?>

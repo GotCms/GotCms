@@ -27,11 +27,11 @@
 
 ?>
 
-<h2><?php echo $this->escape($this->translator('License')); ?></h2>
+<h2><?php echo $this->escapeHtml($this->translate('License')); ?></h2>
 
 <iframe class="license" src="/LICENSE.txt"></iframe>
 
 <label>
     <?php echo $this->formElement($this->form->get('accept-license')); ?>
-    <?php echo $this->escape($this->translator('You must accept this license for continue to install this software.')); ?>
+    <?php echo $this->escapeHtml($this->translate('You must accept this license for continue to install this software.')); ?>
 </label>

@@ -29,18 +29,18 @@
 <?php $errors = $this->form->getMessages(); ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <div>
-        <label class="required" for="name"><?php echo $this->escape($this->translator('Name')); ?></label>
-        <input type="name" class="input-text" value="<?php echo $this->escape($this->form->getValue('name')); ?>" id="name" name="name">
+        <label class="required" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+        <input type="name" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
         <?php if(!empty($errors['name'])): ?>
             <?php echo $this->formErrors($errors['name']); ?>
         <?php endif; ?>
     </div>
     <div>
-        <label class="required" for="model"><?php echo $this->escape($this->translator('Model')); ?></label>
+        <label class="required" for="model"><?php echo $this->escapeHtml($this->translate('Model')); ?></label>
         <select class="input-select" id="model" name="model">
             <?php $options = $this->form->get('model')->getAttribute('options'); ?>
             <?php foreach($options as $option_id => $option_value): ?>
-                <option <?php if($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escape($this->translator($option_value)); ?>" value="<?php echo $this->escape($option_value); ?>"><?php echo $this->escape($option_value); ?></option>
+                <option <?php if($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo $this->escapeHtml($option_value); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
             <?php endforeach; ?>
         </select>
         <?php if(!empty($errors['model'])): ?>
@@ -60,13 +60,13 @@
                     <?php $label = $element->getAttribute('label'); ?>
                     <?php if(!empty($id)): ?>
                         <?php if(!empty($label)): ?>
-                            <label class="required" for="<?php echo $this->escape($this->translator($id)); ?>"><?php echo $this->escape($this->translator($label)); ?></label>
+                            <label class="required" for="<?php echo $this->escapeHtml($this->translate($id)); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
                         <?php endif; ?>
 
                         <?php echo $this->formElement($element); ?>
                     <?php else: ?>
                         <?php if(!empty($label)): ?>
-                            <label><?php echo $this->escape($this->translator($label)); ?>
+                            <label><?php echo $this->escapeHtml($this->translate($label)); ?>
                         <?php endif; ?>
 
                         <?php echo $this->formElement($element); ?>
@@ -81,6 +81,6 @@
     <?php endif; ?>
 
     <div>
-        <input type="submit" class="input-submit" value="<?php echo $this->escape($this->translator('Save')); ?>" id="submit" name="submit">
+        <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
     </div>
 </form>

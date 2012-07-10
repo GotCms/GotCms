@@ -33,8 +33,7 @@ use Gc\Form\AbstractForm,
     Zend\Form\Fieldset,
     Zend\InputFilter\InputFilter,
     Zend\Validator\Db,
-    Zend\Validator\Identical,
-    Zend\Locale\Locale;
+    Zend\Validator\Identical;
 
 class Config extends AbstractForm
 {
@@ -194,11 +193,10 @@ class Config extends AbstractForm
     public function initServer()
     {
         //Local settings
-        $locale_list = Locale::getLocaleList();
-        foreach($locale_list as $locale => $locale_value)
-        {
-            $locale_list[$locale] = $locale;
-        }
+        $locale_list = array(
+            'Français' => 'fr_FR',
+            'English' => 'en_GB',
+        );
 
         $locale_fieldset = new Fieldset('locale');
         $locale = new Element('locale');

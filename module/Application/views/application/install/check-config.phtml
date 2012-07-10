@@ -27,9 +27,9 @@
 
 ?>
 
-<h2><?php echo $this->escape(sprintf($this->translator('Pre-installation check for GotCms %s'), $this->cmsVersion)); ?></h2>
+<h2><?php echo $this->escapeHtml(sprintf($this->translator('Pre-installation check for GotCms %s'), $this->cmsVersion)); ?></h2>
 <div class="install-text">
-    <p><?php echo $this->escape($this->translator('Please make sure all parameters are set to "Yes" before continue installation')); ?></p>
+    <p><?php echo $this->escapeHtml($this->translate('Please make sure all parameters are set to "Yes" before continue installation')); ?></p>
 </div>
 <div class="install-body">
     <div class="m">
@@ -39,11 +39,11 @@
                     <?php foreach($this->phpData as $data): ?>
                         <tr>
                             <td class="item">
-                                <?php echo $this->escape($this->translator($data['label'])); ?>
+                                <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
                             </td>
                             <td>
                                 <span>
-                                    <?php echo $this->escape($this->translator($data['value'] === TRUE ? 'Yes' : 'No')); ?>
+                                    <?php echo $this->escapeHtml($this->translate($data['value'] === TRUE ? 'Yes' : 'No')); ?>
                                 </span>
                             </td>
                         </tr>
@@ -54,9 +54,9 @@
     </div>
 </div>
 
-<h3><?php echo $this->escape($this->translator('Recommended settings:')); ?></h3>
+<h3><?php echo $this->escapeHtml($this->translate('Recommended settings:')); ?></h3>
 <div class="install-text">
-    <?php echo $this->escape($this->translator('These settings are recommended for PHP in order to ensure full compatibility.')); ?>
+    <?php echo $this->escapeHtml($this->translate('These settings are recommended for PHP in order to ensure full compatibility.')); ?>
 </div>
 <div class="install-body">
     <div class="m">
@@ -65,13 +65,13 @@
                 <thead>
                 <tr>
                     <td class="toggle">
-                        <?php echo $this->escape($this->translator('Directive')); ?>
+                        <?php echo $this->escapeHtml($this->translate('Directive')); ?>
                     </td>
                     <td class="toggle">
-                        <?php echo $this->escape($this->translator('Recommended')); ?>
+                        <?php echo $this->escapeHtml($this->translate('Recommended')); ?>
                     </td>
                     <td class="toggle">
-                        <?php echo $this->escape($this->translator('Actual')); ?>
+                        <?php echo $this->escapeHtml($this->translate('Actual')); ?>
                     </td>
                 </tr>
                 </thead>
@@ -79,17 +79,17 @@
                     <?php foreach($this->phpDirective as $data): ?>
                         <tr>
                             <td class="item">
-                                <?php echo $this->escape($this->translator($data['label'])); ?>
+                                <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
                             </td>
 
                             <td class="toggle">
                                 <span>
-                                    <?php echo $this->escape($this->translator($data['needed'] === TRUE ? 'On' : 'Off')); ?>
+                                    <?php echo $this->escapeHtml($this->translate($data['needed'] === TRUE ? 'On' : 'Off')); ?>
                                 </span>
                             </td>
                             <td>
                                 <span class="green">
-                                    <?php echo $this->escape($this->translator($data['value'] === TRUE ? 'On' : 'Off')); ?>
+                                    <?php echo $this->escapeHtml($this->translate($data['value'] === TRUE ? 'On' : 'Off')); ?>
                                 </span>
                             </td>
                         </tr>

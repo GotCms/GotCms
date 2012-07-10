@@ -10,8 +10,8 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Exception;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Exception;
 
 /**
  * @category   Zend
@@ -270,11 +270,11 @@ class Connection implements ConnectionInterface
     /**
      * Get last generated id
      * 
+     * @param  null $name Ignored
      * @return integer 
      */
-    public function getLastGeneratedValue()
+    public function getLastGeneratedValue($name = null)
     {
         return $this->resource->insert_id;
     }
-
 }

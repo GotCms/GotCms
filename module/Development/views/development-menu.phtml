@@ -26,37 +26,37 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<h2>..:: <?php echo $this->escape($this->translator('Managing Views')); ?> ::..</h2>
+<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Views')); ?> ::..</h2>
 
 <ul>
-    <li><a href="<?php echo $this->url('viewCreate'); ?>" title=""><?php echo $this->escape($this->translator('Add')); ?></a></li>
-    <li><a href="<?php echo $this->url('viewList'); ?>" title=""><?php echo $this->escape($this->translator('List')); ?></a></li>
+    <li><a href="<?php echo $this->url('viewCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+    <li><a href="<?php echo $this->url('viewList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
 </ul>
 
-<h2>..:: <?php echo $this->escape($this->translator('Managing Layouts')); ?> ::..</h2>
+<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Layouts')); ?> ::..</h2>
 
 <ul>
-    <li><a href="<?php echo $this->url('layoutCreate'); ?>" title=""><?php echo $this->escape($this->translator('Add')); ?></a></li>
-    <li><a href="<?php echo $this->url('layoutList'); ?>" title=""><?php echo $this->escape($this->translator('List')); ?></a></li>
+    <li><a href="<?php echo $this->url('layoutCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+    <li><a href="<?php echo $this->url('layoutList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
 </ul>
 
-<h2>..:: <?php echo $this->escape($this->translator('Managing Datatypes')); ?> ::..</h2>
+<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Datatypes')); ?> ::..</h2>
 
 <ul>
-    <li><a href="<?php echo $this->url('datatypeCreate'); ?>" title=""><?php echo $this->escape($this->translator('Add')); ?></a></li>
-    <li><a href="<?php echo $this->url('datatypeList'); ?>" title=""><?php echo $this->escape($this->translator('List')); ?></a></li>
+    <li><a href="<?php echo $this->url('datatypeCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+    <li><a href="<?php echo $this->url('datatypeList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
 </ul>
 
-<h2>..:: <?php echo $this->escape($this->translator('Managing Document types')); ?> ::..</h2>
+<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Document types')); ?> ::..</h2>
 
 <ul>
-    <li><a href="<?php echo $this->url('documentTypeCreate'); ?>" title=""><?php echo $this->escape($this->translator('Add')); ?></a></li>
-    <li><a href="<?php echo $this->url('documentTypeList'); ?>" title=""><?php echo $this->escape($this->translator('List')); ?></a></li>
+    <li><a href="<?php echo $this->url('documentTypeCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+    <li><a href="<?php echo $this->url('documentTypeList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
 </ul>
 
-<h2>..:: <?php echo $this->escape($this->translator('Managing Scripts')); ?> ::..</h2>
+<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Scripts')); ?> ::..</h2>
 
 <ul>
-    <li><a href="<?php echo $this->url('scriptCreate'); ?>" title=""><?php echo $this->escape($this->translator('Add')); ?></a></li>
-    <li><a href="<?php echo $this->url('scriptList'); ?>" title=""><?php echo $this->escape($this->translator('List')); ?></a></li>
+    <li><a href="<?php echo $this->url('scriptCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+    <li><a href="<?php echo $this->url('scriptList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
 </ul>

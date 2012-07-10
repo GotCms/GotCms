@@ -28,24 +28,24 @@
 ?>
 <table>
     <tr>
-        <th><?php echo $this->escape($this->translator('Id')); ?></th>
-        <th><?php echo $this->escape($this->translator('Name')); ?></th>
-        <th><?php echo $this->escape($this->translator('Identifier')); ?></th>
-        <th><?php echo $this->escape($this->translator('Description')); ?></th>
-        <th><?php echo $this->escape($this->translator('Edit')); ?></th>
-        <th><?php echo $this->escape($this->translator('Delete')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Id')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Identifier')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Description')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
     </tr>
     <?php foreach($this->scripts as $script): ?>
         <tr>
             <td><?php echo $script->getId(); ?></td>
-            <td><?php echo $this->escape($script->getName()); ?></td>
-            <td><?php echo $this->escape($script->getIdentifier()); ?></td>
-            <td><?php echo $this->escape($script->getDescription()); ?></td>
+            <td><?php echo $this->escapeHtml($script->getName()); ?></td>
+            <td><?php echo $this->escapeHtml($script->getIdentifier()); ?></td>
+            <td><?php echo $this->escapeHtml($script->getDescription()); ?></td>
             <td><a href="<?php echo $this->url('scriptEdit', array('id' => $script->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escape($this->translator('Edit')); ?>" />
+                <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
             </a></td>
             <td><a href="<?php echo $this->url('scriptDelete', array('id' => $script->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escape($this->translator('Delete')); ?>">
+                <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
             </a></td>
         </tr>
     <?php endforeach; ?>

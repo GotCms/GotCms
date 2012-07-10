@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Form
- * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Form
  */
 
 namespace Zend\Form\View\Helper;
@@ -24,7 +13,8 @@ namespace Zend\Form\View\Helper;
 use Zend\Form\ElementInterface;
 use Zend\View\Helper\AbstractHelper as BaseAbstractHelper;
 use Zend\View\Helper\Doctype;
-use Zend\View\Helper\Escape;
+use Zend\View\Helper\EscapeHtml;
+use Zend\View\Helper\EscapeHtmlAttr;
 
 /**
  * Base functionality for all form view helpers
@@ -32,8 +22,6 @@ use Zend\View\Helper\Escape;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage View
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class AbstractHelper extends BaseAbstractHelper
 {
@@ -59,9 +47,14 @@ abstract class AbstractHelper extends BaseAbstractHelper
     protected $doctypeHelper;
 
     /**
-     * @var Escape
+     * @var EscapeHtml
      */
-    protected $escapeHelper;
+    protected $escapeHtmlHelper;
+
+    /**
+     * @var EscapeHtmlAttr
+     */
+    protected $escapeHtmlAttrHelper;
 
     /**
      * Attributes globally valid for all tags
@@ -181,7 +174,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
      */
     public function setEncoding($encoding)
     {
-        $this->getEscapeHelper()->setEncoding($encoding);
+        $this->getEscapeHtmlHelper()->setEncoding($encoding);
         return $this;
     }
     
@@ -192,7 +185,7 @@ abstract class AbstractHelper extends BaseAbstractHelper
      */
     public function getEncoding()
     {
-        return $this->getEscapeHelper()->getEncoding();
+        return $this->getEscapeHtmlHelper()->getEncoding();
     }
 
     /**
@@ -207,8 +200,8 @@ abstract class AbstractHelper extends BaseAbstractHelper
     {
         $attributes = $this->prepareAttributes($attributes);
 
-        $escape  = $this->getEscapeHelper();
-        $strings = array();
+        $escape     = $this->getEscapeHtmlHelper();
+        $strings    = array();
         foreach ($attributes as $key => $value) {
             $key = strtolower($key);
             if (!$value && isset($this->booleanAttributes[$key])) {
@@ -217,7 +210,8 @@ abstract class AbstractHelper extends BaseAbstractHelper
                     continue;
                 }
             }
-            $strings[] = sprintf('%s="%s"', $key, $escape($value));
+            //@TODO Escape event attributes like AbstractHtmlElement view helper does in _htmlAttribs ??
+            $strings[] = sprintf('%s="%s"', $escape($key), $escape($value));
         }
         return implode(' ', $strings);
     }
@@ -280,25 +274,47 @@ abstract class AbstractHelper extends BaseAbstractHelper
     }
 
     /**
-     * Retrieve the escape helper
+     * Retrieve the escapeHtml helper
      * 
-     * @return Escape
+     * @return EscapeHtml
      */
-    protected function getEscapeHelper()
+    protected function getEscapeHtmlHelper()
     {
-        if ($this->escapeHelper) {
-            return $this->escapeHelper;
+        if ($this->escapeHtmlHelper) {
+            return $this->escapeHtmlHelper;
         }
 
         if (method_exists($this->view, 'plugin')) {
-            $this->escapeHelper = $this->view->plugin('escape');
+            $this->escapeHtmlHelper = $this->view->plugin('escapehtml');
         }
 
-        if (!$this->escapeHelper instanceof Escape) {
-            $this->escapeHelper = new Escape();
+        if (!$this->escapeHtmlHelper instanceof EscapeHtml) {
+            $this->escapeHtmlHelper = new EscapeHtml();
         }
 
-        return $this->escapeHelper;
+        return $this->escapeHtmlHelper;
+    }
+
+    /**
+     * Retrieve the escapeHtmlAttr helper
+     * 
+     * @return EscapeHtmlAttr
+     */
+    protected function getEscapeHtmlAttrHelper()
+    {
+        if ($this->escapeHtmlAttrHelper) {
+            return $this->escapeHtmlAttrHelper;
+        }
+
+        if (method_exists($this->view, 'plugin')) {
+            $this->escapeHtmlAttrHelper = $this->view->plugin('escapehtmlattr');
+        }
+
+        if (!$this->escapeHtmlAttrHelper instanceof EscapeHtmlAttr) {
+            $this->escapeHtmlAttrHelper = new EscapeHtmlAttr();
+        }
+
+        return $this->escapeHtmlAttrHelper;
     }
 
     /**

@@ -26,8 +26,8 @@
 
 return array(
     'display_exceptions'    => TRUE,
-    'controller' => array(
-        'classes' => array(
+    'controllers' => array(
+        'invokables' => array(
             'ConfigController'  => 'Config\Controller\IndexController',
             'UserController'    => 'Config\Controller\UserController',
             'RoleController'    => 'Config\Controller\RoleController',

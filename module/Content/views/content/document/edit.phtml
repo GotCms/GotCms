@@ -26,14 +26,14 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form action="<?php echo $this->escape($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
+<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
     <div id="tabs" style="margin-bottom:20px">
         <?php echo $this->tabs; ?>
 
         <?php $fieldsets = $this->form->getFieldsets(); ?>
         <?php foreach($fieldsets as $tab_id => $fieldset): ?>
             <?php $errors = $fieldset->getMessages(); ?>
-            <div id="<?php echo $this->escape($tab_id); ?>">
+            <div id="<?php echo $this->escapeHtml($tab_id); ?>">
                 <?php $elements = $fieldset->getElements(); ?>
                 <?php foreach($elements as $element): ?>
                     <div>
@@ -41,7 +41,7 @@
                         <?php if(!empty($content)): ?>
                             <?php echo $content; ?>
                         <?php else: ?>
-                            <label class="required" for="name"><?php echo $this->escape($this->translator($element->getAttribute('label'))); ?></label>
+                            <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
                             <?php echo $this->formElement($element); ?>
                             <?php if(!empty($errors[$element->getAttribute('name')])): ?>
@@ -53,7 +53,7 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <input type="submit" class="input-submit" value="<?php echo $this->escape($this->translator('Save')); ?>">
+    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
 </form>
 <script type="text/javascript">
     jQuery('#tabs').tabs();

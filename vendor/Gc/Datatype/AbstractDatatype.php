@@ -118,7 +118,7 @@ abstract class AbstractDatatype extends AbstractTable
     {
         if($this->getHelperBroker() === NULL)
         {
-            $this->setHelperBroker($GLOBALS['application']->getServiceManager()->get('viewhelperbroker'));
+            $this->setHelperBroker($GLOBALS['application']->getServiceManager()->get('viewhelpermanager'));
         }
 
         return $this->getHelperBroker()->get($name);

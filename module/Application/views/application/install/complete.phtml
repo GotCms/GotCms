@@ -27,12 +27,12 @@
 
 ?>
 
-<h2><?php echo $this->escape($this->translator('Installation currently finish')); ?></h2>
+<h2><?php echo $this->escapeHtml($this->translate('Installation currently finish')); ?></h2>
 <ul>
-    <li id="c-db" class="active"><?php echo $this->escape($this->translator('Create database')); ?></li>
-    <li id="i-d"><?php echo $this->escape($this->translator('Insert data')); ?></li>
-    <li id="c-uar"><?php echo $this->escape($this->translator('Create users and roles')); ?></li>
-    <li id="c-cf"><?php echo $this->escape($this->translator('Create configuration file')); ?></li>
+    <li id="c-db" class="active"><?php echo $this->escapeHtml($this->translate('Create database')); ?></li>
+    <li id="i-d"><?php echo $this->escapeHtml($this->translate('Insert data')); ?></li>
+    <li id="c-uar"><?php echo $this->escapeHtml($this->translate('Create users and roles')); ?></li>
+    <li id="c-cf"><?php echo $this->escapeHtml($this->translate('Create configuration file')); ?></li>
 </ul>
 
 <div id="installation-data">
@@ -51,7 +51,7 @@
             }
 
             $.ajax({
-                url: '<?php echo $this->jsQuoteEscape($this->url('installComplete')); ?>',
+                url: '<?php echo $this->escapeJs($this->url('installComplete')); ?>',
                 dataType: 'json',
                 data: {step: $data[$step]},
                 type: 'POST',

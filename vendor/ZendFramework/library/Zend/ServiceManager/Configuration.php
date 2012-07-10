@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_ServiceManager
+ */
 
 namespace Zend\ServiceManager;
 
@@ -15,7 +23,7 @@ class Configuration implements ConfigurationInterface
     {
         return (isset($this->configuration['allow_override'])) ? $this->configuration['allow_override'] : null;
     }
-    
+
     public function getFactories()
     {
         return (isset($this->configuration['factories'])) ? $this->configuration['factories'] : array();
@@ -41,6 +49,11 @@ class Configuration implements ConfigurationInterface
         return (isset($this->configuration['aliases'])) ? $this->configuration['aliases'] : array();
     }
 
+    public function getInitializers()
+    {
+        return (isset($this->configuration['initializers'])) ? $this->configuration['initializers'] : array();
+    }
+
     public function getShared()
     {
         return (isset($this->configuration['shared'])) ? $this->configuration['shared'] : array();
@@ -50,7 +63,7 @@ class Configuration implements ConfigurationInterface
     {
         $allowOverride = $this->getAllowOverride();
         isset($allowOverride) ? $serviceManager->setAllowOverride($allowOverride) : null;
-        
+
         foreach ($this->getFactories() as $name => $factory) {
             $serviceManager->setFactory($name, $factory);
         }
@@ -69,6 +82,10 @@ class Configuration implements ConfigurationInterface
 
         foreach ($this->getAliases() as $alias => $nameOrAlias) {
             $serviceManager->setAlias($alias, $nameOrAlias);
+        }
+
+        foreach ($this->getInitializers() as $initializer) {
+            $serviceManager->addInitializer($initializer);
         }
 
         foreach ($this->getShared() as $name => $isShared) {

@@ -1,25 +1,25 @@
 <table>
     <tr>
-        <th><?php echo $this->escape($this->translator('Id')); ?></th>
-        <th><?php echo $this->escape($this->translator('Lastname')); ?></th>
-        <th><?php echo $this->escape($this->translator('Firstname')); ?></th>
-        <th><?php echo $this->escape($this->translator('Email')); ?></th>
-        <th><?php echo $this->escape($this->translator('Login')); ?></th>
-        <th><?php echo $this->escape($this->translator('Edit')); ?></th>
-        <th><?php echo $this->escape($this->translator('Delete')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Id')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Lastname')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Firstname')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Email')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Login')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+        <th><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
     </tr>
     <?php foreach($this->users as $user): ?>
         <tr>
             <td><?php echo $user->getId(); ?></td>
-            <td><?php echo $this->escape($user->getLastname()); ?></td>
-            <td><?php echo $this->escape($user->getFirstname()); ?></td>
-            <td><?php echo $this->escape($user->getEmail()); ?></td>
-            <td><?php echo $this->escape($user->getLogin()); ?></td>
+            <td><?php echo $this->escapeHtml($user->getLastname()); ?></td>
+            <td><?php echo $this->escapeHtml($user->getFirstname()); ?></td>
+            <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
+            <td><?php echo $this->escapeHtml($user->getLogin()); ?></td>
             <td><a href="<?php echo $this->url('userEdit', array('id' => $user->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escape($this->translator('Edit')); ?>" />
+                <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
             </a></td>
             <td><a href="<?php echo $this->url('userDelete', array('id' => $user->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escape($this->translator('Delete')); ?>">
+                <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
             </a></td>
         </tr>
     <?php endforeach; ?>
