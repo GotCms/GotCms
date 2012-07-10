@@ -49,9 +49,9 @@ class Script extends AbstractHelper
         }
 
         $script =  ScriptModel::fromIdentifier($identifier);
-        file_put_contents('gc.script.' . $identifier, $script->getContent());
+        file_put_contents('gc.script://' . $identifier, $script->getContent());
 
-        return include('gc.script.' . $identifier);
+        return include('gc.script://' . $identifier);
 
     }
 }
