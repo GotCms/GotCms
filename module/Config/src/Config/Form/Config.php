@@ -60,7 +60,7 @@ class Config extends AbstractForm
 
         $is_offline = new Element('site_is_offline');
         $is_offline->setAttribute('label', 'Is offline')
-            ->setAttribute('value', '1')
+            ->setAttribute('checkedValue', '1')
             ->setAttribute('type', 'checkbox');
 
         $offline_document = new Element('site_offline_document');
@@ -136,7 +136,7 @@ class Config extends AbstractForm
         $debug_fieldset = new Fieldset('debug');
         $debug_is_active = new Element('debug_is_active');
         $debug_is_active->setAttribute('label', 'Is active')
-            ->setAttribute('type', 'checkbox')
+            ->setAttribute('checkedValue', 'checkbox')
             ->setAttribute('class', 'input-text');
 
         $debug_fieldset->add($debug_is_active);

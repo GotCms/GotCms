@@ -71,7 +71,7 @@ class Install extends AbstractForm
     {
         $accept_license = new Element('accept-license');
         $accept_license->setAttribute('type', 'checkbox')
-            ->setAttribute('value', '1');
+            ->setAttribute('checkedValue', '1');
 
         $input_filter = $this->getInputFilter();
         $inputFilter = $input_filter->add(array(
@@ -163,7 +163,7 @@ class Install extends AbstractForm
 
         $site_is_offline = new Element('site_is_offline');
         $site_is_offline->setAttribute('label', 'Is offline')
-            ->setAttribute('value', '1')
+            ->setAttribute('checkedValue', '1')
             ->setAttribute('type', 'checkbox');
 
         $admin_email = new Element('admin_email');

@@ -67,17 +67,17 @@ class PrevalueEditor extends AbstractPrevalueEditor
             array(
                 'value' => 'maxNumberOfFiles',
                 'label' => 'Is multiple',
-                'selected' => empty($options_values['maxNumberOfFiles']) ? NULL : $options_values['maxNumberOfFiles'],
+                'selected' => empty($options_values['maxNumberOfFiles']) ? FALSE : TRUE,
             ),
             array(
                 'value' => 'title',
                 'label' => 'Has title',
-                'selected' => empty($options_values['maxNumberOfFiles']) ? NULL : $options_values['maxNumberOfFiles'],
+                'selected' => empty($options_values['title']) ? FALSE : TRUE,
             ),
             array(
                 'value' => 'content',
                 'label' => 'has content text',
-                'selected' => empty($options_values['maxNumberOfFiles']) ?  FALSE : TRUE,
+                'selected' => empty($options_values['content']) ?  FALSE : TRUE,
             ),
         ));
         $fieldset->add($element);

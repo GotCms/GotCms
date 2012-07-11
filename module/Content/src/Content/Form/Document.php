@@ -101,24 +101,16 @@ class Document extends AbstractForm
         $status = new Element('status');
         $status->setAttribute('type', 'checkbox')
             ->setAttribute('label', 'Publish')
-            ->setAttribute('value', '1');
-
-        if($document->getStatus() == DocumentModel::STATUS_ENABLE)
-        {
-            $status->setAttribute('checked', 'checked');
-        }
+            ->setAttribute('checkedValue', DocumentModel::STATUS_ENABLE)
+            ->setAttribute('value', $document->getStatus());
 
         $this->add($status);
 
         $show_in_nav = new Element('show_in_nav');
         $show_in_nav->setAttribute('type', 'checkbox')
             ->setAttribute('label', 'Show in nav')
-            ->setAttribute('value', '1');
-
-        if($document->showInNav() == TRUE)
-        {
-            $show_in_nav->setAttribute('checked', 'checked');
-        }
+            ->setAttribute('value', $document->showInNav())
+            ->setAttribute('checkedValue', 1);
 
         $this->add($show_in_nav);
 

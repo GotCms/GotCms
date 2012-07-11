@@ -226,6 +226,7 @@ class DocumentType extends AbstractForm
         $description->setAttribute('type', 'text');
         $required = new Element('required');
         $required->setAttribute('type', 'checkbox');
+        $required->setAttribute('checkedValue', 1);
         $property_id = new Element('property_id');
         $property_id->setAttribute('type', 'hidden');
 

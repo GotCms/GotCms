@@ -117,6 +117,7 @@ class CkEditor extends Object
     {
         $elements = array();
         $items = $this->getAllToolbarItems();
+        $toolbar_items =  $this->getToolbarItems();
         foreach($items as $group)
         {
             if(!empty($group['items']) and is_array($group['items']))
@@ -131,13 +132,13 @@ class CkEditor extends Object
 
                     $element = new Element('toolbar-items['.$item.']');
                     $element->setAttribute('id', 'i' . $group['name'] . $idx_item)
-                        ->setAttribute('value', $item)
+                        ->setAttribute('checkedValue', 1)
                         ->setAttribute('type', 'checkbox')
                         ->setAttribute('label', $item);
 
-                    if(in_array($item, $this->getToolbarItems()))
+                    if(!empty($toolbar_items[$item]))
                     {
-                        $element->setAttribute('checked', 'checked');
+                        $element->setAttribute('value', 1);
                     }
 
                     $fieldset->add($element);
