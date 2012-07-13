@@ -61,7 +61,6 @@ class Script extends AbstractHelper
         file_put_contents('gc.script://' . $identifier, $script->getContent());
 
         return include('gc.script://' . $identifier);
-
     }
 
     /**
