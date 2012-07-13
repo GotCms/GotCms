@@ -33,13 +33,16 @@ use Zend\View\Helper\AbstractHelper,
 
 class Script extends AbstractHelper
 {
+    protected $_params = array();
+
     /**
      * Returns script from identifier.
      *
      * @param string $identifier
+     * @param array $params
      * @return mixte
      */
-    public function __invoke($identifier)
+    public function __invoke($identifier, $params = array())
     {
         $existed = in_array('gc.script', stream_get_wrappers());
         if(!$existed)
@@ -53,9 +56,27 @@ class Script extends AbstractHelper
             return FALSE;
         }
 
+        $this->_params = $params;
+
         file_put_contents('gc.script://' . $identifier, $script->getContent());
 
         return include('gc.script://' . $identifier);
 
+    }
+
+    /**
+     * Returns param from name.
+     *
+     * @param string $name
+     * @return mixte
+     */
+    public function getParam($name)
+    {
+        if(!empty($this->_params[$name]))
+        {
+            return $this->_params[$name];
+        }
+
+        return NULL;
     }
 }
