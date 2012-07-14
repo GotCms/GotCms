@@ -53,19 +53,16 @@ class Config extends AbstractForm
     {
         //General settings
         $general_fieldset = new Fieldset('general');
-        $name = new Element('site_name');
+        $name = new Element\Text('site_name');
         $name->setAttribute('label', 'Site name')
-            ->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text');
 
-        $is_offline = new Element('site_is_offline');
+        $is_offline = new Element\Checkbox('site_is_offline');
         $is_offline->setAttribute('label', 'Is offline')
-            ->setAttribute('checkedValue', '1')
-            ->setAttribute('type', 'checkbox');
+            ->setAttribute('checkedValue', '1');
 
-        $offline_document = new Element('site_offline_document');
-        $offline_document->setAttribute('label', 'Offline document')
-            ->setAttribute('type', 'select');
+        $offline_document = new Element\Select('site_offline_document');
+        $offline_document->setAttribute('label', 'Offline document');
         $document_collection = new Document\Collection();
         $document_collection->load(0);
         $offline_document->setAttribute('options', $document_collection->getSelect());
@@ -106,24 +103,20 @@ class Config extends AbstractForm
     {
         //Session settings
         $session_fieldset = new Fieldset('session');
-        $cookie_domain = new Element('cookie_domain');
+        $cookie_domain = new Element\Text('cookie_domain');
         $cookie_domain->setAttribute('label', 'Cookie domain')
-            ->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text');
 
-        $cookie_path = new Element('cookie_path');
+        $cookie_path = new Element\Text('cookie_path');
         $cookie_path->setAttribute('label', 'Cookie path')
-            ->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text');
 
-        $session_lifetime = new Element('session_lifetime');
+        $session_lifetime = new Element\Text('session_lifetime');
         $session_lifetime->setAttribute('label', 'Session lifetime')
-            ->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text');
 
-        $session_handler = new Element('session_handler');
+        $session_handler = new Element\Select('session_handler');
         $session_handler->setAttribute('label', 'Session handler')
-            ->setAttribute('type', 'select')
             ->setAttribute('options', array('0' => 'Files', '1' => 'Database'));
 
         $session_fieldset->add($cookie_domain);
@@ -134,9 +127,8 @@ class Config extends AbstractForm
 
         //Debug settings
         $debug_fieldset = new Fieldset('debug');
-        $debug_is_active = new Element('debug_is_active');
+        $debug_is_active = new Element\Checkbox('debug_is_active');
         $debug_is_active->setAttribute('label', 'Is active')
-            ->setAttribute('checkedValue', 'checkbox')
             ->setAttribute('class', 'input-text');
 
         $debug_fieldset->add($debug_is_active);
@@ -199,9 +191,8 @@ class Config extends AbstractForm
         );
 
         $locale_fieldset = new Fieldset('locale');
-        $locale = new Element('locale');
-        $locale->setAttribute('type', 'select')
-            ->setAttribute('label', 'Server locale')
+        $locale = new Element\Select('locale');
+        $locale->setAttribute('label', 'Server locale')
             ->setAttribute('options', $locale_list);
 
         $locale_fieldset->add($locale);
@@ -209,14 +200,12 @@ class Config extends AbstractForm
 
         //Mail settings
         $mail_fieldset = new Fieldset('mail');
-        $mail_from = new Element('mail_from');
-        $mail_from->setAttribute('type', 'text')
-            ->setAttribute('label', 'From E-mail')
+        $mail_from = new Element\Text('mail_from');
+        $mail_from->setAttribute('label', 'From E-mail')
             ->setAttribute('class', 'input-text');
 
-        $mail_from_name = new Element('mail_from_name');
-        $mail_from_name->setAttribute('type', 'text')
-            ->setAttribute('label', 'From name')
+        $mail_from_name = new Element\Text('mail_from_name');
+        $mail_from_name->setAttribute('label', 'From name')
             ->setAttribute('class', 'input-text');
 
         $mail_fieldset->add($mail_from);

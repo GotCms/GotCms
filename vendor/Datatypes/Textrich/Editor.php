@@ -56,11 +56,10 @@ class Editor extends AbstractEditor
         $ckeditor->setParameters($parameters);
 
         $id = 'textrich'.$this->_property->getId();
-        $textrich = new Element($this->getName());
+        $textrich = new Element\Textarea($this->getName());
         $textrich->setAttribute('label', $this->_property->getName());
         $textrich->setAttribute('id', $id);
         $textrich->setAttribute('value', $this->_property->getValue());
-        $textrich->setAttribute('type', 'textarea');
 
         $script = '<script type="text/javascript">
             $(function()

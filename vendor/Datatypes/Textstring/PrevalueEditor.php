@@ -50,13 +50,12 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $config = $this->getConfig();
 
-        $length = new Element('length');
+        $length = new Element\Text('length');
         $length->setAttributes(array(
-            'type' => 'text'
-            , 'label' => 'Length'
-            , 'value' => isset($config['length']) ? $config['length'] : ''
-            , 'class' => 'input-text'
-            , 'id' => 'length'
+            'label' => 'Length',
+            'value' => isset($config['length']) ? $config['length'] : '',
+            'class' => 'input-text',
+            'id' => 'length',
         ));
 
         return $length;

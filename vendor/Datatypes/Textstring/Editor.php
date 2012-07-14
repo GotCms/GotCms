@@ -49,7 +49,7 @@ class Editor extends AbstractEditor
     {
         $parameters = $this->getConfig();
         $property = $this->getProperty();
-        $textstring = new Element($this->getName());
+        $textstring = new Element\Text($this->getName());
         $textstring->setAttribute('label', $property->getName());
         $textstring->setAttribute('value', $this->getValue());
         if(!empty($parameters['length']))

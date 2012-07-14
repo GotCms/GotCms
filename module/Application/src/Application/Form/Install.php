@@ -50,9 +50,8 @@ class Install extends AbstractForm
             'en_GB' => 'English',
         );
 
-        $lang = new Element('lang');
+        $lang = new Element\Select('lang');
         $lang->setAttribute('size', 10)
-            ->setAttribute('type', 'select')
             ->setAttribute('options', $country_available);
 
         $input_filter = $this->getInputFilter();
@@ -69,9 +68,8 @@ class Install extends AbstractForm
 
     public function license()
     {
-        $accept_license = new Element('accept-license');
-        $accept_license->setAttribute('type', 'checkbox')
-            ->setAttribute('checkedValue', '1');
+        $accept_license = new Element\Checkbox('accept-license');
+        $accept_license->setAttribute('checkedValue', '1');
 
         $input_filter = $this->getInputFilter();
         $inputFilter = $input_filter->add(array(
@@ -91,27 +89,23 @@ class Install extends AbstractForm
             'pdo_mysql' => 'MySQL'
         );
 
-        $driver = new Element('driver');
-        $driver->setAttribute('type', 'select')
-            ->setAttribute('options', $data)
+        $driver = new Element\Select('driver');
+        $driver->setAttribute('options', $data)
             ->setAttribute('label', 'Driver');
 
-        $hostname = new Element('hostname');
-        $hostname->setAttribute('type', 'text')
-            ->setAttribute('value', 'localhost')
+        $hostname = new Element\Text('hostname');
+        $hostname->setAttribute('value', 'localhost')
             ->setAttribute('label', 'Hostname');
 
-        $username = new Element('username');
+        $username = new Element\Text('username');
         $username->setAttribute('type', 'text')
             ->setAttribute('label', 'Username');
 
-        $password = new Element('password');
-        $password->setAttribute('type', 'password')
-            ->setAttribute('label', 'Password');
+        $password = new Element\Password('password');
+        $password->setAttribute('label', 'Password');
 
-        $dbname = new Element('dbname');
-        $dbname->setAttribute('type', 'text')
-            ->setAttribute('label', 'Db Name');
+        $dbname = new Element\Text('dbname');
+        $dbname->setAttribute('label', 'Db Name');
 
         $this->add($driver);
         $this->add($hostname);
@@ -160,30 +154,25 @@ class Install extends AbstractForm
 
     public function configuration()
     {
-        $site_name = new Element('site_name');
-        $site_name->setAttribute('type', 'text')
-            ->setAttribute('label', 'Site name');
+        $site_name = new Element\Text('site_name');
+        $site_name->setAttribute('label', 'Site name');
 
-        $site_is_offline = new Element('site_is_offline');
+        $site_is_offline = new Element\Checkbox('site_is_offline');
         $site_is_offline->setAttribute('label', 'Is offline')
-            ->setAttribute('checkedValue', '1')
-            ->setAttribute('type', 'checkbox');
+            ->setAttribute('checkedValue', '1');
 
-        $admin_email = new Element('admin_email');
+        $admin_email = new Element\Text('admin_email');
         $admin_email->setAttribute('type', 'text')
             ->setAttribute('label', 'Email');
 
-        $admin_login = new Element('admin_login');
-        $admin_login->setAttribute('type', 'text')
-            ->setAttribute('label', 'Login');
+        $admin_login = new Element\Text('admin_login');
+        $admin_login->setAttribute('label', 'Login');
 
-        $admin_password = new Element('admin_password');
-        $admin_password->setAttribute('type', 'password')
-            ->setAttribute('label', 'Admin password');
+        $admin_password = new Element\Password('admin_password');
+        $admin_password->setAttribute('label', 'Admin password');
 
-        $admin_password_confirm = new Element('admin_passowrd_confirm');
-        $admin_password_confirm->setAttribute('type', 'password')
-            ->setAttribute('label', 'Confirm admin password');
+        $admin_password_confirm = new Element\Password('admin_passowrd_confirm');
+        $admin_password_confirm->setAttribute('label', 'Confirm admin password');
 
         $this->add($site_name);
         $this->add($site_is_offline);

@@ -54,6 +54,9 @@ class Datatype extends AbstractForm
 
         $model->setAttribute('options', $options);
 
+        $this->add(new Element('name'));
+        $this->add($model);
+
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
             'name' => array(
@@ -79,8 +82,5 @@ class Datatype extends AbstractForm
         ));
 
         $this->setInputFilter($inputFilter);
-
-        $this->add(new Element('name'));
-        $this->add($model);
     }
 }

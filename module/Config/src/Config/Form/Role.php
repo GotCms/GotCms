@@ -57,8 +57,8 @@ class Role extends AbstractForm
 
         $this->setInputFilter($inputFilter);
 
-        $this->add(new Element('name'));
-        $this->add(new Element('description'));
+        $this->add(new Element\Text('name'));
+        $this->add(new Element\Text('description'));
     }
 
     /**

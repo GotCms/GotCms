@@ -66,28 +66,25 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $config = $this->getConfig();
 
-        $cols = new Element('cols');
+        $cols = new Element\Text('cols');
         $cols->setAttributes(array(
-            'type' => 'text'
-            , 'label' => 'Cols'
-            , 'value' => isset($config['cols']) ? $config['cols'] : ''
-            , 'class' => 'input-text'
+            'label' => 'Cols',
+            'value' => isset($config['cols']) ? $config['cols'] : '',
+            'class' => 'input-text',
         ));
 
-        $rows = new Element('rows');
+        $rows = new Element\Text('rows');
         $rows->setAttributes(array(
-            'type' => 'text'
-            , 'label' => 'Rows'
-            , 'value' => isset($config['rows']) ? $config['rows'] : ''
-            , 'class' => 'input-text'
+            'label' => 'Rows',
+            'value' => isset($config['rows']) ? $config['rows'] : '',
+            'class' => 'input-text',
         ));
 
-        $wrap = new Element('wrap');
+        $wrap = new Element\Select('wrap');
         $wrap->setAttributes(array(
-            'type' => 'select'
-            , 'label' => 'Wrap'
-            , 'options' => array('hard'=>'hard', 'off'=>'off', 'soft'=>'soft')
-            , 'value' => isset($config['wrap']) ? $config['wrap'] : ''
+            'label' => 'Wrap',
+            'options' => array('hard'=>'hard', 'off'=>'off', 'soft'=>'soft'),
+            'value' => isset($config['wrap']) ? $config['wrap'] : '',
         ));
 
         return array($cols, $rows, $wrap);

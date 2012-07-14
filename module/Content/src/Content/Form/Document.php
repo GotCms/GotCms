@@ -68,24 +68,20 @@ class Document extends AbstractForm
 
         $this->setInputFilter($inputFilter);
 
-        $name = new Element('name');
+        $name = new Element\Text('name');
         $name->setAttribute('label', 'Name')
-            ->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text');
 
-        $url_key = new Element('url_key');
+        $url_key = new Element\Text('url_key');
         $url_key->setAttribute('label', 'Url key')
-            ->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text');
 
         $document_type_collection = new DocumentType\Collection();
-        $document_type = new Element('document_type');
+        $document_type = new Element\Select('document_type');
         $document_type->setAttribute('label', 'Document Type')
-            ->setAttribute('type', 'select')
             ->setAttribute('options', array('' => 'Select document type') + $document_type_collection->getSelect());
 
-        $parent = new Element('parent');
-        $parent->setAttribute('type', 'hidden');
+        $parent = new Element\Hidden('parent');
 
         $this->add($name);
         $this->add($url_key);
@@ -98,35 +94,31 @@ class Document extends AbstractForm
         $this->get('name')->setAttribute('value', $document->getName());
         $this->get('url_key')->setAttribute('value', $document->getUrlKey());
 
-        $status = new Element('status');
-        $status->setAttribute('type', 'checkbox')
-            ->setAttribute('label', 'Publish')
+        $status = new Element\Checkbox('status');
+        $status->setAttribute('label', 'Publish')
             ->setAttribute('checkedValue', DocumentModel::STATUS_ENABLE)
             ->setAttribute('value', $document->getStatus());
 
         $this->add($status);
 
-        $show_in_nav = new Element('show_in_nav');
-        $show_in_nav->setAttribute('type', 'checkbox')
-            ->setAttribute('label', 'Show in nav')
+        $show_in_nav = new Element\Checkbox('show_in_nav');
+        $show_in_nav->setAttribute('label', 'Show in nav')
             ->setAttribute('value', $document->showInNav())
             ->setAttribute('checkedValue', 1);
 
         $this->add($show_in_nav);
 
         $views_collection = new View\Collection();
-        $view = new Element('view');
-        $view->setAttribute('type', 'select')
-            ->setAttribute('options', $views_collection->getSelect())
+        $view = new Element\Select('view');
+        $view->setAttribute('options', $views_collection->getSelect())
             ->setAttribute('value', (string)$document->getViewId())
             ->setAttribute('label', 'View');
 
         $this->add($view);
 
         $layouts_collection = new Layout\Collection();
-        $layout = new Element('layout');
-        $layout->setAttribute('type', 'select')
-            ->setAttribute('options', $layouts_collection->getSelect())
+        $layout = new Element\Select('layout');
+        $layout->setAttribute('options', $layouts_collection->getSelect())
             ->setAttribute('value', (string)$document->getLayoutId())
             ->setAttribute('label', 'Layout');
 

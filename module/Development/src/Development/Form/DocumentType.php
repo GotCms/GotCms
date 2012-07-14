@@ -206,29 +206,22 @@ class DocumentType extends AbstractForm
 
         $fieldsets = $this->getProperties();
 
-        $name = new Element('name');
-        $name->setAttribute('type', 'text');
+        $name = new Element\Text('name');
 
         $identifier = new Element('identifier');
 
-        $tab = new Element('tab');
+        $tab = new Element\Select('tab');
         $tab->setAttribute('class', 'select-tab')
-            ->setAttribute('options', array())
-            ->setAttribute('type', 'select');
+            ->setAttribute('options', array());
 
-        $datatype = new Element('datatype');
+        $datatype = new Element\Select('datatype');
         $datatype->setAttribute('class', 'select-datatype')
-            ->setAttribute('type', 'select')
             ->setAttribute('options', $this->_datatypeCollection->getSelect());
 
-        $description = new Element('description');
-        $description->setAttribute('type', 'text');
-        $required = new Element('required');
-        $required->setAttribute('type', 'checkbox');
+        $description = new Element\Text('description');
+        $required = new Element\Checkbox('required');
         $required->setAttribute('value', 1);
-        $property_id = new Element('property_id');
-        $property_id->setAttribute('type', 'hidden');
-
+        $property_id = new Element\Hidden('property_id');
 
         if($property instanceof Property\Model)
         {
@@ -342,14 +335,11 @@ class DocumentType extends AbstractForm
 
         $fieldsets = $this->getTabs();
 
-        $name = new Element('name');
-        $name->setAttribute('type', 'text');
+        $name = new Element\Text('name');
 
-        $description = new Element('description');
-        $description->setAttribute('type', 'text');
+        $description = new Element\Text('description');
 
-        $tab_id = new Element('tab_id');
-        $tab_id->setAttribute('type', 'hidden');
+        $tab_id = new Element\Hidden('tab_id');
 
         if($tab instanceof Tab\Model)
         {
