@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-cloud",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -10,8 +11,10 @@
             "Zend\\Cloud": ""
         }
     },
+    "target-dir": "Zend/Cloud",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
         "zendframework/zend-service-amazon": "Zend\\Service\\Amazon component",

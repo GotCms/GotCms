@@ -1,5 +1,6 @@
 {
     "name": "zendframework/zend-openid",
+    "description": "provides a simple API for building OpenID-enabled sites and identity providers",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -10,7 +11,9 @@
             "Zend\\OpenId": ""
         }
     },
+    "target-dir": "Zend/OpenId",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "self.version"
     }
 }

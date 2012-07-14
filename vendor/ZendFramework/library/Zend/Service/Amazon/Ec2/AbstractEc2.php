@@ -9,9 +9,11 @@
  */
 
 namespace Zend\Service\Amazon\Ec2;
-use Zend\Crypt\Hmac;
+
 use Zend\Service\Amazon;
 use Zend\Service\Amazon\Ec2\Exception;
+use Zend\Crypt\Hmac;
+use Zend\Http\Client as HttpClient;
 
 /**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API
@@ -72,8 +74,9 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
      * @param  string $region           Sets the AWS Region
      * @return void
      */
-    public function __construct($accessKey=null, $secretKey=null, $region=null)
+    public function __construct($accessKey = null, $secretKey = null, $region = null, HttpClient $httpClient = null)
     {
+        parent::__construct($accessKey, $secretKey, $httpClient);
         if(!$region) {
             $region = self::$_defaultRegion;
         } else {
@@ -84,8 +87,6 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
         }
 
         $this->_region = $region;
-
-        parent::__construct($accessKey, $secretKey);
     }
 
     /**
@@ -176,7 +177,7 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
         $parameters['AWSAccessKeyId']   = $this->_getAccessKey();
         $parameters['SignatureVersion'] = $this->_ec2SignatureVersion;
         $parameters['Timestamp']        = gmdate('Y-m-d\TH:i:s\Z');
-        $parameters['Version']          = $this->_ec2ApiVersion;   
+        $parameters['Version']          = $this->_ec2ApiVersion;
         $parameters['SignatureMethod']  = $this->_ec2SignatureMethod;
         $parameters['Signature']        = $this->signParameters($parameters);
 

@@ -46,8 +46,8 @@ class Install extends AbstractForm
     public function lang()
     {
         $country_available = array(
-            'Français' => 'fr_FR',
-            'English' => 'en_GB',
+            'fr_FR' => 'Français',
+            'en_GB' => 'English',
         );
 
         $lang = new Element('lang');
@@ -86,7 +86,10 @@ class Install extends AbstractForm
 
     public function database()
     {
-        $data = array('PostgreSQL' => 'pdo_pgsql', 'MySQL' => 'pdo_mysql');
+        $data = array(
+            'pdo_pgsql' => 'PostgreSQL',
+            'pdo_mysql' => 'MySQL'
+        );
 
         $driver = new Element('driver');
         $driver->setAttribute('type', 'select')

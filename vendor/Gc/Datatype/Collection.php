@@ -94,7 +94,7 @@ class Collection extends AbstractTable implements IterableInterface
 
         foreach($datatypes as $datatype)
         {
-            $select[$datatype->getName()] = (string)$datatype->getId();
+            $select[$datatype->getId()] = $datatype->getName();
         }
 
         return $select;

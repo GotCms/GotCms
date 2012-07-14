@@ -73,7 +73,7 @@ class FormErrors extends AbstractHelper
         }
 
         if ($escape) {
-            $escaper = $this->view->plugin('escape');
+            $escaper = $this->view->plugin('escapeHtml');
             foreach ($errors as $key => $error) {
                 $errors[$key] = $escaper($error);
             }
@@ -165,7 +165,7 @@ class FormErrors extends AbstractHelper
     protected function _htmlAttribs($attribs)
     {
         $xhtml   = '';
-        $escaper = $this->view->plugin('escape');
+        $escaper = $this->view->plugin('escapeHtml');
         foreach ((array) $attribs as $key => $val) {
             $key = $escaper($key);
 

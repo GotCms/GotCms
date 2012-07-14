@@ -108,7 +108,10 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         $startnum  = $this->getStartLine($includeDocBlock);
         $endnum    = $this->getEndLine() - $this->getStartLine();
 
-        return implode('', array_splice($filelines, $startnum, $endnum, true));
+        // Ensure we get between the open and close braces
+        $lines = array_slice($filelines, $startnum, $endnum);
+        array_unshift($lines, $filelines[$startnum-1]);
+        return strstr(implode('', $lines), '{');
     }
 
     /**
@@ -160,7 +163,7 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     /**
      * Get parent reflection class of reflected class
      *
-     * @return \Zend\Code\Reflection\ReflectionClass
+     * @return \Zend\Code\Reflection\ClassReflection|bool
      */
     public function getParentClass()
     {
@@ -169,9 +172,9 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
             $zendReflection = new ClassReflection($phpReflection->getName());
             unset($phpReflection);
             return $zendReflection;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

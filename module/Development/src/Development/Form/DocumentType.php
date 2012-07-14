@@ -220,13 +220,12 @@ class DocumentType extends AbstractForm
         $datatype->setAttribute('class', 'select-datatype')
             ->setAttribute('type', 'select')
             ->setAttribute('options', $this->_datatypeCollection->getSelect());
-            //->setRequired(TRUE);
 
         $description = new Element('description');
         $description->setAttribute('type', 'text');
         $required = new Element('required');
         $required->setAttribute('type', 'checkbox');
-        $required->setAttribute('checkedValue', 1);
+        $required->setAttribute('value', 1);
         $property_id = new Element('property_id');
         $property_id->setAttribute('type', 'hidden');
 
@@ -238,7 +237,7 @@ class DocumentType extends AbstractForm
             $tab->setAttribute('value', $property->getTabId());
             $datatype->setAttribute('value', $property->getDatatypeId());
             $description->setAttribute('value', $property->getDescription());
-            $required->setAttribute('value', $property->isRequired());
+            $required->setAttribute('checkedValue', $property->isRequired());
             $property_id->setAttribute('value', $property->getId());
             $property_fieldset_name = $property->getId();
         }
@@ -249,7 +248,7 @@ class DocumentType extends AbstractForm
             $tab->setAttribute('value', $property['tab']);
             $datatype->setAttribute('value', $property['datatype']);
             $description->setAttribute('value', $property['description']);
-            $required->setAttribute('value', !empty($property['is_required']));
+            $required->setAttribute('checkedValue', !empty($property['is_required']));
             $property_id->setAttribute('value', str_replace('property', '', $property['id']));
             $property_fieldset_name = $property['id'];
         }

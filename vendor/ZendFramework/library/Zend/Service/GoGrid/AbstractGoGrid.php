@@ -22,32 +22,38 @@ abstract class AbstractGoGrid
     const AUTHENTICATION_FAILED  = 403;
     const NOT_FOUND_ERROR        = 404;
     const UNEXPECTED_ERROR       = 500;
+
     /**
      * GoGrid API key
      *
      * @var string
      */
-    protected $_apiKey;
+    protected $apiKey;
+
     /**
      * GoGrid secret
-     * 
-     * @var string 
+     *
+     * @var string
      */
-    protected $_secret;
+    protected $secret;
+
     /**
      * GoGrid API version
      *
      * @var string
      */
-    protected $_apiVersion = self::VERSION_API;
+    protected $apiVersion = self::VERSION_API;
+
     /**
      * @var HttpClient
      */
-    protected $_httpClient;
+    protected $httpClient;
+
     /**
-     * @var Zend\Http\Response
+     * @var \Zend\Http\Response
      */
-    protected $_lastResponse;
+    protected $lastResponse;
+
     /**
      * Construct
      *
@@ -55,7 +61,7 @@ abstract class AbstractGoGrid
      * @param string $secret
      * @param string $apiVer
      */
-    public function __construct($key, $secret, $apiVer = null)
+    public function __construct($key, $secret, $apiVer = null, HttpClient $httpClient = null)
     {
         if (!isset($key)) {
             throw new Exception\InvalidArgumentException("The key cannot be empty");
@@ -66,30 +72,37 @@ abstract class AbstractGoGrid
         $this->setApiKey($key);
         $this->setSecret($secret);
         $this->setApiVersion($apiVer);
+        $this->setHttpClient($httpClient ?: new HttpClient);
     }
+
+    public function setHttpClient(HttpClient $httpClient)
+    {
+        $this->httpClient = $httpClient;
+        return $this;
+    }
+
     /**
      * get the HttpClient static instance
-     * 
+     *
      * @return HttpClient
      */
     public function getHttpClient()
     {
-        if (empty($this->_httpClient)) {
-            $this->_httpClient = new HttpClient();
-        }
-        return $this->_httpClient;
+        return $this->httpClient;
     }
+
     /**
      * Set the API secret
-     * 
-     * @param string $secret 
+     *
+     * @param string $secret
      */
     public function setSecret($secret)
     {
         if (!empty($secret)) {
-            $this->_secret = (string) $secret;
+            $this->secret = (string) $secret;
         }
     }
+
     /**
      * Set the API key
      *
@@ -98,9 +111,10 @@ abstract class AbstractGoGrid
     public function setApiKey($key)
     {
         if (!empty($key)) {
-            $this->_apiKey = (string) $key;
+            $this->apiKey = (string) $key;
         }
     }
+
     /**
      * Set the API version
      *
@@ -109,18 +123,20 @@ abstract class AbstractGoGrid
     public function setApiVersion($ver)
     {
         if (!empty($ver) && $ver < self::VERSION_API) {
-            $this->_apiVersion = $ver;
+            $this->apiVersion = $ver;
         }
     }
+
     /**
      * Get the API version
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getApiVersion()
     {
-        return $this->_apiVersion;
+        return $this->apiVersion;
     }
+
     /**
      * Compute the signature for the API call
      * This signature is valid in a window of 10 min with the localtime of the server
@@ -129,8 +145,9 @@ abstract class AbstractGoGrid
      */
     private function _computeSignature()
     {
-        return md5($this->_apiKey . $this->_secret . time());
+        return md5($this->apiKey . $this->secret . time());
     }
+
     /**
      *
      * @param string $method
@@ -143,14 +160,14 @@ abstract class AbstractGoGrid
             throw new Exception\InvalidArgumentException("The options must be an array");
         }
         $client = $this->getHttpClient();
-        
+
         $paramGet= array (
             'format'  => self::FORMAT_API,
-            'api_key' => $this->_apiKey,
+            'api_key' => $this->apiKey,
             'sig'     => $this->_computeSignature(),
-            'v'       => $this->_apiVersion
+            'v'       => $this->apiVersion
         );
-        
+
         if (!empty($options)) {
             $get='';
             foreach ($options as $key=>$value) {
@@ -164,16 +181,17 @@ abstract class AbstractGoGrid
             }
         }
         $client->setParameterGet($paramGet);
-        
+
         if (!empty($get)) {
             $client->setUri(self::URL_API . $method.'?'.$get);
         } else {
             $client->setUri(self::URL_API . $method);
         }
-        
-        $this->_lastResponse = $client->send();
-        return json_decode($this->_lastResponse->getBody(), true);
+
+        $this->lastResponse = $client->send();
+        return json_decode($this->lastResponse->getBody(), true);
     }
+
     /**
      * Get the last HTTP response
      *
@@ -183,22 +201,25 @@ abstract class AbstractGoGrid
     {
         return $this->getHttpClient()->getLastRawResponse();
     }
+
     /**
      * Get the last HTTP request
-     * 
+     *
      * @return string
      */
     public function getLastRequest()
     {
         return $this->getHttpClient()->getLastRawRequest();
     }
+
     /**
      * Get the last error type
-     * 
+     *
      * @return integer
      */
     public function getHttpStatus()
     {
-        return $this->_lastResponse->getStatusCode();
+        return $this->lastResponse->getStatusCode();
     }
+
 }

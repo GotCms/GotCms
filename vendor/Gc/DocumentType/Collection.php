@@ -78,7 +78,7 @@ class Collection extends AbstractTable implements IterableInterface
 
         foreach($document_types as $document_type)
         {
-            $select[$document_type->getName()] = (string)$document_type->getId();
+            $select[$document_type->getId()] = $document_type->getName();
         }
 
         return $select;

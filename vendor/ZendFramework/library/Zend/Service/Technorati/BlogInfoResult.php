@@ -79,7 +79,7 @@ class BlogInfoResult
                 // fetched URL often doens't include schema
                 // and this issue causes the following line to fail
                 $this->url = Utils::normalizeUriHttp($result->item(0)->data);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 if ($this->getWeblog() instanceof Weblog) {
                     $this->url = $this->getWeblog()->getUrl();
                 }
@@ -100,7 +100,7 @@ class BlogInfoResult
      *
      * @return  \Zend\Uri\Http
      */
-    public function getUrl() 
+    public function getUrl()
     {
         return $this->url;
     }
@@ -110,7 +110,7 @@ class BlogInfoResult
      *
      * @return  Weblog
      */
-    public function getWeblog() 
+    public function getWeblog()
     {
         return $this->weblog;
     }

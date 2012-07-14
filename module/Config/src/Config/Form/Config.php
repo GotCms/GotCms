@@ -124,7 +124,7 @@ class Config extends AbstractForm
         $session_handler = new Element('session_handler');
         $session_handler->setAttribute('label', 'Session handler')
             ->setAttribute('type', 'select')
-            ->setAttribute('options', array('Files' => '0', 'Database' => '1'));
+            ->setAttribute('options', array('0' => 'Files', '1' => 'Database'));
 
         $session_fieldset->add($cookie_domain);
         $session_fieldset->add($cookie_path);
@@ -194,8 +194,8 @@ class Config extends AbstractForm
     {
         //Local settings
         $locale_list = array(
-            'Français' => 'fr_FR',
-            'English' => 'en_GB',
+            'fr_FR' => 'Français',
+            'en_GB' => 'English',
         );
 
         $locale_fieldset = new Fieldset('locale');

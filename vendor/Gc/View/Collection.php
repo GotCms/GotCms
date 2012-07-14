@@ -98,7 +98,7 @@ class Collection extends AbstractTable implements IterableInterface
 
         foreach($views as $view)
         {
-            $select[$view->getName()] = (string)$view->getId();
+            $select[$view->getId()] = $view->getName();
         }
 
         return $select;

@@ -24,22 +24,22 @@ class ClassMethods implements HydratorInterface
      * @var boolean
      */
     protected $underscoreSeparatedKeys;
-    
+
     /**
      * Define if extract values will use camel case or name with underscore
-     * @param boolean $underscoreSeparatedKeys 
+     * @param boolean $underscoreSeparatedKeys
      */
     public function __construct($underscoreSeparatedKeys = true)
     {
         $this->underscoreSeparatedKeys = $underscoreSeparatedKeys;
     }
-    
+
     /**
      * Extract values from an object with class methods
      *
      * Extracts the getter/setter of the given $object.
-     * 
-     * @param  object $object 
+     *
+     * @param  object $object
      * @return array
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -51,9 +51,8 @@ class ClassMethods implements HydratorInterface
                 __METHOD__
             ));
         }
-        
-        $transform = function($letters)
-        {
+
+        $transform = function($letters) {
             $letter = array_shift($letters);
             return '_' . strtolower($letter);
         };
@@ -72,23 +71,10 @@ class ClassMethods implements HydratorInterface
                     $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
                 }
 
-                $result = $object->$method();
-
-                // Recursively extract if object contains itself other objects or arrays of objects
-                if (is_object($result)) {
-                    $result = $this->extract($result);
-                } elseif (is_array($result)) {
-                    foreach ($result as $key => $value) {
-                        if (is_object($value)) {
-                            $result[$key] = $this->extract($value);
-                        }
-                    }
-                }
-
-                $attributes[$attribute] = $result;
+                $attributes[$attribute] = $object->$method();
             }
         }
-        
+
         return $attributes;
     }
 
@@ -96,9 +82,9 @@ class ClassMethods implements HydratorInterface
      * Hydrate an object by populating getter/setter methods
      *
      * Hydrates an object by getter/setter methods of the object.
-     * 
-     * @param  array $data 
-     * @param  object $object 
+     *
+     * @param  array $data
+     * @param  object $object
      * @return object
      * @throws Exception\BadMethodCallException for a non-object $object
      */
@@ -110,9 +96,8 @@ class ClassMethods implements HydratorInterface
                 __METHOD__
             ));
         }
-        
-        $transform = function($letters)
-        {   
+
+        $transform = function($letters) {
             $letter = substr(array_shift($letters), 1, 1);
             return ucfirst($letter);
         };

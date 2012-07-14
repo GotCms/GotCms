@@ -80,7 +80,7 @@ class Collection extends AbstractTable implements IterableInterface
 
         foreach($layouts as $layout)
         {
-            $select[$layout->getName()] = (string)$layout->getId();
+            $select[$layout->getId()] = $layout->getName();
         }
 
         return $select;

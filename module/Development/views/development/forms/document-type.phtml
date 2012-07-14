@@ -80,7 +80,7 @@
                 <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
                 <?php $default_view = $views_form->get('default_view'); ?>
                 <?php $default_view_option = $default_view->getAttribute('options'); ?>
-                <?php foreach($default_view_option as $option_value => $option_id): ?>
+                <?php foreach($default_view_option as $option_id => $option_value): ?>
                     <option value="<?php echo $option_id; ?>"<?php if($default_view->getAttribute('value') == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
                 <?php endforeach; ?>
             </select>
@@ -96,7 +96,7 @@
             <select name="views[available_views]" id="views-available_views" multiple="multiple">
                 <?php $available_views = $views_form->get('available_views'); ?>
                 <?php $default_view_option = $available_views->getAttribute('options'); ?>
-                <?php foreach($default_view_option as $option_value => $option_id): ?>
+                <?php foreach($default_view_option as $option_id => $option_value): ?>
                     <option value="<?php echo $option_id; ?>"<?php if($available_views->getAttribute('value') == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
                 <?php endforeach; ?>
             </select>
@@ -140,7 +140,7 @@
             <select name="properties[datatype]" id="properties-datatype" class="select-datatype">
                 <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
                 <?php $datatypes_options = $this->form->get('properties')->get('datatypes')->getAttribute('options'); ?>
-                <?php foreach($datatypes_options as $datatype_name => $datatype_id): ?>
+                <?php foreach($datatypes_options as $datatype_id => $datatype_name): ?>
                     <option value="<?php echo $datatype_id; ?>"><?php echo $this->escapeHtml($datatype_name); ?> </option>
                 <?php endforeach; ?>
             </select>
@@ -213,7 +213,7 @@
                                     <dd>
                                         <select class="select-datatype" id="properties-datatype-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][datatype]">
                                             <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
-                                            <?php foreach($datatypes_options as $datatype_name => $datatype_id): ?>
+                                            <?php foreach($datatypes_options as $datatype_id => $datatype_name): ?>
                                                 <option value="<?php echo $datatype_id; ?>"<?php if($datatype_id == $property->get('datatype')->getAttribute('value')): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($datatype_name); ?> </option>
                                             <?php endforeach; ?>
                                         </select>
@@ -235,7 +235,11 @@
                                         <label class="optional" for="properties-required-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Required')); ?></label>
                                     </dt>
                                     <dd>
-                                        <input type="checkbox" value="<?php echo $property->get('required')->getAttribute('value'); ?>" id="properties-required-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][required]">
+                                        <?php
+                                            $value = $property->get('required')->getAttribute('value');
+                                            $checkedValue = $property->get('required')->getAttribute('checkedValue');
+                                        ?>
+                                        <input<?php if($value == $checkedValue):?> checked="checked"<?php endif; ?> type="checkbox" value="<?php echo $value; ?>" id="properties-required-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][required]">
 
                                         <?php if(!empty($errors['properties'][$property_form_id]['required'])): ?>
                                             <?php echo $this->formErrors($errors['properties'][$property_form_id]['required']); ?>
