@@ -158,8 +158,7 @@ ALTER TABLE "tab" ADD CONSTRAINT "tab_pk" PRIMARY KEY("id");
 DROP TABLE IF EXISTS "core_translate" CASCADE;
 CREATE TABLE "core_translate" (
 "id" serial NOT NULL,
-"source" character varying NOT NULL,
-"hash" character varying NOT NULL
+"source" character varying NOT NULL
 ) WITH OIDS;
 ALTER TABLE "core_translate" ADD CONSTRAINT "core_translate_pk" PRIMARY KEY("id");
 
@@ -168,7 +167,6 @@ CREATE TABLE "core_translate_locale" (
 "id" serial NOT NULL,
 "destination" character varying NOT NULL,
 "locale" character varying NOT NULL,
-"hash" character varying NOT NULL,
 "core_translate_id" integer NOT NULL
 ) WITH OIDS;
 ALTER TABLE "core_translate_locale" ADD CONSTRAINT "core_translate_locale_pk" PRIMARY KEY("id");

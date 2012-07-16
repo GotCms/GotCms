@@ -1,0 +1,83 @@
+<?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Design
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
+
+?>
+<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
+    <div>
+        <label for="source">
+            <?php echo $this->escapeHtml($this->translate('Source')); ?>
+        </label>
+        <?php echo $this->formElement($this->form->get('source')); ?>
+    </div>
+
+    <div id="destinations">
+        <?php $i = 0; ?>
+        <table id="table-trad">
+            <colgroup>
+                <col width="525">
+                <col width="159">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th><?php echo $this->escapeHtml($this->translate('Destination')); ?></th>
+                    <th><?php echo $this->escapeHtml($this->translate('Locale')); ?></th>
+                    <th><?php echo $this->escapeHtml($this->translate('Add')); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div>
+                            <input type="text" name="destination[<?php echo $i; ?>]" size="73">
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <?php $locales = $this->form->get('locale')->getAttribute('options'); ?>
+                            <select name="locale[<?php echo $i; ?>]">
+                                <?php foreach($locales as $locale_value => $locale_label): ?>
+                                    <option value="<?php echo $this->escapeHtml($locale_value); ?>"><?php echo $this->escapeHtml($locale_label); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </td>
+                    <td><span class="button-add add-translate"><?php echo $this->escapeHtml($this->translate('Add')); ?></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
+</form>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    Gc.setOption('locale', $.parseJSON('<?php echo $this->json($locales); ?>'));
+    Gc.initTranslator();
+});
+</script>

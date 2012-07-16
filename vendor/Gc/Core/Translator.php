@@ -28,23 +28,24 @@
 namespace Gc\Core;
 
 use Gc\Db\AbstractTable,
+    Zend\Db\Sql\Select,
     Zend\Db\Sql\Where;
 
-class Config extends AbstractTable
+class Translator extends AbstractTable
 {
     /**
      * @var string
      */
-    protected $_name = 'core_config_data';
+    protected $_name = 'core_translate';
 
     /**
-     * @var \Gc\Core\Config $_instance
+     * @var \Gc\Core\Translator $_instance
      */
     static protected $_instance = NULL;
 
     /**
-     * Get instance of \Gc\Core\Config
-     * @return \Gc\Core\Config
+     * Get instance of \Gc\Core\Translator
+     * @return \Gc\Core\Translator
      */
     public static function getInstance()
     {
@@ -62,10 +63,26 @@ class Config extends AbstractTable
      * @param optional $field, database field, by default 'identifier'
      * @return string value
      */
-    static function getValue($data, $field = 'identifier')
+    static function getValue($source, $locale = NULL)
     {
         $instance = self::getInstance();
-        $row = $instance->select(array($field => $data));
+        $select = new Select();
+        $select->from($this->_name)
+        ->columns(array())
+        ->join('core_translate_locale', 'core_translate.id = core_translate_locale.core_translate_id', '*', Select::JOIN_INNER);
+
+        if(!empty($source))
+        {
+            $select->where(array('core_translate.source' => $source));
+        }
+
+        if(!empty($locale))
+        {
+            $select->where(array('core_translate_locale.locale' => $locale));
+        }
+
+        $rows = $this->fetchAll($select);
+        $row = $instance->select(array('source' => $source));
         $current = $row->current();
         if(!empty($current))
         {
@@ -79,10 +96,10 @@ class Config extends AbstractTable
      * Return all values from core_config_data
      * @return array
      */
-    static function getValues()
+    static function getValues($locale)
     {
         $instance = self::getInstance();
-        $rows = $instance->select();
+        $rows = $instance->select(array('locale' => $locale));
         if(!empty($rows))
         {
             return $rows->toArray();
@@ -97,13 +114,8 @@ class Config extends AbstractTable
      * @param string $value
      * @return boolean
      */
-    static function setValue($identifier, $value)
+    static function setValue($source, $locale, $destinations)
     {
-        if(empty($identifier))
-        {
-            return FALSE;
-        }
-
         $instance = self::getInstance();
         $row = $instance->select(array('identifier' => $identifier));
         if(!empty($row))

@@ -150,6 +150,7 @@ class Action extends AbstractActionController
             ->appendFile('/js/libs/codemirror/mode/php/php.js', 'text/javascript')
             ->appendFile('/js/libs/jquery.jstree.js', 'text/javascript')
             ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
+            ->appendFile('/js/generic-classes.js', 'text/javascript')
             ->appendFile('/js/gotcms.js', 'text/javascript');
 
         $headlink = $helper_broker->get('HeadLink');

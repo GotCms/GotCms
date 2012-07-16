@@ -15,17 +15,17 @@ var Gc = (function($)
     return {
         initialize: function()
         {
-            this._options = {};
+            this._options = new Hash();
         },
 
         setOption: function($key, $value)
         {
-            this._options[$key] = $value;
+            this._options.set($key, $value);
         },
 
         getOption: function($key)
         {
-            return this._options[$key];
+            return this._options.get($key);
         },
 
         setHtmlMessage: function($message)
@@ -168,7 +168,7 @@ var Gc = (function($)
                             else
                             {
                                 $this.setHtmlMessage('');
-                                $c = '<dl>'
+                                $c = new Template('<dl>'
                                         +'<dt id="name-label-#{tab}-#{id}">'
                                             +'<label class="optional" for="properties-name-#{tab}-#{id}">Name</label>'
                                         +'</dt>'
@@ -201,18 +201,14 @@ var Gc = (function($)
                                             +'<input type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">'
                                             +'<button type="button" value="#{id}" class="delete-property">delete</button>'
                                         +'</dd>'
-                                    +'</dl>';
+                                    +'</dl>');
 
-                                $.each($data, function($key, $value)
-                                {
-                                    $regexp = new RegExp('#{'+$key+'}', 'ig');
-                                    $c = $c.replace($regexp, $value);
-                                });
+                                $c = $c.evaluate($data);
 
                                 $('#tabs-properties-'+$tab.val()).find('ul').append('<li>'+$c+'</li>');
                                 $('#properties-tab-'+$data.tab+'-'+$data.id).html($('#properties-tab').html()).val($data.tab);
                                 $('#properties-datatype-'+$data.tab+'-'+$data.id).html($('#properties-datatype').html()).val($data.datatype);
-                                $('#properties-required-'+$data.tab+'-'+$data.id).attr('checked', $isRequired.val());
+                                $('#properties-required-'+$data.tab+'-'+$data.id).prop('checked', $isRequired.prop('checked'));
                             }
                         }
                     );
@@ -255,6 +251,7 @@ var Gc = (function($)
                     {
                         $routes = $this.getOption('routes');
                         $url = $routes[$action];
+                        $id = '';
 
                         if($element.attr('rel') != undefined)
                         {
@@ -323,6 +320,46 @@ var Gc = (function($)
                         return false;
                     }
                 }
+            });
+        },
+
+        initTranslator: function()
+        {
+            $idx = 1;
+            $destinations = $('#destinations');
+            $template = '<tr>' +
+                    '<td>' +
+                        '<div>' +
+                            '<input type="text" name="destination[#{id}]" size="73">' +
+                        '</div>' +
+                    '</td>' +
+                    '<td>' +
+                        '<div>' +
+                            '<select name="locale[#{id}]">';
+                                $.each(this.getOption('locale'), function(key, value)
+                                {
+                                    $template += '<option value="'+key+'">'+value+'</option>';
+                                });
+
+                                $template += '<?php endforeach; ?>' +
+                            '</select>' +
+                        '</div>' +
+                    '</td>' +
+                    '<td><span class="button-add add-translate">'+Translate.translate('Add')+'</span></td>' +
+                '</tr>';
+
+            $document.on('click', '.add-translate', function()
+            {
+                $t = new Template($template);
+                $table_trad = $('#table-trad');
+                $table_trad.find('.add-translate').removeClass('add-translate').addClass('delete-translate').html(Translate.translate('Delete'));
+                $table_trad.children('tbody').append($t.evaluate({id: $idx}));
+                $idx++;
+            });
+
+            $document.on('click', '.delete-translate', function()
+            {
+                $(this).parent().parent('tr').remove();
             });
         }
     };

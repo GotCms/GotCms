@@ -52,7 +52,11 @@ class Module
          * @TODO translator
             ->addTranslationPattern($translator);
          */
-        $e->getApplication()->getServiceManager()->get('translator');
+        if(!\Gc\Registry::isRegistered('Translator'))
+        {
+            $translator = $e->getApplication()->getServiceManager()->get('translator');
+            \Gc\Registry::set('Translator', $translator);
+        }
     }
 
     /**
@@ -126,7 +130,7 @@ class Module
      */
     public function init(ModuleManager $module_manager)
     {
-        if(self::$_globalConfig === NULL)
+        if(!\Gc\Registry::isRegistered('Configuration'))
         {
             $config_paths = $module_manager->getEvent()->getConfigListener()->getOptions()->getConfigGlobPaths();
             if(!empty($config_paths))
@@ -143,7 +147,7 @@ class Module
                 if(!empty($config))
                 {
                     $db_adapter = new DbAdapter($config['db']);
-                    self::$_globalConfig = $config;
+                    \Gc\Registry::set('Configuration', $config);
                     \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
                 }
             }

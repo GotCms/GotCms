@@ -30,6 +30,7 @@ return array(
             'ContentController' => 'Content\Controller\IndexController',
             'DocumentController' => 'Content\Controller\DocumentController',
             'MediaController' => 'Content\Controller\MediaController',
+            'TranslationController' => 'Content\Controller\TranslationController',
         ),
     ),
     'view_manager' => array(

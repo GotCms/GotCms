@@ -27,17 +27,17 @@
 
 ?>
 <form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
-        <?php $elements = $this->form->getElements(); ?>
-        <?php foreach($elements as $element): ?>
-            <div>
-                <?php $label = $element->getAttribute('label'); ?>
-                <?php if(!empty($label)): ?>
-                    <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
-                <?php endif; ?>
+    <?php $elements = $this->form->getElements(); ?>
+    <?php foreach($elements as $element): ?>
+        <div>
+            <?php $label = $element->getAttribute('label'); ?>
+            <?php if(!empty($label)): ?>
+                <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+            <?php endif; ?>
 
-                <?php echo $this->formElement($element); ?>
-            </div>
-        <?php endforeach; ?>
+            <?php echo $this->formElement($element); ?>
+        </div>
+    <?php endforeach; ?>
     <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
 </form>
 <script type="text/javascript">

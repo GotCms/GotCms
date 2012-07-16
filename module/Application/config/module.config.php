@@ -46,12 +46,6 @@ return array(
         'doctype'                   => 'HTML5',
         'not_found_template'        => 'error/404',
         'exception_template'        => 'error/index',
-        'Zend\View\HelperPluginManager' => array(
-            'formErrors' => 'Gc\View\Helper\FormErrors',
-            'documents' => 'Gc\View\Helper\Documents',
-            'document' => 'Gc\View\Helper\Document',
-            'script' => 'Gc\View\Helper\Script',
-        ),
         'template_map' => array(
             'layout/layout'     => __DIR__ . '/../views/layouts/layout.phtml',
             'error/404'         => __DIR__ . '/../views/error/404.phtml',
