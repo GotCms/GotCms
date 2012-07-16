@@ -39,36 +39,19 @@ class Collection extends AbstractTable implements IterableInterface
     protected $_name = 'script';
 
     /**
-     * Initiliaze collection
-     * @param optional integer $document_type_id
-     * @return void
-     */
-    public function init($document_type_id = NULL)
-    {
-        $this->setDocumentTypeId($document_type_id);
-        $this->getScripts(TRUE);
-    }
-
-    /**
      * Get scripts
      * @param boolean $force_reload to initiliaze scripts
      * @return array
      */
-    private function getScripts($force_reload = FALSE)
+    public function getScripts($force_reload = FALSE)
     {
-        if($force_reload)
+        if($force_reload or $this->getData('scripts') === NULL)
         {
-            $select = new Select();
-            $select->order(array('name'));
-            $select->from('script');
-
-            if($this->getDocumentTypeId() !== NULL)
+            $rows = $this->select(function(Select $select)
             {
-                $select->join('document_type_script', 'document_type_script.script_id = script.id');
-                $select->where(sprintf('document_type_script.document_type_id = %s', $this->getDocumentTypeId()));
-            }
+                $select->order('name ASC');
+            });
 
-            $rows = $this->fetchAll($select);
             $scripts = array();
             foreach($rows as $row)
             {
@@ -79,50 +62,6 @@ class Collection extends AbstractTable implements IterableInterface
         }
 
         return $this->getData('scripts');
-    }
-
-    /**
-     * get all elements store in $_scripts_elements
-     * @return array
-     */
-    public function getElements()
-    {
-        return $this->_scripts_elements;
-    }
-
-    /**
-     * Save properties
-     * @return boolean
-     */
-    public function save()
-    {
-        if(!empty($this->_data['document_type_id']))
-        {
-            $this->delete();
-            foreach($this->getElements() as $script)
-            {
-                $this->getSqlInsert()->into('document_type_scripts')->values(array('document_type_id' => $this->getDocumentTypeId(), 'script_id' => $script->getId()));
-            }
-
-            return TRUE;
-        }
-
-        return FALSE;
-    }
-
-    /**
-     * delete properties
-     * @return boolean
-     */
-    public function delete()
-    {
-        if(!empty($this->_data['document_type_id']))
-        {
-            $this->getApdater()->delete('document_type_scripts', 'document_type_id = '.$this->getDocumentTypeId());
-            return TRUE;
-        }
-
-        return FALSE;
     }
 
     /* (non-PHPdoc)
