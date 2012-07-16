@@ -28,7 +28,8 @@
 namespace Gc\Document;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+    Gc\Component\IterableInterface,
+    Zend\Db\Sql\Select;
 
 class Collection extends AbstractTable implements IterableInterface
 {
@@ -61,11 +62,19 @@ class Collection extends AbstractTable implements IterableInterface
 
         if(!empty($parent_id))
         {
-            $rows = $this->select(array('parent_id = ? ' => $this->getParentId()));
+            $rows = $this->select(function(Select $select)
+            {
+                $select->where->equalTo('parent_id', $this->getParentId());
+                $select->order('name ASC');
+            });
         }
         else
         {
-            $rows = $this->select('parent_id IS NULL');
+            $rows = $this->select(function(Select $select)
+            {
+                $select->where->isNull('parent_id');
+                $select->order('name ASC');
+            });
         }
 
         $documents = array();
