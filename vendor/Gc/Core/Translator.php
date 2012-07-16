@@ -67,9 +67,9 @@ class Translator extends AbstractTable
     {
         $instance = self::getInstance();
         $select = new Select();
-        $select->from($this->_name)
-        ->columns(array())
-        ->join('core_translate_locale', 'core_translate.id = core_translate_locale.core_translate_id', '*', Select::JOIN_INNER);
+        $select->from('core_translate')
+            ->columns(array('source'))
+            ->join('core_translate_locale', 'core_translate.id = core_translate_locale.core_translate_id', '*', Select::JOIN_INNER);
 
         if(!empty($source))
         {
@@ -81,12 +81,10 @@ class Translator extends AbstractTable
             $select->where(array('core_translate_locale.locale' => $locale));
         }
 
-        $rows = $this->fetchAll($select);
-        $row = $instance->select(array('source' => $source));
-        $current = $row->current();
+        $current = $instance->fetchRow($select);
         if(!empty($current))
         {
-            return $current['value'];
+var_dump('test');
         }
 
         return NULL;
@@ -117,7 +115,7 @@ class Translator extends AbstractTable
     static function setValue($source, $locale, $destinations)
     {
         $instance = self::getInstance();
-        $row = $instance->select(array('identifier' => $identifier));
+        $row = $instance->select(array('source' => $source))->current();
         if(!empty($row))
         {
             $where = new Where();

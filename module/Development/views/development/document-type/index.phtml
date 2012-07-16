@@ -28,7 +28,6 @@
 ?>
 <table>
     <tr>
-        <th><?php echo $this->escapeHtml($this->translate('Id')); ?></th>
         <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
         <th><?php echo $this->escapeHtml($this->translate('Identifier')); ?></th>
         <th><?php echo $this->escapeHtml($this->translate('Description')); ?></th>
@@ -37,7 +36,6 @@
     </tr>
     <?php foreach($this->documents as $document): ?>
         <tr>
-            <td><?php echo $document->getId(); ?></td>
             <td><?php echo $this->escapeHtml($document->getName()); ?></td>
             <td><?php echo $this->escapeHtml($document->getIdentifier()); ?></td>
             <td><?php echo $this->escapeHtml($document->getDescription()); ?></td>

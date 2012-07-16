@@ -28,7 +28,8 @@
 namespace Gc\Layout;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+    Gc\Component\IterableInterface,
+    Zend\Db\Sql\Select;
 
 class Collection extends AbstractTable implements IterableInterface
 {
@@ -52,7 +53,11 @@ class Collection extends AbstractTable implements IterableInterface
      */
     private function setLayouts()
     {
-        $rows = $this->select();
+        $rows = $this->select(function (Select $select)
+        {
+            $select->order('name ASC');
+        });
+
         //$select->order(array('name ASC'));
         $layout = array();
         foreach($rows as $row)

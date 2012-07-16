@@ -82,10 +82,10 @@ class Config extends AbstractTable
     static function getValues()
     {
         $instance = self::getInstance();
-        $rows = $instance->select();
+        $rows = $instance->select()->toArray();
         if(!empty($rows))
         {
-            return $rows->toArray();
+            return $rows;
         }
 
         return NULL;
@@ -105,7 +105,7 @@ class Config extends AbstractTable
         }
 
         $instance = self::getInstance();
-        $row = $instance->select(array('identifier' => $identifier));
+        $row = $instance->select(array('identifier' => $identifier))->current();
         if(!empty($row))
         {
             $where = new Where();

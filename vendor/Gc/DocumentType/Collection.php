@@ -28,7 +28,8 @@
 namespace Gc\DocumentType;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+    Gc\Component\IterableInterface,
+    Zend\Db\Sql\Select;
 
 class Collection extends AbstractTable implements IterableInterface
 {
@@ -53,7 +54,11 @@ class Collection extends AbstractTable implements IterableInterface
      */
     private function setDocumentTypes()
     {
-        $rows = $this->select();
+        $rows = $this->select(function (Select $select)
+        {
+            $select->order('name ASC');
+        });
+
         $documentTypes = array();
         foreach($rows as $row)
         {
