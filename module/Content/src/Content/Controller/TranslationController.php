@@ -125,8 +125,8 @@ class TranslationController extends Action
      *
      * @return \Zend\View\Model\ViewModel|array
      */
-    public function editAction()
+    public function indexAction()
     {
-
+        return array('values' => Translator::getValues());
     }
 }

@@ -1,27 +1,68 @@
-<table>
-    <tr>
-        <th><?php echo $this->escapeHtml($this->translate('Id')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Lastname')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Firstname')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Email')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Login')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
-    </tr>
-    <?php foreach($this->users as $user): ?>
-        <tr>
-            <td><?php echo $user->getId(); ?></td>
-            <td><?php echo $this->escapeHtml($user->getLastname()); ?></td>
-            <td><?php echo $this->escapeHtml($user->getFirstname()); ?></td>
-            <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
-            <td><?php echo $this->escapeHtml($user->getLogin()); ?></td>
-            <td><a href="<?php echo $this->url('userEdit', array('id' => $user->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
-            </a></td>
-            <td><a href="<?php echo $this->url('userDelete', array('id' => $user->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
-            </a></td>
-        </tr>
-    <?php endforeach; ?>
-</table>
+<?php
+/**
+ * This source file is part of Got CMS.
+ *
+ * Got CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Got CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with Got CMS. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Design
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
 
+?>
+<table class="table-list">
+    <colgroup>
+        <col width="20%">
+        <col width="20%">
+        <col width="30%">
+        <col width="20%">
+        <col width="5%">
+        <col width="5%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th><?php echo $this->escapeHtml($this->translate('Lastname')); ?></th>
+            <th><?php echo $this->escapeHtml($this->translate('Firstname')); ?></th>
+            <th><?php echo $this->escapeHtml($this->translate('Email')); ?></th>
+            <th><?php echo $this->escapeHtml($this->translate('Login')); ?></th>
+            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($this->users as $user): ?>
+            <tr>
+                <td><?php echo $this->escapeHtml($user->getLastname()); ?></td>
+                <td><?php echo $this->escapeHtml($user->getFirstname()); ?></td>
+                <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
+                <td><?php echo $this->escapeHtml($user->getLogin()); ?></td>
+                <td class="a-center">
+                    <a href="<?php echo $this->url('userEdit', array('id' => $user->getId())); ?>">
+                        <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
+                    </a>
+                </td>
+                <td class="a-center">
+                    <a href="<?php echo $this->url('userDelete', array('id' => $user->getId())); ?>">
+                        <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

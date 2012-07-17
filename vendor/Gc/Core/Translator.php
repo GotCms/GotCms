@@ -68,8 +68,8 @@ class Translator extends AbstractTable
         $instance = self::getInstance();
         $select = new Select();
         $select->from('core_translate')
-            ->columns(array('source'))
-            ->join('core_translate_locale', 'core_translate.id = core_translate_locale.core_translate_id', '*', Select::JOIN_INNER);
+            ->columns(array('src_id' => 'id', 'source'))
+            ->join('core_translate_locale', 'core_translate.id = core_translate_locale.core_translate_id', array('dst_id' => 'id', 'destination', 'locale'), Select::JOIN_INNER);
 
         if(!empty($source))
         {
@@ -81,28 +81,33 @@ class Translator extends AbstractTable
             $select->where(array('core_translate_locale.locale' => $locale));
         }
 
-        $current = $instance->fetchRow($select);
-        if(!empty($current))
-        {
-        }
-
-        return NULL;
+        return $instance->fetchRow($select);
     }
 
     /**
      * Return all values from core_config_data
      * @return array
      */
-    static function getValues($locale)
+    static function getValues($locale = NULL, $limit = NULL)
     {
         $instance = self::getInstance();
-        $rows = $instance->select(array('locale' => $locale));
-        if(!empty($rows))
+        $select = new Select();
+        $select->from('core_translate')
+            ->columns(array('src_id' => 'id', 'source'))
+            ->join('core_translate_locale', 'core_translate.id = core_translate_locale.core_translate_id', array('dst_id' => 'id', 'destination', 'locale'), Select::JOIN_INNER);
+
+        if(!empty($locale))
         {
-            return $rows->toArray();
+            $select->where->equalTo('core_translate_locale.locale', $locale);
+        }
+        if(!empty($limit))
+        {
+            $select->limit($limit);
         }
 
-        return NULL;
+        $select->order('core_translate.source ASC');
+
+        return $instance->fetchAll($select);
     }
 
     /**

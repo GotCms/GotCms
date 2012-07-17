@@ -26,21 +26,34 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<table>
-    <tr>
-        <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
-    </tr>
-    <?php foreach($this->datatypes as $datatype): ?>
+<table class="table-list">
+    <colgroup>
+        <col width="90%">
+        <col width="5%">
+        <col width="5%">
+    </colgroup>
+    <thead>
         <tr>
-            <td><?php echo $this->escapeHtml($datatype->getName()); ?></td>
-            <td><a href="<?php echo $this->url('datatypeEdit', array('id' => $datatype->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
-            </a></td>
-            <td><a href="<?php echo $this->url('datatypeDelete', array('id' => $datatype->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
-            </a></td>
+            <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
+            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
         </tr>
-    <?php endforeach; ?>
+    </thead>
+    <tbody>
+        <?php foreach($this->datatypes as $datatype): ?>
+            <tr>
+                <td><?php echo $this->escapeHtml($datatype->getName()); ?></td>
+                <td class="a-center">
+                    <a href="<?php echo $this->url('datatypeEdit', array('id' => $datatype->getId())); ?>">
+                        <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
+                    </a>
+                </td>
+                <td class="a-center">
+                    <a href="<?php echo $this->url('datatypeDelete', array('id' => $datatype->getId())); ?>">
+                        <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
 </table>

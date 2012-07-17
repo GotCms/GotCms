@@ -26,28 +26,26 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<table>
-    <tr>
-        <th><?php echo $this->escapeHtml($this->translate('Id')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Identifier')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Description')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
-    </tr>
-    <?php foreach($this->views as $view): ?>
+<table class="table-list">
+    <colgroup>
+        <col width="45%">
+        <col width="45%">
+        <col width="10%">
+    </colgroup>
+    <thead>
         <tr>
-            <td><?php echo $view->getId(); ?></td>
-            <td><?php echo $this->escapeHtml($view->getName()); ?></td>
-            <td><?php echo $this->escapeHtml($view->getIdentifier()); ?></td>
-            <td><?php echo $this->escapeHtml($view->getDescription()); ?></td>
-            <td><a href="<?php echo $this->url(array('id' => $view->getId()), 'viewEdit'); ?>">
-                <img src="<?php echo $this->image('icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>">
-            </a></td>
-            <td><a href="<?php echo $this->url(array('id' => $view->getId()), 'viewDelete'); ?>">
-                <img src="<?php echo $this->image('icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
-            </a></td>
+            <th><?php echo $this->escapeHtml($this->translate('Source')); ?></th>
+            <th><?php echo $this->escapeHtml($this->translate('Destination')); ?></th>
+            <th><?php echo $this->escapeHtml($this->translate('Locale')); ?></th>
         </tr>
-    <?php endforeach; ?>
+    </thead>
+    <tbody>
+        <?php foreach($this->values as $value): ?>
+            <tr>
+                <td><?php echo $this->escapeHtml($value['source']); ?></td>
+                <td><?php echo $this->escapeHtml($value['destination']); ?></td>
+                <td><?php echo $this->escapeHtml($value['locale']); ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
 </table>
-

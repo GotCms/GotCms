@@ -26,24 +26,37 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<table>
-    <tr>
-        <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Description')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
-        <th><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
-    </tr>
-    <?php foreach($this->layouts as $layout): ?>
+<table class="table-list">
+    <colgroup>
+        <col width="40%">
+        <col width="50%">
+        <col width="5%">
+        <col width="5%">
+    </colgroup>
+    <thead>
         <tr>
-            <td><?php echo $this->escapeHtml($layout->getName()); ?></td>
-            <td><?php echo $this->escapeHtml($layout->getDescription()); ?></td>
-            <td><a href="<?php echo $this->url('layoutEdit', array('id' => $layout->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
-            </a></td>
-            <td><a href="<?php echo $this->url('layoutDelete', array('id' => $layout->getId())); ?>">
-                <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
-            </a></td>
+            <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
+            <th><?php echo $this->escapeHtml($this->translate('Description')); ?></th>
+            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
         </tr>
-    <?php endforeach; ?>
+    </thead>
+    <tbody>
+        <?php foreach($this->layouts as $layout): ?>
+            <tr>
+                <td><?php echo $this->escapeHtml($layout->getName()); ?></td>
+                <td><?php echo $this->escapeHtml($layout->getDescription()); ?></td>
+                <td class="a-center">
+                    <a href="<?php echo $this->url('layoutEdit', array('id' => $layout->getId())); ?>">
+                        <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
+                    </a>
+                </td>
+                <td class="a-center">
+                    <a href="<?php echo $this->url('layoutDelete', array('id' => $layout->getId())); ?>">
+                        <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
 </table>
-

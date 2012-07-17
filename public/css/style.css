@@ -175,3 +175,8 @@ footer .creativegfx {width:150px;height:24px;display:block;float:right;}
 #main-installer section {float:left;width:800px}
 #main-installer .license {width:100%;height:500px}
 #table-trad tbody td{text-align:center;}
+
+.a-center {text-align:center !important;}
+.table-list {width:100%}
+.table-list th{text-align:left;}
+
