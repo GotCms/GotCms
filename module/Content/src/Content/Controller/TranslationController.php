@@ -30,6 +30,7 @@ use Gc\Mvc\Controller\Action,
     Gc\Document\Collection as DocumentCollection,
     Content\Form,
     Gc\Component,
+    Gc\Core\Translator,
     Zend\Json\Json;
 
 class TranslationController extends Action
@@ -81,8 +82,31 @@ class TranslationController extends Action
 
         if($this->getRequest()->isPost())
         {
-            
+            $post = $this->getRequest()->getPost();
+            $translation_form->setData($post->toArray());
+            if($translation_form->isValid())
+            {
+                $source = $post->get('source');
+                $data = array();
+                foreach($post->get('destination') as $destination_id => $destination)
+                {
+                    $data[$destination_id] = array('value' => $destination);
+                }
+
+                foreach($post->get('locale') as $locale_id => $locale)
+                {
+                    if(empty($data[$locale_id]))
+                    {
+                        continue;
+                    }
+
+                    $data[$locale_id]['locale'] = $locale;
+                }
+
+                Translator::setValue($source, $data);
+            }
         }
+
         return array('form' => $translation_form);
     }
 

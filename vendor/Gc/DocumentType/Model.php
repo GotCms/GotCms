@@ -31,7 +31,8 @@ use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Gc\User,
     Gc\Tab,
-    Gc\View;
+    Gc\View,
+    Zend\Db\Sql;
 
 class Model extends AbstractTable implements IterableInterface
 {
@@ -149,11 +150,17 @@ class Model extends AbstractTable implements IterableInterface
             $views = $this->getViews();
             if(!empty($views))
             {
-                $db = $this->getAdapter();
-                $db->delete('document_type_views', sprintf('document_type_id = %s', (int)$this->getId()));
+                $delete = new Sql\Delete();
+                $delete->from('document_type_views');
+                $delete->where(sprintf('document_type_id = %s', (int)$this->getId()));
+                $this->execute($delete);
                 foreach($views as $view);
                 {
-                    $db->insert('document_type_views', array('document_type_id' => $this->getId(), 'view_id' => $view));
+                    $insert = new Sql\Insert();
+                    $insert->into('document_type_views')
+                        ->columns(array('document_type_id', 'view_id'))
+                        ->values(array($this->getId(), $view));
+                    $this->execute($insert);
                 }
             }
 

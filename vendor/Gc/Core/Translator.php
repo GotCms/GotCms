@@ -29,7 +29,7 @@ namespace Gc\Core;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select,
-    Zend\Db\Sql\Where;
+    Zend\Db\Sql\Insert;
 
 class Translator extends AbstractTable
 {
@@ -84,7 +84,6 @@ class Translator extends AbstractTable
         $current = $instance->fetchRow($select);
         if(!empty($current))
         {
-var_dump('test');
         }
 
         return NULL;
@@ -108,18 +107,46 @@ var_dump('test');
 
     /**
      * Set config value
-     * @param string $identifier
-     * @param string $value
+     * @param string $source
+     * @param array $destinations
      * @return boolean
      */
-    static function setValue($source, $locale, $destinations)
+    static function setValue($source, array $destinations)
     {
         $instance = self::getInstance();
         $row = $instance->select(array('source' => $source))->current();
         if(!empty($row))
         {
-            $where = new Where();
-            return $instance->update(array('value' => $value), $where->equalTo('identifier', $identifier));
+            $id = $row->id;
+        }
+        else
+        {
+            $instance->insert(array('source' => $source));
+            $id = $instance->getLastInsertId();
+        }
+
+        foreach($destinations as $destination)
+        {
+            if(empty($destination['locale']) or empty($destination['value']))
+            {
+                continue;
+            }
+
+            $insert = new Insert();
+            $insert->into('core_translate_locale')
+            ->columns(array(
+                'destination',
+                'locale',
+                'core_translate_id'
+            ))
+            ->values(array(
+                $destination['value'],
+                $destination['locale'],
+                $id,
+            ));
+
+            $instance->execute($insert);
+
         }
 
         return FALSE;

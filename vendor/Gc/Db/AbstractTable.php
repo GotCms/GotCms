@@ -85,7 +85,10 @@ abstract class AbstractTable extends Object
             return $query->current();
         }
 
-        return $this->_executeQuery($query)->current();
+        $result_set = new ResultSet();
+        $result_set->initialize($this->execute($query));
+
+        return $result_set->current();
     }
 
     /**
@@ -100,15 +103,18 @@ abstract class AbstractTable extends Object
             return $query->toArray();
         }
 
-        return $this->_executeQuery($query)->toArray();
+        $result_set = new ResultSet();
+        $result_set->initialize($this->execute($query));
+
+        return $result_set->toArray();
     }
 
     /**
      * Execute query
-     * @param mixed $query (\Zend\Db\Sql\Select|string)
+     * @param mixed $query (\Zend\Db\Sql\*|string)
      * @return array|Zend\Db\ResultSet\ResultSet
      */
-    protected function _executeQuery($query)
+    public function execute($query)
     {
         if(is_string($query))
         {
@@ -120,11 +126,7 @@ abstract class AbstractTable extends Object
             $query->prepareStatement($this->getAdapter(), $statement);
         }
 
-        $result = $statement->execute();
-        $result_set = new ResultSet();
-        $result_set->initialize($result);
-
-        return $result_set;
+        return $statement->execute();
     }
 
     /**
