@@ -26,11 +26,11 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<table class="table-list">
+<table id="table-translation-edit" class="table-list">
     <colgroup>
-        <col width="45%">
-        <col width="45%">
-        <col width="10%">
+        <col width="43%">
+        <col width="43%">
+        <col width="14%">
     </colgroup>
     <thead>
         <tr>
@@ -42,10 +42,40 @@
     <tbody>
         <?php foreach($this->values as $value): ?>
             <tr>
-                <td><?php echo $this->escapeHtml($value['source']); ?></td>
-                <td><?php echo $this->escapeHtml($value['destination']); ?></td>
-                <td><?php echo $this->escapeHtml($value['locale']); ?></td>
+                <td>
+                    <div>
+                        <?php echo $this->escapeHtml($value['source']); ?>
+                    </div>
+
+                    <div class="hide">
+                        <input type="text" size="40" name="source[<?php $value['src_id']; ?>]" value="<?php echo $this->escapeHtml($value['source']); ?>">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <?php echo $this->escapeHtml($value['destination']); ?>
+                    </div>
+
+                    <div class="hide">
+                        <input type="text" size="40" name="source[<?php $value['dst_id']; ?>]" value="<?php echo $this->escapeHtml($value['destination']); ?>">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <?php echo $this->escapeHtml($value['locale']); ?>
+                    </div>
+
+                    <div class="hide">
+                        <?php echo $this->formElement($this->form->get('locale')); ?>
+                    </div>
+                </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+<script type="text/javascript">
+$(document).ready(function(){
+    Gc.setOption('locale', $.parseJSON('<?php echo $this->json($this->form->get('locale')->getAttribute('options')); ?>'));
+    Gc.initTraslationList();
+});
+</script>

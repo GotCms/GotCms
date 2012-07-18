@@ -1,4 +1,4 @@
-var Translate = (function($)
+var Translator = (function($)
 {
     return {
         data: new Hash(),

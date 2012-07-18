@@ -127,6 +127,7 @@ class TranslationController extends Action
      */
     public function indexAction()
     {
-        return array('values' => Translator::getValues());
+        $translation_form = new Form\Translation();
+        return array('form' => $translation_form, 'values' => Translator::getValues());
     }
 }

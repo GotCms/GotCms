@@ -7,8 +7,7 @@ var Gc = (function($)
     var $document = $(document),
     $window = $(window);
 
-    $document.ready(function()
-    {
+    $document.ready(function(){
         Gc.initialize();
     });
 
@@ -31,12 +30,6 @@ var Gc = (function($)
         setHtmlMessage: function($message)
         {
             $('.html-message').html($message);
-        },
-
-        translate: function($message)
-        {
-            return $message;
-            //@TODO set translator
         },
 
         isEmpty: function($element)
@@ -70,7 +63,7 @@ var Gc = (function($)
                 $description = $('#tabs-adddescription');
                 if($this.isEmpty($name.val()) || $this.isEmpty($description.val()))
                 {
-                    $this.setHtmlMessage($this.translate('Please fill all fields'));
+                    $this.setHtmlMessage(Translator.translate('Please fill all fields'));
                 }
                 else
                 {
@@ -87,7 +80,7 @@ var Gc = (function($)
                                     +'<input type="hidden" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'">'
                                     +'<input type="hidden" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'">'
                                     +'<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>'
-                                    +'<button type="button" value="'+$data.id+'" class="delete-tab">delete</button>'
+                                    +'<button type="button" value="'+$data.id+'" class="delete-tab">'+Translator.translate('Delete')+'</button>'
                                     +'</li>';
                                 $tabs.append($e);
                                 $('.select-tab').append(new Option($name.val(),$data.id));
@@ -147,7 +140,7 @@ var Gc = (function($)
 
                 if($this.isEmpty($identifier.val()) || $this.isEmpty($name.val()) || $this.isEmpty($tab.val()) || $this.isEmpty($datatype.val()) || $this.isEmpty($description.val()))
                 {
-                    $this.setHtmlMessage($this.translate('Please fill all fields'));
+                    $this.setHtmlMessage(Translator.translate('Please fill all fields'));
                 }
                 else
                 {
@@ -170,13 +163,13 @@ var Gc = (function($)
                                 $this.setHtmlMessage('');
                                 $c = new Template('<dl>'
                                         +'<dt id="name-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-name-#{tab}-#{id}">Name</label>'
+                                            +'<label class="optional" for="properties-name-#{tab}-#{id}">'+Translator.translate('Name')+'</label>'
                                         +'</dt>'
                                         +'<dd id="name-element-#{tab}-#{id}">'
                                             +'<input type="text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">'
                                         +'</dd>'
                                         +'<dt id="identifier-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-identifier-#{tab}-#{id}">Identifier</label>'
+                                            +'<label class="optional" for="properties-identifier-#{tab}-#{id}">'+Translator.translate('Identifier')+'</label>'
                                         +'</dt>'
                                         +'<dd id="identifier-element-#{tab}-#{id}">'
                                             +'<input type="text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">'
@@ -186,20 +179,20 @@ var Gc = (function($)
                                             +'</select>'
                                         +'</dd>'
                                         +'<dt id="description-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-description-#{tab}-#{id}">Description</label>'
+                                            +'<label class="optional" for="properties-description-#{tab}-#{id}">'+Translator.translate('Description')+'</label>'
                                         +'</dt>'
                                         +'<dd id="description-element-#{tab}-#{id}">'
                                             +'<input type="text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">'
                                         +'</dd>'
                                         +'<dt id="required-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-required-#{tab}-#{id}">Required</label>'
+                                            +'<label class="optional" for="properties-required-#{tab}-#{id}">'+Translator.translate('Required')+'</label>'
                                         +'</dt>'
                                         +'<dd id="required-element-#{tab}-#{id}">'
                                             +'<input type="checkbox" value="1" id="properties-required-#{tab}-#{id}" name="properties[property#{id}][required]">'
                                         +'</dd>'
                                         +'<dd id="required-element-#{tab}-#{id}">'
                                             +'<input type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">'
-                                            +'<button type="button" value="#{id}" class="delete-property">delete</button>'
+                                            +'<button type="button" value="#{id}" class="delete-property">'+Translator.translate('Delete')+'</button>'
                                         +'</dd>'
                                     +'</dl>');
 
@@ -326,33 +319,31 @@ var Gc = (function($)
         initTranslator: function()
         {
             $idx = 1;
-            $destinations = $('#destinations');
             $template = '<tr>' +
-                    '<td>' +
-                        '<div>' +
-                            '<input type="text" name="destination[#{id}]" size="73">' +
-                        '</div>' +
-                    '</td>' +
-                    '<td>' +
-                        '<div>' +
-                            '<select name="locale[#{id}]">';
-                                $.each(this.getOption('locale'), function(key, value)
-                                {
-                                    $template += '<option value="'+key+'">'+value+'</option>';
-                                });
+                '<td>' +
+                    '<div>' +
+                        '<input type="text" name="destination[#{id}]" size="73">' +
+                    '</div>' +
+                '</td>' +
+                '<td>' +
+                    '<div>' +
+                        '<select name="locale[#{id}]">';
+                            $.each(this.getOption('locale'), function(key, value)
+                            {
+                                $template += '<option value="'+key+'">'+value+'</option>';
+                            });
 
-                                $template += '<?php endforeach; ?>' +
-                            '</select>' +
-                        '</div>' +
-                    '</td>' +
-                    '<td><span class="button-add add-translate">'+Translate.translate('Add')+'</span></td>' +
-                '</tr>';
+                        $template += '</select>' +
+                    '</div>' +
+                '</td>' +
+                '<td><span class="button-add add-translate">'+Translator.translate('Add')+'</span></td>' +
+            '</tr>';
 
             $document.on('click', '.add-translate', function()
             {
                 $t = new Template($template);
                 $table_trad = $('#table-trad');
-                $table_trad.find('.add-translate').removeClass('add-translate').addClass('delete-translate').html(Translate.translate('Delete'));
+                $table_trad.find('.add-translate').removeClass('add-translate').addClass('delete-translate').html(Translator.translate('Delete'));
                 $table_trad.children('tbody').append($t.evaluate({id: $idx}));
                 $idx++;
             });
@@ -360,6 +351,14 @@ var Gc = (function($)
             $document.on('click', '.delete-translate', function()
             {
                 $(this).parent().parent('tr').remove();
+            });
+        },
+
+        initTraslationList: function()
+        {
+            $('#table-translation-edit > tbody > tr').on('click', function(e)
+            {
+                $(this).find('div').toggleClass('hide');
             });
         }
     };
