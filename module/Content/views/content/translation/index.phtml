@@ -26,53 +26,63 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<table id="table-translation-edit" class="table-list">
-    <colgroup>
-        <col width="43%">
-        <col width="43%">
-        <col width="14%">
-    </colgroup>
-    <thead>
-        <tr>
-            <th><?php echo $this->escapeHtml($this->translate('Source')); ?></th>
-            <th><?php echo $this->escapeHtml($this->translate('Destination')); ?></th>
-            <th><?php echo $this->escapeHtml($this->translate('Locale')); ?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($this->values as $value): ?>
+<form autocomplete="off" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
+    <input type="image" src="/images/save.png" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
+    <table id="table-translation-edit" class="table-list">
+        <colgroup>
+            <col width="43%">
+            <col width="43%">
+            <col width="14%">
+        </colgroup>
+        <thead>
             <tr>
-                <td>
-                    <div>
-                        <?php echo $this->escapeHtml($value['source']); ?>
-                    </div>
-
-                    <div class="hide">
-                        <input type="text" size="40" name="source[<?php $value['src_id']; ?>]" value="<?php echo $this->escapeHtml($value['source']); ?>">
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        <?php echo $this->escapeHtml($value['destination']); ?>
-                    </div>
-
-                    <div class="hide">
-                        <input type="text" size="40" name="source[<?php $value['dst_id']; ?>]" value="<?php echo $this->escapeHtml($value['destination']); ?>">
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        <?php echo $this->escapeHtml($value['locale']); ?>
-                    </div>
-
-                    <div class="hide">
-                        <?php echo $this->formElement($this->form->get('locale')); ?>
-                    </div>
-                </td>
+                <th><?php echo $this->escapeHtml($this->translate('Source')); ?></th>
+                <th><?php echo $this->escapeHtml($this->translate('Destination')); ?></th>
+                <th><?php echo $this->escapeHtml($this->translate('Locale')); ?></th>
             </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <?php foreach($this->values as $value): ?>
+                <tr>
+                    <td>
+                        <div>
+                            <?php echo $this->escapeHtml($value['source']); ?>
+                        </div>
+
+                        <div class="hide">
+                            <input type="text" size="40" name="source[<?php echo $value['src_id']; ?>]" value="<?php echo $this->escapeHtml($value['source']); ?>">
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <?php echo $this->escapeHtml($value['destination']); ?>
+                        </div>
+
+                        <div class="hide">
+                            <input type="text" size="40" name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][value]" value="<?php echo $this->escapeHtml($value['destination']); ?>">
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <?php echo $this->escapeHtml($value['locale']); ?>
+                        </div>
+
+                        <div class="hide">
+                            <select name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][locale]">
+                                <?php foreach($this->form->get('locale')->getAttribute('options') as $option_id => $option_value): ?>
+                                    <option value="<?php echo $option_id; ?>"><?php echo $this->escapeHtml($option_value); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <input type="hidden" name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][dst_id]" value="<?php echo $value['dst_id']; ?>">
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</form>
+
 <script type="text/javascript">
 $(document).ready(function(){
     Gc.setOption('locale', $.parseJSON('<?php echo $this->json($this->form->get('locale')->getAttribute('options')); ?>'));

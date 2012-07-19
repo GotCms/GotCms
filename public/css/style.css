@@ -107,7 +107,8 @@ img {border:0}
 .a-right {text-align:right !important;}
 .hide {display:none;}
 .show {display:block;}
-
+.floatL {float:left;}
+.floatR {float:right;}
 
 header {height:145px;}
 #logo {background-image:url(../images/logo.png);background-repeat:no-repeat;width:335px;height:145px;margin-left:212px;margin-right:35px;float:left;}

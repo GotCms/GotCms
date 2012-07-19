@@ -354,11 +354,26 @@ var Gc = (function($)
             });
         },
 
-        initTraslationList: function()
+        initTraslationList: function(e)
         {
             $('#table-translation-edit > tbody > tr').on('click', function(e)
             {
+                if($.inArray(e.target.type, ['text', 'select-one']) !=-1)
+                {
+                    return false;
+                }
+
                 $(this).find('div').toggleClass('hide');
+                $input = $(e.target).parent().find('input:first');
+                $input.focus();
+                $tmp = $input.val();
+                $input.val('');
+                $input.val($tmp);
+                $(this).find('td').each(function()
+                {
+                    $selector = $(this).find('div:last');
+                    $selector.prev('div').html($selector.children().val());
+                });
             });
         }
     };

@@ -29,7 +29,8 @@ namespace Gc\Core;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select,
-    Zend\Db\Sql\Insert;
+    Zend\Db\Sql\Insert,
+    Zend\Db\Sql\Update;
 
 class Translator extends AbstractTable
 {
@@ -119,15 +120,28 @@ class Translator extends AbstractTable
     static function setValue($source, array $destinations)
     {
         $instance = self::getInstance();
-        $row = $instance->select(array('source' => $source))->current();
-        if(!empty($row))
+        if(is_numeric($source))
         {
-            $id = $row->id;
+            $row = $instance->select(array('id' => $source))->current();
+            if(empty($row))
+            {
+                return FALSE;
+            }
+
+            $source_id = $row->id;
         }
         else
         {
-            $instance->insert(array('source' => $source));
-            $id = $instance->getLastInsertId();
+            $row = $instance->select(array('source' => $source))->current();
+            if(!empty($row))
+            {
+                $id = $row->id;
+            }
+            else
+            {
+                $instance->insert(array('source' => $source));
+                $source_id = $instance->getLastInsertId();
+            }
         }
 
         foreach($destinations as $destination)
@@ -136,21 +150,35 @@ class Translator extends AbstractTable
             {
                 continue;
             }
+            if(!empty($destination['dst_id']))
+            {
+                $update = new Update('core_translate_locale');
+                $update->set(array(
+                    'destination' => $destination['value'],
+                    'locale' => $destination['locale']
+                ));
+                $update->where(sprintf('id = %d', $destination['dst_id']));
 
-            $insert = new Insert();
-            $insert->into('core_translate_locale')
-            ->columns(array(
-                'destination',
-                'locale',
-                'core_translate_id'
-            ))
-            ->values(array(
-                $destination['value'],
-                $destination['locale'],
-                $id,
-            ));
+                $instance->execute($update);
+            }
+            else
+            {
+                $insert = new Insert();
+                $insert->into('core_translate_locale')
+                ->columns(array(
+                    'destination',
+                    'locale',
+                    'core_translate_id'
+                ))
+                ->values(array(
+                    $destination['value'],
+                    $destination['locale'],
+                    $source_id,
+                ));
 
-            $instance->execute($insert);
+                $instance->execute($insert);
+            }
+
 
         }
 

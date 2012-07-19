@@ -128,6 +128,27 @@ class TranslationController extends Action
     public function indexAction()
     {
         $translation_form = new Form\Translation();
+        $translation_form->setAttribute('action', $this->url()->fromRoute('translationList'));
+        if($this->getRequest()->isPost())
+        {
+            $post = $this->getRequest()->getPost();
+            if(empty($post['source']) or empty($post['destination']))
+            {
+                return $this->redirect()->toRoute('translationList');
+            }
+
+            foreach($post['source'] as $source_id => $source)
+            {
+                Translator::getInstance()->update(array('source' => $source), sprintf('id = %d', $source_id));
+                if(!empty($post['destination'][$source_id]))
+                {
+                    Translator::setValue($source_id, $post['destination'][$source_id]);
+                }
+            }
+
+            return $this->redirect()->toRoute('translationList');
+        }
+
         return array('form' => $translation_form, 'values' => Translator::getValues());
     }
 }
