@@ -339,7 +339,7 @@ class InstallController extends Action
                     //Create configuration file
                     case 'c-cf':
                         $db = $session['install']['db'];
-                        $file = file_get_contents(GC_APPLICATION_PATH . '/data/install/config.tpl.php');
+                        $file = file_get_contents(GC_APPLICATION_PATH . '/data/template/config.tpl.php');
                         $file = str_replace(
                             array(
                                 '__DRIVER__',

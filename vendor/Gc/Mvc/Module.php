@@ -55,6 +55,8 @@ class Module
         if(!\Gc\Registry::isRegistered('Translator'))
         {
             $translator = $e->getApplication()->getServiceManager()->get('translator');
+            $translator->addTranslationPattern('phparray', GC_APPLICATION_PATH . '/data/translate/', '%s.php', 'default');
+            $translator->setLocale(\Gc\Core\Config::getValue('locale'));
             \Gc\Registry::set('Translator', $translator);
         }
     }

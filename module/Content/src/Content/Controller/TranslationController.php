@@ -146,6 +146,31 @@ class TranslationController extends Action
                 }
             }
 
+            $values = Translator::getValues();
+            $data = array();
+            foreach($values as $value)
+            {
+                if(empty($data[$value['locale']]))
+                {
+                    $data[$value['locale']] = array();
+                }
+
+                $data[$value['locale']][$value['source']] = $value['destination'];
+            }
+
+            $translate_path = GC_APPLICATION_PATH . '/data/translate/%s.php';
+            $template_content = file_get_contents(GC_APPLICATION_PATH . '/data/templates/language.tpl.php');
+
+            foreach(glob(sprintf($translate_path, '*')) as $file)
+            {
+                unlink($file);
+            }
+
+            foreach($data as $locale => $values)
+            {
+                file_put_contents(sprintf($translate_path, $locale), sprintf($template_content, var_export($values, TRUE)));
+            }
+
             return $this->redirect()->toRoute('translationList');
         }
 

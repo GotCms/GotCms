@@ -18,11 +18,30 @@
  * PHP Version >=5.3
  *
  * @category Gc
- * @package  Design
+ * @package  Config
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
- /** @var $this \Zend\View\Renderer\PhpRenderer */
 
-?>
+return array (
+  'Add' => 'Ajouter',
+  'Content' => 'Contenu',
+  'Copy' => 'Copier',
+  'Cut' => 'Couper',
+  'Dashboard' => 'Tableau de bord',
+  'Delete' => 'Supprimer',
+  'Development' => 'Développement',
+  'Disconnect' => 'Déconnexion',
+  'Edit' => 'Modifier',
+  'Managing documents' => 'Gestion des documents',
+  'Managing translation' => 'Gestion des traductions',
+  'New' => 'Nouveau',
+  'Next' => 'Suivant',
+  'Paste' => 'Coller',
+  'Quit' => 'Quitter',
+  'Save' => 'Sauvegarder',
+  'Save and publish' => 'Savegarder et publier',
+  'These items will be permanently deleted and cannot be recovered. Are you sure?' => 'Ces éléments vont être définitevement supprimés et ne pourront pas être restaurés. Êtes-vous sûr ? ',
+  'Welcome %s' => 'Bienvenue %s',
+);
