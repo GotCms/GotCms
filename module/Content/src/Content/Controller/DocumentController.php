@@ -192,6 +192,7 @@ class DocumentController extends Action
         else
         {
             $document_form = new \Zend\Form\Form();
+            $document_form->setAttribute('action', $this->url()->fromRoute('documentEdit', array('id' => $document_id)));
             $this->layout()->setVariable('documentId', $document_id);
             $document_type_id = $document->getDocumentTypeId();
             $layout_id = $this->getRouteMatch()->getParam('layout_id', '');

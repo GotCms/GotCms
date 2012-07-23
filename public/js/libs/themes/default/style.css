@@ -52,6 +52,6 @@
 .jstree-default .jstree-checked a .jstree-checkbox { _background-position:-38px -19px; }
 .jstree-default .jstree-unchecked a .jstree-checkbox { _background-position:-2px -19px; }
 /* IE6 END */
-.jstree-default li[rel="folder"] a .jstree-icon {background-image: url(/images/jstree/folder.gif);background-position: 0 0;}
-.jstree-default li[rel="folder"].jstree-closed a .jstree-icon {background-image: url(/images/jstree/folder-closed.gif);background-position: 0 0;}
-.jstree-default li[rel="default"] a .jstree-icon {background-image: url(/images/jstree/file.gif);background-position: 0 0;}
+.jstree-default li.folder a .jstree-icon {background-image: url(/images/jstree/folder.gif);background-position: 0 0;}
+.jstree-default li.folder a.jstree-closed a .jstree-icon {background-image: url(/images/jstree/folder-closed.gif);background-position: 0 0;}
+.jstree-default li.default a .jstree-icon {background-image: url(/images/jstree/file.gif);background-position: 0 0;}

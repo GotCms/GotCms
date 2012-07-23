@@ -41,7 +41,8 @@
                         <?php if(!empty($content)): ?>
                             <?php echo $content; ?>
                         <?php else: ?>
-                            <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+                            <?php $id = $element->getAttribute('id'); ?>
+                            <label class="required"<?php if(!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
                             <?php echo $this->formElement($element); ?>
                             <?php if(!empty($errors[$element->getAttribute('name')])): ?>

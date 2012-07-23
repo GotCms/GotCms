@@ -62,21 +62,21 @@ class TreeView
 
             if($haveChildren)
             {
-                $rel = ' rel="folder"';
+                $rel = ' class="folder"';
                 $ins ='<ins class="jstree-icon">&nbsp;</ins>';
                 $renderChildren = self::render($children, FALSE);
             }
             else
             {
                 $renderChildren = '';
-                $rel = ' rel="default"';
+                $rel = ' class="default"';
                 $ins = '';
             }
 
 
             $html .= $rel . '>' . $ins;
             $id = $iterator->getId();
-            $html .= '<a ' . (!empty($id) ?  'rel="' . $id . '" ' : '') . 'href="'.$iterator->getUrl().'">';
+            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '') . 'href="'.$iterator->getUrl().'">';
 
             if(in_array($iterator->getIcon(), array('folder','file')))
             {
@@ -88,8 +88,6 @@ class TreeView
             }
 
             $html .= $iterator->getName().'</a>';
-
-            $html .='</span>';
             $html .= $renderChildren;
             $html .='</li>';
         }

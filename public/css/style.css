@@ -125,9 +125,8 @@ header {height:145px;}
 #navigation .part a:hover {color:#FFF; text-decoration:underline;}
 #navigation .part .icone {margin-left:10px; margin-top:10px; float:left; }
 
-#main-top {background-image:url(../images/corpshaut.png);background-repeat:no-repeat;height:69px;width:1031px;margin-bottom:-11px;}
 
-#main {background-color:#FFF;width:1011px;padding-left:10px;padding-right:10px;}
+#main {background-image:url(../images/corpshaut.png);background-repeat:no-repeat;background-color:#FFF;width:1011px;padding: 5px 10px;}
 
 #content {float:right;width:755px;}
 #content h2 {background-image:url(../images/h2txt.png);background-repeat:no-repeat;width:652px;height:25px;color:#FFF;font-size:11px;padding-top:5px;padding-left:10px;margin-left:45px;}
@@ -189,3 +188,5 @@ footer .creativegfx {width:150px;height:24px;display:block;float:right;}
 .table-list {width:100%}
 .table-list th{text-align:left;}
 
+
+#dialog {display:none;}

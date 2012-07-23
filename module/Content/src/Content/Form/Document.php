@@ -70,15 +70,18 @@ class Document extends AbstractForm
 
         $name = new Element\Text('name');
         $name->setAttribute('label', 'Name')
+            ->setAttribute('id', 'name')
             ->setAttribute('class', 'input-text');
 
         $url_key = new Element\Text('url_key');
         $url_key->setAttribute('label', 'Url key')
+            ->setAttribute('id', 'url_key')
             ->setAttribute('class', 'input-text');
 
         $document_type_collection = new DocumentType\Collection();
         $document_type = new Element\Select('document_type');
         $document_type->setAttribute('label', 'Document Type')
+            ->setAttribute('id', 'document_type')
             ->setAttribute('options', array('' => 'Select document type') + $document_type_collection->getSelect());
 
         $parent = new Element\Hidden('parent');
@@ -97,6 +100,7 @@ class Document extends AbstractForm
         $status = new Element\Checkbox('status');
         $status->setAttribute('label', 'Publish')
             ->setAttribute('checkedValue', DocumentModel::STATUS_ENABLE)
+            ->setAttribute('id', 'status')
             ->setAttribute('value', $document->getStatus());
 
         $this->add($status);
@@ -104,6 +108,7 @@ class Document extends AbstractForm
         $show_in_nav = new Element\Checkbox('show_in_nav');
         $show_in_nav->setAttribute('label', 'Show in nav')
             ->setAttribute('value', $document->showInNav())
+            ->setAttribute('id', 'show_in_nav')
             ->setAttribute('checkedValue', 1);
 
         $this->add($show_in_nav);
@@ -112,6 +117,7 @@ class Document extends AbstractForm
         $view = new Element\Select('view');
         $view->setAttribute('options', $views_collection->getSelect())
             ->setAttribute('value', (string)$document->getViewId())
+            ->setAttribute('id', 'view')
             ->setAttribute('label', 'View');
 
         $this->add($view);
@@ -120,6 +126,7 @@ class Document extends AbstractForm
         $layout = new Element\Select('layout');
         $layout->setAttribute('options', $layouts_collection->getSelect())
             ->setAttribute('value', (string)$document->getLayoutId())
+            ->setAttribute('id', 'layout')
             ->setAttribute('label', 'Layout');
 
         $this->add($layout);

@@ -54,7 +54,7 @@ var Gc = (function($)
             var $this = this;
             $('.tabs').tabs();
             $('#tabs').sortable({placeholder: "ui-state-highlight"});
-        $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
+            $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
 
             //tabs
             $('#tabs-add').on('click', function()
@@ -233,8 +233,8 @@ var Gc = (function($)
             $("#browser").jstree({
                 "plugins" : ["themes","html_data"],
                 "core" : { "initially_open" : [ $('#document_' + $document_id).parent().parent('li').prop('id') ] }
-            }).bind("loaded.jstree", function (event, data) {
-
+            }).bind("loaded.jstree", function (event, data)
+            {
                 $("#browser").find('a').contextMenu(
                     {
                         menu: 'contextMenu'
@@ -246,9 +246,9 @@ var Gc = (function($)
                         $url = $routes[$action];
                         $id = '';
 
-                        if($element.attr('rel') != undefined)
+                        if($element.attr('id') != undefined)
                         {
-                            $id = $element.attr('rel');
+                            $id = $element.attr('id');
                             $url = $url.replace('itemId', $id);
                         }
 
