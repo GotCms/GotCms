@@ -49,12 +49,43 @@ var Gc = (function($)
             }
         },
 
-        developmentForm: function($addTabUrl, $addPropertyUrl, $deleteTabUrl, $deletePropertyUrl)
+        initDocumentType: function($addTabUrl, $addPropertyUrl, $deleteTabUrl, $deletePropertyUrl)
         {
             var $this = this;
             $('.tabs').tabs();
-            $('#tabs').sortable({placeholder: "ui-state-highlight"});
-            $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
+            var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
+
+            $('.sortable').accordion({
+                autoHeight: false,
+                collapsible: true,
+                active : -1,
+                header: "> li > h3"
+            })
+            .sortable({
+                handle: "h3",
+                stop: function( event, ui ) {
+                    // IE doesn't register the blur when sorting
+                    // so trigger focusout handlers to remove .ui-state-focus
+                    ui.item.children( "h3" ).triggerHandler( "focusout" );
+                }
+            });
+
+            var $tab_items = $( "ul:first li", $tabs ).droppable({
+                accept: ".connected-sortable li",
+                hoverClass: "ui-state-hover",
+                drop: function( event, ui ) {
+                    var $item = $( this );
+                    var $list = $( $item.find( "a" ).attr( "href" ) )
+                        .find( ".connected-sortable" );
+                    console.log($item);
+                    console.log($list);
+
+                    ui.draggable.hide( "slow", function() {
+                        $tabs.tabs( "select", $tab_items.index( $item ) );
+                        $( this ).appendTo( $list ).show( "slow" );
+                    });
+                }
+            });
 
             //tabs
             $('#tabs-add').on('click', function()
@@ -378,4 +409,3 @@ var Gc = (function($)
         }
     };
 })(jQuery);
-
