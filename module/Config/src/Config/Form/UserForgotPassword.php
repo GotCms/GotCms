@@ -28,7 +28,8 @@ namespace Config\Form;
 
 use Gc\Form\AbstractForm,
     Zend\Validator\Db,
-    Zend\Form\Element;
+    Zend\Form\Element,
+    Zend\InputFilter\Factory as InputFilterFactory;
 
 class UserForgotPassword extends AbstractForm
 {

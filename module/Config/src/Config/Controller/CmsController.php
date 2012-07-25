@@ -94,9 +94,9 @@ class CmsController extends Action
             $this->_form->setData($this->getRequest()->getPost()->toArray());
             if(!$this->_form->isValid())
             {
-                var_dump($this->_form->getInputFilter()->getInvalidInput());
-                var_dump($this->_form->getMessages());
-                die();
+
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save configuration');
+                $this->useFlashMessenger();
             }
             else
             {

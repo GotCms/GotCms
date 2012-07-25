@@ -66,9 +66,9 @@ class UserController extends Action
         if($this->getRequest()->isPost() and $login_form->setData($post->toArray()) and $login_form->isValid())
         {
             $user_model = new User\Model();
+            $redirect = $login_form->getValue('redirect');
             if($user_id = $user_model->authenticate($post->get('login'), $post->get('password')))
             {
-                $redirect = $login_form->getValue('redirect');
                 if(!empty($redirect))
                 {
                     return $this->redirect()->toUrl(base64_decode($redirect));
@@ -78,6 +78,7 @@ class UserController extends Action
             }
 
             $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
+            return $this->redirect()->toRoute('userLogin', array('redirect' => $redirect));
         }
 
         $redirect = $this->getRouteMatch()->getParam('redirect');
@@ -112,8 +113,7 @@ class UserController extends Action
      */
     public function logoutAction()
     {
-        $this->getAuth()->getStorage()->clear();
-        $this->getSession()->clear();
+        $this->getSession()->getManager()->destroy();
         return $this->redirect()->toRoute('admin');
     }
 
