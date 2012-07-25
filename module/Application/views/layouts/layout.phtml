@@ -46,20 +46,9 @@
     ?>
 </head>
 <body>
-    <header>
-        <div id="logo"></div>
-        <div id="connexion">
-            <ul>
-                <li><?php echo $this->escapeHtml(sprintf($this->translate('Welcome %s'), $this->adminName)); ?> - <a href="#">MP (0/6)</a></li>
-                <li><a href="#">Voir les derniers signalements</a></li>
-                <li><a href="<?php echo $this->url('userLogout'); ?>">[ <?php echo $this->escapeHtml($this->translate('Disconnect')); ?> ]</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <div id="navigation">
+    <header class="gradient-black">
         <?php echo $this->partial('navigation.phtml', 'default', 'test'); ?>
-    </div>
+    </header>
 
     <div id="main">
 

@@ -64,10 +64,7 @@ td { vertical-align: top; }
 
 .chromeframe { margin: 0.2em 0; background: #ccc; color: black; padding: 0.2em 0; }
 
-@media only screen and (min-width: 35em) {
-
-
-}
+@media only screen and (min-width: 35em) {}
 
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
 .ir br { display: none; }
@@ -99,7 +96,7 @@ h2, h3 { page-break-after: avoid; }
  * Got CMS CSS
  *
  */
-body {background-image:url(../images/bg.png);background-repeat:repeat-x;background-color:#0d0d0d;font-size:11px;font-family:Arial, Helvetica, sans-serif;width:1031px;margin:auto;}
+body {background-image:url(../images/bg.png);background-repeat:repeat-x;background-color:#0d0d0d;font-size:11px;font-family:Arial, Helvetica, sans-serif;margin:auto;}
 img {border:0}
 
 .a-center {text-align:center !important;}
@@ -109,37 +106,37 @@ img {border:0}
 .show {display:block;}
 .floatL {float:left;}
 .floatR {float:right;}
+.gradient-black {background: #656565;-o-background-size: 100% 100%;-moz-background-size: 100% 100%;-webkit-background-size: 100% 100%;background-size: 100% 100%;background: -webkit-gradient(linear,left top, left bottom,from(#656565),to(#000000));background: -webkit-linear-gradient(top,#656565,#000000);background: -moz-linear-gradient(top,#656565,#000000);background: -o-linear-gradient(top,#656565,#000000);background: linear-gradient(top,#656565,#000000);}
 
-header {height:145px;}
+header {height:60px;}
+header .part {width:206px;height:60px;color:#FFF;float:left;margin-top:-1px;}
+header .part p {margin-left:55px; padding-top:8px;}
+header .part a {color:#FFF; text-decoration:none;}
+header .part a:hover {color:#FFF; text-decoration:underline;}
+header .part .icone {margin-left:10px; margin-top:10px; float:left; }
+
 #logo {background-image:url(../images/logo.png);background-repeat:no-repeat;width:335px;height:145px;margin-left:212px;margin-right:35px;float:left;}
 #connexion a { color:#FFF; text-decoration:none; }
 #connexion a:hover { color:#FFF; text-decoration:underline; }
-#connexion {padding-top:45px;color:#FFF;}
-#connexion ul{list-style: none}
+#connexion {color:#FFF;float: right;width: 250px;}
+#connexion ul{list-style: none;margin:5px;}
 
 
-#navigation {background-image:url(../images/navbar.png);background-repeat:no-repeat;width:1031px;height:60px;}
-#navigation .part {width:206px;height:60px;color:#FFF;float:left;background-image:url(../images/separateur.png);background-repeat:no-repeat;background-position:right;margin-top:-1px;}
-#navigation .part p {margin-left:55px; padding-top:8px;}
-#navigation .part a {color:#FFF; text-decoration:none;}
-#navigation .part a:hover {color:#FFF; text-decoration:underline;}
-#navigation .part .icone {margin-left:10px; margin-top:10px; float:left; }
 
+#main {background-image:url(../images/corpshaut.png);background-repeat:repeat-x;background-color:#FFF;padding: 5px 10px;}
 
-#main {background-image:url(../images/corpshaut.png);background-repeat:no-repeat;background-color:#FFF;width:1011px;padding: 5px 10px;}
-
-#content {float:right;width:755px;}
+#content {float:right;width: 83%;}
 #content h2 {background-image:url(../images/h2txt.png);background-repeat:no-repeat;width:652px;height:25px;color:#FFF;font-size:11px;padding-top:5px;padding-left:10px;margin-left:45px;}
 
 #menu {width:189px;float:left;margin-left:5px;}
 #menu a {color:#000; text-decoration:none; }
 #menu a:hover {color:#000; text-decoration:underline; }
-#menu h2 {background-image:url(../images/h2.png);background-repeat:no-repeat;width:189px;height:25px;color:#FFF;font-size:11px;text-align:center;padding-top:5px;}
+#menu h2 {background-image:url(../images/h2.png);background-repeat:repeat-x;width:270px;height:25px;color:#FFF;font-size:11px;text-align:center;padding-top:5px;}
 #menu ul li {list-style-image:url(../images/liststyle.png);background-image:url(../images/separateur2.png);background-position:bottom;background-repeat:no-repeat;margin-left:-20px;padding-bottom:7px;padding-top:7px;}
 
 #menu #browser li {margin-left: 18px;padding:0;background-position:0 -1766px;list-style: none}
 
-footer {background-image:url(../images/footer.png);background-repeat:no-repeat;width:100%;height:32px;margin-bottom:10px;color:#939393;font-size:10px;padding-top:10px;padding-left:10px;}
+footer {background-image:url(../images/footer.png);background-repeat:repeat-x;width:100%;height:32px;margin-bottom:10px;color:#939393;font-size:10px;padding-top:10px;}
 footer a {color:#939393; font-style:italic; text-decoration:none; }
 footer a:hover {text-decoration:underline;}
 footer .creativegfx {width:150px;height:24px;display:block;float:right;}
