@@ -61,7 +61,12 @@ class ScriptController extends Action
         {
             $data = $this->getRequest()->getPost()->toArray();
             $script_form->setData($data);
-            if($script_form->isValid())
+            if(!$script_form->isValid())
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save script');
+                $this->useFlashMessenger();
+            }
+            else
             {
                 $script_model = new Script\Model();
                 $script_model->setName($script_form->getValue('name'));
@@ -70,6 +75,7 @@ class ScriptController extends Action
                 $script_model->setContent($script_form->getValue('content'));
                 $script_model->save();
 
+                $this->flashMessenger()->setNameSpace('success')->addMessage('This script has been created');
                 return $this->redirect()->toRoute('scriptEdit', array('id' => $script_model->getId()));
             }
         }
@@ -98,13 +104,20 @@ class ScriptController extends Action
         {
             $data = $this->getRequest()->getPost()->toArray();
             $script_form->setData($data);
-            if($script_form->isValid())
+            if(!$script_form->isValid())
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save script');
+                $this->useFlashMessenger();
+            }
+            else
             {
                 $script_model->setName($script_form->getValue('name'));
                 $script_model->setIdentifier($script_form->getValue('identifier'));
                 $script_model->setDescription($script_form->getValue('description'));
                 $script_model->setContent($script_form->getValue('content'));
                 $script_model->save();
+
+                $this->flashMessenger()->setNameSpace('success')->addMessage('This script has been edited');
                 return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
             }
         }

@@ -72,7 +72,8 @@ class DocumentTypeController extends Action
             $form->setValues($post_data);
             if(!$form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can save document_type');
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not document type');
+                $this->useFlashMessenger();
             }
             else
             {
@@ -146,6 +147,7 @@ class DocumentTypeController extends Action
 
                     $document_type->getAdapter()->getDriver()->getConnection()->commit();
 
+                    $this->flashMessenger()->setNameSpace('success')->addMessage('This document type has been saved');
                     return $this->redirect()->toRoute('documentTypeEdit', array('id' => $document_type->getId()));
                 }
                 catch(Exception $e)
@@ -233,7 +235,8 @@ class DocumentTypeController extends Action
             $form->setValues($post_data);
             if(!$form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can save document_type');
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not document type');
+                $this->useFlashMessenger();
             }
             else
             {

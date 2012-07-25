@@ -61,7 +61,12 @@ class LayoutController extends Action
         {
             $data = $this->getRequest()->getPost()->toArray();
             $layout_form->setData($data);
-            if($layout_form->isValid())
+            if(!$layout_form->isValid())
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save layout');
+                $this->useFlashMessenger();
+            }
+            else
             {
                 $layout_model = new Layout\Model();
                 $layout_model->setName($layout_form->getValue('name'));
@@ -70,6 +75,7 @@ class LayoutController extends Action
                 $layout_model->setContent($layout_form->getValue('content'));
                 $layout_model->save();
 
+                $this->flashMessenger()->setNameSpace('success')->addMessage('This layout has been created');
                 return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_model->getId()));
             }
         }
@@ -99,13 +105,20 @@ class LayoutController extends Action
             $data = $this->getRequest()->getPost()->toArray();
 
             $layout_form->setData($data);
-            if($layout_form->isValid())
+            if(!$layout_form->isValid())
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save layout');
+                $this->useFlashMessenger();
+            }
+            else
             {
                 $layout_model->setName($layout_form->getValue('name'));
                 $layout_model->setIdentifier($layout_form->getValue('identifier'));
                 $layout_model->setDescription($layout_form->getValue('description'));
                 $layout_model->setContent($layout_form->getValue('content'));
                 $layout_model->save();
+
+                $this->flashMessenger()->setNameSpace('success')->addMessage('This layout has been edited');
                 return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
             }
         }

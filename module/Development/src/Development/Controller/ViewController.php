@@ -61,7 +61,12 @@ class ViewController extends Action
         {
             $data = $this->getRequest()->getPost()->toArray();
             $view_form->setData($data);
-            if($view_form->isValid())
+            if(!$view_form->isValid())
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save view');
+                $this->useFlashMessenger();
+            }
+            else
             {
                 $view_model = new View\Model();
                 $view_model->setName($view_form->getValue('name'));
@@ -70,6 +75,7 @@ class ViewController extends Action
                 $view_model->setContent($view_form->getValue('content'));
                 $view_model->save();
 
+                $this->flashMessenger()->setNameSpace('success')->addMessage('This view has been created');
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_model->getId()));
             }
         }
@@ -98,13 +104,20 @@ class ViewController extends Action
         {
             $data = $this->getRequest()->getPost()->toArray();
             $view_form->setData($data);
-            if($view_form->isValid())
+            if(!$view_form->isValid())
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save view');
+                $this->useFlashMessenger();
+            }
+            else
             {
                 $view_model->setName($view_form->getValue('name'));
                 $view_model->setIdentifier($view_form->getValue('identifier'));
                 $view_model->setDescription($view_form->getValue('description'));
                 $view_model->setContent($view_form->getValue('content'));
                 $view_model->save();
+
+                $this->flashMessenger()->setNameSpace('success')->addMessage('This view has been edited');
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
             }
         }

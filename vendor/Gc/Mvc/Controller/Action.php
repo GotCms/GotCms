@@ -132,18 +132,7 @@ class Action extends AbstractActionController
 
         $this->layout()->module = strtolower($module);
 
-        $flash_messenger = $this->flashMessenger();
-        $flash_messages = array();
-        foreach(array('error', 'success', 'information', 'warning') as $namespace)
-        {
-            if($flash_messenger->setNameSpace($namespace)->hasMessages())
-            {
-                $flash_messages[$namespace] = $flash_messenger->setNameSpace($namespace)->getMessages();
-            }
-        }
-
-        $this->layout()->flashMessages = $flash_messages;
-
+        $this->useFlashMessenger(FALSE);
         /**
          * Prepare all resources
          */
@@ -226,5 +215,36 @@ class Action extends AbstractActionController
         $json_model->setVariables($data);
         $json_model->setTerminal(TRUE);
         return $json_model;
+    }
+
+    /**
+     * Initiliaze flash messenger
+     * @return void
+     */
+    protected function useFlashMessenger($force_display = TRUE)
+    {
+        $flash_messenger = $this->flashMessenger();
+        $flash_messages = array();
+        foreach(array('error', 'success', 'information', 'warning') as $namespace)
+        {
+            $flash_namespace = $flash_messenger->setNameSpace($namespace);
+            if($force_display)
+            {
+                if($flash_namespace->hasCurrentMessages())
+                {
+                    $flash_messages[$namespace] = $flash_namespace->getCurrentMessages();
+                    $flash_namespace->clearCurrentMessages();
+                }
+            }
+            else
+            {
+                if($flash_namespace->hasMessages())
+                {
+                    $flash_messages[$namespace] = $flash_namespace->getMessages();
+                }
+            }
+        }
+
+        $this->layout()->flashMessages = $flash_messages;
     }
 }
