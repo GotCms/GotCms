@@ -47,7 +47,7 @@
 </head>
 <body>
     <header class="gradient-black">
-        <?php echo $this->partial('navigation.phtml', 'default', 'test'); ?>
+        <?php echo $this->partial('navigation.phtml', array('active' => $this->module)); ?>
     </header>
 
     <div id="main">
@@ -59,6 +59,7 @@
         </div>
 
         <div id="content">
+            <?php echo $this->partial('messages.phtml', array('messages' => $this->flashMessages)); ?>
             <?php echo $this->content; ?>
         </div>
 

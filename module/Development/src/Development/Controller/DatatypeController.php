@@ -130,6 +130,7 @@ class DatatypeController extends Action
                     $datatype_model->addData($datatype_form->getInputFilter()->getValues());
                     if($datatype_model->save())
                     {
+                        $this->flashMessenger()->setNameSpace('success')->addMessage('This view has been edited');
                         return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
                     }
                 }
@@ -140,10 +141,14 @@ class DatatypeController extends Action
                     */
                     \Gc\Error::set(get_class($this), $e);
                 }
+
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Error during editing.');
+                return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
             }
             else
             {
-                $this->view->message .='There are errors in the data sent. <br />';
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Please correctly fil the form.');
+                return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
             }
         }
 

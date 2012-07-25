@@ -132,6 +132,18 @@ class Action extends AbstractActionController
 
         $this->layout()->module = strtolower($module);
 
+        $flash_messenger = $this->flashMessenger();
+        $flash_messages = array();
+        foreach(array('error', 'success', 'information', 'warning') as $namespace)
+        {
+            if($flash_messenger->setNameSpace($namespace)->hasMessages())
+            {
+                $flash_messages[$namespace] = $flash_messenger->setNameSpace($namespace)->getMessages();
+            }
+        }
+
+        $this->layout()->flashMessages = $flash_messages;
+
         /**
          * Prepare all resources
          */

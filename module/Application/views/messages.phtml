@@ -27,7 +27,16 @@
 
 ?>
 <?php if(!empty($this->messages)):?>
-    <?php foreach($this->messages as $type => $message):?>
-        <div class="<?php echo $type; ?>"><img src="image/ico-<?php echo $type; ?>.png" width="22" height="24"> Lorem Ipsum dolor sit amet</div>
+    <?php foreach($this->messages as $type => $messages):?>
+        <?php foreach($messages as $message): ?>
+            <div class="notification <?php echo $type; ?>">
+                <a class="close" href="#">
+                    <img alt="<?php echo $this->escapeHtml($this->translate('Close')); ?>" title="<?php echo $this->escapeHtml($this->translate('Close this notification')); ?>" src="/images/close-small.png">
+                </a>
+                <div>
+                    <?php echo $this->escapeHtml($this->translate($message)); ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
     <?php endforeach; ?>
 <?php endif; ?>

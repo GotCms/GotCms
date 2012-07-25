@@ -48,10 +48,6 @@ class Module
 
     public function onBootstrap($e)
     {
-        /*
-         * @TODO translator
-            ->addTranslationPattern($translator);
-         */
         if(!\Gc\Registry::isRegistered('Translator'))
         {
             $translator = $e->getApplication()->getServiceManager()->get('translator');

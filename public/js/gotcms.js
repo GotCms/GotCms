@@ -9,6 +9,7 @@ var Gc = (function($)
 
     $document.ready(function(){
         Gc.initialize();
+        Gc.notification();
     });
 
     return {
@@ -405,6 +406,16 @@ var Gc = (function($)
                 {
                     $selector = $(this).find('div:last');
                     $selector.prev('div').html($selector.children().val());
+                });
+            });
+        },
+
+        notification: function()
+        {
+            $(document).on('click', '.notification .close', function() {
+                $(this).parent().fadeOut(function()
+                {
+                    $(this).remove();
                 });
             });
         }
