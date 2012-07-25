@@ -28,7 +28,8 @@
 namespace Gc\User;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+    Gc\Component\IterableInterface,
+    Zend\Db\Sql\Select;
 
 class Collection extends AbstractTable implements IterableInterface
 {
@@ -61,7 +62,11 @@ class Collection extends AbstractTable implements IterableInterface
      */
     private function setUsers()
     {
-        $select = $this->select();
+        $select = $this->select(function(Select $select)
+        {
+            $select->order('lastname');
+        });
+
         $rows = $this->fetchAll($select);
         $users = array();
         foreach($rows as $row)

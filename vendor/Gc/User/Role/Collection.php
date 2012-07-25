@@ -27,7 +27,8 @@
 
 namespace Gc\User\Role;
 
-use Gc\Db\AbstractTable;
+use Gc\Db\AbstractTable,
+    Zend\Db\Sql\Select;
 
 class Collection extends AbstractTable
 {
@@ -55,7 +56,11 @@ class Collection extends AbstractTable
     {
         if(empty($this->_roles))
         {
-            $rows = $this->select();
+            $rows = $this->select(function(Select $select)
+            {
+                $select->order('name');
+            });
+
             $roles = array();
             foreach($rows as $row)
             {

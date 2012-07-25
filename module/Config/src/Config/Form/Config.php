@@ -221,6 +221,14 @@ class Config extends AbstractForm
         ), 'locale');
 
         $this->getInputFilter()->add(array(
+            'name' => 'mail_from_name',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+            ),
+        ), 'mail_from_name');
+
+        $this->getInputFilter()->add(array(
             'name' => 'mail_from',
             'required' => TRUE,
             'validators' => array(
@@ -228,13 +236,6 @@ class Config extends AbstractForm
             ),
         ), 'mail_from');
 
-        $this->getInputFilter()->add(array(
-            'name' => 'mail_from_name',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
-            ),
-        ), 'mail_from_name');
 
         return $this;
     }

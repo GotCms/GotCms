@@ -103,13 +103,16 @@ class CmsController extends Action
                 $inputs = $this->_form->getInputFilter()->getValidInput();
                 foreach($inputs as $input)
                 {
-                    Config::setValue($input->getName(), $input->getValue());
+                    if(method_exists($input, 'getName'))
+                    {
+                        Config::setValue($input->getName(), $input->getValue());
+                    }
                 }
 
                 return $this->redirect()->toRoute($this->getRouteMatch()->getMatchedRouteName());
             }
-
         }
+
         return array('form' => $this->_form);
     }
 }

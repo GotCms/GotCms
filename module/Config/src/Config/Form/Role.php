@@ -50,6 +50,9 @@ class Role extends AbstractForm
                     array('name' => 'not_empty'),
                 ),
             ),
+            'description' => array(
+                'required'=> FALSE,
+            ),
             'permissions' => array(
                 'required'=> FALSE,
             ),
