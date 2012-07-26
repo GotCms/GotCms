@@ -45,6 +45,7 @@ abstract class AbstractForm extends Form
     {
         parent::__construct($name);
         $this->setAttribute('method', 'post');
+        $this->setUseInputFilterDefaults(FALSE);
         $this->init();
     }
 
@@ -78,16 +79,19 @@ abstract class AbstractForm extends Form
                 if($this->has($element_name))
                 {
                     $element = $this->get($element_name);
-                    $this->get($element_name)->setAttribute('value', $element_value);
+                    $this->get($element_name)->setValue($element_value);
                 }
 
                 if($input_filter->has($element_name))
                 {
-                    $validator = $input_filter->get($element_name)->getValidatorChain()->getValidator('Zend\Validator\Db\NoRecordExists');;
+                    $validators = $validator = $input_filter->get($element_name)->getValidatorChain()->getValidators();
 
-                    if(!empty($validator))
+                    foreach($validators as $validator)
                     {
-                        $validator->setExclude(array('field' => 'id', 'value' => $table->getId()));
+                        if($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists)
+                        {
+                            $validator['instance']->setExclude(array('field' => 'id', 'value' => $table->getId()));
+                        }
                     }
                 }
             }
@@ -133,11 +137,11 @@ abstract class AbstractForm extends Form
      * @param string $name
      * @return string
      */
-    public function getValue($name)
+    public function getValue($name = NULL)
     {
         if($this->has($name))
         {
-            return $this->get($name)->getAttribute('value');
+            return $this->get($name)->getValue();
         }
 
         return NULL;

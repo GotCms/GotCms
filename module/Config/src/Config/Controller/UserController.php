@@ -81,8 +81,7 @@ class UserController extends Action
             return $this->redirect()->toRoute('userLogin', array('redirect' => $redirect));
         }
 
-        $redirect = $this->getRouteMatch()->getParam('redirect');
-        $login_form->get('redirect')->setAttribute('value', $redirect);
+        $login_form->get('redirect')->setValue($this->getRouteMatch()->getParam('redirect'));
 
         return array('form' => $login_form);
     }

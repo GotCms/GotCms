@@ -27,7 +27,7 @@
 
 use Zend\Loader\AutoloaderFactory;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Mvc\Service\ServiceManagerConfiguration;
+use Zend\Mvc\Service\ServiceManagerConfig;
 
 chdir(dirname(__DIR__));
 define('GC_APPLICATION_PATH', getcwd());
@@ -59,11 +59,8 @@ if (!class_exists('Zend\Loader\AutoloaderFactory')) {
     throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
 }
 
-// Setup service manager
-$serviceManager = new ServiceManager(new ServiceManagerConfiguration($configuration['service_manager']));
-$serviceManager->setService('ApplicationConfiguration', $configuration);
-$serviceManager->get('ModuleManager')->loadModules();
 
 // Run application
-$application = $serviceManager->get('Application');
-$application->bootstrap()->run()->send();
+$application = Zend\Mvc\Application::init($configuration);
+\Gc\Registry::set('Application', $application);
+$application->run()->send();;

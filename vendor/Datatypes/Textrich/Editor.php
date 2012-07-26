@@ -59,7 +59,7 @@ class Editor extends AbstractEditor
         $textrich = new Element\Textarea($this->getName());
         $textrich->setAttribute('label', $this->_property->getName());
         $textrich->setAttribute('id', $id);
-        $textrich->setAttribute('value', $this->_property->getValue());
+        $textrich->setValue($this->_property->getValue());
 
         $script = '<script type="text/javascript">
             $(function()

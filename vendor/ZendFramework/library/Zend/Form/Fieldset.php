@@ -319,7 +319,9 @@ class Fieldset extends Element implements FieldsetInterface
             $messages = array();
             foreach ($this->byName as $name => $element) {
                 $messageSet = $element->getMessages();
-                if (!is_array($messageSet) && !$messageSet instanceof Traversable) {
+                if (!is_array($messageSet) 
+                    && !$messageSet instanceof Traversable
+                    || empty($messageSet)) {
                     continue;
                 }
                 $messages[$name] = $messageSet;
@@ -389,7 +391,7 @@ class Fieldset extends Element implements FieldsetInterface
                 continue;
             }
 
-            $element->setAttribute('value', $value);
+            $element->setValue($value);
         }
     }
 
@@ -552,7 +554,7 @@ class Fieldset extends Element implements FieldsetInterface
                 // Is the object bound to the fieldset of the same type ? Note that we are using a little hack
                 // here, as in case of collection, we bind array to object instance, and let the collection extract
                 // the data
-                if ($fieldset instanceof Collection || (is_object($object) && $object instanceof $fieldset->object)) {
+                if ($fieldset instanceof Collection || (is_object($object) && $fieldset->object && $object instanceof $fieldset->object)) {
                     $fieldset->object = $object;
                     $values[$name] = $fieldset->extract();
                 }

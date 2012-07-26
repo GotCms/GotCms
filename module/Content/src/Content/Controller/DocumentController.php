@@ -95,7 +95,7 @@ class DocumentController extends Action
         $parent_id = $this->getRouteMatch()->getParam('id');
         if(!empty($parent_id))
         {
-            $document_form->get('parent')->setAttribute('value', $parent_id);
+            $document_form->get('parent')->setValue($parent_id);
         }
 
         if($this->getRequest()->isPost())

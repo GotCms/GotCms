@@ -56,12 +56,7 @@ var Gc = (function($)
             $('.tabs').tabs();
             var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
 
-            $('.sortable').accordion({
-                collapsible: true,
-                active : -1,
-                header: "> li > h3"
-            })
-            .sortable({
+            $('.sortable').sortable({
                 axis: "y",
                 handle: "h3",
 

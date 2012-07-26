@@ -51,7 +51,7 @@ class Editor extends AbstractEditor
         $property = $this->getProperty();
         $textstring = new Element\Text($this->getName());
         $textstring->setAttribute('label', $property->getName());
-        $textstring->setAttribute('value', $this->getValue());
+        $textstring->setValue($this->getValue());
         if(!empty($parameters['length']))
         {
             $textstring->setAttribute('maxlength', $parameters['length']);

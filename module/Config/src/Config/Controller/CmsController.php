@@ -92,9 +92,9 @@ class CmsController extends Action
         if($this->getRequest()->isPost())
         {
             $this->_form->setData($this->getRequest()->getPost()->toArray());
+
             if(!$this->_form->isValid())
             {
-
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save configuration');
                 $this->useFlashMessenger();
             }
@@ -109,6 +109,7 @@ class CmsController extends Action
                     }
                 }
 
+                $this->flashMessenger()->setNameSpace('success')->addMessage('Configuration saved');
                 return $this->redirect()->toRoute($this->getRouteMatch()->getMatchedRouteName());
             }
         }

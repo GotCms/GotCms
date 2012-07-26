@@ -197,18 +197,11 @@ abstract class AbstractRestfulController implements
                     break;
                 case 'post':
                     $action = 'create';
-                    $return = $this->create($request->getPost()->toArray());
+                    $return = $this->processPostData($request);
                     break;
                 case 'put':
-                    if (null === $id = $routeMatch->getParam('id')) {
-                        if (!($id = $request->getQuery()->get('id', false))) {
-                            throw new \DomainException('Missing identifier');
-                        }
-                    }
-                    $content = $request->getContent();
-                    parse_str($content, $parsedParams);
                     $action = 'update';
-                    $return = $this->update($id, $parsedParams);
+                    $return = $this->processPutData($request, $routeMatch);
                     break;
                 case 'delete':
                     if (null === $id = $routeMatch->getParam('id')) {
@@ -231,6 +224,34 @@ abstract class AbstractRestfulController implements
         // If a listener returns a response object, return it immediately
         $e->setResult($return);
         return $return;
+    }
+
+    /**
+     * Process post data and call create
+     * 
+     * @param Request $request
+     */
+    public function processPostData(Request $request)
+    {     
+        return $this->create($request->getPost()->toArray());
+    }
+
+    /**
+     * Process put data and call update
+     * 
+     * @param Request $request
+     * @param $routeMatch
+     */
+    public function processPutData(Request $request, $routeMatch)
+    {
+        if (null === $id = $routeMatch->getParam('id')) {
+            if (!($id = $request->getQuery()->get('id', false))) {
+                throw new \DomainException('Missing identifier');
+            }
+        }
+        $content = $request->getContent();
+        parse_str($content, $parsedParams);
+        return $this->update($id, $parsedParams);
     }
 
     /**
@@ -270,7 +291,8 @@ abstract class AbstractRestfulController implements
         $events->setIdentifiers(array(
             'Zend\Stdlib\DispatchableInterface',
             __CLASS__,
-            get_called_class()
+            get_called_class(),
+            substr(get_called_class(), 0, strpos(get_called_class(), '\\'))
         ));
         $this->events = $events;
         $this->attachDefaultListeners();

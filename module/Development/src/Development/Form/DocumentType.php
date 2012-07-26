@@ -220,29 +220,29 @@ class DocumentType extends AbstractForm
 
         $description = new Element\Text('description');
         $required = new Element\Checkbox('required');
-        $required->setAttribute('value', 1);
+        $required->setValue(1);
         $property_id = new Element\Hidden('property_id');
 
         if($property instanceof Property\Model)
         {
-            $name->setAttribute('value', $property->getName());
-            $identifier->setAttribute('value', $property->getIdentifier());
-            $tab->setAttribute('value', $property->getTabId());
-            $datatype->setAttribute('value', $property->getDatatypeId());
-            $description->setAttribute('value', $property->getDescription());
+            $name->setValue($property->getName());
+            $identifier->setValue($property->getIdentifier());
+            $tab->setValue($property->getTabId());
+            $datatype->setValue($property->getDatatypeId());
+            $description->setValue($property->getDescription());
             $required->setAttribute('checkedValue', $property->isRequired());
-            $property_id->setAttribute('value', $property->getId());
+            $property_id->setValue($property->getId());
             $property_fieldset_name = $property->getId();
         }
         elseif(is_array($property))
         {
-            $name->setAttribute('value', $property['name']);
-            $identifier->setAttribute('value', $property['identifier']);
-            $tab->setAttribute('value', $property['tab']);
-            $datatype->setAttribute('value', $property['datatype']);
-            $description->setAttribute('value', $property['description']);
+            $name->setValue($property['name']);
+            $identifier->setValue($property['identifier']);
+            $tab->setValue($property['tab']);
+            $datatype->setValue($property['datatype']);
+            $description->setValue($property['description']);
             $required->setAttribute('checkedValue', !empty($property['is_required']));
-            $property_id->setAttribute('value', str_replace('property', '', $property['id']));
+            $property_id->setValue(str_replace('property', '', $property['id']));
             $property_fieldset_name = $property['id'];
         }
 
@@ -343,17 +343,17 @@ class DocumentType extends AbstractForm
 
         if($tab instanceof Tab\Model)
         {
-            $name->setAttribute('value', $tab->getName());
-            $description->setAttribute('value', $tab->getDescription());
-            $tab_id->setAttribute('value', $tab->getId());
+            $name->setValue($tab->getName());
+            $description->setValue($tab->getDescription());
+            $tab_id->setValue($tab->getId());
             $tab_fieldset_name = $tab->getId();
 
         }
         elseif(is_array($tab))
         {
-            $name->setAttribute('value', $tab['name']);
-            $description->setAttribute('value', $tab['description']);
-            $tab_id->setAttribute('value', str_replace('tab', '', $tab['id']));
+            $name->setValue($tab['name']);
+            $description->setValue($tab['description']);
+            $tab_id->setValue(str_replace('tab', '', $tab['id']));
             $tab_fieldset_name = $tab['id'];
         }
 
@@ -397,13 +397,13 @@ class DocumentType extends AbstractForm
         if($element instanceof DocumentTypeModel)
         {
             $infos_form = $this->getInfos();
-            $infos_form->get('name')->setAttribute('value', $element->getName());
-            $infos_form->get('description')->setAttribute('value', $element->getDescription());
+            $infos_form->get('name')->setValue($element->getName());
+            $infos_form->get('description')->setValue($element->getDescription());
 
             $views_form = $this->getViews();
-            $views_form->get('default_view')->setAttribute('value', $element->getDefaultViewId());
+            $views_form->get('default_view')->setValue($element->getDefaultViewId());
             $views_collection = $element->getAvailableViews();
-            $views_form->get('available_views')->setAttribute('value', $views_collection->getSelect());
+            $views_form->get('available_views')->setValue($views_collection->getSelect());
 
             $tabs = $element->getTabs();
             $session = $element;

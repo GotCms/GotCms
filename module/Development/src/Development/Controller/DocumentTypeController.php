@@ -225,9 +225,15 @@ class DocumentTypeController extends Action
         }
         else
         {
-            if($validator = $form->getInputFilter()->get('infos')->get('name')->getValidatorChain()->getValidator('Zend\Validator\Db\NoRecordExists'))
+
+            $validators = $form->getInputFilter()->get('infos')->get('name')->getValidatorChain()->getValidators();
+
+            foreach($validators as $validator)
             {
-                $validator->setExclude(array('field' => 'id', 'value' => $document_type->getId()));
+                if($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists)
+                {
+                    $validator['instance']->setExclude(array('field' => 'id', 'value' => $document_type->getId()));
+                }
             }
 
             $post_data = $this->getRequest()->getPost()->toArray();

@@ -325,6 +325,6 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getUrl()
     {
-        return $GLOBALS['application']->getMvcEvent()->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));
+        return \Gc\Registry::get('Application')->getMvcEvent()->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));
     }
 }

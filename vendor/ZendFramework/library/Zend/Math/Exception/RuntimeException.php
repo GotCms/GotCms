@@ -17,8 +17,6 @@ namespace Zend\Math\Exception;
  * @package    Zend_Math
  * @subpackage Exception
  */
-class RuntimeException
-    extends \RuntimeException
-    implements ExceptionInterface
-{
-}
+class RuntimeException extends \RuntimeException implements
+    ExceptionInterface
+{}

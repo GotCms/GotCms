@@ -89,7 +89,7 @@ class Role extends AbstractForm
             }
         }
 
-        $element->setAttribute('value', $data);
+        $element->setValue($data);
         $this->add($element);
     }
 }

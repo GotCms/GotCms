@@ -94,7 +94,7 @@ class Install extends AbstractForm
             ->setAttribute('label', 'Driver');
 
         $hostname = new Element\Text('hostname');
-        $hostname->setAttribute('value', 'localhost')
+        $hostname->setValue('localhost')
             ->setAttribute('label', 'Hostname');
 
         $username = new Element\Text('username');

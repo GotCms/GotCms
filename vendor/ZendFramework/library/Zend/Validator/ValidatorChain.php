@@ -211,6 +211,16 @@ class ValidatorChain implements
     }
 
     /**
+     * Get all the validators
+     *
+     * @return array
+     */
+    public function getValidators()
+    {
+        return $this->validators;
+    }
+
+    /**
      * Invoke chain as command
      *
      * @param  mixed $value
@@ -219,18 +229,5 @@ class ValidatorChain implements
     public function __invoke($value)
     {
         return $this->isValid($value);
-    }
-
-    public function getValidator($name)
-    {
-        foreach($this->validators as $validator)
-        {
-            if($validator['instance'] instanceof $name)
-            {
-                return $validator['instance'];
-            }
-        }
-
-        return NULL;
     }
 }

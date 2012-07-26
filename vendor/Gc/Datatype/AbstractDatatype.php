@@ -103,7 +103,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getUploadUrl($property_id)
     {
-        $router = $GLOBALS['application']->getMvcEvent()->getRouter();
+        $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
 
         return $router->assemble(array('document_id' => $this->getDocumentId(), 'property_id' => $property_id), array('name' => 'documentUploadMedia'));
     }
@@ -118,7 +118,7 @@ abstract class AbstractDatatype extends AbstractTable
     {
         if($this->getHelperBroker() === NULL)
         {
-            $this->setHelperBroker($GLOBALS['application']->getServiceManager()->get('viewhelpermanager'));
+            $this->setHelperBroker(\Gc\Registry::get('Application')->getServiceManager()->get('viewhelpermanager'));
         }
 
         return $this->getHelperBroker()->get($name);
@@ -152,7 +152,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function render($name, Array $data = array())
     {
-        $renderer = $GLOBALS['application']->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+        $renderer = \Gc\Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
 
         $view_model = new ViewModel();
         $view_model->setTemplate($name);
@@ -168,7 +168,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function addPath($dir)
     {
-        $renderer = $GLOBALS['application']->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+        $renderer = \Gc\Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
         $iterators = $renderer->resolver()->getIterator()->toArray();
         foreach($iterators as $iterator)
         {

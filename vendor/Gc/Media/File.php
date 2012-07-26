@@ -96,7 +96,7 @@ class File extends Object
                 //$fileclass->error = 'null';
                 $file_object->thumbnail_url = str_replace(GC_APPLICATION_PATH . '/public', '', $file->getDestination()) . '/' . $file_data['name'];
 
-                $router = $GLOBALS['application']->getMvcEvent()->getRouter();
+                $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
                 $file_object->delete_url = $router->assemble(array(
                     'document_id' => $this->getDocument()->getId(),
                     'property_id' => $this->getProperty()->getId(),

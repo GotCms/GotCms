@@ -10,6 +10,7 @@
 
 namespace Zend\Log\Writer;
 
+use Traversable;
 use Zend\Log\Exception;
 use Zend\Log\Formatter\Simple as SimpleFormatter;
 use Zend\Mail\Message as MailMessage;
@@ -73,19 +74,42 @@ class Mail extends AbstractWriter
     /**
      * Constructor
      *
-     * @param MailMessage $mail
-     * @param Transport\TransportInterface $transport Optional
+     * @param  MailMessage|array|Traversable $mail
+     * @param  Transport\TransportInterface $transport Optional
      * @return Mail
      */
-    public function __construct(MailMessage $mail, Transport\TransportInterface $transport = null)
+    public function __construct($mail, Transport\TransportInterface $transport = null)
     {
-        $this->mail = $mail;
-        if (null !== $transport) {
-            $this->setTransport($transport);
-        } else {
-            // default transport
-            $this->setTransport(new Transport\Sendmail());
+        if ($mail instanceof Traversable) {
+            $mail = iterator_to_array($mail);
         }
+
+        if (is_array($mail)) {
+            $transport = isset($mail['transport']) ? $mail['transport'] : null;
+            $mail      = isset($mail['mail']) ? $mail['mail'] : null;
+        }
+
+        // Ensure we have a valid mail message
+        if (!$mail instanceof MailMessage) {
+            throw new Exception\InvalidArgumentException(
+                'Mail parameter of type %s is invalid; must be of type Zend\Mail\Message',
+                (is_object($mail) ? get_class($mail) : gettype($mail))  
+            );
+        }
+        $this->mail = $mail;
+
+        // Ensure we have a valid mail transport
+        if (null === $transport) {
+            $transport = new Transport\Sendmail();
+        }
+        if (!$transport instanceof Transport\TransportInterface) {
+            throw new Exception\InvalidArgumentException(
+                'Transport parameter of type %s is invalid; must be of type Zend\Mail\Transport\TransportInterface',
+                (is_object($transport) ? get_class($transport) : gettype($transport))  
+            );
+        }
+        $this->setTransport($transport);
+
         $this->formatter = new SimpleFormatter();
     }
 

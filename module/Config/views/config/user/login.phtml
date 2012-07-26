@@ -3,7 +3,7 @@
     <fieldset id="inputs">
         <input name="login" id="login" type="text" placeholder="<?php echo $this->escapeHtml($this->translate('Login')); ?>" autofocus required>
         <input name="password" id="password" type="password" placeholder="<?php echo $this->escapeHtml($this->translate('Password')); ?>" required>
-        <input name="redirect" id="redirect" type="hidden" value="<?php echo $this->escapeHtml($this->form->get('redirect')->getAttribute('value')); ?>">
+        <input name="redirect" id="redirect" type="hidden" value="<?php echo $this->escapeHtml($this->form->get('redirect')->getValue()); ?>">
     </fieldset>
     <fieldset id="actions">
         <input type="submit" id="submit" value="<?php echo $this->escapeHtml($this->translate('Log In')); ?>">

@@ -29,7 +29,7 @@ namespace Gc\User;
 
 use Gc\User\Role\Model as RoleModel,
     Gc\User\Model as UserModel,
-    Zend\Acl as ZendAcl,
+    Zend\Permissions\Acl as ZendAcl,
     Zend\Db\TableGateway\TableGateway,
     Zend\Db\Sql\Select;
 

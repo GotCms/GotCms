@@ -10,6 +10,7 @@
 
 namespace Zend\Log\Filter;
 
+use Traversable;
 use Zend\Log\Exception;
 use Zend\Stdlib\ErrorHandler;
 
@@ -30,12 +31,18 @@ class Regex implements FilterInterface
     /**
      * Filter out any log messages not matching the pattern
      *
-     * @param string $regex Regular expression to test the log message
+     * @param string|array|Traversable $regex Regular expression to test the log message
      * @return Regex
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($regex)
     {
+        if ($regex instanceof Traversable) {
+            $regex = iterator_to_array($regex);
+        }
+        if (is_array($regex)) {
+            $regex = isset($regex['regex']) ? $regex['regex'] : null;
+        }
         ErrorHandler::start(E_WARNING);
         $result = preg_match($regex, '');
         ErrorHandler::stop();

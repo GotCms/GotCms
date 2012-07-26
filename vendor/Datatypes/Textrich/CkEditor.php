@@ -137,7 +137,7 @@ class CkEditor extends Object
 
                     if(!empty($toolbar_items[$item]))
                     {
-                        $element->setAttribute('value', 1);
+                        $element->setValue(1);
                     }
 
                     $fieldset->add($element);

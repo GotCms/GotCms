@@ -173,7 +173,7 @@ abstract class AbstractEditor extends Object
      */
     public function getRequest()
     {
-        return $GLOBALS['application']->getRequest();
+        return \Gc\Registry::get('Application')->getRequest();
     }
 
     /**

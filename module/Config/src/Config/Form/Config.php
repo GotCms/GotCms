@@ -83,7 +83,7 @@ class Config extends AbstractForm
         $this->getInputFilter()->add(array(
             'name' => 'site_is_offline',
             'required' => FALSE,
-            'allow_empty' => TRUE
+            'required' => FALSE,
         ), 'site_is_offline');
 
         $this->getInputFilter()->add(array(
@@ -128,7 +128,7 @@ class Config extends AbstractForm
         //Debug settings
         $debug_fieldset = new Fieldset('debug');
         $debug_is_active = new Element\Checkbox('debug_is_active');
-        $debug_is_active->setAttribute('label', 'Is active')
+        $debug_is_active->setAttribute('label', 'Debug is active')
             ->setAttribute('class', 'input-text');
 
         $debug_fieldset->add($debug_is_active);
@@ -252,19 +252,7 @@ class Config extends AbstractForm
             {
                 if($fieldset->has($config['identifier']))
                 {
-                    $element = $fieldset->get($config['identifier']);
-                    if($element->getAttribute('type') == 'checkbox')
-                    {
-                        if(!empty($config['value']))
-                        {
-                            $element->setAttribute('checked', 'checked');
-                        }
-                    }
-                    else
-                    {
-                        $element->setAttribute('value', $config['value']);
-                    }
-
+                    $fieldset->get($config['identifier'])->setValue($config['value']);
                     break;
                 }
             }

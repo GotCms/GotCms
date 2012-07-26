@@ -322,6 +322,16 @@ class Form extends Fieldset implements FormInterface
     }
 
     /**
+     * Check if the form has been validated
+     *
+     * @return bool
+     */
+    public function hasValidated()
+    {
+        return $this->hasValidated;
+    }
+
+    /**
      * Validate the form
      *
      * Typically, will proxy to the composed input filter.
@@ -479,7 +489,9 @@ class Form extends Fieldset implements FormInterface
 
                 $value = $values;
             } else {
-                $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
+                if (isset($data[$key])) {
+                    $this->prepareValidationGroup($fieldset, $data[$key], $validationGroup[$key]);
+                }
             }
         }
     }

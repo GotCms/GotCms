@@ -94,20 +94,20 @@ class Document extends AbstractForm
 
     public function load(DocumentModel $document)
     {
-        $this->get('name')->setAttribute('value', $document->getName());
-        $this->get('url_key')->setAttribute('value', $document->getUrlKey());
+        $this->get('name')->setValue($document->getName());
+        $this->get('url_key')->setValue($document->getUrlKey());
 
         $status = new Element\Checkbox('status');
         $status->setAttribute('label', 'Publish')
             ->setAttribute('checkedValue', DocumentModel::STATUS_ENABLE)
             ->setAttribute('id', 'status')
-            ->setAttribute('value', $document->getStatus());
+            ->setValue($document->getStatus());
 
         $this->add($status);
 
         $show_in_nav = new Element\Checkbox('show_in_nav');
         $show_in_nav->setAttribute('label', 'Show in nav')
-            ->setAttribute('value', $document->showInNav())
+            ->setValue($document->showInNav())
             ->setAttribute('id', 'show_in_nav')
             ->setAttribute('checkedValue', 1);
 
@@ -116,7 +116,7 @@ class Document extends AbstractForm
         $views_collection = new View\Collection();
         $view = new Element\Select('view');
         $view->setAttribute('options', $views_collection->getSelect())
-            ->setAttribute('value', (string)$document->getViewId())
+            ->setValue((string)$document->getViewId())
             ->setAttribute('id', 'view')
             ->setAttribute('label', 'View');
 
@@ -125,7 +125,7 @@ class Document extends AbstractForm
         $layouts_collection = new Layout\Collection();
         $layout = new Element\Select('layout');
         $layout->setAttribute('options', $layouts_collection->getSelect())
-            ->setAttribute('value', (string)$document->getLayoutId())
+            ->setValue((string)$document->getLayoutId())
             ->setAttribute('id', 'layout')
             ->setAttribute('label', 'Layout');
 

@@ -85,6 +85,7 @@ class EventManager implements EventManagerInterface
     public function setSharedManager(SharedEventManagerInterface $sharedEventManager)
     {
         $this->sharedManager = $sharedEventManager;
+        StaticEventManager::setInstance($sharedEventManager);
         return $this;
     }
 
@@ -101,13 +102,28 @@ class EventManager implements EventManagerInterface
     /**
      * Get shared event manager
      *
+     * If one is not defined, but we have a static instance in 
+     * StaticEventManager, that one will be used and set in this instance.
+     *
+     * If none is available in the StaticEventManager, a boolean false is 
+     * returned.
+     *
      * @return false|SharedEventManagerInterface
      */
     public function getSharedManager()
     {
-        if (null === $this->sharedManager) {
-            $this->setSharedManager(StaticEventManager::getInstance());
+        // "false" means "I do not want a shared manager; don't try and fetch one"
+        if (false === $this->sharedManager
+            || $this->sharedManager instanceof SharedEventManagerInterface
+        ) {
+            return $this->sharedManager;
         }
+
+        if (!StaticEventManager::hasInstance()) {
+            return false;
+        }
+
+        $this->sharedManager = StaticEventManager::getInstance();
         return $this->sharedManager;
     }
 
@@ -148,7 +164,7 @@ class EventManager implements EventManagerInterface
         if (is_array($identifiers) || $identifiers instanceof \Traversable) {
             $this->identifiers = array_unique($this->identifiers + (array) $identifiers);
         } elseif ($identifiers !== null) {
-            $this->identifiers = array_unique($this->identifiers + array($identifiers));
+            $this->identifiers = array_unique(array_merge($this->identifiers, array($identifiers)));
         }
         return $this;
     }
