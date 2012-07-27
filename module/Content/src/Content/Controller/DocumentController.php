@@ -189,6 +189,7 @@ class DocumentController extends Action
         if(empty($document))
         {
             $this->flashMessenger()->setNameSpace('error')->addMessage('Document does not exists !');
+            $this->useFlashMessenger();
         }
         else
         {
@@ -222,17 +223,38 @@ class DocumentController extends Action
                 $properties = $this->_loadProperties($document_type_id, $tab->getId(), $document->getId());
 
                 $fieldset = new \Zend\Form\Fieldset('tabs-'.$idx);
-                foreach($properties as $property)
+                if($this->getRequest()->isPost())
                 {
-                    $property->setDocumentId($document->getId())->loadValue();
-                    if($this->getRequest()->isPost())
+                    $connection = $document->getAdapter()->getDriver()->getConnection();
+                    try
                     {
-                        if(!Datatype\Model::saveEditor($property, $document))
+                        $connection->beginTransaction();
+                        foreach($properties as $property)
                         {
-                            $has_error = TRUE;
+                            $property->setDocumentId($document->getId())->loadValue();
+                            if(!Datatype\Model::saveEditor($property, $document))
+                            {
+                                $has_error = TRUE;
+                            }
+                        }
+
+                        if($has_error)
+                        {
+                            $connection->rollBack();
+                        }
+                        else
+                        {
+                            $connection->commit();
                         }
                     }
+                    catch(Exception $e)
+                    {
+                        $connection->rollBack();
+                    }
+                }
 
+                foreach($properties as $property)
+                {
                     \Gc\Form\AbstractForm::addContent($fieldset, Datatype\Model::loadEditor($property, $document));
                 }
 
@@ -256,15 +278,17 @@ class DocumentController extends Action
                 {
                     $document->setStatus(DocumentModel::STATUS_DISABLE);
                     $document->setUrlKey($old_url_key);
-                    $this->flashMessenger()->setNameSpace('error')->addMessage('This document cannot be published and show in nav because one or more properties values are required !');
+                    $this->flashMessenger()->setNameSpace('error')->addMessage('This document cannot be saved because one or more properties values are required !');
+                    $this->useFlashMessenger();
                 }
                 else
                 {
                     $this->flashMessenger()->setNameSpace('success')->addMessage('Document saved !');
                     $document->addData($form_document_add->getInputFilter()->getValues());
-                }
+                    $document->save();
 
-                $document->save();
+                    return $this->redirect()->toRoute('documentEdit', array('id' => $document_id));
+                }
             }
 
             $tabs = new Component\Tabs($tabs_array);
