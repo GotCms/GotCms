@@ -57,18 +57,6 @@ var Gc = (function($)
             $('.tabs').tabs();
             var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
 
-            $('.sortable').sortable(
-            {
-                axis: "y",
-                handle: "h3",
-                stop: function( event, ui )
-                {
-                    // IE doesn't register the blur when sorting
-                    // so trigger focusout handlers to remove .ui-state-focus
-                    ui.item.children( "h3" ).triggerHandler('focusout');
-                }
-            }).disableSelection();
-
             var $tab_items = $('ul:first li', $tabs ).droppable({
                 accept: ".connected-sortable *",
                 hoverClass: "ui-state-hover",
@@ -318,7 +306,8 @@ var Gc = (function($)
 
         showDialogConfirm: function($title, $url)
         {
-            $('#dialog').attr('title', $title).dialog({
+            $('#dialog').attr('title', $title).dialog(
+            {
                 bgiframe        : false,
                 resizable       : false,
                 height          : 150,
