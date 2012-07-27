@@ -52,7 +52,12 @@ class Module
         {
             $translator = $e->getApplication()->getServiceManager()->get('translator');
             $translator->addTranslationPattern('phparray', GC_APPLICATION_PATH . '/data/translate/', '%s.php', 'default');
-            $translator->setLocale(\Gc\Core\Config::getValue('locale'));
+
+            if(\Gc\Registry::isRegistered('Db'))
+            {
+                $translator->setLocale(\Gc\Core\Config::getValue('locale'));
+            }
+
             \Gc\Registry::set('Translator', $translator);
         }
     }
@@ -146,6 +151,7 @@ class Module
                 {
                     $db_adapter = new DbAdapter($config['db']);
                     \Gc\Registry::set('Configuration', $config);
+                    \Gc\Registry::set('Db', $db_adapter);
                     \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
                 }
             }

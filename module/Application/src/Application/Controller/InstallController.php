@@ -49,6 +49,13 @@ class InstallController extends Action
         {
             return $this->redirect()->toUrl('/');
         }
+
+        //Force locale to translator
+        $session = $this->getSession();
+        if(!empty($session['install']['lang']))
+        {
+            \Gc\Registry::get('Translator')->setLocale($session['install']['lang']);
+        }
     }
 
     /**
@@ -117,6 +124,7 @@ class InstallController extends Action
         $php_data[] = array('label' => 'Php version >= 5.3.3', 'value' => PHP_VERSION_ID > 50303);
         $php_data[] = array('label' => 'Pdo', 'value' => extension_loaded('pdo'));
         $php_data[] = array('label' => 'Xml', 'value' => extension_loaded('xml'));
+        $php_data[] = array('label' => 'Intl', 'value' => extension_loaded('intl'));
         $php_data[] = array('label' => 'Database (Mysql, Pgsql)', 'value' => extension_loaded('pdo_mysql') or extension_loaded('pdo_pgsql'));
         $php_data[] = array('label' => 'Mbstring', 'value' => extension_loaded('mbstring'));
         $php_data[] = array('label' => 'Json', 'value' => function_exists('json_encode') and function_exists('json_decode'));

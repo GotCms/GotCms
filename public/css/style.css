@@ -120,7 +120,6 @@ header .part a {color:#FFF; text-decoration:none;}
 header .part a:hover {color:#FFF; text-decoration:none;}
 header .part .icone {margin-left:10px; margin-top:10px; float:left; }
 
-#logo {background-image:url(../images/logo.png);background-repeat:no-repeat;width:335px;height:145px;margin-left:212px;margin-right:35px;float:left;}
 #connexion a { color:#FFF; text-decoration:none; }
 #connexion a:hover { color:#FFF; text-decoration:underline; }
 #connexion {color:#FFF;float: right;width: 250px;}
@@ -173,7 +172,7 @@ footer a:hover {text-decoration:underline;}
 #one-page-form #actions a{color:#3151a2;float:right;line-height:35px;margin-left:10px}
 #one-page-form #back{display:block;text-align:center;position:relative;top:60px;color:#999}
 
-#main-installer {overflow:hidden;background-color:#FFF;width:1011px;padding-left:10px;padding-right:10px;}
+#main-installer {background-color:#FFF;padding-left:10px;padding-right:10px;}
 #main-installer h1 {text-align:center}
 #main-installer h2 {margin-top:0}
 #main-installer nav {float:left;width:200px}
