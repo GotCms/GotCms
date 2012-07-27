@@ -249,19 +249,19 @@ ALTER TABLE "core_session" ADD CONSTRAINT "core_session_pk" PRIMARY KEY("id");
 -- End Table's declaration
 
 -- Start Relation's declaration
-ALTER TABLE "document_type_view" ADD CONSTRAINT "fk_document_type_views_views" FOREIGN KEY ("view_id") REFERENCES "view"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "document_type_view" ADD CONSTRAINT "fk_document_type_views_views" FOREIGN KEY ("view_id") REFERENCES "view"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "property" ADD CONSTRAINT "fk_property_datatype" FOREIGN KEY ("datatype_id") REFERENCES "datatype"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "property" ADD CONSTRAINT "fk_property_datatype" FOREIGN KEY ("datatype_id") REFERENCES "datatype"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "property" ADD CONSTRAINT "fk_property_tab" FOREIGN KEY ("tab_id") REFERENCES "tab"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "property" ADD CONSTRAINT "fk_property_tab" FOREIGN KEY ("tab_id") REFERENCES "tab"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE "document" ADD CONSTRAINT "fk_document_layout" FOREIGN KEY ("layout_id") REFERENCES "layout"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
-ALTER TABLE "document" ADD CONSTRAINT "fk_document_document" FOREIGN KEY ("parent_id") REFERENCES "document"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "document" ADD CONSTRAINT "fk_document_document" FOREIGN KEY ("parent_id") REFERENCES "document"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
 ALTER TABLE "document" ADD CONSTRAINT "fk_documents_view" FOREIGN KEY ("view_id") REFERENCES "view"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
-ALTER TABLE "document" ADD CONSTRAINT "fk_document_document_type" FOREIGN KEY ("document_type_id") REFERENCES "document_type"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "document" ADD CONSTRAINT "fk_document_document_type" FOREIGN KEY ("document_type_id") REFERENCES "document_type"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE "document_type" ADD CONSTRAINT "fk_document_type_view" FOREIGN KEY ("default_view_id") REFERENCES "view"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
@@ -281,9 +281,9 @@ ALTER TABLE "document_type_view" ADD CONSTRAINT "fk_document_type_view_document_
 
 ALTER TABLE "user_acl_permission" ADD CONSTRAINT "fk_user_acl_permission_user_acl_resource" FOREIGN KEY ("user_acl_resource_id") REFERENCES "user_acl_resource"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "property_value" ADD CONSTRAINT "fk_property_value_document" FOREIGN KEY ("document_id") REFERENCES "document"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "property_value" ADD CONSTRAINT "fk_property_value_document" FOREIGN KEY ("document_id") REFERENCES "document"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "property_value" ADD CONSTRAINT "fk_property_value_property" FOREIGN KEY ("property_id") REFERENCES "property"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "property_value" ADD CONSTRAINT "fk_property_value_property" FOREIGN KEY ("property_id") REFERENCES "property"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 -- End Relation's declaration
 
