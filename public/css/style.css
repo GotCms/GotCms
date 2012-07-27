@@ -93,7 +93,7 @@ h2, h3 { page-break-after: avoid; }
 
 
 /**
- * Got CMS CSS
+ * Got Cms CSS
  *
  */
 body {background-image:url(../images/bg.png);background-repeat:repeat-x;background-color:#0d0d0d;font-size:11px;font-family:Arial, Helvetica, sans-serif;margin:auto;}
@@ -109,7 +109,7 @@ img {border:0}
 .gradient-black {background: #656565;-o-background-size: 100% 100%;-moz-background-size: 100% 100%;-webkit-background-size: 100% 100%;background-size: 100% 100%;background: -webkit-gradient(linear,left top, left bottom,from(#656565),to(#000000));background: -webkit-linear-gradient(top,#656565,#000000);background: -moz-linear-gradient(top,#656565,#000000);background: -o-linear-gradient(top,#656565,#000000);background: linear-gradient(top,#656565,#000000);}
 
 header {height:80px;}
-header .part {width:206px;height:60px;color:#FFF;display: inline-block;;margin: 10px 5px 10px 0;border:1px solid transparent;}
+header .part {width:206px;height:60px;color:#FFF;display: inline-block;margin: 10px 5px 10px 0;border:1px solid transparent;}
 header .part.active, header .part:hover {border-radius: 5px 5px 5px 5px;
     background:-moz-linear-gradient(center top , #666666 0%, #000000 100%) repeat scroll 0 0 transparent;
     border: 1px solid #999;
