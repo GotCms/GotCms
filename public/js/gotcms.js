@@ -7,7 +7,8 @@ var Gc = (function($)
     var $document = $(document),
     $window = $(window);
 
-    $document.ready(function(){
+    $document.ready(function()
+    {
         Gc.initialize();
         Gc.notification();
     });
@@ -56,11 +57,12 @@ var Gc = (function($)
             $('.tabs').tabs();
             var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
 
-            $('.sortable').sortable({
+            $('.sortable').sortable(
+            {
                 axis: "y",
                 handle: "h3",
-
-                stop: function( event, ui ) {
+                stop: function( event, ui )
+                {
                     // IE doesn't register the blur when sorting
                     // so trigger focusout handlers to remove .ui-state-focus
                     ui.item.children( "h3" ).triggerHandler('focusout');
@@ -70,12 +72,11 @@ var Gc = (function($)
             var $tab_items = $('ul:first li', $tabs ).droppable({
                 accept: ".connected-sortable *",
                 hoverClass: "ui-state-hover",
-                drop: function( event, ui ) {
+                drop: function( event, ui )
+                {
                     var $item = $( this );
                     var $list = $( $item.find('a').attr('href') )
                         .find('.connected-sortable');
-                    console.log($item);
-                    console.log($list);
 
                     ui.draggable.hide('slow', function() {
                         $tabs.tabs('select', $tab_items.index( $item ) );
@@ -96,63 +97,63 @@ var Gc = (function($)
                 else
                 {
                     $.post($addTabUrl, {name:$name.val(),description:$description.val()}
-                    , function($data, textStatus, jqXHR){
-                            if($data.message != undefined)
+                    , function($data, textStatus, jqXHR)
+                    {
+                        if($data.message != undefined)
+                        {
+                            $this.setHtmlMessage($data.message);
+                        }
+                        else
+                        {
+                            $tabs = $('#tabs');
+                            $e = '<li>'
+                                +'<input type="hidden" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'">'
+                                +'<input type="hidden" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'">'
+                                +'<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>'
+                                +'<button type="button" value="'+$data.id+'" class="delete-tab">'+Translator.translate('Delete')+'</button>'
+                                +'</li>';
+                            $tabs.append($e);
+                            $('.select-tab').append(new Option($name.val(),$data.id));
+
+                            if($('#properties-tabs-content').html() != null)
                             {
-                                $this.setHtmlMessage($data.message);
+                                $('#properties-tabs-content').tabs( "add", '#tabs-properties-'+$data.id, $name.val());
                             }
                             else
                             {
-                                $tabs = $('#tabs');
-                                $e = '<li>'
-                                    +'<input type="hidden" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'">'
-                                    +'<input type="hidden" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'">'
-                                    +'<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>'
-                                    +'<button type="button" value="'+$data.id+'" class="delete-tab">'+Translator.translate('Delete')+'</button>'
-                                    +'</li>';
-                                $tabs.append($e);
-                                $('.select-tab').append(new Option($name.val(),$data.id));
-
-                                if($('#properties-tabs-content').html() != null)
-                                {
-                                    $('#properties-tabs-content').tabs( "add", '#tabs-properties-'+$data.id, $name.val());
-                                }
-                                else
-                                {
-                                    //add tab if does not exist
-                                    $('#property_add').after('<div id="properties-tabs-content" class="tabs">'
-                                        +'<ul>'
-                                            +'<li><a href="#tabs-properties-1">'+$name.val()+'</a></li>'
-                                        +'</ul>'
-                                        +'<div id="tabs-properties-1">'
-                                            +'<ul></ul>'
-                                        +'</div>'
-                                    +'</div>');
-                                    $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
-                                }
+                                //add tab if does not exist
+                                $('#property_add').after('<div id="properties-tabs-content" class="tabs">'
+                                    +'<ul>'
+                                        +'<li><a href="#tabs-properties-1">'+$name.val()+'</a></li>'
+                                    +'</ul>'
+                                    +'<div id="tabs-properties-1">'
+                                        +'<ul></ul>'
+                                    +'</div>'
+                                +'</div>');
+                                $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
                             }
                         }
-                    )
+                    })
                 }
             });
 
             $(document).on('click', '.delete-tab', function()
             {
                 $button = $(this);
-                $.post($deleteTabUrl, {
-                            tab:    $button.val()
-                        },
-                        function($data)
-                        {
-                            $('.select-tab').find('option[value="'+$button.val()+'"]').remove();
-                            $tabs = $('#properties-tabs-content');
-                            $button.parent().remove();
-                            $tab = $tabs.find('a[href="#tabs-properties-'+$button.val()+'"]').parent();
-                            var $index = $('li', $tabs).index($tab);
-                            $tabs.tabs( "remove", $index );
-                            $this.setHtmlMessage($data.message);
-                        }
-                );
+                $.post($deleteTabUrl,
+                {
+                    tab:    $button.val()
+                },
+                function($data)
+                {
+                    $('.select-tab').find('option[value="'+$button.val()+'"]').remove();
+                    $tabs = $('#properties-tabs-content');
+                    $button.parent().remove();
+                    $tab = $tabs.find('a[href="#tabs-properties-'+$button.val()+'"]').parent();
+                    var $index = $('li', $tabs).index($tab);
+                    $tabs.tabs( "remove", $index );
+                    $this.setHtmlMessage($data.message);
+                });
             });
             //views
 
@@ -172,86 +173,86 @@ var Gc = (function($)
                 }
                 else
                 {
-                    $.post($addPropertyUrl, {
-                            name:            $name.val()
-                            , identifier:    $identifier.val()
-                            , tab:            $tab.val()
-                            , datatype:    $datatype.val()
-                            , description:    $description.val()
-                            , is_required:    $isRequired.val()
-                        },
-                        function($data)
+                    $.post($addPropertyUrl,
+                    {
+                        name:            $name.val()
+                        , identifier:    $identifier.val()
+                        , tab:            $tab.val()
+                        , datatype:    $datatype.val()
+                        , description:    $description.val()
+                        , is_required:    $isRequired.val()
+                    },
+                    function($data)
+                    {
+                        if($data.success == false)
                         {
-                            if($data.success == false)
-                            {
-                                $this.setHtmlMessage($data.message);
-                            }
-                            else
-                            {
-                                $this.setHtmlMessage('');
-                                $c = new Template('<dl>'
-                                        +'<dt id="name-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-name-#{tab}-#{id}">'+Translator.translate('Name')+'</label>'
-                                        +'</dt>'
-                                        +'<dd id="name-element-#{tab}-#{id}">'
-                                            +'<input type="text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">'
-                                        +'</dd>'
-                                        +'<dt id="identifier-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-identifier-#{tab}-#{id}">'+Translator.translate('Identifier')+'</label>'
-                                        +'</dt>'
-                                        +'<dd id="identifier-element-#{tab}-#{id}">'
-                                            +'<input type="text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">'
-                                        +'</dd>'
-                                        +'<dd id="datatype-element-#{tab}-#{id}">'
-                                            +'<select class="select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">'
-                                            +'</select>'
-                                        +'</dd>'
-                                        +'<dt id="description-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-description-#{tab}-#{id}">'+Translator.translate('Description')+'</label>'
-                                        +'</dt>'
-                                        +'<dd id="description-element-#{tab}-#{id}">'
-                                            +'<input type="text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">'
-                                        +'</dd>'
-                                        +'<dt id="required-label-#{tab}-#{id}">'
-                                            +'<label class="optional" for="properties-required-#{tab}-#{id}">'+Translator.translate('Required')+'</label>'
-                                        +'</dt>'
-                                        +'<dd id="required-element-#{tab}-#{id}">'
-                                            +'<input type="checkbox" value="1" id="properties-required-#{tab}-#{id}" name="properties[property#{id}][required]">'
-                                        +'</dd>'
-                                        +'<dd id="required-element-#{tab}-#{id}">'
-                                            +'<input type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">'
-                                            +'<button type="button" value="#{id}" class="delete-property">'+Translator.translate('Delete')+'</button>'
-                                        +'</dd>'
-                                    +'</dl>');
-
-                                $c = $c.evaluate($data);
-
-                                $('#tabs-properties-'+$tab.val()).find('ul').append('<li>'+$c+'</li>');
-                                $('#properties-tab-'+$data.tab+'-'+$data.id).html($('#properties-tab').html()).val($data.tab);
-                                $('#properties-datatype-'+$data.tab+'-'+$data.id).html($('#properties-datatype').html()).val($data.datatype);
-                                $('#properties-required-'+$data.tab+'-'+$data.id).prop('checked', $isRequired.prop('checked'));
-                            }
+                            $this.setHtmlMessage($data.message);
                         }
-                    );
+                        else
+                        {
+                            $this.setHtmlMessage('');
+                            $c = new Template('<dl>'
+                                +'<dt id="name-label-#{tab}-#{id}">'
+                                    +'<label class="optional" for="properties-name-#{tab}-#{id}">'+Translator.translate('Name')+'</label>'
+                                +'</dt>'
+                                +'<dd id="name-element-#{tab}-#{id}">'
+                                    +'<input type="text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">'
+                                +'</dd>'
+                                +'<dt id="identifier-label-#{tab}-#{id}">'
+                                    +'<label class="optional" for="properties-identifier-#{tab}-#{id}">'+Translator.translate('Identifier')+'</label>'
+                                +'</dt>'
+                                +'<dd id="identifier-element-#{tab}-#{id}">'
+                                    +'<input type="text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">'
+                                +'</dd>'
+                                +'<dd id="datatype-element-#{tab}-#{id}">'
+                                    +'<select class="select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">'
+                                    +'</select>'
+                                +'</dd>'
+                                +'<dt id="description-label-#{tab}-#{id}">'
+                                    +'<label class="optional" for="properties-description-#{tab}-#{id}">'+Translator.translate('Description')+'</label>'
+                                +'</dt>'
+                                +'<dd id="description-element-#{tab}-#{id}">'
+                                    +'<input type="text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">'
+                                +'</dd>'
+                                +'<dt id="required-label-#{tab}-#{id}">'
+                                    +'<label class="optional" for="properties-required-#{tab}-#{id}">'+Translator.translate('Required')+'</label>'
+                                +'</dt>'
+                                +'<dd id="required-element-#{tab}-#{id}">'
+                                    +'<input type="checkbox" value="1" id="properties-required-#{tab}-#{id}" name="properties[property#{id}][required]">'
+                                +'</dd>'
+                                +'<dd id="required-element-#{tab}-#{id}">'
+                                    +'<input type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">'
+                                    +'<button type="button" value="#{id}" class="delete-property">'+Translator.translate('Delete')+'</button>'
+                                +'</dd>'
+                            +'</dl>');
+
+                            $c = $c.evaluate($data);
+
+                            $('#tabs-properties-'+$tab.val()).find('ul').append('<li>'+$c+'</li>');
+                            $('#properties-tab-'+$data.tab+'-'+$data.id).html($('#properties-tab').html()).val($data.tab);
+                            $('#properties-datatype-'+$data.tab+'-'+$data.id).html($('#properties-datatype').html()).val($data.datatype);
+                            $('#properties-required-'+$data.tab+'-'+$data.id).prop('checked', $isRequired.prop('checked'));
+                        }
+                    });
                 }
             });
 
             $(document).on('click', '.delete-property', function()
             {
                 $button = $(this);
-                $.post($deletePropertyUrl, {
-                        property:    $button.val()
-                    },
-                    function($data)
+                $.post($deletePropertyUrl,
+                {
+                    property:    $button.val()
+                },
+                function($data)
+                {
+                    if($data.success == true)
                     {
-                        if($data.success == true)
-                        {
-                            $button.parent().parent().remove();
-                        }
-
-                        $this.setHtmlMessage($data.message);
+                        $button.parent().parent().remove();
                     }
-                );
+
+                    $this.setHtmlMessage($data.message);
+                });
             });
         },
 
@@ -264,52 +265,54 @@ var Gc = (function($)
             }).bind("loaded.jstree", function (event, data)
             {
                 $("#browser").find('a').contextMenu(
+                {
+                    menu: 'contextMenu'
+                },
+
+                function($action, $element, $position)
+                {
+                    $routes = $this.getOption('routes');
+                    $url = $routes[$action];
+                    $id = '';
+
+                    if($element.attr('id') != undefined)
                     {
-                        menu: 'contextMenu'
-                    },
-
-                    function($action, $element, $position)
-                    {
-                        $routes = $this.getOption('routes');
-                        $url = $routes[$action];
-                        $id = '';
-
-                        if($element.attr('id') != undefined)
-                        {
-                            $id = $element.attr('id');
-                            $url = $url.replace('itemId', $id);
-                        }
-
-                        switch($action){
-                            case 'new':
-                                if(!$this.isEmpty($id))
-                                {
-                                    $url += '/parent/'+$id;
-                                }
-                            case 'edit':
-                            break;
-
-                            case 'copy':
-                            case 'cut':
-                            break;
-
-                            case 'paste':
-                            break;
-
-                            case 'delete':
-                                $this.showDialogConfirm('Delete element', $url);
-                                return false;
-                            break;
-
-                            case 'quit':
-                            default:
-                                return false;
-                            break;
-                        }
-
-                        document.location.href = $url;
+                        $id = $element.attr('id');
+                        $url = $url.replace('itemId', $id);
                     }
-                );
+
+                    switch($action)
+                    {
+                        case 'new':
+                            if(!$this.isEmpty($id))
+                            {
+                                $url += '/parent/'+$id;
+                            }
+                        break;
+
+                        case 'edit':
+                        break;
+
+                        case 'copy':
+                        case 'cut':
+                        break;
+
+                        case 'paste':
+                        break;
+
+                        case 'delete':
+                            $this.showDialogConfirm('Delete element', $url);
+                            return false;
+                        break;
+
+                        case 'quit':
+                        default:
+                            return false;
+                        break;
+                    }
+
+                    document.location.href = $url;
+                });
             });
         },
 
@@ -407,7 +410,8 @@ var Gc = (function($)
 
         notification: function()
         {
-            $(document).on('click', '.notification .close', function() {
+            $(document).on('click', '.notification .close', function()
+            {
                 $(this).parent().fadeOut(function()
                 {
                     $(this).remove();
