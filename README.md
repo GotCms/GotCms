@@ -40,11 +40,11 @@ Php configuration:
 
 ## More information
 
-Go to the website, it will be redirect to /install, follow instructions and refresh.
+Go to the website, it will be redirected to /install and follow instructions.
 
-Go to /admin to manage website, create documents types, datatypes, views, layouts, scripts, ...
+Go to /admin to manage website, create documents, documents types, datatypes, views, layouts, scripts, ...
 
-All content are stored in database and work with stream wrapper.
+All contents are stored in database and works with stream wrapper.
 
 ## Notes
 
