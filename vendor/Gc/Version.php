@@ -54,8 +54,6 @@ final class Version
      */
     public static function compareVersion($version)
     {
-        $version = strtolower($version);
-        $version = preg_replace('/(\d)pr(\d?)/', '$1a$2', $version);
         return version_compare($version, strtolower(self::VERSION));
     }
 
@@ -65,9 +63,24 @@ final class Version
      */
     public static function getLatest()
     {
-        if (null === self::$latestVersion) {
-            //@TODO
-            self::$latestVersion = self::VERSION;
+        if(NULL === self::$latestVersion)
+        {
+            self::$latestVersion = 'not available';
+            $url = 'https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/';
+
+            $api_response = Json::decode(file_get_contents($url), Json::TYPE_ARRAY);
+
+            // Simplify the API response into a simple array of version numbers
+            $tags = array_map(function($tag)
+            {
+                return substr($tag['ref'], 10); // Reliable because we're filtering on 'refs/tags/'
+            }, $api_response);
+
+            // Fetch the latest version number from the array
+            self::$latestVersion = array_reduce($tags, function($a, $b)
+            {
+                return version_compare($a, $b, '>') ? $a : $b;
+            });
         }
 
         return self::$latestVersion;
