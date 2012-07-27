@@ -42,7 +42,7 @@ class TranslationController extends Action
     protected $_acl_page = array('resource' => 'Content', 'permission' => 'translation');
 
     /**
-     * Initialize Document Controller
+     * Initialize Media Controller
      * @return void
      */
     public function init()
@@ -71,7 +71,7 @@ class TranslationController extends Action
     }
 
     /**
-     * Create document
+     * Create Translation
      *
      * @return \Zend\View\Model\ViewModel|array
      */
@@ -85,6 +85,11 @@ class TranslationController extends Action
             $post = $this->getRequest()->getPost();
             $translation_form->setData($post->toArray());
             if($translation_form->isValid())
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid data sent !');
+                $this->useFlashMessenger();
+            }
+            else
             {
                 $source = $post->get('source');
                 $data = array();
@@ -103,6 +108,7 @@ class TranslationController extends Action
                     $data[$locale_id]['locale'] = $locale;
                 }
 
+                $this->flashMessenger()->setNameSpace('success')->addMessage('Translation saved !');
                 Translator::setValue($source, $data);
             }
         }
@@ -111,17 +117,7 @@ class TranslationController extends Action
     }
 
     /**
-     * Delete document
-     *
-     * @return \Zend\View\Model\ViewModel|array
-     */
-    public function deleteAction()
-    {
-
-    }
-
-    /**
-     * Edit Document
+     * List and edit translation
      *
      * @return \Zend\View\Model\ViewModel|array
      */
@@ -146,34 +142,45 @@ class TranslationController extends Action
                 }
             }
 
-            $values = Translator::getValues();
-            $data = array();
-            foreach($values as $value)
-            {
-                if(empty($data[$value['locale']]))
-                {
-                    $data[$value['locale']] = array();
-                }
+            $this->_generateCache();
 
-                $data[$value['locale']][$value['source']] = $value['destination'];
-            }
-
-            $translate_path = GC_APPLICATION_PATH . '/data/translate/%s.php';
-            $template_content = file_get_contents(GC_APPLICATION_PATH . '/data/templates/language.tpl.php');
-
-            foreach(glob(sprintf($translate_path, '*')) as $file)
-            {
-                unlink($file);
-            }
-
-            foreach($data as $locale => $values)
-            {
-                file_put_contents(sprintf($translate_path, $locale), sprintf($template_content, var_export($values, TRUE)));
-            }
-
+            $this->flashMessenger()->setNameSpace('success')->addMessage('Translation saved !');
             return $this->redirect()->toRoute('translationList');
         }
 
         return array('form' => $translation_form, 'values' => Translator::getValues());
+    }
+
+    /**
+     * Generate php array file as cache
+     *
+     * @return void
+     */
+    protected function _generateCache()
+    {
+        $values = Translator::getValues();
+        $data = array();
+        foreach($values as $value)
+        {
+            if(empty($data[$value['locale']]))
+            {
+                $data[$value['locale']] = array();
+            }
+
+            $data[$value['locale']][$value['source']] = $value['destination'];
+        }
+
+        $translate_path = GC_APPLICATION_PATH . '/data/translate/%s.php';
+        $template_content = file_get_contents(GC_APPLICATION_PATH . '/data/templates/language.tpl.php');
+
+        foreach(glob(sprintf($translate_path, '*')) as $file)
+        {
+            unlink($file);
+        }
+
+        foreach($data as $locale => $values)
+        {
+            file_put_contents(sprintf($translate_path, $locale), sprintf($template_content, var_export($values, TRUE)));
+        }
     }
 }

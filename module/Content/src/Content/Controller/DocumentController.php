@@ -112,6 +112,7 @@ class DocumentController extends Action
             if(!$document_form->isValid())
             {
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid document data');
+                $this->useFlashMessenger();
             }
             else
             {
@@ -164,7 +165,7 @@ class DocumentController extends Action
                 }
                 else
                 {
-                    $this->flashMessenger()->setNameSpace('success')->addMessage('There were problems during the removal of this document');
+                    $this->flashMessenger()->setNameSpace('error')->addMessage('There were problems during the removal of this document');
                 }
             }
             catch (Exception $e)
@@ -259,6 +260,7 @@ class DocumentController extends Action
                 }
                 else
                 {
+                    $this->flashMessenger()->setNameSpace('success')->addMessage('Document saved !');
                     $document->addData($form_document_add->getInputFilter()->getValues());
                 }
 

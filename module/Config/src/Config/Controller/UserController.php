@@ -136,12 +136,12 @@ class UserController extends Action
                 $user_model = new User\Model();
                 $user_model->setData($post);
                 $user_model->save();
-                $this->flashMessenger()->setNamespace('success')->addMessage('Success');
+                $this->flashMessenger()->setNamespace('success')->addMessage('User saved!');
 
                 return $this->redirect()->toRoute('userEdit', array('id' => $user_model->getId()));
             }
 
-            $this->flashMessenger()->setNamespace('error')->addMessage('Error');
+            $this->flashMessenger()->setNamespace('error')->addMessage('User can not be saved!');
         }
 
         return array('form' => $form);
@@ -157,7 +157,7 @@ class UserController extends Action
         if(!empty($user_id))
         {
             User\Model::fromId($user_id)->delete();
-            $this->flashMessenger()->setNamespace('success')->addMessage('User deleted');
+            $this->flashMessenger()->setNamespace('success')->addMessage('User deleted!');
         }
 
         return $this->redirect()->toRoute('userList');
@@ -189,11 +189,11 @@ class UserController extends Action
             {
                 $user_model->addData($post);
                 $user_model->save();
-                $this->flashMessenger()->setNamespace('success')->addMessage('Success');
+                $this->flashMessenger()->setNamespace('success')->addMessage('User has been edited!');
                 return $this->redirect()->toRoute('userEdit', array('id' => $user_id));
             }
 
-            $this->flashMessenger()->setNamespace('error')->addMessage('Error');
+            $this->flashMessenger()->setNamespace('error')->addMessage('User can not be saved!');
         }
 
         return array('form' => $form);
