@@ -70,9 +70,13 @@ class RoleController extends Action
                 $role_model = new Role\Model();
                 $role_model->addData($form->getInputFilter()->getValues());
                 $role_model->save();
+
+                $this->flashMessenger()->setNamespace('success')->addMessage('Role saved!');
+                return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
             }
 
-            return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
+            $this->flashMessenger()->setNamespace('error')->addMessage('Role can not saved!');
+            $this->useFlashMessenger();
         }
 
         return array('form' => $form);
@@ -85,10 +89,14 @@ class RoleController extends Action
     public function deleteAction()
     {
         $role_id = $this->getRouteMatch()->getParam('id');
-        if(!empty($role_id))
+        if(empty($role_id))
+        {
+            $this->flashMessenger()->setNamespace('error')->addMessage('Role does not exists!');
+        }
+        else
         {
             Role\Model::fromId($role_id)->delete();
-            $this->flashMessenger()->setNamespace('success')->addMessage('User deleted');
+            $this->flashMessenger()->setNamespace('success')->addMessage('Role deleted!');
         }
 
         return $this->redirect()->toRoute('userRole');
@@ -116,9 +124,12 @@ class RoleController extends Action
             {
                 $role_model->addData($form->getInputFilter()->getValues());
                 $role_model->save();
+
+                return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
             }
 
-            return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
+            $this->flashMessenger()->setNamespace('error')->addMessage('Role can not saved!');
+            $this->useFlashMessenger();
         }
 
         return array('form' => $form);
