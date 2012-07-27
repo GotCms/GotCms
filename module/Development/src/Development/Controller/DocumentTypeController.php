@@ -345,6 +345,7 @@ class DocumentTypeController extends Action
 
                     $document_type->getAdapter()->getDriver()->getConnection()->commit();
 
+                    $this->flashMessenger()->setNameSpace('success')->addMessage('Document type save!');
                     return $this->redirect()->toRoute('documentTypeEdit', array('id' => $document_type_id));
                 }
                 catch(Exception $e)
