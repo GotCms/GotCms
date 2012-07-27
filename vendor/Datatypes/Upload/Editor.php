@@ -86,8 +86,9 @@ class Editor extends AbstractEditor
             }
 
             $return_values = serialize($array_values);
-            $this->setValue($return_values);
         }
+
+        $this->setValue(empty($return_values) ? NULL : $return_values);
     }
 
     public function load()

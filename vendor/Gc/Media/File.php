@@ -119,10 +119,9 @@ class File extends Object
          if(file_exists($file))
          {
              @unlink($file);
-             return TRUE;
          }
 
-         return FALSE;
+         return TRUE;
     }
 
     /**

@@ -132,14 +132,14 @@
                                     <?php if(!empty($this->options['title'])): ?>
                                         '<label>' +
                                             '<?php echo $this->escapeHtml($this->translate('Title:')); ?>' +
-                                            '<input type="text" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][title]" value="'+(file.title != undefined ? file.title : '')+'"">' +
+                                            '<input type="text" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][title]" value="'+(file.title != undefined ? file.title : '')+'">' +
                                         '</label>' +
                                     <?php endif; ?>
 
                                     <?php if(!empty($this->options['content'])): ?>
                                         '<label>' +
                                             '<?php echo $this->escapeHtml($this->translate('Content:')); ?>' +
-                                            '<input type="text" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][content]" value="'+(file.content != undefined ? file.content : '')+'"">' +
+                                            '<input type="text" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][content]" value="'+(file.content != undefined ? file.content : '')+'">' +
                                         '</label>' +
                                     <?php endif; ?>
                                     '</td>' +
