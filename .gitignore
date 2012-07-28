@@ -1,4 +1,4 @@
 .project
 .settings
 config/autoload
-public/media
+public/media/files
