@@ -66,11 +66,10 @@ class Acl extends ZendAcl\Acl
         $this->_user = $user_model;
 
         $select = new Select();
-        $user_role = $this->_role_table->fetchRow(
-            $select->from('user_acl_role')
-                ->join('user', 'user.user_acl_role_id = user_acl_role.id')
-                ->where(sprintf('"user".id = %s', $this->_user->getId()))
-        );
+        $select->from('user_acl_role')
+            ->join('user', 'user.user_acl_role_id = user_acl_role.id');
+        $select->where->equalTo('user.id', $this->_user->getId());
+        $user_role = $this->_role_table->fetchRow($select);
 
         $this->_user_role = empty($user_role['role_id']) ? 0 : $user_role['role_id'];
         $this->_user_role_name = empty($user_role['name']) ? NULL : $user_role['name'];

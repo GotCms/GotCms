@@ -1,4 +1,4 @@
 .project
 .settings
-config/autoload/global.php
+config/autoload
 public/media

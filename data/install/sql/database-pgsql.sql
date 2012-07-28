@@ -273,7 +273,7 @@ ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_permission_user_acl_role" FOR
 
 ALTER TABLE "user" ADD CONSTRAINT "fk_user_user_acl_role" FOREIGN KEY ("user_acl_role_id") REFERENCES "user_acl_role"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 
-ALTER TABLE "core_translate_locale" ADD CONSTRAINT "fk_core_translate_locale_core_translate" FOREIGN KEY ("core_translate_id") REFERENCES "core_translate"("id") ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE "core_translate_locale" ADD CONSTRAINT "fk_core_translate_locale_core_translate" FOREIGN KEY ("core_translate_id") REFERENCES "core_translate"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE "user_acl" ADD CONSTRAINT "fk_user_acl_user_acl_permission" FOREIGN KEY ("user_acl_permission_id") REFERENCES "user_acl_permission"("id") ON UPDATE SET NULL ON DELETE SET NULL;
 

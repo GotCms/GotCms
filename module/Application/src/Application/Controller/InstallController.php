@@ -250,7 +250,7 @@ class InstallController extends Action
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_name', ?);", array($configuration['site_name']));
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_is_offline', ?);", array($configuration['site_is_offline']));
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_offline_document', '');", array());
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_domain', ?);", array($this->getRequest()->uri()->getHost()));
+                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_domain', ?);", array($this->getRequest()->getUri()->getHost()));
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_path', '/');", array());
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_lifetime', '3600');", array());
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_handler', '0');", array());
@@ -340,14 +340,14 @@ class InstallController extends Action
 
                         //Add admin user
                         $configuration = $session['install']['configuration'];
-                        $db_adapter->query("INSERT INTO \"user\" (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), '', '', ?, ?, ?, 1)",
+                        $db_adapter->query("INSERT INTO user (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), '', '', ?, ?, ?, 1)",
                             array($configuration['admin_email'], $configuration['admin_login'], $configuration['admin_password']));
                     break;
 
                     //Create configuration file
                     case 'c-cf':
                         $db = $session['install']['db'];
-                        $file = file_get_contents(GC_APPLICATION_PATH . '/data/template/config.tpl.php');
+                        $file = file_get_contents(GC_APPLICATION_PATH . '/data/templates/config.tpl.php');
                         $file = str_replace(
                             array(
                                 '__DRIVER__',
