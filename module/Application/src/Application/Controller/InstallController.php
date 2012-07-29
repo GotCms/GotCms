@@ -104,7 +104,7 @@ class InstallController extends Action
         }
 
         $this->layout()->setVariables(array('currentRoute' => $this->getRouteMatch()->getMatchedRouteName()));
-        return array('form' => $this->_installForm);
+        return array('form' => $this->_installForm, 'license' => file_get_contents(GC_APPLICATION_PATH . '/LICENSE.txt'));
     }
 
     /**
@@ -340,7 +340,16 @@ class InstallController extends Action
 
                         //Add admin user
                         $configuration = $session['install']['configuration'];
-                        $db_adapter->query("INSERT INTO user (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), '', '', ?, ?, ?, 1)",
+                        if($sql_type == 'mysql')
+                        {
+                            $sql_string = "INSERT INTO `user` (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), '', '', ?, ?, ?, 1)";
+                        }
+                        else
+                        {
+                            $sql_string = "INSERT INTO \"user\" (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), '', '', ?, ?, ?, 1)";
+                        }
+
+                        $db_adapter->query($sql_string,
                             array($configuration['admin_email'], $configuration['admin_login'], $configuration['admin_password']));
                     break;
 

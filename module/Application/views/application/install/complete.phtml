@@ -28,16 +28,14 @@
 ?>
 
 <h2><?php echo $this->escapeHtml($this->translate('Installation currently finish')); ?></h2>
-<ul>
-    <li id="c-db" class="active"><?php echo $this->escapeHtml($this->translate('Create database')); ?></li>
+<ul id="installer">
+    <li id="c-db"><?php echo $this->escapeHtml($this->translate('Create database')); ?></li>
     <li id="i-d"><?php echo $this->escapeHtml($this->translate('Insert data')); ?></li>
     <li id="c-uar"><?php echo $this->escapeHtml($this->translate('Create users and roles')); ?></li>
     <li id="c-cf"><?php echo $this->escapeHtml($this->translate('Create configuration file')); ?></li>
 </ul>
 
-<div id="installation-data">
-    <img src="/images/treeview/ajax-loader.gif">
-</div>
+<div id="installation-data">&nbsp;</div>
 <script type="text/javascript">
     $(document).ready(function()
     {
@@ -50,6 +48,8 @@
                 return false;
             }
 
+            $('#' + $data[$step]).addClass('progress');
+
             $.ajax({
                 url: '<?php echo $this->escapeJs($this->url('installComplete')); ?>',
                 dataType: 'json',
@@ -59,10 +59,20 @@
                 {
                     if(data.success == true)
                     {
+                        $('#' + $data[$step]).removeClass('progress').addClass('complete');
                         nextStep(++$step);
                     }
                     else
                     {
+                        if($data[$step] == 'c-cf')
+                        {
+                            $('#' + $data[$step]).removeClass('progress').addClass('complete');
+                        }
+                        else
+                        {
+                            $('#' + $data[$step]).removeClass('progress').addClass('error');
+                        }
+
                         $('#installation-data').html(data.message);
                     }
                 }

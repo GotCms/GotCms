@@ -73,9 +73,16 @@ class Install extends AbstractForm
 
         $input_filter = $this->getInputFilter();
         $inputFilter = $input_filter->add(array(
+            'name' => 'accept-license',
             'required'=> TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
+                array(
+                    'name' => 'greaterthan',
+                    'options' => array(
+                        'min' => 0
+                    )
+                ),
             ),
         ), 'accept-license');
 

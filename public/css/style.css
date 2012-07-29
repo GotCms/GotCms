@@ -179,6 +179,11 @@ footer a:hover {text-decoration:underline;}
 #main-installer nav .active{font-weight:bold}
 #main-installer section {float:left;width:800px}
 #main-installer .license {width:100%;height:500px}
+#installer {list-style: none;padding: 0;}
+#installer li {padding-left: 25px; line-height:17px;}
+#installer .progress{background:url(/images/ajax-loader.gif) no-repeat scroll 0 0 transparent}
+#installer .complete{background:url(/images/notification/success.png) no-repeat scroll 0 0 transparent}
+#installer .error{background:url(/images/notification/error.png) no-repeat scroll 0 0 transparent}
 #table-trad tbody td{text-align:center;}
 #table-translation-edit td{cursor:pointer;}
 #table-translation-edit tbody tr:hover{background:grey;}
