@@ -1,6 +1,25 @@
+SET foreign_key_checks = 0;
+DROP TABLE IF EXISTS `core_config_data`;
+DROP TABLE IF EXISTS `core_session`;
+DROP TABLE IF EXISTS `core_translate_locale`;
+DROP TABLE IF EXISTS `datatype`;
+DROP TABLE IF EXISTS `document`;
+DROP TABLE IF EXISTS `document_type`;
+DROP TABLE IF EXISTS `document_type_view`;
+DROP TABLE IF EXISTS `icon`;
+DROP TABLE IF EXISTS `layout`;
+DROP TABLE IF EXISTS `property`;
+DROP TABLE IF EXISTS `property_value`;
+DROP TABLE IF EXISTS `tab`;
+DROP TABLE IF EXISTS `view`;
+DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `user_acl`;
+DROP TABLE IF EXISTS `user_acl_resource`;
+DROP TABLE IF EXISTS `user_acl_role`;
+DROP TABLE IF EXISTS `user_acl_permission`;
+SET foreign_key_checks = 1;
 
 -- Start Table's declaration
-DROP TABLE IF EXISTS `datatype`;
 CREATE TABLE `datatype` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
@@ -9,7 +28,6 @@ CREATE TABLE `datatype` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `document_type_view`;
 CREATE TABLE `document_type_view` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `view_id` INT NOT NULL,
@@ -17,7 +35,6 @@ CREATE TABLE `document_type_view` (
     PRIMARY KEY (`id`,`view_id`,`document_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `document_type`;
 CREATE TABLE `document_type` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `created_at` DATETIME NOT NULL,
@@ -30,7 +47,6 @@ CREATE TABLE `document_type` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `document`;
 CREATE TABLE `document` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `created_at` DATETIME NOT NULL,
@@ -47,7 +63,6 @@ CREATE TABLE `document` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `icon`;
 CREATE TABLE `icon` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
@@ -55,7 +70,6 @@ CREATE TABLE `icon` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `layout`;
 CREATE TABLE `layout` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `created_at` DATETIME NOT NULL,
@@ -68,7 +82,6 @@ CREATE TABLE `layout` (
     UNIQUE KEY `name` (`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `property`;
 CREATE TABLE `property` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255),
@@ -82,7 +95,6 @@ CREATE TABLE `property` (
     UNIQUE KEY `name` (`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `property_value`;
 CREATE TABLE `property_value` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `document_id` INT NOT NULL,
@@ -91,7 +103,6 @@ CREATE TABLE `property_value` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `tab` CASCADE;
 CREATE TABLE `tab` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
@@ -109,7 +120,6 @@ CREATE TABLE `core_translate` (
     UNIQUE KEY `name` (`source`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `core_translate_locale`;
 CREATE TABLE `core_translate_locale` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `destination` VARCHAR(255) NOT NULL,
@@ -118,7 +128,6 @@ CREATE TABLE `core_translate_locale` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `user_acl_role`;
 CREATE TABLE `user_acl_role` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255),
@@ -127,7 +136,6 @@ CREATE TABLE `user_acl_role` (
     UNIQUE KEY `name` (`name`)
 );
 
-DROP TABLE IF EXISTS `user_acl`;
 CREATE TABLE `user_acl` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_acl_permission_id` INT NOT NULL,
@@ -135,14 +143,12 @@ CREATE TABLE `user_acl` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `user_acl_resource`;
 CREATE TABLE `user_acl_resource` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `resource` VARCHAR(255),
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `created_at` DATETIME NOT NULL,
@@ -157,7 +163,6 @@ CREATE TABLE `user` (
     UNIQUE KEY `name` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `view`;
 CREATE TABLE `view` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `created_at` DATETIME NOT NULL,
@@ -170,7 +175,6 @@ CREATE TABLE `view` (
     UNIQUE KEY `name` (`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `user_acl_permission`;
 CREATE TABLE `user_acl_permission` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `permission` VARCHAR(255) NOT NULL,
@@ -178,7 +182,6 @@ CREATE TABLE `user_acl_permission` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `core_config_data`;
 CREATE TABLE `core_config_data` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `identifier` VARCHAR(255) NOT NULL,
@@ -187,7 +190,6 @@ CREATE TABLE `core_config_data` (
     UNIQUE KEY `name` (`identifier`)
 );
 
-DROP TABLE IF EXISTS `core_session`;
 CREATE TABLE `core_session` (
     `id` VARCHAR(255) NOT NULL,
     `expires` INT NOT NULL,
