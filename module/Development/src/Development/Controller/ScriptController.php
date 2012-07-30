@@ -122,7 +122,7 @@ class ScriptController extends Action
             }
         }
 
-        return array('form' => $script_form);
+        return array('form' => $script_form, 'scriptId' => $script_id);
     }
 
     /**
@@ -144,5 +144,54 @@ class ScriptController extends Action
         }
 
         return $this->redirect()->toRoute('scriptList');
+    }
+
+    /**
+     * Upload a file to the server
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function uploadAction()
+    {
+        $script_id = $this->getRouteMatch()->getParam('id', NULL);
+        $script = Script\Model::fromId($script_id);
+        if(empty($script_id) or empty($script))
+        {
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This script can not be download');
+            return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+        }
+    }
+
+    /**
+     * Send a file to the browser
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function downloadAction()
+    {
+        $script_id = $this->getRouteMatch()->getParam('id', NULL);
+        $script = Script\Model::fromId($script_id);
+        if(empty($script_id) or empty($script))
+        {
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This script can not be download');
+            return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+        }
+
+        $headers = new Headers();
+        $headers->addHeaderLine("Pragma", "public")
+            ->addHeaderLine('Cache-control', 'must-revalidate, post-check=0, pre-check=0')
+            ->addHeaderLine('Cache-control', 'private')
+            ->addHeaderLine('Expires', -1)
+            ->addHeaderLine('Content-Type', 'application/octet-stream')
+            ->addHeaderLine('Content-Transfer-Encoding', 'binary')
+            ->addHeaderLine('Content-Length', strlen($script->getContent()))
+            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $script->getIdentifier(). '.phtml');
+
+        $response = $this->getResponse();
+        $response->setHeaders($headers);
+
+        $response->setContent($script->getContent());
+
+        return $response;
     }
 }

@@ -28,7 +28,8 @@ namespace Development\Controller;
 
 use Gc\Mvc\Controller\Action,
     Development\Form\View as ViewForm,
-    Gc\View;
+    Gc\View,
+    Zend\Http\Headers;
 
 class ViewController extends Action
 {
@@ -122,7 +123,7 @@ class ViewController extends Action
             }
         }
 
-        return array('form' => $view_form);
+        return array('form' => $view_form, 'viewId' => $view_id);
     }
 
     /**
@@ -144,5 +145,54 @@ class ViewController extends Action
         }
 
         return $this->redirect()->toRoute('viewList');
+    }
+
+    /**
+     * Upload a file to the server
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function uploadAction()
+    {
+        $view_id = $this->getRouteMatch()->getParam('id', NULL);
+        $view = View\Model::fromId($view_id);
+        if(empty($view_id) or empty($view))
+        {
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This view can not be download');
+            return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+        }
+    }
+
+    /**
+     * Send a file to the browser
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function downloadAction()
+    {
+        $view_id = $this->getRouteMatch()->getParam('id', NULL);
+        $view = View\Model::fromId($view_id);
+        if(empty($view_id) or empty($view))
+        {
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This view can not be download');
+            return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+        }
+
+        $headers = new Headers();
+        $headers->addHeaderLine("Pragma", "public")
+            ->addHeaderLine('Cache-control', 'must-revalidate, post-check=0, pre-check=0')
+            ->addHeaderLine('Cache-control', 'private')
+            ->addHeaderLine('Expires', -1)
+            ->addHeaderLine('Content-Type', 'application/octet-stream')
+            ->addHeaderLine('Content-Transfer-Encoding', 'binary')
+            ->addHeaderLine('Content-Length', strlen($view->getContent()))
+            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $view->getIdentifier(). '.phtml');
+
+        $response = $this->getResponse();
+        $response->setHeaders($headers);
+
+        $response->setContent($view->getContent());
+
+        return $response;
     }
 }

@@ -123,7 +123,7 @@ class LayoutController extends Action
             }
         }
 
-        return array('form' => $layout_form);
+        return array('form' => $layout_form, 'layoutId' => $layout_id);
     }
 
     /**
@@ -144,6 +144,55 @@ class LayoutController extends Action
         }
 
         return $this->redirect()->toRoute('layoutList');
+    }
+
+    /**
+     * Upload a file to the server
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function uploadAction()
+    {
+        $layout_id = $this->getRouteMatch()->getParam('id', NULL);
+        $layout = Layout\Model::fromId($layout_id);
+        if(empty($layout_id) or empty($layout))
+        {
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This layout can not be download');
+            return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+        }
+    }
+
+    /**
+     * Send a file to the browser
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function downloadAction()
+    {
+        $layout_id = $this->getRouteMatch()->getParam('id', NULL);
+        $layout = Layout\Model::fromId($layout_id);
+        if(empty($layout_id) or empty($layout))
+        {
+            $this->flashMessenger()->setNameSpace('success')->addMessage('This layout can not be download');
+            return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+        }
+
+        $headers = new Headers();
+        $headers->addHeaderLine("Pragma", "public")
+            ->addHeaderLine('Cache-control', 'must-revalidate, post-check=0, pre-check=0')
+            ->addHeaderLine('Cache-control', 'private')
+            ->addHeaderLine('Expires', -1)
+            ->addHeaderLine('Content-Type', 'application/octet-stream')
+            ->addHeaderLine('Content-Transfer-Encoding', 'binary')
+            ->addHeaderLine('Content-Length', strlen($layout->getContent()))
+            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $layout->getIdentifier(). '.phtml');
+
+        $response = $this->getResponse();
+        $response->setHeaders($headers);
+
+        $response->setContent($layout->getContent());
+
+        return $response;
     }
 }
 

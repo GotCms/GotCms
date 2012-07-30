@@ -26,6 +26,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+<a href="<?php echo $this->url('scriptDownload', array('id' => $this->scriptId)); ?>"><?php echo $this->escapeHtml($this->translate('Download as file')); ?></a>
 <?php echo $this->partial('development/forms/script.phtml', array('form' => $this->form)); ?>
 <script type="text/javascript">
 var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('script-content'), {
