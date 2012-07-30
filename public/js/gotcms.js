@@ -405,6 +405,8 @@ var Gc = (function($)
                 {
                     $(this).remove();
                 });
+
+                return false;
             });
         }
     };
