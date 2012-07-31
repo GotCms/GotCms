@@ -37,9 +37,11 @@ class File extends Object
     const FILE_PERMISSION = 0774;
 
     /**
-     * @param integer $property_id
-     * @param $_FILES $file
-     * @param string $name
+     * Initiliaze File Object
+     * @param object $property
+     * @param object $document
+     *
+     * @return void
      */
     public function init($property = NULL, $document = NULL)
     {
@@ -52,12 +54,17 @@ class File extends Object
         $this->setDocument($document);
     }
 
+    /**
+     * Return directory
+     * @return string
+     */
     public function getDirectory()
     {
         return GC_APPLICATION_PATH . '/public/media/files/' . $this->getDocument()->getId() . '/' . $this->getProperty()->getId();
     }
+
     /**
-     * @param unknown_type $file
+     * Upload file to the server
      * @return boolean
      */
     public function upload()
@@ -93,7 +100,6 @@ class File extends Object
                 $file_object->filename = $file_data['name'];
                 $file_object->size = $file_data['size'];
                 $file_object->type = $file_data['type'];
-                //$fileclass->error = 'null';
                 $file_object->thumbnail_url = str_replace(GC_APPLICATION_PATH . '/public', '', $file->getDestination()) . '/' . $file_data['name'];
 
                 $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
@@ -113,6 +119,11 @@ class File extends Object
         return FALSE;
     }
 
+    /**
+     * Remove image
+     *      *
+     * @return boolean
+     */
     public function remove($filename)
     {
          $file = $this->getDirectory() . '/' . $filename;
@@ -122,21 +133,5 @@ class File extends Object
          }
 
          return TRUE;
-    }
-
-    /**
-     *
-     * Resizes an image
-     * Set parameters to the wanted (or maximum/minimum) width for the processed image, in pixels
-     */
-    public function resize($file_path, $width = null, $height = null)
-    {
-        $this->uploader->image_resize = true;
-
-        $this->uploader->image_ratio_x = ( $width == null ) ? true : false;
-        $this->uploader->image_ratio_y = ( $height == null ) ? true : false;
-
-        $this->uploader->image_x = $width;
-        $this->uploader->image_y = $height;
     }
 }
