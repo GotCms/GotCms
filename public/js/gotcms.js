@@ -408,6 +408,24 @@ var Gc = (function($)
 
                 return false;
             });
+        },
+
+        initCodeMirror: function($content)
+        {
+            $('#upload-link').on('click', function()
+            {
+                $('#form-content').toggle();
+                return false;
+            });
+            var myCodeMirror = CodeMirror.fromTextArea(document.getElementById($content), {
+                lineNumbers: true,
+                matchBrackets: true,
+                mode: "application/x-httpd-php",
+                indentUnit: 4,
+                indentWithTabs: true,
+                enterMode: "keep",
+                tabMode: "spaces"
+            });
         }
     };
 })(jQuery);

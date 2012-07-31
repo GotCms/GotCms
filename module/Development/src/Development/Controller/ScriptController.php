@@ -28,7 +28,9 @@ namespace Development\Controller;
 
 use Gc\Mvc\Controller\Action,
     Development\Form\Script as ScriptForm,
-    Gc\Script;
+    Gc\Script,
+    Zend\Http\Headers,
+    Zend\File\Transfer\Adapter\Http as FileTransfer;
 
 class ScriptController extends Action
 {
@@ -155,11 +157,17 @@ class ScriptController extends Action
     {
         $script_id = $this->getRouteMatch()->getParam('id', NULL);
         $script = Script\Model::fromId($script_id);
-        if(empty($script_id) or empty($script))
+        if(empty($script_id) or empty($script)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
         {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This script can not be download');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload script');
             return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
         }
+
+        $script->setContent(file_get_contents($_FILES['upload']['tmp_name']));
+        $script->save();
+
+        $this->flashMessenger()->setNameSpace('success')->addMessage('View updated');
+        return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
     }
 
     /**
@@ -173,7 +181,7 @@ class ScriptController extends Action
         $script = Script\Model::fromId($script_id);
         if(empty($script_id) or empty($script))
         {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This script can not be download');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('This script can not be download');
             return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
         }
 

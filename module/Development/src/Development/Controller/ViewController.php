@@ -29,7 +29,8 @@ namespace Development\Controller;
 use Gc\Mvc\Controller\Action,
     Development\Form\View as ViewForm,
     Gc\View,
-    Zend\Http\Headers;
+    Zend\Http\Headers,
+    Zend\File\Transfer\Adapter\Http as FileTransfer;
 
 class ViewController extends Action
 {
@@ -156,11 +157,17 @@ class ViewController extends Action
     {
         $view_id = $this->getRouteMatch()->getParam('id', NULL);
         $view = View\Model::fromId($view_id);
-        if(empty($view_id) or empty($view))
+        if(empty($view_id) or empty($view)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
         {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This view can not be download');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload view');
             return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
         }
+
+        $view->setContent(file_get_contents($_FILES['upload']['tmp_name']));
+        $view->save();
+
+        $this->flashMessenger()->setNameSpace('success')->addMessage('View updated');
+        return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
     }
 
     /**
@@ -174,7 +181,7 @@ class ViewController extends Action
         $view = View\Model::fromId($view_id);
         if(empty($view_id) or empty($view))
         {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This view can not be download');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('This view can not be download');
             return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
         }
 

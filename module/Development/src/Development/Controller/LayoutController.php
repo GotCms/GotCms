@@ -28,7 +28,9 @@ namespace Development\Controller;
 
 use Gc\Mvc\Controller\Action,
     Development\Form\Layout as LayoutForm,
-    Gc\Layout;
+    Gc\Layout,
+    Zend\Http\Headers,
+    Zend\File\Transfer\Adapter\Http as FileTransfer;
 
 class LayoutController extends Action
 {
@@ -155,11 +157,17 @@ class LayoutController extends Action
     {
         $layout_id = $this->getRouteMatch()->getParam('id', NULL);
         $layout = Layout\Model::fromId($layout_id);
-        if(empty($layout_id) or empty($layout))
+        if(empty($layout_id) or empty($layout)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
         {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This layout can not be download');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload layout');
             return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
         }
+
+        $layout->setContent(file_get_contents($_FILES['upload']['tmp_name']));
+        $layout->save();
+
+        $this->flashMessenger()->setNameSpace('success')->addMessage('View updated');
+        return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
     }
 
     /**
@@ -173,7 +181,7 @@ class LayoutController extends Action
         $layout = Layout\Model::fromId($layout_id);
         if(empty($layout_id) or empty($layout))
         {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This layout can not be download');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('This layout can not be download');
             return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
         }
 

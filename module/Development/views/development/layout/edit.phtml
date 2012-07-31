@@ -27,15 +27,14 @@
 
 ?>
 <a href="<?php echo $this->url('layoutDownload', array('id' => $this->layoutId)); ?>"><?php echo $this->escapeHtml($this->translate('Download as file')); ?></a>
+<a href="#" id="upload-link"><?php echo $this->escapeHtml($this->translate('Upload file')); ?></a>
+
+<form class="hide" id="form-content" action="<?php echo $this->url('layoutUpload', array('id' => $this->layoutId)); ?>" method="post" enctype="multipart/form-data">
+    <input type="file" name="upload">
+    <input type="submit" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
+</form>
+
 <?php echo $this->partial('development/forms/layout.phtml', array('form' => $this->form)); ?>
 <script type="text/javascript">
-var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('layout-content'), {
-    lineNumbers: true,
-    matchBrackets: true,
-    mode: "application/x-httpd-php",
-    indentUnit: 4,
-    indentWithTabs: true,
-    enterMode: "keep",
-    tabMode: "spaces"
-});
+Gc.initCodeMirror('layout-content');
 </script>
