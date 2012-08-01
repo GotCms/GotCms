@@ -47,6 +47,7 @@ abstract class Object
 
     /**
      * Set Id
+     * @param integer $id
      * @return \Gc\Core\Object
      */
     protected function setId($id = NULL)
@@ -64,6 +65,12 @@ abstract class Object
         $this->init();
     }
 
+
+    /**
+     * Initialize data
+     *
+     * @return void
+     */
     public function init()
     {
     }
@@ -73,7 +80,7 @@ abstract class Object
      *
      * Retains previous data in the object.
      *
-     * @param array $arr
+     * @param array $array
      * @return \Gc\Core\Object
      */
     public function addData(array $array)
@@ -295,28 +302,30 @@ abstract class Object
     /**
      * Convert object attributes to XML
      *
-     * @param  array $array array of required attributes
-     * @param string $rootName name of the root element
+     * @param array $array array of required attributes
+     * @param string $root_name name of the root element
+     * @param boolean $add_open_tag insert <?xml>
+     * @param boolean $add_Cdata insert CDATA[]
      * @return string
      */
-    protected function __toXml(array $array = array(), $rootName = 'item', $addOpenTag=FALSE, $addCdata=TRUE)
+    protected function __toXml(array $array = array(), $root_name = 'item', $add_open_tag = FALSE, $add_Cdata = TRUE)
     {
         $xml = '';
-        if($addOpenTag)
+        if($add_open_tag)
         {
             $xml.= '<?xml version="1.0" encoding="UTF-8"?>'."\n";
         }
 
-        if(!empty($rootName))
+        if(!empty($root_name))
         {
-            $xml.= '<'.$rootName.'>'."\n";
+            $xml.= '<'.$root_name.'>'."\n";
         }
 
         $xmlModel = new SimpleXMLElement('<node></node>');
-        $arrData = $this->toArray($array);
-        foreach($arrData as $fieldName => $fieldValue)
+        $array_data = $this->toArray($array);
+        foreach($array_data as $fieldName => $fieldValue)
         {
-            if($addCdata === TRUE)
+            if($add_Cdata === TRUE)
             {
                 $fieldValue = "<![CDATA[$fieldValue]]>";
             }
@@ -328,10 +337,10 @@ abstract class Object
             $xml.= "<$fieldName>$fieldValue</$fieldName>"."\n";
         }
 
-        if(!empty($rootName))
+        if(!empty($root_name))
         {
 
-            $xml.= '</'.$rootName.'>'."\n";
+            $xml.= '</'.$root_name.'>'."\n";
         }
 
         return $xml;
@@ -341,12 +350,14 @@ abstract class Object
      * Public wrapper for __toXml
      *
      * @param array $array
-     * @param string $rootName
+     * @param string $root_name
+     * @param boolean $add_open_tag insert <?xml>
+     * @param boolean $add_Cdata insert CDATA[]
      * @return string
      */
-    public function toXml(array $array = array(), $rootName = 'item', $addOpenTag=FALSE, $addCdata=TRUE)
+    public function toXml(array $array = array(), $root_name = 'item', $add_open_tag = FALSE, $add_Cdata = TRUE)
     {
-        return $this->__toXml($array, $rootName, $addOpenTag, $addCdata);
+        return $this->__toXml($array, $root_name, $add_open_tag, $add_Cdata);
     }
 
     /**
@@ -357,8 +368,8 @@ abstract class Object
      */
     protected function __toJson(array $array = array())
     {
-        $arrData = $this->toArray($array);
-        $json = Zend_Json::encode($arrData);
+        $array_data = $this->toArray($array);
+        $json = Zend_Json::encode($array_data);
         return $json;
     }
 
@@ -482,6 +493,12 @@ abstract class Object
         return $result;
     }
 
+    /**
+     * String to camel case
+     *
+     * @param string $name
+     * @return string
+     */
     protected function _camelize($name)
     {
         return uc_words($name, '');

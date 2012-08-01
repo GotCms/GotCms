@@ -32,21 +32,23 @@ use Zend,
     Zend\ModuleManager\ModuleManager,
     Zend\Db\Adapter\Adapter as DbAdapter,
     Zend\I18n\Translator\Translator,
-    Zend\Mvc\ModuleRouteListener;
+    Zend\Mvc\ModuleRouteListener,
+    Zend\EventManager\Event;
 
 class Module
 {
     /**
-     * @var array
-     */
-    static protected $_globalConfig;
-
-    /**
+     * Module configuration
      * @var array
      */
     protected $_config;
 
-    public function onBootstrap($e)
+    /**
+     * On boostrap event
+     * @param Event $e
+     * @return void
+     */
+    public function onBootstrap(Event $e)
     {
         if(!\Gc\Registry::isRegistered('Translator'))
         {
@@ -63,7 +65,7 @@ class Module
     }
 
     /**
-     * get autoloader config
+     * Get autoloader config
      * @return array
      */
     public function getAutoloaderConfig()

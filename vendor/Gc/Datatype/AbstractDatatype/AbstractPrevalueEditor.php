@@ -33,11 +33,13 @@ use Gc\Core\Object,
 abstract class AbstractPrevalueEditor extends Object
 {
     /**
+     * Datatype
      * @var AbstractDatatype
      */
     protected $_datatype;
 
     /**
+     * Configuration
      * @var mixed
      */
     protected $_config;
@@ -58,7 +60,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Abstract function for save Editor
-     * @param \Gc\Datatype\AbstractDatatype $datatype_abstract
+     * @param Datatype\AbstractDatatype $datatype_abstract
      * @return void
      */
     public function __construct(Datatype\AbstractDatatype $datatype_abstract)
@@ -116,14 +118,14 @@ abstract class AbstractPrevalueEditor extends Object
      * @param array $data
      * @return string
      */
-    public function render($name, Array $data = array())
+    public function render($name, array $data = array())
     {
         return $this->getDatatype()->render($name, $data);
     }
 
     /**
      * Add path in Zend\View\Resolver\TemplatePathStack
-     * @param string $name
+     * @param string $dir
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     public function addPath($dir)

@@ -34,17 +34,19 @@ use Gc\Core\Object,
 abstract class AbstractEditor extends Object
 {
     /**
+     * Datatype
      * @var AbstractDatatype
      */
     protected $_datatype;
 
     /**
+     * Property model
      * @var \Gc\Property\Model
      */
     protected $_property;
 
     /**
-     * get name of datatype
+     * Get name of datatype
      * @var string
      */
     protected $_name;
@@ -65,7 +67,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Abstract function for save Editor
-     * @param \Gc\Datatype\AbstractDatatype $datatype_abstract
+     * @param Datatype\AbstractDatatype $datatype_abstract
      * @return void
      */
     public function __construct(Datatype\AbstractDatatype $datatype_abstract)
@@ -86,6 +88,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Set property value
+     * @param mixte $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     protected function setValue($value)
@@ -121,6 +124,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Get datatype configuration
+     * @param mixte $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     protected function setConfig($value)
@@ -134,7 +138,6 @@ abstract class AbstractEditor extends Object
      * Upload dir path
      * @return string
      */
-
     public function getUploadUrl()
     {
         return $this->getDatatype()->getUploadUrl($this->getProperty()->getId());
@@ -189,7 +192,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Add path in Zend\View\Resolver\TemplatePathStack
-     * @param string $name
+     * @param string $dir
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     public function addPath($dir)

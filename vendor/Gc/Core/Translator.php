@@ -41,6 +41,7 @@ class Translator extends AbstractTable
     protected $_name = 'core_translate';
 
     /**
+     * Singleton for Translator
      * @var \Gc\Core\Translator $_instance
      */
     static protected $_instance = NULL;
@@ -61,8 +62,8 @@ class Translator extends AbstractTable
 
     /**
      * Get config value
-     * @param string $data
-     * @param optional $field, database field, by default 'identifier'
+     * @param string $source
+     * @param optional string $locale
      * @return string value
      */
     static function getValue($source, $locale = NULL)
@@ -88,6 +89,8 @@ class Translator extends AbstractTable
 
     /**
      * Return all values from core_config_data
+     * @param string $locale
+     * @param integer $limit
      * @return array
      */
     static function getValues($locale = NULL, $limit = NULL)

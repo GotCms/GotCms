@@ -30,13 +30,31 @@ namespace Gc\Validator;
 use Zend\Validator\AbstractValidator;
 class Identifier extends AbstractValidator
 {
+    /**
+     * Identifier message constante
+     * @const notIdentifier
+     */
     const NOT_IDENTIFIER    = 'notIdentifier';
 
+    /**
+     * Pattern to check if string is available identifier
+     * @var string
+     */
     protected $_pattern = '~^[a-zA-Z0-9_]+$~';
+
+    /**
+     * List of errors messages
+     * @var array
+     */
     protected $_messageTemplates = array(
         self::NOT_IDENTIFIER => "'%value%' can only contains alphabetic characters and '_'",
     );
 
+    /**
+     * Check if string is available identifier
+     * @param $value string
+     * @return boolean
+     */
     public function isValid($value)
     {
         $this->setValue($value);

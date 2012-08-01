@@ -202,7 +202,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Save prevalue editor
-     * @param \Gc\Datatype\AbstractDatatype $datatype_model
+     * @param AbstractDatatype $datatype
      * @return Model
      */
     static function savePrevalueEditor(AbstractDatatype $datatype)
@@ -232,7 +232,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Load prevalue editor
-     * @param \Gc\Datatype\AbstractDatatype $datatype
+     * @param AbstractDatatype $datatype
      * @return mxite
      */
     static function loadPrevalueEditor(AbstractDatatype $datatype)
@@ -245,7 +245,6 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Load editor
      * @param PropertyModel $property
-     * @param Gc\Document\Model $document
      * @return mixte
      */
     static function loadEditor(PropertyModel $property)

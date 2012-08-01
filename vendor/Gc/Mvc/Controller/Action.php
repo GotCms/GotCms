@@ -39,26 +39,31 @@ use Gc\User\Model,
 class Action extends AbstractActionController
 {
     /**
-     * @var array route available for installer
+     * Route available for installer
+     * @var array
      */
     protected $_installerRoutes = array('install', 'installCheckConfig', 'installLicense', 'installDatabase', 'installConfiguration', 'installComplete');
 
     /**
+     * Authentication service
      * @var \Zend\Authentication\AuthenticationService
      */
     protected $_auth = NULL;
 
     /**
+     * RouteMatch
      * @var \Zend\Mvc\Router\Http\RouteMatch
      */
     protected $_routeMatch = NULL;
 
     /**
+     * Session storage
      * @var \Zend\Session\Storage\SessionStorage
      */
     protected $_session = NULL;
 
     /**
+     * User acl
      * @var \Gc\User\Acl
      */
     protected $_acl = NULL;
@@ -207,6 +212,7 @@ class Action extends AbstractActionController
 
     /**
      * Return json model
+     * @param array $data
      * @return \Zend\View\Model\JsonModel
      */
     protected function _returnJson(array $data)
@@ -219,6 +225,7 @@ class Action extends AbstractActionController
 
     /**
      * Initiliaze flash messenger
+     * @param boolean $force_display
      * @return void
      */
     protected function useFlashMessenger($force_display = TRUE)

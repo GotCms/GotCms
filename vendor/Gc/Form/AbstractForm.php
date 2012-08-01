@@ -65,8 +65,8 @@ abstract class AbstractForm extends Form
 
     /**
      * Load values
-     * @param \Gc\Db\AbstractTable
-     * @return \Gc\Form\AbstractForm
+     * @param AbstractTable $table
+     * @return AbstractForm
      */
     public function loadValues(AbstractTable $table)
     {
@@ -102,7 +102,7 @@ abstract class AbstractForm extends Form
 
     /**
      * Add content to form
-     * @param \Zend\Form\Form $form
+     * @param Fieldset $form
      * @param mixed $elements
      * @static
      * @return void

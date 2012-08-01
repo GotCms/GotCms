@@ -82,7 +82,7 @@ class Model extends AbstractTable implements IterableInterface
     }
     /**
      * Initiliaze from id
-     * @param integer $id
+     * @param integer $identifier
      * @return \Gc\Script\Model
      */
     static function fromIdentifier($identifier)
