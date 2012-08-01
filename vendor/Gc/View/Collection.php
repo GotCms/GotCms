@@ -31,11 +31,23 @@ use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Zend\Db\Sql\Select;
 
+/**
+ * Collection of \Gc\View\Model.
+ *
+ * @category   Gc
+ * @package    Library
+ * @subpackage  View
+ */
 class Collection extends AbstractTable implements IterableInterface
 {
-    protected $_views_elements;
+    /**
+     * List of \Gc\View\Model
+     * @var array
+     */
+    protected $_views_elements = array();
 
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'view';
@@ -106,7 +118,7 @@ class Collection extends AbstractTable implements IterableInterface
 
     /**
      * Add view
-     * @param \gc\View\Model
+     * @param Model $view
      */
     public function addElement(Model $view)
     {
@@ -168,7 +180,7 @@ class Collection extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getParent()
      */
     public function getParent()
@@ -176,7 +188,7 @@ class Collection extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getChildren()
      */
     public function getChildren()
@@ -184,7 +196,7 @@ class Collection extends AbstractTable implements IterableInterface
         return $this->getViews();
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getId()
      */
     public function getId()
@@ -192,7 +204,7 @@ class Collection extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIterableId()
      */
     public function getIterableId()
@@ -200,7 +212,7 @@ class Collection extends AbstractTable implements IterableInterface
         return 'views';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getName()
      */
     public function getName()
@@ -208,7 +220,7 @@ class Collection extends AbstractTable implements IterableInterface
         return 'Views';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getUrl()
      */
     public function getUrl()
@@ -216,7 +228,7 @@ class Collection extends AbstractTable implements IterableInterface
         return '';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIcon()
      */
     public function getIcon()

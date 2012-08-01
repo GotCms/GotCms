@@ -32,6 +32,7 @@ use Gc\Db\AbstractTable;
 class Model extends AbstractTable
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'property_value';
@@ -65,7 +66,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\Property\Value\Model
      */
-    static function fromArray(Array $array)
+    static function fromArray(array $array)
     {
         $property_value_table = new Model($array);
         $property_value_table->setData($array);

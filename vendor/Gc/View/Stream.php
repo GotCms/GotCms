@@ -59,6 +59,10 @@ class Stream
 
     /**
      * Opens the script file and converts markup.
+     * @param string path
+     * @param string $mode
+     * @param integer $options
+     * @param string $opened_path
      * @return boolean
      */
     public function stream_open($path, $mode, $options, &$opened_path)
@@ -75,6 +79,7 @@ class Stream
 
     /**
      * Reads from the stream.
+     * @param integer $count
      * @return mixed
      */
     public function stream_read($count)
@@ -87,6 +92,7 @@ class Stream
 
     /**
      * Write in the stream
+     * @param string $data
      * @return integer
      */
     public function stream_write($data)
@@ -128,6 +134,8 @@ class Stream
 
     /**
      * Seek to a specific point in the stream.
+     * @param integer $offset
+     * @param integer $whence
      * @return boolean
      */
     public function stream_seek($offset, $whence)
@@ -176,6 +184,10 @@ class Stream
     }
 
     /**
+     * Retrieve information about a file
+     * Always return false because data come from the database
+     * @param string $path
+     * @param int $flags
      * @return boolean
      */
     public function url_stat($path, $flags)

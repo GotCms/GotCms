@@ -33,6 +33,7 @@ use Gc\Db\AbstractTable,
 class Model extends AbstractTable implements IterableInterface
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'view';
@@ -40,7 +41,7 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze
      * @param integer $id
-     * @return \gc\View\Model
+     * @return \Gc\View\Model
      */
     public function init($id = NULL)
     {
@@ -49,10 +50,10 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Initiliaze from array
-     * @param array $view
-     * @return \gc\View\Model
+     * @param array $array
+     * @return \Gc\View\Model
      */
-    static function fromArray(Array $array)
+    static function fromArray(array $array)
     {
         $view_table = new Model();
         $view_table->setData($array);
@@ -63,7 +64,7 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze from id
      * @param integer $id
-     * @return \gc\View\Model
+     * @return \Gc\View\Model
      */
     static function fromId($id)
     {
@@ -140,7 +141,7 @@ class Model extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getParent()
      */
     public function getParent()
@@ -148,7 +149,7 @@ class Model extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getChildren()
      */
     public function getChildren()
@@ -156,7 +157,7 @@ class Model extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getId()
      */
     public function getId()
@@ -164,7 +165,7 @@ class Model extends AbstractTable implements IterableInterface
         return parent::getId();
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIterableId()
      */
     public function getIterableId()
@@ -172,7 +173,7 @@ class Model extends AbstractTable implements IterableInterface
         return 'view-'.$this->getId();
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getName()
      */
     public function getName()
@@ -180,7 +181,7 @@ class Model extends AbstractTable implements IterableInterface
         return parent::getName();
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getUrl()
      */
     public function getUrl()
@@ -188,7 +189,7 @@ class Model extends AbstractTable implements IterableInterface
         return '';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIcon()
      */
     public function getIcon()

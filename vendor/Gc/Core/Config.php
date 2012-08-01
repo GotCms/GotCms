@@ -33,6 +33,7 @@ use Gc\Db\AbstractTable,
 class Config extends AbstractTable
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'core_config_data';

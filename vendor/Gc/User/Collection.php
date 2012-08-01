@@ -34,6 +34,7 @@ use Gc\Db\AbstractTable,
 class Collection extends AbstractTable implements IterableInterface
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'user';
@@ -108,7 +109,7 @@ class Collection extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getTreeViewId()
      */
     public function getIterableId()
@@ -116,7 +117,7 @@ class Collection extends AbstractTable implements IterableInterface
         return 'users';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getUrl()
      */
     public function getUrl()
@@ -124,7 +125,7 @@ class Collection extends AbstractTable implements IterableInterface
         return '';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIcon()
      */
     public function getIcon()

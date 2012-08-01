@@ -121,7 +121,7 @@ class File extends Object
 
     /**
      * Remove image
-     *      *
+     * @param string $filename
      * @return boolean
      */
     public function remove($filename)

@@ -35,18 +35,19 @@ class Navigation
     const XML_NAV_FOOTER = '</nav></configdata>';
 
     /**
-     * @var array of \Gc\Document\Model
+     * List of \Gc\Document\Model
+     * @var array
      */
     protected $_documents;
 
     /**
-     * @var string base path for urls
+     * Base path for urls
+     * @var string
      */
     protected $_basePath;
 
     /**
      * Constructor, initialize document
-     *
      * @return void
      */
     public function __construct()
@@ -58,8 +59,8 @@ class Navigation
 
     /**
      * Set base path for urls
-     *
-     * @return Gc\Component\Navigation
+     * @param string $path
+     * @return \Gc\Component\Navigation
      */
     public function setBasePath($path)
     {
@@ -69,7 +70,6 @@ class Navigation
 
     /**
      * Get base Path
-     *
      * @return string
      */
     public function getBasePath()
@@ -80,9 +80,10 @@ class Navigation
     /**
      * Render navigation
      * @param array $documents (set of \Gc\Document\Model)
+     * @param string $parent_url
      * @return xml
      */
-    public function render(Array $documents = NULL, $parent_url = NULL)
+    public function render(array $documents = NULL, $parent_url = NULL)
     {
         $navigation = '';
         $hasFooter = FALSE;

@@ -36,27 +36,32 @@ use Gc\User\Role\Model as RoleModel,
 class Acl extends ZendAcl\Acl
 {
     /**
+     * Role model
      * @var \Gc\User\Role\Model
      */
     protected $_role_table = NULL;
 
     /**
+     * User Role id
      * @var integer role_id
      */
     protected $_user_role = NULL;
 
     /**
+     * User Role name
      * @var mixed role name
      */
     protected $_user_role_name = NULL;
 
     /**
+     * User model
      * @var \Gc\User\Model
      */
     protected $_user = NULL;
 
     /**
      * Initiliaze Acl
+     * @param UserModel $user_model
      * @return void
      */
     public function __construct(UserModel $user_model)
@@ -165,6 +170,7 @@ class Acl extends ZendAcl\Acl
 
     /**
      * List all resources by group
+     * @param array $group
      * @return array
      */
     public function listResourcesByGroup($group)

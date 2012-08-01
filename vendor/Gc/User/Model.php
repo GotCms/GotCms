@@ -35,6 +35,7 @@ use Gc\Db\AbstractTable,
 class Model extends AbstractTable implements IterableInterface
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'user';
@@ -180,9 +181,9 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze from array
      * @param array $array
-     * @return Gc\User\Model
+     * @return \Gc\User\Model
      */
-    static function fromArray(Array $array)
+    static function fromArray(array $array)
     {
         $user_table = new Model();
         $user_table->setData($array);
@@ -193,7 +194,7 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze from id
      * @param integer $id
-     * @return Gc\User\Model
+     * @return \Gc\User\Model
      */
     static function fromId($id)
     {
@@ -266,7 +267,7 @@ class Model extends AbstractTable implements IterableInterface
         return $this->getData('id');
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getTreeViewId()
      */
     public function getIterableId()
@@ -282,7 +283,7 @@ class Model extends AbstractTable implements IterableInterface
         return '';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIcon()
      */
     public function getIcon()

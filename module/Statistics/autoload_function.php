@@ -24,6 +24,9 @@
  * @link     http://www.got-cms.com
  */
 
+/**
+ * Autoload for Statistics module
+ */
 return function ($class) {
     static $map;
     if (!$map) {

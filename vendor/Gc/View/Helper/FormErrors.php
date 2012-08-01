@@ -40,12 +40,22 @@ class FormErrors extends AbstractHelper
     protected $view = null;
 
     /**
-     * @var string Element block start/end tags and separator
+     * Element block end tags
+     * @var string
      */
     protected $_htmlElementEnd       = '</li></ul>';
+
+    /**
+     * Element block start tags
+     * @var string
+     */
     protected $_htmlElementStart     = '<ul%s><li>';
+
+    /**
+     * Element block separator
+     * @var string
+     */
     protected $_htmlElementSeparator = '</li><li>';
-    /**#@-*/
 
     /**
      * Render form errors

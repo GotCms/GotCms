@@ -34,38 +34,49 @@ use Gc\Db\AbstractTable,
 abstract class AbstractDatatype extends AbstractTable
 {
     /**
+     * Editor
      * @var \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     protected     $_editor;
 
     /**
+     * Prevalue editor
      * @var \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     protected     $_prevalueEditor;
 
     /**
+     * Property
      * @var \Gc\Property\Model
      */
     protected     $_property;
 
     /**
+     * Table name
      * @var string
      */
     protected     $_name = 'datatype';
 
     /**
      * Get Datatype Editor
-     * @param \Gc\Property\Model $property
+     * @param Property\Model $property
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     abstract public function getEditor(Property\Model $property);
 
     /**
      * Get Datatype Prevalue editor
-     * @return Gc\Model\DbTable\Datatype\Abstract\PrevalueEditor
+     * @return \Gc\Model\DbTable\Datatype\Abstract\PrevalueEditor
      */
     abstract public function getPrevalueEditor();
 
+
+    /**
+     * Load Datatype
+     * @param Datatype\Model $datatype
+     * @param integer $document_id
+     * @return mixed
+     */
     public function load($datatype = NULL, $document_id = NULL)
     {
         if(empty($datatype))
@@ -99,6 +110,7 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Get upload url path
+     * @param integer $property_id
      * @return string
      */
     public function getUploadUrl($property_id)
@@ -148,9 +160,10 @@ abstract class AbstractDatatype extends AbstractTable
      * Render template
      *
      * @param string $name
+     * @param array $data
      * @return string
      */
-    public function render($name, Array $data = array())
+    public function render($name, array $data = array())
     {
         $renderer = \Gc\Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
 
@@ -163,7 +176,7 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Add path in Zend\View\Resolver\TemplatePathStack
      *
-     * @param string $name
+     * @param string $dir
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     public function addPath($dir)
@@ -181,6 +194,11 @@ abstract class AbstractDatatype extends AbstractTable
         return $this;
     }
 
+    /**
+     * Retrieve document
+     *
+     * @return \Gc\Document\Model
+     */
     public function getDocument()
     {
         if($this->getData('document') === NULL)

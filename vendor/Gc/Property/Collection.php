@@ -33,6 +33,7 @@ use Gc\Db\AbstractTable,
 class Collection extends AbstractTable
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'property';
@@ -124,7 +125,7 @@ class Collection extends AbstractTable
      * @param array $properties
      * @return void
      */
-    public function setProperties(Array $properties)
+    public function setProperties(array $properties)
     {
         $array = array();
         foreach($properties as $property)

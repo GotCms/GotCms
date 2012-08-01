@@ -29,21 +29,27 @@ namespace Gc\Component;
 
 class Tabs
 {
+    /**
+     * Data stored
+     * @var array
+     */
     private $_data;
 
     /**
+     * Tabs constructor
      * @param array $array
      */
-    public function __construct(Array $array)
+    public function __construct(array $array)
     {
         $this->_data = $array;
     }
 
     /**
+     * Render tab
      * @param array $tabs contains objects
      * @return string
      */
-    public function render(Array $tabs = NULL)
+    public function render(array $tabs = NULL)
     {
         $i = 0;
         $html = '<ul>';
@@ -73,7 +79,8 @@ class Tabs
     }
 
     /**
-     * @return string|FALSE
+     * Render tab
+     * @return string
      */
     public function __toString()
     {

@@ -34,6 +34,7 @@ use Gc\Db\AbstractTable,
 class Model extends AbstractTable
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'user_acl_role';
@@ -112,7 +113,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\User\Model\Role
      */
-    static function fromArray(Array $array)
+    static function fromArray(array $array)
     {
         $role_table = new Model();
         $role_table->setData($array);

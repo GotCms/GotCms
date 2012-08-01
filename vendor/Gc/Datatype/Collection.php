@@ -39,6 +39,7 @@ class Collection extends AbstractTable implements IterableInterface
     protected $_datatypes;
 
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'datatype';
@@ -103,21 +104,21 @@ class Collection extends AbstractTable implements IterableInterface
     /*
      * Gc\Component\IterableInterfaces methods
      */
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getParent()
      */
     public function getParent()
     {
         return FALSE;
     }
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getChildren()
      */
     public function getChildren()
     {
         return $this->getDatatypes();
     }
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getId()
      */
     public function getId()
@@ -126,7 +127,7 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIcon()
      */
     public function getIcon()
@@ -134,7 +135,7 @@ class Collection extends AbstractTable implements IterableInterface
         return 'folder';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIterableId()
      */
     public function getIterableId()
@@ -142,7 +143,7 @@ class Collection extends AbstractTable implements IterableInterface
         return 'datatypes';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getName()
      */
     public function getName()
@@ -150,7 +151,7 @@ class Collection extends AbstractTable implements IterableInterface
         return 'Datatypes';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getUrl()
      */
     public function getUrl()

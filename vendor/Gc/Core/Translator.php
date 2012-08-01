@@ -35,6 +35,7 @@ use Gc\Db\AbstractTable,
 class Translator extends AbstractTable
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'core_translate';

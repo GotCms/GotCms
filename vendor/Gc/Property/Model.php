@@ -37,6 +37,7 @@ class Model extends AbstractTable
     protected         $_value;
 
     /**
+     * Table name
      * @var string
      */
     protected         $_name = 'property';
@@ -208,7 +209,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\Property\Model
      */
-    static function fromArray(Array $array)
+    static function fromArray(array $array)
     {
         $property = new Model();
         $property->setData($array);

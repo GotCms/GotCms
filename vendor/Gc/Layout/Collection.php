@@ -34,6 +34,7 @@ use Gc\Db\AbstractTable,
 class Collection extends AbstractTable implements IterableInterface
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'layout';
@@ -94,21 +95,21 @@ class Collection extends AbstractTable implements IterableInterface
     /*
      * Gc\Component\IterableInterfaces methods
      */
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getParent()
      */
     public function getParent()
     {
         return null;
     }
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getChildren()
      */
     public function getChildren()
     {
         return $this->getLayouts();
     }
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getId()
      */
     public function getId()
@@ -117,28 +118,28 @@ class Collection extends AbstractTable implements IterableInterface
     }
     /* TODO Finish icon in Gc\DocumentType\Collection
      */
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIcon()
      */
     public function getIcon()
     {
         return 'folder';
     }
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIterableId()
      */
     public function getIterableId()
     {
         return 'layouts';
     }
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getName()
      */
     public function getName()
     {
         return 'Layouts';
     }
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getUrl()
      */
     public function getUrl()

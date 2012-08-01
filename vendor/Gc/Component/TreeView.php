@@ -29,22 +29,28 @@ namespace Gc\Component;
 
 class TreeView
 {
+    /**
+     * Data stored
+     * @var array
+     */
     protected $_data;
 
     /**
-     * @param array $array
+     * Treeview constructor
+     * @param array $treeview_data
      */
-    public function __construct(Array $treeview_data)
+    public function __construct(array $treeview_data)
     {
         $this->_data = $treeview_data;
     }
 
-
     /**
-     * @param array $tab contains objects
+     * Render treeview html
+     * @param array $treeview_data contains data as array
+     * @param boolean $init
      * @return string
      */
-    static function render(Array $treeview_data = NULL, $init = TRUE)
+    static function render(array $treeview_data = NULL, $init = TRUE)
     {
         $html = '';
         if($init)
@@ -102,6 +108,10 @@ class TreeView
         return $html;
     }
 
+    /**
+     * Render treeview html
+     * @return string
+     */
     public function __toString()
     {
         try

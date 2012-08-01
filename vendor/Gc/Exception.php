@@ -18,7 +18,6 @@
  * PHP Version >=5.3
  *
  * @category Gc
- * @package  Library
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
@@ -26,14 +25,27 @@
 
 namespace Gc;
 
+/**
+ * Exception is the base class for all Exceptions.
+ *
+ * @category   Gc
+ * @package    Library
+ */
 class Exception
 {
-    public function __construct($msg = '', $code = 0, Exception $previous = null)
+    /**
+     * Construct the exception
+     * @param string $message
+     * @param integer $code
+     * @param Exception $previous
+     * @return void
+     */
+    public function __construct($message = '', $code = 0, Exception $previous = NULL)
     {
         /*
         * TODO \Gc\Core\Exception
         */
-        var_dump($msg);
+        var_dump($message);
         die();
     }
 }

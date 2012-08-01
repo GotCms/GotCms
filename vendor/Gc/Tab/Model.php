@@ -33,6 +33,7 @@ use Gc\Db\AbstractTable,
 class Model extends AbstractTable
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'tab';
@@ -144,7 +145,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\Tab\Model
      */
-    static function fromArray(Array $array)
+    static function fromArray(array $array)
     {
         $tab_table = new Model();
         $tab_table->setData($array);

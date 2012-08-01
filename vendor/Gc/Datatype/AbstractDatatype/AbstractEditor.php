@@ -179,9 +179,10 @@ abstract class AbstractEditor extends Object
     /**
      * Render template
      * @param string $name
+     * @param array $data
      * @return string
      */
-    public function render($name, Array $data = array())
+    public function render($name, array $data = array())
     {
         return $this->getDatatype()->render($name, $data);
     }

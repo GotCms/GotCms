@@ -32,6 +32,7 @@ use Gc\Db\AbstractTable;
 class Collection extends AbstractTable
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'tab';
@@ -85,7 +86,7 @@ class Collection extends AbstractTable
      * @param array $tabs of \Gc\Tab\Model
      * @return void
      */
-    public function setTabs(Array $tabs)
+    public function setTabs(array $tabs)
     {
         $array = array();
         foreach($tabs as $tab)
@@ -101,7 +102,7 @@ class Collection extends AbstractTable
      * @param array $tab
      * @return void
      */
-    public function addTab(Array $tab)
+    public function addTab(array $tab)
     {
         $tabs = $this->getTabs();
         $tabs[] = Model::fromArray($tab);

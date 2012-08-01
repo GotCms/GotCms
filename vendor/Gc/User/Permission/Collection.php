@@ -32,9 +32,14 @@ use Gc\Db\AbstractTable,
 
 class Collection extends AbstractTable
 {
+    /**
+     * List of permissions
+     * @var array
+     */
     protected $_permissions;
 
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'user_acl_permissions';

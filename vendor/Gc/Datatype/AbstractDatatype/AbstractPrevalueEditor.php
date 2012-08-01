@@ -113,6 +113,7 @@ abstract class AbstractPrevalueEditor extends Object
     /**
      * Render template
      * @param string $name
+     * @param array $data
      * @return string
      */
     public function render($name, Array $data = array())

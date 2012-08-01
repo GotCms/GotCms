@@ -34,6 +34,7 @@ use Gc\Db\AbstractTable,
 class Collection extends AbstractTable implements IterableInterface
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'script';
@@ -64,7 +65,7 @@ class Collection extends AbstractTable implements IterableInterface
         return $this->getData('scripts');
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getParent()
      */
     public function getParent()
@@ -72,7 +73,7 @@ class Collection extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getChildren()
      */
     public function getChildren()
@@ -80,7 +81,7 @@ class Collection extends AbstractTable implements IterableInterface
         return $this->getScripts();
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getId()
      */
     public function getId()
@@ -88,7 +89,7 @@ class Collection extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIterableId()
      */
     public function getIterableId()
@@ -96,7 +97,7 @@ class Collection extends AbstractTable implements IterableInterface
         return 'scripts';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getName()
      */
     public function getName()
@@ -104,7 +105,7 @@ class Collection extends AbstractTable implements IterableInterface
         return 'Scripts';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getUrl()
      */
     public function getUrl()
@@ -112,7 +113,7 @@ class Collection extends AbstractTable implements IterableInterface
         return '';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIcon()
      */
     public function getIcon()

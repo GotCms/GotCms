@@ -57,7 +57,7 @@ class Registry extends ArrayObject
     /**
      * Set the default registry instance to a specified instance.
      *
-     * @param \Gc\Registry $registry An object instance of type Registry,
+     * @param Registry $registry An object instance of type Registry,
      *   or a subclass.
      * @return void
      * @throws RuntimeException if registry is already initialized.
@@ -159,10 +159,11 @@ class Registry extends ArrayObject
     }
 
     /**
-     * @param string $index
-     * @returns mixed
+     * Returns TRUE if the $index is a named value in the registry,
+     * or FALSE if $index was not found in the registry.
      *
-     * Workaround for http://bugs.php.net/bug.php?id=40442 (ZF-960).
+     * @param string $index
+     * @return boolean
      */
     public function offsetExists($index)
     {

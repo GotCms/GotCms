@@ -36,6 +36,7 @@ use Gc\Db\AbstractTable,
 class Model extends AbstractTable implements IterableInterface
 {
     /**
+     * Table name
      * @var string
      */
     protected $_name = 'datatype';
@@ -58,7 +59,7 @@ class Model extends AbstractTable implements IterableInterface
      * @param array $array
      * @return \Gc\Datatype\Model
      */
-    static function fromArray(Array $array)
+    static function fromArray(array $array)
     {
         $datatype_table = new Model();
         $datatype_table->setData($array);
@@ -143,7 +144,7 @@ class Model extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getId()
      */
     public function getId()
@@ -151,7 +152,7 @@ class Model extends AbstractTable implements IterableInterface
         return $this->getData('id');
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getName()
      */
     public function getName()
@@ -159,7 +160,7 @@ class Model extends AbstractTable implements IterableInterface
         return $this->getData('name');
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getParent()
      */
     public function getParent()
@@ -167,7 +168,7 @@ class Model extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getChildren()
      */
     public function getChildren()
@@ -175,7 +176,7 @@ class Model extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIterableId()
      */
     public function getIterableId()
@@ -183,7 +184,7 @@ class Model extends AbstractTable implements IterableInterface
         return 'datatype_'.$this->getId();
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getUrl()
      */
     public function getUrl()
@@ -191,7 +192,7 @@ class Model extends AbstractTable implements IterableInterface
         return '';
     }
 
-    /* (non-PHPdoc)
+    /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getIcon()
      */
     public function getIcon()
@@ -258,7 +259,7 @@ class Model extends AbstractTable implements IterableInterface
      * Load Datatype
      * @param integer $datatype_id
      * @param optional integer $document_id
-     * @return Gc\Datatype\AbstractDatatype
+     * @return \Gc\Datatype\AbstractDatatype
      */
     static function loadDatatype($datatype_id, $document_id = NULL)
     {
