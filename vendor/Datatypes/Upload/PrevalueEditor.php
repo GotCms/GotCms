@@ -29,10 +29,13 @@ namespace Datatypes\Upload;
 use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
     Zend\Form\Element;
 
+/**
+ * Prevalue Editor for Upload datatype
+ */
 class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
-     * Save textstring prevalue editor
+     * Save upload prevalue editor
      * @return void
      */
     public function save()
@@ -49,7 +52,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     }
 
     /**
-     * Load textstring prevalue editor
+     * Load upload prevalue editor
      * @return mixte
      */
     public function load()

@@ -29,6 +29,9 @@ namespace Datatypes\Textrich;
 use Gc\Core\Object,
     Zend\Form\Element;
 
+/**
+ * Ckeditor class to generate html for Ckeditor plugin
+ */
 class CkEditor extends Object
 {
     /**

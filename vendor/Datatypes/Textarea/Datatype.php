@@ -29,15 +29,20 @@ namespace Datatypes\Textarea;
 use Gc\Datatype\AbstractDatatype as AbstractDatatype,
     Gc\Property\Model as PropertyModel;
 
+/**
+ * Manage Textarea datatype
+ */
 class Datatype extends AbstractDatatype
 {
     /**
-     * @var string name of datatype
+     * Datatype name
+     * @var string
      */
     protected $_name = 'textarea';
 
     /**
      * Retrieve editor
+     * @param PropertyModel $property
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     public function getEditor(PropertyModel $property)

@@ -28,13 +28,23 @@ namespace Datatypes\DatePicker;
 
 use Gc\Datatype\AbstractDatatype\AbstractEditor;
 
+/**
+ * Editor for Date Picker datatype
+ */
 class Editor extends AbstractEditor
 {
-
+    /**
+     * Save datepicker editor
+     * @return void
+     */
     public function save() {
         //sauvegarde des informations
     }
 
+    /**
+     * Load datepicker editor
+     * @return mixte
+     */
     public function load() {
         //Chargement graphique
     }

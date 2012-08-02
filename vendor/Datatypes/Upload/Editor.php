@@ -30,9 +30,15 @@ use Gc\Datatype\AbstractDatatype\AbstractEditor,
     Gc\Media\File,
     Zend\Form\Element;
 
+/**
+ * Editor for Upload datatype
+ */
 class Editor extends AbstractEditor
 {
-
+    /**
+     * Save upload editor
+     * @return void
+     */
     public function save()
     {
         $file_class = new File();
@@ -91,6 +97,10 @@ class Editor extends AbstractEditor
         $this->setValue(empty($return_values) ? NULL : $return_values);
     }
 
+    /**
+     * Load upload editor
+     * @return mixte
+     */
     public function load()
     {
         $parameters = $this->getConfig();
@@ -147,7 +157,10 @@ class Editor extends AbstractEditor
         ));
     }
 
-
+    /**
+     * Load resources
+     * @return void
+     */
     protected function initScript()
     {
         $headscript = $this->getHelper('HeadScript');
@@ -166,6 +179,8 @@ class Editor extends AbstractEditor
     }
 
     /**
+     * Retrieve param
+     *
      * @param mixte $key
      * @param mixte $value
      * @param mixte $default

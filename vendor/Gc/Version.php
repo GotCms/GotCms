@@ -33,20 +33,20 @@ use Zend\Json\Json;
 final class Version
 {
     /**
-     * Got Cms version identification - see compareVersion()
+     * GotCms version identification - see compareVersion()
      */
     const VERSION = '0.1a';
 
     /**
-     * The latest stable version Got Cms available
+     * The latest stable version GotCms available
      *
      * @var string
      */
     protected static $latestVersion;
 
     /**
-     * Compare the specified Got Cms version string $version
-     * with the current Gc\Version::VERSION of Got Cms.
+     * Compare the specified GotCms version string $version
+     * with the current Gc\Version::VERSION of GotCms.
      *
      * @param  string  $version  A version string (e.g. "0.7.1").
      * @return int           -1 if the $version is older,
@@ -89,7 +89,7 @@ final class Version
     }
 
     /**
-     * Returns true if the running version of Got Cms is
+     * Returns true if the running version of GotCms is
      * the latest (or newer??) than the latest tag on GitHub,
      * which is returned by static::getLatest().
      *

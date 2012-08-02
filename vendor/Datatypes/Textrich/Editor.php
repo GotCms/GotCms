@@ -29,6 +29,9 @@ namespace Datatypes\Textrich;
 use Gc\Datatype\AbstractDatatype\AbstractEditor,
     Zend\Form\Element;
 
+/**
+ * Editor for Textrich datatype
+ */
 class Editor extends AbstractEditor
 {
     /**
@@ -42,7 +45,7 @@ class Editor extends AbstractEditor
     }
 
     /**
-     * load textrich editor
+     * Load textrich editor
      * @return mixte
      */
     public function load()

@@ -29,11 +29,14 @@ namespace Datatypes\Textstring;
 use Gc\Datatype\AbstractDatatype\AbstractEditor,
     Zend\Form\Element;
 
+/**
+ * Editor for Textstring datatype
+ */
 class Editor extends AbstractEditor
 {
     /**
      * Save textstring editor
-     * @return mixte
+     * @return void
      */
     public function save()
     {

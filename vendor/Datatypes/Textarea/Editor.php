@@ -29,11 +29,14 @@ namespace Datatypes\Textarea;
 use Gc\Datatype\AbstractDatatype\AbstractEditor,
     Zend\Form\Element;
 
+/**
+ * Editor for Textarea datatype
+ */
 class Editor extends AbstractEditor
 {
     /**
      * Save textarea editor
-     * @return mixte
+     * @return void
      */
     public function save()
     {

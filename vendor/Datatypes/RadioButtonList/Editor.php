@@ -28,13 +28,23 @@ namespace Datatypes\RadioButtonList;
 
 use Gc\Datatype\AbstractDatatype\AbstractEditor;
 
+/**
+ * Editor for Radio Button List datatype
+ */
 class Editor extends AbstractEditor
 {
-
+    /**
+     * Save radiobuttonlist editor
+     * @return void
+     */
     public function save() {
         //sauvegarde des informations
     }
 
+    /**
+     * Load radiobuttonlist editor
+     * @return mixte
+     */
     public function load() {
         //Chargement graphique
     }

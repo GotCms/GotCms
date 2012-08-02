@@ -29,6 +29,9 @@ namespace Datatypes\Textstring;
 use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
     Zend\Form\Element;
 
+/**
+ * Prevalue Editor for Textstring datatype
+ */
 class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**

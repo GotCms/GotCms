@@ -28,10 +28,17 @@ namespace Datatypes\CheckboxList;
 
 use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
 
+/**
+ * Prevalue Editor for Checkbox List datatype
+ */
 class PrevalueEditor extends AbstractPrevalueEditor
 {
-
-    public function save($request = null) {
+    /**
+     * Save Checkbox List prevalue editor
+     * @return void
+     */
+    public function save()
+    {
         //Save prevalue in column Datatypes\prevalue_value
         $arrayResult = array();
         foreach($request->getParam('values', array()) as $value)
@@ -47,6 +54,10 @@ class PrevalueEditor extends AbstractPrevalueEditor
         return $this->getParameters();
     }
 
+    /**
+     * Load Checkbox List prevalue editor
+     * @return void
+     */
     public function load()
     {
         $parameters = $this->getParameters();

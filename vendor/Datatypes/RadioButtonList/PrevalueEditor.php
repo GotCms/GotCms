@@ -28,9 +28,16 @@ namespace Datatypes\RadioButtonList;
 
 use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
 
+/**
+ * Prevalue Editor for Radio Button List datatype
+ */
 class PrevalueEditor extends AbstractPrevalueEditor
 {
-    public function save($request = null)
+    /**
+     * Save Radio Button List prevalue editor
+     * @return void
+     */
+    public function save()
     {
         //Save prevalue in column Datatypes\prevalue_value
         $this->setConfiguration(array());
@@ -38,6 +45,10 @@ class PrevalueEditor extends AbstractPrevalueEditor
         return $this->getConfiguration();
     }
 
+    /**
+     * Load Radio Button List prevalue editor
+     * @return void
+     */
     public function load()
     {
         $configuration = $this->getConfiguration();

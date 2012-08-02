@@ -28,14 +28,24 @@ namespace Datatypes\CheckboxList;
 
 use Gc\Datatype\AbstractDatatype\AbstractEditor;
 
+/**
+ * Editor for Checkbox List datatype
+ */
 class Editor extends AbstractEditor
 {
-
+    /**
+     * Save checkbox list editor
+     * @return void
+     */
     public function save()
     {
         //sauvegarde des informations
     }
 
+    /**
+     * Load checkbox list editor
+     * @return mixte
+     */
     public function load()
     {
         //Chargement graphique

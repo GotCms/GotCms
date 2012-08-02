@@ -29,10 +29,13 @@ namespace Datatypes\Textarea;
 use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
     Zend\Form\Element;
 
+/**
+ * Prevalue Editor for Textarea datatype
+ */
 class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
-     * Save textarea prevalue editor
+     * Save Textarea prevalue editor
      * @return void
      */
     public function save()
@@ -51,7 +54,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     }
 
     /**
-     * Load textarea prevalue editor
+     * Load Textarea prevalue editor
      * @return mixte
      */
     public function load()
