@@ -29,7 +29,9 @@ namespace Gc\Core;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Where;
-
+/**
+ * Get and set config data
+ */
 class Config extends AbstractTable
 {
     /**

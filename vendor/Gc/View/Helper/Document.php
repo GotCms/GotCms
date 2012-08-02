@@ -29,17 +29,25 @@ namespace Gc\View\Helper;
 
 use Zend\View\Helper\AbstractHelper,
     Gc\Document\Model as DocumentModel;
-
+/**
+ * Retrieve document from id or url_key
+ * @example In view: $this->document('mypage/mysubpage'); or $this->document(1);
+ */
 class Document extends AbstractHelper
 {
     /**
      * Returns document from id.
      *
-     * @param  integer $document_id
+     * @param  mixte $identifier
      * @return \Gc\Document\Model
      */
-    public function __invoke($document_id)
+    public function __invoke($identifier)
     {
-        return DocumentModel::fromId($document_id);
+        if(is_numeric($identifier))
+        {
+            return DocumentModel::fromId($identifier);
+        }
+
+        return DocumentModel::fromUrlKey($identifier);
     }
 }

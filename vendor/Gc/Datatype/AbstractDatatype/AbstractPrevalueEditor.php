@@ -29,7 +29,10 @@ namespace Gc\Datatype\AbstractDatatype;
 
 use Gc\Core\Object,
     Gc\Datatype;
-
+/**
+ * Abstract Prevalue Editor class
+ * Use for display Prevalue Editor in Manage Development -> Datatypes
+ */
 abstract class AbstractPrevalueEditor extends Object
 {
     /**

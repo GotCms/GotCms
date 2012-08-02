@@ -29,7 +29,9 @@ namespace Gc\User\Role;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
-
+/**
+ * Collection of Role Model
+ */
 class Collection extends AbstractTable
 {
     /**

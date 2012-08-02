@@ -28,6 +28,9 @@
 namespace Gc\Validator;
 
 use Zend\Validator\AbstractValidator;
+/**
+ * Check if string is available identifier
+ */
 class Identifier extends AbstractValidator
 {
     /**

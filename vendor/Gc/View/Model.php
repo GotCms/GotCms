@@ -29,7 +29,9 @@ namespace Gc\View;
 
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface;
-
+/**
+ * Class for manage View
+ */
 class Model extends AbstractTable implements IterableInterface
 {
     /**

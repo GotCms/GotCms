@@ -34,7 +34,9 @@ use Zend,
     Zend\I18n\Translator\Translator,
     Zend\Mvc\ModuleRouteListener,
     Zend\EventManager\Event;
-
+/**
+ * Generic Module
+ */
 class Module
 {
     /**

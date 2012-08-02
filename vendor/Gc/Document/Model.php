@@ -30,7 +30,9 @@ namespace Gc\Document;
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Gc\View;
-
+/**
+ * Document Model
+ */
 class Model extends AbstractTable implements IterableInterface
 {
     /**

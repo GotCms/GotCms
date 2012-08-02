@@ -27,6 +27,9 @@
 
 namespace Gc\Component;
 
+/**
+ * Create xml for jQuery treeview
+ */
 class TreeView
 {
     /**

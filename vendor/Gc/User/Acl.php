@@ -32,7 +32,9 @@ use Gc\User\Role\Model as RoleModel,
     Zend\Permissions\Acl as ZendAcl,
     Zend\Db\TableGateway\TableGateway,
     Zend\Db\Sql\Select;
-
+/**
+ * Use Acl
+ */
 class Acl extends ZendAcl\Acl
 {
     /**

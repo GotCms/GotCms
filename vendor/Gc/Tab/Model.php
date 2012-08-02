@@ -29,7 +29,9 @@ namespace Gc\Tab;
 
 use Gc\Db\AbstractTable,
     Gc\Property;
-
+/**
+ * Tab Model
+ */
 class Model extends AbstractTable
 {
     /**

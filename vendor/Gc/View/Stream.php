@@ -27,6 +27,14 @@
 
 namespace Gc\View;
 
+/**
+ * Stream wrapper to convert markup of mostly-PHP templates into PHP prior to
+ * include().
+ *
+ * Based in large part on the example at
+ * http://www.php.net/manual/en/function.stream-wrapper-register.php
+ *
+ */
 class Stream
 {
     /**

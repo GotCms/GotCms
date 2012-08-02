@@ -28,10 +28,13 @@
 namespace Gc\Property;
 
 use Gc\Db\AbstractTable;
-
+/**
+ * Property Model
+ */
 class Model extends AbstractTable
 {
     /**
+     * Accessor for \Gc\Property\Value\Model
      * @var \Gc\Property\Value\Model
      */
     protected         $_value;

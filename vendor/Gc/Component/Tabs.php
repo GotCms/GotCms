@@ -27,6 +27,9 @@
 
 namespace Gc\Component;
 
+/**
+ * Create html for jQuery Ui Tabs
+ */
 class Tabs
 {
     /**

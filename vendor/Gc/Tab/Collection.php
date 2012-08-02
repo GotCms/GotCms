@@ -28,7 +28,9 @@
 namespace Gc\Tab;
 
 use Gc\Db\AbstractTable;
-
+/**
+ * Collection of Tab Model
+ */
 class Collection extends AbstractTable
 {
     /**

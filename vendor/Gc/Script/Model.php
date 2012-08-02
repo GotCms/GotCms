@@ -29,7 +29,9 @@ namespace Gc\Script;
 
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface;
-
+/**
+ * Script Model
+ */
 class Model extends AbstractTable implements IterableInterface
 {
     /**

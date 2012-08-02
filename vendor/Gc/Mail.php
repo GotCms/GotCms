@@ -26,6 +26,9 @@
 
 namespace Gc;
 
+/**
+ * Extension for Zend\Mail
+ */
 class Mail extends Zend\Mail
 {
 

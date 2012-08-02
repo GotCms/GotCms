@@ -30,7 +30,10 @@ namespace Gc\Datatype;
 use Gc\Db\AbstractTable,
     Gc\Property,
     Zend\View\Model\ViewModel;
-
+/**
+ * Abstract Datatype is used to call
+ * the prevalue editor and editor.
+ */
 abstract class AbstractDatatype extends AbstractTable
 {
     /**

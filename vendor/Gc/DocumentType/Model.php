@@ -33,7 +33,9 @@ use Gc\Db\AbstractTable,
     Gc\Tab,
     Gc\View,
     Zend\Db\Sql;
-
+/**
+ * Model for Document Type
+ */
 class Model extends AbstractTable implements IterableInterface
 {
     /**

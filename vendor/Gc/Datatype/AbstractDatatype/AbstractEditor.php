@@ -30,7 +30,10 @@ namespace Gc\Datatype\AbstractDatatype;
 use Gc\Core\Object,
     Gc\Datatype,
     Zend\EventManager\StaticEventManager;
-
+/**
+ * Abstract Editor class
+ * Use for display Editor in Manage Content
+ */
 abstract class AbstractEditor extends Object
 {
     /**

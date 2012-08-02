@@ -32,11 +32,7 @@ use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
 
 /**
- * Collection of \Gc\View\Model.
- *
- * @category   Gc
- * @package    Library
- * @subpackage  View
+ * Collection of View Model
  */
 class Collection extends AbstractTable implements IterableInterface
 {

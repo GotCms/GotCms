@@ -29,7 +29,9 @@ namespace Gc\User\Permission;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
-
+/**
+ * Collection of permissions
+ */
 class Collection extends AbstractTable
 {
     /**

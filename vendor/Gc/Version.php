@@ -27,7 +27,9 @@
 namespace Gc;
 
 use Zend\Json\Json;
-
+/**
+ * Class to store and retrieve version
+ */
 final class Version
 {
     /**

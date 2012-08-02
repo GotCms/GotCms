@@ -28,7 +28,9 @@
 namespace Gc\Property\Value;
 
 use Gc\Db\AbstractTable;
-
+/**
+ * Property value Model
+ */
 class Model extends AbstractTable
 {
     /**

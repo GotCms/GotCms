@@ -28,7 +28,15 @@
 namespace Gc\Core;
 
 use Gc\Exception;
-
+/**
+ * Abstract object, all classes are extends from it to
+ * automate accessors, generate xml, json or array.
+ *
+ * @example if someone want to store data in object he can just do $this->setWantIWant($value);
+ * or $this->setData('what_i_whant', $value);
+ * and retrieve value with $this->getWhatIWhat(); or $this->getData('what_i_want').
+ *
+ */
 abstract class Object
 {
     /**

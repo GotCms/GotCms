@@ -29,6 +29,9 @@ namespace Gc\Component;
 
 use Gc\Document;
 
+/**
+ * Create Xml for \Zend\Navigation
+ */
 class Navigation
 {
     const XML_NAV_HEADER = '<?xml version="1.0" encoding="UTF-8"?><configdata><nav>';

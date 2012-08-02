@@ -30,7 +30,9 @@ namespace Gc\User;
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Zend\Db\Sql\Select;
-
+/**
+ * Collection of User Model
+ */
 class Collection extends AbstractTable implements IterableInterface
 {
     /**

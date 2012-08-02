@@ -29,7 +29,9 @@ namespace Gc\Layout;
 
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface;
-
+/**
+ * Layout Model
+ */
 class Model extends AbstractTable implements IterableInterface
 {
     /**
@@ -193,6 +195,10 @@ class Model extends AbstractTable implements IterableInterface
         return '';
     }
 
+
+    /** (non-PHPdoc)
+     * @see include \Gc\Component\IterableInterface#getIcon()
+     */
     public function getIcon()
     {
         return 'file';

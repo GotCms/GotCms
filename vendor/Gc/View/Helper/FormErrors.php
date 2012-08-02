@@ -29,7 +29,9 @@ namespace Gc\View\Helper;
 
 use Zend\View\Renderer\RendererInterface as Renderer
     ,Zend\View\Helper\AbstractHelper;
-
+/**
+ * Display form errors
+ */
 class FormErrors extends AbstractHelper
 {
     /**

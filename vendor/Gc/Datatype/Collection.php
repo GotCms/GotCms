@@ -29,7 +29,9 @@ namespace Gc\Datatype;
 
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface;
-
+/**
+ * Collection of Datatype Model
+ */
 class Collection extends AbstractTable implements IterableInterface
 {
     /**

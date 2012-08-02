@@ -30,7 +30,9 @@ namespace Gc\Layout;
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Zend\Db\Sql\Select;
-
+/**
+ * Collection of Layout Model
+ */
 class Collection extends AbstractTable implements IterableInterface
 {
     /**

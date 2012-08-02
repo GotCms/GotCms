@@ -25,9 +25,16 @@
  */
 
 namespace Gc;
-
+/**
+ * Generate Error
+ */
 class Error
 {
+    /**
+     * Setter for Error
+     * @param string $title
+     * @param string $content
+     */
     static function set($title, $content)
     {
         var_dump(array('Title' => $title, 'Content' => $content));

@@ -27,8 +27,8 @@
 
 namespace Gc\Component;
 
-interface IterableInterface {
-
+interface IterableInterface
+{
     /**
      * Get Children
      *

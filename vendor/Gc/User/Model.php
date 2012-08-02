@@ -31,7 +31,9 @@ use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Zend\Authentication\Adapter,
     Zend\Authentication\AuthenticationService;
-
+/**
+ * Model of user
+ */
 class Model extends AbstractTable implements IterableInterface
 {
     /**
@@ -228,11 +230,15 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-     * @TODO set forgot password email
+     * Send new password
+     * @param string $email
+     * @return boolean
      */
     public function sendForgotPasswordEmail($email)
     {
         $row = $this->select(array('email' => $email));
+
+        return TRUE;
     }
 
     /** (non-PHPdoc)

@@ -31,7 +31,11 @@ use Gc\Exception,
     Gc\Core\Object,
     Zend\Db\ResultSet\ResultSet,
     Zend\Db\TableGateway;
-
+/**
+ * Extension of Zend\Db\TableGateway
+ * This is better to use fetchRow(), fetchAll(),
+ * execute() and add generic methods.
+ */
 abstract class AbstractTable extends Object
 {
     /**

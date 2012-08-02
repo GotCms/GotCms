@@ -32,7 +32,10 @@ use Gc\Db\AbstractTable,
     Gc\Property\Model as PropertyModel,
     Datatypes,
     Zend\Form\Fieldset;
-
+/**
+ * Datatype Model
+ * Simply class to edit one datatype
+ */
 class Model extends AbstractTable implements IterableInterface
 {
     /**

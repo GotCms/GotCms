@@ -31,7 +31,9 @@ use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select,
     Zend\Db\Sql\Insert,
     Zend\Db\Sql\Update;
-
+/**
+ * Get and set translation
+ */
 class Translator extends AbstractTable
 {
     /**

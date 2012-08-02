@@ -30,7 +30,10 @@ namespace Gc\View\Helper;
 use Zend\View\Helper\AbstractHelper,
     Gc\Script\Model as ScriptModel,
     Gc\View\Stream;
-
+/**
+ * Retrieve script from identifier
+ * @example In view: $this->script('identifier');
+ */
 class Script extends AbstractHelper
 {
     /**

@@ -31,7 +31,10 @@ use Gc\Core\Object,
     Gc\Datatype,
     Zend\EventManager\StaticEventManager,
     Zend\File\Transfer\Adapter\Http as FileTransfer;
-
+/**
+ * Manage File, actually only works for Datatypes
+ * Need document and property to work
+ */
 class File extends Object
 {
     const FILE_PERMISSION = 0774;
