@@ -45,8 +45,8 @@ class UserLogin extends AbstractForm
                 'validators' => array(
                     array('name' => 'not_empty'),
                 )
-            )
-            , 'password' => array(
+            ),
+            'password' => array(
                 'required'=> TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),

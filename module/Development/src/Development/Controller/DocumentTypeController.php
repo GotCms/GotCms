@@ -89,10 +89,10 @@ class DocumentTypeController extends Action
                 $document_type = new DocumentType\Model();
 
                 $document_type->addData(array(
-                    'name' => $infos_subform->getValue('name')
-                    , 'description' => $infos_subform->getValue('description')
-                    , 'default_view_id' => $views_subform->getValue('default_view')
-                    , 'user_id' => $this->getAuth()->getIdentity()->getId()
+                    'name' => $infos_subform->getValue('name'),
+                    'description' => $infos_subform->getValue('description'),
+                    'default_view_id' => $views_subform->getValue('default_view'),
+                    'user_id' => $this->getAuth()->getIdentity()->getId(),
                 ));
 
                 $document_type->getAdapter()->getDriver()->getConnection()->beginTransaction();
@@ -256,9 +256,9 @@ class DocumentTypeController extends Action
                 $properties_subform = $input->get('properties');
 
                 $document_type->addData(array(
-                    'name' => $infos_subform->getValue('name')
-                    , 'description' => $infos_subform->getValue('description')
-                    , 'default_view_id' => $views_subform->getValue('default_view')
+                    'name' => $infos_subform->getValue('name'),
+                    'description' => $infos_subform->getValue('description'),
+                    'default_view_id' => $views_subform->getValue('default_view'),
                 ));
 
                 $document_type->getAdapter()->getDriver()->getConnection()->beginTransaction();

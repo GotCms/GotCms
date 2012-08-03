@@ -44,12 +44,12 @@ class IndexController extends Action
         $this->layout()->setVariable('treeview',  Component\TreeView::render(array($documents)));
 
         $routes = array(
-            'edit' => 'documentEdit'
-            , 'new' => 'documentCreate'
-            , 'delete' => 'documentDelete'
-            , 'copy' => 'documentCopy'
-            , 'cut' => 'documentCut'
-            , 'paste' => 'documentPaste'
+            'edit' => 'documentEdit',
+            'new' => 'documentCreate',
+            'delete' => 'documentDelete',
+            'copy' => 'documentCopy',
+            'cut' => 'documentCut',
+            'paste' => 'documentPaste',
         );
 
         $array_routes = array();

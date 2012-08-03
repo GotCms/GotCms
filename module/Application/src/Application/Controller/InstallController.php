@@ -371,8 +371,8 @@ class InstallController extends Action
                                 $db['password'],
                                 $db['database'],
                                 $db['hostname'],
-                            )
-                        , $file);
+                            ),
+                        $file);
 
                         $config_filename = GC_APPLICATION_PATH . '/config/autoload/global.php';
                         file_put_contents($config_filename, $file);

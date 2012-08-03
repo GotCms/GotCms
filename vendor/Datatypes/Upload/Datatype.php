@@ -26,8 +26,8 @@
 
 namespace Datatypes\Upload;
 
-use Gc\Datatype\AbstractDatatype
-    , Gc\Property\Model as PropertyModel;
+use Gc\Datatype\AbstractDatatype,
+    Gc\Property\Model as PropertyModel;
 
 /**
  * Manage Upload datatype

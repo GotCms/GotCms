@@ -26,8 +26,8 @@
 
 namespace Datatypes\DatePicker;
 
-use Gc\Datatype\AbstractDatatype as AbstractDatatype
-    , Gc\Property\Model as PropertyModel;
+use Gc\Datatype\AbstractDatatype as AbstractDatatype,
+    Gc\Property\Model as PropertyModel;
 
 /**
  * Manage DatePicker datatype

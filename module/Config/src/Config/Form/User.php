@@ -119,16 +119,16 @@ class User extends AbstractForm
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
-            )
-        , 'password');
+            ),
+        'password');
 
         $filter->add(array(
                 'required'=> TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
-            )
-        , 'password_confirm');
+            ),
+        'password_confirm');
 
         return $this;
     }

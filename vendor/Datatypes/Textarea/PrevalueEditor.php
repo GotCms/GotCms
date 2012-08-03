@@ -47,9 +47,9 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $wrap = $post->get('wrap', NULL);
 
         $this->setConfig(array(
-            'cols' => $cols
-            , 'rows' => $rows
-            , 'wrap' => $wrap
+            'cols' => $cols,
+            'rows' => $rows,
+            'wrap' => $wrap,
         ));
     }
 
