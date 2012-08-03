@@ -139,7 +139,13 @@ abstract class AbstractTable extends Object
      */
     public function getLastInsertId()
     {
-        $row = $this->fetchRow(sprintf("SELECT currval('%s_id_seq') AS value", $this->_name));
-        return $row['value'];
+        $configuration = \Gc\Registry::get('Configuration');
+        if($configuration['db']['driver'] == 'pdo_pgsql')
+        {
+            $row = $this->fetchRow(sprintf("SELECT currval('%s_id_seq') AS value", $this->_name));
+            return $row['value'];
+        }
+
+        return $this->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue($this->_name);
     }
 }
