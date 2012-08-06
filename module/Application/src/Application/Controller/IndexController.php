@@ -96,7 +96,6 @@ class IndexController extends Action
             }
         }
 
-        //construct the tree menu
         $view_model = new ViewModel();
         $existed = in_array($this->_viewStream, stream_get_wrappers());
         if($existed)
@@ -140,6 +139,8 @@ class IndexController extends Action
                 }
             }
 
+            $view_model->setVariable('currentDocument', $document);
+
             //Set view from database
             $view = View\Model::fromId($document->getViewId());
             $layout = Layout\Model::fromId($document->getLayoutId());
@@ -152,24 +153,25 @@ class IndexController extends Action
     }
 
     /**
-      * @param integer $document_type_id
-      * @return Gc\Component\Tab\Model
-      */
-    private function loadTabs($document_type_id)
+     * Load tabs
+     * @param integer $document_type_id
+     * @return Gc\Component\Tab\Collection
+     */
+    protected function loadTabs($document_type_id)
     {
         $document_type = DocumentType\Model::fromId($document_type_id);
-
         return $document_type->getTabs();
     }
 
 
     /**
+     * Load properties
      * @param integer $document_type_id
      * @param integer $tab_id
      * @param integer $document_id
-     * @return Gc\Component\Property\Model
+     * @return \Gc\Component\Property\Collection
      */
-    private function loadProperties($document_type_id, $tab_id, $document_id)
+    protected function loadProperties($document_type_id, $tab_id, $document_id)
     {
         $properties = new Property\Collection();
         $properties->load($document_type_id, $tab_id, $document_id);
@@ -178,9 +180,10 @@ class IndexController extends Action
     }
 
     /**
-     * @param string $path
+     * Explode path
+     * @param array $path
      */
-    private function explodePath($path)
+    protected function explodePath($path)
     {
         $explode_path = explode('/', substr($path, 1));
         if(preg_match('/\/$/', $path))
@@ -192,10 +195,11 @@ class IndexController extends Action
     }
 
     /**
-     * @param mixed $data
+     * Defined is can unserialize string
+     * @param string $data
      * @return boolean
      */
-    private  function is_serialized($data)
+    protected function is_serialized($data)
     {
         if (trim($data) == "")
         {
