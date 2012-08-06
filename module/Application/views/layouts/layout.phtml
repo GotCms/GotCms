@@ -47,7 +47,7 @@
 </head>
 <body>
     <header class="gradient-black">
-        <?php echo $this->partial('navigation.phtml', array('active' => $this->module)); ?>
+        <?php echo $this->partial('navigation.phtml', array('active' => $this->module, 'adminUser' => $this->adminUser)); ?>
     </header>
 
     <div id="main">

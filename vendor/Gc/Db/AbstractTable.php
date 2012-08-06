@@ -69,6 +69,11 @@ abstract class AbstractTable extends Object
      */
     public function __call($method, $args)
     {
+        if(empty(self::$_tables[$this->_name]))
+        {
+            $this->__construct();
+        }
+
         if(method_exists(self::$_tables[$this->_name], $method))
         {
             return call_user_func_array(array(self::$_tables[$this->_name], $method), $args);

@@ -134,6 +134,8 @@ class Action extends AbstractActionController
                 {
                     return $this->redirect()->toRoute('userForbidden');
                 }
+
+                $this->layout()->adminUser = $user_model;
             }
         }
 

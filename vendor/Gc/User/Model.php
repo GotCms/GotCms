@@ -262,7 +262,7 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getName()
     {
-        return $this->getFirstName().' '.$this->getLastName();
+        return $this->getFirstname().' '.$this->getLastname();
     }
 
     /** (non-PHPdoc)
