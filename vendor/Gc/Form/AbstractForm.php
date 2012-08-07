@@ -113,6 +113,11 @@ abstract class AbstractForm extends Form
      */
     static function addContent(Fieldset $form, $elements)
     {
+        if(empty($elements))
+        {
+            return;
+        }
+
         if(is_array($elements))
         {
             foreach($elements as $element)
