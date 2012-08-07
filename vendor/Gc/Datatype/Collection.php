@@ -32,7 +32,7 @@ use Gc\Db\AbstractTable,
 /**
  * Collection of Datatype Model
  */
-class Collection extends AbstractTable implements IterableInterface
+class Collection extends AbstractTable
 {
     /**
      * Collection of \Gc\Datatype\Model
@@ -101,63 +101,5 @@ class Collection extends AbstractTable implements IterableInterface
         }
 
         return $select;
-    }
-
-    /*
-     * Gc\Component\IterableInterfaces methods
-     */
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getParent()
-     */
-    public function getParent()
-    {
-        return FALSE;
-    }
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getChildren()
-     */
-    public function getChildren()
-    {
-        return $this->getDatatypes();
-    }
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getId()
-     */
-    public function getId()
-    {
-        return FALSE;
-    }
-
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIcon()
-     */
-    public function getIcon()
-    {
-        return 'folder';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIterableId()
-     */
-    public function getIterableId()
-    {
-        return 'datatypes';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getName()
-     */
-    public function getName()
-    {
-        return 'Datatypes';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
-     */
-    public function getUrl()
-    {
-        return '';
     }
 }

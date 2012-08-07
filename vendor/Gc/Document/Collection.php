@@ -167,5 +167,4 @@ class Collection extends AbstractTable implements IterableInterface
     {
         return NULL;
     }
-
 }

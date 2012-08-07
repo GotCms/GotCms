@@ -33,7 +33,7 @@ use Gc\Db\AbstractTable,
 /**
  * Collection of User Model
  */
-class Collection extends AbstractTable implements IterableInterface
+class Collection extends AbstractTable
 {
     /**
      * Table name
@@ -78,60 +78,5 @@ class Collection extends AbstractTable implements IterableInterface
         }
 
         $this->setData('users', $users);
-    }
-
-    /** (non-PHPdoc)
-     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getName()
-     */
-    public function getName()
-    {
-        return 'Users';
-    }
-
-    /** (non-PHPdoc)
-     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getChildren()
-     */
-    public function getChildren()
-    {
-        return $this->getUsers();
-    }
-    /** (non-PHPdoc)
-     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getParent()
-     */
-    public function getParent()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getId()
-     */
-    public function getId()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include/Es/Interfaces/Gc\Component\IterableInterfaces#getTreeViewId()
-     */
-    public function getIterableId()
-    {
-        return 'users';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
-     */
-    public function getUrl()
-    {
-        return '';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIcon()
-     */
-    public function getIcon()
-    {
-        return 'folder';
     }
 }

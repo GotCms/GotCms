@@ -32,7 +32,7 @@ use Gc\Db\AbstractTable,
 /**
  * Class for manage View
  */
-class Model extends AbstractTable implements IterableInterface
+class Model extends AbstractTable
 {
     /**
      * Table name
@@ -141,61 +141,5 @@ class Model extends AbstractTable implements IterableInterface
         }
 
         return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getParent()
-     */
-    public function getParent()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getChildren()
-     */
-    public function getChildren()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getId()
-     */
-    public function getId()
-    {
-        return parent::getId();
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIterableId()
-     */
-    public function getIterableId()
-    {
-        return 'view-'.$this->getId();
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getName()
-     */
-    public function getName()
-    {
-        return parent::getName();
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
-     */
-    public function getUrl()
-    {
-        return '';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIcon()
-     */
-    public function getIcon()
-    {
-        return 'file';
     }
 }

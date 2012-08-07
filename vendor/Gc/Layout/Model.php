@@ -32,7 +32,7 @@ use Gc\Db\AbstractTable,
 /**
  * Layout Model
  */
-class Model extends AbstractTable implements IterableInterface
+class Model extends AbstractTable
 {
     /**
      * Table name
@@ -142,65 +142,5 @@ class Model extends AbstractTable implements IterableInterface
         }
 
         return FALSE;
-    }
-
-    /*
-     * Gc\Component\IterableInterface Methods
-     */
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getParent()
-     */
-    public function getParent()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getChildren()
-     */
-    public function getChildren()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getId()
-     */
-    public function getId()
-    {
-        return $this->getData('id');
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIterableId()
-     */
-    public function getIterableId()
-    {
-        return 'layout-'.$this->getId();
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getName()
-     */
-    public function getName()
-    {
-        return $this->getData('name');
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
-     */
-    public function getUrl()
-    {
-        return '';
-    }
-
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIcon()
-     */
-    public function getIcon()
-    {
-        return 'file';
     }
 }

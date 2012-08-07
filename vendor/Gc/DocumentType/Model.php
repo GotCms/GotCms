@@ -36,7 +36,7 @@ use Gc\Db\AbstractTable,
 /**
  * Model for Document Type
  */
-class Model extends AbstractTable implements IterableInterface
+class Model extends AbstractTable
 {
     /**
      * Table name
@@ -236,69 +236,5 @@ class Model extends AbstractTable implements IterableInterface
         {
             return FALSE;
         }
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getParent()
-     */
-    public function getParent()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getChildren()
-     */
-    public function getChildren()
-    {
-        return FALSE;
-    }
-
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getChildren()
-     */
-    public function getId()
-    {
-        return parent::getId();
-    }
-
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getName()
-     */
-    public function getName()
-    {
-        return parent::getName();
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIterableId()
-     */
-    public function getIterableId()
-    {
-        return 'documenttype_'.$this->getId();
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
-     */
-    public function getUrl()
-    {
-        return '';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIcon()
-     */
-    public function getIcon()
-    {
-        if($this->_icon_url === NULL)
-        {
-            $icon = Gc_Media_Icon_Model::fromId($this->_documentType_icon);
-            $this->_icon_url = $icon->getIconUrl();
-        }
-
-        return $this->_icon_url;
     }
 }

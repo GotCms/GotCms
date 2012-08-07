@@ -34,7 +34,7 @@ use Gc\Db\AbstractTable,
 /**
  * Collection of View Model
  */
-class Collection extends AbstractTable implements IterableInterface
+class Collection extends AbstractTable
 {
     /**
      * List of \Gc\View\Model
@@ -174,61 +174,5 @@ class Collection extends AbstractTable implements IterableInterface
         }
 
         return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getParent()
-     */
-    public function getParent()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getChildren()
-     */
-    public function getChildren()
-    {
-        return $this->getViews();
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getId()
-     */
-    public function getId()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIterableId()
-     */
-    public function getIterableId()
-    {
-        return 'views';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getName()
-     */
-    public function getName()
-    {
-        return 'Views';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
-     */
-    public function getUrl()
-    {
-        return '';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIcon()
-     */
-    public function getIcon()
-    {
-        return 'folder';
     }
 }

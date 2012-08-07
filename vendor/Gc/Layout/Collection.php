@@ -33,7 +33,7 @@ use Gc\Db\AbstractTable,
 /**
  * Collection of Layout Model
  */
-class Collection extends AbstractTable implements IterableInterface
+class Collection extends AbstractTable
 {
     /**
      * Table name
@@ -92,60 +92,5 @@ class Collection extends AbstractTable implements IterableInterface
         }
 
         return $select;
-    }
-
-    /*
-     * Gc\Component\IterableInterfaces methods
-     */
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getParent()
-     */
-    public function getParent()
-    {
-        return null;
-    }
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getChildren()
-     */
-    public function getChildren()
-    {
-        return $this->getLayouts();
-    }
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getId()
-     */
-    public function getId()
-    {
-        return null;
-    }
-    /* TODO Finish icon in Gc\DocumentType\Collection
-     */
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIcon()
-     */
-    public function getIcon()
-    {
-        return 'folder';
-    }
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIterableId()
-     */
-    public function getIterableId()
-    {
-        return 'layouts';
-    }
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getName()
-     */
-    public function getName()
-    {
-        return 'Layouts';
-    }
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
-     */
-    public function getUrl()
-    {
-        return '';
     }
 }
