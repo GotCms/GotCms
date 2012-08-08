@@ -262,11 +262,6 @@ var Gc = (function($)
                 }
             });
 
-            $(document).on('click', '.connected-sortable h3', function()
-            {
-                $(this).next('dl').toggleClass('hide');
-            });
-
             $(document).on('click', '.delete-property', function()
             {
                 $button = $(this);
