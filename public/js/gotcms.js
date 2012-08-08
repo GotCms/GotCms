@@ -75,13 +75,15 @@ var Gc = (function($)
                 tolerance: "pointer",
                 drop: function( event, ui )
                 {
-                    var $item = $( this );
-                    var $list = $( $item.find('a').attr('href') )
+                    var $item = $(this);
+                    var $list = $( $item.find('a').attr('href'))
                         .find('.connected-sortable');
+                    var $tab_id = $item.find('a').attr('href').replace('#tabs-properties-', '');
 
                     ui.draggable.hide('slow', function() {
                         $tabs.tabs('select', $tab_items.index( $item ) );
-                        $( this ).appendTo( $list ).show('slow');
+                        $(this).appendTo( $list ).show('slow');
+                        $(this).find('input[type="hidden"]').val($tab_id);
                     });
                 },
                 stop: function( event, ui ) {
