@@ -27,9 +27,7 @@
 
 ?>
 <?php echo $this->partial('html-message.phtml'); ?>
-<div class="tabs">
-    <?php echo $this->partial('development/forms/document-type.phtml', array('form' => $this->form)); ?>
-</div>
+<?php echo $this->partial('development/forms/document-type.phtml', array('form' => $this->form)); ?>
 
 <script type="text/javascript">
     Gc.initDocumentType('<?php echo $this->url('addTab') ?>', '<?php echo $this->url('addProperty') ?>', '<?php echo $this->url('deleteTab') ?>', '<?php echo $this->url('deleteProperty') ?>');

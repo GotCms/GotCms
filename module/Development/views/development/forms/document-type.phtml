@@ -35,241 +35,242 @@
 
 <form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->form->getAttribute('action'); ?>" method="post">
     <input type="image" src="/images/save.png" value="1" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
-    <ul>
-        <li><a href="#tabs-1"><?php echo $this->escapeHtml($this->translate('Infos')); ?></a></li>
-        <li><a href="#tabs-2"><?php echo $this->escapeHtml($this->translate('Views')); ?></a></li>
-        <li><a href="#tabs-3"><?php echo $this->escapeHtml($this->translate('Properties')); ?></a></li>
-        <li><a href="#tabs-4"><?php echo $this->escapeHtml($this->translate('Tabs')); ?></a></li>
-    </ul>
-    <div id="tabs-1">
-        <div>
-            <label for="infos-name" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-            <input type="text" name="infos[name]" id="infos-name" value="<?php echo $infos_form->get('name')->getValue(); ?>">
-            <?php if(!empty($errors['infos']['name'])): ?>
-                <?php echo $this->formErrors($errors['infos']['name']); ?>
-            <?php endif; ?>
-        </div>
-        <div>
-            <label for="infos-description" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
-            <input type="text" name="infos[description]" id="infos-description" value="<?php echo $infos_form->get('description')->getValue(); ?>">
-            <?php if(!empty($errors['infos']['description'])): ?>
-                <?php echo $this->formErrors($errors['infos']['description']); ?>
-            <?php endif; ?>
-        </div>
-        <div>
-            <label for="infos-icon_id" class="optional"><?php echo $this->escapeHtml($this->translate('Icon')); ?></label>
-            <select name="infos[icon_id]" id="infos-icon_id">
+    <div class="tabs">
+        <ul>
+            <li><a href="#tabs-1"><?php echo $this->escapeHtml($this->translate('Infos')); ?></a></li>
+            <li><a href="#tabs-2"><?php echo $this->escapeHtml($this->translate('Views')); ?></a></li>
+            <li><a href="#tabs-3"><?php echo $this->escapeHtml($this->translate('Properties')); ?></a></li>
+            <li><a href="#tabs-4"><?php echo $this->escapeHtml($this->translate('Tabs')); ?></a></li>
+        </ul>
+        <div id="tabs-1">
+            <div>
+                <label for="infos-name" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+                <input type="text" name="infos[name]" id="infos-name" value="<?php echo $infos_form->get('name')->getValue(); ?>">
+                <?php if(!empty($errors['infos']['name'])): ?>
+                    <?php echo $this->formErrors($errors['infos']['name']); ?>
+                <?php endif; ?>
+            </div>
+            <div>
+                <label for="infos-description" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+                <input type="text" name="infos[description]" id="infos-description" value="<?php echo $infos_form->get('description')->getValue(); ?>">
+                <?php if(!empty($errors['infos']['description'])): ?>
+                    <?php echo $this->formErrors($errors['infos']['description']); ?>
+                <?php endif; ?>
+            </div>
+            <div>
+                <label for="infos-icon_id" class="optional"><?php echo $this->escapeHtml($this->translate('Icon')); ?></label>
+                <select name="infos[icon_id]" id="infos-icon_id">
 
-            </select>
-            <?php if(!empty($errors['infos']['icon_id'])): ?>
-                <?php echo $this->formErrors($errors['infos']['icon_id']); ?>
-            <?php endif; ?>
-        </div>
-    </div>
-
-    <div id="tabs-2">
-        <div>
-            <label for="views-default_view" class="required"><?php echo $this->escapeHtml($this->translate('Default view')); ?></label>
-            <select name="views[default_view]" id="views-default_view">
-                <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
-                <?php $default_view = $views_form->get('default_view'); ?>
-                <?php $default_view_option = $default_view->getAttribute('options'); ?>
-                <?php foreach($default_view_option as $option_id => $option_value): ?>
-                    <option value="<?php echo $option_id; ?>"<?php if($default_view->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
-                <?php endforeach; ?>
-            </select>
-
-            <?php if(!empty($errors['views']['default_view'])): ?>
-                <?php echo $this->formErrors($errors['views']['default_view']); ?>
-            <?php endif; ?>
-        </div>
-        <div>
-            <label for="views-available_views" class="optional"><?php echo $this->escapeHtml($this->translate('Add view')); ?></label>
-            <select name="views[available_views]" id="views-available_views" multiple="multiple">
-                <?php $available_views = $views_form->get('available_views'); ?>
-                <?php $default_view_option = $available_views->getAttribute('options'); ?>
-                <?php foreach($default_view_option as $option_id => $option_value): ?>
-                    <option value="<?php echo $option_id; ?>"<?php if($available_views->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
-                <?php endforeach; ?>
-            </select>
-
-            <?php if(!empty($errors['views']['available_views'])): ?>
-                <?php echo $this->formErrors($errors['views']['available_views']); ?>
-            <?php endif; ?>
-        </div>
-    </div>
-
-    <div id="tabs-3">
-        <div>
-            <label for="properties-name" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-            <input type="text" name="properties[name]" id="properties-name" value="">
-        </div>
-        <div>
-            <label for="properties-identifier" class="optional"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
-            <input type="text" name="properties[identifier]" id="properties-identifier" value="">
-        </div>
-        <div>
-            <label for="properties-tab" class="required"><?php echo $this->escapeHtml($this->translate('Tab')); ?></label>
-            <select name="properties[tab]" id="properties-tab" class="select-tab">
-                <option value="" label="-- Select tab --" selected="selected">-- Select tab --</option>
-                <?php foreach($tabs_form as $tab_form): ?>
-                    <option value="<?php echo $tab_form->get('tab_id')->getValue(); ?>"><?php echo $tab_form->get('name')->getValue(); ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-
-        <div>
-            <label for="properties-datatype" class="required"><?php echo $this->escapeHtml($this->translate('Datatype')); ?></label>
-            <select name="properties[datatype]" id="properties-datatype" class="select-datatype">
-                <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
-                <?php foreach($datatypes_options as $datatype_id => $datatype_name): ?>
-                    <option value="<?php echo $datatype_id; ?>"><?php echo $this->escapeHtml($datatype_name); ?> </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <div>
-            <label for="properties-description" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
-            <input type="text" name="properties[description]" id="properties-description" value="">
-        </div>
-        <div>
-            <label for="properties-required" class="optional"><?php echo $this->escapeHtml($this->translate('Required')); ?></label>
-            <input type="checkbox" name="properties[required]" id="properties-required" value="1">
-        </div>
-        <div>
-            <button name="properties[add]" id="property-add" type="button" class="input-submit button-add button-add-property"><?php echo $this->escapeHtml($this->translate('Add property')); ?></button>
-        </div>
-        <div>
-            <?php echo $this->escapeHtml($this->translate('Properties')); ?>
-            <div id="properties-tabs-content" class="tabs">
-                <ul>
-                    <?php foreach($tabs_form as $tab_form): ?>
-                        <li>
-                            <?php $name = $tab_form->get('name')->getValue(); ?>
-                            <a href="#tabs-properties-<?php echo $tab_form->get('tab_id')->getValue(); ?>">
-                                <?php echo $name; ?>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-
-                <?php foreach($tabs_form as $tab_form): ?>
-                    <?php $tab_id = $tab_form->get('tab_id')->getValue(); ?>
-                    <div id="tabs-properties-<?php echo $tab_id; ?>">
-                        <div class="sortable connected-sortable ui-helper-reset">
-                            <?php foreach($properties_forms as $property): ?>
-                                <?php if($property->get('tab')->getValue() != $tab_id): ?>
-                                    <?php continue; ?>
-                                <?php endif; ?>
-
-                                    <div>
-                                        <?php $property_id = (int)$property->get('property_id')->getValue(); ?>
-                                        <?php $property_form_id = 'property'.$property->get('property_id')->getValue(); ?>
-                                        <h3><a href="#section<?php echo $property_id; ?>"><?php echo $this->escapeHtml(sprintf('%s (%s)', $property->get('name')->getValue(), $property->get('identifier')->getValue())); ?></a></h3>
-                                        <dl>
-                                            <dt>
-                                                <label class="optional" for="properties-name-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-                                            </dt>
-                                            <dd>
-                                                <input type="text" value="<?php echo $this->escapeHtml($property->get('name')->getValue()); ?>" id="properties-name-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][name]">
-                                                <?php if(!empty($errors['properties'][$property_form_id]['name'])): ?>
-                                                    <?php echo $this->formErrors($errors['properties'][$property_form_id]['name']); ?>
-                                                <?php endif; ?>
-                                            </dd>
-                                            <dt>
-                                                <label class="optional" for="properties-identifier-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
-                                            </dt>
-                                            <dd>
-                                                <input type="text" value="<?php echo $this->escapeHtml($property->get('identifier')->getValue()); ?>" id="properties-identifier-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][identifier]">
-                                                <?php if(!empty($errors['properties'][$property_form_id]['identifier'])): ?>
-                                                    <?php echo $this->formErrors($errors['properties'][$property_form_id]['identifier']); ?>
-                                                <?php endif; ?>
-                                            </dd>
-                                            <dt>
-                                                <label class="optional" for="properties-datatype-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Datatype')); ?></label>
-                                            </dt>
-                                            <dd>
-                                                <select class="select-datatype" id="properties-datatype-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][datatype]">
-                                                    <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
-                                                    <?php foreach($datatypes_options as $datatype_id => $datatype_name): ?>
-                                                        <option value="<?php echo $datatype_id; ?>"<?php if($datatype_id == $property->get('datatype')->getValue()): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($datatype_name); ?> </option>
-                                                    <?php endforeach; ?>
-                                                </select>
-
-                                                <?php if(!empty($errors['properties'][$property_form_id]['datatype'])): ?>
-                                                    <?php echo $this->formErrors($errors['properties'][$property_form_id]['datatype']); ?>
-                                                <?php endif; ?>
-                                            </dd>
-                                            <dt>
-                                                <label class="optional" for="properties-description-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
-                                            </dt>
-                                            <dd>
-                                                <input type="text" value="<?php echo $this->escapeHtml($property->get('description')->getValue()); ?>" id="properties-description-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][description]">
-                                                <?php if(!empty($errors['properties'][$property_form_id]['description'])): ?>
-                                                    <?php echo $this->formErrors($errors['properties'][$property_form_id]['description']); ?>
-                                                <?php endif; ?>
-                                            </dd>
-                                            <dt>
-                                                <label class="optional" for="properties-required-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Required')); ?></label>
-                                            </dt>
-                                            <dd>
-                                                <?php
-                                                    $value = $property->get('required')->getValue();
-                                                    $checkedValue = $property->get('required')->getAttribute('checkedValue');
-                                                ?>
-                                                <input<?php if($value == $checkedValue):?> checked="checked"<?php endif; ?> type="checkbox" value="<?php echo $value; ?>" id="properties-required-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][required]">
-
-                                                <?php if(!empty($errors['properties'][$property_form_id]['required'])): ?>
-                                                    <?php echo $this->formErrors($errors['properties'][$property_form_id]['required']); ?>
-                                                <?php endif; ?>
-                                            </dd>
-                                            <dd>
-                                                <input type="hidden" id="properties-tab-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][tab]" value="<?php echo (int)$property->get('tab')->getValue(); ?>">
-                                                <button type="button" value="<?php echo $property_id; ?>" class="delete-property input-submit"><?php echo $this->escapeHtml($this->translate('Delete')); ?></button>
-                                            </dd>
-                                        </dl>
-                                    </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                </select>
+                <?php if(!empty($errors['infos']['icon_id'])): ?>
+                    <?php echo $this->formErrors($errors['infos']['icon_id']); ?>
+                <?php endif; ?>
             </div>
         </div>
-    </div>
 
-    <div id="tabs-4">
-        <div>
-            <label for="tabs-addname" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-            <input type="text" name="tabs[addname]" id="tabs-addname" value="">
-        </div>
-        <div>
-            <label for="tabs-adddescription" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
-            <input type="text" name="tabs[adddescription]" id="tabs-adddescription" value="">
-        </div>
-        <div>
-            <button name="tabs[add]" id="tabs-add" type="button" class="input-submit button-add button-add-tab"><?php echo $this->escapeHtml($this->translate('Add Tab')); ?></button>
+        <div id="tabs-2">
+            <div>
+                <label for="views-default_view" class="required"><?php echo $this->escapeHtml($this->translate('Default view')); ?></label>
+                <select name="views[default_view]" id="views-default_view">
+                    <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
+                    <?php $default_view = $views_form->get('default_view'); ?>
+                    <?php $default_view_option = $default_view->getAttribute('options'); ?>
+                    <?php foreach($default_view_option as $option_id => $option_value): ?>
+                        <option value="<?php echo $option_id; ?>"<?php if($default_view->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <?php if(!empty($errors['views']['default_view'])): ?>
+                    <?php echo $this->formErrors($errors['views']['default_view']); ?>
+                <?php endif; ?>
+            </div>
+            <div>
+                <label for="views-available_views" class="optional"><?php echo $this->escapeHtml($this->translate('Add view')); ?></label>
+                <select name="views[available_views]" id="views-available_views" multiple="multiple">
+                    <?php $available_views = $views_form->get('available_views'); ?>
+                    <?php $default_view_option = $available_views->getAttribute('options'); ?>
+                    <?php foreach($default_view_option as $option_id => $option_value): ?>
+                        <option value="<?php echo $option_id; ?>"<?php if($available_views->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <?php if(!empty($errors['views']['available_views'])): ?>
+                    <?php echo $this->formErrors($errors['views']['available_views']); ?>
+                <?php endif; ?>
+            </div>
         </div>
 
-        <div>
-            <h3><?php echo $this->escapeHtml($this->translate('Tabs')); ?></h3>
-            <ul id="tabs" class="sortable ui-sortable">
-            <?php foreach($tabs_form as $tab_form): ?>
-                <li>
-                    <?php $name = $tab_form->get('name')->getValue(); ?>
-                    <?php $description = $tab_form->get('description')->getValue(); ?>
-                    <?php $tab_id = 'tab'.$tab_form->get('tab_id')->getValue(); ?>
-                    <div class="hide floatL">
-                        <input type="text" value="<?php echo $name; ?>" name="tabs[<?php echo $tab_id; ?>][name]">
-                        <input type="text" value="<?php echo $description; ?>" name="tabs[<?php echo $tab_id; ?>][description]">
-                    </div>
-                    <div class="floatL">
-                        <span><?php echo $name; ?></span>
-                        <span><?php echo $description; ?></span>
-                    </div>
-                    <button value="<?php echo (int)$tab_form->get('tab_id')->getValue(); ?>" class="delete-tab input-submit floatR" type="button">delete</button>
-                </li>
-            <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>
-</form>
+        <div id="tabs-3">
+            <div>
+                <label for="properties-name" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+                <input type="text" name="properties[name]" id="properties-name" value="">
+            </div>
+            <div>
+                <label for="properties-identifier" class="optional"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
+                <input type="text" name="properties[identifier]" id="properties-identifier" value="">
+            </div>
+            <div>
+                <label for="properties-tab" class="required"><?php echo $this->escapeHtml($this->translate('Tab')); ?></label>
+                <select name="properties[tab]" id="properties-tab" class="select-tab">
+                    <option value="" label="-- Select tab --" selected="selected">-- Select tab --</option>
+                    <?php foreach($tabs_form as $tab_form): ?>
+                        <option value="<?php echo $tab_form->get('tab_id')->getValue(); ?>"><?php echo $tab_form->get('name')->getValue(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
+            <div>
+                <label for="properties-datatype" class="required"><?php echo $this->escapeHtml($this->translate('Datatype')); ?></label>
+                <select name="properties[datatype]" id="properties-datatype" class="select-datatype">
+                    <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
+                    <?php foreach($datatypes_options as $datatype_id => $datatype_name): ?>
+                        <option value="<?php echo $datatype_id; ?>"><?php echo $this->escapeHtml($datatype_name); ?> </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="properties-description" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+                <input type="text" name="properties[description]" id="properties-description" value="">
+            </div>
+            <div>
+                <label for="properties-required" class="optional"><?php echo $this->escapeHtml($this->translate('Required')); ?></label>
+                <input type="checkbox" name="properties[required]" id="properties-required" value="1">
+            </div>
+            <div>
+                <button name="properties[add]" id="property-add" type="button" class="input-submit button-add button-add-property"><?php echo $this->escapeHtml($this->translate('Add property')); ?></button>
+            </div>
+            <div>
+                <?php echo $this->escapeHtml($this->translate('Properties')); ?>
+                <div id="properties-tabs-content" class="tabs">
+                    <ul>
+                        <?php foreach($tabs_form as $tab_form): ?>
+                            <li>
+                                <?php $name = $tab_form->get('name')->getValue(); ?>
+                                <a href="#tabs-properties-<?php echo $tab_form->get('tab_id')->getValue(); ?>">
+                                    <?php echo $name; ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+
+                    <?php foreach($tabs_form as $tab_form): ?>
+                        <?php $tab_id = $tab_form->get('tab_id')->getValue(); ?>
+                        <div id="tabs-properties-<?php echo $tab_id; ?>">
+                            <div class="sortable connected-sortable ui-helper-reset">
+                                <?php foreach($properties_forms as $property): ?>
+                                    <?php if($property->get('tab')->getValue() != $tab_id): ?>
+                                        <?php continue; ?>
+                                    <?php endif; ?>
+
+                                        <div>
+                                            <?php $property_id = (int)$property->get('property_id')->getValue(); ?>
+                                            <?php $property_form_id = 'property'.$property->get('property_id')->getValue(); ?>
+                                            <h3><a href="#section<?php echo $property_id; ?>"><?php echo $this->escapeHtml(sprintf('%s (%s)', $property->get('name')->getValue(), $property->get('identifier')->getValue())); ?></a></h3>
+                                            <dl>
+                                                <dt>
+                                                    <label class="optional" for="properties-name-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+                                                </dt>
+                                                <dd>
+                                                    <input type="text" value="<?php echo $this->escapeHtml($property->get('name')->getValue()); ?>" id="properties-name-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][name]">
+                                                    <?php if(!empty($errors['properties'][$property_form_id]['name'])): ?>
+                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['name']); ?>
+                                                    <?php endif; ?>
+                                                </dd>
+                                                <dt>
+                                                    <label class="optional" for="properties-identifier-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
+                                                </dt>
+                                                <dd>
+                                                    <input type="text" value="<?php echo $this->escapeHtml($property->get('identifier')->getValue()); ?>" id="properties-identifier-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][identifier]">
+                                                    <?php if(!empty($errors['properties'][$property_form_id]['identifier'])): ?>
+                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['identifier']); ?>
+                                                    <?php endif; ?>
+                                                </dd>
+                                                <dt>
+                                                    <label class="optional" for="properties-datatype-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Datatype')); ?></label>
+                                                </dt>
+                                                <dd>
+                                                    <select class="select-datatype" id="properties-datatype-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][datatype]">
+                                                        <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
+                                                        <?php foreach($datatypes_options as $datatype_id => $datatype_name): ?>
+                                                            <option value="<?php echo $datatype_id; ?>"<?php if($datatype_id == $property->get('datatype')->getValue()): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($datatype_name); ?> </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+
+                                                    <?php if(!empty($errors['properties'][$property_form_id]['datatype'])): ?>
+                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['datatype']); ?>
+                                                    <?php endif; ?>
+                                                </dd>
+                                                <dt>
+                                                    <label class="optional" for="properties-description-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+                                                </dt>
+                                                <dd>
+                                                    <input type="text" value="<?php echo $this->escapeHtml($property->get('description')->getValue()); ?>" id="properties-description-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][description]">
+                                                    <?php if(!empty($errors['properties'][$property_form_id]['description'])): ?>
+                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['description']); ?>
+                                                    <?php endif; ?>
+                                                </dd>
+                                                <dt>
+                                                    <label class="optional" for="properties-required-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Required')); ?></label>
+                                                </dt>
+                                                <dd>
+                                                    <?php
+                                                        $value = $property->get('required')->getValue();
+                                                        $checkedValue = $property->get('required')->getAttribute('checkedValue');
+                                                    ?>
+                                                    <input<?php if($value == $checkedValue):?> checked="checked"<?php endif; ?> type="checkbox" value="<?php echo $value; ?>" id="properties-required-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][required]">
+
+                                                    <?php if(!empty($errors['properties'][$property_form_id]['required'])): ?>
+                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['required']); ?>
+                                                    <?php endif; ?>
+                                                </dd>
+                                                <dd>
+                                                    <input type="hidden" id="properties-tab-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][tab]" value="<?php echo (int)$property->get('tab')->getValue(); ?>">
+                                                    <button type="button" value="<?php echo $property_id; ?>" class="delete-property input-submit"><?php echo $this->escapeHtml($this->translate('Delete')); ?></button>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+
+        <div id="tabs-4">
+            <div>
+                <label for="tabs-addname" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+                <input type="text" name="tabs[addname]" id="tabs-addname" value="">
+            </div>
+            <div>
+                <label for="tabs-adddescription" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+                <input type="text" name="tabs[adddescription]" id="tabs-adddescription" value="">
+            </div>
+            <div>
+                <button name="tabs[add]" id="tabs-add" type="button" class="input-submit button-add button-add-tab"><?php echo $this->escapeHtml($this->translate('Add Tab')); ?></button>
+            </div>
+
+            <div>
+                <h3><?php echo $this->escapeHtml($this->translate('Tabs')); ?></h3>
+                <ul id="tabs" class="sortable ui-sortable">
+                <?php foreach($tabs_form as $tab_form): ?>
+                    <li>
+                        <?php $name = $tab_form->get('name')->getValue(); ?>
+                        <?php $description = $tab_form->get('description')->getValue(); ?>
+                        <?php $tab_id = 'tab'.$tab_form->get('tab_id')->getValue(); ?>
+                        <div class="hide floatL">
+                            <input type="text" value="<?php echo $name; ?>" name="tabs[<?php echo $tab_id; ?>][name]">
+                            <input type="text" value="<?php echo $description; ?>" name="tabs[<?php echo $tab_id; ?>][description]">
+                        </div>
+                        <div class="floatL">
+                            <span><?php echo $name; ?></span>
+                            <span><?php echo $description; ?></span>
+                        </div>
+                        <button value="<?php echo (int)$tab_form->get('tab_id')->getValue(); ?>" class="delete-tab input-submit floatR" type="button">delete</button>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
