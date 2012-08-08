@@ -224,7 +224,7 @@
                                                     <?php endif; ?>
                                                 </dd>
                                                 <dd>
-                                                    <input type="hidden" id="properties-tab-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][tab]" value="<?php echo (int)$property->get('tab')->getValue(); ?>">
+                                                    <input class="property-tab-id" type="hidden" id="properties-tab-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][tab]" value="<?php echo (int)$property->get('tab')->getValue(); ?>">
                                                     <button type="button" value="<?php echo $property_id; ?>" class="delete-property input-submit"><?php echo $this->escapeHtml($this->translate('Delete')); ?></button>
                                                 </dd>
                                             </dl>

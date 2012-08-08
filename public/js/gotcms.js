@@ -55,44 +55,6 @@ var Gc = (function($)
         {
             var $this = this;
             $('.tabs').tabs();
-            var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
-
-            $('.connected-sortable')
-                .accordion({
-                    header: "div > h3",
-                    collapsible: true,
-                    autoHeight: false,
-                    active: -1,
-                })
-                .sortable({
-                    placeholder: "ui-state-highlight",
-                    handle: "h3"
-                });
-
-            var $tab_items = $('ul:first li', $tabs).droppable({
-                accept: ".connected-sortable div",
-                hoverClass: "ui-state-hover",
-                tolerance: "pointer",
-                drop: function( event, ui )
-                {
-                    var $item = $(this);
-                    var $list = $( $item.find('a').attr('href'))
-                        .find('.connected-sortable');
-                    var $tab_id = $item.find('a').attr('href').replace('#tabs-properties-', '');
-
-                    ui.draggable.hide('slow', function() {
-                        $tabs.tabs('select', $tab_items.index( $item ) );
-                        $(this).appendTo( $list ).show('slow');
-                        $(this).find('input[type="hidden"]').val($tab_id);
-                    });
-                },
-                stop: function( event, ui ) {
-                    // IE doesn't register the blur when sorting
-                    // so trigger focusout handlers to remove .ui-state-focus
-                    ui.item.children( "h3" ).triggerHandler( "focusout" );
-                }
-            });
-
 
             /**
              * TABS
@@ -184,6 +146,47 @@ var Gc = (function($)
             /**
              * Properties
              */
+            var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
+
+            $this.setOption('accordion-option', {
+                header: "div > h3",
+                collapsible: true,
+                autoHeight: false,
+                active: -1,
+            });
+
+            $('.connected-sortable')
+                .accordion($this.getOption('accordion-option'))
+                .sortable({
+                    placeholder: "ui-state-highlight",
+                    handle: "h3"
+                });
+
+            var $tab_items = $('ul:first li', $tabs).droppable({
+                accept: ".connected-sortable div",
+                hoverClass: "ui-state-hover",
+                tolerance: "pointer",
+                drop: function( event, ui )
+                {
+                    var $item = $(this);
+                    var $list = $( $item.find('a').attr('href'))
+                        .find('.connected-sortable');
+                    var $tab_id = $item.find('a').attr('href').replace('#tabs-properties-', '');
+
+                    ui.draggable.hide('slow', function() {
+                        $tabs.tabs('select', $tab_items.index( $item ) );
+                        $(this).appendTo( $list ).show('slow');
+                        $(this).find('.property-tab-id').val($tab_id);
+                    });
+                },
+                stop: function( event, ui ) {
+                    // IE doesn't register the blur when sorting
+                    // so trigger focusout handlers to remove .ui-state-focus
+                    ui.item.children( "h3" ).triggerHandler( "focusout" );
+                }
+            });
+
+
             $('#property-add').on('click', function()
             {
                 $name = $('#properties-name');
@@ -201,12 +204,12 @@ var Gc = (function($)
                 {
                     $.post($addPropertyUrl,
                     {
-                        name:            $name.val()
-                        , identifier:    $identifier.val()
-                        , tab:            $tab.val()
-                        , datatype:    $datatype.val()
-                        , description:    $description.val()
-                        , is_required:    $isRequired.val()
+                        name:               $name.val()
+                        , identifier:       $identifier.val()
+                        , tab:              $tab.val()
+                        , datatype:         $datatype.val()
+                        , description:      $description.val()
+                        , is_required:      $isRequired.val()
                     },
                     function($data)
                     {
@@ -217,8 +220,8 @@ var Gc = (function($)
                         else
                         {
                             $this.setHtmlMessage('');
-                            $c = new Template('<h3>#{name} (#{identifier})</h3>'
-                                + '<dl class="hide">'
+                            $c = new Template('<div><h3><a href="#secion#{id}">#{name} (#{identifier})</a></h3>'
+                                + '<dl>'
                                 +'<dt id="name-label-#{tab}-#{id}">'
                                     +'<label class="optional" for="properties-name-#{tab}-#{id}">'+Translator.translate('Name')+'</label>'
                                 +'</dt>'
@@ -248,14 +251,15 @@ var Gc = (function($)
                                     +'<input type="checkbox" value="1" id="properties-required-#{tab}-#{id}" name="properties[property#{id}][required]">'
                                 +'</dd>'
                                 +'<dd id="required-element-#{tab}-#{id}">'
-                                    +'<input type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">'
+                                    +'<input class="property-tab-id" type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">'
                                     +'<button type="button" value="#{id}" class="delete-property input-submit">'+Translator.translate('Delete')+'</button>'
                                 +'</dd>'
-                            +'</dl>');
+                            +'</dl></div>');
 
                             $c = $c.evaluate($data);
 
-                            $('#tabs-properties-'+$tab.val()).find('ul').append('<li>'+$c+'</li>');
+                            $('#tabs-properties-'+$tab.val()).children('div:first').append($c);
+                            $('.connected-sortable').accordion(Gc.getOption('accordion-option'))
                             $('#properties-tab-'+$data.tab+'-'+$data.id).html($('#properties-tab').html()).val($data.tab);
                             $('#properties-datatype-'+$data.tab+'-'+$data.id).html($('#properties-datatype').html()).val($data.datatype);
                             $('#properties-required-'+$data.tab+'-'+$data.id).prop('checked', $isRequired.prop('checked'));
@@ -275,7 +279,8 @@ var Gc = (function($)
                 {
                     if($data.success == true)
                     {
-                        $button.parent().parent().remove();
+                        $button.parent().parent().parent().remove();
+                        $('.connected-sortable').accordion(Gc.getOption('accordion-option'))
                     }
 
                     $this.setHtmlMessage($data.message);
@@ -468,3 +473,5 @@ var Gc = (function($)
         }
     };
 })(jQuery);
+
+Gc = Gc;

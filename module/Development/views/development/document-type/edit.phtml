@@ -30,5 +30,7 @@
 <?php echo $this->partial('development/forms/document-type.phtml', array('form' => $this->form)); ?>
 
 <script type="text/javascript">
+$(function(){
     Gc.initDocumentType('<?php echo $this->url('addTab') ?>', '<?php echo $this->url('addProperty') ?>', '<?php echo $this->url('deleteTab') ?>', '<?php echo $this->url('deleteProperty') ?>');
+});
 </script>
