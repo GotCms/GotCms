@@ -57,11 +57,20 @@ var Gc = (function($)
             $('.tabs').tabs();
             var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
 
-            $('.connected-sortable').sortable({
-                placeholder: "ui-state-highlight"
-            });
+            $('.connected-sortable')
+                .accordion({
+                    header: "div > h3",
+                    collapsible: true,
+                    autoHeight: false,
+                    active: -1,
+                })
+                .sortable({
+                    placeholder: "ui-state-highlight",
+                    handle: "h3"
+                });
+
             var $tab_items = $('ul:first li', $tabs).droppable({
-                accept: ".connected-sortable li",
+                accept: ".connected-sortable div",
                 hoverClass: "ui-state-hover",
                 tolerance: "pointer",
                 drop: function( event, ui )
@@ -74,6 +83,11 @@ var Gc = (function($)
                         $tabs.tabs('select', $tab_items.index( $item ) );
                         $( this ).appendTo( $list ).show('slow');
                     });
+                },
+                stop: function( event, ui ) {
+                    // IE doesn't register the blur when sorting
+                    // so trigger focusout handlers to remove .ui-state-focus
+                    ui.item.children( "h3" ).triggerHandler( "focusout" );
                 }
             });
 
@@ -138,16 +152,6 @@ var Gc = (function($)
                         }
                     })
                 }
-            });
-
-            $(document).on('click', '#tabs > li', function(event)
-            {
-                if(event.target.type == 'text')
-                {
-                    return false;
-                }
-
-                $(this).find('div').toggleClass('hide').height('auto');
             });
 
             $(document).on('click', '.delete-tab', function()

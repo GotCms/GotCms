@@ -194,12 +194,10 @@ footer a:hover {text-decoration:underline;}
 .table-list th{text-align:left;}
 
 .sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-.sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; min-height: 1.5em; }
+.sortable li, .sortable div{ font-size: 1.2em; min-height: 1.5em; min-height:35px;}
 
 
-.ui-state-highlight { height: 1.5em; line-height: 1.2em; }
-.connected-sortable li{width: 60%; }
-.connected-sortable li h3{font-size: 1.2em;cursor:pointer;margin: 0;padding: 0;}
+.connected-sortable li{zoom:1;}
 
 .notification {border-radius:6px 6px 6px 6px;border: 1px solid;font-size: 13px;margin: 0 0 15px;padding: 0;position: relative;width: 99.8%;}
 .warning {background: url(../images/notification/warning.png) no-repeat scroll 10px 11px #FFFBCC;border-color: #E6DB55;color: #666452;}
