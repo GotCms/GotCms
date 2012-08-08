@@ -154,6 +154,16 @@ var Gc = (function($)
                 }
             });
 
+            $(document).on('click', '#tabs > li', function(event)
+            {
+                if(event.target.type == 'text')
+                {
+                    return false;
+                }
+
+                $(this).find('div').toggleClass('hide').height('auto');
+            });
+
             $(document).on('click', '.delete-tab', function()
             {
                 $button = $(this);
