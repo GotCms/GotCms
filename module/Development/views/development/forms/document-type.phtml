@@ -136,9 +136,10 @@
             <input type="checkbox" name="properties[required]" id="properties-required" value="1">
         </div>
         <div>
-            <button name="properties[add]" id="property_add" type="button" class="input-submit button-add button-add-property"><?php echo $this->escapeHtml($this->translate('Add property')); ?></button>
+            <button name="properties[add]" id="property-add" type="button" class="input-submit button-add button-add-property"><?php echo $this->escapeHtml($this->translate('Add property')); ?></button>
         </div>
-        <div><?php echo $this->escapeHtml($this->translate('Properties')); ?>
+        <div>
+            <?php echo $this->escapeHtml($this->translate('Properties')); ?>
             <div id="properties-tabs-content" class="tabs">
                 <ul>
                     <?php foreach($tabs_form as $tab_form): ?>
@@ -163,8 +164,8 @@
                                 <li>
                                     <?php $property_id = (int)$property->get('property_id')->getValue(); ?>
                                     <?php $property_form_id = 'property'.$property->get('property_id')->getValue(); ?>
-                                    <h3><?php echo $this->escapeHtml($property_id); ?></h3>
-                                    <dl>
+                                    <h3><?php echo $this->escapeHtml(sprintf('%s (%s)', $property->get('name')->getValue(), $property->get('identifier')->getValue())); ?></h3>
+                                    <dl class="hide">
                                         <dt>
                                             <label class="optional" for="properties-name-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
                                         </dt>
@@ -248,21 +249,27 @@
             <button name="tabs[add]" id="tabs-add" type="button" class="input-submit button-add button-add-tab"><?php echo $this->escapeHtml($this->translate('Add Tab')); ?></button>
         </div>
 
-        <div><?php echo $this->escapeHtml($this->translate('Tabs')); ?>
+        <div>
+            <h3><?php echo $this->escapeHtml($this->translate('Tabs')); ?></h3>
             <ul id="tabs" class="sortable ui-sortable">
             <?php foreach($tabs_form as $tab_form): ?>
                 <li>
                     <?php $name = $tab_form->get('name')->getValue(); ?>
                     <?php $description = $tab_form->get('description')->getValue(); ?>
                     <?php $tab_id = 'tab'.$tab_form->get('tab_id')->getValue(); ?>
-                    <input type="hidden" value="<?php echo $name; ?>" name="tabs[<?php echo $tab_id; ?>][name]">
-                    <input type="hidden" value="<?php echo $description; ?>" name="tabs[<?php echo $tab_id; ?>][description]">
-                    <span><?php echo $name; ?></span>
-                    <span><?php echo $description; ?></span>
-                    <button value="<?php echo (int)$tab_form->get('tab_id')->getValue(); ?>" class="delete-tab input-submit" type="button">delete</button>
+                    <div class="hide floatL">
+                        <input type="text" value="<?php echo $name; ?>" name="tabs[<?php echo $tab_id; ?>][name]">
+                        <input type="text" value="<?php echo $description; ?>" name="tabs[<?php echo $tab_id; ?>][description]">
+                    </div>
+                    <div class="floatL">
+                        <span><?php echo $name; ?></span>
+                        <span><?php echo $description; ?></span>
+                    </div>
+                    <button value="<?php echo (int)$tab_form->get('tab_id')->getValue(); ?>" class="delete-tab input-submit floatR" type="button">delete</button>
                 </li>
             <?php endforeach; ?>
             </ul>
         </div>
     </div>
 </form>
+

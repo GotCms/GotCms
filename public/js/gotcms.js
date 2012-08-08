@@ -57,9 +57,13 @@ var Gc = (function($)
             $('.tabs').tabs();
             var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
 
-            var $tab_items = $('ul:first li', $tabs ).droppable({
-                accept: ".connected-sortable *",
+            $('.connected-sortable').sortable({
+                placeholder: "ui-state-highlight"
+            });
+            var $tab_items = $('ul:first li', $tabs).droppable({
+                accept: ".connected-sortable li",
                 hoverClass: "ui-state-hover",
+                tolerance: "pointer",
                 drop: function( event, ui )
                 {
                     var $item = $( this );
@@ -73,7 +77,14 @@ var Gc = (function($)
                 }
             });
 
-            //tabs
+
+            /**
+             * TABS
+             */
+            $( "#tabs" ).sortable({
+                placeholder: "ui-state-highlight"
+            });
+
             $('#tabs-add').on('click', function()
             {
                 $name = $('#tabs-addname');
@@ -95,11 +106,15 @@ var Gc = (function($)
                         {
                             $tabs = $('#tabs');
                             $e = '<li>'
-                                +'<input type="hidden" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'">'
-                                +'<input type="hidden" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'">'
-                                +'<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>'
-                                +'<button type="button" value="'+$data.id+'" class="delete-tab">'+Translator.translate('Delete')+'</button>'
-                                +'</li>';
+                                + '<div class="hide floatL">'
+                                + '<input type="text" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'">'
+                                + '<input type="text" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'">'
+                                + '</div>'
+                                + '<div class="floatL">'
+                                + '<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>'
+                                + '</div>'
+                                + '<button type="button" value="'+$data.id+'" class="delete-tab floatR input-submit">'+Translator.translate('Delete')+'</button>'
+                                + '</li>';
                             $tabs.append($e);
                             $('.select-tab').append(new Option($name.val(),$data.id));
 
@@ -110,7 +125,7 @@ var Gc = (function($)
                             else
                             {
                                 //add tab if does not exist
-                                $('#property_add').after('<div id="properties-tabs-content" class="tabs">'
+                                $('#property-add').after('<div id="properties-tabs-content" class="tabs">'
                                     +'<ul>'
                                         +'<li><a href="#tabs-properties-1">'+$name.val()+'</a></li>'
                                     +'</ul>'
@@ -125,14 +140,20 @@ var Gc = (function($)
                 }
             });
 
+            $(document).on('click', '#tabs > li', function(event)
+            {
+                if(event.target.type == 'text')
+                {
+                    return false;
+                }
+
+                $(this).find('div').toggleClass('hide').height('auto');
+            });
+
             $(document).on('click', '.delete-tab', function()
             {
                 $button = $(this);
-                $.post($deleteTabUrl,
-                {
-                    tab:    $button.val()
-                },
-                function($data)
+                $.post($deleteTabUrl, {tab: $button.val()}, function($data)
                 {
                     $('.select-tab').find('option[value="'+$button.val()+'"]').remove();
                     $tabs = $('#properties-tabs-content');
@@ -143,10 +164,11 @@ var Gc = (function($)
                     $this.setHtmlMessage($data.message);
                 });
             });
-            //views
 
-            //properties
-            $('#property_add').on('click', function()
+            /**
+             * Properties
+             */
+            $('#property-add').on('click', function()
             {
                 $name = $('#properties-name');
                 $identifier = $('#properties-identifier');
@@ -179,7 +201,8 @@ var Gc = (function($)
                         else
                         {
                             $this.setHtmlMessage('');
-                            $c = new Template('<dl>'
+                            $c = new Template('<h3>#{name} (#{identifier})</h3>'
+                                + '<dl class="hide">'
                                 +'<dt id="name-label-#{tab}-#{id}">'
                                     +'<label class="optional" for="properties-name-#{tab}-#{id}">'+Translator.translate('Name')+'</label>'
                                 +'</dt>'
@@ -210,7 +233,7 @@ var Gc = (function($)
                                 +'</dd>'
                                 +'<dd id="required-element-#{tab}-#{id}">'
                                     +'<input type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">'
-                                    +'<button type="button" value="#{id}" class="delete-property">'+Translator.translate('Delete')+'</button>'
+                                    +'<button type="button" value="#{id}" class="delete-property input-submit">'+Translator.translate('Delete')+'</button>'
                                 +'</dd>'
                             +'</dl>');
 
@@ -223,6 +246,11 @@ var Gc = (function($)
                         }
                     });
                 }
+            });
+
+            $(document).on('click', '.connected-sortable h3', function()
+            {
+                $(this).next('dl').toggleClass('hide');
             });
 
             $(document).on('click', '.delete-property', function()
