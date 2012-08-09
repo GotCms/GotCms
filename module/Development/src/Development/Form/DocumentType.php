@@ -27,12 +27,13 @@
 namespace Development\Form;
 
 use Gc\Form\AbstractForm,
-    Gc\DocumentType\Model as DocumentTypeModel,
     Gc\Datatype,
+    Gc\DocumentType\Model as DocumentTypeModel,
+    Gc\Media\Icon,
+    Gc\Property,
+    Gc\Tab,
     Gc\Validator,
     Gc\View,
-    Gc\Tab,
-    Gc\Property,
     Zend\Validator\Db,
     Zend\Form\Element,
     Zend\InputFilter\InputFilter,
@@ -115,7 +116,11 @@ class DocumentType extends AbstractForm
 
         $fieldsets->add(new Element('name'));
         $fieldsets->add(new Element('description'));
-        $fieldsets->add(new Element('icon_id'));
+
+        $icon_id = new Element\Select('icon_id');
+        $collection = new Icon\Collection();
+        $icon_id->setAttribute('options', $collection->getSelect());
+        $fieldsets->add($icon_id);
 
         $this->add($fieldsets);
 
@@ -399,6 +404,7 @@ class DocumentType extends AbstractForm
             $infos_form = $this->getInfos();
             $infos_form->get('name')->setValue($element->getName());
             $infos_form->get('description')->setValue($element->getDescription());
+            $infos_form->get('icon_id')->setValue($element->getIconId());
 
             $views_form = $this->getViews();
             $views_form->get('default_view')->setValue($element->getDefaultViewId());

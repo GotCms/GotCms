@@ -64,7 +64,7 @@ class Collection extends AbstractTable
      * @param boolean $force_reload to initiliaze views
      * @return array
      */
-    private function getViews($force_reload = FALSE)
+    public function getViews($force_reload = FALSE)
     {
         if($force_reload)
         {

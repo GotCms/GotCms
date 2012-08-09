@@ -29,6 +29,8 @@ namespace Gc\Document;
 
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
+    Gc\DocumentType,
+    Gc\Media\Icon,
     Gc\View;
 /**
  * Document Model
@@ -83,6 +85,20 @@ class Model extends AbstractTable implements IterableInterface
 
         return $this->getData('view');
     }
+
+    /**
+     * Get Document type
+     * @return \Gc\DocumentType\Model
+     */
+     public function getDocumentType()
+     {
+         if($this->getData('document_type') === NULL)
+         {
+             $this->setData('document_type', DocumentType\Model::fromId($this->getDocumentTypeId()));
+         }
+
+         return $this->getData('document_type');
+     }
 
     /**
      * Define if document is show in navigation
@@ -284,26 +300,8 @@ class Model extends AbstractTable implements IterableInterface
     {
         if($this->getData('icon') === NULL)
         {
-            if($this->getIconId() === NULL)
-            {
-                $children = $this->getChildren();
-                if(empty($children))
-                {
-                    $this->setData('icon', 'file');
-                }
-                else
-                {
-                    $this->setData('icon', 'folder');
-                }
-            }
-            else
-            {
-                $db = $this->getAdapter();
-                $select_icon = $db->select()->from(array('i' => 'icons'))
-                    ->where('id = ?', $this->getIconId());
-                $icon = $db->fetchRow($select_icon);
-                $this->setData('icon', $icon['filename']);
-            }
+            $icon = Icon\Model::fromId($this->getDocumentType()->getIconId());
+            $this->setData('icon', $icon->getUrl());
         }
 
         return $this->getData('icon');

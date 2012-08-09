@@ -90,6 +90,7 @@ class DocumentTypeController extends Action
 
                 $document_type->addData(array(
                     'name' => $infos_subform->getValue('name'),
+                    'icon_id' => $infos_subform->getValue('icon_id'),
                     'description' => $infos_subform->getValue('description'),
                     'default_view_id' => $views_subform->getValue('default_view'),
                     'user_id' => $this->getAuth()->getIdentity()->getId(),
@@ -257,6 +258,7 @@ class DocumentTypeController extends Action
 
                 $document_type->addData(array(
                     'name' => $infos_subform->getValue('name'),
+                    'icon_id' => $infos_subform->getValue('icon_id'),
                     'description' => $infos_subform->getValue('description'),
                     'default_view_id' => $views_subform->getValue('default_view'),
                 ));

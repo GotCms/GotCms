@@ -87,13 +87,13 @@ class TreeView
             $id = $iterator->getId();
             $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '') . 'href="'.$iterator->getUrl().'">';
 
-            if(in_array($iterator->getIcon(), array('folder','file')))
+            if($iterator->getIcon() == 'folder')
             {
-                $html .= '<ins class="jstree-icon">&nbsp;</ins>';
+                $html .= '<ins style="background:url(/media/icons/folder.gif) no-repeat scroll 0 0;" class="jstree-icon">&nbsp;</ins>';
             }
             else
             {
-                $html .= '<ins style="background:url(medias/icon/'.$iterator->getIcon().') no-repeat scroll 0 0;padding-left:20px;">&nbsp;</ins>';
+                $html .= '<ins style="background:url('.$iterator->getIcon().') no-repeat scroll 0 0;" class="jstree-icon">&nbsp;</ins>';
             }
 
             $html .= $iterator->getName().'</a>';
