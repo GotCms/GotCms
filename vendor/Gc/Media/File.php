@@ -110,7 +110,7 @@ class File extends Object
                     'document_id' => $this->getDocument()->getId(),
                     'property_id' => $this->getProperty()->getId(),
                     'file' => $file_data['name'])
-                , array('name' => 'documentRemoveMedia'));
+                , array('name' => 'mediaRemove'));
                 $file_object->delete_type = 'DELETE';
                 $data[] = $file_object;
             }

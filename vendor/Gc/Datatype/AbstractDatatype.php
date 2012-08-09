@@ -120,7 +120,7 @@ abstract class AbstractDatatype extends AbstractTable
     {
         $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
 
-        return $router->assemble(array('document_id' => $this->getDocumentId(), 'property_id' => $property_id), array('name' => 'documentUploadMedia'));
+        return $router->assemble(array('document_id' => $this->getDocumentId(), 'property_id' => $property_id), array('name' => 'mediaUpload'));
     }
 
     /**

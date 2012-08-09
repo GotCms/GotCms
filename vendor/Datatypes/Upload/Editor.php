@@ -142,7 +142,7 @@ class Editor extends AbstractEditor
                     'document_id' => $this->getDatatype()->getDocument()->getId(),
                     'property_id' => $this->getProperty()->getId(),
                     'file' => $file_data['name']),
-                array('name' => 'documentRemoveMedia'));
+                array('name' => 'mediaRemove'));
                 $file_object->delete_type = 'DELETE';
                 $file_list[] = $file_object;
             }

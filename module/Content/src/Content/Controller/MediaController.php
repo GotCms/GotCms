@@ -142,7 +142,6 @@ class MediaController extends Action
     public function connectorAction()
     {
         $opts = array(
-            'debug' => TRUE,
             'roots' => array(
                 array(
                     'driver'        => 'LocalFileSystem',
