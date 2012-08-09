@@ -84,7 +84,7 @@ class TranslationController extends Action
         {
             $post = $this->getRequest()->getPost();
             $translation_form->setData($post->toArray());
-            if($translation_form->isValid())
+            if(!$translation_form->isValid())
             {
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid data sent !');
                 $this->useFlashMessenger();

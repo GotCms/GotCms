@@ -470,6 +470,14 @@ var Gc = (function($)
                 enterMode: "keep",
                 tabMode: "spaces"
             });
+        },
+
+        initElFinder: function($connector_url, $language)
+        {
+            var elf = $('#elfinder').elfinder({
+                lang: $language,
+                url : $connector_url  // connector URL (REQUIRED)
+            }).elfinder('instance');
         }
     };
 })(jQuery);

@@ -206,3 +206,5 @@ footer a:hover {text-decoration:underline;}
 .error {background: url(../images/notification/error.png) no-repeat scroll 10px 11px #FFCECE;border-color: #DF8F8F;color: #665252;}
 .notification div {display: block;font-style: normal;line-height: 1.5em;padding: 10px 10px 10px 36px;}
 .notification .close {color: #990000;font-size: 9px;position: absolute;right: 13px;top: 13px;}
+
+#elfinder {font-size: 170%;}

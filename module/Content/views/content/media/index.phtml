@@ -26,19 +26,11 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing documents')); ?> ::..</h2>
 
-<?php echo $this->treeview; ?>
-
-<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing resources')); ?> ::..</h2>
-
-<ul>
-    <li><a href="<?php echo $this->url('documentMedia'); ?>" title=""><?php echo $this->escapeHtml($this->translate('File manager')); ?></a></li>
-</ul>
-
-<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing translation')); ?> ::..</h2>
-
-<ul>
-    <li><a href="<?php echo $this->url('translationCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-    <li><a href="<?php echo $this->url('translationList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Edit')); ?></a></li>
-</ul>
+<div id="elfinder"></div>
+<script type="text/javascript">
+    $(function()
+    {
+        Gc.initElFinder('<?php echo $this->escapeJs($this->url('documentMediaConnector')); ?>', '<?php echo $this->escapeJs($this->language); ?>');
+    })
+</script>

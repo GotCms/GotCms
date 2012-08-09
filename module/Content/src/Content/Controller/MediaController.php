@@ -27,9 +27,15 @@
 namespace Content\Controller;
 
 use Gc\Mvc\Controller\Action,
+    Gc\Component,
     Gc\Document,
+    Gc\Document\Collection as DocumentCollection,
     Gc\Property,
     Gc\Media\File,
+    elFinder\elFinder,
+    elFinder\elFinderConnector,
+    elFinder\elFinderVolumeDriver,
+    elFinder\elFinderLocalFileSystem,
     Zend\Json\Json,
     Zend\File\Transfer\Adapter\Http as FileTransfer;
 
@@ -42,13 +48,42 @@ class MediaController extends Action
     protected $_acl_page = array('resource' => 'Content', 'permission' => 'media');
 
     /**
-     *
+     * Initialize Content Index Controller
+     * @return void
+     */
+    public function init()
+    {
+        $documents = new DocumentCollection();
+        $documents->load(0);
+
+        $this->layout()->setVariable('treeview',  Component\TreeView::render(array($documents)));
+
+        $routes = array(
+            'edit' => 'documentEdit',
+            'new' => 'documentCreate',
+            'delete' => 'documentDelete',
+            'copy' => 'documentCopy',
+            'cut' => 'documentCut',
+            'paste' => 'documentPaste',
+        );
+
+        $array_routes = array();
+        foreach($routes as $key => $route)
+        {
+            $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
+        }
+
+        $this->layout()->setVariable('routes', Json::encode($array_routes));
+    }
+
+    /**
+     * File mananger action
      *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function indexAction()
     {
-
+        return array('language' => preg_replace('~(.*)_.*~', '$1', \Gc\Registry::get('Translator')->getLocale()));
     }
 
     /**
@@ -98,5 +133,29 @@ class MediaController extends Action
         $file_class = new File();
         $file_class->init($property, $document);
         return $this->_returnJson(array($file_class->remove($this->getRouteMatch()->getParam('file'))));
+    }
+
+    /**
+     * Connector for elFinder
+     * @return void
+     */
+    public function connectorAction()
+    {
+        $opts = array(
+            'debug' => TRUE,
+            'roots' => array(
+                array(
+                    'driver'        => 'LocalFileSystem',
+                    'path'          => GC_APPLICATION_PATH . '/public/media/content/',
+                    'tmbPath'       => 'thumbnails',
+                    'URL'           => '/media/content/',
+                    'accessControl' => 'access'
+                )
+            )
+        );
+
+        // run elFinder
+        $connector = new elFinderConnector(new elFinder($opts));
+        $connector->run();
     }
 }

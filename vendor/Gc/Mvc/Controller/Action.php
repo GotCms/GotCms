@@ -145,6 +145,7 @@ class Action extends AbstractActionController
         /**
          * Prepare all resources
          */
+        $language = preg_replace('~(.*)_.*~', '$1', \Gc\Registry::get('Translator')->getLocale());
         $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
         $headscript = $helper_broker->get('HeadScript');
         $headscript
@@ -160,16 +161,19 @@ class Action extends AbstractActionController
             ->appendFile('/js/libs/codemirror/mode/php/php.js', 'text/javascript')
             ->appendFile('/js/libs/jquery.jstree.js', 'text/javascript')
             ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
+            ->appendFile('/js/libs/elfinder.min.js', 'text/javascript')
+            ->appendFile(sprintf('/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript')
             ->appendFile('/js/generic-classes.js', 'text/javascript')
             ->appendFile('/js/gotcms.js', 'text/javascript');
 
         $headlink = $helper_broker->get('HeadLink');
         $headlink
-            ->appendStylesheet('/css/style.css')
             ->appendStylesheet('/js/libs/codemirror/lib/codemirror.css')
             ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
             ->appendStylesheet('/css/jquery.treeview.css')
-            ->appendStylesheet('/css/jquery.contextMenu.css');
+            ->appendStylesheet('/css/elfinder.min.css')
+            ->appendStylesheet('/css/jquery.contextMenu.css')
+            ->appendStylesheet('/css/style.css');
     }
 
     /**

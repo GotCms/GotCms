@@ -52,6 +52,7 @@ return array(
         'namespaces' => array(
             'Gc'        => __DIR__ . '/../vendor/Gc',
             'Datatypes' => __DIR__ . '/../vendor/Datatypes',
+            'elFinder'  => __DIR__ . '/../vendor/elFinder',
         ),
         'autoregister_zf' => TRUE,
     ),

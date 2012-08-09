@@ -20,5 +20,5 @@
 /* SITE */
   Standards: HTML5, CSS3
   Components: Modernizr, jQuery
-  Software: PostgreSQL / jQuery / PHP5 / GotCms / CodeMirror
+  Software: PostgreSQL / jQuery / PHP5 / GotCms / CodeMirror / elFinder / Zend Framework 2 / CkEditor
 

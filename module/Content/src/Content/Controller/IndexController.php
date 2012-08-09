@@ -35,6 +35,7 @@ class IndexController extends Action
 {
     /**
      * Initialize Content Index Controller
+     * @return void
      */
     public function init()
     {
