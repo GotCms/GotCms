@@ -327,9 +327,17 @@ var Gc = (function($)
 
                         case 'copy':
                         case 'cut':
-                        break;
-
                         case 'paste':
+                            $.ajax({
+                                url: $url,
+                                dataType: 'json',
+                                data: {},
+                                success: function(data)
+                                {
+                                    console.log(data);
+                                }
+                            });
+                            return false;
                         break;
 
                         case 'delete':

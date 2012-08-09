@@ -74,16 +74,6 @@ class DocumentController extends Action
     }
 
     /**
-     *
-     *
-     * @return \Zend\View\Model\ViewModel|array
-     */
-    public function indexAction()
-    {
-
-    }
-
-    /**
      * Create document
      *
      * @return \Zend\View\Model\ViewModel|array
@@ -189,7 +179,7 @@ class DocumentController extends Action
         if(empty($document))
         {
             $this->flashMessenger()->setNameSpace('error')->addMessage('Document does not exists !');
-            $this->useFlashMessenger();
+            return $this->redirect()->toRoute('content');
         }
         else
         {
@@ -296,6 +286,107 @@ class DocumentController extends Action
             return array('form' => $document_form, 'tabs' => $tabs);
         }
     }
+
+    /**
+     * Copy document
+     * @return \Zend\View\Model\JsonModel
+     */
+     public function copyAction()
+     {
+        $document_id = $this->getRouteMatch()->getParam('id');
+        if(empty($document_id))
+        {
+            return $this->_returnJson(array('success' => FALSE));
+        }
+
+        $session = $this->getSession();
+        if(!empty($session['document-cut']))
+        {
+            unset($session['document-cut']);
+        }
+
+        $session['document-copy'] = $document_id;
+        return $this->_returnJson(array('success' => TRUE));
+     }
+
+    /**
+     * Cut document
+     * @return \Zend\View\Model\JsonModel
+     */
+     public function cutAction()
+     {
+        $document_id = $this->getRouteMatch()->getParam('id');
+        if(empty($document_id))
+        {
+            return $this->_returnJson(array('success' => FALSE));
+        }
+
+        $session = $this->getSession();
+        if(!empty($session['document-copy']))
+        {
+            unset($session['document-copy']);
+        }
+
+        $session['document-cut'] = $document_id;
+        return $this->_returnJson(array('success' => TRUE));
+     }
+
+    /**
+     * Paste document
+     * @return \Zend\View\Model\JsonModel
+     */
+     public function pasteAction()
+     {
+        $parent_id = $this->getRouteMatch()->getParam('id', NULL);
+        $session = $this->getSession();
+        if(!empty($session['document-cut']))
+        {
+            $document = DocumentModel::fromid($session['document-cut']);
+            if(empty($document))
+            {
+                return $this->_returnJson(array('success' => FALSE));
+            }
+
+            $document->setParentId($parent_id);
+            $document->save();
+            unset($session['document-cut']);
+            return $this->_returnJson(array('success' => TRUE));
+        }
+        elseif(!empty($session['document-copy']))
+        {
+            $document = DocumentModel::fromid($session['document-copy']);
+            $copy_document = new DocumentModel();
+            $copy_document_properties =  new Property\Collection();
+            $copy_document_properties->load(NULL, NULL, $document->getId());
+
+            $copy_document->addData($document->getData());
+            $copy_document->setId(NULL);
+            $copy_document->setParentId($parent_id);
+            $copy_document->save();
+
+            foreach($copy_document_properties->getProperties() as $property)
+            {
+                $value = $property->getValueModel();
+                if(empty($value))
+                {
+                    continue;
+                }
+
+                $copy_property = new Property\Value\Model();
+                $copy_property->addData($value->getData());
+                $copy_property->setId(NULL);
+                $copy_property->setDocumentId($copy_document->getId());
+                $copy_property->save();
+            }
+
+            return $this->_returnJson(array('success' => TRUE));
+        }
+        else
+        {
+            return $this->_returnJson(array('success' => FALSE));
+        }
+     }
+
 
     /**
      * Check url key with deleted space and special chars

@@ -122,6 +122,20 @@ class Model extends AbstractTable
     }
 
     /**
+     * Return property value model
+     * @return mixte
+     */
+    public function getValueModel()
+    {
+        if(empty($this->_value))
+        {
+            $this->loadValue();
+        }
+
+        return $this->_value;
+    }
+
+    /**
      * Save property value
      * @return boolean
      */
