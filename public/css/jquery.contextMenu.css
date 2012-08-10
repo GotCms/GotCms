@@ -14,6 +14,7 @@ You can add icons to the context menu by adding
 classes to the respective LI element(s)
 */
 
+.contextMenu li.new a { background-image: url(../images/contextmenu/new.png); }
 .contextMenu li.edit a { background-image: url(../images/contextmenu/page_white_edit.png); }
 .contextMenu li.cut a { background-image: url(../images/contextmenu/cut.png); }
 .contextMenu li.copy a { background-image: url(../images/contextmenu/page_white_copy.png); }

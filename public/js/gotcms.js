@@ -296,7 +296,7 @@ var Gc = (function($)
                 "core" : { "initially_open" : [ $('#document_' + $document_id).parent().parent('li').prop('id') ] }
             }).bind("loaded.jstree", function (event, data)
             {
-                $("#browser").find('a').contextMenu(
+                $("#browser").find('a[id!=documents]').contextMenu(
                 {
                     menu: 'contextMenu'
                 },
@@ -327,6 +327,7 @@ var Gc = (function($)
 
                         case 'copy':
                         case 'cut':
+                            $('#contextMenu').enableContextMenuItems('#paste');
                         case 'paste':
                             $.ajax({
                                 url: $url,
@@ -334,7 +335,10 @@ var Gc = (function($)
                                 data: {},
                                 success: function(data)
                                 {
-                                    console.log(data);
+                                    if($action == 'copy' || $action == 'cut')
+                                    {
+                                        $('#contextMenu').enableContextMenuItems('#paste');
+                                    }
                                 }
                             });
                             return false;
@@ -353,6 +357,8 @@ var Gc = (function($)
 
                     document.location.href = $url;
                 });
+
+                $('#contextMenu').disableContextMenuItems('#paste');
             });
         },
 
