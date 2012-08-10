@@ -296,69 +296,96 @@ var Gc = (function($)
                 "core" : { "initially_open" : [ $('#document_' + $document_id).parent().parent('li').prop('id') ] }
             }).bind("loaded.jstree", function (event, data)
             {
-                $("#browser").find('a[id!=documents]').contextMenu(
+                $has_cut_action = false;
+                $.contextMenu(
                 {
-                    menu: 'contextMenu'
-                },
-
-                function($action, $element, $position)
-                {
-                    $routes = $this.getOption('routes');
-                    $url = $routes[$action];
-                    $id = '';
-
-                    if($element.attr('id') != undefined)
+                    selector: '#browser a',
+                    items: {
+                        "new": {name: Translator.translate("New"), icon: "add"},
+                        "edit": {name: Translator.translate("Edit"), icon: "edit"},
+                        "delete": {name: Translator.translate("Delete"), icon: "delete"},
+                        "sep1": "---------",
+                        "cut": {name: Translator.translate("Cut"), icon: "cut"},
+                        "copy": {name: Translator.translate("Copy"), icon: "copy"},
+                        "paste": {name: Translator.translate("Paste"), icon: "paste", disabled: true},
+                        "sep2": "---------",
+                        "quit": {name: Translator.translate("Quit"), icon: "quit"}
+                    },
+                    callback: function($action, $options)
                     {
-                        $id = $element.attr('id');
-                        $url = $url.replace('itemId', $id);
-                    }
+                        $element = $(this);
+                        if($action != 'new' && $action != 'paste' && $element.parent('li').attr('id') == 'documents')
+                        {
+                            return true;
+                        }
 
-                    switch($action)
-                    {
-                        case 'new':
-                            if(!$this.isEmpty($id))
-                            {
-                                $url += '/parent/'+$id;
-                            }
-                        break;
+                        $routes = $this.getOption('routes');
+                        $url = $routes[$action];
+                        $id = '';
 
-                        case 'edit':
-                        break;
 
-                        case 'copy':
-                        case 'cut':
-                            $('#contextMenu').enableContextMenuItems('#paste');
-                        case 'paste':
-                            $.ajax({
-                                url: $url,
-                                dataType: 'json',
-                                data: {},
-                                success: function(data)
+                        if($element.attr('id') != undefined)
+                        {
+                            $id = $element.attr('id');
+                            $url = $url.replace('itemId', $id);
+                        }
+
+                        switch($action)
+                        {
+                            case 'new':
+                                if(!$this.isEmpty($id))
                                 {
-                                    if($action == 'copy' || $action == 'cut')
-                                    {
-                                        $('#contextMenu').enableContextMenuItems('#paste');
-                                    }
+                                    $url += '/parent/'+$id;
                                 }
-                            });
-                            return false;
-                        break;
+                            break;
 
-                        case 'delete':
-                            $this.showDialogConfirm('Delete element', $url);
-                            return false;
-                        break;
+                            case 'edit':
+                            break;
 
-                        case 'quit':
-                        default:
-                            return false;
-                        break;
+                            case 'copy':
+                            case 'cut':
+                                $has_cut_action = true;
+                                $options.items.paste.disabled = false;
+                            case 'paste':
+                                $.ajax({
+                                    url: $url,
+                                    dataType: 'json',
+                                    data: {},
+                                    success: function(data)
+                                    {
+                                        if(data.success == true)
+                                        {
+                                            if($action == 'copy' || $action == 'cut')
+                                            {
+                                                $options.items.paste.disabled = false;
+                                            }
+
+                                            if($action == 'paste' && $has_cut_action)
+                                            {
+                                                $options.items.paste.disabled = true;
+                                            }
+                                        }
+                                    }
+                                });
+                                return true;
+                            break;
+
+                            case 'delete':
+                                $this.showDialogConfirm('Delete element', $url);
+                                return true;
+                            break;
+
+                            case 'quit':
+                            default:
+                                return true;
+                            break;
+                        }
+
+                        document.location.href = $url;
                     }
-
-                    document.location.href = $url;
                 });
 
-                $('#contextMenu').disableContextMenuItems('#paste');
+                //$('#contextMenu').disableContextMenuItems('#paste');
             });
         },
 
