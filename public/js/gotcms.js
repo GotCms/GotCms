@@ -321,14 +321,13 @@ var Gc = (function($)
 
                         $routes = $this.getOption('routes');
                         $url = $routes[$action];
-                        $id = '';
-
-
+                        $id = 0;
                         if($element.attr('id') != undefined)
                         {
                             $id = $element.attr('id');
-                            $url = $url.replace('itemId', $id);
                         }
+
+                        $url = $url.replace('itemId', $id);
 
                         switch($action)
                         {
