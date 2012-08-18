@@ -62,6 +62,7 @@ class Module
                 $translator->setLocale(\Gc\Core\Config::getValue('locale'));
             }
 
+            \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
             \Gc\Registry::set('Translator', $translator);
         }
     }

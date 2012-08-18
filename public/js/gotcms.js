@@ -328,6 +328,7 @@ var Gc = (function($)
                         }
 
                         $url = $url.replace('itemId', $id);
+                        $display_copy_form = true;
 
                         switch($action)
                         {
@@ -342,10 +343,17 @@ var Gc = (function($)
                             break;
 
                             case 'copy':
+                                $display_copy_form = false;
                             case 'cut':
-                                $has_cut_action = true;
+                                $this.setOption('lastAction', $action);
                                 $options.items.paste.disabled = false;
                             case 'paste':
+                                if($this.getOption('lastAction') == 'copy' && $display_copy_form == true)
+                                {
+                                    $this.showCopyForm($url, $action, $options);
+                                    return true;
+                                }
+
                                 $.ajax({
                                     url: $url,
                                     dataType: 'json',
@@ -359,7 +367,7 @@ var Gc = (function($)
                                                 $options.items.paste.disabled = false;
                                             }
 
-                                            if($action == 'paste' && $has_cut_action)
+                                            if($action == 'paste' && $this.getOption('lastAction') == 'cut')
                                             {
                                                 $options.items.paste.disabled = true;
                                             }
@@ -370,7 +378,7 @@ var Gc = (function($)
                             break;
 
                             case 'delete':
-                                $this.showDialogConfirm('Delete element', $url);
+                                $this.showDialogConfirm($url);
                                 return true;
                             break;
 
@@ -383,40 +391,90 @@ var Gc = (function($)
                         document.location.href = $url;
                     }
                 });
-
-                //$('#contextMenu').disableContextMenuItems('#paste');
             });
         },
 
-        showDialogConfirm: function($title, $url)
+        showDialogConfirm: function($url)
         {
-            $('#dialog').attr('title', $title).dialog(
+            var $buttons = {};
+            $buttons[Translator.translate('Confirm')] = function()
+            {
+                document.location.href = $url;
+                $(this).dialog('close');
+
+                return true;
+            };
+            $buttons[Translator.translate('Cancel')] = function()
+            {
+                $(this).dialog('close');
+
+                return false;
+            };
+
+            $('#dialog').attr('title', Translator.translate('Delete element')).dialog(
             {
                 bgiframe        : false,
                 resizable       : false,
-                height          : 150,
                 modal           : true,
                 overlay         :
                 {
                     backgroundColor: '#000',
                     opacity: 0.5
                 },
-                buttons         :
+                buttons         :$buttons
+            });
+        },
+
+        showCopyForm: function($url, $action, $options)
+        {
+            $this = this;
+            $template = '<div title="'+Translator.translate('Copy document')+'">'
+                +'<p class="validateTips">'+Translator.translate('All form fields are required.')+'</p>'
+                +'<fieldset>'
+                    +'<div>'
+                        +'<label for="name">'+Translator.translate('Name')+'</label>'
+                        +'<input type="text" name="name" id="copy-name" class="text ui-widget-content ui-corner-all" />'
+                    +'</div>'
+                    +'<div>'
+                        +'<label for="email">'+Translator.translate('Url key')+'</label>'
+                        +'<input type="text" name="url-key" id="copy-url-key" value="" class="text ui-widget-content ui-corner-all" />'
+                    +'</div>'
+               +'</fieldset>'
+            +'</div>';
+
+            var $buttons = {};
+            $buttons[Translator.translate('Copy')] = function()
+            {
+                $copy_name = $('#copy-name');
+                $copy_url_key = $('#copy-url-key');
+                if($this.isEmpty($copy_name.val()) || $this.isEmpty($copy_url_key.val()))
                 {
-                    'Confirm': function()
-                    {
-                        document.location.href = $url;
-                        $(this).dialog('close');
-
-                        return true;
-                    },
-                    'Cancel': function()
-                    {
-                        $(this).dialog('close');
-
-                        return false;
-                    }
+                    return false;
                 }
+
+                $.ajax({
+                    url: $url,
+                    dataType: 'json',
+                    data: {name:$copy_name.val(),url_key:$copy_url_key.val()},
+                    success: function(data)
+                    {
+                        if(data.success == true)
+                        {
+                            if($action == 'paste' && $this.getOption('lastAction') == 'cut')
+                            {
+                                $options.items.paste.disabled = true;
+                            }
+                        }
+                    }
+                });
+
+                $(this).dialog('close');
+            };
+            $buttons[Translator.translate('Cancel')] = function() { $(this).dialog('close'); };
+
+            $($template).dialog({
+                modal: true,
+                buttons: $buttons
             });
         },
 

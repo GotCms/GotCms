@@ -362,6 +362,8 @@ class DocumentController extends Action
             $copy_document->addData($document->getData());
             $copy_document->setId(NULL);
             $copy_document->setParentId($parent_id);
+            $copy_document->setName($this->getRequest()->getQuery('name'));
+            $copy_document->setUrlKey($this->getRequest()->getQuery('url_key'));
             $copy_document->save();
 
             foreach($copy_document_properties->getProperties() as $property)
