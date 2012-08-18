@@ -583,4 +583,3 @@ var Gc = (function($)
     };
 })(jQuery);
 
-Gc = Gc;
