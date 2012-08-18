@@ -470,7 +470,10 @@ var Gc = (function($)
 
                 $(this).dialog('close');
             };
-            $buttons[Translator.translate('Cancel')] = function() { $(this).dialog('close'); };
+            $buttons[Translator.translate('Cancel')] = function()
+            {
+                $(this).dialog('close');
+            };
 
             $($template).dialog({
                 modal: true,
