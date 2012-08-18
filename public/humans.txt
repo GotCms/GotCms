@@ -13,12 +13,8 @@
   Google+: https://plus.google.com/u/0/107809758756474139920/posts
   Location: Paris (FRANCE)
 
-  Pierre Rambaud:
-  Web Development
-  Location: Paris (FRANCE)
-
 /* SITE */
   Standards: HTML5, CSS3
-  Components: Modernizr, jQuery
-  Software: PostgreSQL / jQuery / PHP5 / GotCms / CodeMirror / elFinder / Zend Framework 2 / CkEditor
+  Components: Modernizr, jQuery / CodeMirror / elFinder / Zend Framework 2.0.0rc4 / CkEditor
+  Software: PostgreSQL / MySQL / PHP5 / Apache2
 

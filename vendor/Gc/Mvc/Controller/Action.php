@@ -76,7 +76,7 @@ class Action extends AbstractActionController
      * @param  MvcEvent $e
      * @return mixed
      */
-    public function execute(MvcEvent $e)
+    public function onDispatch(MvcEvent $e)
     {
         $result_response = $this->_construct();
         if(!empty($result_response))
@@ -85,7 +85,7 @@ class Action extends AbstractActionController
         }
 
         $this->init();
-        return parent::execute($e);
+        return parent::onDispatch($e);
     }
 
     /**

@@ -111,7 +111,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      *         type,            - Mime type of this file
      *         size,            - Filesize in bytes
      *         tmp_name,        - Internally temporary filename for uploaded files
-     *         error,           - Error which has occured
+     *         error,           - Error which has occurred
      *         destination,     - New destination for this file
      *         validators,      - Set validator names for this file
      *         files            - Set file names for this file
@@ -510,6 +510,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      *
      * @param array $options Options to set
      * @param array $files   (Optional) Files to set the options for
+     * @return AbstractAdapter
      */
     public function setOptions($options = array(), $files = null)
     {
@@ -1351,6 +1352,7 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
      * Tries to detect if we can read and write to the given path
      *
      * @param string $path
+     * @return bool
      */
     protected function isPathWriteable($path)
     {

@@ -115,6 +115,7 @@ class ServiceManager implements ServiceLocatorInterface
 
     /**
      * @param $allowOverride
+     * @return ServiceManager
      */
     public function setAllowOverride($allowOverride)
     {
@@ -203,6 +204,7 @@ class ServiceManager implements ServiceLocatorInterface
      * @param  string  $name
      * @param  string  $invokableClass
      * @param  bool $shared
+     * @return ServiceManager
      * @throws Exception\InvalidServiceNameException
      */
     public function setInvokableClass($name, $invokableClass, $shared = true)
@@ -227,6 +229,7 @@ class ServiceManager implements ServiceLocatorInterface
      * @param  string                           $name
      * @param  string|FactoryInterface|callable $factory
      * @param  bool                          $shared
+     * @return ServiceManager
      * @throws Exception\InvalidServiceNameException
      */
     public function setFactory($name, $factory, $shared = true)
@@ -256,6 +259,7 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * @param  AbstractFactoryInterface|string $factory
      * @param  bool                            $topOfStack
+     * @return ServiceManager
      * @throws Exception\InvalidArgumentException if the abstract factory is invalid
      */
     public function addAbstractFactory($factory, $topOfStack = true)
@@ -271,7 +275,7 @@ class ServiceManager implements ServiceLocatorInterface
                     'Provided abstract factory must be the class name of an abstract factory or an instance of an AbstractFactoryInterface.'
                 );
             }
-            $refl = new \ReflectionClass($factory);
+            $refl = new ReflectionClass($factory);
             if (!$refl->implementsInterface(__NAMESPACE__ . '\\AbstractFactoryInterface')) {
                 throw new Exception\InvalidArgumentException(
                     'Provided abstract factory must be the class name of an abstract factory or an instance of an AbstractFactoryInterface.'
@@ -857,6 +861,7 @@ class ServiceManager implements ServiceLocatorInterface
      *
      * @param string $className
      * @param string $type
+     * @return bool
      */
     protected static function isSubclassOf($className, $type)
     {
