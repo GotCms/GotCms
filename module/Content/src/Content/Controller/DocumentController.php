@@ -62,6 +62,7 @@ class DocumentController extends Action
             'copy' => 'documentCopy',
             'cut' => 'documentCut',
             'paste' => 'documentPaste',
+            'refresh' => 'documentRefreshTreeview',
         );
 
         $array_routes = array();
@@ -389,6 +390,28 @@ class DocumentController extends Action
         }
      }
 
+    /**
+     * Refresh treeview
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function refreshTreeviewAction()
+    {
+        $document_id = $this->getRouteMatch()->getParam('id', 0);
+        if(empty($document_id))
+        {
+            $documents = new DocumentCollection();
+            $documents->load($document_id);
+            $documents_list = array($documents);
+        }
+        else
+        {
+            $documents = DocumentModel::fromId($document_id);
+            $documents_list = $documents->getChildren();
+        }
+
+
+        return $this->_returnJson(array('treeview' => Component\TreeView::render($documents_list, empty($document_id) ? TRUE : FALSE)));
+    }
 
     /**
      * Check url key with deleted space and special chars

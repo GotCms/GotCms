@@ -41,13 +41,13 @@ var Gc = (function($)
                 return true;
             }
 
-            if(typeof $element == "object")
+            if(typeof $element == 'object')
             {
                 return $.isEmptyObject($element)
             }
             else
             {
-                return $element.trim() == '';
+                return $.trim($element) == '';
             }
         },
 
@@ -59,8 +59,8 @@ var Gc = (function($)
             /**
              * TABS
              */
-            $( "#tabs" ).sortable({
-                placeholder: "ui-state-highlight"
+            $('#tabs').sortable({
+                placeholder: 'ui-state-highlight'
             });
 
             $('#tabs-add').on('click', function()
@@ -98,7 +98,7 @@ var Gc = (function($)
 
                             if($('#properties-tabs-content').html() != null)
                             {
-                                $('#properties-tabs-content').tabs( "add", '#tabs-properties-'+$data.id, $name.val());
+                                $('#properties-tabs-content').tabs('add', '#tabs-properties-'+$data.id, $name.val());
                             }
                             else
                             {
@@ -138,7 +138,7 @@ var Gc = (function($)
                     $button.parent().remove();
                     $tab = $tabs.find('a[href="#tabs-properties-'+$button.val()+'"]').parent();
                     var $index = $('li', $tabs).index($tab);
-                    $tabs.tabs( "remove", $index );
+                    $tabs.tabs('remove', $index );
                     $this.setHtmlMessage($data.message);
                 });
             });
@@ -149,7 +149,7 @@ var Gc = (function($)
             var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
 
             $this.setOption('accordion-option', {
-                header: "div > h3",
+                header: 'div > h3',
                 collapsible: true,
                 autoHeight: false,
                 active: -1,
@@ -158,14 +158,14 @@ var Gc = (function($)
             $('.connected-sortable')
                 .accordion($this.getOption('accordion-option'))
                 .sortable({
-                    placeholder: "ui-state-highlight",
-                    handle: "h3"
+                    placeholder: 'ui-state-highlight',
+                    handle: 'h3'
                 });
 
             var $tab_items = $('ul:first li', $tabs).droppable({
-                accept: ".connected-sortable div",
-                hoverClass: "ui-state-hover",
-                tolerance: "pointer",
+                accept: '.connected-sortable div',
+                hoverClass: 'ui-state-hover',
+                tolerance: 'pointer',
                 drop: function( event, ui )
                 {
                     var $item = $(this);
@@ -182,7 +182,7 @@ var Gc = (function($)
                 stop: function( event, ui ) {
                     // IE doesn't register the blur when sorting
                     // so trigger focusout handlers to remove .ui-state-focus
-                    ui.item.children( "h3" ).triggerHandler( "focusout" );
+                    ui.item.children('h3').triggerHandler('focusout');
                 }
             });
 
@@ -291,30 +291,31 @@ var Gc = (function($)
         initDocumentMenu: function($document_id)
         {
             $this = this;
-            $("#browser").jstree({
-                "plugins" : ["themes","html_data"],
-                "core" : { "initially_open" : [ $('#document_' + $document_id).parent().parent('li').prop('id') ] }
-            }).bind("loaded.jstree", function (event, data)
+            $('#browser').jstree({
+                'plugins' : ['themes','html_data'],
+                'core' : { 'initially_open' : [ $('#document_' + $document_id).parent().parent('li').prop('id') ] }
+            }).bind('loaded.jstree', function (event, data)
             {
                 $has_cut_action = false;
                 $.contextMenu(
                 {
                     selector: '#browser a',
                     items: {
-                        "new": {name: Translator.translate("New"), icon: "add"},
-                        "edit": {name: Translator.translate("Edit"), icon: "edit"},
-                        "delete": {name: Translator.translate("Delete"), icon: "delete"},
-                        "sep1": "---------",
-                        "cut": {name: Translator.translate("Cut"), icon: "cut"},
-                        "copy": {name: Translator.translate("Copy"), icon: "copy"},
-                        "paste": {name: Translator.translate("Paste"), icon: "paste", disabled: true},
-                        "sep2": "---------",
-                        "quit": {name: Translator.translate("Quit"), icon: "quit"}
+                        'new': {name: Translator.translate('New'), icon: 'add'},
+                        'edit': {name: Translator.translate('Edit'), icon: 'edit'},
+                        'delete': {name: Translator.translate('Delete'), icon: 'delete'},
+                        'sep1': '---------',
+                        'cut': {name: Translator.translate('Cut'), icon: 'cut'},
+                        'copy': {name: Translator.translate('Copy'), icon: 'copy'},
+                        'paste': {name: Translator.translate('Paste'), icon: 'paste', disabled: true},
+                        'sep2': '---------',
+                        'refresh': {name: Translator.translate('Refresh'), icon: 'refresh'},
+                        'quit': {name: Translator.translate('Quit'), icon: 'quit'}
                     },
                     callback: function($action, $options)
                     {
                         $element = $(this);
-                        if($action != 'new' && $action != 'paste' && $element.parent('li').attr('id') == 'documents')
+                        if($action != 'refresh' && $action != 'new' && $action != 'paste' && $element.parent('li').attr('id') == 'documents')
                         {
                             return true;
                         }
@@ -332,6 +333,10 @@ var Gc = (function($)
 
                         switch($action)
                         {
+                            case 'refresh':
+                                $this.refreshTreeview($url, $id, $document_id);
+                                return true;
+                            break;
                             case 'new':
                                 if(!$this.isEmpty($id))
                                 {
@@ -391,6 +396,29 @@ var Gc = (function($)
                         document.location.href = $url;
                     }
                 });
+            });
+        },
+
+        refreshTreeview: function($url, $document_id, $init_document_id)
+        {
+            $this = this;
+            $.ajax({
+                url: $url,
+                data: {},
+                success: function(data)
+                {
+                    if($document_id == 0)
+                    {
+                        $('#browser').replaceWith(data.treeview);
+                        $this.initDocumentMenu($init_document_id);
+                    }
+                    else
+                    {
+                        $('#'+$document_id).next('ul').remove()
+                        $('#'+$document_id).after(data.treeview);
+                        $('#browser').jstree('refresh');
+                    }
+                }
             });
         },
 
@@ -562,14 +590,15 @@ var Gc = (function($)
                 $('#form-content').toggle();
                 return false;
             });
+
             var myCodeMirror = CodeMirror.fromTextArea(document.getElementById($content), {
                 lineNumbers: true,
                 matchBrackets: true,
-                mode: "application/x-httpd-php",
+                mode: 'application/x-httpd-php',
                 indentUnit: 4,
                 indentWithTabs: true,
-                enterMode: "keep",
-                tabMode: "spaces"
+                enterMode: 'keep',
+                tabMode: 'spaces'
             });
         },
 

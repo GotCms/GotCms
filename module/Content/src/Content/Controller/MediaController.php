@@ -65,6 +65,7 @@ class MediaController extends Action
             'copy' => 'documentCopy',
             'cut' => 'documentCut',
             'paste' => 'documentPaste',
+            'refresh' => 'documentRefreshTreeview',
         );
 
         $array_routes = array();

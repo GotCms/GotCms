@@ -54,7 +54,7 @@ class Model extends AbstractTable implements IterableInterface
     const STATUS_ENABLE      = 1;
 
     /**
-     * Initiliaz document
+     * Initiliaze document
      * @param integer $document_id
      * @return void
      */
