@@ -135,7 +135,7 @@ class CkEditor extends Object
 
                     $element = new Element\Checkbox('toolbar-items['.$item.']');
                     $element->setAttribute('id', 'i' . $group['name'] . $idx_item)
-                        ->setAttribute('checkedValue', 1)
+                        ->setCheckedValue(1)
                         ->setAttribute('label', $item);
 
                     if(!empty($toolbar_items[$item]))

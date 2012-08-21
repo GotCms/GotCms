@@ -235,7 +235,7 @@ class DocumentType extends AbstractForm
             $tab->setValue($property->getTabId());
             $datatype->setValue($property->getDatatypeId());
             $description->setValue($property->getDescription());
-            $required->setAttribute('checkedValue', $property->isRequired());
+            $required->setCheckedValue($property->isRequired());
             $property_id->setValue($property->getId());
             $property_fieldset_name = $property->getId();
         }
@@ -246,7 +246,7 @@ class DocumentType extends AbstractForm
             $tab->setValue($property['tab']);
             $datatype->setValue($property['datatype']);
             $description->setValue($property['description']);
-            $required->setAttribute('checkedValue', !empty($property['is_required']));
+            $required->setCheckedValue(!empty($property['is_required']));
             $property_id->setValue(str_replace('property', '', $property['id']));
             $property_fieldset_name = $property['id'];
         }

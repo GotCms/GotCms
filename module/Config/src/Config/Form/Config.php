@@ -59,7 +59,7 @@ class Config extends AbstractForm
 
         $is_offline = new Element\Checkbox('site_is_offline');
         $is_offline->setAttribute('label', 'Is offline')
-            ->setAttribute('checkedValue', '1');
+            ->setCheckedValue('1');
 
         $offline_document = new Element\Select('site_offline_document');
         $offline_document->setAttribute('label', 'Offline document');
