@@ -28,7 +28,8 @@
 namespace Gc\Datatype;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+    Gc\Component\IterableInterface,
+    Zend\Db\Sql\Select;
 /**
  * Collection of Datatype Model
  */
@@ -61,7 +62,10 @@ class Collection extends AbstractTable
      */
     private function setDatatypes()
     {
-        $rows = $this->select();
+        $rows = $this->select(function(Select $select)
+        {
+            $select->order('name');
+        });
         $datatypes = array();
         foreach($rows as $row)
         {
