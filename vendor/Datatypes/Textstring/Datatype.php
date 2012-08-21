@@ -48,7 +48,7 @@ class Datatype extends AbstractDatatype
     public function getEditor(PropertyModel $property)
     {
         $this->_property = $property;
-        if($this->_editor === null)
+        if($this->_editor === NULL)
         {
             $this->_editor = new Editor($this);
         }
@@ -62,7 +62,7 @@ class Datatype extends AbstractDatatype
      */
     public function getPrevalueEditor()
     {
-        if($this->_prevalueEditor === null)
+        if($this->_prevalueEditor === NULL)
         {
             $this->_prevalueEditor = new PrevalueEditor($this);
         }

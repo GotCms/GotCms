@@ -81,8 +81,8 @@
             previewMaxWidth:        80,
             previewMaxHeight:       80,
             url:                    '<?php echo $this->escapeJs($this->escapeHtml($this->uploadUrl)); ?>',
-            uploadTemplateId:       null,
-            downloadTemplateId:     null,
+            uploadTemplateId:       NULL,
+            downloadTemplateId:     NULL,
             uploadTemplate:         function (o)
             {
                 var rows = $();
@@ -192,7 +192,7 @@
             if(result && result.length)
             {
                 $(that).fileupload('option', 'done')
-                    .call(that, null, {result: result});
+                    .call(that, NULL, {result: result});
             }
         });
     });

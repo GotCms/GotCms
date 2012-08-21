@@ -134,7 +134,7 @@ class Editor extends AbstractEditor
                     $file_object->content = empty($file_data['content']) ? '' : $file_data['content'];
                 }
 
-                //$fileclass->error = 'null';
+                //$fileclass->error = 'NULL';
                 $file_object->thumbnail_url = str_replace(GC_APPLICATION_PATH . '/public', '', $file_class->getDirectory()) . '/' . $file_data['name'];
 
                 $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
