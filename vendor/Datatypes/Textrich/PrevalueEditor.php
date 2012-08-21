@@ -52,6 +52,11 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $parameters = $this->getConfig();
         $ckeditor = new CkEditor();
+        if(empty($parameters))
+        {
+            $parameters = array();
+        }
+
         $ckeditor->setParameters($parameters);
 
         return $this->addPath(__DIR__)->render('ckeditor-prevalue.phtml', array('textrich' => $ckeditor->getAllItems()));

@@ -76,7 +76,7 @@ abstract class AbstractPrevalueEditor extends Object
      * get configuration
      * @return void
      */
-    protected function getConfig()
+    public function getConfig()
     {
         if(empty($this->_config))
         {
@@ -91,7 +91,7 @@ abstract class AbstractPrevalueEditor extends Object
      * @param mixte $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
-    protected function setConfig($value)
+    public function setConfig($value)
     {
         $this->getDatatype()->setConfig($value);
         return $this;

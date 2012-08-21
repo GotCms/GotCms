@@ -95,10 +95,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
         {
             //Get datatypes
             $object = $this->_getDatatype($datatype_config['name']);
-            if(!empty($datatype_config['config']))
-            {
-                $object->getPrevalueEditor()->setConfig(serialize($datatype_config['config']));
-            }
+            //Force configuration
+            $object->getPrevalueEditor()->setConfig(empty($datatype_config['config']) ? NULL : serialize($datatype_config['config']));
 
             //Initiliaze prefix
             $prefix = 'datatypes['.$datatype_id.']';

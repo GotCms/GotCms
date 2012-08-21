@@ -84,7 +84,7 @@ abstract class AbstractEditor extends Object
      * Return property value
      * @return string
      */
-    protected function getValue()
+    public function getValue()
     {
         return $this->getProperty()->getValue();
     }
@@ -94,7 +94,7 @@ abstract class AbstractEditor extends Object
      * @param mixte $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
-    protected function setValue($value)
+    public function setValue($value)
     {
         $this->getProperty()->setValue($value);
 
@@ -120,7 +120,7 @@ abstract class AbstractEditor extends Object
      * Save property value
      * @return mixed
      */
-    protected function getConfig()
+    public function getConfig()
     {
         return @unserialize($this->getDatatype()->getConfig());
     }
@@ -130,7 +130,7 @@ abstract class AbstractEditor extends Object
      * @param mixte $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
-    protected function setConfig($value)
+    public function setConfig($value)
     {
         $this->getDatatype()->setParameters($value);
 
