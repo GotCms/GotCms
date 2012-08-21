@@ -111,7 +111,7 @@ abstract class AbstractForm extends Form
      * @static
      * @return void
      */
-    static function addContent(Fieldset $form, $elements)
+    static function addContent(Fieldset $form, $elements, $prefix = NULL)
     {
         if(empty($elements))
         {
@@ -122,15 +122,34 @@ abstract class AbstractForm extends Form
         {
             foreach($elements as $element)
             {
-                self::addContent($form, $element);
+                self::addContent($form, $element, $prefix);
             }
         }
         elseif($elements instanceof Element)
         {
+            if(!empty($prefix))
+            {
+                $id = $elements->getAttribute('id');
+                if(empty($id))
+                {
+                    $id = $elements->getAttribute('name');
+                }
+
+                $elements->setAttribute('id', $id . mt_rand());
+                $elements->setAttribute('name', $prefix.'['.$elements->getAttribute('name').']');
+            }
+
             $form->add($elements);
         }
         elseif(is_string($elements))
         {
+
+            if(!empty($prefix))
+            {
+                $elements = preg_replace('~name="(.*)"~iU', 'name="' . $prefix . '[$1]"', $elements);
+                $elements = preg_replace('~id="(.*)"~iU', 'id="${1}' . mt_rand() . '"', $elements);
+            }
+
             $hidden_element = new Element('hidden'.uniqid());
             $hidden_element->setAttribute('content', $elements);
             $form->add($hidden_element);

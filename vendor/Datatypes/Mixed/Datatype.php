@@ -24,45 +24,50 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Datatypes\Textarea;
+namespace Datatypes\Mixed;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype as AbstractDatatype,
+    Gc\Property\Model as PropertyModel;
 
 /**
- * Editor for Textarea datatype
+ * Manage Mixed datatype
  */
-class Editor extends AbstractEditor
+class Datatype extends AbstractDatatype
 {
     /**
-     * Save textarea editor
-     * @return void
+     * Datatype name
+     * @var string
      */
-    public function save()
+    protected $_name = 'mixed';
+
+    /**
+     * Retrieve editor
+     * @param PropertyModel $property
+     * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
+     */
+    public function getEditor(PropertyModel $property)
     {
-        $value = $this->getRequest()->getPost()->get($this->getName());
-        $this->setValue($value);
+        $this->_property = $property;
+        if($this->_editor === NULL)
+        {
+            $this->_editor = new Editor($this);
+        }
+
+        return $this->_editor;
     }
 
     /**
-     * Load textarea editor
-     * @return mixte
+     * Retrieve prevalue editor
+     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
-    public function load()
+    public function getPrevalueEditor()
     {
-        $config = $this->getConfig();
-        $textarea = new Element\Textarea($this->getName());
-        $textarea->setAttribute('label', $this->getProperty()->getName());
-        $textarea->setValue($this->getValue());
-
-        foreach($config as $key => $value)
+        if($this->_prevalueEditor === NULL)
         {
-            if(!empty($value))
-            {
-                $textarea->setAttribute($key, $value);
-            }
+            $this->_prevalueEditor = new PrevalueEditor($this);
         }
 
-        return $textarea;
+        return $this->_prevalueEditor;
     }
 }
+
