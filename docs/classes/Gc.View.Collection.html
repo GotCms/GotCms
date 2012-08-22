@@ -73,18 +73,12 @@ self::$_tables</span><pre>__construct()</pre></a></li>
 <li class="method public inherited"><a href="#execute" title="execute :: Execute query"><span class="description">Execute query</span><pre>execute()</pre></a></li>
 <li class="method public inherited"><a href="#fetchAll" title="fetchAll :: Fetch Row"><span class="description">Fetch Row</span><pre>fetchAll()</pre></a></li>
 <li class="method public inherited"><a href="#fetchRow" title="fetchRow :: Fetch Row"><span class="description">Fetch Row</span><pre>fetchRow()</pre></a></li>
-<li class="method public "><a href="#getChildren" title="getChildren :: (non-PHPdoc)"><span class="description">(non-PHPdoc)</span><pre>getChildren()</pre></a></li>
 <li class="method public inherited"><a href="#getData" title="getData :: Retrieves data from the object"><span class="description">Retrieves data from the object</span><pre>getData()</pre></a></li>
 <li class="method public "><a href="#getElements" title="getElements :: get all elements store in $_views_elements"><span class="description">get all elements store in $_views_elements</span><pre>getElements()</pre></a></li>
-<li class="method public "><a href="#getIcon" title="getIcon :: (non-PHPdoc)"><span class="description">(non-PHPdoc)</span><pre>getIcon()</pre></a></li>
-<li class="method public "><a href="#getId" title="getId :: (non-PHPdoc)"><span class="description">(non-PHPdoc)</span><pre>getId()</pre></a></li>
-<li class="method public "><a href="#getIterableId" title="getIterableId :: (non-PHPdoc)"><span class="description">(non-PHPdoc)</span><pre>getIterableId()</pre></a></li>
 <li class="method public inherited"><a href="#getLastInsertId" title="getLastInsertId :: Get last insert id"><span class="description">Get last insert id</span><pre>getLastInsertId()</pre></a></li>
-<li class="method public "><a href="#getName" title="getName :: (non-PHPdoc)"><span class="description">(non-PHPdoc)</span><pre>getName()</pre></a></li>
 <li class="method public inherited"><a href="#getOrigData" title="getOrigData :: Get object loaded data(original data)"><span class="description">Get object loaded data(original data)</span><pre>getOrigData()</pre></a></li>
-<li class="method public "><a href="#getParent" title="getParent :: (non-PHPdoc)"><span class="description">(non-PHPdoc)</span><pre>getParent()</pre></a></li>
 <li class="method public "><a href="#getSelect" title="getSelect :: Get array for input select"><span class="description">Get array for input select</span><pre>getSelect()</pre></a></li>
-<li class="method public "><a href="#getUrl" title="getUrl :: (non-PHPdoc)"><span class="description">(non-PHPdoc)</span><pre>getUrl()</pre></a></li>
+<li class="method public "><a href="#getViews" title="getViews :: Get views"><span class="description">Get views</span><pre>getViews()</pre></a></li>
 <li class="method public inherited"><a href="#hasData" title="hasData :: If $key is empty, checks whether there's any data in the object
 Otherwise checks if the specified attribute is set."><span class="description">If $key is empty, checks whether there's any data in the object
 Otherwise checks if the specified attribute is set.</span><pre>hasData()</pre></a></li>
@@ -108,8 +102,6 @@ Otherwise checks if the specified attribute is set.</span><pre>hasData()</pre></
 <li class="method protected inherited"><a href="#_getData" title="_getData :: Get value from _data array without parse key"><span class="description">Get value from _data array without parse key</span><pre>_getData()</pre></a></li>
 <li class="method protected inherited"><a href="#_underscore" title="_underscore :: Converts field names for setters and geters"><span class="description">Converts field names for setters and geters</span><pre>_underscore()</pre></a></li>
 <li class="method protected inherited"><a href="#setId" title="setId :: Set Id"><span class="description">Set Id</span><pre>setId()</pre></a></li>
-<li class="nav-header private">» Private</li>
-<li class="method private "><a href="#getViews" title="getViews :: Get views"><span class="description">Get views</span><pre>getViews()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
 <li class="property public inherited"><a href="#%24_tables" title="$_tables :: Zend_Db_Table collection"><span class="description">Zend_Db_Table collection</span><pre>$_tables</pre></a></li>
@@ -368,20 +360,6 @@ self::$_tables</h2>
 </div>
 </div></div>
 </div>
-<a name="getChildren" id="getChildren"></a><div class="element clickable method public getChildren" data-toggle="collapse" data-target=".getChildren .collapse">
-<h2>(non-PHPdoc)</h2>
-<pre>getChildren() : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>see</th>
-<td>\Gc\View\include</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
 <a name="getData" id="getData"></a><div class="element clickable method public getData" data-toggle="collapse" data-target=".getData .collapse">
 <h2>Retrieves data from the object</h2>
 <pre>getData(string $key, string | int $index) : mixed</pre>
@@ -425,48 +403,6 @@ and retrieve corresponding member.</p>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="getIcon" id="getIcon"></a><div class="element clickable method public getIcon" data-toggle="collapse" data-target=".getIcon .collapse">
-<h2>(non-PHPdoc)</h2>
-<pre>getIcon() : string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>see</th>
-<td>\Gc\View\include</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
-</div></div>
-</div>
-<a name="getId" id="getId"></a><div class="element clickable method public getId" data-toggle="collapse" data-target=".getId .collapse">
-<h2>(non-PHPdoc)</h2>
-<pre>getId() : integer</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>see</th>
-<td>\Gc\View\include</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>integer</code></div>
-</div></div>
-</div>
-<a name="getIterableId" id="getIterableId"></a><div class="element clickable method public getIterableId" data-toggle="collapse" data-target=".getIterableId .collapse">
-<h2>(non-PHPdoc)</h2>
-<pre>getIterableId() : string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>see</th>
-<td>\Gc\View\include</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
-</div></div>
-</div>
 <a name="getLastInsertId" id="getLastInsertId"></a><div class="element clickable method public getLastInsertId" data-toggle="collapse" data-target=".getLastInsertId .collapse">
 <h2>Get last insert id</h2>
 <pre>getLastInsertId() : integer</pre>
@@ -479,20 +415,6 @@ and retrieve corresponding member.</p>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>integer</code></div>
-</div></div>
-</div>
-<a name="getName" id="getName"></a><div class="element clickable method public getName" data-toggle="collapse" data-target=".getName .collapse">
-<h2>(non-PHPdoc)</h2>
-<pre>getName() : string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>see</th>
-<td>\Gc\View\include</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <a name="getOrigData" id="getOrigData"></a><div class="element clickable method public getOrigData" data-toggle="collapse" data-target=".getOrigData .collapse">
@@ -520,20 +442,6 @@ and retrieve corresponding member.</p>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
-<a name="getParent" id="getParent"></a><div class="element clickable method public getParent" data-toggle="collapse" data-target=".getParent .collapse">
-<h2>(non-PHPdoc)</h2>
-<pre>getParent() : Object</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>see</th>
-<td>\Gc\View\include</td>
-</tr></table>
-<h3>Returns</h3>
-<div class="subelement response"><code>Object</code></div>
-</div></div>
-</div>
 <a name="getSelect" id="getSelect"></a><div class="element clickable method public getSelect" data-toggle="collapse" data-target=".getSelect .collapse">
 <h2>Get array for input select</h2>
 <pre>getSelect() : array</pre>
@@ -544,18 +452,18 @@ and retrieve corresponding member.</p>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="getUrl" id="getUrl"></a><div class="element clickable method public getUrl" data-toggle="collapse" data-target=".getUrl .collapse">
-<h2>(non-PHPdoc)</h2>
-<pre>getUrl() : string</pre>
+<a name="getViews" id="getViews"></a><div class="element clickable method public getViews" data-toggle="collapse" data-target=".getViews .collapse">
+<h2>Get views</h2>
+<pre>getViews(boolean $force_reload) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
-<table class="table table-bordered"><tr>
-<th>see</th>
-<td>\Gc\View\include</td>
-</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$force_reload</h4>
+<code>boolean</code><p>to initiliaze views</p></div>
 <h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a name="hasData" id="hasData"></a><div class="element clickable method public hasData" data-toggle="collapse" data-target=".hasData .collapse">
@@ -1081,20 +989,6 @@ Uses cache to eliminate unneccessary preg_replace</p>
 <div class="subelement response"><code><a href="../classes/Gc.Core.Object.html">\Gc\Core\Object</a></code></div>
 </div></div>
 </div>
-<a name="getViews" id="getViews"></a><div class="element clickable method private getViews" data-toggle="collapse" data-target=".getViews .collapse">
-<h2>Get views</h2>
-<pre>getViews(boolean $force_reload) : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$force_reload</h4>
-<code>boolean</code><p>to initiliaze views</p></div>
-<h3>Returns</h3>
-<div class="subelement response"><code>array</code></div>
-</div></div>
-</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a name="%24_tables" id="$_tables"> </a><div class="element clickable property public $_tables" data-toggle="collapse" data-target=".$_tables .collapse">
@@ -1164,7 +1058,7 @@ Uses cache to eliminate unneccessary preg_replace</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-08-03T00:06:22+02:00.<br></footer></div>
+            generated on 2012-08-22T10:43:11+02:00.<br></footer></div>
 </div>
 </body>
 </html>

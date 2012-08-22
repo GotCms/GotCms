@@ -108,6 +108,7 @@ abstract class AbstractForm extends Form
      * Add content to form
      * @param Fieldset $form
      * @param mixed $elements
+     * @param string $prefix add belong to for each elements
      * @static
      * @return void
      */

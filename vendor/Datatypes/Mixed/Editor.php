@@ -112,6 +112,11 @@ class Editor extends AbstractEditor
         return $this->addPath(__DIR__)->render('mixed-editor.phtml', array('datatypeName' => $this->getProperty()->getName(), 'datatypes' => $datatypes));
     }
 
+    /**
+     * Retrieve datatypes
+     * @param string $name
+     * @return \Gc\Datatype\AbstractDatatype
+     */
     protected function _getDatatype($name)
     {
         $class = 'Datatypes\\'.$name.'\Datatype';

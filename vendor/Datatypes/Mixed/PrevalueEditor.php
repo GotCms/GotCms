@@ -126,6 +126,11 @@ class PrevalueEditor extends AbstractPrevalueEditor
         return $this->addPath(__DIR__)->render('mixed-prevalue.phtml', $data);
     }
 
+    /**
+     * Retrieve datatypes
+     * @param string $name
+     * @return \Gc\Datatype\AbstractDatatype
+     */
     protected function _getDatatype($name)
     {
         $class = 'Datatypes\\'.$name.'\Datatype';

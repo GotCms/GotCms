@@ -92,6 +92,20 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /**
+     * Return available Documents
+     * @return array
+     */
+    public function getAvailableDocuments()
+    {
+        $rows = $this->select(function(Select $select)
+        {
+            $select->where->equalTo('status', Model::STATUS_ENABLE);
+        });
+
+        return $rows->toArray();
+    }
+
+    /**
      * Return array for input select
      * @return array
      */

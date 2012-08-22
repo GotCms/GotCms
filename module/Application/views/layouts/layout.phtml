@@ -52,11 +52,11 @@
 
     <div id="main">
 
-        <div id="menu">
-            <?php if($this->module !== NULL): ?>
+        <?php if($this->module !== NULL): ?>
+            <div id="menu">
                 <?php echo $this->partial($this->module . '-menu.phtml', array('treeview' => $this->treeview)); ?>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
 
         <div id="content">
             <?php echo $this->partial('messages.phtml', array('messages' => $this->flashMessages)); ?>
