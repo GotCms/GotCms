@@ -158,8 +158,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-     * Initiliaze from url
+     * Initiliaze from url and parent
      * @param string $url_key
+     * @param mixed $parent_id
      * @return \Gc\Document\Model
      */
     static function fromUrlKey($url_key, $parent_id = NULL)

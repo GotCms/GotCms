@@ -73,7 +73,7 @@ self::$_tables</span><pre>__construct()</pre></a></li>
 <li class="method public inherited"><a href="#fetchRow" title="fetchRow :: Fetch Row"><span class="description">Fetch Row</span><pre>fetchRow()</pre></a></li>
 <li class="method public "><a href="#fromArray" title="fromArray :: Initialize document from array"><span class="description">Initialize document from array</span><pre>fromArray()</pre></a></li>
 <li class="method public "><a href="#fromId" title="fromId :: Initiliaze document from id"><span class="description">Initiliaze document from id</span><pre>fromId()</pre></a></li>
-<li class="method public "><a href="#fromUrlKey" title="fromUrlKey :: Initiliaze from url"><span class="description">Initiliaze from url</span><pre>fromUrlKey()</pre></a></li>
+<li class="method public "><a href="#fromUrlKey" title="fromUrlKey :: Initiliaze from url and parent"><span class="description">Initiliaze from url and parent</span><pre>fromUrlKey()</pre></a></li>
 <li class="method public "><a href="#getChildren" title="getChildren :: (non-PHPdoc)"><span class="description">(non-PHPdoc)</span><pre>getChildren()</pre></a></li>
 <li class="method public inherited"><a href="#getData" title="getData :: Retrieves data from the object"><span class="description">Retrieves data from the object</span><pre>getData()</pre></a></li>
 <li class="method public "><a href="#getDocumentType" title="getDocumentType :: Get Document type"><span class="description">Get Document type</span><pre>getDocumentType()</pre></a></li>
@@ -380,8 +380,8 @@ self::$_tables</h2>
 </div></div>
 </div>
 <a name="fromUrlKey" id="fromUrlKey"></a><div class="element clickable method public fromUrlKey" data-toggle="collapse" data-target=".fromUrlKey .collapse">
-<h2>Initiliaze from url</h2>
-<pre>fromUrlKey(string $url_key) : <a href="../classes/Gc.Document.Model.html">\Gc\Document\Model</a></pre>
+<h2>Initiliaze from url and parent</h2>
+<pre>fromUrlKey(string $url_key, mixed $parent_id) : <a href="../classes/Gc.Document.Model.html">\Gc\Document\Model</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
@@ -389,6 +389,10 @@ self::$_tables</h2>
 <div class="subelement argument">
 <h4>$url_key</h4>
 <code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$parent_id</h4>
+<code>mixed</code>
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code><a href="../classes/Gc.Document.Model.html">\Gc\Document\Model</a></code></div>
@@ -1221,7 +1225,7 @@ Uses cache to eliminate unneccessary preg_replace</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-08-22T10:43:11+02:00.<br></footer></div>
+            generated on 2012-08-25T01:55:16+02:00.<br></footer></div>
 </div>
 </body>
 </html>
