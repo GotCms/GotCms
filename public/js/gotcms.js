@@ -617,6 +617,7 @@ var Gc = (function($)
                 placeholder: 'sortable-placeholder',
                 helper: 'clone',
                 handle: 'h3',
+                tolerance: 'pointer',
                 opacity: 0.4,
                 start : function(e, ui)
                 {
