@@ -26,12 +26,13 @@
 
 namespace Admin\Controller;
 
-use Gc\Mvc\Controller\Action;
+use Gc\Mvc\Controller\Action,
+    Gc\Core\Config;
 
 class IndexController extends Action
 {
     /**
-     *
+     * Display dashboard
      * @return void
      */
     public function indexAction()
@@ -56,7 +57,35 @@ class IndexController extends Action
         );
 
         $data['contentStats'] = $content_stats;
+        $widgets = @unserialize(Config::getValue('dashboard-widgets'));
+        $data['dashboardSortable'] = !empty($widgets['sortable']) ? \Zend\Json\Json::encode($widgets['sortable']) : '{}';
+        $data['dashboardWelcome'] = !empty($widgets['welcome']);
 
         return $data;
+    }
+
+    public function saveDashboardAction()
+    {
+        $params = $this->getRequest()->getPost()->toArray();
+
+        $config = @unserialize(Config::getValue('dashboard-widgets'));
+
+        if(empty($config))
+        {
+            $config = array();
+        }
+
+        if(!empty($params['dashboard']))
+        {
+            $config['welcome'] = FALSE;
+        }
+        else
+        {
+            $config['sortable'] = $params;
+        }
+
+        Config::setValue('dashboard-widgets', serialize($config));
+
+        return $this->_returnJson(array('success' => TRUE));
     }
 }

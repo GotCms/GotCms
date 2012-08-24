@@ -606,13 +606,54 @@ var Gc = (function($)
         {
             var elf = $('#elfinder').elfinder({
                 lang: $language,
-                url : $connector_url  // connector URL (REQUIRED)
+                url : $connector_url
             }).elfinder('instance');
         },
-        initDashBoard: function()
+        initDashBoard: function($object, $update_url)
         {
+            $this = this;
+            $foo = $('.widget-column').sortable({
+                connectWith: '.widget-column',
+                start : function(e, ui)
+                {
+                    $dashboardNbUpdate = 0;
+                },
+                update: function(e, ui)
+                {
+                    $object[$(this).attr('id')] = $(this).sortable("toArray").join();
+                    $dashboardNbUpdate++;
+                    if($dashboardNbUpdate == 2)
+                    {
+                        $.ajax({
+                            url: $update_url,
+                            type: 'post',
+                            dataType: 'json',
+                            data: $object
+                        });
+                    }
+                }
+            });
+
+            if(!this.isEmpty($object)) {
+                $.each($object, function(sortable_id, elements)
+                {
+                    $(elements.split(',')).each(function (i, id) {
+                        $("#" + id).appendTo($('#'+sortable_id));
+                    });
+                });
+            }
+
+            $foo.sortable('options');
+
             $('.dashboard-close').on('click', function()
             {
+                $.ajax({
+                    url: $update_url,
+                    type: 'post',
+                    dataType: 'json',
+                    data: {dashboard: true}
+                });
+
                 $('#dashboard').remove();
                 return false;
             });

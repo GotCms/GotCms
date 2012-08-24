@@ -221,7 +221,7 @@ footer a:hover {text-decoration:underline;}
 .dashboard { border-color: #DFDFDF; }
 .dashboard p { color: #777777; }
 .dashboard h3 { text-shadow: 1px 1px 1px #FFFFFF; }
-.widget-colum {width:49%;}
+.widget-column {width:49%;padding: 5px;}
 .widget-box {background-color: #F5F5F5;background-image: -moz-linear-gradient(center top , #F9F9F9, #F5F5F5);border-color: #C2C2C2;border-radius: 3px 3px 3px 3px;min-width: 255px;position: relative;border-style: solid;border-width: 1px;line-height: 1;margin-bottom: 20px;padding: 0;}
 .widget-box h3 {color: #FFFFFF;border-bottom-color: #DFDFDF;text-shadow: 0 1px 0 #FFFFFF;background-color: #F1F1F1;background-image: -moz-linear-gradient(center top , #656565, #000000);}
 .widget-box .inside { font-size: 12px; }

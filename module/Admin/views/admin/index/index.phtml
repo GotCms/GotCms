@@ -27,7 +27,7 @@
 
 ?>
 
-<div class="dashboard" id="dashboard">
+<div class="dashboard<?php if(empty($this->dashboardWelcome)): ?> hide<?php endif; ?>" id="dashboard">
     <a href="#close" class="dashboard-close floatR"><?php echo $this->escapeHtml($this->translate('Close')); ?></a>
 
     <div class="dashboard-content">
@@ -43,8 +43,8 @@
     </div>
 </div>
 
-<div class="widget-colum floatL">
-    <div class="widget-box">
+<div class="widget-column floatL" id="sortable1">
+    <div class="widget-box" id="fast-links">
         <h3 class="header">
             <span><?php echo $this->escapeHtml($this->translate('Fast links')); ?></span>
         </h3>
@@ -60,8 +60,8 @@
     </div>
 </div>
 
-<div class="widget-colum floatR">
-    <div class="widget-box">
+<div class="widget-column floatR" id="sortable2">
+    <div class="widget-box" id="stats">
         <h3 class="header">
             <span><?php echo $this->escapeHtml($this->translate('Stats')); ?></span>
         </h3>
@@ -98,5 +98,5 @@
 </div>
 
 <script type="text/javascript">
-    Gc.initDashBoard();
+    Gc.initDashBoard($.parseJSON('<?php echo $this->escapeJs($this->dashboardSortable); ?>'), '<?php echo $this->escapeJs($this->url('dashboardSave')); ?>');
 </script>
