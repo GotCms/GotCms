@@ -232,3 +232,4 @@ footer a:hover {text-decoration:underline;}
 .widget-box .version { padding: 6px 10px 12px; clear: both; }
 .widget-box a.button { float: right; clear: right; position: relative; top: -5px; }
 .widget-box .header {border-top-left-radius: 3px;border-top-right-radius: 3px;cursor: move;margin:0;padding:12px;}
+.sortable-placeholder{border-width:1px;border-style:dashed;margin-bottom:20px;}

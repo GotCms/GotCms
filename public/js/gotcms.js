@@ -614,8 +614,13 @@ var Gc = (function($)
             $this = this;
             $foo = $('.widget-column').sortable({
                 connectWith: '.widget-column',
+                placeholder: 'sortable-placeholder',
+                helper: 'clone',
+                handle: 'h3',
+                opacity: 0.4,
                 start : function(e, ui)
                 {
+                    $('.sortable-placeholder').css('height', $(ui.item).height());
                     $dashboardNbUpdate = 0;
                 },
                 update: function(e, ui)
