@@ -143,10 +143,12 @@ class IndexController extends Action
                     }
 
                     $view_model->setVariable($property->getIdentifier(), $value);
+                    $this->layout()->setVariable($property->getIdentifier(), $value);
                 }
             }
 
             $view_model->setVariable('currentDocument', $document);
+            $this->layout()->setVariable('currentDocument', $document);
 
             //Set view from database
             $view = View\Model::fromId($document->getViewId());
