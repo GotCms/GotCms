@@ -619,16 +619,22 @@ var Gc = (function($)
                 handle: 'h3',
                 tolerance: 'pointer',
                 opacity: 0.4,
+                forcePlaceholderSize: true,
                 start : function(e, ui)
                 {
-                    $('.sortable-placeholder').css('height', $(ui.item).height());
                     $dashboardNbUpdate = 0;
+                },
+                receive: function(e, ui)
+                {
+                    $('.widget-column').sortable('sortupdate');
                 },
                 update: function(e, ui)
                 {
-                    $object[$(this).attr('id')] = $(this).sortable("toArray").join();
+                    $string = $(this).sortable('toArray').join();
+                    $not_connected = $object[$(this).attr('id')].length == $string.length;
+                    $object[$(this).attr('id')] = $string;
                     $dashboardNbUpdate++;
-                    if($dashboardNbUpdate == 2)
+                    if($dashboardNbUpdate == 2 || $not_connected)
                     {
                         $.ajax({
                             url: $update_url,
