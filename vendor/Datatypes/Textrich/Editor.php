@@ -56,12 +56,19 @@ class Editor extends AbstractEditor
 
         $parameters = $this->getConfig();
         $ckeditor = new CkEditor();
+
+        if(empty($parameters) or !is_arary($parameters))
+        {
+            $parameters = array();
+        }
+
         $ckeditor->setParameters($parameters);
 
         $id = 'textrich'.$this->_property->getId();
         $textrich = new Element\Textarea($this->getName());
         $textrich->setAttribute('label', $this->_property->getName());
         $textrich->setAttribute('id', $id);
+        $textrich->setAttribute('class', $id);
         $textrich->setValue($this->_property->getValue());
 
         $script = '<script type="text/javascript">
@@ -72,7 +79,7 @@ class Editor extends AbstractEditor
                     toolbar: '.$ckeditor->getToolbarAsJs().'
                 };
 
-                $("#'.$id.'").ckeditor(config);
+                $(".'.$id.'").ckeditor(config);
             });
         </script>';
 

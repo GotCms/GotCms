@@ -45,6 +45,10 @@ class CkEditor extends Object
         {
             $this->setToolbarItems($parameters['toolbar-items']);
         }
+        else
+        {
+            $this->setToolbarItems(array());
+        }
 
         return $this;
     }
