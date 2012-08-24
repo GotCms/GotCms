@@ -37,19 +37,22 @@ use Gc\Document\Model as DocumentModel,
 
 class Document extends AbstractForm
 {
+    protected $parentId = NULL;
+    protected $documentId = NULL;
+
     public function init()
     {
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter = $inputFilterFactory->createInputFilter(array(
-            'name' => array(
-                'name' => 'name',
+            'document-name' => array(
+                'name' => 'document-name',
                 'required'=> TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
             ),
-            'url_key' => array(
-                'name' => 'url_key',
+            'document-url_key' => array(
+                'name' => 'document-url_key',
                 'required'=> FALSE,
                 'allow_empty' => TRUE,
                 'validators' => array(
@@ -68,12 +71,12 @@ class Document extends AbstractForm
 
         $this->setInputFilter($inputFilter);
 
-        $name = new Element\Text('name');
+        $name = new Element\Text('document-name');
         $name->setAttribute('label', 'Name')
             ->setAttribute('id', 'name')
             ->setAttribute('class', 'input-text');
 
-        $url_key = new Element\Text('url_key');
+        $url_key = new Element\Text('document-url_key');
         $url_key->setAttribute('label', 'Url key')
             ->setAttribute('id', 'url_key')
             ->setAttribute('class', 'input-text');
@@ -92,12 +95,49 @@ class Document extends AbstractForm
         $this->add($parent);
     }
 
+    /**
+     * Check parent validation
+     * @return boolean
+     */
+    public function isValid()
+    {
+        $parent = $this->get('parent');
+        if(!empty($parent))
+        {
+            $this->parentId = $parent->getValue();
+        }
+
+        $condition = sprintf('parent_id = %d', $this->parentId);
+        if(!empty($this->documentId))
+        {
+            $condition .= sprintf(' AND id != %d', $this->documentId);
+        }
+
+        $input_filter = $this->getInputFilter();
+        $validators = $input_filter->get('document-url_key')->getValidatorChain()->getValidators();
+
+        foreach($validators as $validator)
+        {
+            if($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists)
+            {
+                $validator['instance']->setExclude($condition);
+            }
+        }
+
+        return parent::isValid();
+    }
+
+    /**
+     * Load document form from DocumentModel
+     * @param DocumentModel $document
+     * @return void
+     */
     public function load(DocumentModel $document)
     {
-        $this->get('name')->setValue($document->getName());
-        $this->get('url_key')->setValue($document->getUrlKey());
+        $this->get('document-name')->setValue($document->getName());
+        $this->get('document-url_key')->setValue($document->getUrlKey());
 
-        $status = new Element\Checkbox('status');
+        $status = new Element\Checkbox('document-status');
         $status->setAttribute('label', 'Publish')
             ->setCheckedValue(DocumentModel::STATUS_ENABLE)
             ->setAttribute('id', 'status')
@@ -105,7 +145,7 @@ class Document extends AbstractForm
 
         $this->add($status);
 
-        $show_in_nav = new Element\Checkbox('show_in_nav');
+        $show_in_nav = new Element\Checkbox('document-show_in_nav');
         $show_in_nav->setAttribute('label', 'Show in nav')
             ->setValue($document->showInNav())
             ->setAttribute('id', 'show_in_nav')
@@ -114,7 +154,7 @@ class Document extends AbstractForm
         $this->add($show_in_nav);
 
         $views_collection = new View\Collection();
-        $view = new Element\Select('view');
+        $view = new Element\Select('document-view');
         $view->setAttribute('options', $views_collection->getSelect())
             ->setValue((string)$document->getViewId())
             ->setAttribute('id', 'view')
@@ -123,7 +163,7 @@ class Document extends AbstractForm
         $this->add($view);
 
         $layouts_collection = new Layout\Collection();
-        $layout = new Element\Select('layout');
+        $layout = new Element\Select('document-layout');
         $layout->setAttribute('options', $layouts_collection->getSelect())
             ->setValue((string)$document->getLayoutId())
             ->setAttribute('id', 'layout')
@@ -132,6 +172,8 @@ class Document extends AbstractForm
         $this->add($layout);
         $this->remove('document_type');
         $this->remove('parent');
+        $this->parentId = $document->getParentId();
+        $this->documentId = $document->getId();
 
         $this->loadValues($document);
     }

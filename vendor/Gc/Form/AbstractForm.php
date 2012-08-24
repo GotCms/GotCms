@@ -88,7 +88,7 @@ abstract class AbstractForm extends Form
 
                 if($input_filter->has($element_name))
                 {
-                    $validators = $validator = $input_filter->get($element_name)->getValidatorChain()->getValidators();
+                    $validators = $input_filter->get($element_name)->getValidatorChain()->getValidators();
 
                     foreach($validators as $validator)
                     {

@@ -72,13 +72,14 @@ class IndexController extends Action
             $key = array();
             $document = NULL;
             $has_document = FALSE;
+            $parent_id = 0;
 
             foreach($explode_path as $url_key)
             {
                 $document_tmp = NULL;
                 if($has_document === FALSE)
                 {
-                    $document_tmp = Document\Model::fromUrlKey($url_key);
+                    $document_tmp = Document\Model::fromUrlKey($url_key, $parent_id);
                 }
 
                 if((is_array($children) and !empty($children) and !in_array($document_tmp, $children) and $children !== NULL) or $document_tmp === NULL)
@@ -90,6 +91,12 @@ class IndexController extends Action
                     $document = $document_tmp;
                     if(!empty($document_tmp))
                     {
+                        if(!$document_tmp->isPublished())
+                        {
+                            break;
+                        }
+
+                        $parent_id = $document->getId();
                         $children = $document_tmp->getChildren();
                     }
                 }

@@ -107,8 +107,8 @@ class DocumentController extends Action
             }
             else
             {
-                $document_name = $document_form->getValue('name');
-                $document_url_key = $document_form->getValue('url_key');
+                $document_name = $document_form->getValue('document-name');
+                $document_url_key = $document_form->getValue('document-url_key');
                 $document_type_id = $document_form->getValue('document_type');
                 $parent_id = $document_form->getValue('parent');
                 $document = new DocumentModel();
@@ -195,12 +195,12 @@ class DocumentController extends Action
                 $has_error = FALSE;
                 $document_vars = $this->getRequest()->getPost()->toArray();
                 $old_url_key = $document->getUrlKey();
-                $document->setName(empty($document_vars['name']) ? $document->getName() : $document_vars['name']);
-                $document->setStatus(empty($document_vars['status']) ? DocumentModel::STATUS_DISABLE : DocumentModel::STATUS_ENABLE);
-                $document->showInNav(empty($document_vars['show_in_nav']) ? FALSE : $document_vars['show_in_nav']);
-                $document->setLayoutId(empty($document_vars['layout']) ? FALSE : $document_vars['layout']);
-                $document->setViewId(empty($document_vars['view']) ? $document->getViewId() : $document_vars['view']);
-                $document->setUrlKey(empty($document_vars['url_key']) ? '' : $document_vars['url_key']);
+                $document->setName(empty($document_vars['document-name']) ? $document->getName() : $document_vars['document-name']);
+                $document->setStatus(empty($document_vars['document-status']) ? DocumentModel::STATUS_DISABLE : DocumentModel::STATUS_ENABLE);
+                $document->showInNav(empty($document_vars['document-show_in_nav']) ? FALSE : $document_vars['document-show_in_nav']);
+                $document->setLayoutId(empty($document_vars['document-layout']) ? FALSE : $document_vars['document-layout']);
+                $document->setViewId(empty($document_vars['document-view']) ? $document->getViewId() : $document_vars['document-view']);
+                $document->setUrlKey(empty($document_vars['document-url_key']) ? '' : $document_vars['document-url_key']);
             }
 
             $tabs = $this->_loadTabs($document_type_id);
@@ -348,6 +348,12 @@ class DocumentController extends Action
                 return $this->_returnJson(array('success' => FALSE));
             }
 
+            $search_document = DocumentModel::fromUrlKey($document->getUrlKey(), $parent_id);
+            if(!empty($search_document))
+            {
+                return $this->_returnJson(array('success' => FALSE));
+            }
+
             $document->setParentId($parent_id);
             $document->save();
             unset($session['document-cut']);
@@ -355,6 +361,13 @@ class DocumentController extends Action
         }
         elseif(!empty($session['document-copy']))
         {
+            $url_key = $this->getRequest()->getQuery('url_key');
+            $search_document = DocumentModel::fromUrlKey($url_key, $parent_id);
+            if(!empty($search_document))
+            {
+                return $this->_returnJson(array('success' => FALSE));
+            }
+
             $document = DocumentModel::fromid($session['document-copy']);
             $copy_document = new DocumentModel();
             $copy_document_properties =  new Property\Collection();
@@ -364,7 +377,7 @@ class DocumentController extends Action
             $copy_document->setId(NULL);
             $copy_document->setParentId($parent_id);
             $copy_document->setName($this->getRequest()->getQuery('name'));
-            $copy_document->setUrlKey($this->getRequest()->getQuery('url_key'));
+            $copy_document->setUrlKey($url_key);
             $copy_document->save();
 
             foreach($copy_document_properties->getProperties() as $property)

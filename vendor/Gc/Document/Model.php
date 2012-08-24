@@ -162,10 +162,16 @@ class Model extends AbstractTable implements IterableInterface
      * @param string $url_key
      * @return \Gc\Document\Model
      */
-    static function fromUrlKey($url_key)
+    static function fromUrlKey($url_key, $parent_id = NULL)
     {
         $document_table = new Model();
-        $rowset = $document_table->select(array('url_key' => $url_key));
+        $sql_data = array('url_key' => $url_key);
+        if(!empty($parent_id))
+        {
+            $sql_data['parent_id'] = $parent_id;
+        }
+
+        $rowset = $document_table->select($sql_data);
         $row = $rowset->current();
         if(!empty($row))
         {
