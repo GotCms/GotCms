@@ -148,13 +148,14 @@ class Module
                 {
                     foreach(glob(realpath(__DIR__.'/../../../').'/'.$path, GLOB_BRACE) as $filename)
                     {
-                        $config = include_once($filename);
+                        $config += include_once($filename);
                     }
                 }
 
-                if(!empty($config))
+                if(!empty($config['db']))
                 {
                     $db_adapter = new DbAdapter($config['db']);
+
                     \Gc\Registry::set('Configuration', $config);
                     \Gc\Registry::set('Db', $db_adapter);
                     \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);

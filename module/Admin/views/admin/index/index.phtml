@@ -27,4 +27,76 @@
 
 ?>
 
+<div class="dashboard" id="dashboard">
+    <a href="#close" class="dashboard-close floatR"><?php echo $this->escapeHtml($this->translate('Close')); ?></a>
 
+    <div class="dashboard-content">
+        <h3><?php echo $this->escapeHtml($this->translate('Welcome on your new website GotCms!')); ?></h3>
+        <p class="about-description"><?php echo $this->escapeHtml($this->translate('Introduction')); ?></p>
+        <div class="dashboard-column-container">
+
+            <p class="dashboard-dismiss">
+                <?php echo $this->escapeHtml($this->translate('You know what you do?')); ?>
+                <a href="#close" class="dashboard-close"><?php echo $this->escapeHtml($this->translate('Close message.')); ?></a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="widget-colum floatL">
+    <div class="widget-box">
+        <h3 class="header">
+            <span><?php echo $this->escapeHtml($this->translate('Fast links')); ?></span>
+        </h3>
+        <div class="inside">
+            <ul>
+                <li><a href="<?php echo $this->url('documentCreate'); ?>"><?php echo $this->escapeHtml($this->translate('Create document')); ?></a></li>
+                <li><a href="<?php echo $this->url('userList'); ?>"><?php echo $this->escapeHtml($this->translate('User list')); ?></a></li>
+                <li><a href="<?php echo $this->url('configGeneral'); ?>"><?php echo $this->escapeHtml($this->translate('General configuration')); ?></a></li>
+                <li><a href="<?php echo $this->url('translationCreate'); ?>"><?php echo $this->escapeHtml($this->translate('Add translation')); ?></a></li>
+                <li><a href="<?php echo $this->url('media'); ?>"><?php echo $this->escapeHtml($this->translate('File manager')); ?></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="widget-colum floatR">
+    <div class="widget-box">
+        <h3 class="header">
+            <span><?php echo $this->escapeHtml($this->translate('Stats')); ?></span>
+        </h3>
+        <div class="inside">
+
+            <div class="table floatL">
+                <p class="sub"><?php echo $this->escapeHtml($this->translate('Content')); ?></p>
+                <table>
+                    <tbody>
+                        <?php foreach($this->contentStats as $stats): ?>
+                            <tr>
+                                <td class="first">
+                                    <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $stats['count']; ?></a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $this->escapeHtml($this->translate($stats['label'])); ?></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="version">
+                <span>
+                    <?php echo $this->escapeHtml(sprintf($this->translate('You use GotCms %s'), $this->version)); ?>
+                    <?php if(!$this->versionIsLatest): ?>
+                        <a class="button" href="https://github.com/PierreRambaud/GotCms"><?php echo $this->escapeHtml(sprintf($this->translate('Update to GotCms %s'), $this->versionLatest)); ?></a>
+                    <?php endif; ?>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    Gc.initDashBoard();
+</script>

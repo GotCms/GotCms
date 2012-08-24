@@ -140,6 +140,7 @@ class Action extends AbstractActionController
         }
 
         $this->layout()->module = strtolower($module);
+        $this->layout()->version = \Gc\Version::VERSION;
 
         $this->useFlashMessenger(FALSE);
         /**

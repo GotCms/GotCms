@@ -608,6 +608,14 @@ var Gc = (function($)
                 lang: $language,
                 url : $connector_url  // connector URL (REQUIRED)
             }).elfinder('instance');
+        },
+        initDashBoard: function()
+        {
+            $('.dashboard-close').on('click', function()
+            {
+                $('#dashboard').remove();
+                return false;
+            });
         }
     };
 })(jQuery);
