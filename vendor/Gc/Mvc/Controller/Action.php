@@ -143,38 +143,41 @@ class Action extends AbstractActionController
         $this->layout()->version = \Gc\Version::VERSION;
 
         $this->useFlashMessenger(FALSE);
-        /**
-         * Prepare all resources
-         */
-        $language = preg_replace('~(.*)_.*~', '$1', \Gc\Registry::get('Translator')->getLocale());
-        $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
-        $headscript = $helper_broker->get('HeadScript');
-        $headscript
-            ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
-            ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
-            ->appendFile('/js/plugins.js', 'text/javascript')
-            ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
-            ->appendFile('/js/libs/codemirror/lib/codemirror.js', 'text/javascript')
-            ->appendFile('/js/libs/codemirror/mode/xml/xml.js', 'text/javascript')
-            ->appendFile('/js/libs/codemirror/mode/javascript/javascript.js', 'text/javascript')
-            ->appendFile('/js/libs/codemirror/mode/css/css.js', 'text/javascript')
-            ->appendFile('/js/libs/codemirror/mode/clike/clike.js', 'text/javascript')
-            ->appendFile('/js/libs/codemirror/mode/php/php.js', 'text/javascript')
-            ->appendFile('/js/libs/jquery.jstree.js', 'text/javascript')
-            ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
-            ->appendFile('/js/libs/elfinder.min.js', 'text/javascript')
-            ->appendFile(sprintf('/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript')
-            ->appendFile('/js/generic-classes.js', 'text/javascript')
-            ->appendFile('/js/gotcms.js', 'text/javascript');
+        if(!in_array($route_name, $this->_installerRoutes) and !in_array($route_name, array('userLogin', 'userForgotPassword', 'renderWebsite')))
+        {
+            /**
+             * Prepare all resources
+             */
+            $language = preg_replace('~(.*)_.*~', '$1', \Gc\Registry::get('Translator')->getLocale());
+            $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
+            $headscript = $helper_broker->get('HeadScript');
+            $headscript
+                ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
+                ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
+                ->appendFile('/js/plugins.js', 'text/javascript')
+                ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
+                ->appendFile('/js/libs/codemirror/lib/codemirror.js', 'text/javascript')
+                ->appendFile('/js/libs/codemirror/mode/xml/xml.js', 'text/javascript')
+                ->appendFile('/js/libs/codemirror/mode/javascript/javascript.js', 'text/javascript')
+                ->appendFile('/js/libs/codemirror/mode/css/css.js', 'text/javascript')
+                ->appendFile('/js/libs/codemirror/mode/clike/clike.js', 'text/javascript')
+                ->appendFile('/js/libs/codemirror/mode/php/php.js', 'text/javascript')
+                ->appendFile('/js/libs/jquery.jstree.js', 'text/javascript')
+                ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
+                ->appendFile('/js/libs/elfinder.min.js', 'text/javascript')
+                ->appendFile(sprintf('/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript')
+                ->appendFile('/js/generic-classes.js', 'text/javascript')
+                ->appendFile('/js/gotcms.js', 'text/javascript');
 
-        $headlink = $helper_broker->get('HeadLink');
-        $headlink
-            ->appendStylesheet('/js/libs/codemirror/lib/codemirror.css')
-            ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
-            ->appendStylesheet('/css/jquery.treeview.css')
-            ->appendStylesheet('/css/elfinder.min.css')
-            ->appendStylesheet('/css/jquery.contextMenu.css')
-            ->appendStylesheet('/css/style.css');
+            $headlink = $helper_broker->get('HeadLink');
+            $headlink
+                ->appendStylesheet('/js/libs/codemirror/lib/codemirror.css')
+                ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
+                ->appendStylesheet('/css/jquery.treeview.css')
+                ->appendStylesheet('/css/elfinder.min.css')
+                ->appendStylesheet('/css/jquery.contextMenu.css')
+                ->appendStylesheet('/css/style.css');
+        }
     }
 
     /**

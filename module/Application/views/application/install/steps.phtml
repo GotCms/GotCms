@@ -25,11 +25,30 @@
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
+$routes = array(
+'install',
+'installLicense',
+'installDatabase',
+'installConfiguration',
+);
+var_dump($this->currentRoute);
+$step = array_search($this->currentRoute, $routes);
 ?>
 <h2><?php echo $this->escapeHtml($this->translate('Steps:')); ?></h2>
 <ul>
-    <li<?php if($this->currentRoute == 'install'): ?> class="active"<?php endif; ?>><?php echo $this->escapeHtml($this->translate('Language')); ?></li>
-    <li<?php if($this->currentRoute == 'installLicense'): ?> class="active"<?php endif; ?>><?php echo $this->escapeHtml($this->translate('License')); ?></li>
-    <li<?php if($this->currentRoute == 'installCheckConfig'): ?> class="active"<?php endif; ?>><?php echo $this->escapeHtml($this->translate('Pre-configuration')); ?></li>
-    <li<?php if($this->currentRoute == 'installDatabase'): ?> class="active"<?php endif; ?>><?php echo $this->escapeHtml($this->translate('Database')); ?></li>
+    <li<?php if($this->currentRoute == $routes[0]): ?> class="active"<?php elseif($step > 0): ?> class="done"<?php endif; ?>>
+        <?php echo $this->escapeHtml($this->translate('Language')); ?>
+    </li>
+
+    <li<?php if($this->currentRoute == $routes[1]): ?> class="active"<?php elseif($step > 1): ?> class="done"<?php endif; ?>>
+        <?php echo $this->escapeHtml($this->translate('License')); ?>
+    </li>
+
+    <li<?php if($this->currentRoute == $routes[2]): ?> class="active"<?php elseif($step > 2): ?> class="done"<?php endif; ?>>
+        <?php echo $this->escapeHtml($this->translate('Database')); ?>
+    </li>
+
+    <li<?php if($this->currentRoute == $routes[3]): ?> class="active"<?php elseif(empty($step)): ?> class="done"<?php endif; ?>>
+        <?php echo $this->escapeHtml($this->translate('Pre-configuration')); ?>
+    </li>
 </ul>

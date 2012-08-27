@@ -1,0 +1,21 @@
+header {height:60px;}
+header h1{width:800px;color:#FFFFFF}
+header h1, #main-installer .content, footer {margin:0 auto;}
+
+#main-installer {background-color:#FFFFFF;}
+#main-installer .content {width:800px;padding: 10px 0;}
+#main-installer h1 {text-align:center}
+#main-installer h2 {margin-top:0}
+#main-installer nav {float:left;margin-right: 25px;width: 150px;}
+#main-installer nav h2 {background-image:url(../images/h2.png);background-repeat:repeat-x;height:25px;color:#FFF;font-size:11px;text-align:center;padding-top:5px;}
+#main-installer nav .active{font-weight:bold;background:url(/images/install/task-item.png) no-repeat scroll 3px 50% transparent;}
+#main-installer nav .done{font-weight:bold;background:url(/images/install/task-check.png) no-repeat scroll 0 50% transparent;}
+#main-installer nav li {padding-left: 20px}
+#main-installer section {float:left;width:550px}
+#main-installer .license {width:100%;height:500px}
+#installer {list-style: none;padding: 0;}
+#installer li {padding-left: 25px; line-height:17px;}
+#installer .progress{background:url(/images/ajax-loader.gif) no-repeat scroll 0 0 transparent}
+#installer .complete{background:url(/images/notification/success.png) no-repeat scroll 0 0 transparent}
+#installer .error{background:url(/images/notification/error.png) no-repeat scroll 0 0 transparent}
+

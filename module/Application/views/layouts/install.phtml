@@ -44,43 +44,45 @@
         ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
         ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
         ->appendFile('/js/plugins.js', 'text/javascript')
-        ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
+        ->appendFile('/js/generic-classes.js', 'text/javascript')
         ->appendFile('/js/gotcms.js', 'text/javascript');
 
     echo $this->HeadLink()
         ->appendStylesheet('/css/style.css')
-        ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css');
+        ->appendStylesheet('/css/install.css');
     ?>
 </head>
 <body>
-    <header>
+    <header class="gradient-black">
         <div id="logo">&nbsp;</div>
+        <h1><?php echo $this->escapeHtml($this->translate('Installation')); ?></h1>
     </header>
     <div id="main-installer">
-        <h1><?php echo $this->escapeHtml($this->translate('Installation')); ?></h1>
+        <div class="content">
         <nav>
-            <?php echo $this->partial('application/install/steps.phtml', array('currentRoute' => $this->currentRoute)); ?>
-        </nav>
-        <section>
-            <?php if(!empty($this->currentRoute)): ?>
-                <form action="<?php echo $this->url($this->currentRoute); ?>" method="post" autocomplete="off">
-            <?php endif; ?>
+                <?php echo $this->partial('application/install/steps.phtml', array('currentRoute' => $this->currentRoute)); ?>
+            </nav>
+            <section>
+                <?php if(!empty($this->currentRoute)): ?>
+                    <form action="<?php echo $this->url($this->currentRoute); ?>" method="post" autocomplete="off">
+                <?php endif; ?>
 
-            <?php echo $this->content; ?>
+                <?php echo $this->content; ?>
 
-            <?php if(!empty($this->currentRoute)): ?>
-                    <div>
-                        <input type="submit" value="<?php echo $this->escapeHtml($this->translate('Next')); ?>">
-                    </div>
-                </form>
-            <?php endif; ?>
-        </section>
+                <?php if(!empty($this->currentRoute)): ?>
+                        <div>
+                            <input type="submit" value="<?php echo $this->escapeHtml($this->translate('Next')); ?>">
+                        </div>
+                    </form>
+                <?php endif; ?>
+            </section>
 
-        <div style="clear:both;"></div>
+            <div style="clear:both;"></div>
+        </div>
     </div>
 
     <footer>
-        © 2012 <a href="">GotCms</a>
+        © 2012 <a href="http://www.got-cms.com">GotCms <?php echo $this->version; ?></a>
     </footer>
 </body>
 </html>

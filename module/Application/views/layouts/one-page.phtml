@@ -44,11 +44,12 @@
         ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
         ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
         ->appendFile('/js/plugins.js', 'text/javascript')
-        ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
+        ->appendFile('/js/generic-classes.js', 'text/javascript')
         ->appendFile('/js/gotcms.js', 'text/javascript');
 
     echo $this->HeadLink()
-        ->appendStylesheet('/css/style.css');
+        ->appendStylesheet('/css/style.css')
+        ->appendStylesheet('/css/one-page-form.css');
     ?>
 </head>
 <body>
