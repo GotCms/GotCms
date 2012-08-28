@@ -259,6 +259,21 @@ class InstallController extends Action
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from', '');", array());
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from_name', '');", array());
 
+
+                        $language_filename = sprintf(GC_APPLICATION_PATH . '/data/translate/%s.php', $session['install']['lang']);
+                        if(file_exists($language_filename))
+                        {
+                            \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
+                            \Gc\Registry::set('Configuration', array('db' => $session['install']['db']));
+                            $lang_config = include $language_filename;
+                            foreach($lang_config as $source => $destination)
+                            {
+                                \Gc\Core\Translator::setValue($source, array(array(
+                                    'locale' => $session['install']['lang']
+                                    , 'value' => $destination)
+                                ));
+                            }
+                        }
                     break;
 
                     //Create user and roles

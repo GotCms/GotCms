@@ -70,6 +70,7 @@ class Install extends AbstractForm
     {
         $accept_license = new Element\Checkbox('accept-license');
         $accept_license->setCheckedValue('1');
+        $accept_license->setUseHiddenElement(FALSE);
 
         $input_filter = $this->getInputFilter();
         $inputFilter = $input_filter->add(array(
