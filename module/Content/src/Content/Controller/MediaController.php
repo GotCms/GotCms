@@ -146,11 +146,19 @@ class MediaController extends Action
             'roots' => array(
                 array(
                     'driver'        => 'LocalFileSystem',
-                    'path'          => GC_APPLICATION_PATH . '/public/media/content/',
+                    'path'          => GC_APPLICATION_PATH . '/public/frontend/',
                     'tmbPath'       => 'thumbnails',
-                    'URL'           => '/media/content/',
-                    'accessControl' => 'access'
+                    'URL'           => '/frontend/',
+                    'accessControl' => 'access',
+                    //Do not show .gitignore
+                    'attributes' => array(
+                        array(
+                            'pattern' => '~^/\.gitignore$~',
+                            'hidden'  => TRUE,
+                        ),
+                    ),
                 )
+
             )
         );
 
