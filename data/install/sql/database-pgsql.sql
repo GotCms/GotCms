@@ -7,54 +7,6 @@
 ------------------------------
 
 
--- Start Séquence's declaration
-DROP SEQUENCE IF EXISTS "datatypes_id_seq" CASCADE;
-CREATE SEQUENCE "datatypes_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "document_types_id_seq" CASCADE;
-CREATE SEQUENCE "document_types_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "documents_id_seq" CASCADE;
-CREATE SEQUENCE "documents_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "icons_id_seq" CASCADE;
-CREATE SEQUENCE "icons_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "layouts_id_seq" CASCADE;
-CREATE SEQUENCE "layouts_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "properties_id_seq" CASCADE;
-CREATE SEQUENCE "properties_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "properties_value_id_seq" CASCADE;
-CREATE SEQUENCE "properties_value_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "tabs_id_seq" CASCADE;
-CREATE SEQUENCE "tabs_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "translate_id_seq" CASCADE;
-CREATE SEQUENCE "translate_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
-
-DROP SEQUENCE IF EXISTS "translate_language_id_seq" CASCADE;
-CREATE SEQUENCE "translate_language_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
-
-DROP SEQUENCE IF EXISTS "user_acl_roles_id_seq" CASCADE;
-CREATE SEQUENCE "user_acl_roles_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "user_acl_permissions_id_seq" CASCADE;
-CREATE SEQUENCE "user_acl_permissions_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "user_acl_resources_id_seq" CASCADE;
-CREATE SEQUENCE "user_acl_resources_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "users_id_seq" CASCADE;
-CREATE SEQUENCE "users_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 NO CYCLE;
-
-DROP SEQUENCE IF EXISTS "views_id_seq" CASCADE;
-CREATE SEQUENCE "views_id_seq" INCREMENT 1 NO MINVALUE NO MAXVALUE START 1 CYCLE;
-
--- End Séquence's declaration
-
 -- Start Table's declaration
 DROP TABLE IF EXISTS "datatype" CASCADE;
 CREATE TABLE "datatype" (
@@ -241,8 +193,10 @@ CREATE UNIQUE INDEX "core_config_data_id" ON "core_config_data" USING btree ("id
 DROP TABLE IF EXISTS "core_session" CASCADE;
 CREATE TABLE "core_session" (
 "id" character varying NOT NULL,
-"expires" integer NOT NULL,
-"data" bytea
+"name" character varying(50) NOT NULL,
+"lifetime" integer NOT NULL,
+"updated_at" integer NOT NULL,
+"data" text
 ) WITH OIDS;
 ALTER TABLE "core_session" ADD CONSTRAINT "core_session_pk" PRIMARY KEY("id");
 

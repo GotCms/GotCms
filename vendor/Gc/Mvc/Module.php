@@ -27,13 +27,19 @@
 
 namespace Gc\Mvc;
 
-use Zend,
-    Zend\Config\Reader\Ini,
-    Zend\ModuleManager\ModuleManager,
+use Gc\Core\Config as GcConfig,
+    Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway,
+    Zend,
     Zend\Db\Adapter\Adapter as DbAdapter,
+    Zend\Config\Reader\Ini,
+    Zend\EventManager\Event,
     Zend\I18n\Translator\Translator,
+    Zend\ModuleManager\ModuleManager,
     Zend\Mvc\ModuleRouteListener,
-    Zend\EventManager\Event;
+    Zend\Session\Config\SessionConfig,
+    Zend\Session\Container as SessionContainer,
+    Zend\Session\SaveHandler\DbTableGatewayOptions,
+    Zend\Session\SessionManager;
 /**
  * Generic Module
  */
@@ -155,10 +161,26 @@ class Module
                 if(!empty($config['db']))
                 {
                     $db_adapter = new DbAdapter($config['db']);
+                    \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
 
                     \Gc\Registry::set('Configuration', $config);
                     \Gc\Registry::set('Db', $db_adapter);
-                    \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
+
+                    $session_handler = GcConfig::getValue('session_handler');
+                    if($session_handler == GcConfig::SESSION_DATABASE)
+                    {
+                        $tablegateway_config =  new DbTableGatewayOptions(array(
+                            'idColumn'   => 'id',
+                            'nameColumn' => 'name',
+                            'modifiedColumn' => 'updated_at',
+                            'lifetimeColumn' => 'lifetime',
+                            'dataColumn' => 'data',
+                        ));
+
+                        $session_table = new SessionTableGateway(new \Zend\Db\TableGateway\TableGateway('core_session', $db_adapter), $tablegateway_config);
+                        $session_manager = SessionContainer::getDefaultManager();
+                        $session_manager->setSaveHandler($session_table)->start();
+                    }
                 }
             }
         }

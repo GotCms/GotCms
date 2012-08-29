@@ -35,6 +35,16 @@ use Gc\Db\AbstractTable,
 class Config extends AbstractTable
 {
     /**
+     * @const integer defined session from files
+     */
+    const SESSION_FILES = 0;
+
+    /**
+     * @const integer defined session from database
+     */
+    const SESSION_DATABASE = 1;
+
+    /**
      * Table name
      * @var string
      */

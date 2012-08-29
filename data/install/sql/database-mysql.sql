@@ -192,8 +192,10 @@ CREATE TABLE `core_config_data` (
 
 CREATE TABLE `core_session` (
     `id` VARCHAR(255) NOT NULL,
-    `expires` INT NOT NULL,
-    `data` BLOB,
+    `name` VARCHAR(50) NOT NULL,
+    `updated_at` INT NOT NULL,
+    `lifetime` INT NOT NULL,
+    `data` TEXT,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
