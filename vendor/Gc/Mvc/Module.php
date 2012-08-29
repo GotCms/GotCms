@@ -167,6 +167,12 @@ class Module
                     \Gc\Registry::set('Db', $db_adapter);
 
                     $session_handler = GcConfig::getValue('session_handler');
+                    $session_manager = SessionContainer::getDefaultManager();
+                    $session_config = $session_manager->getConfig();
+                    $session_config->setStorageOption('gc_maxlifetime', \Gc\Core\Config::getValue('session_lifetime'));
+                    $session_config->setStorageOption('cookie_path', \Gc\Core\Config::getValue('cookie_path'));
+                    $session_config->setStorageOption('cookie_domain', \Gc\Core\Config::getValue('cookie_domain'));
+
                     if($session_handler == GcConfig::SESSION_DATABASE)
                     {
                         $tablegateway_config =  new DbTableGatewayOptions(array(
@@ -178,7 +184,6 @@ class Module
                         ));
 
                         $session_table = new SessionTableGateway(new \Zend\Db\TableGateway\TableGateway('core_session', $db_adapter), $tablegateway_config);
-                        $session_manager = SessionContainer::getDefaultManager();
                         $session_manager->setSaveHandler($session_table)->start();
                     }
                 }

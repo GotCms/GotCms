@@ -155,6 +155,7 @@ class Config extends AbstractForm
             'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
+                array('name' => 'digits'),
             ),
         ), 'session_lifetime');
 
