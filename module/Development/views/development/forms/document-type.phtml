@@ -61,8 +61,8 @@
                 <label for="infos-icon_id" class="optional"><?php echo $this->escapeHtml($this->translate('Icon')); ?></label>
                 <select name="infos[icon_id]" id="infos-icon_id">
                     <?php $icons = $infos_form->get('icon_id')->getAttribute('options'); ?>
-                    <?php foreach($icons as $option_id => $option_value): ?>
-                        <option value="<?php echo $option_id; ?>"<?php if($infos_form->get('icon_id')->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
+                    <?php foreach($icons as $option): ?>
+                        <option value="<?php echo $option->getId(); ?>"<?php if($infos_form->get('icon_id')->getValue() == $option->getId()): ?> selected="selected"<?php endif; ?> style="background:url(<?php echo $this->escapeHtml($option->getUrl()); ?>) no-repeat; padding-left:20px;"><?php echo $this->escapeHtml($option->getName()); ?> </option>
                     <?php endforeach; ?>
                 </select>
                 <?php if(!empty($errors['infos']['icon_id'])): ?>
