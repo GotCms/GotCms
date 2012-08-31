@@ -155,37 +155,7 @@ var Gc = (function($)
                 active: -1,
             });
 
-            $('.connected-sortable')
-                .accordion($this.getOption('accordion-option'))
-                .sortable({
-                    placeholder: 'ui-state-highlight',
-                    handle: 'h3'
-                });
-
-            var $tab_items = $('ul:first li', $tabs).droppable({
-                accept: '.connected-sortable div',
-                hoverClass: 'ui-state-hover',
-                tolerance: 'pointer',
-                drop: function( event, ui )
-                {
-                    var $item = $(this);
-                    var $list = $( $item.find('a').attr('href'))
-                        .find('.connected-sortable');
-                    var $tab_id = $item.find('a').attr('href').replace('#tabs-properties-', '');
-
-                    ui.draggable.hide('slow', function() {
-                        $tabs.tabs('select', $tab_items.index( $item ) );
-                        $(this).appendTo( $list ).show('slow');
-                        $(this).find('.property-tab-id').val($tab_id);
-                    });
-                },
-                stop: function( event, ui ) {
-                    // IE doesn't register the blur when sorting
-                    // so trigger focusout handlers to remove .ui-state-focus
-                    ui.item.children('h3').triggerHandler('focusout');
-                }
-            });
-
+            $this.refreshProperties($tabs);
 
             $('#property-add').on('click', function()
             {
@@ -234,6 +204,9 @@ var Gc = (function($)
                                 +'<dd id="identifier-element-#{tab}-#{id}">'
                                     +'<input type="text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">'
                                 +'</dd>'
+                                +'<dt id="datatype-label-#{tab}-#{id}">'
+                                    +'<label class="optional" for="properties-datatype-#{tab}-#{id}">'+Translator.translate('Datatype')+'</label>'
+                                +'</dt>'
                                 +'<dd id="datatype-element-#{tab}-#{id}">'
                                     +'<select class="select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">'
                                     +'</select>'
@@ -263,6 +236,8 @@ var Gc = (function($)
                             $('#properties-tab-'+$data.tab+'-'+$data.id).html($('#properties-tab').html()).val($data.tab);
                             $('#properties-datatype-'+$data.tab+'-'+$data.id).html($('#properties-datatype').html()).val($data.datatype);
                             $('#properties-required-'+$data.tab+'-'+$data.id).prop('checked', $isRequired.prop('checked'));
+
+                            $this.refreshProperties($tabs);
                         }
                     });
                 }
@@ -285,6 +260,41 @@ var Gc = (function($)
 
                     $this.setHtmlMessage($data.message);
                 });
+            });
+        },
+
+        refreshProperties: function($tabs)
+        {
+            $('.connected-sortable')
+                .accordion('destroy')
+                .accordion(this.getOption('accordion-option'))
+                .sortable({
+                    placeholder: 'ui-state-highlight',
+                    handle: 'h3'
+                });
+
+            var $tab_items = $('ul:first li', $tabs).droppable({
+                accept: '.connected-sortable div',
+                hoverClass: 'ui-state-hover',
+                tolerance: 'pointer',
+                drop: function( event, ui )
+                {
+                    var $item = $(this);
+                    var $list = $( $item.find('a').attr('href'))
+                        .find('.connected-sortable');
+                    var $tab_id = $item.find('a').attr('href').replace('#tabs-properties-', '');
+
+                    ui.draggable.hide('slow', function() {
+                        $tabs.tabs('select', $tab_items.index( $item ) );
+                        $(this).appendTo( $list ).show('slow');
+                        $(this).find('.property-tab-id').val($tab_id);
+                    });
+                },
+                stop: function( event, ui ) {
+                    // IE doesn't register the blur when sorting
+                    // so trigger focusout handlers to remove .ui-state-focus
+                    ui.item.children('h3').triggerHandler('focusout');
+                }
             });
         },
 
