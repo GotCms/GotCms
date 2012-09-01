@@ -362,6 +362,46 @@ class DocumentTypeController extends Action
     }
 
     /**
+     * Add tab in session
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function importTabAction()
+    {
+        if($this->getRequest()->isPost())
+        {
+            $tab_id = $this->getRequest()->getPost()->get('tab_id');
+            $tab_model = Tab\Model::fromId($tab_id);
+            $properties_list = $tab_model->getProperties();
+
+
+            $properties = array();
+            foreach($properties_list as $property)
+            {
+                $properties[] = array(
+                    'name' => $property->getName(),
+                    'identifier' => $property->getIdentifier(),
+                    'description' => $property->getDescription(),
+                    'datatype' => $property->getDatatypeId(),
+                    'is_required' => $property->isRequired()
+                );
+            }
+
+            $tab = array(
+                'name' => $tab_model->getName(),
+                'description' => $tab_model->getDescription(),
+                'properties' => $properties
+            );
+
+            return $this->_returnJson(array(
+                'success' => TRUE,
+                'tab' => $tab
+            ));
+        }
+
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
+    }
+
+    /**
      * Delete Document type
      * @return \Zend\View\Model\ViewModel|array
      */

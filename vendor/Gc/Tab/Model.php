@@ -176,6 +176,21 @@ class Model extends AbstractTable
     }
 
     /**
+     * Retrieve document type
+     * @param integer $id
+     * @return \Gc\Tab\Model
+     */
+    public function getDocumentType()
+    {
+        if($this->getData('document_type') === NULL)
+        {
+            $this->setData('document_type', \Gc\DocumentType\Model::fromId($this->getDocumentTypeId()));
+        }
+
+        return $this->getData('document_type');
+    }
+
+    /**
      * Return properties
      * @return \Gc\Property\Collection
      */

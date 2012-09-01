@@ -253,6 +253,18 @@
                 <button name="tabs[add]" id="tabs-add" type="button" class="input-submit button-add button-add-tab"><?php echo $this->escapeHtml($this->translate('Add Tab')); ?></button>
             </div>
 
+            <div id="import-tab">
+                <?php $tabs_list = $this->form->get('tabs')->get('tabs_list')->getAttribute('options'); ?>
+                <?php if(!empty($tabs_list)): ?>
+                    <select id="import-tabs">
+                        <?php foreach($tabs_list as $tab): ?>
+                            <option value="<?php echo $this->escapeHtml($tab->getId()); ?>"><?php echo $this->escapeHtml($tab->getName()); ?> (<?php echo $this->escapeHtml($tab->getDocumentType()->getName()); ?>)</option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php endif; ?>
+                <button id="import-tab-button"><?php echo $this->escapeHtml($this->translate('Import tab')); ?></button>
+            </div>
+
             <div>
                 <h3><?php echo $this->escapeHtml($this->translate('Tabs')); ?></h3>
                 <ul id="tabs" class="sortable ui-sortable">

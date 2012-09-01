@@ -320,6 +320,10 @@ class DocumentType extends AbstractForm
 
         $fieldsets = new FieldSet('tabs');
 
+        $tabs_list = new Element\Select('tabs_list');
+        $tab_collection = new Tab\Collection();
+        $tabs_list->setAttribute('options', $tab_collection->getTabs());
+        $fieldsets->add($tabs_list);
         $this->add($fieldsets);
         $this->getInputFilter()->add(array('type'   => 'Zend\InputFilter\InputFilter'), 'tabs');
 

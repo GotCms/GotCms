@@ -51,7 +51,7 @@ var Gc = (function($)
             }
         },
 
-        initDocumentType: function($addTabUrl, $addPropertyUrl, $deleteTabUrl, $deletePropertyUrl)
+        initDocumentType: function($addTabUrl, $addPropertyUrl, $deleteTabUrl, $deletePropertyUrl, $importTabUrl)
         {
             var $this = this;
             $('.tabs').tabs();
@@ -94,24 +94,13 @@ var Gc = (function($)
                                 + '<button type="button" value="'+$data.id+'" class="delete-tab floatR input-submit">'+Translator.translate('Delete')+'</button>'
                                 + '</li>';
                             $tabs.append($e);
+
                             $('.select-tab').append(new Option($name.val(),$data.id));
 
                             if($('#properties-tabs-content').html() != null)
                             {
                                 $('#properties-tabs-content').tabs('add', '#tabs-properties-'+$data.id, $name.val());
-                            }
-                            else
-                            {
-                                //add tab if does not exist
-                                $('#property-add').after('<div id="properties-tabs-content" class="tabs">'
-                                    +'<ul>'
-                                        +'<li><a href="#tabs-properties-1">'+$name.val()+'</a></li>'
-                                    +'</ul>'
-                                    +'<div id="tabs-properties-1">'
-                                        +'<ul></ul>'
-                                    +'</div>'
-                                +'</div>');
-                                $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
+                                $('#tabs-properties-'+$data.id).append('<div class="sortable connected-sortable ui-helper-reset">');
                             }
                         }
                     })
@@ -146,7 +135,7 @@ var Gc = (function($)
             /**
              * Properties
              */
-            var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div><ul></ul></div>'});
+            var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div></div>'});
 
             $this.setOption('accordion-option', {
                 header: 'div > h3',
@@ -260,6 +249,55 @@ var Gc = (function($)
 
                     $this.setHtmlMessage($data.message);
                 });
+            });
+
+            $('#import-tab-button').on('click', function()
+            {
+                $tab_id = $('#import-tabs').val();
+                //Ajax get tab and properties
+                $.post($importTabUrl, {tab_id: $tab_id}, function($data)
+                {
+                    if($data.success == true)
+                    {
+                        $.ajaxSetup({async:false});
+                        $tab = $data.tab;
+                        $tab_name = $('#tabs-addname');
+                        $tab_description = $('#tabs-adddescription');
+                        $tab_name.val($tab.name);
+                        $tab_description.val($tab.description);
+
+                        $('#tabs-add').click();
+                        $tab_id = $('.select-tab').find('option:last').val();
+                        $.each($tab.properties, function(key, $property)
+                        {
+                            $name = $('#properties-name');
+                            $identifier = $('#properties-identifier');
+                            $tab = $('#properties-tab');
+                            $datatype = $('#properties-datatype');
+                            $description = $('#properties-description');
+                            $isRequired = $('#properties-required');
+                            $name.val($property.name);
+                            $identifier.val($property.identifier);
+                            $tab.val($tab_id);
+                            $datatype.val($property.datatype);
+                            $description.val($property.description);
+                            $isRequired.val($property.is_required);
+                            $('#property-add').click();
+                            $name.val('');
+                            $identifier.val('');
+                            $tab.val('');
+                            $datatype.val('');
+                            $description.val('');
+                            $isRequired.val('');
+                        });
+
+                        $tab_name.val('');
+                        $tab_description.val('');
+                        $.ajaxSetup({async:true});
+                    }
+                });
+
+                return false;
             });
         },
 
