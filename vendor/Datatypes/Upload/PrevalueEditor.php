@@ -45,8 +45,6 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $options_post = $post->get('options', array());
         $options = array();
         $options['maxNumberOfFiles'] = in_array('maxNumberOfFiles', $options_post) ? TRUE : FALSE;
-        $options['title'] = in_array('title', $options_post) ? TRUE : FALSE;
-        $options['content'] = in_array('content', $options_post) ? TRUE : FALSE;
 
         $this->setConfig(array('mime_list' => $mime_list, 'options' => $options));
     }
@@ -71,16 +69,6 @@ class PrevalueEditor extends AbstractPrevalueEditor
                 'value' => 'maxNumberOfFiles',
                 'label' => 'Is multiple',
                 'selected' => empty($options_values['maxNumberOfFiles']) ? FALSE : TRUE,
-            ),
-            array(
-                'value' => 'title',
-                'label' => 'Has title',
-                'selected' => empty($options_values['title']) ? FALSE : TRUE,
-            ),
-            array(
-                'value' => 'content',
-                'label' => 'has content text',
-                'selected' => empty($options_values['content']) ?  FALSE : TRUE,
             ),
         ));
         $fieldset->add($element);
@@ -119,7 +107,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             $options[] = array(
                 'value' => $mime,
                 'label' => $mime,
-                'selected' => !in_array($mime, $parameters['mime_list']) ? FALSE : TRUE,
+                'selected' => !in_array($mime, empty($parameters['mime_list']) ? array() : $parameters['mime_list']) ? FALSE : TRUE,
             );
         }
         $element->setAttribute('options', $options);

@@ -72,17 +72,6 @@ class Editor extends AbstractEditor
                     {
                         $array_values[$i] = array();
                         $array_values[$i]['name'] = $value['name'];
-                        if(!empty($options['title']))
-                        {
-                            $title = empty($value['title']) ? '' : $value['title'];
-                            $array_values[$i]['title'] = $title;
-                        }
-
-                        if(!empty($options['content']))
-                        {
-                            $content = empty($value['content']) ? '' : $value['content'];
-                            $array_values[$i]['content'] = $content;
-                        }
 
                         $i++;
                     }
@@ -106,8 +95,6 @@ class Editor extends AbstractEditor
         $parameters = $this->getConfig();
         $options  = $parameters['options'];
         $maxNumberOfFiles = empty($options['maxNumberOfFiles']) ? FALSE : TRUE;
-        $title = empty($options['title']) ? FALSE : TRUE;
-        $content = empty($options['content']) ? FALSE : TRUE;
 
         $this->initScript();
         $file_list = array();
@@ -123,16 +110,6 @@ class Editor extends AbstractEditor
                 $file_object->filename = $file_data['name'];
                 $file_object->size = empty($file_data['size']) ? '' : $file_data['size'];
                 $file_object->type = empty($file_data['type']) ? '' : $file_data['type'];
-
-                if(!empty($options['title']))
-                {
-                    $file_object->title = empty($file_data['title']) ? '' : $file_data['title'];
-                }
-
-                if(!empty($options['content']))
-                {
-                    $file_object->content = empty($file_data['content']) ? '' : $file_data['content'];
-                }
 
                 //$fileclass->error = 'NULL';
                 $file_object->thumbnail_url = str_replace(GC_APPLICATION_PATH . '/public', '', $file_class->getDirectory()) . '/' . $file_data['name'];
