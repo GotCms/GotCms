@@ -43,10 +43,11 @@ class Editor extends AbstractEditor
     public function save()
     {
         $config = $this->getConfig();
-        $config_datatypes = empty($config['datatypes']) ? array() : $config['datatypes'];
+        $datatypes_config = empty($config['datatypes']) ? array() : $config['datatypes'];
 
         $post = $this->getRequest()->getPost();
         $datatypes = $post->get($this->getName());
+
         if(!empty($datatypes))
         {
             foreach($datatypes as $line_id => $values)
@@ -62,6 +63,12 @@ class Editor extends AbstractEditor
                     //Get datatypes
                     $object = $this->_getDatatype($datatype['name']);
                     $editor = $object->getEditor($this->getProperty());
+                    $datatype_config = $datatypes_config[$datatype_id];
+
+                    if(!empty($datatype_config['config']))
+                    {
+                        $editor->setConfig(serialize($datatype_config['config']));
+                    }
                     $editor->save();
                     $datatypes[$line_id][$datatype_id] = array(
                         'name' => $datatype['name'],
@@ -186,7 +193,7 @@ class Editor extends AbstractEditor
 
         $class = 'Datatypes\\'.$name.'\Datatype';
         $object = new $class();
-        $object->load($this->getDatatype(), $this->getDocumentId());
+        $object->load($this->getDatatype()->getDatatypeModel(), $this->getProperty()->getDocumentId());
         $this->_datatypes[$name] = $object;
         return $this->_datatypes[$name];
     }

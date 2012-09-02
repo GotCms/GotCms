@@ -431,10 +431,38 @@ class Http extends AbstractAdapter
                     $this->files[$value]['received']  = false;
                     $this->files[$value]['filtered']  = false;
 
-                    $mimetype = $this->detectMimeType($this->files[$value]);
+
+                    $tmp_file = array();
+                    foreach($this->files[$value] as $param => $content)
+                    {
+                        if(empty($content[0]) or !is_array($content[0]))
+                        {
+                            continue;
+                        }
+
+                        foreach($content[0] as $k => $v)
+                        {
+                            $tmp_file[$param] = $v[0];
+                        }
+                    }
+
+                    if(empty($tmp_file))
+                    {
+                        $tmp_file = $this->files[$value];
+                    }
+                    else
+                    {
+                        $tmp_file['options']   = $this->options;
+                        $tmp_file['validated'] = false;
+                        $tmp_file['received']  = false;
+                        $tmp_file['filtered']  = false;
+                        $this->files[$value] = $tmp_file;
+                    }
+
+                    $mimetype = $this->detectMimeType($tmp_file);
                     $this->files[$value]['type'] = $mimetype;
 
-                    $filesize = $this->detectFileSize($this->files[$value]);
+                    $filesize = $this->detectFileSize($tmp_file);
                     $this->files[$value]['size'] = $filesize;
 
                     if ($this->options['detectInfos']) {

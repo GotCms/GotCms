@@ -61,7 +61,7 @@ class Module
         if(!\Gc\Registry::isRegistered('Translator'))
         {
             $translator = $e->getApplication()->getServiceManager()->get('translator');
-            $translator->addTranslationPattern('phparray', GC_APPLICATION_PATH . '/data/translate/', '%s.php', 'default');
+            $translator->addTranslationFilePattern('phparray', GC_APPLICATION_PATH . '/data/translate/', '%s.php', 'default');
 
             if(\Gc\Registry::isRegistered('Db'))
             {

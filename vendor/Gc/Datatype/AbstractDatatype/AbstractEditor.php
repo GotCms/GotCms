@@ -55,6 +55,12 @@ abstract class AbstractEditor extends Object
     protected $_name;
 
     /**
+     * Configuration
+     * @var mixed
+     */
+    protected $_config;
+
+    /**
      * Abstract function for save Editor
      * @abstract
      * @return void
@@ -117,23 +123,27 @@ abstract class AbstractEditor extends Object
     }
 
     /**
-     * Save property value
-     * @return mixed
+     * get configuration
+     * @return void
      */
     public function getConfig()
     {
-        return @unserialize($this->getDatatype()->getConfig());
+        if(empty($this->_config))
+        {
+            $this->_config = unserialize($this->getDatatype()->getConfig());
+        }
+
+        return $this->_config;
     }
 
     /**
-     * Get datatype configuration
+     * Set Configuration
      * @param mixte $value
-     * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
+     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     public function setConfig($value)
     {
-        $this->getDatatype()->setParameters($value);
-
+        $this->getDatatype()->setConfig($value);
         return $this;
     }
 

@@ -70,7 +70,7 @@
                     $template += '<div>';
                         <?php $content = $element->getAttribute('content'); ?>
                         <?php if(!empty($content)): ?>
-                            $template += '<?php echo $content; ?>';
+                            $template += '<?php echo $this->escapeJs($content); ?>';
                         <?php else: ?>
                             <?php $id = $element->getAttribute('id'); ?>
                             <?php if(!empty($id)): ?>

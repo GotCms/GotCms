@@ -144,11 +144,12 @@ abstract class AbstractForm extends Form
         }
         elseif(is_string($elements))
         {
-
             if(!empty($prefix))
             {
-                $elements = preg_replace('~name="(.*)(\[\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
-                $elements = preg_replace('~id="(.*)"~iU', 'id="${1}' . mt_rand() . '"', $elements);
+                $rand_id = mt_rand();
+                $elements = preg_replace('~name="(.+)(\[.*\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
+                $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $rand_id . '"', $elements);
+                $elements = preg_replace('~("|\')#(.+)("|\')~iU', '${1}#${2}' . $rand_id . '${3}', $elements);
             }
 
             $hidden_element = new Element('hidden'.uniqid());

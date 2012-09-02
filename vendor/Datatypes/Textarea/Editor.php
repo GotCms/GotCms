@@ -55,6 +55,7 @@ class Editor extends AbstractEditor
         $textarea->setAttribute('label', $this->getProperty()->getName());
         $textarea->setValue($this->getValue());
 
+        $config = empty($config) ? array() : $config;
         foreach($config as $key => $value)
         {
             if(!empty($value))

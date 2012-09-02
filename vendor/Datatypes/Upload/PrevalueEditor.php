@@ -60,8 +60,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $options_values = !empty($parameters['options']) ? $parameters['options'] : array();
         $fieldset = new \Zend\Form\Fieldset('Available options');
-        $element = new Element('options');
-        $element->setAttribute('type', 'multi_checkbox');
+        $element = new Element\MultiCheckbox('options');
         $element->setAttribute('label', 'test');
         $element->setAttribute('selected', $options_values);
         $element->setAttribute('options', array(
@@ -75,8 +74,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $elements[] = $fieldset;
 
-        $element = new Element('mime_list');
-        $element->setAttribute('type', 'multi_checkbox');
+        $element = new Element\MultiCheckbox('mime_list');
         $element->setAttribute('label', 'test');
         $mime_list = array(
             'image/gif',
