@@ -69,7 +69,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/View/Collection.php" hash="cbf312bf7c57fc1d5279bdbc6f996053" package="Library\View">
+  <file path="Gc/View/Collection.php" hash="edbfd1b98c320fcc421b244280d514b7" package="Library\View">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2694,7 +2694,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/DocumentType/Model.php" hash="b5a244c652265a084714c30f1c4ddc8f" package="Library\DocumentType">
+  <file path="Gc/DocumentType/Model.php" hash="7883978eaa23021941faa842c599fad1" package="Library\DocumentType">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2826,60 +2826,71 @@ PHP Version >=5.3]]></long-description>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="131" package="">
-        <name>save</name>
+        <name>getDependencies</name>
         <type>function</type>
         <docblock line="127">
+          <description><![CDATA[Get dependencies]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="127" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="158" package="">
+        <name>save</name>
+        <type>function</type>
+        <docblock line="154">
           <description><![CDATA[Save document type model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="127" name="return" description="" type="integer">
+          <tag line="154" name="return" description="" type="integer">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="190" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="233" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="186">
+        <docblock line="229">
           <description><![CDATA[Delete document type model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="186" name="return" description="" type="boolean">
+          <tag line="229" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\DocumentType" line="213" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\DocumentType" line="256" package="">
         <name>fromArray</name>
         <type>function</type>
-        <docblock line="208">
+        <docblock line="251">
           <description><![CDATA[Get model from array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="208" name="param" description="" type="array" variable="$array">
+          <tag line="251" name="param" description="" type="array" variable="$array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="208" name="return" description="" type="\Gc\DocumentType\Model">
+          <tag line="251" name="return" description="" type="\Gc\DocumentType\Model">
             <type by_reference="false">\Gc\DocumentType\Model</type>
           </tag>
         </docblock>
-        <argument line="213">
+        <argument line="256">
           <name>$array</name>
           <default><![CDATA[]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\DocumentType" line="226" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\DocumentType" line="269" package="">
         <name>fromId</name>
         <type>function</type>
-        <docblock line="221">
+        <docblock line="264">
           <description><![CDATA[Get model from id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="221" name="param" description="" type="integer" variable="$document_type_id">
+          <tag line="264" name="param" description="" type="integer" variable="$document_type_id">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="221" name="return" description="" type="\Gc\DocumentType\Model">
+          <tag line="264" name="return" description="" type="\Gc\DocumentType\Model">
             <type by_reference="false">\Gc\DocumentType\Model</type>
           </tag>
         </docblock>
-        <argument line="226">
+        <argument line="269">
           <name>$document_type_id</name>
           <default><![CDATA[]]></default>
           <type/>
