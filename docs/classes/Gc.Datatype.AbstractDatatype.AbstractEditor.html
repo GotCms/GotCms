@@ -66,7 +66,7 @@
 <li class="method public inherited"><a href="#__toArray" title="__toArray :: Convert object attributes to array"><span class="description">Convert object attributes to array</span><pre>__toArray()</pre></a></li>
 <li class="method public inherited"><a href="#addData" title="addData :: Add data to the object."><span class="description">Add data to the object.</span><pre>addData()</pre></a></li>
 <li class="method public "><a href="#addPath" title="addPath :: Add path in Zend\View\Resolver\TemplatePathStack"><span class="description">Add path in Zend\View\Resolver\TemplatePathStack</span><pre>addPath()</pre></a></li>
-<li class="method public "><a href="#getConfig" title="getConfig :: Save property value"><span class="description">Save property value</span><pre>getConfig()</pre></a></li>
+<li class="method public "><a href="#getConfig" title="getConfig :: get configuration"><span class="description">get configuration</span><pre>getConfig()</pre></a></li>
 <li class="method public inherited"><a href="#getData" title="getData :: Retrieves data from the object"><span class="description">Retrieves data from the object</span><pre>getData()</pre></a></li>
 <li class="method public "><a href="#getDatatype" title="getDatatype :: Get datatype"><span class="description">Get datatype</span><pre>getDatatype()</pre></a></li>
 <li class="method public "><a href="#getHelper" title="getHelper :: Retrieve helper from $name"><span class="description">Retrieve helper from $name</span><pre>getHelper()</pre></a></li>
@@ -87,7 +87,7 @@ Otherwise checks if the specified attribute is set.</span><pre>hasData()</pre></
 <li class="method public inherited"><a href="#offsetUnset" title="offsetUnset :: Implementation of ArrayAccess::offsetUnset()"><span class="description">Implementation of ArrayAccess::offsetUnset()</span><pre>offsetUnset()</pre></a></li>
 <li class="method public "><a href="#render" title="render :: Render template"><span class="description">Render template</span><pre>render()</pre></a></li>
 <li class="method public "><a href="#save" title="save :: Abstract function for save Editor"><span class="description">Abstract function for save Editor</span><pre>save()</pre></a></li>
-<li class="method public "><a href="#setConfig" title="setConfig :: Get datatype configuration"><span class="description">Get datatype configuration</span><pre>setConfig()</pre></a></li>
+<li class="method public "><a href="#setConfig" title="setConfig :: Set Configuration"><span class="description">Set Configuration</span><pre>setConfig()</pre></a></li>
 <li class="method public inherited"><a href="#setData" title="setData :: Overwrite data in the object."><span class="description">Overwrite data in the object.</span><pre>setData()</pre></a></li>
 <li class="method public inherited"><a href="#setOrigData" title="setOrigData :: Initialize object original data"><span class="description">Initialize object original data</span><pre>setOrigData()</pre></a></li>
 <li class="method public "><a href="#setValue" title="setValue :: Set property value"><span class="description">Set property value</span><pre>setValue()</pre></a></li>
@@ -107,6 +107,7 @@ Otherwise checks if the specified attribute is set.</span><pre>hasData()</pre></
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
 <li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24_config" title="$_config :: Configuration"><span class="description">Configuration</span><pre>$_config</pre></a></li>
 <li class="property protected inherited"><a href="#%24_data" title="$_data :: Object attributes"><span class="description">Object attributes</span><pre>$_data</pre></a></li>
 <li class="property protected "><a href="#%24_datatype" title="$_datatype :: Datatype"><span class="description">Datatype</span><pre>$_datatype</pre></a></li>
 <li class="property protected "><a href="#%24_name" title="$_name :: Get name of datatype"><span class="description">Get name of datatype</span><pre>$_name</pre></a></li>
@@ -262,14 +263,10 @@ Use for display Editor in Manage Content</p>
 </div></div>
 </div>
 <a name="getConfig" id="getConfig"></a><div class="element clickable method public getConfig" data-toggle="collapse" data-target=".getConfig .collapse">
-<h2>Save property value</h2>
-<pre>getConfig() : mixed</pre>
+<h2>get configuration</h2>
+<pre>getConfig() : void</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<h3>Returns</h3>
-<div class="subelement response"><code>mixed</code></div>
-</div></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
 <a name="getData" id="getData"></a><div class="element clickable method public getData" data-toggle="collapse" data-target=".getData .collapse">
 <h2>Retrieves data from the object</h2>
@@ -568,8 +565,8 @@ Otherwise checks if the specified attribute is set.</h2>
 </div></div>
 </div>
 <a name="setConfig" id="setConfig"></a><div class="element clickable method public setConfig" data-toggle="collapse" data-target=".setConfig .collapse">
-<h2>Get datatype configuration</h2>
-<pre>setConfig(\Gc\Datatype\AbstractDatatype\mixte $value) : <a href="../classes/Gc.Datatype.AbstractDatatype.AbstractEditor.html">\Gc\Datatype\AbstractDatatype\AbstractEditor</a></pre>
+<h2>Set Configuration</h2>
+<pre>setConfig(\Gc\Datatype\AbstractDatatype\mixte $value) : <a href="../classes/Gc.Datatype.AbstractDatatype.AbstractPrevalueEditor.html">\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
@@ -579,7 +576,7 @@ Otherwise checks if the specified attribute is set.</h2>
 <code>\Gc\Datatype\AbstractDatatype\mixte</code>
 </div>
 <h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/Gc.Datatype.AbstractDatatype.AbstractEditor.html">\Gc\Datatype\AbstractDatatype\AbstractEditor</a></code></div>
+<div class="subelement response"><code><a href="../classes/Gc.Datatype.AbstractDatatype.AbstractPrevalueEditor.html">\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</a></code></div>
 </div></div>
 </div>
 <a name="setData" id="setData"></a><div class="element clickable method public setData" data-toggle="collapse" data-target=".setData .collapse">
@@ -889,6 +886,12 @@ Uses cache to eliminate unneccessary preg_replace</p>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_config" id="$_config"> </a><div class="element clickable property protected $_config" data-toggle="collapse" data-target=".$_config .collapse">
+<h2>Configuration</h2>
+<pre>$_config : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
 <a name="%24_data" id="$_data"> </a><div class="element clickable property protected $_data" data-toggle="collapse" data-target=".$_data .collapse">
 <h2>Object attributes</h2>
 <pre>$_data : array</pre>
@@ -938,7 +941,7 @@ Uses cache to eliminate unneccessary preg_replace</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-08-29T19:50:30+02:00.<br></footer></div>
+            generated on 2012-09-03T08:32:20+02:00.<br></footer></div>
 </div>
 </body>
 </html>

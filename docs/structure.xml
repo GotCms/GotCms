@@ -2298,7 +2298,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </interface>
   </file>
-  <file path="Gc/Media/Icon/Collection.php" hash="abbe626293ba6381a0225c897266d653" package="Library\View">
+  <file path="Gc/Media/Icon/Collection.php" hash="d5e6962fba0b608bed794596cd45a9ba" package="Library\View">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2374,13 +2374,13 @@ PHP Version >=5.3]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media\Icon" line="80" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media\Icon" line="83" package="">
         <name>getSelect</name>
         <type>function</type>
-        <docblock line="76">
+        <docblock line="79">
           <description><![CDATA[Get array for input select]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="76" name="return" description="" type="array">
+          <tag line="79" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
@@ -3051,7 +3051,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Document/Model.php" hash="d9d605e518fbf3c1b9c11e014ab097ef" package="Library\Document">
+  <file path="Gc/Document/Model.php" hash="e36b0bd7cb325d1d1104bb7fac456f1d" package="Library\Document">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -3321,22 +3321,22 @@ PHP Version >=5.3]]></long-description>
           <tag line="303" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="320" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="325" package="">
         <name>getIterableId</name>
         <type>function</type>
-        <docblock line="317">
+        <docblock line="322">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="317" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="322" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="328" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="333" package="">
         <name>getUrl</name>
         <type>function</type>
-        <docblock line="325">
+        <docblock line="330">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="325" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="330" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
     </class>
@@ -3947,7 +3947,7 @@ the prevalue editor and editor.]]></description>
       </method>
     </class>
   </file>
-  <file path="Gc/Datatype/AbstractDatatype/AbstractEditor.php" hash="f64513f3363ee9a33732281dae6e57e3" package="Library\Datatype\AbstractDatatype">
+  <file path="Gc/Datatype/AbstractDatatype/AbstractEditor.php" hash="d9a4ea33da7478d61f570be0e46ca9a3" package="Library\Datatype\AbstractDatatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -4016,235 +4016,246 @@ Use for display Editor in Manage Content]]></description>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="true" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="62" package="">
+      <property final="false" static="false" visibility="protected" line="61" package="Default">
+        <name>$_config</name>
+        <default><![CDATA[]]></default>
+        <docblock line="57">
+          <description><![CDATA[Configuration]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="57" name="var" description="" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="68" package="">
         <name>save</name>
         <type>function</type>
-        <docblock line="57">
+        <docblock line="63">
           <description><![CDATA[Abstract function for save Editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="57" name="abstract" description=""/>
-          <tag line="57" name="return" description="" type="void">
+          <tag line="63" name="abstract" description=""/>
+          <tag line="63" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="true" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="69" package="">
+      <method final="false" abstract="true" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="75" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="64">
+        <docblock line="70">
           <description><![CDATA[Abstract function for load Editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="64" name="abstract" description=""/>
-          <tag line="64" name="return" description="" type="void">
+          <tag line="70" name="abstract" description=""/>
+          <tag line="70" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="76" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="82" package="">
         <name>__construct</name>
         <type>function</type>
-        <docblock line="71">
+        <docblock line="77">
           <description><![CDATA[Abstract function for save Editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="71" name="param" description="" type="\Gc\Datatype\AbstractDatatype" variable="$datatype_abstract">
+          <tag line="77" name="param" description="" type="\Gc\Datatype\AbstractDatatype" variable="$datatype_abstract">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype</type>
           </tag>
-          <tag line="71" name="return" description="" type="void">
+          <tag line="77" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="76">
+        <argument line="82">
           <name>$datatype_abstract</name>
           <default><![CDATA[]]></default>
           <type>Datatype\AbstractDatatype</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="87" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="93" package="">
         <name>getValue</name>
         <type>function</type>
-        <docblock line="83">
+        <docblock line="89">
           <description><![CDATA[Return property value]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="83" name="return" description="" type="string">
+          <tag line="89" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="97" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="103" package="">
         <name>setValue</name>
         <type>function</type>
-        <docblock line="92">
+        <docblock line="98">
           <description><![CDATA[Set property value]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="92" name="param" description="" type="\Gc\Datatype\AbstractDatatype\mixte" variable="$value">
+          <tag line="98" name="param" description="" type="\Gc\Datatype\AbstractDatatype\mixte" variable="$value">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype\mixte</type>
           </tag>
-          <tag line="92" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractEditor">
+          <tag line="98" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractEditor">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype\AbstractEditor</type>
           </tag>
         </docblock>
-        <argument line="97">
+        <argument line="103">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\Datatype\AbstractDatatype" line="108" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\Datatype\AbstractDatatype" line="114" package="">
         <name>saveValue</name>
         <type>function</type>
-        <docblock line="104">
+        <docblock line="110">
           <description><![CDATA[Save property value]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="104" name="return" description="" type="boolean">
+          <tag line="110" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="123" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="129" package="">
         <name>getConfig</name>
         <type>function</type>
-        <docblock line="119">
-          <description><![CDATA[Save property value]]></description>
+        <docblock line="125">
+          <description><![CDATA[get configuration]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="119" name="return" description="" type="mixed">
-            <type by_reference="false">mixed</type>
+          <tag line="125" name="return" description="" type="void">
+            <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="133" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="144" package="">
         <name>setConfig</name>
         <type>function</type>
-        <docblock line="128">
-          <description><![CDATA[Get datatype configuration]]></description>
+        <docblock line="139">
+          <description><![CDATA[Set Configuration]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="128" name="param" description="" type="\Gc\Datatype\AbstractDatatype\mixte" variable="$value">
+          <tag line="139" name="param" description="" type="\Gc\Datatype\AbstractDatatype\mixte" variable="$value">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype\mixte</type>
           </tag>
-          <tag line="128" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractEditor">
-            <type by_reference="false">\Gc\Datatype\AbstractDatatype\AbstractEditor</type>
+          <tag line="139" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor">
+            <type by_reference="false">\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</type>
           </tag>
         </docblock>
-        <argument line="133">
+        <argument line="144">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="144" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="154" package="">
         <name>getUploadUrl</name>
         <type>function</type>
-        <docblock line="140">
+        <docblock line="150">
           <description><![CDATA[Upload dir path]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="140" name="return" description="" type="string">
+          <tag line="150" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="153" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="163" package="">
         <name>getName</name>
         <type>function</type>
-        <docblock line="149">
+        <docblock line="159">
           <description><![CDATA[Get datatype name]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="149" name="return" description="" type="string">
+          <tag line="159" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="162" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="172" package="">
         <name>getProperty</name>
         <type>function</type>
-        <docblock line="158">
+        <docblock line="168">
           <description><![CDATA[Return property model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="158" name="return" description="" type="\Gc\Property\Model">
+          <tag line="168" name="return" description="" type="\Gc\Property\Model">
             <type by_reference="false">\Gc\Property\Model</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="171" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="181" package="">
         <name>getDatatype</name>
         <type>function</type>
-        <docblock line="167">
+        <docblock line="177">
           <description><![CDATA[Get datatype]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="167" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
+          <tag line="177" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="180" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="190" package="">
         <name>getRequest</name>
         <type>function</type>
-        <docblock line="176">
+        <docblock line="186">
           <description><![CDATA[Get request object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="176" name="return" description="" type="\Zend\Http\Request">
+          <tag line="186" name="return" description="" type="\Zend\Http\Request">
             <type by_reference="false">\Zend\Http\Request</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="191" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="201" package="">
         <name>render</name>
         <type>function</type>
-        <docblock line="185">
+        <docblock line="195">
           <description><![CDATA[Render template]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="185" name="param" description="" type="string" variable="$name">
+          <tag line="195" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="185" name="param" description="" type="array" variable="$data">
+          <tag line="195" name="param" description="" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="185" name="return" description="" type="string">
+          <tag line="195" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="191">
+        <argument line="201">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="191">
+        <argument line="201">
           <name>$data</name>
           <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="201" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="211" package="">
         <name>addPath</name>
         <type>function</type>
-        <docblock line="196">
+        <docblock line="206">
           <description><![CDATA[Add path in Zend\View\Resolver\TemplatePathStack]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="196" name="param" description="" type="string" variable="$dir">
+          <tag line="206" name="param" description="" type="string" variable="$dir">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="196" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor">
+          <tag line="206" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</type>
           </tag>
         </docblock>
-        <argument line="201">
+        <argument line="211">
           <name>$dir</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="213" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype\AbstractDatatype" line="223" package="">
         <name>getHelper</name>
         <type>function</type>
-        <docblock line="208">
+        <docblock line="218">
           <description><![CDATA[Retrieve helper from $name]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="208" name="param" description="" type="string" variable="$name">
+          <tag line="218" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="208" name="return" description="" type="\Gc\Datatype\AbstractDatatype\mixte">
+          <tag line="218" name="return" description="" type="\Gc\Datatype\AbstractDatatype\mixte">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype\mixte</type>
           </tag>
         </docblock>
-        <argument line="213">
+        <argument line="223">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -4880,7 +4891,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Tab/Model.php" hash="4228d5bfc3ea348df803d08775f05aa8" package="Library\Tab">
+  <file path="Gc/Tab/Model.php" hash="94956d7a23577e45a095797ad18d8d79" package="Library\Tab">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -5013,12 +5024,23 @@ PHP Version >=5.3]]></long-description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="182" package="">
-        <name>getProperties</name>
+        <name>getDocumentType</name>
         <type>function</type>
         <docblock line="178">
+          <description><![CDATA[Get Document type]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="178" name="return" description="" type="\Gc\DocumentType\Model">
+            <type by_reference="false">\Gc\DocumentType\Model</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="196" package="">
+        <name>getProperties</name>
+        <type>function</type>
+        <docblock line="192">
           <description><![CDATA[Return properties]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="178" name="return" description="" type="\Gc\Property\Collection">
+          <tag line="192" name="return" description="" type="\Gc\Property\Collection">
             <type by_reference="false">\Gc\Property\Collection</type>
           </tag>
         </docblock>
@@ -6802,7 +6824,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Mvc/Module.php" hash="8591c1761cb70f614447836ea00010d8" package="Library\Mvc">
+  <file path="Gc/Mvc/Module.php" hash="71a837851456127be9c1874a9840496f" package="Library\Mvc">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -6942,7 +6964,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Form/AbstractForm.php" hash="433035155449d2c614317e30f357be7b" package="Library\Form">
+  <file path="Gc/Form/AbstractForm.php" hash="a593e77aa1220de2072b9c2604443370" package="Library\Form">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -7074,20 +7096,20 @@ add dynamic content, etc...]]></description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="169" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="170" package="">
         <name>getValue</name>
         <type>function</type>
-        <docblock line="164">
+        <docblock line="165">
           <description><![CDATA[Return element value]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="164" name="param" description="" type="string" variable="$name">
+          <tag line="165" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="164" name="return" description="" type="string">
+          <tag line="165" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="169">
+        <argument line="170">
           <name>$name</name>
           <default><![CDATA[NULL]]></default>
           <type/>
@@ -8112,7 +8134,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Upload/Editor.php" hash="65c03978fe1dbd768cff6c933bb60501" package="Datatype">
+  <file path="Datatypes/Upload/Editor.php" hash="65cba10508f27ed50b01e521c4c741bb" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8157,58 +8179,58 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="104" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="93" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="100">
+        <docblock line="89">
           <description><![CDATA[Load upload editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="100" name="return" description="" type="\Datatypes\Upload\mixte">
+          <tag line="89" name="return" description="" type="\Datatypes\Upload\mixte">
             <type by_reference="false">\Datatypes\Upload\mixte</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Upload" line="164" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Upload" line="141" package="">
         <name>initScript</name>
         <type>function</type>
-        <docblock line="160">
+        <docblock line="137">
           <description><![CDATA[Load resources]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="160" name="return" description="" type="void">
+          <tag line="137" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Upload" line="189" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Upload" line="166" package="">
         <name>getParam</name>
         <type>function</type>
-        <docblock line="181">
+        <docblock line="158">
           <description><![CDATA[Retrieve param]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="181" name="param" description="" type="\Datatypes\Upload\mixte" variable="$key">
+          <tag line="158" name="param" description="" type="\Datatypes\Upload\mixte" variable="$key">
             <type by_reference="false">\Datatypes\Upload\mixte</type>
           </tag>
-          <tag line="181" name="param" description="" type="\Datatypes\Upload\mixte" variable="$value">
+          <tag line="158" name="param" description="" type="\Datatypes\Upload\mixte" variable="$value">
             <type by_reference="false">\Datatypes\Upload\mixte</type>
           </tag>
-          <tag line="181" name="param" description="" type="\Datatypes\Upload\mixte" variable="$default">
+          <tag line="158" name="param" description="" type="\Datatypes\Upload\mixte" variable="$default">
             <type by_reference="false">\Datatypes\Upload\mixte</type>
           </tag>
-          <tag line="181" name="return" description="" type="\Datatypes\Upload\unknown">
+          <tag line="158" name="return" description="" type="\Datatypes\Upload\unknown">
             <type by_reference="false">\Datatypes\Upload\unknown</type>
           </tag>
         </docblock>
-        <argument line="189">
+        <argument line="166">
           <name>$key</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="189">
+        <argument line="166">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="189">
+        <argument line="166">
           <name>$default</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -8216,7 +8238,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Upload/upload-editor.phtml" hash="c141a4fbf456d50921e4ae42e91d858f" package="Datatype">
+  <file path="Datatypes/Upload/upload-editor.phtml" hash="ccaa0e98368be1fbd5d78546c3c22f47" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8264,7 +8286,7 @@ PHP Version >=5.3]]></long-description>
       <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
     </docblock>
   </file>
-  <file path="Datatypes/Upload/PrevalueEditor.php" hash="405326019e8bb2d8b04379405223aa43" package="Datatype">
+  <file path="Datatypes/Upload/PrevalueEditor.php" hash="2258137197a81a6503a660cb0a212d6b" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8308,13 +8330,13 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="58" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="56" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="54">
+        <docblock line="52">
           <description><![CDATA[Load upload prevalue editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="54" name="return" description="" type="\Datatypes\Upload\mixte">
+          <tag line="52" name="return" description="" type="\Datatypes\Upload\mixte">
             <type by_reference="false">\Datatypes\Upload\mixte</type>
           </tag>
         </docblock>
@@ -8698,7 +8720,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Textarea/Editor.php" hash="611dbadc742890b6b98fe080bb802570" package="Datatype">
+  <file path="Datatypes/Textarea/Editor.php" hash="3081465ad6b2e1de9a0547330b7cfa0a" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -9266,7 +9288,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Mixed/Editor.php" hash="f8d903a01cadf40db4c48251e1a1ff5c" package="Datatype">
+  <file path="Datatypes/Mixed/Editor.php" hash="853b428761db4825a7eac308ffaba8d8" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -9300,42 +9322,53 @@ PHP Version >=5.3]]></long-description>
         <description><![CDATA[Editor for Mixed datatype]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Mixed" line="43" package="">
+      <property final="false" static="false" visibility="protected" line="42" package="Default">
+        <name>$_datatypes</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="38">
+          <description><![CDATA[List of Datatypes]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="38" name="var" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Mixed" line="48" package="">
         <name>save</name>
         <type>function</type>
-        <docblock line="39">
+        <docblock line="44">
           <description><![CDATA[Save mixed editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="39" name="return" description="" type="void">
+          <tag line="44" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Mixed" line="74" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Mixed" line="93" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="70">
+        <docblock line="89">
           <description><![CDATA[Load mixed editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="70" name="return" description="" type="\Datatypes\Mixed\mixte">
+          <tag line="89" name="return" description="" type="\Datatypes\Mixed\mixte">
             <type by_reference="false">\Datatypes\Mixed\mixte</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Mixed" line="120" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Mixed" line="192" package="">
         <name>_getDatatype</name>
         <type>function</type>
-        <docblock line="115">
+        <docblock line="187">
           <description><![CDATA[Retrieve datatypes]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="115" name="param" description="" type="string" variable="$name">
+          <tag line="187" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="115" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
+          <tag line="187" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype</type>
           </tag>
         </docblock>
-        <argument line="120">
+        <argument line="192">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -9496,7 +9529,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Mixed/mixed-editor.phtml" hash="d4550f5b404cb366026a4927f5ed9168" package="Datatype">
+  <file path="Datatypes/Mixed/mixed-editor.phtml" hash="a0da37bf11056f2401cd2054caf72175" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify

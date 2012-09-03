@@ -35,7 +35,12 @@ use Gc\Datatype\AbstractDatatype\AbstractEditor,
  */
 class Editor extends AbstractEditor
 {
+    /**
+     * List of Datatypes
+     * @var array
+     */
     protected $_datatypes = array();
+
     /**
      * Save mixed editor
      * @return void

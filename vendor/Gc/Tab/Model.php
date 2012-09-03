@@ -176,9 +176,8 @@ class Model extends AbstractTable
     }
 
     /**
-     * Retrieve document type
-     * @param integer $id
-     * @return \Gc\Tab\Model
+     * Get Document type
+     * @return \Gc\DocumentType\Model
      */
     public function getDocumentType()
     {
