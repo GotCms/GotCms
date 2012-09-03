@@ -23,7 +23,15 @@ CREATE TABLE "document_type_view" (
 "view_id" integer NOT NULL,
 "document_type_id" integer NOT NULL
 ) WITH OIDS;
-ALTER TABLE "document_type_view" ADD CONSTRAINT "document_type_view_pk" PRIMARY KEY("id","view_id","document_type_id");
+ALTER TABLE "document_type_view" ADD CONSTRAINT "document_type_view_pk" PRIMARY KEY("id");
+
+DROP TABLE IF EXISTS "document_type_dependency" CASCADE;
+CREATE TABLE "document_type_dependency" (
+"id" serial NOT NULL,
+"parent_id" integer NOT NULL,
+"children_id" integer NOT NULL
+) WITH OIDS;
+ALTER TABLE "document_type_dependency" ADD CONSTRAINT "document_type_dependency_pk" PRIMARY KEY("id");
 
 DROP TABLE IF EXISTS "document_type" CASCADE;
 CREATE TABLE "document_type" (
@@ -204,6 +212,10 @@ ALTER TABLE "core_session" ADD CONSTRAINT "core_session_pk" PRIMARY KEY("id");
 
 -- Start Relation's declaration
 ALTER TABLE "document_type_view" ADD CONSTRAINT "fk_document_type_views_views" FOREIGN KEY ("view_id") REFERENCES "view"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE "document_type_dependency" ADD CONSTRAINT "fk_document_type_dependency_parent_id" FOREIGN KEY ("parent_id") REFERENCES "document_type"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE "document_type_dependency" ADD CONSTRAINT "fk_document_type_dependency_children_id" FOREIGN KEY ("children_id") REFERENCES "document_type"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE "property" ADD CONSTRAINT "fk_property_datatype" FOREIGN KEY ("datatype_id") REFERENCES "datatype"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 

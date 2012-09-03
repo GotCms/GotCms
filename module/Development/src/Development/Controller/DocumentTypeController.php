@@ -100,6 +100,7 @@ class DocumentTypeController extends Action
                 try
                 {
                     $document_type->addViews($views_subform->getValue('available_views'));
+                    $document_type->setDependencies($infos_subform->getValue('dependency'));
                     $document_type->save();
 
                     $tabs_array = array();
@@ -267,6 +268,7 @@ class DocumentTypeController extends Action
                 try
                 {
                     $document_type->addViews($views_subform->getValue('available_views'));
+                    $document_type->setDependencies($infos_subform->getValue('dependency'));
                     $document_type->save();
 
                     $tabs_array = array();

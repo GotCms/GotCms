@@ -125,6 +125,33 @@ class Model extends AbstractTable
     }
 
     /**
+     * Get dependencies
+     * @return array
+     */
+    public function getDependencies()
+    {
+        $dependencies = $this->getData('dependencies');
+        if(empty($dependencies))
+        {
+            $select = new Sql\Select();
+            $select->from(array('dtd' => 'document_type_dependency'))
+            ->columns(array('children_id'))
+            ->where->equalTo('parent_id', $this->getId());
+            $rows = $this->fetchAll($select);
+
+            $result = array();
+            foreach($rows as $row)
+            {
+                $result[] = $row['children_id'];
+            }
+
+            $this->setData('dependencies', $result);
+        }
+
+        return $this->getData('dependencies');
+    }
+
+    /**
      * Save document type model
      * @return integer
      */
@@ -153,19 +180,35 @@ class Model extends AbstractTable
                 $this->update($array_save, sprintf('id = %d', (int)$this->getId()));
             }
 
-            $views = $this->getViews();
-            if(!empty($views))
+            if(!empty($this->_views))
             {
                 $delete = new Sql\Delete();
-                $delete->from('document_type_views');
+                $delete->from('document_type_view');
                 $delete->where(sprintf('document_type_id = %s', (int)$this->getId()));
                 $this->execute($delete);
-                foreach($views as $view);
+                foreach($this->_views as $view);
                 {
                     $insert = new Sql\Insert();
-                    $insert->into('document_type_views')
+                    $insert->into('document_type_view')
                         ->columns(array('document_type_id', 'view_id'))
                         ->values(array($this->getId(), $view));
+                    $this->execute($insert);
+                }
+            }
+
+            $dependencies = $this->getDependencies();
+            if(!empty($dependencies))
+            {
+                $delete = new Sql\Delete();
+                $delete->from('document_type_dependency');
+                $delete->where->equalTo('parent_id', (int)$this->getId());
+                $this->execute($delete);
+                foreach($dependencies as $children_id);
+                {
+                    $insert = new Sql\Insert();
+                    $insert->into('document_type_dependency')
+                        ->columns(array('parent_id', 'children_id'))
+                        ->values(array($this->getId(), $children_id));
                     $this->execute($insert);
                 }
             }

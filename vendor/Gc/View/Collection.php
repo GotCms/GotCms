@@ -152,7 +152,7 @@ class Collection extends AbstractTable
             $this->delete();
             foreach($this->getElements() as $view)
             {
-                $this->getSqlInsert()->into('document_type_views')->values(array('document_type_id' => $this->getDocumentTypeId(), 'view_id' => $view->getId()));
+                $this->getSqlInsert()->into('document_type_view')->values(array('document_type_id' => $this->getDocumentTypeId(), 'view_id' => $view->getId()));
             }
 
             return TRUE;
@@ -169,7 +169,7 @@ class Collection extends AbstractTable
     {
         if(!empty($this->_data['document_type_id']))
         {
-            $this->getApdater()->delete('document_type_views', 'document_type_id = '.$this->getDocumentTypeId());
+            $this->getApdater()->delete('document_type_view', 'document_type_id = '.$this->getDocumentTypeId());
             return TRUE;
         }
 

@@ -69,6 +69,15 @@
                     <?php echo $this->formErrors($errors['infos']['icon_id']); ?>
                 <?php endif; ?>
             </div>
+            <div>
+                <label><?php echo $this->escapeHtml($this->translate('Available children')); ?></label>
+
+                <?php echo $this->formElement($infos_form->get('infos[dependency]')); ?>
+
+                <?php if(!empty($errors['infos']['infos[dependency]'])): ?>
+                    <?php echo $this->formErrors($errors['infos']['infos[dependency]']); ?>
+                <?php endif; ?>
+            </div>
         </div>
 
         <div id="tabs-2">
@@ -89,11 +98,12 @@
             </div>
             <div>
                 <label for="views-available_views" class="optional"><?php echo $this->escapeHtml($this->translate('Add view')); ?></label>
-                <select name="views[available_views]" id="views-available_views" multiple="multiple">
+                <select name="views[available_views][]" id="views-available_views" multiple="multiple">
                     <?php $available_views = $views_form->get('available_views'); ?>
                     <?php $default_view_option = $available_views->getValueOptions(); ?>
+                    <?php $values = $available_views->getValue(); ?>
                     <?php foreach($default_view_option as $option_id => $option_value): ?>
-                        <option value="<?php echo $option_id; ?>"<?php if($available_views->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
+                        <option value="<?php echo $option_id; ?>"<?php if(!empty($values[$option_id])): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
                     <?php endforeach; ?>
                 </select>
 

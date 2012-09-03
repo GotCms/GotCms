@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS `datatype`;
 DROP TABLE IF EXISTS `document`;
 DROP TABLE IF EXISTS `document_type`;
 DROP TABLE IF EXISTS `document_type_view`;
+DROP TABLE IF EXISTS `document_type_dependency`;
 DROP TABLE IF EXISTS `icon`;
 DROP TABLE IF EXISTS `layout`;
 DROP TABLE IF EXISTS `property`;
@@ -32,7 +33,14 @@ CREATE TABLE `document_type_view` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `view_id` INT NOT NULL,
     `document_type_id` INT NOT NULL,
-    PRIMARY KEY (`id`,`view_id`,`document_type_id`)
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE `document_type_dependency` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `parent_id` INT NOT NULL,
+    `children_id` INT NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `document_type` (
@@ -203,6 +211,10 @@ CREATE TABLE `core_session` (
 
 -- Start Relation's declaration
 ALTER TABLE `document_type_view` ADD CONSTRAINT `fk_document_type_views_views` FOREIGN KEY (`view_id`) REFERENCES `view`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE `document_type_dependency` ADD CONSTRAINT `fk_document_type_dependency_parent_id` FOREIGN KEY (`parent_id`) REFERENCES `document_type`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE `document_type_dependency` ADD CONSTRAINT `fk_document_type_dependency_children_id` FOREIGN KEY (`children_id`) REFERENCES `document_type`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE `property` ADD CONSTRAINT `fk_property_datatype` FOREIGN KEY (`datatype_id`) REFERENCES `datatype`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 

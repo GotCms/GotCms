@@ -109,6 +109,11 @@ class DocumentType extends AbstractForm
             ),
             'icon_id' => array(
                 'name' => 'icon_id',
+                'required' => TRUE,
+                'allow_empty' => FALSE,
+            ),
+            'dependency' => array(
+                'name' => 'dependency',
                 'required' => FALSE,
                 'allow_empty' => FALSE,
             ),
@@ -124,7 +129,7 @@ class DocumentType extends AbstractForm
         $fieldsets->add($icon_id);
 
         $document_type_collection = new DocumentTypeCollection();
-        $dependency = new Element\MultiCheckbox('dependency');
+        $dependency = new Element\MultiCheckbox('infos[dependency]');
         $dependency->setValueOptions($document_type_collection->getSelect());
         $fieldsets->add($dependency);
 
@@ -148,13 +153,12 @@ class DocumentType extends AbstractForm
         $fieldsets = new FieldSet('views');
 
         $available_views = new Element\Select('available_views');
+        $available_views->setValueOptions($this->_viewCollection->getSelect());
+        $fieldsets->add($available_views);
 
         $default_view = new Element\Select('default_view');
         $default_view->setValueOptions($this->_viewCollection->getSelect());
         $fieldsets->add($default_view);
-
-        $available_views->setValueOptions($this->_viewCollection->getSelect());
-        $fieldsets->add($available_views);
 
         $this->add($fieldsets);
 
@@ -415,6 +419,7 @@ class DocumentType extends AbstractForm
             $infos_form->get('name')->setValue($element->getName());
             $infos_form->get('description')->setValue($element->getDescription());
             $infos_form->get('icon_id')->setValue($element->getIconId());
+            $infos_form->get('infos[dependency]')->setValue($element->getDependencies());
 
             $views_form = $this->getViews();
             $views_form->get('default_view')->setValue($element->getDefaultViewId());
