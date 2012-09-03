@@ -308,6 +308,11 @@ class Model extends AbstractTable implements IterableInterface
         if($this->getData('icon') === NULL)
         {
             $icon = Icon\Model::fromId($this->getDocumentType()->getIconId());
+            if(empty($icon))
+            {
+                return FALSE;
+            }
+
             $this->setData('icon', $icon->getUrl());
         }
 

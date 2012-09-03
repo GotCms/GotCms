@@ -85,7 +85,7 @@ class Document extends AbstractForm
         $document_type = new Element\Select('document_type');
         $document_type->setAttribute('label', 'Document Type')
             ->setAttribute('id', 'document_type')
-            ->setAttribute('options', array('' => 'Select document type') + $document_type_collection->getSelect());
+            ->setValueOptions(array('' => 'Select document type') + $document_type_collection->getSelect());
 
         $parent = new Element\Hidden('parent');
 
@@ -155,7 +155,7 @@ class Document extends AbstractForm
 
         $views_collection = new View\Collection();
         $view = new Element\Select('document-view');
-        $view->setAttribute('options', $views_collection->getSelect())
+        $view->setValueOptions($views_collection->getSelect())
             ->setValue((string)$document->getViewId())
             ->setAttribute('id', 'view')
             ->setAttribute('label', 'View');
@@ -164,7 +164,7 @@ class Document extends AbstractForm
 
         $layouts_collection = new Layout\Collection();
         $layout = new Element\Select('document-layout');
-        $layout->setAttribute('options', $layouts_collection->getSelect())
+        $layout->setValueOptions($layouts_collection->getSelect())
             ->setValue((string)$document->getLayoutId())
             ->setAttribute('id', 'layout')
             ->setAttribute('label', 'Layout');

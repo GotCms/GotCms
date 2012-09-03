@@ -86,7 +86,7 @@ class User extends AbstractForm
 
         $this->setInputFilter($inputFilter);
 
-        $role = new Element('user_acl_role_id');
+        $role = new Element\Select('user_acl_role_id');
         $role_collection = new RoleCollection();
         $roles_list = $role_collection->getRoles();
         $select_options = array();
@@ -95,7 +95,7 @@ class User extends AbstractForm
             $select_options[$role_model->getId()] = $role_model->getName();
         }
 
-        $role->setAttribute('options', $select_options);
+        $role->setValueOptions($select_options);
 
         $this->add(new Element('email'));
         $this->add(new Element('login'));

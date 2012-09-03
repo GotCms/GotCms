@@ -63,7 +63,7 @@ class Translation extends AbstractForm
 
         $locale = new Element\Select('locale');
         $locale->setAttribute('label', 'Url key')
-            ->setAttribute('options', $locale_list);
+            ->setValueOptions($locale_list);
 
         $this->add($source);
         $this->add($locale);

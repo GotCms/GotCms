@@ -69,7 +69,7 @@
 
                         <div class="hide">
                             <select name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][locale]">
-                                <?php foreach($this->form->get('locale')->getAttribute('options') as $option_id => $option_value): ?>
+                                <?php foreach($this->form->get('locale')->getValueOptions() as $option_id => $option_value): ?>
                                     <option value="<?php echo $option_id; ?>"><?php echo $this->escapeHtml($option_value); ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -85,7 +85,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-    Gc.setOption('locale', $.parseJSON('<?php echo $this->json($this->form->get('locale')->getAttribute('options')); ?>'));
+    Gc.setOption('locale', $.parseJSON('<?php echo $this->json($this->form->get('locale')->getValueOptions()); ?>'));
     Gc.initTraslationList();
 });
 </script>

@@ -41,7 +41,7 @@ class Datatype extends AbstractForm
     public function init()
     {
 
-        $model  = new Element('model');
+        $model  = new Element\Select('model');
 
         $path = getcwd().'/vendor/Datatypes/';
         $list_dir = glob($path.'*', GLOB_ONLYDIR);
@@ -52,7 +52,7 @@ class Datatype extends AbstractForm
             $options[$dir] = $dir;
         }
 
-        $model->setAttribute('options', $options);
+        $model->setValueOptions($options);
 
         $this->add(new Element('name'));
         $this->add($model);

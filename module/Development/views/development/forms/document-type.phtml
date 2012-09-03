@@ -30,7 +30,7 @@
 <?php $views_form = $this->form->get('views'); ?>
 <?php $tabs_form = $this->form->get('tabs')->getFieldsets(); ?>
 <?php $properties_forms = $this->form->get('properties')->getFieldsets(); ?>
-<?php $datatypes_options = $this->form->get('properties')->get('datatypes')->getAttribute('options'); ?>
+<?php $datatypes_options = $this->form->get('properties')->get('datatypes')->getValueOptions(); ?>
 <?php $errors = $this->form->getMessages(); ?>
 
 <form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->form->getAttribute('action'); ?>" method="post">
@@ -60,7 +60,7 @@
             <div>
                 <label for="infos-icon_id" class="optional"><?php echo $this->escapeHtml($this->translate('Icon')); ?></label>
                 <select name="infos[icon_id]" id="infos-icon_id">
-                    <?php $icons = $infos_form->get('icon_id')->getAttribute('options'); ?>
+                    <?php $icons = $infos_form->get('icon_id')->getValueOptions(); ?>
                     <?php foreach($icons as $option): ?>
                         <option value="<?php echo $option->getId(); ?>"<?php if($infos_form->get('icon_id')->getValue() == $option->getId()): ?> selected="selected"<?php endif; ?> style="background:url(<?php echo $this->escapeHtml($option->getUrl()); ?>) no-repeat; padding-left:20px;"><?php echo $this->escapeHtml($option->getName()); ?> </option>
                     <?php endforeach; ?>
@@ -77,7 +77,7 @@
                 <select name="views[default_view]" id="views-default_view">
                     <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
                     <?php $default_view = $views_form->get('default_view'); ?>
-                    <?php $default_view_option = $default_view->getAttribute('options'); ?>
+                    <?php $default_view_option = $default_view->getValueOptions(); ?>
                     <?php foreach($default_view_option as $option_id => $option_value): ?>
                         <option value="<?php echo $option_id; ?>"<?php if($default_view->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
                     <?php endforeach; ?>
@@ -91,7 +91,7 @@
                 <label for="views-available_views" class="optional"><?php echo $this->escapeHtml($this->translate('Add view')); ?></label>
                 <select name="views[available_views]" id="views-available_views" multiple="multiple">
                     <?php $available_views = $views_form->get('available_views'); ?>
-                    <?php $default_view_option = $available_views->getAttribute('options'); ?>
+                    <?php $default_view_option = $available_views->getValueOptions(); ?>
                     <?php foreach($default_view_option as $option_id => $option_value): ?>
                         <option value="<?php echo $option_id; ?>"<?php if($available_views->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
                     <?php endforeach; ?>
@@ -254,7 +254,7 @@
             </div>
 
             <div id="import-tab">
-                <?php $tabs_list = $this->form->get('tabs')->get('tabs_list')->getAttribute('options'); ?>
+                <?php $tabs_list = $this->form->get('tabs')->get('tabs_list')->getValueOptions(); ?>
                 <?php if(!empty($tabs_list)): ?>
                     <select id="import-tabs">
                         <?php foreach($tabs_list as $tab): ?>

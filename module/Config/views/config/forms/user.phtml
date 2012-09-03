@@ -73,7 +73,7 @@
     <div>
         <label class="required" for="user_acl_role_id"><?php echo $this->escapeHtml($this->translate('Role')); ?></label>
         <select class="input-select" id="user_acl_role_id" name="user_acl_role_id">
-            <?php $options = $this->form->get('user_acl_role_id')->getAttribute('options'); ?>
+            <?php $options = $this->form->get('user_acl_role_id')->getValueOptions(); ?>
             <?php foreach($options as $option_id => $option_value): ?>
                 <option <?php if($option_id == $this->form->getValue('user_acl_role_id')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo (int) $option_id; ?>"><?php echo $this->escapeHtml($this->translate($option_value)); ?></option>
             <?php endforeach; ?>

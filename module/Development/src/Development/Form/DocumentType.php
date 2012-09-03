@@ -29,6 +29,7 @@ namespace Development\Form;
 use Gc\Form\AbstractForm,
     Gc\Datatype,
     Gc\DocumentType\Model as DocumentTypeModel,
+    Gc\DocumentType\Collection as DocumentTypeCollection,
     Gc\Media\Icon,
     Gc\Property,
     Gc\Tab,
@@ -114,13 +115,18 @@ class DocumentType extends AbstractForm
         ), 'infos');
 
 
-        $fieldsets->add(new Element('name'));
-        $fieldsets->add(new Element('description'));
+        $fieldsets->add(new Element\Text('name'));
+        $fieldsets->add(new Element\Text('description'));
 
         $icon_id = new Element\Select('icon_id');
         $collection = new Icon\Collection();
-        $icon_id->setAttribute('options', $collection->getIcons());
+        $icon_id->setValueOptions($collection->getIcons());
         $fieldsets->add($icon_id);
+
+        $document_type_collection = new DocumentTypeCollection();
+        $dependency = new Element\MultiCheckbox('dependency');
+        $dependency->setValueOptions($document_type_collection->getSelect());
+        $fieldsets->add($dependency);
 
         $this->add($fieldsets);
 
@@ -141,13 +147,13 @@ class DocumentType extends AbstractForm
 
         $fieldsets = new FieldSet('views');
 
-        $available_views = new Element('available_views');
+        $available_views = new Element\Select('available_views');
 
-        $default_view = new Element('default_view');
-        $default_view->setAttribute('options', $this->_viewCollection->getSelect());
+        $default_view = new Element\Select('default_view');
+        $default_view->setValueOptions($this->_viewCollection->getSelect());
         $fieldsets->add($default_view);
 
-        $available_views->setAttribute('options', $this->_viewCollection->getSelect());
+        $available_views->setValueOptions($this->_viewCollection->getSelect());
         $fieldsets->add($available_views);
 
         $this->add($fieldsets);
@@ -185,8 +191,8 @@ class DocumentType extends AbstractForm
 
         $fieldsets = new FieldSet('properties');
 
-        $datatypes = new Element('datatypes');
-        $datatypes->setAttribute('options', $this->_datatypeCollection->getSelect())
+        $datatypes = new Element\Select('datatypes');
+        $datatypes->setValueOptions($this->_datatypeCollection->getSelect())
             ->setAttribute('type', 'select');
 
         $fieldsets->add($datatypes);
@@ -217,11 +223,11 @@ class DocumentType extends AbstractForm
 
         $tab = new Element\Select('tab');
         $tab->setAttribute('class', 'select-tab')
-            ->setAttribute('options', array());
+            ->setValueOptions(array());
 
         $datatype = new Element\Select('datatype');
         $datatype->setAttribute('class', 'select-datatype')
-            ->setAttribute('options', $this->_datatypeCollection->getSelect());
+            ->setValueOptions($this->_datatypeCollection->getSelect());
 
         $description = new Element\Text('description');
         $required = new Element\Checkbox('required');
@@ -322,7 +328,7 @@ class DocumentType extends AbstractForm
 
         $tabs_list = new Element\Select('tabs_list');
         $tab_collection = new Tab\Collection();
-        $tabs_list->setAttribute('options', $tab_collection->getTabs());
+        $tabs_list->setValueOptions($tab_collection->getTabs());
         $fieldsets->add($tabs_list);
         $this->add($fieldsets);
         $this->getInputFilter()->add(array('type'   => 'Zend\InputFilter\InputFilter'), 'tabs');

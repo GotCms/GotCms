@@ -52,7 +52,7 @@ class Install extends AbstractForm
 
         $lang = new Element\Select('lang');
         $lang->setAttribute('size', 10)
-            ->setAttribute('options', $country_available);
+            ->setValueOptions($country_available);
 
         $input_filter = $this->getInputFilter();
         $inputFilter = $input_filter->add(array(
@@ -98,7 +98,7 @@ class Install extends AbstractForm
         );
 
         $driver = new Element\Select('driver');
-        $driver->setAttribute('options', $data)
+        $driver->setValueOptions($data)
             ->setAttribute('label', 'Driver');
 
         $hostname = new Element\Text('hostname');

@@ -65,7 +65,7 @@ class Config extends AbstractForm
         $offline_document->setAttribute('label', 'Offline document');
         $document_collection = new Document\Collection();
         $document_collection->load(0);
-        $offline_document->setAttribute('options', $document_collection->getSelect());
+        $offline_document->setValueOptions($document_collection->getSelect());
 
         $general_fieldset->add($name);
         $general_fieldset->add($is_offline);
@@ -117,7 +117,7 @@ class Config extends AbstractForm
 
         $session_handler = new Element\Select('session_handler');
         $session_handler->setAttribute('label', 'Session handler')
-            ->setAttribute('options', array('0' => 'Files', '1' => 'Database'));
+            ->setValueOptions(array('0' => 'Files', '1' => 'Database'));
 
         $session_fieldset->add($cookie_domain);
         $session_fieldset->add($cookie_path);
@@ -194,7 +194,7 @@ class Config extends AbstractForm
         $locale_fieldset = new Fieldset('locale');
         $locale = new Element\Select('locale');
         $locale->setAttribute('label', 'Server locale')
-            ->setAttribute('options', $locale_list);
+            ->setValueOptions($locale_list);
 
         $locale_fieldset->add($locale);
         $this->add($locale_fieldset);
