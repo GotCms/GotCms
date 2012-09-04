@@ -2605,7 +2605,7 @@ Need document and property to work]]></description>
       </method>
     </class>
   </file>
-  <file path="Gc/DocumentType/Collection.php" hash="f3d1dbc64c0128782854a0dac2477c8d" package="Library\DocumentType">
+  <file path="Gc/DocumentType/Collection.php" hash="0cfcdce41770311640f4acb87bd269ce" package="Library\DocumentType">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2657,7 +2657,7 @@ PHP Version >=5.3]]></long-description>
         <docblock line="44">
           <description><![CDATA[Load document type collection]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="44" name="param" description="@parent_id" type="integer" variable="$sort">
+          <tag line="44" name="param" description="@parent_id" type="integer" variable="$parent_id">
             <type by_reference="false">integer</type>
           </tag>
           <tag line="44" name="return" description="" type="void">
@@ -2665,36 +2665,53 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
         <argument line="49">
-          <name>$sort</name>
-          <default><![CDATA['ASC']]></default>
+          <name>$parent_id</name>
+          <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="Gc\DocumentType" line="58" package="">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="Gc\DocumentType" line="59" package="">
         <name>setDocumentTypes</name>
         <type>function</type>
-        <docblock line="54">
+        <docblock line="55">
           <description><![CDATA[Initialize document types]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="54" name="return" description="" type="\Gc\Document\Collection">
+          <tag line="55" name="return" description="" type="\Gc\Document\Collection">
             <type by_reference="false">\Gc\Document\Collection</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="78" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="86" package="">
         <name>getSelect</name>
         <type>function</type>
-        <docblock line="74">
+        <docblock line="82">
           <description><![CDATA[Return array for input select]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="74" name="return" description="" type="array">
+          <tag line="82" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="108" package="">
+        <name>getDependencies</name>
+        <type>function</type>
+        <docblock line="103">
+          <description><![CDATA[Return array for input select]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="103" name="param" description="integer" type="" variable="$parent_id"/>
+          <tag line="103" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="108">
+          <name>$parent_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
     </class>
   </file>
-  <file path="Gc/DocumentType/Model.php" hash="7883978eaa23021941faa842c599fad1" package="Library\DocumentType">
+  <file path="Gc/DocumentType/Model.php" hash="96b5d5a1839b1a455775f26501eea9ea" package="Library\DocumentType">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
