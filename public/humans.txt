@@ -15,6 +15,6 @@
 
 /* SITE */
   Standards: HTML5, CSS3
-  Components: Modernizr, jQuery / CodeMirror / elFinder / Zend Framework 2.0.0rc4 / CkEditor
+  Components: Modernizr, jQuery / CodeMirror / elFinder / Zend Framework 2.0.0rc6 / CkEditor
   Software: PostgreSQL / MySQL / PHP5 / Apache2
 
