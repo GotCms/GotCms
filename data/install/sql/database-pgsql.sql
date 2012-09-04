@@ -2,7 +2,6 @@
 -- pgDesigner 1.2.17
 --
 -- Project    : GotCms
--- Date       : 05/28/2012 12:33:34.97
 -- Description: 
 ------------------------------
 

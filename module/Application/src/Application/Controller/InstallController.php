@@ -274,6 +274,9 @@ class InstallController extends Action
                                 ));
                             }
                         }
+
+                        $sql = file_get_contents(GC_APPLICATION_PATH . '/data/install/sql/data.sql');
+                        $db_adapter->getDriver()->getConnection()->getResource()->exec($sql);
                     break;
 
                     //Create user and roles
