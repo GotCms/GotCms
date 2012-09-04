@@ -73,7 +73,7 @@ class DocumentType extends AbstractForm
      * Initialize infos sub form
      * @return \Zend\Form\FieldSet
      */
-    private function getInfos()
+    protected function getInfos()
     {
         $fieldsets = $this->getFieldSets();
         if(!empty($fieldsets['infos']))
@@ -142,7 +142,7 @@ class DocumentType extends AbstractForm
      * Initialize views sub form
      * @return \Zend\Form\FieldSet
      */
-    private function getViews()
+    protected function getViews()
     {
         $fieldsets = $this->getFieldSets();
         if(!empty($fieldsets['views']))
@@ -185,7 +185,7 @@ class DocumentType extends AbstractForm
      * Initialize properties sub form
      * @return \Zend\Form\FieldSet
      */
-    private function getProperties()
+    protected function getProperties()
     {
         $fieldsets = $this->getFieldSets();
         if(!empty($fieldsets['properties']))
@@ -320,7 +320,7 @@ class DocumentType extends AbstractForm
      * Initialize tabs sub form
      * @return \Zend\Form\FieldSet
      */
-    private function getTabs()
+    protected function getTabs()
     {
         $fieldsets = $this->getFieldSets();
         if(!empty($fieldsets['tabs']))
@@ -427,6 +427,9 @@ class DocumentType extends AbstractForm
             $views_form->get('available_views')->setValue($views_collection->getSelect());
 
             $tabs = $element->getTabs();
+            $tab_collection = new Tab\Collection();
+            $this->getTabs()->get('tabs_list')->setValueOptions($tab_collection->getImportableTabs($element->getId()));
+
             $session = $element;
             foreach($tabs as $tab_id => $tab)
             {

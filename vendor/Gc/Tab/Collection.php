@@ -27,7 +27,8 @@
 
 namespace Gc\Tab;
 
-use Gc\Db\AbstractTable;
+use Gc\Db\AbstractTable,
+    Zend\Db\Sql\Select;
 /**
  * Collection of Tab Model
  */
@@ -81,6 +82,27 @@ class Collection extends AbstractTable
         }
 
         return $this->getData('tabs');
+    }
+
+    /**
+     * Return all tabs from collection
+     * @param integer $document_type_id
+     * @return array
+     */
+    public function getImportableTabs($document_type_id)
+    {
+        $rows = $this->select(function(Select $select) use ($document_type_id)
+        {
+            $select->where->notEqualTo('document_type_id', $document_type_id);
+        });
+
+        $tabs = array();
+        foreach($rows as $row)
+        {
+            $tabs[] = Model::fromArray((array)$row);
+        }
+
+        return $tabs;
     }
 
     /**
