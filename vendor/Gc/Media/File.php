@@ -78,7 +78,7 @@ class File extends Object
         {
             mkdir($dir, self::FILE_PERMISSION, TRUE);
             $tmp_dir = $dir;
-            while($tmp_dir != GC_APPLICATION_PATH . '/media/files')
+            while($tmp_dir != GC_APPLICATION_PATH . '/public/media/files')
             {
                 chmod($tmp_dir, self::FILE_PERMISSION);
                 $tmp_dir = dirname($tmp_dir);
@@ -116,6 +116,7 @@ class File extends Object
             }
 
             $this->setFiles($data);
+
             return TRUE;
         }
 
