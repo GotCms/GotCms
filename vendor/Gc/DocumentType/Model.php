@@ -203,7 +203,7 @@ class Model extends AbstractTable
                 $delete->from('document_type_dependency');
                 $delete->where->equalTo('parent_id', (int)$this->getId());
                 $this->execute($delete);
-                foreach($dependencies as $children_id);
+                foreach($dependencies as $children_id)
                 {
                     $insert = new Sql\Insert();
                     $insert->into('document_type_dependency')

@@ -46,8 +46,9 @@ class Collection extends AbstractTable
      * @param integer @parent_id
      * @return void
      */
-    public function init($sort = 'ASC')
+    public function init($parent_id = NULL)
     {
+        $this->setParentId($parent_id);
         $this->setDocumentTypes();
     }
 
@@ -59,6 +60,13 @@ class Collection extends AbstractTable
     {
         $rows = $this->select(function (Select $select)
         {
+            $parent_id = $this->getParentId();
+            if(!empty($parent_id))
+            {
+                $select->join(array('dtd' => 'document_type_dependency'), 'dtd.children_id = document_type.id', array());
+                $select->where->equalTo('dtd.parent_id', $parent_id);
+            }
+
             $select->order('name ASC');
         });
 
@@ -90,5 +98,15 @@ class Collection extends AbstractTable
         }
 
         return $select;
+    }
+
+    /**
+     * Return array for input select
+     * @param integer
+     * @return array
+     */
+    public function getDependencies($parent_id)
+    {
+
     }
 }

@@ -84,9 +84,18 @@ class DocumentController extends Action
         $document_form = new Form\Document();
         $document_form->setAttribute('action', $this->url()->fromRoute('documentCreate'));
         $parent_id = $this->getRouteMatch()->getParam('id');
-        if(!empty($parent_id))
+
+        $document_type_collection = new DocumentType\Collection();
+        $document_type_element = $document_form->get('document_type');
+        if(empty($parent_id))
+        {
+            $document_type_element->setValueOptions(array('' => 'Select document type') + $document_type_collection->getSelect());
+        }
+        else
         {
             $document_form->get('parent')->setValue($parent_id);
+            $document_type_collection->init($parent_id);
+            $document_type_element->setValueOptions(array('' => 'Select document type') + $document_type_collection->getSelect());
         }
 
         if($this->getRequest()->isPost())

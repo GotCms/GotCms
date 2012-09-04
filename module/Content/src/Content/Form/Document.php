@@ -81,11 +81,10 @@ class Document extends AbstractForm
             ->setAttribute('id', 'url_key')
             ->setAttribute('class', 'input-text');
 
-        $document_type_collection = new DocumentType\Collection();
         $document_type = new Element\Select('document_type');
         $document_type->setAttribute('label', 'Document Type')
             ->setAttribute('id', 'document_type')
-            ->setValueOptions(array('' => 'Select document type') + $document_type_collection->getSelect());
+            ->setValueOptions(array('' => 'Select document type'));
 
         $parent = new Element\Hidden('parent');
 
