@@ -4778,7 +4778,7 @@ PHP Version >=5.3]]></long-description>
       </docblock>
     </class>
   </file>
-  <file path="Gc/Tab/Collection.php" hash="b5d10e9d67c6818ad002baa5460acaa0" package="Library\Tab">
+  <file path="Gc/Tab/Collection.php" hash="4d79c81432969d0f7c5ab3bab5746880" package="Library\Tab">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -4803,116 +4803,136 @@ PHP Version >=5.3]]></long-description>
       <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
     </docblock>
     <namespace-alias name="AbstractTable">Gc\Db\AbstractTable</namespace-alias>
-    <class final="false" abstract="false" namespace="Gc\Tab" line="34" package="Default">
+    <namespace-alias name="Select">Zend\Db\Sql\Select</namespace-alias>
+    <class final="false" abstract="false" namespace="Gc\Tab" line="35" package="Default">
       <name>Collection</name>
       <full_name>\Gc\Tab\Collection</full_name>
       <extends>\Gc\Db\AbstractTable</extends>
-      <docblock line="31">
+      <docblock line="32">
         <description><![CDATA[Collection of Tab Model]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <property final="false" static="false" visibility="protected" line="40" package="Default">
+      <property final="false" static="false" visibility="protected" line="41" package="Default">
         <name>$_name</name>
         <default><![CDATA['tab']]></default>
-        <docblock line="36">
+        <docblock line="37">
           <description><![CDATA[Table name]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="36" name="var" description="" type="string">
+          <tag line="37" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="47" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="48" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="42">
+        <docblock line="43">
           <description><![CDATA[Initiliaze tab collection]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="42" name="param" description="integer $document_type_id" type="\Gc\Tab\optional" variable="$document_type_id">
+          <tag line="43" name="param" description="integer $document_type_id" type="\Gc\Tab\optional" variable="$document_type_id">
             <type by_reference="false">\Gc\Tab\optional</type>
           </tag>
-          <tag line="42" name="return" description="" type="\Gc\Tab\Collection">
+          <tag line="43" name="return" description="" type="\Gc\Tab\Collection">
             <type by_reference="false">\Gc\Tab\Collection</type>
           </tag>
         </docblock>
-        <argument line="47">
+        <argument line="48">
           <name>$document_type_id</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="59" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="60" package="">
         <name>getTabs</name>
         <type>function</type>
-        <docblock line="54">
+        <docblock line="55">
           <description><![CDATA[Return all tabs from collection]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="54" name="param" description="to reload collection" type="boolean" variable="$force_reload">
+          <tag line="55" name="param" description="to reload collection" type="boolean" variable="$force_reload">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="54" name="return" description="" type="array">
+          <tag line="55" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="59">
+        <argument line="60">
           <name>$force_reload</name>
           <default><![CDATA[FALSE]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="91" package="">
-        <name>setTabs</name>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="92" package="">
+        <name>getImportableTabs</name>
         <type>function</type>
-        <docblock line="86">
-          <description><![CDATA[Set tabs]]></description>
+        <docblock line="87">
+          <description><![CDATA[Return all tabs from collection]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="86" name="param" description="of \Gc\Tab\Model" type="array" variable="$tabs">
+          <tag line="87" name="param" description="" type="integer" variable="$document_type_id">
+            <type by_reference="false">integer</type>
+          </tag>
+          <tag line="87" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="86" name="return" description="" type="void">
+        </docblock>
+        <argument line="92">
+          <name>$document_type_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="113" package="">
+        <name>setTabs</name>
+        <type>function</type>
+        <docblock line="108">
+          <description><![CDATA[Set tabs]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="108" name="param" description="of \Gc\Tab\Model" type="array" variable="$tabs">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="108" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="91">
+        <argument line="113">
           <name>$tabs</name>
           <default><![CDATA[]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="107" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="129" package="">
         <name>addTab</name>
         <type>function</type>
-        <docblock line="102">
+        <docblock line="124">
           <description><![CDATA[Add tab from array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="102" name="param" description="" type="array" variable="$tab">
+          <tag line="124" name="param" description="" type="array" variable="$tab">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="102" name="return" description="" type="void">
+          <tag line="124" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="107">
+        <argument line="129">
           <name>$tab</name>
           <default><![CDATA[]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="119" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="141" package="">
         <name>save</name>
         <type>function</type>
-        <docblock line="115">
+        <docblock line="137">
           <description><![CDATA[Save tabs]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="115" name="return" description="" type="void">
+          <tag line="137" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="131" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="153" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="128">
+        <docblock line="150">
           <description><![CDATA[Delete tabs @return void]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
