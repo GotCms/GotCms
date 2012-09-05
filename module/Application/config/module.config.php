@@ -64,6 +64,7 @@ return array(
             'documents' => 'Gc\View\Helper\Documents',
             'document' => 'Gc\View\Helper\Document',
             'script' => 'Gc\View\Helper\Script',
+            'tools' => 'Gc\View\Helper\Tools',
         ),
     ),
 );

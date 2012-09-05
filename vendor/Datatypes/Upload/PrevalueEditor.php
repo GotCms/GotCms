@@ -61,9 +61,9 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $options_values = !empty($parameters['options']) ? $parameters['options'] : array();
         $fieldset = new \Zend\Form\Fieldset('Available options');
         $element = new Element\MultiCheckbox('options');
-        $element->setAttribute('label', 'test');
         $element->setAttribute('selected', $options_values);
-        $element->setAttribute('options', array(
+
+        $element->setValueOptions(array(
             array(
                 'value' => 'maxNumberOfFiles',
                 'label' => 'Is multiple',
@@ -75,7 +75,6 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $elements[] = $fieldset;
 
         $element = new Element\MultiCheckbox('mime_list');
-        $element->setAttribute('label', 'test');
         $mime_list = array(
             'image/gif',
             'image/jpeg',
@@ -108,7 +107,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
                 'selected' => !in_array($mime, empty($parameters['mime_list']) ? array() : $parameters['mime_list']) ? FALSE : TRUE,
             );
         }
-        $element->setAttribute('options', $options);
+        $element->setValueOptions($options);
 
         $fieldset = new \Zend\Form\Fieldset('Mime list');
         $fieldset->add($element);

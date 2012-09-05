@@ -58,12 +58,21 @@ class File extends Object
     }
 
     /**
+     * Return path
+     * @return string
+     */
+    public function getPath()
+    {
+        return GC_APPLICATION_PATH . '/public';
+    }
+
+    /**
      * Return directory
      * @return string
      */
     public function getDirectory()
     {
-        return GC_APPLICATION_PATH . '/public/media/files/' . $this->getDocument()->getId() . '/' . $this->getProperty()->getId();
+        return '/media/files/' . $this->getDocument()->getId() . '/' . $this->getProperty()->getId();
     }
 
     /**
@@ -73,7 +82,7 @@ class File extends Object
     public function upload()
     {
         $file = new FileTransfer();
-        $dir = $this->getDirectory();
+        $dir = $this->getPath() . $this->getDirectory();
         if(!is_dir($dir))
         {
             mkdir($dir, self::FILE_PERMISSION, TRUE);
@@ -100,10 +109,10 @@ class File extends Object
             {
                 $file_object = new \StdClass();
                 $file_object->name = 'New Image Upload Complete:   ' .$file_data['name'];
-                $file_object->filename = $file_data['name'];
+                $file_object->filename = $this->getDirectory() . '/' . $file_data['name'];
                 $file_object->size = $file_data['size'];
                 $file_object->type = $file_data['type'];
-                $file_object->thumbnail_url = str_replace(GC_APPLICATION_PATH . '/public', '', $file->getDestination()) . '/' . $file_data['name'];
+                $file_object->thumbnail_url = $this->getDirectory() . '/' . $file_data['name'];
 
                 $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
                 $file_object->delete_url = $router->assemble(array(
@@ -130,7 +139,7 @@ class File extends Object
      */
     public function remove($filename)
     {
-         $file = $this->getDirectory() . '/' . $filename;
+         $file = $this->getPath() . $this->getDirectory() . '/' . $filename;
          if(file_exists($file))
          {
              @unlink($file);

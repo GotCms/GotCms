@@ -51,7 +51,6 @@ class Editor extends AbstractEditor
         $array_values = array();
         if(!empty($values))
         {
-            $i = 0;
             foreach($values as $idx => $value)
             {
                 if(empty($value['name']))
@@ -59,8 +58,8 @@ class Editor extends AbstractEditor
                     continue;
                 }
 
-                $file = $file_class->getDirectory() . '/' . $value['name'];
-                if(!empty($value) && file_exists($file))
+                $file = $file_class->getPath() . '/' . $value['name'];
+                if(file_exists($file))
                 {
                     $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
                     $finfo = finfo_open($const); // return mimetype extension
@@ -70,10 +69,14 @@ class Editor extends AbstractEditor
                     }
                     else
                     {
-                        $array_values[$i] = array();
-                        $array_values[$i]['name'] = $value['name'];
-
-                        $i++;
+                        $file_info = @getimagesize($file);
+                        $array_values[] = array(
+                            'value' => $value['name'],
+                            'width' => empty($file_info[0]) ? 0 : $file_info[0],
+                            'height' => empty($file_info[1]) ? 0 : $file_info[1],
+                            'html' => empty($file_info[2]) ? '' : $file_info[2],
+                            'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
+                        );
                     }
 
                     finfo_close($finfo);
@@ -106,19 +109,16 @@ class Editor extends AbstractEditor
             foreach($files as $file_data)
             {
                 $file_object = new \StdClass();
-                $file_object->name = $file_data['name'];
-                $file_object->filename = $file_data['name'];
-                $file_object->size = empty($file_data['size']) ? '' : $file_data['size'];
-                $file_object->type = empty($file_data['type']) ? '' : $file_data['type'];
-
-                //$fileclass->error = 'NULL';
-                $file_object->thumbnail_url = str_replace(GC_APPLICATION_PATH . '/public', '', $file_class->getDirectory()) . '/' . $file_data['name'];
+                //@TODO replace path here
+                $file_object->name = $file_data['value'];
+                $file_object->filename = $file_data['value'];
+                $file_object->thumbnail_url = $file_data['value'];
 
                 $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
                 $file_object->delete_url = $router->assemble(array(
                     'document_id' => $this->getDatatype()->getDocument()->getId(),
                     'property_id' => $this->getProperty()->getId(),
-                    'file' => $file_data['name']),
+                    'file' => $file_data['value']),
                 array('name' => 'mediaRemove'));
                 $file_object->delete_type = 'DELETE';
                 $file_list[] = $file_object;

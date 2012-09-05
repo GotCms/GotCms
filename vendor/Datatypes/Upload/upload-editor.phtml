@@ -127,7 +127,7 @@
                         (file.error ? '<td></td><td class="name"></td>' +
                             '<td class="size"></td><td class="error" colspan="2"></td>' :
                                 '<td class="preview"></td>' +
-                                    '<td><div class="name"><a></a></div>' +
+                                    '<td><div class="name"></div>' +
                                     '<input type="hidden" name="<?php echo $this->name; ?>['+$index<?php echo $this->name; ?>+'][name]" value="'+file.filename+'">' +
                                     '</td>' +
                                     '<td class="size"></td><td colspan="2"></td>'
@@ -152,9 +152,8 @@
                         row.find('.name a').text(file.name);
                         if (file.thumbnail_url)
                         {
-                            row.find('.preview').append('<a><img></a>')
+                            row.find('.preview').append('<img>')
                                 .find('img').prop('src', file.thumbnail_url);
-                            row.find('a').prop('rel', 'gallery');
                         }
 
                         row.find('a').prop('href', file.url);

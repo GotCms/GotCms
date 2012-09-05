@@ -66,9 +66,9 @@ class Editor extends AbstractEditor
                     }
 
                     //Get datatypes
-                    $object = $this->_getDatatype($datatype['name']);
-                    $editor = $object->getEditor($this->getProperty());
                     $datatype_config = $datatypes_config[$datatype_id];
+                    $object = $this->_getDatatype($datatype_config['name']);
+                    $editor = $object->getEditor($this->getProperty());
 
                     if(!empty($datatype_config['config']))
                     {
@@ -76,7 +76,6 @@ class Editor extends AbstractEditor
                     }
                     $editor->save();
                     $datatypes[$line_id][$datatype_id] = array(
-                        'name' => $datatype['name'],
                         'value' => $editor->getValue()
                     );
                 }
@@ -129,10 +128,6 @@ class Editor extends AbstractEditor
                     $prefix = $this->getName() . '['.$line_id.']['.$datatype_id.']';
                     //Create form
                     $fieldset = new Fieldset($datatype_config['name'] . $datatype_id);
-                    $hidden = new Element\Hidden();
-                    $hidden->setName($prefix. '[name]');
-                    $hidden->setValue($datatype_config['name']);
-                    $fieldset->add($hidden);
 
                     \Gc\Form\AbstractForm::addContent($fieldset, $editor->load(), $prefix);
                     $datatypes_elements[$line_id][$datatype_id]['label'] = empty($datatype_config['label']) ? '' : $datatype_config['label'];
