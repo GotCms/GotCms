@@ -627,9 +627,6 @@ abstract class AbstractAdapter implements TranslatorAwareInterface
                     } else {
                         $tocheck = $content['tmp_name'];
                     }
-                    if ($class === 'Zend\Validator\File\Upload') {
-                        $validator->setFiles($this->files);
-                    }
 
                     if (!$validator->isValid($tocheck, $content)) {
                         $fileerrors += $validator->getMessages();
