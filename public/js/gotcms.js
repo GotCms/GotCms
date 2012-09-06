@@ -657,10 +657,11 @@ var Gc = (function($)
                 url : $connector_url
             }).elfinder('instance');
         },
+
         initDashBoard: function($object, $update_url)
         {
             $this = this;
-            $foo = $('.widget-column').sortable({
+            $sortable = $('.widget-column').sortable({
                 connectWith: '.widget-column',
                 placeholder: 'sortable-placeholder',
                 helper: 'clone',
@@ -679,7 +680,15 @@ var Gc = (function($)
                 update: function(e, ui)
                 {
                     $string = $(this).sortable('toArray').join();
-                    $not_connected = $object[$(this).attr('id')].length == $string.length;
+                    if($this.isEmpty($object[$(this).attr('id')]))
+                    {
+                        $not_connected = false;
+                    }
+                    else
+                    {
+                        $not_connected = $object[$(this).attr('id')].length == $string.length;
+                    }
+
                     $object[$(this).attr('id')] = $string;
                     $dashboardNbUpdate++;
                     if($dashboardNbUpdate == 2 || $not_connected)
@@ -703,7 +712,7 @@ var Gc = (function($)
                 });
             }
 
-            $foo.sortable('options');
+            $sortable.sortable('options');
 
             $('.dashboard-close').on('click', function()
             {
