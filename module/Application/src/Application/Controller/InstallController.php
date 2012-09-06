@@ -249,12 +249,8 @@ class InstallController extends Action
                         $configuration = $session['install']['configuration'];
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_name', ?);", array($configuration['site_name']));
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_is_offline', ?);", array($configuration['site_is_offline']));
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_offline_document', '');", array());
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_domain', ?);", array($this->getRequest()->getUri()->getHost()));
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_path', '/');", array());
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_lifetime', '3600');", array());
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_handler', '0');", array());
-                        $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('debug_is_active', '0');", array());
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('locale', ?);", array($session['install']['lang']));
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from', '');", array());
                         $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from_name', '');", array());

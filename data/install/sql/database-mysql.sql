@@ -1,4 +1,12 @@
+-- ----------------------------
+-- MySQL Database
+--
+-- Project    : GotCms
+-- Description: 
+-- ----------------------------
+
 SET foreign_key_checks = 0;
+
 DROP TABLE IF EXISTS `core_config_data`;
 DROP TABLE IF EXISTS `core_session`;
 DROP TABLE IF EXISTS `core_translate_locale`;

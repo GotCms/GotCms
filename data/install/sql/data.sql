@@ -1,8 +1,8 @@
-------------------------------
+-- ----------------------------
 -- Data for GotCms
 --
 -- Icon values
-------------------------------
+-- ----------------------------
 
 INSERT INTO icon VALUES (1, 'Home', '/media/icons/home.png');
 INSERT INTO icon VALUES (2, 'Camera', '/media/icons/camera.png');
@@ -28,3 +28,11 @@ INSERT INTO icon VALUES (21, 'Trash', '/media/icons/trash.png');
 INSERT INTO icon VALUES (22, 'Trash empty', '/media/icons/trash-empty.png');
 INSERT INTO icon VALUES (23, 'TV', '/media/icons/tv.png');
 INSERT INTO icon VALUES (24, 'Write', '/media/icons/write.png');
+
+
+-- Core_config_data
+INSERT INTO core_config_data (identifier, value) VALUES ('dashboard-widgets', '');
+INSERT INTO core_config_data (identifier, value) VALUES ('debug_is_active', '0');
+INSERT INTO core_config_data (identifier, value) VALUES ('session_handler', '0');
+INSERT INTO core_config_data (identifier, value) VALUES ('site_offline_document', '');
+INSERT INTO core_config_data (identifier, value) VALUES ('cookie_path', '/');
