@@ -36,6 +36,8 @@
 }
 
 .context-menu-item {
+    width: 100% !important;
+    display:block !important;
     padding: 2px 2px 2px 24px;
     background-color: #EEE;
     position: relative;
