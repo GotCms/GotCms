@@ -2,7 +2,7 @@
 
 ## About GotCms
 
-GotCms is a content management system based on [Zend Framework 2](http://framework.zend.com/zf2/). 
+GotCms is a content management system based on [Zend Framework 2](http://framework.zend.com/). 
 
 This product has been made available under the terms of the GNU GPL version 3.
 Please read the LICENSE.txt file for the exact
@@ -48,4 +48,4 @@ All contents are stored in database and works with stream wrapper.
 
 ## Notes
 
-Please visits the best framework ever : [Zend Framework 2](http://framework.zend.com/zf2/)
+Please visits the best framework ever : [Zend Framework 2](http://framework.zend.com/)
