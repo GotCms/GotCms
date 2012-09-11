@@ -63,6 +63,7 @@ return array(
             'formErrors' => 'Gc\View\Helper\FormErrors',
             'documents' => 'Gc\View\Helper\Documents',
             'document' => 'Gc\View\Helper\Document',
+            'partial' => 'Gc\View\Helper\Partial',
             'script' => 'Gc\View\Helper\Script',
             'tools' => 'Gc\View\Helper\Tools',
         ),

@@ -84,6 +84,26 @@ class Model extends AbstractTable
     }
 
     /**
+     * Initiliaze from identifier
+     * @param string $identifier
+     * @return \Gc\View\Model
+     */
+    static function fromIdentifier($id)
+    {
+        $view_table = new Model();
+        $row = $view_table->select(array('identifier' => $id));
+        $current = $row->current();
+        if(!empty($current))
+        {
+            return $view_table->setData((array)$current);
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
      * Save view model
      * @return integer
      */
