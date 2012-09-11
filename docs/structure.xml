@@ -237,7 +237,76 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/View/Model.php" hash="662a62a0c1eea161829541fe1c392285" package="Library\View">
+  <file path="Gc/View/Resolver/TemplatePathStack.php" hash="bff3cf002ea89d4692a5d5dffee61bf1" package="Library\View\Resolver">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Library"/>
+      <tag line="2" name="subpackage" description="View\Resolver"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+    <namespace-alias name="SplFileInfo">SplFileInfo</namespace-alias>
+    <namespace-alias name="Exception">Zend\View\Exception</namespace-alias>
+    <namespace-alias name="Renderer">Zend\View\Renderer\RendererInterface</namespace-alias>
+    <namespace-alias name="PathStack">Zend\View\Resolver\TemplatePathStack</namespace-alias>
+    <class final="false" abstract="false" namespace="Gc\View\Resolver" line="38" package="Default">
+      <name>TemplatePathStack</name>
+      <full_name>\Gc\View\Resolver\TemplatePathStack</full_name>
+      <extends>\Zend\View\Resolver\TemplatePathStack</extends>
+      <docblock line="35">
+        <description><![CDATA[Resolves view scripts based on a stack of paths]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Resolver" line="48" package="">
+        <name>resolve</name>
+        <type>function</type>
+        <docblock line="40">
+          <description><![CDATA[Retrieve the filesystem path to a view script]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="40" name="param" description="" type="string" variable="$name">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="40" name="param" description="" type="null|\Zend\View\Renderer\RendererInterface" variable="$renderer">
+            <type by_reference="false">null</type>
+            <type by_reference="false">\Zend\View\Renderer\RendererInterface</type>
+          </tag>
+          <tag line="40" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="40" name="throws" description="" type="\Zend\View\Exception\RuntimeException">
+            <type by_reference="false">\Zend\View\Exception\RuntimeException</type>
+          </tag>
+        </docblock>
+        <argument line="48">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="48">
+          <name>$renderer</name>
+          <default><![CDATA[null]]></default>
+          <type>Renderer</type>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Gc/View/Model.php" hash="6cd84ec634916a50e7a59bef905634f6" package="Library\View">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -339,24 +408,43 @@ PHP Version >=5.3]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View" line="90" package="">
-        <name>save</name>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\View" line="91" package="">
+        <name>fromIdentifier</name>
         <type>function</type>
         <docblock line="86">
+          <description><![CDATA[Initiliaze from identifier]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="86" name="param" description="" type="string" variable="$identifier">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="86" name="return" description="" type="\Gc\View\Model">
+            <type by_reference="false">\Gc\View\Model</type>
+          </tag>
+        </docblock>
+        <argument line="91">
+          <name>$identifier</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View" line="110" package="">
+        <name>save</name>
+        <type>function</type>
+        <docblock line="106">
           <description><![CDATA[Save view model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="86" name="return" description="" type="integer">
+          <tag line="106" name="return" description="" type="integer">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View" line="131" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View" line="151" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="127">
+        <docblock line="147">
           <description><![CDATA[Delete view model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="127" name="return" description="" type="boolean">
+          <tag line="147" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
@@ -453,6 +541,83 @@ PHP Version >=5.3]]></long-description>
         <argument line="79">
           <name>$name</name>
           <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Gc/View/Helper/Partial.php" hash="6217d58fe06419dde955fdb1eae91364" package="Library\View\Helper">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Library"/>
+      <tag line="2" name="subpackage" description="View\Helper"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+    <namespace-alias name="ZendPartial">Zend\View\Helper\Partial</namespace-alias>
+    <namespace-alias name="ViewModel">Gc\View\Model</namespace-alias>
+    <namespace-alias name="Stream">Gc\View\Stream</namespace-alias>
+    <namespace-alias name="TemplatePathStack">Gc\View\Resolver\TemplatePathStack</namespace-alias>
+    <class final="false" abstract="false" namespace="Gc\View\Helper" line="39" package="Default">
+      <name>Partial</name>
+      <full_name>\Gc\View\Helper\Partial</full_name>
+      <extends>\Zend\View\Helper\Partial</extends>
+      <docblock line="35">
+        <description><![CDATA[Retrieve view from identifier]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="35" name="example" description="In view: $this-&gt;partial('identifier');"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="45" package="Default">
+        <name>$_params</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="41">
+          <description><![CDATA[Script parameter]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="41" name="var" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="54" package="">
+        <name>__invoke</name>
+        <type>function</type>
+        <docblock line="47">
+          <description><![CDATA[Returns script from identifier.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="47" name="param" description="Name of view script" type="string" variable="$name">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="47" name="param" description="Variables to populate in the view" type="array" variable="$model">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="47" name="return" description="" type="\Gc\View\Helper\mixte">
+            <type by_reference="false">\Gc\View\Helper\mixte</type>
+          </tag>
+        </docblock>
+        <argument line="54">
+          <name>$name</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="54">
+          <name>$model</name>
+          <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
@@ -779,6 +944,70 @@ if data is numeric, return all documents with parent_id equal to $data]]></descr
         <argument line="45">
           <name>$data</name>
           <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Gc/View/Helper/Tools.php" hash="b5c7b0b3c35c9f67893727b5c29c0a5a" package="Library\View\Helper">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Library"/>
+      <tag line="2" name="subpackage" description="View\Helper"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+    <namespace-alias name="AbstractHelper">Zend\View\Helper\AbstractHelper</namespace-alias>
+    <namespace-alias name="ScriptModel">Gc\Script\Model</namespace-alias>
+    <namespace-alias name="Stream">Gc\View\Stream</namespace-alias>
+    <class final="false" abstract="false" namespace="Gc\View\Helper" line="36" package="Default">
+      <name>Tools</name>
+      <full_name>\Gc\View\Helper\Tools</full_name>
+      <extends>\Zend\View\Helper\AbstractHelper</extends>
+      <docblock line="33">
+        <description><![CDATA[Tools helper]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="45" package="">
+        <name>__invoke</name>
+        <type>function</type>
+        <docblock line="38">
+          <description><![CDATA[Tools helper.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="38" name="param" description="" type="string" variable="$function_name">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="38" name="param" description="" type="\Gc\View\Helper\mixte" variable="$value">
+            <type by_reference="false">\Gc\View\Helper\mixte</type>
+          </tag>
+          <tag line="38" name="return" description="" type="\Gc\View\Helper\mixte">
+            <type by_reference="false">\Gc\View\Helper\mixte</type>
+          </tag>
+        </docblock>
+        <argument line="45">
+          <name>$function_name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="45">
+          <name>$value</name>
+          <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
@@ -2494,7 +2723,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Media/File.php" hash="0fd9e985f3beb400cff3f209ac212c64" package="Library\Media">
+  <file path="Gc/Media/File.php" hash="84dc5e33f71670d79af2a381d77a9b52" package="Library\Media">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2563,10 +2792,10 @@ Need document and property to work]]></description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="64" package="">
-        <name>getDirectory</name>
+        <name>getPath</name>
         <type>function</type>
         <docblock line="60">
-          <description><![CDATA[Return directory]]></description>
+          <description><![CDATA[Return path]]></description>
           <long-description><![CDATA[]]></long-description>
           <tag line="60" name="return" description="" type="string">
             <type by_reference="false">string</type>
@@ -2574,30 +2803,41 @@ Need document and property to work]]></description>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="73" package="">
-        <name>upload</name>
+        <name>getDirectory</name>
         <type>function</type>
         <docblock line="69">
+          <description><![CDATA[Return directory]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="69" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="82" package="">
+        <name>upload</name>
+        <type>function</type>
+        <docblock line="78">
           <description><![CDATA[Upload file to the server]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="69" name="return" description="" type="boolean">
+          <tag line="78" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="130" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="140" package="">
         <name>remove</name>
         <type>function</type>
-        <docblock line="125">
+        <docblock line="135">
           <description><![CDATA[Remove image]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="125" name="param" description="" type="string" variable="$filename">
+          <tag line="135" name="param" description="" type="string" variable="$filename">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="125" name="return" description="" type="boolean">
+          <tag line="135" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="130">
+        <argument line="140">
           <name>$filename</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -8182,7 +8422,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Upload/Editor.php" hash="65cba10508f27ed50b01e521c4c741bb" package="Datatype">
+  <file path="Datatypes/Upload/Editor.php" hash="1b2798aeacc857d07589dd955b78c0ce" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8227,13 +8467,13 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="93" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="96" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="89">
+        <docblock line="92">
           <description><![CDATA[Load upload editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="89" name="return" description="" type="\Datatypes\Upload\mixte">
+          <tag line="92" name="return" description="" type="\Datatypes\Upload\mixte">
             <type by_reference="false">\Datatypes\Upload\mixte</type>
           </tag>
         </docblock>
@@ -8286,7 +8526,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Upload/upload-editor.phtml" hash="ccaa0e98368be1fbd5d78546c3c22f47" package="Datatype">
+  <file path="Datatypes/Upload/upload-editor.phtml" hash="a7cd553569a364faee9632b5bb7e6a62" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8334,7 +8574,7 @@ PHP Version >=5.3]]></long-description>
       <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
     </docblock>
   </file>
-  <file path="Datatypes/Upload/PrevalueEditor.php" hash="2258137197a81a6503a660cb0a212d6b" package="Datatype">
+  <file path="Datatypes/Upload/PrevalueEditor.php" hash="a164cf76fe409d88396b378cb054840b" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -9336,7 +9576,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Mixed/Editor.php" hash="853b428761db4825a7eac308ffaba8d8" package="Datatype">
+  <file path="Datatypes/Mixed/Editor.php" hash="3d4e5b6da3ea4b85160cee26d137fee1" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -9392,31 +9632,31 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Mixed" line="93" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Mixed" line="92" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="89">
+        <docblock line="88">
           <description><![CDATA[Load mixed editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="89" name="return" description="" type="\Datatypes\Mixed\mixte">
+          <tag line="88" name="return" description="" type="\Datatypes\Mixed\mixte">
             <type by_reference="false">\Datatypes\Mixed\mixte</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Mixed" line="192" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Mixed" line="187" package="">
         <name>_getDatatype</name>
         <type>function</type>
-        <docblock line="187">
+        <docblock line="182">
           <description><![CDATA[Retrieve datatypes]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="187" name="param" description="" type="string" variable="$name">
+          <tag line="182" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="187" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
+          <tag line="182" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype</type>
           </tag>
         </docblock>
-        <argument line="192">
+        <argument line="187">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -10036,6 +10276,7 @@ PHP Version >=5.3]]></long-description>
     <package name="Validator" full_name="Library\Validator"/>
     <package name="View" full_name="Library\View">
       <package name="Helper" full_name="Library\View\Helper"/>
+      <package name="Resolver" full_name="Library\View\Resolver"/>
     </package>
   </package>
   <namespace name="Datatypes" full_name="Datatypes">
@@ -10081,6 +10322,7 @@ PHP Version >=5.3]]></long-description>
     <namespace name="Validator" full_name="Gc\Validator"/>
     <namespace name="View" full_name="Gc\View">
       <namespace name="Helper" full_name="Gc\View\Helper"/>
+      <namespace name="Resolver" full_name="Gc\View\Resolver"/>
     </namespace>
   </namespace>
   <marker count="0">todo</marker>

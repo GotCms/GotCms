@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>phpDocumentor » \Gc\Component\TreeView</title>
+<title>phpDocumentor » \Gc\View\Resolver\TemplatePathStack</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -59,80 +59,50 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#__construct" title="__construct :: Treeview constructor"><span class="description">Treeview constructor</span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#__toString" title="__toString :: Render treeview html"><span class="description">Render treeview html</span><pre>__toString()</pre></a></li>
-<li class="method public "><a href="#render" title="render :: Render treeview html"><span class="description">Render treeview html</span><pre>render()</pre></a></li>
-<li class="nav-header">
-<i class="icon-custom icon-property"></i> Properties</li>
-<li class="nav-header protected">» Protected</li>
-<li class="property protected "><a href="#%24_data" title="$_data :: Data stored"><span class="description">Data stored</span><pre>$_data</pre></a></li>
+<li class="method public "><a href="#resolve" title="resolve :: Retrieve the filesystem path to a view script"><span class="description">Retrieve the filesystem path to a view script</span><pre>resolve()</pre></a></li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CGc%5CComponent%5CTreeView" id="\Gc\Component\TreeView"></a><ul class="breadcrumb">
+<a name="%5CGc%5CView%5CResolver%5CTemplatePathStack" id="\Gc\View\Resolver\TemplatePathStack"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/Gc.html">Gc</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.Component.html">Component</a></li>
+<span class="divider">\</span><li><a href="../namespaces/Gc.View.html">View</a></li>
+<span class="divider">\</span><li><a href="../namespaces/Gc.View.Resolver.html">Resolver</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Gc.Component.TreeView.html">TreeView</a>
+<span class="divider">\</span><a href="../classes/Gc.View.Resolver.TemplatePathStack.html">TemplatePathStack</a>
 </li>
 </ul>
-<div href="../classes/Gc.Component.TreeView.html" class="element class">
-<p class="short_description">Create xml for jQuery treeview</p>
+<div href="../classes/Gc.View.Resolver.TemplatePathStack.html" class="element class">
+<p class="short_description">Resolves view scripts based on a stack of paths</p>
 <div class="details">
 <p class="long_description"></p>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
-<h2>Treeview constructor</h2>
-<pre>__construct(array $treeview_data) </pre>
+<a name="resolve" id="resolve"></a><div class="element clickable method public resolve" data-toggle="collapse" data-target=".resolve .collapse">
+<h2>Retrieve the filesystem path to a view script</h2>
+<pre>resolve(string $name, Renderer $renderer) : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$treeview_data</h4>
-<code>array</code>
+<h4>$name</h4>
+<code>string</code>
 </div>
-</div></div>
+<div class="subelement argument">
+<h4>$renderer</h4>
+<code>null\Zend\View\Renderer\RendererInterface</code>
 </div>
-<a name="__toString" id="__toString"></a><div class="element clickable method public __toString" data-toggle="collapse" data-target=".__toString .collapse">
-<h2>Render treeview html</h2>
-<pre>__toString() : string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\Zend\View\Exception\RuntimeException</code></th>
+<td></td>
+</tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
 </div></div>
-</div>
-<a name="render" id="render"></a><div class="element clickable method public render" data-toggle="collapse" data-target=".render .collapse">
-<h2>Render treeview html</h2>
-<pre>render(array $treeview_data, boolean $init) : string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$treeview_data</h4>
-<code>array</code><p>contains data as array</p></div>
-<div class="subelement argument">
-<h4>$init</h4>
-<code>boolean</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
-</div></div>
-</div>
-<h3>
-<i class="icon-custom icon-property"></i> Properties</h3>
-<a name="%24_data" id="$_data"> </a><div class="element clickable property protected $_data" data-toggle="collapse" data-target=".$_data .collapse">
-<h2>Data stored</h2>
-<pre>$_data : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
 </div>
 </div>

@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>phpDocumentor » \Gc\Component\TreeView</title>
+<title>phpDocumentor » \Gc\View\Helper\Partial</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -59,78 +59,57 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#__construct" title="__construct :: Treeview constructor"><span class="description">Treeview constructor</span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#__toString" title="__toString :: Render treeview html"><span class="description">Render treeview html</span><pre>__toString()</pre></a></li>
-<li class="method public "><a href="#render" title="render :: Render treeview html"><span class="description">Render treeview html</span><pre>render()</pre></a></li>
+<li class="method public "><a href="#__invoke" title="__invoke :: Returns script from identifier."><span class="description">Returns script from identifier.</span><pre>__invoke()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
 <li class="nav-header protected">» Protected</li>
-<li class="property protected "><a href="#%24_data" title="$_data :: Data stored"><span class="description">Data stored</span><pre>$_data</pre></a></li>
+<li class="property protected "><a href="#%24_params" title="$_params :: Script parameter"><span class="description">Script parameter</span><pre>$_params</pre></a></li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CGc%5CComponent%5CTreeView" id="\Gc\Component\TreeView"></a><ul class="breadcrumb">
+<a name="%5CGc%5CView%5CHelper%5CPartial" id="\Gc\View\Helper\Partial"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/Gc.html">Gc</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.Component.html">Component</a></li>
+<span class="divider">\</span><li><a href="../namespaces/Gc.View.html">View</a></li>
+<span class="divider">\</span><li><a href="../namespaces/Gc.View.Helper.html">Helper</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/Gc.Component.TreeView.html">TreeView</a>
+<span class="divider">\</span><a href="../classes/Gc.View.Helper.Partial.html">Partial</a>
 </li>
 </ul>
-<div href="../classes/Gc.Component.TreeView.html" class="element class">
-<p class="short_description">Create xml for jQuery treeview</p>
+<div href="../classes/Gc.View.Helper.Partial.html" class="element class">
+<p class="short_description">Retrieve view from identifier</p>
 <div class="details">
 <p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>example</th>
+<td>In view: $this-&gt;partial('identifier');</td>
+</tr></table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
-<h2>Treeview constructor</h2>
-<pre>__construct(array $treeview_data) </pre>
+<a name="__invoke" id="__invoke"></a><div class="element clickable method public __invoke" data-toggle="collapse" data-target=".__invoke .collapse">
+<h2>Returns script from identifier.</h2>
+<pre>__invoke(string $name, array $model) : \Gc\View\Helper\mixte</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$treeview_data</h4>
-<code>array</code>
-</div>
-</div></div>
-</div>
-<a name="__toString" id="__toString"></a><div class="element clickable method public __toString" data-toggle="collapse" data-target=".__toString .collapse">
-<h2>Render treeview html</h2>
-<pre>__toString() : string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
-</div></div>
-</div>
-<a name="render" id="render"></a><div class="element clickable method public render" data-toggle="collapse" data-target=".render .collapse">
-<h2>Render treeview html</h2>
-<pre>render(array $treeview_data, boolean $init) : string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
-<h3>Parameters</h3>
+<h4>$name</h4>
+<code>string</code><p>Name of view script</p></div>
 <div class="subelement argument">
-<h4>$treeview_data</h4>
-<code>array</code><p>contains data as array</p></div>
-<div class="subelement argument">
-<h4>$init</h4>
-<code>boolean</code>
-</div>
+<h4>$model</h4>
+<code>array</code><p>Variables to populate in the view</p></div>
 <h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
+<div class="subelement response"><code>\Gc\View\Helper\mixte</code></div>
 </div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a name="%24_data" id="$_data"> </a><div class="element clickable property protected $_data" data-toggle="collapse" data-target=".$_data .collapse">
-<h2>Data stored</h2>
-<pre>$_data : array</pre>
+<a name="%24_params" id="$_params"> </a><div class="element clickable property protected $_params" data-toggle="collapse" data-target=".$_params .collapse">
+<h2>Script parameter</h2>
+<pre>$_params : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>

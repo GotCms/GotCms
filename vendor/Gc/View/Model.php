@@ -88,10 +88,10 @@ class Model extends AbstractTable
      * @param string $identifier
      * @return \Gc\View\Model
      */
-    static function fromIdentifier($id)
+    static function fromIdentifier($identifier)
     {
         $view_table = new Model();
-        $row = $view_table->select(array('identifier' => $id));
+        $row = $view_table->select(array('identifier' => $identifier));
         $current = $row->current();
         if(!empty($current))
         {
