@@ -180,6 +180,18 @@ CREATE TABLE "view" (
 ) WITH OIDS;
 ALTER TABLE "view" ADD CONSTRAINT "view_pk" PRIMARY KEY("id");
 
+DROP TABLE IF EXISTS "script" CASCADE;
+CREATE TABLE "script" (
+"id" serial NOT NULL,
+"created_at" timestamp without time zone NOT NULL,
+"updated_at" timestamp without time zone NOT NULL,
+"name" character varying NOT NULL,
+"identifier" character varying,
+"content" text,
+"description" character varying
+) WITH OIDS;
+ALTER TABLE "script" ADD CONSTRAINT "script_pk" PRIMARY KEY("id");
+
 DROP TABLE IF EXISTS "user_acl_permission" CASCADE;
 CREATE TABLE "user_acl_permission" (
 "id" serial NOT NULL,

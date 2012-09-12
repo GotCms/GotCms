@@ -19,6 +19,7 @@ DROP TABLE IF EXISTS `icon`;
 DROP TABLE IF EXISTS `layout`;
 DROP TABLE IF EXISTS `property`;
 DROP TABLE IF EXISTS `property_value`;
+DROP TABLE IF EXISTS `script`;
 DROP TABLE IF EXISTS `tab`;
 DROP TABLE IF EXISTS `view`;
 DROP TABLE IF EXISTS `user`;
@@ -180,6 +181,18 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `view` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `identifier` VARCHAR(255),
+    `content` TEXT,
+    `description` VARCHAR(255),
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `name` (`identifier`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE `script` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `created_at` DATETIME NOT NULL,
     `updated_at` DATETIME NOT NULL,
