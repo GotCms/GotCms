@@ -26,10 +26,52 @@
 
 namespace Gc;
 
-/**
- * Extension for Zend\Mail
- */
-class Mail extends Zend\Mail
-{
+use Zend\Mail\Message,
+    Zend\Mail\Transport\Sendmail as SendmailTransport;
 
+/**
+ * Extension for Zend\Mail\Message
+ */
+class Mail extends Message
+{
+    /**
+     * Initialize mail
+     * @param string $encoding
+     * @param string $message
+     * @param string $from
+     * @param string $to
+     * @return void
+     */
+    public function __construct($encoding = NULL, $message = NULL, $from = NULL, $to = NULL)
+    {
+        if(!empty($encoding))
+        {
+            $this->setEncoding($encoding);
+        }
+
+        if(!empty($message))
+        {
+            $this->setBody($message);
+        }
+
+        if(!empty($from))
+        {
+            $this->setFrom($from);
+        }
+
+        if(!empty($to))
+        {
+            $this->addTo($to);
+        }
+    }
+
+    /**
+     * send mail
+     * @return void
+     */
+    public function send()
+    {
+        $transport = new SendmailTransport();
+        $transport->send($this);
+    }
 }
