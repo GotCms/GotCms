@@ -34,9 +34,6 @@ use Gc\Document;
  */
 class Navigation
 {
-    const XML_NAV_HEADER = '<?xml version="1.0" encoding="UTF-8"?><configdata><nav>';
-    const XML_NAV_FOOTER = '</nav></configdata>';
-
     /**
      * List of \Gc\Document\Model
      * @var array
@@ -47,7 +44,7 @@ class Navigation
      * Base path for urls
      * @var string
      */
-    protected $_basePath;
+    protected $_basePath = '';
 
     /**
      * Constructor, initialize document
@@ -88,44 +85,30 @@ class Navigation
      */
     public function render(array $documents = NULL, $parent_url = NULL)
     {
-        $navigation = '';
+        $navigation = array();
         $hasFooter = FALSE;
         if($documents === NULL && !empty($this->_documents))
         {
-            $navigation .= self::XML_NAV_HEADER;
             $documents = $this->_documents;
-            $hasFooter = TRUE;
         }
 
         foreach($documents as $document)
         {
             $children = $document->getChildren();
-            if($document->showInNav() && $document->isPublished())
+            if($document->isPublished())
             {
-                $navigation .= '<document-'.$document->getUrlKey().'>';
-                $navigation .= '<label>'.$document->getName().'</label>';
-                $navigation .= '<uri>' . $this->getBasePath() . ($parent_url !== NULL ? $parent_url : '').'/'.$document->getUrlKey().'</uri>';
+                $data = array();
+                $data['label'] = $document->getName();
+                $data['uri'] = $this->getBasePath() . ($parent_url !== NULL ? $parent_url : '') . '/' . $document->getUrlKey();
+                $data['visible'] = $document->showInNav();
+
                 if(!empty($children) && is_array($children))
                 {
-                    $navigation .= '<pages>';
-                    $navigation .= $this->render($children, $document->getUrlKey());
-                    $navigation .= '</pages>';
+                    $data['pages'] = $this->render($children, $document->getUrlKey());
                 }
 
-                $navigation .= '</document-'.$document->getUrlKey().'>';
+                $navigation['document-' . $document->getId()] = $data;
             }
-            else
-            {
-                if(!empty($children) && is_array($children))
-                {
-                    $navigation .= $this->render($children);
-                }
-            }
-        }
-
-        if($hasFooter === TRUE)
-        {
-            $navigation .= self::XML_NAV_FOOTER;
         }
 
         return $navigation;

@@ -58,16 +58,14 @@ class IndexController extends Action
             die('Site offline');
         }
 
-        $url = parse_url($this->getRequest()->getRequestUri());
-        $path = $url['path'];
-        if($path == '/')
+        $path = $this->getRouteMatch()->getParam('path');
+        if(empty($path))
         {
             $document = Document\Model::fromUrlKey('');
         }
         else
         {
             $explode_path = $this->explodePath($path);
-
             $children = NULL;
             $key = array();
             $document = NULL;
@@ -194,7 +192,7 @@ class IndexController extends Action
      */
     protected function explodePath($path)
     {
-        $explode_path = explode('/', substr($path, 1));
+        $explode_path = explode('/',$path);
         if(preg_match('/\/$/', $path))
         {
             array_pop($explode_path);
