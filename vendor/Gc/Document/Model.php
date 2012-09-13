@@ -195,6 +195,7 @@ class Model extends AbstractTable implements IterableInterface
             'url_key' => $this->getUrlKey(),
             'updated_at' => date('Y-m-d H:i:s'),
             'status' => ($this->getStatus() === NULL ? self::STATUS_DISABLE : $this->getStatus()),
+            'sort_order' => (int)$this->getSortOrder(),
             'show_in_nav' => $this->showInNav() === TRUE ? 'TRUE' : 'FALSE',
             'user_id' => (int)$this->getUserId(),
             'document_type_id' => (int)$this->getDocumentTypeId() == 0 ? NULL : (int)$this->getDocumentTypeId(),

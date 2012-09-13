@@ -53,6 +53,7 @@ CREATE TABLE "document" (
 "name" character varying NOT NULL,
 "url_key" character varying NOT NULL,
 "status" integer NOT NULL DEFAULT 0,
+"sort_order" integer NOT NULL DEFAULT 0,
 "show_in_nav" boolean DEFAULT false,
 "user_id" integer NOT NULL,
 "document_type_id" integer,

@@ -71,6 +71,7 @@ CREATE TABLE `document` (
     `name` VARCHAR(255) NOT NULL,
     `url_key` VARCHAR(255) NOT NULL,
     `status` INT NOT NULL DEFAULT 0,
+    `sort_order` INT NOT NULL DEFAULT 0,
     `show_in_nav` boolean DEFAULT false,
     `user_id` INT NOT NULL,
     `document_type_id` integer,

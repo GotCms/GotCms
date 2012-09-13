@@ -435,6 +435,24 @@ class DocumentController extends Action
         return $this->_returnJson(array('treeview' => Component\TreeView::render($documents_list, empty($document_id) ? TRUE : FALSE)));
     }
 
+    public function sortOrderAction()
+    {
+        $order = $this->getRequest()->getPost()->get('order');
+        $list = explode(',', str_replace('document_', '', $order));
+
+        foreach($list as $order => $document_id)
+        {
+            $document_model = DocumentModel::fromId($document_id);
+            if(!empty($document_model))
+            {
+                $document_model->setSortOrder($order);
+                $document_model->save();
+            }
+        }
+
+        return $this->_returnJson(array('success' => TRUE));
+    }
+
     /**
      * Check url key with deleted space and special chars
      * @param string $string

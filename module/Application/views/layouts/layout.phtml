@@ -75,7 +75,7 @@
             $(document).ready(function()
             {
                 Gc.setOption('routes', $.parseJSON('<?php echo $this->escapeJs($this->routes); ?>'));
-                Gc.initDocumentMenu(<?php echo $this->documentId; ?>);
+                Gc.initDocumentMenu(<?php echo $this->documentId; ?>, '<?php echo $this->escapeJs($this->url('documentSortOrder')); ?>');
             });
         <?php endif; ?>
     </script>

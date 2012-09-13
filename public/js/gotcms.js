@@ -336,7 +336,7 @@ var Gc = (function($)
             });
         },
 
-        initDocumentMenu: function($document_id)
+        initDocumentMenu: function($document_id, $update_document_url)
         {
             $this = this;
             $('#browser').jstree({
@@ -345,6 +345,19 @@ var Gc = (function($)
             }).bind('loaded.jstree', function (event, data)
             {
                 $has_cut_action = false;
+                $('#documents').find('ul').sortable({
+                    update: function(e, ui)
+                    {
+                        $data = {order: $(this).sortable('toArray').join()};
+                        $.ajax({
+                            url: $update_document_url,
+                            type: 'post',
+                            dataType: 'json',
+                            data: $data
+                        });
+                    }
+                });
+
                 $.contextMenu(
                 {
                     selector: '#browser a',

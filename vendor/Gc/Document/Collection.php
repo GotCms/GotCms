@@ -68,6 +68,7 @@ class Collection extends AbstractTable implements IterableInterface
             $rows = $this->select(function(Select $select)
             {
                 $select->where->equalTo('parent_id', $this->getParentId());
+                $select->order('sort_order ASC');
                 $select->order('name ASC');
             });
         }
@@ -76,6 +77,7 @@ class Collection extends AbstractTable implements IterableInterface
             $rows = $this->select(function(Select $select)
             {
                 $select->where->isNull('parent_id');
+                $select->order('sort_order ASC');
                 $select->order('name ASC');
             });
         }
@@ -100,6 +102,8 @@ class Collection extends AbstractTable implements IterableInterface
         $rows = $this->select(function(Select $select)
         {
             $select->where->equalTo('status', Model::STATUS_ENABLE);
+            $select->order('sort_order ASC');
+            $select->order('name ASC');
         });
 
         return $rows->toArray();
