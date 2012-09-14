@@ -152,9 +152,24 @@ class Document extends AbstractForm
 
         $this->add($show_in_nav);
 
-        $views_collection = new View\Collection();
+        $document_type = $document->getDocumentType();
+        $views_collection = $document_type->getAvailableViews();
+        $select = $views_collection->getSelect();
+        if(empty($select))
+        {
+            $view_model = \Gc\View\Model::fromId($document->getDocumentType()->getDefaultViewId());
+            if(!empty($view_model))
+            {
+                $select = array($view_model->getId() => $view_model->getName());
+            }
+            else
+            {
+                $select = array();
+            }
+        }
+
         $view = new Element\Select('document-view');
-        $view->setValueOptions($views_collection->getSelect())
+        $view->setValueOptions($select)
             ->setValue((string)$document->getViewId())
             ->setAttribute('id', 'view')
             ->setAttribute('label', 'View');
