@@ -153,7 +153,7 @@ class DocumentType extends AbstractForm
         $fieldsets = new FieldSet('views');
 
         $available_views = new Element\Select('available_views');
-        $available_views->setValueOptions($this->_viewCollection->getSelect());
+        $available_views->setValueOptions(array('' => '') + $this->_viewCollection->getSelect());
         $fieldsets->add($available_views);
 
         $default_view = new Element\Select('default_view');

@@ -186,8 +186,13 @@ class Model extends AbstractTable
                 $delete->from('document_type_view');
                 $delete->where(sprintf('document_type_id = %s', (int)$this->getId()));
                 $this->execute($delete);
-                foreach($this->_views as $view);
+                foreach($this->_views as $view)
                 {
+                    if(empty($View))
+                    {
+                        continue;
+                    }
+
                     $insert = new Sql\Insert();
                     $insert->into('document_type_view')
                         ->columns(array('document_type_id', 'view_id'))
