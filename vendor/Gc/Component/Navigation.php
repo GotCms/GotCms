@@ -47,6 +47,12 @@ class Navigation
     protected $_basePath = '/';
 
     /**
+     * Request uri
+     * @var string
+     */
+     protected $_requestUri;
+
+    /**
      * Constructor, initialize document
      * @return void
      */
@@ -55,6 +61,7 @@ class Navigation
         $documents = new Document\Collection();
         $documents->load(0);
         $this->_documents = $documents->getDocuments();
+        $this->_requestUri = \Gc\Registry::get('Application')->getRequest()->getRequestUri();
     }
 
     /**
@@ -101,6 +108,7 @@ class Navigation
                 $data['label'] = $document->getName();
                 $data['uri'] = $this->getBasePath() . ($parent_url !== NULL ? $parent_url . '/' : '') . $document->getUrlKey();
                 $data['visible'] = $document->showInNav();
+                $data['active'] = $data['uri'] == $this->_requestUri;
 
                 if(!empty($children) && is_array($children))
                 {
