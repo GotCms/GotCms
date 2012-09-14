@@ -320,7 +320,7 @@ class DocumentTypeController extends Action
                         $property_id = $matches[1];
 
                         $property_model = Property\Model::fromId($property_id);
-                        if(empty($property_model) or $property_model->getTabId() != $tab_model->getId())
+                        if(empty($property_model))
                         {
                             $property_model = new Property\Model();
                         }
