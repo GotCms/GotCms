@@ -69,7 +69,7 @@ class CkEditor extends Object
                 $content = array();
                 foreach($group['items'] as $item)
                 {
-                    if(in_array($item, $toolbar_items))
+                    if(!empty($toolbar_items[$item]))
                     {
                         $content[] = $item;
                     }

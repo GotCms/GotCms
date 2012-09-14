@@ -57,7 +57,7 @@ class Editor extends AbstractEditor
         $parameters = $this->getConfig();
         $ckeditor = new CkEditor();
 
-        if(empty($parameters) or !is_arary($parameters))
+        if(empty($parameters) or !is_array($parameters))
         {
             $parameters = array();
         }
