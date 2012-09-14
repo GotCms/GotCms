@@ -44,7 +44,7 @@ class Navigation
      * Base path for urls
      * @var string
      */
-    protected $_basePath = '';
+    protected $_basePath = '/';
 
     /**
      * Constructor, initialize document
@@ -99,12 +99,12 @@ class Navigation
             {
                 $data = array();
                 $data['label'] = $document->getName();
-                $data['uri'] = $this->getBasePath() . ($parent_url !== NULL ? $parent_url : '') . '/' . $document->getUrlKey();
+                $data['uri'] = $this->getBasePath() . ($parent_url !== NULL ? $parent_url . '/' : '') . $document->getUrlKey();
                 $data['visible'] = $document->showInNav();
 
                 if(!empty($children) && is_array($children))
                 {
-                    $data['pages'] = $this->render($children, $document->getUrlKey());
+                    $data['pages'] = $this->render($children, (empty($parent_url) ? NULL : $parent_url . '/') . $document->getUrlKey());
                 }
 
                 $navigation['document-' . $document->getId()] = $data;
