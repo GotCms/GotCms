@@ -2,7 +2,7 @@
 -- MySQL Database
 --
 -- Project    : GotCms
--- Description: 
+-- Description:
 -- ----------------------------
 
 SET foreign_key_checks = 0;
@@ -106,7 +106,7 @@ CREATE TABLE `property` (
     `identifier` VARCHAR(255) NOT NULL,
     `description` VARCHAR(255),
     `required` boolean NOT NULL DEFAULT false,
-    `order` integer DEFAULT 0,
+    `sort_order` integer DEFAULT 0,
     `tab_id` INT NOT NULL,
     `datatype_id` INT NOT NULL,
     PRIMARY KEY (`id`),
@@ -125,7 +125,7 @@ CREATE TABLE `tab` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `description` VARCHAR(255),
-    `order` integer DEFAULT 0,
+    `sort_order` integer DEFAULT 0,
     `document_type_id` INT NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;

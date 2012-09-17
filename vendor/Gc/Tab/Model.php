@@ -71,7 +71,7 @@ class Model extends AbstractTable
         $this->setName($row->name);
         $this->setDescription($row->description);
         $this->setDocumentTypeId($row->document_type_id);
-        $this->setOrder($row->order);
+        $this->setSortOrder($row->order);
 
         return $this;
     }
@@ -85,7 +85,7 @@ class Model extends AbstractTable
         $array_save = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
-            'order' => $this->getOrder(),
+            'sort_order' => $this->getOrder(),
             'document_type_id' => $this->getDocumentTypeId(),
         );
 

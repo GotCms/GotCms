@@ -70,20 +70,6 @@ class Model extends AbstractTable
     }
 
     /**
-     * Get property order
-     * @return integer
-     */
-    public function getOrder()
-    {
-        if($this->getData('order') === NULL)
-        {
-            $this->setData('order', 1);
-        }
-
-        return $this->getData('order');
-    }
-
-    /**
      * Set property value
      * @param mixte $value
      * @return \Gc\Property\Model
@@ -164,7 +150,7 @@ class Model extends AbstractTable
             'description' => $this->getDescription(),
             'identifier' => $this->getIdentifier(),
             'required' => $this->isRequired() == TRUE ? 'TRUE' : 'FALSE',
-            'order' => $this->getOrder(),
+            'sort_order' => $this->getOrder(),
             'tab_id' => $this->getTabId(),
             'datatype_id' => $this->getDatatypeId(),
         );

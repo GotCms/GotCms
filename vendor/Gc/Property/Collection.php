@@ -89,7 +89,7 @@ class Collection extends AbstractTable
                 $select->where(array('tab.document_type_id' => $this->getDocumentTypeId()));
             }
 
-            //$select->order('properties.order ASC'); @TODO order statments
+            $select->order('property.sort_order ASC');
 
             $rows = $this->fetchAll($select);
 

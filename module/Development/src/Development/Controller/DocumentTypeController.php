@@ -120,7 +120,7 @@ class DocumentTypeController extends Action
                         $tab_model->setDescription($tab_values->getValue('description'));
                         $tab_model->setName($tab_values->getValue('name'));
                         $tab_model->setDocumentTypeId($document_type->getId());
-                        $tab_model->setOrder(++$idx);
+                        $tab_model->setSortOrder(++$idx);
                         $tab_model->save();
                         $existing_tabs[$tab_id] = $tab_model->getId();
                     }
@@ -143,7 +143,7 @@ class DocumentTypeController extends Action
                         $property_model->setDatatypeId($property_values->getValue('datatype'));
                         $required = $property_values->getValue('required');
                         $property_model->isRequired(!empty($required) ? TRUE : FALSE);
-                        $property_model->setOrder(++$idx);
+                        $property_model->setSortOrder(++$idx);
                         $property_model->save();
                     }
 
@@ -293,7 +293,7 @@ class DocumentTypeController extends Action
                         $tab_model->setDescription($tab_values->getValue('description'));
                         $tab_model->setName($tab_values->getValue('name'));
                         $tab_model->setDocumentTypeId($document_type->getId());
-                        $tab_model->setOrder(++$idx);
+                        $tab_model->setSortOrder(++$idx);
                         $tab_model->save();
                         $existing_tabs[$tab_id] = $tab_model->getId();
                     }
@@ -332,7 +332,7 @@ class DocumentTypeController extends Action
                         $property_model->setDatatypeId($property_values->getValue('datatype'));
                         $required = $property_values->getValue('required');
                         $property_model->isRequired(!empty($required) ? TRUE : FALSE);
-                        $property_model->setOrder(++$idx);
+                        $property_model->setSortOrder(++$idx);
                         $property_model->save();
                         $existing_properties[] = $property_model->getId();
                     }

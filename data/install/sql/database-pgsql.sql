@@ -2,7 +2,7 @@
 -- pgDesigner 1.2.17
 --
 -- Project    : GotCms
--- Description: 
+-- Description:
 -- ----------------------------
 
 
@@ -90,7 +90,7 @@ CREATE TABLE "property" (
 "identifier" character varying NOT NULL,
 "description" character varying,
 "required" boolean NOT NULL DEFAULT false,
-"order" integer DEFAULT 0,
+"sort_order" integer DEFAULT 0,
 "tab_id" integer NOT NULL,
 "datatype_id" integer NOT NULL
 ) WITH OIDS;
@@ -110,7 +110,7 @@ CREATE TABLE "tab" (
 "id" serial NOT NULL,
 "name" character varying NOT NULL,
 "description" character varying,
-"order" integer DEFAULT 0,
+"sort_order" integer DEFAULT 0,
 "document_type_id" integer NOT NULL
 ) WITH OIDS;
 ALTER TABLE "tab" ADD CONSTRAINT "tab_pk" PRIMARY KEY("id");

@@ -65,7 +65,11 @@ class Collection extends AbstractTable
         {
             if(!empty($document_type_id))
             {
-                $rows = $this->select(array('document_type_id' => $document_type_id));
+                $rows = $this->select(function(Select $select)
+                {
+                    $select->where->equalTo('document_type_id', $this->getDocumentTypeId());
+                    $select->order('sort_order ASC');
+                });
             }
             else
             {
