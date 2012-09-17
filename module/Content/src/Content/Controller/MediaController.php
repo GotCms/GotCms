@@ -131,9 +131,10 @@ class MediaController extends Action
             return $this->_returnJson(array('error' => TRUE));
         }
 
+        $file = base64_decode($this->getRouteMatch()->getParam('file'));
         $file_class = new File();
         $file_class->init($property, $document);
-        return $this->_returnJson(array($file_class->remove($this->getRouteMatch()->getParam('file'))));
+        return $this->_returnJson(array($file_class->remove($file)));
     }
 
     /**

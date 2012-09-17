@@ -118,7 +118,7 @@ class File extends Object
                 $file_object->delete_url = $router->assemble(array(
                     'document_id' => $this->getDocument()->getId(),
                     'property_id' => $this->getProperty()->getId(),
-                    'file' => $file_data['name'])
+                    'file' => base64_encode($file_data['name']))
                 , array('name' => 'mediaRemove'));
                 $file_object->delete_type = 'DELETE';
                 $data[] = $file_object;
@@ -139,7 +139,7 @@ class File extends Object
      */
     public function remove($filename)
     {
-         $file = $this->getPath() . $this->getDirectory() . '/' . $filename;
+         $file = $this->getPath() . $filename;
          if(file_exists($file))
          {
              @unlink($file);

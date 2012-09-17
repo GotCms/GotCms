@@ -118,7 +118,7 @@ class Editor extends AbstractEditor
                 $file_object->delete_url = $router->assemble(array(
                     'document_id' => $this->getDatatype()->getDocument()->getId(),
                     'property_id' => $this->getProperty()->getId(),
-                    'file' => $file_data['value']),
+                    'file' => base64_encode($file_data['value'])),
                 array('name' => 'mediaRemove'));
                 $file_object->delete_type = 'DELETE';
                 $file_list[] = $file_object;
