@@ -154,20 +154,4 @@ class Editor extends AbstractEditor
         $headlink->appendStylesheet('/css/jquery.fileupload-ui.css')
             ->appendStylesheet('/css/jfileupload-bootstrap.css');
     }
-
-    /**
-     * Retrieve param
-     *
-     * @param mixte $key
-     * @param mixte $value
-     * @param mixte $default
-     * @return unknown
-     */
-    protected function getParam($key, $value, $default)
-    {
-        $array = $this->getRequest()->getPost()->get($key);
-
-        return is_array($array) && isset($array[$value]) ? $array[$value] : $default;
-    }
-
 }

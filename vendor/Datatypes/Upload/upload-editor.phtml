@@ -80,7 +80,7 @@
 
             previewMaxWidth:        80,
             previewMaxHeight:       80,
-            url:                    '<?php echo $this->escapeJs($this->escapeHtml($this->uploadUrl)); ?>',
+            url:                    '<?php echo $this->escapeJs($this->uploadUrl); ?>',
             uploadTemplateId:       null,
             downloadTemplateId:     null,
             uploadTemplate:         function (o)
@@ -173,13 +173,25 @@
         // Load existing files:
         $('#<?php echo $this->name; ?>').each(function ()
         {
-            var that = this;
+            var $this = $(this);
             var result = $.parseJSON('<?php echo $this->files; ?>');
             if(result && result.length)
             {
-                $(that).fileupload('option', 'done')
-                    .call(that, null, {result: result});
+                <?php if(empty($this->options['maxNumberOfFiles'])): ?>
+                    $this.fileupload('option', 'maxNumberOfFiles', 0);
+                <?php endif; ?>
+                $this.fileupload('option', 'done').call(this, null, {result: result});
             }
         });
+
+        <?php if(empty($this->options['maxNumberOfFiles'])): ?>
+            $('#<?php echo $this->name; ?>').bind('fileuploaddestroy', function (e, data)
+            {
+                $(this).fileupload('option', 'maxNumberOfFiles', 1);
+            }).bind('fileuploadadded', function(e, data)
+            {
+                $(this).fileupload('option', 'maxNumberOfFiles', 0);
+            });
+        <?php endif; ?>
     });
 </script>
