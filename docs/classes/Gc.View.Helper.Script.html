@@ -59,8 +59,11 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__call" title="__call :: Method overloading: return/call plugins"><span class="description">Method overloading: return/call plugins</span><pre>__call()</pre></a></li>
 <li class="method public "><a href="#__invoke" title="__invoke :: Returns script from identifier."><span class="description">Returns script from identifier.</span><pre>__invoke()</pre></a></li>
 <li class="method public "><a href="#getParam" title="getParam :: Returns param from name."><span class="description">Returns param from name.</span><pre>getParam()</pre></a></li>
+<li class="method public "><a href="#getRequest" title="getRequest :: Get Http Request instance."><span class="description">Get Http Request instance.</span><pre>getRequest()</pre></a></li>
+<li class="method public "><a href="#plugin" title="plugin :: Get plugin instance"><span class="description">Get plugin instance</span><pre>plugin()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
 <li class="nav-header protected">» Protected</li>
@@ -89,6 +92,26 @@
 </tr></table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__call" id="__call"></a><div class="element clickable method public __call" data-toggle="collapse" data-target=".__call .collapse">
+<h2>Method overloading: return/call plugins</h2>
+<pre>__call(string $method, array $params) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description">If the plugin is a functor, call it, passing the parameters provided.
+Otherwise, return the plugin instance.</p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
 <a name="__invoke" id="__invoke"></a><div class="element clickable method public __invoke" data-toggle="collapse" data-target=".__invoke .collapse">
 <h2>Returns script from identifier.</h2>
 <pre>__invoke(string $identifier, array $params) : \Gc\View\Helper\mixte</pre>
@@ -123,6 +146,34 @@
 <div class="subelement response"><code>\Gc\View\Helper\mixte</code></div>
 </div></div>
 </div>
+<a name="getRequest" id="getRequest"></a><div class="element clickable method public getRequest" data-toggle="collapse" data-target=".getRequest .collapse">
+<h2>Get Http Request instance.</h2>
+<pre>getRequest() : \Zend\Http\PhpEnvironment\Request</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Zend\Http\PhpEnvironment\Request</code></div>
+</div></div>
+</div>
+<a name="plugin" id="plugin"></a><div class="element clickable method public plugin" data-toggle="collapse" data-target=".plugin .collapse">
+<h2>Get plugin instance</h2>
+<pre>plugin(string $name, array $options) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name of plugin to return</p></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>nullarray</code><p>Options to pass to plugin constructor (if not already instantiated)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a name="%24_params" id="$_params"> </a><div class="element clickable property protected $_params" data-toggle="collapse" data-target=".$_params .collapse">
@@ -138,7 +189,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-09-11T08:35:15+02:00.<br></footer></div>
+            generated on 2012-09-17T08:19:09+02:00.<br></footer></div>
 </div>
 </body>
 </html>

@@ -1423,15 +1423,15 @@
 <text text-anchor="middle" x="1105" y="-339.1" font-family="Courier,monospace" font-size="11.00">Version</text>
 </a>
 </g>
-<!-- \\Zend\\Mail -->
-<g id="node172" class="node"><title>\\Zend\\Mail</title>
-<ellipse fill="none" stroke="black" cx="205" cy="-20" rx="61.8445" ry="18"/>
-<text text-anchor="middle" x="205" y="-15.9" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Zend\Mail</text>
+<!-- \\Zend\\Mail\\Message -->
+<g id="node172" class="node"><title>\\Zend\\Mail\\Message</title>
+<ellipse fill="none" stroke="black" cx="205" cy="-20" rx="105.122" ry="18"/>
+<text text-anchor="middle" x="205" y="-15.9" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Zend\Mail\Message</text>
 </g>
-<!-- \\Gc\\Mail&#45;&gt;\\Zend\\Mail -->
-<g id="edge118" class="edge"><title>\\Gc\\Mail&#45;&gt;\\Zend\\Mail</title>
-<path fill="none" stroke="black" d="M688.693,-294.152C641.098,-303.168 542.283,-314.099 482,-266 401.911,-202.098 488.886,-112.381 410,-47 371.922,-15.4412 315.457,-10.0301 271.423,-11.7634"/>
-<polygon fill="none" stroke="black" points="271.178,-8.27133 261.374,-12.2894 271.544,-15.2618 271.178,-8.27133"/>
+<!-- \\Gc\\Mail&#45;&gt;\\Zend\\Mail\\Message -->
+<g id="edge118" class="edge"><title>\\Gc\\Mail&#45;&gt;\\Zend\\Mail\\Message</title>
+<path fill="none" stroke="black" d="M688.693,-294.152C641.098,-303.168 542.283,-314.099 482,-266 401.911,-202.098 488.886,-112.381 410,-47 382.203,-23.9618 344.607,-14.8581 309.202,-12.2958"/>
+<polygon fill="none" stroke="black" points="308.97,-8.77782 298.792,-11.7212 308.584,-15.7672 308.97,-8.77782"/>
 </g>
 <!-- \\Gc\\Error -->
 <g id="node130" class="node"><title>\\Gc\\Error</title>
