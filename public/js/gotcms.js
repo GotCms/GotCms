@@ -739,6 +739,24 @@ var Gc = (function($)
                 $('#dashboard').remove();
                 return false;
             });
+        },
+
+        initTableList: function()
+        {
+            $this = this;
+            $('.table-list > tbody').find('td').on('click', function(e)
+            {
+                if(e.target.tagName != 'IMG' && e.target.tagName != 'A')
+                {
+                    $(this).parent().find('.edit-line')[0].click();
+                }
+            });
+
+            $('.delete-line').on('click', function()
+            {
+                $this.showDialogConfirm($(this).attr('href'));
+                return false;
+            })
         }
     };
 })(jQuery);

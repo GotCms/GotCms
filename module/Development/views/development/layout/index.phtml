@@ -47,12 +47,12 @@
                 <td><?php echo $this->escapeHtml($layout->getName()); ?></td>
                 <td><?php echo $this->escapeHtml($layout->getDescription()); ?></td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('layoutEdit', array('id' => $layout->getId())); ?>">
+                    <a href="<?php echo $this->url('layoutEdit', array('id' => $layout->getId())); ?>" class="edit-line">
                         <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('layoutDelete', array('id' => $layout->getId())); ?>">
+                    <a href="<?php echo $this->url('layoutDelete', array('id' => $layout->getId())); ?>" class="delete-line">
                         <img src="<?php echo $this->basePath('images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
                     </a>
                 </td>
@@ -60,3 +60,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<script type="text/javascript">
+    Gc.initTableList();
+</script>
