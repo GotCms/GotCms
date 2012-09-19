@@ -28,13 +28,6 @@
 ?>
 <?php echo $this->partial('development/forms/script.phtml', array('form' => $this->form)); ?>
 <script type="text/javascript">
-var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('script-content'), {
-    lineNumbers: true,
-    matchBrackets: true,
-    mode: "application/x-httpd-php",
-    indentUnit: 4,
-    indentWithTabs: true,
-    enterMode: "keep",
-    tabMode: "spaces"
-});
+Gc.initCodeMirror('script-content');
+Gc.saveCommand();
 </script>

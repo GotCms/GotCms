@@ -762,6 +762,20 @@ var Gc = (function($)
                 $this.showDialogConfirm($(this).attr('href'));
                 return false;
             })
+        },
+
+        saveCommand: function()
+        {
+            $(window).on('keypress', function(event)
+            {
+                if(!(event.which == 115 && event.ctrlKey) && !(event.which == 19))
+                {
+                    return true;
+                }
+
+                event.preventDefault();
+                $('#input-save').click();
+            });
         }
     };
 })(jQuery);

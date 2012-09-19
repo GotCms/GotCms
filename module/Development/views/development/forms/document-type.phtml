@@ -34,7 +34,8 @@
 <?php $errors = $this->form->getMessages(); ?>
 
 <form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->form->getAttribute('action'); ?>" method="post">
-    <input type="image" src="/images/save.png" value="1" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
+    <input id="input-save" type="image" src="/images/save.png" value="1" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
+
     <div class="tabs">
         <ul>
             <li><a href="#tabs-1"><?php echo $this->escapeHtml($this->translate('Infos')); ?></a></li>

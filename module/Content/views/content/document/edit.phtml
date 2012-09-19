@@ -27,6 +27,8 @@
 
 ?>
 <form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
+    <input id="input-save" type="image" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>" value="1" src="/images/save.png">
+
     <div id="tabs" style="margin-bottom:20px">
         <?php echo $this->tabs; ?>
 
@@ -54,8 +56,10 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
 </form>
 <script type="text/javascript">
+$(function(){
     jQuery('#tabs').tabs();
+    Gc.saveCommand();
+});
 </script>
