@@ -11,6 +11,10 @@ license details that apply to GotCms.
 ## Installation
 $ git clone https://github.com/PierreRambaud/GotCms.git
 
+Make sure read and write access are available for:
+- config/autoload
+- public/frontend
+
 If you want to use VirtualHost, copy .htaccess content otherwise check if "AllowOverride" is set to "All".
 
 ##Required
