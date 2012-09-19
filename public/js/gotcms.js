@@ -60,7 +60,8 @@ var Gc = (function($)
              * TABS
              */
             $('#tabs').sortable({
-                placeholder: 'ui-state-highlight'
+                placeholder: 'ui-state-highlight',
+                distance: 10
             });
 
             $('#tabs-add').on('click', function()
@@ -308,7 +309,8 @@ var Gc = (function($)
                 .accordion(this.getOption('accordion-option'))
                 .sortable({
                     placeholder: 'ui-state-highlight',
-                    handle: 'h3'
+                    handle: 'h3',
+                    distance: 10
                 });
 
             var $tab_items = $('ul:first li', $tabs).droppable({
@@ -355,7 +357,8 @@ var Gc = (function($)
                             dataType: 'json',
                             data: $data
                         });
-                    }
+                    },
+                    distance: 10
                 });
 
                 $.contextMenu(
@@ -686,6 +689,7 @@ var Gc = (function($)
                 handle: 'h3',
                 tolerance: 'pointer',
                 opacity: 0.4,
+                distance: 10,
                 forcePlaceholderSize: true,
                 start : function(e, ui)
                 {
@@ -729,8 +733,6 @@ var Gc = (function($)
                     });
                 });
             }
-
-            $sortable.sortable('options');
 
             $('.dashboard-close').on('click', function()
             {
