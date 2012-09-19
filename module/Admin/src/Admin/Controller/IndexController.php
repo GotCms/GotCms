@@ -57,7 +57,7 @@ class IndexController extends Action
         );
 
         $data['contentStats'] = $content_stats;
-        $widgets = @unserialize(Config::getValue('dashboard-widgets'));
+        $widgets = @unserialize(Config::getValue('dashboard_widgets'));
         $data['dashboardSortable'] = !empty($widgets['sortable']) ? \Zend\Json\Json::encode($widgets['sortable']) : '{}';
         $data['dashboardWelcome'] = !empty($widgets['welcome']);
 
@@ -68,7 +68,7 @@ class IndexController extends Action
     {
         $params = $this->getRequest()->getPost()->toArray();
 
-        $config = @unserialize(Config::getValue('dashboard-widgets'));
+        $config = @unserialize(Config::getValue('dashboard_widgets'));
 
         if(empty($config))
         {
@@ -84,7 +84,7 @@ class IndexController extends Action
             $config['sortable'] = $params;
         }
 
-        Config::setValue('dashboard-widgets', serialize($config));
+        Config::setValue('dashboard_widgets', serialize($config));
 
         return $this->_returnJson(array('success' => TRUE));
     }

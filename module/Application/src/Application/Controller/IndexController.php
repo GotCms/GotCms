@@ -55,51 +55,62 @@ class IndexController extends Action
         if(CoreConfig::getValue('site_is_offline') == 1)
         {
             //Site is offline
-            die('Site offline');
-        }
-
-        $path = $this->getRouteMatch()->getParam('path');
-        if(empty($path))
-        {
-            $document = Document\Model::fromUrlKey('');
-        }
-        else
-        {
-            $explode_path = $this->explodePath($path);
-            $children = NULL;
-            $key = array();
-            $document = NULL;
-            $has_document = FALSE;
-            $parent_id = 0;
-
-            foreach($explode_path as $url_key)
+            if(!$this->getAuth()->hasIdentity())
             {
-                $document_tmp = NULL;
-                if($has_document === FALSE)
+                $document = Document\Model::fromId(CoreConfig::getValue('site_offline_document'));
+                if(empty($document))
                 {
-                    $document_tmp = Document\Model::fromUrlKey($url_key, $parent_id);
+                    die('Site offline');
                 }
+            }
+        }
 
-                if((is_array($children) and !empty($children) and !in_array($document_tmp, $children) and $children !== NULL) or $document_tmp === NULL)
+        if(empty($document))
+        {
+            $path = $this->getRouteMatch()->getParam('path');
+            if(empty($path))
+            {
+                $document = Document\Model::fromUrlKey('');
+            }
+            else
+            {
+                $explode_path = $this->explodePath($path);
+                $children = NULL;
+                $key = array();
+                $document = NULL;
+                $has_document = FALSE;
+                $parent_id = 0;
+
+                foreach($explode_path as $url_key)
                 {
-                    $has_document = TRUE;
-                }
-                else
-                {
-                    $document = $document_tmp;
-                    if(!empty($document_tmp))
+                    $document_tmp = NULL;
+                    if($has_document === FALSE)
                     {
-                        if(!$document_tmp->isPublished())
-                        {
-                            break;
-                        }
+                        $document_tmp = Document\Model::fromUrlKey($url_key, $parent_id);
+                    }
 
-                        $parent_id = $document->getId();
-                        $children = $document_tmp->getChildren();
+                    if((is_array($children) and !empty($children) and !in_array($document_tmp, $children) and $children !== NULL) or $document_tmp === NULL)
+                    {
+                        $has_document = TRUE;
+                    }
+                    else
+                    {
+                        $document = $document_tmp;
+                        if(!empty($document_tmp))
+                        {
+                            if(!$document_tmp->isPublished())
+                            {
+                                break;
+                            }
+
+                            $parent_id = $document->getId();
+                            $children = $document_tmp->getChildren();
+                        }
                     }
                 }
             }
         }
+
 
         $view_model = new ViewModel();
         $existed = in_array($this->_viewStream, stream_get_wrappers());
