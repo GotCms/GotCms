@@ -642,6 +642,11 @@ var Gc = (function($)
 
                 return false;
             });
+
+            setTimeout(function()
+            {
+                $('.notification').remove();
+            }, 6000);
         },
 
         initCodeMirror: function($content)
