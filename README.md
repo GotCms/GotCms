@@ -15,24 +15,25 @@ If you want to use VirtualHost, copy .htaccess content otherwise check if "Allow
 
 Example of VirtualHost:
 
-<VirtualHost 127.0.0.1:80>
-    ServerAdmin admin@got-cms.com
-    ServerName got-cms.com
-    ServerAlias www.got-cms.com 
-    DocumentRoot /var/www/got-cms/public
-    <Directory /var/www/got-cms/public>
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride None
-        Order allow,deny
-        RewriteEngine On
-        RewriteCond %{REQUEST_FILENAME} -s [OR]
-        RewriteCond %{REQUEST_FILENAME} -l [OR]
-        RewriteCond %{REQUEST_FILENAME} -d
-        RewriteRule ^.*$ - [NC,L]
-        RewriteRule ^.*$ index.php [NC,L]
-    </Directory>
-</VirtualHost>
-
+```
+    <VirtualHost *:80>
+        ServerAdmin admin@got-cms.com
+        ServerName got-cms.com
+        ServerAlias www.got-cms.com 
+        DocumentRoot /var/www/got-cms/public
+        <Directory /var/www/got-cms/public>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride None
+            Order allow,deny
+            RewriteEngine On
+            RewriteCond %{REQUEST_FILENAME} -s [OR]
+            RewriteCond %{REQUEST_FILENAME} -l [OR]
+            RewriteCond %{REQUEST_FILENAME} -d
+            RewriteRule ^.*$ - [NC,L]
+            RewriteRule ^.*$ index.php [NC,L]
+        </Directory>
+    </VirtualHost>
+```
 
 Make sure read and write access are available for:
 - config/autoload
