@@ -134,10 +134,8 @@ class DocumentType extends AbstractForm
         {
             $dependency = new Element\MultiCheckbox('infos[dependency]');
             $dependency->setValueOptions($document_type_collection->getSelect());
-            $dependency->setOptions(array('options'=> array()));
             $fieldsets->add($dependency);
         }
-
 
         $this->add($fieldsets);
 
