@@ -70,15 +70,18 @@
                     <?php echo $this->formErrors($errors['infos']['icon_id']); ?>
                 <?php endif; ?>
             </div>
-            <div>
-                <label><?php echo $this->escapeHtml($this->translate('Available children')); ?></label>
+            <?php $dependency = $infos_form->get('infos[dependency]'); ?>
+            <?php if(!empty($dependency)): ?>
+                <div>
+                    <label><?php echo $this->escapeHtml($this->translate('Available children')); ?></label>
 
-                <?php echo $this->formElement($infos_form->get('infos[dependency]')); ?>
+                    <?php echo $this->formElement($infos_form->get('infos[dependency]')); ?>
 
-                <?php if(!empty($errors['infos']['infos[dependency]'])): ?>
-                    <?php echo $this->formErrors($errors['infos']['infos[dependency]']); ?>
-                <?php endif; ?>
-            </div>
+                    <?php if(!empty($errors['infos']['infos[dependency]'])): ?>
+                        <?php echo $this->formErrors($errors['infos']['infos[dependency]']); ?>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div id="tabs-2">
