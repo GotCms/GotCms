@@ -2793,7 +2793,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Media/File.php" hash="84dc5e33f71670d79af2a381d77a9b52" package="Library\Media">
+  <file path="Gc/Media/File.php" hash="ed6c787406c18554c85c4a60804fcd3d" package="Library\Media">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2834,7 +2834,7 @@ Need document and property to work]]></description>
         <name>FILE_PERMISSION</name>
         <value><![CDATA[0774]]></value>
       </constant>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="49" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="50" package="">
         <name>init</name>
         <type>function</type>
         <docblock line="42">
@@ -2846,68 +2846,76 @@ Need document and property to work]]></description>
           <tag line="42" name="param" description="" type="object" variable="$document">
             <type by_reference="false">object</type>
           </tag>
+          <tag line="42" name="param" description="" type="string" variable="$filename">
+            <type by_reference="false">string</type>
+          </tag>
           <tag line="42" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="49">
+        <argument line="50">
           <name>$property</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
-        <argument line="49">
+        <argument line="50">
           <name>$document</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
+        <argument line="50">
+          <name>$filename</name>
+          <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="64" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="66" package="">
         <name>getPath</name>
         <type>function</type>
-        <docblock line="60">
+        <docblock line="62">
           <description><![CDATA[Return path]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="60" name="return" description="" type="string">
+          <tag line="62" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="73" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="75" package="">
         <name>getDirectory</name>
         <type>function</type>
-        <docblock line="69">
+        <docblock line="71">
           <description><![CDATA[Return directory]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="69" name="return" description="" type="string">
+          <tag line="71" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="82" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="84" package="">
         <name>upload</name>
         <type>function</type>
-        <docblock line="78">
+        <docblock line="80">
           <description><![CDATA[Upload file to the server]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="78" name="return" description="" type="boolean">
+          <tag line="80" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="140" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media" line="163" package="">
         <name>remove</name>
         <type>function</type>
-        <docblock line="135">
+        <docblock line="158">
           <description><![CDATA[Remove image]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="135" name="param" description="" type="string" variable="$filename">
+          <tag line="158" name="param" description="" type="string" variable="$filename">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="135" name="return" description="" type="boolean">
+          <tag line="158" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="140">
+        <argument line="163">
           <name>$filename</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -8537,7 +8545,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Upload/Editor.php" hash="1b2798aeacc857d07589dd955b78c0ce" package="Datatype">
+  <file path="Datatypes/jQueryFileUpload/Editor.php" hash="d97e98151075c8786146edf93c1c4357" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8563,15 +8571,15 @@ PHP Version >=5.3]]></long-description>
     <namespace-alias name="AbstractEditor">Gc\Datatype\AbstractDatatype\AbstractEditor</namespace-alias>
     <namespace-alias name="File">Gc\Media\File</namespace-alias>
     <namespace-alias name="Element">Zend\Form\Element</namespace-alias>
-    <class final="false" abstract="false" namespace="Datatypes\Upload" line="36" package="Default">
+    <class final="false" abstract="false" namespace="Datatypes\jQueryFileUpload" line="36" package="Default">
       <name>Editor</name>
-      <full_name>\Datatypes\Upload\Editor</full_name>
+      <full_name>\Datatypes\jQueryFileUpload\Editor</full_name>
       <extends>\Gc\Datatype\AbstractDatatype\AbstractEditor</extends>
       <docblock line="33">
         <description><![CDATA[Editor for Upload datatype]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="42" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\jQueryFileUpload" line="42" package="">
         <name>save</name>
         <type>function</type>
         <docblock line="38">
@@ -8582,18 +8590,18 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="96" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\jQueryFileUpload" line="96" package="">
         <name>load</name>
         <type>function</type>
         <docblock line="92">
           <description><![CDATA[Load upload editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="92" name="return" description="" type="\Datatypes\Upload\mixte">
-            <type by_reference="false">\Datatypes\Upload\mixte</type>
+          <tag line="92" name="return" description="" type="\Datatypes\jQueryFileUpload\mixte">
+            <type by_reference="false">\Datatypes\jQueryFileUpload\mixte</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Upload" line="141" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\jQueryFileUpload" line="141" package="">
         <name>initScript</name>
         <type>function</type>
         <docblock line="137">
@@ -8604,44 +8612,114 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Upload" line="166" package="">
-        <name>getParam</name>
+    </class>
+  </file>
+  <file path="Datatypes/jQueryFileUpload/upload-editor.phtml" hash="4ba01ceaf12300125bc2f0ee07f01450" package="Datatype">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Datatype"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+  </file>
+  <file path="Datatypes/jQueryFileUpload/upload-prevalue.phtml" hash="8d2041be7d054045c98df67fea3523c3" package="Datatype">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Datatype"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+  </file>
+  <file path="Datatypes/jQueryFileUpload/PrevalueEditor.php" hash="afaa243bab6630634962dbb98eef558b" package="Datatype">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Datatype"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+    <namespace-alias name="AbstractPrevalueEditor">Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</namespace-alias>
+    <namespace-alias name="Element">Zend\Form\Element</namespace-alias>
+    <class final="false" abstract="false" namespace="Datatypes\jQueryFileUpload" line="35" package="Default">
+      <name>PrevalueEditor</name>
+      <full_name>\Datatypes\jQueryFileUpload\PrevalueEditor</full_name>
+      <extends>\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</extends>
+      <docblock line="32">
+        <description><![CDATA[Prevalue Editor for Upload datatype]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\jQueryFileUpload" line="41" package="">
+        <name>save</name>
         <type>function</type>
-        <docblock line="158">
-          <description><![CDATA[Retrieve param]]></description>
+        <docblock line="37">
+          <description><![CDATA[Save upload prevalue editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="158" name="param" description="" type="\Datatypes\Upload\mixte" variable="$key">
-            <type by_reference="false">\Datatypes\Upload\mixte</type>
-          </tag>
-          <tag line="158" name="param" description="" type="\Datatypes\Upload\mixte" variable="$value">
-            <type by_reference="false">\Datatypes\Upload\mixte</type>
-          </tag>
-          <tag line="158" name="param" description="" type="\Datatypes\Upload\mixte" variable="$default">
-            <type by_reference="false">\Datatypes\Upload\mixte</type>
-          </tag>
-          <tag line="158" name="return" description="" type="\Datatypes\Upload\unknown">
-            <type by_reference="false">\Datatypes\Upload\unknown</type>
+          <tag line="37" name="return" description="" type="void">
+            <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="166">
-          <name>$key</name>
-          <default><![CDATA[]]></default>
-          <type/>
-        </argument>
-        <argument line="166">
-          <name>$value</name>
-          <default><![CDATA[]]></default>
-          <type/>
-        </argument>
-        <argument line="166">
-          <name>$default</name>
-          <default><![CDATA[]]></default>
-          <type/>
-        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\jQueryFileUpload" line="56" package="">
+        <name>load</name>
+        <type>function</type>
+        <docblock line="52">
+          <description><![CDATA[Load upload prevalue editor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="52" name="return" description="" type="\Datatypes\jQueryFileUpload\mixte">
+            <type by_reference="false">\Datatypes\jQueryFileUpload\mixte</type>
+          </tag>
+        </docblock>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Upload/upload-editor.phtml" hash="a7cd553569a364faee9632b5bb7e6a62" package="Datatype">
+  <file path="Datatypes/jQueryFileUpload/Datatype.php" hash="0bc1da99229b939c98999bf4d58a229c" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8664,8 +8742,60 @@ PHP Version >=5.3]]></long-description>
       <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
       <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
     </docblock>
+    <namespace-alias name="AbstractDatatype">Gc\Datatype\AbstractDatatype</namespace-alias>
+    <namespace-alias name="PropertyModel">Gc\Property\Model</namespace-alias>
+    <class final="false" abstract="false" namespace="Datatypes\jQueryFileUpload" line="35" package="Default">
+      <name>Datatype</name>
+      <full_name>\Datatypes\jQueryFileUpload\Datatype</full_name>
+      <extends>\Gc\Datatype\AbstractDatatype</extends>
+      <docblock line="32">
+        <description><![CDATA[Manage Upload datatype]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="41" package="Default">
+        <name>$_name</name>
+        <default><![CDATA['upload']]></default>
+        <docblock line="37">
+          <description><![CDATA[Datatype name]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="37" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\jQueryFileUpload" line="48" package="">
+        <name>getEditor</name>
+        <type>function</type>
+        <docblock line="43">
+          <description><![CDATA[Retrieve editor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="43" name="param" description="" type="\Gc\Property\Model" variable="$property">
+            <type by_reference="false">\Gc\Property\Model</type>
+          </tag>
+          <tag line="43" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractEditor">
+            <type by_reference="false">\Gc\Datatype\AbstractDatatype\AbstractEditor</type>
+          </tag>
+        </docblock>
+        <argument line="48">
+          <name>$property</name>
+          <default><![CDATA[]]></default>
+          <type>PropertyModel</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\jQueryFileUpload" line="63" package="">
+        <name>getPrevalueEditor</name>
+        <type>function</type>
+        <docblock line="59">
+          <description><![CDATA[Retrieve prevalue editor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="59" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor">
+            <type by_reference="false">\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
   </file>
-  <file path="Datatypes/Upload/upload-prevalue.phtml" hash="8d2041be7d054045c98df67fea3523c3" package="Datatype">
+  <file path="Datatypes/Upload/Editor.php" hash="14e39bc21526646bf5df3c9f75d6a202" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8688,8 +8818,41 @@ PHP Version >=5.3]]></long-description>
       <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
       <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
     </docblock>
+    <namespace-alias name="AbstractEditor">Gc\Datatype\AbstractDatatype\AbstractEditor</namespace-alias>
+    <namespace-alias name="Element">Zend\Form\Element</namespace-alias>
+    <class final="false" abstract="false" namespace="Datatypes\Upload" line="35" package="Default">
+      <name>Editor</name>
+      <full_name>\Datatypes\Upload\Editor</full_name>
+      <extends>\Gc\Datatype\AbstractDatatype\AbstractEditor</extends>
+      <docblock line="32">
+        <description><![CDATA[Editor for Upload datatype]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="41" package="">
+        <name>save</name>
+        <type>function</type>
+        <docblock line="37">
+          <description><![CDATA[Save upload editor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="37" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="107" package="">
+        <name>load</name>
+        <type>function</type>
+        <docblock line="103">
+          <description><![CDATA[Load upload editor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="103" name="return" description="" type="\Datatypes\Upload\mixte">
+            <type by_reference="false">\Datatypes\Upload\mixte</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
   </file>
-  <file path="Datatypes/Upload/PrevalueEditor.php" hash="a164cf76fe409d88396b378cb054840b" package="Datatype">
+  <file path="Datatypes/Upload/PrevalueEditor.php" hash="41bef8ce8b1fb0df6ac676ca63438d80" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8733,20 +8896,20 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="56" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Upload" line="54" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="52">
+        <docblock line="50">
           <description><![CDATA[Load upload prevalue editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="52" name="return" description="" type="\Datatypes\Upload\mixte">
+          <tag line="50" name="return" description="" type="\Datatypes\Upload\mixte">
             <type by_reference="false">\Datatypes\Upload\mixte</type>
           </tag>
         </docblock>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Upload/Datatype.php" hash="007db0e1d0a8e353e25cebeb07c7e744" package="Datatype">
+  <file path="Datatypes/Upload/Datatype.php" hash="09f854c0d339c90775538341b5acd0bc" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -9691,7 +9854,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Mixed/Editor.php" hash="3d4e5b6da3ea4b85160cee26d137fee1" package="Datatype">
+  <file path="Datatypes/Mixed/Editor.php" hash="f29a5cb274e7e0cef3f08b180eeddff3" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -9747,31 +9910,31 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Mixed" line="92" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\Mixed" line="121" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="88">
+        <docblock line="117">
           <description><![CDATA[Load mixed editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="88" name="return" description="" type="\Datatypes\Mixed\mixte">
+          <tag line="117" name="return" description="" type="\Datatypes\Mixed\mixte">
             <type by_reference="false">\Datatypes\Mixed\mixte</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Mixed" line="187" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Mixed" line="216" package="">
         <name>_getDatatype</name>
         <type>function</type>
-        <docblock line="182">
+        <docblock line="211">
           <description><![CDATA[Retrieve datatypes]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="182" name="param" description="" type="string" variable="$name">
+          <tag line="211" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="182" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
+          <tag line="211" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype</type>
           </tag>
         </docblock>
-        <argument line="187">
+        <argument line="216">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -9932,7 +10095,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Mixed/mixed-editor.phtml" hash="a0da37bf11056f2401cd2054caf72175" package="Datatype">
+  <file path="Datatypes/Mixed/mixed-editor.phtml" hash="2378706e3fc6172bf7a0e57a7430826f" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -10404,6 +10567,7 @@ PHP Version >=5.3]]></long-description>
     <namespace name="Textrich" full_name="Datatypes\Textrich"/>
     <namespace name="Textstring" full_name="Datatypes\Textstring"/>
     <namespace name="Upload" full_name="Datatypes\Upload"/>
+    <namespace name="jQueryFileUpload" full_name="Datatypes\jQueryFileUpload"/>
   </namespace>
   <namespace name="Gc" full_name="Gc">
     <namespace name="Component" full_name="Gc\Component"/>

@@ -41,23 +41,63 @@ class Editor extends AbstractEditor
     public function save()
     {
         $value = $this->getRequest()->getPost()->get($this->getName());
+        $parameters = $this->getConfig();
+        $data = array();
         if(!empty($_FILES[$this->getName()]['name']))
         {
-            $file = new \Gc\Media\File();
-            $file->init($this->getDatatype()->getDocument(), $this->getProperty(), $this->getName());
-            $file->upload();
-            $files = $file->getFiles();
+            $_OLD_FILES = $_FILES;
+            $file = $_FILES[$this->getName()];
+            //Ignore others data
+            $_FILES = array();
+            $_FILES[$this->getName()] = $file;
+
+            $file_class = new \Gc\Media\File();
+            $file_class->init($this->getDatatype()->getDocument(), $this->getProperty(), $this->getName());
+            $file_class->upload();
+            $files = $file_class->getFiles();
+
             if(!empty($files))
             {
-                $data = array();
                 foreach($files as $file)
                 {
-                    $data[] = $file->filename;
+                    $name = $file->filename;
+                    $file = $file_class->getPath() . '/' . $name;
+                    if(file_exists($file))
+                    {
+                        $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
+                        $finfo = finfo_open($const); // return mimetype extension
+                        if(!in_array(finfo_file($finfo, $file), $parameters['mime_list']))
+                        {
+                            unlink($file);
+                        }
+                        else
+                        {
+                            $file_info = @getimagesize($file);
+                            $data[] = array(
+                                'value' => $name,
+                                'width' => empty($file_info[0]) ? 0 : $file_info[0],
+                                'height' => empty($file_info[1]) ? 0 : $file_info[1],
+                                'html' => empty($file_info[2]) ? '' : $file_info[2],
+                                'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
+                            );
+                        }
+
+                        finfo_close($finfo);
+                    }
                 }
+
+                $data = serialize($data);
             }
+
+            //Restore file data
+            $_FILES = $_OLD_FILES;
+        }
+        else
+        {
+            $data = $this->getRequest()->getPost()->get($this->getName() . '-hidden');
         }
 
-        $this->setValue(empty($data) ? NULL : $data);
+        $this->setValue(empty($data) ? '' : $data);
     }
 
     /**
@@ -70,13 +110,19 @@ class Editor extends AbstractEditor
         $property = $this->getProperty();
         $upload = new Element\File($this->getName());
         $upload->setAttribute('label', $property->getName());
-        $value = $this->getValue();
-        var_dump($value);
-        if(!empty($value))
+        if(!empty($parameters['is_multiple']))
         {
-            $upload->setValue($value[0]);
+            $upload->setAttribute('multiple', 'multiple');
+            $upload->setName($upload->getName() . '[]');
         }
 
-        return $upload;
+        $hidden_upload = new Element\Hidden($this->getName() . '-hidden');
+        $value = $this->getValue();
+        if(!empty($value))
+        {
+            $hidden_upload->setValue($value);
+        }
+
+        return array($upload, $hidden_upload);
     }
 }

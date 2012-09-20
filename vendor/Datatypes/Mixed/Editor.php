@@ -51,6 +51,7 @@ class Editor extends AbstractEditor
         $datatypes_config = empty($config['datatypes']) ? array() : $config['datatypes'];
 
         $post = $this->getRequest()->getPost();
+        $_OLD_POST = $post->toArray();
         $datatypes = $post->get($this->getName());
         $_OLD_FILES = $_FILES;
 
@@ -75,6 +76,7 @@ class Editor extends AbstractEditor
                             );
 
                             $_FILES[$name[0]] = $data;
+                            unset($_FILES[$this->getName()]);
                         }
                     }
 
@@ -96,10 +98,19 @@ class Editor extends AbstractEditor
                     $datatypes[$line_id][$datatype_id] = array(
                         'value' => $editor->getValue()
                     );
+
+
+
+                    foreach($_OLD_POST as $key => $value)
+                    {
+                        $post->set($key, $value);
+                    }
+
+                    $_FILES = $_OLD_FILES;
                 }
             }
         }
-die();
+
         $this->setValue(serialize($datatypes));
     }
 

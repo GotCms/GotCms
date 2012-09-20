@@ -43,8 +43,10 @@
                         <?php if(!empty($content)): ?>
                             <?php echo $content; ?>
                         <?php else: ?>
-                            <?php $id = $element->getAttribute('id'); ?>
-                            <label class="required"<?php if(!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+                            <?php if($element->getAttribute('type') != 'hidden'): ?>
+                                <?php $id = $element->getAttribute('id'); ?>
+                                <label class="required"<?php if(!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+                            <?php endif; ?>
 
                             <?php echo $this->formElement($element); ?>
                             <?php if(!empty($errors[$element->getAttribute('name')])): ?>

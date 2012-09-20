@@ -40,9 +40,11 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function save()
     {
-        $is_multiple = $this->getRequest()->getPost()->get('is_multiple');
+        $post = $this->getRequest()->getPost();
+        $mime_list = $post->get('mime_list');
+        $is_multiple = $post->get('is_multiple');
 
-        $this->setConfig(array('is_multiple' => empty($is_multiple) ? FALSE : TRUE));
+        $this->setConfig(array('mime_list' => empty($mime_list) ? array() : $mime_list, 'is_multiple' => empty($is_multiple) ? FALSE : TRUE));
     }
 
     /**
@@ -61,6 +63,41 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'id' => 'is_multiple',
         ));
 
-        return $is_multiple;
+        $mime_list = new Element\MultiCheckbox('mime_list');
+        $array = array(
+            'image/gif',
+            'image/jpeg',
+            'image/png',
+            'image/tiff',
+            'image/svg+xml',
+            'text/css',
+            'text/csv',
+            'text/html',
+            'text/javascript',
+            'text/plain',
+            'text/xml',
+            'video/mpeg',
+            'video/mp4',
+            'video/quicktime',
+            'video/x-ms-wmv',
+            'video/x-msvideo',
+            'video/x-flv',
+            'audio/mpeg',
+            'audio/x-ms-wma',
+            'audio/vnd.rn-realaudio',
+            'audio/x-wav'
+        );
+        $options = array();
+        foreach($array as $mime)
+        {
+            $options[] = array(
+                'value' => $mime,
+                'label' => $mime,
+                'selected' => !in_array($mime, empty($config['mime_list']) ? array() : $config['mime_list']) ? FALSE : TRUE,
+            );
+        }
+        $mime_list->setValueOptions($options);
+
+        return array($is_multiple, $mime_list);
     }
 }

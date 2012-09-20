@@ -43,6 +43,7 @@ class File extends Object
      * Initiliaze File Object
      * @param object $property
      * @param object $document
+     * @param string $filename
      *
      * @return void
      */
@@ -82,7 +83,7 @@ class File extends Object
      */
     public function upload()
     {
-        $file = new FileTransfer();
+        $file_transfer = new FileTransfer();
         $dir = $this->getPath() . $this->getDirectory();
         if(!is_dir($dir))
         {
@@ -95,40 +96,59 @@ class File extends Object
             }
         }
 
-        $file->setDestination($dir);
+        $file_transfer->setDestination($dir);
 
         $filename = $this->getFileName();
-        $file_name = empty($filename) ? NULL : $filename;
-        $file_name = $file->getFileName($file_name, FALSE);
-        $info = pathinfo($file_name);
-        $file->addFilter('Rename', array(
-            'target' => $file->getDestination($file_name) . '/' . uniqid() . '.' . $info['extension'], 'overwrite' => TRUE));
-
-        if($file->receive($file_name))
+        $filenames = empty($filename) ? NULL : $filename;
+        $filenames = $file_transfer->getFileName($filenames, FALSE);
+        if(!is_array($filenames))
         {
-            $data = array();
-            $files = $file->getFileInfo($this->getFileName());
-            foreach($files as $file_data)
+            $filenames = array();
+            $files = $file_transfer->getFileInfo($filename);
+            foreach($files as $key => $file)
             {
-                $file_object = new \StdClass();
-                $file_object->name = 'New Image Upload Complete:   ' .$file_data['name'];
-                $file_object->filename = $this->getDirectory() . '/' . $file_data['name'];
-                $file_object->size = $file_data['size'];
-                $file_object->type = $file_data['type'];
-                $file_object->thumbnail_url = $this->getDirectory() . '/' . $file_data['name'];
-
-                $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
-                $file_object->delete_url = $router->assemble(array(
-                    'document_id' => $this->getDocument()->getId(),
-                    'property_id' => $this->getProperty()->getId(),
-                    'file' => base64_encode($file_data['name']))
-                , array('name' => 'mediaRemove'));
-                $file_object->delete_type = 'DELETE';
-                $data[] = $file_object;
+                if(!empty($file['name']))
+                {
+                    $filenames[$key] = $file['name'];
+                    break;
+                }
             }
+        }
 
+        $data = array();
+        foreach($filenames as $key => $file_name)
+        {
+            $info = pathinfo($file_name);
+            $file_transfer->addFilter('Rename', array(
+                'target' => $file_transfer->getDestination($file_name) . '/' . uniqid() . (empty($info['extension']) ? '' : '.' . $info['extension']), 'overwrite' => TRUE));
+
+            if($file_transfer->receive($file_name))
+            {
+                $files = $file_transfer->getFileInfo($key);
+                foreach($files as $file_data)
+                {
+                    $file_object = new \StdClass();
+                    $file_object->name = 'New Image Upload Complete:   ' .$file_data['name'];
+                    $file_object->filename = $this->getDirectory() . '/' . $file_data['name'];
+                    $file_object->size = $file_data['size'];
+                    $file_object->type = $file_data['type'];
+                    $file_object->thumbnail_url = $this->getDirectory() . '/' . $file_data['name'];
+
+                    $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
+                    $file_object->delete_url = $router->assemble(array(
+                        'document_id' => $this->getDocument()->getId(),
+                        'property_id' => $this->getProperty()->getId(),
+                        'file' => base64_encode($file_data['name']))
+                    , array('name' => 'mediaRemove'));
+                    $file_object->delete_type = 'DELETE';
+                    $data[] = $file_object;
+                }
+            }
+        }
+
+        if(!empty($data))
+        {
             $this->setFiles($data);
-
             return TRUE;
         }
 
