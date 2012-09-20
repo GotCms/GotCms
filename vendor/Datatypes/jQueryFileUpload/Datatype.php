@@ -24,9 +24,9 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Datatypes\Upload;
+namespace Datatypes\jQueryFileUpload;
 
-use Gc\Datatype\AbstractDatatype as AbstractDatatype,
+use Gc\Datatype\AbstractDatatype,
     Gc\Property\Model as PropertyModel;
 
 /**
@@ -70,4 +70,3 @@ class Datatype extends AbstractDatatype
         return $this->_prevalueEditor;
     }
 }
-

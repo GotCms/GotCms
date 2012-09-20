@@ -52,6 +52,7 @@ class Editor extends AbstractEditor
 
         $post = $this->getRequest()->getPost();
         $datatypes = $post->get($this->getName());
+        $_OLD_FILES = $_FILES;
 
         if(!empty($datatypes))
         {
@@ -60,6 +61,23 @@ class Editor extends AbstractEditor
                 $datatypes[$line_id] = array();
                 foreach($values as $datatype_id => $datatype)
                 {
+                    if(!empty($_OLD_FILES[$this->getName()]['name'][$line_id][$datatype_id]))
+                    {
+                        $name = array_keys($_OLD_FILES[$this->getName()]['name'][$line_id][$datatype_id]);
+                        if(!empty($name[0]))
+                        {
+                            $data = array(
+                                'name' => $_OLD_FILES[$this->getName()]['name'][$line_id][$datatype_id][$name[0]],
+                                'type' => $_OLD_FILES[$this->getName()]['type'][$line_id][$datatype_id][$name[0]],
+                                'tmp_name' => $_OLD_FILES[$this->getName()]['tmp_name'][$line_id][$datatype_id][$name[0]],
+                                'error' =>$_OLD_FILES[$this->getName()]['error'][$line_id][$datatype_id][$name[0]],
+                                'error' => $_OLD_FILES[$this->getName()]['error'][$line_id][$datatype_id][$name[0]],
+                            );
+
+                            $_FILES[$name[0]] = $data;
+                        }
+                    }
+
                     foreach($datatype as $name => $value)
                     {
                         $post->set($name, $value);
@@ -81,7 +99,7 @@ class Editor extends AbstractEditor
                 }
             }
         }
-
+die();
         $this->setValue(serialize($datatypes));
     }
 

@@ -46,7 +46,7 @@ class File extends Object
      *
      * @return void
      */
-    public function init($property = NULL, $document = NULL)
+    public function init($property = NULL, $document = NULL, $filename = NULL)
     {
         if(empty($property) or empty($document))
         {
@@ -55,6 +55,7 @@ class File extends Object
 
         $this->setProperty($property);
         $this->setDocument($document);
+        $this->setFileName($filename);
     }
 
     /**
@@ -96,15 +97,17 @@ class File extends Object
 
         $file->setDestination($dir);
 
-        $file_name = $file->getFileName(NULL, FALSE);
+        $filename = $this->getFileName();
+        $file_name = empty($filename) ? NULL : $filename;
+        $file_name = $file->getFileName($file_name, FALSE);
         $info = pathinfo($file_name);
         $file->addFilter('Rename', array(
-            'target' => $file->getDestination() . '/' . uniqid() . '.' . $info['extension'], 'overwrite' => TRUE));
+            'target' => $file->getDestination($file_name) . '/' . uniqid() . '.' . $info['extension'], 'overwrite' => TRUE));
 
-        if($file->receive())
+        if($file->receive($file_name))
         {
             $data = array();
-            $files = $file->getFileInfo();
+            $files = $file->getFileInfo($this->getFileName());
             foreach($files as $file_data)
             {
                 $file_object = new \StdClass();

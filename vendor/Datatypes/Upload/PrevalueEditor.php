@@ -40,13 +40,9 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function save()
     {
-        $post = $this->getRequest()->getPost();
-        $mime_list = $post->get('mime_list');
-        $options_post = $post->get('options', array());
-        $options = array();
-        $options['maxNumberOfFiles'] = in_array('maxNumberOfFiles', $options_post) ? TRUE : FALSE;
+        $is_multiple = $this->getRequest()->getPost()->get('is_multiple');
 
-        $this->setConfig(array('mime_list' => $mime_list, 'options' => $options));
+        $this->setConfig(array('is_multiple' => empty($is_multiple) ? FALSE : TRUE));
     }
 
     /**
@@ -55,64 +51,16 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function load()
     {
-        $parameters = $this->getConfig();
-        $elements = array();
+        $config = $this->getConfig();
 
-        $options_values = !empty($parameters['options']) ? $parameters['options'] : array();
-        $fieldset = new \Zend\Form\Fieldset('Available options');
-        $element = new Element\MultiCheckbox('options');
-        $element->setAttribute('selected', $options_values);
-
-        $element->setValueOptions(array(
-            array(
-                'value' => 'maxNumberOfFiles',
-                'label' => 'Is multiple',
-                'selected' => empty($options_values['maxNumberOfFiles']) ? FALSE : TRUE,
-            ),
+        $is_multiple = new Element\Checkbox('is_multiple');
+        $is_multiple->setAttributes(array(
+            'label' => 'Is Multiple',
+            'value' => isset($config['is_multiple']) ? $config['is_multiple'] : '',
+            'class' => 'input-text',
+            'id' => 'is_multiple',
         ));
-        $fieldset->add($element);
 
-        $elements[] = $fieldset;
-
-        $element = new Element\MultiCheckbox('mime_list');
-        $mime_list = array(
-            'image/gif',
-            'image/jpeg',
-            'image/png',
-            'image/tiff',
-            'image/svg+xml',
-            'text/css',
-            'text/csv',
-            'text/html',
-            'text/javascript',
-            'text/plain',
-            'text/xml',
-            'video/mpeg',
-            'video/mp4',
-            'video/quicktime',
-            'video/x-ms-wmv',
-            'video/x-msvideo',
-            'video/x-flv',
-            'audio/mpeg',
-            'audio/x-ms-wma',
-            'audio/vnd.rn-realaudio',
-            'audio/x-wav'
-        );
-        $options = array();
-        foreach($mime_list as $mime)
-        {
-            $options[] = array(
-                'value' => $mime,
-                'label' => $mime,
-                'selected' => !in_array($mime, empty($parameters['mime_list']) ? array() : $parameters['mime_list']) ? FALSE : TRUE,
-            );
-        }
-        $element->setValueOptions($options);
-
-        $fieldset = new \Zend\Form\Fieldset('Mime list');
-        $fieldset->add($element);
-        $elements[] = $fieldset;
-
-        return $this->addPath(__DIR__)->render('upload-prevalue.phtml', array('elements' => $elements));
+        return $is_multiple;
     }
 }

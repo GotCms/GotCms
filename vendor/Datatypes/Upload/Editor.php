@@ -27,7 +27,6 @@
 namespace Datatypes\Upload;
 
 use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Gc\Media\File,
     Zend\Form\Element;
 
 /**
@@ -41,52 +40,24 @@ class Editor extends AbstractEditor
      */
     public function save()
     {
-        $file_class = new File();
-        $file_class->init($this->getProperty(), $this->getDatatype()->getDocument());
-
-        $post = $this->getRequest()->getPost();
-        $values = $post->get($this->getName(), array());
-        $parameters = $this->getConfig();
-        $options  = $parameters['options'];
-        $array_values = array();
-        if(!empty($values))
+        $value = $this->getRequest()->getPost()->get($this->getName());
+        if(!empty($_FILES[$this->getName()]['name']))
         {
-            foreach($values as $idx => $value)
+            $file = new \Gc\Media\File();
+            $file->init($this->getDatatype()->getDocument(), $this->getProperty(), $this->getName());
+            $file->upload();
+            $files = $file->getFiles();
+            if(!empty($files))
             {
-                if(empty($value['name']))
+                $data = array();
+                foreach($files as $file)
                 {
-                    continue;
-                }
-
-                $file = $file_class->getPath() . '/' . $value['name'];
-                if(file_exists($file))
-                {
-                    $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
-                    $finfo = finfo_open($const); // return mimetype extension
-                    if(!in_array(finfo_file($finfo, $file), $parameters['mime_list']))
-                    {
-                        unlink($file);
-                    }
-                    else
-                    {
-                        $file_info = @getimagesize($file);
-                        $array_values[] = array(
-                            'value' => $value['name'],
-                            'width' => empty($file_info[0]) ? 0 : $file_info[0],
-                            'height' => empty($file_info[1]) ? 0 : $file_info[1],
-                            'html' => empty($file_info[2]) ? '' : $file_info[2],
-                            'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
-                        );
-                    }
-
-                    finfo_close($finfo);
+                    $data[] = $file->filename;
                 }
             }
-
-            $return_values = serialize($array_values);
         }
 
-        $this->setValue(empty($return_values) ? NULL : $return_values);
+        $this->setValue(empty($data) ? NULL : $data);
     }
 
     /**
@@ -96,62 +67,16 @@ class Editor extends AbstractEditor
     public function load()
     {
         $parameters = $this->getConfig();
-        $options  = $parameters['options'];
-        $maxNumberOfFiles = empty($options['maxNumberOfFiles']) ? FALSE : TRUE;
-
-        $this->initScript();
-        $file_list = array();
-        $files = unserialize($this->getValue());
-        if(!empty($files))
+        $property = $this->getProperty();
+        $upload = new Element\File($this->getName());
+        $upload->setAttribute('label', $property->getName());
+        $value = $this->getValue();
+        var_dump($value);
+        if(!empty($value))
         {
-            $file_class = new File();
-            $file_class->init($this->getProperty(), $this->getDatatype()->getDocument());
-            foreach($files as $file_data)
-            {
-                $file_object = new \StdClass();
-                //@TODO replace path here
-                $file_object->name = $file_data['value'];
-                $file_object->filename = $file_data['value'];
-                $file_object->thumbnail_url = $file_data['value'];
-
-                $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
-                $file_object->delete_url = $router->assemble(array(
-                    'document_id' => $this->getDatatype()->getDocument()->getId(),
-                    'property_id' => $this->getProperty()->getId(),
-                    'file' => base64_encode($file_data['value'])),
-                array('name' => 'mediaRemove'));
-                $file_object->delete_type = 'DELETE';
-                $file_list[] = $file_object;
-            }
+            $upload->setValue($value[0]);
         }
 
-        return $this->addPath(__DIR__)->render('upload-editor.phtml', array(
-            'property' => $this->getProperty(),
-            'uploadUrl' => $this->getUploadUrl(),
-            'name' => $this->getName(),
-            'files' => json_encode($file_list),
-            'options' => $options
-        ));
-    }
-
-    /**
-     * Load resources
-     * @return void
-     */
-    protected function initScript()
-    {
-        $headscript = $this->getHelper('HeadScript');
-        $headscript
-            ->appendFile('/js/jfileupload/load-image.min.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/canvas-to-blob.min.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/jquery.iframe-transport.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/jquery.fileupload.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/jquery.fileupload-fp.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/jquery.fileupload-ui.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/locale.js', 'text/javascript');
-
-        $headlink = $this->getHelper('HeadLink');
-        $headlink->appendStylesheet('/css/jquery.fileupload-ui.css')
-            ->appendStylesheet('/css/jfileupload-bootstrap.css');
+        return $upload;
     }
 }
