@@ -123,6 +123,13 @@ class Editor extends AbstractEditor
             $hidden_upload->setValue($value);
         }
 
-        return array($upload, $hidden_upload);
+        return array(
+            $upload,
+            $hidden_upload,
+            $this->addPath(__DIR__)->render('upload-editor.phtml', array(
+                'files' => $value,
+                'id' => $this->getName()
+            ))
+        );
     }
 }
