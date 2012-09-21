@@ -1016,6 +1016,68 @@ if data is numeric, return all documents with parent_id equal to $data]]></descr
       </method>
     </class>
   </file>
+  <file path="Gc/View/Helper/FormCheckbox.php" hash="afa733ef0bfbe912ed7e15f97bee3d5e" package="Library\View\Helper">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Library"/>
+      <tag line="2" name="subpackage" description="View\Helper"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+    <namespace-alias name="ElementInterface">Zend\Form\ElementInterface</namespace-alias>
+    <namespace-alias name="CheckboxElement">Zend\Form\Element\Checkbox</namespace-alias>
+    <namespace-alias name="ZendFormCheckbox">Zend\Form\View\Helper\FormCheckbox</namespace-alias>
+    <class final="false" abstract="false" namespace="Gc\View\Helper" line="37" package="Default">
+      <name>FormCheckbox</name>
+      <full_name>\Gc\View\Helper\FormCheckbox</full_name>
+      <extends>\Zend\Form\View\Helper\FormCheckbox</extends>
+      <docblock line="34">
+        <description><![CDATA[Render form checkbox]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="47" package="">
+        <name>render</name>
+        <type>function</type>
+        <docblock line="39">
+          <description><![CDATA[Render a form <input> element from the provided $element]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="39" name="param" description="" type="\Zend\Form\ElementInterface" variable="$element">
+            <type by_reference="false">\Zend\Form\ElementInterface</type>
+          </tag>
+          <tag line="39" name="throws" description="" type="\Exception\InvalidArgumentException">
+            <type by_reference="false">\Exception\InvalidArgumentException</type>
+          </tag>
+          <tag line="39" name="throws" description="" type="\Exception\DomainException">
+            <type by_reference="false">\Exception\DomainException</type>
+          </tag>
+          <tag line="39" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="47">
+          <name>$element</name>
+          <default><![CDATA[]]></default>
+          <type>ElementInterface</type>
+        </argument>
+      </method>
+    </class>
+  </file>
   <file path="Gc/View/Helper/Tools.php" hash="b5c7b0b3c35c9f67893727b5c29c0a5a" package="Library\View\Helper">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
@@ -7386,7 +7448,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Form/AbstractForm.php" hash="a593e77aa1220de2072b9c2604443370" package="Library\Form">
+  <file path="Gc/Form/AbstractForm.php" hash="4c5d8adb880be71f958ae451fec25219" package="Library\Form">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -7426,201 +7488,123 @@ This is better to initialize somes values, retrieve adapter
 add dynamic content, etc...]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="48" package="">
+      <constant namespace="Gc\Form" line="47" package="Default">
+        <name>IDENTIFIER_PATTERN</name>
+        <value><![CDATA['~^[a-zA-Z0-9_-]+$~']]></value>
+        <docblock line="43">
+          <description><![CDATA[Identifier pattern constante]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="43" name="const" description="IDENTIFIER_PATTERN"/>
+        </docblock>
+      </constant>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="54" package="">
         <name>__construct</name>
         <type>function</type>
-        <docblock line="43">
+        <docblock line="49">
           <description><![CDATA[Constructor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="43" name="param" description="Optional name for the element" type="null|string|int" variable="$name">
+          <tag line="49" name="param" description="Optional name for the element" type="null|string|int" variable="$name">
             <type by_reference="false">null</type>
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
           </tag>
         </docblock>
-        <argument line="48">
+        <argument line="54">
           <name>$name</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="59" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="65" package="">
         <name>init</name>
         <type>function</type>
-        <docblock line="56">
+        <docblock line="62">
           <description><![CDATA[Initialize form]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="65" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="71" package="">
         <name>getAdapter</name>
         <type>function</type>
-        <docblock line="61">
+        <docblock line="67">
           <description><![CDATA[Get db adapter]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="61" name="return" description="" type="\Gc\Form\Zend_Db_Adapter_Abstract">
+          <tag line="67" name="return" description="" type="\Gc\Form\Zend_Db_Adapter_Abstract">
             <type by_reference="false">\Gc\Form\Zend_Db_Adapter_Abstract</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="75" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="81" package="">
         <name>loadValues</name>
         <type>function</type>
-        <docblock line="70">
+        <docblock line="76">
           <description><![CDATA[Load values]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="70" name="param" description="" type="\Gc\Db\AbstractTable" variable="$table">
+          <tag line="76" name="param" description="" type="\Gc\Db\AbstractTable" variable="$table">
             <type by_reference="false">\Gc\Db\AbstractTable</type>
           </tag>
-          <tag line="70" name="return" description="" type="\Gc\Form\AbstractForm">
+          <tag line="76" name="return" description="" type="\Gc\Form\AbstractForm">
             <type by_reference="false">\Gc\Form\AbstractForm</type>
           </tag>
         </docblock>
-        <argument line="75">
+        <argument line="81">
           <name>$table</name>
           <default><![CDATA[]]></default>
           <type>AbstractTable</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Form" line="115" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Form" line="121" package="">
         <name>addContent</name>
         <type>function</type>
-        <docblock line="107">
+        <docblock line="113">
           <description><![CDATA[Add content to form]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="107" name="param" description="" type="\Zend\Form\Fieldset" variable="$form">
+          <tag line="113" name="param" description="" type="\Zend\Form\Fieldset" variable="$form">
             <type by_reference="false">\Zend\Form\Fieldset</type>
           </tag>
-          <tag line="107" name="param" description="" type="mixed" variable="$elements">
+          <tag line="113" name="param" description="" type="mixed" variable="$elements">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="107" name="param" description="add belong to for each elements" type="string" variable="$prefix">
+          <tag line="113" name="param" description="add belong to for each elements" type="string" variable="$prefix">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="107" name="static" description=""/>
-          <tag line="107" name="return" description="" type="void">
+          <tag line="113" name="static" description=""/>
+          <tag line="113" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="115">
+        <argument line="121">
           <name>$form</name>
           <default><![CDATA[]]></default>
           <type>Fieldset</type>
         </argument>
-        <argument line="115">
+        <argument line="121">
           <name>$elements</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="115">
+        <argument line="121">
           <name>$prefix</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="170" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Form" line="176" package="">
         <name>getValue</name>
         <type>function</type>
-        <docblock line="165">
+        <docblock line="171">
           <description><![CDATA[Return element value]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="165" name="param" description="" type="string" variable="$name">
+          <tag line="171" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="165" name="return" description="" type="string">
+          <tag line="171" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="170">
+        <argument line="176">
           <name>$name</name>
           <default><![CDATA[NULL]]></default>
-          <type/>
-        </argument>
-      </method>
-    </class>
-  </file>
-  <file path="Gc/Validator/Identifier.php" hash="a4c1395b786f57bceb000537d73d2f94" package="Library\Validator">
-    <docblock line="2">
-      <description><![CDATA[This source file is part of GotCms.]]></description>
-      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-GotCms is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License along
-with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
-
-PHP Version >=5.3]]></long-description>
-      <tag line="2" name="category" description="Gc"/>
-      <tag line="2" name="package" description="Library"/>
-      <tag line="2" name="subpackage" description="Validator"/>
-      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
-      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
-      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
-    </docblock>
-    <namespace-alias name="AbstractValidator">Zend\Validator\AbstractValidator</namespace-alias>
-    <class final="false" abstract="false" namespace="Gc\Validator" line="34" package="Default">
-      <name>Identifier</name>
-      <full_name>\Gc\Validator\Identifier</full_name>
-      <extends>\Zend\Validator\AbstractValidator</extends>
-      <docblock line="31">
-        <description><![CDATA[Check if string is available identifier]]></description>
-        <long-description><![CDATA[]]></long-description>
-      </docblock>
-      <constant namespace="Gc\Validator" line="40" package="Default">
-        <name>NOT_IDENTIFIER</name>
-        <value><![CDATA['notIdentifier']]></value>
-        <docblock line="36">
-          <description><![CDATA[Identifier message constante]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="36" name="const" description="notIdentifier"/>
-        </docblock>
-      </constant>
-      <property final="false" static="false" visibility="protected" line="46" package="Default">
-        <name>$_pattern</name>
-        <default><![CDATA['~^[a-zA-Z0-9_]+$~']]></default>
-        <docblock line="42">
-          <description><![CDATA[Pattern to check if string is available identifier]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="42" name="var" description="" type="string">
-            <type by_reference="false">string</type>
-          </tag>
-        </docblock>
-      </property>
-      <property final="false" static="false" visibility="protected" line="52" package="Default">
-        <name>$_messageTemplates</name>
-        <default><![CDATA[array(
-        self::NOT_IDENTIFIER => "'%value%' can only contains alphabetic characters and '_'",
-    )]]></default>
-        <docblock line="48">
-          <description><![CDATA[List of errors messages]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="48" name="var" description="" type="array">
-            <type by_reference="false">array</type>
-          </tag>
-        </docblock>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Validator" line="61" package="">
-        <name>isValid</name>
-        <type>function</type>
-        <docblock line="56">
-          <description><![CDATA[Check if string is available identifier]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="56" name="param" description="string" type="\Gc\Validator\$value" variable="$value">
-            <type by_reference="false">\Gc\Validator\$value</type>
-          </tag>
-          <tag line="56" name="return" description="" type="boolean">
-            <type by_reference="false">boolean</type>
-          </tag>
-        </docblock>
-        <argument line="61">
-          <name>$value</name>
-          <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
@@ -8795,7 +8779,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Upload/Editor.php" hash="14e39bc21526646bf5df3c9f75d6a202" package="Datatype">
+  <file path="Datatypes/Upload/Editor.php" hash="b659d620f9f30d2b2b52991e79230e14" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8851,6 +8835,30 @@ PHP Version >=5.3]]></long-description>
         </docblock>
       </method>
     </class>
+  </file>
+  <file path="Datatypes/Upload/upload-editor.phtml" hash="b48d9ea61ce13b359921ace87d5ff2b0" package="Datatype">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Datatype"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
   </file>
   <file path="Datatypes/Upload/PrevalueEditor.php" hash="41bef8ce8b1fb0df6ac676ca63438d80" package="Datatype">
     <docblock line="2">
@@ -9286,7 +9294,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Textarea/Editor.php" hash="3081465ad6b2e1de9a0547330b7cfa0a" package="Datatype">
+  <file path="Datatypes/Textarea/Editor.php" hash="e11343dcde94d6c432bf8578eaf709ff" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -9942,7 +9950,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/Mixed/PrevalueEditor.php" hash="a5bc7216f4ffc030b2a734cefba6cad5" package="Datatype">
+  <file path="Datatypes/Mixed/PrevalueEditor.php" hash="a8b5b3d3c22f81a44bdae81bda37873a" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -9998,20 +10006,20 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Mixed" line="134" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Datatypes\Mixed" line="135" package="">
         <name>_getDatatype</name>
         <type>function</type>
-        <docblock line="129">
+        <docblock line="130">
           <description><![CDATA[Retrieve datatypes]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="129" name="param" description="" type="string" variable="$name">
+          <tag line="130" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="129" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
+          <tag line="130" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype</type>
           </tag>
         </docblock>
-        <argument line="134">
+        <argument line="135">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -10143,7 +10151,7 @@ PHP Version >=5.3]]></long-description>
       <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
     </docblock>
   </file>
-  <file path="Datatypes/Textstring/Editor.php" hash="8d08c50831b7933d9dd7371fb63709e8" package="Datatype">
+  <file path="Datatypes/Textstring/Editor.php" hash="bb8796c209cbd1d6159bbdfc398a1a07" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -10551,7 +10559,6 @@ PHP Version >=5.3]]></long-description>
       <package name="Permission" full_name="Library\User\Permission"/>
       <package name="Role" full_name="Library\User\Role"/>
     </package>
-    <package name="Validator" full_name="Library\Validator"/>
     <package name="View" full_name="Library\View">
       <package name="Helper" full_name="Library\View\Helper"/>
       <package name="Resolver" full_name="Library\View\Resolver"/>
@@ -10598,7 +10605,6 @@ PHP Version >=5.3]]></long-description>
       <namespace name="Permission" full_name="Gc\User\Permission"/>
       <namespace name="Role" full_name="Gc\User\Role"/>
     </namespace>
-    <namespace name="Validator" full_name="Gc\Validator"/>
     <namespace name="View" full_name="Gc\View">
       <namespace name="Helper" full_name="Gc\View\Helper"/>
       <namespace name="Resolver" full_name="Gc\View\Resolver"/>
