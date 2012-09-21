@@ -137,7 +137,7 @@ footer a:hover {text-decoration:underline;}
 #menu ul li {list-style-image:url(../images/liststyle.png);background-image:url(../images/separateur2.png);background-position:bottom;background-repeat:no-repeat;margin-left:-20px;padding-bottom:7px;padding-top:7px;}
 #menu #browser li {margin-left: 18px;padding:0;background-position:0 -1766px;list-style: none}
 .textarea {margin:0 0 10px 0;border:1px solid #CCCCCC;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;-webkit-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;}
-.input-text{margin:0 0 10px 0;width:280px;border:1px solid #CCCCCC;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;-webkit-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;height:25px;}
+.input-text{margin:5px 0;width:280px;border:1px solid #CCCCCC;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;-webkit-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;height:25px;}
 .input-checkbox[type=checkbox] {visibility: hidden;}
 .input-checkbox {width: 20px;height:20px;display:inline-block;position: relative;}
 .input-checkbox label {width:9px;cursor: pointer;position: absolute;width: 20px;height: 20px;top: 0;left:0;border-radius: 4px;-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);background: -webkit-linear-gradient(top, #222222 0%, #45484D 100%);background: -moz-linear-gradient(top, #222222 0%, #45484D 100%);background: -o-linear-gradient(top, #222222 0%, #45484D 100%);background: -ms-linear-gradient(top, #222222 0%, #45484D 100%);background: linear-gradient(top, #222222 0%, #45484D 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#45484D',GradientType=0 );}
@@ -148,7 +148,7 @@ footer a:hover {text-decoration:underline;}
 .input-submit:hover {text-decoration: none;background: -moz-linear-gradient(center top , #444444, #000000) repeat scroll 0 0 transparent;}
 .input-submit:active {position: relative;top: 1px;background: -moz-linear-gradient(center top , #000000, #444444) repeat scroll 0 0 transparent;color: #666666;}
 
-.simple-form label {width:150px;display:inline-block;height:32px;}
+.simple-form label {width:150px;display:inline-block;height:35px;}
 .simple-form a,
 .simple-form a:visited {color:#FFFFFF;}
 
