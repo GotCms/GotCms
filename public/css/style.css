@@ -148,20 +148,19 @@ footer a:hover {text-decoration:underline;}
 .input-submit:hover {text-decoration: none;background: -moz-linear-gradient(center top , #444444, #000000) repeat scroll 0 0 transparent;}
 .input-submit:active {position: relative;top: 1px;background: -moz-linear-gradient(center top , #000000, #444444) repeat scroll 0 0 transparent;color: #666666;}
 
-
 .simple-form label {width:150px;display:inline-block;height:32px;}
 .simple-form a,
 .simple-form a:visited {color:#FFFFFF;}
-
-
 
 #dialog {display:none;}
 #development-form label {display: inline-block;width: 150px;height:25px;}
 #development-form input[type="text"], #development-form select {width:250px;}
 
 #table-trad tbody td{text-align:center;}
+#table-trad .input-text {width:100%;}
 #table-translation-edit td{cursor:pointer;}
 #table-translation-edit tbody tr:hover{background:grey;}
+#table-translation-edit .input-text {width:90%;margin:0;}
 
 .table-list {width:100%}
 .table-list th{text-align:left;}
