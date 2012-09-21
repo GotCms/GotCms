@@ -188,6 +188,13 @@ class Document extends AbstractForm
         $this->add($layout);
         $this->remove('document_type');
         $this->remove('parent');
+
+
+        $more_information = new Element\Hidden('more_information');
+        $more_information->setAttribute('content', '');
+        $this->add($more_information);
+
+
         $this->parentId = $document->getParentId();
         $this->documentId = $document->getId();
 

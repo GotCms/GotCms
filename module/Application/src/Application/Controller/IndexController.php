@@ -67,6 +67,7 @@ class IndexController extends Action
 
         if(empty($document))
         {
+            $is_preview = ($this->getRequest()->getQuery()->get('preview') == 'true');
             $path = $this->getRouteMatch()->getParam('path');
             if(empty($path))
             {
@@ -95,16 +96,19 @@ class IndexController extends Action
                     }
                     else
                     {
-                        $document = $document_tmp;
                         if(!empty($document_tmp))
                         {
                             if(!$document_tmp->isPublished())
                             {
-                                break;
+                                if(!$this->getAuth()->hasIdentity() or $is_preview !== TRUE)
+                                {
+                                    break;
+                                }
                             }
 
+                            $document = $document_tmp;
                             $parent_id = $document->getId();
-                            $children = $document_tmp->getChildren();
+                            $children = $document->getChildren();
                         }
                     }
                 }
@@ -128,7 +132,7 @@ class IndexController extends Action
         $view_model->setTemplate($this->_viewName);
         $this->layout()->setTemplate($this->_layoutName);
 
-        if(empty($document) or !$document->isPublished())
+        if(empty($document))
         {
             // 404
             $this->getResponse()->setStatusCode(404);

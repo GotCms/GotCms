@@ -39,6 +39,12 @@
                 <?php $elements = $fieldset->getElements(); ?>
                 <?php foreach($elements as $element): ?>
                     <div>
+                        <?php if($element->getName() == 'more_information'): ?>
+                            <label><?php echo $this->escapeHtml($this->translate('Preview')); ?></label>
+
+                            <a href="<?php echo $this->url('renderWebsite', array('path' => $this->document->getUrlKey())); ?>?preview=true">/<?php echo $this->escapeHtml($this->document->getUrlKey()); ?></a>
+                        <?php endif; ?>
+
                         <?php $content = $element->getAttribute('content'); ?>
                         <?php if(!empty($content)): ?>
                             <?php echo $content; ?>
@@ -59,6 +65,7 @@
         <?php endforeach; ?>
     </div>
 </form>
+
 <script type="text/javascript">
 $(function(){
     jQuery('#tabs').tabs();

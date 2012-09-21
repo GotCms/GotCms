@@ -293,7 +293,7 @@ class DocumentController extends Action
 
             $tabs = new Component\Tabs($tabs_array);
 
-            return array('form' => $document_form, 'tabs' => $tabs);
+            return array('form' => $document_form, 'tabs' => $tabs, 'document' => $document);
         }
     }
 
