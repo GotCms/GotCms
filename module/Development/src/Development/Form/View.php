@@ -56,7 +56,9 @@ class View extends AbstractForm
                 'required'=> TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
-                    //, array('name' => 'identifier') @TODO test it
+                    array('name' => 'regex', 'options' => array(
+                        'pattern' => parent::IDENTIFIER_PATTERN
+                    )),
                     array(
                         'name' => 'db\\no_record_exists',
                         'options' => array(

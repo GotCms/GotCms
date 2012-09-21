@@ -288,7 +288,10 @@ class DocumentType extends AbstractForm
                 'name' => 'identifier',
                 'required'=> TRUE,
                 'validators' => array(
-                    array('name' => 'not_empty')
+                    array('name' => 'not_empty'),
+                    array('name' => 'regex', 'options' => array(
+                        'pattern' => parent::IDENTIFIER_PATTERN
+                    ))
                 ),
             ),
             'tab' => array(

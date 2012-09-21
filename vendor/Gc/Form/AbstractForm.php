@@ -41,6 +41,12 @@ use Zend\Form\Form,
 abstract class AbstractForm extends Form
 {
     /**
+     * Identifier pattern constante
+     * @const IDENTIFIER_PATTERN
+     */
+    const IDENTIFIER_PATTERN = '~^[a-zA-Z0-9_-]+$~';
+
+    /**
      * Constructor
      *
      * @param null|string|int $name Optional name for the element

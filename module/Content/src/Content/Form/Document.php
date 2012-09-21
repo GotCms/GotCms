@@ -56,7 +56,9 @@ class Document extends AbstractForm
                 'required'=> FALSE,
                 'allow_empty' => TRUE,
                 'validators' => array(
-                    //, array('name' => 'identifier') @TODO test it
+                    array('name' => 'regex', 'options' => array(
+                        'pattern' => parent::IDENTIFIER_PATTERN
+                    )),
                     array(
                         'name' => 'db\\no_record_exists',
                         'options' => array(
