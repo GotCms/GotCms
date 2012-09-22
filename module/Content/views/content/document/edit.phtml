@@ -42,7 +42,8 @@
                         <?php if($element->getName() == 'more_information'): ?>
                             <label><?php echo $this->escapeHtml($this->translate('Preview')); ?></label>
 
-                            <a href="<?php echo $this->url('renderWebsite', array('path' => $this->document->getUrlKey())); ?>?preview=true">/<?php echo $this->escapeHtml($this->document->getUrlKey()); ?></a>
+                            <a target="_blank" href="<?php echo $this->url('renderWebsite', array('path' => $this->document->getUrlKey())); ?>?preview=true">/<?php echo $this->escapeHtml($this->document->getUrlKey()); ?></a>
+                            <?php continue; ?>
                         <?php endif; ?>
 
                         <?php $content = $element->getAttribute('content'); ?>
