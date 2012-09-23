@@ -58,23 +58,17 @@
                 <?php else: ?>
                     <?php $id = $element->getAttribute('id'); ?>
                     <?php $label = $element->getAttribute('label'); ?>
-                    <?php if(!empty($id)): ?>
-                        <?php if(!empty($label)): ?>
-                            <label class="required" for="<?php echo $this->escapeHtml($this->translate($id)); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
-                        <?php endif; ?>
 
-                        <?php echo $this->formElement($element); ?>
-                    <?php else: ?>
-                        <?php if(!empty($label)): ?>
-                            <label><?php echo $this->escapeHtml($this->translate($label)); ?>
-                        <?php endif; ?>
-
-                        <?php echo $this->formElement($element); ?>
-
-                        <?php if(!empty($label)): ?>
-                            </label>
-                        <?php endif; ?>
+                    <?php if(empty($id)): ?>
+                        <?php $id = 'element' . mt_rand(); ?>
+                        <?php $element->setAttribute('id', $id); ?>
                     <?php endif; ?>
+
+                    <?php if(!empty($label)): ?>
+                        <label class="required" for="<?php echo $this->escapeHtml($this->translate($id)); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+                    <?php endif; ?>
+
+                    <?php echo $this->formElement($element); ?>
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>
