@@ -29,6 +29,7 @@ namespace Gc\Datatype;
 
 use Gc\Db\AbstractTable,
     Gc\Property,
+    Zend\Config\Reader\Ini,
     Zend\View\Model\ViewModel;
 /**
  * Abstract Datatype is used to call
@@ -73,6 +74,23 @@ abstract class AbstractDatatype extends AbstractTable
      */
     abstract public function getPrevalueEditor();
 
+    /**
+     * Return datatype informations
+     * @return array
+     */
+    public function getInfos()
+    {
+        $object = new \ReflectionObject($this);
+        $directory = dirname($object->getFileName());
+        $filename = $directory . '/datatype.info';
+        if(!file_exists($filename))
+        {
+            return FALSE;
+        }
+
+        $config = new Ini();
+        return $config->fromFile($filename);
+    }
 
     /**
      * Load Datatype

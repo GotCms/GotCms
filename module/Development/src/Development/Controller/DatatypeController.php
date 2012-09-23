@@ -158,7 +158,7 @@ class DatatypeController extends Action
             }
         }
 
-        return array('form' => $datatype_form);
+        return array('form' => $datatype_form, 'infos' => $datatype->getInfos());
     }
 
     /**

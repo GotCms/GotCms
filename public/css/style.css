@@ -205,6 +205,8 @@ footer a:hover {text-decoration:underline;}
 .widget-box .header {border-top-left-radius: 3px;border-top-right-radius: 3px;cursor: move;margin:0;padding:12px;}
 .sortable-placeholder{border-width:1px;border-style:dashed;margin-bottom:20px;}
 
+#datatype-infos a {color:#000000;}
+#datatype-infos dl {display:none;}
 
 .ui-state-default a:visited {color:#333333;}
 .ui-state-active a:visited {color:#FFFFFF;}

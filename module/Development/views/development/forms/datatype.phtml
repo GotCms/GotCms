@@ -28,6 +28,23 @@
 ?>
 <?php $errors = $this->form->getMessages(); ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
+    <?php if(!empty($this->infos)): ?>
+        <div id="datatype-infos">
+            <a href="#"><?php echo $this->escapeHtml($this->translate('Display/Hide informations')); ?></a>
+
+            <dl>
+                <?php foreach(array('author', 'description', 'year', 'version') as $info): ?>
+                    <?php if(empty($this->infos[$info])): ?>
+                        <?php continue; ?>
+                    <?php endif; ?>
+
+                    <dt><?php echo $this->escapeHtml($this->translate($info)); ?></dt>
+                    <dd><?php echo $this->infos[$info]; ?></dd>
+                <?php endforeach; ?>
+            </dl>
+        </div>
+    <?php endif; ?>
+
     <div>
         <label class="required" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
         <input type="name" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
@@ -78,3 +95,10 @@
         <input type="submit" id="input-save" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
     </div>
 </form>
+
+<script type="text/javascript">
+    $('#datatype-infos > a').on('click', function()
+    {
+        $(this).next('dl').toggle();
+    });
+</script>
