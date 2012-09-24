@@ -32,13 +32,18 @@
 </div>
 
 <div class="part<?php if($this->active == 'content'): ?> active<?php endif; ?>">
-    <a href="<?php echo $this->url('content'); ?>"><img src="<?php echo $this->basePath('images/icones/blog.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
+    <a href="<?php echo $this->url('content'); ?>"><img src="<?php echo $this->basePath('images/icones/content.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
     <p><?php echo $this->escapeHtml($this->translate('Content')); ?> <br /> <?php echo $this->escapeHtml($this->translate('Manage content')); ?></p></a>
 </div>
 
 <div class="part<?php if($this->active == 'development'): ?> active<?php endif; ?>">
-    <a href="<?php echo $this->url('development'); ?>"><img src="<?php echo $this->basePath('images/icones/user.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
+    <a href="<?php echo $this->url('development'); ?>"><img src="<?php echo $this->basePath('images/icones/development.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
     <p><?php echo $this->escapeHtml($this->translate('Development')); ?> <br /> <?php echo $this->escapeHtml($this->translate('Manage documents')); ?></p></a>
+</div>
+
+<div class="part<?php if($this->active == 'modules'): ?> active<?php endif; ?>">
+    <a href="<?php echo $this->url('modules'); ?>"><img src="<?php echo $this->basePath('images/icones/modules.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
+    <p><?php echo $this->escapeHtml($this->translate('Modules')); ?> <br /> <?php echo $this->escapeHtml($this->translate('Manage modules')); ?></p></a>
 </div>
 
 <div class="part<?php if($this->active == 'statistics'): ?> active<?php endif; ?>">
