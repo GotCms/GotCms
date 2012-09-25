@@ -28,13 +28,32 @@
 namespace Gc\Module;
 
 use Zend\EventManager\Event;
-
+/**
+ * Abstract module
+ */
 abstract class AbstractModule
 {
+    /**
+     * Execute on bootstrap
+     * @param Event $e
+     */
     abstract function onBootstrap(Event $e);
+
+    /**
+     * Install module
+     * @return boolean
+     */
     abstract function install();
+    /**
+     * Uninstall module
+     * @return boolean
+     */
     abstract function uninstall();
 
+    /**
+     * Return database adapter
+     * @return Zend\Db\Adapter\Adapter
+     */
     protected function getDb()
     {
         return \Gc\Registry::get('Db');
