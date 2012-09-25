@@ -17,24 +17,21 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Modules\Controller
+ * @category Modules
+ * @package  Blog\Controller
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
 
-namespace Modules\Blog;
+namespace Modules\Blog\Controller;
 
-use Gc\Module\AbstractModule;
+use Gc\Module\Controller\AbstractController;
 
-class Blog extends AbstractModule
+class IndexController extends AbstractController
 {
-    public function install()
+    public function indexAction()
     {
-    }
 
-    public function uninstall()
-    {
     }
 }

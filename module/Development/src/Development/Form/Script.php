@@ -27,7 +27,6 @@
 namespace Development\Form;
 
 use Gc\Form\AbstractForm,
-    Gc\Validator,
     Zend\Validator\Db,
     Zend\Form\Element,
     Zend\InputFilter\Factory as InputFilterFactory;

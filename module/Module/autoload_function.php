@@ -18,13 +18,23 @@
  * PHP Version >=5.3
  *
  * @category Gc
- * @package  Modules
+ * @package  Module
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
 
-return array(
-    'Modules\Controller\IndexController' => __DIR__ . '/src/Modules/Controller/IndexController.php',
-    'Modules\Module'                     => __DIR__ . '/Module.php',
-);
+/**
+ * Autoload for Statistics module
+ */
+return function ($class) {
+    static $map;
+    if (!$map) {
+        $map = include __DIR__ . '/autoload_classmap.php';
+    }
+
+    if (!isset($map[$class])) {
+        return false;
+    }
+    return include $map[$class];
+};

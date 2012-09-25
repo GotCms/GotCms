@@ -17,19 +17,32 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Modules\AbstractModule
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category Modules
+ * @package  Blog
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
  */
 
-namespace Gc\Modules;
+namespace Modules\Blog;
 
-use Gc\Mvc\Module;
+use Gc\Module\AbstractModule,
+    Zend\EventManager\Event;
 
-class AbstractModule extends Module
+class Blog extends AbstractModule
 {
+    public function onBootstrap(Event $e)
+    {
 
+    }
+
+    public function install()
+    {
+        return TRUE;
+    }
+
+    public function uninstall()
+    {
+        return TRUE;
+    }
 }

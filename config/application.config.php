@@ -31,6 +31,7 @@ return array(
         'Config',
         'Content',
         'Development',
+        'Module',
         'Statistics',
     ),
     'module_listener_options' => array(
@@ -52,6 +53,7 @@ return array(
         'namespaces' => array(
             'Gc'        => __DIR__ . '/../vendor/Gc',
             'Datatypes' => __DIR__ . '/../vendor/Datatypes',
+            'Modules'   => __DIR__ . '/../vendor/Modules',
             'elFinder'  => __DIR__ . '/../vendor/elFinder',
         ),
         'autoregister_zf' => TRUE,

@@ -78,6 +78,14 @@
                 Gc.initDocumentMenu(<?php echo (int)$this->documentId; ?>, '<?php echo $this->escapeJs($this->url('documentSortOrder')); ?>');
             });
         <?php endif; ?>
+
+        <?php if(!empty($this->moduleRoutes)): ?>
+            $(document).ready(function()
+            {
+                Gc.setOption('moduleRoutes', $.parseJSON('<?php echo $this->escapeJs($this->moduleRoutes); ?>'));
+                Gc.initModuleMenu(<?php echo (int)$this->moduleId; ?>);
+            });
+        <?php endif; ?>
     </script>
 
     <div id="dialog" title="">

@@ -18,10 +18,32 @@
  * PHP Version >=5.3
  *
  * @category Gc
- * @package  Modules
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
 
-spl_autoload_register(include __DIR__ . '/autoload_function.php');
+namespace Module;
+
+use Gc\Mvc;
+
+/**
+ * Module Statistics.
+ *
+ * @category   Gc
+ * @package    Config
+ */
+class Module extends Mvc\Module
+{
+    /**
+     * Module directory path
+     * @var string
+     */
+    protected $_directory = __DIR__;
+
+    /**
+     * Module namespace
+     * @var string
+     */
+    protected $_namespace = __NAMESPACE__;
+}

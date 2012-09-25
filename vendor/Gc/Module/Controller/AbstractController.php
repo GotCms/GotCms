@@ -19,17 +19,23 @@
  *
  * @category    Gc
  * @package     Library
- * @subpackage  Modules\Controller/AbstractController
+ * @subpackage  Module\Controller/AbstractController
  * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link        http://www.got-cms.com
  */
 
-namespace Gc\Modules\Controller;
+namespace Gc\Module\Controller;
 
-use Gc\Mvc\Controller;
+use Gc\Mvc\Controller\Action,
+    Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response;
 
-class AbstractController extends Controller
+class AbstractController extends Action
 {
-
+    public function __construct(Request $request, Response $response)
+    {
+        $this->request = $request;
+        $this->response = $response;
+    }
 }

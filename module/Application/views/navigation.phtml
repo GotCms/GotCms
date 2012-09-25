@@ -41,8 +41,8 @@
     <p><?php echo $this->escapeHtml($this->translate('Development')); ?> <br /> <?php echo $this->escapeHtml($this->translate('Manage documents')); ?></p></a>
 </div>
 
-<div class="part<?php if($this->active == 'modules'): ?> active<?php endif; ?>">
-    <a href="<?php echo $this->url('modules'); ?>"><img src="<?php echo $this->basePath('images/icones/modules.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
+<div class="part<?php if($this->active == 'module'): ?> active<?php endif; ?>">
+    <a href="<?php echo $this->url('module'); ?>"><img src="<?php echo $this->basePath('images/icones/module.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
     <p><?php echo $this->escapeHtml($this->translate('Modules')); ?> <br /> <?php echo $this->escapeHtml($this->translate('Manage modules')); ?></p></a>
 </div>
 

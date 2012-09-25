@@ -18,32 +18,25 @@
  * PHP Version >=5.3
  *
  * @category Gc
+ * @package  Design
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
 
-namespace Modules;
+?>
 
-use Gc\Mvc;
+<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
+    <?php $element = $this->form->get('module'); ?>
+    <div>
+        <label class="required" for="module"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
-/**
- * Module Statistics.
- *
- * @category   Gc
- * @package    Config
- */
-class Module extends Mvc\Module
-{
-    /**
-     * Module directory path
-     * @var string
-     */
-    protected $_directory = __DIR__;
+        <?php echo $this->formElement($element); ?>
+    </div>
 
-    /**
-     * Module namespace
-     * @var string
-     */
-    protected $_namespace = __NAMESPACE__;
-}
+    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
+</form>
+<script type="text/javascript">
+    jQuery('#tabs').tabs();
+</script>

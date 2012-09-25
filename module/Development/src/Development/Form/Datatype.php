@@ -27,7 +27,6 @@
 namespace Development\Form;
 
 use Gc\Form\AbstractForm,
-    Gc\Validator,
     Zend\Validator\Db,
     Zend\Form\Element,
     Zend\InputFilter\Factory as InputFilterFactory;
@@ -43,7 +42,7 @@ class Datatype extends AbstractForm
 
         $model  = new Element\Select('model');
 
-        $path = getcwd().'/vendor/Datatypes/';
+        $path = GC_APPLICATION_PATH . '/vendor/Datatypes/';
         $list_dir = glob($path.'*', GLOB_ONLYDIR);
         $options = array();
         foreach($list_dir as $dir)
