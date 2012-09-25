@@ -38,6 +38,12 @@ use Zend\View\Model\ViewModel;
 class IndexController extends Action
 {
     /**
+     * Contains information about acl
+     * @var array $_acl_page
+     */
+    protected $_acl_page = array('resource' => 'Modules', 'permission' => 'all');
+
+    /**
      * @return \Zend\View\Model\ViewModel
      */
     public function indexAction()
