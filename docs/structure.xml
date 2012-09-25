@@ -2659,7 +2659,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </interface>
   </file>
-  <file path="Gc/Module/Collection.php" hash="ee4bd2d888d24a2b24cb7c57392fffd8" package="Library\Module">
+  <file path="Gc/Module/Collection.php" hash="c2e3fb7336ac234165ff82548c0d9495" package="Library\Module">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2719,7 +2719,7 @@ PHP Version >=5.3]]></long-description>
         <name>setModules</name>
         <type>function</type>
         <docblock line="54">
-          <description><![CDATA[Initialize documents]]></description>
+          <description><![CDATA[Initialize modules]]></description>
           <long-description><![CDATA[]]></long-description>
           <tag line="54" name="return" description="" type="\Gc\Module\Collection">
             <type by_reference="false">\Gc\Module\Collection</type>

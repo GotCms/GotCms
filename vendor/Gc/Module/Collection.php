@@ -52,7 +52,7 @@ class Collection extends AbstractTable
     }
 
     /**
-     * Initialize documents
+     * Initialize modules
      * @return \Gc\Module\Collection
      */
     private function setModules()
