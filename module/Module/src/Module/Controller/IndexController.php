@@ -44,7 +44,7 @@ class IndexController extends Action
     {
         $collection = new ModuleCollection();
 
-        return array('modules' => $collection->getChildren());
+        return array('modules' => $collection->getModules());
     }
 
     /**

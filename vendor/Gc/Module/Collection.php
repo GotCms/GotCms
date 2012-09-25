@@ -28,12 +28,11 @@
 namespace Gc\Module;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
     Zend\Db\Sql\Select;
 /**
  * Collection of Module Model
  */
-class Collection extends AbstractTable implements IterableInterface
+class Collection extends AbstractTable
 {
     /**
      * Table name
@@ -93,61 +92,5 @@ class Collection extends AbstractTable implements IterableInterface
         }
 
         return $select;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getParent()
-     */
-    public function getParent()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getChildren()
-     */
-    public function getChildren()
-    {
-        return $this->getModules();
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getId()
-     */
-    public function getId()
-    {
-        return FALSE;
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIcon()
-     */
-    public function getIcon()
-    {
-        return 'folder';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getIterableId()
-     */
-    public function getIterableId()
-    {
-        return 'modules';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getName()
-     */
-    public function getName()
-    {
-        return 'Modules';
-    }
-
-    /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
-     */
-    public function getUrl()
-    {
-        return NULL;
     }
 }
