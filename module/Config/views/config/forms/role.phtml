@@ -39,18 +39,20 @@
 
 
     <?php $permissions = $this->form->getValue('permissions'); ?>
+    <div id="elements">
+        <?php foreach($permissions as $resource => $permissions): ?>
+            <h3><?php echo $this->escapeHtml($this->translate($resource)); ?></h3>
+            <?php foreach($permissions as $permission_id => $permission): ?>
+                <div>
+                    <label class="optional" for="permissions-<?php echo (int)$permission_id; ?>">
+                        <?php echo $this->escapeHtml($this->translate($permission['name'])); ?>
+                    </label>
 
-    <?php foreach($permissions as $resource => $permissions): ?>
-        <?php foreach($permissions as $permission_id => $permission): ?>
-            <div>
-                <label class="optional" for="permissions-<?php echo (int)$permission_id; ?>">
-                    <?php echo $this->escapeHtml($this->translate($permission['name'])); ?>
-                </label>
-
-                <input type="checkbox" value="1" <?php if($permission['value']): ?>checked="checked" <?php endif; ?>id="permissions-<?php echo (int)$permission_id; ?>" name="permissions[<?php echo (int)$permission_id; ?>]">
-            </div>
+                    <input type="checkbox" value="1" <?php if($permission['value']): ?>checked="checked" <?php endif; ?>id="permissions-<?php echo (int)$permission_id; ?>" name="permissions[<?php echo (int)$permission_id; ?>]">
+                </div>
+            <?php endforeach; ?>
         <?php endforeach; ?>
-    <?php endforeach; ?>
+    </div>
 
     <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
 </form>

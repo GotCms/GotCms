@@ -215,12 +215,13 @@ class Model extends AbstractTable
 
     /**
      * Get User Role
+     * @param boolean $force_reload
      * @return \Gc\User\Role\Model
      */
-    public function getRole()
+    public function getRole($force_reload = FALSE)
     {
         $role = $this->getData('role');
-        if(empty($role))
+        if(empty($role) or !empty($force_reload))
         {
             $role = Role\Model::fromId($this->getId());
             $this->setData('role', $role);

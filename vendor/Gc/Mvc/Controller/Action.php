@@ -128,7 +128,7 @@ class Action extends AbstractActionController
                 $user_model = $auth->getIdentity();
 
                 $this->_acl = new Acl($user_model);
-                $permissions = $user_model->getRole()->getUserPermissions();
+                $permissions = $user_model->getRole(TRUE)->getUserPermissions();
 
                 if($route_name != 'userForbidden' and !empty($this->_acl_page) and !$this->_acl->isAllowed($user_model->getRole()->getName(), $this->_acl_page['resource'], $this->_acl_page['permission']))
                 {

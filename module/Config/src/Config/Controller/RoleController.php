@@ -125,6 +125,7 @@ class RoleController extends Action
                 $role_model->addData($form->getInputFilter()->getValues());
                 $role_model->save();
 
+                $this->flashMessenger()->setNamespace('success')->addMessage('Role saved!');
                 return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
             }
 
