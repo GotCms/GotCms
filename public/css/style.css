@@ -111,10 +111,10 @@ img {border:0}
 header {height:80px;}
 header .part {width:206px;height:60px;color:#FFFFFF;display: inline-block;margin: 10px 5px 10px 0;border:1px solid transparent;}
 header .part.active, header .part:hover {border-radius: 5px 5px 5px 5px;background:-moz-linear-gradient(center top , #666666 0%, #000000 100%) repeat scroll 0 0 transparent;border: 1px solid #999;padding: 0;}
-header .part p {margin-left:55px; padding-top:8px;}
-header .part a {color:#FFFFFF; text-decoration:none;}
+header .part p {display: inline-block;line-height: 15px;margin-left: 10px;margin-top: 17px;}
+header .part a {color:#FFFFFF; text-decoration:none;display: block;height: 60px;line-height:60px;}
 header .part a:hover {color:#FFFFFF; text-decoration:none;}
-header .part .icone {margin-left:10px; margin-top:10px; float:left; }
+header .part .icone {display: inline;margin-left: 10px;margin-top: -20px;}
 
 footer {background-image:url(../images/footer.png);background-repeat:repeat-x;width:100%;height:32px;margin-bottom:10px;color:#939393;font-size:10px;padding-top:10px;}
 footer a {color:#939393; font-style:italic; text-decoration:none; }
