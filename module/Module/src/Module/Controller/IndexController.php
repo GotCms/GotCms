@@ -83,6 +83,10 @@ class IndexController extends Action
         return array('form' => $form);
     }
 
+    /**
+     * Load module
+     * @return \Zend\View\Model\ViewModel
+     */
     public function editAction()
     {
         $module_id = $this->getRouteMatch()->getParam('m');
@@ -91,16 +95,21 @@ class IndexController extends Action
 
         $module_model = ModuleModel::fromId($module_id);
 
+        /**
+         * Bootstrap event
+         */
         $class_name = sprintf('\\Modules\\%s\\%s', $module_model->getName(), $module_model->getName());
         $object = new $class_name();
         $object->onBootstrap($this->getEvent());
 
-        $controller_file = sprintf('\\Modules\\%s\\Controller\\%s', $module_model->getName(), ucfirst($controller_name).'Controller');
+        /**
+         * Load controller and execute action
+         */
+        $controller_class = sprintf('\\Modules\\%s\\Controller\\%s', $module_model->getName(), ucfirst($controller_name).'Controller');
         $action = $this->getMethodFromAction($action_name);
 
-        $controller_class = new $controller_file($this->getRequest(), $this->getResponse());
-
-        $result = $controller_class->$action();
+        $controller_object = new $controller_class($this->getRequest(), $this->getResponse());
+        $result = $controller_object->$action();
 
         if(!empty($result) and is_array($result))
         {
@@ -112,6 +121,7 @@ class IndexController extends Action
             $result = new ViewModel();
         }
 
+        //Change defaut template path
         $result->setTemplate(sprintf('%s/views/%s/%s', $module_model->getName(), $controller_name, $action_name));
 
         return $result;
