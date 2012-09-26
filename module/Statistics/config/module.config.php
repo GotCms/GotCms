@@ -26,7 +26,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'StatisticsController' => 'Admin\Controller\IndexController',
+            'StatisticsController' => 'Statistics\Controller\IndexController',
         ),
     ),
     'view_manager' => array(
