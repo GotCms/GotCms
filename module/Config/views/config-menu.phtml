@@ -25,25 +25,33 @@
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
+$permissions = $this->layout()->adminUser->getRole()->getUserPermissions();
+$config = empty($permissions['Config']) ? array() : $permissions['Config'];
 ?>
-<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing configuration')); ?> ::..</h2>
+<?php if(in_array('system', $config)): ?>
+    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing configuration')); ?> ::..</h2>
 
-<ul>
-    <li><a href="<?php echo $this->url('configGeneral'); ?>" title=""><?php echo $this->escapeHtml($this->translate('General')); ?></a></li>
-    <li><a href="<?php echo $this->url('configSystem'); ?>" title=""><?php echo $this->escapeHtml($this->translate('System')); ?></a></li>
-    <li><a href="<?php echo $this->url('configServer'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Server')); ?></a></li>
-</ul>
+    <ul>
+        <li><a href="<?php echo $this->url('configGeneral'); ?>" title=""><?php echo $this->escapeHtml($this->translate('General')); ?></a></li>
+        <li><a href="<?php echo $this->url('configSystem'); ?>" title=""><?php echo $this->escapeHtml($this->translate('System')); ?></a></li>
+        <li><a href="<?php echo $this->url('configServer'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Server')); ?></a></li>
+    </ul>
+<?php endif; ?>
 
-<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Users')); ?> ::..</h2>
+<?php if(in_array('user', $config)): ?>
+    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Users')); ?> ::..</h2>
 
-<ul>
-    <li><a href="<?php echo $this->url('userList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-    <li><a href="<?php echo $this->url('userCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
-</ul>
+    <ul>
+        <li><a href="<?php echo $this->url('userList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <li><a href="<?php echo $this->url('userCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
+    </ul>
+<?php endif; ?>
 
-<h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Roles')); ?> ::..</h2>
+<?php if(in_array('role', $config)): ?>
+    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Roles')); ?> ::..</h2>
 
-<ul>
-    <li><a href="<?php echo $this->url('userRole'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-    <li><a href="<?php echo $this->url('userRoleCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
-</ul>
+    <ul>
+        <li><a href="<?php echo $this->url('userRole'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <li><a href="<?php echo $this->url('userRoleCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
+    </ul>
+<?php endif; ?>
