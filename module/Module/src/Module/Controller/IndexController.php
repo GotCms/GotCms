@@ -62,25 +62,63 @@ class IndexController extends Action
         if($this->getRequest()->isPost())
         {
             $form->setData($this->getRequest()->getPost()->toArray());
-            if($form->isValid())
+            if(!$form->isValid())
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid module');
+                $this->useFlashMessenger();
+            }
+            else
             {
                 $module_name = $form->getInputFilter()->get('module')->getValue();
                 $class_name = sprintf('\\Modules\\%s\\%s', $module_name, $module_name);
                 $object = new $class_name();
 
-                if($object->install())
+                if(!$object->install())
+                {
+                    $this->flashMessenger()->setNameSpace('error')->addMessage('Can not install this module');
+                    return $this->redirect()->toRoute('module');
+                }
+                else
                 {
                     $module_model = new ModuleModel();
                     $module_model->setName($module_name);
                     $module_model->save();
 
-                    return $this->redirect()->toRoute('moduleEdit', array('m' => $module_name));
+                    $this->flashMessenger()->setNameSpace('success')->addMessage('Module installed');
+                    return $this->redirect()->toRoute('moduleEdit', array('m' => $module_model->getId()));
                 }
             }
 
         }
 
         return array('form' => $form);
+    }
+
+    /**
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function uninstallAction()
+    {
+        $module_id = $this->getRouteMatch()->getParam('id');
+        $module_model = ModuleModel::fromId($module_id);
+        if(!empty($module_model))
+        {
+            $module_name = $module_model->getName();
+            $class_name = sprintf('\\Modules\\%s\\%s', $module_name, $module_name);
+            $object = new $class_name();
+
+            if($object->uninstall())
+            {
+                $module_model->delete();
+                $this->flashMessenger()->setNameSpace('success')->addMessage('Module uninstalled');
+            }
+            else
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can\'t uninstall module');
+            }
+        }
+
+        return $this->redirect()->toRoute('module');
     }
 
     /**
