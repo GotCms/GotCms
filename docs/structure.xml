@@ -1198,6 +1198,102 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
+  <file path="Gc/View/Helper/ModuleUrl.php" hash="1f5406e72d53690c396d26441f9f163f" package="Library\View\Helper">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Library"/>
+      <tag line="2" name="subpackage" description="View\Helper"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+    <namespace-alias name="AbstractHelper">Zend\View\Helper\AbstractHelper</namespace-alias>
+    <class final="false" abstract="false" namespace="Gc\View\Helper" line="35" package="Default">
+      <name>ModuleUrl</name>
+      <full_name>\Gc\View\Helper\ModuleUrl</full_name>
+      <extends>\Zend\View\Helper\AbstractHelper</extends>
+      <docblock line="32">
+        <description><![CDATA[Helper for making easy links and getting urls that depend on the routes and router.]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="51" package="">
+        <name>__invoke</name>
+        <type>function</type>
+        <docblock line="37">
+          <description><![CDATA[Generates an url given the name of a route.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="37" name="see" description="\Zend\Mvc\Router\RouteInterface::assemble()" refers="\Zend\Mvc\Router\RouteInterface::assemble()"/>
+          <tag line="37" name="param" description="Action name" type="string" variable="$action_name">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="37" name="param" description="Controller name" type="array" variable="$controller_name">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="37" name="param" description="Parameters for the link" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="37" name="param" description="Options for the route" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="37" name="param" description="Whether to reuse matched parameters" type="boolean" variable="$reuse_matched_params">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag line="37" name="return" description="Url For the link href attribute" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="37" name="throws" description="If no RouteStackInterface was provided" type="\Exception\RuntimeException">
+            <type by_reference="false">\Exception\RuntimeException</type>
+          </tag>
+          <tag line="37" name="throws" description="If no RouteMatch was provided" type="\Exception\RuntimeException">
+            <type by_reference="false">\Exception\RuntimeException</type>
+          </tag>
+          <tag line="37" name="throws" description="If RouteMatch didn't contain a matched route name" type="\Exception\RuntimeException">
+            <type by_reference="false">\Exception\RuntimeException</type>
+          </tag>
+        </docblock>
+        <argument line="51">
+          <name>$action_name</name>
+          <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
+        <argument line="51">
+          <name>$controller_name</name>
+          <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
+        <argument line="51">
+          <name>$params</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+        <argument line="51">
+          <name>$options</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+        <argument line="51">
+          <name>$reuse_matched_params</name>
+          <default><![CDATA[TRUE]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
   <file path="Gc/View/Stream.php" hash="13d594b3ac89a9d0f206aeb80c4706f7" package="Library\View">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
@@ -1607,7 +1703,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/User/Role/Model.php" hash="811b1e557a5a94ac702d2b04fd1a305c" package="Library\User\Role">
+  <file path="Gc/User/Role/Model.php" hash="b9cd80f70f851a443ea597b88fd72d6d" package="Library\User\Role">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2003,7 +2099,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/User/Model.php" hash="f9560e525aebc3c57160cba55efb7e90" package="Library\User">
+  <file path="Gc/User/Model.php" hash="548a3c31657bdcdb227cd1a382ed36ff" package="Library\User">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2183,31 +2279,39 @@ PHP Version >=5.3]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="220" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="221" package="">
         <name>getRole</name>
         <type>function</type>
         <docblock line="216">
           <description><![CDATA[Get User Role]]></description>
           <long-description><![CDATA[]]></long-description>
+          <tag line="216" name="param" description="" type="boolean" variable="$force_reload">
+            <type by_reference="false">boolean</type>
+          </tag>
           <tag line="216" name="return" description="" type="\Gc\User\Role\Model">
             <type by_reference="false">\Gc\User\Role\Model</type>
           </tag>
         </docblock>
+        <argument line="221">
+          <name>$force_reload</name>
+          <default><![CDATA[FALSE]]></default>
+          <type/>
+        </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="237" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="238" package="">
         <name>sendForgotPasswordEmail</name>
         <type>function</type>
-        <docblock line="232">
+        <docblock line="233">
           <description><![CDATA[Send new password]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="232" name="param" description="" type="string" variable="$email">
+          <tag line="233" name="param" description="" type="string" variable="$email">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="232" name="return" description="" type="boolean">
+          <tag line="233" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="237">
+        <argument line="238">
           <name>$email</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -7454,7 +7558,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Mvc/Controller/Action.php" hash="28e5852b82a3acf12cc2c65381381603" package="Library\Mvc\Controller">
+  <file path="Gc/Mvc/Controller/Action.php" hash="7ae84540d12327b2b43a359ca2d0e5eb" package="Library\Mvc\Controller">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
