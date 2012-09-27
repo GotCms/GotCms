@@ -111,6 +111,7 @@ class TranslationController extends Action
 
                 $this->flashMessenger()->setNameSpace('success')->addMessage('Translation saved !');
                 Translator::setValue($source, $data);
+                return $this->redirect()->toRoute('translationCreate');
             }
         }
 
