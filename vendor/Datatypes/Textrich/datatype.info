@@ -1,5 +1,5 @@
 author = Pierre Rambaud
-year = 2012
+date = 2012
 version = 0.1
 description = "Edit rich text using ckeditor, more on http://ckeditor.com/"
 

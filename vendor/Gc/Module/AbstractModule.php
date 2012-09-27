@@ -54,8 +54,13 @@ abstract class AbstractModule
      * Return database adapter
      * @return Zend\Db\Adapter\Adapter
      */
-    protected function getDb()
+    protected function getAdapter()
     {
         return \Gc\Registry::get('Db');
+    }
+
+    protected function getDriverName()
+    {
+        return $this->getAdapter()->getDriver()->getConnection()->getDriverName();
     }
 }

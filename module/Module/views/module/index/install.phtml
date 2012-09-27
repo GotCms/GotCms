@@ -33,10 +33,26 @@
         <label class="required" for="module"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
         <?php echo $this->formElement($element); ?>
+        <?php $modules_info = $element->getAttribute('modules_info'); ?>
+        <?php if(!empty($modules_info)): ?>
+            <div id="modules">
+                <?php foreach($modules_info as $module_name => $module_info): ?>
+                    <div id="<?php echo $this->escapeHtml($this->translate($module_name)); ?>">
+                        <?php echo $module_info; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
 
     <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
 </form>
 <script type="text/javascript">
     jQuery('#tabs').tabs();
+    $('#modules').find('div').hide();
+    $('#module').on('change', function()
+    {
+        $('#modules').find('div').hide();
+        $('#' + $(this).val()).show();
+    })
 </script>

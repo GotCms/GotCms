@@ -32,16 +32,7 @@
         <div id="datatype-infos">
             <a href="#"><?php echo $this->escapeHtml($this->translate('Display/Hide informations')); ?></a>
 
-            <dl>
-                <?php foreach(array('author', 'description', 'year', 'version') as $info): ?>
-                    <?php if(empty($this->infos[$info])): ?>
-                        <?php continue; ?>
-                    <?php endif; ?>
-
-                    <dt><?php echo $this->escapeHtml($this->translate($info)); ?></dt>
-                    <dd><?php echo $this->infos[$info]; ?></dd>
-                <?php endforeach; ?>
-            </dl>
+            <?php echo $this->infos; ?>
         </div>
     <?php endif; ?>
 

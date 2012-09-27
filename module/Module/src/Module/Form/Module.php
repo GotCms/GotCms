@@ -28,7 +28,7 @@ namespace Module\Form;
 
 use Gc\Form\AbstractForm,
     Gc\Module\Collection as ModuleCollection,
-    Zend\Validator\Db,
+    Gc\Media\Info,
     Zend\Form\Element,
     Zend\InputFilter\Factory as InputFilterFactory;
 
@@ -40,13 +40,22 @@ class Module extends AbstractForm
      */
     public function init()
     {
+        $file_info = new Info();
         $path = GC_APPLICATION_PATH . '/vendor/Modules/';
-        $list_dir = glob($path.'*', GLOB_ONLYDIR);
+        $list_dir = glob($path . '*', GLOB_ONLYDIR);
+
+        $modules_infos = array();
         $options = array('' => 'Select an option');
         foreach($list_dir as $dir)
         {
             $dir = str_replace($path, '', $dir);
             $options[$dir] = $dir;
+
+            $config_file = $path . $dir . '/module.info';
+            if($file_info->fromFile($config_file) === TRUE)
+            {
+                $modules_infos[$dir] = $file_info->render();
+            }
         }
 
         $collection = new ModuleCollection();
@@ -56,12 +65,14 @@ class Module extends AbstractForm
             if(in_array($module->getName(), $options))
             {
                 unset($options[$module->getName()]);
+                unset($modules_infos[$module->getName()]);
             }
         }
 
         $module  = new Element\Select('module');
         $module->setAttribute('label', 'Module')
             ->setAttribute('id', 'module')
+            ->setAttribute('modules_info', $modules_infos)
             ->setValueOptions($options);
         $this->add($module);
 

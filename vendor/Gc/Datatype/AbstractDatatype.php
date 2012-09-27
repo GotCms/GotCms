@@ -28,8 +28,8 @@
 namespace Gc\Datatype;
 
 use Gc\Db\AbstractTable,
+    Gc\Media\Info,
     Gc\Property,
-    Zend\Config\Reader\Ini,
     Zend\View\Model\ViewModel;
 /**
  * Abstract Datatype is used to call
@@ -83,13 +83,14 @@ abstract class AbstractDatatype extends AbstractTable
         $object = new \ReflectionObject($this);
         $directory = dirname($object->getFileName());
         $filename = $directory . '/datatype.info';
-        if(!file_exists($filename))
+        $info = new Info();
+
+        if($info->fromFile($filename) !== TRUE)
         {
             return FALSE;
         }
 
-        $config = new Ini();
-        return $config->fromFile($filename);
+        return $info->render();
     }
 
     /**
