@@ -35,7 +35,7 @@ final class Version
     /**
      * GotCms version identification - see compareVersion()
      */
-    const VERSION = '0.1a';
+    const VERSION = '0.1b';
 
     /**
      * The latest stable version GotCms available
