@@ -97,6 +97,16 @@ class Script extends AbstractHelper
     }
 
     /**
+     * Get Http Response instance.
+     *
+     * @return \Zend\Http\PhpEnvironment\Response
+     */
+    public function getResponse()
+    {
+        return \Gc\Registry::get('Application')->getResponse();
+    }
+
+    /**
      * Get plugin instance
      *
      * @param  string $name Name of plugin to return
