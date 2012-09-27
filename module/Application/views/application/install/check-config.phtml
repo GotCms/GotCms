@@ -48,6 +48,19 @@
                             </td>
                         </tr>
                     <?php endforeach; ?>
+
+                    <?php foreach($this->serverData as $data): ?>
+                        <tr>
+                            <td class="item">
+                                <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
+                            </td>
+                            <td>
+                                <span>
+                                    <?php echo $this->escapeHtml($this->translate($data['value'] === TRUE ? 'Yes' : 'No')); ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </fieldset>

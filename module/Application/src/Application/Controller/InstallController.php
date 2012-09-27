@@ -120,6 +120,11 @@ class InstallController extends Action
            define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
         }
 
+        $server_data = array();
+        $server_data[] = array('label' => '/public/frontend is writable', 'value' => is_writable(GC_APPLICATION_PATH . '/public/frontend'));
+        $server_data[] = array('label' => '/config/autoload is writable', 'value' => is_writable(GC_APPLICATION_PATH . '/config/autoload'));
+        $server_data[] = array('label' => '/public/media is writable', 'value' => is_writable(GC_APPLICATION_PATH . '/public/media'));
+
         $php_data = array();
         $php_data[] = array('label' => 'Php version >= 5.3.3', 'value' => PHP_VERSION_ID > 50303);
         $php_data[] = array('label' => 'Pdo', 'value' => extension_loaded('pdo'));
@@ -143,7 +148,7 @@ class InstallController extends Action
         }
 
         $this->layout()->setVariables(array('currentRoute' => $this->getRouteMatch()->getMatchedRouteName()));
-        return array('phpData' => $php_data, 'phpDirective' => $php_directive, 'cmsVersion' => \Gc\Version::VERSION);
+        return array('phpData' => $php_data, 'phpDirective' => $php_directive, 'serverData' => $server_data, 'cmsVersion' => \Gc\Version::VERSION);
     }
 
     /**
