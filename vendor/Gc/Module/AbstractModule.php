@@ -29,7 +29,7 @@ namespace Gc\Module;
 
 use Zend\EventManager\Event;
 /**
- * Abstract module
+ * Abstract module bootstrap
  */
 abstract class AbstractModule
 {
@@ -59,6 +59,10 @@ abstract class AbstractModule
         return \Gc\Registry::get('Db');
     }
 
+    /**
+     * Return driver name
+     * @return string
+     */
     protected function getDriverName()
     {
         return $this->getAdapter()->getDriver()->getConnection()->getDriverName();

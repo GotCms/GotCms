@@ -36,17 +36,20 @@ use Gc\Core\Object,
 class Info extends Object
 {
     /**
-     * @var array available array options
+     * Available array options
+     * @var array
      */
     protected $_optionsArray = array('database_compatibility' => 'Database compatibility');
 
     /**
-     * @var array available string options
+     * Available string options
+     * @var array
      */
     protected $_optionsString = array('author' => 'Author', 'date' => 'Date', 'description' => 'Description', 'cms_version' => 'GotCms version', 'version' => 'Version');
 
     /**
-     * @var array available links options
+     * Available links options
+     * @var array
      */
     protected $_optionsLinks = array('website' => 'Website url');
 

@@ -30,9 +30,17 @@ namespace Gc\Module\Controller;
 use Gc\Mvc\Controller\Action,
     Zend\Stdlib\RequestInterface as Request,
     Zend\Stdlib\ResponseInterface as Response;
-
+/**
+ * Abstract module controller
+ */
 class AbstractController extends Action
 {
+    /**
+     * Construct controller with request and response
+     * @param Request $request
+     * @param Response $response
+     * @return void
+     */
     public function __construct(Request $request, Response $response)
     {
         $this->request = $request;

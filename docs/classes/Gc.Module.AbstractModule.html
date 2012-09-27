@@ -35,7 +35,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">2</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -63,7 +63,8 @@
 <li class="method public "><a href="#onBootstrap" title="onBootstrap :: Execute on bootstrap"><span class="description">Execute on bootstrap</span><pre>onBootstrap()</pre></a></li>
 <li class="method public "><a href="#uninstall" title="uninstall :: Uninstall module"><span class="description">Uninstall module</span><pre>uninstall()</pre></a></li>
 <li class="nav-header protected">» Protected</li>
-<li class="method protected "><a href="#getDb" title="getDb :: Return database adapter"><span class="description">Return database adapter</span><pre>getDb()</pre></a></li>
+<li class="method protected "><a href="#getAdapter" title="getAdapter :: Return database adapter"><span class="description">Return database adapter</span><pre>getAdapter()</pre></a></li>
+<li class="method protected "><a href="#getDriverName" title="getDriverName :: Return driver name"><span class="description">Return driver name</span><pre>getDriverName()</pre></a></li>
 </ul>
 </div>
 <div class="span8">
@@ -78,7 +79,7 @@
 </li>
 </ul>
 <div href="../classes/Gc.Module.AbstractModule.html" class="element class">
-<p class="short_description">Abstract module</p>
+<p class="short_description">Abstract module bootstrap</p>
 <div class="details">
 <p class="long_description"></p>
 <h3>
@@ -116,14 +117,24 @@
 <div class="subelement response"><code>boolean</code></div>
 </div></div>
 </div>
-<a name="getDb" id="getDb"></a><div class="element clickable method protected getDb" data-toggle="collapse" data-target=".getDb .collapse">
+<a name="getAdapter" id="getAdapter"></a><div class="element clickable method protected getAdapter" data-toggle="collapse" data-target=".getAdapter .collapse">
 <h2>Return database adapter</h2>
-<pre>getDb() : \Zend\Db\Adapter\Adapter</pre>
+<pre>getAdapter() : \Zend\Db\Adapter\Adapter</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response"><code>\Zend\Db\Adapter\Adapter</code></div>
+</div></div>
+</div>
+<a name="getDriverName" id="getDriverName"></a><div class="element clickable method protected getDriverName" data-toggle="collapse" data-target=".getDriverName .collapse">
+<h2>Return driver name</h2>
+<pre>getDriverName() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 </div>
@@ -133,7 +144,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-09-26T08:19:06+02:00.<br></footer></div>
+            generated on 2012-09-27T22:39:31+02:00.<br></footer></div>
 </div>
 </body>
 </html>
