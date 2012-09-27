@@ -26,3 +26,42 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+<h1><?php echo $this->escapeHtml($this->translate('Make the M.V.C be with you')); ?></h1>
+<section>
+    <article>
+        <h2><?php echo $this->escapeHtml($this->translate('Views')); ?></h2>
+        <p>
+            <?php echo $this->escapeHtml($this->translate('Create, edit, and delete views.')); ?><br />
+            <?php echo $this->escapeHtml($this->translate('Insert in document type, if you want to get and use property write: $this->propertyIdentifier')); ?>
+        </p>
+        <p><?php echo $this->escapeHtml($this->translate("There's lot of Helper you can use. Those Zend Framework and GotCms, refer to documentation if you want more information."));?></p>
+    </article>
+
+    <article>
+        <h2><?php echo $this->escapeHtml($this->translate('Layouts')); ?></h2>
+        <p>
+            <?php echo $this->escapeHtml($this->translate('Works like views, you can get properties, use helper, and if you want to integrate children (view) write: $this->content.')); ?><br />
+        </p>
+    </article>
+
+    <article>
+        <h2><?php echo $this->escapeHtml($this->translate('Datatypes')); ?></h2>
+        <p>
+            <?php echo $this->escapeHtml($this->translate('Data can be store in that. Create your own datatype, edit configuration and insert it in document type.')); ?><br />
+        </p>
+    </article>
+
+    <article>
+        <h2><?php echo $this->escapeHtml($this->translate('Document types')); ?></h2>
+        <p>
+            <?php echo $this->escapeHtml($this->translate('This is a document pattern. Sort by tabs, insert datatypes and specify availables views.')); ?><br />
+        </p>
+    </article>
+
+    <article>
+        <h2><?php echo $this->escapeHtml($this->translate('Scripts')); ?></h2>
+        <p>
+            <?php echo $this->escapeHtml($this->translate('Work like Zend Framework controllers, you can get the request, response and controller plugins.')); ?><br />
+        </p>
+    </article>
+</section>

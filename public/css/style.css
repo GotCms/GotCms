@@ -128,7 +128,8 @@ footer a:hover {text-decoration:underline;}
 #main {background-image:url(../images/corpshaut.png);background-repeat:repeat-x;background-color:#FFFFFF;padding: 5px 10px;}
 
 #content {float:left;width: 83%;}
-#content h2 {background-image:url(../images/h2txt.png);background-repeat:no-repeat;width:652px;height:25px;color:#FFFFFF;font-size:11px;padding-top:5px;padding-left:10px;margin-left:45px;}
+#content h2 {background-image:url(../images/h2txt.png);background-repeat:no-repeat;width:auto;height:20px;color:#FFFFFF;font-size:11px;padding-top:5px;padding-left:10px;margin:10px 0 0}
+#content article p {margin:5px 0;}
 
 #menu {width:300px;float:left;margin: 0 10px 0 5px;}
 #menu a {color:#000000; text-decoration:none;}

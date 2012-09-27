@@ -27,3 +27,27 @@
 
 ?>
 
+<h1><?php echo $this->escapeHtml($this->translate('Configure your website')); ?></h1>
+<section>
+    <article>
+        <h2><?php echo $this->escapeHtml($this->translate('Users')); ?></h2>
+        <p>
+            <?php echo $this->escapeHtml($this->translate('Create, edit, and delete users.')); ?><br />
+        </p>
+    </article>
+
+    <article>
+        <h2><?php echo $this->escapeHtml($this->translate('Roles')); ?></h2>
+        <p>
+            <?php echo $this->escapeHtml($this->translate('Limit users access with roles and permissions')); ?><br />
+        </p>
+    </article>
+
+    <article>
+        <h2><?php echo $this->escapeHtml($this->translate('Configuration')); ?></h2>
+        <p>
+            <?php echo $this->escapeHtml($this->translate('Define the data to be used for the website such as the locale, sessions, name...')); ?><br />
+        </p>
+    </article>
+</section>
+
