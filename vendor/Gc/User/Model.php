@@ -56,7 +56,7 @@ class Model extends AbstractTable
         $authAdapter->setCredentialColumn('password');
 
         $authAdapter->setIdentity($login);
-        $authAdapter->setCredential($password);
+        $authAdapter->setCredential(sha1($password));
 
         $auth = new AuthenticationService();
         $result = $auth->authenticate($authAdapter);
@@ -133,7 +133,7 @@ class Model extends AbstractTable
         $password = $this->getPassword();
         if(!empty($password))
         {
-            $array_save['password'] = $password;
+            $array_save['password'] = sha1($password);
         }
 
         try

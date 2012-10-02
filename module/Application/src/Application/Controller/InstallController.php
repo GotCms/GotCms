@@ -369,7 +369,7 @@ class InstallController extends Action
                         }
 
                         $db_adapter->query($sql_string,
-                            array($configuration['admin_email'], $configuration['admin_login'], $configuration['admin_password']));
+                            array($configuration['admin_email'], $configuration['admin_login'], sha1($configuration['admin_password'])));
                     break;
 
                     //Create configuration file
