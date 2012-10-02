@@ -49,8 +49,11 @@
                                 <?php echo $content; ?>
                             <?php else: ?>
                                 <?php if($element->getAttribute('type') != 'hidden'): ?>
-                                    <?php $id = $element->getAttribute('id'); ?>
-                                    <label class="required"<?php if(!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+                                    <?php $label = $element->getAttribute('label'); ?>
+                                    <?php if(!empty($label)): ?>
+                                        <?php $id = $element->getAttribute('id'); ?>
+                                        <label class="required"<?php if(!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+                                    <?php endif; ?>
                                 <?php endif; ?>
 
                                 <?php echo $this->formElement($element); ?>

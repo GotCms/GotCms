@@ -26,7 +26,8 @@
 
 namespace Datatypes\CheckboxList;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Gc\Datatype\AbstractDatatype\AbstractEditor,
+    Zend\Form\Element;
 
 /**
  * Editor for Checkbox List datatype
@@ -39,7 +40,13 @@ class Editor extends AbstractEditor
      */
     public function save()
     {
-        //sauvegarde des informations
+        $data = $this->getRequest()->getPost()->get($this->getName());
+        if(!empty($data))
+        {
+            $data = serialize($data);
+        }
+
+        $this->setValue($data);
     }
 
     /**
@@ -48,7 +55,16 @@ class Editor extends AbstractEditor
      */
     public function load()
     {
-        //Chargement graphique
+        $parameters = $this->getConfig();
+
+        $element = new Element\MultiCheckbox($this->getName());
+        $element->setValueOptions($parameters);
+        $element->setLabel($this->getName());
+        $element->setAttribute('label', $this->getProperty()->getName());
+
+        $element->setValue($this->getValue());
+
+        return $element;
     }
 }
 

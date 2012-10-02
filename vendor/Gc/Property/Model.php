@@ -129,7 +129,7 @@ class Model extends AbstractTable
     {
         $value = $this->getValue();
         $this->_value->save();
-        if(empty($value) and $this->isRequired())
+        if($value === '' and $this->isRequired())
         {
             return FALSE;
         }

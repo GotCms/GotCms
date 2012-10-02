@@ -31,28 +31,83 @@ use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
 /**
  * Prevalue Editor for Radio Button List datatype
  */
+/**
+ * Prevalue Editor for Checkbox List datatype
+ */
 class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
-     * Save Radio Button List prevalue editor
+     * Save Radiobutton List prevalue editor
      * @return void
      */
     public function save()
     {
         //Save prevalue in column Datatypes\prevalue_value
-        $this->setConfiguration(array());
+        $array_result = array();
+        $request = $this->getRequest()->getPost();
+        foreach($request->get('values', array()) as $value)
+        {
+            if(!empty($value))
+            {
+                $array_result[] = $value;
+            }
+        }
 
-        return $this->getConfiguration();
+        $this->setConfig($array_result);
     }
 
     /**
-     * Load Radio Button List prevalue editor
+     * Load Radiobutton List prevalue editor
      * @return void
      */
     public function load()
     {
-        $configuration = $this->getConfiguration();
+        $parameters = $this->getConfig();
 
-        return array();
+        $content = '<input type="text" name="addValue" id="addValue" value=""> <button class="button-add">Add Element</button>'.PHP_EOL;
+
+        $content .= '<ul id="checkboxlist-values">';
+        $content .= '<li>List of values</li>';
+        if(is_array($parameters) AND count($parameters)>0)
+        {
+            foreach($parameters as $param => $value)
+            {
+                $content .= '<li><input type="text" name="values[]" value="'.$value.'"> <a class="button-delete">Delete Element</a></li>'.PHP_EOL;
+            }
+        }
+
+        $content .= '</ul>';
+        $content .= '<script type="text/javascript">
+                        buttonDelete();
+                        $(\'.button-add\').button({
+                            icons: {
+                                primary: \'ui-icon-circle-plus\'
+                            },
+                            text: false
+                        }).click(function() {
+                            if($(\'#addValue\').val() != "") {
+                                $(\'#checkboxlist-values\').children(\'li:last\').after(
+                                    \'<li><input type="text" name="values[]" value="\'+$("#addValue").val()+\'"> <a class="button-delete">Delete Element</a></li>\'
+                                );
+                                buttonDelete();
+                                $(this).removeClass(\'ui-state-focus\');
+                                $(\'#addValue\').val(\'\');
+                            }
+                            return false;
+                        });
+                        function buttonDelete() {
+                            $(\'.button-delete\').button({
+                                icons: {
+                                    primary: \'ui-icon-circle-minus\'
+                                },
+                                text: false
+                            }).click(function() {
+                                $(this).parent().remove();
+                                return false;
+                            });
+                        }
+                    </script>';
+
+        return $content;
     }
 }

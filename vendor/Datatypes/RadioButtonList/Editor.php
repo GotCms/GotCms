@@ -26,7 +26,8 @@
 
 namespace Datatypes\RadioButtonList;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Gc\Datatype\AbstractDatatype\AbstractEditor,
+    Zend\Form\Element;
 
 /**
  * Editor for Radio Button List datatype
@@ -37,16 +38,25 @@ class Editor extends AbstractEditor
      * Save radiobuttonlist editor
      * @return void
      */
-    public function save() {
-        //sauvegarde des informations
+    public function save()
+    {
+        $this->setValue($this->getRequest()->getPost()->get($this->getName()));
     }
 
     /**
      * Load radiobuttonlist editor
      * @return mixte
      */
-    public function load() {
-        //Chargement graphique
+    public function load()
+    {
+        $element = new Element\Radio($this->getName());
+        $element->setValueOptions($this->getConfig());
+
+        $element->setLabel($this->getName());
+        $element->setAttribute('label', $this->getProperty()->getName());
+        $element->setValue($this->getValue());
+
+        return $element;
     }
 }
 
