@@ -40,7 +40,7 @@ class ModuleUrl extends AbstractHelper
      * @see    Zend\Mvc\Router\RouteInterface::assemble()
      * @param  string  $action_name             Action name
      * @param  array   $controller_name         Controller name
-     * @param  array   $params                  Parameters for the link
+     * @param  array   $query_params                  Parameters for the link
      * @param  array   $options                 Options for the route
      * @param  boolean $reuse_matched_params    Whether to reuse matched parameters
      * @return string  Url                      For the link href attribute
@@ -48,8 +48,9 @@ class ModuleUrl extends AbstractHelper
      * @throws Exception\RuntimeException       If no RouteMatch was provided
      * @throws Exception\RuntimeException       If RouteMatch didn't contain a matched route name
      */
-    public function __invoke($action_name = NULL, $controller_name = NULL, $params = array(), $options = array(), $reuse_matched_params = TRUE)
+    public function __invoke($action_name = NULL, $controller_name = NULL, $query_params = array(), $options = array(), $reuse_matched_params = TRUE)
     {
+        $params = array();
         if(!empty($action_name))
         {
             $params['ma'] = $action_name;
@@ -60,6 +61,19 @@ class ModuleUrl extends AbstractHelper
             $params['mc'] = $controller_name;
         }
 
-        return $this->getView()->url('moduleEdit', $params, $options, $reuse_matched_params);
+        $url = $this->getView()->url('moduleEdit', $params, $options, $reuse_matched_params);
+
+        if(!empty($query_params))
+        {
+            $url_params = array();
+            foreach($query_params as $key => $value)
+            {
+                $url_params[] = $key . '=' . rawurlencode($value);
+            }
+
+            $url .= '?' . implode('&', $url_params);
+        }
+
+        return $url;
     }
 }
