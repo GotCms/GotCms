@@ -95,12 +95,13 @@ class Visitor extends AbstractTable
         $url_id = $this->getUrlId($request_uri, $referer);
 
         $select = new Select();
-        $select->from(array('lv' => $this->_name), array('visitor_id'))
+        $select->from(array('lv' => $this->_name))
+            ->columns(array('id'))
             ->where->equalTo('session_id', empty($session_id) ? NULL : $session_id)
             ->equalTo('http_user_agent', empty($user_agent) ? NULL : $user_agent)
             ->equalTo('remote_addr', $remote_addr);
 
-        $visitor = $this->fetchRow($select);
+        $visitor_id = $this->fetchOne($select);
         if(!empty($visitor->id))
         {
             $visitor_id = $visitor->id;

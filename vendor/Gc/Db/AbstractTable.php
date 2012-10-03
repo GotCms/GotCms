@@ -119,6 +119,31 @@ abstract class AbstractTable extends Object
     }
 
     /**
+     * Fetch One
+     * @param mixed $query (\Zend\Db\Sql\Select|string)
+     * @return mixte
+     */
+    public function fetchOne($query)
+    {
+        if($query instanceof ResultSet)
+        {
+            $row = $query->current();
+        }
+        else
+        {
+            $row = $this->fetchRow($query);
+        }
+
+        if(!empty($row))
+        {
+            $array = $row->getArrayCopy();
+            return array_shift($array);
+        }
+
+        return FALSE;
+    }
+
+    /**
      * Execute query
      * @param mixed $query (\Zend\Db\Sql\*|string)
      * @return array|Zend\Db\ResultSet\ResultSet

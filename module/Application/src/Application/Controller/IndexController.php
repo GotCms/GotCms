@@ -59,9 +59,7 @@ class IndexController extends Action
 
         try
         {
-            $session->visitor_id = $visitor->getVisitorId(
-                $session_id
-            );
+            $session->visitor_id = $visitor->getVisitorId($session_id);
         }
         catch(Exception $e)
         {
