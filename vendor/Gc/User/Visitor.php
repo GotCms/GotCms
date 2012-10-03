@@ -102,11 +102,7 @@ class Visitor extends AbstractTable
             ->equalTo('remote_addr', $remote_addr);
 
         $visitor_id = $this->fetchOne($select);
-        if(!empty($visitor->id))
-        {
-            $visitor_id = $visitor->id;
-        }
-        else
+        if(empty($visitor_id))
         {
             $insert = new Insert();
             $insert->into('log_visitor')
