@@ -778,6 +778,16 @@ var Gc = (function($)
                 event.preventDefault();
                 $('#input-save').click();
             });
+        },
+
+        installModule: function()
+        {
+            $('#modules').find('div').hide();
+            $('#module').on('change', function()
+            {
+                $('#modules').find('div').hide();
+                $('#' + $(this).val()).show();
+            });
         }
     };
 })(jQuery);

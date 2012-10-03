@@ -32,8 +32,9 @@ use Gc\Component,
     Gc\Module\Model as ModuleModel,
     Module\Form\Module as ModuleForm,
     Modules,
-    Zend\Json\Json;
-use Zend\View\Model\ViewModel;
+    Zend\Stdlib\ResponseInterface as Response,
+    Zend\Json\Json,
+    Zend\View\Model\ViewModel;
 
 class IndexController extends Action
 {
@@ -147,7 +148,13 @@ class IndexController extends Action
         $action = $this->getMethodFromAction($action_name);
 
         $controller_object = new $controller_class($this->getRequest(), $this->getResponse());
+        $controller_object->setEvent($this->getEvent());
         $result = $controller_object->$action();
+
+        if($result instanceof Response)
+        {
+            return $result;
+        }
 
         if(!empty($result) and is_array($result))
         {

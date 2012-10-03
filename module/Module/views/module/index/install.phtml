@@ -48,11 +48,5 @@
     <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
 </form>
 <script type="text/javascript">
-    jQuery('#tabs').tabs();
-    $('#modules').find('div').hide();
-    $('#module').on('change', function()
-    {
-        $('#modules').find('div').hide();
-        $('#' + $(this).val()).show();
-    })
+    Gc.installModule();
 </script>
