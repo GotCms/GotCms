@@ -140,6 +140,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Get last insert id
+     * @param string optional table name
      * @return integer
      */
     public function getLastInsertId($table_name = NULL)

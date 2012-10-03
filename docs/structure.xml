@@ -1209,7 +1209,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/View/Helper/ModuleUrl.php" hash="1f5406e72d53690c396d26441f9f163f" package="Library\View\Helper">
+  <file path="Gc/View/Helper/ModuleUrl.php" hash="10786cb3637d920763b904b47d98e50c" package="Library\View\Helper">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -1255,7 +1255,7 @@ PHP Version >=5.3]]></long-description>
           <tag line="37" name="param" description="Controller name" type="array" variable="$controller_name">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="37" name="param" description="Parameters for the link" type="array" variable="$params">
+          <tag line="37" name="param" description="Parameters for the link" type="array" variable="$query_params">
             <type by_reference="false">array</type>
           </tag>
           <tag line="37" name="param" description="Options for the route" type="array" variable="$options">
@@ -1288,7 +1288,7 @@ PHP Version >=5.3]]></long-description>
           <type/>
         </argument>
         <argument line="51">
-          <name>$params</name>
+          <name>$query_params</name>
           <default><![CDATA[array()]]></default>
           <type/>
         </argument>
@@ -1833,6 +1833,102 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
+  <file path="Gc/User/Visitor.php" hash="ae93b9abae0a45346885344d824e6d23" package="Library\User">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Library"/>
+      <tag line="2" name="subpackage" description="User"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+    <namespace-alias name="AbstractTable">Gc\Db\AbstractTable</namespace-alias>
+    <namespace-alias name="Select">Zend\Db\Sql\Select</namespace-alias>
+    <namespace-alias name="Insert">Zend\Db\Sql\Insert</namespace-alias>
+    <namespace-alias name="Uri">Zend\Uri\Uri</namespace-alias>
+    <namespace-alias name="ValidateIp">Zend\Validator\Ip</namespace-alias>
+    <class final="false" abstract="false" namespace="Gc\User" line="38" package="Default">
+      <name>Visitor</name>
+      <full_name>\Gc\User\Visitor</full_name>
+      <extends>\Gc\Db\AbstractTable</extends>
+      <docblock line="35">
+        <description><![CDATA[Model of visitor]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="44" package="Default">
+        <name>$_name</name>
+        <default><![CDATA['log_visitor']]></default>
+        <docblock line="40">
+          <description><![CDATA[Table name]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="40" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="51" package="">
+        <name>getVisitorId</name>
+        <type>function</type>
+        <docblock line="46">
+          <description><![CDATA[Get visitor id]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="46" name="param" description="" type="string" variable="$session_id">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="46" name="return" description="" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="51">
+          <name>$session_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="155" package="">
+        <name>getUrlId</name>
+        <type>function</type>
+        <docblock line="149">
+          <description><![CDATA[Get url id]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="149" name="param" description="" type="string" variable="$request_uri">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="149" name="param" description="" type="string" variable="$referer">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="149" name="return" description="" type="integer">
+            <type by_reference="false">integer</type>
+          </tag>
+        </docblock>
+        <argument line="155">
+          <name>$request_uri</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="155">
+          <name>$referer</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
   <file path="Gc/User/Collection.php" hash="3b635c75ab38497ea2bfd2fad144d5cb" package="Library\User">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
@@ -2110,7 +2206,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/User/Model.php" hash="548a3c31657bdcdb227cd1a382ed36ff" package="Library\User">
+  <file path="Gc/User/Model.php" hash="fb2f01553b4cd3b01df1e3d45c4b4217" package="Library\User">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -6500,7 +6596,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Version.php" hash="aba26fbf78af9f0bf2f70f7cc49c0c6b" package="Library">
+  <file path="Gc/Version.php" hash="ae3ff222d484f3ddbdfdd0600ca65053" package="Library">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -6534,7 +6630,7 @@ PHP Version >=5.3]]></long-description>
       </docblock>
       <constant namespace="Gc" line="38" package="Default">
         <name>VERSION</name>
-        <value><![CDATA['0.1a']]></value>
+        <value><![CDATA['0.1b']]></value>
         <docblock line="35">
           <description><![CDATA[GotCms version identification - see compareVersion()]]></description>
           <long-description><![CDATA[]]></long-description>
@@ -8216,7 +8312,7 @@ add dynamic content, etc...]]></description>
       </method>
     </class>
   </file>
-  <file path="Gc/Db/AbstractTable.php" hash="33df89064b5e3fcdc34810b8a6315cb4" package="Library\Db">
+  <file path="Gc/Db/AbstractTable.php" hash="06a2ae6a45079c007a8b3fde41582927" package="Library\Db">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8363,16 +8459,24 @@ self::$_tables]]></description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="145" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="146" package="">
         <name>getLastInsertId</name>
         <type>function</type>
         <docblock line="141">
           <description><![CDATA[Get last insert id]]></description>
           <long-description><![CDATA[]]></long-description>
+          <tag line="141" name="param" description="optional table name" type="string" variable="$table_name">
+            <type by_reference="false">string</type>
+          </tag>
           <tag line="141" name="return" description="" type="integer">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
+        <argument line="146">
+          <name>$table_name</name>
+          <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
       </method>
     </class>
   </file>
@@ -8537,7 +8641,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Property/Model.php" hash="259fd829fca2d1af716a90b1370d5858" package="Library\Property">
+  <file path="Gc/Property/Model.php" hash="7cf45fd5e73dbb812f0b3fe032b0cf6e" package="Library\Property">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8947,7 +9051,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/CheckboxList/Editor.php" hash="faf9c22a305b70e38bb33328a848e85e" package="Datatype">
+  <file path="Datatypes/CheckboxList/Editor.php" hash="4bdc6110386c2f0a6f6125d97dbf998c" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8971,39 +9075,40 @@ PHP Version >=5.3]]></long-description>
       <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
     </docblock>
     <namespace-alias name="AbstractEditor">Gc\Datatype\AbstractDatatype\AbstractEditor</namespace-alias>
-    <class final="false" abstract="false" namespace="Datatypes\CheckboxList" line="34" package="Default">
+    <namespace-alias name="Element">Zend\Form\Element</namespace-alias>
+    <class final="false" abstract="false" namespace="Datatypes\CheckboxList" line="35" package="Default">
       <name>Editor</name>
       <full_name>\Datatypes\CheckboxList\Editor</full_name>
       <extends>\Gc\Datatype\AbstractDatatype\AbstractEditor</extends>
-      <docblock line="31">
+      <docblock line="32">
         <description><![CDATA[Editor for Checkbox List datatype]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\CheckboxList" line="40" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\CheckboxList" line="41" package="">
         <name>save</name>
         <type>function</type>
-        <docblock line="36">
+        <docblock line="37">
           <description><![CDATA[Save checkbox list editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="36" name="return" description="" type="void">
+          <tag line="37" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\CheckboxList" line="49" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\CheckboxList" line="56" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="45">
+        <docblock line="52">
           <description><![CDATA[Load checkbox list editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="45" name="return" description="" type="\Datatypes\CheckboxList\mixte">
+          <tag line="52" name="return" description="" type="\Datatypes\CheckboxList\mixte">
             <type by_reference="false">\Datatypes\CheckboxList\mixte</type>
           </tag>
         </docblock>
       </method>
     </class>
   </file>
-  <file path="Datatypes/CheckboxList/PrevalueEditor.php" hash="ba214d730456598802a7f0464dcc8845" package="Datatype">
+  <file path="Datatypes/CheckboxList/PrevalueEditor.php" hash="d594da34c337160320247b69ece29668" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -9046,13 +9151,13 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\CheckboxList" line="61" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\CheckboxList" line="60" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="57">
+        <docblock line="56">
           <description><![CDATA[Load Checkbox List prevalue editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="57" name="return" description="" type="void">
+          <tag line="56" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
@@ -10947,7 +11052,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Datatypes/RadioButtonList/Editor.php" hash="356ec1b2dcb70913d4338933086e89cd" package="Datatype">
+  <file path="Datatypes/RadioButtonList/Editor.php" hash="342e130c817411466bf919c7ca8d5aeb" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -10971,39 +11076,40 @@ PHP Version >=5.3]]></long-description>
       <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
     </docblock>
     <namespace-alias name="AbstractEditor">Gc\Datatype\AbstractDatatype\AbstractEditor</namespace-alias>
-    <class final="false" abstract="false" namespace="Datatypes\RadioButtonList" line="34" package="Default">
+    <namespace-alias name="Element">Zend\Form\Element</namespace-alias>
+    <class final="false" abstract="false" namespace="Datatypes\RadioButtonList" line="35" package="Default">
       <name>Editor</name>
       <full_name>\Datatypes\RadioButtonList\Editor</full_name>
       <extends>\Gc\Datatype\AbstractDatatype\AbstractEditor</extends>
-      <docblock line="31">
+      <docblock line="32">
         <description><![CDATA[Editor for Radio Button List datatype]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="40" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="41" package="">
         <name>save</name>
         <type>function</type>
-        <docblock line="36">
+        <docblock line="37">
           <description><![CDATA[Save radiobuttonlist editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="36" name="return" description="" type="void">
+          <tag line="37" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="48" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="50" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="44">
+        <docblock line="46">
           <description><![CDATA[Load radiobuttonlist editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="44" name="return" description="" type="\Datatypes\RadioButtonList\mixte">
+          <tag line="46" name="return" description="" type="\Datatypes\RadioButtonList\mixte">
             <type by_reference="false">\Datatypes\RadioButtonList\mixte</type>
           </tag>
         </docblock>
       </method>
     </class>
   </file>
-  <file path="Datatypes/RadioButtonList/PrevalueEditor.php" hash="2e47a70b6bbc3e5c1489d16c5c5dd744" package="Datatype">
+  <file path="Datatypes/RadioButtonList/PrevalueEditor.php" hash="be8c838a6ef7fccc143c1f23567df45a" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -11027,39 +11133,39 @@ PHP Version >=5.3]]></long-description>
       <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
     </docblock>
     <namespace-alias name="AbstractPrevalueEditor">Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</namespace-alias>
-    <class final="false" abstract="false" namespace="Datatypes\RadioButtonList" line="34" package="Default">
+    <class final="false" abstract="false" namespace="Datatypes\RadioButtonList" line="37" package="Default">
       <name>PrevalueEditor</name>
       <full_name>\Datatypes\RadioButtonList\PrevalueEditor</full_name>
       <extends>\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</extends>
-      <docblock line="31">
-        <description><![CDATA[Prevalue Editor for Radio Button List datatype]]></description>
+      <docblock line="34">
+        <description><![CDATA[Prevalue Editor for Checkbox List datatype]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="40" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="43" package="">
         <name>save</name>
         <type>function</type>
-        <docblock line="36">
-          <description><![CDATA[Save Radio Button List prevalue editor]]></description>
+        <docblock line="39">
+          <description><![CDATA[Save Radiobutton List prevalue editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="36" name="return" description="" type="void">
+          <tag line="39" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="52" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="63" package="">
         <name>load</name>
         <type>function</type>
-        <docblock line="48">
-          <description><![CDATA[Load Radio Button List prevalue editor]]></description>
+        <docblock line="59">
+          <description><![CDATA[Load Radiobutton List prevalue editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="48" name="return" description="" type="void">
+          <tag line="59" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
     </class>
   </file>
-  <file path="Datatypes/RadioButtonList/Datatype.php" hash="c2fdc66659c2579ff1e361ead64e4543" package="Datatype">
+  <file path="Datatypes/RadioButtonList/Datatype.php" hash="cd0038023433fbdc72c6fcd12cb99315" package="Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -11122,13 +11228,13 @@ PHP Version >=5.3]]></long-description>
           <type>PropertyModel</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="62" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Datatypes\RadioButtonList" line="63" package="">
         <name>getPrevalueEditor</name>
         <type>function</type>
-        <docblock line="58">
+        <docblock line="59">
           <description><![CDATA[Retrieve prevalue editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="58" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor">
+          <tag line="59" name="return" description="" type="\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor</type>
           </tag>
         </docblock>

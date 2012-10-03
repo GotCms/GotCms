@@ -37,11 +37,16 @@ use Gc\Db\AbstractTable,
  */
 class Visitor extends AbstractTable
 {
+    /**
+     * Table name
+     * @var string
+     */
     protected $_name = 'log_visitor';
 
     /**
      * Get visitor id
-     *
+     * @param string $session_id
+     * @return integer
      */
     public function getVisitorId($session_id)
     {
@@ -141,6 +146,12 @@ class Visitor extends AbstractTable
         return $visitor_id;
     }
 
+    /**
+     * Get url id
+     * @param string $request_uri
+     * @param string $referer
+     * @return integer
+     */
     public function getUrlId($request_uri, $referer)
     {
         $select = new Select();
