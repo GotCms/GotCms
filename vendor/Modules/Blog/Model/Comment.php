@@ -34,6 +34,10 @@ class Comment extends AbstractTable
 {
     protected $_name ='blog_comment';
 
+    /**
+     * Return all documents with comment(s)
+     * @return array
+     */
     public function getDocumentList()
     {
         $all_comments = $this->getList();
@@ -50,6 +54,11 @@ class Comment extends AbstractTable
         return $documents;
     }
 
+    /**
+     * Return all comments in document
+     * @param integer $document_id
+     * @return mixte
+     */
     public function getList($document_id = NULL)
     {
         return $this->select(function(Select $select) use ($document_id)
@@ -61,12 +70,32 @@ class Comment extends AbstractTable
         });
     }
 
-    public function get($id)
+    /**
+     * Add command
+     * @param array $data
+     * @param integer $document_id
+     * @return boolean
+     */
+    public function add(array $data, $document_id)
     {
-        return $this->select(function(Select $select) use ($id)
+        $available_key = array('message', 'username', 'email');
+        $insert_data = array();
+        foreach($available_key as $key)
         {
-            $select->where->equalTo('id', $id);
-            $select->join(array('document'), $on);
-        });
+            if(empty($data[$key]))
+            {
+                return FALSE;
+            }
+            else
+            {
+                $insert_data[$key] = $value;
+            }
+        }
+
+        $insert_data['show_email'] = empty($data['show_email']) ? 0 : 1;
+        $insert_data['document_id'] = $document_id;
+        $this->insert($insert_data);
+
+        return TRUE;
     }
 }
