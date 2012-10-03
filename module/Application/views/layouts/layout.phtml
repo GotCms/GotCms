@@ -54,7 +54,7 @@
 
         <?php if($this->module !== NULL): ?>
             <div id="menu">
-                <?php echo $this->partial($this->module . '-menu.phtml', array('treeview' => $this->treeview)); ?>
+                <?php echo $this->partial($this->module . '-menu.phtml', array('treeview' => $this->treeview, 'moduleMenu' => $this->moduleMenu)); ?>
             </div>
         <?php endif; ?>
 
