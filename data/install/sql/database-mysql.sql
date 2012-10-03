@@ -16,6 +16,9 @@ DROP TABLE IF EXISTS `document_type`;
 DROP TABLE IF EXISTS `document_type_view`;
 DROP TABLE IF EXISTS `document_type_dependency`;
 DROP TABLE IF EXISTS `icon`;
+DROP TABLE IF EXISTS `log_url_info`;
+DROP TABLE IF EXISTS `log_url`;
+DROP TABLE IF EXISTS `log_visitor`;
 DROP TABLE IF EXISTS `layout`;
 DROP TABLE IF EXISTS `property`;
 DROP TABLE IF EXISTS `property_value`;
@@ -227,6 +230,31 @@ CREATE TABLE `core_session` (
     `lifetime` INT NOT NULL,
     `data` TEXT,
     PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE `log_visitor` (
+    `id` bigint(20) unsigned NOT NULL auto_increment,
+    `session_id` char(64) NOT NULL default '',
+    `http_user_agent` varchar(255) default NULL,
+    `http_accept_charset` varchar(255) default NULL,
+    `http_accept_language` varchar(255) default NULL,
+    `server_addr` bigint(20) default NULL,
+    `remote_addr` bigint(20) default NULL
+    PRIMARY KEY  (`visitor_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE `log_url_info` (
+    `id` bigint(20) unsigned NOT NULL auto_increment,
+    `url` varchar(255) NOT NULL default '',
+    `referer` varchar(255) default NULL,
+    PRIMARY KEY  (`url_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE `log_url` (
+    `id` bigint(20) unsigned NOT NULL default '0',
+    `visit_at` datetime NOT NULL default '0000-00-00 00:00:00'
+    `log_url_id` bigint(20) unsigned default NULL,
+    `log_visitor_id` bigint(20) unsigned default NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 -- End Table's declaration

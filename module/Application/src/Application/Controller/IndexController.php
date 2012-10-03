@@ -33,6 +33,7 @@ use Gc\Mvc\Controller\Action,
     Gc\DocumentType,
     Gc\Layout,
     Gc\Property,
+    Gc\User\Visitor,
     Gc\View,
     Zend\Config\Reader\Xml,
     Zend\Navigation\Navigation,
@@ -52,6 +53,22 @@ class IndexController extends Action
       */
     public function indexAction()
     {
+        $visitor = new Visitor();
+        $session = $this->getSession();
+        $session_id = $this->getSession()->getDefaultManager()->getId();
+
+        try
+        {
+            $session->visitor_id = $visitor->getVisitorId(
+                $session_id
+            );
+        }
+        catch(Exception $e)
+        {
+            //don't care
+        }
+
+
         if(CoreConfig::getValue('site_is_offline') == 1)
         {
             //Site is offline
