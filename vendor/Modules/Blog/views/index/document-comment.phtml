@@ -1,0 +1,32 @@
+<form class="simple-form" action="<?php echo $this->moduleUrl('document-comment', 'index', array('id' => $document->getId())); ?>" method="post">
+    <?php foreach($this->comment_list as $comment): ?>
+        <div>
+            <label for="username<?php echo $comment['id']; ?>"><?php echo $this->escapeHtml($this->translate('Username')); ?></label>
+            <input id="username<?php echo $comment['id']; ?>" type="text" name="comment[<?php echo $comment['id']; ?>][username]" value="<?php echo $this->escapeHtml($comment['username']); ?>">
+        </div>
+        <div>
+            <label for="email<?php echo $comment['id']; ?>"><?php echo $this->escapeHtml($this->translate('Email')); ?></label>
+            <input id="email<?php echo $comment['id']; ?>" type="email" name="comment[<?php echo $comment['id']; ?>][email]" value="<?php echo $this->escapeHtml($comment['email']); ?>">
+        </div>
+        <div>
+            <label for="show-email<?php echo $comment['id']; ?>"><?php echo $this->escapeHtml($this->translate('Show email')); ?></label>
+            <input id="show-email<?php echo $comment['id']; ?>" type="checkbox" name="comment[<?php echo $comment['id']; ?>][show_email]" value="1"<?php if(!empty($comment['show_email'])): ?> checked="checked"<?php endif; ?>>
+        </div>
+        <div>
+            <label for="is-active<?php echo $comment['id']; ?>"><?php echo $this->escapeHtml($this->translate('Is active')); ?></label>
+            <input id="is-active<?php echo $comment['id']; ?>" type="checkbox" name="comment[<?php echo $comment['id']; ?>][is_active]" value="1"<?php if(!empty($comment['is_active'])): ?> checked="checked"<?php endif; ?>>
+        </div>
+        <div>
+            <label for="message<?php echo $comment['id']; ?>"><?php echo $this->escapeHtml($this->translate('Message')); ?></label>
+            <textarea id="message<?php echo $comment['id']; ?>" name="comment[<?php echo $comment['id']; ?>][message]"><?php echo $this->escapeHtml($comment['message']); ?></textarea>
+        </div>
+    <?php endforeach; ?>
+
+    <div>
+        <input type="submit" id="input-save" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+    </div>
+</form>
+
+<script type="text/javascript">
+Gc.saveCommand();
+</script>

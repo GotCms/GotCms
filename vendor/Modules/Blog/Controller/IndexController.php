@@ -26,12 +26,46 @@
 
 namespace Modules\Blog\Controller;
 
-use Gc\Module\Controller\AbstractController;
+use Gc\Module\Controller\AbstractController,
+    Gc\Document\Model as DocumentModel,
+    Modules\Blog\Model;
 
 class IndexController extends AbstractController
 {
     public function indexAction()
     {
+        $model = new Model\Comment();
+        $document_list = $model->getDocumentList();
 
+        return array('document_list' => $document_list);
+    }
+
+    public function documentCommentAction()
+    {
+        $document_id = $this->getRequest()->getQuery()->get('id');
+        $document = DocumentModel::fromId($document_id);
+        if(empty($document))
+        {
+            return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), TRUE);
+        }
+
+        $model = new Model\Comment();
+        $comment_list = $model->getList($document_id);
+
+        if($this->getRequest()->isPost())
+        {
+            $comments = $this->getRequest()->getPost()->get('comment');
+
+            foreach($comments as $comment_id => $data)
+            {
+                $data['show_email'] = empty($data['show_email']) ? 0 : 1;
+                $data['is_active'] = empty($data['is_active']) ? 0 : 1;
+                $model->update($data, array('id' => $comment_id));
+            }
+
+            return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'document-comment'), array(), TRUE);
+        }
+
+        return array('comment_list' => $comment_list->toArray(), 'document' => $document);
     }
 }

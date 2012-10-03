@@ -18,36 +18,14 @@
  * PHP Version >=5.3
  *
  * @category Modules
- * @package  Blog
+ * @package  Design
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
+?>
+<h2>..:: <?php echo $this->escapeHtml($this->translate('Blog')); ?> ::..</h2>
 
-namespace Modules\Blog;
-
-use Gc\Module\AbstractModule,
-    Zend\EventManager\Event;
-
-class Blog extends AbstractModule
-{
-    public function onBootstrap(Event $e)
-    {
-
-    }
-
-    public function install()
-    {
-        $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();
-        $pdo_resource->exec(file_get_contents(__DIR__ . sprintf('/sql/install-%s.sql', $this->getDriverName())));
-
-        return TRUE;
-    }
-
-    public function uninstall()
-    {
-        $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();
-        $pdo_resource->exec(file_get_contents(__DIR__ . sprintf('/sql/uninstall-%s.sql', $this->getDriverName())));
-        return TRUE;
-    }
-}
+<ul>
+    <li><a href="<?php echo $this->moduleUrl('index', 'index'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Documents list')); ?></a></li>
+</ul>
