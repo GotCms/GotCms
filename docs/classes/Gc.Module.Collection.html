@@ -69,6 +69,7 @@ self::$_tables</span><pre>__construct()</pre></a></li>
 <li class="method public inherited"><a href="#addData" title="addData :: Add data to the object."><span class="description">Add data to the object.</span><pre>addData()</pre></a></li>
 <li class="method public inherited"><a href="#execute" title="execute :: Execute query"><span class="description">Execute query</span><pre>execute()</pre></a></li>
 <li class="method public inherited"><a href="#fetchAll" title="fetchAll :: Fetch Row"><span class="description">Fetch Row</span><pre>fetchAll()</pre></a></li>
+<li class="method public inherited"><a href="#fetchOne" title="fetchOne :: Fetch One"><span class="description">Fetch One</span><pre>fetchOne()</pre></a></li>
 <li class="method public inherited"><a href="#fetchRow" title="fetchRow :: Fetch Row"><span class="description">Fetch Row</span><pre>fetchRow()</pre></a></li>
 <li class="method public inherited"><a href="#getData" title="getData :: Retrieves data from the object"><span class="description">Retrieves data from the object</span><pre>getData()</pre></a></li>
 <li class="method public inherited"><a href="#getLastInsertId" title="getLastInsertId :: Get last insert id"><span class="description">Get last insert id</span><pre>getLastInsertId()</pre></a></li>
@@ -299,6 +300,25 @@ self::$_tables</h2>
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="fetchOne" id="fetchOne"></a><div class="element clickable method public fetchOne" data-toggle="collapse" data-target=".fetchOne .collapse">
+<h2>Fetch One</h2>
+<pre>fetchOne(mixed $query) : \Gc\Db\mixte</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Gc\Db\AbstractTable::fetchOne()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>mixed</code><p>(\Zend\Db\Sql\Select|string)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>\Gc\Db\mixte</code></div>
 </div></div>
 </div>
 <a name="fetchRow" id="fetchRow"></a><div class="element clickable method public fetchRow" data-toggle="collapse" data-target=".fetchRow .collapse">
@@ -991,7 +1011,7 @@ Uses cache to eliminate unneccessary preg_replace</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-10-03T08:49:27+02:00.<br></footer></div>
+            generated on 2012-10-03T19:18:36+02:00.<br></footer></div>
 </div>
 </body>
 </html>

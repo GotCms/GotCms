@@ -1833,7 +1833,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/User/Visitor.php" hash="ae93b9abae0a45346885344d824e6d23" package="Library\User">
+  <file path="Gc/User/Visitor.php" hash="4f55f0b69d64f0fd8558263a8c9242b1" package="Library\User">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -1900,28 +1900,28 @@ PHP Version >=5.3]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="155" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="156" package="">
         <name>getUrlId</name>
         <type>function</type>
-        <docblock line="149">
+        <docblock line="150">
           <description><![CDATA[Get url id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="149" name="param" description="" type="string" variable="$request_uri">
+          <tag line="150" name="param" description="" type="string" variable="$request_uri">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="149" name="param" description="" type="string" variable="$referer">
+          <tag line="150" name="param" description="" type="string" variable="$referer">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="149" name="return" description="" type="integer">
+          <tag line="150" name="return" description="" type="integer">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
-        <argument line="155">
+        <argument line="156">
           <name>$request_uri</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="155">
+        <argument line="156">
           <name>$referer</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -8312,7 +8312,7 @@ add dynamic content, etc...]]></description>
       </method>
     </class>
   </file>
-  <file path="Gc/Db/AbstractTable.php" hash="06a2ae6a45079c007a8b3fde41582927" package="Library\Db">
+  <file path="Gc/Db/AbstractTable.php" hash="a94bdc015efc3fc1c596f053196af575" package="Library\Db">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8440,17 +8440,16 @@ self::$_tables]]></description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="126" package="">
-        <name>execute</name>
+        <name>fetchOne</name>
         <type>function</type>
         <docblock line="121">
-          <description><![CDATA[Execute query]]></description>
+          <description><![CDATA[Fetch One]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="121" name="param" description="(\Zend\Db\Sql\*|string)" type="mixed" variable="$query">
+          <tag line="121" name="param" description="(\Zend\Db\Sql\Select|string)" type="mixed" variable="$query">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="121" name="return" description="" type="array|\Zend\Db\ResultSet\ResultSet">
-            <type by_reference="false">array</type>
-            <type by_reference="false">\Zend\Db\ResultSet\ResultSet</type>
+          <tag line="121" name="return" description="" type="\Gc\Db\mixte">
+            <type by_reference="false">\Gc\Db\mixte</type>
           </tag>
         </docblock>
         <argument line="126">
@@ -8459,20 +8458,40 @@ self::$_tables]]></description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="146" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="151" package="">
+        <name>execute</name>
+        <type>function</type>
+        <docblock line="146">
+          <description><![CDATA[Execute query]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="146" name="param" description="(\Zend\Db\Sql\*|string)" type="mixed" variable="$query">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="146" name="return" description="" type="array|\Zend\Db\ResultSet\ResultSet">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\Zend\Db\ResultSet\ResultSet</type>
+          </tag>
+        </docblock>
+        <argument line="151">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="171" package="">
         <name>getLastInsertId</name>
         <type>function</type>
-        <docblock line="141">
+        <docblock line="166">
           <description><![CDATA[Get last insert id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="141" name="param" description="optional table name" type="string" variable="$table_name">
+          <tag line="166" name="param" description="optional table name" type="string" variable="$table_name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="141" name="return" description="" type="integer">
+          <tag line="166" name="return" description="" type="integer">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
-        <argument line="146">
+        <argument line="171">
           <name>$table_name</name>
           <default><![CDATA[NULL]]></default>
           <type/>
