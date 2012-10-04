@@ -451,7 +451,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/View/Helper/Script.php" hash="f5623e5c054cb9445c007535b15fac64" package="Library\View\Helper">
+  <file path="Gc/View/Helper/Script.php" hash="06a9e5e68bb508a90eac9c3e6e78e281" package="Library\View\Helper">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -545,78 +545,89 @@ PHP Version >=5.3]]></long-description>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="94" package="">
-        <name>getRequest</name>
+        <name>getDocument</name>
         <type>function</type>
         <docblock line="89">
-          <description><![CDATA[Get Http Request instance.]]></description>
+          <description><![CDATA[Returns param from name.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="89" name="return" description="" type="\Zend\Http\PhpEnvironment\Request">
-            <type by_reference="false">\Zend\Http\PhpEnvironment\Request</type>
+          <tag line="89" name="return" description="" type="\Gc\Document\Model">
+            <type by_reference="false">\Gc\Document\Model</type>
           </tag>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="104" package="">
-        <name>getResponse</name>
+        <name>getRequest</name>
         <type>function</type>
         <docblock line="99">
+          <description><![CDATA[Get Http Request instance.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="99" name="return" description="" type="\Zend\Http\PhpEnvironment\Request">
+            <type by_reference="false">\Zend\Http\PhpEnvironment\Request</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="114" package="">
+        <name>getResponse</name>
+        <type>function</type>
+        <docblock line="109">
           <description><![CDATA[Get Http Response instance.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="99" name="return" description="" type="\Zend\Http\PhpEnvironment\Response">
+          <tag line="109" name="return" description="" type="\Zend\Http\PhpEnvironment\Response">
             <type by_reference="false">\Zend\Http\PhpEnvironment\Response</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="116" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="126" package="">
         <name>plugin</name>
         <type>function</type>
-        <docblock line="109">
+        <docblock line="119">
           <description><![CDATA[Get plugin instance]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="109" name="param" description="Name of plugin to return" type="string" variable="$name">
+          <tag line="119" name="param" description="Name of plugin to return" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="109" name="param" description="Options to pass to plugin constructor (if not already instantiated)" type="null|array" variable="$options">
+          <tag line="119" name="param" description="Options to pass to plugin constructor (if not already instantiated)" type="null|array" variable="$options">
             <type by_reference="false">null</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="109" name="return" description="" type="mixed">
+          <tag line="119" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="116">
+        <argument line="126">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="116">
+        <argument line="126">
           <name>$options</name>
           <default><![CDATA[NULL]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="131" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="141" package="">
         <name>__call</name>
         <type>function</type>
-        <docblock line="121">
+        <docblock line="131">
           <description><![CDATA[Method overloading: return/call plugins]]></description>
           <long-description><![CDATA[If the plugin is a functor, call it, passing the parameters provided.
 Otherwise, return the plugin instance.]]></long-description>
-          <tag line="121" name="param" description="" type="string" variable="$method">
+          <tag line="131" name="param" description="" type="string" variable="$method">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="121" name="param" description="" type="array" variable="$params">
+          <tag line="131" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="121" name="return" description="" type="mixed">
+          <tag line="131" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="131">
+        <argument line="141">
           <name>$method</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="131">
+        <argument line="141">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -1833,7 +1844,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/User/Visitor.php" hash="4f55f0b69d64f0fd8558263a8c9242b1" package="Library\User">
+  <file path="Gc/User/Visitor.php" hash="4aeddaadcc720f698106dc32c353d8b2" package="Library\User">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -1900,28 +1911,28 @@ PHP Version >=5.3]]></long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="156" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="152" package="">
         <name>getUrlId</name>
         <type>function</type>
-        <docblock line="150">
+        <docblock line="146">
           <description><![CDATA[Get url id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="150" name="param" description="" type="string" variable="$request_uri">
+          <tag line="146" name="param" description="" type="string" variable="$request_uri">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="150" name="param" description="" type="string" variable="$referer">
+          <tag line="146" name="param" description="" type="string" variable="$referer">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="150" name="return" description="" type="integer">
+          <tag line="146" name="return" description="" type="integer">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
-        <argument line="156">
+        <argument line="152">
           <name>$request_uri</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="156">
+        <argument line="152">
           <name>$referer</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -4149,7 +4160,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Document/Model.php" hash="45035734c621b544e047d8396f1ea894" package="Library\Document">
+  <file path="Gc/Document/Model.php" hash="c2d2b57d138e50e2b38f47d71e561407" package="Library\Document">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -4374,26 +4385,19 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="266" package="">
-        <name>getName</name>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="267" package="">
+        <name>getPath</name>
         <type>function</type>
         <docblock line="263">
-          <description><![CDATA[(non-PHPdoc)]]></description>
+          <description><![CDATA[Get document path]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="263" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="274" package="">
-        <name>getId</name>
-        <type>function</type>
-        <docblock line="271">
-          <description><![CDATA[(non-PHPdoc)]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="271" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="263" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="282" package="">
-        <name>getParent</name>
+        <name>getName</name>
         <type>function</type>
         <docblock line="279">
           <description><![CDATA[(non-PHPdoc)]]></description>
@@ -4401,40 +4405,58 @@ PHP Version >=5.3]]></long-description>
           <tag line="279" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="292" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="290" package="">
+        <name>getId</name>
+        <type>function</type>
+        <docblock line="287">
+          <description><![CDATA[(non-PHPdoc)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="287" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="298" package="">
+        <name>getParent</name>
+        <type>function</type>
+        <docblock line="295">
+          <description><![CDATA[(non-PHPdoc)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="295" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="308" package="">
         <name>getChildren</name>
         <type>function</type>
-        <docblock line="289">
+        <docblock line="305">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="289" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="305" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="307" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="323" package="">
         <name>getIcon</name>
         <type>function</type>
-        <docblock line="304">
+        <docblock line="320">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="304" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="320" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="326" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="342" package="">
         <name>getIterableId</name>
         <type>function</type>
-        <docblock line="323">
+        <docblock line="339">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="323" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="339" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="334" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="350" package="">
         <name>getUrl</name>
         <type>function</type>
-        <docblock line="331">
+        <docblock line="347">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="331" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="347" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
     </class>
