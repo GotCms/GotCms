@@ -88,7 +88,7 @@ class Comment extends AbstractTable
             }
             else
             {
-                $insert_data[$key] = $value;
+                $insert_data[$key] = $data[$key];
             }
         }
 

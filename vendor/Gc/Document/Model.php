@@ -260,6 +260,22 @@ class Model extends AbstractTable implements IterableInterface
         return FALSE;
     }
 
+    /**
+     * Get document path
+     * @return string
+     */
+    public function getPath()
+    {
+        $parent = $this->getParent();
+        $path = '/' . $this->getUrlKey();
+        if(!empty($parent))
+        {
+            $path = $parent->getPath() . $path;
+        }
+
+        return $path;
+    }
+
     /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getName()
      */

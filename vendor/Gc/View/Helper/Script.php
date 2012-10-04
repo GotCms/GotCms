@@ -87,6 +87,16 @@ class Script extends AbstractHelper
     }
 
     /**
+     * Returns param from name.
+     *
+     * @return \Gc\Document\Model
+     */
+    public function getDocument()
+    {
+        return $this->getView()->layout()->currentDocument;
+    }
+
+    /**
      * Get Http Request instance.
      *
      * @return \Zend\Http\PhpEnvironment\Request
