@@ -27,8 +27,7 @@
 
 namespace Gc\Media\Icon;
 
-use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+use Gc\Db\AbstractTable;
 /**
  * Class for manage View
  */

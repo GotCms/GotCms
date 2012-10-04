@@ -28,7 +28,6 @@
 namespace Gc\View;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
     Zend\Db\Sql\Select;
 
 /**

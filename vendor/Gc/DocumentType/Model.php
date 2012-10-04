@@ -28,7 +28,6 @@
 namespace Gc\DocumentType;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
     Gc\User,
     Gc\Tab,
     Gc\View,

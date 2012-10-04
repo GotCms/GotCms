@@ -27,8 +27,7 @@
 
 namespace Gc\Script;
 
-use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+use Gc\Db\AbstractTable;
 /**
  * Script Model
  */

@@ -28,7 +28,6 @@
 namespace Gc\Script;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
     Zend\Db\Sql\Select;
 /**
  * Collection of Script Model

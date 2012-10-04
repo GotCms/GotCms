@@ -261,16 +261,16 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /**
-     * Get document path
+     * Get document url
      * @return string
      */
-    public function getPath()
+    public function getUrl()
     {
         $parent = $this->getParent();
         $path = '/' . $this->getUrlKey();
         if(!empty($parent))
         {
-            $path = $parent->getPath() . $path;
+            $path = $parent->getUrl() . $path;
         }
 
         return $path;
@@ -345,9 +345,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
+     * @see include \Gc\Component\IterableInterface#getEditUrl()
      */
-    public function getUrl()
+    public function getEditUrl()
     {
         return \Gc\Registry::get('Application')->getMvcEvent()->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));
     }

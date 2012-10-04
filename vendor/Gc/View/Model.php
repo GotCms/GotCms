@@ -27,8 +27,7 @@
 
 namespace Gc\View;
 
-use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+use Gc\Db\AbstractTable;
 /**
  * Class for manage View
  */

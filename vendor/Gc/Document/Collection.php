@@ -179,9 +179,9 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
-     * @see include \Gc\Component\IterableInterface#getUrl()
+     * @see include \Gc\Component\IterableInterface#getEditUrl()
      */
-    public function getUrl()
+    public function getEditUrl()
     {
         return NULL;
     }

@@ -27,8 +27,7 @@
 
 namespace Gc\Layout;
 
-use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface;
+use Gc\Db\AbstractTable;
 /**
  * Layout Model
  */

@@ -27,6 +27,8 @@
 
 namespace Gc\Component;
 
+use Gc\Component\IterableInterface;
+
 /**
  * Create xml for jQuery treeview
  */
@@ -65,6 +67,11 @@ class TreeView
 
         foreach($treeview_data as $iterator)
         {
+            if(!$iterator instanceof IterableInterface)
+            {
+                continue;
+            }
+
             $children = $iterator->getChildren();
             $haveChildren = !empty($children);
             $html .= '<li id="'.$iterator->getIterableId().'"';
@@ -85,7 +92,7 @@ class TreeView
 
             $html .= $rel . '>' . $ins;
             $id = $iterator->getId();
-            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '') . 'href="'.$iterator->getUrl().'">';
+            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '') . 'href="'.$iterator->getEditUrl().'">';
 
             if($iterator->getIcon() == 'folder')
             {

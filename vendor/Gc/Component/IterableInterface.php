@@ -58,11 +58,11 @@ interface IterableInterface
     public function getParent();
 
     /**
-     * Get Url
+     * Get edit url
      *
      * @return string
      */
-    public function getUrl();
+    public function getEditUrl();
 
     /**
      * Get Iterable Id

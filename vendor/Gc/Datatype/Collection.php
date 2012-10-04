@@ -28,7 +28,6 @@
 namespace Gc\Datatype;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
     Zend\Db\Sql\Select;
 /**
  * Collection of Datatype Model

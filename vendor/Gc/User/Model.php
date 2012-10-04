@@ -28,7 +28,6 @@
 namespace Gc\User;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
     Zend\Authentication\Adapter,
     Zend\Authentication\AuthenticationService;
 /**

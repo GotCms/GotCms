@@ -28,7 +28,6 @@
 namespace Gc\DocumentType;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
     Zend\Db\Sql\Select;
 /**
  * Collection of Document Type Model

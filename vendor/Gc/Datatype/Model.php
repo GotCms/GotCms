@@ -28,7 +28,6 @@
 namespace Gc\Datatype;
 
 use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
     Gc\Property\Model as PropertyModel,
     Datatypes,
     Zend\Form\Fieldset;
