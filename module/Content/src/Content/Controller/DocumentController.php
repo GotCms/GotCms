@@ -349,10 +349,22 @@ class DocumentController extends Action
      {
         $parent_id = $this->getRouteMatch()->getParam('id', NULL);
         $session = $this->getSession();
+        $parent_document = DocumentModel::fromId($parent_id);
+        if(empty($parent_id))
+        {
+            return $this->_returnJson(array('success' => FALSE));
+        }
+
         if(!empty($session['document-cut']))
         {
-            $document = DocumentModel::fromid($session['document-cut']);
+            $document = DocumentModel::fromId($session['document-cut']);
             if(empty($document))
+            {
+                return $this->_returnJson(array('success' => FALSE));
+            }
+
+            $available_children = $parent_document->getDocumentType()->getDependencies();
+            if(!in_array($document->getDocumentType()->getId(), $available_children))
             {
                 return $this->_returnJson(array('success' => FALSE));
             }
@@ -377,7 +389,14 @@ class DocumentController extends Action
                 return $this->_returnJson(array('success' => FALSE));
             }
 
-            $document = DocumentModel::fromid($session['document-copy']);
+            $document = DocumentModel::fromId($session['document-copy']);
+
+            $available_children = $parent_document->getDocumentType()->getDependencies();
+            if(!in_array($document->getDocumentType()->getId(), $available_children))
+            {
+                return $this->_returnJson(array('success' => FALSE));
+            }
+
             $copy_document = new DocumentModel();
             $copy_document_properties =  new Property\Collection();
             $copy_document_properties->load(NULL, NULL, $document->getId());
