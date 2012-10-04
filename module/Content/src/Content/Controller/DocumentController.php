@@ -349,10 +349,13 @@ class DocumentController extends Action
      {
         $parent_id = $this->getRouteMatch()->getParam('id', NULL);
         $session = $this->getSession();
-        $parent_document = DocumentModel::fromId($parent_id);
-        if(empty($parent_id))
+        if(!empty($parent_id))
         {
-            return $this->_returnJson(array('success' => FALSE));
+            $parent_document = DocumentModel::fromId($parent_id);
+            if(empty($parent_id))
+            {
+                return $this->_returnJson(array('success' => FALSE));
+            }
         }
 
         if(!empty($session['document-cut']))
@@ -363,10 +366,13 @@ class DocumentController extends Action
                 return $this->_returnJson(array('success' => FALSE));
             }
 
-            $available_children = $parent_document->getDocumentType()->getDependencies();
-            if(!in_array($document->getDocumentType()->getId(), $available_children))
+            if(!empty($parent_document))
             {
-                return $this->_returnJson(array('success' => FALSE));
+                $available_children = $parent_document->getDocumentType()->getDependencies();
+                if(!in_array($document->getDocumentType()->getId(), $available_children))
+                {
+                    return $this->_returnJson(array('success' => FALSE));
+                }
             }
 
             $search_document = DocumentModel::fromUrlKey($document->getUrlKey(), $parent_id);
@@ -391,10 +397,13 @@ class DocumentController extends Action
 
             $document = DocumentModel::fromId($session['document-copy']);
 
-            $available_children = $parent_document->getDocumentType()->getDependencies();
-            if(!in_array($document->getDocumentType()->getId(), $available_children))
+            if(!empty($parent_document))
             {
-                return $this->_returnJson(array('success' => FALSE));
+                $available_children = $parent_document->getDocumentType()->getDependencies();
+                if(!in_array($document->getDocumentType()->getId(), $available_children))
+                {
+                    return $this->_returnJson(array('success' => FALSE));
+                }
             }
 
             $copy_document = new DocumentModel();
