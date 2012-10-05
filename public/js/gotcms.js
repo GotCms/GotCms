@@ -398,7 +398,7 @@ var Gc = (function($)
                         switch($action)
                         {
                             case 'refresh':
-                                $this.refreshTreeview($url, $id, $document_id);
+                                $this.refreshTreeview($url, $id);
                                 return true;
                             break;
                             case 'new':
@@ -439,6 +439,8 @@ var Gc = (function($)
                                             if($action == 'paste' && $this.getOption('lastAction') == 'cut')
                                             {
                                                 $options.items.paste.disabled = true;
+
+                                                $this.refreshTreeview($routes['refresh'].replace('itemId', 0), 0);
                                             }
                                         }
                                     }
@@ -463,9 +465,10 @@ var Gc = (function($)
             });
         },
 
-        refreshTreeview: function($url, $document_id, $init_document_id)
+        refreshTreeview: function($url, $document_id)
         {
             $this = this;
+            $browser = $('#browser');
             $.ajax({
                 url: $url,
                 data: {},
@@ -473,15 +476,16 @@ var Gc = (function($)
                 {
                     if($document_id == 0)
                     {
-                        $('#browser').replaceWith(data.treeview);
-                        $this.initDocumentMenu($init_document_id);
+                        $('#documents').children('ul').remove();
+                        $('#documents').append(data.treeview);
                     }
                     else
                     {
                         $('#'+$document_id).next('ul').remove()
                         $('#'+$document_id).after(data.treeview);
-                        $('#browser').jstree('refresh');
                     }
+
+                    $browser.jstree('refresh');
                 }
             });
         },
@@ -556,12 +560,15 @@ var Gc = (function($)
                             {
                                 $options.items.paste.disabled = true;
                             }
+
+                            $this.refreshTreeview($routes['refresh'].replace('itemId', 0), 0);
                         }
                     }
                 });
 
                 $(this).dialog('close');
             };
+
             $buttons[Translator.translate('Cancel')] = function()
             {
                 $(this).dialog('close');

@@ -451,7 +451,7 @@ class DocumentController extends Action
         {
             $documents = new DocumentCollection();
             $documents->load($document_id);
-            $documents_list = array($documents);
+            $documents_list = $documents->getChildren();
         }
         else
         {
@@ -460,7 +460,7 @@ class DocumentController extends Action
         }
 
 
-        return $this->_returnJson(array('treeview' => Component\TreeView::render($documents_list, empty($document_id) ? TRUE : FALSE)));
+        return $this->_returnJson(array('treeview' => Component\TreeView::render($documents_list, FALSE)));
     }
 
     public function sortOrderAction()
