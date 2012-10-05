@@ -338,28 +338,38 @@ var Gc = (function($)
             });
         },
 
+        sortableMenu: function($update_document_url)
+        {
+            $('#documents').find('ul').sortable({
+                update: function(e, ui)
+                {
+                    $data = {order: $(this).sortable('toArray').join()};
+                    $.ajax({
+                        url: $update_document_url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: $data
+                    });
+                },
+                distance: 10
+            });
+        },
+
         initDocumentMenu: function($document_id, $update_document_url)
         {
             $this = this;
             $('#browser').jstree({
                 'plugins' : ['themes','html_data'],
                 'core' : { 'initially_open' : [ $('#document_' + $document_id).parent().parent('li').prop('id') ] }
-            }).bind('loaded.jstree', function (event, data)
+            })
+            .bind('refresh.jstree', function(event, data)
+            {
+                $this.sortableMenu($update_document_url);
+            })
+            .bind('loaded.jstree', function (event, data)
             {
                 $has_cut_action = false;
-                $('#documents').find('ul').sortable({
-                    update: function(e, ui)
-                    {
-                        $data = {order: $(this).sortable('toArray').join()};
-                        $.ajax({
-                            url: $update_document_url,
-                            type: 'post',
-                            dataType: 'json',
-                            data: $data
-                        });
-                    },
-                    distance: 10
-                });
+                $this.sortableMenu($update_document_url);
 
                 $.contextMenu(
                 {
