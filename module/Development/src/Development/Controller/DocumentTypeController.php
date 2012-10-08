@@ -227,7 +227,6 @@ class DocumentTypeController extends Action
         }
         else
         {
-
             $validators = $form->getInputFilter()->get('infos')->get('name')->getValidatorChain()->getValidators();
 
             foreach($validators as $validator)
@@ -320,7 +319,7 @@ class DocumentTypeController extends Action
                         $property_id = $matches[1];
 
                         $property_model = Property\Model::fromId($property_id);
-                        if(empty($property_model))
+                        if(empty($property_model) or !in_array($property_model->getTabId(), $existing_tabs))
                         {
                             $property_model = new Property\Model();
                         }
