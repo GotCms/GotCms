@@ -160,7 +160,7 @@ class Model extends AbstractTable
 
     /**
      * Save editor
-     * @param \Gc\Property\Model $property
+     * @param PropertyModel $property
      * @return mixte
      */
     static function saveEditor(PropertyModel $property)
