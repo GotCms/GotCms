@@ -31,7 +31,9 @@ use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Gc\DocumentType,
     Gc\Media\Icon,
-    Gc\View;
+    Gc\Registry,
+    Gc\View,
+    Zend\Db\TableGateway\TableGateway;
 /**
  * Document Model
  */
@@ -244,7 +246,7 @@ class Model extends AbstractTable implements IterableInterface
             {
                 if(parent::delete('id = '.$this->getId()))
                 {
-                    $properties_table = new \Zend\Db\TableGateway\TableGateway('property_value', $this->getAdapter());
+                    $properties_table = new TableGateway('property_value', $this->getAdapter());
                     $properties_table->delete(array('document_id' => $this->getId()));
                     unset($this);
 
@@ -349,6 +351,6 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getEditUrl()
     {
-        return \Gc\Registry::get('Application')->getMvcEvent()->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));
+        return Registry::get('Application')->getMvcEvent()->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));
     }
 }

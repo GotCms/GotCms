@@ -30,7 +30,8 @@ use Gc\Mvc\Controller\Action,
     Development\Form\Layout as LayoutForm,
     Gc\Layout,
     Zend\Http\Headers,
-    Zend\File\Transfer\Adapter\Http as FileTransfer;
+    Zend\File\Transfer\Adapter\Http as FileTransfer,
+    ZipArchive;
 
 class LayoutController extends Action
 {
@@ -178,11 +179,43 @@ class LayoutController extends Action
     public function downloadAction()
     {
         $layout_id = $this->getRouteMatch()->getParam('id', NULL);
-        $layout = Layout\Model::fromId($layout_id);
-        if(empty($layout_id) or empty($layout))
+        if(!empty($layout_id))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('This layout can not be download');
-            return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+            $layout = Layout\Model::fromId($layout_id);
+            if(empty($layout))
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('This layout can not be download');
+                return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+            }
+
+            $content = $layout->getContent();
+            $filename = $layout->getIdentifier() . 'phtml';
+        }
+        else
+        {
+            $layouts = new Layout\Collection();
+            $children = $layouts->getLayouts();
+            $zip = new ZipArchive;
+            $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
+            $res = $zip->open($tmp_filename, ZipArchive::CREATE);
+            if($res === TRUE)
+            {
+                foreach($children as $child)
+                {
+                    $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
+                }
+
+                $zip->close();
+                $content = file_get_contents($tmp_filename);
+                $filename = 'layout.zip';
+                unlink($tmp_filename);
+            }
+        }
+
+        if(empty($content) or empty($filename))
+        {
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save views');
+            return $this->redirect()->toRoute('view');
         }
 
         $headers = new Headers();
@@ -192,13 +225,12 @@ class LayoutController extends Action
             ->addHeaderLine('Expires', -1)
             ->addHeaderLine('Content-Type', 'application/octet-stream')
             ->addHeaderLine('Content-Transfer-Encoding', 'binary')
-            ->addHeaderLine('Content-Length', strlen($layout->getContent()))
-            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $layout->getIdentifier(). '.phtml');
+            ->addHeaderLine('Content-Length', strlen($content))
+            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $filename);
 
         $response = $this->getResponse();
         $response->setHeaders($headers);
-
-        $response->setContent($layout->getContent());
+        $response->setContent($content);
 
         return $response;
     }

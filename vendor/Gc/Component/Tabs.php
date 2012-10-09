@@ -64,7 +64,7 @@ class Tabs
         $i = 1;
         foreach($tabs as $iterator)
         {
-            if(!$iterator instanceof \Gc\Component\IterableInterface)
+            if(!$iterator instanceof IterableInterface)
             {
                 $html .= '<li><a href="#tabs-'.$i.'">'.$iterator.'</a></li>';
             }

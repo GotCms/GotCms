@@ -27,6 +27,7 @@
 namespace Datatypes\Mixed;
 
 use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
+    Gc\Form\AbstractForm,
     Zend\Form\Element,
     Zend\Form\Fieldset;
 
@@ -115,7 +116,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             $label->setValue(empty($datatype_config['label']) ? '' : $datatype_config['label']);
             $fieldset->add($label);
 
-            \Gc\Form\AbstractForm::addContent($fieldset, $object->getPrevalueEditor()->load(), $prefix);
+            AbstractForm::addContent($fieldset, $object->getPrevalueEditor()->load(), $prefix);
             $datatypes[$datatype_id]['fieldset'] = $fieldset;
         }
 

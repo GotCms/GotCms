@@ -28,6 +28,7 @@
 namespace Gc\Datatype;
 
 use Gc\Db\AbstractTable,
+    Gc\Form\AbstractForm,
     Gc\Property\Model as PropertyModel,
     Datatypes,
     Zend\Form\Fieldset;
@@ -162,7 +163,7 @@ class Model extends AbstractTable
      * @param \Gc\Property\Model $property
      * @return mixte
      */
-    static function saveEditor(\Gc\Property\Model $property)
+    static function saveEditor(PropertyModel $property)
     {
         $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
         $datatype->getEditor($property)->save();
@@ -184,7 +185,7 @@ class Model extends AbstractTable
     static function loadPrevalueEditor(AbstractDatatype $datatype)
     {
         $fieldset = new Fieldset('prevalue-editor');
-        \Gc\Form\AbstractForm::addContent($fieldset, $datatype->getPrevalueEditor()->load());
+        AbstractForm::addContent($fieldset, $datatype->getPrevalueEditor()->load());
         return $fieldset;
     }
 

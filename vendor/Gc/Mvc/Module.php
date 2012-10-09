@@ -29,8 +29,10 @@ namespace Gc\Mvc;
 
 use Gc\Core\Config as GcConfig,
     Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway,
+    Gc\Registry,
     Zend,
     Zend\Db\Adapter\Adapter as DbAdapter,
+    Zend\Db\TableGateway\TableGateway,
     Zend\Config\Reader\Ini,
     Zend\EventManager\Event,
     Zend\I18n\Translator\Translator,
@@ -58,18 +60,18 @@ class Module
      */
     public function onBootstrap(Event $e)
     {
-        if(!\Gc\Registry::isRegistered('Translator'))
+        if(!Registry::isRegistered('Translator'))
         {
             $translator = $e->getApplication()->getServiceManager()->get('translator');
             $translator->addTranslationFilePattern('phparray', GC_APPLICATION_PATH . '/data/translate/', '%s.php', 'default');
 
-            if(\Gc\Registry::isRegistered('Db'))
+            if(Registry::isRegistered('Db'))
             {
-                $translator->setLocale(\Gc\Core\Config::getValue('locale'));
+                $translator->setLocale(GcConfig::getValue('locale'));
             }
 
             \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
-            \Gc\Registry::set('Translator', $translator);
+            Registry::set('Translator', $translator);
         }
     }
 
@@ -144,7 +146,7 @@ class Module
      */
     public function init(ModuleManager $module_manager)
     {
-        if(!\Gc\Registry::isRegistered('Configuration'))
+        if(!Registry::isRegistered('Configuration'))
         {
             $config_paths = $module_manager->getEvent()->getConfigListener()->getOptions()->getConfigGlobPaths();
             if(!empty($config_paths))
@@ -163,15 +165,15 @@ class Module
                     $db_adapter = new DbAdapter($config['db']);
                     \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
 
-                    \Gc\Registry::set('Configuration', $config);
-                    \Gc\Registry::set('Db', $db_adapter);
+                    Registry::set('Configuration', $config);
+                    Registry::set('Db', $db_adapter);
 
                     $session_handler = GcConfig::getValue('session_handler');
                     $session_manager = SessionContainer::getDefaultManager();
                     $session_config = $session_manager->getConfig();
-                    $session_config->setStorageOption('gc_maxlifetime', \Gc\Core\Config::getValue('session_lifetime'));
-                    $session_config->setStorageOption('cookie_path', \Gc\Core\Config::getValue('cookie_path'));
-                    $session_config->setStorageOption('cookie_domain', \Gc\Core\Config::getValue('cookie_domain'));
+                    $session_config->setStorageOption('gc_maxlifetime', GcConfig::getValue('session_lifetime'));
+                    $session_config->setStorageOption('cookie_path', GcConfig::getValue('cookie_path'));
+                    $session_config->setStorageOption('cookie_domain', GcConfig::getValue('cookie_domain'));
 
                     if($session_handler == GcConfig::SESSION_DATABASE)
                     {
@@ -183,7 +185,7 @@ class Module
                             'dataColumn' => 'data',
                         ));
 
-                        $session_table = new SessionTableGateway(new \Zend\Db\TableGateway\TableGateway('core_session', $db_adapter), $tablegateway_config);
+                        $session_table = new SessionTableGateway(new TableGateway('core_session', $db_adapter), $tablegateway_config);
                         $session_manager->setSaveHandler($session_table)->start();
                     }
                 }

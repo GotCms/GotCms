@@ -29,6 +29,7 @@ namespace Gc\Mvc\Controller;
 
 use Gc\User\Model,
     Gc\User\Acl,
+    Gc\Registry,
     Zend\Authentication\AuthenticationService,
     Zend\Mvc\Controller\AbstractActionController,
     Zend\Mvc\MvcEvent,
@@ -148,7 +149,7 @@ class Action extends AbstractActionController
             /**
              * Prepare all resources
              */
-            $language = preg_replace('~(.*)_.*~', '$1', \Gc\Registry::get('Translator')->getLocale());
+            $language = preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale());
             $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
             $headscript = $helper_broker->get('HeadScript');
             $headscript

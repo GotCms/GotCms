@@ -28,6 +28,7 @@ namespace Datatypes\jQueryFileUpload;
 
 use Gc\Datatype\AbstractDatatype\AbstractEditor,
     Gc\Media\File,
+    Gc\Registry,
     Zend\Form\Element;
 
 /**
@@ -114,7 +115,7 @@ class Editor extends AbstractEditor
                 $file_object->filename = $file_data['value'];
                 $file_object->thumbnail_url = $file_data['value'];
 
-                $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
+                $router = Registry::get('Application')->getMvcEvent()->getRouter();
                 $file_object->delete_url = $router->assemble(array(
                     'document_id' => $this->getDatatype()->getDocument()->getId(),
                     'property_id' => $this->getProperty()->getId(),

@@ -27,6 +27,7 @@
 namespace Datatypes\Mixed;
 
 use Gc\Datatype\AbstractDatatype\AbstractEditor,
+    Gc\Form\AbstractForm,
     Zend\Form\Element,
     Zend\Form\Fieldset;
 
@@ -158,7 +159,7 @@ class Editor extends AbstractEditor
                     //Create form
                     $fieldset = new Fieldset($datatype_config['name'] . $datatype_id);
 
-                    \Gc\Form\AbstractForm::addContent($fieldset, $editor->load(), $prefix);
+                    AbstractForm::addContent($fieldset, $editor->load(), $prefix);
                     $datatypes_elements[$line_id][$datatype_id]['label'] = empty($datatype_config['label']) ? '' : $datatype_config['label'];
                     $datatypes_elements[$line_id][$datatype_id]['fieldset'] = $fieldset;
                 }
@@ -195,7 +196,7 @@ class Editor extends AbstractEditor
             $hidden->setValue($datatype_config['name']);
             $fieldset->add($hidden);
 
-            \Gc\Form\AbstractForm::addContent($fieldset, $editor->load(), $prefix);
+            AbstractForm::addContent($fieldset, $editor->load(), $prefix);
             $template[$datatype_id]['label'] = empty($datatype_config['label']) ? '' : $datatype_config['label'];
             $template[$datatype_id]['fieldset'] = $fieldset;
         }

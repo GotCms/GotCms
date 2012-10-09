@@ -28,6 +28,7 @@
 namespace Gc\Datatype\AbstractDatatype;
 
 use Gc\Core\Object,
+    Gc\Registry,
     Gc\Datatype;
 /**
  * Abstract Prevalue Editor class
@@ -103,7 +104,7 @@ abstract class AbstractPrevalueEditor extends Object
      */
     public function getRequest()
     {
-        return \Gc\Registry::get('Application')->getRequest();
+        return Registry::get('Application')->getRequest();
     }
 
     /**

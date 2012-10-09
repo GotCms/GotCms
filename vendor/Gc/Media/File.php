@@ -29,6 +29,8 @@ namespace Gc\Media;
 
 use Gc\Core\Object,
     Gc\Datatype,
+    Gc\Registry,
+    StdClass,
     Zend\EventManager\StaticEventManager,
     Zend\File\Transfer\Adapter\Http as FileTransfer;
 /**
@@ -127,14 +129,14 @@ class File extends Object
                 $files = $file_transfer->getFileInfo($key);
                 foreach($files as $file_data)
                 {
-                    $file_object = new \StdClass();
+                    $file_object = new StdClass();
                     $file_object->name = 'New Image Upload Complete:   ' .$file_data['name'];
                     $file_object->filename = $this->getDirectory() . '/' . $file_data['name'];
                     $file_object->size = $file_data['size'];
                     $file_object->type = $file_data['type'];
                     $file_object->thumbnail_url = $this->getDirectory() . '/' . $file_data['name'];
 
-                    $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
+                    $router = Registry::get('Application')->getMvcEvent()->getRouter();
                     $file_object->delete_url = $router->assemble(array(
                         'document_id' => $this->getDocument()->getId(),
                         'property_id' => $this->getProperty()->getId(),

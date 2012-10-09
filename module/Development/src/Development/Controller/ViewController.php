@@ -30,7 +30,8 @@ use Gc\Mvc\Controller\Action,
     Development\Form\View as ViewForm,
     Gc\View,
     Zend\Http\Headers,
-    Zend\File\Transfer\Adapter\Http as FileTransfer;
+    Zend\File\Transfer\Adapter\Http as FileTransfer,
+    ZipArchive;
 
 class ViewController extends Action
 {
@@ -178,11 +179,43 @@ class ViewController extends Action
     public function downloadAction()
     {
         $view_id = $this->getRouteMatch()->getParam('id', NULL);
-        $view = View\Model::fromId($view_id);
-        if(empty($view_id) or empty($view))
+        if(!empty($view_id))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('This view can not be download');
-            return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+            $view = View\Model::fromId($view_id);
+            if(empty($view))
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('This view can not be download');
+                return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+            }
+
+            $content = $view->getContent();
+            $filename = $view->getIdentifier() . 'phtml';
+        }
+        else
+        {
+            $views = new View\Collection();
+            $children = $views->getViews();
+            $zip = new ZipArchive;
+            $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
+            $res = $zip->open($tmp_filename, ZipArchive::CREATE);
+            if($res === TRUE)
+            {
+                foreach($children as $child)
+                {
+                    $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
+                }
+
+                $zip->close();
+                $content = file_get_contents($tmp_filename);
+                $filename = 'views.zip';
+                unlink($tmp_filename);
+            }
+        }
+
+        if(empty($content) or empty($filename))
+        {
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save views');
+            return $this->redirect()->toRoute('view');
         }
 
         $headers = new Headers();
@@ -192,13 +225,12 @@ class ViewController extends Action
             ->addHeaderLine('Expires', -1)
             ->addHeaderLine('Content-Type', 'application/octet-stream')
             ->addHeaderLine('Content-Transfer-Encoding', 'binary')
-            ->addHeaderLine('Content-Length', strlen($view->getContent()))
-            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $view->getIdentifier(). '.phtml');
+            ->addHeaderLine('Content-Length', strlen($content))
+            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $filename);
 
         $response = $this->getResponse();
         $response->setHeaders($headers);
-
-        $response->setContent($view->getContent());
+        $response->setContent($content);
 
         return $response;
     }

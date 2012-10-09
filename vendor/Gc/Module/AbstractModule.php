@@ -27,7 +27,8 @@
 
 namespace Gc\Module;
 
-use Zend\EventManager\Event;
+use Zend\EventManager\Event,
+    Gc\Registry;
 /**
  * Abstract module bootstrap
  */
@@ -56,7 +57,7 @@ abstract class AbstractModule
      */
     protected function getAdapter()
     {
-        return \Gc\Registry::get('Db');
+        return Registry::get('Db');
     }
 
     /**

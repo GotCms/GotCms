@@ -30,6 +30,7 @@ namespace Gc\User;
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select,
     Zend\Db\Sql\Insert,
+    Zend\Db\Sql\Predicate\Expression,
     Zend\Uri\Uri,
     Zend\Validator\Ip as ValidateIp;
 /**
@@ -134,7 +135,7 @@ class Visitor extends AbstractTable
                 'log_visitor_id'
             ))
             ->values(array(
-                new \Zend\Db\Sql\Predicate\Expression('NOW()'),
+                new Expression('NOW()'),
                 $url_id,
                 $visitor_id
             ));

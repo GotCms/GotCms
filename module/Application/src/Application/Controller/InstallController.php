@@ -27,6 +27,7 @@
 namespace Application\Controller;
 
 use Gc\Mvc\Controller\Action,
+    Gc\Version,
     Application\Form\Install,
     Zend\Db\Adapter\Adapter as DbAdapter;
 
@@ -148,7 +149,7 @@ class InstallController extends Action
         }
 
         $this->layout()->setVariables(array('currentRoute' => $this->getRouteMatch()->getMatchedRouteName()));
-        return array('phpData' => $php_data, 'phpDirective' => $php_directive, 'serverData' => $server_data, 'cmsVersion' => \Gc\Version::VERSION);
+        return array('phpData' => $php_data, 'phpDirective' => $php_directive, 'serverData' => $server_data, 'cmsVersion' => Version::VERSION);
     }
 
     /**

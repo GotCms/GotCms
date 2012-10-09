@@ -28,9 +28,13 @@
 namespace Gc\Datatype;
 
 use Gc\Db\AbstractTable,
+    Gc\Document\Model as DocumentModel,
     Gc\Media\Info,
     Gc\Property,
-    Zend\View\Model\ViewModel;
+    Gc\Registry,
+    ReflectionObject,
+    Zend\View\Model\ViewModel,
+    Zend\View\Resolver\TemplatePathStack;
 /**
  * Abstract Datatype is used to call
  * the prevalue editor and editor.
@@ -80,7 +84,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getInfos()
     {
-        $object = new \ReflectionObject($this);
+        $object = new ReflectionObject($this);
         $directory = dirname($object->getFileName());
         $filename = $directory . '/datatype.info';
         $info = new Info();
@@ -137,7 +141,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getUploadUrl($property_id)
     {
-        $router = \Gc\Registry::get('Application')->getMvcEvent()->getRouter();
+        $router = Registry::get('Application')->getMvcEvent()->getRouter();
 
         return $router->assemble(array('document_id' => $this->getDocumentId(), 'property_id' => $property_id), array('name' => 'mediaUpload'));
     }
@@ -152,7 +156,7 @@ abstract class AbstractDatatype extends AbstractTable
     {
         if($this->getHelperBroker() === NULL)
         {
-            $this->setHelperBroker(\Gc\Registry::get('Application')->getServiceManager()->get('viewhelpermanager'));
+            $this->setHelperBroker(Registry::get('Application')->getServiceManager()->get('viewhelpermanager'));
         }
 
         return $this->getHelperBroker()->get($name);
@@ -187,7 +191,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function render($name, array $data = array())
     {
-        $renderer = \Gc\Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+        $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
 
         $view_model = new ViewModel();
         $view_model->setTemplate($name);
@@ -203,11 +207,11 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function addPath($dir)
     {
-        $renderer = \Gc\Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+        $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
         $iterators = $renderer->resolver()->getIterator()->toArray();
         foreach($iterators as $iterator)
         {
-            if($iterator instanceof \Zend\View\Resolver\TemplatePathStack)
+            if($iterator instanceof TemplatePathStack)
             {
                 $iterator->addPath($dir);
             }
@@ -225,7 +229,7 @@ abstract class AbstractDatatype extends AbstractTable
     {
         if($this->getData('document') === NULL)
         {
-            $this->setData('document', \Gc\Document\Model::fromId($this->getDocumentId()));
+            $this->setData('document', DocumentModel::fromId($this->getDocumentId()));
         }
 
         return $this->getData('document');

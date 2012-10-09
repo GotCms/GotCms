@@ -27,6 +27,7 @@
 namespace Datatypes\Upload;
 
 use Gc\Datatype\AbstractDatatype\AbstractEditor,
+    Gc\Media\File,
     Zend\Form\Element;
 
 /**
@@ -51,7 +52,7 @@ class Editor extends AbstractEditor
             $_FILES = array();
             $_FILES[$this->getName()] = $file;
 
-            $file_class = new \Gc\Media\File();
+            $file_class = new File();
             $file_class->init($this->getDatatype()->getDocument(), $this->getProperty(), $this->getName());
             $file_class->upload();
             $files = $file_class->getFiles();

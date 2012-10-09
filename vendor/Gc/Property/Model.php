@@ -27,7 +27,8 @@
 
 namespace Gc\Property;
 
-use Gc\Db\AbstractTable;
+use Gc\Db\AbstractTable,
+    Zend\Db\TableGateway\TableGateway;
 /**
  * Property Model
  */
@@ -193,7 +194,7 @@ class Model extends AbstractTable
             try
             {
                 parent::delete(sprintf('id = %s', (int)$id));
-                $table = new \Zend\Db\TableGateway\TableGateway('property_value', $this->getAdapter());
+                $table = new TableGateway('property_value', $this->getAdapter());
                 $result = $table->delete(array('property_id' => (int)$id));
             }
             catch(Exception $e)

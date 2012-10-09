@@ -30,7 +30,8 @@ use Gc\Mvc\Controller\Action,
     Development\Form\Script as ScriptForm,
     Gc\Script,
     Zend\Http\Headers,
-    Zend\File\Transfer\Adapter\Http as FileTransfer;
+    Zend\File\Transfer\Adapter\Http as FileTransfer,
+    ZipArchive;
 
 class ScriptController extends Action
 {
@@ -166,7 +167,7 @@ class ScriptController extends Action
         $script->setContent(file_get_contents($_FILES['upload']['tmp_name']));
         $script->save();
 
-        $this->flashMessenger()->setNameSpace('success')->addMessage('View updated');
+        $this->flashMessenger()->setNameSpace('success')->addMessage('Script updated');
         return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
     }
 
@@ -178,11 +179,43 @@ class ScriptController extends Action
     public function downloadAction()
     {
         $script_id = $this->getRouteMatch()->getParam('id', NULL);
-        $script = Script\Model::fromId($script_id);
-        if(empty($script_id) or empty($script))
+        if(!empty($script_id))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('This script can not be download');
-            return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+            $script = Script\Model::fromId($script_id);
+            if(empty($script))
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('This script can not be download');
+                return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+            }
+
+            $content = $script->getContent();
+            $filename = $script->getIdentifier() . 'phtml';
+        }
+        else
+        {
+            $scripts = new Script\Collection();
+            $children = $scripts->getScripts();
+            $zip = new ZipArchive;
+            $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
+            $res = $zip->open($tmp_filename, ZipArchive::CREATE);
+            if($res === TRUE)
+            {
+                foreach($children as $child)
+                {
+                    $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
+                }
+
+                $zip->close();
+                $content = file_get_contents($tmp_filename);
+                $filename = 'scripts.zip';
+                unlink($tmp_filename);
+            }
+        }
+
+        if(empty($content) or empty($filename))
+        {
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save scripts');
+            return $this->redirect()->toRoute('script');
         }
 
         $headers = new Headers();
@@ -192,13 +225,12 @@ class ScriptController extends Action
             ->addHeaderLine('Expires', -1)
             ->addHeaderLine('Content-Type', 'application/octet-stream')
             ->addHeaderLine('Content-Transfer-Encoding', 'binary')
-            ->addHeaderLine('Content-Length', strlen($script->getContent()))
-            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $script->getIdentifier(). '.phtml');
+            ->addHeaderLine('Content-Length', strlen($content))
+            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $filename);
 
         $response = $this->getResponse();
         $response->setHeaders($headers);
-
-        $response->setContent($script->getContent());
+        $response->setContent($content);
 
         return $response;
     }

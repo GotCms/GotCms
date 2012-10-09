@@ -29,6 +29,7 @@ namespace Gc\Datatype\AbstractDatatype;
 
 use Gc\Core\Object,
     Gc\Datatype,
+    Gc\Registry,
     Zend\EventManager\StaticEventManager;
 /**
  * Abstract Editor class
@@ -189,7 +190,7 @@ abstract class AbstractEditor extends Object
      */
     public function getRequest()
     {
-        return \Gc\Registry::get('Application')->getRequest();
+        return Registry::get('Application')->getRequest();
     }
 
     /**

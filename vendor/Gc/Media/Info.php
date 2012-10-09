@@ -28,6 +28,7 @@
 namespace Gc\Media;
 
 use Gc\Core\Object,
+    Gc\Registry,
     Zend\Config\Reader\Ini;
 /**
  * Manage File, actually only works for Datatypes
@@ -99,8 +100,8 @@ class Info extends Object
             return FALSE;
         }
 
-        $translator = \Gc\Registry::get('Translator');
-        $escaper = \Gc\Registry::get('Application')->getServiceManager()->get('ViewManager')->getHelperManager()->get('escapehtml');
+        $translator = Registry::get('Translator');
+        $escaper = Registry::get('Application')->getServiceManager()->get('ViewManager')->getHelperManager()->get('escapehtml');
 
         $return = '<dl>';
         foreach($infos as $key => $info)

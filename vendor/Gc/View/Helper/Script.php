@@ -28,6 +28,7 @@
 namespace Gc\View\Helper;
 
 use Zend\View\Helper\AbstractHelper,
+    Gc\Registry,
     Gc\Script\Model as ScriptModel,
     Gc\View\Stream;
 /**
@@ -103,7 +104,7 @@ class Script extends AbstractHelper
      */
     public function getRequest()
     {
-        return \Gc\Registry::get('Application')->getRequest();
+        return Registry::get('Application')->getRequest();
     }
 
     /**
@@ -113,7 +114,7 @@ class Script extends AbstractHelper
      */
     public function getResponse()
     {
-        return \Gc\Registry::get('Application')->getResponse();
+        return Registry::get('Application')->getResponse();
     }
 
     /**
@@ -125,7 +126,7 @@ class Script extends AbstractHelper
      */
     public function plugin($name, array $options = NULL)
     {
-        return \Gc\Registry::get('Application')->getServiceManager()->get('controllerpluginbroker')->get($name, $options);
+        return Registry::get('Application')->getServiceManager()->get('controllerpluginbroker')->get($name, $options);
     }
 
     /**

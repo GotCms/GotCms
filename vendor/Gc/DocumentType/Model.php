@@ -31,7 +31,8 @@ use Gc\Db\AbstractTable,
     Gc\User,
     Gc\Tab,
     Gc\View,
-    Zend\Db\Sql;
+    Zend\Db\Sql,
+    Zend\Db\TableGateway\TableGateway;
 /**
  * Model for Document Type
  */
@@ -242,7 +243,7 @@ class Model extends AbstractTable
             $tab_collection = new Tab\Collection();
             $tab_collection->load($document_type_id);
             $tab_collection->delete();
-            $table = new \Zend\Db\TableGateway\TableGateway('document_type_view', $this->getAdapter());
+            $table = new TableGateway('document_type_view', $this->getAdapter());
             $result = $table->delete(array('document_type_id' => (int)$document_type_id));
             parent::delete('id = '.$document_type_id);
 

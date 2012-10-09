@@ -27,7 +27,8 @@
 namespace Admin\Controller;
 
 use Gc\Mvc\Controller\Action,
-    Gc\Core\Config;
+    Gc\Core\Config,
+    Gc\Version;
 
 class IndexController extends Action
 {
@@ -38,9 +39,9 @@ class IndexController extends Action
     public function indexAction()
     {
         $data = array();
-        $data['version'] = \Gc\Version::VERSION;
-        $data['versionIsLatest'] = \Gc\Version::isLatest();
-        $data['versionLatest'] = \Gc\Version::getLatest();
+        $data['version'] = Version::VERSION;
+        $data['versionIsLatest'] = Version::isLatest();
+        $data['versionLatest'] = Version::getLatest();
 
         $content_stats = array();
         $documents = new \Gc\Document\Collection();

@@ -27,7 +27,8 @@
 
 namespace Gc\Component;
 
-use Gc\Document;
+use Gc\Document,
+    Gc\Registry;
 
 /**
  * Create Xml for \Zend\Navigation
@@ -61,7 +62,7 @@ class Navigation
         $documents = new Document\Collection();
         $documents->load(0);
         $this->_documents = $documents->getDocuments();
-        $this->_requestUri = \Gc\Registry::get('Application')->getRequest()->getRequestUri();
+        $this->_requestUri = Registry::get('Application')->getRequest()->getRequestUri();
     }
 
     /**

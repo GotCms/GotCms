@@ -29,6 +29,7 @@ namespace Gc\Db;
 
 use Gc\Exception,
     Gc\Core\Object,
+    Gc\Registry,
     Zend\Db\ResultSet\ResultSet,
     Zend\Db\TableGateway;
 /**
@@ -171,7 +172,7 @@ abstract class AbstractTable extends Object
     public function getLastInsertId($table_name = NULL)
     {
         $table_name = empty($table_name) ? $this->_name : $table_name;
-        $configuration = \Gc\Registry::get('Configuration');
+        $configuration = Registry::get('Configuration');
         if($configuration['db']['driver'] == 'pdo_pgsql')
         {
             $row = $this->fetchRow(sprintf("SELECT currval('%s_id_seq') AS value", $table_name));
