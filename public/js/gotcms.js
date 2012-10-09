@@ -671,11 +671,7 @@ var Gc = (function($)
 
         initCodeMirror: function($content)
         {
-            $('#upload-link').on('click', function()
-            {
-                $('#form-content').toggle();
-                return false;
-            });
+            this.initUploadLink();
 
             var myCodeMirror = CodeMirror.fromTextArea(document.getElementById($content), {
                 lineNumbers: true,
@@ -685,6 +681,15 @@ var Gc = (function($)
                 indentWithTabs: true,
                 enterMode: 'keep',
                 tabMode: 'spaces'
+            });
+        },
+
+        initUploadLink: function()
+        {
+            $('#upload-link').on('click', function()
+            {
+                $('#form-content').toggle();
+                return false;
             });
         },
 

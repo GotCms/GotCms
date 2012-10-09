@@ -85,6 +85,26 @@ class Model extends AbstractTable
     }
 
     /**
+     * Initiliaze from identifier
+     * @param string $identifier
+     * @return \Gc\Layout\Model
+     */
+    static function fromIdentifier($identifier)
+    {
+        $layout_table = new Model();
+        $row = $layout_table->select(array('identifier' => $identifier));
+        $current = $row->current();
+        if(!empty($current))
+        {
+            return $layout_table->setData((array)$current);
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
      * Save layout
      * @return integer
      */

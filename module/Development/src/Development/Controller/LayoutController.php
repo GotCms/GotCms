@@ -157,18 +157,50 @@ class LayoutController extends Action
     public function uploadAction()
     {
         $layout_id = $this->getRouteMatch()->getParam('id', NULL);
-        $layout = Layout\Model::fromId($layout_id);
-        if(empty($layout_id) or empty($layout)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
+        if(!empty($layout_id))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload layout');
+            $layout = Layout\Model::fromId($layout_id);
+            if(empty($layout)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload layout');
+                return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+            }
+
+            $layout->setContent(file_get_contents($_FILES['upload']['tmp_name']));
+            $layout->save();
+
+            $this->flashMessenger()->setNameSpace('success')->addMessage('Layout updated');
             return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
         }
+        else
+        {
+            if(empty($_FILES['upload']))
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload layouts');
+                return $this->redirect()->toRoute('layoutList');
+            }
 
-        $layout->setContent(file_get_contents($_FILES['upload']['tmp_name']));
-        $layout->save();
+            foreach($_FILES['upload']['name'] as $idx => $name)
+            {
+                if($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK)
+                {
+                    continue;
+                }
 
-        $this->flashMessenger()->setNameSpace('success')->addMessage('View updated');
-        return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+                $identifier = preg_replace('~\.phtml$~', '', $name);
+                $layout = Layout\Model::fromIdentifier($identifier);
+                if(empty($layout))
+                {
+                    continue;
+                }
+
+                $layout->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
+                $layout->save();
+            }
+
+            $this->flashMessenger()->setNameSpace('success')->addMessage('Layouts updated');
+            return $this->redirect()->toRoute('layoutList');
+        }
     }
 
     /**
@@ -214,8 +246,8 @@ class LayoutController extends Action
 
         if(empty($content) or empty($filename))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save views');
-            return $this->redirect()->toRoute('view');
+            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save layouts');
+            return $this->redirect()->toRoute('layoutList');
         }
 
         $headers = new Headers();

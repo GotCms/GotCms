@@ -157,18 +157,50 @@ class ScriptController extends Action
     public function uploadAction()
     {
         $script_id = $this->getRouteMatch()->getParam('id', NULL);
-        $script = Script\Model::fromId($script_id);
-        if(empty($script_id) or empty($script)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
+        if(!empty($script_id))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload script');
+            $script = Script\Model::fromId($script_id);
+            if(empty($script)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload script');
+                return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+            }
+
+            $script->setContent(file_get_contents($_FILES['upload']['tmp_name']));
+            $script->save();
+
+            $this->flashMessenger()->setNameSpace('success')->addMessage('Script updated');
             return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
         }
+        else
+        {
+            if(empty($_FILES['upload']))
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload scripts');
+                return $this->redirect()->toRoute('scriptList');
+            }
 
-        $script->setContent(file_get_contents($_FILES['upload']['tmp_name']));
-        $script->save();
+            foreach($_FILES['upload']['name'] as $idx => $name)
+            {
+                if($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK)
+                {
+                    continue;
+                }
 
-        $this->flashMessenger()->setNameSpace('success')->addMessage('Script updated');
-        return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+                $identifier = preg_replace('~\.phtml$~', '', $name);
+                $script = Script\Model::fromIdentifier($identifier);
+                if(empty($script))
+                {
+                    continue;
+                }
+
+                $script->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
+                $script->save();
+            }
+
+            $this->flashMessenger()->setNameSpace('success')->addMessage('Scripts updated');
+            return $this->redirect()->toRoute('scriptList');
+        }
     }
 
     /**
@@ -215,7 +247,7 @@ class ScriptController extends Action
         if(empty($content) or empty($filename))
         {
             $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save scripts');
-            return $this->redirect()->toRoute('script');
+            return $this->redirect()->toRoute('scriptList');
         }
 
         $headers = new Headers();

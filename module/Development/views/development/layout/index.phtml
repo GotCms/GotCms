@@ -26,6 +26,15 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+<a href="<?php echo $this->url('layoutDownload'); ?>"><?php echo $this->escapeHtml($this->translate('Download all files')); ?></a>
+<a href="#" id="upload-link"><?php echo $this->escapeHtml($this->translate('Upload file')); ?></a>
+
+<form class="hide" id="form-content" action="<?php echo $this->url('layoutUpload'); ?>" method="post" enctype="multipart/form-data">
+    <p><?php echo $this->escapeHtml($this->translate('Files as: identifier.phtml')); ?></p>
+    <input type="file" name="upload[]" multiple="multiple">
+    <input type="submit" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
+</form>
+
 <table class="table-list">
     <colgroup>
         <col width="40%">
@@ -63,4 +72,5 @@
 
 <script type="text/javascript">
     Gc.initTableList();
+    Gc.initUploadLink();
 </script>

@@ -157,18 +157,49 @@ class ViewController extends Action
     public function uploadAction()
     {
         $view_id = $this->getRouteMatch()->getParam('id', NULL);
-        $view = View\Model::fromId($view_id);
-        if(empty($view_id) or empty($view)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
+        if(!empty($view_id))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload view');
+            $view = View\Model::fromId($view_id);
+            if(empty($view)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload view');
+                return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+            }
+
+            $view->setContent(file_get_contents($_FILES['upload']['tmp_name']));
+            $view->save();
+            $this->flashMessenger()->setNameSpace('success')->addMessage('View updated');
             return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
         }
+        else
+        {
+            if(empty($_FILES['upload']))
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload views');
+                return $this->redirect()->toRoute('viewList');
+            }
 
-        $view->setContent(file_get_contents($_FILES['upload']['tmp_name']));
-        $view->save();
+            foreach($_FILES['upload']['name'] as $idx => $name)
+            {
+                if($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK)
+                {
+                    continue;
+                }
 
-        $this->flashMessenger()->setNameSpace('success')->addMessage('View updated');
-        return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+                $identifier = preg_replace('~\.phtml$~', '', $name);
+                $view = View\Model::fromIdentifier($identifier);
+                if(empty($view))
+                {
+                    continue;
+                }
+
+                $view->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
+                $view->save();
+            }
+
+            $this->flashMessenger()->setNameSpace('success')->addMessage('Views updated');
+            return $this->redirect()->toRoute('viewList');
+        }
     }
 
     /**
@@ -215,7 +246,7 @@ class ViewController extends Action
         if(empty($content) or empty($filename))
         {
             $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save views');
-            return $this->redirect()->toRoute('view');
+            return $this->redirect()->toRoute('viewList');
         }
 
         $headers = new Headers();

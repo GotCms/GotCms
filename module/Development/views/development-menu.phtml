@@ -28,6 +28,16 @@
 $permissions = $this->layout()->adminUser->getRole()->getUserPermissions();
 $development = empty($permissions['Development']) ? array() : $permissions['Development'];
 ?>
+
+<?php if(in_array('document-type', $development)): ?>
+    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Document types')); ?> ::..</h2>
+
+    <ul>
+        <li><a href="<?php echo $this->url('documentTypeCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <li><a href="<?php echo $this->url('documentTypeList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+    </ul>
+<?php endif; ?>
+
 <?php if(in_array('view', $development)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Views')); ?> ::..</h2>
 
@@ -46,29 +56,20 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     </ul>
 <?php endif; ?>
 
-<?php if(in_array('datatype', $development)): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Datatypes')); ?> ::..</h2>
-
-    <ul>
-        <li><a href="<?php echo $this->url('datatypeCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('datatypeList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-    </ul>
-<?php endif; ?>
-
-<?php if(in_array('document-type', $development)): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Document types')); ?> ::..</h2>
-
-    <ul>
-        <li><a href="<?php echo $this->url('documentTypeCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('documentTypeList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-    </ul>
-<?php endif; ?>
-
 <?php if(in_array('script', $development)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Scripts')); ?> ::..</h2>
 
     <ul>
         <li><a href="<?php echo $this->url('scriptCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
         <li><a href="<?php echo $this->url('scriptList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+    </ul>
+<?php endif; ?>
+
+<?php if(in_array('datatype', $development)): ?>
+    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Datatypes')); ?> ::..</h2>
+
+    <ul>
+        <li><a href="<?php echo $this->url('datatypeCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <li><a href="<?php echo $this->url('datatypeList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
     </ul>
 <?php endif; ?>
