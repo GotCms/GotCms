@@ -25,7 +25,6 @@
  */
 
 return array(
-    'display_exceptions'    => TRUE,
     'controllers' => array(
         'invokables' => array(
             'IndexController' => 'Application\Controller\IndexController',
@@ -41,8 +40,8 @@ return array(
         'locale' => 'en_US',
     ),
     'view_manager' => array(
-        'display_not_found_reason'  => true,
-        'display_exceptions'        => true,
+        'display_not_found_reason'  => FALSE,
+        'display_exceptions'        => FALSE,
         'doctype'                   => 'HTML5',
         'not_found_template'        => 'error/404',
         'exception_template'        => 'error/index',

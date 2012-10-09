@@ -169,7 +169,7 @@ class Config extends AbstractForm
 
         $this->getInputFilter()->add(array(
             'name' => 'debug_is_active',
-            'required' => TRUE,
+            'required' => FALSE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),

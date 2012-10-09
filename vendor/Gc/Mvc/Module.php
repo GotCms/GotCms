@@ -55,14 +55,14 @@ class Module
 
     /**
      * On boostrap event
-     * @param Event $e
+     * @param Event $event
      * @return void
      */
-    public function onBootstrap(Event $e)
+    public function onBootstrap(Event $event)
     {
         if(!Registry::isRegistered('Translator'))
         {
-            $translator = $e->getApplication()->getServiceManager()->get('translator');
+            $translator = $event->getApplication()->getServiceManager()->get('translator');
             $translator->addTranslationFilePattern('phparray', GC_APPLICATION_PATH . '/data/translate/', '%s.php', 'default');
 
             if(Registry::isRegistered('Db'))
@@ -113,6 +113,13 @@ class Module
             if(!empty($routes['routes']))
             {
                 $config['router']['routes'] += $routes['routes'];
+            }
+
+
+            if(isset($config['view_manager']['display_exceptions']) and GcConfig::getValue('debug_is_active'))
+            {
+                $config['view_manager']['display_not_found_reason'] = TRUE;
+                $config['view_manager']['display_exceptions'] = TRUE;
             }
 
             $this->_config = $config;
