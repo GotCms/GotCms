@@ -42,7 +42,7 @@ final class Version
      *
      * @var string
      */
-    protected static $latestVersion;
+    protected static $_latestVersion;
 
     /**
      * Compare the specified GotCms version string $version
@@ -65,9 +65,9 @@ final class Version
      */
     public static function getLatest()
     {
-        if(NULL === self::$latestVersion)
+        if(NULL === self::$_latestVersion)
         {
-            self::$latestVersion = 'not available';
+            self::$_latestVersion = 'not available';
             $url = 'https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/';
             $content = @file_get_contents($url);
 
@@ -82,14 +82,14 @@ final class Version
                 }, $api_response);
 
                 // Fetch the latest version number from the array
-                self::$latestVersion = array_reduce($tags, function($a, $b)
+                self::$_latestVersion = array_reduce($tags, function($a, $b)
                 {
                     return version_compare($a, $b, '>') ? $a : $b;
                 });
             }
         }
 
-        return self::$latestVersion;
+        return self::$_latestVersion;
     }
 
     /**
