@@ -253,7 +253,7 @@ CREATE TABLE `log_url_info` (
 CREATE TABLE `log_url` (
     `id` bigint(20) unsigned NOT NULL default '0',
     `visit_at` datetime NOT NULL default '0000-00-00 00:00:00'
-    `log_url_id` bigint(20) unsigned default NULL,
+    `log_url_info_id` bigint(20) unsigned default NULL,
     `log_visitor_id` bigint(20) unsigned default NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
@@ -300,5 +300,8 @@ ALTER TABLE `property_value` ADD CONSTRAINT `fk_property_value_document` FOREIGN
 
 ALTER TABLE `property_value` ADD CONSTRAINT `fk_property_value_property` FOREIGN KEY (`property_id`) REFERENCES `property`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
+ALTER TABLE `log_url` ADD CONSTRAINT `fk_log_url_log_visitor` FOREIGN KEY (`log_visitor_id`) REFERENCES `log_visitor`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE `log_url` ADD CONSTRAINT `fk_log_url_log_url_info` FOREIGN KEY (`log_url_info_id`) REFERENCES `log_url_info`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 -- End Relation's declaration
 

@@ -66,7 +66,6 @@ class IndexController extends Action
             //don't care
         }
 
-
         if(CoreConfig::getValue('site_is_offline') == 1)
         {
             //Site is offline

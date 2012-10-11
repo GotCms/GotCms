@@ -131,7 +131,7 @@ class Visitor extends AbstractTable
         $insert->into('log_url')
             ->columns(array(
                 'visit_at',
-                'log_url_id',
+                'log_url_info_id',
                 'log_visitor_id'
             ))
             ->values(array(
@@ -171,5 +171,25 @@ class Visitor extends AbstractTable
         }
 
         return $url_id;
+    }
+
+    public function getVisitStats($sort, $range = array())
+    {
+        return $this->select(function(Select $select)
+        {
+            $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id');
+            $select->order('lu.visit_at DESC');
+            $select->group(array('lu.id'));
+        });
+    }
+
+    public function getVisitorStats($sort, $range = array())
+    {
+        return $this->select(function(Select $select)
+        {
+            $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id');
+            $select->order('lu.visit_at DESC');
+            $select->group(array('log_visitor.id','lu.id'));
+        });
     }
 }

@@ -245,7 +245,7 @@ DROP TABLE IF EXISTS "log_url" CASCADE;
 CREATE TABLE "log_url" (
 "id" serial NOT NULL,
 "visit_at" timestamp without time zone,
-"log_url_id" integer,
+"log_url_info_id" integer,
 "log_visitor_id" integer
 ) WITH OIDS;
 ALTER TABLE "log_url" ADD CONSTRAINT "log_url_pk" PRIMARY KEY("id");
@@ -293,8 +293,8 @@ ALTER TABLE "property_value" ADD CONSTRAINT "fk_property_value_document" FOREIGN
 
 ALTER TABLE "property_value" ADD CONSTRAINT "fk_property_value_property" FOREIGN KEY ("property_id") REFERENCES "property"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "log_url" ADD CONSTRAINT "log_url_log_visitor" FOREIGN KEY ("log_visitor_id") REFERENCES "log_visitor"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "log_url" ADD CONSTRAINT "fk_log_url_log_visitor" FOREIGN KEY ("log_visitor_id") REFERENCES "log_visitor"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE "log_url" ADD CONSTRAINT "log_url_log_url_info" FOREIGN KEY ("log_url_id") REFERENCES "log_url_info"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "log_url" ADD CONSTRAINT "fk_log_url_log_url_info" FOREIGN KEY ("log_url_info_id") REFERENCES "log_url_info"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 -- End Relation's declaration
 
