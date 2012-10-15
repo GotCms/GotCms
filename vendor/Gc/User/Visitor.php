@@ -276,7 +276,6 @@ class Visitor extends AbstractTable
                 for($i = 1;$i <= 12; $i++)
                 {
                     $values[date( 'M', mktime(0, 0, 0, $i))] = 0;
-                    echo date( 'M', mktime(0, 0, 0, $i)).PHP_EOL;
                 }
 
                 foreach($rows as $row)
