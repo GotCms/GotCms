@@ -31,6 +31,7 @@ use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select,
     Zend\Db\Sql\Insert,
     Zend\Db\Sql\Predicate\Expression,
+    Zend\Db\TableGateway,
     Zend\Uri\Uri,
     Zend\Validator\Ip as ValidateIp;
 /**
@@ -173,23 +174,163 @@ class Visitor extends AbstractTable
         return $url_id;
     }
 
-    public function getVisitStats($sort, $range = array())
+    /**
+     * Return total visitors
+     * @return array
+     */
+    public function getTotalVisitors()
     {
-        return $this->select(function(Select $select)
+        return $this->fetchOne($this->select(function(Select $select)
         {
-            $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id');
-            $select->order('lu.visit_at DESC');
-            $select->group(array('lu.id'));
-        });
+            $select->columns(array('nb_visitors' => new Expression('COUNT(1)')));
+        }));
     }
 
-    public function getVisitorStats($sort, $range = array())
+    /**
+     * Return total visits
+     * @return array
+     */
+    public function getTotalPageViews()
     {
-        return $this->select(function(Select $select)
+        $visit_table = new TableGateway\TableGateway('log_url', TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter());
+        return $this->fetchOne($visit_table->select(function(Select $select)
         {
-            $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id');
-            $select->order('lu.visit_at DESC');
-            $select->group(array('log_visitor.id','lu.id'));
-        });
+            $select->columns(array('nb' => new Expression('COUNT(1)')));
+        }));
+    }
+
+    /**
+     * Return all visits
+     * @param string $sort
+     * @return array
+     */
+    public function getVisitStats($sort)
+    {
+        if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
+        {
+            $sort = 'DAY';
+        }
+
+        $rows = $this->fetchAll($this->select(function(Select $select) use ($sort)
+        {
+            $select->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)), 'nb' => new Expression('COUNT(lu.id)')));
+            $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
+            if($sort == 'HOUR')
+            {
+                $select->where("TO_CHAR(lu.visit_at, 'YYYYMMDD') = TO_CHAR(NOW(), 'YYYYMMDD')");
+            }
+            else
+            {
+                $select->where("lu.visit_at > DATE_TRUNC('month', NOW())");
+            }
+
+            $select->order('date ASC');
+            $select->group(array('date'));
+        }));
+
+        return $this->_sortData($sort, $rows);
+    }
+
+    /**
+     * Return all visitors
+     * @param string $sort
+     * @param array $rows
+     * @return array
+     */
+    protected function _sortData($sort, $rows)
+    {
+        $values = array();
+        if(empty($rows))
+        {
+            return $values;
+        }
+
+        switch($sort)
+        {
+            case 'HOUR':
+                for($i = 1;$i <= 24; $i++)
+                {
+                    $values[$i . 'h'] = 0;
+                }
+
+                foreach($rows as $row)
+                {
+                    $values[$row['date'] . 'h'] = $row['nb'];
+                }
+            break;
+
+            case 'DAY':
+                $day_in_month = date('t');
+                for($i = 1;$i < $day_in_month; $i++)
+                {
+                    $values[$i . 'd'] = 0;
+                }
+
+                foreach($rows as $row)
+                {
+                    $values[$row['date'] . 'd'] = $row['nb'];
+                }
+            break;
+
+            case 'MONTH':
+                for($i = 1;$i <= 12; $i++)
+                {
+                    $values[date( 'M', mktime(0, 0, 0, $i))] = 0;
+                    echo date( 'M', mktime(0, 0, 0, $i)).PHP_EOL;
+                }
+
+                foreach($rows as $row)
+                {
+                    $values[date( 'M', mktime(0, 0, 0, $row['date']))] = $row['nb'];
+                }
+            break;
+
+            case 'YEAR':
+                foreach($rows as $row)
+                {
+                    $values[$row['date']] = $row['nb'];
+                }
+
+                $keys = array_keys($values);
+                for($i = min($keys);$i <= max($keys)+1; $i++)
+                {
+                    $values[$i] = empty($values[$i]) ? 0 : $values[$i];
+                }
+            break;
+        }
+
+        return $values;
+    }
+
+    /**
+     * Return all visitors
+     * @param string $sort
+     * @return array
+     */
+    public function getVisitorStats($sort)
+    {
+        if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
+        {
+            $sort = 'DAY';
+        }
+
+        $rows = $this->fetchAll($this->select(function(Select $select) use ($sort)
+        {
+            $select->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)), 'nb' => new Expression('COUNT(DISTINCT(log_visitor.id))')));
+            $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
+            if($sort == 'HOUR')
+            {
+                $select->where("TO_CHAR(lu.visit_at, 'YYYYMMDD') = TO_CHAR(NOW(), 'YYYYMMDD')");
+            }
+            else
+            {
+                $select->where("lu.visit_at > DATE_TRUNC('month', NOW())");
+            }
+
+            $select->order('date ASC');
+            $select->group(array('date'));
+        }));
+
+        return $this->_sortData($sort, $rows);
     }
 }
