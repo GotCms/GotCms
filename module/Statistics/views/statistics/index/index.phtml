@@ -28,35 +28,46 @@
 <h1><?php echo $this->escapeHtml($this->translate('Statistics')); ?></h1>
 
 <div class="floatL">
-    <h2><?php echo $this->escapeHtml($this->translate('Visits today')); ?></h2>
-    <?php $this->graph->Values($this->visistsHours); ?>
-    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-    <?php echo $this->graph->FetchJavascript(); ?>
+    <?php if(!empty($this->visistsHours)): ?>
+        <h2><?php echo $this->escapeHtml($this->translate('Visits today')); ?></h2>
+        <?php $this->graph->Values($this->visistsHours); ?>
+        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+        <?php echo $this->graph->FetchJavascript(); ?>
+    <?php endif; ?>
 
-    <h2><?php echo $this->escapeHtml($this->translate('Visits this month')); ?></h2>
-    <?php $this->graph->Values($this->visistsDays); ?>
-    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-    <?php echo $this->graph->FetchJavascript(); ?>
+    <?php if(!empty($this->visistsDays)): ?>
+        <h2><?php echo $this->escapeHtml($this->translate('Visits this month')); ?></h2>
+        <?php $this->graph->Values($this->visistsDays); ?>
+        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+        <?php echo $this->graph->FetchJavascript(); ?>
+    <?php endif; ?>
 
-    <h2><?php echo $this->escapeHtml($this->translate('Visits this year')); ?></h2>
-    <?php $this->graph->Values($this->visistsMonths); ?>
-    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-    <?php echo $this->graph->FetchJavascript(); ?>
+    <?php if(!empty($this->visistsMonths)): ?>
+        <h2><?php echo $this->escapeHtml($this->translate('Visits this year')); ?></h2>
+        <?php $this->graph->Values($this->visistsMonths); ?>
+        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+        <?php echo $this->graph->FetchJavascript(); ?>
+    <?php endif; ?>
 </div>
 <div class="floatR">
+    <?php if(!empty($this->visistorsHours)): ?>
+        <h2><?php echo $this->escapeHtml($this->translate('Visitors today')); ?></h2>
+        <?php $this->graph->Values($this->visistorsHours); ?>
+        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+        <?php echo $this->graph->FetchJavascript(); ?>
+    <?php endif; ?>
 
-    <h2><?php echo $this->escapeHtml($this->translate('Visitors today')); ?></h2>
-    <?php $this->graph->Values($this->visistorsHours); ?>
-    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-    <?php echo $this->graph->FetchJavascript(); ?>
+    <?php if(!empty($this->visistorsDays)): ?>
+        <h2><?php echo $this->escapeHtml($this->translate('Visitors this month')); ?></h2>
+        <?php $this->graph->Values($this->visistorsDays); ?>
+        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+        <?php echo $this->graph->FetchJavascript(); ?>
+    <?php endif; ?>
 
-    <h2><?php echo $this->escapeHtml($this->translate('Visitors this month')); ?></h2>
-    <?php $this->graph->Values($this->visistorsDays); ?>
-    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-    <?php echo $this->graph->FetchJavascript(); ?>
-
-    <h2><?php echo $this->escapeHtml($this->translate('Visitors this year')); ?></h2>
-    <?php $this->graph->Values($this->visistorsMonths); ?>
-    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-    <?php echo $this->graph->FetchJavascript(); ?>
+    <?php if(!empty($this->visistorsMonths)): ?>
+        <h2><?php echo $this->escapeHtml($this->translate('Visitors this year')); ?></h2>
+        <?php $this->graph->Values($this->visistorsMonths); ?>
+        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+        <?php echo $this->graph->FetchJavascript(); ?>
+    <?php endif; ?>
 </div>
