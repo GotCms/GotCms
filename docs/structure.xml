@@ -1843,7 +1843,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/User/Visitor.php" hash="ce48923453e1a4186f6c1460732180ea" package="Library\User">
+  <file path="Gc/User/Visitor.php" hash="4ddf00f99861ebb1e4b436835884d73b" package="Library\User">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -1871,69 +1871,157 @@ PHP Version >=5.3]]></long-description>
     <namespace-alias name="Select">Zend\Db\Sql\Select</namespace-alias>
     <namespace-alias name="Insert">Zend\Db\Sql\Insert</namespace-alias>
     <namespace-alias name="Expression">Zend\Db\Sql\Predicate\Expression</namespace-alias>
+    <namespace-alias name="TableGateway">Zend\Db\TableGateway</namespace-alias>
     <namespace-alias name="Uri">Zend\Uri\Uri</namespace-alias>
     <namespace-alias name="ValidateIp">Zend\Validator\Ip</namespace-alias>
-    <class final="false" abstract="false" namespace="Gc\User" line="39" package="Default">
+    <class final="false" abstract="false" namespace="Gc\User" line="40" package="Default">
       <name>Visitor</name>
       <full_name>\Gc\User\Visitor</full_name>
       <extends>\Gc\Db\AbstractTable</extends>
-      <docblock line="36">
+      <docblock line="37">
         <description><![CDATA[Model of visitor]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <property final="false" static="false" visibility="protected" line="45" package="Default">
+      <property final="false" static="false" visibility="protected" line="46" package="Default">
         <name>$_name</name>
         <default><![CDATA['log_visitor']]></default>
-        <docblock line="41">
+        <docblock line="42">
           <description><![CDATA[Table name]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="41" name="var" description="" type="string">
+          <tag line="42" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="52" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="53" package="">
         <name>getVisitorId</name>
         <type>function</type>
-        <docblock line="47">
+        <docblock line="48">
           <description><![CDATA[Get visitor id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="47" name="param" description="" type="string" variable="$session_id">
+          <tag line="48" name="param" description="" type="string" variable="$session_id">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="47" name="return" description="" type="integer">
+          <tag line="48" name="return" description="" type="integer">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
-        <argument line="52">
+        <argument line="53">
           <name>$session_id</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="153" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="154" package="">
         <name>getUrlId</name>
         <type>function</type>
-        <docblock line="147">
+        <docblock line="148">
           <description><![CDATA[Get url id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="147" name="param" description="" type="string" variable="$request_uri">
+          <tag line="148" name="param" description="" type="string" variable="$request_uri">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="147" name="param" description="" type="string" variable="$referer">
+          <tag line="148" name="param" description="" type="string" variable="$referer">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="147" name="return" description="" type="integer">
+          <tag line="148" name="return" description="" type="integer">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
-        <argument line="153">
+        <argument line="154">
           <name>$request_uri</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="153">
+        <argument line="154">
           <name>$referer</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="181" package="">
+        <name>getTotalVisitors</name>
+        <type>function</type>
+        <docblock line="177">
+          <description><![CDATA[Return total visitors]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="177" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="193" package="">
+        <name>getTotalPageViews</name>
+        <type>function</type>
+        <docblock line="189">
+          <description><![CDATA[Return total visits]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="189" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="207" package="">
+        <name>getVisitStats</name>
+        <type>function</type>
+        <docblock line="202">
+          <description><![CDATA[Return all visits]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="202" name="param" description="" type="string" variable="$sort">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="202" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="207">
+          <name>$sort</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\User" line="240" package="">
+        <name>_sortData</name>
+        <type>function</type>
+        <docblock line="234">
+          <description><![CDATA[Return all visitors]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="234" name="param" description="" type="string" variable="$sort">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="234" name="param" description="" type="array" variable="$rows">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="234" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="240">
+          <name>$sort</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="240">
+          <name>$rows</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="309" package="">
+        <name>getVisitorStats</name>
+        <type>function</type>
+        <docblock line="304">
+          <description><![CDATA[Return all visitors]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="304" name="param" description="" type="string" variable="$sort">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="304" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="309">
+          <name>$sort</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
@@ -6641,7 +6729,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Version.php" hash="ae3ff222d484f3ddbdfdd0600ca65053" package="Library">
+  <file path="Gc/Version.php" hash="a344e8804a3f84a0f18f5f0fdae14f7f" package="Library">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -6682,7 +6770,7 @@ PHP Version >=5.3]]></long-description>
         </docblock>
       </constant>
       <property final="false" static="true" visibility="protected" line="45" package="Default">
-        <name>$latestVersion</name>
+        <name>$_latestVersion</name>
         <default><![CDATA[]]></default>
         <docblock line="40">
           <description><![CDATA[The latest stable version GotCms available]]></description>
@@ -8056,7 +8144,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Mvc/Module.php" hash="26757c93d61f0214a03c9604cb7bb45c" package="Library\Mvc">
+  <file path="Gc/Mvc/Module.php" hash="6039646a5bf90cc019a94eadbd93db18" package="Library\Mvc">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8120,7 +8208,7 @@ PHP Version >=5.3]]></long-description>
         <docblock line="56">
           <description><![CDATA[On boostrap event]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="56" name="param" description="" type="\Zend\EventManager\Event" variable="$e">
+          <tag line="56" name="param" description="" type="\Zend\EventManager\Event" variable="$event">
             <type by_reference="false">\Zend\EventManager\Event</type>
           </tag>
           <tag line="56" name="return" description="" type="void">
@@ -8128,7 +8216,7 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
         <argument line="61">
-          <name>$e</name>
+          <name>$event</name>
           <default><![CDATA[]]></default>
           <type>Event</type>
         </argument>
@@ -8155,42 +8243,42 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\Mvc" line="128" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\Mvc" line="135" package="">
         <name>_getDir</name>
         <type>function</type>
-        <docblock line="124">
+        <docblock line="131">
           <description><![CDATA[Get module dir]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="124" name="return" description="" type="string">
+          <tag line="131" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\Mvc" line="137" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\Mvc" line="144" package="">
         <name>_getNamespace</name>
         <type>function</type>
-        <docblock line="133">
+        <docblock line="140">
           <description><![CDATA[get module namespace]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="133" name="return" description="" type="string">
+          <tag line="140" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Mvc" line="147" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Mvc" line="154" package="">
         <name>init</name>
         <type>function</type>
-        <docblock line="142">
+        <docblock line="149">
           <description><![CDATA[initiliaze database connexion for every modules]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="142" name="param" description="" type="\Zend\ModuleManager\ModuleManager" variable="$module_manager">
+          <tag line="149" name="param" description="" type="\Zend\ModuleManager\ModuleManager" variable="$module_manager">
             <type by_reference="false">\Zend\ModuleManager\ModuleManager</type>
           </tag>
-          <tag line="142" name="return" description="" type="void">
+          <tag line="149" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="147">
+        <argument line="154">
           <name>$module_manager</name>
           <default><![CDATA[]]></default>
           <type>ModuleManager</type>

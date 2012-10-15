@@ -74,8 +74,12 @@ self::$_tables</span><pre>__construct()</pre></a></li>
 <li class="method public inherited"><a href="#getData" title="getData :: Retrieves data from the object"><span class="description">Retrieves data from the object</span><pre>getData()</pre></a></li>
 <li class="method public inherited"><a href="#getLastInsertId" title="getLastInsertId :: Get last insert id"><span class="description">Get last insert id</span><pre>getLastInsertId()</pre></a></li>
 <li class="method public inherited"><a href="#getOrigData" title="getOrigData :: Get object loaded data(original data)"><span class="description">Get object loaded data(original data)</span><pre>getOrigData()</pre></a></li>
+<li class="method public "><a href="#getTotalPageViews" title="getTotalPageViews :: Return total visits"><span class="description">Return total visits</span><pre>getTotalPageViews()</pre></a></li>
+<li class="method public "><a href="#getTotalVisitors" title="getTotalVisitors :: Return total visitors"><span class="description">Return total visitors</span><pre>getTotalVisitors()</pre></a></li>
 <li class="method public "><a href="#getUrlId" title="getUrlId :: Get url id"><span class="description">Get url id</span><pre>getUrlId()</pre></a></li>
+<li class="method public "><a href="#getVisitStats" title="getVisitStats :: Return all visits"><span class="description">Return all visits</span><pre>getVisitStats()</pre></a></li>
 <li class="method public "><a href="#getVisitorId" title="getVisitorId :: Get visitor id"><span class="description">Get visitor id</span><pre>getVisitorId()</pre></a></li>
+<li class="method public "><a href="#getVisitorStats" title="getVisitorStats :: Return all visitors"><span class="description">Return all visitors</span><pre>getVisitorStats()</pre></a></li>
 <li class="method public inherited"><a href="#hasData" title="hasData :: If $key is empty, checks whether there's any data in the object
 Otherwise checks if the specified attribute is set."><span class="description">If $key is empty, checks whether there's any data in the object
 Otherwise checks if the specified attribute is set.</span><pre>hasData()</pre></a></li>
@@ -96,6 +100,7 @@ Otherwise checks if the specified attribute is set.</span><pre>hasData()</pre></
 <li class="method protected inherited"><a href="#__toXml" title="__toXml :: Convert object attributes to XML"><span class="description">Convert object attributes to XML</span><pre>__toXml()</pre></a></li>
 <li class="method protected inherited"><a href="#_camelize" title="_camelize :: String to camel case"><span class="description">String to camel case</span><pre>_camelize()</pre></a></li>
 <li class="method protected inherited"><a href="#_getData" title="_getData :: Get value from _data array without parse key"><span class="description">Get value from _data array without parse key</span><pre>_getData()</pre></a></li>
+<li class="method protected "><a href="#_sortData" title="_sortData :: Return all visitors"><span class="description">Return all visitors</span><pre>_sortData()</pre></a></li>
 <li class="method protected inherited"><a href="#_underscore" title="_underscore :: Converts field names for setters and geters"><span class="description">Converts field names for setters and geters</span><pre>_underscore()</pre></a></li>
 <li class="method protected inherited"><a href="#setId" title="setId :: Set Id"><span class="description">Set Id</span><pre>setId()</pre></a></li>
 <li class="nav-header">
@@ -417,6 +422,26 @@ and retrieve corresponding member.</p>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
+<a name="getTotalPageViews" id="getTotalPageViews"></a><div class="element clickable method public getTotalPageViews" data-toggle="collapse" data-target=".getTotalPageViews .collapse">
+<h2>Return total visits</h2>
+<pre>getTotalPageViews() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="getTotalVisitors" id="getTotalVisitors"></a><div class="element clickable method public getTotalVisitors" data-toggle="collapse" data-target=".getTotalVisitors .collapse">
+<h2>Return total visitors</h2>
+<pre>getTotalVisitors() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
 <a name="getUrlId" id="getUrlId"></a><div class="element clickable method public getUrlId" data-toggle="collapse" data-target=".getUrlId .collapse">
 <h2>Get url id</h2>
 <pre>getUrlId(string $request_uri, string $referer) : integer</pre>
@@ -436,6 +461,21 @@ and retrieve corresponding member.</p>
 <div class="subelement response"><code>integer</code></div>
 </div></div>
 </div>
+<a name="getVisitStats" id="getVisitStats"></a><div class="element clickable method public getVisitStats" data-toggle="collapse" data-target=".getVisitStats .collapse">
+<h2>Return all visits</h2>
+<pre>getVisitStats(string $sort) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sort</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
 <a name="getVisitorId" id="getVisitorId"></a><div class="element clickable method public getVisitorId" data-toggle="collapse" data-target=".getVisitorId .collapse">
 <h2>Get visitor id</h2>
 <pre>getVisitorId(string $session_id) : integer</pre>
@@ -449,6 +489,21 @@ and retrieve corresponding member.</p>
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code>integer</code></div>
+</div></div>
+</div>
+<a name="getVisitorStats" id="getVisitorStats"></a><div class="element clickable method public getVisitorStats" data-toggle="collapse" data-target=".getVisitorStats .collapse">
+<h2>Return all visitors</h2>
+<pre>getVisitorStats(string $sort) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sort</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a name="hasData" id="hasData"></a><div class="element clickable method public hasData" data-toggle="collapse" data-target=".hasData .collapse">
@@ -918,6 +973,25 @@ If $key is an array, it will overwrite all the data in the object.</p>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
+<a name="_sortData" id="_sortData"></a><div class="element clickable method protected _sortData" data-toggle="collapse" data-target="._sortData .collapse">
+<h2>Return all visitors</h2>
+<pre>_sortData(string $sort, array $rows) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sort</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$rows</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
 <a name="_underscore" id="_underscore"></a><div class="element clickable method protected _underscore" data-toggle="collapse" data-target="._underscore .collapse">
 <h2>Converts field names for setters and geters</h2>
 <pre>_underscore(string $name) : string</pre>
@@ -1032,7 +1106,7 @@ Uses cache to eliminate unneccessary preg_replace</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-10-09T19:47:37+02:00.<br></footer></div>
+            generated on 2012-10-15T20:48:44+02:00.<br></footer></div>
 </div>
 </body>
 </html>
