@@ -28,6 +28,7 @@ namespace Admin\Controller;
 
 use Gc\Mvc\Controller\Action,
     Gc\Core\Config,
+    Gc\User\Visitor,
     Gc\Version;
 
 class IndexController extends Action
@@ -58,6 +59,21 @@ class IndexController extends Action
         );
 
         $data['contentStats'] = $content_stats;
+
+        $visitor_model = new Visitor();
+        $data['userStats'] = array(
+            'total_visitors' => array(
+                'count' => $visitor_model->getTotalVisitors(),
+                'label' => 'Total visitors',
+                'route' => 'statistics',
+            ),
+            'total_visits' => array(
+                'count' => $visitor_model->getTotalPageViews(),
+                'label' => 'Total page views',
+                'route' => 'statistics',
+            ),
+        );
+
         $widgets = @unserialize(Config::getValue('dashboard_widgets'));
         $data['dashboardSortable'] = !empty($widgets['sortable']) ? \Zend\Json\Json::encode($widgets['sortable']) : '{}';
         $data['dashboardWelcome'] = !empty($widgets['welcome']);

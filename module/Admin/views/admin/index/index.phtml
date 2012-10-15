@@ -85,6 +85,24 @@
                 </table>
             </div>
 
+            <div class="table floatL">
+                <p class="sub"><?php echo $this->escapeHtml($this->translate('Stats')); ?></p>
+                <table>
+                    <tbody>
+                        <?php foreach($this->userStats as $stats): ?>
+                            <tr>
+                                <td class="first">
+                                    <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $stats['count']; ?></a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $this->escapeHtml($this->translate($stats['label'])); ?></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="version">
                 <span>
                     <?php echo $this->escapeHtml(sprintf($this->translate('You use GotCms %s'), $this->version)); ?>
