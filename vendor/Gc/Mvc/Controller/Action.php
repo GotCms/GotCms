@@ -233,6 +233,7 @@ class Action extends AbstractActionController
         $json_model = new JsonModel();
         $json_model->setVariables($data);
         $json_model->setTerminal(TRUE);
+
         return $json_model;
     }
 

@@ -29,6 +29,7 @@ namespace Gc\Db;
 
 use Gc\Exception,
     Gc\Core\Object,
+    Gc\Event\StaticEventManager,
     Gc\Registry,
     Zend\Db\ResultSet\ResultSet,
     Zend\Db\TableGateway;
@@ -180,5 +181,14 @@ abstract class AbstractTable extends Object
         }
 
         return $this->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue($table_name);
+    }
+
+    /**
+     * Retrieve event manager
+     * @return StaticEventManager
+     */
+    public function events()
+    {
+        return StaticEventManager::getInstance();
     }
 }
