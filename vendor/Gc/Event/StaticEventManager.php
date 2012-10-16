@@ -37,6 +37,7 @@ use Zend\EventManager\SharedEventManager,
 class StaticEventManager extends SharedEventManager
 {
     /**
+     * Retrieve StaticEventManager instance
      * @var StaticEventManager
      */
     protected static $_instance;
@@ -68,7 +69,7 @@ class StaticEventManager extends SharedEventManager
     /**
      * Set the singleton to a specific SharedEventManagerInterface instance
      *
-     * @param SharedEventManagerInterface $_instance
+     * @param SharedEventManagerInterface $instance
      * @return void
      */
     public static function setInstance(SharedEventManagerInterface $instance)

@@ -69,7 +69,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/View/Collection.php" hash="57d48f4e8247c5e3ed10cd3acdf6044d" package="Library\View">
+  <file path="Gc/View/Collection.php" hash="67bff655a6f5d8aa789be2df5dca93d2" package="Library\View">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -223,13 +223,13 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View" line="167" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View" line="172" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="163">
+        <docblock line="168">
           <description><![CDATA[delete properties]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="163" name="return" description="" type="boolean">
+          <tag line="168" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
@@ -305,7 +305,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/View/Model.php" hash="ed2c41626f23d9a845a59095d23839ec" package="Library\View">
+  <file path="Gc/View/Model.php" hash="733fcf1d698a246dfbbe45142be2b775" package="Library\View">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -436,13 +436,13 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View" line="150" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View" line="155" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="146">
+        <docblock line="151">
           <description><![CDATA[Delete view model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="146" name="return" description="" type="boolean">
+          <tag line="151" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
@@ -1724,7 +1724,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/User/Role/Model.php" hash="b9cd80f70f851a443ea597b88fd72d6d" package="Library\User\Role">
+  <file path="Gc/User/Role/Model.php" hash="7011683483d1b45c6d26fb60784fb30f" package="Library\User\Role">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -1781,62 +1781,62 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User\Role" line="100" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User\Role" line="105" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="96">
+        <docblock line="101">
           <description><![CDATA[Delete Role]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="96" name="return" description="" type="boolean">
+          <tag line="101" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\User\Role" line="118" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\User\Role" line="128" package="">
         <name>fromArray</name>
         <type>function</type>
-        <docblock line="113">
+        <docblock line="123">
           <description><![CDATA[Initiliaze from array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="113" name="param" description="" type="array" variable="$array">
+          <tag line="123" name="param" description="" type="array" variable="$array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="113" name="return" description="" type="\Gc\User\Model\Role">
+          <tag line="123" name="return" description="" type="\Gc\User\Model\Role">
             <type by_reference="false">\Gc\User\Model\Role</type>
           </tag>
         </docblock>
-        <argument line="118">
+        <argument line="128">
           <name>$array</name>
           <default><![CDATA[]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\User\Role" line="131" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\User\Role" line="141" package="">
         <name>fromId</name>
         <type>function</type>
-        <docblock line="126">
+        <docblock line="136">
           <description><![CDATA[Initiliaze from id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="126" name="param" description="" type="integer" variable="$id">
+          <tag line="136" name="param" description="" type="integer" variable="$id">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="126" name="return" description="" type="\Gc\User\Model\Role">
+          <tag line="136" name="return" description="" type="\Gc\User\Model\Role">
             <type by_reference="false">\Gc\User\Model\Role</type>
           </tag>
         </docblock>
-        <argument line="131">
+        <argument line="141">
           <name>$id</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User\Role" line="150" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User\Role" line="160" package="">
         <name>getUserPermissions</name>
         <type>function</type>
-        <docblock line="146">
+        <docblock line="156">
           <description><![CDATA[Get User permissions]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="146" name="return" description="" type="array">
+          <tag line="156" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
@@ -2304,7 +2304,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/User/Model.php" hash="084d506b83323a9711195f5cb0a078f7" package="Library\User">
+  <file path="Gc/User/Model.php" hash="ca54f56d47e3734fc0ce31a36d334a6c" package="Library\User">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -2434,88 +2434,88 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="169" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="174" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="165">
+        <docblock line="170">
           <description><![CDATA[Delete user]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="165" name="return" description="" type="boolean">
+          <tag line="170" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\User" line="187" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\User" line="197" package="">
         <name>fromArray</name>
         <type>function</type>
-        <docblock line="182">
+        <docblock line="192">
           <description><![CDATA[Initiliaze from array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="182" name="param" description="" type="array" variable="$array">
+          <tag line="192" name="param" description="" type="array" variable="$array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="182" name="return" description="" type="\Gc\User\Model">
+          <tag line="192" name="return" description="" type="\Gc\User\Model">
             <type by_reference="false">\Gc\User\Model</type>
           </tag>
         </docblock>
-        <argument line="187">
+        <argument line="197">
           <name>$array</name>
           <default><![CDATA[]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\User" line="200" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\User" line="210" package="">
         <name>fromId</name>
         <type>function</type>
-        <docblock line="195">
+        <docblock line="205">
           <description><![CDATA[Initiliaze from id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="195" name="param" description="" type="integer" variable="$id">
+          <tag line="205" name="param" description="" type="integer" variable="$id">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="195" name="return" description="" type="\Gc\User\Model">
+          <tag line="205" name="return" description="" type="\Gc\User\Model">
             <type by_reference="false">\Gc\User\Model</type>
           </tag>
         </docblock>
-        <argument line="200">
+        <argument line="210">
           <name>$id</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="220" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="230" package="">
         <name>getRole</name>
         <type>function</type>
-        <docblock line="215">
+        <docblock line="225">
           <description><![CDATA[Get User Role]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="215" name="param" description="" type="boolean" variable="$force_reload">
+          <tag line="225" name="param" description="" type="boolean" variable="$force_reload">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="215" name="return" description="" type="\Gc\User\Role\Model">
+          <tag line="225" name="return" description="" type="\Gc\User\Role\Model">
             <type by_reference="false">\Gc\User\Role\Model</type>
           </tag>
         </docblock>
-        <argument line="220">
+        <argument line="230">
           <name>$force_reload</name>
           <default><![CDATA[FALSE]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="237" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\User" line="247" package="">
         <name>sendForgotPasswordEmail</name>
         <type>function</type>
-        <docblock line="232">
+        <docblock line="242">
           <description><![CDATA[Send new password]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="232" name="param" description="" type="string" variable="$email">
+          <tag line="242" name="param" description="" type="string" variable="$email">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="232" name="return" description="" type="boolean">
+          <tag line="242" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="237">
+        <argument line="247">
           <name>$email</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -3209,7 +3209,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Module/Model.php" hash="a059bb004bd9861db38bb69e08f73ab8" package="Library\Module">
+  <file path="Gc/Module/Model.php" hash="5063e6b4cd057f09a3b895ba7c9f5b22" package="Library\Module">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -3324,13 +3324,13 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Module" line="132" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Module" line="137" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="128">
+        <docblock line="133">
           <description><![CDATA[Delete module]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="128" name="return" description="" type="boolean">
+          <tag line="133" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
@@ -3425,7 +3425,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Media/Icon/Model.php" hash="712c1929267abb6eea6e0b30f11ac4a3" package="Library\View">
+  <file path="Gc/Media/Icon/Model.php" hash="d694de68ddf1283ad43428ec62654699" package="Library\View">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -3518,13 +3518,13 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media\Icon" line="116" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Media\Icon" line="121" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="112">
+        <docblock line="117">
           <description><![CDATA[Delete icon]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="112" name="return" description="" type="boolean">
+          <tag line="117" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
@@ -3881,7 +3881,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/DocumentType/Model.php" hash="2df66d11afd33330ad65b5e940b56d73" package="Library\DocumentType">
+  <file path="Gc/DocumentType/Model.php" hash="b44ac0ad653a04839d54a3e414f53747" package="Library\DocumentType">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -4034,50 +4034,50 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="238" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="243" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="234">
+        <docblock line="239">
           <description><![CDATA[Delete document type model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="234" name="return" description="" type="boolean">
+          <tag line="239" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\DocumentType" line="261" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\DocumentType" line="271" package="">
         <name>fromArray</name>
         <type>function</type>
-        <docblock line="256">
+        <docblock line="266">
           <description><![CDATA[Get model from array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="256" name="param" description="" type="array" variable="$array">
+          <tag line="266" name="param" description="" type="array" variable="$array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="256" name="return" description="" type="\Gc\DocumentType\Model">
+          <tag line="266" name="return" description="" type="\Gc\DocumentType\Model">
             <type by_reference="false">\Gc\DocumentType\Model</type>
           </tag>
         </docblock>
-        <argument line="261">
+        <argument line="271">
           <name>$array</name>
           <default><![CDATA[]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\DocumentType" line="274" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\DocumentType" line="284" package="">
         <name>fromId</name>
         <type>function</type>
-        <docblock line="269">
+        <docblock line="279">
           <description><![CDATA[Get model from id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="269" name="param" description="" type="integer" variable="$document_type_id">
+          <tag line="279" name="param" description="" type="integer" variable="$document_type_id">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="269" name="return" description="" type="\Gc\DocumentType\Model">
+          <tag line="279" name="return" description="" type="\Gc\DocumentType\Model">
             <type by_reference="false">\Gc\DocumentType\Model</type>
           </tag>
         </docblock>
-        <argument line="274">
+        <argument line="284">
           <name>$document_type_id</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -4249,7 +4249,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Document/Model.php" hash="e2a53760af47808e77c46509def958df" package="Library\Document">
+  <file path="Gc/Document/Model.php" hash="b86a62cc5875c1aedd3c39e64de936bd" package="Library\Document">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -4465,89 +4465,89 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="240" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="245" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="236">
+        <docblock line="241">
           <description><![CDATA[Delete document]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="236" name="return" description="" type="boolean">
+          <tag line="241" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="269" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="278" package="">
         <name>getUrl</name>
         <type>function</type>
-        <docblock line="265">
+        <docblock line="274">
           <description><![CDATA[Get document url]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="265" name="return" description="" type="string">
+          <tag line="274" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="284" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="293" package="">
         <name>getName</name>
         <type>function</type>
-        <docblock line="281">
+        <docblock line="290">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="281" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="290" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="292" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="301" package="">
         <name>getId</name>
         <type>function</type>
-        <docblock line="289">
+        <docblock line="298">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="289" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="298" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="300" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="309" package="">
         <name>getParent</name>
         <type>function</type>
-        <docblock line="297">
+        <docblock line="306">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="297" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="306" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="310" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="319" package="">
         <name>getChildren</name>
         <type>function</type>
-        <docblock line="307">
+        <docblock line="316">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="307" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="316" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="325" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="334" package="">
         <name>getIcon</name>
         <type>function</type>
-        <docblock line="322">
+        <docblock line="331">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="322" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="331" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="344" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="353" package="">
         <name>getIterableId</name>
         <type>function</type>
-        <docblock line="341">
+        <docblock line="350">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="341" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="350" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="352" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="361" package="">
         <name>getEditUrl</name>
         <type>function</type>
-        <docblock line="349">
+        <docblock line="358">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="349" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="358" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
     </class>
@@ -4764,6 +4764,193 @@ or FALSE if $index was not found in the registry.]]></description>
         <argument line="168">
           <name>$index</name>
           <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Gc/Event/StaticEventManager.php" hash="1eebd776d72238bb670fabc3d25db11b" package="Library\Event">
+    <docblock line="2">
+      <description><![CDATA[This source file is part of GotCms.]]></description>
+      <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+GotCms is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along
+with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+
+PHP Version >=5.3]]></long-description>
+      <tag line="2" name="category" description="Gc"/>
+      <tag line="2" name="package" description="Library"/>
+      <tag line="2" name="subpackage" description="Event"/>
+      <tag line="2" name="author" description="Pierre Rambaud (GoT) &lt;pierre.rambaud86@gmail.com&gt;"/>
+      <tag line="2" name="license" description="GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html"/>
+      <tag line="2" name="link" description="http://www.got-cms.com" link="http://www.got-cms.com"/>
+    </docblock>
+    <namespace-alias name="SharedEventManager">Zend\EventManager\SharedEventManager</namespace-alias>
+    <namespace-alias name="SharedEventManagerInterface">Zend\EventManager\SharedEventManagerInterface</namespace-alias>
+    <class final="false" abstract="false" namespace="Gc\Event" line="37" package="Default">
+      <name>StaticEventManager</name>
+      <full_name>\Gc\Event\StaticEventManager</full_name>
+      <extends>\Zend\EventManager\SharedEventManager</extends>
+      <docblock line="34">
+        <description><![CDATA[Static version of EventManager]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <property final="false" static="true" visibility="protected" line="43" package="Default">
+        <name>$_instance</name>
+        <default><![CDATA[]]></default>
+        <docblock line="39">
+          <description><![CDATA[Retrieve StaticEventManager instance]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="39" name="var" description="" type="\Gc\Event\StaticEventManager">
+            <type by_reference="false">\Gc\Event\StaticEventManager</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\Event" line="50" package="">
+        <name>__construct</name>
+        <type>function</type>
+        <docblock line="45">
+          <description><![CDATA[Singleton]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="45" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Event" line="59" package="">
+        <name>getInstance</name>
+        <type>function</type>
+        <docblock line="54">
+          <description><![CDATA[Retrieve instance]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="54" name="return" description="" type="\Gc\Event\StaticEventManager">
+            <type by_reference="false">\Gc\Event\StaticEventManager</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Event" line="75" package="">
+        <name>setInstance</name>
+        <type>function</type>
+        <docblock line="69">
+          <description><![CDATA[Set the singleton to a specific SharedEventManagerInterface instance]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="69" name="param" description="" type="\Zend\EventManager\SharedEventManagerInterface" variable="$instance">
+            <type by_reference="false">\Zend\EventManager\SharedEventManagerInterface</type>
+          </tag>
+          <tag line="69" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="75">
+          <name>$instance</name>
+          <default><![CDATA[]]></default>
+          <type>SharedEventManagerInterface</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Event" line="85" package="">
+        <name>hasInstance</name>
+        <type>function</type>
+        <docblock line="80">
+          <description><![CDATA[Is a singleton instance defined?]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="80" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Event" line="95" package="">
+        <name>resetInstance</name>
+        <type>function</type>
+        <docblock line="90">
+          <description><![CDATA[Reset the singleton instance]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="90" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Event" line="106" package="">
+        <name>getEvent</name>
+        <type>function</type>
+        <docblock line="100">
+          <description><![CDATA[Retrieve event]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="100" name="param" description="" type="string" variable="$id">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="100" name="return" description="" type="\Zend\EventManager\EventManager">
+            <type by_reference="false">\Zend\EventManager\EventManager</type>
+          </tag>
+        </docblock>
+        <argument line="106">
+          <name>$id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Event" line="129" package="">
+        <name>trigger</name>
+        <type>function</type>
+        <docblock line="116">
+          <description><![CDATA[Trigger all listeners for a given event]]></description>
+          <long-description><![CDATA[Can emulate triggerUntil() if the last argument provided is a callback.]]></long-description>
+          <tag line="116" name="param" description="Identifier(s) for event emitting component(s)" type="string|array" variable="$id">
+            <type by_reference="false">string</type>
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="116" name="param" description="" type="string" variable="$event">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="116" name="param" description="Object calling emit, or symbol describing target (such as static method name)" type="string|object" variable="$target">
+            <type by_reference="false">string</type>
+            <type by_reference="false">object</type>
+          </tag>
+          <tag line="116" name="param" description="Array of arguments; typically, should be associative" type="array|\Gc\Event\ArrayAccess" variable="$argv">
+            <type by_reference="false">array</type>
+            <type by_reference="false">\Gc\Event\ArrayAccess</type>
+          </tag>
+          <tag line="116" name="param" description="" type="null|\Gc\Event\callable" variable="$callback">
+            <type by_reference="false">null</type>
+            <type by_reference="false">\Gc\Event\callable</type>
+          </tag>
+          <tag line="116" name="return" description="All listener return values" type="\Gc\Event\ResponseCollection">
+            <type by_reference="false">\Gc\Event\ResponseCollection</type>
+          </tag>
+          <tag line="116" name="throws" description="" type="\Exception\InvalidCallbackException">
+            <type by_reference="false">\Exception\InvalidCallbackException</type>
+          </tag>
+        </docblock>
+        <argument line="129">
+          <name>$id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="129">
+          <name>$event</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="129">
+          <name>$target</name>
+          <default><![CDATA[NULL]]></default>
+          <type/>
+        </argument>
+        <argument line="129">
+          <name>$argv</name>
+          <default><![CDATA[array()]]></default>
+          <type/>
+        </argument>
+        <argument line="129">
+          <name>$callback</name>
+          <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
@@ -5710,7 +5897,7 @@ Use for display Prevalue Editor in Manage Development -> Datatypes]]></descripti
       </method>
     </class>
   </file>
-  <file path="Gc/Datatype/Model.php" hash="8373bf50891976bda70d97a820b18e53" package="Library\Datatype">
+  <file path="Gc/Datatype/Model.php" hash="b909b18d9c15ff4cd37e26719b6ca2c5" package="Library\Datatype">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -5828,115 +6015,115 @@ Simply class to edit one datatype]]></description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype" line="135" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Datatype" line="140" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="131">
+        <docblock line="136">
           <description><![CDATA[Delete datatype model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="131" name="return" description="" type="boolean">
+          <tag line="136" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="155" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="165" package="">
         <name>savePrevalueEditor</name>
         <type>function</type>
-        <docblock line="150">
+        <docblock line="160">
           <description><![CDATA[Save prevalue editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="150" name="param" description="" type="\Gc\Datatype\AbstractDatatype" variable="$datatype">
+          <tag line="160" name="param" description="" type="\Gc\Datatype\AbstractDatatype" variable="$datatype">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype</type>
           </tag>
-          <tag line="150" name="return" description="" type="\Gc\Datatype\Model">
+          <tag line="160" name="return" description="" type="\Gc\Datatype\Model">
             <type by_reference="false">\Gc\Datatype\Model</type>
           </tag>
         </docblock>
-        <argument line="155">
+        <argument line="165">
           <name>$datatype</name>
           <default><![CDATA[]]></default>
           <type>AbstractDatatype</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="166" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="176" package="">
         <name>saveEditor</name>
         <type>function</type>
-        <docblock line="161">
+        <docblock line="171">
           <description><![CDATA[Save editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="161" name="param" description="" type="\Gc\Property\Model" variable="$property">
+          <tag line="171" name="param" description="" type="\Gc\Property\Model" variable="$property">
             <type by_reference="false">\Gc\Property\Model</type>
           </tag>
-          <tag line="161" name="return" description="" type="\Gc\Datatype\mixte">
+          <tag line="171" name="return" description="" type="\Gc\Datatype\mixte">
             <type by_reference="false">\Gc\Datatype\mixte</type>
           </tag>
         </docblock>
-        <argument line="166">
+        <argument line="176">
           <name>$property</name>
           <default><![CDATA[]]></default>
           <type>PropertyModel</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="185" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="195" package="">
         <name>loadPrevalueEditor</name>
         <type>function</type>
-        <docblock line="180">
+        <docblock line="190">
           <description><![CDATA[Load prevalue editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="180" name="param" description="" type="\Gc\Datatype\AbstractDatatype" variable="$datatype">
+          <tag line="190" name="param" description="" type="\Gc\Datatype\AbstractDatatype" variable="$datatype">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype</type>
           </tag>
-          <tag line="180" name="return" description="" type="\Gc\Datatype\mxite">
+          <tag line="190" name="return" description="" type="\Gc\Datatype\mxite">
             <type by_reference="false">\Gc\Datatype\mxite</type>
           </tag>
         </docblock>
-        <argument line="185">
+        <argument line="195">
           <name>$datatype</name>
           <default><![CDATA[]]></default>
           <type>AbstractDatatype</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="197" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="207" package="">
         <name>loadEditor</name>
         <type>function</type>
-        <docblock line="192">
+        <docblock line="202">
           <description><![CDATA[Load editor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="192" name="param" description="" type="\Gc\Property\Model" variable="$property">
+          <tag line="202" name="param" description="" type="\Gc\Property\Model" variable="$property">
             <type by_reference="false">\Gc\Property\Model</type>
           </tag>
-          <tag line="192" name="return" description="" type="\Gc\Datatype\mixte">
+          <tag line="202" name="return" description="" type="\Gc\Datatype\mixte">
             <type by_reference="false">\Gc\Datatype\mixte</type>
           </tag>
         </docblock>
-        <argument line="197">
+        <argument line="207">
           <name>$property</name>
           <default><![CDATA[]]></default>
           <type>PropertyModel</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="210" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Datatype" line="220" package="">
         <name>loadDatatype</name>
         <type>function</type>
-        <docblock line="204">
+        <docblock line="214">
           <description><![CDATA[Load Datatype]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="204" name="param" description="" type="integer" variable="$datatype_id">
+          <tag line="214" name="param" description="" type="integer" variable="$datatype_id">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="204" name="param" description="integer $document_id" type="\Gc\Datatype\optional" variable="$document_id">
+          <tag line="214" name="param" description="integer $document_id" type="\Gc\Datatype\optional" variable="$document_id">
             <type by_reference="false">\Gc\Datatype\optional</type>
           </tag>
-          <tag line="204" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
+          <tag line="214" name="return" description="" type="\Gc\Datatype\AbstractDatatype">
             <type by_reference="false">\Gc\Datatype\AbstractDatatype</type>
           </tag>
         </docblock>
-        <argument line="210">
+        <argument line="220">
           <name>$datatype_id</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="210">
+        <argument line="220">
           <name>$document_id</name>
           <default><![CDATA[NULL]]></default>
           <type/>
@@ -6139,7 +6326,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Tab/Model.php" hash="4d975619cde56da1626cd68b8d49a625" package="Library\Tab">
+  <file path="Gc/Tab/Model.php" hash="b0a200653d7a11d56ff6112d7439d5a4" package="Library\Tab">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -6222,73 +6409,73 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="122" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="127" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="118">
+        <docblock line="123">
           <description><![CDATA[Delete tab]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="118" name="return" description="" type="boolean">
+          <tag line="123" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Tab" line="150" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Tab" line="160" package="">
         <name>fromArray</name>
         <type>function</type>
-        <docblock line="145">
+        <docblock line="155">
           <description><![CDATA[Initiliaze from array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="145" name="param" description="" type="array" variable="$array">
+          <tag line="155" name="param" description="" type="array" variable="$array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="145" name="return" description="" type="\Gc\Tab\Model">
+          <tag line="155" name="return" description="" type="\Gc\Tab\Model">
             <type by_reference="false">\Gc\Tab\Model</type>
           </tag>
         </docblock>
-        <argument line="150">
+        <argument line="160">
           <name>$array</name>
           <default><![CDATA[]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Tab" line="163" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Tab" line="173" package="">
         <name>fromId</name>
         <type>function</type>
-        <docblock line="158">
+        <docblock line="168">
           <description><![CDATA[Initialize from id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="158" name="param" description="" type="integer" variable="$id">
+          <tag line="168" name="param" description="" type="integer" variable="$id">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="158" name="return" description="" type="\Gc\Tab\Model">
+          <tag line="168" name="return" description="" type="\Gc\Tab\Model">
             <type by_reference="false">\Gc\Tab\Model</type>
           </tag>
         </docblock>
-        <argument line="163">
+        <argument line="173">
           <name>$id</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="182" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="192" package="">
         <name>getDocumentType</name>
         <type>function</type>
-        <docblock line="178">
+        <docblock line="188">
           <description><![CDATA[Get Document type]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="178" name="return" description="" type="\Gc\DocumentType\Model">
+          <tag line="188" name="return" description="" type="\Gc\DocumentType\Model">
             <type by_reference="false">\Gc\DocumentType\Model</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="196" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Tab" line="206" package="">
         <name>getProperties</name>
         <type>function</type>
-        <docblock line="192">
+        <docblock line="202">
           <description><![CDATA[Return properties]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="192" name="return" description="" type="\Gc\Property\Collection">
+          <tag line="202" name="return" description="" type="\Gc\Property\Collection">
             <type by_reference="false">\Gc\Property\Collection</type>
           </tag>
         </docblock>
@@ -6375,7 +6562,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Layout/Model.php" hash="6fcd936b5419286d4b67bbf13859e5f1" package="Library\Layout">
+  <file path="Gc/Layout/Model.php" hash="7322640d60459d0729175b11f5c02c78" package="Library\Layout">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -6506,13 +6693,13 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Layout" line="151" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Layout" line="156" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="147">
+        <docblock line="152">
           <description><![CDATA[Delete layout]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="147" name="return" description="" type="boolean">
+          <tag line="152" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
@@ -6585,7 +6772,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Script/Model.php" hash="795e1745f031c7805986facfd76d6ad5" package="Library\Script">
+  <file path="Gc/Script/Model.php" hash="f5ba498af706e8dcb349682dee48bdc0" package="Library\Script">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -6716,13 +6903,13 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Script" line="149" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Script" line="154" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="145">
+        <docblock line="150">
           <description><![CDATA[Delete script model]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="145" name="return" description="" type="boolean">
+          <tag line="150" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
@@ -7934,7 +8121,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Mvc/Controller/Action.php" hash="4ab5d599f007ec315fe9c369462a49fa" package="Library\Mvc\Controller">
+  <file path="Gc/Mvc/Controller/Action.php" hash="496fee6bf279f6b6bdfb9feb5e1946ac" package="Library\Mvc\Controller">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8123,20 +8310,20 @@ PHP Version >=5.3]]></long-description>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\Mvc\Controller" line="244" package="">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\Mvc\Controller" line="245" package="">
         <name>useFlashMessenger</name>
         <type>function</type>
-        <docblock line="239">
+        <docblock line="240">
           <description><![CDATA[Initiliaze flash messenger]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="239" name="param" description="" type="boolean" variable="$force_display">
+          <tag line="240" name="param" description="" type="boolean" variable="$force_display">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="239" name="return" description="" type="void">
+          <tag line="240" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="244">
+        <argument line="245">
           <name>$force_display</name>
           <default><![CDATA[TRUE]]></default>
           <type/>
@@ -8448,7 +8635,7 @@ add dynamic content, etc...]]></description>
       </method>
     </class>
   </file>
-  <file path="Gc/Db/AbstractTable.php" hash="a4ffe404ab653aa7ce6584c438ed9bbf" package="Library\Db">
+  <file path="Gc/Db/AbstractTable.php" hash="016ff6918b8b2309d11cb6588ad1ac52" package="Library\Db">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8474,165 +8661,177 @@ PHP Version >=5.3]]></long-description>
     </docblock>
     <namespace-alias name="Exception">Gc\Exception</namespace-alias>
     <namespace-alias name="Object">Gc\Core\Object</namespace-alias>
+    <namespace-alias name="StaticEventManager">Gc\Event\StaticEventManager</namespace-alias>
     <namespace-alias name="Registry">Gc\Registry</namespace-alias>
     <namespace-alias name="ResultSet">Zend\Db\ResultSet\ResultSet</namespace-alias>
     <namespace-alias name="TableGateway">Zend\Db\TableGateway</namespace-alias>
-    <class final="false" abstract="true" namespace="Gc\Db" line="40" package="Default">
+    <class final="false" abstract="true" namespace="Gc\Db" line="41" package="Default">
       <name>AbstractTable</name>
       <full_name>\Gc\Db\AbstractTable</full_name>
       <extends>\Gc\Core\Object</extends>
-      <docblock line="35">
+      <docblock line="36">
         <description><![CDATA[Extension of Zend\Db\TableGateway
 This is better to use fetchRow(), fetchAll(),
 execute() and add generic methods.]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <property final="false" static="true" visibility="public" line="47" package="Default">
+      <property final="false" static="true" visibility="public" line="48" package="Default">
         <name>$_tables</name>
         <default><![CDATA[array()]]></default>
-        <docblock line="42">
+        <docblock line="43">
           <description><![CDATA[Zend_Db_Table collection]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="42" name="var" description="of \Zend\Db\TableGateway\TableGateway" type="array">
+          <tag line="43" name="var" description="of \Zend\Db\TableGateway\TableGateway" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="54" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="55" package="">
         <name>__construct</name>
         <type>function</type>
-        <docblock line="49">
+        <docblock line="50">
           <description><![CDATA[Initialize constructor and save instance of \Zend\Db\TableGateway\TableGateway($_name) in
 self::$_tables]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="49" name="return" description="" type="void">
+          <tag line="50" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="71" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="72" package="">
         <name>__call</name>
         <type>function</type>
-        <docblock line="64">
+        <docblock line="65">
           <description><![CDATA[Set/Get attribute wrapper]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="64" name="param" description="" type="string" variable="$method">
+          <tag line="65" name="param" description="" type="string" variable="$method">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="64" name="param" description="" type="array" variable="$args">
+          <tag line="65" name="param" description="" type="array" variable="$args">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="64" name="return" description="" type="\Zend\Db\TableGateway\TableGateway">
+          <tag line="65" name="return" description="" type="\Zend\Db\TableGateway\TableGateway">
             <type by_reference="false">\Zend\Db\TableGateway\TableGateway</type>
           </tag>
         </docblock>
-        <argument line="71">
+        <argument line="72">
           <name>$method</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="71">
+        <argument line="72">
           <name>$args</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="91" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="92" package="">
         <name>fetchRow</name>
         <type>function</type>
-        <docblock line="86">
+        <docblock line="87">
           <description><![CDATA[Fetch Row]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="86" name="param" description="(\Zend\Db\Sql\Select|string)" type="mixed" variable="$query">
+          <tag line="87" name="param" description="(\Zend\Db\Sql\Select|string)" type="mixed" variable="$query">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="86" name="return" description="" type="array|\Zend\Db\ResultSet\RowObjectInterface">
+          <tag line="87" name="return" description="" type="array|\Zend\Db\ResultSet\RowObjectInterface">
             <type by_reference="false">array</type>
             <type by_reference="false">\Zend\Db\ResultSet\RowObjectInterface</type>
           </tag>
         </docblock>
-        <argument line="91">
+        <argument line="92">
           <name>$query</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="109" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="110" package="">
         <name>fetchAll</name>
         <type>function</type>
-        <docblock line="104">
+        <docblock line="105">
           <description><![CDATA[Fetch Row]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="104" name="param" description="(\Zend\Db\Sql\Select|string)" type="mixed" variable="$query">
+          <tag line="105" name="param" description="(\Zend\Db\Sql\Select|string)" type="mixed" variable="$query">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="104" name="return" description="" type="array">
+          <tag line="105" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="109">
+        <argument line="110">
           <name>$query</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="127" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="128" package="">
         <name>fetchOne</name>
         <type>function</type>
-        <docblock line="122">
+        <docblock line="123">
           <description><![CDATA[Fetch One]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="122" name="param" description="(\Zend\Db\Sql\Select|string)" type="mixed" variable="$query">
+          <tag line="123" name="param" description="(\Zend\Db\Sql\Select|string)" type="mixed" variable="$query">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="122" name="return" description="" type="\Gc\Db\mixte">
+          <tag line="123" name="return" description="" type="\Gc\Db\mixte">
             <type by_reference="false">\Gc\Db\mixte</type>
           </tag>
         </docblock>
-        <argument line="127">
+        <argument line="128">
           <name>$query</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="152" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="153" package="">
         <name>execute</name>
         <type>function</type>
-        <docblock line="147">
+        <docblock line="148">
           <description><![CDATA[Execute query]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="147" name="param" description="(\Zend\Db\Sql\*|string)" type="mixed" variable="$query">
+          <tag line="148" name="param" description="(\Zend\Db\Sql\*|string)" type="mixed" variable="$query">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="147" name="return" description="" type="array|\Zend\Db\ResultSet\ResultSet">
+          <tag line="148" name="return" description="" type="array|\Zend\Db\ResultSet\ResultSet">
             <type by_reference="false">array</type>
             <type by_reference="false">\Zend\Db\ResultSet\ResultSet</type>
           </tag>
         </docblock>
-        <argument line="152">
+        <argument line="153">
           <name>$query</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="172" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="173" package="">
         <name>getLastInsertId</name>
         <type>function</type>
-        <docblock line="167">
+        <docblock line="168">
           <description><![CDATA[Get last insert id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="167" name="param" description="optional table name" type="string" variable="$table_name">
+          <tag line="168" name="param" description="optional table name" type="string" variable="$table_name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="167" name="return" description="" type="integer">
+          <tag line="168" name="return" description="" type="integer">
             <type by_reference="false">integer</type>
           </tag>
         </docblock>
-        <argument line="172">
+        <argument line="173">
           <name>$table_name</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Db" line="190" package="">
+        <name>events</name>
+        <type>function</type>
+        <docblock line="186">
+          <description><![CDATA[Retrieve event manager]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="186" name="return" description="" type="\Gc\Event\StaticEventManager">
+            <type by_reference="false">\Gc\Event\StaticEventManager</type>
+          </tag>
+        </docblock>
       </method>
     </class>
   </file>
@@ -8797,7 +8996,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Property/Model.php" hash="e6688c0f9e1f2fbfb881c78c0dfe538f" package="Library\Property">
+  <file path="Gc/Property/Model.php" hash="afe808fd1fb678a1cc73a3e98eadfd64" package="Library\Property">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -8946,50 +9145,50 @@ PHP Version >=5.3]]></long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Property" line="189" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Property" line="194" package="">
         <name>delete</name>
         <type>function</type>
-        <docblock line="185">
+        <docblock line="190">
           <description><![CDATA[Delete property]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="185" name="return" description="" type="boolean">
+          <tag line="190" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Property" line="216" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Property" line="227" package="">
         <name>fromArray</name>
         <type>function</type>
-        <docblock line="211">
+        <docblock line="222">
           <description><![CDATA[Initiliaze model from array]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="211" name="param" description="" type="array" variable="$array">
+          <tag line="222" name="param" description="" type="array" variable="$array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="211" name="return" description="" type="\Gc\Property\Model">
+          <tag line="222" name="return" description="" type="\Gc\Property\Model">
             <type by_reference="false">\Gc\Property\Model</type>
           </tag>
         </docblock>
-        <argument line="216">
+        <argument line="227">
           <name>$array</name>
           <default><![CDATA[]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Property" line="229" package="">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Property" line="240" package="">
         <name>fromId</name>
         <type>function</type>
-        <docblock line="224">
+        <docblock line="235">
           <description><![CDATA[Initiliaze model from id]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="224" name="param" description="" type="integer" variable="$id">
+          <tag line="235" name="param" description="" type="integer" variable="$id">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="224" name="return" description="" type="\Gc\Property\Model">
+          <tag line="235" name="return" description="" type="\Gc\Property\Model">
             <type by_reference="false">\Gc\Property\Model</type>
           </tag>
         </docblock>
-        <argument line="229">
+        <argument line="240">
           <name>$id</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -8997,7 +9196,7 @@ PHP Version >=5.3]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/Property/Value/Model.php" hash="43f186b6062590e68174a079d039e312" package="Library\Property\Value">
+  <file path="Gc/Property/Value/Model.php" hash="5fc033b91017dd3352ff5f6c4a458b84" package="Library\Property\Value">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[GotCms is free software: you can redistribute it and/or modify
@@ -11414,6 +11613,7 @@ PHP Version >=5.3]]></long-description>
     <package name="Db" full_name="Library\Db"/>
     <package name="Document" full_name="Library\Document"/>
     <package name="DocumentType" full_name="Library\DocumentType"/>
+    <package name="Event" full_name="Library\Event"/>
     <package name="Form" full_name="Library\Form"/>
     <package name="Layout" full_name="Library\Layout"/>
     <package name="Media" full_name="Library\Media"/>
@@ -11462,6 +11662,7 @@ PHP Version >=5.3]]></long-description>
     <namespace name="Db" full_name="Gc\Db"/>
     <namespace name="Document" full_name="Gc\Document"/>
     <namespace name="DocumentType" full_name="Gc\DocumentType"/>
+    <namespace name="Event" full_name="Gc\Event"/>
     <namespace name="Form" full_name="Gc\Form"/>
     <namespace name="Layout" full_name="Gc\Layout"/>
     <namespace name="Media" full_name="Gc\Media">
