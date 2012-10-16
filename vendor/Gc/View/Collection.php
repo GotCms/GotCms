@@ -171,11 +171,16 @@ class Collection extends AbstractTable
      */
     public function delete()
     {
+        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
         if(!empty($this->_data['document_type_id']))
         {
             $this->getApdater()->delete('document_type_view', 'document_type_id = '.$this->getDocumentTypeId());
+            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+
             return TRUE;
         }
+
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
 
         return FALSE;
     }

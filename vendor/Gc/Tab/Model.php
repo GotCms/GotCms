@@ -126,6 +126,7 @@ class Model extends AbstractTable
      */
     public function delete()
     {
+        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
         $tab_id = $this->getId();
         if(!empty($tab_id))
         {
@@ -141,8 +142,12 @@ class Model extends AbstractTable
                 throw new \Gc\Exception($e->getMessage());
             }
 
+            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+
             return TRUE;
         }
+
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
 
         return FALSE;
     }

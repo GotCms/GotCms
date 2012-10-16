@@ -104,13 +104,18 @@ class Model extends AbstractTable
      */
     public function delete()
     {
+        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
         $id = $this->getId();
         if(!empty($id))
         {
             parent::delete('id = '.$id);
+            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
             unset($this);
+
             return TRUE;
         }
+
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
 
         return FALSE;
     }

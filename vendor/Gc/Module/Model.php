@@ -136,18 +136,25 @@ class Model extends AbstractTable
      */
     public function delete()
     {
+        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
         $module_id = $this->getId();
         if(!empty($module_id))
         {
             try
             {
                 parent::delete('id = '.$this->getId());
+                $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+                unset($this);
+
+                return TRUE;
             }
             catch (Exception $e)
             {
                 \Gc\Error::set(get_class($this), $e);
             }
         }
+
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
 
         return FALSE;
     }

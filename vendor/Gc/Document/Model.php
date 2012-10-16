@@ -244,6 +244,7 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function delete()
     {
+        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
         $document_id = $this->getId();
         if(!empty($document_id))
         {
@@ -253,6 +254,7 @@ class Model extends AbstractTable implements IterableInterface
                 {
                     $properties_table = new TableGateway('property_value', $this->getAdapter());
                     $properties_table->delete(array('document_id' => $this->getId()));
+                    $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
                     unset($this);
 
                     return TRUE;
@@ -263,6 +265,8 @@ class Model extends AbstractTable implements IterableInterface
                 \Gc\Error::set(get_class($this), $e);
             }
         }
+
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
 
         return FALSE;
     }

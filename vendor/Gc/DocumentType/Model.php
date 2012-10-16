@@ -242,6 +242,7 @@ class Model extends AbstractTable
      */
     public function delete()
     {
+        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
         $document_type_id = $this->getId();
         if(!empty($document_type_id))
         {
@@ -251,9 +252,13 @@ class Model extends AbstractTable
             $table = new TableGateway('document_type_view', $this->getAdapter());
             $result = $table->delete(array('document_type_id' => (int)$document_type_id));
             parent::delete('id = '.$document_type_id);
+            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            unset($this);
 
             return TRUE;
         }
+
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
 
         return FALSE;
     }
