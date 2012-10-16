@@ -96,6 +96,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
+        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
             'prevalue_value' => serialize($this->getPrevalueValue()),
@@ -115,6 +116,8 @@ class Model extends AbstractTable
                 $this->update($array_save, sprintf('id = %d', $this->getId()));
             }
 
+            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+
             return $this->getId();
         }
         catch (Exception $e)
@@ -124,6 +127,8 @@ class Model extends AbstractTable
              */
             \Gc\Error::set(get_class($this),$e);
         }
+
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
 
         return FALSE;
     }

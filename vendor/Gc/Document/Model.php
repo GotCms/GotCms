@@ -192,6 +192,7 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function save()
     {
+        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
             'url_key' => $this->getUrlKey(),
@@ -220,6 +221,8 @@ class Model extends AbstractTable implements IterableInterface
                 $this->update($array_save, 'id = '.$this->getId());
             }
 
+            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+
             return $this->getId();
         }
         catch (Exception $e)
@@ -229,6 +232,8 @@ class Model extends AbstractTable implements IterableInterface
              */
             \Gc\Error::set(get_class($this),$e);
         }
+
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
 
         return FALSE;
     }

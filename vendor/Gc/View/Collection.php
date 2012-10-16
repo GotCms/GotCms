@@ -146,6 +146,7 @@ class Collection extends AbstractTable
      */
     public function save()
     {
+        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
         if(!empty($this->_data['document_type_id']))
         {
             $this->delete();
@@ -154,8 +155,12 @@ class Collection extends AbstractTable
                 $this->getSqlInsert()->into('document_type_view')->values(array('document_type_id' => $this->getDocumentTypeId(), 'view_id' => $view->getId()));
             }
 
+            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+
             return TRUE;
         }
+
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
 
         return FALSE;
     }
