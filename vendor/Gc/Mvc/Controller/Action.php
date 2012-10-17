@@ -153,7 +153,7 @@ class Action extends AbstractActionController
             $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
             $headscript = $helper_broker->get('HeadScript');
             $headscript
-                ->appendFile('/js/libs/modernizr-2.5.3.min.js', 'text/javascript')
+                ->appendFile('/js/libs/modernizr-2.6.1.min.js', 'text/javascript')
                 ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
                 ->appendFile('/js/plugins.js', 'text/javascript')
                 ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
@@ -172,6 +172,7 @@ class Action extends AbstractActionController
 
             $headlink = $helper_broker->get('HeadLink');
             $headlink
+                ->appendStylesheet('/css/normalize.css')
                 ->appendStylesheet('/js/libs/codemirror/lib/codemirror.css')
                 ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
                 ->appendStylesheet('/css/jquery.treeview.css')
