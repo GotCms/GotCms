@@ -24,7 +24,7 @@ class Uri implements UriInterface
     /**
      * Character classes defined in RFC-3986
      */
-    const CHAR_UNRESERVED = '\w\-\.~';
+    const CHAR_UNRESERVED = 'a-zA-Z0-9_\-\.~';
     const CHAR_GEN_DELIMS = ':\/\?#\[\]@';
     const CHAR_SUB_DELIMS = '!\$&\'\(\)\*\+,;=';
     const CHAR_RESERVED   = ':\/\?#\[\]@!\$&\'\(\)\*\+,;=';
@@ -160,8 +160,8 @@ class Uri implements UriInterface
 
     /**
      * Set Escaper instance
-     * 
-     * @param  Escaper $escaper 
+     *
+     * @param  Escaper $escaper
      */
     public static function setEscaper(Escaper $escaper)
     {
@@ -172,7 +172,7 @@ class Uri implements UriInterface
      * Retrieve Escaper instance
      *
      * Lazy-loads one if none provided
-     * 
+     *
      * @return Escaper
      */
     public static function getEscaper()
