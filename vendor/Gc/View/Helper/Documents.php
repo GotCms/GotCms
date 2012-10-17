@@ -28,7 +28,8 @@
 namespace Gc\View\Helper;
 
 use Zend\View\Helper\AbstractHelper,
-    Gc\Document;
+    Gc\Document\Collection as DocumentCollection,
+    Gc\Document\Model as DocumentModel;
 /**
  * Returns documents from parent_id
  */
@@ -44,7 +45,7 @@ class Documents extends AbstractHelper
      */
     public function __invoke($data = NULL)
     {
-        $documents = new Document\Collection();
+        $documents = new DocumentCollection();
         if(empty($data))
         {
             $elements = $documents->load(0);
@@ -65,7 +66,7 @@ class Documents extends AbstractHelper
                         continue;
                     }
 
-                    $document = Document\Model::fromId($document_id);
+                    $document = DocumentModel::fromId($document_id);
                     if(!empty($document))
                     {
                         $elements[] = $document;
