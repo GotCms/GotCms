@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -22,7 +22,9 @@
 <li><a>Namespaces</a></li>
 <li><a href="../namespaces/Datatypes.html"><i class="icon-th"></i> Datatypes</a></li>
 <li><a href="../namespaces/Gc.html"><i class="icon-th"></i> Gc</a></li>
+<li><a href="../namespaces/Modules.html"><i class="icon-th"></i> Modules</a></li>
 <li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Library.html"><i class="icon-folder-open"></i> Library</a></li>
 </ul>
@@ -58,63 +60,74 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#getAutoloaderConfig" title="getAutoloaderConfig :: Get autoloader config"><span class="description">Get autoloader config</span><pre>getAutoloaderConfig()</pre></a></li>
-<li class="method public "><a href="#getConfig" title="getConfig :: Get module configuration"><span class="description">Get module configuration</span><pre>getConfig()</pre></a></li>
-<li class="method public "><a href="#init" title="init :: initiliaze database connexion for every modules"><span class="description">initiliaze database connexion for every modules</span><pre>init()</pre></a></li>
-<li class="method public "><a href="#onBootstrap" title="onBootstrap :: On boostrap event"><span class="description">On boostrap event</span><pre>onBootstrap()</pre></a></li>
-<li class="nav-header protected">» Protected</li>
-<li class="method protected "><a href="#_getDir" title="_getDir :: Get module dir"><span class="description">Get module dir</span><pre>_getDir()</pre></a></li>
-<li class="method protected "><a href="#_getNamespace" title="_getNamespace :: get module namespace"><span class="description">get module namespace</span><pre>_getNamespace()</pre></a></li>
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_getAutoloaderConfig" title="getAutoloaderConfig :: Get autoloader config"><span class="description">Get autoloader config</span><pre>getAutoloaderConfig()</pre></a></li>
+<li class="method public "><a href="#method_getConfig" title="getConfig :: Get module configuration"><span class="description">Get module configuration</span><pre>getConfig()</pre></a></li>
+<li class="method public "><a href="#method_init" title="init :: initiliaze database connexion for every modules"><span class="description">initiliaze database connexion for every modules</span><pre>init()</pre></a></li>
+<li class="method public "><a href="#method_onBootstrap" title="onBootstrap :: On boostrap event"><span class="description">On boostrap event</span><pre>onBootstrap()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method__getDir" title="_getDir :: Get module dir"><span class="description">Get module dir</span><pre>_getDir()</pre></a></li>
+<li class="method protected "><a href="#method__getNamespace" title="_getNamespace :: get module namespace"><span class="description">get module namespace</span><pre>_getNamespace()</pre></a></li>
+</ul>
+</li>
 <li class="nav-header">
-<i class="icon-custom icon-property"></i> Properties</li>
-<li class="nav-header protected">» Protected</li>
-<li class="property protected "><a href="#%24_config" title="$_config :: Module configuration"><span class="description">Module configuration</span><pre>$_config</pre></a></li>
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul><li class="property protected "><a href="#property__config" title="$_config :: Module configuration"><span class="description">Module configuration</span><pre>$_config</pre></a></li></ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CGc%5CMvc%5CModule" id="\Gc\Mvc\Module"></a><ul class="breadcrumb">
+<a id="\Gc\Mvc\Module"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/Gc.html">Gc</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.Mvc.html">Mvc</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Gc.Mvc.html">Mvc</a>
+</li>
 <li class="active">
 <span class="divider">\</span><a href="../classes/Gc.Mvc.Module.html">Module</a>
 </li>
 </ul>
-<div href="../classes/Gc.Mvc.Module.html" class="element class">
+<div class="element class">
 <p class="short_description">Generic Module</p>
 <div class="details">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="getAutoloaderConfig" id="getAutoloaderConfig"></a><div class="element clickable method public getAutoloaderConfig" data-toggle="collapse" data-target=".getAutoloaderConfig .collapse">
+<a id="method_getAutoloaderConfig"></a><div class="element clickable method public method_getAutoloaderConfig" data-toggle="collapse" data-target=".method_getAutoloaderConfig .collapse">
 <h2>Get autoloader config</h2>
 <pre>getAutoloaderConfig() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="getConfig" id="getConfig"></a><div class="element clickable method public getConfig" data-toggle="collapse" data-target=".getConfig .collapse">
+<a id="method_getConfig"></a><div class="element clickable method public method_getConfig" data-toggle="collapse" data-target=".method_getConfig .collapse">
 <h2>Get module configuration</h2>
 <pre>getConfig() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="init" id="init"></a><div class="element clickable method public init" data-toggle="collapse" data-target=".init .collapse">
+<a id="method_init"></a><div class="element clickable method public method_init" data-toggle="collapse" data-target=".method_init .collapse">
 <h2>initiliaze database connexion for every modules</h2>
-<pre>init(ModuleManager $module_manager) : void</pre>
+<pre>init(\Zend\ModuleManager\ModuleManager $module_manager) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$module_manager</h4>
@@ -122,12 +135,12 @@
 </div>
 </div></div>
 </div>
-<a name="onBootstrap" id="onBootstrap"></a><div class="element clickable method public onBootstrap" data-toggle="collapse" data-target=".onBootstrap .collapse">
+<a id="method_onBootstrap"></a><div class="element clickable method public method_onBootstrap" data-toggle="collapse" data-target=".method_onBootstrap .collapse">
 <h2>On boostrap event</h2>
-<pre>onBootstrap(Event $event) : void</pre>
+<pre>onBootstrap(\Zend\EventManager\Event $event) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$event</h4>
@@ -135,33 +148,33 @@
 </div>
 </div></div>
 </div>
-<a name="_getDir" id="_getDir"></a><div class="element clickable method protected _getDir" data-toggle="collapse" data-target="._getDir .collapse">
+<a id="method__getDir"></a><div class="element clickable method protected method__getDir" data-toggle="collapse" data-target=".method__getDir .collapse">
 <h2>Get module dir</h2>
 <pre>_getDir() : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
-<a name="_getNamespace" id="_getNamespace"></a><div class="element clickable method protected _getNamespace" data-toggle="collapse" data-target="._getNamespace .collapse">
+<a id="method__getNamespace"></a><div class="element clickable method protected method__getNamespace" data-toggle="collapse" data-target=".method__getNamespace .collapse">
 <h2>get module namespace</h2>
 <pre>_getNamespace() : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a name="%24_config" id="$_config"> </a><div class="element clickable property protected $_config" data-toggle="collapse" data-target=".$_config .collapse">
+<a id="property__config"> </a><div class="element clickable property protected property__config" data-toggle="collapse" data-target=".property__config .collapse">
 <h2>Module configuration</h2>
 <pre>$_config : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 </div>
 </div>
@@ -169,8 +182,8 @@
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-10-16T23:17:47+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-10-17T21:58:33+02:00.<br></footer></div>
 </div>
 </body>
 </html>

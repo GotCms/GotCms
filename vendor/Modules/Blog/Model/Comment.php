@@ -29,9 +29,15 @@ namespace Modules\Blog\Model;
 use Gc\Db\AbstractTable,
     Gc\Document\Model as DocumentModel,
     Zend\Db\Sql\Select;
-
+/**
+ * Blog comment table
+ */
 class Comment extends AbstractTable
 {
+    /**
+     * Table name
+     * @var string
+     */
     protected $_name ='blog_comment';
 
     /**

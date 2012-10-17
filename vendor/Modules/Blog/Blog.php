@@ -28,14 +28,25 @@ namespace Modules\Blog;
 
 use Gc\Module\AbstractModule,
     Zend\EventManager\Event;
-
+/**
+ * Blog module bootstrap
+ */
 class Blog extends AbstractModule
 {
+    /**
+     * Boostrap
+     * @param Event $e
+     * @return void
+     */
     public function onBootstrap(Event $e)
     {
 
     }
 
+    /**
+     * Install module
+     * @return boolean
+     */
     public function install()
     {
         $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();
@@ -44,6 +55,10 @@ class Blog extends AbstractModule
         return TRUE;
     }
 
+    /**
+     * Uninstall module
+     * @return boolean
+     */
     public function uninstall()
     {
         $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();

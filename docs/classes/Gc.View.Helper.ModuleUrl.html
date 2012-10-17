@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -22,7 +22,9 @@
 <li><a>Namespaces</a></li>
 <li><a href="../namespaces/Datatypes.html"><i class="icon-th"></i> Datatypes</a></li>
 <li><a href="../namespaces/Gc.html"><i class="icon-th"></i> Gc</a></li>
+<li><a href="../namespaces/Modules.html"><i class="icon-th"></i> Modules</a></li>
 <li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Library.html"><i class="icon-folder-open"></i> Library</a></li>
 </ul>
@@ -56,39 +58,42 @@
 <span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
 <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
 </div>
-<ul class="side-nav nav nav-list">
-<li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#__invoke" title="__invoke :: Generates an url given the name of a route."><span class="description">Generates an url given the name of a route.</span><pre>__invoke()</pre></a></li>
-</ul>
+<ul class="side-nav nav nav-list"><li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul><li class="method public "><a href="#method___invoke" title="__invoke :: Generates an url given the name of a route."><span class="description">Generates an url given the name of a route.</span><pre>__invoke()</pre></a></li></ul>
+</li></ul>
 </div>
 <div class="span8">
-<a name="%5CGc%5CView%5CHelper%5CModuleUrl" id="\Gc\View\Helper\ModuleUrl"></a><ul class="breadcrumb">
+<a id="\Gc\View\Helper\ModuleUrl"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/Gc.html">Gc</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.View.html">View</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.View.Helper.html">Helper</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Gc.View.html">View</a>
+</li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Gc.View.Helper.html">Helper</a>
+</li>
 <li class="active">
 <span class="divider">\</span><a href="../classes/Gc.View.Helper.ModuleUrl.html">ModuleUrl</a>
 </li>
 </ul>
-<div href="../classes/Gc.View.Helper.ModuleUrl.html" class="element class">
+<div class="element class">
 <p class="short_description">Helper for making easy links and getting urls that depend on the routes and router.</p>
 <div class="details">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="__invoke" id="__invoke"></a><div class="element clickable method public __invoke" data-toggle="collapse" data-target=".__invoke .collapse">
+<a id="method___invoke"></a><div class="element clickable method public method___invoke" data-toggle="collapse" data-target=".method___invoke .collapse">
 <h2>Generates an url given the name of a route.</h2>
 <pre>__invoke(string $action_name, array $controller_name, array $query_params, array $options, boolean $reuse_matched_params) : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>see</th>
-<td>\Zend\Mvc\Router\RouteInterface::assemble()</td>
+<td><a href="">\Zend\Mvc\Router\RouteInterface::assemble()</a></td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
@@ -109,21 +114,21 @@
 <h3>Exceptions</h3>
 <table class="table table-bordered">
 <tr>
-<th><code>\Exception\RuntimeException</code></th>
+<th><code>\Gc\View\Helper\Exception\RuntimeException</code></th>
 <td>If no RouteStackInterface was provided</td>
 </tr>
 <tr>
-<th><code>\Exception\RuntimeException</code></th>
+<th><code>\Gc\View\Helper\Exception\RuntimeException</code></th>
 <td>If no RouteMatch was provided</td>
 </tr>
 <tr>
-<th><code>\Exception\RuntimeException</code></th>
+<th><code>\Gc\View\Helper\Exception\RuntimeException</code></th>
 <td>If RouteMatch didn't contain a matched route name</td>
 </tr>
 </table>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>string</code>Url For the link href attribute</div>
+<code>string</code>Url                      For the link href attribute</div>
 </div></div>
 </div>
 </div>
@@ -132,8 +137,8 @@
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-10-16T23:17:46+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-10-17T21:58:32+02:00.<br></footer></div>
 </div>
 </body>
 </html>

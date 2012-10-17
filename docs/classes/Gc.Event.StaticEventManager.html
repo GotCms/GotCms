@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -22,7 +22,9 @@
 <li><a>Namespaces</a></li>
 <li><a href="../namespaces/Datatypes.html"><i class="icon-th"></i> Datatypes</a></li>
 <li><a href="../namespaces/Gc.html"><i class="icon-th"></i> Gc</a></li>
+<li><a href="../namespaces/Modules.html"><i class="icon-th"></i> Modules</a></li>
 <li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Library.html"><i class="icon-folder-open"></i> Library</a></li>
 </ul>
@@ -58,85 +60,94 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#getEvent" title="getEvent :: Retrieve event"><span class="description">Retrieve event</span><pre>getEvent()</pre></a></li>
-<li class="method public "><a href="#getInstance" title="getInstance :: Retrieve instance"><span class="description">Retrieve instance</span><pre>getInstance()</pre></a></li>
-<li class="method public "><a href="#hasInstance" title="hasInstance :: Is a singleton instance defined?"><span class="description">Is a singleton instance defined?</span><pre>hasInstance()</pre></a></li>
-<li class="method public "><a href="#resetInstance" title="resetInstance :: Reset the singleton instance"><span class="description">Reset the singleton instance</span><pre>resetInstance()</pre></a></li>
-<li class="method public "><a href="#setInstance" title="setInstance :: Set the singleton to a specific SharedEventManagerInterface instance"><span class="description">Set the singleton to a specific SharedEventManagerInterface instance</span><pre>setInstance()</pre></a></li>
-<li class="method public "><a href="#trigger" title="trigger :: Trigger all listeners for a given event"><span class="description">Trigger all listeners for a given event</span><pre>trigger()</pre></a></li>
-<li class="nav-header protected">» Protected</li>
-<li class="method protected "><a href="#__construct" title="__construct :: Singleton"><span class="description">Singleton</span><pre>__construct()</pre></a></li>
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_getEvent" title="getEvent :: Retrieve event"><span class="description">Retrieve event</span><pre>getEvent()</pre></a></li>
+<li class="method public "><a href="#method_getInstance" title="getInstance :: Retrieve instance"><span class="description">Retrieve instance</span><pre>getInstance()</pre></a></li>
+<li class="method public "><a href="#method_hasInstance" title="hasInstance :: Is a singleton instance defined?"><span class="description">Is a singleton instance defined?</span><pre>hasInstance()</pre></a></li>
+<li class="method public "><a href="#method_resetInstance" title="resetInstance :: Reset the singleton instance"><span class="description">Reset the singleton instance</span><pre>resetInstance()</pre></a></li>
+<li class="method public "><a href="#method_setInstance" title="setInstance :: Set the singleton to a specific SharedEventManagerInterface instance"><span class="description">Set the singleton to a specific SharedEventManagerInterface instance</span><pre>setInstance()</pre></a></li>
+<li class="method public "><a href="#method_trigger" title="trigger :: Trigger all listeners for a given event"><span class="description">Trigger all listeners for a given event</span><pre>trigger()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul><li class="method protected "><a href="#method___construct" title="__construct :: Singleton"><span class="description">Singleton</span><pre>__construct()</pre></a></li></ul>
+</li>
 <li class="nav-header">
-<i class="icon-custom icon-property"></i> Properties</li>
-<li class="nav-header protected">» Protected</li>
-<li class="property protected "><a href="#%24_instance" title="$_instance :: Retrieve StaticEventManager instance"><span class="description">Retrieve StaticEventManager instance</span><pre>$_instance</pre></a></li>
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul><li class="property protected "><a href="#property__instance" title="$_instance :: Retrieve StaticEventManager instance"><span class="description">Retrieve StaticEventManager instance</span><pre>$_instance</pre></a></li></ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CGc%5CEvent%5CStaticEventManager" id="\Gc\Event\StaticEventManager"></a><ul class="breadcrumb">
+<a id="\Gc\Event\StaticEventManager"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/Gc.html">Gc</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.Event.html">Event</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Gc.Event.html">Event</a>
+</li>
 <li class="active">
 <span class="divider">\</span><a href="../classes/Gc.Event.StaticEventManager.html">StaticEventManager</a>
 </li>
 </ul>
-<div href="../classes/Gc.Event.StaticEventManager.html" class="element class">
+<div class="element class">
 <p class="short_description">Static version of EventManager</p>
 <div class="details">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="getEvent" id="getEvent"></a><div class="element clickable method public getEvent" data-toggle="collapse" data-target=".getEvent .collapse">
+<a id="method_getEvent"></a><div class="element clickable method public method_getEvent" data-toggle="collapse" data-target=".method_getEvent .collapse">
 <h2>Retrieve event</h2>
-<pre>getEvent(string $id) : \Zend\EventManager\EventManager</pre>
+<pre>getEvent(string $id) : \Gc\Event\Zend\EventManager\EventManager</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$id</h4>
 <code>string</code>
 </div>
 <h3>Returns</h3>
-<div class="subelement response"><code>\Zend\EventManager\EventManager</code></div>
+<div class="subelement response"><code>\Gc\Event\Zend\EventManager\EventManager</code></div>
 </div></div>
 </div>
-<a name="getInstance" id="getInstance"></a><div class="element clickable method public getInstance" data-toggle="collapse" data-target=".getInstance .collapse">
+<a id="method_getInstance"></a><div class="element clickable method public method_getInstance" data-toggle="collapse" data-target=".method_getInstance .collapse">
 <h2>Retrieve instance</h2>
 <pre>getInstance() : <a href="../classes/Gc.Event.StaticEventManager.html">\Gc\Event\StaticEventManager</a></pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code><a href="../classes/Gc.Event.StaticEventManager.html">\Gc\Event\StaticEventManager</a></code></div>
 </div></div>
 </div>
-<a name="hasInstance" id="hasInstance"></a><div class="element clickable method public hasInstance" data-toggle="collapse" data-target=".hasInstance .collapse">
+<a id="method_hasInstance"></a><div class="element clickable method public method_hasInstance" data-toggle="collapse" data-target=".method_hasInstance .collapse">
 <h2>Is a singleton instance defined?</h2>
 <pre>hasInstance() : bool</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
-<a name="resetInstance" id="resetInstance"></a><div class="element clickable method public resetInstance" data-toggle="collapse" data-target=".resetInstance .collapse">
+<a id="method_resetInstance"></a><div class="element clickable method public method_resetInstance" data-toggle="collapse" data-target=".method_resetInstance .collapse">
 <h2>Reset the singleton instance</h2>
 <pre>resetInstance() : void</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="setInstance" id="setInstance"></a><div class="element clickable method public setInstance" data-toggle="collapse" data-target=".setInstance .collapse">
+<a id="method_setInstance"></a><div class="element clickable method public method_setInstance" data-toggle="collapse" data-target=".method_setInstance .collapse">
 <h2>Set the singleton to a specific SharedEventManagerInterface instance</h2>
-<pre>setInstance(SharedEventManagerInterface $instance) : void</pre>
-<div class="labels"></div>
+<pre>setInstance(\Zend\EventManager\SharedEventManagerInterface $instance) : void</pre>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$instance</h4>
@@ -144,16 +155,16 @@
 </div>
 </div></div>
 </div>
-<a name="trigger" id="trigger"></a><div class="element clickable method public trigger" data-toggle="collapse" data-target=".trigger .collapse">
+<a id="method_trigger"></a><div class="element clickable method public method_trigger" data-toggle="collapse" data-target=".method_trigger .collapse">
 <h2>Trigger all listeners for a given event</h2>
-<pre>trigger(string | array $id, string $event, string | object $target, array | \Gc\Event\ArrayAccess $argv, null | \Gc\Event\callable $callback) : \Gc\Event\ResponseCollection</pre>
+<pre>trigger(string | array $id, string $event, string | object $target, array | \Gc\Event\ArrayAccess $argv, null | callable $callback) : \Gc\Event\ResponseCollection</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description">Can emulate triggerUntil() if the last argument provided is a callback.</p>
+<div class="long_description"><p>Can emulate triggerUntil() if the last argument provided is a callback.</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$id</h4>
-<code>stringarray</code><p>Identifier(s) for event emitting component(s)</p>
+<code>string</code><code>array</code><p>Identifier(s) for event emitting component(s)</p>
 </div>
 <div class="subelement argument">
 <h4>$event</h4>
@@ -161,18 +172,18 @@
 </div>
 <div class="subelement argument">
 <h4>$target</h4>
-<code>stringobject</code><p>Object calling emit, or symbol describing target (such as static method name)</p>
+<code>string</code><code>object</code><p>Object calling emit, or symbol describing target (such as static method name)</p>
 </div>
 <div class="subelement argument">
 <h4>$argv</h4>
-<code>array\Gc\Event\ArrayAccess</code><p>Array of arguments; typically, should be associative</p></div>
+<code>array</code><code>\Gc\Event\ArrayAccess</code><p>Array of arguments; typically, should be associative</p></div>
 <div class="subelement argument">
 <h4>$callback</h4>
-<code>null\Gc\Event\callable</code>
+<code>null</code><code>callable</code>
 </div>
 <h3>Exceptions</h3>
 <table class="table table-bordered"><tr>
-<th><code>\Exception\InvalidCallbackException</code></th>
+<th><code>\Gc\Event\Exception\InvalidCallbackException</code></th>
 <td></td>
 </tr></table>
 <h3>Returns</h3>
@@ -180,19 +191,19 @@
 <code>\Gc\Event\ResponseCollection</code>All listener return values</div>
 </div></div>
 </div>
-<a name="__construct" id="__construct"></a><div class="element clickable method protected __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<a id="method___construct"></a><div class="element clickable method protected method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
 <h2>Singleton</h2>
 <pre>__construct() : void</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a name="%24_instance" id="$_instance"> </a><div class="element clickable property protected $_instance" data-toggle="collapse" data-target=".$_instance .collapse">
+<a id="property__instance"> </a><div class="element clickable property protected property__instance" data-toggle="collapse" data-target=".property__instance .collapse">
 <h2>Retrieve StaticEventManager instance</h2>
 <pre>$_instance : <a href="../classes/Gc.Event.StaticEventManager.html">\Gc\Event\StaticEventManager</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 </div>
 </div>
@@ -200,8 +211,8 @@
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-10-16T23:17:46+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-10-17T21:58:32+02:00.<br></footer></div>
 </div>
 </body>
 </html>

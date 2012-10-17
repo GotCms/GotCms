@@ -24,13 +24,15 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Module\Form;
+namespace Modules\Blog\Form;
 
 use Gc\Form\AbstractForm,
     Zend\Form\Element,
     Zend\InputFilter\Factory as InputFilterFactory;
-
-class Module extends AbstractForm
+/**
+ * Comment form
+ */
+class Comment extends AbstractForm
 {
     /**
      * Init Module form

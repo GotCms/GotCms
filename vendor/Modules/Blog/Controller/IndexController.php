@@ -29,9 +29,15 @@ namespace Modules\Blog\Controller;
 use Gc\Module\Controller\AbstractController,
     Gc\Document\Model as DocumentModel,
     Modules\Blog\Model;
-
+/**
+ * IndexController
+ */
 class IndexController extends AbstractController
 {
+    /**
+     * Index action, list all documents with comments
+     * @return array
+     */
     public function indexAction()
     {
         $model = new Model\Comment();
@@ -40,6 +46,10 @@ class IndexController extends AbstractController
         return array('document_list' => $document_list);
     }
 
+    /**
+     * List all comment by document id
+     * @return array
+     */
     public function documentCommentAction()
     {
         $document_id = $this->getRequest()->getQuery()->get('id');

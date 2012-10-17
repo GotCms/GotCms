@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -22,7 +22,9 @@
 <li><a>Namespaces</a></li>
 <li><a href="../namespaces/Datatypes.html"><i class="icon-th"></i> Datatypes</a></li>
 <li><a href="../namespaces/Gc.html"><i class="icon-th"></i> Gc</a></li>
+<li><a href="../namespaces/Modules.html"><i class="icon-th"></i> Modules</a></li>
 <li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Library.html"><i class="icon-folder-open"></i> Library</a></li>
 </ul>
@@ -58,48 +60,56 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#install" title="install :: Install module"><span class="description">Install module</span><pre>install()</pre></a></li>
-<li class="method public "><a href="#onBootstrap" title="onBootstrap :: Execute on bootstrap"><span class="description">Execute on bootstrap</span><pre>onBootstrap()</pre></a></li>
-<li class="method public "><a href="#uninstall" title="uninstall :: Uninstall module"><span class="description">Uninstall module</span><pre>uninstall()</pre></a></li>
-<li class="nav-header protected">» Protected</li>
-<li class="method protected "><a href="#getAdapter" title="getAdapter :: Return database adapter"><span class="description">Return database adapter</span><pre>getAdapter()</pre></a></li>
-<li class="method protected "><a href="#getDriverName" title="getDriverName :: Return driver name"><span class="description">Return driver name</span><pre>getDriverName()</pre></a></li>
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_install" title="install :: Install module"><span class="description">Install module</span><pre>install()</pre></a></li>
+<li class="method public "><a href="#method_onBootstrap" title="onBootstrap :: Execute on bootstrap"><span class="description">Execute on bootstrap</span><pre>onBootstrap()</pre></a></li>
+<li class="method public "><a href="#method_uninstall" title="uninstall :: Uninstall module"><span class="description">Uninstall module</span><pre>uninstall()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_getAdapter" title="getAdapter :: Return database adapter"><span class="description">Return database adapter</span><pre>getAdapter()</pre></a></li>
+<li class="method protected "><a href="#method_getDriverName" title="getDriverName :: Return driver name"><span class="description">Return driver name</span><pre>getDriverName()</pre></a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CGc%5CModule%5CAbstractModule" id="\Gc\Module\AbstractModule"></a><ul class="breadcrumb">
+<a id="\Gc\Module\AbstractModule"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/Gc.html">Gc</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.Module.html">Module</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Gc.Module.html">Module</a>
+</li>
 <li class="active">
 <span class="divider">\</span><a href="../classes/Gc.Module.AbstractModule.html">AbstractModule</a>
 </li>
 </ul>
-<div href="../classes/Gc.Module.AbstractModule.html" class="element class">
+<div class="element class">
 <p class="short_description">Abstract module bootstrap</p>
 <div class="details">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="install" id="install"></a><div class="element clickable method public install" data-toggle="collapse" data-target=".install .collapse">
+<a id="method_install"></a><div class="element clickable method public method_install" data-toggle="collapse" data-target=".method_install .collapse">
 <h2>Install module</h2>
 <pre>install() : boolean</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>boolean</code></div>
 </div></div>
 </div>
-<a name="onBootstrap" id="onBootstrap"></a><div class="element clickable method public onBootstrap" data-toggle="collapse" data-target=".onBootstrap .collapse">
+<a id="method_onBootstrap"></a><div class="element clickable method public method_onBootstrap" data-toggle="collapse" data-target=".method_onBootstrap .collapse">
 <h2>Execute on bootstrap</h2>
-<pre>onBootstrap(Event $e) </pre>
+<pre>onBootstrap(\Zend\EventManager\Event $e) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$e</h4>
@@ -107,32 +117,32 @@
 </div>
 </div></div>
 </div>
-<a name="uninstall" id="uninstall"></a><div class="element clickable method public uninstall" data-toggle="collapse" data-target=".uninstall .collapse">
+<a id="method_uninstall"></a><div class="element clickable method public method_uninstall" data-toggle="collapse" data-target=".method_uninstall .collapse">
 <h2>Uninstall module</h2>
 <pre>uninstall() : boolean</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>boolean</code></div>
 </div></div>
 </div>
-<a name="getAdapter" id="getAdapter"></a><div class="element clickable method protected getAdapter" data-toggle="collapse" data-target=".getAdapter .collapse">
+<a id="method_getAdapter"></a><div class="element clickable method protected method_getAdapter" data-toggle="collapse" data-target=".method_getAdapter .collapse">
 <h2>Return database adapter</h2>
-<pre>getAdapter() : \Zend\Db\Adapter\Adapter</pre>
+<pre>getAdapter() : \Gc\Module\Zend\Db\Adapter\Adapter</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
-<div class="subelement response"><code>\Zend\Db\Adapter\Adapter</code></div>
+<div class="subelement response"><code>\Gc\Module\Zend\Db\Adapter\Adapter</code></div>
 </div></div>
 </div>
-<a name="getDriverName" id="getDriverName"></a><div class="element clickable method protected getDriverName" data-toggle="collapse" data-target=".getDriverName .collapse">
+<a id="method_getDriverName"></a><div class="element clickable method protected method_getDriverName" data-toggle="collapse" data-target=".method_getDriverName .collapse">
 <h2>Return driver name</h2>
 <pre>getDriverName() : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
 </div></div>
@@ -143,8 +153,8 @@
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-10-16T23:17:46+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-10-17T21:58:32+02:00.<br></footer></div>
 </div>
 </body>
 </html>

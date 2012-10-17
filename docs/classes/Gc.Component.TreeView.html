@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -22,7 +22,9 @@
 <li><a>Namespaces</a></li>
 <li><a href="../namespaces/Datatypes.html"><i class="icon-th"></i> Datatypes</a></li>
 <li><a href="../namespaces/Gc.html"><i class="icon-th"></i> Gc</a></li>
+<li><a href="../namespaces/Modules.html"><i class="icon-th"></i> Modules</a></li>
 <li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Library.html"><i class="icon-folder-open"></i> Library</a></li>
 </ul>
@@ -58,39 +60,47 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#__construct" title="__construct :: Treeview constructor"><span class="description">Treeview constructor</span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#__toString" title="__toString :: Render treeview html"><span class="description">Render treeview html</span><pre>__toString()</pre></a></li>
-<li class="method public "><a href="#render" title="render :: Render treeview html"><span class="description">Render treeview html</span><pre>render()</pre></a></li>
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Treeview constructor"><span class="description">Treeview constructor</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method___toString" title="__toString :: Render treeview html"><span class="description">Render treeview html</span><pre>__toString()</pre></a></li>
+<li class="method public "><a href="#method_render" title="render :: Render treeview html"><span class="description">Render treeview html</span><pre>render()</pre></a></li>
+</ul>
+</li>
 <li class="nav-header">
-<i class="icon-custom icon-property"></i> Properties</li>
-<li class="nav-header protected">» Protected</li>
-<li class="property protected "><a href="#%24_data" title="$_data :: Data stored"><span class="description">Data stored</span><pre>$_data</pre></a></li>
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul><li class="property protected "><a href="#property__data" title="$_data :: Data stored"><span class="description">Data stored</span><pre>$_data</pre></a></li></ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CGc%5CComponent%5CTreeView" id="\Gc\Component\TreeView"></a><ul class="breadcrumb">
+<a id="\Gc\Component\TreeView"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/Gc.html">Gc</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.Component.html">Component</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Gc.Component.html">Component</a>
+</li>
 <li class="active">
 <span class="divider">\</span><a href="../classes/Gc.Component.TreeView.html">TreeView</a>
 </li>
 </ul>
-<div href="../classes/Gc.Component.TreeView.html" class="element class">
+<div class="element class">
 <p class="short_description">Create xml for jQuery treeview</p>
 <div class="details">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
 <h2>Treeview constructor</h2>
 <pre>__construct(array $treeview_data) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$treeview_data</h4>
@@ -98,22 +108,22 @@
 </div>
 </div></div>
 </div>
-<a name="__toString" id="__toString"></a><div class="element clickable method public __toString" data-toggle="collapse" data-target=".__toString .collapse">
+<a id="method___toString"></a><div class="element clickable method public method___toString" data-toggle="collapse" data-target=".method___toString .collapse">
 <h2>Render treeview html</h2>
 <pre>__toString() : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
-<a name="render" id="render"></a><div class="element clickable method public render" data-toggle="collapse" data-target=".render .collapse">
+<a id="method_render"></a><div class="element clickable method public method_render" data-toggle="collapse" data-target=".method_render .collapse">
 <h2>Render treeview html</h2>
 <pre>render(array $treeview_data, boolean $init) : string</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$treeview_data</h4>
@@ -128,11 +138,11 @@
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a name="%24_data" id="$_data"> </a><div class="element clickable property protected $_data" data-toggle="collapse" data-target=".$_data .collapse">
+<a id="property__data"> </a><div class="element clickable property protected property__data" data-toggle="collapse" data-target=".property__data .collapse">
 <h2>Data stored</h2>
 <pre>$_data : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 </div>
 </div>
@@ -140,8 +150,8 @@
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-10-16T23:17:46+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-10-17T21:58:32+02:00.<br></footer></div>
 </div>
 </body>
 </html>

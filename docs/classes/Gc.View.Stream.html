@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -22,7 +22,9 @@
 <li><a>Namespaces</a></li>
 <li><a href="../namespaces/Datatypes.html"><i class="icon-th"></i> Datatypes</a></li>
 <li><a href="../namespaces/Gc.html"><i class="icon-th"></i> Gc</a></li>
+<li><a href="../namespaces/Modules.html"><i class="icon-th"></i> Modules</a></li>
 <li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Library.html"><i class="icon-folder-open"></i> Library</a></li>
 </ul>
@@ -58,61 +60,71 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#stream_eof" title="stream_eof :: Tells if we are at the end of the stream."><span class="description">Tells if we are at the end of the stream.</span><pre>stream_eof()</pre></a></li>
-<li class="method public "><a href="#stream_open" title="stream_open :: Opens the script file and converts markup."><span class="description">Opens the script file and converts markup.</span><pre>stream_open()</pre></a></li>
-<li class="method public "><a href="#stream_read" title="stream_read :: Reads from the stream."><span class="description">Reads from the stream.</span><pre>stream_read()</pre></a></li>
-<li class="method public "><a href="#stream_seek" title="stream_seek :: Seek to a specific point in the stream."><span class="description">Seek to a specific point in the stream.</span><pre>stream_seek()</pre></a></li>
-<li class="method public "><a href="#stream_stat" title="stream_stat :: Stream statistics."><span class="description">Stream statistics.</span><pre>stream_stat()</pre></a></li>
-<li class="method public "><a href="#stream_tell" title="stream_tell :: Tells the current position in the stream."><span class="description">Tells the current position in the stream.</span><pre>stream_tell()</pre></a></li>
-<li class="method public "><a href="#stream_write" title="stream_write :: Write in the stream"><span class="description">Write in the stream</span><pre>stream_write()</pre></a></li>
-<li class="method public "><a href="#url_stat" title="url_stat :: Retrieve information about a file
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_stream_eof" title="stream_eof :: Tells if we are at the end of the stream."><span class="description">Tells if we are at the end of the stream.</span><pre>stream_eof()</pre></a></li>
+<li class="method public "><a href="#method_stream_open" title="stream_open :: Opens the script file and converts markup."><span class="description">Opens the script file and converts markup.</span><pre>stream_open()</pre></a></li>
+<li class="method public "><a href="#method_stream_read" title="stream_read :: Reads from the stream."><span class="description">Reads from the stream.</span><pre>stream_read()</pre></a></li>
+<li class="method public "><a href="#method_stream_seek" title="stream_seek :: Seek to a specific point in the stream."><span class="description">Seek to a specific point in the stream.</span><pre>stream_seek()</pre></a></li>
+<li class="method public "><a href="#method_stream_stat" title="stream_stat :: Stream statistics."><span class="description">Stream statistics.</span><pre>stream_stat()</pre></a></li>
+<li class="method public "><a href="#method_stream_tell" title="stream_tell :: Tells the current position in the stream."><span class="description">Tells the current position in the stream.</span><pre>stream_tell()</pre></a></li>
+<li class="method public "><a href="#method_stream_write" title="stream_write :: Write in the stream"><span class="description">Write in the stream</span><pre>stream_write()</pre></a></li>
+<li class="method public "><a href="#method_url_stat" title="url_stat :: Retrieve information about a file
 Always return false because data come from the database"><span class="description">Retrieve information about a file
 Always return false because data come from the database</span><pre>url_stat()</pre></a></li>
+</ul>
+</li>
 <li class="nav-header">
-<i class="icon-custom icon-property"></i> Properties</li>
-<li class="nav-header protected">» Protected</li>
-<li class="property protected "><a href="#%24_data" title="$_data :: Data for streaming."><span class="description">Data for streaming.</span><pre>$_data</pre></a></li>
-<li class="property protected "><a href="#%24_path" title="$_path :: Current stream path."><span class="description">Current stream path.</span><pre>$_path</pre></a></li>
-<li class="property protected "><a href="#%24_pos" title="$_pos :: Current stream position."><span class="description">Current stream position.</span><pre>$_pos</pre></a></li>
-<li class="property protected "><a href="#%24_stat" title="$_stat :: Stream stats."><span class="description">Stream stats.</span><pre>$_stat</pre></a></li>
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property__data" title="$_data :: Data for streaming."><span class="description">Data for streaming.</span><pre>$_data</pre></a></li>
+<li class="property protected "><a href="#property__path" title="$_path :: Current stream path."><span class="description">Current stream path.</span><pre>$_path</pre></a></li>
+<li class="property protected "><a href="#property__pos" title="$_pos :: Current stream position."><span class="description">Current stream position.</span><pre>$_pos</pre></a></li>
+<li class="property protected "><a href="#property__stat" title="$_stat :: Stream stats."><span class="description">Stream stats.</span><pre>$_stat</pre></a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CGc%5CView%5CStream" id="\Gc\View\Stream"></a><ul class="breadcrumb">
+<a id="\Gc\View\Stream"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/Gc.html">Gc</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.View.html">View</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Gc.View.html">View</a>
+</li>
 <li class="active">
 <span class="divider">\</span><a href="../classes/Gc.View.Stream.html">Stream</a>
 </li>
 </ul>
-<div href="../classes/Gc.View.Stream.html" class="element class">
+<div class="element class">
 <p class="short_description">Stream wrapper to convert markup of mostly-PHP templates into PHP prior to
 include().</p>
 <div class="details">
-<p class="long_description">Based in large part on the example at
-http://www.php.net/manual/en/function.stream-wrapper-register.php</p>
+<div class="long_description"><p>Based in large part on the example at
+http://www.php.net/manual/en/function.stream-wrapper-register.php</p></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="stream_eof" id="stream_eof"></a><div class="element clickable method public stream_eof" data-toggle="collapse" data-target=".stream_eof .collapse">
+<a id="method_stream_eof"></a><div class="element clickable method public method_stream_eof" data-toggle="collapse" data-target=".method_stream_eof .collapse">
 <h2>Tells if we are at the end of the stream.</h2>
 <pre>stream_eof() : boolean</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>boolean</code></div>
 </div></div>
 </div>
-<a name="stream_open" id="stream_open"></a><div class="element clickable method public stream_open" data-toggle="collapse" data-target=".stream_open .collapse">
+<a id="method_stream_open"></a><div class="element clickable method public method_stream_open" data-toggle="collapse" data-target=".method_stream_open .collapse">
 <h2>Opens the script file and converts markup.</h2>
 <pre>stream_open(string $path, string $mode, integer $options, string $opened_path) : boolean</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$path</h4>
@@ -133,12 +145,12 @@ http://www.php.net/manual/en/function.stream-wrapper-register.php</p>
 <div class="subelement response"><code>boolean</code></div>
 </div></div>
 </div>
-<a name="stream_read" id="stream_read"></a><div class="element clickable method public stream_read" data-toggle="collapse" data-target=".stream_read .collapse">
+<a id="method_stream_read"></a><div class="element clickable method public method_stream_read" data-toggle="collapse" data-target=".method_stream_read .collapse">
 <h2>Reads from the stream.</h2>
 <pre>stream_read(integer $count) : mixed</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$count</h4>
@@ -148,12 +160,12 @@ http://www.php.net/manual/en/function.stream-wrapper-register.php</p>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
-<a name="stream_seek" id="stream_seek"></a><div class="element clickable method public stream_seek" data-toggle="collapse" data-target=".stream_seek .collapse">
+<a id="method_stream_seek"></a><div class="element clickable method public method_stream_seek" data-toggle="collapse" data-target=".method_stream_seek .collapse">
 <h2>Seek to a specific point in the stream.</h2>
 <pre>stream_seek(integer $offset, integer $whence) : boolean</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$offset</h4>
@@ -167,32 +179,32 @@ http://www.php.net/manual/en/function.stream-wrapper-register.php</p>
 <div class="subelement response"><code>boolean</code></div>
 </div></div>
 </div>
-<a name="stream_stat" id="stream_stat"></a><div class="element clickable method public stream_stat" data-toggle="collapse" data-target=".stream_stat .collapse">
+<a id="method_stream_stat"></a><div class="element clickable method public method_stream_stat" data-toggle="collapse" data-target=".method_stream_stat .collapse">
 <h2>Stream statistics.</h2>
 <pre>stream_stat() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="stream_tell" id="stream_tell"></a><div class="element clickable method public stream_tell" data-toggle="collapse" data-target=".stream_tell .collapse">
+<a id="method_stream_tell"></a><div class="element clickable method public method_stream_tell" data-toggle="collapse" data-target=".method_stream_tell .collapse">
 <h2>Tells the current position in the stream.</h2>
 <pre>stream_tell() : integer</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>integer</code></div>
 </div></div>
 </div>
-<a name="stream_write" id="stream_write"></a><div class="element clickable method public stream_write" data-toggle="collapse" data-target=".stream_write .collapse">
+<a id="method_stream_write"></a><div class="element clickable method public method_stream_write" data-toggle="collapse" data-target=".method_stream_write .collapse">
 <h2>Write in the stream</h2>
 <pre>stream_write(string $data) : integer</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$data</h4>
@@ -202,13 +214,13 @@ http://www.php.net/manual/en/function.stream-wrapper-register.php</p>
 <div class="subelement response"><code>integer</code></div>
 </div></div>
 </div>
-<a name="url_stat" id="url_stat"></a><div class="element clickable method public url_stat" data-toggle="collapse" data-target=".url_stat .collapse">
+<a id="method_url_stat"></a><div class="element clickable method public method_url_stat" data-toggle="collapse" data-target=".method_url_stat .collapse">
 <h2>Retrieve information about a file
 Always return false because data come from the database</h2>
 <pre>url_stat(string $path, int $flags) : boolean</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$path</h4>
@@ -224,29 +236,29 @@ Always return false because data come from the database</h2>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a name="%24_data" id="$_data"> </a><div class="element clickable property protected $_data" data-toggle="collapse" data-target=".$_data .collapse">
+<a id="property__data"> </a><div class="element clickable property protected property__data" data-toggle="collapse" data-target=".property__data .collapse">
 <h2>Data for streaming.</h2>
 <pre>$_data : string</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="%24_path" id="$_path"> </a><div class="element clickable property protected $_path" data-toggle="collapse" data-target=".$_path .collapse">
+<a id="property__path"> </a><div class="element clickable property protected property__path" data-toggle="collapse" data-target=".property__path .collapse">
 <h2>Current stream path.</h2>
 <pre>$_path : string</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="%24_pos" id="$_pos"> </a><div class="element clickable property protected $_pos" data-toggle="collapse" data-target=".$_pos .collapse">
+<a id="property__pos"> </a><div class="element clickable property protected property__pos" data-toggle="collapse" data-target=".property__pos .collapse">
 <h2>Current stream position.</h2>
 <pre>$_pos : int</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="%24_stat" id="$_stat"> </a><div class="element clickable property protected $_stat" data-toggle="collapse" data-target=".$_stat .collapse">
+<a id="property__stat"> </a><div class="element clickable property protected property__stat" data-toggle="collapse" data-target=".property__stat .collapse">
 <h2>Stream stats.</h2>
 <pre>$_stat : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 </div>
 </div>
@@ -254,8 +266,8 @@ Always return false because data come from the database</h2>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-10-16T23:17:46+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-10-17T21:58:32+02:00.<br></footer></div>
 </div>
 </body>
 </html>

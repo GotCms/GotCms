@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
@@ -22,7 +22,9 @@
 <li><a>Namespaces</a></li>
 <li><a href="../namespaces/Datatypes.html"><i class="icon-th"></i> Datatypes</a></li>
 <li><a href="../namespaces/Gc.html"><i class="icon-th"></i> Gc</a></li>
+<li><a href="../namespaces/Modules.html"><i class="icon-th"></i> Modules</a></li>
 <li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Library.html"><i class="icon-folder-open"></i> Library</a></li>
 </ul>
@@ -58,49 +60,63 @@
 </div>
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
-<i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#__construct" title="__construct :: Initiliaze Acl"><span class="description">Initiliaze Acl</span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#getRoleId" title="getRoleId :: Get role id from role name"><span class="description">Get role id from role name</span><pre>getRoleId()</pre></a></li>
-<li class="method public "><a href="#listResources" title="listResources :: List resources"><span class="description">List resources</span><pre>listResources()</pre></a></li>
-<li class="method public "><a href="#listResourcesByGroup" title="listResourcesByGroup :: List all resources by group"><span class="description">List all resources by group</span><pre>listResourcesByGroup()</pre></a></li>
-<li class="method public "><a href="#listRoles" title="listRoles :: List Roles"><span class="description">List Roles</span><pre>listRoles()</pre></a></li>
-<li class="nav-header protected">» Protected</li>
-<li class="method protected "><a href="#initResources" title="initResources :: Initiliaze resources"><span class="description">Initiliaze resources</span><pre>initResources()</pre></a></li>
-<li class="nav-header private">» Private</li>
-<li class="method private "><a href="#initRoles" title="initRoles :: Initiliaze Roles"><span class="description">Initiliaze Roles</span><pre>initRoles()</pre></a></li>
-<li class="method private "><a href="#roleResource" title="roleResource :: Initiliaze role resource"><span class="description">Initiliaze role resource</span><pre>roleResource()</pre></a></li>
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct :: Initiliaze Acl"><span class="description">Initiliaze Acl</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_getRoleId" title="getRoleId :: Get role id from role name"><span class="description">Get role id from role name</span><pre>getRoleId()</pre></a></li>
+<li class="method public "><a href="#method_listResources" title="listResources :: List resources"><span class="description">List resources</span><pre>listResources()</pre></a></li>
+<li class="method public "><a href="#method_listResourcesByGroup" title="listResourcesByGroup :: List all resources by group"><span class="description">List all resources by group</span><pre>listResourcesByGroup()</pre></a></li>
+<li class="method public "><a href="#method_listRoles" title="listRoles :: List Roles"><span class="description">List Roles</span><pre>listRoles()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul><li class="method protected "><a href="#method_initResources" title="initResources :: Initiliaze resources"><span class="description">Initiliaze resources</span><pre>initResources()</pre></a></li></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="method private "><a href="#method_initRoles" title="initRoles :: Initiliaze Roles"><span class="description">Initiliaze Roles</span><pre>initRoles()</pre></a></li>
+<li class="method private "><a href="#method_roleResource" title="roleResource :: Initiliaze role resource"><span class="description">Initiliaze role resource</span><pre>roleResource()</pre></a></li>
+</ul>
+</li>
 <li class="nav-header">
-<i class="icon-custom icon-property"></i> Properties</li>
-<li class="nav-header protected">» Protected</li>
-<li class="property protected "><a href="#%24_role_table" title="$_role_table :: Role model"><span class="description">Role model</span><pre>$_role_table</pre></a></li>
-<li class="property protected "><a href="#%24_user" title="$_user :: User model"><span class="description">User model</span><pre>$_user</pre></a></li>
-<li class="property protected "><a href="#%24_user_role" title="$_user_role :: User Role id"><span class="description">User Role id</span><pre>$_user_role</pre></a></li>
-<li class="property protected "><a href="#%24_user_role_name" title="$_user_role_name :: User Role name"><span class="description">User Role name</span><pre>$_user_role_name</pre></a></li>
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property__role_table" title="$_role_table :: Role model"><span class="description">Role model</span><pre>$_role_table</pre></a></li>
+<li class="property protected "><a href="#property__user" title="$_user :: User model"><span class="description">User model</span><pre>$_user</pre></a></li>
+<li class="property protected "><a href="#property__user_role" title="$_user_role :: User Role id"><span class="description">User Role id</span><pre>$_user_role</pre></a></li>
+<li class="property protected "><a href="#property__user_role_name" title="$_user_role_name :: User Role name"><span class="description">User Role name</span><pre>$_user_role_name</pre></a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a name="%5CGc%5CUser%5CAcl" id="\Gc\User\Acl"></a><ul class="breadcrumb">
+<a id="\Gc\User\Acl"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/Gc.html">Gc</a></li>
-<span class="divider">\</span><li><a href="../namespaces/Gc.User.html">User</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Gc.User.html">User</a>
+</li>
 <li class="active">
 <span class="divider">\</span><a href="../classes/Gc.User.Acl.html">Acl</a>
 </li>
 </ul>
-<div href="../classes/Gc.User.Acl.html" class="element class">
+<div class="element class">
 <p class="short_description">Use Acl</p>
 <div class="details">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
 <h2>Initiliaze Acl</h2>
-<pre>__construct(UserModel $user_model) : void</pre>
+<pre>__construct(\Gc\User\Model $user_model) : void</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$user_model</h4>
@@ -108,12 +124,12 @@
 </div>
 </div></div>
 </div>
-<a name="getRoleId" id="getRoleId"></a><div class="element clickable method public getRoleId" data-toggle="collapse" data-target=".getRoleId .collapse">
+<a id="method_getRoleId"></a><div class="element clickable method public method_getRoleId" data-toggle="collapse" data-target=".method_getRoleId .collapse">
 <h2>Get role id from role name</h2>
-<pre>getRoleId(string $role_name) : array | \Zend\Db\ResultSet\RowObjectInterface</pre>
+<pre>getRoleId(string $role_name) : array | \Gc\User\Zend\Db\ResultSet\RowObjectInterface</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$role_name</h4>
@@ -121,26 +137,26 @@
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>array</code><code>\Zend\Db\ResultSet\RowObjectInterface</code>
+<code>array</code><code>\Gc\User\Zend\Db\ResultSet\RowObjectInterface</code>
 </div>
 </div></div>
 </div>
-<a name="listResources" id="listResources"></a><div class="element clickable method public listResources" data-toggle="collapse" data-target=".listResources .collapse">
+<a id="method_listResources"></a><div class="element clickable method public method_listResources" data-toggle="collapse" data-target=".method_listResources .collapse">
 <h2>List resources</h2>
 <pre>listResources() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="listResourcesByGroup" id="listResourcesByGroup"></a><div class="element clickable method public listResourcesByGroup" data-toggle="collapse" data-target=".listResourcesByGroup .collapse">
+<a id="method_listResourcesByGroup"></a><div class="element clickable method public method_listResourcesByGroup" data-toggle="collapse" data-target=".method_listResourcesByGroup .collapse">
 <h2>List all resources by group</h2>
 <pre>listResourcesByGroup(array $group) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$group</h4>
@@ -150,59 +166,59 @@
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="listRoles" id="listRoles"></a><div class="element clickable method public listRoles" data-toggle="collapse" data-target=".listRoles .collapse">
+<a id="method_listRoles"></a><div class="element clickable method public method_listRoles" data-toggle="collapse" data-target=".method_listRoles .collapse">
 <h2>List Roles</h2>
 <pre>listRoles() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<p class="long_description"></p>
+<div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
-<a name="initResources" id="initResources"></a><div class="element clickable method protected initResources" data-toggle="collapse" data-target=".initResources .collapse">
+<a id="method_initResources"></a><div class="element clickable method protected method_initResources" data-toggle="collapse" data-target=".method_initResources .collapse">
 <h2>Initiliaze resources</h2>
 <pre>initResources() : void</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="initRoles" id="initRoles"></a><div class="element clickable method private initRoles" data-toggle="collapse" data-target=".initRoles .collapse">
+<a id="method_initRoles"></a><div class="element clickable method private method_initRoles" data-toggle="collapse" data-target=".method_initRoles .collapse">
 <h2>Initiliaze Roles</h2>
 <pre>initRoles() : void</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="roleResource" id="roleResource"></a><div class="element clickable method private roleResource" data-toggle="collapse" data-target=".roleResource .collapse">
+<a id="method_roleResource"></a><div class="element clickable method private method_roleResource" data-toggle="collapse" data-target=".method_roleResource .collapse">
 <h2>Initiliaze role resource</h2>
 <pre>roleResource() : void</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
-<a name="%24_role_table" id="$_role_table"> </a><div class="element clickable property protected $_role_table" data-toggle="collapse" data-target=".$_role_table .collapse">
+<a id="property__role_table"> </a><div class="element clickable property protected property__role_table" data-toggle="collapse" data-target=".property__role_table .collapse">
 <h2>Role model</h2>
 <pre>$_role_table : <a href="../classes/Gc.User.Role.Model.html">\Gc\User\Role\Model</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="%24_user" id="$_user"> </a><div class="element clickable property protected $_user" data-toggle="collapse" data-target=".$_user .collapse">
+<a id="property__user"> </a><div class="element clickable property protected property__user" data-toggle="collapse" data-target=".property__user .collapse">
 <h2>User model</h2>
 <pre>$_user : <a href="../classes/Gc.User.Model.html">\Gc\User\Model</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="%24_user_role" id="$_user_role"> </a><div class="element clickable property protected $_user_role" data-toggle="collapse" data-target=".$_user_role .collapse">
+<a id="property__user_role"> </a><div class="element clickable property protected property__user_role" data-toggle="collapse" data-target=".property__user_role .collapse">
 <h2>User Role id</h2>
 <pre>$_user_role : integer</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
-<a name="%24_user_role_name" id="$_user_role_name"> </a><div class="element clickable property protected $_user_role_name" data-toggle="collapse" data-target=".$_user_role_name .collapse">
+<a id="property__user_role_name"> </a><div class="element clickable property protected property__user_role_name" data-toggle="collapse" data-target=".property__user_role_name .collapse">
 <h2>User Role name</h2>
 <pre>$_user_role_name : mixed</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 </div>
 </div>
@@ -210,8 +226,8 @@
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
-            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a3</a> and<br>
-            generated on 2012-10-16T23:17:46+02:00.<br></footer></div>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-10-17T21:58:32+02:00.<br></footer></div>
 </div>
 </body>
 </html>
