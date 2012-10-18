@@ -1,26 +1,9 @@
 <?php
 
-use Gc\Registry,
-    Zend\Db\Adapter\Adapter as DbAdapter,
-    Zend\Db\TableGateway\TableGateway;
-
 define('TESTS_GENERATE_REPORT', FALSE);
-
-$config = array(
-    'db' => array(
-        'driver' => '',
-        'username' => '',
-        'password' => '',
-        'database' => '',
-        'hostname' => ''
-    ),
-);
-
-if(!empty($config['db']))
-{
-    $db_adapter = new DbAdapter($config['db']);
-    \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
-    Registry::set('Configuration', $config);
-    Registry::set('Db', $db_adapter);
-}
+define('GC_DATABASE_DRIVER', '');
+define('GC_DATABASE_USERNAME', '');
+define('GC_DATABASE_PASSWORD', '');
+define('GC_DATABASE_DATABASE', '');
+define('GC_DATABASE_HOSTNAME', '');
 
