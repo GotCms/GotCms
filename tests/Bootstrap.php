@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Set error reporting to the level to which Es code must comply.
  */
@@ -34,16 +35,20 @@ Zend\Loader\AutoloaderFactory::factory(array('Zend\Loader\StandardAutoloader' =>
  * Load the user-defined test configuration file, if it exists; otherwise, load
  * the default configuration.
  */
-if (is_readable($gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
+if (is_readable($gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php'))
+{
     require_once $gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php';
-} else {
+}
+else
+{
     require_once $gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
 }
 
 /**
  * Start output buffering, if enabled
  */
-if (defined('TESTS_ES_OB_ENABLED') && constant('TESTS_ES_OB_ENABLED')) {
+if (defined('TESTS_ES_OB_ENABLED') && constant('TESTS_ES_OB_ENABLED'))
+{
     ob_start();
 }
 /*
