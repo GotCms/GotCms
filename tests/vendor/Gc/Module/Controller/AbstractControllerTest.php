@@ -9,7 +9,7 @@ class AbstractControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractController
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class AbstractControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new AbstractController;
+        $this->_object = new AbstractController;
     }
 
     /**

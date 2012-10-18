@@ -9,7 +9,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * @var File
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new File;
+        $this->_object = new File;
     }
 
     /**

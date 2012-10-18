@@ -9,7 +9,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var CkEditor
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new CkEditor;
+        $this->_object = new CkEditor;
     }
 
     /**

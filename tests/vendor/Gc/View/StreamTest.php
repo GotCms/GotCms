@@ -7,17 +7,12 @@ namespace Gc\View;
 class StreamTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Stream
-     */
-    protected $object;
-
-    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp()
     {
-        $this->object = new Stream;
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
     }
 
     /**
@@ -26,6 +21,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        stream_wrapper_unregister('zend.view');
     }
 
     /**
@@ -34,10 +30,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStream_open()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $file = fopen('zend.view://Stream', 'r+');
+        $this->assertInternalType(\PHPUnit_Framework_Constraint_IsType::TYPE_RESOURCE, $file);
     }
 
     /**
@@ -46,10 +40,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStream_read()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        file_put_contents('zend.view://Stream', 'test');
+        $this->assertEquals(file_get_contents('zend.view://Stream'), 'test');
     }
 
     /**
@@ -58,69 +50,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStream_write()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\View\Stream::stream_tell
-     * @todo   Implement testStream_tell().
-     */
-    public function testStream_tell()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\View\Stream::stream_eof
-     * @todo   Implement testStream_eof().
-     */
-    public function testStream_eof()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\View\Stream::stream_stat
-     * @todo   Implement testStream_stat().
-     */
-    public function testStream_stat()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\View\Stream::stream_seek
-     * @todo   Implement testStream_seek().
-     */
-    public function testStream_seek()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\View\Stream::url_stat
-     * @todo   Implement testUrl_stat().
-     */
-    public function testUrl_stat()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        file_put_contents('zend.view://Stream', 'test');
+        $this->assertEquals(file_get_contents('zend.view://Stream'), 'test');
     }
 }

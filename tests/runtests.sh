@@ -9,7 +9,7 @@ while [ -n "$1" ] ; do
      PHPUNIT_GROUPS=""
      break ;;
 
-    Es*|Datatypes*)
+    Gc*|Datatypes*)
      PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}$1"
      shift ;;
     Application*)
@@ -17,7 +17,7 @@ while [ -n "$1" ] ; do
      shift ;;
 
     *)
-     PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}Gc_$1"
+     PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}Gc/$1"
      shift ;;
   esac
 done

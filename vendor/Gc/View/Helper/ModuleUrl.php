@@ -37,7 +37,6 @@ class ModuleUrl extends AbstractHelper
     /**
      * Generates an url given the name of a route.
      *
-     * @see    Zend\Mvc\Router\RouteInterface::assemble()
      * @param  string  $action_name             Action name
      * @param  array   $controller_name         Controller name
      * @param  array   $query_params                  Parameters for the link

@@ -9,7 +9,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractModule
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new AbstractModule;
+        $this->_object = new AbstractModule;
     }
 
     /**

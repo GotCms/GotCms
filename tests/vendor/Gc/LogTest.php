@@ -9,7 +9,7 @@ class LogTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Log
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class LogTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Log;
+        $this->_object = new Log;
     }
 
     /**

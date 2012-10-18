@@ -9,7 +9,7 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
     /**
      * @var FormErrors
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new FormErrors;
+        $this->_object = new FormErrors;
     }
 
     /**

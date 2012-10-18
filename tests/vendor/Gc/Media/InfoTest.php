@@ -9,7 +9,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Info
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Info;
+        $this->_object = new Info;
     }
 
     /**

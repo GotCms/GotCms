@@ -9,7 +9,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Document
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Document;
+        $this->_object = new Document;
     }
 
     /**

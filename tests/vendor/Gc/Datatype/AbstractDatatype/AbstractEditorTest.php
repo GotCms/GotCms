@@ -9,7 +9,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractEditor
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = $this->getMockForAbstractClass('AbstractEditor');
+        $this->_object = $this->getMockForAbstractClass('AbstractEditor');
     }
 
     /**

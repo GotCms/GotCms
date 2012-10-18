@@ -9,7 +9,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Navigation
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Navigation;
+        $this->_object = new Navigation;
     }
 
     /**
