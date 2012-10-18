@@ -59,12 +59,12 @@
       <td class="danger small"><div align="right">0.00%</div></td>
       <td class="danger small"><div align="right">0 / 2</div></td>
       <td class="danger small"><acronym title="Change Risk Anti-Patterns (CRAP) Index">CRAP</acronym></td>
-      <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
-        <div class="bar" style="width: 0.00%;"></div>
+      <td class="warning big">       <div class="progress progress-warning" style="width: 100px;">
+        <div class="bar" style="width: 45.45%;"></div>
        </div>
 </td>
-      <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 22</div></td>
+      <td class="warning small"><div align="right">45.45%</div></td>
+      <td class="warning small"><div align="right">10 / 22</div></td>
      </tr>
 
      <tr>
@@ -81,13 +81,13 @@
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
       <td class="danger small"><div align="right">0 / 2</div></td>
-      <td class="danger small">30</td>
-      <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
-        <div class="bar" style="width: 0.00%;"></div>
+      <td class="danger small">9.06</td>
+      <td class="warning big">       <div class="progress progress-warning" style="width: 100px;">
+        <div class="bar" style="width: 45.45%;"></div>
        </div>
 </td>
-      <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 22</div></td>
+      <td class="warning small"><div align="right">45.45%</div></td>
+      <td class="warning small"><div align="right">10 / 22</div></td>
      </tr>
 
      <tr>
@@ -98,13 +98,13 @@
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
       <td class="danger small"><div align="right">0 / 1</div></td>
-      <td class="danger small">2</td>
-      <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
-        <div class="bar" style="width: 0.00%;"></div>
+      <td class="danger small">1.12</td>
+      <td class="warning big">       <div class="progress progress-warning" style="width: 100px;">
+        <div class="bar" style="width: 50.00%;"></div>
        </div>
 </td>
-      <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 2</div></td>
+      <td class="warning small"><div align="right">50.00%</div></td>
+      <td class="warning small"><div align="right">1 / 2</div></td>
      </tr>
 
      <tr>
@@ -115,13 +115,13 @@
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
       <td class="danger small"><div align="right">0 / 1</div></td>
-      <td class="danger small">20</td>
-      <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
-        <div class="bar" style="width: 0.00%;"></div>
+      <td class="danger small">6.66</td>
+      <td class="warning big">       <div class="progress progress-warning" style="width: 100px;">
+        <div class="bar" style="width: 45.00%;"></div>
        </div>
 </td>
-      <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 20</div></td>
+      <td class="warning small"><div align="right">45.00%</div></td>
+      <td class="warning small"><div align="right">9 / 20</div></td>
      </tr>
 
 
@@ -183,7 +183,7 @@
      <tr><td><div align="right"><a name="52"></a><a href="#52">52</a></div></td><td class="codeLine">     */</td></tr>
      <tr><td><div align="right"><a name="53"></a><a href="#53">53</a></div></td><td class="codeLine">    public function init()</td></tr>
      <tr><td><div align="right"><a name="54"></a><a href="#54">54</a></div></td><td class="codeLine">    {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="55"></a><a href="#55">55</a></div></td><td class="codeLine">        $this-&gt;getPermissions();</td></tr>
+     <tr class="success popin" data-title="1 test covers line 55" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testInit&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="55"></a><a href="#55">55</a></div></td><td class="codeLine">        $this-&gt;getPermissions();</td></tr>
      <tr class="danger"><td><div align="right"><a name="56"></a><a href="#56">56</a></div></td><td class="codeLine">    }</td></tr>
      <tr><td><div align="right"><a name="57"></a><a href="#57">57</a></div></td><td class="codeLine"></td></tr>
      <tr><td><div align="right"><a name="58"></a><a href="#58">58</a></div></td><td class="codeLine">    /**</td></tr>
@@ -192,17 +192,17 @@
      <tr><td><div align="right"><a name="61"></a><a href="#61">61</a></div></td><td class="codeLine">     */</td></tr>
      <tr><td><div align="right"><a name="62"></a><a href="#62">62</a></div></td><td class="codeLine">    public function getPermissions()</td></tr>
      <tr><td><div align="right"><a name="63"></a><a href="#63">63</a></div></td><td class="codeLine">    {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="64"></a><a href="#64">64</a></div></td><td class="codeLine">        if(empty($this-&gt;_permissions))</td></tr>
-     <tr class="danger"><td><div align="right"><a name="65"></a><a href="#65">65</a></div></td><td class="codeLine">        {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="66"></a><a href="#66">66</a></div></td><td class="codeLine">            $select = new Select();</td></tr>
-     <tr class="danger"><td><div align="right"><a name="67"></a><a href="#67">67</a></div></td><td class="codeLine">            $select-&gt;from('user_acl_permission')</td></tr>
-     <tr class="danger"><td><div align="right"><a name="68"></a><a href="#68">68</a></div></td><td class="codeLine">                -&gt;columns(array(</td></tr>
+     <tr class="success popin" data-title="1 test covers line 64" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testGetPermissions&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="64"></a><a href="#64">64</a></div></td><td class="codeLine">        if(empty($this-&gt;_permissions))</td></tr>
+     <tr class="success popin" data-title="1 test covers line 65" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testGetPermissions&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="65"></a><a href="#65">65</a></div></td><td class="codeLine">        {</td></tr>
+     <tr class="success popin" data-title="1 test covers line 66" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testGetPermissions&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="66"></a><a href="#66">66</a></div></td><td class="codeLine">            $select = new Select();</td></tr>
+     <tr class="success popin" data-title="1 test covers line 67" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testGetPermissions&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="67"></a><a href="#67">67</a></div></td><td class="codeLine">            $select-&gt;from('user_acl_permission')</td></tr>
+     <tr class="success popin" data-title="1 test covers line 68" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testGetPermissions&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="68"></a><a href="#68">68</a></div></td><td class="codeLine">                -&gt;columns(array(</td></tr>
      <tr><td><div align="right"><a name="69"></a><a href="#69">69</a></div></td><td class="codeLine">                    'id'</td></tr>
-     <tr class="danger"><td><div align="right"><a name="70"></a><a href="#70">70</a></div></td><td class="codeLine">                    , 'permission'</td></tr>
-     <tr class="danger"><td><div align="right"><a name="71"></a><a href="#71">71</a></div></td><td class="codeLine">                ), TRUE)</td></tr>
-     <tr class="danger"><td><div align="right"><a name="72"></a><a href="#72">72</a></div></td><td class="codeLine">                -&gt;join('user_acl_resource', 'user_acl_resource.id = user_acl_permission.user_acl_resource_id', array('resource'));</td></tr>
+     <tr class="success popin" data-title="1 test covers line 70" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testGetPermissions&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="70"></a><a href="#70">70</a></div></td><td class="codeLine">                    , 'permission'</td></tr>
+     <tr class="success popin" data-title="1 test covers line 71" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testGetPermissions&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="71"></a><a href="#71">71</a></div></td><td class="codeLine">                ), TRUE)</td></tr>
+     <tr class="success popin" data-title="1 test covers line 72" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testGetPermissions&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="72"></a><a href="#72">72</a></div></td><td class="codeLine">                -&gt;join('user_acl_resource', 'user_acl_resource.id = user_acl_permission.user_acl_resource_id', array('resource'));</td></tr>
      <tr><td><div align="right"><a name="73"></a><a href="#73">73</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="74"></a><a href="#74">74</a></div></td><td class="codeLine">            $rows = $this-&gt;fetchAll($select);</td></tr>
+     <tr class="success popin" data-title="1 test covers line 74" data-content="&lt;ul&gt;&lt;li class=&quot;danger&quot;&gt;Gc\User\Permission\CollectionTest::testGetPermissions&lt;/li&gt;&lt;/ul&gt;" data-placement="bottom"><td><div align="right"><a name="74"></a><a href="#74">74</a></div></td><td class="codeLine">            $rows = $this-&gt;fetchAll($select);</td></tr>
      <tr class="danger"><td><div align="right"><a name="75"></a><a href="#75">75</a></div></td><td class="codeLine">            $permissions = array();</td></tr>
      <tr class="danger"><td><div align="right"><a name="76"></a><a href="#76">76</a></div></td><td class="codeLine">            foreach($rows as $permission)</td></tr>
      <tr><td><div align="right"><a name="77"></a><a href="#77">77</a></div></td><td class="codeLine">            {</td></tr>
@@ -231,7 +231,7 @@
      <span class="warning"><strong>Dead Code</strong></span>
     </p>
     <p>
-     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.2.6</a> using <a href="http://www.php.net/" target="_top">PHP 5.4.4-7</a> and <a href="http://phpunit.de/">PHPUnit 3.7.8</a> at Thu Oct 18 20:58:17 CEST 2012.</small>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.2.6</a> using <a href="http://www.php.net/" target="_top">PHP 5.4.4-7</a> and <a href="http://phpunit.de/">PHPUnit 3.7.8</a> at Thu Oct 18 23:24:52 CEST 2012.</small>
     </p>
    </footer>
   </div>

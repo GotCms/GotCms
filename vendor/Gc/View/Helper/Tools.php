@@ -69,7 +69,7 @@ class Tools extends AbstractHelper
 
             case 'camel_case':
             case 'camelCase':
-                $data = str_replace(' ', ucwords($value));
+                $data = str_replace(' ', '', ucwords($value));
             break;
         }
 

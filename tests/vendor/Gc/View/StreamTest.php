@@ -12,7 +12,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        stream_wrapper_unregister('zend.view');
     }
 
     /**
@@ -21,7 +21,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        stream_wrapper_unregister('zend.view');
     }
 
     /**
@@ -30,6 +29,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStream_open()
     {
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         $file = fopen('zend.view://Stream', 'r+');
         $this->assertInternalType(\PHPUnit_Framework_Constraint_IsType::TYPE_RESOURCE, $file);
     }
@@ -40,6 +40,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStream_read()
     {
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://Stream', 'test');
         $this->assertEquals(file_get_contents('zend.view://Stream'), 'test');
     }
@@ -50,6 +51,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStream_write()
     {
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://Stream', 'test');
         $this->assertEquals(file_get_contents('zend.view://Stream'), 'test');
     }

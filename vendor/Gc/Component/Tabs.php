@@ -36,7 +36,7 @@ class Tabs
      * Data stored
      * @var array
      */
-    private $_data;
+    protected $_data;
 
     /**
      * Tabs constructor
@@ -93,5 +93,17 @@ class Tabs
         }
 
         return $this->render();
+    }
+
+    /**
+     * Set data
+     * @param array $array
+     * @return Tabs
+     */
+    public function setData(array $array)
+    {
+        $this->_data = $array;
+
+        return $this;
     }
 }

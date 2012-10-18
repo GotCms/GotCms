@@ -17,7 +17,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Tabs;
+        $this->_object = new Tabs(array());
     }
 
     /**
@@ -26,29 +26,41 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Component\Tabs::render
-     * @todo   Implement testRender().
      */
-    public function testRender()
+    public function testRenderWithParams()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->_object->render(array('string')));
+    }
+
+    /**
+     * @covers Gc\Component\Tabs::render
+     */
+    public function testRenderWithoutParams()
+    {
+        $this->_object->setData(array('string'));
+        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->_object->render());
     }
 
     /**
      * @covers Gc\Component\Tabs::__toString
-     * @todo   Implement test__toString().
      */
-    public function test__toString()
+    public function test__toStringWithEmptyData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData(array());
+        $this->assertFalse($this->_object->__toString());
+    }
+
+    /**
+     * @covers Gc\Component\Tabs::__toString
+     */
+    public function test__toStringWithoutEmptyData()
+    {
+        $this->_object->setData(array('string'));
+        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->_object->__toString());
     }
 }

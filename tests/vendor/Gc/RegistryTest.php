@@ -26,89 +26,70 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->_object->_unsetInstance();
     }
 
     /**
      * @covers Gc\Registry::getInstance
-     * @todo   Implement testGetInstance().
      */
     public function testGetInstance()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->tearDown();
+        $this->assertInstanceOf('Registry', Registry::getInstance());
     }
 
     /**
      * @covers Gc\Registry::setInstance
-     * @todo   Implement testSetInstance().
      */
     public function testSetInstance()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\Registry::_unsetInstance
-     * @todo   Implement test_unsetInstance().
-     */
-    public function test_unsetInstance()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setInstance(new Registry);
+        $this->assertInstanceOf('Registry', Registry::getInstance());
     }
 
     /**
      * @covers Gc\Registry::get
-     * @todo   Implement testGet().
      */
     public function testGet()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->set('key', 'value');
+        $this->assertEquals('value', $this->_object->get('key'));
     }
 
     /**
      * @covers Gc\Registry::set
-     * @todo   Implement testSet().
      */
     public function testSet()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->set('key', 'value');
+        $this->assertEquals('value', $this->_object->get('key'));
     }
 
     /**
      * @covers Gc\Registry::isRegistered
-     * @todo   Implement testIsRegistered().
      */
-    public function testIsRegistered()
+    public function testIsRegisteredWithData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->set('key', 'value');
+        $this->assertTrue($this->_object->isRegistered('key'));
+    }
+
+    /**
+     * @covers Gc\Registry::isRegistered
+     */
+    public function testIsRegisteredWithoutData()
+    {
+        $this->tearDown();
+        $this->assertTrue(!$this->_object->isRegistered('key'));
     }
 
     /**
      * @covers Gc\Registry::offsetExists
-     * @todo   Implement testOffsetExists().
      */
     public function testOffsetExists()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->set('key', 'value');
+        $this->assertTrue($this->_object->isRegistered('key'));
     }
 }
