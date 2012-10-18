@@ -17,7 +17,7 @@ class AbstractControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new AbstractController;
+        $this->_object = $this->getMockForAbstractClass('AbstractController');
     }
 
     /**

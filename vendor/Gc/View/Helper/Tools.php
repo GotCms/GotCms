@@ -56,12 +56,12 @@ class Tools extends AbstractHelper
             break;
 
             case 'debug':
-                $data = sprintf('<pre>%s</pre>', print_r($data, TRUE));
+                $data = sprintf('<pre>%s</pre>', print_r($value, TRUE));
             break;
 
             case 'is_serialized':
             case 'isSerialized':
-                if (trim($data) != "" and preg_match("/^(i|s|a|o|d)(.*);/si", $data))
+                if(trim($value) != '' and preg_match("/^(i|s|a|o|d)(.*);/si", $value))
                 {
                     $data = TRUE;
                 }

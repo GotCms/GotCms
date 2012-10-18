@@ -30,13 +30,44 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\View\Helper\Tools::__invoke
-     * @todo   Implement test__invoke().
      */
-    public function test__invoke()
+    public function testUnserialize()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals('string', $this->_object->__invoke('unserialize', 's:6:"string";'));
+    }
+
+    /**
+     * @covers Gc\View\Helper\Tools::__invoke
+     */
+    public function testSerialize()
+    {
+        $this->assertEquals('s:6:"string";', $this->_object->__invoke('serialize', 'string'));
+    }
+
+    /**
+     * @covers Gc\View\Helper\Tools::__invoke
+     */
+    public function testDebug()
+    {
+        $result = $this->_object->__invoke('debug', 'string');
+        $result = str_replace(array(PHP_EOL, "\n"), '_', $result);
+        $expected = '<pre>string</pre>';
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @covers Gc\View\Helper\Tools::__invoke
+     */
+    public function testIsSerialized()
+    {
+        $this->assertTrue($this->_object->__invoke('is_serialized', 's:6:"string";'));
+    }
+
+    /**
+     * @covers Gc\View\Helper\Tools::__invoke
+     */
+    public function testCamelCase()
+    {
+        $this->assertEquals('StringToCamelCase', $this->_object->__invoke('camelCase', 'String to camel case'));
     }
 }

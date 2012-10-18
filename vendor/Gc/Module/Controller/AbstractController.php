@@ -33,7 +33,7 @@ use Gc\Mvc\Controller\Action,
 /**
  * Abstract module controller
  */
-class AbstractController extends Action
+abstract class AbstractController extends Action
 {
     /**
      * Construct controller with request and response

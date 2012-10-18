@@ -39,25 +39,25 @@ class FormErrors extends AbstractHelper
      *
      * @var Renderer
      */
-    protected $view = null;
+    protected $view = NULL;
 
     /**
      * Element block end tags
      * @var string
      */
-    protected $_htmlElementEnd       = '</li></ul>';
+    protected $_html_element_end       = '</li></ul>';
 
     /**
      * Element block start tags
      * @var string
      */
-    protected $_htmlElementStart     = '<ul%s><li>';
+    protected $_html_element_start     = '<ul%s><li>';
 
     /**
      * Element block separator
      * @var string
      */
-    protected $_htmlElementSeparator = '</li><li>';
+    protected $_html_element_separator = '</li><li>';
 
     /**
      * Render form errors
@@ -66,34 +66,39 @@ class FormErrors extends AbstractHelper
      * @param  array $options
      * @return string
      */
-    public function __invoke($errors, array $options = null)
+    public function __invoke($errors, array $options = NULL)
     {
-        $escape = true;
-        if (isset($options['escape'])) {
+        $escape = TRUE;
+        if(isset($options['escape']))
+        {
             $escape = (bool) $options['escape'];
             unset($options['escape']);
         }
 
-        if (empty($options['class'])) {
+        if(empty($options['class']))
+        {
             $options['class'] = 'errors';
         }
 
         $start = $this->getElementStart();
-        if (strstr($start, '%s')) {
+        if(strstr($start, '%s'))
+        {
             $attribs = $this->_htmlAttribs($options);
             $start   = sprintf($start, $attribs);
         }
 
-        if ($escape) {
+        if($escape)
+        {
             $escaper = $this->view->plugin('escapeHtml');
-            foreach ($errors as $key => $error) {
+            foreach($errors as $key => $error)
+            {
                 $errors[$key] = $escaper($error);
             }
         }
 
         $html  = $start
-               . implode($this->getElementSeparator(), (array) $errors)
-               . $this->getElementEnd();
+           . implode($this->getElementSeparator(), (array) $errors)
+           . $this->getElementEnd();
 
         return $html;
     }
@@ -102,11 +107,12 @@ class FormErrors extends AbstractHelper
      * Set end string for displaying errors
      *
      * @param  string $string
-     * @return \Zend\View\Helper\FormErrors
+     * @return \Gc\View\Helper\FormErrors
      */
     public function setElementEnd($string)
     {
-        $this->_htmlElementEnd = (string) $string;
+        $this->_html_element_end = (string) $string;
+
         return $this;
     }
 
@@ -117,18 +123,19 @@ class FormErrors extends AbstractHelper
      */
     public function getElementEnd()
     {
-        return $this->_htmlElementEnd;
+        return $this->_html_element_end;
     }
 
     /**
      * Set separator string for displaying errors
      *
      * @param  string $string
-     * @return \Zend\View\Helper\FormErrors
+     * @return \Gc\View\Helper\FormErrors
      */
     public function setElementSeparator($string)
     {
-        $this->_htmlElementSeparator = (string) $string;
+        $this->_html_element_separator = (string) $string;
+
         return $this;
     }
 
@@ -139,18 +146,19 @@ class FormErrors extends AbstractHelper
      */
     public function getElementSeparator()
     {
-        return $this->_htmlElementSeparator;
+        return $this->_html_element_separator;
     }
 
     /**
      * Set start string for displaying errors
      *
      * @param  string $string
-     * @return \Zend\View\Helper\FormErrors
+     * @return \Gc\View\Helper\FormErrors
      */
     public function setElementStart($string)
     {
-        $this->_htmlElementStart = (string) $string;
+        $this->_html_element_start = (string) $string;
+
         return $this;
     }
 
@@ -161,7 +169,7 @@ class FormErrors extends AbstractHelper
      */
     public function getElementStart()
     {
-        return $this->_htmlElementStart;
+        return $this->_html_element_start;
     }
 
     /**
@@ -178,38 +186,50 @@ class FormErrors extends AbstractHelper
     {
         $xhtml   = '';
         $escaper = $this->view->plugin('escapeHtml');
-        foreach ((array) $attribs as $key => $val) {
+        foreach((array) $attribs as $key => $val)
+        {
             $key = $escaper($key);
 
-            if (('on' == substr($key, 0, 2)) || ('constraints' == $key)) {
+            if(('on' == substr($key, 0, 2)) || ('constraints' == $key))
+            {
                 // Don't escape event attributes; _do_ substitute double quotes with singles
-                if (!is_scalar($val)) {
+                if(!is_scalar($val))
+                {
                     // non-scalar data should be cast to JSON first
                     $val = \Zend\Json\Json::encode($val);
                 }
+
                 // Escape single quotes inside event attribute values.
                 // This will create html, where the attribute value has
                 // single quotes around it, and escaped single quotes or
                 // non-escaped double quotes inside of it
                 $val = str_replace('\'', '&#39;', $val);
-            } else {
-                if (is_array($val)) {
+            }
+            else
+            {
+                if(is_array($val))
+                {
                     $val = implode(' ', $val);
                 }
+
                 $val = $escaper($val);
             }
 
-            if ('id' == $key) {
+            if('id' == $key)
+            {
                 $val = $this->_normalizeId($val);
             }
 
-            if (strpos($val, '"') !== false) {
+            if(strpos($val, '"') !== FALSE)
+            {
                 $xhtml .= " $key='$val'";
-            } else {
+            }
+            else
+            {
                 $xhtml .= " $key=\"$val\"";
             }
-
         }
+
         return $xhtml;
     }
 
@@ -221,14 +241,18 @@ class FormErrors extends AbstractHelper
      */
     protected function _normalizeId($value)
     {
-        if (strstr($value, '[')) {
-            if ('[]' == substr($value, -2)) {
+        if(strstr($value, '['))
+        {
+            if('[]' == substr($value, -2))
+            {
                 $value = substr($value, 0, strlen($value) - 2);
             }
+
             $value = trim($value, ']');
             $value = str_replace('][', '-', $value);
             $value = str_replace('[', '-', $value);
         }
+
         return $value;
     }
 
@@ -241,13 +265,14 @@ class FormErrors extends AbstractHelper
     public function setView(Renderer $view)
     {
         $this->view = $view;
+
         return $this;
     }
 
     /**
      * Get the view object
      *
-     * @return null|Renderer
+     * @return NULL|Renderer
      */
     public function getView()
     {

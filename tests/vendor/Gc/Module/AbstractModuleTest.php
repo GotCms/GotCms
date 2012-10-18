@@ -17,7 +17,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new AbstractModule;
+        $this->_object = $this->getMockForAbstractClass('AbstractModule');
     }
 
     /**
@@ -26,5 +26,27 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+    }
+
+    /**
+     * @covers Gc\Module\AbstractModule::getAdapter
+     */
+    public function testGetAdapter()
+    {
+        // Remove the following lines when you implement this test.
+        $this->markTestIncomplete(
+          'This test has not been implemented yet.'
+        );
+    }
+
+    /**
+     * @covers Gc\Module\AbstractModule::getDriverName
+     */
+    public function testGetDriverName()
+    {
+        // Remove the following lines when you implement this test.
+        $this->markTestIncomplete(
+          'This test has not been implemented yet.'
+        );
     }
 }
