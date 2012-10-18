@@ -49,7 +49,7 @@ class TemplatePathStack extends PathStack
     {
         $this->lastLookupFailure = FALSE;
 
-        if ($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name))
+        if($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name))
         {
             throw new Exception\DomainException(
                 'Requested scripts may not include parent directory traversal ("../", "..\\" notation)'
@@ -58,45 +58,45 @@ class TemplatePathStack extends PathStack
 
         if(strpos('.phtml', $name) === FALSE)
         {
-            if ($this->useStreamWrapper())
+            if($this->useStreamWrapper())
             {
                 // If using a stream wrapper, prepend the spec to the path
-                $filePath = 'zend.view://' . $name;
-                return $filePath;
+                $file_path = 'zend.view://' . $name;
+                return $file_path;
             }
         }
         else
         {
-            if (!count($this->paths))
+            if(!count($this->paths))
             {
                 $this->lastLookupFailure = static::FAILURE_NO_PATHS;
                 return FALSE;
             }
 
             // Ensure we have the expected file extension
-            $defaultSuffix = $this->getDefaultSuffix();
-            if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix)
+            $default_suffix = $this->getDefaultSuffix();
+            if(pathinfo($name, PATHINFO_EXTENSION) != $default_suffix)
             {
-                $name .= '.' . $defaultSuffix;
+                $name .= '.' . $default_suffix;
             }
 
-            foreach ($this->paths as $path)
+            foreach($this->paths as $path)
             {
                 $file = new SplFileInfo($path . $name);
-                if ($file->isReadable())
+                if($file->isReadable())
                 {
                     // Found! Return it.
-                    if (($filePath = $file->getRealPath()) === FALSE && substr($path, 0, 7) === 'phar://')
+                    if(($file_path = $file->getRealPath()) === FALSE && substr($path, 0, 7) === 'phar://')
                     {
                         // Do not try to expand phar paths (realpath + phars == fail)
-                        $filePath = $path . $name;
-                        if (!file_exists($filePath))
+                        $file_path = $path . $name;
+                        if(!file_exists($file_path))
                         {
                             break;
                         }
                     }
 
-                    return $filePath;
+                    return $file_path;
                 }
             }
         }
