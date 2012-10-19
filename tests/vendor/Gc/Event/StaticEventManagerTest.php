@@ -26,6 +26,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->_object->resetInstance();
     }
 
     /**
@@ -34,10 +35,8 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInstance()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->tearDown();
+        $this->assertInstanceOf('StaticEventManager', StaticEventManager::getInstance());
     }
 
     /**
@@ -46,10 +45,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetInstance()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertInstanceOf('Registry', StaticEventManager::getInstance());
     }
 
     /**
@@ -58,45 +54,59 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testHasInstance()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue(StaticEventManager::hasInstance());
     }
 
     /**
      * @covers Gc\Event\StaticEventManager::resetInstance
-     * @todo   Implement testResetInstance().
      */
     public function testResetInstance()
     {
+        $this->_object->resetInstance();
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertFalse($this->_object->hasInstance());
     }
 
     /**
      * @covers Gc\Event\StaticEventManager::getEvent
-     * @todo   Implement testGetEvent().
+     */
+    public function testGetEventWithoutRegisteredEvent()
+    {
+        $this->assertFalse($this->_object->getEvent('null'));
+    }
+
+    /**
+     * @covers Gc\Event\StaticEventManager::getEvent
      */
     public function testGetEvent()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->attach('Event', 'do', function($e)
+        {
+            //Fake declare to create Event
+        });
+
+
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->_object->getEvent('Event'));
     }
 
     /**
      * @covers Gc\Event\StaticEventManager::trigger
-     * @todo   Implement testTrigger().
      */
     public function testTrigger()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->attach('Event', 'do', function($e)
+        {
+            return $e->getName();
+        });
+
+        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $this->_object->trigger('Event', 'do'));
+    }
+
+    /**
+     * @covers Gc\Event\StaticEventManager::trigger
+     */
+    public function testTriggerWithoutRegisteredEvent()
+    {
+        $this->assertFalse($this->_object->trigger('Event', 'do'));
     }
 }

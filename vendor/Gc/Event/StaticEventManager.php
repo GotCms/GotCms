@@ -123,7 +123,7 @@ class StaticEventManager extends SharedEventManager
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @param  null|callable $callback
-     * @return ResponseCollection All listener return values
+     * @return Zend\EventManager\ResponseCollection All listener return values
      * @throws Exception\InvalidCallbackException
      */
     public function trigger($id, $event, $target = NULL, $argv = array(), $callback = NULL)

@@ -49,12 +49,6 @@ else
     require_once $gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
 }
 
-$config = array();
-foreach(glob(realpath(__DIR__.'/../').'/config/autoload/{,*.}{global,local}.php', GLOB_BRACE) as $filename)
-{
-    $config += include_once($filename);
-}
-
 $config = array(
     'db' => array(
         'driver' => GC_DATABASE_DRIVER,
@@ -68,6 +62,7 @@ $config = array(
 try
 {
     $db_adapter = new DbAdapter($config['db']);
+    $db_adapter->getDriver()->getConnection()->connect();
 }
 catch(Exception $e)
 {
@@ -79,7 +74,10 @@ catch(Exception $e)
 Registry::set('Configuration', $config);
 Registry::set('Db', $db_adapter);
 
-
+/**
+ * Install database
+ */
+$db_adapter->getDriver()->getConnection()->getResource()->exec(file_get_contents($gc_root . '/data/install/sql/database-pgsql.sql'));
 /**
  * Start output buffering, if enabled
  */
