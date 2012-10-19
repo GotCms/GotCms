@@ -274,25 +274,25 @@
 <text text-anchor="middle" x="1631" y="-1640.1" font-family="Times Roman,serif" font-size="11.00" fill="gray">Icon</text>
 </g>
 <g id="graph28" class="cluster"><title>cluster_Gc\Module</title>
-<polyline fill="none" stroke="gray" points="1176,-897 1322,-897 "/>
-<path fill="none" stroke="gray" d="M1322,-897C1328,-897 1334,-903 1334,-909"/>
-<polyline fill="none" stroke="gray" points="1334,-909 1334,-1149 "/>
-<path fill="none" stroke="gray" d="M1334,-1149C1334,-1155 1328,-1161 1322,-1161"/>
-<polyline fill="none" stroke="gray" points="1322,-1161 1176,-1161 "/>
-<path fill="none" stroke="gray" d="M1176,-1161C1170,-1161 1164,-1155 1164,-1149"/>
-<polyline fill="none" stroke="gray" points="1164,-1149 1164,-909 "/>
-<path fill="none" stroke="gray" d="M1164,-909C1164,-903 1170,-897 1176,-897"/>
+<polyline fill="none" stroke="gray" points="1175,-897 1323,-897 "/>
+<path fill="none" stroke="gray" d="M1323,-897C1329,-897 1335,-903 1335,-909"/>
+<polyline fill="none" stroke="gray" points="1335,-909 1335,-1149 "/>
+<path fill="none" stroke="gray" d="M1335,-1149C1335,-1155 1329,-1161 1323,-1161"/>
+<polyline fill="none" stroke="gray" points="1323,-1161 1175,-1161 "/>
+<path fill="none" stroke="gray" d="M1175,-1161C1169,-1161 1163,-1155 1163,-1149"/>
+<polyline fill="none" stroke="gray" points="1163,-1149 1163,-909 "/>
+<path fill="none" stroke="gray" d="M1163,-909C1163,-903 1169,-897 1175,-897"/>
 <text text-anchor="middle" x="1249" y="-1147.1" font-family="Times Roman,serif" font-size="11.00" fill="gray">Module</text>
 </g>
 <g id="graph29" class="cluster"><title>cluster_Gc\Module\Controller</title>
-<polyline fill="none" stroke="gray" points="1184,-905 1314,-905 "/>
-<path fill="none" stroke="gray" d="M1314,-905C1320,-905 1326,-911 1326,-917"/>
-<polyline fill="none" stroke="gray" points="1326,-917 1326,-967 "/>
-<path fill="none" stroke="gray" d="M1326,-967C1326,-973 1320,-979 1314,-979"/>
-<polyline fill="none" stroke="gray" points="1314,-979 1184,-979 "/>
-<path fill="none" stroke="gray" d="M1184,-979C1178,-979 1172,-973 1172,-967"/>
-<polyline fill="none" stroke="gray" points="1172,-967 1172,-917 "/>
-<path fill="none" stroke="gray" d="M1172,-917C1172,-911 1178,-905 1184,-905"/>
+<polyline fill="none" stroke="gray" points="1183,-905 1315,-905 "/>
+<path fill="none" stroke="gray" d="M1315,-905C1321,-905 1327,-911 1327,-917"/>
+<polyline fill="none" stroke="gray" points="1327,-917 1327,-967 "/>
+<path fill="none" stroke="gray" d="M1327,-967C1327,-973 1321,-979 1315,-979"/>
+<polyline fill="none" stroke="gray" points="1315,-979 1183,-979 "/>
+<path fill="none" stroke="gray" d="M1183,-979C1177,-979 1171,-973 1171,-967"/>
+<polyline fill="none" stroke="gray" points="1171,-967 1171,-917 "/>
+<path fill="none" stroke="gray" d="M1171,-917C1171,-911 1177,-905 1183,-905"/>
 <text text-anchor="middle" x="1249" y="-965.1" font-family="Times Roman,serif" font-size="11.00" fill="gray">Controller</text>
 </g>
 <g id="graph31" class="cluster"><title>cluster_Gc\Mvc</title>
@@ -1178,9 +1178,10 @@
 </g>
 <!-- \\Gc\\Module\\Controller\\AbstractController -->
 <g id="node85" class="node"><title>\\Gc\\Module\\Controller\\AbstractController</title>
-<a xlink:href="Gc.Module.Controller.AbstractController.html" xlink:title="AbstractController" target="_parent">
+<a xlink:href="Gc.Module.Controller.AbstractController.html" xlink:title="«abstract»&lt;br/&gt;AbstractController" target="_parent">
 <polygon fill="none" stroke="black" points="1318,-949 1180,-949 1180,-913 1318,-913 1318,-949"/>
-<text text-anchor="middle" x="1249" y="-928.1" font-family="Courier,monospace" font-size="11.00">AbstractController</text>
+<text text-anchor="start" x="1215" y="-936.433" font-family="Courier,monospace" font-size="11.00">«abstract»</text>
+<text text-anchor="start" x="1188" y="-923.233" font-family="Courier,monospace" font-size="11.00">AbstractController</text>
 </a>
 </g>
 <!-- \\Gc\\Mvc\\Controller\\Action -->
@@ -1192,8 +1193,8 @@
 </g>
 <!-- \\Gc\\Module\\Controller\\AbstractController&#45;&gt;\\Gc\\Mvc\\Controller\\Action -->
 <g id="edge97" class="edge"><title>\\Gc\\Module\\Controller\\AbstractController&#45;&gt;\\Gc\\Mvc\\Controller\\Action</title>
-<path fill="none" stroke="black" d="M1179.98,-937.3C1072.45,-947.114 868.472,-965.731 783.579,-973.479"/>
-<polygon fill="none" stroke="black" points="783.234,-969.996 773.593,-974.39 783.87,-976.967 783.234,-969.996"/>
+<path fill="none" stroke="black" d="M1179.45,-937.348C1071.74,-947.178 868.186,-965.757 783.487,-973.487"/>
+<polygon fill="none" stroke="black" points="783.165,-970.002 773.525,-974.397 783.801,-976.973 783.165,-970.002"/>
 </g>
 <!-- \\Gc\\Module\\Collection -->
 <g id="node86" class="node"><title>\\Gc\\Module\\Collection</title>

@@ -236,7 +236,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/View/Resolver/TemplatePathStack.php" hash="bff3cf002ea89d4692a5d5dffee61bf1" package="Library\View\Resolver">
+  <file path="Gc/View/Resolver/TemplatePathStack.php" hash="935ffb30f71bbc2c7305b9fb005ceeb4" package="Library\View\Resolver">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -714,7 +714,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/View/Helper/FormErrors.php" hash="d21e93e9ba523ad22b83263a8df28908" package="Library\View\Helper">
+  <file path="Gc/View/Helper/FormErrors.php" hash="3582eaedd0e2da2f7498575e7536f6b8" package="Library\View\Helper">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -750,7 +750,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </docblock>
       <property final="false" static="false" visibility="protected" line="42" namespace="Gc\View\Helper" package="Default">
         <name>$view</name>
-        <default><![CDATA[null]]></default>
+        <default><![CDATA[NULL]]></default>
         <docblock line="37">
           <description><![CDATA[View object]]></description>
           <long-description><![CDATA[]]></long-description>
@@ -760,7 +760,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         </docblock>
       </property>
       <property final="false" static="false" visibility="protected" line="48" namespace="Gc\View\Helper" package="Default">
-        <name>$_htmlElementEnd</name>
+        <name>$_html_element_end</name>
         <default><![CDATA['</li></ul>']]></default>
         <docblock line="44">
           <description><![CDATA[Element block end tags]]></description>
@@ -771,7 +771,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         </docblock>
       </property>
       <property final="false" static="false" visibility="protected" line="54" namespace="Gc\View\Helper" package="Default">
-        <name>$_htmlElementStart</name>
+        <name>$_html_element_start</name>
         <default><![CDATA['<ul%s><li>']]></default>
         <docblock line="50">
           <description><![CDATA[Element block start tags]]></description>
@@ -782,7 +782,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         </docblock>
       </property>
       <property final="false" static="false" visibility="protected" line="60" namespace="Gc\View\Helper" package="Default">
-        <name>$_htmlElementSeparator</name>
+        <name>$_html_element_separator</name>
         <default><![CDATA['</li><li>']]></default>
         <docblock line="56">
           <description><![CDATA[Element block separator]]></description>
@@ -816,166 +816,166 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         </argument>
         <argument line="69">
           <name>$options</name>
-          <default><![CDATA[null]]></default>
+          <default><![CDATA[NULL]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="107" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="112" package="Default">
         <name>setElementEnd</name>
         <full_name>setElementEnd</full_name>
-        <docblock line="101">
+        <docblock line="106">
           <description><![CDATA[Set end string for displaying errors]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="101" name="param" description="" type="string" variable="$string">
+          <tag line="106" name="param" description="" type="string" variable="$string">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="101" name="return" description="" type="\Zend\View\Helper\FormErrors">
-            <type by_reference="false">\Zend\View\Helper\FormErrors</type>
+          <tag line="106" name="return" description="" type="\Gc\View\Helper\FormErrors">
+            <type by_reference="false">\Gc\View\Helper\FormErrors</type>
           </tag>
         </docblock>
-        <argument line="107">
+        <argument line="112">
           <name>$string</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="118" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="124" package="Default">
         <name>getElementEnd</name>
         <full_name>getElementEnd</full_name>
-        <docblock line="113">
+        <docblock line="119">
           <description><![CDATA[Retrieve end string for displaying errors]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="113" name="return" description="" type="string">
+          <tag line="119" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="129" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="135" package="Default">
         <name>setElementSeparator</name>
         <full_name>setElementSeparator</full_name>
-        <docblock line="123">
+        <docblock line="129">
           <description><![CDATA[Set separator string for displaying errors]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="123" name="param" description="" type="string" variable="$string">
+          <tag line="129" name="param" description="" type="string" variable="$string">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="123" name="return" description="" type="\Zend\View\Helper\FormErrors">
-            <type by_reference="false">\Zend\View\Helper\FormErrors</type>
+          <tag line="129" name="return" description="" type="\Gc\View\Helper\FormErrors">
+            <type by_reference="false">\Gc\View\Helper\FormErrors</type>
           </tag>
         </docblock>
-        <argument line="129">
+        <argument line="135">
           <name>$string</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="140" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="147" package="Default">
         <name>getElementSeparator</name>
         <full_name>getElementSeparator</full_name>
-        <docblock line="135">
+        <docblock line="142">
           <description><![CDATA[Retrieve separator string for displaying errors]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="135" name="return" description="" type="string">
+          <tag line="142" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="151" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="158" package="Default">
         <name>setElementStart</name>
         <full_name>setElementStart</full_name>
-        <docblock line="145">
+        <docblock line="152">
           <description><![CDATA[Set start string for displaying errors]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="145" name="param" description="" type="string" variable="$string">
+          <tag line="152" name="param" description="" type="string" variable="$string">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="145" name="return" description="" type="\Zend\View\Helper\FormErrors">
-            <type by_reference="false">\Zend\View\Helper\FormErrors</type>
+          <tag line="152" name="return" description="" type="\Gc\View\Helper\FormErrors">
+            <type by_reference="false">\Gc\View\Helper\FormErrors</type>
           </tag>
         </docblock>
-        <argument line="151">
+        <argument line="158">
           <name>$string</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="162" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="170" package="Default">
         <name>getElementStart</name>
         <full_name>getElementStart</full_name>
-        <docblock line="157">
+        <docblock line="165">
           <description><![CDATA[Retrieve start string for displaying errors]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="157" name="return" description="" type="string">
+          <tag line="165" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\View\Helper" line="177" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\View\Helper" line="185" package="Default">
         <name>_htmlAttribs</name>
         <full_name>_htmlAttribs</full_name>
-        <docblock line="167">
+        <docblock line="175">
           <description><![CDATA[Converts an associative array to a string of tag attributes.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="167" name="access" description="public"/>
-          <tag line="167" name="param" description="From this array, each key-value pair is converted to an attribute name and value." type="array" variable="$attribs">
+          <tag line="175" name="access" description="public"/>
+          <tag line="175" name="param" description="From this array, each key-value pair is converted to an attribute name and value." type="array" variable="$attribs">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="167" name="return" description="The XHTML for the attributes." type="string">
+          <tag line="175" name="return" description="The XHTML for the attributes." type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="177">
+        <argument line="185">
           <name>$attribs</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\View\Helper" line="222" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="Gc\View\Helper" line="242" package="Default">
         <name>_normalizeId</name>
         <full_name>_normalizeId</full_name>
-        <docblock line="216">
+        <docblock line="236">
           <description><![CDATA[Normalize an ID]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="216" name="param" description="" type="string" variable="$value">
+          <tag line="236" name="param" description="" type="string" variable="$value">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="216" name="return" description="" type="string">
+          <tag line="236" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="222">
+        <argument line="242">
           <name>$value</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="241" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="265" package="Default">
         <name>setView</name>
         <full_name>setView</full_name>
-        <docblock line="235">
+        <docblock line="259">
           <description><![CDATA[Set the View object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="235" name="param" description="" type="\Zend\View\Renderer\RendererInterface" variable="$view">
+          <tag line="259" name="param" description="" type="\Zend\View\Renderer\RendererInterface" variable="$view">
             <type by_reference="false">\Zend\View\Renderer\RendererInterface</type>
           </tag>
-          <tag line="235" name="return" description="" type="\Zend\View\Helper\AbstractHelper">
+          <tag line="259" name="return" description="" type="\Zend\View\Helper\AbstractHelper">
             <type by_reference="false">\Zend\View\Helper\AbstractHelper</type>
           </tag>
         </docblock>
-        <argument line="241">
+        <argument line="265">
           <name>$view</name>
           <default><![CDATA[]]></default>
           <type>\Zend\View\Renderer\RendererInterface</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="252" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="277" package="Default">
         <name>getView</name>
         <full_name>getView</full_name>
-        <docblock line="247">
+        <docblock line="272">
           <description><![CDATA[Get the view object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="247" name="return" description="" type="null|\Zend\View\Renderer\RendererInterface">
-            <type by_reference="false">null</type>
+          <tag line="272" name="return" description="" type="NULL|\Zend\View\Renderer\RendererInterface">
+            <type by_reference="false">NULL</type>
             <type by_reference="false">\Zend\View\Renderer\RendererInterface</type>
           </tag>
         </docblock>
@@ -1103,7 +1103,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/View/Helper/Tools.php" hash="b5c7b0b3c35c9f67893727b5c29c0a5a" package="Library\View\Helper">
+  <file path="Gc/View/Helper/Tools.php" hash="7b2fb791fd9867a34fe24b2366a587e0" package="Library\View\Helper">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -1223,7 +1223,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/View/Helper/ModuleUrl.php" hash="10786cb3637d920763b904b47d98e50c" package="Library\View\Helper">
+  <file path="Gc/View/Helper/ModuleUrl.php" hash="c86294391ea4c1923214e1838274ea93" package="Library\View\Helper">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -1256,13 +1256,12 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         <description><![CDATA[Helper for making easy links and getting urls that depend on the routes and router.]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="51" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="50" package="Default">
         <name>__invoke</name>
         <full_name>__invoke</full_name>
         <docblock line="37">
           <description><![CDATA[Generates an url given the name of a route.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="37" name="see" description="\Zend\Mvc\Router\RouteInterface::assemble()" refers="\Zend\Mvc\Router\RouteInterface::assemble()"/>
           <tag line="37" name="param" description="Action name" type="string" variable="$action_name">
             <type by_reference="false">string</type>
           </tag>
@@ -1291,27 +1290,27 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
             <type by_reference="false">\Gc\View\Helper\Exception\RuntimeException</type>
           </tag>
         </docblock>
-        <argument line="51">
+        <argument line="50">
           <name>$action_name</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
-        <argument line="51">
+        <argument line="50">
           <name>$controller_name</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
-        <argument line="51">
+        <argument line="50">
           <name>$query_params</name>
           <default><![CDATA[array()]]></default>
           <type/>
         </argument>
-        <argument line="51">
+        <argument line="50">
           <name>$options</name>
           <default><![CDATA[array()]]></default>
           <type/>
         </argument>
-        <argument line="51">
+        <argument line="50">
           <name>$reuse_matched_params</name>
           <default><![CDATA[TRUE]]></default>
           <type/>
@@ -2527,7 +2526,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/Component/TreeView.php" hash="462ac2aebf5bbbc528d4ba5b61a4088b" package="Library\Component">
+  <file path="Gc/Component/TreeView.php" hash="1a3d01e81e4b6624d1bcb7806107c8c5" package="Library\Component">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -2583,7 +2582,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         </docblock>
         <argument line="47">
           <name>$treeview_data</name>
-          <default><![CDATA[]]></default>
+          <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
@@ -2625,9 +2624,28 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
           </tag>
         </docblock>
       </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Component" line="143" package="Default">
+        <name>setData</name>
+        <full_name>setData</full_name>
+        <docblock line="138">
+          <description><![CDATA[Set data]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="138" name="param" description="" type="array" variable="$array">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="138" name="return" description="" type="\Gc\Component\Tabs">
+            <type by_reference="false">\Gc\Component\Tabs</type>
+          </tag>
+        </docblock>
+        <argument line="143">
+          <name>$array</name>
+          <default><![CDATA[]]></default>
+          <type>array</type>
+        </argument>
+      </method>
     </class>
   </file>
-  <file path="Gc/Component/Navigation.php" hash="0b559a8d6eb274646f8d97ed08d4c9e7" package="Library\Component">
+  <file path="Gc/Component/Navigation.php" hash="d4c730fc47626f2eb1d405f912c49e88" package="Library\Component">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -2698,7 +2716,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         <name>__construct</name>
         <full_name>__construct</full_name>
         <docblock line="56">
-          <description><![CDATA[Constructor, initialize document]]></description>
+          <description><![CDATA[Constructor, initialize documents]]></description>
           <long-description><![CDATA[]]></long-description>
           <tag line="56" name="return" description="" type="void">
             <type by_reference="false">void</type>
@@ -2775,7 +2793,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/Component/Tabs.php" hash="f0fbbff102bb894146698b2235fac085" package="Library\Component">
+  <file path="Gc/Component/Tabs.php" hash="54e460096051f9fd3c041424cccaf461" package="Library\Component">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -2807,7 +2825,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         <description><![CDATA[Create html for jQuery Ui Tabs]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <property final="false" static="false" visibility="private" line="39" namespace="Gc\Component" package="Default">
+      <property final="false" static="false" visibility="protected" line="39" namespace="Gc\Component" package="Default">
         <name>$_data</name>
         <default><![CDATA[]]></default>
         <docblock line="35">
@@ -2830,7 +2848,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         </docblock>
         <argument line="45">
           <name>$array</name>
-          <default><![CDATA[]]></default>
+          <default><![CDATA[array()]]></default>
           <type>array</type>
         </argument>
       </method>
@@ -2853,16 +2871,35 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Component" line="88" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Component" line="87" package="Default">
         <name>__toString</name>
         <full_name>__toString</full_name>
-        <docblock line="84">
+        <docblock line="83">
           <description><![CDATA[Render tab]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="84" name="return" description="" type="string">
+          <tag line="83" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Component" line="102" package="Default">
+        <name>setData</name>
+        <full_name>setData</full_name>
+        <docblock line="97">
+          <description><![CDATA[Set data]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="97" name="param" description="" type="array" variable="$array">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="97" name="return" description="" type="\Gc\Component\Tabs">
+            <type by_reference="false">\Gc\Component\Tabs</type>
+          </tag>
+        </docblock>
+        <argument line="102">
+          <name>$array</name>
+          <default><![CDATA[]]></default>
+          <type>array</type>
+        </argument>
       </method>
     </class>
   </file>
@@ -3148,7 +3185,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/Module/Controller/AbstractController.php" hash="5254206bedfcb3378a4256f103d016c2" package="Library\Module\Controller/AbstractController">
+  <file path="Gc/Module/Controller/AbstractController.php" hash="b34afac496f0d93384f995bf3dbb646c" package="Library\Module\Controller/AbstractController">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -3175,7 +3212,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
     <namespace-alias name="Action">Gc\Mvc\Controller\Action</namespace-alias>
     <namespace-alias name="Request">Zend\Stdlib\RequestInterface</namespace-alias>
     <namespace-alias name="Response">Zend\Stdlib\ResponseInterface</namespace-alias>
-    <class final="false" abstract="false" namespace="Gc\Module\Controller" line="36" package="Default">
+    <class final="true" abstract="true" namespace="Gc\Module\Controller" line="36" package="Default">
       <extends>\Gc\Mvc\Controller\Action</extends>
       <name>AbstractController</name>
       <full_name>\Gc\Module\Controller\AbstractController</full_name>
