@@ -116,10 +116,13 @@ class Module
             }
 
 
-            if(isset($config['view_manager']['display_exceptions']) and GcConfig::getValue('debug_is_active'))
+            if(Registry::isRegistered('Db'))
             {
-                $config['view_manager']['display_not_found_reason'] = TRUE;
-                $config['view_manager']['display_exceptions'] = TRUE;
+                if(isset($config['view_manager']['display_exceptions']) and GcConfig::getValue('debug_is_active'))
+                {
+                    $config['view_manager']['display_not_found_reason'] = TRUE;
+                    $config['view_manager']['display_exceptions'] = TRUE;
+                }
             }
 
             $this->_config = $config;
