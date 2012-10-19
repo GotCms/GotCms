@@ -65,7 +65,7 @@ class Config extends AbstractForm
         $offline_document->setAttribute('label', 'Offline document');
         $document_collection = new Document\Collection();
         $document_collection->load(0);
-        $offline_document->setValueOptions($document_collection->getSelect());
+        $offline_document->setValueOptions(array('Select document') + $document_collection->getSelect());
 
         $general_fieldset->add($name);
         $general_fieldset->add($is_offline);

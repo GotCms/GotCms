@@ -191,4 +191,14 @@ abstract class AbstractTable extends Object
     {
         return StaticEventManager::getInstance();
     }
+
+    /**
+     * Retrieve driver name
+     * @return string
+     */
+     public function getDriverName()
+     {
+         $configuration = Registry::get('Configuration');
+         return $configuration['db']['driver'];
+     }
 }

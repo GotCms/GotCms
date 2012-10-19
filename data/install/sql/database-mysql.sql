@@ -10,6 +10,7 @@ SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS `core_config_data`;
 DROP TABLE IF EXISTS `core_session`;
 DROP TABLE IF EXISTS `core_translate_locale`;
+DROP TABLE IF EXISTS `core_translate`;
 DROP TABLE IF EXISTS `datatype`;
 DROP TABLE IF EXISTS `document`;
 DROP TABLE IF EXISTS `document_type`;
@@ -62,7 +63,7 @@ CREATE TABLE `document_type` (
     `name` VARCHAR(255) NOT NULL,
     `description` TEXT,
     `icon_id` integer,
-    `default_view_id` integer,
+    `DEFAULT_view_id` integer,
     `user_id` INT NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
@@ -133,7 +134,6 @@ CREATE TABLE `tab` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-DROP TABLE IF EXISTS `core_translate`;
 CREATE TABLE `core_translate` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `source` VARCHAR(255) NOT NULL,
@@ -233,28 +233,29 @@ CREATE TABLE `core_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `log_visitor` (
-    `id` bigint(20) unsigned NOT NULL auto_increment,
-    `session_id` char(64) NOT NULL default '',
-    `http_user_agent` varchar(255) default NULL,
-    `http_accept_charset` varchar(255) default NULL,
-    `http_accept_language` varchar(255) default NULL,
-    `server_addr` bigint(20) default NULL,
-    `remote_addr` bigint(20) default NULL
-    PRIMARY KEY  (`visitor_id`)
+    `id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT,
+    `session_id` CHAR(64) NOT NULL DEFAULT '',
+    `http_user_agent` VARCHAR(255) DEFAULT NULL,
+    `http_accept_CHARset` VARCHAR(255) DEFAULT NULL,
+    `http_accept_language` VARCHAR(255) DEFAULT NULL,
+    `server_addr` BIGINT(20) DEFAULT NULL,
+    `remote_addr` BIGINT(20) DEFAULT NULL,
+    PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `log_url_info` (
-    `id` bigint(20) unsigned NOT NULL auto_increment,
-    `url` varchar(255) NOT NULL default '',
-    `referer` varchar(255) default NULL,
-    PRIMARY KEY  (`url_id`)
+    `id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT,
+    `url` VARCHAR(255) NOT NULL DEFAULT '',
+    `referer` VARCHAR(255) DEFAULT NULL,
+    PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `log_url` (
-    `id` bigint(20) unsigned NOT NULL default '0',
-    `visit_at` datetime NOT NULL default '0000-00-00 00:00:00'
-    `log_url_info_id` bigint(20) unsigned default NULL,
-    `log_visitor_id` bigint(20) unsigned default NULL,
+    `id` BIGINT(20) unsigned NOT NULL AUTO_INCREMENT,
+    `visit_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+    `log_url_info_id` BIGINT(20) unsigned,
+    `log_visitor_id` BIGINT(20) unsigned,
+    PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 -- End Table's declaration
@@ -278,7 +279,7 @@ ALTER TABLE `document` ADD CONSTRAINT `fk_documents_view` FOREIGN KEY (`view_id`
 
 ALTER TABLE `document` ADD CONSTRAINT `fk_document_document_type` FOREIGN KEY (`document_type_id`) REFERENCES `document_type`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE `document_type` ADD CONSTRAINT `fk_document_type_view` FOREIGN KEY (`default_view_id`) REFERENCES `view`(`id`) ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE `document_type` ADD CONSTRAINT `fk_document_type_view` FOREIGN KEY (`DEFAULT_view_id`) REFERENCES `view`(`id`) ON UPDATE SET NULL ON DELETE SET NULL;
 
 ALTER TABLE `document_type` ADD CONSTRAINT `fk_document_type_icon` FOREIGN KEY (`icon_id`) REFERENCES `icon`(`id`) ON UPDATE SET NULL ON DELETE SET NULL;
 
