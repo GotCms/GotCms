@@ -54,7 +54,7 @@ class Navigation
      protected $_requestUri;
 
     /**
-     * Constructor, initialize document
+     * Constructor, initialize documents
      * @return void
      */
     public function __construct()

@@ -42,7 +42,7 @@ class Tabs
      * Tabs constructor
      * @param array $array
      */
-    public function __construct(array $array)
+    public function __construct(array $array = array())
     {
         $this->_data = $array;
     }
@@ -54,13 +54,12 @@ class Tabs
      */
     public function render(array $tabs = NULL)
     {
-        $i = 0;
-        $html = '<ul>';
         if($tabs === NULL)
         {
             $tabs = $this->_data;
         }
 
+        $html = '<ul>';
         $i = 1;
         foreach($tabs as $iterator)
         {

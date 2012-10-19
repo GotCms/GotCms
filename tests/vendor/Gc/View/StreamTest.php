@@ -25,7 +25,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\View\Stream::stream_open
-     * @todo   Implement testStream_open().
      */
     public function testStream_open()
     {
@@ -36,7 +35,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\View\Stream::stream_read
-     * @todo   Implement testStream_read().
      */
     public function testStream_read()
     {
@@ -47,7 +45,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\View\Stream::stream_write
-     * @todo   Implement testStream_write().
      */
     public function testStream_write()
     {

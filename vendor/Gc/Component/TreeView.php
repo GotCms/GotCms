@@ -44,7 +44,7 @@ class TreeView
      * Treeview constructor
      * @param array $treeview_data
      */
-    public function __construct(array $treeview_data)
+    public function __construct(array $treeview_data = array())
     {
         $this->_data = $treeview_data;
     }
@@ -133,5 +133,17 @@ class TreeView
             trigger_error($e->getMessage(), E_USER_ERROR);
             return FALSE;
         }
+    }
+
+    /**
+     * Set data
+     * @param array $array
+     * @return Tabs
+     */
+    public function setData(array $array)
+    {
+        $this->_data = $array;
+
+        return $this;
     }
 }
