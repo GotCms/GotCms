@@ -173,7 +173,7 @@ class Document extends AbstractForm
         }
 
         $view = new Element\Select('document-view');
-        $view->setValueOptions($select)
+        $view->setValueOptions(array('Select view') + $select)
             ->setValue((string)$document->getViewId())
             ->setAttribute('id', 'view')
             ->setAttribute('label', 'View');
