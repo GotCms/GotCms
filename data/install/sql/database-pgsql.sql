@@ -250,6 +250,15 @@ CREATE TABLE "log_url" (
 ) WITH OIDS;
 ALTER TABLE "log_url" ADD CONSTRAINT "log_url_pk" PRIMARY KEY("id");
 
+DROP TABLE IF EXISTS "module" CASCADE;
+CREATE TABLE "module" (
+  "id" serial NOT NULL,
+  "name" character varying(50) NOT NULL,
+  "created_at" timestamp without time zone NOT NULL
+) WITH OIDS;
+CREATE UNIQUE INDEX "module_idx" ON "module" USING btree ("name");
+
+ALTER TABLE "module" ADD CONSTRAINT "module_pk" PRIMARY KEY("id");
 -- End Table's declaration
 
 -- Start Relation's declaration

@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS `log_url_info`;
 DROP TABLE IF EXISTS `log_url`;
 DROP TABLE IF EXISTS `log_visitor`;
 DROP TABLE IF EXISTS `layout`;
+DROP TABLE IF EXISTS `module`;
 DROP TABLE IF EXISTS `property`;
 DROP TABLE IF EXISTS `property_value`;
 DROP TABLE IF EXISTS `script`;
@@ -114,7 +115,7 @@ CREATE TABLE `property` (
     `tab_id` INT NOT NULL,
     `datatype_id` INT NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `name` (`identifier`)
+    UNIQUE KEY `name` (`identifier`, `tab_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `property_value` (
@@ -258,6 +259,13 @@ CREATE TABLE `log_url` (
     PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
+CREATE TABLE `module` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(50) NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 -- End Table's declaration
 
 -- Start Relation's declaration
