@@ -200,7 +200,9 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2012-09-20 22:31:50', 'Mai
     <script type="text/javascript" src="/frontend/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/frontend/js/jquery.easing-sooper.js"></script>
     <script type="text/javascript" src="/frontend/js/jquery.sooperfish.js"></script>
-    <script type="text/javascript" src="/frontend/js/image_fade.js"></script>
+    <?php if(!empty($this->slider)): ?>
+    	<script type="text/javascript" src="/frontend/js/image_fade.js"></script>
+	<?php endif; ?>
     <!-- initialise sooperfish menu -->
     <script type="text/javascript">
         $(document).ready(function() {
