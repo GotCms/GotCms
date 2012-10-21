@@ -232,11 +232,11 @@ class Visitor extends AbstractTable
             {
                 if($sort == 'HOUR')
                 {
-                    $select->where("DATE_FORMAT(lu.visit_at, '%d/%m/%Y') = DATE_FORMAT(NOW(), '%d/%m/%Y')");
+                    $select->where("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')");
                 }
                 else
                 {
-                    $select->where("lu.visit_at > EXTRACT(YEAR_MONTH FROM NOW())");
+                    $select->where("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())");
                 }
             }
 
@@ -349,11 +349,11 @@ class Visitor extends AbstractTable
             {
                 if($sort == 'HOUR')
                 {
-                    $select->where("DATE_FORMAT(lu.visit_at, '%d/%m/%Y') = DATE_FORMAT(NOW(), '%d/%m/%Y')");
+                    $select->where("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')");
                 }
                 else
                 {
-                    $select->where("lu.visit_at > EXTRACT(YEAR_MONTH FROM NOW())");
+                    $select->where("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())");
                 }
             }
             $select->order('date ASC');
