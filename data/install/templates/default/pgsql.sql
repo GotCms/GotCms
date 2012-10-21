@@ -197,7 +197,7 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2012-09-20 22:31:50', 'Mai
 
     </div>
     <!-- javascript at the bottom for fast page loading -->
-    <script type="text/javascript" src="/frontend/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/frontend/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="/frontend/js/jquery.easing-sooper.js"></script>
     <script type="text/javascript" src="/frontend/js/jquery.sooperfish.js"></script>
     <script type="text/javascript" src="/frontend/js/image_fade.js"></script>
@@ -268,30 +268,20 @@ INSERT INTO property VALUES (13, 'Main Title', 'mainTitle', 'Title', false, NULL
 -- Data for Name: property_value; Type: TABLE DATA; Schema: public;
 --
 
-INSERT INTO property_value VALUES (1, 1, 14, 'a:3:{i:1;a:2:{i:0;a:1:{s:5:"value";s:152:"a:1:{i:0;a:5:{s:5:"value";s:35:"/media/files/14/1/50732534879d2.jpg";s:5:"width";i:950;s:6:"height";i:450;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";}}";}i:1;a:1:{s:5:"value";s:51:""You can put a
-caption for your
-image right here"";}}i:2;a:2:{i:0;a:1:{s:5:"value";s:152:"a:1:{i:0;a:5:{s:5:"value";s:35:"/media/files/14/1/507325348a76a.jpg";s:5:"width";i:950;s:6:"height";i:450;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";}}";}i:1;a:1:{s:5:"value";s:51:""You can put a
-caption for your
-image right here"";}}i:3;a:2:{i:0;a:1:{s:5:"value";s:152:"a:1:{i:0;a:5:{s:5:"value";s:35:"/media/files/14/1/507325348af74.jpg";s:5:"width";i:950;s:6:"height";i:450;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";}}";}i:1;a:1:{s:5:"value";s:51:""You can put a
-caption for your
-image right here"";}}}');
-INSERT INTO property_value VALUES (2, 1, 1, 'My website');
-INSERT INTO property_value VALUES (3, 1, 2, '');
-INSERT INTO property_value VALUES (4, 1, 3, 'My website');
-INSERT INTO property_value VALUES (5, 1, 4, 'My website');
-INSERT INTO property_value VALUES (6, 2, 5, '<h1>
-	About This Template</h1>
-<p>
-	This simple, fixed width website template is released under a <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 Licence</a>. This means you are free to download and use it for personal and commercial projects. However, you <strong>must leave the &#39;design from css3templates.co.uk&#39; link in the footer of the template</strong>. This template is written entirely in <strong>HTML5</strong> and <strong>CSS3</strong>.</p>
-');
-INSERT INTO property_value VALUES (7, 2, 10, 'About');
-INSERT INTO property_value VALUES (8, 2, 11, '');
-INSERT INTO property_value VALUES (9, 2, 12, 'About');
-INSERT INTO property_value VALUES (10, 2, 13, 'About');
-INSERT INTO property_value VALUES (11, 3, 6, 'Contact');
-INSERT INTO property_value VALUES (12, 3, 7, 'Contact');
-INSERT INTO property_value VALUES (13, 3, 8, 'Contact');
-INSERT INTO property_value VALUES (14, 3, 9, 'Contact');
+INSERT INTO property_value VALUES (6, 2, 5, '\x3c68313e0a0941626f757420546869732054656d706c6174653c2f68313e0a3c703e0a09546869732073696d706c652c20666978656420776964746820776562736974652074656d706c6174652069732072656c656173656420756e6465722061203c6120687265663d22687474703a2f2f6372656174697665636f6d6d6f6e732e6f72672f6c6963656e7365732f62792f332e30223e437265617469766520436f6d6d6f6e73204174747269627574696f6e20332e30204c6963656e63653c2f613e2e2054686973206d65616e7320796f7520617265206672656520746f20646f776e6c6f616420616e642075736520697420666f7220706572736f6e616c20616e6420636f6d6d65726369616c2070726f6a656374732e20486f77657665722c20796f75203c7374726f6e673e6d757374206c656176652074686520262333393b64657369676e2066726f6d206373733374656d706c617465732e636f2e756b262333393b206c696e6b20696e2074686520666f6f746572206f66207468652074656d706c6174653c2f7374726f6e673e2e20546869732074656d706c617465206973207772697474656e20656e746972656c7920696e203c7374726f6e673e48544d4c353c2f7374726f6e673e20616e64203c7374726f6e673e435353333c2f7374726f6e673e2e3c2f703e0a');
+INSERT INTO property_value VALUES (7, 2, 10, '\x41626f7574');
+INSERT INTO property_value VALUES (8, 2, 11, '\x');
+INSERT INTO property_value VALUES (9, 2, 12, '\x41626f7574');
+INSERT INTO property_value VALUES (10, 2, 13, '\x41626f7574');
+INSERT INTO property_value VALUES (11, 3, 6, '\x436f6e74616374');
+INSERT INTO property_value VALUES (12, 3, 7, '\x436f6e74616374');
+INSERT INTO property_value VALUES (13, 3, 8, '\x436f6e74616374');
+INSERT INTO property_value VALUES (14, 3, 9, '\x436f6e74616374');
+INSERT INTO property_value VALUES (1, 1, 14, '\x613a333a7b693a313b613a323a7b693a303b613a313a7b733a353a2276616c7565223b733a3135323a22613a313a7b693a303b613a353a7b733a353a2276616c7565223b733a33353a222f6d656469612f66696c65732f31342f312f353037333235333438373964322e6a7067223b733a353a227769647468223b693a3935303b733a363a22686569676874223b693a3435303b733a343a2268746d6c223b693a323b733a343a226d696d65223b733a31303a22696d6167652f6a706567223b7d7d223b7d693a313b613a313a7b733a353a2276616c7565223b733a35313a2222596f752063616e2070757420610d0a63617074696f6e20666f7220796f75720d0a696d616765207269676874206865726522223b7d7d693a323b613a323a7b693a303b613a313a7b733a353a2276616c7565223b733a3135323a22613a313a7b693a303b613a353a7b733a353a2276616c7565223b733a33353a222f6d656469612f66696c65732f31342f312f353037333235333438613736612e6a7067223b733a353a227769647468223b693a3935303b733a363a22686569676874223b693a3435303b733a343a2268746d6c223b693a323b733a343a226d696d65223b733a31303a22696d6167652f6a706567223b7d7d223b7d693a313b613a313a7b733a353a2276616c7565223b733a35313a2222596f752063616e2070757420610d0a63617074696f6e20666f7220796f75720d0a696d616765207269676874206865726522223b7d7d693a333b613a323a7b693a303b613a313a7b733a353a2276616c7565223b733a3135323a22613a313a7b693a303b613a353a7b733a353a2276616c7565223b733a33353a222f6d656469612f66696c65732f31342f312f353037333235333438616637342e6a7067223b733a353a227769647468223b693a3935303b733a363a22686569676874223b693a3435303b733a343a2268746d6c223b693a323b733a343a226d696d65223b733a31303a22696d6167652f6a706567223b7d7d223b7d693a313b613a313a7b733a353a2276616c7565223b733a35313a2222596f752063616e2070757420610d0a63617074696f6e20666f7220796f75720d0a696d616765207269676874206865726522223b7d7d7d');
+INSERT INTO property_value VALUES (2, 1, 1, '\x4d792077656273697465');
+INSERT INTO property_value VALUES (3, 1, 2, '\x');
+INSERT INTO property_value VALUES (4, 1, 3, '\x4d792077656273697465');
+INSERT INTO property_value VALUES (5, 1, 4, '\x4d792077656273697465');
 
 
 --

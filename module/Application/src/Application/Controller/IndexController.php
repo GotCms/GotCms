@@ -169,9 +169,10 @@ class IndexController extends Action
                 foreach($properties as $property)
                 {
                     $value = $property->getValue();
-                    if($this->is_serialized($property->getValue()))
+
+                    if($this->_isSerialized($value))
                     {
-                        $value = unserialize($property->getValue());
+                        $value = unserialize($value);
                     }
 
                     $view_model->setVariable($property->getIdentifier(), $value);
@@ -242,14 +243,14 @@ class IndexController extends Action
      * @param string $data
      * @return boolean
      */
-    protected function is_serialized($data)
+    protected function _isSerialized($data)
     {
-        if (trim($data) == "")
+        if(trim($data) == "")
         {
             return FALSE;
         }
 
-        if (preg_match("/^(i|s|a|o|d)(.*);/si", $data))
+        if(preg_match("/^(i|s|a|o|d)(.*);/si", $data))
         {
             return TRUE;
         }
