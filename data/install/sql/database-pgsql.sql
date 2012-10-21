@@ -101,7 +101,7 @@ CREATE TABLE "property_value" (
 "id" serial NOT NULL,
 "document_id" integer NOT NULL,
 "property_id" integer NOT NULL,
-"value" text
+"value" bytea
 ) WITH OIDS;
 ALTER TABLE "property_value" ADD CONSTRAINT "property_value_pk" PRIMARY KEY("id");
 

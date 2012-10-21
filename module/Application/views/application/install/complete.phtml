@@ -32,6 +32,7 @@
     <li id="c-db"><?php echo $this->escapeHtml($this->translate('Create database')); ?></li>
     <li id="i-d"><?php echo $this->escapeHtml($this->translate('Insert data')); ?></li>
     <li id="c-uar"><?php echo $this->escapeHtml($this->translate('Create users and roles')); ?></li>
+    <li id="it"><?php echo $this->escapeHtml($this->translate('Install template')); ?></li>
     <li id="c-cf"><?php echo $this->escapeHtml($this->translate('Create configuration file')); ?></li>
 </ul>
 
@@ -39,7 +40,7 @@
 <script type="text/javascript">
     $(document).ready(function()
     {
-        $data = ['c-db', 'i-d', 'c-uar', 'c-cf'];
+        $data = ['c-db', 'i-d', 'c-uar', 'it', 'c-cf'];
 
         function nextStep($step)
         {

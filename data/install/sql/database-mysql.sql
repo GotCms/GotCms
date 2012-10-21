@@ -64,7 +64,7 @@ CREATE TABLE `document_type` (
     `name` VARCHAR(255) NOT NULL,
     `description` TEXT,
     `icon_id` integer,
-    `DEFAULT_view_id` integer,
+    `default_view_id` integer,
     `user_id` INT NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
@@ -122,7 +122,7 @@ CREATE TABLE `property_value` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `document_id` INT NOT NULL,
     `property_id` INT NOT NULL,
-    `value` text,
+    `value` LONGBLOB,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
@@ -287,7 +287,7 @@ ALTER TABLE `document` ADD CONSTRAINT `fk_documents_view` FOREIGN KEY (`view_id`
 
 ALTER TABLE `document` ADD CONSTRAINT `fk_document_document_type` FOREIGN KEY (`document_type_id`) REFERENCES `document_type`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE `document_type` ADD CONSTRAINT `fk_document_type_view` FOREIGN KEY (`DEFAULT_view_id`) REFERENCES `view`(`id`) ON UPDATE SET NULL ON DELETE SET NULL;
+ALTER TABLE `document_type` ADD CONSTRAINT `fk_document_type_view` FOREIGN KEY (`default_view_id`) REFERENCES `view`(`id`) ON UPDATE SET NULL ON DELETE SET NULL;
 
 ALTER TABLE `document_type` ADD CONSTRAINT `fk_document_type_icon` FOREIGN KEY (`icon_id`) REFERENCES `icon`(`id`) ON UPDATE SET NULL ON DELETE SET NULL;
 

@@ -159,6 +159,7 @@ class Document extends AbstractForm
         $document_type = $document->getDocumentType();
         $views_collection = $document_type->getAvailableViews();
         $select = $views_collection->getSelect();
+
         if(empty($select))
         {
             $view_model = \Gc\View\Model::fromId($document->getDocumentType()->getDefaultViewId());
@@ -173,7 +174,7 @@ class Document extends AbstractForm
         }
 
         $view = new Element\Select('document-view');
-        $view->setValueOptions(array('Select view') + $select)
+        $view->setValueOptions(array('' => 'Select view') + $select)
             ->setValue((string)$document->getViewId())
             ->setAttribute('id', 'view')
             ->setAttribute('label', 'View');
@@ -195,7 +196,6 @@ class Document extends AbstractForm
         $more_information = new Element\Hidden('more_information');
         $more_information->setAttribute('content', '');
         $this->add($more_information);
-
 
         $this->parentId = $document->getParentId();
         $this->documentId = $document->getId();

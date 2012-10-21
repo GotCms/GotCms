@@ -40,8 +40,8 @@ return array(
         'locale' => 'en_US',
     ),
     'view_manager' => array(
-        'display_not_found_reason'  => FALSE,
-        'display_exceptions'        => FALSE,
+        'display_not_found_reason'  => TRUE,
+        'display_exceptions'        => TRUE,
         'doctype'                   => 'HTML5',
         'not_found_template'        => 'error/404',
         'exception_template'        => 'error/index',

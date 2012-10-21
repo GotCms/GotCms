@@ -182,12 +182,27 @@ class Install extends AbstractForm
         $admin_password_confirm = new Element\Password('admin_passowrd_confirm');
         $admin_password_confirm->setAttribute('label', 'Confirm admin password');
 
+        $path = GC_APPLICATION_PATH . '/data/install/templates/';
+        $list_dir = glob($path.'*', GLOB_ONLYDIR);
+        $options = array('' => 'Select template');
+        foreach($list_dir as $dir)
+        {
+            $dir = str_replace($path, '', $dir);
+            $options[$dir] = $dir;
+        }
+
+        $template = new Element\Select('template');
+        $template->setAttribute('label', 'Default template');
+        $template->setValueOptions($options);
+
+
         $this->add($site_name);
         $this->add($site_is_offline);
         $this->add($admin_email);
         $this->add($admin_login);
         $this->add($admin_password);
         $this->add($admin_password_confirm);
+        $this->add($template);
 
 
         $input_filter = $this->getInputFilter();
@@ -225,5 +240,10 @@ class Install extends AbstractForm
             'name' => 'admin_password',
             'required'=> FALSE,
         ), 'admin_password');
+
+        $inputFilter = $input_filter->add(array(
+            'name' => 'template',
+            'required'=> TRUE,
+        ), 'template');
     }
 }
