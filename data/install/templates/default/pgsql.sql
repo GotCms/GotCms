@@ -108,7 +108,7 @@ $this->navigation($container);
 $document = $this->layout()->currentDocument; 
 
 echo $this->navigation()->menu()->setUlClass(''sf-menu navigation'');', 'Navigation');
-INSERT INTO view VALUES (3, '2012-09-19 19:32:56', '2012-09-20 22:27:02', 'Contact', 'contact', '<?php echo $this->script(''contact''); ?>
+INSERT INTO view VALUES (3, '2012-09-19 19:32:56', '2012-09-20 22:27:02', 'Contact', 'contact', '<?php $this->script(''contact''); ?>
 <?php
 $number_1 = mt_rand(1, 9);
 $number_2 = mt_rand(1, 9);
