@@ -64,7 +64,7 @@
        </div>
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 42</div></td>
+      <td class="danger small"><div align="right">0 / 46</div></td>
      </tr>
 
      <tr>
@@ -81,13 +81,13 @@
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
       <td class="danger small"><div align="right">0 / 4</div></td>
-      <td class="danger small">110</td>
+      <td class="danger small">132</td>
       <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
         <div class="bar" style="width: 0.00%;"></div>
        </div>
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 42</div></td>
+      <td class="danger small"><div align="right">0 / 46</div></td>
      </tr>
 
      <tr>
@@ -98,17 +98,17 @@
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
       <td class="danger small"><div align="right">0 / 1</div></td>
-      <td class="danger small">20</td>
+      <td class="danger small">30</td>
       <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
         <div class="bar" style="width: 0.00%;"></div>
        </div>
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 13</div></td>
+      <td class="danger small"><div align="right">0 / 17</div></td>
      </tr>
 
      <tr>
-      <td class="danger" colspan="4">&nbsp;<a href="#71">fromArray(array $array)</a></td>
+      <td class="danger" colspan="4">&nbsp;<a href="#78">fromArray(array $array)</a></td>
       <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
         <div class="bar" style="width: 0.00%;"></div>
        </div>
@@ -125,7 +125,7 @@
      </tr>
 
      <tr>
-      <td class="danger" colspan="4">&nbsp;<a href="#84">fromId($property_value_id)</a></td>
+      <td class="danger" colspan="4">&nbsp;<a href="#91">fromId($property_value_id)</a></td>
       <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
         <div class="bar" style="width: 0.00%;"></div>
        </div>
@@ -142,7 +142,7 @@
      </tr>
 
      <tr>
-      <td class="danger" colspan="4">&nbsp;<a href="#104">save()</a></td>
+      <td class="danger" colspan="4">&nbsp;<a href="#111">save()</a></td>
       <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
         <div class="bar" style="width: 0.00%;"></div>
        </div>
@@ -218,93 +218,100 @@
      <tr class="danger"><td><div align="right"><a name="53"></a><a href="#53">53</a></div></td><td class="codeLine">        $this-&gt;setPropertyId($property_id);</td></tr>
      <tr class="danger"><td><div align="right"><a name="54"></a><a href="#54">54</a></div></td><td class="codeLine">        if(!empty($document_id) and !empty($property_id))</td></tr>
      <tr class="danger"><td><div align="right"><a name="55"></a><a href="#55">55</a></div></td><td class="codeLine">        {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="56"></a><a href="#56">56</a></div></td><td class="codeLine">            $prevalue_value = $this-&gt;select(array('property_id' =&gt; $property_id, 'document_id' =&gt; $document_id))-&gt;current();</td></tr>
+     <tr class="danger"><td><div align="right"><a name="56"></a><a href="#56">56</a></div></td><td class="codeLine">            $property_value = $this-&gt;select(array('property_id' =&gt; $property_id, 'document_id' =&gt; $document_id))-&gt;current();</td></tr>
      <tr><td><div align="right"><a name="57"></a><a href="#57">57</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="58"></a><a href="#58">58</a></div></td><td class="codeLine">            if(!empty($prevalue_value-&gt;id))</td></tr>
+     <tr class="danger"><td><div align="right"><a name="58"></a><a href="#58">58</a></div></td><td class="codeLine">            if(!empty($property_value-&gt;id))</td></tr>
      <tr class="danger"><td><div align="right"><a name="59"></a><a href="#59">59</a></div></td><td class="codeLine">            {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="60"></a><a href="#60">60</a></div></td><td class="codeLine">                $this-&gt;setId($prevalue_value-&gt;id);</td></tr>
-     <tr class="danger"><td><div align="right"><a name="61"></a><a href="#61">61</a></div></td><td class="codeLine">                $this-&gt;setValue($prevalue_value-&gt;value);</td></tr>
-     <tr class="danger"><td><div align="right"><a name="62"></a><a href="#62">62</a></div></td><td class="codeLine">            }</td></tr>
-     <tr class="danger"><td><div align="right"><a name="63"></a><a href="#63">63</a></div></td><td class="codeLine">        }</td></tr>
-     <tr class="danger"><td><div align="right"><a name="64"></a><a href="#64">64</a></div></td><td class="codeLine">    }</td></tr>
-     <tr><td><div align="right"><a name="65"></a><a href="#65">65</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="66"></a><a href="#66">66</a></div></td><td class="codeLine">    /**</td></tr>
-     <tr><td><div align="right"><a name="67"></a><a href="#67">67</a></div></td><td class="codeLine">     * Initialize from array</td></tr>
-     <tr><td><div align="right"><a name="68"></a><a href="#68">68</a></div></td><td class="codeLine">     * @param array $array</td></tr>
-     <tr><td><div align="right"><a name="69"></a><a href="#69">69</a></div></td><td class="codeLine">     * @return \Gc\Property\Value\Model</td></tr>
-     <tr><td><div align="right"><a name="70"></a><a href="#70">70</a></div></td><td class="codeLine">     */</td></tr>
-     <tr><td><div align="right"><a name="71"></a><a href="#71">71</a></div></td><td class="codeLine">    static function fromArray(array $array)</td></tr>
-     <tr><td><div align="right"><a name="72"></a><a href="#72">72</a></div></td><td class="codeLine">    {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="73"></a><a href="#73">73</a></div></td><td class="codeLine">        $property_value_table = new Model($array);</td></tr>
-     <tr class="danger"><td><div align="right"><a name="74"></a><a href="#74">74</a></div></td><td class="codeLine">        $property_value_table-&gt;setData($array);</td></tr>
-     <tr><td><div align="right"><a name="75"></a><a href="#75">75</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="76"></a><a href="#76">76</a></div></td><td class="codeLine">        return $property_value_table;</td></tr>
-     <tr><td><div align="right"><a name="77"></a><a href="#77">77</a></div></td><td class="codeLine">    }</td></tr>
-     <tr><td><div align="right"><a name="78"></a><a href="#78">78</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="79"></a><a href="#79">79</a></div></td><td class="codeLine">    /**</td></tr>
-     <tr><td><div align="right"><a name="80"></a><a href="#80">80</a></div></td><td class="codeLine">     * Initialize from id</td></tr>
-     <tr><td><div align="right"><a name="81"></a><a href="#81">81</a></div></td><td class="codeLine">     * @param integer $property_value_id</td></tr>
-     <tr><td><div align="right"><a name="82"></a><a href="#82">82</a></div></td><td class="codeLine">     * @return \Gc\Property\Value\Model</td></tr>
-     <tr><td><div align="right"><a name="83"></a><a href="#83">83</a></div></td><td class="codeLine">     */</td></tr>
-     <tr><td><div align="right"><a name="84"></a><a href="#84">84</a></div></td><td class="codeLine">    static function fromId($property_value_id)</td></tr>
-     <tr><td><div align="right"><a name="85"></a><a href="#85">85</a></div></td><td class="codeLine">    {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="86"></a><a href="#86">86</a></div></td><td class="codeLine">        $property_value_table = new Model($array);</td></tr>
-     <tr class="danger"><td><div align="right"><a name="87"></a><a href="#87">87</a></div></td><td class="codeLine">        $select = $property_value_table-&gt;select();</td></tr>
-     <tr class="danger"><td><div align="right"><a name="88"></a><a href="#88">88</a></div></td><td class="codeLine">        $select-&gt;where('id = ?', (int)$property_value_id);</td></tr>
-     <tr class="danger"><td><div align="right"><a name="89"></a><a href="#89">89</a></div></td><td class="codeLine">        $row = $property_value_table-&gt;fetchRow($select);</td></tr>
-     <tr class="danger"><td><div align="right"><a name="90"></a><a href="#90">90</a></div></td><td class="codeLine">        if(!empty($row))</td></tr>
-     <tr class="danger"><td><div align="right"><a name="91"></a><a href="#91">91</a></div></td><td class="codeLine">        {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="92"></a><a href="#92">92</a></div></td><td class="codeLine">            return $property_value_table-&gt;setData($row);</td></tr>
-     <tr><td><div align="right"><a name="93"></a><a href="#93">93</a></div></td><td class="codeLine">        }</td></tr>
-     <tr><td><div align="right"><a name="94"></a><a href="#94">94</a></div></td><td class="codeLine">        else</td></tr>
-     <tr><td><div align="right"><a name="95"></a><a href="#95">95</a></div></td><td class="codeLine">        {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="96"></a><a href="#96">96</a></div></td><td class="codeLine">            return NULL;</td></tr>
-     <tr><td><div align="right"><a name="97"></a><a href="#97">97</a></div></td><td class="codeLine">        }</td></tr>
-     <tr><td><div align="right"><a name="98"></a><a href="#98">98</a></div></td><td class="codeLine">    }</td></tr>
-     <tr><td><div align="right"><a name="99"></a><a href="#99">99</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="100"></a><a href="#100">100</a></div></td><td class="codeLine">    /**</td></tr>
-     <tr><td><div align="right"><a name="101"></a><a href="#101">101</a></div></td><td class="codeLine">     * Save property value</td></tr>
-     <tr><td><div align="right"><a name="102"></a><a href="#102">102</a></div></td><td class="codeLine">     * @return integer</td></tr>
-     <tr><td><div align="right"><a name="103"></a><a href="#103">103</a></div></td><td class="codeLine">     */</td></tr>
-     <tr><td><div align="right"><a name="104"></a><a href="#104">104</a></div></td><td class="codeLine">    public function save()</td></tr>
-     <tr><td><div align="right"><a name="105"></a><a href="#105">105</a></div></td><td class="codeLine">    {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="106"></a><a href="#106">106</a></div></td><td class="codeLine">        $this-&gt;events()-&gt;trigger(__CLASS__, 'beforeSave', NULL, array('object' =&gt; $this));</td></tr>
-     <tr><td><div align="right"><a name="107"></a><a href="#107">107</a></div></td><td class="codeLine">        $array_save = array(</td></tr>
-     <tr class="danger"><td><div align="right"><a name="108"></a><a href="#108">108</a></div></td><td class="codeLine">            'value' =&gt; $this-&gt;getValue(),</td></tr>
-     <tr class="danger"><td><div align="right"><a name="109"></a><a href="#109">109</a></div></td><td class="codeLine">            'document_id' =&gt; $this-&gt;getDocumentId(),</td></tr>
-     <tr class="danger"><td><div align="right"><a name="110"></a><a href="#110">110</a></div></td><td class="codeLine">            'property_id' =&gt; $this-&gt;getPropertyId(),</td></tr>
-     <tr class="danger"><td><div align="right"><a name="111"></a><a href="#111">111</a></div></td><td class="codeLine">        );</td></tr>
-     <tr><td><div align="right"><a name="112"></a><a href="#112">112</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="113"></a><a href="#113">113</a></div></td><td class="codeLine">        try</td></tr>
-     <tr><td><div align="right"><a name="114"></a><a href="#114">114</a></div></td><td class="codeLine">        {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="115"></a><a href="#115">115</a></div></td><td class="codeLine">            $id = $this-&gt;getId();</td></tr>
-     <tr class="danger"><td><div align="right"><a name="116"></a><a href="#116">116</a></div></td><td class="codeLine">            if(empty($id))</td></tr>
-     <tr class="danger"><td><div align="right"><a name="117"></a><a href="#117">117</a></div></td><td class="codeLine">            {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="118"></a><a href="#118">118</a></div></td><td class="codeLine">                $this-&gt;insert($array_save);</td></tr>
-     <tr class="danger"><td><div align="right"><a name="119"></a><a href="#119">119</a></div></td><td class="codeLine">                $this-&gt;setId($this-&gt;getLastInsertId());</td></tr>
-     <tr class="danger"><td><div align="right"><a name="120"></a><a href="#120">120</a></div></td><td class="codeLine">            }</td></tr>
-     <tr><td><div align="right"><a name="121"></a><a href="#121">121</a></div></td><td class="codeLine">            else</td></tr>
-     <tr><td><div align="right"><a name="122"></a><a href="#122">122</a></div></td><td class="codeLine">            {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="123"></a><a href="#123">123</a></div></td><td class="codeLine">                $this-&gt;update($array_save, sprintf('id = %s', $this-&gt;getId()));</td></tr>
-     <tr><td><div align="right"><a name="124"></a><a href="#124">124</a></div></td><td class="codeLine">            }</td></tr>
-     <tr><td><div align="right"><a name="125"></a><a href="#125">125</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="126"></a><a href="#126">126</a></div></td><td class="codeLine">            $this-&gt;events()-&gt;trigger(__CLASS__, 'afterSave', NULL, array('object' =&gt; $this));</td></tr>
-     <tr><td><div align="right"><a name="127"></a><a href="#127">127</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="128"></a><a href="#128">128</a></div></td><td class="codeLine">            return $this-&gt;getId();</td></tr>
-     <tr><td><div align="right"><a name="129"></a><a href="#129">129</a></div></td><td class="codeLine">        }</td></tr>
-     <tr class="danger"><td><div align="right"><a name="130"></a><a href="#130">130</a></div></td><td class="codeLine">        catch (Exception $e)</td></tr>
-     <tr><td><div align="right"><a name="131"></a><a href="#131">131</a></div></td><td class="codeLine">        {</td></tr>
-     <tr><td><div align="right"><a name="132"></a><a href="#132">132</a></div></td><td class="codeLine">            /**</td></tr>
-     <tr><td><div align="right"><a name="133"></a><a href="#133">133</a></div></td><td class="codeLine">            * TODO(Make \Gc\Error)</td></tr>
-     <tr><td><div align="right"><a name="134"></a><a href="#134">134</a></div></td><td class="codeLine">            */</td></tr>
-     <tr class="danger"><td><div align="right"><a name="135"></a><a href="#135">135</a></div></td><td class="codeLine">            \Gc\Error::set(get_class($this),$e);</td></tr>
+     <tr class="danger"><td><div align="right"><a name="60"></a><a href="#60">60</a></div></td><td class="codeLine">                $this-&gt;setId($property_value-&gt;id);</td></tr>
+     <tr class="danger"><td><div align="right"><a name="61"></a><a href="#61">61</a></div></td><td class="codeLine">                if($this-&gt;getDriverName() != 'pdo_pgsql')</td></tr>
+     <tr class="danger"><td><div align="right"><a name="62"></a><a href="#62">62</a></div></td><td class="codeLine">                {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="63"></a><a href="#63">63</a></div></td><td class="codeLine">                    $this-&gt;setValue($property_value-&gt;value);</td></tr>
+     <tr class="danger"><td><div align="right"><a name="64"></a><a href="#64">64</a></div></td><td class="codeLine">                }</td></tr>
+     <tr><td><div align="right"><a name="65"></a><a href="#65">65</a></div></td><td class="codeLine">                else</td></tr>
+     <tr><td><div align="right"><a name="66"></a><a href="#66">66</a></div></td><td class="codeLine">                {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="67"></a><a href="#67">67</a></div></td><td class="codeLine">                    $this-&gt;setValue(stream_get_contents($property_value-&gt;value));</td></tr>
+     <tr><td><div align="right"><a name="68"></a><a href="#68">68</a></div></td><td class="codeLine">                }</td></tr>
+     <tr class="danger"><td><div align="right"><a name="69"></a><a href="#69">69</a></div></td><td class="codeLine">            }</td></tr>
+     <tr class="danger"><td><div align="right"><a name="70"></a><a href="#70">70</a></div></td><td class="codeLine">        }</td></tr>
+     <tr class="danger"><td><div align="right"><a name="71"></a><a href="#71">71</a></div></td><td class="codeLine">    }</td></tr>
+     <tr><td><div align="right"><a name="72"></a><a href="#72">72</a></div></td><td class="codeLine"></td></tr>
+     <tr><td><div align="right"><a name="73"></a><a href="#73">73</a></div></td><td class="codeLine">    /**</td></tr>
+     <tr><td><div align="right"><a name="74"></a><a href="#74">74</a></div></td><td class="codeLine">     * Initialize from array</td></tr>
+     <tr><td><div align="right"><a name="75"></a><a href="#75">75</a></div></td><td class="codeLine">     * @param array $array</td></tr>
+     <tr><td><div align="right"><a name="76"></a><a href="#76">76</a></div></td><td class="codeLine">     * @return \Gc\Property\Value\Model</td></tr>
+     <tr><td><div align="right"><a name="77"></a><a href="#77">77</a></div></td><td class="codeLine">     */</td></tr>
+     <tr><td><div align="right"><a name="78"></a><a href="#78">78</a></div></td><td class="codeLine">    static function fromArray(array $array)</td></tr>
+     <tr><td><div align="right"><a name="79"></a><a href="#79">79</a></div></td><td class="codeLine">    {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="80"></a><a href="#80">80</a></div></td><td class="codeLine">        $property_value_table = new Model($array);</td></tr>
+     <tr class="danger"><td><div align="right"><a name="81"></a><a href="#81">81</a></div></td><td class="codeLine">        $property_value_table-&gt;setData($array);</td></tr>
+     <tr><td><div align="right"><a name="82"></a><a href="#82">82</a></div></td><td class="codeLine"></td></tr>
+     <tr class="danger"><td><div align="right"><a name="83"></a><a href="#83">83</a></div></td><td class="codeLine">        return $property_value_table;</td></tr>
+     <tr><td><div align="right"><a name="84"></a><a href="#84">84</a></div></td><td class="codeLine">    }</td></tr>
+     <tr><td><div align="right"><a name="85"></a><a href="#85">85</a></div></td><td class="codeLine"></td></tr>
+     <tr><td><div align="right"><a name="86"></a><a href="#86">86</a></div></td><td class="codeLine">    /**</td></tr>
+     <tr><td><div align="right"><a name="87"></a><a href="#87">87</a></div></td><td class="codeLine">     * Initialize from id</td></tr>
+     <tr><td><div align="right"><a name="88"></a><a href="#88">88</a></div></td><td class="codeLine">     * @param integer $property_value_id</td></tr>
+     <tr><td><div align="right"><a name="89"></a><a href="#89">89</a></div></td><td class="codeLine">     * @return \Gc\Property\Value\Model</td></tr>
+     <tr><td><div align="right"><a name="90"></a><a href="#90">90</a></div></td><td class="codeLine">     */</td></tr>
+     <tr><td><div align="right"><a name="91"></a><a href="#91">91</a></div></td><td class="codeLine">    static function fromId($property_value_id)</td></tr>
+     <tr><td><div align="right"><a name="92"></a><a href="#92">92</a></div></td><td class="codeLine">    {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="93"></a><a href="#93">93</a></div></td><td class="codeLine">        $property_value_table = new Model($array);</td></tr>
+     <tr class="danger"><td><div align="right"><a name="94"></a><a href="#94">94</a></div></td><td class="codeLine">        $select = $property_value_table-&gt;select();</td></tr>
+     <tr class="danger"><td><div align="right"><a name="95"></a><a href="#95">95</a></div></td><td class="codeLine">        $select-&gt;where('id = ?', (int)$property_value_id);</td></tr>
+     <tr class="danger"><td><div align="right"><a name="96"></a><a href="#96">96</a></div></td><td class="codeLine">        $row = $property_value_table-&gt;fetchRow($select);</td></tr>
+     <tr class="danger"><td><div align="right"><a name="97"></a><a href="#97">97</a></div></td><td class="codeLine">        if(!empty($row))</td></tr>
+     <tr class="danger"><td><div align="right"><a name="98"></a><a href="#98">98</a></div></td><td class="codeLine">        {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="99"></a><a href="#99">99</a></div></td><td class="codeLine">            return $property_value_table-&gt;setData($row);</td></tr>
+     <tr><td><div align="right"><a name="100"></a><a href="#100">100</a></div></td><td class="codeLine">        }</td></tr>
+     <tr><td><div align="right"><a name="101"></a><a href="#101">101</a></div></td><td class="codeLine">        else</td></tr>
+     <tr><td><div align="right"><a name="102"></a><a href="#102">102</a></div></td><td class="codeLine">        {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="103"></a><a href="#103">103</a></div></td><td class="codeLine">            return NULL;</td></tr>
+     <tr><td><div align="right"><a name="104"></a><a href="#104">104</a></div></td><td class="codeLine">        }</td></tr>
+     <tr><td><div align="right"><a name="105"></a><a href="#105">105</a></div></td><td class="codeLine">    }</td></tr>
+     <tr><td><div align="right"><a name="106"></a><a href="#106">106</a></div></td><td class="codeLine"></td></tr>
+     <tr><td><div align="right"><a name="107"></a><a href="#107">107</a></div></td><td class="codeLine">    /**</td></tr>
+     <tr><td><div align="right"><a name="108"></a><a href="#108">108</a></div></td><td class="codeLine">     * Save property value</td></tr>
+     <tr><td><div align="right"><a name="109"></a><a href="#109">109</a></div></td><td class="codeLine">     * @return integer</td></tr>
+     <tr><td><div align="right"><a name="110"></a><a href="#110">110</a></div></td><td class="codeLine">     */</td></tr>
+     <tr><td><div align="right"><a name="111"></a><a href="#111">111</a></div></td><td class="codeLine">    public function save()</td></tr>
+     <tr><td><div align="right"><a name="112"></a><a href="#112">112</a></div></td><td class="codeLine">    {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="113"></a><a href="#113">113</a></div></td><td class="codeLine">        $this-&gt;events()-&gt;trigger(__CLASS__, 'beforeSave', NULL, array('object' =&gt; $this));</td></tr>
+     <tr><td><div align="right"><a name="114"></a><a href="#114">114</a></div></td><td class="codeLine">        $array_save = array(</td></tr>
+     <tr class="danger"><td><div align="right"><a name="115"></a><a href="#115">115</a></div></td><td class="codeLine">            'value' =&gt; $this-&gt;getValue(),</td></tr>
+     <tr class="danger"><td><div align="right"><a name="116"></a><a href="#116">116</a></div></td><td class="codeLine">            'document_id' =&gt; $this-&gt;getDocumentId(),</td></tr>
+     <tr class="danger"><td><div align="right"><a name="117"></a><a href="#117">117</a></div></td><td class="codeLine">            'property_id' =&gt; $this-&gt;getPropertyId(),</td></tr>
+     <tr class="danger"><td><div align="right"><a name="118"></a><a href="#118">118</a></div></td><td class="codeLine">        );</td></tr>
+     <tr><td><div align="right"><a name="119"></a><a href="#119">119</a></div></td><td class="codeLine"></td></tr>
+     <tr><td><div align="right"><a name="120"></a><a href="#120">120</a></div></td><td class="codeLine">        try</td></tr>
+     <tr><td><div align="right"><a name="121"></a><a href="#121">121</a></div></td><td class="codeLine">        {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="122"></a><a href="#122">122</a></div></td><td class="codeLine">            $id = $this-&gt;getId();</td></tr>
+     <tr class="danger"><td><div align="right"><a name="123"></a><a href="#123">123</a></div></td><td class="codeLine">            if(empty($id))</td></tr>
+     <tr class="danger"><td><div align="right"><a name="124"></a><a href="#124">124</a></div></td><td class="codeLine">            {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="125"></a><a href="#125">125</a></div></td><td class="codeLine">                $this-&gt;insert($array_save);</td></tr>
+     <tr class="danger"><td><div align="right"><a name="126"></a><a href="#126">126</a></div></td><td class="codeLine">                $this-&gt;setId($this-&gt;getLastInsertId());</td></tr>
+     <tr class="danger"><td><div align="right"><a name="127"></a><a href="#127">127</a></div></td><td class="codeLine">            }</td></tr>
+     <tr><td><div align="right"><a name="128"></a><a href="#128">128</a></div></td><td class="codeLine">            else</td></tr>
+     <tr><td><div align="right"><a name="129"></a><a href="#129">129</a></div></td><td class="codeLine">            {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="130"></a><a href="#130">130</a></div></td><td class="codeLine">                $this-&gt;update($array_save, sprintf('id = %s', $this-&gt;getId()));</td></tr>
+     <tr><td><div align="right"><a name="131"></a><a href="#131">131</a></div></td><td class="codeLine">            }</td></tr>
+     <tr><td><div align="right"><a name="132"></a><a href="#132">132</a></div></td><td class="codeLine"></td></tr>
+     <tr class="danger"><td><div align="right"><a name="133"></a><a href="#133">133</a></div></td><td class="codeLine">            $this-&gt;events()-&gt;trigger(__CLASS__, 'afterSave', NULL, array('object' =&gt; $this));</td></tr>
+     <tr><td><div align="right"><a name="134"></a><a href="#134">134</a></div></td><td class="codeLine"></td></tr>
+     <tr class="danger"><td><div align="right"><a name="135"></a><a href="#135">135</a></div></td><td class="codeLine">            return $this-&gt;getId();</td></tr>
      <tr><td><div align="right"><a name="136"></a><a href="#136">136</a></div></td><td class="codeLine">        }</td></tr>
-     <tr><td><div align="right"><a name="137"></a><a href="#137">137</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="138"></a><a href="#138">138</a></div></td><td class="codeLine">        $this-&gt;events()-&gt;trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' =&gt; $this));</td></tr>
-     <tr><td><div align="right"><a name="139"></a><a href="#139">139</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="140"></a><a href="#140">140</a></div></td><td class="codeLine">        return FALSE;</td></tr>
-     <tr><td><div align="right"><a name="141"></a><a href="#141">141</a></div></td><td class="codeLine">    }</td></tr>
-     <tr><td><div align="right"><a name="142"></a><a href="#142">142</a></div></td><td class="codeLine">}</td></tr>
+     <tr class="danger"><td><div align="right"><a name="137"></a><a href="#137">137</a></div></td><td class="codeLine">        catch (Exception $e)</td></tr>
+     <tr><td><div align="right"><a name="138"></a><a href="#138">138</a></div></td><td class="codeLine">        {</td></tr>
+     <tr><td><div align="right"><a name="139"></a><a href="#139">139</a></div></td><td class="codeLine">            /**</td></tr>
+     <tr><td><div align="right"><a name="140"></a><a href="#140">140</a></div></td><td class="codeLine">            * TODO(Make \Gc\Error)</td></tr>
+     <tr><td><div align="right"><a name="141"></a><a href="#141">141</a></div></td><td class="codeLine">            */</td></tr>
+     <tr class="danger"><td><div align="right"><a name="142"></a><a href="#142">142</a></div></td><td class="codeLine">            \Gc\Error::set(get_class($this),$e);</td></tr>
+     <tr><td><div align="right"><a name="143"></a><a href="#143">143</a></div></td><td class="codeLine">        }</td></tr>
+     <tr><td><div align="right"><a name="144"></a><a href="#144">144</a></div></td><td class="codeLine"></td></tr>
+     <tr class="danger"><td><div align="right"><a name="145"></a><a href="#145">145</a></div></td><td class="codeLine">        $this-&gt;events()-&gt;trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' =&gt; $this));</td></tr>
+     <tr><td><div align="right"><a name="146"></a><a href="#146">146</a></div></td><td class="codeLine"></td></tr>
+     <tr class="danger"><td><div align="right"><a name="147"></a><a href="#147">147</a></div></td><td class="codeLine">        return FALSE;</td></tr>
+     <tr><td><div align="right"><a name="148"></a><a href="#148">148</a></div></td><td class="codeLine">    }</td></tr>
+     <tr><td><div align="right"><a name="149"></a><a href="#149">149</a></div></td><td class="codeLine">}</td></tr>
 
     </tbody>
    </table>
@@ -316,7 +323,7 @@
      <span class="warning"><strong>Dead Code</strong></span>
     </p>
     <p>
-     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.2.6</a> using <a href="http://www.php.net/" target="_top">PHP 5.4.4-7</a> and <a href="http://phpunit.de/">PHPUnit 3.7.8</a> at Fri Oct 19 8:41:27 CEST 2012.</small>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.2.6</a> using <a href="http://www.php.net/" target="_top">PHP 5.4.4-7</a> and <a href="http://phpunit.de/">PHPUnit 3.7.8</a> at Mon Oct 22 8:23:11 CEST 2012.</small>
     </p>
    </footer>
   </div>
