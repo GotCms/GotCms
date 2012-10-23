@@ -47,6 +47,8 @@ class TemplatePathStack extends PathStack
      */
     public function resolve($name, Renderer $renderer = null)
     {
+        //Force use view stream
+        $this->useViewStream = TRUE;
         $this->lastLookupFailure = FALSE;
 
         if($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name))
