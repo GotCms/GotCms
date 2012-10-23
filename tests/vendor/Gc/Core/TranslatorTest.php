@@ -28,53 +28,90 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Core\Translator::getInstance
-     * @todo   Implement testGetInstance().
      */
     public function testGetInstance()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertInstanceOf('Gc\Core\Translator', Translator::getInstance());
     }
 
     /**
      * @covers Gc\Core\Translator::getValue
-     * @todo   Implement testGetValue().
      */
     public function testGetValue()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setValue('key', array(
+            array(
+                'locale' => 'fr_FR',
+                'value' => 'clé',
+            )
+        ));
+        $this->assertInstanceOf('ArrayObject', $this->_object->getValue('key', 'fr_FR'));
     }
 
     /**
      * @covers Gc\Core\Translator::getValues
-     * @todo   Implement testGetValues().
      */
     public function testGetValues()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $data = $this->_object->getValues('fr_FR');
+        $this->assertArrayHasKey(0, $data);
+    }
+
+    /**
+     * @covers Gc\Core\Translator::getValues
+     */
+    public function testGetValuesWithLimit()
+    {
+        $data = $this->_object->getValues('fr_FR', 1);
+        $this->assertArrayHasKey(0, $data);
     }
 
     /**
      * @covers Gc\Core\Translator::setValue
-     * @todo   Implement testSetValue().
      */
     public function testSetValue()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $result = $this->_object->setValue('parameters', array(
+            array(
+                'locale' => 'fr_FR',
+                'value' => 'paramètres',
+            )
+        ));
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers Gc\Core\Translator::setValue
+     */
+    public function testSetValueWithSourceId()
+    {
+        $this->_object->setValue('parameters', array(
+            array(
+                'locale' => 'fr_FR',
+                'value' => 'paramètres',
+            )
+        ));
+        $data = $this->_object->getValue('parameters', 'fr_FR');
+        $result = $this->_object->setValue($data->src_id, array(
+            array(
+                'locale' => 'it_IT',
+                'value' => 'parametri',
+            )
+        ));
+
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers Gc\Core\Translator::setValue
+     */
+    public function testSetValueWithUndefinedSourceId()
+    {
+        $this->assertFalse($this->_object->setValue(40000000, array()));
     }
 }

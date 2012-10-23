@@ -58,4 +58,54 @@ class StreamTest extends \PHPUnit_Framework_TestCase
         file_put_contents('zend.view://Stream', 'test');
         $this->assertEquals(file_get_contents('zend.view://Stream'), 'test');
     }
+
+    /**
+     * @covers Gc\View\Stream::stream_seek
+     */
+    public function testStream_seekSEEK_SET()
+    {
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        file_put_contents('zend.view://Stream', "test\ntest\ntest");
+        $fp = fopen('zend.view://Stream', 'r');
+        $this->assertEquals(0, fseek($fp, 0, SEEK_SET));
+    }
+
+    /**
+     * @covers Gc\View\Stream::stream_seek
+     */
+    public function testStream_seekSEEK_CUR()
+    {
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        file_put_contents('zend.view://Stream', "test\ntest\ntest");
+        $fp = fopen('zend.view://Stream', 'a+');
+        $this->assertEquals(0, fseek($fp, 0, SEEK_CUR));
+    }
+
+    /**
+     * @covers Gc\View\Stream::stream_seek
+     */
+    public function testStream_seekSEEK_END()
+    {
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        file_put_contents('zend.view://Stream', "test\ntest\ntest");
+        $fp = fopen('zend.view://Stream', 'r');
+        $this->assertEquals(0, fseek($fp, -1, SEEK_END));
+    }
+
+    /**
+     * @covers Gc\View\Stream::url_stat
+     */
+    public function testStream_eof()
+    {
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        file_put_contents('zend.view://Stream', "test\ntest\ntest");
+        $fp = fopen('zend.view://Stream', 'a+');
+        do
+        {
+            $line = fgets($fp);
+        }
+        while (!feof($fp));
+
+        $this->assertTrue(feof($fp));
+    }
 }

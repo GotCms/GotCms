@@ -36,7 +36,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInstance()
     {
-        $this->assertInstanceOf('Config', Config::getInstance());
+        $this->assertInstanceOf('Gc\Core\Config', Config::getInstance());
     }
 
     /**
@@ -60,9 +60,17 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\Core\Config::setValue
      */
+    public function testSetValueWithFakeIdentifier()
+    {
+        $this->assertFalse($this->_object->setValue('fake_identifier', 'fake_value'));
+    }
+
+    /**
+     * @covers Gc\Core\Config::setValue
+     */
     public function testSetValue()
     {
-        $this->_object->insert(array('identifier' => 'string_test_insert_value', 'value' => 'string_result_insert_value'));
-        $this->assertEquals('string_result', $this->_object->getValue('string_test'));
+        $this->_object->insert(array('identifier' => 'string_identifier', 'value' => 'string_result_insert_value'));
+        $this->assertTrue((bool)$this->_object->setValue('string_identifier', 'string_result_insert_value'));
     }
 }

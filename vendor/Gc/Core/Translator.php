@@ -141,7 +141,7 @@ class Translator extends AbstractTable
             $row = $instance->select(array('source' => $source))->current();
             if(!empty($row))
             {
-                $id = $row->id;
+                $source_id = $row->id;
             }
             else
             {
@@ -184,10 +184,8 @@ class Translator extends AbstractTable
 
                 $instance->execute($insert);
             }
-
-
         }
 
-        return FALSE;
+        return TRUE;
     }
 }
