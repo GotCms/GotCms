@@ -28,77 +28,120 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Layout\Model::init
-     * @todo   Implement testInit().
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->init(1);
+        $this->assertEquals(1, $this->_object->getId());
     }
 
     /**
      * @covers Gc\Layout\Model::fromArray
-     * @todo   Implement testFromArray().
      */
     public function testFromArray()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $array = array(
+            'id' => 1,
+            'name' => 'String',
+            'identifier' => 'string',
+            'description' => 'Description',
+            'content' => 'Content',
+            'updated_at' => date('Y-m-d H:i:s'),
         );
+        $model = $this->_object->fromArray($array);
+        $this->assertEquals(1, $model->getId());
     }
 
     /**
      * @covers Gc\Layout\Model::fromId
-     * @todo   Implement testFromId().
      */
     public function testFromId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $array = array(
+            'name' => 'String',
+            'identifier' => 'string',
+            'description' => 'Description',
+            'content' => 'Content',
         );
+        $model = $this->_object->fromArray($array);
+        $model->save();
+
+        $model = $this->_object->fromId(1);
+        $this->assertEquals(1, $model->getId());
+    }
+
+    /**
+     * @covers Gc\Layout\Model::fromId
+     */
+    public function testFromFakeId()
+    {
+        $model = $this->_object->fromId(10000);
+        $this->assertFalse($model);
     }
 
     /**
      * @covers Gc\Layout\Model::fromIdentifier
-     * @todo   Implement testFromIdentifier().
      */
     public function testFromIdentifier()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $array = array(
+            'name' => 'Test Identifier',
+            'identifier' => 'test-identifier',
+            'description' => 'Description',
+            'content' => 'Content',
         );
+        $model = $this->_object->fromArray($array);
+        $model->save();
+
+        $model = $this->_object->fromIdentifier('test-identifier');
+        $this->assertEquals('Test Identifier', $model->getName());
+    }
+
+    /**
+     * @covers Gc\Layout\Model::fromIdentifier
+     */
+    public function testFromFakeIdentifier()
+    {
+        $model = $this->_object->fromIdentifier('fake-identifier');
+        $this->assertFalse($model);
     }
 
     /**
      * @covers Gc\Layout\Model::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $array = array(
+            'name' => 'Test Identifier',
+            'identifier' => 'test-identifier',
+            'description' => 'Description',
+            'content' => 'Content',
         );
+
+        $model = $this->_object->fromArray($array);
+        $model->save();
+        $this->assertTrue((bool)$model->getId());
     }
 
     /**
      * @covers Gc\Layout\Model::delete
-     * @todo   Implement testDelete().
      */
     public function testDelete()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $array = array(
+            'name' => 'Test Identifier',
+            'identifier' => 'test-identifier',
+            'description' => 'Description',
+            'content' => 'Content',
         );
+        $model = $this->_object->fromArray($array);
+        $model->save();
+
+        $this->assertTrue($model->delete());
     }
 }
