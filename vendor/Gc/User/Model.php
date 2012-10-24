@@ -29,7 +29,8 @@ namespace Gc\User;
 
 use Gc\Db\AbstractTable,
     Zend\Authentication\Adapter,
-    Zend\Authentication\AuthenticationService;
+    Zend\Authentication\AuthenticationService,
+    Zend\Db\Sql\Predicate\Expression;
 /**
  * Model of user
  */
@@ -126,7 +127,7 @@ class Model extends AbstractTable
             'lastname' => $this->getLastname(),
             'email' => $this->getEmail(),
             'login' => $this->getLogin(),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'updated_at' => new Expression('NOW()'),
             'user_acl_role_id' => $this->getUserAclRoleId(),
         );
 
@@ -141,7 +142,7 @@ class Model extends AbstractTable
             $id = $this->getId();
             if(empty($id))
             {
-                $array_save['created_at'] = date('Y-m-d H:i:s');
+                $array_save['created_at'] = new Expression('NOW()');
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             }

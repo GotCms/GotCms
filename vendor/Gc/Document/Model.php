@@ -33,7 +33,8 @@ use Gc\Db\AbstractTable,
     Gc\Media\Icon,
     Gc\Registry,
     Gc\View,
-    Zend\Db\TableGateway\TableGateway;
+    Zend\Db\TableGateway\TableGateway,
+    Zend\Db\Sql\Predicate\Expression;
 /**
  * Document Model
  */
@@ -196,7 +197,7 @@ class Model extends AbstractTable implements IterableInterface
         $array_save = array(
             'name' => $this->getName(),
             'url_key' => $this->getUrlKey(),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'updated_at' => new Expression('NOW()'),
             'status' => ($this->getStatus() === NULL ? self::STATUS_DISABLE : $this->getStatus()),
             'sort_order' => (int)$this->getSortOrder(),
             'show_in_nav' => $this->showInNav() === TRUE ? 'TRUE' : 'FALSE',
@@ -212,7 +213,7 @@ class Model extends AbstractTable implements IterableInterface
             $document_id = $this->getId();
             if(empty($document_id))
             {
-                $array_save['created_at'] = date('Y-m-d H:i:s');
+                $array_save['created_at'] = new Expression('NOW()');
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             }

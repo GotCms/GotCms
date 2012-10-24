@@ -30,7 +30,8 @@ namespace Gc\Module;
 use Gc\Db\AbstractTable,
     Gc\ModuleType,
     Gc\Media\Icon,
-    Gc\View;
+    Gc\View,
+    Zend\Db\Sql\Predicate\Expression;
 /**
  * Module Model
  */
@@ -104,7 +105,7 @@ class Model extends AbstractTable
             $module_id = $this->getId();
             if(empty($module_id))
             {
-                $array_save['created_at'] = date('Y-m-d H:i:s');
+                $array_save['created_at'] = new Expression('NOW()');
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             }

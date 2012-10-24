@@ -27,7 +27,8 @@
 
 namespace Gc\Script;
 
-use Gc\Db\AbstractTable;
+use Gc\Db\AbstractTable,
+    Zend\Db\Sql\Predicate\Expression;
 /**
  * Script Model
  */
@@ -113,7 +114,7 @@ class Model extends AbstractTable
             'identifier' => $this->getIdentifier(),
             'description' => $this->getDescription(),
             'content' => $this->getContent(),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'updated_at' => new Expression('NOW()'),
         );
 
         try
@@ -121,7 +122,7 @@ class Model extends AbstractTable
             $id = $this->getId();
             if($this->getId() == NULL)
             {
-                $array_save['created_at'] = date('Y-m-d H:i:s');
+                $array_save['created_at'] = new Expression('NOW()');
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             }

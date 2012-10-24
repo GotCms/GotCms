@@ -32,7 +32,8 @@ use Gc\Db\AbstractTable,
     Gc\Tab,
     Gc\View,
     Zend\Db\Sql,
-    Zend\Db\TableGateway\TableGateway;
+    Zend\Db\TableGateway\TableGateway,
+    Zend\Db\Sql\Predicate\Expression;
 /**
  * Model for Document Type
  */
@@ -160,7 +161,7 @@ class Model extends AbstractTable
         $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'updated_at' => new Expression('NOW()'),
             'description' => $this->getDescription(),
             'icon_id' => $this->getIconId(),
             'default_view_id' => $this->getDefaultViewId(),
@@ -172,7 +173,7 @@ class Model extends AbstractTable
             $id = $this->getId();
             if(empty($id))
             {
-                $array_save['created_at'] = date('Y-m-d H:i:s');
+                $array_save['created_at'] = new Expression('NOW()');
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             }

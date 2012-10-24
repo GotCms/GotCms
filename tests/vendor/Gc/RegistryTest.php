@@ -14,11 +14,17 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     protected $_object;
 
     /**
+     * @var Registry
+     */
+    protected $_old_instance;
+
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp()
     {
+        $this->_old_instance = Registry::getInstance();
         $this->_object = new Registry;
     }
 
@@ -29,6 +35,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->_object->_unsetInstance();
+        Registry::setInstance($this->_old_instance);
     }
 
     /**
