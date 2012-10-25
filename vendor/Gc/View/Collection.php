@@ -28,7 +28,9 @@
 namespace Gc\View;
 
 use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+    Zend\Db\Sql\Select,
+    Zend\Db\Sql\Insert,
+    Zend\Db\TableGateway\TableGateway;
 
 /**
  * Collection of View Model
@@ -146,9 +148,18 @@ class Collection extends AbstractTable
         if(!empty($this->_data['document_type_id']))
         {
             $this->delete();
+
+            $insert = new Insert();
+            $insert->into('document_type_view')
+            ->columns(array(
+                'document_type_id',
+                'view_id',
+            ));
+
             foreach($this->getElements() as $view)
             {
-                $this->getSqlInsert()->into('document_type_view')->values(array('document_type_id' => $this->getDocumentTypeId(), 'view_id' => $view->getId()));
+                $insert->values(array($this->getDocumentTypeId(), $view->getId()));
+                $this->execute($insert);
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
@@ -170,7 +181,8 @@ class Collection extends AbstractTable
         $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
         if(!empty($this->_data['document_type_id']))
         {
-            $this->getApdater()->delete('document_type_view', 'document_type_id = '.$this->getDocumentTypeId());
+            $table = new TableGateway('document_type_view', $this->getAdapter());
+            $table->delete(array('document_type_id' => $this->getDocumentTypeId()));
             $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
 
             return TRUE;

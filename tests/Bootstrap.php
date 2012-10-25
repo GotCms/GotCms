@@ -77,7 +77,10 @@ Registry::set('Db', $db_adapter);
 /**
  * Install database
  */
-$db_adapter->getDriver()->getConnection()->getResource()->exec(file_get_contents($gc_root . '/data/install/sql/database-pgsql.sql'));
+$resource = $db_adapter->getDriver()->getConnection()->getResource();
+$driver_name = str_replace('pdo_', '', $config['db']['driver']);
+$resource->exec(file_get_contents(sprintf($gc_root . '/data/install/sql/database-%s.sql', $driver_name)));
+$resource->exec(file_get_contents($gc_root . '/data/install/sql/data.sql'));
 /**
  * Start output buffering, if enabled
  */
