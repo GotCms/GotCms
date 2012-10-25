@@ -93,15 +93,15 @@ class Model extends AbstractTable implements IterableInterface
      * Get Document type
      * @return \Gc\DocumentType\Model
      */
-     public function getDocumentType()
-     {
-         if($this->getData('document_type') === NULL)
-         {
-             $this->setData('document_type', DocumentType\Model::fromId($this->getDocumentTypeId()));
-         }
+    public function getDocumentType()
+    {
+        if($this->getData('document_type') === NULL)
+        {
+            $this->setData('document_type', DocumentType\Model::fromId($this->getDocumentTypeId()));
+        }
 
-         return $this->getData('document_type');
-     }
+        return $this->getData('document_type');
+    }
 
     /**
      * Define if document is show in navigation
@@ -200,13 +200,21 @@ class Model extends AbstractTable implements IterableInterface
             'updated_at' => new Expression('NOW()'),
             'status' => ($this->getStatus() === NULL ? self::STATUS_DISABLE : $this->getStatus()),
             'sort_order' => (int)$this->getSortOrder(),
-            'show_in_nav' => $this->showInNav() === TRUE ? 'TRUE' : 'FALSE',
             'user_id' => (int)$this->getUserId(),
             'document_type_id' => (int)$this->getDocumentTypeId() == 0 ? NULL : (int)$this->getDocumentTypeId(),
             'view_id' => (int)$this->getViewId() == 0 ? NULL : (int)$this->getViewId(),
             'layout_id' => (int)$this->getLayoutId() == 0 ? NULL : (int)$this->getLayoutId(),
             'parent_id' => (int)$this->getParentId() == 0 ? NULL : (int)$this->getParentId(),
         );
+
+        if($this->getDriverName() == 'pdo_pgsql')
+        {
+            $array_save['show_in_nav'] = $this->showInNav() === TRUE ? 'TRUE' : 'FALSE';
+        }
+        else
+        {
+            $array_save['show_in_nav'] = $this->showInNav() === TRUE ? 1 : 0;
+        }
 
         try
         {

@@ -151,11 +151,19 @@ class Model extends AbstractTable
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'identifier' => $this->getIdentifier(),
-            'required' => $this->isRequired() == TRUE ? 'TRUE' : 'FALSE',
             'sort_order' => $this->getOrder(),
             'tab_id' => $this->getTabId(),
             'datatype_id' => $this->getDatatypeId(),
         );
+
+        if($this->getDriverName() == 'pdo_pgsql')
+        {
+            $array_save['required'] = $this->isRequired() === TRUE ? 'TRUE' : 'FALSE';
+        }
+        else
+        {
+            $array_save['required'] = $this->isRequired() === TRUE ? 1 : 0;
+        }
 
         try
         {

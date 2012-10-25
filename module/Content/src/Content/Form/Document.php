@@ -140,10 +140,10 @@ class Document extends AbstractForm
 
         $status = new Element\Checkbox('document-status');
         $status->setAttribute('label', 'Publish')
+            ->setValue($document->getStatus())
             ->setCheckedValue(DocumentModel::STATUS_ENABLE)
             ->setAttribute('id', 'status')
-            ->setAttribute('class', 'input-checkbox')
-            ->setValue($document->getStatus());
+            ->setAttribute('class', 'input-checkbox');
 
         $this->add($status);
 
