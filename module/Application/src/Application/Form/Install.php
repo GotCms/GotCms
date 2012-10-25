@@ -69,8 +69,10 @@ class Install extends AbstractForm
     public function license()
     {
         $accept_license = new Element\Checkbox('accept-license');
-        $accept_license->setCheckedValue('1');
-        $accept_license->setUseHiddenElement(FALSE);
+        $accept_license->setCheckedValue('1')
+            ->setUseHiddenElement(FALSE)
+            ->setAttribute('id', 'accept-license')
+            ->setAttribute('class', 'input-checkbox');
 
         $input_filter = $this->getInputFilter();
         $input_filter->add(array(
@@ -103,16 +105,20 @@ class Install extends AbstractForm
 
         $hostname = new Element\Text('hostname');
         $hostname->setValue('localhost')
+            ->setAttribute('class', 'input-text')
             ->setAttribute('label', 'Hostname');
 
         $username = new Element\Text('username');
         $username->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text')
             ->setAttribute('label', 'Username');
 
         $password = new Element\Password('password');
+        $password->setAttribute('class', 'input-text');
         $password->setAttribute('label', 'Password');
 
         $dbname = new Element\Text('dbname');
+        $dbname->setAttribute('class', 'input-text');
         $dbname->setAttribute('label', 'Db Name');
 
         $this->add($driver);
@@ -163,32 +169,41 @@ class Install extends AbstractForm
     public function configuration()
     {
         $site_name = new Element\Text('site_name');
-        $site_name->setAttribute('label', 'Site name');
+        $site_name->setAttribute('label', 'Site name')
+            ->setAttribute('class', 'input-text');
 
         $site_is_offline = new Element\Checkbox('site_is_offline');
         $site_is_offline->setAttribute('label', 'Is offline')
+            ->setAttribute('class', 'input-checkbox')
+            ->setAttribute('id', 'is-offline')
             ->setCheckedValue('1');
 
         $admin_email = new Element\Text('admin_email');
         $admin_email->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text')
             ->setAttribute('label', 'Email');
 
         $admin_firstname = new Element\Text('admin_firstname');
         $admin_firstname->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text')
             ->setAttribute('label', 'Firstname');
 
         $admin_lastname = new Element\Text('admin_lastname');
         $admin_lastname->setAttribute('type', 'text')
+            ->setAttribute('class', 'input-text')
             ->setAttribute('label', 'Lastname');
 
         $admin_login = new Element\Text('admin_login');
-        $admin_login->setAttribute('label', 'Login');
+        $admin_login->setAttribute('label', 'Login')
+            ->setAttribute('class', 'input-text');
 
         $admin_password = new Element\Password('admin_password');
-        $admin_password->setAttribute('label', 'Admin password');
+        $admin_password->setAttribute('label', 'Admin password')
+            ->setAttribute('class', 'input-text');
 
         $admin_password_confirm = new Element\Password('admin_passowrd_confirm');
-        $admin_password_confirm->setAttribute('label', 'Confirm admin password');
+        $admin_password_confirm->setAttribute('label', 'Confirm admin password')
+            ->setAttribute('class', 'input-text');
 
         $path = GC_APPLICATION_PATH . '/data/install/templates/';
         $list_dir = glob($path.'*', GLOB_ONLYDIR);
