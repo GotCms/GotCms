@@ -82,7 +82,17 @@ SELECT pg_catalog.setval('view_id_seq', 5, true);
 --
 -- Data for Name: view; Type: TABLE DATA; Schema: public;
 --
+INSERT INTO view VALUES (1, '2012-09-19 19:29:04', '2012-10-08 22:42:57', 'Home page', 'home', '<?php if(!empty($this->slider)): ?>
+    <ul class="slideshow">
+        <?php foreach($this->slider as $idx => $slide): ?>
+            <?php $image = $this->tools(''unserialize'', $slide[0][''value'']); ?>
+            <?php $text = $slide[1][''value'']; ?>
 
+            <li<?php if($idx == 0): ?> class="show"<?php endif; ?>><img width="<?php echo $this->escapeHtml($image[0][''width'']); ?>" height="<?php echo $this->escapeHtml($image[0][''height'']); ?>" src="<?php echo $this->escapeHtml($image[0][''value'']); ?>" alt="<?php echo $this->escapeHtml($text); ?>" /></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+', 'Home page content');
 INSERT INTO view VALUES (2, '2012-09-19 19:29:50', '2012-09-19 19:29:50', 'Blog', 'blog', '<div id="left_content">
     <div id="blog_container">
         <div class="blog"><h2>Nov</h2><h3>22nd</h3></div>
@@ -101,6 +111,34 @@ INSERT INTO view VALUES (2, '2012-09-19 19:29:50', '2012-09-19 19:29:50', 'Blog'
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
     </div>
 </div>', 'Blog');
+INSERT INTO view VALUES (3, '2012-09-19 19:32:56', '2012-09-20 22:27:02', 'Contact', 'contact', '<?php echo $this->partial(''flash-messages''); ?>
+<?php $return = $this->script(''contact''); ?>
+<?php
+$number_1 = mt_rand(1, 9);
+$number_2 = mt_rand(1, 9);
+$answer = substr(sha1($number_1+$number_2),5,10);
+?>
+
+<form id="contact" action="<?php echo $this->escapeHtml($this->document(''contact'')->getUrl()); ?>" method="post">
+    <?php if(!empty($return[''error_message''])): ?>
+        <div class="notification error"><span><?php echo $this->escapeHtml($return[''error_message'']); ?><span></div>
+    <?php endif; ?>
+
+    <div class="form_settings">
+        <p><span>Name</span><input class="contact" type="text" name="name" value="<?php echo $this->escapeHtml(!empty($return[''name'']) ? $return[''name''] : ''''); ?>" /></p>
+        <p><span>Email Address</span><input class="contact" type="text" name="email" value="<?php echo $this->escapeHtml(!empty($return[''email'']) ? $return[''email''] : ''''); ?>" /></p>
+        <p><span>Message</span><textarea class="contact textarea" rows="5" cols="50" name="message"><?php echo $this->escapeHtml(!empty($return[''message'']) ? $return[''message''] : ''''); ?></textarea></p>
+        <p style="line-height: 1.7em;">To help prevent spam, please enter the answer to this question:</p>
+        <p><span><?php echo $number_1; ?> + <?php echo $number_2; ?> = ?</span><input type="text" name="answer" /><input type="hidden" name="answer_hash" value="<?php echo $answer; ?>" /></p>
+        <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="send" /></p>
+    </div>
+</form>', 'Contact form');
+INSERT INTO view VALUES (4, '2012-09-19 19:33:51', '2012-10-08 22:32:28', 'About', 'about', '<div>
+    <div id="left_content"><?php echo $this->content; ?></div>
+</div>
+<div id="right_content">
+    <img style="float: left;" src="/frontend/images/about.jpg" title="about me" alt="about me"/>
+</div>', 'About page');
 INSERT INTO view VALUES (5, '2012-09-20 22:12:33', '2012-09-20 22:21:24', 'Navigation', 'navigation', '<?php
 $component = new \Gc\Component\Navigation();
 $container = new \Zend\Navigation\Navigation($component->render());
@@ -108,39 +146,15 @@ $this->navigation($container);
 $document = $this->layout()->currentDocument; 
 
 echo $this->navigation()->menu()->setUlClass(''sf-menu navigation'');', 'Navigation');
-INSERT INTO view VALUES (3, '2012-09-19 19:32:56', '2012-09-20 22:27:02', 'Contact', 'contact', '<?php $this->script(''contact''); ?>
-<?php
-$number_1 = mt_rand(1, 9);
-$number_2 = mt_rand(1, 9);
-$answer = substr(sha1($number_1+$number_2),5,10);
-?>
-<form id="contact" action="contact.php" method="post">
-    <div class="form_settings">
-        <p><span>Name</span><input class="contact" type="text" name="your_name" value="" /></p>
-        <p><span>Email Address</span><input class="contact" type="text" name="your_email" value="" /></p>
-        <p><span>Message</span><textarea class="contact textarea" rows="5" cols="50" name="your_message"></textarea></p>
-        <p style="line-height: 1.7em;">To help prevent spam, please enter the answer to this question:</p>
-        <p><span><?php echo $number_1; ?> + <?php echo $number_2; ?> = ?</span><input type="text" name="user_answer" /><input type="hidden" name="answer" value="<?php echo $answer; ?>" /></p>
-        <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="send" /></p>
-    </div>
-</form>', 'Contact form');
-INSERT INTO view VALUES (4, '2012-09-19 19:33:51', '2012-10-08 22:32:28', 'About', 'about', '<div>
-	<div id="left_content"><?php echo $this->content; ?></div>
-</div>
-<div id="right_content">
-    <img style="float: left;" src="/frontend/images/about.jpg" title="about me" alt="about me"/>
-</div>', 'About page');
-INSERT INTO view VALUES (1, '2012-09-19 19:29:04', '2012-10-08 22:42:57', 'Home page', 'home', '<?php if(!empty($this->slider)): ?>
-	<ul class="slideshow">
-		<?php foreach($this->slider as $idx => $slide): ?>
-			<?php $image = $this->tools(''unserialize'', $slide[0][''value'']); ?>
-			<?php $text = $slide[1][''value'']; ?>
-
-			<li<?php if($idx == 0): ?> class="show"<?php endif; ?>><img width="<?php echo $this->escapeHtml($image[0][''width'']); ?>" height="<?php echo $this->escapeHtml($image[0][''height'']); ?>" src="<?php echo $this->escapeHtml($image[0][''value'']); ?>" alt="<?php echo $this->escapeHtml($text); ?>" /></li>
-		<?php endforeach; ?>
-	</ul>
-<?php endif; ?>
-', 'Home page content');
+INSERT INTO view VALUES (6, '2012-10-25 19:57:05', '2012-10-25 20:27:48', 'Flash messages', 'flash-messages', '<?php if(!empty($this->layout()->flashMessages)): ?>    
+    <?php foreach($this->layout()->flashMessages as $type => $messages):?>
+        <?php foreach($messages as $message): ?>
+            <div class="notification <?php echo $type; ?>">
+             <?php echo $this->escapeHtml($this->translate($message)); ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif; ?>', 'Flash messages displayer');
 
 
 --
@@ -177,14 +191,14 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2012-09-20 22:31:50', 'Mai
         <header>
             <div id="logo"><h1><a href="#">G</a>ot<a href="#">C</a>ms</h1></div>
             <nav>
-				<?php echo $this->partial(''navigation''); ?>
+                <?php echo $this->partial(''navigation''); ?>
             </nav>
         </header>
         <!-- end header -->
 
         <!-- begin content -->
         <div id="site_content">
-			<?php echo $this->content; ?>
+            <?php echo $this->content; ?>
         </div>
         <!-- end content -->
 
@@ -201,8 +215,8 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2012-09-20 22:31:50', 'Mai
     <script type="text/javascript" src="/frontend/js/jquery.easing-sooper.js"></script>
     <script type="text/javascript" src="/frontend/js/jquery.sooperfish.js"></script>
     <?php if(!empty($this->slider)): ?>
-    	<script type="text/javascript" src="/frontend/js/image_fade.js"></script>
-	<?php endif; ?>
+        <script type="text/javascript" src="/frontend/js/image_fade.js"></script>
+    <?php endif; ?>
     <!-- initialise sooperfish menu -->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -294,27 +308,29 @@ INSERT INTO script VALUES (1, '2012-09-20 22:26:23', '2012-09-20 22:26:23', 'Con
 $request = $this->getRequest();
 if($request->isPost())
 {
-	$name = $request->getPost()->get(''name'');
-	$email = $request->getPost()->get(''email'');
-	$tel = $request->getPost()->get(''tel'');
-	$message = $request->getPost()->get(''message'');
+    $post = $request->getPost();
+    $name = $post->get(''name'');
+    $email = $post->get(''email'');
+    $message = $post->get(''message'');
+    $answer_hash = $post->get(''answer_hash'');
+    $answer = substr(sha1($post->get(''answer'')), 5, 10);
 
-	if(empty($name) or empty($email) or empty($message))
-	{
-		return FALSE;
-	}
-	else
-	{
-		$mail = new \Gc\Mail(''utf-8'', $message);
-		$mail->setFrom($email, $name);
-		$mail->addTo(\Gc\Core\Config::getValue(''mail_from''));
-		$mail->send();
-		$this->redirect()->toUrl(''/contact'');
-		return TRUE;
-	}
+    if($answer != $answer_hash or empty($name) or empty($email) or empty($message))
+    {
+        return array(''name'' => $name, ''email'' => $email, ''message'' => $message, ''error_message'' => ''Please fill all fields'');
+    }
+    else
+    {
+        $mail = new \Gc\Mail(''utf-8'', $message);
+        $mail->setFrom($email, $name);
+        $mail->addTo(\Gc\Core\Config::getValue(''mail_from''));
+        $mail->send();
+        $this->flashMessenger()->setNameSpace(''success'')->addMessage(''Message sent'');
+        $this->redirect()->toUrl(''/contact'');
+        return TRUE;
+    }
 }
 ', 'Contact ');
-
 
 --
 -- PostgreSQL database dump complete

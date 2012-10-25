@@ -1,3 +1,14 @@
+INSERT INTO view VALUES (1, '2012-09-19 19:29:04', '2012-10-08 22:42:57', 'Home page', 'home', '<?php if(!empty($this->slider)): ?>
+    <ul class="slideshow">
+        <?php foreach($this->slider as $idx => $slide): ?>
+            <?php $image = $this->tools(''unserialize'', $slide[0][''value'']); ?>
+            <?php $text = $slide[1][''value'']; ?>
+
+            <li<?php if($idx == 0): ?> class="show"<?php endif; ?>><img width="<?php echo $this->escapeHtml($image[0][''width'']); ?>" height="<?php echo $this->escapeHtml($image[0][''height'']); ?>" src="<?php echo $this->escapeHtml($image[0][''value'']); ?>" alt="<?php echo $this->escapeHtml($text); ?>" /></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+', 'Home page content');
 INSERT INTO view VALUES (2, '2012-09-19 19:29:50', '2012-09-19 19:29:50', 'Blog', 'blog', '<div id="left_content">
     <div id="blog_container">
         <div class="blog"><h2>Nov</h2><h3>22nd</h3></div>
@@ -16,6 +27,34 @@ INSERT INTO view VALUES (2, '2012-09-19 19:29:50', '2012-09-19 19:29:50', 'Blog'
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui.</p>
     </div>
 </div>', 'Blog');
+INSERT INTO view VALUES (3, '2012-09-19 19:32:56', '2012-09-20 22:27:02', 'Contact', 'contact', '<?php echo $this->partial(''flash-messages''); ?>
+<?php $return = $this->script(''contact''); ?>
+<?php
+$number_1 = mt_rand(1, 9);
+$number_2 = mt_rand(1, 9);
+$answer = substr(sha1($number_1+$number_2),5,10);
+?>
+
+<form id="contact" action="<?php echo $this->escapeHtml($this->document(''contact'')->getUrl()); ?>" method="post">
+    <?php if(!empty($return[''error_message''])): ?>
+        <div class="notification error"><span><?php echo $this->escapeHtml($return[''error_message'']); ?><span></div>
+    <?php endif; ?>
+
+    <div class="form_settings">
+        <p><span>Name</span><input class="contact" type="text" name="name" value="<?php echo $this->escapeHtml(!empty($return[''name'']) ? $return[''name''] : ''''); ?>" /></p>
+        <p><span>Email Address</span><input class="contact" type="text" name="email" value="<?php echo $this->escapeHtml(!empty($return[''email'']) ? $return[''email''] : ''''); ?>" /></p>
+        <p><span>Message</span><textarea class="contact textarea" rows="5" cols="50" name="message"><?php echo $this->escapeHtml(!empty($return[''message'']) ? $return[''message''] : ''''); ?></textarea></p>
+        <p style="line-height: 1.7em;">To help prevent spam, please enter the answer to this question:</p>
+        <p><span><?php echo $number_1; ?> + <?php echo $number_2; ?> = ?</span><input type="text" name="answer" /><input type="hidden" name="answer_hash" value="<?php echo $answer; ?>" /></p>
+        <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="send" /></p>
+    </div>
+</form>', 'Contact form');
+INSERT INTO view VALUES (4, '2012-09-19 19:33:51', '2012-10-08 22:32:28', 'About', 'about', '<div>
+    <div id="left_content"><?php echo $this->content; ?></div>
+</div>
+<div id="right_content">
+    <img style="float: left;" src="/frontend/images/about.jpg" title="about me" alt="about me"/>
+</div>', 'About page');
 INSERT INTO view VALUES (5, '2012-09-20 22:12:33', '2012-09-20 22:21:24', 'Navigation', 'navigation', '<?php
 $component = new \\Gc\\Component\\Navigation();
 $container = new \\Zend\\Navigation\\Navigation($component->render());
@@ -23,52 +62,27 @@ $this->navigation($container);
 $document = $this->layout()->currentDocument; 
 
 echo $this->navigation()->menu()->setUlClass(''sf-menu navigation'');', 'Navigation');
-INSERT INTO view VALUES (3, '2012-09-19 19:32:56', '2012-09-20 22:27:02', 'Contact', 'contact', '<?php $this->script(''contact''); ?>
-<?php
-$number_1 = mt_rand(1, 9);
-$number_2 = mt_rand(1, 9);
-$answer = substr(sha1($number_1+$number_2),5,10);
-?>
-<form id="contact" action="contact.php" method="post">
-    <div class="form_settings">
-        <p><span>Name</span><input class="contact" type="text" name="your_name" value="" /></p>
-        <p><span>Email Address</span><input class="contact" type="text" name="your_email" value="" /></p>
-        <p><span>Message</span><textarea class="contact textarea" rows="5" cols="50" name="your_message"></textarea></p>
-        <p style="line-height: 1.7em;">To help prevent spam, please enter the answer to this question:</p>
-        <p><span><?php echo $number_1; ?> + <?php echo $number_2; ?> = ?</span><input type="text" name="user_answer" /><input type="hidden" name="answer" value="<?php echo $answer; ?>" /></p>
-        <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="send" /></p>
-    </div>
-</form>', 'Contact form');
-INSERT INTO view VALUES (4, '2012-09-19 19:33:51', '2012-10-08 22:32:28', 'About', 'about', '<div>
-	<div id="left_content"><?php echo $this->content; ?></div>
-</div>
-<div id="right_content">
-    <img style="float: left;" src="/frontend/images/about.jpg" title="about me" alt="about me"/>
-</div>', 'About page');
-INSERT INTO view VALUES (1, '2012-09-19 19:29:04', '2012-10-08 22:42:57', 'Home page', 'home', '<?php if(!empty($this->slider)): ?>
-	<ul class="slideshow">
-		<?php foreach($this->slider as $idx => $slide): ?>
-			<?php $image = $this->tools(''unserialize'', $slide[0][''value'']); ?>
-			<?php $text = $slide[1][''value'']; ?>
-
-			<li<?php if($idx == 0): ?> class="show"<?php endif; ?>><img width="<?php echo $this->escapeHtml($image[0][''width'']); ?>" height="<?php echo $this->escapeHtml($image[0][''height'']); ?>" src="<?php echo $this->escapeHtml($image[0][''value'']); ?>" alt="<?php echo $this->escapeHtml($text); ?>" /></li>
-		<?php endforeach; ?>
-	</ul>
-<?php endif; ?>
-', 'Home page content');
-
+INSERT INTO view VALUES (6, '2012-10-25 19:57:05', '2012-10-25 20:27:48', 'Flash messages', 'flash-messages', '<?php if(!empty($this->layout()->flashMessages)): ?>    
+    <?php foreach($this->layout()->flashMessages as $type => $messages):?>
+        <?php foreach($messages as $message): ?>
+            <div class="notification <?php echo $type; ?>">
+             <?php echo $this->escapeHtml($this->translate($message)); ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif; ?>', 'Flash messages displayer');
 
 --
--- Data for Name: document_type; Type: TABLE DATA; Schema: public;
+-- Data for Name: document_type
 --
 
-INSERT INTO document_type VALUES (2, '2012-09-20 22:05:53', '2012-10-08 20:44:24', 'Contact', 'Contact form', 11, 3, 1);
 INSERT INTO document_type VALUES (1, '2012-09-20 22:01:55', '2012-10-08 21:01:06', 'Home', 'Home page', 1, 1, 1);
+INSERT INTO document_type VALUES (2, '2012-09-20 22:05:53', '2012-10-08 20:44:24', 'Contact', 'Contact form', 11, 3, 1);
 INSERT INTO document_type VALUES (3, '2012-09-20 22:06:37', '2012-10-08 21:02:07', 'About', 'About this website', 13, 4, 1);
 
 
 --
--- Data for Name: layout; Type: TABLE DATA; Schema: public;
+-- Data for Name: layout
 --
 
 INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2012-09-20 22:31:50', 'Main', 'main-layout', '<!DOCTYPE HTML>
@@ -92,14 +106,14 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2012-09-20 22:31:50', 'Mai
         <header>
             <div id="logo"><h1><a href="#">G</a>ot<a href="#">C</a>ms</h1></div>
             <nav>
-				<?php echo $this->partial(''navigation''); ?>
+                <?php echo $this->partial(''navigation''); ?>
             </nav>
         </header>
         <!-- end header -->
 
         <!-- begin content -->
         <div id="site_content">
-			<?php echo $this->content; ?>
+            <?php echo $this->content; ?>
         </div>
         <!-- end content -->
 
@@ -116,8 +130,8 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2012-09-20 22:31:50', 'Mai
     <script type="text/javascript" src="/frontend/js/jquery.easing-sooper.js"></script>
     <script type="text/javascript" src="/frontend/js/jquery.sooperfish.js"></script>
     <?php if(!empty($this->slider)): ?>
-    	<script type="text/javascript" src="/frontend/js/image_fade.js"></script>
-	<?php endif; ?>
+        <script type="text/javascript" src="/frontend/js/image_fade.js"></script>
+    <?php endif; ?>
     <!-- initialise sooperfish menu -->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -129,7 +143,7 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2012-09-20 22:31:50', 'Mai
 ', 'Main layout');
 
 --
--- Data for Name: document; Type: TABLE DATA; Schema: public;
+-- Data for Name: document
 --
 
 INSERT INTO document VALUES (1, '2012-09-20 22:06:53', '2012-10-08 22:30:43', 'Home', '', 1, 0, true, 1, 1, 1, 1, NULL);
@@ -138,7 +152,7 @@ INSERT INTO document VALUES (3, '2012-09-20 22:09:29', '2012-10-09 08:00:21', 'C
 
 
 --
--- Data for Name: datatype; Type: TABLE DATA; Schema: public;
+-- Data for Name: datatype
 --
 
 INSERT INTO datatype VALUES (1, 'Text field', 'N;', 'Textstring');
@@ -151,18 +165,18 @@ INSERT INTO datatype VALUES (5, 'Slider', 'a:1:{s:9:"datatypes";a:2:{i:0;a:3:{s:
 
 
 --
--- Data for Name: tab; Type: TABLE DATA; Schema: public;
+-- Data for Name: tab
 --
 
-INSERT INTO tab VALUES (7, 'Title and meta', 'Meta description', NULL, 2);
 INSERT INTO tab VALUES (2, 'Content', 'Content', NULL, 1);
-INSERT INTO tab VALUES (5, 'Title and meta', 'Meta description', NULL, 1);
 INSERT INTO tab VALUES (4, 'Content', 'Content', NULL, 3);
+INSERT INTO tab VALUES (5, 'Title and meta', 'Meta description', NULL, 1);
+INSERT INTO tab VALUES (7, 'Title and meta', 'Meta description', NULL, 2);
 INSERT INTO tab VALUES (8, 'Title and meta', 'Meta description', NULL, 3);
 
 
 --
--- Data for Name: property; Type: TABLE DATA; Schema: public;
+-- Data for Name: property
 --
 
 INSERT INTO property VALUES (6, 'Meta description', 'metaDescription', 'Description', false, NULL, 7, 1);
@@ -182,10 +196,10 @@ INSERT INTO property VALUES (13, 'Main Title', 'mainTitle', 'Title', false, NULL
 
 
 --
--- Data for Name: property_value; Type: TABLE DATA; Schema: public;
+-- Data for Name: property_value
 --
 
-INSERT INTO `property_value` (`id`, `document_id`, `property_id`, `value`) VALUES
+INSERT INTO property_value VALUES
 (1, 1, 14, 0x613a333a7b693a313b613a323a7b693a303b613a313a7b733a353a2276616c7565223b733a3135323a22613a313a7b693a303b613a353a7b733a353a2276616c7565223b733a33353a222f6d656469612f66696c65732f31342f312f353037333235333438373964322e6a7067223b733a353a227769647468223b693a3935303b733a363a22686569676874223b693a3435303b733a343a2268746d6c223b693a323b733a343a226d696d65223b733a31303a22696d6167652f6a706567223b7d7d223b7d693a313b613a313a7b733a353a2276616c7565223b733a35313a2222596f752063616e2070757420610d0a63617074696f6e20666f7220796f75720d0a696d616765207269676874206865726522223b7d7d693a323b613a323a7b693a303b613a313a7b733a353a2276616c7565223b733a3135323a22613a313a7b693a303b613a353a7b733a353a2276616c7565223b733a33353a222f6d656469612f66696c65732f31342f312f353037333235333438613736612e6a7067223b733a353a227769647468223b693a3935303b733a363a22686569676874223b693a3435303b733a343a2268746d6c223b693a323b733a343a226d696d65223b733a31303a22696d6167652f6a706567223b7d7d223b7d693a313b613a313a7b733a353a2276616c7565223b733a35313a2222596f752063616e2070757420610d0a63617074696f6e20666f7220796f75720d0a696d616765207269676874206865726522223b7d7d693a333b613a323a7b693a303b613a313a7b733a353a2276616c7565223b733a3135323a22613a313a7b693a303b613a353a7b733a353a2276616c7565223b733a33353a222f6d656469612f66696c65732f31342f312f353037333235333438616637342e6a7067223b733a353a227769647468223b693a3935303b733a363a22686569676874223b693a3435303b733a343a2268746d6c223b693a323b733a343a226d696d65223b733a31303a22696d6167652f6a706567223b7d7d223b7d693a313b613a313a7b733a353a2276616c7565223b733a35313a2222596f752063616e2070757420610d0a63617074696f6e20666f7220796f75720d0a696d616765207269676874206865726522223b7d7d7d),
 (2, 1, 1, 0x4d792077656273697465),
 (3, 1, 2, ''),
@@ -203,31 +217,34 @@ INSERT INTO `property_value` (`id`, `document_id`, `property_id`, `value`) VALUE
 
 
 --
--- Data for Name: script; Type: TABLE DATA; Schema: public;
+-- Data for Name: script
 --
 
 INSERT INTO script VALUES (1, '2012-09-20 22:26:23', '2012-09-20 22:26:23', 'Contact', 'contact', '<?php
 $request = $this->getRequest();
 if($request->isPost())
 {
-	$name = $request->getPost()->get(''name'');
-	$email = $request->getPost()->get(''email'');
-	$tel = $request->getPost()->get(''tel'');
-	$message = $request->getPost()->get(''message'');
+    $post = $request->getPost();
+    $name = $post->get(''name'');
+    $email = $post->get(''email'');
+    $message = $post->get(''message'');
+    $answer_hash = $post->get(''answer_hash'');
+    $answer = substr(sha1($post->get(''answer'')), 5, 10);
 
-	if(empty($name) or empty($email) or empty($message))
-	{
-		return FALSE;
-	}
-	else
-	{
-		$mail = new \\Gc\\Mail(''utf-8'', $message);
-		$mail->setFrom($email, $name);
-		$mail->addTo(\\Gc\\Core\\Config::getValue(''mail_from''));
-		$mail->send();
-		$this->redirect()->toUrl(''/contact'');
-		return TRUE;
-	}
+    if($answer != $answer_hash or empty($name) or empty($email) or empty($message))
+    {
+        return array(''name'' => $name, ''email'' => $email, ''message'' => $message, ''error_message'' => ''Please fill all fields'');
+    }
+    else
+    {
+        $mail = new \\Gc\\Mail(''utf-8'', $message);
+        $mail->setFrom($email, $name);
+        $mail->addTo(\\Gc\\Core\\Config::getValue(''mail_from''));
+        $mail->send();
+        $this->flashMessenger()->setNameSpace(''success'')->addMessage(''Message sent'');
+        $this->redirect()->toUrl(''/contact'');
+        return TRUE;
+    }
 }
 ', 'Contact ');
 

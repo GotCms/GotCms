@@ -85,3 +85,6 @@ ul.navigation {float: right;margin: 25px 10px 0 0;}
 ul.navigation li a {font: normal 150% 'News Cycle', sans-serif;text-decoration: none;outline: none;text-align: center;z-index: 10;display: block;float: left;height: 30px;padding:5px 14px 6px 15px;position: relative;overflow: hidden;}
 ul.navigation ul {margin-top: 40px;padding-bottom: 10px;}
 
+.notification {font-size: 20px;margin: 10px;}
+.success {color: #C5E105}
+.error {color:#FB6206;}
