@@ -43,7 +43,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInstance()
     {
-        $this->tearDown();
+        $this->_object->_unsetInstance();
         $this->assertInstanceOf('Gc\Registry', Registry::getInstance());
     }
 
@@ -52,7 +52,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetInstance()
     {
-        // Remove the following lines when you implement this test.
+        $this->_object->_unsetInstance();
         $this->_object->setInstance(new Registry);
         $this->assertInstanceOf('Gc\Registry', Registry::getInstance());
     }
@@ -89,7 +89,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsRegisteredWithoutData()
     {
-        $this->tearDown();
+        $this->_object->_unsetInstance();
         $this->assertFalse($this->_object->isRegistered('key'));
     }
 

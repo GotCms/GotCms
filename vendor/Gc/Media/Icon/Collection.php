@@ -83,10 +83,6 @@ class Collection extends AbstractTable
     {
         $select = array();
         $icons = $this->getIcons();
-        if(!is_array($icons))
-        {
-            return $select;
-        }
 
         foreach($icons as $icon)
         {

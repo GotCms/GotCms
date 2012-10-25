@@ -93,10 +93,6 @@ class Collection extends AbstractTable
     {
         $select = array();
         $datatypes = $this->getDatatypes();
-        if(!is_array($datatypes))
-        {
-            return $select;
-        }
 
         foreach($datatypes as $datatype)
         {

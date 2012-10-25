@@ -46,30 +46,33 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->setLayouts();
+        $this->getLayouts(TRUE);
     }
 
     /**
      * Set layout collection
+     * @param boolean $force_reload
      * @return \Gc\Layout\Collection
      */
-    private function setLayouts()
+    public function getLayouts($force_reload = FALSE)
     {
-        $rows = $this->select(function (Select $select)
+        if($force_reload or $this->getData('layouts') === NULL)
         {
-            $select->order('name ASC');
-        });
+            $rows = $this->select(function (Select $select)
+            {
+                $select->order('name ASC');
+            });
 
-        //$select->order(array('name ASC'));
-        $layout = array();
-        foreach($rows as $row)
-        {
-            $layout[] = Model::fromArray((array)$row);
+            $layouts = array();
+            foreach($rows as $row)
+            {
+                $layouts[] = Model::fromArray((array)$row);
+            }
+
+            $this->setData('layouts', $layouts);
         }
 
-        $this->setData('layouts', $layout);
-
-        return $this;
+        return $this->getData('layouts');
     }
 
     /**
@@ -80,10 +83,6 @@ class Collection extends AbstractTable
     {
         $select = array();
         $layouts = $this->getLayouts();
-        if(!is_array($layouts))
-        {
-            return $select;
-        }
 
         foreach($layouts as $layout)
         {

@@ -117,10 +117,6 @@ class Collection extends AbstractTable implements IterableInterface
     {
         $select = array();
         $documents = $this->getDocuments();
-        if(!is_array($documents))
-        {
-            return $select;
-        }
 
         foreach($documents as $document)
         {

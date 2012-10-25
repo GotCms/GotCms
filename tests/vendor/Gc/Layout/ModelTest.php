@@ -70,9 +70,10 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         );
         $model = $this->_object->fromArray($array);
         $model->save();
+        $id = $model->getId();
 
-        $model = $this->_object->fromId(1);
-        $this->assertEquals(1, $model->getId());
+        $model = $this->_object->fromId($id);
+        $this->assertEquals('string', $model->getIdentifier());
     }
 
     /**
@@ -118,7 +119,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     {
         $array = array(
             'name' => 'Test Identifier',
-            'identifier' => 'test-identifier',
+            'identifier' => 'test-save-identifier',
             'description' => 'Description',
             'content' => 'Content',
         );
@@ -135,7 +136,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     {
         $array = array(
             'name' => 'Test Identifier',
-            'identifier' => 'test-identifier',
+            'identifier' => 'test--delete-identifier',
             'description' => 'Description',
             'content' => 'Content',
         );

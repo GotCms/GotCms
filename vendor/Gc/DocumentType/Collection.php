@@ -86,10 +86,6 @@ class Collection extends AbstractTable
     {
         $select = array();
         $document_types = $this->getDocumentTypes();
-        if(!is_array($document_types))
-        {
-            return $select;
-        }
 
         foreach($document_types as $document_type)
         {

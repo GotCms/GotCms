@@ -20,6 +20,15 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_object = new Collection;
+
+        $model = Model::fromArray(array(
+            'name' => 'name-collection-test',
+            'identifier' => 'identifier-collection-test',
+            'description' => 'description-collection-test',
+            'content' => 'content-collection-test'
+        ));
+
+        $model->save();
     }
 
     /**
@@ -28,17 +37,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $model = Model::fromIdentifier('identifier-collection-test');
+        $model->delete();
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Script\Collection::getScripts
-     * @todo   Implement testGetScripts().
      */
     public function testGetScripts()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $scripts = $this->_object->getScripts();
+        $this->assertEquals(1, count($scripts));
     }
 }

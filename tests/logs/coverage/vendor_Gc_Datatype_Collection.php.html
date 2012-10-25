@@ -63,7 +63,7 @@
        </div>
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 21</div></td>
+      <td class="danger small"><div align="right">0 / 18</div></td>
      </tr>
 
      <tr>
@@ -80,13 +80,13 @@
 </td>
       <td class="danger small"><div align="right">20.00%</div></td>
       <td class="danger small"><div align="right">1 / 5</div></td>
-      <td class="danger small">72</td>
+      <td class="danger small">56</td>
       <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
         <div class="bar" style="width: 0.00%;"></div>
        </div>
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 21</div></td>
+      <td class="danger small"><div align="right">0 / 18</div></td>
      </tr>
 
      <tr>
@@ -162,13 +162,13 @@
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
       <td class="danger small"><div align="right">0 / 1</div></td>
-      <td class="danger small">12</td>
+      <td class="danger small">6</td>
       <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
         <div class="bar" style="width: 0.00%;"></div>
        </div>
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 9</div></td>
+      <td class="danger small"><div align="right">0 / 6</div></td>
      </tr>
 
 
@@ -271,19 +271,15 @@
      <tr><td><div align="right"><a name="93"></a><a href="#93">93</a></div></td><td class="codeLine">    {</td></tr>
      <tr class="danger"><td><div align="right"><a name="94"></a><a href="#94">94</a></div></td><td class="codeLine">        $select = array();</td></tr>
      <tr class="danger"><td><div align="right"><a name="95"></a><a href="#95">95</a></div></td><td class="codeLine">        $datatypes = $this-&gt;getDatatypes();</td></tr>
-     <tr class="danger"><td><div align="right"><a name="96"></a><a href="#96">96</a></div></td><td class="codeLine">        if(!is_array($datatypes))</td></tr>
-     <tr class="danger"><td><div align="right"><a name="97"></a><a href="#97">97</a></div></td><td class="codeLine">        {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="98"></a><a href="#98">98</a></div></td><td class="codeLine">            return $select;</td></tr>
-     <tr><td><div align="right"><a name="99"></a><a href="#99">99</a></div></td><td class="codeLine">        }</td></tr>
-     <tr><td><div align="right"><a name="100"></a><a href="#100">100</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="101"></a><a href="#101">101</a></div></td><td class="codeLine">        foreach($datatypes as $datatype)</td></tr>
-     <tr><td><div align="right"><a name="102"></a><a href="#102">102</a></div></td><td class="codeLine">        {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="103"></a><a href="#103">103</a></div></td><td class="codeLine">            $select[$datatype-&gt;getId()] = $datatype-&gt;getName();</td></tr>
-     <tr class="danger"><td><div align="right"><a name="104"></a><a href="#104">104</a></div></td><td class="codeLine">        }</td></tr>
-     <tr><td><div align="right"><a name="105"></a><a href="#105">105</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="106"></a><a href="#106">106</a></div></td><td class="codeLine">        return $select;</td></tr>
-     <tr><td><div align="right"><a name="107"></a><a href="#107">107</a></div></td><td class="codeLine">    }</td></tr>
-     <tr><td><div align="right"><a name="108"></a><a href="#108">108</a></div></td><td class="codeLine">}</td></tr>
+     <tr><td><div align="right"><a name="96"></a><a href="#96">96</a></div></td><td class="codeLine"></td></tr>
+     <tr class="danger"><td><div align="right"><a name="97"></a><a href="#97">97</a></div></td><td class="codeLine">        foreach($datatypes as $datatype)</td></tr>
+     <tr><td><div align="right"><a name="98"></a><a href="#98">98</a></div></td><td class="codeLine">        {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="99"></a><a href="#99">99</a></div></td><td class="codeLine">            $select[$datatype-&gt;getId()] = $datatype-&gt;getName();</td></tr>
+     <tr class="danger"><td><div align="right"><a name="100"></a><a href="#100">100</a></div></td><td class="codeLine">        }</td></tr>
+     <tr><td><div align="right"><a name="101"></a><a href="#101">101</a></div></td><td class="codeLine"></td></tr>
+     <tr class="danger"><td><div align="right"><a name="102"></a><a href="#102">102</a></div></td><td class="codeLine">        return $select;</td></tr>
+     <tr><td><div align="right"><a name="103"></a><a href="#103">103</a></div></td><td class="codeLine">    }</td></tr>
+     <tr><td><div align="right"><a name="104"></a><a href="#104">104</a></div></td><td class="codeLine">}</td></tr>
 
     </tbody>
    </table>
@@ -295,7 +291,7 @@
      <span class="warning"><strong>Dead Code</strong></span>
     </p>
     <p>
-     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.2.6</a> using <a href="http://www.php.net/" target="_top">PHP 5.4.4-7</a> and <a href="http://phpunit.de/">PHPUnit 3.7.8</a> at Wed Oct 24 8:44:37 CEST 2012.</small>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.2.6</a> using <a href="http://www.php.net/" target="_top">PHP 5.4.4-7</a> and <a href="http://phpunit.de/">PHPUnit 3.7.8</a> at Thu Oct 25 18:53:43 CEST 2012.</small>
     </p>
    </footer>
   </div>

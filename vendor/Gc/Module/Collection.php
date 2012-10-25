@@ -81,10 +81,6 @@ class Collection extends AbstractTable
     {
         $select = array();
         $modules = $this->getModules();
-        if(!is_array($modules))
-        {
-            return $select;
-        }
 
         foreach($modules as $module)
         {

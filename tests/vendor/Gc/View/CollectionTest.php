@@ -20,6 +20,15 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_object = new Collection;
+
+        $model = Model::fromArray(array(
+            'name' => 'name-collection-test',
+            'identifier' => 'identifier-collection-test',
+            'description' => 'description-collection-test',
+            'content' => 'content-collection-test'
+        ));
+
+        $model->save();
     }
 
     /**
@@ -28,83 +37,83 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $model = Model::fromIdentifier('identifier-collection-test');
+        $model->delete();
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\View\Collection::init
-     * @todo   Implement testInit().
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->init(1);
+        $this->assertEquals(1, $this->_object->getDocumentTypeId());
     }
 
     /**
      * @covers Gc\View\Collection::getViews
-     * @todo   Implement testGetViews().
+     */
+    public function testGetViewsWithDocumentType()
+    {
+        $this->_object->init(1000);
+        $views = $this->_object->getViews();
+        $this->assertEquals(0, count($views));
+    }
+
+    /**
+     * @covers Gc\View\Collection::getViews
      */
     public function testGetViews()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->init(NULL);
+        $views = $this->_object->getViews();
+        $this->assertEquals(1, count($views));
     }
 
     /**
      * @covers Gc\View\Collection::getSelect
-     * @todo   Implement testGetSelect().
      */
     public function testGetSelect()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->init(NULL);
+        $views = $this->_object->getSelect();
+        $this->assertTrue(count($views) > 0);
     }
 
     /**
      * @covers Gc\View\Collection::addElement
-     * @todo   Implement testAddElement().
      */
     public function testAddElement()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $model = Model::fromIdentifier('identifier-collection-test');
+        $this->_object->addElement($model);
+        $this->assertEquals(1, count($this->_object->getElements()));
     }
 
     /**
      * @covers Gc\View\Collection::clearElements
-     * @todo   Implement testClearElements().
      */
     public function testClearElements()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $model = Model::fromIdentifier('identifier-collection-test');
+        $this->_object->addElement($model);
+        $this->_object->clearElements();
+        $this->assertEquals(0, count($this->_object->getElements()));
     }
 
     /**
      * @covers Gc\View\Collection::getElements
-     * @todo   Implement testGetElements().
      */
     public function testGetElements()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $model = Model::fromIdentifier('identifier-collection-test');
+        $this->_object->addElement($model);
+        $this->assertEquals(1, count($this->_object->getElements()));
     }
 
     /**
      * @covers Gc\View\Collection::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
@@ -116,7 +125,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\View\Collection::delete
-     * @todo   Implement testDelete().
      */
     public function testDelete()
     {

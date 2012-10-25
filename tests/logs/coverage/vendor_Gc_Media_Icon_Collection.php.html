@@ -64,7 +64,7 @@
        </div>
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 22</div></td>
+      <td class="danger small"><div align="right">0 / 19</div></td>
      </tr>
 
      <tr>
@@ -81,13 +81,13 @@
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
       <td class="danger small"><div align="right">0 / 4</div></td>
-      <td class="danger small">72</td>
+      <td class="danger small">56</td>
       <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
         <div class="bar" style="width: 0.00%;"></div>
        </div>
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 22</div></td>
+      <td class="danger small"><div align="right">0 / 19</div></td>
      </tr>
 
      <tr>
@@ -149,13 +149,13 @@
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
       <td class="danger small"><div align="right">0 / 1</div></td>
-      <td class="danger small">12</td>
+      <td class="danger small">6</td>
       <td class="danger big">       <div class="progress progress-danger" style="width: 100px;">
         <div class="bar" style="width: 0.00%;"></div>
        </div>
 </td>
       <td class="danger small"><div align="right">0.00%</div></td>
-      <td class="danger small"><div align="right">0 / 9</div></td>
+      <td class="danger small"><div align="right">0 / 6</div></td>
      </tr>
 
 
@@ -248,19 +248,15 @@
      <tr><td><div align="right"><a name="83"></a><a href="#83">83</a></div></td><td class="codeLine">    {</td></tr>
      <tr class="danger"><td><div align="right"><a name="84"></a><a href="#84">84</a></div></td><td class="codeLine">        $select = array();</td></tr>
      <tr class="danger"><td><div align="right"><a name="85"></a><a href="#85">85</a></div></td><td class="codeLine">        $icons = $this-&gt;getIcons();</td></tr>
-     <tr class="danger"><td><div align="right"><a name="86"></a><a href="#86">86</a></div></td><td class="codeLine">        if(!is_array($icons))</td></tr>
-     <tr class="danger"><td><div align="right"><a name="87"></a><a href="#87">87</a></div></td><td class="codeLine">        {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="88"></a><a href="#88">88</a></div></td><td class="codeLine">            return $select;</td></tr>
-     <tr><td><div align="right"><a name="89"></a><a href="#89">89</a></div></td><td class="codeLine">        }</td></tr>
-     <tr><td><div align="right"><a name="90"></a><a href="#90">90</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="91"></a><a href="#91">91</a></div></td><td class="codeLine">        foreach($icons as $icon)</td></tr>
-     <tr><td><div align="right"><a name="92"></a><a href="#92">92</a></div></td><td class="codeLine">        {</td></tr>
-     <tr class="danger"><td><div align="right"><a name="93"></a><a href="#93">93</a></div></td><td class="codeLine">            $select[$icon-&gt;getId()] = $icon-&gt;getName();</td></tr>
-     <tr class="danger"><td><div align="right"><a name="94"></a><a href="#94">94</a></div></td><td class="codeLine">        }</td></tr>
-     <tr><td><div align="right"><a name="95"></a><a href="#95">95</a></div></td><td class="codeLine"></td></tr>
-     <tr class="danger"><td><div align="right"><a name="96"></a><a href="#96">96</a></div></td><td class="codeLine">        return $select;</td></tr>
-     <tr><td><div align="right"><a name="97"></a><a href="#97">97</a></div></td><td class="codeLine">    }</td></tr>
-     <tr><td><div align="right"><a name="98"></a><a href="#98">98</a></div></td><td class="codeLine">}</td></tr>
+     <tr><td><div align="right"><a name="86"></a><a href="#86">86</a></div></td><td class="codeLine"></td></tr>
+     <tr class="danger"><td><div align="right"><a name="87"></a><a href="#87">87</a></div></td><td class="codeLine">        foreach($icons as $icon)</td></tr>
+     <tr><td><div align="right"><a name="88"></a><a href="#88">88</a></div></td><td class="codeLine">        {</td></tr>
+     <tr class="danger"><td><div align="right"><a name="89"></a><a href="#89">89</a></div></td><td class="codeLine">            $select[$icon-&gt;getId()] = $icon-&gt;getName();</td></tr>
+     <tr class="danger"><td><div align="right"><a name="90"></a><a href="#90">90</a></div></td><td class="codeLine">        }</td></tr>
+     <tr><td><div align="right"><a name="91"></a><a href="#91">91</a></div></td><td class="codeLine"></td></tr>
+     <tr class="danger"><td><div align="right"><a name="92"></a><a href="#92">92</a></div></td><td class="codeLine">        return $select;</td></tr>
+     <tr><td><div align="right"><a name="93"></a><a href="#93">93</a></div></td><td class="codeLine">    }</td></tr>
+     <tr><td><div align="right"><a name="94"></a><a href="#94">94</a></div></td><td class="codeLine">}</td></tr>
 
     </tbody>
    </table>
@@ -272,7 +268,7 @@
      <span class="warning"><strong>Dead Code</strong></span>
     </p>
     <p>
-     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.2.6</a> using <a href="http://www.php.net/" target="_top">PHP 5.4.4-7</a> and <a href="http://phpunit.de/">PHPUnit 3.7.8</a> at Wed Oct 24 8:44:37 CEST 2012.</small>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.2.6</a> using <a href="http://www.php.net/" target="_top">PHP 5.4.4-7</a> and <a href="http://phpunit.de/">PHPUnit 3.7.8</a> at Thu Oct 25 18:53:43 CEST 2012.</small>
     </p>
    </footer>
   </div>

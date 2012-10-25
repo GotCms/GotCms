@@ -19,6 +19,15 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+
+        $model = Model::fromArray(array(
+            'name' => 'name-collection-test',
+            'identifier' => 'identifier-collection-test',
+            'description' => 'description-collection-test',
+            'content' => 'content-collection-test'
+        ));
+
+        $model->save();
         $this->_object = new Collection;
     }
 
@@ -28,18 +37,28 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $model = Model::fromIdentifier('identifier-collection-test');
+        $model->delete();
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Layout\Collection::init
-     * @todo   Implement testInit().
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->init();
+        $layouts = $this->_object->getLayouts();
+        $this->assertTrue(count($layouts) >= 1);
+    }
+
+    /**
+     * @covers Gc\Layout\Collection::getLayouts
+     */
+    public function testGetLayouts()
+    {
+        $layouts = $this->_object->getLayouts();
+        $this->assertTrue(count($layouts) >= 1);
     }
 
     /**
@@ -48,9 +67,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSelect()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $layouts = $this->_object->getSelect();
+        $this->assertTrue(count($layouts) >= 1);
     }
 }

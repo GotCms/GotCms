@@ -65,4 +65,13 @@ class TabsTest extends \PHPUnit_Framework_TestCase
         $this->_object->setData(array('string'));
         $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->_object->__toString());
     }
+
+    /**
+     * @covers Gc\Component\Tabs::setData
+     */
+    public function testSetData()
+    {
+        $this->_object->setData(array('string'));
+        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->_object->__toString());
+    }
 }

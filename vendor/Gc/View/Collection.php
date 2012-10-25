@@ -98,10 +98,6 @@ class Collection extends AbstractTable
     {
         $select = array();
         $views = $this->getViews();
-        if(!is_array($views))
-        {
-            return $select;
-        }
 
         foreach($views as $view)
         {
