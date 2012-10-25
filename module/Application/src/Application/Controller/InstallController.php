@@ -265,8 +265,8 @@ class InstallController extends Action
                             $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_domain', ?);", array($this->getRequest()->getUri()->getHost()));
                             $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_lifetime', '3600');", array());
                             $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('locale', ?);", array($session['install']['lang']));
-                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from', '');", array());
-                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from_name', '');", array());
+                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from', ?);", array($configuration['admin_email']));
+                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from_name', ?);", array($configuration['admin_firstname'] . ' ' . $configuration['admin_lastname']));
 
 
                             $language_filename = sprintf(GC_APPLICATION_PATH . '/data/translate/%s.php', $session['install']['lang']);
@@ -369,15 +369,15 @@ class InstallController extends Action
                             $configuration = $session['install']['configuration'];
                             if($sql_type == 'mysql')
                             {
-                                $sql_string = "INSERT INTO `user` (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), '', '', ?, ?, ?, 1)";
+                                $sql_string = "INSERT INTO `user` (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)";
                             }
                             else
                             {
-                                $sql_string = "INSERT INTO \"user\" (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), '', '', ?, ?, ?, 1)";
+                                $sql_string = "INSERT INTO \"user\" (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)";
                             }
 
                             $db_adapter->query($sql_string,
-                                array($configuration['admin_email'], $configuration['admin_login'], sha1($configuration['admin_password'])));
+                                array($configuration['admin_lastname'], $configuration['admin_firstname'], $configuration['admin_email'], $configuration['admin_login'], sha1($configuration['admin_password'])));
                         break;
 
                         //Install template
@@ -425,7 +425,7 @@ class InstallController extends Action
                             file_put_contents($config_filename, $file);
                             chmod($config_filename, $this->_umask);
 
-                            return $this->_returnJson(array('message' => 'Installation complete'));
+                            return $this->_returnJson(array('message' => 'Installation complete. Please refresh or go to /admin page to manage your website.'));
                         break;
                     }
                 }

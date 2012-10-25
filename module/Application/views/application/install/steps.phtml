@@ -26,11 +26,11 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 $routes = array(
-'install',
-'installLicense',
-'installCheckConfig',
-'installDatabase',
-'installConfiguration',
+    'install',
+    'installLicense',
+    'installCheckConfig',
+    'installDatabase',
+    'installConfiguration',
 );
 $step = array_search($this->currentRoute, $routes);
 if(empty($this->currentRoute))

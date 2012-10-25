@@ -55,7 +55,7 @@ class Install extends AbstractForm
             ->setValueOptions($country_available);
 
         $input_filter = $this->getInputFilter();
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'lang',
             'required'=> TRUE,
             'validators' => array(
@@ -73,7 +73,7 @@ class Install extends AbstractForm
         $accept_license->setUseHiddenElement(FALSE);
 
         $input_filter = $this->getInputFilter();
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'accept-license',
             'required'=> TRUE,
             'validators' => array(
@@ -122,7 +122,7 @@ class Install extends AbstractForm
         $this->add($password);
 
         $input_filter = $this->getInputFilter();
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'driver',
             'required'=> TRUE,
             'validators' => array(
@@ -130,7 +130,7 @@ class Install extends AbstractForm
             ),
         ), 'driver');
 
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'hostname',
             'required'=> TRUE,
             'validators' => array(
@@ -138,7 +138,7 @@ class Install extends AbstractForm
             ),
         ), 'hostname');
 
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'username',
             'required'=> TRUE,
             'validators' => array(
@@ -146,12 +146,12 @@ class Install extends AbstractForm
             ),
         ), 'username');
 
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'password',
             'required'=> FALSE,
         ), 'password');
 
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'dbname',
             'required'=> TRUE,
             'validators' => array(
@@ -172,6 +172,14 @@ class Install extends AbstractForm
         $admin_email = new Element\Text('admin_email');
         $admin_email->setAttribute('type', 'text')
             ->setAttribute('label', 'Email');
+
+        $admin_firstname = new Element\Text('admin_firstname');
+        $admin_firstname->setAttribute('type', 'text')
+            ->setAttribute('label', 'Firstname');
+
+        $admin_lastname = new Element\Text('admin_lastname');
+        $admin_lastname->setAttribute('type', 'text')
+            ->setAttribute('label', 'Lastname');
 
         $admin_login = new Element\Text('admin_login');
         $admin_login->setAttribute('label', 'Login');
@@ -199,6 +207,8 @@ class Install extends AbstractForm
         $this->add($site_name);
         $this->add($site_is_offline);
         $this->add($admin_email);
+        $this->add($admin_firstname);
+        $this->add($admin_lastname);
         $this->add($admin_login);
         $this->add($admin_password);
         $this->add($admin_password_confirm);
@@ -206,7 +216,7 @@ class Install extends AbstractForm
 
 
         $input_filter = $this->getInputFilter();
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'site_name',
             'required'=> TRUE,
             'validators' => array(
@@ -214,7 +224,23 @@ class Install extends AbstractForm
             ),
         ), 'site_name');
 
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
+            'name' => 'admin_firstname',
+            'required'=> TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+            ),
+        ), 'admin_firstname');
+
+        $input_filter->add(array(
+            'name' => 'admin_lastname',
+            'required'=> TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+            ),
+        ), 'admin_lastname');
+
+        $input_filter->add(array(
             'name' => 'admin_email',
             'required'=> TRUE,
             'validators' => array(
@@ -223,7 +249,7 @@ class Install extends AbstractForm
             ),
         ), 'admin_email');
 
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'admin_login',
             'required'=> TRUE,
             'validators' => array(
@@ -231,17 +257,17 @@ class Install extends AbstractForm
             ),
         ), 'admin_login');
 
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'site_is_offline',
             'required'=> FALSE,
         ), 'site_is_offline');
 
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'admin_password',
             'required'=> FALSE,
         ), 'admin_password');
 
-        $inputFilter = $input_filter->add(array(
+        $input_filter->add(array(
             'name' => 'template',
             'required'=> TRUE,
         ), 'template');
