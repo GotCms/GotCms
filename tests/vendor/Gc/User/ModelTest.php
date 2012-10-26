@@ -19,7 +19,16 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Model;
+        $this->_object = Model::fromArray(array(
+            'lastname' => 'Test',
+            'firstname' => 'Test',
+            'email' => 'test@test.com',
+            'login' => 'test',
+            'user_acl_role_id' => 1,
+        ));
+
+        $this->_object->setPassword('test');
+        $this->_object->save();
     }
 
     /**
@@ -28,95 +37,116 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->_object->delete();
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\User\Model::authenticate
-     * @todo   Implement testAuthenticate().
      */
     public function testAuthenticate()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue($this->_object->authenticate('test', 'test'));
+    }
+
+
+    /**
+     * @covers Gc\User\Model::authenticate
+     */
+    public function testFakeAuthenticate()
+    {
+        $this->assertFalse($this->_object->authenticate('test', 'wrong password'));
     }
 
     /**
      * @covers Gc\User\Model::setEmail
-     * @todo   Implement testSetEmail().
      */
     public function testSetEmail()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue($this->_object->setEmail('test@test.com'));
+    }
+
+    /**
+     * @covers Gc\User\Model::setEmail
+     */
+    public function testSetFakeEmail()
+    {
+        $this->assertFalse($this->_object->setEmail('wrong email'));
     }
 
     /**
      * @covers Gc\User\Model::setPassword
-     * @todo   Implement testSetPassword().
      */
-    public function testSetPassword()
+    public function testSetEncryptedPassword()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $password = sha1('test');
+        $this->_object->setPassword('test');
+        $this->assertEquals($password, $this->_object->getPassword());
     }
 
     /**
      * @covers Gc\User\Model::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->save();
     }
 
     /**
      * @covers Gc\User\Model::delete
-     * @todo   Implement testDelete().
+     */
+    public function testDeleteWithoutId()
+    {
+        $model = new Model();
+        $this->assertFalse($model->delete());
+    }
+
+    /**
+     * @covers Gc\User\Model::delete
      */
     public function testDelete()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue($this->_object->delete());
     }
 
     /**
      * @covers Gc\User\Model::fromArray
-     * @todo   Implement testFromArray().
      */
     public function testFromArray()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->delete();
+        $this->_object = Model::fromArray(array(
+            'lastname' => 'Test',
+            'firstname' => 'Test',
+            'email' => 'test@test.com',
+            'login' => 'test',
+            'user_acl_role_id' => 1,
+        ));
+
+        $this->assertEquals('test@test.com', $this->_object->getEmail());
     }
 
     /**
      * @covers Gc\User\Model::fromId
-     * @todo   Implement testFromId().
      */
     public function testFromId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $current_id = $this->_object->getId();
+        $model = Model::fromId($current_id);
+
+        $this->assertEquals($this->_object->getName(), $model->getName());
+    }
+
+    /**
+     * @covers Gc\User\Model::fromId
+     */
+    public function testFromFakeId()
+    {
+        $this->assertFalse(Model::fromId(10000));
     }
 
     /**
      * @covers Gc\User\Model::getRole
-     * @todo   Implement testGetRole().
      */
     public function testGetRole()
     {
@@ -128,7 +158,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\User\Model::sendForgotPasswordEmail
-     * @todo   Implement testSendForgotPasswordEmail().
      */
     public function testSendForgotPasswordEmail()
     {

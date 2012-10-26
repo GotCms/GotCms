@@ -27,6 +27,7 @@ $path = array(
 );
 
 set_include_path(implode(PATH_SEPARATOR, $path));
+define('GC_APPLICATION_PATH', $gc_root);
 /**
  * Setup autoloading
  */
@@ -81,6 +82,73 @@ $resource = $db_adapter->getDriver()->getConnection()->getResource();
 $driver_name = str_replace('pdo_', '', $config['db']['driver']);
 $resource->exec(file_get_contents(sprintf($gc_root . '/data/install/sql/database-%s.sql', $driver_name)));
 $resource->exec(file_get_contents($gc_root . '/data/install/sql/data.sql'));
+//Create role
+$ini = new \Zend\Config\Reader\Ini();
+$roles = $ini->fromFile($gc_root . '/data/install/scripts/roles.ini');
+
+try
+{
+    foreach ($roles['role'] as $key=>$value)
+    {
+        $statement = $db_adapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
+        $result = $statement->execute();
+    }
+}
+catch (Exception $e)
+{
+    return $this->_returnJson(array('messages' => $e->getMessage()));
+}
+
+//resources
+$ini = new \Zend\Config\Reader\Ini();
+$resources = $ini->fromFile($gc_root . '/data/install/scripts/resources.ini');
+
+foreach($resources as $key => $value)
+{
+    $statement = $db_adapter->createStatement("INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')");
+    $result = $statement->execute();
+
+    $statement = $db_adapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
+    $result = $statement->execute();
+    $lastInsertId = $result->current();
+    $lastInsertId = $lastInsertId['id'];
+
+    $permissions = array();
+    foreach($value as $key2 => $value2)
+    {
+        if(!in_array($key2, $permissions))
+        {
+            $statement = $db_adapter->createStatement("INSERT INTO user_acl_permission (permission, user_acl_resource_id) VALUES ('".$key2."', '".$lastInsertId."')");
+            $result = $statement->execute();
+            $permissions[] = $key2;
+        }
+    }
+}
+
+foreach($resources as $key => $value)
+{
+    $statement = $db_adapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
+    $result = $statement->execute();
+    $lastResourceInsertId = $result->current();
+    $lastResourceInsertId = $lastResourceInsertId['id'];
+
+    foreach($value as $key2 => $value2)
+    {
+        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_permission WHERE permission =  '" . $key2 . "' AND user_acl_resource_id = '" .$lastResourceInsertId . "'");
+        $result = $statement->execute();
+        $lastInsertId = $result->current();
+        $lastInsertId = $lastInsertId['id'];
+
+        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_role WHERE name = '" . $value2 . "'");
+        $result = $statement->execute();
+        $role = $result->current();
+        if(!empty($role['id']))
+        {
+            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('".$role['id']."', " . $lastInsertId . ")");
+            $result = $statement->execute();
+        }
+    }
+}
 /**
  * Start output buffering, if enabled
  */

@@ -30,7 +30,9 @@ namespace Gc\User;
 use Gc\Db\AbstractTable,
     Zend\Authentication\Adapter,
     Zend\Authentication\AuthenticationService,
-    Zend\Db\Sql\Predicate\Expression;
+    Zend\Db\Sql\Predicate\Expression,
+    Zend\Db\Sql\Select,
+    Zend\Validator\EmailAddress;
 /**
  * Model of user
  */
@@ -80,22 +82,24 @@ class Model extends AbstractTable
      */
     public function setEmail($user_email)
     {
-        $value = trim($user_email);
-        $validateur = new Zend_Validate_EmailAddress();
-        if($validateur->isValid($user_email))
+        $user_email = trim($user_email);
+        $validator = new EmailAddress();
+        if($validator->isValid($user_email))
         {
-            $select = $this->select()
-                ->where('email = ?', $user_email);
-
-            if($this->getId() != -1)
+            $select = $this->select(function(Select $select) use ($user_email)
             {
-                $select->where('id != ?', $this->getId());
-            }
+                $select->where->equalTo('email', $user_email);
 
-            $user = $this->fetchRow($select);
-            if(count($user) == 0)
+                if($this->getId() != -1)
+                {
+                    $select->where->notEqualTo('id', $this->getId());
+                }
+            });
+
+            $rows = $this->fetchAll($select);
+            if(count($rows) == 0)
             {
-                $this->_email = $user_email;
+                $this->setData('email', $user_email);
                 return TRUE;
             }
         }
@@ -111,7 +115,7 @@ class Model extends AbstractTable
      */
     public function setPassword($user_password, $encrypt = TRUE)
     {
-        $this->_password = ($encrypt) ? sha1($user_password) : trim($user_password);
+        $this->setData('password', $encrypt ? sha1($user_password) : trim($user_password));
     }
 
 
@@ -134,7 +138,7 @@ class Model extends AbstractTable
         $password = $this->getPassword();
         if(!empty($password))
         {
-            $array_save['password'] = sha1($password);
+            $array_save['password'] = $password;
         }
 
         try
@@ -199,6 +203,7 @@ class Model extends AbstractTable
     {
         $user_table = new Model();
         $user_table->setData($array);
+        $user_table->unsetData('password');
 
         return $user_table;
     }
@@ -215,7 +220,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $user_table->setData((array)$current);
+            $user_table->setData((array)$current);
+            $user_table->unsetData('password');
+            return $user_table;
         }
         else
         {
