@@ -16,6 +16,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Gc\Core\Object::__construct
      */
     protected function setUp()
     {
@@ -32,241 +33,220 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Core\Object::init
-     * @todo   Implement testInit().
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->_object->init());
     }
 
     /**
      * @covers Gc\Core\Object::addData
-     * @todo   Implement testAddData().
      */
     public function testAddData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->addData(array('k' => 'v'));
+        $this->assertEquals('v', $this->_object->getData('k'));
     }
 
     /**
      * @covers Gc\Core\Object::setData
-     * @todo   Implement testSetData().
+     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object::_underscore
      */
     public function testSetData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setK('v');
+        $this->assertEquals('v', $this->_object->getData('k'));
+    }
+
+    /**
+     * @covers Gc\Core\Object::setData
+     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object::_underscore
+     */
+    public function testSetAllData()
+    {
+        $this->_object->setData(array('k' => 'v', 'k2' => 'v2'));
+        $this->assertEquals('v', $this->_object->getData('k'));
     }
 
     /**
      * @covers Gc\Core\Object::unsetData
-     * @todo   Implement testUnsetData().
+     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object::_underscore
      */
     public function testUnsetData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData('k', 'v');
+        $this->_object->unsK();
+        $this->assertNull($this->_object->getData('k'));
+    }
+
+    /**
+     * @covers Gc\Core\Object::unsetData
+     */
+    public function testUnsetAllData()
+    {
+        $this->_object->setData('k', 'v');
+        $this->_object->unsetData();
+        $this->assertNull($this->_object->getData('k'));
     }
 
     /**
      * @covers Gc\Core\Object::getData
-     * @todo   Implement testGetData().
+     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object::_underscore
      */
     public function testGetData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData('k', 'v');
+        $this->assertEquals('v', $this->_object->getK());
+    }
+
+    /**
+     * @covers Gc\Core\Object::getData
+     */
+    public function testGetDataWithIndex()
+    {
+        $this->_object->setData('a', array('b', 'c'));
+        $this->assertEquals('b', $this->_object->getData('a', 0));
+    }
+
+    /**
+     * @covers Gc\Core\Object::getData
+     */
+    public function testGetAllData()
+    {
+        $this->_object->setData('k', 'v');
+        $this->assertEquals(array('k' => 'v'), $this->_object->getData());
+    }
+
+    /**
+     * @covers Gc\Core\Object::getData
+     */
+    public function testGetArrayData()
+    {
+        $this->_object->setData(array('a' => array('b' => '1', 'c' => '2')));
+        $this->assertEquals('1', $this->_object->getData('a/b'));
+        $this->assertNull($this->_object->getData('b/c'));
+        $this->assertNull($this->_object->getData('a/b/'));
     }
 
     /**
      * @covers Gc\Core\Object::hasData
-     * @todo   Implement testHasData().
+     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object::_underscore
      */
     public function testHasData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData('k', 'v');
+        $this->assertTrue($this->_object->hasK());
     }
 
     /**
-     * @covers Gc\Core\Object::__toArray
-     * @todo   Implement test__toArray().
+     * @covers Gc\Core\Object::hasData
      */
-    public function test__toArray()
+    public function testHasFakeData()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertFalse($this->_object->hasData(''));
     }
 
     /**
      * @covers Gc\Core\Object::toArray
-     * @todo   Implement testToArray().
+     * @covers Gc\Core\Object::__toArray
      */
-    public function testToArray()
+    public function test__toArray()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData('k', 'v');
+        $this->assertArrayHasKey('k', $this->_object->toArray());
+    }
+
+    /**
+     * @covers Gc\Core\Object::toArray
+     * @covers Gc\Core\Object::__toArray
+     */
+    public function test__toArrayWithParameters()
+    {
+        $this->_object->setData('k', 'v');
+        $this->assertArrayHasKey('k2', $this->_object->toArray(array('k', 'k2')));
     }
 
     /**
      * @covers Gc\Core\Object::toXml
-     * @todo   Implement testToXml().
      */
     public function testToXml()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData(array('k' => 'v'));
+        $xml = '<?xml version="1.0" encoding="UTF-8"?><items><k><![CDATA[v]]></k></items>';
+        $this->assertXmlStringEqualsXmlString($xml, $this->_object->toXml(array(), 'items', TRUE, TRUE));
+    }
+
+    /**
+     * @covers Gc\Core\Object::toXml
+     * @covers Gc\Core\Object::__toXml
+     */
+    public function testToXmlWithoutParameters()
+    {
+        $this->_object->setData(array('k' => 'v'));
+        $this->_object->toXml(array(), 'items', TRUE, TRUE);
+        $this->_object->toXml(array(), 'items', FALSE, FALSE);
+        $xml = '<item><k><![CDATA[v]]></k></item>';
+        $this->assertXmlStringEqualsXmlString($xml, $this->_object->toXml());
     }
 
     /**
      * @covers Gc\Core\Object::toJson
-     * @todo   Implement testToJson().
+     * @covers Gc\Core\Object::__toJson
      */
     public function testToJson()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData(array('k' => 'v'));
+        $this->assertEquals(json_encode(array('k' => 'v')), $this->_object->toJson());
     }
 
     /**
      * @covers Gc\Core\Object::toString
-     * @todo   Implement testToString().
      */
     public function testToString()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\Core\Object::__call
-     * @todo   Implement test__call().
-     */
-    public function test__call()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\Core\Object::__get
-     * @todo   Implement test__get().
-     */
-    public function test__get()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\Core\Object::__set
-     * @todo   Implement test__set().
-     */
-    public function test__set()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\Core\Object::getOrigData
-     * @todo   Implement testGetOrigData().
-     */
-    public function testGetOrigData()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Gc\Core\Object::setOrigData
-     * @todo   Implement testSetOrigData().
-     */
-    public function testSetOrigData()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData(array('k' => 'v'));
+        $this->assertEquals('v', $this->_object->toString());
     }
 
     /**
      * @covers Gc\Core\Object::offsetSet
-     * @todo   Implement testOffsetSet().
      */
     public function testOffsetSet()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->offsetSet('k', 'v');
+        $this->assertEquals('v', $this->_object->getData('k'));
     }
 
     /**
      * @covers Gc\Core\Object::offsetExists
-     * @todo   Implement testOffsetExists().
      */
     public function testOffsetExists()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData('k', 'v');
+        $this->assertTrue($this->_object->OffsetExists('k'));
     }
 
     /**
      * @covers Gc\Core\Object::offsetUnset
-     * @todo   Implement testOffsetUnset().
      */
     public function testOffsetUnset()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData('k', 'v');
+        $this->_object->offsetUnset('k');
+        $this->assertNull($this->_object->getData('k'));
     }
 
     /**
      * @covers Gc\Core\Object::offsetGet
-     * @todo   Implement testOffsetGet().
      */
     public function testOffsetGet()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->setData('k', 'v');
+        $this->assertEquals('v', $this->_object->offsetGet('k'));
     }
 }

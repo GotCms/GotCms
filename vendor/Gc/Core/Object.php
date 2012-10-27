@@ -27,7 +27,9 @@
 
 namespace Gc\Core;
 
-use Gc\Exception;
+use Gc\Exception,
+    SimpleXMLElement,
+    Zend\Json\Json;
 /**
  * Abstract object, all classes are extends from it to
  * automate accessors, generate xml, json or array.
@@ -172,11 +174,11 @@ abstract class Object
         $default = NULL;
 
         // accept a/b/c as ['a']['b']['c']
-        if(strpos($key,'/'))
+        if(strpos($key,'/')) // Not  !== FALSE no need '/a/b always return NULL
         {
-            $keyArr = explode('/', $key);
+            $key_array = explode('/', $key);
             $data = $this->_data;
-            foreach($keyArr as $i => $k)
+            foreach($key_array as $i => $k)
             {
                 if($k==='')
                 {
@@ -191,10 +193,6 @@ abstract class Object
                     }
 
                     $data = $data[$k];
-                }
-                elseif($data instanceof Object)
-                {
-                    $data = $data->getData($k);
                 }
                 else
                 {
@@ -280,20 +278,20 @@ abstract class Object
             return $this->_data;
         }
 
-        $arrRes = array();
+        $array_result = array();
         foreach($array as $attribute)
         {
             if(isset($this->_data[$attribute]))
             {
-                $arrRes[$attribute] = $this->_data[$attribute];
+                $array_result[$attribute] = $this->_data[$attribute];
             }
             else
             {
-                $arrRes[$attribute] = NULL;
+                $array_result[$attribute] = NULL;
             }
         }
 
-        return $arrRes;
+        return $array_result;
     }
 
     /**
@@ -321,7 +319,7 @@ abstract class Object
         $xml = '';
         if($add_open_tag)
         {
-            $xml.= '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+            $xml.= '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
         }
 
         if(!empty($root_name))
@@ -329,26 +327,27 @@ abstract class Object
             $xml.= '<'.$root_name.'>'."\n";
         }
 
-        $xmlModel = new SimpleXMLElement('<node></node>');
+        $xml_model = new SimpleXMLElement('<node></node>');
         $array_data = $this->toArray($array);
-        foreach($array_data as $fieldName => $fieldValue)
+
+        foreach($array_data as $field_name => $field_value)
         {
             if($add_Cdata === TRUE)
             {
-                $fieldValue = "<![CDATA[$fieldValue]]>";
+                $field_value = '<![CDATA[' . $field_value . ']]>';
             }
             else
             {
-                $fieldValue = $xmlModel->xmlentities($fieldValue);
+                $field_value = htmlentities($field_value);
             }
 
-            $xml.= "<$fieldName>$fieldValue</$fieldName>"."\n";
+            $xml.= '<' . $field_name . '>' . $field_value . '</' . $field_name . '>' . PHP_EOL;
         }
 
         if(!empty($root_name))
         {
 
-            $xml.= '</'.$root_name.'>'."\n";
+            $xml.= '</' . $root_name . '>'."\n";
         }
 
         return $xml;
@@ -377,7 +376,7 @@ abstract class Object
     protected function __toJson(array $array = array())
     {
         $array_data = $this->toArray($array);
-        $json = Zend_Json::encode($array_data);
+        $json = Json::encode($array_data);
         return $json;
     }
 
@@ -455,31 +454,6 @@ abstract class Object
     }
 
     /**
-     * Attribute getter(deprecated)
-     *
-     * @param string $var
-     * @return mixed
-     */
-
-    public function __get($var)
-    {
-        $var = $this->_underscore($var);
-        return $this->getData($var);
-    }
-
-    /**
-     * Attribute setter(deprecated)
-     *
-     * @param string $var
-     * @param mixed $value
-     */
-    public function __set($var, $value)
-    {
-        $var = $this->_underscore($var);
-        $this->setData($var, $value);
-    }
-
-    /**
      * Converts field names for setters and geters
      *
      * $this->setMyField($value) === $this->setData('my_field', $value)
@@ -499,54 +473,6 @@ abstract class Object
 
         self::$_underscoreCache[$name] = $result;
         return $result;
-    }
-
-    /**
-     * String to camel case
-     *
-     * @param string $name
-     * @return string
-     */
-    protected function _camelize($name)
-    {
-        return uc_words($name, '');
-    }
-
-    /**
-     * Get object loaded data(original data)
-     *
-     * @param string $key
-     * @return mixed
-     */
-    public function getOrigData($key = NULL)
-    {
-        if(is_null($key))
-        {
-            return $this->_origData;
-        }
-
-        return isset($this->_origData[$key]) ? $this->_origData[$key] : NULL;
-    }
-
-    /**
-     * Initialize object original data
-     *
-     * @param string $key
-     * @param mixed $data
-     * @return \Gc\Core\Object
-     */
-    public function setOrigData($key = NULL, $data = NULL)
-    {
-        if(is_null($key))
-        {
-            $this->_origData = $this->_data;
-        }
-        else
-        {
-            $this->_origData[$key] = $data;
-        }
-
-        return $this;
     }
 
     /**

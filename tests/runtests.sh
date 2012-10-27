@@ -23,6 +23,5 @@ while [ -n "$1" ] ; do
 done
 
 set -x
-${PHPUNIT} ${PHPUNIT_OPTS} ${PHPUNIT_COVERAGE} ${PHPUNIT_DB} \
-${PHPUNIT_GROUPS:+--group $PHPUNIT_GROUPS}
+${PHPUNIT} ${PHPUNIT_OPTS} ${PHPUNIT_GROUPS:+--group $PHPUNIT_GROUPS}
 
