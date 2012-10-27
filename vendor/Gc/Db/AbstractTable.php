@@ -148,7 +148,7 @@ abstract class AbstractTable extends Object
     /**
      * Execute query
      * @param mixed $query (\Zend\Db\Sql\*|string)
-     * @return array|Zend\Db\ResultSet\ResultSet
+     * @return array|Zend\Db\Adapter\Driver\Pdo\Result
      */
     public function execute($query)
     {

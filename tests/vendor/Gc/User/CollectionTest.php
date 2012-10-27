@@ -28,29 +28,24 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\User\Collection::init
-     * @todo   Implement testInit().
+     * @covers Gc\User\Collection::setUsers
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->init();
+        $this->assertTrue(is_array($this->_object->getUsers()));
     }
 
     /**
      * @covers Gc\User\Collection::getUsers
-     * @todo   Implement testGetUsers().
      */
     public function testGetUsers()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue(is_array($this->_object->getUsers()));
     }
 }
