@@ -19,7 +19,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Model;
+        $this->_object = Model::fromId(1);
     }
 
     /**
@@ -28,65 +28,89 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\User\Role\Model::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $permissions = $this->_object->getUserPermissions();
+        $array = array();
+        foreach($permissions as $type_name => $type_values)
+        {
+            $array += $type_values;
+        }
+
+        $this->_object->setPermissions($array);
+        $this->assertTrue(is_numeric($this->_object->save()));
+    }
+
+    /**
+     * @covers Gc\User\Role\Model::save
+     */
+    public function testSaveWithoutId()
+    {
+        $model = new Model();
+        $model->setName('New Name2');
+        $model->setDescription('Test description2');
+
+        $this->assertTrue(is_numeric($model->save()));
+        $model->delete();
     }
 
     /**
      * @covers Gc\User\Role\Model::delete
-     * @todo   Implement testDelete().
+     * @covers Gc\User\Role\Model::save
      */
     public function testDelete()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $model = new Model();
+        $model->setName('New Name');
+        $model->setDescription('Test description');
+        $model->save();
+        $this->assertTrue($model->delete());
+    }
+
+    /**
+     * @covers Gc\User\Role\Model::delete
+     */
+    public function testFakeDelete()
+    {
+        $model = new Model();
+        $this->assertFalse($model->delete());
     }
 
     /**
      * @covers Gc\User\Role\Model::fromArray
-     * @todo   Implement testFromArray().
      */
     public function testFromArray()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertInstanceOf('Gc\User\Role\Model', Model::fromArray($this->_object->getData()));
     }
 
     /**
      * @covers Gc\User\Role\Model::fromId
-     * @todo   Implement testFromId().
      */
     public function testFromId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertInstanceOf('Gc\User\Role\Model', Model::fromId(1));
+    }
+
+    /**
+     * @covers Gc\User\Role\Model::fromId
+     */
+    public function testFromFakeId()
+    {
+        $this->assertFalse(Model::fromId(42));
     }
 
     /**
      * @covers Gc\User\Role\Model::getUserPermissions
-     * @todo   Implement testGetUserPermissions().
      */
     public function testGetUserPermissions()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue(is_array($this->_object->getUserPermissions()));
     }
 }

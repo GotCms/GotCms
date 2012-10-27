@@ -89,7 +89,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->_object->save();
+        $this->assertTrue($this->_object->save());
     }
 
     /**
@@ -150,10 +150,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRole()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertInstanceOf('Gc\User\Role\Model', $this->_object->getRole());
     }
 
     /**

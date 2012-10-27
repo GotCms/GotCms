@@ -240,7 +240,7 @@ class Model extends AbstractTable
         $role = $this->getData('role');
         if(empty($role) or !empty($force_reload))
         {
-            $role = Role\Model::fromId($this->getId());
+            $role = Role\Model::fromId($this->getUserAclRoleId());
             $this->setData('role', $role);
         }
 
