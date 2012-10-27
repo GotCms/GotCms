@@ -115,7 +115,7 @@ class Model extends AbstractTable
      */
     public function setPassword($user_password, $encrypt = TRUE)
     {
-        $this->setData('password', $encrypt ? sha1($user_password) : trim($user_password));
+        $this->setData('password', ($encrypt ? sha1(trim($user_password)) : trim($user_password)));
     }
 
 

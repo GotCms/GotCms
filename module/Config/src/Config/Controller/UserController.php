@@ -135,6 +135,7 @@ class UserController extends Action
             {
                 $user_model = new User\Model();
                 $user_model->setData($post);
+                $user_model->setPassword($post['password']);
                 $user_model->save();
                 $this->flashMessenger()->setNamespace('success')->addMessage('User saved!');
 
@@ -188,6 +189,11 @@ class UserController extends Action
             if($form->isValid())
             {
                 $user_model->addData($post);
+                if(!empty($post['password']))
+                {
+                    $user_model->setPassword($post['password']);
+                }
+
                 $user_model->save();
                 $this->flashMessenger()->setNamespace('success')->addMessage('User has been edited!');
                 return $this->redirect()->toRoute('userEdit', array('id' => $user_id));
