@@ -16,6 +16,8 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Gc\Event\StaticEventManager::setInstance
+     * @covers Gc\Event\StaticEventManager::__construct
      */
     protected function setUp()
     {
@@ -33,26 +35,21 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Event\StaticEventManager::getInstance
-     * @todo   Implement testGetInstance().
      */
     public function testGetInstance()
     {
         $this->tearDown();
-        $this->assertInstanceOf('StaticEventManager', StaticEventManager::getInstance());
+        $this->assertInstanceOf('Gc\Event\StaticEventManager', StaticEventManager::getInstance());
     }
 
-    /**
-     * @covers Gc\Event\StaticEventManager::setInstance
-     * @todo   Implement testSetInstance().
-     */
     public function testSetInstance()
     {
-        $this->assertInstanceOf('Registry', StaticEventManager::getInstance());
+        StaticEventManager::setInstance($this->_object);
+        $this->assertInstanceOf('Gc\Event\StaticEventManager', StaticEventManager::getInstance());
     }
 
     /**
      * @covers Gc\Event\StaticEventManager::hasInstance
-     * @todo   Implement testHasInstance().
      */
     public function testHasInstance()
     {
@@ -65,7 +62,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     public function testResetInstance()
     {
         $this->_object->resetInstance();
-        // Remove the following lines when you implement this test.
         $this->assertFalse($this->_object->hasInstance());
     }
 
