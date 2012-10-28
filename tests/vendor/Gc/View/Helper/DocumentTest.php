@@ -28,17 +28,22 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\View\Helper\Document::__invoke
-     * @todo   Implement test__invoke().
      */
-    public function test__invoke()
+    public function test__invokeFromId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertFalse($this->_object->__invoke(999));
+    }
+
+    /**
+     * @covers Gc\View\Helper\Document::__invoke
+     */
+    public function test__invokeFromUrlKey()
+    {
+        $this->assertFalse($this->_object->__invoke('test-helper-document'));
     }
 }

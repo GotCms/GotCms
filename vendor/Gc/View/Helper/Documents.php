@@ -41,20 +41,20 @@ class Documents extends AbstractHelper
      * if data is an array, return all documents
      * if data is numeric, return all documents with parent_id equal to $data
      * @param  integer $data
-     * @return array of \Gc\Document\Collection
+     * @return array of \Gc\Document\Model
      */
     public function __invoke($data = NULL)
     {
         $documents = new DocumentCollection();
         if(empty($data))
         {
-            $elements = $documents->load(0);
+            $elements = $documents->load(0)->getDocuments();
         }
         else
         {
             if(is_numeric($data))
             {
-                $elements = $documents->load($data);
+                $elements = $documents->load($data)->getDocuments();
             }
             elseif(is_array($data))
             {

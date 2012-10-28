@@ -44,7 +44,7 @@ class Collection extends AbstractTable implements IterableInterface
     /**
      * Load document collection
      * @param integer @parent_id
-     * @return void
+     * @return \Gc\Document\Collection
      */
     public function load($parent_id = NULL)
     {
@@ -53,6 +53,8 @@ class Collection extends AbstractTable implements IterableInterface
             $this->setData('parent_id', $parent_id);
             $this->setDocuments();
         }
+
+        return $this;
     }
 
     /**
