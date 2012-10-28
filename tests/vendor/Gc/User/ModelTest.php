@@ -23,11 +23,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'lastname' => 'Test',
             'firstname' => 'Test',
             'email' => 'test@test.com',
-            'login' => 'test',
+            'login' => 'test-user-model',
             'user_acl_role_id' => 1,
         ));
 
-        $this->_object->setPassword('test');
+        $this->_object->setPassword('test-user-model-password');
         $this->_object->save();
     }
 
@@ -46,7 +46,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticate()
     {
-        $this->assertTrue($this->_object->authenticate('test', 'test'));
+        $this->assertTrue($this->_object->authenticate('test-user-model', 'test-user-model-password'));
     }
 
 
@@ -63,7 +63,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetEmail()
     {
-        $this->assertTrue($this->_object->setEmail('test@test.com'));
+        $this->assertTrue($this->_object->setEmail('test-user-model@test.com'));
     }
 
     /**
@@ -89,7 +89,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertTrue($this->_object->save());
+        $this->assertTrue(is_numeric($this->_object->save()));
     }
 
     /**

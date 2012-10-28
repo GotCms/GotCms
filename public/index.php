@@ -38,7 +38,7 @@ if (file_exists('vendor/autoload.php')) {
 }
 
 // Support for ZF2_PATH environment variable or git submodule
-if ($zf2Path = getenv('ZF2_PATH') ?: (is_dir('vendor/ZendFramework/library') ? 'vendor/ZendFramework/library' : false))
+if ($zf2Path = getenv('ZF2_PATH') ?: (is_dir('vendor/ZendFramework/library') ? 'vendor/ZendFramework/library' : FALSE))
 {
     // Get application stack configuration
     $configuration = include 'config/application.config.php';
@@ -63,4 +63,4 @@ if (!class_exists('Zend\Loader\AutoloaderFactory')) {
 // Run application
 $application = Zend\Mvc\Application::init($configuration);
 \Gc\Registry::set('Application', $application);
-$application->run()->send();;
+$application->run()->send();

@@ -64,8 +64,6 @@
                     <ul>
 <li class="method public inherited"><a href="#method___call" title="__call :: Set/Get attribute wrapper"><span class="description">Set/Get attribute wrapper</span><pre>__call()</pre></a></li>
 <li class="method public inherited"><a href="#method___construct" title="__construct :: Abstract function for save Editor"><span class="description">Abstract function for save Editor</span><pre>__construct()</pre></a></li>
-<li class="method public inherited"><a href="#method___get" title="__get :: Attribute getter(deprecated)"><span class="description">Attribute getter(deprecated)</span><pre>__get()</pre></a></li>
-<li class="method public inherited"><a href="#method___set" title="__set :: Attribute setter(deprecated)"><span class="description">Attribute setter(deprecated)</span><pre>__set()</pre></a></li>
 <li class="method public inherited"><a href="#method___toArray" title="__toArray :: Convert object attributes to array"><span class="description">Convert object attributes to array</span><pre>__toArray()</pre></a></li>
 <li class="method public inherited"><a href="#method_addData" title="addData :: Add data to the object."><span class="description">Add data to the object.</span><pre>addData()</pre></a></li>
 <li class="method public inherited"><a href="#method_addPath" title="addPath :: Add path in Zend\View\Resolver\TemplatePathStack"><span class="description">Add path in Zend\View\Resolver\TemplatePathStack</span><pre>addPath()</pre></a></li>
@@ -73,7 +71,6 @@
 <li class="method public inherited"><a href="#method_getData" title="getData :: Retrieves data from the object"><span class="description">Retrieves data from the object</span><pre>getData()</pre></a></li>
 <li class="method public inherited"><a href="#method_getDatatype" title="getDatatype :: Get current datatype"><span class="description">Get current datatype</span><pre>getDatatype()</pre></a></li>
 <li class="method public inherited"><a href="#method_getHelper" title="getHelper :: Retrieve helper from $name"><span class="description">Retrieve helper from $name</span><pre>getHelper()</pre></a></li>
-<li class="method public inherited"><a href="#method_getOrigData" title="getOrigData :: Get object loaded data(original data)"><span class="description">Get object loaded data(original data)</span><pre>getOrigData()</pre></a></li>
 <li class="method public inherited"><a href="#method_getRequest" title="getRequest :: Get request object"><span class="description">Get request object</span><pre>getRequest()</pre></a></li>
 <li class="method public inherited"><a href="#method_hasData" title="hasData :: If $key is empty, checks whether there's any data in the object
 Otherwise checks if the specified attribute is set."><span class="description">If $key is empty, checks whether there's any data in the object
@@ -88,7 +85,6 @@ Otherwise checks if the specified attribute is set.</span><pre>hasData()</pre></
 <li class="method public "><a href="#method_save" title="save :: Save Textrich prevalue editor"><span class="description">Save Textrich prevalue editor</span><pre>save()</pre></a></li>
 <li class="method public inherited"><a href="#method_setConfig" title="setConfig :: Set Configuration"><span class="description">Set Configuration</span><pre>setConfig()</pre></a></li>
 <li class="method public inherited"><a href="#method_setData" title="setData :: Overwrite data in the object."><span class="description">Overwrite data in the object.</span><pre>setData()</pre></a></li>
-<li class="method public inherited"><a href="#method_setOrigData" title="setOrigData :: Initialize object original data"><span class="description">Initialize object original data</span><pre>setOrigData()</pre></a></li>
 <li class="method public inherited"><a href="#method_toArray" title="toArray :: Public wrapper for __toArray"><span class="description">Public wrapper for __toArray</span><pre>toArray()</pre></a></li>
 <li class="method public inherited"><a href="#method_toJson" title="toJson :: Public wrapper for __toJson"><span class="description">Public wrapper for __toJson</span><pre>toJson()</pre></a></li>
 <li class="method public inherited"><a href="#method_toString" title="toString :: Public wrapper for __toString"><span class="description">Public wrapper for __toString</span><pre>toString()</pre></a></li>
@@ -100,7 +96,6 @@ Otherwise checks if the specified attribute is set.</span><pre>hasData()</pre></
                     <ul>
 <li class="method protected inherited"><a href="#method___toJson" title="__toJson :: Convert object attributes to JSON"><span class="description">Convert object attributes to JSON</span><pre>__toJson()</pre></a></li>
 <li class="method protected inherited"><a href="#method___toXml" title="__toXml :: Convert object attributes to XML"><span class="description">Convert object attributes to XML</span><pre>__toXml()</pre></a></li>
-<li class="method protected inherited"><a href="#method__camelize" title="_camelize :: String to camel case"><span class="description">String to camel case</span><pre>_camelize()</pre></a></li>
 <li class="method protected inherited"><a href="#method__getData" title="_getData :: Get value from _data array without parse key"><span class="description">Get value from _data array without parse key</span><pre>_getData()</pre></a></li>
 <li class="method protected inherited"><a href="#method__underscore" title="_underscore :: Converts field names for setters and geters"><span class="description">Converts field names for setters and geters</span><pre>_underscore()</pre></a></li>
 <li class="method protected inherited"><a href="#method_setId" title="setId :: Set Id"><span class="description">Set Id</span><pre>setId()</pre></a></li>
@@ -182,58 +177,6 @@ Otherwise checks if the specified attribute is set.</span><pre>hasData()</pre></
 <div class="subelement argument">
 <h4>$datatype_abstract</h4>
 <code><a href="../classes/Gc.Datatype.AbstractDatatype.html">\Gc\Datatype\AbstractDatatype</a></code>
-</div>
-</div></div>
-</div>
-<a id="method___get"></a><div class="element clickable method public method___get" data-toggle="collapse" data-target=".method___get .collapse">
-<h2>Attribute getter(deprecated)</h2>
-<pre>__get(string $var) : mixed</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Core\Object::__get()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::__get()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$var</h4>
-<code>string</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>mixed</code></div>
-</div></div>
-</div>
-<a id="method___set"></a><div class="element clickable method public method___set" data-toggle="collapse" data-target=".method___set .collapse">
-<h2>Attribute setter(deprecated)</h2>
-<pre>__set(string $var, mixed $value) </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Core\Object::__set()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::__set()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$var</h4>
-<code>string</code>
-</div>
-<div class="subelement argument">
-<h4>$value</h4>
-<code>mixed</code>
 </div>
 </div></div>
 </div>
@@ -381,31 +324,6 @@ and retrieve corresponding member.</p></div>
 </div>
 <h3>Returns</h3>
 <div class="subelement response"><code>\Gc\Datatype\AbstractDatatype\mixte</code></div>
-</div></div>
-</div>
-<a id="method_getOrigData"></a><div class="element clickable method public method_getOrigData" data-toggle="collapse" data-target=".method_getOrigData .collapse">
-<h2>Get object loaded data(original data)</h2>
-<pre>getOrigData(string $key) : mixed</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Core\Object::getOrigData()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::getOrigData()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
 <a id="method_getRequest"></a><div class="element clickable method public method_getRequest" data-toggle="collapse" data-target=".method_getRequest .collapse">
@@ -672,35 +590,6 @@ If $key is string, the attribute value will be overwritten by $value</p>
 <div class="subelement response"><code><a href="../classes/Gc.Core.Object.html">\Gc\Core\Object</a></code></div>
 </div></div>
 </div>
-<a id="method_setOrigData"></a><div class="element clickable method public method_setOrigData" data-toggle="collapse" data-target=".method_setOrigData .collapse">
-<h2>Initialize object original data</h2>
-<pre>setOrigData(string $key, mixed $data) : <a href="../classes/Gc.Core.Object.html">\Gc\Core\Object</a></pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Core\Object::setOrigData()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::setOrigData()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$key</h4>
-<code>string</code>
-</div>
-<div class="subelement argument">
-<h4>$data</h4>
-<code>mixed</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code><a href="../classes/Gc.Core.Object.html">\Gc\Core\Object</a></code></div>
-</div></div>
-</div>
 <a id="method_toArray"></a><div class="element clickable method public method_toArray" data-toggle="collapse" data-target=".method_toArray .collapse">
 <h2>Public wrapper for __toArray</h2>
 <pre>toArray(array $array) : array</pre>
@@ -897,31 +786,6 @@ If $key is string, the attribute value will be overwritten by $value</p>
 <div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
-<a id="method__camelize"></a><div class="element clickable method protected method__camelize" data-toggle="collapse" data-target=".method__camelize .collapse">
-<h2>String to camel case</h2>
-<pre>_camelize(string $name) : string</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Core\Object::_camelize()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::_camelize()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$name</h4>
-<code>string</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response"><code>string</code></div>
-</div></div>
-</div>
 <a id="method__getData"></a><div class="element clickable method protected method__getData" data-toggle="collapse" data-target=".method__getData .collapse">
 <h2>Get value from _data array without parse key</h2>
 <pre>_getData(string $key) : mixed</pre>
@@ -1067,7 +931,7 @@ Uses cache to eliminate unneccessary preg_replace</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-10-21T15:59:12+02:00.<br></footer></div>
+            generated on 2012-10-28T02:50:57+01:00.<br></footer></div>
 </div>
 </body>
 </html>

@@ -69,7 +69,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->_object->init(NULL);
         $views = $this->_object->getViews();
-        $this->assertEquals(1, count($views));
+        $this->assertTrue(count($views) > 0);
     }
 
     /**

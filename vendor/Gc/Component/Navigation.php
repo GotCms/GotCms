@@ -89,7 +89,7 @@ class Navigation
      * Render navigation
      * @param array $documents (set of \Gc\Document\Model)
      * @param string $parent_url
-     * @return xml
+     * @return array
      */
     public function render(array $documents = NULL, $parent_url = NULL)
     {
@@ -121,22 +121,5 @@ class Navigation
         }
 
         return $navigation;
-    }
-
-    /**
-     * To string method
-     * @return xml
-     */
-    public function __toString()
-    {
-        try
-        {
-            return $this->render();
-        }
-        catch(Exception $e)
-        {
-            trigger_error($e->getMessage(), E_USER_ERROR);
-            return '';
-        }
     }
 }

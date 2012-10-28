@@ -34,19 +34,12 @@ use Gc\Component\IterableInterface;
  */
 class TreeView
 {
-    /**
-     * Data stored
-     * @var array
-     */
-    protected $_data;
 
     /**
      * Treeview constructor
-     * @param array $treeview_data
      */
-    public function __construct(array $treeview_data = array())
+    public function __construct()
     {
-        $this->_data = $treeview_data;
     }
 
     /**
@@ -116,34 +109,5 @@ class TreeView
         }
 
         return $html;
-    }
-
-    /**
-     * Render treeview html
-     * @return string
-     */
-    public function __toString()
-    {
-        try
-        {
-            return $this->render();
-        }
-        catch(Exception $e)
-        {
-            trigger_error($e->getMessage(), E_USER_ERROR);
-            return FALSE;
-        }
-    }
-
-    /**
-     * Set data
-     * @param array $array
-     * @return Tabs
-     */
-    public function setData(array $array)
-    {
-        $this->_data = $array;
-
-        return $this;
     }
 }

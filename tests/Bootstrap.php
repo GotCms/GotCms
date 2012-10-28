@@ -34,13 +34,16 @@ error_reporting(E_ALL | E_STRICT);
  * Determine the root, library, and tests directories of the framework
  * distribution.
  */
-$gc_root        = realpath(dirname(__DIR__));
+
+chdir(dirname(__DIR__));
+$gc_root        = getcwd();
 $zf_library     = $gc_root . '/vendor/ZendFramework/library';
 $gc_library     = $gc_root . '/vendor';
 $gc_tests       = $gc_root . '/tests';
 
 $path = array(
     $gc_library,
+    $gc_root . '/module',
     $zf_library,
     $gc_tests,
     get_include_path(),
@@ -52,10 +55,40 @@ define('GC_APPLICATION_PATH', $gc_root);
  * Setup autoloading
  */
 
-require_once $zf_library . '/Zend/Loader/AutoloaderFactory.php';
-$app_config = include $gc_root . '/config/application.config.php';
-Zend\Loader\AutoloaderFactory::factory(array('Zend\Loader\StandardAutoloader' => $app_config['autoloader']));
+// Composer autoloading
+if (file_exists($gc_root . '/vendor/autoload.php'))
+{
+    $loader = include $gc_root . '/vendor/autoload.php';
+}
 
+// Support for ZF2_PATH environment variable or git submodule
+
+if ($zf2Path = getenv('ZF2_PATH') ?: (is_dir($zf_library) ? $zf_library : FALSE))
+{
+    // Get application stack configuration
+    $configuration = require_once $gc_root . '/config/application.config.php';
+    if (isset($loader))
+    {
+        $loader->add('Zend', $zf2Path . '/Zend');
+    }
+    else
+    {
+        require_once $zf_library . '/Zend/Loader/AutoloaderFactory.php';
+        \Zend\Loader\AutoloaderFactory::factory(array(
+            'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
+        ));
+    }
+}
+
+if (!class_exists('Zend\Loader\AutoloaderFactory')) {
+    throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
+}
+
+
+// Run application
+Zend\Console\Console::overrideIsConsole(FALSE);
+$application = \Zend\Mvc\Application::init($configuration);
+\Gc\Registry::set('Application', $application);
 
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load
