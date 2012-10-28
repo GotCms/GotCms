@@ -65,7 +65,7 @@ class Model extends AbstractTable implements IterableInterface
     {
         if(!empty($document_id))
         {
-            $this->setData('document_id', $document_id);
+            $this->setId($document_id);
         }
 
         $this->getChildren();
@@ -82,7 +82,7 @@ class Model extends AbstractTable implements IterableInterface
             $view = View\Model::fromId($this->getViewId());
             if($view !== NULL)
             {
-                $this->setData('view',$view->getContent());
+                $this->setData('view',$view);
             }
         }
 

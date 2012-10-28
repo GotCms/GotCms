@@ -156,6 +156,7 @@ class DocumentType extends AbstractForm
         $fieldsets = new FieldSet('views');
 
         $available_views = new Element\Select('available_views');
+        $available_views->setAttribute('multiple', 'multiple');
         $available_views->setValueOptions(array('' => '') + $this->_viewCollection->getSelect());
         $fieldsets->add($available_views);
 
@@ -434,6 +435,7 @@ class DocumentType extends AbstractForm
             $views_form = $this->getViews();
             $views_form->get('default_view')->setValue($element->getDefaultViewId());
             $views_collection = $element->getAvailableViews();
+
             $views_form->get('available_views')->setValue($views_collection->getSelect());
 
             $tabs = $element->getTabs();

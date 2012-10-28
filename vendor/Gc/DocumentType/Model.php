@@ -59,7 +59,7 @@ class Model extends AbstractTable
     {
         if($this->getData('user') === NULL AND $this->getUserId() != NULL)
         {
-            $this->setData('user', new User\Model($this->getUserId()));
+            $this->setData('user', User\Model::fromId($this->getUserId()));
         }
 
         return $this->getData('user');
@@ -81,7 +81,7 @@ class Model extends AbstractTable
      * @param array $views
      * @return \Gc\DocumentType\Model
      */
-    public function addViews($views)
+    public function addViews(array $views)
     {
         if(!empty($views))
         {
@@ -188,9 +188,9 @@ class Model extends AbstractTable
                 $delete->from('document_type_view');
                 $delete->where(sprintf('document_type_id = %s', (int)$this->getId()));
                 $this->execute($delete);
-                foreach($this->_views as $view)
+                foreach($this->_views as $view_id)
                 {
-                    if(empty($View))
+                    if(empty($view_id))
                     {
                         continue;
                     }
@@ -198,7 +198,7 @@ class Model extends AbstractTable
                     $insert = new Sql\Insert();
                     $insert->into('document_type_view')
                         ->columns(array('document_type_id', 'view_id'))
-                        ->values(array($this->getId(), $view));
+                        ->values(array($this->getId(), $view_id));
                     $this->execute($insert);
                 }
             }

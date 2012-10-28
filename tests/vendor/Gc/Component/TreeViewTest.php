@@ -163,7 +163,6 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
         $collection = new DocumentCollection();
         $collection->load(0);
         $array = array_merge($collection->getDocuments(), array('test' => 'value'));
-        var_dump($array);
         $this->assertTrue(strlen($this->_object->render($array)) > 0);
     }
 }
