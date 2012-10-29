@@ -140,6 +140,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function testHasData()
     {
         $this->_object->setData('k', 'v');
+        $this->assertTrue($this->_object->hasData('k'));
         $this->assertTrue($this->_object->hasK());
     }
 

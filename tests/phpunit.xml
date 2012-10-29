@@ -10,6 +10,7 @@
     <filter>
         <blacklist>
             <directory suffix=".php">../vendor/ZendFramework</directory>
+            <directory>../data</directory>
         </blacklist>
     </filter>
 </phpunit>

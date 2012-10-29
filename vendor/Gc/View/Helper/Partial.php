@@ -45,6 +45,18 @@ class Partial extends ZendPartial
     protected $_params = array();
 
     /**
+     * Template path stack
+     * @var TemplatePathStack
+     */
+    protected $_resolver;
+
+    /**
+     * Check if stream is registered
+     * @var TemplatePathStack
+     */
+    static protected $_streamIsRegistered = FALSE;
+
+    /**
      * Returns script from identifier.
      *
      * @param  string $name Name of view script
@@ -96,13 +108,22 @@ class Partial extends ZendPartial
         }
         else
         {
-            $resolver = new TemplatePathStack();
-            $resolver->setUseStreamWrapper(TRUE);
-            $view->setResolver($resolver);
-            $existed = in_array('zend.view', stream_get_wrappers());
-            if(!$existed)
+            if(empty($this->_resolver))
             {
-                stream_wrapper_register('zend.view', 'Gc\View\Stream');
+                $this->_resolver = new TemplatePathStack();
+                $this->_resolver->setUseStreamWrapper(TRUE);
+            }
+
+            $view->setResolver($this->_resolver);
+
+            if(self::$_streamIsRegistered === FALSE)
+            {
+                $existed = in_array("zend.view", stream_get_wrappers());
+                if($existed)
+                {
+                    stream_wrapper_unregister("zend.view");
+                    stream_wrapper_register('zend.view', 'Gc\View\Stream');
+                }
             }
 
             $view_model =  ViewModel::fromIdentifier($name);
@@ -112,6 +133,7 @@ class Partial extends ZendPartial
             }
 
             file_put_contents('zend.view://' . $name, $view_model->getContent());
+
             return $view->render($name);
         }
     }
