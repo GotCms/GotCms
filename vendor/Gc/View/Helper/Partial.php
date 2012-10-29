@@ -132,6 +132,8 @@ class Partial extends ZendPartial
                 return FALSE;
             }
 
+            $name .= '-view.gc-stream';
+
             file_put_contents('zend.view://' . $name, $view_model->getContent());
 
             return $view->render($name);

@@ -65,10 +65,16 @@ class Script extends AbstractHelper
         }
 
         $this->_params = $params;
+        $name = $identifier . '-script.gc-stream';
 
-        file_put_contents('gc.script://' . $identifier, $script->getContent());
+        file_put_contents('gc.script://' . $name, $script->getContent());
 
-        return include('gc.script://' . $identifier);
+        ob_start();
+        include('gc.script://' . $name);
+        $return = ob_get_clean();
+
+
+        return $return;
     }
 
     /**
