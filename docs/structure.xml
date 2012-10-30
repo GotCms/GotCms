@@ -69,7 +69,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/View/Collection.php" hash="2152dd2a1aff657f1cf1e0aa687e5ad2" package="Library\View">
+  <file path="Gc/View/Collection.php" hash="2602739df818c45e45dc2c0e813ced16" package="Library\View">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -452,7 +452,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/View/Helper/Script.php" hash="5217b96ee52c6148c43ef6690ad9ef82" package="Library\View\Helper">
+  <file path="Gc/View/Helper/Script.php" hash="5af9889b50f4bdbc6050f0d07b0b4567" package="Library\View\Helper">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -480,7 +480,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
     <namespace-alias name="Registry">Gc\Registry</namespace-alias>
     <namespace-alias name="ScriptModel">Gc\Script\Model</namespace-alias>
     <namespace-alias name="Stream">Gc\View\Stream</namespace-alias>
-    <include line="71" type="Include" package="Default">
+    <include line="73" type="Include" package="Default">
       <name/>
     </include>
     <class final="false" abstract="false" namespace="Gc\View\Helper" line="38" package="Default">
@@ -530,109 +530,109 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="80" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="86" package="Default">
         <name>getParam</name>
         <full_name>getParam</full_name>
-        <docblock line="74">
+        <docblock line="80">
           <description><![CDATA[Returns param from name.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="74" name="param" description="" type="string" variable="$name">
+          <tag line="80" name="param" description="" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="74" name="return" description="" type="\Gc\View\Helper\mixte">
+          <tag line="80" name="return" description="" type="\Gc\View\Helper\mixte">
             <type by_reference="false">\Gc\View\Helper\mixte</type>
           </tag>
         </docblock>
-        <argument line="80">
+        <argument line="86">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="95" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="101" package="Default">
         <name>getDocument</name>
         <full_name>getDocument</full_name>
-        <docblock line="90">
+        <docblock line="96">
           <description><![CDATA[Returns param from name.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="90" name="return" description="" type="\Gc\Document\Model">
+          <tag line="96" name="return" description="" type="\Gc\Document\Model">
             <type by_reference="false">\Gc\Document\Model</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="105" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="111" package="Default">
         <name>getRequest</name>
         <full_name>getRequest</full_name>
-        <docblock line="100">
+        <docblock line="106">
           <description><![CDATA[Get Http Request instance.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="100" name="return" description="" type="\Zend\Http\PhpEnvironment\Request">
+          <tag line="106" name="return" description="" type="\Zend\Http\PhpEnvironment\Request">
             <type by_reference="false">\Zend\Http\PhpEnvironment\Request</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="115" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="121" package="Default">
         <name>getResponse</name>
         <full_name>getResponse</full_name>
-        <docblock line="110">
+        <docblock line="116">
           <description><![CDATA[Get Http Response instance.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="110" name="return" description="" type="\Zend\Http\PhpEnvironment\Response">
+          <tag line="116" name="return" description="" type="\Zend\Http\PhpEnvironment\Response">
             <type by_reference="false">\Zend\Http\PhpEnvironment\Response</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="127" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="133" package="Default">
         <name>plugin</name>
         <full_name>plugin</full_name>
-        <docblock line="120">
+        <docblock line="126">
           <description><![CDATA[Get plugin instance]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="120" name="param" description="Name of plugin to return" type="string" variable="$name">
+          <tag line="126" name="param" description="Name of plugin to return" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="120" name="param" description="Options to pass to plugin constructor (if not already instantiated)" type="null|array" variable="$options">
+          <tag line="126" name="param" description="Options to pass to plugin constructor (if not already instantiated)" type="null|array" variable="$options">
             <type by_reference="false">null</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="120" name="return" description="" type="mixed">
+          <tag line="126" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="127">
+        <argument line="133">
           <name>$name</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="127">
+        <argument line="133">
           <name>$options</name>
           <default><![CDATA[NULL]]></default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="142" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="148" package="Default">
         <name>__call</name>
         <full_name>__call</full_name>
-        <docblock line="132">
+        <docblock line="138">
           <description><![CDATA[Method overloading: return/call plugins]]></description>
           <long-description><![CDATA[<p>If the plugin is a functor, call it, passing the parameters provided.
 Otherwise, return the plugin instance.</p>]]></long-description>
-          <tag line="132" name="param" description="" type="string" variable="$method">
+          <tag line="138" name="param" description="" type="string" variable="$method">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="132" name="param" description="" type="array" variable="$params">
+          <tag line="138" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="132" name="return" description="" type="mixed">
+          <tag line="138" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="142">
+        <argument line="148">
           <name>$method</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="142">
+        <argument line="148">
           <name>$params</name>
           <default><![CDATA[]]></default>
           <type/>
@@ -640,7 +640,7 @@ Otherwise, return the plugin instance.</p>]]></long-description>
       </method>
     </class>
   </file>
-  <file path="Gc/View/Helper/Partial.php" hash="6217d58fe06419dde955fdb1eae91364" package="Library\View\Helper">
+  <file path="Gc/View/Helper/Partial.php" hash="e41498d98d4ab63ab61edbc0f7d0b186" package="Library\View\Helper">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -688,28 +688,50 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="54" package="Default">
+      <property final="false" static="false" visibility="protected" line="51" namespace="Gc\View\Helper" package="Default">
+        <name>$_resolver</name>
+        <default><![CDATA[]]></default>
+        <docblock line="47">
+          <description><![CDATA[Template path stack]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="47" name="var" description="" type="\Gc\View\Resolver\TemplatePathStack">
+            <type by_reference="false">\Gc\View\Resolver\TemplatePathStack</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="true" visibility="protected" line="57" namespace="Gc\View\Helper" package="Default">
+        <name>$_streamIsRegistered</name>
+        <default><![CDATA[FALSE]]></default>
+        <docblock line="53">
+          <description><![CDATA[Check if stream is registered]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="53" name="var" description="" type="\Gc\View\Resolver\TemplatePathStack">
+            <type by_reference="false">\Gc\View\Resolver\TemplatePathStack</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\View\Helper" line="66" package="Default">
         <name>__invoke</name>
         <full_name>__invoke</full_name>
-        <docblock line="47">
+        <docblock line="59">
           <description><![CDATA[Returns script from identifier.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="47" name="param" description="Name of view script" type="string" variable="$name">
+          <tag line="59" name="param" description="Name of view script" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="47" name="param" description="Variables to populate in the view" type="array" variable="$model">
+          <tag line="59" name="param" description="Variables to populate in the view" type="array" variable="$model">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="47" name="return" description="" type="\Gc\View\Helper\mixte">
+          <tag line="59" name="return" description="" type="\Gc\View\Helper\mixte">
             <type by_reference="false">\Gc\View\Helper\mixte</type>
           </tag>
         </docblock>
-        <argument line="54">
+        <argument line="66">
           <name>$name</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="54">
+        <argument line="66">
           <name>$model</name>
           <default><![CDATA[null]]></default>
           <type/>
@@ -985,7 +1007,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/View/Helper/Documents.php" hash="5e8c1756cd8d5a1b73b1673e5c93a9e3" package="Library\View\Helper">
+  <file path="Gc/View/Helper/Documents.php" hash="c798e651710621fca33c3b22f2b173e1" package="Library\View\Helper">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -1032,7 +1054,7 @@ if data is numeric, return all documents with parent_id equal to $data]]></descr
           <tag line="38" name="param" description="" type="integer" variable="$data">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="38" name="return" description="of \Gc\Document\Collection" type="array">
+          <tag line="38" name="return" description="of \Gc\Document\Model" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
@@ -2532,7 +2554,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/Component/TreeView.php" hash="9f22cd29b28c00f91d48b25db35e85ff" package="Library\Component">
+  <file path="Gc/Component/TreeView.php" hash="267c26b6d4e2be7be56ee3295cf4c5c2" package="Library\Component">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -2565,28 +2587,36 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         <description><![CDATA[Create xml for jQuery treeview]]></description>
         <long-description><![CDATA[]]></long-description>
       </docblock>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Component" line="43" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Component" line="41" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="38">
+          <description><![CDATA[Treeview constructor]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="Gc\Component" line="51" package="Default">
         <name>render</name>
         <full_name>render</full_name>
-        <docblock line="37">
+        <docblock line="45">
           <description><![CDATA[Render treeview html]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="37" name="param" description="contains data as array" type="array" variable="$treeview_data">
+          <tag line="45" name="param" description="contains data as array" type="array" variable="$treeview_data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="37" name="param" description="" type="boolean" variable="$init">
+          <tag line="45" name="param" description="" type="boolean" variable="$init">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag line="37" name="return" description="" type="string">
+          <tag line="45" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="43">
+        <argument line="51">
           <name>$treeview_data</name>
           <default><![CDATA[NULL]]></default>
           <type>array</type>
         </argument>
-        <argument line="43">
+        <argument line="51">
           <name>$init</name>
           <default><![CDATA[TRUE]]></default>
           <type/>
@@ -3756,7 +3786,7 @@ Need document and property to work]]></description>
       </method>
     </class>
   </file>
-  <file path="Gc/DocumentType/Collection.php" hash="17020bc700c7b8ad77c37660afe1d5a3" package="Library\DocumentType">
+  <file path="Gc/DocumentType/Collection.php" hash="47c585609988343be85dff6b795d8104" package="Library\DocumentType">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -3842,26 +3872,9 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="103" package="Default">
-        <name>getDependencies</name>
-        <full_name>getDependencies</full_name>
-        <docblock line="98">
-          <description><![CDATA[Return array for input select]]></description>
-          <long-description><![CDATA[]]></long-description>
-          <tag line="98" name="param" description="integer" type="" variable="$parent_id"/>
-          <tag line="98" name="return" description="" type="array">
-            <type by_reference="false">array</type>
-          </tag>
-        </docblock>
-        <argument line="103">
-          <name>$parent_id</name>
-          <default><![CDATA[]]></default>
-          <type/>
-        </argument>
-      </method>
     </class>
   </file>
-  <file path="Gc/DocumentType/Model.php" hash="9f3c569d3183439954731908e96003eb" package="Library\DocumentType">
+  <file path="Gc/DocumentType/Model.php" hash="2ad12949d4e1a8d59f32e5b8e621d4c0" package="Library\DocumentType">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -3968,7 +3981,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
         <argument line="84">
           <name>$views</name>
           <default><![CDATA[]]></default>
-          <type/>
+          <type>array</type>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\DocumentType" line="98" package="Default">
@@ -4066,7 +4079,7 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
       </method>
     </class>
   </file>
-  <file path="Gc/Document/Collection.php" hash="3aab55d25c6be9b9696134c3e428c303" package="Library\Document">
+  <file path="Gc/Document/Collection.php" hash="773ed968598ef8f166fc23d445ef3aa0" package="Library\Document">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
@@ -4122,8 +4135,8 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
           <tag line="44" name="param" description="@parent_id" type="integer" variable="$parent_id">
             <type by_reference="false">integer</type>
           </tag>
-          <tag line="44" name="return" description="" type="void">
-            <type by_reference="false">void</type>
+          <tag line="44" name="return" description="" type="\Gc\Document\Collection">
+            <type by_reference="false">\Gc\Document\Collection</type>
           </tag>
         </docblock>
         <argument line="49">
@@ -4132,105 +4145,105 @@ with GotCms. If not, see <a href="http://www.gnu.org/licenses/lgpl-3.0.html">htt
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="Gc\Document" line="62" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="Gc\Document" line="64" package="Default">
         <name>setDocuments</name>
         <full_name>setDocuments</full_name>
-        <docblock line="58">
+        <docblock line="60">
           <description><![CDATA[Initialize documents]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="58" name="return" description="" type="\Gc\Document\Collection">
+          <tag line="60" name="return" description="" type="\Gc\Document\Collection">
             <type by_reference="false">\Gc\Document\Collection</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="100" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="102" package="Default">
         <name>getAvailableDocuments</name>
         <full_name>getAvailableDocuments</full_name>
-        <docblock line="96">
+        <docblock line="98">
           <description><![CDATA[Return available Documents]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="96" name="return" description="" type="array">
+          <tag line="98" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="116" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="118" package="Default">
         <name>getSelect</name>
         <full_name>getSelect</full_name>
-        <docblock line="112">
+        <docblock line="114">
           <description><![CDATA[Return array for input select]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="112" name="return" description="" type="array">
+          <tag line="114" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="132" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="134" package="Default">
         <name>getParent</name>
         <full_name>getParent</full_name>
-        <docblock line="129">
+        <docblock line="131">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="129" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="131" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="140" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="142" package="Default">
         <name>getChildren</name>
         <full_name>getChildren</full_name>
-        <docblock line="137">
+        <docblock line="139">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="137" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="139" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="148" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="150" package="Default">
         <name>getId</name>
         <full_name>getId</full_name>
-        <docblock line="145">
+        <docblock line="147">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="145" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="147" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="156" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="158" package="Default">
         <name>getIcon</name>
         <full_name>getIcon</full_name>
-        <docblock line="153">
+        <docblock line="155">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="153" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="155" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="164" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="166" package="Default">
         <name>getIterableId</name>
         <full_name>getIterableId</full_name>
-        <docblock line="161">
+        <docblock line="163">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="161" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="163" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="172" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="174" package="Default">
         <name>getName</name>
         <full_name>getName</full_name>
-        <docblock line="169">
+        <docblock line="171">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="169" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="171" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="180" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="Gc\Document" line="182" package="Default">
         <name>getEditUrl</name>
         <full_name>getEditUrl</full_name>
-        <docblock line="177">
+        <docblock line="179">
           <description><![CDATA[(non-PHPdoc)]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="177" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
+          <tag line="179" name="see" description="\Gc\Document\include" refers="\Gc\Document\include"/>
         </docblock>
       </method>
     </class>
   </file>
-  <file path="Gc/Document/Model.php" hash="38f03fa96cf55ef3bdc476cd6e220769" package="Library\Document">
+  <file path="Gc/Document/Model.php" hash="745667c02e6f7d4f6d55ce3a1e66eeb3" package="Library\Document">
     <docblock line="2">
       <description><![CDATA[This source file is part of GotCms.]]></description>
       <long-description><![CDATA[<p>GotCms is free software: you can redistribute it and/or modify
