@@ -115,4 +115,12 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Redirect', $this->_object->redirect());
     }
+
+    /**
+     * @covers Gc\View\Helper\Script::__call
+     */
+    public function test__callWithIsCallablePlugin()
+    {
+        $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Params', $this->_object->params());
+    }
 }

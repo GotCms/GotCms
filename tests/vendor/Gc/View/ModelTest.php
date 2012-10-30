@@ -145,4 +145,14 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($model->delete());
     }
+
+    /**
+     * @covers Gc\View\Model::delete
+     */
+    public function testFakeDelete()
+    {
+        $model = new Model();
+
+        $this->assertTrue($model->delete());
+    }
 }

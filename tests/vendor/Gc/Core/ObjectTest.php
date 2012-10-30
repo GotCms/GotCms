@@ -110,6 +110,55 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         $this->_object->setData('a', array('b', 'c'));
         $this->assertEquals('b', $this->_object->getData('a', 0));
+        $this->assertNull($this->_object->getData('a', 3));
+    }
+
+    /**
+     * @covers Gc\Core\Object::getData
+     */
+    public function testGetDataWithFakeIndex()
+    {
+        $this->_object->setData('a', array('b', 'c'));
+        $this->assertNull($this->_object->getData('a', 3));
+    }
+
+    /**
+     * @covers Gc\Core\Object::getData
+     */
+    public function testGetDataWithIndexAndStringValue()
+    {
+        $this->_object->setData('a', 'b');
+        $this->assertEquals('b', $this->_object->getData('a', 0));
+    }
+
+    /**
+     * @covers Gc\Core\Object::getData
+     */
+    public function testGetDataWithIndexAndObjectValue()
+    {
+        $new_object = $this->getMockForAbstractClass('Gc\Core\Object');
+        $new_object->setData('b', 'c');
+        $this->_object->setData('a', $new_object);
+        $this->assertEquals('c', $this->_object->getData('a', 'b'));
+    }
+
+    /**
+     * @covers Gc\Core\Object::getData
+     */
+    public function testGetDataWithIndexAndDifferentObjectValue()
+    {
+        $new_object = new \stdClass();
+        $new_object->b = 'c';
+        $this->_object->setData('a', $new_object);
+        $this->assertNull($this->_object->getData('a', 'b'));
+    }
+
+    /**
+     * @covers Gc\Core\Object::getData
+     */
+    public function testGetDataWithUndefinedKeyAndIndex()
+    {
+        $this->assertNull($this->_object->getData('a', 'b'));
     }
 
     /**
@@ -212,6 +261,15 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         $this->_object->setData(array('k' => 'v'));
         $this->assertEquals('v', $this->_object->toString());
+    }
+
+    /**
+     * @covers Gc\Core\Object::toString
+     */
+    public function testToStringWithFormat()
+    {
+        $this->_object->setData(array('a' => 'b', 'c' => 'd'));
+        $this->assertEquals('b d', $this->_object->toString('{{a}} {{c}}'));
     }
 
     /**

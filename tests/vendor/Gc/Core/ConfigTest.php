@@ -49,12 +49,34 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Core\Config::getValue
+     */
+    public function testGetValueWithEmptyIdentifier()
+    {
+        $this->assertNull($this->_object->getValue(''));
+    }
+
+    /**
      * @covers Gc\Core\Config::getValues
      */
     public function testGetValues()
     {
         $this->_object->insert(array('identifier' => 'values_test', 'value' => 'values_result'));
+        $values = $this->_object->getValues();
+        $this->_object->delete('1 = 1');
+
         $this->assertArrayHasKey('0', $this->_object->getValues());
+        foreach($values as $value)
+        {
+            $this->_object->insert($value);
+        }
+    }
+    /**
+     * @covers Gc\Core\Config::getValues
+     */
+    public function testGetEmptyValues()
+    {
+        $this->assertNull($this->_object->getValues());
     }
 
     /**
@@ -72,5 +94,13 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $this->_object->insert(array('identifier' => 'string_identifier', 'value' => 'string_result_insert_value'));
         $this->assertTrue((bool)$this->_object->setValue('string_identifier', 'string_result_insert_value'));
+    }
+
+    /**
+     * @covers Gc\Core\Config::setValue
+     */
+    public function testSetValueWithEmptyIdentifier()
+    {
+        $this->assertFalse($this->_object->setValue('', 'string_result_insert_value'));
     }
 }
