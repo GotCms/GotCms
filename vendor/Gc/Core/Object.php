@@ -238,17 +238,6 @@ abstract class Object
     }
 
     /**
-     * Get value from _data array without parse key
-     *
-     * @param   string $key
-     * @return  mixed
-     */
-    protected function _getData($key)
-    {
-        return isset($this->_data[$key]) ? $this->_data[$key] : NULL;
-    }
-
-    /**
      * If $key is empty, checks whether there's any data in the object
      * Otherwise checks if the specified attribute is set.
      *
