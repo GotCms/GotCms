@@ -94,14 +94,4 @@ class Collection extends AbstractTable
 
         return $select;
     }
-
-    /**
-     * Return array for input select
-     * @param integer
-     * @return array
-     */
-    public function getDependencies($parent_id)
-    {
-
-    }
 }
