@@ -31,7 +31,6 @@
 <?php $tabs_form = $this->form->get('tabs')->getFieldsets(); ?>
 <?php $properties_forms = $this->form->get('properties')->getFieldsets(); ?>
 <?php $datatypes_options = $this->form->get('properties')->get('datatypes')->getValueOptions(); ?>
-<?php $errors = $this->form->getMessages(); ?>
 
 <form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->form->getAttribute('action'); ?>" method="post">
     <input id="input-save" type="image" src="/images/save.png" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
@@ -47,16 +46,14 @@
             <div>
                 <label for="infos-name" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
                 <input class="input-text" type="text" name="infos[name]" id="infos-name" value="<?php echo $infos_form->get('name')->getValue(); ?>">
-                <?php if(!empty($errors['infos']['name'])): ?>
-                    <?php echo $this->formErrors($errors['infos']['name']); ?>
-                <?php endif; ?>
+
+                <?php echo $this->formElementErrors($this->form->get('infos')->get('name')); ?>
             </div>
             <div>
                 <label for="infos-description" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
                 <input class="input-text" type="text" name="infos[description]" id="infos-description" value="<?php echo $infos_form->get('description')->getValue(); ?>">
-                <?php if(!empty($errors['infos']['description'])): ?>
-                    <?php echo $this->formErrors($errors['infos']['description']); ?>
-                <?php endif; ?>
+
+                <?php echo $this->formElementErrors($this->form->get('infos')->get('description')); ?>
             </div>
             <div>
                 <label for="infos-icon_id" class="optional"><?php echo $this->escapeHtml($this->translate('Icon')); ?></label>
@@ -66,9 +63,8 @@
                         <option value="<?php echo $option->getId(); ?>"<?php if($infos_form->get('icon_id')->getValue() == $option->getId()): ?> selected="selected"<?php endif; ?> style="background:url(<?php echo $this->escapeHtml($option->getUrl()); ?>) no-repeat; padding-left:20px;"><?php echo $this->escapeHtml($option->getName()); ?> </option>
                     <?php endforeach; ?>
                 </select>
-                <?php if(!empty($errors['infos']['icon_id'])): ?>
-                    <?php echo $this->formErrors($errors['infos']['icon_id']); ?>
-                <?php endif; ?>
+
+                <?php echo $this->formElementErrors($this->form->get('infos')->get('icon_id')); ?>
             </div>
             <?php $dependency = $infos_form->get('infos[dependency]'); ?>
             <?php if(!empty($dependency)): ?>
@@ -77,9 +73,7 @@
 
                     <?php echo $this->formElement($infos_form->get('infos[dependency]')); ?>
 
-                    <?php if(!empty($errors['infos']['infos[dependency]'])): ?>
-                        <?php echo $this->formErrors($errors['infos']['infos[dependency]']); ?>
-                    <?php endif; ?>
+                <?php echo $this->formElementErrors($this->form->get('infos')->get('infos[dependency]')); ?>
                 </div>
             <?php endif; ?>
         </div>
@@ -96,9 +90,7 @@
                     <?php endforeach; ?>
                 </select>
 
-                <?php if(!empty($errors['views']['default_view'])): ?>
-                    <?php echo $this->formErrors($errors['views']['default_view']); ?>
-                <?php endif; ?>
+                <?php echo $this->formElementErrors($this->form->get('views')->get('default_view')); ?>
             </div>
             <div>
                 <label for="views-available_views" class="optional"><?php echo $this->escapeHtml($this->translate('Add view')); ?></label>
@@ -111,9 +103,7 @@
                     <?php endforeach; ?>
                 </select>
 
-                <?php if(!empty($errors['views']['available_views'])): ?>
-                    <?php echo $this->formErrors($errors['views']['available_views']); ?>
-                <?php endif; ?>
+                <?php echo $this->formElementErrors($this->form->get('views')->get('available_views')); ?>
             </div>
         </div>
 
@@ -189,8 +179,9 @@
                                                 </dt>
                                                 <dd>
                                                     <input class="input-text" type="text" value="<?php echo $this->escapeHtml($property->get('name')->getValue()); ?>" id="properties-name-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][name]">
-                                                    <?php if(!empty($errors['properties'][$property_form_id]['name'])): ?>
-                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['name']); ?>
+
+                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                        <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('name')); ?>
                                                     <?php endif; ?>
                                                 </dd>
                                                 <dt>
@@ -198,8 +189,9 @@
                                                 </dt>
                                                 <dd>
                                                     <input class="input-text" type="text" value="<?php echo $this->escapeHtml($property->get('identifier')->getValue()); ?>" id="properties-identifier-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][identifier]">
-                                                    <?php if(!empty($errors['properties'][$property_form_id]['identifier'])): ?>
-                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['identifier']); ?>
+
+                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                        <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('identifier')); ?>
                                                     <?php endif; ?>
                                                 </dd>
                                                 <dt>
@@ -213,8 +205,8 @@
                                                         <?php endforeach; ?>
                                                     </select>
 
-                                                    <?php if(!empty($errors['properties'][$property_form_id]['datatype'])): ?>
-                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['datatype']); ?>
+                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                        <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('datatype')); ?>
                                                     <?php endif; ?>
                                                 </dd>
                                                 <dt>
@@ -222,8 +214,9 @@
                                                 </dt>
                                                 <dd>
                                                     <input class="input-text" type="text" value="<?php echo $this->escapeHtml($property->get('description')->getValue()); ?>" id="properties-description-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][description]">
-                                                    <?php if(!empty($errors['properties'][$property_form_id]['description'])): ?>
-                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['description']); ?>
+
+                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                        <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('description')); ?>
                                                     <?php endif; ?>
                                                 </dd>
                                                 <dt>
@@ -236,8 +229,8 @@
                                                     ?>
                                                     <input<?php if($value == $checkedValue):?> checked="checked"<?php endif; ?> type="checkbox" value="<?php echo $value; ?>" id="properties-required-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][required]">
 
-                                                    <?php if(!empty($errors['properties'][$property_form_id]['required'])): ?>
-                                                        <?php echo $this->formErrors($errors['properties'][$property_form_id]['required']); ?>
+                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                        <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('required')); ?>
                                                     <?php endif; ?>
                                                 </dd>
                                                 <dd>

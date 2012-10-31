@@ -26,35 +26,30 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php $errors = $this->form->getMessages(); ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <div>
         <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
-        <?php if(!empty($errors['name'])): ?>
-            <?php echo $this->formErrors($errors['name']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('name')); ?>
     </div>
     <div>
         <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('identifier')); ?>" id="identifier" name="identifier">
-        <?php if(!empty($errors['identifier'])): ?>
-            <?php echo $this->formErrors($errors['identifier']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('identifier')); ?>
     </div>
     <div>
         <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('description')); ?>" id="description" name="description">
-        <?php if(!empty($errors['description'])): ?>
-            <?php echo $this->formErrors($errors['description']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('description')); ?>
     </div>
     <div>
         <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Content')); ?></label>
-        <textarea cols="80" rows="24" id="view-content" name="content"><?php echo $this->escapeHtml($this->form->getValue('content')); ?></textarea>
-        <?php if(!empty($errors['content'])): ?>
-            <?php echo $this->formErrors($errors['content']); ?>
-        <?php endif; ?>
+        <textarea cols="80" rows="24" id="view-content" name="content"><?php echo $this->escapeHtml($this->form->getValue('content')); ?></textarea>x
+
+        <?php echo $this->formElementErrors($this->form->get('content')); ?>
     </div>
     <div>
         <input type="submit" id="input-save" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">

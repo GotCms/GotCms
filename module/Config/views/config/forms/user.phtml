@@ -26,49 +26,42 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php $errors = $this->form->getMessages(); ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <div>
         <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Email')); ?></label>
         <input type="email" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('email')); ?>" id="email" name="email">
-        <?php if(!empty($errors['email'])): ?>
-            <?php echo $this->formErrors($errors['email']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('email')); ?>
     </div>
     <div>
         <label class="optional" for="login"><?php echo $this->escapeHtml($this->translate('Login')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('login')); ?>" id="login" name="login">
-        <?php if(!empty($errors['login'])): ?>
-            <?php echo $this->formErrors($errors['login']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('login')); ?>
     </div>
     <div>
         <label class="required" for="password"><?php echo $this->escapeHtml($this->translate('Password')); ?></label>
         <input type="password" autocomplete="off" class="input-text" value="" id="password" name="password">
-        <?php if(!empty($errors['password'])): ?>
-            <?php echo $this->formErrors($errors['password']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('password')); ?>
     </div>
     <div>
         <label class="required" for="password_confirm"><?php echo $this->escapeHtml($this->translate('Password Confirm')); ?></label>
         <input type="password" autocomplete="off" class="input-text" value="" id="password_confirm" name="password_confirm">
-        <?php if(!empty($errors['password_confirm'])): ?>
-            <?php echo $this->formErrors($errors['password_confirm']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('password_confirm')); ?>
     </div>
     <div>
         <label class="required" for="lastname"><?php echo $this->escapeHtml($this->translate('Lastname')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('lastname')); ?>" id="lastname" name="lastname">
-        <?php if(!empty($errors['lastname'])): ?>
-            <?php echo $this->formErrors($errors['lastname']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('lastname')); ?>
     </div>
     <div>
         <label class="required" for="firstname"><?php echo $this->escapeHtml($this->translate('Firstname')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('firstname')); ?>" id="firstname" name="firstname">
-        <?php if(!empty($errors['firstname'])): ?>
-            <?php echo $this->formErrors($errors['firstname']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('firstname')); ?>
     </div>
     <div>
         <label class="required" for="user_acl_role_id"><?php echo $this->escapeHtml($this->translate('Role')); ?></label>
@@ -78,9 +71,8 @@
                 <option <?php if($option_id == $this->form->getValue('user_acl_role_id')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo (int) $option_id; ?>"><?php echo $this->escapeHtml($this->translate($option_value)); ?></option>
             <?php endforeach; ?>
         </select>
-        <?php if(!empty($errors['user_acl_role_id'])): ?>
-            <?php echo $this->formErrors($errors['user_acl_role_id']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('user_acl_role_id')); ?>
     </div>
     <div>
         <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">

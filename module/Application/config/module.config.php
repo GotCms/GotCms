@@ -61,7 +61,6 @@ return array(
         'invokables' => array(
             'documents' => 'Gc\View\Helper\Documents',
             'document' => 'Gc\View\Helper\Document',
-            'formErrors' => 'Gc\View\Helper\FormErrors',
             'formCheckbox' => 'Gc\View\Helper\FormCheckbox',
             'moduleUrl' => 'Gc\View\Helper\ModuleUrl',
             'partial' => 'Gc\View\Helper\Partial',

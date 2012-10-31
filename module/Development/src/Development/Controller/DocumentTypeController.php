@@ -99,7 +99,13 @@ class DocumentTypeController extends Action
                 $document_type->getAdapter()->getDriver()->getConnection()->beginTransaction();
                 try
                 {
-                    $document_type->addViews($views_subform->getValue('available_views'));
+                    $available_views = $views_subform->getValue('available_views');
+                    if(empty($available_views))
+                    {
+                        $available_views = array();
+                    }
+
+                    $document_type->addViews($available_views);
                     $document_type->setDependencies($infos_subform->getValue('dependency'));
                     $document_type->save();
 
@@ -266,7 +272,13 @@ class DocumentTypeController extends Action
                 $document_type->getAdapter()->getDriver()->getConnection()->beginTransaction();
                 try
                 {
-                    $document_type->addViews($views_subform->getValue('available_views'));
+                    $available_views = $views_subform->getValue('available_views');
+                    if(empty($available_views))
+                    {
+                        $available_views = array();
+                    }
+
+                    $document_type->addViews($available_views);
                     $document_type->setDependencies($infos_subform->getValue('dependency'));
                     $document_type->save();
 

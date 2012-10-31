@@ -29,15 +29,11 @@
 <h2><?php echo $this->escapeHtml($this->translate('Configuration')); ?></h2>
 
 <?php $elements = $this->form->getElements(); ?>
-<?php $errors = $this->form->getMessages(); ?>
 <?php foreach($elements as $element): ?>
     <div>
         <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
         <?php echo $this->formElement($element); ?>
-
-        <?php if(!empty($errors[$element->getAttribute('name')])): ?>
-            <?php echo $this->formErrors($errors[$element->getAttribute('name')]); ?>
-        <?php endif; ?>
+        <?php echo $this->formElementErrors($element); ?>
     </div>
 <?php endforeach; ?>

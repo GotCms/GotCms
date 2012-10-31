@@ -26,7 +26,6 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php $errors = $this->form->getMessages(); ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <?php if(!empty($this->infos)): ?>
         <div id="datatype-infos">
@@ -39,9 +38,8 @@
     <div>
         <label class="required" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
         <input type="name" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
-        <?php if(!empty($errors['name'])): ?>
-            <?php echo $this->formErrors($errors['name']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('name')); ?>
     </div>
     <div>
         <label class="required" for="model"><?php echo $this->escapeHtml($this->translate('Model')); ?></label>
@@ -51,9 +49,8 @@
                 <option <?php if($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo $this->escapeHtml($option_value); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
             <?php endforeach; ?>
         </select>
-        <?php if(!empty($errors['model'])): ?>
-            <?php echo $this->formErrors($errors['model']); ?>
-        <?php endif; ?>
+
+        <?php echo $this->formElementErrors($this->form->get('model')); ?>
     </div>
 
     <?php $fieldset = $this->form->get('prevalue-editor'); ?>

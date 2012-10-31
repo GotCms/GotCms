@@ -57,9 +57,7 @@
                                 <?php endif; ?>
 
                                 <?php echo $this->formElement($element); ?>
-                                <?php if(!empty($errors[$element->getAttribute('name')])): ?>
-                                    <?php echo $this->formErrors($errors[$element->getAttribute('name')]); ?>
-                                <?php endif; ?>
+                                <?php echo $this->formElementErrors($element); ?>
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>
