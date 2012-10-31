@@ -47,9 +47,9 @@ class DbTableGateway extends ZendDbTableGateway
             $this->options->getNameColumn() => $this->sessionName,
         ));
 
-        if ($row = $rows->current())
+        if($row = $rows->current())
         {
-            if ($row->{$this->options->getModifiedColumn()} + $row->{$this->options->getLifetimeColumn()} > time())
+            if($row->{$this->options->getModifiedColumn()} + $row->{$this->options->getLifetimeColumn()} > time())
             {
                 return base64_decode($row->{$this->options->getDataColumn()});
             }
@@ -79,7 +79,7 @@ class DbTableGateway extends ZendDbTableGateway
             $this->options->getNameColumn() => $this->sessionName,
         ));
 
-        if ($row = $rows->current())
+        if($row = $rows->current())
         {
             return (bool) $this->tableGateway->update($data, array(
                 $this->options->getIdColumn()   => $id,
