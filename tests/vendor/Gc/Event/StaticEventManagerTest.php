@@ -31,6 +31,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->_object->resetInstance();
+        unset($this->_object);
     }
 
     /**

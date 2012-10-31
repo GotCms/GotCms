@@ -51,6 +51,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
