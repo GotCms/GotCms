@@ -47,7 +47,8 @@ class Registry extends ArrayObject
      */
     public static function getInstance()
     {
-        if (self::$registry === null) {
+        if (self::$registry === null)
+        {
             self::init();
         }
 
@@ -64,7 +65,8 @@ class Registry extends ArrayObject
      */
     public static function setInstance(Registry $registry)
     {
-        if (self::$registry !== null) {
+        if (self::$registry !== null)
+        {
             throw new RuntimeException('Registry is already initialized');
         }
 
@@ -106,7 +108,8 @@ class Registry extends ArrayObject
     {
         $instance = self::getInstance();
 
-        if (!$instance->offsetExists($index)) {
+        if (!$instance->offsetExists($index))
+        {
             throw new RuntimeException("No entry is registered for key '$index'");
         }
 
@@ -140,9 +143,11 @@ class Registry extends ArrayObject
      */
     public static function isRegistered($index)
     {
-        if (self::$registry === null) {
+        if (self::$registry === null)
+        {
             return false;
         }
+
         return self::$registry->offsetExists($index);
     }
 
