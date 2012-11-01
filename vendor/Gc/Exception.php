@@ -31,21 +31,6 @@ namespace Gc;
  * @category   Gc
  * @package    Library
  */
-class Exception
+class Exception extends \Exception
 {
-    /**
-     * Construct the exception
-     * @param string $message
-     * @param integer $code
-     * @param Exception $previous
-     * @return void
-     */
-    public function __construct($message = '', $code = 0, Exception $previous = NULL)
-    {
-        /*
-        * TODO \Gc\Core\Exception
-        */
-        var_dump($message);
-        die();
-    }
 }

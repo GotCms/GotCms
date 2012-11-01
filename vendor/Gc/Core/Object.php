@@ -439,7 +439,7 @@ abstract class Object
                 return isset($this->_data[$key]);
         }
 
-        throw new Exception("Invalid method ".get_class($this)."::".$method."(".print_r($args,1).")");
+        throw new \Gc\Exception('Invalid method ' . get_class($this) . "::" . $method . "(" . print_r($args, 1) . ")");
     }
 
     /**

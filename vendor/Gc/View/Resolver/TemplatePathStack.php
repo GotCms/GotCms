@@ -58,7 +58,7 @@ class TemplatePathStack extends PathStack
             );
         }
 
-        if(strpos('.phtml', $name) === FALSE)
+        if(strpos($name, '.phtml') === FALSE)
         {
             if($this->useStreamWrapper())
             {

@@ -32,13 +32,101 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\View\Resolver\TemplatePathStack::resolve
-     * @todo   Implement testResolve().
      */
-    public function testResolve()
+    public function testNormalResolve()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->addPath(__DIR__ . '/_templates');
+
+        $markup = $this->_object->resolve('one.phtml');
+        $this->assertEquals(__DIR__ . '/_templates/one.phtml', $markup);
+    }
+
+    /**
+     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     */
+    public function testWithoutPaths()
+    {
+        $markup = $this->_object->resolve('one.phtml');
+        $this->assertFalse($markup);
+    }
+
+    /**
+     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     */
+    public function testResolveWithoutDefaultSuffix()
+    {
+        $this->_object->setDefaultSuffix('.bar');
+        $this->_object->addPath(__DIR__ . '/_templates');
+
+        $markup = $this->_object->resolve('two.phtml');
+        $this->assertEquals(__DIR__ . '/_templates/two.phtml.bar', $markup);
+    }
+
+    /**
+     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     */
+    public function testResolveWithLfiProtection()
+    {
+        $this->_object->setLfiProtection(TRUE)
+            ->addPath(__DIR__ . '/_templates');
+
+        $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
+        $this->_object->resolve('../one.phtml');
+    }
+
+    /**
+     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     */
+    public function testResolveWithStream()
+    {
+        $existed = in_array("zend.view", stream_get_wrappers());
+        if($existed)
+        {
+            stream_wrapper_unregister("zend.view");
+        }
+
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        $this->_object->setUseStreamWrapper(TRUE);
+        $markup = $this->_object->resolve('foo.bar');
+        $this->assertEquals('zend.view://foo.bar', $markup);
+    }
+
+    /**
+     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     */
+    public function testResolveWithStreamAndNoStreamWrapperActive()
+    {
+        $markup = $this->_object->resolve('foo.bar');
+        $this->assertFalse($markup);
+
+    }
+
+    /**
+     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     */
+    public function testResolveWithPharProtocol()
+    {
+        $path  = 'phar://' . __DIR__
+            . DIRECTORY_SEPARATOR . '_templates'
+            . DIRECTORY_SEPARATOR . 'view.phar'
+            . DIRECTORY_SEPARATOR . 'start'
+            . DIRECTORY_SEPARATOR . '..'
+            . DIRECTORY_SEPARATOR . 'views';
+        $this->_object->addPath($path);
+        $markup = $this->_object->resolve('foo' . DIRECTORY_SEPARATOR . 'hello.phtml');
+        $this->assertEquals($path . DIRECTORY_SEPARATOR . 'foo' . DIRECTORY_SEPARATOR . 'hello.phtml', $markup);
+    }
+
+    /**
+     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     */
+    public function testResolveWithFakePharProtocol()
+    {
+        $path  = 'phar://' . __DIR__
+            . DIRECTORY_SEPARATOR . '_templates'
+            . DIRECTORY_SEPARATOR . 'fake-view.phar';
+        $this->_object->addPath($path);
+        $markup = $this->_object->resolve('hello.phtml');
+        $this->assertFalse($markup);
     }
 }

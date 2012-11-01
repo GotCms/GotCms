@@ -1,5 +1,5 @@
 <phpunit bootstrap="./Bootstrap.php" colors="true">
-    <testsuite name="EsCMS Test Suite">
+    <testsuite name="GotCms Test Suite">
         <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">./vendor/</directory>
     </testsuite>
     <logging>

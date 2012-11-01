@@ -29,7 +29,8 @@ namespace Gc\View\Helper;
 
 use Zend\Form\ElementInterface,
     Zend\Form\Element\Checkbox as CheckboxElement,
-    Zend\Form\View\Helper\FormCheckbox as ZendFormCheckbox;
+    Zend\Form\View\Helper\FormCheckbox as ZendFormCheckbox,
+    Zend\Form\Exception;
 
 /**
  * Render form checkbox

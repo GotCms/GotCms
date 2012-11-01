@@ -153,6 +153,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     {
         $model = new Model();
 
-        $this->assertTrue($model->delete());
+        $this->assertFalse($model->delete());
     }
 }

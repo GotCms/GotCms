@@ -105,6 +105,15 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Core\Object::__call
+     */
+    public function testFakeMethod()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $this->_object->fakeMethodToLaunchException();
+    }
+
+    /**
      * @covers Gc\Core\Object::getData
      */
     public function testGetDataWithIndex()
