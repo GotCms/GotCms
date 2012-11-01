@@ -27,8 +27,7 @@
 
 namespace Gc\Core;
 
-use Gc\Exception,
-    SimpleXMLElement,
+use SimpleXMLElement,
     Zend\Json\Json;
 /**
  * Abstract object, all classes are extends from it to

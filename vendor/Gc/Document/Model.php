@@ -234,7 +234,7 @@ class Model extends AbstractTable implements IterableInterface
 
             return $this->getId();
         }
-        catch (Exception $e)
+        catch(\Exception $e)
         {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
@@ -266,7 +266,7 @@ class Model extends AbstractTable implements IterableInterface
                     return TRUE;
                 }
             }
-            catch (Exception $e)
+            catch(\Exception $e)
             {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }

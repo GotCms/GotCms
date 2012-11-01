@@ -118,7 +118,7 @@ class Model extends AbstractTable
 
             return $this->getId();
         }
-        catch (Exception $e)
+        catch(\Exception $e)
         {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
@@ -146,7 +146,7 @@ class Model extends AbstractTable
 
                 return TRUE;
             }
-            catch (Exception $e)
+            catch(\Exception $e)
             {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }

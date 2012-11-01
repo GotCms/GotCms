@@ -27,8 +27,7 @@
 
 namespace Gc\Db;
 
-use Gc\Exception,
-    Gc\Core\Object,
+use Gc\Core\Object,
     Gc\Event\StaticEventManager,
     Gc\Registry,
     Zend\Db\ResultSet\ResultSet,
