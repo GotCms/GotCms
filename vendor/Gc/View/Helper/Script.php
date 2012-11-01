@@ -69,12 +69,7 @@ class Script extends AbstractHelper
 
         file_put_contents('gc.script://' . $name, $script->getContent());
 
-        ob_start();
-        include('gc.script://' . $name);
-        $return = ob_get_clean();
-
-
-        return $return;
+        return include('gc.script://' . $name);;
     }
 
     /**
