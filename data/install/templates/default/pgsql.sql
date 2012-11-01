@@ -77,7 +77,7 @@ SELECT pg_catalog.setval('tab_id_seq', 8, true);
 -- Name: view_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
 --
 
-SELECT pg_catalog.setval('view_id_seq', 5, true);
+SELECT pg_catalog.setval('view_id_seq', 6, true);
 
 --
 -- Data for Name: view; Type: TABLE DATA; Schema: public;
