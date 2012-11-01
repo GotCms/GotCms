@@ -109,10 +109,7 @@ class Model extends AbstractTable
         }
         catch (Exception $e)
         {
-            /**
-            * TODO(Make \Gc\Error)
-            */
-            \Gc\Error::set(get_class($this),$e);
+            throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
@@ -137,9 +134,9 @@ class Model extends AbstractTable
                 $properties_collection->delete();
                 parent::delete('id = '.$tab_id);
             }
-            catch(Exception $e)
+            catch(\Exception $e)
             {
-                throw new \Gc\Exception($e->getMessage());
+                throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
             $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));

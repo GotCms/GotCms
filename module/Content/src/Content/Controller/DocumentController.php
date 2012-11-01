@@ -168,9 +168,9 @@ class DocumentController extends Action
                     $this->flashMessenger()->setNameSpace('error')->addMessage('There were problems during the removal of this document');
                 }
             }
-            catch (Exception $e)
+            catch(\Exception $e)
             {
-                \Gc\Error::set(get_class($this), $e);
+                throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
 

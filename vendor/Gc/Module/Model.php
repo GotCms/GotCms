@@ -120,10 +120,7 @@ class Model extends AbstractTable
         }
         catch (Exception $e)
         {
-            /**
-             * TODO(Make \Gc\Error)
-             */
-            \Gc\Error::set(get_class($this),$e);
+            throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
@@ -151,7 +148,7 @@ class Model extends AbstractTable
             }
             catch (Exception $e)
             {
-                \Gc\Error::set(get_class($this), $e);
+                throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
 

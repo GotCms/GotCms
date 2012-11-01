@@ -184,10 +184,7 @@ class Model extends AbstractTable
         }
         catch (Exception $e)
         {
-            /**
-            * TODO(Make \Gc\Error)
-            */
-            \Gc\Error::set(get_class($this),$e);
+            throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
@@ -211,7 +208,7 @@ class Model extends AbstractTable
                 $table = new TableGateway('property_value', $this->getAdapter());
                 $result = $table->delete(array('property_id' => (int)$id));
             }
-            catch(Exception $e)
+            catch(\Exception $e)
             {
                 throw new \Gc\Exception($e->getMessage());
 

@@ -83,12 +83,9 @@ class DatatypeController extends Action
                         throw new \Gc\Core\Exception("Error during insert new datatype");
                     }
                 }
-                catch(Exception $e)
+                catch(\Exception $e)
                 {
-                    /**
-                    * TODO(Make \Gc\Error)
-                    */
-                    \Gc\Error::set(get_class($this), $e);
+                    throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
             }
         }
@@ -145,12 +142,9 @@ class DatatypeController extends Action
                         return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
                     }
                 }
-                catch(Exception $e)
+                catch(\Exception $e)
                 {
-                    /**
-                    * TODO(Make \Gc\Error)
-                    */
-                    \Gc\Error::set(get_class($this), $e);
+                    throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
 
                 $this->flashMessenger()->setNameSpace('error')->addMessage('Error during editing.');
