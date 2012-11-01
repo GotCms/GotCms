@@ -43,7 +43,7 @@
         <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('description')); ?>" id="description" name="description">
 
-        <?php echo $this->formElementErrors($this->form->get('v')); ?>
+        <?php echo $this->formElementErrors($this->form->get('description')); ?>
     </div>
     <div>
         <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Content')); ?></label>
