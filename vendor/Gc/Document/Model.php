@@ -31,6 +31,7 @@ use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Gc\DocumentType,
     Gc\Media\Icon,
+    Gc\Property\Model as PropertyModel,
     Gc\Registry,
     Gc\View,
     Zend\Db\TableGateway\TableGateway,
@@ -291,6 +292,21 @@ class Model extends AbstractTable implements IterableInterface
         }
 
         return $path;
+    }
+
+    /**
+     * Get property
+     * @param string $property_name
+     * @return FALSE | PropertyModel
+     */
+    public function getProperty($property_name)
+    {
+        if(!$this->hasData('id'))
+        {
+            return FALSE;
+        }
+
+        return PropertyModel::fromIdentifier($property_name, $this->getId());
     }
 
     /** (non-PHPdoc)

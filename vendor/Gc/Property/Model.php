@@ -28,6 +28,7 @@
 namespace Gc\Property;
 
 use Gc\Db\AbstractTable,
+    Zend\Db\Sql\Select,
     Zend\Db\TableGateway\TableGateway;
 /**
  * Property Model
@@ -250,6 +251,37 @@ class Model extends AbstractTable
         if(!empty($current))
         {
             return $property_table->setData((array)$current);
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Initiliaze model from identifier
+     * @param string $identifier
+     * @param id $document_id
+     * @return \Gc\Property\Model
+     */
+    static function fromIdentifier($identifier, $document_id)
+    {
+        $property_table = new Model();
+        $row = $property_table->select(function(Select $select) use ($document_id, $identifier)
+        {
+            $select->join(array('t' => 'tab'), 't.id = property.tab_id', array());
+            $select->join(array('dt' => 'document_type'), 'dt.id = t.document_type_id', array());
+            $select->join(array('d' => 'document'), 'd.document_type_id = dt.id', array());
+            $select->where->equalTo('d.id', $document_id);
+            $select->where->equalTo('identifier', $identifier);
+        });
+
+        $current = $row->current();
+        if(!empty($current))
+        {
+            $property_table->setData((array)$current);
+            $property_table->setDocumentId($document_id);
+            return $property_table;
         }
         else
         {
