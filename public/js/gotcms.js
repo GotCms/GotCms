@@ -53,6 +53,18 @@ var Gc = (function($)
 
         initDocumentType: function($addTabUrl, $addPropertyUrl, $deleteTabUrl, $deletePropertyUrl, $importTabUrl)
         {
+            $('.button-add').button({
+                icons: {
+                    primary: "ui-icon-plus"
+                }
+            });
+
+            $('.button-delete').button({
+                icons: {
+                    primary: "ui-icon-close"
+                }
+            });
+
             var $this = this;
             $('.tabs').tabs();
 
@@ -84,7 +96,7 @@ var Gc = (function($)
                         else
                         {
                             $tabs = $('#tabs');
-                            $e = '<li class="clearfix">'
+                            $e = $('<li class="clearfix">'
                                 + '<div class="hide floatL">'
                                 + '<input type="text" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'">'
                                 + '<input type="text" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'">'
@@ -92,8 +104,15 @@ var Gc = (function($)
                                 + '<div class="floatL">'
                                 + '<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>'
                                 + '</div>'
-                                + '<button type="button" value="'+$data.id+'" class="delete-tab floatR input-submit">'+Translator.translate('Delete')+'</button>'
-                                + '</li>';
+                                + '<button type="button" value="'+$data.id+'" class="button-delete delete-tab floatR">'+Translator.translate('Delete')+'</button>'
+                                + '</li>');
+
+                            $e.find('.button-delete').button({
+                                icons: {
+                                    primary: "ui-icon-close"
+                                }
+                            });
+
                             $tabs.append($e);
 
                             $('.select-tab').append(new Option($name.val(),$data.id));
@@ -136,6 +155,15 @@ var Gc = (function($)
             /**
              * Properties
              */
+
+            $('#display-property').on('click', function()
+            {
+                $(this).next().toggleClass('hide');
+                $(this).find('.ui-icon').toggleClass('ui-icon-minus');
+                $(this).find('.ui-icon').toggleClass('ui-icon-plus');
+                return false;
+            });
+
             var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div></div>'});
 
             $this.setOption('accordion-option', {
@@ -215,11 +243,18 @@ var Gc = (function($)
                                 +'</dd>'
                                 +'<dd id="required-element-#{tab}-#{id}">'
                                     +'<input class="property-tab-id" type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">'
-                                    +'<button type="button" value="#{id}" class="delete-property input-submit">'+Translator.translate('Delete')+'</button>'
+                                +'</dd>'
+                                +'<dd class="cb">'
+                                    +'<button type="button" value="#{id}" class="delete-property button-delete">'+Translator.translate('Delete')+'</button>'
                                 +'</dd>'
                             +'</dl></div>');
 
-                            $c = $c.evaluate($data);
+                            $c = $($c.evaluate($data));
+                            $c.find('.button-delete').button({
+                                icons: {
+                                    primary: "ui-icon-close"
+                                }
+                            });
 
                             $('#tabs-properties-'+$tab.val()).children('div:first').append($c);
                             $('.connected-sortable').accordion(Gc.getOption('accordion-option'))
