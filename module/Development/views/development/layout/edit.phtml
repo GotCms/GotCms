@@ -31,7 +31,7 @@
 
 <form class="hide" id="form-content" action="<?php echo $this->url('layoutUpload', array('id' => $this->layoutId)); ?>" method="post" enctype="multipart/form-data">
     <input type="file" name="upload">
-    <input type="submit" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
+    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
 </form>
 
 <?php echo $this->partial('development/forms/layout.phtml', array('form' => $this->form)); ?>
