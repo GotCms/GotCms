@@ -166,9 +166,12 @@ class Action extends AbstractActionController
                 ->appendFile('/js/libs/jquery.jstree.js', 'text/javascript')
                 ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
                 ->appendFile('/js/libs/elfinder.min.js', 'text/javascript')
-                ->appendFile(sprintf('/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript')
                 ->appendFile('/js/generic-classes.js', 'text/javascript')
                 ->appendFile('/js/gotcms.js', 'text/javascript');
+            if($language != 'en')
+            {
+                $headscript->appendFile(sprintf('/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript');
+            }
 
             $headlink = $helper_broker->get('HeadLink');
             $headlink
