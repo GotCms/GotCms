@@ -101,10 +101,7 @@ class DocumentType extends AbstractForm
             ),
             'description' => array(
                 'name' => 'description',
-                'required'=> TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty')
-                ),
+                'required'=> FALSE,
             ),
             'icon_id' => array(
                 'name' => 'icon_id',

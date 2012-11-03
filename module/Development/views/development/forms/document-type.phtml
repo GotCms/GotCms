@@ -276,7 +276,7 @@
                 <h3><?php echo $this->escapeHtml($this->translate('Tabs')); ?></h3>
                 <ul id="tabs" class="sortable ui-sortable">
                 <?php foreach($tabs_form as $tab_form): ?>
-                    <li>
+                    <li class="clearfix">
                         <?php $name = $tab_form->get('name')->getValue(); ?>
                         <?php $description = $tab_form->get('description')->getValue(); ?>
                         <?php $tab_id = 'tab'.$tab_form->get('tab_id')->getValue(); ?>

@@ -84,7 +84,7 @@ var Gc = (function($)
                         else
                         {
                             $tabs = $('#tabs');
-                            $e = '<li>'
+                            $e = '<li class="clearfix">'
                                 + '<div class="hide floatL">'
                                 + '<input type="text" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'">'
                                 + '<input type="text" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'">'
@@ -156,7 +156,7 @@ var Gc = (function($)
                 $description = $('#properties-description');
                 $isRequired = $('#properties-required');
 
-                if($this.isEmpty($identifier.val()) || $this.isEmpty($name.val()) || $this.isEmpty($tab.val()) || $this.isEmpty($datatype.val()) || $this.isEmpty($description.val()))
+                if($this.isEmpty($identifier.val()) || $this.isEmpty($name.val()) || $this.isEmpty($tab.val()) || $this.isEmpty($datatype.val()))
                 {
                     $this.setHtmlMessage(Translator.translate('Please fill all fields'));
                 }
