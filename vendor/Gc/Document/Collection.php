@@ -112,6 +112,25 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /**
+     * Return available children
+     * @return array
+     */
+    public function getAvailableChildren()
+    {
+        $children = $this->getChildren();
+        $array = array();
+        foreach($children as $child)
+        {
+            if($child->isPublished())
+            {
+                $array[] = $child;
+            }
+        }
+
+        return $array;
+    }
+
+    /**
      * Return array for input select
      * @return array
      */

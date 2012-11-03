@@ -309,6 +309,22 @@ class Model extends AbstractTable implements IterableInterface
         return PropertyModel::fromIdentifier($property_name, $this->getId());
     }
 
+    /**
+     * Retrieve children with his status is enable
+     * @return FALSE | PropertyModel
+     */
+    public function getAvailableChildren()
+    {
+        if($this->getData('available_children') === NULL)
+        {
+            $children = new Collection();
+            $children->load($this->getId());
+            $this->setData('available_children', $children->getAvailableChildren());
+        }
+
+        return $this->getData('available_children');
+    }
+
     /** (non-PHPdoc)
      * @see include \Gc\Component\IterableInterface#getName()
      */
