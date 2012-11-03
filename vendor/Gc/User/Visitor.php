@@ -264,7 +264,7 @@ class Visitor extends AbstractTable
         switch($sort)
         {
             case 'HOUR':
-                for($i = 1;$i <= 24; $i++)
+                for($i = 0;$i < 24; $i++)
                 {
                     $values[$i . 'h'] = 0;
                 }
