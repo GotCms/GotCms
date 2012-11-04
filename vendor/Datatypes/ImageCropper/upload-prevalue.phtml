@@ -1,0 +1,102 @@
+<?php
+/**
+ * This source file is part of GotCms.
+ *
+ * GotCms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GotCms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Datatype
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
+
+?>
+
+<h3><?php echo $this->escapeHtml($this->translate($this->elements['mime']->getName())); ?></h3>
+<div>
+    <?php echo $this->formElement($this->elements['mime']); ?>
+</div>
+
+<h3><?php echo $this->escapeHtml($this->translate($this->elements['resize-option']->getName())); ?></h3>
+<div>
+    <?php echo $this->formElement($this->elements['resize-option']); ?>
+</div>
+
+<h3><?php echo $this->escapeHtml($this->translate($this->elements['background']->getName())); ?></h3>
+<div>
+    <?php echo $this->formElement($this->elements['background']); ?>
+</div>
+
+<h3><?php echo $this->escapeHtml($this->translate('Size')); ?></h3>
+<div id="sizes">
+    <?php if(!empty($this->elements['size'])): ?>
+        <?php foreach($this->elements['size'] as $size): ?>
+            <div>
+                <?php foreach($size as $element): ?>
+                    <label style="width:auto" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($element->getLabel()); ?></label>
+                    <?php echo $this->formElement($element); ?>
+                <?php endforeach; ?>
+                <span class="delete-button"><?php echo $this->escapeHtml($this->translate('Delete')); ?></span>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+
+<div>
+    <span id="add-size"><?php echo $this->escapeHtml($this->translate('Add')); ?></span>
+</div>
+
+<script type="text/javascript">
+    $template = new Template('<div>' +
+        <?php foreach($this->elements['size-template'] as $element): ?>
+            '<label style="width:auto" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeJs($element->getLabel()); ?></label>&nbsp;' +
+            '<?php echo $this->escapeJs($this->formElement($element)); ?>&nbsp;' +
+        <?php endforeach; ?>
+        '<span class="delete-button"><?php echo $this->escapeJs($this->translate('Delete')); ?></span>' +
+    '</div>');
+
+    $idx = <?php echo count($this->elements['size']); ?>;
+    $('body').on('click', '#add-size', function()
+    {
+        $html = $($template.evaluate({idx: $idx}));
+        $html.find('.delete-button').button({
+            icons: {
+                primary: "ui-icon-close"
+            }
+        });
+        $('#sizes').append($html);
+        $idx++;
+    });
+
+    $('body').on('click', '.delete-button', function()
+    {
+        $(this).parent().remove();
+    });
+
+    $('.delete-button').button({
+        icons: {
+            primary: "ui-icon-close"
+        }
+    });
+
+    $('#add-size').button({
+        icons: {
+            primary: "ui-icon-plus"
+        }
+    });
+</script>

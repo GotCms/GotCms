@@ -24,39 +24,50 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Datatypes\RadioButtonList;
+namespace Datatypes\ImageCropper;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype as AbstractDatatype,
+    Gc\Property\Model as PropertyModel;
 
 /**
- * Editor for Radio Button List datatype
+ * Manage Image cropper datatype
  */
-class Editor extends AbstractEditor
+class Datatype extends AbstractDatatype
 {
     /**
-     * Save radiobuttonlist editor
-     * @return void
+     * Datatype name
+     * @var string
      */
-    public function save()
+    protected $_name = 'image-cropper';
+
+    /**
+     * Retrieve editor
+     * @param PropertyModel $property
+     * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
+     */
+    public function getEditor(PropertyModel $property)
     {
-        $this->setValue($this->getRequest()->getPost()->get($this->getName()));
+        $this->_property = $property;
+        if($this->_editor === NULL)
+        {
+            $this->_editor = new Editor($this);
+        }
+
+        return $this->_editor;
     }
 
     /**
-     * Load radiobuttonlist editor
-     * @return mixte
+     * Retrieve prevalue editor
+     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
-    public function load()
+    public function getPrevalueEditor()
     {
-        $element = new Element\Radio($this->getName());
-        $element->setValueOptions($this->getConfig());
+        if($this->_prevalueEditor === NULL)
+        {
+            $this->_prevalueEditor = new PrevalueEditor($this);
+        }
 
-        $element->setLabel($this->getName());
-        $element->setAttribute('label', $this->getProperty()->getName());
-        $element->setValue($this->getValue());
-
-        return $element;
+        return $this->_prevalueEditor;
     }
 }
 

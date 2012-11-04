@@ -1,0 +1,148 @@
+<?php
+/**
+ * This source file is part of GotCms.
+ *
+ * GotCms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GotCms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category Gc
+ * @package  Datatype
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
+ */
+ /** @var $this \Zend\View\Renderer\PhpRenderer */
+
+?>
+<?php $files = $this->files; ?>
+<?php $is_crop = !empty($this->options['resize_option']) and $this->options['resize_option'] == 'crop'; ?>
+<?php if(!empty($files)): ?>
+    <span class="image-crop-display" id="display-data<?php echo $this->name; ?>"><?php echo $this->escapeHtml($this->translate('Show / hide images')); ?></span>
+    <div class="image-crop-result">
+        <table class="table-crop-list">
+            <thead>
+                <tr>
+                    <th><?php echo $this->escapeHtml($this->translate('Preview')); ?></th>
+                    <th<?php if(!$is_crop): ?> class="last"<?php endif; ?>><?php echo $this->escapeHtml($this->translate('Infos')); ?></th>
+                    <?php if($is_crop): ?>
+                        <th class="last"><?php echo $this->escapeHtml($this->translate('Crop')); ?></th>
+                    <?php endif; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($files as $idx => $file): ?>
+                    <tr>
+                        <td>
+                            <?php if($file['width'] > 600 or $file['height'] > 300): ?>
+                                <a href="<?php echo $this->escapeHtml($file['value']); ?>" target="_blank"><?php echo $this->escapeHtml($file['value']); ?></a>
+                            <?php else: ?>
+                                <img src="<?php echo $this->escapeHtml($file['value']); ?>" width="<?php echo $this->escapeHtml($file['width']); ?>" height="<?php echo $this->escapeHtml($file['height']); ?>" alt="Image">
+                            <?php endif; ?>
+                        </td>
+                        <td<?php if(!$is_crop): ?> class="last"<?php endif; ?>>
+                            <dl>
+                                <dt>
+                                    <?php echo $this->escapeHtml($this->translate('Width:')); ?>
+                                </dt>
+                                <dd>
+                                    <?php echo $this->escapeHtml($file['width']); ?>
+                                </dd>
+                                <dt>
+                                    <?php echo $this->escapeHtml($this->translate('Height:')); ?>
+                                </dt>
+                                <dd>
+                                    <?php echo $this->escapeHtml($file['height']); ?>
+                                </dd>
+                                <dt>
+                                    <?php echo $this->escapeHtml($this->translate('Mime:')); ?>
+                                </dt>
+                                <dd>
+                                    <?php echo $this->escapeHtml($file['mime']); ?>
+                                </dd>
+                            </dl>
+                        </td>
+                        <?php if($is_crop): ?>
+                            <td class="last">
+                                <?php if($idx != 'original'): ?>
+                                    <button id="<?php echo $this->name . $idx; ?>" class="button-crop"><?php echo $this->escapeHtml($this->translate('Crop')); ?></button>
+                                <?php else: ?>
+                                    <?php echo $this->escapeHtml($this->translate('Original image')); ?>
+                                <?php endif; ?>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php foreach($files as $idx => $file): ?>
+        <?php if($is_crop and $idx != 'original'): ?>
+            <input type="hidden" id="<?php echo $this->escapeHtml($this->name . $idx . '-x'); ?>" name="<?php echo $this->escapeHtml($this->name . $idx . '-x'); ?>" value="<?php echo $this->escapeHtml($file['x']); ?>">
+            <input type="hidden" id="<?php echo $this->escapeHtml($this->name . $idx . '-y'); ?>" name="<?php echo $this->escapeHtml($this->name . $idx . '-y'); ?>" value="<?php echo $this->escapeHtml($file['y']); ?>">
+            <script type="text/javascript">
+                $('#<?php echo $this->name . $idx; ?>').on('click', function()
+                {
+                    var jcrop_api;
+                    var width = <?php echo $this->escapeJs($file['width'] > $files['original']['width'] ? $files['original']['width'] : $file['width']); ?>;
+                    var height = <?php echo $this->escapeJs($file['height'] > $files['original']['height'] ? $files['original']['height'] : $file['height']); ?>;
+                    var x = <?php echo $file['x']; ?>;
+                    var y = <?php echo $file['y']; ?>;
+                    var $dialog = $('<div><div class="jc-dialog"><img src="<?php echo $this->escapeJs($files['original']['value']); ?>" id="target"></div></div>');
+                    $dialog.find('img').Jcrop({
+                        minSize: [width, height],
+                        maxSize: [width, height],
+                        setSelect:   [ x, y, x + width, y + width ],
+                        onSelect : function(c)
+                        {
+                            $('#<?php echo $this->escapeHtml($this->name . $idx . '-x'); ?>').val(c.x < 0 ? 0 : c.x);
+                            $('#<?php echo $this->escapeHtml($this->name . $idx . '-y'); ?>').val(c.y < 0 ? 0 : c.y);
+                        }
+                    },function()
+                    {
+                        jcrop_api = this;
+                        $dialog.dialog({
+                            modal: true,
+                            title: 'Crop image',
+                            close: function()
+                            {
+                                $dialog.remove();
+                            },
+                            width: jcrop_api.getBounds()[0]+34,
+                            resizable: false
+                        });
+                    });
+
+                    return false;
+                });
+            </script>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<script type="text/javascript">
+    $('#display-data<?php echo $this->name; ?>').on('click', function()
+    {
+        $(this).next('.image-crop-result').toggle();
+        return false;
+    });
+    <?php if($is_crop): ?>
+        $('.button-crop').button({
+            icons: {
+                primary: 'ui-icon-plus'
+            }
+        });
+    <?php endif; ?>
+</script>
