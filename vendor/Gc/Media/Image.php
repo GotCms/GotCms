@@ -33,26 +33,31 @@ namespace Gc\Media;
 class Image
 {
     /**
+     * Original image
      * @var resource
      */
     protected $_image;
 
     /**
+     * Original image width
      * @var integer
      */
     protected $_width;
 
     /**
+     * Original image height
      * @var integer
      */
     protected $_height;
 
     /**
+     * Image resized
      * @var resource
      */
     protected $_imageResized;
 
     /**
+     * Available options
      * @var array
      */
     protected $_availableOptions = array('auto', 'crop');
@@ -116,9 +121,9 @@ class Image
     /**
      * Resize image
      * @param integer $new_width
-     * @param integer $new_heigh
-     * @param string $background_color
+     * @param integer $new_height
      * @param string option can be (auto|crop)
+     * @param string $background_color
      * @param integer $source_x
      * @param integer $source_y
      * @return Gc\Media\Image
@@ -169,7 +174,7 @@ class Image
 
         $tmp_image = @imagecreatetruecolor($new_width, $new_height);
 
-        $rgb_array = $this->hex2rbg($background_color);
+        $rgb_array = $this->hex2rgb($background_color);
         if(empty($rgb_array))
         {
             $background_color = imagecolorallocate($tmp_image, 0, 0, 0);
@@ -189,7 +194,12 @@ class Image
         return $this;
     }
 
-    public function hex2rbg($hex_string)
+    /**
+     * Convert hexa string to rbg
+     * @param string $hex_string
+     * @return array)
+     */
+    public function hex2rgb($hex_string)
     {
         $hex_string = preg_replace("/[^0-9A-Fa-f]/", '', $hex_string); // Gets a proper hex string
         $rgb_array = array();
