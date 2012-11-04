@@ -121,50 +121,53 @@ class Editor extends AbstractEditor
             $data = $post->get($this->getName() . '-hidden');
             $data = unserialize($data);
 
-            foreach($parameters['size'] as $size)
+            if(!empty($data))
             {
-                $x = (int)$post->get($this->getName() . $size['name'] . '-x');
-                $y = (int)$post->get($this->getName() . $size['name'] . '-y');
-
-                $filename = !empty($data[$size['name']]['value']) ? $data[$size['name']]['value'] :  preg_replace('~\.([a-zA-Z]+)$~', '-' . $size['name'] . '.$1', $data['original']['value']);
-                $image_model->open($file_class->getPath() . $data['original']['value']);
-                $image_model->resize($size['width'], $size['height'], empty($parameters['resize_option']) ? 'auto' : $parameters['resize_option'], $background_color, $x, $y);
-                $image_model->save($file_class->getPath() . $filename);
-                if(!empty($data[$size['name']]['value']))
-                {
-                    $data[$size['name']]['x'] = $x;
-                    $data[$size['name']]['y'] = $y;
-                }
-                else
-                {
-                    $file_info = @getimagesize($file_class->getPath() . $filename);
-                    $data[$size['name']] = array(
-                        'value' => $filename,
-                        'width' => empty($file_info[0]) ? 0 : $file_info[0],
-                        'height' => empty($file_info[1]) ? 0 : $file_info[1],
-                        'html' => empty($file_info[2]) ? '' : $file_info[2],
-                        'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
-                        'x' => 0,
-                        'y' => 0,
-                    );
-                }
-            }
-
-            foreach($data as $name => $value)
-            {
-                $found = FALSE;
                 foreach($parameters['size'] as $size)
                 {
-                    if($size['name'] == $name)
-                    {
-                        $found = TRUE;
-                        $file['options'] = $size;
+                    $x = (int)$post->get($this->getName() . $size['name'] . '-x');
+                    $y = (int)$post->get($this->getName() . $size['name'] . '-y');
 
-                        break;
-                    }
-                    if(empty($found))
+                    $filename = !empty($data[$size['name']]['value']) ? $data[$size['name']]['value'] :  preg_replace('~\.([a-zA-Z]+)$~', '-' . $size['name'] . '.$1', $data['original']['value']);
+                    $image_model->open($file_class->getPath() . $data['original']['value']);
+                    $image_model->resize($size['width'], $size['height'], empty($parameters['resize_option']) ? 'auto' : $parameters['resize_option'], $background_color, $x, $y);
+                    $image_model->save($file_class->getPath() . $filename);
+                    if(!empty($data[$size['name']]['value']))
                     {
-                        unset($value[$name]);
+                        $data[$size['name']]['x'] = $x;
+                        $data[$size['name']]['y'] = $y;
+                    }
+                    else
+                    {
+                        $file_info = @getimagesize($file_class->getPath() . $filename);
+                        $data[$size['name']] = array(
+                            'value' => $filename,
+                            'width' => empty($file_info[0]) ? 0 : $file_info[0],
+                            'height' => empty($file_info[1]) ? 0 : $file_info[1],
+                            'html' => empty($file_info[2]) ? '' : $file_info[2],
+                            'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
+                            'x' => 0,
+                            'y' => 0,
+                        );
+                    }
+                }
+
+                foreach($data as $name => $value)
+                {
+                    $found = FALSE;
+                    foreach($parameters['size'] as $size)
+                    {
+                        if($size['name'] == $name)
+                        {
+                            $found = TRUE;
+                            $file['options'] = $size;
+
+                            break;
+                        }
+                        if(empty($found))
+                        {
+                            unset($value[$name]);
+                        }
                     }
                 }
             }
