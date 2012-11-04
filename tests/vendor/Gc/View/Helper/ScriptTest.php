@@ -55,7 +55,10 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function test__invoke()
     {
-        $this->assertEquals('script Content', $this->_object->__invoke('script-identifier'));
+        ob_start();
+        $this->_object->__invoke('script-identifier');
+        $data = ob_get_clean();
+        $this->assertEquals('script Content', $data);
         $this->assertFalse($this->_object->__invoke('fake-script-identifier'));
     }
 
