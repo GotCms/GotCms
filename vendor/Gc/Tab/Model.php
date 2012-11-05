@@ -86,7 +86,7 @@ class Model extends AbstractTable
         $array_save = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
-            'sort_order' => $this->getOrder(),
+            'sort_order' => $this->getSortOrder(),
             'document_type_id' => $this->getDocumentTypeId(),
         );
 

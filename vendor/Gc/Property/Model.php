@@ -152,7 +152,7 @@ class Model extends AbstractTable
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'identifier' => $this->getIdentifier(),
-            'sort_order' => $this->getOrder(),
+            'sort_order' => $this->getSortOrder(),
             'tab_id' => $this->getTabId(),
             'datatype_id' => $this->getDatatypeId(),
         );
