@@ -158,23 +158,15 @@ class Image
         }
         else
         {
-            if($this->_width > $new_width and $this->_height > $new_height)
+            $optimal_height = $this->_getSizeByFixedWidth($new_width);
+            $optimal_width = $this->_getSizeByFixedHeight($new_height);
+            if($optimal_height > $new_height)
             {
-                $optimal_width = $new_width;
-                $optimal_height = $new_height;
+                $optimal_height = $this->_getSizeByFixedWidth($optimal_width);
             }
-            else
+            elseif($optimal_width > $new_width)
             {
-                $optimal_height = $this->_getSizeByFixedWidth($new_width);
-                $optimal_width = $this->_getSizeByFixedHeight($new_height);
-                if($optimal_height > $new_height)
-                {
-                    $optimal_height = $this->_getSizeByFixedWidth($optimal_width);
-                }
-                elseif($optimal_width > $new_width)
-                {
-                    $optimal_width = $this->_getSizeByFixedHeight($optimal_height);
-                }
+                $optimal_width = $this->_getSizeByFixedHeight($optimal_height);
             }
 
             $this->_imageResized = imagecreatetruecolor($optimal_width, $optimal_height);
