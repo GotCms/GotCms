@@ -63,13 +63,21 @@
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
-                <input type="button" class="delete" value="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
+                <div style="margin-top:25px;">
+                    <button class="delete"><?php echo $this->escapeHtml($this->translate('Delete this datatype')); ?></button>
+                </div>
             </div>
         <?php endforeach; ?>
     </div>
 
     <script>
         $('#tabs').tabs();
+        $('.delete').button({
+            icons: {
+                primary: 'ui-icon-minus'
+            }
+        });
+
         $('.delete').on('click', function()
         {
             $id = $(this).parent().attr('id').replace('tabs-', '');

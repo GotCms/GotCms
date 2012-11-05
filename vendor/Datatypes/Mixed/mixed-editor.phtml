@@ -54,7 +54,7 @@
                                 </div>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
-                        <button class="delete-mixed-element">
+                        <button class="delete-mixed-element<?php echo $this->propertyName; ?> button-delete<?php echo $this->propertyName; ?>">
                             <?php echo $this->escapeHtml($this->translate('Delete')); ?>
                         </button>
                     </div>
@@ -65,48 +65,66 @@
     </div>
 
     <script type="text/javascript">
-        $template = '';
-        $template += '<div class="element">';
-            <?php foreach($this->templateElements as $datatype_id => $datatype): ?>
-                <?php foreach($datatype['fieldset']->getElements() as $element): ?>
-                    $template += '<div>';
-                        <?php $content = $element->getAttribute('content'); ?>
-                        <?php if(!empty($content)): ?>
-                            $template += '<?php echo $this->escapeJs($content); ?>';
-                        <?php else: ?>
-                            <?php if($element->getAttribute('type') != 'hidden'): ?>
-                                <?php $id = $element->getAttribute('id'); ?>
-                                <?php if(!empty($id)): ?>
-                                    $template += '<label class="required" for="<?php echo $this->escapeHtml($this->translate($element->getAttribute('id'))); ?>"><?php echo $this->escapeHtml($this->translate($datatype['label'])); ?></label>';
-                                <?php endif; ?>
-                            <?php endif; ?>
-
-                            $template += '<?php echo $this->formElement($element); ?>';
-                        <?php endif; ?>
-                    $template += '</div>';
-                <?php endforeach; ?>
-            <?php endforeach; ?>
-            $template += '<button class="delete-mixed-element">';
-                $template += '<?php echo $this->escapeHtml($this->translate('Delete')); ?>';
-            $template += '</button>';
-        $template += '</div>';
-
-        $template<?php echo $this->escapeHtml($this->propertyName); ?> = new Template($template);
-
         $line_id<?php echo $this->escapeHtml($this->propertyName); ?> = <?php echo count($this->datatypes); ?>;
         $('#add-element-<?php echo $this->escapeHtml($this->propertyName); ?>').on('click', function()
         {
+            var $template = '';
+            $template += '<div class="element">';
+                <?php foreach($this->templateElements as $datatype_id => $datatype): ?>
+                    <?php foreach($datatype['fieldset']->getElements() as $element): ?>
+                        $template += '<div>';
+                            <?php $content = $element->getAttribute('content'); ?>
+                            <?php if(!empty($content)): ?>
+                                $template += '<?php echo $this->escapeJs($content); ?>';
+                            <?php else: ?>
+                                <?php if($element->getAttribute('type') != 'hidden'): ?>
+                                    <?php $id = $element->getAttribute('id'); ?>
+                                    <?php if(!empty($id)): ?>
+                                        $template += '<label class="required" for="<?php echo $this->escapeHtml($this->translate($element->getAttribute('id'))); ?>"><?php echo $this->escapeHtml($this->translate($datatype['label'])); ?></label>';
+                                    <?php endif; ?>
+                                <?php endif; ?>
+
+                                $template += '<?php echo $this->formElement($element); ?>';
+                            <?php endif; ?>
+                        $template += '</div>';
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+                $template += '<button class="delete-mixed-element<?php echo $this->propertyName; ?> button-delete">';
+                    $template += '<?php echo $this->escapeHtml($this->translate('Delete')); ?>';
+                $template += '</button>';
+            $template += '</div>';
+
+            $template = new Template($template);
+            $content = $($template.evaluate({line: $line_id<?php echo $this->escapeHtml($this->propertyName); ?>}));
+            $content.find('.button-delete').button({
+                icons: {
+                    primary: 'ui-icon-minus'
+                }
+            });
+
             $line_id<?php echo $this->escapeHtml($this->propertyName); ?>++;
-            $('#elements-<?php echo $this->escapeHtml($this->propertyName); ?>').append($template<?php echo $this->escapeHtml($this->propertyName); ?>.evaluate({line: $line_id<?php echo $this->escapeHtml($this->propertyName); ?>}));
+            $('#elements-<?php echo $this->escapeHtml($this->propertyName); ?>').append($content);
 
             return false;
         });
 
-        $('body').on('click', '.delete-mixed-element', function()
+        $('body').on('click', '.delete-mixed-element<?php echo $this->propertyName; ?>', function()
         {
             $(this).parent().remove();
 
             return false;
+        });
+
+        $('.button-delete<?php echo $this->propertyName; ?>').button({
+            icons: {
+                primary: 'ui-icon-minus'
+            }
+        });
+
+        $('#add-element-<?php echo $this->propertyName; ?>').button({
+            icons: {
+                primary: 'ui-icon-plus'
+            }
         });
     </script>
 </div>

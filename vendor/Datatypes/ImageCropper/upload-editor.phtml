@@ -76,7 +76,7 @@
                         <?php if($is_crop): ?>
                             <td class="last">
                                 <?php if($idx != 'original'): ?>
-                                    <button id="<?php echo $this->name . $idx; ?>" class="button-crop"><?php echo $this->escapeHtml($this->translate('Crop')); ?></button>
+                                    <button id="<?php echo $this->name . $idx; ?>" class="button-crop<?php echo $this->name; ?>"><?php echo $this->escapeHtml($this->translate('Crop')); ?></button>
                                 <?php else: ?>
                                     <?php echo $this->escapeHtml($this->translate('Original image')); ?>
                                 <?php endif; ?>
@@ -138,8 +138,9 @@
         $(this).next('.image-crop-result').toggle();
         return false;
     });
+
     <?php if($is_crop): ?>
-        $('.button-crop').button({
+        $('.button-crop<?php echo $this->name; ?>').button({
             icons: {
                 primary: 'ui-icon-plus'
             }
