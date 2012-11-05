@@ -140,34 +140,43 @@ class Image
             $option = 'auto';
         }
 
-        if($this->_width > $new_width and $this->_height > $new_height)
+        if($option == 'crop')
         {
             $optimal_width = $new_width;
             $optimal_height = $new_height;
-        }
-        else
-        {
-            $optimal_height = $this->_getSizeByFixedWidth($new_width);
-            $optimal_width = $this->_getSizeByFixedHeight($new_height);
-
-            if($optimal_height > $new_height)
+            if($this->_width < $new_width)
             {
-                $optimal_height = $this->_getSizeByFixedWidth($optimal_width);
+                $optimal_width = $this->_width;
             }
-            elseif($optimal_width > $new_width)
-            {
-                $optimal_width = $this->_getSizeByFixedHeight($optimal_height);
-            }
-        }
 
-        if($option == 'crop')
-        {
-            $optimal_width = $optimal_width > $this->_width ? $this->_width : $optimal_width;
-            $optimal_height = $optimal_height > $this->_width ? $this->_height : $optimal_height;
+            if($this->_height < $new_height)
+            {
+                $optimal_height = $this->_height;
+            }
+
             $this->_crop($optimal_width, $optimal_height, $source_x, $source_y);
         }
         else
         {
+            if($this->_width > $new_width and $this->_height > $new_height)
+            {
+                $optimal_width = $new_width;
+                $optimal_height = $new_height;
+            }
+            else
+            {
+                $optimal_height = $this->_getSizeByFixedWidth($new_width);
+                $optimal_width = $this->_getSizeByFixedHeight($new_height);
+                if($optimal_height > $new_height)
+                {
+                    $optimal_height = $this->_getSizeByFixedWidth($optimal_width);
+                }
+                elseif($optimal_width > $new_width)
+                {
+                    $optimal_width = $this->_getSizeByFixedHeight($optimal_height);
+                }
+            }
+
             $this->_imageResized = imagecreatetruecolor($optimal_width, $optimal_height);
             imagecopyresampled($this->_imageResized, $this->_image, 0, 0, 0, 0, $optimal_width, $optimal_height, $this->_width, $this->_height);
         }
@@ -234,7 +243,7 @@ class Image
         $ratio = $this->_width / $this->_height;
         $new_width = $new_height * $ratio;
 
-        return $new_width;
+        return floor($new_width);
     }
 
     /**
@@ -247,7 +256,7 @@ class Image
         $ratio = $this->_height / $this->_width;
         $new_height = $new_width * $ratio;
 
-        return $new_height;
+        return floor($new_height);
     }
 
     /**
