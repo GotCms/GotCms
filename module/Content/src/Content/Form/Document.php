@@ -173,6 +173,15 @@ class Document extends AbstractForm
             }
         }
 
+        $inputFilterFactory = $this->getInputFilter();
+        $inputFilter = $inputFilterFactory->add(array(
+            'name' => 'document-view',
+            'required'=> TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+            ),
+        ), 'document-view');
+
         $view = new Element\Select('document-view');
         $view->setValueOptions(array('' => 'Select view') + $select)
             ->setValue((string)$document->getViewId())
@@ -187,6 +196,14 @@ class Document extends AbstractForm
             ->setValue((string)$document->getLayoutId())
             ->setAttribute('id', 'layout')
             ->setAttribute('label', 'Layout');
+
+        $inputFilter = $inputFilterFactory->add(array(
+            'name' => 'document-layout',
+            'required'=> TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+            ),
+        ), 'document-layout');
 
         $this->add($layout);
         $this->remove('document_type');

@@ -250,7 +250,7 @@ class IndexController extends Action
             return FALSE;
         }
 
-        if(preg_match("/^(i|s|a|o|d)(.*);/si", $data))
+        if(preg_match("/^(i|s|a|o|d|N)(.*);/si", $data))
         {
             return TRUE;
         }
