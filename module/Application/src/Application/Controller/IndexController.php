@@ -97,12 +97,12 @@ class IndexController extends Action
                 $explode_path = $this->explodePath($path);
                 $children = NULL;
                 $key = array();
-                $document = NULL;
                 $has_document = FALSE;
                 $parent_id = 0;
 
                 foreach($explode_path as $url_key)
                 {
+                    $document = NULL;
                     $document_tmp = NULL;
                     if($has_document === FALSE)
                     {
