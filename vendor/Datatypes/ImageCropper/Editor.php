@@ -179,7 +179,6 @@ class Editor extends AbstractEditor
                             unset($data[$name]);
                         }
                     }
-
                 }
             }
         }
