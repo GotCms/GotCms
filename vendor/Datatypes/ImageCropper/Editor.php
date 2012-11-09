@@ -125,7 +125,6 @@ class Editor extends AbstractEditor
             {
                 if(!empty($data['original']['value']))
                 {
-                    var_dump($parameters['size']);
                     foreach($parameters['size'] as $size)
                     {
                         $x = (int)$post->get($this->getName() . $size['name'] . '-x');
