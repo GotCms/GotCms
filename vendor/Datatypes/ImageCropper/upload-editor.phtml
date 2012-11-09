@@ -27,7 +27,7 @@
 
 ?>
 <?php $files = $this->files; ?>
-<?php $is_crop = !empty($this->options['resize_option']) and $this->options['resize_option'] == 'crop'; ?>
+<?php $is_crop = (!empty($this->options['resize_option']) and $this->options['resize_option'] == 'crop'); ?>
 <?php if(!empty($files)): ?>
     <span class="image-crop-display" id="display-data<?php echo $this->name; ?>"><?php echo $this->escapeHtml($this->translate('Show / hide images')); ?></span>
     <div class="image-crop-result">
