@@ -95,12 +95,11 @@ class Editor extends AbstractEditor
                     {
                         $editor->setConfig(serialize($datatype_config['config']));
                     }
+
                     $editor->save();
                     $datatypes[$line_id][$datatype_id] = array(
                         'value' => $editor->getValue()
                     );
-
-
 
                     foreach($_OLD_POST as $key => $value)
                     {
