@@ -125,6 +125,7 @@ class Editor extends AbstractEditor
             {
                 if(!empty($data['original']['value']))
                 {
+                    var_dump($parameters['size']);
                     foreach($parameters['size'] as $size)
                     {
                         $x = (int)$post->get($this->getName() . $size['name'] . '-x');
@@ -156,6 +157,11 @@ class Editor extends AbstractEditor
 
                     foreach($data as $name => $value)
                     {
+                        if($name == 'original')
+                        {
+                            continue;
+                        }
+
                         $found = FALSE;
                         foreach($parameters['size'] as $size)
                         {
@@ -166,10 +172,11 @@ class Editor extends AbstractEditor
 
                                 break;
                             }
-                            if(empty($found))
-                            {
-                                unset($value[$name]);
-                            }
+                        }
+
+                        if(empty($found))
+                        {
+                            unset($data[$name]);
                         }
                     }
 
