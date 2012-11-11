@@ -94,7 +94,7 @@ class DocumentController extends Action
         else
         {
             $document_form->get('parent')->setValue($parent_id);
-            $document_type_collection->init($parent_id);
+            $document_type_collection->init(DocumentModel::fromId($parent_id)->getDocumentTypeId());
             $document_type_element->setValueOptions(array('' => 'Select document type') + $document_type_collection->getSelect());
         }
 
