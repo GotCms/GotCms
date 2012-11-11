@@ -155,7 +155,15 @@ class IndexController extends Action
         {
             // 404
             $this->getResponse()->setStatusCode(404);
-            file_put_contents($this->_layoutPath, 'Error 404 - page not found');
+            $layout = Layout\Model::fromId(CoreConfig::getValue('site_404_layout'));
+            if(!empty($layout))
+            {
+                file_put_contents($this->_layoutPath, $layout->getContent());
+            }
+            else
+            {
+                file_put_contents($this->_layoutPath, '<?php echo $this->content; ?>');
+            }
         }
         else
         {

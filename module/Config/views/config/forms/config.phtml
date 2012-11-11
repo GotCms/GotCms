@@ -39,5 +39,11 @@
         <?php endforeach; ?>
     <?php endforeach; ?>
 
-    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+    <input id="input-save" type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
 </form>
+
+<script type="text/javascript">
+$(function(){
+    Gc.saveCommand();
+});
+</script>

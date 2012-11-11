@@ -28,6 +28,7 @@ namespace Config\Form;
 
 use Gc\Form\AbstractForm,
     Gc\Document,
+    Gc\Layout,
     Gc\User\Permission,
     Zend\Form\Element,
     Zend\Form\Fieldset,
@@ -61,15 +62,21 @@ class Config extends AbstractForm
         $is_offline->setAttribute('label', 'Is offline')
             ->setCheckedValue('1');
 
-        $offline_document = new Element\Select('site_offline_document');
-        $offline_document->setAttribute('label', 'Offline document');
         $document_collection = new Document\Collection();
         $document_collection->load(0);
+        $offline_document = new Element\Select('site_offline_document');
+        $offline_document->setAttribute('label', 'Offline document');
         $offline_document->setValueOptions(array('Select document') + $document_collection->getSelect());
+
+        $layout_collection = new Layout\Collection();
+        $layout_404 = new Element\Select('site_404_layout');
+        $layout_404->setAttribute('label', '404 layout');
+        $layout_404->setValueOptions(array('Select document') + $layout_collection->getSelect());
 
         $general_fieldset->add($name);
         $general_fieldset->add($is_offline);
         $general_fieldset->add($offline_document);
+        $general_fieldset->add($layout_404);
         $this->add($general_fieldset);
 
         $this->getInputFilter()->add(array(
@@ -83,13 +90,17 @@ class Config extends AbstractForm
         $this->getInputFilter()->add(array(
             'name' => 'site_is_offline',
             'required' => FALSE,
-            'required' => FALSE,
         ), 'site_is_offline');
 
         $this->getInputFilter()->add(array(
             'name' => 'site_offline_document',
             'required' => TRUE,
         ), 'site_offline_document');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'site_404_layout',
+            'required' => TRUE,
+        ), 'site_404_layout');
 
         return $this;
     }
