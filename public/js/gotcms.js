@@ -569,7 +569,7 @@ var Gc = (function($)
         showCopyForm: function($url, $action, $options)
         {
             $this = this;
-            $template = '<div title="'+Translator.translate('Copy document')+'">'
+            $template = '<div id="copy-dialog-form" title="'+Translator.translate('Copy document')+'">'
                 +'<p class="validateTips">'+Translator.translate('All form fields are required.')+'</p>'
                 +'<fieldset>'
                     +'<div>'
@@ -618,6 +618,8 @@ var Gc = (function($)
             {
                 $(this).dialog('close');
             };
+
+            $('#copy-dialog-form').remove();
 
             $($template).dialog({
                 modal: true,
