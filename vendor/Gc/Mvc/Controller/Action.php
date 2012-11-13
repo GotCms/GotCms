@@ -153,35 +153,35 @@ class Action extends AbstractActionController
             $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
             $headscript = $helper_broker->get('HeadScript');
             $headscript
-                ->appendFile('/js/libs/modernizr-2.6.1.min.js', 'text/javascript')
-                ->appendFile('/js/libs/jquery-1.7.2.min.js', 'text/javascript')
-                ->appendFile('/js/plugins.js', 'text/javascript')
-                ->appendFile('/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
-                ->appendFile('/js/libs/codemirror/lib/codemirror.js', 'text/javascript')
-                ->appendFile('/js/libs/codemirror/mode/xml/xml.js', 'text/javascript')
-                ->appendFile('/js/libs/codemirror/mode/javascript/javascript.js', 'text/javascript')
-                ->appendFile('/js/libs/codemirror/mode/css/css.js', 'text/javascript')
-                ->appendFile('/js/libs/codemirror/mode/clike/clike.js', 'text/javascript')
-                ->appendFile('/js/libs/codemirror/mode/php/php.js', 'text/javascript')
-                ->appendFile('/js/libs/jquery.jstree.js', 'text/javascript')
-                ->appendFile('/js/libs/jquery.contextMenu.js', 'text/javascript')
-                ->appendFile('/js/libs/elfinder.min.js', 'text/javascript')
-                ->appendFile('/js/generic-classes.js', 'text/javascript')
-                ->appendFile('/js/gotcms.js', 'text/javascript');
+                ->appendFile('/backend/js/libs/modernizr-2.6.1.min.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/jquery-1.7.2.min.js', 'text/javascript')
+                ->appendFile('/backend/js/plugins.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/codemirror/lib/codemirror.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/codemirror/mode/xml/xml.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/codemirror/mode/javascript/javascript.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/codemirror/mode/css/css.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/codemirror/mode/clike/clike.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/codemirror/mode/php/php.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/jquery.jstree.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/jquery.contextMenu.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/elfinder.min.js', 'text/javascript')
+                ->appendFile('/backend/js/generic-classes.js', 'text/javascript')
+                ->appendFile('/backend/js/gotcms.js', 'text/javascript');
             if($language != 'en')
             {
-                $headscript->appendFile(sprintf('/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript');
+                $headscript->appendFile(sprintf('/backend/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript');
             }
 
             $headlink = $helper_broker->get('HeadLink');
             $headlink
-                ->appendStylesheet('/css/normalize.css')
-                ->appendStylesheet('/js/libs/codemirror/lib/codemirror.css')
-                ->appendStylesheet('/css/jquery-ui-1.8.14.custom.css')
-                ->appendStylesheet('/css/jquery.treeview.css')
-                ->appendStylesheet('/css/elfinder.min.css')
-                ->appendStylesheet('/css/jquery.contextMenu.css')
-                ->appendStylesheet('/css/style.css');
+                ->appendStylesheet('/backend/css/normalize.css')
+                ->appendStylesheet('/backend/js/libs/codemirror/lib/codemirror.css')
+                ->appendStylesheet('/backend/css/jquery-ui-1.8.14.custom.css')
+                ->appendStylesheet('/backend/css/jquery.treeview.css')
+                ->appendStylesheet('/backend/css/elfinder.min.css')
+                ->appendStylesheet('/backend/css/jquery.contextMenu.css')
+                ->appendStylesheet('/backend/css/style.css');
         }
     }
 

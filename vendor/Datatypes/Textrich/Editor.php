@@ -50,8 +50,8 @@ class Editor extends AbstractEditor
      */
     public function load()
     {
-        $this->getHelper('headscript')->appendFile('/js/ckeditor/ckeditor.js', 'text/javascript');
-        $this->getHelper('headscript')->appendFile('/js/ckeditor/ckeditor-adapters-jquery.js', 'text/javascript');
+        $this->getHelper('headscript')->appendFile('/datatypes/Textrich/ckeditor.js', 'text/javascript');
+        $this->getHelper('headscript')->appendFile('/datatypes/Textrich/ckeditor-adapters-jquery.js', 'text/javascript');
 
 
         $parameters = $this->getConfig();

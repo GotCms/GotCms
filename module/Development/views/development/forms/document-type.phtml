@@ -33,7 +33,7 @@
 <?php $datatypes_options = $this->form->get('properties')->get('datatypes')->getValueOptions(); ?>
 
 <form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->form->getAttribute('action'); ?>" method="post">
-    <input id="input-save" type="image" src="/images/save.png" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
+    <input id="input-save" type="image" src="<?php echo $this->basePath('backend/images/save.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
 
     <div class="tabs">
         <ul>

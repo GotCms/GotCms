@@ -1,0 +1,7 @@
+.table-crop-list {width:100%}
+.table-crop-list th {background:#323232;border-right:1px solid #666666;}
+.table-crop-list td {border:1px solid #666666;vertical-align:middle;padding:5px;}
+.table-crop-list .last {border-right:none;text-align:center;vertical-align:middle;}
+
+.image-crop-result {max-height:300px;overflow:auto;display:none;width: 100%;border: 1px solid #323232;}
+.image-crop-display {text-decoration:underline;cursor:pointer;}

@@ -143,16 +143,16 @@ class Editor extends AbstractEditor
     {
         $headscript = $this->getHelper('HeadScript');
         $headscript
-            ->appendFile('/js/jfileupload/load-image.min.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/canvas-to-blob.min.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/jquery.iframe-transport.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/jquery.fileupload.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/jquery.fileupload-fp.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/jquery.fileupload-ui.js', 'text/javascript')
-            ->appendFile('/js/jfileupload/locale.js', 'text/javascript');
+            ->appendFile('/datatypes/jQueryFileUpload/load-image.min.js', 'text/javascript')
+            ->appendFile('/datatypes/jQueryFileUpload/canvas-to-blob.min.js', 'text/javascript')
+            ->appendFile('/datatypes/jQueryFileUpload/jquery.iframe-transport.js', 'text/javascript')
+            ->appendFile('/datatypes/jQueryFileUpload/jquery.fileupload.js', 'text/javascript')
+            ->appendFile('/datatypes/jQueryFileUpload/jquery.fileupload-fp.js', 'text/javascript')
+            ->appendFile('/datatypes/jQueryFileUpload/jquery.fileupload-ui.js', 'text/javascript')
+            ->appendFile('/datatypes/jQueryFileUpload/locale.js', 'text/javascript');
 
         $headlink = $this->getHelper('HeadLink');
-        $headlink->appendStylesheet('/css/jquery.fileupload-ui.css')
-            ->appendStylesheet('/css/jfileupload-bootstrap.css');
+        $headlink->appendStylesheet('/datatypes/jQueryFileUpload/jquery.fileupload-ui.css')
+            ->appendStylesheet('/datatypes/jQueryFileUpload/jfileupload-bootstrap.css');
     }
 }
