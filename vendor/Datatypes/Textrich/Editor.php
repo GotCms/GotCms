@@ -79,7 +79,18 @@ class Editor extends AbstractEditor
                     toolbar: '.$ckeditor->getToolbarAsJs().'
                 };
 
-                $(".'.$id.'").ckeditor(config);
+                $(".'.$id.'").ckeditor(config)
+                .ckeditor(function()
+                {
+                    this.addCommand("saveDocument",
+                    {
+                        exec : function(editor, data)
+                        {
+                            $("#input-save").click();
+                        }
+                    });
+                    this.keystrokeHandler.keystrokes[CKEDITOR.CTRL + 83 /* S */] =  "saveDocument";
+                })
             });
         </script>';
 
