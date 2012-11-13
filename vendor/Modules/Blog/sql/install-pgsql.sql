@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS "blog_comment" CASCADE;
 CREATE TABLE "blog_comment" (
     "id" serial NOT NULL,
+    "created_at" timestamp without time zone NOT NULL,
     "username" character varying(255) NOT NULL,
     "email" character varying(255) NOT NULL,
     "show_email" boolean DEFAULT false,

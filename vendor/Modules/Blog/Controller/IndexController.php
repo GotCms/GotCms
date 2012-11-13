@@ -60,7 +60,7 @@ class IndexController extends AbstractController
         }
 
         $model = new Model\Comment();
-        $comment_list = $model->getList($document_id);
+        $comment_list = $model->getList($document_id, NULL);
 
         if($this->getRequest()->isPost())
         {
@@ -76,6 +76,6 @@ class IndexController extends AbstractController
             return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'document-comment'), array(), TRUE);
         }
 
-        return array('comment_list' => $comment_list->toArray(), 'document' => $document);
+        return array('comment_list' => $comment_list, 'document' => $document);
     }
 }

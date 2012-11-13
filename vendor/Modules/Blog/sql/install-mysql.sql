@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS `blog_comment`;
 CREATE TABLE `blog_comment` (
     `id` INT NOT NULL AUTO_INCREMENT,
+    `created_at` DATETIME NOT NULL,
     `username` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
     `show_email` SMALLINT NOT NULL DEFAULT 0,

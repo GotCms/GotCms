@@ -28,7 +28,8 @@ namespace Modules\Blog\Model;
 
 use Gc\Db\AbstractTable,
     Gc\Document\Model as DocumentModel,
-    Zend\Db\Sql\Select;
+    Zend\Db\Sql\Select,
+    Zend\Db\Sql\Predicate\Expression;
 /**
  * Blog comment table
  */
@@ -46,7 +47,7 @@ class Comment extends AbstractTable
      */
     public function getDocumentList()
     {
-        $all_comments = $this->getList();
+        $all_comments = $this->getList(NULL, NULL);
         $documents = array();
         foreach($all_comments as $key => $comment)
         {
@@ -63,17 +64,24 @@ class Comment extends AbstractTable
     /**
      * Return all comments in document
      * @param integer $document_id
-     * @return mixte
+     * @return array
      */
-    public function getList($document_id = NULL)
+    public function getList($document_id = NULL, $is_active = TRUE)
     {
-        return $this->select(function(Select $select) use ($document_id)
+        return $this->select(function(Select $select) use ($document_id, $is_active)
         {
             if(!empty($document_id))
             {
                 $select->where->equalTo('document_id', $document_id);
             }
-        });
+
+            if(!is_null($is_active))
+            {
+                $select->where->equalTo('is_active', $is_active);
+            }
+
+            $select->order('created_at ASC');
+        })->toArray();
     }
 
     /**
@@ -84,9 +92,9 @@ class Comment extends AbstractTable
      */
     public function add(array $data, $document_id)
     {
-        $available_key = array('message', 'username', 'email');
+        $mandatory_keys = array('message', 'username', 'email');
         $insert_data = array();
-        foreach($available_key as $key)
+        foreach($mandatory_keys as $key)
         {
             if(empty($data[$key]))
             {
@@ -100,6 +108,7 @@ class Comment extends AbstractTable
 
         $insert_data['show_email'] = empty($data['show_email']) ? 0 : 1;
         $insert_data['document_id'] = $document_id;
+        $insert_data['created_at'] = new Expression('NOW()');
         $this->insert($insert_data);
 
         return TRUE;
