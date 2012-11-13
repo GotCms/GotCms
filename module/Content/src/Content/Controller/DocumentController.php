@@ -153,7 +153,7 @@ class DocumentController extends Action
         $document = DocumentModel::fromId($this->getRouteMatch()->getParam('id', ''));
         if(empty($document))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Document does not exists !');
+            return $this->_returnJson(array('success' => FALSE, 'message' => 'Document does not exists!'));
         }
         else
         {
@@ -161,11 +161,7 @@ class DocumentController extends Action
             {
                 if($document->delete())
                 {
-                    $this->flashMessenger()->setNameSpace('success')->addMessage('This document was succefully delete');
-                }
-                else
-                {
-                    $this->flashMessenger()->setNameSpace('error')->addMessage('There were problems during the removal of this document');
+                    return $this->_returnJson(array('success' => TRUE, 'message' => 'This document was succefully delete'));
                 }
             }
             catch(\Exception $e)
@@ -174,7 +170,7 @@ class DocumentController extends Action
             }
         }
 
-        return $this->redirect()->toRoute('content');
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'There were problems during the removal of this document'));
     }
 
     /**

@@ -420,18 +420,16 @@ class DocumentTypeController extends Action
      */
     public function deleteAction()
     {
-        $document_type_id = $this->getRouteMatch()->getParam('id', NULL);
-        $document_type = DocumentType\Model::fromId($document_type_id);
-        if(empty($document_type_id) or empty($document_type) or !$document_type->delete())
+        $document_type = DocumentType\Model::fromId($this->getRouteMatch()->getParam('id', NULL));
+        if(!empty($document_type))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not delete this document type');
-        }
-        else
-        {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This document type has been deleted');
+            if($document_type->delete())
+            {
+                return $this->_returnJson(array('success' => TRUE, 'message' => 'This document type has been deleted!'));
+            }
         }
 
-        return $this->redirect()->toRoute('documentTypeList');
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Can not delete this document type'));
     }
 
     /**

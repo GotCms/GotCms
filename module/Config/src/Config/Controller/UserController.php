@@ -154,14 +154,16 @@ class UserController extends Action
      */
     public function deleteAction()
     {
-        $user_id = $this->getRouteMatch()->getParam('id');
-        if(!empty($user_id))
+        $user = User\Model::fromId($this->getRouteMatch()->getParam('id'));
+        if(empty($user))
         {
-            User\Model::fromId($user_id)->delete();
-            $this->flashMessenger()->setNamespace('success')->addMessage('User deleted!');
+            if($user->delete())
+            {
+                return $this->_returnJson(array('success' => TRUE, 'message' => 'User deleted!'));
+            }
         }
 
-        return $this->redirect()->toRoute('userList');
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'User does not exists!'));
     }
 
     /**

@@ -161,19 +161,16 @@ class DatatypeController extends Action
      */
     public function deleteAction()
     {
-        $datatype_id = $this->getRouteMatch()->getParam('id', NULL);
-        $datatype = Datatype\Model::fromId($datatype_id);
-        if(empty($datatype))
+        $datatype = Datatype\Model::fromId($this->getRouteMatch()->getParam('id', NULL));
+        if(!empty($datatype))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not delete this view');
-        }
-        else
-        {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This view has been deleted');
-            $datatype->delete();
+            if($datatype->delete())
+            {
+                return $this->_returnJson(array('success' => TRUE, 'message' => 'This datatype has been deleted!'));
+            }
         }
 
-        return $this->redirect()->toRoute('datatypeList');
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Datatype does not exists!'));
     }
 }
 

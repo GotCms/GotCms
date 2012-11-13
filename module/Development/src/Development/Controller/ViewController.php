@@ -134,19 +134,16 @@ class ViewController extends Action
      */
     public function deleteAction()
     {
-        $view_id = $this->getRouteMatch()->getParam('id', NULL);
-        $view = View\Model::fromId($view_id);
-        if(empty($view_id) or empty($view))
+        $view = View\Model::fromId($this->getRouteMatch()->getParam('id', NULL));
+        if(!empty($view))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not delete this view');
-        }
-        else
-        {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This view has been deleted');
-            $view->delete();
+            if($view->delete())
+            {
+                return $this->_returnJson(array('success' => TRUE, 'message' => 'This view has been deleted!'));
+            }
         }
 
-        return $this->redirect()->toRoute('viewList');
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Can not delete this view'));
     }
 
     /**

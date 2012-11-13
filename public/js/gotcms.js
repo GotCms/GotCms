@@ -494,7 +494,7 @@ var Gc = (function($)
                             break;
 
                             case 'delete':
-                                $this.showDialogConfirm($url);
+                                $this.showDialogConfirm($url, $element.parent());
                                 return true;
                             break;
 
@@ -535,12 +535,19 @@ var Gc = (function($)
             });
         },
 
-        showDialogConfirm: function($url)
+        showDialogConfirm: function($url, $element_to_remove)
         {
             var $buttons = {};
             $buttons[Translator.translate('Confirm')] = function()
             {
-                document.location.href = $url;
+                $.get($url, function(data)
+                {
+                    if(data.success == true)
+                    {
+                        $element_to_remove.remove();
+                    }
+                });
+
                 $(this).dialog('close');
 
                 return true;
@@ -820,7 +827,7 @@ var Gc = (function($)
 
             $('.delete-line').on('click', function()
             {
-                $this.showDialogConfirm($(this).attr('href'));
+                $this.showDialogConfirm($(this).attr('href'), $(this).parent().parent());
                 return false;
             })
         },

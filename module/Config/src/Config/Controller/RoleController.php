@@ -88,18 +88,16 @@ class RoleController extends Action
      */
     public function deleteAction()
     {
-        $role_id = $this->getRouteMatch()->getParam('id');
-        if(empty($role_id))
+        $role = Role\Model::fromId($this->getRouteMatch()->getParam('id'));
+        if(empty($role))
         {
-            $this->flashMessenger()->setNamespace('error')->addMessage('Role does not exists!');
-        }
-        else
-        {
-            Role\Model::fromId($role_id)->delete();
-            $this->flashMessenger()->setNamespace('success')->addMessage('Role deleted!');
+            if($role->delete())
+            {
+                return $this->_returnJson(array('success' => TRUE, 'message' => 'Role deleted!'));
+            }
         }
 
-        return $this->redirect()->toRoute('userRole');
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Role does not exists!'));
     }
 
     /**

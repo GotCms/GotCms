@@ -134,19 +134,16 @@ class ScriptController extends Action
      */
     public function deleteAction()
     {
-        $script_id = $this->getRouteMatch()->getParam('id', NULL);
-        $script = Script\Model::fromId($script_id);
-        if(empty($script_id) or empty($script))
+        $script = Script\Model::fromId($this->getRouteMatch()->getParam('id', NULL));
+        if(!empty($script))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not delete this script');
-        }
-        else
-        {
-            $this->flashMessenger()->setNameSpace('success')->addMessage('This script has been deleted');
-            $script->delete();
+            if($script->delete())
+            {
+                return $this->_returnJson(array('success' => TRUE, 'message' => 'This script has been deleted!'));
+            }
         }
 
-        return $this->redirect()->toRoute('scriptList');
+        return $this->_returnJson(array('success' => FALSE, 'message' => 'Can not delete this script'));
     }
 
     /**
