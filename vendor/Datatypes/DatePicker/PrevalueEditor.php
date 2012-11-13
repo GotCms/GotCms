@@ -37,21 +37,15 @@ class PrevalueEditor extends AbstractPrevalueEditor
      * Save Date Picker prevalue editor
      * @return void
      */
-    public function save() {
-        //Save prevalue in column Datatypes\prevalue_value
-
-        $this->setConfiguration(array());
-
-        return $this->getConfig();
+    public function save()
+    {
     }
 
     /**
      * Load Date Picker prevalue editor
      * @return void
      */
-    public function load() {
-        $configuration = $this->getConfig();
-
-        return array($required, $length);
+    public function load()
+    {
     }
 }

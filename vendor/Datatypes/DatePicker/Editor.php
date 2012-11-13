@@ -26,7 +26,8 @@
 
 namespace Datatypes\DatePicker;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Gc\Datatype\AbstractDatatype\AbstractEditor,
+    Zend\Form\Element;
 
 /**
  * Editor for Date Picker datatype
@@ -37,7 +38,8 @@ class Editor extends AbstractEditor
      * Save datepicker editor
      * @return void
      */
-    public function save() {
+    public function save()
+    {
         //sauvegarde des informations
     }
 
@@ -45,8 +47,31 @@ class Editor extends AbstractEditor
      * Load datepicker editor
      * @return mixte
      */
-    public function load() {
-        //Chargement graphique
+    public function load()
+    {
+        $this->getHelper('headscript')->appendFile('/datatypes/DatePicker/jquery-ui-timepicker-addon.js', 'text/javascript');
+        $this->getHelper('headscript')->appendFile('/datatypes/DatePicker/jquery-ui-sliderAccess.js', 'text/javascript');
+        $id = 'datepicker'.$this->_property->getId();
+        $datepicker = new Element\Text($this->getName());
+        $datepicker->setAttribute('label', $this->getProperty()->getName())
+            ->setAttribute('id', $id);
+
+        $script = '<script type="text/javascript">
+            $(function()
+            {
+                $("#' . $id . '").datetimepicker({
+                    showOn: "button",
+                    addSliderAccess: true,
+                    sliderAccessArgs: { touchonly: false },
+                    buttonImage: "/datatypes/DatePicker/calendar.gif",
+                    buttonImageOnly: true,
+                    timeFormat: "hh:mm:ss",
+                    dateFormat: "yy/mm/dd"
+                });
+            });
+        </script>';
+
+        return array($datepicker, $script);
     }
 }
 
