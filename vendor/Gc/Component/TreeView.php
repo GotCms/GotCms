@@ -85,7 +85,13 @@ class TreeView
 
             $html .= $rel . '>' . $ins;
             $id = $iterator->getId();
-            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '') . 'href="'.$iterator->getEditUrl().'">';
+            $is_published = NULL;
+            if(method_exists($iterator, 'isPublished'))
+            {
+                $is_published = $iterator->isPublished();
+            }
+
+            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '') . 'href="'.$iterator->getEditUrl().'"' . ($is_published === FALSE ? ' class="not-published"' : '') . '>';
 
             if($iterator->getIcon() == 'folder')
             {

@@ -137,6 +137,7 @@ footer a:hover {text-decoration:underline;}
 #menu a:hover {color:#000000; text-decoration:underline;}
 #menu h2 {background-image:url(../images/h2.png);background-repeat:repeat-x;width:270px;height:25px;color:#FFFFFF;font-size:11px;text-align:center;padding-top:5px;}
 #menu ul li {list-style-image:url(../images/liststyle.png);background-image:url(../images/separateur2.png);background-position:bottom;background-repeat:no-repeat;margin-left:-20px;padding-bottom:7px;padding-top:7px;}
+#menu .not-published {opacity:0.6}
 #menu #browser li {margin-left: 18px;padding:0;background-position:0 -1766px;list-style: none}
 .textarea {margin:0 0 10px 0;border:1px solid #CCCCCC;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;-webkit-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;}
 .input-text{margin:5px 0;width:280px;border:1px solid #CCCCCC;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;-webkit-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;height:25px;}
