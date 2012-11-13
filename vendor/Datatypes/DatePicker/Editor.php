@@ -40,7 +40,7 @@ class Editor extends AbstractEditor
      */
     public function save()
     {
-        //sauvegarde des informations
+        $this->setValue($this->getRequest()->getPost()->get($this->getName()));
     }
 
     /**
@@ -54,6 +54,7 @@ class Editor extends AbstractEditor
         $id = 'datepicker'.$this->_property->getId();
         $datepicker = new Element\Text($this->getName());
         $datepicker->setAttribute('label', $this->getProperty()->getName())
+            ->setValue($this->getValue())
             ->setAttribute('id', $id);
 
         $script = '<script type="text/javascript">
