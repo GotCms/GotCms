@@ -155,7 +155,7 @@ abstract class AbstractForm extends Form
                 $rand_id = mt_rand();
                 $elements = preg_replace('~name="(.+)(\[.*\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
                 $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $rand_id . '"', $elements);
-                $elements = preg_replace('~(?:(?!value=))*("|\')#(.+)("|\')~iU', '${1}#${2}' . $rand_id . '${3}', $elements);
+                $elements = preg_replace('~(?:(?!(?<=value=)))("|\')#(.+)("|\')~iU', '${1}#${2}' . $rand_id . '${3}', $elements);
             }
 
             $hidden_element = new Element('hidden'.uniqid());
