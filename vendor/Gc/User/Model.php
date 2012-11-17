@@ -255,4 +255,13 @@ class Model extends AbstractTable
 
         return TRUE;
     }
+
+    /**
+     * Return user name
+     * @return string
+     */
+     public function getName()
+     {
+         return $this->getFirstname() . ' ' . $this->getLastname();
+     }
 }

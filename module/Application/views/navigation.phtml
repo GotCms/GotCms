@@ -72,8 +72,7 @@ if(!empty($this->adminUser))
 <?php if(!empty($this->adminUser)): ?>
     <div id="connexion" class="part">
         <ul>
-            <li><?php echo $this->escapeHtml(sprintf($this->translate('Welcome %s'), $this->adminUser->getName())); ?> - <a href="#">MP (0/6)</a></li>
-            <li><a href="#">Voir les derniers signalements</a></li>
+            <li><?php echo $this->escapeHtml(sprintf($this->translate('Welcome %s'), $this->adminUser->getName())); ?></li>
             <li><a href="<?php echo $this->url('userLogout'); ?>">[ <?php echo $this->escapeHtml($this->translate('Disconnect')); ?> ]</a></li>
         </ul>
     </div>
