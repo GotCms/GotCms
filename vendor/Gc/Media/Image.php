@@ -340,7 +340,7 @@ class Image
      * @param integer image quality
      * @return boolean
      */
-    public function save($save_path, $image_quality = 100)
+    public function save($save_path, $image_quality = 90)
     {
         if(empty($this->_image) or empty($this->_imageResized))
         {
