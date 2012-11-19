@@ -45,14 +45,14 @@
     echo $this->HeadLink();
     ?>
 </head>
-<body>
+<body<?php if(!empty($this->module)): ?> id="module-<?php echo $this->escapeHtml($this->module); ?>"<?php endif; ?>>
     <header class="gradient-black">
         <?php echo $this->partial('navigation.phtml', array('active' => $this->module, 'adminUser' => $this->adminUser)); ?>
     </header>
 
     <div id="main">
 
-        <?php if($this->module !== NULL): ?>
+        <?php if(!empty($this->module)): ?>
             <div id="menu">
                 <?php echo $this->partial($this->module . '-menu.phtml', array('treeview' => $this->treeview, 'moduleMenu' => $this->moduleMenu)); ?>
             </div>

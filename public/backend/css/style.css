@@ -110,8 +110,8 @@ img {border:0}
 .gradient-black {background: #656565;-o-background-size: 100% 100%;-moz-background-size: 100% 100%;-webkit-background-size: 100% 100%;background-size: 100% 100%;background: -webkit-gradient(linear,left top, left bottom,from(#656565),to(#000000));background: -webkit-linear-gradient(top,#656565,#000000);background: -moz-linear-gradient(top,#656565,#000000);background: -o-linear-gradient(top,#656565,#000000);background: linear-gradient(top,#656565,#000000);}
 
 header {height:80px;position:fixed;top:0;right:0;left:0;z-index: 999;}
-header .part {width:206px;height:60px;color:#FFFFFF;display: inline-block;margin: 10px 5px 10px 0;border:1px solid transparent;}
-header .part.active, header .part:hover {border-radius: 5px 5px 5px 5px;background:-moz-linear-gradient(center top , #666666 0%, #000000 100%) repeat scroll 0 0 transparent;border: 1px solid #999;padding: 0;}
+header .part {width:auto;height:60px;color:#FFFFFF;display: inline-block;margin: 10px 5px 10px 0;border:1px solid transparent;padding: 0 20px 0 10px;}
+header .part.active, header .part:hover {border-radius: 5px 5px 5px 5px;background:-moz-linear-gradient(center top , #666666 0%, #000000 100%) repeat scroll 0 0 transparent;border: 1px solid #999;}
 header .part p {display: inline-block;line-height: 15px;margin-left: 10px;margin-top: 17px;}
 header .part a {color:#FFFFFF; text-decoration:none;display: block;height: 60px;line-height:60px;}
 header .part a:hover {color:#FFFFFF; text-decoration:none;}
@@ -128,7 +128,8 @@ footer a:hover {text-decoration:underline;}
 
 #main {margin-top:80px;background-image:url(../images/corpshaut.png);background-repeat:repeat-x;background-color:#FFFFFF;padding: 5px 10px;}
 
-#content {float:left;width: 83%;}
+#admin #module-content {width:100%;}
+#content {margin-left:320px;overflow:hidden;}
 #content h2 {background-image:url(../images/h2txt.png);background-repeat:no-repeat;width:auto;height:20px;color:#FFFFFF;font-size:11px;padding-top:5px;padding-left:10px;margin:10px 0 0}
 #content article p {margin:5px 0;}
 
@@ -195,7 +196,7 @@ footer a:hover {text-decoration:underline;}
 .dashboard {border-color: #DFDFDF;}
 .dashboard p {color: #777777;}
 .dashboard h3 {text-shadow: 1px 1px 1px #FFFFFF;}
-.widget-column {width:49%;padding: 5px;min-height:50px;}
+.widget-column {width:48%;padding: 5px;min-height:50px;}
 .widget-box {background-color: #F5F5F5;background-image: -moz-linear-gradient(center top , #F9F9F9, #F5F5F5);border-color: #C2C2C2;border-radius: 3px 3px 3px 3px;min-width: 255px;position: relative;border-style: solid;border-width: 1px;line-height: 1;margin-bottom: 20px;padding: 0;}
 .widget-box h3 {color: #FFFFFF;border-bottom-color: #DFDFDF;text-shadow: 0 1px 0 #FFFFFF;background-color: #F1F1F1;background-image: -moz-linear-gradient(center top , #656565, #000000);}
 .widget-box .inside {font-size: 12px;}
