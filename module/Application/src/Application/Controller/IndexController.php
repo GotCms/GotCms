@@ -62,7 +62,7 @@ class IndexController extends Action
         {
             $session->visitor_id = $visitor->getVisitorId($session_id);
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
             //don't care
         }
