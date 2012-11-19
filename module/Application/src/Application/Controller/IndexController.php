@@ -62,9 +62,8 @@ class IndexController extends Action
         {
             $session->visitor_id = $visitor->getVisitorId($session_id);
         }
-        catch(\Zend\Db\Exception\ErrorException $e)
+        catch(Exception $e)
         {
-            die('here');
             //don't care
         }
 
