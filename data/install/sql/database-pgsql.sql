@@ -236,8 +236,8 @@ CREATE TABLE "log_visitor" (
 "http_user_agent" character varying,
 "http_accept_charset" character varying,
 "http_accept_language" character varying,
-"server_addr" integer,
-"remote_addr" integer
+"server_addr" bigint,
+"remote_addr" bigint
 ) WITH OIDS;
 ALTER TABLE "log_visitor" ADD CONSTRAINT "log_visitor_pk" PRIMARY KEY("id");
 
