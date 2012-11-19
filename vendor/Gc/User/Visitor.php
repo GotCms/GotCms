@@ -91,6 +91,8 @@ class Visitor extends AbstractTable
         }
 
         $validator = new ValidateIp();
+        $server_addr = '255.255.255.255';
+        $remote_addr = '255.255.255.255';
         $server_addr = $validator->isValid($server_addr, 'ip') ? ip2long($server_addr) : NULL;
         $remote_addr = $validator->isValid($remote_addr, 'ip') ? ip2long($remote_addr) : NULL;
 

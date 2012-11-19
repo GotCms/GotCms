@@ -128,10 +128,11 @@ footer a:hover {text-decoration:underline;}
 
 #main {margin-top:80px;background-image:url(../images/corpshaut.png);background-repeat:repeat-x;background-color:#FFFFFF;padding: 5px 10px;}
 
-#admin #module-content {width:100%;}
+#module-admin #content, #module-statistics #content {width:100%;margin:0;}
 #content {margin-left:320px;overflow:hidden;}
 #content h2 {background-image:url(../images/h2txt.png);background-repeat:no-repeat;width:auto;height:20px;color:#FFFFFF;font-size:11px;padding-top:5px;padding-left:10px;margin:10px 0 0}
 #content article p {margin:5px 0;}
+#module-statistics #content .floatL, #module-statistics #content .floatR {margin:0 50px;}
 
 #menu {width:300px;float:left;margin: 0 10px 0 5px;}
 #menu a {color:#000000; text-decoration:none;}
