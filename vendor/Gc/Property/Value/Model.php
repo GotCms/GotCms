@@ -112,7 +112,7 @@ class Model extends AbstractTable
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
         $array_save = array(
-            'value' => $this->getValue(),
+            'value' => ($this->getDriverName() == 'pdo_pgsql') ? pg_escape_bytea($this->getValue()) : $this->getValue(),
             'document_id' => $this->getDocumentId(),
             'property_id' => $this->getPropertyId(),
         );
