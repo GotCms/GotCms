@@ -65,6 +65,11 @@ class Input implements InputInterface
      */
     protected $value;
 
+    /**
+     * @var mixed
+     */
+    protected $fallbackValue;
+
     public function __construct($name = null)
     {
         $this->name = $name;
@@ -96,8 +101,7 @@ class Input implements InputInterface
      */
     public function setErrorMessage($errorMessage)
     {
-        $errorMessage = (null === $errorMessage) ? null : (string) $errorMessage;
-        $this->errorMessage = $errorMessage;
+        $this->errorMessage = (null === $errorMessage) ? null : (string) $errorMessage;
         return $this;
     }
 
@@ -148,6 +152,16 @@ class Input implements InputInterface
     public function setValue($value)
     {
         $this->value = $value;
+        return $this;
+    }
+
+    /**
+     * @param  mixed $value
+     * @return Input
+     */
+    public function setFallbackValue($value)
+    {
+        $this->fallbackValue = $value;
         return $this;
     }
 
@@ -231,6 +245,14 @@ class Input implements InputInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getFallbackValue()
+    {
+        return $this->fallbackValue;
+    }
+
+    /**
      * @param  InputInterface $input
      * @return Input
      */
@@ -241,7 +263,7 @@ class Input implements InputInterface
         $this->setErrorMessage($input->getErrorMessage());
         $this->setName($input->getName());
         $this->setRequired($input->isRequired());
-        $this->setValue($input->getValue());
+        $this->setValue($input->getRawValue());
 
         $filterChain = $input->getFilterChain();
         $this->getFilterChain()->merge($filterChain);
@@ -260,7 +282,13 @@ class Input implements InputInterface
         $this->injectNotEmptyValidator();
         $validator = $this->getValidatorChain();
         $value     = $this->getValue();
-        return $validator->isValid($value, $context);
+        $result    = $validator->isValid($value, $context);
+        if (!$result && $fallbackValue = $this->getFallbackValue()) {
+            $this->setValue($fallbackValue);
+            $result = true;
+        }
+
+        return $result;
     }
 
     /**
@@ -270,6 +298,10 @@ class Input implements InputInterface
     {
         if (null !== $this->errorMessage) {
             return (array) $this->errorMessage;
+        }
+
+        if ($this->getFallbackValue()) {
+            return array();
         }
 
         $validator = $this->getValidatorChain();

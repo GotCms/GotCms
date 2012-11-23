@@ -12,12 +12,10 @@ namespace Zend\Paginator;
 
 use ArrayIterator;
 use Countable;
-use Iterator;
 use IteratorAggregate;
 use Traversable;
 use Zend\Cache\Storage\IteratorInterface as CacheIterator;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
-use Zend\Db\Sql;
 use Zend\Db\ResultSet\AbstractResultSet;
 use Zend\Filter\FilterInterface;
 use Zend\Json\Json;
@@ -174,18 +172,18 @@ class Paginator implements Countable, IteratorAggregate
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable');
         }
 
-        self::$config = $config;
+        static::$config = $config;
 
         if (isset($config['scrolling_style_plugins'])
             && null !== ($adapters = $config['scrolling_style_plugins'])
         ) {
-            self::setScrollingStylePluginManager($adapters);
+            static::setScrollingStylePluginManager($adapters);
         }
 
         $scrollingStyle = isset($config['scrolling_style']) ? $config['scrolling_style'] : null;
 
         if ($scrollingStyle != null) {
-            self::setDefaultScrollingStyle($scrollingStyle);
+            static::setDefaultScrollingStyle($scrollingStyle);
         }
     }
 
@@ -196,7 +194,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public static function getDefaultScrollingStyle()
     {
-        return self::$defaultScrollingStyle;
+        return static::$defaultScrollingStyle;
     }
 
     /**
@@ -206,7 +204,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public static function getDefaultItemCountPerPage()
     {
-        return self::$defaultItemCountPerPage;
+        return static::$defaultItemCountPerPage;
     }
 
     /**
@@ -216,7 +214,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public static function setDefaultItemCountPerPage($count)
     {
-        self::$defaultItemCountPerPage = (int) $count;
+        static::$defaultItemCountPerPage = (int) $count;
     }
 
     /**
@@ -226,7 +224,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public static function setCache(CacheStorage $cache)
     {
-        self::$cache = $cache;
+        static::$cache = $cache;
     }
 
     /**
@@ -236,7 +234,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public static function setDefaultScrollingStyle($scrollingStyle = 'Sliding')
     {
-        self::$defaultScrollingStyle = $scrollingStyle;
+        static::$defaultScrollingStyle = $scrollingStyle;
     }
 
     public static function setScrollingStylePluginManager($scrollingAdapters)
@@ -256,7 +254,7 @@ class Paginator implements Countable, IteratorAggregate
                 (is_object($scrollingAdapters) ? get_class($scrollingAdapters) : gettype($scrollingAdapters))
             ));
         }
-        self::$scrollingStyles = $scrollingAdapters;
+        static::$scrollingStyles = $scrollingAdapters;
     }
 
     /**
@@ -267,11 +265,11 @@ class Paginator implements Countable, IteratorAggregate
      */
     public static function getScrollingStylePluginManager()
     {
-        if (self::$scrollingStyles === null) {
-            self::$scrollingStyles = new ScrollingStylePluginManager();
+        if (static::$scrollingStyles === null) {
+            static::$scrollingStyles = new ScrollingStylePluginManager();
         }
 
-        return self::$scrollingStyles;
+        return static::$scrollingStyles;
     }
 
     /**
@@ -293,7 +291,7 @@ class Paginator implements Countable, IteratorAggregate
             );
         }
 
-        $config = self::$config;
+        $config = static::$config;
 
         if (!empty($config)) {
             $setupMethods = array('ItemCountPerPage', 'PageRange');
@@ -335,7 +333,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     public function setCacheEnabled($enable)
     {
-        $this->cacheEnabled = (bool)$enable;
+        $this->cacheEnabled = (bool) $enable;
         return $this;
     }
 
@@ -377,19 +375,19 @@ class Paginator implements Countable, IteratorAggregate
 
         if (null === $pageNumber) {
             $prefixLength  = strlen(self::CACHE_TAG_PREFIX);
-            $cacheIterator = self::$cache->getIterator();
+            $cacheIterator = static::$cache->getIterator();
             $cacheIterator->setMode(CacheIterator::CURRENT_AS_KEY);
             foreach ($cacheIterator as $key) {
-                $tags = self::$cache->getTags($key);
+                $tags = static::$cache->getTags($key);
                 if ($tags && in_array($this->_getCacheInternalId(), $tags)) {
                     if (substr($key, 0, $prefixLength) == self::CACHE_TAG_PREFIX) {
-                        self::$cache->removeItem($this->_getCacheId((int)substr($key, $prefixLength)));
+                        static::$cache->removeItem($this->_getCacheId((int)substr($key, $prefixLength)));
                     }
                 }
             }
         } else {
             $cleanId = $this->_getCacheId($pageNumber);
-            self::$cache->removeItem($cleanId);
+            static::$cache->removeItem($cleanId);
         }
         return $this;
     }
@@ -546,7 +544,7 @@ class Paginator implements Countable, IteratorAggregate
     public function getItemCountPerPage()
     {
         if (empty($this->itemCountPerPage)) {
-            $this->itemCountPerPage = self::getDefaultItemCountPerPage();
+            $this->itemCountPerPage = static::getDefaultItemCountPerPage();
         }
 
         return $this->itemCountPerPage;
@@ -601,7 +599,7 @@ class Paginator implements Countable, IteratorAggregate
         $pageNumber = $this->normalizePageNumber($pageNumber);
 
         if ($this->cacheEnabled()) {
-            $data = self::$cache->getItem($this->_getCacheId($pageNumber));
+            $data = static::$cache->getItem($this->_getCacheId($pageNumber));
             if ($data) {
                 return $data;
             }
@@ -623,8 +621,8 @@ class Paginator implements Countable, IteratorAggregate
 
         if ($this->cacheEnabled()) {
             $cacheId = $this->_getCacheId($pageNumber);
-            self::$cache->setItem($cacheId, $items);
-            self::$cache->setTags($cacheId, array($this->_getCacheInternalId()));
+            static::$cache->setItem($cacheId, $items);
+            static::$cache->setTags($cacheId, array($this->_getCacheInternalId()));
         }
 
         return $items;
@@ -714,13 +712,13 @@ class Paginator implements Countable, IteratorAggregate
         $data = array();
         if ($this->cacheEnabled()) {
             $prefixLength  = strlen(self::CACHE_TAG_PREFIX);
-            $cacheIterator = self::$cache->getIterator();
+            $cacheIterator = static::$cache->getIterator();
             $cacheIterator->setMode(CacheIterator::CURRENT_AS_VALUE);
             foreach ($cacheIterator as $key => $value) {
-                $tags = self::$cache->getTags($key);
+                $tags = static::$cache->getTags($key);
                 if ($tags && in_array($this->_getCacheInternalId(), $tags)) {
                     if (substr($key, 0, $prefixLength) == self::CACHE_TAG_PREFIX) {
-                        $data[(int)substr($key, $prefixLength)] = $value;
+                        $data[(int) substr($key, $prefixLength)] = $value;
                     }
                 }
             }
@@ -841,7 +839,7 @@ class Paginator implements Countable, IteratorAggregate
      */
     protected function cacheEnabled()
     {
-        return ((self::$cache !== null) && $this->cacheEnabled);
+        return ((static::$cache !== null) && $this->cacheEnabled);
     }
 
     /**
@@ -943,7 +941,7 @@ class Paginator implements Countable, IteratorAggregate
     protected function _loadScrollingStyle($scrollingStyle = null)
     {
         if ($scrollingStyle === null) {
-            $scrollingStyle = self::$defaultScrollingStyle;
+            $scrollingStyle = static::$defaultScrollingStyle;
         }
 
         switch (strtolower(gettype($scrollingStyle))) {
@@ -957,7 +955,7 @@ class Paginator implements Countable, IteratorAggregate
                 return $scrollingStyle;
 
             case 'string':
-                return self::getScrollingStylePluginManager()->get($scrollingStyle);
+                return static::getScrollingStylePluginManager()->get($scrollingStyle);
 
             case 'null':
                 // Fall through to default case

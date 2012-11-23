@@ -76,9 +76,9 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
         }
 
         $params = array();
-        foreach ((array)$flags as $flag) {
-            if (isset(self::$searchFlags[$flag])) {
-                $params[] = self::$searchFlags[$flag];
+        foreach ((array) $flags as $flag) {
+            if (isset(static::$searchFlags[$flag])) {
+                $params[] = static::$searchFlags[$flag];
             } else {
                 $params[] = 'KEYWORD';
                 $params[] = $this->protocol->escapeString($flag);
@@ -116,7 +116,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
 
         $flags = array();
         foreach ($data['FLAGS'] as $flag) {
-            $flags[] = isset(self::$knownFlags[$flag]) ? self::$knownFlags[$flag] : $flag;
+            $flags[] = isset(static::$knownFlags[$flag]) ? static::$knownFlags[$flag] : $flag;
         }
 
         return new $this->messageClass(array('handler' => $this, 'id' => $id, 'headers' => $header, 'flags' => $flags));
@@ -181,7 +181,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
     public function __construct($params)
     {
         if (is_array($params)) {
-            $params = (object)$params;
+            $params = (object) $params;
         }
 
         $this->has['flags'] = true;
@@ -307,7 +307,7 @@ class Imap extends AbstractStorage implements Folder\FolderInterface, Writable\W
      */
     public function getFolders($rootFolder = null)
     {
-        $folders = $this->protocol->listMailbox((string)$rootFolder);
+        $folders = $this->protocol->listMailbox((string) $rootFolder);
         if (!$folders) {
             throw new Exception\InvalidArgumentException('folder not found');
         }

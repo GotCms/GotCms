@@ -134,16 +134,17 @@ class ClassMapAutoloader implements SplAutoloader
     }
 
     /**
-     * Defined by Autoloadable
-     *
-     * @param  string $class
-     * @return void
+     * {@inheritDoc}
      */
     public function autoload($class)
     {
         if (isset($this->map[$class])) {
             require_once $this->map[$class];
+
+            return $class;
         }
+
+        return false;
     }
 
     /**
@@ -195,7 +196,7 @@ class ClassMapAutoloader implements SplAutoloader
      * Resolve the real_path() to a file within a phar.
      *
      * @see https://bugs.php.net/bug.php?id=52769
-     * @param string $path
+     * @param  string $path
      * @return string
      */
     public static function realPharPath($path)

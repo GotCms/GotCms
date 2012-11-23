@@ -15,7 +15,9 @@ use Traversable;
 
 require_once __DIR__ . '/SplAutoloader.php';
 
-if (class_exists('Zend\Loader\AutoloaderFactory')) return;
+if (class_exists('Zend\Loader\AutoloaderFactory')) {
+    return;
+}
 
 /**
  * @category   Zend
@@ -82,7 +84,7 @@ abstract class AutoloaderFactory
             );
         }
 
-        foreach ($options as $class => $options) {
+        foreach ($options as $class => $autoloaderOptions) {
             if (!isset(static::$loaders[$class])) {
                 $autoloader = static::getStandardAutoloader();
                 if (!class_exists($class) && !$autoloader->autoload($class)) {
@@ -92,7 +94,7 @@ abstract class AutoloaderFactory
                     );
                 }
 
-                if (!self::isSubclassOf($class, 'Zend\Loader\SplAutoloader')) {
+                if (!static::isSubclassOf($class, 'Zend\Loader\SplAutoloader')) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
                         sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
@@ -100,14 +102,14 @@ abstract class AutoloaderFactory
                 }
 
                 if ($class === static::STANDARD_AUTOLOADER) {
-                    $autoloader->setOptions($options);
+                    $autoloader->setOptions($autoloaderOptions);
                 } else {
-                    $autoloader = new $class($options);
+                    $autoloader = new $class($autoloaderOptions);
                 }
                 $autoloader->register();
                 static::$loaders[$class] = $autoloader;
             } else {
-                static::$loaders[$class]->setOptions($options);
+                static::$loaders[$class]->setOptions($autoloaderOptions);
             }
         }
     }
@@ -127,7 +129,7 @@ abstract class AutoloaderFactory
     /**
      * Retrieves an autoloader by class name
      *
-     * @param string $class
+     * @param  string $class
      * @return SplAutoloader
      * @throws Exception\InvalidArgumentException for non-registered class
      */
@@ -204,8 +206,8 @@ abstract class AutoloaderFactory
      * @see https://bugs.php.net/bug.php?id=53727
      * @see https://github.com/zendframework/zf2/pull/1807
      *
-     * @param string $className
-     * @param string $type
+     * @param  string $className
+     * @param  string $type
      * @return bool
      */
     protected static function isSubclassOf($className, $type)

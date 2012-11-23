@@ -150,15 +150,11 @@ class Collection extends AbstractTable
             $this->delete();
 
             $insert = new Insert();
-            $insert->into('document_type_view')
-            ->columns(array(
-                'document_type_id',
-                'view_id',
-            ));
+            $insert->into('document_type_view');
 
             foreach($this->getElements() as $view)
             {
-                $insert->values(array($this->getDocumentTypeId(), $view->getId()));
+                $insert->values(array('document_type_id' => $this->getDocumentTypeId(), 'view_id' => $view->getId()));
                 $this->execute($insert);
             }
 

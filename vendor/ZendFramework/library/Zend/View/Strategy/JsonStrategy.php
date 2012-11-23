@@ -13,7 +13,6 @@ namespace Zend\View\Strategy;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Http\Request as HttpRequest;
-use Zend\Http\Response as HttpResponse;
 use Zend\View\Model;
 use Zend\View\Renderer\JsonRenderer;
 use Zend\View\ViewEvent;
@@ -84,40 +83,13 @@ class JsonStrategy implements ListenerAggregateInterface
     {
         $model = $e->getModel();
 
-        if ($model instanceof Model\JsonModel) {
-            // JsonModel found
-            return $this->renderer;
-        }
-
-        $request = $e->getRequest();
-        if (!$request instanceof HttpRequest) {
-            // Not an HTTP request; cannot autodetermine
+        if (!$model instanceof Model\JsonModel) {
+            // no JsonModel; do nothing
             return;
         }
 
-        $headers = $request->getHeaders();
-        if (!$headers->has('accept')) {
-            return;
-        }
-
-
-        $accept  = $headers->get('Accept');
-        if (($match = $accept->match('application/json, application/javascript')) == false) {
-            return;
-        }
-
-        if ($match->getTypeString() == 'application/json') {
-            // application/json Accept header found
-            return $this->renderer;
-        }
-
-        if ($match->getTypeString() == 'application/javascript') {
-            // application/javascript Accept header found
-            if (false != ($callback = $request->getQuery()->get('callback'))) {
-                $this->renderer->setJsonpCallback($callback);
-            }
-            return $this->renderer;
-        }
+        // JsonModel found
+        return $this->renderer;
     }
 
     /**

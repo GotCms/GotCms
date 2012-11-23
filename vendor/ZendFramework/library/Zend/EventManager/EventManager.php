@@ -447,19 +447,15 @@ class EventManager implements EventManagerInterface
         $wildcardListeners       = $this->getListeners('*');
         if (count($sharedListeners) || count($sharedWildcardListeners) || count($wildcardListeners)) {
             $listeners = clone $listeners;
-        }
 
-        // Shared listeners on this specific event
-        $this->insertListeners($listeners, $sharedListeners);
+            // Shared listeners on this specific event
+            $this->insertListeners($listeners, $sharedListeners);
 
-        // Shared wildcard listeners
-        $this->insertListeners($listeners, $sharedWildcardListeners);
+            // Shared wildcard listeners
+            $this->insertListeners($listeners, $sharedWildcardListeners);
 
-        // Add wildcard listeners
-        $this->insertListeners($listeners, $wildcardListeners);
-
-        if ($listeners->isEmpty()) {
-            return $responses;
+            // Add wildcard listeners
+            $this->insertListeners($listeners, $wildcardListeners);
         }
 
         foreach ($listeners as $listener) {
@@ -498,6 +494,10 @@ class EventManager implements EventManagerInterface
         }
 
         $identifiers     = $this->getIdentifiers();
+        //Add wildcard id to the search, if not already added
+        if (!in_array('*', $identifiers)) {
+            $identifiers[] = '*';
+        }
         $sharedListeners = array();
 
         foreach ($identifiers as $id) {
@@ -531,10 +531,6 @@ class EventManager implements EventManagerInterface
      */
     protected function insertListeners($masterListeners, $listeners)
     {
-        if (!count($listeners)) {
-            return;
-        }
-
         foreach ($listeners as $listener) {
             $priority = $listener->getMetadatum('priority');
             if (null === $priority) {

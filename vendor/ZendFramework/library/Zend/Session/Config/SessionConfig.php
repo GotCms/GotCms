@@ -11,7 +11,6 @@
 namespace Zend\Session\Config;
 
 use Zend\Session\Exception;
-use Zend\Validator\Hostname as HostnameValidator;
 
 /**
  * Session configuration proxying to session INI options
@@ -147,6 +146,24 @@ class SessionConfig extends StandardConfig
         $this->setOption('save_handler', $phpSaveHandler);
         return $this;
     }
+
+    /**
+     * Set session.save_path
+     *
+     * @param  string $savePath
+     * @return SessionConfig
+     * @throws Exception\InvalidArgumentException on invalid path
+     */
+    public function setSavePath($savePath)
+    {
+        if ($this->getOption('save_handler') == 'files') {
+            parent::setSavePath($savePath);
+        }
+        $this->savePath = $savePath;
+        $this->setOption('save_path', $savePath);
+        return $this;
+    }
+
 
     /**
      * Set session.serialize_handler

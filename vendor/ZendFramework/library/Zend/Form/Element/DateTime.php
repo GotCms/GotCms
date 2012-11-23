@@ -18,7 +18,6 @@ use Zend\Validator\Date as DateValidator;
 use Zend\Validator\DateStep as DateStepValidator;
 use Zend\Validator\GreaterThan as GreaterThanValidator;
 use Zend\Validator\LessThan as LessThanValidator;
-use Zend\Validator\ValidatorInterface;
 
 /**
  * @category   Zend
@@ -27,6 +26,8 @@ use Zend\Validator\ValidatorInterface;
  */
 class DateTime extends Element implements InputProviderInterface
 {
+    const DATETIME_FORMAT = 'Y-m-d\TH:iP';
+
     /**
      * Seed attributes
      *
@@ -37,12 +38,13 @@ class DateTime extends Element implements InputProviderInterface
     );
 
     /**
-     * Date format to use for DateTime values. By default, this is RFC-3339,
-     * which is what HTML5 dictates.
+     *
+     * Opera and mobile browsers support datetime input, and display a datepicker control
+     * But the submitted value does not include seconds.
      *
      * @var string
      */
-    protected $format = PhpDateTime::RFC3339;
+    protected $format = self::DATETIME_FORMAT;
 
     /**
      * @var array
@@ -137,7 +139,7 @@ class DateTime extends Element implements InputProviderInterface
      */
     protected function getDateValidator()
     {
-        return new DateValidator(array('format' => PhpDateTime::ISO8601));
+        return new DateValidator(array('format' => $this->format));
     }
 
     /**
@@ -148,13 +150,13 @@ class DateTime extends Element implements InputProviderInterface
     protected function getStepValidator()
     {
         $stepValue = (isset($this->attributes['step']))
-                     ? $this->attributes['step'] : 1; // Minutes
+                   ? $this->attributes['step'] : 1; // Minutes
 
         $baseValue = (isset($this->attributes['min']))
-                     ? $this->attributes['min'] : '1970-01-01T00:00:00Z';
+                   ? $this->attributes['min'] : '1970-01-01T00:00Z';
 
         return new DateStepValidator(array(
-            'format'    => PhpDateTime::ISO8601,
+            'format'    => $this->format,
             'baseValue' => $baseValue,
             'step'      => new DateInterval("PT{$stepValue}M"),
         ));

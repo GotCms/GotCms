@@ -197,8 +197,7 @@ class Model extends AbstractTable
 
                     $insert = new Sql\Insert();
                     $insert->into('document_type_view')
-                        ->columns(array('document_type_id', 'view_id'))
-                        ->values(array($this->getId(), $view_id));
+                        ->values(array('document_type_id' => $this->getId(), 'view_id' => $view_id));
                     $this->execute($insert);
                 }
             }
@@ -214,8 +213,7 @@ class Model extends AbstractTable
                 {
                     $insert = new Sql\Insert();
                     $insert->into('document_type_dependency')
-                        ->columns(array('parent_id', 'children_id'))
-                        ->values(array($this->getId(), $children_id));
+                        ->values(array('parent_id' => $this->getId(), 'children_id' => $children_id));
                     $this->execute($insert);
                 }
             }

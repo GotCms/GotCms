@@ -2,7 +2,7 @@
 
 ## About GotCms
 
-GotCms is a content management system based on [Zend Framework 2.0.2](http://framework.zend.com/). 
+GotCms is a content management system based on [Zend Framework 2.0.4](http://framework.zend.com/).
 
 This product has been made available under the terms of the GNU GPL version 3.
 Please read the LICENSE.txt file for the exact
@@ -19,7 +19,7 @@ Example of VirtualHost:
 <VirtualHost *:80>
     ServerAdmin admin@got-cms.com
     ServerName got-cms.com
-    ServerAlias www.got-cms.com 
+    ServerAlias www.got-cms.com
     DocumentRoot /var/www/got-cms/public
     <Directory /var/www/got-cms/public>
         Options Indexes FollowSymLinks MultiViews
@@ -56,7 +56,7 @@ Make sure read and write access are available for:
 ## Recommended
 
 Actually only tested with Apache HTTP server.
-Php configuration: 
+Php configuration:
 - Display Errors: Off
 - File Uploads: On
 - Magic Quotes Runtime: Off

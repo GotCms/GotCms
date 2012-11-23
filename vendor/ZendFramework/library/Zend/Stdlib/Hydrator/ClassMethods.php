@@ -63,19 +63,13 @@ class ClassMethods extends AbstractHydrator
             if (!preg_match('/^(get|has|is)[A-Z]\w*/', $method)) {
                 continue;
             }
+
+            $attribute = $method;
             if (preg_match('/^get/', $method)) {
-                // setter verification
-                $setter = preg_replace('/^get/', 'set', $method);
                 $attribute = substr($method, 3);
                 $attribute = lcfirst($attribute);
-            } else {
-                // setter verification
-                $setter = 'set' . ucfirst($method);
-                $attribute = $method;
             }
-            if (!in_array($setter, $methods)) {
-                continue;
-            }
+
             if ($this->underscoreSeparatedKeys) {
                 $attribute = preg_replace_callback('/([A-Z])/', $transform, $attribute);
             }
@@ -109,10 +103,10 @@ class ClassMethods extends AbstractHydrator
         };
 
         foreach ($data as $property => $value) {
-            if ($this->underscoreSeparatedKeys) {
-                $property = preg_replace_callback('/(_[a-z])/', $transform, $property);
-            }
             $method = 'set' . ucfirst($property);
+            if ($this->underscoreSeparatedKeys) {
+                $method = preg_replace_callback('/(_[a-z])/', $transform, $method);
+            }
             if (method_exists($object, $method)) {
                 $value = $this->hydrateValue($property, $value);
 

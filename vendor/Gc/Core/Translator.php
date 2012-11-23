@@ -171,15 +171,10 @@ class Translator extends AbstractTable
             {
                 $insert = new Insert();
                 $insert->into('core_translate_locale')
-                ->columns(array(
-                    'destination',
-                    'locale',
-                    'core_translate_id'
-                ))
                 ->values(array(
-                    $destination['value'],
-                    $destination['locale'],
-                    $source_id,
+                    'destination' => $destination['value'],
+                    'locale' => $destination['locale'],
+                    'core_translate_id' => $source_id,
                 ));
 
                 $instance->execute($insert);

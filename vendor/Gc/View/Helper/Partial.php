@@ -60,10 +60,10 @@ class Partial extends ZendPartial
      * Returns script from identifier.
      *
      * @param  string $name Name of view script
-     * @param  array $model Variables to populate in the view
+     * @param  array $values Variables to populate in the view
      * @return mixte
      */
-    public function __invoke($name = null, $model = null)
+    public function __invoke($name = null, $values = null)
     {
         if(empty($name))
         {
@@ -73,31 +73,25 @@ class Partial extends ZendPartial
         $view = $this->cloneView();
 
 
-        if(isset($this->partialCounter))
+        if(!empty($values))
         {
-            $view->partialCounter = $this->partialCounter;
-        }
-
-
-        if(!empty($model))
-        {
-            if(is_array($model))
+            if(is_array($values))
             {
-                $view->vars()->assign($model);
+                $view->vars()->assign($values);
             }
-            elseif(is_object($model))
+            elseif(is_object($values))
             {
                 if(NULL !== ($objectKey = $this->getObjectKey()))
                 {
-                    $view->vars()->offsetSet($objectKey, $model);
+                    $view->vars()->offsetSet($objectKey, $values);
                 }
-                elseif(method_exists($model, 'toArray'))
+                elseif(method_exists($values, 'toArray'))
                 {
-                    $view->vars()->assign($model->toArray());
+                    $view->vars()->assign($values->toArray());
                 }
                 else
                 {
-                    $view->vars()->assign(get_object_vars($model));
+                    $view->vars()->assign(get_object_vars($values));
                 }
             }
         }
@@ -138,5 +132,18 @@ class Partial extends ZendPartial
 
             return $view->render($name);
         }
+    }
+
+    /**
+     * Clone the current View
+     *
+     * @return \Zend\View\Renderer\RendererInterface
+     */
+    public function cloneView()
+    {
+        $view = clone $this->getView();
+        $view->setVariables(array());
+
+        return $view;
     }
 }

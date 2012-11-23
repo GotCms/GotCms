@@ -10,7 +10,6 @@
 
 namespace Zend\Form\View\Helper\Captcha;
 
-use Traversable;
 use Zend\Captcha\AdapterInterface as CaptchaAdapter;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
@@ -131,9 +130,8 @@ abstract class AbstractWord extends FormInput
 
         $hidden    = $this->renderCaptchaHidden($captcha, $attributes);
         $input     = $this->renderCaptchaInput($captcha, $attributes);
-        $separator = $this->getSeparator();
 
-        return $hidden . $separator . $input;
+        return $hidden . $input;
     }
 
     /**

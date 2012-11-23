@@ -14,7 +14,6 @@ use Zend\Mvc\Router\RouteMatch;
 use Zend\Mvc\Router\RouteStackInterface;
 use Zend\Navigation\Exception;
 use Zend\Mvc\ModuleRouteListener;
-use Zend\View\Helper\Url as UrlHelper;
 
 /**
  * Represents a page that is defined using controller, action, route
@@ -179,7 +178,7 @@ class Mvc extends AbstractPage
 
         $router = $this->router;
         if (null === $router) {
-            $router = self::$defaultRouter;
+            $router = static::$defaultRouter;
         }
 
         if (!$router instanceof RouteStackInterface) {
@@ -412,7 +411,7 @@ class Mvc extends AbstractPage
      */
     public static function setDefaultRouter($router)
     {
-        self::$defaultRouter = $router;
+        static::$defaultRouter = $router;
     }
 
     /**
@@ -422,7 +421,7 @@ class Mvc extends AbstractPage
      */
     public static function getDefaultRouter()
     {
-        return self::$defaultRouter;
+        return static::$defaultRouter;
     }
 
     // Public methods:

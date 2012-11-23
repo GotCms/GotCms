@@ -12,7 +12,6 @@ namespace Zend\Db\TableGateway\Feature\EventFeature;
 
 use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManagerInterface;
 
 /**
  * @category   Zend
@@ -44,7 +43,7 @@ class TableGatewayEvent implements EventInterface
      */
     public function getName()
     {
-        return get_class($this->target) . '.' . $this->name;
+        return $this->name;
     }
 
     /**

@@ -127,7 +127,7 @@ class Script extends AbstractHelper
      */
     public function plugin($name, array $options = NULL)
     {
-        return Registry::get('Application')->getServiceManager()->get('controllerpluginbroker')->get($name, $options);
+        return Registry::get('Application')->getServiceManager()->get('controllerPluginManager')->get($name, $options);
     }
 
     /**

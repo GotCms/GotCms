@@ -109,21 +109,13 @@ class Visitor extends AbstractTable
         {
             $insert = new Insert();
             $insert->into('log_visitor')
-                ->columns(array(
-                    'session_id',
-                    'http_user_agent',
-                    'http_accept_charset',
-                    'http_accept_language',
-                    'server_addr',
-                    'remote_addr'
-                ))
                 ->values(array(
-                    $session_id,
-                    $user_agent,
-                    $accept_charset,
-                    $accept_language,
-                    $server_addr,
-                    $remote_addr
+                    'session_id' => $session_id,
+                    'http_user_agent' => $user_agent,
+                    'http_accept_charset' => $accept_charset,
+                    'http_accept_language' => $accept_language,
+                    'server_addr' => $session_id,
+                    'remote_addr' => $remote_addr,
                 ));
             $this->execute($insert);
             $visitor_id = $this->getLastInsertId('log_visitor');
