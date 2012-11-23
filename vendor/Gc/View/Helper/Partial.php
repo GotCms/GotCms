@@ -136,13 +136,12 @@ class Partial extends ZendPartial
 
     /**
      * Clone the current View
-     *
      * @return \Zend\View\Renderer\RendererInterface
      */
     public function cloneView()
     {
         $view = clone $this->getView();
-        $view->setVariables(array());
+        $view->setVars(array());
 
         return $view;
     }

@@ -49,6 +49,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @covers Gc\View\Helper\Partial::__invoke
+     * @covers Gc\View\Helper\Partial::cloneView
      */
     public function test__invoke()
     {
