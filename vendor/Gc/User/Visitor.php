@@ -114,7 +114,7 @@ class Visitor extends AbstractTable
                     'http_user_agent' => $user_agent,
                     'http_accept_charset' => $accept_charset,
                     'http_accept_language' => $accept_language,
-                    'server_addr' => $session_id,
+                    'server_addr' => $server_addr,
                     'remote_addr' => $remote_addr,
                 ));
             $this->execute($insert);
@@ -123,15 +123,10 @@ class Visitor extends AbstractTable
 
         $insert = new Insert();
         $insert->into('log_url')
-            ->columns(array(
-                'visit_at',
-                'log_url_info_id',
-                'log_visitor_id'
-            ))
             ->values(array(
-                new Expression('NOW()'),
-                $url_id,
-                $visitor_id
+                'visit_at' => new Expression('NOW()'),
+                'log_url_info_id' => $url_id,
+                'log_visitor_id' => $visitor_id
             ));
 
         $this->execute($insert);
