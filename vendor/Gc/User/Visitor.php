@@ -192,7 +192,7 @@ class Visitor extends AbstractTable
      * @param string $sort
      * @return array
      */
-    public function getVisitStats($sort)
+    public function getNbPagesViews($sort)
     {
         if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
         {
@@ -309,7 +309,7 @@ class Visitor extends AbstractTable
      * @param string $sort
      * @return array
      */
-    public function getVisitorStats($sort)
+    public function getNbVisitor($sort)
     {
         if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
         {
@@ -349,4 +349,51 @@ class Visitor extends AbstractTable
 
         return $this->_sortData($sort, $rows);
     }
+
+    /**
+     * Return all referers
+     * @param string $sort
+     * @param optional integer $limit
+     * @return array
+     */
+     public function getUrlsViews($sort, $limit = 20)
+     {
+        if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
+        {
+            $sort = 'DAY';
+        }
+
+        $select = new Select();
+        $select->from(array('lu' => 'log_url'))
+            ->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM MAX(lu.visit_at))', $sort))))
+            ->join(array('lui' => 'log_url_info'), 'lui.id = lu.log_url_info_id', array('url', 'nb' => new Expression('COUNT(lui.id)')))
+        ->order('nb DESC')
+        ->group(array('lui.url'));
+        if($this->getDriverName() == 'pdo_pgsql')
+        {
+            if($sort == 'HOUR')
+            {
+                $select->where("TO_CHAR(lu.visit_at, 'YYYYMMDD') = TO_CHAR(NOW(), 'YYYYMMDD')");
+            }
+            else
+            {
+                $select->where("lu.visit_at > DATE_TRUNC('month', NOW())");
+            }
+        }
+        elseif($this->getDriverName() == 'pdo_mysql')
+        {
+            if($sort == 'HOUR')
+            {
+                $select->where("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')");
+            }
+            else
+            {
+                $select->where("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())");
+            }
+        }
+
+        $select->limit($limit);
+
+        return $this->fetchAll($select);
+     }
 }

@@ -29,7 +29,8 @@ namespace Statistics\Controller;
 require_once('vendor/SVGGraph/SVGGraph.php');
 
 use Gc\Mvc\Controller\Action,
-    Gc\User\Visitor;
+    Gc\User\Visitor,
+    SVGGraph;
 
 class IndexController extends Action
 {
@@ -50,27 +51,38 @@ class IndexController extends Action
           'project_angle' => 45,    'minimum_grid_spacing' => 40
         );
 
-        $colours = array(array('#656565','#959595'));
+        $graph = new SVGGraph(600, 400, $settings);
+        $graph->colours = array(array('#656565','#959595'));
 
-        $graph = new \SVGGraph(600, 400, $settings);
-        $graph->colours = $colours;
+        $data = array();
+        foreach(array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH') as $type => $sql_value)
+        {
+            switch($type)
+            {
+                case 'hours':
+                    $label = 'This day';
+                break;
+                case 'days':
+                    $label = 'This month';
+                break;
+                case 'months':
+                    $label = 'This year';
+                break;
+            }
 
-        $visists_hours = $visitor_model->getVisitStats('HOUR');
-        $visists_days = $visitor_model->getVisitStats('DAY');
-        $visists_months = $visitor_model->getVisitStats('MONTH');
-
-        $visistors_hours = $visitor_model->getVisitorStats('HOUR');
-        $visistors_days = $visitor_model->getVisitorStats('DAY');
-        $visistors_months = $visitor_model->getVisitorStats('MONTH');
+            $data[$type] = array(
+                'label' => $label,
+                'values' => array(
+                    'visitors' => $visitor_model->getNbVisitor($sql_value),
+                    'pagesviews' => $visitor_model->getNbPagesViews($sql_value),
+                    'urlsviews' => $visitor_model->getUrlsViews($sql_value),
+                ),
+            );
+        }
 
         return array(
             'graph' => $graph,
-            'visistsHours' => $visists_hours,
-            'visistsDays' => $visists_days,
-            'visistsMonths' => $visists_months,
-            'visistorsHours' => $visistors_hours,
-            'visistorsDays' => $visistors_days,
-            'visistorsMonths' => $visistors_months,
+            'groups' => $data,
         );
     }
 }

@@ -27,47 +27,51 @@
 ?>
 <h1><?php echo $this->escapeHtml($this->translate('Statistics')); ?></h1>
 
-<div class="floatL">
-    <?php if(!empty($this->visistsHours)): ?>
-        <h2><?php echo $this->escapeHtml($this->translate('Visits today')); ?></h2>
-        <?php $this->graph->Values($this->visistsHours); ?>
-        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-        <?php echo $this->graph->FetchJavascript(); ?>
-    <?php endif; ?>
+<div class="tabs">
+    <ul>
+        <?php foreach($this->groups as $type => $data): ?>
+            <li><a href="#<?php echo $this->escapeHtml($type); ?>"><?php echo $this->escapeHtml($data['label']); ?></a></li>
+        <?php endforeach; ?>
+    </ul>
 
-    <?php if(!empty($this->visistsDays)): ?>
-        <h2><?php echo $this->escapeHtml($this->translate('Visits this month')); ?></h2>
-        <?php $this->graph->Values($this->visistsDays); ?>
-        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-        <?php echo $this->graph->FetchJavascript(); ?>
-    <?php endif; ?>
+    <?php foreach($this->groups as $type => $data): ?>
+        <?php $values = $data['values']; ?>
+        <div id="<?php echo $this->escapeHtml($type); ?>">
+            <div class="floatL">
+                <?php if(!empty($values['pagesviews'])): ?>
+                    <h2><?php echo $this->escapeHtml($this->translate($data['label'])); ?></h2>
+                    <?php $this->graph->Values($values['pagesviews']); ?>
+                    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+                    <?php echo $this->graph->FetchJavascript(); ?>
+                <?php endif; ?>
+            </div>
 
-    <?php if(!empty($this->visistsMonths)): ?>
-        <h2><?php echo $this->escapeHtml($this->translate('Visits this year')); ?></h2>
-        <?php $this->graph->Values($this->visistsMonths); ?>
-        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-        <?php echo $this->graph->FetchJavascript(); ?>
-    <?php endif; ?>
+            <div class="floatL">
+                <?php if(!empty($values['visitors'])): ?>
+                    <h2><?php echo $this->escapeHtml($this->translate($data['label'])); ?></h2>
+                    <?php $this->graph->Values($values['visitors']); ?>
+                    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+                    <?php echo $this->graph->FetchJavascript(); ?>
+                <?php endif; ?>
+            </div>
+
+            <div class="cb">
+                <?php if(!empty($values['urlsviews'])): ?>
+                    <h2><?php echo $this->escapeHtml($this->translate($data['label'])); ?></h2>
+                    <ul>
+                        <?php foreach($values['urlsviews'] as $value): ?>
+                            <li>
+                                <span class="floatL"><?php echo $this->escapeHtml($value['url']); ?></span>
+                                <span class="floatR"><?php echo $this->escapeHtml($value['nb']); ?></span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+
+        </div>
+    <?php endforeach; ?>
 </div>
-<div class="floatR">
-    <?php if(!empty($this->visistorsHours)): ?>
-        <h2><?php echo $this->escapeHtml($this->translate('Visitors today')); ?></h2>
-        <?php $this->graph->Values($this->visistorsHours); ?>
-        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-        <?php echo $this->graph->FetchJavascript(); ?>
-    <?php endif; ?>
-
-    <?php if(!empty($this->visistorsDays)): ?>
-        <h2><?php echo $this->escapeHtml($this->translate('Visitors this month')); ?></h2>
-        <?php $this->graph->Values($this->visistorsDays); ?>
-        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-        <?php echo $this->graph->FetchJavascript(); ?>
-    <?php endif; ?>
-
-    <?php if(!empty($this->visistorsMonths)): ?>
-        <h2><?php echo $this->escapeHtml($this->translate('Visitors this year')); ?></h2>
-        <?php $this->graph->Values($this->visistorsMonths); ?>
-        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-        <?php echo $this->graph->FetchJavascript(); ?>
-    <?php endif; ?>
-</div>
+<script type="text/javascript">
+    $('.tabs').tabs();
+</script>
