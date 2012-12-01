@@ -129,7 +129,7 @@ footer a:hover {text-decoration:underline;}
 #main {margin-top:80px;background-image:url(../images/corpshaut.png);background-repeat:repeat-x;background-color:#FFFFFF;padding: 5px 10px;}
 
 #module-admin #content, #module-statistics #content {width:100%;margin:0;}
-#content {margin-left:320px;overflow:hidden;}
+#content {margin-left:320px;}
 #content h2 {background-image:url(../images/h2txt.png);background-repeat:no-repeat;width:auto;height:20px;color:#FFFFFF;font-size:11px;padding-top:5px;padding-left:10px;margin:10px 0 0}
 #content article p {margin:5px 0;}
 #module-statistics #content .floatL, #module-statistics #content .floatR {margin:0 50px;}
@@ -184,7 +184,7 @@ footer a:hover {text-decoration:underline;}
 .notification div {display: block;font-style: normal;line-height: 1.5em;padding: 10px 10px 10px 36px;}
 .notification .close {color: #990000;font-size: 9px;position: absolute;right: 13px;top: 13px;}
 
-#elfinder {font-size: 170%;}
+#elfinder {font-size: 170%;float:left;width:100% !important;}
 .dashboard {margin: 20px 8px; padding: 0 10px 20px; border-width: 1px 0pt; border-style: solid; position: relative; line-height: 1.6em; overflow: auto;}
 .dashboard h3 {font-size: 32px; font-weight: normal; line-height: 1.2; margin: 0.1em 0pt 0.8em;}
 .dashboard h4 {font-size: 14px;}
