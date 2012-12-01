@@ -204,29 +204,7 @@ class Visitor extends AbstractTable
             $select->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)), 'nb' => new Expression('COUNT(lu.id)')));
             $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
 
-            if($this->getDriverName() == 'pdo_pgsql')
-            {
-                if($sort == 'HOUR')
-                {
-                    $select->where("TO_CHAR(lu.visit_at, 'YYYYMMDD') = TO_CHAR(NOW(), 'YYYYMMDD')");
-                }
-                else
-                {
-                    $select->where("lu.visit_at > DATE_TRUNC('month', NOW())");
-                }
-            }
-            elseif($this->getDriverName() == 'pdo_mysql')
-            {
-                if($sort == 'HOUR')
-                {
-                    $select->where("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')");
-                }
-                else
-                {
-                    $select->where("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())");
-                }
-            }
-
+            $this->_groupByDate($sort, $select);
             $select->order('date ASC');
             $select->group(array('date'));
         }));
@@ -321,28 +299,7 @@ class Visitor extends AbstractTable
             $select->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)), 'nb' => new Expression('COUNT(DISTINCT(log_visitor.id))')));
             $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
 
-            if($this->getDriverName() == 'pdo_pgsql')
-            {
-                if($sort == 'HOUR')
-                {
-                    $select->where("TO_CHAR(lu.visit_at, 'YYYYMMDD') = TO_CHAR(NOW(), 'YYYYMMDD')");
-                }
-                else
-                {
-                    $select->where("lu.visit_at > DATE_TRUNC('month', NOW())");
-                }
-            }
-            elseif($this->getDriverName() == 'pdo_mysql')
-            {
-                if($sort == 'HOUR')
-                {
-                    $select->where("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')");
-                }
-                else
-                {
-                    $select->where("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())");
-                }
-            }
+            $this->_groupByDate($sort, $select);
             $select->order('date ASC');
             $select->group(array('date'));
         }));
@@ -369,31 +326,44 @@ class Visitor extends AbstractTable
             ->join(array('lui' => 'log_url_info'), 'lui.id = lu.log_url_info_id', array('url', 'nb' => new Expression('COUNT(lui.id)')))
         ->order('nb DESC')
         ->group(array('lui.url'));
-        if($this->getDriverName() == 'pdo_pgsql')
-        {
-            if($sort == 'HOUR')
-            {
-                $select->where("TO_CHAR(lu.visit_at, 'YYYYMMDD') = TO_CHAR(NOW(), 'YYYYMMDD')");
-            }
-            else
-            {
-                $select->where("lu.visit_at > DATE_TRUNC('month', NOW())");
-            }
-        }
-        elseif($this->getDriverName() == 'pdo_mysql')
-        {
-            if($sort == 'HOUR')
-            {
-                $select->where("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')");
-            }
-            else
-            {
-                $select->where("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())");
-            }
-        }
 
+        $this->_groupByDate($sort, $select);
         $select->limit($limit);
 
         return $this->fetchAll($select);
      }
+
+    protected function _groupByDate($sort, Select &$select)
+    {
+        if($this->getDriverName() == 'pdo_pgsql')
+        {
+            switch($sort)
+            {
+                case 'HOUR':
+                    $select->where("TO_CHAR(lu.visit_at, 'YYYYMMDD') = TO_CHAR(NOW(), 'YYYYMMDD')");
+                break;
+                case 'DAY':
+                    $select->where("lu.visit_at > DATE_TRUNC('month', NOW())");
+                break;
+                case 'MONTH':
+                    $select->where("lu.visit_at > DATE_TRUNC('year', NOW())");
+                break;
+            }
+        }
+        elseif($this->getDriverName() == 'pdo_mysql')
+        {
+            switch($sort)
+            {
+                case 'HOUR':
+                    $select->where("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')");
+                break;
+                case 'DAY':
+                    $select->where("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())");
+                break;
+                case 'MONTH':
+                    $select->where("DATE_FORMAT(lu.visit_at, '%Y') >= EXTRACT(YEAR FROM NOW())");
+                break;
+            }
+        }
+    }
 }
