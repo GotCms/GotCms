@@ -42,7 +42,7 @@
                 <td><?php echo $this->escapeHtml($document->getName()); ?></td>
                 <td class="a-center">
                     <a href="<?php echo $this->moduleUrl('document-comment', 'index', array('id' => $document->getId())); ?>" class="edit-line">
-                        <img src="<?php echo $this->basePath('images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
+                        <img src="<?php echo $this->basePath('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>
             </tr>
@@ -53,4 +53,3 @@
 <script type="text/javascript">
     Gc.initTableList();
 </script>
-
