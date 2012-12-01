@@ -57,10 +57,11 @@ class IndexController extends Action
         $visitor = new Visitor();
         $session = $this->getSession();
         $session_id = $this->getSession()->getDefaultManager()->getId();
-        $is_preview = ($this->getAuth()->hasIdentity() and $this->getRequest()->getQuery()->get('preview') === 'true');
+        $is_admin = $this->getAuth()->hasIdentity();
+        $is_preview = ($is_admin and $this->getRequest()->getQuery()->get('preview') === 'true');
 
         //Don't log preview
-        if(!$is_preview)
+        if(!$is_preview and !$is_admin)
         {
             try
             {
@@ -79,7 +80,7 @@ class IndexController extends Action
         if(CoreConfig::getValue('site_is_offline') == 1)
         {
             //Site is offline
-            if(!$this->getAuth()->hasIdentity())
+            if(!$is_admin)
             {
                 $document = Document\Model::fromId(CoreConfig::getValue('site_offline_document'));
                 if(empty($document))
