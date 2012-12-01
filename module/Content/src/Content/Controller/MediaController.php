@@ -30,8 +30,9 @@ use Gc\Mvc\Controller\Action,
     Gc\Component,
     Gc\Document,
     Gc\Document\Collection as DocumentCollection,
-    Gc\Property,
     Gc\Media\File,
+    Gc\Property,
+    Gc\Registry,
     elFinder\elFinder,
     elFinder\elFinderConnector,
     elFinder\elFinderVolumeDriver,
@@ -84,6 +85,16 @@ class MediaController extends Action
      */
     public function indexAction()
     {
+
+        $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
+        $helper_broker->get('HeadScript')->appendFile('/backend/js/libs/elfinder.min.js', 'text/javascript');
+
+        $language = preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale());
+        if($language != 'en')
+        {
+            $headscript->appendFile(sprintf('/backend/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript');
+        }
+
         return array('language' => preg_replace('~(.*)_.*~', '$1', \Gc\Registry::get('Translator')->getLocale()));
     }
 

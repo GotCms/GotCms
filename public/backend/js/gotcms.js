@@ -552,6 +552,7 @@ var Gc = (function($)
 
                 return true;
             };
+
             $buttons[Translator.translate('Cancel')] = function()
             {
                 $(this).dialog('close');

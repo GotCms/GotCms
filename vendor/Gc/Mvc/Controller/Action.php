@@ -149,7 +149,6 @@ class Action extends AbstractActionController
             /**
              * Prepare all resources
              */
-            $language = preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale());
             $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
             $headscript = $helper_broker->get('HeadScript');
             $headscript
@@ -165,13 +164,8 @@ class Action extends AbstractActionController
                 ->appendFile('/backend/js/libs/codemirror/mode/php/php.js', 'text/javascript')
                 ->appendFile('/backend/js/libs/jquery.jstree.js', 'text/javascript')
                 ->appendFile('/backend/js/libs/jquery.contextMenu.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/elfinder.min.js', 'text/javascript')
                 ->appendFile('/backend/js/generic-classes.js', 'text/javascript')
                 ->appendFile('/backend/js/gotcms.js', 'text/javascript');
-            if($language != 'en')
-            {
-                $headscript->appendFile(sprintf('/backend/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript');
-            }
 
             $headlink = $helper_broker->get('HeadLink');
             $headlink
