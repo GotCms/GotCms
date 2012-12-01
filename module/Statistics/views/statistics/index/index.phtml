@@ -36,10 +36,11 @@
 
     <?php foreach($this->groups as $type => $data): ?>
         <?php $values = $data['values']; ?>
+        <?php $labels = $data['labels']; ?>
         <div id="<?php echo $this->escapeHtml($type); ?>">
             <div class="floatL">
                 <?php if(!empty($values['pagesviews'])): ?>
-                    <h2><?php echo $this->escapeHtml($this->translate($data['label'])); ?></h2>
+                    <h2><?php echo $this->escapeHtml($this->translate($labels['pagesviews'])); ?></h2>
                     <?php $this->graph->Values($values['pagesviews']); ?>
                     <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
                     <?php echo $this->graph->FetchJavascript(); ?>
@@ -48,7 +49,7 @@
 
             <div class="floatL">
                 <?php if(!empty($values['visitors'])): ?>
-                    <h2><?php echo $this->escapeHtml($this->translate($data['label'])); ?></h2>
+                    <h2><?php echo $this->escapeHtml($this->translate($labels['visitors'])); ?></h2>
                     <?php $this->graph->Values($values['visitors']); ?>
                     <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
                     <?php echo $this->graph->FetchJavascript(); ?>
@@ -57,7 +58,7 @@
 
             <div class="cb">
                 <?php if(!empty($values['urlsviews'])): ?>
-                    <h2><?php echo $this->escapeHtml($this->translate($data['label'])); ?></h2>
+                    <h2><?php echo $this->escapeHtml($this->translate($labels['urlsviews'])); ?></h2>
                     <ul>
                         <?php foreach($values['urlsviews'] as $value): ?>
                             <li>

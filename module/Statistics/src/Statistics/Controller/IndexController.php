@@ -72,6 +72,11 @@ class IndexController extends Action
 
             $data[$type] = array(
                 'label' => $label,
+                'labels' => array(
+                    'visitors' => 'Visitors',
+                    'pagesviews' => 'Pages views',
+                    'urlsviews' => 'Most urls views'
+                ),
                 'values' => array(
                     'visitors' => $visitor_model->getNbVisitor($sql_value),
                     'pagesviews' => $visitor_model->getNbPagesViews($sql_value),
