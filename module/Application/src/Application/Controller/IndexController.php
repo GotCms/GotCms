@@ -57,14 +57,19 @@ class IndexController extends Action
         $visitor = new Visitor();
         $session = $this->getSession();
         $session_id = $this->getSession()->getDefaultManager()->getId();
+        $is_preview = ($this->getAuth()->hasIdentity() and $this->getRequest()->getQuery()->get('preview') === 'true');
 
-        try
+        //Don't log preview
+        if(!$is_preview)
         {
-            $session->visitor_id = $visitor->getVisitorId($session_id);
-        }
-        catch(\Exception $e)
-        {
-            //don't care
+            try
+            {
+                $session->visitor_id = $visitor->getVisitorId($session_id);
+            }
+            catch(\Exception $e)
+            {
+                //don't care
+            }
         }
 
         $events = StaticEventManager::getInstance();
@@ -86,7 +91,6 @@ class IndexController extends Action
 
         if(empty($document))
         {
-            $is_preview = ($this->getRequest()->getQuery()->get('preview') == 'true');
             $path = $this->getRouteMatch()->getParam('path');
             if(empty($path))
             {
@@ -119,7 +123,7 @@ class IndexController extends Action
                         {
                             if(!$document_tmp->isPublished())
                             {
-                                if(!$this->getAuth()->hasIdentity() or $is_preview !== TRUE)
+                                if(!$is_preview)
                                 {
                                     break;
                                 }
