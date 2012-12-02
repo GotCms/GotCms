@@ -82,7 +82,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $config = $this->getConfig();
 
-        $path = GC_APPLICATION_PATH.'/vendor/Datatypes/';
+        $path = GC_APPLICATION_PATH.'/library/Datatypes/';
         $list_dir = glob($path.'*', GLOB_ONLYDIR);
         $options = array();
         foreach($list_dir as $dir)

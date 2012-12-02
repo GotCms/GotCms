@@ -1,6 +1,6 @@
 <phpunit bootstrap="./Bootstrap.php" colors="true">
     <testsuite name="GotCms Test Suite">
-        <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">./vendor/</directory>
+        <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">./library/</directory>
     </testsuite>
     <logging>
         <log type="coverage-html" target="./logs/coverage" charset="UTF-8"

@@ -37,7 +37,7 @@ error_reporting(E_ALL | E_STRICT);
 chdir(dirname(__DIR__));
 $gc_root        = getcwd();
 $zf_library     = $gc_root . '/vendor/ZendFramework/library';
-$gc_library     = $gc_root . '/vendor';
+$gc_library     = $gc_root . '/library';
 $gc_tests       = $gc_root . '/tests';
 
 $path = array(
