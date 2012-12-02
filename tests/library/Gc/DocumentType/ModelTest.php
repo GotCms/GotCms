@@ -95,26 +95,18 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
         $insert = new Insert();
         $insert->into('document_type_dependency')
-            ->columns(array(
-                'parent_id',
-                'children_id',
-            ))
             ->values(array(
-                $this->_object->getId(),
-                $this->_documentTypeChildren->getId()
+                'parent_id' => $this->_object->getId(),
+                'children_id' => $this->_documentTypeChildren->getId()
             ));
 
         $this->_object->execute($insert);
 
         $insert = new Insert();
         $insert->into('document_type_view')
-            ->columns(array(
-                'view_id',
-                'document_type_id',
-            ))
             ->values(array(
-                $this->_view->getId(),
-                $this->_object->getId()
+                'view_id' => $this->_view->getId(),
+                'document_type_id' => $this->_object->getId()
             ));
 
         $this->_object->execute($insert);
