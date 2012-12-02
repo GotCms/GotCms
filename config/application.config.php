@@ -51,10 +51,10 @@ return array(
     ),
     'autoloader' => array(
         'namespaces' => array(
-            'Datatypes' => __DIR__ . '/../vendor/Datatypes',
             'elFinder'  => __DIR__ . '/../vendor/elFinder',
-            'Gc'        => __DIR__ . '/../vendor/Gc',
-            'Modules'   => __DIR__ . '/../vendor/Modules',
+            'Datatypes' => __DIR__ . '/../library/Datatypes',
+            'Gc'        => __DIR__ . '/../library/Gc',
+            'Modules'   => __DIR__ . '/../library/Modules',
         ),
         'autoregister_zf' => TRUE,
     ),

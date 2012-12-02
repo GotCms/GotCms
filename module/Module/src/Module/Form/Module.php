@@ -41,7 +41,7 @@ class Module extends AbstractForm
     public function init()
     {
         $file_info = new Info();
-        $path = GC_APPLICATION_PATH . '/vendor/Modules/';
+        $path = GC_APPLICATION_PATH . '/library/Modules/';
         $list_dir = glob($path . '*', GLOB_ONLYDIR);
 
         $modules_infos = array();

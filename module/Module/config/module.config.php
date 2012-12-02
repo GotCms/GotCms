@@ -32,7 +32,7 @@ return array(
     'view_manager' => array(
         'template_path_stack' => array(
             'module'  => __DIR__ . '/../views',
-            'modules' => GC_APPLICATION_PATH . '/vendor/Modules',
+            'modules' => GC_APPLICATION_PATH . '/library/Modules',
         ),
     ),
 );

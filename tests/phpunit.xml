@@ -9,8 +9,8 @@
     </logging>
     <filter>
         <whitelist>
-            <directory suffix=".php">../vendor/Gc</directory>
-            <directory suffix=".php">../vendor/Datatypes</directory>
+            <directory suffix=".php">../library/Gc</directory>
+            <directory suffix=".php">../library/Datatypes</directory>
         </whitelist>
     </filter>
 </phpunit>

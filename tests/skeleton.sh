@@ -15,15 +15,15 @@ else
         dir=`echo $1 | cut -f -$(($deep-1)) -d /`
         class=$(echo $1 | sed -e "s/\//\\\/g")
         file=`echo $1 | cut -f $deep -d /`"Test"$ext
-        destination_directory=$pwd/vendor/$dir
-        source_directory=$pwd/../vendor/$dir
+        destination_directory=$pwd/library/$dir
+        source_directory=$pwd/../library/$dir
 
         if [[ -f $destination_directory/$file ]]
         then
             echo "Test $file already exists, exiting.."
         else
-            cd ../vendor/
-            phpunit-skelgen --bootstrap $pwd/Bootstrap.php  --test $class 
+            cd ../library/
+            phpunit-skelgen --bootstrap $pwd/Bootstrap.php  --test $class
 
             if [[ $? -ne 0 ]]
             then
