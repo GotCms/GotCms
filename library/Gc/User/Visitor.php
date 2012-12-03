@@ -153,8 +153,7 @@ class Visitor extends AbstractTable
         {
             $insert = new Insert();
             $insert->into('log_url_info')
-                ->columns(array('url', 'referer'))
-                ->values(array($request_uri, $referer));
+                ->values(array('url' => $request_uri, 'referer' => $referer));
             $this->execute($insert);
             $url_id = $this->getLastInsertId('log_url_info');
         }
