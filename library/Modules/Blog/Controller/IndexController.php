@@ -34,6 +34,7 @@ use Gc\Module\Controller\AbstractController,
  */
 class IndexController extends AbstractController
 {
+    protected $_whiteList = array('show_email', 'is_active', 'username', 'email', 'message', 'document_id', 'created_at');
     /**
      * Index action, list all documents with comments
      * @return array
@@ -68,6 +69,20 @@ class IndexController extends AbstractController
 
             foreach($comments as $comment_id => $data)
             {
+                if(!empty($data['delete']))
+                {
+                    $model->delete(array('id' => $comment_id));
+                    continue;
+                }
+
+                foreach($data as $k => $v)
+                {
+                    if(!in_array($k, $this->_whiteList))
+                    {
+                        unset($data[$k]);
+                    }
+                }
+
                 $data['show_email'] = empty($data['show_email']) ? 0 : 1;
                 $data['is_active'] = empty($data['is_active']) ? 0 : 1;
                 $model->update($data, array('id' => $comment_id));
