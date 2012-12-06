@@ -19,7 +19,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = $this->getMockForAbstractClass('AbstractPrevalueEditor');
+        $this->_object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor');
     }
 
     /**

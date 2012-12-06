@@ -12,6 +12,10 @@ class AclTest extends \PHPUnit_Framework_TestCase
      * @var Acl
      */
     protected $_object;
+    /**
+     * @var Model
+     */
+    protected $_user;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -19,7 +23,18 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Acl;
+
+        $this->_user = Model::fromArray(array(
+            'lastname' => 'Test',
+            'firstname' => 'Test',
+            'email' => 'test@test.com',
+            'login' => 'test-user-model',
+            'user_acl_role_id' => 1,
+        ));
+
+        $this->_user->setPassword('test-user-model-password');
+        $this->_user->save();
+        $this->_object = new Acl($this->_user);
     }
 
     /**
@@ -28,6 +43,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->_user->delete();
+        unset($this->_object);
+        unset($this->_user);
     }
 
     /**

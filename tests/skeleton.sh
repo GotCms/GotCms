@@ -23,7 +23,7 @@ else
             echo "Test $file already exists, exiting.."
         else
             cd ../library/
-            phpunit-skelgen --bootstrap $pwd/Bootstrap.php  --test $class
+            phpunit-skelgen --bootstrap $pwd/Bootstrap.php --test $class
 
             if [[ $? -ne 0 ]]
             then

@@ -40,9 +40,13 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     public function testGetInstance()
     {
         $this->tearDown();
+        $this->setUp();
         $this->assertInstanceOf('Gc\Event\StaticEventManager', StaticEventManager::getInstance());
     }
 
+    /**
+     * @covers Gc\Event\StaticEventManager::setInstance
+     */
     public function testSetInstance()
     {
         StaticEventManager::setInstance($this->_object);

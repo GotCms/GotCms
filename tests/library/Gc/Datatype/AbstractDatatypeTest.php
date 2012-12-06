@@ -19,7 +19,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = $this->getMockForAbstractClass('AbstractDatatype');
+        $this->_object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
     }
 
     /**

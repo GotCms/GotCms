@@ -61,9 +61,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValues()
     {
-        $this->_object->insert(array('identifier' => 'values_test', 'value' => 'values_result'));
         $values = $this->_object->getValues();
         $this->_object->delete('1 = 1');
+        $this->_object->insert(array('identifier' => 'values_test', 'value' => 'values_result'));
 
         $this->assertArrayHasKey('0', $this->_object->getValues());
         foreach($values as $value)
@@ -76,6 +76,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEmptyValues()
     {
+        $this->_object->delete('1 = 1');
         $this->assertNull($this->_object->getValues());
     }
 

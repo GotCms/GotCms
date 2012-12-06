@@ -17,11 +17,11 @@ while [ -n "$1" ] ; do
      shift ;;
 
     *)
-     PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}Gc/$1"
+     PHPUNIT_FILE="$1"
      shift ;;
   esac
 done
 
 set -x
-${PHPUNIT} ${PHPUNIT_OPTS} ${PHPUNIT_GROUPS:+--group $PHPUNIT_GROUPS}
+${PHPUNIT} ${PHPUNIT_OPTS} ${PHPUNIT_GROUPS:+--group $PHPUNIT_GROUPS} ${PHPUNIT_FILE}
 

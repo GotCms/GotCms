@@ -94,9 +94,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->_object);
 
-        $this->_documentTypeChildren->delete();
-        unset($this->_documentTypeChildren);
-
         $this->_view->delete();
         unset($this->_view);
 

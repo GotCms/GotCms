@@ -1,5 +1,5 @@
 <?php
-namespace Datatypes\Boolean;
+namespace Datatypes\ImageCropper;
 
 use Gc\Datatype\Model as DatatypeModel,
     Gc\DocumentType\Model as DocumentTypeModel,
@@ -102,9 +102,9 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
         $this->_documentType->save();
 
         $this->_datatype = DatatypeModel::fromArray(array(
-            'name' => 'BooleanTest',
+            'name' => 'ImageCropperTest',
             'prevalue_value' => '',
-            'model' => 'Boolean',
+            'model' => 'ImageCropper',
         ));
         $this->_datatype->save();
 
@@ -154,18 +154,18 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Datatypes\Boolean\Datatype::getEditor
+     * @covers Datatypes\ImageCropper\Datatype::getEditor
      */
     public function testGetEditor()
     {
-        $this->assertInstanceOf('Datatypes\Boolean\Editor', $this->_object->getEditor($this->_property));
+        $this->assertInstanceOf('Datatypes\ImageCropper\Editor', $this->_object->getEditor($this->_property));
     }
 
     /**
-     * @covers Datatypes\Boolean\Datatype::getPrevalueEditor
+     * @covers Datatypes\ImageCropper\Datatype::getPrevalueEditor
      */
     public function testGetPrevalueEditor()
     {
-        $this->assertInstanceOf('Datatypes\Boolean\PrevalueEditor', $this->_object->getPrevalueEditor());
+        $this->assertInstanceOf('Datatypes\ImageCropper\PrevalueEditor', $this->_object->getPrevalueEditor());
     }
 }
