@@ -205,7 +205,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Document\Collection::getChildren
-     * @todo   Implement testGetChildren().
      */
     public function testGetChildren()
     {
@@ -214,8 +213,16 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Document\Collection::getAvailableChildren
+     */
+    public function testGetAvailableChilren()
+    {
+        $this->_object->load(0);
+        $this->assertTrue(is_array($this->_object->getAvailableChildren()));
+    }
+
+    /**
      * @covers Gc\Document\Collection::getId
-     * @todo   Implement testGetId().
      */
     public function testGetId()
     {
@@ -224,7 +231,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Document\Collection::getIcon
-     * @todo   Implement testGetIcon().
      */
     public function testGetIcon()
     {
@@ -233,7 +239,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Document\Collection::getIterableId
-     * @todo   Implement testGetIterableId().
      */
     public function testGetIterableId()
     {
@@ -242,7 +247,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Document\Collection::getName
-     * @todo   Implement testGetName().
      */
     public function testGetName()
     {
@@ -251,7 +255,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Document\Collection::getEditUrl
-     * @todo   Implement testGetEditUrl().
      */
     public function testGetEditUrl()
     {

@@ -18,6 +18,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     protected $_object;
 
     /**
+     * @var Model
+     */
+    protected $_parentModel;
+
+    /**
      * @var ViewModel
      */
     protected $_view;
@@ -84,6 +89,20 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
         $this->_documentType->save();
 
+        $this->_parentModel = new Model();
+        $this->_parentModel->setData(array(
+            'name' => 'Document name',
+            'url_key' => 'parent',
+            'status' => Model::STATUS_ENABLE,
+            'show_in_nav' => TRUE,
+            'user_id' => $this->_user->getId(),
+            'document_type_id' => $this->_documentType->getId(),
+            'view_id' => $this->_view->getId(),
+            'layout_id' => $this->_layout->getId(),
+            'parent_id' => 0
+        ));
+        $this->_parentModel->save();
+
         $this->_object = new Model();
         $this->_object->setData(array(
             'name' => 'Document name',
@@ -94,7 +113,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'document_type_id' => $this->_documentType->getId(),
             'view_id' => $this->_view->getId(),
             'layout_id' => $this->_layout->getId(),
-            'parent_id' => 0
+            'parent_id' => $this->_parentModel->getId()
         ));
 
         $this->_object->save();
@@ -232,7 +251,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUrl()
     {
-        $this->assertEquals('/url-key', $this->_object->getUrl());
+        $this->assertEquals('/parent/url-key', $this->_object->getUrl());
     }
 
     /**
@@ -256,7 +275,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParent()
     {
-        $this->assertFalse($this->_object->getParent());
+        $this->assertInstanceOf('Gc\Document\Model', $this->_object->getParent());
     }
 
     /**
@@ -264,7 +283,32 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetChildren()
     {
-        $this->assertFalse($this->_object->getParent());
+        $this->assertTrue(is_array($this->_object->getChildren()));
+    }
+
+    /**
+     * @covers Gc\Document\Model::getAvailableChildren
+     */
+    public function testGetAvailableChilren()
+    {
+        $this->assertTrue(is_array($this->_object->getAvailableChildren()));
+    }
+
+    /**
+     * @covers Gc\Document\Model::getProperty
+     */
+    public function testGetPropertyWithOutId()
+    {
+        $fake_model = new Model();
+        $this->assertFalse($fake_model->getProperty('fake_property'));
+    }
+
+    /**
+     * @covers Gc\Document\Model::getProperty
+     */
+    public function testGetProperty()
+    {
+        $this->assertFalse($this->_object->getProperty('fake_property'));
     }
 
     /**
@@ -273,6 +317,14 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testGetIcon()
     {
         $this->assertEquals('/media/icons/home.png', $this->_object->getIcon());
+    }
+    /**
+     * @covers Gc\Document\Model::getIcon
+     */
+    public function testGetEmptyIcon()
+    {
+        $this->_object->getDocumentType()->setIconId(42000);
+        $this->assertFalse($this->_object->getIcon());
     }
 
     /**
