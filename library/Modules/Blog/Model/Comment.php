@@ -64,6 +64,7 @@ class Comment extends AbstractTable
     /**
      * Return all comments in document
      * @param integer $document_id
+     * @param boolean $is_active
      * @return array
      */
     public function getList($document_id = NULL, $is_active = TRUE)
