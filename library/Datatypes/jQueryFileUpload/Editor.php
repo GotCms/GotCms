@@ -50,7 +50,7 @@ class Editor extends AbstractEditor
         $parameters = $this->getConfig();
         $options  = $parameters['options'];
         $array_values = array();
-        if(!empty($values))
+        if(!empty($values) and is_array($values))
         {
             foreach($values as $idx => $value)
             {

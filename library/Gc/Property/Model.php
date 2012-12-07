@@ -78,6 +78,11 @@ class Model extends AbstractTable
      */
     public function setValue($value)
     {
+        if(empty($this->_value))
+        {
+            $this->loadValue();
+        }
+
         $this->_value->setValue($value);
 
         return $this;

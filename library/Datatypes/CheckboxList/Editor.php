@@ -58,7 +58,11 @@ class Editor extends AbstractEditor
         $parameters = $this->getConfig();
 
         $element = new Element\MultiCheckbox($this->getName());
-        $element->setValueOptions($parameters);
+        if(!empty($parameters))
+        {
+            $element->setValueOptions($parameters);
+        }
+
         $element->setLabel($this->getName());
         $element->setAttribute('label', $this->getProperty()->getName());
 

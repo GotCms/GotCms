@@ -56,7 +56,7 @@ class Editor extends AbstractEditor
         $datatypes = $post->get($this->getName());
         $_OLD_FILES = $_FILES;
 
-        if(!empty($datatypes))
+        if(!empty($datatypes) and is_array($datatypes))
         {
             foreach($datatypes as $line_id => $values)
             {

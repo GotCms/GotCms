@@ -49,8 +49,12 @@ class Editor extends AbstractEditor
      */
     public function load()
     {
+        $parameters = $this->getConfig();
         $element = new Element\Radio($this->getName());
-        $element->setValueOptions($this->getConfig());
+        if(!empty($parameters))
+        {
+            $element->setValueOptions($parameters);
+        }
 
         $element->setLabel($this->getName());
         $element->setAttribute('label', $this->getProperty()->getName());
