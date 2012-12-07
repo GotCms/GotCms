@@ -38,9 +38,9 @@ class UserController extends Action
 {
     /**
      * Contains information about acl
-     * @var array $_acl_page
+     * @var array $_aclPage
      */
-    protected $_acl_page = array('resource' => 'Config', 'permission' => 'user');
+    protected $_aclPage = array('resource' => 'Config', 'permission' => 'user');
 
     /**
      * List all roles

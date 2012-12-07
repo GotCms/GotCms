@@ -104,7 +104,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
         {
             $line = fgets($fp);
         }
-        while (!feof($fp));
+        while(!feof($fp));
 
         $this->assertTrue(feof($fp));
     }

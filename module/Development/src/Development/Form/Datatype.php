@@ -56,8 +56,8 @@ class Datatype extends AbstractForm
         $this->add(new Element('name'));
         $this->add($model);
 
-        $inputFilterFactory = new InputFilterFactory();
-        $inputFilter = $inputFilterFactory->createInputFilter(array(
+        $input_filter_factory = new InputFilterFactory();
+        $input_filter = $input_filter_factory->createInputFilter(array(
             'name' => array(
                 'required'=> TRUE,
                 'validators' => array(
@@ -80,6 +80,6 @@ class Datatype extends AbstractForm
             )
         ));
 
-        $this->setInputFilter($inputFilter);
+        $this->setInputFilter($input_filter);
     }
 }

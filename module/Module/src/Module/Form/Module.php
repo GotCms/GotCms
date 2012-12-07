@@ -76,8 +76,8 @@ class Module extends AbstractForm
             ->setValueOptions($options);
         $this->add($module);
 
-        $inputFilterFactory = new InputFilterFactory();
-        $inputFilter = $inputFilterFactory->createInputFilter(array(
+        $input_filter_factory = new InputFilterFactory();
+        $input_filter = $input_filter_factory->createInputFilter(array(
             'module' => array(
                 'name' => 'module',
                 'required'=> TRUE,
@@ -87,6 +87,6 @@ class Module extends AbstractForm
             )
         ));
 
-        $this->setInputFilter($inputFilter);
+        $this->setInputFilter($input_filter);
     }
 }

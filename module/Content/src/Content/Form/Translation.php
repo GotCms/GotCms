@@ -39,8 +39,8 @@ class Translation extends AbstractForm
 {
     public function init()
     {
-        $inputFilterFactory = new InputFilterFactory();
-        $inputFilter = $inputFilterFactory->createInputFilter(array(
+        $input_filter_factory = new InputFilterFactory();
+        $input_filter = $input_filter_factory->createInputFilter(array(
             'source' => array(
                 'name' => 'source',
                 'required'=> TRUE,
@@ -50,7 +50,7 @@ class Translation extends AbstractForm
             ),
         ));
 
-        $this->setInputFilter($inputFilter);
+        $this->setInputFilter($input_filter);
 
         $source = new Element\Text('source');
         $source->setAttribute('label', 'Name')

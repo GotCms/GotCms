@@ -55,20 +55,20 @@ define('GC_APPLICATION_PATH', $gc_root);
  */
 
 // Composer autoloading
-if (file_exists($gc_root . '/vendor/autoload.php'))
+if(file_exists($gc_root . '/vendor/autoload.php'))
 {
     $loader = include $gc_root . '/vendor/autoload.php';
 }
 
 // Support for ZF2_PATH environment variable or git submodule
 
-if ($zf2Path = getenv('ZF2_PATH') ?: (is_dir($zf_library) ? $zf_library : FALSE))
+if($zf2_path = getenv('ZF2_PATH') ?: (is_dir($zf_library) ? $zf_library : FALSE))
 {
     // Get application stack configuration
     $configuration = require_once $gc_root . '/config/application.config.php';
-    if (isset($loader))
+    if(isset($loader))
     {
-        $loader->add('Zend', $zf2Path . '/Zend');
+        $loader->add('Zend', $zf2_path . '/Zend');
     }
     else
     {
@@ -79,7 +79,8 @@ if ($zf2Path = getenv('ZF2_PATH') ?: (is_dir($zf_library) ? $zf_library : FALSE)
     }
 }
 
-if (!class_exists('Zend\Loader\AutoloaderFactory')) {
+if(!class_exists('Zend\Loader\AutoloaderFactory'))
+{
     throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
 }
 
@@ -93,7 +94,7 @@ $application = \Zend\Mvc\Application::init($configuration);
  * Load the user-defined test configuration file, if it exists; otherwise, load
  * the default configuration.
  */
-if (is_readable($gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php'))
+if(is_readable($gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php'))
 {
     require_once $gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php';
 }
@@ -109,7 +110,7 @@ require_once('prepare-database.php');
 /**
  * Start output buffering, if enabled
  */
-if (defined('TESTS_ES_OB_ENABLED') && constant('TESTS_ES_OB_ENABLED'))
+if(defined('TESTS_ES_OB_ENABLED') && constant('TESTS_ES_OB_ENABLED'))
 {
     ob_start();
 }

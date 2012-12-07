@@ -37,9 +37,9 @@ class TranslationController extends Action
 {
     /**
      * Contains information about acl
-     * @var array $_acl_page
+     * @var array $_aclPage
      */
-    protected $_acl_page = array('resource' => 'Content', 'permission' => 'translation');
+    protected $_aclPage = array('resource' => 'Content', 'permission' => 'translation');
 
     /**
      * Initialize Media Controller
@@ -50,7 +50,7 @@ class TranslationController extends Action
         $documents = new DocumentCollection();
         $documents->load(0);
 
-        $this->layout()->setVariable('treeview',  Component\TreeView::render(array($documents)));
+        $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
 
         $routes = array(
             'edit' => 'documentEdit',

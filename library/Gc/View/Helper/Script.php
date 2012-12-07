@@ -143,7 +143,7 @@ class Script extends AbstractHelper
     public function __call($method, $params)
     {
         $plugin = $this->plugin($method);
-        if (is_callable($plugin))
+        if(is_callable($plugin))
         {
             return call_user_func_array($plugin, $params);
         }

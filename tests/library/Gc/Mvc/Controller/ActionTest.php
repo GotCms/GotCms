@@ -37,9 +37,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testOnDispatch()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -49,9 +47,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testInit()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -61,8 +57,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testGetRouteMatch()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

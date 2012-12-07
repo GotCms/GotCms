@@ -54,7 +54,7 @@ class Model extends AbstractTable
         $select = $this->select();
         if($this->getDocumentTypeId() !== NULL)
         {
-            $select->where('document_type_id = ?',$this->getDocumentTypeId());
+            $select->where('document_type_id = ?', $this->getDocumentTypeId());
         }
 
         if($this->getId() !== NULL)

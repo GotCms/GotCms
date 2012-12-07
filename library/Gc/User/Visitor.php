@@ -255,12 +255,12 @@ class Visitor extends AbstractTable
             case 'MONTH':
                 for($i = 1;$i <= 12; $i++)
                 {
-                    $values[date( 'M', mktime(0, 0, 0, $i))] = 0;
+                    $values[date('M', mktime(0, 0, 0, $i))] = 0;
                 }
 
                 foreach($rows as $row)
                 {
-                    $values[date( 'M', mktime(0, 0, 0, $row['date']))] = $row['nb'];
+                    $values[date('M', mktime(0, 0, 0, $row['date']))] = $row['nb'];
                 }
             break;
 

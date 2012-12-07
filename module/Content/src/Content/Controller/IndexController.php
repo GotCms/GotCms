@@ -42,7 +42,7 @@ class IndexController extends Action
         $documents = new DocumentCollection();
         $documents->load(0);
 
-        $this->layout()->setVariable('treeview',  Component\TreeView::render(array($documents)));
+        $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
 
         $routes = array(
             'edit' => 'documentEdit',

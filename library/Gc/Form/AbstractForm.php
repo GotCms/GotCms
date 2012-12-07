@@ -62,7 +62,9 @@ abstract class AbstractForm extends Form
     /**
      * Initialize form
      */
-    public function init(){}
+    public function init()
+    {
+    }
 
     /**
      * Get db adapter

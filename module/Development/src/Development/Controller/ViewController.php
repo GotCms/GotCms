@@ -37,9 +37,9 @@ class ViewController extends Action
 {
     /**
      * Contains information about acl
-     * @var array $_acl_page
+     * @var array $_aclPage
      */
-    protected $_acl_page = array('resource' => 'Development', 'permission' => 'view');
+    protected $_aclPage = array('resource' => 'Development', 'permission' => 'view');
 
     /**
      * List all views
@@ -100,7 +100,7 @@ class ViewController extends Action
         }
 
         $view_form = new ViewForm();
-        $view_form->setAttribute('action', $this->url()->fromRoute('viewEdit',array('id' => $view_id)));
+        $view_form->setAttribute('action', $this->url()->fromRoute('viewEdit', array('id' => $view_id)));
         $view_form->loadValues($view_model);
 
         if($this->getRequest()->isPost())

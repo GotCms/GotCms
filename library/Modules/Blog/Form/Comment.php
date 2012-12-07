@@ -54,8 +54,8 @@ class Comment extends AbstractForm
         $this->add($email);
         $this->add($message);
 
-        $inputFilterFactory = new InputFilterFactory();
-        $inputFilter = $inputFilterFactory->createInputFilter(array(
+        $input_filter_factory = new InputFilterFactory();
+        $input_filter = $input_filter_factory->createInputFilter(array(
             'show_email' => array(
                 'name' => 'show_email',
                 'required'=> FALSE,
@@ -77,6 +77,6 @@ class Comment extends AbstractForm
             ),
         ));
 
-        $this->setInputFilter($inputFilter);
+        $this->setInputFilter($input_filter);
     }
 }

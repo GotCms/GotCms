@@ -66,18 +66,18 @@ class TreeView
             }
 
             $children = $iterator->getChildren();
-            $haveChildren = !empty($children);
+            $has_children = !empty($children);
             $html .= '<li id="'.$iterator->getIterableId().'"';
 
-            if($haveChildren)
+            if($has_children)
             {
                 $rel = ' class="folder"';
                 $ins ='<ins class="jstree-icon">&nbsp;</ins>';
-                $renderChildren = self::render($children, FALSE);
+                $render_children = self::render($children, FALSE);
             }
             else
             {
-                $renderChildren = '';
+                $render_children = '';
                 $rel = ' class="default"';
                 $ins = '';
             }
@@ -103,7 +103,7 @@ class TreeView
             }
 
             $html .= $iterator->getName().'</a>';
-            $html .= $renderChildren;
+            $html .= $render_children;
             $html .='</li>';
         }
 

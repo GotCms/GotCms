@@ -37,9 +37,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetValue()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -49,9 +47,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testSetValue()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -61,9 +57,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetConfig()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -73,9 +67,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testSetConfig()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -85,9 +77,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetUploadUrl()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -97,9 +87,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetName()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -109,9 +97,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetProperty()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -121,9 +107,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetDatatype()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -133,9 +117,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetRequest()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -145,9 +127,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -157,9 +137,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testAddPath()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -169,8 +147,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetHelper()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

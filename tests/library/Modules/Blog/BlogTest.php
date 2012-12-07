@@ -11,7 +11,7 @@ class BlogTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Blog
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -19,7 +19,7 @@ class BlogTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Blog;
+        $this->_object = new Blog;
     }
 
     /**
@@ -37,9 +37,7 @@ class BlogTest extends \PHPUnit_Framework_TestCase
     public function testOnBootstrap()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -49,9 +47,7 @@ class BlogTest extends \PHPUnit_Framework_TestCase
     public function testInstall()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -61,8 +57,6 @@ class BlogTest extends \PHPUnit_Framework_TestCase
     public function testUninstall()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

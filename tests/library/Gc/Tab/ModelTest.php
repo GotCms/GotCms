@@ -37,9 +37,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -49,9 +47,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -61,9 +57,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testDelete()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -73,9 +67,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testFromArray()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -85,9 +77,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testFromId()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -97,9 +87,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testGetDocumentType()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -109,8 +97,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testGetProperties()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

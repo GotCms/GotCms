@@ -173,7 +173,8 @@ abstract class Object
         $default = NULL;
 
         // accept a/b/c as ['a']['b']['c']
-        if(strpos($key,'/')) // Not  !== FALSE no need '/a/b always return NULL
+        // Not  !== FALSE no need '/a/b always return NULL
+        if(strpos($key, '/'))
         {
             $key_array = explode('/', $key);
             $data = $this->_data;
@@ -299,10 +300,10 @@ abstract class Object
      * @param array $array array of required attributes
      * @param string $root_name name of the root element
      * @param boolean $add_open_tag insert <?xml>
-     * @param boolean $add_Cdata insert CDATA[]
+     * @param boolean $add_cdata insert CDATA[]
      * @return string
      */
-    protected function __toXml(array $array = array(), $root_name = 'item', $add_open_tag = FALSE, $add_Cdata = TRUE)
+    protected function __toXml(array $array = array(), $root_name = 'item', $add_open_tag = FALSE, $add_cdata = TRUE)
     {
         $xml = '';
         if($add_open_tag)
@@ -320,7 +321,7 @@ abstract class Object
 
         foreach($array_data as $field_name => $field_value)
         {
-            if($add_Cdata === TRUE)
+            if($add_cdata === TRUE)
             {
                 $field_value = '<![CDATA[' . $field_value . ']]>';
             }
@@ -347,12 +348,12 @@ abstract class Object
      * @param array $array
      * @param string $root_name
      * @param boolean $add_open_tag insert <?xml>
-     * @param boolean $add_Cdata insert CDATA[]
+     * @param boolean $add_cdata insert CDATA[]
      * @return string
      */
-    public function toXml(array $array = array(), $root_name = 'item', $add_open_tag = FALSE, $add_Cdata = TRUE)
+    public function toXml(array $array = array(), $root_name = 'item', $add_open_tag = FALSE, $add_cdata = TRUE)
     {
-        return $this->__toXml($array, $root_name, $add_open_tag, $add_Cdata);
+        return $this->__toXml($array, $root_name, $add_open_tag, $add_cdata);
     }
 
     /**
@@ -419,23 +420,27 @@ abstract class Object
         switch(substr($method, 0, 3))
         {
             case 'get' :
-                $key = $this->_underscore(substr($method,3));
+                $key = $this->_underscore(substr($method, 3));
                 $data = $this->getData($key, isset($args[0]) ? $args[0] : NULL);
                 return $data;
+            break;
 
             case 'set' :
-                $key = $this->_underscore(substr($method,3));
+                $key = $this->_underscore(substr($method, 3));
                 $result = $this->setData($key, isset($args[0]) ? $args[0] : NULL);
                 return $result;
+            break;
 
             case 'uns' :
-                $key = $this->_underscore(substr($method,3));
+                $key = $this->_underscore(substr($method, 3));
                 $result = $this->unsetData($key);
                 return $result;
+            break;
 
             case 'has' :
-                $key = $this->_underscore(substr($method,3));
+                $key = $this->_underscore(substr($method, 3));
                 return isset($this->_data[$key]);
+            break;
         }
 
         throw new \Gc\Exception('Invalid method ' . get_class($this) . "::" . $method . "(" . print_r($args, 1) . ")");

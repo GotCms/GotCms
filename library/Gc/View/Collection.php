@@ -41,7 +41,7 @@ class Collection extends AbstractTable
      * List of \Gc\View\Model
      * @var array
      */
-    protected $_views_elements = array();
+    protected $_viewsElements = array();
 
     /**
      * Table name
@@ -115,7 +115,7 @@ class Collection extends AbstractTable
      */
     public function addElement(Model $view)
     {
-        $this->_views_elements[] = $view;
+        $this->_viewsElements[] = $view;
         return $this;
     }
 
@@ -125,17 +125,17 @@ class Collection extends AbstractTable
      */
     public function clearElements()
     {
-        $this->_views_elements = array();
+        $this->_viewsElements = array();
         return $this;
     }
 
     /**
-     * get all elements store in $_views_elements
+     * get all elements store in $_viewsElements
      * @return array
      */
     public function getElements()
     {
-        return $this->_views_elements;
+        return $this->_viewsElements;
     }
 
     /**

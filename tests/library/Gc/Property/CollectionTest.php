@@ -37,9 +37,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -49,9 +47,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetProperties()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -61,9 +57,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testAddProperty()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -73,9 +67,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testSetProperties()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -85,9 +77,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -97,8 +87,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testDelete()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

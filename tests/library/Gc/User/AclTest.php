@@ -55,9 +55,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     public function testListRoles()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -67,9 +65,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     public function testGetRoleId()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -79,9 +75,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     public function testListResources()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -91,8 +85,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
     public function testListResourcesByGroup()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

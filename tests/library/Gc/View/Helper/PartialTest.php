@@ -93,7 +93,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
 
         $return = $this->_object->__invoke('partial-vars.phtml', $model);
 
-        foreach (get_object_vars($model) as $key => $value)
+        foreach(get_object_vars($model) as $key => $value)
         {
             $string = sprintf('%s: %s', $key, $value);
             $this->assertContains($string, $return);

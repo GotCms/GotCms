@@ -37,13 +37,13 @@ use Gc\Document\Model as DocumentModel,
 
 class Document extends AbstractForm
 {
-    protected $parentId = NULL;
-    protected $documentId = NULL;
+    protected $_parentId = NULL;
+    protected $_documentId = NULL;
 
     public function init()
     {
-        $inputFilterFactory = new InputFilterFactory();
-        $inputFilter = $inputFilterFactory->createInputFilter(array(
+        $input_filter_factory = new InputFilterFactory();
+        $input_filter = $input_filter_factory->createInputFilter(array(
             'document-name' => array(
                 'name' => 'document-name',
                 'required'=> TRUE,
@@ -71,7 +71,7 @@ class Document extends AbstractForm
             ),
         ));
 
-        $this->setInputFilter($inputFilter);
+        $this->setInputFilter($input_filter);
 
         $name = new Element\Text('document-name');
         $name->setAttribute('label', 'Name')
@@ -105,13 +105,13 @@ class Document extends AbstractForm
         $parent = $this->get('parent');
         if(!empty($parent))
         {
-            $this->parentId = $parent->getValue();
+            $this->_parentId = $parent->getValue();
         }
 
-        $condition = sprintf('parent_id = %d', $this->parentId);
-        if(!empty($this->documentId))
+        $condition = sprintf('parent_id = %d', $this->_parentId);
+        if(!empty($this->_documentId))
         {
-            $condition .= sprintf(' AND id != %d', $this->documentId);
+            $condition .= sprintf(' AND id != %d', $this->_documentId);
         }
 
         $input_filter = $this->getInputFilter();
@@ -173,8 +173,8 @@ class Document extends AbstractForm
             }
         }
 
-        $inputFilterFactory = $this->getInputFilter();
-        $inputFilter = $inputFilterFactory->add(array(
+        $input_filter_factory = $this->getInputFilter();
+        $input_filter = $input_filter_factory->add(array(
             'name' => 'document-view',
             'required'=> TRUE,
             'validators' => array(
@@ -197,7 +197,7 @@ class Document extends AbstractForm
             ->setAttribute('id', 'layout')
             ->setAttribute('label', 'Layout');
 
-        $inputFilter = $inputFilterFactory->add(array(
+        $input_filter = $input_filter_factory->add(array(
             'name' => 'document-layout',
             'required'=> TRUE,
             'validators' => array(
@@ -214,8 +214,8 @@ class Document extends AbstractForm
         $more_information->setAttribute('content', '');
         $this->add($more_information);
 
-        $this->parentId = $document->getParentId();
-        $this->documentId = $document->getId();
+        $this->_parentId = $document->getParentId();
+        $this->_documentId = $document->getId();
 
         $this->loadValues($document);
     }

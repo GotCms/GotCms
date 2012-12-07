@@ -206,10 +206,10 @@ class Image
         $rgb_array = array();
         if(strlen($hex_string) == 6)
         {
-            $colorVal = hexdec($hex_string);
-            $rgb_array['red'] = 0xFF & ($colorVal >> 0x10);
-            $rgb_array['green'] = 0xFF & ($colorVal >> 0x8);
-            $rgb_array['blue'] = 0xFF & $colorVal;
+            $color_val = hexdec($hex_string);
+            $rgb_array['red'] = 0xFF & ($color_val >> 0x10);
+            $rgb_array['green'] = 0xFF & ($color_val >> 0x8);
+            $rgb_array['blue'] = 0xFF & $color_val;
         }
         elseif(strlen($hex_string) == 3)
         {
@@ -328,8 +328,8 @@ class Image
     protected function _crop($new_width, $new_height, $source_x = 0, $source_y = 0)
     {
         $crop = $this->_imageResized;
-        $this->_imageResized = imagecreatetruecolor($new_width , $new_height);
-        imagecopyresampled($this->_imageResized, $this->_image, 0, 0, $source_x, $source_y, $this->_width, $this->_height , $this->_width, $this->_height);
+        $this->_imageResized = imagecreatetruecolor($new_width, $new_height);
+        imagecopyresampled($this->_imageResized, $this->_image, 0, 0, $source_x, $source_y, $this->_width, $this->_height, $this->_width, $this->_height);
 
         return $this;
     }

@@ -151,7 +151,7 @@ class Stream
         switch ($whence)
         {
             case SEEK_SET:
-                if ($offset < strlen(self::$_data[$this->_path]) and $offset >= 0)
+                if($offset < strlen(self::$_data[$this->_path]) and $offset >= 0)
                 {
                     $this->_pos = $offset;
                     return true;
@@ -163,7 +163,7 @@ class Stream
             break;
 
             case SEEK_CUR:
-                if ($offset >= 0)
+                if($offset >= 0)
                 {
                     $this->_pos += $offset;
                     return true;
@@ -175,7 +175,7 @@ class Stream
             break;
 
             case SEEK_END:
-                if (strlen(self::$_data[$this->_path]) + $offset >= 0)
+                if(strlen(self::$_data[$this->_path]) + $offset >= 0)
                 {
                     $this->_pos = strlen(self::$_data[$this->_path]) + $offset;
                     return true;

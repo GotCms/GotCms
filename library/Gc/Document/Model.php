@@ -83,7 +83,7 @@ class Model extends AbstractTable implements IterableInterface
             $view = View\Model::fromId($this->getViewId());
             if($view !== NULL)
             {
-                $this->setData('view',$view);
+                $this->setData('view', $view);
             }
         }
 

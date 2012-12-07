@@ -40,9 +40,9 @@ class DocumentController extends Action
 {
     /**
      * Contains information about acl
-     * @var array $_acl_page
+     * @var array $_aclPage
      */
-    protected $_acl_page = array('resource' => 'Content', 'permission' => 'document');
+    protected $_aclPage = array('resource' => 'Content', 'permission' => 'document');
 
     /**
      * Initialize Document Controller
@@ -53,7 +53,7 @@ class DocumentController extends Action
         $documents = new DocumentCollection();
         $documents->load(0);
 
-        $this->layout()->setVariable('treeview',  Component\TreeView::render(array($documents)));
+        $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
 
         $routes = array(
             'edit' => 'documentEdit',
@@ -100,14 +100,12 @@ class DocumentController extends Action
 
         if($this->getRequest()->isPost())
         {
-            $document_form->getInputFilter()->add(
-                array(
-                    'required'=> TRUE,
-                    'validators' => array(
-                        array('name' => 'not_empty'),
-                    ),
-                )
-            , 'document_type');
+            $document_form->getInputFilter()->add(array(
+                'required'=> TRUE,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ), 'document_type');
             $document_form->setData($this->getRequest()->getPost()->toArray());
             if(!$document_form->isValid())
             {

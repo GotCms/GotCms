@@ -94,7 +94,6 @@ class Navigation
     public function render(array $documents = NULL, $parent_url = NULL)
     {
         $navigation = array();
-        $hasFooter = FALSE;
         if($documents === NULL && !empty($this->_documents))
         {
             $documents = $this->_documents;

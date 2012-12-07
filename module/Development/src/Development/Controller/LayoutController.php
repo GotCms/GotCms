@@ -37,9 +37,9 @@ class LayoutController extends Action
 {
     /**
      * Contains information about acl
-     * @var array $_acl_page
+     * @var array $_aclPage
      */
-    protected $_acl_page = array('resource' => 'Development', 'permission' => 'layout');
+    protected $_aclPage = array('resource' => 'Development', 'permission' => 'layout');
 
     /**
      * List all layouts

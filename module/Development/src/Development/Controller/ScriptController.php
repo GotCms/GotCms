@@ -37,9 +37,9 @@ class ScriptController extends Action
 {
     /**
      * Contains information about acl
-     * @var array $_acl_page
+     * @var array $_aclPage
      */
-    protected $_acl_page = array('resource' => 'Development', 'permission' => 'script');
+    protected $_aclPage = array('resource' => 'Development', 'permission' => 'script');
 
     /**
      * List all scripts
@@ -100,7 +100,7 @@ class ScriptController extends Action
         }
 
         $script_form = new ScriptForm();
-        $script_form->setAttribute('action', $this->url()->fromRoute('scriptEdit',array('id' => $script_id)));
+        $script_form->setAttribute('action', $this->url()->fromRoute('scriptEdit', array('id' => $script_id)));
         $script_form->loadValues($script_model);
 
         if($this->getRequest()->isPost())

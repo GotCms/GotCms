@@ -35,8 +35,8 @@ class View extends AbstractForm
 {
     public function init()
     {
-        $inputFilterFactory = new InputFilterFactory();
-        $inputFilter = $inputFilterFactory->createInputFilter(array(
+        $input_filter_factory = new InputFilterFactory();
+        $input_filter = $input_filter_factory->createInputFilter(array(
             'name' => array(
                 'required'=> TRUE,
                 'validators' => array(
@@ -70,7 +70,7 @@ class View extends AbstractForm
             ),
         ));
 
-        $this->setInputFilter($inputFilter);
+        $this->setInputFilter($input_filter);
 
         $this->add(new Element('name'));
         $this->add(new Element('identifier'));

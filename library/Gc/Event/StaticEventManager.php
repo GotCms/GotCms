@@ -105,7 +105,7 @@ class StaticEventManager extends SharedEventManager
      */
     public function getEvent($id)
     {
-        if (!array_key_exists($id, $this->identifiers))
+        if(!array_key_exists($id, $this->identifiers))
         {
             return FALSE;
         }

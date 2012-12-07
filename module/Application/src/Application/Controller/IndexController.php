@@ -65,7 +65,7 @@ class IndexController extends Action
         {
             try
             {
-                $session->visitor_id = $visitor->getVisitorId($session_id);
+                $session->visitorId = $visitor->getVisitorId($session_id);
             }
             catch(\Exception $e)
             {
@@ -242,7 +242,7 @@ class IndexController extends Action
      */
     protected function explodePath($path)
     {
-        $explode_path = explode('/',$path);
+        $explode_path = explode('/', $path);
         if(preg_match('/\/$/', $path))
         {
             array_pop($explode_path);

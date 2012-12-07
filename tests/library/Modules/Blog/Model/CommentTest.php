@@ -11,7 +11,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Comment
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -19,7 +19,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Comment;
+        $this->_object = new Comment;
     }
 
     /**
@@ -37,9 +37,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     public function testGetDocumentList()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -49,9 +47,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     public function testGetList()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -61,8 +57,6 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     public function testAdd()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

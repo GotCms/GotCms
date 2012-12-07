@@ -41,7 +41,7 @@ class CmsController extends Action
      * Contains information about acl
      * @var array
      */
-    protected $_acl_page = array('resource' => 'Config', 'permission' => 'system');
+    protected $_aclPage = array('resource' => 'Config', 'permission' => 'system');
 
     /**
      * Generate general configuration form

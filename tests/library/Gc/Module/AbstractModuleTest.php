@@ -36,9 +36,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     public function testGetAdapter()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -47,8 +45,6 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     public function testGetDriverName()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

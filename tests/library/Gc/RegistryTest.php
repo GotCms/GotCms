@@ -17,7 +17,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Registry
      */
-    protected $_old_instance;
+    protected $_oldInstance;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -26,7 +26,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_old_instance = Registry::getInstance();
+        $this->_oldInstance = Registry::getInstance();
         $this->_object = new Registry;
     }
 
@@ -37,7 +37,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->_object->_unsetInstance();
-        Registry::setInstance($this->_old_instance);
+        Registry::setInstance($this->_oldInstance);
     }
 
     /**

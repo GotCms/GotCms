@@ -81,9 +81,9 @@ class Partial extends ZendPartial
             }
             elseif(is_object($values))
             {
-                if(NULL !== ($objectKey = $this->getObjectKey()))
+                if(NULL !== ($object_key = $this->getObjectKey()))
                 {
-                    $view->vars()->offsetSet($objectKey, $values);
+                    $view->vars()->offsetSet($object_key, $values);
                 }
                 elseif(method_exists($values, 'toArray'))
                 {

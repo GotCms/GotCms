@@ -37,9 +37,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     public function testSetParameters()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -49,9 +47,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetToolbarAsJs()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -61,9 +57,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetAllToolbarItems()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -73,8 +67,6 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetAllItems()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

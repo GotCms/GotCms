@@ -36,9 +36,9 @@ class RoleController extends Action
 {
     /**
      * Contains information about acl
-     * @var array $_acl_page
+     * @var array $_aclPage
      */
-    protected $_acl_page = array('resource' => 'Config', 'permission' => 'role');
+    protected $_aclPage = array('resource' => 'Config', 'permission' => 'role');
 
     /**
      * List all roles

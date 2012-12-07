@@ -69,13 +69,13 @@ class Collection extends AbstractTable
             $select->order('name ASC');
         });
 
-        $documentTypes = array();
+        $document_types = array();
         foreach($rows as $row)
         {
-            $documentTypes[] = Model::fromArray((array)$row);
+            $document_types[] = Model::fromArray((array)$row);
         }
 
-        $this->setData('document_types', $documentTypes);
+        $this->setData('document_types', $document_types);
     }
 
     /**

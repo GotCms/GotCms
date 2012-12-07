@@ -11,7 +11,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Image
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -19,7 +19,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Image;
+        $this->_object = new Image;
     }
 
     /**
@@ -37,9 +37,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testOpen()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -49,9 +47,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testResize()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -61,9 +57,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testHex2rgb()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -73,8 +67,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

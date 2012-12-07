@@ -38,7 +38,7 @@ class Registry extends ArrayObject
      * Registry object provides storage for shared objects.
      * @var \Gc\Registry
      */
-    private static $registry = null;
+    private static $_registry = null;
 
     /**
      * Retrieves the default registry instance.
@@ -47,30 +47,30 @@ class Registry extends ArrayObject
      */
     public static function getInstance()
     {
-        if (self::$registry === null)
+        if(self::$_registry === null)
         {
             self::init();
         }
 
-        return self::$registry;
+        return self::$_registry;
     }
 
     /**
      * Set the default registry instance to a specified instance.
      *
-     * @param Registry $registry An object instance of type Registry,
+     * @param Registry $_registry An object instance of type Registry,
      *   or a subclass.
      * @return void
      * @throws RuntimeException if registry is already initialized.
      */
-    public static function setInstance(Registry $registry)
+    public static function setInstance(Registry $_registry)
     {
-        if (self::$registry !== null)
+        if(self::$_registry !== null)
         {
             throw new RuntimeException('Registry is already initialized');
         }
 
-        self::$registry = $registry;
+        self::$_registry = $_registry;
     }
 
     /**
@@ -90,7 +90,7 @@ class Registry extends ArrayObject
      */
     public static function _unsetInstance()
     {
-        self::$registry = null;
+        self::$_registry = null;
     }
 
     /**
@@ -108,7 +108,7 @@ class Registry extends ArrayObject
     {
         $instance = self::getInstance();
 
-        if (!$instance->offsetExists($index))
+        if(!$instance->offsetExists($index))
         {
             throw new RuntimeException("No entry is registered for key '$index'");
         }
@@ -143,12 +143,12 @@ class Registry extends ArrayObject
      */
     public static function isRegistered($index)
     {
-        if (self::$registry === null)
+        if(self::$_registry === null)
         {
             return false;
         }
 
-        return self::$registry->offsetExists($index);
+        return self::$_registry->offsetExists($index);
     }
 
     /**

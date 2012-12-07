@@ -112,17 +112,6 @@ class Collection extends AbstractTable
     }
 
     /**
-     * Add property
-     * @param mixed $property
-     * @return void
-     */
-    public function addProperty($property)
-    {
-        $this->_properties_elements[] = $property;
-        return $this;
-    }
-
-    /**
      * Set properties
      * @param array $properties
      * @return void

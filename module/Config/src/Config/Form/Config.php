@@ -69,14 +69,14 @@ class Config extends AbstractForm
         $offline_document->setValueOptions(array('Select document') + $document_collection->getSelect());
 
         $layout_collection = new Layout\Collection();
-        $layout_404 = new Element\Select('site_404_layout');
-        $layout_404->setAttribute('label', '404 layout');
-        $layout_404->setValueOptions(array('Select document') + $layout_collection->getSelect());
+        $layout_not_found = new Element\Select('site_404_layout');
+        $layout_not_found->setAttribute('label', '404 layout');
+        $layout_not_found->setValueOptions(array('Select document') + $layout_collection->getSelect());
 
         $general_fieldset->add($name);
         $general_fieldset->add($is_offline);
         $general_fieldset->add($offline_document);
-        $general_fieldset->add($layout_404);
+        $general_fieldset->add($layout_not_found);
         $this->add($general_fieldset);
 
         $this->getInputFilter()->add(array(

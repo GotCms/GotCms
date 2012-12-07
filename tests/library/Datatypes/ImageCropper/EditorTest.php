@@ -11,7 +11,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Editor
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -19,7 +19,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Editor;
+        $this->_object = new Editor;
     }
 
     /**
@@ -37,9 +37,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
     /**
@@ -49,8 +47,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }

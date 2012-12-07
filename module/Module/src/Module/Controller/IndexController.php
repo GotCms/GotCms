@@ -40,9 +40,9 @@ class IndexController extends Action
 {
     /**
      * Contains information about acl
-     * @var array $_acl_page
+     * @var array $_aclPage
      */
-    protected $_acl_page = array('resource' => 'Modules', 'permission' => 'all');
+    protected $_aclPage = array('resource' => 'Modules', 'permission' => 'all');
 
     /**
      * @return \Zend\View\Model\ViewModel

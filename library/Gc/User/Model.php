@@ -52,20 +52,20 @@ class Model extends AbstractTable
      */
     public function authenticate($login, $password)
     {
-        $authAdapter = new Adapter\DbTable($this->getAdapter());
-        $authAdapter->setTableName($this->_name);
-        $authAdapter->setIdentityColumn('login');
-        $authAdapter->setCredentialColumn('password');
+        $auth_adapter = new Adapter\DbTable($this->getAdapter());
+        $auth_adapter->setTableName($this->_name);
+        $auth_adapter->setIdentityColumn('login');
+        $auth_adapter->setCredentialColumn('password');
 
-        $authAdapter->setIdentity($login);
-        $authAdapter->setCredential(sha1($password));
+        $auth_adapter->setIdentity($login);
+        $auth_adapter->setCredential(sha1($password));
 
         $auth = new AuthenticationService();
-        $result = $auth->authenticate($authAdapter);
+        $result = $auth->authenticate($auth_adapter);
 
         if($result->isValid())
         {
-            $data = $authAdapter->getResultRowObject(null, 'password');
+            $data = $auth_adapter->getResultRowObject(null, 'password');
             $this->setData((array)$data);
             $auth->getStorage()->write($this);
 

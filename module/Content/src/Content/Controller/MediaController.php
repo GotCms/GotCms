@@ -44,9 +44,9 @@ class MediaController extends Action
 {
     /**
      * Contains information about acl
-     * @var array $_acl_page
+     * @var array $_aclPage
      */
-    protected $_acl_page = array('resource' => 'Content', 'permission' => 'media');
+    protected $_aclPage = array('resource' => 'Content', 'permission' => 'media');
 
     /**
      * Initialize Content Index Controller
@@ -57,7 +57,7 @@ class MediaController extends Action
         $documents = new DocumentCollection();
         $documents->load(0);
 
-        $this->layout()->setVariable('treeview',  Component\TreeView::render(array($documents)));
+        $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
 
         $routes = array(
             'edit' => 'documentEdit',

@@ -98,7 +98,6 @@ class Editor extends AbstractEditor
     {
         $parameters = $this->getConfig();
         $options  = $parameters['options'];
-        $maxNumberOfFiles = empty($options['maxNumberOfFiles']) ? FALSE : TRUE;
 
         $this->initScript();
         $file_list = array();
