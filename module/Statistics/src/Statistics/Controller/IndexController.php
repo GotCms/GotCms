@@ -78,7 +78,7 @@ class IndexController extends Action
                     'urlsviews' => 'Most urls views'
                 ),
                 'values' => array(
-                    'visitors' => $visitor_model->getNbVisitor($sql_value),
+                    'visitors' => $visitor_model->getNbVisitors($sql_value),
                     'pagesviews' => $visitor_model->getNbPagesViews($sql_value),
                     'urlsviews' => $visitor_model->getUrlsViews($sql_value),
                 ),

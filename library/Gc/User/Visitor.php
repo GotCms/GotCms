@@ -70,11 +70,6 @@ class Visitor extends AbstractTable
             $referer = substr($referer, 0, 255);
         }
 
-        if(!ctype_alnum($session_id))
-        {
-            $session_id = NULL;
-        }
-
         if(!ctype_print($user_agent))
         {
             $user_agent = NULL;
@@ -99,7 +94,7 @@ class Visitor extends AbstractTable
         $select = new Select();
         $select->from(array('lv' => $this->_name))
             ->columns(array('id'))
-            ->where->equalTo('session_id', empty($session_id) ? NULL : $session_id)
+            ->where->equalTo('session_id', $session_id)
             ->equalTo('http_user_agent', empty($user_agent) ? NULL : $user_agent)
             ->equalTo('remote_addr', $remote_addr);
 
@@ -143,6 +138,14 @@ class Visitor extends AbstractTable
     {
         $select = new Select();
         $select->from('log_url_info')->where->equalTo('url', $request_uri);
+        if(is_null($referer))
+        {
+            $select->where->isNull('referer');
+        }
+        else
+        {
+            $select->where->equalTo('referer', $referer);
+        }
 
         $url_info = $this->fetchRow($select);
         if(!empty($url_info->id))
@@ -286,7 +289,7 @@ class Visitor extends AbstractTable
      * @param string $sort
      * @return array
      */
-    public function getNbVisitor($sort)
+    public function getNbVisitors($sort)
     {
         if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
         {

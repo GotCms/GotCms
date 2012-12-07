@@ -28,65 +28,105 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\User\Visitor::getVisitorId
-     * @todo   Implement testGetVisitorId().
      */
     public function testGetVisitorId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0.11) Gecko/20100101 Firefox/10.0.11 Iceweasel/10.0.11';
+        $_SERVER['HTTP_ACCEPT_CHARSET'] = NULL;
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en-us,en;q=0.5';
+        $_SERVER['SERVER_ADDR'] = '127.0.0.1';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+        $_SERVER['REQUEST_URI'] = '/test';
+        $_SERVER['HTTP_REFERER'] = '/';
+        $this->assertTrue(is_numeric($this->_object->getVisitorId('9135ejnhfiebe6u85qhmas7k12')));
+    }
+    /**
+     * @covers Gc\User\Visitor::getVisitorId
+     */
+    public function testGetVisitorIdWithWrongData()
+    {
+        $_SERVER['HTTP_USER_AGENT'] = NULL;
+        $_SERVER['HTTP_ACCEPT_CHARSET'] = NULL;
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = NULL;
+        $_SERVER['SERVER_ADDR'] = '127.0.0.1';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+        $_SERVER['REQUEST_URI'] = '/test';
+        $_SERVER['HTTP_REFERER'] = '/';
+        $this->assertTrue(is_numeric($this->_object->getVisitorId('9135ejnhfiebe6u85qhmas7k12')));
     }
 
     /**
      * @covers Gc\User\Visitor::getUrlId
-     * @todo   Implement testGetUrlId().
      */
     public function testGetUrlId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_numeric($this->_object->getUrlId('/something', NULL)));
+        //Existing url
+        $this->assertTrue(is_numeric($this->_object->getUrlId('/something', NULL)));
+        //with referer
+        $this->assertTrue(is_numeric($this->_object->getUrlId('/something', '/somewhat')));
     }
 
     /**
      * @covers Gc\User\Visitor::getTotalVisitors
-     * @todo   Implement testGetTotalVisitors().
      */
     public function testGetTotalVisitors()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_numeric($this->_object->getTotalVisitors()));
     }
 
     /**
      * @covers Gc\User\Visitor::getTotalPageViews
-     * @todo   Implement testGetTotalPageViews().
      */
     public function testGetTotalPageViews()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_numeric($this->_object->getTotalPageViews()));
     }
 
     /**
-     * @covers Gc\User\Visitor::getVisitStats
-     * @todo   Implement testGetVisitStats().
+     * @covers Gc\User\Visitor::getNbPagesViews
+     * @covers Gc\User\Visitor::_sortData
+     * @covers Gc\User\Visitor::_groupByDate
      */
-    public function testGetVisitStats()
+    public function testGetNbPagesViews()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->getNbPagesViews('HOUR')));
+        $this->assertTrue(is_array($this->_object->getNbPagesViews('TEST')));
+        $this->assertTrue(is_array($this->_object->getNbPagesViews('DAY')));
+        $this->assertTrue(is_array($this->_object->getNbPagesViews('MONTH')));
+        $this->assertTrue(is_array($this->_object->getNbPagesViews('YEAR')));
     }
 
     /**
-     * @covers Gc\User\Visitor::getVisitorStats
-     * @todo   Implement testGetVisitorStats().
+     * @covers Gc\User\Visitor::getNbVisitors
+     * @covers Gc\User\Visitor::_sortData
+     * @covers Gc\User\Visitor::_groupByDate
      */
-    public function testGetVisitorStats()
+    public function testGetNbVisitors()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->getNbVisitors('TEST')));
+        $this->assertTrue(is_array($this->_object->getNbVisitors('HOUR')));
+        $this->assertTrue(is_array($this->_object->getNbVisitors('DAY')));
+        $this->assertTrue(is_array($this->_object->getNbVisitors('MONTH')));
+        $this->assertTrue(is_array($this->_object->getNbVisitors('YEAR')));
+    }
+
+    /**
+     * @covers Gc\User\Visitor::getUrlsViews
+     * @covers Gc\User\Visitor::_sortData
+     * @covers Gc\User\Visitor::_groupByDate
+     */
+    public function testGetUrlsViews()
+    {
+        $this->assertTrue(is_array($this->_object->getUrlsViews('TEST')));
+        $this->assertTrue(is_array($this->_object->getUrlsViews('HOUR')));
+        $this->assertTrue(is_array($this->_object->getUrlsViews('DAY')));
+        $this->assertTrue(is_array($this->_object->getUrlsViews('MONTH')));
+        $this->assertTrue(is_array($this->_object->getUrlsViews('YEAR')));
     }
 }
