@@ -180,7 +180,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Datatypes\jQueryFileUpload\Editor::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
@@ -191,7 +190,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Datatypes\jQueryFileUpload\Editor::load
-     * @todo   Implement testLoad().
+     * @covers Datatypes\jQueryFileUpload\Editor::_initScript
      */
     public function testLoad()
     {

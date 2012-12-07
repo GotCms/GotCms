@@ -99,7 +99,7 @@ class Editor extends AbstractEditor
         $parameters = $this->getConfig();
         $options  = $parameters['options'];
 
-        $this->initScript();
+        $this->_initScript();
         $file_list = array();
         $files = unserialize($this->getValue());
         if(!empty($files))
@@ -138,7 +138,7 @@ class Editor extends AbstractEditor
      * Load resources
      * @return void
      */
-    protected function initScript()
+    protected function _initScript()
     {
         $headscript = $this->getHelper('HeadScript');
         $headscript

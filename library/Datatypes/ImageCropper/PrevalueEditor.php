@@ -46,15 +46,18 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $resize_option = $post->get('resize_option');
         $background = $post->get('background');
         $sizes = array();
-        foreach($sizes_data as $idx => $size)
+        if(!empty($sizes_data) and is_array($sizes_data))
         {
-            if(empty($size['name']) or empty($size['height']) or empty($size['width']))
+            foreach($sizes_data as $idx => $size)
             {
-                continue;
-            }
+                if(empty($size['name']) or empty($size['height']) or empty($size['width']))
+                {
+                    continue;
+                }
 
-            $size['name'] = str_replace(' ', '', $size['name']); // delete useless space
-            $sizes[] = $size;
+                $size['name'] = str_replace(' ', '', $size['name']); // delete useless space
+                $sizes[] = $size;
+            }
         }
 
         $this->setConfig(array('background' => $background, 'resize_option' => $resize_option, 'mime_list' => empty($mime_list) ? array() : $mime_list, 'size' => $sizes));

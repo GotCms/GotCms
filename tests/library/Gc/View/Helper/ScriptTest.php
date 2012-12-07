@@ -67,7 +67,9 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParam()
     {
+        ob_start();
         $this->_object->__invoke('script-identifier', array('key' => 'value'));
+        $data = ob_get_clean();
         $this->assertEquals('value', $this->_object->getParam('key'));
         $this->assertNull($this->_object->getParam('fake-key'));
     }

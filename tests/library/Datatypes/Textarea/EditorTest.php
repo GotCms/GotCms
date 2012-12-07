@@ -103,7 +103,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
         $this->_datatype = DatatypeModel::fromArray(array(
             'name' => 'TextareaTest',
-            'prevalue_value' => '',
+            'prevalue_value' => 'a:1:{s:3:"col";i:10;}',
             'model' => 'Textarea',
         ));
         $this->_datatype->save();
@@ -158,7 +158,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Datatypes\Textarea\Editor::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
@@ -169,7 +168,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Datatypes\Textarea\Editor::load
-     * @todo   Implement testLoad().
      */
     public function testLoad()
     {

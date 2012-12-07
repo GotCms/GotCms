@@ -61,7 +61,7 @@ class Editor extends AbstractEditor
             $file_class->upload();
             $files = $file_class->getFiles();
 
-            if(!empty($files))
+            if(!empty($files) and is_array($files))
             {
                 foreach($files as $file)
                 {

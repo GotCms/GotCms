@@ -100,7 +100,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
         $document->save();
         $collection = new DocumentCollection();
         $collection->load(0);
-        $this->assertEquals('<ul><li><a href="#tabs-7">Document name</a></li></ul>', $this->_object->render($collection->getChildren()));
+        $this->assertEquals(sprintf('<ul><li><a href="#tabs-%d">Document name</a></li></ul>', $document->getId()), $this->_object->render($collection->getChildren()));
     }
 
     /**

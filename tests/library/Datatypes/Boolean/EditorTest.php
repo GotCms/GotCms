@@ -158,7 +158,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Datatypes\Boolean\Editor::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
@@ -169,7 +168,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Datatypes\Boolean\Editor::load
-     * @todo   Implement testLoad().
      */
     public function testLoad()
     {
