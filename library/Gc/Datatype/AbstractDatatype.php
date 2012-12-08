@@ -173,6 +173,17 @@ abstract class AbstractDatatype extends AbstractTable
     }
 
     /**
+     * Set Property Model
+     *
+     * @return \Gc\Datatype\AbstractDatatype
+     */
+    public function setProperty($property)
+    {
+        $this->_property = $property;
+        return $this;
+    }
+
+    /**
      * get datatype name, construct with datatype name and property_id
      *
      * @return string

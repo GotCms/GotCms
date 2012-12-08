@@ -80,8 +80,35 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
             array(
                 'locale' => 'fr_FR',
                 'value' => 'paramètres',
+            ), array(
+                'locale' => '', //Missing locale
+                'value' => 'parametri',
             )
         ));
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers Gc\Core\Translator::setValue
+     */
+    public function testSetValueWithDestinationId()
+    {
+        $this->_object->setValue('parameters', array(
+            array(
+                'd' => 'fr_FR',
+                'locale' => 'fr_FR',
+                'value' => 'paramètres',
+            )
+        ));
+        $data = $this->_object->getValue('parameters', 'fr_FR');
+        $result = $this->_object->setValue('parameters', array(
+            array(
+                'dst_id' => $data->dst_id,
+                'locale' => 'it_IT',
+                'value' => 'parametri',
+            )
+        ));
+
         $this->assertTrue($result);
     }
 

@@ -27,9 +27,9 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_datatype = DatatypeModel::fromArray(array(
-            'name' => 'BooleanTest',
-            'prevalue_value' => 'BooleanTest',
-            'model' => 'Boolean',
+            'name' => 'AbstractDatatype',
+            'prevalue_value' => 'AbstractDatatype',
+            'model' => 'AbstractDatatype',
         ));
         $this->_datatype->save();
 
@@ -63,11 +63,19 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Datatype\AbstractDatatype::load
+     */
+    public function testLoadWithEmptyDatatype()
+    {
+        $this->assertFalse($this->_object->load(NULL, NULL));
+    }
+
+    /**
      * @covers Gc\Datatype\AbstractDatatype::getConfig
      */
     public function testGetConfig()
     {
-        $this->assertEquals('BooleanTest', $this->_object->getConfig());
+        $this->assertEquals('AbstractDatatype', $this->_object->getConfig());
     }
 
     /**
@@ -104,6 +112,15 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Datatype\AbstractDatatype::setProperty
+     */
+    public function testSetProperty()
+    {
+        $this->_object->setProperty('test');
+        $this->assertEquals('test', $this->_object->getProperty());
+    }
+
+    /**
      * @covers Gc\Datatype\AbstractDatatype::getName
      */
     public function testGetName()
@@ -112,21 +129,21 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Gc\Datatype\AbstractDatatype::render
-     * @todo   Implement testRender().
-     */
-    public function testRender()
-    {
-        $this->_object->addPath(__DIR__);
-        $this->assertEquals('String test', trim($this->_object->render('_files/template.phtml')));
-    }
-
-    /**
      * @covers Gc\Datatype\AbstractDatatype::addPath
      */
     public function testAddPath()
     {
         $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', $this->_object->addPath(__DIR__));
+    }
+
+    /**
+     * @covers Gc\Datatype\AbstractDatatype::addPath
+     * @covers Gc\Datatype\AbstractDatatype::render
+     */
+    public function testRender()
+    {
+        $this->_object->addPath(__DIR__);
+        $this->assertEquals('String' . PHP_EOL, $this->_object->render('_files/template.phtml'));
     }
 
     /**

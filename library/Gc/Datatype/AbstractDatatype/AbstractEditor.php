@@ -109,21 +109,6 @@ abstract class AbstractEditor extends Object
     }
 
     /**
-     * Save property value
-     * @return boolean
-     */
-    protected function saveValue()
-    {
-        $value = $this->getValue();
-        if($this->getProperty()->isRequired() and empty($value))
-        {
-            return FALSE;
-        }
-
-        return $this->getProperty()->saveValue();
-    }
-
-    /**
      * get configuration
      * @return void
      */

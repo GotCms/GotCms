@@ -126,6 +126,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
         $model = $this->_object->fromArray($array);
         $model->save();
+        //Save again for code coverage
+        $model->save();
         $this->assertTrue((bool)$model->getId());
     }
 
