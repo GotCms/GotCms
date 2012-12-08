@@ -47,7 +47,7 @@ class Datatype extends AbstractDatatype
      */
     public function getEditor(PropertyModel $property)
     {
-        $this->_property = $property;
+        $this->setProperty($property);
         if($this->_editor === NULL)
         {
             $this->_editor = new Editor($this);
