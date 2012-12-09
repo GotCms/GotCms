@@ -164,13 +164,13 @@ class Model extends AbstractTable
 
     /**
      * Initialize from id
-     * @param integer $id
+     * @param integer $tab_id
      * @return \Gc\Tab\Model
      */
-    static function fromId($id)
+    static function fromId($tab_id)
     {
         $tab_table = new Model();
-        $row = $tab_table->select(array('id' => $id));
+        $row = $tab_table->select(array('id' => (int)$tab_id));
         $current = $row->current();
         if(!empty($current))
         {

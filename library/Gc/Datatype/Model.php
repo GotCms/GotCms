@@ -78,7 +78,7 @@ class Model extends AbstractTable
     static function fromId($datatype_id)
     {
         $datatype_table = new Model();
-        $row = $datatype_table->select(array('id' => $datatype_id));
+        $row = $datatype_table->select(array('id' => (int)$datatype_id));
         $current = $row->current();
         if(!empty($current))
         {

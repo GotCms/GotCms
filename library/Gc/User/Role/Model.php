@@ -132,13 +132,13 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
-     * @param integer $id
+     * @param integer $user_role_id
      * @return \Gc\User\Model\Role
      */
-    static function fromId($id)
+    static function fromId($user_role_id)
     {
         $role_table = new Model();
-        $row = $role_table->select(array('id' => $id));
+        $row = $role_table->select(array('id' => (int)$user_role_id));
         $current = $row->current();
         if(!empty($current))
         {

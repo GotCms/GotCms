@@ -245,13 +245,13 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze model from id
-     * @param integer $id
+     * @param integer $property_id
      * @return \Gc\Property\Model
      */
-    static function fromId($id)
+    static function fromId($property_id)
     {
         $property_table = new Model();
-        $row = $property_table->select(array('id' => $id));
+        $row = $property_table->select(array('id' => (int)$property_id));
         $current = $row->current();
         if(!empty($current))
         {

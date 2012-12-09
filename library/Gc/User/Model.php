@@ -207,13 +207,13 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
-     * @param integer $id
+     * @param integer $user_id
      * @return \Gc\User\Model
      */
-    static function fromId($id)
+    static function fromId($user_id)
     {
         $user_table = new Model();
-        $row = $user_table->select(array('id' => $id));
+        $row = $user_table->select(array('id' => (int)$user_id));
         $current = $row->current();
         if(!empty($current))
         {

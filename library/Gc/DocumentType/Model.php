@@ -280,7 +280,7 @@ class Model extends AbstractTable
     static function fromId($document_type_id)
     {
         $document_type_table = new Model();
-        $row = $document_type_table->select(array('id' => $document_type_id));
+        $row = $document_type_table->select(array('id' => (int)$document_type_id));
         $current = $row->current();
         if(!empty($current))
         {

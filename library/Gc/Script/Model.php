@@ -65,13 +65,13 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
-     * @param integer $id
+     * @param integer $script_id
      * @return \Gc\Script\Model
      */
-    static function fromId($id)
+    static function fromId($script_id)
     {
         $script_table = new Model();
-        $row = $script_table->select(array('id' => $id));
+        $row = $script_table->select(array('id' => (int)$script_id));
         $current = $row->current();
         if(!empty($current))
         {

@@ -54,13 +54,13 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
-     * @param integer $id
+     * @param integer $icon_id
      * @return \Gc\Media\Icon\Model
      */
-    static function fromId($id)
+    static function fromId($icon_id)
     {
         $icon_table = new Model();
-        $row = $icon_table->select(array('id' => $id));
+        $row = $icon_table->select(array('id' => (int)$icon_id));
         $current = $row->current();
         if(!empty($current))
         {

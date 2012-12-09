@@ -65,13 +65,13 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
-     * @param integer $id
+     * @param integer $view_id
      * @return \Gc\View\Model
      */
-    static function fromId($id)
+    static function fromId($view_id)
     {
         $view_table = new Model();
-        $row = $view_table->select(array('id' => $id));
+        $row = $view_table->select(array('id' => (int)$view_id));
         $current = $row->current();
         if(!empty($current))
         {

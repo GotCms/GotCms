@@ -67,13 +67,13 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
-     * @param integer $id
+     * @param integer $layout_id
      * @return \Gc\Layout\Model
      */
-    static function fromId($id)
+    static function fromId($layout_id)
     {
         $layout_table = new Model();
-        $row = $layout_table->select(array('id' => $id));
+        $row = $layout_table->select(array('id' => (int)$layout_id));
         $current = $row->current();
         if(!empty($current))
         {

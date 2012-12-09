@@ -149,7 +149,7 @@ class Model extends AbstractTable implements IterableInterface
     static function fromId($document_id)
     {
         $document_table = new Model();
-        $row = $document_table->select(array('id' => $document_id));
+        $row = $document_table->select(array('id' => (int)$document_id));
         $current = $row->current();
         if(!empty($current))
         {
