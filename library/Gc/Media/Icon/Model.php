@@ -81,7 +81,7 @@ class Model extends AbstractTable
         $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
-            'url' => $this->getIdentifier(),
+            'url' => $this->getUrl(),
         );
 
         try
@@ -121,12 +121,19 @@ class Model extends AbstractTable
         $id = $this->getId();
         if(!empty($id))
         {
-            if(parent::delete(array('id' => $id)))
+            try
             {
-                $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
-                unset($this);
+                if(parent::delete(array('id' => $id)))
+                {
+                    $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+                    unset($this);
 
-                return TRUE;
+                    return TRUE;
+                }
+            }
+            catch(\Exception $e)
+            {
+                throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
 

@@ -32,41 +32,80 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Media\Icon\Model::fromArray
-     * @todo   Implement testFromArray().
      */
     public function testFromArray()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf('Gc\Media\Icon\Model', Model::fromArray(array()));
     }
 
     /**
      * @covers Gc\Media\Icon\Model::fromId
-     * @todo   Implement testFromId().
      */
     public function testFromId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf('Gc\Media\Icon\Model', Model::fromId(1));
+    }
+
+    /**
+     * @covers Gc\Media\Icon\Model::fromId
+     */
+    public function testFromWithWrongId()
+    {
+        $this->assertFalse(Model::fromId('undefined'));
     }
 
     /**
      * @covers Gc\Media\Icon\Model::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->_object->setData(array(
+            'name' => 'IconTest',
+            'url' => 'IconTest'
+        ));
+        $this->assertTrue(is_numeric($this->_object->save()));
+        //Code coverage
+        $this->assertTrue(is_numeric($this->_object->save()));
+    }
+
+    /**
+     * @covers Gc\Media\Icon\Model::save
+     */
+    public function testSaveWithWrongValues()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $this->assertFalse($this->_object->save());
     }
 
     /**
      * @covers Gc\Media\Icon\Model::delete
-     * @todo   Implement testDelete().
      */
     public function testDelete()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->_object->setData(array(
+            'name' => 'IconTest',
+            'url' => 'IconTest'
+        ));
+        $this->_object->save();
+
+        $this->assertTrue($this->_object->delete());
+    }
+
+    /**
+     * @covers Gc\Media\Icon\Model::delete
+     */
+    public function testDeleteWithNoData()
+    {
+        $this->assertFalse($this->_object->delete());
+    }
+
+    /**
+     * @covers Gc\Media\Icon\Model::delete
+     */
+    public function testDeleteWithWrongValues()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $this->_object->setId('undefined');
+        $this->assertFalse($this->_object->delete());
     }
 }

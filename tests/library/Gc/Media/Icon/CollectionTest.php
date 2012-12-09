@@ -28,35 +28,31 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Media\Icon\Collection::init
-     * @todo   Implement testInit().
+     * @covers Gc\Media\Icon\Collection::getIcons
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertNull($this->_object->init());
     }
 
     /**
      * @covers Gc\Media\Icon\Collection::getIcons
-     * @todo   Implement testGetIcons().
      */
     public function testGetIcons()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->getIcons()));
     }
 
     /**
      * @covers Gc\Media\Icon\Collection::getSelect
-     * @todo   Implement testGetSelect().
      */
     public function testGetSelect()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->getSelect()));
     }
 }
