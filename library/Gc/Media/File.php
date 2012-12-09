@@ -140,8 +140,8 @@ class File extends Object
                     $file_object->delete_url = $router->assemble(array(
                         'document_id' => $this->getDocument()->getId(),
                         'property_id' => $this->getProperty()->getId(),
-                        'file' => base64_encode($file_data['name']))
-                    , array('name' => 'mediaRemove'));
+                        'file' => base64_encode($file_data['name'])
+                    ), array('name' => 'mediaRemove'));
                     $file_object->delete_type = 'DELETE';
                     $data[] = $file_object;
                 }
