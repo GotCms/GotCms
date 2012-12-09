@@ -100,7 +100,7 @@ class Model extends AbstractTable
             }
             else
             {
-                $this->update($array_save, sprintf('id = %s', (int)$this->getId()));
+                $this->update($array_save, array('id' => (int)$this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
@@ -132,7 +132,7 @@ class Model extends AbstractTable
                 $properties_collection = new Property\Collection();
                 $properties_collection->load(NULL, $tab_id);
                 $properties_collection->delete();
-                parent::delete('id = '.$tab_id);
+                parent::delete(array('id' => $tab_id));
             }
             catch(\Exception $e)
             {

@@ -189,7 +189,24 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         $this->_object->addViews(array($this->_view->getId(), 0));
+        $this->_object->setDependencies(array($this->_object->getId()));
         $this->assertTrue(is_numeric($this->_object->save()));
+    }
+
+    /**
+     * @covers Gc\DocumentType\Model::save
+     */
+    public function testSaveWithWrongValues()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $model = $this->_object->fromArray(array(
+            'name' => NULL,
+            'description' => NULL,
+            'icon_id' => NULL,
+            'default_view_id' => NULL,
+            'user_id' => NULL,
+        ));
+        $this->assertFalse($model->save());
     }
 
     /**

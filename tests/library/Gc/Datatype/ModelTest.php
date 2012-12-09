@@ -19,7 +19,13 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Model;
+        $this->_object = Model::fromArray(array(
+            'name' => 'ModelTest',
+            'prevalue_value' => '',
+            'description' => 'ModelTest',
+            'model' => 'ModelTest',
+        ));
+        $this->_object->save();
     }
 
     /**
@@ -28,61 +34,94 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->_object->delete();
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Datatype\Model::setPrevalueValue
-     * @todo   Implement testSetPrevalueValue().
      */
     public function testSetPrevalueValue()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->_object->setPrevalueValue('s:11:"string test";');
+        $this->assertEquals('string test', $this->_object->getPrevalueValue());
+        $this->_object->setPrevalueValue(array('array test'));
+        $this->assertEquals(array('array test'), $this->_object->getPrevalueValue());
     }
 
     /**
      * @covers Gc\Datatype\Model::fromArray
-     * @todo   Implement testFromArray().
      */
     public function testFromArray()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf('Gc\Datatype\Model', $this->_object->fromArray(array(
+            'name' => 'ModelTest',
+            'prevalue_value' => '',
+            'description' => 'ModelTest',
+            'model' => 'ModelTest',
+        )));
     }
 
     /**
      * @covers Gc\Datatype\Model::fromId
-     * @todo   Implement testFromId().
      */
     public function testFromId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+
+        $this->assertInstanceOf('Gc\Datatype\Model', Model::fromId($this->_object->getId()));
+        $this->assertFalse(Model::fromId('undefined id'));
     }
 
     /**
      * @covers Gc\Datatype\Model::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $model = $this->_object->fromArray(array(
+            'name' => 'ModelTest',
+            'prevalue_value' => '',
+            'description' => 'ModelTest',
+            'model' => 'ModelTest',
+        ));
+        $this->assertTrue(is_numeric($model->save()));
+        //Test update
+        $this->assertTrue(is_numeric($model->save()));
+        $model->delete();
+    }
+
+    /**
+     * @covers Gc\Datatype\Model::save
+     */
+    public function testSaveWithWrongValues()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $model = $this->_object->fromArray(array(
+            'name' => 'ModelTest',
+            'prevalue_value' => '',
+            'description' => 'ModelTest',
+        ));
+        $this->assertFalse($model->save());
     }
 
     /**
      * @covers Gc\Datatype\Model::delete
-     * @todo   Implement testDelete().
      */
     public function testDelete()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue($this->_object->delete());
+    }
+
+    /**
+     * @covers Gc\Datatype\Model::delete
+     */
+    public function testDeleteWithoutId()
+    {
+        $model = new Model();
+        $this->assertFalse($model->delete());
     }
 
     /**
      * @covers Gc\Datatype\Model::savePrevalueEditor
-     * @todo   Implement testSavePrevalueEditor().
      */
     public function testSavePrevalueEditor()
     {
@@ -92,7 +131,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Datatype\Model::saveEditor
-     * @todo   Implement testSaveEditor().
      */
     public function testSaveEditor()
     {
@@ -102,7 +140,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Datatype\Model::loadPrevalueEditor
-     * @todo   Implement testLoadPrevalueEditor().
      */
     public function testLoadPrevalueEditor()
     {
@@ -111,8 +148,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Gc\Datatype\Model::loadEditor
-     * @todo   Implement testLoadEditor().
+     * @covers Gc\Datatype\Model::loadEditorx
      */
     public function testLoadEditor()
     {
@@ -121,8 +157,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Gc\Datatype\Model::loadDatatype
-     * @todo   Implement testLoadDatatype().
+     * @covers Gc\Datatype\Model::loadDatatypex
      */
     public function testLoadDatatype()
     {

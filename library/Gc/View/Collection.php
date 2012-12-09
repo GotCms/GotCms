@@ -76,7 +76,7 @@ class Collection extends AbstractTable
             if($this->getDocumentTypeId() !== NULL)
             {
                 $select->join('document_type_view', 'document_type_view.view_id = view.id', array());
-                $select->where(sprintf('document_type_view.document_type_id = %s', $this->getDocumentTypeId()));
+                $select->where->equalTo('document_type_view.document_type_id', $this->getDocumentTypeId());
             }
 
             $rows = $this->fetchAll($select);

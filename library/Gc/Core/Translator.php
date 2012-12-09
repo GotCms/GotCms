@@ -163,7 +163,7 @@ class Translator extends AbstractTable
                     'destination' => $destination['value'],
                     'locale' => $destination['locale']
                 ));
-                $update->where(sprintf('id = %d', $destination['dst_id']));
+                $update->where->equalTo('id', $destination['dst_id']);
 
                 $instance->execute($update);
             }

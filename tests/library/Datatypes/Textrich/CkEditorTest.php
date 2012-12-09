@@ -28,45 +28,41 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Datatypes\Textrich\CkEditor::setParameters
-     * @todo   Implement testSetParameters().
      */
     public function testSetParameters()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf('Datatypes\Textrich\CkEditor', $this->_object->setParameters(array()));
+        $this->assertInstanceOf('Datatypes\Textrich\CkEditor', $this->_object->setParameters(array('toolbar-items' => 'test')));
     }
 
     /**
      * @covers Datatypes\Textrich\CkEditor::getToolbarAsJs
-     * @todo   Implement testGetToolbarAsJs().
      */
     public function testGetToolbarAsJs()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->_object->setParameters(array('toolbar-items' => array('Source' => '1')));
+        $this->assertEquals("[['Source'], ['/'], ['/'],]", $this->_object->getToolbarAsJs());
     }
 
     /**
      * @covers Datatypes\Textrich\CkEditor::getAllToolbarItems
-     * @todo   Implement testGetAllToolbarItems().
      */
     public function testGetAllToolbarItems()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->getAllToolbarItems()));
     }
 
     /**
      * @covers Datatypes\Textrich\CkEditor::getAllItems
-     * @todo   Implement testGetAllItems().
      */
     public function testGetAllItems()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->_object->setParameters(array('toolbar-items' => array('Source' => '1')));
+        $this->assertTrue(is_array($this->_object->getAllItems()));
     }
 }

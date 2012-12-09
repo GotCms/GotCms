@@ -181,7 +181,7 @@ class Model extends AbstractTable
             }
             else
             {
-                $this->update($array_save, sprintf('id =  %s', (int)$this->getId()));
+                $this->update($array_save, array('id' => (int)$this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
@@ -210,7 +210,7 @@ class Model extends AbstractTable
         {
             try
             {
-                parent::delete(sprintf('id = %s', (int)$id));
+                parent::delete(array('id' => (int)$id));
                 $table = new TableGateway('property_value', $this->getAdapter());
                 $result = $table->delete(array('property_id' => (int)$id));
             }

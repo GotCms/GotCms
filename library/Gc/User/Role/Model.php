@@ -63,14 +63,14 @@ class Model extends AbstractTable
             }
             else
             {
-                $this->update($array_save, 'id = '.$this->getId());
+                $this->update($array_save, array('id' => $this->getId()));
             }
 
             $permissions = $this->getPermissions();
             if(!empty($permissions))
             {
                 $acl_table = new TableGateway('user_acl', $this->getAdapter());
-                $acl_table->delete(sprintf('user_acl_role_id = %s', $this->getId()));
+                $acl_table->delete(array('user_acl_role_id' => $this->getId()));
 
                 foreach($permissions as $permission_id => $value)
                 {
@@ -105,7 +105,7 @@ class Model extends AbstractTable
         $id = $this->getId();
         if(!empty($id))
         {
-            parent::delete('id = '.$id);
+            parent::delete(array('id' => $id));
             $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
             unset($this);
 
@@ -164,7 +164,7 @@ class Model extends AbstractTable
                 ->join('user_acl', 'user_acl.user_acl_role_id = user_acl_role.id', array())
                 ->join('user_acl_permission', 'user_acl_permission.id = user_acl.user_acl_permission_id', array('userPermissionId' => 'id', 'permission'))
                 ->join('user_acl_resource', 'user_acl_resource.id = user_acl_permission.user_acl_resource_id', array('resource'))
-                ->where(sprintf('user_acl_role.id = %s', $this->getId()));
+                ->where->equalTo('user_acl_role.id', $this->getId());
 
             $permissions = $this->fetchAll($select);
 

@@ -179,14 +179,14 @@ class Model extends AbstractTable
             }
             else
             {
-                $this->update($array_save, sprintf('id = %d', (int)$this->getId()));
+                $this->update($array_save, array('id' => (int)$this->getId()));
             }
 
             if(!empty($this->_views))
             {
                 $delete = new Sql\Delete();
                 $delete->from('document_type_view');
-                $delete->where(sprintf('document_type_id = %s', (int)$this->getId()));
+                $delete->where(array('document_type_id' => (int)$this->getId()));
                 $this->execute($delete);
                 foreach($this->_views as $view_id)
                 {
@@ -247,7 +247,7 @@ class Model extends AbstractTable
             $tab_collection->delete();
             $table = new TableGateway('document_type_view', $this->getAdapter());
             $result = $table->delete(array('document_type_id' => (int)$document_type_id));
-            parent::delete('id = '.$document_type_id);
+            parent::delete(array('id' => $document_type_id));
             $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
             unset($this);
 

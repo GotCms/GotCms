@@ -127,7 +127,7 @@ class Model extends AbstractTable
             }
             else
             {
-                $this->update($array_save, sprintf('id = %s', $this->getId()));
+                $this->update($array_save, array('id' => $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));

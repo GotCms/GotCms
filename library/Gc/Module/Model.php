@@ -111,7 +111,7 @@ class Model extends AbstractTable
             }
             else
             {
-                $this->update($array_save, 'id = '.$this->getId());
+                $this->update($array_save, array('id' => $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
@@ -140,7 +140,7 @@ class Model extends AbstractTable
         {
             try
             {
-                parent::delete('id = '.$this->getId());
+                parent::delete(array('id' => $module_id));
                 $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
                 unset($this);
 

@@ -132,13 +132,28 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Layout\Model::save
+     */
+    public function testSaveWithWrongValues()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $model = $this->_object->fromArray(array(
+            'name' => NULL,
+            'identifier' => NULL,
+            'description' => NULL,
+            'content' => NULL,
+        ));
+        $this->assertFalse($model->save());
+    }
+
+    /**
      * @covers Gc\Layout\Model::delete
      */
     public function testDelete()
     {
         $array = array(
             'name' => 'Test Identifier',
-            'identifier' => 'test--delete-identifier',
+            'identifier' => 'test-delete-identifier',
             'description' => 'Description',
             'content' => 'Content',
         );
@@ -151,10 +166,20 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\Layout\Model::delete
      */
-    public function testFakeDelete()
+    public function testDeleteWithoutId()
     {
         $model = new Model();
+        $this->assertFalse($model->delete());
+    }
 
+    /**
+     * @covers Gc\Layout\Model::delete
+     */
+    public function testDeleteWithWrongId()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $model = new Model();
+        $model->setId('undefined');
         $this->assertFalse($model->delete());
     }
 }

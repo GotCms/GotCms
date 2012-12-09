@@ -228,7 +228,7 @@ class Model extends AbstractTable implements IterableInterface
             }
             else
             {
-                $this->update($array_save, 'id = '.$this->getId());
+                $this->update($array_save, array('id' => $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
@@ -257,7 +257,7 @@ class Model extends AbstractTable implements IterableInterface
         {
             try
             {
-                if(parent::delete('id = '.$this->getId()))
+                if(parent::delete(array('id' => $document_id)))
                 {
                     $properties_table = new TableGateway('property_value', $this->getAdapter());
                     $properties_table->delete(array('document_id' => $this->getId()));

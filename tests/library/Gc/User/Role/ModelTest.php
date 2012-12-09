@@ -61,6 +61,17 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\User\Role\Model::save
+     */
+    public function testSaveWithWrongValues()
+    {
+        $this->setExpectedException('\Gc\Exception');
+        $model = new Model();
+        $model->setId('undefined');
+        $this->assertFalse($model->save());
+    }
+
+    /**
      * @covers Gc\User\Role\Model::delete
      * @covers Gc\User\Role\Model::save
      */

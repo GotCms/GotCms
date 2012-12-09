@@ -239,11 +239,51 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Document\Model::save
+     */
+    public function testSaveWithWrongValues()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $model = $this->_object->fromArray(array(
+            'name' => 'Document name',
+            'url_key' => NULL,
+            'status' => Model::STATUS_ENABLE,
+            'show_in_nav' => TRUE,
+            'user_id' => NULL,
+            'document_type_id' => NULL,
+            'view_id' => NULL,
+            'layout_id' => NULL,
+            'parent_id' => NULL,
+        ));
+        $this->assertFalse($model->save());
+    }
+
+    /**
      * @covers Gc\Document\Model::delete
      */
     public function testDelete()
     {
         $this->assertTrue($this->_object->delete());
+    }
+
+    /**
+     * @covers Gc\Document\Model::delete
+     */
+    public function testDeleteWithoutId()
+    {
+        $model = new Model();
+        $this->assertFalse($model->delete());
+    }
+
+    /**
+     * @covers Gc\Document\Model::delete
+     */
+    public function testDeleteWithException()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $model = new Model();
+        $model->setId('test');
+        $this->assertFalse($model->delete());
     }
 
     /**

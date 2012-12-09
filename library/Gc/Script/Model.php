@@ -128,7 +128,7 @@ class Model extends AbstractTable
             }
             else
             {
-                $this->update($array_save, 'id = '.(int)$this->getId());
+                $this->update($array_save, array('id' => (int)$this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
@@ -155,12 +155,19 @@ class Model extends AbstractTable
         $id = $this->getId();
         if(!empty($id))
         {
-            if(parent::delete(sprintf('id = %d', $id)))
+            try
             {
-                $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
-                unset($this);
+                if(parent::delete(array('id' => $id)))
+                {
+                    $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+                    unset($this);
 
-                return TRUE;
+                    return TRUE;
+                }
+            }
+            catch(\Exception $e)
+            {
+                throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
 

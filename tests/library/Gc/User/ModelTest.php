@@ -93,6 +93,17 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\User\Model::save
+     */
+    public function testSaveWithWrongValues()
+    {
+        $this->setExpectedException('\Gc\Exception');
+        $model = new Model();
+        $model->setId('undefined');
+        $this->assertFalse($model->save());
+    }
+
+    /**
      * @covers Gc\User\Model::delete
      */
     public function testDeleteWithoutId()
@@ -107,6 +118,17 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testDelete()
     {
         $this->assertTrue($this->_object->delete());
+    }
+
+    /**
+     * @covers Gc\User\Model::delete
+     */
+    public function testDeleteWithWrongId()
+    {
+        $this->setExpectedException('\Gc\Exception');
+        $model = new Model();
+        $model->setId('undefined');
+        $this->assertFalse($model->delete());
     }
 
     /**

@@ -184,7 +184,7 @@ class Acl extends ZendAcl\Acl
         $group = $this->_roleTable->fetchAll($this->_roleTable->select()
             ->from('acl_resources')
             ->from('acl_permissions')
-            ->where(sprintf("\"acl_resources\".resource = '%s'", $group))
+            ->where->equalTo('acl_resources.resource', $group)
             ->where('uid = resource_uid')
         );
 
