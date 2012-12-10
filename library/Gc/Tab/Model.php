@@ -28,7 +28,8 @@
 namespace Gc\Tab;
 
 use Gc\Db\AbstractTable,
-    Gc\Property;
+    Gc\Property,
+    Zend\Db\Sql\Select;
 /**
  * Tab Model
  */
@@ -48,22 +49,24 @@ class Model extends AbstractTable
      */
     public function load($tab_id = NULL, $document_type_id = NULL)
     {
-        $this->setId($tab_id);
-        $this->setDocumentTypeId($document_type_id);
+        $this->setId((int)$tab_id);
+        $this->setDocumentTypeId((int)$document_type_id);
 
-        $select = $this->select();
-        if($this->getDocumentTypeId() !== NULL)
+        $select = $this->select(function(Select $select)
         {
-            $select->where('document_type_id = ?', $this->getDocumentTypeId());
-        }
+            if($this->getDocumentTypeId() !== NULL)
+            {
+                $select->where->equalTo('document_type_id', $this->getDocumentTypeId());
+            }
 
-        if($this->getId() !== NULL)
-        {
-            $select->where('id = ?', $this->getId());
-        }
+            if($this->getId() !== NULL)
+            {
+                $select->where->equalTo('id', $this->getId());
+            }
+        });
 
         $row = $this->fetchRow($select);
-        if(empty($row))
+        if(empty($row['id']))
         {
             return FALSE;
         }
@@ -71,7 +74,7 @@ class Model extends AbstractTable
         $this->setName($row->name);
         $this->setDescription($row->description);
         $this->setDocumentTypeId($row->document_type_id);
-        $this->setSortOrder($row->order);
+        $this->setSortOrder($row->sort_order);
 
         return $this;
     }
@@ -140,6 +143,7 @@ class Model extends AbstractTable
             }
 
             $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            unset($this);
 
             return TRUE;
         }

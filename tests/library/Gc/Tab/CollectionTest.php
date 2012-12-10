@@ -38,7 +38,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     protected $_documentType;
 
     /**
-     * @var DocumentTypeModel
+     * @var Model
      */
     protected $_tab;
 
