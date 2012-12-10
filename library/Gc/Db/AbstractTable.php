@@ -42,7 +42,7 @@ abstract class AbstractTable extends Object
     /**
      * Zend_Db_Table collection
      *
-     * @var array of \Zend\Db\TableGateway\TableGateway
+     * @var array \Zend\Db\TableGateway\TableGateway
      */
     static $_tables = array();
 
@@ -86,7 +86,7 @@ abstract class AbstractTable extends Object
     /**
      * Fetch Row
      * @param mixed $query (\Zend\Db\Sql\Select|string)
-     * @return array|Zend\Db\ResultSet\RowObjectInterface
+     * @return array|\Zend\Db\ResultSet\RowObjectInterface
      */
     public function fetchRow($query)
     {
@@ -122,7 +122,7 @@ abstract class AbstractTable extends Object
     /**
      * Fetch One
      * @param mixed $query (\Zend\Db\Sql\Select|string)
-     * @return mixte
+     * @return mixed
      */
     public function fetchOne($query)
     {
@@ -147,7 +147,7 @@ abstract class AbstractTable extends Object
     /**
      * Execute query
      * @param mixed $query (\Zend\Db\Sql\*|string)
-     * @return array|Zend\Db\Adapter\Driver\Pdo\Result
+     * @return array|\Zend\Db\Adapter\Driver\Pdo\Result
      */
     public function execute($query)
     {
@@ -166,7 +166,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Get last insert id
-     * @param string optional table name
+     * @param string $table_name Optional
      * @return integer
      */
     public function getLastInsertId($table_name = NULL)
@@ -183,7 +183,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Retrieve event manager
-     * @return StaticEventManager
+     * @return \Gc\Event\StaticEventManager
      */
     public function events()
     {

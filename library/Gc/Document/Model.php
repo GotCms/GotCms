@@ -106,7 +106,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Define if document is show in navigation
-     * @param optional $is_show
+     * @param boolean $is_show Optional
      * @return boolean
      */
     public function showInNav($is_show = NULL)

@@ -50,7 +50,7 @@ class Model extends AbstractTable
     /**
      * Get if property is required or not
      * @param Boolean $value to set value
-     * @return mixte
+     * @return mixed
      */
     public function isRequired($value = NULL)
     {
@@ -73,7 +73,7 @@ class Model extends AbstractTable
 
     /**
      * Set property value
-     * @param mixte $value
+     * @param mixed $value
      * @return \Gc\Property\Model
      */
     public function setValue($value)
@@ -102,7 +102,7 @@ class Model extends AbstractTable
 
     /**
      * Return property value
-     * @return mixte
+     * @return mixed
      */
     public function getValue()
     {
@@ -116,7 +116,7 @@ class Model extends AbstractTable
 
     /**
      * Return property value model
-     * @return mixte
+     * @return mixed
      */
     public function getValueModel()
     {

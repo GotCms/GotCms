@@ -120,7 +120,7 @@ class Model extends AbstractTable
     /**
      * Initiliaze from array
      * @param array $array
-     * @return \Gc\User\Model\Role
+     * @return \Gc\User\Role\Model
      */
     static function fromArray(array $array)
     {
@@ -133,7 +133,7 @@ class Model extends AbstractTable
     /**
      * Initiliaze from id
      * @param integer $user_role_id
-     * @return \Gc\User\Model\Role
+     * @return \Gc\User\Role\Model
      */
     static function fromId($user_role_id)
     {

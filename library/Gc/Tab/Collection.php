@@ -42,7 +42,7 @@ class Collection extends AbstractTable
 
     /**
      * Initiliaze tab collection
-     * @param optional integer $document_type_id
+     * @param integer $document_type_id Optional
      * @return \Gc\Tab\Collection
      */
     public function load($document_type_id = NULL)

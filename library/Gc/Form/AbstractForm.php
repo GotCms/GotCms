@@ -68,7 +68,7 @@ abstract class AbstractForm extends Form
 
     /**
      * Get db adapter
-     * @return Zend_Db_Adapter_Abstract
+     * @return \Zend\Db\Adapter\Adapter
      */
     public function getAdapter()
     {

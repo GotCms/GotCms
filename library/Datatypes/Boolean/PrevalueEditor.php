@@ -44,7 +44,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load Boolean prevalue editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

@@ -151,7 +151,7 @@ class Acl extends ZendAcl\Acl
     /**
      * Get role id from role name
      * @param string $role_name
-     * @return array|Zend\Db\ResultSet\RowObjectInterface
+     * @return array|\Zend\Db\ResultSet\RowObjectInterface
      */
     public function getRoleId($role_name)
     {

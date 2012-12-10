@@ -37,11 +37,11 @@ class Documents extends AbstractHelper
 {
     /**
      * Returns documents
-     * $data can be mixte
+     * $data can be mixed
      * if data is an array, return all documents
      * if data is numeric, return all documents with parent_id equal to $data
      * @param  integer $data
-     * @return array of \Gc\Document\Model
+     * @return array \Gc\Document\Model
      */
     public function __invoke($data = NULL)
     {

@@ -55,7 +55,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load Textarea prevalue editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

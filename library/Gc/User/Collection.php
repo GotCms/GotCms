@@ -51,7 +51,7 @@ class Collection extends AbstractTable
 
     /**
      * Get users
-     * @return array of Gc\User\Model
+     * @return array Gc\User\Model
      */
     public function getUsers()
     {

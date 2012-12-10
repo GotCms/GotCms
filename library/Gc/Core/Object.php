@@ -413,7 +413,7 @@ abstract class Object
      *
      * @param   string $method
      * @param   array $args
-     * @return  Zend_Db_Table
+     * @return  mixed|\Gc\Core\Object
      */
     public function __call($method, $args)
     {

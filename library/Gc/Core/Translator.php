@@ -65,7 +65,7 @@ class Translator extends AbstractTable
     /**
      * Get config value
      * @param string $source
-     * @param optional string $locale
+     * @param string $locale Optional
      * @return string value
      */
     static function getValue($source, $locale = NULL)

@@ -64,7 +64,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Abstract function for save Editor
-     * @param Datatype\AbstractDatatype $datatype_abstract
+     * @param \Gc\Datatype\AbstractDatatype $datatype_abstract
      * @return void
      */
     public function __construct(Datatype\AbstractDatatype $datatype_abstract)
@@ -89,7 +89,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Set Configuration
-     * @param mixte $value
+     * @param mixed $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     public function setConfig($value)
@@ -142,7 +142,7 @@ abstract class AbstractPrevalueEditor extends Object
     /**
      * Retrieve helper from $name
      * @param string $name
-     * @return mixte
+     * @return mixed
      */
     public function getHelper($name)
     {

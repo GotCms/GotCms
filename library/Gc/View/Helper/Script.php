@@ -48,7 +48,7 @@ class Script extends AbstractHelper
      *
      * @param string $identifier
      * @param array $params
-     * @return mixte
+     * @return mixed
      */
     public function __invoke($identifier, $params = array())
     {
@@ -76,7 +76,7 @@ class Script extends AbstractHelper
      * Returns param from name.
      *
      * @param string $name
-     * @return mixte
+     * @return mixed
      */
     public function getParam($name)
     {

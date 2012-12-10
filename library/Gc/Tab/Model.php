@@ -43,9 +43,9 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze Tab
-     * @param optional integer $tab_id
-     * @param optional integer $document_type_id
-     * @return \Gc\Model\Tab
+     * @param integer $tab_id Optional
+     * @param integer $document_type_id Optional
+     * @return \Gc\Tab\Model
      */
     public function load($tab_id = NULL, $document_type_id = NULL)
     {

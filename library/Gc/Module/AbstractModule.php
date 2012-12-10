@@ -53,7 +53,7 @@ abstract class AbstractModule
 
     /**
      * Return database adapter
-     * @return Zend\Db\Adapter\Adapter
+     * @return \Zend\Db\Adapter\Adapter
      */
     protected function getAdapter()
     {

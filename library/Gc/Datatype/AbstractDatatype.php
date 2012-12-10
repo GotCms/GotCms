@@ -74,7 +74,7 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Get Datatype Prevalue editor
-     * @return \Gc\Model\DbTable\Datatype\Abstract\PrevalueEditor
+     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     abstract public function getPrevalueEditor();
 
@@ -99,7 +99,7 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Load Datatype
-     * @param Datatype\Model $datatype
+     * @param Model $datatype
      * @param integer $document_id
      * @return mixed
      */
@@ -174,7 +174,7 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Set Property Model
-     *
+     * @param \Gc\Property\Model $property
      * @return \Gc\Datatype\AbstractDatatype
      */
     public function setProperty($property)

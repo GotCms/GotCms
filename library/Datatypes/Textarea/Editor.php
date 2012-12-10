@@ -46,7 +46,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load textarea editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

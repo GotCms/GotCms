@@ -53,7 +53,7 @@ class Model extends AbstractTable
 
     /**
      * Get user model
-     * @return \Gc\Model\user
+     * @return \Gc\User\Model
      */
     public function getUser()
     {
@@ -110,7 +110,7 @@ class Model extends AbstractTable
 
     /**
      * Get available views
-     * @return array of \Gc\View\Collection
+     * @return array \Gc\View\Collection
      */
     public function getAvailableViews()
     {

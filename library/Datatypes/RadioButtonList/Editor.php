@@ -45,7 +45,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load radiobuttonlist editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

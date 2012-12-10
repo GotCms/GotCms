@@ -174,7 +174,7 @@ class Model extends AbstractTable
     /**
      * Save editor
      * @param PropertyModel $property
-     * @return mixte
+     * @return mixed
      */
     static function saveEditor(PropertyModel $property)
     {
@@ -193,7 +193,7 @@ class Model extends AbstractTable
     /**
      * Load prevalue editor
      * @param AbstractDatatype $datatype
-     * @return mxite
+     * @return mixed
      */
     static function loadPrevalueEditor(AbstractDatatype $datatype)
     {
@@ -205,7 +205,7 @@ class Model extends AbstractTable
     /**
      * Load editor
      * @param PropertyModel $property
-     * @return mixte
+     * @return mixed
      */
     static function loadEditor(PropertyModel $property)
     {
@@ -217,7 +217,7 @@ class Model extends AbstractTable
     /**
      * Load Datatype
      * @param integer $datatype_id
-     * @param optional integer $document_id
+     * @param integer $document_id Optional
      * @return \Gc\Datatype\AbstractDatatype
      */
     static function loadDatatype($datatype_id, $document_id = NULL)

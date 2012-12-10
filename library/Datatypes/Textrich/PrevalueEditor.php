@@ -46,7 +46,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load Textrich prevalue editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

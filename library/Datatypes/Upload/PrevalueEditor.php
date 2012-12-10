@@ -49,7 +49,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load upload prevalue editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

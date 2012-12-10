@@ -73,7 +73,7 @@ class Config extends AbstractTable
     /**
      * Get config value
      * @param string $data
-     * @param optional $field database field, by default 'identifier'
+     * @param string $field Optional database field, by default 'identifier'
      * @return string value
      */
     static function getValue($data, $field = 'identifier')

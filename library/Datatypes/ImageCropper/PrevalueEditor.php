@@ -65,7 +65,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load Image cropper prevalue editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

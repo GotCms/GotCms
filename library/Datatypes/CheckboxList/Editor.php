@@ -51,7 +51,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load checkbox list editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

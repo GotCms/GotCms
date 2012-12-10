@@ -61,7 +61,7 @@ class Partial extends ZendPartial
      *
      * @param  string $name Name of view script
      * @param  array $values Variables to populate in the view
-     * @return mixte
+     * @return mixed
      */
     public function __invoke($name = null, $values = null)
     {

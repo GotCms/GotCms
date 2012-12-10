@@ -78,7 +78,7 @@ class Image
     /**
      * Open image
      * @param string $file
-     * @return Gc\Media\Image
+     * @return \Gc\Media\Image
      */
     public function open($file)
     {
@@ -126,7 +126,7 @@ class Image
      * @param string $background_color
      * @param integer $source_x
      * @param integer $source_y
-     * @return Gc\Media\Image
+     * @return \Gc\Media\Image
      */
     public function resize($new_width, $new_height, $option = 'auto', $background_color = '#000000', $source_x = 0, $source_y = 0)
     {
@@ -198,7 +198,7 @@ class Image
     /**
      * Convert hexa string to rbg
      * @param string $hex_string
-     * @return array)
+     * @return array
      */
     public function hex2rgb($hex_string)
     {
@@ -323,7 +323,7 @@ class Image
      * @param integer $new_height
      * @param integer $source_x
      * @param integer $source_y
-     * @return Gc\Media\Image
+     * @return \Gc\Media\Image
      */
     protected function _crop($new_width, $new_height, $source_x = 0, $source_y = 0)
     {

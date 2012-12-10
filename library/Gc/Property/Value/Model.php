@@ -41,9 +41,9 @@ class Model extends AbstractTable
 
     /**
      * Load property value
-     * @param optional integer $value_id
-     * @param optional integer $document_id
-     * @param optional integer $property_id
+     * @param integer $value_id Optional
+     * @param integer $document_id Optional
+     * @param integer $property_id Optional
      * @return void
      */
     public function load($value_id = NULL, $document_id = NULL, $property_id = NULL)

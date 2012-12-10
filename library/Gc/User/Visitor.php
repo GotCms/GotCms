@@ -312,7 +312,7 @@ class Visitor extends AbstractTable
     /**
      * Return all referers
      * @param string $sort
-     * @param optional integer $limit
+     * @param integer $limit Optional
      * @return array
      */
      public function getUrlsViews($sort, $limit = 20)

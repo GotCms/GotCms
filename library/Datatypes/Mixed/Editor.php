@@ -116,7 +116,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load mixed editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

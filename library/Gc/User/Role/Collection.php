@@ -58,7 +58,7 @@ class Collection extends AbstractTable
     /**
      * Get Roles
      * @param boolean $force_reload
-     * @return array of \Gc\User\Role\Model
+     * @return array \Gc\User\Role\Model
      */
     public function getRoles($force_reload = FALSE)
     {

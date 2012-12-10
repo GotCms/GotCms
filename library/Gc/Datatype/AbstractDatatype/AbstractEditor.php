@@ -98,7 +98,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Set property value
-     * @param mixte $value
+     * @param mixed $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     public function setValue($value)
@@ -124,7 +124,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Set Configuration
-     * @param mixte $value
+     * @param mixed $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     public function setConfig($value)
@@ -204,7 +204,7 @@ abstract class AbstractEditor extends Object
     /**
      * Retrieve helper from $name
      * @param string $name
-     * @return mixte
+     * @return mixed
      */
     public function getHelper($name)
     {

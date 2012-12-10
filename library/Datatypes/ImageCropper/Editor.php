@@ -189,7 +189,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load Image cropper editor
-     * @return mixte
+     * @return mixed
      */
     public function load()
     {

@@ -37,7 +37,7 @@ class CkEditor extends Object
     /**
      * Set parameters
      * @param array $parameters
-     * @return \Datatypes\Textrich\Ckeditor
+     * @return Datatypes\Textrich\Ckeditor
      */
     public function setParameters(array $parameters = NULL)
     {

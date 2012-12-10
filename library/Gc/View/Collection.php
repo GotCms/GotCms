@@ -51,7 +51,7 @@ class Collection extends AbstractTable
 
     /**
      * Initiliaze collection
-     * @param optional integer $document_type_id
+     * @param integer $document_type_id Optional
      * @return void
      */
     public function init($document_type_id = NULL)
