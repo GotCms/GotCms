@@ -140,13 +140,19 @@ class Model extends AbstractTable
         $id = $this->getId();
         if(!empty($id))
         {
-            if(parent::delete(array('id' => $id)))
+            try
             {
-                $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
-                unset($this);
-
-                return TRUE;
+                parent::delete(array('id' => $id));
             }
+            catch(\Exception $e)
+            {
+                throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
+            }
+
+            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            unset($this);
+
+            return TRUE;
         }
 
         $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
