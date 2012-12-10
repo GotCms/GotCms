@@ -71,7 +71,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             'login' => 'test',
             'user_acl_role_id' => 1,
         ));
-
         $this->_user->setPassword('test');
         $this->_user->save();
 
@@ -82,7 +81,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             'default_view_id' => $this->_view->getId(),
             'user_id' => $this->_user->getId(),
         ));
-
         $this->_documentType->save();
 
         $this->_tab = Model::fromArray(array(

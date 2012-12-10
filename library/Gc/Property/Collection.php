@@ -114,7 +114,7 @@ class Collection extends AbstractTable
     /**
      * Set properties
      * @param array $properties
-     * @return void
+     * @return Gc\Property\Collection
      */
     public function setProperties(array $properties)
     {
@@ -125,11 +125,13 @@ class Collection extends AbstractTable
         }
 
         $this->setData('properties', $array);
+
+        return $this;
     }
 
     /**
      * Save properties
-     * @return void
+     * @return boolean
      */
     public function save()
     {
@@ -141,16 +143,19 @@ class Collection extends AbstractTable
                 $property->save();
             }
 
+            return TRUE;
         }
         catch(\Exception $e)
         {
             throw new \Gc\Exception($e->getMessage());
         }
+
+        return FALSE;
     }
 
     /**
      * Delete properties
-     * @return void
+     * @return boolean
      */
     public function delete()
     {
@@ -160,12 +165,15 @@ class Collection extends AbstractTable
             foreach($properties as $property)
             {
                 $property->delete();
-
             }
+
+            return TRUE;
         }
         catch(\Exception $e)
         {
             throw new \Gc\Exception($e->getMessage());
         }
+
+        return FALSE;
     }
 }

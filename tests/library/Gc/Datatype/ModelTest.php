@@ -121,6 +121,17 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Datatype\Model::delete
+     */
+    public function testDeleteWithWrongValues()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $model = new Model();
+        $model->setId('undefined');
+        $this->assertFalse($model->delete());
+    }
+
+    /**
      * @covers Gc\Datatype\Model::savePrevalueEditor
      */
     public function testSavePrevalueEditor()

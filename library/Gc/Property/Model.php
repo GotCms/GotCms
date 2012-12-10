@@ -217,7 +217,6 @@ class Model extends AbstractTable
             catch(\Exception $e)
             {
                 throw new \Gc\Exception($e->getMessage());
-
             }
 
             $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
