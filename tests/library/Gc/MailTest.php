@@ -16,10 +16,11 @@ class MailTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Gc\Mail::__construct
      */
     protected function setUp()
     {
-        $this->_object = new Mail;
+        $this->_object = new Mail('utf-8', 'MessageTest', 'pierre.rambaud86@gmail.com', 'pierre.rambaud86@gmail.com');
     }
 
     /**
@@ -28,15 +29,18 @@ class MailTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Mail::send
-     * @todo   Implement testSend().
      */
     public function testSend()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->setExpectedException('\Exception');
+        ob_start();
+        $this->_object->send();
+        $data = ob_get_clean();
+        $this->assertNull($data);
     }
 }

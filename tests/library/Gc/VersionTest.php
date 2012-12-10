@@ -32,7 +32,6 @@ class VersionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Version::compareVersion
-     * @todo   Implement testCompareVersion().
      */
     public function testCompareVersion()
     {
@@ -41,7 +40,6 @@ class VersionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Version::getLatest
-     * @todo   Implement testGetLatest().
      */
     public function testGetLatest()
     {
@@ -50,7 +48,6 @@ class VersionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Version::isLatest
-     * @todo   Implement testIsLatest().
      */
     public function testIsLatest()
     {

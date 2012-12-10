@@ -28,25 +28,23 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\User\Role\Collection::init
-     * @todo   Implement testInit().
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->_object->init(TRUE);
+        $this->assertTrue(is_array($this->_object->getRoles()));
     }
 
     /**
      * @covers Gc\User\Role\Collection::getRoles
-     * @todo   Implement testGetRoles().
      */
     public function testGetRoles()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->getRoles(TRUE)));
     }
 }

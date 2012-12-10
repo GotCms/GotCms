@@ -69,7 +69,7 @@ class Acl extends ZendAcl\Acl
     public function __construct(UserModel $user_model)
     {
         $this->_roleTable = new RoleModel();
-        $this->roleResource();
+        $this->_roleResource();
         $this->_user = $user_model;
 
         $select = new Select();
@@ -86,7 +86,7 @@ class Acl extends ZendAcl\Acl
      * Initiliaze Roles
      * @return void
      */
-    private function initRoles()
+    protected function _initRoles()
     {
         $roles = $this->_roleTable->fetchAll($this->_roleTable->select());
         foreach($roles as $role)
@@ -99,9 +99,9 @@ class Acl extends ZendAcl\Acl
      * Initiliaze resources
      * @return void
      */
-    protected function initResources()
+    protected function _initResources()
     {
-        $this->initRoles();
+        $this->_initRoles();
         $select = new Select();
         $select->from('user_acl_resource');
         $resources = $this->_roleTable->fetchAll($select);
@@ -119,9 +119,9 @@ class Acl extends ZendAcl\Acl
      * Initiliaze role resource
      * @return void
      */
-    private function roleResource()
+    protected function _roleResource()
     {
-        $this->initResources();
+        $this->_initResources();
         $select = new Select();
         $select->from('user_acl_role')
             ->columns(array(
@@ -145,9 +145,7 @@ class Acl extends ZendAcl\Acl
      */
     public function listRoles()
     {
-        return $this->_roleTable->fetchAll(
-            $this->_roleTable->select()->from('acl_roles')
-        );
+        return $this->_roleTable->fetchAll($this->_roleTable->select());
     }
 
     /**
@@ -168,9 +166,9 @@ class Acl extends ZendAcl\Acl
      */
     public function listResources()
     {
-        return $this->_roleTable->fetchAll(
-            $this->_roleTable->select()->from('user_acl_resource')
-        );
+        $select = new Select();
+        $select->from('user_acl_resource');
+        return $this->_roleTable->fetchAll($select);
     }
 
     /**
@@ -181,16 +179,15 @@ class Acl extends ZendAcl\Acl
     public function listResourcesByGroup($group)
     {
         $result = null;
-        $group = $this->_roleTable->fetchAll($this->_roleTable->select()
-            ->from('acl_resources')
-            ->from('acl_permissions')
-            ->where->equalTo('acl_resources.resource', $group)
-            ->where('uid = resource_uid')
-        );
+        $select = new Select();
+        $select->from(array('uar' => 'user_acl_resource'))
+            ->join(array('uap' => 'user_acl_permission'), 'uar.id = uap.user_acl_resource_id')
+            ->where->equalTo('uar.resource', $group);
+        $group = $this->_roleTable->fetchAll($select);
 
-        foreach($group as $key=>$value)
+        foreach($group as $key => $value)
         {
-            if($this->isAllowed($this->_user, $value['resource'], $value['permission']))
+            if($this->isAllowed($this->_user->getRole()->getName(), $value['resource'], $value['permission']))
             {
                 $result[] = $value['permission'];
             }

@@ -52,16 +52,17 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->getRoles();
+        $this->getRoles(TRUE);
     }
 
     /**
      * Get Roles
+     * @param boolean $force_reload
      * @return array of \Gc\User\Role\Model
      */
-    public function getRoles()
+    public function getRoles($force_reload = FALSE)
     {
-        if(empty($this->_roles))
+        if(empty($this->_roles) or $force_reload === TRUE)
         {
             $rows = $this->select(function(Select $select)
             {

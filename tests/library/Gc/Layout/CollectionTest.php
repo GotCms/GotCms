@@ -63,7 +63,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Layout\Collection::getSelect
-     * @todo   Implement testGetSelect().
      */
     public function testGetSelect()
     {

@@ -176,7 +176,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Document\Collection::getAvailableDocuments
-     * @todo   Implement testGetAvailableDocuments().
      */
     public function testGetAvailableDocuments()
     {
@@ -185,7 +184,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Document\Collection::getSelect
-     * @todo   Implement testGetSelect().
      */
     public function testGetSelect()
     {
@@ -195,7 +193,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Document\Collection::getParent
-     * @todo   Implement testGetParent().
      */
     public function testGetParent()
     {

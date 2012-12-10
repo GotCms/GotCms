@@ -38,7 +38,7 @@ class Collection extends AbstractTable
      * List of permissions
      * @var array
      */
-    protected $_permissions;
+    protected $_permissions = array();
 
     /**
      * Table name
@@ -52,16 +52,17 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->getPermissions();
+        $this->getPermissions(TRUE);
     }
 
     /**
      * Get permissions
+     * @param boolean $force_reload
      * @return array
      */
-    public function getPermissions()
+    public function getPermissions($force_reload = FALSE)
     {
-        if(empty($this->_permissions))
+        if(empty($this->_permissions) or $force_reload === TRUE)
         {
             $select = new Select();
             $select->from('user_acl_permission')

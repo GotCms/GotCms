@@ -20,10 +20,13 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Gc\User\Acl::__construct
+     * @covers Gc\User\Acl::_roleResource
+     * @covers Gc\User\Acl::_initResources
+     * @covers Gc\User\Acl::_initRoles
      */
     protected function setUp()
     {
-
         $this->_user = Model::fromArray(array(
             'lastname' => 'Test',
             'firstname' => 'Test',
@@ -50,41 +53,33 @@ class AclTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\User\Acl::listRoles
-     * @todo   Implement testListRoles().
      */
     public function testListRoles()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->listRoles()));
     }
 
     /**
      * @covers Gc\User\Acl::getRoleId
-     * @todo   Implement testGetRoleId().
      */
     public function testGetRoleId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf('ArrayObject', $this->_object->getRoleId('Administrator'));
     }
 
     /**
      * @covers Gc\User\Acl::listResources
-     * @todo   Implement testListResources().
      */
     public function testListResources()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->listResources()));
     }
 
     /**
      * @covers Gc\User\Acl::listResourcesByGroup
-     * @todo   Implement testListResourcesByGroup().
      */
     public function testListResourcesByGroup()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->listResourcesByGroup('Development')));
     }
 }
