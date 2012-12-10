@@ -30,8 +30,13 @@ namespace Gc\Property;
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select,
     Zend\Db\TableGateway\TableGateway;
+
 /**
  * Property Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Property
  */
 class Model extends AbstractTable
 {

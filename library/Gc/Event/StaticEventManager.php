@@ -33,6 +33,10 @@ use Zend\EventManager\SharedEventManager,
 
 /**
  * Static version of EventManager
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Event
  */
 class StaticEventManager extends SharedEventManager
 {

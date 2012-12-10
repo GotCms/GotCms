@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Form
- * @package  Config
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Config
+ * @subpackage Form
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Config\Form;
@@ -36,15 +37,25 @@ use Gc\Form\AbstractForm,
     Zend\Validator\Db,
     Zend\Validator\Identical;
 
+/**
+ * Config form
+ *
+ * @category   Gc_Application
+ * @package    Config
+ * @subpackage Form
+ */
 class Config extends AbstractForm
 {
     /**
      * Initialize form
+     *
+     * @return void
      */
     public function init()
     {
         $this->setInputFilter(new InputFilter());
     }
+
     /**
      * Initialize General sub form
      *
@@ -254,6 +265,7 @@ class Config extends AbstractForm
 
     /**
      * Set config values from database result
+     *
      * @param array $data
      */
     public function setValues(array $data)

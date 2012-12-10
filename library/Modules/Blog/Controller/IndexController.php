@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Modules
- * @package  Blog\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Library
+ * @package    Modules
+ * @subpackage Blog\Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Modules\Blog\Controller;
@@ -29,8 +30,13 @@ namespace Modules\Blog\Controller;
 use Gc\Module\Controller\AbstractController,
     Gc\Document\Model as DocumentModel,
     Modules\Blog\Model;
+
 /**
  * IndexController
+ *
+ * @category   Gc_Library
+ * @package    Modules
+ * @subpackage Blog\Controller
  */
 class IndexController extends AbstractController
 {

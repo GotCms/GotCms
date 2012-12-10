@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Development\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Development\Controller;
@@ -32,16 +33,25 @@ use Development\Form\DocumentType as DocumentTypeForm,
     Gc\Property,
     Gc\Tab;
 
+/**
+ * Document type controller
+ *
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Controller
+ */
 class DocumentTypeController extends Action
 {
     /**
      * Contains information about acl
+     *
      * @var array $_aclPage
      */
     protected $_aclPage = array('resource' => 'Development', 'permission' => 'document-type');
 
     /**
      * List all document types
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function indexAction()
@@ -52,6 +62,7 @@ class DocumentTypeController extends Action
 
     /**
      * Create document type
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function createAction()
@@ -171,6 +182,7 @@ class DocumentTypeController extends Action
 
     /**
      * Edit document type
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function editAction()
@@ -376,6 +388,7 @@ class DocumentTypeController extends Action
 
     /**
      * Add tab in session
+     *
      * @return \Zend\View\Model\JsonModel
      */
     public function importTabAction()
@@ -416,6 +429,7 @@ class DocumentTypeController extends Action
 
     /**
      * Delete Document type
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function deleteAction()
@@ -434,6 +448,7 @@ class DocumentTypeController extends Action
 
     /**
      * Add tab in session
+     *
      * @return \Zend\View\Model\JsonModel
      */
     public function addTabAction()
@@ -476,6 +491,7 @@ class DocumentTypeController extends Action
 
     /**
      * Delete tab in session
+     *
      * @return \Zend\View\Model\JsonModel
      */
     public function deleteTabAction()
@@ -502,6 +518,7 @@ class DocumentTypeController extends Action
 
     /**
      * Add property in session
+     *
      * @return \Zend\View\Model\JsonModel
      */
     public function addPropertyAction()
@@ -570,6 +587,7 @@ class DocumentTypeController extends Action
 
     /**
      * Delete property in session
+     *
      * @return \Zend\View\Model\JsonModel
      */
     public function deletePropertyAction()

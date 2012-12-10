@@ -29,8 +29,13 @@ namespace Gc\View;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Predicate\Expression;
+
 /**
  * Class for manage View
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View
  */
 class Model extends AbstractTable
 {

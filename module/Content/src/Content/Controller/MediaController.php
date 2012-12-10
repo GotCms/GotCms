@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Content\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Content
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Content\Controller;
@@ -40,6 +41,13 @@ use Gc\Mvc\Controller\Action,
     Zend\Json\Json,
     Zend\File\Transfer\Adapter\Http as FileTransfer;
 
+/**
+ * Media controller
+ *
+ * @category   Gc_Application
+ * @package    Content
+ * @subpackage Controller
+ */
 class MediaController extends Action
 {
     /**

@@ -34,6 +34,10 @@ use Zend\Form\ElementInterface,
 
 /**
  * Render form checkbox
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View\Helper
  */
 class FormCheckbox extends ZendFormCheckbox
 {

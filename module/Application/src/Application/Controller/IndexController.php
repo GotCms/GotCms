@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Application\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Application
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Application\Controller;
@@ -40,18 +41,55 @@ use Gc\Mvc\Controller\Action,
     Zend\Navigation\Navigation,
     Zend\View\Model\ViewModel;
 
+/**
+ * Index controller for module Application
+ *
+ * @category   Gc_Application
+ * @package    Application
+ * @subpackage Controller
+ */
 class IndexController extends Action
 {
+    /**
+     * Stream name
+     *
+     * @var string
+     */
     protected $_viewStream  = 'zend.view';
+
+    /**
+     * View filename
+     *
+     * @var string
+     */
     protected $_viewName = 'application/index/view-content';
+
+    /**
+     * View filename
+     *
+     * @var string
+     */
     protected $_layoutName = 'application/index/layout-content';
+
+    /**
+     * View path
+     *
+     * @var string
+     */
     protected $_viewPath;
+
+    /**
+     * View path
+     *
+     * @var string
+     */
     protected $_layoutPath;
 
     /**
-      * Generate frontend from url key
-      * @return \Zend\View\Model\ViewModel|array
-      */
+     * Generate frontend from url key
+     *
+     * @return \Zend\View\Model\ViewModel|array
+     */
     public function indexAction()
     {
         $visitor = new Visitor();
@@ -211,6 +249,7 @@ class IndexController extends Action
 
     /**
      * Load tabs
+     *
      * @param integer $document_type_id
      * @return Gc\Component\Tab\Collection
      */
@@ -223,6 +262,7 @@ class IndexController extends Action
 
     /**
      * Load properties
+     *
      * @param integer $document_type_id
      * @param integer $tab_id
      * @param integer $document_id
@@ -238,6 +278,7 @@ class IndexController extends Action
 
     /**
      * Explode path
+     *
      * @param array $path
      */
     protected function explodePath($path)
@@ -253,6 +294,7 @@ class IndexController extends Action
 
     /**
      * Defined is can unserialize string
+     *
      * @param string $data
      * @return boolean
      */

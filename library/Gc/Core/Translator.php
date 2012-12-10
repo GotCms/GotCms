@@ -33,6 +33,10 @@ use Gc\Db\AbstractTable,
     Zend\Db\Sql\Update;
 /**
  * Get and set translation
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Core
  */
 class Translator extends AbstractTable
 {

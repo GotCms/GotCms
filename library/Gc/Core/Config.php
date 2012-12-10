@@ -31,6 +31,10 @@ use Gc\Db\AbstractTable,
     Zend\Db\Sql\Where;
 /**
  * Get and set config data
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Core
  */
 class Config extends AbstractTable
 {

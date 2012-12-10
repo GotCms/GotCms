@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Module\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Module
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Module\Controller;
@@ -36,6 +37,13 @@ use Gc\Component,
     Zend\Json\Json,
     Zend\View\Model\ViewModel;
 
+/**
+ * Index controller
+ *
+ * @category   Gc_Application
+ * @package    Module
+ * @subpackage Controller
+ */
 class IndexController extends Action
 {
     /**
@@ -45,6 +53,8 @@ class IndexController extends Action
     protected $_aclPage = array('resource' => 'Modules', 'permission' => 'all');
 
     /**
+     * List all modules
+     *
      * @return \Zend\View\Model\ViewModel
      */
     public function indexAction()
@@ -55,6 +65,8 @@ class IndexController extends Action
     }
 
     /**
+     * Install module
+     *
      * @return \Zend\View\Model\ViewModel
      */
     public function installAction()
@@ -96,6 +108,8 @@ class IndexController extends Action
     }
 
     /**
+     * Uninstall module
+     *
      * @return \Zend\View\Model\ViewModel
      */
     public function uninstallAction()
@@ -124,6 +138,7 @@ class IndexController extends Action
 
     /**
      * Load module
+     *
      * @return \Zend\View\Model\ViewModel
      */
     public function editAction()

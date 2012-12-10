@@ -29,8 +29,13 @@ namespace Gc\Module;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
+
 /**
  * Collection of Module Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Module
  */
 class Collection extends AbstractTable
 {

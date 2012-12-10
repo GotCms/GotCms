@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Development\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Development\Controller;
@@ -31,16 +32,25 @@ use Gc\Mvc\Controller\Action,
     Gc\Datatype,
     Zend\View\Model\ViewModel;
 
+/**
+ * Datatype controller
+ *
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Controller
+ */
 class DatatypeController extends Action
 {
     /**
      * Contains information about acl
+     *
      * @var array $_aclPage
      */
     protected $_aclPage = array('resource' => 'Development', 'permission' => 'datatype');
 
     /**
      * List all datatypes
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function indexAction()
@@ -52,6 +62,7 @@ class DatatypeController extends Action
 
     /**
      * Create Datatype
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function createAction()
@@ -95,6 +106,7 @@ class DatatypeController extends Action
 
     /**
      * Edit datatype
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function editAction()
@@ -157,6 +169,7 @@ class DatatypeController extends Action
 
     /**
      * Delete datatype
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function deleteAction()

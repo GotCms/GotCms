@@ -32,6 +32,10 @@ use Gc\Db\AbstractTable,
 
 /**
  * Collection of Media icons
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View
  */
 class Collection extends AbstractTable
 {

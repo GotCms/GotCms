@@ -30,8 +30,13 @@ namespace Gc\View\Helper;
 use Zend\View\Helper\AbstractHelper,
     Gc\Document\Collection as DocumentCollection,
     Gc\Document\Model as DocumentModel;
+
 /**
  * Returns documents from parent_id
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View\Helper
  */
 class Documents extends AbstractHelper
 {

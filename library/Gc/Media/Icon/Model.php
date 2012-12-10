@@ -28,8 +28,13 @@
 namespace Gc\Media\Icon;
 
 use Gc\Db\AbstractTable;
+
 /**
  * Class for manage View
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View
  */
 class Model extends AbstractTable
 {

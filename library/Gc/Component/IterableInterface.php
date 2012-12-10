@@ -27,6 +27,13 @@
 
 namespace Gc\Component;
 
+/**
+ * Iterable interface
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Component
+ */
 interface IterableInterface
 {
     /**

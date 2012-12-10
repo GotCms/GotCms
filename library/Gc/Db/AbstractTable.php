@@ -36,6 +36,10 @@ use Gc\Core\Object,
  * Extension of Zend\Db\TableGateway
  * This is better to use fetchRow(), fetchAll(),
  * execute() and add generic methods.
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Db
  */
 abstract class AbstractTable extends Object
 {

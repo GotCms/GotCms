@@ -31,6 +31,10 @@ use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
 /**
  * Collection of Datatype Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Datatype
  */
 class Collection extends AbstractTable
 {

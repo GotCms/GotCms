@@ -34,6 +34,9 @@ namespace Gc\View;
  * Based in large part on the example at
  * http://www.php.net/manual/en/function.stream-wrapper-register.php
  *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View
  */
 class Stream
 {

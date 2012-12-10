@@ -19,7 +19,7 @@
  *
  * @category    Gc
  * @package     Library
- * @subpackage  Module\Controller/AbstractController
+ * @subpackage  Module\Controller
  * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link        http://www.got-cms.com
@@ -32,6 +32,10 @@ use Gc\Mvc\Controller\Action,
     Zend\Stdlib\ResponseInterface as Response;
 /**
  * Abstract module controller
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Module\Controller
  */
 abstract class AbstractController extends Action
 {

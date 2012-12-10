@@ -33,10 +33,15 @@ use Zend\Form\Form,
     Zend\InputFilter\InputFilter,
     Gc\Exception,
     Gc\Db\AbstractTable;
+
 /**
  * Abstract Form overload Zend\Form\Form
  * This is better to initialize somes values, retrieve adapter
  * add dynamic content, etc...
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Form
  */
 abstract class AbstractForm extends Form
 {

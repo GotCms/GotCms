@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Config\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Config
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Config\Controller;
@@ -34,16 +35,25 @@ use Config\Form\UserLogin,
     Zend\Http\Request,
     Zend\View\Model\ViewModel;
 
+/**
+ * User controller
+ *
+ * @category   Gc_Application
+ * @package    Config
+ * @subpackage Controller
+ */
 class UserController extends Action
 {
     /**
      * Contains information about acl
+     *
      * @var array $_aclPage
      */
     protected $_aclPage = array('resource' => 'Config', 'permission' => 'user');
 
     /**
      * List all roles
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function indexAction()
@@ -55,6 +65,7 @@ class UserController extends Action
 
     /**
      * Login user
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function loginAction()
@@ -88,6 +99,7 @@ class UserController extends Action
 
     /**
      * Forgot password action
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function forgotPasswordAction()
@@ -108,6 +120,7 @@ class UserController extends Action
 
     /**
      * Logout action
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function logoutAction()
@@ -117,7 +130,8 @@ class UserController extends Action
     }
 
     /**
-     * Craete user
+     * Create user
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function createAction()
@@ -150,6 +164,7 @@ class UserController extends Action
 
     /**
      * Delete user
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function deleteAction()
@@ -168,6 +183,7 @@ class UserController extends Action
 
     /**
      * Edit user
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function editAction()
@@ -209,6 +225,7 @@ class UserController extends Action
 
     /**
      * This action is used when user has no access to display one page
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function forbiddenAction()

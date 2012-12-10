@@ -29,6 +29,10 @@ namespace Gc\Component;
 
 /**
  * Create html for jQuery Ui Tabs
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Component
  */
 class Tabs
 {

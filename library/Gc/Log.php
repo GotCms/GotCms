@@ -28,7 +28,7 @@ namespace Gc;
 /**
  * Log data.
  *
- * @category   Gc
+ * @category   Gc_Library
  * @package    Library
  */
 class Log extends Mail

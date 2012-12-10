@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Gc
- * @package  Datatype
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Library
+ * @package    Datatype
+ * @subpackage Textrich
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Datatypes\Textrich;
@@ -31,6 +32,10 @@ use Gc\Core\Object,
 
 /**
  * Ckeditor class to generate html for Ckeditor plugin
+ *
+ * @category   Gc_Library
+ * @package    Datatype
+ * @subpackage Textrich
  */
 class CkEditor extends Object
 {

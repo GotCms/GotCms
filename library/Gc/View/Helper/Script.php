@@ -33,6 +33,10 @@ use Zend\View\Helper\AbstractHelper,
     Gc\View\Stream;
 /**
  * Retrieve script from identifier
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View\Helper
  * @example In view: $this->script('identifier');
  */
 class Script extends AbstractHelper

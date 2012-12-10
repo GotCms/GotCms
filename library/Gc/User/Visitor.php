@@ -34,8 +34,13 @@ use Gc\Db\AbstractTable,
     Zend\Db\TableGateway,
     Zend\Uri\Uri,
     Zend\Validator\Ip as ValidateIp;
+
 /**
  * Model of visitor
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  User
  */
 class Visitor extends AbstractTable
 {

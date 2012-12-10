@@ -34,6 +34,10 @@ use Gc\Db\AbstractTable,
 
 /**
  * Collection of View Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View
  */
 class Collection extends AbstractTable
 {

@@ -36,8 +36,13 @@ use Gc\User\Model,
     Zend\Session\Container as SessionContainer,
     Zend\View\Model\JsonModel,
     Zend\I18n\Translator\Translator;
+
 /**
  * Extension of AbstractActionController
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Mvc\Controller
  */
 class Action extends AbstractActionController
 {

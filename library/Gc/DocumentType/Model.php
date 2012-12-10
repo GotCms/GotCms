@@ -34,8 +34,13 @@ use Gc\Db\AbstractTable,
     Zend\Db\Sql,
     Zend\Db\TableGateway\TableGateway,
     Zend\Db\Sql\Predicate\Expression;
+
 /**
  * Model for Document Type
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  DocumentType
  */
 class Model extends AbstractTable
 {

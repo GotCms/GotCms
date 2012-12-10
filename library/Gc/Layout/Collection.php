@@ -29,8 +29,13 @@ namespace Gc\Layout;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
+
 /**
  * Collection of Layout Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Layout
  */
 class Collection extends AbstractTable
 {

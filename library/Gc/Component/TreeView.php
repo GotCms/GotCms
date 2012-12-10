@@ -31,6 +31,10 @@ use Gc\Component\IterableInterface;
 
 /**
  * Create xml for jQuery treeview
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Component
  */
 class TreeView
 {

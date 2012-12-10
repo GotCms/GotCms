@@ -31,6 +31,9 @@ use ArrayObject,
 
 /**
  * Generic storage class helps to manage global data.
+ *
+ * @category Gc
+ * @package  Library
  */
 class Registry extends ArrayObject
 {

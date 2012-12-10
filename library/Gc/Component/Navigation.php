@@ -32,6 +32,10 @@ use Gc\Document,
 
 /**
  * Create Xml for \Zend\Navigation
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Component
  */
 class Navigation
 {

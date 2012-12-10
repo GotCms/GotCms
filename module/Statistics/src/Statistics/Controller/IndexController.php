@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Statistics\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Statistics
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Statistics\Controller;
@@ -32,9 +33,18 @@ use Gc\Mvc\Controller\Action,
     Gc\User\Visitor,
     SVGGraph;
 
+/**
+ * Statistics controller
+ *
+ * @category   Gc_Application
+ * @package    Statistics
+ * @subpackage Controller
+ */
 class IndexController extends Action
 {
     /**
+     * Display statistics for visitors
+     *
      * @return \Zend\View\Model\ViewModel
      */
     public function indexAction()

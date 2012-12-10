@@ -29,8 +29,13 @@ namespace Gc\Script;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
+
 /**
  * Collection of Script Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Script
  */
 class Collection extends AbstractTable
 {

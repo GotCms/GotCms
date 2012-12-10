@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Form
- * @package  Development
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Form
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Development\Form;
@@ -39,20 +40,32 @@ use Gc\Form\AbstractForm,
     Zend\InputFilter\InputFilter,
     Zend\Form\FieldSet;
 
+/**
+ * Document type form
+ *
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Form
+ */
 class DocumentType extends AbstractForm
 {
     /**
+     * View collection
+     *
      * @var \Gc\View\Collection
      */
      protected $_viewCollection;
 
      /**
+      * Datatype collection
+      *
       * @var \Gc\Datatype\Collection
       */
      protected $_datatypeCollection;
 
     /**
      * Init document type form
+     * @return void
      */
     public function init()
     {
@@ -70,6 +83,7 @@ class DocumentType extends AbstractForm
 
     /**
      * Initialize infos sub form
+     *
      * @return \Zend\Form\FieldSet
      */
     protected function getInfos()
@@ -140,6 +154,7 @@ class DocumentType extends AbstractForm
 
     /**
      * Initialize views sub form
+     *
      * @return \Zend\Form\FieldSet
      */
     protected function getViews()
@@ -184,6 +199,7 @@ class DocumentType extends AbstractForm
 
     /**
      * Initialize properties sub form
+     *
      * @return \Zend\Form\FieldSet
      */
     protected function getProperties()
@@ -210,6 +226,7 @@ class DocumentType extends AbstractForm
 
     /**
      * Add property sub form
+     *
      * @param mixed \Gc\Property\Model | array
      * @return \Developpement\Form\DocumentType
      */
@@ -322,6 +339,7 @@ class DocumentType extends AbstractForm
 
     /**
      * Initialize tabs sub form
+     *
      * @return \Zend\Form\FieldSet
      */
     protected function getTabs()
@@ -346,6 +364,7 @@ class DocumentType extends AbstractForm
 
     /**
      * Add tab sub form
+     *
      * @param mixed \Gc\Tab\Model | array
      * @return \Developpement\Form\DocumentType
      */
@@ -412,6 +431,7 @@ class DocumentType extends AbstractForm
     /**
      * Set values and create tabs and properties FieldSet
      * from parameter
+     *
      * @param mixed \Gc\DocumentType\Model | array
      * @return \Developpement\Form\DocumentType
      */

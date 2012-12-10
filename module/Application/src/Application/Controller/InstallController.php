@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Application\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Application
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Application\Controller;
@@ -31,20 +32,32 @@ use Gc\Mvc\Controller\Action,
     Application\Form\Install,
     Zend\Db\Adapter\Adapter as DbAdapter;
 
+/**
+ * Install controller for module Application
+ *
+ * @category   Gc_Application
+ * @package    Application
+ * @subpackage Controller
+ */
 class InstallController extends Action
 {
     /**
+     * Umask
+     *
      * @var integer
      */
      protected $_umask = 0774;
 
     /**
+     * Install form
+     *
      * @var Application\Form\Install
      */
     protected $_installForm;
 
     /**
      * Initialize Installer
+     *
      * @return void
      */
     public function init()
@@ -66,6 +79,7 @@ class InstallController extends Action
 
     /**
      * Select language in first page
+     *
      * @return array
      */
     public function indexAction()
@@ -92,6 +106,7 @@ class InstallController extends Action
 
     /**
      * Display license
+     *
      * @return array
      */
     public function licenseAction()
@@ -115,6 +130,7 @@ class InstallController extends Action
 
     /**
      * Check configuration
+     *
      * @return array
      */
     public function checkConfigAction()
@@ -159,6 +175,7 @@ class InstallController extends Action
 
     /**
      * Display database information
+     *
      * @return array
      */
     public function databaseAction()
@@ -207,6 +224,11 @@ class InstallController extends Action
         return array('form' => $this->_installForm, 'messages' => $messages);
     }
 
+    /**
+     * Configuration
+     *
+     * @return array
+     */
     public function configurationAction()
     {
         $this->_checkInstall(5);
@@ -233,6 +255,12 @@ class InstallController extends Action
         return array('form' => $this->_installForm);
     }
 
+
+    /**
+     * Complete installation
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
     public function completeAction()
     {
         $this->_checkInstall(6);
@@ -436,7 +464,12 @@ class InstallController extends Action
         }
     }
 
-
+    /**
+     * Check install step
+     *
+     * @param string $step
+     * @return \Zend\View\Model\ViewModel
+     */
     protected function _checkInstall($step)
     {
         $session = $this->getSession();
@@ -472,6 +505,7 @@ class InstallController extends Action
 
     /**
      * Copy directory from source to destination
+     *
      * @param string $source
      * @param string $destination
      * @return boolean

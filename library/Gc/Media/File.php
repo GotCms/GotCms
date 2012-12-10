@@ -33,9 +33,14 @@ use Gc\Core\Object,
     StdClass,
     Zend\EventManager\StaticEventManager,
     Zend\File\Transfer\Adapter\Http as FileTransfer;
+
 /**
  * Manage File, actually only works for Datatypes
  * Need document and property to work
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Media
  */
 class File extends Object
 {

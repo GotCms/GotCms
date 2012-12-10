@@ -35,6 +35,10 @@ use Gc\Db\AbstractTable,
 /**
  * Datatype Model
  * Simply class to edit one datatype
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Datatype
  */
 class Model extends AbstractTable
 {

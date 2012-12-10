@@ -17,20 +17,29 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Development\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Development\Controller;
 
 use Gc\Mvc\Controller\Action;
 
+/**
+ * Index controller
+ *
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Controller
+ */
 class IndexController extends Action
 {
     /**
+     * Display text
      *
      * @return \Zend\View\Model\ViewModel
      */

@@ -42,8 +42,13 @@ use Gc\Core\Config as GcConfig,
     Zend\Session\Container as SessionContainer,
     Zend\Session\SaveHandler\DbTableGatewayOptions,
     Zend\Session\SessionManager;
+
 /**
  * Generic Module
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Mvc
  */
 class Module
 {

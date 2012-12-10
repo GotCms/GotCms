@@ -30,8 +30,13 @@ namespace Gc\User\Role;
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select,
     Zend\Db\TableGateway\TableGateway;
+
 /**
  * Role Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  User\Role
  */
 class Model extends AbstractTable
 {

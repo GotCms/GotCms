@@ -30,6 +30,10 @@ namespace Gc\Property\Value;
 use Gc\Db\AbstractTable;
 /**
  * Property value Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Property\Value
  */
 class Model extends AbstractTable
 {

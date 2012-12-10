@@ -31,6 +31,10 @@ use Zend\Session\SaveHandler\DbTableGateway as ZendDbTableGateway;
 
 /**
  * DB Table Gateway session save handler
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Session\SaveHandler
  */
 class DbTableGateway extends ZendDbTableGateway
 {

@@ -29,8 +29,13 @@ namespace Gc\View\Helper;
 
 use Zend\View\Helper\AbstractHelper,
     Gc\Document\Model as DocumentModel;
+
 /**
  * Retrieve document from id or url_key
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View\Helper
  * @example In view: $this->document('mypage/mysubpage'); or $this->document(1);
  */
 class Document extends AbstractHelper

@@ -36,8 +36,13 @@ use Gc\Db\AbstractTable,
     Gc\View,
     Zend\Db\TableGateway\TableGateway,
     Zend\Db\Sql\Predicate\Expression;
+
 /**
  * Document Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Document
  */
 class Model extends AbstractTable implements IterableInterface
 {

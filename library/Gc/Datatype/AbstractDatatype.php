@@ -38,6 +38,10 @@ use Gc\Db\AbstractTable,
 /**
  * Abstract Datatype is used to call
  * the prevalue editor and editor.
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Datatype
  */
 abstract class AbstractDatatype extends AbstractTable
 {

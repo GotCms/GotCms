@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Form
- * @package  Application
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Application
+ * @subpackage Form
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Application\Form;
@@ -32,10 +33,18 @@ use Gc\Form\AbstractForm,
     Zend\InputFilter\InputFilter,
     Zend\Locale\Locale;
 
+/**
+ * Install form
+ *
+ * @category   Gc_Application
+ * @package    Application
+ * @subpackage Form
+ */
 class Install extends AbstractForm
 {
     /**
      * Init Install form
+     *
      * @return void
      */
     public function init()
@@ -43,6 +52,11 @@ class Install extends AbstractForm
         $this->setInputFilter(new InputFilter());
     }
 
+    /**
+     * Language form
+     *
+     * @return void
+     */
     public function lang()
     {
         $country_available = array(
@@ -66,6 +80,11 @@ class Install extends AbstractForm
         $this->add($lang);
     }
 
+    /**
+     * License form
+     *
+     * @return void
+     */
     public function license()
     {
         $accept_license = new Element\Checkbox('accept-license');
@@ -92,6 +111,11 @@ class Install extends AbstractForm
         $this->add($accept_license);
     }
 
+    /**
+     * Database form
+     *
+     * @return void
+     */
     public function database()
     {
         $data = array(
@@ -166,6 +190,11 @@ class Install extends AbstractForm
         ), 'dbname');
     }
 
+    /**
+     * Configuration form
+     *
+     * @return void
+     */
     public function configuration()
     {
         $site_name = new Element\Text('site_name');

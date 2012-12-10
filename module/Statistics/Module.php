@@ -17,12 +17,13 @@
  *
  * PHP Version >=5.3
  *
- * @category Gc
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Statistics
+ * @subpackage Module
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
-
 namespace Statistics;
 
 use Gc\Mvc;
@@ -30,8 +31,9 @@ use Gc\Mvc;
 /**
  * Module Statistics.
  *
- * @category   Gc
- * @package    Config
+ * @category   Gc_Application
+ * @package    Statistics
+ * @subpackage Module
  */
 class Module extends Mvc\Module
 {

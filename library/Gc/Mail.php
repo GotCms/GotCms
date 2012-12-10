@@ -31,6 +31,9 @@ use Zend\Mail\Message,
 
 /**
  * Extension for Zend\Mail\Message
+ *
+ * @category Gc
+ * @package  Library
  */
 class Mail extends Message
 {

@@ -32,8 +32,13 @@ use Gc\Db\AbstractTable,
     Gc\Media\Icon,
     Gc\View,
     Zend\Db\Sql\Predicate\Expression;
+
 /**
  * Module Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Module
  */
 class Model extends AbstractTable
 {

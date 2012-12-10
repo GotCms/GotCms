@@ -34,6 +34,10 @@ use Gc\Core\Object,
 /**
  * Abstract Editor class
  * Use for display Editor in Manage Content
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Datatype\AbstractDatatype
  */
 abstract class AbstractEditor extends Object
 {

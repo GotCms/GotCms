@@ -29,8 +29,13 @@ namespace Gc\User;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
+
 /**
  * Collection of User Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  User
  */
 class Collection extends AbstractTable
 {

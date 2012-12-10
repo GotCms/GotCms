@@ -34,6 +34,10 @@ use SplFileInfo,
 
 /**
  * Resolves view scripts based on a stack of paths
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View\Resolver
  */
 class TemplatePathStack extends PathStack
 {

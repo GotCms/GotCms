@@ -32,8 +32,13 @@ use Gc\User\Role\Model as RoleModel,
     Zend\Permissions\Acl as ZendAcl,
     Zend\Db\TableGateway\TableGateway,
     Zend\Db\Sql\Select;
+
 /**
  * Use Acl
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  User
  */
 class Acl extends ZendAcl\Acl
 {

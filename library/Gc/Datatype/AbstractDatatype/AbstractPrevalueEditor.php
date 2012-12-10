@@ -33,6 +33,10 @@ use Gc\Core\Object,
 /**
  * Abstract Prevalue Editor class
  * Use for display Prevalue Editor in Manage Development -> Datatypes
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Datatype\AbstractDatatype
  */
 abstract class AbstractPrevalueEditor extends Object
 {

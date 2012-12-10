@@ -33,8 +33,13 @@ use Gc\Db\AbstractTable,
     Zend\Db\Sql\Predicate\Expression,
     Zend\Db\Sql\Select,
     Zend\Validator\EmailAddress;
+
 /**
  * Model of user
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  User
  */
 class Model extends AbstractTable
 {

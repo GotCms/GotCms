@@ -29,8 +29,13 @@ namespace Gc\Property;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
+
 /**
  * Collection of Property Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Property
  */
 class Collection extends AbstractTable
 {

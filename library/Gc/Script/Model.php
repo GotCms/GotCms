@@ -29,8 +29,13 @@ namespace Gc\Script;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Predicate\Expression;
+
 /**
  * Script Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Script
  */
 class Model extends AbstractTable
 {

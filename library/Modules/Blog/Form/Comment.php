@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Modules
- * @package  Blog/Form
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Library
+ * @package    Modules
+ * @subpackage Blog\Form
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Modules\Blog\Form;
@@ -29,8 +30,13 @@ namespace Modules\Blog\Form;
 use Gc\Form\AbstractForm,
     Zend\Form\Element,
     Zend\InputFilter\Factory as InputFilterFactory;
+
 /**
  * Comment form
+ *
+ * @category   Gc_Library
+ * @package    Modules
+ * @subpackage Blog\Form
  */
 class Comment extends AbstractForm
 {

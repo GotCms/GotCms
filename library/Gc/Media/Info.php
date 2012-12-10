@@ -30,9 +30,14 @@ namespace Gc\Media;
 use Gc\Core\Object,
     Gc\Registry,
     Zend\Config\Reader\Ini;
+
 /**
  * Manage File, actually only works for Datatypes
  * Need document and property to work
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Media
  */
 class Info extends Object
 {

@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Gc
- * @package  Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Admin
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Admin\Controller;
@@ -31,10 +32,18 @@ use Gc\Mvc\Controller\Action,
     Gc\User\Visitor,
     Gc\Version;
 
+/**
+ * Index controller for admin module
+ *
+ * @category   Gc_Application
+ * @package    Admin
+ * @subpackage Controller
+ */
 class IndexController extends Action
 {
     /**
      * Display dashboard
+     *
      * @return void
      */
     public function indexAction()
@@ -81,6 +90,11 @@ class IndexController extends Action
         return $data;
     }
 
+    /**
+     * Save dashboard
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
     public function saveDashboardAction()
     {
         $params = $this->getRequest()->getPost()->toArray();

@@ -17,7 +17,7 @@
  *
  * PHP Version >=5.3
  *
- * @category   Gc
+ * @category   Gc_Library
  * @package    Library
  * @subpackage View\Helper
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
@@ -31,6 +31,10 @@ use Zend\View\Helper\AbstractHelper;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router.
+ *
+ * @category   Gc_Library
+ * @package    Library
+ * @subpackage View\Helper
  */
 class ModuleUrl extends AbstractHelper
 {

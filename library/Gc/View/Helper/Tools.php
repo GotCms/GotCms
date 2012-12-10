@@ -30,8 +30,13 @@ namespace Gc\View\Helper;
 use Zend\View\Helper\AbstractHelper,
     Gc\Script\Model as ScriptModel,
     Gc\View\Stream;
+
 /**
  * Tools helper
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View\Helper
  */
 class Tools extends AbstractHelper
 {

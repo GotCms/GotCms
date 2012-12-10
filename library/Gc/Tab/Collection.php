@@ -29,8 +29,13 @@ namespace Gc\Tab;
 
 use Gc\Db\AbstractTable,
     Zend\Db\Sql\Select;
+
 /**
  * Collection of Tab Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Tab
  */
 class Collection extends AbstractTable
 {

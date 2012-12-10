@@ -28,7 +28,7 @@ namespace Gc;
 /**
  * Exception is the base class for all Exceptions.
  *
- * @category   Gc
+ * @category   Gc_Library
  * @package    Library
  */
 class Exception extends \Exception

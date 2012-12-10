@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Form
- * @package  Development
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Form
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Development\Form;
@@ -31,8 +32,20 @@ use Gc\Form\AbstractForm,
     Zend\Form\Element,
     Zend\InputFilter\Factory as InputFilterFactory;
 
+/**
+ * Layout form
+ *
+ * @category   Gc_Application
+ * @package    Development
+ * @subpackage Form
+ */
 class Layout extends AbstractForm
 {
+    /**
+     * Initialize form
+     *
+     * @return void
+     */
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();

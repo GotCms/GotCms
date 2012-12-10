@@ -30,8 +30,13 @@ namespace Gc\Document;
 use Gc\Db\AbstractTable,
     Gc\Component\IterableInterface,
     Zend\Db\Sql\Select;
+
 /**
  * Collection of Document Model
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Document
  */
 class Collection extends AbstractTable implements IterableInterface
 {

@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Config\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Config
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Config\Controller;
@@ -32,16 +33,25 @@ use Gc\Mvc\Controller\Action,
     Gc\User\Role\Rule,
     Config\Form\Role as RoleForm;
 
+/**
+ * Role controller
+ *
+ * @category   Gc_Application
+ * @package    Config
+ * @subpackage Controller
+ */
 class RoleController extends Action
 {
     /**
      * Contains information about acl
+     *
      * @var array $_aclPage
      */
     protected $_aclPage = array('resource' => 'Config', 'permission' => 'role');
 
     /**
      * List all roles
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function indexAction()
@@ -53,6 +63,7 @@ class RoleController extends Action
 
     /**
      * Create role
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function createAction()
@@ -84,6 +95,7 @@ class RoleController extends Action
 
     /**
      * Delete role
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function deleteAction()
@@ -102,6 +114,7 @@ class RoleController extends Action
 
     /**
      * Edit role
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function editAction()

@@ -34,6 +34,10 @@ use Zend\View\Helper\Partial as ZendPartial,
 
 /**
  * Retrieve view from identifier
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  View\Helper
  * @example In view: $this->partial('identifier');
  */
 class Partial extends ZendPartial

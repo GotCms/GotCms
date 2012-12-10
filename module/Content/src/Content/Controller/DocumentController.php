@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Controller
- * @package  Content\Controller
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Content
+ * @subpackage Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Content\Controller;
@@ -36,16 +37,25 @@ use Gc\Mvc\Controller\Action,
     Gc\Component,
     Zend\Json\Json;
 
+/**
+ * Document controller
+ *
+ * @category   Gc_Application
+ * @package    Content
+ * @subpackage Controller
+ */
 class DocumentController extends Action
 {
     /**
      * Contains information about acl
+     *
      * @var array $_aclPage
      */
     protected $_aclPage = array('resource' => 'Content', 'permission' => 'document');
 
     /**
      * Initialize Document Controller
+     *
      * @return void
      */
     public function init()
@@ -293,6 +303,7 @@ class DocumentController extends Action
 
     /**
      * Copy document
+     *
      * @return \Zend\View\Model\JsonModel
      */
      public function copyAction()
@@ -315,6 +326,7 @@ class DocumentController extends Action
 
     /**
      * Cut document
+     *
      * @return \Zend\View\Model\JsonModel
      */
      public function cutAction()
@@ -337,6 +349,7 @@ class DocumentController extends Action
 
     /**
      * Paste document
+     *
      * @return \Zend\View\Model\JsonModel
      */
      public function pasteAction()
@@ -436,6 +449,7 @@ class DocumentController extends Action
 
     /**
      * Refresh treeview
+     *
      * @return \Zend\View\Model\ViewModel
      */
     public function refreshTreeviewAction()
@@ -457,6 +471,11 @@ class DocumentController extends Action
         return $this->_returnJson(array('treeview' => Component\TreeView::render($documents_list, FALSE)));
     }
 
+    /**
+     * Sort document action
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
     public function sortOrderAction()
     {
         $order = $this->getRequest()->getPost()->get('order');
@@ -477,6 +496,7 @@ class DocumentController extends Action
 
     /**
      * Check url key with deleted space and special chars
+     *
      * @param string $string
      * @return string
      */
@@ -491,6 +511,7 @@ class DocumentController extends Action
 
     /**
      * Load tabs from document type
+     *
      * @param integer $document_type_id
      * @return \Gc\Tab\Collection
      */
@@ -504,6 +525,7 @@ class DocumentController extends Action
 
     /**
      * Load properties from document type, tab and document
+     *
      * @param integer $document_type_id
      * @param integer $tab_id
      * @param integer $document_id

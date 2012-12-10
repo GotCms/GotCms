@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Form
- * @package  Content
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Content
+ * @subpackage Form
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Content\Form;
@@ -35,11 +36,34 @@ use Gc\Document\Model as DocumentModel,
     Zend\Form\Element,
     Zend\InputFilter\Factory as InputFilterFactory;
 
+/**
+ * Document form
+ *
+ * @category   Gc_Application
+ * @package    Content
+ * @subpackage Form
+ */
 class Document extends AbstractForm
 {
+    /**
+     * Parent id
+     *
+     * @var integer
+     */
     protected $_parentId = NULL;
+
+    /**
+     * Document id
+     *
+     * @var integer
+     */
     protected $_documentId = NULL;
 
+    /**
+     * Initialize Form
+     *
+     * @return void
+     */
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
@@ -98,6 +122,7 @@ class Document extends AbstractForm
 
     /**
      * Check parent validation
+     *
      * @return boolean
      */
     public function isValid()
@@ -130,6 +155,7 @@ class Document extends AbstractForm
 
     /**
      * Load document form from DocumentModel
+     *
      * @param DocumentModel $document
      * @return void
      */

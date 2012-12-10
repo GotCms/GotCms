@@ -29,6 +29,10 @@ namespace Gc\Media;
 
 /**
  * Manage Image
+ *
+ * @category    Gc
+ * @package     Library
+ * @subpackage  Media
  */
 class Image
 {
