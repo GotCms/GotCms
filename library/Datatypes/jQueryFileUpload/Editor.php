@@ -109,7 +109,6 @@ class Editor extends AbstractEditor
             foreach($files as $file_data)
             {
                 $file_object = new \StdClass();
-                //@TODO replace path here
                 $file_object->name = $file_data['value'];
                 $file_object->filename = $file_data['value'];
                 $file_object->thumbnail_url = $file_data['value'];

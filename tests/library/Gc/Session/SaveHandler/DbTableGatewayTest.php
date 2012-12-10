@@ -89,7 +89,6 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Session\SaveHandler\DbTableGateway::write
-     * @todo   Implement testWrite().
      */
     public function testWrite()
     {
