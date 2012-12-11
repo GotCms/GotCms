@@ -50,18 +50,21 @@ class Config extends AbstractTable
 
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'core_config_data';
 
     /**
      * Singleton for Config
+     *
      * @var \Gc\Core\Config $_instance
      */
     static protected $_instance = NULL;
 
     /**
      * Get instance of \Gc\Core\Config
+     *
      * @return \Gc\Core\Config
      */
     public static function getInstance()
@@ -76,6 +79,7 @@ class Config extends AbstractTable
 
     /**
      * Get config value
+     *
      * @param string $data
      * @param string $field Optional database field, by default 'identifier'
      * @return string value
@@ -95,6 +99,7 @@ class Config extends AbstractTable
 
     /**
      * Return all values from core_config_data
+     *
      * @return array
      */
     static function getValues()
@@ -111,6 +116,7 @@ class Config extends AbstractTable
 
     /**
      * Set config value
+     *
      * @param string $identifier
      * @param string $value
      * @return boolean

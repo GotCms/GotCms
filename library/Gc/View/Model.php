@@ -41,12 +41,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'view';
 
     /**
      * Initiliaze
+     *
      * @param integer $id
      * @return \Gc\View\Model
      */
@@ -57,6 +59,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from array
+     *
      * @param array $array
      * @return \Gc\View\Model
      */
@@ -70,6 +73,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
+     *
      * @param integer $view_id
      * @return \Gc\View\Model
      */
@@ -90,6 +94,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from identifier
+     *
      * @param string $identifier
      * @return \Gc\View\Model
      */
@@ -110,6 +115,7 @@ class Model extends AbstractTable
 
     /**
      * Save view model
+     *
      * @return integer
      */
     public function save()
@@ -153,6 +159,7 @@ class Model extends AbstractTable
 
     /**
      * Delete view model
+     *
      * @return boolean
      */
     public function delete()

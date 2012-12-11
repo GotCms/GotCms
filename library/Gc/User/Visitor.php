@@ -46,12 +46,14 @@ class Visitor extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'log_visitor';
 
     /**
      * Get visitor id
+     *
      * @param string $session_id
      * @return integer
      */
@@ -135,6 +137,7 @@ class Visitor extends AbstractTable
 
     /**
      * Get url id
+     *
      * @param string $request_uri
      * @param string $referer
      * @return integer
@@ -171,6 +174,7 @@ class Visitor extends AbstractTable
 
     /**
      * Return total visitors
+     *
      * @return array
      */
     public function getTotalVisitors()
@@ -183,6 +187,7 @@ class Visitor extends AbstractTable
 
     /**
      * Return total visits
+     *
      * @return array
      */
     public function getTotalPageViews()
@@ -196,6 +201,7 @@ class Visitor extends AbstractTable
 
     /**
      * Return all visits
+     *
      * @param string $sort
      * @return array
      */
@@ -221,6 +227,7 @@ class Visitor extends AbstractTable
 
     /**
      * Return all visitors
+     *
      * @param string $sort
      * @param array $rows
      * @return array
@@ -291,6 +298,7 @@ class Visitor extends AbstractTable
 
     /**
      * Return all visitors
+     *
      * @param string $sort
      * @return array
      */
@@ -316,6 +324,7 @@ class Visitor extends AbstractTable
 
     /**
      * Return all referers
+     *
      * @param string $sort
      * @param integer $limit Optional
      * @return array
@@ -342,6 +351,7 @@ class Visitor extends AbstractTable
 
     /**
      * group by date
+     *
      * @param string $sort
      * @param Select &$select
      * @return void

@@ -41,6 +41,7 @@ class Editor extends AbstractEditor
 {
     /**
      * Save checkbox list editor
+     *
      * @return void
      */
     public function save()
@@ -56,6 +57,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load checkbox list editor
+     *
      * @return mixed
      */
     public function load()

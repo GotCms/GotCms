@@ -41,12 +41,14 @@ class Datatype extends AbstractDatatype
 {
     /**
      * Datatype name
+     *
      * @var string
      */
     protected $_name = 'datepicker';
 
     /**
      * Retrieve editor
+     *
      * @param PropertyModel $property
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
@@ -63,6 +65,7 @@ class Datatype extends AbstractDatatype
 
     /**
      * Retrieve prevalue editor
+     *
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     public function getPrevalueEditor()

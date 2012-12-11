@@ -41,12 +41,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'script';
 
     /**
      * Initiliaze
+     *
      * @param integer $id
      * @return \Gc\Script\Model
      */
@@ -57,6 +59,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from array
+     *
      * @param array $array
      * @return \Gc\Script\Model
      */
@@ -70,6 +73,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
+     *
      * @param integer $script_id
      * @return \Gc\Script\Model
      */
@@ -89,6 +93,7 @@ class Model extends AbstractTable
     }
     /**
      * Initiliaze from id
+     *
      * @param integer $identifier
      * @return \Gc\Script\Model
      */
@@ -109,6 +114,7 @@ class Model extends AbstractTable
 
     /**
      * Save script model
+     *
      * @return integer
      */
     public function save()
@@ -152,6 +158,7 @@ class Model extends AbstractTable
 
     /**
      * Delete script model
+     *
      * @return boolean
      */
     public function delete()

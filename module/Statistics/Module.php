@@ -39,12 +39,14 @@ class Module extends Mvc\Module
 {
     /**
      * Module directory path
+     *
      * @var string
      */
     protected $_directory = __DIR__;
 
     /**
      * Module namespace
+     *
      * @var string
      */
     protected $_namespace = __NAMESPACE__;

@@ -44,12 +44,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'module';
 
     /**
      * Initiliaze module
+     *
      * @param integer $module_id
      * @return void
      */
@@ -63,6 +65,7 @@ class Model extends AbstractTable
 
     /**
      * Initialize module from array
+     *
      * @param array $array
      * @return \Gc\Module\Model
      */
@@ -76,6 +79,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze module from id
+     *
      * @param array $module_id
      * @return \Gc\Module\Model
      */
@@ -96,6 +100,7 @@ class Model extends AbstractTable
 
     /**
      * Save Model
+     *
      * @return integer
      */
     public function save()
@@ -135,6 +140,7 @@ class Model extends AbstractTable
 
     /**
      * Delete module
+     *
      * @return boolean
      */
     public function delete()

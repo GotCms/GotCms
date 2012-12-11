@@ -41,23 +41,27 @@ abstract class AbstractModule
 {
     /**
      * Execute on bootstrap
+     *
      * @param Event $e
      */
     abstract function onBootstrap(Event $e);
 
     /**
      * Install module
+     *
      * @return boolean
      */
     abstract function install();
     /**
      * Uninstall module
+     *
      * @return boolean
      */
     abstract function uninstall();
 
     /**
      * Return database adapter
+     *
      * @return \Zend\Db\Adapter\Adapter
      */
     protected function getAdapter()
@@ -67,6 +71,7 @@ abstract class AbstractModule
 
     /**
      * Return driver name
+     *
      * @return string
      */
     protected function getDriverName()

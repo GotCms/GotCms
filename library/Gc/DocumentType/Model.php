@@ -46,18 +46,21 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'document_type';
 
     /**
      * List of view id
+     *
      * @var integer
      */
     protected $_views = array();
 
     /**
      * Get user model
+     *
      * @return \Gc\User\Model
      */
     public function getUser()
@@ -72,6 +75,7 @@ class Model extends AbstractTable
 
     /**
      * Add view
+     *
      * @param integer $view_id
      * @return \Gc\DocumentType\Model
      */
@@ -83,6 +87,7 @@ class Model extends AbstractTable
 
     /**
      * Add views
+     *
      * @param array $views
      * @return \Gc\DocumentType\Model
      */
@@ -98,6 +103,7 @@ class Model extends AbstractTable
 
     /**
      * Get Tabs
+     *
      * @return \Gc\Tab\Collection
      */
     public function getTabs()
@@ -115,6 +121,7 @@ class Model extends AbstractTable
 
     /**
      * Get available views
+     *
      * @return array \Gc\View\Collection
      */
     public function getAvailableViews()
@@ -132,6 +139,7 @@ class Model extends AbstractTable
 
     /**
      * Get dependencies
+     *
      * @return array
      */
     public function getDependencies()
@@ -159,6 +167,7 @@ class Model extends AbstractTable
 
     /**
      * Save document type model
+     *
      * @return integer
      */
     public function save()
@@ -239,6 +248,7 @@ class Model extends AbstractTable
 
     /**
      * Delete document type model
+     *
      * @return boolean
      */
     public function delete()
@@ -266,6 +276,7 @@ class Model extends AbstractTable
 
     /**
      * Get model from array
+     *
      * @param array $array
      * @return \Gc\DocumentType\Model
      */
@@ -279,6 +290,7 @@ class Model extends AbstractTable
 
     /**
      * Get model from id
+     *
      * @param integer $document_type_id
      * @return \Gc\DocumentType\Model
      */

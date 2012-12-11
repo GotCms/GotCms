@@ -42,6 +42,7 @@ class Comment extends AbstractForm
 {
     /**
      * Init Module form
+     *
      * @return void
      */
     public function init()

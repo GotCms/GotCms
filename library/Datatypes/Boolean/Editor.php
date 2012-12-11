@@ -41,6 +41,7 @@ class Editor extends AbstractEditor
 {
     /**
      * Save Boolean editor
+     *
      * @return void
      */
     public function save()
@@ -51,6 +52,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load Boolean editor
+     *
      * @return mixed
      */
     public function load()

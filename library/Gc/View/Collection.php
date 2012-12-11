@@ -43,18 +43,21 @@ class Collection extends AbstractTable
 {
     /**
      * List of \Gc\View\Model
+     *
      * @var array
      */
     protected $_viewsElements = array();
 
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'view';
 
     /**
      * Initiliaze collection
+     *
      * @param integer $document_type_id Optional
      * @return void
      */
@@ -66,6 +69,7 @@ class Collection extends AbstractTable
 
     /**
      * Get views
+     *
      * @param boolean $force_reload to initiliaze views
      * @return array
      */
@@ -98,6 +102,7 @@ class Collection extends AbstractTable
 
     /**
      * Get array for input select
+     *
      * @return array
      */
     public function getSelect()
@@ -115,6 +120,7 @@ class Collection extends AbstractTable
 
     /**
      * Add view
+     *
      * @param Model $view
      */
     public function addElement(Model $view)
@@ -125,6 +131,7 @@ class Collection extends AbstractTable
 
     /**
      * Clear elements
+     *
      * @return \Gc\View\Collection
      */
     public function clearElements()
@@ -135,6 +142,7 @@ class Collection extends AbstractTable
 
     /**
      * get all elements store in $_viewsElements
+     *
      * @return array
      */
     public function getElements()
@@ -144,6 +152,7 @@ class Collection extends AbstractTable
 
     /**
      * Save properties
+     *
      * @return boolean
      */
     public function save()
@@ -174,6 +183,7 @@ class Collection extends AbstractTable
 
     /**
      * delete properties
+     *
      * @return boolean
      */
     public function delete()

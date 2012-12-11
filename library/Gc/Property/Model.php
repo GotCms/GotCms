@@ -42,18 +42,21 @@ class Model extends AbstractTable
 {
     /**
      * Accessor for \Gc\Property\Value\Model
+     *
      * @var \Gc\Property\Value\Model
      */
     protected         $_value;
 
     /**
      * Table name
+     *
      * @var string
      */
     protected         $_name = 'property';
 
     /**
      * Get if property is required or not
+     *
      * @param Boolean $value to set value
      * @return mixed
      */
@@ -78,6 +81,7 @@ class Model extends AbstractTable
 
     /**
      * Set property value
+     *
      * @param mixed $value
      * @return \Gc\Property\Model
      */
@@ -95,6 +99,7 @@ class Model extends AbstractTable
 
     /**
      * Load property value
+     *
      * @return void
      */
     public function loadValue()
@@ -107,6 +112,7 @@ class Model extends AbstractTable
 
     /**
      * Return property value
+     *
      * @return mixed
      */
     public function getValue()
@@ -121,6 +127,7 @@ class Model extends AbstractTable
 
     /**
      * Return property value model
+     *
      * @return mixed
      */
     public function getValueModel()
@@ -135,6 +142,7 @@ class Model extends AbstractTable
 
     /**
      * Save property value
+     *
      * @return boolean
      */
     public function saveValue()
@@ -153,6 +161,7 @@ class Model extends AbstractTable
 
     /**
      * Save property
+     *
      * @return integer
      */
     public function save()
@@ -205,6 +214,7 @@ class Model extends AbstractTable
 
     /**
      * Delete property
+     *
      * @return boolean
      */
     public function delete()
@@ -236,6 +246,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze model from array
+     *
      * @param array $array
      * @return \Gc\Property\Model
      */
@@ -249,6 +260,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze model from id
+     *
      * @param integer $property_id
      * @return \Gc\Property\Model
      */
@@ -269,6 +281,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze model from identifier
+     *
      * @param string $identifier
      * @param id $document_id
      * @return \Gc\Property\Model

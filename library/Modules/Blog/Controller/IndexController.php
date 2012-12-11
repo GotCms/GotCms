@@ -42,12 +42,14 @@ class IndexController extends AbstractController
 {
     /**
      * Fields white list
+     *
      * @var array
      */
     protected $_whiteList = array('show_email', 'is_active', 'username', 'email', 'message', 'document_id', 'created_at');
 
     /**
      * Index action, list all documents with comments
+     *
      * @return array
      */
     public function indexAction()
@@ -60,6 +62,7 @@ class IndexController extends AbstractController
 
     /**
      * List all comment by document id
+     *
      * @return array
      */
     public function documentCommentAction()

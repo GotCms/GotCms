@@ -41,6 +41,7 @@ abstract class AbstractController extends Action
 {
     /**
      * Construct controller with request and response
+     *
      * @param Request $request
      * @param Response $response
      * @return void

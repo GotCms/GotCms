@@ -48,6 +48,7 @@ class IndexController extends Action
 {
     /**
      * Contains information about acl
+     *
      * @var array $_aclPage
      */
     protected $_aclPage = array('resource' => 'Modules', 'permission' => 'all');

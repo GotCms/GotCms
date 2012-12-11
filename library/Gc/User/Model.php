@@ -45,12 +45,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'user';
 
     /**
      * Authenticate user
+     *
      * @param string $login
      * @param string $password
      * @return boolean
@@ -82,6 +84,7 @@ class Model extends AbstractTable
 
     /**
      * Set User email
+     *
      * @param string $user_email
      * @return boolean
      */
@@ -114,6 +117,7 @@ class Model extends AbstractTable
 
     /**
      * Set user password
+     *
      * @param string $user_password
      * @param boolean $encrypt
      * @return void
@@ -126,6 +130,7 @@ class Model extends AbstractTable
 
     /**
      * Save user
+     *
      * @return integer
      */
     public function save()
@@ -176,6 +181,7 @@ class Model extends AbstractTable
 
     /**
      * Delete user
+     *
      * @return boolean
      */
     public function delete()
@@ -206,6 +212,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from array
+     *
      * @param array $array
      * @return \Gc\User\Model
      */
@@ -220,6 +227,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
+     *
      * @param integer $user_id
      * @return \Gc\User\Model
      */
@@ -242,6 +250,7 @@ class Model extends AbstractTable
 
     /**
      * Get User Role
+     *
      * @param boolean $force_reload
      * @return \Gc\User\Role\Model
      */
@@ -259,6 +268,7 @@ class Model extends AbstractTable
 
     /**
      * Send new password
+     *
      * @param string $email
      * @return boolean
      */
@@ -271,6 +281,7 @@ class Model extends AbstractTable
 
     /**
      * Return user name
+     *
      * @return string
      */
      public function getName()

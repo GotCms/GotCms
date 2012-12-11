@@ -44,18 +44,21 @@ class Partial extends ZendPartial
 {
     /**
      * Script parameter
+     *
      * @var array
      */
     protected $_params = array();
 
     /**
      * Template path stack
+     *
      * @var TemplatePathStack
      */
     protected $_resolver;
 
     /**
      * Check if stream is registered
+     *
      * @var TemplatePathStack
      */
     static protected $_streamIsRegistered = FALSE;
@@ -140,6 +143,7 @@ class Partial extends ZendPartial
 
     /**
      * Clone the current View
+     *
      * @return \Zend\View\Renderer\RendererInterface
      */
     public function cloneView()

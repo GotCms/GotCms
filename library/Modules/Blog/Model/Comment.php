@@ -43,12 +43,14 @@ class Comment extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name ='blog_comment';
 
     /**
      * Return all documents with comment(s)
+     *
      * @return array
      */
     public function getDocumentList()
@@ -69,6 +71,7 @@ class Comment extends AbstractTable
 
     /**
      * Return all comments in document
+     *
      * @param integer $document_id
      * @param boolean $is_active
      * @return array
@@ -93,6 +96,7 @@ class Comment extends AbstractTable
 
     /**
      * Add command
+     *
      * @param array $data
      * @param integer $document_id
      * @return boolean

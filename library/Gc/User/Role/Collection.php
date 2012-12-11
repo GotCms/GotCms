@@ -41,18 +41,21 @@ class Collection extends AbstractTable
 {
     /**
      * List of roles
+     *
      * @var array
      */
     protected $_roles;
 
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'user_acl_role';
 
     /**
      * Initiliaze role collection
+     *
      * @return void
      */
     public function init()
@@ -62,6 +65,7 @@ class Collection extends AbstractTable
 
     /**
      * Get Roles
+     *
      * @param boolean $force_reload
      * @return array \Gc\User\Role\Model
      */

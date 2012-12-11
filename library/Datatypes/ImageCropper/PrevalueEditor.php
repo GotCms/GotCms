@@ -41,6 +41,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
      * Save Image cropper prevalue editor
+     *
      * @return void
      */
     public function save()
@@ -70,6 +71,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load Image cropper prevalue editor
+     *
      * @return mixed
      */
     public function load()

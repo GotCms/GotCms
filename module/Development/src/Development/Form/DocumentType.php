@@ -65,6 +65,7 @@ class DocumentType extends AbstractForm
 
     /**
      * Init document type form
+     *
      * @return void
      */
     public function init()

@@ -41,6 +41,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
      * Save Textarea prevalue editor
+     *
      * @return void
      */
     public function save()
@@ -60,18 +61,16 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load Textarea prevalue editor
+     * - cols:   Number of caracters display per line
+     * - rows:   Define the number of line visible in text zone
+     * - wrap:   Possible values are : hard / off / soft
+     *                       define if line returns are automatic (hard / soft)
+     *                       or if the horizontal display if exceeded (off)
+     *
      * @return mixed
      */
     public function load()
     {
-        /*
-        - cols     :   Number of caracters display per line
-        - rows     :   Define the number of line visible in text zone
-        - wrap     :   Possible values are : hard / off / soft
-                            define if line returns are automatic (hard / soft)
-                            or if the horizontal display if exceeded (off)
-        */
-
         $config = $this->getConfig();
 
         $cols = new Element\Text('cols');

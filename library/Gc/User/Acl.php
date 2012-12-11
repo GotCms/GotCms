@@ -44,30 +44,35 @@ class Acl extends ZendAcl\Acl
 {
     /**
      * Role model
+     *
      * @var \Gc\User\Role\Model
      */
     protected $_roleTable = NULL;
 
     /**
      * User Role id
+     *
      * @var integer role_id
      */
     protected $_userRole = NULL;
 
     /**
      * User Role name
+     *
      * @var mixed role name
      */
     protected $_userRoleName = NULL;
 
     /**
      * User model
+     *
      * @var \Gc\User\Model
      */
     protected $_user = NULL;
 
     /**
      * Initiliaze Acl
+     *
      * @param UserModel $user_model
      * @return void
      */
@@ -89,6 +94,7 @@ class Acl extends ZendAcl\Acl
 
     /**
      * Initiliaze Roles
+     *
      * @return void
      */
     protected function _initRoles()
@@ -102,6 +108,7 @@ class Acl extends ZendAcl\Acl
 
     /**
      * Initiliaze resources
+     *
      * @return void
      */
     protected function _initResources()
@@ -122,6 +129,7 @@ class Acl extends ZendAcl\Acl
 
     /**
      * Initiliaze role resource
+     *
      * @return void
      */
     protected function _roleResource()
@@ -146,6 +154,7 @@ class Acl extends ZendAcl\Acl
 
     /**
      * List Roles
+     *
      * @return array
      */
     public function listRoles()
@@ -155,6 +164,7 @@ class Acl extends ZendAcl\Acl
 
     /**
      * Get role id from role name
+     *
      * @param string $role_name
      * @return array|\Zend\Db\ResultSet\RowObjectInterface
      */
@@ -167,6 +177,7 @@ class Acl extends ZendAcl\Acl
 
     /**
      * List resources
+     *
      * @return array
      */
     public function listResources()
@@ -178,6 +189,7 @@ class Acl extends ZendAcl\Acl
 
     /**
      * List all resources by group
+     *
      * @param array $group
      * @return array
      */

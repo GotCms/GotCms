@@ -44,12 +44,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'datatype';
 
     /**
      * Set prevalue value
+     *
      * @param mixed $value
      * @return \Gc\Datatype\Model
      */
@@ -63,6 +65,7 @@ class Model extends AbstractTable
 
     /**
      * Get Model from array
+     *
      * @param array $array
      * @return \Gc\Datatype\Model
      */
@@ -76,6 +79,7 @@ class Model extends AbstractTable
 
     /**
      * Get model from id
+     *
      * @param integer $datatype_id
      * @return FALSE|\Gc\Datatype\Model
      */
@@ -96,6 +100,7 @@ class Model extends AbstractTable
 
     /**
      * Save Datatype model
+     *
      * @return integer
      */
     public function save()
@@ -136,6 +141,7 @@ class Model extends AbstractTable
 
     /**
      * Delete datatype model
+     *
      * @return boolean
      */
     public function delete()
@@ -166,6 +172,7 @@ class Model extends AbstractTable
 
     /**
      * Save prevalue editor
+     *
      * @param AbstractDatatype $datatype
      * @return Model
      */
@@ -177,6 +184,7 @@ class Model extends AbstractTable
 
     /**
      * Save editor
+     *
      * @param PropertyModel $property
      * @return mixed
      */
@@ -196,6 +204,7 @@ class Model extends AbstractTable
 
     /**
      * Load prevalue editor
+     *
      * @param AbstractDatatype $datatype
      * @return mixed
      */
@@ -208,6 +217,7 @@ class Model extends AbstractTable
 
     /**
      * Load editor
+     *
      * @param PropertyModel $property
      * @return mixed
      */
@@ -220,6 +230,7 @@ class Model extends AbstractTable
 
     /**
      * Load Datatype
+     *
      * @param integer $datatype_id
      * @param integer $document_id Optional
      * @return \Gc\Datatype\AbstractDatatype

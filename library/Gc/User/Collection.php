@@ -41,12 +41,14 @@ class Collection extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'user';
 
     /**
      * Initiliaze User collection
+     *
      * @return void
      */
     public function init()
@@ -56,6 +58,7 @@ class Collection extends AbstractTable
 
     /**
      * Get users
+     *
      * @return array Gc\User\Model
      */
     public function getUsers()
@@ -65,6 +68,7 @@ class Collection extends AbstractTable
 
     /**
      * Set users collection
+     *
      * @return void
      */
     private function setUsers()

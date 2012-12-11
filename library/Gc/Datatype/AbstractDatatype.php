@@ -47,30 +47,35 @@ abstract class AbstractDatatype extends AbstractTable
 {
     /**
      * Editor
+     *
      * @var \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     protected     $_editor;
 
     /**
      * Prevalue editor
+     *
      * @var \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     protected     $_prevalueEditor;
 
     /**
      * Property
+     *
      * @var \Gc\Property\Model
      */
     protected     $_property;
 
     /**
      * Table name
+     *
      * @var string
      */
     protected     $_name = 'datatype';
 
     /**
      * Get Datatype Editor
+     *
      * @param Property\Model $property
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
@@ -78,12 +83,14 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Get Datatype Prevalue editor
+     *
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     abstract public function getPrevalueEditor();
 
     /**
      * Return datatype informations
+     *
      * @return array
      */
     public function getInfos()
@@ -103,6 +110,7 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Load Datatype
+     *
      * @param Model $datatype
      * @param integer $document_id
      * @return mixed
@@ -120,6 +128,7 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Return configuration
+     *
      * @return mixed
      */
     public function getConfig()
@@ -129,6 +138,7 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Set configuration
+     *
      * @param mixed $value
      * @return \Gc\Datatype\AbstractDatatype
      */
@@ -140,6 +150,7 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Get upload url path
+     *
      * @param integer $property_id
      * @return string
      */
@@ -178,6 +189,7 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Set Property Model
+     *
      * @param \Gc\Property\Model $property
      * @return \Gc\Datatype\AbstractDatatype
      */
@@ -188,7 +200,7 @@ abstract class AbstractDatatype extends AbstractTable
     }
 
     /**
-     * get datatype name, construct with datatype name and property_id
+     * Get datatype name, construct with datatype name and property_id
      *
      * @return string
      */

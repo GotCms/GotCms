@@ -43,30 +43,35 @@ abstract class AbstractEditor extends Object
 {
     /**
      * Datatype
+     *
      * @var AbstractDatatype
      */
     protected $_datatype;
 
     /**
      * Property model
+     *
      * @var \Gc\Property\Model
      */
     protected $_property;
 
     /**
      * Get name of datatype
+     *
      * @var string
      */
     protected $_name;
 
     /**
      * Configuration
+     *
      * @var mixed
      */
     protected $_config;
 
     /**
      * Abstract function for save Editor
+     *
      * @abstract
      * @return void
      */
@@ -74,6 +79,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Abstract function for load Editor
+     *
      * @abstract
      * @return void
      */
@@ -81,6 +87,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Abstract function for save Editor
+     *
      * @param Datatype\AbstractDatatype $datatype_abstract
      * @return void
      */
@@ -93,6 +100,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Return property value
+     *
      * @return string
      */
     public function getValue()
@@ -102,6 +110,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Set property value
+     *
      * @param mixed $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
@@ -114,6 +123,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * get configuration
+     *
      * @return void
      */
     public function getConfig()
@@ -128,6 +138,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Set Configuration
+     *
      * @param mixed $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
@@ -139,6 +150,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Upload dir path
+     *
      * @return string
      */
     public function getUploadUrl()
@@ -148,6 +160,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Get datatype name
+     *
      * @return string
      */
     public function getName()
@@ -157,6 +170,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Return property model
+     *
      * @return \Gc\Property\Model
      */
     public function getProperty()
@@ -166,6 +180,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Get datatype
+     *
      * @return \Gc\Datatype\AbstractDatatype
      */
     public function getDatatype()
@@ -175,6 +190,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Get request object
+     *
      * @return \Zend\Http\Request
      */
     public function getRequest()
@@ -184,6 +200,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Render template
+     *
      * @param string $name
      * @param array $data
      * @return string
@@ -195,6 +212,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Add path in Zend\View\Resolver\TemplatePathStack
+     *
      * @param string $dir
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
@@ -207,6 +225,7 @@ abstract class AbstractEditor extends Object
 
     /**
      * Retrieve helper from $name
+     *
      * @param string $name
      * @return mixed
      */

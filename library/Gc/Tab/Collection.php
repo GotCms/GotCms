@@ -41,12 +41,14 @@ class Collection extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'tab';
 
     /**
      * Initiliaze tab collection
+     *
      * @param integer $document_type_id Optional
      * @return \Gc\Tab\Collection
      */
@@ -59,6 +61,7 @@ class Collection extends AbstractTable
 
     /**
      * Return all tabs from collection
+     *
      * @param boolean $force_reload to reload collection
      * @return array
      */
@@ -95,6 +98,7 @@ class Collection extends AbstractTable
 
     /**
      * Return all tabs from collection
+     *
      * @param integer $document_type_id
      * @return array
      */
@@ -116,6 +120,7 @@ class Collection extends AbstractTable
 
     /**
      * Set tabs
+     *
      * @param array $tabs of \Gc\Tab\Model
      * @return void
      */
@@ -132,6 +137,7 @@ class Collection extends AbstractTable
 
     /**
      * Add tab from array
+     *
      * @param array $tab
      * @return void
      */
@@ -145,6 +151,7 @@ class Collection extends AbstractTable
 
     /**
      * Save tabs
+     *
      * @return void
      */
     public function save()
@@ -157,7 +164,9 @@ class Collection extends AbstractTable
     }
 
     /**
-     * Delete tabs @return void
+     * Delete tabs
+     *
+     * @return void
      */
     public function delete()
     {

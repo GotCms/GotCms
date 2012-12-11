@@ -43,18 +43,21 @@ class Info extends Object
 {
     /**
      * Available array options
+     *
      * @var array
      */
     protected $_optionsArray = array('database_compatibility' => 'Database compatibility');
 
     /**
      * Available string options
+     *
      * @var array
      */
     protected $_optionsString = array('author' => 'Author', 'date' => 'Date', 'description' => 'Description', 'cms_version' => 'GotCms version', 'version' => 'Version');
 
     /**
      * Available links options
+     *
      * @var array
      */
     protected $_optionsLinks = array('website' => 'Website url');

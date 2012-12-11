@@ -44,6 +44,7 @@ class Module extends AbstractForm
 {
     /**
      * Init Module form
+     *
      * @return void
      */
     public function init()

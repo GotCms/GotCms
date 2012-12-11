@@ -41,18 +41,21 @@ class Collection extends AbstractTable
 {
     /**
      * List of permissions
+     *
      * @var array
      */
     protected $_permissions = array();
 
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'user_acl_permissions';
 
     /**
      * Initiliaze permissions
+     *
      * @return void
      */
     public function init()
@@ -62,6 +65,7 @@ class Collection extends AbstractTable
 
     /**
      * Get permissions
+     *
      * @param boolean $force_reload
      * @return array
      */

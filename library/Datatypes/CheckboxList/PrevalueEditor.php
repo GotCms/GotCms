@@ -40,6 +40,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
      * Save Checkbox List prevalue editor
+     *
      * @return void
      */
     public function save()
@@ -60,6 +61,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load Checkbox List prevalue editor
+     *
      * @return void
      */
     public function load()

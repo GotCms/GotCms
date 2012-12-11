@@ -40,6 +40,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
      * Save Date Picker prevalue editor
+     *
      * @return void
      */
     public function save()
@@ -48,6 +49,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load Date Picker prevalue editor
+     *
      * @return void
      */
     public function load()

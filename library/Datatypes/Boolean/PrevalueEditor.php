@@ -41,6 +41,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
      * Save Boolean prevalue editor
+     *
      * @return void
      */
     public function save()
@@ -49,6 +50,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load Boolean prevalue editor
+     *
      * @return mixed
      */
     public function load()

@@ -70,6 +70,7 @@ class Stream
 
     /**
      * Opens the script file and converts markup.
+     *
      * @param string path
      * @param string $mode
      * @param integer $options
@@ -90,6 +91,7 @@ class Stream
 
     /**
      * Reads from the stream.
+     *
      * @param integer $count
      * @return mixed
      */
@@ -103,6 +105,7 @@ class Stream
 
     /**
      * Write in the stream
+     *
      * @param string $data
      * @return integer
      */
@@ -118,6 +121,7 @@ class Stream
 
     /**
      * Tells the current position in the stream.
+     *
      * @return integer
      */
     public function stream_tell()
@@ -127,6 +131,7 @@ class Stream
 
     /**
      * Tells if we are at the end of the stream.
+     *
      * @return boolean
      */
     public function stream_eof()
@@ -136,6 +141,7 @@ class Stream
 
     /**
      * Stream statistics.
+     *
      * @return array
      */
     public function stream_stat()
@@ -145,6 +151,7 @@ class Stream
 
     /**
      * Seek to a specific point in the stream.
+     *
      * @param integer $offset
      * @param integer $whence
      * @return boolean
@@ -197,6 +204,7 @@ class Stream
     /**
      * Retrieve information about a file
      * Always return false because data come from the database
+     *
      * @param string $path
      * @param int $flags
      * @return boolean

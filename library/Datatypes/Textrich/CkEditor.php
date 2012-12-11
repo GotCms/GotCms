@@ -41,6 +41,7 @@ class CkEditor extends Object
 {
     /**
      * Set parameters
+     *
      * @param array $parameters
      * @return Datatypes\Textrich\Ckeditor
      */
@@ -60,6 +61,7 @@ class CkEditor extends Object
 
     /**
      * Get toolbar as js to initialize ckeditor
+     *
      * @return string
      */
     public function getToolbarAsJs()
@@ -99,6 +101,7 @@ class CkEditor extends Object
 
     /**
      * List all toolbar items
+     *
      * @return array
      */
     public function getAllToolbarItems()
@@ -123,6 +126,7 @@ class CkEditor extends Object
 
     /**
      * Get all items as form
+     *
      * @return array
      */
     public function getAllItems()

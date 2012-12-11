@@ -41,6 +41,7 @@ class Editor extends AbstractEditor
 {
     /**
      * Save textstring editor
+     *
      * @return void
      */
     public function save()
@@ -51,6 +52,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load textstring editor
+     *
      * @return mixed
      */
     public function load()

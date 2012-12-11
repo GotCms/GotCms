@@ -39,12 +39,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'property_value';
 
     /**
      * Load property value
+     *
      * @param integer $value_id Optional
      * @param integer $document_id Optional
      * @param integer $property_id Optional
@@ -76,6 +78,7 @@ class Model extends AbstractTable
 
     /**
      * Initialize from array
+     *
      * @param array $array
      * @return \Gc\Property\Value\Model
      */
@@ -89,6 +92,7 @@ class Model extends AbstractTable
 
     /**
      * Initialize from id
+     *
      * @param integer $property_value_id
      * @return \Gc\Property\Value\Model
      */
@@ -110,6 +114,7 @@ class Model extends AbstractTable
 
     /**
      * Save property value
+     *
      * @return integer
      */
     public function save()

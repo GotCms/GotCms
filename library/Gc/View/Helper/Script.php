@@ -43,6 +43,7 @@ class Script extends AbstractHelper
 {
     /**
      * Script parameter
+     *
      * @var array
      */
     protected $_params = array();

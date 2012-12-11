@@ -42,18 +42,21 @@ abstract class AbstractPrevalueEditor extends Object
 {
     /**
      * Datatype
+     *
      * @var AbstractDatatype
      */
     protected $_datatype;
 
     /**
      * Configuration
+     *
      * @var mixed
      */
     protected $_config;
 
     /**
      * Abstract function for save Prevalue Editor
+     *
      * @abstract
      * @return void
      */
@@ -61,6 +64,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Abstract function for load Prevalue Editor
+     *
      * @abstract
      * @return void
      */
@@ -68,6 +72,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Abstract function for save Editor
+     *
      * @param \Gc\Datatype\AbstractDatatype $datatype_abstract
      * @return void
      */
@@ -79,6 +84,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * get configuration
+     *
      * @return void
      */
     public function getConfig()
@@ -93,6 +99,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Set Configuration
+     *
      * @param mixed $value
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
@@ -104,6 +111,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Get request object
+     *
      * @return \Zend\Http\Request
      */
     public function getRequest()
@@ -113,6 +121,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Get current datatype
+     *
      * @return \Gc\Datatype\AbstractDatatype
      */
     public function getDatatype()
@@ -122,6 +131,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Render template
+     *
      * @param string $name
      * @param array $data
      * @return string
@@ -133,6 +143,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Add path in Zend\View\Resolver\TemplatePathStack
+     *
      * @param string $dir
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
@@ -145,6 +156,7 @@ abstract class AbstractPrevalueEditor extends Object
 
     /**
      * Retrieve helper from $name
+     *
      * @param string $name
      * @return mixed
      */

@@ -41,12 +41,14 @@ class Collection extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'layout';
 
     /**
      * Initiliaze collection
+     *
      * @return void
      */
     public function init()
@@ -56,6 +58,7 @@ class Collection extends AbstractTable
 
     /**
      * Set layout collection
+     *
      * @param boolean $force_reload
      * @return \Gc\Layout\Collection
      */
@@ -82,6 +85,7 @@ class Collection extends AbstractTable
 
     /**
      * Return array for input select
+     *
      * @return array
      */
     public function getSelect()

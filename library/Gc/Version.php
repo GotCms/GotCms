@@ -64,6 +64,7 @@ final class Version
 
     /**
      * Fetches the version of the latest stable release.
+     *
      * @return string
      */
     public static function getLatest()

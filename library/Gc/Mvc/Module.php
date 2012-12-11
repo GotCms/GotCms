@@ -54,12 +54,14 @@ class Module
 {
     /**
      * Module configuration
+     *
      * @var array
      */
     protected $_config;
 
     /**
      * On boostrap event
+     *
      * @param Event $event
      * @return void
      */
@@ -82,6 +84,7 @@ class Module
 
     /**
      * Get autoloader config
+     *
      * @return array
      */
     public function getAutoloaderConfig()
@@ -100,6 +103,7 @@ class Module
 
     /**
      * Get module configuration
+     *
      * @return array
      */
     public function getConfig()
@@ -138,6 +142,7 @@ class Module
 
     /**
      * Get module dir
+     *
      * @return string
      */
     protected function _getDir()
@@ -147,6 +152,7 @@ class Module
 
     /**
      * get module namespace
+     *
      * @return string
      */
     protected function _getNamespace()
@@ -156,6 +162,7 @@ class Module
 
     /**
      * initiliaze database connexion for every modules
+     *
      * @param ModuleManager $module_manager
      * @return void
      */

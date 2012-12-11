@@ -59,6 +59,7 @@ abstract class Object
 
     /**
      * Set Id
+     *
      * @param integer $id
      * @return \Gc\Core\Object
      */

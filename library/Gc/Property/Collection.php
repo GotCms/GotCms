@@ -41,12 +41,14 @@ class Collection extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'property';
 
     /**
      * Load property
+     *
      * @param integer $document_type_id Optional
      * @param integer $tab_id Optional
      * @param integer $document_id Optional
@@ -65,6 +67,7 @@ class Collection extends AbstractTable
 
     /**
      * Get properties
+     *
      * @param boolean $force_reload to initiliaze properties
      * @return array
      */
@@ -118,6 +121,7 @@ class Collection extends AbstractTable
 
     /**
      * Set properties
+     *
      * @param array $properties
      * @return \Gc\Property\Collection
      */
@@ -136,6 +140,7 @@ class Collection extends AbstractTable
 
     /**
      * Save properties
+     *
      * @return boolean
      */
     public function save()
@@ -160,6 +165,7 @@ class Collection extends AbstractTable
 
     /**
      * Delete properties
+     *
      * @return boolean
      */
     public function delete()

@@ -41,24 +41,28 @@ class Navigation
 {
     /**
      * List of \Gc\Document\Model
+     *
      * @var array
      */
     protected $_documents;
 
     /**
      * Base path for urls
+     *
      * @var string
      */
     protected $_basePath = '/';
 
     /**
      * Request uri
+     *
      * @var string
      */
      protected $_requestUri;
 
     /**
      * Constructor, initialize documents
+     *
      * @return void
      */
     public function __construct()
@@ -71,6 +75,7 @@ class Navigation
 
     /**
      * Set base path for urls
+     *
      * @param string $path
      * @return \Gc\Component\Navigation
      */
@@ -82,6 +87,7 @@ class Navigation
 
     /**
      * Get base Path
+     *
      * @return string
      */
     public function getBasePath()
@@ -91,6 +97,7 @@ class Navigation
 
     /**
      * Render navigation
+     *
      * @param array $documents (set of \Gc\Document\Model)
      * @param string $parent_url
      * @return array

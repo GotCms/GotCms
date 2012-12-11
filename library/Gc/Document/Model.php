@@ -48,6 +48,7 @@ class Model extends AbstractTable implements IterableInterface
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'document';
@@ -64,6 +65,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Initiliaze document
+     *
      * @param integer $document_id
      * @return void
      */
@@ -79,6 +81,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * get View Model
+     *
      * @return \Gc\View\Model
      */
     public function getView()
@@ -97,6 +100,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Get Document type
+     *
      * @return \Gc\DocumentType\Model
      */
     public function getDocumentType()
@@ -111,6 +115,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Define if document is show in navigation
+     *
      * @param boolean $is_show Optional
      * @return boolean
      */
@@ -126,6 +131,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Test if status is equal to self::STATUS_ENABLE
+     *
      * @return boolean
      */
     public function isPublished()
@@ -135,6 +141,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Initialize document from array
+     *
      * @param array $array
      * @return \Gc\Document\Model
      */
@@ -148,6 +155,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Initiliaze document from id
+     *
      * @param array $document_id
      * @return \Gc\Document\Model
      */
@@ -168,6 +176,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Initiliaze from url and parent
+     *
      * @param string $url_key
      * @param mixed $parent_id
      * @return \Gc\Document\Model
@@ -195,6 +204,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Save Model
+     *
      * @return integer
      */
     public function save()
@@ -252,6 +262,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Delete document
+     *
      * @return boolean
      */
     public function delete()
@@ -284,6 +295,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Get document url
+     *
      * @return string
      */
     public function getUrl()
@@ -300,6 +312,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Get property
+     *
      * @param string $property_name
      * @return FALSE | PropertyModel
      */
@@ -315,6 +328,7 @@ class Model extends AbstractTable implements IterableInterface
 
     /**
      * Retrieve children with his status is enable
+     *
      * @return FALSE | PropertyModel
      */
     public function getAvailableChildren()

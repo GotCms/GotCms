@@ -52,12 +52,14 @@ class MediaController extends Action
 {
     /**
      * Contains information about acl
+     *
      * @var array $_aclPage
      */
     protected $_aclPage = array('resource' => 'Content', 'permission' => 'media');
 
     /**
      * Initialize Content Index Controller
+     *
      * @return void
      */
     public function init()
@@ -158,6 +160,7 @@ class MediaController extends Action
 
     /**
      * Connector for elFinder
+     *
      * @return void
      */
     public function connectorAction()

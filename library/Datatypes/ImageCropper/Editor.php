@@ -43,6 +43,7 @@ class Editor extends AbstractEditor
 {
     /**
      * Save Image cropper editor
+     *
      * @return void
      */
     public function save()
@@ -194,6 +195,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load Image cropper editor
+     *
      * @return mixed
      */
     public function load()

@@ -45,12 +45,14 @@ class TranslationController extends Action
 {
     /**
      * Contains information about acl
+     *
      * @var array $_aclPage
      */
     protected $_aclPage = array('resource' => 'Content', 'permission' => 'translation');
 
     /**
      * Initialize Media Controller
+     *
      * @return void
      */
     public function init()

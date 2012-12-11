@@ -41,6 +41,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
      * Save textstring prevalue editor
+     *
      * @return void
      */
     public function save()
@@ -52,6 +53,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load textstring prevalue editor
+     *
      * @return mixed
      */
     public function load()

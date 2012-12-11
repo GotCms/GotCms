@@ -41,12 +41,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'layout';
 
     /**
      * Initiliaze layout
+     *
      * @param integer $id
      * @return \Gc\Layout\Model
      */
@@ -59,6 +61,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from array
+     *
      * @param array $array
      * @return \Gc\Layout\Model
      */
@@ -72,6 +75,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
+     *
      * @param integer $layout_id
      * @return \Gc\Layout\Model
      */
@@ -92,6 +96,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from identifier
+     *
      * @param string $identifier
      * @return \Gc\Layout\Model
      */
@@ -112,6 +117,7 @@ class Model extends AbstractTable
 
     /**
      * Save layout
+     *
      * @return integer
      */
     public function save()
@@ -154,6 +160,7 @@ class Model extends AbstractTable
 
     /**
      * Delete layout
+     *
      * @return boolean
      */
     public function delete()

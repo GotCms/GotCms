@@ -41,12 +41,14 @@ class Collection extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'icon';
 
     /**
      * Initiliaze collection
+     *
      * @return void
      */
     public function init()
@@ -56,6 +58,7 @@ class Collection extends AbstractTable
 
     /**
      * Get views
+     *
      * @param boolean $force_reload to initiliaze views
      * @return array
      */
@@ -81,6 +84,7 @@ class Collection extends AbstractTable
 
     /**
      * Get array for input select
+     *
      * @return array
      */
     public function getSelect()

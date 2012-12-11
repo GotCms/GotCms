@@ -38,36 +38,42 @@ class Image
 {
     /**
      * Original image
+     *
      * @var resource
      */
     protected $_image;
 
     /**
      * Original image width
+     *
      * @var integer
      */
     protected $_width;
 
     /**
      * Original image height
+     *
      * @var integer
      */
     protected $_height;
 
     /**
      * Image resized
+     *
      * @var resource
      */
     protected $_imageResized;
 
     /**
      * Available options
+     *
      * @var array
      */
     protected $_availableOptions = array('auto', 'crop');
 
     /**
      * Initialize object
+     *
      * @param $filename
      * @return void
      */
@@ -81,6 +87,7 @@ class Image
 
     /**
      * Open image
+     *
      * @param string $file
      * @return \Gc\Media\Image
      */
@@ -124,6 +131,7 @@ class Image
 
     /**
      * Resize image
+     *
      * @param integer $new_width
      * @param integer $new_height
      * @param string option can be (auto|crop)
@@ -201,6 +209,7 @@ class Image
 
     /**
      * Convert hexa string to rbg
+     *
      * @param string $hex_string
      * @return array
      */
@@ -231,6 +240,7 @@ class Image
 
     /**
      * Get fixed height
+     *
      * @param integer $new_height
      * @return integer
      */
@@ -244,6 +254,7 @@ class Image
 
     /**
      * Get fixed width
+     *
      * @param integer $new_width
      * @return integer
      */
@@ -257,6 +268,7 @@ class Image
 
     /**
      * Get optimal crop size auto
+     *
      * @param integer $new_width
      * @param integer $new_height
      * @return array
@@ -297,6 +309,7 @@ class Image
 
     /**
      * Get optimal crop size
+     *
      * @param integer $new_width
      * @param integer $new_height
      * @return array
@@ -323,6 +336,7 @@ class Image
 
     /**
      * Crop image
+     *
      * @param integer $new_width
      * @param integer $new_height
      * @param integer $source_x
@@ -340,6 +354,7 @@ class Image
 
     /**
      * Save image
+     *
      * @param string save path
      * @param integer image quality
      * @return boolean

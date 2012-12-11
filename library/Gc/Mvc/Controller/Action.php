@@ -48,30 +48,35 @@ class Action extends AbstractActionController
 {
     /**
      * Route available for installer
+     *
      * @var array
      */
     protected $_installerRoutes = array('install', 'installCheckConfig', 'installLicense', 'installDatabase', 'installConfiguration', 'installComplete');
 
     /**
      * Authentication service
+     *
      * @var \Zend\Authentication\AuthenticationService
      */
     protected $_auth = NULL;
 
     /**
      * RouteMatch
+     *
      * @var \Zend\Mvc\Router\Http\RouteMatch
      */
     protected $_routeMatch = NULL;
 
     /**
      * Session storage
+     *
      * @var \Zend\Session\Storage\SessionStorage
      */
     protected $_session = NULL;
 
     /**
      * User acl
+     *
      * @var \Gc\User\Acl
      */
     protected $_acl = NULL;
@@ -96,6 +101,7 @@ class Action extends AbstractActionController
 
     /**
      * Initiliaze
+     *
      * @return void
      */
     public function init()
@@ -105,6 +111,7 @@ class Action extends AbstractActionController
 
     /**
      * Constructor
+     *
      * @return void
      */
     protected function _construct()
@@ -186,6 +193,7 @@ class Action extends AbstractActionController
 
     /**
      * Return matched route
+     *
      * @return \Zend\Mvc\Router\Http\RouteMatch
      */
     public function getRouteMatch()
@@ -200,6 +208,7 @@ class Action extends AbstractActionController
 
     /**
      * Get session storage
+     *
      * @return \Zend\Session\Storage\SessionStorage
      */
     protected function getSession()
@@ -214,6 +223,7 @@ class Action extends AbstractActionController
 
     /**
      * Get authentication
+     *
      * @return \Zend\Authentication\AuthenticationService
      */
     protected function getAuth()
@@ -228,6 +238,7 @@ class Action extends AbstractActionController
 
     /**
      * Return json model
+     *
      * @param array $data
      * @return \Zend\View\Model\JsonModel
      */
@@ -242,6 +253,7 @@ class Action extends AbstractActionController
 
     /**
      * Initiliaze flash messenger
+     *
      * @param boolean $force_display
      * @return void
      */

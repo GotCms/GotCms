@@ -41,12 +41,14 @@ class Collection extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'script';
 
     /**
      * Get scripts
+     *
      * @param boolean $force_reload to initiliaze scripts
      * @return array
      */

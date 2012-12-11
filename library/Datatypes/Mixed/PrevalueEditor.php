@@ -43,6 +43,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
      * Save mixed prevalue editor
+     *
      * @return void
      */
     public function save()
@@ -81,6 +82,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load mixed prevalue editor
+     *
      * @return mixed
      */
     public function load()
@@ -135,6 +137,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Retrieve datatypes
+     *
      * @param string $name
      * @return \Gc\Datatype\AbstractDatatype
      */

@@ -42,13 +42,15 @@ class Collection extends AbstractTable implements IterableInterface
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'document';
 
     /**
      * Load document collection
-     * @param integer @parent_id
+     *
+     * @param integer $parent_id
      * @return \Gc\Document\Collection
      */
     public function load($parent_id = NULL)
@@ -64,6 +66,7 @@ class Collection extends AbstractTable implements IterableInterface
 
     /**
      * Initialize documents
+     *
      * @return \Gc\Document\Collection
      */
     private function setDocuments()
@@ -102,6 +105,7 @@ class Collection extends AbstractTable implements IterableInterface
 
     /**
      * Return available Documents
+     *
      * @return array
      */
     public function getAvailableDocuments()
@@ -118,6 +122,7 @@ class Collection extends AbstractTable implements IterableInterface
 
     /**
      * Return available children
+     *
      * @return array
      */
     public function getAvailableChildren()
@@ -137,6 +142,7 @@ class Collection extends AbstractTable implements IterableInterface
 
     /**
      * Return array for input select
+     *
      * @return array
      */
     public function getSelect()

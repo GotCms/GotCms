@@ -41,12 +41,14 @@ class Collection extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'module';
 
     /**
      * Initialize collection
+     *
      * @return \Gc\Module\Collection
      */
     public function init()
@@ -58,6 +60,7 @@ class Collection extends AbstractTable
 
     /**
      * Initialize modules
+     *
      * @return \Gc\Module\Collection
      */
     private function setModules()
@@ -80,6 +83,7 @@ class Collection extends AbstractTable
 
     /**
      * Return array for input select
+     *
      * @return array
      */
     public function getSelect()

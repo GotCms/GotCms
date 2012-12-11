@@ -41,13 +41,15 @@ class Collection extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'document_type';
 
     /**
      * Load document type collection
-     * @param integer @parent_id
+     *
+     * @param integer $parent_id
      * @return void
      */
     public function init($parent_id = NULL)
@@ -58,6 +60,7 @@ class Collection extends AbstractTable
 
     /**
      * Initialize document types
+     *
      * @return \Gc\Document\Collection
      */
     private function setDocumentTypes()
@@ -85,6 +88,7 @@ class Collection extends AbstractTable
 
     /**
      * Return array for input select
+     *
      * @return array
      */
     public function getSelect()

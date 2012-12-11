@@ -42,12 +42,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'tab';
 
     /**
      * Initiliaze Tab
+     *
      * @param integer $tab_id Optional
      * @param integer $document_type_id Optional
      * @return \Gc\Tab\Model
@@ -86,6 +88,7 @@ class Model extends AbstractTable
 
     /**
      * Save tab
+     *
      * @return integer
      */
     public function save()
@@ -127,6 +130,7 @@ class Model extends AbstractTable
 
     /**
      * Delete tab
+     *
      * @return boolean
      */
     public function delete()
@@ -160,6 +164,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from array
+     *
      * @param array $array
      * @return \Gc\Tab\Model
      */
@@ -173,6 +178,7 @@ class Model extends AbstractTable
 
     /**
      * Initialize from id
+     *
      * @param integer $tab_id
      * @return \Gc\Tab\Model
      */
@@ -193,6 +199,7 @@ class Model extends AbstractTable
 
     /**
      * Get Document type
+     *
      * @return \Gc\DocumentType\Model
      */
     public function getDocumentType()
@@ -207,6 +214,7 @@ class Model extends AbstractTable
 
     /**
      * Return properties
+     *
      * @return \Gc\Property\Collection
      */
     public function getProperties()

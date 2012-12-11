@@ -48,6 +48,7 @@ class File extends Object
 
     /**
      * Initiliaze File Object
+     *
      * @param object $property
      * @param object $document
      * @param string $filename
@@ -68,6 +69,7 @@ class File extends Object
 
     /**
      * Return path
+     *
      * @return string
      */
     public function getPath()
@@ -77,6 +79,7 @@ class File extends Object
 
     /**
      * Return directory
+     *
      * @return string
      */
     public function getDirectory()
@@ -86,6 +89,7 @@ class File extends Object
 
     /**
      * Upload file to the server
+     *
      * @return boolean
      */
     public function upload()
@@ -164,6 +168,7 @@ class File extends Object
 
     /**
      * Remove image
+     *
      * @param string $filename
      * @return boolean
      */

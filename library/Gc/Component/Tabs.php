@@ -38,12 +38,14 @@ class Tabs
 {
     /**
      * Data stored
+     *
      * @var array
      */
     protected $_data;
 
     /**
      * Tabs constructor
+     *
      * @param array $array
      */
     public function __construct(array $array = array())
@@ -53,6 +55,7 @@ class Tabs
 
     /**
      * Render tab
+     *
      * @param array $tabs contains objects
      * @return string
      */
@@ -86,6 +89,7 @@ class Tabs
 
     /**
      * Render tab
+     *
      * @return string
      */
     public function __toString()
@@ -100,6 +104,7 @@ class Tabs
 
     /**
      * Set data
+     *
      * @param array $array
      * @return Tabs
      */

@@ -41,6 +41,7 @@ class Editor extends AbstractEditor
 {
     /**
      * Save radiobuttonlist editor
+     *
      * @return void
      */
     public function save()
@@ -50,6 +51,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load radiobuttonlist editor
+     *
      * @return mixed
      */
     public function load()

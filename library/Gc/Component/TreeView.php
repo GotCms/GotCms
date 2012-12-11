@@ -41,6 +41,8 @@ class TreeView
 
     /**
      * Treeview constructor
+     *
+     * @return void
      */
     public function __construct()
     {
@@ -48,6 +50,7 @@ class TreeView
 
     /**
      * Render treeview html
+     *
      * @param array $treeview_data contains data as array
      * @param boolean $init
      * @return string

@@ -47,6 +47,7 @@ abstract class AbstractForm extends Form
 {
     /**
      * Identifier pattern constante
+     *
      * @const IDENTIFIER_PATTERN
      */
     const IDENTIFIER_PATTERN = '~^[a-zA-Z0-9_-]+$~';
@@ -73,6 +74,7 @@ abstract class AbstractForm extends Form
 
     /**
      * Get db adapter
+     *
      * @return \Zend\Db\Adapter\Adapter
      */
     public function getAdapter()
@@ -82,6 +84,7 @@ abstract class AbstractForm extends Form
 
     /**
      * Load values
+     *
      * @param AbstractTable $table
      * @return AbstractForm
      */
@@ -119,6 +122,7 @@ abstract class AbstractForm extends Form
 
     /**
      * Add content to form
+     *
      * @param Fieldset $form
      * @param mixed $elements
      * @param string $prefix add belong to for each elements
@@ -177,6 +181,7 @@ abstract class AbstractForm extends Form
 
     /**
      * Return element value
+     *
      * @param string $name
      * @return string
      */

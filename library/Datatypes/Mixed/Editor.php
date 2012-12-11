@@ -43,12 +43,14 @@ class Editor extends AbstractEditor
 {
     /**
      * List of Datatypes
+     *
      * @var array
      */
     protected $_datatypes = array();
 
     /**
      * Save mixed editor
+     *
      * @return void
      */
     public function save()
@@ -121,6 +123,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load mixed editor
+     *
      * @return mixed
      */
     public function load()
@@ -215,6 +218,7 @@ class Editor extends AbstractEditor
 
     /**
      * Retrieve datatypes
+     *
      * @param string $name
      * @return \Gc\Datatype\AbstractDatatype
      */

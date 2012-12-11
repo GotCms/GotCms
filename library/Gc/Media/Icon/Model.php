@@ -40,12 +40,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'icon';
 
     /**
      * Initiliaze from array
+     *
      * @param array $array
      * @return \Gc\Media\Icon\Model
      */
@@ -59,6 +61,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
+     *
      * @param integer $icon_id
      * @return \Gc\Media\Icon\Model
      */
@@ -79,6 +82,7 @@ class Model extends AbstractTable
 
     /**
      * Save icon
+     *
      * @return integer
      */
     public function save()
@@ -118,6 +122,7 @@ class Model extends AbstractTable
 
     /**
      * Delete icon
+     *
      * @return boolean
      */
     public function delete()

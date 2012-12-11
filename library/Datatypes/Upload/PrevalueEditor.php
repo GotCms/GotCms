@@ -41,6 +41,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 {
     /**
      * Save upload prevalue editor
+     *
      * @return void
      */
     public function save()
@@ -54,6 +55,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
     /**
      * Load upload prevalue editor
+     *
      * @return mixed
      */
     public function load()

@@ -40,18 +40,21 @@ class Collection extends AbstractTable
 {
     /**
      * Collection of \Gc\Datatype\Model
+     *
      * @var array
      */
     protected $_datatypes;
 
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'datatype';
 
     /**
      * Initialize datatype collection
+     *
      * @return void
      */
     public function init()
@@ -61,6 +64,7 @@ class Collection extends AbstractTable
 
     /**
      * Set datatype collection
+     *
      * @return \Gc\Datatype\Collection
      */
     private function setDatatypes()
@@ -82,6 +86,7 @@ class Collection extends AbstractTable
 
     /**
      * Get datatypes
+     *
      * @return array
      */
     public function getDatatypes()
@@ -91,6 +96,7 @@ class Collection extends AbstractTable
 
     /**
      * Return array of datatypes for input select
+     *
      * @return array
      */
     public function getSelect()

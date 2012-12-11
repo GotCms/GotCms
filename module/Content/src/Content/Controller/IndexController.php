@@ -74,6 +74,7 @@ class IndexController extends Action
 
     /**
      * Display text
+     *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function indexAction()

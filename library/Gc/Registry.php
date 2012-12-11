@@ -39,6 +39,7 @@ class Registry extends ArrayObject
 {
     /**
      * Registry object provides storage for shared objects.
+     *
      * @var \Gc\Registry
      */
     private static $_registry = null;
@@ -89,7 +90,8 @@ class Registry extends ArrayObject
     /**
      * Unset the default registry instance.
      * Primarily used in tearDown() in unit tests.
-     * @returns void
+     *
+     * @return void
      */
     public static function _unsetInstance()
     {

@@ -42,12 +42,14 @@ class Model extends AbstractTable
 {
     /**
      * Table name
+     *
      * @var string
      */
     protected $_name = 'user_acl_role';
 
     /**
      * Save Role
+     *
      * @return integer
      */
     public function save()
@@ -102,6 +104,7 @@ class Model extends AbstractTable
 
     /**
      * Delete Role
+     *
      * @return boolean
      */
     public function delete()
@@ -124,6 +127,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from array
+     *
      * @param array $array
      * @return \Gc\User\Role\Model
      */
@@ -137,6 +141,7 @@ class Model extends AbstractTable
 
     /**
      * Initiliaze from id
+     *
      * @param integer $user_role_id
      * @return \Gc\User\Role\Model
      */
@@ -157,6 +162,7 @@ class Model extends AbstractTable
 
     /**
      * Get User permissions
+     *
      * @return array
      */
     public function getUserPermissions()

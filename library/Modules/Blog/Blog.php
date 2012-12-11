@@ -40,6 +40,7 @@ class Blog extends AbstractModule
 {
     /**
      * Boostrap
+     *
      * @param Event $e
      * @return void
      */
@@ -50,6 +51,7 @@ class Blog extends AbstractModule
 
     /**
      * Install module
+     *
      * @return boolean
      */
     public function install()
@@ -62,6 +64,7 @@ class Blog extends AbstractModule
 
     /**
      * Uninstall module
+     *
      * @return boolean
      */
     public function uninstall()

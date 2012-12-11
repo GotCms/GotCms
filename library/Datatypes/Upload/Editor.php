@@ -42,6 +42,7 @@ class Editor extends AbstractEditor
 {
     /**
      * Save upload editor
+     *
      * @return void
      */
     public function save()
@@ -108,6 +109,7 @@ class Editor extends AbstractEditor
 
     /**
      * Load upload editor
+     *
      * @return mixed
      */
     public function load()

@@ -39,6 +39,7 @@ class Mail extends Message
 {
     /**
      * Initialize mail
+     *
      * @param string $encoding
      * @param string $message
      * @param string $from
@@ -69,7 +70,8 @@ class Mail extends Message
     }
 
     /**
-     * send mail
+     * Send mail
+     *
      * @return void
      */
     public function send()

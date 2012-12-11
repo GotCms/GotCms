@@ -44,15 +44,15 @@ use Gc\Core\Object,
 abstract class AbstractTable extends Object
 {
     /**
-     * Zend_Db_Table collection
+     * AbstractTable collection
      *
      * @var array \Zend\Db\TableGateway\TableGateway
      */
     static $_tables = array();
 
     /**
-     * Initialize constructor and save instance of \Zend\Db\TableGateway\TableGateway($_name) in
-     * self::$_tables
+     * Initialize constructor and save instance of \Zend\Db\TableGateway\TableGateway($_name) in self::$_tables
+     *
      * @return void
      */
     public function __construct()
@@ -89,6 +89,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Fetch Row
+     *
      * @param mixed $query (\Zend\Db\Sql\Select|string)
      * @return array|\Zend\Db\ResultSet\RowObjectInterface
      */
@@ -107,6 +108,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Fetch Row
+     *
      * @param mixed $query (\Zend\Db\Sql\Select|string)
      * @return array
      */
@@ -125,6 +127,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Fetch One
+     *
      * @param mixed $query (\Zend\Db\Sql\Select|string)
      * @return mixed
      */
@@ -150,6 +153,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Execute query
+     *
      * @param mixed $query (\Zend\Db\Sql\*|string)
      * @return array|\Zend\Db\Adapter\Driver\Pdo\Result
      */
@@ -170,6 +174,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Get last insert id
+     *
      * @param string $table_name Optional
      * @return integer
      */
@@ -187,6 +192,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Retrieve event manager
+     *
      * @return \Gc\Event\StaticEventManager
      */
     public function events()
@@ -196,6 +202,7 @@ abstract class AbstractTable extends Object
 
     /**
      * Retrieve driver name
+     *
      * @return string
      */
      public function getDriverName()
