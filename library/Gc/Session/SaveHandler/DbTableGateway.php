@@ -17,12 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Session\SaveHandler
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage Session\SaveHandler
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\Session\SaveHandler;
@@ -32,9 +32,9 @@ use Zend\Session\SaveHandler\DbTableGateway as ZendDbTableGateway;
 /**
  * DB Table Gateway session save handler
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Session\SaveHandler
+ * @category   Gc
+ * @package    Library
+ * @subpackage Session\SaveHandler
  */
 class DbTableGateway extends ZendDbTableGateway
 {

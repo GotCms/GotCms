@@ -17,12 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Form
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage Form
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\Form;
@@ -39,9 +39,9 @@ use Zend\Form\Form,
  * This is better to initialize somes values, retrieve adapter
  * add dynamic content, etc...
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Form
+ * @category   Gc
+ * @package    Library
+ * @subpackage Form
  */
 abstract class AbstractForm extends Form
 {

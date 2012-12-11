@@ -17,12 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Datatype\AbstractDatatype
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage Datatype\AbstractDatatype
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\Datatype\AbstractDatatype;
@@ -34,9 +34,9 @@ use Gc\Core\Object,
  * Abstract Prevalue Editor class
  * Use for display Prevalue Editor in Manage Development -> Datatypes
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Datatype\AbstractDatatype
+ * @category   Gc
+ * @package    Library
+ * @subpackage Datatype\AbstractDatatype
  */
 abstract class AbstractPrevalueEditor extends Object
 {

@@ -17,12 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Mvc
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage Mvc
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\Mvc;
@@ -46,9 +46,9 @@ use Gc\Core\Config as GcConfig,
 /**
  * Generic Module
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Mvc
+ * @category   Gc
+ * @package    Library
+ * @subpackage Mvc
  */
 class Module
 {

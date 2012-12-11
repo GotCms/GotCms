@@ -17,12 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Script
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage Script
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\Script;
@@ -33,9 +33,9 @@ use Gc\Db\AbstractTable,
 /**
  * Script Model
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Script
+ * @category   Gc
+ * @package    Library
+ * @subpackage Script
  */
 class Model extends AbstractTable
 {

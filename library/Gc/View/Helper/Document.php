@@ -17,12 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  View\Helper
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage View\Helper
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\View\Helper;
@@ -33,9 +33,9 @@ use Zend\View\Helper\AbstractHelper,
 /**
  * Retrieve document from id or url_key
  *
- * @category    Gc
- * @package     Library
- * @subpackage  View\Helper
+ * @category   Gc
+ * @package    Library
+ * @subpackage View\Helper
  * @example In view: $this->document('mypage/mysubpage'); or $this->document(1);
  */
 class Document extends AbstractHelper

@@ -17,12 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Property
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage Property
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\Property;
@@ -34,9 +34,9 @@ use Gc\Db\AbstractTable,
 /**
  * Property Model
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Property
+ * @category   Gc
+ * @package    Library
+ * @subpackage Property
  */
 class Model extends AbstractTable
 {

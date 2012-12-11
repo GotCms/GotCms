@@ -17,12 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  View
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage View
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\Media\Icon;
@@ -32,9 +32,9 @@ use Gc\Db\AbstractTable;
 /**
  * Class for manage View
  *
- * @category    Gc
- * @package     Library
- * @subpackage  View
+ * @category   Gc
+ * @package    Library
+ * @subpackage View
  */
 class Model extends AbstractTable
 {

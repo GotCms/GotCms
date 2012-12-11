@@ -17,12 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Datatype
- * @author      Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license     GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link        http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage Datatype
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\Datatype;
@@ -32,9 +32,9 @@ use Gc\Db\AbstractTable,
 /**
  * Collection of Datatype Model
  *
- * @category    Gc
- * @package     Library
- * @subpackage  Datatype
+ * @category   Gc
+ * @package    Library
+ * @subpackage Datatype
  */
 class Collection extends AbstractTable
 {
