@@ -53,7 +53,7 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->setModules();
+        $this->_setModules();
 
         return $this;
     }
@@ -63,7 +63,7 @@ class Collection extends AbstractTable
      *
      * @return \Gc\Module\Collection
      */
-    private function setModules()
+    protected function _setModules()
     {
         $rows = $this->select(function(Select $select)
         {

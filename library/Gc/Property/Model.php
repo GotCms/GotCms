@@ -100,7 +100,7 @@ class Model extends AbstractTable
     /**
      * Load property value
      *
-     * @return void
+     * @return \Gc\Property\Model
      */
     public function loadValue()
     {
@@ -108,6 +108,8 @@ class Model extends AbstractTable
         $property_value->load(NULL, $this->getDocumentId(), $this->getId());
 
         $this->_value = $property_value;
+
+        return $this;
     }
 
     /**
@@ -149,7 +151,7 @@ class Model extends AbstractTable
     {
         $value = $this->getValue();
         $this->_value->save();
-        if($value === '' and $this->isRequired())
+        if((is_null($value) or $value === '') and $this->isRequired())
         {
             return FALSE;
         }

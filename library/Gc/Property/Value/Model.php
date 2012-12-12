@@ -50,7 +50,7 @@ class Model extends AbstractTable
      * @param integer $value_id Optional
      * @param integer $document_id Optional
      * @param integer $property_id Optional
-     * @return void
+     * @return \Gc\Property\Model\Value
      */
     public function load($value_id = NULL, $document_id = NULL, $property_id = NULL)
     {
@@ -64,16 +64,18 @@ class Model extends AbstractTable
             if(!empty($property_value->id))
             {
                 $this->setId($property_value->id);
-                if($this->getDriverName() != 'pdo_pgsql')
-                {
-                    $this->setValue($property_value->value);
-                }
-                else
+                if($this->getDriverName() == 'pdo_pgsql')
                 {
                     $this->setValue(stream_get_contents($property_value->value));
                 }
+                else
+                {
+                    $this->setValue($property_value->value);
+                }
             }
         }
+
+        return $this;
     }
 
     /**
@@ -84,7 +86,7 @@ class Model extends AbstractTable
      */
     static function fromArray(array $array)
     {
-        $property_value_table = new Model($array);
+        $property_value_table = new Model();
         $property_value_table->setData($array);
 
         return $property_value_table;
@@ -94,21 +96,20 @@ class Model extends AbstractTable
      * Initialize from id
      *
      * @param integer $property_value_id
-     * @return \Gc\Property\Value\Model
+     * @return \Gc\Property\Value\Model|boolean
      */
     static function fromId($property_value_id)
     {
-        $property_value_table = new Model($array);
-        $select = $property_value_table->select();
-        $select->where('id = ?', (int)$property_value_id);
+        $property_value_table = new Model();
+        $select = $property_value_table->select(array('id' => (int)$property_value_id));
         $row = $property_value_table->fetchRow($select);
         if(!empty($row))
         {
-            return $property_value_table->setData($row);
+            return $property_value_table->setData((array)$row);
         }
         else
         {
-            return NULL;
+            return FALSE;
         }
     }
 

@@ -19,7 +19,10 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Model;
+        $this->_object = Model::fromArray(array(
+            'name' => 'ModuleTest',
+        ));
+        $this->_object->save();
     }
 
     /**
@@ -28,55 +31,85 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->_object->delete();
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Module\Model::init
-     * @todo   Implement testInit().
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertNull($this->_object->init($this->_object->getId()));
     }
 
     /**
      * @covers Gc\Module\Model::fromArray
-     * @todo   Implement testFromArray().
      */
     public function testFromArray()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf('Gc\Module\Model', Model::fromArray($this->_object->getData()));
     }
 
     /**
      * @covers Gc\Module\Model::fromId
-     * @todo   Implement testFromId().
      */
     public function testFromId()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf('Gc\Module\Model', Model::fromId($this->_object->getId()));
+    }
+
+    /**
+     * @covers Gc\Module\Model::fromId
+     */
+    public function testFromWrongId()
+    {
+        $this->assertFalse(Model::fromId('undefined'));
     }
 
     /**
      * @covers Gc\Module\Model::save
-     * @todo   Implement testSave().
      */
     public function testSave()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_numeric($this->_object->save()));
+    }
+
+    /**
+     * @covers Gc\Module\Model::save
+     */
+    public function testSaveWithWrongValues()
+    {
+        $this->setExpectedException('Gc\Exception');
+        $this->_object->setName(NULL);
+        $this->assertFalse($this->_object->save());
     }
 
     /**
      * @covers Gc\Module\Model::delete
-     * @todo   Implement testDelete().
      */
     public function testDelete()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue($this->_object->delete());
+    }
+
+    /**
+     * @covers Gc\Module\Model::delete
+     */
+    public function testDeleteWithWrongValues()
+    {
+        $this->setExpectedException('\Gc\Exception');
+        $model = new Model();
+        $model->setId('undefined');
+        $this->assertFalse($model->delete());
+    }
+
+    /**
+     * @covers Gc\Module\Model::delete
+     */
+    public function testDeleteWithNoId()
+    {
+        $model = new Model();
+        $this->assertFalse($model->delete());
     }
 }

@@ -14,11 +14,21 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     protected $_object;
 
     /**
+     * @var Model
+     */
+    protected $_module;
+
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp()
     {
+        $this->_module = Model::fromArray(array(
+            'name' => 'ModuleTest',
+        ));
+        $this->_module->save();
+
         $this->_object = new Collection;
     }
 
@@ -28,25 +38,25 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->_module->delete();
+        unset($this->_module);
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Module\Collection::init
-     * @todo   Implement testInit().
+     * @covers Gc\Module\Collection::_setModules
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf('Gc\Module\Collection', $this->_object->init());
     }
 
     /**
      * @covers Gc\Module\Collection::getSelect
-     * @todo   Implement testGetSelect().
      */
     public function testGetSelect()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->getSelect()));
     }
 }

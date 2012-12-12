@@ -156,7 +156,7 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze document from id
      *
-     * @param array $document_id
+     * @param integer $document_id
      * @return \Gc\Document\Model
      */
     static function fromId($document_id)

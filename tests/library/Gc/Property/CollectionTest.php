@@ -6,7 +6,6 @@ use Gc\Datatype\Model as DatatypeModel,
     Gc\Layout\Model as LayoutModel,
     Gc\User\Model as UserModel,
     Gc\View\Model as ViewModel,
-    Gc\Property\Model as PropertyModel,
     Gc\Tab\Model as TabModel;
 
 /**
@@ -47,7 +46,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     protected $_tab;
 
     /**
-     * @var PropertyModel
+     * @var Model
      */
     protected $_property;
 
