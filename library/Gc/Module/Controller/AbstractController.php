@@ -27,9 +27,9 @@
 
 namespace Gc\Module\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response;
+use Zend\Stdlib\RequestInterface as Request,
+    Zend\Stdlib\ResponseInterface as Response,
+    Zend\Mvc\Controller\AbstractActionController;
 /**
  * Abstract module controller
  *
@@ -37,7 +37,7 @@ use Gc\Mvc\Controller\Action,
  * @package    Library
  * @subpackage Module\Controller
  */
-abstract class AbstractController extends Action
+abstract class AbstractController extends AbstractActionController
 {
     /**
      * Construct controller with request and response

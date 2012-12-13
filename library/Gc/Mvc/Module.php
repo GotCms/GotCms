@@ -30,6 +30,7 @@ namespace Gc\Mvc;
 use Gc\Core\Config as GcConfig,
     Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway,
     Gc\Registry,
+    Gc\Module\Collection as ModuleCollection,
     Zend,
     Zend\Db\Adapter\Adapter as DbAdapter,
     Zend\Db\TableGateway\TableGateway,
@@ -223,6 +224,16 @@ abstract class Module
 
                         $session_table = new SessionTableGateway(new TableGateway('core_session', $db_adapter), $tablegateway_config);
                         $session_manager->setSaveHandler($session_table)->start();
+                    }
+
+                    //Initialize Observers
+                    $module_collection = new ModuleCollection();
+                    $modules = $module_collection->getModules();
+                    foreach($modules as $module)
+                    {
+                        $class_name = sprintf('\\Modules\\%s\\Observer', $module->getName());
+                        $object = new $class_name();
+                        $object->init();
                     }
                 }
             }

@@ -28,36 +28,23 @@
 namespace Gc\Module;
 
 use Zend\EventManager\Event,
-    Gc\Registry;
+    Gc\Registry,
+    Gc\Event\StaticEventManager;
 
 /**
- * Abstract module bootstrap
+ * Abstract obverser bootstrap
  *
  * @category   Gc
  * @package    Library
  * @subpackage Module
  */
-abstract class AbstractModule
+abstract class AbstractObserver
 {
     /**
-     * Execute on bootstrap
-     *
-     * @param Event $e
+     * Initialize observer
+     * @return void
      */
-    abstract function init(Event $e);
-
-    /**
-     * Install module
-     *
-     * @return boolean
-     */
-    abstract function install();
-    /**
-     * Uninstall module
-     *
-     * @return boolean
-     */
-    abstract function uninstall();
+    abstract function init();
 
     /**
      * Return database adapter
@@ -76,7 +63,16 @@ abstract class AbstractModule
      */
     protected function _getDriverName()
     {
-         $configuration = Registry::get('Configuration');
-         return $configuration['db']['driver'];
+        return $this->getAdapter()->getDriver()->getConnection()->getDriverName();
+    }
+
+    /**
+     * Retrieve event manager
+     *
+     * @return \Gc\Event\StaticEventManager
+     */
+    public function events()
+    {
+        return StaticEventManager::getInstance();
     }
 }

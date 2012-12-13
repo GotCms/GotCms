@@ -33,21 +33,21 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Gc\Module\AbstractModule::getAdapter
+     * @covers Gc\Module\AbstractModule::_getAdapter
      */
     public function testGetAdapter()
     {
-        $class = $this->_getMethod('getAdapter');
+        $class = $this->_getMethod('_getAdapter');
         $this->assertInstanceOf('Zend\Db\Adapter\Adapter', $class->invokeArgs($this->_object, array()));
     }
 
     /**
-     * @covers Gc\Module\AbstractModule::getDriverName
+     * @covers Gc\Module\AbstractModule::_getDriverName
      */
     public function testGetDriverName()
     {
         $configuration = Registry::get('Configuration');
-        $class = $this->_getMethod('getDriverName');
+        $class = $this->_getMethod('_getDriverName');
         $this->assertEquals($configuration['db']['driver'], 'pdo_' . $class->invokeArgs($this->_object, array()));
     }
 

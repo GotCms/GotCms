@@ -153,11 +153,11 @@ class LayoutController extends Action
         {
             if($layout->delete())
             {
-                return $this->_returnJson(array('success' => TRUE, 'message' => 'This layout has been deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This layout has been deleted!'));
             }
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Can not delete this layout'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Can not delete this layout'));
     }
 
     /**

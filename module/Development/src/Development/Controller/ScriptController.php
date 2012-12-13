@@ -152,11 +152,11 @@ class ScriptController extends Action
         {
             if($script->delete())
             {
-                return $this->_returnJson(array('success' => TRUE, 'message' => 'This script has been deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This script has been deleted!'));
             }
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Can not delete this script'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Can not delete this script'));
     }
 
     /**

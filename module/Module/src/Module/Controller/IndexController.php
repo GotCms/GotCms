@@ -84,8 +84,7 @@ class IndexController extends Action
             else
             {
                 $module_name = $form->getInputFilter()->get('module')->getValue();
-                $class_name = sprintf('\\Modules\\%s\\%s', $module_name, $module_name);
-                $object = new $class_name();
+                $object = $this->_loadBootstrap($module_name);
 
                 if(!$object->install())
                 {
@@ -119,22 +118,16 @@ class IndexController extends Action
         $module_model = ModuleModel::fromId($module_id);
         if(!empty($module_model))
         {
-            $module_name = $module_model->getName();
-            $class_name = sprintf('\\Modules\\%s\\%s', $module_name, $module_name);
-            $object = new $class_name();
+            $object = $this->_loadBootstrap($module_model->getName());
 
             if($object->uninstall())
             {
                 $module_model->delete();
-                $this->flashMessenger()->setNameSpace('success')->addMessage('Module uninstalled');
-            }
-            else
-            {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can\'t uninstall module');
+                return $this->returnJson(array('success' => TRUE, 'message' => 'Module uninstalled'));
             }
         }
 
-        return $this->redirect()->toRoute('module');
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Can\'t uninstall module'));
     }
 
     /**
@@ -153,9 +146,8 @@ class IndexController extends Action
         /**
          * Bootstrap event
          */
-        $class_name = sprintf('\\Modules\\%s\\%s', $module_model->getName(), $module_model->getName());
-        $object = new $class_name();
-        $object->onBootstrap($this->getEvent());
+        $object = $this->_loadBootstrap($module_model->getName());
+        $object->init($this->getEvent());
 
         /**
          * Load controller and execute action
@@ -188,5 +180,12 @@ class IndexController extends Action
         $this->layout()->setVariable('moduleMenu', sprintf('%s/views/menu.phtml', $module_model->getName()));
 
         return $result;
+    }
+
+    protected function _loadBootstrap($module_name)
+    {
+        $class_name = sprintf('\\Modules\\%s\\Bootstrap', $module_name, $module_name);
+
+        return new $class_name();
     }
 }

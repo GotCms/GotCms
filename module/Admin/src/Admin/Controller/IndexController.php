@@ -117,6 +117,6 @@ class IndexController extends Action
 
         Config::setValue('dashboard_widgets', serialize($config));
 
-        return $this->_returnJson(array('success' => TRUE));
+        return $this->returnJson(array('success' => TRUE));
     }
 }

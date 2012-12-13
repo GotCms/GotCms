@@ -418,13 +418,13 @@ class DocumentTypeController extends Action
                 'properties' => $properties
             );
 
-            return $this->_returnJson(array(
+            return $this->returnJson(array(
                 'success' => TRUE,
                 'tab' => $tab
             ));
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
     /**
@@ -439,11 +439,11 @@ class DocumentTypeController extends Action
         {
             if($document_type->delete())
             {
-                return $this->_returnJson(array('success' => TRUE, 'message' => 'This document type has been deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This document type has been deleted!'));
             }
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Can not delete this document type'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Can not delete this document type'));
     }
 
     /**
@@ -466,7 +466,7 @@ class DocumentTypeController extends Action
             {
                 if($name == $tab['name'])
                 {
-                    return $this->_returnJson(array('success' => FALSE, 'message' => 'Already exists'));
+                    return $this->returnJson(array('success' => FALSE, 'message' => 'Already exists'));
                 }
             }
 
@@ -478,7 +478,7 @@ class DocumentTypeController extends Action
             $document_type_session['tabs'] = $tabs;
             $session['document-type'] = $document_type_session;
 
-            return $this->_returnJson(array(
+            return $this->returnJson(array(
                 'success' => TRUE,
                 'id' => $current_id,
                 'name' => $name,
@@ -486,7 +486,7 @@ class DocumentTypeController extends Action
             ));
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
     /**
@@ -509,11 +509,11 @@ class DocumentTypeController extends Action
                 unset($document_type_session['tabs'][$id]);
                 $session->offsetSet('document-type', $document_type_session);
 
-                return $this->_returnJson(array('success' => TRUE, 'message' => 'Tab successfullty deleted'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'Tab successfullty deleted'));
             }
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
     /**
@@ -540,7 +540,7 @@ class DocumentTypeController extends Action
 
             if(empty($document_type_session['tabs'][$tab_id]))
             {
-                return $this->_returnJson(array('success' => FALSE, 'message' => 'Tab does not exists'));
+                return $this->returnJson(array('success' => FALSE, 'message' => 'Tab does not exists'));
             }
 
             $tab = $document_type_session['tabs'][$tab_id];
@@ -557,7 +557,7 @@ class DocumentTypeController extends Action
                 {
                     if(!empty($property['identifier']) and $identifier == $property['identifier'])
                     {
-                        return $this->_returnJson(array('success' => FALSE, 'message' => 'Identifier already exists'));
+                        return $this->returnJson(array('success' => FALSE, 'message' => 'Identifier already exists'));
                     }
                 }
             }
@@ -579,10 +579,10 @@ class DocumentTypeController extends Action
             $properties[$current_id]['success'] = TRUE;
             $properties[$current_id]['id'] = $current_id;
 
-            return $this->_returnJson($properties[$current_id]);
+            return $this->returnJson($properties[$current_id]);
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 
     /**
@@ -611,11 +611,11 @@ class DocumentTypeController extends Action
                     unset($document_type_session['tabs'][$tab_id]['properties'][$id]);
                     $session->offsetSet('document-type', $document_type_session);
 
-                    return $this->_returnJson(array('success' => TRUE, 'message' => 'Property successfullty deleted'));
+                    return $this->returnJson(array('success' => TRUE, 'message' => 'Property successfullty deleted'));
                 }
             }
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
     }
 }

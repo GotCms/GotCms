@@ -17,66 +17,39 @@
  *
  * PHP Version >=5.3
  *
- * @category   Gc
- * @package    Library
- * @subpackage Module
+ * @category   Gc_Library
+ * @package    Modules
+ * @subpackage Blog
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace Gc\Module;
+namespace Modules\Blog;
 
-use Zend\EventManager\Event,
-    Gc\Registry;
-
+use Gc\Module\AbstractObserver,
+    Zend\EventManager\Event;
 /**
- * Abstract module bootstrap
+ * Blog module bootstrap
  *
- * @category   Gc
- * @package    Library
- * @subpackage Module
+ * @category   Gc_Library
+ * @package    Modules
+ * @subpackage Blog
  */
-abstract class AbstractModule
+class Observer extends AbstractObserver
 {
     /**
-     * Execute on bootstrap
+     * Boostrap
      *
-     * @param Event $e
+     * @return void
      */
-    abstract function init(Event $e);
-
-    /**
-     * Install module
-     *
-     * @return boolean
-     */
-    abstract function install();
-    /**
-     * Uninstall module
-     *
-     * @return boolean
-     */
-    abstract function uninstall();
-
-    /**
-     * Return database adapter
-     *
-     * @return \Zend\Db\Adapter\Adapter
-     */
-    protected function _getAdapter()
+    public function init()
     {
-        return Registry::get('Db');
+        //Example of attach events
+        $this->events()->attach('Front', 'preDispatch', array($this, 'onPreDispatch'), array('object' => $this));
     }
 
-    /**
-     * Return driver name
-     *
-     * @return string
-     */
-    protected function _getDriverName()
+    public function onPreDispatch()
     {
-         $configuration = Registry::get('Configuration');
-         return $configuration['db']['driver'];
     }
 }

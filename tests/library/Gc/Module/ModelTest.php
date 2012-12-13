@@ -36,14 +36,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Gc\Module\Model::init
-     */
-    public function testInit()
-    {
-        $this->assertNull($this->_object->init($this->_object->getId()));
-    }
-
-    /**
      * @covers Gc\Module\Model::fromArray
      */
     public function testFromArray()

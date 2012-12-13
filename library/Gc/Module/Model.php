@@ -50,20 +50,6 @@ class Model extends AbstractTable
     protected $_name = 'module';
 
     /**
-     * Initiliaze module
-     *
-     * @param integer $module_id
-     * @return void
-     */
-    public function init($module_id = NULL)
-    {
-        if(!empty($module_id))
-        {
-            $this->setData('module_id', $module_id);
-        }
-    }
-
-    /**
      * Initialize module from array
      *
      * @param array $array

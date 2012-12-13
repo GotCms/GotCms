@@ -105,11 +105,11 @@ class RoleController extends Action
         {
             if($role->delete())
             {
-                return $this->_returnJson(array('success' => TRUE, 'message' => 'Role deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'Role deleted!'));
             }
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Role does not exists!'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Role does not exists!'));
     }
 
     /**

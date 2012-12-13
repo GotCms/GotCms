@@ -119,7 +119,7 @@ class MediaController extends Action
         $document = Document\Model::fromId($this->getRouteMatch()->getParam('document_id'));
         if(!$this->getRequest()->isPost() or empty($document) or empty($property))
         {
-            return $this->_returnJson(array('error' => TRUE));
+            return $this->returnJson(array('error' => TRUE));
         }
 
         $file_class = new File();
@@ -132,10 +132,10 @@ class MediaController extends Action
 
         if(!empty($files))
         {
-            return $this->_returnJson($files);
+            return $this->returnJson($files);
         }
 
-        return $this->_returnJson(array('error' => TRUE));
+        return $this->returnJson(array('error' => TRUE));
     }
 
     /**
@@ -149,13 +149,13 @@ class MediaController extends Action
         $document = Document\Model::fromId($this->getRouteMatch()->getParam('document_id'));
         if($this->getRequest()->getMethod() != 'DELETE' or empty($document) or empty($property))
         {
-            return $this->_returnJson(array('error' => TRUE));
+            return $this->returnJson(array('error' => TRUE));
         }
 
         $file = base64_decode($this->getRouteMatch()->getParam('file'));
         $file_class = new File();
         $file_class->init($property, $document);
-        return $this->_returnJson(array($file_class->remove($file)));
+        return $this->returnJson(array($file_class->remove($file)));
     }
 
     /**

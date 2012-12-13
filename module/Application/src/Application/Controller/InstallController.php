@@ -332,7 +332,7 @@ class InstallController extends Action
                             }
                             catch(Exception $e)
                             {
-                                return $this->_returnJson(array('messages' => $e->getMessage()));
+                                return $this->returnJson(array('messages' => $e->getMessage()));
                             }
 
                             //resources
@@ -390,7 +390,7 @@ class InstallController extends Action
                             }
                             catch(Exception $e)
                             {
-                                return $this->_returnJson(array('messages' => $e->getMessage()));
+                                return $this->returnJson(array('messages' => $e->getMessage()));
                             }
 
                             //Add admin user
@@ -415,7 +415,7 @@ class InstallController extends Action
                             $file_path = sprintf('%s/%s.sql', $template_path, $sql_type);
                             if(!file_exists($file_path))
                             {
-                                return $this->_returnJson(array('success' => FALSE, 'message' => sprintf('Could not find data for this template and driver: Driver %s, path %s', $sql_type, $template_path)));
+                                return $this->returnJson(array('success' => FALSE, 'message' => sprintf('Could not find data for this template and driver: Driver %s, path %s', $sql_type, $template_path)));
                             }
 
                             $sql = file_get_contents($file_path);
@@ -450,16 +450,16 @@ class InstallController extends Action
                             file_put_contents($config_filename, $file);
                             chmod($config_filename, $this->_umask);
 
-                            return $this->_returnJson(array('message' => 'Installation complete. Please refresh or go to /admin page to manage your website.'));
+                            return $this->returnJson(array('message' => 'Installation complete. Please refresh or go to /admin page to manage your website.'));
                         break;
                     }
                 }
                 catch(Exception $e)
                 {
-                    return $this->_returnJson(array('success' => FALSE, 'message' => $e->getMessage()));
+                    return $this->returnJson(array('success' => FALSE, 'message' => $e->getMessage()));
                 }
 
-                return $this->_returnJson(array('success' => TRUE));
+                return $this->returnJson(array('success' => TRUE));
             }
         }
     }

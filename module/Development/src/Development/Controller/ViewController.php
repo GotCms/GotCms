@@ -152,11 +152,11 @@ class ViewController extends Action
         {
             if($view->delete())
             {
-                return $this->_returnJson(array('success' => TRUE, 'message' => 'This view has been deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This view has been deleted!'));
             }
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'Can not delete this view'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Can not delete this view'));
     }
 
     /**

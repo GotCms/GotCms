@@ -161,7 +161,7 @@ class DocumentController extends Action
         $document = DocumentModel::fromId($this->getRouteMatch()->getParam('id', ''));
         if(empty($document))
         {
-            return $this->_returnJson(array('success' => FALSE, 'message' => 'Document does not exists!'));
+            return $this->returnJson(array('success' => FALSE, 'message' => 'Document does not exists!'));
         }
         else
         {
@@ -169,7 +169,7 @@ class DocumentController extends Action
             {
                 if($document->delete())
                 {
-                    return $this->_returnJson(array('success' => TRUE, 'message' => 'This document was succefully delete'));
+                    return $this->returnJson(array('success' => TRUE, 'message' => 'This document was succefully delete'));
                 }
             }
             catch(\Exception $e)
@@ -178,7 +178,7 @@ class DocumentController extends Action
             }
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'There were problems during the removal of this document'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'There were problems during the removal of this document'));
     }
 
     /**
@@ -311,7 +311,7 @@ class DocumentController extends Action
         $document_id = $this->getRouteMatch()->getParam('id');
         if(empty($document_id))
         {
-            return $this->_returnJson(array('success' => FALSE));
+            return $this->returnJson(array('success' => FALSE));
         }
 
         $session = $this->getSession();
@@ -321,7 +321,7 @@ class DocumentController extends Action
         }
 
         $session['document-copy'] = $document_id;
-        return $this->_returnJson(array('success' => TRUE));
+        return $this->returnJson(array('success' => TRUE));
      }
 
     /**
@@ -334,7 +334,7 @@ class DocumentController extends Action
         $document_id = $this->getRouteMatch()->getParam('id');
         if(empty($document_id))
         {
-            return $this->_returnJson(array('success' => FALSE));
+            return $this->returnJson(array('success' => FALSE));
         }
 
         $session = $this->getSession();
@@ -344,7 +344,7 @@ class DocumentController extends Action
         }
 
         $session['document-cut'] = $document_id;
-        return $this->_returnJson(array('success' => TRUE));
+        return $this->returnJson(array('success' => TRUE));
      }
 
     /**
@@ -361,7 +361,7 @@ class DocumentController extends Action
             $parent_document = DocumentModel::fromId($parent_id);
             if(empty($parent_id))
             {
-                return $this->_returnJson(array('success' => FALSE));
+                return $this->returnJson(array('success' => FALSE));
             }
         }
 
@@ -370,7 +370,7 @@ class DocumentController extends Action
             $document = DocumentModel::fromId($session['document-cut']);
             if(empty($document))
             {
-                return $this->_returnJson(array('success' => FALSE));
+                return $this->returnJson(array('success' => FALSE));
             }
 
             if(!empty($parent_document))
@@ -378,20 +378,20 @@ class DocumentController extends Action
                 $available_children = $parent_document->getDocumentType()->getDependencies();
                 if(!in_array($document->getDocumentType()->getId(), $available_children))
                 {
-                    return $this->_returnJson(array('success' => FALSE));
+                    return $this->returnJson(array('success' => FALSE));
                 }
             }
 
             $search_document = DocumentModel::fromUrlKey($document->getUrlKey(), $parent_id);
             if(!empty($search_document))
             {
-                return $this->_returnJson(array('success' => FALSE));
+                return $this->returnJson(array('success' => FALSE));
             }
 
             $document->setParentId($parent_id);
             $document->save();
             unset($session['document-cut']);
-            return $this->_returnJson(array('success' => TRUE));
+            return $this->returnJson(array('success' => TRUE));
         }
         elseif(!empty($session['document-copy']))
         {
@@ -399,7 +399,7 @@ class DocumentController extends Action
             $search_document = DocumentModel::fromUrlKey($url_key, $parent_id);
             if(!empty($search_document))
             {
-                return $this->_returnJson(array('success' => FALSE));
+                return $this->returnJson(array('success' => FALSE));
             }
 
             $document = DocumentModel::fromId($session['document-copy']);
@@ -409,7 +409,7 @@ class DocumentController extends Action
                 $available_children = $parent_document->getDocumentType()->getDependencies();
                 if(!in_array($document->getDocumentType()->getId(), $available_children))
                 {
-                    return $this->_returnJson(array('success' => FALSE));
+                    return $this->returnJson(array('success' => FALSE));
                 }
             }
 
@@ -439,11 +439,11 @@ class DocumentController extends Action
                 $copy_property->save();
             }
 
-            return $this->_returnJson(array('success' => TRUE));
+            return $this->returnJson(array('success' => TRUE));
         }
         else
         {
-            return $this->_returnJson(array('success' => FALSE));
+            return $this->returnJson(array('success' => FALSE));
         }
      }
 
@@ -468,7 +468,7 @@ class DocumentController extends Action
         }
 
 
-        return $this->_returnJson(array('treeview' => Component\TreeView::render($documents_list, FALSE)));
+        return $this->returnJson(array('treeview' => Component\TreeView::render($documents_list, FALSE)));
     }
 
     /**
@@ -491,7 +491,7 @@ class DocumentController extends Action
             }
         }
 
-        return $this->_returnJson(array('success' => TRUE));
+        return $this->returnJson(array('success' => TRUE));
     }
 
     /**

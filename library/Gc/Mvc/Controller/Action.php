@@ -211,7 +211,7 @@ class Action extends AbstractActionController
      *
      * @return \Zend\Session\Storage\SessionStorage
      */
-    protected function getSession()
+    public function getSession()
     {
         if($this->_session === NULL)
         {
@@ -226,7 +226,7 @@ class Action extends AbstractActionController
      *
      * @return \Zend\Authentication\AuthenticationService
      */
-    protected function getAuth()
+    public function getAuth()
     {
         if($this->_auth === NULL)
         {
@@ -242,7 +242,7 @@ class Action extends AbstractActionController
      * @param array $data
      * @return \Zend\View\Model\JsonModel
      */
-    protected function _returnJson(array $data)
+    public function returnJson(array $data)
     {
         $json_model = new JsonModel();
         $json_model->setVariables($data);
@@ -257,7 +257,7 @@ class Action extends AbstractActionController
      * @param boolean $force_display
      * @return void
      */
-    protected function useFlashMessenger($force_display = TRUE)
+    public function useFlashMessenger($force_display = TRUE)
     {
         $flash_messenger = $this->flashMessenger();
         $flash_messages = array();

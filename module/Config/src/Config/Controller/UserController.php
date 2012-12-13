@@ -174,11 +174,11 @@ class UserController extends Action
         {
             if($user->delete())
             {
-                return $this->_returnJson(array('success' => TRUE, 'message' => 'User deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'User deleted!'));
             }
         }
 
-        return $this->_returnJson(array('success' => FALSE, 'message' => 'User does not exists!'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'User does not exists!'));
     }
 
     /**
