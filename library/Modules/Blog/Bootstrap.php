@@ -36,7 +36,7 @@ use Gc\Module\AbstractModule,
  * @package    Modules
  * @subpackage Blog
  */
-class Blog extends AbstractModule
+class Bootstrap extends AbstractModule
 {
     /**
      * Boostrap
@@ -44,7 +44,7 @@ class Blog extends AbstractModule
      * @param Event $e
      * @return void
      */
-    public function onBootstrap(Event $e)
+    public function init(Event $e)
     {
 
     }
@@ -56,8 +56,8 @@ class Blog extends AbstractModule
      */
     public function install()
     {
-        $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();
-        $pdo_resource->exec(file_get_contents(__DIR__ . sprintf('/sql/install-%s.sql', $this->getDriverName())));
+        $pdo_resource = $this->_getAdapter()->getDriver()->getConnection()->getResource();
+        $pdo_resource->exec(file_get_contents(__DIR__ . sprintf('/sql/install-%s.sql', $this->_getDriverName())));
 
         return TRUE;
     }
@@ -69,8 +69,8 @@ class Blog extends AbstractModule
      */
     public function uninstall()
     {
-        $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();
-        $pdo_resource->exec(file_get_contents(__DIR__ . sprintf('/sql/uninstall-%s.sql', $this->getDriverName())));
+        $pdo_resource = $this->_getAdapter()->getDriver()->getConnection()->getResource();
+        $pdo_resource->exec(file_get_contents(__DIR__ . sprintf('/sql/uninstall-%s.sql', $this->_getDriverName())));
         return TRUE;
     }
 }

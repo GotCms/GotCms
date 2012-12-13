@@ -6,7 +6,7 @@ namespace Modules\Blog;
  * @backupGlobals disabled
  * @backupStaticAttributes disabled
  */
-class BlogTest extends \PHPUnit_Framework_TestCase
+class BootstrapTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Blog
@@ -19,7 +19,7 @@ class BlogTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Blog;
+        $this->_object = new Bootstrap;
     }
 
     /**
@@ -34,7 +34,7 @@ class BlogTest extends \PHPUnit_Framework_TestCase
      * @covers Modules\Blog\Blog::onBootstrap
      * @todo   Implement testOnBootstrap().
      */
-    public function testOnBootstrap()
+    public function testInit()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete('This test has not been implemented yet.');
