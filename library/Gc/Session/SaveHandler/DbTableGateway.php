@@ -91,7 +91,7 @@ class DbTableGateway extends ZendDbTableGateway
             ));
         }
 
-        $data[$this->options->getLifetimeColumn()] = $this->lifetime;
+        $data[$this->options->getLifetimeColumn()] = (int)$this->lifetime;
         $data[$this->options->getIdColumn()]       = $id;
         $data[$this->options->getNameColumn()]     = $this->sessionName;
 

@@ -50,8 +50,22 @@ use Gc\Core\Config as GcConfig,
  * @package    Library
  * @subpackage Mvc
  */
-class Module
+abstract class Module
 {
+    /**
+     * Module directory path
+     *
+     * @var string
+     */
+    protected $_directory = NULL;
+
+    /**
+     * Module namespace
+     *
+     * @var string
+     */
+    protected $_namespace = NULL;
+
     /**
      * Module configuration
      *
