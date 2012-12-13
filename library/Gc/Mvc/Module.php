@@ -232,8 +232,11 @@ abstract class Module
                     foreach($modules as $module)
                     {
                         $class_name = sprintf('\\Modules\\%s\\Observer', $module->getName());
-                        $object = new $class_name();
-                        $object->init();
+                        if(class_exists($class_name))
+                        {
+                            $object = new $class_name();
+                            $object->init();
+                        }
                     }
                 }
             }
