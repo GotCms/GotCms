@@ -42,6 +42,7 @@ abstract class AbstractObserver
 {
     /**
      * Initialize observer
+     *
      * @return void
      */
     abstract function init();
