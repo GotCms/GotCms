@@ -49,6 +49,11 @@ class Observer extends AbstractObserver
         $this->events()->attach('Front', 'preDispatch', array($this, 'onPreDispatch'), array('object' => $this));
     }
 
+    /**
+     * Example of preDispatch event
+     *
+     * @return void
+     */
     public function onPreDispatch()
     {
     }

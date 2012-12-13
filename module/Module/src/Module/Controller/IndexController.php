@@ -182,10 +182,15 @@ class IndexController extends Action
         return $result;
     }
 
+    /**
+     * Load bootstrap from module name
+     *
+     * @param string $module_name
+     * @return \Gc\Module\AbstractModule
+     */
     protected function _loadBootstrap($module_name)
     {
         $class_name = sprintf('\\Modules\\%s\\Bootstrap', $module_name, $module_name);
-
         return new $class_name();
     }
 }
