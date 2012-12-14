@@ -198,10 +198,6 @@ abstract class Object
 
                     $data = $data[$k];
                 }
-                else
-                {
-                    return $default;
-                }
             }
 
             return $data;
