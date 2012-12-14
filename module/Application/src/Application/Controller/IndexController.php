@@ -32,7 +32,6 @@ use Gc\Mvc\Controller\Action,
     Gc\Component,
     Gc\Document,
     Gc\DocumentType,
-    Gc\Event\StaticEventManager,
     Gc\Layout,
     Gc\Property,
     Gc\User\Visitor,
@@ -111,9 +110,7 @@ class IndexController extends Action
             }
         }
 
-        $events = StaticEventManager::getInstance();
-        $events->trigger('Front', 'preDispatch', NULL, array('object' => $this));
-
+        $this->events()->trigger('Front', 'preDispatch', NULL, array('object' => $this));
 
         if(CoreConfig::getValue('site_is_offline') == 1)
         {
@@ -242,7 +239,7 @@ class IndexController extends Action
             file_put_contents($this->_viewPath, $view->getContent());
         }
 
-        $events->trigger('Front', 'postDispatch');
+        $this->events()->trigger('Front', 'postDispatch');
 
         return $view_model;
     }

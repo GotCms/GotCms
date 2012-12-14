@@ -27,7 +27,8 @@
 
 namespace Gc\Mvc\Controller;
 
-use Gc\User\Model,
+use Gc\Event\StaticEventManager,
+    Gc\User\Model,
     Gc\User\Acl,
     Gc\Registry,
     Zend\Authentication\AuthenticationService,
@@ -282,5 +283,15 @@ class Action extends AbstractActionController
         }
 
         $this->layout()->flashMessages = $flash_messages;
+    }
+
+    /**
+     * Retrieve event manager
+     *
+     * @return \Gc\Event\StaticEventManager
+     */
+    public function events()
+    {
+        return StaticEventManager::getInstance();
     }
 }
