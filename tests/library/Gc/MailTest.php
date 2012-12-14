@@ -37,10 +37,6 @@ class MailTest extends \PHPUnit_Framework_TestCase
      */
     public function testSend()
     {
-        $this->setExpectedException('\Exception');
-        ob_start();
-        $this->_object->send();
-        $data = ob_get_clean();
-        $this->assertNull($data);
+        $this->assertNull($this->_object->send());
     }
 }
