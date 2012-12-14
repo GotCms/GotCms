@@ -2,6 +2,7 @@
 namespace Gc\Property;
 
 use Gc\Datatype\Model as DatatypeModel,
+    Gc\Document\Model as DocumentModel,
     Gc\DocumentType\Model as DocumentTypeModel,
     Gc\Layout\Model as LayoutModel,
     Gc\User\Model as UserModel,
@@ -162,6 +163,22 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetProperties()
     {
+        $document_model = DocumentModel::fromArray(array(
+            'name' => 'DocumentTest',
+            'url_key' => 'document-test',
+            'status' => DocumentModel::STATUS_ENABLE,
+            'sort_order' => 1,
+            'show_in_nav' => TRUE,
+            'user_id' => $this->_user->getId(),
+            'document_type_id' => $this->_documentType->getId(),
+            'view_id' => $this->_view->getId(),
+            'layout_id' => $this->_layout->getId(),
+            'parent_id' => 0,
+        ));
+        $document_model->save();
+        $this->_object->setDocumentId($document_model->getId());
+        $this->_object->save();
+
         $this->_object->load($this->_documentType->getId(), $this->_tab->getId(), 1);
         $this->assertTrue(is_array($this->_object->getProperties(TRUE)));
         $this->_object->load();
