@@ -64,7 +64,8 @@ abstract class AbstractObserver
      */
     protected function _getDriverName()
     {
-        return $this->getAdapter()->getDriver()->getConnection()->getDriverName();
+         $configuration = Registry::get('Configuration');
+         return $configuration['db']['driver'];
     }
 
     /**
