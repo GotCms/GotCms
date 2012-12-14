@@ -226,12 +226,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Model::saveEditor($property_model));
 
         $property_model->delete();
-        $tab_model->delete();
         $document_model->delete();
+        $tab_model->delete();
         $document_type_model->delete();
         $view_model->delete();
         $layout_model->delete();
-        $user_model->delete();
     }
 
     /**
