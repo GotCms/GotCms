@@ -48,7 +48,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     {
         $configuration = Registry::get('Configuration');
         $class = $this->_getMethod('_getDriverName');
-        $this->assertEquals($configuration['db']['driver'], 'pdo_' . $class->invokeArgs($this->_object, array()));
+        $this->assertEquals($configuration['db']['driver'], $class->invokeArgs($this->_object, array()));
     }
 
     protected function _getMethod($name)
