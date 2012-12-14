@@ -345,8 +345,12 @@ var Gc = (function($)
 
         refreshProperties: function($tabs)
         {
+            if($('.connected-sortable').hasClass('ui-accordion'))
+            {
+                $('.connected-sortable').accordion('destroy');
+            }
+
             $('.connected-sortable')
-                .accordion('destroy')
                 .accordion(this.getOption('accordion-option'))
                 .sortable({
                     placeholder: 'ui-state-highlight',
@@ -773,7 +777,7 @@ var Gc = (function($)
                 },
                 receive: function()
                 {
-                    $('.widget-column').sortable('sortupdate');
+                    $('.widget-column').sortable('refresh');
                 },
                 update: function()
                 {

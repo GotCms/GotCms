@@ -165,9 +165,9 @@ class Action extends AbstractActionController
             $headscript = $helper_broker->get('HeadScript');
             $headscript
                 ->appendFile('/backend/js/libs/modernizr-2.6.1.min.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/jquery-1.7.2.min.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/jquery-1.8.3.min.js', 'text/javascript')
                 ->appendFile('/backend/js/plugins.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/jquery-ui-1.8.14.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/jquery-ui-1.9.2.custom.js', 'text/javascript')
                 ->appendFile('/backend/js/libs/codemirror/lib/codemirror.js', 'text/javascript')
                 ->appendFile('/backend/js/libs/codemirror/mode/xml/xml.js', 'text/javascript')
                 ->appendFile('/backend/js/libs/codemirror/mode/javascript/javascript.js', 'text/javascript')
@@ -183,7 +183,7 @@ class Action extends AbstractActionController
             $headlink
                 ->appendStylesheet('/backend/css/normalize.css')
                 ->appendStylesheet('/backend/js/libs/codemirror/lib/codemirror.css')
-                ->appendStylesheet('/backend/css/jquery-ui-1.8.14.custom.css')
+                ->appendStylesheet('/backend/css/jquery-ui-1.9.2.custom.css')
                 ->appendStylesheet('/backend/css/jquery.treeview.css')
                 ->appendStylesheet('/backend/css/elfinder.min.css')
                 ->appendStylesheet('/backend/css/jquery.contextMenu.css')
