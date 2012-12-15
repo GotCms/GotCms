@@ -34,6 +34,7 @@ use Gc\Db\AbstractTable,
     Gc\Registry,
     ReflectionObject,
     Zend\View\Model\ViewModel,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Resolver\TemplatePathStack;
 /**
  * Abstract Datatype is used to call
@@ -72,6 +73,13 @@ abstract class AbstractDatatype extends AbstractTable
      * @var string
      */
     protected     $_name = 'datatype';
+
+    /**
+     * Renderer
+     *
+     * @var \Zend\View\Renderer\PhpRenderer
+     */
+    protected $_renderer;
 
     /**
      * Get Datatype Editor
@@ -218,30 +226,41 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function render($name, array $data = array())
     {
-        $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
-
+        $this->_checkRenderer();
         $view_model = new ViewModel();
         $view_model->setTemplate($name);
         $view_model->setVariables($data);
-        return $renderer->render($view_model);
+
+        return $this->_renderer->render($view_model);
     }
 
     /**
      * Add path in Zend\View\Resolver\TemplatePathStack
      *
      * @param string $dir
-     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
+     * @return \Gc\Datatype\AbstractDatatype
      */
     public function addPath($dir)
     {
-        $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
-        $iterators = $renderer->resolver()->getIterator()->toArray();
-        foreach($iterators as $iterator)
+        $this->_checkRenderer();
+        $this->_renderer->resolver()->addPath($dir);
+
+        return $this;
+    }
+
+    /**
+     * Check renderer, create if not exists
+     * Copy helper plugin manager from application service manager
+     *
+     * @return \Gc\Datatype\AbstractDatatype
+     */
+    protected function _checkRenderer()
+    {
+        if(is_null($this->_renderer))
         {
-            if($iterator instanceof TemplatePathStack)
-            {
-                $iterator->addPath($dir);
-            }
+            $this->_renderer = new PhpRenderer();
+            $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+            $this->_renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
         }
 
         return $this;
