@@ -46,7 +46,6 @@ class Observer extends AbstractObserver
      */
     public function init()
     {
-        //Example of attach events
         $this->events()->attach('Admin\Controller\IndexController', 'dashboard', array($this, 'dashboard'));
     }
 
