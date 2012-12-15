@@ -87,7 +87,14 @@ class Comment extends AbstractTable
 
             if(!is_null($is_active))
             {
-                $select->where->equalTo('is_active', $is_active);
+                if($this->getDriverName() == 'pdo_pgsql')
+                {
+                    $select->where->equalTo('is_active', empty($is_active) ? 'FALSE' : 'TRUE');
+                }
+                else
+                {
+                    $select->where->equalTo('is_active', (int)$is_active);
+                }
             }
 
             $select->order('created_at ASC');

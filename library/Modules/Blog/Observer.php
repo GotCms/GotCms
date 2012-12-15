@@ -28,6 +28,7 @@
 namespace Modules\Blog;
 
 use Gc\Module\AbstractObserver,
+    Modules\Blog\Model\Comment,
     Zend\EventManager\Event;
 /**
  * Blog module bootstrap
@@ -46,15 +47,29 @@ class Observer extends AbstractObserver
     public function init()
     {
         //Example of attach events
-        $this->events()->attach('Front', 'preDispatch', array($this, 'onPreDispatch'), array('object' => $this));
+        $this->events()->attach('Admin\Controller\IndexController', 'dashboard', array($this, 'dashboard'));
     }
 
     /**
-     * Example of preDispatch event
+     * Display widget dashboard
      *
      * @return void
      */
-    public function onPreDispatch()
+    public function dashboard(Event $event)
     {
+        $comment_model = new Comment();
+        $unactive_comment_list = $comment_model->getList(NULL, FALSE);
+        $active_comment_list = $comment_model->getList(NULL, TRUE);
+
+        $widgets = $event->getParam('widgets');
+
+        $widgets['test']['id'] = 'blog';
+        $widgets['test']['title'] = 'Blog information';
+        $widgets['test']['content'] = $this->addPath(__DIR__ . '/views')->render('dashboard.phtml', array(
+            'unactiveComments' => $unactive_comment_list,
+            'activeComments'   => $active_comment_list,
+        ));
+
+        $event->setParam('widgets', $widgets);
     }
 }

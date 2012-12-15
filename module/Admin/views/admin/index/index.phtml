@@ -59,6 +59,20 @@
             </ul>
         </div>
     </div>
+
+    <?php foreach($this->widgets as $widget): ?>
+        <?php if(empty($widget['id']) or empty($widget['title']) or empty($widget['content'])): ?>
+            <?php continue; ?>
+        <?php endif; ?>
+        <div class="widget-box" id="<?php echo $this->escapeHtml(!empty($widget['id']) ? $widget['id'] : ''); ?>">
+            <h3 class="header">
+                <span><?php echo $this->escapeHtml($this->translate(!empty($widget['title']) ? $widget['title'] : '')); ?></span>
+            </h3>
+            <div class="inside">
+                <?php echo !empty($widget['content']) ? $widget['content'] : ''; ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
 </div>
 
 <div class="widget-column floatR" id="sortable2">
