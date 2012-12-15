@@ -193,7 +193,7 @@ abstract class Module
                 {
                     foreach(glob(realpath(__DIR__.'/../../../').'/'.$path, GLOB_BRACE) as $filename)
                     {
-                        $config += include_once($filename);
+                        $config += include($filename);
                     }
                 }
 
@@ -205,14 +205,13 @@ abstract class Module
                     Registry::set('Configuration', $config);
                     Registry::set('Db', $db_adapter);
 
-                    $session_handler = GcConfig::getValue('session_handler');
                     $session_manager = SessionContainer::getDefaultManager();
                     $session_config = $session_manager->getConfig();
                     $session_config->setStorageOption('gc_maxlifetime', GcConfig::getValue('session_lifetime'));
                     $session_config->setStorageOption('cookie_path', GcConfig::getValue('cookie_path'));
                     $session_config->setStorageOption('cookie_domain', GcConfig::getValue('cookie_domain'));
 
-                    if($session_handler == GcConfig::SESSION_DATABASE)
+                    if(GcConfig::getValue('session_handler') == GcConfig::SESSION_DATABASE)
                     {
                         $tablegateway_config =  new DbTableGatewayOptions(array(
                             'idColumn'   => 'id',

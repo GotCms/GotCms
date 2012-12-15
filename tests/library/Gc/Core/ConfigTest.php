@@ -61,23 +61,22 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValues()
     {
-        $values = $this->_object->getValues();
-        $this->_object->delete('1 = 1');
-        $this->_object->insert(array('identifier' => 'values_test', 'value' => 'values_result'));
-
-        $this->assertArrayHasKey('0', $this->_object->getValues());
-        foreach($values as $value)
-        {
-            $this->_object->insert($value);
-        }
+        $this->assertTrue(is_array($this->_object->getValues()));
     }
     /**
      * @covers Gc\Core\Config::getValues
      */
     public function testGetEmptyValues()
     {
+        $values = $this->_object->getValues();
         $this->_object->delete('1 = 1');
         $this->assertNull($this->_object->getValues());
+
+        //restore data
+        foreach($values as $value)
+        {
+            $this->_object->insert($value);
+        }
     }
 
     /**
