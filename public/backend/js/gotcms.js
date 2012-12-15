@@ -779,16 +779,32 @@ var Gc = (function($)
                 {
                     $('.widget-column').sortable('refresh');
                 },
-                update: function()
+                update: function(event, ui)
                 {
-                    var $string = $(this).sortable('toArray').join();
+                    var $string = $(this).sortable('toArray').join(),
+                    $found = false;
                     if($this.isEmpty($object[$(this).attr('id')]))
                     {
                         $not_connected = false;
                     }
                     else
                     {
-                        $not_connected = $object[$(this).attr('id')].length === $string.length;
+                        $.each($object, function($key, $value)
+                        {
+                            if(!$this.isEmpty($object[$key]) && $.inArray(ui.item.attr('id'), $value.split(',')) !== -1)
+                            {
+                                $found = true;
+                            }
+                        });
+
+                        if($found === false)
+                        {
+                            $not_connected = true;
+                        }
+                        else
+                        {
+                            $not_connected = $object[$(this).attr('id')].length === $string.length;
+                        }
                     }
 
                     $object[$(this).attr('id')] = $string;

@@ -87,8 +87,8 @@ class IndexController extends Action
         $data['dashboardSortable'] = !empty($widgets['sortable']) ? \Zend\Json\Json::encode($widgets['sortable']) : '{}';
         $data['dashboardWelcome'] = !empty($widgets['welcome']);
 
-        $data['widgets'] = array();
-        $this->events()->trigger(__CLASS__, 'dashboard', NULL, array('widgets' => &$data['widgets']));
+        $data['customeWidgets'] = array();
+        $this->events()->trigger(__CLASS__, 'dashboard', NULL, array('widgets' => &$data['customeWidgets']));
 
         return $data;
     }
