@@ -60,6 +60,32 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($configuration['db']['driver'], $class->invokeArgs($this->_object, array()));
     }
 
+    /**
+     * @covers Gc\Module\AbstractObserver::render
+     */
+    public function testRender()
+    {
+        $this->assertEquals('Render view' . PHP_EOL, $this->_object->addPath(__DIR__ . '/_files')->render('view.phtml'));
+    }
+
+    /**
+     * @covers Gc\Module\AbstractObserver::addPath
+     */
+    public function testAddPath()
+    {
+        $this->assertInstanceOf('Gc\Module\AbstractObserver', $this->_object->addPath(__DIR__));
+    }
+
+    /**
+     * @covers Gc\Module\AbstractObserver::_checkRenderer
+     */
+    public function testCheckRenderer()
+    {
+        $configuration = Registry::get('Configuration');
+        $class = $this->_getMethod('_checkRenderer');
+        $this->assertInstanceOf('Gc\Module\AbstractObserver', $class->invokeArgs($this->_object, array()));
+    }
+
     protected function _getMethod($name)
     {
         $class = new ReflectionClass('Gc\Module\AbstractObserver');
