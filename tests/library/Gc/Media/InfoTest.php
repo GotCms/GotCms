@@ -16,6 +16,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Gc\Media\Info::init
      */
     protected function setUp()
     {
@@ -31,32 +32,40 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Gc\Media\Info::init
-     * @todo   Implement testInit().
+     * @covers Gc\Media\Info::fromFile
      */
-    public function testInit()
+    public function testFromFile()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $file_path = __DIR__ . '/_files/information.info';
+        $this->assertTrue($this->_object->fromFile($file_path));
+        $this->assertTrue($this->_object->fromFile($file_path));
     }
 
     /**
      * @covers Gc\Media\Info::fromFile
-     * @todo   Implement testFromFile().
      */
-    public function testFromFile()
+    public function testFromFileWithWrongFilePath()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertFalse($this->_object->fromFile('wrong-path-file.info'));
     }
 
     /**
      * @covers Gc\Media\Info::render
-     * @todo   Implement testRender().
      */
     public function testRender()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $file_path = __DIR__ . '/_files/information.info';
+        $this->_object->fromFile($file_path);
+        $assert_string = '<dl><dt>Author</dt><dd>Pierre Rambaud</dd><dt>Date</dt><dd>2012</dd><dt>Version</dt><dd>0.1</dd><dt>Description</dt><dd>Information test</dd><dt>Database compatibility</dt><dd>pgsql</dd><dt>Website url</dt><dd><a href="http://rambaudpierre.fr">website</a></dd></dl>';
+        $this->assertEquals($assert_string, $this->_object->render());
+    }
+
+    /**
+     * @covers Gc\Media\Info::render
+     */
+    public function testRenderWithWrongFilePath()
+    {
+        $this->_object->fromFile('wrong-path-file.info');
+        $this->assertFalse($this->_object->render());
     }
 }
