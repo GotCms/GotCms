@@ -89,7 +89,7 @@ class MediaController extends Action
     }
 
     /**
-     * File mananger action
+     * File manager action
      *
      * @return \Zend\View\Model\ViewModel|array
      */
@@ -97,7 +97,8 @@ class MediaController extends Action
     {
 
         $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
-        $helper_broker->get('HeadScript')->appendFile('/backend/js/libs/elfinder.min.js', 'text/javascript');
+        $headscript = $helper_broker->get('HeadScript');
+        $headscript->appendFile('/backend/js/libs/elfinder.min.js', 'text/javascript');
 
         $language = preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale());
         if($language != 'en')
