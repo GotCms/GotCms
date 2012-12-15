@@ -53,6 +53,7 @@ class Observer extends AbstractObserver
     /**
      * Display widget dashboard
      *
+     * @param \Zend\EventManager\Event $event
      * @return void
      */
     public function dashboard(Event $event)
