@@ -14,11 +14,17 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     protected $_object;
 
     /**
+     * @var string
+     */
+    protected $_directory;
+
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp()
     {
+        $this->_directory = __DIR__ . '/_files/';
         $this->_object = new Image;
     }
 
@@ -31,42 +37,145 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Media\Image::__construct
+     */
+    public function testConstructor()
+    {
+        $this->assertInstanceOf('Gc\Media\Image', new Image($this->_directory . 'test.png'));
+    }
+
+    /**
      * @covers Gc\Media\Image::open
-     * @todo   Implement testOpen().
      */
     public function testOpen()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertInstanceOf('Gc\Media\Image', $this->_object->open($this->_directory . 'test.png'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->_object->open($this->_directory . 'test.jpg'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->_object->open($this->_directory . 'test.gif'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->_object->open($this->_directory . 'test.bmp'));
     }
 
     /**
      * @covers Gc\Media\Image::resize
-     * @todo   Implement testResize().
+     * @covers Gc\Media\Image::_getSizeByFixedWidth
+     * @covers Gc\Media\Image::_getSizeByFixedHeight
+     * @covers Gc\Media\Image::hex2rgb
      */
-    public function testResize()
+    public function testResizeWithUndefinedOption()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->_object->open($this->_directory . 'test.png');
+        $this->assertInstanceOf('Gc\Media\Image', $this->_object->resize(50, 500, 'undefined option'));
+        //double test for optimal size tests
+        $this->assertInstanceOf('Gc\Media\Image', $this->_object->resize(500, 50, 'undefined option'));
+    }
+
+    /**
+     * @covers Gc\Media\Image::resize
+     * @covers Gc\Media\Image::_crop
+     * @covers Gc\Media\Image::hex2rgb
+     */
+    public function testResizeWithCropOption()
+    {
+        $this->_object->open($this->_directory . 'test.png');
+        $this->assertInstanceOf('Gc\Media\Image', $this->_object->resize(50, 50, 'crop'));
+    }
+
+    /**
+     * @covers Gc\Media\Image::resize
+     * @covers Gc\Media\Image::_getSizeByFixedWidth
+     * @covers Gc\Media\Image::_getSizeByFixedHeight
+     * @covers Gc\Media\Image::hex2rgb
+     */
+    public function testResizeWithUndefinedColor()
+    {
+        $this->_object->open($this->_directory . 'test.png');
+        $this->assertInstanceOf('Gc\Media\Image', $this->_object->resize(50, 50, 'auto', 'FFFFFFFF'));
+    }
+
+    /**
+     * @covers Gc\Media\Image::resize
+     */
+    public function testResizeWithNoImage()
+    {
+        $this->assertFalse($this->_object->resize(50, 50));
     }
 
     /**
      * @covers Gc\Media\Image::hex2rgb
-     * @todo   Implement testHex2rgb().
      */
-    public function testHex2rgb()
+    public function testHex2rgbWith6Chars()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue(is_array($this->_object->hex2rgb('FFFFFF')));
+    }
+
+    /**
+     * @covers Gc\Media\Image::hex2rgb
+     */
+    public function testHex2rgbWith3Chars()
+    {
+        $this->assertTrue(is_array($this->_object->hex2rgb('FFF')));
+    }
+
+    /**
+     * @covers Gc\Media\Image::hex2rgb
+     */
+    public function testHex2rgbWithWrongValue()
+    {
+        $this->assertFalse($this->_object->hex2rgb('0123456'));
     }
 
     /**
      * @covers Gc\Media\Image::save
-     * @todo   Implement testSave().
      */
-    public function testSave()
+    public function testSaveWithNoImage()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertFalse($this->_object->save('wrong/path'));
+    }
+
+    /**
+     * @covers Gc\Media\Image::save
+     */
+    public function testSaveWithPng()
+    {
+        $saving_path = $this->_directory . 'saving-test.png';
+        $this->_object->open($this->_directory . 'test.png');
+        $this->_object->resize(50, 50);
+        $this->assertTrue($this->_object->save($saving_path));
+        unlink($saving_path);
+    }
+
+    /**
+     * @covers Gc\Media\Image::save
+     */
+    public function testSaveWithGif()
+    {
+        $saving_path = $this->_directory . 'saving-test.gif';
+        $this->_object->open($this->_directory . 'test.gif');
+        $this->_object->resize(50, 50);
+        $this->assertTrue($this->_object->save($saving_path));
+        unlink($saving_path);
+    }
+
+    /**
+     * @covers Gc\Media\Image::save
+     */
+    public function testSaveWithJpg()
+    {
+        $saving_path = $this->_directory . 'saving-test.jpg';
+        $this->_object->open($this->_directory . 'test.jpg');
+        $this->_object->resize(50, 50);
+        $this->assertTrue($this->_object->save($saving_path));
+        unlink($saving_path);
+    }
+
+    /**
+     * @covers Gc\Media\Image::save
+     */
+    public function testSaveInBmp()
+    {
+        $saving_path = $this->_directory . 'saving-test.bmp';
+        $this->_object->open($this->_directory . 'test.png');
+        $this->_object->resize(50, 50);
+        $this->assertFalse($this->_object->save($saving_path));
     }
 }
