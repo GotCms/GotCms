@@ -88,13 +88,27 @@ class File extends Object
     }
 
     /**
+     * Return File Transfer adapter
+     *
+     * @return \Zend\File\Transfer\Adapter
+     */
+    public function getFileTransfer()
+    {
+        if(empty($this->_fileTransferAdapter))
+        {
+            $this->_fileTransferAdapter = new FileTransfer();
+        }
+
+        return $this->_fileTransferAdapter;
+    }
+
+    /**
      * Upload file to the server
      *
      * @return boolean
      */
     public function upload()
     {
-        $file_transfer = new FileTransfer();
         $dir = $this->getPath() . $this->getDirectory();
         if(!is_dir($dir))
         {
@@ -107,15 +121,15 @@ class File extends Object
             }
         }
 
-        $file_transfer->setDestination($dir);
+        $this->getFileTransfer()->setDestination($dir);
 
         $filename = $this->getFileName();
         $filenames = empty($filename) ? NULL : $filename;
-        $filenames = $file_transfer->getFileName($filenames, FALSE);
+        $filenames = $this->getFileTransfer()->getFileName($filenames, FALSE);
         if(!is_array($filenames))
         {
             $filenames = array();
-            $files = $file_transfer->getFileInfo($filename);
+            $files = $this->getFileTransfer()->getFileInfo($filename);
             foreach($files as $key => $file)
             {
                 if(!empty($file['name']))
@@ -130,12 +144,12 @@ class File extends Object
         foreach($filenames as $key => $file_name)
         {
             $info = pathinfo($file_name);
-            $file_transfer->addFilter('Rename', array(
-                'target' => $file_transfer->getDestination($file_name) . '/' . uniqid() . (empty($info['extension']) ? '' : '.' . $info['extension']), 'overwrite' => TRUE));
+            $this->getFileTransfer()->addFilter('Rename', array(
+                'target' => $this->getFileTransfer()->getDestination($file_name) . '/' . uniqid() . (empty($info['extension']) ? '' : '.' . $info['extension']), 'overwrite' => TRUE));
 
-            if($file_transfer->receive($file_name))
+            if($this->getFileTransfer()->receive($file_name))
             {
-                $files = $file_transfer->getFileInfo($key);
+                $files = $this->getFileTransfer()->getFileInfo($key);
                 foreach($files as $file_data)
                 {
                     $file_object = new StdClass();
@@ -174,12 +188,12 @@ class File extends Object
      */
     public function remove($filename)
     {
-         $file = $this->getPath() . $filename;
-         if(file_exists($file))
-         {
-             @unlink($file);
-         }
+        $file = $this->getPath() . $filename;
+        if(file_exists($file))
+        {
+            @unlink($file);
+        }
 
-         return TRUE;
+        return TRUE;
     }
 }

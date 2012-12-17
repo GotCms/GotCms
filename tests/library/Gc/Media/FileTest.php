@@ -1,4 +1,17 @@
 <?php
+namespace Zend\File\Transfer\Adapter;
+
+function is_uploaded_file($filename)
+{
+    return true;
+}
+
+function move_uploaded_file($filename, $destination)
+{
+    return copy($filename, $destination);
+}
+
+
 namespace Gc\Media;
 
 use Gc\Document\Model as DocumentModel,
@@ -66,22 +79,87 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Media\File::getFileTransfer
+     */
+    public function testGetFileTransfer()
+    {
+        $this->assertInstanceOf('Zend\File\Transfer\Adapter\Http', $this->_object->getFileTransfer());
+    }
+
+    /**
      * @covers Gc\Media\File::upload
-     * @todo   Implement testUpload().
      */
     public function testUpload()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->_initializeFiles();
+        $this->assertFalse($this->_object->upload());
+        $this->_removeDirectories();
+    }
+
+    /**
+     * @covers Gc\Media\File::upload
+     * @covers Gc\Media\File::remove
+     */
+    public function testUploadWithoutValidators()
+    {
+        $this->_initializeFiles();
+
+        $this->_object->getFileTransfer()->removeValidator('Zend\Validator\File\Upload');
+        $this->assertTrue($this->_object->upload());
+
+        $files = $this->_object->getFiles();
+        if(is_array($files))
+        {
+            foreach($files as $file)
+            {
+                $this->_object->remove($file->filename);
+            }
+        }
+
+        $this->_removeDirectories();
     }
 
     /**
      * @covers Gc\Media\File::remove
-     * @todo   Implement testRemove().
      */
     public function testRemove()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertTrue($this->_object->remove('undefined-file'));
+    }
+
+    protected function _initializeFiles()
+    {
+        $_FILES = array(
+            'test' => array(
+                'name' => __DIR__ . '/_files/test.jpg',
+                'type' => 'plain/text',
+                'size' => 8,
+                'tmp_name' => __DIR__ . '/_files/test.jpg',
+                'error' => 0
+            )
+        );
+
+        $property = PropertyModel::fromArray(array(
+            'id' => 'test'
+        ));
+        $document = DocumentModel::fromArray(array(
+            'id' => 'test'
+        ));
+
+        $this->_object->init($property, $document, 'test');
+    }
+
+    protected function _removeDirectories()
+    {
+        $dir = $this->_object->getPath() . $this->_object->getDirectory();
+        if(is_dir($dir))
+        {
+            $tmp_dir = $dir;
+            while($tmp_dir != GC_APPLICATION_PATH . '/public/media/files')
+            {
+                rmdir($tmp_dir);
+                $tmp_dir = dirname($tmp_dir);
+            }
+        }
     }
 }
