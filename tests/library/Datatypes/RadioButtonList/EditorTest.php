@@ -172,6 +172,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
+        $this->_object->setConfig(array('key' => 'value'));
         $this->assertInstanceOf('Zend\Form\Element\Radio', $this->_object->load());
     }
 }

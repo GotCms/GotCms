@@ -52,6 +52,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
+        $this->_object->getRequest()->getPost()->set('values', array('key' => 'value'));
         $this->assertNull($this->_object->save());
     }
 
@@ -60,6 +61,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
+        $this->_object->setConfig(array('key' => 'value'));
         $this->assertTrue(is_string($this->_object->load()));
     }
 }

@@ -72,7 +72,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $content .= '<ul id="checkboxlist-values">';
         $content .= '<li>List of values</li>';
-        if(is_array($parameters) AND count($parameters)>0)
+        if(is_array($parameters))
         {
             foreach($parameters as $param => $value)
             {
@@ -82,35 +82,35 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $content .= '</ul>';
         $content .= '<script type="text/javascript">
-                        buttonDelete();
-                        $(\'.button-add\').button({
-                            icons: {
-                                primary: \'ui-icon-circle-plus\'
-                            },
-                            text: false
-                        }).click(function() {
-                            if($(\'#addValue\').val() != "") {
-                                $(\'#checkboxlist-values\').children(\'li:last\').after(
-                                    \'<li><input type="text" name="values[]" value="\'+$("#addValue").val()+\'"> <a class="button-delete">Delete Element</a></li>\'
-                                );
-                                buttonDelete();
-                                $(this).removeClass(\'ui-state-focus\');
-                                $(\'#addValue\').val(\'\');
-                            }
-                            return false;
-                        });
-                        function buttonDelete() {
-                            $(\'.button-delete\').button({
-                                icons: {
-                                    primary: \'ui-icon-circle-minus\'
-                                },
-                                text: false
-                            }).click(function() {
-                                $(this).parent().remove();
-                                return false;
-                            });
-                        }
-                    </script>';
+            buttonDelete();
+            $(\'.button-add\').button({
+                icons: {
+                    primary: \'ui-icon-circle-plus\'
+                },
+                text: false
+            }).click(function() {
+                if($(\'#addValue\').val() != "") {
+                    $(\'#checkboxlist-values\').children(\'li:last\').after(
+                        \'<li><input type="text" name="values[]" value="\'+$("#addValue").val()+\'"> <a class="button-delete">Delete Element</a></li>\'
+                    );
+                    buttonDelete();
+                    $(this).removeClass(\'ui-state-focus\');
+                    $(\'#addValue\').val(\'\');
+                }
+                return false;
+            });
+            function buttonDelete() {
+                $(\'.button-delete\').button({
+                    icons: {
+                        primary: \'ui-icon-circle-minus\'
+                    },
+                    text: false
+                }).click(function() {
+                    $(this).parent().remove();
+                    return false;
+                });
+            }
+        </script>';
 
         return $content;
     }
