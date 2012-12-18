@@ -72,8 +72,12 @@ function Template($body)
         var $content = this.body;
         $.each($data, function(index, value)
         {
-            var $exp = new RegExp(/#\{'+index+'\}/, "gi");
-            $content = $content.replace($exp, value);
+            var $regexp,
+                $exp = '#\\{'+index+'\\}';
+                console.log($exp);
+
+            $regexp = new RegExp($exp, "gi");
+            $content = $content.replace($regexp, value);
         });
 
         return $content;
