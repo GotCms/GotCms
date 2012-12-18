@@ -104,7 +104,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
         $this->_datatype = DatatypeModel::fromArray(array(
             'name' => 'MixedTest',
-            'prevalue_value' => '',
+            'prevalue_value' => 'a:1:{s:9:"datatypes";a:1:{i:0;a:3:{s:4:"name";s:10:"Textstring";s:5:"label";s:4:"Test";s:6:"config";a:1:{s:6:"length";s:0:"";}}}}',
             'model' => 'Mixed',
         ));
         $this->_datatype->save();
@@ -159,19 +159,84 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Datatypes\Mixed\Editor::save
+     * @covers Datatypes\Mixed\Editor::_getDatatype
      */
     public function testSave()
     {
-        $this->_object->getRequest()->getPost()->set($this->_object->getName(), '1');
+        $post = $this->_object->getRequest()->getPost();
+        $post->set($this->_object->getName(), array(
+            array(
+                array(
+                    'textstring51' => 'test1',
+                ),
+            ), array(
+                array(
+                    'textstring51' => 'test2',
+                ),
+            ),
+        ));
+
+        $_FILES = array(
+            $this->_object->getName() => array(
+                'name' => array(
+                    array(
+                        array(
+                            'textstring51' => array(
+                                __DIR__ . '/test',
+                            ),
+                        ),
+                    ),
+                ),
+                'type' => array(
+                    array(
+                        array(
+                            'textstring51' => array(
+                                'plain/text',
+                            ),
+                        ),
+                    ),
+                ),
+                'size' => array(
+                    array(
+                        array(
+                            'textstring51' => array(
+                                8,
+                            ),
+                        ),
+                    ),
+                ),
+                'tmp_name' => array(
+                    array(
+                        array(
+                            'textstring51' => array(
+                                __DIR__ . '/test',
+                            ),
+                        ),
+                    ),
+                ),
+                'error' => array(
+                    array(
+                        array(
+                            'textstring51' => array(
+                                0,
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
         $this->_object->save();
-        $this->assertEquals('s:1:"1";', $this->_object->getValue());
+        $this->assertEquals('a:2:{i:0;a:1:{i:0;a:1:{s:5:"value";N;}}i:1;a:1:{i:0;a:1:{s:5:"value";N;}}}', $this->_object->getValue());
     }
 
     /**
      * @covers Datatypes\Mixed\Editor::load
+     * @covers Datatypes\Mixed\Editor::_getDatatype
      */
     public function testLoad()
     {
+        $this->_object->setValue('a:3:{i:0;a:1:{i:0;a:1:{s:5:"value";s:5:"test1";}}i:1;a:1:{i:0;a:0:{}}i:3;a:1:{i:25;a:0:{}}}');
         $this->assertTrue(is_string($this->_object->load()));
     }
 }

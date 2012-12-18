@@ -30,7 +30,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
 
         $this->_datatype = DatatypeModel::fromArray(array(
             'name' => 'MixedTest',
-            'prevalue_value' => '',
+            'prevalue_value' => 'a:1:{s:9:"datatypes";a:1:{i:0;a:3:{s:4:"name";s:10:"Textstring";s:5:"label";s:4:"Test";s:6:"config";a:1:{s:6:"length";s:0:"";}}}}',
             'model' => 'Mixed',
         ));
         $this->_datatype->save();
@@ -49,14 +49,25 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Datatypes\Mixed\PrevalueEditor::save
+     * @covers Datatypes\Mixed\PrevalueEditor::_getDatatype
      */
     public function testSave()
     {
+        $post = $this->_object->getRequest()->getPost();
+        $post->set('add-model', 'Textstring');
+        $post->set('datatypes', array(
+            1 => array(
+                'name' => 'Textstring',
+                'label' => 'TextstringTest',
+                'length' => 25,
+            ),
+        ));
         $this->assertNull($this->_object->save());
     }
 
     /**
      * @covers Datatypes\Mixed\PrevalueEditor::load
+     * @covers Datatypes\Mixed\PrevalueEditor::_getDatatype
      */
     public function testLoad()
     {
