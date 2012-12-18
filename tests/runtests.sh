@@ -5,18 +5,15 @@
 
 while [ -n "$1" ] ; do
   case "$1" in
-    ALL|all|MAX|max)
+    ALL|all)
      PHPUNIT_GROUPS=""
      break ;;
 
-    Gc*|Datatypes*)
+    Gc|Datatypes|Modules)
      PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}$1"
      shift ;;
-    Application*)
-     PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}$1"
-     shift ;;
-
     *)
+
      PHPUNIT_FILE="$1"
      shift ;;
   esac
