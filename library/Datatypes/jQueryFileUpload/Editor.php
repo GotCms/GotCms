@@ -54,7 +54,6 @@ class Editor extends AbstractEditor
         $post = $this->getRequest()->getPost();
         $values = $post->get($this->getName(), array());
         $parameters = $this->getConfig();
-        $options  = $parameters['options'];
         $array_values = array();
         if(!empty($values) and is_array($values))
         {
@@ -104,7 +103,7 @@ class Editor extends AbstractEditor
     public function load()
     {
         $parameters = $this->getConfig();
-        $options  = $parameters['options'];
+        $options = empty($parameters['options']) ? array() : $parameters['options'];
 
         $this->_initScript();
         $file_list = array();
