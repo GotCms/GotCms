@@ -171,6 +171,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
+        $this->_object->setConfig(array('key' => 'value'));
         $this->assertInstanceOf('Zend\Form\Element\MultiCheckbox', $this->_object->load());
     }
 }
