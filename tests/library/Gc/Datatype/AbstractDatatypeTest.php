@@ -28,7 +28,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     {
         $this->_datatype = DatatypeModel::fromArray(array(
             'name' => 'AbstractDatatype',
-            'prevalue_value' => 'AbstractDatatype',
+            'prevalue_value' => 's:16:"AbstractDatatype";',
             'model' => 'AbstractDatatype',
         ));
         $this->_datatype->save();
@@ -79,11 +79,20 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Datatype\AbstractDatatype::getConfig
+     */
+    public function testGetConfigWithNotSerializeValue()
+    {
+        $this->_object->setConfig(array());
+        $this->assertTrue(is_array($this->_object->getConfig()));
+    }
+
+    /**
      * @covers Gc\Datatype\AbstractDatatype::setConfig
      */
     public function testSetConfig()
     {
-        $this->_object->setConfig('NewValue');
+        $this->_object->setConfig(serialize('NewValue'));
         $this->assertEquals('NewValue', $this->_object->getConfig());
     }
 
@@ -130,6 +139,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Datatype\AbstractDatatype::addPath
+     * @covers Gc\Datatype\AbstractDatatype::_checkRenderer
      */
     public function testAddPath()
     {
@@ -139,6 +149,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\Datatype\AbstractDatatype::addPath
      * @covers Gc\Datatype\AbstractDatatype::render
+     * @covers Gc\Datatype\AbstractDatatype::_checkRenderer
      */
     public function testRender()
     {

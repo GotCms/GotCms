@@ -57,7 +57,11 @@ class Model extends AbstractTable
      */
     public function setPrevalueValue($value)
     {
-        if(is_string($value)) $value = unserialize($value);
+        if(is_string($value))
+        {
+            $value = unserialize($value);
+        }
+
         $this->setData('prevalue_value', $value);
 
         return $this;

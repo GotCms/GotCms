@@ -122,18 +122,13 @@ abstract class AbstractEditor extends Object
     }
 
     /**
-     * get configuration
+     * Get configuration
      *
      * @return void
      */
     public function getConfig()
     {
-        if(empty($this->_config))
-        {
-            $this->_config = unserialize($this->getDatatype()->getConfig());
-        }
-
-        return $this->_config;
+        return $this->getDatatype()->getConfig();
     }
 
     /**

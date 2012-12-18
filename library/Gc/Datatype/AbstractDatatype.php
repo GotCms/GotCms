@@ -51,28 +51,28 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @var \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
-    protected     $_editor;
+    protected $_editor;
 
     /**
      * Prevalue editor
      *
      * @var \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
-    protected     $_prevalueEditor;
+    protected $_prevalueEditor;
 
     /**
      * Property
      *
      * @var \Gc\Property\Model
      */
-    protected     $_property;
+    protected $_property;
 
     /**
      * Table name
      *
      * @var string
      */
-    protected     $_name = 'datatype';
+    protected $_name = 'datatype';
 
     /**
      * Renderer
@@ -80,6 +80,20 @@ abstract class AbstractDatatype extends AbstractTable
      * @var \Zend\View\Renderer\PhpRenderer
      */
     protected $_renderer;
+
+    /**
+     * Configuration
+     *
+     * @var mixed
+     */
+    protected $_config;
+
+    /**
+     * Check if config changed
+     *
+     * @var mixed
+     */
+    protected $_configHasChanged = FALSE;
 
     /**
      * Get Datatype Editor
@@ -137,11 +151,26 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Return configuration
      *
-     * @return mixed
+     * @return void
      */
     public function getConfig()
     {
-        return $this->getDatatypeModel()->getData('prevalue_value');
+        if(empty($this->_config) or $this->_configHasChanged)
+        {
+            $config = $this->getDatatypeModel()->getData('prevalue_value');
+            if(!is_string($config) or !preg_match("/^(i|s|a|o|d)(.*);/si", $config))
+            {
+                $this->_config = $config;
+            }
+            else
+            {
+                $this->_config = unserialize($config);
+            }
+
+            $this->_configHasChanged = FALSE;
+        }
+
+        return $this->_config;
     }
 
     /**
@@ -152,7 +181,8 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function setConfig($value)
     {
-        $this->getDatatypeModel()->setData('prevalue_value', $value);
+        $this->getDatatypeModel()->setPrevalueValue($value);
+        $this->_configHasChanged = TRUE;
         return $this;
     }
 
