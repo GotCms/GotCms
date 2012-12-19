@@ -280,7 +280,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     protected function _removeDirectories()
     {
         $file = new File();
-        $file->init($this->_property, $this->_document);
+        $file->load($this->_property, $this->_document);
         $dir = $file->getPath() . $file->getDirectory();
         if(is_dir($dir))
         {

@@ -124,7 +124,7 @@ class MediaController extends Action
         }
 
         $file_class = new File();
-        $file_class->init($property, $document);
+        $file_class->load($property, $document);
         $files = array();
         if($file_class->upload())
         {
@@ -155,7 +155,7 @@ class MediaController extends Action
 
         $file = base64_decode($this->getRouteMatch()->getParam('file'));
         $file_class = new File();
-        $file_class->init($property, $document);
+        $file_class->load($property, $document);
         return $this->returnJson(array($file_class->remove($file)));
     }
 

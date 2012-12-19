@@ -2,6 +2,7 @@
 namespace Datatypes\ImageCropper;
 
 use Gc\Datatype\Model as DatatypeModel,
+    Gc\Document\Model as DocumentModel,
     Gc\DocumentType\Model as DocumentTypeModel,
     Gc\Layout\Model as LayoutModel,
     Gc\Property\Model as PropertyModel,
@@ -56,6 +57,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      * @var DocumentTypeModel
      */
      protected $_documentType;
+
+    /**
+     * @var DocumentModel
+     */
+     protected $_document;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -128,8 +134,22 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->_property->save();
+
+        $this->_document = DocumentModel::fromArray(array(
+            'name' => 'jQueryFileUploadTest',
+            'url_key' => '/jqueryfileupload-test',
+            'status' => DocumentModel::STATUS_ENABLE,
+            'sort_order' => 1,
+            'show_in_nav' => FALSE,
+            'user_id' => $this->_user->getId(),
+            'document_type_id' => $this->_documentType->getId(),
+            'view_id' => $this->_view->getId(),
+            'layout_id' => $this->_layout->getId(),
+            'parent_id' => 0,
+        ));
+        $this->_document->save();
         $datatype = new Datatype();
-        $datatype->load($this->_datatype);
+        $datatype->load($this->_datatype, $this->_document->getId());
         $this->_object = $datatype->getEditor($this->_property);
     }
 

@@ -36,12 +36,17 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Gc\Media\File::init
+     * @covers Gc\Media\File::load
      */
     public function testInit()
     {
-        $this->assertFalse($this->_object->init());
-        $this->assertNull($this->_object->init(1, 1, 1));
+        $property = PropertyModel::fromArray(array(
+            'id' => 1
+        ));
+        $document = DocumentModel::fromArray(array(
+            'id' => 1
+        ));
+        $this->assertNull($this->_object->load($property, $document, 1));
     }
 
     /**
@@ -63,7 +68,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $document = DocumentModel::fromArray(array(
             'id' => 1
         ));
-        $this->_object->init($property, $document);
+        $this->_object->load($property, $document);
 
         $this->assertEquals('/media/files/' . $document->getId() . '/' . $property->getId(), $this->_object->getDirectory());
     }
@@ -98,6 +103,16 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
         $this->_object->getFileTransfer()->removeValidator('Zend\Validator\File\Upload');
         $result = $this->_object->upload();
+        $this->assertTrue($this->_object->upload());
+
+        $files = $this->_object->getFiles();
+        if(is_array($files))
+        {
+            foreach($files as $file)
+            {
+                $this->_object->remove($file->filename);
+            }
+        }
 
         $this->_removeDirectories();
         $this->assertTrue($result);
@@ -130,7 +145,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
             'id' => 'test'
         ));
 
-        $this->_object->init($property, $document, 'test');
+        $this->_object->load($property, $document, 'test');
     }
 
     protected function _removeDirectories()

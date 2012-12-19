@@ -49,19 +49,14 @@ class File extends Object
     /**
      * Initiliaze File Object
      *
-     * @param object $property
-     * @param object $document
+     * @param \Gc\Property\Model $property
+     * @param \Gc\Document\Model $document
      * @param string $filename
      *
      * @return void
      */
-    public function init($property = NULL, $document = NULL, $filename = NULL)
+    public function load(\Gc\Property\Model $property, \Gc\Document\Model $document, $filename = NULL)
     {
-        if(empty($property) or empty($document))
-        {
-            return FALSE;
-        }
-
         $this->setProperty($property);
         $this->setDocument($document);
         $this->setFileName($filename);

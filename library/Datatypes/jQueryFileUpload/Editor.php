@@ -49,7 +49,7 @@ class Editor extends AbstractEditor
     public function save()
     {
         $file_class = new File();
-        $file_class->init($this->getProperty(), $this->getDatatype()->getDocument());
+        $file_class->load($this->getProperty(), $this->getDatatype()->getDocument());
 
         $post = $this->getRequest()->getPost();
         $values = $post->get($this->getName(), array());
@@ -111,7 +111,7 @@ class Editor extends AbstractEditor
         if(!empty($files))
         {
             $file_class = new File();
-            $file_class->init($this->getProperty(), $this->getDatatype()->getDocument());
+            $file_class->load($this->getProperty(), $this->getDatatype()->getDocument());
             foreach($files as $file_data)
             {
                 $file_object = new \StdClass();

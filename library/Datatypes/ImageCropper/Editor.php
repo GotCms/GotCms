@@ -53,7 +53,7 @@ class Editor extends AbstractEditor
         $data = array();
         $image_model = new Image();
         $file_class = new File();
-        $file_class->init($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
+        $file_class->load($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
         $background_color = empty($parameters['background']) ? '#000000' : $parameters['background'];
 
         if(!empty($_FILES[$this->getName()]['name']))
