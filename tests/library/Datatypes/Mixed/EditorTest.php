@@ -228,6 +228,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
         $this->_object->save();
         $this->assertEquals('a:2:{i:0;a:1:{i:0;a:1:{s:5:"value";N;}}i:1;a:1:{i:0;a:1:{s:5:"value";N;}}}', $this->_object->getValue());
+        $_FILES = array();
     }
 
     /**
