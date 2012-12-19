@@ -1,16 +1,4 @@
 <?php
-namespace Zend\File\Transfer\Adapter;
-
-function is_uploaded_file($filename)
-{
-    return true;
-}
-
-function move_uploaded_file($filename, $destination)
-{
-    return copy($filename, $destination);
-}
-
 
 namespace Gc\Media;
 
@@ -44,6 +32,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $_FILES = array();
     }
 
     /**
@@ -93,8 +82,10 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testUpload()
     {
         $this->_initializeFiles();
-        $this->assertFalse($this->_object->upload());
+        $_FILES = array();
+        $result = $this->_object->upload();
         $this->_removeDirectories();
+        $this->assertFalse($result);
     }
 
     /**
@@ -106,18 +97,10 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->_initializeFiles();
 
         $this->_object->getFileTransfer()->removeValidator('Zend\Validator\File\Upload');
-        $this->assertTrue($this->_object->upload());
-
-        $files = $this->_object->getFiles();
-        if(is_array($files))
-        {
-            foreach($files as $file)
-            {
-                $this->_object->remove($file->filename);
-            }
-        }
+        $result = $this->_object->upload();
 
         $this->_removeDirectories();
+        $this->assertTrue($result);
     }
 
     /**
@@ -155,6 +138,12 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $dir = $this->_object->getPath() . $this->_object->getDirectory();
         if(is_dir($dir))
         {
+            $data = glob($dir . '/*');
+            foreach($data as $file)
+            {
+                unlink($file);
+            }
+
             $tmp_dir = $dir;
             while($tmp_dir != GC_APPLICATION_PATH . '/public/media/files')
             {

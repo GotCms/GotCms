@@ -23,6 +23,7 @@
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
+namespace Gc;
 
 /*
  * Set error reporting to the level to which Es code must comply.
@@ -86,7 +87,7 @@ if(!class_exists('Zend\Loader\AutoloaderFactory'))
 
 
 // Run application
-Zend\Console\Console::overrideIsConsole(FALSE);
+\Zend\Console\Console::overrideIsConsole(FALSE);
 $application = \Zend\Mvc\Application::init($configuration);
 \Gc\Registry::set('Application', $application);
 
@@ -118,3 +119,30 @@ if(defined('TESTS_ES_OB_ENABLED') && constant('TESTS_ES_OB_ENABLED'))
  * Unset global variables that are no longer needed.
  */
 unset($gc_root, $gc_library, $gc_tests, $path);
+
+
+namespace Gc\Media\File;
+
+namespace Zend\File\Transfer\Adapter;
+
+function is_uploaded_file($filename)
+{
+    return true;
+}
+
+function move_uploaded_file($filename, $destination)
+{
+    return copy($filename, $destination);
+}
+
+namespace Zend\Validator\File;
+
+function is_uploaded_file($filename)
+{
+    return true;
+}
+
+function move_uploaded_file($filename, $destination)
+{
+    return copy($filename, $destination);
+}

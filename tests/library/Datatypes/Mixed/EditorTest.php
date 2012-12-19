@@ -139,6 +139,8 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $_FILES = array();
+        $_POST = array();
         $this->_datatype->delete();
         $this->_documentType->delete();
         $this->_layout->delete();
@@ -228,7 +230,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
         $this->_object->save();
         $this->assertEquals('a:2:{i:0;a:1:{i:0;a:1:{s:5:"value";N;}}i:1;a:1:{i:0;a:1:{s:5:"value";N;}}}', $this->_object->getValue());
-        $_FILES = array();
     }
 
     /**

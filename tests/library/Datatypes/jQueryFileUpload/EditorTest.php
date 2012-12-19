@@ -159,6 +159,8 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $_FILES = array();
+        $_POST = array();
         $this->_datatype->delete();
         $this->_documentType->delete();
         $this->_document->delete();

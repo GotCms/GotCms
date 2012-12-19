@@ -59,7 +59,7 @@ class Editor extends AbstractEditor
             $_FILES[$this->getName()] = $file;
 
             $file_class = new File();
-            $file_class->init($this->getDatatype()->getDocument(), $this->getProperty(), $this->getName());
+            $file_class->init($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
             $file_class->upload();
             $files = $file_class->getFiles();
 
