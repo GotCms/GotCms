@@ -139,10 +139,10 @@ class FileTest extends \PHPUnit_Framework_TestCase
         );
 
         $property = PropertyModel::fromArray(array(
-            'id' => 'test'
+            'id' => 'test-upload'
         ));
         $document = DocumentModel::fromArray(array(
-            'id' => 'test'
+            'id' => 'test-upload'
         ));
 
         $this->_object->load($property, $document, 'test');
