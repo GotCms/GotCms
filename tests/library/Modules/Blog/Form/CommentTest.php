@@ -33,11 +33,9 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Modules\Blog\Form\Comment::init
-     * @todo   Implement testInit().
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertNull($this->_object->init());
     }
 }
