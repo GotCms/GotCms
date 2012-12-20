@@ -69,7 +69,7 @@ class File extends Object
      */
     public function getPath()
     {
-        return GC_MEDIA_PATH . '/..';
+        return realpath(GC_MEDIA_PATH . '/..');
     }
 
     /**
