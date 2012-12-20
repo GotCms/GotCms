@@ -51,6 +51,7 @@ $path = array(
 
 set_include_path(implode(PATH_SEPARATOR, $path));
 define('GC_APPLICATION_PATH', $gc_root);
+define('GC_MEDIA_PATH', GC_APPLICATION_PATH . '/tests/media');
 /**
  * Setup autoloading
  */

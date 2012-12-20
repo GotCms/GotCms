@@ -145,7 +145,7 @@ class InstallController extends Action
         $server_data = array();
         $server_data[] = array('label' => '/public/frontend is writable', 'value' => is_writable(GC_APPLICATION_PATH . '/public/frontend'));
         $server_data[] = array('label' => '/config/autoload is writable', 'value' => is_writable(GC_APPLICATION_PATH . '/config/autoload'));
-        $server_data[] = array('label' => '/public/media is writable', 'value' => is_writable(GC_APPLICATION_PATH . '/public/media'));
+        $server_data[] = array('label' => '/public/media is writable', 'value' => is_writable(GC_MEDIA_PATH));
 
         $php_data = array();
         $php_data[] = array('label' => 'Php version >= 5.3.3', 'value' => PHP_VERSION_ID > 50303);
@@ -424,7 +424,7 @@ class InstallController extends Action
                             $this->_copyDirectory($template_path . '/frontend', GC_APPLICATION_PATH . '/public/frontend');
                             if(file_exists($template_path . '/files'))
                             {
-                                $this->_copyDirectory($template_path . '/files', GC_APPLICATION_PATH . '/public/media/files');
+                                $this->_copyDirectory($template_path . '/files', GC_MEDIA_PATH . '/files');
                             }
                         break;
 

@@ -291,10 +291,10 @@ class EditorTest extends \PHPUnit_Framework_TestCase
             }
 
             $tmp_dir = $dir;
-            while($tmp_dir != GC_APPLICATION_PATH . '/public/media/files')
+            while($tmp_dir != GC_MEDIA_PATH . '/files')
             {
                 rmdir($tmp_dir);
-                $tmp_dir = dirname($tmp_dir);
+                $tmp_dir = realpath(dirname($tmp_dir));
             }
         }
     }

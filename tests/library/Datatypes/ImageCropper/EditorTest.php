@@ -247,7 +247,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithEmptyFilesVar()
     {
-        $data = 'a:3:{s:8:"original";a:5:{s:5:"value";s:34:"/media/files/1/1/50d3899a8260c.jpg";s:5:"width";i:10;s:6:"height";i:10;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";}s:7:"223x112";a:7:{s:5:"value";s:42:"/media/files/1/1/50d3899a8260c-223x112.jpg";s:5:"width";i:223;s:6:"height";i:112;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";s:1:"x";i:0;s:1:"y";i:0;}s:7:"800x600";a:7:{s:5:"value";s:42:"/media/files/1/1/50d3899a8260c-223x112.jpg";s:5:"width";i:223;s:6:"height";i:112;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";s:1:"x";i:0;s:1:"y";i:0;}}';
+        $data = 'a:3:{s:8:"original";a:5:{s:5:"value";s:47:"/library/Datatypes/ImageCropper/_files/test.jpg";s:5:"width";i:10;s:6:"height";i:10;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";}s:7:"223x112";a:7:{s:5:"value";s:42:"/media/files/1/1/50d3899a8260c-223x112.jpg";s:5:"width";i:223;s:6:"height";i:112;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";s:1:"x";i:0;s:1:"y";i:0;}s:7:"800x600";a:7:{s:5:"value";s:42:"/media/files/1/1/50d3899a8260c-223x112.jpg";s:5:"width";i:223;s:6:"height";i:112;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";s:1:"x";i:0;s:1:"y";i:0;}}';
         $this->_object->getRequest()->getPost()->set($this->_object->getName() . '-hidden', $data);
 
         $this->_object->save();

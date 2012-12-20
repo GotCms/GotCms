@@ -69,7 +69,7 @@ class File extends Object
      */
     public function getPath()
     {
-        return GC_APPLICATION_PATH . '/public';
+        return GC_MEDIA_PATH . '/..';
     }
 
     /**
@@ -109,10 +109,10 @@ class File extends Object
         {
             mkdir($dir, self::FILE_PERMISSION, TRUE);
             $tmp_dir = $dir;
-            while($tmp_dir != GC_APPLICATION_PATH . '/public/media/files')
+            while($tmp_dir != GC_MEDIA_PATH . '/files')
             {
                 chmod($tmp_dir, self::FILE_PERMISSION);
-                $tmp_dir = dirname($tmp_dir);
+                $tmp_dir = realpath(dirname($tmp_dir));
             }
         }
 

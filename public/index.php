@@ -30,6 +30,7 @@ use Zend\Mvc\Service\ServiceManagerConfig;
 
 chdir(dirname(__DIR__));
 define('GC_APPLICATION_PATH', getcwd());
+define('GC_MEDIA_PATH', GC_APPLICATION_PATH . '/public/media');
 
 // Composer autoloading
 if (file_exists('vendor/autoload.php')) {
