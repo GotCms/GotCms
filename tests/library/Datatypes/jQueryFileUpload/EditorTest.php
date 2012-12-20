@@ -186,9 +186,32 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->_object->getRequest()->getPost()->set($this->_object->getName(), '1');
+        copy(__DIR__ . '/_files/test-source.bmp', __DIR__ . '/_files/test.bmp');
+        $this->_object->getRequest()->getPost()->set($this->_object->getName(), array(
+            array(
+                'name' => '',
+            ),
+            array(
+                'name' => '../tests/library/Datatypes/jQueryFileUpload/_files/test.jpg',
+            ),
+            array(
+                'name' => '../tests/library/Datatypes/jQueryFileUpload/_files/test.bmp',
+            ),
+        ));
+
+        $this->_object->setConfig(array(
+            'is_multiple' => TRUE,
+            'mime_list' => array(
+                'image/gif',
+                'image/jpeg',
+                'image/png',
+            )
+        ));
+
         $this->_object->save();
-        $this->assertEquals(NULL, $this->_object->getValue());
+        $result = $this->_object->getValue();
+
+        $this->assertInternalType('string', $this->_object->getValue());
     }
 
     /**
@@ -197,6 +220,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
+        $this->_object->setValue(serialize(array(
+            array(
+                'value' => __DIR__ . '/_files/test.jpg',
+            )
+        )));
         $this->assertInternalType('string', $this->_object->load());
     }
 }

@@ -55,6 +55,28 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
+        $post = $this->_object->getRequest()->getPost();
+        $post->set('background', '#FFFFFF');
+        $post->set('resize_option', '#auto');
+        $post->set('mime_list', array(
+                'image/gif',
+            'image/jpeg',
+            'image/png',
+        ));
+
+        $post->set('size', array(
+            array (
+                'name' => '223x112',
+                'width' => '223',
+                'height' => '112',
+            ),
+            array (
+                'name' => '',
+                'width' => '',
+                'height' => '',
+            ),
+        ));
+
         $this->assertNull($this->_object->save());
     }
 
@@ -63,6 +85,28 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
+        $this->_object->setConfig(array(
+            'background' => '#FFFFFF',
+            'resize_option' => 'auto',
+            'mime_list' => array(
+                'image/gif',
+                'image/jpeg',
+                'image/png',
+            ),
+            'size' => array(
+                array (
+                    'name' => '223x112',
+                    'width' => '223',
+                    'height' => '112',
+                ),
+                array (
+                    'name' => '600x300',
+                    'width' => '600',
+                    'height' => '300',
+                ),
+            ),
+        ));
+
         $this->assertInternalType('string', $this->_object->load());
     }
 }

@@ -151,6 +151,28 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $datatype = new Datatype();
         $datatype->load($this->_datatype, $this->_document->getId());
         $this->_object = $datatype->getEditor($this->_property);
+
+        $this->_object->setConfig(array(
+            'background' => '#FFFFFF',
+            'resize_option' => 'auto',
+            'mime_list' => array(
+                'image/gif',
+                'image/jpeg',
+                'image/png',
+            ),
+            'size' => array(
+                array (
+                    'name' => '223x112',
+                    'width' => '223',
+                    'height' => '112',
+                ),
+                array (
+                    'name' => '600x300',
+                    'width' => '600',
+                    'height' => '300',
+                ),
+            ),
+        ));
     }
 
     /**
@@ -159,7 +181,10 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $_FILES = array();
+        $_POST = array();
         $this->_datatype->delete();
+        $this->_document->delete();
         $this->_documentType->delete();
         $this->_layout->delete();
         $this->_property->delete();
@@ -168,6 +193,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $this->_view->delete();
 
         unset($this->_datatype);
+        unset($this->_document);
         unset($this->_documentType);
         unset($this->_layout);
         unset($this->_property);
@@ -182,9 +208,50 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->_object->getRequest()->getPost()->set($this->_object->getName(), '1');
+        $_FILES = array(
+            $this->_object->getName() => array(
+                'name' => __DIR__ . '/_files/test.jpg',
+                'type' => 'plain/text',
+                'size' => 8,
+                'tmp_name' => __DIR__ . '/_files/test.jpg',
+                'error' => 0
+            )
+        );
+
         $this->_object->save();
-        $this->assertEquals('b:0;', $this->_object->getValue());
+        $this->assertInternalType('string', $this->_object->getValue());
+    }
+
+    /**
+     * @covers Datatypes\ImageCropper\Editor::save
+     */
+    public function testSaveWithBmp()
+    {
+        copy(__DIR__ . '/_files/test-source.bmp', __DIR__ . '/_files/test.bmp');
+        $_FILES = array(
+            $this->_object->getName() => array(
+                'name' => __DIR__ . '/_files/test.bmp',
+                'type' => 'plain/text',
+                'size' => 8,
+                'tmp_name' => __DIR__ . '/_files/test.bmp',
+                'error' => 0
+            )
+        );
+
+        $this->_object->save();
+        $this->assertInternalType('string', $this->_object->getValue());
+    }
+
+    /**
+     * @covers Datatypes\ImageCropper\Editor::save
+     */
+    public function testSaveWithEmptyFilesVar()
+    {
+        $data = 'a:3:{s:8:"original";a:5:{s:5:"value";s:34:"/media/files/1/1/50d3899a8260c.jpg";s:5:"width";i:10;s:6:"height";i:10;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";}s:7:"223x112";a:7:{s:5:"value";s:42:"/media/files/1/1/50d3899a8260c-223x112.jpg";s:5:"width";i:223;s:6:"height";i:112;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";s:1:"x";i:0;s:1:"y";i:0;}s:7:"800x600";a:7:{s:5:"value";s:42:"/media/files/1/1/50d3899a8260c-223x112.jpg";s:5:"width";i:223;s:6:"height";i:112;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";s:1:"x";i:0;s:1:"y";i:0;}}';
+        $this->_object->getRequest()->getPost()->set($this->_object->getName() . '-hidden', $data);
+
+        $this->_object->save();
+        $this->assertInternalType('string', $this->_object->getValue());
     }
 
     /**
@@ -192,6 +259,8 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
+        $data = 'a:3:{s:8:"original";a:5:{s:5:"value";s:34:"/media/files/1/1/50d3899a8260c.jpg";s:5:"width";i:10;s:6:"height";i:10;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";}s:7:"223x112";a:7:{s:5:"value";s:42:"/media/files/1/1/50d3899a8260c-223x112.jpg";s:5:"width";i:223;s:6:"height";i:112;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";s:1:"x";i:0;s:1:"y";i:0;}s:7:"800x600";a:7:{s:5:"value";s:42:"/media/files/1/1/50d3899a8260c-223x112.jpg";s:5:"width";i:223;s:6:"height";i:112;s:4:"html";i:2;s:4:"mime";s:10:"image/jpeg";s:1:"x";i:0;s:1:"y";i:0;}}';
+        $this->_object->setValue($data);
         $this->assertInternalType('array', $this->_object->load());
     }
 }
