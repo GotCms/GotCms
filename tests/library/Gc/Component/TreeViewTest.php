@@ -57,8 +57,7 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = new ViewModel();
-        $this->_view->setData(array(
+        $this->_view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
@@ -66,8 +65,7 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
         ));
         $this->_view->save();
 
-        $this->_layout = new LayoutModel();
-        $this->_layout->setData(array(
+        $this->_layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
@@ -75,8 +73,7 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
         ));
         $this->_layout->save();
 
-        $this->_user = new UserModel();
-        $this->_user->setData(array(
+        $this->_user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
@@ -87,8 +84,7 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
         $this->_user->setPassword('test');
         $this->_user->save();
 
-        $this->_documentType = new DocumentTypeModel();
-        $this->_documentType->setData(array(
+        $this->_documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
@@ -98,8 +94,7 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
 
         $this->_documentType->save();
 
-        $this->_document = new DocumentModel();
-        $this->_document->setData(array(
+        $this->_document = DocumentModel::fromArray(array(
             'name' => 'Document name',
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,
@@ -112,8 +107,7 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
 
         $this->_document->save();
 
-        $this->_documentChildren = new DocumentModel();
-        $this->_documentChildren->setData(array(
+        $this->_documentChildren = DocumentModel::fromArray(array(
             'name' => 'Document name',
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,

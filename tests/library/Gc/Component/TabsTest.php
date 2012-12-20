@@ -44,8 +44,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderWithIterableInterface()
     {
-        $view = new ViewModel();
-        $view->setData(array(
+        $view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
@@ -53,8 +52,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
         ));
         $view->save();
 
-        $layout = new LayoutModel();
-        $layout->setData(array(
+        $layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
@@ -62,8 +60,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
         ));
         $layout->save();
 
-        $user = new UserModel();
-        $user->setData(array(
+        $user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
@@ -74,8 +71,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
         $user->setPassword('test');
         $user->save();
 
-        $document_type = new DocumentTypeModel();
-        $document_type->setData(array(
+        $document_type = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
@@ -85,8 +81,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
 
         $document_type->save();
 
-        $document = new DocumentModel();
-        $document->setData(array(
+        $document = DocumentModel::fromArray(array(
             'name' => 'Document name',
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,

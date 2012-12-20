@@ -57,8 +57,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadValues()
     {
-        $model = new Model();
-        $model->setData(array(
+        $model = Model::fromArray(array(
             'name' => 'Name',
         ));
 

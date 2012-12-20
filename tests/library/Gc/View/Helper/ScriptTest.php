@@ -29,8 +29,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_script = new ScriptModel();
-        $this->_script->setData(array(
+        $this->_script = ScriptModel::fromArray(array(
             'name' => 'Script name',
             'identifier' => 'script-identifier',
             'description' => 'Script description',

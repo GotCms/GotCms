@@ -30,8 +30,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     {
         $this->_object = new Partial;
 
-        $this->_view = new ViewModel();
-        $this->_view->setData(array(
+        $this->_view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'view-identifier',
             'description' => 'View Description',
