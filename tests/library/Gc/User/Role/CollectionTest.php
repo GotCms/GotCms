@@ -38,7 +38,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testInit()
     {
         $this->_object->init(TRUE);
-        $this->assertTrue(is_array($this->_object->getRoles()));
+        $this->assertInternalType('array', $this->_object->getRoles());
     }
 
     /**
@@ -46,6 +46,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRoles()
     {
-        $this->assertTrue(is_array($this->_object->getRoles(TRUE)));
+        $this->assertInternalType('array', $this->_object->getRoles(TRUE));
     }
 }

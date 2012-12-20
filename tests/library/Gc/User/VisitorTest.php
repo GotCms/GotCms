@@ -44,7 +44,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['HTTP_REFERER'] = '/';
-        $this->assertTrue(is_numeric($this->_object->getVisitorId('9135ejnhfiebe6u85qhmas7k12')));
+        $this->assertInternalType('integer', $this->_object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
     }
     /**
      * @covers Gc\User\Visitor::getVisitorId
@@ -58,7 +58,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['HTTP_REFERER'] = '/';
-        $this->assertTrue(is_numeric($this->_object->getVisitorId('9135ejnhfiebe6u85qhmas7k12')));
+        $this->assertInternalType('integer', $this->_object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
     }
 
     /**
@@ -66,11 +66,11 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUrlId()
     {
-        $this->assertTrue(is_numeric($this->_object->getUrlId('/something', NULL)));
+        $this->assertInternalType('integer', $this->_object->getUrlId('/something', NULL));
         //Existing url
-        $this->assertTrue(is_numeric($this->_object->getUrlId('/something', NULL)));
+        $this->assertInternalType('integer', $this->_object->getUrlId('/something', NULL));
         //with referer
-        $this->assertTrue(is_numeric($this->_object->getUrlId('/something', '/somewhat')));
+        $this->assertInternalType('integer', $this->_object->getUrlId('/something', '/somewhat'));
     }
 
     /**
@@ -78,7 +78,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTotalVisitors()
     {
-        $this->assertTrue(is_numeric($this->_object->getTotalVisitors()));
+        $this->assertInternalType('integer', $this->_object->getTotalVisitors());
     }
 
     /**
@@ -86,7 +86,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTotalPageViews()
     {
-        $this->assertTrue(is_numeric($this->_object->getTotalPageViews()));
+        $this->assertInternalType('integer', $this->_object->getTotalPageViews());
     }
 
     /**
@@ -96,11 +96,11 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNbPagesViews()
     {
-        $this->assertTrue(is_array($this->_object->getNbPagesViews('HOUR')));
-        $this->assertTrue(is_array($this->_object->getNbPagesViews('TEST')));
-        $this->assertTrue(is_array($this->_object->getNbPagesViews('DAY')));
-        $this->assertTrue(is_array($this->_object->getNbPagesViews('MONTH')));
-        $this->assertTrue(is_array($this->_object->getNbPagesViews('YEAR')));
+        $this->assertInternalType('array', $this->_object->getNbPagesViews('HOUR'));
+        $this->assertInternalType('array', $this->_object->getNbPagesViews('TEST'));
+        $this->assertInternalType('array', $this->_object->getNbPagesViews('DAY'));
+        $this->assertInternalType('array', $this->_object->getNbPagesViews('MONTH'));
+        $this->assertInternalType('array', $this->_object->getNbPagesViews('YEAR'));
     }
 
     /**
@@ -110,11 +110,11 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNbVisitors()
     {
-        $this->assertTrue(is_array($this->_object->getNbVisitors('TEST')));
-        $this->assertTrue(is_array($this->_object->getNbVisitors('HOUR')));
-        $this->assertTrue(is_array($this->_object->getNbVisitors('DAY')));
-        $this->assertTrue(is_array($this->_object->getNbVisitors('MONTH')));
-        $this->assertTrue(is_array($this->_object->getNbVisitors('YEAR')));
+        $this->assertInternalType('array', $this->_object->getNbVisitors('TEST'));
+        $this->assertInternalType('array', $this->_object->getNbVisitors('HOUR'));
+        $this->assertInternalType('array', $this->_object->getNbVisitors('DAY'));
+        $this->assertInternalType('array', $this->_object->getNbVisitors('MONTH'));
+        $this->assertInternalType('array', $this->_object->getNbVisitors('YEAR'));
     }
 
     /**
@@ -124,10 +124,10 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUrlsViews()
     {
-        $this->assertTrue(is_array($this->_object->getUrlsViews('TEST')));
-        $this->assertTrue(is_array($this->_object->getUrlsViews('HOUR')));
-        $this->assertTrue(is_array($this->_object->getUrlsViews('DAY')));
-        $this->assertTrue(is_array($this->_object->getUrlsViews('MONTH')));
-        $this->assertTrue(is_array($this->_object->getUrlsViews('YEAR')));
+        $this->assertInternalType('array', $this->_object->getUrlsViews('TEST'));
+        $this->assertInternalType('array', $this->_object->getUrlsViews('HOUR'));
+        $this->assertInternalType('array', $this->_object->getUrlsViews('DAY'));
+        $this->assertInternalType('array', $this->_object->getUrlsViews('MONTH'));
+        $this->assertInternalType('array', $this->_object->getUrlsViews('YEAR'));
     }
 }

@@ -62,7 +62,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValues()
     {
-        $this->assertTrue(is_array($this->_object->getValues()));
+        $this->assertInternalType('array', $this->_object->getValues());
     }
     /**
      * @covers Gc\Core\Config::getValues

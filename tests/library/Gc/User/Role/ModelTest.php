@@ -45,7 +45,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->_object->setPermissions($array);
-        $this->assertTrue(is_numeric($this->_object->save()));
+        $this->assertInternalType('integer', $this->_object->save());
     }
 
     /**
@@ -57,7 +57,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         $model->setName('New Name2');
         $model->setDescription('Test description2');
 
-        $this->assertTrue(is_numeric($model->save()));
+        $this->assertInternalType('integer', $model->save());
         $model->delete();
     }
 
@@ -123,6 +123,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUserPermissions()
     {
-        $this->assertTrue(is_array($this->_object->getUserPermissions()));
+        $this->assertInternalType('array', $this->_object->getUserPermissions());
     }
 }

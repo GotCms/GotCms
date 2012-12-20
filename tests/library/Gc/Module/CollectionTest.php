@@ -58,6 +58,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSelect()
     {
-        $this->assertTrue(is_array($this->_object->getSelect()));
+        $this->assertInternalType('array', $this->_object->getSelect());
     }
 }

@@ -64,9 +64,9 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'name' => 'IconTest',
             'url' => 'IconTest'
         ));
-        $this->assertTrue(is_numeric($this->_object->save()));
+        $this->assertInternalType('integer', $this->_object->save());
         //Code coverage
-        $this->assertTrue(is_numeric($this->_object->save()));
+        $this->assertInternalType('integer', $this->_object->save());
     }
 
     /**

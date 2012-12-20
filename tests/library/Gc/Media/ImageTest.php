@@ -106,7 +106,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testHex2rgbWith6Chars()
     {
-        $this->assertTrue(is_array($this->_object->hex2rgb('FFFFFF')));
+        $this->assertInternalType('array', $this->_object->hex2rgb('FFFFFF'));
     }
 
     /**
@@ -114,7 +114,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testHex2rgbWith3Chars()
     {
-        $this->assertTrue(is_array($this->_object->hex2rgb('FFF')));
+        $this->assertInternalType('array', $this->_object->hex2rgb('FFF'));
     }
 
     /**

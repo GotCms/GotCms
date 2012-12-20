@@ -85,7 +85,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     public function testGetConfigWithNotSerializeValue()
     {
         $this->_object->setConfig(array());
-        $this->assertTrue(is_array($this->_object->getConfig()));
+        $this->assertInternalType('array', $this->_object->getConfig());
     }
 
     /**

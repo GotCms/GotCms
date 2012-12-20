@@ -65,6 +65,6 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         $this->_object->setConfig(array('key' => 'value'));
-        $this->assertTrue(is_string($this->_object->load()));
+        $this->assertInternalType('string', $this->_object->load());
     }
 }

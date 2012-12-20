@@ -239,6 +239,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         $this->_object->setValue('a:3:{i:0;a:1:{i:0;a:1:{s:5:"value";s:5:"test1";}}i:1;a:1:{i:0;a:0:{}}i:3;a:1:{i:25;a:0:{}}}');
-        $this->assertTrue(is_string($this->_object->load()));
+        $this->assertInternalType('string', $this->_object->load());
     }
 }

@@ -131,7 +131,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertTrue(is_numeric($this->_object->save()));
+        $this->assertInternalType('integer', $this->_object->save());
     }
 
     /**
@@ -203,6 +203,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetProperties()
     {
-        $this->assertTrue(is_array($this->_object->getProperties()));
+        $this->assertInternalType('array', $this->_object->getProperties());
     }
 }

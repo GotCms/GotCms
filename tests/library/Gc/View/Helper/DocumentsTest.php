@@ -122,7 +122,7 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
      */
     public function test__invoke()
     {
-        $this->assertTrue(is_array($this->_object->__invoke()));
+        $this->assertInternalType('array', $this->_object->__invoke());
     }
 
     /**
@@ -130,7 +130,7 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
      */
     public function test__invokeWithParameters()
     {
-        $this->assertTrue(is_array($this->_object->__invoke(1)));
-        $this->assertTrue(is_array($this->_object->__invoke(array(0, $this->_document->getId()))));
+        $this->assertInternalType('array', $this->_object->__invoke(1));
+        $this->assertInternalType('array', $this->_object->__invoke(array(0, $this->_document->getId())));
     }
 }

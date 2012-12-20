@@ -71,7 +71,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
         $select = new Select();
         $select->from('user');
         $result = $this->_object->fetchAll($select);
-        $this->assertTrue(is_array($result));
+        $this->assertInternalType('array', $result);
     }
 
     /**
@@ -80,7 +80,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     public function testFetchAll()
     {
         $result = $this->_object->fetchAll($this->_object->select());
-        $this->assertTrue(is_array($result));
+        $this->assertInternalType('array', $result);
     }
 
     /**
@@ -91,7 +91,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
         $select = new Select();
         $select->from('user');
         $result = $this->_object->fetchAll($select);
-        $this->assertTrue(is_array($result));
+        $this->assertInternalType('array', $result);
     }
 
     /**
@@ -115,7 +115,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     public function testFetchOne()
     {
         $result = $this->_object->fetchOne($this->_object->select());
-        $this->assertTrue(is_numeric($result));
+        $this->assertInternalType('integer', $result);
     }
 
     /**
@@ -144,7 +144,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLastInsertId()
     {
-        $this->assertTrue(is_numeric($this->_object->getLastInsertId()));
+        $this->assertInternalType('integer', $this->_object->getLastInsertId());
     }
 
     /**
@@ -160,6 +160,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDriverName()
     {
-        $this->assertTrue(is_string($this->_object->getDriverName()));
+        $this->assertInternalType('string', $this->_object->getDriverName());
     }
 }

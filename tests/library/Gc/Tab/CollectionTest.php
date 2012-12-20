@@ -128,7 +128,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetTabsWithDocumentTypeId()
     {
         $this->_object->load(1);
-        $this->assertTrue(is_array($this->_object->getTabs()));
+        $this->assertInternalType('array', $this->_object->getTabs());
     }
 
     /**
@@ -136,7 +136,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTabs()
     {
-        $this->assertTrue(is_array($this->_object->getTabs()));
+        $this->assertInternalType('array', $this->_object->getTabs());
     }
 
     /**
@@ -144,7 +144,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetImportableTabs()
     {
-        $this->assertTrue(is_array($this->_object->getImportableTabs(0)));
+        $this->assertInternalType('array', $this->_object->getImportableTabs(0));
     }
 
     /**

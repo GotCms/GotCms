@@ -181,9 +181,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->_object->save();
 
         $this->_object->load($this->_documentType->getId(), $this->_tab->getId(), 1);
-        $this->assertTrue(is_array($this->_object->getProperties(TRUE)));
+        $this->assertInternalType('array', $this->_object->getProperties(TRUE));
         $this->_object->load();
-        $this->assertTrue(is_array($this->_object->getProperties(TRUE)));
+        $this->assertInternalType('array', $this->_object->getProperties(TRUE));
     }
 
     /**

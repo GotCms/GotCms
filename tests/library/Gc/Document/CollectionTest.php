@@ -162,7 +162,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         $this->_object->load(0);
-        $this->assertTrue(is_array($this->_object->getDocuments()));
+        $this->assertInternalType('array', $this->_object->getDocuments());
     }
 
     /**
@@ -172,7 +172,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testLoadWithParentId()
     {
         $this->_object->load($this->_document->getId());
-        $this->assertTrue(is_array($this->_object->getDocuments()));
+        $this->assertInternalType('array', $this->_object->getDocuments());
     }
 
     /**
@@ -180,7 +180,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAvailableDocuments()
     {
-        $this->assertTrue(is_array($this->_object->getAvailableDocuments()));
+        $this->assertInternalType('array', $this->_object->getAvailableDocuments());
     }
 
     /**
@@ -189,7 +189,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetSelect()
     {
         $this->_object->load(0);
-        $this->assertTrue(is_array($this->_object->getSelect()));
+        $this->assertInternalType('array', $this->_object->getSelect());
     }
 
     /**
@@ -207,7 +207,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetChildren()
     {
         $this->_object->load(0);
-        $this->assertTrue(is_array($this->_object->getChildren()));
+        $this->assertInternalType('array', $this->_object->getChildren());
     }
 
     /**
@@ -216,7 +216,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetAvailableChilren()
     {
         $this->_object->load(0);
-        $this->assertTrue(is_array($this->_object->getAvailableChildren()));
+        $this->assertInternalType('array', $this->_object->getAvailableChildren());
     }
 
     /**

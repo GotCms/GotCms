@@ -192,6 +192,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->assertTrue(is_array($this->_object->load()));
+        $this->assertInternalType('array', $this->_object->load());
     }
 }

@@ -212,7 +212,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $result = $this->_object->getValue();
         $this->_removeDirectories();
 
-        $this->assertTrue(is_string($this->_object->getValue()));
+        $this->assertInternalType('string', $this->_object->getValue());
     }
 
     /**
@@ -263,7 +263,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $result = $this->_object->getValue();
         $this->_removeDirectories();
 
-        $this->assertTrue(is_string($result));
+        $this->assertInternalType('string', $result);
     }
 
     /**
@@ -274,7 +274,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $this->_object->setConfig(array('is_multiple' => TRUE));
         $this->_object->setValue('value');
 
-        $this->assertTrue(is_array($this->_object->load()));
+        $this->assertInternalType('array', $this->_object->load());
     }
 
     protected function _removeDirectories()

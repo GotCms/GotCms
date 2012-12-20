@@ -55,7 +55,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAllToolbarItems()
     {
-        $this->assertTrue(is_array($this->_object->getAllToolbarItems()));
+        $this->assertInternalType('array', $this->_object->getAllToolbarItems());
     }
 
     /**
@@ -64,6 +64,6 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetAllItems()
     {
         $this->_object->setParameters(array('toolbar-items' => array('Source' => '1')));
-        $this->assertTrue(is_array($this->_object->getAllItems()));
+        $this->assertInternalType('array', $this->_object->getAllItems());
     }
 }

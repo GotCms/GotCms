@@ -51,7 +51,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAutoloaderConfig()
     {
-        $this->assertTrue(is_array($this->_object->getAutoloaderConfig()));
+        $this->assertInternalType('array', $this->_object->getAutoloaderConfig());
     }
 
     /**
@@ -60,7 +60,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testGetConfig()
     {
         Config::setValue('debug_is_active', 1);
-        $this->assertTrue(is_array($this->_object->getConfig()));
+        $this->assertInternalType('array', $this->_object->getConfig());
     }
 
     /**

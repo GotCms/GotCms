@@ -55,7 +55,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testInit()
     {
         $this->_object->init();
-        $this->assertTrue(is_array($this->_object->getDatatypes()));
+        $this->assertInternalType('array', $this->_object->getDatatypes());
     }
 
     /**
@@ -63,7 +63,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDatatypes()
     {
-        $this->assertTrue(is_array($this->_object->getDatatypes()));
+        $this->assertInternalType('array', $this->_object->getDatatypes());
     }
 
     /**
@@ -71,6 +71,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSelect()
     {
-        $this->assertTrue(is_array($this->_object->getSelect()));
+        $this->assertInternalType('array', $this->_object->getSelect());
     }
 }

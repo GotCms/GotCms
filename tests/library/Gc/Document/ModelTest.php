@@ -236,7 +236,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertTrue(is_numeric($this->_object->save()));
+        $this->assertInternalType('integer', $this->_object->save());
     }
 
     /**
@@ -308,7 +308,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetId()
     {
-        $this->assertTrue(is_numeric($this->_object->getId()));
+        $this->assertInternalType('integer', $this->_object->getId());
     }
 
     /**
@@ -324,7 +324,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetChildren()
     {
-        $this->assertTrue(is_array($this->_object->getChildren()));
+        $this->assertInternalType('array', $this->_object->getChildren());
     }
 
     /**
@@ -332,7 +332,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAvailableChilren()
     {
-        $this->assertTrue(is_array($this->_object->getAvailableChildren()));
+        $this->assertInternalType('array', $this->_object->getAvailableChildren());
     }
 
     /**
@@ -381,6 +381,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEditUrl()
     {
-        $this->assertTrue(is_string($this->_object->getEditUrl()));
+        $this->assertInternalType('string', $this->_object->getEditUrl());
     }
 }

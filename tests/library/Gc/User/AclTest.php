@@ -57,7 +57,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testListRoles()
     {
-        $this->assertTrue(is_array($this->_object->listRoles()));
+        $this->assertInternalType('array', $this->_object->listRoles());
     }
 
     /**
@@ -73,7 +73,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testListResources()
     {
-        $this->assertTrue(is_array($this->_object->listResources()));
+        $this->assertInternalType('array', $this->_object->listResources());
     }
 
     /**
@@ -81,6 +81,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testListResourcesByGroup()
     {
-        $this->assertTrue(is_array($this->_object->listResourcesByGroup('Development')));
+        $this->assertInternalType('array', $this->_object->listResourcesByGroup('Development'));
     }
 }

@@ -165,7 +165,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTabs()
     {
-        $this->assertTrue(is_array($this->_object->getTabs()));
+        $this->assertInternalType('array', $this->_object->getTabs());
     }
 
     /**
@@ -181,7 +181,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDependencies()
     {
-        $this->assertTrue(is_array($this->_object->getDependencies()));
+        $this->assertInternalType('array', $this->_object->getDependencies());
     }
 
     /**
@@ -191,7 +191,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     {
         $this->_object->addViews(array($this->_view->getId(), 0));
         $this->_object->setDependencies(array($this->_object->getId()));
-        $this->assertTrue(is_numeric($this->_object->save()));
+        $this->assertInternalType('integer', $this->_object->save());
     }
 
     /**

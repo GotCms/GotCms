@@ -92,9 +92,9 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'description' => 'ModelTest',
             'model' => 'ModelTest',
         ));
-        $this->assertTrue(is_numeric($model->save()));
+        $this->assertInternalType('integer', $model->save());
         //Test update
-        $this->assertTrue(is_numeric($model->save()));
+        $this->assertInternalType('integer', $model->save());
         $model->delete();
     }
 
@@ -145,7 +145,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSavePrevalueEditor()
     {
-        $this->assertTrue(is_array(Model::savePrevalueEditor(Model::loadDatatype($this->_object->getId()))));
+        $this->assertInternalType('array', Model::savePrevalueEditor(Model::loadDatatype($this->_object->getId())));
     }
 
     /**
