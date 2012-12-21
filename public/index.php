@@ -38,7 +38,7 @@ if (file_exists('vendor/autoload.php')) {
 }
 
 // Support for ZF2_PATH environment variable or git submodule
-if ($zf2Path = getenv('ZF2_PATH') ?: (is_dir('vendor/ZendFramework/library') ? 'vendor/ZendFramework/library' : FALSE))
+if ($zf2Path = getenv('ZF2_PATH') ?: (is_dir('vendor') ? 'vendor' : FALSE))
 {
     // Get application stack configuration
     $configuration = include 'config/application.config.php';
