@@ -17,45 +17,52 @@
  *
  * PHP Version >=5.3
  *
- * @category   Gc_Application
- * @package    Config
- * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link       http://www.got-cms.com
+ * @category Gc_Application
+ * @package  Config
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
  */
 
 use Zend\Loader\AutoloaderFactory;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\Service\ServiceManagerConfig;
 
+/**
+ * @category Gc_Application
+ * @package  Config
+ */
+
 chdir(dirname(__DIR__));
 define('GC_APPLICATION_PATH', getcwd());
 define('GC_MEDIA_PATH', GC_APPLICATION_PATH . '/public/media');
 
 // Composer autoloading
-if (file_exists('vendor/autoload.php')) {
+if(file_exists('vendor/autoload.php'))
+{
     $loader = include 'vendor/autoload.php';
 }
 
 // Support for ZF2_PATH environment variable or git submodule
-if ($zf2Path = getenv('ZF2_PATH') ?: (is_dir('vendor') ? 'vendor' : FALSE))
+if($zf_path = getenv('ZF2_PATH') ?: (is_dir('vendor') ? 'vendor' : FALSE))
 {
     // Get application stack configuration
     $configuration = include 'config/application.config.php';
-    if (isset($loader))
+    if(isset($loader))
     {
-        $loader->add('Zend', $zf2Path . '/Zend');
+        $loader->add('Zend', $zf_path . '/Zend');
     }
     else
     {
-        include $zf2Path . '/Zend/Loader/AutoloaderFactory.php';
+        include $zf_path . '/Zend/Loader/AutoloaderFactory.php';
         AutoloaderFactory::factory(array(
             'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
         ));
     }
 }
 
-if (!class_exists('Zend\Loader\AutoloaderFactory')) {
+if(!class_exists('Zend\Loader\AutoloaderFactory'))
+{
     throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
 }
 
