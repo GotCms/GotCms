@@ -108,14 +108,6 @@ else
 
 require_once('prepare-database.php');
 
-
-/**
- * Start output buffering, if enabled
- */
-if(defined('TESTS_ES_OB_ENABLED') && constant('TESTS_ES_OB_ENABLED'))
-{
-    ob_start();
-}
 /*
  * Unset global variables that are no longer needed.
  */
