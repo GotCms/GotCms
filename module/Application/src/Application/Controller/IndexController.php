@@ -37,6 +37,8 @@ use Gc\Mvc\Controller\Action,
     Gc\User\Visitor,
     Gc\View,
     Zend\Config\Reader\Xml,
+    Zend\Cache\Storage\Adapter\Filesystem,
+    Zend\Cache\Storage\Adapter\FilesystemOptions,
     Zend\Navigation\Navigation,
     Zend\View\Model\ViewModel;
 
@@ -85,6 +87,13 @@ class IndexController extends Action
     protected $_layoutPath;
 
     /**
+     * Cache
+     *
+     * @var Filesystem
+     */
+    protected $_cache;
+
+    /**
      * Generate frontend from url key
      *
      * @return \Zend\View\Model\ViewModel|array
@@ -125,57 +134,6 @@ class IndexController extends Action
             }
         }
 
-        if(empty($document))
-        {
-            $path = $this->getRouteMatch()->getParam('path');
-            if(empty($path))
-            {
-                $document = Document\Model::fromUrlKey('');
-            }
-            else
-            {
-                $explode_path = $this->explodePath($path);
-                $children = NULL;
-                $key = array();
-                $has_document = FALSE;
-                $parent_id = 0;
-
-                foreach($explode_path as $url_key)
-                {
-                    $document = NULL;
-                    $document_tmp = NULL;
-                    if($has_document === FALSE)
-                    {
-                        $document_tmp = Document\Model::fromUrlKey($url_key, $parent_id);
-                    }
-
-                    if((is_array($children) and !empty($children) and !in_array($document_tmp, $children) and $children !== NULL) or $document_tmp === NULL)
-                    {
-                        $has_document = TRUE;
-                    }
-                    else
-                    {
-                        if(!empty($document_tmp))
-                        {
-                            if(!$document_tmp->isPublished())
-                            {
-                                if(!$is_preview)
-                                {
-                                    break;
-                                }
-                            }
-
-                            $document = $document_tmp;
-                            $parent_id = $document->getId();
-                            $children = $document->getChildren();
-                        }
-                    }
-                }
-            }
-        }
-
-
-        $view_model = new ViewModel();
         $existed = in_array($this->_viewStream, stream_get_wrappers());
         if($existed)
         {
@@ -188,55 +146,144 @@ class IndexController extends Action
         $this->_viewPath = $template_path_stack->resolve($this->_viewName);
         $this->_layoutPath = $template_path_stack->resolve($this->_layoutName);
 
-        $view_model->setTemplate($this->_viewName);
-        $this->layout()->setTemplate($this->_layoutName);
+        $path = $this->getRouteMatch()->getParam('path');
 
-        if(empty($document))
+        $cache_is_enable = (CoreConfig::getValue('cache_is_active') == 1);
+        if($cache_is_enable)
         {
-            // 404
-            $this->getResponse()->setStatusCode(404);
-            $layout = Layout\Model::fromId(CoreConfig::getValue('site_404_layout'));
-            if(!empty($layout))
+            $this->_enableCache();
+            $cache_key = ('page' . (empty($path) ? '' : '-' . str_replace('/', '-', $path)));
+            if($this->_cache->hasItem($cache_key))
             {
-                file_put_contents($this->_layoutPath, $layout->getContent());
-            }
-            else
-            {
-                file_put_contents($this->_layoutPath, '<?php echo $this->content; ?>');
+                //Retrieve cache value and set data
+                $cache_value = unserialize($this->_cache->getItem($cache_key));
+                $view_model = $cache_value['view_model'];
+                $view_model->setTemplate($this->_viewName);
+                $this->layout()->setTemplate($this->_layoutName);
+                $this->layout()->setVariables($cache_value['layout_variables']);
+                $layout_content = $cache_value['layout_content'];
+                $view_content = $cache_value['view_content'];
             }
         }
-        else
+
+        //Cache is disable or cache isn't create
+        if(empty($cache_value))
         {
-            //Get all tabs of document
-            $tabs = $this->loadTabs($document->getDocumentTypeId());
-            //get Tabs and Properties to construct property in view
-            foreach($tabs as $tab)
+            if(empty($document))
             {
-                $tabs_array[] = $tab->getName();
-                $properties = $this->loadProperties($document->getDocumentTypeId(), $tab->getId(), $document->getId());
-                foreach($properties as $property)
+                if(empty($path))
                 {
-                    $value = $property->getValue();
+                    $document = Document\Model::fromUrlKey('');
+                }
+                else
+                {
+                    $explode_path = $this->explodePath($path);
+                    $children = NULL;
+                    $key = array();
+                    $has_document = FALSE;
+                    $parent_id = 0;
 
-                    if($this->_isSerialized($value))
+                    foreach($explode_path as $url_key)
                     {
-                        $value = unserialize($value);
-                    }
+                        $document = NULL;
+                        $document_tmp = NULL;
+                        if($has_document === FALSE)
+                        {
+                            $document_tmp = Document\Model::fromUrlKey($url_key, $parent_id);
+                        }
 
-                    $view_model->setVariable($property->getIdentifier(), $value);
-                    $this->layout()->setVariable($property->getIdentifier(), $value);
+                        if((is_array($children) and !empty($children) and !in_array($document_tmp, $children) and $children !== NULL) or $document_tmp === NULL)
+                        {
+                            $has_document = TRUE;
+                        }
+                        else
+                        {
+                            if(!empty($document_tmp))
+                            {
+                                if(!$document_tmp->isPublished())
+                                {
+                                    if(!$is_preview)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                $document = $document_tmp;
+                                $parent_id = $document->getId();
+                                $children = $document->getChildren();
+                            }
+                        }
+                    }
                 }
             }
 
-            $view_model->setVariable('currentDocument', $document);
-            $this->layout()->setVariable('currentDocument', $document);
+            $view_model = new ViewModel();
+            $view_model->setTemplate($this->_viewName);
+            $this->layout()->setTemplate($this->_layoutName);
 
-            //Set view from database
-            $view = View\Model::fromId($document->getViewId());
-            $layout = Layout\Model::fromId($document->getLayoutId());
+            if(empty($document))
+            {
+                // 404
+                $this->getResponse()->setStatusCode(404);
+                $layout = Layout\Model::fromId(CoreConfig::getValue('site_404_layout'));
+                if(!empty($layout))
+                {
+                    $layout_content = $layout->getContent();
+                }
+                else
+                {
+                    $layout_content = '<?php echo $this->content; ?>';
+                }
+            }
+            else
+            {
+                //Get all tabs of document
+                $tabs = $this->loadTabs($document->getDocumentTypeId());
+                //get Tabs and Properties to construct property in view
+                foreach($tabs as $tab)
+                {
+                    $tabs_array[] = $tab->getName();
+                    $properties = $this->loadProperties($document->getDocumentTypeId(), $tab->getId(), $document->getId());
+                    foreach($properties as $property)
+                    {
+                        $value = $property->getValue();
 
-            file_put_contents($this->_layoutPath, $layout->getContent());
-            file_put_contents($this->_viewPath, $view->getContent());
+                        if($this->_isSerialized($value))
+                        {
+                            $value = unserialize($value);
+                        }
+
+                        $view_model->setVariable($property->getIdentifier(), $value);
+                        $this->layout()->setVariable($property->getIdentifier(), $value);
+                    }
+                }
+
+                $view_model->setVariable('currentDocument', $document);
+                $this->layout()->setVariable('currentDocument', $document);
+
+                //Set view from database
+                $view = View\Model::fromId($document->getViewId());
+                $layout = Layout\Model::fromId($document->getLayoutId());
+
+                $layout_content = $layout->getContent();
+                $view_content = $view->getContent();
+            }
+
+            if($cache_is_enable)
+            {
+                $this->_cache->addItem($cache_key, serialize(array(
+                    'view_model' => $view_model,
+                    'layout_variables' => $this->layout()->getVariables(),
+                    'layout_content' => $layout->getContent(),
+                    'view_content' => $view->getContent(),
+                )));
+            }
+        }
+
+        file_put_contents($this->_layoutPath, $layout_content);
+        if(!empty($view_content))
+        {
+            file_put_contents($this->_viewPath, $view_content);
         }
 
         $this->events()->trigger('Front', 'postDispatch');
@@ -308,5 +355,22 @@ class IndexController extends Action
         }
 
         return FALSE;
+    }
+
+    /**
+     * Enable cache
+     *
+     * @return void
+     */
+    protected function _enableCache()
+    {
+        $cache_ttl = CoreConfig::getValue('cache_lifetime');
+        $this->_cache = new Filesystem();
+        $cache_options = new FilesystemOptions(array(
+            'cache_dir' => GC_APPLICATION_PATH . '/data/cache/',
+            'ttl' => empty($cache_ttl) ? 0 : $cache_ttl,
+        ));
+
+        $this->_cache->setOptions($cache_options);
     }
 }

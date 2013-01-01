@@ -156,6 +156,20 @@ class Config extends AbstractForm
         $debug_fieldset->add($debug_is_active);
         $this->add($debug_fieldset);
 
+        //Debug settings
+        $cache_fieldset = new Fieldset('acche');
+        $cache_is_active = new Element\Checkbox('cache_is_active');
+        $cache_is_active->setAttribute('label', 'Cache is active')
+            ->setAttribute('class', 'input-text');
+
+        $cache_lifetime = new Element\Text('cache_lifetime');
+        $cache_lifetime->setAttribute('label', 'Cache lifetime')
+            ->setAttribute('class', 'input-text');
+
+        $cache_fieldset->add($cache_is_active);
+        $cache_fieldset->add($cache_lifetime);
+        $this->add($cache_fieldset);
+
         $this->getInputFilter()->add(array(
             'name' => 'cookie_domain',
             'required' => TRUE,
@@ -196,6 +210,23 @@ class Config extends AbstractForm
                 array('name' => 'not_empty'),
             ),
         ), 'debug_is_active');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'cache_is_active',
+            'required' => FALSE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+            ),
+        ), 'cache_is_active');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'cache_lifetime',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+                array('name' => 'digits'),
+            ),
+        ), 'cache_lifetime');
 
         return $this;
     }
