@@ -411,7 +411,7 @@ class InstallController extends Action
                         //Install template
                         case 'it':
                             $template = $session['install']['configuration']['template'];
-                            $template_path = GC_APPLICATION_PATH . sprintf('/data/install/templates/%s', $template);
+                            $template_path = GC_APPLICATION_PATH . sprintf('/data/install/design/%s', $template);
                             $file_path = sprintf('%s/%s.sql', $template_path, $sql_type);
                             if(!file_exists($file_path))
                             {
@@ -431,7 +431,7 @@ class InstallController extends Action
                         //Create configuration file
                         case 'c-cf':
                             $db = $session['install']['db'];
-                            $file = file_get_contents(GC_APPLICATION_PATH . '/data/templates/config.tpl.php');
+                            $file = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/config.tpl.php');
                             $file = str_replace(array(
                                 '__DRIVER__',
                                 '__USERNAME__',

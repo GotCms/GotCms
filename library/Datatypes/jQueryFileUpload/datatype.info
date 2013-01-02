@@ -1,4 +1,4 @@
 author = Pierre Rambaud
 date = 2012
-version = 0.1
+version = ">=0.1"
 description = "Allow users to upload files in a property."

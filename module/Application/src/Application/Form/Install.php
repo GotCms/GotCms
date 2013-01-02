@@ -234,7 +234,7 @@ class Install extends AbstractForm
         $admin_password_confirm->setAttribute('label', 'Confirm admin password')
             ->setAttribute('class', 'input-text');
 
-        $path = GC_APPLICATION_PATH . '/data/install/templates/';
+        $path = GC_APPLICATION_PATH . '/data/install/design/';
         $list_dir = glob($path.'*', GLOB_ONLYDIR);
         $options = array('' => 'Select template');
         foreach($list_dir as $dir)
