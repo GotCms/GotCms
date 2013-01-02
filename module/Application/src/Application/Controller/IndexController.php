@@ -37,8 +37,7 @@ use Gc\Mvc\Controller\Action,
     Gc\User\Visitor,
     Gc\View,
     Zend\Config\Reader\Xml,
-    Zend\Cache\Storage\Adapter\Filesystem,
-    Zend\Cache\Storage\Adapter\FilesystemOptions,
+    Zend\Cache\StorageFactory as CacheStorage,
     Zend\Navigation\Navigation,
     Zend\View\Model\ViewModel;
 
@@ -156,11 +155,12 @@ class IndexController extends Action
             if($this->_cache->hasItem($cache_key))
             {
                 //Retrieve cache value and set data
-                $cache_value = unserialize($this->_cache->getItem($cache_key));
+                $cache_value = $this->_cache->getItem($cache_key);
                 $view_model = $cache_value['view_model'];
                 $view_model->setTemplate($this->_viewName);
-                $this->layout()->setTemplate($this->_layoutName);
+                $view_model->setVariables($cache_value['layout_variables']);
                 $this->layout()->setVariables($cache_value['layout_variables']);
+                $this->layout()->setTemplate($this->_layoutName);
                 $layout_content = $cache_value['layout_content'];
                 $view_content = $cache_value['view_content'];
             }
@@ -271,12 +271,12 @@ class IndexController extends Action
 
             if($cache_is_enable)
             {
-                $this->_cache->addItem($cache_key, serialize(array(
+                $this->_cache->addItem($cache_key, array(
                     'view_model' => $view_model,
                     'layout_variables' => $this->layout()->getVariables(),
                     'layout_content' => $layout->getContent(),
                     'view_content' => $view->getContent(),
-                )));
+                ));
             }
         }
 
@@ -364,13 +364,45 @@ class IndexController extends Action
      */
     protected function _enableCache()
     {
-        $cache_ttl = CoreConfig::getValue('cache_lifetime');
-        $this->_cache = new Filesystem();
-        $cache_options = new FilesystemOptions(array(
-            'cache_dir' => GC_APPLICATION_PATH . '/data/cache/',
-            'ttl' => empty($cache_ttl) ? 0 : $cache_ttl,
-        ));
+        $cache_ttl = (int)CoreConfig::getValue('cache_lifetime');
+        $cache_handler = CoreConfig::getValue('cache_handler');
 
-        $this->_cache->setOptions($cache_options);
+        if(!in_array($cache_handler, array('apc', 'memcached', 'filesystem')))
+        {
+            $cache_handler = 'filesystem';
+        }
+
+        switch($cache_handler)
+        {
+            case 'memcached':
+                $cache_options = array(
+                    'ttl' => $cache_ttl,
+                    'servers' => array(array(
+                        'localhost', 11211
+                    )),
+                );
+            break;
+
+            case 'apc':
+            default:
+                $cache_options = array(
+                    'ttl' => $cache_ttl,
+                );
+            break;
+        }
+
+        $this->_cache = CacheStorage::factory(array(
+            'adapter' => array(
+                'name' => $cache_handler,
+                'options' => $cache_options,
+            ),
+            'plugins' => array(
+                // Don't throw exceptions on cache errors
+                'exception_handler' => array(
+                    'throw_exceptions' => false
+                ),
+                'Serializer'
+            ),
+        ));
     }
 }

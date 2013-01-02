@@ -34,6 +34,7 @@ INSERT INTO icon (name, url) VALUES ('Write', '/media/icons/write.png');
 INSERT INTO core_config_data (identifier, value) VALUES ('dashboard_widgets', '');
 INSERT INTO core_config_data (identifier, value) VALUES ('debug_is_active', '0');
 INSERT INTO core_config_data (identifier, value) VALUES ('cache_is_active', '0');
+INSERT INTO core_config_data (identifier, value) VALUES ('cache_handler', 'filesystem');
 INSERT INTO core_config_data (identifier, value) VALUES ('cache_lifetime', '600');
 INSERT INTO core_config_data (identifier, value) VALUES ('session_handler', '0');
 INSERT INTO core_config_data (identifier, value) VALUES ('site_offline_document', '');

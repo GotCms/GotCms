@@ -157,16 +157,32 @@ class Config extends AbstractForm
         $this->add($debug_fieldset);
 
         //Debug settings
-        $cache_fieldset = new Fieldset('acche');
+        $cache_fieldset = new Fieldset('cache');
         $cache_is_active = new Element\Checkbox('cache_is_active');
         $cache_is_active->setAttribute('label', 'Cache is active')
             ->setAttribute('class', 'input-text');
+
+        $cache_handler = new Element\Select('cache_handler');
+        $cache_handler->setAttribute('label', 'Cache handler');
+        $handler_whitelist = array('filesystem' => 'FileSystem');
+        if(extension_loaded('apc'))
+        {
+            $handler_whitelist['apc'] = 'Apc';
+        }
+
+        if(extension_loaded('memcached'))
+        {
+            $handler_whitelist['memcached'] = 'Memcached';
+        }
+
+        $cache_handler->setValueOptions($handler_whitelist);
 
         $cache_lifetime = new Element\Text('cache_lifetime');
         $cache_lifetime->setAttribute('label', 'Cache lifetime')
             ->setAttribute('class', 'input-text');
 
         $cache_fieldset->add($cache_is_active);
+        $cache_fieldset->add($cache_handler);
         $cache_fieldset->add($cache_lifetime);
         $this->add($cache_fieldset);
 
@@ -227,6 +243,14 @@ class Config extends AbstractForm
                 array('name' => 'digits'),
             ),
         ), 'cache_lifetime');
+
+        $this->getInputFilter()->add(array(
+            'name' => 'cache_handler',
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+            ),
+        ), 'cache_handler');
 
         return $this;
     }
