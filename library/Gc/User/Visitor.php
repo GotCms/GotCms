@@ -207,10 +207,7 @@ class Visitor extends AbstractTable
      */
     public function getNbPagesViews($sort)
     {
-        if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
-        {
-            $sort = 'DAY';
-        }
+        $sort = $this->_checkSort($sort);
 
         $rows = $this->fetchAll($this->select(function(Select $select) use ($sort)
         {
@@ -286,10 +283,18 @@ class Visitor extends AbstractTable
                 }
 
                 $keys = array_keys($values);
-                for($i = min($keys);$i <= max($keys)+1; $i++)
+                for($i = min($keys);$i <= max($keys); $i++)
                 {
                     $values[$i] = empty($values[$i]) ? 0 : $values[$i];
                 }
+
+                $new_values = array();
+                foreach($values as $key => $value)
+                {
+                    $new_values[$key . 'y'] = $value;
+                }
+
+                $values = $new_values;
             break;
         }
 
@@ -304,10 +309,7 @@ class Visitor extends AbstractTable
      */
     public function getNbVisitors($sort)
     {
-        if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
-        {
-            $sort = 'DAY';
-        }
+        $sort = $this->_checkSort($sort);
 
         $rows = $this->fetchAll($this->select(function(Select $select) use ($sort)
         {
@@ -331,10 +333,7 @@ class Visitor extends AbstractTable
      */
      public function getUrlsViews($sort, $limit = 20)
      {
-        if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
-        {
-            $sort = 'DAY';
-        }
+        $sort = $this->_checkSort($sort);
 
         $select = new Select();
         $select->from(array('lu' => 'log_url'))
@@ -342,6 +341,31 @@ class Visitor extends AbstractTable
             ->join(array('lui' => 'log_url_info'), 'lui.id = lu.log_url_info_id', array('url', 'nb' => new Expression('COUNT(lui.id)')))
         ->order('nb DESC')
         ->group(array('lui.url'));
+
+        $this->_groupByDate($sort, $select);
+        $select->limit($limit);
+
+        return $this->fetchAll($select);
+     }
+
+    /**
+     * Return all referers
+     *
+     * @param string $sort
+     * @param integer $limit Optional
+     * @return array
+     */
+     public function getReferers($sort, $limit = 20)
+     {
+        $sort = $this->_checkSort($sort);
+
+        $select = new Select();
+        $select->from(array('lu' => 'log_url'))
+            ->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM MAX(lu.visit_at))', $sort))))
+            ->join(array('lui' => 'log_url_info'), 'lui.id = lu.log_url_info_id', array('url' => 'referer', 'nb' => new Expression('COUNT(lui.id)')))
+            ->where('lui.referer IS NOT NULL')
+        ->order('nb DESC')
+        ->group(array('lui.referer'));
 
         $this->_groupByDate($sort, $select);
         $select->limit($limit);
@@ -365,9 +389,11 @@ class Visitor extends AbstractTable
                 case 'HOUR':
                     $select->where("TO_CHAR(lu.visit_at, 'YYYYMMDD') = TO_CHAR(NOW(), 'YYYYMMDD')");
                 break;
+
                 case 'DAY':
                     $select->where("lu.visit_at > DATE_TRUNC('month', NOW())");
                 break;
+
                 case 'MONTH':
                     $select->where("lu.visit_at > DATE_TRUNC('year', NOW())");
                 break;
@@ -380,13 +406,31 @@ class Visitor extends AbstractTable
                 case 'HOUR':
                     $select->where("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')");
                 break;
+
                 case 'DAY':
                     $select->where("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())");
                 break;
+
                 case 'MONTH':
                     $select->where("DATE_FORMAT(lu.visit_at, '%Y') >= EXTRACT(YEAR FROM NOW())");
                 break;
             }
         }
     }
+
+    /**
+     * Check sort sql variable
+     *
+     * @param string $sort
+     * @return string
+     */
+     protected function _checkSort($sort)
+     {
+        if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
+        {
+            $sort = 'DAY';
+        }
+
+        return $sort;
+     }
 }

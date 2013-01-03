@@ -120,6 +120,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\User\Visitor::getNbPagesViews
      * @covers Gc\User\Visitor::_sortData
+     * @covers Gc\User\Visitor::_checkSort
      * @covers Gc\User\Visitor::_groupByDate
      */
     public function testGetNbPagesViews()
@@ -134,6 +135,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\User\Visitor::getNbVisitors
      * @covers Gc\User\Visitor::_sortData
+     * @covers Gc\User\Visitor::_checkSort
      * @covers Gc\User\Visitor::_groupByDate
      */
     public function testGetNbVisitors()
@@ -148,6 +150,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\User\Visitor::getUrlsViews
      * @covers Gc\User\Visitor::_sortData
+     * @covers Gc\User\Visitor::_checkSort
      * @covers Gc\User\Visitor::_groupByDate
      */
     public function testGetUrlsViews()
@@ -157,5 +160,20 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $this->_object->getUrlsViews('DAY'));
         $this->assertInternalType('array', $this->_object->getUrlsViews('MONTH'));
         $this->assertInternalType('array', $this->_object->getUrlsViews('YEAR'));
+    }
+
+    /**
+     * @covers Gc\User\Visitor::getReferers
+     * @covers Gc\User\Visitor::_sortData
+     * @covers Gc\User\Visitor::_checkSort
+     * @covers Gc\User\Visitor::_groupByDate
+     */
+    public function testGetReferers()
+    {
+        $this->assertInternalType('array', $this->_object->getReferers('TEST'));
+        $this->assertInternalType('array', $this->_object->getReferers('HOUR'));
+        $this->assertInternalType('array', $this->_object->getReferers('DAY'));
+        $this->assertInternalType('array', $this->_object->getReferers('MONTH'));
+        $this->assertInternalType('array', $this->_object->getReferers('YEAR'));
     }
 }

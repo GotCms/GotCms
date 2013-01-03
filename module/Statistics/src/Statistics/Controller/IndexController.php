@@ -52,20 +52,27 @@ class IndexController extends Action
         $visitor_model = new Visitor();
 
         $settings = array(
-          'back_colour' => '#FFF',  'stroke_colour' => '#000',
-          'back_stroke_width' => 0, 'back_stroke_colour' => '#000',
-          'axis_colour' => '#333',  'axis_overlap' => 1,
-          'axis_font' => 'Verdana', 'axis_font_size' => 10,
-          'grid_colour' => '#666',  'label_colour' => '#000',
-          'pad_right' => 10,        'pad_left' => 10,
-          'project_angle' => 45,    'minimum_grid_spacing' => 40
+          'back_colour' => '#FFF',
+          'stroke_colour' => '#000',
+          'back_stroke_width' => 0,
+          'back_stroke_colour' => '#000',
+          'axis_colour' => '#333',
+          'axis_overlap' => 1,
+          'axis_font' => 'Verdana',
+          'axis_font_size' => 10,
+          'grid_colour' => '#666',
+          'label_colour' => '#000',
+          'pad_right' => 10,
+          'pad_left' => 10,
+          'project_angle' => 45,
+          'minimum_grid_spacing' => 40,
         );
 
         $graph = new SVGGraph(600, 400, $settings);
         $graph->colours = array(array('#656565','#959595'));
 
         $data = array();
-        foreach(array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH') as $type => $sql_value)
+        foreach(array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR') as $type => $sql_value)
         {
             switch($type)
             {
@@ -78,6 +85,9 @@ class IndexController extends Action
                 case 'months':
                     $label = 'This year';
                 break;
+                case 'years':
+                    $label = 'All the time';
+                break;
             }
 
             $data[$type] = array(
@@ -85,12 +95,14 @@ class IndexController extends Action
                 'labels' => array(
                     'visitors' => 'Visitors',
                     'pagesviews' => 'Pages views',
-                    'urlsviews' => 'Most urls views'
+                    'urlsviews' => 'Most urls views',
+                    'referers' => 'Referers',
                 ),
                 'values' => array(
                     'visitors' => $visitor_model->getNbVisitors($sql_value),
                     'pagesviews' => $visitor_model->getNbPagesViews($sql_value),
                     'urlsviews' => $visitor_model->getUrlsViews($sql_value),
+                    'referers' => $visitor_model->getReferers($sql_value),
                 ),
             );
         }

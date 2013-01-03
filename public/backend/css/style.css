@@ -222,6 +222,12 @@ footer a:hover {text-decoration:underline;}
 .ui-state-default a:visited {color:#333333;}
 .ui-state-active a:visited {color:#FFFFFF;}
 
+.stats-list ul{list-style: decimal;}
+.stats-list li{}
+.stats-list a:visited,
+.stats-list a:link,
+.stats-list a:active {color:#FFFFFF;text-decoration:none;}
+
 @media screen and (max-width: 1295px) {
     header .part{padding:0 10px 0 0px;}
     #connexion {width:200px;}
