@@ -1,0 +1,49 @@
+<?php if(!empty($this->updater)): ?>
+    <?php echo nl2br($this->escapeHtml($this->content)); ?>
+<?php else: ?>
+    <?php if($this->isLatest): ?>
+        <p><?php echo $this->escapeHtml($this->translate('You already have the latest version')); ?></p>
+    <?php else: ?>
+        <p><?php echo $this->escapeHtml(sprintf($this->translate('Version %s has been released, please upgrade for security issues.'), $this->latestVersion)); ?></p>
+
+        <?php if(!empty($this->datatypesErrors)): ?>
+            <div class="datatypes-errors">
+                <p><?php echo $this->escapeHtml($this->translate('These datatypes may have problems:')); ?></p>
+                <ul>
+                    <?php foreach($this->datatypesErrors as $error): ?>
+                        <li><?php echo $this->escapeHtml($error); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <?php if(!empty($this->modulesErrors)): ?>
+            <div class="modules-errors">
+                <p><?php echo $this->escapeHtml($this->translate('These modules may have problems:')); ?></p>
+                <ul>
+                    <?php foreach($this->modulesErrors as $error): ?>
+                        <li><?php echo $this->escapeHtml($error); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <form action="<?php echo $this->url(); ?>" method="post" id="update-form">
+            <ul>
+                <li>
+                    <label>
+                        <input type="radio" name="adapter" value="git">Git
+                    </label>
+                </li>
+            </ul>
+
+            <div>
+                <input id="input-save" class="input-submit" type="submit" name="submit" value="<?php echo $this->escapeHtml($this->translate('Update')); ?>">
+            </div>
+        </form>
+        <script type="text/javascript">
+            Gc.initUpdate('<?php echo $this->escapeJs($this->translate('Do you really want to update GotCms?')); ?>');
+        </script>
+    <?php endif; ?>
+<?php endif; ?>
+

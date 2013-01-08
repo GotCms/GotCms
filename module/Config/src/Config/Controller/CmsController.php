@@ -29,6 +29,9 @@ namespace Config\Controller;
 
 use Gc\Mvc\Controller\Action,
     Gc\Core\Config,
+    Gc\Core\Updater,
+    Gc\Media\Info,
+    Gc\Version,
     Config\Form\Config as configForm;
 
 /**
@@ -126,5 +129,97 @@ class CmsController extends Action
         }
 
         return array('form' => $this->_form);
+    }
+
+    /**
+     * Update cms
+     */
+    public function updateAction()
+    {
+        $version_is_latest = Version::isLatest();
+        $latest_version = Version::getLatest();
+
+        if($this->getRequest()->isPost())
+        {
+            $updater = new Updater();
+            if(!$updater->load($this->getRequest()->getPost()->get('adapter')) or $version_is_latest)
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('Can\'t set adapter');
+                return $this->redirect()->toRoute('cmsUpdate');
+            }
+
+            //Fetch content
+            $updater->update();
+
+            //Update database
+            if(!$updater->updateDatabase())
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage($updater->getError());
+                return $this->redirect()->toRoute('cmsUpdate');
+            }
+
+            //Upgrade cms
+            $updater->upgrade();
+
+            $this->flashMessenger()->setNameSpace('success')->addMessage(sprintf('Cms update to %s', $latest_version));
+            return $this->redirect()->toRoute('cmsUpdate');
+        }
+
+        //Check modules and datatypes
+        $datatypes_errors = array();
+        $this->_checkVersion(glob(GC_APPLICATION_PATH . '/library/Datatypes/*'), 'datatype', $datatypes_errors);
+        $modules_errors = array();
+        $this->_checkVersion(glob(GC_APPLICATION_PATH . '/library/Modules/*'), 'module', $modules_errors);
+
+        return array(
+            'isLatest' => $version_is_latest,
+            'latestVersion' => $latest_version,
+            'datatypesErrors' => $datatypes_errors,
+            'modulesErrors' => $modules_errors,
+        );
+    }
+
+    /**
+     * Check version in info file
+     * from $type directory
+     *
+     * @param array $directories list of directories
+     * @param string $type Type of directory
+     * @param array $errors Insert in this all errors
+     */
+    protected function _checkVersion(array $directories, $type, array &$errors)
+    {
+        $latest_version = Version::getLatest();
+        foreach($directories as $directory)
+        {
+            if(is_dir($directory))
+            {
+                $filename = $directory . '/ '. $type .'.info';
+                $info = new Info();
+
+                if($info->fromFile($filename) === TRUE)
+                {
+                    $infos = $info->getInfos();
+                    if(!empty($infos['version']))
+                    {
+                        preg_match('~(?<operator>[>=]*)(?<version>.+)~', $infos['version'], $matches);
+                        if(empty($matches['operator']))
+                        {
+                            if(version_compare($latest_version, $matches['version']) === 1)
+                            {
+                                $errors[] = basename($directory);
+                            }
+                        }
+                        else
+                        {
+                            if(!version_compare($latest_version, $matches['version'], $matches['operator']))
+                            {
+                                $errors[] = $directory;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

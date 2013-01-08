@@ -884,6 +884,17 @@ var Gc = (function($)
                 $('#modules').find('div').hide();
                 $('#' + $(this).val()).show();
             });
+        },
+
+        initUpdate: function($confirm_text)
+        {
+            $('#update-form').on('submit', function()
+            {
+                if(!confirm($confirm_text))
+                {
+                    return false;
+                }
+            });
         }
     };
 })(jQuery);
