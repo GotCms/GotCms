@@ -2,4 +2,3 @@ author = Pierre Rambaud
 date = 2012
 version = ">=0.1"
 description = "A simple textarea, parameters can be : rows, cols, wrap"
-
