@@ -40,7 +40,7 @@ class WgetTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Wget
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class WgetTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Wget;
+        $this->_object = new Wget;
     }
 
     /**
@@ -57,29 +57,23 @@ class WgetTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Core\Updater\Adapter\Wget::update
-     * @todo   Implement testUpdate().
      */
     public function testUpdate()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue($this->_object->update());
+
     }
 
     /**
      * @covers Gc\Core\Updater\Adapter\Wget::upgrade
-     * @todo   Implement testUpgrade().
      */
     public function testUpgrade()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue($this->_object->upgrade());
     }
 }

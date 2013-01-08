@@ -40,7 +40,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractAdapter
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new AbstractAdapter;
+        $this->_object = $this->getMockForAbstractClass('Gc\Core\Updater\Adapter\AbstractAdapter');
     }
 
     /**
@@ -57,6 +57,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
@@ -65,9 +66,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLatest()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals(\Gc\Version::getLatest(), $this->_object->getLatest());
     }
 }

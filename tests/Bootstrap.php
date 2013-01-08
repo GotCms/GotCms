@@ -113,29 +113,4 @@ require_once('prepare-database.php');
  */
 unset($gc_root, $gc_library, $gc_tests, $path);
 
-
-namespace Gc\Media\File;
-
-namespace Zend\File\Transfer\Adapter;
-
-function is_uploaded_file($filename)
-{
-    return true;
-}
-
-function move_uploaded_file($filename, $destination)
-{
-    return copy($filename, $destination);
-}
-
-namespace Zend\Validator\File;
-
-function is_uploaded_file($filename)
-{
-    return true;
-}
-
-function move_uploaded_file($filename, $destination)
-{
-    return copy($filename, $destination);
-}
+require_once('override-php-functions.php');

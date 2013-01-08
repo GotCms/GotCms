@@ -40,7 +40,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Updater
      */
-    protected $object;
+    protected $_object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Updater;
+        $this->_object = new Updater;
     }
 
     /**
@@ -57,65 +57,120 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->_object);
     }
 
     /**
      * @covers Gc\Core\Updater::init
-     * @todo   Implement testInit().
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->_object->init());
     }
 
     /**
      * @covers Gc\Core\Updater::load
-     * @todo   Implement testLoad().
      */
     public function testLoad()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue($this->_object->load('git'));
+        $this->assertFalse($this->_object->load('ssh'));
     }
 
     /**
      * @covers Gc\Core\Updater::update
-     * @todo   Implement testUpdate().
      */
     public function testUpdate()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->_object->load('git');
+        $this->assertTrue($this->_object->update());
+    }
+
+    /**
+     * @covers Gc\Core\Updater::update
+     */
+    public function testUpdateWithoutAdapter()
+    {
+        $this->assertFalse($this->_object->update());
+    }
+
+
+    /**
+     * @covers Gc\Core\Updater::upgrade
+     */
+    public function testUpgrade()
+    {
+        $this->_object->load('git');
+        $this->assertTrue($this->_object->upgrade());
     }
 
     /**
      * @covers Gc\Core\Updater::upgrade
-     * @todo   Implement testUpgrade().
      */
-    public function testUpgrade()
+    public function testUpgradeWithoutAdapter()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertFalse($this->_object->upgrade());
     }
 
     /**
      * @covers Gc\Core\Updater::updateDatabase
-     * @todo   Implement testUpdateDatabase().
      */
     public function testUpdateDatabase()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $existed = in_array("zend.view", stream_get_wrappers());
+        if($existed)
+        {
+            stream_wrapper_unregister("zend.view");
+        }
+
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+
+        file_put_contents('zend.view://test-updater', 'SELECT * FROM core_config_data');
+        $this->_object->load('git');
+        $this->assertTrue($this->_object->updateDatabase());
+    }
+
+    /**
+     * @covers Gc\Core\Updater::updateDatabase
+     */
+    public function testUpdateDatabaseWithEmptyFiles()
+    {
+        $existed = in_array("zend.view", stream_get_wrappers());
+        if($existed)
+        {
+            stream_wrapper_unregister("zend.view");
+        }
+
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        file_put_contents('zend.view://test-updater', ' ');
+
+        $this->_object->load('git');
+        $this->assertTrue($this->_object->updateDatabase());
+    }
+
+    /**
+     * @covers Gc\Core\Updater::updateDatabase
+     */
+    public function testUpdateDatabaseWithSqlError()
+    {
+        $existed = in_array("zend.view", stream_get_wrappers());
+        if($existed)
+        {
+            stream_wrapper_unregister("zend.view");
+        }
+
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        file_put_contents('zend.view://test-updater', 'SELECT FROM core_config_data');
+
+        $this->_object->load('git');
+        $this->assertFalse($this->_object->updateDatabase());
+    }
+
+    /**
+     * @covers Gc\Core\Updater::updateDatabase
+     */
+    public function testUpdateDatabaseWithoutAdapter()
+    {
+        $this->assertFalse($this->_object->updateDatabase());
     }
 }

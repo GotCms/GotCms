@@ -69,6 +69,13 @@ class Stream
     protected $_stat = array();
 
     /**
+     * Stream stats.
+     *
+     * @var array
+     */
+    protected $_mode;
+
+    /**
      * Opens the script file and converts markup.
      *
      * @param string path
@@ -79,8 +86,10 @@ class Stream
      */
     public function stream_open($path, $mode, $options, &$opened_path)
     {
+        $this->_mode = $mode;
         $path        = str_replace('zend.view://', '', $path);
         $this->_path = $path;
+        $this->_pos = 0;
         if(empty(self::$_data[$path]))
         {
             self::$_data[$path] = NULL;
@@ -111,10 +120,16 @@ class Stream
      */
     public function stream_write($data)
     {
+        if($this->_mode == 'wb')
+        {
+            self::$_data[$this->_path] = NULL;
+            $this->_pos = 0;
+        }
+
         $left = substr(self::$_data[$this->_path], 0, $this->_pos);
         $right = substr(self::$_data[$this->_path], $this->_pos + strlen($data));
         self::$_data[$this->_path] = $left . $data . $right;
-        $this->_pos += strlen($data);
+        $this->_pos += strlen($left . $data);
 
         return strlen($data);
     }
@@ -164,11 +179,11 @@ class Stream
                 if($offset < strlen(self::$_data[$this->_path]) and $offset >= 0)
                 {
                     $this->_pos = $offset;
-                    return true;
+                    return TRUE;
                 }
                 else
                 {
-                    return false;
+                    return FALSE;
                 }
             break;
 
@@ -176,11 +191,11 @@ class Stream
                 if($offset >= 0)
                 {
                     $this->_pos += $offset;
-                    return true;
+                    return TRUE;
                 }
                 else
                 {
-                    return false;
+                    return FALSE;
                 }
             break;
 
@@ -188,22 +203,22 @@ class Stream
                 if(strlen(self::$_data[$this->_path]) + $offset >= 0)
                 {
                     $this->_pos = strlen(self::$_data[$this->_path]) + $offset;
-                    return true;
+                    return TRUE;
                 }
                 else
                 {
-                    return false;
+                    return FALSE;
                 }
             break;
 
             default:
-                return false;
+                return FALSE;
         }
     }
 
     /**
      * Retrieve information about a file
-     * Always return false because data come from the database
+     * Always return FALSE because data come from the database
      *
      * @param string $path
      * @param int $flags

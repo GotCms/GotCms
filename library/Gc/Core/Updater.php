@@ -128,6 +128,11 @@ class Updater extends Object
      */
     public function updateDatabase()
     {
+        if(empty($this->_adapter))
+        {
+            return FALSE;
+        }
+
         $configuration = Registry::get('Configuration');
         $files = glob(sprintf(GC_APPLICATION_PATH . '/data/update/%s/%s/*.sql', $this->getLatest(), $configuration['db']['driver']));
         if(empty($files))
@@ -138,7 +143,7 @@ class Updater extends Object
         $sql = '';
         foreach($files as $filename)
         {
-            $sql .= file_get_contents($filename).PHP_EOL;
+            $sql .= file_get_contents($filename) . PHP_EOL;
         }
 
         $resource = Registry::get('Db')->getDriver()->getConnection()->getResource();
@@ -148,10 +153,10 @@ class Updater extends Object
             $resource->exec($sql);
             $resource->commit();
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            $this->setError($e->getMessage());
             $resource->rollback();
+            $this->setError($e->getMessage());
 
             return FALSE;
         }

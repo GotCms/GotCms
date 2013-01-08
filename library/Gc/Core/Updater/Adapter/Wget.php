@@ -43,8 +43,8 @@ class Wget extends AbstractAdapter
      */
     public function update()
     {
-        $version = \Version::getLatest();
-        file_get_contents(sprintf('https://api.github.com/repos/PierreRambaud/GotCms/tarball/v', $version));
+        //file_put_contents(sprintf('https://api.github.com/repos/PierreRambaud/GotCms/tarball/v', $version));
+        return TRUE;
     }
 
     /**
@@ -54,6 +54,6 @@ class Wget extends AbstractAdapter
      */
     public function upgrade()
     {
-
+        return TRUE;
     }
 }
