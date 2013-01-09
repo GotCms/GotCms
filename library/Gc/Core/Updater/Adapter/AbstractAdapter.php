@@ -51,6 +51,8 @@ abstract class AbstractAdapter extends Object
 
     /**
      * Upgrade
+     *
+     * @param string $version
      */
     abstract public function rollback($version);
 

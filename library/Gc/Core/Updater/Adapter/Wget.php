@@ -60,6 +60,7 @@ class Wget extends AbstractAdapter
     /**
      * Rollback
      *
+     * @param string $version
      * @return string
      */
     public function rollback($version)
