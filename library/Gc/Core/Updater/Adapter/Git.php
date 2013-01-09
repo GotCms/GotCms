@@ -43,16 +43,26 @@ class Git extends AbstractAdapter
      */
     public function update()
     {
-        return system('cd ' . GC_APPLICATION_PATH .' ; git fetch');
+        return system('cd ' . GC_APPLICATION_PATH . ' ; git fetch');
     }
 
     /**
-     * UPgrade
+     * Upgrade
      *
      * @return string
      */
     public function upgrade()
     {
-        return system('cd ' . GC_APPLICATION_PATH .' ; git checkout v'.$this->getLatest());
+        return system('cd ' . GC_APPLICATION_PATH . ' ; git checkout v' . $this->getLatest());
+    }
+
+    /**
+     * Upgrade
+     *
+     * @return string
+     */
+    public function rollback($version)
+    {
+        return system('cd ' . GC_APPLICATION_PATH . ' ; git checkout v' . $version);
     }
 }

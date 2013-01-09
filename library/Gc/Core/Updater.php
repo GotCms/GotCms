@@ -28,7 +28,8 @@
 namespace Gc\Core;
 
 use Gc\Core\Updater\Adapter,
-    Gc\Registry;
+    Gc\Registry,
+    Gc\Version;
 
 /**
  * Update cms
@@ -51,8 +52,7 @@ class Updater extends Object
      */
     public function init()
     {
-         $configuration = Registry::get('Configuration');
-        $this->setUpdateDirectory(GC_APPLICATION_PATH . '/data/update/' . $configuration['db']['driver']);
+        $this->setUpdateDirectory(GC_APPLICATION_PATH . '/data/update/' . Version::getLatest());
     }
 
     /**
@@ -97,6 +97,8 @@ class Updater extends Object
 
     /**
      * Update
+     *
+     * @return void
      */
     public function update()
     {
@@ -110,6 +112,8 @@ class Updater extends Object
 
     /**
      * Upgrade
+     *
+     * @return void
      */
     public function upgrade()
     {
@@ -119,6 +123,21 @@ class Updater extends Object
         }
 
         return $this->_adapter->upgrade();
+    }
+
+    /**
+     * Rollback if problem with database
+     *
+     * @return void
+     */
+    public function rollback()
+    {
+        if(empty($this->_adapter))
+        {
+            return FALSE;
+        }
+
+        return $this->_adapter->rollback();
     }
 
     /**
@@ -134,7 +153,7 @@ class Updater extends Object
         }
 
         $configuration = Registry::get('Configuration');
-        $files = glob(sprintf(GC_APPLICATION_PATH . '/data/update/%s/%s/*.sql', $this->getLatest(), $configuration['db']['driver']));
+        $files = glob(sprintf($this->getUpdateDirectory() . '/%s/*.sql', $configuration['db']['driver']));
         if(empty($files))
         {
             return TRUE;

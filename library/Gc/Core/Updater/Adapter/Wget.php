@@ -44,7 +44,7 @@ class Wget extends AbstractAdapter
     public function update()
     {
         //file_put_contents(sprintf('https://api.github.com/repos/PierreRambaud/GotCms/tarball/v', $version));
-        return TRUE;
+        return '';
     }
 
     /**
@@ -54,6 +54,16 @@ class Wget extends AbstractAdapter
      */
     public function upgrade()
     {
-        return TRUE;
+        return '';
+    }
+
+    /**
+     * Rollback
+     *
+     * @return string
+     */
+    public function rollback($version)
+    {
+        return '';
     }
 }

@@ -83,7 +83,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     public function testUpdate()
     {
         $this->_object->load('git');
-        $this->assertTrue($this->_object->update());
+        $this->assertInternalType('string', $this->_object->update());
     }
 
     /**
@@ -101,7 +101,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     public function testUpgrade()
     {
         $this->_object->load('git');
-        $this->assertTrue($this->_object->upgrade());
+        $this->assertInternalType('string', $this->_object->upgrade());
     }
 
     /**

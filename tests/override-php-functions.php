@@ -60,7 +60,7 @@ namespace Gc\Core\Updater\Adapter;
 
 function system($command, &$return_var = NULL)
 {
-    return TRUE;
+    return '';
 }
 
 

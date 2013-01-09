@@ -50,6 +50,11 @@ abstract class AbstractAdapter extends Object
     abstract public function upgrade();
 
     /**
+     * Upgrade
+     */
+    abstract public function rollback($version);
+
+    /**
      * GetLatest version
      *
      * @return string
