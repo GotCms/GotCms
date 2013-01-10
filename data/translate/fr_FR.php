@@ -175,4 +175,9 @@ return array (
   'Visitors' => 'Visiteurs',
   'Most urls views' => 'Les liens les plus visités',
   'Referers' => 'Référants',
+  'These modules may have problems:' => 'Ces modules peuvent avoir des problèmes :',
+  'These datatypes may have problems:' => 'Ces types de données peuvent avoir des problèmes :',
+  'Version %s has been released, please upgrade for security issues.' => 'Version %s a été publiée, merci de mettre à jour pour des raisons de sécurité.',
+  'Do you really want to update GotCms?' => 'Voulez-vous vraiment mettre à jour GotCms ?',
+  'You can follow this project on github:' => 'Vous pouvez suivre ce projet sur github :'
 );

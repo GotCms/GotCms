@@ -4,7 +4,8 @@
     <?php if($this->isLatest): ?>
         <p><?php echo $this->escapeHtml($this->translate('You already have the latest version')); ?></p>
     <?php else: ?>
-        <p><?php echo $this->escapeHtml(sprintf($this->translate('Version %s has been released, please upgrade for security issues.'), $this->latestVersion)); ?></p>
+        <p><?php echo $this->escapeHtml(sprintf($this->translate('Version %s has been released, please upgrade for security issues.'), $this->latestVersion)); ?>
+        <br><?php echo $this->translate('You can follow this project on github:'); ?> <a href="https://github.com/PierreRambaud/GotCms" target="_blank">https://github.com/PierreRambaud/GotCms</a></p>
 
         <?php if(!empty($this->datatypesErrors)): ?>
             <div class="datatypes-errors">
