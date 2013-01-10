@@ -42,24 +42,40 @@
                             <td class="item">
                                 <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
                             </td>
-                            <td>
-                                <span>
-                                    <?php echo $this->escapeHtml($this->translate($data['value'] === TRUE ? 'Yes' : 'No')); ?>
-                                </span>
-                            </td>
+                            <?php if($data['value'] === TRUE): ?>
+                                <td class="success">
+                                    <span>
+                                        <?php echo $this->escapeHtml($this->translate('Yes')); ?>
+                                    </span>
+                                </td>
+                            <?php else: ?>
+                                <td class="error">
+                                    <span>
+                                        <?php echo $this->escapeHtml($this->translate('No')); ?>
+                                    </span>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
 
                     <?php foreach($this->serverData as $data): ?>
                         <tr>
                             <td class="item">
-                                <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
+                                <?php echo $this->escapeHtml(sprintf($this->translate('%s is writable'), $data['label'])); ?>
                             </td>
-                            <td>
-                                <span>
-                                    <?php echo $this->escapeHtml($this->translate($data['value'] === TRUE ? 'Yes' : 'No')); ?>
-                                </span>
-                            </td>
+                            <?php if($data['value'] === TRUE): ?>
+                                <td class="success">
+                                    <span>
+                                        <?php echo $this->escapeHtml($this->translate('Yes')); ?>
+                                    </span>
+                                </td>
+                            <?php else: ?>
+                                <td class="error">
+                                    <span>
+                                        <?php echo $this->escapeHtml($this->translate('No')); ?>
+                                    </span>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -78,15 +94,15 @@
             <table class="content">
                 <thead>
                 <tr>
-                    <td class="toggle">
+                    <th class="toggle">
                         <?php echo $this->escapeHtml($this->translate('Directive')); ?>
-                    </td>
-                    <td class="toggle">
+                    </th>
+                    <th class="toggle">
                         <?php echo $this->escapeHtml($this->translate('Recommended')); ?>
-                    </td>
-                    <td class="toggle">
+                    </th>
+                    <th class="toggle">
                         <?php echo $this->escapeHtml($this->translate('Actual')); ?>
-                    </td>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>

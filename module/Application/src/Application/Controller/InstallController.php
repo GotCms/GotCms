@@ -143,9 +143,10 @@ class InstallController extends Action
         }
 
         $server_data = array();
-        $server_data[] = array('label' => '/public/frontend is writable', 'value' => is_writable(GC_APPLICATION_PATH . '/public/frontend'));
-        $server_data[] = array('label' => '/config/autoload is writable', 'value' => is_writable(GC_APPLICATION_PATH . '/config/autoload'));
-        $server_data[] = array('label' => '/public/media is writable', 'value' => is_writable(GC_MEDIA_PATH));
+        $server_data[] = array('label' => '/public/frontend', 'value' => is_writable(GC_APPLICATION_PATH . '/public/frontend'));
+        $server_data[] = array('label' => '/config/autoload', 'value' => is_writable(GC_APPLICATION_PATH . '/config/autoload'));
+        $server_data[] = array('label' => '/data/cache', 'value' => is_writable(GC_APPLICATION_PATH . '/data/cache'));
+        $server_data[] = array('label' => '/public/media', 'value' => is_writable(GC_MEDIA_PATH));
 
         $php_data = array();
         $php_data[] = array('label' => 'Php version >= 5.3.3', 'value' => PHP_VERSION_ID > 50303);
