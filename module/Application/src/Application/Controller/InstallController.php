@@ -167,7 +167,29 @@ class InstallController extends Action
 
         if($this->getRequest()->isPost())
         {
-            return $this->redirect()->toRoute('installDatabase');
+
+            $continue = TRUE;
+            foreach(array($server_data, $php_data) as $configs)
+            {
+                foreach($configs as $config)
+                {
+                    if($config['value'] !== TRUE)
+                    {
+                        $continue = FALSE;
+                        break 2;
+                    }
+                }
+            }
+
+            if($continue)
+            {
+                return $this->redirect()->toRoute('installDatabase');
+            }
+            else
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage('All parameters must be set to "Yes"');
+                return $this->redirect()->toRoute('installCheckConfig');
+            }
         }
 
         $this->layout()->setVariables(array('currentRoute' => $this->getRouteMatch()->getMatchedRouteName()));

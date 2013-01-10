@@ -64,6 +64,7 @@
                 <?php echo $this->partial('application/install/steps.phtml', array('currentRoute' => $this->currentRoute)); ?>
             </nav>
             <section>
+                <?php echo $this->partial('messages.phtml', array('messages' => $this->flashMessages)); ?>
                 <?php if(!empty($this->currentRoute)): ?>
                     <form action="<?php echo $this->url($this->currentRoute); ?>" method="post">
                 <?php endif; ?>

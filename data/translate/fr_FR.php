@@ -148,4 +148,5 @@ return array (
   'Recommended settings:' => 'Paramètres recommandés',
   'These settings are recommended for PHP in order to ensure full compatibility.' => "Ces paramètres sont recommandés pour PHP afin d'assurer une compatibilité totale.",
   'Actual' => 'Actuel',
+  'All parameters must be set to "Yes"', 'Tous les paramètres doivent être définis à "Oui"'
 );

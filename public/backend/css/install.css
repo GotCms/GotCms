@@ -26,7 +26,7 @@ header h1, #main-installer .content, footer {margin:0 auto;}
 .button:active {position: relative;top: 1px;background: -moz-linear-gradient(center top , #000000, #444444) repeat scroll 0 0 transparent;color: #666666;}
 
 
-.install-body table {overflow:hidden;border:1px solid #d3d3d3;background:#fefefe;width:70%;margin:5% auto 0;-moz-border-radius:5px; /* FF1+ */-webkit-border-radius:5px; /* Saf3-4 */border-radius:5px;-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);}
+.install-body table {overflow:hidden;border:1px solid #d3d3d3;background:#fefefe;width:100%;margin:5% auto 0;-moz-border-radius:5px; /* FF1+ */-webkit-border-radius:5px; /* Saf3-4 */border-radius:5px;-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);}
 .install-body th, td {padding:8px 18px; text-align:center; }
 .install-body th {padding-top:12px; text-shadow: 1px 1px 1px #fff; background:#e8eaeb;}
 .install-body td {border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;}
@@ -39,5 +39,7 @@ header h1, #main-installer .content, footer {margin:0 auto;}
 .install-body tr:first-child th.last {-moz-border-radius-topright:5px;-webkit-border-top-right-radius:5px; /* Saf3-4 */}
 .install-body tr:last-child td.first {-moz-border-radius-bottomleft:5px;-webkit-border-bottom-left-radius:5px; /* Saf3-4 */}
 .install-body tr:last-child td.last {-moz-border-radius-bottomright:5px;-webkit-border-bottom-right-radius:5px; /* Saf3-4 */}
-.install-body tr td.error{background-image:url(../images/notification/error.png);background-repeat:no-repeat;background-position:30% 50%}
-.install-body tr td.success{background-image:url(../images/notification/success.png);background-repeat:no-repeat;background-position:30% 50%}
+.install-body tr td.error,
+.install-body tr td.success {background-repeat:no-repeat;background-position:5px 50%}
+.install-body tr td.error {background-image:url(../images/notification/error.png);}
+.install-body tr td.success {background-image:url(../images/notification/success.png);}
