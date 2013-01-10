@@ -30,7 +30,7 @@
 <div class="tabs">
     <ul>
         <?php foreach($this->groups as $type => $data): ?>
-            <li><a href="#<?php echo $this->escapeHtml($type); ?>"><?php echo $this->escapeHtml($data['label']); ?></a></li>
+            <li><a href="#<?php echo $this->escapeHtml($type); ?>"><?php echo $this->escapeHtml($this->translate($data['label'])); ?></a></li>
         <?php endforeach; ?>
     </ul>
 
