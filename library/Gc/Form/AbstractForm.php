@@ -154,7 +154,7 @@ abstract class AbstractForm extends Form
                 }
 
                 $elements->setAttribute('id', $id . mt_rand());
-                $elements->setAttribute('name', $prefix.'['.$elements->getAttribute('name').']');
+                $elements->setAttribute('name', $prefix . '[' . $elements->getAttribute('name') . ']');
             }
 
             $form->add($elements);
@@ -169,13 +169,13 @@ abstract class AbstractForm extends Form
                 $elements = preg_replace('~(?:(?!(?<=value=)))("|\')#(.+)("|\')~iU', '${1}#${2}' . $rand_id . '${3}', $elements);
             }
 
-            $hidden_element = new Element('hidden'.uniqid());
+            $hidden_element = new Element('hidden' . uniqid());
             $hidden_element->setAttribute('content', $elements);
             $form->add($hidden_element);
         }
         else
         {
-            throw new Exception("Invalid element ".__CLASS__."::".__METHOD__.")");
+            throw new Exception('Invalid element ' . __CLASS__ . '::' . __METHOD__ . ')');
         }
     }
 

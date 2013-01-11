@@ -68,7 +68,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $parameters = $this->getConfig();
 
-        $content = '<input type="text" name="addValue" id="addValue" value=""> <button class="button-add">Add Element</button>'.PHP_EOL;
+        $content = '<input type="text" name="addValue" id="addValue" value=""> <button class="button-add">Add Element</button>' . PHP_EOL;
 
         $content .= '<ul id="checkboxlist-values">';
         $content .= '<li>List of values</li>';
@@ -76,7 +76,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         {
             foreach($parameters as $param => $value)
             {
-                $content .= '<li><input type="text" name="values[]" value="'.$value.'"> <a class="button-delete">Delete Element</a></li>'.PHP_EOL;
+                $content .= '<li><input type="text" name="values[]" value="' . $value . '"> <a class="button-delete">Delete Element</a></li>' . PHP_EOL;
             }
         }
 

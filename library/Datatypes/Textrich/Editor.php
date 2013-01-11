@@ -71,7 +71,7 @@ class Editor extends AbstractEditor
 
         $ckeditor->setParameters($parameters);
 
-        $id = 'textrich'.$this->getProperty()->getId();
+        $id = 'textrich' . $this->getProperty()->getId();
         $textrich = new Element\Textarea($this->getName());
         $textrich->setAttribute('label', $this->getProperty()->getName());
         $textrich->setAttribute('id', $id);
@@ -83,10 +83,10 @@ class Editor extends AbstractEditor
             {
                 var config = {
                     skin: "v2",
-                    toolbar: '.$ckeditor->getToolbarAsJs().'
+                    toolbar: ' . $ckeditor->getToolbarAsJs() . '
                 };
 
-                $("#'.$id.'").ckeditor(config)
+                $("#' . $id . '").ckeditor(config)
                 .ckeditor(function()
                 {
                     this.addCommand("saveDocument",

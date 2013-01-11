@@ -208,7 +208,7 @@ class CmsController extends Action
         {
             if(is_dir($directory))
             {
-                $filename = $directory . '/ '. $type .'.info';
+                $filename = $directory . '/ ' . $type . '.info';
                 $info = new Info();
 
                 if($info->fromFile($filename) === TRUE)

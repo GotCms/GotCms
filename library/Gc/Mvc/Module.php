@@ -191,7 +191,7 @@ abstract class Module
                 $config = array();
                 foreach($config_paths as $path)
                 {
-                    foreach(glob(realpath(__DIR__.'/../../../').'/'.$path, GLOB_BRACE) as $filename)
+                    foreach(glob(realpath(__DIR__ . '/../../../') . '/' . $path, GLOB_BRACE) as $filename)
                     {
                         $config += include($filename);
                     }

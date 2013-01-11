@@ -89,8 +89,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $config = $this->getConfig();
 
-        $path = GC_APPLICATION_PATH.'/library/Datatypes/';
-        $list_dir = glob($path.'*', GLOB_ONLYDIR);
+        $path = GC_APPLICATION_PATH . '/library/Datatypes/';
+        $list_dir = glob($path . '*', GLOB_ONLYDIR);
         $options = array();
         foreach($list_dir as $dir)
         {
@@ -107,16 +107,16 @@ class PrevalueEditor extends AbstractPrevalueEditor
             $object->getPrevalueEditor()->setConfig(empty($datatype_config['config']) ? NULL : serialize($datatype_config['config']));
 
             //Initiliaze prefix
-            $prefix = 'datatypes['.$datatype_id.']';
+            $prefix = 'datatypes[' . $datatype_id . ']';
 
             //Create form
             $fieldset = new Fieldset();
             $hidden = new Element\Hidden();
-            $hidden->setName($prefix. '[name]');
+            $hidden->setName($prefix . '[name]');
             $hidden->setValue($datatype_config['name']);
             $fieldset->add($hidden);
             $label = new Element\Text();
-            $label->setName($prefix. '[label]');
+            $label->setName($prefix . '[label]');
             $label->setAttribute('class', 'input-text');
             $label->setAttribute('label', 'Label');
             $label->setAttribute('id', 'label' . $datatype_id);
@@ -143,7 +143,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     protected function _getDatatype($name)
     {
-        $class = 'Datatypes\\'.$name.'\Datatype';
+        $class = 'Datatypes\\' . $name . '\Datatype';
         $object = new $class();
         $object->load($this->getDatatype(), $this->getDocumentId());
         return $object;

@@ -152,7 +152,7 @@ class IndexController extends Action
         /**
          * Load controller and execute action
          */
-        $controller_class = sprintf('\\Modules\\%s\\Controller\\%s', $module_model->getName(), ucfirst($controller_name).'Controller');
+        $controller_class = sprintf('\\Modules\\%s\\Controller\\%s', $module_model->getName(), ucfirst($controller_name) . 'Controller');
         $action = $this->getMethodFromAction($action_name);
 
         $controller_object = new $controller_class($this->getRequest(), $this->getResponse());

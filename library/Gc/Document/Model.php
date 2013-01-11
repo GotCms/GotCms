@@ -408,7 +408,7 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getIterableId()
     {
-        return 'document_'.$this->getId();
+        return 'document_' . $this->getId();
     }
 
     /** (non-PHPdoc)

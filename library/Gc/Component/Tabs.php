@@ -72,11 +72,11 @@ class Tabs
         {
             if(!$iterator instanceof IterableInterface)
             {
-                $html .= '<li><a href="#tabs-'.$i.'">'.$iterator.'</a></li>';
+                $html .= '<li><a href="#tabs-' . $i . '">' . $iterator . '</a></li>';
             }
             else
             {
-                $html .= '<li><a href="#tabs-'.$iterator->getId().'">'.$iterator->getName().'</a></li>';
+                $html .= '<li><a href="#tabs-' . $iterator->getId() . '">' . $iterator->getName() . '</a></li>';
             }
 
             $i++;

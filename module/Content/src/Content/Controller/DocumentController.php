@@ -226,7 +226,7 @@ class DocumentController extends Action
                 $tabs_array[] = $tab->getName();
                 $properties = $this->_loadProperties($document_type_id, $tab->getId(), $document->getId());
 
-                $fieldset = new \Zend\Form\Fieldset('tabs-'.$idx);
+                $fieldset = new \Zend\Form\Fieldset('tabs-' . $idx);
                 if($this->getRequest()->isPost())
                 {
                     $connection = $document->getAdapter()->getDriver()->getConnection();
@@ -270,7 +270,7 @@ class DocumentController extends Action
 
             $form_document_add = new Form\Document();
             $form_document_add->load($document);
-            $form_document_add->setAttribute('name', 'tabs-'.$idx);
+            $form_document_add->setAttribute('name', 'tabs-' . $idx);
 
             $document_form->add($form_document_add);
 

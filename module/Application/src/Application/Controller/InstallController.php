@@ -379,7 +379,7 @@ class InstallController extends Action
                                     {
                                         if(!in_array($k, $permissions))
                                         {
-                                            $statement = $db_adapter->createStatement("INSERT INTO user_acl_permission (permission, user_acl_resource_id) VALUES ('".$k."', '".$last_insert_id."')");
+                                            $statement = $db_adapter->createStatement("INSERT INTO user_acl_permission (permission, user_acl_resource_id) VALUES ('" . $k . "', '" . $last_insert_id . "')");
                                             $result = $statement->execute();
                                             $permissions[] = $k;
                                         }
@@ -395,7 +395,7 @@ class InstallController extends Action
 
                                     foreach($value as $k => $v)
                                     {
-                                        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_permission WHERE permission =  '" . $k . "' AND user_acl_resource_id = '" .$last_resource_insert_id . "'");
+                                        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_permission WHERE permission =  '" . $k . "' AND user_acl_resource_id = '" . $last_resource_insert_id . "'");
                                         $result = $statement->execute();
                                         $last_insert_id = $result->current();
                                         $last_insert_id = $last_insert_id['id'];
@@ -405,7 +405,7 @@ class InstallController extends Action
                                         $role = $result->current();
                                         if(!empty($role['id']))
                                         {
-                                            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('".$role['id']."', " . $last_insert_id . ")");
+                                            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('" . $role['id'] . "', " . $last_insert_id . ")");
                                             $result = $statement->execute();
                                         }
                                     }

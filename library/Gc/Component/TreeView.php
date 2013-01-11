@@ -74,12 +74,12 @@ class TreeView
 
             $children = $iterator->getChildren();
             $has_children = !empty($children);
-            $html .= '<li id="'.$iterator->getIterableId().'"';
+            $html .= '<li id="' . $iterator->getIterableId() . '"';
 
             if($has_children)
             {
                 $rel = ' class="folder"';
-                $ins ='<ins class="jstree-icon">&nbsp;</ins>';
+                $ins = '<ins class="jstree-icon">&nbsp;</ins>';
                 $render_children = self::render($children, FALSE);
             }
             else
@@ -98,7 +98,7 @@ class TreeView
                 $is_published = $iterator->isPublished();
             }
 
-            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '') . 'href="'.$iterator->getEditUrl().'"' . ($is_published === FALSE ? ' class="not-published"' : '') . '>';
+            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '') . 'href="' . $iterator->getEditUrl() . '"' . ($is_published === FALSE ? ' class="not-published"' : '') . '>';
 
             if($iterator->getIcon() == 'folder')
             {
@@ -106,10 +106,10 @@ class TreeView
             }
             else
             {
-                $html .= '<ins style="background:url('.$iterator->getIcon().') no-repeat scroll 0 0;" class="jstree-icon">&nbsp;</ins>';
+                $html .= '<ins style="background:url(' . $iterator->getIcon() . ') no-repeat scroll 0 0;" class="jstree-icon">&nbsp;</ins>';
             }
 
-            $html .= $iterator->getName().'</a>';
+            $html .= $iterator->getName() . '</a>';
             $html .= $render_children;
             $html .='</li>';
         }

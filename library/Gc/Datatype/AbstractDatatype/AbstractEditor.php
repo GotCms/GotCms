@@ -160,7 +160,7 @@ abstract class AbstractEditor extends Object
      */
     public function getName()
     {
-        return $this->getDatatype()->getName().$this->getProperty()->getId();
+        return $this->getDatatype()->getName() . $this->getProperty()->getId();
     }
 
     /**

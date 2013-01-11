@@ -242,7 +242,7 @@ class Model extends AbstractTable
     static function loadDatatype($datatype_id, $document_id = NULL)
     {
         $datatype = Model::fromId($datatype_id);
-        $class = 'Datatypes\\'.$datatype->getModel().'\Datatype';
+        $class = 'Datatypes\\' . $datatype->getModel() . '\Datatype';
 
         $object = new $class();
         $object->load($datatype, $document_id);

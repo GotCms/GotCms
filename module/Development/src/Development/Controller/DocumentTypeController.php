@@ -172,7 +172,7 @@ class DocumentTypeController extends Action
                 catch(Exception $e)
                 {
                     $document_type->getAdapter()->getDriver()->getConnection()->rollBack();
-                    throw new \Gc\Exception("Error Processing Request ".print_r($e, TRUE), 1);
+                    throw new \Gc\Exception('Error Processing Request ' . print_r($e, TRUE), 1);
                 }
             }
         }
@@ -378,7 +378,7 @@ class DocumentTypeController extends Action
                 catch(Exception $e)
                 {
                     $document_type->getAdapter()->getDriver()->getConnection()->rollBack();
-                    throw new \Gc\Exception("Error Processing Request ".print_r($e, TRUE), 1);
+                    throw new \Gc\Exception('Error Processing Request ' . print_r($e, TRUE), 1);
                 }
             }
         }

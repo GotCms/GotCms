@@ -235,7 +235,7 @@ class Install extends AbstractForm
             ->setAttribute('class', 'input-text');
 
         $path = GC_APPLICATION_PATH . '/data/install/design/';
-        $list_dir = glob($path.'*', GLOB_ONLYDIR);
+        $list_dir = glob($path . '*', GLOB_ONLYDIR);
         $options = array('' => 'Select template');
         foreach($list_dir as $dir)
         {

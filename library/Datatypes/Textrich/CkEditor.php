@@ -84,7 +84,7 @@ class CkEditor extends Object
 
                 if(!empty($content))
                 {
-                    $js .= '[\''.implode('\', \'', $content).'\'], ';
+                    $js .= '[\'' . implode('\', \'', $content) . '\'], ';
                 }
             }
             else
@@ -146,7 +146,7 @@ class CkEditor extends Object
                         continue;
                     }
 
-                    $element = new Element\Checkbox('toolbar-items['.$item.']');
+                    $element = new Element\Checkbox('toolbar-items[' . $item . ']');
                     $element->setAttribute('id', 'i' . $group['name'] . $idx_item)
                         ->setCheckedValue(1)
                         ->setAttribute('label', $item);

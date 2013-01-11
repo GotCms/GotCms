@@ -51,7 +51,7 @@ class Datatype extends AbstractForm
         $model  = new Element\Select('model');
 
         $path = GC_APPLICATION_PATH . '/library/Datatypes/';
-        $list_dir = glob($path.'*', GLOB_ONLYDIR);
+        $list_dir = glob($path . '*', GLOB_ONLYDIR);
         $options = array();
         foreach($list_dir as $dir)
         {

@@ -148,7 +148,7 @@ class File extends Object
                 foreach($files as $file_data)
                 {
                     $file_object = new StdClass();
-                    $file_object->name = 'New Image Upload Complete:   ' .$file_data['name'];
+                    $file_object->name = 'New Image Upload Complete:   ' . $file_data['name'];
                     $file_object->filename = $this->getDirectory() . '/' . $file_data['name'];
                     $file_object->size = $file_data['size'];
                     $file_object->type = $file_data['type'];

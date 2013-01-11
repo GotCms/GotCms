@@ -223,7 +223,7 @@ abstract class Object
             }
             elseif(is_string($value))
             {
-                $array = explode("\n", $value);
+                $array = explode(PHP_EOL, $value);
                 return(isset($array[$index]) &&(!empty($array[$index]) || strlen($array[$index]) > 0)) ? $array[$index] : NULL;
             }
             elseif($value instanceof Object)
@@ -313,7 +313,7 @@ abstract class Object
 
         if(!empty($root_name))
         {
-            $xml.= '<'.$root_name.'>'."\n";
+            $xml.= '<' . $root_name . '>' . PHP_EOL;
         }
 
         $xml_model = new SimpleXMLElement('<node></node>');
@@ -336,7 +336,7 @@ abstract class Object
         if(!empty($root_name))
         {
 
-            $xml.= '</' . $root_name . '>'."\n";
+            $xml.= '</' . $root_name . '>' . PHP_EOL;
         }
 
         return $xml;
@@ -399,7 +399,7 @@ abstract class Object
             preg_match_all('/\{\{([a-z0-9_]+)\}\}/is', $format, $matches);
             foreach($matches[1] as $var)
             {
-                $format = str_replace('{{'.$var.'}}', $this->getData($var), $format);
+                $format = str_replace('{{' . $var . '}}', $this->getData($var), $format);
             }
 
             $str = $format;

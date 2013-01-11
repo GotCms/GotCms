@@ -116,17 +116,17 @@ class PrevalueEditor extends AbstractPrevalueEditor
         {
             foreach($config['size'] as $idx => $size)
             {
-                $element_size_name = new Element\Text('size['. $idx . '][name]');
+                $element_size_name = new Element\Text('size[' . $idx . '][name]');
                 $element_size_name->setValue($size['name']);
                 $element_size_name->setAttribute('id', 'name' . $idx);
                 $element_size_name->setLabel('Name');
 
-                $element_width = new Element\Text('size['. $idx . '][width]');
+                $element_width = new Element\Text('size[' . $idx . '][width]');
                 $element_width->setValue($size['width']);
                 $element_width->setAttribute('id', 'width' . $idx);
                 $element_width->setLabel('Width');
 
-                $element_height = new Element\Text('size['. $idx . '][height]');
+                $element_height = new Element\Text('size[' . $idx . '][height]');
                 $element_height->setValue($size['height']);
                 $element_height->setAttribute('id', 'height' . $idx);
                 $element_height->setLabel('Height');

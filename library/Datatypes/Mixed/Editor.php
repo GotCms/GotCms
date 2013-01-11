@@ -162,7 +162,7 @@ class Editor extends AbstractEditor
                     }
 
                     //Initialize prefix
-                    $prefix = $this->getName() . '['.$line_id.']['.$datatype_id.']';
+                    $prefix = $this->getName() . '[' . $line_id . '][' . $datatype_id . ']';
                     //Create form
                     $fieldset = new Fieldset($datatype_config['name'] . $datatype_id);
 
@@ -195,11 +195,11 @@ class Editor extends AbstractEditor
             }
 
             //Initialize prefix
-            $prefix = $this->getName() . '['.'#{line}'.']['.$datatype_id.']';
+            $prefix = $this->getName() . '[#{line}][' . $datatype_id . ']';
             //Create form
             $fieldset = new Fieldset($datatype_config['name'] . $datatype_id);
             $hidden = new Element\Hidden();
-            $hidden->setName($prefix. '[name]');
+            $hidden->setName($prefix . '[name]');
             $hidden->setValue($datatype_config['name']);
             $fieldset->add($hidden);
 
@@ -229,7 +229,7 @@ class Editor extends AbstractEditor
             return $this->_datatypes[$name];
         }
 
-        $class = 'Datatypes\\'.$name.'\Datatype';
+        $class = 'Datatypes\\' . $name . '\Datatype';
         $object = new $class();
         $object->load($this->getDatatype()->getDatatypeModel(), $this->getProperty()->getDocumentId());
         $this->_datatypes[$name] = $object;
