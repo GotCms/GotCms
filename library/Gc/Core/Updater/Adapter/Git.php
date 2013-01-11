@@ -43,7 +43,7 @@ class Git extends AbstractAdapter
      */
     public function update()
     {
-        return system('cd ' . GC_APPLICATION_PATH . ' ; git fetch');
+        return shell_exec('cd ' . GC_APPLICATION_PATH . ' ; git fetch');
     }
 
     /**
@@ -53,7 +53,7 @@ class Git extends AbstractAdapter
      */
     public function upgrade()
     {
-        return system('cd ' . GC_APPLICATION_PATH . ' ; git checkout v' . $this->getLatest());
+        return shell_exec('cd ' . GC_APPLICATION_PATH . ' ; git checkout v' . $this->getLatest());
     }
 
     /**
@@ -64,6 +64,6 @@ class Git extends AbstractAdapter
      */
     public function rollback($version)
     {
-        return system('cd ' . GC_APPLICATION_PATH . ' ; git checkout v' . $version);
+        return shell_exec('cd ' . GC_APPLICATION_PATH . ' ; git checkout v' . $version);
     }
 }
