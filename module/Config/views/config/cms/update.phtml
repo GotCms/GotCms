@@ -1,5 +1,6 @@
-<?php if(!empty($this->updater)): ?>
-    <?php echo nl2br($this->escapeHtml($this->content)); ?>
+<?php if(!empty($this->updateOutput)): ?>
+    <p><?php echo $this->escapeHtml($this->translate('Result:')); ?></p>
+    <p><?php echo nl2br($this->escapeHtml($this->updateOutput)); ?></p>
 <?php else: ?>
     <?php if($this->isLatest): ?>
         <p><?php echo $this->escapeHtml($this->translate('You already have the latest version')); ?></p>

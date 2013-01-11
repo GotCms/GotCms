@@ -138,6 +138,7 @@ class CmsController extends Action
     {
         $version_is_latest = Version::isLatest();
         $latest_version = Version::getLatest();
+        $session = $this->getSession();
 
         if($this->getRequest()->isPost())
         {
@@ -149,11 +150,12 @@ class CmsController extends Action
             }
 
             $current_version = Version::VERSION;
+            $output = '';
             //Fetch content
-            $updater->update();
+            $output .= $updater->update();
 
             //Upgrade cms
-            $updater->upgrade();
+            $output .= $updater->upgrade();
 
             //Update database
             if(!$updater->updateDatabase())
@@ -164,8 +166,16 @@ class CmsController extends Action
                 return $this->redirect()->toRoute('cmsUpdate');
             }
 
+            $session['updateOutput'] = $output;
+
             $this->flashMessenger()->setNameSpace('success')->addMessage(sprintf('Cms update to %s', $latest_version));
             return $this->redirect()->toRoute('cmsUpdate');
+        }
+
+        if(!empty($session['updateOutput']))
+        {
+            $update_output = $session['updateOutput'];
+            unset($session['updateOutput']);
         }
 
         //Check modules and datatypes
@@ -179,6 +189,7 @@ class CmsController extends Action
             'latestVersion' => $latest_version,
             'datatypesErrors' => $datatypes_errors,
             'modulesErrors' => $modules_errors,
+            'updateOutput' => empty($update_output) ? '' : $update_output,
         );
     }
 
