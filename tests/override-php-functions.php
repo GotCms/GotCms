@@ -58,8 +58,9 @@ function move_uploaded_file($filename, $destination)
  */
 namespace Gc\Core\Updater\Adapter;
 
-function system($command, &$return_var = NULL)
+function exec($command, &$output = array(), &$return_var = NULL)
 {
+    $output = array();
     return '';
 }
 
