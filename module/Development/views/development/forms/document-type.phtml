@@ -122,7 +122,7 @@
                 <div>
                     <label for="properties-tab" class="required"><?php echo $this->escapeHtml($this->translate('Tab')); ?></label>
                     <select name="properties[tab]" id="properties-tab" class="select-tab">
-                        <option value="" label="-- Select tab --" selected="selected">-- Select tab --</option>
+                        <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
                         <?php foreach($tabs_form as $tab_form): ?>
                             <option value="<?php echo $tab_form->get('tab_id')->getValue(); ?>"><?php echo $tab_form->get('name')->getValue(); ?></option>
                         <?php endforeach; ?>
