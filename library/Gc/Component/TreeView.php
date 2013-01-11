@@ -111,7 +111,7 @@ class TreeView
 
             $html .= $iterator->getName() . '</a>';
             $html .= $render_children;
-            $html .='</li>';
+            $html .= '</li>';
         }
 
         $html .= '</ul>';
