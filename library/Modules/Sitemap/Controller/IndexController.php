@@ -50,12 +50,12 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Generate xml
+     * Generate xml action
      */
     public function generateAction()
     {
         $sitemap = new Model\Sitemap();
-        file_put_contents(GC_MEDIA_PATH . '/sitemap.xml', $sitemap->generate());
+        file_put_contents($sitemap->getFilePath(), $sitemap->generate());
 
         return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), TRUE);
     }

@@ -28,11 +28,10 @@
 namespace Modules\Sitemap\Model;
 
 use Gc\Core\Object,
+    Gc\Registry,
     Gc\Component\IterableInterface,
     Gc\Document\Collection as DocumentCollection,
-    Gc\Document\Model as DocumentModel,
-    Zend\Db\Sql\Select,
-    Zend\Db\Sql\Predicate\Expression;
+    Gc\Document\Model as DocumentModel;
 
 /**
  * Sitemap comment table
@@ -43,6 +42,11 @@ use Gc\Core\Object,
  */
 class Sitemap extends Object
 {
+    public function init()
+    {
+        $this->setFilePath(GC_MEDIA_PATH . '/sitemap.xml');
+    }
+
     /**
      * Generate Xml accessor
      *
@@ -72,32 +76,15 @@ class Sitemap extends Object
         $xml = '<?xml version="1.0" encoding="UTF-8"?>';
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
 
-        $url = 'http';
-        if(!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] == 'on')
-        {
-            $url .= 's';
-        }
-
-        $url .= '://';
-        if($_SERVER['SERVER_PORT'] != '80')
-        {
-            $url .= $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
-        }
-        else
-        {
-            $url .= $_SERVER['SERVER_NAME'];
-        }
+        $url = Registry::get('Application')->getRequest()->getBasePath();
 
         foreach($documents as $document)
         {
-            if(!$document instanceof IterableInterface)
-            {
-                continue;
-            }
-
             $xml .= '<url>';
             $xml .= '<loc>' . $url . $document->getUrl() . '</loc>';
-            $xml .= '<lastmod>' . date('Y-m-d', strtotime($document->getUpdatedAt())) . '</lastmod>';
+            $xml .= '<lastmod>' . date('Y-m-d\TH:i:s\Z', strtotime($document->getUpdatedAt())) . '</lastmod>';
+            $xml .= '<changefreq>weekly</changefreq>';
+            $xml .= '<priority>0.5</priority>';
             $xml .= '</url>';
         }
 

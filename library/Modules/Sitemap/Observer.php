@@ -46,24 +46,25 @@ class Observer extends AbstractObserver
      */
     public function init()
     {
-        $this->events()->attach('Gc\Document\Model', 'afterSave', array($this, 'generateSitemap'));
+        $this->events()->attach('Gc\Document\Model', 'afterSave', array($this, 'addElement'));
+        $this->events()->attach('Gc\Document\Model', 'afterDelete', array($this, 'removeElement'));
     }
 
     /**
-     * Display widget dashboard
+     * Generate xml on save
      *
      * @param \Zend\EventManager\Event $event
      * @return void
      */
-    public function generateSitemap(Event $event)
+    public function addElement(Event $event)
     {
-        $sitemap_path = GC_MEDIA_PATH . '/sitemap.xml';
-        if(file_exists($sitemap_path))
+        $sitemap = new Sitemap();
+        if(file_exists($sitemap->getFilePath()))
         {
             $document = $event->getParam('object');
             $old_url_key = $document->getUrlKey();
             $document->setUrlKey($document->getOrigData('url_key'));
-            $content = file_get_contents($sitemap_path);
+            $content = file_get_contents($sitemap->getFilePath());
             $xml = simplexml_load_string($content);
             $xml->registerXPathNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
             $obj = $xml->xpath(sprintf('//sm:url[sm:loc="%s"]', $document->getUrl()));
@@ -71,15 +72,42 @@ class Observer extends AbstractObserver
             {
                 $obj[0]->loc = $document->getUrl();
                 $obj[0]->lastmod = $document->getUrl();
-                $xml->asXml($sitemap_path);
+                $xml->asXml($sitemap->getFilePath());
             }
 
             $document->setUrlKey($old_url_key);
         }
         else
         {
-            $sitemap = new Sitemap();
-            file_put_contents($sitemap_path, $sitemap->generate());
+            file_put_contents($sitemap->getFilePath(), $sitemap->generate());
+        }
+    }
+
+    /**
+     * Remove element on delete
+     *
+     * @param \Zend\EventManager\Event $event
+     * @return void
+     */
+    public function removeElement(Event $event)
+    {
+        $sitemap = new Sitemap();
+        if(file_exists($sitemap->getFilePath()))
+        {
+            $document = $event->getParam('object');
+            $old_url_key = $document->getUrlKey();
+            $document->setUrlKey($document->getOrigData('url_key'));
+            $content = file_get_contents($sitemap->getFilePath());
+            $xml = simplexml_load_string($content);
+            $xml->registerXPathNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+            $obj = $xml->xpath(sprintf('//sm:url[sm:loc="%s"]', $document->getUrl()));
+            if(!empty($obj))
+            {
+                unset($obj);
+                $xml->asXml($sitemap->getFilePath());
+            }
+
+            $document->setUrlKey($old_url_key);
         }
     }
 }

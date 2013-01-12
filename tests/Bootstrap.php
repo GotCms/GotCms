@@ -91,7 +91,8 @@ if(!class_exists('Zend\Loader\AutoloaderFactory'))
 \Zend\Console\Console::overrideIsConsole(FALSE);
 $application = \Zend\Mvc\Application::init($configuration);
 \Gc\Registry::set('Application', $application);
-
+//Remove all event observer
+\Gc\Event\StaticEventManager::resetInstance();
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load
  * the default configuration.
