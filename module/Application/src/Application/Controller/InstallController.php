@@ -143,10 +143,10 @@ class InstallController extends Action
         }
 
         $server_data = array();
-        $server_data[] = array('label' => '/public/frontend', 'value' => is_writable(GC_APPLICATION_PATH . '/public/frontend'));
-        $server_data[] = array('label' => '/config/autoload', 'value' => is_writable(GC_APPLICATION_PATH . '/config/autoload'));
+        $server_data[] = array('label' => '/public/frontend', 'value' => $this->_isWritable(GC_APPLICATION_PATH . '/public/frontend'));
+        $server_data[] = array('label' => '/config/autoload', 'value' => $this->_isWritable(GC_APPLICATION_PATH . '/config/autoload'));
         $server_data[] = array('label' => '/data/cache', 'value' => is_writable(GC_APPLICATION_PATH . '/data/cache'));
-        $server_data[] = array('label' => '/public/media', 'value' => is_writable(GC_MEDIA_PATH));
+        $server_data[] = array('label' => '/public/media', 'value' => $this->_isWritable(GC_MEDIA_PATH));
 
         $php_data = array();
         $php_data[] = array('label' => 'Php version >= 5.3.3', 'value' => PHP_VERSION_ID > 50303);
@@ -193,7 +193,13 @@ class InstallController extends Action
         }
 
         $this->layout()->setVariables(array('currentRoute' => $this->getRouteMatch()->getMatchedRouteName()));
-        return array('phpData' => $php_data, 'phpDirective' => $php_directive, 'serverData' => $server_data, 'cmsVersion' => Version::VERSION);
+        return array(
+            'gitProject' => file_exists(GC_APPLICATION_PATH . '/.git'),
+            'phpData' => $php_data,
+            'phpDirective' => $php_directive,
+            'serverData' => $server_data,
+            'cmsVersion' => Version::VERSION
+        );
     }
 
     /**
@@ -565,5 +571,31 @@ class InstallController extends Action
         }
 
         return TRUE;
+    }
+
+    protected function _isWritable($directory)
+    {
+        $folder = opendir($directory);
+        while(FALSE !== ($file = readdir($folder)))
+        {
+            $path = $directory . '/' .$file;
+            if(!in_array($file, array('.', '..')))
+            {
+                if(is_dir($path))
+                {
+                    return $this->_isWritable($path);
+                }
+
+                if(!is_writable($path))
+                {
+                    var_dump($path);
+                    closedir($folder);
+                    return FALSE;
+                }
+            }
+        }
+
+        closedir($folder);
+        return true;
     }
 }

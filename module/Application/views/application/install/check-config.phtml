@@ -58,6 +58,19 @@
                         </tr>
                     <?php endforeach; ?>
 
+                    <?php if(!empty($this->gitProject)): ?>
+                        <tr>
+                            <td class="item">
+                                <?php echo $this->escapeHtml($this->translate('Git project has been found, make sure you clone with apache user.')); ?>
+                            </td>
+                            <td class="warning">
+                                <span>
+                                    <?php echo $this->escapeHtml($this->translate('Care')); ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+
                     <?php foreach($this->serverData as $data): ?>
                         <tr>
                             <td class="item">
