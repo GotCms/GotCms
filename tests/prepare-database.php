@@ -17,11 +17,11 @@
  *
  * PHP Version >=5.3
  *
- * @category   Gc_Test
- * @package    Bootstrap
- * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link       http://www.got-cms.com
+ * @category Gc_Test
+ * @package  Bootstrap
+ * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link     http://www.got-cms.com
  */
 
 use Gc\Core\Config as GcConfig,
@@ -97,7 +97,7 @@ foreach($resources as $key => $value)
     {
         if(!in_array($k, $permissions))
         {
-            $statement = $db_adapter->createStatement("INSERT INTO user_acl_permission (permission, user_acl_resource_id) VALUES ('".$k."', '".$last_insert_id."')");
+            $statement = $db_adapter->createStatement("INSERT INTO user_acl_permission (permission, user_acl_resource_id) VALUES ('" . $k . "', '" . $last_insert_id . "')");
             $result = $statement->execute();
             $permissions[] = $k;
         }
@@ -113,7 +113,7 @@ foreach($resources as $key => $value)
 
     foreach($value as $k => $v)
     {
-        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_permission WHERE permission =  '" . $k . "' AND user_acl_resource_id = '" .$last_resource_insert_id . "'");
+        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_permission WHERE permission =  '" . $k . "' AND user_acl_resource_id = '" . $last_resource_insert_id . "'");
         $result = $statement->execute();
         $last_insert_id = $result->current();
         $last_insert_id = $last_insert_id['id'];
@@ -123,7 +123,7 @@ foreach($resources as $key => $value)
         $role = $result->current();
         if(!empty($role['id']))
         {
-            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('".$role['id']."', " . $last_insert_id . ")");
+            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('" . $role['id'] . "', " . $last_insert_id . ")");
             $result = $statement->execute();
         }
     }
