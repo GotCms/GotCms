@@ -43,6 +43,13 @@ use SimpleXMLElement,
  */
 abstract class Object
 {
+     /**
+     * Original data
+     *
+     * @var array
+     */
+     protected $_origData;
+
     /**
      * Object attributes
      *
@@ -443,7 +450,7 @@ abstract class Object
             break;
         }
 
-        throw new \Gc\Exception('Invalid method ' . get_class($this) . "::" . $method . "(" . print_r($args, 1) . ")");
+        throw new \Gc\Exception('Invalid method ' . get_class($this) . '::' . $method . '(' . print_r($args, 1) . ')');
     }
 
     /**
@@ -462,9 +469,9 @@ abstract class Object
             return self::$_underscoreCache[$name];
         }
 
-        $result = strtolower(preg_replace('/(.)([A-Z])/', "$1_$2", $name));
-
+        $result = strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $name));
         self::$_underscoreCache[$name] = $result;
+
         return $result;
     }
 
@@ -514,4 +521,55 @@ abstract class Object
     {
         return isset($this->_data[$offset]) ? $this->_data[$offset] : NULL;
     }
+
+     /**
+      * Get Original data
+      *
+      * @param string $key
+      * @return mixed
+      */
+     public function getOrigData($key = NULL)
+     {
+         if(is_null($key))
+         {
+             return $this->_origData;
+         }
+
+         return isset($this->_origData[$key]) ? $this->_origData[$key] : NULL;
+     }
+
+     /**
+      * Set Original data
+      *
+      * @param string $key
+      * @param mixed $data
+      * @return Varien_Object
+      */
+     public function setOrigData($key = NULL, $data = NULL)
+     {
+         if(is_null($key))
+         {
+             $this->_origData = $this->_data;
+         }
+         else
+         {
+             $this->_origData[$key] = $data;
+         }
+
+         return $this;
+     }
+
+      /**
+      * Check if data has changed
+      *
+      * @param string $field
+      * @return boolean
+      */
+     public function hasDataChangedFor($field)
+     {
+         $newData = $this->getData($field);
+         $origData = $this->getOrigData($field);
+
+         return $newData!=$origData;
+     }
 }

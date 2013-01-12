@@ -284,6 +284,7 @@ class Model extends AbstractTable
     {
         $document_type_table = new Model();
         $document_type_table->setData($array);
+        $document_type_table->setOrigData();
 
         return $document_type_table;
     }
@@ -301,7 +302,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $document_type_table->setData((array)$current);
+            $document_type_table->setData((array)$current);
+            $document_type_table->setOrigData();
+            return $document_type_table;
         }
         else
         {

@@ -221,6 +221,7 @@ class Model extends AbstractTable
         $user_table = new Model();
         $user_table->setData($array);
         $user_table->unsetData('password');
+        $user_table->setOrigData();
 
         return $user_table;
     }
@@ -238,8 +239,10 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
+            $array = (array)$current;
             $user_table->setData((array)$current);
             $user_table->unsetData('password');
+            $user_table->setOrigData();
             return $user_table;
         }
         else

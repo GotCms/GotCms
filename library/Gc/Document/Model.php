@@ -149,6 +149,7 @@ class Model extends AbstractTable implements IterableInterface
     {
         $document_table = new Model();
         $document_table->setData($array);
+        $document_table->setOrigData();
 
         return $document_table;
     }
@@ -166,7 +167,9 @@ class Model extends AbstractTable implements IterableInterface
         $current = $row->current();
         if(!empty($current))
         {
-            return $document_table->setData((array)$current);
+            $document_table->setData((array)$current);
+            $document_table->setOrigData();
+            return $document_table;
         }
         else
         {

@@ -67,6 +67,7 @@ class Model extends AbstractTable
     {
         $script_table = new Model();
         $script_table->setData($array);
+        $script_table->setOrigData();
 
         return $script_table;
     }
@@ -84,7 +85,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $script_table->setData((array)$current);
+            $script_table->setData((array)$current);
+            $script_table->setOrigData();
+            return $script_table;
         }
         else
         {

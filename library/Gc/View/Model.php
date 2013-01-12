@@ -67,6 +67,7 @@ class Model extends AbstractTable
     {
         $view_table = new Model();
         $view_table->setData($array);
+        $view_table->setOrigData();
 
         return $view_table;
     }
@@ -84,7 +85,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $view_table->setData((array)$current);
+            $view_table->setData((array)$current);
+            $view_table->setOrigData();
+            return $view_table;
         }
         else
         {
@@ -105,7 +108,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $view_table->setData((array)$current);
+            $view_table->setData((array)$current);
+            $view_table->setOrigData();
+            return $view_table;
         }
         else
         {

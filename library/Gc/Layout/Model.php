@@ -69,6 +69,7 @@ class Model extends AbstractTable
     {
         $layout_table = new Model();
         $layout_table->setData($array);
+        $layout_table->setOrigData();
 
         return $layout_table;
     }
@@ -86,7 +87,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $layout_table->setData((array)$current);
+            $layout_table->setData((array)$current);
+            $layout_table->setOrigData();
+            return $layout_table;
         }
         else
         {
@@ -107,7 +110,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $layout_table->setData((array)$current);
+            $layout_table->setData((array)$current);
+            $layout_table->setOrigData();
+            return $layout_table;
         }
         else
         {

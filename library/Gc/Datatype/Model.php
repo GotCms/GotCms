@@ -77,6 +77,7 @@ class Model extends AbstractTable
     {
         $datatype_table = new Model();
         $datatype_table->setData($array);
+        $datatype_table->setOrigData();
 
         return $datatype_table;
     }
@@ -94,7 +95,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $datatype_table->setData((array)$current);
+            $datatype_table->setData((array)$current);
+            $datatype_table->setOrigData();
+            return $datatype_table;
         }
         else
         {

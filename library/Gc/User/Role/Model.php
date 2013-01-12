@@ -135,6 +135,7 @@ class Model extends AbstractTable
     {
         $role_table = new Model();
         $role_table->setData($array);
+        $role_table->setOrigData();
 
         return $role_table;
     }
@@ -152,7 +153,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $role_table->setData((array)$current);
+            $role_table->setData((array)$current);
+            $role_table->setOrigData();
+            return $role_table;
         }
         else
         {

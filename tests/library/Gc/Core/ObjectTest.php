@@ -354,6 +354,62 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Gc\Core\Object::getOrigData
+     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object::_underscore
+     */
+    public function testGetOrigData()
+    {
+        $this->_object->setOrigData('k', 'v');
+        $this->assertEquals('v', $this->_object->getOrigData('k'));
+    }
+
+    /**
+     * @covers Gc\Core\Object::getOrigData
+     */
+    public function testGetAllOrigData()
+    {
+        $this->_object->setOrigData('k', 'v');
+        $this->assertEquals(array('k' => 'v'), $this->_object->getOrigData());
+    }
+
+    /**
+     * @covers Gc\Core\Object::hasDataChangedFor
+     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object::_underscore
+     */
+    public function testHasDataChangedFor()
+    {
+        $this->_object->setData('k', 'v');
+        $this->_object->setOrigData();
+        $this->assertFalse($this->_object->hasDataChangedFor('k'));
+    }
+
+    /**
+     * @covers Gc\Core\Object::setOrigData
+     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object::_underscore
+     */
+    public function testSetOrigData()
+    {
+        $this->_object->setOrigData('k', 'v');
+        $this->assertEquals('v', $this->_object->getOrigData('k'));
+    }
+
+    /**
+     * @covers Gc\Core\Object::setOrigData
+     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object::_underscore
+     */
+    public function testSetAllOrigData()
+    {
+        $this->_object->setData(array('k' => 'v', 'k2' => 'v2'));
+        $this->_object->setOrigData();
+        $this->assertEquals('v', $this->_object->getOrigData('k'));
+    }
+
+
+    /**
      * @covers Gc\Core\Object::offsetGet
      */
     public function testOffsetGet()

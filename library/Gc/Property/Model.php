@@ -254,10 +254,11 @@ class Model extends AbstractTable
      */
     static function fromArray(array $array)
     {
-        $property = new Model();
-        $property->setData($array);
+        $property_table = new Model();
+        $property_table->setData($array);
+        $property_table->setOrigData();
 
-        return $property;
+        return $property_table;
     }
 
     /**
@@ -273,7 +274,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $property_table->setData((array)$current);
+            $property_table->setData((array)$current);
+            $property_table->setOrigData();
+            return $property_table;
         }
         else
         {
@@ -305,6 +308,7 @@ class Model extends AbstractTable
         {
             $property_table->setData((array)$current);
             $property_table->setDocumentId($document_id);
+            $property_table->setOrigData();
             return $property_table;
         }
         else

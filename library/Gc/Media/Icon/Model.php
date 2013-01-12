@@ -55,6 +55,7 @@ class Model extends AbstractTable
     {
         $icon_table = new Model();
         $icon_table->setData($array);
+        $icon_table->setOrigData();
 
         return $icon_table;
     }
@@ -72,7 +73,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $icon_table->setData((array)$current);
+            $icon_table->setData((array)$current);
+            $icon_table->setOrigData();
+            return $icon_table;
         }
         else
         {

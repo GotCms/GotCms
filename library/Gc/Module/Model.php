@@ -59,6 +59,7 @@ class Model extends AbstractTable
     {
         $module_table = new Model();
         $module_table->setData($array);
+        $module_table->setOrigData();
 
         return $module_table;
     }
@@ -76,7 +77,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $module_table->setData((array)$current);
+            $module_table->setData((array)$current);
+            $module_table->setOrigData();
+            return $module_table;
         }
         else
         {

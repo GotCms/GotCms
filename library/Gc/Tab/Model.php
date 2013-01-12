@@ -172,6 +172,7 @@ class Model extends AbstractTable
     {
         $tab_table = new Model();
         $tab_table->setData($array);
+        $tab_table->setOrigData();
 
         return $tab_table;
     }
@@ -189,7 +190,9 @@ class Model extends AbstractTable
         $current = $row->current();
         if(!empty($current))
         {
-            return $tab_table->setData((array)$current);
+            $tab_table->setData((array)$current);
+            $tab_table->setOrigData();
+            return $tab_table;
         }
         else
         {

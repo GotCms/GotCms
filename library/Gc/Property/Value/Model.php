@@ -88,6 +88,7 @@ class Model extends AbstractTable
     {
         $property_value_table = new Model();
         $property_value_table->setData($array);
+        $property_value_table->setOrigData();
 
         return $property_value_table;
     }
@@ -102,10 +103,12 @@ class Model extends AbstractTable
     {
         $property_value_table = new Model();
         $select = $property_value_table->select(array('id' => (int)$property_value_id));
-        $row = $property_value_table->fetchRow($select);
-        if(!empty($row))
+        $current = $property_value_table->fetchRow($select);
+        if(!empty($current))
         {
-            return $property_value_table->setData((array)$row);
+            $property_value_table->setData((array)$current);
+            $property_value_table->setOrigData();
+            return $property_value_table;
         }
         else
         {
