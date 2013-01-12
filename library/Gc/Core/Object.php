@@ -567,9 +567,9 @@ abstract class Object
       */
      public function hasDataChangedFor($field)
      {
-         $newData = $this->getData($field);
-         $origData = $this->getOrigData($field);
+         $new_data = $this->getData($field);
+         $orig_data = $this->getOrigData($field);
 
-         return $newData!=$origData;
+         return $new_data != $orig_data;
      }
 }
