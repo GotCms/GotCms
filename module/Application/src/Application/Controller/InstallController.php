@@ -573,6 +573,12 @@ class InstallController extends Action
         return TRUE;
     }
 
+    /**
+     * Test is_writable recursively
+     *
+     * @param string $directory Directory start
+     * @return boolean
+     */
     protected function _isWritable($directory)
     {
         $folder = opendir($directory);
