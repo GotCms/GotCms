@@ -185,6 +185,7 @@ class CmsController extends Action
         $this->_checkVersion(glob(GC_APPLICATION_PATH . '/library/Modules/*'), 'module', $modules_errors);
 
         return array(
+            'gitProject' => file_exists(GC_APPLICATION_PATH . '/.git'),
             'isLatest' => $version_is_latest,
             'latestVersion' => $latest_version,
             'datatypesErrors' => $datatypes_errors,
