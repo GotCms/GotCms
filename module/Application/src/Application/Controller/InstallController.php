@@ -584,7 +584,7 @@ class InstallController extends Action
         $folder = opendir($directory);
         while(FALSE !== ($file = readdir($folder)))
         {
-            $path = $directory . '/' .$file;
+            $path = $directory . '/' . $file;
             if(!in_array($file, array('.', '..')))
             {
                 if(is_dir($path))
