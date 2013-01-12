@@ -62,6 +62,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Core\Updater::init
+     * @covers Gc\Version::getLatest
      */
     public function testInit()
     {
