@@ -42,6 +42,11 @@ use Gc\Core\Object,
  */
 class Sitemap extends Object
 {
+    /**
+     * Initialize file path
+     *
+     * @return void
+     */
     public function init()
     {
         $this->setFilePath(GC_MEDIA_PATH . '/sitemap.xml');
