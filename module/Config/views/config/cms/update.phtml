@@ -30,7 +30,7 @@
             </div>
         <?php endif; ?>
 
-        <?php if(!empty($this->gitProject)): ?>
+        <?php if(empty($this->gitProject)): ?>
             <p><?php echo $this->escapeHtml($this->translate("Yout can't update this project because you don't clone it with git")); ?></p>
         <?php else: ?>
             <form action="<?php echo $this->url(); ?>" method="post" id="update-form">
