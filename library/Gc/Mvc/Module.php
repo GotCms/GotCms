@@ -94,6 +94,25 @@ abstract class Module
 
             \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
             Registry::set('Translator', $translator);
+
+            $uri = '';
+            $uri_class = $event->getRequest()->getUri();
+            if($uri_class->getScheme())
+            {
+                $uri .= $uri_class->getScheme() . ':';
+            }
+
+            if($uri_class->getHost() !== NULL)
+            {
+                $uri .= '//';
+                $uri .= $uri_class->getHost();
+                if($uri_class->getPort() and $uri_class->getPort() != 80)
+                {
+                    $uri .= ':' . $uri_class->getPort();
+                }
+            }
+
+            $event->getRequest()->setBasePath($uri);
         }
     }
 
@@ -138,7 +157,6 @@ abstract class Module
             {
                 $config['router']['routes'] += $routes['routes'];
             }
-
 
             if(Registry::isRegistered('Db'))
             {
