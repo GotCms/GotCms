@@ -194,10 +194,12 @@ class Model extends AbstractTable implements IterableInterface
         }
 
         $rowset = $document_table->select($sql_data);
-        $row = $rowset->current();
-        if(!empty($row))
+        $current = $rowset->current();
+        if(!empty($current))
         {
-            return $document_table->setData((array)$row);
+            $document_table->setData((array)$current);
+            $document_table->setOrigData();
+            return $document_table;
         }
         else
         {

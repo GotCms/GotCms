@@ -275,7 +275,7 @@ class IndexController extends Action
                     'view_model' => $view_model,
                     'layout_variables' => $this->layout()->getVariables(),
                     'layout_content' => $layout->getContent(),
-                    'view_content' => $view->getContent(),
+                    'view_content' => !empty($view) ? $view->getContent() : '',
                 ));
             }
         }
