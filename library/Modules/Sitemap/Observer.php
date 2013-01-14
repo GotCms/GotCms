@@ -28,6 +28,7 @@
 namespace Modules\Sitemap;
 
 use Gc\Module\AbstractObserver,
+    Gc\Registry,
     Modules\Sitemap\Model\Sitemap,
     Zend\EventManager\Event;
 /**
@@ -62,20 +63,23 @@ class Observer extends AbstractObserver
         if(file_exists($sitemap->getFilePath()))
         {
             $document = $event->getParam('object');
-            $old_url_key = $document->getUrlKey();
-            $document->setUrlKey($document->getOrigData('url_key'));
-            $content = file_get_contents($sitemap->getFilePath());
-            $xml = simplexml_load_string($content);
-            $xml->registerXPathNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-            $obj = $xml->xpath(sprintf('//sm:url[sm:loc="%s"]', $document->getUrl()));
-            if(!empty($obj))
+            if($document->hasDataChangedFor('url_key'))
             {
-                $obj[0]->loc = $document->getUrl();
-                $obj[0]->lastmod = $document->getUrl();
-                $xml->asXml($sitemap->getFilePath());
-            }
+                $old_url_key = $document->getUrlKey();
+                $document->setUrlKey($document->getOrigData('url_key'));
+                $content = file_get_contents($sitemap->getFilePath());
+                $xml = simplexml_load_string($content);
+                $xml->registerXPathNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+                $obj = $xml->xpath(sprintf('//sm:url[sm:loc="%s%s"]', Registry::get('Application')->getRequest()->getBasePath(), $document->getUrl()));
+                if(!empty($obj))
+                {
+                    $obj[0]->loc = $document->getUrl();
+                    $obj[0]->lastmod = $document->getUrl();
+                    $xml->asXml($sitemap->getFilePath());
+                }
 
-            $document->setUrlKey($old_url_key);
+                $document->setUrlKey($old_url_key);
+            }
         }
         else
         {
@@ -100,7 +104,7 @@ class Observer extends AbstractObserver
             $content = file_get_contents($sitemap->getFilePath());
             $xml = simplexml_load_string($content);
             $xml->registerXPathNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-            $obj = $xml->xpath(sprintf('//sm:url[sm:loc="%s"]', $document->getUrl()));
+            $obj = $xml->xpath(sprintf('//sm:url[sm:loc="%s%s"]', Registry::get('Application')->getRequest()->getBasePath(), $document->getUrl()));
             if(!empty($obj))
             {
                 unset($obj);

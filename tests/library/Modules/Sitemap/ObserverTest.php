@@ -157,6 +157,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     {
         $mvc_event = Registry::get('Application')->getMvcEvent();
         $mvc_event->setParam('object', $this->_document);
+        $this->_document->setUrlKey('new-url-key');
         $this->assertNull($this->_object->addElement($mvc_event));
         $this->assertNull($this->_object->addElement($mvc_event));
     }
