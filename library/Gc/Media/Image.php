@@ -215,7 +215,7 @@ class Image
      */
     public function hex2rgb($hex_string)
     {
-        $hex_string = preg_replace("/[^0-9A-Fa-f]/", '', $hex_string); // Gets a proper hex string
+        $hex_string = preg_replace('/[^0-9A-Fa-f]/', '', $hex_string); // Gets a proper hex string
         $rgb_array = array();
         if(strlen($hex_string) == 6)
         {

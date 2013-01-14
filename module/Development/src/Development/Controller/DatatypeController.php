@@ -91,7 +91,7 @@ class DatatypeController extends Action
                     }
                     else
                     {
-                        throw new \Gc\Core\Exception("Error during insert new datatype");
+                        throw new \Gc\Core\Exception('Error during insert new datatype');
                     }
                 }
                 catch(\Exception $e)

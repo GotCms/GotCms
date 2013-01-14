@@ -66,7 +66,7 @@ class Tools extends AbstractHelper
 
             case 'is_serialized':
             case 'isSerialized':
-                if(trim($value) != '' and preg_match("/^(i|s|a|o|d)(.*);/si", $value))
+                if(trim($value) != '' and preg_match('/^(i|s|a|o|d)(.*);/si', $value))
                 {
                     $data = TRUE;
                 }

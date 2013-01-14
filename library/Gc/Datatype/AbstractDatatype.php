@@ -158,7 +158,7 @@ abstract class AbstractDatatype extends AbstractTable
         if(empty($this->_config) or $this->_configHasChanged)
         {
             $config = $this->getDatatypeModel()->getData('prevalue_value');
-            if(!is_string($config) or !preg_match("/^(i|s|a|o|d)(.*);/si", $config))
+            if(!is_string($config) or !preg_match('/^(i|s|a|o|d)(.*);/si', $config))
             {
                 $this->_config = $config;
             }

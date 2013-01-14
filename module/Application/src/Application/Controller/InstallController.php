@@ -411,7 +411,7 @@ class InstallController extends Action
                                         $role = $result->current();
                                         if(!empty($role['id']))
                                         {
-                                            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('" . $role['id'] . "', " . $last_insert_id . ")");
+                                            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('" . $role['id'] . "', " . $last_insert_id . ')');
                                             $result = $statement->execute();
                                         }
                                     }
@@ -426,11 +426,11 @@ class InstallController extends Action
                             $configuration = $session['install']['configuration'];
                             if($sql_type == 'mysql')
                             {
-                                $sql_string = "INSERT INTO `user` (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)";
+                                $sql_string = 'INSERT INTO `user` (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
                             }
                             else
                             {
-                                $sql_string = "INSERT INTO \"user\" (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)";
+                                $sql_string = 'INSERT INTO \"user\" (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
                             }
 
                             $db_adapter->query($sql_string,

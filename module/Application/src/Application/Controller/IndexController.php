@@ -139,7 +139,7 @@ class IndexController extends Action
             stream_wrapper_unregister($this->_viewStream);
         }
 
-        stream_wrapper_register($this->_viewStream, "Gc\View\Stream");
+        stream_wrapper_register($this->_viewStream, 'Gc\View\Stream');
         $template_path_stack = $this->getServiceLocator()->get('Zend\View\Resolver\TemplatePathStack');
         $template_path_stack->setUseStreamWrapper(TRUE);
         $this->_viewPath = $template_path_stack->resolve($this->_viewName);
@@ -344,12 +344,12 @@ class IndexController extends Action
      */
     protected function _isSerialized($data)
     {
-        if(trim($data) == "")
+        if(trim($data) == '')
         {
             return FALSE;
         }
 
-        if(preg_match("/^(i|s|a|o|d|N)(.*);/si", $data))
+        if(preg_match('/^(i|s|a|o|d|N)(.*);/si', $data))
         {
             return TRUE;
         }

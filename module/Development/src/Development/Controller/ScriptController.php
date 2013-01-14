@@ -261,7 +261,7 @@ class ScriptController extends Action
         }
 
         $headers = new Headers();
-        $headers->addHeaderLine("Pragma", "public")
+        $headers->addHeaderLine('Pragma', 'public')
             ->addHeaderLine('Cache-control', 'must-revalidate, post-check=0, pre-check=0')
             ->addHeaderLine('Cache-control', 'private')
             ->addHeaderLine('Expires', -1)

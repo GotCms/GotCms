@@ -119,10 +119,10 @@ class Partial extends ZendPartial
 
             if(self::$_streamIsRegistered === FALSE)
             {
-                $existed = in_array("zend.view", stream_get_wrappers());
+                $existed = in_array('zend.view', stream_get_wrappers());
                 if($existed)
                 {
-                    stream_wrapper_unregister("zend.view");
+                    stream_wrapper_unregister('zend.view');
                     stream_wrapper_register('zend.view', 'Gc\View\Stream');
                 }
             }
