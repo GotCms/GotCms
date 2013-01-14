@@ -133,7 +133,7 @@ class CkEditor extends Object
     {
         $elements = array();
         $items = $this->getAllToolbarItems();
-        $toolbar_items =  $this->getToolbarItems();
+        $toolbar_items = $this->getToolbarItems();
         foreach($items as $group)
         {
             if(!empty($group['items']) and is_array($group['items']))

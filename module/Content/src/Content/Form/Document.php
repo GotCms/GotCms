@@ -70,14 +70,14 @@ class Document extends AbstractForm
         $input_filter = $input_filter_factory->createInputFilter(array(
             'document-name' => array(
                 'name' => 'document-name',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
             ),
             'document-url_key' => array(
                 'name' => 'document-url_key',
-                'required'=> FALSE,
+                'required' => FALSE,
                 'allow_empty' => TRUE,
                 'validators' => array(
                     array('name' => 'regex', 'options' => array(
@@ -202,7 +202,7 @@ class Document extends AbstractForm
         $input_filter_factory = $this->getInputFilter();
         $input_filter = $input_filter_factory->add(array(
             'name' => 'document-view',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -225,7 +225,7 @@ class Document extends AbstractForm
 
         $input_filter = $input_filter_factory->add(array(
             'name' => 'document-layout',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),

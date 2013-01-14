@@ -71,7 +71,7 @@ class Install extends AbstractForm
         $input_filter = $this->getInputFilter();
         $input_filter->add(array(
             'name' => 'lang',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -96,7 +96,7 @@ class Install extends AbstractForm
         $input_filter = $this->getInputFilter();
         $input_filter->add(array(
             'name' => 'accept-license',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
                 array(
@@ -154,7 +154,7 @@ class Install extends AbstractForm
         $input_filter = $this->getInputFilter();
         $input_filter->add(array(
             'name' => 'driver',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -162,7 +162,7 @@ class Install extends AbstractForm
 
         $input_filter->add(array(
             'name' => 'hostname',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -170,7 +170,7 @@ class Install extends AbstractForm
 
         $input_filter->add(array(
             'name' => 'username',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -178,12 +178,12 @@ class Install extends AbstractForm
 
         $input_filter->add(array(
             'name' => 'password',
-            'required'=> FALSE,
+            'required' => FALSE,
         ), 'password');
 
         $input_filter->add(array(
             'name' => 'dbname',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -262,7 +262,7 @@ class Install extends AbstractForm
         $input_filter = $this->getInputFilter();
         $input_filter->add(array(
             'name' => 'site_name',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -270,7 +270,7 @@ class Install extends AbstractForm
 
         $input_filter->add(array(
             'name' => 'admin_firstname',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -278,7 +278,7 @@ class Install extends AbstractForm
 
         $input_filter->add(array(
             'name' => 'admin_lastname',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -286,7 +286,7 @@ class Install extends AbstractForm
 
         $input_filter->add(array(
             'name' => 'admin_email',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
                 array('name' => 'email_address'),
@@ -295,7 +295,7 @@ class Install extends AbstractForm
 
         $input_filter->add(array(
             'name' => 'admin_login',
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
@@ -303,17 +303,17 @@ class Install extends AbstractForm
 
         $input_filter->add(array(
             'name' => 'site_is_offline',
-            'required'=> FALSE,
+            'required' => FALSE,
         ), 'site_is_offline');
 
         $input_filter->add(array(
             'name' => 'admin_password',
-            'required'=> FALSE,
+            'required' => FALSE,
         ), 'admin_password');
 
         $input_filter->add(array(
             'name' => 'template',
-            'required'=> TRUE,
+            'required' => TRUE,
         ), 'template');
     }
 }

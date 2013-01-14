@@ -89,7 +89,7 @@ class Module extends AbstractForm
         $input_filter = $input_filter_factory->createInputFilter(array(
             'module' => array(
                 'name' => 'module',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 )

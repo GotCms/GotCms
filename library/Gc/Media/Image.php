@@ -319,7 +319,7 @@ class Image
             break;
 
             case '.png':
-                $scale_quality = round(($image_quality/100) * 9);
+                $scale_quality = round(($image_quality / 100) * 9);
 
                 $invert_scale_quality = 9 - $scale_quality;
 

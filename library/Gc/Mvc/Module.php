@@ -231,7 +231,7 @@ abstract class Module
 
                     if(GcConfig::getValue('session_handler') == GcConfig::SESSION_DATABASE)
                     {
-                        $tablegateway_config =  new DbTableGatewayOptions(array(
+                        $tablegateway_config = new DbTableGatewayOptions(array(
                             'idColumn'   => 'id',
                             'nameColumn' => 'name',
                             'modifiedColumn' => 'updated_at',

@@ -78,7 +78,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function test__call()
     {
-        unset(AbstractTable::$_tables['user']);
         $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $this->_object->select());
     }
 

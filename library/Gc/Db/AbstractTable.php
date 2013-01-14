@@ -48,7 +48,7 @@ abstract class AbstractTable extends Object
      *
      * @var array \Zend\Db\TableGateway\TableGateway
      */
-    static $_tables = array();
+    static protected $_tables = array();
 
     /**
      * Initialize constructor and save instance of \Zend\Db\TableGateway\TableGateway($_name) in self::$_tables
@@ -74,11 +74,6 @@ abstract class AbstractTable extends Object
      */
     public function __call($method, $args)
     {
-        if(empty(self::$_tables[$this->_name]))
-        {
-            $this->__construct();
-        }
-
         if(method_exists(self::$_tables[$this->_name], $method))
         {
             return call_user_func_array(array(self::$_tables[$this->_name], $method), $args);

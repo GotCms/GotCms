@@ -101,7 +101,7 @@ class DocumentType extends AbstractForm
             'type'   => 'Zend\InputFilter\InputFilter',
             'name' => array(
                 'name' => 'name',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                     array(
@@ -116,7 +116,7 @@ class DocumentType extends AbstractForm
             ),
             'description' => array(
                 'name' => 'description',
-                'required'=> FALSE,
+                'required' => FALSE,
             ),
             'icon_id' => array(
                 'name' => 'icon_id',
@@ -183,7 +183,7 @@ class DocumentType extends AbstractForm
             'type'   => 'Zend\InputFilter\InputFilter',
             'default_view' => array(
                 'name' => 'default_view',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty')
                 ),
@@ -294,14 +294,14 @@ class DocumentType extends AbstractForm
             'type'   => 'Zend\InputFilter\InputFilter',
             'name' => array(
                 'name' => 'name',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty')
                 ),
             ),
             'identifier' => array(
                 'name' => 'identifier',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                     array('name' => 'regex', 'options' => array(
@@ -311,14 +311,14 @@ class DocumentType extends AbstractForm
             ),
             'tab' => array(
                 'name' => 'tab',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty')
                 ),
             ),
             'datatype' => array(
                 'name' => 'datatype',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty')
                 ),
@@ -412,14 +412,14 @@ class DocumentType extends AbstractForm
             'type'   => 'Zend\InputFilter\InputFilter',
             'name' => array(
                 'name' => 'name',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty')
                 ),
             ),
             'description' => array(
                 'name' => 'description',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty')
                 ),

@@ -46,7 +46,7 @@ class Comment extends AbstractTable
      *
      * @var string
      */
-    protected $_name ='blog_comment';
+    protected $_name = 'blog_comment';
 
     /**
      * Return all documents with comment(s)

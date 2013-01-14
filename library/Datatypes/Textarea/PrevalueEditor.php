@@ -90,7 +90,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $wrap = new Element\Select('wrap');
         $wrap->setAttributes(array(
             'label' => 'Wrap',
-            'options' => array('hard'=>'hard', 'off'=>'off', 'soft'=>'soft'),
+            'options' => array('hard' => 'hard', 'off' => 'off', 'soft' => 'soft'),
             'value' => isset($config['wrap']) ? $config['wrap'] : '',
         ));
 

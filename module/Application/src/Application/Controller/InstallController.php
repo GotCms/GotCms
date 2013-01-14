@@ -353,7 +353,7 @@ class InstallController extends Action
 
                             try
                             {
-                                foreach($roles['role'] as $key=>$value)
+                                foreach($roles['role'] as $key => $value)
                                 {
                                     $statement = $db_adapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
                                     $result = $statement->execute();

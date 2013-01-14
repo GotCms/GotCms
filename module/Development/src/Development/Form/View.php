@@ -51,7 +51,7 @@ class View extends AbstractForm
         $input_filter_factory = new InputFilterFactory();
         $input_filter = $input_filter_factory->createInputFilter(array(
             'name' => array(
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                     array(
@@ -65,7 +65,7 @@ class View extends AbstractForm
                 ),
             ),
             'identifier' => array(
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                     array('name' => 'regex', 'options' => array(

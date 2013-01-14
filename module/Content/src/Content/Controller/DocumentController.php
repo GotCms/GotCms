@@ -111,7 +111,7 @@ class DocumentController extends Action
         if($this->getRequest()->isPost())
         {
             $document_form->getInputFilter()->add(array(
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
@@ -414,7 +414,7 @@ class DocumentController extends Action
             }
 
             $copy_document = new DocumentModel();
-            $copy_document_properties =  new Property\Collection();
+            $copy_document_properties = new Property\Collection();
             $copy_document_properties->load(NULL, NULL, $document->getId());
 
             $copy_document->addData($document->getData());

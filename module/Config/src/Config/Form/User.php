@@ -53,13 +53,13 @@ class User extends AbstractForm
         $input_filter_factory = new InputFilterFactory();
         $input_filter = $input_filter_factory->createInputFilter(array(
             'email' => array(
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                     array('name' => 'email_address'),
                 ),
             ), 'login' => array(
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                     array(
@@ -72,17 +72,17 @@ class User extends AbstractForm
                     ),
                 ),
             ), 'lastname' => array(
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
             ), 'firstname' => array(
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
             ), 'user_acl_role_id' => array(
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
@@ -120,14 +120,14 @@ class User extends AbstractForm
     {
         $filter = $this->getInputFilter();
         $filter->add(array(
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),
         ), 'password');
 
         $filter->add(array(
-            'required'=> TRUE,
+            'required' => TRUE,
             'validators' => array(
                 array('name' => 'not_empty'),
             ),

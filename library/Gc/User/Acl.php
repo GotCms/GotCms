@@ -118,7 +118,7 @@ class Acl extends ZendAcl\Acl
         $select->from('user_acl_resource');
         $resources = $this->_roleTable->fetchAll($select);
 
-        foreach($resources as $key=>$value)
+        foreach($resources as $key => $value)
         {
             if(!$this->hasResource($value['resource']))
             {
@@ -146,7 +146,7 @@ class Acl extends ZendAcl\Acl
 
         $acl = $this->_roleTable->fetchAll($select);
 
-        foreach($acl as $key=>$value)
+        foreach($acl as $key => $value)
         {
             $this->allow($value['name'], $value['resource'], $value['permission']);
         }

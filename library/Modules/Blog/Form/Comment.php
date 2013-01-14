@@ -65,22 +65,22 @@ class Comment extends AbstractForm
         $input_filter = $input_filter_factory->createInputFilter(array(
             'show_email' => array(
                 'name' => 'show_email',
-                'required'=> FALSE,
+                'required' => FALSE,
             ),
             'username' => array(
                 'name' => 'username',
-                'required'=> TRUE,
+                'required' => TRUE,
             ),
             'email' => array(
                 'name' => 'email',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'email_address'),
                 ),
             ),
             'message' => array(
                 'name' => 'message',
-                'required'=> TRUE,
+                'required' => TRUE,
             ),
         ));
 

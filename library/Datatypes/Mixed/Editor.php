@@ -76,11 +76,11 @@ class Editor extends AbstractEditor
                         if(!empty($name[0]))
                         {
                             $data = array(
-                                'name' => $_OLD_FILES[$this->getName()]['name'][$line_id][$datatype_id][$name[0]],
-                                'type' => $_OLD_FILES[$this->getName()]['type'][$line_id][$datatype_id][$name[0]],
+                                'name'     => $_OLD_FILES[$this->getName()]['name'][$line_id][$datatype_id][$name[0]],
+                                'type'     => $_OLD_FILES[$this->getName()]['type'][$line_id][$datatype_id][$name[0]],
                                 'tmp_name' => $_OLD_FILES[$this->getName()]['tmp_name'][$line_id][$datatype_id][$name[0]],
-                                'error' =>$_OLD_FILES[$this->getName()]['error'][$line_id][$datatype_id][$name[0]],
-                                'error' => $_OLD_FILES[$this->getName()]['error'][$line_id][$datatype_id][$name[0]],
+                                'error'    => $_OLD_FILES[$this->getName()]['error'][$line_id][$datatype_id][$name[0]],
+                                'error'    => $_OLD_FILES[$this->getName()]['error'][$line_id][$datatype_id][$name[0]],
                             );
 
                             $_FILES[$name[0]] = $data;

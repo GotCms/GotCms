@@ -56,7 +56,7 @@ class Translation extends AbstractForm
         $input_filter = $input_filter_factory->createInputFilter(array(
             'source' => array(
                 'name' => 'source',
-                'required'=> TRUE,
+                'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),

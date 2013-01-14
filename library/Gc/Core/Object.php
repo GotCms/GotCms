@@ -176,7 +176,7 @@ abstract class Object
      */
     public function getData($key='', $index = NULL)
     {
-        if(''===$key)
+        if('' === $key)
         {
             return $this->_data;
         }
@@ -191,7 +191,7 @@ abstract class Object
             $data = $this->_data;
             foreach($key_array as $i => $k)
             {
-                if($k==='')
+                if($k === '')
                 {
                     return $default;
                 }
@@ -315,12 +315,12 @@ abstract class Object
         $xml = '';
         if($add_open_tag)
         {
-            $xml.= '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
+            $xml .= '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
         }
 
         if(!empty($root_name))
         {
-            $xml.= '<' . $root_name . '>' . PHP_EOL;
+            $xml .= '<' . $root_name . '>' . PHP_EOL;
         }
 
         $xml_model = new SimpleXMLElement('<node></node>');
@@ -337,13 +337,13 @@ abstract class Object
                 $field_value = htmlentities($field_value);
             }
 
-            $xml.= '<' . $field_name . '>' . $field_value . '</' . $field_name . '>' . PHP_EOL;
+            $xml .= '<' . $field_name . '>' . $field_value . '</' . $field_name . '>' . PHP_EOL;
         }
 
         if(!empty($root_name))
         {
 
-            $xml.= '</' . $root_name . '>' . PHP_EOL;
+            $xml .= '</' . $root_name . '>' . PHP_EOL;
         }
 
         return $xml;

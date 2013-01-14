@@ -63,7 +63,7 @@ class Script extends AbstractHelper
             stream_wrapper_register('gc.script', 'Gc\View\Stream');
         }
 
-        $script =  ScriptModel::fromIdentifier($identifier);
+        $script = ScriptModel::fromIdentifier($identifier);
         if(empty($script))
         {
             return FALSE;

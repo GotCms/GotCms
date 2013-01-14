@@ -127,7 +127,7 @@ class Partial extends ZendPartial
                 }
             }
 
-            $view_model =  ViewModel::fromIdentifier($name);
+            $view_model = ViewModel::fromIdentifier($name);
             if(empty($view_model))
             {
                 return FALSE;
