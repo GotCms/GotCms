@@ -28,6 +28,7 @@
 namespace Application\Controller;
 
 use Gc\Mvc\Controller\Action,
+    Gc\Media\File,
     Gc\Version,
     Application\Form\Install,
     Zend\Db\Adapter\Adapter as DbAdapter;
@@ -143,10 +144,10 @@ class InstallController extends Action
         }
 
         $server_data = array();
-        $server_data[] = array('label' => '/public/frontend', 'value' => $this->_isWritable(GC_APPLICATION_PATH . '/public/frontend'));
-        $server_data[] = array('label' => '/config/autoload', 'value' => $this->_isWritable(GC_APPLICATION_PATH . '/config/autoload'));
+        $server_data[] = array('label' => '/public/frontend', 'value' => File::isWritable(GC_APPLICATION_PATH . '/public/frontend'));
+        $server_data[] = array('label' => '/config/autoload', 'value' => File::isWritable(GC_APPLICATION_PATH . '/config/autoload'));
         $server_data[] = array('label' => '/data/cache', 'value' => is_writable(GC_APPLICATION_PATH . '/data/cache'));
-        $server_data[] = array('label' => '/public/media', 'value' => $this->_isWritable(GC_MEDIA_PATH));
+        $server_data[] = array('label' => '/public/media', 'value' => File::isWritable(GC_MEDIA_PATH));
 
         $php_data = array();
         $php_data[] = array('label' => 'Php version >= 5.3.3', 'value' => PHP_VERSION_ID > 50303);
@@ -450,10 +451,10 @@ class InstallController extends Action
                             $sql = file_get_contents($file_path);
                             $db_adapter->getDriver()->getConnection()->getResource()->exec($sql);
 
-                            $this->_copyDirectory($template_path . '/frontend', GC_APPLICATION_PATH . '/public/frontend');
+                            File::copyDirectory($template_path . '/frontend', GC_APPLICATION_PATH . '/public/frontend');
                             if(file_exists($template_path . '/files'))
                             {
-                                $this->_copyDirectory($template_path . '/files', GC_MEDIA_PATH . '/files');
+                                File::copyDirectory($template_path . '/files', GC_MEDIA_PATH . '/files');
                             }
                         break;
 
@@ -530,78 +531,5 @@ class InstallController extends Action
                 return $this->redirect()->toRoute('configuration');
             }
         }
-    }
-
-    /**
-     * Copy directory from source to destination
-     *
-     * @param string $source
-     * @param string $destination
-     * @return boolean
-     */
-    protected function _copyDirectory($source, $destination)
-    {
-        if(is_dir($source))
-        {
-            if(!file_exists($destination))
-            {
-                @mkdir($destination, 0777);
-            }
-
-            $directory = dir($source);
-            while(FALSE !== ($read_directory = $directory->read()))
-            {
-                if($read_directory == '.' || $read_directory == '..')
-                {
-                    continue;
-                }
-
-                $path_dir = $source . '/' . $read_directory;
-                $this->_copyDirectory($path_dir, $destination . '/' . $read_directory);
-            }
-
-            $directory->close();
-        }
-        else
-        {
-            $result = copy($source, $destination);
-            @chmod($destination, $this->_umask);
-
-            return $result;
-        }
-
-        return TRUE;
-    }
-
-    /**
-     * Test is_writable recursively
-     *
-     * @param string $directory Directory start
-     * @return boolean
-     */
-    protected function _isWritable($directory)
-    {
-        $folder = opendir($directory);
-        while(FALSE !== ($file = readdir($folder)))
-        {
-            $path = $directory . '/' . $file;
-            if(!in_array($file, array('.', '..')))
-            {
-                if(is_dir($path))
-                {
-                    return $this->_isWritable($path);
-                }
-
-                if(!is_writable($path))
-                {
-                    var_dump($path);
-                    closedir($folder);
-                    return FALSE;
-                }
-            }
-        }
-
-        closedir($folder);
-        return true;
     }
 }

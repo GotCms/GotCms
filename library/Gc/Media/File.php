@@ -191,4 +191,76 @@ class File extends Object
 
         return TRUE;
     }
+
+    /**
+     * Copy directory from source to destination
+     *
+     * @param string $source
+     * @param string $destination
+     * @return boolean
+     */
+    static public function copyDirectory()
+    {
+        if(is_dir($source))
+        {
+            if(!file_exists($destination))
+            {
+                @mkdir($destination, 0777);
+            }
+
+            $directory = dir($source);
+            while(FALSE !== ($read_directory = $directory->read()))
+            {
+                if($read_directory == '.' || $read_directory == '..')
+                {
+                    continue;
+                }
+
+                $path_dir = $source . '/' . $read_directory;
+                self::copyDirectory($path_dir, $destination . '/' . $read_directory);
+            }
+
+            $directory->close();
+        }
+        else
+        {
+            $result = copy($source, $destination);
+            @chmod($destination, 0774);
+
+            return $result;
+        }
+
+        return TRUE;
+    }
+
+    /**
+     * Test is_writable recursively
+     *
+     * @param string $directory Directory start
+     * @return boolean
+     */
+    static public function isWritable($directory)
+    {
+        $folder = opendir($directory);
+        while(FALSE !== ($file = readdir($folder)))
+        {
+            $path = $directory . '/' . $file;
+            if(!in_array($file, array('.', '..')))
+            {
+                if(is_dir($path))
+                {
+                    return self::isWritable($path);
+                }
+
+                if(!is_writable($path))
+                {
+                    closedir($folder);
+                    return FALSE;
+                }
+            }
+        }
+
+        closedir($folder);
+        return true;
+    }
 }
