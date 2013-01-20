@@ -151,24 +151,33 @@ class CmsController extends Action
 
             $current_version = Version::VERSION;
             $output = '';
-            //Fetch content
-            $output .= $updater->update();
-
-            //Upgrade cms
-            $output .= $updater->upgrade();
-
-            //Update database
-            if(!$updater->updateDatabase())
+            if($updater->update())
             {
-                //Upgrade cms
-                $updater->rollback($current_version);
-                $this->flashMessenger()->setNameSpace('error')->addMessage($updater->getError());
-                return $this->redirect()->toRoute('cmsUpdate');
+                //Fetch content
+                if($updater->upgrade())
+                {
+                    //Upgrade cms
+                    //Update database
+                    if(!$updater->updateDatabase())
+                    {
+                        //Upgrade cms
+                        $updater->rollback($current_version);
+                    }
+                    else
+                    {
+                        $session['updateOutput'] = $updater->getMessages();
+
+                        $this->flashMessenger()->setNameSpace('success')->addMessage(sprintf('Cms update to %s', $latest_version));
+                        return $this->redirect()->toRoute('cmsUpdate');
+                    }
+                }
             }
 
-            $session['updateOutput'] = $output;
+            foreach($updater->getMessages() as $message)
+            {
+                $this->flashMessenger()->setNameSpace('error')->addMessage($message);
+            }
 
-            $this->flashMessenger()->setNameSpace('success')->addMessage(sprintf('Cms update to %s', $latest_version));
             return $this->redirect()->toRoute('cmsUpdate');
         }
 

@@ -40,6 +40,13 @@ use Gc\Core\Object,
 abstract class AbstractAdapter extends Object
 {
     /**
+     * Messages list
+     *
+     * @var array
+     */
+    protected $_messages = array();
+
+    /**
      * Update
      */
     abstract public function update();
@@ -61,8 +68,31 @@ abstract class AbstractAdapter extends Object
      *
      * @return string
      */
-    public function getLatest()
+    public function getLatestVersion()
     {
         return Version::getLatest();
+    }
+
+    /**
+     * Add message
+     *
+     * @param string
+     * @return \Gc\Core\Updater\Adapter
+     */
+    public function addMessage($message)
+    {
+        $this->_messages[] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Return messages stack
+     *
+     * @return array
+     */
+    public function getMessages()
+    {
+        return $this->_messages;
     }
 }

@@ -45,8 +45,9 @@ class Git extends AbstractAdapter
     {
         putenv('PATH=' . getenv('PATH') . ':' . GC_APPLICATION_PATH);
         exec('git fetch 2>&1', $output);
+        $this->addMessage(implode(PHP_EOL, $output));
 
-        return implode(PHP_EOL, $output);
+        return TRUE;
     }
 
     /**
@@ -57,9 +58,10 @@ class Git extends AbstractAdapter
     public function upgrade()
     {
         putenv('PATH=' . getenv('PATH') . ':' . GC_APPLICATION_PATH);
-        exec('git checkout v' . $this->getLatest() . ' 2>&1', $output);
+        exec('git checkout v' . $this->getLatestVersion() . ' 2>&1', $output);
+        $this->addMessage(implode(PHP_EOL, $output));
 
-        return implode(PHP_EOL, $output);
+        return TRUE;
     }
 
     /**
@@ -72,7 +74,8 @@ class Git extends AbstractAdapter
     {
         putenv('PATH=' . getenv('PATH') . ':' . GC_APPLICATION_PATH);
         exec('git checkout v' . $version . ' 2>&1', $output);
+        $this->addMessage(implode(PHP_EOL, $output));
 
-        return implode(PHP_EOL, $output);
+        return TRUE;
     }
 }

@@ -182,4 +182,14 @@ class Updater extends Object
 
         return TRUE;
     }
+
+    /**
+     * Retrieve messages from adapter
+     *
+     * @return array
+     */
+    public function getMessages()
+    {
+        return $this->_adapter->getMessages();
+    }
 }
