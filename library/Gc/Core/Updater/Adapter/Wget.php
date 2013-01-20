@@ -164,8 +164,8 @@ class Wget extends AbstractAdapter
             }
             else
             {
-                $newFile = str_replace(GC_APPLICATION_PATH, '', $file);
-                $zip->addFile($file, $newFile);
+                $new_file = str_replace(GC_APPLICATION_PATH, '', $file);
+                $zip->addFile($file, $new_file);
             }
         }
 

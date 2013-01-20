@@ -199,7 +199,7 @@ class File extends Object
      * @param string $destination
      * @return boolean
      */
-    static public function copyDirectory()
+    static public function copyDirectory($source, $destination)
     {
         if(is_dir($source))
         {
