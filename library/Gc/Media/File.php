@@ -225,7 +225,7 @@ class File extends Object
         else
         {
             $result = copy($source, $destination);
-            @chmod($destination, 0774);
+            @chmod($destination, self::FILE_PERMISSION);
 
             return $result;
         }
@@ -237,22 +237,24 @@ class File extends Object
      * Test is_writable recursively
      *
      * @param string $directory Directory start
+     * @param array $exclude_directory Exclude directory
      * @return boolean
      */
-    static public function isWritable($directory)
+    static public function isWritable($directory, $exclude_directory = array())
     {
         $folder = opendir($directory);
         while(FALSE !== ($file = readdir($folder)))
         {
             $path = $directory . '/' . $file;
-            if(!in_array($file, array('.', '..')))
+            if(!in_array($file, array('.', '..')) and !in_array($path, $exclude_directory))
             {
+                $is_writable = TRUE;
                 if(is_dir($path))
                 {
-                    return self::isWritable($path);
+                    $is_writable = self::isWritable($path, $exclude_directory);
                 }
 
-                if(!is_writable($path))
+                if(empty($is_writable) or !is_writable($path))
                 {
                     closedir($folder);
                     return FALSE;
@@ -261,6 +263,6 @@ class File extends Object
         }
 
         closedir($folder);
-        return true;
+        return TRUE;
     }
 }
