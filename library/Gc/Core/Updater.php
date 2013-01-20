@@ -128,16 +128,17 @@ class Updater extends Object
     /**
      * Rollback if problem with database
      *
+     * @param string $current_version
      * @return void
      */
-    public function rollback()
+    public function rollback($current_version)
     {
         if(empty($this->_adapter))
         {
             return FALSE;
         }
 
-        return $this->_adapter->rollback();
+        return $this->_adapter->rollback($current_version);
     }
 
     /**
@@ -153,16 +154,34 @@ class Updater extends Object
         }
 
         $configuration = Registry::get('Configuration');
-        $files = glob(sprintf($this->getUpdateDirectory() . '/%s/*.sql', $configuration['db']['driver']));
+        $files = array();
+        $update_path = GC_APPLICATION_PATH . '/data/update';
+        $path = glob($update_path . '/*');
+        foreach($path as $file)
+        {
+            $version = str_replace($update_path . '/v', '', $file);
+            if(version_compare($version, Version::VERSION, '>'))
+            {
+                $file_list = glob(sprintf($file . '/%s/*.sql', $configuration['db']['driver']));
+                if(!empty($file_list))
+                {
+                    $files[] = $file_list;
+                }
+            }
+        }
+
         if(empty($files))
         {
             return TRUE;
         }
 
         $sql = '';
-        foreach($files as $filename)
+        foreach($files as $file_list)
         {
-            $sql .= file_get_contents($filename) . PHP_EOL;
+            foreach($file_list as $filename)
+            {
+                $sql .= file_get_contents($filename) . PHP_EOL;
+            }
         }
 
         $resource = Registry::get('Db')->getDriver()->getConnection()->getResource();
