@@ -84,7 +84,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     public function testUpdate()
     {
         $this->_object->load('git');
-        $this->assertInternalType('string', $this->_object->update());
+        $this->assertTrue($this->_object->update());
     }
 
     /**
@@ -95,14 +95,21 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_object->update());
     }
 
-
     /**
      * @covers Gc\Core\Updater::upgrade
      */
     public function testUpgrade()
     {
         $this->_object->load('git');
-        $this->assertInternalType('string', $this->_object->upgrade());
+        $this->assertTrue($this->_object->upgrade());
+    }
+
+    /**
+     * @covers Gc\Core\Updater::rollback
+     */
+    public function testRollbackWithoutAdapter()
+    {
+        $this->assertFalse($this->_object->rollback('version'));
     }
 
     /**

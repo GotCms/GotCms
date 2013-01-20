@@ -65,7 +65,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdate()
     {
-        $this->assertInternalType('string', $this->_object->update());
+        $this->assertTrue($this->_object->update());
     }
 
     /**
@@ -74,7 +74,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpgrade()
     {
-        $this->assertInternalType('string', $this->_object->upgrade());
+        $this->assertTrue($this->_object->upgrade());
     }
 
     /**
@@ -82,6 +82,6 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function testRollback()
     {
-        $this->assertInternalType('string', $this->_object->rollback('version'));
+        $this->assertTrue($this->_object->rollback('version'));
     }
 }
