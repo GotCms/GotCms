@@ -90,6 +90,8 @@ if(!class_exists('Zend\Loader\AutoloaderFactory'))
 // Run application
 \Zend\Console\Console::overrideIsConsole(FALSE);
 $application = \Zend\Mvc\Application::init($configuration);
+$application->getMvcEvent()->getRouter()->setRequestUri($application->getRequest()->getUri());
+$application->getRequest()->setBasePath('http://gotcms.com');
 \Gc\Registry::set('Application', $application);
 //Remove all event observer
 \Gc\Event\StaticEventManager::resetInstance();

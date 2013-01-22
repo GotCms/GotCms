@@ -61,11 +61,11 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Gc\Core\Updater\Adapter\AbstractAdapter::getLatest
+     * @covers Gc\Core\Updater\Adapter\AbstractAdapter::getLatestVersion
      * @covers Gc\Version::getLatest
      */
-    public function testGetLatest()
+    public function testGetLatestVersion()
     {
-        $this->assertEquals(\Gc\Version::getLatest(), $this->_object->getLatest());
+        $this->assertEquals(\Gc\Version::getLatest(), $this->_object->getLatestVersion());
     }
 }

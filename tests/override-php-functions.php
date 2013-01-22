@@ -79,11 +79,16 @@ function glob($pattern, $flags = 0)
 
     stream_wrapper_register('zend.view', '\Gc\View\Stream');
 
-    $content = trim(file_get_contents('zend.view://test-updater'));
-    if(empty($content))
+    if(preg_match('~\.sql$~', $pattern))
     {
-        return FALSE;
+        $content = trim(file_get_contents('zend.view://test-updater'));
+        if(empty($content))
+        {
+            return FALSE;
+        }
+
+        return array('zend.view://test-updater');
     }
 
-    return array('zend.view://test-updater');
+    return array('9999.999.999');
 }
