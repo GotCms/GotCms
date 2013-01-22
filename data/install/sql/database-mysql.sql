@@ -180,6 +180,8 @@ CREATE TABLE `user` (
     `email` VARCHAR(255) NOT NULL,
     `login` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
+    `retrieve_password_key` VARCHAR(40) DEFAULT NULL,
+    `retrieve_updated_at` DATETIME DEFAULT NULL,
     `user_acl_role_id` INT NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`email`)

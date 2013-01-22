@@ -207,10 +207,17 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\User\Model::sendForgotPasswordEmail
      */
-    public function testSendForgotPasswordEmail()
+    public function testSendForgotPasswordWithWrongEmail()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->assertFalse($this->_object->sendForgotPasswordEmail('wrong@email.test'));
+    }
+
+    /**
+     * @covers Gc\User\Model::sendForgotPasswordEmail
+     */
+    public function testSendForgotPasswordWithEmail()
+    {
+        $this->assertTrue($this->_object->sendForgotPasswordEmail('test@test.com'));
     }
 
     /**

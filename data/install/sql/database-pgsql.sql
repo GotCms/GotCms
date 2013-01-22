@@ -165,6 +165,8 @@ CREATE TABLE "user" (
 "email" character varying NOT NULL,
 "login" character varying NOT NULL,
 "password" character varying NOT NULL,
+"retrieve_password_key" character varying(40) DEFAULT NULL,
+"retrieve_updated_at" timestamp without time zone DEFAULT NULL,
 "user_acl_role_id" integer NOT NULL DEFAULT 0
 ) WITH OIDS;
 ALTER TABLE "user" ADD CONSTRAINT "user_pk" PRIMARY KEY("id");

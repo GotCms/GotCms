@@ -283,9 +283,10 @@ class Model extends AbstractTable
     public function sendForgotPasswordEmail($email)
     {
         $row = $this->select(array('email' => $email));
-        $user = self::fromArray((array)$row->current());
-        if(!empty($user))
+        $current = $row->current();
+        if(!empty($current))
         {
+            $user = self::fromArray((array)$current);
             $password_key = sha1(uniqid());
             $user->setRetrievePasswordKey($password_key);
             $user->setRetrieveUpdatedAt(new Expression('NOW()'));
