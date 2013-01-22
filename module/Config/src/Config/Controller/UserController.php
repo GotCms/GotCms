@@ -33,7 +33,8 @@ use Config\Form\UserLogin,
     Gc\Mvc\Controller\Action,
     Gc\User,
     Zend\Http\Request,
-    Zend\View\Model\ViewModel;
+    Zend\View\Model\ViewModel,
+    DateTime;
 
 /**
  * User controller
@@ -106,13 +107,57 @@ class UserController extends Action
     {
         $this->layout()->setTemplate('layouts/one-page.phtml');
         $forgot_password_form = new UserForgotForm();
-        $post = $this->getRequest()->getPost();
-        if($this->getRequest()->isPost() and $forgot_password_form->isValid($post->toArray()))
+        $id = $this->getRouteMatch()->getParam('id');
+        $key = $this->getRouteMatch()->getParam('key');
+        if(!empty($id) and !empty($key))
         {
-            $user_model = new User\Model();
-            $user_model->sendForgotPasswordEmail($forgot_password_form->getValue('email'));
-            //@TODO send mail to retrieve password
-            $this->redirect()->toRoute('admin');
+            $user_model = User\Model::fromId($id);
+            if($user_model->getRetrievePasswordKey() == $key and strtotime('-1 hour') < strtotime($user_model->getRetrieveUpdatedAt()))
+            {
+                $forgot_password_form->setAttribute('action', $this->url()->fromRoute('userForgotPasswordKey', array(
+                    'id' => $id,
+                    'key' => $key
+                )));
+
+                $forgot_password_form->initResetForm();
+                if($this->getRequest()->isPost())
+                {
+                    $post = $this->getRequest()->getPost();
+                    $forgot_password_form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new \Zend\Validator\Identical($post['password']));
+                    $forgot_password_form->setData($post->toArray());
+                    if($forgot_password_form->isValid())
+                    {
+                        $user_model->setPassword($forgot_password_form->getValue('password'));
+                        $user_model->setRetrievePasswordKey(NULL);
+                        $user_model->setRetrieveUpdatedAt(NULL);
+                        $user_model->save();
+                    }
+
+                    return $this->redirect()->toRoute('admin');
+                }
+
+                return array('form' => $forgot_password_form);
+            }
+
+            return $this->redirect()->toRoute('admin');
+        }
+        else
+        {
+            $forgot_password_form->setAttribute('action', $this->url()->fromRoute('userForgotPassword'));
+            $forgot_password_form->initEmail();
+            if($this->getRequest()->isPost())
+            {
+                $post = $this->getRequest()->getPost();
+                $forgot_password_form->setData($post->toArray());
+                if($forgot_password_form->isValid())
+                {
+                    $user_model = new User\Model();
+                    if($user_model->sendForgotPasswordEmail($forgot_password_form->getValue('email')))
+                    {
+                        return $this->redirect()->toRoute('admin');
+                    }
+                }
+            }
         }
 
         return array('form' => $forgot_password_form);

@@ -28,6 +28,9 @@
 namespace Gc\User;
 
 use Gc\Db\AbstractTable,
+    Gc\Core\Config,
+    Gc\Mail,
+    Gc\Registry,
     Zend\Authentication\Adapter,
     Zend\Authentication\AuthenticationService,
     Zend\Db\Sql\Predicate\Expression,
@@ -143,6 +146,8 @@ class Model extends AbstractTable
             'login' => $this->getLogin(),
             'updated_at' => new Expression('NOW()'),
             'user_acl_role_id' => $this->getUserAclRoleId(),
+            'retrieve_password_key' => $this->getRetrievePasswordKey(),
+            'retrieve_updated_at' => $this->getRetrieveUpdatedAt(),
         );
 
         $password = $this->getPassword();
@@ -278,8 +283,27 @@ class Model extends AbstractTable
     public function sendForgotPasswordEmail($email)
     {
         $row = $this->select(array('email' => $email));
+        $user = self::fromArray((array)$row->current());
+        if(!empty($user))
+        {
+            $password_key = sha1(uniqid());
+            $user->setRetrievePasswordKey($password_key);
+            $user->setRetrieveUpdatedAt(new Expression('NOW()'));
+            $user->save();
 
-        return TRUE;
+            $message = Registry::get('Translator')->translate('To reset your password follow this link but be careful you only have one hour before the link expires:');
+            $message .= '<br>';
+            $message .= Registry::get('Application')->getMvcEvent()->getRouter()->assemble(array(
+                'id' => $user->getId(),
+                'key' => $password_key,
+            ), array('force_canonical' => TRUE, 'name' => 'userForgotPasswordKey'));
+
+            $mail = new Mail('utf-8', $message, Config::getValue('mail_from'), $user->getEmail());
+            $mail->send();
+            return TRUE;
+        }
+
+        return FALSE;
     }
 
     /**

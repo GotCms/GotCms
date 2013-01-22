@@ -1,0 +1,3 @@
+ALTER TABLE `user`
+ADD COLUMN retrieve_password_key VARCHAR(40) DEFAULT NULL,
+ADD COLUMN retrieve_updated_at DATETIME DEFAULT NULL;

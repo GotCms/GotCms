@@ -132,7 +132,7 @@ class Action extends AbstractActionController
             $auth = $this->getAuth();
             if(!$auth->hasIdentity())
             {
-                if(!in_array($route_name, array('userLogin', 'userForgotPassword', 'renderWebsite')))
+                if(!in_array($route_name, array('userLogin', 'userForgotPassword', 'userForgotPasswordKey', 'renderWebsite')))
                 {
                     return $this->redirect()->toRoute('userLogin', array('redirect' => base64_encode($this->getRequest()->getRequestUri())));
                 }

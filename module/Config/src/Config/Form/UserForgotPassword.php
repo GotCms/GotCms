@@ -30,7 +30,7 @@ namespace Config\Form;
 use Gc\Form\AbstractForm,
     Zend\Validator\Db,
     Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory;
+    Zend\InputFilter\InputFilter;
 
 /**
  * User forgot password form
@@ -48,18 +48,51 @@ class UserForgotPassword extends AbstractForm
      */
     public function init()
     {
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
+        $this->setInputFilter(new InputFilter());
+    }
+
+    /**
+     * Initialize UserForgotPassword email form
+     *
+     * @return void
+     */
+    public function initEmail()
+    {
+        $filter = $this->getInputFilter();
+        $filter->add(array(
             'email' => array(
                 'required' => TRUE,
                 'validators' => array(
                     array('name' => 'not_empty'),
                 ),
             ),
-        ));
+        ), 'email');
 
-        $this->setInputFilter($input_filter);
+        $this->add(new Element\Text('email'));
+    }
+    /**
+     * Initialize UserForgotPassword reset form
+     *
+     * @return void
+     */
+    public function initResetForm()
+    {
+        $filter = $this->getInputFilter();
+        $filter->add(array(
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+            ),
+        ), 'password');
 
-        $this->add(new Element('email'));
+        $filter->add(array(
+            'required' => TRUE,
+            'validators' => array(
+                array('name' => 'not_empty'),
+            ),
+        ), 'password_confirm');
+
+        $this->add(new Element\Text('password'));
+        $this->add(new Element\Text('password_confirm'));
     }
 }
