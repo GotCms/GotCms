@@ -30,7 +30,6 @@ namespace Config\Controller;
 use Gc\Mvc\Controller\Action,
     Gc\User,
     Gc\User\Role,
-    Gc\User\Role\Rule,
     Config\Form\Role as RoleForm;
 
 /**
@@ -42,6 +41,13 @@ use Gc\Mvc\Controller\Action,
  */
 class RoleController extends Action
 {
+    /**
+     * Protected role name
+     *
+     * @var string $_protectedName
+     */
+    protected $_protectedName = 'Administrator';
+
     /**
      * Contains information about acl
      *
@@ -56,9 +62,17 @@ class RoleController extends Action
      */
     public function indexAction()
     {
-        $roles = new Role\Collection();
-        $roles->init();
-        return array('roles' => $roles->getRoles());
+        $role_collection = new Role\Collection();
+        $roles = array();
+        foreach($role_collection->getRoles() as $role)
+        {
+            if($role->getName() !== $this->_protectedName)
+            {
+                $roles[] = $role;
+            }
+        }
+
+        return array('roles' => $roles);
     }
 
     /**
@@ -100,10 +114,10 @@ class RoleController extends Action
      */
     public function deleteAction()
     {
-        $role = Role\Model::fromId($this->getRouteMatch()->getParam('id'));
-        if(empty($role))
+        $role_model = Role\Model::fromId($this->getRouteMatch()->getParam('id'));
+        if(empty($role_model) and $role_model->getName() !== $this->_protectedName)
         {
-            if($role->delete())
+            if($role_model->delete())
             {
                 return $this->returnJson(array('success' => TRUE, 'message' => 'Role deleted!'));
             }
@@ -122,6 +136,11 @@ class RoleController extends Action
         $role_id = $this->getRouteMatch()->getParam('id');
 
         $role_model = Role\Model::fromId($role_id);
+        if($role_model->getName() === $this->_protectedName)
+        {
+            $this->flashMessenger()->setNamespace('error')->addMessage("Can't edit this role");
+            return $this->redirect()->toRoute('userRole');
+        }
 
         $form = new RoleForm();
         $form->initPermissions($role_model->getUserPermissions());
