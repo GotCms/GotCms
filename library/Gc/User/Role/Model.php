@@ -48,6 +48,13 @@ class Model extends AbstractTable
     protected $_name = 'user_acl_role';
 
     /**
+     * Protected role name
+     *
+     * @var string $_protectedName
+     */
+    const PROTECTED_NAME = 'Administrator';
+
+    /**
      * Save Role
      *
      * @return integer

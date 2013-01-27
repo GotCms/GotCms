@@ -42,13 +42,6 @@ use Gc\Mvc\Controller\Action,
 class RoleController extends Action
 {
     /**
-     * Protected role name
-     *
-     * @var string $_protectedName
-     */
-    protected $_protectedName = 'Administrator';
-
-    /**
      * Contains information about acl
      *
      * @var array $_aclPage
@@ -66,7 +59,7 @@ class RoleController extends Action
         $roles = array();
         foreach($role_collection->getRoles() as $role)
         {
-            if($role->getName() !== $this->_protectedName)
+            if($role->getName() !== Role\Model::PROTECTED_NAME)
             {
                 $roles[] = $role;
             }
@@ -115,7 +108,7 @@ class RoleController extends Action
     public function deleteAction()
     {
         $role_model = Role\Model::fromId($this->getRouteMatch()->getParam('id'));
-        if(empty($role_model) and $role_model->getName() !== $this->_protectedName)
+        if(empty($role_model) and $role_model->getName() !== Role\Model::PROTECTED_NAME)
         {
             if($role_model->delete())
             {
@@ -136,7 +129,7 @@ class RoleController extends Action
         $role_id = $this->getRouteMatch()->getParam('id');
 
         $role_model = Role\Model::fromId($role_id);
-        if($role_model->getName() === $this->_protectedName)
+        if($role_model->getName() === Role\Model::PROTECTED_NAME)
         {
             $this->flashMessenger()->setNamespace('error')->addMessage("Can't edit this role");
             return $this->redirect()->toRoute('userRole');
