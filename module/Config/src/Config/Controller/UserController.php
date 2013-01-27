@@ -61,16 +61,8 @@ class UserController extends Action
     public function indexAction()
     {
         $user_collection = new User\Collection();
-        $users = array();
-        foreach($user_collection->getUsers() as $user)
-        {
-            if($user->getRole()->getName() !== Role\Model::PROTECTED_NAME)
-            {
-                $users[] = $user;
-            }
-        }
 
-        return array('users' => $users);
+        return array('users' => $user_collection->getUsers());
     }
 
     /**
