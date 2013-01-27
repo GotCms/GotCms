@@ -4,6 +4,7 @@
 - Bug with HTTP 404 (undefined variable view)
 - Gc\Document\Model::fromUrlKey() not saving original data
 - Administrator role must be protected and can't be edit
+- Administrator user must be protected and can't be deleted
 
 ## 0.1.3 (12 Jan 2013):
 - Sitemap module QuickFix set base path (https://github.com/PierreRambaud/GotCms/issues/14)
