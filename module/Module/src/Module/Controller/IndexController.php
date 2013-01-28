@@ -116,7 +116,7 @@ class IndexController extends Action
                     $insert = new Sql\Insert();
                     $insert->into('user_acl')
                         ->values(array(
-                            'user_acl_permission_id' => $module_model->getLastInsertId(),
+                            'user_acl_permission_id' => $module_model->getLastInsertId('user_acl_permission'),
                             'user_acl_role_id' => 1, //Administrator role
                         ));
 
