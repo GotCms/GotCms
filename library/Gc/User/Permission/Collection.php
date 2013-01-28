@@ -51,7 +51,7 @@ class Collection extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'user_acl_permissions';
+    protected $_name = 'user_acl_permission';
 
     /**
      * Initiliaze permissions

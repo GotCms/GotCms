@@ -6,6 +6,7 @@
 - Administrator role must be protected and can't be edit
 - Administrator user must be protected and can't be deleted
 - User can retrieve his password
+- Modules permissions (https://github.com/PierreRambaud/GotCms/issues/21)
 
 ## 0.1.3 (12 Jan 2013):
 - Sitemap module QuickFix set base path (https://github.com/PierreRambaud/GotCms/issues/14)

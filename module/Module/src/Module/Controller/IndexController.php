@@ -31,10 +31,12 @@ use Gc\Component,
     Gc\Mvc\Controller\Action,
     Gc\Module\Collection as ModuleCollection,
     Gc\Module\Model as ModuleModel,
+    Gc\User\Role\Model as RoleModel,
     Module\Form\Module as ModuleForm,
     Modules,
-    Zend\Stdlib\ResponseInterface as Response,
+    Zend\Db\Sql,
     Zend\Json\Json,
+    Zend\Stdlib\ResponseInterface as Response,
     Zend\View\Model\ViewModel;
 
 /**
@@ -51,7 +53,7 @@ class IndexController extends Action
      *
      * @var array $_aclPage
      */
-    protected $_aclPage = array('resource' => 'Modules', 'permission' => 'all');
+    protected $_aclPage = array('resource' => 'Modules');
 
     /**
      * List all modules
@@ -97,6 +99,29 @@ class IndexController extends Action
                     $module_model->setName($module_name);
                     $module_model->save();
 
+                    $select = new Sql\Select();
+                    $select->from('user_acl_resource')
+                        ->columns(array('id'))
+                        ->where->equalTo('resource', 'Modules');
+
+                    $insert = new Sql\Insert();
+                    $insert->into('user_acl_permission')
+                        ->values(array(
+                            'permission' => $module_name,
+                            'user_acl_resource_id' => $module_model->fetchOne($select),
+                        ));
+
+                    $module_model->execute($insert);
+
+                    $insert = new Sql\Insert();
+                    $insert->into('user_acl')
+                        ->values(array(
+                            'user_acl_permission_id' => $module_model->getLastInsertId(),
+                            'user_acl_role_id' => 1, //Administrator role
+                        ));
+
+                    $module_model->execute($insert);
+
                     $this->flashMessenger()->setNameSpace('success')->addMessage('Module installed');
                     return $this->redirect()->toRoute('moduleEdit', array('m' => $module_model->getId()));
                 }
@@ -122,7 +147,25 @@ class IndexController extends Action
 
             if($object->uninstall())
             {
+                $select = new Sql\Select();
+                $select->from('user_acl_permission')
+                    ->columns(array('id'))
+                    ->where->equalTo('permission', $module_model->getName());
+
+                $user_acl_permission_id = $module_model->fetchOne($select);
+
+                $delete = new Sql\Delete();
+                $delete->from('user_acl');
+                $delete->where->equalTo('user_acl_permission_id', $user_acl_permission_id);
+                $module_model->execute($delete);
+
+                $delete = new Sql\Delete();
+                $delete->from('user_acl_permission');
+                $delete->where->equalTo('id', $user_acl_permission_id);
+                $module_model->execute($delete);
+
                 $module_model->delete();
+
                 return $this->returnJson(array('success' => TRUE, 'message' => 'Module uninstalled'));
             }
         }

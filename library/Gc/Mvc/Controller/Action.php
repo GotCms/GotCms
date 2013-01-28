@@ -28,6 +28,7 @@
 namespace Gc\Mvc\Controller;
 
 use Gc\Event\StaticEventManager,
+    Gc\Module\Model as ModuleModel,
     Gc\User\Model,
     Gc\User\Acl,
     Gc\Registry,
@@ -143,12 +144,38 @@ class Action extends AbstractActionController
 
                 $this->_acl = new Acl($user_model);
                 $permissions = $user_model->getRole(TRUE)->getUserPermissions();
-
-                if($route_name != 'userForbidden' and !empty($this->_aclPage) and !$this->_acl->isAllowed($user_model->getRole()->getName(), $this->_aclPage['resource'], $this->_aclPage['permission']))
+                if($route_name != 'userForbidden')
                 {
-                    return $this->redirect()->toRoute('userForbidden');
-                }
+                    if(!empty($this->_aclPage))
+                    {
+                        $is_allowed = FALSE;
+                        if($this->_aclPage['resource'] == 'Modules')
+                        {
+                            $module_id = $this->getRouteMatch()->getParam('m');
+                            if(empty($module_id))
+                            {
+                                $action = $this->getRouteMatch()->getParam('action');
+                                $action = ($action === 'index' ? 'list' : $action);
+                                $is_allowed = $this->_acl->isAllowed($user_model->getRole()->getName(), $this->_aclPage['resource'], $action);
+                            }
+                            else
+                            {
+                                $module_model = ModuleModel::fromId($module_id);
+                                $is_allowed = $this->_acl->isAllowed($user_model->getRole()->getName(), $this->_aclPage['resource'], $module_model->getName());
+                            }
+                        }
+                        else
+                        {
+                            $is_allowed = $this->_acl->isAllowed($user_model->getRole()->getName(), $this->_aclPage['resource'], $this->_aclPage['permission']);
+                        }
 
+                        if(!$is_allowed)
+                        {
+                            return $this->redirect()->toRoute('userForbidden');
+                        }
+                    }
+
+                }
                 $this->layout()->adminUser = $user_model;
             }
         }
