@@ -230,7 +230,10 @@ class IndexController extends Action
         //Change defaut template path
         $result->setTemplate(sprintf('%s/views/%s/%s', $module_model->getName(), $controller_name, $action_name));
 
-        $this->layout()->setVariable('moduleMenu', sprintf('%s/views/menu.phtml', $module_model->getName()));
+        if(file_exists(sprintf(GC_APPLICATION_PATH . '/library/Modules/%s/views/menu.phtml', $module_model->getName())))
+        {
+            $this->layout()->setVariable('moduleMenu', sprintf('%s/views/menu.phtml', $module_model->getName()));
+        }
 
         return $result;
     }
