@@ -7,6 +7,8 @@
 - Administrator user must be protected and can't be deleted
 - User can retrieve his password
 - Modules permissions (https://github.com/PierreRambaud/GotCms/issues/21)
+- Methods fetchAll, fetchOne, fetchRow and execute now have the ability to pass parameters
+- Backup module (https://github.com/PierreRambaud/GotCms/issues/20)
 
 ## 0.1.3 (12 Jan 2013):
 - Sitemap module QuickFix set base path (https://github.com/PierreRambaud/GotCms/issues/14)
