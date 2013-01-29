@@ -161,7 +161,10 @@ class Action extends AbstractActionController
                             else
                             {
                                 $module_model = ModuleModel::fromId($module_id);
-                                $is_allowed = $this->_acl->isAllowed($user_model->getRole()->getName(), $this->_aclPage['resource'], $module_model->getName());
+                                if(!empty($module_model))
+                                {
+                                    $is_allowed = $this->_acl->isAllowed($user_model->getRole()->getName(), $this->_aclPage['resource'], $module_model->getName());
+                                }
                             }
                         }
                         else
