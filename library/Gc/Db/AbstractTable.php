@@ -91,9 +91,10 @@ abstract class AbstractTable extends Object
      * Fetch Row
      *
      * @param mixed $query (\Zend\Db\Sql\Select|string)
+     * @param mixed $parameters
      * @return array|\Zend\Db\ResultSet\RowObjectInterface
      */
-    public function fetchRow($query)
+    public function fetchRow($query, $parameters = NULL)
     {
         if($query instanceof ResultSet)
         {
@@ -101,7 +102,7 @@ abstract class AbstractTable extends Object
         }
 
         $result_set = new ResultSet();
-        $result_set->initialize($this->execute($query));
+        $result_set->initialize($this->execute($query, $parameters));
 
         return $result_set->current();
     }
@@ -110,9 +111,10 @@ abstract class AbstractTable extends Object
      * Fetch Row
      *
      * @param mixed $query (\Zend\Db\Sql\Select|string)
+     * @param mixed $parameters
      * @return array
      */
-    public function fetchAll($query)
+    public function fetchAll($query, $parameters = NULL)
     {
         if($query instanceof ResultSet)
         {
@@ -120,7 +122,7 @@ abstract class AbstractTable extends Object
         }
 
         $result_set = new ResultSet();
-        $result_set->initialize($this->execute($query));
+        $result_set->initialize($this->execute($query, $parameters));
 
         return $result_set->toArray();
     }
@@ -129,9 +131,10 @@ abstract class AbstractTable extends Object
      * Fetch One
      *
      * @param mixed $query (\Zend\Db\Sql\Select|string)
+     * @param mixed $parameters
      * @return mixed
      */
-    public function fetchOne($query)
+    public function fetchOne($query, $parameters = NULL)
     {
         if($query instanceof ResultSet)
         {
@@ -139,7 +142,7 @@ abstract class AbstractTable extends Object
         }
         else
         {
-            $row = $this->fetchRow($query);
+            $row = $this->fetchRow($query, $parameters);
         }
 
         if(!empty($row))
@@ -155,9 +158,10 @@ abstract class AbstractTable extends Object
      * Execute query
      *
      * @param mixed $query (\Zend\Db\Sql\*|string)
+     * @param mixed $parameters
      * @return array|\Zend\Db\Adapter\Driver\Pdo\Result
      */
-    public function execute($query)
+    public function execute($query, $parameters = NULL)
     {
         if(is_string($query))
         {
@@ -169,7 +173,7 @@ abstract class AbstractTable extends Object
             $query->prepareStatement($this->getAdapter(), $statement);
         }
 
-        return $statement->execute();
+        return $statement->execute($parameters);
     }
 
     /**
