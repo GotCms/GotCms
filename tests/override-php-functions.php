@@ -92,3 +92,14 @@ function glob($pattern, $flags = 0)
 
     return array('9999.999.999');
 }
+
+/**
+ * Override Git adapter
+ */
+namespace Modules\Backup\Model;
+
+function exec($command, &$output = array(), &$return_var = NULL)
+{
+    $output = array();
+    return '';
+}
