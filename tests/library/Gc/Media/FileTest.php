@@ -154,6 +154,34 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_object->remove('undefined-file'));
     }
 
+    /**
+     * @covers Gc\Media\File::copyDirectory
+     */
+    public function testCopyDirectory()
+    {
+        $source = __DIR__ . '/_files/copy/source';
+        $destination = __DIR__ . '/_files/copy/destination';
+        $this->assertTrue($this->_object->copyDirectory($source, $destination));
+        `rm -rf $destination`;
+    }
+
+    /**
+     * @covers Gc\Media\File::isWritable
+     */
+    public function testIsWritable()
+    {
+        $directory = __DIR__ . '/_files/copy';
+        $this->assertTrue($this->_object->isWritable($directory));
+    }
+
+    /**
+     * @covers Gc\Media\File::isWritable
+     */
+    public function testIsWritableWithNotWritablePath()
+    {
+        $this->assertFalse($this->_object->isWritable('/etc'));
+    }
+
     protected function _initializeFiles()
     {
         $_FILES = array(
