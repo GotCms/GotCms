@@ -70,7 +70,7 @@ class Pgsql extends AbstractTable
 
         if(!empty($parameters['port']))
         {
-            putenv('PGPORT=' . $port);
+            putenv('PGPORT=' . $parameters['port']);
         }
 
         //Prepare command
@@ -89,7 +89,7 @@ class Pgsql extends AbstractTable
                 $cmd .= ' -c';
             break;
 
-            case 'all':
+            case 'structureanddata':
                 $cmd .= ' --inserts';
                 $cmd .= ' -c';
             break;
