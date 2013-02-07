@@ -33,8 +33,10 @@ use Gc\Mvc\Controller\Action,
     Gc\Document\Model as DocumentModel,
     Gc\DocumentType,
     Gc\Property,
+    Gc\Form\AbstractForm,
     Content\Form,
     Gc\Component,
+    Zend\Form as ZendForm,
     Zend\Json\Json;
 
 /**
@@ -197,7 +199,7 @@ class DocumentController extends Action
         }
         else
         {
-            $document_form = new \Zend\Form\Form();
+            $document_form = new ZendForm\Form();
             $document_form->setAttribute('action', $this->url()->fromRoute('documentEdit', array('id' => $document_id)));
             $this->layout()->setVariable('documentId', $document_id);
             $document_type_id = $document->getDocumentTypeId();
@@ -226,7 +228,7 @@ class DocumentController extends Action
                 $tabs_array[] = $tab->getName();
                 $properties = $this->_loadProperties($document_type_id, $tab->getId(), $document->getId());
 
-                $fieldset = new \Zend\Form\Fieldset('tabs-' . $idx);
+                $fieldset = new ZendForm\Fieldset('tabs-' . $idx);
                 if($this->getRequest()->isPost())
                 {
                     $connection = $document->getAdapter()->getDriver()->getConnection();
@@ -259,7 +261,7 @@ class DocumentController extends Action
 
                 foreach($properties as $property)
                 {
-                    \Gc\Form\AbstractForm::addContent($fieldset, Datatype\Model::loadEditor($property, $document));
+                    AbstractForm::addContent($fieldset, Datatype\Model::loadEditor($property, $document));
                 }
 
                 $document_form->add($fieldset);

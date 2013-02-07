@@ -35,6 +35,7 @@ use Config\Form\UserLogin,
     Gc\User\Role,
     Zend\Http\Request,
     Zend\View\Model\ViewModel,
+    Zend\Validator\Identical,
     DateTime;
 
 /**
@@ -124,7 +125,7 @@ class UserController extends Action
                 if($this->getRequest()->isPost())
                 {
                     $post = $this->getRequest()->getPost();
-                    $forgot_password_form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new \Zend\Validator\Identical($post['password']));
+                    $forgot_password_form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new Identical($post['password']));
                     $forgot_password_form->setData($post->toArray());
                     if($forgot_password_form->isValid())
                     {
@@ -189,7 +190,7 @@ class UserController extends Action
         if($this->getRequest()->isPost())
         {
             $form->setData($post);
-            $form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new \Zend\Validator\Identical($post['password']));
+            $form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new Identical($post['password']));
 
             if($form->isValid())
             {
@@ -246,7 +247,7 @@ class UserController extends Action
             if(!empty($post['password']))
             {
                 $form->passwordRequired();
-                $form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new \Zend\Validator\Identical($post['password']));
+                $form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new Identical($post['password']));
             }
 
             $form->setData($post);

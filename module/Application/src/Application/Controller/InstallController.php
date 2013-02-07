@@ -29,8 +29,12 @@ namespace Application\Controller;
 
 use Gc\Mvc\Controller\Action,
     Gc\Media\File,
+    Gc\Core,
+    Gc\Registry,
     Gc\Version,
     Application\Form\Install,
+    Zend\Config\Reader\Ini,
+    Zend\Db\TableGateway\Feature\GlobalAdapterFeature,
     Zend\Db\Adapter\Adapter as DbAdapter;
 
 /**
@@ -74,7 +78,7 @@ class InstallController extends Action
         $session = $this->getSession();
         if(!empty($session['install']['lang']))
         {
-            \Gc\Registry::get('Translator')->setLocale($session['install']['lang']);
+            Registry::get('Translator')->setLocale($session['install']['lang']);
         }
     }
 
@@ -330,12 +334,12 @@ class InstallController extends Action
                             $language_filename = sprintf(GC_APPLICATION_PATH . '/data/translate/%s.php', $session['install']['lang']);
                             if(file_exists($language_filename))
                             {
-                                \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
-                                \Gc\Registry::set('Configuration', array('db' => $session['install']['db']));
+                                GlobalAdapterFeature::setStaticAdapter($db_adapter);
+                                Registry::set('Configuration', array('db' => $session['install']['db']));
                                 $lang_config = include $language_filename;
                                 foreach($lang_config as $source => $destination)
                                 {
-                                    \Gc\Core\Translator::setValue($source, array(array(
+                                    Core\Translator::setValue($source, array(array(
                                         'locale' => $session['install']['lang']
                                         , 'value' => $destination)
                                     ));
@@ -349,7 +353,7 @@ class InstallController extends Action
                         //Create user and roles
                         case 'c-uar':
                             //Create role
-                            $ini = new \Zend\Config\Reader\Ini();
+                            $ini = new Ini();
                             $roles = $ini->fromFile(GC_APPLICATION_PATH . '/data/install/scripts/roles.ini');
 
                             try
@@ -366,7 +370,7 @@ class InstallController extends Action
                             }
 
                             //resources
-                            $ini = new \Zend\Config\Reader\Ini();
+                            $ini = new Ini();
                             $resources = $ini->fromFile(GC_APPLICATION_PATH . '/data/install/scripts/resources.ini');
 
                             try

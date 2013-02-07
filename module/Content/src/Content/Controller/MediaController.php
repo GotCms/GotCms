@@ -106,7 +106,7 @@ class MediaController extends Action
             $headscript->appendFile(sprintf('/backend/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript');
         }
 
-        return array('language' => preg_replace('~(.*)_.*~', '$1', \Gc\Registry::get('Translator')->getLocale()));
+        return array('language' => preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale()));
     }
 
     /**

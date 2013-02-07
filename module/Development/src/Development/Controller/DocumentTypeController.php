@@ -30,6 +30,7 @@ namespace Development\Controller;
 use Development\Form\DocumentType as DocumentTypeForm,
     Gc\DocumentType,
     Gc\Mvc\Controller\Action,
+    Zend\Validator,
     Gc\Property,
     Gc\Tab;
 
@@ -249,7 +250,7 @@ class DocumentTypeController extends Action
 
             foreach($validators as $validator)
             {
-                if($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists)
+                if($validator['instance'] instanceof Validator\Db\NoRecordExists)
                 {
                     $validator['instance']->setExclude(array('field' => 'id', 'value' => $document_type->getId()));
                 }

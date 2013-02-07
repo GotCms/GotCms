@@ -28,9 +28,11 @@
 namespace Admin\Controller;
 
 use Gc\Mvc\Controller\Action,
+    Gc\Document\Collection,
     Gc\Core\Config,
     Gc\User\Visitor,
-    Gc\Version;
+    Gc\Version,
+    Zend\Json\Json;
 
 /**
  * Index controller for admin module
@@ -54,7 +56,7 @@ class IndexController extends Action
         $data['versionLatest'] = Version::getLatest();
 
         $content_stats = array();
-        $documents = new \Gc\Document\Collection();
+        $documents = new Collectionlection();
         $content_stats['online_documents'] = array(
             'count' => count($documents->getAvailableDocuments()),
             'label' => 'Online documents',
@@ -84,7 +86,7 @@ class IndexController extends Action
         );
 
         $widgets = @unserialize(Config::getValue('dashboard_widgets'));
-        $data['dashboardSortable'] = !empty($widgets['sortable']) ? \Zend\Json\Json::encode($widgets['sortable']) : '{}';
+        $data['dashboardSortable'] = !empty($widgets['sortable']) ? Json::encode($widgets['sortable']) : '{}';
         $data['dashboardWelcome'] = !empty($widgets['welcome']);
 
         $data['customeWidgets'] = array();

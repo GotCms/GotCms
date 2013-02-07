@@ -144,7 +144,7 @@ class Document extends AbstractForm
 
         foreach($validators as $validator)
         {
-            if($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists)
+            if($validator['instance'] instanceof Validator\Db\NoRecordExists)
             {
                 $validator['instance']->setExclude($condition);
             }
@@ -188,7 +188,7 @@ class Document extends AbstractForm
 
         if(empty($select))
         {
-            $view_model = \Gc\View\Model::fromId($document->getDocumentType()->getDefaultViewId());
+            $view_model = View\Model::fromId($document->getDocumentType()->getDefaultViewId());
             if(!empty($view_model))
             {
                 $select = array($view_model->getId() => $view_model->getName());
