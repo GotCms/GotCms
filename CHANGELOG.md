@@ -10,6 +10,7 @@
 - Methods fetchAll, fetchOne, fetchRow and execute now have the ability to pass parameters
 - Backup module (https://github.com/PierreRambaud/GotCms/issues/20)
 - Update to Zend Framework 2.1.1
+- Execute script after update (https://github.com/PierreRambaud/GotCms/issues/19)
 
 ## 0.1.3 (12 Jan 2013):
 - Sitemap module QuickFix set base path (https://github.com/PierreRambaud/GotCms/issues/14)

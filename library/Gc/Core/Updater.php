@@ -28,7 +28,7 @@
 namespace Gc\Core;
 
 use Gc\Core\Updater\Adapter,
-    Gc\Script\Model as ScriptModel,
+    Gc\Core\Updater\Script,
     Gc\Registry,
     Gc\Version;
 
@@ -236,30 +236,20 @@ class Updater extends Object
             return TRUE;
         }
 
-        $sql = '';
+        $script = new Script();
         foreach($files as $file_list)
         {
             foreach($file_list as $filename)
             {
-                $script = new ScriptModel();
-                $script->setContent(file_get_contents($filename));
-                //@TODO
+                try
+                {
+                    $this->_adapter->addMessage($script(file_get_contents($filename)));
+                }
+                catch(\Exception $e)
+                {
+                    $this->setError($e->getMessage());
+                }
             }
-        }
-
-        $resource = Registry::get('Db')->getDriver()->getConnection()->getResource();
-        try
-        {
-            $resource->beginTransaction();
-            $resource->exec($sql);
-            $resource->commit();
-        }
-        catch(\Exception $e)
-        {
-            $resource->rollback();
-            $this->setError($e->getMessage());
-
-            return FALSE;
         }
 
         return TRUE;
