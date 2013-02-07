@@ -28,6 +28,7 @@
 namespace Gc\Core;
 
 use Gc\Core\Updater\Adapter,
+    Gc\Script\Model as ScriptModel,
     Gc\Registry,
     Gc\Version;
 
@@ -181,6 +182,68 @@ class Updater extends Object
             foreach($file_list as $filename)
             {
                 $sql .= file_get_contents($filename) . PHP_EOL;
+            }
+        }
+
+        $resource = Registry::get('Db')->getDriver()->getConnection()->getResource();
+        try
+        {
+            $resource->beginTransaction();
+            $resource->exec($sql);
+            $resource->commit();
+        }
+        catch(\Exception $e)
+        {
+            $resource->rollback();
+            $this->setError($e->getMessage());
+
+            return FALSE;
+        }
+
+        return TRUE;
+    }
+
+    /**
+     * Update database
+     *
+     * @return boolean
+     */
+    public function executeScripts()
+    {
+        if(empty($this->_adapter))
+        {
+            return FALSE;
+        }
+
+        $files = array();
+        $update_path = GC_APPLICATION_PATH . '/data/update';
+        $path = glob($update_path . '/*');
+        foreach($path as $file)
+        {
+            $version = str_replace($update_path . '/v', '', $file);
+            if(version_compare($version, Version::VERSION, '>'))
+            {
+                $file_list = glob($file . '/*.php');
+                if(!empty($file_list))
+                {
+                    $files[] = $file_list;
+                }
+            }
+        }
+
+        if(empty($files))
+        {
+            return TRUE;
+        }
+
+        $sql = '';
+        foreach($files as $file_list)
+        {
+            foreach($file_list as $filename)
+            {
+                $script = new ScriptModel();
+                $script->setContent(file_get_contents($filename));
+                //@TODO
             }
         }
 

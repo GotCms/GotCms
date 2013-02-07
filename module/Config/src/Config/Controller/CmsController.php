@@ -165,6 +165,7 @@ class CmsController extends Action
                     }
                     else
                     {
+                        $updater->executeScripts();
                         $session['updateOutput'] = $updater->getMessages();
 
                         $this->flashMessenger()->setNameSpace('success')->addMessage(sprintf('Cms update to %s', $latest_version));
