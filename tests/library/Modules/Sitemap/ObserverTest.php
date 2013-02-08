@@ -138,6 +138,16 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->_document->delete();
+        $this->_documentType->delete();
+        $this->_user->delete();
+        $this->_layout->delete();
+        $this->_view->delete();
+        unset($this->_document);
+        unset($this->_documentType);
+        unset($this->_user);
+        unset($this->_layout);
+        unset($this->_view);
         unset($this->_object);
         StaticEventManager::resetInstance();
     }
