@@ -148,10 +148,10 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_datatype->delete();
         $this->_property->delete();
-        $this->_documentType->delete();
+        $this->_datatype->delete();
         $this->_tab->delete();
+        $this->_documentType->delete();
         $this->_user->delete();
         $this->_view->delete();
         unset($this->_datatype);

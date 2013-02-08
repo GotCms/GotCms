@@ -125,6 +125,12 @@ class TabsTest extends \PHPUnit_Framework_TestCase
         $collection = new DocumentCollection();
         $collection->load(0);
         $this->assertEquals(sprintf('<ul><li><a href="#tabs-%d">Document name</a></li></ul>', $document->getId()), $this->_object->render($collection->getChildren()));
+
+        $document->delete();
+        $document_type->delete();
+        $layout->delete();
+        $view->delete();
+        $user->delete();
     }
 
     /**

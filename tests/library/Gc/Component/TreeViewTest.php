@@ -157,11 +157,11 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_document->delete();
-        unset($this->_document);
-
         $this->_documentChildren->delete();
         unset($this->_documentChildren);
+
+        $this->_document->delete();
+        unset($this->_document);
 
         $this->_view->delete();
         unset($this->_view);
