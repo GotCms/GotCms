@@ -66,8 +66,8 @@ class Observer extends AbstractObserver
         $widgets['test']['id'] = 'blog';
         $widgets['test']['title'] = 'Blog information';
         $widgets['test']['content'] = $this->addPath(__DIR__ . '/views')->render('dashboard.phtml', array(
-            'unactiveComments' => $unactive_comment_list,
-            'activeComments'   => $active_comment_list,
+            'unactiveComments' => count($unactive_comment_list),
+            'activeComments'   => count($active_comment_list),
         ));
 
         $event->setParam('widgets', $widgets);
