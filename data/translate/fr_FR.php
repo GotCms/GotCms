@@ -201,5 +201,11 @@ return array (
   'Files as: identifier.phtml' => 'Fichier au format : identifiant.phtml',
   'Upload' => 'Envoyer',
   'Download file' => 'Télécharger le fichier',
-
+  '%d active comment(s)' => '%d commentaire(s) actif(s)',
+  '%d unactive comment(s)' => '%d commentaire(s) inactif(s)',
+  'Generate' => 'Générer',
+  'Data only' => 'Données seulement',
+  'Structure only' => 'Structure seulement',
+  'Structure and data' => 'Structure et données',
+  'Download' => 'Télécharger',
 );
