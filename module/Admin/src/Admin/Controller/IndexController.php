@@ -56,7 +56,7 @@ class IndexController extends Action
         $data['versionLatest'] = Version::getLatest();
 
         $content_stats = array();
-        $documents = new Collectionlection();
+        $documents = new Collection();
         $content_stats['online_documents'] = array(
             'count' => count($documents->getAvailableDocuments()),
             'label' => 'Online documents',
