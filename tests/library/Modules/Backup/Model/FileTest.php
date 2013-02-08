@@ -33,10 +33,10 @@ namespace Modules\Backup\Model;
  * @category Gc_Tests
  * @package  Modules
  */
-class PgsqlTest extends \PHPUnit_Framework_TestCase
+class FilesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Pgsql
+     * @var Files
      */
     protected $_object;
 
@@ -46,7 +46,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Pgsql;
+        $this->_object = new Files;
     }
 
     /**
@@ -58,31 +58,11 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Modules\Backup\Model\Pgsql::export
+     * @covers Modules\Backup\Model\Files::export
+     * @covers Modules\Backup\Model\Files::zip
      */
     public function testExport()
     {
-        $connection = $this->_object->getAdapter()->getDriver()->getConnection();
-        $parameters = $connection->getConnectionParameters();
-        $parameters['port'] = 80;
-        $connection->setConnectionParameters($parameters);
-
         $this->assertInternalType('string', $this->_object->export());
-    }
-
-    /**
-     * @covers Modules\Backup\Model\Pgsql::export
-     */
-    public function testExportDataOnly()
-    {
-        $this->assertInternalType('string', $this->_object->export('dataonly'));
-    }
-
-    /**
-     * @covers Modules\Backup\Model\Pgsql::export
-     */
-    public function testExportStructureOnly()
-    {
-        $this->assertInternalType('string', $this->_object->export('structureonly'));
     }
 }

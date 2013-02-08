@@ -51,27 +51,56 @@ class IndexController extends AbstractController
     {
 
     }
+
     /**
-     * Index action, list all documents with comments
+     * Download database as gzip
      *
      * @return array
      */
-    public function downloadAction()
+    public function downloadDatabaseAction()
     {
         $configuration = Registry::get('Configuration');
         switch($configuration['db']['driver'])
         {
             case 'pdo_pgsql':
-                $model = new Model\Pgsql();
+                $model = new Model\Database\Pgsql();
             break;
 
             case 'pdo_mysql':
-                $model = new Model\Mysql();
+                $model = new Model\Database\Mysql();
             break;
         }
 
         $content = $model->export($this->getRequest()->getPost()->get('what'));
-        $filename = 'backup-' . date('Y-m-d') . '.sql.gz';
+        $filename = 'database-backup-' . date('Y-m-d') . '.sql.gz';
+
+        $headers = new Headers();
+        $headers->addHeaderLine('Pragma', 'public')
+            ->addHeaderLine('Cache-control', 'must-revalidate, post-check=0, pre-check=0')
+            ->addHeaderLine('Cache-control', 'private')
+            ->addHeaderLine('Expires', -1)
+            ->addHeaderLine('Content-Type', 'application/octet-stream')
+            ->addHeaderLine('Content-Transfer-Encoding', 'binary')
+            ->addHeaderLine('Content-Length', strlen($content))
+            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $filename);
+
+        $response = $this->getResponse();
+        $response->setHeaders($headers);
+        $response->setContent($content);
+
+        return $response;
+    }
+
+    /**
+     * Download files as gzip
+     *
+     * @return array
+     */
+    public function downloadFilesAction()
+    {
+        $model = new Model\Files();
+        $content = $model->export();
+        $filename = 'frontend-backup-' . date('Y-m-d') . '.zip';
 
         $headers = new Headers();
         $headers->addHeaderLine('Pragma', 'public')

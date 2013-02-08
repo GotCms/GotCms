@@ -29,21 +29,33 @@
 
 <h1><?php echo $this->escapeHtml($this->translate('Backup')); ?></h1>
 
-<form action="<?php echo $this->moduleUrl('download', 'index'); ?>" method="post">
-    <div>
-        <input id="what1" type="radio" checked="checked" value="dataonly" name="what">
-        <label for="what1"><?php echo $this->escapeHtml($this->translate('Data only')); ?></label>
-    </div>
-    <div>
-        <input id="what2" type="radio" value="structureonly" name="what">
-        <label for="what2"><?php echo $this->escapeHtml($this->translate('Structure only')); ?></label>
-    </div>
-    <div>
-        <input id="what3" type="radio" value="structureanddata" name="what">
-        <label for="what3"><?php echo $this->escapeHtml($this->translate('Structure and data')); ?></label>
-    </div>
-    <div>
-        <input id="input-save" class="input-submit" type="submit" name="submit" value="<?php echo $this->escapeHtml($this->translate('Download')); ?>">
-    </div>
-</form>
+<section>
+    <h2><?php echo $this->escapeHtml($this->translate('Database')); ?></h2>
+    <form action="<?php echo $this->moduleUrl('download-database', 'index'); ?>" method="post">
+        <div>
+            <input id="what1" type="radio" checked="checked" value="dataonly" name="what">
+            <label for="what1"><?php echo $this->escapeHtml($this->translate('Data only')); ?></label>
+        </div>
+        <div>
+            <input id="what2" type="radio" value="structureonly" name="what">
+            <label for="what2"><?php echo $this->escapeHtml($this->translate('Structure only')); ?></label>
+        </div>
+        <div>
+            <input id="what3" type="radio" value="structureanddata" name="what">
+            <label for="what3"><?php echo $this->escapeHtml($this->translate('Structure and data')); ?></label>
+        </div>
+        <div>
+            <input id="input-save" class="input-submit" type="submit" name="submit" value="<?php echo $this->escapeHtml($this->translate('Download')); ?>">
+        </div>
+    </form>
+</section>
+
+<section>
+    <h2><?php echo $this->escapeHtml($this->translate('Files')); ?></h2>
+    <form action="<?php echo $this->moduleUrl('download-files', 'index'); ?>" method="post">
+        <div>
+            <input id="input-save" class="input-submit" type="submit" name="submit" value="<?php echo $this->escapeHtml($this->translate('Download')); ?>">
+        </div>
+    </form>
+</section>
 

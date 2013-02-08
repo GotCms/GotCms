@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Backup\Model;
+namespace Modules\Backup\Model\Database;
 
 use Gc\Db\AbstractTable,
     Gc\Document\Model as DocumentModel,
@@ -39,7 +39,7 @@ use Gc\Db\AbstractTable,
  * @package    Modules
  * @subpackage Blog\Model
  */
-class Mysql extends AbstractTable
+class Pgsql extends AbstractTable
 {
     /**
      * Table name
@@ -56,37 +56,48 @@ class Mysql extends AbstractTable
      */
     public function export($what = 'structureanddata')
     {
+        $exe = escapeshellcmd('/usr/bin/pg_dump');
         $parameters = $this->getAdapter()->getDriver()->getConnection()->getConnectionParameters();
 
-        $cmd = escapeshellcmd('/usr/bin/mysqldump');
-        //Prepare command
-        $cmd .= ' --user=' . escapeshellarg($parameters['username']);
-        $cmd .= ' --password=' . escapeshellarg($parameters['password']);
+        // Set environmental variables that pg_dump uses
+        putenv('PGPASSWORD=' . $parameters['password']);
+        putenv('PGUSER=' . $parameters['username']);
+        putenv('PGDATABASE=' . $parameters['database']);
         if(!empty($parameters['hostname']))
         {
-            $cmd .= ' --host=' . escapeshellarg($parameters['hostname']);
+            putenv('PGHOST=' . $parameters['hostname']);
         }
 
         if(!empty($parameters['port']))
         {
-            $cmd .= ' --port=' . escapeshellarg($parameters['port']);
+            putenv('PGPORT=' . $parameters['port']);
         }
+
+        //Prepare command
+        $cmd = $exe . ' -i';
+        $cmd .= ' -Z 9';
 
         switch ($what)
         {
             case 'dataonly':
-                $cmd .= ' --no-create-info';
+                $cmd .= ' -a';
+                $cmd .= ' --inserts';
             break;
 
             case 'structureonly':
-                $cmd .= ' --no-data';
+                $cmd .= ' -s';
+                $cmd .= ' -c';
+            break;
+
+            case 'structureanddata':
+                $cmd .= ' --inserts';
+                $cmd .= ' -c';
             break;
         }
 
-        $cmd .= ' ' . escapeshellarg($parameters['database']);
 
         // Execute command and return the output
-        exec($cmd . ' | gzip 2>&1', $output);
+        exec($cmd . ' 2>&1', $output);
 
         return implode(PHP_EOL, $output);
     }
