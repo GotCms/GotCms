@@ -208,4 +208,5 @@ return array (
   'Structure only' => 'Structure seulement',
   'Structure and data' => 'Structure et données',
   'Download' => 'Télécharger',
+  'Care' => 'Attention',
 );
