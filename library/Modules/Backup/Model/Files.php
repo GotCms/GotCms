@@ -44,7 +44,6 @@ class Files extends Object
     /**
      * Export function
      *
-     * @param string $what
      * @return string
      */
     public function export()
@@ -58,7 +57,13 @@ class Files extends Object
         return file_get_contents($tmp_file);
     }
 
-    protected function zip($sources, $destination)
+    /**
+     * Generate zip archive
+     *
+     * @param array $sources array of folders
+     * @param string $destination zip file name
+     */
+    protected function zip(array $sources, $destination)
     {
         $zip = new ZipArchive();
         if(!$zip->open($destination, ZIPARCHIVE::CREATE))

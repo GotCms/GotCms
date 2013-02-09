@@ -49,7 +49,7 @@ class Script extends Helper\Script
     /**
      * Returns script from identifier.
      *
-     * @param string $identifier
+     * @param string $content
      * @param array $params
      * @return mixed
      */
