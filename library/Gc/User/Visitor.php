@@ -404,15 +404,15 @@ class Visitor extends AbstractTable
             switch($sort)
             {
                 case 'HOUR':
-                    $select->where("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')");
+                    $select->where(new Expression("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')"));
                 break;
 
                 case 'DAY':
-                    $select->where("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())");
+                    $select->where(new Expression("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())"));
                 break;
 
                 case 'MONTH':
-                    $select->where("DATE_FORMAT(lu.visit_at, '%Y') >= EXTRACT(YEAR FROM NOW())");
+                    $select->where(new Expression("DATE_FORMAT(lu.visit_at, '%Y') >= EXTRACT(YEAR FROM NOW())"));
                 break;
             }
         }
