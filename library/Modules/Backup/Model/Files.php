@@ -79,7 +79,7 @@ class Files extends Object
                     $file = str_replace('\\', '/', $file);
 
                     // Ignore "." and ".." folders
-                    if(in_array(substr($file, strrpos($file, '/')+1), array('.', '..')) )
+                    if(in_array(substr($file, strrpos($file, '/') + 1), array('.', '..')))
                     {
                         continue;
                     }
