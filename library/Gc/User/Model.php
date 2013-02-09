@@ -32,6 +32,7 @@ use Gc\Db\AbstractTable,
     Gc\Mail,
     Gc\Registry,
     Zend\Authentication\Adapter,
+    Zend\Authentication\Storage,
     Zend\Authentication\AuthenticationService,
     Zend\Db\Sql\Predicate\Expression,
     Zend\Db\Sql\Select,
@@ -46,6 +47,13 @@ use Gc\Db\AbstractTable,
  */
 class Model extends AbstractTable
 {
+    /**
+     * Backend auth namespace for authenticationService
+     *
+     * @const string
+     */
+    const BACKEND_AUTH_NAMESPACE = 'Zend_Auth_Backend';
+
     /**
      * Table name
      *
@@ -70,7 +78,7 @@ class Model extends AbstractTable
         $auth_adapter->setIdentity($login);
         $auth_adapter->setCredential(sha1($password));
 
-        $auth = new AuthenticationService();
+        $auth = new AuthenticationService(new Storage\Session(self::BACKEND_AUTH_NAMESPACE));
         $result = $auth->authenticate($auth_adapter);
 
         if($result->isValid())

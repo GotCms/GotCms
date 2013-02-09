@@ -29,10 +29,11 @@ namespace Gc\Mvc\Controller;
 
 use Gc\Event\StaticEventManager,
     Gc\Module\Model as ModuleModel,
-    Gc\User\Model,
+    Gc\User\Model as UserModel,
     Gc\User\Acl,
     Gc\Registry,
     Zend\Authentication\AuthenticationService,
+    Zend\Authentication\Storage,
     Zend\Mvc\Controller\AbstractActionController,
     Zend\Mvc\MvcEvent,
     Zend\Session\Container as SessionContainer,
@@ -261,7 +262,7 @@ class Action extends AbstractActionController
     {
         if($this->_auth === NULL)
         {
-            $this->_auth = new AuthenticationService();
+            $this->_auth = new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
         }
 
         return $this->_auth;
