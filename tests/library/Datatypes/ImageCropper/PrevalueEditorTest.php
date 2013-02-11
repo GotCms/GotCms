@@ -55,7 +55,6 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-
         $this->_datatype = DatatypeModel::fromArray(array(
             'name' => 'ImageCropperTest',
             'prevalue_value' => '',

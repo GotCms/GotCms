@@ -75,6 +75,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $this->_object->insert(array('identifier' => 'string_test', 'value' => 'string_result'));
         $this->assertEquals('string_result', $this->_object->getValue('string_test'));
+        $this->_object->delete(array('identifier' => 'string_test'));
     }
 
     /**
@@ -123,6 +124,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $this->_object->insert(array('identifier' => 'string_identifier', 'value' => 'string_result_insert_value'));
         $this->assertTrue((bool)$this->_object->setValue('string_identifier', 'string_result_insert_value'));
+        $this->_object->delete(array('identifier' => 'string_identifier'));
     }
 
     /**
