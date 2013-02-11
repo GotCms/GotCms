@@ -156,9 +156,9 @@ class Visitor extends AbstractTable
         }
 
         $url_info = $this->fetchRow($select);
-        if(!empty($url_info->id))
+        if(!empty($url_info['id']))
         {
-            $url_id = $url_info->id;
+            $url_id = $url_info['id'];
         }
         else
         {

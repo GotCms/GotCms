@@ -73,15 +73,15 @@ class Collection extends AbstractTable
         {
             if(!empty($document_type_id))
             {
-                $rows = $this->select(function(Select $select)
+                $rows = $this->fetchAll($this->select(function(Select $select)
                 {
                     $select->where->equalTo('document_type_id', $this->getDocumentTypeId());
                     $select->order('sort_order ASC');
-                });
+                }));
             }
             else
             {
-                $rows = $this->select();
+                $rows = $this->fetchAll($this->select());
             }
 
             $tabs = array();
@@ -104,10 +104,10 @@ class Collection extends AbstractTable
      */
     public function getImportableTabs($document_type_id)
     {
-        $rows = $this->select(function(Select $select) use ($document_type_id)
+        $rows = $this->fetchAll($this->select(function(Select $select) use ($document_type_id)
         {
             $select->where->notEqualTo('document_type_id', $document_type_id);
-        });
+        }));
 
         $tabs = array();
         foreach($rows as $row)

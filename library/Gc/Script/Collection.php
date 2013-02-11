@@ -56,10 +56,10 @@ class Collection extends AbstractTable
     {
         if($force_reload or $this->getData('scripts') === NULL)
         {
-            $rows = $this->select(function(Select $select)
+            $rows = $this->fetchAll($this->select(function(Select $select)
             {
                 $select->order('name ASC');
-            });
+            }));
 
             $scripts = array();
             foreach($rows as $row)

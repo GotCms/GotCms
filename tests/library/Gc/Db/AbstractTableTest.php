@@ -87,7 +87,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     public function testFetchRow()
     {
         $result = $this->_object->fetchRow($this->_object->select());
-        $this->assertInstanceOf('ArrayObject', $result);
+        $this->assertInternalType('array', $result);
     }
 
     /**

@@ -31,7 +31,8 @@ use Gc\Core\Object,
     Gc\Event\StaticEventManager,
     Gc\Registry,
     Zend\Db\ResultSet\ResultSet,
-    Zend\Db\TableGateway;
+    Zend\Db\TableGateway,
+    PDO;
 /**
  * Extension of Zend\Db\TableGateway
  * This is better to use fetchRow(), fetchAll(),
@@ -98,13 +99,18 @@ abstract class AbstractTable extends Object
     {
         if($query instanceof ResultSet)
         {
-            return $query->current();
+            $result_set = $query;
+        }
+        else
+        {
+            $result_set = new ResultSet();
+            $result_set->initialize($this->execute($query, $parameters));
         }
 
-        $result_set = new ResultSet();
-        $result_set->initialize($this->execute($query, $parameters));
+        $result = $result_set->getDataSource()->getResource()->fetch(PDO::FETCH_ASSOC);
+        $result_set->getDataSource()->getResource()->closeCursor();
 
-        return $result_set->current();
+        return $result;
     }
 
     /**
@@ -118,13 +124,18 @@ abstract class AbstractTable extends Object
     {
         if($query instanceof ResultSet)
         {
-            return $query->toArray();
+            $result_set = $query;
+        }
+        else
+        {
+            $result_set = new ResultSet();
+            $result_set->initialize($this->execute($query, $parameters));
         }
 
-        $result_set = new ResultSet();
-        $result_set->initialize($this->execute($query, $parameters));
+        $result = $result_set->getDataSource()->getResource()->fetchAll(PDO::FETCH_ASSOC);
+        $result_set->getDataSource()->getResource()->closeCursor();
 
-        return $result_set->toArray();
+        return $result;
     }
 
     /**
@@ -138,20 +149,18 @@ abstract class AbstractTable extends Object
     {
         if($query instanceof ResultSet)
         {
-            $row = $query->current();
+            $result_set = $query;
         }
         else
         {
-            $row = $this->fetchRow($query, $parameters);
+            $result_set = new ResultSet();
+            $result_set->initialize($this->execute($query, $parameters));
         }
 
-        if(!empty($row))
-        {
-            $array = $row->getArrayCopy();
-            return array_shift($array);
-        }
+        $result = $result_set->getDataSource()->getResource()->fetchColumn();
+        $result_set->getDataSource()->getResource()->closeCursor();
 
-        return FALSE;
+        return $result;
     }
 
     /**

@@ -71,7 +71,7 @@ class Collection extends AbstractTable
      *
      * @return void
      */
-    private function setUsers()
+    protected function setUsers()
     {
         $select = $this->select(function(Select $select)
         {

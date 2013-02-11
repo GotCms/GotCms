@@ -69,27 +69,27 @@ class Collection extends AbstractTable implements IterableInterface
      *
      * @return \Gc\Document\Collection
      */
-    private function setDocuments()
+    protected function setDocuments()
     {
         $parent_id = $this->getParentId();
 
         if(!empty($parent_id))
         {
-            $rows = $this->select(function(Select $select)
+            $rows = $this->fetchAll($this->select(function(Select $select)
             {
                 $select->where->equalTo('parent_id', $this->getParentId());
                 $select->order('sort_order ASC');
                 $select->order('name ASC');
-            });
+            }));
         }
         else
         {
-            $rows = $this->select(function(Select $select)
+            $rows = $this->fetchAll($this->select(function(Select $select)
             {
                 $select->where->isNull('parent_id');
                 $select->order('sort_order ASC');
                 $select->order('name ASC');
-            });
+            }));
         }
 
         $documents = array();
@@ -110,14 +110,14 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getAvailableDocuments()
     {
-        $rows = $this->select(function(Select $select)
+        $rows = $this->fetchAll($this->select(function(Select $select)
         {
             $select->where->equalTo('status', Model::STATUS_ENABLE);
             $select->order('sort_order ASC');
             $select->order('name ASC');
-        });
+        }));
 
-        return $rows->toArray();
+        return $rows;
     }
 
     /**

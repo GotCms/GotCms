@@ -67,12 +67,13 @@ class Collection extends AbstractTable
      *
      * @return \Gc\Datatype\Collection
      */
-    private function setDatatypes()
+    protected function setDatatypes()
     {
-        $rows = $this->select(function(Select $select)
+        $rows = $this->fetchAll($this->select(function(Select $select)
         {
             $select->order('name');
-        });
+        }));
+
         $datatypes = array();
         foreach($rows as $row)
         {

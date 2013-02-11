@@ -163,11 +163,10 @@ class Model extends AbstractTable implements IterableInterface
     static function fromId($document_id)
     {
         $document_table = new Model();
-        $row = $document_table->select(array('id' => (int)$document_id));
-        $current = $row->current();
-        if(!empty($current))
+        $row = $document_table->fetchRow($document_table->select(array('id' => (int)$document_id)));
+        if(!empty($row))
         {
-            $document_table->setData((array)$current);
+            $document_table->setData((array)$row);
             $document_table->setOrigData();
             return $document_table;
         }
@@ -193,11 +192,10 @@ class Model extends AbstractTable implements IterableInterface
             $sql_data['parent_id'] = $parent_id;
         }
 
-        $rowset = $document_table->select($sql_data);
-        $current = $rowset->current();
-        if(!empty($current))
+        $row = $document_table->fetchRow($document_table->select($sql_data));
+        if(!empty($row))
         {
-            $document_table->setData((array)$current);
+            $document_table->setData((array)$row);
             $document_table->setOrigData();
             return $document_table;
         }

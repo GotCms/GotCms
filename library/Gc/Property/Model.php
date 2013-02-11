@@ -270,11 +270,10 @@ class Model extends AbstractTable
     static function fromId($property_id)
     {
         $property_table = new Model();
-        $row = $property_table->select(array('id' => (int)$property_id));
-        $current = $row->current();
-        if(!empty($current))
+        $row = $property_table->fetchRow($property_table->select(array('id' => (int)$property_id)));
+        if(!empty($row))
         {
-            $property_table->setData((array)$current);
+            $property_table->setData((array)$row);
             $property_table->setOrigData();
             return $property_table;
         }
@@ -294,19 +293,18 @@ class Model extends AbstractTable
     static function fromIdentifier($identifier, $document_id)
     {
         $property_table = new Model();
-        $row = $property_table->select(function(Select $select) use ($document_id, $identifier)
+        $row = $property_table->fetchRow($property_table->select(function(Select $select) use ($document_id, $identifier)
         {
             $select->join(array('t' => 'tab'), 't.id = property.tab_id', array());
             $select->join(array('dt' => 'document_type'), 'dt.id = t.document_type_id', array());
             $select->join(array('d' => 'document'), 'd.document_type_id = dt.id', array());
             $select->where->equalTo('d.id', $document_id);
             $select->where->equalTo('identifier', $identifier);
-        });
+        }));
 
-        $current = $row->current();
-        if(!empty($current))
+        if(!empty($row))
         {
-            $property_table->setData((array)$current);
+            $property_table->setData((array)$row);
             $property_table->setDocumentId($document_id);
             $property_table->setOrigData();
             return $property_table;

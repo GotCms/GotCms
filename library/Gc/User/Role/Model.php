@@ -156,11 +156,10 @@ class Model extends AbstractTable
     static function fromId($user_role_id)
     {
         $role_table = new Model();
-        $row = $role_table->select(array('id' => (int)$user_role_id));
-        $current = $row->current();
-        if(!empty($current))
+        $row = $role_table->fetchRow($role_table->select(array('id' => (int)$user_role_id)));
+        if(!empty($row))
         {
-            $role_table->setData((array)$current);
+            $role_table->setData((array)$row);
             $role_table->setOrigData();
             return $role_table;
         }

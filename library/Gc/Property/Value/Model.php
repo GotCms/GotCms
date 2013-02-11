@@ -59,18 +59,18 @@ class Model extends AbstractTable
         $this->setPropertyId($property_id);
         if(!empty($document_id) and !empty($property_id))
         {
-            $property_value = $this->select(array('property_id' => $property_id, 'document_id' => $document_id))->current();
+            $property_value = $this->fetchRow($this->select(array('property_id' => $property_id, 'document_id' => $document_id)));
 
-            if(!empty($property_value->id))
+            if(!empty($property_value['id']))
             {
-                $this->setId($property_value->id);
+                $this->setId($property_value['id']);
                 if($this->getDriverName() == 'pdo_pgsql')
                 {
-                    $this->setValue(stream_get_contents($property_value->value));
+                    $this->setValue(stream_get_contents($property_value['value']));
                 }
                 else
                 {
-                    $this->setValue($property_value->value);
+                    $this->setValue($property_value['value']);
                 }
             }
         }

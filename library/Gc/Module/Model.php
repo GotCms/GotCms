@@ -73,11 +73,10 @@ class Model extends AbstractTable
     static function fromId($module_id)
     {
         $module_table = new Model();
-        $row = $module_table->select(array('id' => (int)$module_id));
-        $current = $row->current();
-        if(!empty($current))
+        $row = $module_table->fetchRow($module_table->select(array('id' => (int)$module_id)));
+        if(!empty($row))
         {
-            $module_table->setData((array)$current);
+            $module_table->setData((array)$row);
             $module_table->setOrigData();
             return $module_table;
         }

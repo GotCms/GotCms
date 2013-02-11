@@ -81,11 +81,10 @@ class Model extends AbstractTable
     static function fromId($script_id)
     {
         $script_table = new Model();
-        $row = $script_table->select(array('id' => (int)$script_id));
-        $current = $row->current();
-        if(!empty($current))
+        $row = $script_table->fetchRow($script_table->select(array('id' => (int)$script_id)));
+        if(!empty($row))
         {
-            $script_table->setData((array)$current);
+            $script_table->setData((array)$row);
             $script_table->setOrigData();
             return $script_table;
         }
@@ -103,11 +102,10 @@ class Model extends AbstractTable
     static function fromIdentifier($identifier)
     {
         $script_table = new Model();
-        $row = $script_table->select(array('identifier' => $identifier));
-        $current = $row->current();
-        if(!empty($current))
+        $row = $script_table->fetchRow($script_table->select(array('identifier' => $identifier)));
+        if(!empty($row))
         {
-            return $script_table->setData((array)$current);
+            return $script_table->setData((array)$row);
         }
         else
         {

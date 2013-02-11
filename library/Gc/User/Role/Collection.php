@@ -73,10 +73,10 @@ class Collection extends AbstractTable
     {
         if(empty($this->_roles) or $force_reload === TRUE)
         {
-            $rows = $this->select(function(Select $select)
+            $rows = $this->fetchAll($this->select(function(Select $select)
             {
                 $select->order('name');
-            });
+            }));
 
             $roles = array();
             foreach($rows as $row)

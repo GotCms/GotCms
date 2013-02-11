@@ -79,7 +79,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
                 'value' => 'clé',
             )
         ));
-        $this->assertInstanceOf('ArrayObject', $this->_object->getValue('key', 'fr_FR'));
+        $this->assertInternalType('array', $this->_object->getValue('key', 'fr_FR'));
     }
 
     /**
@@ -124,7 +124,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->_object->setValue('parameters', array(
             array(
-                'd' => 'fr_FR',
                 'locale' => 'fr_FR',
                 'value' => 'paramètres',
             )
@@ -132,7 +131,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $data = $this->_object->getValue('parameters', 'fr_FR');
         $result = $this->_object->setValue('parameters', array(
             array(
-                'dst_id' => $data->dst_id,
+                'dst_id' => $data['dst_id'],
                 'locale' => 'it_IT',
                 'value' => 'parametri',
             )
@@ -153,7 +152,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
             )
         ));
         $data = $this->_object->getValue('parameters', 'fr_FR');
-        $result = $this->_object->setValue($data->src_id, array(
+        $result = $this->_object->setValue($data['src_id'], array(
             array(
                 'locale' => 'it_IT',
                 'value' => 'parametri',

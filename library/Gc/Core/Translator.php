@@ -138,20 +138,20 @@ class Translator extends AbstractTable
         $instance = self::getInstance();
         if(is_numeric($source))
         {
-            $row = $instance->select(array('id' => $source))->current();
+            $row = $instance->fetchRow($instance->select(array('id' => $source)));
             if(empty($row))
             {
                 return FALSE;
             }
 
-            $source_id = $row->id;
+            $source_id = $row['id'];
         }
         else
         {
-            $row = $instance->select(array('source' => $source))->current();
+            $row = $instance->fetchRow($instance->select(array('source' => $source)));
             if(!empty($row))
             {
-                $source_id = $row->id;
+                $source_id = $row['id'];
             }
             else
             {

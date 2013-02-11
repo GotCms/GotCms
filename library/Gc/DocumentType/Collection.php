@@ -63,9 +63,9 @@ class Collection extends AbstractTable
      *
      * @return \Gc\Document\Collection
      */
-    private function setDocumentTypes()
+    protected function setDocumentTypes()
     {
-        $rows = $this->select(function (Select $select)
+        $rows = $this->fetchAll($this->select(function (Select $select)
         {
             $parent_id = $this->getParentId();
             if(!empty($parent_id))
@@ -75,7 +75,7 @@ class Collection extends AbstractTable
             }
 
             $select->order('name ASC');
-        });
+        }));
 
         $document_types = array();
         foreach($rows as $row)

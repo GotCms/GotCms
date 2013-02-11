@@ -69,11 +69,10 @@ class Model extends AbstractTable
     static function fromId($icon_id)
     {
         $icon_table = new Model();
-        $row = $icon_table->select(array('id' => (int)$icon_id));
-        $current = $row->current();
-        if(!empty($current))
+        $row = $icon_table->fetchRow($icon_table->select(array('id' => (int)$icon_id)));
+        if(!empty($row))
         {
-            $icon_table->setData((array)$current);
+            $icon_table->setData((array)$row);
             $icon_table->setOrigData();
             return $icon_table;
         }

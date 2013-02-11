@@ -78,10 +78,10 @@ class Model extends AbstractTable
             return FALSE;
         }
 
-        $this->setName($row->name);
-        $this->setDescription($row->description);
-        $this->setDocumentTypeId($row->document_type_id);
-        $this->setSortOrder($row->sort_order);
+        $this->setName($row['name']);
+        $this->setDescription($row['description']);
+        $this->setDocumentTypeId($row['document_type_id']);
+        $this->setSortOrder($row['sort_order']);
 
         return $this;
     }
@@ -186,11 +186,10 @@ class Model extends AbstractTable
     static function fromId($tab_id)
     {
         $tab_table = new Model();
-        $row = $tab_table->select(array('id' => (int)$tab_id));
-        $current = $row->current();
-        if(!empty($current))
+        $row = $tab_table->fetchRow($tab_table->select(array('id' => (int)$tab_id)));
+        if(!empty($row))
         {
-            $tab_table->setData((array)$current);
+            $tab_table->setData((array)$row);
             $tab_table->setOrigData();
             return $tab_table;
         }

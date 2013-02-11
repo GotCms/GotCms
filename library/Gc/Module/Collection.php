@@ -65,10 +65,10 @@ class Collection extends AbstractTable
      */
     protected function _setModules()
     {
-        $rows = $this->select(function(Select $select)
+        $rows = $this->fetchAll($this->select(function(Select $select)
         {
             $select->order('name ASC');
-        });
+        }));
 
         $modules = array();
         foreach($rows as $row)
