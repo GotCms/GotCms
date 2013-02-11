@@ -77,6 +77,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetScripts()
     {
         $scripts = $this->_object->getScripts();
-        $this->assertEquals(1, count($scripts));
+        $this->assertInternalType('array', $scripts);
     }
 }
