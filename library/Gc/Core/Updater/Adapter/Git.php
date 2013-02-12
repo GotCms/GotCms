@@ -44,7 +44,7 @@ class Git extends AbstractAdapter
     public function update()
     {
         putenv('PATH=' . getenv('PATH') . ':' . GC_APPLICATION_PATH);
-        exec('git fetch 2>&1', $output);
+        exec('git fetch --tags 2>&1', $output);
         $this->addMessage(implode(PHP_EOL, $output));
 
         return TRUE;
