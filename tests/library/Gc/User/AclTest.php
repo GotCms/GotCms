@@ -49,6 +49,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
      * @covers Gc\User\Acl::__construct
      * @covers Gc\User\Acl::_roleResource
      * @covers Gc\User\Acl::_initResources
