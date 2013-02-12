@@ -1,6 +1,6 @@
 # CHANGELOG13
 
-## 0.1.4 (?? ??? 2013):
+## 0.1.4 (12 Feb 2013):
 - Bug with HTTP 404 (undefined variable view)
 - Gc\Document\Model::fromUrlKey() not saving original data
 - Administrator role must be protected and can't be edit
