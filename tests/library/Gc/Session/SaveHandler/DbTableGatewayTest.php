@@ -60,7 +60,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $tablegateway_config =  new DbTableGatewayOptions(array(
+        $tablegateway_config = new DbTableGatewayOptions(array(
             'idColumn'   => 'id',
             'nameColumn' => 'name',
             'modifiedColumn' => 'updated_at',

@@ -67,10 +67,10 @@ $roles = $ini->fromFile($gc_root . '/data/install/scripts/roles.ini');
 
 try
 {
-    foreach($roles['role'] as $key=>$value)
+    foreach($roles['role'] as $key => $value)
     {
         $statement = $db_adapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
-        $result = $statement->execute();
+        $statement->execute();
     }
 }
 catch(Exception $e)
@@ -85,7 +85,7 @@ $resources = $ini->fromFile($gc_root . '/data/install/scripts/resources.ini');
 foreach($resources as $key => $value)
 {
     $statement = $db_adapter->createStatement("INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')");
-    $result = $statement->execute();
+    $statement->execute();
 
     $statement = $db_adapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
     $result = $statement->execute();
@@ -98,7 +98,7 @@ foreach($resources as $key => $value)
         if(!in_array($k, $permissions))
         {
             $statement = $db_adapter->createStatement("INSERT INTO user_acl_permission (permission, user_acl_resource_id) VALUES ('" . $k . "', '" . $last_insert_id . "')");
-            $result = $statement->execute();
+            $statement->execute();
             $permissions[] = $k;
         }
     }
@@ -123,8 +123,8 @@ foreach($resources as $key => $value)
         $role = $result->current();
         if(!empty($role['id']))
         {
-            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('" . $role['id'] . "', " . $last_insert_id . ")");
-            $result = $statement->execute();
+            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('" . $role['id'] . "', " . $last_insert_id . ')');
+            $statement->execute();
         }
     }
 }

@@ -43,10 +43,10 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $existed = in_array("zend.view", stream_get_wrappers());
+        $existed = in_array('zend.view', stream_get_wrappers());
         if($existed)
         {
-            stream_wrapper_unregister("zend.view");
+            stream_wrapper_unregister('zend.view');
         }
     }
 

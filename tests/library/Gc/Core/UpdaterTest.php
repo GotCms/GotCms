@@ -125,10 +125,10 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateDatabase()
     {
-        $existed = in_array("zend.view", stream_get_wrappers());
+        $existed = in_array('zend.view', stream_get_wrappers());
         if($existed)
         {
-            stream_wrapper_unregister("zend.view");
+            stream_wrapper_unregister('zend.view');
         }
 
         stream_wrapper_register('zend.view', '\Gc\View\Stream');
@@ -143,10 +143,10 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateDatabaseWithEmptyFiles()
     {
-        $existed = in_array("zend.view", stream_get_wrappers());
+        $existed = in_array('zend.view', stream_get_wrappers());
         if($existed)
         {
-            stream_wrapper_unregister("zend.view");
+            stream_wrapper_unregister('zend.view');
         }
 
         stream_wrapper_register('zend.view', '\Gc\View\Stream');
@@ -161,10 +161,10 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateDatabaseWithSqlError()
     {
-        $existed = in_array("zend.view", stream_get_wrappers());
+        $existed = in_array('zend.view', stream_get_wrappers());
         if($existed)
         {
-            stream_wrapper_unregister("zend.view");
+            stream_wrapper_unregister('zend.view');
         }
 
         stream_wrapper_register('zend.view', '\Gc\View\Stream');
