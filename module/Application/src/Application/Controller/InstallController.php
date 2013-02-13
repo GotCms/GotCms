@@ -331,7 +331,7 @@ class InstallController extends Action
                             $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from_name', ?);", array($configuration['admin_firstname'] . ' ' . $configuration['admin_lastname']));
 
 
-                            $language_filename = sprintf(GC_APPLICATION_PATH . '/data/translate/%s.php', $session['install']['lang']);
+                            $language_filename = sprintf(GC_APPLICATION_PATH . '/data/translation/%s.php', $session['install']['lang']);
                             if(file_exists($language_filename))
                             {
                                 GlobalAdapterFeature::setStaticAdapter($db_adapter);

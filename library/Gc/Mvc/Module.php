@@ -85,7 +85,7 @@ abstract class Module
         if(!Registry::isRegistered('Translator'))
         {
             $translator = $event->getApplication()->getServiceManager()->get('translator');
-            $translator->addTranslationFilePattern('phparray', GC_APPLICATION_PATH . '/data/translate/', '%s.php', 'default');
+            $translator->addTranslationFilePattern('phparray', GC_APPLICATION_PATH . '/data/translation/', '%s.php', 'default');
 
             if(Registry::isRegistered('Db'))
             {
