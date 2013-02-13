@@ -111,7 +111,8 @@ img {border:0}
 
 header {height:80px;position:fixed;top:0;right:0;left:0;z-index: 999;}
 header .part {width:auto;height:60px;color:#FFFFFF;display: inline-block;margin: 10px 5px 10px 0;border:1px solid transparent;padding: 0 20px 0 10px;}
-header .part.active, header .part:hover {border-radius: 5px 5px 5px 5px;background:-moz-linear-gradient(center top , #666666 0%, #000000 100%) repeat scroll 0 0 transparent;border: 1px solid #999;}
+header .part.active,
+header .part:hover{border-radius: 5px 5px 5px 5px;background:-moz-linear-gradient(center top , #666666 0%, #000000 100%) repeat scroll 0 0 transparent;border: 1px solid #999;}
 header .part p {display: inline-block;line-height: 15px;margin-left: 10px;margin-top: 17px;}
 header .part a {color:#FFFFFF; text-decoration:none;display: block;height: 60px;line-height:60px;}
 header .part a:hover {color:#FFFFFF; text-decoration:none;}
@@ -121,10 +122,7 @@ footer {background-image:url(../images/footer.png);background-repeat:repeat-x;wi
 footer a {color:#939393; font-style:italic; text-decoration:none;}
 footer a:hover {text-decoration:underline;}
 
-#connexion a {color:#FFFFFF; text-decoration:none;display:inline;line-height:1.2}
-#connexion a:hover {color:#FFFFFF; text-decoration:underline;}
-#connexion {color:#FFFFFF;float: right;width: 250px;}
-#connexion ul{list-style: none;margin:5px;}
+#logout {float: right;}
 
 #main {margin-top:80px;background-image:url(../images/corpshaut.png);background-repeat:repeat-x;background-color:#FFFFFF;padding: 5px 10px;}
 
@@ -228,26 +226,26 @@ footer a:hover {text-decoration:underline;}
 .stats-list a:link,
 .stats-list a:active {color:#FFFFFF;text-decoration:none;}
 
-@media screen and (max-width: 1295px) {
+@media screen and (max-width: 1420px) {
     header .part{padding:0 10px 0 0px;}
-    #connexion {width:200px;}
 }
 
-@media screen and (max-width: 1039px) {
+@media screen and (max-width: 1320px) {
     header .part .icone{width:20px;height:20px;margin-top: -17px;}
-    header .part {margin: 10px 0 10px 0;}
-    #connexion {width:130px}
-    #connexion ul {padding-left: 10px;}
+    header .part {margin: 10px 0 10px 0;height:40px;}
+    header .part a {line-height:40px;height:40px;}
+    header .part p {margin-top:7px}
+    #main {margin-top:60px;}
+    header {height:60px;}
 }
 
-@media screen and (max-width: 783px) {
+@media screen and (max-width: 1190px) {
     header {height:50px;}
     #main {margin-top:50px;}
     header .part {margin:5px 0;height:35px}
     header .part a {line-height:35px; height:35px;}
     header .part .icone {margin-top:0;}
     header .part p {display:none;}
-    #connexion {width:auto}
 }
 
 @media screen and (max-width: 495px) {

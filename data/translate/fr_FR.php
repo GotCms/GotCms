@@ -209,4 +209,6 @@ return array (
   'Structure and data' => 'Structure et données',
   'Download' => 'Télécharger',
   'Care' => 'Attention',
+  'Logout' => 'Déconnexion',
+  'Click to logout' => 'Cliquez pour vous déconnecter',
 );
