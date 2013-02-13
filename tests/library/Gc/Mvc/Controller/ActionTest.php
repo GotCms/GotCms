@@ -156,7 +156,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testUseflashMessenger()
     {
-        $this->_object->flashMessenger()->setNamespace('information')->addMessage('Test');
+        $this->_object->flashMessenger()->addInfoMessage('Test');
         $this->assertNull($this->_object->useFlashMessenger(FALSE));
         $this->assertNull($this->_object->useFlashMessenger(TRUE));
     }

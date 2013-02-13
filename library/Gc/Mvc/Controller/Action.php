@@ -293,7 +293,7 @@ class Action extends AbstractActionController
     {
         $flash_messenger = $this->flashMessenger();
         $flash_messages = array();
-        foreach(array('error', 'success', 'information', 'warning') as $namespace)
+        foreach(array('error', 'success', 'info', 'warning') as $namespace)
         {
             $flash_namespace = $flash_messenger->setNameSpace($namespace);
             if($force_display)

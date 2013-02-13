@@ -77,7 +77,7 @@ class ViewController extends Action
             $view_form->setData($data);
             if(!$view_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save view');
+                $this->flashMessenger()->addErrorMessage('Can not save view');
                 $this->useFlashMessenger();
             }
             else
@@ -89,7 +89,7 @@ class ViewController extends Action
                 $view_model->setContent($view_form->getValue('content'));
                 $view_model->save();
 
-                $this->flashMessenger()->setNameSpace('success')->addMessage('This view has been created');
+                $this->flashMessenger()->addSuccessMessage('This view has been created');
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_model->getId()));
             }
         }
@@ -121,7 +121,7 @@ class ViewController extends Action
             $view_form->setData($data);
             if(!$view_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save view');
+                $this->flashMessenger()->addErrorMessage('Can not save view');
                 $this->useFlashMessenger();
             }
             else
@@ -132,7 +132,7 @@ class ViewController extends Action
                 $view_model->setContent($view_form->getValue('content'));
                 $view_model->save();
 
-                $this->flashMessenger()->setNameSpace('success')->addMessage('This view has been edited');
+                $this->flashMessenger()->addSuccessMessage('This view has been saved');
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
             }
         }
@@ -152,11 +152,11 @@ class ViewController extends Action
         {
             if($view->delete())
             {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'This view has been deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This view has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Can not delete this view'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'View does not exists'));
     }
 
     /**
@@ -172,20 +172,20 @@ class ViewController extends Action
             $view = View\Model::fromId($view_id);
             if(empty($view)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload view');
+                $this->flashMessenger()->addErrorMessage('Can not upload view');
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
             }
 
             $view->setContent(file_get_contents($_FILES['upload']['tmp_name']));
             $view->save();
-            $this->flashMessenger()->setNameSpace('success')->addMessage('View updated');
+            $this->flashMessenger()->addSuccessMessage('View updated');
             return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
         }
         else
         {
             if(empty($_FILES['upload']))
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload views');
+                $this->flashMessenger()->addErrorMessage('Can not upload views');
                 return $this->redirect()->toRoute('viewList');
             }
 
@@ -207,7 +207,7 @@ class ViewController extends Action
                 $view->save();
             }
 
-            $this->flashMessenger()->setNameSpace('success')->addMessage('Views updated');
+            $this->flashMessenger()->addSuccessMessage('Views updated');
             return $this->redirect()->toRoute('viewList');
         }
     }
@@ -225,7 +225,7 @@ class ViewController extends Action
             $view = View\Model::fromId($view_id);
             if(empty($view))
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('This view can not be download');
+                $this->flashMessenger()->addErrorMessage('This view can not be download');
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
             }
 
@@ -255,7 +255,7 @@ class ViewController extends Action
 
         if(empty($content) or empty($filename))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save views');
+            $this->flashMessenger()->addErrorMessage('Can not save views');
             return $this->redirect()->toRoute('viewList');
         }
 

@@ -109,7 +109,7 @@ class CmsController extends Action
 
             if(!$this->_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save configuration');
+                $this->flashMessenger()->addErrorMessage('Can not save configuration');
                 $this->useFlashMessenger();
             }
             else
@@ -123,7 +123,7 @@ class CmsController extends Action
                     }
                 }
 
-                $this->flashMessenger()->setNameSpace('success')->addMessage('Configuration saved');
+                $this->flashMessenger()->addSuccessMessage('Configuration saved');
                 return $this->redirect()->toRoute($this->getRouteMatch()->getMatchedRouteName());
             }
         }
@@ -145,7 +145,7 @@ class CmsController extends Action
             $updater = new Updater();
             if(!$updater->load($this->getRequest()->getPost()->get('adapter')) or $version_is_latest)
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can\'t set adapter');
+                $this->flashMessenger()->addErrorMessage('Can\'t set adapter');
                 return $this->redirect()->toRoute('cmsUpdate');
             }
 
@@ -168,7 +168,7 @@ class CmsController extends Action
                         $updater->executeScripts();
                         $session['updateOutput'] = $updater->getMessages();
 
-                        $this->flashMessenger()->setNameSpace('success')->addMessage(sprintf('Cms update to %s', $latest_version));
+                        $this->flashMessenger()->addSuccessMessage(sprintf('Cms update to %s', $latest_version));
                         return $this->redirect()->toRoute('cmsUpdate');
                     }
                 }
@@ -176,7 +176,7 @@ class CmsController extends Action
 
             foreach($updater->getMessages() as $message)
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage($message);
+                $this->flashMessenger()->addErrorMessage($message);
             }
 
             return $this->redirect()->toRoute('cmsUpdate');

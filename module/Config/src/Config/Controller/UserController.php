@@ -91,7 +91,7 @@ class UserController extends Action
                 return $this->redirect()->toRoute('admin');
             }
 
-            $this->flashMessenger()->setNamespace('error')->addMessage('Can not connect');
+            $this->flashMessenger()->addErrorMessage('Can not connect');
             return $this->redirect()->toRoute('userLogin', array('redirect' => $redirect));
         }
 
@@ -198,12 +198,13 @@ class UserController extends Action
                 $user_model->setData($post);
                 $user_model->setPassword($post['password']);
                 $user_model->save();
-                $this->flashMessenger()->setNamespace('success')->addMessage('User saved!');
+                $this->flashMessenger()->addSuccessMessage('User saved!');
 
                 return $this->redirect()->toRoute('userEdit', array('id' => $user_model->getId()));
             }
 
-            $this->flashMessenger()->setNamespace('error')->addMessage('User can not be saved!');
+            $this->useFlashMessenger();
+            $this->flashMessenger()->addErrorMessage('User can not be saved');
         }
 
         return array('form' => $form);
@@ -221,11 +222,11 @@ class UserController extends Action
         {
             if($user->delete())
             {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'User deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'The user has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'User does not exists!'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'User does not exists'));
     }
 
     /**
@@ -260,11 +261,11 @@ class UserController extends Action
                 }
 
                 $user_model->save();
-                $this->flashMessenger()->setNamespace('success')->addMessage('User has been edited!');
+                $this->flashMessenger()->addSuccessMessage('This user has been saved');
                 return $this->redirect()->toRoute('userEdit', array('id' => $user_id));
             }
 
-            $this->flashMessenger()->setNamespace('error')->addMessage('User can not be saved!');
+            $this->flashMessenger()->addErrorMessage('User can not be saved');
         }
 
         return array('form' => $form);

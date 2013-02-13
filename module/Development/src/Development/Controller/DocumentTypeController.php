@@ -84,7 +84,7 @@ class DocumentTypeController extends Action
             $form->setValues($post_data);
             if(!$form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not document type');
+                $this->flashMessenger()->addErrorMessage('Can not document type');
                 $this->useFlashMessenger();
             }
             else
@@ -167,7 +167,7 @@ class DocumentTypeController extends Action
 
                     $document_type->getAdapter()->getDriver()->getConnection()->commit();
 
-                    $this->flashMessenger()->setNameSpace('success')->addMessage('This document type has been saved');
+                    $this->flashMessenger()->addSuccessMessage('This document type has been saved');
                     return $this->redirect()->toRoute('documentTypeEdit', array('id' => $document_type->getId()));
                 }
                 catch(Exception $e)
@@ -261,7 +261,7 @@ class DocumentTypeController extends Action
             $form->setValues($post_data);
             if(!$form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not document type');
+                $this->flashMessenger()->addErrorMessage('Can not document type');
                 $this->useFlashMessenger();
             }
             else
@@ -373,7 +373,7 @@ class DocumentTypeController extends Action
 
                     $document_type->getAdapter()->getDriver()->getConnection()->commit();
 
-                    $this->flashMessenger()->setNameSpace('success')->addMessage('Document type save!');
+                    $this->flashMessenger()->addSuccessMessage('This document type has been saved');
                     return $this->redirect()->toRoute('documentTypeEdit', array('id' => $document_type_id));
                 }
                 catch(Exception $e)
@@ -440,11 +440,11 @@ class DocumentTypeController extends Action
         {
             if($document_type->delete())
             {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'This document type has been deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This document type has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Can not delete this document type'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Document type does not exists'));
     }
 
     /**
@@ -510,7 +510,7 @@ class DocumentTypeController extends Action
                 unset($document_type_session['tabs'][$id]);
                 $session->offsetSet('document-type', $document_type_session);
 
-                return $this->returnJson(array('success' => TRUE, 'message' => 'Tab successfullty deleted'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This tab has been deleted'));
             }
         }
 
@@ -612,7 +612,7 @@ class DocumentTypeController extends Action
                     unset($document_type_session['tabs'][$tab_id]['properties'][$id]);
                     $session->offsetSet('document-type', $document_type_session);
 
-                    return $this->returnJson(array('success' => TRUE, 'message' => 'Property successfullty deleted'));
+                    return $this->returnJson(array('success' => TRUE, 'message' => 'This property has been deleted'));
                 }
             }
         }

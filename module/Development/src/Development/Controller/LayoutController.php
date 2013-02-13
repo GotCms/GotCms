@@ -77,7 +77,7 @@ class LayoutController extends Action
             $layout_form->setData($data);
             if(!$layout_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save layout');
+                $this->flashMessenger()->addErrorMessage('Can not save layout');
                 $this->useFlashMessenger();
             }
             else
@@ -89,7 +89,7 @@ class LayoutController extends Action
                 $layout_model->setContent($layout_form->getValue('content'));
                 $layout_model->save();
 
-                $this->flashMessenger()->setNameSpace('success')->addMessage('This layout has been created');
+                $this->flashMessenger()->addSuccessMessage('This layout has been created');
                 return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_model->getId()));
             }
         }
@@ -122,7 +122,7 @@ class LayoutController extends Action
             $layout_form->setData($data);
             if(!$layout_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save layout');
+                $this->flashMessenger()->addErrorMessage('Can not save layout');
                 $this->useFlashMessenger();
             }
             else
@@ -133,7 +133,7 @@ class LayoutController extends Action
                 $layout_model->setContent($layout_form->getValue('content'));
                 $layout_model->save();
 
-                $this->flashMessenger()->setNameSpace('success')->addMessage('This layout has been edited');
+                $this->flashMessenger()->addSuccessMessage('This layout has been saved');
                 return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
             }
         }
@@ -153,11 +153,11 @@ class LayoutController extends Action
         {
             if($layout->delete())
             {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'This layout has been deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This layout has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Can not delete this layout'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Layout does not exists'));
     }
 
     /**
@@ -173,21 +173,21 @@ class LayoutController extends Action
             $layout = Layout\Model::fromId($layout_id);
             if(empty($layout)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload layout');
+                $this->flashMessenger()->addErrorMessage('Can not upload layout');
                 return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
             }
 
             $layout->setContent(file_get_contents($_FILES['upload']['tmp_name']));
             $layout->save();
 
-            $this->flashMessenger()->setNameSpace('success')->addMessage('Layout updated');
+            $this->flashMessenger()->addSuccessMessage('Layout updated');
             return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
         }
         else
         {
             if(empty($_FILES['upload']))
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload layouts');
+                $this->flashMessenger()->addErrorMessage('Can not upload layouts');
                 return $this->redirect()->toRoute('layoutList');
             }
 
@@ -209,7 +209,7 @@ class LayoutController extends Action
                 $layout->save();
             }
 
-            $this->flashMessenger()->setNameSpace('success')->addMessage('Layouts updated');
+            $this->flashMessenger()->addSuccessMessage('Layouts updated');
             return $this->redirect()->toRoute('layoutList');
         }
     }
@@ -227,7 +227,7 @@ class LayoutController extends Action
             $layout = Layout\Model::fromId($layout_id);
             if(empty($layout))
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('This layout can not be download');
+                $this->flashMessenger()->addErrorMessage('This layout can not be download');
                 return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
             }
 
@@ -257,7 +257,7 @@ class LayoutController extends Action
 
         if(empty($content) or empty($filename))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save layouts');
+            $this->flashMessenger()->addErrorMessage('Can not save layouts');
             return $this->redirect()->toRoute('layoutList');
         }
 

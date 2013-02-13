@@ -76,7 +76,7 @@ class DatatypeController extends Action
             $datatype_form->setData($post);
             if(!$datatype_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save datatype');
+                $this->flashMessenger()->addErrorMessage('Can not save datatype');
                 $this->useFlashMessenger();
             }
             else
@@ -86,7 +86,7 @@ class DatatypeController extends Action
                 {
                     if($id = $datatype->save())
                     {
-                        $this->flashMessenger()->setNameSpace('success')->addMessage('This datatype has been created');
+                        $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
                         return $this->redirect()->toRoute('datatypeEdit', array('id' => $id));
                     }
                     else
@@ -131,7 +131,7 @@ class DatatypeController extends Action
             $datatype_form->setData($post);
             if(!$datatype_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save datatype');
+                $this->flashMessenger()->addErrorMessage('Can not save datatype');
                 $this->useFlashMessenger();
             }
             else
@@ -150,7 +150,7 @@ class DatatypeController extends Action
                     $datatype_model->addData($datatype_form->getInputFilter()->getValues());
                     if($datatype_model->save())
                     {
-                        $this->flashMessenger()->setNameSpace('success')->addMessage('This datatype has been saved');
+                        $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
                         return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
                     }
                 }
@@ -159,7 +159,7 @@ class DatatypeController extends Action
                     throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
 
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Error during editing.');
+                $this->flashMessenger()->addErrorMessage('Error during editing.');
                 return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
             }
         }
@@ -179,11 +179,11 @@ class DatatypeController extends Action
         {
             if($datatype->delete())
             {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'This datatype has been deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This datatype has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Datatype does not exists!'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Datatype does not exists'));
     }
 }
 

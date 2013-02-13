@@ -59,10 +59,10 @@ INSERT INTO view VALUES (5, '2012-09-20 22:12:33', '2012-09-20 22:21:24', 'Navig
 $component = new \\Gc\\Component\\Navigation();
 $container = new \\Zend\\Navigation\\Navigation($component->render());
 $this->navigation($container);
-$document = $this->layout()->currentDocument; 
+$document = $this->layout()->currentDocument;
 
 echo $this->navigation()->menu()->setUlClass(''sf-menu navigation'');', 'Navigation');
-INSERT INTO view VALUES (6, '2012-10-25 19:57:05', '2012-10-25 20:27:48', 'Flash messages', 'flash-messages', '<?php if(!empty($this->layout()->flashMessages)): ?>    
+INSERT INTO view VALUES (6, '2012-10-25 19:57:05', '2012-10-25 20:27:48', 'Flash messages', 'flash-messages', '<?php if(!empty($this->layout()->flashMessages)): ?>
     <?php foreach($this->layout()->flashMessages as $type => $messages):?>
         <?php foreach($messages as $message): ?>
             <div class="notification <?php echo $type; ?>">
@@ -241,7 +241,7 @@ if($request->isPost())
         $mail->setFrom($email, $name);
         $mail->addTo(\\Gc\\Core\\Config::getValue(''mail_from''));
         $mail->send();
-        $this->flashMessenger()->setNameSpace(''success'')->addMessage(''Message sent'');
+        $this->flashMessenger()->addSuccessMessage(''Message sent'');
         $this->redirect()->toUrl(''/contact'');
         return TRUE;
     }

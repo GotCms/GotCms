@@ -75,6 +75,12 @@
         <?php echo $this->formElementErrors($this->form->get('user_acl_role_id')); ?>
     </div>
     <div>
-        <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+        <input id="input-save" type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
     </div>
 </form>
+
+<script type="text/javascript">
+$(function(){
+    Gc.saveCommand();
+});
+</script>

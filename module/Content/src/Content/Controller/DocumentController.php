@@ -121,7 +121,7 @@ class DocumentController extends Action
             $document_form->setData($this->getRequest()->getPost()->toArray());
             if(!$document_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid document data');
+                $this->flashMessenger()->addErrorMessage('Invalid document data');
                 $this->useFlashMessenger();
             }
             else
@@ -140,11 +140,11 @@ class DocumentController extends Action
                 $document_id = $document->save();
                 if(empty($document_id))
                 {
-                    $this->flashMessenger()->setNameSpace('error')->addMessage('Can not add document');
+                    $this->flashMessenger()->addErrorMessage('Can not add document');
                 }
                 else
                 {
-                    $this->flashMessenger()->setNameSpace('success')->addMessage('Document successfuly add');
+                    $this->flashMessenger()->addSuccessMessage('Document successfuly add');
                     $this->redirect()->toRoute('documentEdit', array('id' => $document_id));
                 }
             }
@@ -194,7 +194,7 @@ class DocumentController extends Action
         $document = DocumentModel::fromId($document_id);
         if(empty($document))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Document does not exists !');
+            $this->flashMessenger()->addErrorMessage('Document does not exists !');
             return $this->redirect()->toRoute('content');
         }
         else
@@ -284,12 +284,12 @@ class DocumentController extends Action
                 {
                     $document->setStatus(DocumentModel::STATUS_DISABLE);
                     $document->setUrlKey($old_url_key);
-                    $this->flashMessenger()->setNameSpace('error')->addMessage('This document cannot be saved because one or more properties values are required !');
+                    $this->flashMessenger()->addErrorMessage('This document cannot be saved because one or more properties values are required !');
                     $this->useFlashMessenger();
                 }
                 else
                 {
-                    $this->flashMessenger()->setNameSpace('success')->addMessage('Document saved !');
+                    $this->flashMessenger()->addSuccessMessage('Document saved !');
                     $document->addData($form_document_add->getInputFilter()->getValues());
                     $document->save();
 

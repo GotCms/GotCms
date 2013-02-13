@@ -97,7 +97,7 @@ class TranslationController extends Action
             $translation_form->setData($post->toArray());
             if(!$translation_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid data sent !');
+                $this->flashMessenger()->addErrorMessage('Invalid data sent !');
                 $this->useFlashMessenger();
             }
             else
@@ -119,7 +119,7 @@ class TranslationController extends Action
                     $data[$locale_id]['locale'] = $locale;
                 }
 
-                $this->flashMessenger()->setNameSpace('success')->addMessage('Translation saved !');
+                $this->flashMessenger()->addSuccessMessage('Translation saved !');
                 Translator::setValue($source, $data);
                 return $this->redirect()->toRoute('translationCreate');
             }
@@ -156,7 +156,7 @@ class TranslationController extends Action
 
             $this->_generateCache();
 
-            $this->flashMessenger()->setNameSpace('success')->addMessage('Translation saved !');
+            $this->flashMessenger()->addSuccessMessage('Translation saved !');
             return $this->redirect()->toRoute('translationList');
         }
 

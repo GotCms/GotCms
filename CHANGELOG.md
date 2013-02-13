@@ -4,6 +4,7 @@
 - Git updater failed (https://github.com/PierreRambaud/GotCms/issues/24)
 - Add translation directory for installation
 - Add captcha for blog module (https://github.com/PierreRambaud/GotCms/issues/25)
+- Refactoring flash messenger (https://github.com/PierreRambaud/GotCms/issues/26)
 
 ## 0.1.4 (12 Feb 2013):
 - Bug with HTTP 404 (undefined variable view)

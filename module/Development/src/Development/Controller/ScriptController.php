@@ -77,7 +77,7 @@ class ScriptController extends Action
             $script_form->setData($data);
             if(!$script_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save script');
+                $this->flashMessenger()->addErrorMessage('Can not save script');
                 $this->useFlashMessenger();
             }
             else
@@ -89,7 +89,7 @@ class ScriptController extends Action
                 $script_model->setContent($script_form->getValue('content'));
                 $script_model->save();
 
-                $this->flashMessenger()->setNameSpace('success')->addMessage('This script has been created');
+                $this->flashMessenger()->addSuccessMessage('This script has been created');
                 return $this->redirect()->toRoute('scriptEdit', array('id' => $script_model->getId()));
             }
         }
@@ -121,7 +121,7 @@ class ScriptController extends Action
             $script_form->setData($data);
             if(!$script_form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save script');
+                $this->flashMessenger()->addErrorMessage('Can not save script');
                 $this->useFlashMessenger();
             }
             else
@@ -132,7 +132,7 @@ class ScriptController extends Action
                 $script_model->setContent($script_form->getValue('content'));
                 $script_model->save();
 
-                $this->flashMessenger()->setNameSpace('success')->addMessage('This script has been edited');
+                $this->flashMessenger()->addSuccessMessage('This script has been saved');
                 return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
             }
         }
@@ -152,11 +152,11 @@ class ScriptController extends Action
         {
             if($script->delete())
             {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'This script has been deleted!'));
+                return $this->returnJson(array('success' => TRUE, 'message' => 'This script has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Can not delete this script'));
+        return $this->returnJson(array('success' => FALSE, 'message' => 'Script does not exists'));
     }
 
     /**
@@ -172,21 +172,21 @@ class ScriptController extends Action
             $script = Script\Model::fromId($script_id);
             if(empty($script)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload script');
+                $this->flashMessenger()->addErrorMessage('Can not upload script');
                 return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
             }
 
             $script->setContent(file_get_contents($_FILES['upload']['tmp_name']));
             $script->save();
 
-            $this->flashMessenger()->setNameSpace('success')->addMessage('Script updated');
+            $this->flashMessenger()->addSuccessMessage('Script updated');
             return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
         }
         else
         {
             if(empty($_FILES['upload']))
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Can not upload scripts');
+                $this->flashMessenger()->addErrorMessage('Can not upload scripts');
                 return $this->redirect()->toRoute('scriptList');
             }
 
@@ -208,7 +208,7 @@ class ScriptController extends Action
                 $script->save();
             }
 
-            $this->flashMessenger()->setNameSpace('success')->addMessage('Scripts updated');
+            $this->flashMessenger()->addSuccessMessage('Scripts updated');
             return $this->redirect()->toRoute('scriptList');
         }
     }
@@ -226,7 +226,7 @@ class ScriptController extends Action
             $script = Script\Model::fromId($script_id);
             if(empty($script))
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('This script can not be download');
+                $this->flashMessenger()->addErrorMessage('This script can not be download');
                 return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
             }
 
@@ -256,7 +256,7 @@ class ScriptController extends Action
 
         if(empty($content) or empty($filename))
         {
-            $this->flashMessenger()->setNameSpace('error')->addMessage('Can not save scripts');
+            $this->flashMessenger()->addErrorMessage('Can not save scripts');
             return $this->redirect()->toRoute('scriptList');
         }
 

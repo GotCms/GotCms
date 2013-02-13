@@ -192,7 +192,7 @@ class InstallController extends Action
             }
             else
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('All parameters must be set to "Yes"');
+                $this->flashMessenger()->addErrorMessage('All parameters must be set to "Yes"');
                 return $this->redirect()->toRoute('installCheckConfig');
             }
         }

@@ -80,7 +80,7 @@ class IndexController extends Action
             $form->setData($this->getRequest()->getPost()->toArray());
             if(!$form->isValid())
             {
-                $this->flashMessenger()->setNameSpace('error')->addMessage('Invalid module');
+                $this->flashMessenger()->addErrorMessage('Invalid module');
                 $this->useFlashMessenger();
             }
             else
@@ -90,7 +90,7 @@ class IndexController extends Action
 
                 if(!$object->install())
                 {
-                    $this->flashMessenger()->setNameSpace('error')->addMessage('Can not install this module');
+                    $this->flashMessenger()->addErrorMessage('Can not install this module');
                     return $this->redirect()->toRoute('module');
                 }
                 else
@@ -122,7 +122,7 @@ class IndexController extends Action
 
                     $module_model->execute($insert);
 
-                    $this->flashMessenger()->setNameSpace('success')->addMessage('Module installed');
+                    $this->flashMessenger()->addSuccessMessage('Module installed');
                     return $this->redirect()->toRoute('moduleEdit', array('m' => $module_model->getId()));
                 }
             }
