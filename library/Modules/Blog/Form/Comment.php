@@ -29,7 +29,8 @@ namespace Modules\Blog\Form;
 
 use Gc\Form\AbstractForm,
     Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory;
+    Zend\InputFilter\Factory as InputFilterFactory,
+    Zend\Captcha\Image as CaptchaImage;
 
 /**
  * Comment form
@@ -49,17 +50,40 @@ class Comment extends AbstractForm
     {
         $show_email  = new Element\Checkbox('show_email');
         $show_email->setAttribute('label', 'Show email');
+        $show_email->setAttribute('required', 'required');
         $username    = new Element\Text('username');
-        $show_email->setAttribute('label', 'Username');
+        $username->setAttribute('label', 'Username');
+        $username->setAttribute('required', 'required');
         $email       = new Element\Text('email');
-        $show_email->setAttribute('label', 'Email');
+        $email->setAttribute('label', 'Email');
+        $email->setAttribute('required', 'required');
         $message     = new Element\Textarea('message');
-        $show_email->setAttribute('label', 'Message');
+        $message->setAttribute('label', 'Message');
+        $message->setAttribute('required', 'required');
+
+        $captcha_image = new CaptchaImage(array(
+                'font' => GC_APPLICATION_PATH . '/data/fonts/arial.ttf',
+                'width' => 250,
+                'height' => 50,
+                'dotNoiseLevel' => 40,
+                'lineNoiseLevel' => 3
+            )
+        );
+
+        $captcha_image->setImgDir(GC_APPLICATION_PATH . '/public/frontend/tmp');
+        $captcha_image->setImgUrl('/frontend/tmp');
+
+        $captcha = new Element\Captcha('captcha');
+        $captcha->setAttribute('label', 'Please verify you are human');
+        $captcha->setCaptcha($captcha_image);
+        $captcha->setAttribute('required', 'required');
+        $captcha->setAttribute('id', 'captcha');
 
         $this->add($show_email);
         $this->add($username);
         $this->add($email);
         $this->add($message);
+        $this->add($captcha);
 
         $input_filter_factory = new InputFilterFactory();
         $input_filter = $input_filter_factory->createInputFilter(array(
@@ -82,6 +106,7 @@ class Comment extends AbstractForm
                 'name' => 'message',
                 'required' => TRUE,
             ),
+            'captcha' => $captcha->getInputSpecification()
         ));
 
         $this->setInputFilter($input_filter);
