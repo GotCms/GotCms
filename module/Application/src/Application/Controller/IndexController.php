@@ -147,7 +147,7 @@ class IndexController extends Action
 
         $path = $this->getRouteMatch()->getParam('path');
 
-        $cache_is_enable = (CoreConfig::getValue('cache_is_active') == 1);
+        $cache_is_enable = (CoreConfig::getValue('cache_is_active') == 1 and !$is_preview);
         if($cache_is_enable)
         {
             $this->_enableCache();
