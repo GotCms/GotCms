@@ -1,6 +1,6 @@
 author = Pierre Rambaud
 date = 2012
-version = ">=0.1"
+version = ">=0.1.5"
 description = "Blog"
 database_compatibility[] = "mysql"
 database_compatibility[] = "pgsql"
