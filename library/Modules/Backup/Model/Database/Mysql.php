@@ -56,6 +56,11 @@ class Mysql extends AbstractTable
      */
     public function export($what = 'structureanddata')
     {
+        if(empty($what))
+        {
+            $what = 'structureanddata';
+        }
+
         $parameters = $this->getAdapter()->getDriver()->getConnection()->getConnectionParameters();
 
         $cmd = escapeshellcmd('/usr/bin/mysqldump');
@@ -72,7 +77,7 @@ class Mysql extends AbstractTable
             $cmd .= ' --port=' . escapeshellarg($parameters['port']);
         }
 
-        switch ($what)
+        switch($what)
         {
             case 'dataonly':
                 $cmd .= ' --no-create-info';
@@ -85,9 +90,9 @@ class Mysql extends AbstractTable
 
         $cmd .= ' ' . escapeshellarg($parameters['database']);
 
-        // Execute command and return the output
-        exec($cmd . ' | gzip 2>&1', $output);
+        ob_start();
+        passthru($cmd . ' | gzip');
 
-        return implode(PHP_EOL, $output);
+        return ob_get_clean();
     }
 }

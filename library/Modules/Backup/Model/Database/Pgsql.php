@@ -56,6 +56,11 @@ class Pgsql extends AbstractTable
      */
     public function export($what = 'structureanddata')
     {
+        if(empty($what))
+        {
+            $what = 'structureanddata';
+        }
+
         $exe = escapeshellcmd('/usr/bin/pg_dump');
         $parameters = $this->getAdapter()->getDriver()->getConnection()->getConnectionParameters();
 
@@ -74,31 +79,31 @@ class Pgsql extends AbstractTable
         }
 
         //Prepare command
-        $cmd = $exe . ' -i';
-        $cmd .= ' -Z 9';
+        $cmd = $exe;
+        $cmd .= ' --compress 9 --no-owner --disable-triggers';
 
         switch ($what)
         {
             case 'dataonly':
-                $cmd .= ' -a';
-                $cmd .= ' --inserts';
+                $cmd .= ' --data-only';
+                $cmd .= ' --column-inserts';
             break;
 
             case 'structureonly':
-                $cmd .= ' -s';
-                $cmd .= ' -c';
+                $cmd .= ' --schema-only';
+                $cmd .= ' --clean';
             break;
 
             case 'structureanddata':
-                $cmd .= ' --inserts';
-                $cmd .= ' -c';
+                $cmd .= ' --column-inserts';
+                $cmd .= ' --clean';
             break;
         }
 
-
         // Execute command and return the output
-        exec($cmd . ' 2>&1', $output);
+        ob_start();
+        passthru($cmd);
 
-        return implode(PHP_EOL, $output);
+        return ob_get_clean();
     }
 }

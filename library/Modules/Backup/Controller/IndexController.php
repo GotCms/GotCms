@@ -79,7 +79,7 @@ class IndexController extends AbstractController
             ->addHeaderLine('Cache-control', 'must-revalidate, post-check=0, pre-check=0')
             ->addHeaderLine('Cache-control', 'private')
             ->addHeaderLine('Expires', -1)
-            ->addHeaderLine('Content-Type', 'application/octet-stream')
+            ->addHeaderLine('Content-Type', 'application/download')
             ->addHeaderLine('Content-Transfer-Encoding', 'binary')
             ->addHeaderLine('Content-Length', strlen($content))
             ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $filename);
@@ -107,7 +107,7 @@ class IndexController extends AbstractController
             ->addHeaderLine('Cache-control', 'must-revalidate, post-check=0, pre-check=0')
             ->addHeaderLine('Cache-control', 'private')
             ->addHeaderLine('Expires', -1)
-            ->addHeaderLine('Content-Type', 'application/octet-stream')
+            ->addHeaderLine('Content-Type', 'application/download')
             ->addHeaderLine('Content-Transfer-Encoding', 'binary')
             ->addHeaderLine('Content-Length', strlen($content))
             ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $filename);
