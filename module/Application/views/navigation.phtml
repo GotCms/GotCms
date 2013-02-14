@@ -101,7 +101,7 @@ if(!empty($this->adminUser))
 <?php endif; ?>
 
 <?php if(!empty($this->adminUser)): ?>
-    <div id="logout" class="part<?php if($this->active == 'config'): ?> active<?php endif; ?>">
+    <div id="logout" class="part">
         <a href="<?php echo $this->url('userLogout'); ?>">
             <img src="<?php echo $this->basePath('backend/images/icones/logout.png'); ?>" width="40" height="40" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Log out')); ?>">
             <p>
