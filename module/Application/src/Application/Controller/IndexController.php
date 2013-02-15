@@ -240,6 +240,7 @@ class IndexController extends Action
                 //Get all tabs of document
                 $tabs = $this->loadTabs($document->getDocumentTypeId());
                 //get Tabs and Properties to construct property in view
+                $variables = array();
                 foreach($tabs as $tab)
                 {
                     $tabs_array[] = $tab->getName();
@@ -255,9 +256,11 @@ class IndexController extends Action
 
                         $view_model->setVariable($property->getIdentifier(), $value);
                         $this->layout()->setVariable($property->getIdentifier(), $value);
+                        $variables[$property->getIdentifier()] = $value;
                     }
                 }
 
+                $variables['currentDocument'] = $document;
                 $view_model->setVariable('currentDocument', $document);
                 $this->layout()->setVariable('currentDocument', $document);
 
@@ -273,7 +276,7 @@ class IndexController extends Action
             {
                 $this->_cache->addItem($cache_key, array(
                     'view_model' => $view_model,
-                    'layout_variables' => $this->layout()->getVariables(),
+                    'layout_variables' => $variables,
                     'layout_content' => $layout->getContent(),
                     'view_content' => !empty($view) ? $view->getContent() : '',
                 ));
