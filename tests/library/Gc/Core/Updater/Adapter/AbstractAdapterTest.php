@@ -62,10 +62,25 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Gc\Core\Updater\Adapter\AbstractAdapter::getLatestVersion
-     * @covers Gc\Version::getLatest
      */
     public function testGetLatestVersion()
     {
         $this->assertEquals(\Gc\Version::getLatest(), $this->_object->getLatestVersion());
+    }
+
+    /**
+     * @covers Gc\Core\Updater\Adapter\AbstractAdapter::addMessage
+     */
+    public function testAddMessage()
+    {
+        $this->assertInstanceOf('Gc\Core\Updater\Adapter\AbstractAdapter', $this->_object->addMessage('test'));
+    }
+
+    /**
+     * @covers Gc\Core\Updater\Adapter\AbstractAdapter::getMessages
+     */
+    public function testGetMessages()
+    {
+        $this->assertInternalType('array', $this->_object->getMessages());
     }
 }

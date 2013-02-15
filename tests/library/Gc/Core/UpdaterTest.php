@@ -107,6 +107,15 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\Core\Updater::rollback
      */
+    public function testRollback()
+    {
+        $this->_object->load('git');
+        $this->assertTrue($this->_object->rollback('version'));
+    }
+
+    /**
+     * @covers Gc\Core\Updater::rollback
+     */
     public function testRollbackWithoutAdapter()
     {
         $this->assertFalse($this->_object->rollback('version'));
@@ -180,5 +189,15 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateDatabaseWithoutAdapter()
     {
         $this->assertFalse($this->_object->updateDatabase());
+    }
+
+
+    /**
+     * @covers Gc\Core\Updater::getMessages
+     */
+    public function testGetMessages()
+    {
+        $this->_object->load('git');
+        $this->assertInternalType('array', $this->_object->getMessages());
     }
 }
