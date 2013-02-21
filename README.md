@@ -42,6 +42,7 @@ Make sure read and write access are available for:
 - config/autoload
 - public/frontend
 - public/media
+- data/cache
 
 ##Required
 
