@@ -8,6 +8,7 @@
 - Backup module failed with pgsql (https://github.com/PierreRambaud/GotCms/issues/27)
 - Disable cache on preview (https://github.com/PierreRambaud/GotCms/issues/29)
 - Flash messages failed in view helper script (https://github.com/PierreRambaud/GotCms/issues/28)
+- Update to Zend Framework 2.1.3
 
 ## 0.1.4 (12 Feb 2013):
 - Bug with HTTP 404 (undefined variable view)
