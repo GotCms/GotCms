@@ -30,4 +30,3 @@ define('GC_DATABASE_USERNAME', '');
 define('GC_DATABASE_PASSWORD', '');
 define('GC_DATABASE_DATABASE', '');
 define('GC_DATABASE_HOSTNAME', '');
-

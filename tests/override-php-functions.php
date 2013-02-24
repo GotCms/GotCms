@@ -58,7 +58,7 @@ function move_uploaded_file($filename, $destination)
  */
 namespace Gc\Core\Updater\Adapter;
 
-function exec($command, &$output = array(), &$return_var = NULL)
+function exec($command, &$output = array(), &$return_var = null)
 {
     $output = array();
     return '';
@@ -69,22 +69,20 @@ function exec($command, &$output = array(), &$return_var = NULL)
  * Override updater
  */
 namespace Gc\Core;
+
 function glob($pattern, $flags = 0)
 {
     $existed = in_array('zend.view', stream_get_wrappers());
-    if($existed)
-    {
+    if ($existed) {
         stream_wrapper_unregister('zend.view');
     }
 
     stream_wrapper_register('zend.view', '\Gc\View\Stream');
 
-    if(preg_match('~\.sql$~', $pattern))
-    {
+    if (preg_match('~\.sql$~', $pattern)) {
         $content = trim(file_get_contents('zend.view://test-updater'));
-        if(empty($content))
-        {
-            return FALSE;
+        if (empty($content)) {
+            return false;
         }
 
         return array('zend.view://test-updater');
@@ -98,7 +96,7 @@ function glob($pattern, $flags = 0)
  */
 namespace Modules\Backup\Model;
 
-function exec($command, &$output = array(), &$return_var = NULL)
+function exec($command, &$output = array(), &$return_var = null)
 {
     $output = array();
     return '';

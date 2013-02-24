@@ -38,7 +38,7 @@ return array(
         'config_glob_paths'    => array(
             'config/autoload/{,*.}{global,local}.php',
         ),
-        'config_cache_enabled' => FALSE,
+        'config_cache_enabled' => false,
         'cache_dir' => 'data/cache',
         'module_paths' => array(
             './module',
@@ -46,7 +46,7 @@ return array(
         ),
     ),
     'service_manager' => array(
-        'use_defaults' => TRUE,
+        'use_defaults' => true,
         'factories' => array(),
     ),
     'autoloader' => array(
@@ -56,6 +56,6 @@ return array(
             'Gc'        => __DIR__ . '/../library/Gc',
             'Modules'   => __DIR__ . '/../library/Modules',
         ),
-        'autoregister_zf' => TRUE,
+        'autoregister_zf' => true,
     ),
 );

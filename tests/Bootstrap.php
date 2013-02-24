@@ -57,38 +57,36 @@ define('GC_MEDIA_PATH', GC_APPLICATION_PATH . '/tests/media');
  */
 
 // Composer autoloading
-if(file_exists($gc_root . '/vendor/autoload.php'))
-{
+if (file_exists($gc_root . '/vendor/autoload.php')) {
     $loader = include $gc_root . '/vendor/autoload.php';
 }
 
 // Support for ZF2_PATH environment variable or git submodule
 
-if($zf2_path = getenv('ZF2_PATH') ?: (is_dir($zf_library) ? $zf_library : FALSE))
-{
+if ($zf2_path = getenv('ZF2_PATH') ?: (is_dir($zf_library) ? $zf_library : false)) {
     // Get application stack configuration
     $configuration = require_once $gc_root . '/config/application.config.php';
-    if(isset($loader))
-    {
+    if (isset($loader)) {
         $loader->add('Zend', $zf2_path . '/Zend');
-    }
-    else
-    {
+    } else {
         require_once $zf_library . '/Zend/Loader/AutoloaderFactory.php';
-        \Zend\Loader\AutoloaderFactory::factory(array(
-            'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
-        ));
+        \Zend\Loader\AutoloaderFactory::factory(
+            array(
+                'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
+            )
+        );
     }
 }
 
-if(!class_exists('Zend\Loader\AutoloaderFactory'))
-{
-    throw new RuntimeException('Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.');
+if (!class_exists('Zend\Loader\AutoloaderFactory')) {
+    throw new RuntimeException(
+        'Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.'
+    );
 }
 
 
 // Run application
-\Zend\Console\Console::overrideIsConsole(FALSE);
+\Zend\Console\Console::overrideIsConsole(false);
 $application = \Zend\Mvc\Application::init($configuration);
 $application->getMvcEvent()->getRouter()->setRequestUri($application->getRequest()->getUri());
 $application->getRequest()->setBasePath('http://gotcms.com');
@@ -99,12 +97,9 @@ $application->getRequest()->setBasePath('http://gotcms.com');
  * Load the user-defined test configuration file, if it exists; otherwise, load
  * the default configuration.
  */
-if(is_readable($gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php'))
-{
+if (is_readable($gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
     require_once $gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php';
-}
-else
-{
+} else {
     require_once $gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
 }
 

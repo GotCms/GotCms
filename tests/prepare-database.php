@@ -24,10 +24,10 @@
  * @link     http://www.got-cms.com
  */
 
-use Gc\Core\Config as GcConfig,
-    Gc\Registry,
-    Zend\Db\Adapter\Adapter as DbAdapter,
-    Zend\Db\TableGateway\TableGateway;
+use Gc\Core\Config as GcConfig;
+use Gc\Registry;
+use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\TableGateway\TableGateway;
 
 $config = array(
     'db' => array(
@@ -39,13 +39,10 @@ $config = array(
     ),
 );
 
-try
-{
+try {
     $db_adapter = new DbAdapter($config['db']);
     $db_adapter->getDriver()->getConnection()->connect();
-}
-catch(Exception $e)
-{
+} catch (Exception $e) {
     echo 'Can\'t connect to database exiting.' . PHP_EOL;
     exit;
 }
@@ -65,16 +62,12 @@ $resource->exec(file_get_contents($gc_root . '/data/install/sql/data.sql'));
 $ini = new \Zend\Config\Reader\Ini();
 $roles = $ini->fromFile($gc_root . '/data/install/scripts/roles.ini');
 
-try
-{
-    foreach($roles['role'] as $key => $value)
-    {
+try {
+    foreach ($roles['role'] as $key => $value) {
         $statement = $db_adapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
         $statement->execute();
     }
-}
-catch(Exception $e)
-{
+} catch (Exception $e) {
     return $this->_returnJson(array('messages' => $e->getMessage()));
 }
 
@@ -82,8 +75,7 @@ catch(Exception $e)
 $ini = new \Zend\Config\Reader\Ini();
 $resources = $ini->fromFile($gc_root . '/data/install/scripts/resources.ini');
 
-foreach($resources as $key => $value)
-{
+foreach ($resources as $key => $value) {
     $statement = $db_adapter->createStatement("INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')");
     $statement->execute();
 
@@ -93,27 +85,30 @@ foreach($resources as $key => $value)
     $last_insert_id = $last_insert_id['id'];
 
     $permissions = array();
-    foreach($value as $k => $v)
-    {
-        if(!in_array($k, $permissions))
-        {
-            $statement = $db_adapter->createStatement("INSERT INTO user_acl_permission (permission, user_acl_resource_id) VALUES ('" . $k . "', '" . $last_insert_id . "')");
+    foreach ($value as $k => $v) {
+        if (!in_array($k, $permissions)) {
+            $statement = $db_adapter->createStatement(
+                "INSERT INTO user_acl_permission (permission, user_acl_resource_id)
+                VALUES ('" . $k . "', '" . $last_insert_id . "')"
+            );
             $statement->execute();
             $permissions[] = $k;
         }
     }
 }
 
-foreach($resources as $key => $value)
-{
+foreach ($resources as $key => $value) {
     $statement = $db_adapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
     $result = $statement->execute();
     $last_resource_insert_id = $result->current();
     $last_resource_insert_id = $last_resource_insert_id['id'];
 
-    foreach($value as $k => $v)
-    {
-        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_permission WHERE permission =  '" . $k . "' AND user_acl_resource_id = '" . $last_resource_insert_id . "'");
+    foreach ($value as $k => $v) {
+        $statement = $db_adapter->createStatement(
+            "SELECT id FROM user_acl_permission
+            WHERE permission =  '" . $k . "'
+                AND user_acl_resource_id = '" . $last_resource_insert_id . "'"
+        );
         $result = $statement->execute();
         $last_insert_id = $result->current();
         $last_insert_id = $last_insert_id['id'];
@@ -121,9 +116,11 @@ foreach($resources as $key => $value)
         $statement = $db_adapter->createStatement("SELECT id FROM user_acl_role WHERE name = '" . $v . "'");
         $result = $statement->execute();
         $role = $result->current();
-        if(!empty($role['id']))
-        {
-            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('" . $role['id'] . "', " . $last_insert_id . ')');
+        if (!empty($role['id'])) {
+            $statement = $db_adapter->createStatement(
+                "INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id)
+                VALUES ('" . $role['id'] . "', " . $last_insert_id . ')'
+            );
             $statement->execute();
         }
     }
