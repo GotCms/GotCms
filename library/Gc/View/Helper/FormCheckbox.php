@@ -27,10 +27,10 @@
 
 namespace Gc\View\Helper;
 
-use Zend\Form\ElementInterface,
-    Zend\Form\Element\Checkbox as CheckboxElement,
-    Zend\Form\View\Helper\FormCheckbox as ZendFormCheckbox,
-    Zend\Form\Exception;
+use Zend\Form\ElementInterface;
+use Zend\Form\Element\Checkbox as CheckboxElement;
+use Zend\Form\View\Helper\FormCheckbox as ZendFormCheckbox;
+use Zend\Form\Exception;
 
 /**
  * Render form checkbox
@@ -51,21 +51,23 @@ class FormCheckbox extends ZendFormCheckbox
      */
     public function render(ElementInterface $element)
     {
-        if(!$element instanceof CheckboxElement)
-        {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s requires that the element is of type Zend\Form\Element\Checkbox',
-                __METHOD__
-            ));
+        if (!$element instanceof CheckboxElement) {
+            throw new Exception\InvalidArgumentException(
+                sprintf(
+                    '%s requires that the element is of type Zend\Form\Element\Checkbox',
+                    __METHOD__
+                )
+            );
         }
 
         $name = $element->getName();
-        if(empty($name) && $name !== 0)
-        {
-            throw new Exception\DomainException(sprintf(
-                '%s requires that the element has an assigned name; none discovered',
-                __METHOD__
-            ));
+        if (empty($name) && $name !== 0) {
+            throw new Exception\DomainException(
+                sprintf(
+                    '%s requires that the element has an assigned name; none discovered',
+                    __METHOD__
+                )
+            );
         }
 
         $attributes            = $element->getAttributes();
@@ -74,21 +76,17 @@ class FormCheckbox extends ZendFormCheckbox
         $attributes['value']   = $element->getCheckedValue();
         $closing_bracket        = $this->getInlineClosingBracket();
 
-        if($element->isChecked())
-        {
+        if ($element->isChecked()) {
             $attributes['checked'] = 'checked';
         }
 
-        if($element->getAttribute('class') != 'input-checkbox' or $element->getAttribute('id') == '')
-        {
+        if ($element->getAttribute('class') != 'input-checkbox' or $element->getAttribute('id') == '') {
             $rendered = sprintf(
                 '<input %s%s',
                 $this->createAttributesString($attributes),
                 $closing_bracket
             );
-        }
-        else
-        {
+        } else {
             unset($attributes['class']);
             $rendered = sprintf(
                 '<div class="input-checkbox"><input %s%s<label for="%s"></label></div>',

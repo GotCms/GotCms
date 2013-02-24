@@ -45,27 +45,27 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Collection
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-    protected $_documentType;
+    protected $documentType;
 
     /**
      * @var DocumentModel
@@ -83,23 +83,23 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = LayoutModel::fromArray(array(
+        $this->layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
@@ -107,28 +107,28 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = DocumentTypeModel::fromArray(array(
+        $this->documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
 
-        $this->_documentType->save();
+        $this->documentType->save();
 
         $this->_document = DocumentModel::fromArray(array(
             'name' => 'Document name',
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,
             'show_in_nav' => TRUE,
-            'user_id' => $this->_user->getId(),
-            'document_type_id' => $this->_documentType->getId(),
-            'view_id' => $this->_view->getId(),
-            'layout_id' => $this->_layout->getId(),
+            'user_id' => $this->user->getId(),
+            'document_type_id' => $this->documentType->getId(),
+            'view_id' => $this->view->getId(),
+            'layout_id' => $this->layout->getId(),
             'parent_id' => 0
         ));
 
@@ -139,15 +139,15 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,
             'show_in_nav' => TRUE,
-            'user_id' => $this->_user->getId(),
-            'document_type_id' => $this->_documentType->getId(),
-            'view_id' => $this->_view->getId(),
-            'layout_id' => $this->_layout->getId(),
+            'user_id' => $this->user->getId(),
+            'document_type_id' => $this->documentType->getId(),
+            'view_id' => $this->view->getId(),
+            'layout_id' => $this->layout->getId(),
             'parent_id' => $this->_document->getId()
         ));
 
         $this->_documentChildren->save();
-        $this->_object = new Collection;
+        $this->object = new Collection;
     }
 
     /**
@@ -162,19 +162,19 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->_documentChildren->delete();
         unset($this->_documentChildren);
 
-        $this->_view->delete();
-        unset($this->_view);
+        $this->view->delete();
+        unset($this->view);
 
-        $this->_user->delete();
-        unset($this->_user);
+        $this->user->delete();
+        unset($this->user);
 
-        $this->_layout->delete();
-        unset($this->_layout);
+        $this->layout->delete();
+        unset($this->layout);
 
-        $this->_documentType->delete();
-        unset($this->_documentType);
+        $this->documentType->delete();
+        unset($this->documentType);
 
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -183,8 +183,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->_object->load(0);
-        $this->assertInternalType('array', $this->_object->getDocuments());
+        $this->object->load(0);
+        $this->assertInternalType('array', $this->object->getDocuments());
     }
 
     /**
@@ -193,8 +193,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadWithParentId()
     {
-        $this->_object->load($this->_document->getId());
-        $this->assertInternalType('array', $this->_object->getDocuments());
+        $this->object->load($this->_document->getId());
+        $this->assertInternalType('array', $this->object->getDocuments());
     }
 
     /**
@@ -202,7 +202,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAvailableDocuments()
     {
-        $this->assertInternalType('array', $this->_object->getAvailableDocuments());
+        $this->assertInternalType('array', $this->object->getAvailableDocuments());
     }
 
     /**
@@ -210,8 +210,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSelect()
     {
-        $this->_object->load(0);
-        $this->assertInternalType('array', $this->_object->getSelect());
+        $this->object->load(0);
+        $this->assertInternalType('array', $this->object->getSelect());
     }
 
     /**
@@ -219,8 +219,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParent()
     {
-        $this->_object->load(0);
-        $this->assertFalse($this->_object->getParent());
+        $this->object->load(0);
+        $this->assertFalse($this->object->getParent());
     }
 
     /**
@@ -228,8 +228,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetChildren()
     {
-        $this->_object->load(0);
-        $this->assertInternalType('array', $this->_object->getChildren());
+        $this->object->load(0);
+        $this->assertInternalType('array', $this->object->getChildren());
     }
 
     /**
@@ -237,8 +237,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAvailableChilren()
     {
-        $this->_object->load(0);
-        $this->assertInternalType('array', $this->_object->getAvailableChildren());
+        $this->object->load(0);
+        $this->assertInternalType('array', $this->object->getAvailableChildren());
     }
 
     /**
@@ -246,7 +246,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetId()
     {
-        $this->assertFalse($this->_object->getId());
+        $this->assertFalse($this->object->getId());
     }
 
     /**
@@ -254,7 +254,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetIcon()
     {
-        $this->assertEquals('folder', $this->_object->getIcon());
+        $this->assertEquals('folder', $this->object->getIcon());
     }
 
     /**
@@ -262,7 +262,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetIterableId()
     {
-        $this->assertEquals('documents', $this->_object->getIterableId());
+        $this->assertEquals('documents', $this->object->getIterableId());
     }
 
     /**
@@ -270,7 +270,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetName()
     {
-        $this->assertEquals('Website', $this->_object->getName());
+        $this->assertEquals('Website', $this->object->getName());
     }
 
     /**
@@ -279,6 +279,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetEditUrl()
     {
 
-        $this->assertNull($this->_object->getEditUrl());
+        $this->assertNull($this->object->getEditUrl());
     }
 }

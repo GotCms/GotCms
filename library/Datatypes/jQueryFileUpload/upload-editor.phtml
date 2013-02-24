@@ -70,12 +70,11 @@
 
 <script type="text/javascript">
     var $index<?php echo $this->name; ?> = 0;
-    $(function ()
-    {
+    $(function () {
         'use strict';
 
         $('#<?php echo $this->name; ?>').fileupload({
-            <?php if(empty($this->options['maxNumberOfFiles'])): ?>
+            <?php if (empty($this->options['maxNumberOfFiles'])): ?>
                 maxNumberOfFiles:   1,
             <?php endif; ?>
 
@@ -84,11 +83,9 @@
             url:                    '<?php echo $this->escapeJs($this->uploadUrl); ?>',
             uploadTemplateId:       null,
             downloadTemplateId:     null,
-            uploadTemplate:         function (o)
-            {
+            uploadTemplate:         function (o) {
                 var rows = $();
-                $.each(o.files, function (index, file)
-                {
+                $.each(o.files, function (index, file) {
                     var row = $('<tr class="template-upload fade">' +
                         '<td class="preview"><span class="fade"></span></td>' +
                         '<td class="size"></td>' +
@@ -107,8 +104,7 @@
                         '</td></tr>');
                     row.find('.name').text(file.name);
                     row.find('.size').text(o.formatFileSize(file.size));
-                    if (file.error)
-                    {
+                    if (file.error) {
                         row.find('.error').text(
                             locale.fileupload.errors[file.error] || file.error
                         );
@@ -119,11 +115,9 @@
 
                 return rows;
             },
-            downloadTemplate:       function (o)
-            {
+            downloadTemplate:       function (o) {
                 var rows = $();
-                $.each(o.files, function (index, file)
-                {
+                $.each(o.files, function (index, file) {
                     var row = $('<tr class="template-download fade">' +
                         (file.error ? '<td></td><td class="name"></td>' +
                             '<td class="size"></td><td class="error" colspan="2"></td>' :
@@ -141,18 +135,14 @@
 
                             '</td></tr>');
                     row.find('.size').text(o.formatFileSize(file.size));
-                    if (file.error)
-                    {
+                    if (file.error) {
                         row.find('.name').text(file.name);
                         row.find('.error').text(
                             locale.fileupload.errors[file.error] || file.error
                         );
-                    }
-                    else
-                    {
+                    } else {
                         row.find('.name a').text(file.name);
-                        if (file.thumbnail_url)
-                        {
+                        if (file.thumbnail_url) {
                             row.find('.preview').append('<img>')
                                 .find('img').prop('src', file.thumbnail_url);
                         }
@@ -172,25 +162,21 @@
         });
 
         // Load existing files:
-        $('#<?php echo $this->name; ?>').each(function ()
-        {
+        $('#<?php echo $this->name; ?>').each(function () {
             var $this = $(this);
             var result = $.parseJSON('<?php echo $this->files; ?>');
-            if(result && result.length)
-            {
-                <?php if(empty($this->options['maxNumberOfFiles'])): ?>
+            if (result && result.length) {
+                <?php if (empty($this->options['maxNumberOfFiles'])): ?>
                     $this.fileupload('option', 'maxNumberOfFiles', 0);
                 <?php endif; ?>
                 $this.fileupload('option', 'done').call(this, null, {result: result});
             }
         });
 
-        <?php if(empty($this->options['maxNumberOfFiles'])): ?>
-            $('#<?php echo $this->name; ?>').bind('fileuploaddestroy', function (e, data)
-            {
+        <?php if (empty($this->options['maxNumberOfFiles'])): ?>
+            $('#<?php echo $this->name; ?>').bind('fileuploaddestroy', function (e, data) {
                 $(this).fileupload('option', 'maxNumberOfFiles', 1);
-            }).bind('fileuploadadded', function(e, data)
-            {
+            }).bind('fileuploadadded', function (e, data) {
                 $(this).fileupload('option', 'maxNumberOfFiles', 0);
             });
         <?php endif; ?>

@@ -39,7 +39,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Pgsql
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -47,7 +47,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Pgsql;
+        $this->object = new Pgsql;
     }
 
     /**
@@ -63,17 +63,17 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testExport()
     {
-        $connection = $this->_object->getAdapter()->getDriver()->getConnection();
+        $connection = $this->object->getAdapter()->getDriver()->getConnection();
         $parameters = $connection->getConnectionParameters();
         if($parameters['driver'] != 'pdo_pgsql')
         {
             return;
         }
 
-        $parameters['port'] = 80;
+        $parameters['port'] = 5432;
         $connection->setConnectionParameters($parameters);
 
-        $this->assertInternalType('string', $this->_object->export());
+        $this->assertInternalType('string', $this->object->export());
     }
 
     /**
@@ -81,14 +81,14 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testExportDataOnly()
     {
-        $connection = $this->_object->getAdapter()->getDriver()->getConnection();
+        $connection = $this->object->getAdapter()->getDriver()->getConnection();
         $parameters = $connection->getConnectionParameters();
         if($parameters['driver'] != 'pdo_pgsql')
         {
             return;
         }
 
-        $this->assertInternalType('string', $this->_object->export('dataonly'));
+        $this->assertInternalType('string', $this->object->export('dataonly'));
     }
 
     /**
@@ -96,13 +96,13 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
      */
     public function testExportStructureOnly()
     {
-        $connection = $this->_object->getAdapter()->getDriver()->getConnection();
+        $connection = $this->object->getAdapter()->getDriver()->getConnection();
         $parameters = $connection->getConnectionParameters();
         if($parameters['driver'] != 'pdo_pgsql')
         {
             return;
         }
 
-        $this->assertInternalType('string', $this->_object->export('structureonly'));
+        $this->assertInternalType('string', $this->object->export('structureonly'));
     }
 }

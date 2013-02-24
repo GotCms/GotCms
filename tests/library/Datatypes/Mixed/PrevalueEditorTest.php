@@ -42,12 +42,12 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var PrevalueEditor
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var DatatypeModel
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -55,15 +55,15 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'MixedTest',
             'prevalue_value' => 'a:1:{s:9:"datatypes";a:1:{i:0;a:3:{s:4:"name";s:10:"Textstring";s:5:"label";s:4:"Test";s:6:"config";a:1:{s:6:"length";s:0:"";}}}}',
             'model' => 'Mixed',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
         $datatype = new Datatype();
-        $datatype->load($this->_datatype);
-        $this->_object = $datatype->getPrevalueEditor();
+        $datatype->load($this->datatype);
+        $this->object = $datatype->getPrevalueEditor();
     }
 
     /**
@@ -72,18 +72,18 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_datatype->delete();
-        unset($this->_datatype);
-        unset($this->_object);
+        $this->datatype->delete();
+        unset($this->datatype);
+        unset($this->object);
     }
 
     /**
      * @covers Datatypes\Mixed\PrevalueEditor::save
-     * @covers Datatypes\Mixed\PrevalueEditor::_getDatatype
+     * @covers Datatypes\Mixed\PrevalueEditor::getDatatype
      */
     public function testSave()
     {
-        $post = $this->_object->getRequest()->getPost();
+        $post = $this->object->getRequest()->getPost();
         $post->set('add-model', 'Textstring');
         $post->set('datatypes', array(
             1 => array(
@@ -92,15 +92,15 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
                 'length' => 25,
             ),
         ));
-        $this->assertNull($this->_object->save());
+        $this->assertNull($this->object->save());
     }
 
     /**
      * @covers Datatypes\Mixed\PrevalueEditor::load
-     * @covers Datatypes\Mixed\PrevalueEditor::_getDatatype
+     * @covers Datatypes\Mixed\PrevalueEditor::getDatatype
      */
     public function testLoad()
     {
-        $this->assertInternalType('string', $this->_object->load());
+        $this->assertInternalType('string', $this->object->load());
     }
 }

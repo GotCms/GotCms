@@ -27,12 +27,12 @@
 
 namespace Config\Form;
 
-use Gc\Form\AbstractForm,
-    Gc\User\Role\Collection as RoleCollection,
-    Zend\Validator\Db,
-    Zend\Validator,
-    Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory;
+use Gc\Form\AbstractForm;
+use Gc\User\Role\Collection as RoleCollection;
+use Zend\Validator\Db;
+use Zend\Validator;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory as InputFilterFactory;
 
 /**
  * User form
@@ -51,43 +51,45 @@ class User extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
-            'email' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                    array('name' => 'email_address'),
-                ),
-            ), 'login' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                    array(
-                        'name' => 'db\\no_record_exists',
-                        'options' => array(
-                            'table' => 'user',
-                            'field' => 'login',
-                            'adapter' => $this->getAdapter(),
+        $input_filter = $input_filter_factory->createInputFilter(
+            array(
+                'email' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                        array('name' => 'email_address'),
+                    ),
+                ), 'login' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                        array(
+                            'name' => 'db\\no_record_exists',
+                            'options' => array(
+                                'table' => 'user',
+                                'field' => 'login',
+                                'adapter' => $this->getAdapter(),
+                            ),
                         ),
                     ),
+                ), 'lastname' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    ),
+                ), 'firstname' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    ),
+                ), 'user_acl_role_id' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    ),
                 ),
-            ), 'lastname' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
-            ), 'firstname' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
-            ), 'user_acl_role_id' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
-            ),
-        ));
+            )
+        );
 
         $this->setInputFilter($input_filter);
 
@@ -95,8 +97,7 @@ class User extends AbstractForm
         $role_collection = new RoleCollection();
         $roles_list = $role_collection->getRoles();
         $select_options = array();
-        foreach($roles_list as $role_model)
-        {
+        foreach ($roles_list as $role_model) {
             $select_options[$role_model->getId()] = $role_model->getName();
         }
 
@@ -119,19 +120,25 @@ class User extends AbstractForm
     public function passwordRequired()
     {
         $filter = $this->getInputFilter();
-        $filter->add(array(
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $filter->add(
+            array(
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'password');
+            'password'
+        );
 
-        $filter->add(array(
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $filter->add(
+            array(
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'password_confirm');
+            'password_confirm'
+        );
 
         return $this;
     }

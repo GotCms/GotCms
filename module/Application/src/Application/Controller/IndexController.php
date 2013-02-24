@@ -27,19 +27,19 @@
 
 namespace Application\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Gc\Core\Config as CoreConfig,
-    Gc\Component,
-    Gc\Document,
-    Gc\DocumentType,
-    Gc\Layout,
-    Gc\Property,
-    Gc\User\Visitor,
-    Gc\View,
-    Zend\Config\Reader\Xml,
-    Zend\Cache\StorageFactory as CacheStorage,
-    Zend\Navigation\Navigation,
-    Zend\View\Model\ViewModel;
+use Gc\Mvc\Controller\Action;
+use Gc\Core\Config as CoreConfig;
+use Gc\Component;
+use Gc\Document;
+use Gc\DocumentType;
+use Gc\Layout;
+use Gc\Property;
+use Gc\User\Visitor;
+use Gc\View;
+use Zend\Config\Reader\Xml;
+use Zend\Cache\StorageFactory as CacheStorage;
+use Zend\Navigation\Navigation;
+use Zend\View\Model\ViewModel;
 
 /**
  * Index controller for module Application
@@ -55,42 +55,42 @@ class IndexController extends Action
      *
      * @var string
      */
-    protected $_viewStream  = 'zend.view';
+    protected $viewStream  = 'zend.view';
 
     /**
      * View filename
      *
      * @var string
      */
-    protected $_viewName = 'application/index/view-content';
+    protected $viewName = 'application/index/view-content';
 
     /**
      * View filename
      *
      * @var string
      */
-    protected $_layoutName = 'application/index/layout-content';
+    protected $layoutName = 'application/index/layout-content';
 
     /**
      * View path
      *
      * @var string
      */
-    protected $_viewPath;
+    protected $viewPath;
 
     /**
      * View path
      *
      * @var string
      */
-    protected $_layoutPath;
+    protected $layoutPath;
 
     /**
      * Cache
      *
      * @var Filesystem
      */
-    protected $_cache;
+    protected $cache;
 
     /**
      * Generate frontend from url key
@@ -106,104 +106,85 @@ class IndexController extends Action
         $is_preview = ($is_admin and $this->getRequest()->getQuery()->get('preview') === 'true');
 
         //Don't log preview
-        if(!$is_preview and !$is_admin)
-        {
-            try
-            {
+        if (!$is_preview and !$is_admin) {
+            try {
                 $session->visitorId = $visitor->getVisitorId($session_id);
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 //don't care
             }
         }
 
-        $this->events()->trigger('Front', 'preDispatch', NULL, array('object' => $this));
+        $this->events()->trigger('Front', 'preDispatch', null, array('object' => $this));
 
-        if(CoreConfig::getValue('site_is_offline') == 1)
-        {
+        if (CoreConfig::getValue('site_is_offline') == 1) {
             //Site is offline
-            if(!$is_admin)
-            {
+            if (!$is_admin) {
                 $document = Document\Model::fromId(CoreConfig::getValue('site_offline_document'));
-                if(empty($document))
-                {
+                if (empty($document)) {
                     die('Site offline');
                 }
             }
         }
 
-        $existed = in_array($this->_viewStream, stream_get_wrappers());
-        if($existed)
-        {
-            stream_wrapper_unregister($this->_viewStream);
+        $existed = in_array($this->viewStream, stream_get_wrappers());
+        if ($existed) {
+            stream_wrapper_unregister($this->viewStream);
         }
 
-        stream_wrapper_register($this->_viewStream, 'Gc\View\Stream');
+        stream_wrapper_register($this->viewStream, 'Gc\View\Stream');
         $template_path_stack = $this->getServiceLocator()->get('Zend\View\Resolver\TemplatePathStack');
-        $template_path_stack->setUseStreamWrapper(TRUE);
-        $this->_viewPath = $template_path_stack->resolve($this->_viewName);
-        $this->_layoutPath = $template_path_stack->resolve($this->_layoutName);
+        $template_path_stack->setUseStreamWrapper(true);
+        $this->viewPath = $template_path_stack->resolve($this->viewName);
+        $this->layoutPath = $template_path_stack->resolve($this->layoutName);
 
         $path = $this->getRouteMatch()->getParam('path');
 
         $cache_is_enable = (CoreConfig::getValue('cache_is_active') == 1 and !$is_preview);
-        if($cache_is_enable)
-        {
-            $this->_enableCache();
+        if ($cache_is_enable) {
+            $this->enableCache();
             $cache_key = ('page' . (empty($path) ? '' : '-' . str_replace('/', '-', $path)));
-            if($this->_cache->hasItem($cache_key))
-            {
+            if ($this->cache->hasItem($cache_key)) {
                 //Retrieve cache value and set data
-                $cache_value = $this->_cache->getItem($cache_key);
+                $cache_value = $this->cache->getItem($cache_key);
                 $view_model = $cache_value['view_model'];
-                $view_model->setTemplate($this->_viewName);
+                $view_model->setTemplate($this->viewName);
                 $view_model->setVariables($cache_value['layout_variables']);
                 $this->layout()->setVariables($cache_value['layout_variables']);
-                $this->layout()->setTemplate($this->_layoutName);
+                $this->layout()->setTemplate($this->layoutName);
                 $layout_content = $cache_value['layout_content'];
                 $view_content = $cache_value['view_content'];
             }
         }
 
         //Cache is disable or cache isn't create
-        if(empty($cache_value))
-        {
-            if(empty($document))
-            {
-                if(empty($path))
-                {
+        if (empty($cache_value)) {
+            if (empty($document)) {
+                if (empty($path)) {
                     $document = Document\Model::fromUrlKey('');
-                }
-                else
-                {
+                } else {
                     $explode_path = $this->explodePath($path);
-                    $children = NULL;
+                    $children = null;
                     $key = array();
-                    $has_document = FALSE;
+                    $has_document = false;
                     $parent_id = 0;
 
-                    foreach($explode_path as $url_key)
-                    {
-                        $document = NULL;
-                        $document_tmp = NULL;
-                        if($has_document === FALSE)
-                        {
+                    foreach ($explode_path as $url_key) {
+                        $document = null;
+                        $document_tmp = null;
+                        if ($has_document === false) {
                             $document_tmp = Document\Model::fromUrlKey($url_key, $parent_id);
                         }
 
-                        if((is_array($children) and !empty($children) and !in_array($document_tmp, $children) and $children !== NULL) or $document_tmp === NULL)
-                        {
-                            $has_document = TRUE;
-                        }
-                        else
-                        {
-                            if(!empty($document_tmp))
-                            {
-                                if(!$document_tmp->isPublished())
-                                {
-                                    if(!$is_preview)
-                                    {
+                        if ((is_array($children)
+                            and !empty($children)
+                            and !in_array($document_tmp, $children)
+                            and $children !== null)
+                            or $document_tmp === null) {
+                            $has_document = true;
+                        } else {
+                            if (!empty($document_tmp)) {
+                                if (!$document_tmp->isPublished()) {
+                                    if (!$is_preview) {
                                         break;
                                     }
                                 }
@@ -218,39 +199,34 @@ class IndexController extends Action
             }
 
             $view_model = new ViewModel();
-            $view_model->setTemplate($this->_viewName);
-            $this->layout()->setTemplate($this->_layoutName);
+            $view_model->setTemplate($this->viewName);
+            $this->layout()->setTemplate($this->layoutName);
 
-            if(empty($document))
-            {
+            if (empty($document)) {
                 // 404
                 $this->getResponse()->setStatusCode(404);
                 $layout = Layout\Model::fromId(CoreConfig::getValue('site_404_layout'));
-                if(!empty($layout))
-                {
+                if (!empty($layout)) {
                     $layout_content = $layout->getContent();
-                }
-                else
-                {
+                } else {
                     $layout_content = '<?php echo $this->content; ?>';
                 }
-            }
-            else
-            {
+            } else {
                 //Get all tabs of document
                 $tabs = $this->loadTabs($document->getDocumentTypeId());
                 //get Tabs and Properties to construct property in view
                 $variables = array();
-                foreach($tabs as $tab)
-                {
+                foreach ($tabs as $tab) {
                     $tabs_array[] = $tab->getName();
-                    $properties = $this->loadProperties($document->getDocumentTypeId(), $tab->getId(), $document->getId());
-                    foreach($properties as $property)
-                    {
+                    $properties = $this->loadProperties(
+                        $document->getDocumentTypeId(),
+                        $tab->getId(),
+                        $document->getId()
+                    );
+                    foreach ($properties as $property) {
                         $value = $property->getValue();
 
-                        if($this->_isSerialized($value))
-                        {
+                        if ($this->isSerialized($value)) {
                             $value = unserialize($value);
                         }
 
@@ -272,21 +248,22 @@ class IndexController extends Action
                 $view_content = $view->getContent();
             }
 
-            if($cache_is_enable)
-            {
-                $this->_cache->addItem($cache_key, array(
-                    'view_model' => $view_model,
-                    'layout_variables' => $variables,
-                    'layout_content' => $layout->getContent(),
-                    'view_content' => !empty($view) ? $view->getContent() : '',
-                ));
+            if ($cache_is_enable) {
+                $this->cache->addItem(
+                    $cache_key,
+                    array(
+                        'view_model' => $view_model,
+                        'layout_variables' => $variables,
+                        'layout_content' => $layout->getContent(),
+                        'view_content' => !empty($view) ? $view->getContent() : '',
+                    )
+                );
             }
         }
 
-        file_put_contents($this->_layoutPath, $layout_content);
-        if(!empty($view_content))
-        {
-            file_put_contents($this->_viewPath, $view_content);
+        file_put_contents($this->layoutPath, $layout_content);
+        if (!empty($view_content)) {
+            file_put_contents($this->viewPath, $view_content);
         }
 
         $this->events()->trigger('Front', 'postDispatch');
@@ -331,8 +308,7 @@ class IndexController extends Action
     protected function explodePath($path)
     {
         $explode_path = explode('/', $path);
-        if(preg_match('/\/$/', $path))
-        {
+        if (preg_match('/\/$/', $path)) {
             array_pop($explode_path);
         }
 
@@ -345,19 +321,17 @@ class IndexController extends Action
      * @param string $data
      * @return boolean
      */
-    protected function _isSerialized($data)
+    protected function isSerialized($data)
     {
-        if(trim($data) == '')
-        {
-            return FALSE;
+        if (trim($data) == '') {
+            return false;
         }
 
-        if(preg_match('/^(i|s|a|o|d|N)(.*);/si', $data))
-        {
-            return TRUE;
+        if (preg_match('/^(i|s|a|o|d|N)(.*);/si', $data)) {
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -365,18 +339,16 @@ class IndexController extends Action
      *
      * @return void
      */
-    protected function _enableCache()
+    protected function enableCache()
     {
         $cache_ttl = (int)CoreConfig::getValue('cache_lifetime');
         $cache_handler = CoreConfig::getValue('cache_handler');
 
-        if(!in_array($cache_handler, array('apc', 'memcached', 'filesystem')))
-        {
+        if (!in_array($cache_handler, array('apc', 'memcached', 'filesystem'))) {
             $cache_handler = 'filesystem';
         }
 
-        switch($cache_handler)
-        {
+        switch($cache_handler) {
             case 'memcached':
                 $cache_options = array(
                     'ttl' => $cache_ttl,
@@ -384,28 +356,29 @@ class IndexController extends Action
                         'localhost', 11211
                     )),
                 );
-            break;
-
+                break;
             case 'apc':
             default:
                 $cache_options = array(
                     'ttl' => $cache_ttl,
                 );
-            break;
+                break;
         }
 
-        $this->_cache = CacheStorage::factory(array(
-            'adapter' => array(
-                'name' => $cache_handler,
-                'options' => $cache_options,
-            ),
-            'plugins' => array(
-                // Don't throw exceptions on cache errors
-                'exception_handler' => array(
-                    'throw_exceptions' => false
+        $this->cache = CacheStorage::factory(
+            array(
+                'adapter' => array(
+                    'name' => $cache_handler,
+                    'options' => $cache_options,
                 ),
-                'Serializer'
-            ),
-        ));
+                'plugins' => array(
+                    // Don't throw exceptions on cache errors
+                    'exception_handler' => array(
+                        'throw_exceptions' => false
+                    ),
+                    'Serializer'
+                ),
+            )
+        );
     }
 }

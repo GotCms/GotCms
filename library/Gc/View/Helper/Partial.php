@@ -27,10 +27,10 @@
 
 namespace Gc\View\Helper;
 
-use Zend\View\Helper\Partial as ZendPartial,
-    Gc\View\Model as ViewModel,
-    Gc\View\Stream,
-    Gc\View\Resolver\TemplatePathStack;
+use Zend\View\Helper\Partial as ZendPartial;
+use Gc\View\Model as ViewModel;
+use Gc\View\Stream;
+use Gc\View\Resolver\TemplatePathStack;
 
 /**
  * Retrieve view from identifier
@@ -43,25 +43,18 @@ use Zend\View\Helper\Partial as ZendPartial,
 class Partial extends ZendPartial
 {
     /**
-     * Script parameter
-     *
-     * @var array
-     */
-    protected $_params = array();
-
-    /**
      * Template path stack
      *
      * @var TemplatePathStack
      */
-    protected $_resolver;
+    protected $resolver;
 
     /**
      * Check if stream is registered
      *
      * @var TemplatePathStack
      */
-    static protected $_streamIsRegistered = FALSE;
+    static protected $streamIsRegistered = false;
 
     /**
      * Returns script from identifier.
@@ -72,65 +65,48 @@ class Partial extends ZendPartial
      */
     public function __invoke($name = null, $values = null)
     {
-        if(empty($name))
-        {
+        if (empty($name)) {
             return $this;
         }
 
         $view = $this->cloneView();
 
 
-        if(!empty($values))
-        {
-            if(is_array($values))
-            {
+        if (!empty($values)) {
+            if (is_array($values)) {
                 $view->vars()->assign($values);
-            }
-            elseif(is_object($values))
-            {
-                if(NULL !== ($object_key = $this->getObjectKey()))
-                {
+            } elseif (is_object($values)) {
+                if (null !== ($object_key = $this->getObjectKey())) {
                     $view->vars()->offsetSet($object_key, $values);
-                }
-                elseif(method_exists($values, 'toArray'))
-                {
+                } elseif (method_exists($values, 'toArray')) {
                     $view->vars()->assign($values->toArray());
-                }
-                else
-                {
+                } else {
                     $view->vars()->assign(get_object_vars($values));
                 }
             }
         }
 
-        if(strpos($name, '.phtml') !== FALSE)
-        {
+        if (strpos($name, '.phtml') !== false) {
             return $view->render($name);
-        }
-        else
-        {
-            if(empty($this->_resolver))
-            {
-                $this->_resolver = new TemplatePathStack();
-                $this->_resolver->setUseStreamWrapper(TRUE);
+        } else {
+            if (empty($this->resolver)) {
+                $this->resolver = new TemplatePathStack();
+                $this->resolver->setUseStreamWrapper(true);
             }
 
-            $view->setResolver($this->_resolver);
+            $view->setResolver($this->resolver);
 
-            if(self::$_streamIsRegistered === FALSE)
-            {
+            if (self::$streamIsRegistered === false) {
                 $existed = in_array('zend.view', stream_get_wrappers());
-                if($existed)
-                {
+                if ($existed) {
                     stream_wrapper_unregister('zend.view');
                     stream_wrapper_register('zend.view', 'Gc\View\Stream');
                 }
             }
 
             $view_model = ViewModel::fromIdentifier($name);
-            if(empty($view_model))
-            {
-                return FALSE;
+            if (empty($view_model)) {
+                return false;
             }
 
             $name .= '-view.gc-stream';

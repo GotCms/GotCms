@@ -27,10 +27,10 @@
 
 namespace Modules\Blog\Model;
 
-use Gc\Db\AbstractTable,
-    Gc\Document\Model as DocumentModel,
-    Zend\Db\Sql\Select,
-    Zend\Db\Sql\Predicate\Expression;
+use Gc\Db\AbstractTable;
+use Gc\Document\Model as DocumentModel;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Predicate\Expression;
 
 /**
  * Blog comment table
@@ -46,7 +46,7 @@ class Comment extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'blog_comment';
+    protected $name = 'blog_comment';
 
     /**
      * Return all documents with comment(s)
@@ -55,12 +55,10 @@ class Comment extends AbstractTable
      */
     public function getDocumentList()
     {
-        $all_comments = $this->getList(NULL, NULL);
+        $all_comments = $this->getList(null, null);
         $documents = array();
-        foreach($all_comments as $key => $comment)
-        {
-            if(empty($documents[$comment['document_id']]))
-            {
+        foreach ($all_comments as $key => $comment) {
+            if (empty($documents[$comment['document_id']])) {
                 $document = DocumentModel::fromId($comment['document_id']);
                 $documents[$document->getId()] = $document;
             }
@@ -76,29 +74,25 @@ class Comment extends AbstractTable
      * @param boolean $is_active
      * @return array
      */
-    public function getList($document_id = NULL, $is_active = TRUE)
+    public function getList($document_id = null, $is_active = true)
     {
-        return $this->select(function(Select $select) use ($document_id, $is_active)
-        {
-            if(!empty($document_id))
-            {
-                $select->where->equalTo('document_id', $document_id);
-            }
-
-            if(!is_null($is_active))
-            {
-                if($this->getDriverName() == 'pdo_pgsql')
-                {
-                    $select->where->equalTo('is_active', empty($is_active) ? 'FALSE' : 'TRUE');
+        return $this->select(
+            function (Select $select) use ($document_id, $is_active) {
+                if (!empty($document_id)) {
+                    $select->where->equalTo('document_id', $document_id);
                 }
-                else
-                {
-                    $select->where->equalTo('is_active', (int)$is_active);
-                }
-            }
 
-            $select->order('created_at ASC');
-        })->toArray();
+                if (!is_null($is_active)) {
+                    if ($this->getDriverName() == 'pdo_pgsql') {
+                        $select->where->equalTo('is_active', empty($is_active) ? 'false' : 'true');
+                    } else {
+                        $select->where->equalTo('is_active', (int)$is_active);
+                    }
+                }
+
+                $select->order('created_at ASC');
+            }
+        )->toArray();
     }
 
     /**
@@ -112,14 +106,10 @@ class Comment extends AbstractTable
     {
         $mandatory_keys = array('message', 'username', 'email');
         $insert_data = array();
-        foreach($mandatory_keys as $key)
-        {
-            if(empty($data[$key]))
-            {
-                return FALSE;
-            }
-            else
-            {
+        foreach ($mandatory_keys as $key) {
+            if (empty($data[$key])) {
+                return false;
+            } else {
                 $insert_data[$key] = $data[$key];
             }
         }
@@ -129,6 +119,6 @@ class Comment extends AbstractTable
         $insert_data['created_at'] = new Expression('NOW()');
         $this->insert($insert_data);
 
-        return TRUE;
+        return true;
     }
 }

@@ -26,10 +26,16 @@
  */
 
 return array(
-    'Development\Controller\IndexController'        => __DIR__ . '/src/Development/Controller/IndexController.php',
-    'Development\Controller\DocumentTypeController' => __DIR__ . '/src/Development/Controller/DocumentTypeController.php',
-    'Development\Controller\DatatypeController'     => __DIR__ . '/src/Development/Controller/DatatypeController.php',
-    'Development\Controller\LayoutController'       => __DIR__ . '/src/Development/Controller/LayoutController.php',
-    'Development\Controller\ViewController'         => __DIR__ . '/src/Development/Controller/ViewController.php',
-    'Development\Module'                            => __DIR__ . '/Module.php',
+    'Development\Controller\IndexController'        =>
+        __DIR__ . '/src/Development/Controller/IndexController.php',
+    'Development\Controller\DocumentTypeController' =>
+        __DIR__ . '/src/Development/Controller/DocumentTypeController.php',
+    'Development\Controller\DatatypeController'     =>
+        __DIR__ . '/src/Development/Controller/DatatypeController.php',
+    'Development\Controller\LayoutController'       =>
+        __DIR__ . '/src/Development/Controller/LayoutController.php',
+    'Development\Controller\ViewController'         =>
+        __DIR__ . '/src/Development/Controller/ViewController.php',
+    'Development\Module'                            =>
+        __DIR__ . '/Module.php',
 );

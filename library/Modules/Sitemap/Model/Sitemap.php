@@ -27,11 +27,11 @@
 
 namespace Modules\Sitemap\Model;
 
-use Gc\Core\Object,
-    Gc\Registry,
-    Gc\Component\IterableInterface,
-    Gc\Document\Collection as DocumentCollection,
-    Gc\Document\Model as DocumentModel;
+use Gc\Core\Object;
+use Gc\Registry;
+use Gc\Component\IterableInterface;
+use Gc\Document\Collection as DocumentCollection;
+use Gc\Document\Model as DocumentModel;
 
 /**
  * Sitemap comment table
@@ -62,12 +62,11 @@ class Sitemap extends Object
         $collection = new DocumentCollection();
         $documents = array();
         $rows = $collection->getAvailableDocuments();
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $documents[] = DocumentModel::fromArray((array)$row);
         }
 
-        return $this->_generateXml($documents);
+        return $this->generateXml($documents);
     }
 
     /**
@@ -76,15 +75,18 @@ class Sitemap extends Object
      * @param array $documents Array with all documents
      * @return string
      */
-    protected function _generateXml($documents)
+    protected function generateXml($documents)
     {
         $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
+        $xml .= '<urlset
+            xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
 
         $url = Registry::get('Application')->getRequest()->getBasePath();
 
-        foreach($documents as $document)
-        {
+        foreach ($documents as $document) {
             $xml .= '<url>';
             $xml .= '<loc>' . $url . $document->getUrl() . '</loc>';
             $xml .= '<lastmod>' . date('Y-m-d\TH:i:s\Z', strtotime($document->getUpdatedAt())) . '</lastmod>';

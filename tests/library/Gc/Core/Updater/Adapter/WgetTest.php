@@ -40,7 +40,7 @@ class WgetTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Wget
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class WgetTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Wget;
+        $this->object = new Wget;
     }
 
     /**
@@ -57,7 +57,7 @@ class WgetTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**

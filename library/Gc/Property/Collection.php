@@ -27,8 +27,8 @@
 
 namespace Gc\Property;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of Property Model
@@ -44,7 +44,7 @@ class Collection extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'property';
+    protected $name = 'property';
 
     /**
      * Load property
@@ -54,13 +54,13 @@ class Collection extends AbstractTable
      * @param integer $document_id Optional
      * @return \Gc\Property\Collection
      */
-    public function load($document_type_id = NULL, $tab_id = NULL, $document_id = null)
+    public function load($document_type_id = null, $tab_id = null, $document_id = null)
     {
         $this->setDocumentTypeId($document_type_id);
         $this->setTabId($tab_id);
         $this->setDocumentId($document_id);
 
-        $this->getProperties(TRUE);
+        $this->getProperties(true);
 
         return $this;
     }
@@ -71,29 +71,35 @@ class Collection extends AbstractTable
      * @param boolean $force_reload to initiliaze properties
      * @return array
      */
-    public function getProperties($force_reload = FALSE)
+    public function getProperties($force_reload = false)
     {
-        if($this->getData('properties') == NULL or $force_reload)
-        {
+        if ($this->getData('properties') == null or $force_reload) {
             $select = new Select();
             $select->from('tab')
             ->columns(array())
             ->join('property', 'tab.id = property.tab_id', '*', Select::JOIN_INNER);
 
-            if($this->getDocumentId() !== NULL)
-            {
-                $select->join('document', 'document.document_type_id = tab.document_type_id', array(), Select::JOIN_INNER);
-                $select->join('property_value', 'document.id = property_value.document_id AND property.id = property_value.property_id', array('value'), Select::JOIN_LEFT);
+            if ($this->getDocumentId() !== null) {
+                $select->join(
+                    'document',
+                    'document.document_type_id = tab.document_type_id',
+                    array(),
+                    Select::JOIN_INNER
+                );
+                $select->join(
+                    'property_value',
+                    'document.id = property_value.document_id AND property.id = property_value.property_id',
+                    array('value'),
+                    Select::JOIN_LEFT
+                );
                 $select->where(array('document.id' => $this->getDocumentId()));
             }
 
-            if($this->getTabId() != NULL)
-            {
+            if ($this->getTabId() != null) {
                 $select->where(array('tab.id' => $this->getTabId()));
             }
 
-            if($this->getDocumentTypeId() != NULL)
-            {
+            if ($this->getDocumentTypeId() != null) {
                 $select->where(array('tab.document_type_id' => $this->getDocumentTypeId()));
             }
 
@@ -102,11 +108,9 @@ class Collection extends AbstractTable
             $rows = $this->fetchAll($select);
 
             $properties = array();
-            foreach($rows as $row)
-            {
+            foreach ($rows as $row) {
                 $property_model = Model::fromArray((array)$row);
-                if($this->getDocumentId() !== NULL)
-                {
+                if ($this->getDocumentId() !== null) {
                     $property_model->setDocumentId($this->getDocumentId());
                 }
 
@@ -128,8 +132,7 @@ class Collection extends AbstractTable
     public function setProperties(array $properties)
     {
         $array = array();
-        foreach($properties as $property)
-        {
+        foreach ($properties as $property) {
             $array[] = Model::fromArray($property);
         }
 
@@ -146,21 +149,17 @@ class Collection extends AbstractTable
     public function save()
     {
         $properties = $this->getProperties();
-        try
-        {
-            foreach($properties as $property)
-            {
+        try {
+            foreach ($properties as $property) {
                 $property->save();
             }
 
-            return TRUE;
-        }
-        catch(\Exception $e)
-        {
+            return true;
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage());
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -171,20 +170,16 @@ class Collection extends AbstractTable
     public function delete()
     {
         $properties = $this->getProperties();
-        try
-        {
-            foreach($properties as $property)
-            {
+        try {
+            foreach ($properties as $property) {
                 $property->delete();
             }
 
-            return TRUE;
-        }
-        catch(\Exception $e)
-        {
+            return true;
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage());
         }
 
-        return FALSE;
+        return false;
     }
 }

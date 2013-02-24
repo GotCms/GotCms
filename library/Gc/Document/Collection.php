@@ -27,9 +27,9 @@
 
 namespace Gc\Document;
 
-use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Gc\Component\IterableInterface;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of Document Model
@@ -45,7 +45,7 @@ class Collection extends AbstractTable implements IterableInterface
      *
      * @var string
      */
-    protected $_name = 'document';
+    protected $name = 'document';
 
     /**
      * Load document collection
@@ -53,10 +53,9 @@ class Collection extends AbstractTable implements IterableInterface
      * @param integer $parent_id
      * @return \Gc\Document\Collection
      */
-    public function load($parent_id = NULL)
+    public function load($parent_id = null)
     {
-        if($parent_id !== NULL)
-        {
+        if ($parent_id !== null) {
             $this->setData('parent_id', $parent_id);
             $this->setDocuments();
         }
@@ -73,28 +72,30 @@ class Collection extends AbstractTable implements IterableInterface
     {
         $parent_id = $this->getParentId();
 
-        if(!empty($parent_id))
-        {
-            $rows = $this->fetchAll($this->select(function(Select $select)
-            {
-                $select->where->equalTo('parent_id', $this->getParentId());
-                $select->order('sort_order ASC');
-                $select->order('name ASC');
-            }));
-        }
-        else
-        {
-            $rows = $this->fetchAll($this->select(function(Select $select)
-            {
-                $select->where->isNull('parent_id');
-                $select->order('sort_order ASC');
-                $select->order('name ASC');
-            }));
+        if (!empty($parent_id)) {
+            $rows = $this->fetchAll(
+                $this->select(
+                    function (Select $select) {
+                        $select->where->equalTo('parent_id', $this->getParentId());
+                        $select->order('sort_order ASC');
+                        $select->order('name ASC');
+                    }
+                )
+            );
+        } else {
+            $rows = $this->fetchAll(
+                $this->select(
+                    function (Select $select) {
+                        $select->where->isNull('parent_id');
+                        $select->order('sort_order ASC');
+                        $select->order('name ASC');
+                    }
+                )
+            );
         }
 
         $documents = array();
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $documents[] = Model::fromArray((array)$row);
         }
 
@@ -110,12 +111,15 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getAvailableDocuments()
     {
-        $rows = $this->fetchAll($this->select(function(Select $select)
-        {
-            $select->where->equalTo('status', Model::STATUS_ENABLE);
-            $select->order('sort_order ASC');
-            $select->order('name ASC');
-        }));
+        $rows = $this->fetchAll(
+            $this->select(
+                function (Select $select) {
+                    $select->where->equalTo('status', Model::STATUS_ENABLE);
+                    $select->order('sort_order ASC');
+                    $select->order('name ASC');
+                }
+            )
+        );
 
         return $rows;
     }
@@ -129,10 +133,8 @@ class Collection extends AbstractTable implements IterableInterface
     {
         $children = $this->getChildren();
         $array = array();
-        foreach($children as $child)
-        {
-            if($child->isPublished())
-            {
+        foreach ($children as $child) {
+            if ($child->isPublished()) {
                 $array[] = $child;
             }
         }
@@ -150,8 +152,7 @@ class Collection extends AbstractTable implements IterableInterface
         $select = array();
         $documents = $this->getDocuments();
 
-        foreach($documents as $document)
-        {
+        foreach ($documents as $document) {
             $select[$document->getId()] = $document->getName();
         }
 
@@ -163,7 +164,7 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getParent()
     {
-        return FALSE;
+        return false;
     }
 
     /** (non-PHPdoc)
@@ -179,7 +180,7 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getId()
     {
-        return FALSE;
+        return false;
     }
 
     /** (non-PHPdoc)
@@ -211,6 +212,6 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getEditUrl()
     {
-        return NULL;
+        return null;
     }
 }

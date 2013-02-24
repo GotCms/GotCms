@@ -42,7 +42,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractPrevalueEditor
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -52,17 +52,17 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'AbstractEditorTest',
             'prevalue_value' => 's:26:"AbstractPrevalueEditorTest";',
             'model' => 'AbstractEditorTest',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
 
         $mock_datatype = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
-        $mock_datatype->load($this->_datatype, 1);
+        $mock_datatype->load($this->datatype, 1);
 
-        $this->_object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor', array($mock_datatype));
+        $this->object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor', array($mock_datatype));
     }
 
     /**
@@ -71,9 +71,9 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_datatype->delete();
-        unset($this->_datatype);
-        unset($this->_object);
+        $this->datatype->delete();
+        unset($this->datatype);
+        unset($this->object);
     }
 
     /**
@@ -81,7 +81,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetConfig()
     {
-        $this->assertEquals('AbstractPrevalueEditorTest', $this->_object->getConfig());
+        $this->assertEquals('AbstractPrevalueEditorTest', $this->object->getConfig());
     }
 
     /**
@@ -89,8 +89,8 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetConfig()
     {
-        $this->_object->setConfig('s:27:"AbstractPrevalueEditorTest2";');
-        $this->assertEquals('AbstractPrevalueEditorTest2', $this->_object->getConfig());
+        $this->object->setConfig('s:27:"AbstractPrevalueEditorTest2";');
+        $this->assertEquals('AbstractPrevalueEditorTest2', $this->object->getConfig());
     }
 
     /**
@@ -98,7 +98,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRequest()
     {
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Request', $this->_object->getRequest());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Request', $this->object->getRequest());
     }
 
     /**
@@ -106,7 +106,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDatatype()
     {
-        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', $this->_object->getDatatype());
+        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', $this->object->getDatatype());
     }
 
     /**
@@ -114,8 +114,8 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $this->_object->addPath(__DIR__ . '/../');
-        $this->assertEquals('String' . PHP_EOL, $this->_object->render('_files/template.phtml'));
+        $this->object->addPath(__DIR__ . '/../');
+        $this->assertEquals('String' . PHP_EOL, $this->object->render('_files/template.phtml'));
     }
 
     /**
@@ -123,7 +123,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddPath()
     {
-        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor', $this->_object->addPath(__DIR__));
+        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor', $this->object->addPath(__DIR__));
     }
 
     /**
@@ -131,6 +131,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHelper()
     {
-        $this->assertInstanceOf('Gc\View\Helper\Partial', $this->_object->getHelper('partial'));
+        $this->assertInstanceOf('Gc\View\Helper\Partial', $this->object->getHelper('partial'));
     }
 }

@@ -27,10 +27,10 @@
 
 namespace Gc\Core;
 
-use Gc\Core\Updater\Adapter,
-    Gc\Core\Updater\Script,
-    Gc\Registry,
-    Gc\Version;
+use Gc\Core\Updater\Adapter;
+use Gc\Core\Updater\Script;
+use Gc\Registry;
+use Gc\Version;
 
 /**
  * Update cms
@@ -46,7 +46,7 @@ class Updater extends Object
      *
      * @var AbstractAdapter
      */
-    protected $_adapter;
+    protected $adapter;
 
     /**
      * Initialize update directory
@@ -64,36 +64,32 @@ class Updater extends Object
      */
     public function load($type)
     {
-        switch($type)
-        {
+        switch($type) {
             case 'git':
                 $adapter = new Adapter\Git();
-            break;
-
+                break;
             /**
              * @TODO Wget
              *
             case 'wget':
                 $adapter = new Adapter\Wget();
-            break;
+                break;
              */
-
             /**
              * @TODO ftp
              *
             case 'ftp':
                 $adapter = new Adapter\Ftp();
-            break;
+                break;
              */
         }
 
-        if(empty($adapter))
-        {
+        if (empty($adapter)) {
             return false;
         }
 
-        $this->_adapter = $adapter;
-        return TRUE;
+        $this->adapter = $adapter;
+        return true;
     }
 
     /**
@@ -103,12 +99,11 @@ class Updater extends Object
      */
     public function update()
     {
-        if(empty($this->_adapter))
-        {
-            return FALSE;
+        if (empty($this->adapter)) {
+            return false;
         }
 
-        return $this->_adapter->update();
+        return $this->adapter->update();
     }
 
     /**
@@ -118,12 +113,11 @@ class Updater extends Object
      */
     public function upgrade()
     {
-        if(empty($this->_adapter))
-        {
-            return FALSE;
+        if (empty($this->adapter)) {
+            return false;
         }
 
-        return $this->_adapter->upgrade();
+        return $this->adapter->upgrade();
     }
 
     /**
@@ -134,12 +128,11 @@ class Updater extends Object
      */
     public function rollback($current_version)
     {
-        if(empty($this->_adapter))
-        {
-            return FALSE;
+        if (empty($this->adapter)) {
+            return false;
         }
 
-        return $this->_adapter->rollback($current_version);
+        return $this->adapter->rollback($current_version);
     }
 
     /**
@@ -149,58 +142,48 @@ class Updater extends Object
      */
     public function updateDatabase()
     {
-        if(empty($this->_adapter))
-        {
-            return FALSE;
+        if (empty($this->adapter)) {
+            return false;
         }
 
         $configuration = Registry::get('Configuration');
         $files = array();
         $update_path = GC_APPLICATION_PATH . '/data/update';
         $path = glob($update_path . '/*');
-        foreach($path as $file)
-        {
+        foreach ($path as $file) {
             $version = str_replace($update_path . '/v', '', $file);
-            if(version_compare($version, Version::VERSION, '>'))
-            {
+            if (version_compare($version, Version::VERSION, '>')) {
                 $file_list = glob(sprintf($file . '/%s/*.sql', $configuration['db']['driver']));
-                if(!empty($file_list))
-                {
+                if (!empty($file_list)) {
                     $files[] = $file_list;
                 }
             }
         }
 
-        if(empty($files))
-        {
-            return TRUE;
+        if (empty($files)) {
+            return true;
         }
 
         $sql = '';
-        foreach($files as $file_list)
-        {
-            foreach($file_list as $filename)
-            {
+        foreach ($files as $file_list) {
+            foreach ($file_list as $filename) {
                 $sql .= file_get_contents($filename) . PHP_EOL;
             }
         }
 
         $resource = Registry::get('Db')->getDriver()->getConnection()->getResource();
-        try
-        {
+        try {
             $resource->beginTransaction();
             $resource->exec($sql);
             $resource->commit();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             $resource->rollback();
             $this->setError($e->getMessage());
 
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -210,49 +193,39 @@ class Updater extends Object
      */
     public function executeScripts()
     {
-        if(empty($this->_adapter))
-        {
-            return FALSE;
+        if (empty($this->adapter)) {
+            return false;
         }
 
         $files = array();
         $update_path = GC_APPLICATION_PATH . '/data/update';
         $path = glob($update_path . '/*');
-        foreach($path as $file)
-        {
+        foreach ($path as $file) {
             $version = str_replace($update_path . '/v', '', $file);
-            if(version_compare($version, Version::VERSION, '>'))
-            {
+            if (version_compare($version, Version::VERSION, '>')) {
                 $file_list = glob($file . '/*.php');
-                if(!empty($file_list))
-                {
+                if (!empty($file_list)) {
                     $files[] = $file_list;
                 }
             }
         }
 
-        if(empty($files))
-        {
-            return TRUE;
+        if (empty($files)) {
+            return true;
         }
 
         $script = new Script();
-        foreach($files as $file_list)
-        {
-            foreach($file_list as $filename)
-            {
-                try
-                {
-                    $this->_adapter->addMessage($script(file_get_contents($filename)));
-                }
-                catch(\Exception $e)
-                {
+        foreach ($files as $file_list) {
+            foreach ($file_list as $filename) {
+                try {
+                    $this->adapter->addMessage($script(file_get_contents($filename)));
+                } catch (\Exception $e) {
                     $this->setError($e->getMessage());
                 }
             }
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -262,6 +235,6 @@ class Updater extends Object
      */
     public function getMessages()
     {
-        return $this->_adapter->getMessages();
+        return $this->adapter->getMessages();
     }
 }

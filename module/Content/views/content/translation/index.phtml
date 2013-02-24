@@ -43,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($this->values as $value): ?>
+            <?php foreach ($this->values as $value): ?>
                 <tr>
                     <td>
                         <div>
@@ -70,7 +70,7 @@
 
                         <div class="hide">
                             <select name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][locale]">
-                                <?php foreach($this->form->get('locale')->getValueOptions() as $option_id => $option_value): ?>
+                                <?php foreach ($this->form->get('locale')->getValueOptions() as $option_id => $option_value): ?>
                                     <option value="<?php echo $option_id; ?>"><?php echo $this->escapeHtml($option_value); ?></option>
                                 <?php endforeach; ?>
                             </select>

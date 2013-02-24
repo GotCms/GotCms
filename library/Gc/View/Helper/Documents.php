@@ -27,9 +27,9 @@
 
 namespace Gc\View\Helper;
 
-use Zend\View\Helper\AbstractHelper,
-    Gc\Document\Collection as DocumentCollection,
-    Gc\Document\Model as DocumentModel;
+use Zend\View\Helper\AbstractHelper;
+use Gc\Document\Collection as DocumentCollection;
+use Gc\Document\Model as DocumentModel;
 
 /**
  * Returns documents from parent_id
@@ -49,32 +49,23 @@ class Documents extends AbstractHelper
      * @param  integer $data
      * @return array \Gc\Document\Model
      */
-    public function __invoke($data = NULL)
+    public function __invoke($data = null)
     {
         $documents = new DocumentCollection();
-        if(empty($data))
-        {
+        if (empty($data)) {
             $elements = $documents->load(0)->getDocuments();
-        }
-        else
-        {
-            if(is_numeric($data))
-            {
+        } else {
+            if (is_numeric($data)) {
                 $elements = $documents->load($data)->getDocuments();
-            }
-            elseif(is_array($data))
-            {
+            } elseif (is_array($data)) {
                 $elements = array();
-                foreach($data as $document_id)
-                {
-                    if(empty($document_id) or !is_numeric($document_id))
-                    {
+                foreach ($data as $document_id) {
+                    if (empty($document_id) or !is_numeric($document_id)) {
                         continue;
                     }
 
                     $document = DocumentModel::fromId($document_id);
-                    if(!empty($document))
-                    {
+                    if (!empty($document)) {
                         $elements[] = $document;
                     }
                 }

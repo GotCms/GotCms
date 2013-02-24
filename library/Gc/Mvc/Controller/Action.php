@@ -27,18 +27,18 @@
 
 namespace Gc\Mvc\Controller;
 
-use Gc\Event\StaticEventManager,
-    Gc\Module\Model as ModuleModel,
-    Gc\User\Model as UserModel,
-    Gc\User\Acl,
-    Gc\Registry,
-    Zend\Authentication\AuthenticationService,
-    Zend\Authentication\Storage,
-    Zend\Mvc\Controller\AbstractActionController,
-    Zend\Mvc\MvcEvent,
-    Zend\Session\Container as SessionContainer,
-    Zend\View\Model\JsonModel,
-    Zend\I18n\Translator\Translator;
+use Gc\Event\StaticEventManager;
+use Gc\Module\Model as ModuleModel;
+use Gc\User\Model as UserModel;
+use Gc\User\Acl;
+use Gc\Registry;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Storage;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\MvcEvent;
+use Zend\Session\Container as SessionContainer;
+use Zend\View\Model\JsonModel;
+use Zend\I18n\Translator\Translator;
 
 /**
  * Extension of AbstractActionController
@@ -54,35 +54,42 @@ class Action extends AbstractActionController
      *
      * @var array
      */
-    protected $_installerRoutes = array('install', 'installCheckConfig', 'installLicense', 'installDatabase', 'installConfiguration', 'installComplete');
+    protected $installerRoutes = array(
+        'install',
+        'installCheckConfig',
+        'installLicense',
+        'installDatabase',
+        'installConfiguration',
+        'installComplete'
+    );
 
     /**
      * Authentication service
      *
      * @var \Zend\Authentication\AuthenticationService
      */
-    protected $_auth = NULL;
+    protected $auth = null;
 
     /**
      * RouteMatch
      *
      * @var \Zend\Mvc\Router\Http\RouteMatch
      */
-    protected $_routeMatch = NULL;
+    protected $routeMatch = null;
 
     /**
      * Session storage
      *
      * @var \Zend\Session\Storage\SessionStorage
      */
-    protected $_session = NULL;
+    protected $session = null;
 
     /**
      * User acl
      *
      * @var \Gc\User\Acl
      */
-    protected $_acl = NULL;
+    protected $acl = null;
 
     /**
      * Execute the request
@@ -93,8 +100,7 @@ class Action extends AbstractActionController
     public function onDispatch(MvcEvent $e)
     {
         $result_response = $this->_construct();
-        if(!empty($result_response))
-        {
+        if (!empty($result_response)) {
             return $result_response;
         }
 
@@ -125,56 +131,66 @@ class Action extends AbstractActionController
         /**
          * Installation check, and check on removal of the install directory.
          */
-        if(!file_exists(GC_APPLICATION_PATH . '/config/autoload/global.php') and !in_array($route_name, $this->_installerRoutes))
-        {
+        if (!file_exists(GC_APPLICATION_PATH . '/config/autoload/global.php')
+            and !in_array($route_name, $this->installerRoutes)
+        ) {
             return $this->redirect()->toRoute('install');
-        }
-        elseif(!in_array($route_name, $this->_installerRoutes))
-        {
+        } elseif (!in_array($route_name, $this->installerRoutes)) {
             $auth = $this->getAuth();
-            if(!$auth->hasIdentity())
-            {
-                if(!in_array($route_name, array('userLogin', 'userForgotPassword', 'userForgotPasswordKey', 'renderWebsite')))
-                {
-                    return $this->redirect()->toRoute('userLogin', array('redirect' => base64_encode($this->getRequest()->getRequestUri())));
+            if (!$auth->hasIdentity()) {
+                if (
+                    !in_array(
+                        $route_name,
+                        array(
+                            'userLogin',
+                            'userForgotPassword',
+                            'userForgotPasswordKey',
+                            'renderWebsite'
+                        )
+                    )
+                ) {
+                    return $this->redirect()->toRoute(
+                        'userLogin',
+                        array('redirect' => base64_encode($this->getRequest()->getRequestUri()))
+                    );
                 }
-            }
-            else
-            {
+            } else {
                 $user_model = $auth->getIdentity();
 
-                $this->_acl = new Acl($user_model);
-                $permissions = $user_model->getRole(TRUE)->getUserPermissions();
-                if($route_name != 'userForbidden')
-                {
-                    if(!empty($this->_aclPage))
-                    {
-                        $is_allowed = FALSE;
-                        if($this->_aclPage['resource'] == 'Modules')
-                        {
+                $this->acl = new Acl($user_model);
+                $permissions = $user_model->getRole(true)->getUserPermissions();
+                if ($route_name != 'userForbidden') {
+                    if (!empty($this->aclPage)) {
+                        $is_allowed = false;
+                        if ($this->aclPage['resource'] == 'Modules') {
                             $module_id = $this->getRouteMatch()->getParam('m');
-                            if(empty($module_id))
-                            {
+                            if (empty($module_id)) {
                                 $action = $this->getRouteMatch()->getParam('action');
                                 $action = ($action === 'index' ? 'list' : $action);
-                                $is_allowed = $this->_acl->isAllowed($user_model->getRole()->getName(), $this->_aclPage['resource'], $action);
-                            }
-                            else
-                            {
+                                $is_allowed = $this->acl->isAllowed(
+                                    $user_model->getRole()->getName(),
+                                    $this->aclPage['resource'],
+                                    $action
+                                );
+                            } else {
                                 $module_model = ModuleModel::fromId($module_id);
-                                if(!empty($module_model))
-                                {
-                                    $is_allowed = $this->_acl->isAllowed($user_model->getRole()->getName(), $this->_aclPage['resource'], $module_model->getName());
+                                if (!empty($module_model)) {
+                                    $is_allowed = $this->acl->isAllowed(
+                                        $user_model->getRole()->getName(),
+                                        $this->aclPage['resource'],
+                                        $module_model->getName()
+                                    );
                                 }
                             }
-                        }
-                        else
-                        {
-                            $is_allowed = $this->_acl->isAllowed($user_model->getRole()->getName(), $this->_aclPage['resource'], $this->_aclPage['permission']);
+                        } else {
+                            $is_allowed = $this->acl->isAllowed(
+                                $user_model->getRole()->getName(),
+                                $this->aclPage['resource'],
+                                $this->aclPage['permission']
+                            );
                         }
 
-                        if(!$is_allowed)
-                        {
+                        if (!$is_allowed) {
                             return $this->redirect()->toRoute('userForbidden');
                         }
                     }
@@ -187,9 +203,11 @@ class Action extends AbstractActionController
         $this->layout()->module = strtolower($module);
         $this->layout()->version = \Gc\Version::VERSION;
 
-        $this->useFlashMessenger(FALSE);
-        if(!in_array($route_name, $this->_installerRoutes) and !in_array($route_name, array('userLogin', 'userForgotPassword', 'renderWebsite')))
-        {
+        $this->useFlashMessenger(false);
+        if (
+            !in_array($route_name, $this->installerRoutes)
+            and !in_array($route_name, array('userLogin', 'userForgotPassword', 'renderWebsite'))
+        ) {
             /**
              * Prepare all resources
              */
@@ -230,12 +248,11 @@ class Action extends AbstractActionController
      */
     public function getRouteMatch()
     {
-        if(empty($this->_routeMatch))
-        {
-            $this->_routeMatch = $this->getEvent()->getRouteMatch();
+        if (empty($this->routeMatch)) {
+            $this->routeMatch = $this->getEvent()->getRouteMatch();
         }
 
-        return $this->_routeMatch;
+        return $this->routeMatch;
     }
 
     /**
@@ -245,12 +262,11 @@ class Action extends AbstractActionController
      */
     public function getSession()
     {
-        if($this->_session === NULL)
-        {
-            $this->_session = new SessionContainer();
+        if ($this->session === null) {
+            $this->session = new SessionContainer();
         }
 
-        return $this->_session;
+        return $this->session;
     }
 
     /**
@@ -260,12 +276,11 @@ class Action extends AbstractActionController
      */
     public function getAuth()
     {
-        if($this->_auth === NULL)
-        {
-            $this->_auth = new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
+        if ($this->auth === null) {
+            $this->auth = new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
         }
 
-        return $this->_auth;
+        return $this->auth;
     }
 
     /**
@@ -278,7 +293,7 @@ class Action extends AbstractActionController
     {
         $json_model = new JsonModel();
         $json_model->setVariables($data);
-        $json_model->setTerminal(TRUE);
+        $json_model->setTerminal(true);
 
         return $json_model;
     }
@@ -289,25 +304,19 @@ class Action extends AbstractActionController
      * @param boolean $force_display
      * @return void
      */
-    public function useFlashMessenger($force_display = TRUE)
+    public function useFlashMessenger($force_display = true)
     {
         $flash_messenger = $this->flashMessenger();
         $flash_messages = array();
-        foreach(array('error', 'success', 'info', 'warning') as $namespace)
-        {
+        foreach (array('error', 'success', 'info', 'warning') as $namespace) {
             $flash_namespace = $flash_messenger->setNameSpace($namespace);
-            if($force_display)
-            {
-                if($flash_namespace->hasCurrentMessages())
-                {
+            if ($force_display) {
+                if ($flash_namespace->hasCurrentMessages()) {
                     $flash_messages[$namespace] = $flash_namespace->getCurrentMessages();
                     $flash_namespace->clearCurrentMessages();
                 }
-            }
-            else
-            {
-                if($flash_namespace->hasMessages())
-                {
+            } else {
+                if ($flash_namespace->hasMessages()) {
                     $flash_messages[$namespace] = $flash_namespace->getMessages();
                 }
             }

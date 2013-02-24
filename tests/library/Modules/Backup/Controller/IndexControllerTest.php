@@ -41,7 +41,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * @var IndexController
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var Bootstrap
@@ -56,7 +56,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->_boostrap = new Bootstrap();
         $this->_boostrap->install();
-        $this->_object = new IndexController(Registry::get('Application')->getRequest(), Registry::get('Application')->getResponse());
+        $this->object = new IndexController(Registry::get('Application')->getRequest(), Registry::get('Application')->getResponse());
 
     }
 
@@ -73,7 +73,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testIndexAction()
     {
-        $this->assertNull($this->_object->indexAction());
+        $this->assertNull($this->object->indexAction());
     }
 
     /**
@@ -87,7 +87,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertInstanceOf('Zend\Http\Response', $this->_object->downloadDatabaseAction());
+        $this->assertInstanceOf('Zend\Http\Response', $this->object->downloadDatabaseAction());
     }
 
     /**
@@ -101,7 +101,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertInstanceOf('Zend\Http\Response', $this->_object->downloadDatabaseAction());
+        $this->assertInstanceOf('Zend\Http\Response', $this->object->downloadDatabaseAction());
     }
 
     /**
@@ -109,6 +109,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDownloadFilesActionWithPgsql()
     {
-        $this->assertInstanceOf('Zend\Http\Response', $this->_object->downloadFilesAction());
+        $this->assertInstanceOf('Zend\Http\Response', $this->object->downloadFilesAction());
     }
 }

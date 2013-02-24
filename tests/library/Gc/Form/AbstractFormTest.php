@@ -43,7 +43,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractForm
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -53,7 +53,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = $this->getMockForAbstractClass('Gc\Form\AbstractForm');
+        $this->object = $this->getMockForAbstractClass('Gc\Form\AbstractForm');
     }
 
     /**
@@ -62,7 +62,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -70,7 +70,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->assertNull($this->_object->init());
+        $this->assertNull($this->object->init());
     }
 
     /**
@@ -78,7 +78,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAdapter()
     {
-        $this->assertInstanceOf('Zend\Db\Adapter\Adapter', $this->_object->getAdapter());
+        $this->assertInstanceOf('Zend\Db\Adapter\Adapter', $this->object->getAdapter());
     }
 
     /**
@@ -101,17 +101,17 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
                         'options' => array(
                             'table' => 'datatype',
                             'field' => 'name',
-                            'adapter' => $this->_object->getAdapter(),
+                            'adapter' => $this->object->getAdapter(),
                         ),
                     ),
                 ),
             ),
         ));
 
-        $this->_object->setInputFilter($input_filter);
-        $this->_object->add(new Element\Text('name'));
+        $this->object->setInputFilter($input_filter);
+        $this->object->add(new Element\Text('name'));
 
-        $this->assertInstanceOf('Gc\Form\AbstractForm', $this->_object->loadValues($model));
+        $this->assertInstanceOf('Gc\Form\AbstractForm', $this->object->loadValues($model));
     }
 
     /**
@@ -119,10 +119,10 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddContent()
     {
-        $this->assertNull($this->_object->addContent($this->_object, array()));
-        $this->assertNull($this->_object->addContent($this->_object, array(new Element\Text('text'))));
-        $this->assertNull($this->_object->addContent($this->_object, '<input type="text" name="text">', 'prefix'));
-        $this->assertNull($this->_object->addContent($this->_object, new Element\Text('text-element'), 'prefix'));
+        $this->assertNull($this->object->addContent($this->object, array()));
+        $this->assertNull($this->object->addContent($this->object, array(new Element\Text('text'))));
+        $this->assertNull($this->object->addContent($this->object, '<input type="text" name="text">', 'prefix'));
+        $this->assertNull($this->object->addContent($this->object, new Element\Text('text-element'), 'prefix'));
     }
 
     /**
@@ -131,7 +131,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     public function testAddContentWithWrongParameters()
     {
         $this->setExpectedException('\Gc\Exception');
-        $this->assertNull($this->_object->addContent($this->_object, $this->_object->getAdapter()));
+        $this->assertNull($this->object->addContent($this->object, $this->object->getAdapter()));
     }
 
     /**
@@ -139,11 +139,11 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValue()
     {
-        $this->assertNull($this->_object->getValue('undefined'));
+        $this->assertNull($this->object->getValue('undefined'));
         $element = new Element\Text('text');
         $element->setValue('string');
-        $this->_object->add($element);
+        $this->object->add($element);
 
-        $this->assertEquals('string', $this->_object->getValue('text'));
+        $this->assertEquals('string', $this->object->getValue('text'));
     }
 }

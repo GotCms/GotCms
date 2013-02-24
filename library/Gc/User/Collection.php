@@ -27,8 +27,8 @@
 
 namespace Gc\User;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of User Model
@@ -44,7 +44,7 @@ class Collection extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'user';
+    protected $name = 'user';
 
     /**
      * Initiliaze User collection
@@ -73,15 +73,15 @@ class Collection extends AbstractTable
      */
     protected function setUsers()
     {
-        $select = $this->select(function(Select $select)
-        {
-            $select->order('lastname');
-        });
+        $select = $this->select(
+            function (Select $select) {
+                $select->order('lastname');
+            }
+        );
 
         $rows = $this->fetchAll($select);
         $users = array();
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $users[] = Model::fromArray((array)$row);
         }
 

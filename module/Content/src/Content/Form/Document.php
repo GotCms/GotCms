@@ -27,14 +27,14 @@
 
 namespace Content\Form;
 
-use Gc\Document\Model as DocumentModel,
-    Gc\DocumentType,
-    Gc\Form\AbstractForm,
-    Gc\Layout,
-    Gc\View,
-    Zend\Validator,
-    Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory;
+use Gc\Document\Model as DocumentModel;
+use Gc\DocumentType;
+use Gc\Form\AbstractForm;
+use Gc\Layout;
+use Gc\View;
+use Zend\Validator;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory as InputFilterFactory;
 
 /**
  * Document form
@@ -50,14 +50,14 @@ class Document extends AbstractForm
      *
      * @var integer
      */
-    protected $_parentId = NULL;
+    protected $parentId = null;
 
     /**
      * Document id
      *
      * @var integer
      */
-    protected $_documentId = NULL;
+    protected $documentId = null;
 
     /**
      * Initialize Form
@@ -67,33 +67,35 @@ class Document extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
-            'document-name' => array(
-                'name' => 'document-name',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
+        $input_filter = $input_filter_factory->createInputFilter(
+            array(
+                'document-name' => array(
+                    'name' => 'document-name',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    ),
                 ),
-            ),
-            'document-url_key' => array(
-                'name' => 'document-url_key',
-                'required' => FALSE,
-                'allow_empty' => TRUE,
-                'validators' => array(
-                    array('name' => 'regex', 'options' => array(
-                        'pattern' => parent::IDENTIFIER_PATTERN
-                    )),
-                    array(
-                        'name' => 'db\\no_record_exists',
-                        'options' => array(
-                            'table' => 'document',
-                            'field' => 'url_key',
-                            'adapter' => $this->getAdapter(),
+                'document-url_key' => array(
+                    'name' => 'document-url_key',
+                    'required' => false,
+                    'allow_empty' => true,
+                    'validators' => array(
+                        array('name' => 'regex', 'options' => array(
+                            'pattern' => parent::IDENTIFIER_PATTERN
+                        )),
+                        array(
+                            'name' => 'db\\no_record_exists',
+                            'options' => array(
+                                'table' => 'document',
+                                'field' => 'url_key',
+                                'adapter' => $this->getAdapter(),
+                            ),
                         ),
                     ),
                 ),
-            ),
-        ));
+            )
+        );
 
         $this->setInputFilter($input_filter);
 
@@ -128,24 +130,20 @@ class Document extends AbstractForm
     public function isValid()
     {
         $parent = $this->get('parent');
-        if(!empty($parent))
-        {
-            $this->_parentId = $parent->getValue();
+        if (!empty($parent)) {
+            $this->parentId = $parent->getValue();
         }
 
-        $condition = sprintf('parent_id = %d', $this->_parentId);
-        if(!empty($this->_documentId))
-        {
-            $condition .= sprintf(' AND id != %d', $this->_documentId);
+        $condition = sprintf('parent_id = %d', $this->parentId);
+        if (!empty($this->documentId)) {
+            $condition .= sprintf(' AND id != %d', $this->documentId);
         }
 
         $input_filter = $this->getInputFilter();
         $validators = $input_filter->get('document-url_key')->getValidatorChain()->getValidators();
 
-        foreach($validators as $validator)
-        {
-            if($validator['instance'] instanceof Validator\Db\NoRecordExists)
-            {
+        foreach ($validators as $validator) {
+            if ($validator['instance'] instanceof Validator\Db\NoRecordExists) {
                 $validator['instance']->setExclude($condition);
             }
         }
@@ -186,27 +184,26 @@ class Document extends AbstractForm
         $views_collection = $document_type->getAvailableViews();
         $select = $views_collection->getSelect();
 
-        if(empty($select))
-        {
+        if (empty($select)) {
             $view_model = View\Model::fromId($document->getDocumentType()->getDefaultViewId());
-            if(!empty($view_model))
-            {
+            if (!empty($view_model)) {
                 $select = array($view_model->getId() => $view_model->getName());
-            }
-            else
-            {
+            } else {
                 $select = array();
             }
         }
 
         $input_filter_factory = $this->getInputFilter();
-        $input_filter = $input_filter_factory->add(array(
-            'name' => 'document-view',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter = $input_filter_factory->add(
+            array(
+                'name' => 'document-view',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'document-view');
+            'document-view'
+        );
 
         $view = new Element\Select('document-view');
         $view->setValueOptions(array('' => 'Select view') + $select)
@@ -223,13 +220,16 @@ class Document extends AbstractForm
             ->setAttribute('id', 'layout')
             ->setAttribute('label', 'Layout');
 
-        $input_filter = $input_filter_factory->add(array(
-            'name' => 'document-layout',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter = $input_filter_factory->add(
+            array(
+                'name' => 'document-layout',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'document-layout');
+            'document-layout'
+        );
 
         $this->add($layout);
         $this->remove('document_type');
@@ -240,8 +240,8 @@ class Document extends AbstractForm
         $more_information->setAttribute('content', '');
         $this->add($more_information);
 
-        $this->_parentId = $document->getParentId();
-        $this->_documentId = $document->getId();
+        $this->parentId = $document->getParentId();
+        $this->documentId = $document->getId();
 
         $this->loadValues($document);
     }

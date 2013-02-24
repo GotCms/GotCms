@@ -40,7 +40,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Collection
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Collection;
+        $this->object = new Collection;
     }
 
     /**
@@ -57,7 +57,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -66,8 +66,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->_object->init();
-        $this->assertInternalType('array', $this->_object->getUsers());
+        $this->object->init();
+        $this->assertInternalType('array', $this->object->getUsers());
     }
 
     /**
@@ -75,6 +75,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUsers()
     {
-        $this->assertInternalType('array', $this->_object->getUsers());
+        $this->assertInternalType('array', $this->object->getUsers());
     }
 }

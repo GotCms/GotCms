@@ -27,15 +27,16 @@
 
 namespace Gc\Datatype;
 
-use Gc\Db\AbstractTable,
-    Gc\Document\Model as DocumentModel,
-    Gc\Media\Info,
-    Gc\Property,
-    Gc\Registry,
-    ReflectionObject,
-    Zend\View\Model\ViewModel,
-    Zend\View\Renderer\PhpRenderer,
-    Zend\View\Resolver\TemplatePathStack;
+use Gc\Db\AbstractTable;
+use Gc\Document\Model as DocumentModel;
+use Gc\Media\Info;
+use Gc\Property;
+use Gc\Registry;
+use ReflectionObject;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver\TemplatePathStack;
+
 /**
  * Abstract Datatype is used to call
  * the prevalue editor and editor.
@@ -51,49 +52,49 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @var \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
-    protected $_editor;
+    protected $editor;
 
     /**
      * Prevalue editor
      *
      * @var \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
-    protected $_prevalueEditor;
+    protected $prevalueEditor;
 
     /**
      * Property
      *
      * @var \Gc\Property\Model
      */
-    protected $_property;
+    protected $property;
 
     /**
      * Table name
      *
      * @var string
      */
-    protected $_name = 'datatype';
+    protected $name = 'datatype';
 
     /**
      * Renderer
      *
      * @var \Zend\View\Renderer\PhpRenderer
      */
-    protected $_renderer;
+    protected $renderer;
 
     /**
      * Configuration
      *
      * @var mixed
      */
-    protected $_config;
+    protected $config;
 
     /**
      * Check if config changed
      *
      * @var mixed
      */
-    protected $_configHasChanged = FALSE;
+    protected $configHasChanged = false;
 
     /**
      * Get Datatype Editor
@@ -122,9 +123,8 @@ abstract class AbstractDatatype extends AbstractTable
         $filename = $directory . '/datatype.info';
         $info = new Info();
 
-        if($info->fromFile($filename) !== TRUE)
-        {
-            return FALSE;
+        if ($info->fromFile($filename) !== true) {
+            return false;
         }
 
         return $info->render();
@@ -137,11 +137,10 @@ abstract class AbstractDatatype extends AbstractTable
      * @param integer $document_id
      * @return mixed
      */
-    public function load($datatype = NULL, $document_id = NULL)
+    public function load($datatype = null, $document_id = null)
     {
-        if(empty($datatype))
-        {
-            return FALSE;
+        if (empty($datatype)) {
+            return false;
         }
 
         $this->setData('datatype_model', $datatype);
@@ -155,22 +154,18 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getConfig()
     {
-        if(empty($this->_config) or $this->_configHasChanged)
-        {
+        if (empty($this->config) or $this->configHasChanged) {
             $config = $this->getDatatypeModel()->getData('prevalue_value');
-            if(!is_string($config) or !preg_match('/^(i|s|a|o|d)(.*);/si', $config))
-            {
-                $this->_config = $config;
-            }
-            else
-            {
-                $this->_config = unserialize($config);
+            if (!is_string($config) or !preg_match('/^(i|s|a|o|d)(.*);/si', $config)) {
+                $this->config = $config;
+            } else {
+                $this->config = unserialize($config);
             }
 
-            $this->_configHasChanged = FALSE;
+            $this->configHasChanged = false;
         }
 
-        return $this->_config;
+        return $this->config;
     }
 
     /**
@@ -182,7 +177,7 @@ abstract class AbstractDatatype extends AbstractTable
     public function setConfig($value)
     {
         $this->getDatatypeModel()->setPrevalueValue($value);
-        $this->_configHasChanged = TRUE;
+        $this->configHasChanged = true;
         return $this;
     }
 
@@ -196,7 +191,13 @@ abstract class AbstractDatatype extends AbstractTable
     {
         $router = Registry::get('Application')->getMvcEvent()->getRouter();
 
-        return $router->assemble(array('document_id' => $this->getDocumentId(), 'property_id' => $property_id), array('name' => 'mediaUpload'));
+        return $router->assemble(
+            array(
+                'document_id' => $this->getDocumentId(),
+                'property_id' => $property_id
+            ),
+            array('name' => 'mediaUpload')
+        );
     }
 
     /**
@@ -207,8 +208,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getHelper($name)
     {
-        if($this->getHelperBroker() === NULL)
-        {
+        if ($this->getHelperBroker() === null) {
             $this->setHelperBroker(Registry::get('Application')->getServiceManager()->get('viewhelpermanager'));
         }
 
@@ -222,7 +222,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getProperty()
     {
-        return $this->_property;
+        return $this->property;
     }
 
     /**
@@ -233,7 +233,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function setProperty($property)
     {
-        $this->_property = $property;
+        $this->property = $property;
         return $this;
     }
 
@@ -244,7 +244,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -256,12 +256,12 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function render($name, array $data = array())
     {
-        $this->_checkRenderer();
+        $this->checkRenderer();
         $view_model = new ViewModel();
         $view_model->setTemplate($name);
         $view_model->setVariables($data);
 
-        return $this->_renderer->render($view_model);
+        return $this->renderer->render($view_model);
     }
 
     /**
@@ -272,8 +272,8 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function addPath($dir)
     {
-        $this->_checkRenderer();
-        $this->_renderer->resolver()->addPath($dir);
+        $this->checkRenderer();
+        $this->renderer->resolver()->addPath($dir);
 
         return $this;
     }
@@ -284,13 +284,12 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @return \Gc\Datatype\AbstractDatatype
      */
-    protected function _checkRenderer()
+    protected function checkRenderer()
     {
-        if(is_null($this->_renderer))
-        {
-            $this->_renderer = new PhpRenderer();
+        if (is_null($this->renderer)) {
+            $this->renderer = new PhpRenderer();
             $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
-            $this->_renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
+            $this->renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
         }
 
         return $this;
@@ -303,8 +302,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getDocument()
     {
-        if($this->getData('document') === NULL)
-        {
+        if ($this->getData('document') === null) {
             $this->setData('document', DocumentModel::fromId($this->getDocumentId()));
         }
 

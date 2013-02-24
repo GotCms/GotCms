@@ -27,10 +27,10 @@
 
 namespace Config\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Gc\User,
-    Gc\User\Role,
-    Config\Form\Role as RoleForm;
+use Gc\Mvc\Controller\Action;
+use Gc\User;
+use Gc\User\Role;
+use Config\Form\Role as RoleForm;
 
 /**
  * Role controller
@@ -46,7 +46,7 @@ class RoleController extends Action
      *
      * @var array $_aclPage
      */
-    protected $_aclPage = array('resource' => 'Config', 'permission' => 'role');
+    protected $aclPage = array('resource' => 'Config', 'permission' => 'role');
 
     /**
      * List all roles
@@ -57,10 +57,8 @@ class RoleController extends Action
     {
         $role_collection = new Role\Collection();
         $roles = array();
-        foreach($role_collection->getRoles() as $role)
-        {
-            if($role->getName() !== Role\Model::PROTECTED_NAME)
-            {
+        foreach ($role_collection->getRoles() as $role) {
+            if ($role->getName() !== Role\Model::PROTECTED_NAME) {
                 $roles[] = $role;
             }
         }
@@ -79,12 +77,10 @@ class RoleController extends Action
         $form->initPermissions();
         $form->setAttribute('action', $this->url()->fromRoute('userRoleCreate'));
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
             $form->setData($post);
-            if($form->isValid())
-            {
+            if ($form->isValid()) {
                 $role_model = new Role\Model();
                 $role_model->addData($form->getInputFilter()->getValues());
                 $role_model->save();
@@ -108,15 +104,13 @@ class RoleController extends Action
     public function deleteAction()
     {
         $role_model = Role\Model::fromId($this->getRouteMatch()->getParam('id'));
-        if(empty($role_model) and $role_model->getName() !== Role\Model::PROTECTED_NAME)
-        {
-            if($role_model->delete())
-            {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'Role has been deleted'));
+        if (empty($role_model) and $role_model->getName() !== Role\Model::PROTECTED_NAME) {
+            if ($role_model->delete()) {
+                return $this->returnJson(array('success' => true, 'message' => 'Role has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Role does not exists'));
+        return $this->returnJson(array('success' => false, 'message' => 'Role does not exists'));
     }
 
     /**
@@ -129,8 +123,7 @@ class RoleController extends Action
         $role_id = $this->getRouteMatch()->getParam('id');
 
         $role_model = Role\Model::fromId($role_id);
-        if($role_model->getName() === Role\Model::PROTECTED_NAME)
-        {
+        if ($role_model->getName() === Role\Model::PROTECTED_NAME) {
             $this->flashMessenger()->addErrorMessage("Can't edit this role");
             return $this->redirect()->toRoute('userRole');
         }
@@ -139,12 +132,10 @@ class RoleController extends Action
         $form->initPermissions($role_model->getUserPermissions());
         $form->setAttribute('action', $this->url()->fromRoute('userRoleEdit', array('id' => $role_id)));
         $form->loadValues($role_model);
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
             $form->setData($post);
-            if($form->isValid())
-            {
+            if ($form->isValid()) {
                 $role_model->addData($form->getInputFilter()->getValues());
                 $role_model->save();
 

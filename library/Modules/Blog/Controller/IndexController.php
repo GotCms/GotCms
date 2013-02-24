@@ -27,9 +27,9 @@
 
 namespace Modules\Blog\Controller;
 
-use Gc\Module\Controller\AbstractController,
-    Gc\Document\Model as DocumentModel,
-    Modules\Blog\Model;
+use Gc\Module\Controller\AbstractController;
+use Gc\Document\Model as DocumentModel;
+use Modules\Blog\Model;
 
 /**
  * IndexController
@@ -45,7 +45,15 @@ class IndexController extends AbstractController
      *
      * @var array
      */
-    protected $_whiteList = array('show_email', 'is_active', 'username', 'email', 'message', 'document_id', 'created_at');
+    protected $whiteList = array(
+        'show_email',
+        'is_active',
+        'username',
+        'email',
+        'message',
+        'document_id',
+        'created_at'
+    );
 
     /**
      * Index action, list all documents with comments
@@ -69,30 +77,24 @@ class IndexController extends AbstractController
     {
         $document_id = $this->getRequest()->getQuery()->get('id');
         $document = DocumentModel::fromId($document_id);
-        if(empty($document))
-        {
-            return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), TRUE);
+        if (empty($document)) {
+            return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), true);
         }
 
         $model = new Model\Comment();
-        $comment_list = $model->getList($document_id, NULL);
+        $comment_list = $model->getList($document_id, null);
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $comments = $this->getRequest()->getPost()->get('comment');
 
-            foreach($comments as $comment_id => $data)
-            {
-                if(!empty($data['delete']))
-                {
+            foreach ($comments as $comment_id => $data) {
+                if (!empty($data['delete'])) {
                     $model->delete(array('id' => $comment_id));
                     continue;
                 }
 
-                foreach($data as $k => $v)
-                {
-                    if(!in_array($k, $this->_whiteList))
-                    {
+                foreach ($data as $k => $v) {
+                    if (!in_array($k, $this->whiteList)) {
                         unset($data[$k]);
                     }
                 }
@@ -102,7 +104,15 @@ class IndexController extends AbstractController
                 $model->update($data, array('id' => $comment_id));
             }
 
-            return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'document-comment'), array(), TRUE);
+            return $this->redirect()->toRoute(
+                'moduleEdit',
+                array(
+                    'mc' => 'index',
+                    'ma' => 'document-comment'
+                ),
+                array(),
+                true
+            );
         }
 
         return array('comment_list' => $comment_list, 'document' => $document);

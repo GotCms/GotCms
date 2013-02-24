@@ -27,12 +27,14 @@
 
 namespace Gc\Media;
 
-use Gc\Core\Object,
-    Gc\Datatype,
-    Gc\Registry,
-    StdClass,
-    Zend\EventManager\StaticEventManager,
-    Zend\File\Transfer\Adapter\Http as FileTransfer;
+use Gc\Core\Object;
+use Gc\Datatype;
+use Gc\Registry;
+use Gc\Property\Model as PropertyModel;
+use Gc\Document\Model as DocumentModel;
+use StdClass;
+use Zend\EventManager\StaticEventManager;
+use Zend\File\Transfer\Adapter\Http as FileTransfer;
 
 /**
  * Manage File, actually only works for Datatypes
@@ -55,7 +57,7 @@ class File extends Object
      *
      * @return void
      */
-    public function load(\Gc\Property\Model $property, \Gc\Document\Model $document, $filename = NULL)
+    public function load(PropertyModel $property, DocumentModel $document, $filename = null)
     {
         $this->setProperty($property);
         $this->setDocument($document);
@@ -89,8 +91,7 @@ class File extends Object
      */
     public function getFileTransfer()
     {
-        if(empty($this->_fileTransferAdapter))
-        {
+        if (empty($this->_fileTransferAdapter)) {
             $this->_fileTransferAdapter = new FileTransfer();
         }
 
@@ -105,12 +106,10 @@ class File extends Object
     public function upload()
     {
         $dir = $this->getPath() . $this->getDirectory();
-        if(!is_dir($dir))
-        {
-            mkdir($dir, self::FILE_PERMISSION, TRUE);
+        if (!is_dir($dir)) {
+            mkdir($dir, self::FILE_PERMISSION, true);
             $tmp_dir = $dir;
-            while($tmp_dir != GC_MEDIA_PATH . '/files')
-            {
+            while ($tmp_dir != GC_MEDIA_PATH . '/files') {
                 chmod($tmp_dir, self::FILE_PERMISSION);
                 $tmp_dir = realpath(dirname($tmp_dir));
             }
@@ -119,16 +118,13 @@ class File extends Object
         $this->getFileTransfer()->setDestination($dir);
 
         $filename = $this->getFileName();
-        $filenames = empty($filename) ? NULL : $filename;
-        $filenames = $this->getFileTransfer()->getFileName($filenames, FALSE);
-        if(!is_array($filenames))
-        {
+        $filenames = empty($filename) ? null : $filename;
+        $filenames = $this->getFileTransfer()->getFileName($filenames, false);
+        if (!is_array($filenames)) {
             $filenames = array();
             $files = $this->getFileTransfer()->getFileInfo($filename);
-            foreach($files as $key => $file)
-            {
-                if(!empty($file['name']))
-                {
+            foreach ($files as $key => $file) {
+                if (!empty($file['name'])) {
                     $filenames[$key] = $file['name'];
                     break;
                 }
@@ -136,17 +132,21 @@ class File extends Object
         }
 
         $data = array();
-        foreach($filenames as $key => $file_name)
-        {
+        foreach ($filenames as $key => $file_name) {
             $info = pathinfo($file_name);
-            $this->getFileTransfer()->addFilter('Rename', array(
-                'target' => $this->getFileTransfer()->getDestination($file_name) . '/' . uniqid() . (empty($info['extension']) ? '' : '.' . $info['extension']), 'overwrite' => TRUE));
+            $this->getFileTransfer()->addFilter(
+                'Rename',
+                array(
+                    'target' => $this->getFileTransfer()->getDestination($file_name)
+                        . '/' . uniqid()
+                        . (empty($info['extension']) ? '' : '.' . $info['extension'])
+                        , 'overwrite' => true
+                )
+            );
 
-            if($this->getFileTransfer()->receive($file_name))
-            {
+            if ($this->getFileTransfer()->receive($file_name)) {
                 $files = $this->getFileTransfer()->getFileInfo($key);
-                foreach($files as $file_data)
-                {
+                foreach ($files as $file_data) {
                     $file_object = new StdClass();
                     $file_object->name = 'New Image Upload Complete:   ' . $file_data['name'];
                     $file_object->filename = $this->getDirectory() . '/' . $file_data['name'];
@@ -155,24 +155,26 @@ class File extends Object
                     $file_object->thumbnail_url = $this->getDirectory() . '/' . $file_data['name'];
 
                     $router = Registry::get('Application')->getMvcEvent()->getRouter();
-                    $file_object->delete_url = $router->assemble(array(
-                        'document_id' => $this->getDocument()->getId(),
-                        'property_id' => $this->getProperty()->getId(),
-                        'file' => base64_encode($file_data['name'])
-                    ), array('name' => 'mediaRemove'));
+                    $file_object->delete_url = $router->assemble(
+                        array(
+                            'document_id' => $this->getDocument()->getId(),
+                            'property_id' => $this->getProperty()->getId(),
+                            'file' => base64_encode($file_data['name'])
+                        ),
+                        array('name' => 'mediaRemove')
+                    );
                     $file_object->delete_type = 'DELETE';
                     $data[] = $file_object;
                 }
             }
         }
 
-        if(!empty($data))
-        {
+        if (!empty($data)) {
             $this->setFiles($data);
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -184,12 +186,11 @@ class File extends Object
     public function remove($filename)
     {
         $file = $this->getPath() . $filename;
-        if(file_exists($file))
-        {
+        if (file_exists($file)) {
             @unlink($file);
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -199,20 +200,16 @@ class File extends Object
      * @param string $destination
      * @return boolean
      */
-    static public function copyDirectory($source, $destination)
+    public static function copyDirectory($source, $destination)
     {
-        if(is_dir($source))
-        {
-            if(!file_exists($destination))
-            {
+        if (is_dir($source)) {
+            if (!file_exists($destination)) {
                 @mkdir($destination, 0777);
             }
 
             $directory = dir($source);
-            while(FALSE !== ($read_directory = $directory->read()))
-            {
-                if($read_directory == '.' || $read_directory == '..')
-                {
+            while (false !== ($read_directory = $directory->read())) {
+                if ($read_directory == '.' || $read_directory == '..') {
                     continue;
                 }
 
@@ -221,16 +218,14 @@ class File extends Object
             }
 
             $directory->close();
-        }
-        else
-        {
+        } else {
             $result = copy($source, $destination);
             @chmod($destination, self::FILE_PERMISSION);
 
             return $result;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -240,29 +235,25 @@ class File extends Object
      * @param array $exclude_directory Exclude directory
      * @return boolean
      */
-    static public function isWritable($directory, $exclude_directory = array())
+    public static function isWritable($directory, $exclude_directory = array())
     {
         $folder = opendir($directory);
-        while(FALSE !== ($file = readdir($folder)))
-        {
+        while (false !== ($file = readdir($folder))) {
             $path = $directory . '/' . $file;
-            if(!in_array($file, array('.', '..')) and !in_array($path, $exclude_directory))
-            {
-                $is_writable = TRUE;
-                if(is_dir($path))
-                {
+            if (!in_array($file, array('.', '..')) and !in_array($path, $exclude_directory)) {
+                $is_writable = true;
+                if (is_dir($path)) {
                     $is_writable = self::isWritable($path, $exclude_directory);
                 }
 
-                if(empty($is_writable) or !is_writable($path))
-                {
+                if (empty($is_writable) or !is_writable($path)) {
                     closedir($folder);
-                    return FALSE;
+                    return false;
                 }
             }
         }
 
         closedir($folder);
-        return TRUE;
+        return true;
     }
 }

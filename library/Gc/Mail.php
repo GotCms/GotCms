@@ -26,8 +26,8 @@
 
 namespace Gc;
 
-use Zend\Mail\Message,
-    Zend\Mail\Transport\Sendmail as SendmailTransport;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Sendmail as SendmailTransport;
 
 /**
  * Extension for Zend\Mail\Message
@@ -46,25 +46,21 @@ class Mail extends Message
      * @param string $to
      * @return void
      */
-    public function __construct($encoding = NULL, $message = NULL, $from = NULL, $to = NULL)
+    public function __construct($encoding = null, $message = null, $from = null, $to = null)
     {
-        if(!empty($encoding))
-        {
+        if (!empty($encoding)) {
             $this->setEncoding($encoding);
         }
 
-        if(!empty($message))
-        {
+        if (!empty($message)) {
             $this->setBody($message);
         }
 
-        if(!empty($from))
-        {
+        if (!empty($from)) {
             $this->setFrom($from);
         }
 
-        if(!empty($to))
-        {
+        if (!empty($to)) {
             $this->addTo($to);
         }
     }

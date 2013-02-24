@@ -27,8 +27,8 @@
 
 namespace Datatypes\Boolean;
 
-use Gc\Datatype\AbstractDatatype as AbstractDatatype,
-    Gc\Property\Model as PropertyModel;
+use Gc\Datatype\AbstractDatatype as AbstractDatatype;
+use Gc\Property\Model as PropertyModel;
 
 /**
  * Manage Boolean datatype
@@ -44,7 +44,7 @@ class Datatype extends AbstractDatatype
      *
      * @var string
      */
-    protected $_name = 'boolean';
+    protected $name = 'boolean';
 
     /**
      * Retrieve editor
@@ -55,12 +55,11 @@ class Datatype extends AbstractDatatype
     public function getEditor(PropertyModel $property)
     {
         $this->setProperty($property);
-        if($this->_editor === NULL)
-        {
-            $this->_editor = new Editor($this);
+        if ($this->editor === null) {
+            $this->editor = new Editor($this);
         }
 
-        return $this->_editor;
+        return $this->editor;
     }
 
     /**
@@ -70,12 +69,10 @@ class Datatype extends AbstractDatatype
      */
     public function getPrevalueEditor()
     {
-        if($this->_prevalueEditor === NULL)
-        {
-            $this->_prevalueEditor = new PrevalueEditor($this);
+        if ($this->prevalueEditor === null) {
+            $this->prevalueEditor = new PrevalueEditor($this);
         }
 
-        return $this->_prevalueEditor;
+        return $this->prevalueEditor;
     }
 }
-

@@ -27,8 +27,8 @@
 
 namespace Datatypes\Textrich;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Zend\Form\Element;
 
 /**
  * Editor for Textrich datatype
@@ -58,14 +58,16 @@ class Editor extends AbstractEditor
     public function load()
     {
         $this->getHelper('headscript')->appendFile('/datatypes/Textrich/ckeditor.js', 'text/javascript');
-        $this->getHelper('headscript')->appendFile('/datatypes/Textrich/ckeditor-adapters-jquery.js', 'text/javascript');
+        $this->getHelper('headscript')->appendFile(
+            '/datatypes/Textrich/ckeditor-adapters-jquery.js',
+            'text/javascript'
+        );
 
 
         $parameters = $this->getConfig();
         $ckeditor = new CkEditor();
 
-        if(empty($parameters) or !is_array($parameters))
-        {
+        if (empty($parameters) or !is_array($parameters)) {
             $parameters = array();
         }
 
@@ -79,20 +81,17 @@ class Editor extends AbstractEditor
         $textrich->setValue($this->getProperty()->getValue());
 
         $script = '<script type="text/javascript">
-            $(function()
-            {
+            $(function () {
                 var config = {
                     skin: "v2",
                     toolbar: ' . $ckeditor->getToolbarAsJs() . '
                 };
 
                 $("#' . $id . '").ckeditor(config)
-                .ckeditor(function()
-                {
+                .ckeditor(function () {
                     this.addCommand("saveDocument",
                     {
-                        exec : function(editor, data)
-                        {
+                        exec : function (editor, data) {
                             $("#input-save").click();
                         }
                     });

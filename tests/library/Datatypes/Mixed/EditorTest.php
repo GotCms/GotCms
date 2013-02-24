@@ -48,42 +48,42 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Editor
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var DatatypeModel
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * @var PropertyModel
      */
-    protected $_property;
+    protected $property;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var TabModel
      */
-    protected $_tab;
+    protected $tab;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-     protected $_documentType;
+     protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -91,74 +91,74 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = new ViewModel();
-        $this->_view->setData(array(
+        $this->view = new ViewModel();
+        $this->view->setData(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = new LayoutModel();
-        $this->_layout->setData(array(
+        $this->layout = new LayoutModel();
+        $this->layout->setData(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = new UserModel();
-        $this->_user->setData(array(
+        $this->user = new UserModel();
+        $this->user->setData(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
             'login' => 'test',
             'user_acl_role_id' => 1,
         ));
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = new DocumentTypeModel();
-        $this->_documentType->setData(array(
+        $this->documentType = new DocumentTypeModel();
+        $this->documentType->setData(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
-        $this->_documentType->save();
+        $this->documentType->save();
 
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'MixedTest',
             'prevalue_value' => 'a:1:{s:9:"datatypes";a:1:{i:0;a:3:{s:4:"name";s:10:"Textstring";s:5:"label";s:4:"Test";s:6:"config";a:1:{s:6:"length";s:0:"";}}}}',
             'model' => 'Mixed',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
 
-        $this->_tab = TabModel::fromArray(array(
+        $this->tab = TabModel::fromArray(array(
             'name' => 'TabTest',
             'description' => 'TabTest',
             'sort_order' => 1,
-            'document_type_id' => $this->_documentType->getId(),
+            'document_type_id' => $this->documentType->getId(),
         ));
-        $this->_tab->save();
+        $this->tab->save();
 
-        $this->_property = PropertyModel::fromArray(array(
+        $this->property = PropertyModel::fromArray(array(
             'name' => 'DatatypeTest',
             'identifier' => 'DatatypeTest',
             'description' => 'DatatypeTest',
             'required' => FALSE,
             'sort_order' => 1,
-            'tab_id' => $this->_tab->getId(),
-            'datatype_id' => $this->_datatype->getId(),
+            'tab_id' => $this->tab->getId(),
+            'datatype_id' => $this->datatype->getId(),
         ));
 
-        $this->_property->save();
+        $this->property->save();
         $datatype = new Datatype();
-        $datatype->load($this->_datatype);
-        $this->_object = $datatype->getEditor($this->_property);
+        $datatype->load($this->datatype);
+        $this->object = $datatype->getEditor($this->property);
     }
 
     /**
@@ -169,32 +169,32 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     {
         $_FILES = array();
         $_POST = array();
-        $this->_datatype->delete();
-        $this->_documentType->delete();
-        $this->_layout->delete();
-        $this->_property->delete();
-        $this->_tab->delete();
-        $this->_user->delete();
-        $this->_view->delete();
+        $this->datatype->delete();
+        $this->documentType->delete();
+        $this->layout->delete();
+        $this->property->delete();
+        $this->tab->delete();
+        $this->user->delete();
+        $this->view->delete();
 
-        unset($this->_datatype);
-        unset($this->_documentType);
-        unset($this->_layout);
-        unset($this->_property);
-        unset($this->_tab);
-        unset($this->_user);
-        unset($this->_view);
-        unset($this->_object);
+        unset($this->datatype);
+        unset($this->documentType);
+        unset($this->layout);
+        unset($this->property);
+        unset($this->tab);
+        unset($this->user);
+        unset($this->view);
+        unset($this->object);
     }
 
     /**
      * @covers Datatypes\Mixed\Editor::save
-     * @covers Datatypes\Mixed\Editor::_getDatatype
+     * @covers Datatypes\Mixed\Editor::getDatatype
      */
     public function testSave()
     {
-        $post = $this->_object->getRequest()->getPost();
-        $post->set($this->_object->getName(), array(
+        $post = $this->object->getRequest()->getPost();
+        $post->set($this->object->getName(), array(
             array(
                 array(
                     'textstring51' => 'test1',
@@ -207,7 +207,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         ));
 
         $_FILES = array(
-            $this->_object->getName() => array(
+            $this->object->getName() => array(
                 'name' => array(
                     array(
                         array(
@@ -256,17 +256,17 @@ class EditorTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->_object->save();
-        $this->assertEquals('a:2:{i:0;a:1:{i:0;a:1:{s:5:"value";N;}}i:1;a:1:{i:0;a:1:{s:5:"value";N;}}}', $this->_object->getValue());
+        $this->object->save();
+        $this->assertEquals('a:2:{i:0;a:1:{i:0;a:1:{s:5:"value";N;}}i:1;a:1:{i:0;a:1:{s:5:"value";N;}}}', $this->object->getValue());
     }
 
     /**
      * @covers Datatypes\Mixed\Editor::load
-     * @covers Datatypes\Mixed\Editor::_getDatatype
+     * @covers Datatypes\Mixed\Editor::getDatatype
      */
     public function testLoad()
     {
-        $this->_object->setValue('a:3:{i:0;a:1:{i:0;a:1:{s:5:"value";s:5:"test1";}}i:1;a:1:{i:0;a:0:{}}i:3;a:1:{i:25;a:0:{}}}');
-        $this->assertInternalType('string', $this->_object->load());
+        $this->object->setValue('a:3:{i:0;a:1:{i:0;a:1:{s:5:"value";s:5:"test1";}}i:1;a:1:{i:0;a:0:{}}i:3;a:1:{i:25;a:0:{}}}');
+        $this->assertInternalType('string', $this->object->load());
     }
 }

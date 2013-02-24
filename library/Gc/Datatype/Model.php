@@ -27,11 +27,12 @@
 
 namespace Gc\Datatype;
 
-use Gc\Db\AbstractTable,
-    Gc\Form\AbstractForm,
-    Gc\Property\Model as PropertyModel,
-    Datatypes,
-    Zend\Form\Fieldset;
+use Gc\Db\AbstractTable;
+use Gc\Form\AbstractForm;
+use Gc\Property\Model as PropertyModel;
+use Datatypes;
+use Zend\Form\Fieldset;
+
 /**
  * Datatype Model
  * Simply class to edit one datatype
@@ -47,7 +48,7 @@ class Model extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'datatype';
+    protected $name = 'datatype';
 
     /**
      * Set prevalue value
@@ -57,8 +58,7 @@ class Model extends AbstractTable
      */
     public function setPrevalueValue($value)
     {
-        if(is_string($value))
-        {
+        if (is_string($value)) {
             $value = unserialize($value);
         }
 
@@ -73,7 +73,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\Datatype\Model
      */
-    static function fromArray(array $array)
+    public static function fromArray(array $array)
     {
         $datatype_table = new Model();
         $datatype_table->setData($array);
@@ -86,21 +86,18 @@ class Model extends AbstractTable
      * Get model from id
      *
      * @param integer $datatype_id
-     * @return FALSE|\Gc\Datatype\Model
+     * @return false|\Gc\Datatype\Model
      */
-    static function fromId($datatype_id)
+    public static function fromId($datatype_id)
     {
         $datatype_table = new Model();
         $row = $datatype_table->fetchRow($datatype_table->select(array('id' => (int)$datatype_id)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $datatype_table->setData((array)$row);
             $datatype_table->setOrigData();
             return $datatype_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -111,38 +108,32 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
             'prevalue_value' => serialize($this->getPrevalueValue()),
             'model' => $this->getModel(),
         );
 
-        try
-        {
+        try {
             $id = $this->getId();
-            if(empty($id))
-            {
+            if (empty($id)) {
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
-            }
-            else
-            {
+            } else {
                 $this->update($array_save, array('id' => $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
             return $this->getId();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -152,28 +143,24 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
         $id = $this->getId();
-        if(!empty($id))
-        {
-            try
-            {
+        if (!empty($id)) {
+            try {
                 parent::delete(array('id' => $id));
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
             unset($this);
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -182,7 +169,7 @@ class Model extends AbstractTable
      * @param AbstractDatatype $datatype
      * @return Model
      */
-    static function savePrevalueEditor(AbstractDatatype $datatype)
+    public static function savePrevalueEditor(AbstractDatatype $datatype)
     {
         $datatype->getPrevalueEditor()->save();
         return $datatype->getConfig();
@@ -194,17 +181,14 @@ class Model extends AbstractTable
      * @param PropertyModel $property
      * @return mixed
      */
-    static function saveEditor(PropertyModel $property)
+    public static function saveEditor(PropertyModel $property)
     {
         $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
         $datatype->getEditor($property)->save();
-        if(!$property->saveValue())
-        {
-            return FALSE;
-        }
-        else
-        {
-            return TRUE;
+        if (!$property->saveValue()) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -214,7 +198,7 @@ class Model extends AbstractTable
      * @param AbstractDatatype $datatype
      * @return mixed
      */
-    static function loadPrevalueEditor(AbstractDatatype $datatype)
+    public static function loadPrevalueEditor(AbstractDatatype $datatype)
     {
         $fieldset = new Fieldset('prevalue-editor');
         AbstractForm::addContent($fieldset, $datatype->getPrevalueEditor()->load());
@@ -227,7 +211,7 @@ class Model extends AbstractTable
      * @param PropertyModel $property
      * @return mixed
      */
-    static function loadEditor(PropertyModel $property)
+    public static function loadEditor(PropertyModel $property)
     {
         $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
 
@@ -241,7 +225,7 @@ class Model extends AbstractTable
      * @param integer $document_id Optional
      * @return \Gc\Datatype\AbstractDatatype
      */
-    static function loadDatatype($datatype_id, $document_id = NULL)
+    public static function loadDatatype($datatype_id, $document_id = null)
     {
         $datatype = Model::fromId($datatype_id);
         $class = 'Datatypes\\' . $datatype->getModel() . '\Datatype';

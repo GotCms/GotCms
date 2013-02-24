@@ -27,14 +27,14 @@
 
 namespace Content\Form;
 
-use Gc\Document\Model as DocumentModel,
-    Gc\DocumentType,
-    Gc\Form\AbstractForm,
-    Gc\Layout,
-    Gc\View,
-    Zend\Validator,
-    Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory;
+use Gc\Document\Model as DocumentModel;
+use Gc\DocumentType;
+use Gc\Form\AbstractForm;
+use Gc\Layout;
+use Gc\View;
+use Zend\Validator;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory as InputFilterFactory;
 
 /**
  * Translation form
@@ -53,15 +53,17 @@ class Translation extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
-            'source' => array(
-                'name' => 'source',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
+        $input_filter = $input_filter_factory->createInputFilter(
+            array(
+                'source' => array(
+                    'name' => 'source',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    ),
                 ),
-            ),
-        ));
+            )
+        );
 
         $this->setInputFilter($input_filter);
 

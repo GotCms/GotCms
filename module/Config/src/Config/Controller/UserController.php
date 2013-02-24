@@ -27,16 +27,16 @@
 
 namespace Config\Controller;
 
-use Config\Form\UserLogin,
-    Config\Form\User as UserForm,
-    Config\Form\UserForgotPassword as UserForgotForm,
-    Gc\Mvc\Controller\Action,
-    Gc\User,
-    Gc\User\Role,
-    Zend\Http\Request,
-    Zend\View\Model\ViewModel,
-    Zend\Validator\Identical,
-    DateTime;
+use Config\Form\UserLogin;
+use Config\Form\User as UserForm;
+use Config\Form\UserForgotPassword as UserForgotForm;
+use Gc\Mvc\Controller\Action;
+use Gc\User;
+use Gc\User\Role;
+use Zend\Http\Request;
+use Zend\View\Model\ViewModel;
+use Zend\Validator\Identical;
+use DateTime;
 
 /**
  * User controller
@@ -52,7 +52,7 @@ class UserController extends Action
      *
      * @var array $_aclPage
      */
-    protected $_aclPage = array('resource' => 'Config', 'permission' => 'user');
+    protected $aclPage = array('resource' => 'Config', 'permission' => 'user');
 
     /**
      * List all roles
@@ -77,14 +77,11 @@ class UserController extends Action
         $login_form = new UserLogin();
 
         $post = $this->getRequest()->getPost();
-        if($this->getRequest()->isPost() and $login_form->setData($post->toArray()) and $login_form->isValid())
-        {
+        if ($this->getRequest()->isPost() and $login_form->setData($post->toArray()) and $login_form->isValid()) {
             $user_model = new User\Model();
             $redirect = $login_form->getValue('redirect');
-            if($user_id = $user_model->authenticate($post->get('login'), $post->get('password')))
-            {
-                if(!empty($redirect))
-                {
+            if ($user_id = $user_model->authenticate($post->get('login'), $post->get('password'))) {
+                if (!empty($redirect)) {
                     return $this->redirect()->toUrl(base64_decode($redirect));
                 }
 
@@ -111,27 +108,33 @@ class UserController extends Action
         $forgot_password_form = new UserForgotForm();
         $id = $this->getRouteMatch()->getParam('id');
         $key = $this->getRouteMatch()->getParam('key');
-        if(!empty($id) and !empty($key))
-        {
+        if (!empty($id) and !empty($key)) {
             $user_model = User\Model::fromId($id);
-            if($user_model->getRetrievePasswordKey() == $key and strtotime('-1 hour') < strtotime($user_model->getRetrieveUpdatedAt()))
-            {
-                $forgot_password_form->setAttribute('action', $this->url()->fromRoute('userForgotPasswordKey', array(
-                    'id' => $id,
-                    'key' => $key
-                )));
+            if ($user_model->getRetrievePasswordKey() == $key
+                and strtotime('-1 hour') < strtotime($user_model->getRetrieveUpdatedAt())) {
+                $forgot_password_form->setAttribute(
+                    'action',
+                    $this->url()->fromRoute(
+                        'userForgotPasswordKey',
+                        array(
+                            'id' => $id,
+                            'key' => $key
+                        )
+                    )
+                );
 
                 $forgot_password_form->initResetForm();
-                if($this->getRequest()->isPost())
-                {
+                if ($this->getRequest()->isPost()) {
                     $post = $this->getRequest()->getPost();
-                    $forgot_password_form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new Identical($post['password']));
+                    $forgot_password_form->getInputFilter()
+                        ->get('password_confirm')
+                        ->getValidatorChain()
+                        ->addValidator(new Identical($post['password']));
                     $forgot_password_form->setData($post->toArray());
-                    if($forgot_password_form->isValid())
-                    {
+                    if ($forgot_password_form->isValid()) {
                         $user_model->setPassword($forgot_password_form->getValue('password'));
-                        $user_model->setRetrievePasswordKey(NULL);
-                        $user_model->setRetrieveUpdatedAt(NULL);
+                        $user_model->setRetrievePasswordKey(null);
+                        $user_model->setRetrieveUpdatedAt(null);
                         $user_model->save();
                     }
 
@@ -142,20 +145,15 @@ class UserController extends Action
             }
 
             return $this->redirect()->toRoute('admin');
-        }
-        else
-        {
+        } else {
             $forgot_password_form->setAttribute('action', $this->url()->fromRoute('userForgotPassword'));
             $forgot_password_form->initEmail();
-            if($this->getRequest()->isPost())
-            {
+            if ($this->getRequest()->isPost()) {
                 $post = $this->getRequest()->getPost();
                 $forgot_password_form->setData($post->toArray());
-                if($forgot_password_form->isValid())
-                {
+                if ($forgot_password_form->isValid()) {
                     $user_model = new User\Model();
-                    if($user_model->sendForgotPasswordEmail($forgot_password_form->getValue('email')))
-                    {
+                    if ($user_model->sendForgotPasswordEmail($forgot_password_form->getValue('email'))) {
                         return $this->redirect()->toRoute('admin');
                     }
                 }
@@ -187,13 +185,14 @@ class UserController extends Action
         $form->setAttribute('action', $this->url()->fromRoute('userCreate'));
         $form->passwordRequired();
         $post = $this->getRequest()->getPost()->toArray();
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $form->setData($post);
-            $form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new Identical($post['password']));
+            $form->getInputFilter()
+                ->get('password_confirm')
+                ->getValidatorChain()
+                ->addValidator(new Identical($post['password']));
 
-            if($form->isValid())
-            {
+            if ($form->isValid()) {
                 $user_model = new User\Model();
                 $user_model->setData($post);
                 $user_model->setPassword($post['password']);
@@ -218,15 +217,13 @@ class UserController extends Action
     public function deleteAction()
     {
         $user = User\Model::fromId($this->getRouteMatch()->getParam('id'));
-        if(empty($user) and $user->getRole()->getName() !== Role\Model::PROTECTED_NAME)
-        {
-            if($user->delete())
-            {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'The user has been deleted'));
+        if (empty($user) and $user->getRole()->getName() !== Role\Model::PROTECTED_NAME) {
+            if ($user->delete()) {
+                return $this->returnJson(array('success' => true, 'message' => 'The user has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'User does not exists'));
+        return $this->returnJson(array('success' => false, 'message' => 'User does not exists'));
     }
 
     /**
@@ -243,20 +240,19 @@ class UserController extends Action
         $form->setAttribute('action', $this->url()->fromRoute('userEdit', array('id' => $user_id)));
         $form->loadValues($user_model);
         $post = $this->getRequest()->getPost()->toArray();
-        if($this->getRequest()->isPost())
-        {
-            if(!empty($post['password']))
-            {
+        if ($this->getRequest()->isPost()) {
+            if (!empty($post['password'])) {
                 $form->passwordRequired();
-                $form->getInputFilter()->get('password_confirm')->getValidatorChain()->addValidator(new Identical($post['password']));
+                $form->getInputFilter()
+                    ->get('password_confirm')
+                    ->getValidatorChain()
+                    ->addValidator(new Identical($post['password']));
             }
 
             $form->setData($post);
-            if($form->isValid())
-            {
+            if ($form->isValid()) {
                 $user_model->addData($post);
-                if(!empty($post['password']))
-                {
+                if (!empty($post['password'])) {
                     $user_model->setPassword($post['password']);
                 }
 
@@ -279,7 +275,7 @@ class UserController extends Action
     public function forbiddenAction()
     {
         $this->getResponse()->setStatusCode(403);
-        $this->getResponse()->isForbidden(TRUE);
-        $this->layout()->module = NULL;
+        $this->getResponse()->isForbidden(true);
+        $this->layout()->module = null;
     }
 }

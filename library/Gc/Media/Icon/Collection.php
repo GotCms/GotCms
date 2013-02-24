@@ -27,8 +27,8 @@
 
 namespace Gc\Media\Icon;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of Media icons
@@ -44,7 +44,7 @@ class Collection extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'icon';
+    protected $name = 'icon';
 
     /**
      * Initiliaze collection
@@ -53,7 +53,7 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->getIcons(TRUE);
+        $this->getIcons(true);
     }
 
     /**
@@ -62,17 +62,18 @@ class Collection extends AbstractTable
      * @param boolean $force_reload to initiliaze views
      * @return array
      */
-    public function getIcons($force_reload = FALSE)
+    public function getIcons($force_reload = false)
     {
-        if($force_reload)
-        {
-            $rows = $this->fetchAll($this->select(function(Select $select)
-            {
-                $select->order('name');
-            }));
+        if ($force_reload) {
+            $rows = $this->fetchAll(
+                $this->select(
+                    function (Select $select) {
+                        $select->order('name');
+                    }
+                )
+            );
             $array = array();
-            foreach($rows as $row)
-            {
+            foreach ($rows as $row) {
                 $array[] = Model::fromId($row['id']);
             }
 
@@ -92,8 +93,7 @@ class Collection extends AbstractTable
         $select = array();
         $icons = $this->getIcons();
 
-        foreach($icons as $icon)
-        {
+        foreach ($icons as $icon) {
             $select[$icon->getId()] = $icon->getName();
         }
 

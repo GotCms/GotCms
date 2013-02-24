@@ -27,9 +27,9 @@
 
 namespace Config\Form;
 
-use Gc\Form\AbstractForm,
-    Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory;
+use Gc\Form\AbstractForm;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory as InputFilterFactory;
 
 /**
  * User login form
@@ -48,20 +48,22 @@ class UserLogin extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
-            'login' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                )
-            ),
-            'password' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
+        $input_filter = $input_filter_factory->createInputFilter(
+            array(
+                'login' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    )
                 ),
-            ),
-        ));
+                'password' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    ),
+                ),
+            )
+        );
 
         $this->setInputFilter($input_filter);
 

@@ -40,7 +40,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Collection
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -57,7 +57,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         ));
 
         $model->save();
-        $this->_object = new Collection;
+        $this->object = new Collection;
     }
 
     /**
@@ -68,7 +68,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $model = Model::fromIdentifier('identifier-collection-test');
         $model->delete();
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -76,8 +76,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->_object->init();
-        $layouts = $this->_object->getLayouts();
+        $this->object->init();
+        $layouts = $this->object->getLayouts();
         $this->assertTrue(count($layouts) >= 1);
     }
 
@@ -86,7 +86,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLayouts()
     {
-        $layouts = $this->_object->getLayouts();
+        $layouts = $this->object->getLayouts();
         $this->assertTrue(count($layouts) >= 1);
     }
 
@@ -95,7 +95,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSelect()
     {
-        $layouts = $this->_object->getSelect();
+        $layouts = $this->object->getSelect();
         $this->assertTrue(count($layouts) >= 1);
     }
 }

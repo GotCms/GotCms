@@ -27,8 +27,8 @@
 
 namespace Datatypes\Boolean;
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Zend\Form\Element;
 
 /**
  * Prevalue Editor for Boolean datatype

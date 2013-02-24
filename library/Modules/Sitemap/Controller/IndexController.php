@@ -27,9 +27,9 @@
 
 namespace Modules\Sitemap\Controller;
 
-use Gc\Module\Controller\AbstractController,
-    Gc\Document\Model as DocumentModel,
-    Modules\Sitemap\Model;
+use Gc\Module\Controller\AbstractController;
+use Gc\Document\Model as DocumentModel;
+use Modules\Sitemap\Model;
 
 /**
  * IndexController
@@ -57,6 +57,6 @@ class IndexController extends AbstractController
         $sitemap = new Model\Sitemap();
         file_put_contents($sitemap->getFilePath(), $sitemap->generate());
 
-        return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), TRUE);
+        return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), true);
     }
 }

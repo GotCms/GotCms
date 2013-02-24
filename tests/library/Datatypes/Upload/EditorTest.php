@@ -51,42 +51,42 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Editor
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var DatatypeModel
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * @var PropertyModel
      */
-    protected $_property;
+    protected $property;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var TabModel
      */
-    protected $_tab;
+    protected $tab;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-     protected $_documentType;
+     protected $documentType;
 
     /**
      * @var DocumentModel
@@ -99,71 +99,71 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = new ViewModel();
-        $this->_view->setData(array(
+        $this->view = new ViewModel();
+        $this->view->setData(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = new LayoutModel();
-        $this->_layout->setData(array(
+        $this->layout = new LayoutModel();
+        $this->layout->setData(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = new UserModel();
-        $this->_user->setData(array(
+        $this->user = new UserModel();
+        $this->user->setData(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
             'login' => 'test',
             'user_acl_role_id' => 1,
         ));
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = new DocumentTypeModel();
-        $this->_documentType->setData(array(
+        $this->documentType = new DocumentTypeModel();
+        $this->documentType->setData(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
-        $this->_documentType->save();
+        $this->documentType->save();
 
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'UploadTest',
             'prevalue_value' => 'a:1:{s:6:"length";i:10;}',
             'model' => 'Upload',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
 
-        $this->_tab = TabModel::fromArray(array(
+        $this->tab = TabModel::fromArray(array(
             'name' => 'TabTest',
             'description' => 'TabTest',
             'sort_order' => 1,
-            'document_type_id' => $this->_documentType->getId(),
+            'document_type_id' => $this->documentType->getId(),
         ));
-        $this->_tab->save();
+        $this->tab->save();
 
-        $this->_property = PropertyModel::fromArray(array(
+        $this->property = PropertyModel::fromArray(array(
             'name' => 'DatatypeTest',
             'identifier' => 'DatatypeTest',
             'description' => 'DatatypeTest',
             'required' => FALSE,
             'sort_order' => 1,
-            'tab_id' => $this->_tab->getId(),
-            'datatype_id' => $this->_datatype->getId(),
+            'tab_id' => $this->tab->getId(),
+            'datatype_id' => $this->datatype->getId(),
         ));
 
-        $this->_property->save();
+        $this->property->save();
 
         $this->_document = DocumentModel::fromArray(array(
             'name' => 'jQueryFileUploadTest',
@@ -171,17 +171,17 @@ class EditorTest extends \PHPUnit_Framework_TestCase
             'status' => DocumentModel::STATUS_ENABLE,
             'sort_order' => 1,
             'show_in_nav' => FALSE,
-            'user_id' => $this->_user->getId(),
-            'document_type_id' => $this->_documentType->getId(),
-            'view_id' => $this->_view->getId(),
-            'layout_id' => $this->_layout->getId(),
+            'user_id' => $this->user->getId(),
+            'document_type_id' => $this->documentType->getId(),
+            'view_id' => $this->view->getId(),
+            'layout_id' => $this->layout->getId(),
             'parent_id' => 0,
         ));
         $this->_document->save();
 
         $datatype = new Datatype();
-        $datatype->load($this->_datatype, $this->_document->getId());
-        $this->_object = $datatype->getEditor($this->_property);
+        $datatype->load($this->datatype, $this->_document->getId());
+        $this->object = $datatype->getEditor($this->property);
     }
 
     /**
@@ -192,24 +192,24 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     {
         $_FILES = array();
         $_POST = array();
-        $this->_datatype->delete();
+        $this->datatype->delete();
         $this->_document->delete();
-        $this->_documentType->delete();
-        $this->_layout->delete();
-        $this->_property->delete();
-        $this->_tab->delete();
-        $this->_user->delete();
-        $this->_view->delete();
+        $this->documentType->delete();
+        $this->layout->delete();
+        $this->property->delete();
+        $this->tab->delete();
+        $this->user->delete();
+        $this->view->delete();
 
-        unset($this->_datatype);
+        unset($this->datatype);
         unset($this->_document);
-        unset($this->_documentType);
-        unset($this->_layout);
-        unset($this->_property);
-        unset($this->_tab);
-        unset($this->_user);
-        unset($this->_view);
-        unset($this->_object);
+        unset($this->documentType);
+        unset($this->layout);
+        unset($this->property);
+        unset($this->tab);
+        unset($this->user);
+        unset($this->view);
+        unset($this->object);
     }
 
     /**
@@ -217,7 +217,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->_object->setConfig(array(
+        $this->object->setConfig(array(
             'is_multiple' => TRUE,
             'mime_list' => array(
                 'image/gif',
@@ -227,7 +227,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         ));
 
         $_FILES = array(
-            $this->_object->getName() => array(
+            $this->object->getName() => array(
                 'name' => __DIR__ . '/_files/test.jpg',
                 'type' => 'plain/text',
                 'size' => 8,
@@ -236,11 +236,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->_object->save();
-        $result = $this->_object->getValue();
+        $this->object->save();
+        $result = $this->object->getValue();
         $this->_removeDirectories();
 
-        $this->assertInternalType('string', $this->_object->getValue());
+        $this->assertInternalType('string', $this->object->getValue());
     }
 
     /**
@@ -248,8 +248,8 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithEmptyFilesVar()
     {
-        $this->_object->getRequest()->getPost()->set($this->_object->getName() . '-hidden', '1');
-        $this->_object->setConfig(array(
+        $this->object->getRequest()->getPost()->set($this->object->getName() . '-hidden', '1');
+        $this->object->setConfig(array(
             'is_multiple' => TRUE,
             'mime_list' => array(
                 'image/gif',
@@ -258,9 +258,9 @@ class EditorTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $this->_object->save();
+        $this->object->save();
 
-        $this->assertEquals('1', $this->_object->getValue());
+        $this->assertEquals('1', $this->object->getValue());
     }
 
     /**
@@ -268,7 +268,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithWrongMimeType()
     {
-        $this->_object->setConfig(array(
+        $this->object->setConfig(array(
             'is_multiple' => TRUE,
             'mime_list' => array(
                 'image/gif',
@@ -278,7 +278,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         ));
 
         $_FILES = array(
-            $this->_object->getName() => array(
+            $this->object->getName() => array(
                 'name' => __DIR__ . '/_files/test.bmp',
                 'type' => 'plain/text',
                 'size' => 8,
@@ -287,8 +287,8 @@ class EditorTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->_object->save();
-        $result = $this->_object->getValue();
+        $this->object->save();
+        $result = $this->object->getValue();
         $this->_removeDirectories();
 
         $this->assertInternalType('string', $result);
@@ -299,16 +299,16 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->_object->setConfig(array('is_multiple' => TRUE));
-        $this->_object->setValue('value');
+        $this->object->setConfig(array('is_multiple' => TRUE));
+        $this->object->setValue('value');
 
-        $this->assertInternalType('array', $this->_object->load());
+        $this->assertInternalType('array', $this->object->load());
     }
 
     protected function _removeDirectories()
     {
         $file = new File();
-        $file->load($this->_property, $this->_document);
+        $file->load($this->property, $this->_document);
         $dir = $file->getPath() . $file->getDirectory();
         if(is_dir($dir))
         {

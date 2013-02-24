@@ -27,8 +27,9 @@
 
 namespace Gc\Core\Updater;
 
-use Gc\Registry,
-    Gc\View\Helper;
+use Gc\Registry;
+use Gc\View\Helper;
+
 /**
  * Retrieve script from identifier
  *
@@ -44,7 +45,7 @@ class Script extends Helper\Script
      *
      * @var array
      */
-    protected $_params = array();
+    protected $__params = array();
 
     /**
      * Returns script from identifier.
@@ -56,12 +57,11 @@ class Script extends Helper\Script
     public function __invoke($content, $params = array())
     {
         $existed = in_array('gc.script', stream_get_wrappers());
-        if(!$existed)
-        {
+        if (!$existed) {
             stream_wrapper_register('gc.script', 'Gc\View\Stream');
         }
 
-        $this->_params = $params;
+        $this->__params = $params;
         $name = mt_rand() . '-script.gc-stream';
 
         file_put_contents('gc.script://' . $name, $content);
@@ -80,11 +80,10 @@ class Script extends Helper\Script
      */
     public function getParam($name)
     {
-        if(!empty($this->_params[$name]))
-        {
-            return $this->_params[$name];
+        if (!empty($this->__params[$name])) {
+            return $this->__params[$name];
         }
 
-        return NULL;
+        return null;
     }
 }

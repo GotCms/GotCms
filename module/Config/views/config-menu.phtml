@@ -29,7 +29,7 @@
 $permissions = $this->layout()->adminUser->getRole()->getUserPermissions();
 $config = empty($permissions['Config']) ? array() : $permissions['Config'];
 ?>
-<?php if(in_array('system', $config)): ?>
+<?php if (in_array('system', $config)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing configuration')); ?> ::..</h2>
 
     <ul>
@@ -40,7 +40,7 @@ $config = empty($permissions['Config']) ? array() : $permissions['Config'];
     </ul>
 <?php endif; ?>
 
-<?php if(in_array('user', $config)): ?>
+<?php if (in_array('user', $config)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Users')); ?> ::..</h2>
 
     <ul>
@@ -49,7 +49,7 @@ $config = empty($permissions['Config']) ? array() : $permissions['Config'];
     </ul>
 <?php endif; ?>
 
-<?php if(in_array('role', $config)): ?>
+<?php if (in_array('role', $config)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Roles')); ?> ::..</h2>
 
     <ul>

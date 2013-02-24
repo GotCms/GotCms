@@ -25,7 +25,7 @@
  */
 
 return array(
-    'display_exceptions'    => TRUE,
+    'display_exceptions'    => true,
     'controllers' => array(
         'invokables' => array(
             'ConfigController'  => 'Config\Controller\IndexController',

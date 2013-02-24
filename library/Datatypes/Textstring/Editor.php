@@ -27,8 +27,8 @@
 
 namespace Datatypes\Textstring;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Zend\Form\Element;
 
 /**
  * Editor for Textstring datatype
@@ -63,8 +63,7 @@ class Editor extends AbstractEditor
         $textstring->setAttribute('class', 'input-text');
         $textstring->setAttribute('label', $property->getName());
         $textstring->setValue($this->getValue());
-        if(!empty($parameters['length']))
-        {
+        if (!empty($parameters['length'])) {
             $textstring->setAttribute('maxlength', $parameters['length']);
         }
 

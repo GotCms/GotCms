@@ -46,27 +46,27 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
     /**
      * @var TreeView
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-    protected $_documentType;
+    protected $documentType;
 
     /**
      * @var DocumentModel
@@ -86,23 +86,23 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = LayoutModel::fromArray(array(
+        $this->layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
@@ -110,28 +110,28 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = DocumentTypeModel::fromArray(array(
+        $this->documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
 
-        $this->_documentType->save();
+        $this->documentType->save();
 
         $this->_document = DocumentModel::fromArray(array(
             'name' => 'Document name',
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,
             'show_in_nav' => TRUE,
-            'user_id' => $this->_user->getId(),
-            'document_type_id' => $this->_documentType->getId(),
-            'view_id' => $this->_view->getId(),
-            'layout_id' => $this->_layout->getId(),
+            'user_id' => $this->user->getId(),
+            'document_type_id' => $this->documentType->getId(),
+            'view_id' => $this->view->getId(),
+            'layout_id' => $this->layout->getId(),
         ));
 
         $this->_document->save();
@@ -141,15 +141,15 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,
             'show_in_nav' => TRUE,
-            'user_id' => $this->_user->getId(),
-            'document_type_id' => $this->_documentType->getId(),
-            'view_id' => $this->_view->getId(),
-            'layout_id' => $this->_layout->getId(),
+            'user_id' => $this->user->getId(),
+            'document_type_id' => $this->documentType->getId(),
+            'view_id' => $this->view->getId(),
+            'layout_id' => $this->layout->getId(),
             'parent_id' => $this->_document->getId()
         ));
 
         $this->_documentChildren->save();
-        $this->_object = new TreeView;
+        $this->object = new TreeView;
     }
 
     /**
@@ -164,19 +164,19 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
         $this->_document->delete();
         unset($this->_document);
 
-        $this->_view->delete();
-        unset($this->_view);
+        $this->view->delete();
+        unset($this->view);
 
-        $this->_user->delete();
-        unset($this->_user);
+        $this->user->delete();
+        unset($this->user);
 
-        $this->_layout->delete();
-        unset($this->_layout);
+        $this->layout->delete();
+        unset($this->layout);
 
-        $this->_documentType->delete();
-        unset($this->_documentType);
+        $this->documentType->delete();
+        unset($this->documentType);
 
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -187,6 +187,6 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
         $collection = new DocumentCollection();
         $collection->load(0);
         $array = array_merge(array($collection), array('test' => 'value'));
-        $this->assertTrue(strlen($this->_object->render($array)) > 0);
+        $this->assertTrue(strlen($this->object->render($array)) > 0);
     }
 }

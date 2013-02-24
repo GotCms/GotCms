@@ -45,22 +45,22 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Documents
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentModel
@@ -70,7 +70,7 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
     /**
      * @var DocumentTypeModel
      */
-    protected $_documentType;
+    protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -78,23 +78,23 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = LayoutModel::fromArray(array(
+        $this->layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
@@ -102,33 +102,33 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = DocumentTypeModel::fromArray(array(
+        $this->documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
 
-        $this->_documentType->save();
+        $this->documentType->save();
 
         $this->_document = DocumentModel::fromArray(array(
             'name' => 'Document name',
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,
             'show_in_nav' => TRUE,
-            'user_id' => $this->_user->getId(),
-            'document_type_id' => $this->_documentType->getId(),
-            'view_id' => $this->_view->getId(),
-            'layout_id' => $this->_layout->getId(),
+            'user_id' => $this->user->getId(),
+            'document_type_id' => $this->documentType->getId(),
+            'view_id' => $this->view->getId(),
+            'layout_id' => $this->layout->getId(),
             'parent_id' => 0
         ));
         $this->_document->save();
 
-        $this->_object = new Documents;
+        $this->object = new Documents;
     }
 
     /**
@@ -137,7 +137,7 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -145,7 +145,7 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
      */
     public function test__invoke()
     {
-        $this->assertInternalType('array', $this->_object->__invoke());
+        $this->assertInternalType('array', $this->object->__invoke());
     }
 
     /**
@@ -153,7 +153,7 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
      */
     public function test__invokeWithParameters()
     {
-        $this->assertInternalType('array', $this->_object->__invoke(1));
-        $this->assertInternalType('array', $this->_object->__invoke(array(0, $this->_document->getId())));
+        $this->assertInternalType('array', $this->object->__invoke(1));
+        $this->assertInternalType('array', $this->object->__invoke(array(0, $this->_document->getId())));
     }
 }

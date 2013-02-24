@@ -27,8 +27,8 @@
 
 namespace Datatypes\ImageCropper;
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Zend\Form\Element;
 
 /**
  * Prevalue Editor for Image cropper datatype
@@ -52,12 +52,9 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $resize_option = $post->get('resize_option');
         $background = $post->get('background');
         $sizes = array();
-        if(!empty($sizes_data) and is_array($sizes_data))
-        {
-            foreach($sizes_data as $idx => $size)
-            {
-                if(empty($size['name']) or empty($size['height']) or empty($size['width']))
-                {
+        if (!empty($sizes_data) and is_array($sizes_data)) {
+            foreach ($sizes_data as $idx => $size) {
+                if (empty($size['name']) or empty($size['height']) or empty($size['width'])) {
                     continue;
                 }
 
@@ -66,7 +63,14 @@ class PrevalueEditor extends AbstractPrevalueEditor
             }
         }
 
-        $this->setConfig(array('background' => $background, 'resize_option' => $resize_option, 'mime_list' => empty($mime_list) ? array() : $mime_list, 'size' => $sizes));
+        $this->setConfig(
+            array(
+                'background' => $background,
+                'resize_option' => $resize_option,
+                'mime_list' => empty($mime_list) ? array() : $mime_list,
+                'size' => $sizes
+            )
+        );
     }
 
     /**
@@ -82,10 +86,12 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $resize_option->setValue(empty($config['resize_option']) ? 'auto' : $config['resize_option']);
         $resize_option->setAttribute('id', 'resize-option');
         $resize_option->setLabel('Resize option');
-        $resize_option->setValueOptions(array(
-            'auto' => 'auto',
-            'crop' => 'crop',
-        ));
+        $resize_option->setValueOptions(
+            array(
+                'auto' => 'auto',
+                'crop' => 'crop',
+            )
+        );
 
         $background_option = new Element\Text('background');
         $background_option->setValue(empty($config['background']) ? '' : $config['background']);
@@ -100,22 +106,23 @@ class PrevalueEditor extends AbstractPrevalueEditor
         );
 
         $options = array();
-        foreach($array as $mime)
-        {
+        foreach ($array as $mime) {
             $options[] = array(
                 'value' => $mime,
                 'label' => $mime,
-                'selected' => !in_array($mime, empty($config['mime_list']) ? array() : $config['mime_list']) ? FALSE : TRUE,
+                'selected' =>
+                    !in_array(
+                        $mime,
+                        empty($config['mime_list']) ? array() : $config['mime_list']
+                    ) ? false : true,
             );
         }
 
         $mime_list->setValueOptions($options);
         $size_elements = array();
         $idx = 0;
-        if(!empty($config['size']))
-        {
-            foreach($config['size'] as $idx => $size)
-            {
+        if (!empty($config['size'])) {
+            foreach ($config['size'] as $idx => $size) {
                 $element_size_name = new Element\Text('size[' . $idx . '][name]');
                 $element_size_name->setValue($size['name']);
                 $element_size_name->setAttribute('id', 'name' . $idx);
@@ -148,14 +155,17 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $element_height->setAttribute('id', 'height#{idx}');
         $template = array($element_size_name, $element_width, $element_height);
 
-        return $this->addPath(__DIR__)->render('upload-prevalue.phtml', array(
-            'elements' => array(
-                'resize-option' => $resize_option,
-                'background' => $background_option,
-                'mime' => $mime_list,
-                'size' => $size_elements,
-                'size-template' => $template
+        return $this->addPath(__DIR__)->render(
+            'upload-prevalue.phtml',
+            array(
+                'elements' => array(
+                    'resize-option' => $resize_option,
+                    'background' => $background_option,
+                    'mime' => $mime_list,
+                    'size' => $size_elements,
+                    'size-template' => $template
+                )
             )
-        ));
+        );
     }
 }

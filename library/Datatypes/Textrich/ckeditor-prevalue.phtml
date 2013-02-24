@@ -31,13 +31,13 @@
 <span id="ckeditor-select-all" style="cursor:pointer;text-decoration:underline"><?php echo $this->escapeHtml($this->translate('Select all elements')); ?></span>
 
 <div id="elements">
-    <?php foreach($fieldsets as $fieldset): ?>
-        <?php if(!empty($fieldset)): ?>
+    <?php foreach ($fieldsets as $fieldset): ?>
+        <?php if (!empty($fieldset)): ?>
             <h3><?php echo $this->escapeHtml($this->translate($fieldset->getName())); ?></h3>
-            <?php foreach($fieldset->getElements() as $element): ?>
+            <?php foreach ($fieldset->getElements() as $element): ?>
                 <div>
                     <?php $content = $element->getAttribute('content'); ?>
-                    <?php if(!empty($content)): ?>
+                    <?php if (!empty($content)): ?>
                         <?php echo $content; ?>
                     <?php else: ?>
                         <label class="required" for="<?php echo $this->escapeHtml($this->translate($element->getAttribute('id'))); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
@@ -50,8 +50,7 @@
     <?php endforeach; ?>
 </div>
 <script type="text/javascript">
-    $('#ckeditor-select-all').on('click', function()
-    {
+    $('#ckeditor-select-all').on('click', function () {
         $('#elements').find('input[type="checkbox"]').prop('checked', true);
     });
 </script>

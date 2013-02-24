@@ -27,8 +27,8 @@
 
 namespace Datatypes\Textstring;
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Zend\Form\Element;
 
 /**
  * Prevalue Editor for Textstring datatype
@@ -61,12 +61,14 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $config = $this->getConfig();
 
         $length = new Element\Text('length');
-        $length->setAttributes(array(
-            'label' => 'Length',
-            'value' => isset($config['length']) ? $config['length'] : '',
-            'class' => 'input-text',
-            'id' => 'length',
-        ));
+        $length->setAttributes(
+            array(
+                'label' => 'Length',
+                'value' => isset($config['length']) ? $config['length'] : '',
+                'class' => 'input-text',
+                'id' => 'length',
+            )
+        );
 
         return $length;
     }

@@ -27,8 +27,8 @@
 
 namespace Gc\Core\Updater\Adapter;
 
-use Gc\Core\Object,
-    Gc\Version;
+use Gc\Core\Object;
+use Gc\Version;
 
 /**
  * Abstract adapter for updater
@@ -44,7 +44,7 @@ abstract class AbstractAdapter extends Object
      *
      * @var array
      */
-    protected $_messages = array();
+    protected $messages = array();
 
     /**
      * Update
@@ -81,7 +81,7 @@ abstract class AbstractAdapter extends Object
      */
     public function addMessage($message)
     {
-        $this->_messages[] = $message;
+        $this->messages[] = $message;
 
         return $this;
     }
@@ -93,6 +93,6 @@ abstract class AbstractAdapter extends Object
      */
     public function getMessages()
     {
-        return $this->_messages;
+        return $this->messages;
     }
 }

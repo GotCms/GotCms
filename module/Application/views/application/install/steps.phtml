@@ -42,23 +42,23 @@ if(empty($this->currentRoute))
 ?>
 <h2><?php echo $this->escapeHtml($this->translate('Steps:')); ?></h2>
 <ul>
-    <li<?php if($this->currentRoute == $routes[0]): ?> class="active"<?php elseif($step > 0): ?> class="done"<?php endif; ?>>
+    <li<?php if ($this->currentRoute == $routes[0]): ?> class="active"<?php elseif($step > 0): ?> class="done"<?php endif; ?>>
         <?php echo $this->escapeHtml($this->translate('Language')); ?>
     </li>
 
-    <li<?php if($this->currentRoute == $routes[1]): ?> class="active"<?php elseif($step > 1): ?> class="done"<?php endif; ?>>
+    <li<?php if ($this->currentRoute == $routes[1]): ?> class="active"<?php elseif($step > 1): ?> class="done"<?php endif; ?>>
         <?php echo $this->escapeHtml($this->translate('License')); ?>
     </li>
 
-    <li<?php if($this->currentRoute == $routes[2]): ?> class="active"<?php elseif($step > 2): ?> class="done"<?php endif; ?>>
+    <li<?php if ($this->currentRoute == $routes[2]): ?> class="active"<?php elseif($step > 2): ?> class="done"<?php endif; ?>>
         <?php echo $this->escapeHtml($this->translate('Pre-configuration')); ?>
     </li>
 
-    <li<?php if($this->currentRoute == $routes[3]): ?> class="active"<?php elseif($step > 3): ?> class="done"<?php endif; ?>>
+    <li<?php if ($this->currentRoute == $routes[3]): ?> class="active"<?php elseif($step > 3): ?> class="done"<?php endif; ?>>
         <?php echo $this->escapeHtml($this->translate('Database')); ?>
     </li>
 
-    <li<?php if($this->currentRoute == $routes[4]): ?> class="active"<?php elseif($step >= 4): ?> class="done"<?php endif; ?>>
+    <li<?php if ($this->currentRoute == $routes[4]): ?> class="active"<?php elseif($step >= 4): ?> class="done"<?php endif; ?>>
         <?php echo $this->escapeHtml($this->translate('Configuration')); ?>
     </li>
 </ul>

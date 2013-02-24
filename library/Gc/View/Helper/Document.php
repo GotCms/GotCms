@@ -27,8 +27,8 @@
 
 namespace Gc\View\Helper;
 
-use Zend\View\Helper\AbstractHelper,
-    Gc\Document\Model as DocumentModel;
+use Zend\View\Helper\AbstractHelper;
+use Gc\Document\Model as DocumentModel;
 
 /**
  * Retrieve document from id or url_key
@@ -48,8 +48,7 @@ class Document extends AbstractHelper
      */
     public function __invoke($identifier)
     {
-        if(is_numeric($identifier))
-        {
+        if (is_numeric($identifier)) {
             return DocumentModel::fromId($identifier);
         }
 

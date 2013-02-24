@@ -45,10 +45,10 @@
 
 <h3><?php echo $this->escapeHtml($this->translate('Size')); ?></h3>
 <div id="sizes">
-    <?php if(!empty($this->elements['size'])): ?>
-        <?php foreach($this->elements['size'] as $size): ?>
+    <?php if (!empty($this->elements['size'])): ?>
+        <?php foreach ($this->elements['size'] as $size): ?>
             <div>
-                <?php foreach($size as $element): ?>
+                <?php foreach ($size as $element): ?>
                     <label style="width:auto" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($element->getLabel()); ?></label>
                     <?php echo $this->formElement($element); ?>
                 <?php endforeach; ?>
@@ -64,7 +64,7 @@
 
 <script type="text/javascript">
     $template = new Template('<div>' +
-        <?php foreach($this->elements['size-template'] as $element): ?>
+        <?php foreach ($this->elements['size-template'] as $element): ?>
             '<label style="width:auto" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeJs($element->getLabel()); ?></label>&nbsp;' +
             '<?php echo $this->escapeJs($this->formElement($element)); ?>&nbsp;' +
         <?php endforeach; ?>
@@ -72,8 +72,7 @@
     '</div>');
 
     $idx = <?php echo count($this->elements['size']); ?>;
-    $('body').on('click', '#add-size', function()
-    {
+    $('body').on('click', '#add-size', function () {
         $html = $($template.evaluate({idx: $idx}));
         $html.find('.delete-button').button({
             icons: {
@@ -84,8 +83,7 @@
         $idx++;
     });
 
-    $('body').on('click', '.delete-button', function()
-    {
+    $('body').on('click', '.delete-button', function () {
         $(this).parent().remove();
     });
 

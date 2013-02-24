@@ -1,38 +1,38 @@
-<?php if(!empty($this->updateOutput)): ?>
+<?php if (!empty($this->updateOutput)): ?>
     <p><?php echo $this->escapeHtml($this->translate('Result:')); ?></p>
-    <?php foreach($this->updateOutput as $message): ?>
+    <?php foreach ($this->updateOutput as $message): ?>
         <p><?php echo nl2br($this->escapeHtml($message)); ?></p>
     <?php endforeach; ?>
 <?php else: ?>
-    <?php if($this->isLatest): ?>
+    <?php if ($this->isLatest): ?>
         <p><?php echo $this->escapeHtml($this->translate('You already have the latest version')); ?></p>
     <?php else: ?>
         <p><?php echo $this->escapeHtml(sprintf($this->translate('Version %s has been released, please upgrade for security issues.'), $this->latestVersion)); ?>
         <br><?php echo $this->translate('You can follow this project on github:'); ?> <a href="https://github.com/PierreRambaud/GotCms" target="_blank">https://github.com/PierreRambaud/GotCms</a></p>
 
-        <?php if(!empty($this->datatypesErrors)): ?>
+        <?php if (!empty($this->datatypesErrors)): ?>
             <div class="datatypes-errors">
                 <p><?php echo $this->escapeHtml($this->translate('These datatypes may have problems:')); ?></p>
                 <ul>
-                    <?php foreach($this->datatypesErrors as $error): ?>
+                    <?php foreach ($this->datatypesErrors as $error): ?>
                         <li><?php echo $this->escapeHtml($error); ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
 
-        <?php if(!empty($this->modulesErrors)): ?>
+        <?php if (!empty($this->modulesErrors)): ?>
             <div class="modules-errors">
                 <p><?php echo $this->escapeHtml($this->translate('These modules may have problems:')); ?></p>
                 <ul>
-                    <?php foreach($this->modulesErrors as $error): ?>
+                    <?php foreach ($this->modulesErrors as $error): ?>
                         <li><?php echo $this->escapeHtml($error); ?></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
 
-        <?php if(empty($this->gitProject)): ?>
+        <?php if (empty($this->gitProject)): ?>
             <p><?php echo $this->escapeHtml($this->translate("Yout can't update this project because you don't clone it with git")); ?></p>
         <?php else: ?>
             <form action="<?php echo $this->url(); ?>" method="post" id="update-form">

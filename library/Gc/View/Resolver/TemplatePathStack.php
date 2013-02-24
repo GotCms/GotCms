@@ -27,10 +27,10 @@
 
 namespace Gc\View\Resolver;
 
-use SplFileInfo,
-    Zend\View\Exception,
-    Zend\View\Renderer\RendererInterface as Renderer,
-    Zend\View\Resolver\TemplatePathStack as PathStack;
+use SplFileInfo;
+use Zend\View\Exception;
+use Zend\View\Renderer\RendererInterface as Renderer;
+use Zend\View\Resolver\TemplatePathStack as PathStack;
 
 /**
  * Resolves view scripts based on a stack of paths
@@ -52,52 +52,41 @@ class TemplatePathStack extends PathStack
     public function resolve($name, Renderer $renderer = null)
     {
         //Force use view stream
-        $this->useViewStream = TRUE;
-        $this->lastLookupFailure = FALSE;
+        $this->useViewStream = true;
+        $this->lastLookupFailure = false;
 
-        if($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name))
-        {
+        if ($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name)) {
             throw new Exception\DomainException(
                 'Requested scripts may not include parent directory traversal ("../", "..\\" notation)'
             );
         }
 
-        if(strpos($name, '.phtml') === FALSE)
-        {
-            if($this->useStreamWrapper())
-            {
+        if (strpos($name, '.phtml') === false) {
+            if ($this->useStreamWrapper()) {
                 // If using a stream wrapper, prepend the spec to the path
                 $file_path = 'zend.view://' . $name;
                 return $file_path;
             }
-        }
-        else
-        {
-            if(!count($this->paths))
-            {
+        } else {
+            if (!count($this->paths)) {
                 $this->lastLookupFailure = static::FAILURE_NO_PATHS;
-                return FALSE;
+                return false;
             }
 
             // Ensure we have the expected file extension
             $default_suffix = $this->getDefaultSuffix();
-            if(pathinfo($name, PATHINFO_EXTENSION) != $default_suffix)
-            {
+            if (pathinfo($name, PATHINFO_EXTENSION) != $default_suffix) {
                 $name .= '.' . $default_suffix;
             }
 
-            foreach($this->paths as $path)
-            {
+            foreach ($this->paths as $path) {
                 $file = new SplFileInfo($path . $name);
-                if($file->isReadable())
-                {
+                if ($file->isReadable()) {
                     // Found! Return it.
-                    if(($file_path = $file->getRealPath()) === FALSE && substr($path, 0, 7) === 'phar://')
-                    {
+                    if (($file_path = $file->getRealPath()) === false && substr($path, 0, 7) === 'phar://') {
                         // Do not try to expand phar paths (realpath + phars == fail)
                         $file_path = $path . $name;
-                        if(!file_exists($file_path))
-                        {
+                        if (!file_exists($file_path)) {
                             break;
                         }
                     }
@@ -108,6 +97,6 @@ class TemplatePathStack extends PathStack
         }
 
         $this->lastLookupFailure = static::FAILURE_NOT_FOUND;
-        return FALSE;
+        return false;
     }
 }

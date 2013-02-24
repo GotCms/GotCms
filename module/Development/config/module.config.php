@@ -42,4 +42,3 @@ return array(
         ),
     ),
 );
-

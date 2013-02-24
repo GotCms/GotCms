@@ -27,10 +27,10 @@
 
 namespace Modules\Blog\Form;
 
-use Gc\Form\AbstractForm,
-    Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory,
-    Zend\Captcha\Image as CaptchaImage;
+use Gc\Form\AbstractForm;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory as InputFilterFactory;
+use Zend\Captcha\Image as CaptchaImage;
 
 /**
  * Comment form
@@ -61,7 +61,8 @@ class Comment extends AbstractForm
         $message->setAttribute('label', 'Message');
         $message->setAttribute('required', 'required');
 
-        $captcha_image = new CaptchaImage(array(
+        $captcha_image = new CaptchaImage(
+            array(
                 'font' => GC_APPLICATION_PATH . '/data/fonts/arial.ttf',
                 'width' => 250,
                 'height' => 50,
@@ -86,28 +87,30 @@ class Comment extends AbstractForm
         $this->add($captcha);
 
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
-            'show_email' => array(
-                'name' => 'show_email',
-                'required' => FALSE,
-            ),
-            'username' => array(
-                'name' => 'username',
-                'required' => TRUE,
-            ),
-            'email' => array(
-                'name' => 'email',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'email_address'),
+        $input_filter = $input_filter_factory->createInputFilter(
+            array(
+                'show_email' => array(
+                    'name' => 'show_email',
+                    'required' => false,
                 ),
-            ),
-            'message' => array(
-                'name' => 'message',
-                'required' => TRUE,
-            ),
-            'captcha' => $captcha->getInputSpecification()
-        ));
+                'username' => array(
+                    'name' => 'username',
+                    'required' => true,
+                ),
+                'email' => array(
+                    'name' => 'email',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'email_address'),
+                    ),
+                ),
+                'message' => array(
+                    'name' => 'message',
+                    'required' => true,
+                ),
+                'captcha' => $captcha->getInputSpecification()
+            )
+        );
 
         $this->setInputFilter($input_filter);
     }

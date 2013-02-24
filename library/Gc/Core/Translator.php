@@ -27,10 +27,11 @@
 
 namespace Gc\Core;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select,
-    Zend\Db\Sql\Insert,
-    Zend\Db\Sql\Update;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Update;
+
 /**
  * Get and set translation
  *
@@ -45,14 +46,14 @@ class Translator extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'core_translate';
+    protected $name = 'core_translate';
 
     /**
      * Singleton for Translator
      *
-     * @var \Gc\Core\Translator $_instance
+     * @var \Gc\Core\Translator $instance
      */
-    static protected $_instance = NULL;
+    static protected $instance = null;
 
     /**
      * Get instance of \Gc\Core\Translator
@@ -61,12 +62,11 @@ class Translator extends AbstractTable
      */
     public static function getInstance()
     {
-        if(empty(static::$_instance))
-        {
-            static::$_instance = new self();
+        if (empty(static::$instance)) {
+            static::$instance = new self();
         }
 
-        return static::$_instance;
+        return static::$instance;
     }
 
     /**
@@ -76,21 +76,24 @@ class Translator extends AbstractTable
      * @param string $locale Optional
      * @return string value
      */
-    static function getValue($source, $locale = NULL)
+    public static function getValue($source, $locale = null)
     {
         $instance = self::getInstance();
         $select = new Select();
         $select->from('core_translate')
             ->columns(array('src_id' => 'id', 'source'))
-            ->join('core_translate_locale', 'core_translate.id = core_translate_locale.core_translate_id', array('dst_id' => 'id', 'destination', 'locale'), Select::JOIN_INNER);
+            ->join(
+                'core_translate_locale',
+                'core_translate.id = core_translate_locale.core_translate_id',
+                array('dst_id' => 'id', 'destination', 'locale'),
+                Select::JOIN_INNER
+            );
 
-        if(!empty($source))
-        {
+        if (!empty($source)) {
             $select->where(array('core_translate.source' => $source));
         }
 
-        if(!empty($locale))
-        {
+        if (!empty($locale)) {
             $select->where(array('core_translate_locale.locale' => $locale));
         }
 
@@ -104,20 +107,23 @@ class Translator extends AbstractTable
      * @param integer $limit
      * @return array
      */
-    static function getValues($locale = NULL, $limit = NULL)
+    public static function getValues($locale = null, $limit = null)
     {
         $instance = self::getInstance();
         $select = new Select();
         $select->from('core_translate')
             ->columns(array('src_id' => 'id', 'source'))
-            ->join('core_translate_locale', 'core_translate.id = core_translate_locale.core_translate_id', array('dst_id' => 'id', 'destination', 'locale'), Select::JOIN_INNER);
+            ->join(
+                'core_translate_locale',
+                'core_translate.id = core_translate_locale.core_translate_id',
+                array('dst_id' => 'id', 'destination', 'locale'),
+                Select::JOIN_INNER
+            );
 
-        if(!empty($locale))
-        {
+        if (!empty($locale)) {
             $select->where->equalTo('core_translate_locale.locale', $locale);
         }
-        if(!empty($limit))
-        {
+        if (!empty($limit)) {
             $select->limit($limit);
         }
 
@@ -133,64 +139,56 @@ class Translator extends AbstractTable
      * @param array $destinations
      * @return boolean
      */
-    static function setValue($source, array $destinations)
+    public static function setValue($source, array $destinations)
     {
         $instance = self::getInstance();
-        if(is_numeric($source))
-        {
+        if (is_numeric($source)) {
             $row = $instance->fetchRow($instance->select(array('id' => $source)));
-            if(empty($row))
-            {
-                return FALSE;
+            if (empty($row)) {
+                return false;
             }
 
             $source_id = $row['id'];
-        }
-        else
-        {
+        } else {
             $row = $instance->fetchRow($instance->select(array('source' => $source)));
-            if(!empty($row))
-            {
+            if (!empty($row)) {
                 $source_id = $row['id'];
-            }
-            else
-            {
+            } else {
                 $instance->insert(array('source' => $source));
                 $source_id = $instance->getLastInsertId();
             }
         }
 
-        foreach($destinations as $destination)
-        {
-            if(empty($destination['locale']) or empty($destination['value']))
-            {
+        foreach ($destinations as $destination) {
+            if (empty($destination['locale']) or empty($destination['value'])) {
                 continue;
             }
-            if(!empty($destination['dst_id']))
-            {
+            if (!empty($destination['dst_id'])) {
                 $update = new Update('core_translate_locale');
-                $update->set(array(
-                    'destination' => $destination['value'],
-                    'locale' => $destination['locale']
-                ));
+                $update->set(
+                    array(
+                        'destination' => $destination['value'],
+                        'locale' => $destination['locale']
+                    )
+                );
                 $update->where->equalTo('id', $destination['dst_id']);
 
                 $instance->execute($update);
-            }
-            else
-            {
+            } else {
                 $insert = new Insert();
                 $insert->into('core_translate_locale')
-                ->values(array(
-                    'destination' => $destination['value'],
-                    'locale' => $destination['locale'],
-                    'core_translate_id' => $source_id,
-                ));
+                ->values(
+                    array(
+                        'destination' => $destination['value'],
+                        'locale' => $destination['locale'],
+                        'core_translate_id' => $source_id,
+                    )
+                );
 
                 $instance->execute($insert);
             }
         }
 
-        return TRUE;
+        return true;
     }
 }

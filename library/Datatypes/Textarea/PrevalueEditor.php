@@ -27,8 +27,8 @@
 
 namespace Datatypes\Textarea;
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Zend\Form\Element;
 
 /**
  * Prevalue Editor for Textarea datatype
@@ -48,15 +48,17 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         //Save prevalue in column Datatypes\prevalue_value
         $post = $this->getRequest()->getPost();
-        $rows = $post->get('rows', NULL);
-        $cols = $post->get('cols', NULL);
-        $wrap = $post->get('wrap', NULL);
+        $rows = $post->get('rows', null);
+        $cols = $post->get('cols', null);
+        $wrap = $post->get('wrap', null);
 
-        $this->setConfig(array(
-            'cols' => $cols,
-            'rows' => $rows,
-            'wrap' => $wrap,
-        ));
+        $this->setConfig(
+            array(
+                'cols' => $cols,
+                'rows' => $rows,
+                'wrap' => $wrap,
+            )
+        );
     }
 
     /**
@@ -74,25 +76,31 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $config = $this->getConfig();
 
         $cols = new Element\Text('cols');
-        $cols->setAttributes(array(
-            'label' => 'Cols',
-            'value' => isset($config['cols']) ? $config['cols'] : '',
-            'class' => 'input-text',
-        ));
+        $cols->setAttributes(
+            array(
+                'label' => 'Cols',
+                'value' => isset($config['cols']) ? $config['cols'] : '',
+                'class' => 'input-text',
+            )
+        );
 
         $rows = new Element\Text('rows');
-        $rows->setAttributes(array(
-            'label' => 'Rows',
-            'value' => isset($config['rows']) ? $config['rows'] : '',
-            'class' => 'input-text',
-        ));
+        $rows->setAttributes(
+            array(
+                'label' => 'Rows',
+                'value' => isset($config['rows']) ? $config['rows'] : '',
+                'class' => 'input-text',
+            )
+        );
 
         $wrap = new Element\Select('wrap');
-        $wrap->setAttributes(array(
-            'label' => 'Wrap',
-            'options' => array('hard' => 'hard', 'off' => 'off', 'soft' => 'soft'),
-            'value' => isset($config['wrap']) ? $config['wrap'] : '',
-        ));
+        $wrap->setAttributes(
+            array(
+                'label' => 'Wrap',
+                'options' => array('hard' => 'hard', 'off' => 'off', 'soft' => 'soft'),
+                'value' => isset($config['wrap']) ? $config['wrap'] : '',
+            )
+        );
 
         return array($cols, $rows, $wrap);
     }

@@ -40,7 +40,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Document
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Document;
+        $this->object = new Document;
     }
 
     /**
@@ -57,7 +57,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -65,7 +65,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     public function test__invokeFromId()
     {
-        $this->assertFalse($this->_object->__invoke(999));
+        $this->assertFalse($this->object->__invoke(999));
     }
 
     /**
@@ -73,6 +73,6 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     public function test__invokeFromUrlKey()
     {
-        $this->assertFalse($this->_object->__invoke('test-helper-document'));
+        $this->assertFalse($this->object->__invoke('test-helper-document'));
     }
 }

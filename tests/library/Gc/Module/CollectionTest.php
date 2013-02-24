@@ -40,7 +40,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Collection
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var Model
@@ -58,7 +58,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         ));
         $this->_module->save();
 
-        $this->_object = new Collection;
+        $this->object = new Collection;
     }
 
     /**
@@ -69,16 +69,16 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->_module->delete();
         unset($this->_module);
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
      * @covers Gc\Module\Collection::init
-     * @covers Gc\Module\Collection::_setModules
+     * @covers Gc\Module\Collection::setModules
      */
     public function testInit()
     {
-        $this->assertInstanceOf('Gc\Module\Collection', $this->_object->init());
+        $this->assertInstanceOf('Gc\Module\Collection', $this->object->init());
     }
 
     /**
@@ -86,6 +86,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSelect()
     {
-        $this->assertInternalType('array', $this->_object->getSelect());
+        $this->assertInternalType('array', $this->object->getSelect());
     }
 }

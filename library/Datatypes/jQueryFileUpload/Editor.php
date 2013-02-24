@@ -27,10 +27,10 @@
 
 namespace Datatypes\jQueryFileUpload;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Gc\Media\File,
-    Gc\Registry,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Gc\Media\File;
+use Gc\Registry;
+use Zend\Form\Element;
 
 /**
  * Editor for Upload datatype
@@ -55,26 +55,19 @@ class Editor extends AbstractEditor
         $values = $post->get($this->getName(), array());
         $parameters = $this->getConfig();
         $array_values = array();
-        if(!empty($values) and is_array($values))
-        {
-            foreach($values as $idx => $value)
-            {
-                if(empty($value['name']))
-                {
+        if (!empty($values) and is_array($values)) {
+            foreach ($values as $idx => $value) {
+                if (empty($value['name'])) {
                     continue;
                 }
 
                 $file = $file_class->getPath() . '/' . $value['name'];
-                if(file_exists($file))
-                {
+                if (file_exists($file)) {
                     $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
                     $finfo = finfo_open($const); // return mimetype extension
-                    if(!in_array(finfo_file($finfo, $file), $parameters['mime_list']))
-                    {
+                    if (!in_array(finfo_file($finfo, $file), $parameters['mime_list'])) {
                         unlink($file);
-                    }
-                    else
-                    {
+                    } else {
                         $file_info = @getimagesize($file);
                         $array_values[] = array(
                             'value' => $value['name'],
@@ -92,7 +85,7 @@ class Editor extends AbstractEditor
             $return_values = serialize($array_values);
         }
 
-        $this->setValue(empty($return_values) ? NULL : $return_values);
+        $this->setValue(empty($return_values) ? null : $return_values);
     }
 
     /**
@@ -105,38 +98,42 @@ class Editor extends AbstractEditor
         $parameters = $this->getConfig();
         $options = empty($parameters['options']) ? array() : $parameters['options'];
 
-        $this->_initScript();
+        $this->initScript();
         $file_list = array();
         $files = unserialize($this->getValue());
-        if(!empty($files))
-        {
+        if (!empty($files)) {
             $file_class = new File();
             $file_class->load($this->getProperty(), $this->getDatatype()->getDocument());
-            foreach($files as $file_data)
-            {
+            foreach ($files as $file_data) {
                 $file_object = new \StdClass();
                 $file_object->name = $file_data['value'];
                 $file_object->filename = $file_data['value'];
                 $file_object->thumbnail_url = $file_data['value'];
 
                 $router = Registry::get('Application')->getMvcEvent()->getRouter();
-                $file_object->delete_url = $router->assemble(array(
-                    'document_id' => $this->getDatatype()->getDocument()->getId(),
-                    'property_id' => $this->getProperty()->getId(),
-                    'file' => base64_encode($file_data['value'])
-                ), array('name' => 'mediaRemove'));
+                $file_object->delete_url = $router->assemble(
+                    array(
+                        'document_id' => $this->getDatatype()->getDocument()->getId(),
+                        'property_id' => $this->getProperty()->getId(),
+                        'file' => base64_encode($file_data['value'])
+                    ),
+                    array('name' => 'mediaRemove')
+                );
                 $file_object->delete_type = 'DELETE';
                 $file_list[] = $file_object;
             }
         }
 
-        return $this->addPath(__DIR__)->render('upload-editor.phtml', array(
-            'property' => $this->getProperty(),
-            'uploadUrl' => $this->getUploadUrl(),
-            'name' => $this->getName(),
-            'files' => json_encode($file_list),
-            'options' => $options
-        ));
+        return $this->addPath(__DIR__)->render(
+            'upload-editor.phtml',
+            array(
+                'property' => $this->getProperty(),
+                'uploadUrl' => $this->getUploadUrl(),
+                'name' => $this->getName(),
+                'files' => json_encode($file_list),
+                'options' => $options
+            )
+        );
     }
 
     /**
@@ -144,7 +141,7 @@ class Editor extends AbstractEditor
      *
      * @return void
      */
-    protected function _initScript()
+    protected function initScript()
     {
         $headscript = $this->getHelper('HeadScript');
         $headscript

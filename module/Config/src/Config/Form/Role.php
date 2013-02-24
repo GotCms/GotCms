@@ -27,12 +27,12 @@
 
 namespace Config\Form;
 
-use Gc\Form\AbstractForm,
-    Gc\User\Permission,
-    Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory,
-    Zend\Validator\Db,
-    Zend\Validator\Identical;
+use Gc\Form\AbstractForm;
+use Gc\User\Permission;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory as InputFilterFactory;
+use Zend\Validator\Db;
+use Zend\Validator\Identical;
 
 /**
  * Role form
@@ -51,20 +51,22 @@ class Role extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
-            'name' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
+        $input_filter = $input_filter_factory->createInputFilter(
+            array(
+                'name' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    ),
                 ),
-            ),
-            'description' => array(
-                'required' => FALSE,
-            ),
-            'permissions' => array(
-                'required' => FALSE,
-            ),
-        ));
+                'description' => array(
+                    'required' => false,
+                ),
+                'permissions' => array(
+                    'required' => false,
+                ),
+            )
+        );
 
         $this->setInputFilter($input_filter);
 
@@ -86,14 +88,12 @@ class Role extends AbstractForm
         $element = new Element('permissions');
 
         $data = $resources;
-        foreach($resources as $resource => $permissions)
-        {
-            foreach($permissions as $permission_id => $permission)
-            {
-                $data[$resource][$permission_id] = array('name' => $permission, 'value' => FALSE);
-                if(!empty($user_permissions[$resource]) and array_key_exists($permission_id, $user_permissions[$resource]))
-                {
-                    $data[$resource][$permission_id]['value'] = TRUE;
+        foreach ($resources as $resource => $permissions) {
+            foreach ($permissions as $permission_id => $permission) {
+                $data[$resource][$permission_id] = array('name' => $permission, 'value' => false);
+                if (!empty($user_permissions[$resource])
+                    and array_key_exists($permission_id, $user_permissions[$resource])) {
+                    $data[$resource][$permission_id]['value'] = true;
                 }
             }
         }

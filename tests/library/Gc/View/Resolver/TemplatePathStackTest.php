@@ -40,7 +40,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * @var TemplatePathStack
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new TemplatePathStack;
+        $this->object = new TemplatePathStack;
     }
 
     /**
@@ -64,9 +64,9 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testNormalResolve()
     {
-        $this->_object->addPath(__DIR__ . '/_templates');
+        $this->object->addPath(__DIR__ . '/_templates');
 
-        $markup = $this->_object->resolve('one.phtml');
+        $markup = $this->object->resolve('one.phtml');
         $this->assertEquals(__DIR__ . '/_templates/one.phtml', $markup);
     }
 
@@ -75,7 +75,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithoutPaths()
     {
-        $markup = $this->_object->resolve('one.phtml');
+        $markup = $this->object->resolve('one.phtml');
         $this->assertFalse($markup);
     }
 
@@ -84,10 +84,10 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolveWithoutDefaultSuffix()
     {
-        $this->_object->setDefaultSuffix('.bar');
-        $this->_object->addPath(__DIR__ . '/_templates');
+        $this->object->setDefaultSuffix('.bar');
+        $this->object->addPath(__DIR__ . '/_templates');
 
-        $markup = $this->_object->resolve('two.phtml');
+        $markup = $this->object->resolve('two.phtml');
         $this->assertEquals(__DIR__ . '/_templates/two.phtml.bar', $markup);
     }
 
@@ -96,11 +96,11 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolveWithLfiProtection()
     {
-        $this->_object->setLfiProtection(TRUE)
+        $this->object->setLfiProtection(TRUE)
             ->addPath(__DIR__ . '/_templates');
 
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
-        $this->_object->resolve('../one.phtml');
+        $this->object->resolve('../one.phtml');
     }
 
     /**
@@ -115,8 +115,8 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         }
 
         stream_wrapper_register('zend.view', '\Gc\View\Stream');
-        $this->_object->setUseStreamWrapper(TRUE);
-        $markup = $this->_object->resolve('foo.bar');
+        $this->object->setUseStreamWrapper(TRUE);
+        $markup = $this->object->resolve('foo.bar');
         $this->assertEquals('zend.view://foo.bar', $markup);
     }
 
@@ -125,7 +125,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolveWithStreamAndNoStreamWrapperActive()
     {
-        $markup = $this->_object->resolve('foo.bar');
+        $markup = $this->object->resolve('foo.bar');
         $this->assertFalse($markup);
 
     }
@@ -141,8 +141,8 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
             . DIRECTORY_SEPARATOR . 'start'
             . DIRECTORY_SEPARATOR . '..'
             . DIRECTORY_SEPARATOR . 'views';
-        $this->_object->addPath($path);
-        $markup = $this->_object->resolve('foo' . DIRECTORY_SEPARATOR . 'hello.phtml');
+        $this->object->addPath($path);
+        $markup = $this->object->resolve('foo' . DIRECTORY_SEPARATOR . 'hello.phtml');
         $this->assertEquals($path . DIRECTORY_SEPARATOR . 'foo' . DIRECTORY_SEPARATOR . 'hello.phtml', $markup);
     }
 
@@ -154,8 +154,8 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $path  = 'phar://' . __DIR__
             . DIRECTORY_SEPARATOR . '_templates'
             . DIRECTORY_SEPARATOR . 'fake-view.phar';
-        $this->_object->addPath($path);
-        $markup = $this->_object->resolve('hello.phtml');
+        $this->object->addPath($path);
+        $markup = $this->object->resolve('hello.phtml');
         $this->assertFalse($markup);
     }
 }

@@ -47,7 +47,7 @@ class Git extends AbstractAdapter
         exec('git fetch --tags 2>&1', $output);
         $this->addMessage(implode(PHP_EOL, $output));
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -61,7 +61,7 @@ class Git extends AbstractAdapter
         exec('git checkout v' . $this->getLatestVersion() . ' 2>&1', $output);
         $this->addMessage(implode(PHP_EOL, $output));
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -76,6 +76,6 @@ class Git extends AbstractAdapter
         exec('git checkout v' . $version . ' 2>&1', $output);
         $this->addMessage(implode(PHP_EOL, $output));
 
-        return TRUE;
+        return true;
     }
 }

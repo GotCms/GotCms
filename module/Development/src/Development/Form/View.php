@@ -27,10 +27,10 @@
 
 namespace Development\Form;
 
-use Gc\Form\AbstractForm,
-    Zend\Validator\Db,
-    Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory;
+use Gc\Form\AbstractForm;
+use Zend\Validator\Db;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory as InputFilterFactory;
 
 /**
  * View form
@@ -49,39 +49,41 @@ class View extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
-            'name' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                    array(
-                        'name' => 'db\\no_record_exists',
-                        'options' => array(
-                            'table' => 'view',
-                            'field' => 'name',
-                            'adapter' => $this->getAdapter(),
+        $input_filter = $input_filter_factory->createInputFilter(
+            array(
+                'name' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                        array(
+                            'name' => 'db\\no_record_exists',
+                            'options' => array(
+                                'table' => 'view',
+                                'field' => 'name',
+                                'adapter' => $this->getAdapter(),
+                            ),
                         ),
                     ),
                 ),
-            ),
-            'identifier' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                    array('name' => 'regex', 'options' => array(
-                        'pattern' => parent::IDENTIFIER_PATTERN
-                    )),
-                    array(
-                        'name' => 'db\\no_record_exists',
-                        'options' => array(
-                            'table' => 'view',
-                            'field' => 'identifier',
-                            'adapter' => $this->getAdapter(),
+                'identifier' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                        array('name' => 'regex', 'options' => array(
+                            'pattern' => parent::IDENTIFIER_PATTERN
+                        )),
+                        array(
+                            'name' => 'db\\no_record_exists',
+                            'options' => array(
+                                'table' => 'view',
+                                'field' => 'identifier',
+                                'adapter' => $this->getAdapter(),
+                            ),
                         ),
                     ),
                 ),
-            ),
-        ));
+            )
+        );
 
         $this->setInputFilter($input_filter);
 

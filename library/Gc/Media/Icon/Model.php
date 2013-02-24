@@ -43,7 +43,7 @@ class Model extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'icon';
+    protected $name = 'icon';
 
     /**
      * Initiliaze from array
@@ -51,7 +51,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\Media\Icon\Model
      */
-    static function fromArray(array $array)
+    public static function fromArray(array $array)
     {
         $icon_table = new Model();
         $icon_table->setData($array);
@@ -66,19 +66,16 @@ class Model extends AbstractTable
      * @param integer $icon_id
      * @return \Gc\Media\Icon\Model
      */
-    static function fromId($icon_id)
+    public static function fromId($icon_id)
     {
         $icon_table = new Model();
         $row = $icon_table->fetchRow($icon_table->select(array('id' => (int)$icon_id)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $icon_table->setData((array)$row);
             $icon_table->setOrigData();
             return $icon_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -89,37 +86,31 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
             'url' => $this->getUrl(),
         );
 
-        try
-        {
+        try {
             $id = $this->getId();
-            if($this->getId() == NULL)
-            {
+            if ($this->getId() == null) {
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
-            }
-            else
-            {
+            } else {
                 $this->update($array_save, array('id' => (int)$this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
             return $this->getId();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -129,27 +120,23 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
         $id = $this->getId();
-        if(!empty($id))
-        {
-            try
-            {
+        if (!empty($id)) {
+            try {
                 parent::delete(array('id' => $id));
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
             unset($this);
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 }

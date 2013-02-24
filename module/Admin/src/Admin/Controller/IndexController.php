@@ -27,12 +27,12 @@
 
 namespace Admin\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Gc\Document\Collection,
-    Gc\Core\Config,
-    Gc\User\Visitor,
-    Gc\Version,
-    Zend\Json\Json;
+use Gc\Mvc\Controller\Action;
+use Gc\Document\Collection;
+use Gc\Core\Config;
+use Gc\User\Visitor;
+use Gc\Version;
+use Zend\Json\Json;
 
 /**
  * Index controller for admin module
@@ -90,7 +90,7 @@ class IndexController extends Action
         $data['dashboardWelcome'] = !empty($widgets['welcome']);
 
         $data['customeWidgets'] = array();
-        $this->events()->trigger(__CLASS__, 'dashboard', NULL, array('widgets' => &$data['customeWidgets']));
+        $this->events()->trigger(__CLASS__, 'dashboard', null, array('widgets' => &$data['customeWidgets']));
 
         return $data;
     }
@@ -106,22 +106,18 @@ class IndexController extends Action
 
         $config = @unserialize(Config::getValue('dashboard_widgets'));
 
-        if(empty($config))
-        {
+        if (empty($config)) {
             $config = array();
         }
 
-        if(!empty($params['dashboard']))
-        {
-            $config['welcome'] = FALSE;
-        }
-        else
-        {
+        if (!empty($params['dashboard'])) {
+            $config['welcome'] = false;
+        } else {
             $config['sortable'] = $params;
         }
 
         Config::setValue('dashboard_widgets', serialize($config));
 
-        return $this->returnJson(array('success' => TRUE));
+        return $this->returnJson(array('success' => true));
     }
 }

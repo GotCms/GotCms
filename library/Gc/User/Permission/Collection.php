@@ -27,8 +27,8 @@
 
 namespace Gc\User\Permission;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of permissions
@@ -44,14 +44,14 @@ class Collection extends AbstractTable
      *
      * @var array
      */
-    protected $_permissions = array();
+    protected $permissions = array();
 
     /**
      * Table name
      *
      * @var string
      */
-    protected $_name = 'user_acl_permission';
+    protected $name = 'user_acl_permission';
 
     /**
      * Initiliaze permissions
@@ -60,7 +60,7 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->getPermissions(TRUE);
+        $this->getPermissions(true);
     }
 
     /**
@@ -69,33 +69,36 @@ class Collection extends AbstractTable
      * @param boolean $force_reload
      * @return array
      */
-    public function getPermissions($force_reload = FALSE)
+    public function getPermissions($force_reload = false)
     {
-        if(empty($this->_permissions) or $force_reload === TRUE)
-        {
+        if (empty($this->permissions) or $force_reload === true) {
             $select = new Select();
             $select->from('user_acl_permission')
-                ->columns(array(
-                    'id'
-                    , 'permission'
-                ), TRUE)
-                ->join('user_acl_resource', 'user_acl_resource.id = user_acl_permission.user_acl_resource_id', array('resource'));
+                ->columns(
+                    array(
+                        'id'
+                        , 'permission'
+                    ),
+                    true
+                )->join(
+                    'user_acl_resource',
+                    'user_acl_resource.id = user_acl_permission.user_acl_resource_id',
+                    array('resource')
+                );
 
             $rows = $this->fetchAll($select);
             $permissions = array();
-            foreach($rows as $permission)
-            {
-                if(empty($permissions[$permission['resource']]))
-                {
+            foreach ($rows as $permission) {
+                if (empty($permissions[$permission['resource']])) {
                     $permissions[$permission['resource']] = array();
                 }
 
                 $permissions[$permission['resource']][$permission['id']] = $permission['permission'];
             }
 
-            $this->_permissions = $permissions;
+            $this->permissions = $permissions;
         }
 
-        return $this->_permissions;
+        return $this->permissions;
     }
 }

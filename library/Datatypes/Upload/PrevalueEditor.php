@@ -27,8 +27,8 @@
 
 namespace Datatypes\Upload;
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Zend\Form\Element;
 
 /**
  * Prevalue Editor for Upload datatype
@@ -50,7 +50,12 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $mime_list = $post->get('mime_list');
         $is_multiple = $post->get('is_multiple');
 
-        $this->setConfig(array('mime_list' => empty($mime_list) ? array() : $mime_list, 'is_multiple' => empty($is_multiple) ? FALSE : TRUE));
+        $this->setConfig(
+            array(
+                'mime_list' => empty($mime_list) ? array() : $mime_list,
+                'is_multiple' => empty($is_multiple) ? false : true
+            )
+        );
     }
 
     /**
@@ -63,12 +68,14 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $config = $this->getConfig();
 
         $is_multiple = new Element\Checkbox('is_multiple');
-        $is_multiple->setAttributes(array(
-            'label' => 'Is Multiple',
-            'value' => isset($config['is_multiple']) ? $config['is_multiple'] : '',
-            'class' => 'input-text',
-            'id' => 'is_multiple',
-        ));
+        $is_multiple->setAttributes(
+            array(
+                'label' => 'Is Multiple',
+                'value' => isset($config['is_multiple']) ? $config['is_multiple'] : '',
+                'class' => 'input-text',
+                'id' => 'is_multiple',
+            )
+        );
 
         $mime_list = new Element\MultiCheckbox('mime_list');
         $array = array(
@@ -95,12 +102,15 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'audio/x-wav'
         );
         $options = array();
-        foreach($array as $mime)
-        {
+        foreach ($array as $mime) {
             $options[] = array(
                 'value' => $mime,
                 'label' => $mime,
-                'selected' => !in_array($mime, empty($config['mime_list']) ? array() : $config['mime_list']) ? FALSE : TRUE,
+                'selected' =>
+                    !in_array(
+                        $mime,
+                        empty($config['mime_list']) ? array() : $config['mime_list']
+                    ) ? false : true,
             );
         }
         $mime_list->setValueOptions($options);

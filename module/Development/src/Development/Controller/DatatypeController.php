@@ -27,10 +27,10 @@
 
 namespace Development\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Development\Form\Datatype as DatatypeForm,
-    Gc\Datatype,
-    Zend\View\Model\ViewModel;
+use Gc\Mvc\Controller\Action;
+use Development\Form\Datatype as DatatypeForm;
+use Gc\Datatype;
+use Zend\View\Model\ViewModel;
 
 /**
  * Datatype controller
@@ -46,7 +46,7 @@ class DatatypeController extends Action
      *
      * @var array $_aclPage
      */
-    protected $_aclPage = array('resource' => 'Development', 'permission' => 'datatype');
+    protected $aclPage = array('resource' => 'Development', 'permission' => 'datatype');
 
     /**
      * List all datatypes
@@ -70,32 +70,22 @@ class DatatypeController extends Action
         $datatype = new Datatype\Model();
         $datatype_form = new DatatypeForm();
         $datatype_form->setAttribute('action', $this->url()->fromRoute('datatypeCreate'));
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
             $datatype_form->setData($post);
-            if(!$datatype_form->isValid())
-            {
+            if (!$datatype_form->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save datatype');
                 $this->useFlashMessenger();
-            }
-            else
-            {
+            } else {
                 $datatype->addData($datatype_form->getInputFilter()->getValues());
-                try
-                {
-                    if($id = $datatype->save())
-                    {
+                try {
+                    if ($id = $datatype->save()) {
                         $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
                         return $this->redirect()->toRoute('datatypeEdit', array('id' => $id));
-                    }
-                    else
-                    {
+                    } else {
                         throw new \Gc\Core\Exception('Error during insert new datatype');
                     }
-                }
-                catch(\Exception $e)
-                {
+                } catch (\Exception $e) {
                     throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
             }
@@ -112,50 +102,44 @@ class DatatypeController extends Action
     public function editAction()
     {
         $datatype_model = Datatype\Model::fromId($this->_routeMatch->getParam('id'));
-        if(empty($datatype_model))
-        {
+        if (empty($datatype_model)) {
             return $this->redirect()->toRoute('datatypeList');
         }
 
         $datatype = Datatype\Model::loadDatatype($this->_routeMatch->getParam('id'));
 
         $datatype_form = new DatatypeForm();
-        $datatype_form->setAttribute('action', $this->url()->fromRoute('datatypeEdit', array('id' => $this->_routeMatch->getParam('id'))));
+        $datatype_form->setAttribute(
+            'action',
+            $this->url()->fromRoute(
+                'datatypeEdit',
+                array('id' => $this->_routeMatch->getParam('id'))
+            )
+        );
 
         DatatypeForm::addContent($datatype_form, Datatype\Model::loadPrevalueEditor($datatype));
         $datatype_form->loadValues($datatype_model);
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
             $datatype_form->setData($post);
-            if(!$datatype_form->isValid())
-            {
+            if (!$datatype_form->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save datatype');
                 $this->useFlashMessenger();
-            }
-            else
-            {
-                if($datatype_model->getModel() != $datatype_form->getValue('model'))
-                {
+            } else {
+                if ($datatype_model->getModel() != $datatype_form->getValue('model')) {
                     $datatype_model->setPrevalueValue(array());
-                }
-                else
-                {
+                } else {
                     $datatype_model->setPrevalueValue(Datatype\Model::savePrevalueEditor($datatype));
                 }
 
-                try
-                {
+                try {
                     $datatype_model->addData($datatype_form->getInputFilter()->getValues());
-                    if($datatype_model->save())
-                    {
+                    if ($datatype_model->save()) {
                         $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
                         return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
                     }
-                }
-                catch(\Exception $e)
-                {
+                } catch (\Exception $e) {
                     throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
 
@@ -174,16 +158,13 @@ class DatatypeController extends Action
      */
     public function deleteAction()
     {
-        $datatype = Datatype\Model::fromId($this->getRouteMatch()->getParam('id', NULL));
-        if(!empty($datatype))
-        {
-            if($datatype->delete())
-            {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'This datatype has been deleted'));
+        $datatype = Datatype\Model::fromId($this->getRouteMatch()->getParam('id', null));
+        if (!empty($datatype)) {
+            if ($datatype->delete()) {
+                return $this->returnJson(array('success' => true, 'message' => 'This datatype has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Datatype does not exists'));
+        return $this->returnJson(array('success' => false, 'message' => 'Datatype does not exists'));
     }
 }
-

@@ -27,10 +27,10 @@
 
 namespace Gc\View;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select,
-    Zend\Db\Sql\Insert,
-    Zend\Db\TableGateway\TableGateway;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Insert;
+use Zend\Db\TableGateway\TableGateway;
 
 /**
  * Collection of View Model
@@ -46,14 +46,14 @@ class Collection extends AbstractTable
      *
      * @var array
      */
-    protected $_viewsElements = array();
+    protected $elements = array();
 
     /**
      * Table name
      *
      * @var string
      */
-    protected $_name = 'view';
+    protected $name = 'view';
 
     /**
      * Initiliaze collection
@@ -61,10 +61,10 @@ class Collection extends AbstractTable
      * @param integer $document_type_id Optional
      * @return void
      */
-    public function init($document_type_id = NULL)
+    public function init($document_type_id = null)
     {
         $this->setDocumentTypeId($document_type_id);
-        $this->getViews(TRUE);
+        $this->getViews(true);
     }
 
     /**
@@ -73,24 +73,21 @@ class Collection extends AbstractTable
      * @param boolean $force_reload to initiliaze views
      * @return array
      */
-    public function getViews($force_reload = FALSE)
+    public function getViews($force_reload = false)
     {
-        if($force_reload)
-        {
+        if ($force_reload) {
             $select = new Select();
             $select->order(array('name'));
             $select->from('view');
 
-            if($this->getDocumentTypeId() !== NULL)
-            {
+            if ($this->getDocumentTypeId() !== null) {
                 $select->join('document_type_view', 'document_type_view.view_id = view.id', array());
                 $select->where->equalTo('document_type_view.document_type_id', $this->getDocumentTypeId());
             }
 
             $rows = $this->fetchAll($select);
             $views = array();
-            foreach($rows as $row)
-            {
+            foreach ($rows as $row) {
                 $views[] = Model::fromArray((array)$row);
             }
 
@@ -110,8 +107,7 @@ class Collection extends AbstractTable
         $select = array();
         $views = $this->getViews();
 
-        foreach($views as $view)
-        {
+        foreach ($views as $view) {
             $select[$view->getId()] = $view->getName();
         }
 
@@ -125,7 +121,7 @@ class Collection extends AbstractTable
      */
     public function addElement(Model $view)
     {
-        $this->_viewsElements[] = $view;
+        $this->elements[] = $view;
         return $this;
     }
 
@@ -136,18 +132,18 @@ class Collection extends AbstractTable
      */
     public function clearElements()
     {
-        $this->_viewsElements = array();
+        $this->elements = array();
         return $this;
     }
 
     /**
-     * get all elements store in $_viewsElements
+     * Get all elements store in $elements
      *
      * @return array
      */
     public function getElements()
     {
-        return $this->_viewsElements;
+        return $this->elements;
     }
 
     /**
@@ -157,28 +153,26 @@ class Collection extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
-        if(!empty($this->_data['document_type_id']))
-        {
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
+        if (!empty($this->data['document_type_id'])) {
             $this->delete();
 
             $insert = new Insert();
             $insert->into('document_type_view');
 
-            foreach($this->getElements() as $view)
-            {
+            foreach ($this->getElements() as $view) {
                 $insert->values(array('document_type_id' => $this->getDocumentTypeId(), 'view_id' => $view->getId()));
                 $this->execute($insert);
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -188,18 +182,17 @@ class Collection extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
-        if(!empty($this->_data['document_type_id']))
-        {
+        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
+        if (!empty($this->data['document_type_id'])) {
             $table = new TableGateway('document_type_view', $this->getAdapter());
             $table->delete(array('document_type_id' => $this->getDocumentTypeId()));
-            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 }

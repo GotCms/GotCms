@@ -48,10 +48,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
         //Save prevalue in column Datatypes\prevalue_value
         $array_result = array();
         $request = $this->getRequest()->getPost();
-        foreach($request->get('values', array()) as $value)
-        {
-            if(!empty($value))
-            {
+        foreach ($request->get('values', array()) as $value) {
+            if (!empty($value)) {
                 $array_result[] = $value;
             }
         }
@@ -68,15 +66,15 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $parameters = $this->getConfig();
 
-        $content = '<input type="text" name="addValue" id="addValue" value=""> <button class="button-add">Add Element</button>' . PHP_EOL;
+        $content = '<input type="text" name="addValue" id="addValue" value="">
+        <button class="button-add">Add Element</button>' . PHP_EOL;
 
         $content .= '<ul id="checkboxlist-values">';
         $content .= '<li>List of values</li>';
-        if(is_array($parameters))
-        {
-            foreach($parameters as $param => $value)
-            {
-                $content .= '<li><input type="text" name="values[]" value="' . $value . '"> <a class="button-delete">Delete Element</a></li>' . PHP_EOL;
+        if (is_array($parameters)) {
+            foreach ($parameters as $param => $value) {
+                $content .= '<li><input type="text" name="values[]" value="' . $value . '">
+                <a class="button-delete">Delete Element</a></li>' . PHP_EOL;
             }
         }
 
@@ -88,10 +86,11 @@ class PrevalueEditor extends AbstractPrevalueEditor
                     primary: \'ui-icon-circle-plus\'
                 },
                 text: false
-            }).click(function() {
-                if($(\'#addValue\').val() != "") {
+            }).click(function () {
+                if ($(\'#addValue\').val() != "") {
                     $(\'#checkboxlist-values\').children(\'li:last\').after(
-                        \'<li><input type="text" name="values[]" value="\'+$("#addValue").val()+\'"> <a class="button-delete">Delete Element</a></li>\'
+                        \'<li><input type="text" name="values[]" value="\'+$("#addValue").val()+\'">\' +
+                        \'<a class="button-delete">Delete Element</a></li>\'
                     );
                     buttonDelete();
                     $(this).removeClass(\'ui-state-focus\');
@@ -105,7 +104,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
                         primary: \'ui-icon-circle-minus\'
                     },
                     text: false
-                }).click(function() {
+                }).click(function () {
                     $(this).parent().remove();
                     return false;
                 });

@@ -40,7 +40,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractAdapter
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = $this->getMockForAbstractClass('Gc\Core\Updater\Adapter\AbstractAdapter');
+        $this->object = $this->getMockForAbstractClass('Gc\Core\Updater\Adapter\AbstractAdapter');
     }
 
     /**
@@ -57,7 +57,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -65,7 +65,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLatestVersion()
     {
-        $this->assertEquals(\Gc\Version::getLatest(), $this->_object->getLatestVersion());
+        $this->assertEquals(\Gc\Version::getLatest(), $this->object->getLatestVersion());
     }
 
     /**
@@ -73,7 +73,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddMessage()
     {
-        $this->assertInstanceOf('Gc\Core\Updater\Adapter\AbstractAdapter', $this->_object->addMessage('test'));
+        $this->assertInstanceOf('Gc\Core\Updater\Adapter\AbstractAdapter', $this->object->addMessage('test'));
     }
 
     /**
@@ -81,6 +81,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-        $this->assertInternalType('array', $this->_object->getMessages());
+        $this->assertInternalType('array', $this->object->getMessages());
     }
 }

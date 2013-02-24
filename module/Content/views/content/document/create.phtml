@@ -29,10 +29,10 @@
 ?>
 <form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
     <?php $elements = $this->form->getElements(); ?>
-    <?php foreach($elements as $element): ?>
+    <?php foreach ($elements as $element): ?>
         <div>
             <?php $label = $element->getAttribute('label'); ?>
-            <?php if(!empty($label)): ?>
+            <?php if (!empty($label)): ?>
                 <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
             <?php endif; ?>
 

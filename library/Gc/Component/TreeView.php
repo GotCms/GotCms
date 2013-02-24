@@ -55,20 +55,17 @@ class TreeView
      * @param boolean $init
      * @return string
      */
-    static function render(array $treeview_data = NULL, $init = TRUE)
+    public static function render(array $treeview_data = null, $init = true)
     {
         $html = '';
-        if($init)
-        {
+        if ($init) {
             $html .= '<div id="browser">';
         }
 
         $html .= '<ul>';
 
-        foreach($treeview_data as $iterator)
-        {
-            if(!$iterator instanceof IterableInterface)
-            {
+        foreach ($treeview_data as $iterator) {
+            if (!$iterator instanceof IterableInterface) {
                 continue;
             }
 
@@ -76,14 +73,11 @@ class TreeView
             $has_children = !empty($children);
             $html .= '<li id="' . $iterator->getIterableId() . '"';
 
-            if($has_children)
-            {
+            if ($has_children) {
                 $rel = ' class="folder"';
                 $ins = '<ins class="jstree-icon">&nbsp;</ins>';
-                $render_children = self::render($children, FALSE);
-            }
-            else
-            {
+                $render_children = self::render($children, false);
+            } else {
                 $render_children = '';
                 $rel = ' class="default"';
                 $ins = '';
@@ -92,21 +86,23 @@ class TreeView
 
             $html .= $rel . '>' . $ins;
             $id = $iterator->getId();
-            $is_published = NULL;
-            if(method_exists($iterator, 'isPublished'))
-            {
+            $is_published = null;
+            if (method_exists($iterator, 'isPublished')) {
                 $is_published = $iterator->isPublished();
             }
 
-            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '') . 'href="' . $iterator->getEditUrl() . '"' . ($is_published === FALSE ? ' class="not-published"' : '') . '>';
+            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '')
+                . 'href="' . $iterator->getEditUrl() . '"'
+                . ($is_published === false ? ' class="not-published"' : '') . '>';
 
-            if($iterator->getIcon() == 'folder')
-            {
-                $html .= '<ins style="background:url(/media/icons/folder.gif) no-repeat scroll 0 0;" class="jstree-icon">&nbsp;</ins>';
-            }
-            else
-            {
-                $html .= '<ins style="background:url(' . $iterator->getIcon() . ') no-repeat scroll 0 0;" class="jstree-icon">&nbsp;</ins>';
+            if ($iterator->getIcon() == 'folder') {
+                $html .= '<ins
+                    style="background:url(/media/icons/folder.gif) no-repeat scroll 0 0;"
+                    class="jstree-icon">&nbsp;</ins>';
+            } else {
+                $html .= '<ins
+                    style="background:url(' . $iterator->getIcon() . ') no-repeat scroll 0 0;"
+                    class="jstree-icon">&nbsp;</ins>';
             }
 
             $html .= $iterator->getName() . '</a>';
@@ -116,8 +112,7 @@ class TreeView
 
         $html .= '</ul>';
 
-        if($init)
-        {
+        if ($init) {
             $html .= '</div>';
         }
 

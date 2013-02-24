@@ -27,16 +27,16 @@
 
 namespace Gc\User;
 
-use Gc\Db\AbstractTable,
-    Gc\Core\Config,
-    Gc\Mail,
-    Gc\Registry,
-    Zend\Authentication\Adapter,
-    Zend\Authentication\Storage,
-    Zend\Authentication\AuthenticationService,
-    Zend\Db\Sql\Predicate\Expression,
-    Zend\Db\Sql\Select,
-    Zend\Validator\EmailAddress;
+use Gc\Db\AbstractTable;
+use Gc\Core\Config;
+use Gc\Mail;
+use Gc\Registry;
+use Zend\Authentication\Adapter;
+use Zend\Authentication\Storage;
+use Zend\Authentication\AuthenticationService;
+use Zend\Db\Sql\Predicate\Expression;
+use Zend\Db\Sql\Select;
+use Zend\Validator\EmailAddress;
 
 /**
  * Model of user
@@ -59,7 +59,7 @@ class Model extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'user';
+    protected $name = 'user';
 
     /**
      * Authenticate user
@@ -71,7 +71,7 @@ class Model extends AbstractTable
     public function authenticate($login, $password)
     {
         $auth_adapter = new Adapter\DbTable($this->getAdapter());
-        $auth_adapter->setTableName($this->_name);
+        $auth_adapter->setTableName($this->name);
         $auth_adapter->setIdentityColumn('login');
         $auth_adapter->setCredentialColumn('password');
 
@@ -81,16 +81,15 @@ class Model extends AbstractTable
         $auth = new AuthenticationService(new Storage\Session(self::BACKEND_AUTH_NAMESPACE));
         $result = $auth->authenticate($auth_adapter);
 
-        if($result->isValid())
-        {
+        if ($result->isValid()) {
             $data = $auth_adapter->getResultRowObject(null, 'password');
             $this->setData((array)$data);
             $auth->getStorage()->write($this);
 
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -103,27 +102,25 @@ class Model extends AbstractTable
     {
         $user_email = trim($user_email);
         $validator = new EmailAddress();
-        if($validator->isValid($user_email))
-        {
-            $select = $this->select(function(Select $select) use ($user_email)
-            {
-                $select->where->equalTo('email', $user_email);
+        if ($validator->isValid($user_email)) {
+            $select = $this->select(
+                function (Select $select) use ($user_email) {
+                    $select->where->equalTo('email', $user_email);
 
-                if($this->getId() != -1)
-                {
-                    $select->where->notEqualTo('id', $this->getId());
+                    if ($this->getId() != -1) {
+                        $select->where->notEqualTo('id', $this->getId());
+                    }
                 }
-            });
+            );
 
             $rows = $this->fetchAll($select);
-            if(count($rows) == 0)
-            {
+            if (count($rows) == 0) {
                 $this->setData('email', $user_email);
-                return TRUE;
+                return true;
             }
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -133,7 +130,7 @@ class Model extends AbstractTable
      * @param boolean $encrypt
      * @return void
      */
-    public function setPassword($user_password, $encrypt = TRUE)
+    public function setPassword($user_password, $encrypt = true)
     {
         $this->setData('password', ($encrypt ? sha1(trim($user_password)) : trim($user_password)));
     }
@@ -146,7 +143,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
         $array_save = array(
             'firstname' => $this->getFirstname(),
             'lastname' => $this->getLastname(),
@@ -159,37 +156,30 @@ class Model extends AbstractTable
         );
 
         $password = $this->getPassword();
-        if(!empty($password))
-        {
+        if (!empty($password)) {
             $array_save['password'] = $password;
         }
 
-        try
-        {
+        try {
             $id = $this->getId();
-            if(empty($id))
-            {
+            if (empty($id)) {
                 $array_save['created_at'] = new Expression('NOW()');
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
-            }
-            else
-            {
+            } else {
                 $this->update($array_save, array('id' => $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
             return $this->getId();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -199,28 +189,24 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
         $id = $this->getId();
-        if(!empty($id))
-        {
-            try
-            {
+        if (!empty($id)) {
+            try {
                 parent::delete(array('id' => $id));
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
             unset($this);
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -229,7 +215,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\User\Model
      */
-    static function fromArray(array $array)
+    public static function fromArray(array $array)
     {
         $user_table = new Model();
         $user_table->setData($array);
@@ -245,20 +231,17 @@ class Model extends AbstractTable
      * @param integer $user_id
      * @return \Gc\User\Model
      */
-    static function fromId($user_id)
+    public static function fromId($user_id)
     {
         $user_table = new Model();
         $row = $user_table->fetchRow($user_table->select(array('id' => (int)$user_id)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $user_table->setData((array)$row);
             $user_table->unsetData('password');
             $user_table->setOrigData();
             return $user_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -268,11 +251,10 @@ class Model extends AbstractTable
      * @param boolean $force_reload
      * @return \Gc\User\Role\Model
      */
-    public function getRole($force_reload = FALSE)
+    public function getRole($force_reload = false)
     {
         $role = $this->getData('role');
-        if(empty($role) or !empty($force_reload))
-        {
+        if (empty($role) or !empty($force_reload)) {
             $role = Role\Model::fromId($this->getUserAclRoleId());
             $this->setData('role', $role);
         }
@@ -289,27 +271,33 @@ class Model extends AbstractTable
     public function sendForgotPasswordEmail($email)
     {
         $row = $this->fetchRow($this->select(array('email' => $email)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $user = self::fromArray((array)$row);
             $password_key = sha1(uniqid());
             $user->setRetrievePasswordKey($password_key);
             $user->setRetrieveUpdatedAt(new Expression('NOW()'));
             $user->save();
 
-            $message = Registry::get('Translator')->translate('To reset your password follow this link but be careful you only have one hour before the link expires:');
+            $message = Registry::get('Translator')
+                ->translate('To reset your password follow this link but be careful you only have one hour before the link expires:');
             $message .= '<br>';
-            $message .= Registry::get('Application')->getMvcEvent()->getRouter()->assemble(array(
-                'id' => $user->getId(),
-                'key' => $password_key,
-            ), array('force_canonical' => TRUE, 'name' => 'userForgotPasswordKey'));
+            $message .= Registry::get('Application')->getMvcEvent()->getRouter()->assemble(
+                array(
+                    'id' => $user->getId(),
+                    'key' => $password_key,
+                ),
+                array(
+                    'force_canonical' => true,
+                    'name' => 'userForgotPasswordKey'
+                )
+            );
 
             $mail = new Mail('utf-8', $message, Config::getValue('mail_from'), $user->getEmail());
             $mail->send();
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -317,8 +305,8 @@ class Model extends AbstractTable
      *
      * @return string
      */
-     public function getName()
-     {
-         return $this->getFirstname() . ' ' . $this->getLastname();
-     }
+    public function getName()
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
+    }
 }

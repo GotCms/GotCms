@@ -51,26 +51,27 @@ class ModuleUrl extends AbstractHelper
      * @throws Exception\RuntimeException       If no RouteMatch was provided
      * @throws Exception\RuntimeException       If RouteMatch didn't contain a matched route name
      */
-    public function __invoke($action_name = NULL, $controller_name = NULL, $query_params = array(), $options = array(), $reuse_matched_params = TRUE)
-    {
+    public function __invoke(
+        $action_name = null,
+        $controller_name = null,
+        $query_params = array(),
+        $options = array(),
+        $reuse_matched_params = true
+    ) {
         $params = array();
-        if(!empty($action_name))
-        {
+        if (!empty($action_name)) {
             $params['ma'] = $action_name;
         }
 
-        if(!empty($controller_name))
-        {
+        if (!empty($controller_name)) {
             $params['mc'] = $controller_name;
         }
 
         $url = $this->getView()->url('moduleEdit', $params, $options, $reuse_matched_params);
 
-        if(!empty($query_params))
-        {
+        if (!empty($query_params)) {
             $url_params = array();
-            foreach($query_params as $key => $value)
-            {
+            foreach ($query_params as $key => $value) {
                 $url_params[] = $key . '=' . rawurlencode($value);
             }
 

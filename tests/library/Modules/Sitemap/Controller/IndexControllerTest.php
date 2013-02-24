@@ -42,7 +42,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * @var IndexController
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var Bootstrap
@@ -57,7 +57,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->_boostrap = new Bootstrap();
         $this->_boostrap->install();
-        $this->_object = new IndexController(Registry::get('Application')->getRequest(), Registry::get('Application')->getResponse());
+        $this->object = new IndexController(Registry::get('Application')->getRequest(), Registry::get('Application')->getResponse());
     }
 
     /**
@@ -67,7 +67,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->_boostrap->uninstall();
-        unset($this->_object);
+        unset($this->object);
         unset($this->_boostrap);
     }
 
@@ -77,7 +77,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testIndexAction()
     {
-        $this->assertNull($this->_object->indexAction());
+        $this->assertNull($this->object->indexAction());
     }
 
     /**
@@ -87,6 +87,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     public function testGenerateAction()
     {
         $this->setExpectedException('Zend\Mvc\Exception\DomainException');
-        $this->assertInternalType('array', $this->_object->generateAction());
+        $this->assertInternalType('array', $this->object->generateAction());
     }
 }

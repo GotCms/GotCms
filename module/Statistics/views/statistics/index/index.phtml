@@ -29,17 +29,17 @@
 
 <div class="tabs">
     <ul>
-        <?php foreach($this->groups as $type => $data): ?>
+        <?php foreach ($this->groups as $type => $data): ?>
             <li><a href="#<?php echo $this->escapeHtml($type); ?>"><?php echo $this->escapeHtml($this->translate($data['label'])); ?></a></li>
         <?php endforeach; ?>
     </ul>
 
-    <?php foreach($this->groups as $type => $data): ?>
+    <?php foreach ($this->groups as $type => $data): ?>
         <?php $values = $data['values']; ?>
         <?php $labels = $data['labels']; ?>
         <div id="<?php echo $this->escapeHtml($type); ?>">
             <div class="floatL">
-                <?php if(!empty($values['pagesviews'])): ?>
+                <?php if (!empty($values['pagesviews'])): ?>
                     <h2><?php echo $this->escapeHtml($this->translate($labels['pagesviews'])); ?></h2>
                     <?php $this->graph->Values($values['pagesviews']); ?>
                     <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="floatL">
-                <?php if(!empty($values['visitors'])): ?>
+                <?php if (!empty($values['visitors'])): ?>
                     <h2><?php echo $this->escapeHtml($this->translate($labels['visitors'])); ?></h2>
                     <?php $this->graph->Values($values['visitors']); ?>
                     <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
@@ -56,12 +56,12 @@
                 <?php endif; ?>
             </div>
 
-            <?php foreach(array('urlsviews', 'referers') as $data_name): ?>
+            <?php foreach (array('urlsviews', 'referers') as $data_name): ?>
                 <div class="cb stats-list">
-                    <?php if(!empty($values[$data_name])): ?>
+                    <?php if (!empty($values[$data_name])): ?>
                         <h2><?php echo $this->escapeHtml($this->translate($labels[$data_name])); ?></h2>
                         <ul>
-                            <?php foreach($values[$data_name] as $value): ?>
+                            <?php foreach ($values[$data_name] as $value): ?>
                                 <li>
                                     <span class="floatL">
                                         <a href="<?php echo $this->escapeHtml($value['url']); ?>" target="_blank">

@@ -27,10 +27,10 @@
 
 namespace Config\Form;
 
-use Gc\Form\AbstractForm,
-    Zend\Validator\Db,
-    Zend\Form\Element,
-    Zend\InputFilter\InputFilter;
+use Gc\Form\AbstractForm;
+use Zend\Validator\Db;
+use Zend\Form\Element;
+use Zend\InputFilter\InputFilter;
 
 /**
  * User forgot password form
@@ -59,14 +59,17 @@ class UserForgotPassword extends AbstractForm
     public function initEmail()
     {
         $filter = $this->getInputFilter();
-        $filter->add(array(
-            'email' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
+        $filter->add(
+            array(
+                'email' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    ),
                 ),
             ),
-        ), 'email');
+            'email'
+        );
 
         $this->add(new Element\Text('email'));
     }
@@ -78,19 +81,25 @@ class UserForgotPassword extends AbstractForm
     public function initResetForm()
     {
         $filter = $this->getInputFilter();
-        $filter->add(array(
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $filter->add(
+            array(
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'password');
+            'password'
+        );
 
-        $filter->add(array(
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $filter->add(
+            array(
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'password_confirm');
+            'password_confirm'
+        );
 
         $this->add(new Element\Text('password'));
         $this->add(new Element\Text('password_confirm'));

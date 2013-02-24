@@ -37,12 +37,12 @@
         <fieldset>
             <table>
                 <tbody>
-                    <?php foreach($this->phpData as $data): ?>
+                    <?php foreach ($this->phpData as $data): ?>
                         <tr>
                             <td class="item">
                                 <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
                             </td>
-                            <?php if($data['value'] === TRUE): ?>
+                            <?php if ($data['value'] === true): ?>
                                 <td class="success">
                                     <span>
                                         <?php echo $this->escapeHtml($this->translate('Yes')); ?>
@@ -58,7 +58,7 @@
                         </tr>
                     <?php endforeach; ?>
 
-                    <?php if(!empty($this->gitProject)): ?>
+                    <?php if (!empty($this->gitProject)): ?>
                         <tr>
                             <td class="item">
                                 <?php echo $this->escapeHtml($this->translate('Git project has been found, make sure you clone with apache user.')); ?>
@@ -71,12 +71,12 @@
                         </tr>
                     <?php endif; ?>
 
-                    <?php foreach($this->serverData as $data): ?>
+                    <?php foreach ($this->serverData as $data): ?>
                         <tr>
                             <td class="item">
                                 <?php echo $this->escapeHtml(sprintf($this->translate('%s is writable'), $data['label'])); ?>
                             </td>
-                            <?php if($data['value'] === TRUE): ?>
+                            <?php if ($data['value'] === true): ?>
                                 <td class="success">
                                     <span>
                                         <?php echo $this->escapeHtml($this->translate('Yes')); ?>
@@ -119,7 +119,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($this->phpDirective as $data): ?>
+                    <?php foreach ($this->phpDirective as $data): ?>
                         <tr>
                             <td class="item">
                                 <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
@@ -127,12 +127,12 @@
 
                             <td class="toggle">
                                 <span>
-                                    <?php echo $this->escapeHtml($this->translate($data['needed'] === TRUE ? 'On' : 'Off')); ?>
+                                    <?php echo $this->escapeHtml($this->translate($data['needed'] === true ? 'On' : 'Off')); ?>
                                 </span>
                             </td>
                             <td>
                                 <span class="green">
-                                    <?php echo $this->escapeHtml($this->translate($data['value'] === TRUE ? 'On' : 'Off')); ?>
+                                    <?php echo $this->escapeHtml($this->translate($data['value'] === true ? 'On' : 'Off')); ?>
                                 </span>
                             </td>
                         </tr>

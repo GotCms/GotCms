@@ -27,11 +27,11 @@
 
 namespace Module\Form;
 
-use Gc\Form\AbstractForm,
-    Gc\Module\Collection as ModuleCollection,
-    Gc\Media\Info,
-    Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory;
+use Gc\Form\AbstractForm;
+use Gc\Module\Collection as ModuleCollection;
+use Gc\Media\Info;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory as InputFilterFactory;
 
 /**
  * Module form
@@ -55,24 +55,20 @@ class Module extends AbstractForm
 
         $modules_infos = array();
         $options = array('' => 'Select an option');
-        foreach($list_dir as $dir)
-        {
+        foreach ($list_dir as $dir) {
             $dir = str_replace($path, '', $dir);
             $options[$dir] = $dir;
 
             $config_file = $path . $dir . '/module.info';
-            if($file_info->fromFile($config_file) === TRUE)
-            {
+            if ($file_info->fromFile($config_file) === true) {
                 $modules_infos[$dir] = $file_info->render();
             }
         }
 
         $collection = new ModuleCollection();
         $modules = $collection->getModules();
-        foreach($modules as $module)
-        {
-            if(in_array($module->getName(), $options))
-            {
+        foreach ($modules as $module) {
+            if (in_array($module->getName(), $options)) {
                 unset($options[$module->getName()]);
                 unset($modules_infos[$module->getName()]);
             }
@@ -86,15 +82,17 @@ class Module extends AbstractForm
         $this->add($module);
 
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
-            'module' => array(
-                'name' => 'module',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
+        $input_filter = $input_filter_factory->createInputFilter(
+            array(
+                'module' => array(
+                    'name' => 'module',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    )
                 )
             )
-        ));
+        );
 
         $this->setInputFilter($input_filter);
     }

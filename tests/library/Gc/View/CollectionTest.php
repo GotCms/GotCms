@@ -41,7 +41,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Collection
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -49,7 +49,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Collection;
+        $this->object = new Collection;
 
         $model = Model::fromArray(array(
             'name' => 'name-collection-test',
@@ -69,7 +69,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $model = Model::fromIdentifier('identifier-collection-test');
         $model->delete();
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -77,8 +77,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->_object->init(1);
-        $this->assertEquals(1, $this->_object->getDocumentTypeId());
+        $this->object->init(1);
+        $this->assertEquals(1, $this->object->getDocumentTypeId());
     }
 
     /**
@@ -86,8 +86,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetViewsWithDocumentType()
     {
-        $this->_object->init(1000);
-        $views = $this->_object->getViews();
+        $this->object->init(1000);
+        $views = $this->object->getViews();
         $this->assertEquals(0, count($views));
     }
 
@@ -96,8 +96,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetViews()
     {
-        $this->_object->init(NULL);
-        $views = $this->_object->getViews();
+        $this->object->init(NULL);
+        $views = $this->object->getViews();
         $this->assertTrue(count($views) > 0);
     }
 
@@ -106,8 +106,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSelect()
     {
-        $this->_object->init(NULL);
-        $views = $this->_object->getSelect();
+        $this->object->init(NULL);
+        $views = $this->object->getSelect();
         $this->assertTrue(count($views) > 0);
     }
 
@@ -117,8 +117,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testAddElement()
     {
         $model = Model::fromIdentifier('identifier-collection-test');
-        $this->_object->addElement($model);
-        $this->assertEquals(1, count($this->_object->getElements()));
+        $this->object->addElement($model);
+        $this->assertEquals(1, count($this->object->getElements()));
     }
 
     /**
@@ -127,9 +127,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testClearElements()
     {
         $model = Model::fromIdentifier('identifier-collection-test');
-        $this->_object->addElement($model);
-        $this->_object->clearElements();
-        $this->assertEquals(0, count($this->_object->getElements()));
+        $this->object->addElement($model);
+        $this->object->clearElements();
+        $this->assertEquals(0, count($this->object->getElements()));
     }
 
     /**
@@ -138,8 +138,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetElements()
     {
         $model = Model::fromIdentifier('identifier-collection-test');
-        $this->_object->addElement($model);
-        $this->assertEquals(1, count($this->_object->getElements()));
+        $this->object->addElement($model);
+        $this->assertEquals(1, count($this->object->getElements()));
     }
 
     /**
@@ -151,16 +151,16 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $document_type = DocumentTypeModel::fromArray(array(
             'name' => 'Document type name',
             'description' => 'Document type description',
-            'default_view_id' => $model->getId(),
+            'defaultview_id' => $model->getId(),
             'icon_id' => 1,
             'user_id' => 1,
         ));
 
         $document_type->save();
-        $this->_object->init($document_type->getId());
-        $this->_object->addElement($model);
+        $this->object->init($document_type->getId());
+        $this->object->addElement($model);
 
-        $this->assertTrue($this->_object->save());
+        $this->assertTrue($this->object->save());
         $document_type->delete();
     }
 
@@ -169,8 +169,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveFailed()
     {
-        $this->_object->init(0);
-        $this->assertFalse($this->_object->save());
+        $this->object->init(0);
+        $this->assertFalse($this->object->save());
     }
 
     /**
@@ -182,17 +182,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $document_type = DocumentTypeModel::fromArray(array(
             'name' => 'Document type name',
             'description' => 'Document type description',
-            'default_view_id' => $model->getId(),
+            'defaultview_id' => $model->getId(),
             'icon_id' => 1,
             'user_id' => 1,
         ));
 
         $document_type->save();
-        $this->_object->init($document_type->getId());
-        $this->_object->addElement($model);
-        $this->_object->save();
+        $this->object->init($document_type->getId());
+        $this->object->addElement($model);
+        $this->object->save();
 
-        $this->assertTrue($this->_object->delete());
+        $this->assertTrue($this->object->delete());
         $document_type->delete();
     }
 
@@ -201,7 +201,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteFailed()
     {
-        $this->_object->init(0);
-        $this->assertFalse($this->_object->delete());
+        $this->object->init(0);
+        $this->assertFalse($this->object->delete());
     }
 }

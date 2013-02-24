@@ -46,15 +46,15 @@ class DbTableGateway extends ZendDbTableGateway
      */
     public function read($id)
     {
-        $rows = $this->tableGateway->select(array(
-            $this->options->getIdColumn()   => $id,
-            $this->options->getNameColumn() => $this->sessionName,
-        ));
+        $rows = $this->tableGateway->select(
+            array(
+                $this->options->getIdColumn()   => $id,
+                $this->options->getNameColumn() => $this->sessionName,
+            )
+        );
 
-        if($row = $rows->current())
-        {
-            if($row->{$this->options->getModifiedColumn()} + $row->{$this->options->getLifetimeColumn()} > time())
-            {
+        if ($row = $rows->current()) {
+            if ($row->{$this->options->getModifiedColumn()} + $row->{$this->options->getLifetimeColumn()} > time()) {
                 return base64_decode($row->{$this->options->getDataColumn()});
             }
 
@@ -78,17 +78,21 @@ class DbTableGateway extends ZendDbTableGateway
             $this->options->getDataColumn()     => base64_encode((string) $data),
         );
 
-        $rows = $this->tableGateway->select(array(
-            $this->options->getIdColumn()   => $id,
-            $this->options->getNameColumn() => $this->sessionName,
-        ));
-
-        if($row = $rows->current())
-        {
-            return (bool) $this->tableGateway->update($data, array(
+        $rows = $this->tableGateway->select(
+            array(
                 $this->options->getIdColumn()   => $id,
                 $this->options->getNameColumn() => $this->sessionName,
-            ));
+            )
+        );
+
+        if ($row = $rows->current()) {
+            return (bool) $this->tableGateway->update(
+                $data,
+                array(
+                    $this->options->getIdColumn()   => $id,
+                    $this->options->getNameColumn() => $this->sessionName,
+                )
+            );
         }
 
         $data[$this->options->getLifetimeColumn()] = (int)$this->lifetime;

@@ -27,12 +27,12 @@
 
 namespace Content\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Gc\Document\Collection as DocumentCollection,
-    Content\Form,
-    Gc\Component,
-    Gc\Core\Translator,
-    Zend\Json\Json;
+use Gc\Mvc\Controller\Action;
+use Gc\Document\Collection as DocumentCollection;
+use Content\Form;
+use Gc\Component;
+use Gc\Core\Translator;
+use Zend\Json\Json;
 
 /**
  * Translation controller
@@ -48,7 +48,7 @@ class TranslationController extends Action
      *
      * @var array $_aclPage
      */
-    protected $_aclPage = array('resource' => 'Content', 'permission' => 'translation');
+    protected $aclPage = array('resource' => 'Content', 'permission' => 'translation');
 
     /**
      * Initialize Media Controller
@@ -73,8 +73,7 @@ class TranslationController extends Action
         );
 
         $array_routes = array();
-        foreach($routes as $key => $route)
-        {
+        foreach ($routes as $key => $route) {
             $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
         }
 
@@ -91,28 +90,21 @@ class TranslationController extends Action
         $translation_form = new Form\Translation();
         $translation_form->setAttribute('action', $this->url()->fromRoute('translationCreate'));
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();
             $translation_form->setData($post->toArray());
-            if(!$translation_form->isValid())
-            {
+            if (!$translation_form->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Invalid data sent !');
                 $this->useFlashMessenger();
-            }
-            else
-            {
+            } else {
                 $source = $post->get('source');
                 $data = array();
-                foreach($post->get('destination') as $destination_id => $destination)
-                {
+                foreach ($post->get('destination') as $destination_id => $destination) {
                     $data[$destination_id] = array('value' => $destination);
                 }
 
-                foreach($post->get('locale') as $locale_id => $locale)
-                {
-                    if(empty($data[$locale_id]))
-                    {
+                foreach ($post->get('locale') as $locale_id => $locale) {
+                    if (empty($data[$locale_id])) {
                         continue;
                     }
 
@@ -137,24 +129,20 @@ class TranslationController extends Action
     {
         $translation_form = new Form\Translation();
         $translation_form->setAttribute('action', $this->url()->fromRoute('translationList'));
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();
-            if(empty($post['source']) or empty($post['destination']))
-            {
+            if (empty($post['source']) or empty($post['destination'])) {
                 return $this->redirect()->toRoute('translationList');
             }
 
-            foreach($post['source'] as $source_id => $source)
-            {
+            foreach ($post['source'] as $source_id => $source) {
                 Translator::getInstance()->update(array('source' => $source), sprintf('id = %d', $source_id));
-                if(!empty($post['destination'][$source_id]))
-                {
+                if (!empty($post['destination'][$source_id])) {
                     Translator::setValue($source_id, $post['destination'][$source_id]);
                 }
             }
 
-            $this->_generateCache();
+            $this->generateCache();
 
             $this->flashMessenger()->addSuccessMessage('Translation saved !');
             return $this->redirect()->toRoute('translationList');
@@ -168,14 +156,12 @@ class TranslationController extends Action
      *
      * @return void
      */
-    protected function _generateCache()
+    protected function generateCache()
     {
         $values = Translator::getValues();
         $data = array();
-        foreach($values as $value)
-        {
-            if(empty($data[$value['locale']]))
-            {
+        foreach ($values as $value) {
+            if (empty($data[$value['locale']])) {
                 $data[$value['locale']] = array();
             }
 
@@ -185,14 +171,12 @@ class TranslationController extends Action
         $translate_path = GC_APPLICATION_PATH . '/data/translation/%s.php';
         $template_content = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/language.tpl.php');
 
-        foreach(glob(sprintf($translate_path, '*')) as $file)
-        {
+        foreach (glob(sprintf($translate_path, '*')) as $file) {
             unlink($file);
         }
 
-        foreach($data as $locale => $values)
-        {
-            file_put_contents(sprintf($translate_path, $locale), sprintf($template_content, var_export($values, TRUE)));
+        foreach ($data as $locale => $values) {
+            file_put_contents(sprintf($translate_path, $locale), sprintf($template_content, var_export($values, true)));
         }
     }
 }

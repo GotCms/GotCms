@@ -60,15 +60,15 @@
                 <label for="infos-icon_id" class="optional"><?php echo $this->escapeHtml($this->translate('Icon')); ?></label>
                 <select name="infos[icon_id]" id="infos-icon_id">
                     <?php $icons = $infos_form->get('icon_id')->getValueOptions(); ?>
-                    <?php foreach($icons as $option): ?>
-                        <option value="<?php echo $option->getId(); ?>"<?php if($infos_form->get('icon_id')->getValue() == $option->getId()): ?> selected="selected"<?php endif; ?> style="background:url(<?php echo $this->escapeHtml($option->getUrl()); ?>) no-repeat; padding-left:20px;"><?php echo $this->escapeHtml($option->getName()); ?> </option>
+                    <?php foreach ($icons as $option): ?>
+                        <option value="<?php echo $option->getId(); ?>"<?php if ($infos_form->get('icon_id')->getValue() == $option->getId()): ?> selected="selected"<?php endif; ?> style="background:url(<?php echo $this->escapeHtml($option->getUrl()); ?>) no-repeat; padding-left:20px;"><?php echo $this->escapeHtml($option->getName()); ?> </option>
                     <?php endforeach; ?>
                 </select>
 
                 <?php echo $this->formElementErrors($this->form->get('infos')->get('icon_id')); ?>
             </div>
             <?php $dependency = $infos_form->get('infos[dependency]'); ?>
-            <?php if(!empty($dependency)): ?>
+            <?php if (!empty($dependency)): ?>
                 <div>
                     <label><?php echo $this->escapeHtml($this->translate('Available children')); ?></label>
 
@@ -86,8 +86,8 @@
                     <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
                     <?php $default_view = $views_form->get('default_view'); ?>
                     <?php $default_view_option = $default_view->getValueOptions(); ?>
-                    <?php foreach($default_view_option as $option_id => $option_value): ?>
-                        <option value="<?php echo $option_id; ?>"<?php if($default_view->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
+                    <?php foreach ($default_view_option as $option_id => $option_value): ?>
+                        <option value="<?php echo $option_id; ?>"<?php if ($default_view->getValue() == $option_id): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
                     <?php endforeach; ?>
                 </select>
 
@@ -99,8 +99,8 @@
                     <?php $available_views = $views_form->get('available_views'); ?>
                     <?php $default_view_option = $available_views->getValueOptions(); ?>
                     <?php $values = $available_views->getValue(); ?>
-                    <?php foreach($default_view_option as $option_id => $option_value): ?>
-                        <option value="<?php echo $option_id; ?>"<?php if(!empty($values[$option_id])): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
+                    <?php foreach ($default_view_option as $option_id => $option_value): ?>
+                        <option value="<?php echo $option_id; ?>"<?php if (!empty($values[$option_id])): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($option_value); ?> </option>
                     <?php endforeach; ?>
                 </select>
 
@@ -123,7 +123,7 @@
                     <label for="properties-tab" class="required"><?php echo $this->escapeHtml($this->translate('Tab')); ?></label>
                     <select name="properties[tab]" id="properties-tab" class="select-tab">
                         <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
-                        <?php foreach($tabs_form as $tab_form): ?>
+                        <?php foreach ($tabs_form as $tab_form): ?>
                             <option value="<?php echo $tab_form->get('tab_id')->getValue(); ?>"><?php echo $tab_form->get('name')->getValue(); ?></option>
                         <?php endforeach; ?>
                     </select>
@@ -133,7 +133,7 @@
                     <label for="properties-datatype" class="required"><?php echo $this->escapeHtml($this->translate('Datatype')); ?></label>
                     <select name="properties[datatype]" id="properties-datatype" class="select-datatype">
                         <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
-                        <?php foreach($datatypes_options as $datatype_id => $datatype_name): ?>
+                        <?php foreach ($datatypes_options as $datatype_id => $datatype_name): ?>
                             <option value="<?php echo $datatype_id; ?>"><?php echo $this->escapeHtml($datatype_name); ?> </option>
                         <?php endforeach; ?>
                     </select>
@@ -154,7 +154,7 @@
                 <?php echo $this->escapeHtml($this->translate('Properties')); ?>
                 <div id="properties-tabs-content" class="tabs">
                     <ul>
-                        <?php foreach($tabs_form as $tab_form): ?>
+                        <?php foreach ($tabs_form as $tab_form): ?>
                             <li>
                                 <?php $name = $tab_form->get('name')->getValue(); ?>
                                 <a href="#tabs-properties-<?php echo $tab_form->get('tab_id')->getValue(); ?>">
@@ -164,12 +164,12 @@
                         <?php endforeach; ?>
                     </ul>
 
-                    <?php foreach($tabs_form as $tab_form): ?>
+                    <?php foreach ($tabs_form as $tab_form): ?>
                         <?php $tab_id = $tab_form->get('tab_id')->getValue(); ?>
                         <div id="tabs-properties-<?php echo $tab_id; ?>">
                             <div class="sortable connected-sortable ui-helper-reset">
-                                <?php foreach($properties_forms as $property): ?>
-                                    <?php if($property->get('tab')->getValue() != $tab_id): ?>
+                                <?php foreach ($properties_forms as $property): ?>
+                                    <?php if ($property->get('tab')->getValue() != $tab_id): ?>
                                         <?php continue; ?>
                                     <?php endif; ?>
 
@@ -184,7 +184,7 @@
                                                 <dd>
                                                     <input class="input-text" type="text" value="<?php echo $this->escapeHtml($property->get('name')->getValue()); ?>" id="properties-name-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][name]">
 
-                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                    <?php if ($this->form->get('properties')->has($property_form_id)): ?>
                                                         <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('name')); ?>
                                                     <?php endif; ?>
                                                 </dd>
@@ -194,7 +194,7 @@
                                                 <dd>
                                                     <input class="input-text" type="text" value="<?php echo $this->escapeHtml($property->get('identifier')->getValue()); ?>" id="properties-identifier-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][identifier]">
 
-                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                    <?php if ($this->form->get('properties')->has($property_form_id)): ?>
                                                         <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('identifier')); ?>
                                                     <?php endif; ?>
                                                 </dd>
@@ -204,12 +204,12 @@
                                                 <dd>
                                                     <select class="select-datatype" id="properties-datatype-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][datatype]">
                                                         <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
-                                                        <?php foreach($datatypes_options as $datatype_id => $datatype_name): ?>
-                                                            <option value="<?php echo $datatype_id; ?>"<?php if($datatype_id == $property->get('datatype')->getValue()): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($datatype_name); ?> </option>
+                                                        <?php foreach ($datatypes_options as $datatype_id => $datatype_name): ?>
+                                                            <option value="<?php echo $datatype_id; ?>"<?php if ($datatype_id == $property->get('datatype')->getValue()): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($datatype_name); ?> </option>
                                                         <?php endforeach; ?>
                                                     </select>
 
-                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                    <?php if ($this->form->get('properties')->has($property_form_id)): ?>
                                                         <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('datatype')); ?>
                                                     <?php endif; ?>
                                                 </dd>
@@ -219,7 +219,7 @@
                                                 <dd>
                                                     <input class="input-text" type="text" value="<?php echo $this->escapeHtml($property->get('description')->getValue()); ?>" id="properties-description-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][description]">
 
-                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                    <?php if ($this->form->get('properties')->has($property_form_id)): ?>
                                                         <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('description')); ?>
                                                     <?php endif; ?>
                                                 </dd>
@@ -231,9 +231,9 @@
                                                         $value = $property->get('required')->getValue();
                                                         $checkedValue = $property->get('required')->getAttribute('checkedValue');
                                                     ?>
-                                                    <input<?php if($value == $checkedValue):?> checked="checked"<?php endif; ?> type="checkbox" value="<?php echo $value; ?>" id="properties-required-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][required]">
+                                                    <input<?php if ($value == $checkedValue):?> checked="checked"<?php endif; ?> type="checkbox" value="<?php echo $value; ?>" id="properties-required-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][required]">
 
-                                                    <?php if($this->form->get('properties')->has($property_form_id)): ?>
+                                                    <?php if ($this->form->get('properties')->has($property_form_id)): ?>
                                                         <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('required')); ?>
                                                     <?php endif; ?>
                                                 </dd>
@@ -266,9 +266,9 @@
 
             <div id="import-tab">
                 <?php $tabs_list = $this->form->get('tabs')->get('tabs_list')->getValueOptions(); ?>
-                <?php if(!empty($tabs_list)): ?>
+                <?php if (!empty($tabs_list)): ?>
                     <select id="import-tabs">
-                        <?php foreach($tabs_list as $tab): ?>
+                        <?php foreach ($tabs_list as $tab): ?>
                             <option value="<?php echo $this->escapeHtml($tab->getId()); ?>"><?php echo $this->escapeHtml($tab->getName()); ?> (<?php echo $this->escapeHtml($tab->getDocumentType()->getName()); ?>)</option>
                         <?php endforeach; ?>
                     </select>
@@ -279,7 +279,7 @@
             <div>
                 <h3><?php echo $this->escapeHtml($this->translate('Tabs')); ?></h3>
                 <ul id="tabs" class="sortable ui-sortable">
-                <?php foreach($tabs_form as $tab_form): ?>
+                <?php foreach ($tabs_form as $tab_form): ?>
                     <li class="clearfix">
                         <?php $name = $tab_form->get('name')->getValue(); ?>
                         <?php $description = $tab_form->get('description')->getValue(); ?>

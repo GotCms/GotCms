@@ -39,14 +39,11 @@
 
 <div id="installation-data">&nbsp;</div>
 <script type="text/javascript">
-    $(document).ready(function()
-    {
+    $(document).ready(function() {
         $data = ['c-db', 'i-d', 'c-uar', 'it', 'c-cf'];
 
-        function nextStep($step)
-        {
-            if($data[$step] == undefined)
-            {
+        function nextStep($step) {
+            if ($data[$step] == undefined) {
                 return false;
             }
 
@@ -57,21 +54,14 @@
                 dataType: 'json',
                 data: {step: $data[$step]},
                 type: 'POST',
-                success: function(data)
-                {
-                    if(data.success == true)
-                    {
+                success: function(data) {
+                    if (data.success == true) {
                         $('#' + $data[$step]).removeClass('progress').addClass('complete');
                         nextStep(++$step);
-                    }
-                    else
-                    {
-                        if($data[$step] == 'c-cf')
-                        {
+                    } else {
+                        if ($data[$step] == 'c-cf') {
                             $('#' + $data[$step]).removeClass('progress').addClass('complete');
-                        }
-                        else
-                        {
+                        } else {
                             $('#' + $data[$step]).removeClass('progress').addClass('error');
                         }
 

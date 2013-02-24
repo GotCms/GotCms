@@ -27,8 +27,8 @@
 
 namespace Gc\User\Role;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of Role Model
@@ -44,14 +44,14 @@ class Collection extends AbstractTable
      *
      * @var array
      */
-    protected $_roles;
+    protected $roles;
 
     /**
      * Table name
      *
      * @var string
      */
-    protected $_name = 'user_acl_role';
+    protected $name = 'user_acl_role';
 
     /**
      * Initiliaze role collection
@@ -60,7 +60,7 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->getRoles(TRUE);
+        $this->getRoles(true);
     }
 
     /**
@@ -69,24 +69,25 @@ class Collection extends AbstractTable
      * @param boolean $force_reload
      * @return array \Gc\User\Role\Model
      */
-    public function getRoles($force_reload = FALSE)
+    public function getRoles($force_reload = false)
     {
-        if(empty($this->_roles) or $force_reload === TRUE)
-        {
-            $rows = $this->fetchAll($this->select(function(Select $select)
-            {
-                $select->order('name');
-            }));
+        if (empty($this->roles) or $force_reload === true) {
+            $rows = $this->fetchAll(
+                $this->select(
+                    function (Select $select) {
+                        $select->order('name');
+                    }
+                )
+            );
 
             $roles = array();
-            foreach($rows as $row)
-            {
+            foreach ($rows as $row) {
                 $roles[] = Model::fromArray((array)$row);
             }
 
-            $this->_roles = $roles;
+            $this->roles = $roles;
         }
 
-        return $this->_roles;
+        return $this->roles;
     }
 }

@@ -42,12 +42,12 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var PrevalueEditor
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var DatatypeModel
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -55,15 +55,15 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'BooleanTest',
             'prevalue_value' => '',
             'model' => 'Boolean',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
         $datatype = new Datatype();
-        $datatype->load($this->_datatype);
-        $this->_object = $datatype->getPrevalueEditor();
+        $datatype->load($this->datatype);
+        $this->object = $datatype->getPrevalueEditor();
     }
 
     /**
@@ -79,7 +79,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertNull($this->_object->save());
+        $this->assertNull($this->object->save());
     }
 
     /**
@@ -87,6 +87,6 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->assertNull($this->_object->load());
+        $this->assertNull($this->object->load());
     }
 }

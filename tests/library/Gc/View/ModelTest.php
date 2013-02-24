@@ -40,7 +40,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Model
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Model;
+        $this->object = new Model;
     }
 
     /**
@@ -57,7 +57,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -65,8 +65,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->_object->init(1);
-        $this->assertEquals(1, $this->_object->getId());
+        $this->object->init(1);
+        $this->assertEquals(1, $this->object->getId());
     }
 
     /**
@@ -82,7 +82,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'content' => 'Content',
             'updated_at' => date('Y-m-d H:i:s'),
         );
-        $model = $this->_object->fromArray($array);
+        $model = $this->object->fromArray($array);
         $this->assertEquals(1, $model->getId());
     }
 
@@ -97,11 +97,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'description' => 'Description',
             'content' => 'Content',
         );
-        $model = $this->_object->fromArray($array);
+        $model = $this->object->fromArray($array);
         $model->save();
         $id = $model->getId();
 
-        $model = $this->_object->fromId($id);
+        $model = $this->object->fromId($id);
         $this->assertEquals('string', $model->getIdentifier());
     }
 
@@ -110,7 +110,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromFakeId()
     {
-        $model = $this->_object->fromId(10000);
+        $model = $this->object->fromId(10000);
         $this->assertFalse($model);
     }
 
@@ -125,10 +125,10 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'description' => 'Description',
             'content' => 'Content',
         );
-        $model = $this->_object->fromArray($array);
+        $model = $this->object->fromArray($array);
         $model->save();
 
-        $model = $this->_object->fromIdentifier('test-identifier');
+        $model = $this->object->fromIdentifier('test-identifier');
         $this->assertEquals('Test Identifier', $model->getName());
     }
 
@@ -137,7 +137,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromFakeIdentifier()
     {
-        $model = $this->_object->fromIdentifier('fake-identifier');
+        $model = $this->object->fromIdentifier('fake-identifier');
         $this->assertFalse($model);
     }
 
@@ -153,7 +153,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'content' => 'Content',
         );
 
-        $model = $this->_object->fromArray($array);
+        $model = $this->object->fromArray($array);
         $model->save();
         //Save again for code coverage
         $model->save();
@@ -166,7 +166,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithWrongValues()
     {
         $this->setExpectedException('Gc\Exception');
-        $model = $this->_object->fromArray(array(
+        $model = $this->object->fromArray(array(
             'name' => NULL,
             'identifier' => NULL,
             'description' => NULL,
@@ -186,7 +186,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'description' => 'Description',
             'content' => 'Content',
         );
-        $model = $this->_object->fromArray($array);
+        $model = $this->object->fromArray($array);
         $model->save();
 
         $this->assertTrue($model->delete());

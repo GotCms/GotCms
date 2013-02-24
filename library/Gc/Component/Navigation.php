@@ -27,8 +27,8 @@
 
 namespace Gc\Component;
 
-use Gc\Document,
-    Gc\Registry;
+use Gc\Document;
+use Gc\Registry;
 
 /**
  * Create Xml for \Zend\Navigation
@@ -44,21 +44,21 @@ class Navigation
      *
      * @var array
      */
-    protected $_documents;
+    protected $documents;
 
     /**
      * Base path for urls
      *
      * @var string
      */
-    protected $_basePath = '/';
+    protected $basePath = '/';
 
     /**
      * Request uri
      *
      * @var string
      */
-     protected $_requestUri;
+     protected $requestUri;
 
     /**
      * Constructor, initialize documents
@@ -69,8 +69,8 @@ class Navigation
     {
         $documents = new Document\Collection();
         $documents->load(0);
-        $this->_documents = $documents->getDocuments();
-        $this->_requestUri = Registry::get('Application')->getRequest()->getRequestUri();
+        $this->documents = $documents->getDocuments();
+        $this->requestUri = Registry::get('Application')->getRequest()->getRequestUri();
     }
 
     /**
@@ -81,7 +81,7 @@ class Navigation
      */
     public function setBasePath($path)
     {
-        $this->_basePath = $path;
+        $this->basePath = $path;
         return $this;
     }
 
@@ -92,7 +92,7 @@ class Navigation
      */
     public function getBasePath()
     {
-        return $this->_basePath;
+        return $this->basePath;
     }
 
     /**
@@ -102,28 +102,29 @@ class Navigation
      * @param string $parent_url
      * @return array
      */
-    public function render(array $documents = NULL, $parent_url = NULL)
+    public function render(array $documents = null, $parent_url = null)
     {
         $navigation = array();
-        if($documents === NULL && !empty($this->_documents))
-        {
-            $documents = $this->_documents;
+        if ($documents === null && !empty($this->documents)) {
+            $documents = $this->documents;
         }
 
-        foreach($documents as $document)
-        {
+        foreach ($documents as $document) {
             $children = $document->getChildren();
-            if($document->isPublished())
-            {
+            if ($document->isPublished()) {
                 $data = array();
                 $data['label'] = $document->getName();
-                $data['uri'] = $this->getBasePath() . ($parent_url !== NULL ? $parent_url . '/' : '') . $document->getUrlKey();
+                $data['uri'] = $this->getBasePath()
+                    . ($parent_url !== null ? $parent_url . '/' : '')
+                    . $document->getUrlKey();
                 $data['visible'] = $document->showInNav();
-                $data['active'] = $data['uri'] == $this->_requestUri;
+                $data['active'] = $data['uri'] == $this->requestUri;
 
-                if(!empty($children) && is_array($children))
-                {
-                    $data['pages'] = $this->render($children, (empty($parent_url) ? NULL : $parent_url . '/') . $document->getUrlKey());
+                if (!empty($children) && is_array($children)) {
+                    $data['pages'] = $this->render(
+                        $children,
+                        (empty($parent_url) ? null : $parent_url . '/') . $document->getUrlKey()
+                    );
                 }
 
                 $navigation['document-' . $document->getId()] = $data;

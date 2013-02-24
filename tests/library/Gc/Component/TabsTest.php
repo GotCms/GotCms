@@ -46,7 +46,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Tabs
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -56,7 +56,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Tabs(array());
+        $this->object = new Tabs(array());
     }
 
     /**
@@ -65,7 +65,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -104,7 +104,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $view->getId(),
+            'defaultview_id' => $view->getId(),
             'user_id' => $user->getId(),
         ));
 
@@ -125,7 +125,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
         $document->save();
         $collection = new DocumentCollection();
         $collection->load(0);
-        $this->assertEquals(sprintf('<ul><li><a href="#tabs-%d">Document name</a></li></ul>', $document->getId()), $this->_object->render($collection->getChildren()));
+        $this->assertEquals(sprintf('<ul><li><a href="#tabs-%d">Document name</a></li></ul>', $document->getId()), $this->object->render($collection->getChildren()));
 
         $document->delete();
         $document_type->delete();
@@ -139,7 +139,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderWithParams()
     {
-        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->_object->render(array('string')));
+        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->object->render(array('string')));
     }
 
     /**
@@ -147,8 +147,8 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderWithoutParams()
     {
-        $this->_object->setData(array('string'));
-        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->_object->render());
+        $this->object->setData(array('string'));
+        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->object->render());
     }
 
     /**
@@ -156,8 +156,8 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     public function test__toStringWithEmptyData()
     {
-        $this->_object->setData(array());
-        $this->assertFalse($this->_object->__toString());
+        $this->object->setData(array());
+        $this->assertFalse($this->object->__toString());
     }
 
     /**
@@ -165,8 +165,8 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     public function test__toStringWithoutEmptyData()
     {
-        $this->_object->setData(array('string'));
-        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->_object->__toString());
+        $this->object->setData(array('string'));
+        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->object->__toString());
     }
 
     /**
@@ -174,7 +174,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetData()
     {
-        $this->_object->setData(array('string'));
-        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->_object->__toString());
+        $this->object->setData(array('string'));
+        $this->assertEquals('<ul><li><a href="#tabs-1">string</a></li></ul>', $this->object->__toString());
     }
 }

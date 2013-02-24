@@ -27,8 +27,8 @@
 
 namespace Datatypes\RadioButtonList;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Zend\Form\Element;
 
 /**
  * Editor for Radio Button List datatype
@@ -58,8 +58,7 @@ class Editor extends AbstractEditor
     {
         $parameters = $this->getConfig();
         $element = new Element\Radio($this->getName());
-        if(!empty($parameters))
-        {
+        if (!empty($parameters)) {
             $element->setValueOptions($parameters);
         }
 
@@ -70,4 +69,3 @@ class Editor extends AbstractEditor
         return $element;
     }
 }
-

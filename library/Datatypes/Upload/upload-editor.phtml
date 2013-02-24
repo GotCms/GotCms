@@ -28,8 +28,8 @@
 
 ?>
 <?php $files = $this->tools('unserialize', $this->files); ?>
-<?php if(!empty($files)): ?>
-    <?php foreach($files as $file): ?>
+<?php if (!empty($files)): ?>
+    <?php foreach ($files as $file): ?>
         <a target="_blank" href="<?php echo $this->escapeHtml($file['value']); ?>"><?php echo $this->escapeHtml($file['value']); ?></a><br>
     <?php endforeach; ?>
 <?php endif; ?>

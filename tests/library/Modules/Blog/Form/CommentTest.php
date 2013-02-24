@@ -40,7 +40,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Comment
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Comment;
+        $this->object = new Comment;
     }
 
     /**
@@ -64,6 +64,6 @@ class CommentTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->assertNull($this->_object->init());
+        $this->assertNull($this->object->init());
     }
 }

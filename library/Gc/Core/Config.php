@@ -27,8 +27,9 @@
 
 namespace Gc\Core;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Where;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Where;
+
 /**
  * Get and set config data
  *
@@ -53,14 +54,14 @@ class Config extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'core_config_data';
+    protected $name = 'core_config_data';
 
     /**
      * Singleton for Config
      *
-     * @var \Gc\Core\Config $_instance
+     * @var \Gc\Core\Config $instance
      */
-    static protected $_instance = NULL;
+    static protected $instance = null;
 
     /**
      * Get instance of \Gc\Core\Config
@@ -69,12 +70,11 @@ class Config extends AbstractTable
      */
     public static function getInstance()
     {
-        if(empty(static::$_instance))
-        {
-            static::$_instance = new self();
+        if (empty(static::$instance)) {
+            static::$instance = new self();
         }
 
-        return static::$_instance;
+        return static::$instance;
     }
 
     /**
@@ -84,16 +84,15 @@ class Config extends AbstractTable
      * @param string $field Optional database field, by default 'identifier'
      * @return string value
      */
-    static function getValue($data, $field = 'identifier')
+    public static function getValue($data, $field = 'identifier')
     {
         $instance = self::getInstance();
         $row = $instance->fetchRow($instance->select(array($field => $data)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             return $row['value'];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -101,16 +100,15 @@ class Config extends AbstractTable
      *
      * @return array
      */
-    static function getValues()
+    public static function getValues()
     {
         $instance = self::getInstance();
         $rows = $instance->fetchAll($instance->select());
-        if(!empty($rows))
-        {
+        if (!empty($rows)) {
             return $rows;
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -120,21 +118,19 @@ class Config extends AbstractTable
      * @param string $value
      * @return boolean
      */
-    static function setValue($identifier, $value)
+    public static function setValue($identifier, $value)
     {
-        if(empty($identifier))
-        {
-            return FALSE;
+        if (empty($identifier)) {
+            return false;
         }
 
         $instance = self::getInstance();
         $row = $instance->fetchRow($instance->select(array('identifier' => $identifier)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $where = new Where();
             return $instance->update(array('value' => $value), $where->equalTo('identifier', $identifier));
         }
 
-        return FALSE;
+        return false;
     }
 }

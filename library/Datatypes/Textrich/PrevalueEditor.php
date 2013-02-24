@@ -27,8 +27,8 @@
 
 namespace Datatypes\Textrich;
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Zend\Form\Element;
 
 /**
  * Prevalue Editor for Textrich datatype
@@ -59,13 +59,17 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $parameters = $this->getConfig();
         $ckeditor = new CkEditor();
-        if(empty($parameters))
-        {
+        if (empty($parameters)) {
             $parameters = array();
         }
 
         $ckeditor->setParameters($parameters);
 
-        return $this->addPath(__DIR__)->render('ckeditor-prevalue.phtml', array('textrich' => $ckeditor->getAllItems()));
+        return $this->addPath(__DIR__)->render(
+            'ckeditor-prevalue.phtml',
+            array(
+                'textrich' => $ckeditor->getAllItems()
+            )
+        );
     }
 }

@@ -40,7 +40,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Config
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Config;
+        $this->object = new Config;
     }
 
     /**
@@ -57,7 +57,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -73,9 +73,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValue()
     {
-        $this->_object->insert(array('identifier' => 'string_test', 'value' => 'string_result'));
-        $this->assertEquals('string_result', $this->_object->getValue('string_test'));
-        $this->_object->delete(array('identifier' => 'string_test'));
+        $this->object->insert(array('identifier' => 'string_test', 'value' => 'string_result'));
+        $this->assertEquals('string_result', $this->object->getValue('string_test'));
+        $this->object->delete(array('identifier' => 'string_test'));
     }
 
     /**
@@ -83,7 +83,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValueWithEmptyIdentifier()
     {
-        $this->assertNull($this->_object->getValue(''));
+        $this->assertNull($this->object->getValue(''));
     }
 
     /**
@@ -91,21 +91,21 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValues()
     {
-        $this->assertInternalType('array', $this->_object->getValues());
+        $this->assertInternalType('array', $this->object->getValues());
     }
     /**
      * @covers Gc\Core\Config::getValues
      */
     public function testGetEmptyValues()
     {
-        $values = $this->_object->getValues();
-        $this->_object->delete('1 = 1');
-        $this->assertNull($this->_object->getValues());
+        $values = $this->object->getValues();
+        $this->object->delete('1 = 1');
+        $this->assertNull($this->object->getValues());
 
         //restore data
         foreach($values as $value)
         {
-            $this->_object->insert($value);
+            $this->object->insert($value);
         }
     }
 
@@ -114,7 +114,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValueWithFakeIdentifier()
     {
-        $this->assertFalse($this->_object->setValue('fake_identifier', 'fake_value'));
+        $this->assertFalse($this->object->setValue('fake_identifier', 'fake_value'));
     }
 
     /**
@@ -122,9 +122,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValue()
     {
-        $this->_object->insert(array('identifier' => 'string_identifier', 'value' => 'string_result_insert_value'));
-        $this->assertTrue((bool)$this->_object->setValue('string_identifier', 'string_result_insert_value'));
-        $this->_object->delete(array('identifier' => 'string_identifier'));
+        $this->object->insert(array('identifier' => 'string_identifier', 'value' => 'string_result_insert_value'));
+        $this->assertTrue((bool)$this->object->setValue('string_identifier', 'string_result_insert_value'));
+        $this->object->delete(array('identifier' => 'string_identifier'));
     }
 
     /**
@@ -132,6 +132,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValueWithEmptyIdentifier()
     {
-        $this->assertFalse($this->_object->setValue('', 'string_result_insert_value'));
+        $this->assertFalse($this->object->setValue('', 'string_result_insert_value'));
     }
 }

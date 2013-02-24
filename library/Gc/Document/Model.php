@@ -27,15 +27,15 @@
 
 namespace Gc\Document;
 
-use Gc\Db\AbstractTable,
-    Gc\Component\IterableInterface,
-    Gc\DocumentType,
-    Gc\Media\Icon,
-    Gc\Property\Model as PropertyModel,
-    Gc\Registry,
-    Gc\View,
-    Zend\Db\TableGateway\TableGateway,
-    Zend\Db\Sql\Predicate\Expression;
+use Gc\Db\AbstractTable;
+use Gc\Component\IterableInterface;
+use Gc\DocumentType;
+use Gc\Media\Icon;
+use Gc\Property\Model as PropertyModel;
+use Gc\Registry;
+use Gc\View;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Predicate\Expression;
 
 /**
  * Document Model
@@ -51,7 +51,7 @@ class Model extends AbstractTable implements IterableInterface
      *
      * @var string
      */
-    protected $_name = 'document';
+    protected $name = 'document';
 
     /**
      * @const STATUS_DISABLE
@@ -69,10 +69,9 @@ class Model extends AbstractTable implements IterableInterface
      * @param integer $document_id
      * @return void
      */
-    public function init($document_id = NULL)
+    public function init($document_id = null)
     {
-        if(!empty($document_id))
-        {
+        if (!empty($document_id)) {
             $this->setId($document_id);
         }
 
@@ -86,11 +85,9 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getView()
     {
-        if($this->getData('view') == NULL)
-        {
+        if ($this->getData('view') == null) {
             $view = View\Model::fromId($this->getViewId());
-            if($view !== NULL)
-            {
+            if ($view !== null) {
                 $this->setData('view', $view);
             }
         }
@@ -105,8 +102,7 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getDocumentType()
     {
-        if($this->getData('document_type') === NULL)
-        {
+        if ($this->getData('document_type') === null) {
             $this->setData('document_type', DocumentType\Model::fromId($this->getDocumentTypeId()));
         }
 
@@ -119,14 +115,13 @@ class Model extends AbstractTable implements IterableInterface
      * @param boolean $is_show Optional
      * @return boolean
      */
-    public function showInNav($is_show = NULL)
+    public function showInNav($is_show = null)
     {
-        if(!is_null($is_show))
-        {
+        if (!is_null($is_show)) {
             $this->setData('show_in_nav', $is_show);
         }
 
-        return (bool)$this->getData('show_in_nav') != FALSE ? TRUE : FALSE;
+        return (bool)$this->getData('show_in_nav') != false ? true : false;
     }
 
     /**
@@ -145,7 +140,7 @@ class Model extends AbstractTable implements IterableInterface
      * @param array $array
      * @return \Gc\Document\Model
      */
-    static function fromArray(array $array)
+    public static function fromArray(array $array)
     {
         $document_table = new Model();
         $document_table->setData($array);
@@ -160,19 +155,16 @@ class Model extends AbstractTable implements IterableInterface
      * @param integer $document_id
      * @return \Gc\Document\Model
      */
-    static function fromId($document_id)
+    public static function fromId($document_id)
     {
         $document_table = new Model();
         $row = $document_table->fetchRow($document_table->select(array('id' => (int)$document_id)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $document_table->setData((array)$row);
             $document_table->setOrigData();
             return $document_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -183,25 +175,21 @@ class Model extends AbstractTable implements IterableInterface
      * @param mixed $parent_id
      * @return \Gc\Document\Model
      */
-    static function fromUrlKey($url_key, $parent_id = NULL)
+    public static function fromUrlKey($url_key, $parent_id = null)
     {
         $document_table = new Model();
         $sql_data = array('url_key' => $url_key);
-        if(!empty($parent_id))
-        {
+        if (!empty($parent_id)) {
             $sql_data['parent_id'] = $parent_id;
         }
 
         $row = $document_table->fetchRow($document_table->select($sql_data));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $document_table->setData((array)$row);
             $document_table->setOrigData();
             return $document_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -212,55 +200,46 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
             'url_key' => $this->getUrlKey(),
             'updated_at' => new Expression('NOW()'),
-            'status' => ($this->getStatus() === NULL ? self::STATUS_DISABLE : $this->getStatus()),
+            'status' => ($this->getStatus() === null ? self::STATUS_DISABLE : $this->getStatus()),
             'sort_order' => (int)$this->getSortOrder(),
             'user_id' => (int)$this->getUserId(),
-            'document_type_id' => (int)$this->getDocumentTypeId() == 0 ? NULL : (int)$this->getDocumentTypeId(),
-            'view_id' => (int)$this->getViewId() == 0 ? NULL : (int)$this->getViewId(),
-            'layout_id' => (int)$this->getLayoutId() == 0 ? NULL : (int)$this->getLayoutId(),
-            'parent_id' => (int)$this->getParentId() == 0 ? NULL : (int)$this->getParentId(),
+            'document_type_id' => (int)$this->getDocumentTypeId() == 0 ? null : (int)$this->getDocumentTypeId(),
+            'view_id' => (int)$this->getViewId() == 0 ? null : (int)$this->getViewId(),
+            'layout_id' => (int)$this->getLayoutId() == 0 ? null : (int)$this->getLayoutId(),
+            'parent_id' => (int)$this->getParentId() == 0 ? null : (int)$this->getParentId(),
         );
 
-        if($this->getDriverName() == 'pdo_pgsql')
-        {
-            $array_save['show_in_nav'] = $this->showInNav() === TRUE ? 'TRUE' : 'FALSE';
-        }
-        else
-        {
-            $array_save['show_in_nav'] = $this->showInNav() === TRUE ? 1 : 0;
+        if ($this->getDriverName() == 'pdo_pgsql') {
+            $array_save['show_in_nav'] = $this->showInNav() === true ? 'true' : 'false';
+        } else {
+            $array_save['show_in_nav'] = $this->showInNav() === true ? 1 : 0;
         }
 
-        try
-        {
+        try {
             $document_id = $this->getId();
-            if(empty($document_id))
-            {
+            if (empty($document_id)) {
                 $array_save['created_at'] = new Expression('NOW()');
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
-            }
-            else
-            {
+            } else {
                 $this->update($array_save, array('id' => $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
             return $this->getId();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -270,30 +249,26 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
         $document_id = $this->getId();
-        if(!empty($document_id))
-        {
-            try
-            {
+        if (!empty($document_id)) {
+            try {
                 $properties_table = new TableGateway('property_value', $this->getAdapter());
                 $properties_table->delete(array('document_id' => $this->getId()));
                 parent::delete(array('id' => $document_id));
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
             unset($this);
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -305,8 +280,7 @@ class Model extends AbstractTable implements IterableInterface
     {
         $parent = $this->getParent();
         $path = '/' . $this->getUrlKey();
-        if(!empty($parent))
-        {
+        if (!empty($parent)) {
             $path = $parent->getUrl() . $path;
         }
 
@@ -317,13 +291,12 @@ class Model extends AbstractTable implements IterableInterface
      * Get property
      *
      * @param string $property_name
-     * @return FALSE | PropertyModel
+     * @return false | PropertyModel
      */
     public function getProperty($property_name)
     {
-        if(!$this->hasData('id'))
-        {
-            return FALSE;
+        if (!$this->hasData('id')) {
+            return false;
         }
 
         return PropertyModel::fromIdentifier($property_name, $this->getId());
@@ -332,12 +305,11 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Retrieve children with his status is enable
      *
-     * @return FALSE | PropertyModel
+     * @return false | PropertyModel
      */
     public function getAvailableChildren()
     {
-        if($this->getData('available_children') === NULL)
-        {
+        if ($this->getData('available_children') === null) {
             $children = new Collection();
             $children->load($this->getId());
             $this->setData('available_children', $children->getAvailableChildren());
@@ -377,8 +349,7 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getChildren()
     {
-        if($this->getData('children') === NULL)
-        {
+        if ($this->getData('children') === null) {
             $children = new Collection();
             $children->load($this->getId());
             $this->setData('children', $children->getChildren());
@@ -392,12 +363,10 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getIcon()
     {
-        if($this->getData('icon') === NULL)
-        {
+        if ($this->getData('icon') === null) {
             $icon = Icon\Model::fromId($this->getDocumentType()->getIconId());
-            if(empty($icon))
-            {
-                return FALSE;
+            if (empty($icon)) {
+                return false;
             }
 
             $this->setData('icon', $icon->getUrl());
@@ -419,6 +388,12 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getEditUrl()
     {
-        return Registry::get('Application')->getMvcEvent()->getRouter()->assemble(array('id' => $this->getId()), array('name' => 'documentEdit'));
+        return Registry::get('Application')
+            ->getMvcEvent()
+            ->getRouter()
+            ->assemble(
+                array('id' => $this->getId()),
+                array('name' => 'documentEdit')
+            );
     }
 }

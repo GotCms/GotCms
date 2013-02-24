@@ -27,8 +27,8 @@
 
 namespace Gc\Tab;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of Tab Model
@@ -44,7 +44,7 @@ class Collection extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'tab';
+    protected $name = 'tab';
 
     /**
      * Initiliaze tab collection
@@ -52,7 +52,7 @@ class Collection extends AbstractTable
      * @param integer $document_type_id Optional
      * @return \Gc\Tab\Collection
      */
-    public function load($document_type_id = NULL)
+    public function load($document_type_id = null)
     {
         $this->setDocumentTypeId($document_type_id);
 
@@ -65,28 +65,26 @@ class Collection extends AbstractTable
      * @param boolean $force_reload to reload collection
      * @return array
      */
-    public function getTabs($force_reload = FALSE)
+    public function getTabs($force_reload = false)
     {
         $tabs = $this->getData('tabs');
         $document_type_id = $this->getDocumentTypeId();
-        if(empty($tabs) or $force_reload == TRUE)
-        {
-            if(!empty($document_type_id))
-            {
-                $rows = $this->fetchAll($this->select(function(Select $select)
-                {
-                    $select->where->equalTo('document_type_id', $this->getDocumentTypeId());
-                    $select->order('sort_order ASC');
-                }));
-            }
-            else
-            {
+        if (empty($tabs) or $force_reload == true) {
+            if (!empty($document_type_id)) {
+                $rows = $this->fetchAll(
+                    $this->select(
+                        function (Select $select) {
+                            $select->where->equalTo('document_type_id', $this->getDocumentTypeId());
+                            $select->order('sort_order ASC');
+                        }
+                    )
+                );
+            } else {
                 $rows = $this->fetchAll($this->select());
             }
 
             $tabs = array();
-            foreach($rows as $row)
-            {
+            foreach ($rows as $row) {
                 $tabs[] = Model::fromArray((array)$row);
             }
 
@@ -104,14 +102,16 @@ class Collection extends AbstractTable
      */
     public function getImportableTabs($document_type_id)
     {
-        $rows = $this->fetchAll($this->select(function(Select $select) use ($document_type_id)
-        {
-            $select->where->notEqualTo('document_type_id', $document_type_id);
-        }));
+        $rows = $this->fetchAll(
+            $this->select(
+                function (Select $select) use ($document_type_id) {
+                    $select->where->notEqualTo('document_type_id', $document_type_id);
+                }
+            )
+        );
 
         $tabs = array();
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $tabs[] = Model::fromArray((array)$row);
         }
 
@@ -127,8 +127,7 @@ class Collection extends AbstractTable
     public function setTabs(array $tabs)
     {
         $array = array();
-        foreach($tabs as $tab)
-        {
+        foreach ($tabs as $tab) {
             $array[] = Model::fromArray($tab);
         }
 
@@ -157,8 +156,7 @@ class Collection extends AbstractTable
     public function save()
     {
         $tabs = $this->getTabs();
-        foreach($tabs as $tab)
-        {
+        foreach ($tabs as $tab) {
             $tab->save();
         }
     }
@@ -171,11 +169,10 @@ class Collection extends AbstractTable
     public function delete()
     {
         $tabs = $this->getTabs();
-        foreach($tabs as $tab)
-        {
+        foreach ($tabs as $tab) {
             $tab->delete();
         }
 
-        return TRUE;
+        return true;
     }
 }

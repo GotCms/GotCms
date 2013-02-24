@@ -27,11 +27,11 @@
 
 namespace Gc\Module;
 
-use Zend\EventManager\Event,
-    Gc\Registry,
-    Gc\Event\StaticEventManager,
-    Zend\View\Model\ViewModel,
-    Zend\View\Renderer\PhpRenderer;
+use Zend\EventManager\Event;
+use Gc\Registry;
+use Gc\Event\StaticEventManager;
+use Zend\View\Model\ViewModel;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Abstract obverser bootstrap
@@ -47,21 +47,21 @@ abstract class AbstractObserver
      *
      * @var \Zend\View\Renderer\PhpRenderer
      */
-    protected $_renderer;
+    protected $renderer;
 
     /**
      * Initialize observer
      *
      * @return void
      */
-    abstract function init();
+    abstract public function init();
 
     /**
      * Return database adapter
      *
      * @return \Zend\Db\Adapter\Adapter
      */
-    protected function _getAdapter()
+    protected function getAdapter()
     {
         return Registry::get('Db');
     }
@@ -71,7 +71,7 @@ abstract class AbstractObserver
      *
      * @return string
      */
-    protected function _getDriverName()
+    protected function getDriverName()
     {
          $configuration = Registry::get('Configuration');
          return $configuration['db']['driver'];
@@ -96,12 +96,12 @@ abstract class AbstractObserver
      */
     public function render($name, array $data = array())
     {
-        $this->_checkRenderer();
+        $this->checkRenderer();
         $view_model = new ViewModel();
         $view_model->setTemplate($name);
         $view_model->setVariables($data);
 
-        return $this->_renderer->render($view_model);
+        return $this->renderer->render($view_model);
     }
 
     /**
@@ -112,8 +112,8 @@ abstract class AbstractObserver
      */
     public function addPath($dir)
     {
-        $this->_checkRenderer();
-        $this->_renderer->resolver()->addPath($dir);
+        $this->checkRenderer();
+        $this->renderer->resolver()->addPath($dir);
 
         return $this;
     }
@@ -124,13 +124,12 @@ abstract class AbstractObserver
      *
      * @return \Gc\Module\AbstractObserver
      */
-    protected function _checkRenderer()
+    protected function checkRenderer()
     {
-        if(is_null($this->_renderer))
-        {
-            $this->_renderer = new PhpRenderer();
+        if (is_null($this->renderer)) {
+            $this->renderer = new PhpRenderer();
             $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
-            $this->_renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
+            $this->renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
         }
 
         return $this;

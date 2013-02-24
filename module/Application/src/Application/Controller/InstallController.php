@@ -27,15 +27,15 @@
 
 namespace Application\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Gc\Media\File,
-    Gc\Core,
-    Gc\Registry,
-    Gc\Version,
-    Application\Form\Install,
-    Zend\Config\Reader\Ini,
-    Zend\Db\TableGateway\Feature\GlobalAdapterFeature,
-    Zend\Db\Adapter\Adapter as DbAdapter;
+use Gc\Mvc\Controller\Action;
+use Gc\Media\File;
+use Gc\Core;
+use Gc\Registry;
+use Gc\Version;
+use Application\Form\Install;
+use Zend\Config\Reader\Ini;
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
+use Zend\Db\Adapter\Adapter as DbAdapter;
 
 /**
  * Install controller for module Application
@@ -51,14 +51,14 @@ class InstallController extends Action
      *
      * @var integer
      */
-     protected $_umask = 0774;
+     protected $umask = 0774;
 
     /**
      * Install form
      *
      * @var Application\Form\Install
      */
-    protected $_installForm;
+    protected $installForm;
 
     /**
      * Initialize Installer
@@ -68,16 +68,14 @@ class InstallController extends Action
     public function init()
     {
         $this->layout()->setTemplate('layouts/install.phtml');
-        $this->_installForm = new Install();
-        if(file_exists(GC_APPLICATION_PATH . '/config/autoload/global.php'))
-        {
+        $this->installForm = new Install();
+        if (file_exists(GC_APPLICATION_PATH . '/config/autoload/global.php')) {
             return $this->redirect()->toUrl('/');
         }
 
         //Force locale to translator
         $session = $this->getSession();
-        if(!empty($session['install']['lang']))
-        {
+        if (!empty($session['install']['lang'])) {
             Registry::get('Translator')->setLocale($session['install']['lang']);
         }
     }
@@ -89,24 +87,22 @@ class InstallController extends Action
      */
     public function indexAction()
     {
-        $this->_checkInstall(1);
-        $this->_installForm->lang();
+        $this->checkInstall(1);
+        $this->installForm->lang();
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $post_data = $this->getRequest()->getPost()->toArray();
-            $this->_installForm->setData($post_data);
-            if($this->_installForm->isValid())
-            {
+            $this->installForm->setData($post_data);
+            if ($this->installForm->isValid()) {
                 $session = $this->getSession();
-                $session['install'] = array('lang' => $this->_installForm->getInputFilter()->getValue('lang'));
+                $session['install'] = array('lang' => $this->installForm->getInputFilter()->getValue('lang'));
 
                 return $this->redirect()->toRoute('installLicense');
             }
         }
 
         $this->layout()->setVariables(array('currentRoute' => $this->getRouteMatch()->getMatchedRouteName()));
-        return array('form' => $this->_installForm);
+        return array('form' => $this->installForm);
     }
 
     /**
@@ -116,21 +112,22 @@ class InstallController extends Action
      */
     public function licenseAction()
     {
-        $this->_checkInstall(2);
-        $this->_installForm->license();
+        $this->checkInstall(2);
+        $this->installForm->license();
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $post_data = $this->getRequest()->getPost()->toArray();
-            $this->_installForm->setData($post_data);
-            if($this->_installForm->isValid())
-            {
+            $this->installForm->setData($post_data);
+            if ($this->installForm->isValid()) {
                 return $this->redirect()->toRoute('installCheckConfig');
             }
         }
 
         $this->layout()->setVariables(array('currentRoute' => $this->getRouteMatch()->getMatchedRouteName()));
-        return array('form' => $this->_installForm, 'license' => file_get_contents(GC_APPLICATION_PATH . '/LICENSE.txt'));
+        return array(
+            'form' => $this->installForm,
+            'license' => file_get_contents(GC_APPLICATION_PATH . '/LICENSE.txt')
+        );
     }
 
     /**
@@ -140,58 +137,103 @@ class InstallController extends Action
      */
     public function checkConfigAction()
     {
-        $this->_checkInstall(3);
-        if(!defined('PHP_VERSION_ID'))
-        {
-           $version = explode('.', PHP_VERSION);
-           define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
+        $this->checkInstall(3);
+        if (!defined('PHP_VERSION_ID')) {
+            $version = explode('.', PHP_VERSION);
+            define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
         }
 
         $server_data = array();
-        $server_data[] = array('label' => '/public/frontend', 'value' => File::isWritable(GC_APPLICATION_PATH . '/public/frontend'));
-        $server_data[] = array('label' => '/config/autoload', 'value' => File::isWritable(GC_APPLICATION_PATH . '/config/autoload'));
-        $server_data[] = array('label' => '/data/cache', 'value' => is_writable(GC_APPLICATION_PATH . '/data/cache'));
-        $server_data[] = array('label' => '/public/media', 'value' => File::isWritable(GC_MEDIA_PATH));
+        $server_data[] = array(
+        'label' => '/public/frontend', 'value' => File::isWritable(GC_APPLICATION_PATH . '/public/frontend')
+        );
+        $server_data[] = array(
+        'label' => '/config/autoload', 'value' => File::isWritable(GC_APPLICATION_PATH . '/config/autoload')
+        );
+        $server_data[] = array(
+        'label' => '/data/cache', 'value' => is_writable(GC_APPLICATION_PATH . '/data/cache')
+        );
+        $server_data[] = array(
+        'label' => '/public/media', 'value' => File::isWritable(GC_MEDIA_PATH)
+        );
 
         $php_data = array();
-        $php_data[] = array('label' => 'Php version >= 5.3.3', 'value' => PHP_VERSION_ID > 50303);
-        $php_data[] = array('label' => 'Pdo', 'value' => extension_loaded('pdo'));
-        $php_data[] = array('label' => 'Xml', 'value' => extension_loaded('xml'));
-        $php_data[] = array('label' => 'Intl', 'value' => extension_loaded('intl'));
-        $php_data[] = array('label' => 'Database (Mysql, Pgsql)', 'value' => extension_loaded('pdo_mysql') or extension_loaded('pdo_pgsql'));
-        $php_data[] = array('label' => 'Mbstring', 'value' => extension_loaded('mbstring'));
-        $php_data[] = array('label' => 'Json', 'value' => function_exists('json_encode') and function_exists('json_decode'));
+        $php_data[] = array(
+            'label' => 'Php version >= 5.3.3',
+            'value' => PHP_VERSION_ID > 50303
+        );
+        $php_data[] = array(
+            'label' => 'Pdo',
+            'value' => extension_loaded('pdo')
+        );
+        $php_data[] = array(
+            'label' => 'Xml',
+            'value' => extension_loaded('xml')
+        );
+        $php_data[] = array(
+            'label' => 'Intl',
+            'value' => extension_loaded('intl')
+        );
+        $php_data[] = array(
+            'label' => 'Database (Mysql, Pgsql)',
+            'value' => extension_loaded('pdo_mysql') or extension_loaded('pdo_pgsql')
+        );
+        $php_data[] = array(
+            'label' => 'Mbstring',
+            'value' => extension_loaded('mbstring')
+        );
+        $php_data[] = array(
+            'label' => 'Json',
+            'value' => function_exists('json_encode') and function_exists('json_decode')
+        );
 
         $php_directive = array();
-        $php_directive[] = array('label' => 'Display Errors', 'needed' => FALSE, 'value' => ini_get('display_errors') == TRUE);
-        $php_directive[] = array('label' => 'File Uploads', 'needed' => TRUE, 'value' => ini_get('file_uploads') == TRUE);
-        $php_directive[] = array('label' => 'Magic Quotes Runtime', 'needed' => FALSE, 'value' => ini_get('magic_quote_runtime') == TRUE);
-        $php_directive[] = array('label' => 'Magic Quotes GPC', 'needed' => FALSE, 'value' => ini_get('magic_quote_gpc') == TRUE);
-        $php_directive[] = array('label' => 'Register Globals', 'needed' => FALSE, 'value' => ini_get('register_globals') == TRUE);
-        $php_directive[] = array('label' => 'Session Auto Start', 'needed' => FALSE, 'value' => ini_get('session.auto_start') == TRUE);
+        $php_directive[] = array(
+            'label' => 'Display Errors',
+            'needed' => false,
+            'value' => ini_get('display_errors') == true
+        );
+        $php_directive[] = array(
+            'label' => 'File Uploads',
+            'needed' => true,
+            'value' => ini_get('file_uploads') == true
+        );
+        $php_directive[] = array(
+            'label' => 'Magic Quotes Runtime',
+            'needed' => false,
+            'value' => ini_get('magic_quote_runtime') == true
+        );
+        $php_directive[] = array(
+            'label' => 'Magic Quotes GPC',
+            'needed' => false,
+            'value' => ini_get('magic_quote_gpc') == true
+        );
+        $php_directive[] = array(
+            'label' => 'Register Globals',
+            'needed' => false,
+            'value' => ini_get('register_globals') == true
+        );
+        $php_directive[] = array(
+            'label' => 'Session Auto Start',
+            'needed' => false,
+            'value' => ini_get('session.auto_start') == true
+        );
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
 
-            $continue = TRUE;
-            foreach(array($server_data, $php_data) as $configs)
-            {
-                foreach($configs as $config)
-                {
-                    if($config['value'] !== TRUE)
-                    {
-                        $continue = FALSE;
+            $continue = true;
+            foreach (array($server_data, $php_data) as $configs) {
+                foreach ($configs as $config) {
+                    if ($config['value'] !== true) {
+                        $continue = false;
                         break 2;
                     }
                 }
             }
 
-            if($continue)
-            {
+            if ($continue) {
                 return $this->redirect()->toRoute('installDatabase');
-            }
-            else
-            {
+            } else {
                 $this->flashMessenger()->addErrorMessage('All parameters must be set to "Yes"');
                 return $this->redirect()->toRoute('installCheckConfig');
             }
@@ -214,17 +256,15 @@ class InstallController extends Action
      */
     public function databaseAction()
     {
-        $this->_checkInstall(4);
-        $this->_installForm->database();
+        $this->checkInstall(4);
+        $this->installForm->database();
         $messages = array();
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
-            $this->_installForm->setData($data);
-            if($this->_installForm->isValid())
-            {
+            $this->installForm->setData($data);
+            if ($this->installForm->isValid()) {
                 //Test database connexion
-                $values = $this->_installForm->getInputFilter()->getValues();
+                $values = $this->installForm->getInputFilter()->getValues();
                 $config = array(
                     'driver' => $values['driver'],
                     'username' => $values['username'],
@@ -233,8 +273,7 @@ class InstallController extends Action
                     'password' => empty($values['password']) ? '' : $values['password'],
                 );
 
-                try
-                {
+                try {
                     $db_adapter = new DbAdapter($config);
                     $db_adapter->getDriver()->getConnection()->connect();
 
@@ -245,9 +284,7 @@ class InstallController extends Action
                     $session['install'] = $install;
 
                     return $this->redirect()->toRoute('installConfiguration');
-                }
-                catch(\Exception $e)
-                {
+                } catch (\Exception $e) {
                     $messages[] = 'Can\'t connect to database';
                     $messages[] = $e->getMessage();
                 }
@@ -255,7 +292,7 @@ class InstallController extends Action
         }
 
         $this->layout()->setVariables(array('currentRoute' => $this->getRouteMatch()->getMatchedRouteName()));
-        return array('form' => $this->_installForm, 'messages' => $messages);
+        return array('form' => $this->installForm, 'messages' => $messages);
     }
 
     /**
@@ -265,16 +302,14 @@ class InstallController extends Action
      */
     public function configurationAction()
     {
-        $this->_checkInstall(5);
-        $this->_installForm->configuration();
+        $this->checkInstall(5);
+        $this->installForm->configuration();
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
-            $this->_installForm->setData($data);
-            if($this->_installForm->isValid())
-            {
-                $values = $this->_installForm->getInputFilter()->getValues();
+            $this->installForm->setData($data);
+            if ($this->installForm->isValid()) {
+                $values = $this->installForm->getInputFilter()->getValues();
 
                 $session = $this->getSession();
                 $install = $session['install'];
@@ -286,7 +321,7 @@ class InstallController extends Action
         }
 
         $this->layout()->setVariables(array('currentRoute' => $this->getRouteMatch()->getMatchedRouteName()));
-        return array('form' => $this->_installForm);
+        return array('form' => $this->installForm);
     }
 
 
@@ -297,11 +332,9 @@ class InstallController extends Action
      */
     public function completeAction()
     {
-        $this->_checkInstall(6);
-        if($this->getRequest()->isXmlHttpRequest())
-        {
-            if($this->getRequest()->isPost())
-            {
+        $this->checkInstall(6);
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            if ($this->getRequest()->isPost()) {
                 $session = $this->getSession();
 
                 $db_adapter = new DbAdapter($session['install']['db']);
@@ -309,46 +342,80 @@ class InstallController extends Action
 
                 $step = $this->getRequest()->getPost()->get('step');
                 $sql_type = str_replace('pdo_', '', $session['install']['db']['driver']);
-                try
-                {
-                    switch($step)
-                    {
+                try {
+                    switch($step) {
                         //Create database
                         case 'c-db':
-                            $sql = file_get_contents(GC_APPLICATION_PATH . sprintf('/data/install/sql/database-%s.sql', $sql_type));
+                            $sql = file_get_contents(
+                                GC_APPLICATION_PATH . sprintf('/data/install/sql/database-%s.sql', $sql_type)
+                            );
                             $db_adapter->getDriver()->getConnection()->getResource()->exec($sql);
-                        break;
+                            break;
 
                         //Insert data
                         case 'i-d':
                             $configuration = $session['install']['configuration'];
-                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_name', ?);", array($configuration['site_name']));
-                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('site_is_offline', ?);", array($configuration['site_is_offline']));
-                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('cookie_domain', ?);", array($this->getRequest()->getUri()->getHost()));
-                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('session_lifetime', '3600');", array());
-                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('locale', ?);", array($session['install']['lang']));
-                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from', ?);", array($configuration['admin_email']));
-                            $db_adapter->query("INSERT INTO core_config_data (identifier, value) VALUES ('mail_from_name', ?);", array($configuration['admin_firstname'] . ' ' . $configuration['admin_lastname']));
+                            $db_adapter->query(
+                                "INSERT INTO core_config_data
+                                (identifier, value) VALUES ('site_name', ?);",
+                                array($configuration['site_name'])
+                            );
+                            $db_adapter->query(
+                                "INSERT INTO core_config_data
+                                (identifier, value) VALUES ('site_is_offline', ?);",
+                                array($configuration['site_is_offline'])
+                            );
+                            $db_adapter->query(
+                                "INSERT INTO core_config_data
+                                (identifier, value) VALUES ('cookie_domain', ?);",
+                                array($this->getRequest()->getUri()->getHost())
+                            );
+                            $db_adapter->query(
+                                "INSERT INTO core_config_data
+                                (identifier, value) VALUES ('session_lifetime', '3600');",
+                                array()
+                            );
+                            $db_adapter->query(
+                                "INSERT INTO core_config_data
+                                (identifier, value) VALUES ('locale', ?);",
+                                array($session['install']['lang'])
+                            );
+                            $db_adapter->query(
+                                "INSERT INTO core_config_data
+                                (identifier, value) VALUES ('mail_from', ?);",
+                                array($configuration['admin_email'])
+                            );
+                            $db_adapter->query(
+                                "INSERT INTO core_config_data
+                                (identifier, value) VALUES ('mail_from_name', ?);",
+                                array($configuration['admin_firstname'] . ' ' . $configuration['admin_lastname'])
+                            );
 
 
-                            $language_filename = sprintf(GC_APPLICATION_PATH . '/data/install/translation/%s.php', $session['install']['lang']);
-                            if(file_exists($language_filename))
-                            {
+                            $language_filename = sprintf(
+                                GC_APPLICATION_PATH . '/data/install/translation/%s.php',
+                                $session['install']['lang']
+                            );
+                            if (file_exists($language_filename)) {
                                 GlobalAdapterFeature::setStaticAdapter($db_adapter);
                                 Registry::set('Configuration', array('db' => $session['install']['db']));
                                 $lang_config = include $language_filename;
-                                foreach($lang_config as $source => $destination)
-                                {
-                                    Core\Translator::setValue($source, array(array(
-                                        'locale' => $session['install']['lang']
-                                        , 'value' => $destination)
-                                    ));
+                                foreach ($lang_config as $source => $destination) {
+                                    Core\Translator::setValue(
+                                        $source,
+                                        array(
+                                            array(
+                                                'locale' => $session['install']['lang']
+                                                , 'value' => $destination
+                                            )
+                                        )
+                                    );
                                 }
                             }
 
                             $sql = file_get_contents(GC_APPLICATION_PATH . '/data/install/sql/data.sql');
                             $db_adapter->getDriver()->getConnection()->getResource()->exec($sql);
-                        break;
+                            break;
 
                         //Create user and roles
                         case 'c-uar':
@@ -356,16 +423,14 @@ class InstallController extends Action
                             $ini = new Ini();
                             $roles = $ini->fromFile(GC_APPLICATION_PATH . '/data/install/scripts/roles.ini');
 
-                            try
-                            {
-                                foreach($roles['role'] as $key => $value)
-                                {
-                                    $statement = $db_adapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
+                            try {
+                                foreach ($roles['role'] as $key => $value) {
+                                    $statement = $db_adapter->createStatement(
+                                        "INSERT INTO user_acl_role (name) VALUES ('" . $value . "')"
+                                    );
                                     $result = $statement->execute();
                                 }
-                            }
-                            catch(Exception $e)
-                            {
+                            } catch (Exception $e) {
                                 return $this->returnJson(array('messages' => $e->getMessage()));
                             }
 
@@ -373,127 +438,186 @@ class InstallController extends Action
                             $ini = new Ini();
                             $resources = $ini->fromFile(GC_APPLICATION_PATH . '/data/install/scripts/resources.ini');
 
-                            try
-                            {
-                                foreach($resources as $key => $value)
-                                {
-                                    $statement = $db_adapter->createStatement("INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')");
+                            try {
+                                foreach ($resources as $key => $value) {
+                                    $statement = $db_adapter->createStatement(
+                                        "INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')"
+                                    );
                                     $result = $statement->execute();
 
-                                    $statement = $db_adapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
+                                    $statement = $db_adapter->createStatement(
+                                        "SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'"
+                                    );
                                     $result = $statement->execute();
                                     $last_insert_id = $result->current();
                                     $last_insert_id = $last_insert_id['id'];
 
                                     $permissions = array();
-                                    foreach($value as $k => $v)
-                                    {
-                                        if(!in_array($k, $permissions))
-                                        {
-                                            $statement = $db_adapter->createStatement("INSERT INTO user_acl_permission (permission, user_acl_resource_id) VALUES ('" . $k . "', '" . $last_insert_id . "')");
+                                    foreach ($value as $k => $v) {
+                                        if (!in_array($k, $permissions)) {
+                                            $statement = $db_adapter->createStatement(
+                                                "INSERT INTO user_acl_permission
+                                                (
+                                                    permission,
+                                                    user_acl_resource_id
+                                                )
+                                                VALUES ('" . $k . "', '" . $last_insert_id . "')"
+                                            );
                                             $result = $statement->execute();
                                             $permissions[] = $k;
                                         }
                                     }
                                 }
 
-                                foreach($resources as $key => $value)
-                                {
-                                    $statement = $db_adapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
+                                foreach ($resources as $key => $value) {
+                                    $statement = $db_adapter->createStatement(
+                                        "SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'"
+                                    );
                                     $result = $statement->execute();
                                     $last_resource_insert_id = $result->current();
                                     $last_resource_insert_id = $last_resource_insert_id['id'];
 
-                                    foreach($value as $k => $v)
-                                    {
-                                        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_permission WHERE permission =  '" . $k . "' AND user_acl_resource_id = '" . $last_resource_insert_id . "'");
+                                    foreach ($value as $k => $v) {
+                                        $statement = $db_adapter->createStatement(
+                                            "SELECT id
+                                            FROM user_acl_permission
+                                            WHERE permission =  '" . $k . "'
+                                                AND user_acl_resource_id = '" . $last_resource_insert_id . "'"
+                                        );
                                         $result = $statement->execute();
                                         $last_insert_id = $result->current();
                                         $last_insert_id = $last_insert_id['id'];
 
-                                        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_role WHERE name = '" . $v . "'");
+                                        $statement = $db_adapter->createStatement(
+                                            "SELECT id FROM user_acl_role WHERE name = '" . $v . "'"
+                                        );
                                         $result = $statement->execute();
                                         $role = $result->current();
-                                        if(!empty($role['id']))
-                                        {
-                                            $statement = $db_adapter->createStatement("INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id) VALUES ('" . $role['id'] . "', " . $last_insert_id . ')');
+                                        if (!empty($role['id'])) {
+                                            $statement = $db_adapter->createStatement(
+                                                "INSERT INTO user_acl
+                                                (
+                                                    user_acl_role_id,
+                                                    user_acl_permission_id
+                                                )
+                                                VALUES ('" . $role['id'] . "', " . $last_insert_id . ')'
+                                            );
                                             $result = $statement->execute();
                                         }
                                     }
                                 }
-                            }
-                            catch(Exception $e)
-                            {
+                            } catch (Exception $e) {
                                 return $this->returnJson(array('messages' => $e->getMessage()));
                             }
 
                             //Add admin user
                             $configuration = $session['install']['configuration'];
-                            if($sql_type == 'mysql')
-                            {
-                                $sql_string = 'INSERT INTO `user` (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
-                            }
-                            else
-                            {
-                                $sql_string = 'INSERT INTO \"user\" (created_at, updated_at, lastname, firstname, email, login, password, user_acl_role_id) VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
+                            if ($sql_type == 'mysql') {
+                                $sql_string = 'INSERT INTO `user`
+                                    (
+                                        created_at,
+                                        updated_at,
+                                        lastname,
+                                        firstname,
+                                        email,
+                                        login,
+                                        password,
+                                        user_acl_role_id
+                                    )
+                                    VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
+                            } else {
+                                $sql_string = 'INSERT INTO \"user\"
+                                    (
+                                        created_at,
+                                        updated_at,
+                                        lastname,
+                                        firstname,
+                                        email,
+                                        login,
+                                        password,
+                                        user_acl_role_id
+                                    )
+                                    VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
                             }
 
-                            $db_adapter->query($sql_string,
-                                array($configuration['admin_lastname'], $configuration['admin_firstname'], $configuration['admin_email'], $configuration['admin_login'], sha1($configuration['admin_password'])));
-                        break;
+                            $db_adapter->query(
+                                $sql_string,
+                                array(
+                                    $configuration['admin_lastname'],
+                                    $configuration['admin_firstname'],
+                                    $configuration['admin_email'],
+                                    $configuration['admin_login'],
+                                    sha1($configuration['admin_password'])
+                                )
+                            );
+                            break;
 
                         //Install template
                         case 'it':
                             $template = $session['install']['configuration']['template'];
                             $template_path = GC_APPLICATION_PATH . sprintf('/data/install/design/%s', $template);
                             $file_path = sprintf('%s/%s.sql', $template_path, $sql_type);
-                            if(!file_exists($file_path))
-                            {
-                                return $this->returnJson(array('success' => FALSE, 'message' => sprintf('Could not find data for this template and driver: Driver %s, path %s', $sql_type, $template_path)));
+                            if (!file_exists($file_path)) {
+                                return $this->returnJson(
+                                    array(
+                                        'success' => false,
+                                        'message' => sprintf(
+                                            'Could not find data for this template and driver: Driver %s, path %s',
+                                            $sql_type,
+                                            $template_path
+                                        )
+                                    )
+                                );
                             }
 
                             $sql = file_get_contents($file_path);
                             $db_adapter->getDriver()->getConnection()->getResource()->exec($sql);
 
                             File::copyDirectory($template_path . '/frontend', GC_APPLICATION_PATH . '/public/frontend');
-                            if(file_exists($template_path . '/files'))
-                            {
+                            if (file_exists($template_path . '/files')) {
                                 File::copyDirectory($template_path . '/files', GC_MEDIA_PATH . '/files');
                             }
-                        break;
+                            break;
 
                         //Create configuration file
                         case 'c-cf':
                             $db = $session['install']['db'];
                             $file = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/config.tpl.php');
-                            $file = str_replace(array(
-                                '__DRIVER__',
-                                '__USERNAME__',
-                                '__PASSWORD__',
-                                '__DATABASE__',
-                                '__HOSTNAME__',
-                            ), array(
-                                $db['driver'],
-                                $db['username'],
-                                $db['password'],
-                                $db['database'],
-                                $db['hostname'],
-                            ), $file);
+                            $file = str_replace(
+                                array(
+                                    '__DRIVER__',
+                                    '__USERNAME__',
+                                    '__PASSWORD__',
+                                    '__DATABASE__',
+                                    '__HOSTNAME__',
+                                ),
+                                array(
+                                    $db['driver'],
+                                    $db['username'],
+                                    $db['password'],
+                                    $db['database'],
+                                    $db['hostname'],
+                                ),
+                                $file
+                            );
 
                             $config_filename = GC_APPLICATION_PATH . '/config/autoload/global.php';
                             file_put_contents($config_filename, $file);
-                            chmod($config_filename, $this->_umask);
+                            chmod($config_filename, $this->umask);
 
-                            return $this->returnJson(array('message' => 'Installation complete. Please refresh or go to /admin page to manage your website.'));
-                        break;
+                            return $this->returnJson(
+                                array(
+                                    'message' => 'Installation complete.
+                                    Please refresh or go to /admin page to manage your website.'
+                                )
+                            );
+                            break;
                     }
-                }
-                catch(Exception $e)
-                {
-                    return $this->returnJson(array('success' => FALSE, 'message' => $e->getMessage()));
+                } catch (Exception $e) {
+                    return $this->returnJson(array('success' => false, 'message' => $e->getMessage()));
                 }
 
-                return $this->returnJson(array('success' => TRUE));
+                return $this->returnJson(array('success' => true));
             }
         }
     }
@@ -504,34 +628,28 @@ class InstallController extends Action
      * @param string $step
      * @return \Zend\View\Model\ViewModel
      */
-    protected function _checkInstall($step)
+    protected function checkInstall($step)
     {
         $session = $this->getSession();
-        if($step == 1)
-        {
-            return TRUE;
+        if ($step == 1) {
+            return true;
         }
 
         //step 2 or higher
-        if(empty($session['install']) or empty($session['install']['lang']))
-        {
+        if (empty($session['install']) or empty($session['install']['lang'])) {
             return $this->redirect()->toRoute('install');
         }
 
         //Higher than 4
-        if($step > 4)
-        {
-            if(empty($session['install']['db']))
-            {
+        if ($step > 4) {
+            if (empty($session['install']['db'])) {
                 return $this->redirect()->toRoute('installDatabase');
             }
         }
 
         //Higher than 5
-        if($step > 5)
-        {
-            if(empty($session['install']['configuration']))
-            {
+        if ($step > 5) {
+            if (empty($session['install']['configuration'])) {
                 return $this->redirect()->toRoute('configuration');
             }
         }

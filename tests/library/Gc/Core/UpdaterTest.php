@@ -40,7 +40,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Updater
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Updater;
+        $this->object = new Updater;
     }
 
     /**
@@ -57,7 +57,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -66,7 +66,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->assertNull($this->_object->init());
+        $this->assertNull($this->object->init());
     }
 
     /**
@@ -74,8 +74,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->assertTrue($this->_object->load('git'));
-        $this->assertFalse($this->_object->load('ssh'));
+        $this->assertTrue($this->object->load('git'));
+        $this->assertFalse($this->object->load('ssh'));
     }
 
     /**
@@ -83,8 +83,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdate()
     {
-        $this->_object->load('git');
-        $this->assertTrue($this->_object->update());
+        $this->object->load('git');
+        $this->assertTrue($this->object->update());
     }
 
     /**
@@ -92,7 +92,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateWithoutAdapter()
     {
-        $this->assertFalse($this->_object->update());
+        $this->assertFalse($this->object->update());
     }
 
     /**
@@ -100,8 +100,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpgrade()
     {
-        $this->_object->load('git');
-        $this->assertTrue($this->_object->upgrade());
+        $this->object->load('git');
+        $this->assertTrue($this->object->upgrade());
     }
 
     /**
@@ -109,8 +109,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testRollback()
     {
-        $this->_object->load('git');
-        $this->assertTrue($this->_object->rollback('version'));
+        $this->object->load('git');
+        $this->assertTrue($this->object->rollback('version'));
     }
 
     /**
@@ -118,7 +118,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testRollbackWithoutAdapter()
     {
-        $this->assertFalse($this->_object->rollback('version'));
+        $this->assertFalse($this->object->rollback('version'));
     }
 
     /**
@@ -126,7 +126,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpgradeWithoutAdapter()
     {
-        $this->assertFalse($this->_object->upgrade());
+        $this->assertFalse($this->object->upgrade());
     }
 
     /**
@@ -143,8 +143,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
         stream_wrapper_register('zend.view', '\Gc\View\Stream');
 
         file_put_contents('zend.view://test-updater', 'SELECT * FROM core_config_data');
-        $this->_object->load('git');
-        $this->assertTrue($this->_object->updateDatabase());
+        $this->object->load('git');
+        $this->assertTrue($this->object->updateDatabase());
     }
 
     /**
@@ -161,8 +161,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
         stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://test-updater', ' ');
 
-        $this->_object->load('git');
-        $this->assertTrue($this->_object->updateDatabase());
+        $this->object->load('git');
+        $this->assertTrue($this->object->updateDatabase());
     }
 
     /**
@@ -179,8 +179,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
         stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://test-updater', 'SELECT FROM core_config_data');
 
-        $this->_object->load('git');
-        $this->assertFalse($this->_object->updateDatabase());
+        $this->object->load('git');
+        $this->assertFalse($this->object->updateDatabase());
     }
 
     /**
@@ -188,7 +188,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateDatabaseWithoutAdapter()
     {
-        $this->assertFalse($this->_object->updateDatabase());
+        $this->assertFalse($this->object->updateDatabase());
     }
 
 
@@ -197,7 +197,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-        $this->_object->load('git');
-        $this->assertInternalType('array', $this->_object->getMessages());
+        $this->object->load('git');
+        $this->assertInternalType('array', $this->object->getMessages());
     }
 }

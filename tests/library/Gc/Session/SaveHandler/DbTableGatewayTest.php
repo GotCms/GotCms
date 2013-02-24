@@ -42,7 +42,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * @var DbTableGateway
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var array
@@ -69,7 +69,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->_adapter = new TableGateway('core_session', \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter());
-        $this->_object = new DbTableGateway($this->_adapter, $tablegateway_config);
+        $this->object = new DbTableGateway($this->_adapter, $tablegateway_config);
 
         $this->_testArray = array('foo' => 'bar', 'bar' => array('foo' => 'bar'));
     }
@@ -80,7 +80,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -89,13 +89,13 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testRead()
     {
-        $this->_object->open('savepath', 'sessionname');
+        $this->object->open('savepath', 'sessionname');
 
         $id = '242';
 
-        $this->assertTrue($this->_object->write($id, serialize($this->_testArray)));
+        $this->assertTrue($this->object->write($id, serialize($this->_testArray)));
 
-        $data = unserialize($this->_object->read($id));
+        $data = unserialize($this->object->read($id));
         $this->assertEquals($this->_testArray, $data, 'Expected ' . var_export($this->_testArray, 1) . "\nbut got: " . var_export($data, 1));
     }
     /**
@@ -104,15 +104,15 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadWithLifetimeExpired()
     {
-        $this->_object->open('savepath', 'sessionname');
+        $this->object->open('savepath', 'sessionname');
 
         $id = '242';
 
-        $this->assertTrue($this->_object->write($id, serialize($this->_testArray)));
+        $this->assertTrue($this->object->write($id, serialize($this->_testArray)));
 
         $this->_adapter->update(array('lifetime' => 0), array('id' => $id));
 
-        $data = $this->_object->read($id);
+        $data = $this->object->read($id);
         $this->assertEquals('', $data);
     }
 
@@ -121,8 +121,8 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrite()
     {
-        $this->_object->open('savepath', 'sessionname');
+        $this->object->open('savepath', 'sessionname');
         $id = '242';
-        $this->assertTrue($this->_object->write($id, serialize($this->_testArray)));
+        $this->assertTrue($this->object->write($id, serialize($this->_testArray)));
     }
 }

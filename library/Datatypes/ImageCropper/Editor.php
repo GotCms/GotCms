@@ -27,10 +27,10 @@
 
 namespace Datatypes\ImageCropper;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Gc\Media\File,
-    Gc\Media\Image,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Gc\Media\File;
+use Gc\Media\Image;
+use Zend\Form\Element;
 
 /**
  * Editor for Image cropper datatype
@@ -56,8 +56,7 @@ class Editor extends AbstractEditor
         $file_class->load($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
         $background_color = empty($parameters['background']) ? '#000000' : $parameters['background'];
 
-        if(!empty($_FILES[$this->getName()]['name']))
-        {
+        if (!empty($_FILES[$this->getName()]['name'])) {
             $_OLD_FILES = $_FILES;
             $file = $_FILES[$this->getName()];
             //Ignore others data
@@ -67,22 +66,16 @@ class Editor extends AbstractEditor
             $file_class->upload();
             $files = $file_class->getFiles();
 
-            if(!empty($files) and is_array($files))
-            {
-                foreach($files as $file)
-                {
+            if (!empty($files) and is_array($files)) {
+                foreach ($files as $file) {
                     $name = $file->filename;
                     $file = $file_class->getPath() . $name;
-                    if(file_exists($file))
-                    {
+                    if (file_exists($file)) {
                         $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
                         $finfo = finfo_open($const); // return mimetype extension
-                        if(!in_array(finfo_file($finfo, $file), $parameters['mime_list']))
-                        {
+                        if (!in_array(finfo_file($finfo, $file), $parameters['mime_list'])) {
                             unlink($file);
-                        }
-                        else
-                        {
+                        } else {
                             $file_info = @getimagesize($file);
                             $data['original'] = array(
                                 'value' => $name,
@@ -94,10 +87,14 @@ class Editor extends AbstractEditor
 
                             $image_model->open($file);
 
-                            foreach($parameters['size'] as $size)
-                            {
+                            foreach ($parameters['size'] as $size) {
                                 $image_model->open($file);
-                                $image_model->resize($size['width'], $size['height'], empty($parameters['resize_option']) ? 'auto' : $parameters['resize_option'], $background_color);
+                                $image_model->resize(
+                                    $size['width'],
+                                    $size['height'],
+                                    empty($parameters['resize_option']) ? 'auto' : $parameters['resize_option'],
+                                    $background_color
+                                );
                                 $size_filename = preg_replace('~\.([a-zA-Z]+)$~', '-' . $size['name'] . '.$1', $name);
                                 $image_model->save($file_class->getPath() . $size_filename);
 
@@ -121,32 +118,33 @@ class Editor extends AbstractEditor
 
             //Restore file data
             $_FILES = $_OLD_FILES;
-        }
-        else
-        {
+        } else {
             $data = $post->get($this->getName() . '-hidden');
             $data = unserialize($data);
 
-            if(!empty($data))
-            {
-                if(!empty($data['original']['value']))
-                {
-                    foreach($parameters['size'] as $size)
-                    {
+            if (!empty($data)) {
+                if (!empty($data['original']['value'])) {
+                    foreach ($parameters['size'] as $size) {
                         $x = (int)$post->get($this->getName() . $size['name'] . '-x');
                         $y = (int)$post->get($this->getName() . $size['name'] . '-y');
 
-                        $filename = !empty($data[$size['name']]['value']) ? $data[$size['name']]['value'] :  preg_replace('~\.([a-zA-Z]+)$~', '-' . $size['name'] . '.$1', $data['original']['value']);
+                        $filename = !empty($data[$size['name']]['value']) ?
+                            $data[$size['name']]['value'] :
+                            preg_replace('~\.([a-zA-Z]+)$~', '-' . $size['name'] . '.$1', $data['original']['value']);
                         $image_model->open($file_class->getPath() . $data['original']['value']);
-                        $image_model->resize($size['width'], $size['height'], empty($parameters['resize_option']) ? 'auto' : $parameters['resize_option'], $background_color, $x, $y);
+                        $image_model->resize(
+                            $size['width'],
+                            $size['height'],
+                            empty($parameters['resize_option']) ? 'auto' : $parameters['resize_option'],
+                            $background_color,
+                            $x,
+                            $y
+                        );
                         $image_model->save($file_class->getPath() . $filename);
-                        if(!empty($data[$size['name']]['value']))
-                        {
+                        if (!empty($data[$size['name']]['value'])) {
                             $data[$size['name']]['x'] = $x;
                             $data[$size['name']]['y'] = $y;
-                        }
-                        else
-                        {
+                        } else {
                             $file_info = @getimagesize($file_class->getPath() . $filename);
                             $data[$size['name']] = array(
                                 'value' => $filename,
@@ -160,27 +158,22 @@ class Editor extends AbstractEditor
                         }
                     }
 
-                    foreach($data as $name => $value)
-                    {
-                        if($name == 'original')
-                        {
+                    foreach ($data as $name => $value) {
+                        if ($name == 'original') {
                             continue;
                         }
 
-                        $found = FALSE;
-                        foreach($parameters['size'] as $size)
-                        {
-                            if($size['name'] == $name)
-                            {
-                                $found = TRUE;
+                        $found = false;
+                        foreach ($parameters['size'] as $size) {
+                            if ($size['name'] == $name) {
+                                $found = true;
                                 $file['options'] = $size;
 
                                 break;
                             }
                         }
 
-                        if(empty($found))
-                        {
+                        if (empty($found)) {
                             unset($data[$name]);
                         }
                     }
@@ -207,33 +200,26 @@ class Editor extends AbstractEditor
 
         $hidden_upload = new Element\Hidden($this->getName() . '-hidden');
         $value = $this->getValue();
-        if(!empty($value))
-        {
+        if (!empty($value)) {
             $hidden_upload->setValue($value);
             $value = unserialize($value);
-            if(is_array($value))
-            {
-                foreach($value as $name => $file)
-                {
-                    if($name == 'original')
-                    {
+            if (is_array($value)) {
+                foreach ($value as $name => $file) {
+                    if ($name == 'original') {
                         continue;
                     }
 
-                    $found = FALSE;
-                    foreach($parameters['size'] as $size)
-                    {
-                        if($size['name'] == $name)
-                        {
-                            $found = TRUE;
+                    $found = false;
+                    foreach ($parameters['size'] as $size) {
+                        if ($size['name'] == $name) {
+                            $found = true;
                             $file['options'] = $size;
 
                             break;
                         }
                     }
 
-                    if(empty($found))
-                    {
+                    if (empty($found)) {
                         unset($value[$name]);
                     }
                 }
@@ -247,12 +233,15 @@ class Editor extends AbstractEditor
         return array(
             $upload,
             $hidden_upload,
-            $this->addPath(__DIR__)->render('upload-editor.phtml', array(
-                'files' => $value,
-                'id' => $this->getName(),
-                'options' => $parameters,
-                'name' => $this->getName(),
-            ))
+            $this->addPath(__DIR__)->render(
+                'upload-editor.phtml',
+                array(
+                    'files' => $value,
+                    'id' => $this->getName(),
+                    'options' => $parameters,
+                    'name' => $this->getName(),
+                )
+            )
         );
     }
 }

@@ -27,8 +27,9 @@
 
 namespace Gc\Datatype;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
+
 /**
  * Collection of Datatype Model
  *
@@ -43,14 +44,14 @@ class Collection extends AbstractTable
      *
      * @var array
      */
-    protected $_datatypes;
+    protected $datatypes;
 
     /**
      * Table name
      *
      * @var string
      */
-    protected $_name = 'datatype';
+    protected $name = 'datatype';
 
     /**
      * Initialize datatype collection
@@ -69,18 +70,20 @@ class Collection extends AbstractTable
      */
     protected function setDatatypes()
     {
-        $rows = $this->fetchAll($this->select(function(Select $select)
-        {
-            $select->order('name');
-        }));
+        $rows = $this->fetchAll(
+            $this->select(
+                function (Select $select) {
+                    $select->order('name');
+                }
+            )
+        );
 
         $datatypes = array();
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $datatypes[] = Model::fromArray((array)$row);
         }
 
-        $this->_datatypes = $datatypes;
+        $this->datatypes = $datatypes;
 
         return $this;
     }
@@ -92,7 +95,7 @@ class Collection extends AbstractTable
      */
     public function getDatatypes()
     {
-        return $this->_datatypes;
+        return $this->datatypes;
     }
 
     /**
@@ -105,8 +108,7 @@ class Collection extends AbstractTable
         $select = array();
         $datatypes = $this->getDatatypes();
 
-        foreach($datatypes as $datatype)
-        {
+        foreach ($datatypes as $datatype) {
             $select[$datatype->getId()] = $datatype->getName();
         }
 

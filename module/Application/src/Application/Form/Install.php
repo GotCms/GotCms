@@ -27,11 +27,11 @@
 
 namespace Application\Form;
 
-use Gc\Form\AbstractForm,
-    Zend\Validator\Db,
-    Zend\Form\Element,
-    Zend\InputFilter\InputFilter,
-    Zend\Locale\Locale;
+use Gc\Form\AbstractForm;
+use Zend\Validator\Db;
+use Zend\Form\Element;
+use Zend\InputFilter\InputFilter;
+use Zend\Locale\Locale;
 
 /**
  * Install form
@@ -69,13 +69,16 @@ class Install extends AbstractForm
             ->setValueOptions($country_available);
 
         $input_filter = $this->getInputFilter();
-        $input_filter->add(array(
-            'name' => 'lang',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter->add(
+            array(
+                'name' => 'lang',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'lang');
+            'lang'
+        );
 
         $this->add($lang);
     }
@@ -89,24 +92,27 @@ class Install extends AbstractForm
     {
         $accept_license = new Element\Checkbox('accept-license');
         $accept_license->setCheckedValue('1')
-            ->setUseHiddenElement(FALSE)
+            ->setUseHiddenElement(false)
             ->setAttribute('id', 'accept-license')
             ->setAttribute('class', 'input-checkbox');
 
         $input_filter = $this->getInputFilter();
-        $input_filter->add(array(
-            'name' => 'accept-license',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
-                array(
-                    'name' => 'greaterthan',
-                    'options' => array(
-                        'min' => 0
-                    )
+        $input_filter->add(
+            array(
+                'name' => 'accept-license',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                    array(
+                        'name' => 'greaterthan',
+                        'options' => array(
+                            'min' => 0
+                        )
+                    ),
                 ),
             ),
-        ), 'accept-license');
+            'accept-license'
+        );
 
         $this->add($accept_license);
     }
@@ -152,42 +158,57 @@ class Install extends AbstractForm
         $this->add($password);
 
         $input_filter = $this->getInputFilter();
-        $input_filter->add(array(
-            'name' => 'driver',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter->add(
+            array(
+                'name' => 'driver',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'driver');
+            'driver'
+        );
 
-        $input_filter->add(array(
-            'name' => 'hostname',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter->add(
+            array(
+                'name' => 'hostname',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'hostname');
+            'hostname'
+        );
 
-        $input_filter->add(array(
-            'name' => 'username',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter->add(
+            array(
+                'name' => 'username',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'username');
+            'username'
+        );
 
-        $input_filter->add(array(
-            'name' => 'password',
-            'required' => FALSE,
-        ), 'password');
-
-        $input_filter->add(array(
-            'name' => 'dbname',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter->add(
+            array(
+                'name' => 'password',
+                'required' => false,
             ),
-        ), 'dbname');
+            'password'
+        );
+
+        $input_filter->add(
+            array(
+                'name' => 'dbname',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            ),
+            'dbname'
+        );
     }
 
     /**
@@ -237,8 +258,7 @@ class Install extends AbstractForm
         $path = GC_APPLICATION_PATH . '/data/install/design/';
         $list_dir = glob($path . '*', GLOB_ONLYDIR);
         $options = array('' => 'Select template');
-        foreach($list_dir as $dir)
-        {
+        foreach ($list_dir as $dir) {
             $dir = str_replace($path, '', $dir);
             $options[$dir] = $dir;
         }
@@ -260,60 +280,84 @@ class Install extends AbstractForm
 
 
         $input_filter = $this->getInputFilter();
-        $input_filter->add(array(
-            'name' => 'site_name',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter->add(
+            array(
+                'name' => 'site_name',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'site_name');
+            'site_name'
+        );
 
-        $input_filter->add(array(
-            'name' => 'admin_firstname',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter->add(
+            array(
+                'name' => 'admin_firstname',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'admin_firstname');
+            'admin_firstname'
+        );
 
-        $input_filter->add(array(
-            'name' => 'admin_lastname',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter->add(
+            array(
+                'name' => 'admin_lastname',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'admin_lastname');
+            'admin_lastname'
+        );
 
-        $input_filter->add(array(
-            'name' => 'admin_email',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
-                array('name' => 'email_address'),
+        $input_filter->add(
+            array(
+                'name' => 'admin_email',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                    array('name' => 'email_address'),
+                ),
             ),
-        ), 'admin_email');
+            'admin_email'
+        );
 
-        $input_filter->add(array(
-            'name' => 'admin_login',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $input_filter->add(
+            array(
+                'name' => 'admin_login',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'admin_login');
+            'admin_login'
+        );
 
-        $input_filter->add(array(
-            'name' => 'site_is_offline',
-            'required' => FALSE,
-        ), 'site_is_offline');
+        $input_filter->add(
+            array(
+                'name' => 'site_is_offline',
+                'required' => false,
+            ),
+            'site_is_offline'
+        );
 
-        $input_filter->add(array(
-            'name' => 'admin_password',
-            'required' => FALSE,
-        ), 'admin_password');
+        $input_filter->add(
+            array(
+                'name' => 'admin_password',
+                'required' => false,
+            ),
+            'admin_password'
+        );
 
-        $input_filter->add(array(
-            'name' => 'template',
-            'required' => TRUE,
-        ), 'template');
+        $input_filter->add(
+            array(
+                'name' => 'template',
+                'required' => true,
+            ),
+            'template'
+        );
     }
 }

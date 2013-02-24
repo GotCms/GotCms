@@ -42,12 +42,12 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var PrevalueEditor
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var DatatypeModel
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -55,15 +55,15 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'ImageCropperTest',
             'prevalue_value' => '',
             'model' => 'ImageCropper',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
         $datatype = new Datatype();
-        $datatype->load($this->_datatype);
-        $this->_object = $datatype->getPrevalueEditor();
+        $datatype->load($this->datatype);
+        $this->object = $datatype->getPrevalueEditor();
     }
 
     /**
@@ -72,9 +72,9 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_datatype->delete();
-        unset($this->_datatype);
-        unset($this->_object);
+        $this->datatype->delete();
+        unset($this->datatype);
+        unset($this->object);
     }
 
     /**
@@ -82,7 +82,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $post = $this->_object->getRequest()->getPost();
+        $post = $this->object->getRequest()->getPost();
         $post->set('background', '#FFFFFF');
         $post->set('resize_option', '#auto');
         $post->set('mime_list', array(
@@ -104,7 +104,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
             ),
         ));
 
-        $this->assertNull($this->_object->save());
+        $this->assertNull($this->object->save());
     }
 
     /**
@@ -112,7 +112,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->_object->setConfig(array(
+        $this->object->setConfig(array(
             'background' => '#FFFFFF',
             'resize_option' => 'auto',
             'mime_list' => array(
@@ -134,6 +134,6 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
             ),
         ));
 
-        $this->assertInternalType('string', $this->_object->load());
+        $this->assertInternalType('string', $this->object->load());
     }
 }

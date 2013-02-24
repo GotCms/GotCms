@@ -34,26 +34,26 @@
         <?php echo $this->tabs; ?>
 
         <?php $fieldsets = $this->form->getFieldsets(); ?>
-        <?php foreach($fieldsets as $tab_id => $fieldset): ?>
+        <?php foreach ($fieldsets as $tab_id => $fieldset): ?>
             <?php $errors = $fieldset->getMessages(); ?>
             <div id="<?php echo $this->escapeHtml($tab_id); ?>">
                 <?php $elements = $fieldset->getElements(); ?>
-                <?php foreach($elements as $element): ?>
+                <?php foreach ($elements as $element): ?>
                     <div>
-                        <?php if($element->getName() == 'more_information'): ?>
+                        <?php if ($element->getName() == 'more_information'): ?>
                             <label><?php echo $this->escapeHtml($this->translate('Preview')); ?></label>
 
                             <a target="_blank" href="<?php echo $this->escapeHtml($this->document->getUrl()); ?>?preview=true"><?php echo $this->escapeHtml($this->document->getUrl()); ?></a>
                         <?php else: ?>
                             <?php $content = $element->getAttribute('content'); ?>
-                            <?php if(!empty($content)): ?>
+                            <?php if (!empty($content)): ?>
                                 <?php echo $content; ?>
                             <?php else: ?>
-                                <?php if($element->getAttribute('type') != 'hidden'): ?>
+                                <?php if ($element->getAttribute('type') != 'hidden'): ?>
                                     <?php $label = $element->getAttribute('label'); ?>
-                                    <?php if(!empty($label)): ?>
+                                    <?php if (!empty($label)): ?>
                                         <?php $id = $element->getAttribute('id'); ?>
-                                        <label class="required"<?php if(!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+                                        <label class="required"<?php if (!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($label)); ?></label>
                                     <?php endif; ?>
                                 <?php endif; ?>
 

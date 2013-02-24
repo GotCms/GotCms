@@ -27,10 +27,11 @@
 
 namespace Gc\Datatype\AbstractDatatype;
 
-use Gc\Core\Object,
-    Gc\Datatype,
-    Gc\Registry,
-    Zend\EventManager\StaticEventManager;
+use Gc\Core\Object;
+use Gc\Datatype;
+use Gc\Registry;
+use Zend\EventManager\StaticEventManager;
+
 /**
  * Abstract Editor class
  * Use for display Editor in Manage Content
@@ -46,28 +47,28 @@ abstract class AbstractEditor extends Object
      *
      * @var AbstractDatatype
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * Property model
      *
      * @var \Gc\Property\Model
      */
-    protected $_property;
+    protected $property;
 
     /**
      * Get name of datatype
      *
      * @var string
      */
-    protected $_name;
+    protected $name;
 
     /**
      * Configuration
      *
      * @var mixed
      */
-    protected $_config;
+    protected $config;
 
     /**
      * Abstract function for save Editor
@@ -93,8 +94,8 @@ abstract class AbstractEditor extends Object
      */
     public function __construct(Datatype\AbstractDatatype $datatype_abstract)
     {
-        $this->_datatype = $datatype_abstract;
-        $this->_property = $datatype_abstract->getProperty();
+        $this->datatype = $datatype_abstract;
+        $this->property = $datatype_abstract->getProperty();
         parent::__construct();
     }
 
@@ -170,7 +171,7 @@ abstract class AbstractEditor extends Object
      */
     public function getProperty()
     {
-        return $this->_property;
+        return $this->property;
     }
 
     /**
@@ -180,7 +181,7 @@ abstract class AbstractEditor extends Object
      */
     public function getDatatype()
     {
-        return $this->_datatype;
+        return $this->datatype;
     }
 
     /**

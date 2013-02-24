@@ -40,7 +40,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Model
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Model;
+        $this->object = new Model;
     }
 
     /**
@@ -88,13 +88,13 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->_object->setData(array(
+        $this->object->setData(array(
             'name' => 'IconTest',
             'url' => 'IconTest'
         ));
-        $this->assertInternalType('integer', $this->_object->save());
+        $this->assertInternalType('integer', $this->object->save());
         //Code coverage
-        $this->assertInternalType('integer', $this->_object->save());
+        $this->assertInternalType('integer', $this->object->save());
     }
 
     /**
@@ -103,7 +103,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithWrongValues()
     {
         $this->setExpectedException('Gc\Exception');
-        $this->assertFalse($this->_object->save());
+        $this->assertFalse($this->object->save());
     }
 
     /**
@@ -111,13 +111,13 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $this->_object->setData(array(
+        $this->object->setData(array(
             'name' => 'IconTest',
             'url' => 'IconTest'
         ));
-        $this->_object->save();
+        $this->object->save();
 
-        $this->assertTrue($this->_object->delete());
+        $this->assertTrue($this->object->delete());
     }
 
     /**
@@ -125,7 +125,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteWithNoData()
     {
-        $this->assertFalse($this->_object->delete());
+        $this->assertFalse($this->object->delete());
     }
 
     /**
@@ -134,7 +134,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testDeleteWithWrongValues()
     {
         $this->setExpectedException('Gc\Exception');
-        $this->_object->setId('undefined');
-        $this->assertFalse($this->_object->delete());
+        $this->object->setId('undefined');
+        $this->assertFalse($this->object->delete());
     }
 }

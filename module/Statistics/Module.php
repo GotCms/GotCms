@@ -42,12 +42,12 @@ class Module extends Mvc\Module
      *
      * @var string
      */
-    protected $_directory = __DIR__;
+    protected $directory = __DIR__;
 
     /**
      * Module namespace
      *
      * @var string
      */
-    protected $_namespace = __NAMESPACE__;
+    protected $namespace = __NAMESPACE__;
 }

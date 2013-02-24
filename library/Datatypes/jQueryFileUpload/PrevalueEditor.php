@@ -27,8 +27,8 @@
 
 namespace Datatypes\jQueryFileUpload;
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Zend\Form\Element;
 
 /**
  * Prevalue Editor for Upload datatype
@@ -50,7 +50,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $mime_list = $post->get('mime_list');
         $options_post = $post->get('options', array());
         $options = array();
-        $options['maxNumberOfFiles'] = in_array('maxNumberOfFiles', $options_post) ? TRUE : FALSE;
+        $options['maxNumberOfFiles'] = in_array('maxNumberOfFiles', $options_post) ? true : false;
 
         $this->setConfig(array('mime_list' => $mime_list, 'options' => $options));
     }
@@ -70,13 +70,15 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $element = new Element\MultiCheckbox('options');
         $element->setAttribute('selected', $options_values);
 
-        $element->setValueOptions(array(
+        $element->setValueOptions(
             array(
-                'value' => 'maxNumberOfFiles',
-                'label' => 'Is multiple',
-                'selected' => empty($options_values['maxNumberOfFiles']) ? FALSE : TRUE,
-            ),
-        ));
+                array(
+                    'value' => 'maxNumberOfFiles',
+                    'label' => 'Is multiple',
+                    'selected' => empty($options_values['maxNumberOfFiles']) ? false : true,
+                ),
+            )
+        );
         $fieldset->add($element);
 
         $elements[] = $fieldset;
@@ -106,12 +108,15 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'audio/x-wav'
         );
         $options = array();
-        foreach($mime_list as $mime)
-        {
+        foreach ($mime_list as $mime) {
             $options[] = array(
                 'value' => $mime,
                 'label' => $mime,
-                'selected' => !in_array($mime, empty($parameters['mime_list']) ? array() : $parameters['mime_list']) ? FALSE : TRUE,
+                'selected' =>
+                    !in_array(
+                        $mime,
+                        empty($parameters['mime_list']) ? array() : $parameters['mime_list']
+                    ) ? false : true,
             );
         }
         $element->setValueOptions($options);

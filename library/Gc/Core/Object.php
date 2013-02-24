@@ -27,8 +27,9 @@
 
 namespace Gc\Core;
 
-use SimpleXMLElement,
-    Zend\Json\Json;
+use SimpleXMLElement;
+use Zend\Json\Json;
+
 /**
  * Abstract object, all classes are extends from it to
  * automate accessors, generate xml, json or array.
@@ -48,21 +49,21 @@ abstract class Object
      *
      * @var array
      */
-     protected $_origData;
+     protected $origData;
 
     /**
      * Object attributes
      *
      * @var array
      */
-    protected $_data = array();
+    protected $data = array();
 
     /**
      * Setter/Getter underscore transformation cache
      *
      * @var array
      */
-    protected static $_underscoreCache = array();
+    protected static $underscoreCache = array();
 
     /**
      * Set Id
@@ -70,7 +71,7 @@ abstract class Object
      * @param integer $id
      * @return \Gc\Core\Object
      */
-    protected function setId($id = NULL)
+    protected function setId($id = null)
     {
         return $this->setData('id', $id);
     }
@@ -105,8 +106,7 @@ abstract class Object
      */
     public function addData(array $array)
     {
-        foreach($array as $index => $value)
-        {
+        foreach ($array as $index => $value) {
             $this->setData($index, $value);
         }
 
@@ -125,15 +125,12 @@ abstract class Object
      * @param mixed $value
      * @return \Gc\Core\Object
      */
-    public function setData($key, $value = NULL)
+    public function setData($key, $value = null)
     {
-        if(is_array($key))
-        {
-            $this->_data = $key;
-        }
-        else
-        {
-            $this->_data[$key] = $value;
+        if (is_array($key)) {
+            $this->data = $key;
+        } else {
+            $this->data[$key] = $value;
         }
 
         return $this;
@@ -147,15 +144,12 @@ abstract class Object
      * @param string $key
      * @return \Gc\Core\Object
      */
-    public function unsetData($key = NULL)
+    public function unsetData($key = null)
     {
-        if(is_null($key))
-        {
-            $this->_data = array();
-        }
-        else
-        {
-            unset($this->_data[$key]);
+        if (is_null($key)) {
+            $this->data = array();
+        } else {
+            unset($this->data[$key]);
         }
 
         return $this;
@@ -174,32 +168,26 @@ abstract class Object
      * @param string|int $index
      * @return mixed
      */
-    public function getData($key='', $index = NULL)
+    public function getData($key = '', $index = null)
     {
-        if('' === $key)
-        {
-            return $this->_data;
+        if ('' === $key) {
+            return $this->data;
         }
 
-        $default = NULL;
+        $default = null;
 
         // accept a/b/c as ['a']['b']['c']
-        // Not  !== FALSE no need '/a/b always return NULL
-        if(strpos($key, '/'))
-        {
+        // Not  !== false no need '/a/b always return null
+        if (strpos($key, '/')) {
             $key_array = explode('/', $key);
-            $data = $this->_data;
-            foreach($key_array as $i => $k)
-            {
-                if($k === '')
-                {
+            $data = $this->data;
+            foreach ($key_array as $i => $k) {
+                if ($k === '') {
                     return $default;
                 }
 
-                if(is_array($data))
-                {
-                    if(!isset($data[$k]))
-                    {
+                if (is_array($data)) {
+                    if (!isset($data[$k])) {
                         return $default;
                     }
 
@@ -211,30 +199,24 @@ abstract class Object
         }
 
         // legacy functionality for $index
-        if(isset($this->_data[$key]))
-        {
-            if(is_null($index))
-            {
-                return $this->_data[$key];
+        if (isset($this->data[$key])) {
+            if (is_null($index)) {
+                return $this->data[$key];
             }
 
-            $value = $this->_data[$key];
-            if(is_array($value))
-            {
-                if(isset($value[$index]))
-                {
+            $value = $this->data[$key];
+            if (is_array($value)) {
+                if (isset($value[$index])) {
                     return $value[$index];
                 }
 
-                return NULL;
-            }
-            elseif(is_string($value))
-            {
+                return null;
+            } elseif (is_string($value)) {
                 $array = explode(PHP_EOL, $value);
-                return(isset($array[$index]) &&(!empty($array[$index]) || strlen($array[$index]) > 0)) ? $array[$index] : NULL;
-            }
-            elseif($value instanceof Object)
-            {
+                return(isset($array[$index])
+                    &&(!empty($array[$index])
+                    || strlen($array[$index]) > 0)) ? $array[$index] : null;
+            } elseif ($value instanceof Object) {
                 return $value->getData($index);
             }
 
@@ -251,14 +233,13 @@ abstract class Object
      * @param string $key
      * @return boolean
      */
-    public function hasData($key='')
+    public function hasData($key = '')
     {
-        if(empty($key) || !is_string($key))
-        {
-            return !empty($this->_data);
+        if (empty($key) || !is_string($key)) {
+            return !empty($this->data);
         }
 
-        return array_key_exists($key, $this->_data);
+        return array_key_exists($key, $this->data);
     }
 
     /**
@@ -269,21 +250,16 @@ abstract class Object
      */
     public function __toArray(array $array = array())
     {
-        if(empty($array))
-        {
-            return $this->_data;
+        if (empty($array)) {
+            return $this->data;
         }
 
         $array_result = array();
-        foreach($array as $attribute)
-        {
-            if(isset($this->_data[$attribute]))
-            {
-                $array_result[$attribute] = $this->_data[$attribute];
-            }
-            else
-            {
-                $array_result[$attribute] = NULL;
+        foreach ($array as $attribute) {
+            if (isset($this->data[$attribute])) {
+                $array_result[$attribute] = $this->data[$attribute];
+            } else {
+                $array_result[$attribute] = null;
             }
         }
 
@@ -310,38 +286,35 @@ abstract class Object
      * @param boolean $add_cdata insert CDATA[]
      * @return string
      */
-    protected function __toXml(array $array = array(), $root_name = 'item', $add_open_tag = FALSE, $add_cdata = TRUE)
-    {
+    protected function __toXml(
+        array $array = array(),
+        $root_name = 'item',
+        $add_open_tag = false,
+        $add_cdata = true
+    ) {
         $xml = '';
-        if($add_open_tag)
-        {
+        if ($add_open_tag) {
             $xml .= '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
         }
 
-        if(!empty($root_name))
-        {
+        if (!empty($root_name)) {
             $xml .= '<' . $root_name . '>' . PHP_EOL;
         }
 
         $xml_model = new SimpleXMLElement('<node></node>');
-        $array_data = $this->toArray($array);
+        $arraydata = $this->toArray($array);
 
-        foreach($array_data as $field_name => $field_value)
-        {
-            if($add_cdata === TRUE)
-            {
+        foreach ($arraydata as $field_name => $field_value) {
+            if ($add_cdata === true) {
                 $field_value = '<![CDATA[' . $field_value . ']]>';
-            }
-            else
-            {
+            } else {
                 $field_value = htmlentities($field_value);
             }
 
             $xml .= '<' . $field_name . '>' . $field_value . '</' . $field_name . '>' . PHP_EOL;
         }
 
-        if(!empty($root_name))
-        {
+        if (!empty($root_name)) {
 
             $xml .= '</' . $root_name . '>' . PHP_EOL;
         }
@@ -358,7 +331,7 @@ abstract class Object
      * @param boolean $add_cdata insert CDATA[]
      * @return string
      */
-    public function toXml(array $array = array(), $root_name = 'item', $add_open_tag = FALSE, $add_cdata = TRUE)
+    public function toXml(array $array = array(), $root_name = 'item', $add_open_tag = false, $add_cdata = true)
     {
         return $this->__toXml($array, $root_name, $add_open_tag, $add_cdata);
     }
@@ -371,8 +344,8 @@ abstract class Object
      */
     protected function __toJson(array $array = array())
     {
-        $array_data = $this->toArray($array);
-        $json = Json::encode($array_data);
+        $arraydata = $this->toArray($array);
+        $json = Json::encode($arraydata);
         return $json;
     }
 
@@ -395,17 +368,13 @@ abstract class Object
      * @param string $format
      * @return string
      */
-    public function toString($format='')
+    public function toString($format = '')
     {
-        if(empty($format))
-        {
+        if (empty($format)) {
             $str = implode(', ', $this->getData());
-        }
-        else
-        {
+        } else {
             preg_match_all('/\{\{([a-z0-9_]+)\}\}/is', $format, $matches);
-            foreach($matches[1] as $var)
-            {
+            foreach ($matches[1] as $var) {
                 $format = str_replace('{{' . $var . '}}', $this->getData($var), $format);
             }
 
@@ -424,30 +393,26 @@ abstract class Object
      */
     public function __call($method, $args)
     {
-        switch(substr($method, 0, 3))
-        {
-            case 'get' :
-                $key = $this->_underscore(substr($method, 3));
-                $data = $this->getData($key, isset($args[0]) ? $args[0] : NULL);
+        switch(substr($method, 0, 3)) {
+            case 'get':
+                $key = $this->underscore(substr($method, 3));
+                $data = $this->getData($key, isset($args[0]) ? $args[0] : null);
                 return $data;
-            break;
-
-            case 'set' :
-                $key = $this->_underscore(substr($method, 3));
-                $result = $this->setData($key, isset($args[0]) ? $args[0] : NULL);
+                break;
+            case 'set':
+                $key = $this->underscore(substr($method, 3));
+                $result = $this->setData($key, isset($args[0]) ? $args[0] : null);
                 return $result;
-            break;
-
-            case 'uns' :
-                $key = $this->_underscore(substr($method, 3));
+                break;
+            case 'uns':
+                $key = $this->underscore(substr($method, 3));
                 $result = $this->unsetData($key);
                 return $result;
-            break;
-
-            case 'has' :
-                $key = $this->_underscore(substr($method, 3));
-                return isset($this->_data[$key]);
-            break;
+                break;
+            case 'has':
+                $key = $this->underscore(substr($method, 3));
+                return isset($this->data[$key]);
+                break;
         }
 
         throw new \Gc\Exception('Invalid method ' . get_class($this) . '::' . $method . '(' . print_r($args, 1) . ')');
@@ -462,15 +427,14 @@ abstract class Object
      * @param string $name
      * @return string
      */
-    protected function _underscore($name)
+    protected function underscore($name)
     {
-        if(isset(self::$_underscoreCache[$name]))
-        {
-            return self::$_underscoreCache[$name];
+        if (isset(self::$underscoreCache[$name])) {
+            return self::$underscoreCache[$name];
         }
 
         $result = strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $name));
-        self::$_underscoreCache[$name] = $result;
+        self::$underscoreCache[$name] = $result;
 
         return $result;
     }
@@ -484,7 +448,7 @@ abstract class Object
      */
     public function offsetSet($offset, $value)
     {
-        $this->_data[$offset] = $value;
+        $this->data[$offset] = $value;
     }
 
     /**
@@ -496,7 +460,7 @@ abstract class Object
      */
     public function offsetExists($offset)
     {
-        return isset($this->_data[$offset]);
+        return isset($this->data[$offset]);
     }
 
     /**
@@ -507,7 +471,7 @@ abstract class Object
      */
     public function offsetUnset($offset)
     {
-        unset($this->_data[$offset]);
+        unset($this->data[$offset]);
     }
 
     /**
@@ -519,57 +483,53 @@ abstract class Object
      */
     public function offsetGet($offset)
     {
-        return isset($this->_data[$offset]) ? $this->_data[$offset] : NULL;
+        return isset($this->data[$offset]) ? $this->data[$offset] : null;
     }
 
-     /**
-      * Get Original data
-      *
-      * @param string $key
-      * @return mixed
-      */
-     public function getOrigData($key = NULL)
-     {
-         if(is_null($key))
-         {
-             return $this->_origData;
-         }
+    /**
+     * Get Original data
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function getOrigData($key = null)
+    {
+        if (is_null($key)) {
+            return $this->origData;
+        }
 
-         return isset($this->_origData[$key]) ? $this->_origData[$key] : NULL;
-     }
+        return isset($this->origData[$key]) ? $this->origData[$key] : null;
+    }
 
-     /**
-      * Set Original data
-      *
-      * @param string $key
-      * @param mixed $data
-      * @return Varien_Object
-      */
-     public function setOrigData($key = NULL, $data = NULL)
-     {
-         if(is_null($key))
-         {
-             $this->_origData = $this->_data;
-         }
-         else
-         {
-             $this->_origData[$key] = $data;
-         }
+    /**
+     * Set Original data
+     *
+     * @param string $key
+     * @param mixed $data
+     * @return Varien_Object
+     */
+    public function setOrigData($key = null, $data = null)
+    {
+        if (is_null($key)) {
+            $this->origData = $this->data;
+        } else {
+            $this->origData[$key] = $data;
+        }
 
-         return $this;
-     }
+        return $this;
+    }
 
-      /**
-      * Check if data has changed
-      *
-      * @param string $field
-      * @return boolean
-      */
-     public function hasDataChangedFor($field)
-     {
-         $new_data = $this->getData($field);
-         $orig_data = $this->getOrigData($field);
+    /**
+     * Check if data has changed
+     *
+     * @param string $field
+     * @return boolean
+     */
+    public function hasDataChangedFor($field)
+    {
+        $newdata = $this->getData($field);
+        $origdata = $this->getOrigData($field);
 
-         return $new_data != $orig_data;
-     }
+        return $newdata != $origdata;
+    }
 }

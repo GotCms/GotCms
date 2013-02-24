@@ -27,8 +27,8 @@
 
 namespace Gc\Module;
 
-use Zend\EventManager\Event,
-    Gc\Registry;
+use Zend\EventManager\Event;
+use Gc\Registry;
 
 /**
  * Abstract module bootstrap
@@ -44,27 +44,27 @@ abstract class AbstractModule
      *
      * @param Event $e
      */
-    abstract function init(Event $e);
+    abstract public function init(Event $e);
 
     /**
      * Install module
      *
      * @return boolean
      */
-    abstract function install();
+    abstract public function install();
     /**
      * Uninstall module
      *
      * @return boolean
      */
-    abstract function uninstall();
+    abstract public function uninstall();
 
     /**
      * Return database adapter
      *
      * @return \Zend\Db\Adapter\Adapter
      */
-    protected function _getAdapter()
+    protected function getAdapter()
     {
         return Registry::get('Db');
     }
@@ -74,7 +74,7 @@ abstract class AbstractModule
      *
      * @return string
      */
-    protected function _getDriverName()
+    protected function getDriverName()
     {
          $configuration = Registry::get('Configuration');
          return $configuration['db']['driver'];

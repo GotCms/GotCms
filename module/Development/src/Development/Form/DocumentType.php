@@ -27,18 +27,18 @@
 
 namespace Development\Form;
 
-use Gc\Form\AbstractForm,
-    Gc\Datatype,
-    Gc\DocumentType\Model as DocumentTypeModel,
-    Gc\DocumentType\Collection as DocumentTypeCollection,
-    Gc\Media\Icon,
-    Gc\Property,
-    Gc\Tab,
-    Gc\View,
-    Zend\Validator\Db,
-    Zend\Form\Element,
-    Zend\InputFilter\InputFilter,
-    Zend\Form\FieldSet;
+use Gc\Form\AbstractForm;
+use Gc\Datatype;
+use Gc\DocumentType\Model as DocumentTypeModel;
+use Gc\DocumentType\Collection as DocumentTypeCollection;
+use Gc\Media\Icon;
+use Gc\Property;
+use Gc\Tab;
+use Gc\View;
+use Zend\Validator\Db;
+use Zend\Form\Element;
+use Zend\InputFilter\InputFilter;
+use Zend\Form\FieldSet;
 
 /**
  * Document type form
@@ -54,14 +54,14 @@ class DocumentType extends AbstractForm
      *
      * @var \Gc\View\Collection
      */
-     protected $_viewCollection;
+     protected $viewCollection;
 
      /**
       * Datatype collection
       *
       * @var \Gc\Datatype\Collection
       */
-     protected $_datatypeCollection;
+     protected $datatypeCollection;
 
     /**
      * Init document type form
@@ -71,8 +71,8 @@ class DocumentType extends AbstractForm
     public function init()
     {
         $this->setInputFilter(new InputFilter());
-        $this->_datatypeCollection = new Datatype\Collection();
-        $this->_viewCollection = new View\Collection();
+        $this->datatypeCollection = new Datatype\Collection();
+        $this->viewCollection = new View\Collection();
 
         $this->getInfos();
         $this->getViews();
@@ -90,45 +90,47 @@ class DocumentType extends AbstractForm
     protected function getInfos()
     {
         $fieldsets = $this->getFieldSets();
-        if(!empty($fieldsets['infos']))
-        {
+        if (!empty($fieldsets['infos'])) {
             return $fieldsets['infos'];
         }
 
         $fieldsets = new FieldSet('infos');
 
-        $this->getInputFilter()->add(array(
-            'type'   => 'Zend\InputFilter\InputFilter',
-            'name' => array(
-                'name' => 'name',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                    array(
-                        'name' => 'db\\no_record_exists',
-                        'options' => array(
-                            'table' => 'document_type',
-                            'field' => 'name',
-                            'adapter' => $this->getAdapter(),
+        $this->getInputFilter()->add(
+            array(
+                'type'   => 'Zend\InputFilter\InputFilter',
+                'name' => array(
+                    'name' => 'name',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                        array(
+                            'name' => 'db\\no_record_exists',
+                            'options' => array(
+                                'table' => 'document_type',
+                                'field' => 'name',
+                                'adapter' => $this->getAdapter(),
+                            ),
                         ),
                     ),
                 ),
+                'description' => array(
+                    'name' => 'description',
+                    'required' => false,
+                ),
+                'icon_id' => array(
+                    'name' => 'icon_id',
+                    'required' => true,
+                    'allow_empty' => false,
+                ),
+                'dependency' => array(
+                    'name' => 'dependency',
+                    'required' => false,
+                    'allow_empty' => false,
+                ),
             ),
-            'description' => array(
-                'name' => 'description',
-                'required' => FALSE,
-            ),
-            'icon_id' => array(
-                'name' => 'icon_id',
-                'required' => TRUE,
-                'allow_empty' => FALSE,
-            ),
-            'dependency' => array(
-                'name' => 'dependency',
-                'required' => FALSE,
-                'allow_empty' => FALSE,
-            ),
-        ), 'infos');
+            'infos'
+        );
 
 
         $fieldsets->add(new Element\Text('name'));
@@ -141,8 +143,7 @@ class DocumentType extends AbstractForm
 
         $document_type_collection = new DocumentTypeCollection();
         $select = $document_type_collection->getSelect();
-        if(!empty($select))
-        {
+        if (!empty($select)) {
             $dependency = new Element\MultiCheckbox('infos[dependency]');
             $dependency->setValueOptions($document_type_collection->getSelect());
             $fieldsets->add($dependency);
@@ -161,8 +162,7 @@ class DocumentType extends AbstractForm
     protected function getViews()
     {
         $fieldsets = $this->getFieldSets();
-        if(!empty($fieldsets['views']))
-        {
+        if (!empty($fieldsets['views'])) {
             return $fieldsets['views'];
         }
 
@@ -170,30 +170,33 @@ class DocumentType extends AbstractForm
 
         $available_views = new Element\Select('available_views');
         $available_views->setAttribute('multiple', 'multiple');
-        $available_views->setValueOptions(array('' => '') + $this->_viewCollection->getSelect());
+        $available_views->setValueOptions(array('' => '') + $this->viewCollection->getSelect());
         $fieldsets->add($available_views);
 
         $default_view = new Element\Select('default_view');
-        $default_view->setValueOptions($this->_viewCollection->getSelect());
+        $default_view->setValueOptions($this->viewCollection->getSelect());
         $fieldsets->add($default_view);
 
         $this->add($fieldsets);
 
-        $this->getInputFilter()->add(array(
-            'type'   => 'Zend\InputFilter\InputFilter',
-            'default_view' => array(
-                'name' => 'default_view',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty')
+        $this->getInputFilter()->add(
+            array(
+                'type'   => 'Zend\InputFilter\InputFilter',
+                'default_view' => array(
+                    'name' => 'default_view',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty')
+                    ),
+                ),
+                'available_views' => array(
+                    'name' => 'available_views',
+                    'required' => false,
+                    'allow_empty' => false,
                 ),
             ),
-            'available_views' => array(
-                'name' => 'available_views',
-                'required' => FALSE,
-                'allow_empty' => FALSE,
-            ),
-        ), 'views');
+            'views'
+        );
 
         return $fieldsets;
     }
@@ -206,15 +209,14 @@ class DocumentType extends AbstractForm
     protected function getProperties()
     {
         $fieldsets = $this->getFieldSets();
-        if(!empty($fieldsets['properties']))
-        {
+        if (!empty($fieldsets['properties'])) {
             return $fieldsets['properties'];
         }
 
         $fieldsets = new FieldSet('properties');
 
         $datatypes = new Element\Select('datatypes');
-        $datatypes->setValueOptions($this->_datatypeCollection->getSelect())
+        $datatypes->setValueOptions($this->datatypeCollection->getSelect())
             ->setAttribute('type', 'select');
 
         $fieldsets->add($datatypes);
@@ -233,8 +235,7 @@ class DocumentType extends AbstractForm
      */
     public function addProperty($property)
     {
-        if(!is_array($property) and !$property instanceof Property\Model)
-        {
+        if (!is_array($property) and !$property instanceof Property\Model) {
             return $this;
         }
 
@@ -250,15 +251,14 @@ class DocumentType extends AbstractForm
 
         $datatype = new Element\Select('datatype');
         $datatype->setAttribute('class', 'select-datatype')
-            ->setValueOptions($this->_datatypeCollection->getSelect());
+            ->setValueOptions($this->datatypeCollection->getSelect());
 
         $description = new Element\Text('description');
         $required = new Element\Checkbox('required');
         $required->setValue(1);
         $property_id = new Element\Hidden('property_id');
 
-        if($property instanceof Property\Model)
-        {
+        if ($property instanceof Property\Model) {
             $name->setValue($property->getName());
             $identifier->setValue($property->getIdentifier());
             $tab->setValue($property->getTabId());
@@ -267,9 +267,7 @@ class DocumentType extends AbstractForm
             $required->setCheckedValue($property->isRequired());
             $property_id->setValue($property->getId());
             $property_fieldset_name = $property->getId();
-        }
-        elseif(is_array($property))
-        {
+        } elseif (is_array($property)) {
             $name->setValue($property['name']);
             $identifier->setValue($property['identifier']);
             $tab->setValue($property['tab']);
@@ -290,50 +288,53 @@ class DocumentType extends AbstractForm
         $property_form->add($required);
         $fieldsets->add($property_form);
 
-        $this->getInputFilter()->get('properties')->add(array(
-            'type'   => 'Zend\InputFilter\InputFilter',
-            'name' => array(
-                'name' => 'name',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty')
+        $this->getInputFilter()->get('properties')->add(
+            array(
+                'type'   => 'Zend\InputFilter\InputFilter',
+                'name' => array(
+                    'name' => 'name',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty')
+                    ),
                 ),
-            ),
-            'identifier' => array(
-                'name' => 'identifier',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                    array('name' => 'regex', 'options' => array(
-                        'pattern' => parent::IDENTIFIER_PATTERN
-                    ))
+                'identifier' => array(
+                    'name' => 'identifier',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                        array('name' => 'regex', 'options' => array(
+                            'pattern' => parent::IDENTIFIER_PATTERN
+                        ))
+                    ),
                 ),
-            ),
-            'tab' => array(
-                'name' => 'tab',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty')
+                'tab' => array(
+                    'name' => 'tab',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty')
+                    ),
                 ),
-            ),
-            'datatype' => array(
-                'name' => 'datatype',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty')
+                'datatype' => array(
+                    'name' => 'datatype',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty')
+                    ),
                 ),
+                'description' => array(
+                    'name' => 'description',
+                    'required' => false,
+                    'allow_empty' => false,
+                ),
+                'required' => array(
+                    'name' => 'required',
+                    'required' => false,
+                    'allow_empty' => false,
+                )
             ),
-            'description' => array(
-                'name' => 'description',
-                'required' => FALSE,
-                'allow_empty' => FALSE,
-            ),
-            'required' => array(
-                'name' => 'required',
-                'required' => FALSE,
-                'allow_empty' => FALSE,
-            )
-        ), $property_fieldset_name);
+            $property_fieldset_name
+        );
 
         return $this;
     }
@@ -346,8 +347,7 @@ class DocumentType extends AbstractForm
     protected function getTabs()
     {
         $fieldsets = $this->getFieldSets();
-        if(!empty($fieldsets['tabs']))
-        {
+        if (!empty($fieldsets['tabs'])) {
             return $fieldsets['tabs'];
         }
 
@@ -371,8 +371,7 @@ class DocumentType extends AbstractForm
      */
     public function addTab($tab)
     {
-        if(!is_array($tab) and !$tab instanceof Tab\Model)
-        {
+        if (!is_array($tab) and !$tab instanceof Tab\Model) {
             return $this;
         }
 
@@ -384,16 +383,13 @@ class DocumentType extends AbstractForm
 
         $tab_id = new Element\Hidden('tab_id');
 
-        if($tab instanceof Tab\Model)
-        {
+        if ($tab instanceof Tab\Model) {
             $name->setValue($tab->getName());
             $description->setValue($tab->getDescription());
             $tab_id->setValue($tab->getId());
             $tab_fieldset_name = $tab->getId();
 
-        }
-        elseif(is_array($tab))
-        {
+        } elseif (is_array($tab)) {
             $name->setValue($tab['name']);
             $description->setValue($tab['description']);
             $tab_id->setValue(str_replace('tab', '', $tab['id']));
@@ -408,23 +404,26 @@ class DocumentType extends AbstractForm
 
         //Input filter
 
-        $this->getInputFilter()->get('tabs')->add(array(
-            'type'   => 'Zend\InputFilter\InputFilter',
-            'name' => array(
-                'name' => 'name',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty')
+        $this->getInputFilter()->get('tabs')->add(
+            array(
+                'type'   => 'Zend\InputFilter\InputFilter',
+                'name' => array(
+                    'name' => 'name',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty')
+                    ),
+                ),
+                'description' => array(
+                    'name' => 'description',
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty')
+                    ),
                 ),
             ),
-            'description' => array(
-                'name' => 'description',
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty')
-                ),
-            ),
-        ), $tab_fieldset_name);
+            $tab_fieldset_name
+        );
 
         return $this;
     }
@@ -438,15 +437,13 @@ class DocumentType extends AbstractForm
      */
     public function setValues($element)
     {
-        if($element instanceof DocumentTypeModel)
-        {
+        if ($element instanceof DocumentTypeModel) {
             $infos_form = $this->getInfos();
             $infos_form->get('name')->setValue($element->getName());
             $infos_form->get('description')->setValue($element->getDescription());
             $infos_form->get('icon_id')->setValue($element->getIconId());
             $dependency = $infos_form->get('infos[dependency]');
-            if(!empty($dependency))
-            {
+            if (!empty($dependency)) {
                 $dependency->setValue($element->getDependencies());
             }
 
@@ -461,28 +458,21 @@ class DocumentType extends AbstractForm
             $this->getTabs()->get('tabs_list')->setValueOptions($tab_collection->getImportableTabs($element->getId()));
 
             $session = $element;
-            foreach($tabs as $tab_id => $tab)
-            {
+            foreach ($tabs as $tab_id => $tab) {
                 $this->addTab($tab);
                 $properties = $tab->getProperties();
-                foreach($properties as $property)
-                {
+                foreach ($properties as $property) {
                     $this->addProperty($property);
                 }
             }
-        }
-        else
-        {
-            if(empty($element['tabs']))
-            {
+        } else {
+            if (empty($element['tabs'])) {
                 return;
             }
 
             $tab_select = array();
-            foreach($element['tabs'] as $tab_id => $tab)
-            {
-                if(!is_array($tab))
-                {
+            foreach ($element['tabs'] as $tab_id => $tab) {
+                if (!is_array($tab)) {
                     continue;
                 }
 
@@ -491,10 +481,8 @@ class DocumentType extends AbstractForm
                 $tab_select[$tab_id] = $tab['name'];
             }
 
-            foreach($element['properties'] as $property_id => $property)
-            {
-                if(!is_array($property))
-                {
+            foreach ($element['properties'] as $property_id => $property) {
+                if (!is_array($property)) {
                     continue;
                 }
 

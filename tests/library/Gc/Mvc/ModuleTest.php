@@ -44,7 +44,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Module
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -52,7 +52,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new ModuleUnitTest;
+        $this->object = new ModuleUnitTest;
     }
 
     /**
@@ -69,17 +69,17 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testOnBootstrap()
     {
         Registry::getInstance()->offsetUnset('Translator');
-        $this->assertNull($this->_object->onBootstrap(Registry::get('Application')->getMvcEvent()));
+        $this->assertNull($this->object->onBootstrap(Registry::get('Application')->getMvcEvent()));
     }
 
     /**
      * @covers Gc\Mvc\Module::getAutoloaderConfig
-     * @covers Gc\Mvc\Module::_getDir
-     * @covers Gc\Mvc\Module::_getNamespace
+     * @covers Gc\Mvc\Module::getDir
+     * @covers Gc\Mvc\Module::getNamespace
      */
     public function testGetAutoloaderConfig()
     {
-        $this->assertInternalType('array', $this->_object->getAutoloaderConfig());
+        $this->assertInternalType('array', $this->object->getAutoloaderConfig());
     }
 
     /**
@@ -88,7 +88,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testGetConfig()
     {
         Config::setValue('debug_is_active', 1);
-        $this->assertInternalType('array', $this->_object->getConfig());
+        $this->assertInternalType('array', $this->object->getConfig());
     }
 
     /**
@@ -119,7 +119,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         Config::setValue('session_handler', Config::SESSION_DATABASE);
 
         Registry::getInstance()->offsetUnset('Configuration');
-        $this->assertNull($this->_object->init(Registry::get('Application')->getServiceManager()->get('ModuleManager')));
+        $this->assertNull($this->object->init(Registry::get('Application')->getServiceManager()->get('ModuleManager')));
 
         Registry::set('Db', $old_database);
         Registry::set('Configuration', $old_configuration);
@@ -143,12 +143,12 @@ class ModuleUnitTest extends Module
      *
      * @var string
      */
-    protected $_directory = __DIR__;
+    protected $directory = __DIR__;
 
     /**
      * Module
      *
      * @var string
      */
-    protected $_namespace = __namespace__;
+    protected $namespace = __namespace__;
 }

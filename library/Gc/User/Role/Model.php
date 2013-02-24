@@ -27,9 +27,9 @@
 
 namespace Gc\User\Role;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select,
-    Zend\Db\TableGateway\TableGateway;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
+use Zend\Db\TableGateway\TableGateway;
 
 /**
  * Role Model
@@ -45,7 +45,7 @@ class Model extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'user_acl_role';
+    protected $name = 'user_acl_role';
 
     /**
      * Protected role name
@@ -61,52 +61,48 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
         );
 
-        try
-        {
+        try {
             $role_id = $this->getId();
-            if(empty($role_id))
-            {
+            if (empty($role_id)) {
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
-            }
-            else
-            {
+            } else {
                 $this->update($array_save, array('id' => $this->getId()));
             }
 
             $permissions = $this->getPermissions();
-            if(!empty($permissions))
-            {
+            if (!empty($permissions)) {
                 $acl_table = new TableGateway('user_acl', $this->getAdapter());
                 $acl_table->delete(array('user_acl_role_id' => $this->getId()));
 
-                foreach($permissions as $permission_id => $value)
-                {
-                    if(!empty($value))
-                    {
-                        $acl_table->insert(array('user_acl_role_id' => $this->getId(), 'user_acl_permission_id' => $permission_id));
+                foreach ($permissions as $permission_id => $value) {
+                    if (!empty($value)) {
+                        $acl_table->insert(
+                            array(
+                                'user_acl_role_id' => $this->getId(),
+                                'user_acl_permission_id' => $permission_id
+                            )
+                        );
                     }
                 }
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
             return $this->getId();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -116,20 +112,19 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
         $id = $this->getId();
-        if(!empty($id))
-        {
+        if (!empty($id)) {
             parent::delete(array('id' => $id));
-            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
             unset($this);
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -138,7 +133,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\User\Role\Model
      */
-    static function fromArray(array $array)
+    public static function fromArray(array $array)
     {
         $role_table = new Model();
         $role_table->setData($array);
@@ -153,19 +148,16 @@ class Model extends AbstractTable
      * @param integer $user_role_id
      * @return \Gc\User\Role\Model
      */
-    static function fromId($user_role_id)
+    public static function fromId($user_role_id)
     {
         $role_table = new Model();
         $row = $role_table->fetchRow($role_table->select(array('id' => (int)$user_role_id)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $role_table->setData((array)$row);
             $role_table->setOrigData();
             return $role_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -177,22 +169,31 @@ class Model extends AbstractTable
     public function getUserPermissions()
     {
         $user_permissions = $this->getData('user_permissions');
-        if(empty($user_permissions))
-        {
+        if (empty($user_permissions)) {
             $select = new Select();
             $select->from('user_acl_role')
-                ->join('user_acl', 'user_acl.user_acl_role_id = user_acl_role.id', array())
-                ->join('user_acl_permission', 'user_acl_permission.id = user_acl.user_acl_permission_id', array('userPermissionId' => 'id', 'permission'))
-                ->join('user_acl_resource', 'user_acl_resource.id = user_acl_permission.user_acl_resource_id', array('resource'))
-                ->where->equalTo('user_acl_role.id', $this->getId());
+                ->join(
+                    'user_acl',
+                    'user_acl.user_acl_role_id = user_acl_role.id',
+                    array()
+                )->join(
+                    'user_acl_permission',
+                    'user_acl_permission.id = user_acl.user_acl_permission_id',
+                    array(
+                        'userPermissionId' => 'id',
+                        'permission'
+                    )
+                )->join(
+                    'user_acl_resource',
+                    'user_acl_resource.id = user_acl_permission.user_acl_resource_id',
+                    array('resource')
+                )->where->equalTo('user_acl_role.id', $this->getId());
 
             $permissions = $this->fetchAll($select);
 
             $user_permissions = array();
-            foreach($permissions as $permission)
-            {
-                if(empty($user_permissions[$permission['resource']]))
-                {
+            foreach ($permissions as $permission) {
+                if (empty($user_permissions[$permission['resource']])) {
                     $user_permissions[$permission['resource']] = array();
                 }
 

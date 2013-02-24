@@ -43,7 +43,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Observer
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -51,7 +51,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Observer;
+        $this->object = new Observer;
     }
 
     /**
@@ -60,7 +60,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
         StaticEventManager::resetInstance();
     }
 
@@ -69,7 +69,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->assertNull($this->_object->init());
+        $this->assertNull($this->object->init());
     }
 
     /**
@@ -79,7 +79,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     {
         $bootstrap = new Bootstrap();
         $bootstrap->install();
-        $this->assertNull($this->_object->dashboard(Registry::get('Application')->getMvcEvent()));
+        $this->assertNull($this->object->dashboard(Registry::get('Application')->getMvcEvent()));
         $bootstrap->uninstall();
     }
 }

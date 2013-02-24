@@ -27,8 +27,8 @@
 
 namespace Gc\Module;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of Module Model
@@ -44,7 +44,7 @@ class Collection extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'module';
+    protected $name = 'module';
 
     /**
      * Initialize collection
@@ -53,7 +53,7 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->_setModules();
+        $this->setModules();
 
         return $this;
     }
@@ -63,16 +63,18 @@ class Collection extends AbstractTable
      *
      * @return \Gc\Module\Collection
      */
-    protected function _setModules()
+    protected function setModules()
     {
-        $rows = $this->fetchAll($this->select(function(Select $select)
-        {
-            $select->order('name ASC');
-        }));
+        $rows = $this->fetchAll(
+            $this->select(
+                function (Select $select) {
+                    $select->order('name ASC');
+                }
+            )
+        );
 
         $modules = array();
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $modules[] = Model::fromArray((array)$row);
         }
 
@@ -91,8 +93,7 @@ class Collection extends AbstractTable
         $select = array();
         $modules = $this->getModules();
 
-        foreach($modules as $module)
-        {
+        foreach ($modules as $module) {
             $select[$module->getId()] = $module->getName();
         }
 

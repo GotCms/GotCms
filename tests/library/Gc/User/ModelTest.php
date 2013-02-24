@@ -40,7 +40,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Model
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = Model::fromArray(array(
+        $this->object = Model::fromArray(array(
             'lastname' => 'Test',
             'firstname' => 'Test',
             'email' => 'test@test.com',
@@ -56,8 +56,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_object->setPassword('test-user-model-password');
-        $this->_object->save();
+        $this->object->setPassword('test-user-model-password');
+        $this->object->save();
     }
 
     /**
@@ -66,8 +66,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_object->delete();
-        unset($this->_object);
+        $this->object->delete();
+        unset($this->object);
     }
 
     /**
@@ -75,7 +75,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticate()
     {
-        $this->assertTrue($this->_object->authenticate('test-user-model', 'test-user-model-password'));
+        $this->assertTrue($this->object->authenticate('test-user-model', 'test-user-model-password'));
     }
 
 
@@ -84,7 +84,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFakeAuthenticate()
     {
-        $this->assertFalse($this->_object->authenticate('test', 'wrong password'));
+        $this->assertFalse($this->object->authenticate('test', 'wrong password'));
     }
 
     /**
@@ -92,7 +92,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetEmail()
     {
-        $this->assertTrue($this->_object->setEmail('test-user-model@test.com'));
+        $this->assertTrue($this->object->setEmail('test-user-model@test.com'));
     }
 
     /**
@@ -100,7 +100,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFakeEmail()
     {
-        $this->assertFalse($this->_object->setEmail('wrong email'));
+        $this->assertFalse($this->object->setEmail('wrong email'));
     }
 
     /**
@@ -109,8 +109,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSetEncryptedPassword()
     {
         $password = sha1('test');
-        $this->_object->setPassword('test');
-        $this->assertEquals($password, $this->_object->getPassword());
+        $this->object->setPassword('test');
+        $this->assertEquals($password, $this->object->getPassword());
     }
 
     /**
@@ -118,7 +118,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertInternalType('integer', $this->_object->save());
+        $this->assertInternalType('integer', $this->object->save());
     }
 
     /**
@@ -146,7 +146,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $this->assertTrue($this->_object->delete());
+        $this->assertTrue($this->object->delete());
     }
 
     /**
@@ -165,8 +165,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromArray()
     {
-        $this->_object->delete();
-        $this->_object = Model::fromArray(array(
+        $this->object->delete();
+        $this->object = Model::fromArray(array(
             'lastname' => 'Test',
             'firstname' => 'Test',
             'email' => 'test@test.com',
@@ -174,7 +174,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->assertEquals('test@test.com', $this->_object->getEmail());
+        $this->assertEquals('test@test.com', $this->object->getEmail());
     }
 
     /**
@@ -182,10 +182,10 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromId()
     {
-        $current_id = $this->_object->getId();
+        $current_id = $this->object->getId();
         $model = Model::fromId($current_id);
 
-        $this->assertEquals($this->_object->getName(), $model->getName());
+        $this->assertEquals($this->object->getName(), $model->getName());
     }
 
     /**
@@ -201,7 +201,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRole()
     {
-        $this->assertInstanceOf('Gc\User\Role\Model', $this->_object->getRole());
+        $this->assertInstanceOf('Gc\User\Role\Model', $this->object->getRole());
     }
 
     /**
@@ -209,7 +209,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSendForgotPasswordWithWrongEmail()
     {
-        $this->assertFalse($this->_object->sendForgotPasswordEmail('wrong@email.test'));
+        $this->assertFalse($this->object->sendForgotPasswordEmail('wrong@email.test'));
     }
 
     /**
@@ -217,7 +217,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSendForgotPasswordWithEmail()
     {
-        $this->assertTrue($this->_object->sendForgotPasswordEmail('test@test.com'));
+        $this->assertTrue($this->object->sendForgotPasswordEmail('test@test.com'));
     }
 
     /**
@@ -225,6 +225,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetName()
     {
-        $this->assertEquals('Test Test', $this->_object->getName());
+        $this->assertEquals('Test Test', $this->object->getName());
     }
 }

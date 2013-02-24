@@ -27,9 +27,10 @@
 
 namespace Gc\Datatype\AbstractDatatype;
 
-use Gc\Core\Object,
-    Gc\Registry,
-    Gc\Datatype;
+use Gc\Core\Object;
+use Gc\Registry;
+use Gc\Datatype;
+
 /**
  * Abstract Prevalue Editor class
  * Use for display Prevalue Editor in Manage Development -> Datatypes
@@ -45,7 +46,7 @@ abstract class AbstractPrevalueEditor extends Object
      *
      * @var AbstractDatatype
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * Abstract function for save Prevalue Editor
@@ -71,7 +72,7 @@ abstract class AbstractPrevalueEditor extends Object
      */
     public function __construct(Datatype\AbstractDatatype $datatype_abstract)
     {
-        $this->_datatype = $datatype_abstract;
+        $this->datatype = $datatype_abstract;
         parent::__construct();
     }
 
@@ -114,7 +115,7 @@ abstract class AbstractPrevalueEditor extends Object
      */
     public function getDatatype()
     {
-        return $this->_datatype;
+        return $this->datatype;
     }
 
     /**

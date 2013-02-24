@@ -26,8 +26,8 @@
 
 namespace Gc;
 
-use ArrayObject,
-    RuntimeException;
+use ArrayObject;
+use RuntimeException;
 
 /**
  * Generic storage class helps to manage global data.
@@ -42,7 +42,7 @@ class Registry extends ArrayObject
      *
      * @var \Gc\Registry
      */
-    private static $_registry = null;
+    private static $registry = null;
 
     /**
      * Retrieves the default registry instance.
@@ -51,30 +51,28 @@ class Registry extends ArrayObject
      */
     public static function getInstance()
     {
-        if(self::$_registry === null)
-        {
+        if (self::$registry === null) {
             self::init();
         }
 
-        return self::$_registry;
+        return self::$registry;
     }
 
     /**
      * Set the default registry instance to a specified instance.
      *
-     * @param Registry $_registry An object instance of type Registry,
+     * @param Registry $registry An object instance of type Registry,
      *   or a subclass.
      * @return void
      * @throws RuntimeException if registry is already initialized.
      */
-    public static function setInstance(Registry $_registry)
+    public static function setInstance(Registry $registry)
     {
-        if(self::$_registry !== null)
-        {
+        if (self::$registry !== null) {
             throw new RuntimeException('Registry is already initialized');
         }
 
-        self::$_registry = $_registry;
+        self::$registry = $registry;
     }
 
     /**
@@ -93,15 +91,15 @@ class Registry extends ArrayObject
      *
      * @return void
      */
-    public static function _unsetInstance()
+    public static function unsetInstance()
     {
-        self::$_registry = null;
+        self::$registry = null;
     }
 
     /**
      * getter method, basically same as offsetGet().
      *
-     * This method can be called from an object of type Zend_Registry, or it
+     * This method can be called from an object of type Zendregistry, or it
      * can be called statically.  In the latter case, it uses the default
      * static instance stored in the class.
      *
@@ -113,8 +111,7 @@ class Registry extends ArrayObject
     {
         $instance = self::getInstance();
 
-        if(!$instance->offsetExists($index))
-        {
+        if (!$instance->offsetExists($index)) {
             throw new RuntimeException("No entry is registered for key '$index'");
         }
 
@@ -124,7 +121,7 @@ class Registry extends ArrayObject
     /**
      * setter method, basically same as offsetSet().
      *
-     * This method can be called from an object of type Zend_Registry, or it
+     * This method can be called from an object of type Zendregistry, or it
      * can be called statically.  In the latter case, it uses the default
      * static instance stored in the class.
      *
@@ -140,20 +137,19 @@ class Registry extends ArrayObject
     }
 
     /**
-     * Returns TRUE if the $index is a named value in the registry,
-     * or FALSE if $index was not found in the registry.
+     * Returns true if the $index is a named value in the registry,
+     * or false if $index was not found in the registry.
      *
      * @param  string $index
      * @return boolean
      */
     public static function isRegistered($index)
     {
-        if(self::$_registry === null)
-        {
+        if (self::$registry === null) {
             return false;
         }
 
-        return self::$_registry->offsetExists($index);
+        return self::$registry->offsetExists($index);
     }
 
     /**
@@ -169,8 +165,8 @@ class Registry extends ArrayObject
     }
 
     /**
-     * Returns TRUE if the $index is a named value in the registry,
-     * or FALSE if $index was not found in the registry.
+     * Returns true if the $index is a named value in the registry,
+     * or false if $index was not found in the registry.
      *
      * @param string $index
      * @return boolean

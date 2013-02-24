@@ -28,7 +28,7 @@
 
 ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
-    <?php if(!empty($this->infos)): ?>
+    <?php if (!empty($this->infos)): ?>
         <div id="datatype-infos">
             <a href="#"><?php echo $this->escapeHtml($this->translate('Display/Hide informations')); ?></a>
 
@@ -46,8 +46,8 @@
         <label class="required" for="model"><?php echo $this->escapeHtml($this->translate('Model')); ?></label>
         <select class="input-select" id="model" name="model">
             <?php $options = $this->form->get('model')->getValueOptions(); ?>
-            <?php foreach($options as $option_id => $option_value): ?>
-                <option <?php if($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo $this->escapeHtml($option_value); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
+            <?php foreach ($options as $option_id => $option_value): ?>
+                <option <?php if ($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo $this->escapeHtml($option_value); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
             <?php endforeach; ?>
         </select>
 
@@ -55,22 +55,22 @@
     </div>
 
     <?php $fieldset = $this->form->get('prevalue-editor'); ?>
-    <?php if(!empty($fieldset)): ?>
-        <?php foreach($fieldset->getElements() as $element): ?>
+    <?php if (!empty($fieldset)): ?>
+        <?php foreach ($fieldset->getElements() as $element): ?>
             <div>
                 <?php $content = $element->getAttribute('content'); ?>
-                <?php if(!empty($content)): ?>
+                <?php if (!empty($content)): ?>
                     <?php echo $content; ?>
                 <?php else: ?>
                     <?php $id = $element->getAttribute('id'); ?>
                     <?php $label = $element->getAttribute('label'); ?>
 
-                    <?php if(empty($id)): ?>
+                    <?php if (empty($id)): ?>
                         <?php $id = 'element' . mt_rand(); ?>
                         <?php $element->setAttribute('id', $id); ?>
                     <?php endif; ?>
 
-                    <?php if(!empty($label)): ?>
+                    <?php if (!empty($label)): ?>
                         <label class="required" for="<?php echo $this->escapeHtml($this->translate($id)); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
                     <?php endif; ?>
 
@@ -86,8 +86,7 @@
 </form>
 
 <script type="text/javascript">
-    $('#datatype-infos > a').on('click', function()
-    {
+    $('#datatype-infos > a').on('click', function() {
         $(this).next('dl').toggle();
     });
 </script>

@@ -27,8 +27,8 @@
 
 namespace Gc\Core\Updater\Adapter;
 
-use ZipArchive,
-    Gc\Media\File;
+use ZipArchive;
+use Gc\Media\File;
 
 /**
  * Get and set config data
@@ -44,10 +44,10 @@ class Wget extends AbstractAdapter
      *
      * @return void
      */
-     public function init()
-     {
-         $this->setTmpPath(GC_APPLICATION_PATH . '/data/tmp');
-     }
+    public function init()
+    {
+        $this->setTmpPath(GC_APPLICATION_PATH . '/data/tmp');
+    }
     /**
      * Update
      *
@@ -56,18 +56,23 @@ class Wget extends AbstractAdapter
     public function update()
     {
         $filename = $this->getTmpPath() . '/v' . $this->getLatestVersion() . '.zip';
-        if(file_exists($filename))
-        {
+        if (file_exists($filename)) {
             unlink($filename);
         }
 
-        exec('wget -P ' . $this->getTmpPath() . ' --no-check-certificate https://api.github.com/repos/PierreRambaud/GotCms/zipball/v' . $this->getLatestVersion() . ' 2>&1', $output);
+        exec(
+            'wget -P '
+            . $this->getTmpPath()
+            . ' --no-check-certificate https://api.github.com/repos/PierreRambaud/GotCms/zipball/v'
+            . $this->getLatestVersion()
+            . ' 2>&1',
+            $output
+        );
         rename($this->getTmpPath() . 'v' . $this->getLatestVersion(), $filename);
         $this->addMessage(implode(PHP_EOL, $output));
 
         $zip = new ZipArchive;
-        if($zip->open($filename))
-        {
+        if ($zip->open($filename)) {
             $directory_name = $zip->getNameIndex(0);
             $zip->extractTo($this->getTmpPath());
             $zip->close();
@@ -75,10 +80,10 @@ class Wget extends AbstractAdapter
 
             unlink($filename);
 
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -90,35 +95,41 @@ class Wget extends AbstractAdapter
     {
         $backup_filename = $this->getTmpPath() . '/backup.zip';
         //Create backup
-        if(file_exists($backup_filename))
-        {
+        if (file_exists($backup_filename)) {
             unlink($backup_filename);
         }
 
-        if(File::isWritable(GC_APPLICATION_PATH, array(GC_APPLICATION_PATH . '/data/cache', GC_APPLICATION_PATH . '/.git')))
-        {
+        if (
+            File::isWritable(
+                GC_APPLICATION_PATH,
+                array(GC_APPLICATION_PATH . '/data/cache', GC_APPLICATION_PATH . '/.git')
+            )
+        ) {
             $zip = new ZipArchive();
-            if($zip->open($backup_filename, ZipArchive::CREATE))
-            {
-                $this->_addDirectoryToZip($zip, GC_APPLICATION_PATH, array(
-                    GC_APPLICATION_PATH . '/.git',
-                    GC_APPLICATION_PATH . '/data/tmp',
-                    GC_APPLICATION_PATH . '/data/cache',
-                    GC_APPLICATION_PATH . '/public/frontend',
-                    GC_APPLICATION_PATH . '/public/media/files',
-                ));
+            if ($zip->open($backup_filename, ZipArchive::CREATE)) {
+                $this->addDirectoryToZip(
+                    $zip,
+                    GC_APPLICATION_PATH,
+                    array(
+                        GC_APPLICATION_PATH . '/.git',
+                        GC_APPLICATION_PATH . '/data/tmp',
+                        GC_APPLICATION_PATH . '/data/cache',
+                        GC_APPLICATION_PATH . '/public/frontend',
+                        GC_APPLICATION_PATH . '/public/media/files',
+                    )
+                );
 
                 $directory = $this->getTmpPath() . '/v' . $this->getLatestVersion();
                 exec('cp -v -R ' . $directory . ' ' . GC_APPLICATION_PATH . ' 2>&1', $output);
                 $this->addMessage(implode(PHP_EOL, empty($output) ? array() : $output));
 
-                return TRUE;
+                return true;
             }
         }
 
         $this->addMessage('Some files are not writable!');
         $this->addMessage(sprintf('Please execute: chmod -R ug+rw %s', GC_APPLICATION_PATH));
-        return FALSE;
+        return false;
     }
 
     /**
@@ -130,13 +141,12 @@ class Wget extends AbstractAdapter
     public function rollback($version)
     {
         $zip = new ZipArchive();
-        if($zip->open($this->getTmpPath() . '/backup.zip'))
-        {
+        if ($zip->open($this->getTmpPath() . '/backup.zip')) {
             $zip->extractTo(GC_APPLICATION_PATH);
             $zip->close();
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -146,24 +156,19 @@ class Wget extends AbstractAdapter
      * @param string $directory
      * @param array $exclude_directory
      */
-    protected function _addDirectoryToZip(ZipArchive $zip, $directory, $exclude_directory = array())
+    protected function addDirectoryToZip(ZipArchive $zip, $directory, $exclude_directory = array())
     {
         $new_folder = str_replace(GC_APPLICATION_PATH, '', $directory);
         $zip->addEmptyDir($new_folder);
         $files = glob($directory . '/*');
-        foreach($files as $file)
-        {
-            if(in_array($file, $exclude_directory))
-            {
+        foreach ($files as $file) {
+            if (in_array($file, $exclude_directory)) {
                 continue;
             }
 
-            if(is_dir($file))
-            {
-                $zip = $this->_addDirectoryToZip($zip, $file, $exclude_directory);
-            }
-            else
-            {
+            if (is_dir($file)) {
+                $zip = $this->addDirectoryToZip($zip, $file, $exclude_directory);
+            } else {
                 $new_file = str_replace(GC_APPLICATION_PATH, '', $file);
                 $zip->addFile($file, $new_file);
             }
@@ -171,5 +176,4 @@ class Wget extends AbstractAdapter
 
         return $zip;
     }
-
 }

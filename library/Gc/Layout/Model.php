@@ -27,8 +27,8 @@
 
 namespace Gc\Layout;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Predicate\Expression;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Predicate\Expression;
 
 /**
  * Layout Model
@@ -44,7 +44,7 @@ class Model extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'layout';
+    protected $name = 'layout';
 
     /**
      * Initiliaze layout
@@ -52,7 +52,7 @@ class Model extends AbstractTable
      * @param integer $id
      * @return \Gc\Layout\Model
      */
-    public function init($id = NULL)
+    public function init($id = null)
     {
         $this->setId($id);
 
@@ -65,7 +65,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\Layout\Model
      */
-    static function fromArray(array $array)
+    public static function fromArray(array $array)
     {
         $layout_table = new Model();
         $layout_table->setData($array);
@@ -80,19 +80,16 @@ class Model extends AbstractTable
      * @param integer $layout_id
      * @return \Gc\Layout\Model
      */
-    static function fromId($layout_id)
+    public static function fromId($layout_id)
     {
         $layout_table = new Model();
         $row = $layout_table->fetchRow($layout_table->select(array('id' => (int)$layout_id)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $layout_table->setData((array)$row);
             $layout_table->setOrigData();
             return $layout_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -102,19 +99,16 @@ class Model extends AbstractTable
      * @param string $identifier
      * @return \Gc\Layout\Model
      */
-    static function fromIdentifier($identifier)
+    public static function fromIdentifier($identifier)
     {
         $layout_table = new Model();
         $row = $layout_table->fetchRow($layout_table->select(array('identifier' => $identifier)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $layout_table->setData((array)$row);
             $layout_table->setOrigData();
             return $layout_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -125,7 +119,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
         $array_save = array('name' => $this->getName(),
             'identifier' => $this->getIdentifier(),
             'description' => $this->getDescription(),
@@ -133,32 +127,26 @@ class Model extends AbstractTable
             'updated_at' => new Expression('NOW()')
         );
 
-        try
-        {
+        try {
             $id = $this->getId();
-            if(empty($id))
-            {
+            if (empty($id)) {
                 $array_save['created_at'] = new Expression('NOW()');
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
-            }
-            else
-            {
+            } else {
                 $this->update($array_save, array('id' => $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
             return $this->getId();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -168,27 +156,23 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
         $id = $this->getId();
-        if(!empty($id))
-        {
-            try
-            {
+        if (!empty($id)) {
+            try {
                 parent::delete(array('id' => $id));
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
             unset($this);
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 }

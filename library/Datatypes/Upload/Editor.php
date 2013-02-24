@@ -27,9 +27,9 @@
 
 namespace Datatypes\Upload;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Gc\Media\File,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Gc\Media\File;
+use Zend\Form\Element;
 
 /**
  * Editor for Upload datatype
@@ -50,8 +50,7 @@ class Editor extends AbstractEditor
         $value = $this->getRequest()->getPost()->get($this->getName());
         $parameters = $this->getConfig();
         $data = array();
-        if(!empty($_FILES[$this->getName()]['name']))
-        {
+        if (!empty($_FILES[$this->getName()]['name'])) {
             $_OLD_FILES = $_FILES;
             $file = $_FILES[$this->getName()];
             //Ignore others data
@@ -63,22 +62,16 @@ class Editor extends AbstractEditor
             $file_class->upload();
             $files = $file_class->getFiles();
 
-            if(!empty($files))
-            {
-                foreach($files as $file)
-                {
+            if (!empty($files)) {
+                foreach ($files as $file) {
                     $name = $file->filename;
                     $file = $file_class->getPath() . '/' . $name;
-                    if(file_exists($file))
-                    {
+                    if (file_exists($file)) {
                         $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
                         $finfo = finfo_open($const); // return mimetype extension
-                        if(!in_array(finfo_file($finfo, $file), $parameters['mime_list']))
-                        {
+                        if (!in_array(finfo_file($finfo, $file), $parameters['mime_list'])) {
                             unlink($file);
-                        }
-                        else
-                        {
+                        } else {
                             $file_info = @getimagesize($file);
                             $data[] = array(
                                 'value' => $name,
@@ -98,9 +91,7 @@ class Editor extends AbstractEditor
 
             //Restore file data
             $_FILES = $_OLD_FILES;
-        }
-        else
-        {
+        } else {
             $data = $this->getRequest()->getPost()->get($this->getName() . '-hidden');
         }
 
@@ -118,26 +109,27 @@ class Editor extends AbstractEditor
         $property = $this->getProperty();
         $upload = new Element\File($this->getName());
         $upload->setAttribute('label', $property->getName());
-        if(!empty($parameters['is_multiple']))
-        {
+        if (!empty($parameters['is_multiple'])) {
             $upload->setAttribute('multiple', 'multiple');
             $upload->setName($upload->getName() . '[]');
         }
 
         $hidden_upload = new Element\Hidden($this->getName() . '-hidden');
         $value = $this->getValue();
-        if(!empty($value))
-        {
+        if (!empty($value)) {
             $hidden_upload->setValue($value);
         }
 
         return array(
             $upload,
             $hidden_upload,
-            $this->addPath(__DIR__)->render('upload-editor.phtml', array(
-                'files' => $value,
-                'id' => $this->getName()
-            ))
+            $this->addPath(__DIR__)->render(
+                'upload-editor.phtml',
+                array(
+                    'files' => $value,
+                    'id' => $this->getName()
+                )
+            )
         );
     }
 }

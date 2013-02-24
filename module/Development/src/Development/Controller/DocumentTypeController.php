@@ -27,12 +27,12 @@
 
 namespace Development\Controller;
 
-use Development\Form\DocumentType as DocumentTypeForm,
-    Gc\DocumentType,
-    Gc\Mvc\Controller\Action,
-    Zend\Validator,
-    Gc\Property,
-    Gc\Tab;
+use Development\Form\DocumentType as DocumentTypeForm;
+use Gc\DocumentType;
+use Gc\Mvc\Controller\Action;
+use Zend\Validator;
+use Gc\Property;
+use Gc\Tab;
 
 /**
  * Document type controller
@@ -48,7 +48,7 @@ class DocumentTypeController extends Action
      *
      * @var array $_aclPage
      */
-    protected $_aclPage = array('resource' => 'Development', 'permission' => 'document-type');
+    protected $aclPage = array('resource' => 'Development', 'permission' => 'document-type');
 
     /**
      * List all document types
@@ -73,22 +73,16 @@ class DocumentTypeController extends Action
         $request = $this->getRequest();
         $session = $this->getSession();
 
-        if(!$request->isPost())
-        {
+        if (!$request->isPost()) {
             $session['document-type'] = array('tabs' => array());
-        }
-        else
-        {
+        } else {
             $post_data = $this->getRequest()->getPost()->toArray();
             $form->setData($post_data);
             $form->setValues($post_data);
-            if(!$form->isValid())
-            {
+            if (!$form->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not document type');
                 $this->useFlashMessenger();
-            }
-            else
-            {
+            } else {
                 $property_collection = new Property\Collection();
 
                 $input = $form->getInputFilter();
@@ -100,20 +94,20 @@ class DocumentTypeController extends Action
 
                 $document_type = new DocumentType\Model();
 
-                $document_type->addData(array(
-                    'name' => $infos_subform->getValue('name'),
-                    'icon_id' => $infos_subform->getValue('icon_id'),
-                    'description' => $infos_subform->getValue('description'),
-                    'default_view_id' => $views_subform->getValue('default_view'),
-                    'user_id' => $this->getAuth()->getIdentity()->getId(),
-                ));
+                $document_type->addData(
+                    array(
+                        'name' => $infos_subform->getValue('name'),
+                        'icon_id' => $infos_subform->getValue('icon_id'),
+                        'description' => $infos_subform->getValue('description'),
+                        'default_view_id' => $views_subform->getValue('default_view'),
+                        'user_id' => $this->getAuth()->getIdentity()->getId(),
+                    )
+                );
 
                 $document_type->getAdapter()->getDriver()->getConnection()->beginTransaction();
-                try
-                {
+                try {
                     $available_views = $views_subform->getValue('available_views');
-                    if(empty($available_views))
-                    {
+                    if (empty($available_views)) {
                         $available_views = array();
                     }
 
@@ -125,10 +119,8 @@ class DocumentTypeController extends Action
                     $existing_tabs = array();
                     $idx = 0;
 
-                    foreach($tabs_subform->getValidInput() as $tab_id => $tab_values)
-                    {
-                        if(!preg_match('~^tab(\d+)$~', $tab_id, $matches))
-                        {
+                    foreach ($tabs_subform->getValidInput() as $tab_id => $tab_values) {
+                        if (!preg_match('~^tab(\d+)$~', $tab_id, $matches)) {
                             continue;
                         }
 
@@ -144,10 +136,8 @@ class DocumentTypeController extends Action
                     }
 
                     $idx = 0;
-                    foreach($properties_subform->getValidInput() as $property_id => $property_values)
-                    {
-                        if(!preg_match('~^property(\d+)$~', $property_id, $matches))
-                        {
+                    foreach ($properties_subform->getValidInput() as $property_id => $property_values) {
+                        if (!preg_match('~^property(\d+)$~', $property_id, $matches)) {
                             continue;
                         }
 
@@ -160,7 +150,7 @@ class DocumentTypeController extends Action
                         $property_model->setTabId($existing_tabs[$property_values->getValue('tab')]);
                         $property_model->setDatatypeId($property_values->getValue('datatype'));
                         $required = $property_values->getValue('required');
-                        $property_model->isRequired(!empty($required) ? TRUE : FALSE);
+                        $property_model->isRequired(!empty($required) ? true : false);
                         $property_model->setSortOrder(++$idx);
                         $property_model->save();
                     }
@@ -169,11 +159,9 @@ class DocumentTypeController extends Action
 
                     $this->flashMessenger()->addSuccessMessage('This document type has been saved');
                     return $this->redirect()->toRoute('documentTypeEdit', array('id' => $document_type->getId()));
-                }
-                catch(Exception $e)
-                {
+                } catch (Exception $e) {
                     $document_type->getAdapter()->getDriver()->getConnection()->rollBack();
-                    throw new \Gc\Exception('Error Processing Request ' . print_r($e, TRUE), 1);
+                    throw new \Gc\Exception('Error Processing Request ' . print_r($e, true), 1);
                 }
             }
         }
@@ -190,8 +178,7 @@ class DocumentTypeController extends Action
     {
         $document_type_id = $this->getRouteMatch()->getParam('id');
         $document_type = DocumentType\Model::fromId($document_type_id);
-        if(empty($document_type))
-        {
+        if (empty($document_type)) {
             return $this->redirect()->toRoute('documentTypeCreate');
         }
 
@@ -201,8 +188,7 @@ class DocumentTypeController extends Action
         $session = $this->getSession();
 
 
-        if(!$request->isPost())
-        {
+        if (!$request->isPost()) {
             $form->setValues($document_type);
 
             $document_type_session = array(
@@ -211,21 +197,18 @@ class DocumentTypeController extends Action
                 'max-tab-id' => 0,
             );
 
-            foreach($document_type->getTabs() as $tab)
-            {
+            foreach ($document_type->getTabs() as $tab) {
                 $document_type_session['tabs'][$tab->getId()] = array(
                     'name' => $tab->getName(),
                     'description' => $tab->getDescription(),
                     'properties' => array(),
                 );
 
-                if($tab->getId() > $document_type_session['max-tab-id'])
-                {
+                if ($tab->getId() > $document_type_session['max-tab-id']) {
                     $document_type_session['max-tab-id'] = $tab->getId();
                 }
 
-                foreach($tab->getProperties() as $property)
-                {
+                foreach ($tab->getProperties() as $property) {
                     $document_type_session['tabs'][$tab->getId()]['properties'][$property->getId()] = array(
                         'name' => $property->getName(),
                         'identifier' => $property->getIdentifier(),
@@ -235,23 +218,18 @@ class DocumentTypeController extends Action
                         'datatype' => $property->getDatatypeId(),
                     );
 
-                    if($property->getId() > $document_type_session['max-property-id'])
-                    {
+                    if ($property->getId() > $document_type_session['max-property-id']) {
                         $document_type_session['max-property-id'] = $property->getId();
                     }
                 }
             }
 
             $session['document-type'] = $document_type_session;
-        }
-        else
-        {
+        } else {
             $validators = $form->getInputFilter()->get('infos')->get('name')->getValidatorChain()->getValidators();
 
-            foreach($validators as $validator)
-            {
-                if($validator['instance'] instanceof Validator\Db\NoRecordExists)
-                {
+            foreach ($validators as $validator) {
+                if ($validator['instance'] instanceof Validator\Db\NoRecordExists) {
                     $validator['instance']->setExclude(array('field' => 'id', 'value' => $document_type->getId()));
                 }
             }
@@ -259,13 +237,10 @@ class DocumentTypeController extends Action
             $post_data = $this->getRequest()->getPost()->toArray();
             $form->setData($post_data);
             $form->setValues($post_data);
-            if(!$form->isValid())
-            {
+            if (!$form->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not document type');
                 $this->useFlashMessenger();
-            }
-            else
-            {
+            } else {
                 $property_collection = new Property\Collection();
 
                 $input = $form->getInputFilter();
@@ -275,19 +250,19 @@ class DocumentTypeController extends Action
                 $tabs_subform = $input->get('tabs');
                 $properties_subform = $input->get('properties');
 
-                $document_type->addData(array(
-                    'name' => $infos_subform->getValue('name'),
-                    'icon_id' => $infos_subform->getValue('icon_id'),
-                    'description' => $infos_subform->getValue('description'),
-                    'default_view_id' => $views_subform->getValue('default_view'),
-                ));
+                $document_type->addData(
+                    array(
+                        'name' => $infos_subform->getValue('name'),
+                        'icon_id' => $infos_subform->getValue('icon_id'),
+                        'description' => $infos_subform->getValue('description'),
+                        'default_view_id' => $views_subform->getValue('default_view'),
+                    )
+                );
 
                 $document_type->getAdapter()->getDriver()->getConnection()->beginTransaction();
-                try
-                {
+                try {
                     $available_views = $views_subform->getValue('available_views');
-                    if(empty($available_views))
-                    {
+                    if (empty($available_views)) {
                         $available_views = array();
                     }
 
@@ -299,18 +274,15 @@ class DocumentTypeController extends Action
                     $existing_tabs = array();
                     $idx = 0;
 
-                    foreach($tabs_subform->getValidInput() as $tab_id => $tab_values)
-                    {
-                        if(!preg_match('~^tab(\d+)$~', $tab_id, $matches))
-                        {
+                    foreach ($tabs_subform->getValidInput() as $tab_id => $tab_values) {
+                        if (!preg_match('~^tab(\d+)$~', $tab_id, $matches)) {
                             continue;
                         }
 
                         $tab_id = $matches[1];
 
                         $tab_model = Tab\Model::fromId($tab_id);
-                        if(empty($tab_model) or $tab_model->getDocumentTypeId() != $document_type->getId())
-                        {
+                        if (empty($tab_model) or $tab_model->getDocumentTypeId() != $document_type->getId()) {
                             $tab_model = new Tab\Model();
                         }
 
@@ -324,28 +296,23 @@ class DocumentTypeController extends Action
 
                     $tab_collection = new Tab\Collection();
                     $tabs = $tab_collection->load($document_type->getId())->getTabs();
-                    foreach($tabs as $tab)
-                    {
-                        if(!in_array($tab->getId(), $existing_tabs))
-                        {
+                    foreach ($tabs as $tab) {
+                        if (!in_array($tab->getId(), $existing_tabs)) {
                             $tab->delete();
                         }
                     }
 
                     $existing_properties = array();
                     $idx = 0;
-                    foreach($properties_subform->getValidInput() as $property_id => $property_values)
-                    {
-                        if(!preg_match('~^property(\d+)$~', $property_id, $matches))
-                        {
+                    foreach ($properties_subform->getValidInput() as $property_id => $property_values) {
+                        if (!preg_match('~^property(\d+)$~', $property_id, $matches)) {
                             continue;
                         }
 
                         $property_id = $matches[1];
 
                         $property_model = Property\Model::fromId($property_id);
-                        if(empty($property_model) or !in_array($property_model->getTabId(), $existing_tabs))
-                        {
+                        if (empty($property_model) or !in_array($property_model->getTabId(), $existing_tabs)) {
                             $property_model = new Property\Model();
                         }
 
@@ -355,7 +322,7 @@ class DocumentTypeController extends Action
                         $property_model->setTabId($existing_tabs[$property_values->getValue('tab')]);
                         $property_model->setDatatypeId($property_values->getValue('datatype'));
                         $required = $property_values->getValue('required');
-                        $property_model->isRequired(!empty($required) ? TRUE : FALSE);
+                        $property_model->isRequired(!empty($required) ? true : false);
                         $property_model->setSortOrder(++$idx);
                         $property_model->save();
                         $existing_properties[] = $property_model->getId();
@@ -363,10 +330,8 @@ class DocumentTypeController extends Action
 
                     $property_collection = new Property\Collection();
                     $properties = $property_collection->load($document_type->getId())->getProperties();
-                    foreach($properties as $property)
-                    {
-                        if(!in_array($property->getId(), $existing_properties))
-                        {
+                    foreach ($properties as $property) {
+                        if (!in_array($property->getId(), $existing_properties)) {
                             $property->delete();
                         }
                     }
@@ -375,11 +340,9 @@ class DocumentTypeController extends Action
 
                     $this->flashMessenger()->addSuccessMessage('This document type has been saved');
                     return $this->redirect()->toRoute('documentTypeEdit', array('id' => $document_type_id));
-                }
-                catch(Exception $e)
-                {
+                } catch (Exception $e) {
                     $document_type->getAdapter()->getDriver()->getConnection()->rollBack();
-                    throw new \Gc\Exception('Error Processing Request ' . print_r($e, TRUE), 1);
+                    throw new \Gc\Exception('Error Processing Request ' . print_r($e, true), 1);
                 }
             }
         }
@@ -394,16 +357,14 @@ class DocumentTypeController extends Action
      */
     public function importTabAction()
     {
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $tab_id = $this->getRequest()->getPost()->get('tab_id');
             $tab_model = Tab\Model::fromId($tab_id);
             $properties_list = $tab_model->getProperties();
 
 
             $properties = array();
-            foreach($properties_list as $property)
-            {
+            foreach ($properties_list as $property) {
                 $properties[] = array(
                     'name' => $property->getName(),
                     'identifier' => $property->getIdentifier(),
@@ -419,13 +380,15 @@ class DocumentTypeController extends Action
                 'properties' => $properties
             );
 
-            return $this->returnJson(array(
-                'success' => TRUE,
-                'tab' => $tab
-            ));
+            return $this->returnJson(
+                array(
+                    'success' => true,
+                    'tab' => $tab
+                )
+            );
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => false, 'message' => 'Error'));
     }
 
     /**
@@ -435,16 +398,14 @@ class DocumentTypeController extends Action
      */
     public function deleteAction()
     {
-        $document_type = DocumentType\Model::fromId($this->getRouteMatch()->getParam('id', NULL));
-        if(!empty($document_type))
-        {
-            if($document_type->delete())
-            {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'This document type has been deleted'));
+        $document_type = DocumentType\Model::fromId($this->getRouteMatch()->getParam('id', null));
+        if (!empty($document_type)) {
+            if ($document_type->delete()) {
+                return $this->returnJson(array('success' => true, 'message' => 'This document type has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Document type does not exists'));
+        return $this->returnJson(array('success' => false, 'message' => 'Document type does not exists'));
     }
 
     /**
@@ -454,8 +415,7 @@ class DocumentTypeController extends Action
      */
     public function addTabAction()
     {
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $session = $this->getSession();
             $name = $this->getRequest()->getPost()->get('name');
             $description = $this->getRequest()->getPost()->get('description');
@@ -463,11 +423,9 @@ class DocumentTypeController extends Action
 
             $tabs = empty($document_type_session['tabs']) ? array() : $document_type_session['tabs'];
 
-            foreach($tabs as $tab)
-            {
-                if($name == $tab['name'])
-                {
-                    return $this->returnJson(array('success' => FALSE, 'message' => 'Already exists'));
+            foreach ($tabs as $tab) {
+                if ($name == $tab['name']) {
+                    return $this->returnJson(array('success' => false, 'message' => 'Already exists'));
                 }
             }
 
@@ -479,15 +437,17 @@ class DocumentTypeController extends Action
             $document_type_session['tabs'] = $tabs;
             $session['document-type'] = $document_type_session;
 
-            return $this->returnJson(array(
-                'success' => TRUE,
-                'id' => $current_id,
-                'name' => $name,
-                'description' => $description,
-            ));
+            return $this->returnJson(
+                array(
+                    'success' => true,
+                    'id' => $current_id,
+                    'name' => $name,
+                    'description' => $description,
+                )
+            );
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => false, 'message' => 'Error'));
     }
 
     /**
@@ -497,24 +457,22 @@ class DocumentTypeController extends Action
      */
     public function deleteTabAction()
     {
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $session = $this->getSession();
             $id = $this->getRequest()->getPost()->get('tab');
             $description = $this->getRequest()->getPost()->get('description');
 
             $tabs = empty($session['document-type']) ? array() : $session['document-type']['tabs'];
-            if(array_key_exists($id, $tabs))
-            {
+            if (array_key_exists($id, $tabs)) {
                 $document_type_session = $session['document-type'];
                 unset($document_type_session['tabs'][$id]);
                 $session->offsetSet('document-type', $document_type_session);
 
-                return $this->returnJson(array('success' => TRUE, 'message' => 'This tab has been deleted'));
+                return $this->returnJson(array('success' => true, 'message' => 'This tab has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => false, 'message' => 'Error'));
     }
 
     /**
@@ -524,8 +482,7 @@ class DocumentTypeController extends Action
      */
     public function addPropertyAction()
     {
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $post           = $this->getRequest()->getPost();
             $name           = $post->get('name');
             $identifier     = $post->get('identifier');
@@ -539,26 +496,21 @@ class DocumentTypeController extends Action
             $document_type_session = $session['document-type'];
             $tabs = $document_type_session['tabs'];
 
-            if(empty($document_type_session['tabs'][$tab_id]))
-            {
-                return $this->returnJson(array('success' => FALSE, 'message' => 'Tab does not exists'));
+            if (empty($document_type_session['tabs'][$tab_id])) {
+                return $this->returnJson(array('success' => false, 'message' => 'Tab does not exists'));
             }
 
             $tab = $document_type_session['tabs'][$tab_id];
             $properties = $tab['properties'];
 
-            foreach($tabs as $tab)
-            {
-                if(empty($tab['properties']))
-                {
+            foreach ($tabs as $tab) {
+                if (empty($tab['properties'])) {
                     continue;
                 }
 
-                foreach($tab['properties'] as $property)
-                {
-                    if(!empty($property['identifier']) and $identifier == $property['identifier'])
-                    {
-                        return $this->returnJson(array('success' => FALSE, 'message' => 'Identifier already exists'));
+                foreach ($tab['properties'] as $property) {
+                    if (!empty($property['identifier']) and $identifier == $property['identifier']) {
+                        return $this->returnJson(array('success' => false, 'message' => 'Identifier already exists'));
                     }
                 }
             }
@@ -571,19 +523,19 @@ class DocumentTypeController extends Action
                 'identifier' => $identifier,
                 'tab' => $tab_id,
                 'description' => $description,
-                'is_required' => $is_required == 1 ? TRUE : FALSE,
+                'is_required' => $is_required == 1 ? true : false,
                 'datatype' => $datatype_id,
             );
 
             $document_type_session['tabs'][$tab_id]['properties'] = $properties;
             $session['document-type'] = $document_type_session;
-            $properties[$current_id]['success'] = TRUE;
+            $properties[$current_id]['success'] = true;
             $properties[$current_id]['id'] = $current_id;
 
             return $this->returnJson($properties[$current_id]);
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => false, 'message' => 'Error'));
     }
 
     /**
@@ -593,30 +545,26 @@ class DocumentTypeController extends Action
      */
     public function deletePropertyAction()
     {
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $id = $this->getRequest()->getPost()->get('property');
             $session = $this->getSession();
 
-            foreach($session['document-type']['tabs'] as $tab_id => $tab)
-            {
-                if(empty($tab['properties']))
-                {
+            foreach ($session['document-type']['tabs'] as $tab_id => $tab) {
+                if (empty($tab['properties'])) {
                     continue;
                 }
 
-                if(array_key_exists($id, $tab['properties']))
-                {
+                if (array_key_exists($id, $tab['properties'])) {
 
                     $document_type_session = $session['document-type'];
                     unset($document_type_session['tabs'][$tab_id]['properties'][$id]);
                     $session->offsetSet('document-type', $document_type_session);
 
-                    return $this->returnJson(array('success' => TRUE, 'message' => 'This property has been deleted'));
+                    return $this->returnJson(array('success' => true, 'message' => 'This property has been deleted'));
                 }
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'Error'));
+        return $this->returnJson(array('success' => false, 'message' => 'Error'));
     }
 }

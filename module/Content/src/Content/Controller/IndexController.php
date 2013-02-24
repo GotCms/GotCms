@@ -27,10 +27,10 @@
 
 namespace Content\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Gc\Document\Collection as DocumentCollection,
-    Gc\Component,
-    Zend\Json\Json;
+use Gc\Mvc\Controller\Action;
+use Gc\Document\Collection as DocumentCollection;
+use Gc\Component;
+use Zend\Json\Json;
 
 /**
  * Index controller
@@ -64,8 +64,7 @@ class IndexController extends Action
         );
 
         $array_routes = array();
-        foreach($routes as $key => $route)
-        {
+        foreach ($routes as $key => $route) {
             $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
         }
 

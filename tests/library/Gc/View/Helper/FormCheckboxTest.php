@@ -41,7 +41,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * @var FormCheckbox
      */
-    protected $_object;
+    protected $object;
     /**
      * @var Element\Checkbox
      */
@@ -60,7 +60,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->_element->setOptions($options);
-        $this->_object = new FormCheckbox;
+        $this->object = new FormCheckbox;
     }
 
     /**
@@ -76,7 +76,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $markup = $this->_object->render($this->_element);
+        $markup = $this->object->render($this->_element);
 
         $this->assertContains('type="checkbox"', $markup);
         $this->assertContains('name="foo"', $markup);
@@ -88,7 +88,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithoutElementCheckboxr()
     {
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
-        $this->_object->render(new Element\Text('bar'));
+        $this->object->render(new Element\Text('bar'));
     }
 
     /**
@@ -97,7 +97,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithoutName()
     {
         $this->setExpectedException('Zend\Form\Exception\DomainException');
-        $this->_object->render(new Element\Checkbox());
+        $this->object->render(new Element\Checkbox());
     }
 
     /**
@@ -106,7 +106,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithCheckedValue()
     {
         $this->_element->setValue('checked');
-        $markup = $this->_object->render($this->_element);
+        $markup = $this->object->render($this->_element);
         $this->assertContains('checked="checked"', $markup);
     }
 
@@ -118,7 +118,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
         $this->_element->setValue('checked');
         $this->_element->setAttribute('id', 'bar');
         $this->_element->setAttribute('class', 'input-checkbox');
-        $markup = $this->_object->render($this->_element);
+        $markup = $this->object->render($this->_element);
         $this->assertContains('checked="checked"', $markup);
         $this->assertContains('class="input-checkbox"', $markup);
     }

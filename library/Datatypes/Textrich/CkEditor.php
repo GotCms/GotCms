@@ -27,8 +27,8 @@
 
 namespace Datatypes\Textrich;
 
-use Gc\Core\Object,
-    Zend\Form\Element;
+use Gc\Core\Object;
+use Zend\Form\Element;
 
 /**
  * Ckeditor class to generate html for Ckeditor plugin
@@ -45,14 +45,11 @@ class CkEditor extends Object
      * @param array $parameters
      * @return Datatypes\Textrich\Ckeditor
      */
-    public function setParameters(array $parameters = NULL)
+    public function setParameters(array $parameters = null)
     {
-        if(!empty($parameters['toolbar-items']))
-        {
+        if (!empty($parameters['toolbar-items'])) {
             $this->setToolbarItems($parameters['toolbar-items']);
-        }
-        else
-        {
+        } else {
             $this->setToolbarItems(array());
         }
 
@@ -69,28 +66,20 @@ class CkEditor extends Object
         $js = '';
         $all_toolbar_items = $this->getAllToolbarItems();
         $toolbar_items = $this->getToolbarItems();
-        foreach($all_toolbar_items as $group)
-        {
-            if(!empty($group['items']) and is_array($group['items']))
-            {
+        foreach ($all_toolbar_items as $group) {
+            if (!empty($group['items']) and is_array($group['items'])) {
                 $content = array();
-                foreach($group['items'] as $item)
-                {
-                    if(!empty($toolbar_items[$item]))
-                    {
+                foreach ($group['items'] as $item) {
+                    if (!empty($toolbar_items[$item])) {
                         $content[] = $item;
                     }
                 }
 
-                if(!empty($content))
-                {
+                if (!empty($content)) {
                     $js .= '[\'' . implode('\', \'', $content) . '\'], ';
                 }
-            }
-            else
-            {
-                if(strlen($group) > 0)
-                {
+            } else {
+                if (strlen($group) > 0) {
                     $js .= '[\'/\'], ';
                 }
             }
@@ -107,20 +96,141 @@ class CkEditor extends Object
     public function getAllToolbarItems()
     {
         return array(
-            array('name' => 'document', 'items' => array('Source', '-', 'Save', 'NewPage', 'DocProps', 'Preview', 'Print', '-', 'Templates')),
-            array('name' => 'clipboard', 'items' => array('Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo')),
-            array('name' => 'editing', 'items' => array('Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt')),
-            array('name' => 'forms', 'items' => array('Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField')),
+            array(
+                'name' => 'document',
+                'items' => array(
+                    'Source',
+                    '-',
+                    'Save',
+                    'NewPage',
+                    'DocProps',
+                    'Preview',
+                    'Print',
+                    '-',
+                    'Templates'
+                )
+            ),
+            array(
+                'name' => 'clipboard',
+                'items' => array(
+                    'Cut',
+                    'Copy',
+                    'Paste',
+                    'PasteText',
+                    'PasteFromWord',
+                    '-',
+                    'Undo',
+                    'Redo'
+                )
+            ),
+            array(
+                'name' => 'editing',
+                'items' => array(
+                    'Find',
+                    'Replace',
+                    '-',
+                    'SelectAll',
+                    '-',
+                    'SpellChecker',
+                    'Scayt'
+                )
+            ),
+            array(
+                'name' => 'forms',
+                'items' => array(
+                    'Form',
+                    'Checkbox',
+                    'Radio',
+                    'TextField',
+                    'Textarea',
+                    'Select',
+                    'Button',
+                    'ImageButton',
+                    'HiddenField'
+                )
+            ),
             '/',
-            array('name' => 'basicstyles', 'items' => array('Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat')),
-            array('name' => 'paragraph', 'items' => array('NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv',
-            '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl')),
-            array('name' => 'links', 'items' => array('Link', 'Unlink', 'Anchor')),
-            array('name' => 'insert', 'items' => array('Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe')),
+            array(
+                'name' => 'basicstyles',
+                'items' => array(
+                    'Bold',
+                    'Italic',
+                    'Underline',
+                    'Strike',
+                    'Subscript',
+                    'Superscript',
+                    '-',
+                    'RemoveFormat'
+                )
+            ),
+            array(
+                'name' => 'paragraph',
+                'items' => array(
+                    'NumberedList',
+                    'BulletedList',
+                    '-',
+                    'Outdent',
+                    'Indent',
+                    '-',
+                    'Blockquote',
+                    'CreateDiv',
+                    '-',
+                    'JustifyLeft',
+                    'JustifyCenter',
+                    'JustifyRight',
+                    'JustifyBlock',
+                    '-',
+                    'BidiLtr',
+                    'BidiRtl'
+                )
+            ),
+            array(
+                'name' => 'links',
+                'items' => array(
+                    'Link',
+                    'Unlink',
+                    'Anchor'
+                )
+            ),
+            array(
+                'name' => 'insert',
+                'items' => array(
+                    'Image',
+                    'Flash',
+                    'Table',
+                    'HorizontalRule',
+                    'Smiley',
+                    'SpecialChar',
+                    'PageBreak',
+                    'Iframe'
+                )
+            ),
             '/',
-            array('name' => 'styles', 'items' => array('Styles', 'Format', 'Font', 'FontSize')),
-            array('name' => 'colors', 'items' => array('TextColor', 'BGColor')),
-            array('name' => 'tools', 'items' => array('Maximize', 'ShowBlocks', '-', 'About')),
+            array(
+                'name' => 'styles',
+                'items' => array(
+                    'Styles',
+                    'Format',
+                    'Font',
+                    'FontSize'
+                )
+            ),
+            array(
+                'name' => 'colors',
+                'items' => array(
+                    'TextColor',
+                    'BGColor'
+                )
+            ),
+            array(
+                'name' => 'tools',
+                'items' => array(
+                    'Maximize',
+                    'ShowBlocks',
+                    '-',
+                    'About'
+                )
+            ),
         );
     }
 
@@ -134,15 +244,11 @@ class CkEditor extends Object
         $elements = array();
         $items = $this->getAllToolbarItems();
         $toolbar_items = $this->getToolbarItems();
-        foreach($items as $group)
-        {
-            if(!empty($group['items']) and is_array($group['items']))
-            {
+        foreach ($items as $group) {
+            if (!empty($group['items']) and is_array($group['items'])) {
                 $fieldset = new \Zend\Form\Fieldset($group['name']);
-                foreach($group['items'] as $idx_item => $item)
-                {
-                    if($item == '-')
-                    {
+                foreach ($group['items'] as $idx_item => $item) {
+                    if ($item == '-') {
                         continue;
                     }
 
@@ -151,8 +257,7 @@ class CkEditor extends Object
                         ->setCheckedValue(1)
                         ->setAttribute('label', $item);
 
-                    if(!empty($toolbar_items[$item]))
-                    {
+                    if (!empty($toolbar_items[$item])) {
                         $element->setValue(1);
                     }
 

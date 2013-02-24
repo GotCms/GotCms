@@ -27,10 +27,10 @@
 
 namespace Datatypes\Mixed;
 
-use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor,
-    Gc\Form\AbstractForm,
-    Zend\Form\Element,
-    Zend\Form\Fieldset;
+use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
+use Gc\Form\AbstractForm;
+use Zend\Form\Element;
+use Zend\Form\Fieldset;
 
 /**
  * Prevalue Editor for Mixed datatype
@@ -51,17 +51,14 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $post = $this->getRequest()->getPost();
         $datatypes = $post->get('datatypes');
         $model = $post->get('add-model');
-        if(!empty($datatypes))
-        {
-            foreach($datatypes as $datatype_id => $datatype)
-            {
-                foreach($datatype as $name => $value)
-                {
+        if (!empty($datatypes)) {
+            foreach ($datatypes as $datatype_id => $datatype) {
+                foreach ($datatype as $name => $value) {
                     $post->set($name, $value);
                 }
 
                 //Get datatypes
-                $object = $this->_getDatatype($datatype['name']);
+                $object = $this->loadDatatype($datatype['name']);
                 $object->getPrevalueEditor()->save();
                 $datatypes[$datatype_id] = array(
                     'name' => $datatype['name'],
@@ -71,8 +68,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             }
         }
 
-        if(!empty($model))
-        {
+        if (!empty($model)) {
             $datatypes[] = array('name' => $model);
         }
 
@@ -92,19 +88,19 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $path = GC_APPLICATION_PATH . '/library/Datatypes/';
         $list_dir = glob($path . '*', GLOB_ONLYDIR);
         $options = array();
-        foreach($list_dir as $dir)
-        {
+        foreach ($list_dir as $dir) {
             $dir = str_replace($path, '', $dir);
             $options[$dir] = $dir;
         }
 
         $datatypes = empty($config['datatypes']) ? array() : $config['datatypes'];
-        foreach($datatypes as $datatype_id => $datatype_config)
-        {
+        foreach ($datatypes as $datatype_id => $datatype_config) {
             //Get datatypes
-            $object = $this->_getDatatype($datatype_config['name']);
+            $object = $this->loadDatatype($datatype_config['name']);
             //Force configuration
-            $object->getPrevalueEditor()->setConfig(empty($datatype_config['config']) ? NULL : serialize($datatype_config['config']));
+            $object->getPrevalueEditor()->setConfig(
+                empty($datatype_config['config']) ? null : serialize($datatype_config['config'])
+            );
 
             //Initiliaze prefix
             $prefix = 'datatypes[' . $datatype_id . ']';
@@ -141,7 +137,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
      * @param string $name
      * @return \Gc\Datatype\AbstractDatatype
      */
-    protected function _getDatatype($name)
+    protected function loadDatatype($name)
     {
         $class = 'Datatypes\\' . $name . '\Datatype';
         $object = new $class();

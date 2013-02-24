@@ -30,32 +30,32 @@
 <label for="add-model"><?php echo $this->escapeHtml($this->translate('Add datatype')); ?></label>
 <select name="add-model" id="add-model">
     <option value=""><?php echo $this->escapeHtml($this->translate('Select an option')); ?></option>
-    <?php foreach($this->modelOptions as $option_id => $option_value): ?>
+    <?php foreach ($this->modelOptions as $option_id => $option_value): ?>
         <option value="<?php echo $this->escapeHtml($option_id); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
     <?php endforeach; ?>
 </select>
-<?php if(!empty($this->datatypes)): ?>
+<?php if (!empty($this->datatypes)): ?>
     <div id="tabs">
         <ul>
-            <?php foreach($this->datatypes as $datatype_id => $datatype): ?>
+            <?php foreach ($this->datatypes as $datatype_id => $datatype): ?>
                 <li><a href="#tabs-<?php echo $datatype_id; ?>">
                     <?php echo $this->escapeHtml($datatype['name']); ?>
                 </a></li>
             <?php endforeach; ?>
         </ul>
 
-        <?php foreach($this->datatypes as $datatype_id => $datatype): ?>
+        <?php foreach ($this->datatypes as $datatype_id => $datatype): ?>
             <div id="tabs-<?php echo $datatype_id; ?>">
-                <?php foreach($datatype['fieldset']->getElements() as $element): ?>
+                <?php foreach ($datatype['fieldset']->getElements() as $element): ?>
                     <div>
                         <?php $content = $element->getAttribute('content'); ?>
-                        <?php if(!empty($content)): ?>
+                        <?php if (!empty($content)): ?>
                             <?php echo $content; ?>
                         <?php else: ?>
                             <?php $label = $element->getAttribute('label'); ?>
-                            <?php if(!empty($label)): ?>
+                            <?php if (!empty($label)): ?>
                                 <?php $id = $element->getAttribute('id'); ?>
-                                <?php if(!empty($id)): ?>
+                                <?php if (!empty($id)): ?>
                                     <label class="required" for="<?php echo $this->escapeHtml($this->translate($element->getAttribute('id'))); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
                                 <?php endif; ?>
                             <?php endif; ?>
@@ -79,8 +79,7 @@
             }
         });
 
-        $('.delete').on('click', function()
-        {
+        $('.delete').on('click', function () {
             $id = $(this).parent().attr('id').replace('tabs-', '');
             $('#tabs').tabs('remove', $id);
         });

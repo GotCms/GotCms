@@ -30,7 +30,7 @@
 <h2><?php echo $this->escapeHtml($this->translate('Configuration')); ?></h2>
 
 <?php $elements = $this->form->getElements(); ?>
-<?php foreach($elements as $element): ?>
+<?php foreach ($elements as $element): ?>
     <div>
         <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 

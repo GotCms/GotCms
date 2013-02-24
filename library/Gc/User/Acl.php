@@ -27,11 +27,11 @@
 
 namespace Gc\User;
 
-use Gc\User\Role\Model as RoleModel,
-    Gc\User\Model as UserModel,
-    Zend\Permissions\Acl as ZendAcl,
-    Zend\Db\TableGateway\TableGateway,
-    Zend\Db\Sql\Select;
+use Gc\User\Role\Model as RoleModel;
+use Gc\User\Model as UserModel;
+use Zend\Permissions\Acl as ZendAcl;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Select;
 
 /**
  * Use Acl
@@ -47,28 +47,28 @@ class Acl extends ZendAcl\Acl
      *
      * @var \Gc\User\Role\Model
      */
-    protected $_roleTable = NULL;
+    protected $roleTable = null;
 
     /**
      * User Role id
      *
      * @var integer role_id
      */
-    protected $_userRole = NULL;
+    protected $userRole = null;
 
     /**
      * User Role name
      *
      * @var mixed role name
      */
-    protected $_userRoleName = NULL;
+    protected $userRoleName = null;
 
     /**
      * User model
      *
      * @var \Gc\User\Model
      */
-    protected $_user = NULL;
+    protected $user = null;
 
     /**
      * Initiliaze Acl
@@ -78,18 +78,18 @@ class Acl extends ZendAcl\Acl
      */
     public function __construct(UserModel $user_model)
     {
-        $this->_roleTable = new RoleModel();
-        $this->_roleResource();
-        $this->_user = $user_model;
+        $this->roleTable = new RoleModel();
+        $this->roleResource();
+        $this->user = $user_model;
 
         $select = new Select();
         $select->from('user_acl_role')
             ->join('user', 'user.user_acl_role_id = user_acl_role.id');
-        $select->where->equalTo('user.id', $this->_user->getId());
-        $user_role = $this->_roleTable->fetchRow($select);
+        $select->where->equalTo('user.id', $this->user->getId());
+        $user_role = $this->roleTable->fetchRow($select);
 
-        $this->_userRole = empty($user_role['role_id']) ? 0 : $user_role['role_id'];
-        $this->_userRoleName = empty($user_role['name']) ? NULL : $user_role['name'];
+        $this->userRole = empty($user_role['role_id']) ? 0 : $user_role['role_id'];
+        $this->userRoleName = empty($user_role['name']) ? null : $user_role['name'];
     }
 
     /**
@@ -97,11 +97,10 @@ class Acl extends ZendAcl\Acl
      *
      * @return void
      */
-    protected function _initRoles()
+    protected function initRoles()
     {
-        $roles = $this->_roleTable->fetchAll($this->_roleTable->select());
-        foreach($roles as $role)
-        {
+        $roles = $this->roleTable->fetchAll($this->roleTable->select());
+        foreach ($roles as $role) {
             $this->addRole(new ZendAcl\Role\GenericRole($role['name']));
         }
     }
@@ -111,17 +110,15 @@ class Acl extends ZendAcl\Acl
      *
      * @return void
      */
-    protected function _initResources()
+    protected function initResources()
     {
-        $this->_initRoles();
+        $this->initRoles();
         $select = new Select();
         $select->from('user_acl_resource');
-        $resources = $this->_roleTable->fetchAll($select);
+        $resources = $this->roleTable->fetchAll($select);
 
-        foreach($resources as $key => $value)
-        {
-            if(!$this->hasResource($value['resource']))
-            {
+        foreach ($resources as $key => $value) {
+            if (!$this->hasResource($value['resource'])) {
                 $this->addResource(new ZendAcl\Resource\GenericResource($value['resource']));
             }
         }
@@ -132,22 +129,32 @@ class Acl extends ZendAcl\Acl
      *
      * @return void
      */
-    protected function _roleResource()
+    protected function roleResource()
     {
-        $this->_initResources();
+        $this->initResources();
         $select = new Select();
         $select->from('user_acl_role')
-            ->columns(array(
-                'name'
-            ), TRUE)
+            ->columns(
+                array(
+                    'name'
+                ),
+                true
+            )
             ->join('user_acl', 'user_acl.user_acl_role_id = user_acl_role.id', array())
-            ->join('user_acl_permission', 'user_acl_permission.id = user_acl.user_acl_permission_id', array('permission'))
-            ->join('user_acl_resource', 'user_acl_resource.id = user_acl_permission.user_acl_resource_id', array('resource'));
+            ->join(
+                'user_acl_permission',
+                'user_acl_permission.id = user_acl.user_acl_permission_id',
+                array('permission')
+            )
+            ->join(
+                'user_acl_resource',
+                'user_acl_resource.id = user_acl_permission.user_acl_resource_id',
+                array('resource')
+            );
 
-        $acl = $this->_roleTable->fetchAll($select);
+        $acl = $this->roleTable->fetchAll($select);
 
-        foreach($acl as $key => $value)
-        {
+        foreach ($acl as $key => $value) {
             $this->allow($value['name'], $value['resource'], $value['permission']);
         }
     }
@@ -159,7 +166,7 @@ class Acl extends ZendAcl\Acl
      */
     public function listRoles()
     {
-        return $this->_roleTable->fetchAll($this->_roleTable->select());
+        return $this->roleTable->fetchAll($this->roleTable->select());
     }
 
     /**
@@ -170,8 +177,8 @@ class Acl extends ZendAcl\Acl
      */
     public function getRoleId($role_name)
     {
-        return $this->_roleTable->fetchRow(
-            $this->_roleTable->select(array('name' => $role_name))
+        return $this->roleTable->fetchRow(
+            $this->roleTable->select(array('name' => $role_name))
         );
     }
 
@@ -184,7 +191,7 @@ class Acl extends ZendAcl\Acl
     {
         $select = new Select();
         $select->from('user_acl_resource');
-        return $this->_roleTable->fetchAll($select);
+        return $this->roleTable->fetchAll($select);
     }
 
     /**
@@ -200,12 +207,10 @@ class Acl extends ZendAcl\Acl
         $select->from(array('uar' => 'user_acl_resource'))
             ->join(array('uap' => 'user_acl_permission'), 'uar.id = uap.user_acl_resource_id')
             ->where->equalTo('uar.resource', $group);
-        $group = $this->_roleTable->fetchAll($select);
+        $group = $this->roleTable->fetchAll($select);
 
-        foreach($group as $key => $value)
-        {
-            if($this->isAllowed($this->_user->getRole()->getName(), $value['resource'], $value['permission']))
-            {
+        foreach ($group as $key => $value) {
+            if ($this->isAllowed($this->user->getRole()->getName(), $value['resource'], $value['permission'])) {
                 $result[] = $value['permission'];
             }
         }

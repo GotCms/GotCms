@@ -28,6 +28,7 @@
 namespace Gc\Property\Value;
 
 use Gc\Db\AbstractTable;
+
 /**
  * Property value Model
  *
@@ -42,7 +43,7 @@ class Model extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'property_value';
+    protected $name = 'property_value';
 
     /**
      * Load property value
@@ -52,24 +53,23 @@ class Model extends AbstractTable
      * @param integer $property_id Optional
      * @return \Gc\Property\Model\Value
      */
-    public function load($value_id = NULL, $document_id = NULL, $property_id = NULL)
+    public function load($value_id = null, $document_id = null, $property_id = null)
     {
         $this->setId($value_id);
         $this->setDocumentId($document_id);
         $this->setPropertyId($property_id);
-        if(!empty($document_id) and !empty($property_id))
-        {
-            $property_value = $this->fetchRow($this->select(array('property_id' => $property_id, 'document_id' => $document_id)));
+        if (!empty($document_id) and !empty($property_id)) {
+            $property_value = $this->fetchRow(
+                $this->select(
+                    array('property_id' => $property_id, 'document_id' => $document_id)
+                )
+            );
 
-            if(!empty($property_value['id']))
-            {
+            if (!empty($property_value['id'])) {
                 $this->setId($property_value['id']);
-                if($this->getDriverName() == 'pdo_pgsql')
-                {
+                if ($this->getDriverName() == 'pdo_pgsql') {
                     $this->setValue(stream_get_contents($property_value['value']));
-                }
-                else
-                {
+                } else {
                     $this->setValue($property_value['value']);
                 }
             }
@@ -84,7 +84,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\Property\Value\Model
      */
-    static function fromArray(array $array)
+    public static function fromArray(array $array)
     {
         $property_value_table = new Model();
         $property_value_table->setData($array);
@@ -99,20 +99,17 @@ class Model extends AbstractTable
      * @param integer $property_value_id
      * @return \Gc\Property\Value\Model|boolean
      */
-    static function fromId($property_value_id)
+    public static function fromId($property_value_id)
     {
         $property_value_table = new Model();
         $select = $property_value_table->select(array('id' => (int)$property_value_id));
         $current = $property_value_table->fetchRow($select);
-        if(!empty($current))
-        {
+        if (!empty($current)) {
             $property_value_table->setData((array)$current);
             $property_value_table->setOrigData();
             return $property_value_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -123,37 +120,31 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
         $array_save = array(
             'value' => ($this->getDriverName() == 'pdo_pgsql') ? pg_escape_bytea($this->getValue()) : $this->getValue(),
             'document_id' => $this->getDocumentId(),
             'property_id' => $this->getPropertyId(),
         );
 
-        try
-        {
+        try {
             $id = $this->getId();
-            if(empty($id))
-            {
+            if (empty($id)) {
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
-            }
-            else
-            {
+            } else {
                 $this->update($array_save, array('id' => $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
             return $this->getId();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 }

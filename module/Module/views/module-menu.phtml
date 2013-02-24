@@ -33,13 +33,13 @@
 <h2>..:: <?php echo $this->escapeHtml($this->translate('Modules')); ?> ::..</h2>
 
 <ul>
-    <?php if(in_array('install', $permissions['Modules'])):?>
+    <?php if (in_array('install', $permissions['Modules'])):?>
         <li><a href="<?php echo $this->url('moduleInstall'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
     <?php endif; ?>
 
     <li><a href="<?php echo $this->url('module'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
 </ul>
 
-<?php if(!empty($this->moduleMenu)): ?>
+<?php if (!empty($this->moduleMenu)): ?>
     <?php echo $this->partial($this->moduleMenu); ?>
 <?php endif; ?>

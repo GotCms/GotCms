@@ -27,22 +27,22 @@
 
 namespace Gc\Mvc;
 
-use Gc\Core\Config as GcConfig,
-    Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway,
-    Gc\Registry,
-    Gc\Module\Collection as ModuleCollection,
-    Zend,
-    Zend\Db\Adapter\Adapter as DbAdapter,
-    Zend\Db\TableGateway\TableGateway,
-    Zend\Config\Reader\Ini,
-    Zend\EventManager\Event,
-    Zend\I18n\Translator\Translator,
-    Zend\ModuleManager\ModuleManager,
-    Zend\Mvc\ModuleRouteListener,
-    Zend\Session\Config\SessionConfig,
-    Zend\Session\Container as SessionContainer,
-    Zend\Session\SaveHandler\DbTableGatewayOptions,
-    Zend\Session\SessionManager;
+use Gc\Core\Config as GcConfig;
+use Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway;
+use Gc\Registry;
+use Gc\Module\Collection as ModuleCollection;
+use Zend;
+use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Config\Reader\Ini;
+use Zend\EventManager\Event;
+use Zend\I18n\Translator\Translator;
+use Zend\ModuleManager\ModuleManager;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Session\Config\SessionConfig;
+use Zend\Session\Container as SessionContainer;
+use Zend\Session\SaveHandler\DbTableGatewayOptions;
+use Zend\Session\SessionManager;
 
 /**
  * Generic Module
@@ -58,21 +58,21 @@ abstract class Module
      *
      * @var string
      */
-    protected $_directory = NULL;
+    protected $directory = null;
 
     /**
      * Module namespace
      *
      * @var string
      */
-    protected $_namespace = NULL;
+    protected $namespace = null;
 
     /**
      * Module configuration
      *
      * @var array
      */
-    protected $_config;
+    protected $config;
 
     /**
      * On boostrap event
@@ -82,13 +82,16 @@ abstract class Module
      */
     public function onBootstrap(Event $event)
     {
-        if(!Registry::isRegistered('Translator'))
-        {
+        if (!Registry::isRegistered('Translator')) {
             $translator = $event->getApplication()->getServiceManager()->get('translator');
-            $translator->addTranslationFilePattern('phparray', GC_APPLICATION_PATH . '/data/translation/', '%s.php', 'default');
+            $translator->addTranslationFilePattern(
+                'phparray',
+                GC_APPLICATION_PATH . '/data/translation/',
+                '%s.php',
+                'default'
+            );
 
-            if(Registry::isRegistered('Db'))
-            {
+            if (Registry::isRegistered('Db')) {
                 $translator->setLocale(GcConfig::getValue('locale'));
             }
 
@@ -97,17 +100,14 @@ abstract class Module
 
             $uri = '';
             $uri_class = $event->getRequest()->getUri();
-            if($uri_class->getScheme())
-            {
+            if ($uri_class->getScheme()) {
                 $uri .= $uri_class->getScheme() . ':';
             }
 
-            if($uri_class->getHost() !== NULL)
-            {
+            if ($uri_class->getHost() !== null) {
                 $uri .= '//';
                 $uri .= $uri_class->getHost();
-                if($uri_class->getPort() and $uri_class->getPort() != 80)
-                {
+                if ($uri_class->getPort() and $uri_class->getPort() != 80) {
                     $uri .= ':' . $uri_class->getPort();
                 }
             }
@@ -125,11 +125,11 @@ abstract class Module
     {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
-                $this->_getDir() . '/autoload_classmap.php',
+                $this->getDir() . '/autoload_classmap.php',
             ),
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    $this->_getNamespace() => $this->_getDir() . '/src/' . $this->_getNamespace(),
+                    $this->getNamespace() => $this->getDir() . '/src/' . $this->getNamespace(),
                 ),
             ),
         );
@@ -142,35 +142,30 @@ abstract class Module
      */
     public function getConfig()
     {
-        if(empty($this->_config))
-        {
-            $config = include $this->_getDir() . '/config/module.config.php';
+        if (empty($this->config)) {
+            $config = include $this->getDir() . '/config/module.config.php';
             $ini = new Ini();
-            $routes = $ini->fromFile($this->_getDir() . '/config/routes.ini');
+            $routes = $ini->fromFile($this->getDir() . '/config/routes.ini');
             $routes = $routes['production'];
-            if(empty($config['router']['routes']))
-            {
+            if (empty($config['router']['routes'])) {
                 $config['router']['routes'] = array();
             }
 
-            if(!empty($routes['routes']))
-            {
+            if (!empty($routes['routes'])) {
                 $config['router']['routes'] += $routes['routes'];
             }
 
-            if(Registry::isRegistered('Db'))
-            {
-                if(isset($config['view_manager']['display_exceptions']) and GcConfig::getValue('debug_is_active'))
-                {
-                    $config['view_manager']['display_not_found_reason'] = TRUE;
-                    $config['view_manager']['display_exceptions'] = TRUE;
+            if (Registry::isRegistered('Db')) {
+                if (isset($config['view_manager']['display_exceptions']) and GcConfig::getValue('debug_is_active')) {
+                    $config['view_manager']['display_not_found_reason'] = true;
+                    $config['view_manager']['display_exceptions'] = true;
                 }
             }
 
-            $this->_config = $config;
+            $this->config = $config;
         }
 
-        return $this->_config;
+        return $this->config;
     }
 
     /**
@@ -178,9 +173,9 @@ abstract class Module
      *
      * @return string
      */
-    protected function _getDir()
+    protected function getDir()
     {
-        return $this->_directory;
+        return $this->directory;
     }
 
     /**
@@ -188,9 +183,9 @@ abstract class Module
      *
      * @return string
      */
-    protected function _getNamespace()
+    protected function getNamespace()
     {
-        return $this->_namespace;
+        return $this->namespace;
     }
 
     /**
@@ -201,22 +196,17 @@ abstract class Module
      */
     public function init(ModuleManager $module_manager)
     {
-        if(!Registry::isRegistered('Configuration'))
-        {
+        if (!Registry::isRegistered('Configuration')) {
             $config_paths = $module_manager->getEvent()->getConfigListener()->getOptions()->getConfigGlobPaths();
-            if(!empty($config_paths))
-            {
+            if (!empty($config_paths)) {
                 $config = array();
-                foreach($config_paths as $path)
-                {
-                    foreach(glob(realpath(__DIR__ . '/../../../') . '/' . $path, GLOB_BRACE) as $filename)
-                    {
+                foreach ($config_paths as $path) {
+                    foreach (glob(realpath(__DIR__ . '/../../../') . '/' . $path, GLOB_BRACE) as $filename) {
                         $config += include($filename);
                     }
                 }
 
-                if(!empty($config['db']))
-                {
+                if (!empty($config['db'])) {
                     $db_adapter = new DbAdapter($config['db']);
                     \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
 
@@ -229,28 +219,30 @@ abstract class Module
                     $session_config->setStorageOption('cookie_path', GcConfig::getValue('cookie_path'));
                     $session_config->setStorageOption('cookie_domain', GcConfig::getValue('cookie_domain'));
 
-                    if(GcConfig::getValue('session_handler') == GcConfig::SESSION_DATABASE)
-                    {
-                        $tablegateway_config = new DbTableGatewayOptions(array(
-                            'idColumn'   => 'id',
-                            'nameColumn' => 'name',
-                            'modifiedColumn' => 'updated_at',
-                            'lifetimeColumn' => 'lifetime',
-                            'dataColumn' => 'data',
-                        ));
+                    if (GcConfig::getValue('session_handler') == GcConfig::SESSION_DATABASE) {
+                        $tablegateway_config = new DbTableGatewayOptions(
+                            array(
+                                'idColumn'   => 'id',
+                                'nameColumn' => 'name',
+                                'modifiedColumn' => 'updated_at',
+                                'lifetimeColumn' => 'lifetime',
+                                'dataColumn' => 'data',
+                            )
+                        );
 
-                        $session_table = new SessionTableGateway(new TableGateway('core_session', $db_adapter), $tablegateway_config);
+                        $session_table = new SessionTableGateway(
+                            new TableGateway('core_session', $db_adapter),
+                            $tablegateway_config
+                        );
                         $session_manager->setSaveHandler($session_table)->start();
                     }
 
                     //Initialize Observers
                     $module_collection = new ModuleCollection();
                     $modules = $module_collection->getModules();
-                    foreach($modules as $module)
-                    {
+                    foreach ($modules as $module) {
                         $class_name = sprintf('\\Modules\\%s\\Observer', $module->getName());
-                        if(class_exists($class_name))
-                        {
+                        if (class_exists($class_name)) {
                             $object = new $class_name();
                             $object->init();
                         }

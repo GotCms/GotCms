@@ -27,11 +27,11 @@
 
 namespace Modules\Backup\Controller;
 
-use Gc\Module\Controller\AbstractController,
-    Gc\Document\Model as DocumentModel,
-    Gc\Registry,
-    Modules\Backup\Model,
-    Zend\Http\Headers;
+use Gc\Module\Controller\AbstractController;
+use Gc\Document\Model as DocumentModel;
+use Gc\Registry;
+use Modules\Backup\Model;
+use Zend\Http\Headers;
 
 /**
  * IndexController
@@ -60,15 +60,13 @@ class IndexController extends AbstractController
     public function downloadDatabaseAction()
     {
         $configuration = Registry::get('Configuration');
-        switch($configuration['db']['driver'])
-        {
+        switch($configuration['db']['driver']) {
             case 'pdo_pgsql':
                 $model = new Model\Database\Pgsql();
-            break;
-
+                break;
             case 'pdo_mysql':
                 $model = new Model\Database\Mysql();
-            break;
+                break;
         }
 
         $content = $model->export($this->getRequest()->getPost()->get('what'));

@@ -27,8 +27,8 @@
 
 namespace Gc\Layout;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of Layout Model
@@ -44,7 +44,7 @@ class Collection extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'layout';
+    protected $name = 'layout';
 
     /**
      * Initiliaze collection
@@ -53,7 +53,7 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->getLayouts(TRUE);
+        $this->getLayouts(true);
     }
 
     /**
@@ -62,18 +62,19 @@ class Collection extends AbstractTable
      * @param boolean $force_reload
      * @return \Gc\Layout\Collection
      */
-    public function getLayouts($force_reload = FALSE)
+    public function getLayouts($force_reload = false)
     {
-        if($force_reload or $this->getData('layouts') === NULL)
-        {
-            $rows = $this->fetchAll($this->select(function (Select $select)
-            {
-                $select->order('name ASC');
-            }));
+        if ($force_reload or $this->getData('layouts') === null) {
+            $rows = $this->fetchAll(
+                $this->select(
+                    function (Select $select) {
+                        $select->order('name ASC');
+                    }
+                )
+            );
 
             $layouts = array();
-            foreach($rows as $row)
-            {
+            foreach ($rows as $row) {
                 $layouts[] = Model::fromArray((array)$row);
             }
 
@@ -93,8 +94,7 @@ class Collection extends AbstractTable
         $select = array();
         $layouts = $this->getLayouts();
 
-        foreach($layouts as $layout)
-        {
+        foreach ($layouts as $layout) {
             $select[$layout->getId()] = $layout->getName();
         }
 

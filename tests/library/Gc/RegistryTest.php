@@ -41,7 +41,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Registry
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var Registry
@@ -57,7 +57,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_oldInstance = Registry::getInstance();
-        $this->_object = new Registry;
+        $this->object = new Registry;
     }
 
     /**
@@ -66,18 +66,18 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_object->_unsetInstance();
+        $this->object->unsetInstance();
         Registry::setInstance($this->_oldInstance);
     }
 
     /**
      * @covers Gc\Registry::getInstance
      * @covers Gc\Registry::init
-     * @covers Gc\Registry::_unsetInstance
+     * @covers Gc\Registry::unsetInstance
      */
     public function testGetInstance()
     {
-        $this->_object->_unsetInstance();
+        $this->object->unsetInstance();
         $this->assertInstanceOf('Gc\Registry', Registry::getInstance());
     }
 
@@ -86,8 +86,8 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetInstance()
     {
-        $this->_object->_unsetInstance();
-        $this->_object->setInstance(new Registry);
+        $this->object->unsetInstance();
+        $this->object->setInstance(new Registry);
         $this->assertInstanceOf('Gc\Registry', Registry::getInstance());
     }
 
@@ -97,7 +97,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     public function testSetInstanceWithRegistryAlreadyInitialized()
     {
         $this->setExpectedException('RuntimeException');
-        $this->_object->setInstance(new Registry);
+        $this->object->setInstance(new Registry);
     }
 
     /**
@@ -105,8 +105,8 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testGet()
     {
-        $this->_object->set('key', 'value');
-        $this->assertEquals('value', $this->_object->get('key'));
+        $this->object->set('key', 'value');
+        $this->assertEquals('value', $this->object->get('key'));
     }
 
     /**
@@ -115,7 +115,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     public function testGetFakeData()
     {
         $this->setExpectedException('RuntimeException');
-        $this->_object->get('foo');
+        $this->object->get('foo');
     }
 
     /**
@@ -123,8 +123,8 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testSet()
     {
-        $this->_object->set('key', 'value');
-        $this->assertEquals('value', $this->_object->get('key'));
+        $this->object->set('key', 'value');
+        $this->assertEquals('value', $this->object->get('key'));
     }
 
     /**
@@ -132,8 +132,8 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsRegisteredWithData()
     {
-        $this->_object->set('key', 'value');
-        $this->assertTrue($this->_object->isRegistered('key'));
+        $this->object->set('key', 'value');
+        $this->assertTrue($this->object->isRegistered('key'));
     }
 
     /**
@@ -141,8 +141,8 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsRegisteredWithoutData()
     {
-        $this->_object->_unsetInstance();
-        $this->assertFalse($this->_object->isRegistered('key'));
+        $this->object->unsetInstance();
+        $this->assertFalse($this->object->isRegistered('key'));
     }
 
     /**
@@ -150,7 +150,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testOffsetExists()
     {
-        $this->_object->set('key', 'value');
-        $this->assertTrue($this->_object->isRegistered('key'));
+        $this->object->set('key', 'value');
+        $this->assertTrue($this->object->isRegistered('key'));
     }
 }

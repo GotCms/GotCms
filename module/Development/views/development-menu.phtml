@@ -30,7 +30,7 @@ $permissions = $this->layout()->adminUser->getRole()->getUserPermissions();
 $development = empty($permissions['Development']) ? array() : $permissions['Development'];
 ?>
 
-<?php if(in_array('document-type', $development)): ?>
+<?php if (in_array('document-type', $development)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Document types')); ?> ::..</h2>
 
     <ul>
@@ -39,7 +39,7 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     </ul>
 <?php endif; ?>
 
-<?php if(in_array('view', $development)): ?>
+<?php if (in_array('view', $development)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Views')); ?> ::..</h2>
 
     <ul>
@@ -48,7 +48,7 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     </ul>
 <?php endif; ?>
 
-<?php if(in_array('layout', $development)): ?>
+<?php if (in_array('layout', $development)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Layouts')); ?> ::..</h2>
 
     <ul>
@@ -57,7 +57,7 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     </ul>
 <?php endif; ?>
 
-<?php if(in_array('script', $development)): ?>
+<?php if (in_array('script', $development)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Scripts')); ?> ::..</h2>
 
     <ul>
@@ -66,7 +66,7 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     </ul>
 <?php endif; ?>
 
-<?php if(in_array('datatype', $development)): ?>
+<?php if (in_array('datatype', $development)): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Datatypes')); ?> ::..</h2>
 
     <ul>

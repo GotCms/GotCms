@@ -40,7 +40,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Model
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,10 +48,10 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = Model::fromArray(array(
+        $this->object = Model::fromArray(array(
             'name' => 'ModuleTest',
         ));
-        $this->_object->save();
+        $this->object->save();
     }
 
     /**
@@ -60,8 +60,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_object->delete();
-        unset($this->_object);
+        $this->object->delete();
+        unset($this->object);
     }
 
     /**
@@ -69,7 +69,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromArray()
     {
-        $this->assertInstanceOf('Gc\Module\Model', Model::fromArray($this->_object->getData()));
+        $this->assertInstanceOf('Gc\Module\Model', Model::fromArray($this->object->getData()));
     }
 
     /**
@@ -77,7 +77,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromId()
     {
-        $this->assertInstanceOf('Gc\Module\Model', Model::fromId($this->_object->getId()));
+        $this->assertInstanceOf('Gc\Module\Model', Model::fromId($this->object->getId()));
     }
 
     /**
@@ -93,7 +93,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertInternalType('integer', $this->_object->save());
+        $this->assertInternalType('integer', $this->object->save());
     }
 
     /**
@@ -102,8 +102,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithWrongValues()
     {
         $this->setExpectedException('Gc\Exception');
-        $this->_object->setName(NULL);
-        $this->assertFalse($this->_object->save());
+        $this->object->setName(NULL);
+        $this->assertFalse($this->object->save());
     }
 
     /**
@@ -111,7 +111,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $this->assertTrue($this->_object->delete());
+        $this->assertTrue($this->object->delete());
     }
 
     /**

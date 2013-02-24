@@ -40,7 +40,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Tools
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Tools;
+        $this->object = new Tools;
     }
 
     /**
@@ -64,7 +64,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnserialize()
     {
-        $this->assertEquals('string', $this->_object->__invoke('unserialize', 's:6:"string";'));
+        $this->assertEquals('string', $this->object->__invoke('unserialize', 's:6:"string";'));
     }
 
     /**
@@ -72,7 +72,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
      */
     public function testSerialize()
     {
-        $this->assertEquals('s:6:"string";', $this->_object->__invoke('serialize', 'string'));
+        $this->assertEquals('s:6:"string";', $this->object->__invoke('serialize', 'string'));
     }
 
     /**
@@ -80,7 +80,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
      */
     public function testDebug()
     {
-        $result = $this->_object->__invoke('debug', 'string');
+        $result = $this->object->__invoke('debug', 'string');
         $result = str_replace(array(PHP_EOL, "\n"), '_', $result);
         $expected = '<pre>string</pre>';
         $this->assertEquals($expected, $result);
@@ -91,7 +91,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsSerialized()
     {
-        $this->assertTrue($this->_object->__invoke('is_serialized', 's:6:"string";'));
+        $this->assertTrue($this->object->__invoke('is_serialized', 's:6:"string";'));
     }
 
     /**
@@ -99,6 +99,6 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
      */
     public function testCamelCase()
     {
-        $this->assertEquals('StringToCamelCase', $this->_object->__invoke('camelCase', 'String to camel case'));
+        $this->assertEquals('StringToCamelCase', $this->object->__invoke('camelCase', 'String to camel case'));
     }
 }

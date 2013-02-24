@@ -40,7 +40,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Image
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var string
@@ -54,7 +54,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_directory = __DIR__ . '/_files/';
-        $this->_object = new Image;
+        $this->object = new Image;
     }
 
     /**
@@ -78,47 +78,47 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testOpen()
     {
-        $this->assertInstanceOf('Gc\Media\Image', $this->_object->open($this->_directory . 'test.png'));
-        $this->assertInstanceOf('Gc\Media\Image', $this->_object->open($this->_directory . 'test.jpg'));
-        $this->assertInstanceOf('Gc\Media\Image', $this->_object->open($this->_directory . 'test.gif'));
-        $this->assertInstanceOf('Gc\Media\Image', $this->_object->open($this->_directory . 'test.bmp'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->_directory . 'test.png'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->_directory . 'test.jpg'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->_directory . 'test.gif'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->_directory . 'test.bmp'));
     }
 
     /**
      * @covers Gc\Media\Image::resize
-     * @covers Gc\Media\Image::_getSizeByFixedWidth
-     * @covers Gc\Media\Image::_getSizeByFixedHeight
+     * @covers Gc\Media\Image::getSizeByFixedWidth
+     * @covers Gc\Media\Image::getSizeByFixedHeight
      * @covers Gc\Media\Image::hex2rgb
      */
     public function testResizeWithUndefinedOption()
     {
-        $this->_object->open($this->_directory . 'test.png');
-        $this->assertInstanceOf('Gc\Media\Image', $this->_object->resize(50, 500, 'undefined option'));
+        $this->object->open($this->_directory . 'test.png');
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->resize(50, 500, 'undefined option'));
         //double test for optimal size tests
-        $this->assertInstanceOf('Gc\Media\Image', $this->_object->resize(500, 50, 'undefined option'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->resize(500, 50, 'undefined option'));
     }
 
     /**
      * @covers Gc\Media\Image::resize
-     * @covers Gc\Media\Image::_crop
+     * @covers Gc\Media\Image::crop
      * @covers Gc\Media\Image::hex2rgb
      */
     public function testResizeWithCropOption()
     {
-        $this->_object->open($this->_directory . 'test.png');
-        $this->assertInstanceOf('Gc\Media\Image', $this->_object->resize(50, 50, 'crop'));
+        $this->object->open($this->_directory . 'test.png');
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->resize(50, 50, 'crop'));
     }
 
     /**
      * @covers Gc\Media\Image::resize
-     * @covers Gc\Media\Image::_getSizeByFixedWidth
-     * @covers Gc\Media\Image::_getSizeByFixedHeight
+     * @covers Gc\Media\Image::getSizeByFixedWidth
+     * @covers Gc\Media\Image::getSizeByFixedHeight
      * @covers Gc\Media\Image::hex2rgb
      */
     public function testResizeWithUndefinedColor()
     {
-        $this->_object->open($this->_directory . 'test.png');
-        $this->assertInstanceOf('Gc\Media\Image', $this->_object->resize(50, 50, 'auto', 'FFFFFFFF'));
+        $this->object->open($this->_directory . 'test.png');
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->resize(50, 50, 'auto', 'FFFFFFFF'));
     }
 
     /**
@@ -126,7 +126,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testResizeWithNoImage()
     {
-        $this->assertFalse($this->_object->resize(50, 50));
+        $this->assertFalse($this->object->resize(50, 50));
     }
 
     /**
@@ -134,7 +134,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testHex2rgbWith6Chars()
     {
-        $this->assertInternalType('array', $this->_object->hex2rgb('FFFFFF'));
+        $this->assertInternalType('array', $this->object->hex2rgb('FFFFFF'));
     }
 
     /**
@@ -142,7 +142,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testHex2rgbWith3Chars()
     {
-        $this->assertInternalType('array', $this->_object->hex2rgb('FFF'));
+        $this->assertInternalType('array', $this->object->hex2rgb('FFF'));
     }
 
     /**
@@ -150,7 +150,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testHex2rgbWithWrongValue()
     {
-        $this->assertFalse($this->_object->hex2rgb('0123456'));
+        $this->assertFalse($this->object->hex2rgb('0123456'));
     }
 
     /**
@@ -158,7 +158,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithNoImage()
     {
-        $this->assertFalse($this->_object->save('wrong/path'));
+        $this->assertFalse($this->object->save('wrong/path'));
     }
 
     /**
@@ -167,9 +167,9 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithPng()
     {
         $saving_path = $this->_directory . 'saving-test.png';
-        $this->_object->open($this->_directory . 'test.png');
-        $this->_object->resize(50, 50);
-        $this->assertTrue($this->_object->save($saving_path));
+        $this->object->open($this->_directory . 'test.png');
+        $this->object->resize(50, 50);
+        $this->assertTrue($this->object->save($saving_path));
         unlink($saving_path);
     }
 
@@ -179,9 +179,9 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithGif()
     {
         $saving_path = $this->_directory . 'saving-test.gif';
-        $this->_object->open($this->_directory . 'test.gif');
-        $this->_object->resize(50, 50);
-        $this->assertTrue($this->_object->save($saving_path));
+        $this->object->open($this->_directory . 'test.gif');
+        $this->object->resize(50, 50);
+        $this->assertTrue($this->object->save($saving_path));
         unlink($saving_path);
     }
 
@@ -191,9 +191,9 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithJpg()
     {
         $saving_path = $this->_directory . 'saving-test.jpg';
-        $this->_object->open($this->_directory . 'test.jpg');
-        $this->_object->resize(50, 50);
-        $this->assertTrue($this->_object->save($saving_path));
+        $this->object->open($this->_directory . 'test.jpg');
+        $this->object->resize(50, 50);
+        $this->assertTrue($this->object->save($saving_path));
         unlink($saving_path);
     }
 
@@ -203,8 +203,8 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testSaveInBmp()
     {
         $saving_path = $this->_directory . 'saving-test.bmp';
-        $this->_object->open($this->_directory . 'test.png');
-        $this->_object->resize(50, 50);
-        $this->assertFalse($this->_object->save($saving_path));
+        $this->object->open($this->_directory . 'test.png');
+        $this->object->resize(50, 50);
+        $this->assertFalse($this->object->save($saving_path));
     }
 }

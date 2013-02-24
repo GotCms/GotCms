@@ -28,8 +28,8 @@
 
 namespace Gc\Event;
 
-use Zend\EventManager\SharedEventManager,
-    Zend\EventManager\SharedEventManagerInterface;
+use Zend\EventManager\SharedEventManager;
+use Zend\EventManager\SharedEventManagerInterface;
 
 /**
  * Static version of EventManager
@@ -45,7 +45,7 @@ class StaticEventManager extends SharedEventManager
      *
      * @var StaticEventManager
      */
-    protected static $_instance;
+    protected static $instance;
 
     /**
      * Singleton
@@ -63,12 +63,11 @@ class StaticEventManager extends SharedEventManager
      */
     public static function getInstance()
     {
-        if(static::$_instance === NULL)
-        {
+        if (static::$instance === null) {
             static::setInstance(new static());
         }
 
-        return static::$_instance;
+        return static::$instance;
     }
 
     /**
@@ -79,7 +78,7 @@ class StaticEventManager extends SharedEventManager
      */
     public static function setInstance(SharedEventManagerInterface $instance)
     {
-        static::$_instance = $instance;
+        static::$instance = $instance;
     }
 
     /**
@@ -89,7 +88,7 @@ class StaticEventManager extends SharedEventManager
      */
     public static function hasInstance()
     {
-        return (static::$_instance instanceof SharedEventManagerInterface);
+        return (static::$instance instanceof SharedEventManagerInterface);
     }
 
     /**
@@ -99,7 +98,7 @@ class StaticEventManager extends SharedEventManager
      */
     public static function resetInstance()
     {
-        static::$_instance = NULL;
+        static::$instance = null;
     }
 
     /**
@@ -110,9 +109,8 @@ class StaticEventManager extends SharedEventManager
      */
     public function getEvent($id)
     {
-        if(!array_key_exists($id, $this->identifiers))
-        {
-            return FALSE;
+        if (!array_key_exists($id, $this->identifiers)) {
+            return false;
         }
 
         return $this->identifiers[$id];
@@ -131,12 +129,11 @@ class StaticEventManager extends SharedEventManager
      * @return \Zend\EventManager\ResponseCollection All listener return values
      * @throws \Zend\EventManager\Exception\InvalidCallbackException
      */
-    public function trigger($id, $event, $target = NULL, $argv = array(), $callback = NULL)
+    public function trigger($id, $event, $target = null, $argv = array(), $callback = null)
     {
         $e = $this->getEvent($id);
-        if(empty($e))
-        {
-            return FALSE;
+        if (empty($e)) {
+            return false;
         }
 
         return $e->trigger($event, $target, $argv, $callback);

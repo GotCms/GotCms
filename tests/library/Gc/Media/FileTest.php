@@ -43,7 +43,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * @var File
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -51,7 +51,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new File;
+        $this->object = new File;
     }
 
     /**
@@ -74,7 +74,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $document = DocumentModel::fromArray(array(
             'id' => 1
         ));
-        $this->assertNull($this->_object->load($property, $document, 1));
+        $this->assertNull($this->object->load($property, $document, 1));
     }
 
     /**
@@ -82,7 +82,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPath()
     {
-        $this->assertEquals(realpath(GC_MEDIA_PATH . '/..'), $this->_object->getPath());
+        $this->assertEquals(realpath(GC_MEDIA_PATH . '/..'), $this->object->getPath());
     }
 
     /**
@@ -96,9 +96,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $document = DocumentModel::fromArray(array(
             'id' => 1
         ));
-        $this->_object->load($property, $document);
+        $this->object->load($property, $document);
 
-        $this->assertEquals('/media/files/' . $document->getId() . '/' . $property->getId(), $this->_object->getDirectory());
+        $this->assertEquals('/media/files/' . $document->getId() . '/' . $property->getId(), $this->object->getDirectory());
     }
 
     /**
@@ -106,7 +106,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFileTransfer()
     {
-        $this->assertInstanceOf('Zend\File\Transfer\Adapter\Http', $this->_object->getFileTransfer());
+        $this->assertInstanceOf('Zend\File\Transfer\Adapter\Http', $this->object->getFileTransfer());
     }
 
     /**
@@ -116,7 +116,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $this->_initializeFiles();
         $_FILES = array();
-        $result = $this->_object->upload();
+        $result = $this->object->upload();
         $this->_removeDirectories();
         $this->assertFalse($result);
     }
@@ -129,16 +129,16 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $this->_initializeFiles();
 
-        $this->_object->getFileTransfer()->removeValidator('Zend\Validator\File\Upload');
-        $result = $this->_object->upload();
-        $this->assertTrue($this->_object->upload());
+        $this->object->getFileTransfer()->removeValidator('Zend\Validator\File\Upload');
+        $result = $this->object->upload();
+        $this->assertTrue($this->object->upload());
 
-        $files = $this->_object->getFiles();
+        $files = $this->object->getFiles();
         if(is_array($files))
         {
             foreach($files as $file)
             {
-                $this->_object->remove($file->filename);
+                $this->object->remove($file->filename);
             }
         }
 
@@ -151,7 +151,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testRemove()
     {
-        $this->assertTrue($this->_object->remove('undefined-file'));
+        $this->assertTrue($this->object->remove('undefined-file'));
     }
 
     /**
@@ -161,7 +161,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $source = __DIR__ . '/_files/copy/source';
         $destination = __DIR__ . '/_files/copy/destination';
-        $this->assertTrue($this->_object->copyDirectory($source, $destination));
+        $this->assertTrue($this->object->copyDirectory($source, $destination));
         `rm -rf $destination`;
     }
 
@@ -171,7 +171,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testIsWritable()
     {
         $directory = __DIR__ . '/_files/copy';
-        $this->assertTrue($this->_object->isWritable($directory));
+        $this->assertTrue($this->object->isWritable($directory));
     }
 
     /**
@@ -179,7 +179,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsWritableWithNotWritablePath()
     {
-        $this->assertFalse($this->_object->isWritable('/etc'));
+        $this->assertFalse($this->object->isWritable('/etc'));
     }
 
     protected function _initializeFiles()
@@ -201,12 +201,12 @@ class FileTest extends \PHPUnit_Framework_TestCase
             'id' => 'test-upload'
         ));
 
-        $this->_object->load($property, $document, 'test');
+        $this->object->load($property, $document, 'test');
     }
 
     protected function _removeDirectories()
     {
-        $dir = $this->_object->getPath() . $this->_object->getDirectory();
+        $dir = $this->object->getPath() . $this->object->getDirectory();
         if(is_dir($dir))
         {
             $data = glob($dir . '/*');

@@ -45,27 +45,27 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Model
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-    protected $_documentType;
+    protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -75,23 +75,23 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = LayoutModel::fromArray(array(
+        $this->layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
@@ -99,26 +99,26 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = DocumentTypeModel::fromArray(array(
+        $this->documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
 
-        $this->_documentType->save();
+        $this->documentType->save();
 
-        $this->_object = Model::fromArray(array(
+        $this->object = Model::fromArray(array(
             'name' => 'TabTest',
             'description' => 'TabTest',
             'sort_order' => 1,
-            'document_type_id' => $this->_documentType->getId(),
+            'document_type_id' => $this->documentType->getId(),
         ));
-        $this->_object->save();
+        $this->object->save();
     }
 
     /**
@@ -127,16 +127,16 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_object->delete();
-        $this->_documentType->delete();
-        $this->_user->delete();
-        $this->_layout->delete();
-        $this->_view->delete();
-        unset($this->_documentType);
-        unset($this->_user);
-        unset($this->_layout);
-        unset($this->_view);
-        unset($this->_object);
+        $this->object->delete();
+        $this->documentType->delete();
+        $this->user->delete();
+        $this->layout->delete();
+        $this->view->delete();
+        unset($this->documentType);
+        unset($this->user);
+        unset($this->layout);
+        unset($this->view);
+        unset($this->object);
     }
 
     /**
@@ -144,7 +144,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->assertInstanceOf('Gc\Tab\Model', $this->_object->load($this->_object->getId(), $this->_object->getDocumentTypeId()));
+        $this->assertInstanceOf('Gc\Tab\Model', $this->object->load($this->object->getId(), $this->object->getDocumentTypeId()));
     }
 
     /**
@@ -152,7 +152,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadWithWrongValues()
     {
-        $this->assertFalse($this->_object->load('undefined'));
+        $this->assertFalse($this->object->load('undefined'));
     }
 
     /**
@@ -160,7 +160,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertInternalType('integer', $this->_object->save());
+        $this->assertInternalType('integer', $this->object->save());
     }
 
     /**
@@ -169,8 +169,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithWrongValues()
     {
         $this->setExpectedException('\Gc\Exception');
-        $this->_object->setDocumentTypeId('undefined');
-        $this->assertFalse($this->_object->save());
+        $this->object->setDocumentTypeId('undefined');
+        $this->assertFalse($this->object->save());
     }
 
     /**
@@ -178,7 +178,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $this->assertTrue($this->_object->delete());
+        $this->assertTrue($this->object->delete());
         //Code coverage
         $model = new Model();
         $this->assertFalse($model->delete());
@@ -200,7 +200,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromArray()
     {
-        $this->assertInstanceOf('Gc\Tab\Model', Model::fromArray($this->_object->getData()));
+        $this->assertInstanceOf('Gc\Tab\Model', Model::fromArray($this->object->getData()));
     }
 
     /**
@@ -208,7 +208,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromId()
     {
-        $this->assertInstanceOf('Gc\Tab\Model', Model::fromId($this->_object->getId()));
+        $this->assertInstanceOf('Gc\Tab\Model', Model::fromId($this->object->getId()));
     }
 
     /**
@@ -224,7 +224,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDocumentType()
     {
-        $this->assertInstanceOf('Gc\DocumentType\Model', $this->_object->getDocumentType());
+        $this->assertInstanceOf('Gc\DocumentType\Model', $this->object->getDocumentType());
     }
 
     /**
@@ -232,6 +232,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetProperties()
     {
-        $this->assertInternalType('array', $this->_object->getProperties());
+        $this->assertInternalType('array', $this->object->getProperties());
     }
 }

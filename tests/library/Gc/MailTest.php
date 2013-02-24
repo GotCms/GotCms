@@ -40,7 +40,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Mail
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -50,7 +50,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Mail('utf-8', 'MessageTest', 'pierre.rambaud86@gmail.com', 'pierre.rambaud86@gmail.com');
+        $this->object = new Mail('utf-8', 'MessageTest', 'pierre.rambaud86@gmail.com', 'pierre.rambaud86@gmail.com');
     }
 
     /**
@@ -59,7 +59,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -67,6 +67,6 @@ class MailTest extends \PHPUnit_Framework_TestCase
      */
     public function testSend()
     {
-        $this->assertNull($this->_object->send());
+        $this->assertNull($this->object->send());
     }
 }

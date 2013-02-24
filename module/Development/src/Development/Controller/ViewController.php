@@ -27,12 +27,12 @@
 
 namespace Development\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Development\Form\View as ViewForm,
-    Gc\View,
-    Zend\Http\Headers,
-    Zend\File\Transfer\Adapter\Http as FileTransfer,
-    ZipArchive;
+use Gc\Mvc\Controller\Action;
+use Development\Form\View as ViewForm;
+use Gc\View;
+use Zend\Http\Headers;
+use Zend\File\Transfer\Adapter\Http as FileTransfer;
+use ZipArchive;
 
 /**
  * View controller
@@ -48,7 +48,7 @@ class ViewController extends Action
      *
      * @var array $_aclPage
      */
-    protected $_aclPage = array('resource' => 'Development', 'permission' => 'view');
+    protected $aclPage = array('resource' => 'Development', 'permission' => 'view');
 
     /**
      * List all views
@@ -71,17 +71,13 @@ class ViewController extends Action
         $view_form = new ViewForm();
         $view_form->setAttribute('action', $this->url()->fromRoute('viewCreate'));
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
             $view_form->setData($data);
-            if(!$view_form->isValid())
-            {
+            if (!$view_form->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save view');
                 $this->useFlashMessenger();
-            }
-            else
-            {
+            } else {
                 $view_model = new View\Model();
                 $view_model->setName($view_form->getValue('name'));
                 $view_model->setIdentifier($view_form->getValue('identifier'));
@@ -104,10 +100,9 @@ class ViewController extends Action
      */
     public function editAction()
     {
-        $view_id = $this->getRouteMatch()->getParam('id', NULL);
+        $view_id = $this->getRouteMatch()->getParam('id', null);
         $view_model = View\Model::fromId($view_id);
-        if(empty($view_id) or empty($view_model))
-        {
+        if (empty($view_id) or empty($view_model)) {
             return $this->redirect()->toRoute('viewList');
         }
 
@@ -115,17 +110,13 @@ class ViewController extends Action
         $view_form->setAttribute('action', $this->url()->fromRoute('viewEdit', array('id' => $view_id)));
         $view_form->loadValues($view_model);
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
             $view_form->setData($data);
-            if(!$view_form->isValid())
-            {
+            if (!$view_form->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save view');
                 $this->useFlashMessenger();
-            }
-            else
-            {
+            } else {
                 $view_model->setName($view_form->getValue('name'));
                 $view_model->setIdentifier($view_form->getValue('identifier'));
                 $view_model->setDescription($view_form->getValue('description'));
@@ -147,16 +138,14 @@ class ViewController extends Action
      */
     public function deleteAction()
     {
-        $view = View\Model::fromId($this->getRouteMatch()->getParam('id', NULL));
-        if(!empty($view))
-        {
-            if($view->delete())
-            {
-                return $this->returnJson(array('success' => TRUE, 'message' => 'This view has been deleted'));
+        $view = View\Model::fromId($this->getRouteMatch()->getParam('id', null));
+        if (!empty($view)) {
+            if ($view->delete()) {
+                return $this->returnJson(array('success' => true, 'message' => 'This view has been deleted'));
             }
         }
 
-        return $this->returnJson(array('success' => FALSE, 'message' => 'View does not exists'));
+        return $this->returnJson(array('success' => false, 'message' => 'View does not exists'));
     }
 
     /**
@@ -166,12 +155,10 @@ class ViewController extends Action
      */
     public function uploadAction()
     {
-        $view_id = $this->getRouteMatch()->getParam('id', NULL);
-        if(!empty($view_id))
-        {
+        $view_id = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($view_id)) {
             $view = View\Model::fromId($view_id);
-            if(empty($view)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK)
-            {
+            if (empty($view)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload view');
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
             }
@@ -180,26 +167,20 @@ class ViewController extends Action
             $view->save();
             $this->flashMessenger()->addSuccessMessage('View updated');
             return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
-        }
-        else
-        {
-            if(empty($_FILES['upload']))
-            {
+        } else {
+            if (empty($_FILES['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload views');
                 return $this->redirect()->toRoute('viewList');
             }
 
-            foreach($_FILES['upload']['name'] as $idx => $name)
-            {
-                if($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK)
-                {
+            foreach ($_FILES['upload']['name'] as $idx => $name) {
+                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
                     continue;
                 }
 
                 $identifier = preg_replace('~\.phtml$~', '', $name);
                 $view = View\Model::fromIdentifier($identifier);
-                if(empty($view))
-                {
+                if (empty($view)) {
                     continue;
                 }
 
@@ -219,30 +200,24 @@ class ViewController extends Action
      */
     public function downloadAction()
     {
-        $view_id = $this->getRouteMatch()->getParam('id', NULL);
-        if(!empty($view_id))
-        {
+        $view_id = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($view_id)) {
             $view = View\Model::fromId($view_id);
-            if(empty($view))
-            {
+            if (empty($view)) {
                 $this->flashMessenger()->addErrorMessage('This view can not be download');
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
             }
 
             $content = $view->getContent();
             $filename = $view->getIdentifier() . 'phtml';
-        }
-        else
-        {
+        } else {
             $views = new View\Collection();
             $children = $views->getViews();
             $zip = new ZipArchive;
             $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
             $res = $zip->open($tmp_filename, ZipArchive::CREATE);
-            if($res === TRUE)
-            {
-                foreach($children as $child)
-                {
+            if ($res === true) {
+                foreach ($children as $child) {
                     $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
                 }
 
@@ -253,8 +228,7 @@ class ViewController extends Action
             }
         }
 
-        if(empty($content) or empty($filename))
-        {
+        if (empty($content) or empty($filename)) {
             $this->flashMessenger()->addErrorMessage('Can not save views');
             return $this->redirect()->toRoute('viewList');
         }

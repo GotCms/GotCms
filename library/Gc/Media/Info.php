@@ -27,9 +27,9 @@
 
 namespace Gc\Media;
 
-use Gc\Core\Object,
-    Gc\Registry,
-    Zend\Config\Reader\Ini;
+use Gc\Core\Object;
+use Gc\Registry;
+use Zend\Config\Reader\Ini;
 
 /**
  * Manage File, actually only works for Datatypes
@@ -46,21 +46,27 @@ class Info extends Object
      *
      * @var array
      */
-    protected $_optionsArray = array('database_compatibility' => 'Database compatibility');
+    protected $optionsArray = array('database_compatibility' => 'Database compatibility');
 
     /**
      * Available string options
      *
      * @var array
      */
-    protected $_optionsString = array('author' => 'Author', 'date' => 'Date', 'description' => 'Description', 'cms_version' => 'GotCms version', 'version' => 'Version');
+    protected $optionsString = array(
+        'author' => 'Author',
+        'date' => 'Date',
+        'description' => 'Description',
+        'cms_version' => 'GotCms version',
+        'version' => 'Version'
+    );
 
     /**
      * Available links options
      *
      * @var array
      */
-    protected $_optionsLinks = array('website' => 'Website url');
+    protected $optionsLinks = array('website' => 'Website url');
 
     /**
      * Initialize reader
@@ -80,62 +86,54 @@ class Info extends Object
      */
     public function fromFile($file_path)
     {
-        if(!empty($file_path) and $file_path == $this->getFilename())
-        {
-            return TRUE;
-        }
-        elseif($file_path != $this->getFilename() and file_exists($file_path))
-        {
+        if (!empty($file_path) and $file_path == $this->getFilename()) {
+            return true;
+        } elseif ($file_path != $this->getFilename() and file_exists($file_path)) {
             $this->setFilename($file_path);
             $this->setInfos($this->getReader()->fromFile($file_path));
 
-            return TRUE;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
      * Render info file to html
      *
-     * @return string|FALSE
+     * @return string|false
      */
     public function render()
     {
         $infos = $this->getInfos();
-        if(empty($infos) or !is_array($infos))
-        {
-            return FALSE;
+        if (empty($infos) or !is_array($infos)) {
+            return false;
         }
 
         $translator = Registry::get('Translator');
-        $escaper = Registry::get('Application')->getServiceManager()->get('ViewManager')->getHelperManager()->get('escapehtml');
+        $escaper = Registry::get('Application')
+            ->getServiceManager()
+            ->get('ViewManager')
+            ->getHelperManager()
+            ->get('escapehtml');
 
         $return = '<dl>';
-        foreach($infos as $key => $info)
-        {
-            if(!empty($this->_optionsArray[$key]))
-            {
-                $return .= sprintf('<dt>%s</dt>', $translator->translate($this->_optionsArray[$key]));
-                if(!is_array($info))
-                {
+        foreach ($infos as $key => $info) {
+            if (!empty($this->optionsArray[$key])) {
+                $return .= sprintf('<dt>%s</dt>', $translator->translate($this->optionsArray[$key]));
+                if (!is_array($info)) {
                     $info = array($info);
                 }
 
-                foreach($info as $value)
-                {
+                foreach ($info as $value) {
                     $return .= sprintf('<dd>%s</dd>', $escaper($value));
                 }
 
-            }
-            elseif(!empty($this->_optionsString[$key]))
-            {
-                $return .= sprintf('<dt>%s</dt>', $translator->translate($this->_optionsString[$key]));
+            } elseif (!empty($this->optionsString[$key])) {
+                $return .= sprintf('<dt>%s</dt>', $translator->translate($this->optionsString[$key]));
                 $return .= sprintf('<dd>%s</dd>', $escaper($info));
-            }
-            elseif(!empty($this->_optionsLinks[$key]))
-            {
-                $return .= sprintf('<dt>%s</dt>', $translator->translate($this->_optionsLinks[$key]));
+            } elseif (!empty($this->optionsLinks[$key])) {
+                $return .= sprintf('<dt>%s</dt>', $translator->translate($this->optionsLinks[$key]));
                 $return .= sprintf('<dd><a href="%s">%s</a></dd>', $escaper($info), $translator->translate($key));
             }
         }

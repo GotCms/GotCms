@@ -48,7 +48,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Model
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -56,13 +56,13 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = Model::fromArray(array(
+        $this->object = Model::fromArray(array(
             'name' => 'ModelTest',
             'prevalue_value' => '',
             'description' => 'ModelTest',
             'model' => 'Textstring',
         ));
-        $this->_object->save();
+        $this->object->save();
     }
 
     /**
@@ -71,8 +71,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_object->delete();
-        unset($this->_object);
+        $this->object->delete();
+        unset($this->object);
     }
 
     /**
@@ -80,10 +80,10 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetPrevalueValue()
     {
-        $this->_object->setPrevalueValue('s:11:"string test";');
-        $this->assertEquals('string test', $this->_object->getPrevalueValue());
-        $this->_object->setPrevalueValue(array('array test'));
-        $this->assertEquals(array('array test'), $this->_object->getPrevalueValue());
+        $this->object->setPrevalueValue('s:11:"string test";');
+        $this->assertEquals('string test', $this->object->getPrevalueValue());
+        $this->object->setPrevalueValue(array('array test'));
+        $this->assertEquals(array('array test'), $this->object->getPrevalueValue());
     }
 
     /**
@@ -91,7 +91,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromArray()
     {
-        $this->assertInstanceOf('Gc\Datatype\Model', $this->_object->fromArray(array(
+        $this->assertInstanceOf('Gc\Datatype\Model', $this->object->fromArray(array(
             'name' => 'ModelTest',
             'prevalue_value' => '',
             'description' => 'ModelTest',
@@ -105,7 +105,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testFromId()
     {
 
-        $this->assertInstanceOf('Gc\Datatype\Model', Model::fromId($this->_object->getId()));
+        $this->assertInstanceOf('Gc\Datatype\Model', Model::fromId($this->object->getId()));
         $this->assertFalse(Model::fromId('undefined id'));
     }
 
@@ -114,7 +114,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $model = $this->_object->fromArray(array(
+        $model = $this->object->fromArray(array(
             'name' => 'ModelTest',
             'prevalue_value' => '',
             'description' => 'ModelTest',
@@ -132,7 +132,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithWrongValues()
     {
         $this->setExpectedException('Gc\Exception');
-        $model = $this->_object->fromArray(array(
+        $model = $this->object->fromArray(array(
             'name' => 'ModelTest',
             'prevalue_value' => '',
             'description' => 'ModelTest',
@@ -145,7 +145,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $this->assertTrue($this->_object->delete());
+        $this->assertTrue($this->object->delete());
     }
 
     /**
@@ -173,7 +173,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSavePrevalueEditor()
     {
-        $this->assertInternalType('array', Model::savePrevalueEditor(Model::loadDatatype($this->_object->getId())));
+        $this->assertInternalType('array', Model::savePrevalueEditor(Model::loadDatatype($this->object->getId())));
     }
 
     /**
@@ -211,7 +211,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $view_model->getId(),
+            'defaultview_id' => $view_model->getId(),
             'user_id' => $user_model->getId(),
         ));
         $document_type_model->save();
@@ -239,7 +239,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         $document_model->save();
 
         $property_model = PropertyModel::fromArray(array(
-            'datatype_id' => $this->_object->getId(),
+            'datatype_id' => $this->object->getId(),
             'document_id' => $document_model->getId(),
             'tab_id' => $tab_model->getId(),
             'name' => 'PropertyTest',
@@ -267,7 +267,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadPrevalueEditor()
     {
-        $this->assertInstanceOf('Zend\Form\Fieldset', Model::loadPrevalueEditor(Model::loadDatatype($this->_object->getId())));
+        $this->assertInstanceOf('Zend\Form\Fieldset', Model::loadPrevalueEditor(Model::loadDatatype($this->object->getId())));
     }
 
     /**
@@ -276,7 +276,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testLoadEditor()
     {
         $model = PropertyModel::fromArray(array(
-            'datatype_id' => $this->_object->getId(),
+            'datatype_id' => $this->object->getId(),
             'document_id' => 1,
         ));
         //Specific to Textstring editor
@@ -288,6 +288,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadDatatype()
     {
-        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', Model::loadDatatype($this->_object->getId()));
+        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', Model::loadDatatype($this->object->getId()));
     }
 }

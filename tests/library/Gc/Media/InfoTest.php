@@ -40,7 +40,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Info
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -50,7 +50,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Info;
+        $this->object = new Info;
     }
 
     /**
@@ -67,8 +67,8 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     public function testFromFile()
     {
         $file_path = __DIR__ . '/_files/information.info';
-        $this->assertTrue($this->_object->fromFile($file_path));
-        $this->assertTrue($this->_object->fromFile($file_path));
+        $this->assertTrue($this->object->fromFile($file_path));
+        $this->assertTrue($this->object->fromFile($file_path));
     }
 
     /**
@@ -76,7 +76,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromFileWithWrongFilePath()
     {
-        $this->assertFalse($this->_object->fromFile('wrong-path-file.info'));
+        $this->assertFalse($this->object->fromFile('wrong-path-file.info'));
     }
 
     /**
@@ -85,9 +85,9 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         $file_path = __DIR__ . '/_files/information.info';
-        $this->_object->fromFile($file_path);
+        $this->object->fromFile($file_path);
         $assert_string = '<dl><dt>Author</dt><dd>Pierre Rambaud</dd><dt>Date</dt><dd>2012</dd><dt>Version</dt><dd>0.1</dd><dt>Description</dt><dd>Information test</dd><dt>Database compatibility</dt><dd>pgsql</dd><dt>Website url</dt><dd><a href="http://rambaudpierre.fr">website</a></dd></dl>';
-        $this->assertEquals($assert_string, $this->_object->render());
+        $this->assertEquals($assert_string, $this->object->render());
     }
 
     /**
@@ -95,7 +95,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderWithWrongFilePath()
     {
-        $this->_object->fromFile('wrong-path-file.info');
-        $this->assertFalse($this->_object->render());
+        $this->object->fromFile('wrong-path-file.info');
+        $this->assertFalse($this->object->render());
     }
 }

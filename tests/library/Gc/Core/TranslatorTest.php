@@ -40,7 +40,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Translator
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Translator;
+        $this->object = new Translator;
     }
 
     /**
@@ -57,7 +57,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -73,13 +73,13 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValue()
     {
-        $this->_object->setValue('key', array(
+        $this->object->setValue('key', array(
             array(
                 'locale' => 'fr_FR',
                 'value' => 'clé',
             )
         ));
-        $this->assertInternalType('array', $this->_object->getValue('key', 'fr_FR'));
+        $this->assertInternalType('array', $this->object->getValue('key', 'fr_FR'));
     }
 
     /**
@@ -87,7 +87,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValues()
     {
-        $data = $this->_object->getValues('fr_FR');
+        $data = $this->object->getValues('fr_FR');
         $this->assertArrayHasKey(0, $data);
     }
 
@@ -96,7 +96,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValuesWithLimit()
     {
-        $data = $this->_object->getValues('fr_FR', 1);
+        $data = $this->object->getValues('fr_FR', 1);
         $this->assertArrayHasKey(0, $data);
     }
 
@@ -105,7 +105,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValue()
     {
-        $result = $this->_object->setValue('parameters', array(
+        $result = $this->object->setValue('parameters', array(
             array(
                 'locale' => 'fr_FR',
                 'value' => 'paramètres',
@@ -122,14 +122,14 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValueWithDestinationId()
     {
-        $this->_object->setValue('parameters', array(
+        $this->object->setValue('parameters', array(
             array(
                 'locale' => 'fr_FR',
                 'value' => 'paramètres',
             )
         ));
-        $data = $this->_object->getValue('parameters', 'fr_FR');
-        $result = $this->_object->setValue('parameters', array(
+        $data = $this->object->getValue('parameters', 'fr_FR');
+        $result = $this->object->setValue('parameters', array(
             array(
                 'dst_id' => $data['dst_id'],
                 'locale' => 'it_IT',
@@ -145,14 +145,14 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValueWithSourceId()
     {
-        $this->_object->setValue('parameters', array(
+        $this->object->setValue('parameters', array(
             array(
                 'locale' => 'fr_FR',
                 'value' => 'paramètres',
             )
         ));
-        $data = $this->_object->getValue('parameters', 'fr_FR');
-        $result = $this->_object->setValue($data['src_id'], array(
+        $data = $this->object->getValue('parameters', 'fr_FR');
+        $result = $this->object->setValue($data['src_id'], array(
             array(
                 'locale' => 'it_IT',
                 'value' => 'parametri',
@@ -167,6 +167,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValueWithUndefinedSourceId()
     {
-        $this->assertFalse($this->_object->setValue(40000000, array()));
+        $this->assertFalse($this->object->setValue(40000000, array()));
     }
 }

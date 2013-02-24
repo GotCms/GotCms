@@ -32,11 +32,10 @@
 <h1><?php echo $this->translate('A 404 error occurred') ?></h1>
 <h2><?php echo $this->message ?></h2>
 
-<?php if(isset($this->reason) and $this->reason): ?>
+<?php if (isset($this->reason) and $this->reason): ?>
     <?php
     $reason_message= '';
-    switch ($this->reason)
-    {
+    switch ($this->reason) {
         case 'error-controller-cannot-dispatch':
             $reason_message = $this->translate('The requested controller was unable to dispatch the request.');
         break;
@@ -62,13 +61,12 @@
     <p><?php echo $reason_message ?></p>
 <?php endif ?>
 
-<?php if(isset($this->controller) and $this->controller != 'IndexController'): ?>
+<?php if (isset($this->controller) and $this->controller != 'IndexController'): ?>
     <dl>
         <dt><?php echo $this->translate('Controller') ?>:</dt>
         <dd><?php echo $this->escapeHtml($this->controller) ?>
         <?php
-        if(isset($this->controller_class) and $this->controller_class and $this->controller_class != $this->controller)
-        {
+        if (isset($this->controller_class) and $this->controller_class and $this->controller_class != $this->controller) {
             echo '(' . sprintf($this->translate('resolves to %s'), $this->escapeHtml($this->controller_class)) . ')';
         }
         ?>
@@ -76,8 +74,8 @@
     </dl>
 <?php endif ?>
 
-<?php if(isset($this->display_exceptions) and $this->display_exceptions): ?>
-    <?php if(isset($this->exception) and $this->exception instanceof Exception): ?>
+<?php if (isset($this->display_exceptions) and $this->display_exceptions): ?>
+    <?php if (isset($this->exception) and $this->exception instanceof Exception): ?>
         <hr/>
         <h2><?php echo $this->translate('Additional information') ?>:</h2>
         <h3><?php echo get_class($this->exception); ?></h3>
@@ -97,7 +95,7 @@
         </dl>
         <?php $e = $this->exception->getPrevious(); ?>
 
-        <?php if($e): ?>
+        <?php if ($e): ?>
             <hr/>
             <h2><?php echo $this->translate('Previous exceptions') ?>:</h2>
             <ul class="unstyled">

@@ -27,12 +27,12 @@
 
 namespace Config\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Gc\Core\Config,
-    Gc\Core\Updater,
-    Gc\Media\Info,
-    Gc\Version,
-    Config\Form\Config as configForm;
+use Gc\Mvc\Controller\Action;
+use Gc\Core\Config;
+use Gc\Core\Updater;
+use Gc\Media\Info;
+use Gc\Version;
+use Config\Form\Config as configForm;
 
 /**
  * Cms controller
@@ -46,16 +46,16 @@ class CmsController extends Action
     /**
      * Config form
      *
-     * @var \Config\Form\Config $_form
+     * @var \Config\Form\Config $form
      */
-    protected $_form;
+    protected $form;
 
     /**
      * Contains information about acl
      *
      * @var array
      */
-    protected $_aclPage = array('resource' => 'Config', 'permission' => 'system');
+    protected $aclPage = array('resource' => 'Config', 'permission' => 'system');
 
     /**
      * Generate general configuration form
@@ -64,8 +64,8 @@ class CmsController extends Action
      */
     public function editGeneralAction()
     {
-        $this->_form = new configForm();
-        $this->_form->initGeneral();
+        $this->form = new configForm();
+        $this->form->initGeneral();
         return $this->forward()->dispatch('CmsController', array('action' => 'edit'));
     }
 
@@ -76,8 +76,8 @@ class CmsController extends Action
      */
     public function editSystemAction()
     {
-        $this->_form = new configForm();
-        $this->_form->initSystem();
+        $this->form = new configForm();
+        $this->form->initSystem();
         return $this->forward()->dispatch('CmsController', array('action' => 'edit'));
     }
 
@@ -88,8 +88,8 @@ class CmsController extends Action
      */
     public function editServerAction()
     {
-        $this->_form = new configForm();
-        $this->_form->initServer();
+        $this->form = new configForm();
+        $this->form->initServer();
         return $this->forward()->dispatch('CmsController', array('action' => 'edit'));
     }
 
@@ -101,24 +101,18 @@ class CmsController extends Action
     public function editAction()
     {
         $values = Config::getValues();
-        $this->_form->setValues($values);
+        $this->form->setValues($values);
 
-        if($this->getRequest()->isPost())
-        {
-            $this->_form->setData($this->getRequest()->getPost()->toArray());
+        if ($this->getRequest()->isPost()) {
+            $this->form->setData($this->getRequest()->getPost()->toArray());
 
-            if(!$this->_form->isValid())
-            {
+            if (!$this->form->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save configuration');
                 $this->useFlashMessenger();
-            }
-            else
-            {
-                $inputs = $this->_form->getInputFilter()->getValidInput();
-                foreach($inputs as $input)
-                {
-                    if(method_exists($input, 'getName'))
-                    {
+            } else {
+                $inputs = $this->form->getInputFilter()->getValidInput();
+                foreach ($inputs as $input) {
+                    if (method_exists($input, 'getName')) {
                         Config::setValue($input->getName(), $input->getValue());
                     }
                 }
@@ -128,7 +122,7 @@ class CmsController extends Action
             }
         }
 
-        return array('form' => $this->_form);
+        return array('form' => $this->form);
     }
 
     /**
@@ -140,31 +134,24 @@ class CmsController extends Action
         $latest_version = Version::getLatest();
         $session = $this->getSession();
 
-        if($this->getRequest()->isPost())
-        {
+        if ($this->getRequest()->isPost()) {
             $updater = new Updater();
-            if(!$updater->load($this->getRequest()->getPost()->get('adapter')) or $version_is_latest)
-            {
+            if (!$updater->load($this->getRequest()->getPost()->get('adapter')) or $version_is_latest) {
                 $this->flashMessenger()->addErrorMessage('Can\'t set adapter');
                 return $this->redirect()->toRoute('cmsUpdate');
             }
 
             $current_version = Version::VERSION;
             $output = '';
-            if($updater->update())
-            {
+            if ($updater->update()) {
                 //Fetch content
-                if($updater->upgrade())
-                {
+                if ($updater->upgrade()) {
                     //Upgrade cms
                     //Update database
-                    if(!$updater->updateDatabase())
-                    {
+                    if (!$updater->updateDatabase()) {
                         //Upgrade cms
                         $updater->rollback($current_version);
-                    }
-                    else
-                    {
+                    } else {
                         $updater->executeScripts();
                         $session['updateOutput'] = $updater->getMessages();
 
@@ -174,25 +161,23 @@ class CmsController extends Action
                 }
             }
 
-            foreach($updater->getMessages() as $message)
-            {
+            foreach ($updater->getMessages() as $message) {
                 $this->flashMessenger()->addErrorMessage($message);
             }
 
             return $this->redirect()->toRoute('cmsUpdate');
         }
 
-        if(!empty($session['updateOutput']))
-        {
+        if (!empty($session['updateOutput'])) {
             $update_output = $session['updateOutput'];
             unset($session['updateOutput']);
         }
 
         //Check modules and datatypes
         $datatypes_errors = array();
-        $this->_checkVersion(glob(GC_APPLICATION_PATH . '/library/Datatypes/*'), 'datatype', $datatypes_errors);
+        $this->checkVersion(glob(GC_APPLICATION_PATH . '/library/Datatypes/*'), 'datatype', $datatypes_errors);
         $modules_errors = array();
-        $this->_checkVersion(glob(GC_APPLICATION_PATH . '/library/Modules/*'), 'module', $modules_errors);
+        $this->checkVersion(glob(GC_APPLICATION_PATH . '/library/Modules/*'), 'module', $modules_errors);
 
         return array(
             'gitProject' => file_exists(GC_APPLICATION_PATH . '/.git'),
@@ -212,33 +197,24 @@ class CmsController extends Action
      * @param string $type Type of directory
      * @param array $errors Insert in this all errors
      */
-    protected function _checkVersion(array $directories, $type, array &$errors)
+    protected function checkVersion(array $directories, $type, array &$errors)
     {
         $latest_version = Version::getLatest();
-        foreach($directories as $directory)
-        {
-            if(is_dir($directory))
-            {
+        foreach ($directories as $directory) {
+            if (is_dir($directory)) {
                 $filename = $directory . '/ ' . $type . '.info';
                 $info = new Info();
 
-                if($info->fromFile($filename) === TRUE)
-                {
+                if ($info->fromFile($filename) === true) {
                     $infos = $info->getInfos();
-                    if(!empty($infos['version']))
-                    {
+                    if (!empty($infos['version'])) {
                         preg_match('~(?<operator>[>=]*)(?<version>.+)~', $infos['version'], $matches);
-                        if(empty($matches['operator']))
-                        {
-                            if(version_compare($latest_version, $matches['version']) === 1)
-                            {
+                        if (empty($matches['operator'])) {
+                            if (version_compare($latest_version, $matches['version']) === 1) {
                                 $errors[] = basename($directory);
                             }
-                        }
-                        else
-                        {
-                            if(!version_compare($latest_version, $matches['version'], $matches['operator']))
-                            {
+                        } else {
+                            if (!version_compare($latest_version, $matches['version'], $matches['operator'])) {
                                 $errors[] = $directory;
                             }
                         }

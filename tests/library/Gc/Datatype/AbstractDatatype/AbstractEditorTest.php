@@ -46,32 +46,32 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractEditor
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var TabModel
      */
-    protected $_tab;
+    protected $tab;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-     protected $_documentType;
+     protected $documentType;
 
     /**
      * @var PropertyModel
      */
-    protected $_property;
+    protected $property;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -81,66 +81,66 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'AbstractEditorTest',
             'prevalue_value' => 's:18:"AbstractEditorTest";',
             'model' => 'AbstractEditorTest',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
 
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
             'login' => 'test',
             'user_acl_role_id' => 1,
         ));
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = DocumentTypeModel::fromArray(array(
+        $this->documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
-        $this->_documentType->save();
+        $this->documentType->save();
 
-        $this->_tab = TabModel::fromArray(array(
+        $this->tab = TabModel::fromArray(array(
             'name' => 'TabTest',
             'description' => 'TabTest',
             'sort_order' => 1,
-            'document_type_id' => $this->_documentType->getId(),
+            'document_type_id' => $this->documentType->getId(),
         ));
-        $this->_tab->save();
+        $this->tab->save();
 
-        $this->_property = PropertyModel::fromArray(array(
+        $this->property = PropertyModel::fromArray(array(
             'name' => 'DatatypeTest',
             'identifier' => 'DatatypeTest',
             'description' => 'DatatypeTest',
             'required' => FALSE,
             'sort_order' => 1,
-            'tab_id' => $this->_tab->getId(),
-            'datatype_id' => $this->_datatype->getId(),
+            'tab_id' => $this->tab->getId(),
+            'datatype_id' => $this->datatype->getId(),
         ));
 
-        $this->_property->save();
+        $this->property->save();
 
 
         $mock_datatype = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
-        $mock_datatype->setProperty($this->_property);
-        $mock_datatype->load($this->_datatype, 1);
+        $mock_datatype->setProperty($this->property);
+        $mock_datatype->load($this->datatype, 1);
 
-        $this->_object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype\AbstractEditor', array($mock_datatype));
+        $this->object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype\AbstractEditor', array($mock_datatype));
     }
 
     /**
@@ -149,19 +149,19 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_property->delete();
-        $this->_datatype->delete();
-        $this->_tab->delete();
-        $this->_documentType->delete();
-        $this->_user->delete();
-        $this->_view->delete();
-        unset($this->_datatype);
-        unset($this->_property);
-        unset($this->_documentType);
-        unset($this->_tab);
-        unset($this->_user);
-        unset($this->_view);
-        unset($this->_object);
+        $this->property->delete();
+        $this->datatype->delete();
+        $this->tab->delete();
+        $this->documentType->delete();
+        $this->user->delete();
+        $this->view->delete();
+        unset($this->datatype);
+        unset($this->property);
+        unset($this->documentType);
+        unset($this->tab);
+        unset($this->user);
+        unset($this->view);
+        unset($this->object);
     }
 
     /**
@@ -169,8 +169,8 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValue()
     {
-        $this->_object->setValue('test');
-        $this->assertEquals('test', $this->_object->getValue());
+        $this->object->setValue('test');
+        $this->assertEquals('test', $this->object->getValue());
     }
 
     /**
@@ -178,8 +178,8 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValue()
     {
-        $this->_object->setValue('test');
-        $this->assertEquals('test', $this->_object->getValue());
+        $this->object->setValue('test');
+        $this->assertEquals('test', $this->object->getValue());
     }
 
     /**
@@ -187,7 +187,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetConfig()
     {
-        $this->assertEquals('AbstractEditorTest', $this->_object->getConfig());
+        $this->assertEquals('AbstractEditorTest', $this->object->getConfig());
     }
 
     /**
@@ -195,8 +195,8 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetConfig()
     {
-        $this->_object->setConfig('s:19:"AbstractEditorTest2";');
-        $this->assertEquals('AbstractEditorTest2', $this->_object->getConfig());
+        $this->object->setConfig('s:19:"AbstractEditorTest2";');
+        $this->assertEquals('AbstractEditorTest2', $this->object->getConfig());
     }
 
     /**
@@ -204,7 +204,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUploadUrl()
     {
-        $this->assertEquals('/admin/content/media/upload/document/1/property/' . $this->_property->getId(), $this->_object->getUploadUrl());
+        $this->assertEquals('/admin/content/media/upload/document/1/property/' . $this->property->getId(), $this->object->getUploadUrl());
     }
 
     /**
@@ -212,7 +212,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetName()
     {
-        $this->assertEquals('datatype' . $this->_property->getId(), $this->_object->getName());
+        $this->assertEquals('datatype' . $this->property->getId(), $this->object->getName());
     }
 
     /**
@@ -220,7 +220,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetProperty()
     {
-        $this->assertInstanceOf('Gc\Property\Model', $this->_object->getProperty());
+        $this->assertInstanceOf('Gc\Property\Model', $this->object->getProperty());
     }
 
     /**
@@ -228,7 +228,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDatatype()
     {
-        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', $this->_object->getDatatype());
+        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', $this->object->getDatatype());
     }
 
     /**
@@ -236,7 +236,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRequest()
     {
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Request', $this->_object->getRequest());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Request', $this->object->getRequest());
     }
 
     /**
@@ -244,8 +244,8 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $this->_object->addPath(__DIR__ . '/../');
-        $this->assertEquals('String' . PHP_EOL, $this->_object->render('_files/template.phtml'));
+        $this->object->addPath(__DIR__ . '/../');
+        $this->assertEquals('String' . PHP_EOL, $this->object->render('_files/template.phtml'));
     }
 
     /**
@@ -253,7 +253,7 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddPath()
     {
-        $this->assertInstanceOf(get_class($this->_object), $this->_object->addPath(__DIR__));
+        $this->assertInstanceOf(get_class($this->object), $this->object->addPath(__DIR__));
     }
 
     /**
@@ -261,6 +261,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHelper()
     {
-        $this->assertInstanceOf('Gc\View\Helper\Partial', $this->_object->getHelper('partial'));
+        $this->assertInstanceOf('Gc\View\Helper\Partial', $this->object->getHelper('partial'));
     }
 }

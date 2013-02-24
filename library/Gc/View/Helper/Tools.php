@@ -27,9 +27,9 @@
 
 namespace Gc\View\Helper;
 
-use Zend\View\Helper\AbstractHelper,
-    Gc\Script\Model as ScriptModel,
-    Gc\View\Stream;
+use Zend\View\Helper\AbstractHelper;
+use Gc\Script\Model as ScriptModel;
+use Gc\View\Stream;
 
 /**
  * Tools helper
@@ -49,33 +49,27 @@ class Tools extends AbstractHelper
      */
     public function __invoke($function_name, $value)
     {
-        $data = FALSE;
-        switch($function_name)
-        {
+        $data = false;
+        switch($function_name) {
             case 'unserialize':
                 $data = @unserialize($value);
-            break;
-
+                break;
             case 'serialize':
                 $data = @serialize($value);
-            break;
-
+                break;
             case 'debug':
-                $data = sprintf('<pre>%s</pre>', print_r($value, TRUE));
-            break;
-
+                $data = sprintf('<pre>%s</pre>', print_r($value, true));
+                break;
             case 'is_serialized':
             case 'isSerialized':
-                if(trim($value) != '' and preg_match('/^(i|s|a|o|d)(.*);/si', $value))
-                {
-                    $data = TRUE;
+                if (trim($value) != '' and preg_match('/^(i|s|a|o|d)(.*);/si', $value)) {
+                    $data = true;
                 }
-            break;
-
+                break;
             case 'camel_case':
             case 'camelCase':
                 $data = str_replace(' ', '', ucwords($value));
-            break;
+                break;
         }
 
         return $data;

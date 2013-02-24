@@ -40,24 +40,24 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Acl
      */
-    protected $_object;
+    protected $object;
     /**
      * @var Model
      */
-    protected $_user;
+    protected $user;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
      * @covers Gc\User\Acl::__construct
-     * @covers Gc\User\Acl::_roleResource
-     * @covers Gc\User\Acl::_initResources
-     * @covers Gc\User\Acl::_initRoles
+     * @covers Gc\User\Acl::roleResource
+     * @covers Gc\User\Acl::initResources
+     * @covers Gc\User\Acl::initRoles
      */
     protected function setUp()
     {
-        $this->_user = Model::fromArray(array(
+        $this->user = Model::fromArray(array(
             'lastname' => 'Test',
             'firstname' => 'Test',
             'email' => 'test@test.com',
@@ -65,9 +65,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_user->setPassword('test-user-model-password');
-        $this->_user->save();
-        $this->_object = new Acl($this->_user);
+        $this->user->setPassword('test-user-model-password');
+        $this->user->save();
+        $this->object = new Acl($this->user);
     }
 
     /**
@@ -76,9 +76,9 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_user->delete();
-        unset($this->_object);
-        unset($this->_user);
+        $this->user->delete();
+        unset($this->object);
+        unset($this->user);
     }
 
     /**
@@ -86,7 +86,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testListRoles()
     {
-        $this->assertInternalType('array', $this->_object->listRoles());
+        $this->assertInternalType('array', $this->object->listRoles());
     }
 
     /**
@@ -94,7 +94,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRoleId()
     {
-        $this->assertInternalType('array', $this->_object->getRoleId('Administrator'));
+        $this->assertInternalType('array', $this->object->getRoleId('Administrator'));
     }
 
     /**
@@ -102,7 +102,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testListResources()
     {
-        $this->assertInternalType('array', $this->_object->listResources());
+        $this->assertInternalType('array', $this->object->listResources());
     }
 
     /**
@@ -110,6 +110,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testListResourcesByGroup()
     {
-        $this->assertInternalType('array', $this->_object->listResourcesByGroup('Development'));
+        $this->assertInternalType('array', $this->object->listResourcesByGroup('Development'));
     }
 }

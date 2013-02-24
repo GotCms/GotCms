@@ -40,7 +40,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Version
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Version;
+        $this->object = new Version;
     }
 
     /**

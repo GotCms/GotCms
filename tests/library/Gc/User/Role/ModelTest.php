@@ -40,7 +40,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Model
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = Model::fromId(1);
+        $this->object = Model::fromId(1);
     }
 
     /**
@@ -57,7 +57,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -65,15 +65,15 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $permissions = $this->_object->getUserPermissions();
+        $permissions = $this->object->getUserPermissions();
         $array = array();
         foreach($permissions as $type_name => $type_values)
         {
             $array += $type_values;
         }
 
-        $this->_object->setPermissions($array);
-        $this->assertInternalType('integer', $this->_object->save());
+        $this->object->setPermissions($array);
+        $this->assertInternalType('integer', $this->object->save());
     }
 
     /**
@@ -127,7 +127,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromArray()
     {
-        $this->assertInstanceOf('Gc\User\Role\Model', Model::fromArray($this->_object->getData()));
+        $this->assertInstanceOf('Gc\User\Role\Model', Model::fromArray($this->object->getData()));
     }
 
     /**
@@ -151,6 +151,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUserPermissions()
     {
-        $this->assertInternalType('array', $this->_object->getUserPermissions());
+        $this->assertInternalType('array', $this->object->getUserPermissions());
     }
 }

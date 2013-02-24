@@ -27,10 +27,10 @@
 
 namespace Modules\Backup\Model\Database;
 
-use Gc\Db\AbstractTable,
-    Gc\Document\Model as DocumentModel,
-    Zend\Db\Sql\Select,
-    Zend\Db\Sql\Predicate\Expression;
+use Gc\Db\AbstractTable;
+use Gc\Document\Model as DocumentModel;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Predicate\Expression;
 
 /**
  * Blog comment table
@@ -46,7 +46,7 @@ class Pgsql extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'core_config_data';
+    protected $name = 'core_config_data';
 
     /**
      * Export function
@@ -56,8 +56,7 @@ class Pgsql extends AbstractTable
      */
     public function export($what = 'structureanddata')
     {
-        if(empty($what))
-        {
+        if (empty($what)) {
             $what = 'structureanddata';
         }
 
@@ -68,13 +67,11 @@ class Pgsql extends AbstractTable
         putenv('PGPASSWORD=' . $parameters['password']);
         putenv('PGUSER=' . $parameters['username']);
         putenv('PGDATABASE=' . $parameters['database']);
-        if(!empty($parameters['hostname']))
-        {
+        if (!empty($parameters['hostname'])) {
             putenv('PGHOST=' . $parameters['hostname']);
         }
 
-        if(!empty($parameters['port']))
-        {
+        if (!empty($parameters['port'])) {
             putenv('PGPORT=' . $parameters['port']);
         }
 
@@ -82,22 +79,19 @@ class Pgsql extends AbstractTable
         $cmd = $exe;
         $cmd .= ' --compress 9 --no-owner --disable-triggers';
 
-        switch ($what)
-        {
+        switch ($what) {
             case 'dataonly':
                 $cmd .= ' --data-only';
                 $cmd .= ' --column-inserts';
-            break;
-
+                break;
             case 'structureonly':
                 $cmd .= ' --schema-only';
                 $cmd .= ' --clean';
-            break;
-
+                break;
             case 'structureanddata':
                 $cmd .= ' --column-inserts';
                 $cmd .= ' --clean';
-            break;
+                break;
         }
 
         // Execute command and return the output

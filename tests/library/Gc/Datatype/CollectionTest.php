@@ -42,12 +42,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Collection
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var Collection
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -55,14 +55,14 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'DatatypeCollectionTest',
             'prevalue_value' => '',
             'model' => 'DatatypeCollectionTest',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
 
-        $this->_object = new Collection;
+        $this->object = new Collection;
     }
 
     /**
@@ -71,9 +71,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_datatype->delete();
-        unset($this->_datatype);
-        unset($this->_object);
+        $this->datatype->delete();
+        unset($this->datatype);
+        unset($this->object);
     }
 
     /**
@@ -82,8 +82,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->_object->init();
-        $this->assertInternalType('array', $this->_object->getDatatypes());
+        $this->object->init();
+        $this->assertInternalType('array', $this->object->getDatatypes());
     }
 
     /**
@@ -91,7 +91,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDatatypes()
     {
-        $this->assertInternalType('array', $this->_object->getDatatypes());
+        $this->assertInternalType('array', $this->object->getDatatypes());
     }
 
     /**
@@ -99,6 +99,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSelect()
     {
-        $this->assertInternalType('array', $this->_object->getSelect());
+        $this->assertInternalType('array', $this->object->getSelect());
     }
 }

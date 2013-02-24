@@ -44,7 +44,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Action
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -52,8 +52,8 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Action;
-        $this->_object->setEvent(Registry::get('Application')->getMvcEvent());
+        $this->object = new Action;
+        $this->object->setEvent(Registry::get('Application')->getMvcEvent());
     }
 
     /**
@@ -71,13 +71,13 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnDispatchWithoutIdentity()
     {
-        $this->_object->getEvent()->setRouteMatch(new RouteMatch(array('controller' => 'controller')));
-        $this->_object->dispatch(Registry::get('Application')->getRequest(), NULL);
+        $this->object->getEvent()->setRouteMatch(new RouteMatch(array('controller' => 'controller')));
+        $this->object->dispatch(Registry::get('Application')->getRequest(), NULL);
 
         $route_match = new RouteMatch(array());
         $route_match->setMatchedRouteName('content');
-        $this->_object->getEvent()->setRouteMatch($route_match);
-        $this->_object->onDispatch(Registry::get('Application')->getMvcEvent());
+        $this->object->getEvent()->setRouteMatch($route_match);
+        $this->object->onDispatch(Registry::get('Application')->getMvcEvent());
 
     }
 
@@ -103,9 +103,9 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
         $route_match = new RouteMatch(array());
         $route_match->setMatchedRouteName('renderWebsite');
-        $this->_object->getEvent()->setRouteMatch($route_match);
-        $this->_object->dispatch(Registry::get('Application')->getRequest(), NULL);
-        $this->_object->onDispatch(Registry::get('Application')->getMvcEvent());
+        $this->object->getEvent()->setRouteMatch($route_match);
+        $this->object->dispatch(Registry::get('Application')->getRequest(), NULL);
+        $this->object->onDispatch(Registry::get('Application')->getMvcEvent());
 
         $user_model->delete();
     }
@@ -115,8 +115,8 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRouteMatch()
     {
-        $this->_object->getEvent()->setRouteMatch(new RouteMatch(array('controller' => 'controller')));
-        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $this->_object->getRouteMatch());
+        $this->object->getEvent()->setRouteMatch(new RouteMatch(array('controller' => 'controller')));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $this->object->getRouteMatch());
     }
 
     /**
@@ -124,7 +124,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSession()
     {
-        $this->assertInstanceOf('Zend\Session\Container', $this->_object->getSession());
+        $this->assertInstanceOf('Zend\Session\Container', $this->object->getSession());
     }
 
     /**
@@ -132,7 +132,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAuth()
     {
-        $this->assertInstanceOf('Zend\Authentication\AuthenticationService', $this->_object->getAuth());
+        $this->assertInstanceOf('Zend\Authentication\AuthenticationService', $this->object->getAuth());
     }
 
     /**
@@ -140,7 +140,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnJson()
     {
-        $this->assertInstanceOf('Zend\View\Model\JsonModel', $this->_object->returnJson(array()));
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $this->object->returnJson(array()));
     }
 
     /**
@@ -148,7 +148,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testEvents()
     {
-        $this->assertInstanceOf('Gc\Event\StaticEventManager', $this->_object->events());
+        $this->assertInstanceOf('Gc\Event\StaticEventManager', $this->object->events());
     }
 
     /**
@@ -156,8 +156,8 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testUseflashMessenger()
     {
-        $this->_object->flashMessenger()->addInfoMessage('Test');
-        $this->assertNull($this->_object->useFlashMessenger(FALSE));
-        $this->assertNull($this->_object->useFlashMessenger(TRUE));
+        $this->object->flashMessenger()->addInfoMessage('Test');
+        $this->assertNull($this->object->useFlashMessenger(FALSE));
+        $this->assertNull($this->object->useFlashMessenger(TRUE));
     }
 }

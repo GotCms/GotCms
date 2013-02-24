@@ -28,10 +28,10 @@
 
 ?>
 <?php $fieldsets = $this->elements; ?>
-<?php foreach($fieldsets as $fieldset): ?>
-    <?php if(!empty($fieldset)): ?>
+<?php foreach ($fieldsets as $fieldset): ?>
+    <?php if (!empty($fieldset)): ?>
         <h3><?php echo $this->escapeHtml($this->translate($fieldset->getName())); ?></h3>
-        <?php foreach($fieldset->getElements() as $element): ?>
+        <?php foreach ($fieldset->getElements() as $element): ?>
             <div>
                 <?php echo $this->formElement($element); ?>
             </div>

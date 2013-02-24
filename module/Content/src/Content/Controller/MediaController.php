@@ -27,19 +27,19 @@
 
 namespace Content\Controller;
 
-use Gc\Mvc\Controller\Action,
-    Gc\Component,
-    Gc\Document,
-    Gc\Document\Collection as DocumentCollection,
-    Gc\Media\File,
-    Gc\Property,
-    Gc\Registry,
-    elFinder\elFinder,
-    elFinder\elFinderConnector,
-    elFinder\elFinderVolumeDriver,
-    elFinder\elFinderLocalFileSystem,
-    Zend\Json\Json,
-    Zend\File\Transfer\Adapter\Http as FileTransfer;
+use Gc\Mvc\Controller\Action;
+use Gc\Component;
+use Gc\Document;
+use Gc\Document\Collection as DocumentCollection;
+use Gc\Media\File;
+use Gc\Property;
+use Gc\Registry;
+use elFinder\elFinder;
+use elFinder\elFinderConnector;
+use elFinder\elFinderVolumeDriver;
+use elFinder\elFinderLocalFileSystem;
+use Zend\Json\Json;
+use Zend\File\Transfer\Adapter\Http as FileTransfer;
 
 /**
  * Media controller
@@ -55,7 +55,7 @@ class MediaController extends Action
      *
      * @var array $_aclPage
      */
-    protected $_aclPage = array('resource' => 'Content', 'permission' => 'media');
+    protected $aclPage = array('resource' => 'Content', 'permission' => 'media');
 
     /**
      * Initialize Content Index Controller
@@ -80,8 +80,7 @@ class MediaController extends Action
         );
 
         $array_routes = array();
-        foreach($routes as $key => $route)
-        {
+        foreach ($routes as $key => $route) {
             $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
         }
 
@@ -101,8 +100,7 @@ class MediaController extends Action
         $headscript->appendFile('/backend/js/libs/elfinder.min.js', 'text/javascript');
 
         $language = preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale());
-        if($language != 'en')
-        {
+        if ($language != 'en') {
             $headscript->appendFile(sprintf('/backend/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript');
         }
 
@@ -118,25 +116,22 @@ class MediaController extends Action
     {
         $property = Property\Model::fromId($this->getRouteMatch()->getParam('property_id'));
         $document = Document\Model::fromId($this->getRouteMatch()->getParam('document_id'));
-        if(!$this->getRequest()->isPost() or empty($document) or empty($property))
-        {
-            return $this->returnJson(array('error' => TRUE));
+        if (!$this->getRequest()->isPost() or empty($document) or empty($property)) {
+            return $this->returnJson(array('error' => true));
         }
 
         $file_class = new File();
         $file_class->load($property, $document);
         $files = array();
-        if($file_class->upload())
-        {
+        if ($file_class->upload()) {
             $files = $file_class->getFiles();
         }
 
-        if(!empty($files))
-        {
+        if (!empty($files)) {
             return $this->returnJson($files);
         }
 
-        return $this->returnJson(array('error' => TRUE));
+        return $this->returnJson(array('error' => true));
     }
 
     /**
@@ -148,9 +143,8 @@ class MediaController extends Action
     {
         $property = Property\Model::fromId($this->getRouteMatch()->getParam('property_id'));
         $document = Document\Model::fromId($this->getRouteMatch()->getParam('document_id'));
-        if($this->getRequest()->getMethod() != 'DELETE' or empty($document) or empty($property))
-        {
-            return $this->returnJson(array('error' => TRUE));
+        if ($this->getRequest()->getMethod() != 'DELETE' or empty($document) or empty($property)) {
+            return $this->returnJson(array('error' => true));
         }
 
         $file = base64_decode($this->getRouteMatch()->getParam('file'));
@@ -178,7 +172,7 @@ class MediaController extends Action
                     'attributes' => array(
                         array(
                             'pattern' => '~^/\.gitignore$~',
-                            'hidden'  => TRUE,
+                            'hidden'  => true,
                         ),
                     ),
                 )

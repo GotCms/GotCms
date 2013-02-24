@@ -27,10 +27,11 @@
 
 namespace Modules\Sitemap;
 
-use Gc\Module\AbstractObserver,
-    Gc\Registry,
-    Modules\Sitemap\Model\Sitemap,
-    Zend\EventManager\Event;
+use Gc\Module\AbstractObserver;
+use Gc\Registry;
+use Modules\Sitemap\Model\Sitemap;
+use Zend\EventManager\Event;
+
 /**
  * Sitemap module bootstrap
  *
@@ -60,19 +61,22 @@ class Observer extends AbstractObserver
     public function addElement(Event $event)
     {
         $sitemap = new Sitemap();
-        if(file_exists($sitemap->getFilePath()))
-        {
+        if (file_exists($sitemap->getFilePath())) {
             $document = $event->getParam('object');
-            if($document->hasDataChangedFor('url_key'))
-            {
+            if ($document->hasDataChangedFor('url_key')) {
                 $old_url_key = $document->getUrlKey();
                 $document->setUrlKey($document->getOrigData('url_key'));
                 $content = file_get_contents($sitemap->getFilePath());
                 $xml = simplexml_load_string($content);
                 $xml->registerXPathNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-                $obj = $xml->xpath(sprintf('//sm:url[sm:loc="%s%s"]', Registry::get('Application')->getRequest()->getBasePath(), $document->getUrl()));
-                if(!empty($obj))
-                {
+                $obj = $xml->xpath(
+                    sprintf(
+                        '//sm:url[sm:loc="%s%s"]',
+                        Registry::get('Application')->getRequest()->getBasePath(),
+                        $document->getUrl()
+                    )
+                );
+                if (!empty($obj)) {
                     $obj[0]->loc = $document->getUrl();
                     $obj[0]->lastmod = $document->getUrl();
                     $xml->asXml($sitemap->getFilePath());
@@ -80,9 +84,7 @@ class Observer extends AbstractObserver
 
                 $document->setUrlKey($old_url_key);
             }
-        }
-        else
-        {
+        } else {
             file_put_contents($sitemap->getFilePath(), $sitemap->generate());
         }
     }
@@ -96,17 +98,21 @@ class Observer extends AbstractObserver
     public function removeElement(Event $event)
     {
         $sitemap = new Sitemap();
-        if(file_exists($sitemap->getFilePath()))
-        {
+        if (file_exists($sitemap->getFilePath())) {
             $document = $event->getParam('object');
             $old_url_key = $document->getUrlKey();
             $document->setUrlKey($document->getOrigData('url_key'));
             $content = file_get_contents($sitemap->getFilePath());
             $xml = simplexml_load_string($content);
             $xml->registerXPathNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-            $obj = $xml->xpath(sprintf('//sm:url[sm:loc="%s%s"]', Registry::get('Application')->getRequest()->getBasePath(), $document->getUrl()));
-            if(!empty($obj))
-            {
+            $obj = $xml->xpath(
+                sprintf(
+                    '//sm:url[sm:loc="%s%s"]',
+                    Registry::get('Application')->getRequest()->getBasePath(),
+                    $document->getUrl()
+                )
+            );
+            if (!empty($obj)) {
                 unset($obj);
                 $xml->asXml($sitemap->getFilePath());
             }

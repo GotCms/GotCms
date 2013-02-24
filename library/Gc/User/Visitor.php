@@ -27,13 +27,13 @@
 
 namespace Gc\User;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select,
-    Zend\Db\Sql\Insert,
-    Zend\Db\Sql\Predicate\Expression,
-    Zend\Db\TableGateway,
-    Zend\Uri\Uri,
-    Zend\Validator\Ip as ValidateIp;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Predicate\Expression;
+use Zend\Db\TableGateway;
+use Zend\Uri\Uri;
+use Zend\Validator\Ip as ValidateIp;
 
 /**
  * Model of visitor
@@ -49,7 +49,7 @@ class Visitor extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'log_visitor';
+    protected $name = 'log_visitor';
 
     /**
      * Get visitor id
@@ -59,77 +59,75 @@ class Visitor extends AbstractTable
      */
     public function getVisitorId($session_id)
     {
-        $user_agent = empty($_SERVER['HTTP_USER_AGENT']) ? NULL : $_SERVER['HTTP_USER_AGENT'];
-        $accept_charset = empty($_SERVER['HTTP_ACCEPT_CHARSET']) ? NULL : $_SERVER['HTTP_ACCEPT_CHARSET'];
-        $accept_language = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? NULL : $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-        $server_addr = empty($_SERVER['SERVER_ADDR']) ? NULL : $_SERVER['SERVER_ADDR'];
-        $remote_addr = empty($_SERVER['REMOTE_ADDR']) ? NULL : $_SERVER['REMOTE_ADDR'];
-        $request_uri = empty($_SERVER['REQUEST_URI']) ? NULL : $_SERVER['REQUEST_URI'];
-        $referer = empty($_SERVER['HTTP_REFERER']) ? NULL : $_SERVER['HTTP_REFERER'];
+        $user_agent = empty($_SERVER['HTTP_USER_AGENT']) ? null : $_SERVER['HTTP_USER_AGENT'];
+        $accept_charset = empty($_SERVER['HTTP_ACCEPT_CHARSET']) ? null : $_SERVER['HTTP_ACCEPT_CHARSET'];
+        $accept_language = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? null : $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        $server_addr = empty($_SERVER['SERVER_ADDR']) ? null : $_SERVER['SERVER_ADDR'];
+        $remote_addr = empty($_SERVER['REMOTE_ADDR']) ? null : $_SERVER['REMOTE_ADDR'];
+        $request_uri = empty($_SERVER['REQUEST_URI']) ? null : $_SERVER['REQUEST_URI'];
+        $referer = empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER'];
 
-        if(!empty($request_uri))
-        {
+        if (!empty($request_uri)) {
             $request_uri = substr($request_uri, 0, 255);
         }
 
-        if(!empty($referer))
-        {
+        if (!empty($referer)) {
             $referer = substr($referer, 0, 255);
         }
 
-        if(!ctype_print($user_agent))
-        {
-            $user_agent = NULL;
+        if (!ctype_print($user_agent)) {
+            $user_agent = null;
         }
 
-        if(!ctype_print($accept_charset))
-        {
-            $accept_charset = NULL;
+        if (!ctype_print($accept_charset)) {
+            $accept_charset = null;
         }
 
-        if(!ctype_print($accept_language))
-        {
-            $accept_language = NULL;
+        if (!ctype_print($accept_language)) {
+            $accept_language = null;
         }
 
         $validator = new ValidateIp();
-        $server_addr = $validator->isValid($server_addr, 'ip') ? ip2long($server_addr) : NULL;
-        $remote_addr = $validator->isValid($remote_addr, 'ip') ? ip2long($remote_addr) : NULL;
+        $server_addr = $validator->isValid($server_addr, 'ip') ? ip2long($server_addr) : null;
+        $remote_addr = $validator->isValid($remote_addr, 'ip') ? ip2long($remote_addr) : null;
 
         $url_id = $this->getUrlId($request_uri, $referer);
 
         $select = new Select();
-        $select->from(array('lv' => $this->_name))
+        $select->from(array('lv' => $this->name))
             ->columns(array('id'))
             ->where->equalTo('session_id', $session_id)
-            ->equalTo('http_user_agent', empty($user_agent) ? NULL : $user_agent)
+            ->equalTo('http_user_agent', empty($user_agent) ? null : $user_agent)
             ->equalTo('remote_addr', $remote_addr);
 
         $visitor_id = $this->fetchOne($select);
 
-        if(empty($visitor_id))
-        {
+        if (empty($visitor_id)) {
             $insert = new Insert();
             $insert->into('log_visitor')
-                ->values(array(
-                    'session_id' => $session_id,
-                    'http_user_agent' => $user_agent,
-                    'http_accept_charset' => $accept_charset,
-                    'http_accept_language' => $accept_language,
-                    'server_addr' => $server_addr,
-                    'remote_addr' => $remote_addr,
-                ));
+                ->values(
+                    array(
+                        'session_id' => $session_id,
+                        'http_user_agent' => $user_agent,
+                        'http_accept_charset' => $accept_charset,
+                        'http_accept_language' => $accept_language,
+                        'server_addr' => $server_addr,
+                        'remote_addr' => $remote_addr,
+                    )
+                );
             $this->execute($insert);
             $visitor_id = $this->getLastInsertId('log_visitor');
         }
 
         $insert = new Insert();
         $insert->into('log_url')
-            ->values(array(
-                'visit_at' => new Expression('NOW()'),
-                'log_url_info_id' => $url_id,
-                'log_visitor_id' => $visitor_id
-            ));
+            ->values(
+                array(
+                    'visit_at' => new Expression('NOW()'),
+                    'log_url_info_id' => $url_id,
+                    'log_visitor_id' => $visitor_id
+                )
+            );
 
         $this->execute($insert);
         return $visitor_id;
@@ -146,22 +144,16 @@ class Visitor extends AbstractTable
     {
         $select = new Select();
         $select->from('log_url_info')->where->equalTo('url', $request_uri);
-        if(is_null($referer))
-        {
+        if (is_null($referer)) {
             $select->where->isNull('referer');
-        }
-        else
-        {
+        } else {
             $select->where->equalTo('referer', $referer);
         }
 
         $url_info = $this->fetchRow($select);
-        if(!empty($url_info['id']))
-        {
+        if (!empty($url_info['id'])) {
             $url_id = $url_info['id'];
-        }
-        else
-        {
+        } else {
             $insert = new Insert();
             $insert->into('log_url_info')
                 ->values(array('url' => $request_uri, 'referer' => $referer));
@@ -179,10 +171,13 @@ class Visitor extends AbstractTable
      */
     public function getTotalVisitors()
     {
-        return $this->fetchOne($this->select(function(Select $select)
-        {
-            $select->columns(array('nb_visitors' => new Expression('COUNT(1)')));
-        }));
+        return $this->fetchOne(
+            $this->select(
+                function (Select $select) {
+                    $select->columns(array('nb_visitors' => new Expression('COUNT(1)')));
+                }
+            )
+        );
     }
 
     /**
@@ -192,11 +187,18 @@ class Visitor extends AbstractTable
      */
     public function getTotalPageViews()
     {
-        $visit_table = new TableGateway\TableGateway('log_url', TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter());
-        return $this->fetchOne($visit_table->select(function(Select $select)
-        {
-            $select->columns(array('nb' => new Expression('COUNT(1)')));
-        }));
+        $visit_table = new TableGateway\TableGateway(
+            'log_url',
+            TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter()
+        );
+
+        return $this->fetchOne(
+            $visit_table->select(
+                function (Select $select) {
+                    $select->columns(array('nb' => new Expression('COUNT(1)')));
+                }
+            )
+        );
     }
 
     /**
@@ -207,19 +209,27 @@ class Visitor extends AbstractTable
      */
     public function getNbPagesViews($sort)
     {
-        $sort = $this->_checkSort($sort);
+        $sort = $this->checkSort($sort);
 
-        $rows = $this->fetchAll($this->select(function(Select $select) use ($sort)
-        {
-            $select->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)), 'nb' => new Expression('COUNT(lu.id)')));
-            $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
+        $rows = $this->fetchAll(
+            $this->select(
+                function (Select $select) use ($sort) {
+                    $select->columns(
+                        array(
+                            'date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)),
+                            'nb' => new Expression('COUNT(lu.id)')
+                        )
+                    );
+                    $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
 
-            $this->_groupByDate($sort, $select);
-            $select->order('date ASC');
-            $select->group(array('date'));
-        }));
+                    $this->groupByDate($sort, $select);
+                    $select->order('date ASC');
+                    $select->group(array('date'));
+                }
+            )
+        );
 
-        return $this->_sortData($sort, $rows);
+        return $this->sortData($sort, $rows);
     }
 
     /**
@@ -229,73 +239,59 @@ class Visitor extends AbstractTable
      * @param array $rows
      * @return array
      */
-    protected function _sortData($sort, $rows)
+    protected function sortData($sort, $rows)
     {
         $values = array();
-        if(empty($rows))
-        {
+        if (empty($rows)) {
             return $values;
         }
 
-        switch($sort)
-        {
+        switch($sort) {
             case 'HOUR':
-                for($i = 0;$i < 24; $i++)
-                {
+                for ($i = 0; $i < 24; $i++) {
                     $values[$i . 'h'] = 0;
                 }
 
-                foreach($rows as $row)
-                {
+                foreach ($rows as $row) {
                     $values[$row['date'] . 'h'] = $row['nb'];
                 }
-            break;
-
+                break;
             case 'DAY':
                 $day_in_month = date('t');
-                for($i = 1;$i < $day_in_month; $i++)
-                {
+                for ($i = 1; $i < $day_in_month; $i++) {
                     $values[$i . 'd'] = 0;
                 }
 
-                foreach($rows as $row)
-                {
+                foreach ($rows as $row) {
                     $values[$row['date'] . 'd'] = $row['nb'];
                 }
-            break;
-
+                break;
             case 'MONTH':
-                for($i = 1;$i <= 12; $i++)
-                {
+                for ($i = 1; $i <= 12; $i++) {
                     $values[date('M', mktime(0, 0, 0, $i))] = 0;
                 }
 
-                foreach($rows as $row)
-                {
+                foreach ($rows as $row) {
                     $values[date('M', mktime(0, 0, 0, $row['date']))] = $row['nb'];
                 }
-            break;
-
+                break;
             case 'YEAR':
-                foreach($rows as $row)
-                {
+                foreach ($rows as $row) {
                     $values[$row['date']] = $row['nb'];
                 }
 
                 $keys = array_keys($values);
-                for($i = min($keys);$i <= max($keys); $i++)
-                {
+                for ($i = min($keys); $i <= max($keys); $i++) {
                     $values[$i] = empty($values[$i]) ? 0 : $values[$i];
                 }
 
                 $new_values = array();
-                foreach($values as $key => $value)
-                {
+                foreach ($values as $key => $value) {
                     $new_values[$key . 'y'] = $value;
                 }
 
                 $values = $new_values;
-            break;
+                break;
         }
 
         return $values;
@@ -309,19 +305,27 @@ class Visitor extends AbstractTable
      */
     public function getNbVisitors($sort)
     {
-        $sort = $this->_checkSort($sort);
+        $sort = $this->checkSort($sort);
 
-        $rows = $this->fetchAll($this->select(function(Select $select) use ($sort)
-        {
-            $select->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)), 'nb' => new Expression('COUNT(DISTINCT(log_visitor.id))')));
-            $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
+        $rows = $this->fetchAll(
+            $this->select(
+                function (Select $select) use ($sort) {
+                    $select->columns(
+                        array(
+                            'date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)),
+                            'nb' => new Expression('COUNT(DISTINCT(log_visitor.id))')
+                        )
+                    );
+                    $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
 
-            $this->_groupByDate($sort, $select);
-            $select->order('date ASC');
-            $select->group(array('date'));
-        }));
+                    $this->groupByDate($sort, $select);
+                    $select->order('date ASC');
+                    $select->group(array('date'));
+                }
+            )
+        );
 
-        return $this->_sortData($sort, $rows);
+        return $this->sortData($sort, $rows);
     }
 
     /**
@@ -331,22 +335,30 @@ class Visitor extends AbstractTable
      * @param integer $limit Optional
      * @return array
      */
-     public function getUrlsViews($sort, $limit = 20)
-     {
-        $sort = $this->_checkSort($sort);
+    public function getUrlsViews($sort, $limit = 20)
+    {
+        $sort = $this->checkSort($sort);
 
         $select = new Select();
         $select->from(array('lu' => 'log_url'))
             ->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM MAX(lu.visit_at))', $sort))))
-            ->join(array('lui' => 'log_url_info'), 'lui.id = lu.log_url_info_id', array('url', 'nb' => new Expression('COUNT(lui.id)')))
-        ->order('nb DESC')
-        ->group(array('lui.url'));
+            ->join(
+                array(
+                    'lui' => 'log_url_info'
+                ),
+                'lui.id = lu.log_url_info_id',
+                array(
+                    'url',
+                    'nb' => new Expression('COUNT(lui.id)')
+                )
+            )->order('nb DESC')
+            ->group(array('lui.url'));
 
-        $this->_groupByDate($sort, $select);
+        $this->groupByDate($sort, $select);
         $select->limit($limit);
 
         return $this->fetchAll($select);
-     }
+    }
 
     /**
      * Return all referers
@@ -355,23 +367,31 @@ class Visitor extends AbstractTable
      * @param integer $limit Optional
      * @return array
      */
-     public function getReferers($sort, $limit = 20)
-     {
-        $sort = $this->_checkSort($sort);
+    public function getReferers($sort, $limit = 20)
+    {
+        $sort = $this->checkSort($sort);
 
         $select = new Select();
         $select->from(array('lu' => 'log_url'))
             ->columns(array('date' => new Expression(sprintf('EXTRACT(%s FROM MAX(lu.visit_at))', $sort))))
-            ->join(array('lui' => 'log_url_info'), 'lui.id = lu.log_url_info_id', array('url' => 'referer', 'nb' => new Expression('COUNT(lui.id)')))
-            ->where('lui.referer IS NOT NULL')
+            ->join(
+                array(
+                    'lui' => 'log_url_info'
+                ),
+                'lui.id = lu.log_url_info_id',
+                array(
+                    'url' => 'referer',
+                    'nb' => new Expression('COUNT(lui.id)')
+                )
+            )->where('lui.referer IS NOT null')
         ->order('nb DESC')
         ->group(array('lui.referer'));
 
-        $this->_groupByDate($sort, $select);
+        $this->groupByDate($sort, $select);
         $select->limit($limit);
 
         return $this->fetchAll($select);
-     }
+    }
 
     /**
      * group by date
@@ -380,40 +400,37 @@ class Visitor extends AbstractTable
      * @param Select &$select
      * @return void
      */
-    protected function _groupByDate($sort, Select &$select)
+    protected function groupByDate($sort, Select &$select)
     {
-        if($this->getDriverName() == 'pdo_pgsql')
-        {
-            switch($sort)
-            {
+        if ($this->getDriverName() == 'pdo_pgsql') {
+            switch($sort) {
                 case 'HOUR':
                     $select->where("TO_CHAR(lu.visit_at, 'YYYYMMDD') = TO_CHAR(NOW(), 'YYYYMMDD')");
-                break;
-
+                    break;
                 case 'DAY':
                     $select->where("lu.visit_at > DATE_TRUNC('month', NOW())");
-                break;
-
+                    break;
                 case 'MONTH':
                     $select->where("lu.visit_at > DATE_TRUNC('year', NOW())");
-                break;
+                    break;
             }
-        }
-        elseif($this->getDriverName() == 'pdo_mysql')
-        {
-            switch($sort)
-            {
+        } elseif ($this->getDriverName() == 'pdo_mysql') {
+            switch($sort) {
                 case 'HOUR':
-                    $select->where(new Expression("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')"));
-                break;
-
+                    $select->where(
+                        new Expression("DATE_FORMAT(lu.visit_at, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')")
+                    );
+                    break;
                 case 'DAY':
-                    $select->where(new Expression("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())"));
-                break;
-
+                    $select->where(
+                        new Expression("DATE_FORMAT(lu.visit_at, '%Y%m') >= EXTRACT(YEAR_MONTH FROM NOW())")
+                    );
+                    break;
                 case 'MONTH':
-                    $select->where(new Expression("DATE_FORMAT(lu.visit_at, '%Y') >= EXTRACT(YEAR FROM NOW())"));
-                break;
+                    $select->where(
+                        new Expression("DATE_FORMAT(lu.visit_at, '%Y') >= EXTRACT(YEAR FROM NOW())")
+                    );
+                    break;
             }
         }
     }
@@ -424,13 +441,12 @@ class Visitor extends AbstractTable
      * @param string $sort
      * @return string
      */
-     protected function _checkSort($sort)
-     {
-        if(!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR')))
-        {
+    protected function checkSort($sort)
+    {
+        if (!in_array($sort, array('HOUR', 'DAY', 'MONTH', 'YEAR'))) {
             $sort = 'DAY';
         }
 
         return $sort;
-     }
+    }
 }

@@ -27,8 +27,8 @@
 
 namespace Gc\Script;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of Script Model
@@ -44,7 +44,7 @@ class Collection extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'script';
+    protected $name = 'script';
 
     /**
      * Get scripts
@@ -52,18 +52,19 @@ class Collection extends AbstractTable
      * @param boolean $force_reload to initiliaze scripts
      * @return array
      */
-    public function getScripts($force_reload = FALSE)
+    public function getScripts($force_reload = false)
     {
-        if($force_reload or $this->getData('scripts') === NULL)
-        {
-            $rows = $this->fetchAll($this->select(function(Select $select)
-            {
-                $select->order('name ASC');
-            }));
+        if ($force_reload or $this->getData('scripts') === null) {
+            $rows = $this->fetchAll(
+                $this->select(
+                    function (Select $select) {
+                        $select->order('name ASC');
+                    }
+                )
+            );
 
             $scripts = array();
-            foreach($rows as $row)
-            {
+            foreach ($rows as $row) {
                 $scripts[] = Model::fromArray((array)$row);
             }
 

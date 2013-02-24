@@ -27,8 +27,8 @@
 
 namespace Gc\DocumentType;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
 
 /**
  * Collection of Document Type Model
@@ -44,7 +44,7 @@ class Collection extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'document_type';
+    protected $name = 'document_type';
 
     /**
      * Load document type collection
@@ -52,7 +52,7 @@ class Collection extends AbstractTable
      * @param integer $parent_id
      * @return void
      */
-    public function init($parent_id = NULL)
+    public function init($parent_id = null)
     {
         $this->setParentId($parent_id);
         $this->setDocumentTypes();
@@ -65,21 +65,26 @@ class Collection extends AbstractTable
      */
     protected function setDocumentTypes()
     {
-        $rows = $this->fetchAll($this->select(function (Select $select)
-        {
-            $parent_id = $this->getParentId();
-            if(!empty($parent_id))
-            {
-                $select->join(array('dtd' => 'document_type_dependency'), 'dtd.children_id = document_type.id', array());
-                $select->where->equalTo('dtd.parent_id', $parent_id);
-            }
+        $rows = $this->fetchAll(
+            $this->select(
+                function (Select $select) {
+                    $parent_id = $this->getParentId();
+                    if (!empty($parent_id)) {
+                        $select->join(
+                            array('dtd' => 'document_type_dependency'),
+                            'dtd.children_id = document_type.id',
+                            array()
+                        );
+                        $select->where->equalTo('dtd.parent_id', $parent_id);
+                    }
 
-            $select->order('name ASC');
-        }));
+                    $select->order('name ASC');
+                }
+            )
+        );
 
         $document_types = array();
-        foreach($rows as $row)
-        {
+        foreach ($rows as $row) {
             $document_types[] = Model::fromArray((array)$row);
         }
 
@@ -96,8 +101,7 @@ class Collection extends AbstractTable
         $select = array();
         $document_types = $this->getDocumentTypes();
 
-        foreach($document_types as $document_type)
-        {
+        foreach ($document_types as $document_type) {
             $select[$document_type->getId()] = $document_type->getName();
         }
 

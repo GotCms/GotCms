@@ -35,9 +35,9 @@
 
         <?php echo $this->formElement($element); ?>
         <?php $modules_info = $element->getAttribute('modules_info'); ?>
-        <?php if(!empty($modules_info)): ?>
+        <?php if (!empty($modules_info)): ?>
             <div id="modules">
-                <?php foreach($modules_info as $module_name => $module_info): ?>
+                <?php foreach ($modules_info as $module_name => $module_info): ?>
                     <div id="<?php echo $this->escapeHtml($this->translate($module_name)); ?>">
                         <?php echo $module_info; ?>
                     </div>

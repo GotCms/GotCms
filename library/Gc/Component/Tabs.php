@@ -41,7 +41,7 @@ class Tabs
      *
      * @var array
      */
-    protected $_data;
+    protected $data;
 
     /**
      * Tabs constructor
@@ -50,7 +50,7 @@ class Tabs
      */
     public function __construct(array $array = array())
     {
-        $this->_data = $array;
+        $this->data = $array;
     }
 
     /**
@@ -59,23 +59,18 @@ class Tabs
      * @param array $tabs contains objects
      * @return string
      */
-    public function render(array $tabs = NULL)
+    public function render(array $tabs = null)
     {
-        if($tabs === NULL)
-        {
-            $tabs = $this->_data;
+        if ($tabs === null) {
+            $tabs = $this->data;
         }
 
         $html = '<ul>';
         $i = 1;
-        foreach($tabs as $iterator)
-        {
-            if(!$iterator instanceof IterableInterface)
-            {
+        foreach ($tabs as $iterator) {
+            if (!$iterator instanceof IterableInterface) {
                 $html .= '<li><a href="#tabs-' . $i . '">' . $iterator . '</a></li>';
-            }
-            else
-            {
+            } else {
                 $html .= '<li><a href="#tabs-' . $iterator->getId() . '">' . $iterator->getName() . '</a></li>';
             }
 
@@ -94,9 +89,8 @@ class Tabs
      */
     public function __toString()
     {
-        if(empty($this->_data))
-        {
-            return FALSE;
+        if (empty($this->data)) {
+            return false;
         }
 
         return $this->render();
@@ -110,7 +104,7 @@ class Tabs
      */
     public function setData(array $array)
     {
-        $this->_data = $array;
+        $this->data = $array;
 
         return $this;
     }

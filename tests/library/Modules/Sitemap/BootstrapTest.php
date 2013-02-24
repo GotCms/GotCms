@@ -43,7 +43,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Bootstrap
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -51,7 +51,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Bootstrap;
+        $this->object = new Bootstrap;
     }
 
     /**
@@ -60,7 +60,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -68,7 +68,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->assertNull($this->_object->init(Registry::get('Application')->getMvcEvent()));
+        $this->assertNull($this->object->init(Registry::get('Application')->getMvcEvent()));
     }
 
     /**
@@ -76,8 +76,8 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstall()
     {
-        $this->assertTrue($this->_object->install());
-        $this->assertTrue($this->_object->uninstall());
+        $this->assertTrue($this->object->install());
+        $this->assertTrue($this->object->uninstall());
     }
 
     /**
@@ -85,9 +85,9 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
      */
     public function testUninstall()
     {
-        $this->assertTrue($this->_object->install());
+        $this->assertTrue($this->object->install());
         $sitemap = new Model\Sitemap();
         file_put_contents($sitemap->getFilePath(), $sitemap->generate());
-        $this->assertTrue($this->_object->uninstall());
+        $this->assertTrue($this->object->uninstall());
     }
 }

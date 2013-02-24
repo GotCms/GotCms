@@ -40,7 +40,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Git
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Git;
+        $this->object = new Git;
     }
 
     /**
@@ -57,7 +57,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -65,7 +65,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdate()
     {
-        $this->assertTrue($this->_object->update());
+        $this->assertTrue($this->object->update());
     }
 
     /**
@@ -74,7 +74,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpgrade()
     {
-        $this->assertTrue($this->_object->upgrade());
+        $this->assertTrue($this->object->upgrade());
     }
 
     /**
@@ -82,6 +82,6 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function testRollback()
     {
-        $this->assertTrue($this->_object->rollback('version'));
+        $this->assertTrue($this->object->rollback('version'));
     }
 }

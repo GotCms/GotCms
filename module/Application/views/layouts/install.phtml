@@ -65,13 +65,13 @@
             </nav>
             <section>
                 <?php echo $this->partial('messages.phtml', array('messages' => $this->flashMessages)); ?>
-                <?php if(!empty($this->currentRoute)): ?>
+                <?php if (!empty($this->currentRoute)): ?>
                     <form action="<?php echo $this->url($this->currentRoute); ?>" method="post">
                 <?php endif; ?>
 
                 <?php echo $this->content; ?>
 
-                <?php if(!empty($this->currentRoute)): ?>
+                <?php if (!empty($this->currentRoute)): ?>
                         <div class="button-submit">
                             <input class="button" type="submit" value="<?php echo $this->escapeHtml($this->translate('Continue')); ?>">
                         </div>

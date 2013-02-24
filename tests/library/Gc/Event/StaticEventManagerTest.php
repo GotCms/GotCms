@@ -40,7 +40,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * @var StaticEventManager
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -51,7 +51,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = StaticEventManager::getInstance();
+        $this->object = StaticEventManager::getInstance();
     }
 
     /**
@@ -60,8 +60,8 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_object->resetInstance();
-        unset($this->_object);
+        $this->object->resetInstance();
+        unset($this->object);
     }
 
     /**
@@ -79,7 +79,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetInstance()
     {
-        StaticEventManager::setInstance($this->_object);
+        StaticEventManager::setInstance($this->object);
         $this->assertInstanceOf('Gc\Event\StaticEventManager', StaticEventManager::getInstance());
     }
 
@@ -96,8 +96,8 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testResetInstance()
     {
-        $this->_object->resetInstance();
-        $this->assertFalse($this->_object->hasInstance());
+        $this->object->resetInstance();
+        $this->assertFalse($this->object->hasInstance());
     }
 
     /**
@@ -105,7 +105,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEventWithoutRegisteredEvent()
     {
-        $this->assertFalse($this->_object->getEvent('null'));
+        $this->assertFalse($this->object->getEvent('null'));
     }
 
     /**
@@ -113,13 +113,13 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEvent()
     {
-        $this->_object->attach('Event', 'do', function($e)
+        $this->object->attach('Event', 'do', function($e)
         {
             //Fake declare to create Event
         });
 
 
-        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->_object->getEvent('Event'));
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->object->getEvent('Event'));
     }
 
     /**
@@ -127,12 +127,12 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testTrigger()
     {
-        $this->_object->attach('Event', 'do', function($e)
+        $this->object->attach('Event', 'do', function($e)
         {
             return $e->getName();
         });
 
-        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $this->_object->trigger('Event', 'do'));
+        $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $this->object->trigger('Event', 'do'));
     }
 
     /**
@@ -140,6 +140,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testTriggerWithoutRegisteredEvent()
     {
-        $this->assertFalse($this->_object->trigger('Event', 'do'));
+        $this->assertFalse($this->object->trigger('Event', 'do'));
     }
 }

@@ -43,27 +43,27 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Collection
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-    protected $_documentType;
+    protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -71,23 +71,23 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = LayoutModel::fromArray(array(
+        $this->layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
@@ -95,20 +95,20 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = Model::fromArray(array(
+        $this->documentType = Model::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
 
-        $this->_documentType->save();
+        $this->documentType->save();
 
-        $this->_object = new Collection();
+        $this->object = new Collection();
     }
 
     /**
@@ -117,16 +117,16 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
 
-        $this->_view->delete();
-        unset($this->_view);
+        $this->view->delete();
+        unset($this->view);
 
-        $this->_layout->delete();
-        unset($this->_layout);
+        $this->layout->delete();
+        unset($this->layout);
 
-        $this->_user->delete();
-        unset($this->_user);
+        $this->user->delete();
+        unset($this->user);
     }
 
     /**
@@ -135,8 +135,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->_object->init($this->_documentType->getId());
-        $this->assertInternalType('array', $this->_object->getDocumentTypes());
+        $this->object->init($this->documentType->getId());
+        $this->assertInternalType('array', $this->object->getDocumentTypes());
     }
 
     /**
@@ -144,7 +144,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSelect()
     {
-        $this->_object->init();
-        $this->assertInternalType('array', $this->_object->getSelect());
+        $this->object->init();
+        $this->assertInternalType('array', $this->object->getSelect());
     }
 }

@@ -40,7 +40,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Visitor
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Visitor;
+        $this->object = new Visitor;
     }
 
     /**
@@ -57,7 +57,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -65,28 +65,28 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetVisitorId()
     {
-        $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0.11) Gecko/20100101 Firefox/10.0.11 Iceweasel/10.0.11';
+        $_SERVER['HTTPuser_AGENT'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0.11) Gecko/20100101 Firefox/10.0.11 Iceweasel/10.0.11';
         $_SERVER['HTTP_ACCEPT_CHARSET'] = NULL;
         $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en-us,en;q=0.5';
         $_SERVER['SERVER_ADDR'] = '127.0.0.1';
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['HTTP_REFERER'] = '/';
-        $this->assertInternalType('integer', $this->_object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
+        $this->assertInternalType('integer', $this->object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
     }
     /**
      * @covers Gc\User\Visitor::getVisitorId
      */
     public function testGetVisitorIdWithWrongData()
     {
-        $_SERVER['HTTP_USER_AGENT'] = NULL;
+        $_SERVER['HTTPuser_AGENT'] = NULL;
         $_SERVER['HTTP_ACCEPT_CHARSET'] = NULL;
         $_SERVER['HTTP_ACCEPT_LANGUAGE'] = NULL;
         $_SERVER['SERVER_ADDR'] = '127.0.0.1';
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['HTTP_REFERER'] = '/';
-        $this->assertInternalType('integer', $this->_object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
+        $this->assertInternalType('integer', $this->object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
     }
 
     /**
@@ -94,11 +94,11 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUrlId()
     {
-        $this->assertInternalType('integer', $this->_object->getUrlId('/something', NULL));
+        $this->assertInternalType('integer', $this->object->getUrlId('/something', NULL));
         //Existing url
-        $this->assertInternalType('integer', $this->_object->getUrlId('/something', NULL));
+        $this->assertInternalType('integer', $this->object->getUrlId('/something', NULL));
         //with referer
-        $this->assertInternalType('integer', $this->_object->getUrlId('/something', '/somewhat'));
+        $this->assertInternalType('integer', $this->object->getUrlId('/something', '/somewhat'));
     }
 
     /**
@@ -106,7 +106,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTotalVisitors()
     {
-        $this->assertInternalType('integer', $this->_object->getTotalVisitors());
+        $this->assertInternalType('integer', $this->object->getTotalVisitors());
     }
 
     /**
@@ -114,66 +114,66 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTotalPageViews()
     {
-        $this->assertInternalType('integer', $this->_object->getTotalPageViews());
+        $this->assertInternalType('integer', $this->object->getTotalPageViews());
     }
 
     /**
      * @covers Gc\User\Visitor::getNbPagesViews
-     * @covers Gc\User\Visitor::_sortData
-     * @covers Gc\User\Visitor::_checkSort
-     * @covers Gc\User\Visitor::_groupByDate
+     * @covers Gc\User\Visitor::sortData
+     * @covers Gc\User\Visitor::checkSort
+     * @covers Gc\User\Visitor::groupByDate
      */
     public function testGetNbPagesViews()
     {
-        $this->assertInternalType('array', $this->_object->getNbPagesViews('HOUR'));
-        $this->assertInternalType('array', $this->_object->getNbPagesViews('TEST'));
-        $this->assertInternalType('array', $this->_object->getNbPagesViews('DAY'));
-        $this->assertInternalType('array', $this->_object->getNbPagesViews('MONTH'));
-        $this->assertInternalType('array', $this->_object->getNbPagesViews('YEAR'));
+        $this->assertInternalType('array', $this->object->getNbPagesViews('HOUR'));
+        $this->assertInternalType('array', $this->object->getNbPagesViews('TEST'));
+        $this->assertInternalType('array', $this->object->getNbPagesViews('DAY'));
+        $this->assertInternalType('array', $this->object->getNbPagesViews('MONTH'));
+        $this->assertInternalType('array', $this->object->getNbPagesViews('YEAR'));
     }
 
     /**
      * @covers Gc\User\Visitor::getNbVisitors
-     * @covers Gc\User\Visitor::_sortData
-     * @covers Gc\User\Visitor::_checkSort
-     * @covers Gc\User\Visitor::_groupByDate
+     * @covers Gc\User\Visitor::sortData
+     * @covers Gc\User\Visitor::checkSort
+     * @covers Gc\User\Visitor::groupByDate
      */
     public function testGetNbVisitors()
     {
-        $this->assertInternalType('array', $this->_object->getNbVisitors('TEST'));
-        $this->assertInternalType('array', $this->_object->getNbVisitors('HOUR'));
-        $this->assertInternalType('array', $this->_object->getNbVisitors('DAY'));
-        $this->assertInternalType('array', $this->_object->getNbVisitors('MONTH'));
-        $this->assertInternalType('array', $this->_object->getNbVisitors('YEAR'));
+        $this->assertInternalType('array', $this->object->getNbVisitors('TEST'));
+        $this->assertInternalType('array', $this->object->getNbVisitors('HOUR'));
+        $this->assertInternalType('array', $this->object->getNbVisitors('DAY'));
+        $this->assertInternalType('array', $this->object->getNbVisitors('MONTH'));
+        $this->assertInternalType('array', $this->object->getNbVisitors('YEAR'));
     }
 
     /**
      * @covers Gc\User\Visitor::getUrlsViews
-     * @covers Gc\User\Visitor::_sortData
-     * @covers Gc\User\Visitor::_checkSort
-     * @covers Gc\User\Visitor::_groupByDate
+     * @covers Gc\User\Visitor::sortData
+     * @covers Gc\User\Visitor::checkSort
+     * @covers Gc\User\Visitor::groupByDate
      */
     public function testGetUrlsViews()
     {
-        $this->assertInternalType('array', $this->_object->getUrlsViews('TEST'));
-        $this->assertInternalType('array', $this->_object->getUrlsViews('HOUR'));
-        $this->assertInternalType('array', $this->_object->getUrlsViews('DAY'));
-        $this->assertInternalType('array', $this->_object->getUrlsViews('MONTH'));
-        $this->assertInternalType('array', $this->_object->getUrlsViews('YEAR'));
+        $this->assertInternalType('array', $this->object->getUrlsViews('TEST'));
+        $this->assertInternalType('array', $this->object->getUrlsViews('HOUR'));
+        $this->assertInternalType('array', $this->object->getUrlsViews('DAY'));
+        $this->assertInternalType('array', $this->object->getUrlsViews('MONTH'));
+        $this->assertInternalType('array', $this->object->getUrlsViews('YEAR'));
     }
 
     /**
      * @covers Gc\User\Visitor::getReferers
-     * @covers Gc\User\Visitor::_sortData
-     * @covers Gc\User\Visitor::_checkSort
-     * @covers Gc\User\Visitor::_groupByDate
+     * @covers Gc\User\Visitor::sortData
+     * @covers Gc\User\Visitor::checkSort
+     * @covers Gc\User\Visitor::groupByDate
      */
     public function testGetReferers()
     {
-        $this->assertInternalType('array', $this->_object->getReferers('TEST'));
-        $this->assertInternalType('array', $this->_object->getReferers('HOUR'));
-        $this->assertInternalType('array', $this->_object->getReferers('DAY'));
-        $this->assertInternalType('array', $this->_object->getReferers('MONTH'));
-        $this->assertInternalType('array', $this->_object->getReferers('YEAR'));
+        $this->assertInternalType('array', $this->object->getReferers('TEST'));
+        $this->assertInternalType('array', $this->object->getReferers('HOUR'));
+        $this->assertInternalType('array', $this->object->getReferers('DAY'));
+        $this->assertInternalType('array', $this->object->getReferers('MONTH'));
+        $this->assertInternalType('array', $this->object->getReferers('YEAR'));
     }
 }

@@ -27,10 +27,10 @@
 
 namespace Modules\Backup\Model\Database;
 
-use Gc\Db\AbstractTable,
-    Gc\Document\Model as DocumentModel,
-    Zend\Db\Sql\Select,
-    Zend\Db\Sql\Predicate\Expression;
+use Gc\Db\AbstractTable;
+use Gc\Document\Model as DocumentModel;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Predicate\Expression;
 
 /**
  * Blog comment table
@@ -46,7 +46,7 @@ class Mysql extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'core_config_data';
+    protected $name = 'core_config_data';
 
     /**
      * Export function
@@ -56,8 +56,7 @@ class Mysql extends AbstractTable
      */
     public function export($what = 'structureanddata')
     {
-        if(empty($what))
-        {
+        if (empty($what)) {
             $what = 'structureanddata';
         }
 
@@ -67,25 +66,21 @@ class Mysql extends AbstractTable
         //Prepare command
         $cmd .= ' --user=' . escapeshellarg($parameters['username']);
         $cmd .= ' --password=' . escapeshellarg($parameters['password']);
-        if(!empty($parameters['hostname']))
-        {
+        if (!empty($parameters['hostname'])) {
             $cmd .= ' --host=' . escapeshellarg($parameters['hostname']);
         }
 
-        if(!empty($parameters['port']))
-        {
+        if (!empty($parameters['port'])) {
             $cmd .= ' --port=' . escapeshellarg($parameters['port']);
         }
 
-        switch($what)
-        {
+        switch($what) {
             case 'dataonly':
                 $cmd .= ' --no-create-info';
-            break;
-
+                break;
             case 'structureonly':
                 $cmd .= ' --no-data';
-            break;
+                break;
         }
 
         $cmd .= ' ' . escapeshellarg($parameters['database']);

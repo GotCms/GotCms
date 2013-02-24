@@ -42,12 +42,12 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractDatatype
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var DatatypeModel
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -55,15 +55,15 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'AbstractDatatype',
             'prevalue_value' => 's:16:"AbstractDatatype";',
             'model' => 'AbstractDatatype',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
 
-        $this->_object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
-        $this->_object->load($this->_datatype, 1);
+        $this->object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
+        $this->object->load($this->datatype, 1);
     }
 
     /**
@@ -72,9 +72,9 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_datatype->delete();
-        unset($this->_datatype);
-        unset($this->_object);
+        $this->datatype->delete();
+        unset($this->datatype);
+        unset($this->object);
     }
 
     /**
@@ -82,7 +82,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInfos()
     {
-        $this->assertFalse($this->_object->getInfos());
+        $this->assertFalse($this->object->getInfos());
     }
 
     /**
@@ -90,8 +90,8 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->assertEquals(1, $this->_object->getDocumentId());
-        $this->assertInstanceOf('Gc\Datatype\Model', $this->_object->getDatatypeModel());
+        $this->assertEquals(1, $this->object->getDocumentId());
+        $this->assertInstanceOf('Gc\Datatype\Model', $this->object->getDatatypeModel());
     }
 
     /**
@@ -99,7 +99,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadWithEmptyDatatype()
     {
-        $this->assertFalse($this->_object->load(NULL, NULL));
+        $this->assertFalse($this->object->load(NULL, NULL));
     }
 
     /**
@@ -107,7 +107,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetConfig()
     {
-        $this->assertEquals('AbstractDatatype', $this->_object->getConfig());
+        $this->assertEquals('AbstractDatatype', $this->object->getConfig());
     }
 
     /**
@@ -115,8 +115,8 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetConfigWithNotSerializeValue()
     {
-        $this->_object->setConfig(array());
-        $this->assertInternalType('array', $this->_object->getConfig());
+        $this->object->setConfig(array());
+        $this->assertInternalType('array', $this->object->getConfig());
     }
 
     /**
@@ -124,8 +124,8 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetConfig()
     {
-        $this->_object->setConfig(serialize('NewValue'));
-        $this->assertEquals('NewValue', $this->_object->getConfig());
+        $this->object->setConfig(serialize('NewValue'));
+        $this->assertEquals('NewValue', $this->object->getConfig());
     }
 
     /**
@@ -133,7 +133,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUploadUrl()
     {
-        $this->assertEquals('/admin/content/media/upload/document/1/property/1', $this->_object->getUploadUrl(1));
+        $this->assertEquals('/admin/content/media/upload/document/1/property/1', $this->object->getUploadUrl(1));
     }
 
     /**
@@ -141,7 +141,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHelper()
     {
-        $this->assertInstanceOf('Gc\View\Helper\Partial', $this->_object->getHelper('partial'));
+        $this->assertInstanceOf('Gc\View\Helper\Partial', $this->object->getHelper('partial'));
     }
 
     /**
@@ -149,7 +149,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetProperty()
     {
-        $this->assertNull($this->_object->getProperty());
+        $this->assertNull($this->object->getProperty());
     }
 
     /**
@@ -157,8 +157,8 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetProperty()
     {
-        $this->_object->setProperty('test');
-        $this->assertEquals('test', $this->_object->getProperty());
+        $this->object->setProperty('test');
+        $this->assertEquals('test', $this->object->getProperty());
     }
 
     /**
@@ -166,27 +166,27 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetName()
     {
-        $this->assertEquals('datatype', $this->_object->getName());
+        $this->assertEquals('datatype', $this->object->getName());
     }
 
     /**
      * @covers Gc\Datatype\AbstractDatatype::addPath
-     * @covers Gc\Datatype\AbstractDatatype::_checkRenderer
+     * @covers Gc\Datatype\AbstractDatatype::checkRenderer
      */
     public function testAddPath()
     {
-        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', $this->_object->addPath(__DIR__));
+        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', $this->object->addPath(__DIR__));
     }
 
     /**
      * @covers Gc\Datatype\AbstractDatatype::addPath
      * @covers Gc\Datatype\AbstractDatatype::render
-     * @covers Gc\Datatype\AbstractDatatype::_checkRenderer
+     * @covers Gc\Datatype\AbstractDatatype::checkRenderer
      */
     public function testRender()
     {
-        $this->_object->addPath(__DIR__);
-        $this->assertEquals('String' . PHP_EOL, $this->_object->render('_files/template.phtml'));
+        $this->object->addPath(__DIR__);
+        $this->assertEquals('String' . PHP_EOL, $this->object->render('_files/template.phtml'));
     }
 
     /**
@@ -194,6 +194,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDocument()
     {
-        $this->assertFalse($this->_object->getDocument());
+        $this->assertFalse($this->object->getDocument());
     }
 }

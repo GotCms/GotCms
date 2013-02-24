@@ -27,9 +27,9 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php if(!empty($this->messages)):?>
-    <?php foreach($this->messages as $type => $messages):?>
-        <?php foreach($messages as $message): ?>
+<?php if (!empty($this->messages)):?>
+    <?php foreach ($this->messages as $type => $messages):?>
+        <?php foreach ($messages as $message): ?>
             <div class="notification <?php echo $type; ?>">
                 <a class="close" href="#">
                     <img alt="<?php echo $this->escapeHtml($this->translate('Close')); ?>" title="<?php echo $this->escapeHtml($this->translate('Close this notification')); ?>" src="<?php echo $this->basePath('backend/images/close-small.png'); ?>">

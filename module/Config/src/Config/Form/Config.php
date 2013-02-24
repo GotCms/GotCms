@@ -27,15 +27,15 @@
 
 namespace Config\Form;
 
-use Gc\Form\AbstractForm,
-    Gc\Document,
-    Gc\Layout,
-    Gc\User\Permission,
-    Zend\Form\Element,
-    Zend\Form\Fieldset,
-    Zend\InputFilter\InputFilter,
-    Zend\Validator\Db,
-    Zend\Validator\Identical;
+use Gc\Form\AbstractForm;
+use Gc\Document;
+use Gc\Layout;
+use Gc\User\Permission;
+use Zend\Form\Element;
+use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilter;
+use Zend\Validator\Db;
+use Zend\Validator\Identical;
 
 /**
  * Config form
@@ -90,28 +90,40 @@ class Config extends AbstractForm
         $general_fieldset->add($layout_not_found);
         $this->add($general_fieldset);
 
-        $this->getInputFilter()->add(array(
-            'name' => 'site_name',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'site_name',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'site_name');
+            'site_name'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'site_is_offline',
-            'required' => FALSE,
-        ), 'site_is_offline');
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'site_is_offline',
+                'required' => false,
+            ),
+            'site_is_offline'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'site_offline_document',
-            'required' => TRUE,
-        ), 'site_offline_document');
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'site_offline_document',
+                'required' => true,
+            ),
+            'site_offline_document'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'site_404_layout',
-            'required' => TRUE,
-        ), 'site_404_layout');
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'site_404_layout',
+                'required' => true,
+            ),
+            'site_404_layout'
+        );
 
         return $this;
     }
@@ -165,13 +177,11 @@ class Config extends AbstractForm
         $cache_handler = new Element\Select('cache_handler');
         $cache_handler->setAttribute('label', 'Cache handler');
         $handler_whitelist = array('filesystem' => 'FileSystem');
-        if(extension_loaded('apc'))
-        {
+        if (extension_loaded('apc')) {
             $handler_whitelist['apc'] = 'Apc';
         }
 
-        if(extension_loaded('memcached'))
-        {
+        if (extension_loaded('memcached')) {
             $handler_whitelist['memcached'] = 'Memcached';
         }
 
@@ -186,71 +196,95 @@ class Config extends AbstractForm
         $cache_fieldset->add($cache_lifetime);
         $this->add($cache_fieldset);
 
-        $this->getInputFilter()->add(array(
-            'name' => 'cookie_domain',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'cookie_domain',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'cookie_domain');
+            'cookie_domain'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'cookie_path',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'cookie_path',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'cookie_path');
+            'cookie_path'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'session_lifetime',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
-                array('name' => 'digits'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'session_lifetime',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                    array('name' => 'digits'),
+                ),
             ),
-        ), 'session_lifetime');
+            'session_lifetime'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'session_handler',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'session_handler',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'session_handler');
+            'session_handler'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'debug_is_active',
-            'required' => FALSE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'debug_is_active',
+                'required' => false,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'debug_is_active');
+            'debug_is_active'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'cache_is_active',
-            'required' => FALSE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'cache_is_active',
+                'required' => false,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'cache_is_active');
+            'cache_is_active'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'cache_lifetime',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
-                array('name' => 'digits'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'cache_lifetime',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                    array('name' => 'digits'),
+                ),
             ),
-        ), 'cache_lifetime');
+            'cache_lifetime'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'cache_handler',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'cache_handler',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'cache_handler');
+            'cache_handler'
+        );
 
         return $this;
     }
@@ -290,29 +324,38 @@ class Config extends AbstractForm
         $mail_fieldset->add($mail_from_name);
         $this->add($mail_fieldset);
 
-        $this->getInputFilter()->add(array(
-            'name' => 'locale',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'locale',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'locale');
+            'locale'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'mail_from_name',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'mail_from_name',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'mail_from_name');
+            'mail_from_name'
+        );
 
-        $this->getInputFilter()->add(array(
-            'name' => 'mail_from',
-            'required' => TRUE,
-            'validators' => array(
-                array('name' => 'not_empty'),
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'mail_from',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
             ),
-        ), 'mail_from');
+            'mail_from'
+        );
 
 
         return $this;
@@ -325,12 +368,9 @@ class Config extends AbstractForm
      */
     public function setValues(array $data)
     {
-        foreach($data as $config)
-        {
-            foreach($this->getFieldsets() as $fieldset)
-            {
-                if($fieldset->has($config['identifier']))
-                {
+        foreach ($data as $config) {
+            foreach ($this->getFieldsets() as $fieldset) {
+                if ($fieldset->has($config['identifier'])) {
                     $fieldset->get($config['identifier'])->setValue($config['value']);
                     break;
                 }

@@ -27,9 +27,10 @@
 
 namespace Modules\Sitemap;
 
-use Gc\Module\AbstractModule,
-    Zend\EventManager\Event,
-    Modules\Sitemap\Model;
+use Gc\Module\AbstractModule;
+use Zend\EventManager\Event;
+use Modules\Sitemap\Model;
+
 /**
  * Sitemap module bootstrap
  *
@@ -57,7 +58,7 @@ class Bootstrap extends AbstractModule
      */
     public function install()
     {
-        return TRUE;
+        return true;
     }
 
     /**
@@ -68,11 +69,10 @@ class Bootstrap extends AbstractModule
     public function uninstall()
     {
         $sitemap = new Model\Sitemap();
-        if(file_exists($sitemap->getFilePath()))
-        {
+        if (file_exists($sitemap->getFilePath())) {
             @unlink($sitemap->getFilePath());
         }
 
-        return TRUE;
+        return true;
     }
 }

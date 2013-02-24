@@ -27,6 +27,7 @@
 namespace Gc;
 
 use Zend\Json\Json;
+
 /**
  * Class to store and retrieve version
  *
@@ -45,7 +46,7 @@ final class Version
      *
      * @var string
      */
-    protected static $_latestVersion;
+    protected static $latestVersion;
 
     /**
      * Compare the specified GotCms version string $version
@@ -69,31 +70,33 @@ final class Version
      */
     public static function getLatest()
     {
-        if(NULL === self::$_latestVersion)
-        {
-            self::$_latestVersion = 'not available';
+        if (null === self::$latestVersion) {
+            self::$latestVersion = 'not available';
             $url = 'https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/';
             $content = @file_get_contents($url);
 
-            if(!empty($content))
-            {
+            if (!empty($content)) {
                 $api_response = Json::decode($content, Json::TYPE_ARRAY);
 
                 // Simplify the API response into a simple array of version numbers
-                $tags = array_map(function($tag)
-                {
-                    return substr($tag['ref'], 11); // Reliable because we're filtering on 'refs/tags/v'
-                }, $api_response);
+                $tags = array_map(
+                    function ($tag) {
+                        return substr($tag['ref'], 11); // Reliable because we're filtering on 'refs/tags/v'
+                    },
+                    $api_response
+                );
 
                 // Fetch the latest version number from the array
-                self::$_latestVersion = array_reduce($tags, function($a, $b)
-                {
-                    return version_compare($a, $b, '>') ? $a : $b;
-                });
+                self::$latestVersion = array_reduce(
+                    $tags,
+                    function ($a, $b) {
+                        return version_compare($a, $b, '>') ? $a : $b;
+                    }
+                );
             }
         }
 
-        return self::$_latestVersion;
+        return self::$latestVersion;
     }
 
     /**

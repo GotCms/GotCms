@@ -44,32 +44,32 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Collection
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-    protected $_documentType;
+    protected $documentType;
 
     /**
      * @var Model
      */
-    protected $_tab;
+    protected $tab;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -77,50 +77,50 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = LayoutModel::fromArray(array(
+        $this->layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
             'login' => 'test',
             'user_acl_role_id' => 1,
         ));
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = DocumentTypeModel::fromArray(array(
+        $this->documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
-        $this->_documentType->save();
+        $this->documentType->save();
 
-        $this->_tab = Model::fromArray(array(
+        $this->tab = Model::fromArray(array(
             'name' => 'TabTest',
             'description' => 'TabTest',
             'sort_order' => 1,
-            'document_type_id' => $this->_documentType->getId(),
+            'document_type_id' => $this->documentType->getId(),
         ));
-        $this->_tab->save();
+        $this->tab->save();
 
-        $this->_object = new Collection;
+        $this->object = new Collection;
     }
 
     /**
@@ -129,17 +129,17 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_tab->delete();
-        $this->_documentType->delete();
-        $this->_user->delete();
-        $this->_layout->delete();
-        $this->_view->delete();
-        unset($this->_tab);
-        unset($this->_documentType);
-        unset($this->_user);
-        unset($this->_layout);
-        unset($this->_view);
-        unset($this->_object);
+        $this->tab->delete();
+        $this->documentType->delete();
+        $this->user->delete();
+        $this->layout->delete();
+        $this->view->delete();
+        unset($this->tab);
+        unset($this->documentType);
+        unset($this->user);
+        unset($this->layout);
+        unset($this->view);
+        unset($this->object);
     }
 
     /**
@@ -147,7 +147,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->assertInstanceOf('Gc\Tab\Collection', $this->_object->load(1));
+        $this->assertInstanceOf('Gc\Tab\Collection', $this->object->load(1));
     }
 
     /**
@@ -155,8 +155,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTabsWithDocumentTypeId()
     {
-        $this->_object->load(1);
-        $this->assertInternalType('array', $this->_object->getTabs());
+        $this->object->load(1);
+        $this->assertInternalType('array', $this->object->getTabs());
     }
 
     /**
@@ -164,7 +164,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTabs()
     {
-        $this->assertInternalType('array', $this->_object->getTabs());
+        $this->assertInternalType('array', $this->object->getTabs());
     }
 
     /**
@@ -172,7 +172,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetImportableTabs()
     {
-        $this->assertInternalType('array', $this->_object->getImportableTabs(0));
+        $this->assertInternalType('array', $this->object->getImportableTabs(0));
     }
 
     /**
@@ -180,12 +180,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetTabs()
     {
-        $this->assertNull($this->_object->setTabs(array(
+        $this->assertNull($this->object->setTabs(array(
             array(
                 'name' => 'TabTest',
                 'description' => 'TabTest',
                 'sort_order' => 2,
-                'document_type_id' => $this->_documentType->getId(),
+                'document_type_id' => $this->documentType->getId(),
             )
         )));
     }
@@ -195,11 +195,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddTab()
     {
-        $this->assertNull($this->_object->addTab(array(
+        $this->assertNull($this->object->addTab(array(
             'name' => 'TabTest',
             'description' => 'TabTest',
             'sort_order' => 2,
-            'document_type_id' => $this->_documentType->getId(),
+            'document_type_id' => $this->documentType->getId(),
         )));
     }
 
@@ -208,16 +208,16 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->_object->setTabs(array(
+        $this->object->setTabs(array(
             array(
                 'name' => 'TabTest',
                 'description' => 'TabTest',
                 'sort_order' => 2,
-                'document_type_id' => $this->_documentType->getId(),
+                'document_type_id' => $this->documentType->getId(),
             )
         ));
 
-        $this->assertNull($this->_object->save());
+        $this->assertNull($this->object->save());
     }
 
     /**
@@ -225,16 +225,16 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $this->_object->setTabs(array(
+        $this->object->setTabs(array(
             array(
                 'name' => 'TabTest',
                 'description' => 'TabTest',
                 'sort_order' => 2,
-                'document_type_id' => $this->_documentType->getId(),
+                'document_type_id' => $this->documentType->getId(),
             )
         ));
-        $this->_object->save();
+        $this->object->save();
 
-        $this->assertTrue($this->_object->delete());
+        $this->assertTrue($this->object->delete());
     }
 }

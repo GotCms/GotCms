@@ -27,12 +27,12 @@
 
 namespace Gc\Form;
 
-use Zend\Form\Form,
-    Zend\Form\Fieldset,
-    Zend\Form\Element,
-    Zend\InputFilter\InputFilter,
-    Gc\Exception,
-    Gc\Db\AbstractTable;
+use Zend\Form\Form;
+use Zend\Form\Fieldset;
+use Zend\Form\Element;
+use Zend\InputFilter\InputFilter;
+use Gc\Exception;
+use Gc\Db\AbstractTable;
 
 /**
  * Abstract Form overload Zend\Form\Form
@@ -61,7 +61,7 @@ abstract class AbstractForm extends Form
     {
         parent::__construct($name);
         $this->setAttribute('method', 'post');
-        $this->setUseInputFilterDefaults(FALSE);
+        $this->setUseInputFilterDefaults(false);
         $this->init();
     }
 
@@ -92,24 +92,18 @@ abstract class AbstractForm extends Form
     {
         $data = $table->getData();
         $input_filter = $this->getInputFilter();
-        if(is_array($data))
-        {
-            foreach($data as $element_name => $element_value)
-            {
-                if($this->has($element_name))
-                {
+        if (is_array($data)) {
+            foreach ($data as $element_name => $element_value) {
+                if ($this->has($element_name)) {
                     $element = $this->get($element_name);
                     $this->get($element_name)->setValue($element_value);
                 }
 
-                if($input_filter->has($element_name))
-                {
+                if ($input_filter->has($element_name)) {
                     $validators = $input_filter->get($element_name)->getValidatorChain()->getValidators();
 
-                    foreach($validators as $validator)
-                    {
-                        if($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists)
-                        {
+                    foreach ($validators as $validator) {
+                        if ($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists) {
                             $validator['instance']->setExclude(array('field' => 'id', 'value' => $table->getId()));
                         }
                     }
@@ -129,27 +123,20 @@ abstract class AbstractForm extends Form
      * @static
      * @return void
      */
-    static function addContent(Fieldset $form, $elements, $prefix = NULL)
+    public static function addContent(Fieldset $form, $elements, $prefix = null)
     {
-        if(empty($elements))
-        {
+        if (empty($elements)) {
             return;
         }
 
-        if(is_array($elements))
-        {
-            foreach($elements as $element)
-            {
+        if (is_array($elements)) {
+            foreach ($elements as $element) {
                 self::addContent($form, $element, $prefix);
             }
-        }
-        elseif($elements instanceof Element)
-        {
-            if(!empty($prefix))
-            {
+        } elseif ($elements instanceof Element) {
+            if (!empty($prefix)) {
                 $id = $elements->getAttribute('id');
-                if(empty($id))
-                {
+                if (empty($id)) {
                     $id = $elements->getAttribute('name');
                 }
 
@@ -158,23 +145,22 @@ abstract class AbstractForm extends Form
             }
 
             $form->add($elements);
-        }
-        elseif(is_string($elements))
-        {
-            if(!empty($prefix))
-            {
+        } elseif (is_string($elements)) {
+            if (!empty($prefix)) {
                 $rand_id = mt_rand();
                 $elements = preg_replace('~name="(.+)(\[.*\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
                 $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $rand_id . '"', $elements);
-                $elements = preg_replace('~(?:(?!(?<=value=)))("|\')#(.+)("|\')~iU', '${1}#${2}' . $rand_id . '${3}', $elements);
+                $elements = preg_replace(
+                    '~(?:(?!(?<=value=)))("|\')#(.+)("|\')~iU',
+                    '${1}#${2}' . $rand_id . '${3}',
+                    $elements
+                );
             }
 
             $hidden_element = new Element('hidden' . uniqid());
             $hidden_element->setAttribute('content', $elements);
             $form->add($hidden_element);
-        }
-        else
-        {
+        } else {
             throw new Exception('Invalid element ' . __CLASS__ . '::' . __METHOD__ . ')');
         }
     }
@@ -185,13 +171,12 @@ abstract class AbstractForm extends Form
      * @param string $name
      * @return string
      */
-    public function getValue($name = NULL)
+    public function getValue($name = null)
     {
-        if($this->has($name))
-        {
+        if ($this->has($name)) {
             return $this->get($name)->getValue();
         }
 
-        return NULL;
+        return null;
     }
 }

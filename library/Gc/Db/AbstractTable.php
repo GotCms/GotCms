@@ -27,12 +27,13 @@
 
 namespace Gc\Db;
 
-use Gc\Core\Object,
-    Gc\Event\StaticEventManager,
-    Gc\Registry,
-    Zend\Db\ResultSet\ResultSet,
-    Zend\Db\TableGateway,
-    PDO;
+use Gc\Core\Object;
+use Gc\Event\StaticEventManager;
+use Gc\Registry;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway;
+use PDO;
+
 /**
  * Extension of Zend\Db\TableGateway
  * This is better to use fetchRow(), fetchAll(),
@@ -49,18 +50,20 @@ abstract class AbstractTable extends Object
      *
      * @var array \Zend\Db\TableGateway\TableGateway
      */
-    static protected $_tables = array();
+    static protected $tables = array();
 
     /**
-     * Initialize constructor and save instance of \Zend\Db\TableGateway\TableGateway($_name) in self::$_tables
+     * Initialize constructor and save instance of \Zend\Db\TableGateway\TableGateway($_name) in self::$tables
      *
      * @return void
      */
     public function __construct()
     {
-        if(!empty($this->_name) and !in_array($this->_name, self::$_tables))
-        {
-            self::$_tables[$this->_name] = new TableGateway\TableGateway($this->_name, TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter());
+        if (!empty($this->name) and !in_array($this->name, self::$tables)) {
+            self::$tables[$this->name] = new TableGateway\TableGateway(
+                $this->name,
+                TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter()
+            );
         }
 
         $this->init();
@@ -75,14 +78,12 @@ abstract class AbstractTable extends Object
      */
     public function __call($method, $args)
     {
-        if(empty(self::$_tables[$this->_name]))
-        {
+        if (empty(self::$tables[$this->name])) {
             $this->__construct();
         }
 
-        if(method_exists(self::$_tables[$this->_name], $method))
-        {
-            return call_user_func_array(array(self::$_tables[$this->_name], $method), $args);
+        if (method_exists(self::$tables[$this->name], $method)) {
+            return call_user_func_array(array(self::$tables[$this->name], $method), $args);
         }
 
         return parent::__call($method, $args);
@@ -95,14 +96,11 @@ abstract class AbstractTable extends Object
      * @param mixed $parameters
      * @return array|\Zend\Db\ResultSet\RowObjectInterface
      */
-    public function fetchRow($query, $parameters = NULL)
+    public function fetchRow($query, $parameters = null)
     {
-        if($query instanceof ResultSet)
-        {
+        if ($query instanceof ResultSet) {
             $result_set = $query;
-        }
-        else
-        {
+        } else {
             $result_set = new ResultSet();
             $result_set->initialize($this->execute($query, $parameters));
         }
@@ -120,14 +118,11 @@ abstract class AbstractTable extends Object
      * @param mixed $parameters
      * @return array
      */
-    public function fetchAll($query, $parameters = NULL)
+    public function fetchAll($query, $parameters = null)
     {
-        if($query instanceof ResultSet)
-        {
+        if ($query instanceof ResultSet) {
             $result_set = $query;
-        }
-        else
-        {
+        } else {
             $result_set = new ResultSet();
             $result_set->initialize($this->execute($query, $parameters));
         }
@@ -145,14 +140,11 @@ abstract class AbstractTable extends Object
      * @param mixed $parameters
      * @return mixed
      */
-    public function fetchOne($query, $parameters = NULL)
+    public function fetchOne($query, $parameters = null)
     {
-        if($query instanceof ResultSet)
-        {
+        if ($query instanceof ResultSet) {
             $result_set = $query;
-        }
-        else
-        {
+        } else {
             $result_set = new ResultSet();
             $result_set->initialize($this->execute($query, $parameters));
         }
@@ -170,14 +162,11 @@ abstract class AbstractTable extends Object
      * @param mixed $parameters
      * @return array|\Zend\Db\Adapter\Driver\Pdo\Result
      */
-    public function execute($query, $parameters = NULL)
+    public function execute($query, $parameters = null)
     {
-        if(is_string($query))
-        {
+        if (is_string($query)) {
             $statement = $this->getAdapter()->createStatement($query);
-        }
-        else
-        {
+        } else {
             $statement = $this->getAdapter()->createStatement();
             $query->prepareStatement($this->getAdapter(), $statement);
         }
@@ -191,11 +180,10 @@ abstract class AbstractTable extends Object
      * @param string $table_name Optional
      * @return integer
      */
-    public function getLastInsertId($table_name = NULL)
+    public function getLastInsertId($table_name = null)
     {
-        $table_name = empty($table_name) ? $this->_name : $table_name;
-        if($this->getDriverName() == 'pdo_pgsql')
-        {
+        $table_name = empty($table_name) ? $this->name : $table_name;
+        if ($this->getDriverName() == 'pdo_pgsql') {
             $row = $this->fetchRow(sprintf("SELECT currval('%s_id_seq') AS value", $table_name));
             return $row['value'];
         }
@@ -218,9 +206,9 @@ abstract class AbstractTable extends Object
      *
      * @return string
      */
-     public function getDriverName()
-     {
-         $configuration = Registry::get('Configuration');
-         return $configuration['db']['driver'];
-     }
+    public function getDriverName()
+    {
+        $configuration = Registry::get('Configuration');
+        return $configuration['db']['driver'];
+    }
 }

@@ -27,9 +27,10 @@
 
 namespace Modules\Blog;
 
-use Gc\Module\AbstractObserver,
-    Modules\Blog\Model\Comment,
-    Zend\EventManager\Event;
+use Gc\Module\AbstractObserver;
+use Modules\Blog\Model\Comment;
+use Zend\EventManager\Event;
+
 /**
  * Blog module bootstrap
  *
@@ -58,17 +59,20 @@ class Observer extends AbstractObserver
     public function dashboard(Event $event)
     {
         $comment_model = new Comment();
-        $unactive_comment_list = $comment_model->getList(NULL, FALSE);
-        $active_comment_list = $comment_model->getList(NULL, TRUE);
+        $unactive_comment_list = $comment_model->getList(null, false);
+        $active_comment_list = $comment_model->getList(null, true);
 
         $widgets = $event->getParam('widgets');
 
         $widgets['test']['id'] = 'blog';
         $widgets['test']['title'] = 'Blog information';
-        $widgets['test']['content'] = $this->addPath(__DIR__ . '/views')->render('dashboard.phtml', array(
-            'unactiveComments' => count($unactive_comment_list),
-            'activeComments'   => count($active_comment_list),
-        ));
+        $widgets['test']['content'] = $this->addPath(__DIR__ . '/views')->render(
+            'dashboard.phtml',
+            array(
+                'unactiveComments' => count($unactive_comment_list),
+                'activeComments'   => count($active_comment_list),
+            )
+        );
 
         $event->setParam('widgets', $widgets);
     }

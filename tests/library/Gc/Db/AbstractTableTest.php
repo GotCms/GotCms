@@ -42,7 +42,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractTable
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -52,7 +52,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = Model::fromArray(array(
+        $this->object = Model::fromArray(array(
             'lastname' => 'Test',
             'firstname' => 'Test',
             'email' => 'test@test.com',
@@ -60,8 +60,8 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_object->setPassword('test');
-        $this->_object->save();
+        $this->object->setPassword('test');
+        $this->object->save();
     }
 
     /**
@@ -70,8 +70,8 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_object->delete();
-        unset($this->_object);
+        $this->object->delete();
+        unset($this->object);
     }
 
     /**
@@ -79,7 +79,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function test__call()
     {
-        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $this->_object->select());
+        $this->assertInstanceOf('Zend\Db\ResultSet\ResultSet', $this->object->select());
     }
 
     /**
@@ -87,7 +87,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchRow()
     {
-        $result = $this->_object->fetchRow($this->_object->select());
+        $result = $this->object->fetchRow($this->object->select());
         $this->assertInternalType('array', $result);
     }
 
@@ -98,7 +98,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     {
         $select = new Select();
         $select->from('user');
-        $result = $this->_object->fetchAll($select);
+        $result = $this->object->fetchAll($select);
         $this->assertInternalType('array', $result);
     }
 
@@ -107,7 +107,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchAll()
     {
-        $result = $this->_object->fetchAll($this->_object->select());
+        $result = $this->object->fetchAll($this->object->select());
         $this->assertInternalType('array', $result);
     }
 
@@ -118,7 +118,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     {
         $select = new Select();
         $select->from('user');
-        $result = $this->_object->fetchAll($select);
+        $result = $this->object->fetchAll($select);
         $this->assertInternalType('array', $result);
     }
 
@@ -132,7 +132,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
         $select->columns(array('email'));
         $select->where->equalTo('login', 'test');
 
-        $result = $this->_object->fetchOne($select);
+        $result = $this->object->fetchOne($select);
         $this->assertEquals('test@test.com', $result);
     }
 
@@ -142,7 +142,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchOne()
     {
-        $result = $this->_object->fetchOne($this->_object->select());
+        $result = $this->object->fetchOne($this->object->select());
         $this->assertInternalType('integer', $result);
     }
 
@@ -152,7 +152,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchOneWitthFakeOption()
     {
-        $result = $this->_object->fetchOne($this->_object->select(array('id' => 42)));
+        $result = $this->object->fetchOne($this->object->select(array('id' => 42)));
         $this->assertFalse($result);
     }
 
@@ -163,7 +163,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     {
         $select = new Select();
         $select->from('user');
-        $result = $this->_object->execute($select);
+        $result = $this->object->execute($select);
         $this->assertInstanceOf('Zend\Db\Adapter\Driver\Pdo\Result', $result);
     }
 
@@ -172,7 +172,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLastInsertId()
     {
-        $this->assertInternalType('integer', $this->_object->getLastInsertId());
+        $this->assertInternalType('integer', $this->object->getLastInsertId());
     }
 
     /**
@@ -180,7 +180,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testEvents()
     {
-        $this->assertInstanceOf('Gc\Event\StaticEventManager', $this->_object->events());
+        $this->assertInstanceOf('Gc\Event\StaticEventManager', $this->object->events());
     }
 
     /**
@@ -188,6 +188,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDriverName()
     {
-        $this->assertInternalType('string', $this->_object->getDriverName());
+        $this->assertInternalType('string', $this->object->getDriverName());
     }
 }

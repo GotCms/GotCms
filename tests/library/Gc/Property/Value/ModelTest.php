@@ -49,42 +49,42 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Model
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-    protected $_documentType;
+    protected $documentType;
 
     /**
      * @var TabModel
      */
-    protected $_tab;
+    protected $tab;
 
     /**
      * @var DatatypeModel
      */
-    protected $_datatype;
+    protected $datatype;
 
     /**
      * @var PropertyModel
      */
-    protected $_property;
+    protected $property;
 
     /**
      * @var DocumentModel
@@ -97,67 +97,67 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = LayoutModel::fromArray(array(
+        $this->layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
             'login' => 'test',
             'user_acl_role_id' => 1,
         ));
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = DocumentTypeModel::fromArray(array(
+        $this->documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
-        $this->_documentType->save();
+        $this->documentType->save();
 
-        $this->_tab = TabModel::fromArray(array(
+        $this->tab = TabModel::fromArray(array(
             'name' => 'TabTest',
             'description' => 'TabTest',
             'sort_order' => 1,
-            'document_type_id' => $this->_documentType->getId(),
+            'document_type_id' => $this->documentType->getId(),
         ));
-        $this->_tab->save();
+        $this->tab->save();
 
-        $this->_datatype = DatatypeModel::fromArray(array(
+        $this->datatype = DatatypeModel::fromArray(array(
             'name' => 'BooleanTest',
             'prevalue_value' => '',
             'model' => 'Boolean',
         ));
-        $this->_datatype->save();
+        $this->datatype->save();
 
-        $this->_property = PropertyModel::fromArray(array(
+        $this->property = PropertyModel::fromArray(array(
             'name' => 'DatatypeTest',
             'identifier' => 'DatatypeTest',
             'description' => 'DatatypeTest',
             'required' => FALSE,
             'sort_order' => 1,
-            'tab_id' => $this->_tab->getId(),
-            'datatype_id' => $this->_datatype->getId(),
+            'tab_id' => $this->tab->getId(),
+            'datatype_id' => $this->datatype->getId(),
         ));
 
-        $this->_property->save();
+        $this->property->save();
 
         $this->_document = DocumentModel::fromArray(array(
             'name' => 'DocumentTest',
@@ -165,21 +165,21 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             'status' => DocumentModel::STATUS_ENABLE,
             'sort_order' => 1,
             'show_in_nav' => TRUE,
-            'user_id' => $this->_user->getId(),
-            'document_type_id' => $this->_documentType->getId(),
-            'view_id' => $this->_view->getId(),
-            'layout_id' => $this->_layout->getId(),
+            'user_id' => $this->user->getId(),
+            'document_type_id' => $this->documentType->getId(),
+            'view_id' => $this->view->getId(),
+            'layout_id' => $this->layout->getId(),
             'parent_id' => 0,
         ));
         $this->_document->save();
 
-        $this->_object = Model::fromArray(array(
+        $this->object = Model::fromArray(array(
             'document_id' => $this->_document->getId(),
-            'property_id' => $this->_property->getId(),
+            'property_id' => $this->property->getId(),
             'value' => '',
         ));
 
-        $this->_object->save();
+        $this->object->save();
     }
 
     /**
@@ -188,21 +188,21 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->_property->delete();
-        $this->_datatype->delete();
-        $this->_tab->delete();
-        $this->_documentType->delete();
-        $this->_user->delete();
-        $this->_layout->delete();
-        $this->_view->delete();
-        unset($this->_datatype);
-        unset($this->_property);
-        unset($this->_tab);
-        unset($this->_documentType);
-        unset($this->_user);
-        unset($this->_layout);
-        unset($this->_view);
-        unset($this->_object);
+        $this->property->delete();
+        $this->datatype->delete();
+        $this->tab->delete();
+        $this->documentType->delete();
+        $this->user->delete();
+        $this->layout->delete();
+        $this->view->delete();
+        unset($this->datatype);
+        unset($this->property);
+        unset($this->tab);
+        unset($this->documentType);
+        unset($this->user);
+        unset($this->layout);
+        unset($this->view);
+        unset($this->object);
     }
 
     /**
@@ -210,7 +210,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->assertInstanceOf('Gc\Property\Value\Model', $this->_object->load($this->_object->getId(), $this->_document->getId(), $this->_property->getId()));
+        $this->assertInstanceOf('Gc\Property\Value\Model', $this->object->load($this->object->getId(), $this->_document->getId(), $this->property->getId()));
     }
 
     /**
@@ -218,7 +218,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromArray()
     {
-        $this->assertInstanceOf('Gc\Property\Value\Model', Model::fromArray($this->_object->getData()));
+        $this->assertInstanceOf('Gc\Property\Value\Model', Model::fromArray($this->object->getData()));
     }
 
     /**
@@ -226,7 +226,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromId()
     {
-        $this->assertInstanceOf('Gc\Property\Value\Model', Model::fromId($this->_object->getId()));
+        $this->assertInstanceOf('Gc\Property\Value\Model', Model::fromId($this->object->getId()));
     }
 
     /**
@@ -242,7 +242,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertInternalType('integer', $this->_object->save());
+        $this->assertInternalType('integer', $this->object->save());
     }
 
     /**
@@ -251,7 +251,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithWrongValues()
     {
         $this->setExpectedException('Gc\Exception');
-        $this->_object->setDocumentId(NULL);
-        $this->assertFalse($this->_object->save());
+        $this->object->setDocumentId(NULL);
+        $this->assertFalse($this->object->save());
     }
 }

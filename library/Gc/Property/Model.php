@@ -27,9 +27,9 @@
 
 namespace Gc\Property;
 
-use Gc\Db\AbstractTable,
-    Zend\Db\Sql\Select,
-    Zend\Db\TableGateway\TableGateway;
+use Gc\Db\AbstractTable;
+use Zend\Db\Sql\Select;
+use Zend\Db\TableGateway\TableGateway;
 
 /**
  * Property Model
@@ -45,14 +45,14 @@ class Model extends AbstractTable
      *
      * @var \Gc\Property\Value\Model
      */
-    protected         $_value;
+    protected $value;
 
     /**
      * Table name
      *
      * @var string
      */
-    protected         $_name = 'property';
+    protected $name = 'property';
 
     /**
      * Get if property is required or not
@@ -60,20 +60,16 @@ class Model extends AbstractTable
      * @param Boolean $value to set value
      * @return mixed
      */
-    public function isRequired($value = NULL)
+    public function isRequired($value = null)
     {
-        if($value === NULL)
-        {
+        if ($value === null) {
             return $this->getData('required');
         }
 
-        if($value === TRUE)
-        {
-            $this->setData('required', TRUE);
-        }
-        else
-        {
-            $this->setData('required', FALSE);
+        if ($value === true) {
+            $this->setData('required', true);
+        } else {
+            $this->setData('required', false);
         }
 
         return $this;
@@ -87,12 +83,11 @@ class Model extends AbstractTable
      */
     public function setValue($value)
     {
-        if(empty($this->_value))
-        {
+        if (empty($this->value)) {
             $this->loadValue();
         }
 
-        $this->_value->setValue($value);
+        $this->value->setValue($value);
 
         return $this;
     }
@@ -104,10 +99,10 @@ class Model extends AbstractTable
      */
     public function loadValue()
     {
-        $property_value = new Value\Model();
-        $property_value->load(NULL, $this->getDocumentId(), $this->getId());
+        $propertyvalue = new Value\Model();
+        $propertyvalue->load(null, $this->getDocumentId(), $this->getId());
 
-        $this->_value = $property_value;
+        $this->value = $propertyvalue;
 
         return $this;
     }
@@ -119,12 +114,11 @@ class Model extends AbstractTable
      */
     public function getValue()
     {
-        if(empty($this->_value))
-        {
+        if (empty($this->value)) {
             $this->loadValue();
         }
 
-        return $this->_value->getValue();
+        return $this->value->getValue();
     }
 
     /**
@@ -134,12 +128,11 @@ class Model extends AbstractTable
      */
     public function getValueModel()
     {
-        if(empty($this->_value))
-        {
+        if (empty($this->value)) {
             $this->loadValue();
         }
 
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -150,14 +143,11 @@ class Model extends AbstractTable
     public function saveValue()
     {
         $value = $this->getValue();
-        $this->_value->save();
-        if((is_null($value) or $value === '') and $this->isRequired())
-        {
-            return FALSE;
-        }
-        else
-        {
-            return TRUE;
+        $this->value->save();
+        if ((is_null($value) or $value === '') and $this->isRequired()) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -168,7 +158,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
@@ -178,40 +168,31 @@ class Model extends AbstractTable
             'datatype_id' => $this->getDatatypeId(),
         );
 
-        if($this->getDriverName() == 'pdo_pgsql')
-        {
-            $array_save['required'] = $this->isRequired() === TRUE ? 'TRUE' : 'FALSE';
-        }
-        else
-        {
-            $array_save['required'] = $this->isRequired() === TRUE ? 1 : 0;
+        if ($this->getDriverName() == 'pdo_pgsql') {
+            $array_save['required'] = $this->isRequired() === true ? 'true' : 'false';
+        } else {
+            $array_save['required'] = $this->isRequired() === true ? 1 : 0;
         }
 
-        try
-        {
+        try {
             $id = $this->getId();
-            if(empty($id))
-            {
+            if (empty($id)) {
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
-            }
-            else
-            {
+            } else {
                 $this->update($array_save, array('id' => (int)$this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
             return $this->getId();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -221,29 +202,25 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
         $id = $this->getId();
-        if(!empty($id))
-        {
-            try
-            {
+        if (!empty($id)) {
+            try {
                 parent::delete(array('id' => (int)$id));
                 $table = new TableGateway('property_value', $this->getAdapter());
                 $result = $table->delete(array('property_id' => (int)$id));
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage());
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -252,7 +229,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\Property\Model
      */
-    static function fromArray(array $array)
+    public static function fromArray(array $array)
     {
         $property_table = new Model();
         $property_table->setData($array);
@@ -267,19 +244,16 @@ class Model extends AbstractTable
      * @param integer $property_id
      * @return \Gc\Property\Model
      */
-    static function fromId($property_id)
+    public static function fromId($property_id)
     {
         $property_table = new Model();
         $row = $property_table->fetchRow($property_table->select(array('id' => (int)$property_id)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $property_table->setData((array)$row);
             $property_table->setOrigData();
             return $property_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -290,28 +264,28 @@ class Model extends AbstractTable
      * @param id $document_id
      * @return \Gc\Property\Model
      */
-    static function fromIdentifier($identifier, $document_id)
+    public static function fromIdentifier($identifier, $document_id)
     {
         $property_table = new Model();
-        $row = $property_table->fetchRow($property_table->select(function(Select $select) use ($document_id, $identifier)
-        {
-            $select->join(array('t' => 'tab'), 't.id = property.tab_id', array());
-            $select->join(array('dt' => 'document_type'), 'dt.id = t.document_type_id', array());
-            $select->join(array('d' => 'document'), 'd.document_type_id = dt.id', array());
-            $select->where->equalTo('d.id', $document_id);
-            $select->where->equalTo('identifier', $identifier);
-        }));
+        $row = $property_table->fetchRow(
+            $property_table->select(
+                function (Select $select) use ($document_id, $identifier) {
+                    $select->join(array('t' => 'tab'), 't.id = property.tab_id', array());
+                    $select->join(array('dt' => 'document_type'), 'dt.id = t.document_type_id', array());
+                    $select->join(array('d' => 'document'), 'd.document_type_id = dt.id', array());
+                    $select->where->equalTo('d.id', $document_id);
+                    $select->where->equalTo('identifier', $identifier);
+                }
+            )
+        );
 
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $property_table->setData((array)$row);
             $property_table->setDocumentId($document_id);
             $property_table->setOrigData();
             return $property_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 }

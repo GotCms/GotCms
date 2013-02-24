@@ -27,9 +27,10 @@
 
 namespace Gc\Module\Controller;
 
-use Zend\Stdlib\RequestInterface as Request,
-    Zend\Stdlib\ResponseInterface as Response,
-    Zend\Mvc\Controller\AbstractActionController;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\Mvc\Controller\AbstractActionController;
+
 /**
  * Abstract module controller
  *

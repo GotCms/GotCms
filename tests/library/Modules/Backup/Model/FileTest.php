@@ -39,7 +39,7 @@ class FilesTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Files
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -47,7 +47,7 @@ class FilesTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new Files;
+        $this->object = new Files;
     }
 
     /**
@@ -64,6 +64,6 @@ class FilesTest extends \PHPUnit_Framework_TestCase
      */
     public function testExport()
     {
-        $this->assertInternalType('string', $this->_object->export());
+        $this->assertInternalType('string', $this->object->export());
     }
 }

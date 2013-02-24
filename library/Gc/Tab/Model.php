@@ -27,9 +27,9 @@
 
 namespace Gc\Tab;
 
-use Gc\Db\AbstractTable,
-    Gc\Property,
-    Zend\Db\Sql\Select;
+use Gc\Db\AbstractTable;
+use Gc\Property;
+use Zend\Db\Sql\Select;
 
 /**
  * Tab Model
@@ -45,7 +45,7 @@ class Model extends AbstractTable
      *
      * @var string
      */
-    protected $_name = 'tab';
+    protected $name = 'tab';
 
     /**
      * Initiliaze Tab
@@ -54,28 +54,26 @@ class Model extends AbstractTable
      * @param integer $document_type_id Optional
      * @return \Gc\Tab\Model
      */
-    public function load($tab_id = NULL, $document_type_id = NULL)
+    public function load($tab_id = null, $document_type_id = null)
     {
         $this->setId((int)$tab_id);
         $this->setDocumentTypeId((int)$document_type_id);
 
-        $select = $this->select(function(Select $select)
-        {
-            if($this->getDocumentTypeId() !== NULL)
-            {
-                $select->where->equalTo('document_type_id', $this->getDocumentTypeId());
-            }
+        $select = $this->select(
+            function (Select $select) {
+                if ($this->getDocumentTypeId() !== null) {
+                    $select->where->equalTo('document_type_id', $this->getDocumentTypeId());
+                }
 
-            if($this->getId() !== NULL)
-            {
-                $select->where->equalTo('id', $this->getId());
+                if ($this->getId() !== null) {
+                    $select->where->equalTo('id', $this->getId());
+                }
             }
-        });
+        );
 
         $row = $this->fetchRow($select);
-        if(empty($row['id']))
-        {
-            return FALSE;
+        if (empty($row['id'])) {
+            return false;
         }
 
         $this->setName($row['name']);
@@ -93,7 +91,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
         $array_save = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
@@ -101,31 +99,25 @@ class Model extends AbstractTable
             'document_type_id' => $this->getDocumentTypeId(),
         );
 
-        try
-        {
+        try {
             $id = $this->getId();
-            if(empty($id))
-            {
+            if (empty($id)) {
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
-            }
-            else
-            {
+            } else {
                 $this->update($array_save, array('id' => (int)$this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
 
             return $this->getId();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -135,31 +127,27 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
         $tab_id = $this->getId();
-        if(!empty($tab_id))
-        {
-            try
-            {
+        if (!empty($tab_id)) {
+            try {
                 $properties_collection = new Property\Collection();
-                $properties_collection->load(NULL, $tab_id);
+                $properties_collection->load(null, $tab_id);
                 $properties_collection->delete();
                 parent::delete(array('id' => $tab_id));
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', NULL, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
             unset($this);
 
-            return TRUE;
+            return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', NULL, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -168,7 +156,7 @@ class Model extends AbstractTable
      * @param array $array
      * @return \Gc\Tab\Model
      */
-    static function fromArray(array $array)
+    public static function fromArray(array $array)
     {
         $tab_table = new Model();
         $tab_table->setData($array);
@@ -183,19 +171,16 @@ class Model extends AbstractTable
      * @param integer $tab_id
      * @return \Gc\Tab\Model
      */
-    static function fromId($tab_id)
+    public static function fromId($tab_id)
     {
         $tab_table = new Model();
         $row = $tab_table->fetchRow($tab_table->select(array('id' => (int)$tab_id)));
-        if(!empty($row))
-        {
+        if (!empty($row)) {
             $tab_table->setData((array)$row);
             $tab_table->setOrigData();
             return $tab_table;
-        }
-        else
-        {
-            return FALSE;
+        } else {
+            return false;
         }
     }
 
@@ -206,8 +191,7 @@ class Model extends AbstractTable
      */
     public function getDocumentType()
     {
-        if($this->getData('document_type') === NULL)
-        {
+        if ($this->getData('document_type') === null) {
             $this->setData('document_type', \Gc\DocumentType\Model::fromId($this->getDocumentTypeId()));
         }
 
@@ -221,8 +205,7 @@ class Model extends AbstractTable
      */
     public function getProperties()
     {
-        if($this->getData('properties') === NULL )
-        {
+        if ($this->getData('properties') === null ) {
             $properties_collection = new Property\Collection();
             $properties_collection->load($this->getDocumentTypeId(), $this->getId());
 

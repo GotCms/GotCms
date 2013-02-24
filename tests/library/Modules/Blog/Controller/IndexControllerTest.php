@@ -48,7 +48,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * @var IndexController
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var Bootstrap
@@ -63,22 +63,22 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-    protected $_documentType;
+    protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -86,23 +86,23 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = LayoutModel::fromArray(array(
+        $this->layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
@@ -110,28 +110,28 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = DocumentTypeModel::fromArray(array(
+        $this->documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
 
-        $this->_documentType->save();
+        $this->documentType->save();
 
         $this->_document = DocumentModel::fromArray(array(
             'name' => 'Document name',
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,
             'show_in_nav' => TRUE,
-            'user_id' => $this->_user->getId(),
-            'document_type_id' => $this->_documentType->getId(),
-            'view_id' => $this->_view->getId(),
-            'layout_id' => $this->_layout->getId(),
+            'user_id' => $this->user->getId(),
+            'document_type_id' => $this->documentType->getId(),
+            'view_id' => $this->view->getId(),
+            'layout_id' => $this->layout->getId(),
             'parent_id' => NULL
         ));
 
@@ -139,7 +139,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->_boostrap = new Bootstrap();
         $this->_boostrap->install();
-        $this->_object = new IndexController(Registry::get('Application')->getRequest(), Registry::get('Application')->getResponse());
+        $this->object = new IndexController(Registry::get('Application')->getRequest(), Registry::get('Application')->getResponse());
     }
 
     /**
@@ -150,16 +150,16 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->_boostrap->uninstall();
         $this->_document->delete();
-        $this->_view->delete();
-        $this->_layout->delete();
-        $this->_documentType->delete();
-        $this->_user->delete();
+        $this->view->delete();
+        $this->layout->delete();
+        $this->documentType->delete();
+        $this->user->delete();
         unset($this->_document);
-        unset($this->_object);
-        unset($this->_view);
-        unset($this->_layout);
-        unset($this->_documentType);
-        unset($this->_user);
+        unset($this->object);
+        unset($this->view);
+        unset($this->layout);
+        unset($this->documentType);
+        unset($this->user);
     }
 
     /**
@@ -167,7 +167,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testIndexAction()
     {
-        $this->assertInternalType('array', $this->_object->indexAction());
+        $this->assertInternalType('array', $this->object->indexAction());
     }
 
     /**
@@ -176,7 +176,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     public function testDocumentCommentActionWithRedirect()
     {
         $this->setExpectedException('Zend\Mvc\Exception\DomainException');
-        $this->assertInternalType('array', $this->_object->documentCommentAction());
+        $this->assertInternalType('array', $this->object->documentCommentAction());
     }
 
     /**
@@ -185,7 +185,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     public function testDocumentComment()
     {
         Registry::get('Application')->getRequest()->getQuery()->set('id', $this->_document->getId());
-        $this->assertInternalType('array', $this->_object->documentCommentAction());
+        $this->assertInternalType('array', $this->object->documentCommentAction());
     }
 
     /**
@@ -210,7 +210,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
             ),
         ));
 
-        $this->assertNUll($this->_object->documentCommentAction());
+        $this->assertNUll($this->object->documentCommentAction());
 
         $request->setMethod('GET');
     }

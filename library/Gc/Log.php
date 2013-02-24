@@ -34,5 +34,4 @@ namespace Gc;
  */
 class Log extends Mail
 {
-
 }

@@ -42,7 +42,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractModule
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -50,7 +50,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = $this->getMockForAbstractClass('Gc\Module\AbstractModule');
+        $this->object = $this->getMockForAbstractClass('Gc\Module\AbstractModule');
     }
 
     /**
@@ -62,22 +62,22 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Gc\Module\AbstractModule::_getAdapter
+     * @covers Gc\Module\AbstractModule::getAdapter
      */
     public function testGetAdapter()
     {
-        $class = $this->_getMethod('_getAdapter');
-        $this->assertInstanceOf('Zend\Db\Adapter\Adapter', $class->invokeArgs($this->_object, array()));
+        $class = $this->_getMethod('getAdapter');
+        $this->assertInstanceOf('Zend\Db\Adapter\Adapter', $class->invokeArgs($this->object, array()));
     }
 
     /**
-     * @covers Gc\Module\AbstractModule::_getDriverName
+     * @covers Gc\Module\AbstractModule::getDriverName
      */
     public function testGetDriverName()
     {
         $configuration = Registry::get('Configuration');
-        $class = $this->_getMethod('_getDriverName');
-        $this->assertEquals($configuration['db']['driver'], $class->invokeArgs($this->_object, array()));
+        $class = $this->_getMethod('getDriverName');
+        $this->assertEquals($configuration['db']['driver'], $class->invokeArgs($this->object, array()));
     }
 
     protected function _getMethod($name)

@@ -27,8 +27,9 @@
 
 namespace Modules\Backup;
 
-use Gc\Module\AbstractModule,
-    Zend\EventManager\Event;
+use Gc\Module\AbstractModule;
+use Zend\EventManager\Event;
+
 /**
  * Backup module bootstrap
  *
@@ -56,7 +57,7 @@ class Bootstrap extends AbstractModule
      */
     public function install()
     {
-        return TRUE;
+        return true;
     }
 
     /**
@@ -66,6 +67,6 @@ class Bootstrap extends AbstractModule
      */
     public function uninstall()
     {
-        return TRUE;
+        return true;
     }
 }

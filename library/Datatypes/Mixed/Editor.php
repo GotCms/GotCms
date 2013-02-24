@@ -27,10 +27,10 @@
 
 namespace Datatypes\Mixed;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Gc\Form\AbstractForm,
-    Zend\Form\Element,
-    Zend\Form\Fieldset;
+use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Gc\Form\AbstractForm;
+use Zend\Form\Element;
+use Zend\Form\Fieldset;
 
 /**
  * Editor for Mixed datatype
@@ -46,7 +46,7 @@ class Editor extends AbstractEditor
      *
      * @var array
      */
-    protected $_datatypes = array();
+    protected $datatypes = array();
 
     /**
      * Save mixed editor
@@ -63,24 +63,24 @@ class Editor extends AbstractEditor
         $datatypes = $post->get($this->getName());
         $_OLD_FILES = $_FILES;
 
-        if(!empty($datatypes) and is_array($datatypes))
-        {
-            foreach($datatypes as $line_id => $values)
-            {
+        if (!empty($datatypes) and is_array($datatypes)) {
+            foreach ($datatypes as $line_id => $values) {
                 $datatypes[$line_id] = array();
-                foreach($values as $datatype_id => $datatype)
-                {
-                    if(!empty($_OLD_FILES[$this->getName()]['name'][$line_id][$datatype_id]))
-                    {
+                foreach ($values as $datatype_id => $datatype) {
+                    if (!empty($_OLD_FILES[$this->getName()]['name'][$line_id][$datatype_id])) {
                         $name = array_keys($_OLD_FILES[$this->getName()]['name'][$line_id][$datatype_id]);
-                        if(!empty($name[0]))
-                        {
+                        if (!empty($name[0])) {
                             $data = array(
-                                'name'     => $_OLD_FILES[$this->getName()]['name'][$line_id][$datatype_id][$name[0]],
-                                'type'     => $_OLD_FILES[$this->getName()]['type'][$line_id][$datatype_id][$name[0]],
-                                'tmp_name' => $_OLD_FILES[$this->getName()]['tmp_name'][$line_id][$datatype_id][$name[0]],
-                                'error'    => $_OLD_FILES[$this->getName()]['error'][$line_id][$datatype_id][$name[0]],
-                                'error'    => $_OLD_FILES[$this->getName()]['error'][$line_id][$datatype_id][$name[0]],
+                                'name'     => $_OLD_FILES[$this->getName()]
+                                    ['name'][$line_id][$datatype_id][$name[0]],
+                                'type'     => $_OLD_FILES[$this->getName()]
+                                    ['type'][$line_id][$datatype_id][$name[0]],
+                                'tmp_name' => $_OLD_FILES[$this->getName()]
+                                    ['tmp_name'][$line_id][$datatype_id][$name[0]],
+                                'error'    => $_OLD_FILES[$this->getName()]
+                                    ['error'][$line_id][$datatype_id][$name[0]],
+                                'error'    => $_OLD_FILES[$this->getName()]
+                                    ['error'][$line_id][$datatype_id][$name[0]],
                             );
 
                             $_FILES[$name[0]] = $data;
@@ -88,18 +88,16 @@ class Editor extends AbstractEditor
                         }
                     }
 
-                    foreach($datatype as $name => $value)
-                    {
+                    foreach ($datatype as $name => $value) {
                         $post->set($name, $value);
                     }
 
                     //Get datatypes
                     $datatype_config = $datatypes_config[$datatype_id];
-                    $object = $this->_getDatatype($datatype_config['name']);
+                    $object = $this->loadDatatype($datatype_config['name']);
                     $editor = $object->getEditor($this->getProperty());
 
-                    if(!empty($datatype_config['config']))
-                    {
+                    if (!empty($datatype_config['config'])) {
                         $editor->setConfig(serialize($datatype_config['config']));
                     }
 
@@ -108,8 +106,7 @@ class Editor extends AbstractEditor
                         'value' => $editor->getValue()
                     );
 
-                    foreach($_OLD_POST as $key => $value)
-                    {
+                    foreach ($_OLD_POST as $key => $value) {
                         $post->set($key, $value);
                     }
 
@@ -134,30 +131,24 @@ class Editor extends AbstractEditor
         $datatypes = empty($config['datatypes']) ? array() : $config['datatypes'];
         $datatypes_elements = array();
         $line_id = 0;
-        if(!empty($values))
-        {
-            foreach($values as $line_id => $datatype_value)
-            {
-                foreach($datatype_value as $datatype_id => $value)
-                {
-                    if(empty($datatypes[$datatype_id]))
-                    {
+        if (!empty($values)) {
+            foreach ($values as $line_id => $datatype_value) {
+                foreach ($datatype_value as $datatype_id => $value) {
+                    if (empty($datatypes[$datatype_id])) {
                         continue;
                     }
 
                     $datatype_config = $datatypes[$datatype_id];
                      //Get datatypes
-                    $object = $this->_getDatatype($datatype_config['name']);
+                    $object = $this->loadDatatype($datatype_config['name']);
                     $editor = $object->getEditor($this->getProperty());
-                    if(empty($values[$line_id][$datatype_id]))
-                    {
+                    if (empty($values[$line_id][$datatype_id])) {
                         $values[$line_id][$datatype_id] = array('value' => '');
                     }
 
                     $editor->setValue($values[$line_id][$datatype_id]['value']);
 
-                    if(!empty($datatype_config['config']))
-                    {
+                    if (!empty($datatype_config['config'])) {
                         $editor->setConfig(serialize($datatype_config['config']));
                     }
 
@@ -167,7 +158,9 @@ class Editor extends AbstractEditor
                     $fieldset = new Fieldset($datatype_config['name'] . $datatype_id);
 
                     AbstractForm::addContent($fieldset, $editor->load(), $prefix);
-                    $datatypes_elements[$line_id][$datatype_id]['label'] = empty($datatype_config['label']) ? '' : $datatype_config['label'];
+                    $datatypes_elements[$line_id][$datatype_id]['label'] = empty($datatype_config['label']) ?
+                        '' :
+                        $datatype_config['label'];
                     $datatypes_elements[$line_id][$datatype_id]['fieldset'] = $fieldset;
                 }
             }
@@ -176,21 +169,18 @@ class Editor extends AbstractEditor
         //Defauts elements
 
         $template = array();
-        foreach($datatypes as $datatype_id => $datatype_config)
-        {
+        foreach ($datatypes as $datatype_id => $datatype_config) {
             $datatype_config = $datatypes[$datatype_id];
              //Get datatypes
-            $object = $this->_getDatatype($datatype_config['name']);
+            $object = $this->loadDatatype($datatype_config['name']);
             $editor = $object->getEditor($this->getProperty());
-            if(empty($values['#{line}'][$datatype_id]))
-            {
+            if (empty($values['#{line}'][$datatype_id])) {
                 $values['#{line}'][$datatype_id] = array('value' => '');
             }
 
             $editor->setValue($values['#{line}'][$datatype_id]['value']);
 
-            if(!empty($datatype_config['config']))
-            {
+            if (!empty($datatype_config['config'])) {
                 $editor->setConfig(serialize($datatype_config['config']));
             }
 
@@ -208,12 +198,15 @@ class Editor extends AbstractEditor
             $template[$datatype_id]['fieldset'] = $fieldset;
         }
 
-        return $this->addPath(__DIR__)->render('mixed-editor.phtml', array(
-            'datatypeName' => $this->getProperty()->getName(),
-            'datatypes' => $datatypes_elements,
-            'propertyName' => $this->getName(),
-            'templateElements' => $template,
-        ));
+        return $this->addPath(__DIR__)->render(
+            'mixed-editor.phtml',
+            array(
+                'datatypeName' => $this->getProperty()->getName(),
+                'datatypes' => $datatypes_elements,
+                'propertyName' => $this->getName(),
+                'templateElements' => $template,
+            )
+        );
     }
 
     /**
@@ -222,17 +215,16 @@ class Editor extends AbstractEditor
      * @param string $name
      * @return \Gc\Datatype\AbstractDatatype
      */
-    protected function _getDatatype($name)
+    protected function loadDatatype($name)
     {
-        if(!empty($this->_datatypes[$name]))
-        {
-            return $this->_datatypes[$name];
+        if (!empty($this->datatypes[$name])) {
+            return $this->datatypes[$name];
         }
 
         $class = 'Datatypes\\' . $name . '\Datatype';
         $object = new $class();
         $object->load($this->getDatatype()->getDatatypeModel(), $this->getProperty()->getDocumentId());
-        $this->_datatypes[$name] = $object;
-        return $this->_datatypes[$name];
+        $this->datatypes[$name] = $object;
+        return $this->datatypes[$name];
     }
 }

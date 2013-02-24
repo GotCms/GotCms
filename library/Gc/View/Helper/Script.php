@@ -27,10 +27,11 @@
 
 namespace Gc\View\Helper;
 
-use Zend\View\Helper\AbstractHelper,
-    Gc\Registry,
-    Gc\Script\Model as ScriptModel,
-    Gc\View\Stream;
+use Zend\View\Helper\AbstractHelper;
+use Gc\Registry;
+use Gc\Script\Model as ScriptModel;
+use Gc\View\Stream;
+
 /**
  * Retrieve script from identifier
  *
@@ -46,7 +47,7 @@ class Script extends AbstractHelper
      *
      * @var array
      */
-    protected $_params = array();
+    protected $__params = array();
 
     /**
      * Returns script from identifier.
@@ -58,23 +59,21 @@ class Script extends AbstractHelper
     public function __invoke($identifier, $params = array())
     {
         $existed = in_array('gc.script', stream_get_wrappers());
-        if(!$existed)
-        {
+        if (!$existed) {
             stream_wrapper_register('gc.script', 'Gc\View\Stream');
         }
 
         $script = ScriptModel::fromIdentifier($identifier);
-        if(empty($script))
-        {
-            return FALSE;
+        if (empty($script)) {
+            return false;
         }
 
-        $this->_params = $params;
+        $this->__params = $params;
         $name = $identifier . '-script.gc-stream';
 
         file_put_contents('gc.script://' . $name, $script->getContent());
 
-        return include('gc.script://' . $name);;
+        return include('gc.script://' . $name);
     }
 
     /**
@@ -85,12 +84,11 @@ class Script extends AbstractHelper
      */
     public function getParam($name)
     {
-        if(!empty($this->_params[$name]))
-        {
-            return $this->_params[$name];
+        if (!empty($this->__params[$name])) {
+            return $this->__params[$name];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -130,7 +128,7 @@ class Script extends AbstractHelper
      * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
      * @return mixed
      */
-    public function plugin($name, array $options = NULL)
+    public function plugin($name, array $options = null)
     {
         return Registry::get('Application')->getServiceManager()->get('controllerPluginManager')->get($name, $options);
     }
@@ -148,8 +146,7 @@ class Script extends AbstractHelper
     public function __call($method, $params)
     {
         $plugin = $this->plugin($method);
-        if(is_callable($plugin))
-        {
+        if (is_callable($plugin)) {
             return call_user_func_array($plugin, $params);
         }
 

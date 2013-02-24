@@ -44,7 +44,7 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
     /**
      * @var ModuleUrl
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var Router
@@ -57,7 +57,7 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new ModuleUrl;
+        $this->object = new ModuleUrl;
         $router = new Router();
         $router->addRoute('moduleEdit', array(
             'type' => 'Zend\Mvc\Router\Http\Segment',
@@ -72,8 +72,8 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
         $this->_router = $router;
         $view = new View;
         $view->getHelperPluginManager();
-        $this->_object->setView($view);
-        $this->_object->getView()->plugin('url')->setRouter($router);
+        $this->object->setView($view);
+        $this->object->getView()->plugin('url')->setRouter($router);
     }
 
     /**
@@ -86,7 +86,7 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
 
     public function testRoute()
     {
-        $url = $this->_object->__invoke();
+        $url = $this->object->__invoke();
         $this->assertEquals('/admin/module/1', $url);
     }
 
@@ -95,7 +95,7 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
      */
     public function testRouteWithControllerAndAction()
     {
-        $this->assertEquals('/admin/module/1/index/index', $this->_object->__invoke('index', 'index'));
+        $this->assertEquals('/admin/module/1/index/index', $this->object->__invoke('index', 'index'));
     }
 
     /**
@@ -103,6 +103,6 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
      */
     public function testRouteWithParams()
     {
-        $this->assertEquals('/admin/module/1/index/index?key=value', $this->_object->__invoke('index', 'index', array('key' => 'value')));
+        $this->assertEquals('/admin/module/1/index/index?key=value', $this->object->__invoke('index', 'index', array('key' => 'value')));
     }
 }

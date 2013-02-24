@@ -27,10 +27,10 @@
 
 namespace Modules\Backup\Model;
 
-use Gc\Core\Object,
-    ZipArchive,
-    RecursiveIteratorIterator,
-    RecursiveDirectoryIterator;
+use Gc\Core\Object;
+use ZipArchive;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 
 /**
  * Blog comment table
@@ -49,10 +49,13 @@ class Files extends Object
     public function export()
     {
         $tmp_file = tempnam(sys_get_temp_dir(), 'Gc');
-        $this->zip(array(
-            GC_APPLICATION_PATH . '/public/frontend',
-            GC_APPLICATION_PATH . '/public/media',
-        ), $tmp_file);
+        $this->zip(
+            array(
+                GC_APPLICATION_PATH . '/public/frontend',
+                GC_APPLICATION_PATH . '/public/media',
+            ),
+            $tmp_file
+        );
 
         return file_get_contents($tmp_file);
     }
@@ -66,37 +69,31 @@ class Files extends Object
     protected function zip(array $sources, $destination)
     {
         $zip = new ZipArchive();
-        if(!$zip->open($destination, ZIPARCHIVE::CREATE))
-        {
-            return FALSE;
+        if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
+            return false;
         }
 
-        foreach($sources as $source)
-        {
+        foreach ($sources as $source) {
             $source = str_replace('\\', '/', realpath($source));
-
-            if(is_dir($source) === TRUE)
-            {
-                $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+            if (is_dir($source) === true) {
+                $files = new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator($source),
+                    RecursiveIteratorIterator::SELF_FIRST
+                );
                 $directory_name = dirname($source);
-                foreach($files as $file)
-                {
+                foreach ($files as $file) {
                     $file = str_replace('\\', '/', $file);
 
                     // Ignore "." and ".." folders
-                    if(in_array(substr($file, strrpos($file, '/') + 1), array('.', '..')))
-                    {
+                    if (in_array(substr($file, strrpos($file, '/') + 1), array('.', '..'))) {
                         continue;
                     }
 
                     $file = realpath($file);
 
-                    if(is_dir($file) === TRUE)
-                    {
+                    if (is_dir($file) === true) {
                         $zip->addEmptyDir(str_replace($directory_name . '/', '', $file . '/'));
-                    }
-                    elseif(is_file($file) === TRUE)
-                    {
+                    } elseif (is_file($file) === true) {
                         $zip->addFromString(str_replace($directory_name . '/', '', $file), file_get_contents($file));
                     }
                 }

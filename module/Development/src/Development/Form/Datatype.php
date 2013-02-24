@@ -27,10 +27,10 @@
 
 namespace Development\Form;
 
-use Gc\Form\AbstractForm,
-    Zend\Validator\Db,
-    Zend\Form\Element,
-    Zend\InputFilter\Factory as InputFilterFactory;
+use Gc\Form\AbstractForm;
+use Zend\Validator\Db;
+use Zend\Form\Element;
+use Zend\InputFilter\Factory as InputFilterFactory;
 
 /**
  * Datatype form
@@ -53,8 +53,7 @@ class Datatype extends AbstractForm
         $path = GC_APPLICATION_PATH . '/library/Datatypes/';
         $list_dir = glob($path . '*', GLOB_ONLYDIR);
         $options = array();
-        foreach($list_dir as $dir)
-        {
+        foreach ($list_dir as $dir) {
             $dir = str_replace($path, '', $dir);
             $options[$dir] = $dir;
         }
@@ -65,28 +64,30 @@ class Datatype extends AbstractForm
         $this->add($model);
 
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(array(
-            'name' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                    array(
-                        'name' => 'db\\no_record_exists',
-                        'options' => array(
-                            'table' => 'datatype',
-                            'field' => 'name',
-                            'adapter' => $this->getAdapter(),
+        $input_filter = $input_filter_factory->createInputFilter(
+            array(
+                'name' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                        array(
+                            'name' => 'db\\no_record_exists',
+                            'options' => array(
+                                'table' => 'datatype',
+                                'field' => 'name',
+                                'adapter' => $this->getAdapter(),
+                            ),
                         ),
                     ),
                 ),
-            ),
-            'model' => array(
-                'required' => TRUE,
-                'validators' => array(
-                    array('name' => 'not_empty'),
+                'model' => array(
+                    'required' => true,
+                    'validators' => array(
+                        array('name' => 'not_empty'),
+                    )
                 )
             )
-        ));
+        );
 
         $this->setInputFilter($input_filter);
     }

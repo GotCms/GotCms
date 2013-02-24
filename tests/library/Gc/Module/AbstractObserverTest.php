@@ -43,7 +43,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * @var AbstractObserver
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -51,7 +51,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = $this->getMockForAbstractClass('Gc\Module\AbstractObserver');
+        $this->object = $this->getMockForAbstractClass('Gc\Module\AbstractObserver');
     }
 
     /**
@@ -67,26 +67,26 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testEvents()
     {
-        $this->assertInstanceOf('Gc\Event\StaticEventManager', $this->_object->events());
+        $this->assertInstanceOf('Gc\Event\StaticEventManager', $this->object->events());
     }
 
     /**
-     * @covers Gc\Module\AbstractObserver::_getAdapter
+     * @covers Gc\Module\AbstractObserver::getAdapter
      */
     public function testGetAdapter()
     {
-        $class = $this->_getMethod('_getAdapter');
-        $this->assertInstanceOf('Zend\Db\Adapter\Adapter', $class->invokeArgs($this->_object, array()));
+        $class = $this->_getMethod('getAdapter');
+        $this->assertInstanceOf('Zend\Db\Adapter\Adapter', $class->invokeArgs($this->object, array()));
     }
 
     /**
-     * @covers Gc\Module\AbstractObserver::_getDriverName
+     * @covers Gc\Module\AbstractObserver::getDriverName
      */
     public function testGetDriverName()
     {
         $configuration = Registry::get('Configuration');
-        $class = $this->_getMethod('_getDriverName');
-        $this->assertEquals($configuration['db']['driver'], $class->invokeArgs($this->_object, array()));
+        $class = $this->_getMethod('getDriverName');
+        $this->assertEquals($configuration['db']['driver'], $class->invokeArgs($this->object, array()));
     }
 
     /**
@@ -94,7 +94,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $this->assertEquals('Render view' . PHP_EOL, $this->_object->addPath(__DIR__ . '/_files')->render('view.phtml'));
+        $this->assertEquals('Render view' . PHP_EOL, $this->object->addPath(__DIR__ . '/_files')->render('view.phtml'));
     }
 
     /**
@@ -102,17 +102,17 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddPath()
     {
-        $this->assertInstanceOf('Gc\Module\AbstractObserver', $this->_object->addPath(__DIR__));
+        $this->assertInstanceOf('Gc\Module\AbstractObserver', $this->object->addPath(__DIR__));
     }
 
     /**
-     * @covers Gc\Module\AbstractObserver::_checkRenderer
+     * @covers Gc\Module\AbstractObserver::checkRenderer
      */
     public function testCheckRenderer()
     {
         $configuration = Registry::get('Configuration');
-        $class = $this->_getMethod('_checkRenderer');
-        $this->assertInstanceOf('Gc\Module\AbstractObserver', $class->invokeArgs($this->_object, array()));
+        $class = $this->_getMethod('checkRenderer');
+        $this->assertInstanceOf('Gc\Module\AbstractObserver', $class->invokeArgs($this->object, array()));
     }
 
     protected function _getMethod($name)

@@ -24,14 +24,11 @@
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
-
 namespace Statistics\Controller;
 
-require_once('vendor/SVGGraph/SVGGraph.php');
-
-use Gc\Mvc\Controller\Action,
-    Gc\User\Visitor,
-    SVGGraph;
+use Gc\Mvc\Controller\Action;
+use Gc\User\Visitor;
+use SVGGraph;
 
 /**
  * Statistics controller
@@ -49,6 +46,11 @@ class IndexController extends Action
      */
     public function indexAction()
     {
+        /**
+         * Load SVGGraph
+         */
+        require_once('vendor/SVGGraph/SVGGraph.php');
+
         $visitor_model = new Visitor();
 
         $settings = array(
@@ -72,22 +74,21 @@ class IndexController extends Action
         $graph->colours = array(array('#656565','#959595'));
 
         $data = array();
-        foreach(array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR') as $type => $sql_value)
-        {
-            switch($type)
-            {
+        $array = array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR');
+        foreach ($array as $type => $sql_value) {
+            switch($type) {
                 case 'hours':
                     $label = 'This day';
-                break;
+                    break;
                 case 'days':
                     $label = 'This month';
-                break;
+                    break;
                 case 'months':
                     $label = 'This year';
-                break;
+                    break;
                 case 'years':
                     $label = 'All the time';
-                break;
+                    break;
             }
 
             $data[$type] = array(

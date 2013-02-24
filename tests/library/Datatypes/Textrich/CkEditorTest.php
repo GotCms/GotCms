@@ -40,7 +40,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * @var CkEditor
      */
-    protected $_object;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -48,7 +48,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_object = new CkEditor;
+        $this->object = new CkEditor;
     }
 
     /**
@@ -57,7 +57,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
     }
 
     /**
@@ -65,8 +65,8 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetParameters()
     {
-        $this->assertInstanceOf('Datatypes\Textrich\CkEditor', $this->_object->setParameters(array()));
-        $this->assertInstanceOf('Datatypes\Textrich\CkEditor', $this->_object->setParameters(array('toolbar-items' => 'test')));
+        $this->assertInstanceOf('Datatypes\Textrich\CkEditor', $this->object->setParameters(array()));
+        $this->assertInstanceOf('Datatypes\Textrich\CkEditor', $this->object->setParameters(array('toolbar-items' => 'test')));
     }
 
     /**
@@ -74,8 +74,8 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetToolbarAsJs()
     {
-        $this->_object->setParameters(array('toolbar-items' => array('Source' => '1')));
-        $this->assertEquals("[['Source'], ['/'], ['/'],]", $this->_object->getToolbarAsJs());
+        $this->object->setParameters(array('toolbar-items' => array('Source' => '1')));
+        $this->assertEquals("[['Source'], ['/'], ['/'],]", $this->object->getToolbarAsJs());
     }
 
     /**
@@ -83,7 +83,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAllToolbarItems()
     {
-        $this->assertInternalType('array', $this->_object->getAllToolbarItems());
+        $this->assertInternalType('array', $this->object->getAllToolbarItems());
     }
 
     /**
@@ -91,7 +91,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAllItems()
     {
-        $this->_object->setParameters(array('toolbar-items' => array('Source' => '1')));
-        $this->assertInternalType('array', $this->_object->getAllItems());
+        $this->object->setParameters(array('toolbar-items' => array('Source' => '1')));
+        $this->assertInternalType('array', $this->object->getAllItems());
     }
 }

@@ -46,14 +46,14 @@
     echo $this->HeadLink();
     ?>
 </head>
-<body<?php if(!empty($this->module)): ?> id="module-<?php echo $this->escapeHtml($this->module); ?>"<?php endif; ?>>
+<body<?php if (!empty($this->module)): ?> id="module-<?php echo $this->escapeHtml($this->module); ?>"<?php endif; ?>>
     <header class="gradient-black">
         <?php echo $this->partial('navigation.phtml', array('active' => $this->module, 'adminUser' => $this->adminUser)); ?>
     </header>
 
     <div id="main">
 
-        <?php if(!empty($this->module)): ?>
+        <?php if (!empty($this->module)): ?>
             <div id="menu">
                 <?php echo $this->partial($this->module . '-menu.phtml', array('treeview' => $this->treeview, 'moduleMenu' => $this->moduleMenu)); ?>
             </div>
@@ -72,17 +72,15 @@
     </footer>
 
     <script type="text/javascript">
-        <?php if(!empty($this->routes)): ?>
-            $(document).ready(function()
-            {
+        <?php if (!empty($this->routes)): ?>
+            $(document).ready(function() {
                 Gc.setOption('routes', $.parseJSON('<?php echo $this->escapeJs($this->routes); ?>'));
                 Gc.initDocumentMenu(<?php echo (int)$this->documentId; ?>, '<?php echo $this->escapeJs($this->url('documentSortOrder')); ?>');
             });
         <?php endif; ?>
 
-        <?php if(!empty($this->moduleRoutes)): ?>
-            $(document).ready(function()
-            {
+        <?php if (!empty($this->moduleRoutes)): ?>
+            $(document).ready(function() {
                 Gc.setOption('moduleRoutes', $.parseJSON('<?php echo $this->escapeJs($this->moduleRoutes); ?>'));
                 Gc.initModuleMenu(<?php echo (int)$this->moduleId; ?>);
             });

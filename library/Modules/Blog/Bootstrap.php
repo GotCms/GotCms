@@ -27,8 +27,9 @@
 
 namespace Modules\Blog;
 
-use Gc\Module\AbstractModule,
-    Zend\EventManager\Event;
+use Gc\Module\AbstractModule;
+use Zend\EventManager\Event;
+
 /**
  * Blog module bootstrap
  *
@@ -56,10 +57,14 @@ class Bootstrap extends AbstractModule
      */
     public function install()
     {
-        $pdo_resource = $this->_getAdapter()->getDriver()->getConnection()->getResource();
-        $pdo_resource->exec(file_get_contents(__DIR__ . sprintf('/sql/install-%s.sql', str_replace('pdo_', '', $this->_getDriverName()))));
+        $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();
+        $pdo_resource->exec(
+            file_get_contents(
+                __DIR__ . sprintf('/sql/install-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
+            )
+        );
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -69,8 +74,13 @@ class Bootstrap extends AbstractModule
      */
     public function uninstall()
     {
-        $pdo_resource = $this->_getAdapter()->getDriver()->getConnection()->getResource();
-        $pdo_resource->exec(file_get_contents(__DIR__ . sprintf('/sql/uninstall-%s.sql', str_replace('pdo_', '', $this->_getDriverName()))));
-        return TRUE;
+        $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();
+        $pdo_resource->exec(
+            file_get_contents(
+                __DIR__ . sprintf('/sql/uninstall-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
+            )
+        );
+
+        return true;
     }
 }

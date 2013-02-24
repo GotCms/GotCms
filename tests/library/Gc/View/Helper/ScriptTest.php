@@ -44,7 +44,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Script
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var ScriptModel
@@ -64,7 +64,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
             'content' => 'script Content',
         ));
         $this->_script->save();
-        $this->_object = new Script;
+        $this->object = new Script;
     }
 
     /**
@@ -73,7 +73,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object);
+        unset($this->object);
         $this->_script->delete();
         unset($this->_script);
     }
@@ -84,10 +84,10 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     public function test__invoke()
     {
         ob_start();
-        $this->_object->__invoke('script-identifier');
+        $this->object->__invoke('script-identifier');
         $data = ob_get_clean();
         $this->assertEquals('script Content', $data);
-        $this->assertFalse($this->_object->__invoke('fake-script-identifier'));
+        $this->assertFalse($this->object->__invoke('fake-script-identifier'));
     }
 
     /**
@@ -96,10 +96,10 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     public function testGetParam()
     {
         ob_start();
-        $this->_object->__invoke('script-identifier', array('key' => 'value'));
+        $this->object->__invoke('script-identifier', array('key' => 'value'));
         $data = ob_get_clean();
-        $this->assertEquals('value', $this->_object->getParam('key'));
-        $this->assertNull($this->_object->getParam('fake-key'));
+        $this->assertEquals('value', $this->object->getParam('key'));
+        $this->assertNull($this->object->getParam('fake-key'));
     }
 
     /**
@@ -112,9 +112,9 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
         $view = new View();
         $view->plugin('view_model')->setRoot($parent);
         $view->resolver()->addPath(__DIR__ . '/_files/views');
-        $this->_object->setView($view);
-        $this->_object->getView()->layout()->currentDocument = new DocumentModel();
-        $this->assertInstanceOf('Gc\Document\Model', $this->_object->getDocument());
+        $this->object->setView($view);
+        $this->object->getView()->layout()->currentDocument = new DocumentModel();
+        $this->assertInstanceOf('Gc\Document\Model', $this->object->getDocument());
     }
 
     /**
@@ -122,7 +122,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRequest()
     {
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Request', $this->_object->getRequest());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Request', $this->object->getRequest());
     }
 
     /**
@@ -130,7 +130,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetResponse()
     {
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $this->_object->getResponse());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $this->object->getResponse());
     }
 
     /**
@@ -138,7 +138,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function testPlugin()
     {
-        $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Redirect', $this->_object->plugin('redirect'));
+        $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Redirect', $this->object->plugin('redirect'));
     }
 
     /**
@@ -146,7 +146,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function test__call()
     {
-        $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Redirect', $this->_object->redirect());
+        $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Redirect', $this->object->redirect());
     }
 
     /**
@@ -154,6 +154,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function test__callWithIsCallablePlugin()
     {
-        $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Params', $this->_object->params());
+        $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Params', $this->object->params());
     }
 }

@@ -47,7 +47,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Observer
      */
-    protected $_object;
+    protected $object;
 
     /**
      * @var Model
@@ -57,22 +57,22 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * @var ViewModel
      */
-    protected $_view;
+    protected $view;
 
     /**
      * @var LayoutModel
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * @var UserModel
      */
-    protected $_user;
+    protected $user;
 
     /**
      * @var DocumentTypeModel
      */
-    protected $_documentType;
+    protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -80,23 +80,23 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_view = ViewModel::fromArray(array(
+        $this->view = ViewModel::fromArray(array(
             'name' => 'View Name',
             'identifier' => 'View identifier',
             'description' => 'View Description',
             'content' => 'View Content'
         ));
-        $this->_view->save();
+        $this->view->save();
 
-        $this->_layout = LayoutModel::fromArray(array(
+        $this->layout = LayoutModel::fromArray(array(
             'name' => 'Layout Name',
             'identifier' => 'Layout identifier',
             'description' => 'Layout Description',
             'content' => 'Layout Content'
         ));
-        $this->_layout->save();
+        $this->layout->save();
 
-        $this->_user = UserModel::fromArray(array(
+        $this->user = UserModel::fromArray(array(
             'lastname' => 'User test',
             'firstname' => 'User test',
             'email' => 'test@test.com',
@@ -104,33 +104,33 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
             'user_acl_role_id' => 1,
         ));
 
-        $this->_user->setPassword('test');
-        $this->_user->save();
+        $this->user->setPassword('test');
+        $this->user->save();
 
-        $this->_documentType = DocumentTypeModel::fromArray(array(
+        $this->documentType = DocumentTypeModel::fromArray(array(
             'name' => 'Document Type Name',
             'description' => 'Document Type description',
             'icon_id' => 1,
-            'default_view_id' => $this->_view->getId(),
-            'user_id' => $this->_user->getId(),
+            'defaultview_id' => $this->view->getId(),
+            'user_id' => $this->user->getId(),
         ));
 
-        $this->_documentType->save();
+        $this->documentType->save();
 
         $this->_document = DocumentModel::fromArray(array(
             'name' => 'Document name',
             'url_key' => 'url-key',
             'status' => DocumentModel::STATUS_ENABLE,
             'show_in_nav' => TRUE,
-            'user_id' => $this->_user->getId(),
-            'document_type_id' => $this->_documentType->getId(),
-            'view_id' => $this->_view->getId(),
-            'layout_id' => $this->_layout->getId(),
+            'user_id' => $this->user->getId(),
+            'document_type_id' => $this->documentType->getId(),
+            'view_id' => $this->view->getId(),
+            'layout_id' => $this->layout->getId(),
             'parent_id' => NULL
         ));
 
         $this->_document->save();
-        $this->_object = new Observer;
+        $this->object = new Observer;
     }
 
     /**
@@ -140,16 +140,16 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->_document->delete();
-        $this->_documentType->delete();
-        $this->_user->delete();
-        $this->_layout->delete();
-        $this->_view->delete();
+        $this->documentType->delete();
+        $this->user->delete();
+        $this->layout->delete();
+        $this->view->delete();
         unset($this->_document);
-        unset($this->_documentType);
-        unset($this->_user);
-        unset($this->_layout);
-        unset($this->_view);
-        unset($this->_object);
+        unset($this->documentType);
+        unset($this->user);
+        unset($this->layout);
+        unset($this->view);
+        unset($this->object);
         StaticEventManager::resetInstance();
     }
 
@@ -158,7 +158,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->assertNull($this->_object->init());
+        $this->assertNull($this->object->init());
     }
 
     /**
@@ -169,8 +169,8 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
         $mvc_event = Registry::get('Application')->getMvcEvent();
         $mvc_event->setParam('object', $this->_document);
         $this->_document->setUrlKey('new-url-key');
-        $this->assertNull($this->_object->addElement($mvc_event));
-        $this->assertNull($this->_object->addElement($mvc_event));
+        $this->assertNull($this->object->addElement($mvc_event));
+        $this->assertNull($this->object->addElement($mvc_event));
     }
 
     /**
@@ -180,6 +180,6 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     {
         $mvc_event = Registry::get('Application')->getMvcEvent();
         $mvc_event->setParam('object', $this->_document);
-        $this->assertNull($this->_object->removeElement($mvc_event));
+        $this->assertNull($this->object->removeElement($mvc_event));
     }
 }

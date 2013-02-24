@@ -27,8 +27,8 @@
 
 namespace Datatypes\Textarea;
 
-use Gc\Datatype\AbstractDatatype\AbstractEditor,
-    Zend\Form\Element;
+use Gc\Datatype\AbstractDatatype\AbstractEditor;
+use Zend\Form\Element;
 
 /**
  * Editor for Textarea datatype
@@ -64,10 +64,8 @@ class Editor extends AbstractEditor
         $textarea->setValue($this->getValue());
 
         $config = empty($config) ? array() : $config;
-        foreach($config as $key => $value)
-        {
-            if(!empty($value))
-            {
+        foreach ($config as $key => $value) {
+            if (!empty($value)) {
                 $textarea->setAttribute($key, $value);
             }
         }
