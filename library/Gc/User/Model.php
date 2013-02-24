@@ -279,7 +279,10 @@ class Model extends AbstractTable
             $user->save();
 
             $message = Registry::get('Translator')
-                ->translate('To reset your password follow this link but be careful you only have one hour before the link expires:');
+                ->translate(
+                    'To reset your password follow this link but be careful '.
+                    'you only have one hour before the link expires:'
+                );
             $message .= '<br>';
             $message .= Registry::get('Application')->getMvcEvent()->getRouter()->assemble(
                 array(

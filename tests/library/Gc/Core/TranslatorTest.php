@@ -73,12 +73,15 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValue()
     {
-        $this->object->setValue('key', array(
+        $this->object->setValue(
+            'key',
             array(
-                'locale' => 'fr_FR',
-                'value' => 'clé',
+                array(
+                    'locale' => 'fr_FR',
+                    'value' => 'clé',
+                )
             )
-        ));
+        );
         $this->assertInternalType('array', $this->object->getValue('key', 'fr_FR'));
     }
 
@@ -105,15 +108,18 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValue()
     {
-        $result = $this->object->setValue('parameters', array(
+        $result = $this->object->setValue(
+            'parameters',
             array(
-                'locale' => 'fr_FR',
-                'value' => 'paramètres',
-            ), array(
-                'locale' => '', //Missing locale
-                'value' => 'parametri',
+                array(
+                    'locale' => 'fr_FR',
+                    'value' => 'paramètres',
+                ), array(
+                    'locale' => '', //Missing locale
+                    'value' => 'parametri',
+                )
             )
-        ));
+        );
         $this->assertTrue($result);
     }
 
@@ -122,20 +128,26 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValueWithDestinationId()
     {
-        $this->object->setValue('parameters', array(
+        $this->object->setValue(
+            'parameters',
             array(
-                'locale' => 'fr_FR',
-                'value' => 'paramètres',
+                array(
+                    'locale' => 'fr_FR',
+                    'value' => 'paramètres',
+                )
             )
-        ));
+        );
         $data = $this->object->getValue('parameters', 'fr_FR');
-        $result = $this->object->setValue('parameters', array(
+        $result = $this->object->setValue(
+            'parameters',
             array(
-                'dst_id' => $data['dst_id'],
-                'locale' => 'it_IT',
-                'value' => 'parametri',
+                array(
+                    'dst_id' => $data['dst_id'],
+                    'locale' => 'it_IT',
+                    'value' => 'parametri',
+                )
             )
-        ));
+        );
 
         $this->assertTrue($result);
     }
@@ -145,19 +157,25 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValueWithSourceId()
     {
-        $this->object->setValue('parameters', array(
+        $this->object->setValue(
+            'parameters',
             array(
-                'locale' => 'fr_FR',
-                'value' => 'paramètres',
+                array(
+                    'locale' => 'fr_FR',
+                    'value' => 'paramètres',
+                )
             )
-        ));
+        );
         $data = $this->object->getValue('parameters', 'fr_FR');
-        $result = $this->object->setValue($data['src_id'], array(
+        $result = $this->object->setValue(
+            $data['src_id'],
             array(
-                'locale' => 'it_IT',
-                'value' => 'parametri',
+                array(
+                    'locale' => 'it_IT',
+                    'value' => 'parametri',
+                )
             )
-        ));
+        );
 
         $this->assertTrue($result);
     }

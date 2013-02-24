@@ -48,13 +48,15 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = Model::fromArray(array(
-            'lastname' => 'Test',
-            'firstname' => 'Test',
-            'email' => 'test@test.com',
-            'login' => 'test-user-model',
-            'user_acl_role_id' => 1,
-        ));
+        $this->object = Model::fromArray(
+            array(
+                'lastname' => 'Test',
+                'firstname' => 'Test',
+                'email' => 'test@test.com',
+                'login' => 'test-user-model',
+                'user_acl_role_id' => 1,
+            )
+        );
 
         $this->object->setPassword('test-user-model-password');
         $this->object->save();
@@ -166,13 +168,15 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testFromArray()
     {
         $this->object->delete();
-        $this->object = Model::fromArray(array(
-            'lastname' => 'Test',
-            'firstname' => 'Test',
-            'email' => 'test@test.com',
-            'login' => 'test',
-            'user_acl_role_id' => 1,
-        ));
+        $this->object = Model::fromArray(
+            array(
+                'lastname' => 'Test',
+                'firstname' => 'Test',
+                'email' => 'test@test.com',
+                'login' => 'test',
+                'user_acl_role_id' => 1,
+            )
+        );
 
         $this->assertEquals('test@test.com', $this->object->getEmail());
     }

@@ -45,7 +45,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * @var string
      */
-    protected $_directory;
+    protected $directory;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -53,7 +53,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_directory = __DIR__ . '/_files/';
+        $this->directory = __DIR__ . '/_files/';
         $this->object = new Image;
     }
 
@@ -70,7 +70,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $this->assertInstanceOf('Gc\Media\Image', new Image($this->_directory . 'test.png'));
+        $this->assertInstanceOf('Gc\Media\Image', new Image($this->directory . 'test.png'));
     }
 
     /**
@@ -78,10 +78,10 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testOpen()
     {
-        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->_directory . 'test.png'));
-        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->_directory . 'test.jpg'));
-        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->_directory . 'test.gif'));
-        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->_directory . 'test.bmp'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->directory . 'test.png'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->directory . 'test.jpg'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->directory . 'test.gif'));
+        $this->assertInstanceOf('Gc\Media\Image', $this->object->open($this->directory . 'test.bmp'));
     }
 
     /**
@@ -92,7 +92,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testResizeWithUndefinedOption()
     {
-        $this->object->open($this->_directory . 'test.png');
+        $this->object->open($this->directory . 'test.png');
         $this->assertInstanceOf('Gc\Media\Image', $this->object->resize(50, 500, 'undefined option'));
         //double test for optimal size tests
         $this->assertInstanceOf('Gc\Media\Image', $this->object->resize(500, 50, 'undefined option'));
@@ -105,7 +105,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testResizeWithCropOption()
     {
-        $this->object->open($this->_directory . 'test.png');
+        $this->object->open($this->directory . 'test.png');
         $this->assertInstanceOf('Gc\Media\Image', $this->object->resize(50, 50, 'crop'));
     }
 
@@ -117,7 +117,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testResizeWithUndefinedColor()
     {
-        $this->object->open($this->_directory . 'test.png');
+        $this->object->open($this->directory . 'test.png');
         $this->assertInstanceOf('Gc\Media\Image', $this->object->resize(50, 50, 'auto', 'FFFFFFFF'));
     }
 
@@ -166,8 +166,8 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithPng()
     {
-        $saving_path = $this->_directory . 'saving-test.png';
-        $this->object->open($this->_directory . 'test.png');
+        $saving_path = $this->directory . 'saving-test.png';
+        $this->object->open($this->directory . 'test.png');
         $this->object->resize(50, 50);
         $this->assertTrue($this->object->save($saving_path));
         unlink($saving_path);
@@ -176,10 +176,10 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\Media\Image::save
      */
-    public function testSaveWithGif()
+    public function testSaveWithGif ()
     {
-        $saving_path = $this->_directory . 'saving-test.gif';
-        $this->object->open($this->_directory . 'test.gif');
+        $saving_path = $this->directory . 'saving-test.gif';
+        $this->object->open($this->directory . 'test.gif');
         $this->object->resize(50, 50);
         $this->assertTrue($this->object->save($saving_path));
         unlink($saving_path);
@@ -190,8 +190,8 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithJpg()
     {
-        $saving_path = $this->_directory . 'saving-test.jpg';
-        $this->object->open($this->_directory . 'test.jpg');
+        $saving_path = $this->directory . 'saving-test.jpg';
+        $this->object->open($this->directory . 'test.jpg');
         $this->object->resize(50, 50);
         $this->assertTrue($this->object->save($saving_path));
         unlink($saving_path);
@@ -202,8 +202,8 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveInBmp()
     {
-        $saving_path = $this->_directory . 'saving-test.bmp';
-        $this->object->open($this->_directory . 'test.png');
+        $saving_path = $this->directory . 'saving-test.bmp';
+        $this->object->open($this->directory . 'test.png');
         $this->object->resize(50, 50);
         $this->assertFalse($this->object->save($saving_path));
     }

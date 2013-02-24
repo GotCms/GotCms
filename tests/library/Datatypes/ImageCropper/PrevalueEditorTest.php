@@ -55,11 +55,13 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->datatype = DatatypeModel::fromArray(array(
-            'name' => 'ImageCropperTest',
-            'prevalue_value' => '',
-            'model' => 'ImageCropper',
-        ));
+        $this->datatype = DatatypeModel::fromArray(
+            array(
+                'name' => 'ImageCropperTest',
+                'prevalue_value' => '',
+                'model' => 'ImageCropper',
+            )
+        );
         $this->datatype->save();
         $datatype = new Datatype();
         $datatype->load($this->datatype);
@@ -85,24 +87,30 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
         $post = $this->object->getRequest()->getPost();
         $post->set('background', '#FFFFFF');
         $post->set('resize_option', '#auto');
-        $post->set('mime_list', array(
-                'image/gif',
-            'image/jpeg',
-            'image/png',
-        ));
+        $post->set(
+            'mime_list',
+            array(
+                    'image/gif',
+                'image/jpeg',
+                'image/png',
+            )
+        );
 
-        $post->set('size', array(
-            array (
-                'name' => '223x112',
-                'width' => '223',
-                'height' => '112',
-            ),
-            array (
-                'name' => '',
-                'width' => '',
-                'height' => '',
-            ),
-        ));
+        $post->set(
+            'size',
+            array(
+                array (
+                    'name' => '223x112',
+                    'width' => '223',
+                    'height' => '112',
+                ),
+                array (
+                    'name' => '',
+                    'width' => '',
+                    'height' => '',
+                ),
+            )
+        );
 
         $this->assertNull($this->object->save());
     }
@@ -112,27 +120,29 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->object->setConfig(array(
-            'background' => '#FFFFFF',
-            'resize_option' => 'auto',
-            'mime_list' => array(
-                'image/gif',
-                'image/jpeg',
-                'image/png',
-            ),
-            'size' => array(
-                array (
-                    'name' => '223x112',
-                    'width' => '223',
-                    'height' => '112',
+        $this->object->setConfig(
+            array(
+                'background' => '#FFFFFF',
+                'resize_option' => 'auto',
+                'mime_list' => array(
+                    'image/gif',
+                    'image/jpeg',
+                    'image/png',
                 ),
-                array (
-                    'name' => '600x300',
-                    'width' => '600',
-                    'height' => '300',
+                'size' => array(
+                    array (
+                        'name' => '223x112',
+                        'width' => '223',
+                        'height' => '112',
+                    ),
+                    array (
+                        'name' => '600x300',
+                        'width' => '600',
+                        'height' => '300',
+                    ),
                 ),
-            ),
-        ));
+            )
+        );
 
         $this->assertInternalType('string', $this->object->load());
     }

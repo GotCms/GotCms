@@ -166,12 +166,14 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithWrongValues()
     {
         $this->setExpectedException('Gc\Exception');
-        $model = $this->object->fromArray(array(
-            'name' => NULL,
-            'identifier' => NULL,
-            'description' => NULL,
-            'content' => NULL,
-        ));
+        $model = $this->object->fromArray(
+            array(
+                'name' => null,
+                'identifier' => null,
+                'description' => null,
+                'content' => null,
+            )
+        );
         $this->assertFalse($model->save());
     }
 

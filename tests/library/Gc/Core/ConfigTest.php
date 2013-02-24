@@ -103,8 +103,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->object->getValues());
 
         //restore data
-        foreach($values as $value)
-        {
+        foreach ($values as $value) {
             $this->object->insert($value);
         }
     }

@@ -49,12 +49,14 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
 
-        $model = Model::fromArray(array(
-            'name' => 'name-collection-test',
-            'identifier' => 'identifier-collection-test',
-            'description' => 'description-collection-test',
-            'content' => 'content-collection-test'
-        ));
+        $model = Model::fromArray(
+            array(
+                'name' => 'name-collection-test',
+                'identifier' => 'identifier-collection-test',
+                'description' => 'description-collection-test',
+                'content' => 'content-collection-test'
+            )
+        );
 
         $model->save();
         $this->object = new Collection;

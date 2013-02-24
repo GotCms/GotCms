@@ -65,8 +65,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     {
         $connection = $this->object->getAdapter()->getDriver()->getConnection();
         $parameters = $connection->getConnectionParameters();
-        if($parameters['driver'] != 'pdo_pgsql')
-        {
+        if ($parameters['driver'] != 'pdo_pgsql') {
             return;
         }
 
@@ -83,8 +82,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     {
         $connection = $this->object->getAdapter()->getDriver()->getConnection();
         $parameters = $connection->getConnectionParameters();
-        if($parameters['driver'] != 'pdo_pgsql')
-        {
+        if ($parameters['driver'] != 'pdo_pgsql') {
             return;
         }
 
@@ -98,8 +96,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     {
         $connection = $this->object->getAdapter()->getDriver()->getConnection();
         $parameters = $connection->getConnectionParameters();
-        if($parameters['driver'] != 'pdo_pgsql')
-        {
+        if ($parameters['driver'] != 'pdo_pgsql') {
             return;
         }
 

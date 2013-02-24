@@ -66,7 +66,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $this->object->init(TRUE);
+        $this->object->init(true);
         $this->assertInternalType('array', $this->object->getPermissions());
     }
 
@@ -75,6 +75,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPermissions()
     {
-        $this->assertInternalType('array', $this->object->getPermissions(TRUE));
+        $this->assertInternalType('array', $this->object->getPermissions(true));
     }
 }

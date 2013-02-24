@@ -96,7 +96,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolveWithLfiProtection()
     {
-        $this->object->setLfiProtection(TRUE)
+        $this->object->setLfiProtection(true)
             ->addPath(__DIR__ . '/_templates');
 
         $this->setExpectedException('Zend\View\Exception\ExceptionInterface');
@@ -109,13 +109,12 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     public function testResolveWithStream()
     {
         $existed = in_array('zend.view', stream_get_wrappers());
-        if($existed)
-        {
+        if ($existed) {
             stream_wrapper_unregister('zend.view');
         }
 
         stream_wrapper_register('zend.view', '\Gc\View\Stream');
-        $this->object->setUseStreamWrapper(TRUE);
+        $this->object->setUseStreamWrapper(true);
         $markup = $this->object->resolve('foo.bar');
         $this->assertEquals('zend.view://foo.bar', $markup);
     }

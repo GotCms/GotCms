@@ -55,11 +55,13 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->datatype = DatatypeModel::fromArray(array(
-            'name' => 'TextrichTest',
-            'prevalue_value' => '',
-            'model' => 'Textrich',
-        ));
+        $this->datatype = DatatypeModel::fromArray(
+            array(
+                'name' => 'TextrichTest',
+                'prevalue_value' => '',
+                'model' => 'Textrich',
+            )
+        );
         $this->datatype->save();
         $datatype = new Datatype();
         $datatype->load($this->datatype);

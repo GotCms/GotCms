@@ -88,10 +88,12 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->object->setData(array(
-            'name' => 'IconTest',
-            'url' => 'IconTest'
-        ));
+        $this->object->setData(
+            array(
+                'name' => 'IconTest',
+                'url' => 'IconTest'
+            )
+        );
         $this->assertInternalType('integer', $this->object->save());
         //Code coverage
         $this->assertInternalType('integer', $this->object->save());
@@ -111,10 +113,12 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $this->object->setData(array(
-            'name' => 'IconTest',
-            'url' => 'IconTest'
-        ));
+        $this->object->setData(
+            array(
+                'name' => 'IconTest',
+                'url' => 'IconTest'
+            )
+        );
         $this->object->save();
 
         $this->assertTrue($this->object->delete());

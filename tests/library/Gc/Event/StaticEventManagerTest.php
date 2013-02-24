@@ -113,10 +113,13 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetEvent()
     {
-        $this->object->attach('Event', 'do', function($e)
-        {
-            //Fake declare to create Event
-        });
+        $this->object->attach(
+            'Event',
+            'do',
+            function ($e) {
+                //Fake declare to create Event
+            }
+        );
 
 
         $this->assertInstanceOf('Zend\EventManager\EventManager', $this->object->getEvent('Event'));
@@ -127,10 +130,13 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testTrigger()
     {
-        $this->object->attach('Event', 'do', function($e)
-        {
-            return $e->getName();
-        });
+        $this->object->attach(
+            'Event',
+            'do',
+            function ($e) {
+                return $e->getName();
+            }
+        );
 
         $this->assertInstanceOf('Zend\EventManager\ResponseCollection', $this->object->trigger('Event', 'do'));
     }

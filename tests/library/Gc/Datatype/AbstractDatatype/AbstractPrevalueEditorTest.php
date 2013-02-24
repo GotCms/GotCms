@@ -52,17 +52,22 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->datatype = DatatypeModel::fromArray(array(
-            'name' => 'AbstractEditorTest',
-            'prevalue_value' => 's:26:"AbstractPrevalueEditorTest";',
-            'model' => 'AbstractEditorTest',
-        ));
+        $this->datatype = DatatypeModel::fromArray(
+            array(
+                'name' => 'AbstractEditorTest',
+                'prevalue_value' => 's:26:"AbstractPrevalueEditorTest";',
+                'model' => 'AbstractEditorTest',
+            )
+        );
         $this->datatype->save();
 
         $mock_datatype = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
         $mock_datatype->load($this->datatype, 1);
 
-        $this->object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor', array($mock_datatype));
+        $this->object = $this->getMockForAbstractClass(
+            'Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor',
+            array($mock_datatype)
+        );
     }
 
     /**

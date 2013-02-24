@@ -33,4 +33,3 @@ return array(
         'hostname' => '__HOSTNAME__'
     ),
 );
-

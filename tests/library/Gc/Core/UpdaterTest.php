@@ -135,8 +135,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateDatabase()
     {
         $existed = in_array('zend.view', stream_get_wrappers());
-        if($existed)
-        {
+        if ($existed) {
             stream_wrapper_unregister('zend.view');
         }
 
@@ -153,8 +152,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateDatabaseWithEmptyFiles()
     {
         $existed = in_array('zend.view', stream_get_wrappers());
-        if($existed)
-        {
+        if ($existed) {
             stream_wrapper_unregister('zend.view');
         }
 
@@ -171,8 +169,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateDatabaseWithSqlError()
     {
         $existed = in_array('zend.view', stream_get_wrappers());
-        if($existed)
-        {
+        if ($existed) {
             stream_wrapper_unregister('zend.view');
         }
 

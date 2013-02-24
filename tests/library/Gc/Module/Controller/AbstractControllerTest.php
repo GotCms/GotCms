@@ -60,9 +60,15 @@ class AbstractControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $this->assertInstanceOf('Gc\Module\Controller\AbstractController', $this->getMockForAbstractClass('Gc\Module\Controller\AbstractController', array(
-            Registry::get('Application')->getRequest(),
-            Registry::get('Application')->getResponse(),
-        )));
+        $this->assertInstanceOf(
+            'Gc\Module\Controller\AbstractController',
+            $this->getMockForAbstractClass(
+                'Gc\Module\Controller\AbstractController',
+                array(
+                    Registry::get('Application')->getRequest(),
+                    Registry::get('Application')->getResponse(),
+                )
+            )
+        );
     }
 }

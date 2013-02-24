@@ -55,11 +55,16 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->datatype = DatatypeModel::fromArray(array(
-            'name' => 'MixedTest',
-            'prevalue_value' => 'a:1:{s:9:"datatypes";a:1:{i:0;a:3:{s:4:"name";s:10:"Textstring";s:5:"label";s:4:"Test";s:6:"config";a:1:{s:6:"length";s:0:"";}}}}',
-            'model' => 'Mixed',
-        ));
+        $this->datatype = DatatypeModel::fromArray(
+            array(
+                'name' => 'MixedTest',
+                'prevalue_value' =>
+                    'a:1:{s:9:"datatypes";a:1:{i:0;a:3:{s:4:"name";' .
+                    's:10:"Textstring";s:5:"label";s:4:"Test";s:6:"config";' .
+                    'a:1:{s:6:"length";s:0:"";}}}}',
+                'model' => 'Mixed',
+            )
+        );
         $this->datatype->save();
         $datatype = new Datatype();
         $datatype->load($this->datatype);
@@ -85,13 +90,16 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     {
         $post = $this->object->getRequest()->getPost();
         $post->set('add-model', 'Textstring');
-        $post->set('datatypes', array(
-            1 => array(
-                'name' => 'Textstring',
-                'label' => 'TextstringTest',
-                'length' => 25,
-            ),
-        ));
+        $post->set(
+            'datatypes',
+            array(
+                1 => array(
+                    'name' => 'Textstring',
+                    'label' => 'TextstringTest',
+                    'length' => 25,
+                ),
+            )
+        );
         $this->assertNull($this->object->save());
     }
 

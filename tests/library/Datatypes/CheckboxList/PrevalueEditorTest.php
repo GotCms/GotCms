@@ -55,11 +55,13 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->datatype = DatatypeModel::fromArray(array(
-            'name' => 'CheckboxListTest',
-            'prevalue_value' => '',
-            'model' => 'CheckboxList',
-        ));
+        $this->datatype = DatatypeModel::fromArray(
+            array(
+                'name' => 'CheckboxListTest',
+                'prevalue_value' => '',
+                'model' => 'CheckboxList',
+            )
+        );
         $this->datatype->save();
         $datatype = new Datatype();
         $datatype->load($this->datatype);

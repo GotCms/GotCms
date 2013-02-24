@@ -66,7 +66,10 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     public function testSetParameters()
     {
         $this->assertInstanceOf('Datatypes\Textrich\CkEditor', $this->object->setParameters(array()));
-        $this->assertInstanceOf('Datatypes\Textrich\CkEditor', $this->object->setParameters(array('toolbar-items' => 'test')));
+        $this->assertInstanceOf(
+            'Datatypes\Textrich\CkEditor',
+            $this->object->setParameters(array('toolbar-items' => 'test'))
+        );
     }
 
     /**

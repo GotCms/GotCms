@@ -67,8 +67,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     {
         $permissions = $this->object->getUserPermissions();
         $array = array();
-        foreach($permissions as $type_name => $type_values)
-        {
+        foreach ($permissions as $type_name => $type_values) {
             $array += $type_values;
         }
 

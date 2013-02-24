@@ -63,7 +63,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\View\Helper\Document::__invoke
      */
-    public function test__invokeFromId()
+    public function testInvokeFromId()
     {
         $this->assertFalse($this->object->__invoke(999));
     }
@@ -71,7 +71,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Gc\View\Helper\Document::__invoke
      */
-    public function test__invokeFromUrlKey()
+    public function testInvokeFromUrlKey()
     {
         $this->assertFalse($this->object->__invoke('test-helper-document'));
     }

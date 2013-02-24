@@ -55,11 +55,13 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->datatype = DatatypeModel::fromArray(array(
-            'name' => 'AbstractDatatype',
-            'prevalue_value' => 's:16:"AbstractDatatype";',
-            'model' => 'AbstractDatatype',
-        ));
+        $this->datatype = DatatypeModel::fromArray(
+            array(
+                'name' => 'AbstractDatatype',
+                'prevalue_value' => 's:16:"AbstractDatatype";',
+                'model' => 'AbstractDatatype',
+            )
+        );
         $this->datatype->save();
 
         $this->object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
@@ -99,7 +101,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadWithEmptyDatatype()
     {
-        $this->assertFalse($this->object->load(NULL, NULL));
+        $this->assertFalse($this->object->load(null, null));
     }
 
     /**

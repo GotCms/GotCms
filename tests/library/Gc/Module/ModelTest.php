@@ -48,9 +48,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = Model::fromArray(array(
-            'name' => 'ModuleTest',
-        ));
+        $this->object = Model::fromArray(
+            array(
+                'name' => 'ModuleTest',
+            )
+        );
         $this->object->save();
     }
 
@@ -102,7 +104,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testSaveWithWrongValues()
     {
         $this->setExpectedException('Gc\Exception');
-        $this->object->setName(NULL);
+        $this->object->setName(null);
         $this->assertFalse($this->object->save());
     }
 

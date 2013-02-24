@@ -55,11 +55,13 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->datatype = DatatypeModel::fromArray(array(
-            'name' => 'DatePickerTest',
-            'prevalue_value' => '',
-            'model' => 'DatePicker',
-        ));
+        $this->datatype = DatatypeModel::fromArray(
+            array(
+                'name' => 'DatePickerTest',
+                'prevalue_value' => '',
+                'model' => 'DatePicker',
+            )
+        );
         $this->datatype->save();
         $datatype = new Datatype();
         $datatype->load($this->datatype);

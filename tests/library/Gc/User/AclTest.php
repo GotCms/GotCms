@@ -57,13 +57,15 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->user = Model::fromArray(array(
-            'lastname' => 'Test',
-            'firstname' => 'Test',
-            'email' => 'test@test.com',
-            'login' => 'test-user-model',
-            'user_acl_role_id' => 1,
-        ));
+        $this->user = Model::fromArray(
+            array(
+                'lastname' => 'Test',
+                'firstname' => 'Test',
+                'email' => 'test@test.com',
+                'login' => 'test-user-model',
+                'user_acl_role_id' => 1,
+            )
+        );
 
         $this->user->setPassword('test-user-model-password');
         $this->user->save();

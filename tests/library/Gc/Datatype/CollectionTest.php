@@ -55,11 +55,13 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->datatype = DatatypeModel::fromArray(array(
-            'name' => 'DatatypeCollectionTest',
-            'prevalue_value' => '',
-            'model' => 'DatatypeCollectionTest',
-        ));
+        $this->datatype = DatatypeModel::fromArray(
+            array(
+                'name' => 'DatatypeCollectionTest',
+                'prevalue_value' => '',
+                'model' => 'DatatypeCollectionTest',
+            )
+        );
         $this->datatype->save();
 
         $this->object = new Collection;

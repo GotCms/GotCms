@@ -50,12 +50,14 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->object = new Collection;
 
-        $model = Model::fromArray(array(
-            'name' => 'name-collection-test',
-            'identifier' => 'identifier-collection-test',
-            'description' => 'description-collection-test',
-            'content' => 'content-collection-test'
-        ));
+        $model = Model::fromArray(
+            array(
+                'name' => 'name-collection-test',
+                'identifier' => 'identifier-collection-test',
+                'description' => 'description-collection-test',
+                'content' => 'content-collection-test'
+            )
+        );
 
         $model->save();
     }
