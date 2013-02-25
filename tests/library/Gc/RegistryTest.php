@@ -41,11 +41,15 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Registry
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var Registry
+     *
+     * @return void
      */
     protected $oldInstance;
 
@@ -54,16 +58,20 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Registry::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
         $this->oldInstance = Registry::getInstance();
-        $this->object = new Registry;
+        $this->object      = new Registry;
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -72,9 +80,13 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Registry::getInstance
      * @covers Gc\Registry::init
      * @covers Gc\Registry::unsetInstance
+     *
+     * @return void
      */
     public function testGetInstance()
     {
@@ -83,7 +95,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Registry::setInstance
+     *
+     * @return void
      */
     public function testSetInstance()
     {
@@ -93,7 +109,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Registry::setInstance
+     *
+     * @return void
      */
     public function testSetInstanceWithRegistryAlreadyInitialized()
     {
@@ -102,7 +122,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Registry::get
+     *
+     * @return void
      */
     public function testGet()
     {
@@ -111,7 +135,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Registry::get
+     *
+     * @return void
      */
     public function testGetFakeData()
     {
@@ -120,7 +148,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Registry::set
+     *
+     * @return void
      */
     public function testSet()
     {
@@ -129,7 +161,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Registry::isRegistered
+     *
+     * @return void
      */
     public function testIsRegisteredWithData()
     {
@@ -138,7 +174,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Registry::isRegistered
+     *
+     * @return void
      */
     public function testIsRegisteredWithoutData()
     {
@@ -147,7 +187,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Registry::offsetExists
+     *
+     * @return void
      */
     public function testOffsetExists()
     {

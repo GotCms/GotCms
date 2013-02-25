@@ -43,32 +43,44 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Collection
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -123,6 +135,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -139,8 +153,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\DocumentType\Collection::init
      * @covers Gc\DocumentType\Collection::setDocumentTypes
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -149,7 +167,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\DocumentType\Collection::getSelect
+     *
+     * @return void
      */
     public function testGetSelect()
     {

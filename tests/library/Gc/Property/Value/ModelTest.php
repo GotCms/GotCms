@@ -21,7 +21,7 @@
  * @package  Library
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @linkuse  http://www.got-cms.com
+ * @link     http://www.got-cms.com
  */
 
 namespace Gc\Property\Value;
@@ -48,52 +48,72 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * @var TabModel
+     *
+     * @return void
      */
     protected $tab;
 
     /**
      * @var DatatypeModel
+     *
+     * @return void
      */
     protected $datatype;
 
     /**
      * @var PropertyModel
+     *
+     * @return void
      */
     protected $property;
 
     /**
      * @var DocumentModel
+     *
+     * @return void
      */
     protected $document;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -203,6 +223,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -224,7 +246,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Value\Model::load
+     *
+     * @return void
      */
     public function testLoad()
     {
@@ -235,7 +261,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Value\Model::fromArray
+     *
+     * @return void
      */
     public function testFromArray()
     {
@@ -243,7 +273,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Value\Model::fromId
+     *
+     * @return void
      */
     public function testFromId()
     {
@@ -251,7 +285,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Value\Model::fromId
+     *
+     * @return void
      */
     public function testFromWithWrongId()
     {
@@ -259,7 +297,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Value\Model::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -267,7 +309,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Value\Model::save
+     *
+     * @return void
      */
     public function testSaveWithWrongValues()
     {

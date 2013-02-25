@@ -42,22 +42,30 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var DbTableGateway
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var array
+     *
+     * @return void
      */
     protected $testArray;
 
     /**
      * @var TableGateway
+     *
+     * @return void
      */
     protected $adapter;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -75,7 +83,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
             'core_session',
             \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter()
         );
-        $this->object = new DbTableGateway($this->adapter, $tablegateway_config);
+        $this->object  = new DbTableGateway($this->adapter, $tablegateway_config);
 
         $this->testArray = array('foo' => 'bar', 'bar' => array('foo' => 'bar'));
     }
@@ -83,6 +91,8 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -90,8 +100,12 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Session\SaveHandler\DbTableGateway::read
      * @covers Gc\Session\SaveHandler\DbTableGateway::write
+     *
+     * @return void
      */
     public function testRead()
     {
@@ -109,8 +123,12 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
         );
     }
     /**
+     * Test
+     *
      * @covers Gc\Session\SaveHandler\DbTableGateway::read
      * @covers Gc\Session\SaveHandler\DbTableGateway::write
+     *
+     * @return void
      */
     public function testReadWithLifetimeExpired()
     {
@@ -127,7 +145,11 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Session\SaveHandler\DbTableGateway::write
+     *
+     * @return void
      */
     public function testWrite()
     {

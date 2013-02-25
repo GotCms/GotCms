@@ -41,17 +41,23 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractDatatype
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var DatatypeModel
+     *
+     * @return void
      */
     protected $datatype;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -71,6 +77,8 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -80,7 +88,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::getInfos
+     *
+     * @return void
      */
     public function testGetInfos()
     {
@@ -88,7 +100,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::load
+     *
+     * @return void
      */
     public function testLoad()
     {
@@ -97,7 +113,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::load
+     *
+     * @return void
      */
     public function testLoadWithEmptyDatatype()
     {
@@ -105,7 +125,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::getConfig
+     *
+     * @return void
      */
     public function testGetConfig()
     {
@@ -113,7 +137,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::getConfig
+     *
+     * @return void
      */
     public function testGetConfigWithNotSerializeValue()
     {
@@ -122,7 +150,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::setConfig
+     *
+     * @return void
      */
     public function testSetConfig()
     {
@@ -131,7 +163,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::getUploadUrl
+     *
+     * @return void
      */
     public function testGetUploadUrl()
     {
@@ -139,7 +175,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::getHelper
+     *
+     * @return void
      */
     public function testGetHelper()
     {
@@ -147,7 +187,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::getProperty
+     *
+     * @return void
      */
     public function testGetProperty()
     {
@@ -155,7 +199,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::setProperty
+     *
+     * @return void
      */
     public function testSetProperty()
     {
@@ -164,7 +212,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::getName
+     *
+     * @return void
      */
     public function testGetName()
     {
@@ -172,8 +224,12 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::addPath
      * @covers Gc\Datatype\AbstractDatatype::checkRenderer
+     *
+     * @return void
      */
     public function testAddPath()
     {
@@ -181,9 +237,13 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::addPath
      * @covers Gc\Datatype\AbstractDatatype::render
      * @covers Gc\Datatype\AbstractDatatype::checkRenderer
+     *
+     * @return void
      */
     public function testRender()
     {
@@ -192,7 +252,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype::getDocument
+     *
+     * @return void
      */
     public function testGetDocument()
     {

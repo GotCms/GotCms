@@ -21,7 +21,7 @@
  * @package  Library
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @linkuse  http://www.got-cms.com
+ * @link     http://www.got-cms.com
  */
 
 namespace Gc\Document;
@@ -45,42 +45,58 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Collection
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * @var DocumentModel
+     *
+     * @return void
      */
     protected $document;
 
     /**
      * @var DocumentModel
+     *
+     * @return void
      */
     protected $documentChildren;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -166,6 +182,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -191,8 +209,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::load
      * @covers Gc\Document\Collection::setDocuments
+     *
+     * @return void
      */
     public function testLoad()
     {
@@ -201,8 +223,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::load
      * @covers Gc\Document\Collection::setDocuments
+     *
+     * @return void
      */
     public function testLoadWithParentId()
     {
@@ -211,7 +237,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getAvailableDocuments
+     *
+     * @return void
      */
     public function testGetAvailableDocuments()
     {
@@ -219,7 +249,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getSelect
+     *
+     * @return void
      */
     public function testGetSelect()
     {
@@ -228,7 +262,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getParent
+     *
+     * @return void
      */
     public function testGetParent()
     {
@@ -237,7 +275,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getChildren
+     *
+     * @return void
      */
     public function testGetChildren()
     {
@@ -246,7 +288,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getAvailableChildren
+     *
+     * @return void
      */
     public function testGetAvailableChilren()
     {
@@ -255,7 +301,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getId
+     *
+     * @return void
      */
     public function testGetId()
     {
@@ -263,7 +313,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getIcon
+     *
+     * @return void
      */
     public function testGetIcon()
     {
@@ -271,7 +325,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getIterableId
+     *
+     * @return void
      */
     public function testGetIterableId()
     {
@@ -279,7 +337,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getName
+     *
+     * @return void
      */
     public function testGetName()
     {
@@ -287,7 +349,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Collection::getEditUrl
+     *
+     * @return void
      */
     public function testGetEditUrl()
     {

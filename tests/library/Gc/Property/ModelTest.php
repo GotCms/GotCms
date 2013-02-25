@@ -47,42 +47,58 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * @var TabModel
+     *
+     * @return void
      */
     protected $tab;
 
     /**
      * @var DatatypeModel
+     *
+     * @return void
      */
     protected $datatype;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -166,6 +182,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -186,7 +204,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::isRequired
+     *
+     * @return void
      */
     public function testIsRequired()
     {
@@ -198,8 +220,12 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::setValue
      * @covers Gc\Property\Model::loadValue
+     *
+     * @return void
      */
     public function testSetValue()
     {
@@ -207,7 +233,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::loadValue
+     *
+     * @return void
      */
     public function testLoadValue()
     {
@@ -215,8 +245,12 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::getValue
      * @covers Gc\Property\Model::loadValue
+     *
+     * @return void
      */
     public function testGetValue()
     {
@@ -226,7 +260,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::getValueModel
+     *
+     * @return void
      */
     public function testGetValueModel()
     {
@@ -234,7 +272,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::saveValue
+     *
+     * @return void
      */
     public function testSaveValue()
     {
@@ -260,7 +302,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -268,7 +314,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::save
+     *
+     * @return void
      */
     public function testSaveWithWrongValues()
     {
@@ -278,7 +328,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::delete
+     *
+     * @return void
      */
     public function testDelete()
     {
@@ -286,7 +340,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithNoId()
     {
@@ -295,7 +353,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::fromArray
+     *
+     * @return void
      */
     public function testFromArray()
     {
@@ -314,7 +376,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::fromId
+     *
+     * @return void
      */
     public function testFromId()
     {
@@ -322,7 +388,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::fromId
+     *
+     * @return void
      */
     public function testFromWithWrongId()
     {
@@ -330,7 +400,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::fromIdentifier
+     *
+     * @return void
      */
     public function testFromIdentifierWithNoDocumentId()
     {
@@ -338,7 +412,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Model::fromIdentifier
+     *
+     * @return void
      */
     public function testFromIdentifier()
     {

@@ -39,12 +39,16 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Translator
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,6 +58,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -61,7 +67,11 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Translator::getInstance
+     *
+     * @return void
      */
     public function testGetInstance()
     {
@@ -69,7 +79,11 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Translator::getValue
+     *
+     * @return void
      */
     public function testGetValue()
     {
@@ -86,7 +100,11 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Translator::getValues
+     *
+     * @return void
      */
     public function testGetValues()
     {
@@ -95,7 +113,11 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Translator::getValues
+     *
+     * @return void
      */
     public function testGetValuesWithLimit()
     {
@@ -104,7 +126,11 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Translator::setValue
+     *
+     * @return void
      */
     public function testSetValue()
     {
@@ -124,7 +150,11 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Translator::setValue
+     *
+     * @return void
      */
     public function testSetValueWithDestinationId()
     {
@@ -137,7 +167,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        $data = $this->object->getValue('parameters', 'fr_FR');
+        $data   = $this->object->getValue('parameters', 'fr_FR');
         $result = $this->object->setValue(
             'parameters',
             array(
@@ -153,7 +183,11 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Translator::setValue
+     *
+     * @return void
      */
     public function testSetValueWithSourceId()
     {
@@ -166,7 +200,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        $data = $this->object->getValue('parameters', 'fr_FR');
+        $data   = $this->object->getValue('parameters', 'fr_FR');
         $result = $this->object->setValue(
             $data['src_id'],
             array(
@@ -181,7 +215,11 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Translator::setValue
+     *
+     * @return void
      */
     public function testSetValueWithUndefinedSourceId()
     {

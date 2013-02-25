@@ -50,52 +50,72 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Editor
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var DatatypeModel
+     *
+     * @return void
      */
     protected $datatype;
 
     /**
      * @var PropertyModel
+     *
+     * @return void
      */
     protected $property;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var TabModel
+     *
+     * @return void
      */
     protected $tab;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
      protected $documentType;
 
     /**
      * @var DocumentModel
+     *
+     * @return void
      */
      protected $document;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -199,11 +219,13 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
         $_FILES = array();
-        $_POST = array();
+        $_POST  = array();
         $this->datatype->delete();
         $this->document->delete();
         $this->documentType->delete();
@@ -225,7 +247,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Upload\Editor::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -258,7 +284,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Upload\Editor::save
+     *
+     * @return void
      */
     public function testSaveWithEmptyFilesVar()
     {
@@ -280,7 +310,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Upload\Editor::save
+     *
+     * @return void
      */
     public function testSaveWithWrongMimeType()
     {
@@ -313,7 +347,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Upload\Editor::load
+     *
+     * @return void
      */
     public function testLoad()
     {
@@ -323,6 +361,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $this->object->load());
     }
 
+    /**
+     * Remove directories
+     *
+     * @return mixed
+     */
     protected function removeDirectories()
     {
         $file = new File();

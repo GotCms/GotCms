@@ -47,42 +47,58 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var IndexController
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var Bootstrap
+     *
+     * @return void
      */
     protected $boostrap;
 
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $document;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -158,6 +174,8 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -176,7 +194,11 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Controller\IndexController::indexAction
+     *
+     * @return void
      */
     public function testIndexAction()
     {
@@ -184,7 +206,11 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Controller\IndexController::documentCommentAction
+     *
+     * @return void
      */
     public function testDocumentCommentActionWithRedirect()
     {
@@ -193,7 +219,11 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Controller\IndexController::documentCommentAction
+     *
+     * @return void
      */
     public function testDocumentComment()
     {
@@ -202,7 +232,11 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Controller\IndexController::documentCommentAction
+     *
+     * @return void
      */
     public function testDocumentCommentWithPostData()
     {

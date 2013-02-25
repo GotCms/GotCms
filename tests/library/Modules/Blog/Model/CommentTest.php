@@ -46,42 +46,58 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Comment
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var Bootstrap
+     *
+     * @return void
      */
     protected $boostrap;
 
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $document;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -154,6 +170,8 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -172,8 +190,12 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Model\Comment::getDocumentList
      * @covers Modules\Blog\Model\Comment::add
+     *
+     * @return void
      */
     public function testGetDocumentList()
     {
@@ -187,7 +209,11 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Model\Comment::getList
+     *
+     * @return void
      */
     public function testGetList()
     {
@@ -195,7 +221,11 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Model\Comment::add
+     *
+     * @return void
      */
     public function testAdd()
     {
@@ -208,7 +238,11 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Model\Comment::add
+     *
+     * @return void
      */
     public function testAddWithWrongValues()
     {

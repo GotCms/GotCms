@@ -47,47 +47,65 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Editor
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var DatatypeModel
+     *
+     * @return void
      */
     protected $datatype;
 
     /**
      * @var PropertyModel
+     *
+     * @return void
      */
     protected $property;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var TabModel
+     *
+     * @return void
      */
     protected $tab;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
      protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -137,17 +155,17 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $this->datatype = DatatypeModel::fromArray(
             array(
                 'name' => 'TextrichTest',
-                'prevalue_value' => 'a:1:{s:13:"toolbar-items";a:67:{s:6:"Source";s:1:"1";s:4:"Save";'.
+                'prevalue_value' => 'a:1:{s:13:"toolbar-items";a:67:{s:6:"Source";s:1:"1";s:4:"Save";' .
                     's:1:"1";s:7:"NewPage";s:1:"1";s:8:"DocProps";s:1:"1";s:7:"Preview";s:1:"1";s:5:"Print";' .
                     's:1:"1";s:9:"Templates";s:1:"1";s:3:"Cut";s:1:"1";s:4:"Copy";s:1:"1";s:5:"Paste";s:1:"1";' .
                     's:9:"PasteText";s:1:"1";s:13:"PasteFromWord";s:1:"1";s:4:"Undo";s:1:"1";s:4:"Redo";s:1:"1";' .
-                    's:4:"Find";s:1:"1";s:7:"Replace";s:1:"1";s:9:"SelectAll";s:1:"1";s:12:"SpellChecker";s:1:"1";'.
+                    's:4:"Find";s:1:"1";s:7:"Replace";s:1:"1";s:9:"SelectAll";s:1:"1";s:12:"SpellChecker";s:1:"1";' .
                     's:5:"Scayt";s:1:"1";s:4:"Form";s:1:"1";s:8:"Checkbox";s:1:"1";s:5:"Radio";s:1:"1";' .
                     's:9:"TextField";s:1:"1";s:8:"Textarea";s:1:"1";s:6:"Select";s:1:"1";s:6:"Button";s:1:"1";' .
                     's:11:"ImageButton";s:1:"1";s:11:"HiddenField";s:1:"1";s:4:"Bold";s:1:"1";s:6:"Italic";' .
                     's:1:"1";s:9:"Underline";s:1:"1";s:6:"Strike";s:1:"1";s:9:"Subscript";s:1:"1";' .
                     's:11:"Superscript";s:1:"1";s:12:"RemoveFormat";s:1:"1";s:12:"NumberedList";s:1:"1";' .
-                    's:12:"BulletedList";s:1:"1";s:7:"Outdent";s:1:"1";s:6:"Indent";'.
+                    's:12:"BulletedList";s:1:"1";s:7:"Outdent";s:1:"1";s:6:"Indent";' .
                     's:1:"1";s:10:"Blockquote";s:1:"1";s:9:"CreateDiv";s:1:"1";s:11:"JustifyLeft";s:1:"1";' .
                     's:13:"JustifyCenter";s:1:"1";s:12:"JustifyRight";s:1:"1";s:12:"JustifyBlock";s:1:"1";' .
                     's:7:"BidiLtr";s:1:"1";s:7:"BidiRtl";s:1:"1";s:4:"Link";s:1:"1";s:6:"Unlink";s:1:"1";' .
@@ -195,6 +213,8 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -217,7 +237,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Textrich\Editor::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -227,7 +251,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Textrich\Editor::load
+     *
+     * @return void
      */
     public function testLoad()
     {
@@ -235,7 +263,11 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Textrich\Editor::load
+     *
+     * @return void
      */
     public function testLoadWithEmptyConfig()
     {

@@ -39,12 +39,16 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var TemplatePathStack
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,13 +58,19 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     *
+     * @return void
      */
     public function testNormalResolve()
     {
@@ -71,7 +81,11 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     *
+     * @return void
      */
     public function testWithoutPaths()
     {
@@ -80,7 +94,11 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     *
+     * @return void
      */
     public function testResolveWithoutDefaultSuffix()
     {
@@ -92,7 +110,11 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     *
+     * @return void
      */
     public function testResolveWithLfiProtection()
     {
@@ -104,7 +126,11 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     *
+     * @return void
      */
     public function testResolveWithStream()
     {
@@ -120,7 +146,11 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     *
+     * @return void
      */
     public function testResolveWithStreamAndNoStreamWrapperActive()
     {
@@ -130,11 +160,15 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     *
+     * @return void
      */
     public function testResolveWithPharProtocol()
     {
-        $path  = 'phar://' . __DIR__
+        $path = 'phar://' . __DIR__
             . DIRECTORY_SEPARATOR . '_templates'
             . DIRECTORY_SEPARATOR . 'view.phar'
             . DIRECTORY_SEPARATOR . 'start'
@@ -146,11 +180,15 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     *
+     * @return void
      */
     public function testResolveWithFakePharProtocol()
     {
-        $path  = 'phar://' . __DIR__
+        $path = 'phar://' . __DIR__
             . DIRECTORY_SEPARATOR . '_templates'
             . DIRECTORY_SEPARATOR . 'fake-view.phar';
         $this->object->addPath($path);

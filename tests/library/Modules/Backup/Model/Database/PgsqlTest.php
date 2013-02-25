@@ -38,12 +38,16 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Pgsql
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -53,13 +57,19 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Backup\Model\Database\Pgsql::export
+     *
+     * @return void
      */
     public function testExport()
     {
@@ -76,7 +86,11 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Backup\Model\Database\Pgsql::export
+     *
+     * @return void
      */
     public function testExportDataOnly()
     {
@@ -90,7 +104,11 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Backup\Model\Database\Pgsql::export
+     *
+     * @return void
      */
     public function testExportStructureOnly()
     {

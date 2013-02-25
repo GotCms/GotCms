@@ -39,12 +39,16 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,6 +58,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -61,7 +67,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::init
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -70,7 +80,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::fromArray
+     *
+     * @return void
      */
     public function testFromArray()
     {
@@ -87,7 +101,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::fromId
+     *
+     * @return void
      */
     public function testFromId()
     {
@@ -106,7 +124,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::fromId
+     *
+     * @return void
      */
     public function testFromFakeId()
     {
@@ -115,7 +137,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::fromIdentifier
+     *
+     * @return void
      */
     public function testFromIdentifier()
     {
@@ -133,7 +159,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::fromIdentifier
+     *
+     * @return void
      */
     public function testFromFakeIdentifier()
     {
@@ -142,7 +172,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -157,11 +191,15 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         $model->save();
         //Save again for code coverage
         $model->save();
-        $this->assertTrue((bool)$model->getId());
+        $this->assertTrue((bool) $model->getId());
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::save
+     *
+     * @return void
      */
     public function testSaveWithWrongValues()
     {
@@ -178,7 +216,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::delete
+     *
+     * @return void
      */
     public function testDelete()
     {
@@ -195,7 +237,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithoutId()
     {
@@ -204,7 +250,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithWrongId()
     {

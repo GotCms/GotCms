@@ -39,12 +39,16 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -65,6 +69,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -73,7 +79,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::authenticate
+     *
+     * @return void
      */
     public function testAuthenticate()
     {
@@ -82,7 +92,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::authenticate
+     *
+     * @return void
      */
     public function testFakeAuthenticate()
     {
@@ -90,7 +104,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::setEmail
+     *
+     * @return void
      */
     public function testSetEmail()
     {
@@ -98,7 +116,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::setEmail
+     *
+     * @return void
      */
     public function testSetFakeEmail()
     {
@@ -106,7 +128,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::setPassword
+     *
+     * @return void
      */
     public function testSetEncryptedPassword()
     {
@@ -116,7 +142,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -124,7 +154,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::save
+     *
+     * @return void
      */
     public function testSaveWithWrongValues()
     {
@@ -135,7 +169,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithoutId()
     {
@@ -144,7 +182,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::delete
+     *
+     * @return void
      */
     public function testDelete()
     {
@@ -152,7 +194,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithWrongId()
     {
@@ -163,7 +209,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::fromArray
+     *
+     * @return void
      */
     public function testFromArray()
     {
@@ -182,18 +232,26 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::fromId
+     *
+     * @return void
      */
     public function testFromId()
     {
         $current_id = $this->object->getId();
-        $model = Model::fromId($current_id);
+        $model      = Model::fromId($current_id);
 
         $this->assertEquals($this->object->getName(), $model->getName());
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::fromId
+     *
+     * @return void
      */
     public function testFromFakeId()
     {
@@ -201,7 +259,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::getRole
+     *
+     * @return void
      */
     public function testGetRole()
     {
@@ -209,7 +271,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::sendForgotPasswordEmail
+     *
+     * @return void
      */
     public function testSendForgotPasswordWithWrongEmail()
     {
@@ -217,7 +283,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::sendForgotPasswordEmail
+     *
+     * @return void
      */
     public function testSendForgotPasswordWithEmail()
     {
@@ -225,7 +295,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Model::getName
+     *
+     * @return void
      */
     public function testGetName()
     {

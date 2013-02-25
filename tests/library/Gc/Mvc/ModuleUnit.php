@@ -21,7 +21,7 @@
  * @package  Library
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @linkuse  http://www.got-cms.com
+ * @link     http://www.got-cms.com
  */
 
 namespace Gc\Mvc;
@@ -41,6 +41,8 @@ class ModuleUnit extends Module
      * Module directory path
      *
      * @var string
+     *
+     * @return void
      */
     protected $directory = __DIR__;
 
@@ -48,6 +50,8 @@ class ModuleUnit extends Module
      * Module
      *
      * @var string
+     *
+     * @return void
      */
     protected $namespace = __namespace__;
 }

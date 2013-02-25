@@ -39,12 +39,16 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Config
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,6 +58,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -61,7 +67,11 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Config::getInstance
+     *
+     * @return void
      */
     public function testGetInstance()
     {
@@ -69,7 +79,11 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Config::getValue
+     *
+     * @return void
      */
     public function testGetValue()
     {
@@ -79,7 +93,11 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Config::getValue
+     *
+     * @return void
      */
     public function testGetValueWithEmptyIdentifier()
     {
@@ -87,14 +105,22 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Config::getValues
+     *
+     * @return void
      */
     public function testGetValues()
     {
         $this->assertInternalType('array', $this->object->getValues());
     }
     /**
+     * Test
+     *
      * @covers Gc\Core\Config::getValues
+     *
+     * @return void
      */
     public function testGetEmptyValues()
     {
@@ -109,7 +135,11 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Config::setValue
+     *
+     * @return void
      */
     public function testSetValueWithFakeIdentifier()
     {
@@ -117,17 +147,25 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Config::setValue
+     *
+     * @return void
      */
     public function testSetValue()
     {
         $this->object->insert(array('identifier' => 'string_identifier', 'value' => 'string_result_insert_value'));
-        $this->assertTrue((bool)$this->object->setValue('string_identifier', 'string_result_insert_value'));
+        $this->assertTrue((bool) $this->object->setValue('string_identifier', 'string_result_insert_value'));
         $this->object->delete(array('identifier' => 'string_identifier'));
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Config::setValue
+     *
+     * @return void
      */
     public function testSetValueWithEmptyIdentifier()
     {

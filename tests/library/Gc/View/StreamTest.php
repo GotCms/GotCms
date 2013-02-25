@@ -40,6 +40,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -52,15 +54,21 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Stream::stream_open
      * @covers Gc\View\Stream::stream_seek
      * @covers Gc\View\Stream::url_stat
+     *
+     * @return void
      */
     public function testStreamOpen()
     {
@@ -70,6 +78,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Stream::stream_open
      * @covers Gc\View\Stream::stream_read
      * @covers Gc\View\Stream::stream_write
@@ -77,6 +87,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      * @covers Gc\View\Stream::stream_stat
      * @covers Gc\View\Stream::stream_seek
      * @covers Gc\View\Stream::url_stat
+     *
+     * @return void
      */
     public function testStreamRead()
     {
@@ -86,6 +98,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Stream::stream_open
      * @covers Gc\View\Stream::stream_read
      * @covers Gc\View\Stream::stream_write
@@ -93,6 +107,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      * @covers Gc\View\Stream::stream_stat
      * @covers Gc\View\Stream::stream_seek
      * @covers Gc\View\Stream::url_stat
+     *
+     * @return void
      */
     public function testStreamWrite()
     {
@@ -102,11 +118,15 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Stream::stream_open
      * @covers Gc\View\Stream::stream_write
      * @covers Gc\View\Stream::stream_tell
      * @covers Gc\View\Stream::stream_seek
      * @covers Gc\View\Stream::url_stat
+     *
+     * @return void
      */
     public function testStreamSeekSet()
     {
@@ -117,11 +137,15 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Stream::stream_open
      * @covers Gc\View\Stream::stream_write
      * @covers Gc\View\Stream::stream_tell
      * @covers Gc\View\Stream::stream_seek
      * @covers Gc\View\Stream::url_stat
+     *
+     * @return void
      */
     public function testStreamSeekCur()
     {
@@ -132,11 +156,15 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Stream::stream_open
      * @covers Gc\View\Stream::stream_write
      * @covers Gc\View\Stream::stream_tell
      * @covers Gc\View\Stream::stream_seek
      * @covers Gc\View\Stream::url_stat
+     *
+     * @return void
      */
     public function testStreamSeekEnd()
     {
@@ -147,6 +175,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Stream::stream_open
      * @covers Gc\View\Stream::stream_read
      * @covers Gc\View\Stream::stream_write
@@ -154,6 +184,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      * @covers Gc\View\Stream::stream_eof
      * @covers Gc\View\Stream::stream_seek
      * @covers Gc\View\Stream::url_stat
+     *
+     * @return void
      */
     public function testStreamEof()
     {

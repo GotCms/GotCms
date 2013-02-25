@@ -46,36 +46,50 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var TreeView
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * @var DocumentModel
+     *
+     * @return void
      */
     protected $document;
 
     /**
      * @var DocumentModel
+     *
+     * @return void
      */
     protected $documentChildren;
 
@@ -84,6 +98,8 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Component\TreeView::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -168,6 +184,8 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -193,7 +211,11 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\TreeView::render
+     *
+     * @return void
      */
     public function testRender()
     {

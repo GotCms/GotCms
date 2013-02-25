@@ -41,17 +41,23 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var PrevalueEditor
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var DatatypeModel
+     *
+     * @return void
      */
     protected $datatype;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -71,6 +77,8 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -80,7 +88,11 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Upload\PrevalueEditor::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -88,7 +100,11 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Upload\PrevalueEditor::load
+     *
+     * @return void
      */
     public function testLoad()
     {

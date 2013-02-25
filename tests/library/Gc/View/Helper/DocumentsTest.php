@@ -45,37 +45,51 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Documents
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentModel
+     *
+     * @return void
      */
     protected $document;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -145,6 +159,8 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -152,7 +168,11 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Documents::__invoke
+     *
+     * @return void
      */
     public function testInvoke()
     {
@@ -160,7 +180,11 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Documents::__invoke
+     *
+     * @return void
      */
     public function testInvokeWithParameters()
     {

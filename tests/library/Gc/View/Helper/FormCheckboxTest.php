@@ -41,21 +41,27 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var FormCheckbox
+     *
+     * @return void
      */
     protected $object;
     /**
      * @var Element\Checkbox
+     *
+     * @return void
      */
     protected $element;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
         $this->element = new Element\Checkbox('foo');
-        $options = array(
+        $options       = array(
             'checked_value' => 'checked',
             'unchecked_value' => 'unchecked',
         );
@@ -67,13 +73,19 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\FormCheckbox::render
+     *
+     * @return void
      */
     public function testRender()
     {
@@ -84,7 +96,11 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\FormCheckbox::render
+     *
+     * @return void
      */
     public function testRenderWithoutElementCheckboxr()
     {
@@ -93,7 +109,11 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\FormCheckbox::render
+     *
+     * @return void
      */
     public function testRenderWithoutName()
     {
@@ -102,7 +122,11 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\FormCheckbox::render
+     *
+     * @return void
      */
     public function testRenderWithCheckedValue()
     {
@@ -112,7 +136,11 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\FormCheckbox::render
+     *
+     * @return void
      */
     public function testRenderWithClassAndId()
     {

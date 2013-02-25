@@ -44,17 +44,23 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Script
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ScriptModel
+     *
+     * @return void
      */
     protected $script;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -73,6 +79,8 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -82,7 +90,11 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Script::__invoke
+     *
+     * @return void
      */
     public function testInvoke()
     {
@@ -94,7 +106,11 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Script::getParam
+     *
+     * @return void
      */
     public function testGetParam()
     {
@@ -106,7 +122,11 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Script::getDocument
+     *
+     * @return void
      */
     public function testGetDocument()
     {
@@ -121,7 +141,11 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Script::getRequest
+     *
+     * @return void
      */
     public function testGetRequest()
     {
@@ -129,7 +153,11 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Script::getResponse
+     *
+     * @return void
      */
     public function testGetResponse()
     {
@@ -137,7 +165,11 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Script::plugin
+     *
+     * @return void
      */
     public function testPlugin()
     {
@@ -145,7 +177,11 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Script::__call
+     *
+     * @return void
      */
     public function testCall()
     {
@@ -153,7 +189,11 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Script::__call
+     *
+     * @return void
      */
     public function testCallWithIsCallablePlugin()
     {

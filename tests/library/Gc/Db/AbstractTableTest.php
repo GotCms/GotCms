@@ -21,7 +21,7 @@
  * @package  Library
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @linkuse  http://www.got-cms.com
+ * @link     http://www.got-cms.com
  */
 
 namespace Gc\Db;
@@ -42,6 +42,8 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractTable
+     *
+     * @return void
      */
     protected $object;
 
@@ -50,6 +52,8 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Db\AbstractTable::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -70,6 +74,8 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -78,7 +84,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::__call
+     *
+     * @return void
      */
     public function testCall()
     {
@@ -86,7 +96,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::fetchRow
+     *
+     * @return void
      */
     public function testFetchRow()
     {
@@ -95,7 +109,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::fetchRow
+     *
+     * @return void
      */
     public function testFetchRowFromQuery()
     {
@@ -106,7 +124,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::fetchAll
+     *
+     * @return void
      */
     public function testFetchAll()
     {
@@ -115,7 +137,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::fetchAll
+     *
+     * @return void
      */
     public function testFetchAllFromQuery()
     {
@@ -126,7 +152,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::fetchOne
+     *
+     * @return void
      */
     public function testFetchOneFromQuery()
     {
@@ -140,8 +170,12 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::fetchOne
      * @covers Gc\Db\AbstractTable::__call
+     *
+     * @return void
      */
     public function testFetchOne()
     {
@@ -150,8 +184,12 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::fetchOne
      * @covers Gc\Db\AbstractTable::__call
+     *
+     * @return void
      */
     public function testFetchOneWitthFakeOption()
     {
@@ -160,7 +198,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::execute
+     *
+     * @return void
      */
     public function testExecute()
     {
@@ -171,7 +213,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::getLastInsertId
+     *
+     * @return void
      */
     public function testGetLastInsertId()
     {
@@ -179,7 +225,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::events
+     *
+     * @return void
      */
     public function testEvents()
     {
@@ -187,7 +237,11 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Db\AbstractTable::getDriverName
+     *
+     * @return void
      */
     public function testGetDriverName()
     {

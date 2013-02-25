@@ -21,7 +21,7 @@
  * @package  Library
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @linkuse  http://www.got-cms.com
+ * @link     http://www.got-cms.com
  */
 
 namespace Gc\Document;
@@ -44,37 +44,51 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $parentModel;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -158,6 +172,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -178,7 +194,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::init
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -188,7 +208,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getView
+     *
+     * @return void
      */
     public function testGetView()
     {
@@ -196,7 +220,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getDocumentType
+     *
+     * @return void
      */
     public function testGetDocumentType()
     {
@@ -204,7 +232,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::showInNav
+     *
+     * @return void
      */
     public function testShowInNav()
     {
@@ -213,7 +245,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::isPublished
+     *
+     * @return void
      */
     public function testIsPublished()
     {
@@ -222,7 +258,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::fromArray
+     *
+     * @return void
      */
     public function testFromArray()
     {
@@ -231,7 +271,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::fromId
+     *
+     * @return void
      */
     public function testFromId()
     {
@@ -240,7 +284,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::fromId
+     *
+     * @return void
      */
     public function testFromFakeId()
     {
@@ -249,7 +297,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::fromUrlKey
+     *
+     * @return void
      */
     public function testFromUrlKey()
     {
@@ -258,7 +310,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::fromUrlKey
+     *
+     * @return void
      */
     public function testFromFakeUrlKey()
     {
@@ -267,7 +323,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -275,7 +335,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::save
+     *
+     * @return void
      */
     public function testSaveWithWrongValues()
     {
@@ -297,7 +361,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::delete
+     *
+     * @return void
      */
     public function testDelete()
     {
@@ -305,7 +373,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithoutId()
     {
@@ -314,7 +386,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithException()
     {
@@ -325,7 +401,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getUrl
+     *
+     * @return void
      */
     public function testGetUrl()
     {
@@ -333,7 +413,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getName
+     *
+     * @return void
      */
     public function testGetName()
     {
@@ -341,7 +425,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getId
+     *
+     * @return void
      */
     public function testGetId()
     {
@@ -349,7 +437,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getParent
+     *
+     * @return void
      */
     public function testGetParent()
     {
@@ -357,7 +449,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getChildren
+     *
+     * @return void
      */
     public function testGetChildren()
     {
@@ -365,7 +461,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getAvailableChildren
+     *
+     * @return void
      */
     public function testGetAvailableChilren()
     {
@@ -373,7 +473,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getProperty
+     *
+     * @return void
      */
     public function testGetPropertyWithOutId()
     {
@@ -382,7 +486,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getProperty
+     *
+     * @return void
      */
     public function testGetProperty()
     {
@@ -390,14 +498,22 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getIcon
+     *
+     * @return void
      */
     public function testGetIcon()
     {
         $this->assertEquals('/media/icons/home.png', $this->object->getIcon());
     }
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getIcon
+     *
+     * @return void
      */
     public function testGetEmptyIcon()
     {
@@ -406,7 +522,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getIterableId
+     *
+     * @return void
      */
     public function testGetIterableId()
     {
@@ -414,7 +534,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Document\Model::getEditUrl
+     *
+     * @return void
      */
     public function testGetEditUrl()
     {

@@ -39,6 +39,8 @@ class InfoTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Info
+     *
+     * @return void
      */
     protected $object;
 
@@ -47,6 +49,8 @@ class InfoTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Media\Info::init
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -56,13 +60,19 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Info::fromFile
+     *
+     * @return void
      */
     public function testFromFile()
     {
@@ -72,7 +82,11 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Info::fromFile
+     *
+     * @return void
      */
     public function testFromFileWithWrongFilePath()
     {
@@ -80,7 +94,11 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Info::render
+     *
+     * @return void
      */
     public function testRender()
     {
@@ -94,7 +112,11 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Info::render
+     *
+     * @return void
      */
     public function testRenderWithWrongFilePath()
     {

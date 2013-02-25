@@ -21,7 +21,7 @@
  * @package  Library
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @linkuse  http://www.got-cms.com
+ * @link     http://www.got-cms.com
  */
 
 namespace Gc\Mvc;
@@ -43,29 +43,39 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Module
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
-        require_once(__DIR__ . '/ModuleUnit.php');
+        include_once __DIR__ . '/ModuleUnit.php';
         $this->object = new ModuleUnit;
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Module::onBootstrap
+     *
+     * @return void
      */
     public function testOnBootstrap()
     {
@@ -74,9 +84,13 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Module::getAutoloaderConfig
      * @covers Gc\Mvc\Module::getDir
      * @covers Gc\Mvc\Module::getNamespace
+     *
+     * @return void
      */
     public function testGetAutoloaderConfig()
     {
@@ -84,7 +98,11 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Module::getConfig
+     *
+     * @return void
      */
     public function testGetConfig()
     {
@@ -93,13 +111,17 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Module::init
+     *
+     * @return void
      */
     public function testInit()
     {
-        $old_database = Registry::get('Db');
+        $old_database      = Registry::get('Db');
         $old_configuration = Registry::get('Configuration');
-        $old_adapter = GlobalAdapterFeature::getStaticAdapter();
+        $old_adapter       = GlobalAdapterFeature::getStaticAdapter();
 
         if (!Config::getValue('session_lifetime')) {
             Config::getInstance()->insert(

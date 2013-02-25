@@ -42,12 +42,16 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractModule
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -57,13 +61,19 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Module\AbstractModule::getAdapter
+     *
+     * @return void
      */
     public function testGetAdapter()
     {
@@ -72,18 +82,29 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Module\AbstractModule::getDriverName
+     *
+     * @return void
      */
     public function testGetDriverName()
     {
         $configuration = Registry::get('Configuration');
-        $class = $this->getMethod('getDriverName');
+        $class         = $this->getMethod('getDriverName');
         $this->assertEquals($configuration['db']['driver'], $class->invokeArgs($this->object, array()));
     }
 
+    /**
+     * Retrieve protected method
+     *
+     * @param string $name Name
+     *
+     * @return mixed
+     */
     protected function getMethod($name)
     {
-        $class = new ReflectionClass('Gc\Module\AbstractModule');
+        $class  = new ReflectionClass('Gc\Module\AbstractModule');
         $method = $class->getMethod($name);
         $method->setAccessible(true);
         return $method;

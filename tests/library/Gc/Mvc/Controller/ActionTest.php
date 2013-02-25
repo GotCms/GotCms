@@ -44,12 +44,16 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Action
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -60,15 +64,21 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Controller\Action::onDispatch
      * @covers Gc\Mvc\Controller\Action::init
      * @covers Gc\Mvc\Controller\Action::_construct
+     *
+     * @return void
      */
     public function testOnDispatchWithoutIdentity()
     {
@@ -83,9 +93,13 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Controller\Action::onDispatch
      * @covers Gc\Mvc\Controller\Action::init
      * @covers Gc\Mvc\Controller\Action::_construct
+     *
+     * @return void
      */
     public function testOnDispatchWithIdentity()
     {
@@ -114,7 +128,11 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Controller\Action::getRouteMatch
+     *
+     * @return void
      */
     public function testGetRouteMatch()
     {
@@ -123,7 +141,11 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Controller\Action::getSession
+     *
+     * @return void
      */
     public function testGetSession()
     {
@@ -131,7 +153,11 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Controller\Action::getAuth
+     *
+     * @return void
      */
     public function testGetAuth()
     {
@@ -139,7 +165,11 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Controller\Action::returnJson
+     *
+     * @return void
      */
     public function testReturnJson()
     {
@@ -147,7 +177,11 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Controller\Action::events
+     *
+     * @return void
      */
     public function testEvents()
     {
@@ -155,7 +189,11 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mvc\Controller\Action::useFlashMessenger
+     *
+     * @return void
      */
     public function testUseflashMessenger()
     {

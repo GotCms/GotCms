@@ -41,6 +41,8 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractPrevalueEditor
+     *
+     * @return void
      */
     protected $object;
 
@@ -49,6 +51,8 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -73,6 +77,8 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -82,7 +88,11 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::getConfig
+     *
+     * @return void
      */
     public function testGetConfig()
     {
@@ -90,7 +100,11 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::setConfig
+     *
+     * @return void
      */
     public function testSetConfig()
     {
@@ -99,7 +113,11 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::getRequest
+     *
+     * @return void
      */
     public function testGetRequest()
     {
@@ -107,7 +125,11 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::getDatatype
+     *
+     * @return void
      */
     public function testGetDatatype()
     {
@@ -115,7 +137,11 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::render
+     *
+     * @return void
      */
     public function testRender()
     {
@@ -124,7 +150,11 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::addPath
+     *
+     * @return void
      */
     public function testAddPath()
     {
@@ -132,7 +162,11 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::getHelper
+     *
+     * @return void
      */
     public function testGetHelper()
     {

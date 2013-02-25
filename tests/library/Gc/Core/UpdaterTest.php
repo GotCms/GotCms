@@ -39,12 +39,16 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Updater
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,6 +58,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -61,8 +67,12 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::init
      * @covers Gc\Version::getLatest
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -70,7 +80,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::load
+     *
+     * @return void
      */
     public function testLoad()
     {
@@ -79,7 +93,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::update
+     *
+     * @return void
      */
     public function testUpdate()
     {
@@ -88,7 +106,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::update
+     *
+     * @return void
      */
     public function testUpdateWithoutAdapter()
     {
@@ -96,7 +118,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::upgrade
+     *
+     * @return void
      */
     public function testUpgrade()
     {
@@ -105,7 +131,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::rollback
+     *
+     * @return void
      */
     public function testRollback()
     {
@@ -114,7 +144,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::rollback
+     *
+     * @return void
      */
     public function testRollbackWithoutAdapter()
     {
@@ -122,7 +156,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::upgrade
+     *
+     * @return void
      */
     public function testUpgradeWithoutAdapter()
     {
@@ -130,7 +168,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::updateDatabase
+     *
+     * @return void
      */
     public function testUpdateDatabase()
     {
@@ -147,7 +189,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::updateDatabase
+     *
+     * @return void
      */
     public function testUpdateDatabaseWithEmptyFiles()
     {
@@ -164,7 +210,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::updateDatabase
+     *
+     * @return void
      */
     public function testUpdateDatabaseWithSqlError()
     {
@@ -181,7 +231,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::updateDatabase
+     *
+     * @return void
      */
     public function testUpdateDatabaseWithoutAdapter()
     {
@@ -190,7 +244,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
 
     /**
+     * Test
+     *
      * @covers Gc\Core\Updater::getMessages
+     *
+     * @return void
      */
     public function testGetMessages()
     {

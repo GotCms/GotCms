@@ -36,10 +36,10 @@ error_reporting(E_ALL | E_STRICT);
  */
 
 chdir(dirname(__DIR__));
-$gc_root        = getcwd();
-$zf_library     = $gc_root . '/vendor';
-$gc_library     = $gc_root . '/library';
-$gc_tests       = $gc_root . '/tests';
+$gc_root    = getcwd();
+$zf_library = $gc_root . '/vendor';
+$gc_library = $gc_root . '/library';
+$gc_tests   = $gc_root . '/tests';
 
 $path = array(
     $gc_library,
@@ -104,11 +104,11 @@ if (is_readable($gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
 }
 
 
-require_once('prepare-database.php');
+require_once 'prepare-database.php';
 
 /*
  * Unset global variables that are no longer needed.
  */
 unset($gc_root, $gc_library, $gc_tests, $path);
 
-require_once('override-php-functions.php');
+require_once 'override-php-functions.php';

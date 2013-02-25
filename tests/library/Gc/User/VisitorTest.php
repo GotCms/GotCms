@@ -39,12 +39,16 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Visitor
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,6 +58,8 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -61,37 +67,49 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Visitor::getVisitorId
+     *
+     * @return void
      */
     public function testGetVisitorId()
     {
-        $_SERVER['HTTPuser_AGENT'] = 'Mozilla/5.0 (X11; Linux x86_64; ' .
+        $_SERVER['HTTPuser_AGENT']       = 'Mozilla/5.0 (X11; Linux x86_64; ' .
             'rv:10.0.11) Gecko/20100101 Firefox/10.0.11 Iceweasel/10.0.11';
-        $_SERVER['HTTP_ACCEPT_CHARSET'] = null;
+        $_SERVER['HTTP_ACCEPT_CHARSET']  = null;
         $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en-us,en;q=0.5';
-        $_SERVER['SERVER_ADDR'] = '127.0.0.1';
-        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-        $_SERVER['REQUEST_URI'] = '/test';
-        $_SERVER['HTTP_REFERER'] = '/';
+        $_SERVER['SERVER_ADDR']          = '127.0.0.1';
+        $_SERVER['REMOTE_ADDR']          = '127.0.0.1';
+        $_SERVER['REQUEST_URI']          = '/test';
+        $_SERVER['HTTP_REFERER']         = '/';
         $this->assertInternalType('integer', $this->object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
     }
     /**
+     * Test
+     *
      * @covers Gc\User\Visitor::getVisitorId
+     *
+     * @return void
      */
     public function testGetVisitorIdWithWrongData()
     {
-        $_SERVER['HTTPuser_AGENT'] = null;
-        $_SERVER['HTTP_ACCEPT_CHARSET'] = null;
+        $_SERVER['HTTPuser_AGENT']       = null;
+        $_SERVER['HTTP_ACCEPT_CHARSET']  = null;
         $_SERVER['HTTP_ACCEPT_LANGUAGE'] = null;
-        $_SERVER['SERVER_ADDR'] = '127.0.0.1';
-        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-        $_SERVER['REQUEST_URI'] = '/test';
-        $_SERVER['HTTP_REFERER'] = '/';
+        $_SERVER['SERVER_ADDR']          = '127.0.0.1';
+        $_SERVER['REMOTE_ADDR']          = '127.0.0.1';
+        $_SERVER['REQUEST_URI']          = '/test';
+        $_SERVER['HTTP_REFERER']         = '/';
         $this->assertInternalType('integer', $this->object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Visitor::getUrlId
+     *
+     * @return void
      */
     public function testGetUrlId()
     {
@@ -103,7 +121,11 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Visitor::getTotalVisitors
+     *
+     * @return void
      */
     public function testGetTotalVisitors()
     {
@@ -111,7 +133,11 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Visitor::getTotalPageViews
+     *
+     * @return void
      */
     public function testGetTotalPageViews()
     {
@@ -119,10 +145,14 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Visitor::getNbPagesViews
      * @covers Gc\User\Visitor::sortData
      * @covers Gc\User\Visitor::checkSort
      * @covers Gc\User\Visitor::groupByDate
+     *
+     * @return void
      */
     public function testGetNbPagesViews()
     {
@@ -134,10 +164,14 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Visitor::getNbVisitors
      * @covers Gc\User\Visitor::sortData
      * @covers Gc\User\Visitor::checkSort
      * @covers Gc\User\Visitor::groupByDate
+     *
+     * @return void
      */
     public function testGetNbVisitors()
     {
@@ -149,10 +183,14 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Visitor::getUrlsViews
      * @covers Gc\User\Visitor::sortData
      * @covers Gc\User\Visitor::checkSort
      * @covers Gc\User\Visitor::groupByDate
+     *
+     * @return void
      */
     public function testGetUrlsViews()
     {
@@ -164,10 +202,14 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Visitor::getReferers
      * @covers Gc\User\Visitor::sortData
      * @covers Gc\User\Visitor::checkSort
      * @covers Gc\User\Visitor::groupByDate
+     *
+     * @return void
      */
     public function testGetReferers()
     {

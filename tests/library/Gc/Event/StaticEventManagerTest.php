@@ -39,6 +39,8 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var StaticEventManager
+     *
+     * @return void
      */
     protected $object;
 
@@ -48,6 +50,8 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      *
      * @covers Gc\Event\StaticEventManager::setInstance
      * @covers Gc\Event\StaticEventManager::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -57,6 +61,8 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -65,7 +71,11 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Event\StaticEventManager::getInstance
+     *
+     * @return void
      */
     public function testGetInstance()
     {
@@ -75,7 +85,11 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Event\StaticEventManager::setInstance
+     *
+     * @return void
      */
     public function testSetInstance()
     {
@@ -84,7 +98,11 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Event\StaticEventManager::hasInstance
+     *
+     * @return void
      */
     public function testHasInstance()
     {
@@ -92,7 +110,11 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Event\StaticEventManager::resetInstance
+     *
+     * @return void
      */
     public function testResetInstance()
     {
@@ -101,7 +123,11 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Event\StaticEventManager::getEvent
+     *
+     * @return void
      */
     public function testGetEventWithoutRegisteredEvent()
     {
@@ -109,7 +135,11 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Event\StaticEventManager::getEvent
+     *
+     * @return void
      */
     public function testGetEvent()
     {
@@ -126,7 +156,11 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Event\StaticEventManager::trigger
+     *
+     * @return void
      */
     public function testTrigger()
     {
@@ -142,7 +176,11 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Event\StaticEventManager::trigger
+     *
+     * @return void
      */
     public function testTriggerWithoutRegisteredEvent()
     {

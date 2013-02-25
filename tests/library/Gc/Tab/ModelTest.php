@@ -44,26 +44,36 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
@@ -72,6 +82,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Tab\Model::save
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -134,6 +146,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -150,7 +164,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::load
+     *
+     * @return void
      */
     public function testLoad()
     {
@@ -161,7 +179,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::load
+     *
+     * @return void
      */
     public function testLoadWithWrongValues()
     {
@@ -169,7 +191,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -177,7 +203,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::save
+     *
+     * @return void
      */
     public function testSaveWithWrongValues()
     {
@@ -187,7 +217,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::delete
+     *
+     * @return void
      */
     public function testDelete()
     {
@@ -198,7 +232,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithWrongValues()
     {
@@ -209,7 +247,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::fromArray
+     *
+     * @return void
      */
     public function testFromArray()
     {
@@ -217,7 +259,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::fromId
+     *
+     * @return void
      */
     public function testFromId()
     {
@@ -225,7 +271,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::fromId
+     *
+     * @return void
      */
     public function testFromIdWithWrongValues()
     {
@@ -233,7 +283,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::getDocumentType
+     *
+     * @return void
      */
     public function testGetDocumentType()
     {
@@ -241,7 +295,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Tab\Model::getProperties
+     *
+     * @return void
      */
     public function testGetProperties()
     {

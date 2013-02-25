@@ -39,17 +39,23 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Collection
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $module;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -66,6 +72,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -75,8 +83,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Module\Collection::init
      * @covers Gc\Module\Collection::setModules
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -84,7 +96,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Module\Collection::getSelect
+     *
+     * @return void
      */
     public function testGetSelect()
     {

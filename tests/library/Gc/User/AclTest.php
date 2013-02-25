@@ -39,10 +39,14 @@ class AclTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Acl
+     *
+     * @return void
      */
     protected $object;
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $user;
 
@@ -54,6 +58,8 @@ class AclTest extends \PHPUnit_Framework_TestCase
      * @covers Gc\User\Acl::roleResource
      * @covers Gc\User\Acl::initResources
      * @covers Gc\User\Acl::initRoles
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -75,6 +81,8 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -84,7 +92,11 @@ class AclTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Acl::listRoles
+     *
+     * @return void
      */
     public function testListRoles()
     {
@@ -92,7 +104,11 @@ class AclTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Acl::getRoleId
+     *
+     * @return void
      */
     public function testGetRoleId()
     {
@@ -100,7 +116,11 @@ class AclTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Acl::listResources
+     *
+     * @return void
      */
     public function testListResources()
     {
@@ -108,7 +128,11 @@ class AclTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\User\Acl::listResourcesByGroup
+     *
+     * @return void
      */
     public function testListResourcesByGroup()
     {

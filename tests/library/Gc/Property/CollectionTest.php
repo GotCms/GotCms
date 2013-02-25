@@ -21,7 +21,7 @@
  * @package  Library
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @linkuse  http://www.got-cms.com
+ * @link     http://www.got-cms.com
  */
 
 namespace Gc\Property;
@@ -47,47 +47,65 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Collection
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * @var TabModel
+     *
+     * @return void
      */
     protected $tab;
 
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $property;
 
     /**
      * @var DatatypeModel
+     *
+     * @return void
      */
     protected $datatype;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -173,6 +191,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -194,7 +214,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Collection::load
+     *
+     * @return void
      */
     public function testLoad()
     {
@@ -202,7 +226,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Collection::getProperties
+     *
+     * @return void
      */
     public function testGetProperties()
     {
@@ -231,7 +259,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Collection::setProperties
+     *
+     * @return void
      */
     public function testSetProperties()
     {
@@ -242,7 +274,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Collection::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -251,7 +287,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Collection::save
+     *
+     * @return void
      */
     public function testSaveWithWrongValues()
     {
@@ -262,7 +302,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Property\Collection::delete
+     *
+     * @return void
      */
     public function testDelete()
     {

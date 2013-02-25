@@ -43,12 +43,16 @@ class FileTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var File
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -58,6 +62,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -65,7 +71,11 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::load
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -83,7 +93,11 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::getPath
+     *
+     * @return void
      */
     public function testGetPath()
     {
@@ -91,7 +105,11 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::getDirectory
+     *
+     * @return void
      */
     public function testGetDirectory()
     {
@@ -114,7 +132,11 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::getFileTransfer
+     *
+     * @return void
      */
     public function testGetFileTransfer()
     {
@@ -122,7 +144,11 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::upload
+     *
+     * @return void
      */
     public function testUpload()
     {
@@ -134,8 +160,12 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::upload
      * @covers Gc\Media\File::remove
+     *
+     * @return void
      */
     public function testUploadWithoutValidators()
     {
@@ -157,7 +187,11 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::remove
+     *
+     * @return void
      */
     public function testRemove()
     {
@@ -165,18 +199,26 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::copyDirectory
+     *
+     * @return void
      */
     public function testCopyDirectory()
     {
-        $source = __DIR__ . '/_files/copy/source';
+        $source      = __DIR__ . '/_files/copy/source';
         $destination = __DIR__ . '/_files/copy/destination';
         $this->assertTrue($this->object->copyDirectory($source, $destination));
         `rm -rf $destination`;
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::isWritable
+     *
+     * @return void
      */
     public function testIsWritable()
     {
@@ -185,13 +227,22 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\File::isWritable
+     *
+     * @return void
      */
     public function testIsWritableWithNotWritablePath()
     {
         $this->assertFalse($this->object->isWritable('/etc'));
     }
 
+    /**
+     * Initiliaze files
+     *
+     * @return void
+     */
     protected function initializeFiles()
     {
         $_FILES = array(
@@ -218,6 +269,11 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->object->load($property, $document, 'test');
     }
 
+    /**
+     * Remove directories
+     *
+     * @return void
+     */
     protected function removeDirectories()
     {
         $dir = $this->object->getPath() . $this->object->getDirectory();

@@ -45,36 +45,50 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Navigation
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
+     *
+     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
     protected $documentType;
 
     /**
      * @var DocumentModel
+     *
+     * @return void
      */
     protected $document;
 
     /**
      * @var DocumentModel
+     *
+     * @return void
      */
     protected $documentChildren;
 
@@ -83,6 +97,8 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Component\Navigation::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -168,6 +184,8 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -193,7 +211,11 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\Navigation::setBasePath
+     *
+     * @return void
      */
     public function testSetBasePath()
     {
@@ -202,7 +224,11 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\Navigation::getBasePath
+     *
+     * @return void
      */
     public function testGetBasePath()
     {
@@ -211,7 +237,11 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\Navigation::render
+     *
+     * @return void
      */
     public function testRender()
     {

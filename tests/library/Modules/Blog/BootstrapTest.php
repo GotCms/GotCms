@@ -41,12 +41,16 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Blog
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -56,13 +60,19 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Bootstrap::init
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -70,7 +80,11 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Bootstrap::install
+     *
+     * @return void
      */
     public function testInstall()
     {
@@ -79,7 +93,11 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Bootstrap::uninstall
+     *
+     * @return void
      */
     public function testUninstall()
     {

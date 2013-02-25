@@ -44,22 +44,28 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ModuleUrl
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var Router
+     *
+     * @return void
      */
     protected $router;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
         $this->object = new ModuleUrl;
-        $router = new Router();
+        $router       = new Router();
         $router->addRoute(
             'moduleEdit',
             array(
@@ -74,7 +80,7 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->router = $router;
-        $view = new View;
+        $view         = new View;
         $view->getHelperPluginManager();
         $this->object->setView($view);
         $this->object->getView()->plugin('url')->setRouter($router);
@@ -83,6 +89,8 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -90,6 +98,13 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
         unset($this->router);
     }
 
+    /**
+     * Test
+     *
+     * @covers Gc\View\Helper\ModuleUrl::__invoke
+     *
+     * @return void
+     */
     public function testRoute()
     {
         $url = $this->object->__invoke();
@@ -97,7 +112,11 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\ModuleUrl::__invoke
+     *
+     * @return void
      */
     public function testRouteWithControllerAndAction()
     {
@@ -105,7 +124,11 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\ModuleUrl::__invoke
+     *
+     * @return void
      */
     public function testRouteWithParams()
     {

@@ -38,12 +38,16 @@ class FilesTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Files
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -53,14 +57,20 @@ class FilesTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Backup\Model\Files::export
      * @covers Modules\Backup\Model\Files::zip
+     *
+     * @return void
      */
     public function testExport()
     {

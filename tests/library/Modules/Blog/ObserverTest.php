@@ -42,12 +42,16 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Observer
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -57,6 +61,8 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -65,7 +71,11 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Observer::init
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -73,7 +83,11 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Blog\Observer::dashboard
+     *
+     * @return void
      */
     public function testDashBoard()
     {

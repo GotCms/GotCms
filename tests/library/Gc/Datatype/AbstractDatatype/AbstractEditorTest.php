@@ -21,7 +21,7 @@
  * @package  Library
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @linkuse  http://www.got-cms.com
+ * @link     http://www.got-cms.com
  */
 
 namespace Gc\Datatype\AbstractDatatype;
@@ -46,31 +46,43 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractEditor
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var TabModel
+     *
+     * @return void
      */
     protected $tab;
 
     /**
      * @var UserModel
+     *
+     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
+     *
+     * @return void
      */
      protected $documentType;
 
     /**
      * @var PropertyModel
+     *
+     * @return void
      */
     protected $property;
 
     /**
      * @var ViewModel
+     *
+     * @return void
      */
     protected $view;
 
@@ -79,6 +91,8 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -162,6 +176,8 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -181,7 +197,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::getValue
+     *
+     * @return void
      */
     public function testGetValue()
     {
@@ -190,7 +210,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::setValue
+     *
+     * @return void
      */
     public function testSetValue()
     {
@@ -199,7 +223,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::getConfig
+     *
+     * @return void
      */
     public function testGetConfig()
     {
@@ -207,7 +235,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::setConfig
+     *
+     * @return void
      */
     public function testSetConfig()
     {
@@ -216,7 +248,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::getUploadUrl
+     *
+     * @return void
      */
     public function testGetUploadUrl()
     {
@@ -227,7 +263,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::getName
+     *
+     * @return void
      */
     public function testGetName()
     {
@@ -235,7 +275,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::getProperty
+     *
+     * @return void
      */
     public function testGetProperty()
     {
@@ -243,7 +287,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::getDatatype
+     *
+     * @return void
      */
     public function testGetDatatype()
     {
@@ -251,7 +299,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::getRequest
+     *
+     * @return void
      */
     public function testGetRequest()
     {
@@ -259,7 +311,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::render
+     *
+     * @return void
      */
     public function testRender()
     {
@@ -268,7 +324,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::addPath
+     *
+     * @return void
      */
     public function testAddPath()
     {
@@ -276,7 +336,11 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Datatype\AbstractDatatype\AbstractEditor::getHelper
+     *
+     * @return void
      */
     public function testGetHelper()
     {

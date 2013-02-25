@@ -41,12 +41,16 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Collection
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -67,6 +71,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -76,7 +82,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::init
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -85,7 +95,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::getViews
+     *
+     * @return void
      */
     public function testGetViewsWithDocumentType()
     {
@@ -95,7 +109,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::getViews
+     *
+     * @return void
      */
     public function testGetViews()
     {
@@ -105,7 +123,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::getSelect
+     *
+     * @return void
      */
     public function testGetSelect()
     {
@@ -115,7 +137,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::addElement
+     *
+     * @return void
      */
     public function testAddElement()
     {
@@ -125,7 +151,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::clearElements
+     *
+     * @return void
      */
     public function testClearElements()
     {
@@ -136,7 +166,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::getElements
+     *
+     * @return void
      */
     public function testGetElements()
     {
@@ -146,11 +180,15 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::save
+     *
+     * @return void
      */
     public function testSave()
     {
-        $model = Model::fromIdentifier('identifier-collection-test');
+        $model         = Model::fromIdentifier('identifier-collection-test');
         $document_type = DocumentTypeModel::fromArray(
             array(
                 'name' => 'Document type name',
@@ -170,7 +208,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::save
+     *
+     * @return void
      */
     public function testSaveFailed()
     {
@@ -179,11 +221,15 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::delete
+     *
+     * @return void
      */
     public function testDelete()
     {
-        $model = Model::fromIdentifier('identifier-collection-test');
+        $model         = Model::fromIdentifier('identifier-collection-test');
         $document_type = DocumentTypeModel::fromArray(
             array(
                 'name' => 'Document type name',
@@ -204,7 +250,11 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Collection::delete
+     *
+     * @return void
      */
     public function testDeleteFailed()
     {

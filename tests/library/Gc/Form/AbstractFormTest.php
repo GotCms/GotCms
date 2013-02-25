@@ -43,6 +43,8 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractForm
+     *
+     * @return void
      */
     protected $object;
 
@@ -51,6 +53,8 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Form\AbstractForm::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -60,6 +64,8 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -67,7 +73,11 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Form\AbstractForm::init
+     *
+     * @return void
      */
     public function testInit()
     {
@@ -75,7 +85,11 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Form\AbstractForm::getAdapter
+     *
+     * @return void
      */
     public function testGetAdapter()
     {
@@ -83,7 +97,11 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Form\AbstractForm::loadValues
+     *
+     * @return void
      */
     public function testLoadValues()
     {
@@ -94,7 +112,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
         );
 
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(
+        $input_filter         = $input_filter_factory->createInputFilter(
             array(
                 'name' => array(
                     'required' => true,
@@ -120,7 +138,11 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Form\AbstractForm::addContent
+     *
+     * @return void
      */
     public function testAddContent()
     {
@@ -131,7 +153,11 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Form\AbstractForm::addContent
+     *
+     * @return void
      */
     public function testAddContentWithWrongParameters()
     {
@@ -140,7 +166,11 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Form\AbstractForm::getValue
+     *
+     * @return void
      */
     public function testGetValue()
     {

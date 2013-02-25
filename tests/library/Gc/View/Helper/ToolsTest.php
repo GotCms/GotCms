@@ -39,12 +39,16 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Tools
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,13 +58,19 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Tools::__invoke
+     *
+     * @return void
      */
     public function testUnserialize()
     {
@@ -68,7 +78,11 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Tools::__invoke
+     *
+     * @return void
      */
     public function testSerialize()
     {
@@ -76,18 +90,26 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Tools::__invoke
+     *
+     * @return void
      */
     public function testDebug()
     {
-        $result = $this->object->__invoke('debug', 'string');
-        $result = str_replace(array(PHP_EOL, "\n"), '_', $result);
+        $result   = $this->object->__invoke('debug', 'string');
+        $result   = str_replace(array(PHP_EOL, "\n"), '_', $result);
         $expected = '<pre>string</pre>';
         $this->assertEquals($expected, $result);
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Tools::__invoke
+     *
+     * @return void
      */
     public function testIsSerialized()
     {
@@ -95,7 +117,11 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\View\Helper\Tools::__invoke
+     *
+     * @return void
      */
     public function testCamelCase()
     {

@@ -39,12 +39,16 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Model
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,13 +58,19 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Icon\Model::fromArray
+     *
+     * @return void
      */
     public function testFromArray()
     {
@@ -68,7 +78,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Icon\Model::fromId
+     *
+     * @return void
      */
     public function testFromId()
     {
@@ -76,7 +90,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Icon\Model::fromId
+     *
+     * @return void
      */
     public function testFromWithWrongId()
     {
@@ -84,7 +102,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Icon\Model::save
+     *
+     * @return void
      */
     public function testSave()
     {
@@ -100,7 +122,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Icon\Model::save
+     *
+     * @return void
      */
     public function testSaveWithWrongValues()
     {
@@ -109,7 +135,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Icon\Model::delete
+     *
+     * @return void
      */
     public function testDelete()
     {
@@ -125,7 +155,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Icon\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithNoData()
     {
@@ -133,7 +167,11 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Icon\Model::delete
+     *
+     * @return void
      */
     public function testDeleteWithWrongValues()
     {

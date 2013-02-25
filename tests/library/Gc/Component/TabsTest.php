@@ -46,6 +46,8 @@ class TabsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Tabs
+     *
+     * @return void
      */
     protected $object;
 
@@ -54,6 +56,8 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Component\Tabs::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -63,6 +67,8 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -70,7 +76,11 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\Tabs::render
+     *
+     * @return void
      */
     public function testRenderWithIterableInterface()
     {
@@ -152,7 +162,11 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\Tabs::render
+     *
+     * @return void
      */
     public function testRenderWithParams()
     {
@@ -160,7 +174,11 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\Tabs::render
+     *
+     * @return void
      */
     public function testRenderWithoutParams()
     {
@@ -169,7 +187,11 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\Tabs::__toString
+     *
+     * @return void
      */
     public function testToStringWithEmptyData()
     {
@@ -178,7 +200,11 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\Tabs::__toString
+     *
+     * @return void
      */
     public function testToStringWithoutEmptyData()
     {
@@ -187,7 +213,11 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Component\Tabs::setData
+     *
+     * @return void
      */
     public function testSetData()
     {

@@ -39,34 +39,46 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Image
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var string
+     *
+     * @return void
      */
     protected $directory;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
         $this->directory = __DIR__ . '/_files/';
-        $this->object = new Image;
+        $this->object    = new Image;
     }
 
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::__construct
+     *
+     * @return void
      */
     public function testConstructor()
     {
@@ -74,7 +86,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::open
+     *
+     * @return void
      */
     public function testOpen()
     {
@@ -85,10 +101,14 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::resize
      * @covers Gc\Media\Image::getSizeByFixedWidth
      * @covers Gc\Media\Image::getSizeByFixedHeight
      * @covers Gc\Media\Image::hex2rgb
+     *
+     * @return void
      */
     public function testResizeWithUndefinedOption()
     {
@@ -99,9 +119,13 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::resize
      * @covers Gc\Media\Image::crop
      * @covers Gc\Media\Image::hex2rgb
+     *
+     * @return void
      */
     public function testResizeWithCropOption()
     {
@@ -110,10 +134,14 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::resize
      * @covers Gc\Media\Image::getSizeByFixedWidth
      * @covers Gc\Media\Image::getSizeByFixedHeight
      * @covers Gc\Media\Image::hex2rgb
+     *
+     * @return void
      */
     public function testResizeWithUndefinedColor()
     {
@@ -122,7 +150,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::resize
+     *
+     * @return void
      */
     public function testResizeWithNoImage()
     {
@@ -130,7 +162,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::hex2rgb
+     *
+     * @return void
      */
     public function testHex2rgbWith6Chars()
     {
@@ -138,7 +174,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::hex2rgb
+     *
+     * @return void
      */
     public function testHex2rgbWith3Chars()
     {
@@ -146,7 +186,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::hex2rgb
+     *
+     * @return void
      */
     public function testHex2rgbWithWrongValue()
     {
@@ -154,7 +198,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::save
+     *
+     * @return void
      */
     public function testSaveWithNoImage()
     {
@@ -162,7 +210,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::save
+     *
+     * @return void
      */
     public function testSaveWithPng()
     {
@@ -174,7 +226,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::save
+     *
+     * @return void
      */
     public function testSaveWithGif ()
     {
@@ -186,7 +242,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::save
+     *
+     * @return void
      */
     public function testSaveWithJpg()
     {
@@ -198,7 +258,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Media\Image::save
+     *
+     * @return void
      */
     public function testSaveInBmp()
     {

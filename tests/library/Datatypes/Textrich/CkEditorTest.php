@@ -39,12 +39,16 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var CkEditor
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,6 +58,8 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -61,7 +67,11 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Textrich\CkEditor::setParameters
+     *
+     * @return void
      */
     public function testSetParameters()
     {
@@ -73,7 +83,11 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Textrich\CkEditor::getToolbarAsJs
+     *
+     * @return void
      */
     public function testGetToolbarAsJs()
     {
@@ -82,7 +96,11 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Textrich\CkEditor::getAllToolbarItems
+     *
+     * @return void
      */
     public function testGetAllToolbarItems()
     {
@@ -90,7 +108,11 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Datatypes\Textrich\CkEditor::getAllItems
+     *
+     * @return void
      */
     public function testGetAllItems()
     {

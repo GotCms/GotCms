@@ -42,17 +42,23 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var IndexController
+     *
+     * @return void
      */
     protected $object;
 
     /**
      * @var Bootstrap
+     *
+     * @return void
      */
     protected $boostrap;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -67,6 +73,8 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -76,8 +84,12 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Sitemap\Controller\IndexController::indexAction
      * @todo   Implement testIndexAction().
+     *
+     * @return void
      */
     public function testIndexAction()
     {
@@ -85,8 +97,12 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Modules\Sitemap\Controller\IndexController::generateAction
      * @todo   Implement testGenerateAction().
+     *
+     * @return void
      */
     public function testGenerateAction()
     {

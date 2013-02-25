@@ -39,6 +39,8 @@ class MailTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Mail
+     *
+     * @return void
      */
     protected $object;
 
@@ -47,6 +49,8 @@ class MailTest extends \PHPUnit_Framework_TestCase
      * This method is called before a test is executed.
      *
      * @covers Gc\Mail::__construct
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -56,6 +60,8 @@ class MailTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
@@ -63,7 +69,11 @@ class MailTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test
+     *
      * @covers Gc\Mail::send
+     *
+     * @return void
      */
     public function testSend()
     {
