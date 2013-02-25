@@ -53,7 +53,7 @@ class Translation extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(
+        $input_filter         = $input_filter_factory->createInputFilter(
             array(
                 'source' => array(
                     'name' => 'source',

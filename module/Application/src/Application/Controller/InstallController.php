@@ -94,7 +94,7 @@ class InstallController extends Action
             $post_data = $this->getRequest()->getPost()->toArray();
             $this->installForm->setData($post_data);
             if ($this->installForm->isValid()) {
-                $session = $this->getSession();
+                $session            = $this->getSession();
                 $session['install'] = array('lang' => $this->installForm->getInputFilter()->getValue('lang'));
 
                 return $this->redirect()->toRoute('installLicense');
@@ -143,7 +143,7 @@ class InstallController extends Action
             define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
         }
 
-        $server_data = array();
+        $server_data   = array();
         $server_data[] = array(
         'label' => '/public/frontend', 'value' => File::isWritable(GC_APPLICATION_PATH . '/public/frontend')
         );
@@ -157,7 +157,7 @@ class InstallController extends Action
         'label' => '/public/media', 'value' => File::isWritable(GC_MEDIA_PATH)
         );
 
-        $php_data = array();
+        $php_data   = array();
         $php_data[] = array(
             'label' => 'Php version >= 5.3.3',
             'value' => PHP_VERSION_ID > 50303
@@ -187,7 +187,7 @@ class InstallController extends Action
             'value' => function_exists('json_encode') and function_exists('json_decode')
         );
 
-        $php_directive = array();
+        $php_directive   = array();
         $php_directive[] = array(
             'label' => 'Display Errors',
             'needed' => false,
@@ -277,10 +277,9 @@ class InstallController extends Action
                     $db_adapter = new DbAdapter($config);
                     $db_adapter->getDriver()->getConnection()->connect();
 
-                    $session = $this->getSession();
-                    $install = $session['install'];
-                    $install['db'] = $config;
-
+                    $session            = $this->getSession();
+                    $install            = $session['install'];
+                    $install['db']      = $config;
                     $session['install'] = $install;
 
                     return $this->redirect()->toRoute('installConfiguration');
@@ -311,10 +310,10 @@ class InstallController extends Action
             if ($this->installForm->isValid()) {
                 $values = $this->installForm->getInputFilter()->getValues();
 
-                $session = $this->getSession();
-                $install = $session['install'];
+                $session                  = $this->getSession();
+                $install                  = $session['install'];
                 $install['configuration'] = $values;
-                $session['install'] = $install;
+                $session['install']       = $install;
 
                 return $this->redirect()->toRoute('installComplete');
             }
@@ -340,7 +339,7 @@ class InstallController extends Action
                 $db_adapter = new DbAdapter($session['install']['db']);
                 $db_adapter->getDriver()->getConnection()->connect();
 
-                $step = $this->getRequest()->getPost()->get('step');
+                $step     = $this->getRequest()->getPost()->get('step');
                 $sql_type = str_replace('pdo_', '', $session['install']['db']['driver']);
                 try {
                     switch($step) {
@@ -420,7 +419,7 @@ class InstallController extends Action
                         //Create user and roles
                         case 'c-uar':
                             //Create role
-                            $ini = new Ini();
+                            $ini   = new Ini();
                             $roles = $ini->fromFile(GC_APPLICATION_PATH . '/data/install/scripts/roles.ini');
 
                             try {
@@ -428,14 +427,14 @@ class InstallController extends Action
                                     $statement = $db_adapter->createStatement(
                                         "INSERT INTO user_acl_role (name) VALUES ('" . $value . "')"
                                     );
-                                    $result = $statement->execute();
+                                    $result    = $statement->execute();
                                 }
                             } catch (Exception $e) {
                                 return $this->returnJson(array('messages' => $e->getMessage()));
                             }
 
                             //resources
-                            $ini = new Ini();
+                            $ini       = new Ini();
                             $resources = $ini->fromFile(GC_APPLICATION_PATH . '/data/install/scripts/resources.ini');
 
                             try {
@@ -443,19 +442,19 @@ class InstallController extends Action
                                     $statement = $db_adapter->createStatement(
                                         "INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')"
                                     );
-                                    $result = $statement->execute();
+                                    $result    = $statement->execute();
 
-                                    $statement = $db_adapter->createStatement(
+                                    $statement      = $db_adapter->createStatement(
                                         "SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'"
                                     );
-                                    $result = $statement->execute();
+                                    $result         = $statement->execute();
                                     $last_insert_id = $result->current();
                                     $last_insert_id = $last_insert_id['id'];
 
                                     $permissions = array();
                                     foreach ($value as $k => $v) {
                                         if (!in_array($k, $permissions)) {
-                                            $statement = $db_adapter->createStatement(
+                                            $statement     = $db_adapter->createStatement(
                                                 "INSERT INTO user_acl_permission
                                                 (
                                                     permission,
@@ -463,36 +462,36 @@ class InstallController extends Action
                                                 )
                                                 VALUES ('" . $k . "', '" . $last_insert_id . "')"
                                             );
-                                            $result = $statement->execute();
+                                            $result        = $statement->execute();
                                             $permissions[] = $k;
                                         }
                                     }
                                 }
 
                                 foreach ($resources as $key => $value) {
-                                    $statement = $db_adapter->createStatement(
+                                    $statement               = $db_adapter->createStatement(
                                         "SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'"
                                     );
-                                    $result = $statement->execute();
+                                    $result                  = $statement->execute();
                                     $last_resource_insert_id = $result->current();
                                     $last_resource_insert_id = $last_resource_insert_id['id'];
 
                                     foreach ($value as $k => $v) {
-                                        $statement = $db_adapter->createStatement(
+                                        $statement      = $db_adapter->createStatement(
                                             "SELECT id
                                             FROM user_acl_permission
                                             WHERE permission =  '" . $k . "'
                                                 AND user_acl_resource_id = '" . $last_resource_insert_id . "'"
                                         );
-                                        $result = $statement->execute();
+                                        $result         = $statement->execute();
                                         $last_insert_id = $result->current();
                                         $last_insert_id = $last_insert_id['id'];
 
                                         $statement = $db_adapter->createStatement(
                                             "SELECT id FROM user_acl_role WHERE name = '" . $v . "'"
                                         );
-                                        $result = $statement->execute();
-                                        $role = $result->current();
+                                        $result    = $statement->execute();
+                                        $role      = $result->current();
                                         if (!empty($role['id'])) {
                                             $statement = $db_adapter->createStatement(
                                                 "INSERT INTO user_acl
@@ -502,7 +501,7 @@ class InstallController extends Action
                                                 )
                                                 VALUES ('" . $role['id'] . "', " . $last_insert_id . ')'
                                             );
-                                            $result = $statement->execute();
+                                            $result    = $statement->execute();
                                         }
                                     }
                                 }
@@ -554,9 +553,9 @@ class InstallController extends Action
 
                         //Install template
                         case 'it':
-                            $template = $session['install']['configuration']['template'];
+                            $template      = $session['install']['configuration']['template'];
                             $template_path = GC_APPLICATION_PATH . sprintf('/data/install/design/%s', $template);
-                            $file_path = sprintf('%s/%s.sql', $template_path, $sql_type);
+                            $file_path     = sprintf('%s/%s.sql', $template_path, $sql_type);
                             if (!file_exists($file_path)) {
                                 return $this->returnJson(
                                     array(
@@ -581,7 +580,7 @@ class InstallController extends Action
 
                         //Create configuration file
                         case 'c-cf':
-                            $db = $session['install']['db'];
+                            $db   = $session['install']['db'];
                             $file = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/config.tpl.php');
                             $file = str_replace(
                                 array(
@@ -625,7 +624,8 @@ class InstallController extends Action
     /**
      * Check install step
      *
-     * @param string $step
+     * @param string $step Installation step
+     *
      * @return \Zend\View\Model\ViewModel
      */
     protected function checkInstall($step)

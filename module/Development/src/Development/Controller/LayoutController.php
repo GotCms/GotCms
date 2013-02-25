@@ -100,7 +100,7 @@ class LayoutController extends Action
      */
     public function editAction()
     {
-        $layout_id = $this->getRouteMatch()->getParam('id', null);
+        $layout_id    = $this->getRouteMatch()->getParam('id', null);
         $layout_model = Layout\Model::fromId($layout_id);
         if (empty($layout_id) or empty($layout_model)) {
             return $this->redirect()->toRoute('layoutList');
@@ -181,7 +181,7 @@ class LayoutController extends Action
                 }
 
                 $identifier = preg_replace('~\.phtml$~', '', $name);
-                $layout = Layout\Model::fromIdentifier($identifier);
+                $layout     = Layout\Model::fromIdentifier($identifier);
                 if (empty($layout)) {
                     continue;
                 }
@@ -210,21 +210,21 @@ class LayoutController extends Action
                 return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
             }
 
-            $content = $layout->getContent();
+            $content  = $layout->getContent();
             $filename = $layout->getIdentifier() . 'phtml';
         } else {
-            $layouts = new Layout\Collection();
-            $children = $layouts->getLayouts();
-            $zip = new ZipArchive;
+            $layouts      = new Layout\Collection();
+            $children     = $layouts->getLayouts();
+            $zip          = new ZipArchive;
             $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
-            $res = $zip->open($tmp_filename, ZipArchive::CREATE);
+            $res          = $zip->open($tmp_filename, ZipArchive::CREATE);
             if ($res === true) {
                 foreach ($children as $child) {
                     $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
                 }
 
                 $zip->close();
-                $content = file_get_contents($tmp_filename);
+                $content  = file_get_contents($tmp_filename);
                 $filename = 'layout.zip';
                 unlink($tmp_filename);
             }

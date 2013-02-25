@@ -46,10 +46,6 @@ class IndexController extends Action
      */
     public function indexAction()
     {
-        /**
-         * Load SVGGraph
-         */
-        require_once('vendor/SVGGraph/SVGGraph.php');
 
         $visitor_model = new Visitor();
 
@@ -70,11 +66,11 @@ class IndexController extends Action
           'minimum_grid_spacing' => 40,
         );
 
-        $graph = new SVGGraph(600, 400, $settings);
+        $graph          = new SVGGraph(600, 400, $settings);
         $graph->colours = array(array('#656565','#959595'));
+        $data           = array();
+        $array          = array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR');
 
-        $data = array();
-        $array = array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR');
         foreach ($array as $type => $sql_value) {
             switch($type) {
                 case 'hours':

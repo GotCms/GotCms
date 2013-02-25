@@ -79,7 +79,7 @@ class UserController extends Action
         $post = $this->getRequest()->getPost();
         if ($this->getRequest()->isPost() and $login_form->setData($post->toArray()) and $login_form->isValid()) {
             $user_model = new User\Model();
-            $redirect = $login_form->getValue('redirect');
+            $redirect   = $login_form->getValue('redirect');
             if ($user_id = $user_model->authenticate($post->get('login'), $post->get('password'))) {
                 if (!empty($redirect)) {
                     return $this->redirect()->toUrl(base64_decode($redirect));
@@ -106,8 +106,8 @@ class UserController extends Action
     {
         $this->layout()->setTemplate('layouts/one-page.phtml');
         $forgot_password_form = new UserForgotForm();
-        $id = $this->getRouteMatch()->getParam('id');
-        $key = $this->getRouteMatch()->getParam('key');
+        $id                   = $this->getRouteMatch()->getParam('id');
+        $key                  = $this->getRouteMatch()->getParam('key');
         if (!empty($id) and !empty($key)) {
             $user_model = User\Model::fromId($id);
             if ($user_model->getRetrievePasswordKey() == $key
@@ -233,7 +233,7 @@ class UserController extends Action
      */
     public function editAction()
     {
-        $user_id = $this->getRouteMatch()->getParam('id');
+        $user_id    = $this->getRouteMatch()->getParam('id');
         $user_model = User\Model::fromId($user_id);
 
         $form = new UserForm();

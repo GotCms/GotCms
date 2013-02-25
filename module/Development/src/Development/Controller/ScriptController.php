@@ -100,7 +100,7 @@ class ScriptController extends Action
      */
     public function editAction()
     {
-        $script_id = $this->getRouteMatch()->getParam('id', null);
+        $script_id    = $this->getRouteMatch()->getParam('id', null);
         $script_model = Script\Model::fromId($script_id);
         if (empty($script_id) or empty($script_model)) {
             return $this->redirect()->toRoute('scriptList');
@@ -180,7 +180,7 @@ class ScriptController extends Action
                 }
 
                 $identifier = preg_replace('~\.phtml$~', '', $name);
-                $script = Script\Model::fromIdentifier($identifier);
+                $script     = Script\Model::fromIdentifier($identifier);
                 if (empty($script)) {
                     continue;
                 }
@@ -209,21 +209,21 @@ class ScriptController extends Action
                 return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
             }
 
-            $content = $script->getContent();
+            $content  = $script->getContent();
             $filename = $script->getIdentifier() . 'phtml';
         } else {
-            $scripts = new Script\Collection();
-            $children = $scripts->getScripts();
-            $zip = new ZipArchive;
+            $scripts      = new Script\Collection();
+            $children     = $scripts->getScripts();
+            $zip          = new ZipArchive;
             $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
-            $res = $zip->open($tmp_filename, ZipArchive::CREATE);
+            $res          = $zip->open($tmp_filename, ZipArchive::CREATE);
             if ($res === true) {
                 foreach ($children as $child) {
                     $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
                 }
 
                 $zip->close();
-                $content = file_get_contents($tmp_filename);
+                $content  = file_get_contents($tmp_filename);
                 $filename = 'scripts.zip';
                 unlink($tmp_filename);
             }

@@ -67,7 +67,7 @@ class DatatypeController extends Action
      */
     public function createAction()
     {
-        $datatype = new Datatype\Model();
+        $datatype      = new Datatype\Model();
         $datatype_form = new DatatypeForm();
         $datatype_form->setAttribute('action', $this->url()->fromRoute('datatypeCreate'));
         if ($this->getRequest()->isPost()) {

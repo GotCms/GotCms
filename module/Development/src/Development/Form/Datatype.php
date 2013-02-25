@@ -48,13 +48,12 @@ class Datatype extends AbstractForm
      */
     public function init()
     {
-        $model  = new Element\Select('model');
-
-        $path = GC_APPLICATION_PATH . '/library/Datatypes/';
+        $model    = new Element\Select('model');
+        $path     = GC_APPLICATION_PATH . '/library/Datatypes/';
         $list_dir = glob($path . '*', GLOB_ONLYDIR);
-        $options = array();
+        $options  = array();
         foreach ($list_dir as $dir) {
-            $dir = str_replace($path, '', $dir);
+            $dir           = str_replace($path, '', $dir);
             $options[$dir] = $dir;
         }
 
@@ -64,7 +63,7 @@ class Datatype extends AbstractForm
         $this->add($model);
 
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(
+        $input_filter         = $input_filter_factory->createInputFilter(
             array(
                 'name' => array(
                     'required' => true,

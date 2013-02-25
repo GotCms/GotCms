@@ -97,7 +97,7 @@ class DocumentController extends Action
         $parent_id = $this->getRouteMatch()->getParam('id');
 
         $document_type_collection = new DocumentType\Collection();
-        $document_type_element = $document_form->get('document_type');
+        $document_type_element    = $document_form->get('document_type');
         if (empty($parent_id)) {
             $document_type_element->setValueOptions(
                 array('' => 'Select document type') + $document_type_collection->getSelect()
@@ -127,11 +127,11 @@ class DocumentController extends Action
                 $this->flashMessenger()->addErrorMessage('Invalid document data');
                 $this->useFlashMessenger();
             } else {
-                $document_name = $document_form->getValue('document-name');
+                $document_name    = $document_form->getValue('document-name');
                 $document_url_key = $document_form->getValue('document-url_key');
                 $document_type_id = $document_form->getValue('document_type');
-                $parent_id = $document_form->getValue('parent');
-                $document = new DocumentModel();
+                $parent_id        = $document_form->getValue('parent');
+                $document         = new DocumentModel();
                 $document->setName($document_name)
                     ->setDocumentTypeId($document_type_id)
                     ->setParentId($parent_id)
@@ -192,7 +192,7 @@ class DocumentController extends Action
     public function editAction()
     {
         $document_id = $this->getRouteMatch()->getParam('id');
-        $document = DocumentModel::fromId($document_id);
+        $document    = DocumentModel::fromId($document_id);
         if (empty($document)) {
             $this->flashMessenger()->addErrorMessage('Document does not exists !');
             return $this->redirect()->toRoute('content');
@@ -204,12 +204,12 @@ class DocumentController extends Action
             );
             $this->layout()->setVariable('documentId', $document_id);
             $document_type_id = $document->getDocumentTypeId();
-            $layout_id = $this->getRouteMatch()->getParam('layout_id', '');
+            $layout_id        = $this->getRouteMatch()->getParam('layout_id', '');
 
             if ($this->getRequest()->isPost()) {
-                $has_error = false;
+                $has_error     = false;
                 $document_vars = $this->getRequest()->getPost()->toArray();
-                $old_url_key = $document->getUrlKey();
+                $old_url_key   = $document->getUrlKey();
                 $document->setName(
                     empty($document_vars['document-name']) ?
                     $document->getName() :
@@ -242,14 +242,14 @@ class DocumentController extends Action
                 );
             }
 
-            $tabs = $this->loadTabs($document_type_id);
+            $tabs       = $this->loadTabs($document_type_id);
             $tabs_array = array();
-            $datatypes = array();
+            $datatypes  = array();
 
             $idx = 1;
             foreach ($tabs as $tab) {
                 $tabs_array[] = $tab->getName();
-                $properties = $this->loadProperties($document_type_id, $tab->getId(), $document->getId());
+                $properties   = $this->loadProperties($document_type_id, $tab->getId(), $document->getId());
 
                 $fieldset = new ZendForm\Fieldset('tabs-' . $idx);
                 if ($this->getRequest()->isPost()) {
@@ -364,7 +364,7 @@ class DocumentController extends Action
     public function pasteAction()
     {
         $parent_id = $this->getRouteMatch()->getParam('id', null);
-        $session = $this->getSession();
+        $session   = $this->getSession();
         if (!empty($parent_id)) {
             $parent_document = DocumentModel::fromId($parent_id);
             if (empty($parent_id)) {
@@ -395,7 +395,7 @@ class DocumentController extends Action
             unset($session['document-cut']);
             return $this->returnJson(array('success' => true));
         } elseif (!empty($session['document-copy'])) {
-            $url_key = $this->getRequest()->getQuery('url_key');
+            $url_key         = $this->getRequest()->getQuery('url_key');
             $search_document = DocumentModel::fromUrlKey($url_key, $parent_id);
             if (!empty($search_document)) {
                 return $this->returnJson(array('success' => false));
@@ -410,7 +410,7 @@ class DocumentController extends Action
                 }
             }
 
-            $copy_document = new DocumentModel();
+            $copy_document            = new DocumentModel();
             $copy_document_properties = new Property\Collection();
             $copy_document_properties->load(null, null, $document->getId());
 
@@ -453,7 +453,7 @@ class DocumentController extends Action
             $documents->load($document_id);
             $documents_list = $documents->getChildren();
         } else {
-            $documents = DocumentModel::fromId($document_id);
+            $documents      = DocumentModel::fromId($document_id);
             $documents_list = $documents->getChildren();
         }
 
@@ -469,7 +469,7 @@ class DocumentController extends Action
     public function sortOrderAction()
     {
         $order = $this->getRequest()->getPost()->get('order');
-        $list = explode(',', str_replace('document_', '', $order));
+        $list  = explode(',', str_replace('document_', '', $order));
 
         foreach ($list as $order => $document_id) {
             $document_model = DocumentModel::fromId($document_id);
@@ -485,7 +485,8 @@ class DocumentController extends Action
     /**
      * Check url key with deleted space and special chars
      *
-     * @param string $string
+     * @param string $string Url key
+     *
      * @return string
      */
     protected function checkUrlKey($string)
@@ -494,11 +495,11 @@ class DocumentController extends Action
             ' ',
             'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'
         );
-        $to = array(
+        $to      = array(
             '-',
             'aaaaaceeeeiiiinooooouuuuyyaaaaaceeeeiiiinooooouuuuy'
         );
-        $string = strtolower(str_replace($replace, $to, trim($string)));
+        $string  = strtolower(str_replace($replace, $to, trim($string)));
 
         return $string;
     }
@@ -506,13 +507,14 @@ class DocumentController extends Action
     /**
      * Load tabs from document type
      *
-     * @param integer $document_type_id
+     * @param integer $document_type_id Document type id
+     *
      * @return \Gc\Tab\Collection
      */
     protected function loadTabs($document_type_id)
     {
         $document_type = DocumentType\Model::fromId($document_type_id);
-        $tabs = $document_type->getTabs();
+        $tabs          = $document_type->getTabs();
 
         return $tabs;
     }
@@ -520,9 +522,10 @@ class DocumentController extends Action
     /**
      * Load properties from document type, tab and document
      *
-     * @param integer $document_type_id
-     * @param integer $tab_id
-     * @param integer $document_id
+     * @param integer $document_type_id Document type id
+     * @param integer $tab_id           Tab id
+     * @param integer $document_id      Document id
+     *
      * @return \Gc\Property\Collection
      */
     protected function loadProperties($document_type_id, $tab_id, $document_id)

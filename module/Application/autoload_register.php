@@ -25,4 +25,4 @@
  * @link       http://www.got-cms.com
  */
 
-spl_autoload_register(include __DIR__ . '/autoload_function.php');
+spl_autoload_register(require __DIR__ . '/autoload_function.php');

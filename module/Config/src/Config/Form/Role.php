@@ -51,7 +51,7 @@ class Role extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(
+        $input_filter         = $input_filter_factory->createInputFilter(
             array(
                 'name' => array(
                     'required' => true,
@@ -78,14 +78,15 @@ class Role extends AbstractForm
      * Initialize permissions
      *
      * @param array $user_permissions Optional
+     *
      * @return \Config\Form\Role
      */
     public function initPermissions($user_permissions = array())
     {
-        $filter = $this->getInputFilter();
+        $filter            = $this->getInputFilter();
         $permissions_table = new Permission\Collection();
-        $resources = $permissions_table->getPermissions();
-        $element = new Element('permissions');
+        $resources         = $permissions_table->getPermissions();
+        $element           = new Element('permissions');
 
         $data = $resources;
         foreach ($resources as $resource => $permissions) {

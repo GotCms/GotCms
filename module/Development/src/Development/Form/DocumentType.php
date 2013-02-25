@@ -72,7 +72,7 @@ class DocumentType extends AbstractForm
     {
         $this->setInputFilter(new InputFilter());
         $this->datatypeCollection = new Datatype\Collection();
-        $this->viewCollection = new View\Collection();
+        $this->viewCollection     = new View\Collection();
 
         $this->getInfos();
         $this->getViews();
@@ -136,13 +136,13 @@ class DocumentType extends AbstractForm
         $fieldsets->add(new Element\Text('name'));
         $fieldsets->add(new Element\Text('description'));
 
-        $icon_id = new Element\Select('icon_id');
+        $icon_id    = new Element\Select('icon_id');
         $collection = new Icon\Collection();
         $icon_id->setValueOptions($collection->getIcons());
         $fieldsets->add($icon_id);
 
         $document_type_collection = new DocumentTypeCollection();
-        $select = $document_type_collection->getSelect();
+        $select                   = $document_type_collection->getSelect();
         if (!empty($select)) {
             $dependency = new Element\MultiCheckbox('infos[dependency]');
             $dependency->setValueOptions($document_type_collection->getSelect());
@@ -230,7 +230,8 @@ class DocumentType extends AbstractForm
     /**
      * Add property sub form
      *
-     * @param mixed \Gc\Property\Model | array
+     * @param mixed $property \Gc\Property\Model|array
+     *
      * @return \Developpement\Form\DocumentType
      */
     public function addProperty($property)
@@ -254,7 +255,7 @@ class DocumentType extends AbstractForm
             ->setValueOptions($this->datatypeCollection->getSelect());
 
         $description = new Element\Text('description');
-        $required = new Element\Checkbox('required');
+        $required    = new Element\Checkbox('required');
         $required->setValue(1);
         $property_id = new Element\Hidden('property_id');
 
@@ -353,7 +354,7 @@ class DocumentType extends AbstractForm
 
         $fieldsets = new FieldSet('tabs');
 
-        $tabs_list = new Element\Select('tabs_list');
+        $tabs_list      = new Element\Select('tabs_list');
         $tab_collection = new Tab\Collection();
         $tabs_list->setValueOptions($tab_collection->getTabs());
         $fieldsets->add($tabs_list);
@@ -366,7 +367,8 @@ class DocumentType extends AbstractForm
     /**
      * Add tab sub form
      *
-     * @param mixed \Gc\Tab\Model | array
+     * @param mixed $tab \Gc\Tab\Model|array
+     *
      * @return \Developpement\Form\DocumentType
      */
     public function addTab($tab)
@@ -432,7 +434,8 @@ class DocumentType extends AbstractForm
      * Set values and create tabs and properties FieldSet
      * from parameter
      *
-     * @param mixed \Gc\DocumentType\Model | array
+     * @param mixed $element \Gc\DocumentType\Model | array
+     *
      * @return \Developpement\Form\DocumentType
      */
     public function setValues($element)
@@ -453,7 +456,7 @@ class DocumentType extends AbstractForm
 
             $views_form->get('available_views')->setValue($views_collection->getSelect());
 
-            $tabs = $element->getTabs();
+            $tabs           = $element->getTabs();
             $tab_collection = new Tab\Collection();
             $this->getTabs()->get('tabs_list')->setValueOptions($tab_collection->getImportableTabs($element->getId()));
 

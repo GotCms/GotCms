@@ -82,7 +82,7 @@ class IndexController extends Action
                 $this->useFlashMessenger();
             } else {
                 $module_name = $form->getInputFilter()->get('module')->getValue();
-                $object = $this->loadBootstrap($module_name);
+                $object      = $this->loadBootstrap($module_name);
 
                 if (!$object->install()) {
                     $this->flashMessenger()->addErrorMessage('Can not install this module');
@@ -136,7 +136,7 @@ class IndexController extends Action
      */
     public function uninstallAction()
     {
-        $module_id = $this->getRouteMatch()->getParam('id');
+        $module_id    = $this->getRouteMatch()->getParam('id');
         $module_model = ModuleModel::fromId($module_id);
         if (!empty($module_model)) {
             $object = $this->loadBootstrap($module_model->getName());
@@ -175,11 +175,10 @@ class IndexController extends Action
      */
     public function editAction()
     {
-        $module_id = $this->getRouteMatch()->getParam('m');
+        $module_id       = $this->getRouteMatch()->getParam('m');
         $controller_name = $this->getRouteMatch()->getParam('mc', 'index');
-        $action_name = $this->getRouteMatch()->getParam('ma', 'index');
-
-        $module_model = ModuleModel::fromId($module_id);
+        $action_name     = $this->getRouteMatch()->getParam('ma', 'index');
+        $module_model    = ModuleModel::fromId($module_id);
 
         /**
          * Bootstrap event
@@ -215,7 +214,7 @@ class IndexController extends Action
         }
 
         if (!empty($result) and is_array($result)) {
-            $model = new ViewModel();
+            $model  = new ViewModel();
             $result = $model->setVariables($result);
         } elseif (empty($result)) {
             $result = new ViewModel();
@@ -235,7 +234,8 @@ class IndexController extends Action
     /**
      * Load bootstrap from module name
      *
-     * @param string $module_name
+     * @param string $module_name Module name
+     *
      * @return \Gc\Module\AbstractModule
      */
     protected function loadBootstrap($module_name)

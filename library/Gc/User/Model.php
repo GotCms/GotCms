@@ -280,7 +280,7 @@ class Model extends AbstractTable
 
             $message = Registry::get('Translator')
                 ->translate(
-                    'To reset your password follow this link but be careful '.
+                    'To reset your password follow this link but be careful ' .
                     'you only have one hour before the link expires:'
                 );
             $message .= '<br>';

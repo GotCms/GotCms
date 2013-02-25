@@ -96,7 +96,7 @@ class MediaController extends Action
     {
 
         $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
-        $headscript = $helper_broker->get('HeadScript');
+        $headscript    = $helper_broker->get('HeadScript');
         $headscript->appendFile('/backend/js/libs/elfinder.min.js', 'text/javascript');
 
         $language = preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale());
@@ -147,7 +147,7 @@ class MediaController extends Action
             return $this->returnJson(array('error' => true));
         }
 
-        $file = base64_decode($this->getRouteMatch()->getParam('file'));
+        $file       = base64_decode($this->getRouteMatch()->getParam('file'));
         $file_class = new File();
         $file_class->load($property, $document);
         return $this->returnJson(array($file_class->remove($file)));

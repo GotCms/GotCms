@@ -67,7 +67,7 @@ class Document extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(
+        $input_filter         = $input_filter_factory->createInputFilter(
             array(
                 'document-name' => array(
                     'name' => 'document-name',
@@ -140,7 +140,7 @@ class Document extends AbstractForm
         }
 
         $input_filter = $this->getInputFilter();
-        $validators = $input_filter->get('document-url_key')->getValidatorChain()->getValidators();
+        $validators   = $input_filter->get('document-url_key')->getValidatorChain()->getValidators();
 
         foreach ($validators as $validator) {
             if ($validator['instance'] instanceof Validator\Db\NoRecordExists) {
@@ -154,7 +154,8 @@ class Document extends AbstractForm
     /**
      * Load document form from DocumentModel
      *
-     * @param DocumentModel $document
+     * @param DocumentModel $document Document model
+     *
      * @return void
      */
     public function load(DocumentModel $document)
@@ -180,9 +181,9 @@ class Document extends AbstractForm
 
         $this->add($show_in_nav);
 
-        $document_type = $document->getDocumentType();
+        $document_type    = $document->getDocumentType();
         $views_collection = $document_type->getAvailableViews();
-        $select = $views_collection->getSelect();
+        $select           = $views_collection->getSelect();
 
         if (empty($select)) {
             $view_model = View\Model::fromId($document->getDocumentType()->getDefaultViewId());
@@ -194,7 +195,7 @@ class Document extends AbstractForm
         }
 
         $input_filter_factory = $this->getInputFilter();
-        $input_filter = $input_filter_factory->add(
+        $input_filter         = $input_filter_factory->add(
             array(
                 'name' => 'document-view',
                 'required' => true,
@@ -207,16 +208,16 @@ class Document extends AbstractForm
 
         $view = new Element\Select('document-view');
         $view->setValueOptions(array('' => 'Select view') + $select)
-            ->setValue((string)$document->getViewId())
+            ->setValue((string) $document->getViewId())
             ->setAttribute('id', 'view')
             ->setAttribute('label', 'View');
 
         $this->add($view);
 
         $layouts_collection = new Layout\Collection();
-        $layout = new Element\Select('document-layout');
+        $layout             = new Element\Select('document-layout');
         $layout->setValueOptions($layouts_collection->getSelect())
-            ->setValue((string)$document->getLayoutId())
+            ->setValue((string) $document->getLayoutId())
             ->setAttribute('id', 'layout')
             ->setAttribute('label', 'Layout');
 
@@ -240,7 +241,7 @@ class Document extends AbstractForm
         $more_information->setAttribute('content', '');
         $this->add($more_information);
 
-        $this->parentId = $document->getParentId();
+        $this->parentId   = $document->getParentId();
         $this->documentId = $document->getId();
 
         $this->loadValues($document);

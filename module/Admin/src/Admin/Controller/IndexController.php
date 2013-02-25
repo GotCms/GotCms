@@ -50,13 +50,13 @@ class IndexController extends Action
      */
     public function indexAction()
     {
-        $data = array();
-        $data['version'] = Version::VERSION;
+        $data                    = array();
+        $data['version']         = Version::VERSION;
         $data['versionIsLatest'] = Version::isLatest();
-        $data['versionLatest'] = Version::getLatest();
+        $data['versionLatest']   = Version::getLatest();
 
-        $content_stats = array();
-        $documents = new Collection();
+        $content_stats                     = array();
+        $documents                         = new Collection();
         $content_stats['online_documents'] = array(
             'count' => count($documents->getAvailableDocuments()),
             'label' => 'Online documents',
@@ -71,7 +71,7 @@ class IndexController extends Action
 
         $data['contentStats'] = $content_stats;
 
-        $visitor_model = new Visitor();
+        $visitor_model     = new Visitor();
         $data['userStats'] = array(
             'total_visitors' => array(
                 'count' => $visitor_model->getTotalVisitors(),
@@ -85,9 +85,9 @@ class IndexController extends Action
             ),
         );
 
-        $widgets = @unserialize(Config::getValue('dashboard_widgets'));
+        $widgets                   = @unserialize(Config::getValue('dashboard_widgets'));
         $data['dashboardSortable'] = !empty($widgets['sortable']) ? Json::encode($widgets['sortable']) : '{}';
-        $data['dashboardWelcome'] = !empty($widgets['welcome']);
+        $data['dashboardWelcome']  = !empty($widgets['welcome']);
 
         $data['customeWidgets'] = array();
         $this->events()->trigger(__CLASS__, 'dashboard', null, array('widgets' => &$data['customeWidgets']));

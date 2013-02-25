@@ -65,7 +65,7 @@ class Config extends AbstractForm
     {
         //General settings
         $general_fieldset = new Fieldset('general');
-        $name = new Element\Text('site_name');
+        $name             = new Element\Text('site_name');
         $name->setAttribute('label', 'Site name')
             ->setAttribute('class', 'input-text');
 
@@ -80,7 +80,7 @@ class Config extends AbstractForm
         $offline_document->setValueOptions(array('Select document') + $document_collection->getSelect());
 
         $layout_collection = new Layout\Collection();
-        $layout_not_found = new Element\Select('site_404_layout');
+        $layout_not_found  = new Element\Select('site_404_layout');
         $layout_not_found->setAttribute('label', '404 layout');
         $layout_not_found->setValueOptions(array('Select document') + $layout_collection->getSelect());
 
@@ -137,7 +137,7 @@ class Config extends AbstractForm
     {
         //Session settings
         $session_fieldset = new Fieldset('session');
-        $cookie_domain = new Element\Text('cookie_domain');
+        $cookie_domain    = new Element\Text('cookie_domain');
         $cookie_domain->setAttribute('label', 'Cookie domain')
             ->setAttribute('class', 'input-text');
 
@@ -160,7 +160,7 @@ class Config extends AbstractForm
         $this->add($session_fieldset);
 
         //Debug settings
-        $debug_fieldset = new Fieldset('debug');
+        $debug_fieldset  = new Fieldset('debug');
         $debug_is_active = new Element\Checkbox('debug_is_active');
         $debug_is_active->setAttribute('label', 'Debug is active')
             ->setAttribute('class', 'input-text');
@@ -169,7 +169,7 @@ class Config extends AbstractForm
         $this->add($debug_fieldset);
 
         //Debug settings
-        $cache_fieldset = new Fieldset('cache');
+        $cache_fieldset  = new Fieldset('cache');
         $cache_is_active = new Element\Checkbox('cache_is_active');
         $cache_is_active->setAttribute('label', 'Cache is active')
             ->setAttribute('class', 'input-text');
@@ -303,7 +303,7 @@ class Config extends AbstractForm
         );
 
         $locale_fieldset = new Fieldset('locale');
-        $locale = new Element\Select('locale');
+        $locale          = new Element\Select('locale');
         $locale->setAttribute('label', 'Server locale')
             ->setValueOptions($locale_list);
 
@@ -312,7 +312,7 @@ class Config extends AbstractForm
 
         //Mail settings
         $mail_fieldset = new Fieldset('mail');
-        $mail_from = new Element\Text('mail_from');
+        $mail_from     = new Element\Text('mail_from');
         $mail_from->setAttribute('label', 'From E-mail')
             ->setAttribute('class', 'input-text');
 
@@ -364,7 +364,9 @@ class Config extends AbstractForm
     /**
      * Set config values from database result
      *
-     * @param array $data
+     * @param array $data The data as array will by passed into form field
+     *
+     * @return void
      */
     public function setValues(array $data)
     {

@@ -100,7 +100,7 @@ class ViewController extends Action
      */
     public function editAction()
     {
-        $view_id = $this->getRouteMatch()->getParam('id', null);
+        $view_id    = $this->getRouteMatch()->getParam('id', null);
         $view_model = View\Model::fromId($view_id);
         if (empty($view_id) or empty($view_model)) {
             return $this->redirect()->toRoute('viewList');
@@ -179,7 +179,7 @@ class ViewController extends Action
                 }
 
                 $identifier = preg_replace('~\.phtml$~', '', $name);
-                $view = View\Model::fromIdentifier($identifier);
+                $view       = View\Model::fromIdentifier($identifier);
                 if (empty($view)) {
                     continue;
                 }
@@ -208,21 +208,21 @@ class ViewController extends Action
                 return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
             }
 
-            $content = $view->getContent();
+            $content  = $view->getContent();
             $filename = $view->getIdentifier() . 'phtml';
         } else {
-            $views = new View\Collection();
-            $children = $views->getViews();
-            $zip = new ZipArchive;
+            $views        = new View\Collection();
+            $children     = $views->getViews();
+            $zip          = new ZipArchive;
             $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
-            $res = $zip->open($tmp_filename, ZipArchive::CREATE);
+            $res          = $zip->open($tmp_filename, ZipArchive::CREATE);
             if ($res === true) {
                 foreach ($children as $child) {
                     $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
                 }
 
                 $zip->close();
-                $content = file_get_contents($tmp_filename);
+                $content  = file_get_contents($tmp_filename);
                 $filename = 'views.zip';
                 unlink($tmp_filename);
             }

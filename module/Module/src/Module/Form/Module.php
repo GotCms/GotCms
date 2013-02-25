@@ -50,13 +50,13 @@ class Module extends AbstractForm
     public function init()
     {
         $file_info = new Info();
-        $path = GC_APPLICATION_PATH . '/library/Modules/';
-        $list_dir = glob($path . '*', GLOB_ONLYDIR);
+        $path      = GC_APPLICATION_PATH . '/library/Modules/';
+        $list_dir  = glob($path . '*', GLOB_ONLYDIR);
 
         $modules_infos = array();
-        $options = array('' => 'Select an option');
+        $options       = array('' => 'Select an option');
         foreach ($list_dir as $dir) {
-            $dir = str_replace($path, '', $dir);
+            $dir           = str_replace($path, '', $dir);
             $options[$dir] = $dir;
 
             $config_file = $path . $dir . '/module.info';
@@ -66,7 +66,7 @@ class Module extends AbstractForm
         }
 
         $collection = new ModuleCollection();
-        $modules = $collection->getModules();
+        $modules    = $collection->getModules();
         foreach ($modules as $module) {
             if (in_array($module->getName(), $options)) {
                 unset($options[$module->getName()]);
@@ -74,7 +74,7 @@ class Module extends AbstractForm
             }
         }
 
-        $module  = new Element\Select('module');
+        $module = new Element\Select('module');
         $module->setAttribute('label', 'Module')
             ->setAttribute('id', 'module')
             ->setAttribute('modules_info', $modules_infos)
@@ -82,7 +82,7 @@ class Module extends AbstractForm
         $this->add($module);
 
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(
+        $input_filter         = $input_filter_factory->createInputFilter(
             array(
                 'module' => array(
                     'name' => 'module',

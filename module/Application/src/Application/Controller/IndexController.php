@@ -55,7 +55,7 @@ class IndexController extends Action
      *
      * @var string
      */
-    protected $viewStream  = 'zend.view';
+    protected $viewStream = 'zend.view';
 
     /**
      * View filename
@@ -99,10 +99,10 @@ class IndexController extends Action
      */
     public function indexAction()
     {
-        $visitor = new Visitor();
-        $session = $this->getSession();
+        $visitor    = new Visitor();
+        $session    = $this->getSession();
         $session_id = $this->getSession()->getDefaultManager()->getId();
-        $is_admin = $this->getAuth()->hasIdentity();
+        $is_admin   = $this->getAuth()->hasIdentity();
         $is_preview = ($is_admin and $this->getRequest()->getQuery()->get('preview') === 'true');
 
         //Don't log preview
@@ -134,7 +134,7 @@ class IndexController extends Action
         stream_wrapper_register($this->viewStream, 'Gc\View\Stream');
         $template_path_stack = $this->getServiceLocator()->get('Zend\View\Resolver\TemplatePathStack');
         $template_path_stack->setUseStreamWrapper(true);
-        $this->viewPath = $template_path_stack->resolve($this->viewName);
+        $this->viewPath   = $template_path_stack->resolve($this->viewName);
         $this->layoutPath = $template_path_stack->resolve($this->layoutName);
 
         $path = $this->getRouteMatch()->getParam('path');
@@ -146,13 +146,13 @@ class IndexController extends Action
             if ($this->cache->hasItem($cache_key)) {
                 //Retrieve cache value and set data
                 $cache_value = $this->cache->getItem($cache_key);
-                $view_model = $cache_value['view_model'];
+                $view_model  = $cache_value['view_model'];
                 $view_model->setTemplate($this->viewName);
                 $view_model->setVariables($cache_value['layout_variables']);
                 $this->layout()->setVariables($cache_value['layout_variables']);
                 $this->layout()->setTemplate($this->layoutName);
                 $layout_content = $cache_value['layout_content'];
-                $view_content = $cache_value['view_content'];
+                $view_content   = $cache_value['view_content'];
             }
         }
 
@@ -163,13 +163,13 @@ class IndexController extends Action
                     $document = Document\Model::fromUrlKey('');
                 } else {
                     $explode_path = $this->explodePath($path);
-                    $children = null;
-                    $key = array();
+                    $children     = null;
+                    $key          = array();
                     $has_document = false;
-                    $parent_id = 0;
+                    $parent_id    = 0;
 
                     foreach ($explode_path as $url_key) {
-                        $document = null;
+                        $document     = null;
                         $document_tmp = null;
                         if ($has_document === false) {
                             $document_tmp = Document\Model::fromUrlKey($url_key, $parent_id);
@@ -189,9 +189,9 @@ class IndexController extends Action
                                     }
                                 }
 
-                                $document = $document_tmp;
+                                $document  = $document_tmp;
                                 $parent_id = $document->getId();
-                                $children = $document->getChildren();
+                                $children  = $document->getChildren();
                             }
                         }
                     }
@@ -218,7 +218,7 @@ class IndexController extends Action
                 $variables = array();
                 foreach ($tabs as $tab) {
                     $tabs_array[] = $tab->getName();
-                    $properties = $this->loadProperties(
+                    $properties   = $this->loadProperties(
                         $document->getDocumentTypeId(),
                         $tab->getId(),
                         $document->getId()
@@ -241,11 +241,11 @@ class IndexController extends Action
                 $this->layout()->setVariable('currentDocument', $document);
 
                 //Set view from database
-                $view = View\Model::fromId($document->getViewId());
+                $view   = View\Model::fromId($document->getViewId());
                 $layout = Layout\Model::fromId($document->getLayoutId());
 
                 $layout_content = $layout->getContent();
-                $view_content = $view->getContent();
+                $view_content   = $view->getContent();
             }
 
             if ($cache_is_enable) {
@@ -274,7 +274,8 @@ class IndexController extends Action
     /**
      * Load tabs
      *
-     * @param integer $document_type_id
+     * @param integer $document_type_id Document type id
+     *
      * @return Gc\Component\Tab\Collection
      */
     protected function loadTabs($document_type_id)
@@ -287,9 +288,10 @@ class IndexController extends Action
     /**
      * Load properties
      *
-     * @param integer $document_type_id
-     * @param integer $tab_id
-     * @param integer $document_id
+     * @param integer $document_type_id Document type id
+     * @param integer $tab_id           Tab id
+     * @param integer $document_id      Document id
+     *
      * @return \Gc\Component\Property\Collection
      */
     protected function loadProperties($document_type_id, $tab_id, $document_id)
@@ -303,7 +305,9 @@ class IndexController extends Action
     /**
      * Explode path
      *
-     * @param array $path
+     * @param string $path Url path
+     *
+     * @return void
      */
     protected function explodePath($path)
     {
@@ -318,16 +322,17 @@ class IndexController extends Action
     /**
      * Defined is can unserialize string
      *
-     * @param string $data
+     * @param string $string String
+     *
      * @return boolean
      */
-    protected function isSerialized($data)
+    protected function isSerialized($string)
     {
-        if (trim($data) == '') {
+        if (trim($string) == '') {
             return false;
         }
 
-        if (preg_match('/^(i|s|a|o|d|N)(.*);/si', $data)) {
+        if (preg_match('/^(i|s|a|o|d|N)(.*);/si', $string)) {
             return true;
         }
 
@@ -341,7 +346,7 @@ class IndexController extends Action
      */
     protected function enableCache()
     {
-        $cache_ttl = (int)CoreConfig::getValue('cache_lifetime');
+        $cache_ttl     = (int) CoreConfig::getValue('cache_lifetime');
         $cache_handler = CoreConfig::getValue('cache_handler');
 
         if (!in_array($cache_handler, array('apc', 'memcached', 'filesystem'))) {

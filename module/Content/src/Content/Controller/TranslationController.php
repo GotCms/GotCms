@@ -98,7 +98,7 @@ class TranslationController extends Action
                 $this->useFlashMessenger();
             } else {
                 $source = $post->get('source');
-                $data = array();
+                $data   = array();
                 foreach ($post->get('destination') as $destination_id => $destination) {
                     $data[$destination_id] = array('value' => $destination);
                 }
@@ -159,7 +159,7 @@ class TranslationController extends Action
     protected function generateCache()
     {
         $values = Translator::getValues();
-        $data = array();
+        $data   = array();
         foreach ($values as $value) {
             if (empty($data[$value['locale']])) {
                 $data[$value['locale']] = array();
@@ -168,7 +168,7 @@ class TranslationController extends Action
             $data[$value['locale']][$value['source']] = $value['destination'];
         }
 
-        $translate_path = GC_APPLICATION_PATH . '/data/translation/%s.php';
+        $translate_path   = GC_APPLICATION_PATH . '/data/translation/%s.php';
         $template_content = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/language.tpl.php');
 
         foreach (glob(sprintf($translate_path, '*')) as $file) {

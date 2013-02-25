@@ -49,7 +49,7 @@ class Layout extends AbstractForm
     public function init()
     {
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(
+        $input_filter         = $input_filter_factory->createInputFilter(
             array(
                 'name' => array(
                     'required' => true,

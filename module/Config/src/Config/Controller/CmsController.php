@@ -127,12 +127,14 @@ class CmsController extends Action
 
     /**
      * Update cms
+     *
+     * @return \Zend\View\Model\ViewModel|array
      */
     public function updateAction()
     {
         $version_is_latest = Version::isLatest();
-        $latest_version = Version::getLatest();
-        $session = $this->getSession();
+        $latest_version    = Version::getLatest();
+        $session           = $this->getSession();
 
         if ($this->getRequest()->isPost()) {
             $updater = new Updater();
@@ -142,7 +144,7 @@ class CmsController extends Action
             }
 
             $current_version = Version::VERSION;
-            $output = '';
+            $output          = '';
             if ($updater->update()) {
                 //Fetch content
                 if ($updater->upgrade()) {
@@ -193,9 +195,11 @@ class CmsController extends Action
      * Check version in info file
      * from $type directory
      *
-     * @param array $directories list of directories
-     * @param string $type Type of directory
-     * @param array $errors Insert in this all errors
+     * @param array  $directories List of directories
+     * @param string $type        Type of directory
+     * @param array  &$errors     Insert in this all errors
+     *
+     * @return void
      */
     protected function checkVersion(array $directories, $type, array &$errors)
     {
@@ -203,7 +207,7 @@ class CmsController extends Action
         foreach ($directories as $directory) {
             if (is_dir($directory)) {
                 $filename = $directory . '/ ' . $type . '.info';
-                $info = new Info();
+                $info     = new Info();
 
                 if ($info->fromFile($filename) === true) {
                     $infos = $info->getInfos();

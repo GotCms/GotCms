@@ -28,4 +28,5 @@
 return array(
     'Statistics\Controller\IndexController' => __DIR__ . '/src/Statistics/Controller/IndexController.php',
     'Statistics\Module'                     => __DIR__ . '/Module.php',
+    'SVGGraph'                              => __DIR__ . '/../../vendor/SVGGraph/SVGGraph.php'
 );

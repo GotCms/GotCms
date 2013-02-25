@@ -56,7 +56,7 @@ class RoleController extends Action
     public function indexAction()
     {
         $role_collection = new Role\Collection();
-        $roles = array();
+        $roles           = array();
         foreach ($role_collection->getRoles() as $role) {
             if ($role->getName() !== Role\Model::PROTECTED_NAME) {
                 $roles[] = $role;
