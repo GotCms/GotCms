@@ -52,8 +52,9 @@ class Script extends AbstractHelper
     /**
      * Returns script from identifier.
      *
-     * @param string $identifier
-     * @param array $params
+     * @param string $identifier Identifier
+     * @param array  $params     Parameters
+     *
      * @return mixed
      */
     public function __invoke($identifier, $params = array())
@@ -69,17 +70,18 @@ class Script extends AbstractHelper
         }
 
         $this->__params = $params;
-        $name = $identifier . '-script.gc-stream';
+        $name           = $identifier . '-script.gc-stream';
 
         file_put_contents('gc.script://' . $name, $script->getContent());
 
-        return include('gc.script://' . $name);
+        return include 'gc.script://' . $name;
     }
 
     /**
      * Returns param from name.
      *
-     * @param string $name
+     * @param string $name Parameter name
+     *
      * @return mixed
      */
     public function getParam($name)
@@ -124,8 +126,9 @@ class Script extends AbstractHelper
     /**
      * Get plugin instance
      *
-     * @param  string $name Name of plugin to return
-     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
+     * @param string     $name    Name of plugin to return
+     * @param null|array $options Options to pass to plugin constructor (if not already instantiated)
+     *
      * @return mixed
      */
     public function plugin($name, array $options = null)
@@ -139,8 +142,9 @@ class Script extends AbstractHelper
      * If the plugin is a functor, call it, passing the parameters provided.
      * Otherwise, return the plugin instance.
      *
-     * @param  string $method
-     * @param  array  $params
+     * @param string $method Method
+     * @param array  $params Parameters
+     *
      * @return mixed
      */
     public function __call($method, $params)

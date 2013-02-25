@@ -80,7 +80,7 @@ class Collection extends AbstractTable
 
         $datatypes = array();
         foreach ($rows as $row) {
-            $datatypes[] = Model::fromArray((array)$row);
+            $datatypes[] = Model::fromArray((array) $row);
         }
 
         $this->datatypes = $datatypes;
@@ -105,7 +105,7 @@ class Collection extends AbstractTable
      */
     public function getSelect()
     {
-        $select = array();
+        $select    = array();
         $datatypes = $this->getDatatypes();
 
         foreach ($datatypes as $datatype) {

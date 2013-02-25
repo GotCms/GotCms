@@ -50,14 +50,15 @@ class Model extends AbstractTable
     /**
      * Initiliaze Tab
      *
-     * @param integer $tab_id Optional
-     * @param integer $document_type_id Optional
+     * @param integer $tab_id           Optional tab id
+     * @param integer $document_type_id Optional document type id
+     *
      * @return \Gc\Tab\Model
      */
     public function load($tab_id = null, $document_type_id = null)
     {
-        $this->setId((int)$tab_id);
-        $this->setDocumentTypeId((int)$document_type_id);
+        $this->setId((int) $tab_id);
+        $this->setDocumentTypeId((int) $document_type_id);
 
         $select = $this->select(
             function (Select $select) {
@@ -105,7 +106,7 @@ class Model extends AbstractTable
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int)$this->getId()));
+                $this->update($array_save, array('id' => (int) $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
@@ -153,8 +154,9 @@ class Model extends AbstractTable
     /**
      * Initiliaze from array
      *
-     * @param array $array
-     * @return \Gc\Tab\Model
+     * @param array $array Data
+     *
+     * @return void
      */
     public static function fromArray(array $array)
     {
@@ -168,15 +170,16 @@ class Model extends AbstractTable
     /**
      * Initialize from id
      *
-     * @param integer $tab_id
+     * @param integer $tab_id Tab id
+     *
      * @return \Gc\Tab\Model
      */
     public static function fromId($tab_id)
     {
         $tab_table = new Model();
-        $row = $tab_table->fetchRow($tab_table->select(array('id' => (int)$tab_id)));
+        $row       = $tab_table->fetchRow($tab_table->select(array('id' => (int) $tab_id)));
         if (!empty($row)) {
-            $tab_table->setData((array)$row);
+            $tab_table->setData((array) $row);
             $tab_table->setOrigData();
             return $tab_table;
         } else {
@@ -205,7 +208,7 @@ class Model extends AbstractTable
      */
     public function getProperties()
     {
-        if ($this->getData('properties') === null ) {
+        if ($this->getData('properties') === null) {
             $properties_collection = new Property\Collection();
             $properties_collection->load($this->getDocumentTypeId(), $this->getId());
 

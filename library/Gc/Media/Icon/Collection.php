@@ -60,6 +60,7 @@ class Collection extends AbstractTable
      * Get views
      *
      * @param boolean $force_reload to initiliaze views
+     *
      * @return array
      */
     public function getIcons($force_reload = false)
@@ -91,7 +92,7 @@ class Collection extends AbstractTable
     public function getSelect()
     {
         $select = array();
-        $icons = $this->getIcons();
+        $icons  = $this->getIcons();
 
         foreach ($icons as $icon) {
             $select[$icon->getId()] = $icon->getName();

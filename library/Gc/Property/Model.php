@@ -57,7 +57,8 @@ class Model extends AbstractTable
     /**
      * Get if property is required or not
      *
-     * @param Boolean $value to set value
+     * @param Boolean $value Value
+     *
      * @return mixed
      */
     public function isRequired($value = null)
@@ -78,7 +79,8 @@ class Model extends AbstractTable
     /**
      * Set property value
      *
-     * @param mixed $value
+     * @param mixed $value Value
+     *
      * @return \Gc\Property\Model
      */
     public function setValue($value)
@@ -180,7 +182,7 @@ class Model extends AbstractTable
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int)$this->getId()));
+                $this->update($array_save, array('id' => (int) $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
@@ -206,9 +208,9 @@ class Model extends AbstractTable
         $id = $this->getId();
         if (!empty($id)) {
             try {
-                parent::delete(array('id' => (int)$id));
-                $table = new TableGateway('property_value', $this->getAdapter());
-                $result = $table->delete(array('property_id' => (int)$id));
+                parent::delete(array('id' => (int) $id));
+                $table  = new TableGateway('property_value', $this->getAdapter());
+                $result = $table->delete(array('property_id' => (int) $id));
             } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage());
             }
@@ -226,8 +228,9 @@ class Model extends AbstractTable
     /**
      * Initiliaze model from array
      *
-     * @param array $array
-     * @return \Gc\Property\Model
+     * @param array $array Data
+     *
+     * @return void
      */
     public static function fromArray(array $array)
     {
@@ -241,15 +244,16 @@ class Model extends AbstractTable
     /**
      * Initiliaze model from id
      *
-     * @param integer $property_id
+     * @param integer $property_id Property id
+     *
      * @return \Gc\Property\Model
      */
     public static function fromId($property_id)
     {
         $property_table = new Model();
-        $row = $property_table->fetchRow($property_table->select(array('id' => (int)$property_id)));
+        $row            = $property_table->fetchRow($property_table->select(array('id' => (int) $property_id)));
         if (!empty($row)) {
-            $property_table->setData((array)$row);
+            $property_table->setData((array) $row);
             $property_table->setOrigData();
             return $property_table;
         } else {
@@ -260,14 +264,15 @@ class Model extends AbstractTable
     /**
      * Initiliaze model from identifier
      *
-     * @param string $identifier
-     * @param id $document_id
+     * @param string $identifier  Identifier
+     * @param id     $document_id Document id
+     *
      * @return \Gc\Property\Model
      */
     public static function fromIdentifier($identifier, $document_id)
     {
         $property_table = new Model();
-        $row = $property_table->fetchRow(
+        $row            = $property_table->fetchRow(
             $property_table->select(
                 function (Select $select) use ($document_id, $identifier) {
                     $select->join(array('t' => 'tab'), 't.id = property.tab_id', array());
@@ -280,7 +285,7 @@ class Model extends AbstractTable
         );
 
         if (!empty($row)) {
-            $property_table->setData((array)$row);
+            $property_table->setData((array) $row);
             $property_table->setDocumentId($document_id);
             $property_table->setOrigData();
             return $property_table;

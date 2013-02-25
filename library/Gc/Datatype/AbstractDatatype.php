@@ -99,7 +99,8 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Get Datatype Editor
      *
-     * @param Property\Model $property
+     * @param Property\Model $property Property
+     *
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     abstract public function getEditor(Property\Model $property);
@@ -118,10 +119,10 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getInfos()
     {
-        $object = new ReflectionObject($this);
+        $object    = new ReflectionObject($this);
         $directory = dirname($object->getFileName());
-        $filename = $directory . '/datatype.info';
-        $info = new Info();
+        $filename  = $directory . '/datatype.info';
+        $info      = new Info();
 
         if ($info->fromFile($filename) !== true) {
             return false;
@@ -133,8 +134,9 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Load Datatype
      *
-     * @param Model $datatype
-     * @param integer $document_id
+     * @param Model   $datatype    Datatype
+     * @param integer $document_id Document id
+     *
      * @return mixed
      */
     public function load($datatype = null, $document_id = null)
@@ -171,7 +173,8 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Set configuration
      *
-     * @param mixed $value
+     * @param mixed $value Value
+     *
      * @return \Gc\Datatype\AbstractDatatype
      */
     public function setConfig($value)
@@ -184,7 +187,8 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Get upload url path
      *
-     * @param integer $property_id
+     * @param integer $property_id Property id
+     *
      * @return string
      */
     public function getUploadUrl($property_id)
@@ -203,7 +207,8 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Get a helper by name
      *
-     * @param  string $name
+     * @param string $name Name
+     *
      * @return object
      */
     public function getHelper($name)
@@ -228,7 +233,8 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Set Property Model
      *
-     * @param \Gc\Property\Model $property
+     * @param \Gc\Property\Model $property Property
+     *
      * @return \Gc\Datatype\AbstractDatatype
      */
     public function setProperty($property)
@@ -250,8 +256,9 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Render template
      *
-     * @param string $name
-     * @param array $data
+     * @param string $name Name
+     * @param array  $data Data
+     *
      * @return string
      */
     public function render($name, array $data = array())
@@ -267,7 +274,8 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Add path in Zend\View\Resolver\TemplatePathStack
      *
-     * @param string $dir
+     * @param string $dir Directory
+     *
      * @return \Gc\Datatype\AbstractDatatype
      */
     public function addPath($dir)
@@ -288,7 +296,7 @@ abstract class AbstractDatatype extends AbstractTable
     {
         if (is_null($this->renderer)) {
             $this->renderer = new PhpRenderer();
-            $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+            $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
             $this->renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
         }
 

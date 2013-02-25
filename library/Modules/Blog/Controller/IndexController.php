@@ -62,7 +62,7 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $model = new Model\Comment();
+        $model         = new Model\Comment();
         $document_list = $model->getDocumentList();
 
         return array('document_list' => $document_list);
@@ -76,12 +76,12 @@ class IndexController extends AbstractController
     public function documentCommentAction()
     {
         $document_id = $this->getRequest()->getQuery()->get('id');
-        $document = DocumentModel::fromId($document_id);
+        $document    = DocumentModel::fromId($document_id);
         if (empty($document)) {
             return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), true);
         }
 
-        $model = new Model\Comment();
+        $model        = new Model\Comment();
         $comment_list = $model->getList($document_id, null);
 
         if ($this->getRequest()->isPost()) {
@@ -100,7 +100,7 @@ class IndexController extends AbstractController
                 }
 
                 $data['show_email'] = empty($data['show_email']) ? 0 : 1;
-                $data['is_active'] = empty($data['is_active']) ? 0 : 1;
+                $data['is_active']  = empty($data['is_active']) ? 0 : 1;
                 $model->update($data, array('id' => $comment_id));
             }
 

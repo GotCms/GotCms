@@ -31,6 +31,7 @@ use Gc\Datatype\AbstractDatatype\AbstractEditor;
 use Gc\Media\File;
 use Gc\Registry;
 use Zend\Form\Element;
+use StdClass;
 
 /**
  * Editor for Upload datatype
@@ -51,9 +52,9 @@ class Editor extends AbstractEditor
         $file_class = new File();
         $file_class->load($this->getProperty(), $this->getDatatype()->getDocument());
 
-        $post = $this->getRequest()->getPost();
-        $values = $post->get($this->getName(), array());
-        $parameters = $this->getConfig();
+        $post         = $this->getRequest()->getPost();
+        $values       = $post->get($this->getName(), array());
+        $parameters   = $this->getConfig();
         $array_values = array();
         if (!empty($values) and is_array($values)) {
             foreach ($values as $idx => $value) {
@@ -68,7 +69,7 @@ class Editor extends AbstractEditor
                     if (!in_array(finfo_file($finfo, $file), $parameters['mime_list'])) {
                         unlink($file);
                     } else {
-                        $file_info = @getimagesize($file);
+                        $file_info      = @getimagesize($file);
                         $array_values[] = array(
                             'value' => $value['name'],
                             'width' => empty($file_info[0]) ? 0 : $file_info[0],
@@ -96,22 +97,22 @@ class Editor extends AbstractEditor
     public function load()
     {
         $parameters = $this->getConfig();
-        $options = empty($parameters['options']) ? array() : $parameters['options'];
+        $options    = empty($parameters['options']) ? array() : $parameters['options'];
 
         $this->initScript();
         $file_list = array();
-        $files = unserialize($this->getValue());
+        $files     = unserialize($this->getValue());
         if (!empty($files)) {
             $file_class = new File();
             $file_class->load($this->getProperty(), $this->getDatatype()->getDocument());
             foreach ($files as $file_data) {
-                $file_object = new \StdClass();
-                $file_object->name = $file_data['value'];
-                $file_object->filename = $file_data['value'];
+                $file_object                = new StdClass();
+                $file_object->name          = $file_data['value'];
+                $file_object->filename      = $file_data['value'];
                 $file_object->thumbnail_url = $file_data['value'];
 
-                $router = Registry::get('Application')->getMvcEvent()->getRouter();
-                $file_object->delete_url = $router->assemble(
+                $router                   = Registry::get('Application')->getMvcEvent()->getRouter();
+                $file_object->delete_url  = $router->assemble(
                     array(
                         'document_id' => $this->getDatatype()->getDocument()->getId(),
                         'property_id' => $this->getProperty()->getId(),
@@ -120,7 +121,7 @@ class Editor extends AbstractEditor
                     array('name' => 'mediaRemove')
                 );
                 $file_object->delete_type = 'DELETE';
-                $file_list[] = $file_object;
+                $file_list[]              = $file_object;
             }
         }
 

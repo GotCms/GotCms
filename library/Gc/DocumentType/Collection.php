@@ -49,7 +49,8 @@ class Collection extends AbstractTable
     /**
      * Load document type collection
      *
-     * @param integer $parent_id
+     * @param integer $parent_id Parent id
+     *
      * @return void
      */
     public function init($parent_id = null)
@@ -85,7 +86,7 @@ class Collection extends AbstractTable
 
         $document_types = array();
         foreach ($rows as $row) {
-            $document_types[] = Model::fromArray((array)$row);
+            $document_types[] = Model::fromArray((array) $row);
         }
 
         $this->setData('document_types', $document_types);
@@ -98,7 +99,7 @@ class Collection extends AbstractTable
      */
     public function getSelect()
     {
-        $select = array();
+        $select         = array();
         $document_types = $this->getDocumentTypes();
 
         foreach ($document_types as $document_type) {

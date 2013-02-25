@@ -50,6 +50,8 @@ class Updater extends Object
 
     /**
      * Initialize update directory
+     *
+     * @return void
      */
     public function init()
     {
@@ -59,7 +61,8 @@ class Updater extends Object
     /**
      * Load adapter
      *
-     * @param strin $type Adapter type
+     * @param string $type Adapter type
+     *
      * @return boolean
      */
     public function load($type)
@@ -123,7 +126,8 @@ class Updater extends Object
     /**
      * Rollback if problem with database
      *
-     * @param string $current_version
+     * @param string $current_version Current version
+     *
      * @return void
      */
     public function rollback($current_version)
@@ -147,9 +151,9 @@ class Updater extends Object
         }
 
         $configuration = Registry::get('Configuration');
-        $files = array();
-        $update_path = GC_APPLICATION_PATH . '/data/update';
-        $path = glob($update_path . '/*');
+        $files         = array();
+        $update_path   = GC_APPLICATION_PATH . '/data/update';
+        $path          = glob($update_path . '/*');
         foreach ($path as $file) {
             $version = str_replace($update_path . '/v', '', $file);
             if (version_compare($version, Version::VERSION, '>')) {
@@ -197,9 +201,9 @@ class Updater extends Object
             return false;
         }
 
-        $files = array();
+        $files       = array();
         $update_path = GC_APPLICATION_PATH . '/data/update';
-        $path = glob($update_path . '/*');
+        $path        = glob($update_path . '/*');
         foreach ($path as $file) {
             $version = str_replace($update_path . '/v', '', $file);
             if (version_compare($version, Version::VERSION, '>')) {

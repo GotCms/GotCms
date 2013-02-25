@@ -63,8 +63,10 @@ class Files extends Object
     /**
      * Generate zip archive
      *
-     * @param array $sources array of folders
-     * @param string $destination zip file name
+     * @param array  $sources     Array of folders
+     * @param string $destination Zip file name
+     *
+     * @return boolean
      */
     protected function zip(array $sources, $destination)
     {
@@ -80,6 +82,7 @@ class Files extends Object
                     new RecursiveDirectoryIterator($source),
                     RecursiveIteratorIterator::SELF_FIRST
                 );
+
                 $directory_name = dirname($source);
                 foreach ($files as $file) {
                     $file = str_replace('\\', '/', $file);

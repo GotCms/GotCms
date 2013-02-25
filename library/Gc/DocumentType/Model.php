@@ -75,7 +75,8 @@ class Model extends AbstractTable
     /**
      * Add view
      *
-     * @param integer $view_id
+     * @param integer $view_id View id
+     *
      * @return \Gc\DocumentType\Model
      */
     public function addView($view_id)
@@ -87,7 +88,8 @@ class Model extends AbstractTable
     /**
      * Add views
      *
-     * @param array $views
+     * @param array $views Views
+     *
      * @return \Gc\DocumentType\Model
      */
     public function addViews(array $views)
@@ -106,7 +108,7 @@ class Model extends AbstractTable
      */
     public function getTabs()
     {
-        if ($this->getData('tabs') === null ) {
+        if ($this->getData('tabs') === null) {
             $tabs_collection = new Tab\Collection();
             $tabs_collection->load($this->getId());
 
@@ -144,8 +146,8 @@ class Model extends AbstractTable
         if (empty($dependencies)) {
             $select = new Sql\Select();
             $select->from(array('dtd' => 'document_type_dependency'))
-            ->columns(array('children_id'))
-            ->where->equalTo('parent_id', $this->getId());
+                ->columns(array('children_id'))
+                ->where->equalTo('parent_id', $this->getId());
             $rows = $this->fetchAll($select);
 
             $result = array();
@@ -183,13 +185,13 @@ class Model extends AbstractTable
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int)$this->getId()));
+                $this->update($array_save, array('id' => (int) $this->getId()));
             }
 
             if (!empty($this->views)) {
                 $delete = new Sql\Delete();
                 $delete->from('document_type_view');
-                $delete->where(array('document_type_id' => (int)$this->getId()));
+                $delete->where(array('document_type_id' => (int) $this->getId()));
                 $this->execute($delete);
                 foreach ($this->views as $view_id) {
                     if (empty($view_id)) {
@@ -205,7 +207,7 @@ class Model extends AbstractTable
 
             $delete = new Sql\Delete();
             $delete->from('document_type_dependency');
-            $delete->where->equalTo('parent_id', (int)$this->getId());
+            $delete->where->equalTo('parent_id', (int) $this->getId());
             $this->execute($delete);
             $dependencies = $this->getDependencies();
             if (!empty($dependencies)) {
@@ -242,8 +244,8 @@ class Model extends AbstractTable
             $tab_collection = new Tab\Collection();
             $tab_collection->load($document_type_id);
             $tab_collection->delete();
-            $table = new TableGateway('document_type_view', $this->getAdapter());
-            $result = $table->delete(array('document_type_id' => (int)$document_type_id));
+            $table  = new TableGateway('document_type_view', $this->getAdapter());
+            $result = $table->delete(array('document_type_id' => (int) $document_type_id));
             parent::delete(array('id' => $document_type_id));
             $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
             unset($this);
@@ -259,7 +261,8 @@ class Model extends AbstractTable
     /**
      * Get model from array
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return \Gc\DocumentType\Model
      */
     public static function fromArray(array $array)
@@ -274,15 +277,18 @@ class Model extends AbstractTable
     /**
      * Get model from id
      *
-     * @param integer $document_type_id
+     * @param integer $document_type_id Document type id
+     *
      * @return \Gc\DocumentType\Model
      */
     public static function fromId($document_type_id)
     {
         $document_type_table = new Model();
-        $row = $document_type_table->fetchRow($document_type_table->select(array('id' => (int)$document_type_id)));
+        $row                 = $document_type_table->fetchRow(
+            $document_type_table->select(array('id' => (int) $document_type_id))
+        );
         if (!empty($row)) {
-            $document_type_table->setData((array)$row);
+            $document_type_table->setData((array) $row);
             $document_type_table->setOrigData();
             return $document_type_table;
         } else {

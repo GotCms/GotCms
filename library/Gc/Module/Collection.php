@@ -75,7 +75,7 @@ class Collection extends AbstractTable
 
         $modules = array();
         foreach ($rows as $row) {
-            $modules[] = Model::fromArray((array)$row);
+            $modules[] = Model::fromArray((array) $row);
         }
 
         $this->setData('modules', $modules);
@@ -90,7 +90,7 @@ class Collection extends AbstractTable
      */
     public function getSelect()
     {
-        $select = array();
+        $select  = array();
         $modules = $this->getModules();
 
         foreach ($modules as $module) {

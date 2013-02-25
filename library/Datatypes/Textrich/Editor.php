@@ -65,7 +65,7 @@ class Editor extends AbstractEditor
 
 
         $parameters = $this->getConfig();
-        $ckeditor = new CkEditor();
+        $ckeditor   = new CkEditor();
 
         if (empty($parameters) or !is_array($parameters)) {
             $parameters = array();
@@ -73,7 +73,7 @@ class Editor extends AbstractEditor
 
         $ckeditor->setParameters($parameters);
 
-        $id = 'textrich' . $this->getProperty()->getId();
+        $id       = 'textrich' . $this->getProperty()->getId();
         $textrich = new Element\Textarea($this->getName());
         $textrich->setAttribute('label', $this->getProperty()->getName());
         $textrich->setAttribute('id', $id);

@@ -51,6 +51,8 @@ class IndexController extends AbstractController
 
     /**
      * Generate xml action
+     *
+     * @return \Zend\Http\Response
      */
     public function generateAction()
     {

@@ -43,13 +43,14 @@ abstract class AbstractController extends AbstractActionController
     /**
      * Construct controller with request and response
      *
-     * @param Request $request
-     * @param Response $response
+     * @param Request  $request  Request
+     * @param Response $response Response
+     *
      * @return void
      */
     public function __construct(Request $request, Response $response)
     {
-        $this->request = $request;
+        $this->request  = $request;
         $this->response = $response;
     }
 }

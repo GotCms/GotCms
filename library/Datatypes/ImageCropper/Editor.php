@@ -48,19 +48,19 @@ class Editor extends AbstractEditor
      */
     public function save()
     {
-        $post = $this->getRequest()->getPost();
-        $parameters = $this->getConfig();
-        $data = array();
+        $post        = $this->getRequest()->getPost();
+        $parameters  = $this->getConfig();
+        $data        = array();
         $image_model = new Image();
-        $file_class = new File();
+        $file_class  = new File();
         $file_class->load($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
         $background_color = empty($parameters['background']) ? '#000000' : $parameters['background'];
 
         if (!empty($_FILES[$this->getName()]['name'])) {
             $_OLD_FILES = $_FILES;
-            $file = $_FILES[$this->getName()];
+            $file       = $_FILES[$this->getName()];
             //Ignore others data
-            $_FILES = array();
+            $_FILES                   = array();
             $_FILES[$this->getName()] = $file;
 
             $file_class->upload();
@@ -76,7 +76,7 @@ class Editor extends AbstractEditor
                         if (!in_array(finfo_file($finfo, $file), $parameters['mime_list'])) {
                             unlink($file);
                         } else {
-                            $file_info = @getimagesize($file);
+                            $file_info        = @getimagesize($file);
                             $data['original'] = array(
                                 'value' => $name,
                                 'width' => empty($file_info[0]) ? 0 : $file_info[0],
@@ -98,7 +98,7 @@ class Editor extends AbstractEditor
                                 $size_filename = preg_replace('~\.([a-zA-Z]+)$~', '-' . $size['name'] . '.$1', $name);
                                 $image_model->save($file_class->getPath() . $size_filename);
 
-                                $file_info = @getimagesize($file_class->getPath() . $size_filename);
+                                $file_info           = @getimagesize($file_class->getPath() . $size_filename);
                                 $data[$size['name']] = array(
                                     'value' => $size_filename,
                                     'width' => empty($file_info[0]) ? 0 : $file_info[0],
@@ -125,8 +125,8 @@ class Editor extends AbstractEditor
             if (!empty($data)) {
                 if (!empty($data['original']['value'])) {
                     foreach ($parameters['size'] as $size) {
-                        $x = (int)$post->get($this->getName() . $size['name'] . '-x');
-                        $y = (int)$post->get($this->getName() . $size['name'] . '-y');
+                        $x = (int) $post->get($this->getName() . $size['name'] . '-x');
+                        $y = (int) $post->get($this->getName() . $size['name'] . '-y');
 
                         $filename = !empty($data[$size['name']]['value']) ?
                             $data[$size['name']]['value'] :
@@ -145,7 +145,7 @@ class Editor extends AbstractEditor
                             $data[$size['name']]['x'] = $x;
                             $data[$size['name']]['y'] = $y;
                         } else {
-                            $file_info = @getimagesize($file_class->getPath() . $filename);
+                            $file_info           = @getimagesize($file_class->getPath() . $filename);
                             $data[$size['name']] = array(
                                 'value' => $filename,
                                 'width' => empty($file_info[0]) ? 0 : $file_info[0],
@@ -166,7 +166,7 @@ class Editor extends AbstractEditor
                         $found = false;
                         foreach ($parameters['size'] as $size) {
                             if ($size['name'] == $name) {
-                                $found = true;
+                                $found           = true;
                                 $file['options'] = $size;
 
                                 break;
@@ -194,12 +194,12 @@ class Editor extends AbstractEditor
     public function load()
     {
         $parameters = $this->getConfig();
-        $property = $this->getProperty();
-        $upload = new Element\File($this->getName());
+        $property   = $this->getProperty();
+        $upload     = new Element\File($this->getName());
         $upload->setAttribute('label', $property->getName());
 
         $hidden_upload = new Element\Hidden($this->getName() . '-hidden');
-        $value = $this->getValue();
+        $value         = $this->getValue();
         if (!empty($value)) {
             $hidden_upload->setValue($value);
             $value = unserialize($value);
@@ -212,7 +212,7 @@ class Editor extends AbstractEditor
                     $found = false;
                     foreach ($parameters['size'] as $size) {
                         if ($size['name'] == $name) {
-                            $found = true;
+                            $found           = true;
                             $file['options'] = $size;
 
                             break;

@@ -56,10 +56,10 @@ class Comment extends AbstractTable
     public function getDocumentList()
     {
         $all_comments = $this->getList(null, null);
-        $documents = array();
+        $documents    = array();
         foreach ($all_comments as $key => $comment) {
             if (empty($documents[$comment['document_id']])) {
-                $document = DocumentModel::fromId($comment['document_id']);
+                $document                      = DocumentModel::fromId($comment['document_id']);
                 $documents[$document->getId()] = $document;
             }
         }
@@ -70,8 +70,9 @@ class Comment extends AbstractTable
     /**
      * Return all comments in document
      *
-     * @param integer $document_id
-     * @param boolean $is_active
+     * @param integer $document_id Document id
+     * @param boolean $is_active   Is active
+     *
      * @return array
      */
     public function getList($document_id = null, $is_active = true)
@@ -86,7 +87,7 @@ class Comment extends AbstractTable
                     if ($this->getDriverName() == 'pdo_pgsql') {
                         $select->where->equalTo('is_active', empty($is_active) ? 'false' : 'true');
                     } else {
-                        $select->where->equalTo('is_active', (int)$is_active);
+                        $select->where->equalTo('is_active', (int) $is_active);
                     }
                 }
 
@@ -98,14 +99,15 @@ class Comment extends AbstractTable
     /**
      * Add command
      *
-     * @param array $data
-     * @param integer $document_id
+     * @param array   $data        Array of comments
+     * @param integer $document_id Document id
+     *
      * @return boolean
      */
     public function add(array $data, $document_id)
     {
         $mandatory_keys = array('message', 'username', 'email');
-        $insert_data = array();
+        $insert_data    = array();
         foreach ($mandatory_keys as $key) {
             if (empty($data[$key])) {
                 return false;
@@ -114,9 +116,9 @@ class Comment extends AbstractTable
             }
         }
 
-        $insert_data['show_email'] = empty($data['show_email']) ? 0 : 1;
+        $insert_data['show_email']  = empty($data['show_email']) ? 0 : 1;
         $insert_data['document_id'] = $document_id;
-        $insert_data['created_at'] = new Expression('NOW()');
+        $insert_data['created_at']  = new Expression('NOW()');
         $this->insert($insert_data);
 
         return true;

@@ -99,11 +99,10 @@ class Wget extends AbstractAdapter
             unlink($backup_filename);
         }
 
-        if (
-            File::isWritable(
-                GC_APPLICATION_PATH,
-                array(GC_APPLICATION_PATH . '/data/cache', GC_APPLICATION_PATH . '/.git')
-            )
+        if (File::isWritable(
+            GC_APPLICATION_PATH,
+            array(GC_APPLICATION_PATH . '/data/cache', GC_APPLICATION_PATH . '/.git')
+        )
         ) {
             $zip = new ZipArchive();
             if ($zip->open($backup_filename, ZipArchive::CREATE)) {
@@ -135,7 +134,8 @@ class Wget extends AbstractAdapter
     /**
      * Rollback
      *
-     * @param string $version
+     * @param string $version Version
+     *
      * @return string
      */
     public function rollback($version)
@@ -152,9 +152,11 @@ class Wget extends AbstractAdapter
     /**
      * Add directory and children to zip
      *
-     * @param ZipArchive $zip
-     * @param string $directory
-     * @param array $exclude_directory
+     * @param ZipArchive $zip               Zip
+     * @param string     $directory         Directory
+     * @param array      $exclude_directory Exclude directory
+     *
+     * @return ZipArchive
      */
     protected function addDirectoryToZip(ZipArchive $zip, $directory, $exclude_directory = array())
     {

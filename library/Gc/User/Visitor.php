@@ -54,18 +54,19 @@ class Visitor extends AbstractTable
     /**
      * Get visitor id
      *
-     * @param string $session_id
+     * @param string $session_id Session Id
+     *
      * @return integer
      */
     public function getVisitorId($session_id)
     {
-        $user_agent = empty($_SERVER['HTTP_USER_AGENT']) ? null : $_SERVER['HTTP_USER_AGENT'];
-        $accept_charset = empty($_SERVER['HTTP_ACCEPT_CHARSET']) ? null : $_SERVER['HTTP_ACCEPT_CHARSET'];
+        $user_agent      = empty($_SERVER['HTTP_USER_AGENT']) ? null : $_SERVER['HTTP_USER_AGENT'];
+        $accept_charset  = empty($_SERVER['HTTP_ACCEPT_CHARSET']) ? null : $_SERVER['HTTP_ACCEPT_CHARSET'];
         $accept_language = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? null : $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-        $server_addr = empty($_SERVER['SERVER_ADDR']) ? null : $_SERVER['SERVER_ADDR'];
-        $remote_addr = empty($_SERVER['REMOTE_ADDR']) ? null : $_SERVER['REMOTE_ADDR'];
-        $request_uri = empty($_SERVER['REQUEST_URI']) ? null : $_SERVER['REQUEST_URI'];
-        $referer = empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER'];
+        $server_addr     = empty($_SERVER['SERVER_ADDR']) ? null : $_SERVER['SERVER_ADDR'];
+        $remote_addr     = empty($_SERVER['REMOTE_ADDR']) ? null : $_SERVER['REMOTE_ADDR'];
+        $request_uri     = empty($_SERVER['REQUEST_URI']) ? null : $_SERVER['REQUEST_URI'];
+        $referer         = empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER'];
 
         if (!empty($request_uri)) {
             $request_uri = substr($request_uri, 0, 255);
@@ -87,7 +88,7 @@ class Visitor extends AbstractTable
             $accept_language = null;
         }
 
-        $validator = new ValidateIp();
+        $validator   = new ValidateIp();
         $server_addr = $validator->isValid($server_addr, 'ip') ? ip2long($server_addr) : null;
         $remote_addr = $validator->isValid($remote_addr, 'ip') ? ip2long($remote_addr) : null;
 
@@ -136,8 +137,9 @@ class Visitor extends AbstractTable
     /**
      * Get url id
      *
-     * @param string $request_uri
-     * @param string $referer
+     * @param string $request_uri Request URI
+     * @param string $referer     Referer
+     *
      * @return integer
      */
     public function getUrlId($request_uri, $referer)
@@ -204,7 +206,8 @@ class Visitor extends AbstractTable
     /**
      * Return all visits
      *
-     * @param string $sort
+     * @param string $sort Sort by HOUR, DAY, MONTH, YEAR
+     *
      * @return array
      */
     public function getNbPagesViews($sort)
@@ -235,8 +238,9 @@ class Visitor extends AbstractTable
     /**
      * Return all visitors
      *
-     * @param string $sort
-     * @param array $rows
+     * @param string $sort Sort by HOUR, DAY, MONTH, YEAR
+     * @param array  $rows Rows
+     *
      * @return array
      */
     protected function sortData($sort, $rows)
@@ -300,7 +304,8 @@ class Visitor extends AbstractTable
     /**
      * Return all visitors
      *
-     * @param string $sort
+     * @param string $sort Sort by HOUR, DAY, MONTH, YEAR
+     *
      * @return array
      */
     public function getNbVisitors($sort)
@@ -331,8 +336,9 @@ class Visitor extends AbstractTable
     /**
      * Return all referers
      *
-     * @param string $sort
-     * @param integer $limit Optional
+     * @param string  $sort  Sort by HOUR, DAY, MONTH, YEAR
+     * @param integer $limit Optional limit, default: 20
+     *
      * @return array
      */
     public function getUrlsViews($sort, $limit = 20)
@@ -363,8 +369,9 @@ class Visitor extends AbstractTable
     /**
      * Return all referers
      *
-     * @param string $sort
-     * @param integer $limit Optional
+     * @param string  $sort  Sort by HOUR, DAY, MONTH, YEAR
+     * @param integer $limit Optional limit, default: 20
+     *
      * @return array
      */
     public function getReferers($sort, $limit = 20)
@@ -384,8 +391,8 @@ class Visitor extends AbstractTable
                     'nb' => new Expression('COUNT(lui.id)')
                 )
             )->where('lui.referer IS NOT null')
-        ->order('nb DESC')
-        ->group(array('lui.referer'));
+            ->order('nb DESC')
+            ->group(array('lui.referer'));
 
         $this->groupByDate($sort, $select);
         $select->limit($limit);
@@ -396,8 +403,9 @@ class Visitor extends AbstractTable
     /**
      * group by date
      *
-     * @param string $sort
-     * @param Select &$select
+     * @param string $sort    Sort by HOUR, DAY, MONTH, YEAR
+     * @param Select &$select Select
+     *
      * @return void
      */
     protected function groupByDate($sort, Select &$select)
@@ -438,7 +446,8 @@ class Visitor extends AbstractTable
     /**
      * Check sort sql variable
      *
-     * @param string $sort
+     * @param string $sort Sort by HOUR, DAY, MONTH, YEAR
+     *
      * @return string
      */
     protected function checkSort($sort)

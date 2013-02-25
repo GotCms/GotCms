@@ -41,7 +41,8 @@ class DbTableGateway extends ZendDbTableGateway
     /**
      * Read session data
      *
-     * @param string $id
+     * @param string $id Id
+     *
      * @return string
      */
     public function read($id)
@@ -67,8 +68,9 @@ class DbTableGateway extends ZendDbTableGateway
     /**
      * Write session data
      *
-     * @param string $id
-     * @param string $data
+     * @param string $id   Id
+     * @param string $data Data
+     *
      * @return boolean
      */
     public function write($id, $data)
@@ -95,7 +97,7 @@ class DbTableGateway extends ZendDbTableGateway
             );
         }
 
-        $data[$this->options->getLifetimeColumn()] = (int)$this->lifetime;
+        $data[$this->options->getLifetimeColumn()] = (int) $this->lifetime;
         $data[$this->options->getIdColumn()]       = $id;
         $data[$this->options->getNameColumn()]     = $this->sessionName;
 

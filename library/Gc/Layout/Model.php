@@ -49,7 +49,8 @@ class Model extends AbstractTable
     /**
      * Initiliaze layout
      *
-     * @param integer $id
+     * @param integer $id Layout id
+     *
      * @return \Gc\Layout\Model
      */
     public function init($id = null)
@@ -62,7 +63,8 @@ class Model extends AbstractTable
     /**
      * Initiliaze from array
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return \Gc\Layout\Model
      */
     public static function fromArray(array $array)
@@ -77,15 +79,16 @@ class Model extends AbstractTable
     /**
      * Initiliaze from id
      *
-     * @param integer $layout_id
+     * @param integer $layout_id Layout id
+     *
      * @return \Gc\Layout\Model
      */
     public static function fromId($layout_id)
     {
         $layout_table = new Model();
-        $row = $layout_table->fetchRow($layout_table->select(array('id' => (int)$layout_id)));
+        $row          = $layout_table->fetchRow($layout_table->select(array('id' => (int) $layout_id)));
         if (!empty($row)) {
-            $layout_table->setData((array)$row);
+            $layout_table->setData((array) $row);
             $layout_table->setOrigData();
             return $layout_table;
         } else {
@@ -96,15 +99,16 @@ class Model extends AbstractTable
     /**
      * Initiliaze from identifier
      *
-     * @param string $identifier
+     * @param string $identifier Identifier
+     *
      * @return \Gc\Layout\Model
      */
     public static function fromIdentifier($identifier)
     {
         $layout_table = new Model();
-        $row = $layout_table->fetchRow($layout_table->select(array('identifier' => $identifier)));
+        $row          = $layout_table->fetchRow($layout_table->select(array('identifier' => $identifier)));
         if (!empty($row)) {
-            $layout_table->setData((array)$row);
+            $layout_table->setData((array) $row);
             $layout_table->setOrigData();
             return $layout_table;
         } else {

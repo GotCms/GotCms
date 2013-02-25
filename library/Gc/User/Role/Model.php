@@ -130,7 +130,8 @@ class Model extends AbstractTable
     /**
      * Initiliaze from array
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return \Gc\User\Role\Model
      */
     public static function fromArray(array $array)
@@ -145,15 +146,16 @@ class Model extends AbstractTable
     /**
      * Initiliaze from id
      *
-     * @param integer $user_role_id
+     * @param integer $user_role_id User role id
+     *
      * @return \Gc\User\Role\Model
      */
     public static function fromId($user_role_id)
     {
         $role_table = new Model();
-        $row = $role_table->fetchRow($role_table->select(array('id' => (int)$user_role_id)));
+        $row        = $role_table->fetchRow($role_table->select(array('id' => (int) $user_role_id)));
         if (!empty($row)) {
-            $role_table->setData((array)$row);
+            $role_table->setData((array) $row);
             $role_table->setOrigData();
             return $role_table;
         } else {

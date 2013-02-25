@@ -46,7 +46,7 @@ class Tabs
     /**
      * Tabs constructor
      *
-     * @param array $array
+     * @param array $array Data
      */
     public function __construct(array $array = array())
     {
@@ -56,7 +56,8 @@ class Tabs
     /**
      * Render tab
      *
-     * @param array $tabs contains objects
+     * @param array $tabs Contains objects
+     *
      * @return string
      */
     public function render(array $tabs = null)
@@ -66,7 +67,7 @@ class Tabs
         }
 
         $html = '<ul>';
-        $i = 1;
+        $i    = 1;
         foreach ($tabs as $iterator) {
             if (!$iterator instanceof IterableInterface) {
                 $html .= '<li><a href="#tabs-' . $i . '">' . $iterator . '</a></li>';
@@ -99,7 +100,8 @@ class Tabs
     /**
      * Set data
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return Tabs
      */
     public function setData(array $array)

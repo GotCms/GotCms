@@ -94,7 +94,8 @@ class Action extends AbstractActionController
     /**
      * Execute the request
      *
-     * @param  MvcEvent $e
+     * @param MvcEvent $e Mvc Event
+     *
      * @return mixed
      */
     public function onDispatch(MvcEvent $e)
@@ -125,7 +126,7 @@ class Action extends AbstractActionController
      */
     protected function _construct()
     {
-        $module = $this->getRouteMatch()->getParam('module');
+        $module     = $this->getRouteMatch()->getParam('module');
         $route_name = $this->getRouteMatch()->getMatchedRouteName();
 
         /**
@@ -138,16 +139,15 @@ class Action extends AbstractActionController
         } elseif (!in_array($route_name, $this->installerRoutes)) {
             $auth = $this->getAuth();
             if (!$auth->hasIdentity()) {
-                if (
-                    !in_array(
-                        $route_name,
-                        array(
-                            'userLogin',
-                            'userForgotPassword',
-                            'userForgotPasswordKey',
-                            'renderWebsite'
-                        )
+                if (!in_array(
+                    $route_name,
+                    array(
+                        'userLogin',
+                        'userForgotPassword',
+                        'userForgotPasswordKey',
+                        'renderWebsite'
                     )
+                )
                 ) {
                     return $this->redirect()->toRoute(
                         'userLogin',
@@ -157,7 +157,7 @@ class Action extends AbstractActionController
             } else {
                 $user_model = $auth->getIdentity();
 
-                $this->acl = new Acl($user_model);
+                $this->acl   = new Acl($user_model);
                 $permissions = $user_model->getRole(true)->getUserPermissions();
                 if ($route_name != 'userForbidden') {
                     if (!empty($this->aclPage)) {
@@ -165,8 +165,8 @@ class Action extends AbstractActionController
                         if ($this->aclPage['resource'] == 'Modules') {
                             $module_id = $this->getRouteMatch()->getParam('m');
                             if (empty($module_id)) {
-                                $action = $this->getRouteMatch()->getParam('action');
-                                $action = ($action === 'index' ? 'list' : $action);
+                                $action     = $this->getRouteMatch()->getParam('action');
+                                $action     = ($action === 'index' ? 'list' : $action);
                                 $is_allowed = $this->acl->isAllowed(
                                     $user_model->getRole()->getName(),
                                     $this->aclPage['resource'],
@@ -200,19 +200,18 @@ class Action extends AbstractActionController
             }
         }
 
-        $this->layout()->module = strtolower($module);
+        $this->layout()->module  = strtolower($module);
         $this->layout()->version = \Gc\Version::VERSION;
 
         $this->useFlashMessenger(false);
-        if (
-            !in_array($route_name, $this->installerRoutes)
+        if (!in_array($route_name, $this->installerRoutes)
             and !in_array($route_name, array('userLogin', 'userForgotPassword', 'renderWebsite'))
         ) {
             /**
              * Prepare all resources
              */
             $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
-            $headscript = $helper_broker->get('HeadScript');
+            $headscript    = $helper_broker->get('HeadScript');
             $headscript
                 ->appendFile('/backend/js/libs/modernizr-2.6.1.min.js', 'text/javascript')
                 ->appendFile('/backend/js/libs/jquery-1.8.3.min.js', 'text/javascript')
@@ -286,7 +285,8 @@ class Action extends AbstractActionController
     /**
      * Return json model
      *
-     * @param array $data
+     * @param array $data Data
+     *
      * @return \Zend\View\Model\JsonModel
      */
     public function returnJson(array $data)
@@ -301,13 +301,14 @@ class Action extends AbstractActionController
     /**
      * Initiliaze flash messenger
      *
-     * @param boolean $force_display
+     * @param boolean $force_display Force display
+     *
      * @return void
      */
     public function useFlashMessenger($force_display = true)
     {
         $flash_messenger = $this->flashMessenger();
-        $flash_messages = array();
+        $flash_messages  = array();
         foreach (array('error', 'success', 'info', 'warning') as $namespace) {
             $flash_namespace = $flash_messenger->setNameSpace($namespace);
             if ($force_display) {

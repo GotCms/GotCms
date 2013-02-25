@@ -72,8 +72,9 @@ abstract class AbstractTable extends Object
     /**
      * Set/Get attribute wrapper
      *
-     * @param   string $method
-     * @param   array $args
+     * @param string $method Method
+     * @param array  $args   Args
+     *
      * @return  \Zend\Db\TableGateway\TableGateway
      */
     public function __call($method, $args)
@@ -92,8 +93,9 @@ abstract class AbstractTable extends Object
     /**
      * Fetch Row
      *
-     * @param mixed $query (\Zend\Db\Sql\Select|string)
-     * @param mixed $parameters
+     * @param mixed $query      (\Zend\Db\Sql\*|string) Query
+     * @param mixed $parameters Parameters
+     *
      * @return array|\Zend\Db\ResultSet\RowObjectInterface
      */
     public function fetchRow($query, $parameters = null)
@@ -114,8 +116,9 @@ abstract class AbstractTable extends Object
     /**
      * Fetch Row
      *
-     * @param mixed $query (\Zend\Db\Sql\Select|string)
-     * @param mixed $parameters
+     * @param mixed $query      (\Zend\Db\Sql\*|string) Query
+     * @param mixed $parameters Parameters
+     *
      * @return array
      */
     public function fetchAll($query, $parameters = null)
@@ -136,8 +139,9 @@ abstract class AbstractTable extends Object
     /**
      * Fetch One
      *
-     * @param mixed $query (\Zend\Db\Sql\Select|string)
-     * @param mixed $parameters
+     * @param mixed $query      (\Zend\Db\Sql\*|string) Query
+     * @param mixed $parameters Parameters
+     *
      * @return mixed
      */
     public function fetchOne($query, $parameters = null)
@@ -158,8 +162,9 @@ abstract class AbstractTable extends Object
     /**
      * Execute query
      *
-     * @param mixed $query (\Zend\Db\Sql\*|string)
-     * @param mixed $parameters
+     * @param mixed $query      (\Zend\Db\Sql\*|string) Query
+     * @param mixed $parameters Parameters
+     *
      * @return array|\Zend\Db\Adapter\Driver\Pdo\Result
      */
     public function execute($query, $parameters = null)
@@ -177,7 +182,8 @@ abstract class AbstractTable extends Object
     /**
      * Get last insert id
      *
-     * @param string $table_name Optional
+     * @param string $table_name Optional table name
+     *
      * @return integer
      */
     public function getLastInsertId($table_name = null)

@@ -80,14 +80,15 @@ class Config extends AbstractTable
     /**
      * Get config value
      *
-     * @param string $data
+     * @param string $data  Data
      * @param string $field Optional database field, by default 'identifier'
+     *
      * @return string value
      */
     public static function getValue($data, $field = 'identifier')
     {
         $instance = self::getInstance();
-        $row = $instance->fetchRow($instance->select(array($field => $data)));
+        $row      = $instance->fetchRow($instance->select(array($field => $data)));
         if (!empty($row)) {
             return $row['value'];
         }
@@ -103,7 +104,7 @@ class Config extends AbstractTable
     public static function getValues()
     {
         $instance = self::getInstance();
-        $rows = $instance->fetchAll($instance->select());
+        $rows     = $instance->fetchAll($instance->select());
         if (!empty($rows)) {
             return $rows;
         }
@@ -114,8 +115,9 @@ class Config extends AbstractTable
     /**
      * Set config value
      *
-     * @param string $identifier
-     * @param string $value
+     * @param string $identifier Identifier
+     * @param string $value      Value
+     *
      * @return boolean
      */
     public static function setValue($identifier, $value)
@@ -125,7 +127,7 @@ class Config extends AbstractTable
         }
 
         $instance = self::getInstance();
-        $row = $instance->fetchRow($instance->select(array('identifier' => $identifier)));
+        $row      = $instance->fetchRow($instance->select(array('identifier' => $identifier)));
         if (!empty($row)) {
             $where = new Where();
             return $instance->update(array('value' => $value), $where->equalTo('identifier', $identifier));

@@ -69,7 +69,7 @@ class IndexController extends AbstractController
                 break;
         }
 
-        $content = $model->export($this->getRequest()->getPost()->get('what'));
+        $content  = $model->export($this->getRequest()->getPost()->get('what'));
         $filename = 'database-backup-' . date('Y-m-d') . '.sql.gz';
 
         $headers = new Headers();
@@ -96,8 +96,8 @@ class IndexController extends AbstractController
      */
     public function downloadFilesAction()
     {
-        $model = new Model\Files();
-        $content = $model->export();
+        $model    = new Model\Files();
+        $content  = $model->export();
         $filename = 'frontend-backup-' . date('Y-m-d') . '.zip';
 
         $headers = new Headers();

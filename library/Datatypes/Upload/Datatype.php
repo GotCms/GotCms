@@ -49,7 +49,8 @@ class Datatype extends AbstractDatatype
     /**
      * Retrieve editor
      *
-     * @param PropertyModel $property
+     * @param PropertyModel $property Property
+     *
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     public function getEditor(PropertyModel $property)

@@ -42,7 +42,9 @@ abstract class AbstractModule
     /**
      * Execute on bootstrap
      *
-     * @param Event $e
+     * @param Event $e Event
+     *
+     * @return void
      */
     abstract public function init(Event $e);
 

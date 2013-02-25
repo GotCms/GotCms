@@ -42,7 +42,8 @@ class CkEditor extends Object
     /**
      * Set parameters
      *
-     * @param array $parameters
+     * @param array $parameters Parameters
+     *
      * @return Datatypes\Textrich\Ckeditor
      */
     public function setParameters(array $parameters = null)
@@ -63,9 +64,9 @@ class CkEditor extends Object
      */
     public function getToolbarAsJs()
     {
-        $js = '';
+        $js                = '';
         $all_toolbar_items = $this->getAllToolbarItems();
-        $toolbar_items = $this->getToolbarItems();
+        $toolbar_items     = $this->getToolbarItems();
         foreach ($all_toolbar_items as $group) {
             if (!empty($group['items']) and is_array($group['items'])) {
                 $content = array();
@@ -241,8 +242,8 @@ class CkEditor extends Object
      */
     public function getAllItems()
     {
-        $elements = array();
-        $items = $this->getAllToolbarItems();
+        $elements      = array();
+        $items         = $this->getAllToolbarItems();
         $toolbar_items = $this->getToolbarItems();
         foreach ($items as $group) {
             if (!empty($group['items']) and is_array($group['items'])) {

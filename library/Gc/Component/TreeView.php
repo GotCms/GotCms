@@ -51,8 +51,9 @@ class TreeView
     /**
      * Render treeview html
      *
-     * @param array $treeview_data contains data as array
-     * @param boolean $init
+     * @param array   $treeview_data Contains data as array
+     * @param boolean $init          Initialize
+     *
      * @return string
      */
     public static function render(array $treeview_data = null, $init = true)
@@ -69,23 +70,23 @@ class TreeView
                 continue;
             }
 
-            $children = $iterator->getChildren();
+            $children     = $iterator->getChildren();
             $has_children = !empty($children);
-            $html .= '<li id="' . $iterator->getIterableId() . '"';
+            $html        .= '<li id="' . $iterator->getIterableId() . '"';
 
             if ($has_children) {
-                $rel = ' class="folder"';
-                $ins = '<ins class="jstree-icon">&nbsp;</ins>';
+                $rel             = ' class="folder"';
+                $ins             = '<ins class="jstree-icon">&nbsp;</ins>';
                 $render_children = self::render($children, false);
             } else {
                 $render_children = '';
-                $rel = ' class="default"';
-                $ins = '';
+                $rel             = ' class="default"';
+                $ins             = '';
             }
 
 
-            $html .= $rel . '>' . $ins;
-            $id = $iterator->getId();
+            $html        .= $rel . '>' . $ins;
+            $id           = $iterator->getId();
             $is_published = null;
             if (method_exists($iterator, 'isPublished')) {
                 $is_published = $iterator->isPublished();

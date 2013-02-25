@@ -72,14 +72,15 @@ class Translator extends AbstractTable
     /**
      * Get config value
      *
-     * @param string $source
-     * @param string $locale Optional
+     * @param string $source Source
+     * @param string $locale Optional locale
+     *
      * @return string value
      */
     public static function getValue($source, $locale = null)
     {
         $instance = self::getInstance();
-        $select = new Select();
+        $select   = new Select();
         $select->from('core_translate')
             ->columns(array('src_id' => 'id', 'source'))
             ->join(
@@ -103,14 +104,15 @@ class Translator extends AbstractTable
     /**
      * Return all values from core_config_data
      *
-     * @param string $locale
-     * @param integer $limit
+     * @param string  $locale Locale
+     * @param integer $limit  Limit
+     *
      * @return array
      */
     public static function getValues($locale = null, $limit = null)
     {
         $instance = self::getInstance();
-        $select = new Select();
+        $select   = new Select();
         $select->from('core_translate')
             ->columns(array('src_id' => 'id', 'source'))
             ->join(
@@ -135,8 +137,9 @@ class Translator extends AbstractTable
     /**
      * Set config value
      *
-     * @param string $source
-     * @param array $destinations
+     * @param string $source       Source
+     * @param array  $destinations Destinations
+     *
      * @return boolean
      */
     public static function setValue($source, array $destinations)
@@ -177,13 +180,13 @@ class Translator extends AbstractTable
             } else {
                 $insert = new Insert();
                 $insert->into('core_translate_locale')
-                ->values(
-                    array(
-                        'destination' => $destination['value'],
-                        'locale' => $destination['locale'],
-                        'core_translate_id' => $source_id,
-                    )
-                );
+                    ->values(
+                        array(
+                            'destination' => $destination['value'],
+                            'locale' => $destination['locale'],
+                            'core_translate_id' => $source_id,
+                        )
+                    );
 
                 $instance->execute($insert);
             }

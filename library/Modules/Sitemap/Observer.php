@@ -55,7 +55,8 @@ class Observer extends AbstractObserver
     /**
      * Generate xml on save
      *
-     * @param \Zend\EventManager\Event $event
+     * @param \Zend\EventManager\Event $event Event
+     *
      * @return void
      */
     public function addElement(Event $event)
@@ -67,7 +68,7 @@ class Observer extends AbstractObserver
                 $old_url_key = $document->getUrlKey();
                 $document->setUrlKey($document->getOrigData('url_key'));
                 $content = file_get_contents($sitemap->getFilePath());
-                $xml = simplexml_load_string($content);
+                $xml     = simplexml_load_string($content);
                 $xml->registerXPathNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
                 $obj = $xml->xpath(
                     sprintf(
@@ -77,7 +78,7 @@ class Observer extends AbstractObserver
                     )
                 );
                 if (!empty($obj)) {
-                    $obj[0]->loc = $document->getUrl();
+                    $obj[0]->loc     = $document->getUrl();
                     $obj[0]->lastmod = $document->getUrl();
                     $xml->asXml($sitemap->getFilePath());
                 }
@@ -92,18 +93,19 @@ class Observer extends AbstractObserver
     /**
      * Remove element on delete
      *
-     * @param \Zend\EventManager\Event $event
+     * @param \Zend\EventManager\Event $event Event
+     *
      * @return void
      */
     public function removeElement(Event $event)
     {
         $sitemap = new Sitemap();
         if (file_exists($sitemap->getFilePath())) {
-            $document = $event->getParam('object');
+            $document    = $event->getParam('object');
             $old_url_key = $document->getUrlKey();
             $document->setUrlKey($document->getOrigData('url_key'));
             $content = file_get_contents($sitemap->getFilePath());
-            $xml = simplexml_load_string($content);
+            $xml     = simplexml_load_string($content);
             $xml->registerXPathNamespace('sm', 'http://www.sitemaps.org/schemas/sitemap/0.9');
             $obj = $xml->xpath(
                 sprintf(

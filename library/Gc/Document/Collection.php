@@ -50,7 +50,8 @@ class Collection extends AbstractTable implements IterableInterface
     /**
      * Load document collection
      *
-     * @param integer $parent_id
+     * @param integer $parent_id Parent id
+     *
      * @return \Gc\Document\Collection
      */
     public function load($parent_id = null)
@@ -96,7 +97,7 @@ class Collection extends AbstractTable implements IterableInterface
 
         $documents = array();
         foreach ($rows as $row) {
-            $documents[] = Model::fromArray((array)$row);
+            $documents[] = Model::fromArray((array) $row);
         }
 
         $this->setData('documents', $documents);
@@ -132,7 +133,7 @@ class Collection extends AbstractTable implements IterableInterface
     public function getAvailableChildren()
     {
         $children = $this->getChildren();
-        $array = array();
+        $array    = array();
         foreach ($children as $child) {
             if ($child->isPublished()) {
                 $array[] = $child;
@@ -149,7 +150,7 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getSelect()
     {
-        $select = array();
+        $select    = array();
         $documents = $this->getDocuments();
 
         foreach ($documents as $document) {
@@ -160,7 +161,9 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getParent()
+     * @return mixed
      */
     public function getParent()
     {
@@ -168,7 +171,9 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getChildren()
+     * @return array
      */
     public function getChildren()
     {
@@ -176,7 +181,9 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getId()
+     * @return mixed
      */
     public function getId()
     {
@@ -184,7 +191,9 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getIcon()
+     * @return string
      */
     public function getIcon()
     {
@@ -192,7 +201,9 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getIterableId()
+     * @return string
      */
     public function getIterableId()
     {
@@ -200,7 +211,9 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getName()
+     * @return string
      */
     public function getName()
     {
@@ -208,7 +221,9 @@ class Collection extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getEditUrl()
+     * @return mixed
      */
     public function getEditUrl()
     {

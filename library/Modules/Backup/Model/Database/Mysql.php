@@ -51,7 +51,8 @@ class Mysql extends AbstractTable
     /**
      * Export function
      *
-     * @param string $what
+     * @param string $what Action
+     *
      * @return string
      */
     public function export($what = 'structureanddata')

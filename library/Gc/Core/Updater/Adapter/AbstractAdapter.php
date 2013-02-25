@@ -48,18 +48,24 @@ abstract class AbstractAdapter extends Object
 
     /**
      * Update
+     *
+     * @return boolean
      */
     abstract public function update();
 
     /**
      * Upgrade
+     *
+     * @return boolean
      */
     abstract public function upgrade();
 
     /**
      * Upgrade
      *
-     * @param string $version
+     * @param string $version Version
+     *
+     * @return boolean
      */
     abstract public function rollback($version);
 
@@ -76,7 +82,8 @@ abstract class AbstractAdapter extends Object
     /**
      * Add message
      *
-     * @param string
+     * @param string $message Message
+     *
      * @return \Gc\Core\Updater\Adapter
      */
     public function addMessage($message)

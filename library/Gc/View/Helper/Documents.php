@@ -46,7 +46,8 @@ class Documents extends AbstractHelper
      * if data is an array, return all documents
      * if data is numeric, return all documents with parent_id equal to $data
      *
-     * @param  integer $data
+     * @param mixed $data Data
+     *
      * @return array \Gc\Document\Model
      */
     public function __invoke($data = null)

@@ -46,10 +46,10 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function save()
     {
-        $post = $this->getRequest()->getPost();
-        $mime_list = $post->get('mime_list');
-        $options_post = $post->get('options', array());
-        $options = array();
+        $post                        = $this->getRequest()->getPost();
+        $mime_list                   = $post->get('mime_list');
+        $options_post                = $post->get('options', array());
+        $options                     = array();
         $options['maxNumberOfFiles'] = in_array('maxNumberOfFiles', $options_post) ? true : false;
 
         $this->setConfig(array('mime_list' => $mime_list, 'options' => $options));
@@ -63,11 +63,11 @@ class PrevalueEditor extends AbstractPrevalueEditor
     public function load()
     {
         $parameters = $this->getConfig();
-        $elements = array();
+        $elements   = array();
 
         $options_values = !empty($parameters['options']) ? $parameters['options'] : array();
-        $fieldset = new \Zend\Form\Fieldset('Available options');
-        $element = new Element\MultiCheckbox('options');
+        $fieldset       = new \Zend\Form\Fieldset('Available options');
+        $element        = new Element\MultiCheckbox('options');
         $element->setAttribute('selected', $options_values);
 
         $element->setValueOptions(
@@ -83,7 +83,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $elements[] = $fieldset;
 
-        $element = new Element\MultiCheckbox('mime_list');
+        $element   = new Element\MultiCheckbox('mime_list');
         $mime_list = array(
             'image/gif',
             'image/jpeg',
@@ -107,7 +107,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'audio/vnd.rn-realaudio',
             'audio/x-wav'
         );
-        $options = array();
+        $options   = array();
         foreach ($mime_list as $mime) {
             $options[] = array(
                 'value' => $mime,

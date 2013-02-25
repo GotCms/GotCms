@@ -66,7 +66,8 @@ class Collection extends AbstractTable
     /**
      * Get permissions
      *
-     * @param boolean $force_reload
+     * @param boolean $force_reload Force reload
+     *
      * @return array
      */
     public function getPermissions($force_reload = false)
@@ -86,7 +87,7 @@ class Collection extends AbstractTable
                     array('resource')
                 );
 
-            $rows = $this->fetchAll($select);
+            $rows        = $this->fetchAll($select);
             $permissions = array();
             foreach ($rows as $permission) {
                 if (empty($permissions[$permission['resource']])) {

@@ -60,10 +60,10 @@ class Sitemap extends Object
     public function generate()
     {
         $collection = new DocumentCollection();
-        $documents = array();
-        $rows = $collection->getAvailableDocuments();
+        $documents  = array();
+        $rows       = $collection->getAvailableDocuments();
         foreach ($rows as $row) {
-            $documents[] = DocumentModel::fromArray((array)$row);
+            $documents[] = DocumentModel::fromArray((array) $row);
         }
 
         return $this->generateXml($documents);
@@ -73,11 +73,12 @@ class Sitemap extends Object
      * Generate Xml
      *
      * @param array $documents Array with all documents
+     *
      * @return string
      */
     protected function generateXml($documents)
     {
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+        $xml  = '<?xml version="1.0" encoding="UTF-8"?>';
         $xml .= '<urlset
             xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

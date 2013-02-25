@@ -55,12 +55,12 @@ class Editor extends AbstractEditor
      */
     public function save()
     {
-        $config = $this->getConfig();
+        $config           = $this->getConfig();
         $datatypes_config = empty($config['datatypes']) ? array() : $config['datatypes'];
 
-        $post = $this->getRequest()->getPost();
-        $_OLD_POST = $post->toArray();
-        $datatypes = $post->get($this->getName());
+        $post       = $this->getRequest()->getPost();
+        $_OLD_POST  = $post->toArray();
+        $datatypes  = $post->get($this->getName());
         $_OLD_FILES = $_FILES;
 
         if (!empty($datatypes) and is_array($datatypes)) {
@@ -94,8 +94,8 @@ class Editor extends AbstractEditor
 
                     //Get datatypes
                     $datatype_config = $datatypes_config[$datatype_id];
-                    $object = $this->loadDatatype($datatype_config['name']);
-                    $editor = $object->getEditor($this->getProperty());
+                    $object          = $this->loadDatatype($datatype_config['name']);
+                    $editor          = $object->getEditor($this->getProperty());
 
                     if (!empty($datatype_config['config'])) {
                         $editor->setConfig(serialize($datatype_config['config']));
@@ -128,9 +128,9 @@ class Editor extends AbstractEditor
         $config = $this->getConfig();
         $values = unserialize($this->getValue());
 
-        $datatypes = empty($config['datatypes']) ? array() : $config['datatypes'];
+        $datatypes          = empty($config['datatypes']) ? array() : $config['datatypes'];
         $datatypes_elements = array();
-        $line_id = 0;
+        $line_id            = 0;
         if (!empty($values)) {
             foreach ($values as $line_id => $datatype_value) {
                 foreach ($datatype_value as $datatype_id => $value) {
@@ -158,7 +158,7 @@ class Editor extends AbstractEditor
                     $fieldset = new Fieldset($datatype_config['name'] . $datatype_id);
 
                     AbstractForm::addContent($fieldset, $editor->load(), $prefix);
-                    $datatypes_elements[$line_id][$datatype_id]['label'] = empty($datatype_config['label']) ?
+                    $datatypes_elements[$line_id][$datatype_id]['label']    = empty($datatype_config['label']) ?
                         '' :
                         $datatype_config['label'];
                     $datatypes_elements[$line_id][$datatype_id]['fieldset'] = $fieldset;
@@ -188,13 +188,13 @@ class Editor extends AbstractEditor
             $prefix = $this->getName() . '[#{line}][' . $datatype_id . ']';
             //Create form
             $fieldset = new Fieldset($datatype_config['name'] . $datatype_id);
-            $hidden = new Element\Hidden();
+            $hidden   = new Element\Hidden();
             $hidden->setName($prefix . '[name]');
             $hidden->setValue($datatype_config['name']);
             $fieldset->add($hidden);
 
             AbstractForm::addContent($fieldset, $editor->load(), $prefix);
-            $template[$datatype_id]['label'] = empty($datatype_config['label']) ? '' : $datatype_config['label'];
+            $template[$datatype_id]['label']    = empty($datatype_config['label']) ? '' : $datatype_config['label'];
             $template[$datatype_id]['fieldset'] = $fieldset;
         }
 
@@ -212,7 +212,8 @@ class Editor extends AbstractEditor
     /**
      * Retrieve datatypes
      *
-     * @param string $name
+     * @param string $name Datatype name
+     *
      * @return \Gc\Datatype\AbstractDatatype
      */
     protected function loadDatatype($name)
@@ -221,7 +222,7 @@ class Editor extends AbstractEditor
             return $this->datatypes[$name];
         }
 
-        $class = 'Datatypes\\' . $name . '\Datatype';
+        $class  = 'Datatypes\\' . $name . '\Datatype';
         $object = new $class();
         $object->load($this->getDatatype()->getDatatypeModel(), $this->getProperty()->getDocumentId());
         $this->datatypes[$name] = $object;

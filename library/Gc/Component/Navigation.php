@@ -69,14 +69,15 @@ class Navigation
     {
         $documents = new Document\Collection();
         $documents->load(0);
-        $this->documents = $documents->getDocuments();
+        $this->documents  = $documents->getDocuments();
         $this->requestUri = Registry::get('Application')->getRequest()->getRequestUri();
     }
 
     /**
      * Set base path for urls
      *
-     * @param string $path
+     * @param string $path Path
+     *
      * @return \Gc\Component\Navigation
      */
     public function setBasePath($path)
@@ -98,8 +99,9 @@ class Navigation
     /**
      * Render navigation
      *
-     * @param array $documents (set of \Gc\Document\Model)
-     * @param string $parent_url
+     * @param array  $documents  Let of \Gc\Document\Model
+     * @param string $parent_url Parent url
+     *
      * @return array
      */
     public function render(array $documents = null, $parent_url = null)
@@ -112,13 +114,13 @@ class Navigation
         foreach ($documents as $document) {
             $children = $document->getChildren();
             if ($document->isPublished()) {
-                $data = array();
-                $data['label'] = $document->getName();
-                $data['uri'] = $this->getBasePath()
+                $data            = array();
+                $data['label']   = $document->getName();
+                $data['uri']     = $this->getBasePath()
                     . ($parent_url !== null ? $parent_url . '/' : '')
                     . $document->getUrlKey();
                 $data['visible'] = $document->showInNav();
-                $data['active'] = $data['uri'] == $this->requestUri;
+                $data['active']  = $data['uri'] == $this->requestUri;
 
                 if (!empty($children) && is_array($children)) {
                     $data['pages'] = $this->render(

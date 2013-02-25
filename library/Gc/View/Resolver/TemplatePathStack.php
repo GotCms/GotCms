@@ -44,15 +44,16 @@ class TemplatePathStack extends PathStack
     /**
      * Retrieve the filesystem path to a view script
      *
-     * @param  string $name
-     * @param  null|Renderer $renderer
+     * @param string        $name     Template name
+     * @param null|Renderer $renderer Renderer
+     *
      * @return string
      * @throws Exception\RuntimeException
      */
     public function resolve($name, Renderer $renderer = null)
     {
         //Force use view stream
-        $this->useViewStream = true;
+        $this->useViewStream     = true;
         $this->lastLookupFailure = false;
 
         if ($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name)) {

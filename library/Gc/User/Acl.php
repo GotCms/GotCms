@@ -73,7 +73,8 @@ class Acl extends ZendAcl\Acl
     /**
      * Initiliaze Acl
      *
-     * @param UserModel $user_model
+     * @param UserModel $user_model User model
+     *
      * @return void
      */
     public function __construct(UserModel $user_model)
@@ -88,7 +89,7 @@ class Acl extends ZendAcl\Acl
         $select->where->equalTo('user.id', $this->user->getId());
         $user_role = $this->roleTable->fetchRow($select);
 
-        $this->userRole = empty($user_role['role_id']) ? 0 : $user_role['role_id'];
+        $this->userRole     = empty($user_role['role_id']) ? 0 : $user_role['role_id'];
         $this->userRoleName = empty($user_role['name']) ? null : $user_role['name'];
     }
 
@@ -172,7 +173,8 @@ class Acl extends ZendAcl\Acl
     /**
      * Get role id from role name
      *
-     * @param string $role_name
+     * @param string $role_name Role name
+     *
      * @return array|\Zend\Db\ResultSet\RowObjectInterface
      */
     public function getRoleId($role_name)
@@ -197,7 +199,8 @@ class Acl extends ZendAcl\Acl
     /**
      * List all resources by group
      *
-     * @param array $group
+     * @param array $group Resource group
+     *
      * @return array
      */
     public function listResourcesByGroup($group)

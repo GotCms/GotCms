@@ -44,7 +44,8 @@ class FormCheckbox extends ZendFormCheckbox
     /**
      * Render a form <input> element from the provided $element
      *
-     * @param  ElementInterface $element
+     * @param ElementInterface $element Zend Form Element
+     *
      * @throws Exception\InvalidArgumentException
      * @throws Exception\DomainException
      * @return string
@@ -70,11 +71,11 @@ class FormCheckbox extends ZendFormCheckbox
             );
         }
 
-        $attributes            = $element->getAttributes();
-        $attributes['name']    = $name;
-        $attributes['type']    = $this->getInputType();
-        $attributes['value']   = $element->getCheckedValue();
-        $closing_bracket        = $this->getInlineClosingBracket();
+        $attributes          = $element->getAttributes();
+        $attributes['name']  = $name;
+        $attributes['type']  = $this->getInputType();
+        $attributes['value'] = $element->getCheckedValue();
+        $closing_bracket     = $this->getInlineClosingBracket();
 
         if ($element->isChecked()) {
             $attributes['checked'] = 'checked';

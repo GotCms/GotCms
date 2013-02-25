@@ -48,16 +48,16 @@ class Comment extends AbstractForm
      */
     public function init()
     {
-        $show_email  = new Element\Checkbox('show_email');
+        $show_email = new Element\Checkbox('show_email');
         $show_email->setAttribute('label', 'Show email');
         $show_email->setAttribute('required', 'required');
-        $username    = new Element\Text('username');
+        $username = new Element\Text('username');
         $username->setAttribute('label', 'Username');
         $username->setAttribute('required', 'required');
-        $email       = new Element\Text('email');
+        $email = new Element\Text('email');
         $email->setAttribute('label', 'Email');
         $email->setAttribute('required', 'required');
-        $message     = new Element\Textarea('message');
+        $message = new Element\Textarea('message');
         $message->setAttribute('label', 'Message');
         $message->setAttribute('required', 'required');
 
@@ -87,7 +87,7 @@ class Comment extends AbstractForm
         $this->add($captcha);
 
         $input_filter_factory = new InputFilterFactory();
-        $input_filter = $input_filter_factory->createInputFilter(
+        $input_filter         = $input_filter_factory->createInputFilter(
             array(
                 'show_email' => array(
                     'name' => 'show_email',

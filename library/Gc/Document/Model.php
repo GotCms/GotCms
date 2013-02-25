@@ -56,17 +56,18 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * @const STATUS_DISABLE
      */
-    const STATUS_DISABLE     = 0;
+    const STATUS_DISABLE = 0;
 
     /**
      * @const STATUS_ENABLE
      */
-    const STATUS_ENABLE      = 1;
+    const STATUS_ENABLE = 1;
 
     /**
      * Initiliaze document
      *
-     * @param integer $document_id
+     * @param integer $document_id Document id
+     *
      * @return void
      */
     public function init($document_id = null)
@@ -113,6 +114,7 @@ class Model extends AbstractTable implements IterableInterface
      * Define if document is show in navigation
      *
      * @param boolean $is_show Optional
+     *
      * @return boolean
      */
     public function showInNav($is_show = null)
@@ -121,7 +123,7 @@ class Model extends AbstractTable implements IterableInterface
             $this->setData('show_in_nav', $is_show);
         }
 
-        return (bool)$this->getData('show_in_nav') != false ? true : false;
+        return (bool) $this->getData('show_in_nav') != false ? true : false;
     }
 
     /**
@@ -137,7 +139,8 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initialize document from array
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return \Gc\Document\Model
      */
     public static function fromArray(array $array)
@@ -152,15 +155,16 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze document from id
      *
-     * @param integer $document_id
+     * @param integer $document_id Document id
+     *
      * @return \Gc\Document\Model
      */
     public static function fromId($document_id)
     {
         $document_table = new Model();
-        $row = $document_table->fetchRow($document_table->select(array('id' => (int)$document_id)));
+        $row            = $document_table->fetchRow($document_table->select(array('id' => (int) $document_id)));
         if (!empty($row)) {
-            $document_table->setData((array)$row);
+            $document_table->setData((array) $row);
             $document_table->setOrigData();
             return $document_table;
         } else {
@@ -171,21 +175,22 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze from url and parent
      *
-     * @param string $url_key
-     * @param mixed $parent_id
+     * @param string $url_key   Url key
+     * @param mixed  $parent_id Parent id
+     *
      * @return \Gc\Document\Model
      */
     public static function fromUrlKey($url_key, $parent_id = null)
     {
         $document_table = new Model();
-        $sql_data = array('url_key' => $url_key);
+        $sql_data       = array('url_key' => $url_key);
         if (!empty($parent_id)) {
             $sql_data['parent_id'] = $parent_id;
         }
 
         $row = $document_table->fetchRow($document_table->select($sql_data));
         if (!empty($row)) {
-            $document_table->setData((array)$row);
+            $document_table->setData((array) $row);
             $document_table->setOrigData();
             return $document_table;
         } else {
@@ -206,12 +211,12 @@ class Model extends AbstractTable implements IterableInterface
             'url_key' => $this->getUrlKey(),
             'updated_at' => new Expression('NOW()'),
             'status' => ($this->getStatus() === null ? self::STATUS_DISABLE : $this->getStatus()),
-            'sort_order' => (int)$this->getSortOrder(),
-            'user_id' => (int)$this->getUserId(),
-            'document_type_id' => (int)$this->getDocumentTypeId() == 0 ? null : (int)$this->getDocumentTypeId(),
-            'view_id' => (int)$this->getViewId() == 0 ? null : (int)$this->getViewId(),
-            'layout_id' => (int)$this->getLayoutId() == 0 ? null : (int)$this->getLayoutId(),
-            'parent_id' => (int)$this->getParentId() == 0 ? null : (int)$this->getParentId(),
+            'sort_order' => (int) $this->getSortOrder(),
+            'user_id' => (int) $this->getUserId(),
+            'document_type_id' => (int) $this->getDocumentTypeId() == 0 ? null : (int) $this->getDocumentTypeId(),
+            'view_id' => (int) $this->getViewId() == 0 ? null : (int) $this->getViewId(),
+            'layout_id' => (int) $this->getLayoutId() == 0 ? null : (int) $this->getLayoutId(),
+            'parent_id' => (int) $this->getParentId() == 0 ? null : (int) $this->getParentId(),
         );
 
         if ($this->getDriverName() == 'pdo_pgsql') {
@@ -279,7 +284,7 @@ class Model extends AbstractTable implements IterableInterface
     public function getUrl()
     {
         $parent = $this->getParent();
-        $path = '/' . $this->getUrlKey();
+        $path   = '/' . $this->getUrlKey();
         if (!empty($parent)) {
             $path = $parent->getUrl() . $path;
         }
@@ -290,7 +295,8 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Get property
      *
-     * @param string $property_name
+     * @param string $property_name Property name
+     *
      * @return false | PropertyModel
      */
     public function getProperty($property_name)
@@ -319,7 +325,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getName()
+     * @return string
      */
     public function getName()
     {
@@ -327,7 +335,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getId()
+     * @return integer
      */
     public function getId()
     {
@@ -335,7 +345,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getParent()
+     * @return mixed
      */
     public function getParent()
     {
@@ -345,7 +357,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getChildren()
+     * @return array
      */
     public function getChildren()
     {
@@ -359,7 +373,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getIcon()
+     * @return mixed
      */
     public function getIcon()
     {
@@ -376,7 +392,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getIterableId()
+     * @return string
      */
     public function getIterableId()
     {
@@ -384,7 +402,9 @@ class Model extends AbstractTable implements IterableInterface
     }
 
     /** (non-PHPdoc)
+     *
      * @see include \Gc\Component\IterableInterface#getEditUrl()
+     * @return mixed
      */
     public function getEditUrl()
     {

@@ -52,10 +52,11 @@ final class Version
      * Compare the specified GotCms version string $version
      * with the current Gc\Version::VERSION of GotCms.
      *
-     * @param  string  $version  A version string (e.g. "0.7.1").
-     * @return int           -1 if the $version is older,
-     *                           0 if they are the same,
-     *                           and +1 if $version is newer.
+     * @param string $version A version string (e.g. "0.7.1").
+     *
+     * @return int -1 if the $version is older,
+     *             0 if they are the same,
+     *             and +1 if $version is newer.
      *
      */
     public static function compareVersion($version)
@@ -72,8 +73,8 @@ final class Version
     {
         if (null === self::$latestVersion) {
             self::$latestVersion = 'not available';
-            $url = 'https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/';
-            $content = @file_get_contents($url);
+            $url                 = 'https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/';
+            $content             = @file_get_contents($url);
 
             if (!empty($content)) {
                 $api_response = Json::decode($content, Json::TYPE_ARRAY);

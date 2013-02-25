@@ -48,9 +48,9 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function save()
     {
-        $post = $this->getRequest()->getPost();
+        $post      = $this->getRequest()->getPost();
         $datatypes = $post->get('datatypes');
-        $model = $post->get('add-model');
+        $model     = $post->get('add-model');
         if (!empty($datatypes)) {
             foreach ($datatypes as $datatype_id => $datatype) {
                 foreach ($datatype as $name => $value) {
@@ -85,11 +85,11 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $config = $this->getConfig();
 
-        $path = GC_APPLICATION_PATH . '/library/Datatypes/';
+        $path     = GC_APPLICATION_PATH . '/library/Datatypes/';
         $list_dir = glob($path . '*', GLOB_ONLYDIR);
-        $options = array();
+        $options  = array();
         foreach ($list_dir as $dir) {
-            $dir = str_replace($path, '', $dir);
+            $dir           = str_replace($path, '', $dir);
             $options[$dir] = $dir;
         }
 
@@ -107,7 +107,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
             //Create form
             $fieldset = new Fieldset();
-            $hidden = new Element\Hidden();
+            $hidden   = new Element\Hidden();
             $hidden->setName($prefix . '[name]');
             $hidden->setValue($datatype_config['name']);
             $fieldset->add($hidden);
@@ -124,8 +124,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
         }
 
 
-        $data = array();
-        $data['datatypes'] = $datatypes;
+        $data                 = array();
+        $data['datatypes']    = $datatypes;
         $data['modelOptions'] = $options;
 
         return $this->addPath(__DIR__)->render('mixed-prevalue.phtml', $data);
@@ -134,12 +134,13 @@ class PrevalueEditor extends AbstractPrevalueEditor
     /**
      * Retrieve datatypes
      *
-     * @param string $name
+     * @param string $name Datatype name
+     *
      * @return \Gc\Datatype\AbstractDatatype
      */
     protected function loadDatatype($name)
     {
-        $class = 'Datatypes\\' . $name . '\Datatype';
+        $class  = 'Datatypes\\' . $name . '\Datatype';
         $object = new $class();
         $object->load($this->getDatatype(), $this->getDocumentId());
         return $object;

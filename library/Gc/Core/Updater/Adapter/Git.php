@@ -68,6 +68,7 @@ class Git extends AbstractAdapter
      * Upgrade
      *
      * @param string $version Version to checkout
+     *
      * @return string
      */
     public function rollback($version)

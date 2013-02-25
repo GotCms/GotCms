@@ -51,7 +51,8 @@ class Pgsql extends AbstractTable
     /**
      * Export function
      *
-     * @param string $what
+     * @param string $what Action
+     *
      * @return string
      */
     public function export($what = 'structureanddata')
@@ -60,7 +61,7 @@ class Pgsql extends AbstractTable
             $what = 'structureanddata';
         }
 
-        $exe = escapeshellcmd('/usr/bin/pg_dump');
+        $exe        = escapeshellcmd('/usr/bin/pg_dump');
         $parameters = $this->getAdapter()->getDriver()->getConnection()->getConnectionParameters();
 
         // Set environmental variables that pg_dump uses
@@ -76,7 +77,7 @@ class Pgsql extends AbstractTable
         }
 
         //Prepare command
-        $cmd = $exe;
+        $cmd  = $exe;
         $cmd .= ' --compress 9 --no-owner --disable-triggers';
 
         switch ($what) {

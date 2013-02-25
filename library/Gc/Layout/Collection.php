@@ -59,7 +59,8 @@ class Collection extends AbstractTable
     /**
      * Set layout collection
      *
-     * @param boolean $force_reload
+     * @param boolean $force_reload Force reload
+     *
      * @return \Gc\Layout\Collection
      */
     public function getLayouts($force_reload = false)
@@ -75,7 +76,7 @@ class Collection extends AbstractTable
 
             $layouts = array();
             foreach ($rows as $row) {
-                $layouts[] = Model::fromArray((array)$row);
+                $layouts[] = Model::fromArray((array) $row);
             }
 
             $this->setData('layouts', $layouts);
@@ -91,7 +92,7 @@ class Collection extends AbstractTable
      */
     public function getSelect()
     {
-        $select = array();
+        $select  = array();
         $layouts = $this->getLayouts();
 
         foreach ($layouts as $layout) {

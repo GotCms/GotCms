@@ -79,10 +79,10 @@ class Collection extends AbstractTable
             }
         );
 
-        $rows = $this->fetchAll($select);
+        $rows  = $this->fetchAll($select);
         $users = array();
         foreach ($rows as $row) {
-            $users[] = Model::fromArray((array)$row);
+            $users[] = Model::fromArray((array) $row);
         }
 
         $this->setData('users', $users);

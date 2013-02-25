@@ -64,8 +64,9 @@ class Model extends AbstractTable
     /**
      * Authenticate user
      *
-     * @param string $login
-     * @param string $password
+     * @param string $login    Login
+     * @param string $password Password
+     *
      * @return boolean
      */
     public function authenticate($login, $password)
@@ -78,12 +79,12 @@ class Model extends AbstractTable
         $auth_adapter->setIdentity($login);
         $auth_adapter->setCredential(sha1($password));
 
-        $auth = new AuthenticationService(new Storage\Session(self::BACKEND_AUTH_NAMESPACE));
+        $auth   = new AuthenticationService(new Storage\Session(self::BACKEND_AUTH_NAMESPACE));
         $result = $auth->authenticate($auth_adapter);
 
         if ($result->isValid()) {
             $data = $auth_adapter->getResultRowObject(null, 'password');
-            $this->setData((array)$data);
+            $this->setData((array) $data);
             $auth->getStorage()->write($this);
 
             return true;
@@ -95,13 +96,14 @@ class Model extends AbstractTable
     /**
      * Set User email
      *
-     * @param string $user_email
+     * @param string $user_email Email address
+     *
      * @return boolean
      */
     public function setEmail($user_email)
     {
         $user_email = trim($user_email);
-        $validator = new EmailAddress();
+        $validator  = new EmailAddress();
         if ($validator->isValid($user_email)) {
             $select = $this->select(
                 function (Select $select) use ($user_email) {
@@ -126,8 +128,9 @@ class Model extends AbstractTable
     /**
      * Set user password
      *
-     * @param string $user_password
-     * @param boolean $encrypt
+     * @param string  $user_password User password
+     * @param boolean $encrypt       Encrypt or not the password
+     *
      * @return void
      */
     public function setPassword($user_password, $encrypt = true)
@@ -212,7 +215,8 @@ class Model extends AbstractTable
     /**
      * Initiliaze from array
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return \Gc\User\Model
      */
     public static function fromArray(array $array)
@@ -228,15 +232,16 @@ class Model extends AbstractTable
     /**
      * Initiliaze from id
      *
-     * @param integer $user_id
+     * @param integer $user_id User id
+     *
      * @return \Gc\User\Model
      */
     public static function fromId($user_id)
     {
         $user_table = new Model();
-        $row = $user_table->fetchRow($user_table->select(array('id' => (int)$user_id)));
+        $row        = $user_table->fetchRow($user_table->select(array('id' => (int) $user_id)));
         if (!empty($row)) {
-            $user_table->setData((array)$row);
+            $user_table->setData((array) $row);
             $user_table->unsetData('password');
             $user_table->setOrigData();
             return $user_table;
@@ -248,7 +253,8 @@ class Model extends AbstractTable
     /**
      * Get User Role
      *
-     * @param boolean $force_reload
+     * @param boolean $force_reload Force reload
+     *
      * @return \Gc\User\Role\Model
      */
     public function getRole($force_reload = false)
@@ -265,20 +271,21 @@ class Model extends AbstractTable
     /**
      * Send new password
      *
-     * @param string $email
+     * @param string $email Email address
+     *
      * @return boolean
      */
     public function sendForgotPasswordEmail($email)
     {
         $row = $this->fetchRow($this->select(array('email' => $email)));
         if (!empty($row)) {
-            $user = self::fromArray((array)$row);
+            $user         = self::fromArray((array) $row);
             $password_key = sha1(uniqid());
             $user->setRetrievePasswordKey($password_key);
             $user->setRetrieveUpdatedAt(new Expression('NOW()'));
             $user->save();
 
-            $message = Registry::get('Translator')
+            $message  = Registry::get('Translator')
                 ->translate(
                     'To reset your password follow this link but be careful ' .
                     'you only have one hour before the link expires:'

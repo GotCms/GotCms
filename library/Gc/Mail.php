@@ -40,10 +40,11 @@ class Mail extends Message
     /**
      * Initialize mail
      *
-     * @param string $encoding
-     * @param string $message
-     * @param string $from
-     * @param string $to
+     * @param string $encoding Encoding
+     * @param string $message  Message
+     * @param string $from     From
+     * @param string $to       To
+     *
      * @return void
      */
     public function __construct($encoding = null, $message = null, $from = null, $to = null)

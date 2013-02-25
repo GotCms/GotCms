@@ -77,7 +77,8 @@ abstract class Module
     /**
      * On boostrap event
      *
-     * @param Event $event
+     * @param Event $event Event
+     *
      * @return void
      */
     public function onBootstrap(Event $event)
@@ -98,7 +99,7 @@ abstract class Module
             \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
             Registry::set('Translator', $translator);
 
-            $uri = '';
+            $uri       = '';
             $uri_class = $event->getRequest()->getUri();
             if ($uri_class->getScheme()) {
                 $uri .= $uri_class->getScheme() . ':';
@@ -144,7 +145,7 @@ abstract class Module
     {
         if (empty($this->config)) {
             $config = include $this->getDir() . '/config/module.config.php';
-            $ini = new Ini();
+            $ini    = new Ini();
             $routes = $ini->fromFile($this->getDir() . '/config/routes.ini');
             $routes = $routes['production'];
             if (empty($config['router']['routes'])) {
@@ -158,7 +159,7 @@ abstract class Module
             if (Registry::isRegistered('Db')) {
                 if (isset($config['view_manager']['display_exceptions']) and GcConfig::getValue('debug_is_active')) {
                     $config['view_manager']['display_not_found_reason'] = true;
-                    $config['view_manager']['display_exceptions'] = true;
+                    $config['view_manager']['display_exceptions']       = true;
                 }
             }
 
@@ -191,7 +192,8 @@ abstract class Module
     /**
      * initiliaze database connexion for every modules
      *
-     * @param ModuleManager $module_manager
+     * @param ModuleManager $module_manager Module manager
+     *
      * @return void
      */
     public function init(ModuleManager $module_manager)
@@ -202,7 +204,7 @@ abstract class Module
                 $config = array();
                 foreach ($config_paths as $path) {
                     foreach (glob(realpath(__DIR__ . '/../../../') . '/' . $path, GLOB_BRACE) as $filename) {
-                        $config += include($filename);
+                        $config += include $filename;
                     }
                 }
 
@@ -214,7 +216,7 @@ abstract class Module
                     Registry::set('Db', $db_adapter);
 
                     $session_manager = SessionContainer::getDefaultManager();
-                    $session_config = $session_manager->getConfig();
+                    $session_config  = $session_manager->getConfig();
                     $session_config->setStorageOption('gc_maxlifetime', GcConfig::getValue('session_lifetime'));
                     $session_config->setStorageOption('cookie_path', GcConfig::getValue('cookie_path'));
                     $session_config->setStorageOption('cookie_domain', GcConfig::getValue('cookie_domain'));
@@ -239,7 +241,7 @@ abstract class Module
 
                     //Initialize Observers
                     $module_collection = new ModuleCollection();
-                    $modules = $module_collection->getModules();
+                    $modules           = $module_collection->getModules();
                     foreach ($modules as $module) {
                         $class_name = sprintf('\\Modules\\%s\\Observer', $module->getName());
                         if (class_exists($class_name)) {

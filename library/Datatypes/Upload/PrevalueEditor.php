@@ -46,8 +46,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function save()
     {
-        $post = $this->getRequest()->getPost();
-        $mime_list = $post->get('mime_list');
+        $post        = $this->getRequest()->getPost();
+        $mime_list   = $post->get('mime_list');
         $is_multiple = $post->get('is_multiple');
 
         $this->setConfig(
@@ -78,7 +78,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         );
 
         $mime_list = new Element\MultiCheckbox('mime_list');
-        $array = array(
+        $array     = array(
             'image/gif',
             'image/jpeg',
             'image/png',
@@ -101,7 +101,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'audio/vnd.rn-realaudio',
             'audio/x-wav'
         );
-        $options = array();
+        $options   = array();
         foreach ($array as $mime) {
             $options[] = array(
                 'value' => $mime,

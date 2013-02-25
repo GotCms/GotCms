@@ -73,7 +73,8 @@ class StaticEventManager extends SharedEventManager
     /**
      * Set the singleton to a specific SharedEventManagerInterface instance
      *
-     * @param SharedEventManagerInterface $instance
+     * @param SharedEventManagerInterface $instance Event instance
+     *
      * @return void
      */
     public static function setInstance(SharedEventManagerInterface $instance)
@@ -104,7 +105,8 @@ class StaticEventManager extends SharedEventManager
     /**
      * Retrieve event
      *
-     * @param  string $id
+     * @param string $id Id
+     *
      * @return \Zend\EventManager\EventManager
      */
     public function getEvent($id)
@@ -121,11 +123,12 @@ class StaticEventManager extends SharedEventManager
      *
      * Can emulate triggerUntil() if the last argument provided is a callback.
      *
-     * @param  string|array $id Identifier(s) for event emitting component(s)
-     * @param  string $event
-     * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
-     * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
-     * @param  null|callable $callback
+     * @param string|array      $id       Identifier(s) for event emitting component(s)
+     * @param string            $event    Event
+     * @param string|object     $target   Object calling emit, or symbol describing target (such as static method name)
+     * @param array|ArrayAccess $argv     Array of arguments; typically, should be associative
+     * @param null|callable     $callback Callback function
+     *
      * @return \Zend\EventManager\ResponseCollection All listener return values
      * @throws \Zend\EventManager\Exception\InvalidCallbackException
      */

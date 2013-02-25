@@ -58,7 +58,8 @@ class Collection extends AbstractTable
     /**
      * Initiliaze collection
      *
-     * @param integer $document_type_id Optional
+     * @param integer $document_type_id Optional document type id
+     *
      * @return void
      */
     public function init($document_type_id = null)
@@ -70,7 +71,8 @@ class Collection extends AbstractTable
     /**
      * Get views
      *
-     * @param boolean $force_reload to initiliaze views
+     * @param boolean $force_reload To initiliaze views
+     *
      * @return array
      */
     public function getViews($force_reload = false)
@@ -85,10 +87,10 @@ class Collection extends AbstractTable
                 $select->where->equalTo('document_type_view.document_type_id', $this->getDocumentTypeId());
             }
 
-            $rows = $this->fetchAll($select);
+            $rows  = $this->fetchAll($select);
             $views = array();
             foreach ($rows as $row) {
-                $views[] = Model::fromArray((array)$row);
+                $views[] = Model::fromArray((array) $row);
             }
 
             $this->setData('views', $views);
@@ -105,7 +107,7 @@ class Collection extends AbstractTable
     public function getSelect()
     {
         $select = array();
-        $views = $this->getViews();
+        $views  = $this->getViews();
 
         foreach ($views as $view) {
             $select[$view->getId()] = $view->getName();
@@ -117,7 +119,9 @@ class Collection extends AbstractTable
     /**
      * Add view
      *
-     * @param Model $view
+     * @param Model $view View model
+     *
+     * @return \Gc\View\Collection
      */
     public function addElement(Model $view)
     {

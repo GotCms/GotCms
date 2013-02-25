@@ -43,7 +43,8 @@ class Bootstrap extends AbstractModule
     /**
      * Boostrap
      *
-     * @param Event $e
+     * @param Event $e Event
+     *
      * @return void
      */
     public function init(Event $e)

@@ -52,7 +52,8 @@ class Model extends AbstractTable
     /**
      * Initialize module from array
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return \Gc\Module\Model
      */
     public static function fromArray(array $array)
@@ -67,15 +68,16 @@ class Model extends AbstractTable
     /**
      * Initiliaze module from id
      *
-     * @param array $module_id
+     * @param array $module_id Module id
+     *
      * @return \Gc\Module\Model
      */
     public static function fromId($module_id)
     {
         $module_table = new Model();
-        $row = $module_table->fetchRow($module_table->select(array('id' => (int)$module_id)));
+        $row          = $module_table->fetchRow($module_table->select(array('id' => (int) $module_id)));
         if (!empty($row)) {
-            $module_table->setData((array)$row);
+            $module_table->setData((array) $row);
             $module_table->setOrigData();
             return $module_table;
         } else {

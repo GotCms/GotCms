@@ -90,8 +90,9 @@ abstract class AbstractObserver
     /**
      * Render template
      *
-     * @param string $name
-     * @param array $data
+     * @param string $name Name
+     * @param array  $data Data
+     *
      * @return string
      */
     public function render($name, array $data = array())
@@ -107,7 +108,8 @@ abstract class AbstractObserver
     /**
      * Add path in Zend\View\Resolver\TemplatePathStack
      *
-     * @param string $dir
+     * @param string $dir Directory
+     *
      * @return \Gc\Module\AbstractObserver
      */
     public function addPath($dir)
@@ -128,7 +130,7 @@ abstract class AbstractObserver
     {
         if (is_null($this->renderer)) {
             $this->renderer = new PhpRenderer();
-            $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+            $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
             $this->renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
         }
 

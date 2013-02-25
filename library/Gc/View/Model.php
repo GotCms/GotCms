@@ -49,7 +49,8 @@ class Model extends AbstractTable
     /**
      * Initiliaze
      *
-     * @param integer $id
+     * @param integer $id View id
+     *
      * @return \Gc\View\Model
      */
     public function init($id = null)
@@ -60,7 +61,8 @@ class Model extends AbstractTable
     /**
      * Initiliaze from array
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return \Gc\View\Model
      */
     public static function fromArray(array $array)
@@ -75,16 +77,17 @@ class Model extends AbstractTable
     /**
      * Initiliaze from id
      *
-     * @param integer $view_id
+     * @param integer $view_id View id
+     *
      * @return \Gc\View\Model
      */
     public static function fromId($view_id)
     {
         $view_table = new Model();
-        $row = $view_table->select(array('id' => (int)$view_id));
-        $current = $row->current();
+        $row        = $view_table->select(array('id' => (int) $view_id));
+        $current    = $row->current();
         if (!empty($current)) {
-            $view_table->setData((array)$current);
+            $view_table->setData((array) $current);
             $view_table->setOrigData();
             return $view_table;
         } else {
@@ -95,16 +98,17 @@ class Model extends AbstractTable
     /**
      * Initiliaze from identifier
      *
-     * @param string $identifier
+     * @param string $identifier Identifier
+     *
      * @return \Gc\View\Model
      */
     public static function fromIdentifier($identifier)
     {
         $view_table = new Model();
-        $row = $view_table->select(array('identifier' => $identifier));
-        $current = $row->current();
+        $row        = $view_table->select(array('identifier' => $identifier));
+        $current    = $row->current();
         if (!empty($current)) {
-            $view_table->setData((array)$current);
+            $view_table->setData((array) $current);
             $view_table->setOrigData();
             return $view_table;
         } else {
@@ -135,7 +139,7 @@ class Model extends AbstractTable
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int)$this->getId()));
+                $this->update($array_save, array('id' => (int) $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));

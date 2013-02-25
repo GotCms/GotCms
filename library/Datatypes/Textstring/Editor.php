@@ -58,7 +58,7 @@ class Editor extends AbstractEditor
     public function load()
     {
         $parameters = $this->getConfig();
-        $property = $this->getProperty();
+        $property   = $this->getProperty();
         $textstring = new Element\Text($this->getName());
         $textstring->setAttribute('class', 'input-text');
         $textstring->setAttribute('label', $property->getName());

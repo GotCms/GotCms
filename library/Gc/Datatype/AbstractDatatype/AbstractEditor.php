@@ -89,7 +89,8 @@ abstract class AbstractEditor extends Object
     /**
      * Abstract function for save Editor
      *
-     * @param Datatype\AbstractDatatype $datatype_abstract
+     * @param Datatype\AbstractDatatype $datatype_abstract Datatype
+     *
      * @return void
      */
     public function __construct(Datatype\AbstractDatatype $datatype_abstract)
@@ -112,7 +113,8 @@ abstract class AbstractEditor extends Object
     /**
      * Set property value
      *
-     * @param mixed $value
+     * @param mixed $value Value
+     *
      * @return \Gc\Datatype\AbstractDatatype\AbstractEditor
      */
     public function setValue($value)
@@ -135,7 +137,8 @@ abstract class AbstractEditor extends Object
     /**
      * Set Configuration
      *
-     * @param mixed $value
+     * @param mixed $value Value
+     *
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     public function setConfig($value)
@@ -197,8 +200,9 @@ abstract class AbstractEditor extends Object
     /**
      * Render template
      *
-     * @param string $name
-     * @param array $data
+     * @param string $name Name
+     * @param array  $data Data
+     *
      * @return string
      */
     public function render($name, array $data = array())
@@ -209,7 +213,8 @@ abstract class AbstractEditor extends Object
     /**
      * Add path in Zend\View\Resolver\TemplatePathStack
      *
-     * @param string $dir
+     * @param string $dir Directory
+     *
      * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      */
     public function addPath($dir)
@@ -222,7 +227,8 @@ abstract class AbstractEditor extends Object
     /**
      * Retrieve helper from $name
      *
-     * @param string $name
+     * @param string $name Name
+     *
      * @return mixed
      */
     public function getHelper($name)

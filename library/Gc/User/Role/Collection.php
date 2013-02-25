@@ -66,7 +66,8 @@ class Collection extends AbstractTable
     /**
      * Get Roles
      *
-     * @param boolean $force_reload
+     * @param boolean $force_reload Force reload
+     *
      * @return array \Gc\User\Role\Model
      */
     public function getRoles($force_reload = false)
@@ -82,7 +83,7 @@ class Collection extends AbstractTable
 
             $roles = array();
             foreach ($rows as $row) {
-                $roles[] = Model::fromArray((array)$row);
+                $roles[] = Model::fromArray((array) $row);
             }
 
             $this->roles = $roles;

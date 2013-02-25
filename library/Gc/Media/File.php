@@ -51,9 +51,9 @@ class File extends Object
     /**
      * Initiliaze File Object
      *
-     * @param \Gc\Property\Model $property
-     * @param \Gc\Document\Model $document
-     * @param string $filename
+     * @param \Gc\Property\Model $property Property
+     * @param \Gc\Document\Model $document Document
+     * @param string             $filename Filename
      *
      * @return void
      */
@@ -117,12 +117,12 @@ class File extends Object
 
         $this->getFileTransfer()->setDestination($dir);
 
-        $filename = $this->getFileName();
+        $filename  = $this->getFileName();
         $filenames = empty($filename) ? null : $filename;
         $filenames = $this->getFileTransfer()->getFileName($filenames, false);
         if (!is_array($filenames)) {
             $filenames = array();
-            $files = $this->getFileTransfer()->getFileInfo($filename);
+            $files     = $this->getFileTransfer()->getFileInfo($filename);
             foreach ($files as $key => $file) {
                 if (!empty($file['name'])) {
                     $filenames[$key] = $file['name'];
@@ -147,15 +147,15 @@ class File extends Object
             if ($this->getFileTransfer()->receive($file_name)) {
                 $files = $this->getFileTransfer()->getFileInfo($key);
                 foreach ($files as $file_data) {
-                    $file_object = new StdClass();
-                    $file_object->name = 'New Image Upload Complete:   ' . $file_data['name'];
-                    $file_object->filename = $this->getDirectory() . '/' . $file_data['name'];
-                    $file_object->size = $file_data['size'];
-                    $file_object->type = $file_data['type'];
+                    $file_object                = new StdClass();
+                    $file_object->name          = 'New Image Upload Complete:   ' . $file_data['name'];
+                    $file_object->filename      = $this->getDirectory() . '/' . $file_data['name'];
+                    $file_object->size          = $file_data['size'];
+                    $file_object->type          = $file_data['type'];
                     $file_object->thumbnail_url = $this->getDirectory() . '/' . $file_data['name'];
 
-                    $router = Registry::get('Application')->getMvcEvent()->getRouter();
-                    $file_object->delete_url = $router->assemble(
+                    $router                   = Registry::get('Application')->getMvcEvent()->getRouter();
+                    $file_object->delete_url  = $router->assemble(
                         array(
                             'document_id' => $this->getDocument()->getId(),
                             'property_id' => $this->getProperty()->getId(),
@@ -164,7 +164,7 @@ class File extends Object
                         array('name' => 'mediaRemove')
                     );
                     $file_object->delete_type = 'DELETE';
-                    $data[] = $file_object;
+                    $data[]                   = $file_object;
                 }
             }
         }
@@ -180,7 +180,8 @@ class File extends Object
     /**
      * Remove image
      *
-     * @param string $filename
+     * @param string $filename Filename
+     *
      * @return boolean
      */
     public function remove($filename)
@@ -196,8 +197,9 @@ class File extends Object
     /**
      * Copy directory from source to destination
      *
-     * @param string $source
-     * @param string $destination
+     * @param string $source      Source
+     * @param string $destination Destination
+     *
      * @return boolean
      */
     public static function copyDirectory($source, $destination)
@@ -231,8 +233,9 @@ class File extends Object
     /**
      * Test is_writable recursively
      *
-     * @param string $directory Directory start
-     * @param array $exclude_directory Exclude directory
+     * @param string $directory         Directory start
+     * @param array  $exclude_directory Exclude directory
+     *
      * @return boolean
      */
     public static function isWritable($directory, $exclude_directory = array())

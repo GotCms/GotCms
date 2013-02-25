@@ -68,7 +68,8 @@ abstract class Object
     /**
      * Set Id
      *
-     * @param integer $id
+     * @param integer $id Id
+     *
      * @return \Gc\Core\Object
      */
     protected function setId($id = null)
@@ -101,8 +102,9 @@ abstract class Object
      *
      * Retains previous data in the object.
      *
-     * @param array $array
-     * @return \Gc\Core\Object
+     * @param array $array Data
+     *
+     * @return void
      */
     public function addData(array $array)
     {
@@ -121,8 +123,9 @@ abstract class Object
      *
      * If $key is an array, it will overwrite all the data in the object.
      *
-     * @param string|array $key
-     * @param mixed $value
+     * @param string|array $key   Key
+     * @param mixed        $value Value
+     *
      * @return \Gc\Core\Object
      */
     public function setData($key, $value = null)
@@ -141,7 +144,8 @@ abstract class Object
      *
      * $key can be a string only. Array will be ignored.
      *
-     * @param string $key
+     * @param string $key Key
+     *
      * @return \Gc\Core\Object
      */
     public function unsetData($key = null)
@@ -164,8 +168,9 @@ abstract class Object
      * If $index is specified it will assume that attribute data is an array
      * and retrieve corresponding member.
      *
-     * @param string $key
-     * @param string|int $index
+     * @param string     $key   key
+     * @param string|int $index Index
+     *
      * @return mixed
      */
     public function getData($key = '', $index = null)
@@ -180,7 +185,7 @@ abstract class Object
         // Not  !== false no need '/a/b always return null
         if (strpos($key, '/')) {
             $key_array = explode('/', $key);
-            $data = $this->data;
+            $data      = $this->data;
             foreach ($key_array as $i => $k) {
                 if ($k === '') {
                     return $default;
@@ -230,7 +235,8 @@ abstract class Object
      * If $key is empty, checks whether there's any data in the object
      * Otherwise checks if the specified attribute is set.
      *
-     * @param string $key
+     * @param string $key Key
+     *
      * @return boolean
      */
     public function hasData($key = '')
@@ -245,7 +251,8 @@ abstract class Object
     /**
      * Convert object attributes to array
      *
-     * @param  array $array array of required attributes
+     * @param array $array array of required attributes
+     *
      * @return array
      */
     public function __toArray(array $array = array())
@@ -269,7 +276,8 @@ abstract class Object
     /**
      * Public wrapper for __toArray
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return array
      */
     public function toArray(array $array = array())
@@ -280,10 +288,11 @@ abstract class Object
     /**
      * Convert object attributes to XML
      *
-     * @param array $array array of required attributes
-     * @param string $root_name name of the root element
-     * @param boolean $add_open_tag insert <?xml>
-     * @param boolean $add_cdata insert CDATA[]
+     * @param array   $array        Array of required attributes
+     * @param string  $root_name    Name of the root element
+     * @param boolean $add_open_tag Insert <?xml>
+     * @param boolean $add_cdata    Insert CDATA[]
+     *
      * @return string
      */
     protected function __toXml(
@@ -325,10 +334,11 @@ abstract class Object
     /**
      * Public wrapper for __toXml
      *
-     * @param array $array
-     * @param string $root_name
-     * @param boolean $add_open_tag insert <?xml>
-     * @param boolean $add_cdata insert CDATA[]
+     * @param array   $array        Data
+     * @param string  $root_name    Root name
+     * @param boolean $add_open_tag Insert <?xml>
+     * @param boolean $add_cdata    Insert CDATA[]
+     *
      * @return string
      */
     public function toXml(array $array = array(), $root_name = 'item', $add_open_tag = false, $add_cdata = true)
@@ -339,20 +349,22 @@ abstract class Object
     /**
      * Convert object attributes to JSON
      *
-     * @param  array $array array of required attributes
+     * @param array $array array of required attributes
+     *
      * @return string
      */
     protected function __toJson(array $array = array())
     {
         $arraydata = $this->toArray($array);
-        $json = Json::encode($arraydata);
+        $json      = Json::encode($arraydata);
         return $json;
     }
 
     /**
      * Public wrapper for __toJson
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return string
      */
     public function toJson(array $array = array())
@@ -365,7 +377,8 @@ abstract class Object
      *
      * Will use $format as an template and substitute {{key}} for attributes
      *
-     * @param string $format
+     * @param string $format Format
+     *
      * @return string
      */
     public function toString($format = '')
@@ -387,25 +400,26 @@ abstract class Object
     /**
      * Set/Get attribute wrapper
      *
-     * @param   string $method
-     * @param   array $args
+     * @param string $method Method
+     * @param array  $args   Arguments
+     *
      * @return  mixed|\Gc\Core\Object
      */
     public function __call($method, $args)
     {
         switch(substr($method, 0, 3)) {
             case 'get':
-                $key = $this->underscore(substr($method, 3));
+                $key  = $this->underscore(substr($method, 3));
                 $data = $this->getData($key, isset($args[0]) ? $args[0] : null);
                 return $data;
                 break;
             case 'set':
-                $key = $this->underscore(substr($method, 3));
+                $key    = $this->underscore(substr($method, 3));
                 $result = $this->setData($key, isset($args[0]) ? $args[0] : null);
                 return $result;
                 break;
             case 'uns':
-                $key = $this->underscore(substr($method, 3));
+                $key    = $this->underscore(substr($method, 3));
                 $result = $this->unsetData($key);
                 return $result;
                 break;
@@ -424,7 +438,8 @@ abstract class Object
      * $this->setMyField($value) === $this->setData('my_field', $value)
      * Uses cache to eliminate unneccessary preg_replace
      *
-     * @param string $name
+     * @param string $name Name
+     *
      * @return string
      */
     protected function underscore($name)
@@ -433,7 +448,7 @@ abstract class Object
             return self::$underscoreCache[$name];
         }
 
-        $result = strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $name));
+        $result                       = strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $name));
         self::$underscoreCache[$name] = $result;
 
         return $result;
@@ -442,9 +457,12 @@ abstract class Object
     /**
      * Implementation of ArrayAccess::offsetSet()
      *
+     * @param string $offset Offset
+     * @param mixed  $value  Value
+     *
      * @link http://www.php.net/manual/en/arrayaccess.offsetset.php
-     * @param string $offset
-     * @param mixed $value
+     *
+     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -454,8 +472,10 @@ abstract class Object
     /**
      * Implementation of ArrayAccess::offsetExists()
      *
+     * @param string $offset Offset
+     *
      * @link http://www.php.net/manual/en/arrayaccess.offsetexists.php
-     * @param string $offset
+     *
      * @return boolean
      */
     public function offsetExists($offset)
@@ -466,8 +486,11 @@ abstract class Object
     /**
      * Implementation of ArrayAccess::offsetUnset()
      *
+     * @param string $offset Offset
+     *
      * @link http://www.php.net/manual/en/arrayaccess.offsetunset.php
-     * @param string $offset
+     *
+     * @return void
      */
     public function offsetUnset($offset)
     {
@@ -477,8 +500,10 @@ abstract class Object
     /**
      * Implementation of ArrayAccess::offsetGet()
      *
+     * @param string $offset Offset
+     *
      * @link http://www.php.net/manual/en/arrayaccess.offsetget.php
-     * @param string $offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
@@ -489,7 +514,8 @@ abstract class Object
     /**
      * Get Original data
      *
-     * @param string $key
+     * @param string $key Key
+     *
      * @return mixed
      */
     public function getOrigData($key = null)
@@ -504,9 +530,10 @@ abstract class Object
     /**
      * Set Original data
      *
-     * @param string $key
-     * @param mixed $data
-     * @return Varien_Object
+     * @param string $key  Key
+     * @param mixed  $data Data
+     *
+     * @return \Gc\Core\Object
      */
     public function setOrigData($key = null, $data = null)
     {
@@ -522,12 +549,13 @@ abstract class Object
     /**
      * Check if data has changed
      *
-     * @param string $field
+     * @param string $field Field
+     *
      * @return boolean
      */
     public function hasDataChangedFor($field)
     {
-        $newdata = $this->getData($field);
+        $newdata  = $this->getData($field);
         $origdata = $this->getOrigData($field);
 
         return $newdata != $origdata;

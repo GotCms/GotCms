@@ -9,7 +9,7 @@
 - Disable cache on preview (https://github.com/PierreRambaud/GotCms/issues/29)
 - Flash messages failed in view helper script (https://github.com/PierreRambaud/GotCms/issues/28)
 - Update to Zend Framework 2.1.3
-- #37 Use PSR2 instead GotSniffs (https://github.com/PierreRambaud/GotCms/issues/37)
+- Use new GotSniffs based on PSR2 (https://github.com/PierreRambaud/GotCms/issues/38)
 
 ## 0.1.4 (12 Feb 2013):
 - Bug with HTTP 404 (undefined variable view)

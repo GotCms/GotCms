@@ -64,7 +64,7 @@ class Editor extends AbstractEditor
             '/datatypes/DatePicker/jquery-ui-sliderAccess.js',
             'text/javascript'
         );
-        $id = 'datepicker' . $this->property->getId();
+        $id         = 'datepicker' . $this->property->getId();
         $datepicker = new Element\Text($this->getName());
         $datepicker->setAttribute('label', $this->getProperty()->getName())
             ->setValue($this->getValue())

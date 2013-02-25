@@ -78,17 +78,18 @@ class Stream
     /**
      * Opens the script file and converts markup.
      *
-     * @param string path
-     * @param string $mode
-     * @param integer $options
-     * @param string $openedpath
+     * @param string  $path        Path
+     * @param string  $mode        Mode
+     * @param integer $options     Options
+     * @param string  &$openedpath Opened path
+     *
      * @return boolean
      */
     public function stream_open($path, $mode, $options, &$openedpath)
     {
-        $this->mode = $mode;
-        $path        = str_replace('zend.view://', '', $path);
-        $this->path = $path;
+        $this->mode     = $mode;
+        $path           = str_replace('zend.view://', '', $path);
+        $this->path     = $path;
         $this->position = 0;
         if (empty(self::$data[$path])) {
             self::$data[$path] = null;
@@ -100,12 +101,13 @@ class Stream
     /**
      * Reads from the stream.
      *
-     * @param integer $count
+     * @param integer $count Count
+     *
      * @return mixed
      */
     public function stream_read($count)
     {
-        $ret = substr(self::$data[$this->path], $this->position, $count);
+        $ret             = substr(self::$data[$this->path], $this->position, $count);
         $this->position += strlen($ret);
 
         return $ret;
@@ -114,20 +116,21 @@ class Stream
     /**
      * Write in the stream
      *
-     * @param string $data
+     * @param string $data Data
+     *
      * @return integer
      */
     public function stream_write($data)
     {
         if ($this->mode == 'wb') {
             self::$data[$this->path] = null;
-            $this->position = 0;
+            $this->position          = 0;
         }
 
-        $left = substr(self::$data[$this->path], 0, $this->position);
-        $right = substr(self::$data[$this->path], $this->position + strlen($data));
+        $left                    = substr(self::$data[$this->path], 0, $this->position);
+        $right                   = substr(self::$data[$this->path], $this->position + strlen($data));
         self::$data[$this->path] = $left . $data . $right;
-        $this->position += strlen($left . $data);
+        $this->position         += strlen($left . $data);
 
         return strlen($data);
     }
@@ -165,8 +168,9 @@ class Stream
     /**
      * Seek to a specific point in the stream.
      *
-     * @param integer $offset
-     * @param integer $whence
+     * @param integer $offset Offset
+     * @param integer $whence Whence
+     *
      * @return boolean
      */
     public function stream_seek($offset, $whence)
@@ -205,8 +209,9 @@ class Stream
      * Retrieve information about a file
      * Always return false because data come from the database
      *
-     * @param string $path
-     * @param int $flags
+     * @param string $path  Path
+     * @param int    $flags Flags
+     *
      * @return boolean
      */
     public function url_stat($path, $flags)

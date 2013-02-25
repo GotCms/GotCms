@@ -46,12 +46,12 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function save()
     {
-        $post = $this->getRequest()->getPost();
-        $mime_list = $post->get('mime_list');
-        $sizes_data = $post->get('size');
+        $post          = $this->getRequest()->getPost();
+        $mime_list     = $post->get('mime_list');
+        $sizes_data    = $post->get('size');
         $resize_option = $post->get('resize_option');
-        $background = $post->get('background');
-        $sizes = array();
+        $background    = $post->get('background');
+        $sizes         = array();
         if (!empty($sizes_data) and is_array($sizes_data)) {
             foreach ($sizes_data as $idx => $size) {
                 if (empty($size['name']) or empty($size['height']) or empty($size['width'])) {
@@ -59,7 +59,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
                 }
 
                 $size['name'] = str_replace(' ', '', $size['name']); // delete useless space
-                $sizes[] = $size;
+                $sizes[]      = $size;
             }
         }
 
@@ -99,7 +99,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $background_option->setLabel('Background color');
 
         $mime_list = new Element\MultiCheckbox('mime_list');
-        $array = array(
+        $array     = array(
             'image/gif',
             'image/jpeg',
             'image/png',
@@ -120,7 +120,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $mime_list->setValueOptions($options);
         $size_elements = array();
-        $idx = 0;
+        $idx           = 0;
         if (!empty($config['size'])) {
             foreach ($config['size'] as $idx => $size) {
                 $element_size_name = new Element\Text('size[' . $idx . '][name]');

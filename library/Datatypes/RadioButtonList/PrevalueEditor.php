@@ -47,7 +47,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         //Save prevalue in column Datatypes\prevalue_value
         $array_result = array();
-        $request = $this->getRequest()->getPost();
+        $request      = $this->getRequest()->getPost();
         foreach ($request->get('values', array()) as $value) {
             if (!empty($value)) {
                 $array_result[] = $value;

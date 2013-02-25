@@ -67,6 +67,8 @@ abstract class AbstractForm extends Form
 
     /**
      * Initialize form
+     *
+     * @return void
      */
     public function init()
     {
@@ -85,12 +87,13 @@ abstract class AbstractForm extends Form
     /**
      * Load values
      *
-     * @param AbstractTable $table
+     * @param AbstractTable $table Table
+     *
      * @return AbstractForm
      */
     public function loadValues(AbstractTable $table)
     {
-        $data = $table->getData();
+        $data         = $table->getData();
         $input_filter = $this->getInputFilter();
         if (is_array($data)) {
             foreach ($data as $element_name => $element_value) {
@@ -117,9 +120,10 @@ abstract class AbstractForm extends Form
     /**
      * Add content to form
      *
-     * @param Fieldset $form
-     * @param mixed $elements
-     * @param string $prefix add belong to for each elements
+     * @param Fieldset $form     Form
+     * @param mixed    $elements Elements
+     * @param string   $prefix   Add belong to for each elements
+     *
      * @static
      * @return void
      */
@@ -147,7 +151,7 @@ abstract class AbstractForm extends Form
             $form->add($elements);
         } elseif (is_string($elements)) {
             if (!empty($prefix)) {
-                $rand_id = mt_rand();
+                $rand_id  = mt_rand();
                 $elements = preg_replace('~name="(.+)(\[.*\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
                 $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $rand_id . '"', $elements);
                 $elements = preg_replace(
@@ -168,7 +172,8 @@ abstract class AbstractForm extends Form
     /**
      * Return element value
      *
-     * @param string $name
+     * @param string $name Name
+     *
      * @return string
      */
     public function getValue($name = null)

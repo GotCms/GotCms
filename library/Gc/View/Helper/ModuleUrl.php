@@ -41,15 +41,16 @@ class ModuleUrl extends AbstractHelper
     /**
      * Generates an url given the name of a route.
      *
-     * @param  string  $action_name             Action name
-     * @param  array   $controller_name         Controller name
-     * @param  array   $query_params                  Parameters for the link
-     * @param  array   $options                 Options for the route
-     * @param  boolean $reuse_matched_params    Whether to reuse matched parameters
-     * @return string  Url                      For the link href attribute
-     * @throws Exception\RuntimeException       If no RouteStackInterface was provided
-     * @throws Exception\RuntimeException       If no RouteMatch was provided
-     * @throws Exception\RuntimeException       If RouteMatch didn't contain a matched route name
+     * @param string  $action_name          Action name
+     * @param array   $controller_name      Controller name
+     * @param array   $query_params         Parameters for the link
+     * @param array   $options              Options for the route
+     * @param boolean $reuse_matched_params Whether to reuse matched parameters
+     *
+     * @return string  Url                For the link href attribute
+     * @throws Exception\RuntimeException If no RouteStackInterface was provided
+     * @throws Exception\RuntimeException If no RouteMatch was provided
+     * @throws Exception\RuntimeException If RouteMatch didn't contain a matched route name
      */
     public function __invoke(
         $action_name = null,

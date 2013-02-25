@@ -43,7 +43,8 @@ class Document extends AbstractHelper
     /**
      * Returns document from id.
      *
-     * @param  mixed $identifier
+     * @param mixed $identifier Identifier
+     *
      * @return \Gc\Document\Model
      */
     public function __invoke($identifier)

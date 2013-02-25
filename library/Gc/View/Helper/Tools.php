@@ -43,8 +43,9 @@ class Tools extends AbstractHelper
     /**
      * Tools helper.
      *
-     * @param string $function_name
-     * @param mixed $value
+     * @param string $function_name Function name
+     * @param mixed  $value         Value
+     *
      * @return mixed
      */
     public function __invoke($function_name, $value)

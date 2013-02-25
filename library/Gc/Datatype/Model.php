@@ -53,7 +53,8 @@ class Model extends AbstractTable
     /**
      * Set prevalue value
      *
-     * @param mixed $value
+     * @param mixed $value Value
+     *
      * @return \Gc\Datatype\Model
      */
     public function setPrevalueValue($value)
@@ -70,8 +71,9 @@ class Model extends AbstractTable
     /**
      * Get Model from array
      *
-     * @param array $array
-     * @return \Gc\Datatype\Model
+     * @param array $array Data
+     *
+     * @return void
      */
     public static function fromArray(array $array)
     {
@@ -85,15 +87,16 @@ class Model extends AbstractTable
     /**
      * Get model from id
      *
-     * @param integer $datatype_id
+     * @param integer $datatype_id Datatype id
+     *
      * @return false|\Gc\Datatype\Model
      */
     public static function fromId($datatype_id)
     {
         $datatype_table = new Model();
-        $row = $datatype_table->fetchRow($datatype_table->select(array('id' => (int)$datatype_id)));
+        $row            = $datatype_table->fetchRow($datatype_table->select(array('id' => (int) $datatype_id)));
         if (!empty($row)) {
-            $datatype_table->setData((array)$row);
+            $datatype_table->setData((array) $row);
             $datatype_table->setOrigData();
             return $datatype_table;
         } else {
@@ -166,7 +169,8 @@ class Model extends AbstractTable
     /**
      * Save prevalue editor
      *
-     * @param AbstractDatatype $datatype
+     * @param AbstractDatatype $datatype Datatype
+     *
      * @return Model
      */
     public static function savePrevalueEditor(AbstractDatatype $datatype)
@@ -178,7 +182,8 @@ class Model extends AbstractTable
     /**
      * Save editor
      *
-     * @param PropertyModel $property
+     * @param PropertyModel $property Property
+     *
      * @return mixed
      */
     public static function saveEditor(PropertyModel $property)
@@ -195,7 +200,8 @@ class Model extends AbstractTable
     /**
      * Load prevalue editor
      *
-     * @param AbstractDatatype $datatype
+     * @param AbstractDatatype $datatype Datatype
+     *
      * @return mixed
      */
     public static function loadPrevalueEditor(AbstractDatatype $datatype)
@@ -208,7 +214,8 @@ class Model extends AbstractTable
     /**
      * Load editor
      *
-     * @param PropertyModel $property
+     * @param PropertyModel $property Property
+     *
      * @return mixed
      */
     public static function loadEditor(PropertyModel $property)
@@ -221,14 +228,15 @@ class Model extends AbstractTable
     /**
      * Load Datatype
      *
-     * @param integer $datatype_id
-     * @param integer $document_id Optional
+     * @param integer $datatype_id Datatype id
+     * @param integer $document_id Optional document id
+     *
      * @return \Gc\Datatype\AbstractDatatype
      */
     public static function loadDatatype($datatype_id, $document_id = null)
     {
         $datatype = Model::fromId($datatype_id);
-        $class = 'Datatypes\\' . $datatype->getModel() . '\Datatype';
+        $class    = 'Datatypes\\' . $datatype->getModel() . '\Datatype';
 
         $object = new $class();
         $object->load($datatype, $document_id);

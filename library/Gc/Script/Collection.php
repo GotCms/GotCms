@@ -50,6 +50,7 @@ class Collection extends AbstractTable
      * Get scripts
      *
      * @param boolean $force_reload to initiliaze scripts
+     *
      * @return array
      */
     public function getScripts($force_reload = false)
@@ -65,7 +66,7 @@ class Collection extends AbstractTable
 
             $scripts = array();
             foreach ($rows as $row) {
-                $scripts[] = Model::fromArray((array)$row);
+                $scripts[] = Model::fromArray((array) $row);
             }
 
             $this->setData('scripts', $scripts);

@@ -47,14 +47,14 @@ class Editor extends AbstractEditor
      */
     public function save()
     {
-        $value = $this->getRequest()->getPost()->get($this->getName());
+        $value      = $this->getRequest()->getPost()->get($this->getName());
         $parameters = $this->getConfig();
-        $data = array();
+        $data       = array();
         if (!empty($_FILES[$this->getName()]['name'])) {
             $_OLD_FILES = $_FILES;
-            $file = $_FILES[$this->getName()];
+            $file       = $_FILES[$this->getName()];
             //Ignore others data
-            $_FILES = array();
+            $_FILES                   = array();
             $_FILES[$this->getName()] = $file;
 
             $file_class = new File();
@@ -73,7 +73,7 @@ class Editor extends AbstractEditor
                             unlink($file);
                         } else {
                             $file_info = @getimagesize($file);
-                            $data[] = array(
+                            $data[]    = array(
                                 'value' => $name,
                                 'width' => empty($file_info[0]) ? 0 : $file_info[0],
                                 'height' => empty($file_info[1]) ? 0 : $file_info[1],
@@ -106,8 +106,8 @@ class Editor extends AbstractEditor
     public function load()
     {
         $parameters = $this->getConfig();
-        $property = $this->getProperty();
-        $upload = new Element\File($this->getName());
+        $property   = $this->getProperty();
+        $upload     = new Element\File($this->getName());
         $upload->setAttribute('label', $property->getName());
         if (!empty($parameters['is_multiple'])) {
             $upload->setAttribute('multiple', 'multiple');
@@ -115,7 +115,7 @@ class Editor extends AbstractEditor
         }
 
         $hidden_upload = new Element\Hidden($this->getName() . '-hidden');
-        $value = $this->getValue();
+        $value         = $this->getValue();
         if (!empty($value)) {
             $hidden_upload->setValue($value);
         }

@@ -62,7 +62,8 @@ class Registry extends ArrayObject
      * Set the default registry instance to a specified instance.
      *
      * @param Registry $registry An object instance of type Registry,
-     *   or a subclass.
+     *                           or a subclass.
+     *
      * @return void
      * @throws RuntimeException if registry is already initialized.
      */
@@ -104,6 +105,7 @@ class Registry extends ArrayObject
      * static instance stored in the class.
      *
      * @param string $index - get the value associated with $index
+     *
      * @return mixed
      * @throws RuntimeException if no entry is registerd for $index.
      */
@@ -126,8 +128,9 @@ class Registry extends ArrayObject
      * static instance stored in the class.
      *
      * @param string $index The location in the ArrayObject in which to store
-     *   the value.
-     * @param mixed $value The object to store in the ArrayObject.
+     *                      the value.
+     * @param mixed  $value The object to store in the ArrayObject.
+     *
      * @return void
      */
     public static function set($index, $value)
@@ -140,7 +143,8 @@ class Registry extends ArrayObject
      * Returns true if the $index is a named value in the registry,
      * or false if $index was not found in the registry.
      *
-     * @param  string $index
+     * @param string $index Index
+     *
      * @return boolean
      */
     public static function isRegistered($index)
@@ -156,8 +160,10 @@ class Registry extends ArrayObject
      * Constructs a parent ArrayObject with default
      * ARRAY_AS_PROPS to allow acces as an object
      *
-     * @param array $array data array
+     * @param array   $array data array
      * @param integer $flags ArrayObject flags
+     *
+     * @return void
      */
     public function __construct($array = array(), $flags = parent::ARRAY_AS_PROPS)
     {
@@ -168,7 +174,8 @@ class Registry extends ArrayObject
      * Returns true if the $index is a named value in the registry,
      * or false if $index was not found in the registry.
      *
-     * @param string $index
+     * @param string $index Index
+     *
      * @return boolean
      */
     public function offsetExists($index)

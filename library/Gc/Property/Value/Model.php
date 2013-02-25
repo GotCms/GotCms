@@ -48,9 +48,10 @@ class Model extends AbstractTable
     /**
      * Load property value
      *
-     * @param integer $value_id Optional
-     * @param integer $document_id Optional
-     * @param integer $property_id Optional
+     * @param integer $value_id    Optional value id
+     * @param integer $document_id Optional document id
+     * @param integer $property_id Optional property id
+     *
      * @return \Gc\Property\Model\Value
      */
     public function load($value_id = null, $document_id = null, $property_id = null)
@@ -81,7 +82,8 @@ class Model extends AbstractTable
     /**
      * Initialize from array
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return \Gc\Property\Value\Model
      */
     public static function fromArray(array $array)
@@ -96,16 +98,17 @@ class Model extends AbstractTable
     /**
      * Initialize from id
      *
-     * @param integer $property_value_id
+     * @param integer $property_value_id Property value id
+     *
      * @return \Gc\Property\Value\Model|boolean
      */
     public static function fromId($property_value_id)
     {
         $property_value_table = new Model();
-        $select = $property_value_table->select(array('id' => (int)$property_value_id));
-        $current = $property_value_table->fetchRow($select);
+        $select               = $property_value_table->select(array('id' => (int) $property_value_id));
+        $current              = $property_value_table->fetchRow($select);
         if (!empty($current)) {
-            $property_value_table->setData((array)$current);
+            $property_value_table->setData((array) $current);
             $property_value_table->setOrigData();
             return $property_value_table;
         } else {

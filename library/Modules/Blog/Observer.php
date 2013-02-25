@@ -53,19 +53,20 @@ class Observer extends AbstractObserver
     /**
      * Display widget dashboard
      *
-     * @param \Zend\EventManager\Event $event
+     * @param \Zend\EventManager\Event $event Event
+     *
      * @return void
      */
     public function dashboard(Event $event)
     {
-        $comment_model = new Comment();
+        $comment_model         = new Comment();
         $unactive_comment_list = $comment_model->getList(null, false);
-        $active_comment_list = $comment_model->getList(null, true);
+        $active_comment_list   = $comment_model->getList(null, true);
 
         $widgets = $event->getParam('widgets');
 
-        $widgets['test']['id'] = 'blog';
-        $widgets['test']['title'] = 'Blog information';
+        $widgets['test']['id']      = 'blog';
+        $widgets['test']['title']   = 'Blog information';
         $widgets['test']['content'] = $this->addPath(__DIR__ . '/views')->render(
             'dashboard.phtml',
             array(

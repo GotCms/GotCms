@@ -48,7 +48,8 @@ class Model extends AbstractTable
     /**
      * Initiliaze from array
      *
-     * @param array $array
+     * @param array $array Data
+     *
      * @return \Gc\Media\Icon\Model
      */
     public static function fromArray(array $array)
@@ -63,15 +64,16 @@ class Model extends AbstractTable
     /**
      * Initiliaze from id
      *
-     * @param integer $icon_id
+     * @param integer $icon_id Icon id
+     *
      * @return \Gc\Media\Icon\Model
      */
     public static function fromId($icon_id)
     {
         $icon_table = new Model();
-        $row = $icon_table->fetchRow($icon_table->select(array('id' => (int)$icon_id)));
+        $row        = $icon_table->fetchRow($icon_table->select(array('id' => (int) $icon_id)));
         if (!empty($row)) {
-            $icon_table->setData((array)$row);
+            $icon_table->setData((array) $row);
             $icon_table->setOrigData();
             return $icon_table;
         } else {
@@ -98,7 +100,7 @@ class Model extends AbstractTable
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int)$this->getId()));
+                $this->update($array_save, array('id' => (int) $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));

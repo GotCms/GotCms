@@ -49,7 +49,8 @@ class Model extends AbstractTable
     /**
      * Initiliaze
      *
-     * @param integer $id
+     * @param integer $id Script id
+     *
      * @return \Gc\Script\Model
      */
     public function init($id = null)
@@ -60,8 +61,9 @@ class Model extends AbstractTable
     /**
      * Initiliaze from array
      *
-     * @param array $array
-     * @return \Gc\Script\Model
+     * @param array $array Data
+     *
+     * @return void
      */
     public static function fromArray(array $array)
     {
@@ -75,15 +77,16 @@ class Model extends AbstractTable
     /**
      * Initiliaze from id
      *
-     * @param integer $script_id
+     * @param integer $script_id Script id
+     *
      * @return \Gc\Script\Model
      */
     public static function fromId($script_id)
     {
         $script_table = new Model();
-        $row = $script_table->fetchRow($script_table->select(array('id' => (int)$script_id)));
+        $row          = $script_table->fetchRow($script_table->select(array('id' => (int) $script_id)));
         if (!empty($row)) {
-            $script_table->setData((array)$row);
+            $script_table->setData((array) $row);
             $script_table->setOrigData();
             return $script_table;
         } else {
@@ -93,15 +96,16 @@ class Model extends AbstractTable
     /**
      * Initiliaze from id
      *
-     * @param integer $identifier
+     * @param integer $identifier Identifier
+     *
      * @return \Gc\Script\Model
      */
     public static function fromIdentifier($identifier)
     {
         $script_table = new Model();
-        $row = $script_table->fetchRow($script_table->select(array('identifier' => $identifier)));
+        $row          = $script_table->fetchRow($script_table->select(array('identifier' => $identifier)));
         if (!empty($row)) {
-            return $script_table->setData((array)$row);
+            return $script_table->setData((array) $row);
         } else {
             return false;
         }
@@ -130,7 +134,7 @@ class Model extends AbstractTable
                 $this->insert($array_save);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int)$this->getId()));
+                $this->update($array_save, array('id' => (int) $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));

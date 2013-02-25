@@ -81,7 +81,8 @@ class Info extends Object
     /**
      * Initialize file from path
      *
-     * @param string $file_path
+     * @param string $file_path File path
+     *
      * @return boolean
      */
     public function fromFile($file_path)
@@ -111,7 +112,7 @@ class Info extends Object
         }
 
         $translator = Registry::get('Translator');
-        $escaper = Registry::get('Application')
+        $escaper    = Registry::get('Application')
             ->getServiceManager()
             ->get('ViewManager')
             ->getHelperManager()

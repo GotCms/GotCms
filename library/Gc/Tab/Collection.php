@@ -49,7 +49,8 @@ class Collection extends AbstractTable
     /**
      * Initiliaze tab collection
      *
-     * @param integer $document_type_id Optional
+     * @param integer $document_type_id Optional document type id
+     *
      * @return \Gc\Tab\Collection
      */
     public function load($document_type_id = null)
@@ -62,12 +63,13 @@ class Collection extends AbstractTable
     /**
      * Return all tabs from collection
      *
-     * @param boolean $force_reload to reload collection
+     * @param boolean $force_reload Force reload collection
+     *
      * @return array
      */
     public function getTabs($force_reload = false)
     {
-        $tabs = $this->getData('tabs');
+        $tabs             = $this->getData('tabs');
         $document_type_id = $this->getDocumentTypeId();
         if (empty($tabs) or $force_reload == true) {
             if (!empty($document_type_id)) {
@@ -85,7 +87,7 @@ class Collection extends AbstractTable
 
             $tabs = array();
             foreach ($rows as $row) {
-                $tabs[] = Model::fromArray((array)$row);
+                $tabs[] = Model::fromArray((array) $row);
             }
 
             $this->setData('tabs', $tabs);
@@ -97,7 +99,8 @@ class Collection extends AbstractTable
     /**
      * Return all tabs from collection
      *
-     * @param integer $document_type_id
+     * @param integer $document_type_id Document type id
+     *
      * @return array
      */
     public function getImportableTabs($document_type_id)
@@ -112,7 +115,7 @@ class Collection extends AbstractTable
 
         $tabs = array();
         foreach ($rows as $row) {
-            $tabs[] = Model::fromArray((array)$row);
+            $tabs[] = Model::fromArray((array) $row);
         }
 
         return $tabs;
@@ -122,6 +125,7 @@ class Collection extends AbstractTable
      * Set tabs
      *
      * @param array $tabs of \Gc\Tab\Model
+     *
      * @return void
      */
     public function setTabs(array $tabs)
@@ -137,13 +141,14 @@ class Collection extends AbstractTable
     /**
      * Add tab from array
      *
-     * @param array $tab
+     * @param array $array Data
+     *
      * @return void
      */
-    public function addTab(array $tab)
+    public function addTab(array $array)
     {
-        $tabs = $this->getTabs();
-        $tabs[] = Model::fromArray($tab);
+        $tabs   = $this->getTabs();
+        $tabs[] = Model::fromArray($array);
 
         $this->setData('tabs', $tabs);
     }

@@ -50,8 +50,9 @@ class Script extends Helper\Script
     /**
      * Returns script from identifier.
      *
-     * @param string $content
-     * @param array $params
+     * @param string $content Content
+     * @param array  $params  Parameters
+     *
      * @return mixed
      */
     public function __invoke($content, $params = array())
@@ -62,12 +63,12 @@ class Script extends Helper\Script
         }
 
         $this->__params = $params;
-        $name = mt_rand() . '-script.gc-stream';
+        $name           = mt_rand() . '-script.gc-stream';
 
         file_put_contents('gc.script://' . $name, $content);
 
         ob_start();
-        include('gc.script://' . $name);
+        include 'gc.script://' . $name;
 
         return ob_get_clean();
     }
@@ -75,7 +76,8 @@ class Script extends Helper\Script
     /**
      * Returns param from name.
      *
-     * @param string $name
+     * @param string $name Name
+     *
      * @return mixed
      */
     public function getParam($name)

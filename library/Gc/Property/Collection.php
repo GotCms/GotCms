@@ -50,8 +50,9 @@ class Collection extends AbstractTable
      * Load property
      *
      * @param integer $document_type_id Optional
-     * @param integer $tab_id Optional
-     * @param integer $document_id Optional
+     * @param integer $tab_id           Optional
+     * @param integer $document_id      Optional
+     *
      * @return \Gc\Property\Collection
      */
     public function load($document_type_id = null, $tab_id = null, $document_id = null)
@@ -69,6 +70,7 @@ class Collection extends AbstractTable
      * Get properties
      *
      * @param boolean $force_reload to initiliaze properties
+     *
      * @return array
      */
     public function getProperties($force_reload = false)
@@ -76,8 +78,8 @@ class Collection extends AbstractTable
         if ($this->getData('properties') == null or $force_reload) {
             $select = new Select();
             $select->from('tab')
-            ->columns(array())
-            ->join('property', 'tab.id = property.tab_id', '*', Select::JOIN_INNER);
+                ->columns(array())
+                ->join('property', 'tab.id = property.tab_id', '*', Select::JOIN_INNER);
 
             if ($this->getDocumentId() !== null) {
                 $select->join(
@@ -109,7 +111,7 @@ class Collection extends AbstractTable
 
             $properties = array();
             foreach ($rows as $row) {
-                $property_model = Model::fromArray((array)$row);
+                $property_model = Model::fromArray((array) $row);
                 if ($this->getDocumentId() !== null) {
                     $property_model->setDocumentId($this->getDocumentId());
                 }
@@ -126,7 +128,8 @@ class Collection extends AbstractTable
     /**
      * Set properties
      *
-     * @param array $properties
+     * @param array $properties Properties
+     *
      * @return \Gc\Property\Collection
      */
     public function setProperties(array $properties)
