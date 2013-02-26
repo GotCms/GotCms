@@ -93,6 +93,13 @@ After you can manage your website, create documents, documents types, datatypes,
 
 All contents are stored in database and works with stream wrapper.
 
+
+## CONTRIBUTING
+
+If you wish to contribute to GotCms, please read the
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
+
 ## Notes
 
 Please visits the best framework ever : [Zend Framework 2](http://framework.zend.com/)
