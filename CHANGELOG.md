@@ -11,6 +11,7 @@
 - Update to Zend Framework 2.1.3
 - Use new GotSniffs based on PSR2 (https://github.com/PierreRambaud/GotCms/issues/38)
 - Update jquery, jquery ui and modernizr (https://github.com/PierreRambaud/GotCms/issues/39)
+- Composer support (https://github.com/PierreRambaud/GotCms/issues/35)
 
 ## 0.1.4 (12 Feb 2013):
 - Bug with HTTP 404 (undefined variable view)
