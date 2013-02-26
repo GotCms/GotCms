@@ -11,10 +11,18 @@ Please read the LICENSE.txt file for the exact license details that apply to Got
 
 Please see CHANGELOG.md.
 
-## Installation
-$ git clone https://github.com/PierreRambaud/GotCms.git
+## Usage
 
-If you want to use VirtualHost, copy .htaccess content otherwise check if "AllowOverride" is set to "All".
+Installation via composer:
+
+    $ curl -s https://getcomposer.org/installer | php
+    $ php composer.phar install
+
+Installation via Git:
+
+    $ git clone https://github.com/PierreRambaud/GotCms.git
+
+If you want to use VirtualHost, copy the .htaccess content otherwise check if "AllowOverride" is set to "All".
 
 Example of VirtualHost:
 
@@ -38,7 +46,7 @@ Example of VirtualHost:
 </VirtualHost>
 ```
 
-Make sure read and write access are available for:
+Make sure read and write access are available by apache user/group for these directories:
 - config/autoload
 - public/frontend
 - public/media
@@ -69,11 +77,19 @@ Php configuration:
 - Session Auto Start: Off
 
 
-## More information
+## Installation
 
-Go to the website, it will be redirected to /install and follow instructions.
+Go to the website, it will redirect you to /install.
+Please follow instructions, there'are only five steps:
+- Language
+- License
+- Pre-configuration
+- Database connection
+- Configuration
 
-Go to /admin to manage website, create documents, documents types, datatypes, views, layouts, scripts, ...
+Adminstration is accessible with /admin in URL.
+
+After you can manage your website, create documents, documents types, datatypes, views, layouts, scripts, ...
 
 All contents are stored in database and works with stream wrapper.
 
