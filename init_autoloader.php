@@ -47,6 +47,11 @@ if ($zf_path) {
     $configuration = include 'config/application.config.php';
     if (isset($loader)) {
         $loader->add('Zend', $zf_path);
+        foreach ($configuration['autoloader']['namespaces'] as $name => $path) {
+            $loader->add($name, dirname($path));
+        }
+
+        $loader->register();
     } else {
         include $zf_path . '/Zend/Loader/AutoloaderFactory.php';
         Zend\Loader\AutoloaderFactory::factory(

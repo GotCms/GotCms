@@ -1,0 +1,19 @@
+{
+    "name": "pierrerambaud/gotcms",
+    "description": "GotCms is a CMS based on Zend Framework 2",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.1.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "squizlabs/php_codesniffer": "1.4.*"
+    },
+    "authors": [
+        {
+            "name": "Pierre RAMBAUD",
+            "email": "pierre.rambaud86@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
