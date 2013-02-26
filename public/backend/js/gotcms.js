@@ -1,6 +1,25 @@
-/* Author:
-Pierre Rambaud
-*/
+/**
+ * This source file is part of GotCms.
+ *
+ * GotCms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GotCms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
+ */
 
 var Gc = (function($)
 {
@@ -8,8 +27,7 @@ var Gc = (function($)
     var $document = $(document),
     $window = $(window);
 
-    $document.ready(function()
-    {
+    $document.ready(function() {
         Gc.initialize();
         Gc.notification();
     });
@@ -37,17 +55,13 @@ var Gc = (function($)
 
         isEmpty: function($element)
         {
-            if($element === undefined)
-            {
+            if($element === undefined) {
                 return true;
             }
 
-            if(typeof $element === 'object')
-            {
+            if(typeof $element === 'object') {
                 return $.isEmptyObject($element);
-            }
-            else
-            {
+            } else {
                 return $.trim($element) === '';
             }
         },
@@ -77,27 +91,19 @@ var Gc = (function($)
                 distance: 10
             });
 
-            $('#tabs-add').on('click', function()
-            {
+            $('#tabs-add').on('click', function() {
                 var $name, $description;
                 $name = $('#tabs-addname');
                 $description = $('#tabs-adddescription');
-                if($this.isEmpty($name.val()) || $this.isEmpty($description.val()))
-                {
+                if($this.isEmpty($name.val()) || $this.isEmpty($description.val())) {
                     $this.setHtmlMessage(Translator.translate('Please fill all fields'));
-                }
-                else
-                {
+                } else {
                     $.post($addTabUrl,
                     {name: $name.val(), description: $description.val()},
-                    function($data)
-                    {
-                        if($data.message !== undefined)
-                        {
+                    function($data) {
+                        if($data.message !== undefined) {
                             $this.setHtmlMessage($data.message);
-                        }
-                        else
-                        {
+                        } else {
                             var $tabs, $e;
                             $tabs = $('#tabs');
                             $e = $('<li class="clearfix">' +
@@ -121,8 +127,7 @@ var Gc = (function($)
 
                             $('.select-tab').append(new Option($name.val(),$data.id));
 
-                            if($('#properties-tabs-content').html() !== null)
-                            {
+                            if($('#properties-tabs-content').html() !== null) {
                                 $('#properties-tabs-content').tabs('add', '#tabs-properties-'+$data.id, $name.val());
                                 $('#tabs-properties-'+$data.id).append('<div class="sortable connected-sortable ui-helper-reset">');
                             }
@@ -131,21 +136,17 @@ var Gc = (function($)
                 }
             });
 
-            $(document).on('click', '#tabs > li', function(event)
-            {
-                if(event.target.type === 'text')
-                {
+            $(document).on('click', '#tabs > li', function(event) {
+                if(event.target.type === 'text') {
                     return false;
                 }
 
                 $(this).find('div').toggleClass('hide').height('auto');
             });
 
-            $(document).on('click', '.delete-tab', function()
-            {
+            $(document).on('click', '.delete-tab', function() {
                 var $button = $(this);
-                $.post($deleteTabUrl, {tab: $button.val()}, function($data)
-                {
+                $.post($deleteTabUrl, {tab: $button.val()}, function($data) {
                     $('.select-tab').find('option[value="'+$button.val()+'"]').remove();
                     var $tabs = $('#properties-tabs-content');
                     $button.parent().remove();
@@ -160,8 +161,7 @@ var Gc = (function($)
              * Properties
              */
 
-            $('#display-property').on('click', function()
-            {
+            $('#display-property').on('click', function() {
                 $(this).next().toggleClass('hide');
                 $(this).find('.ui-icon').toggleClass('ui-icon-minus');
                 $(this).find('.ui-icon').toggleClass('ui-icon-plus');
@@ -179,8 +179,7 @@ var Gc = (function($)
 
             $this.refreshProperties($tabs);
 
-            $('#property-add').on('click', function()
-            {
+            $('#property-add').on('click', function() {
                 var $name = $('#properties-name'),
                 $identifier = $('#properties-identifier'),
                 $tab = $('#properties-tab'),
@@ -188,14 +187,10 @@ var Gc = (function($)
                 $description = $('#properties-description'),
                 $isRequired = $('#properties-required');
 
-                if($this.isEmpty($identifier.val()) || $this.isEmpty($name.val()) || $this.isEmpty($tab.val()) || $this.isEmpty($datatype.val()))
-                {
+                if($this.isEmpty($identifier.val()) || $this.isEmpty($name.val()) || $this.isEmpty($tab.val()) || $this.isEmpty($datatype.val())) {
                     $this.setHtmlMessage(Translator.translate('Please fill all fields'));
-                }
-                else
-                {
-                    $.post($addPropertyUrl,
-                    {
+                } else {
+                    $.post($addPropertyUrl, {
                         name:             $name.val(),
                         identifier:       $identifier.val(),
                         tab:              $tab.val(),
@@ -203,14 +198,10 @@ var Gc = (function($)
                         description:      $description.val(),
                         is_required:      $isRequired.val()
                     },
-                    function($data)
-                    {
-                        if($data.success === false)
-                        {
+                    function($data) {
+                        if($data.success === false) {
                             $this.setHtmlMessage($data.message);
-                        }
-                        else
-                        {
+                        } else {
                             $this.setHtmlMessage('');
                             var $c = new Template('<div><h3><a href="#secion#{id}">#{name} (#{identifier})</a></h3>' +
                                 '<dl>' +
@@ -272,17 +263,13 @@ var Gc = (function($)
                 }
             });
 
-            $(document).on('click', '.delete-property', function()
-            {
+            $(document).on('click', '.delete-property', function() {
                 var $button = $(this);
-                $.post($deletePropertyUrl,
-                {
+                $.post($deletePropertyUrl, {
                     property:    $button.val()
                 },
-                function($data)
-                {
-                    if($data.success === true)
-                    {
+                function($data) {
+                    if($data.success === true) {
                         $button.parent().parent().parent().remove();
                         $('.connected-sortable').accordion(Gc.getOption('accordion-option'));
                     }
@@ -291,14 +278,11 @@ var Gc = (function($)
                 });
             });
 
-            $('#import-tab-button').on('click', function()
-            {
+            $('#import-tab-button').on('click', function() {
                 var $tab_id = $('#import-tabs').val();
                 //Ajax get tab and properties
-                $.post($importTabUrl, {tab_id: $tab_id}, function($data)
-                {
-                    if($data.success === true)
-                    {
+                $.post($importTabUrl, {tab_id: $tab_id}, function($data) {
+                    if($data.success === true) {
                         $.ajaxSetup({async:false});
                         var $tab = $data.tab,
                         $tab_name = $('#tabs-addname'),
@@ -345,8 +329,7 @@ var Gc = (function($)
 
         refreshProperties: function($tabs)
         {
-            if($('.connected-sortable').hasClass('ui-accordion'))
-            {
+            if($('.connected-sortable').hasClass('ui-accordion')) {
                 $('.connected-sortable').accordion('destroy');
             }
 
@@ -362,8 +345,7 @@ var Gc = (function($)
                 accept: '.connected-sortable div',
                 hoverClass: 'ui-state-hover',
                 tolerance: 'pointer',
-                drop: function( event, ui )
-                {
+                drop: function(event, ui) {
                     var $item = $(this);
                     var $list = $( $item.find('a').attr('href'))
                         .find('.connected-sortable');
@@ -386,8 +368,7 @@ var Gc = (function($)
         sortableMenu: function($update_document_url)
         {
             $('#documents').find('ul').sortable({
-                update: function()
-                {
+                update: function() {
                     $.ajax({
                         url: $update_document_url,
                         type: 'post',
@@ -405,17 +386,12 @@ var Gc = (function($)
             $('#browser').jstree({
                 'plugins' : ['themes','html_data'],
                 'core' : { 'initially_open' : [ $('#document_' + $document_id).parent().parent('li').prop('id') ] }
-            })
-            .bind('refresh.jstree', function()
-            {
+            }).bind('refresh.jstree', function() {
                 $this.sortableMenu($update_document_url);
-            })
-            .bind('loaded.jstree', function()
-            {
+            }).bind('loaded.jstree', function() {
                 $this.sortableMenu($update_document_url);
 
-                $.contextMenu(
-                {
+                $.contextMenu({
                     selector: '#browser a',
                     items: {
                         'new': {name: Translator.translate('New'), icon: 'add'},
@@ -429,53 +405,45 @@ var Gc = (function($)
                         'refresh': {name: Translator.translate('Refresh'), icon: 'refresh'},
                         'quit': {name: Translator.translate('Quit'), icon: 'quit'}
                     },
-                    callback: function($action, $options)
-                    {
+                    callback: function($action, $options) {
                         var $element = $(this),
                         $routes,
                         $url,
                         $id,
                         $display_copy_form;
 
-                        if($action !== 'refresh' && $action !== 'new' && $action !== 'paste' && $element.parent('li').attr('id') === 'documents')
-                        {
+                        if($action !== 'refresh' && $action !== 'new' && $action !== 'paste' && $element.parent('li').attr('id') === 'documents') {
                             return true;
                         }
 
                         $routes = $this.getOption('routes');
                         $url = $routes[$action];
                         $id = 0;
-                        if($element.attr('id') !== undefined)
-                        {
+                        if($element.attr('id') !== undefined) {
                             $id = $element.attr('id');
                         }
 
                         $url = $url.replace('itemId', $id);
                         $display_copy_form = true;
 
-                        switch($action)
-                        {
+                        switch($action) {
                             case 'refresh':
                                 $this.refreshTreeview($url, $id);
-                            return true;
+                                return true;
                             case 'new':
-                                if(!$this.isEmpty($id))
-                                {
+                                if(!$this.isEmpty($id)) {
                                     $url += '/parent/'+$id;
                                 }
                             break;
-
                             case 'edit':
                             break;
-
                             case 'copy':
                                 $display_copy_form = false;
                             case 'cut':
                                 $this.setOption('lastAction', $action);
                                 $options.items.paste.disabled = false;
                             case 'paste':
-                                if($this.getOption('lastAction') === 'copy' && $display_copy_form === true)
-                                {
+                                if($this.getOption('lastAction') === 'copy' && $display_copy_form === true) {
                                     $this.showCopyForm($url, $action, $options);
                                     return true;
                                 }
@@ -484,17 +452,13 @@ var Gc = (function($)
                                     url: $url,
                                     dataType: 'json',
                                     data: {},
-                                    success: function(data)
-                                    {
-                                        if(data.success === true)
-                                        {
-                                            if($action === 'copy' || $action === 'cut')
-                                            {
+                                    success: function(data) {
+                                        if(data.success === true) {
+                                            if($action === 'copy' || $action === 'cut') {
                                                 $options.items.paste.disabled = false;
                                             }
 
-                                            if($action === 'paste' && $this.getOption('lastAction') === 'cut')
-                                            {
+                                            if($action === 'paste' && $this.getOption('lastAction') === 'cut') {
                                                 $options.items.paste.disabled = true;
 
                                                 $this.refreshTreeview($routes.refresh.replace('itemId', 0), 0);
@@ -502,15 +466,15 @@ var Gc = (function($)
                                         }
                                     }
                                 });
-                            return true;
+                                return true;
 
                             case 'delete':
                                 $this.showDialogConfirm($url, $element.parent());
-                            return true;
+                                return true;
 
                             case 'quit':
                             default:
-                            return true;
+                                return true;
                         }
 
                         document.location.href = $url;
@@ -525,15 +489,11 @@ var Gc = (function($)
             $.ajax({
                 url: $url,
                 data: {},
-                success: function(data)
-                {
-                    if($document_id === 0)
-                    {
+                success: function(data) {
+                    if($document_id === 0) {
                         $('#documents').children('ul').remove();
                         $('#documents').append(data.treeview);
-                    }
-                    else
-                    {
+                    } else {
                         $('#'+$document_id).next('ul').remove();
                         $('#'+$document_id).after(data.treeview);
                     }
@@ -546,12 +506,9 @@ var Gc = (function($)
         showDialogConfirm: function($url, $element_to_remove)
         {
             var $buttons = {};
-            $buttons[Translator.translate('Confirm')] = function()
-            {
-                $.get($url, function(data)
-                {
-                    if(data.success === true)
-                    {
+            $buttons[Translator.translate('Confirm')] = function() {
+                $.get($url, function(data) {
+                    if(data.success === true) {
                         $element_to_remove.remove();
                     }
                 });
@@ -561,20 +518,17 @@ var Gc = (function($)
                 return true;
             };
 
-            $buttons[Translator.translate('Cancel')] = function()
-            {
+            $buttons[Translator.translate('Cancel')] = function() {
                 $(this).dialog('close');
 
                 return false;
             };
 
-            $('#dialog').attr('title', Translator.translate('Delete element')).dialog(
-            {
+            $('#dialog').attr('title', Translator.translate('Delete element')).dialog({
                 bgiframe        : false,
                 resizable       : false,
                 modal           : true,
-                overlay         :
-                {
+                overlay         : {
                     backgroundColor: '#000',
                     opacity: 0.5
                 },
@@ -600,12 +554,10 @@ var Gc = (function($)
             '</div>';
 
             var $buttons = {};
-            $buttons[Translator.translate('Copy')] = function()
-            {
+            $buttons[Translator.translate('Copy')] = function() {
                 var $copy_name = $('#copy-name'),
                 $copy_url_key = $('#copy-url-key');
-                if($this.isEmpty($copy_name.val()) || $this.isEmpty($copy_url_key.val()))
-                {
+                if($this.isEmpty($copy_name.val()) || $this.isEmpty($copy_url_key.val())) {
                     return false;
                 }
 
@@ -613,12 +565,9 @@ var Gc = (function($)
                     url: $url,
                     dataType: 'json',
                     data: {name:$copy_name.val(),url_key:$copy_url_key.val()},
-                    success: function(data)
-                    {
-                        if(data.success === true)
-                        {
-                            if($action === 'paste' && $this.getOption('lastAction') === 'cut')
-                            {
+                    success: function(data) {
+                        if(data.success === true) {
+                            if($action === 'paste' && $this.getOption('lastAction') === 'cut') {
                                 $options.items.paste.disabled = true;
                             }
 
@@ -630,8 +579,7 @@ var Gc = (function($)
                 $(this).dialog('close');
             };
 
-            $buttons[Translator.translate('Cancel')] = function()
-            {
+            $buttons[Translator.translate('Cancel')] = function() {
                 $(this).dialog('close');
             };
 
@@ -666,8 +614,7 @@ var Gc = (function($)
                 '<td><span class="button-add add-translate">'+Translator.translate('Add')+'</span></td>' +
             '</tr>';
 
-            $document.on('click', '.add-translate', function()
-            {
+            $document.on('click', '.add-translate', function() {
                 var $t = new Template($template),
                 $table_trad = $('#table-trad');
 
@@ -676,18 +623,15 @@ var Gc = (function($)
                 $idx++;
             });
 
-            $document.on('click', '.delete-translate', function()
-            {
+            $document.on('click', '.delete-translate', function() {
                 $(this).parent().parent('tr').remove();
             });
         },
 
         initTraslationList: function()
         {
-            $('#table-translation-edit > tbody > tr').on('click', function(e)
-            {
-                if($.inArray(e.target.type, ['text', 'select-one']) !== -1)
-                {
+            $('#table-translation-edit > tbody > tr').on('click', function(e) {
+                if($.inArray(e.target.type, ['text', 'select-one']) !== -1) {
                     return false;
                 }
 
@@ -697,8 +641,7 @@ var Gc = (function($)
                 var $tmp = $input.val();
                 $input.val('');
                 $input.val($tmp);
-                $(this).find('td').each(function()
-                {
+                $(this).find('td').each(function() {
                     var $selector = $(this).find('div:last');
                     $selector.prev('div').html($selector.children().val());
                 });
@@ -707,18 +650,15 @@ var Gc = (function($)
 
         notification: function()
         {
-            $(document).on('click', '.notification .close', function()
-            {
-                $(this).parent().fadeOut(function()
-                {
+            $(document).on('click', '.notification .close', function() {
+                $(this).parent().fadeOut(function() {
                     $(this).remove();
                 });
 
                 return false;
             });
 
-            setTimeout(function()
-            {
+            setTimeout(function() {
                 $('.notification').remove();
             }, 6000);
         },
@@ -740,8 +680,7 @@ var Gc = (function($)
 
         initUploadLink: function()
         {
-            $('#upload-link').on('click', function()
-            {
+            $('#upload-link').on('click', function() {
                 $('#form-content').toggle();
                 return false;
             });
@@ -771,46 +710,34 @@ var Gc = (function($)
                 opacity: 0.4,
                 distance: 10,
                 forcePlaceholderSize: true,
-                start : function()
-                {
+                start : function() {
                     $dashboard_nb_update = 0;
                 },
-                receive: function()
-                {
+                receive: function() {
                     $('.widget-column').sortable('refresh');
                 },
-                update: function(event, ui)
-                {
+                update: function(event, ui) {
                     var $string = $(this).sortable('toArray').join(),
                     $found = false;
-                    if($this.isEmpty($object[$(this).attr('id')]))
-                    {
+                    if($this.isEmpty($object[$(this).attr('id')])) {
                         $not_connected = false;
-                    }
-                    else
-                    {
-                        $.each($object, function($key, $value)
-                        {
-                            if(!$this.isEmpty($object[$key]) && $.inArray(ui.item.attr('id'), $value.split(',')) !== -1)
-                            {
+                    } else {
+                        $.each($object, function($key, $value) {
+                            if(!$this.isEmpty($object[$key]) && $.inArray(ui.item.attr('id'), $value.split(',')) !== -1) {
                                 $found = true;
                             }
                         });
 
-                        if($found === false)
-                        {
+                        if($found === false) {
                             $not_connected = true;
-                        }
-                        else
-                        {
+                        } else {
                             $not_connected = $object[$(this).attr('id')].length === $string.length;
                         }
                     }
 
                     $object[$(this).attr('id')] = $string;
                     $dashboard_nb_update++;
-                    if($dashboard_nb_update === 2 || $not_connected)
-                    {
+                    if($dashboard_nb_update === 2 || $not_connected) {
                         $.ajax({
                             url: $update_url,
                             type: 'post',
@@ -822,16 +749,14 @@ var Gc = (function($)
             });
 
             if(!this.isEmpty($object)) {
-                $.each($object, function(sortable_id, elements)
-                {
+                $.each($object, function(sortable_id, elements) {
                     $(elements.split(',')).each(function (i, id) {
                         $("#" + id).appendTo($('#'+sortable_id));
                     });
                 });
             }
 
-            $('.dashboard-close').on('click', function()
-            {
+            $('.dashboard-close').on('click', function() {
                 $.ajax({
                     url: $update_url,
                     type: 'post',
@@ -847,16 +772,13 @@ var Gc = (function($)
         initTableList: function()
         {
             var $this = this;
-            $('.table-list > tbody').find('td').on('click', function(e)
-            {
-                if(e.target.tagName !== 'IMG' && e.target.tagName !== 'A')
-                {
+            $('.table-list > tbody').find('td').on('click', function(e) {
+                if(e.target.tagName !== 'IMG' && e.target.tagName !== 'A') {
                     $(this).parent().find('.edit-line')[0].click();
                 }
             });
 
-            $('.delete-line').on('click', function()
-            {
+            $('.delete-line').on('click', function() {
                 $this.showDialogConfirm($(this).attr('href'), $(this).parent().parent());
                 return false;
             });
@@ -864,10 +786,8 @@ var Gc = (function($)
 
         saveCommand: function()
         {
-            $(window).on('keypress', function(event)
-            {
-                if(!(event.which === 115 && event.ctrlKey) && !(event.which === 19))
-                {
+            $(window).on('keypress', function(event) {
+                if(!(event.which === 115 && event.ctrlKey) && !(event.which === 19)) {
                     return true;
                 }
 
@@ -879,8 +799,7 @@ var Gc = (function($)
         installModule: function()
         {
             $('#modules').find('div').hide();
-            $('#module').on('change', function()
-            {
+            $('#module').on('change', function() {
                 $('#modules').find('div').hide();
                 $('#' + $(this).val()).show();
             });
@@ -888,14 +807,11 @@ var Gc = (function($)
 
         initUpdate: function($confirm_text)
         {
-            $('#update-form').on('submit', function()
-            {
-                if(!confirm($confirm_text))
-                {
+            $('#update-form').on('submit', function() {
+                if(!confirm($confirm_text)) {
                     return false;
                 }
             });
         }
     };
 })(jQuery);
-
