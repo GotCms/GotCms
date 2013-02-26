@@ -1,6 +1,7 @@
 {
     "name": "pierrerambaud/gotcms",
     "description": "GotCms is a CMS based on Zend Framework 2",
+    "license" : "LGPL-3.0",
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": "2.1.3"
