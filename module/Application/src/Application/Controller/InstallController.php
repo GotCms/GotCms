@@ -145,16 +145,16 @@ class InstallController extends Action
 
         $server_data   = array();
         $server_data[] = array(
-        'label' => '/public/frontend', 'value' => File::isWritable(GC_APPLICATION_PATH . '/public/frontend')
+            'label' => '/public/frontend', 'value' => File::isWritable(GC_APPLICATION_PATH . '/public/frontend')
         );
         $server_data[] = array(
-        'label' => '/config/autoload', 'value' => File::isWritable(GC_APPLICATION_PATH . '/config/autoload')
+            'label' => '/config/autoload', 'value' => File::isWritable(GC_APPLICATION_PATH . '/config/autoload')
         );
         $server_data[] = array(
-        'label' => '/data/cache', 'value' => is_writable(GC_APPLICATION_PATH . '/data/cache')
+            'label' => '/data/cache', 'value' => is_writable(GC_APPLICATION_PATH . '/data/cache')
         );
         $server_data[] = array(
-        'label' => '/public/media', 'value' => File::isWritable(GC_MEDIA_PATH)
+            'label' => '/public/media', 'value' => File::isWritable(GC_MEDIA_PATH)
         );
 
         $php_data   = array();
