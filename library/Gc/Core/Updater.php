@@ -222,7 +222,7 @@ class Updater extends Object
         foreach ($files as $file_list) {
             foreach ($file_list as $filename) {
                 try {
-                    $this->adapter->addMessage($script(file_get_contents($filename)));
+                    $this->adapter->addMessage($script->execute($filename));
                 } catch (\Exception $e) {
                     $this->setError($e->getMessage());
                 }

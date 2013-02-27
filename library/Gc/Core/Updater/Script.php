@@ -28,7 +28,7 @@
 namespace Gc\Core\Updater;
 
 use Gc\Registry;
-use Gc\View\Helper;
+use Gc\Core\Object;
 
 /**
  * Retrieve script from identifier
@@ -38,54 +38,20 @@ use Gc\View\Helper;
  * @subpackage View\Helper
  * @example In view: $this->script('identifier');
  */
-class Script extends Helper\Script
+class Script extends Object
 {
     /**
-     * Script parameter
+     * Execute script, need to be execute here in order to isolate all variables.
      *
-     * @var array
-     */
-    protected $__params = array();
-
-    /**
-     * Returns script from identifier.
-     *
-     * @param string $content Content
-     * @param array  $params  Parameters
+     * @param string $filename Filename
      *
      * @return mixed
      */
-    public function __invoke($content, $params = array())
+    public function execute($filename)
     {
-        $existed = in_array('gc.script', stream_get_wrappers());
-        if (!$existed) {
-            stream_wrapper_register('gc.script', 'Gc\View\Stream');
-        }
-
-        $this->__params = $params;
-        $name           = mt_rand() . '-script.gc-stream';
-
-        file_put_contents('gc.script://' . $name, $content);
-
         ob_start();
-        include 'gc.script://' . $name;
+        include $filename;
 
         return ob_get_clean();
-    }
-
-    /**
-     * Returns param from name.
-     *
-     * @param string $name Name
-     *
-     * @return mixed
-     */
-    public function getParam($name)
-    {
-        if (!empty($this->__params[$name])) {
-            return $this->__params[$name];
-        }
-
-        return null;
     }
 }
