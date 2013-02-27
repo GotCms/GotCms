@@ -94,7 +94,7 @@ After you can manage your website, create documents, documents types, datatypes,
 All contents are stored in database and works with stream wrapper.
 
 
-## CONTRIBUTING
+## Contributing
 
 If you wish to contribute to GotCms, please read the
 [CONTRIBUTING.md](CONTRIBUTING.md).
