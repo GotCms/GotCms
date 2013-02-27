@@ -57,7 +57,10 @@ class Files extends Object
             $tmp_file
         );
 
-        return file_get_contents($tmp_file);
+        $zip_content = file_get_contents($tmp_file);
+        unlink($tmp_file);
+
+        return $zip_content;
     }
 
     /**
