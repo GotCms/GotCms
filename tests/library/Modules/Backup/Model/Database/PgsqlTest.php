@@ -82,7 +82,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
         $parameters['port'] = 5432;
         $connection->setConnectionParameters($parameters);
 
-        $this->assertInternalType('string', $this->object->export());
+        $this->assertInternalType('string', $this->object->export(''));
     }
 
     /**

@@ -82,7 +82,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
         $parameters['port'] = 3306;
         $connection->setConnectionParameters($parameters);
 
-        $this->assertInternalType('string', $this->object->export());
+        $this->assertInternalType('string', $this->object->export(''));
     }
 
     /**

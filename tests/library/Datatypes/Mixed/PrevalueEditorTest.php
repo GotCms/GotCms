@@ -94,7 +94,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Datatypes\Mixed\PrevalueEditor::save
-     * @covers Datatypes\Mixed\PrevalueEditor::getDatatype
+     * @covers Datatypes\Mixed\PrevalueEditor::loadDatatype
      *
      * @return void
      */
@@ -119,7 +119,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Datatypes\Mixed\PrevalueEditor::load
-     * @covers Datatypes\Mixed\PrevalueEditor::getDatatype
+     * @covers Datatypes\Mixed\PrevalueEditor::loadDatatype
      *
      * @return void
      */

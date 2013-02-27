@@ -224,7 +224,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Datatypes\Mixed\Editor::save
-     * @covers Datatypes\Mixed\Editor::getDatatype
+     * @covers Datatypes\Mixed\Editor::loadDatatype
      *
      * @return void
      */
@@ -307,7 +307,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Datatypes\Mixed\Editor::load
-     * @covers Datatypes\Mixed\Editor::getDatatype
+     * @covers Datatypes\Mixed\Editor::loadDatatype
      *
      * @return void
      */
