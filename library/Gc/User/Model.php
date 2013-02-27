@@ -109,14 +109,14 @@ class Model extends AbstractTable
                 function (Select $select) use ($user_email) {
                     $select->where->equalTo('email', $user_email);
 
-                    if ($this->getId() != -1) {
+                    if ($this->getId() != NULL) {
                         $select->where->notEqualTo('id', $this->getId());
                     }
                 }
             );
 
-            $rows = $this->fetchAll($select);
-            if (count($rows) == 0) {
+            $row = $this->fetchRow($select);
+            if (empty($row)) {
                 $this->setData('email', $user_email);
                 return true;
             }
