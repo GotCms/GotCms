@@ -101,19 +101,19 @@ class DatatypeController extends Action
      */
     public function editAction()
     {
-        $datatype_model = Datatype\Model::fromId($this->_routeMatch->getParam('id'));
+        $datatype_model = Datatype\Model::fromId($this->getRouteMatch()->getParam('id'));
         if (empty($datatype_model)) {
             return $this->redirect()->toRoute('datatypeList');
         }
 
-        $datatype = Datatype\Model::loadDatatype($this->_routeMatch->getParam('id'));
+        $datatype = Datatype\Model::loadDatatype($this->getRouteMatch()->getParam('id'));
 
         $datatype_form = new DatatypeForm();
         $datatype_form->setAttribute(
             'action',
             $this->url()->fromRoute(
                 'datatypeEdit',
-                array('id' => $this->_routeMatch->getParam('id'))
+                array('id' => $this->getRouteMatch()->getParam('id'))
             )
         );
 
