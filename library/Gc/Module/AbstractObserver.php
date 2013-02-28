@@ -27,11 +27,10 @@
 
 namespace Gc\Module;
 
-use Zend\EventManager\Event;
 use Gc\Registry;
+use Gc\View\Renderer;
+use Zend\EventManager\Event;
 use Gc\Event\StaticEventManager;
-use Zend\View\Model\ViewModel;
-use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Abstract obverser bootstrap
@@ -45,7 +44,7 @@ abstract class AbstractObserver
     /**
      * Renderer
      *
-     * @var \Zend\View\Renderer\PhpRenderer
+     * @var \Gc\View\Renderer
      */
     protected $renderer;
 
@@ -97,12 +96,11 @@ abstract class AbstractObserver
      */
     public function render($name, array $data = array())
     {
-        $this->checkRenderer();
-        $view_model = new ViewModel();
-        $view_model->setTemplate($name);
-        $view_model->setVariables($data);
+        if (empty($this->renderer)) {
+            $this->renderer = new Renderer();
+        }
 
-        return $this->renderer->render($view_model);
+        return $this->renderer->render($name, $data);
     }
 
     /**
@@ -110,29 +108,15 @@ abstract class AbstractObserver
      *
      * @param string $dir Directory
      *
-     * @return \Gc\Module\AbstractObserver
+     * @return \Gc\Datatype\AbstractDatatype
      */
     public function addPath($dir)
     {
-        $this->checkRenderer();
-        $this->renderer->resolver()->addPath($dir);
-
-        return $this;
-    }
-
-    /**
-     * Check renderer, create if not exists
-     * Copy helper plugin manager from application service manager
-     *
-     * @return \Gc\Module\AbstractObserver
-     */
-    protected function checkRenderer()
-    {
-        if (is_null($this->renderer)) {
-            $this->renderer = new PhpRenderer();
-            $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
-            $this->renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
+        if (empty($this->renderer)) {
+            $this->renderer = new Renderer();
         }
+
+        $this->renderer->addPath($dir);
 
         return $this;
     }

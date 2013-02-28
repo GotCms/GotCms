@@ -227,7 +227,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Gc\Datatype\AbstractDatatype::addPath
-     * @covers Gc\Datatype\AbstractDatatype::checkRenderer
      *
      * @return void
      */
@@ -241,7 +240,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
      *
      * @covers Gc\Datatype\AbstractDatatype::addPath
      * @covers Gc\Datatype\AbstractDatatype::render
-     * @covers Gc\Datatype\AbstractDatatype::checkRenderer
      *
      * @return void
      */

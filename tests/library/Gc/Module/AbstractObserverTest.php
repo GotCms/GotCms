@@ -132,20 +132,6 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test
-     *
-     * @covers Gc\Module\AbstractObserver::checkRenderer
-     *
-     * @return void
-     */
-    public function testCheckRenderer()
-    {
-        $configuration = Registry::get('Configuration');
-        $class         = $this->getMethod('checkRenderer');
-        $this->assertInstanceOf('Gc\Module\AbstractObserver', $class->invokeArgs($this->object, array()));
-    }
-
-    /**
      * Retrieve protected method
      *
      * @param string $name Name
