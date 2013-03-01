@@ -226,6 +226,8 @@ footer a:hover {text-decoration:underline;}
 .stats-list a:link,
 .stats-list a:active {color:#FFFFFF;text-decoration:none;}
 
+#input-save[type="image"]{float: right;margin: 5px 5px 0 0;position: relative;z-index: 99;}
+
 @media screen and (max-width: 1420px) {
     header .part{padding:0 10px 0 0px;}
 }
