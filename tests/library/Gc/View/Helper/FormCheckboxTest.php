@@ -78,6 +78,8 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->object);
+        unset($this->element);
     }
 
     /**

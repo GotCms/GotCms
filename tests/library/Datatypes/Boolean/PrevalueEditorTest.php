@@ -82,6 +82,9 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->datatype->delete();
+        unset($this->datatype);
+        unset($this->object);
     }
 
     /**

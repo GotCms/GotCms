@@ -78,6 +78,8 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->object);
+        unset($this->boostrap);
     }
 
     /**
