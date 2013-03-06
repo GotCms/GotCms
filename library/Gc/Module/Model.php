@@ -49,6 +49,27 @@ class Model extends AbstractTable
      */
     protected $name = 'module';
 
+
+    /**
+     * Initiliaze module from name
+     *
+     * @param array $module_name Module name
+     *
+     * @return \Gc\Module\Model
+     */
+    public static function fromName($module_name)
+    {
+        $module_table = new Model();
+        $row          = $module_table->fetchRow($module_table->select(array('name' => $module_name)));
+        if (!empty($row)) {
+            $module_table->setData((array) $row);
+            $module_table->setOrigData();
+            return $module_table;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Initialize module from array
      *

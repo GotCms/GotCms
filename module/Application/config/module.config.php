@@ -60,13 +60,14 @@ return array(
     ),
     'view_helpers' => array(
         'invokables' => array(
-            'documents' => 'Gc\View\Helper\Documents',
-            'document' => 'Gc\View\Helper\Document',
+            'documents'    => 'Gc\View\Helper\Documents',
+            'document'     => 'Gc\View\Helper\Document',
             'formCheckbox' => 'Gc\View\Helper\FormCheckbox',
-            'moduleUrl' => 'Gc\View\Helper\ModuleUrl',
-            'partial' => 'Gc\View\Helper\Partial',
-            'script' => 'Gc\View\Helper\Script',
-            'tools' => 'Gc\View\Helper\Tools',
+            'moduleUrl'    => 'Gc\View\Helper\ModuleUrl',
+            'partial'      => 'Gc\View\Helper\Partial',
+            'script'       => 'Gc\View\Helper\Script',
+            'tools'        => 'Gc\View\Helper\Tools',
+            'modulePlugin' => 'Gc\View\Helper\ModulePlugin',
         ),
     ),
 );
