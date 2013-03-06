@@ -86,7 +86,7 @@ class Script extends AbstractHelper
      */
     public function getParam($name)
     {
-        if (!empty($this->__params[$name])) {
+        if (isset($this->__params[$name])) {
             return $this->__params[$name];
         }
 
