@@ -70,7 +70,7 @@ class ModulePlugin extends AbstractHelper
     protected $__params = array();
 
     /**
-     * Returns script from identifier.
+     * Execute plugin module.
      *
      * @param string $module_name Module name
      * @param string $plugin_name Plugin name
@@ -95,41 +95,6 @@ class ModulePlugin extends AbstractHelper
     }
 
     /**
-     * Get plugin instance
-     *
-     * @param string     $name    Name of plugin to return
-     * @param null|array $options Options to pass to plugin constructor (if not already instantiated)
-     *
-     * @return mixed
-     */
-    public function plugin($name, array $options = null)
-    {
-        return Registry::get('Application')->getServiceManager()->get('controllerPluginManager')->get($name, $options);
-    }
-
-    /**
-     * Method overloading: return/call plugins
-     *
-     * If the plugin is a functor, call it, passing the parameters provided.
-     * Otherwise, return the plugin instance.
-     *
-     * @param string $method Method
-     * @param array  $params Parameters
-     *
-     * @return mixed
-     */
-    public function __call($method, $params)
-    {
-        $plugin = $this->plugin($method);
-        if (is_callable($plugin)) {
-            return call_user_func_array($plugin, $params);
-        }
-
-        return $plugin;
-    }
-
-
-    /**
      * Validate the plugin
      *
      * Any plugin is considered valid in this context.
@@ -142,8 +107,7 @@ class ModulePlugin extends AbstractHelper
     public function validatePlugin($plugin)
     {
         if ($plugin instanceof AbstractPlugin) {
-            // we're okay
-            return;
+            return true;
         }
 
         throw new Exception(
@@ -245,7 +209,7 @@ class ModulePlugin extends AbstractHelper
      *
      * @return bool|\Gc\Module\AbstractPlugin
      */
-    public function create($module_name, $plugin_name)
+    public function create($module_name, $plugin_name = null)
     {
         if (is_array($module_name)) {
             list($module_name, $plugin_name) = $module_name;
@@ -256,9 +220,10 @@ class ModulePlugin extends AbstractHelper
         if ($this->canCreate($module_name, $plugin_name)) {
             $class_name = 'Modules\\' . $module_name . '\\Plugin\\' . $plugin_name;
             $plugin     = new $class_name();
-            $this->validatePlugin($plugin);
-            $this->instances[$module_name][$plugin_name] = $plugin;
-            return $plugin;
+            if ($this->validatePlugin($plugin)) {
+                $this->instances[$module_name][$plugin_name] = $plugin;
+                return $plugin;
+            }
         }
 
         return false;

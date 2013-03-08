@@ -174,7 +174,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function test__call()
+    public function testCall()
     {
         $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Redirect', $this->object->redirect());
     }
