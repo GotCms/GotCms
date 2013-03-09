@@ -40,6 +40,13 @@ use Modules\Blog;
 class Form extends AbstractPlugin
 {
     /**
+     * Form
+     *
+     * @var \Modules\Blog\Form\Comment
+     */
+    protected $form;
+
+    /**
      * Invoke form
      *
      * @return void
@@ -47,14 +54,13 @@ class Form extends AbstractPlugin
     public function __invoke()
     {
         $request = $this->getRequest();
-        $form    = new Blog\Form\Comment();
         if ($request->isPost()) {
             $post = $request->getPost();
-            $form->setData($post);
-            if ($form->isValid()) {
+            $this->getForm()->setData($post);
+            if ($this->getForm()->isValid()) {
                 $comment_table = new Blog\Model\Comment();
                 if ($comment_table->add(
-                    $form->getInputFilter()->getValues(),
+                    $this->getForm()->getInputFilter()->getValues(),
                     $this->layout()->currentDocument->getId()
                 )
                 ) {
@@ -67,9 +73,23 @@ class Form extends AbstractPlugin
         return $this->addPath(__DIR__ . '/../views')->render(
             'plugin/form.phtml',
             array(
-                'form' => $form,
+                'form' => $this->getForm(),
                 'errorMessage' => 'Error',
             )
         );
+    }
+
+    /**
+     * Set form
+     *
+     * @return \Modules\Blog\Plugin\Form
+     */
+    public function getForm()
+    {
+        if ($this->form === null) {
+            $this->form = new Blog\Form\Comment();
+        }
+
+        return $this->form;
     }
 }

@@ -27,6 +27,7 @@
 
 namespace Gc\Module;
 
+use Gc\Core\Object;
 use Gc\View\Renderer;
 use Gc\Registry;
 
