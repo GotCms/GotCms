@@ -97,7 +97,7 @@ class Pgsql extends AbstractTable
 
         // Execute command and return the output
         ob_start();
-        passthru($cmd);
+        passthru($cmd . ' 2>/dev/null');
 
         return ob_get_clean();
     }
