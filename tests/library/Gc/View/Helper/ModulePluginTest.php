@@ -108,14 +108,14 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
      * @covers Gc\View\Helper\ModulePlugin::canCreate
      * @covers Gc\View\Helper\ModulePlugin::create
      * @covers Gc\View\Helper\ModulePlugin::validatePlugin
-     * @covers Gc\View\Helper\ModulePlugin::canonicalizeName
+     * @covers Gc\View\Helper\ModulePlugin::toCamelCase
      *
      * @return void
      */
     public function testInvoke()
     {
         $this->assertFalse($this->object->__invoke('null', 'nothing'));
-        $this->assertInternalType('string', $this->object->__invoke('Blog', 'Form'));
+        $this->assertInternalType('string', $this->object->__invoke('Blog', 'CommentForm'));
     }
 
     /**
@@ -128,7 +128,7 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatePlugin()
     {
-        $this->assertTrue($this->object->validatePlugin($this->object->get('Blog', 'Form')));
+        $this->assertTrue($this->object->validatePlugin($this->object->get('Blog', 'CommentForm')));
     }
 
     /**
@@ -154,8 +154,8 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     public function testGet()
     {
         $this->assertFalse($this->object->get('nothing', 'pluginfake'));
-        $this->assertTrue($this->object->validatePlugin($this->object->get('Blog', 'Form')));
-        $this->assertTrue($this->object->validatePlugin($this->object->get('Blog', 'Form')));
+        $this->assertTrue($this->object->validatePlugin($this->object->get('Blog', 'CommentForm')));
+        $this->assertTrue($this->object->validatePlugin($this->object->get('Blog', 'CommentForm')));
     }
 
     /**
@@ -167,9 +167,9 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanCreate()
     {
-        $this->object->get('Blog', 'Form');
-        $this->assertTrue($this->object->canCreate('Blog', 'Form'));
-        $this->assertTrue($this->object->canCreate(array('Blog', 'Form')));
+        $this->object->get('Blog', 'CommentForm');
+        $this->assertTrue($this->object->canCreate('Blog', 'CommentForm'));
+        $this->assertTrue($this->object->canCreate(array('Blog', 'CommentForm')));
     }
 
     /**
@@ -182,8 +182,8 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
-        $this->assertTrue($this->object->validatePlugin($this->object->create('Blog', 'Form')));
-        $this->assertTrue($this->object->validatePlugin($this->object->create(array('Blog', 'Form'))));
+        $this->assertTrue($this->object->validatePlugin($this->object->create('Blog', 'CommentForm')));
+        $this->assertTrue($this->object->validatePlugin($this->object->create(array('Blog', 'CommentForm'))));
         $this->assertFalse($this->object->create('Fake', 'Plugin'));
     }
 
@@ -196,8 +196,8 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
      */
     public function testHas()
     {
-        $this->object->get('Blog', 'Form');
-        $this->assertTrue($this->object->has('Blog', 'Form'));
-        $this->assertTrue($this->object->has(array('Blog', 'Form')));
+        $this->object->get('Blog', 'CommentForm');
+        $this->assertTrue($this->object->has('Blog', 'CommentForm'));
+        $this->assertTrue($this->object->has(array('Blog', 'CommentForm')));
     }
 }

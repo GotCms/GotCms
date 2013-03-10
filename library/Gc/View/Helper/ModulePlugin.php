@@ -44,11 +44,11 @@ use Gc\Registry;
 class ModulePlugin extends AbstractHelper
 {
     /**
-     * Lookup for canonicalized names.
+     * Lookup for camel case names.
      *
      * @var array
      */
-    protected $canonicalNames = array();
+    protected $camelCaseNames = array();
 
     /**
      * Registered services and cached values
@@ -56,11 +56,6 @@ class ModulePlugin extends AbstractHelper
      * @var array
      */
     protected $instances = array();
-
-    /**
-     * @var array map of characters to be replaced through strtr
-     */
-    protected $canonicalNamesReplacements = array('-' => '', '_' => '', ' ' => '', '\\' => '', '/' => '');
 
     /**
      * Script parameter
@@ -128,7 +123,7 @@ class ModulePlugin extends AbstractHelper
      */
     public function get($module_name, $plugin_name)
     {
-        $plugin_name = $this->canonicalizeName($plugin_name);
+        $plugin_name = $this->toCamelCase($plugin_name);
         $instance    = null;
 
         if (isset($this->instances[$module_name][$plugin_name])) {
@@ -155,14 +150,18 @@ class ModulePlugin extends AbstractHelper
      *
      * @return string
      */
-    protected function canonicalizeName($name)
+    protected function toCamelCase($name)
     {
-        if (isset($this->canonicalNames[$name])) {
-            return $this->canonicalNames[$name];
+        if (isset($this->camelCaseNames[$name])) {
+            return $this->camelCaseNames[$name];
         }
 
+        $result  = str_replace(array('.', '-', '_'), ' ', $name);
+        $result  = ucwords($result);
+        $result  = str_replace(' ', '', $result);
+
         // this is just for performance instead of using str_replace
-        return $this->canonicalNames[$name] = ucfirst(strtolower(strtr($name, $this->canonicalNamesReplacements)));
+        return $this->camelCaseNames[$name] = $result;
     }
 
 
@@ -179,16 +178,12 @@ class ModulePlugin extends AbstractHelper
         if (is_array($module_name)) {
             list($module_name, $plugin_name) = $module_name;
         } else {
-            $plugin_name = $this->canonicalizeName($plugin_name);
+            $plugin_name = $this->toCamelCase($plugin_name);
         }
 
         if (isset($this->instances[$module_name][$plugin_name])
         ) {
             return true;
-        }
-
-        if (!isset($this->instances[$module_name])) {
-            $this->instances[$module_name] = array();
         }
 
         if (ModuleModel::fromName($module_name)) {
@@ -214,10 +209,14 @@ class ModulePlugin extends AbstractHelper
         if (is_array($module_name)) {
             list($module_name, $plugin_name) = $module_name;
         } else {
-            $plugin_name = $this->canonicalizeName($plugin_name);
+            $plugin_name = $this->toCamelCase($plugin_name);
         }
 
         if ($this->canCreate($module_name, $plugin_name)) {
+            if (!isset($this->instances[$module_name])) {
+                $this->instances[$module_name] = array();
+            }
+
             $class_name = 'Modules\\' . $module_name . '\\Plugin\\' . $plugin_name;
             $plugin     = new $class_name();
             if ($this->validatePlugin($plugin)) {
@@ -242,7 +241,7 @@ class ModulePlugin extends AbstractHelper
         if (is_array($module_name)) {
             list($module_name, $plugin_name) = $module_name;
         } else {
-            $plugin_name = $this->canonicalizeName($plugin_name);
+            $plugin_name = $this->toCamelCase($plugin_name);
         }
 
         if ($this->canCreate($module_name, $plugin_name)) {

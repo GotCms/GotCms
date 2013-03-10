@@ -46,10 +46,10 @@ use Zend\View\Renderer\PhpRenderer;
  * @category Gc_Tests
  * @package  Modules
  */
-class FormTest extends \PHPUnit_Framework_TestCase
+class CommentFormTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Form
+     * @var CommentForm
      */
     protected $object;
 
@@ -177,7 +177,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->object = new Form;
+        $this->object = new CommentForm;
 
         $this->module = ModuleModel::fromArray(
             array(
@@ -219,7 +219,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Plugin\Form::init
+     * @covers Modules\Blog\Plugin\CommentForm::init
      *
      * @return void
      */
@@ -230,7 +230,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Plugin\Form::__invoke
+     * @covers Modules\Blog\Plugin\CommentForm::__invoke
      *
      * @return void
      */
@@ -242,8 +242,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Plugin\Form::__invoke
-     * @covers Modules\Blog\Plugin\Form::getForm
+     * @covers Modules\Blog\Plugin\CommentForm::__invoke
+     * @covers Modules\Blog\Plugin\CommentForm::getForm
      *
      * @return void
      */
