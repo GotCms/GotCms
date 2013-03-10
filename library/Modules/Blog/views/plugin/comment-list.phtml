@@ -1,0 +1,25 @@
+<h3 id="comments_list">Comments</h3>
+<div class="hr dotted clearfix">&nbsp;</div>
+<?php if(empty($this->comments)): ?>
+    <p>No comments</p>
+<?php else: ?>
+    <ol class="commentlist">
+        <?php foreach($this->comments as $comment): ?>
+            <li class="comment">
+                <div class="comment_content">
+                    <div class="clearfix">
+                        <?php if(!empty($comment['show_email'])): ?>
+                            <cite class="author_name"><a href="mailto:<?php echo $this->escapeHtml($comment['email']); ?>"><?php echo $this->escapeHtml($comment['username']); ?></a></cite>
+                        <?php else: ?>
+                            <cite class="author_name"><?php echo $this->escapeHtml($comment['username']); ?></cite>
+                        <?php endif; ?>
+                        <div class="comment-meta commentmetadata"><?php echo $this->escapeHtml(date('Y-m-d \a\t h:i:s A', strtotime($comment['created_at']))); ?></div>
+                    </div>
+                    <div class="comment_text">
+                        <p><?php echo $this->escapeHtml($comment['message']); ?></p>
+                    </div>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ol>
+<?php endif; ?>
