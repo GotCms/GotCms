@@ -34,7 +34,7 @@ error_reporting(E_ALL | E_STRICT);
  * Determine the root, library, and tests directories of the framework
  * distribution.
  */
-
+require_once 'PHPUnit/Autoload.php';
 chdir(dirname(__DIR__));
 $gc_root    = getcwd();
 $zf_library = $gc_root . '/vendor';
