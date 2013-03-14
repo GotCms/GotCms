@@ -17,7 +17,19 @@ else
         class=`echo "${2%.*}" | sed 's/\\//\\\\/g'`
         classTest=`echo $class"Test"`
         file="${2%.*}"$ext
-        fileTest="${2%.*}Test"$ext
+        srcFileTest="${2%.*}Test"$ext
+        if [[ "$1" == "module" ]]
+        then
+            fileTest=$(echo "${2%.*}Test"$ext | awk -F'/src/' '{ print $2 }')
+        else
+            fileTest=$srcFileTest
+        fi
+
+        if [[ -z "$fileTest" ]]
+        then
+            exit
+        fi
+
         destination_directory=$pwd/$1
         source_directory=$pwd/../$1
 
@@ -47,7 +59,7 @@ else
                         mkdir -p $(dirname $destination_directory/$fileTest)
                     fi
 
-                    mv $source_directory/$fileTest $destination_directory/$fileTest
+                    mv $source_directory/$srcFileTest $destination_directory/$fileTest
 
                     cd $pwd
                     echo "done."
