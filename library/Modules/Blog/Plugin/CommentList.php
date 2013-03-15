@@ -54,7 +54,7 @@ class CommentList extends AbstractPlugin
     public function __invoke()
     {
         $comment_table = new \Modules\Blog\Model\Comment();
-        $comments = $comment_table->getList($this->layout()->currentDocument->getId());
+        $comments      = $comment_table->getList($this->layout()->currentDocument->getId());
 
         return $this->addPath(__DIR__ . '/../views')->render(
             'plugin/comment-list.phtml',

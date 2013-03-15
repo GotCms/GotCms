@@ -45,6 +45,8 @@ class InstallTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,68 +56,90 @@ class InstallTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Application\Form\Install::init
      * @todo   Implement testInit().
+     *
+     * @return void
      */
     public function testInit()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Application\Form\Install::lang
      * @todo   Implement testLang().
+     *
+     * @return void
      */
     public function testLang()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Application\Form\Install::license
      * @todo   Implement testLicense().
+     *
+     * @return void
      */
     public function testLicense()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Application\Form\Install::database
      * @todo   Implement testDatabase().
+     *
+     * @return void
      */
     public function testDatabase()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Application\Form\Install::configuration
      * @todo   Implement testConfiguration().
+     *
+     * @return void
      */
     public function testConfiguration()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 }

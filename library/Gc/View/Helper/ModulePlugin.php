@@ -156,9 +156,9 @@ class ModulePlugin extends AbstractHelper
             return $this->camelCaseNames[$name];
         }
 
-        $result  = str_replace(array('.', '-', '_'), ' ', $name);
-        $result  = ucwords($result);
-        $result  = str_replace(' ', '', $result);
+        $result = str_replace(array('.', '-', '_'), ' ', $name);
+        $result = ucwords($result);
+        $result = str_replace(' ', '', $result);
 
         // this is just for performance instead of using str_replace
         return $this->camelCaseNames[$name] = $result;

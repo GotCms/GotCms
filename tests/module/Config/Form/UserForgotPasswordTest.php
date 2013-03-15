@@ -45,6 +45,8 @@ class UserForgotPasswordTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,44 +56,58 @@ class UserForgotPasswordTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Config\Form\UserForgotPassword::init
      * @todo   Implement testInit().
+     *
+     * @return void
      */
     public function testInit()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Config\Form\UserForgotPassword::initEmail
      * @todo   Implement testInitEmail().
+     *
+     * @return void
      */
     public function testInitEmail()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Config\Form\UserForgotPassword::initResetForm
      * @todo   Implement testInitResetForm().
+     *
+     * @return void
      */
     public function testInitResetForm()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 }

@@ -39,13 +39,23 @@ use Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
  */
 class IndexControllerTest extends AbstractHttpControllerTestCase
 {
+    /**
+     * Sets up the fixture, for example, opens a network connection.
+     * This method is called before a test is executed.
+     *
+     * @return void
+     */
     public function setUp()
     {
         $this->init();
     }
 
+
     /**
-     * Display dashboard
+     * Test
+     *
+     * @covers Admin\Controller\IndexController::indexAction
+     * @todo   Implement testIndexAction().
      *
      * @return void
      */

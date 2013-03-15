@@ -45,6 +45,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,68 +56,90 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Config\Form\Config::init
      * @todo   Implement testInit().
+     *
+     * @return void
      */
     public function testInit()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Config\Form\Config::initGeneral
      * @todo   Implement testInitGeneral().
+     *
+     * @return void
      */
     public function testInitGeneral()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Config\Form\Config::initSystem
      * @todo   Implement testInitSystem().
+     *
+     * @return void
      */
     public function testInitSystem()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Config\Form\Config::initServer
      * @todo   Implement testInitServer().
+     *
+     * @return void
      */
     public function testInitServer()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Config\Form\Config::setValues
      * @todo   Implement testSetValues().
+     *
+     * @return void
      */
     public function testSetValues()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 }

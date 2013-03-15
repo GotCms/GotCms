@@ -45,6 +45,8 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp()
     {
@@ -54,56 +56,74 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
+     *
+     * @return void
      */
     protected function tearDown()
     {
     }
 
     /**
+     * Test
+     *
      * @covers Development\Form\DocumentType::init
      * @todo   Implement testInit().
+     *
+     * @return void
      */
     public function testInit()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Development\Form\DocumentType::addProperty
      * @todo   Implement testAddProperty().
+     *
+     * @return void
      */
     public function testAddProperty()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Development\Form\DocumentType::addTab
      * @todo   Implement testAddTab().
+     *
+     * @return void
      */
     public function testAddTab()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
     /**
+     * Test
+     *
      * @covers Development\Form\DocumentType::setValues
      * @todo   Implement testSetValues().
+     *
+     * @return void
      */
     public function testSetValues()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 }
