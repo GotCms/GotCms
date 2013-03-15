@@ -4,67 +4,77 @@ if [[ $# -lt 2 ]]
 then
     echo >&2 "You must specify a directory and filename name!"
 else
-    ext=".php"
-    pwd=`pwd`
-    deep=`echo $2 | sed 's/\// /g' | sed 's/\\//\/ /g' | wc -w`
-
-    if [[ $deep -lt 2 ]]
+    if [[ "$2" == "all" ]]
     then
-        echo >&2 "Filename name $2 invalid. Exiting.."
-    else
-        dir=`echo $2 | cut -f -$(($deep-1)) -d /`
-
-        class=`echo "${2%.*}" | sed 's/\\//\\\\/g'`
-        classTest=`echo $class"Test"`
-        file="${2%.*}"$ext
-        srcFileTest="${2%.*}Test"$ext
         if [[ "$1" == "module" ]]
         then
-            fileTest=$(echo "${2%.*}Test"$ext | awk -F'/src/' '{ print $2 }')
+            LISTING=`find ../module/ -name "*.php" | awk '{print substr($1, 11);}'`
         else
-            fileTest=$srcFileTest
+            LISTING=`find ../library/ -name "*.php" | awk '{print substr($1, 12);}'`
         fi
 
-        if [[ -z "$fileTest" ]]
-        then
-            exit
-        fi
+        FILES=(`echo $LISTING`)
+    else
+        FILES=(`echo $2`)
+    fi
 
-        destination_directory=$pwd/$1
-        source_directory=$pwd/../$1
-
-        if [[ -f $destination_directory/$fileTest ]]
+    EXT=".php"
+    PWD=`pwd`
+    for FILENAME in "${FILES[@]}"
+    do
+        DEEP=`echo $FILENAME | sed 's/\// /g' | sed 's/\\//\/ /g' | wc -w`
+        if [[ $DEEP -lt 2 ]]
         then
-            echo "Test $file already exists, exiting.."
+            echo >&2 "Filename name $FILENAME invalid. Exiting.."
         else
-            cd ../$1/
-
+            CLASS_SRC=`echo "${FILENAME%.*}" | sed 's/\\//\\\\/g'`
+            FILE_TEST_SRC="${FILENAME%.*}Test"$EXT
             if [[ "$1" == "module" ]]
             then
-                class=$(echo $class| awk -F'\\\\src\\\\' '{ print $2 }')
+                CLASS_TEST_DST=$(echo $FILE_TEST_SRC | awk -F'/src/' '{ print $2 }')
+            else
+                CLASS_TEST_DST=$FILE_TEST_SRC
             fi
 
-            if [ ! -z "$class" ]
+            if [[ -z "$CLASS_TEST_DST" ]]
             then
-                phpunit-skelgen --bootstrap $pwd/Bootstrap.php --test -- "$class" "$source_directory/$file"
+                continue;
+            fi
 
-                if [[ $? -ne 0 ]]
+            SRC_DIR=$PWD/../$1
+            DST_DIR=$PWD/$1
+
+            if [[ -f $DST_DIR/$CLASS_TEST_DST ]]
+            then
+                echo "Test $FILENAME already exists, exiting.."
+            else
+                if [[ "$1" == "module" ]]
                 then
-                    echo >&2 "PHPUnit returned an error when generating the skeleton"
-                    cd $pwd
-                    echo "Exiting.."
-                else
-                    if [[ ! -d $(dirname $destination_directory/$fileTest) ]]
+                    CLASS_SRC=$(echo $CLASS_SRC | awk -F'\\\\src\\\\' '{ print $2 }')
+                fi
+                if [ ! -z "$CLASS_SRC" ]
+                then
+
+                    phpunit-skelgen --bootstrap $PWD/Bootstrap.php --test -- "$CLASS_SRC" "$SRC_DIR/$FILENAME"
+
+                    if [[ $? -ne 0 ]]
                     then
-                        mkdir -p $(dirname $destination_directory/$fileTest)
+                        echo >&2 "PHPUnit returned an error when generating the skeleton"
+                        cd $PWD
+                        echo "Exiting.."
+                    else
+                        if [[ ! -d $(dirname $DST_DIR/$CLASS_TEST_DST) ]]
+                        then
+                            mkdir -p $(dirname $DST_DIR/$CLASS_TEST_DST)
+                        fi
+
+                        mv $SRC_DIR/$FILE_TEST_SRC $DST_DIR/$CLASS_TEST_DST
+
+                        cd $PWD
+                        echo "done."
                     fi
-
-                    mv $source_directory/$srcFileTest $destination_directory/$fileTest
-
-                    cd $pwd
-                    echo "done."
                 fi
             fi
         fi
-    fi
+    done
 fi
