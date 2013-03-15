@@ -28,7 +28,7 @@
 namespace Development\Form;
 
 use Gc\Form\AbstractForm;
-use Gc\Datatype;
+use Gc\Datatype\Collection as DatatypeCollection;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\DocumentType\Collection as DocumentTypeCollection;
 use Gc\Media\Icon;
@@ -71,7 +71,7 @@ class DocumentType extends AbstractForm
     public function init()
     {
         $this->setInputFilter(new InputFilter());
-        $this->datatypeCollection = new Datatype\Collection();
+        $this->datatypeCollection = new DatatypeCollection();
         $this->viewCollection     = new View\Collection();
 
         $this->getInfos();

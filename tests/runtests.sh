@@ -9,7 +9,7 @@ while [ -n "$1" ] ; do
      PHPUNIT_GROUPS=""
      break ;;
 
-    Gc|Datatypes|Modules)
+    Gc|Datatypes|Modules|ZfModules)
      PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}$1"
      shift ;;
     *)
