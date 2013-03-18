@@ -50,12 +50,10 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->init();
     }
 
-
     /**
      * Test
      *
      * @covers Admin\Controller\IndexController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
@@ -68,5 +66,28 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('AdminController');
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('admin');
+    }
+
+
+    /**
+     * Test
+     *
+     * @covers Admin\Controller\IndexController::saveDashboardAction
+     *
+     * @return void
+     */
+    public function testSaveDashboardAction()
+    {
+        $this->dispatch(
+            '/admin/dashboard/save',
+            'POST',
+            array('sortable1' => 'fast-links,blog', 'sortable2' => 'stats')
+        );
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Admin');
+        $this->assertControllerName('AdminController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('dashboardSave');
     }
 }

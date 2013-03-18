@@ -13,6 +13,7 @@
 - Update jquery, jquery ui and modernizr (https://github.com/PierreRambaud/GotCms/issues/39)
 - Composer support (https://github.com/PierreRambaud/GotCms/issues/35)
 - Add plugin in Modules (https://github.com/PierreRambaud/GotCms/issues/31)
+- Unit testing for ZF modules (https://github.com/PierreRambaud/GotCms/issues/36)
 
 ## 0.1.4 (12 Feb 2013):
 - Bug with HTTP 404 (undefined variable view)

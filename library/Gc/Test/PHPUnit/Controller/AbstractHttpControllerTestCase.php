@@ -39,6 +39,11 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as ZendAbstractH
 class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
 {
     /**
+     * @var Gc\User\Model
+     */
+    protected $user;
+
+    /**
      * Initialize test
      *
      * @return void
@@ -64,5 +69,15 @@ class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
         $this->setApplicationConfig(
             include GC_APPLICATION_PATH . '/config/application.config.php'
         );
+    }
+
+    /**
+     * Tear down
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        $this->user->delete();
     }
 }

@@ -54,15 +54,17 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Statistics\Controller\IndexController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
     public function testIndexAction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->dispatch('/admin/statistics');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Statistics');
+        $this->assertControllerName('StatisticsController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('statistics');
     }
 }
