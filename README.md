@@ -9,7 +9,7 @@ Please read the LICENSE.txt file for the exact license details that apply to Got
 
 ## Updates in 0.1.5
 
-Please see CHANGELOG.md.
+Please see [CHANGELOG.md](CHANGELOG.md).
 
 ## Usage
 
