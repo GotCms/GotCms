@@ -67,15 +67,11 @@ class ViewTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Development\Form\View::init
-     * @todo   Implement testInit().
      *
      * @return void
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->init());
     }
 }
