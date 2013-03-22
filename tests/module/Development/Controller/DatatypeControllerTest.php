@@ -54,7 +54,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DatatypeController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DatatypeController::createAction
-     * @todo   Implement testCreateAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DatatypeController::editAction
-     * @todo   Implement testEditAction().
      *
      * @return void
      */
@@ -102,7 +99,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DatatypeController::deleteAction
-     * @todo   Implement testDeleteAction().
      *
      * @return void
      */

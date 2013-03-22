@@ -61,37 +61,30 @@ class RoleTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * Test
      *
      * @covers Config\Form\Role::init
-     * @todo   Implement testInit().
      *
      * @return void
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->init());
     }
 
     /**
      * Test
      *
      * @covers Config\Form\Role::initPermissions
-     * @todo   Implement testInitPermissions().
      *
      * @return void
      */
     public function testInitPermissions()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->initPermissions());
     }
 }

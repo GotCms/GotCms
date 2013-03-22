@@ -54,7 +54,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\TranslationController::init
-     * @todo   Implement testInit().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\TranslationController::createAction
-     * @todo   Implement testCreateAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\TranslationController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */

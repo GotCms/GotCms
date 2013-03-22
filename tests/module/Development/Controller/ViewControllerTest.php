@@ -54,7 +54,6 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ViewController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ViewController::createAction
-     * @todo   Implement testCreateAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ViewController::editAction
-     * @todo   Implement testEditAction().
      *
      * @return void
      */
@@ -102,7 +99,6 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ViewController::deleteAction
-     * @todo   Implement testDeleteAction().
      *
      * @return void
      */
@@ -118,7 +114,6 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ViewController::uploadAction
-     * @todo   Implement testUploadAction().
      *
      * @return void
      */
@@ -134,7 +129,6 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ViewController::downloadAction
-     * @todo   Implement testDownloadAction().
      *
      * @return void
      */

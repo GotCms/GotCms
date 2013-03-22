@@ -54,7 +54,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\CmsController::editGeneralAction
-     * @todo   Implement testEditGeneralAction().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\CmsController::editSystemAction
-     * @todo   Implement testEditSystemAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\CmsController::editServerAction
-     * @todo   Implement testEditServerAction().
      *
      * @return void
      */
@@ -102,7 +99,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\CmsController::editAction
-     * @todo   Implement testEditAction().
      *
      * @return void
      */
@@ -118,7 +114,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\CmsController::updateAction
-     * @todo   Implement testUpdateAction().
      *
      * @return void
      */

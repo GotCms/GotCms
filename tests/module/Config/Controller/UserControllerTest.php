@@ -54,7 +54,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\UserController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\UserController::loginAction
-     * @todo   Implement testLoginAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\UserController::forgotPasswordAction
-     * @todo   Implement testForgotPasswordAction().
      *
      * @return void
      */
@@ -102,7 +99,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\UserController::logoutAction
-     * @todo   Implement testLogoutAction().
      *
      * @return void
      */
@@ -118,7 +114,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\UserController::createAction
-     * @todo   Implement testCreateAction().
      *
      * @return void
      */
@@ -134,7 +129,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\UserController::deleteAction
-     * @todo   Implement testDeleteAction().
      *
      * @return void
      */
@@ -150,7 +144,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\UserController::editAction
-     * @todo   Implement testEditAction().
      *
      * @return void
      */
@@ -166,7 +159,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\UserController::forbiddenAction
-     * @todo   Implement testForbiddenAction().
      *
      * @return void
      */

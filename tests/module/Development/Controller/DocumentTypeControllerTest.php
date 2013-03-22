@@ -54,7 +54,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DocumentTypeController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DocumentTypeController::createAction
-     * @todo   Implement testCreateAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DocumentTypeController::editAction
-     * @todo   Implement testEditAction().
      *
      * @return void
      */
@@ -102,7 +99,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DocumentTypeController::importTabAction
-     * @todo   Implement testImportTabAction().
      *
      * @return void
      */
@@ -118,7 +114,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DocumentTypeController::deleteAction
-     * @todo   Implement testDeleteAction().
      *
      * @return void
      */
@@ -134,7 +129,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DocumentTypeController::addTabAction
-     * @todo   Implement testAddTabAction().
      *
      * @return void
      */
@@ -150,7 +144,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DocumentTypeController::deleteTabAction
-     * @todo   Implement testDeleteTabAction().
      *
      * @return void
      */
@@ -166,7 +159,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DocumentTypeController::addPropertyAction
-     * @todo   Implement testAddPropertyAction().
      *
      * @return void
      */
@@ -182,7 +174,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\DocumentTypeController::deletePropertyAction
-     * @todo   Implement testDeletePropertyAction().
      *
      * @return void
      */

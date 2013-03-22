@@ -54,7 +54,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\RoleController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\RoleController::createAction
-     * @todo   Implement testCreateAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\RoleController::deleteAction
-     * @todo   Implement testDeleteAction().
      *
      * @return void
      */
@@ -102,7 +99,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\RoleController::editAction
-     * @todo   Implement testEditAction().
      *
      * @return void
      */

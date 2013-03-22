@@ -67,79 +67,59 @@ class InstallTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Application\Form\Install::init
-     * @todo   Implement testInit().
      *
      * @return void
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->init());
     }
 
     /**
      * Test
      *
      * @covers Application\Form\Install::lang
-     * @todo   Implement testLang().
      *
      * @return void
      */
     public function testLang()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->lang());
     }
 
     /**
      * Test
      *
      * @covers Application\Form\Install::license
-     * @todo   Implement testLicense().
      *
      * @return void
      */
     public function testLicense()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->license());
     }
 
     /**
      * Test
      *
      * @covers Application\Form\Install::database
-     * @todo   Implement testDatabase().
      *
      * @return void
      */
     public function testDatabase()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->database());
     }
 
     /**
      * Test
      *
      * @covers Application\Form\Install::configuration
-     * @todo   Implement testConfiguration().
      *
      * @return void
      */
     public function testConfiguration()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->configuration());
     }
 }

@@ -61,53 +61,42 @@ class UserForgotPasswordTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * Test
      *
      * @covers Config\Form\UserForgotPassword::init
-     * @todo   Implement testInit().
      *
      * @return void
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->init());
     }
 
     /**
      * Test
      *
      * @covers Config\Form\UserForgotPassword::initEmail
-     * @todo   Implement testInitEmail().
      *
      * @return void
      */
     public function testInitEmail()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->initEmail());
     }
 
     /**
      * Test
      *
      * @covers Config\Form\UserForgotPassword::initResetForm
-     * @todo   Implement testInitResetForm().
      *
      * @return void
      */
     public function testInitResetForm()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->initResetForm());
     }
 }

@@ -54,7 +54,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\MediaController::init
-     * @todo   Implement testInit().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\MediaController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\MediaController::uploadAction
-     * @todo   Implement testUploadAction().
      *
      * @return void
      */
@@ -102,7 +99,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\MediaController::removeAction
-     * @todo   Implement testRemoveAction().
      *
      * @return void
      */
@@ -118,7 +114,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\MediaController::connectorAction
-     * @todo   Implement testConnectorAction().
      *
      * @return void
      */

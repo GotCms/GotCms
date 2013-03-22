@@ -54,7 +54,6 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ScriptController::indexAction
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ScriptController::createAction
-     * @todo   Implement testCreateAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ScriptController::editAction
-     * @todo   Implement testEditAction().
      *
      * @return void
      */
@@ -102,7 +99,6 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ScriptController::deleteAction
-     * @todo   Implement testDeleteAction().
      *
      * @return void
      */
@@ -118,7 +114,6 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ScriptController::uploadAction
-     * @todo   Implement testUploadAction().
      *
      * @return void
      */
@@ -134,7 +129,6 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Development\Controller\ScriptController::downloadAction
-     * @todo   Implement testDownloadAction().
      *
      * @return void
      */

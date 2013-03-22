@@ -54,7 +54,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\DocumentController::init
-     * @todo   Implement testInit().
      *
      * @return void
      */
@@ -70,7 +69,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\DocumentController::createAction
-     * @todo   Implement testCreateAction().
      *
      * @return void
      */
@@ -86,7 +84,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\DocumentController::deleteAction
-     * @todo   Implement testDeleteAction().
      *
      * @return void
      */
@@ -102,7 +99,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\DocumentController::editAction
-     * @todo   Implement testEditAction().
      *
      * @return void
      */
@@ -118,7 +114,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\DocumentController::copyAction
-     * @todo   Implement testCopyAction().
      *
      * @return void
      */
@@ -134,7 +129,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\DocumentController::cutAction
-     * @todo   Implement testCutAction().
      *
      * @return void
      */
@@ -150,7 +144,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\DocumentController::pasteAction
-     * @todo   Implement testPasteAction().
      *
      * @return void
      */
@@ -166,7 +159,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\DocumentController::refreshTreeviewAction
-     * @todo   Implement testRefreshTreeviewAction().
      *
      * @return void
      */
@@ -182,7 +174,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Content\Controller\DocumentController::sortOrderAction
-     * @todo   Implement testSortOrderAction().
      *
      * @return void
      */

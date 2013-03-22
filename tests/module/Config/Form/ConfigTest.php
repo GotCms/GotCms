@@ -61,85 +61,76 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * Test
      *
      * @covers Config\Form\Config::init
-     * @todo   Implement testInit().
      *
      * @return void
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->init());
     }
 
     /**
      * Test
      *
      * @covers Config\Form\Config::initGeneral
-     * @todo   Implement testInitGeneral().
      *
      * @return void
      */
     public function testInitGeneral()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertInstanceOf('Config\Form\Config', $this->object->initGeneral());
     }
 
     /**
      * Test
      *
      * @covers Config\Form\Config::initSystem
-     * @todo   Implement testInitSystem().
      *
      * @return void
      */
     public function testInitSystem()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertInstanceOf('Config\Form\Config', $this->object->initSystem());
     }
 
     /**
      * Test
      *
      * @covers Config\Form\Config::initServer
-     * @todo   Implement testInitServer().
      *
      * @return void
      */
     public function testInitServer()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertInstanceOf('Config\Form\Config', $this->object->initServer());
     }
 
     /**
      * Test
      *
      * @covers Config\Form\Config::setValues
-     * @todo   Implement testSetValues().
      *
      * @return void
      */
     public function testSetValues()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $this->object->initServer();
+        $this->assertNull(
+            $this->object->setValues(
+                array(
+                    array(
+                        'identifier' => 'mail_from_name',
+                        'value' => 'Pierre Rambaud'
+                    )
+                )
+            )
         );
     }
 }

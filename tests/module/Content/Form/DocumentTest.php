@@ -61,29 +61,25 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * Test
      *
      * @covers Content\Form\Document::init
-     * @todo   Implement testInit().
      *
      * @return void
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->init());
     }
 
     /**
      * Test
      *
      * @covers Content\Form\Document::isValid
-     * @todo   Implement testIsValid().
      *
      * @return void
      */
@@ -99,7 +95,6 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Content\Form\Document::load
-     * @todo   Implement testLoad().
      *
      * @return void
      */

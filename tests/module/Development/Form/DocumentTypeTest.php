@@ -61,29 +61,29 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->objet);
     }
 
     /**
      * Test
      *
      * @covers Development\Form\DocumentType::init
-     * @todo   Implement testInit().
+     * @covers Development\Form\DocumentType::getInfos
+     * @covers Development\Form\DocumentType::getProperties
+     * @covers Development\Form\DocumentType::getTabs
+     * @covers Development\Form\DocumentType::getViews
      *
      * @return void
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->init());
     }
 
     /**
      * Test
      *
      * @covers Development\Form\DocumentType::addProperty
-     * @todo   Implement testAddProperty().
      *
      * @return void
      */
@@ -99,7 +99,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Development\Form\DocumentType::addTab
-     * @todo   Implement testAddTab().
      *
      * @return void
      */
@@ -115,7 +114,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Development\Form\DocumentType::setValues
-     * @todo   Implement testSetValues().
      *
      * @return void
      */
