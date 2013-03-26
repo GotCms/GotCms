@@ -31,6 +31,7 @@ use Gc\Mvc\Controller\Action;
 use Development\Form\Datatype as DatatypeForm;
 use Gc\Datatype;
 use Zend\View\Model\ViewModel;
+use Exception;
 
 /**
  * Datatype controller
@@ -79,13 +80,10 @@ class DatatypeController extends Action
             } else {
                 $datatype->addData($datatype_form->getInputFilter()->getValues());
                 try {
-                    if ($id = $datatype->save()) {
-                        $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
-                        return $this->redirect()->toRoute('datatypeEdit', array('id' => $id));
-                    } else {
-                        throw new \Gc\Core\Exception('Error during insert new datatype');
-                    }
-                } catch (\Exception $e) {
+                    $id = $datatype->save();
+                    $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
+                    return $this->redirect()->toRoute('datatypeEdit', array('id' => $id));
+                } catch (Exception $e) {
                     throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
             }
@@ -139,7 +137,7 @@ class DatatypeController extends Action
                         $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
                         return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
                     }
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
 
@@ -159,10 +157,8 @@ class DatatypeController extends Action
     public function deleteAction()
     {
         $datatype = Datatype\Model::fromId($this->getRouteMatch()->getParam('id', null));
-        if (!empty($datatype)) {
-            if ($datatype->delete()) {
-                return $this->returnJson(array('success' => true, 'message' => 'This datatype has been deleted'));
-            }
+        if (!empty($datatype) and $datatype->delete()) {
+            return $this->returnJson(array('success' => true, 'message' => 'This datatype has been deleted'));
         }
 
         return $this->returnJson(array('success' => false, 'message' => 'Datatype does not exists'));

@@ -33,6 +33,7 @@ use Gc\Mvc\Controller\Action;
 use Zend\Validator;
 use Gc\Property;
 use Gc\Tab;
+use Exception;
 
 /**
  * Document type controller
@@ -392,10 +393,8 @@ class DocumentTypeController extends Action
     public function deleteAction()
     {
         $document_type = DocumentType\Model::fromId($this->getRouteMatch()->getParam('id', null));
-        if (!empty($document_type)) {
-            if ($document_type->delete()) {
-                return $this->returnJson(array('success' => true, 'message' => 'This document type has been deleted'));
-            }
+        if (!empty($document_type) and $document_type->delete()) {
+            return $this->returnJson(array('success' => true, 'message' => 'This document type has been deleted'));
         }
 
         return $this->returnJson(array('success' => false, 'message' => 'Document type does not exists'));

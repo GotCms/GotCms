@@ -140,10 +140,8 @@ class LayoutController extends Action
     public function deleteAction()
     {
         $layout = Layout\Model::fromId($this->getRouteMatch()->getParam('id', null));
-        if (!empty($layout)) {
-            if ($layout->delete()) {
-                return $this->returnJson(array('success' => true, 'message' => 'This layout has been deleted'));
-            }
+        if (!empty($layout) and $layout->delete()) {
+            return $this->returnJson(array('success' => true, 'message' => 'This layout has been deleted'));
         }
 
         return $this->returnJson(array('success' => false, 'message' => 'Layout does not exists'));

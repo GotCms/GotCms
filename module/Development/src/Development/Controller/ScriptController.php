@@ -139,10 +139,8 @@ class ScriptController extends Action
     public function deleteAction()
     {
         $script = Script\Model::fromId($this->getRouteMatch()->getParam('id', null));
-        if (!empty($script)) {
-            if ($script->delete()) {
-                return $this->returnJson(array('success' => true, 'message' => 'This script has been deleted'));
-            }
+        if (!empty($script) and $script->delete()) {
+            return $this->returnJson(array('success' => true, 'message' => 'This script has been deleted'));
         }
 
         return $this->returnJson(array('success' => false, 'message' => 'Script does not exists'));

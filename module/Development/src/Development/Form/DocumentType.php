@@ -34,7 +34,7 @@ use Gc\DocumentType\Collection as DocumentTypeCollection;
 use Gc\Media\Icon;
 use Gc\Property;
 use Gc\Tab;
-use Gc\View;
+use Gc\View\Collection as ViewCollection;
 use Zend\Validator\Db;
 use Zend\Form\Element;
 use Zend\InputFilter\InputFilter;
@@ -72,7 +72,7 @@ class DocumentType extends AbstractForm
     {
         $this->setInputFilter(new InputFilter());
         $this->datatypeCollection = new DatatypeCollection();
-        $this->viewCollection     = new View\Collection();
+        $this->viewCollection     = new ViewCollection();
 
         $this->getInfos();
         $this->getViews();

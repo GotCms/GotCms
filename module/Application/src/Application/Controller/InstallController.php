@@ -36,6 +36,7 @@ use Application\Form\Install;
 use Zend\Config\Reader\Ini;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Db\Adapter\Adapter as DbAdapter;
+use Exception;
 
 /**
  * Install controller for module Application
@@ -283,7 +284,7 @@ class InstallController extends Action
                     $session['install'] = $install;
 
                     return $this->redirect()->toRoute('installConfiguration');
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $messages[] = 'Can\'t connect to database';
                     $messages[] = $e->getMessage();
                 }

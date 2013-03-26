@@ -115,7 +115,9 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
             )
         );
         $document_type_model->save();
-        $this->assertNull($this->object->init());
+
+        $form = new DocumentType;
+        $this->assertNull($form->init());
 
         $view_model->delete();
         $document_type_model->delete();
@@ -247,9 +249,67 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValues()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $document_type_model = DocumentTypeModel::fromarray(
+            array(
+                'name' => 'Name',
+                'description' => 'Description',
+                'icon_id' => 1,
+            )
+        );
+
+        $this->object->setValues($document_type_model);
+    }
+
+    /**
+     * Test
+     *
+     * @covers Development\Form\DocumentType::setValues
+     *
+     * @return void
+     */
+    public function testSetValuesFromArray()
+    {
+        $this->object->setValues(
+            array(
+                'tabs' => array(
+                    1 => array(
+                        'id' => 1,
+                        'name' => 'Name',
+                        'description' => 'Description',
+                        'sort_order' => 1,
+                        'document_type_id' => 1,
+                    ),
+                    2 => null,
+                ),
+                'properties' => array(
+                    1 => array(
+                        'name' => 'property',
+                        'identifier' => 'identifier',
+                        'tab' => 1,
+                        'datatype' => 1,
+                        'description' => 'description',
+                        'is_required' => false,
+                        'id' => 1,
+                    ),
+                    2 => null,
+                )
+            )
+        );
+    }
+
+    /**
+     * Test
+     *
+     * @covers Development\Form\DocumentType::setValues
+     *
+     * @return void
+     */
+    public function testSetValuesWithEmptyTabs()
+    {
+        $this->object->setValues(
+            array(
+                'tabs' => array()
+            )
         );
     }
 }

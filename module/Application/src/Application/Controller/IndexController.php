@@ -40,6 +40,7 @@ use Zend\Config\Reader\Xml;
 use Zend\Cache\StorageFactory as CacheStorage;
 use Zend\Navigation\Navigation;
 use Zend\View\Model\ViewModel;
+use Exception;
 
 /**
  * Index controller for module Application
@@ -109,7 +110,7 @@ class IndexController extends Action
         if (!$is_preview and !$is_admin) {
             try {
                 $session->visitorId = $visitor->getVisitorId($session_id);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 //don't care
             }
         }

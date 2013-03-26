@@ -217,10 +217,8 @@ class UserController extends Action
     public function deleteAction()
     {
         $user = User\Model::fromId($this->getRouteMatch()->getParam('id'));
-        if (empty($user) and $user->getRole()->getName() !== Role\Model::PROTECTED_NAME) {
-            if ($user->delete()) {
-                return $this->returnJson(array('success' => true, 'message' => 'The user has been deleted'));
-            }
+        if (empty($user) and $user->getRole()->getName() !== Role\Model::PROTECTED_NAME and $user->delete()) {
+            return $this->returnJson(array('success' => true, 'message' => 'The user has been deleted'));
         }
 
         return $this->returnJson(array('success' => false, 'message' => 'User does not exists'));

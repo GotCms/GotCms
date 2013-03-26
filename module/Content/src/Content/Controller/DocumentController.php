@@ -38,6 +38,7 @@ use Content\Form;
 use Gc\Component;
 use Zend\Form as ZendForm;
 use Zend\Json\Json;
+use Exception;
 
 /**
  * Document controller
@@ -171,7 +172,7 @@ class DocumentController extends Action
                         )
                     );
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
