@@ -38,7 +38,14 @@ return array(
         ),
     ),
     'translator' => array(
-        'locale' => 'en_US',
+        'locale' => 'en_GB',
+        'translation_file_patterns' => array(
+            array(
+                'type'     => 'phparray',
+                'base_dir' => GC_APPLICATION_PATH . '/data/translation',
+                'pattern'  => '%s.php',
+            ),
+        ),
     ),
     'view_manager' => array(
         'display_not_found_reason'  => false,

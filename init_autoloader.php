@@ -59,9 +59,6 @@ if ($zf_path) {
                 'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
             )
         );
-
-        require $zf_path . '/Zend/Stdlib/compatibility/autoload.php';
-        require $zf_path . '/Zend/Session/compatibility/autoload.php';
     }
 }
 

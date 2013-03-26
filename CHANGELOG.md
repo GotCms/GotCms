@@ -8,7 +8,7 @@
 - Backup module failed with pgsql (https://github.com/PierreRambaud/GotCms/issues/27)
 - Disable cache on preview (https://github.com/PierreRambaud/GotCms/issues/29)
 - Flash messages failed in view helper script (https://github.com/PierreRambaud/GotCms/issues/28)
-- Update to Zend Framework 2.1.3
+- Update to Zend Framework 2.1.4
 - Use new GotSniffs based on PSR2 (https://github.com/PierreRambaud/GotCms/issues/38)
 - Update jquery, jquery ui and modernizr (https://github.com/PierreRambaud/GotCms/issues/39)
 - Composer support (https://github.com/PierreRambaud/GotCms/issues/35)
