@@ -54,45 +54,57 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
      * Test
      *
      * @covers Config\Controller\CmsController::editGeneralAction
+     * @covers Config\Controller\CmsController::editAction
      *
      * @return void
      */
     public function testEditGeneralAction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->dispatch('/admin/config/general');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Config');
+        $this->assertControllerName('CmsController');
+        $this->assertControllerClass('CmsController');
+        $this->assertMatchedRouteName('configGeneral');
     }
 
     /**
      * Test
      *
      * @covers Config\Controller\CmsController::editSystemAction
+     * @covers Config\Controller\CmsController::editAction
      *
      * @return void
      */
     public function testEditSystemAction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->dispatch('/admin/config/system');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Config');
+        $this->assertControllerName('CmsController');
+        $this->assertControllerClass('CmsController');
+        $this->assertMatchedRouteName('configSystem');
     }
 
     /**
      * Test
      *
      * @covers Config\Controller\CmsController::editServerAction
+     * @covers Config\Controller\CmsController::editAction
      *
      * @return void
      */
     public function testEditServerAction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->dispatch('/admin/config/server');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Config');
+        $this->assertControllerName('CmsController');
+        $this->assertControllerClass('CmsController');
+        $this->assertMatchedRouteName('configServer');
     }
 
     /**
@@ -104,24 +116,62 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditAction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $this->dispatch(
+            '/admin/config/server',
+            'POST',
+            array(
+                'locale' => 'fr_FR',
+                'mail_from' => 'pierre.rambaud86@gmail.com',
+                'mail_from_name' => 'Pierre Rambaud',
+            )
         );
+        $this->assertResponseStatusCode(302);
+
+        $this->assertModuleName('Config');
+        $this->assertControllerName('CmsController');
+        $this->assertControllerClass('CmsController');
+        $this->assertMatchedRouteName('configServer');
+    }
+
+    /**
+     * Test
+     *
+     * @covers Config\Controller\CmsController::editAction
+     *
+     * @return void
+     */
+    public function testEditActionWithInvalidForm()
+    {
+        $this->dispatch(
+            '/admin/config/server',
+            'POST',
+            array(
+            )
+        );
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Config');
+        $this->assertControllerName('CmsController');
+        $this->assertControllerClass('CmsController');
+        $this->assertMatchedRouteName('configServer');
     }
 
     /**
      * Test
      *
      * @covers Config\Controller\CmsController::updateAction
+     * @covers Config\Controller\CmsController::checkVersion
      *
      * @return void
      */
     public function testUpdateAction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->dispatch('/admin/config/update');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Config');
+        $this->assertControllerName('CmsController');
+        $this->assertControllerClass('CmsController');
+        $this->assertMatchedRouteName('cmsUpdate');
     }
 }
