@@ -130,7 +130,7 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
             array(
                 'lastname' => 'User test',
                 'firstname' => 'User test',
-                'email' => 'test@test.com',
+                'email' => 'pierre.rambaud86@gmail.com',
                 'login' => 'test',
                 'user_acl_role_id' => 1,
             )
@@ -293,7 +293,7 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
         $data    = array(
             'show_email' => true,
             'username'   => 'username',
-            'email'      => 'test@test.com',
+            'email'      => 'pierre.rambaud86@gmail.com',
             'message'    => 'message',
             'captcha'    => 'test',
         );

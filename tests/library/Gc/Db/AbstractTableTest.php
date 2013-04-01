@@ -61,7 +61,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
-                'email' => 'test@test.com',
+                'email' => 'pierre.rambaud86@gmail.com',
                 'login' => 'test',
                 'user_acl_role_id' => 1,
             )
@@ -166,7 +166,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
         $select->where->equalTo('login', 'test');
 
         $result = $this->object->fetchOne($select);
-        $this->assertEquals('test@test.com', $result);
+        $this->assertEquals('pierre.rambaud86@gmail.com', $result);
     }
 
     /**

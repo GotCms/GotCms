@@ -125,7 +125,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
             array(
                 'lastname' => 'User test',
                 'firstname' => 'User test',
-                'email' => 'test@test.com',
+                'email' => 'pierre.rambaud86@gmail.com',
                 'login' => 'test',
                 'user_acl_role_id' => 1,
             )
@@ -202,7 +202,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'message' => 'test',
             'username' => 'test',
-            'email' => 'test@test.com',
+            'email' => 'pierre.rambaud86@gmail.com',
         );
         $this->object->add($data, $this->document->getId());
         $this->assertInternalType('array', $this->object->getDocumentList());
@@ -232,7 +232,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
         $data = array(
             'message' => 'test',
             'username' => 'test',
-            'email' => 'test@test.com',
+            'email' => 'pierre.rambaud86@gmail.com',
         );
         $this->assertTrue($this->object->add($data, $this->document->getId()));
     }

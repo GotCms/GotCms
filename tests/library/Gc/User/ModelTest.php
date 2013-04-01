@@ -56,7 +56,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
-                'email' => 'test@test.com',
+                'email' => 'pierre.rambaud86@gmail.com',
                 'login' => 'test-user-model',
                 'user_acl_role_id' => 1,
             )
@@ -222,13 +222,13 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
-                'email' => 'test@test.com',
+                'email' => 'pierre.rambaud86@gmail.com',
                 'login' => 'test',
                 'user_acl_role_id' => 1,
             )
         );
 
-        $this->assertEquals('test@test.com', $this->object->getEmail());
+        $this->assertEquals('pierre.rambaud86@gmail.com', $this->object->getEmail());
     }
 
     /**
@@ -291,7 +291,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSendForgotPasswordWithEmail()
     {
-        $this->assertTrue($this->object->sendForgotPasswordEmail('test@test.com'));
+        $this->assertTrue($this->object->sendForgotPasswordEmail('pierre.rambaud86@gmail.com'));
     }
 
     /**

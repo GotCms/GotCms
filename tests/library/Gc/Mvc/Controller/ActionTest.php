@@ -108,7 +108,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
-                'email' => 'test@test.com',
+                'email' => 'pierre.rambaud86@gmail.com',
                 'login' => 'login-test',
                 'user_acl_role_id' => 1,
             )

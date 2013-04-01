@@ -119,7 +119,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
             array(
                 'lastname' => 'User test',
                 'firstname' => 'User test',
-                'email' => 'test@test.com',
+                'email' => 'pierre.rambaud86@gmail.com',
                 'login' => 'test',
                 'user_acl_role_id' => 1,
             )
