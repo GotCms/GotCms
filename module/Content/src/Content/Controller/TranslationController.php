@@ -171,10 +171,6 @@ class TranslationController extends Action
         $translate_path   = GC_APPLICATION_PATH . '/data/translation/%s.php';
         $template_content = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/language.tpl.php');
 
-        foreach (glob(sprintf($translate_path, '*')) as $file) {
-            unlink($file);
-        }
-
         foreach ($data as $locale => $values) {
             file_put_contents(sprintf($translate_path, $locale), sprintf($template_content, var_export($values, true)));
         }

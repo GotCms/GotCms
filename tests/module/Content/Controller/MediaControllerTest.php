@@ -53,31 +53,20 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\MediaController::init
-     *
-     * @return void
-     */
-    public function testInit()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * Test
-     *
      * @covers Content\Controller\MediaController::indexAction
+     * @covers Content\Controller\MediaController::init
      *
      * @return void
      */
     public function testIndexAction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->dispatch('/admin/content/media');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('MediaController');
+        $this->assertControllerClass('MediaController');
+        $this->assertMatchedRouteName('media');
     }
 
     /**
@@ -102,12 +91,21 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
      *
      * @return void
      */
-    public function testRemoveAction()
+    public function testRemoveActionWithWrongMethod()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $this->dispatch(
+            '/admin/content/media/remove/document/1/property/2/file/',
+            'POST',
+            array(
+            )
         );
+
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('MediaController');
+        $this->assertControllerClass('MediaController');
+        $this->assertMatchedRouteName('mediaRemove');
     }
 
     /**
@@ -119,9 +117,13 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
      */
     public function testConnectorAction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $this->dispatch('/admin/content/media/connector');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('MediaController');
+        $this->assertControllerClass('MediaController');
+        $this->assertMatchedRouteName('mediaConnector');
     }
 }

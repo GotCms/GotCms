@@ -101,3 +101,15 @@ function exec($command, &$output = array(), &$return_var = null)
     $output = array();
     return '';
 }
+
+/**
+ * Override Elfinder connector
+ */
+namespace elFinder;
+
+class elFinderConnector
+{
+    public function run() {
+        return true;
+    }
+}

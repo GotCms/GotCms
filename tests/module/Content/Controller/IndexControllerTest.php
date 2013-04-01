@@ -53,30 +53,19 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\IndexController::init
-     *
-     * @return void
-     */
-    public function testInit()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * Test
-     *
      * @covers Content\Controller\IndexController::indexAction
+     * @covers Content\Controller\IndexController::init
      *
      * @return void
      */
     public function testIndexAction()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->dispatch('/admin/content');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('ContentController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('content');
     }
 }
