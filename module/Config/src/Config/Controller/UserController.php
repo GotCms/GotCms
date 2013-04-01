@@ -170,7 +170,7 @@ class UserController extends Action
      */
     public function logoutAction()
     {
-        $this->getSession()->getManager()->destroy();
+        $this->getAuth()->clearIdentity();
         return $this->redirect()->toRoute('admin');
     }
 
@@ -190,7 +190,7 @@ class UserController extends Action
             $form->getInputFilter()
                 ->get('password_confirm')
                 ->getValidatorChain()
-                ->addValidator(new Identical($post['password']));
+                ->addValidator(new Identical(empty($post['password']) ? null : $post['password']));
 
             if ($form->isValid()) {
                 $user_model = new User\Model();
@@ -217,7 +217,7 @@ class UserController extends Action
     public function deleteAction()
     {
         $user = User\Model::fromId($this->getRouteMatch()->getParam('id'));
-        if (empty($user) and $user->getRole()->getName() !== Role\Model::PROTECTED_NAME and $user->delete()) {
+        if (!empty($user) and $user->getRole()->getName() !== Role\Model::PROTECTED_NAME and $user->delete()) {
             return $this->returnJson(array('success' => true, 'message' => 'The user has been deleted'));
         }
 
@@ -234,11 +234,16 @@ class UserController extends Action
         $user_id    = $this->getRouteMatch()->getParam('id');
         $user_model = User\Model::fromId($user_id);
 
+        if (empty($user_model)) {
+            $this->flashMessenger()->addErrorMessage("Can't edit this user");
+            return $this->redirect()->toRoute('userList');
+        }
+
         $form = new UserForm();
         $form->setAttribute('action', $this->url()->fromRoute('userEdit', array('id' => $user_id)));
         $form->loadValues($user_model);
-        $post = $this->getRequest()->getPost()->toArray();
         if ($this->getRequest()->isPost()) {
+            $post = $this->getRequest()->getPost()->toArray();
             if (!empty($post['password'])) {
                 $form->passwordRequired();
                 $form->getInputFilter()

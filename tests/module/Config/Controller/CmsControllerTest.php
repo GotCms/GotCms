@@ -174,4 +174,29 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('CmsController');
         $this->assertMatchedRouteName('cmsUpdate');
     }
+
+    /**
+     * Test
+     *
+     * @covers Config\Controller\CmsController::updateAction
+     * @covers Config\Controller\CmsController::checkVersion
+     *
+     * @return void
+     */
+    public function testUpdateActionWithWrongAdapter()
+    {
+        $this->dispatch(
+            '/admin/config/update',
+            'POST',
+            array(
+                'adapter' => 'fake'
+            )
+        );
+        $this->assertResponseStatusCode(302);
+
+        $this->assertModuleName('Config');
+        $this->assertControllerName('CmsController');
+        $this->assertControllerClass('CmsController');
+        $this->assertMatchedRouteName('cmsUpdate');
+    }
 }

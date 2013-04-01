@@ -84,9 +84,8 @@ class RoleController extends Action
                 $role_model = new Role\Model();
                 $role_model->addData($form->getInputFilter()->getValues());
                 $role_model->save();
-
                 $this->flashMessenger()->addSuccessMessage('Role saved!');
-                return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
+                return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_model->getId()));
             }
 
             $this->flashMessenger()->addErrorMessage('Role can not saved!');
@@ -104,7 +103,7 @@ class RoleController extends Action
     public function deleteAction()
     {
         $role_model = Role\Model::fromId($this->getRouteMatch()->getParam('id'));
-        if (empty($role_model) and $role_model->getName() !== Role\Model::PROTECTED_NAME and $role_model->delete()) {
+        if (!empty($role_model) and $role_model->getName() !== Role\Model::PROTECTED_NAME and $role_model->delete()) {
             return $this->returnJson(array('success' => true, 'message' => 'Role has been deleted'));
         }
 
@@ -121,7 +120,7 @@ class RoleController extends Action
         $role_id = $this->getRouteMatch()->getParam('id');
 
         $role_model = Role\Model::fromId($role_id);
-        if ($role_model->getName() === Role\Model::PROTECTED_NAME) {
+        if (empty($role_model) or $role_model->getName() === Role\Model::PROTECTED_NAME) {
             $this->flashMessenger()->addErrorMessage("Can't edit this role");
             return $this->redirect()->toRoute('userRole');
         }
