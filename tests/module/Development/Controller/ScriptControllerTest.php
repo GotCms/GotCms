@@ -148,7 +148,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithInvalidId()
     {
-        $this->dispatch('/admin/development/script/edit/id/99999');
+        $this->dispatch('/admin/development/script/edit/99999');
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -174,7 +174,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         );
         $script_model->save();
 
-        $this->dispatch('/admin/development/script/edit/id/' . $script_model->getId());
+        $this->dispatch('/admin/development/script/edit/' . $script_model->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -203,7 +203,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $script_model->save();
 
         $this->dispatch(
-            '/admin/development/script/edit/id/' . $script_model->getId(),
+            '/admin/development/script/edit/' . $script_model->getId(),
             'POST',
             array(
             )
@@ -236,7 +236,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $script_model->save();
 
         $this->dispatch(
-            '/admin/development/script/edit/id/' . $script_model->getId(),
+            '/admin/development/script/edit/' . $script_model->getId(),
             'POST',
             array(
                 'name' => 'ScriptName',
@@ -270,7 +270,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $script_model->save();
-        $this->dispatch('/admin/development/script/delete/id/' . $script_model->getId());
+        $this->dispatch('/admin/development/script/delete/' . $script_model->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -290,7 +290,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteActionWithInvalidId()
     {
-        $this->dispatch('/admin/development/script/delete/id/9999');
+        $this->dispatch('/admin/development/script/delete/9999');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');

@@ -148,7 +148,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithInvalidId()
     {
-        $this->dispatch('/admin/development/layout/edit/id/99999');
+        $this->dispatch('/admin/development/layout/edit/99999');
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -174,7 +174,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         );
         $layout_model->save();
 
-        $this->dispatch('/admin/development/layout/edit/id/' . $layout_model->getId());
+        $this->dispatch('/admin/development/layout/edit/' . $layout_model->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -203,7 +203,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $layout_model->save();
 
         $this->dispatch(
-            '/admin/development/layout/edit/id/' . $layout_model->getId(),
+            '/admin/development/layout/edit/' . $layout_model->getId(),
             'POST',
             array(
             )
@@ -236,7 +236,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $layout_model->save();
 
         $this->dispatch(
-            '/admin/development/layout/edit/id/' . $layout_model->getId(),
+            '/admin/development/layout/edit/' . $layout_model->getId(),
             'POST',
             array(
                 'name' => 'LayoutName',
@@ -270,7 +270,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $layout_model->save();
-        $this->dispatch('/admin/development/layout/delete/id/' . $layout_model->getId());
+        $this->dispatch('/admin/development/layout/delete/' . $layout_model->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -290,7 +290,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteActionWithInvalidId()
     {
-        $this->dispatch('/admin/development/layout/delete/id/9999');
+        $this->dispatch('/admin/development/layout/delete/9999');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');

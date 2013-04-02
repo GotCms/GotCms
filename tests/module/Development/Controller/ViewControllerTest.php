@@ -148,7 +148,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithInvalidId()
     {
-        $this->dispatch('/admin/development/view/edit/id/99999');
+        $this->dispatch('/admin/development/view/edit/99999');
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -174,7 +174,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         );
         $view_model->save();
 
-        $this->dispatch('/admin/development/view/edit/id/' . $view_model->getId());
+        $this->dispatch('/admin/development/view/edit/' . $view_model->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -203,7 +203,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $view_model->save();
 
         $this->dispatch(
-            '/admin/development/view/edit/id/' . $view_model->getId(),
+            '/admin/development/view/edit/' . $view_model->getId(),
             'POST',
             array(
             )
@@ -236,7 +236,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $view_model->save();
 
         $this->dispatch(
-            '/admin/development/view/edit/id/' . $view_model->getId(),
+            '/admin/development/view/edit/' . $view_model->getId(),
             'POST',
             array(
                 'name' => 'ViewName',
@@ -270,7 +270,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $view_model->save();
-        $this->dispatch('/admin/development/view/delete/id/' . $view_model->getId());
+        $this->dispatch('/admin/development/view/delete/' . $view_model->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -290,7 +290,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteActionWithInvalidId()
     {
-        $this->dispatch('/admin/development/view/delete/id/9999');
+        $this->dispatch('/admin/development/view/delete/9999');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');

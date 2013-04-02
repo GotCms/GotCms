@@ -143,7 +143,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithWrongId()
     {
-        $this->dispatch('/admin/development/datatype/edit/id/9999');
+        $this->dispatch('/admin/development/datatype/edit/9999');
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -168,7 +168,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $datatype_model->save();
-        $this->dispatch('/admin/development/datatype/edit/id/' . $datatype_model->getId());
+        $this->dispatch('/admin/development/datatype/edit/' . $datatype_model->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -196,7 +196,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         );
         $datatype_model->save();
         $this->dispatch(
-            '/admin/development/datatype/edit/id/' . $datatype_model->getId(),
+            '/admin/development/datatype/edit/' . $datatype_model->getId(),
             'POST',
             array()
         );
@@ -227,7 +227,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         );
         $datatype_model->save();
         $this->dispatch(
-            '/admin/development/datatype/edit/id/' . $datatype_model->getId(),
+            '/admin/development/datatype/edit/' . $datatype_model->getId(),
             'POST',
             array(
                 'name' => 'DatatypeTest',
@@ -260,7 +260,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $datatype_model->save();
-        $this->dispatch('/admin/development/datatype/delete/id/' . $datatype_model->getId());
+        $this->dispatch('/admin/development/datatype/delete/' . $datatype_model->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -280,7 +280,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteActionWithInvalidId()
     {
-        $this->dispatch('/admin/development/datatype/delete/id/9999');
+        $this->dispatch('/admin/development/datatype/delete/9999');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');

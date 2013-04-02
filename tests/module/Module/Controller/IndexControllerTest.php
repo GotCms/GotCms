@@ -149,7 +149,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     public function testUninstallActionWithInvalidData()
     {
         $this->dispatch(
-            '/admin/module/uninstall/id/99999'
+            '/admin/module/uninstall/99999'
         );
         $this->assertResponseStatusCode(200);
 
@@ -178,7 +178,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $module_model->save();
 
         $this->dispatch(
-            '/admin/module/uninstall/id/' . $module_model->getId()
+            '/admin/module/uninstall/' . $module_model->getId()
         );
         $this->assertResponseStatusCode(200);
 
