@@ -454,9 +454,8 @@ class DocumentTypeController extends Action
     public function deleteTabAction()
     {
         if ($this->getRequest()->isPost()) {
-            $session     = $this->getSession();
-            $id          = $this->getRequest()->getPost()->get('tab');
-            $description = $this->getRequest()->getPost()->get('description');
+            $session = $this->getSession();
+            $id      = $this->getRequest()->getPost()->get('tab');
 
             $tabs = empty($session['document-type']) ? array() : $session['document-type']['tabs'];
             if (array_key_exists($id, $tabs)) {
