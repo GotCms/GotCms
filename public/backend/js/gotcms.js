@@ -104,7 +104,7 @@ var Gc = (function($)
                         if($data.message !== undefined) {
                             $this.setHtmlMessage($data.message);
                         } else {
-                            var $tabs, $e;
+                            var $tabs, $e, $tab_content;
                             $tabs = $('#tabs');
                             $e = $('<li class="clearfix">' +
                                 '<div class="hide floatL">' +
@@ -128,7 +128,10 @@ var Gc = (function($)
                             $('.select-tab').append(new Option($name.val(),$data.id));
 
                             if($('#properties-tabs-content').html() !== null) {
-                                $('#properties-tabs-content').tabs('add', '#tabs-properties-'+$data.id, $name.val());
+                                $tab_content = $('#properties-tabs-content');
+                                $tab_content.append('<div id="tabs-properties-' + $data.id + '"></div>');
+                                $tab_content.children('ul').append('<li><a href="#tabs-properties-' + $data.id + '"> ' + $name.val() + '</a></li>');
+                                $tab_content.tabs('refresh');
                                 $('#tabs-properties-'+$data.id).append('<div class="sortable connected-sortable ui-helper-reset">');
                             }
                         }
@@ -152,7 +155,10 @@ var Gc = (function($)
                     $button.parent().remove();
                     var $tab = $tabs.find('a[href="#tabs-properties-'+$button.val()+'"]').parent();
                     var $index = $('li', $tabs).index($tab);
-                    $tabs.tabs('remove', $index );
+
+                    $tabs.find('.ui-tabs-nav li:eq(' + $index + ')').remove();
+                    // Refresh the tabs widget
+                    $tabs.tabs('refresh');
                     $this.setHtmlMessage($data.message);
                 });
             });

@@ -172,6 +172,7 @@ footer a:hover {text-decoration:underline;}
 .table-list tbody tr {cursor:pointer;}
 
 .sortable {list-style-type: none; margin: 0; padding: 0;}
+.sortable .ui-accordion-content {height:auto !important;}
 .sortable li, .sortable div{font-size: 1.2em; min-height: 1.5em; min-height:35px;}
 .connected-sortable li{zoom:1;}
 

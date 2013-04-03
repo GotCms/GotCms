@@ -74,7 +74,6 @@ function Template($body)
         {
             var $regexp,
                 $exp = '#\\{'+index+'\\}';
-                console.log($exp);
 
             $regexp = new RegExp($exp, "gi");
             $content = $content.replace($regexp, value);
