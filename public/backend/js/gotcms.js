@@ -108,13 +108,13 @@ var Gc = (function($)
                             $tabs = $('#tabs');
                             $e = $('<li class="clearfix">' +
                                 '<div class="hide floatL">' +
-                                    '<input type="text" name="tabs[tab'+$data.id+'][name]" value="'+$name.val()+'">' +
-                                    '<input type="text" name="tabs[tab'+$data.id+'][description]" value="'+$description.val()+'">' +
+                                    '<input type="text" name="tabs[tab' + $data.id + '][name]" value="' + $name.val() + '">' +
+                                    '<input type="text" name="tabs[tab' + $data.id + '][description]" value="' + $description.val() + '">' +
                                 '</div>' +
                                 '<div class="floatL">' +
-                                    '<span>'+$name.val()+'</span> <span>'+$description.val()+'</span>' +
+                                    '<span>' + $name.val() + '</span> <span>' + $description.val() + '</span>' +
                                 '</div>' +
-                                '<button type="button" value="'+$data.id+'" class="button-delete delete-tab floatR">'+Translator.translate('Delete')+'</button>' +
+                                '<button type="button" value="' + $data.id + '" class="button-delete delete-tab floatR">' + Translator.translate('Delete') + '</button>' +
                             '</li>');
 
                             $e.find('.button-delete').button({
@@ -132,7 +132,7 @@ var Gc = (function($)
                                 $tab_content.append('<div id="tabs-properties-' + $data.id + '"></div>');
                                 $tab_content.children('ul').append('<li><a href="#tabs-properties-' + $data.id + '"> ' + $name.val() + '</a></li>');
                                 $tab_content.tabs('refresh');
-                                $('#tabs-properties-'+$data.id).append('<div class="sortable connected-sortable ui-helper-reset">');
+                                $('#tabs-properties-' + $data.id).append('<div class="sortable connected-sortable ui-helper-reset">');
                             }
                         }
                     });
@@ -150,13 +150,14 @@ var Gc = (function($)
             $(document).on('click', '.delete-tab', function() {
                 var $button = $(this);
                 $.post($deleteTabUrl, {tab: $button.val()}, function($data) {
-                    $('.select-tab').find('option[value="'+$button.val()+'"]').remove();
+                    $('.select-tab').find('option[value="' + $button.val() + '"]').remove();
                     var $tabs = $('#properties-tabs-content');
                     $button.parent().remove();
-                    var $tab = $tabs.find('a[href="#tabs-properties-'+$button.val()+'"]').parent();
+                    var $tab = $tabs.find('a[href="#tabs-properties-' + $button.val() + '"]').parent();
                     var $index = $('li', $tabs).index($tab);
 
                     $tabs.find('.ui-tabs-nav li:eq(' + $index + ')').remove();
+                    $('#tabs-properties-' + $button.val()).remove();
                     // Refresh the tabs widget
                     $tabs.tabs('refresh');
                     $this.setHtmlMessage($data.message);
@@ -212,32 +213,32 @@ var Gc = (function($)
                             var $c = new Template('<div><h3><a href="#secion#{id}">#{name} (#{identifier})</a></h3>' +
                                 '<dl>' +
                                 '<dt id="name-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-name-#{tab}-#{id}">'+Translator.translate('Name')+'</label>' +
+                                    '<label class="optional" for="properties-name-#{tab}-#{id}">' + Translator.translate('Name') + '</label>' +
                                 '</dt>' +
                                 '<dd id="name-element-#{tab}-#{id}">' +
                                     '<input type="text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">' +
                                 '</dd>' +
                                 '<dt id="identifier-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-identifier-#{tab}-#{id}">'+Translator.translate('Identifier')+'</label>' +
+                                    '<label class="optional" for="properties-identifier-#{tab}-#{id}">' + Translator.translate('Identifier') + '</label>' +
                                 '</dt>' +
                                 '<dd id="identifier-element-#{tab}-#{id}">' +
                                     '<input type="text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">' +
                                 '</dd>' +
                                 '<dt id="datatype-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-datatype-#{tab}-#{id}">'+Translator.translate('Datatype')+'</label>' +
+                                    '<label class="optional" for="properties-datatype-#{tab}-#{id}">' + Translator.translate('Datatype') + '</label>' +
                                 '</dt>' +
                                 '<dd id="datatype-element-#{tab}-#{id}">' +
                                     '<select class="select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
                                     '</select>' +
                                 '</dd>' +
                                 '<dt id="description-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-description-#{tab}-#{id}">'+Translator.translate('Description')+'</label>' +
+                                    '<label class="optional" for="properties-description-#{tab}-#{id}">' + Translator.translate('Description') + '</label>' +
                                 '</dt>' +
                                 '<dd id="description-element-#{tab}-#{id}">' +
                                     '<input type="text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">' +
                                 '</dd>' +
                                 '<dt id="required-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-required-#{tab}-#{id}">'+Translator.translate('Required')+'</label>' +
+                                    '<label class="optional" for="properties-required-#{tab}-#{id}">' + Translator.translate('Required') + '</label>' +
                                 '</dt>' +
                                 '<dd id="required-element-#{tab}-#{id}">' +
                                     '<input type="checkbox" value="1" id="properties-required-#{tab}-#{id}" name="properties[property#{id}][required]">' +
@@ -246,7 +247,7 @@ var Gc = (function($)
                                     '<input class="property-tab-id" type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">' +
                                 '</dd>' +
                                 '<dd class="cb">' +
-                                    '<button type="button" value="#{id}" class="delete-property button-delete">'+Translator.translate('Delete')+'</button>' +
+                                    '<button type="button" value="#{id}" class="delete-property button-delete">' + Translator.translate('Delete') + '</button>' +
                                 '</dd>' +
                             '</dl></div>');
 
@@ -257,11 +258,11 @@ var Gc = (function($)
                                 }
                             });
 
-                            $('#tabs-properties-'+$tab.val()).children('div:first').append($c);
+                            $('#tabs-properties-' + $tab.val()).children('div:first').append($c);
                             $('.connected-sortable').accordion(Gc.getOption('accordion-option'));
-                            $('#properties-tab-'+$data.tab+'-'+$data.id).html($('#properties-tab').html()).val($data.tab);
-                            $('#properties-datatype-'+$data.tab+'-'+$data.id).html($('#properties-datatype').html()).val($data.datatype);
-                            $('#properties-required-'+$data.tab+'-'+$data.id).prop('checked', $isRequired.prop('checked'));
+                            $('#properties-tab-' + $data.tab + '-' + $data.id).html($('#properties-tab').html()).val($data.tab);
+                            $('#properties-datatype-' + $data.tab + '-' + $data.id).html($('#properties-datatype').html()).val($data.datatype);
+                            $('#properties-required-' + $data.tab + '-' + $data.id).prop('checked', $isRequired.prop('checked'));
 
                             $this.refreshProperties($tabs);
                         }
@@ -438,7 +439,7 @@ var Gc = (function($)
                                 return true;
                             case 'new':
                                 if(!$this.isEmpty($id)) {
-                                    $url += '/parent/'+$id;
+                                    $url += '/parent/' + $id;
                                 }
                             break;
                             case 'edit':
@@ -500,8 +501,8 @@ var Gc = (function($)
                         $('#documents').children('ul').remove();
                         $('#documents').append(data.treeview);
                     } else {
-                        $('#'+$document_id).next('ul').remove();
-                        $('#'+$document_id).after(data.treeview);
+                        $('#' + $document_id).next('ul').remove();
+                        $('#' + $document_id).after(data.treeview);
                     }
 
                     $browser.jstree('refresh');
@@ -545,15 +546,15 @@ var Gc = (function($)
         showCopyForm: function($url, $action, $options)
         {
             var $this = this,
-            $template = '<div id="copy-dialog-form" title="'+Translator.translate('Copy document')+'">' +
-                '<p class="validateTips">'+Translator.translate('All form fields are required.')+'</p>' +
+            $template = '<div id="copy-dialog-form" title="' + Translator.translate('Copy document') + '">' +
+                '<p class="validateTips">' + Translator.translate('All form fields are required.') + '</p>' +
                 '<fieldset>' +
                     '<div>' +
-                        '<label for="name">'+Translator.translate('Name')+'</label>' +
+                        '<label for="name">' + Translator.translate('Name') + '</label>' +
                         '<input type="text" name="name" id="copy-name" class="text ui-widget-content ui-corner-all" />' +
                     '</div>' +
                     '<div>' +
-                        '<label for="email">'+Translator.translate('Url key')+'</label>' +
+                        '<label for="email">' + Translator.translate('Url key') + '</label>' +
                         '<input type="text" name="url-key" id="copy-url-key" value="" class="text ui-widget-content ui-corner-all" />' +
                     '</div>' +
                '</fieldset>' +
@@ -611,13 +612,13 @@ var Gc = (function($)
                         '<select name="locale[#{id}]">';
                             $.each(this.getOption('locale'), function(key, value)
                             {
-                                $template += '<option value="'+key+'">'+value+'</option>';
+                                $template += '<option value="' + key + '">' + value + '</option>';
                             });
 
                         $template += '</select>' +
                     '</div>' +
                 '</td>' +
-                '<td><span class="button-add add-translate">'+Translator.translate('Add')+'</span></td>' +
+                '<td><span class="button-add add-translate">' + Translator.translate('Add') + '</span></td>' +
             '</tr>';
 
             $document.on('click', '.add-translate', function() {
@@ -757,7 +758,7 @@ var Gc = (function($)
             if(!this.isEmpty($object)) {
                 $.each($object, function(sortable_id, elements) {
                     $(elements.split(',')).each(function (i, id) {
-                        $("#" + id).appendTo($('#'+sortable_id));
+                        $("#" + id).appendTo($('#' + sortable_id));
                     });
                 });
             }
@@ -792,7 +793,7 @@ var Gc = (function($)
 
         saveCommand: function()
         {
-            $(window).on('keypress', function(event) {
+            $window.on('keypress', function(event) {
                 if(!(event.which === 115 && event.ctrlKey) && !(event.which === 19)) {
                     return true;
                 }
