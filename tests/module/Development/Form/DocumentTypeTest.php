@@ -105,6 +105,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
         );
 
         $view_model->save();
+
         $document_type_model = DocumentTypeModel::fromArray(
             array(
                 'name' => 'DocumentType',

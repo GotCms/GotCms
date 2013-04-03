@@ -168,6 +168,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $datatype_model->save();
+
         $this->dispatch('/admin/development/datatype/edit/' . $datatype_model->getId());
         $this->assertResponseStatusCode(200);
 
@@ -195,6 +196,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $datatype_model->save();
+
         $this->dispatch(
             '/admin/development/datatype/edit/' . $datatype_model->getId(),
             'POST',
@@ -226,6 +228,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $datatype_model->save();
+
         $this->dispatch(
             '/admin/development/datatype/edit/' . $datatype_model->getId(),
             'POST',
@@ -260,6 +263,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $datatype_model->save();
+
         $this->dispatch('/admin/development/datatype/delete/' . $datatype_model->getId());
         $this->assertResponseStatusCode(200);
 

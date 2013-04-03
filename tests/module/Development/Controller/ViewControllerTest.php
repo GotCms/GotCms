@@ -270,6 +270,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $view_model->save();
+
         $this->dispatch('/admin/development/view/delete/' . $view_model->getId());
         $this->assertResponseStatusCode(200);
 
@@ -325,6 +326,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $view_model->save();
+
         $this->dispatch('/admin/development/view/upload/' . $view_model->getId());
         $this->assertResponseStatusCode(302);
 
@@ -381,6 +383,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $view_model->save();
+
         $this->dispatch('/admin/development/view/upload');
         $this->assertResponseStatusCode(302);
 
@@ -446,6 +449,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $view_model->save();
+
         $this->dispatch('/admin/development/view/download/' . $view_model->getId());
         $this->assertResponseStatusCode(200);
 
@@ -473,6 +477,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $view_model->save();
+
         $this->dispatch('/admin/development/view/download/' . $view_model->getId());
         $this->assertResponseStatusCode(302);
 
@@ -519,6 +524,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $view_model->save();
+
         $this->dispatch('/admin/development/view/download');
         $this->assertResponseStatusCode(200);
 

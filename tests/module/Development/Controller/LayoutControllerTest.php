@@ -270,6 +270,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $layout_model->save();
+
         $this->dispatch('/admin/development/layout/delete/' . $layout_model->getId());
         $this->assertResponseStatusCode(200);
 
@@ -325,6 +326,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $layout_model->save();
+
         $this->dispatch('/admin/development/layout/upload/' . $layout_model->getId());
         $this->assertResponseStatusCode(302);
 
@@ -381,6 +383,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $layout_model->save();
+
         $this->dispatch('/admin/development/layout/upload');
         $this->assertResponseStatusCode(302);
 
@@ -446,6 +449,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $layout_model->save();
+
         $this->dispatch('/admin/development/layout/download/' . $layout_model->getId());
         $this->assertResponseStatusCode(200);
 
@@ -473,6 +477,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $layout_model->save();
+
         $this->dispatch('/admin/development/layout/download/' . $layout_model->getId());
         $this->assertResponseStatusCode(302);
 
@@ -519,6 +524,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $layout_model->save();
+
         $this->dispatch('/admin/development/layout/download');
         $this->assertResponseStatusCode(200);
 

@@ -206,6 +206,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         );
 
         $module_model->save();
+
         $select = new Sql\Select();
         $select->from('user_acl_resource')
             ->columns(array('id'))

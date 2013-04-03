@@ -270,6 +270,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $script_model->save();
+
         $this->dispatch('/admin/development/script/delete/' . $script_model->getId());
         $this->assertResponseStatusCode(200);
 
@@ -325,6 +326,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $script_model->save();
+
         $this->dispatch('/admin/development/script/upload/' . $script_model->getId());
         $this->assertResponseStatusCode(302);
 
@@ -381,6 +383,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $script_model->save();
+
         $this->dispatch('/admin/development/script/upload');
         $this->assertResponseStatusCode(302);
 
@@ -446,6 +449,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $script_model->save();
+
         $this->dispatch('/admin/development/script/download/' . $script_model->getId());
         $this->assertResponseStatusCode(200);
 
@@ -473,6 +477,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $script_model->save();
+
         $this->dispatch('/admin/development/script/download/' . $script_model->getId());
         $this->assertResponseStatusCode(302);
 
@@ -519,6 +524,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $script_model->save();
+
         $this->dispatch('/admin/development/script/download');
         $this->assertResponseStatusCode(200);
 

@@ -151,6 +151,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $role_model->save();
+
         $this->dispatch('/admin/config/user/role/delete/' . $role_model->getId());
         $this->assertResponseStatusCode(200);
 
@@ -194,6 +195,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $role_model->save();
+
         $this->dispatch('/admin/config/user/role/edit/' . $role_model->getId());
         $this->assertResponseStatusCode(200);
 
@@ -221,6 +223,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $role_model->save();
+
         $this->dispatch(
             '/admin/config/user/role/edit/' . $role_model->getId(),
             'POST',
@@ -255,6 +258,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $role_model->save();
+
         $this->dispatch(
             '/admin/config/user/role/edit/' . $role_model->getId(),
             'POST',

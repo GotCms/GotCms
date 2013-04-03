@@ -107,6 +107,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         );
         $user_model->setPassword('passwordtest');
         $user_model->save();
+
         $this->dispatch(
             '/admin/user/login',
             'POST',
@@ -121,6 +122,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userLogin');
+
         $user_model->delete();
     }
 
@@ -144,6 +146,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         );
         $user_model->setPassword('passwordtest');
         $user_model->save();
+
         $this->dispatch(
             '/admin/user/login/L2FkbWlu',
             'POST',
@@ -159,6 +162,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userLogin');
+
         $user_model->delete();
     }
 
@@ -226,6 +230,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         );
         $user_model->setPassword('passwordtest');
         $user_model->save();
+
         $this->dispatch(
             '/admin/config/user/forgot-password',
             'POST',
@@ -239,6 +244,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userForgotPassword');
+
         $user_model->delete();
     }
 
@@ -383,6 +389,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userDelete');
+
         $user_model->delete();
     }
 
@@ -450,6 +457,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userEdit');
+
         $user_model->delete();
     }
 
@@ -486,6 +494,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userEdit');
+
         $user_model->delete();
     }
 
@@ -529,6 +538,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userEdit');
+
         $user_model->delete();
     }
 

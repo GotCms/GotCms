@@ -191,6 +191,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
         $this->assertMatchedRouteName('documentTypeCreate');
+
         $view_model->delete();
         $datatype_model->delete();
     }
@@ -270,6 +271,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
         $this->assertMatchedRouteName('documentTypeEdit');
+
         $document_type_model->delete();
         $property_model->delete();
         $tab_model->delete();
@@ -391,6 +393,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
         $this->assertMatchedRouteName('documentTypeEdit');
+
         $document_type_model->delete();
         $property_model->delete();
         $tab_model->delete();
@@ -451,6 +454,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
         $this->assertMatchedRouteName('documentTypeEdit');
+
         $document_type_model->delete();
         $view_model->delete();
         $user_model->delete();
@@ -521,6 +525,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
         $this->assertMatchedRouteName('documentTypeDelete');
+
         $document_type_model->delete();
         $view_model->delete();
         $user_model->delete();
