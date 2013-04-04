@@ -113,3 +113,14 @@ class elFinderConnector
         return true;
     }
 }
+
+/**
+ * Override Installer file_exists functions
+ */
+namespace Application\Controller;
+
+function file_exists($string)
+{
+    return false;
+}
+
