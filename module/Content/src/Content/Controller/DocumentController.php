@@ -139,13 +139,9 @@ class DocumentController extends Action
                     ->setUrlKey(!empty($document_url_key) ? $document_url_key : $this->checkUrlKey($document_name))
                     ->setUserId($this->getAuth()->getIdentity()->getId());
 
-                $document_id = $document->save();
-                if (empty($document_id)) {
-                    $this->flashMessenger()->addErrorMessage('Can not add document');
-                } else {
-                    $this->flashMessenger()->addSuccessMessage('Document successfuly add');
-                    $this->redirect()->toRoute('documentEdit', array('id' => $document_id));
-                }
+                $document->save();
+                $this->flashMessenger()->addSuccessMessage('Document successfuly add');
+                $this->redirect()->toRoute('documentEdit', array('id' => $document->getId()));
             }
         }
 
@@ -368,7 +364,7 @@ class DocumentController extends Action
         $session   = $this->getSession();
         if (!empty($parent_id)) {
             $parent_document = DocumentModel::fromId($parent_id);
-            if (empty($parent_id)) {
+            if (empty($parent_document)) {
                 return $this->returnJson(array('success' => false));
             }
         }
@@ -403,6 +399,9 @@ class DocumentController extends Action
             }
 
             $document = DocumentModel::fromId($session['document-copy']);
+            if (empty($document)) {
+                return $this->returnJson(array('success' => false));
+            }
 
             if (!empty($parent_document)) {
                 $available_children = $parent_document->getDocumentType()->getDependencies();
