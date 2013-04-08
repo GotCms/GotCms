@@ -183,7 +183,9 @@ class IndexController extends Action
                             or $document_tmp === null) {
                             $has_document = true;
                         } else {
-                            if (!empty($document_tmp)) {
+                            if (empty($document_tmp)) {
+                                break;
+                            } else {
                                 if (!$document_tmp->isPublished()) {
                                     if (!$is_preview) {
                                         break;
@@ -203,6 +205,7 @@ class IndexController extends Action
             $view_model->setTemplate($this->viewName);
             $this->layout()->setTemplate($this->layoutName);
 
+            $variables = array();
             if (empty($document)) {
                 // 404
                 $this->getResponse()->setStatusCode(404);
@@ -216,7 +219,6 @@ class IndexController extends Action
                 //Get all tabs of document
                 $tabs = $this->loadTabs($document->getDocumentTypeId());
                 //get Tabs and Properties to construct property in view
-                $variables = array();
                 foreach ($tabs as $tab) {
                     $tabs_array[] = $tab->getName();
                     $properties   = $this->loadProperties(
