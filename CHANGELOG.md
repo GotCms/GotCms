@@ -1,6 +1,6 @@
 # CHANGELOG13
 
-##0.1.5 (-- --- 2013):
+##0.1.5 (08 Apr 2013):
 - Git updater failed (https://github.com/PierreRambaud/GotCms/issues/24)
 - Add translation directory for installation
 - Add captcha for blog module (https://github.com/PierreRambaud/GotCms/issues/25)
