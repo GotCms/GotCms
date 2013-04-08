@@ -227,7 +227,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
             'POST',
             array(
                 'document-name' => 'test',
-                'document-url_key' => 'test',
+                'document-url_key' => '',
                 'document_type' => $this->documentType->getId(),
             )
         );
@@ -278,7 +278,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $document = DocumentModel::fromArray(
             array(
                 'name' => 'test',
-                'url_key' => 'about',
+                'url_key' => '',
                 'status' => DocumentModel::STATUS_ENABLE,
                 'user_id' => $this->user->getId(),
                 'document_type_id' => $this->documentType->getId(),
