@@ -28,7 +28,6 @@
  * Override upload functions
  */
 namespace Gc\Media\File;
-
 namespace Zend\File\Transfer\Adapter;
 
 function is_uploaded_file($filename)
@@ -124,3 +123,14 @@ function file_exists($string)
     return false;
 }
 
+namespace Application\Controller;
+
+function file_get_contents($filename)
+{
+    return 'SELECT 1';
+}
+
+function file_put_contents($filename, $content)
+{
+    return true;
+}

@@ -243,9 +243,12 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $document->save();
+        $this->property->setDocumentId($document->getId());
+        $this->property->setValue('s:6:"string";');
+        $this->property->saveValue();
 
 
-        $this->dispatch($document->getUrl());
+        $this->dispatch($document->getUrl() . '/');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Application');
@@ -286,6 +289,9 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $document->save();
+        $this->property->setDocumentId($document->getId());
+        $this->property->setValue('string');
+        $this->property->saveValue();
 
 
         $this->dispatch($document->getUrl());

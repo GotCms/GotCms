@@ -26,6 +26,7 @@
 
 namespace Application\Controller;
 
+use Gc\Core\Config as CoreConfig;
 use Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Zend\Session\Container as SessionContainer;
 
@@ -684,6 +685,197 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         );
 
         $this->dispatch('/install/complete');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Application');
+        $this->assertControllerName('InstallController');
+        $this->assertControllerClass('InstallController');
+        $this->assertMatchedRouteName('installComplete');
+    }
+
+    /**
+     * Test
+     *
+     * @covers Application\Controller\InstallController::completeAction
+     *
+     * @return void
+     */
+    public function testCompleteActionDatabase()
+    {
+        $session = new SessionContainer();
+        $session->offsetSet(
+            'install',
+            array(
+                'lang' => 'fr_FR',
+                'db' => array(
+                    'driver' => GC_DATABASE_DRIVER,
+                    'username' => GC_DATABASE_USERNAME,
+                    'dbname' => GC_DATABASE_DATABASE,
+                    'hostname' => GC_DATABASE_HOSTNAME,
+                    'password' => GC_DATABASE_PASSWORD,
+                ),
+                'configuration' => array(
+                    'site_name' => 'GotCms',
+                    'site_is_offiline' => 0,
+                    'admin_email' => 'pierre.rambaud86@gmail.com',
+                    'admin_firstname' => 'Pierre',
+                    'admin_lastname' => 'Rambaud'
+                )
+            )
+        );
+
+        $this->getRequest()->getHeaders()->addHeaderLine('X_REQUESTED_WITH: XMLHttpRequest');
+        $this->dispatch(
+            '/install/complete',
+            'POST',
+            array(
+                'step' => 'c-db'
+            )
+        );
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Application');
+        $this->assertControllerName('InstallController');
+        $this->assertControllerClass('InstallController');
+        $this->assertMatchedRouteName('installComplete');
+    }
+
+    /**
+     * Test
+     *
+     * @covers Application\Controller\InstallController::completeAction
+     *
+     * @return void
+     */
+    public function testCompleteActionData()
+    {
+        $session = new SessionContainer();
+        $session->offsetSet(
+            'install',
+            array(
+                'lang' => 'fr_FR',
+                'db' => array(
+                    'driver' => GC_DATABASE_DRIVER,
+                    'username' => GC_DATABASE_USERNAME,
+                    'dbname' => GC_DATABASE_DATABASE,
+                    'hostname' => GC_DATABASE_HOSTNAME,
+                    'password' => GC_DATABASE_PASSWORD,
+                ),
+                'configuration' => array(
+                    'site_name' => 'GotCms',
+                    'site_is_offline' => 0,
+                    'admin_email' => 'pierre.rambaud86@gmail.com',
+                    'admin_firstname' => 'Pierre',
+                    'admin_lastname' => 'Rambaud'
+                )
+            )
+        );
+
+        CoreConfig::getInstance()->delete('1 =1');
+        $this->getRequest()->getHeaders()->addHeaderLine('X_REQUESTED_WITH: XMLHttpRequest');
+        $this->dispatch(
+            '/install/complete',
+            'POST',
+            array(
+                'step' => 'i-d'
+            )
+        );
+
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Application');
+        $this->assertControllerName('InstallController');
+        $this->assertControllerClass('InstallController');
+        $this->assertMatchedRouteName('installComplete');
+    }
+
+    /**
+     * Test
+     *
+     * @covers Application\Controller\InstallController::completeAction
+     *
+     * @return void
+     */
+    public function testCompleteActionTemplate()
+    {
+        $session = new SessionContainer();
+        $session->offsetSet(
+            'install',
+            array(
+                'lang' => 'fr_FR',
+                'db' => array(
+                    'driver' => GC_DATABASE_DRIVER,
+                    'username' => GC_DATABASE_USERNAME,
+                    'dbname' => GC_DATABASE_DATABASE,
+                    'hostname' => GC_DATABASE_HOSTNAME,
+                    'password' => GC_DATABASE_PASSWORD,
+                ),
+                'configuration' => array(
+                    'site_name' => 'GotCms',
+                    'site_is_offiline' => 0,
+                    'admin_email' => 'pierre.rambaud86@gmail.com',
+                    'admin_firstname' => 'Pierre',
+                    'admin_lastname' => 'Rambaud',
+                    'template' => 'default',
+                )
+            )
+        );
+
+        $this->getRequest()->getHeaders()->addHeaderLine('X_REQUESTED_WITH: XMLHttpRequest');
+        $this->dispatch(
+            '/install/complete',
+            'POST',
+            array(
+                'step' => 'it'
+            )
+        );
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Application');
+        $this->assertControllerName('InstallController');
+        $this->assertControllerClass('InstallController');
+        $this->assertMatchedRouteName('installComplete');
+    }
+
+    /**
+     * Test
+     *
+     * @covers Application\Controller\InstallController::completeAction
+     *
+     * @return void
+     */
+    public function testCompleteActionConfiguration()
+    {
+        $session = new SessionContainer();
+        $session->offsetSet(
+            'install',
+            array(
+                'lang' => 'fr_FR',
+                'db' => array(
+                    'driver' => GC_DATABASE_DRIVER,
+                    'username' => GC_DATABASE_USERNAME,
+                    'dbname' => GC_DATABASE_DATABASE,
+                    'hostname' => GC_DATABASE_HOSTNAME,
+                    'password' => GC_DATABASE_PASSWORD,
+                ),
+                'configuration' => array(
+                    'site_name' => 'GotCms',
+                    'site_is_offiline' => 0,
+                    'admin_email' => 'pierre.rambaud86@gmail.com',
+                    'admin_firstname' => 'Pierre',
+                    'admin_lastname' => 'Rambaud'
+                )
+            )
+        );
+
+        $this->getRequest()->getHeaders()->addHeaderLine('X_REQUESTED_WITH: XMLHttpRequest');
+        $this->dispatch(
+            '/install/complete',
+            'POST',
+            array(
+                'step' => 'c-cf'
+            )
+        );
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Application');
