@@ -28,6 +28,7 @@ namespace Gc\Mvc;
 
 use Gc\Registry;
 use Gc\Core\Config;
+use Gc\Layout\Model as LayoutModel;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 
 /**
@@ -81,7 +82,40 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testOnBootstrap()
     {
         Registry::getInstance()->offsetUnset('Translator');
+        $uri = Registry::get('Application')->getRequest()->getUri();
+        $uri->setHost('got-cms.com');
+        $uri->setPort(443);
         $this->assertNull($this->object->onBootstrap(Registry::get('Application')->getMvcEvent()));
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Mvc\Module::prepareException
+     *
+     * @return void
+     */
+    public function testPrepareException()
+    {
+        $existed = in_array('zend.view', stream_get_wrappers());
+        if ($existed) {
+            stream_wrapper_unregister('zend.view');
+        }
+
+        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        $layout_model = LayoutModel::fromArray(
+            array(
+                'name' => 'Layout Name',
+                'identifier' => 'Layout identifier',
+                'description' => 'Layout Description',
+                'content' => 'Layout Content'
+            )
+        );
+
+        $layout_model->save();
+        Config::setValue('site_exception_layout', $layout_model->getId());
+        $this->assertNull($this->object->prepareException(Registry::get('Application')->getMvcEvent()));
+        $layout_model->delete();
     }
 
     /**

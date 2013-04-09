@@ -416,4 +416,29 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('renderWebsite');
     }
+
+    /**
+     * Test
+     *
+     * @covers Application\Controller\IndexController::indexAction
+     * @covers Application\Controller\IndexController::loadTabs
+     * @covers Application\Controller\IndexController::loadProperties
+     * @covers Application\Controller\IndexController::explodePath
+     * @covers Application\Controller\IndexController::isSerialized
+     * @covers Application\Controller\IndexController::enableCache
+     *
+     * @return void
+     */
+    public function testIndexActionWith404PageAndNotEmptyContent()
+    {
+        CoreConfig::setValue('site_404_layout', $this->layout->getId());
+        $this->layout->setContent('test');
+        $this->dispatch('/404Page');
+        $this->assertResponseStatusCode(404);
+
+        $this->assertModuleName('Application');
+        $this->assertControllerName('IndexController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('renderWebsite');
+    }
 }

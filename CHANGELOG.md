@@ -3,6 +3,7 @@
 ##0.1.6 (-- --- 2013):
 - Only last key is required to display document (https://github.com/PierreRambaud/GotCms/issues/42)
 - Cache thrown exception (https://github.com/PierreRambaud/GotCms/issues/43)
+- Add specific layout for exception in front (https://github.com/PierreRambaud/GotCms/issues/44)
 
 ##0.1.5 (08 Apr 2013):
 - Git updater failed (https://github.com/PierreRambaud/GotCms/issues/24)

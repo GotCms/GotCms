@@ -84,10 +84,15 @@ class Config extends AbstractForm
         $layout_not_found->setAttribute('label', '404 layout');
         $layout_not_found->setValueOptions(array('Select document') + $layout_collection->getSelect());
 
+        $layout_exception  = new Element\Select('site_exception_layout');
+        $layout_exception->setAttribute('label', 'Exception layout');
+        $layout_exception->setValueOptions(array('Select document') + $layout_collection->getSelect());
+
         $general_fieldset->add($name);
         $general_fieldset->add($is_offline);
         $general_fieldset->add($offline_document);
         $general_fieldset->add($layout_not_found);
+        $general_fieldset->add($layout_exception);
         $this->add($general_fieldset);
 
         $this->getInputFilter()->add(
@@ -123,6 +128,14 @@ class Config extends AbstractForm
                 'required' => true,
             ),
             'site_404_layout'
+        );
+
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'site_exception_layout',
+                'required' => true,
+            ),
+            'site_exception_layout'
         );
 
         return $this;

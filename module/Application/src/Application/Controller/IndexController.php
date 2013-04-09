@@ -63,14 +63,14 @@ class IndexController extends Action
      *
      * @var string
      */
-    protected $viewName = 'application/index/view-content';
+    const VIEW_NAME = 'application/index/view-content';
 
     /**
      * View filename
      *
      * @var string
      */
-    protected $layoutName = 'application/index/layout-content';
+    const LAYOUT_NAME = 'application/index/layout-content';
 
     /**
      * View path
@@ -135,8 +135,8 @@ class IndexController extends Action
         stream_wrapper_register($this->viewStream, 'Gc\View\Stream');
         $template_path_stack = $this->getServiceLocator()->get('Zend\View\Resolver\TemplatePathStack');
         $template_path_stack->setUseStreamWrapper(true);
-        $this->viewPath   = $template_path_stack->resolve($this->viewName);
-        $this->layoutPath = $template_path_stack->resolve($this->layoutName);
+        $this->viewPath   = $template_path_stack->resolve(self::VIEW_NAME);
+        $this->layoutPath = $template_path_stack->resolve(self::LAYOUT_NAME);
 
         $path = $this->getRouteMatch()->getParam('path');
 
@@ -148,13 +148,19 @@ class IndexController extends Action
                 //Retrieve cache value and set data
                 $cache_value = $this->cache->getItem($cache_key);
                 $view_model  = $cache_value['view_model'];
-                $view_model->setTemplate($this->viewName);
+                $view_model->setTemplate(self::VIEW_NAME);
                 $view_model->setVariables($cache_value['layout_variables']);
                 $this->layout()->setVariables($cache_value['layout_variables']);
-                $this->layout()->setTemplate($this->layoutName);
+                $this->layout()->setTemplate(self::LAYOUT_NAME);
                 $layout_content = $cache_value['layout_content'];
                 $view_content   = $cache_value['view_content'];
             }
+        }
+
+        if (empty($view_model)) {
+            $view_model = new ViewModel();
+            $view_model->setTemplate(self::VIEW_NAME);
+            $this->layout()->setTemplate(self::LAYOUT_NAME);
         }
 
         //Cache is disable or cache isn't create
@@ -201,9 +207,6 @@ class IndexController extends Action
                 }
             }
 
-            $view_model = new ViewModel();
-            $view_model->setTemplate($this->viewName);
-            $this->layout()->setTemplate($this->layoutName);
 
             $variables = array();
             if (empty($document)) {

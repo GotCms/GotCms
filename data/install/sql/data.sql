@@ -39,4 +39,5 @@ INSERT INTO core_config_data (identifier, value) VALUES ('cache_lifetime', '600'
 INSERT INTO core_config_data (identifier, value) VALUES ('session_handler', '0');
 INSERT INTO core_config_data (identifier, value) VALUES ('site_offline_document', '');
 INSERT INTO core_config_data (identifier, value) VALUES ('site_404_layout', '');
+INSERT INTO core_config_data (identifier, value) VALUES ('site_exception_layout', '');
 INSERT INTO core_config_data (identifier, value) VALUES ('cookie_path', '/');

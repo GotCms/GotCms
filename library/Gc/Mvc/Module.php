@@ -27,7 +27,9 @@
 
 namespace Gc\Mvc;
 
-use Gc\Core\Config as GcConfig;
+use Application\Controller\IndexController as RenderController;
+use Gc\Core\Config as CoreConfig;
+use Gc\Layout;
 use Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway;
 use Gc\Registry;
 use Gc\Module\Collection as ModuleCollection;
@@ -39,6 +41,7 @@ use Zend\EventManager\Event;
 use Zend\I18n\Translator\Translator;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\MvcEvent;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container as SessionContainer;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
@@ -87,7 +90,7 @@ abstract class Module
             $translator = $event->getApplication()->getServiceManager()->get('translator');
 
             if (Registry::isRegistered('Db')) {
-                $translator->setLocale(GcConfig::getValue('locale'));
+                $translator->setLocale(CoreConfig::getValue('locale'));
             }
 
             \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
@@ -108,6 +111,21 @@ abstract class Module
             }
 
             $event->getRequest()->setBasePath($uri);
+
+            $event->getApplication()->getEventManager()->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'prepareException'));
+        }
+    }
+
+    /**
+     * Initialize Render error event
+     */
+    public function prepareException($e)
+    {
+        $layout = Layout\Model::fromId(CoreConfig::getValue('site_exception_layout'));
+        if (!empty($layout)) {
+            $template_path_stack = $e->getApplication()->getServiceManager()->get('Zend\View\Resolver\TemplatePathStack');
+            $template_path_stack->setUseStreamWrapper(true);
+            file_put_contents($template_path_stack->resolve(RenderController::LAYOUT_NAME), $layout->getContent());
         }
     }
 
@@ -151,7 +169,7 @@ abstract class Module
             }
 
             if (Registry::isRegistered('Db')) {
-                if (isset($config['view_manager']['display_exceptions']) and GcConfig::getValue('debug_is_active')) {
+                if (isset($config['view_manager']['display_exceptions']) and CoreConfig::getValue('debug_is_active')) {
                     $config['view_manager']['display_not_found_reason'] = true;
                     $config['view_manager']['display_exceptions']       = true;
                 }
@@ -211,11 +229,11 @@ abstract class Module
 
                     $session_manager = SessionContainer::getDefaultManager();
                     $session_config  = $session_manager->getConfig();
-                    $session_config->setStorageOption('gc_maxlifetime', GcConfig::getValue('session_lifetime'));
-                    $session_config->setStorageOption('cookie_path', GcConfig::getValue('cookie_path'));
-                    $session_config->setStorageOption('cookie_domain', GcConfig::getValue('cookie_domain'));
+                    $session_config->setStorageOption('gc_maxlifetime', CoreConfig::getValue('session_lifetime'));
+                    $session_config->setStorageOption('cookie_path', CoreConfig::getValue('cookie_path'));
+                    $session_config->setStorageOption('cookie_domain', CoreConfig::getValue('cookie_domain'));
 
-                    if (GcConfig::getValue('session_handler') == GcConfig::SESSION_DATABASE) {
+                    if (CoreConfig::getValue('session_handler') == CoreConfig::SESSION_DATABASE) {
                         $tablegateway_config = new DbTableGatewayOptions(
                             array(
                                 'idColumn'   => 'id',
