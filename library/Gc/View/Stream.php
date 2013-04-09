@@ -218,4 +218,24 @@ class Stream
     {
         return false;
     }
+
+    /**
+     * Register stream wrapper
+     *
+     * @param string $name Name
+     *
+     * @return void
+     */
+    public static function register($name = 'zend.view', $overwrite = true)
+    {
+        if (in_array($name, stream_get_wrappers())) {
+            if (!$overwrite) {
+                return;
+            }
+
+            stream_wrapper_unregister($name);
+        }
+
+        stream_wrapper_register($name, 'Gc\View\Stream');
+    }
 }

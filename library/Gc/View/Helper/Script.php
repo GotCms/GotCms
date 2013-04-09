@@ -59,10 +59,7 @@ class Script extends AbstractHelper
      */
     public function __invoke($identifier, $params = array())
     {
-        $existed = in_array('gc.script', stream_get_wrappers());
-        if (!$existed) {
-            stream_wrapper_register('gc.script', 'Gc\View\Stream');
-        }
+        Stream::register('gc.script', false);
 
         $script = ScriptModel::fromIdentifier($identifier);
         if (empty($script)) {

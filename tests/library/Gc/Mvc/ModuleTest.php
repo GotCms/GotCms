@@ -29,6 +29,7 @@ namespace Gc\Mvc;
 use Gc\Registry;
 use Gc\Core\Config;
 use Gc\Layout\Model as LayoutModel;
+use Gc\View\Stream;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 
 /**
@@ -97,12 +98,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testPrepareException()
     {
-        $existed = in_array('zend.view', stream_get_wrappers());
-        if ($existed) {
-            stream_wrapper_unregister('zend.view');
-        }
-
-        stream_wrapper_register('zend.view', '\Gc\View\Stream');
+        Stream::register();
         $layout_model = LayoutModel::fromArray(
             array(
                 'name' => 'Layout Name',

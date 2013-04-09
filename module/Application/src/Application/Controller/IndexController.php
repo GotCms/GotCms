@@ -52,13 +52,6 @@ use Exception;
 class IndexController extends Action
 {
     /**
-     * Stream name
-     *
-     * @var string
-     */
-    protected $viewStream = 'zend.view';
-
-    /**
      * View filename
      *
      * @var string
@@ -127,12 +120,7 @@ class IndexController extends Action
             }
         }
 
-        $existed = in_array($this->viewStream, stream_get_wrappers());
-        if ($existed) {
-            stream_wrapper_unregister($this->viewStream);
-        }
-
-        stream_wrapper_register($this->viewStream, 'Gc\View\Stream');
+        View\Stream::register();
         $template_path_stack = $this->getServiceLocator()->get('Zend\View\Resolver\TemplatePathStack');
         $template_path_stack->setUseStreamWrapper(true);
         $this->viewPath   = $template_path_stack->resolve(self::VIEW_NAME);

@@ -45,10 +45,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $existed = in_array('zend.view', stream_get_wrappers());
-        if ($existed) {
-            stream_wrapper_unregister('zend.view');
-        }
+        Stream::register();
     }
 
     /**
@@ -72,7 +69,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamOpen()
     {
-        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         $file = fopen('zend.view://Stream', 'r+');
         $this->assertInternalType(\PHPUnit_Framework_Constraint_IsType::TYPE_RESOURCE, $file);
     }
@@ -92,7 +88,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamRead()
     {
-        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://Stream', 'test');
         $this->assertEquals(file_get_contents('zend.view://Stream'), 'test');
     }
@@ -112,7 +107,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamWrite()
     {
-        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://Stream', 'test');
         $this->assertEquals(file_get_contents('zend.view://Stream'), 'test');
     }
@@ -130,7 +124,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamSeekSet()
     {
-        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://Stream', "test\ntest\ntest");
         $fp = fopen('zend.view://Stream', 'r');
         $this->assertEquals(0, fseek($fp, 0, SEEK_SET));
@@ -149,7 +142,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamSeekCur()
     {
-        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://Stream', "test\ntest\ntest");
         $fp = fopen('zend.view://Stream', 'a+');
         $this->assertEquals(0, fseek($fp, 0, SEEK_CUR));
@@ -168,7 +160,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamSeekEnd()
     {
-        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://Stream', "test\ntest\ntest");
         $fp = fopen('zend.view://Stream', 'r');
         $this->assertEquals(0, fseek($fp, -1, SEEK_END));
@@ -189,7 +180,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      */
     public function testStreamEof()
     {
-        stream_wrapper_register('zend.view', '\Gc\View\Stream');
         file_put_contents('zend.view://Stream', "test\ntest\ntest");
         $fp = fopen('zend.view://Stream', 'a+');
         do {
@@ -197,5 +187,18 @@ class StreamTest extends \PHPUnit_Framework_TestCase
         } while (!feof($fp));
 
         $this->assertTrue(feof($fp));
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\View\Stream::register
+     *
+     * @return void
+     */
+    public function testRegister()
+    {
+        $this->assertNull(Stream::register());
+        $this->assertNull(Stream::register('zend.view', false));
     }
 }

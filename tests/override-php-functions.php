@@ -69,14 +69,11 @@ function exec($command, &$output = array(), &$return_var = null)
  */
 namespace Gc\Core;
 
+use Gc\View\Stream;
+
 function glob($pattern, $flags = 0)
 {
-    $existed = in_array('zend.view', stream_get_wrappers());
-    if ($existed) {
-        stream_wrapper_unregister('zend.view');
-    }
-
-    stream_wrapper_register('zend.view', '\Gc\View\Stream');
+    Stream::register();
 
     if (preg_match('~\.sql$~', $pattern)) {
         $content = trim(file_get_contents('zend.view://test-updater'));
