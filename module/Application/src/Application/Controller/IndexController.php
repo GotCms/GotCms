@@ -141,7 +141,7 @@ class IndexController extends Action
         $path = $this->getRouteMatch()->getParam('path');
 
         $cache_is_enable = (CoreConfig::getValue('cache_is_active') == 1 and !$is_preview);
-        if ($cache_is_enable && !empty($document)) {
+        if ($cache_is_enable) {
             $this->enableCache();
             $cache_key = ('page' . (empty($path) ? '' : '-' . preg_replace('/[^a-z0-9_\+\-]+/Di', '_', str_replace('/', '-', $path))));
             if ($this->cache->hasItem($cache_key)) {
