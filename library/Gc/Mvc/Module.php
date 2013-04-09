@@ -111,19 +111,27 @@ abstract class Module
             }
 
             $event->getRequest()->setBasePath($uri);
-
-            $event->getApplication()->getEventManager()->attach(MvcEvent::EVENT_RENDER_ERROR, array($this, 'prepareException'));
+            $event->getApplication()->getEventManager()->attach(
+                MvcEvent::EVENT_RENDER_ERROR,
+                array($this, 'prepareException')
+            );
         }
     }
 
     /**
      * Initialize Render error event
+     *
+     * @param Event $event Event
+     *
+     * @return void
      */
-    public function prepareException($e)
+    public function prepareException($event)
     {
         $layout = Layout\Model::fromId(CoreConfig::getValue('site_exception_layout'));
         if (!empty($layout)) {
-            $template_path_stack = $e->getApplication()->getServiceManager()->get('Zend\View\Resolver\TemplatePathStack');
+            $template_path_stack = $event->getApplication()->getServiceManager()->get(
+                'Zend\View\Resolver\TemplatePathStack'
+            );
             $template_path_stack->setUseStreamWrapper(true);
             file_put_contents($template_path_stack->resolve(RenderController::LAYOUT_NAME), $layout->getContent());
         }

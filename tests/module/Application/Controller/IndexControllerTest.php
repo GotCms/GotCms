@@ -276,7 +276,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     {
         $enable_cache = CoreConfig::setValue('cache_is_active', 1);
         $enable_cache = CoreConfig::setValue('cache_handler', 'filesystem');
-        $document = DocumentModel::fromArray(
+        $document     = DocumentModel::fromArray(
             array(
                 'name' => 'test',
                 'url_key' => 'test',
@@ -322,7 +322,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     {
         $enable_cache = CoreConfig::setValue('cache_is_active', 1);
         $enable_cache = CoreConfig::setValue('cache_handler', 'filesystem');
-        $document = DocumentModel::fromArray(
+        $document     = DocumentModel::fromArray(
             array(
                 'name' => 'test',
                 'url_key' => 'test',

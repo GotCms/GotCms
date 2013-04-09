@@ -376,6 +376,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
                 ),
             ),
         );
+
         $layout_model = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',

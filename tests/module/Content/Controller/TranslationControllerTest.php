@@ -189,6 +189,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
             4 => array(),
             5 => array(),
         );
+
         $destination[1][1]           = array();
         $destination[1][1]['dst_id'] = '1';
         $destination[1][1]['locale'] = 'fr_FR';
@@ -204,17 +205,20 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
         $destination[4][4]           = array();
         $destination[4][4]['dst_id'] = '4';
         $destination[4][4]['locale'] = 'fr_FR';
-        $destination[4][4]['value']  = 'Fonctionnent comme les vues, vous pouvez récupérer les propriétés, use helpers et si vous voulez intégrer l\'enfant (vue) écrivez : $this->content.';
+        $destination[4][4]['value']  = 'Fonctionnent comme les vues, vous pouvez récupérer les propriétés, '
+            . 'use helpers et si vous voulez intégrer l\'enfant (vue) écrivez : $this->content.';
         $destination[5][5]           = array();
         $destination[5][5]['dst_id'] = '5';
         $destination[5][5]['locale'] = 'fr_FR';
-        $destination[5][5]['value']  = 'Fonctionnent comme les contrôleurs Zend Framework, vous pouvez récupérer la requête (Request), la réponse (Response) et utiliser les plugins de contrôleurs.';
+        $destination[5][5]['value']  = 'Fonctionnent comme les contrôleurs Zend Framework, vous pouvez récupérer'
+            . ' la requête (Request), la réponse (Response) et utiliser les plugins de contrôleurs.';
 
         $source    = array();
         $source[1] = 'Views';
         $source[2] = 'Website statistics';
         $source[3] = 'Welcome %s';
-        $source[4] = 'Work like views, you can get properties, use helpers, and if you want to integrate children (view) write: $this->content.';
+        $source[4] = 'Work like views, you can get properties, use helpers, and if you want to integrate children '
+            . '(view) write: $this->content.';
         $source[5] = 'Work like Zend Framework controllers, you can get the request, response and controller plugins.';
 
         $this->dispatch(
@@ -232,5 +236,4 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('TranslationController');
         $this->assertMatchedRouteName('translationList');
     }
-
 }

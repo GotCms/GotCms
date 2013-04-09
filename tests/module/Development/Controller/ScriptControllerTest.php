@@ -376,6 +376,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
                 ),
             ),
         );
+
         $script_model = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',

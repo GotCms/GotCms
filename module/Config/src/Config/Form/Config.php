@@ -84,7 +84,7 @@ class Config extends AbstractForm
         $layout_not_found->setAttribute('label', '404 layout');
         $layout_not_found->setValueOptions(array('Select document') + $layout_collection->getSelect());
 
-        $layout_exception  = new Element\Select('site_exception_layout');
+        $layout_exception = new Element\Select('site_exception_layout');
         $layout_exception->setAttribute('label', 'Exception layout');
         $layout_exception->setValueOptions(array('Select document') + $layout_collection->getSelect());
 

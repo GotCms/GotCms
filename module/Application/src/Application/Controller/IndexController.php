@@ -143,7 +143,8 @@ class IndexController extends Action
         $cache_is_enable = (CoreConfig::getValue('cache_is_active') == 1 and !$is_preview);
         if ($cache_is_enable) {
             $this->enableCache();
-            $cache_key = ('page' . (empty($path) ? '' : '-' . preg_replace('/[^a-z0-9_\+\-]+/Di', '_', str_replace('/', '-', $path))));
+            $cache_key = ('page'
+                . (empty($path) ? '' : '-' . preg_replace('/[^a-z0-9_\+\-]+/Di', '_', str_replace('/', '-', $path))));
             if ($this->cache->hasItem($cache_key)) {
                 //Retrieve cache value and set data
                 $cache_value = $this->cache->getItem($cache_key);

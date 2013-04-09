@@ -376,6 +376,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
                 ),
             ),
         );
+
         $view_model = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
