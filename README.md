@@ -5,7 +5,7 @@
 GotCms is a content management system based on [Zend Framework 2.1.4](http://framework.zend.com/).
 
 This product has been made available under the terms of the GNU GPL version 3.
-Please read the LICENSE.txt file for the exact license details that apply to GotCms.
+Please read the [LICENSE.txt](LICENSE.txt) file for the exact license details that apply to GotCms.
 
 ## Updates in 0.1.5
 
