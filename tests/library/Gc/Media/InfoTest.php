@@ -108,7 +108,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
         $assert_string = '<dl><dt>Author</dt><dd>Pierre Rambaud</dd><dt>Date</dt>' .
             '<dd>2012</dd><dt>Version</dt><dd>0.1</dd><dt>Description</dt>' .
             '<dd>Information test</dd><dt>Database compatibility</dt><dd>pgsql</dd>' .
-            '<dt>Website url</dt><dd><a href="http://rambaudpierre.fr">website</a></dd></dl>';
+            '<dt>Website url</dt><dd><a href="http://pierrerambaud.com">website</a></dd></dl>';
         $this->assertEquals($assert_string, $this->object->render());
     }
 

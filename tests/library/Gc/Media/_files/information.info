@@ -3,4 +3,4 @@ date = 2012
 version = 0.1
 description = "Information test"
 database_compatibility = "pgsql"
-website = "http://rambaudpierre.fr"
+website = "http://pierrerambaud.com"
