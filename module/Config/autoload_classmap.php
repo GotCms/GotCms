@@ -31,4 +31,9 @@ return array(
     'Config\Controller\RoleController'  => __DIR__ . '/src/Config/Controller/RoleController.php',
     'Config\Controller\UserController'  => __DIR__ . '/src/Config/Controller/UserController.php',
     'Config\Module'                     => __DIR__ . '/Module.php',
+    'Config\Form\Install'               => __DIR__ . '/src/Config/Form/Config.php',
+    'Config\Form\Role'                  => __DIR__ . '/src/Config/Form/Role.php',
+    'Config\Form\User'                  => __DIR__ . '/src/Config/Form/User.php',
+    'Config\Form\UserForgotPassword'    => __DIR__ . '/src/Config/Form/UserForgotPassword.php',
+    'Config\Form\UserLogin'             => __DIR__ . '/src/Config/Form/UserLogin.php',
 );

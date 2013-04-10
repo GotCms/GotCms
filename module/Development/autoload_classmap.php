@@ -26,16 +26,23 @@
  */
 
 return array(
-    'Development\Controller\IndexController'        =>
+    'Development\Controller\IndexController'          =>
         __DIR__ . '/src/Development/Controller/IndexController.php',
-    'Development\Controller\DocumentTypeController' =>
+    'Development\Controller\DocumentTypeController'   =>
         __DIR__ . '/src/Development/Controller/DocumentTypeController.php',
-    'Development\Controller\DatatypeController'     =>
+    'Development\Controller\DatatypeController'       =>
         __DIR__ . '/src/Development/Controller/DatatypeController.php',
-    'Development\Controller\LayoutController'       =>
+    'Development\Controller\LayoutController'         =>
         __DIR__ . '/src/Development/Controller/LayoutController.php',
-    'Development\Controller\ViewController'         =>
+    'Development\Controller\ViewController'           =>
         __DIR__ . '/src/Development/Controller/ViewController.php',
-    'Development\Module'                            =>
+    'Development\Controller\ScriptController'         =>
+        __DIR__ . '/src/Development/Controller/ScriptController.php',
+    'Development\Module'                              =>
         __DIR__ . '/Module.php',
+    'Development\Form\Datatype'                       => __DIR__ . '/src/Development/Form/Datatype.php',
+    'Development\Form\DocumentType'                   => __DIR__ . '/src/Development/Form/DocumentType.php',
+    'Development\Form\Layout'                         => __DIR__ . '/src/Development/Form/Layout.php',
+    'Development\Form\Script'                         => __DIR__ . '/src/Development/Form/Script.php',
+    'Development\Form\View'                           => __DIR__ . '/src/Development/Form/View.php',
 );

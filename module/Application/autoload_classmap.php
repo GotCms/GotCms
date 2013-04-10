@@ -26,7 +26,9 @@
  */
 
 return array(
-    'Application\Controller\IndexController' => __DIR__ . '/src/Application/Controller/IndexController.php',
-    'Application\Controller\ErrorController' => __DIR__ . '/src/Application/Controller/ErrorController.php',
-    'Application\Module'                     => __DIR__ . '/Module.php',
+    'Application\Controller\IndexController'   => __DIR__ . '/src/Application/Controller/IndexController.php',
+    'Application\Controller\InstallController' => __DIR__ . '/src/Application/Controller/InstallController.php',
+    'Application\Controller\ErrorController'   => __DIR__ . '/src/Application/Controller/ErrorController.php',
+    'Application\Module'                       => __DIR__ . '/Module.php',
+    'Application\Form\Install'                 => __DIR__ . '/src/Application/Form/Install.php',
 );

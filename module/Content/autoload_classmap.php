@@ -26,7 +26,11 @@
  */
 
 return array(
-    'Content\Controller\IndexController'    => __DIR__ . '/src/Content/Controller/IndexController.php',
-    'Content\Controller\DocumentController' => __DIR__ . '/src/Content/Controller/DocumentController.php',
-    'Content\Module'                        => __DIR__ . '/Module.php',
+    'Content\Controller\IndexController'       => __DIR__ . '/src/Content/Controller/IndexController.php',
+    'Content\Controller\DocumentController'    => __DIR__ . '/src/Content/Controller/DocumentController.php',
+    'Content\Controller\MediaController'       => __DIR__ . '/src/Content/Controller/MediaController.php',
+    'Content\Controller\TranslationController' => __DIR__ . '/src/Content/Controller/TranslationController.php',
+    'Content\Module'                           => __DIR__ . '/Module.php',
+    'Content\Form\Document'                    => __DIR__ . '/src/Content/Form/Document.php',
+    'Content\Form\Translation'                 => __DIR__ . '/src/Content/Form/Translation.php',
 );

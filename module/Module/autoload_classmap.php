@@ -28,4 +28,5 @@
 return array(
     'Module\Controller\IndexController' => __DIR__ . '/src/Module/Controller/IndexController.php',
     'Module\Module'                     => __DIR__ . '/Module.php',
+    'Module\Form\Module'                => __DIR__ . '/src/Module/Form/Module.php',
 );
