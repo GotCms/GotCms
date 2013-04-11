@@ -47,8 +47,10 @@
                     <label class="optional" for="permissions-<?php echo (int)$permission_id; ?>">
                         <?php echo $this->escapeHtml($this->translate($permission['name'])); ?>
                     </label>
-
-                    <input type="checkbox" value="1" <?php if ($permission['value']): ?>checked="checked" <?php endif; ?>id="permissions-<?php echo (int)$permission_id; ?>" name="permissions[<?php echo (int)$permission_id; ?>]">
+                    <div class="input-checkbox">
+                        <input type="checkbox" class="input-checkbox" value="1" <?php if ($permission['value']): ?>checked="checked" <?php endif; ?>id="permissions-<?php echo (int)$permission_id; ?>" name="permissions[<?php echo (int)$permission_id; ?>]">
+                        <label for="permissions-<?php echo (int)$permission_id; ?>"></label>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php endforeach; ?>

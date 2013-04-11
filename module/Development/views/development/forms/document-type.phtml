@@ -144,7 +144,10 @@
                 </div>
                 <div>
                     <label for="properties-required" class="optional"><?php echo $this->escapeHtml($this->translate('Required')); ?></label>
-                    <input type="checkbox" name="properties[required]" id="properties-required" value="1">
+                    <div class="input-checkbox">
+                        <input type="checkbox" name="properties[required]" class="input-checkbox" id="properties-required" value="1">
+                        <label for="properties-required"></label>
+                    </div>
                 </div>
                 <div>
                     <button name="properties[add]" id="property-add" type="button" class="button-add button-add-property"><?php echo $this->escapeHtml($this->translate('Add')); ?></button>
@@ -231,7 +234,10 @@
                                                         $value = $property->get('required')->getValue();
                                                         $checkedValue = $property->get('required')->getAttribute('checkedValue');
                                                     ?>
-                                                    <input<?php if ($value == $checkedValue):?> checked="checked"<?php endif; ?> type="checkbox" value="<?php echo $value; ?>" id="properties-required-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][required]">
+                                                    <div class="input-checkbox">
+                                                        <input type="checkbox" name="properties[<?php echo $property_form_id; ?>][required]" class="input-checkbox" id="properties-required-<?php echo $property_id; ?>" value="<?php echo $value; ?>" <?php if ($value == $checkedValue):?> checked="checked"<?php endif; ?>>
+                                                        <label for="properties-required-<?php echo $property_id; ?>"></label>
+                                                    </div>
 
                                                     <?php if ($this->form->get('properties')->has($property_form_id)): ?>
                                                         <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('required')); ?>

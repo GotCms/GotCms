@@ -81,13 +81,17 @@ class FormCheckbox extends ZendFormCheckbox
             $attributes['checked'] = 'checked';
         }
 
-        if ($element->getAttribute('class') != 'input-checkbox' or $element->getAttribute('id') == '') {
+        if ($element->getAttribute('class') != 'input-checkbox') {
             $rendered = sprintf(
                 '<input %s%s',
                 $this->createAttributesString($attributes),
                 $closing_bracket
             );
         } else {
+            if ($element->getAttribute('id') == '') {
+                $element->setAttribute('id', 'checkbox-' . uniqid());
+            }
+
             unset($attributes['class']);
             $rendered = sprintf(
                 '<div class="input-checkbox"><input %s%s<label for="%s"></label></div>',

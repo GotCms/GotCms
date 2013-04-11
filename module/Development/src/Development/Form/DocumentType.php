@@ -145,6 +145,7 @@ class DocumentType extends AbstractForm
         $select                   = $document_type_collection->getSelect();
         if (!empty($select)) {
             $dependency = new Element\MultiCheckbox('infos[dependency]');
+            $dependency->setAttribute('class', 'input-checkbox');
             $dependency->setValueOptions($document_type_collection->getSelect());
             $fieldsets->add($dependency);
         }
@@ -256,7 +257,9 @@ class DocumentType extends AbstractForm
 
         $description = new Element\Text('description');
         $required    = new Element\Checkbox('required');
-        $required->setValue(1);
+        $required->setValue(1)
+            ->setAttribute('id', 'required')
+            ->setAttribute('class', 'input-checkbox');
         $property_id = new Element\Hidden('property_id');
 
         if ($property instanceof Property\Model) {

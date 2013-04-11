@@ -141,8 +141,8 @@ footer a:hover {text-decoration:underline;}
 #menu #browser li {margin-left: 18px;padding:0;background-position:0 -1766px;list-style: none}
 .textarea {margin:0 0 10px 0;border:1px solid #CCCCCC;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;-webkit-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;}
 .input-text{margin:5px 0;width:280px;border:1px solid #CCCCCC;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;-webkit-box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;box-shadow:0 1px 1px #CCCCCC inset,0 1px 0 #FFFFFF;height:25px;}
+.input-checkbox {width: 20px;height:20px;display:inline-block;position: relative;margin-right:5px;}
 .input-checkbox[type=checkbox] {visibility: hidden;}
-.input-checkbox {width: 20px;height:20px;display:inline-block;position: relative;}
 .input-checkbox label {width:9px;cursor: pointer;position: absolute;width: 20px !important;height: 20px !important;top: 0;left:0;border-radius: 4px;-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);background: -webkit-linear-gradient(top, #222222 0%, #45484D 100%);background: -moz-linear-gradient(top, #222222 0%, #45484D 100%);background: -o-linear-gradient(top, #222222 0%, #45484D 100%);background: -ms-linear-gradient(top, #222222 0%, #45484D 100%);background: linear-gradient(top, #222222 0%, #45484D 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#45484D',GradientType=0 );}
 .input-checkbox label:after {-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter: alpha(opacity=0);opacity: 0;content: '';position: absolute;width: 9px;height: 5px;background: transparent;top: 6px;left: 4px;border: 3px solid #FCFFF4;border-top: none;border-right: none;-webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-o-transform: rotate(-45deg);-ms-transform: rotate(-45deg);transform: rotate(-45deg);}
 .input-checkbox label:hover::after {-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";filter: alpha(opacity=30);opacity: 0.3;}
@@ -215,6 +215,7 @@ footer a:hover {text-decoration:underline;}
 #properties-tabs-content dd {float:left;}
 #properties-tabs-content dt {float:left;clear:both;}
 #properties-tabs-content dd,#properties-tabs-content dt{height:35px;line-height:35px;}
+#properties-tabs-content .input-checkbox{margin-top: 7px;}
 #datatype-infos a {color:#000000;}
 #datatype-infos dl {display:none;}
 

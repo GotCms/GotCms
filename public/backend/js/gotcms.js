@@ -241,7 +241,10 @@ var Gc = (function($)
                                     '<label class="optional" for="properties-required-#{tab}-#{id}">' + Translator.translate('Required') + '</label>' +
                                 '</dt>' +
                                 '<dd id="required-element-#{tab}-#{id}">' +
-                                    '<input type="checkbox" value="1" id="properties-required-#{tab}-#{id}" name="properties[property#{id}][required]">' +
+                                    '<div class="input-checkbox">' +
+                                        '<input type="checkbox" name="properties[<?php echo $property_form_id; ?>][required]" class="input-checkbox" id="properties-required-#{tab}-#{id}" value="1">' +
+                                        '<label for="properties-required-#{tab}-#{id}"></label>' +
+                                    '</div>' +
                                 '</dd>' +
                                 '<dd id="required-element-#{tab}-#{id}">' +
                                     '<input class="property-tab-id" type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">' +

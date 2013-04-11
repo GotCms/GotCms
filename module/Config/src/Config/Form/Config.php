@@ -71,22 +71,24 @@ class Config extends AbstractForm
 
         $is_offline = new Element\Checkbox('site_is_offline');
         $is_offline->setAttribute('label', 'Is offline')
+            ->setAttribute('class', 'input-checkbox')
+            ->setAttribute('id', 'site-offiline')
             ->setCheckedValue('1');
 
         $document_collection = new Document\Collection();
         $document_collection->load(0);
         $offline_document = new Element\Select('site_offline_document');
-        $offline_document->setAttribute('label', 'Offline document');
-        $offline_document->setValueOptions(array('Select document') + $document_collection->getSelect());
+        $offline_document->setAttribute('label', 'Offline document')
+            ->setValueOptions(array('Select document') + $document_collection->getSelect());
 
         $layout_collection = new Layout\Collection();
         $layout_not_found  = new Element\Select('site_404_layout');
-        $layout_not_found->setAttribute('label', '404 layout');
-        $layout_not_found->setValueOptions(array('Select document') + $layout_collection->getSelect());
+        $layout_not_found->setAttribute('label', '404 layout')
+            ->setValueOptions(array('Select document') + $layout_collection->getSelect());
 
         $layout_exception = new Element\Select('site_exception_layout');
-        $layout_exception->setAttribute('label', 'Exception layout');
-        $layout_exception->setValueOptions(array('Select document') + $layout_collection->getSelect());
+        $layout_exception->setAttribute('label', 'Exception layout')
+            ->setValueOptions(array('Select document') + $layout_collection->getSelect());
 
         $general_fieldset->add($name);
         $general_fieldset->add($is_offline);
@@ -176,7 +178,8 @@ class Config extends AbstractForm
         $debug_fieldset  = new Fieldset('debug');
         $debug_is_active = new Element\Checkbox('debug_is_active');
         $debug_is_active->setAttribute('label', 'Debug is active')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('id', 'input-checkbox')
+            ->setAttribute('class', 'input-checkbox');
 
         $debug_fieldset->add($debug_is_active);
         $this->add($debug_fieldset);
@@ -185,7 +188,8 @@ class Config extends AbstractForm
         $cache_fieldset  = new Fieldset('cache');
         $cache_is_active = new Element\Checkbox('cache_is_active');
         $cache_is_active->setAttribute('label', 'Cache is active')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'input-checkbox')
+            ->setAttribute('id', 'cache-active');
 
         $cache_handler = new Element\Select('cache_handler');
         $cache_handler->setAttribute('label', 'Cache handler');
