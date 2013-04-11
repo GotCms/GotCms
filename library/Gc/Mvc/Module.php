@@ -127,13 +127,15 @@ abstract class Module
      */
     public function prepareException($event)
     {
-        $layout = Layout\Model::fromId(CoreConfig::getValue('site_exception_layout'));
-        if (!empty($layout)) {
-            $template_path_stack = $event->getApplication()->getServiceManager()->get(
-                'Zend\View\Resolver\TemplatePathStack'
-            );
-            $template_path_stack->setUseStreamWrapper(true);
-            file_put_contents($template_path_stack->resolve(RenderController::LAYOUT_NAME), $layout->getContent());
+        if ($event->getApplication()->getMvcEvent()->getRouteMatch()->getMatchedRouteName() === 'renderWebsite') {
+            $layout = Layout\Model::fromId(CoreConfig::getValue('site_exception_layout'));
+            if (!empty($layout)) {
+                $template_path_stack = $event->getApplication()->getServiceManager()->get(
+                    'Zend\View\Resolver\TemplatePathStack'
+                );
+                $template_path_stack->setUseStreamWrapper(true);
+                file_put_contents($template_path_stack->resolve(RenderController::LAYOUT_NAME), $layout->getContent());
+            }
         }
     }
 
