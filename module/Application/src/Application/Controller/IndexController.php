@@ -93,16 +93,16 @@ class IndexController extends Action
      */
     public function indexAction()
     {
-        $visitor    = new Visitor();
-        $session    = $this->getSession();
-        $session_id = $this->getSession()->getDefaultManager()->getId();
-        $is_admin   = $this->getAuth()->hasIdentity();
-        $is_preview = ($is_admin and $this->getRequest()->getQuery()->get('preview') === 'true');
+        $visitor   = new Visitor();
+        $session   = $this->getSession();
+        $sessionId = $this->getSession()->getDefaultManager()->getId();
+        $isAdmin   = $this->getAuth()->hasIdentity();
+        $isPreview = ($isAdmin and $this->getRequest()->getQuery()->get('preview') === 'true');
 
         //Don't log preview
-        if (!$is_preview and !$is_admin) {
+        if (!$isPreview and !$isAdmin) {
             try {
-                $session->visitorId = $visitor->getVisitorId($session_id);
+                $session->visitorId = $visitor->getVisitorId($sessionId);
             } catch (Exception $e) {
                 //don't care
             }
@@ -112,7 +112,7 @@ class IndexController extends Action
 
         if (CoreConfig::getValue('site_is_offline') == 1) {
             //Site is offline
-            if (!$is_admin) {
+            if (!$isAdmin) {
                 $document = Document\Model::fromId(CoreConfig::getValue('site_offline_document'));
                 if (empty($document)) {
                     die('Site offline');
@@ -121,75 +121,76 @@ class IndexController extends Action
         }
 
         View\Stream::register();
-        $template_path_stack = $this->getServiceLocator()->get('Zend\View\Resolver\TemplatePathStack');
-        $template_path_stack->setUseStreamWrapper(true);
-        $this->viewPath   = $template_path_stack->resolve(self::VIEW_NAME);
-        $this->layoutPath = $template_path_stack->resolve(self::LAYOUT_NAME);
+        $templatePathStack = $this->getServiceLocator()->get('Zend\View\Resolver\TemplatePathStack');
+        $templatePathStack->setUseStreamWrapper(true);
+        $this->viewPath   = $templatePathStack->resolve(self::VIEW_NAME);
+        $this->layoutPath = $templatePathStack->resolve(self::LAYOUT_NAME);
 
         $path = $this->getRouteMatch()->getParam('path');
 
-        $cache_is_enable = (CoreConfig::getValue('cache_is_active') == 1 and !$is_preview);
-        if ($cache_is_enable) {
+        $cacheIsEnable = (CoreConfig::getValue('cache_is_active') == 1 and !$isPreview);
+        if ($cacheIsEnable) {
             $this->enableCache();
-            $cache_key = ('page'
-                . (empty($path) ? '' : '-' . preg_replace('/[^a-z0-9_\+\-]+/Di', '_', str_replace('/', '-', $path))));
-            if ($this->cache->hasItem($cache_key)) {
+            $cacheKey = ('page'
+                . (empty($path) ? '' : '-'
+                . preg_replace('/[^a-z0-9_\+\-]+/Di', '_', str_replace('/', '-', strtolower($path)))));
+            if ($this->cache->hasItem($cacheKey)) {
                 //Retrieve cache value and set data
-                $cache_value = $this->cache->getItem($cache_key);
-                $view_model  = $cache_value['view_model'];
-                $view_model->setTemplate(self::VIEW_NAME);
-                $view_model->setVariables($cache_value['layout_variables']);
-                $this->layout()->setVariables($cache_value['layout_variables']);
+                $cacheValue = $this->cache->getItem($cacheKey);
+                $viewModel  = $cacheValue['view_model'];
+                $viewModel->setTemplate(self::VIEW_NAME);
+                $viewModel->setVariables($cacheValue['layout_variables']);
+                $this->layout()->setVariables($cacheValue['layout_variables']);
                 $this->layout()->setTemplate(self::LAYOUT_NAME);
-                $layout_content = $cache_value['layout_content'];
-                $view_content   = $cache_value['view_content'];
+                $layoutContent = $cacheValue['layout_content'];
+                $viewContent   = $cacheValue['view_content'];
             }
         }
 
-        if (empty($view_model)) {
-            $view_model = new ViewModel();
-            $view_model->setTemplate(self::VIEW_NAME);
+        if (empty($viewModel)) {
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate(self::VIEW_NAME);
             $this->layout()->setTemplate(self::LAYOUT_NAME);
         }
 
         //Cache is disable or cache isn't create
-        if (empty($cache_value)) {
+        if (empty($cacheValue)) {
             if (empty($document)) {
                 if (empty($path)) {
                     $document = Document\Model::fromUrlKey('');
                 } else {
-                    $explode_path = $this->explodePath($path);
-                    $children     = null;
-                    $key          = array();
-                    $has_document = false;
-                    $parent_id    = 0;
+                    $explodePath = $this->explodePath($path);
+                    $children    = null;
+                    $key         = array();
+                    $hasDocument = false;
+                    $parentId    = 0;
 
-                    foreach ($explode_path as $url_key) {
-                        $document     = null;
-                        $document_tmp = null;
-                        if ($has_document === false) {
-                            $document_tmp = Document\Model::fromUrlKey($url_key, $parent_id);
+                    foreach ($explodePath as $urlKey) {
+                        $document    = null;
+                        $documentTmp = null;
+                        if ($hasDocument === false) {
+                            $documentTmp = Document\Model::fromUrlKey($urlKey, $parentId);
                         }
 
                         if ((is_array($children)
                             and !empty($children)
-                            and !in_array($document_tmp, $children)
+                            and !in_array($documentTmp, $children)
                             and $children !== null)
-                            or $document_tmp === null) {
-                            $has_document = true;
+                            or $documentTmp === null) {
+                            $hasDocument = true;
                         } else {
-                            if (empty($document_tmp)) {
+                            if (empty($documentTmp)) {
                                 break;
                             } else {
-                                if (!$document_tmp->isPublished()) {
-                                    if (!$is_preview) {
+                                if (!$documentTmp->isPublished()) {
+                                    if (!$isPreview) {
                                         break;
                                     }
                                 }
 
-                                $document  = $document_tmp;
-                                $parent_id = $document->getId();
-                                $children  = $document->getChildren();
+                                $document = $documentTmp;
+                                $parentId = $document->getId();
+                                $children = $document->getChildren();
                             }
                         }
                     }
@@ -203,17 +204,17 @@ class IndexController extends Action
                 $this->getResponse()->setStatusCode(404);
                 $layout = Layout\Model::fromId(CoreConfig::getValue('site_404_layout'));
                 if (!empty($layout)) {
-                    $layout_content = $layout->getContent();
+                    $layoutContent = $layout->getContent();
                 } else {
-                    $layout_content = '<?php echo $this->content; ?>';
+                    $layoutContent = '<?php echo $this->content; ?>';
                 }
             } else {
                 //Get all tabs of document
                 $tabs = $this->loadTabs($document->getDocumentTypeId());
                 //get Tabs and Properties to construct property in view
                 foreach ($tabs as $tab) {
-                    $tabs_array[] = $tab->getName();
-                    $properties   = $this->loadProperties(
+                    $tabsArray[] = $tab->getName();
+                    $properties  = $this->loadProperties(
                         $document->getDocumentTypeId(),
                         $tab->getId(),
                         $document->getId()
@@ -225,29 +226,29 @@ class IndexController extends Action
                             $value = unserialize($value);
                         }
 
-                        $view_model->setVariable($property->getIdentifier(), $value);
+                        $viewModel->setVariable($property->getIdentifier(), $value);
                         $this->layout()->setVariable($property->getIdentifier(), $value);
                         $variables[$property->getIdentifier()] = $value;
                     }
                 }
 
                 $variables['currentDocument'] = $document;
-                $view_model->setVariable('currentDocument', $document);
+                $viewModel->setVariable('currentDocument', $document);
                 $this->layout()->setVariable('currentDocument', $document);
 
                 //Set view from database
                 $view   = View\Model::fromId($document->getViewId());
                 $layout = Layout\Model::fromId($document->getLayoutId());
 
-                $layout_content = $layout->getContent();
-                $view_content   = $view->getContent();
+                $layoutContent = $layout->getContent();
+                $viewContent   = $view->getContent();
             }
 
-            if ($cache_is_enable && !empty($document)) {
+            if ($cacheIsEnable && !empty($document)) {
                 $this->cache->addItem(
-                    $cache_key,
+                    $cacheKey,
                     array(
-                        'view_model' => $view_model,
+                        'view_model' => $viewModel,
                         'layout_variables' => $variables,
                         'layout_content' => $layout->getContent(),
                         'view_content' => !empty($view) ? $view->getContent() : '',
@@ -256,43 +257,43 @@ class IndexController extends Action
             }
         }
 
-        file_put_contents($this->layoutPath, $layout_content);
-        if (!empty($view_content)) {
-            file_put_contents($this->viewPath, $view_content);
+        file_put_contents($this->layoutPath, $layoutContent);
+        if (!empty($viewContent)) {
+            file_put_contents($this->viewPath, $viewContent);
         }
 
         $this->events()->trigger('Front', 'postDispatch');
 
-        return $view_model;
+        return $viewModel;
     }
 
     /**
      * Load tabs
      *
-     * @param integer $document_type_id Document type id
+     * @param integer $documentTypeId Document type id
      *
      * @return Gc\Component\Tab\Collection
      */
-    protected function loadTabs($document_type_id)
+    protected function loadTabs($documentTypeId)
     {
-        $document_type = DocumentType\Model::fromId($document_type_id);
-        return $document_type->getTabs();
+        $documentType = DocumentType\Model::fromId($documentTypeId);
+        return $documentType->getTabs();
     }
 
 
     /**
      * Load properties
      *
-     * @param integer $document_type_id Document type id
-     * @param integer $tab_id           Tab id
-     * @param integer $document_id      Document id
+     * @param integer $documentTypeId Document type id
+     * @param integer $tabId          Tab id
+     * @param integer $documentId     Document id
      *
      * @return \Gc\Component\Property\Collection
      */
-    protected function loadProperties($document_type_id, $tab_id, $document_id)
+    protected function loadProperties($documentTypeId, $tabId, $documentId)
     {
         $properties = new Property\Collection();
-        $properties->load($document_type_id, $tab_id, $document_id);
+        $properties->load($documentTypeId, $tabId, $documentId);
 
         return $properties->getProperties();
     }
@@ -306,12 +307,12 @@ class IndexController extends Action
      */
     protected function explodePath($path)
     {
-        $explode_path = explode('/', $path);
+        $explodePath = explode('/', $path);
         if (preg_match('/\/$/', $path)) {
-            array_pop($explode_path);
+            array_pop($explodePath);
         }
 
-        return $explode_path;
+        return $explodePath;
     }
 
     /**
@@ -341,17 +342,17 @@ class IndexController extends Action
      */
     protected function enableCache()
     {
-        $cache_ttl     = (int) CoreConfig::getValue('cache_lifetime');
-        $cache_handler = CoreConfig::getValue('cache_handler');
+        $cacheTtl     = (int) CoreConfig::getValue('cache_lifetime');
+        $cacheHandler = CoreConfig::getValue('cache_handler');
 
-        if (!in_array($cache_handler, array('apc', 'memcached', 'filesystem'))) {
-            $cache_handler = 'filesystem';
+        if (!in_array($cacheHandler, array('apc', 'memcached', 'filesystem'))) {
+            $cacheHandler = 'filesystem';
         }
 
-        switch($cache_handler) {
+        switch($cacheHandler) {
             case 'memcached':
-                $cache_options = array(
-                    'ttl' => $cache_ttl,
+                $cacheOptions = array(
+                    'ttl' => $cacheTtl,
                     'servers' => array(array(
                         'localhost', 11211
                     )),
@@ -359,8 +360,8 @@ class IndexController extends Action
                 break;
             case 'apc':
             default:
-                $cache_options = array(
-                    'ttl' => $cache_ttl,
+                $cacheOptions = array(
+                    'ttl' => $cacheTtl,
                 );
                 break;
         }
@@ -368,8 +369,8 @@ class IndexController extends Action
         $this->cache = CacheStorage::factory(
             array(
                 'adapter' => array(
-                    'name' => $cache_handler,
-                    'options' => $cache_options,
+                    'name' => $cacheHandler,
+                    'options' => $cacheOptions,
                 ),
                 'plugins' => array(
                     // Don't throw exceptions on cache errors

@@ -49,13 +49,13 @@ class Collection extends AbstractTable
     /**
      * Get scripts
      *
-     * @param boolean $force_reload to initiliaze scripts
+     * @param boolean $forceReload to initiliaze scripts
      *
      * @return array
      */
-    public function getScripts($force_reload = false)
+    public function getScripts($forceReload = false)
     {
-        if ($force_reload or $this->getData('scripts') === null) {
+        if ($forceReload or $this->getData('scripts') === null) {
             $rows = $this->fetchAll(
                 $this->select(
                     function (Select $select) {

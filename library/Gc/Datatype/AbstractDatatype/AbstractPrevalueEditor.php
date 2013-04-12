@@ -67,13 +67,13 @@ abstract class AbstractPrevalueEditor extends Object
     /**
      * Abstract function for save Editor
      *
-     * @param \Gc\Datatype\AbstractDatatype $datatype_abstract Datatype
+     * @param \Gc\Datatype\AbstractDatatype $datatypeAbstract Datatype
      *
      * @return void
      */
-    public function __construct(Datatype\AbstractDatatype $datatype_abstract)
+    public function __construct(Datatype\AbstractDatatype $datatypeAbstract)
     {
-        $this->datatype = $datatype_abstract;
+        $this->datatype = $datatypeAbstract;
         parent::__construct();
     }
 

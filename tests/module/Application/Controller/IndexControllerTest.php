@@ -274,9 +274,9 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexActionWithCache()
     {
-        $enable_cache = CoreConfig::setValue('cache_is_active', 1);
-        $enable_cache = CoreConfig::setValue('cache_handler', 'filesystem');
-        $document     = DocumentModel::fromArray(
+        $enableCache = CoreConfig::setValue('cache_is_active', 1);
+        $enableCache = CoreConfig::setValue('cache_handler', 'filesystem');
+        $document    = DocumentModel::fromArray(
             array(
                 'name' => 'test',
                 'url_key' => 'test',
@@ -320,9 +320,9 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexActionWithExistingCache()
     {
-        $enable_cache = CoreConfig::setValue('cache_is_active', 1);
-        $enable_cache = CoreConfig::setValue('cache_handler', 'filesystem');
-        $document     = DocumentModel::fromArray(
+        $enableCache = CoreConfig::setValue('cache_is_active', 1);
+        $enableCache = CoreConfig::setValue('cache_handler', 'filesystem');
+        $document    = DocumentModel::fromArray(
             array(
                 'name' => 'test',
                 'url_key' => 'test',
@@ -347,7 +347,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         $document->delete();
         unset($document);
-        $enable_cache = CoreConfig::setValue('cache_is_active', 0);
+        $enableCache = CoreConfig::setValue('cache_is_active', 0);
     }
 
     /**
@@ -391,7 +391,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         $document->delete();
         unset($document);
-        $enable_cache = CoreConfig::setValue('cache_is_active', 0);
+        $enableCache = CoreConfig::setValue('cache_is_active', 0);
     }
 
     /**

@@ -96,17 +96,17 @@ abstract class Module
             \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
             Registry::set('Translator', $translator);
 
-            $uri       = '';
-            $uri_class = $event->getRequest()->getUri();
-            if ($uri_class->getScheme()) {
-                $uri .= $uri_class->getScheme() . ':';
+            $uri      = '';
+            $uriClass = $event->getRequest()->getUri();
+            if ($uriClass->getScheme()) {
+                $uri .= $uriClass->getScheme() . ':';
             }
 
-            if ($uri_class->getHost() !== null) {
+            if ($uriClass->getHost() !== null) {
                 $uri .= '//';
-                $uri .= $uri_class->getHost();
-                if ($uri_class->getPort() and $uri_class->getPort() != 80) {
-                    $uri .= ':' . $uri_class->getPort();
+                $uri .= $uriClass->getHost();
+                if ($uriClass->getPort() and $uriClass->getPort() != 80) {
+                    $uri .= ':' . $uriClass->getPort();
                 }
             }
 
@@ -130,11 +130,11 @@ abstract class Module
         if ($event->getApplication()->getMvcEvent()->getRouteMatch()->getMatchedRouteName() === 'renderWebsite') {
             $layout = Layout\Model::fromId(CoreConfig::getValue('site_exception_layout'));
             if (!empty($layout)) {
-                $template_path_stack = $event->getApplication()->getServiceManager()->get(
+                $templatePathStack = $event->getApplication()->getServiceManager()->get(
                     'Zend\View\Resolver\TemplatePathStack'
                 );
-                $template_path_stack->setUseStreamWrapper(true);
-                file_put_contents($template_path_stack->resolve(RenderController::LAYOUT_NAME), $layout->getContent());
+                $templatePathStack->setUseStreamWrapper(true);
+                file_put_contents($templatePathStack->resolve(RenderController::LAYOUT_NAME), $layout->getContent());
             }
         }
     }
@@ -214,37 +214,37 @@ abstract class Module
     /**
      * initiliaze database connexion for every modules
      *
-     * @param ModuleManager $module_manager Module manager
+     * @param ModuleManager $moduleManager Module manager
      *
      * @return void
      */
-    public function init(ModuleManager $module_manager)
+    public function init(ModuleManager $moduleManager)
     {
         if (!Registry::isRegistered('Configuration')) {
-            $config_paths = $module_manager->getEvent()->getConfigListener()->getOptions()->getConfigGlobPaths();
-            if (!empty($config_paths)) {
+            $configPaths = $moduleManager->getEvent()->getConfigListener()->getOptions()->getConfigGlobPaths();
+            if (!empty($configPaths)) {
                 $config = array();
-                foreach ($config_paths as $path) {
+                foreach ($configPaths as $path) {
                     foreach (glob(realpath(__DIR__ . '/../../../') . '/' . $path, GLOB_BRACE) as $filename) {
                         $config += include $filename;
                     }
                 }
 
                 if (!empty($config['db'])) {
-                    $db_adapter = new DbAdapter($config['db']);
-                    \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
+                    $dbAdapter = new DbAdapter($config['db']);
+                    \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
 
                     Registry::set('Configuration', $config);
-                    Registry::set('Db', $db_adapter);
+                    Registry::set('Db', $dbAdapter);
 
-                    $session_manager = SessionContainer::getDefaultManager();
-                    $session_config  = $session_manager->getConfig();
-                    $session_config->setStorageOption('gc_maxlifetime', CoreConfig::getValue('session_lifetime'));
-                    $session_config->setStorageOption('cookie_path', CoreConfig::getValue('cookie_path'));
-                    $session_config->setStorageOption('cookie_domain', CoreConfig::getValue('cookie_domain'));
+                    $sessionManager = SessionContainer::getDefaultManager();
+                    $sessionConfig  = $sessionManager->getConfig();
+                    $sessionConfig->setStorageOption('gc_maxlifetime', CoreConfig::getValue('session_lifetime'));
+                    $sessionConfig->setStorageOption('cookie_path', CoreConfig::getValue('cookie_path'));
+                    $sessionConfig->setStorageOption('cookie_domain', CoreConfig::getValue('cookie_domain'));
 
                     if (CoreConfig::getValue('session_handler') == CoreConfig::SESSION_DATABASE) {
-                        $tablegateway_config = new DbTableGatewayOptions(
+                        $tablegatewayConfig = new DbTableGatewayOptions(
                             array(
                                 'idColumn'   => 'id',
                                 'nameColumn' => 'name',
@@ -254,20 +254,20 @@ abstract class Module
                             )
                         );
 
-                        $session_table = new SessionTableGateway(
-                            new TableGateway('core_session', $db_adapter),
-                            $tablegateway_config
+                        $sessionTable = new SessionTableGateway(
+                            new TableGateway('core_session', $dbAdapter),
+                            $tablegatewayConfig
                         );
-                        $session_manager->setSaveHandler($session_table)->start();
+                        $sessionManager->setSaveHandler($sessionTable)->start();
                     }
 
                     //Initialize Observers
-                    $module_collection = new ModuleCollection();
-                    $modules           = $module_collection->getModules();
+                    $moduleCollection = new ModuleCollection();
+                    $modules          = $moduleCollection->getModules();
                     foreach ($modules as $module) {
-                        $class_name = sprintf('\\Modules\\%s\\Observer', $module->getName());
-                        if (class_exists($class_name)) {
-                            $object = new $class_name();
+                        $className = sprintf('\\Modules\\%s\\Observer', $module->getName());
+                        if (class_exists($className)) {
+                            $object = new $className();
                             $object->init();
                         }
                     }

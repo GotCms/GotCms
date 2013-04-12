@@ -54,28 +54,28 @@ class Model extends AbstractTable
      */
     public static function fromArray(array $array)
     {
-        $icon_table = new Model();
-        $icon_table->setData($array);
-        $icon_table->setOrigData();
+        $iconTable = new Model();
+        $iconTable->setData($array);
+        $iconTable->setOrigData();
 
-        return $icon_table;
+        return $iconTable;
     }
 
     /**
      * Initiliaze from id
      *
-     * @param integer $icon_id Icon id
+     * @param integer $iconId Icon id
      *
      * @return \Gc\Media\Icon\Model
      */
-    public static function fromId($icon_id)
+    public static function fromId($iconId)
     {
-        $icon_table = new Model();
-        $row        = $icon_table->fetchRow($icon_table->select(array('id' => (int) $icon_id)));
+        $iconTable = new Model();
+        $row       = $iconTable->fetchRow($iconTable->select(array('id' => (int) $iconId)));
         if (!empty($row)) {
-            $icon_table->setData((array) $row);
-            $icon_table->setOrigData();
-            return $icon_table;
+            $iconTable->setData((array) $row);
+            $iconTable->setOrigData();
+            return $iconTable;
         } else {
             return false;
         }
@@ -89,7 +89,7 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array(
+        $arraySave = array(
             'name' => $this->getName(),
             'url' => $this->getUrl(),
         );
@@ -97,10 +97,10 @@ class Model extends AbstractTable
         try {
             $id = $this->getId();
             if ($this->getId() == null) {
-                $this->insert($array_save);
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int) $this->getId()));
+                $this->update($arraySave, array('id' => (int) $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));

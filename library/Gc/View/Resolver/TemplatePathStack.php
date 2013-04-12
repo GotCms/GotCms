@@ -65,8 +65,8 @@ class TemplatePathStack extends PathStack
         if (strpos($name, '.phtml') === false) {
             if ($this->useStreamWrapper()) {
                 // If using a stream wrapper, prepend the spec to the path
-                $file_path = 'zend.view://' . $name;
-                return $file_path;
+                $filePath = 'zend.view://' . $name;
+                return $filePath;
             }
         } else {
             if (!count($this->paths)) {
@@ -75,24 +75,24 @@ class TemplatePathStack extends PathStack
             }
 
             // Ensure we have the expected file extension
-            $default_suffix = $this->getDefaultSuffix();
-            if (pathinfo($name, PATHINFO_EXTENSION) != $default_suffix) {
-                $name .= '.' . $default_suffix;
+            $defaultSuffix = $this->getDefaultSuffix();
+            if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {
+                $name .= '.' . $defaultSuffix;
             }
 
             foreach ($this->paths as $path) {
                 $file = new SplFileInfo($path . $name);
                 if ($file->isReadable()) {
                     // Found! Return it.
-                    if (($file_path = $file->getRealPath()) === false && substr($path, 0, 7) === 'phar://') {
+                    if (($filePath = $file->getRealPath()) === false && substr($path, 0, 7) === 'phar://') {
                         // Do not try to expand phar paths (realpath + phars == fail)
-                        $file_path = $path . $name;
-                        if (!file_exists($file_path)) {
+                        $filePath = $path . $name;
+                        if (!file_exists($filePath)) {
                             break;
                         }
                     }
 
-                    return $file_path;
+                    return $filePath;
                 }
             }
         }

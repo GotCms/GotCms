@@ -62,10 +62,10 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $model         = new Model\Comment();
-        $document_list = $model->getDocumentList();
+        $model        = new Model\Comment();
+        $documentList = $model->getDocumentList();
 
-        return array('document_list' => $document_list);
+        return array('document_list' => $documentList);
     }
 
     /**
@@ -75,21 +75,21 @@ class IndexController extends AbstractController
      */
     public function documentCommentAction()
     {
-        $document_id = $this->getRequest()->getQuery()->get('id');
-        $document    = DocumentModel::fromId($document_id);
+        $documentId = $this->getRequest()->getQuery()->get('id');
+        $document   = DocumentModel::fromId($documentId);
         if (empty($document)) {
             return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), true);
         }
 
-        $model        = new Model\Comment();
-        $comment_list = $model->getList($document_id, null);
+        $model       = new Model\Comment();
+        $commentList = $model->getList($documentId, null);
 
         if ($this->getRequest()->isPost()) {
             $comments = $this->getRequest()->getPost()->get('comment');
 
-            foreach ($comments as $comment_id => $data) {
+            foreach ($comments as $commentId => $data) {
                 if (!empty($data['delete'])) {
-                    $model->delete(array('id' => $comment_id));
+                    $model->delete(array('id' => $commentId));
                     continue;
                 }
 
@@ -101,7 +101,7 @@ class IndexController extends AbstractController
 
                 $data['show_email'] = empty($data['show_email']) ? 0 : 1;
                 $data['is_active']  = empty($data['is_active']) ? 0 : 1;
-                $model->update($data, array('id' => $comment_id));
+                $model->update($data, array('id' => $commentId));
             }
 
             return $this->redirect()->toRoute(
@@ -115,6 +115,6 @@ class IndexController extends AbstractController
             );
         }
 
-        return array('comment_list' => $comment_list, 'document' => $document);
+        return array('comment_list' => $commentList, 'document' => $document);
     }
 }

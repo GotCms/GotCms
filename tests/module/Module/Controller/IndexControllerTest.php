@@ -169,16 +169,16 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUninstallAction()
     {
-        $module_model = ModuleModel::fromArray(
+        $moduleModel = ModuleModel::fromArray(
             array(
                 'name' => 'Sitemap'
             )
         );
 
-        $module_model->save();
+        $moduleModel->save();
 
         $this->dispatch(
-            '/admin/module/uninstall/' . $module_model->getId()
+            '/admin/module/uninstall/' . $moduleModel->getId()
         );
         $this->assertResponseStatusCode(200);
 
@@ -187,7 +187,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('moduleUninstall');
 
-        $module_model->delete();
+        $moduleModel->delete();
     }
 
     /**
@@ -199,13 +199,13 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditAction()
     {
-        $module_model = ModuleModel::fromArray(
+        $moduleModel = ModuleModel::fromArray(
             array(
                 'name' => 'Sitemap'
             )
         );
 
-        $module_model->save();
+        $moduleModel->save();
 
         $select = new Sql\Select();
         $select->from('user_acl_resource')
@@ -215,25 +215,25 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $insert->into('user_acl_permission')
             ->values(
                 array(
-                    'permission' => $module_model->getName(),
-                    'user_acl_resource_id' => $module_model->fetchOne($select),
+                    'permission' => $moduleModel->getName(),
+                    'user_acl_resource_id' => $moduleModel->fetchOne($select),
                 )
             );
 
-        $module_model->execute($insert);
+        $moduleModel->execute($insert);
 
         $insert = new Sql\Insert();
         $insert->into('user_acl')
             ->values(
                 array(
-                    'user_acl_permission_id' => $module_model->getLastInsertId('user_acl_permission'),
+                    'user_acl_permission_id' => $moduleModel->getLastInsertId('user_acl_permission'),
                     'user_acl_role_id' => 1, //Administrator role
                 )
             );
-        $module_model->execute($insert);
+        $moduleModel->execute($insert);
 
         $this->dispatch(
-            '/admin/module/' . $module_model->getId()
+            '/admin/module/' . $moduleModel->getId()
         );
         $this->assertResponseStatusCode(200);
 
@@ -242,6 +242,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('moduleEdit');
 
-        $module_model->delete();
+        $moduleModel->delete();
     }
 }

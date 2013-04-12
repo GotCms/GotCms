@@ -161,15 +161,15 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditAction()
     {
-        $datatype_model = DatatypeModel::fromArray(
+        $datatypeModel = DatatypeModel::fromArray(
             array(
                 'name' => 'DatatypeTest',
                 'model' => 'Textstring'
             )
         );
-        $datatype_model->save();
+        $datatypeModel->save();
 
-        $this->dispatch('/admin/development/datatype/edit/' . $datatype_model->getId());
+        $this->dispatch('/admin/development/datatype/edit/' . $datatypeModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -177,7 +177,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('DatatypeController');
         $this->assertMatchedRouteName('datatypeEdit');
 
-        $datatype_model->delete();
+        $datatypeModel->delete();
     }
 
     /**
@@ -189,16 +189,16 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithInvalidPostData()
     {
-        $datatype_model = DatatypeModel::fromArray(
+        $datatypeModel = DatatypeModel::fromArray(
             array(
                 'name' => 'DatatypeTest',
                 'model' => 'Textstring'
             )
         );
-        $datatype_model->save();
+        $datatypeModel->save();
 
         $this->dispatch(
-            '/admin/development/datatype/edit/' . $datatype_model->getId(),
+            '/admin/development/datatype/edit/' . $datatypeModel->getId(),
             'POST',
             array()
         );
@@ -209,7 +209,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('DatatypeController');
         $this->assertMatchedRouteName('datatypeEdit');
 
-        $datatype_model->delete();
+        $datatypeModel->delete();
     }
 
     /**
@@ -221,16 +221,16 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithPostData()
     {
-        $datatype_model = DatatypeModel::fromArray(
+        $datatypeModel = DatatypeModel::fromArray(
             array(
                 'name' => 'DatatypeTest',
                 'model' => 'Textstring'
             )
         );
-        $datatype_model->save();
+        $datatypeModel->save();
 
         $this->dispatch(
-            '/admin/development/datatype/edit/' . $datatype_model->getId(),
+            '/admin/development/datatype/edit/' . $datatypeModel->getId(),
             'POST',
             array(
                 'name' => 'DatatypeTest',
@@ -244,7 +244,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('DatatypeController');
         $this->assertMatchedRouteName('datatypeEdit');
 
-        $datatype_model->delete();
+        $datatypeModel->delete();
     }
 
     /**
@@ -256,15 +256,15 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteAction()
     {
-        $datatype_model = DatatypeModel::fromArray(
+        $datatypeModel = DatatypeModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'model' => 'Textstring'
             )
         );
-        $datatype_model->save();
+        $datatypeModel->save();
 
-        $this->dispatch('/admin/development/datatype/delete/' . $datatype_model->getId());
+        $this->dispatch('/admin/development/datatype/delete/' . $datatypeModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -272,7 +272,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('DatatypeController');
         $this->assertMatchedRouteName('datatypeDelete');
 
-        $datatype_model->delete();
+        $datatypeModel->delete();
     }
 
     /**

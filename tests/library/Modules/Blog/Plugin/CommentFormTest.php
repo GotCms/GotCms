@@ -266,8 +266,8 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
         $this->object->plugin('redirect')->getController()->setEvent(Registry::get('Application')->getMvcEvent());
         $this->object->layout()->currentDocument = $this->renderer->layout()->currentDocument;
 
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'show_email' => array(
                     'name' => 'show_email',
@@ -288,7 +288,7 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $captcha = $this->object->getForm()->setInputfilter($input_filter);
+        $captcha = $this->object->getForm()->setInputfilter($inputFilter);
         $post    = $request->getPost();
         $data    = array(
             'show_email' => true,

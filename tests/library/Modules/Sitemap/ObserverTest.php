@@ -201,11 +201,11 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddElement()
     {
-        $mvc_event = Registry::get('Application')->getMvcEvent();
-        $mvc_event->setParam('object', $this->document);
+        $mvcEvent = Registry::get('Application')->getMvcEvent();
+        $mvcEvent->setParam('object', $this->document);
         $this->document->setUrlKey('new-url-key');
-        $this->assertNull($this->object->addElement($mvc_event));
-        $this->assertNull($this->object->addElement($mvc_event));
+        $this->assertNull($this->object->addElement($mvcEvent));
+        $this->assertNull($this->object->addElement($mvcEvent));
     }
 
     /**
@@ -217,8 +217,8 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testRemoveElement()
     {
-        $mvc_event = Registry::get('Application')->getMvcEvent();
-        $mvc_event->setParam('object', $this->document);
-        $this->assertNull($this->object->removeElement($mvc_event));
+        $mvcEvent = Registry::get('Application')->getMvcEvent();
+        $mvcEvent->setParam('object', $this->document);
+        $this->assertNull($this->object->removeElement($mvcEvent));
     }
 }

@@ -121,8 +121,8 @@ class FormMultiCheckbox extends ZendFormMultiCheckbox
             $inputAttributes['disabled'] = $disabled;
 
 
-            if (!empty($attributes['class']) and $attributes['class'] != 'input-checkbox') {
-                $rendered = sprintf(
+            if (empty($attributes['class']) or $attributes['class'] != 'input-checkbox') {
+                $input = sprintf(
                     '<input %s%s',
                     $this->createAttributesString($attributes),
                     $closingBracket
@@ -156,7 +156,6 @@ class FormMultiCheckbox extends ZendFormMultiCheckbox
                 case self::LABEL_APPEND:
                 default:
                     $markup = sprintf($template, $input, $label);
-                    break;
             }
 
             $combinedMarkup[] = $markup;

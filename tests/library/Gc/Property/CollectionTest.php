@@ -234,7 +234,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetProperties()
     {
-        $document_model = DocumentModel::fromArray(
+        $documentModel = DocumentModel::fromArray(
             array(
                 'name' => 'DocumentTest',
                 'url_key' => 'document-test',
@@ -248,8 +248,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
                 'parent_id' => 0,
             )
         );
-        $document_model->save();
-        $this->object->setDocumentId($document_model->getId());
+        $documentModel->save();
+        $this->object->setDocumentId($documentModel->getId());
         $this->object->save();
 
         $this->object->load($this->documentType->getId(), $this->tab->getId(), 1);

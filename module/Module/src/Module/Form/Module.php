@@ -49,19 +49,19 @@ class Module extends AbstractForm
      */
     public function init()
     {
-        $file_info = new Info();
-        $path      = GC_APPLICATION_PATH . '/library/Modules/';
-        $list_dir  = glob($path . '*', GLOB_ONLYDIR);
+        $fileInfo = new Info();
+        $path     = GC_APPLICATION_PATH . '/library/Modules/';
+        $listDir  = glob($path . '*', GLOB_ONLYDIR);
 
-        $modules_infos = array();
-        $options       = array('' => 'Select an option');
-        foreach ($list_dir as $dir) {
+        $modulesInfos = array();
+        $options      = array('' => 'Select an option');
+        foreach ($listDir as $dir) {
             $dir           = str_replace($path, '', $dir);
             $options[$dir] = $dir;
 
-            $config_file = $path . $dir . '/module.info';
-            if ($file_info->fromFile($config_file) === true) {
-                $modules_infos[$dir] = $file_info->render();
+            $configFile = $path . $dir . '/module.info';
+            if ($fileInfo->fromFile($configFile) === true) {
+                $modulesInfos[$dir] = $fileInfo->render();
             }
         }
 
@@ -70,19 +70,19 @@ class Module extends AbstractForm
         foreach ($modules as $module) {
             if (in_array($module->getName(), $options)) {
                 unset($options[$module->getName()]);
-                unset($modules_infos[$module->getName()]);
+                unset($modulesInfos[$module->getName()]);
             }
         }
 
         $module = new Element\Select('module');
         $module->setAttribute('label', 'Module')
             ->setAttribute('id', 'module')
-            ->setAttribute('modules_info', $modules_infos)
+            ->setAttribute('modules_info', $modulesInfos)
             ->setValueOptions($options);
         $this->add($module);
 
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'module' => array(
                     'name' => 'module',
@@ -94,6 +94,6 @@ class Module extends AbstractForm
             )
         );
 
-        $this->setInputFilter($input_filter);
+        $this->setInputFilter($inputFilter);
     }
 }

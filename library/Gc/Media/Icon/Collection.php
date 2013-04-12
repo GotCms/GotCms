@@ -59,13 +59,13 @@ class Collection extends AbstractTable
     /**
      * Get views
      *
-     * @param boolean $force_reload to initiliaze views
+     * @param boolean $forceReload to initiliaze views
      *
      * @return array
      */
-    public function getIcons($force_reload = false)
+    public function getIcons($forceReload = false)
     {
-        if ($force_reload) {
+        if ($forceReload) {
             $rows = $this->fetchAll(
                 $this->select(
                     function (Select $select) {

@@ -64,38 +64,38 @@ class Config extends AbstractForm
     public function initGeneral()
     {
         //General settings
-        $general_fieldset = new Fieldset('general');
-        $name             = new Element\Text('site_name');
+        $generalFieldset = new Fieldset('general');
+        $name            = new Element\Text('site_name');
         $name->setAttribute('label', 'Site name')
             ->setAttribute('class', 'input-text');
 
-        $is_offline = new Element\Checkbox('site_is_offline');
-        $is_offline->setAttribute('label', 'Is offline')
+        $isOffline = new Element\Checkbox('site_is_offline');
+        $isOffline->setAttribute('label', 'Is offline')
             ->setAttribute('class', 'input-checkbox')
             ->setAttribute('id', 'site-offiline')
             ->setCheckedValue('1');
 
-        $document_collection = new Document\Collection();
-        $document_collection->load(0);
-        $offline_document = new Element\Select('site_offline_document');
-        $offline_document->setAttribute('label', 'Offline document')
-            ->setValueOptions(array('Select document') + $document_collection->getSelect());
+        $documentCollection = new Document\Collection();
+        $documentCollection->load(0);
+        $offlineDocument = new Element\Select('site_offline_document');
+        $offlineDocument->setAttribute('label', 'Offline document')
+            ->setValueOptions(array('Select document') + $documentCollection->getSelect());
 
-        $layout_collection = new Layout\Collection();
-        $layout_not_found  = new Element\Select('site_404_layout');
-        $layout_not_found->setAttribute('label', '404 layout')
-            ->setValueOptions(array('Select document') + $layout_collection->getSelect());
+        $layoutCollection = new Layout\Collection();
+        $layoutNotFound   = new Element\Select('site_404_layout');
+        $layoutNotFound->setAttribute('label', '404 layout')
+            ->setValueOptions(array('Select document') + $layoutCollection->getSelect());
 
-        $layout_exception = new Element\Select('site_exception_layout');
-        $layout_exception->setAttribute('label', 'Exception layout')
-            ->setValueOptions(array('Select document') + $layout_collection->getSelect());
+        $layoutException = new Element\Select('site_exception_layout');
+        $layoutException->setAttribute('label', 'Exception layout')
+            ->setValueOptions(array('Select document') + $layoutCollection->getSelect());
 
-        $general_fieldset->add($name);
-        $general_fieldset->add($is_offline);
-        $general_fieldset->add($offline_document);
-        $general_fieldset->add($layout_not_found);
-        $general_fieldset->add($layout_exception);
-        $this->add($general_fieldset);
+        $generalFieldset->add($name);
+        $generalFieldset->add($isOffline);
+        $generalFieldset->add($offlineDocument);
+        $generalFieldset->add($layoutNotFound);
+        $generalFieldset->add($layoutException);
+        $this->add($generalFieldset);
 
         $this->getInputFilter()->add(
             array(
@@ -151,67 +151,67 @@ class Config extends AbstractForm
     public function initSystem()
     {
         //Session settings
-        $session_fieldset = new Fieldset('session');
-        $cookie_domain    = new Element\Text('cookie_domain');
-        $cookie_domain->setAttribute('label', 'Cookie domain')
+        $sessionFieldset = new Fieldset('session');
+        $cookieDomain    = new Element\Text('cookie_domain');
+        $cookieDomain->setAttribute('label', 'Cookie domain')
             ->setAttribute('class', 'input-text');
 
-        $cookie_path = new Element\Text('cookie_path');
-        $cookie_path->setAttribute('label', 'Cookie path')
+        $cookiePath = new Element\Text('cookie_path');
+        $cookiePath->setAttribute('label', 'Cookie path')
             ->setAttribute('class', 'input-text');
 
-        $session_lifetime = new Element\Text('session_lifetime');
-        $session_lifetime->setAttribute('label', 'Session lifetime')
+        $sessionLifetime = new Element\Text('session_lifetime');
+        $sessionLifetime->setAttribute('label', 'Session lifetime')
             ->setAttribute('class', 'input-text');
 
-        $session_handler = new Element\Select('session_handler');
-        $session_handler->setAttribute('label', 'Session handler')
+        $sessionHandler = new Element\Select('session_handler');
+        $sessionHandler->setAttribute('label', 'Session handler')
             ->setValueOptions(array('0' => 'Files', '1' => 'Database'));
 
-        $session_fieldset->add($cookie_domain);
-        $session_fieldset->add($cookie_path);
-        $session_fieldset->add($session_handler);
-        $session_fieldset->add($session_lifetime);
-        $this->add($session_fieldset);
+        $sessionFieldset->add($cookieDomain);
+        $sessionFieldset->add($cookiePath);
+        $sessionFieldset->add($sessionHandler);
+        $sessionFieldset->add($sessionLifetime);
+        $this->add($sessionFieldset);
 
         //Debug settings
-        $debug_fieldset  = new Fieldset('debug');
-        $debug_is_active = new Element\Checkbox('debug_is_active');
-        $debug_is_active->setAttribute('label', 'Debug is active')
+        $debugFieldset = new Fieldset('debug');
+        $debugIsActive = new Element\Checkbox('debug_is_active');
+        $debugIsActive->setAttribute('label', 'Debug is active')
             ->setAttribute('id', 'input-checkbox')
             ->setAttribute('class', 'input-checkbox');
 
-        $debug_fieldset->add($debug_is_active);
-        $this->add($debug_fieldset);
+        $debugFieldset->add($debugIsActive);
+        $this->add($debugFieldset);
 
         //Debug settings
-        $cache_fieldset  = new Fieldset('cache');
-        $cache_is_active = new Element\Checkbox('cache_is_active');
-        $cache_is_active->setAttribute('label', 'Cache is active')
+        $cacheFieldset = new Fieldset('cache');
+        $cacheIsActive = new Element\Checkbox('cache_is_active');
+        $cacheIsActive->setAttribute('label', 'Cache is active')
             ->setAttribute('class', 'input-checkbox')
             ->setAttribute('id', 'cache-active');
 
-        $cache_handler = new Element\Select('cache_handler');
-        $cache_handler->setAttribute('label', 'Cache handler');
-        $handler_whitelist = array('filesystem' => 'FileSystem');
+        $cacheHandler = new Element\Select('cache_handler');
+        $cacheHandler->setAttribute('label', 'Cache handler');
+        $handlerWhitelist = array('filesystem' => 'FileSystem');
         if (extension_loaded('apc')) {
-            $handler_whitelist['apc'] = 'Apc';
+            $handlerWhitelist['apc'] = 'Apc';
         }
 
         if (extension_loaded('memcached')) {
-            $handler_whitelist['memcached'] = 'Memcached';
+            $handlerWhitelist['memcached'] = 'Memcached';
         }
 
-        $cache_handler->setValueOptions($handler_whitelist);
+        $cacheHandler->setValueOptions($handlerWhitelist);
 
-        $cache_lifetime = new Element\Text('cache_lifetime');
-        $cache_lifetime->setAttribute('label', 'Cache lifetime')
+        $cacheLifetime = new Element\Text('cache_lifetime');
+        $cacheLifetime->setAttribute('label', 'Cache lifetime')
             ->setAttribute('class', 'input-text');
 
-        $cache_fieldset->add($cache_is_active);
-        $cache_fieldset->add($cache_handler);
-        $cache_fieldset->add($cache_lifetime);
-        $this->add($cache_fieldset);
+        $cacheFieldset->add($cacheIsActive);
+        $cacheFieldset->add($cacheHandler);
+        $cacheFieldset->add($cacheLifetime);
+        $this->add($cacheFieldset);
 
         $this->getInputFilter()->add(
             array(
@@ -314,32 +314,32 @@ class Config extends AbstractForm
     public function initServer()
     {
         //Local settings
-        $locale_list = array(
+        $localeList = array(
             'fr_FR' => 'Français',
             'en_GB' => 'English',
         );
 
-        $locale_fieldset = new Fieldset('locale');
-        $locale          = new Element\Select('locale');
+        $localeFieldset = new Fieldset('locale');
+        $locale         = new Element\Select('locale');
         $locale->setAttribute('label', 'Server locale')
-            ->setValueOptions($locale_list);
+            ->setValueOptions($localeList);
 
-        $locale_fieldset->add($locale);
-        $this->add($locale_fieldset);
+        $localeFieldset->add($locale);
+        $this->add($localeFieldset);
 
         //Mail settings
-        $mail_fieldset = new Fieldset('mail');
-        $mail_from     = new Element\Text('mail_from');
-        $mail_from->setAttribute('label', 'From E-mail')
+        $mailFieldset = new Fieldset('mail');
+        $mailFrom     = new Element\Text('mail_from');
+        $mailFrom->setAttribute('label', 'From E-mail')
             ->setAttribute('class', 'input-text');
 
-        $mail_from_name = new Element\Text('mail_from_name');
-        $mail_from_name->setAttribute('label', 'From name')
+        $mailFromName = new Element\Text('mail_from_name');
+        $mailFromName->setAttribute('label', 'From name')
             ->setAttribute('class', 'input-text');
 
-        $mail_fieldset->add($mail_from);
-        $mail_fieldset->add($mail_from_name);
-        $this->add($mail_fieldset);
+        $mailFieldset->add($mailFrom);
+        $mailFieldset->add($mailFromName);
+        $this->add($mailFieldset);
 
         $this->getInputFilter()->add(
             array(

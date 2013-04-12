@@ -58,26 +58,26 @@ class Collection extends AbstractTable
     /**
      * Initiliaze collection
      *
-     * @param integer $document_type_id Optional document type id
+     * @param integer $documentTypeId Optional document type id
      *
      * @return void
      */
-    public function init($document_type_id = null)
+    public function init($documentTypeId = null)
     {
-        $this->setDocumentTypeId($document_type_id);
+        $this->setDocumentTypeId($documentTypeId);
         $this->getViews(true);
     }
 
     /**
      * Get views
      *
-     * @param boolean $force_reload To initiliaze views
+     * @param boolean $forceReload To initiliaze views
      *
      * @return array
      */
-    public function getViews($force_reload = false)
+    public function getViews($forceReload = false)
     {
-        if ($force_reload) {
+        if ($forceReload) {
             $select = new Select();
             $select->order(array('name'));
             $select->from('view');

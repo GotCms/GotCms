@@ -54,70 +54,70 @@ class Visitor extends AbstractTable
     /**
      * Get visitor id
      *
-     * @param string $session_id Session Id
+     * @param string $sessionId Session Id
      *
      * @return integer
      */
-    public function getVisitorId($session_id)
+    public function getVisitorId($sessionId)
     {
-        $user_agent      = empty($_SERVER['HTTP_USER_AGENT']) ? null : $_SERVER['HTTP_USER_AGENT'];
-        $accept_charset  = empty($_SERVER['HTTP_ACCEPT_CHARSET']) ? null : $_SERVER['HTTP_ACCEPT_CHARSET'];
-        $accept_language = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? null : $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-        $server_addr     = empty($_SERVER['SERVER_ADDR']) ? null : $_SERVER['SERVER_ADDR'];
-        $remote_addr     = empty($_SERVER['REMOTE_ADDR']) ? null : $_SERVER['REMOTE_ADDR'];
-        $request_uri     = empty($_SERVER['REQUEST_URI']) ? null : $_SERVER['REQUEST_URI'];
-        $referer         = empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER'];
+        $userAgent      = empty($_SERVER['HTTP_USER_AGENT']) ? null : $_SERVER['HTTP_USER_AGENT'];
+        $acceptCharset  = empty($_SERVER['HTTP_ACCEPT_CHARSET']) ? null : $_SERVER['HTTP_ACCEPT_CHARSET'];
+        $acceptLanguage = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? null : $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        $serverAddr     = empty($_SERVER['SERVER_ADDR']) ? null : $_SERVER['SERVER_ADDR'];
+        $remoteAddr     = empty($_SERVER['REMOTE_ADDR']) ? null : $_SERVER['REMOTE_ADDR'];
+        $requestUri     = empty($_SERVER['REQUEST_URI']) ? null : $_SERVER['REQUEST_URI'];
+        $referer        = empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER'];
 
-        if (!empty($request_uri)) {
-            $request_uri = substr($request_uri, 0, 255);
+        if (!empty($requestUri)) {
+            $requestUri = substr($requestUri, 0, 255);
         }
 
         if (!empty($referer)) {
             $referer = substr($referer, 0, 255);
         }
 
-        if (!ctype_print($user_agent)) {
-            $user_agent = null;
+        if (!ctype_print($userAgent)) {
+            $userAgent = null;
         }
 
-        if (!ctype_print($accept_charset)) {
-            $accept_charset = null;
+        if (!ctype_print($acceptCharset)) {
+            $acceptCharset = null;
         }
 
-        if (!ctype_print($accept_language)) {
-            $accept_language = null;
+        if (!ctype_print($acceptLanguage)) {
+            $acceptLanguage = null;
         }
 
-        $validator   = new ValidateIp();
-        $server_addr = $validator->isValid($server_addr, 'ip') ? ip2long($server_addr) : null;
-        $remote_addr = $validator->isValid($remote_addr, 'ip') ? ip2long($remote_addr) : null;
+        $validator  = new ValidateIp();
+        $serverAddr = $validator->isValid($serverAddr, 'ip') ? ip2long($serverAddr) : null;
+        $remoteAddr = $validator->isValid($remoteAddr, 'ip') ? ip2long($remoteAddr) : null;
 
-        $url_id = $this->getUrlId($request_uri, $referer);
+        $urlId = $this->getUrlId($requestUri, $referer);
 
         $select = new Select();
         $select->from(array('lv' => $this->name))
             ->columns(array('id'))
-            ->where->equalTo('session_id', $session_id)
-            ->equalTo('http_user_agent', empty($user_agent) ? null : $user_agent)
-            ->equalTo('remote_addr', $remote_addr);
+            ->where->equalTo('session_id', $sessionId)
+            ->equalTo('http_user_agent', empty($userAgent) ? null : $userAgent)
+            ->equalTo('remote_addr', $remoteAddr);
 
-        $visitor_id = $this->fetchOne($select);
+        $visitorId = $this->fetchOne($select);
 
-        if (empty($visitor_id)) {
+        if (empty($visitorId)) {
             $insert = new Insert();
             $insert->into('log_visitor')
                 ->values(
                     array(
-                        'session_id' => $session_id,
-                        'http_user_agent' => $user_agent,
-                        'http_accept_charset' => $accept_charset,
-                        'http_accept_language' => $accept_language,
-                        'server_addr' => $server_addr,
-                        'remote_addr' => $remote_addr,
+                        'session_id' => $sessionId,
+                        'http_user_agent' => $userAgent,
+                        'http_accept_charset' => $acceptCharset,
+                        'http_accept_language' => $acceptLanguage,
+                        'server_addr' => $serverAddr,
+                        'remote_addr' => $remoteAddr,
                     )
                 );
             $this->execute($insert);
-            $visitor_id = $this->getLastInsertId('log_visitor');
+            $visitorId = $this->getLastInsertId('log_visitor');
         }
 
         $insert = new Insert();
@@ -125,45 +125,45 @@ class Visitor extends AbstractTable
             ->values(
                 array(
                     'visit_at' => new Expression('NOW()'),
-                    'log_url_info_id' => $url_id,
-                    'log_visitor_id' => $visitor_id
+                    'log_url_info_id' => $urlId,
+                    'log_visitor_id' => $visitorId
                 )
             );
 
         $this->execute($insert);
-        return $visitor_id;
+        return $visitorId;
     }
 
     /**
      * Get url id
      *
-     * @param string $request_uri Request URI
-     * @param string $referer     Referer
+     * @param string $requestUri Request URI
+     * @param string $referer    Referer
      *
      * @return integer
      */
-    public function getUrlId($request_uri, $referer)
+    public function getUrlId($requestUri, $referer)
     {
         $select = new Select();
-        $select->from('log_url_info')->where->equalTo('url', $request_uri);
+        $select->from('log_url_info')->where->equalTo('url', $requestUri);
         if (is_null($referer)) {
             $select->where->isNull('referer');
         } else {
             $select->where->equalTo('referer', $referer);
         }
 
-        $url_info = $this->fetchRow($select);
-        if (!empty($url_info['id'])) {
-            $url_id = $url_info['id'];
+        $urlInfo = $this->fetchRow($select);
+        if (!empty($urlInfo['id'])) {
+            $urlId = $urlInfo['id'];
         } else {
             $insert = new Insert();
             $insert->into('log_url_info')
-                ->values(array('url' => $request_uri, 'referer' => $referer));
+                ->values(array('url' => $requestUri, 'referer' => $referer));
             $this->execute($insert);
-            $url_id = $this->getLastInsertId('log_url_info');
+            $urlId = $this->getLastInsertId('log_url_info');
         }
 
-        return $url_id;
+        return $urlId;
     }
 
     /**
@@ -189,13 +189,13 @@ class Visitor extends AbstractTable
      */
     public function getTotalPageViews()
     {
-        $visit_table = new TableGateway\TableGateway(
+        $visitTable = new TableGateway\TableGateway(
             'log_url',
             TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter()
         );
 
         return $this->fetchOne(
-            $visit_table->select(
+            $visitTable->select(
                 function (Select $select) {
                     $select->columns(array('nb' => new Expression('COUNT(1)')));
                 }
@@ -261,8 +261,8 @@ class Visitor extends AbstractTable
                 }
                 break;
             case 'DAY':
-                $day_in_month = date('t');
-                for ($i = 1; $i < $day_in_month; $i++) {
+                $dayInMonth = date('t');
+                for ($i = 1; $i < $dayInMonth; $i++) {
                     $values[$i . 'd'] = 0;
                 }
 
@@ -289,12 +289,12 @@ class Visitor extends AbstractTable
                     $values[$i] = empty($values[$i]) ? 0 : $values[$i];
                 }
 
-                $new_values = array();
+                $newValues = array();
                 foreach ($values as $key => $value) {
-                    $new_values[$key . 'y'] = $value;
+                    $newValues[$key . 'y'] = $value;
                 }
 
-                $values = $new_values;
+                $values = $newValues;
                 break;
         }
 

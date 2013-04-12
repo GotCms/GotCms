@@ -36,40 +36,40 @@ error_reporting(E_ALL | E_STRICT);
  */
 require_once 'PHPUnit/Autoload.php';
 chdir(dirname(__DIR__));
-$gc_root    = getcwd();
-$zf_library = $gc_root . '/vendor';
-$gc_library = $gc_root . '/library';
-$gc_tests   = $gc_root . '/tests';
+$gcRoot    = getcwd();
+$zfLibrary = $gcRoot . '/vendor';
+$gcLibrary = $gcRoot . '/library';
+$gcTests   = $gcRoot . '/tests';
 
 $path = array(
-    $gc_library,
-    $gc_root . '/module',
-    $zf_library,
-    $gc_tests,
+    $gcLibrary,
+    $gcRoot . '/module',
+    $zfLibrary,
+    $gcTests,
     get_include_path(),
 );
 
 set_include_path(implode(PATH_SEPARATOR, $path));
-define('GC_APPLICATION_PATH', $gc_root);
+define('GC_APPLICATION_PATH', $gcRoot);
 define('GC_MEDIA_PATH', GC_APPLICATION_PATH . '/tests/media');
 /**
  * Setup autoloading
  */
 
 // Composer autoloading
-if (file_exists($gc_root . '/vendor/autoload.php')) {
-    $loader = include $gc_root . '/vendor/autoload.php';
+if (file_exists($gcRoot . '/vendor/autoload.php')) {
+    $loader = include $gcRoot . '/vendor/autoload.php';
 }
 
 // Support for ZF2_PATH environment variable or git submodule
 
-if ($zf2_path = getenv('ZF2_PATH') ?: (is_dir($zf_library) ? $zf_library : false)) {
+if ($zfPath = getenv('ZF2_PATH') ?: (is_dir($zfLibrary) ? $zfLibrary : false)) {
     // Get application stack configuration
-    $configuration = require_once $gc_root . '/config/application.config.php';
+    $configuration = include_once $gcRoot . '/config/application.config.php';
     if (isset($loader)) {
-        $loader->add('Zend', $zf2_path . '/Zend');
+        $loader->add('Zend', $zfPath . '/Zend');
     } else {
-        require_once $zf_library . '/Zend/Loader/AutoloaderFactory.php';
+        include_once $zfLibrary . '/Zend/Loader/AutoloaderFactory.php';
         \Zend\Loader\AutoloaderFactory::factory(
             array(
                 'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
@@ -97,10 +97,10 @@ $application->getRequest()->setBasePath('http://got-cms.com');
  * Load the user-defined test configuration file, if it exists; otherwise, load
  * the default configuration.
  */
-if (is_readable($gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
-    require_once $gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php';
+if (is_readable($gcTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
+    include_once $gcTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php';
 } else {
-    require_once $gc_tests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
+    include_once $gcTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
 }
 
 
@@ -109,6 +109,6 @@ require_once 'prepare-database.php';
 /*
  * Unset global variables that are no longer needed.
  */
-unset($gc_root, $gc_library, $gc_tests, $path);
+unset($gcRoot, $gcLibrary, $gcTests, $path);
 
 require_once 'override-php-functions.php';

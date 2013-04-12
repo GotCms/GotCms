@@ -93,17 +93,17 @@ abstract class AbstractForm extends Form
      */
     public function loadValues(AbstractTable $table)
     {
-        $data         = $table->getData();
-        $input_filter = $this->getInputFilter();
+        $data        = $table->getData();
+        $inputFilter = $this->getInputFilter();
         if (is_array($data)) {
-            foreach ($data as $element_name => $element_value) {
-                if ($this->has($element_name)) {
-                    $element = $this->get($element_name);
-                    $this->get($element_name)->setValue($element_value);
+            foreach ($data as $elementName => $elementValue) {
+                if ($this->has($elementName)) {
+                    $element = $this->get($elementName);
+                    $this->get($elementName)->setValue($elementValue);
                 }
 
-                if ($input_filter->has($element_name)) {
-                    $validators = $input_filter->get($element_name)->getValidatorChain()->getValidators();
+                if ($inputFilter->has($elementName)) {
+                    $validators = $inputFilter->get($elementName)->getValidatorChain()->getValidators();
 
                     foreach ($validators as $validator) {
                         if ($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists) {
@@ -151,19 +151,19 @@ abstract class AbstractForm extends Form
             $form->add($elements);
         } elseif (is_string($elements)) {
             if (!empty($prefix)) {
-                $rand_id  = mt_rand();
+                $randId   = mt_rand();
                 $elements = preg_replace('~name="(.+)(\[.*\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
-                $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $rand_id . '"', $elements);
+                $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $randId . '"', $elements);
                 $elements = preg_replace(
                     '~(?:(?!(?<=value=)))("|\')#(.+)("|\')~iU',
-                    '${1}#${2}' . $rand_id . '${3}',
+                    '${1}#${2}' . $randId . '${3}',
                     $elements
                 );
             }
 
-            $hidden_element = new Element('hidden' . uniqid());
-            $hidden_element->setAttribute('content', $elements);
-            $form->add($hidden_element);
+            $hiddenElement = new Element('hidden' . uniqid());
+            $hiddenElement->setAttribute('content', $elements);
+            $form->add($hiddenElement);
         } else {
             throw new Exception('Invalid element ' . __CLASS__ . '::' . __METHOD__ . ')');
         }

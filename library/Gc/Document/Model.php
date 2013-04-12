@@ -66,14 +66,14 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze document
      *
-     * @param integer $document_id Document id
+     * @param integer $documentId Document id
      *
      * @return void
      */
-    public function init($document_id = null)
+    public function init($documentId = null)
     {
-        if (!empty($document_id)) {
-            $this->setId($document_id);
+        if (!empty($documentId)) {
+            $this->setId($documentId);
         }
 
         $this->getChildren();
@@ -113,14 +113,14 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Define if document is show in navigation
      *
-     * @param boolean $is_show Optional
+     * @param boolean $isShow Optional
      *
      * @return boolean
      */
-    public function showInNav($is_show = null)
+    public function showInNav($isShow = null)
     {
-        if (!is_null($is_show)) {
-            $this->setData('show_in_nav', $is_show);
+        if (!is_null($isShow)) {
+            $this->setData('show_in_nav', $isShow);
         }
 
         return (bool) $this->getData('show_in_nav') != false ? true : false;
@@ -145,28 +145,28 @@ class Model extends AbstractTable implements IterableInterface
      */
     public static function fromArray(array $array)
     {
-        $document_table = new Model();
-        $document_table->setData($array);
-        $document_table->setOrigData();
+        $documentTable = new Model();
+        $documentTable->setData($array);
+        $documentTable->setOrigData();
 
-        return $document_table;
+        return $documentTable;
     }
 
     /**
      * Initiliaze document from id
      *
-     * @param integer $document_id Document id
+     * @param integer $documentId Document id
      *
      * @return \Gc\Document\Model
      */
-    public static function fromId($document_id)
+    public static function fromId($documentId)
     {
-        $document_table = new Model();
-        $row            = $document_table->fetchRow($document_table->select(array('id' => (int) $document_id)));
+        $documentTable = new Model();
+        $row           = $documentTable->fetchRow($documentTable->select(array('id' => (int) $documentId)));
         if (!empty($row)) {
-            $document_table->setData((array) $row);
-            $document_table->setOrigData();
-            return $document_table;
+            $documentTable->setData((array) $row);
+            $documentTable->setOrigData();
+            return $documentTable;
         } else {
             return false;
         }
@@ -175,24 +175,24 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze from url and parent
      *
-     * @param string $url_key   Url key
-     * @param mixed  $parent_id Parent id
+     * @param string $urlKey   Url key
+     * @param mixed  $parentId Parent id
      *
      * @return \Gc\Document\Model
      */
-    public static function fromUrlKey($url_key, $parent_id = null)
+    public static function fromUrlKey($urlKey, $parentId = null)
     {
-        $document_table = new Model();
-        $sql_data       = array('url_key' => $url_key);
-        if (!empty($parent_id)) {
-            $sql_data['parent_id'] = $parent_id;
+        $documentTable = new Model();
+        $sqlData       = array('url_key' => $urlKey);
+        if (!empty($parentId)) {
+            $sqlData['parent_id'] = $parentId;
         }
 
-        $row = $document_table->fetchRow($document_table->select($sql_data));
+        $row = $documentTable->fetchRow($documentTable->select($sqlData));
         if (!empty($row)) {
-            $document_table->setData((array) $row);
-            $document_table->setOrigData();
-            return $document_table;
+            $documentTable->setData((array) $row);
+            $documentTable->setOrigData();
+            return $documentTable;
         } else {
             return false;
         }
@@ -206,7 +206,7 @@ class Model extends AbstractTable implements IterableInterface
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array(
+        $arraySave = array(
             'name' => $this->getName(),
             'url_key' => $this->getUrlKey(),
             'updated_at' => new Expression('NOW()'),
@@ -220,19 +220,19 @@ class Model extends AbstractTable implements IterableInterface
         );
 
         if ($this->getDriverName() == 'pdo_pgsql') {
-            $array_save['show_in_nav'] = $this->showInNav() === true ? 'true' : 'false';
+            $arraySave['show_in_nav'] = $this->showInNav() === true ? 'true' : 'false';
         } else {
-            $array_save['show_in_nav'] = $this->showInNav() === true ? 1 : 0;
+            $arraySave['show_in_nav'] = $this->showInNav() === true ? 1 : 0;
         }
 
         try {
-            $document_id = $this->getId();
-            if (empty($document_id)) {
-                $array_save['created_at'] = new Expression('NOW()');
-                $this->insert($array_save);
+            $documentId = $this->getId();
+            if (empty($documentId)) {
+                $arraySave['created_at'] = new Expression('NOW()');
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => $this->getId()));
+                $this->update($arraySave, array('id' => $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
@@ -255,12 +255,12 @@ class Model extends AbstractTable implements IterableInterface
     public function delete()
     {
         $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
-        $document_id = $this->getId();
-        if (!empty($document_id)) {
+        $documentId = $this->getId();
+        if (!empty($documentId)) {
             try {
-                $properties_table = new TableGateway('property_value', $this->getAdapter());
-                $properties_table->delete(array('document_id' => $this->getId()));
-                parent::delete(array('id' => $document_id));
+                $propertiesTable = new TableGateway('property_value', $this->getAdapter());
+                $propertiesTable->delete(array('document_id' => $this->getId()));
+                parent::delete(array('id' => $documentId));
             } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
@@ -295,17 +295,17 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Get property
      *
-     * @param string $property_name Property name
+     * @param string $propertyName Property name
      *
      * @return false | PropertyModel
      */
-    public function getProperty($property_name)
+    public function getProperty($propertyName)
     {
         if (!$this->hasData('id')) {
             return false;
         }
 
-        return PropertyModel::fromIdentifier($property_name, $this->getId());
+        return PropertyModel::fromIdentifier($propertyName, $this->getId());
     }
 
     /**
@@ -351,9 +351,9 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function getParent()
     {
-        $parent_id = $this->getData('parent_id');
+        $parentId = $this->getData('parent_id');
 
-        return Model::fromId($parent_id);
+        return Model::fromId($parentId);
     }
 
     /** (non-PHPdoc)

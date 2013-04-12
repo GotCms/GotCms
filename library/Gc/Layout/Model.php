@@ -69,28 +69,28 @@ class Model extends AbstractTable
      */
     public static function fromArray(array $array)
     {
-        $layout_table = new Model();
-        $layout_table->setData($array);
-        $layout_table->setOrigData();
+        $layoutTable = new Model();
+        $layoutTable->setData($array);
+        $layoutTable->setOrigData();
 
-        return $layout_table;
+        return $layoutTable;
     }
 
     /**
      * Initiliaze from id
      *
-     * @param integer $layout_id Layout id
+     * @param integer $layoutId Layout id
      *
      * @return \Gc\Layout\Model
      */
-    public static function fromId($layout_id)
+    public static function fromId($layoutId)
     {
-        $layout_table = new Model();
-        $row          = $layout_table->fetchRow($layout_table->select(array('id' => (int) $layout_id)));
+        $layoutTable = new Model();
+        $row         = $layoutTable->fetchRow($layoutTable->select(array('id' => (int) $layoutId)));
         if (!empty($row)) {
-            $layout_table->setData((array) $row);
-            $layout_table->setOrigData();
-            return $layout_table;
+            $layoutTable->setData((array) $row);
+            $layoutTable->setOrigData();
+            return $layoutTable;
         } else {
             return false;
         }
@@ -105,12 +105,12 @@ class Model extends AbstractTable
      */
     public static function fromIdentifier($identifier)
     {
-        $layout_table = new Model();
-        $row          = $layout_table->fetchRow($layout_table->select(array('identifier' => $identifier)));
+        $layoutTable = new Model();
+        $row         = $layoutTable->fetchRow($layoutTable->select(array('identifier' => $identifier)));
         if (!empty($row)) {
-            $layout_table->setData((array) $row);
-            $layout_table->setOrigData();
-            return $layout_table;
+            $layoutTable->setData((array) $row);
+            $layoutTable->setOrigData();
+            return $layoutTable;
         } else {
             return false;
         }
@@ -124,7 +124,7 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array('name' => $this->getName(),
+        $arraySave = array('name' => $this->getName(),
             'identifier' => $this->getIdentifier(),
             'description' => $this->getDescription(),
             'content' => $this->getContent(),
@@ -134,11 +134,11 @@ class Model extends AbstractTable
         try {
             $id = $this->getId();
             if (empty($id)) {
-                $array_save['created_at'] = new Expression('NOW()');
-                $this->insert($array_save);
+                $arraySave['created_at'] = new Expression('NOW()');
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => $this->getId()));
+                $this->update($arraySave, array('id' => $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));

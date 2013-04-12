@@ -220,11 +220,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithPng()
     {
-        $saving_path = $this->directory . 'saving-test.png';
+        $savingPath = $this->directory . 'saving-test.png';
         $this->object->open($this->directory . 'test.png');
         $this->object->resize(50, 50);
-        $this->assertTrue($this->object->save($saving_path));
-        unlink($saving_path);
+        $this->assertTrue($this->object->save($savingPath));
+        unlink($savingPath);
     }
 
     /**
@@ -236,11 +236,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithGif ()
     {
-        $saving_path = $this->directory . 'saving-test.gif';
+        $savingPath = $this->directory . 'saving-test.gif';
         $this->object->open($this->directory . 'test.gif');
         $this->object->resize(50, 50);
-        $this->assertTrue($this->object->save($saving_path));
-        unlink($saving_path);
+        $this->assertTrue($this->object->save($savingPath));
+        unlink($savingPath);
     }
 
     /**
@@ -252,11 +252,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithJpg()
     {
-        $saving_path = $this->directory . 'saving-test.jpg';
+        $savingPath = $this->directory . 'saving-test.jpg';
         $this->object->open($this->directory . 'test.jpg');
         $this->object->resize(50, 50);
-        $this->assertTrue($this->object->save($saving_path));
-        unlink($saving_path);
+        $this->assertTrue($this->object->save($savingPath));
+        unlink($savingPath);
     }
 
     /**
@@ -268,9 +268,9 @@ class ImageTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveInBmp()
     {
-        $saving_path = $this->directory . 'saving-test.bmp';
+        $savingPath = $this->directory . 'saving-test.bmp';
         $this->object->open($this->directory . 'test.png');
         $this->object->resize(50, 50);
-        $this->assertFalse($this->object->save($saving_path));
+        $this->assertFalse($this->object->save($savingPath));
     }
 }

@@ -161,7 +161,7 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array(
+        $arraySave = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'identifier' => $this->getIdentifier(),
@@ -171,18 +171,18 @@ class Model extends AbstractTable
         );
 
         if ($this->getDriverName() == 'pdo_pgsql') {
-            $array_save['required'] = $this->isRequired() === true ? 'true' : 'false';
+            $arraySave['required'] = $this->isRequired() === true ? 'true' : 'false';
         } else {
-            $array_save['required'] = $this->isRequired() === true ? 1 : 0;
+            $arraySave['required'] = $this->isRequired() === true ? 1 : 0;
         }
 
         try {
             $id = $this->getId();
             if (empty($id)) {
-                $this->insert($array_save);
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int) $this->getId()));
+                $this->update($arraySave, array('id' => (int) $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
@@ -234,28 +234,28 @@ class Model extends AbstractTable
      */
     public static function fromArray(array $array)
     {
-        $property_table = new Model();
-        $property_table->setData($array);
-        $property_table->setOrigData();
+        $propertyTable = new Model();
+        $propertyTable->setData($array);
+        $propertyTable->setOrigData();
 
-        return $property_table;
+        return $propertyTable;
     }
 
     /**
      * Initiliaze model from id
      *
-     * @param integer $property_id Property id
+     * @param integer $propertyId Property id
      *
      * @return \Gc\Property\Model
      */
-    public static function fromId($property_id)
+    public static function fromId($propertyId)
     {
-        $property_table = new Model();
-        $row            = $property_table->fetchRow($property_table->select(array('id' => (int) $property_id)));
+        $propertyTable = new Model();
+        $row           = $propertyTable->fetchRow($propertyTable->select(array('id' => (int) $propertyId)));
         if (!empty($row)) {
-            $property_table->setData((array) $row);
-            $property_table->setOrigData();
-            return $property_table;
+            $propertyTable->setData((array) $row);
+            $propertyTable->setOrigData();
+            return $propertyTable;
         } else {
             return false;
         }
@@ -264,31 +264,31 @@ class Model extends AbstractTable
     /**
      * Initiliaze model from identifier
      *
-     * @param string $identifier  Identifier
-     * @param id     $document_id Document id
+     * @param string $identifier Identifier
+     * @param id     $documentId Document id
      *
      * @return \Gc\Property\Model
      */
-    public static function fromIdentifier($identifier, $document_id)
+    public static function fromIdentifier($identifier, $documentId)
     {
-        $property_table = new Model();
-        $row            = $property_table->fetchRow(
-            $property_table->select(
-                function (Select $select) use ($document_id, $identifier) {
+        $propertyTable = new Model();
+        $row           = $propertyTable->fetchRow(
+            $propertyTable->select(
+                function (Select $select) use ($documentId, $identifier) {
                     $select->join(array('t' => 'tab'), 't.id = property.tab_id', array());
                     $select->join(array('dt' => 'document_type'), 'dt.id = t.document_type_id', array());
                     $select->join(array('d' => 'document'), 'd.document_type_id = dt.id', array());
-                    $select->where->equalTo('d.id', $document_id);
+                    $select->where->equalTo('d.id', $documentId);
                     $select->where->equalTo('identifier', $identifier);
                 }
             )
         );
 
         if (!empty($row)) {
-            $property_table->setData((array) $row);
-            $property_table->setDocumentId($document_id);
-            $property_table->setOrigData();
-            return $property_table;
+            $propertyTable->setData((array) $row);
+            $propertyTable->setDocumentId($documentId);
+            $propertyTable->setOrigData();
+            return $propertyTable;
         } else {
             return false;
         }

@@ -66,19 +66,19 @@ class Collection extends AbstractTable
     /**
      * Get permissions
      *
-     * @param boolean $force_reload Force reload
+     * @param boolean $forceReload Force reload
      *
      * @return array
      */
-    public function getPermissions($force_reload = false)
+    public function getPermissions($forceReload = false)
     {
-        if (empty($this->permissions) or $force_reload === true) {
+        if (empty($this->permissions) or $forceReload === true) {
             $select = new Select();
             $select->from('user_acl_permission')
                 ->columns(
                     array(
-                        'id'
-                        , 'permission'
+                        'id',
+                        'permission'
                     ),
                     true
                 )->join(

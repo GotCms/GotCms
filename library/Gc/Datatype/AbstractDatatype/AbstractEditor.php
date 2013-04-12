@@ -89,14 +89,14 @@ abstract class AbstractEditor extends Object
     /**
      * Abstract function for save Editor
      *
-     * @param Datatype\AbstractDatatype $datatype_abstract Datatype
+     * @param Datatype\AbstractDatatype $datatypeAbstract Datatype
      *
      * @return void
      */
-    public function __construct(Datatype\AbstractDatatype $datatype_abstract)
+    public function __construct(Datatype\AbstractDatatype $datatypeAbstract)
     {
-        $this->datatype = $datatype_abstract;
-        $this->property = $datatype_abstract->getProperty();
+        $this->datatype = $datatypeAbstract;
+        $this->property = $datatypeAbstract->getProperty();
         parent::__construct();
     }
 

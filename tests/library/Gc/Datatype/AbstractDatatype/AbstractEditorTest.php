@@ -163,13 +163,13 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
         $this->property->save();
 
 
-        $mock_datatype = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
-        $mock_datatype->setProperty($this->property);
-        $mock_datatype->load($this->datatype, 1);
+        $mockDatatype = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
+        $mockDatatype->setProperty($this->property);
+        $mockDatatype->load($this->datatype, 1);
 
         $this->object = $this->getMockForAbstractClass(
             'Gc\Datatype\AbstractDatatype\AbstractEditor',
-            array($mock_datatype)
+            array($mockDatatype)
         );
     }
 

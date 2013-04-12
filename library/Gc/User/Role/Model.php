@@ -50,7 +50,7 @@ class Model extends AbstractTable
     /**
      * Protected role name
      *
-     * @var string $_protectedName
+     * @var string $protectedname
      */
     const PROTECTED_NAME = 'Administrator';
 
@@ -62,31 +62,31 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array(
+        $arraySave = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
         );
 
         try {
-            $role_id = $this->getId();
-            if (empty($role_id)) {
-                $this->insert($array_save);
+            $roleId = $this->getId();
+            if (empty($roleId)) {
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => $this->getId()));
+                $this->update($arraySave, array('id' => $this->getId()));
             }
 
             $permissions = $this->getPermissions();
             if (!empty($permissions)) {
-                $acl_table = new TableGateway('user_acl', $this->getAdapter());
-                $acl_table->delete(array('user_acl_role_id' => $this->getId()));
+                $aclTable = new TableGateway('user_acl', $this->getAdapter());
+                $aclTable->delete(array('user_acl_role_id' => $this->getId()));
 
-                foreach ($permissions as $permission_id => $value) {
+                foreach ($permissions as $permissionId => $value) {
                     if (!empty($value)) {
-                        $acl_table->insert(
+                        $aclTable->insert(
                             array(
                                 'user_acl_role_id' => $this->getId(),
-                                'user_acl_permission_id' => $permission_id
+                                'user_acl_permission_id' => $permissionId
                             )
                         );
                     }
@@ -136,28 +136,28 @@ class Model extends AbstractTable
      */
     public static function fromArray(array $array)
     {
-        $role_table = new Model();
-        $role_table->setData($array);
-        $role_table->setOrigData();
+        $roleTable = new Model();
+        $roleTable->setData($array);
+        $roleTable->setOrigData();
 
-        return $role_table;
+        return $roleTable;
     }
 
     /**
      * Initiliaze from id
      *
-     * @param integer $user_role_id User role id
+     * @param integer $userRoleId User role id
      *
      * @return \Gc\User\Role\Model
      */
-    public static function fromId($user_role_id)
+    public static function fromId($userRoleId)
     {
-        $role_table = new Model();
-        $row        = $role_table->fetchRow($role_table->select(array('id' => (int) $user_role_id)));
+        $roleTable = new Model();
+        $row       = $roleTable->fetchRow($roleTable->select(array('id' => (int) $userRoleId)));
         if (!empty($row)) {
-            $role_table->setData((array) $row);
-            $role_table->setOrigData();
-            return $role_table;
+            $roleTable->setData((array) $row);
+            $roleTable->setOrigData();
+            return $roleTable;
         } else {
             return false;
         }
@@ -170,8 +170,8 @@ class Model extends AbstractTable
      */
     public function getUserPermissions()
     {
-        $user_permissions = $this->getData('user_permissions');
-        if (empty($user_permissions)) {
+        $userPermissions = $this->getData('user_permissions');
+        if (empty($userPermissions)) {
             $select = new Select();
             $select->from('user_acl_role')
                 ->join(
@@ -193,18 +193,18 @@ class Model extends AbstractTable
 
             $permissions = $this->fetchAll($select);
 
-            $user_permissions = array();
+            $userPermissions = array();
             foreach ($permissions as $permission) {
-                if (empty($user_permissions[$permission['resource']])) {
-                    $user_permissions[$permission['resource']] = array();
+                if (empty($userPermissions[$permission['resource']])) {
+                    $userPermissions[$permission['resource']] = array();
                 }
 
-                $user_permissions[$permission['resource']][$permission['userPermissionId']] = $permission['permission'];
+                $userPermissions[$permission['resource']][$permission['userPermissionId']] = $permission['permission'];
             }
 
-            $this->setData('user_permissions', $user_permissions);
+            $this->setData('user_permissions', $userPermissions);
         }
 
-        return $user_permissions;
+        return $userPermissions;
     }
 }

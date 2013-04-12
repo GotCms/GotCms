@@ -48,30 +48,30 @@ class Model extends AbstractTable
     /**
      * Load property value
      *
-     * @param integer $value_id    Optional value id
-     * @param integer $document_id Optional document id
-     * @param integer $property_id Optional property id
+     * @param integer $valueId    Optional value id
+     * @param integer $documentId Optional document id
+     * @param integer $propertyId Optional property id
      *
      * @return \Gc\Property\Model\Value
      */
-    public function load($value_id = null, $document_id = null, $property_id = null)
+    public function load($valueId = null, $documentId = null, $propertyId = null)
     {
-        $this->setId($value_id);
-        $this->setDocumentId($document_id);
-        $this->setPropertyId($property_id);
-        if (!empty($document_id) and !empty($property_id)) {
-            $property_value = $this->fetchRow(
+        $this->setId($valueId);
+        $this->setDocumentId($documentId);
+        $this->setPropertyId($propertyId);
+        if (!empty($documentId) and !empty($propertyId)) {
+            $propertyValue = $this->fetchRow(
                 $this->select(
-                    array('property_id' => $property_id, 'document_id' => $document_id)
+                    array('property_id' => $propertyId, 'document_id' => $documentId)
                 )
             );
 
-            if (!empty($property_value['id'])) {
-                $this->setId($property_value['id']);
+            if (!empty($propertyValue['id'])) {
+                $this->setId($propertyValue['id']);
                 if ($this->getDriverName() == 'pdo_pgsql') {
-                    $this->setValue(stream_get_contents($property_value['value']));
+                    $this->setValue(stream_get_contents($propertyValue['value']));
                 } else {
-                    $this->setValue($property_value['value']);
+                    $this->setValue($propertyValue['value']);
                 }
             }
         }
@@ -88,29 +88,29 @@ class Model extends AbstractTable
      */
     public static function fromArray(array $array)
     {
-        $property_value_table = new Model();
-        $property_value_table->setData($array);
-        $property_value_table->setOrigData();
+        $propertyValueTable = new Model();
+        $propertyValueTable->setData($array);
+        $propertyValueTable->setOrigData();
 
-        return $property_value_table;
+        return $propertyValueTable;
     }
 
     /**
      * Initialize from id
      *
-     * @param integer $property_value_id Property value id
+     * @param integer $propertyValueId Property value id
      *
      * @return \Gc\Property\Value\Model|boolean
      */
-    public static function fromId($property_value_id)
+    public static function fromId($propertyValueId)
     {
-        $property_value_table = new Model();
-        $select               = $property_value_table->select(array('id' => (int) $property_value_id));
-        $current              = $property_value_table->fetchRow($select);
+        $propertyValueTable = new Model();
+        $select             = $propertyValueTable->select(array('id' => (int) $propertyValueId));
+        $current            = $propertyValueTable->fetchRow($select);
         if (!empty($current)) {
-            $property_value_table->setData((array) $current);
-            $property_value_table->setOrigData();
-            return $property_value_table;
+            $propertyValueTable->setData((array) $current);
+            $propertyValueTable->setOrigData();
+            return $propertyValueTable;
         } else {
             return false;
         }
@@ -124,7 +124,7 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array(
+        $arraySave = array(
             'value' => ($this->getDriverName() == 'pdo_pgsql') ? pg_escape_bytea($this->getValue()) : $this->getValue(),
             'document_id' => $this->getDocumentId(),
             'property_id' => $this->getPropertyId(),
@@ -133,10 +133,10 @@ class Model extends AbstractTable
         try {
             $id = $this->getId();
             if (empty($id)) {
-                $this->insert($array_save);
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => $this->getId()));
+                $this->update($arraySave, array('id' => $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));

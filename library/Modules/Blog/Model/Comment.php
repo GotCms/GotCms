@@ -55,9 +55,9 @@ class Comment extends AbstractTable
      */
     public function getDocumentList()
     {
-        $all_comments = $this->getList(null, null);
-        $documents    = array();
-        foreach ($all_comments as $key => $comment) {
+        $allComments = $this->getList(null, null);
+        $documents   = array();
+        foreach ($allComments as $key => $comment) {
             if (empty($documents[$comment['document_id']])) {
                 $document                      = DocumentModel::fromId($comment['document_id']);
                 $documents[$document->getId()] = $document;
@@ -70,24 +70,24 @@ class Comment extends AbstractTable
     /**
      * Return all comments in document
      *
-     * @param integer $document_id Document id
-     * @param boolean $is_active   Is active
+     * @param integer $documentId Document id
+     * @param boolean $isActive   Is active
      *
      * @return array
      */
-    public function getList($document_id = null, $is_active = true)
+    public function getList($documentId = null, $isActive = true)
     {
         return $this->select(
-            function (Select $select) use ($document_id, $is_active) {
-                if (!empty($document_id)) {
-                    $select->where->equalTo('document_id', $document_id);
+            function (Select $select) use ($documentId, $isActive) {
+                if (!empty($documentId)) {
+                    $select->where->equalTo('document_id', $documentId);
                 }
 
-                if (!is_null($is_active)) {
+                if (!is_null($isActive)) {
                     if ($this->getDriverName() == 'pdo_pgsql') {
-                        $select->where->equalTo('is_active', empty($is_active) ? 'false' : 'true');
+                        $select->where->equalTo('is_active', empty($isActive) ? 'false' : 'true');
                     } else {
-                        $select->where->equalTo('is_active', (int) $is_active);
+                        $select->where->equalTo('is_active', (int) $isActive);
                     }
                 }
 
@@ -99,27 +99,27 @@ class Comment extends AbstractTable
     /**
      * Add command
      *
-     * @param array   $data        Array of comments
-     * @param integer $document_id Document id
+     * @param array   $data       Array of comments
+     * @param integer $documentId Document id
      *
      * @return boolean
      */
-    public function add(array $data, $document_id)
+    public function add(array $data, $documentId)
     {
-        $mandatory_keys = array('message', 'username', 'email');
-        $insert_data    = array();
-        foreach ($mandatory_keys as $key) {
+        $mandatoryKeys = array('message', 'username', 'email');
+        $insertData    = array();
+        foreach ($mandatoryKeys as $key) {
             if (empty($data[$key])) {
                 return false;
             } else {
-                $insert_data[$key] = $data[$key];
+                $insertData[$key] = $data[$key];
             }
         }
 
-        $insert_data['show_email']  = empty($data['show_email']) ? 0 : 1;
-        $insert_data['document_id'] = $document_id;
-        $insert_data['created_at']  = new Expression('NOW()');
-        $this->insert($insert_data);
+        $insertData['show_email']  = empty($data['show_email']) ? 0 : 1;
+        $insertData['document_id'] = $documentId;
+        $insertData['created_at']  = new Expression('NOW()');
+        $this->insert($insertData);
 
         return true;
     }

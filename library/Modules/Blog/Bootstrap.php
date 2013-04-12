@@ -58,8 +58,8 @@ class Bootstrap extends AbstractModule
      */
     public function install()
     {
-        $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();
-        $pdo_resource->exec(
+        $pdoResource = $this->getAdapter()->getDriver()->getConnection()->getResource();
+        $pdoResource->exec(
             file_get_contents(
                 __DIR__ . sprintf('/sql/install-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
             )
@@ -75,8 +75,8 @@ class Bootstrap extends AbstractModule
      */
     public function uninstall()
     {
-        $pdo_resource = $this->getAdapter()->getDriver()->getConnection()->getResource();
-        $pdo_resource->exec(
+        $pdoResource = $this->getAdapter()->getDriver()->getConnection()->getResource();
+        $pdoResource->exec(
             file_get_contents(
                 __DIR__ . sprintf('/sql/uninstall-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
             )

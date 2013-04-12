@@ -59,17 +59,17 @@ class Install extends AbstractForm
      */
     public function lang()
     {
-        $country_available = array(
+        $countryAvailable = array(
             'fr_FR' => 'Français',
             'en_GB' => 'English',
         );
 
         $lang = new Element\Select('lang');
         $lang->setAttribute('size', 10)
-            ->setValueOptions($country_available);
+            ->setValueOptions($countryAvailable);
 
-        $input_filter = $this->getInputFilter();
-        $input_filter->add(
+        $inputFilter = $this->getInputFilter();
+        $inputFilter->add(
             array(
                 'name' => 'lang',
                 'required' => true,
@@ -90,14 +90,14 @@ class Install extends AbstractForm
      */
     public function license()
     {
-        $accept_license = new Element\Checkbox('accept-license');
-        $accept_license->setCheckedValue('1')
+        $acceptLicense = new Element\Checkbox('accept-license');
+        $acceptLicense->setCheckedValue('1')
             ->setUseHiddenElement(false)
             ->setAttribute('id', 'accept-license')
             ->setAttribute('class', 'input-checkbox');
 
-        $input_filter = $this->getInputFilter();
-        $input_filter->add(
+        $inputFilter = $this->getInputFilter();
+        $inputFilter->add(
             array(
                 'name' => 'accept-license',
                 'required' => true,
@@ -114,7 +114,7 @@ class Install extends AbstractForm
             'accept-license'
         );
 
-        $this->add($accept_license);
+        $this->add($acceptLicense);
     }
 
     /**
@@ -157,8 +157,8 @@ class Install extends AbstractForm
         $this->add($username);
         $this->add($password);
 
-        $input_filter = $this->getInputFilter();
-        $input_filter->add(
+        $inputFilter = $this->getInputFilter();
+        $inputFilter->add(
             array(
                 'name' => 'driver',
                 'required' => true,
@@ -169,7 +169,7 @@ class Install extends AbstractForm
             'driver'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'hostname',
                 'required' => true,
@@ -180,7 +180,7 @@ class Install extends AbstractForm
             'hostname'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'username',
                 'required' => true,
@@ -191,7 +191,7 @@ class Install extends AbstractForm
             'username'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'password',
                 'required' => false,
@@ -199,7 +199,7 @@ class Install extends AbstractForm
             'password'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'dbname',
                 'required' => true,
@@ -218,47 +218,47 @@ class Install extends AbstractForm
      */
     public function configuration()
     {
-        $site_name = new Element\Text('site_name');
-        $site_name->setAttribute('label', 'Site name')
+        $siteName = new Element\Text('site_name');
+        $siteName->setAttribute('label', 'Site name')
             ->setAttribute('class', 'input-text');
 
-        $site_is_offline = new Element\Checkbox('site_is_offline');
-        $site_is_offline->setAttribute('label', 'Is offline')
+        $siteIsOffline = new Element\Checkbox('site_is_offline');
+        $siteIsOffline->setAttribute('label', 'Is offline')
             ->setAttribute('class', 'input-checkbox')
             ->setAttribute('id', 'is-offline')
             ->setCheckedValue('1');
 
-        $admin_email = new Element\Text('admin_email');
-        $admin_email->setAttribute('type', 'text')
+        $adminEmail = new Element\Text('admin_email');
+        $adminEmail->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text')
             ->setAttribute('label', 'Email');
 
-        $admin_firstname = new Element\Text('admin_firstname');
-        $admin_firstname->setAttribute('type', 'text')
+        $adminFirstname = new Element\Text('admin_firstname');
+        $adminFirstname->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text')
             ->setAttribute('label', 'Firstname');
 
-        $admin_lastname = new Element\Text('admin_lastname');
-        $admin_lastname->setAttribute('type', 'text')
+        $adminLastname = new Element\Text('admin_lastname');
+        $adminLastname->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text')
             ->setAttribute('label', 'Lastname');
 
-        $admin_login = new Element\Text('admin_login');
-        $admin_login->setAttribute('label', 'Login')
+        $adminLogin = new Element\Text('admin_login');
+        $adminLogin->setAttribute('label', 'Login')
             ->setAttribute('class', 'input-text');
 
-        $admin_password = new Element\Password('admin_password');
-        $admin_password->setAttribute('label', 'Admin password')
+        $adminPassword = new Element\Password('admin_password');
+        $adminPassword->setAttribute('label', 'Admin password')
             ->setAttribute('class', 'input-text');
 
-        $admin_password_confirm = new Element\Password('admin_passowrd_confirm');
-        $admin_password_confirm->setAttribute('label', 'Confirm admin password')
+        $adminPasswordConfirm = new Element\Password('admin_passowrd_confirm');
+        $adminPasswordConfirm->setAttribute('label', 'Confirm admin password')
             ->setAttribute('class', 'input-text');
 
-        $path     = GC_APPLICATION_PATH . '/data/install/design/';
-        $list_dir = glob($path . '*', GLOB_ONLYDIR);
-        $options  = array('' => 'Select template');
-        foreach ($list_dir as $dir) {
+        $path    = GC_APPLICATION_PATH . '/data/install/design/';
+        $listDir = glob($path . '*', GLOB_ONLYDIR);
+        $options = array('' => 'Select template');
+        foreach ($listDir as $dir) {
             $dir           = str_replace($path, '', $dir);
             $options[$dir] = $dir;
         }
@@ -268,19 +268,19 @@ class Install extends AbstractForm
         $template->setValueOptions($options);
 
 
-        $this->add($site_name);
-        $this->add($site_is_offline);
-        $this->add($admin_email);
-        $this->add($admin_firstname);
-        $this->add($admin_lastname);
-        $this->add($admin_login);
-        $this->add($admin_password);
-        $this->add($admin_password_confirm);
+        $this->add($siteName);
+        $this->add($siteIsOffline);
+        $this->add($adminEmail);
+        $this->add($adminFirstname);
+        $this->add($adminLastname);
+        $this->add($adminLogin);
+        $this->add($adminPassword);
+        $this->add($adminPasswordConfirm);
         $this->add($template);
 
 
-        $input_filter = $this->getInputFilter();
-        $input_filter->add(
+        $inputFilter = $this->getInputFilter();
+        $inputFilter->add(
             array(
                 'name' => 'site_name',
                 'required' => true,
@@ -291,7 +291,7 @@ class Install extends AbstractForm
             'site_name'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'admin_firstname',
                 'required' => true,
@@ -302,7 +302,7 @@ class Install extends AbstractForm
             'admin_firstname'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'admin_lastname',
                 'required' => true,
@@ -313,7 +313,7 @@ class Install extends AbstractForm
             'admin_lastname'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'admin_email',
                 'required' => true,
@@ -325,7 +325,7 @@ class Install extends AbstractForm
             'admin_email'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'admin_login',
                 'required' => true,
@@ -336,7 +336,7 @@ class Install extends AbstractForm
             'admin_login'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'site_is_offline',
                 'required' => false,
@@ -344,7 +344,7 @@ class Install extends AbstractForm
             'site_is_offline'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'admin_password',
                 'required' => false,
@@ -352,7 +352,7 @@ class Install extends AbstractForm
             'admin_password'
         );
 
-        $input_filter->add(
+        $inputFilter->add(
             array(
                 'name' => 'template',
                 'required' => true,

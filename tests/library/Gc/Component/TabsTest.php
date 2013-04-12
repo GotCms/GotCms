@@ -117,7 +117,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
         $user->setPassword('test');
         $user->save();
 
-        $document_type = DocumentTypeModel::fromArray(
+        $documentType = DocumentTypeModel::fromArray(
             array(
                 'name' => 'Document Type Name',
                 'description' => 'Document Type description',
@@ -127,7 +127,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $document_type->save();
+        $documentType->save();
 
         $document = DocumentModel::fromArray(
             array(
@@ -136,7 +136,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
                 'status' => DocumentModel::STATUS_ENABLE,
                 'show_in_nav' => true,
                 'user_id' => $user->getId(),
-                'document_type_id' => $document_type->getId(),
+                'document_type_id' => $documentType->getId(),
                 'view_id' => $view->getId(),
                 'layout_id' => $layout->getId(),
                 'parent_id' => 0
@@ -155,7 +155,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
         );
 
         $document->delete();
-        $document_type->delete();
+        $documentType->delete();
         $layout->delete();
         $view->delete();
         $user->delete();

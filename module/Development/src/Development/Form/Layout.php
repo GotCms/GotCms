@@ -48,8 +48,8 @@ class Layout extends AbstractForm
      */
     public function init()
     {
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'name' => array(
                     'required' => true,
@@ -85,7 +85,7 @@ class Layout extends AbstractForm
             )
         );
 
-        $this->setInputFilter($input_filter);
+        $this->setInputFilter($inputFilter);
 
         $this->add(new Element('name'));
         $this->add(new Element('identifier'));

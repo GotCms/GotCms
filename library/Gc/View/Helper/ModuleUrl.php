@@ -41,11 +41,11 @@ class ModuleUrl extends AbstractHelper
     /**
      * Generates an url given the name of a route.
      *
-     * @param string  $action_name          Action name
-     * @param array   $controller_name      Controller name
-     * @param array   $query_params         Parameters for the link
-     * @param array   $options              Options for the route
-     * @param boolean $reuse_matched_params Whether to reuse matched parameters
+     * @param string  $actionName         Action name
+     * @param array   $controllerName     Controller name
+     * @param array   $queryParams        Parameters for the link
+     * @param array   $options            Options for the route
+     * @param boolean $reuseMatchedParams Whether to reuse matched parameters
      *
      * @return string  Url                For the link href attribute
      * @throws Exception\RuntimeException If no RouteStackInterface was provided
@@ -53,30 +53,30 @@ class ModuleUrl extends AbstractHelper
      * @throws Exception\RuntimeException If RouteMatch didn't contain a matched route name
      */
     public function __invoke(
-        $action_name = null,
-        $controller_name = null,
-        $query_params = array(),
+        $actionName = null,
+        $controllerName = null,
+        $queryParams = array(),
         $options = array(),
-        $reuse_matched_params = true
+        $reuseMatchedParams = true
     ) {
         $params = array();
-        if (!empty($action_name)) {
-            $params['ma'] = $action_name;
+        if (!empty($actionName)) {
+            $params['ma'] = $actionName;
         }
 
-        if (!empty($controller_name)) {
-            $params['mc'] = $controller_name;
+        if (!empty($controllerName)) {
+            $params['mc'] = $controllerName;
         }
 
-        $url = $this->getView()->url('moduleEdit', $params, $options, $reuse_matched_params);
+        $url = $this->getView()->url('moduleEdit', $params, $options, $reuseMatchedParams);
 
-        if (!empty($query_params)) {
-            $url_params = array();
-            foreach ($query_params as $key => $value) {
-                $url_params[] = $key . '=' . rawurlencode($value);
+        if (!empty($queryParams)) {
+            $urlParams = array();
+            foreach ($queryParams as $key => $value) {
+                $urlParams[] = $key . '=' . rawurlencode($value);
             }
 
-            $url .= '?' . implode('&', $url_params);
+            $url .= '?' . implode('&', $urlParams);
         }
 
         return $url;

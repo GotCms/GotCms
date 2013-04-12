@@ -47,7 +47,7 @@ class IndexController extends Action
     public function indexAction()
     {
 
-        $visitor_model = new Visitor();
+        $visitorModel = new Visitor();
 
         $settings = array(
           'back_colour' => '#FFF',
@@ -71,7 +71,7 @@ class IndexController extends Action
         $data           = array();
         $array          = array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR');
 
-        foreach ($array as $type => $sql_value) {
+        foreach ($array as $type => $sqlValue) {
             switch($type) {
                 case 'hours':
                     $label = 'This day';
@@ -96,10 +96,10 @@ class IndexController extends Action
                     'referers' => 'Referers',
                 ),
                 'values' => array(
-                    'visitors' => $visitor_model->getNbVisitors($sql_value),
-                    'pagesviews' => $visitor_model->getNbPagesViews($sql_value),
-                    'urlsviews' => $visitor_model->getUrlsViews($sql_value),
-                    'referers' => $visitor_model->getReferers($sql_value),
+                    'visitors' => $visitorModel->getNbVisitors($sqlValue),
+                    'pagesviews' => $visitorModel->getNbPagesViews($sqlValue),
+                    'urlsviews' => $visitorModel->getUrlsViews($sqlValue),
+                    'referers' => $visitorModel->getReferers($sqlValue),
                 ),
             );
         }

@@ -240,8 +240,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromId()
     {
-        $current_id = $this->object->getId();
-        $model      = Model::fromId($current_id);
+        $currentId = $this->object->getId();
+        $model     = Model::fromId($currentId);
 
         $this->assertEquals($this->object->getName(), $model->getName());
     }

@@ -67,21 +67,21 @@ class ModulePlugin extends AbstractHelper
     /**
      * Execute plugin module.
      *
-     * @param string $module_name Module name
-     * @param string $plugin_name Plugin name
-     * @param array  $params      Parameters
+     * @param string $moduleName Module name
+     * @param string $pluginName Plugin name
+     * @param array  $params     Parameters
      *
      * @return mixed
      */
-    public function __invoke($module_name, $plugin_name, $params = array())
+    public function __invoke($moduleName, $pluginName, $params = array())
     {
-        if (!$this->has($module_name, $plugin_name)) {
+        if (!$this->has($moduleName, $pluginName)) {
             return false;
         }
 
         $this->__params = $params;
 
-        $instance = $this->get($module_name, $plugin_name);
+        $instance = $this->get($moduleName, $pluginName);
         if (is_callable($instance)) {
             return call_user_func_array($instance, $params);
         }
@@ -116,23 +116,23 @@ class ModulePlugin extends AbstractHelper
     /**
      * Retrieve a registered instance
      *
-     * @param string $module_name Module name
-     * @param string $plugin_name Plugin name
+     * @param string $moduleName Module name
+     * @param string $pluginName Plugin name
      *
      * @return object|array
      */
-    public function get($module_name, $plugin_name)
+    public function get($moduleName, $pluginName)
     {
-        $plugin_name = $this->toCamelCase($plugin_name);
-        $instance    = null;
+        $pluginName = $this->toCamelCase($pluginName);
+        $instance   = null;
 
-        if (isset($this->instances[$module_name][$plugin_name])) {
-            return $this->instances[$module_name][$plugin_name];
+        if (isset($this->instances[$moduleName][$pluginName])) {
+            return $this->instances[$moduleName][$pluginName];
         }
 
         if (!$instance) {
-            if ($this->canCreate($module_name, $plugin_name)) {
-                $instance = $this->create($module_name, $plugin_name);
+            if ($this->canCreate($moduleName, $pluginName)) {
+                $instance = $this->create($moduleName, $pluginName);
             }
         }
 
@@ -168,27 +168,27 @@ class ModulePlugin extends AbstractHelper
     /**
      * Determine if we can create an instance.
      *
-     * @param string|array $module_name Module name
-     * @param string       $plugin_name Plugin name
+     * @param string|array $moduleName Module name
+     * @param string       $pluginName Plugin name
      *
      * @return bool
      */
-    public function canCreate($module_name, $plugin_name = null)
+    public function canCreate($moduleName, $pluginName = null)
     {
-        if (is_array($module_name)) {
-            list($module_name, $plugin_name) = $module_name;
+        if (is_array($moduleName)) {
+            list($moduleName, $pluginName) = $moduleName;
         } else {
-            $plugin_name = $this->toCamelCase($plugin_name);
+            $pluginName = $this->toCamelCase($pluginName);
         }
 
-        if (isset($this->instances[$module_name][$plugin_name])
+        if (isset($this->instances[$moduleName][$pluginName])
         ) {
             return true;
         }
 
-        if (ModuleModel::fromName($module_name)) {
-            $class_name = 'Modules\\' . $module_name . '\\Plugin\\' . $plugin_name;
-            if (class_exists($class_name)) {
+        if (ModuleModel::fromName($moduleName)) {
+            $className = 'Modules\\' . $moduleName . '\\Plugin\\' . $pluginName;
+            if (class_exists($className)) {
                 return true;
             }
         }
@@ -199,28 +199,28 @@ class ModulePlugin extends AbstractHelper
     /**
      * Create plugin
      *
-     * @param string|array $module_name Module name
-     * @param string       $plugin_name Plugin name
+     * @param string|array $moduleName Module name
+     * @param string       $pluginName Plugin name
      *
      * @return bool|\Gc\Module\AbstractPlugin
      */
-    public function create($module_name, $plugin_name = null)
+    public function create($moduleName, $pluginName = null)
     {
-        if (is_array($module_name)) {
-            list($module_name, $plugin_name) = $module_name;
+        if (is_array($moduleName)) {
+            list($moduleName, $pluginName) = $moduleName;
         } else {
-            $plugin_name = $this->toCamelCase($plugin_name);
+            $pluginName = $this->toCamelCase($pluginName);
         }
 
-        if ($this->canCreate($module_name, $plugin_name)) {
-            if (!isset($this->instances[$module_name])) {
-                $this->instances[$module_name] = array();
+        if ($this->canCreate($moduleName, $pluginName)) {
+            if (!isset($this->instances[$moduleName])) {
+                $this->instances[$moduleName] = array();
             }
 
-            $class_name = 'Modules\\' . $module_name . '\\Plugin\\' . $plugin_name;
-            $plugin     = new $class_name();
+            $className = 'Modules\\' . $moduleName . '\\Plugin\\' . $pluginName;
+            $plugin    = new $className();
             if ($this->validatePlugin($plugin)) {
-                $this->instances[$module_name][$plugin_name] = $plugin;
+                $this->instances[$moduleName][$pluginName] = $plugin;
                 return $plugin;
             }
         }
@@ -231,20 +231,20 @@ class ModulePlugin extends AbstractHelper
     /**
      * Check if plugin exists
      *
-     * @param string|array $module_name Module name
-     * @param string       $plugin_name Plugin name
+     * @param string|array $moduleName Module name
+     * @param string       $pluginName Plugin name
      *
      * @return bool
      */
-    public function has($module_name, $plugin_name = null)
+    public function has($moduleName, $pluginName = null)
     {
-        if (is_array($module_name)) {
-            list($module_name, $plugin_name) = $module_name;
+        if (is_array($moduleName)) {
+            list($moduleName, $pluginName) = $moduleName;
         } else {
-            $plugin_name = $this->toCamelCase($plugin_name);
+            $pluginName = $this->toCamelCase($pluginName);
         }
 
-        if ($this->canCreate($module_name, $plugin_name)) {
+        if ($this->canCreate($moduleName, $pluginName)) {
             return true;
         }
 

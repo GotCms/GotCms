@@ -46,8 +46,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function save()
     {
-        $toolbar_items = $this->getRequest()->getPost()->get('toolbar-items');
-        $this->setConfig(array('toolbar-items' => $toolbar_items));
+        $toolbarItems = $this->getRequest()->getPost()->get('toolbar-items');
+        $this->setConfig(array('toolbar-items' => $toolbarItems));
     }
 
     /**

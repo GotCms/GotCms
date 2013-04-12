@@ -129,22 +129,22 @@ class Image
     /**
      * Resize image
      *
-     * @param integer $new_width        New width
-     * @param integer $new_height       New height
-     * @param string  $option           Option can be (auto|crop)
-     * @param string  $background_color Background color
-     * @param integer $source_x         Source x
-     * @param integer $source_y         Source y
+     * @param integer $newWidth        New width
+     * @param integer $newHeight       New height
+     * @param string  $option          Option can be (auto|crop)
+     * @param string  $backgroundColor Background color
+     * @param integer $sourceX         Source x
+     * @param integer $sourceY         Source y
      *
      * @return \Gc\Media\Image
      */
     public function resize(
-        $new_width,
-        $new_height,
+        $newWidth,
+        $newHeight,
         $option = 'auto',
-        $background_color = '#000000',
-        $source_x = 0,
-        $source_y = 0
+        $backgroundColor = '#000000',
+        $sourceX = 0,
+        $sourceY = 0
     ) {
         if (empty($this->image)) {
             return false;
@@ -155,23 +155,23 @@ class Image
         }
 
         if ($option == 'crop') {
-            $optimalwidth  = $new_width;
-            $optimalheight = $new_height;
-            if ($this->width < $new_width) {
+            $optimalwidth  = $newWidth;
+            $optimalheight = $newHeight;
+            if ($this->width < $newWidth) {
                 $optimalwidth = $this->width;
             }
 
-            if ($this->height < $new_height) {
+            if ($this->height < $newHeight) {
                 $optimalheight = $this->height;
             }
 
-            $this->crop($optimalwidth, $optimalheight, $source_x, $source_y);
+            $this->crop($optimalwidth, $optimalheight, $sourceX, $sourceY);
         } else {
-            $optimalheight = $this->getSizeByFixedWidth($new_width);
-            $optimalwidth  = $this->getSizeByFixedHeight($new_height);
-            if ($optimalheight > $new_height) {
+            $optimalheight = $this->getSizeByFixedWidth($newWidth);
+            $optimalwidth  = $this->getSizeByFixedHeight($newHeight);
+            if ($optimalheight > $newHeight) {
                 $optimalheight = $this->getSizeByFixedWidth($optimalwidth);
-            } elseif ($optimalwidth > $new_width) {
+            } elseif ($optimalwidth > $newWidth) {
                 $optimalwidth = $this->getSizeByFixedHeight($optimalheight);
             }
 
@@ -190,29 +190,29 @@ class Image
             );
         }
 
-        $tmpimage = @imagecreatetruecolor($new_width, $new_height);
+        $tmpimage = @imagecreatetruecolor($newWidth, $newHeight);
 
-        $rgb_array = $this->hex2rgb($background_color);
-        if (empty($rgb_array)) {
-            $background_color = imagecolorallocate($tmpimage, 0, 0, 0);
+        $rgbArray = $this->hex2rgb($backgroundColor);
+        if (empty($rgbArray)) {
+            $backgroundColor = imagecolorallocate($tmpimage, 0, 0, 0);
         } else {
-            $background_color = imagecolorallocate(
+            $backgroundColor = imagecolorallocate(
                 $tmpimage,
-                $rgb_array['red'],
-                $rgb_array['green'],
-                $rgb_array['blue']
+                $rgbArray['red'],
+                $rgbArray['green'],
+                $rgbArray['blue']
             );
         }
 
-        imagefill($tmpimage, 0, 0, $background_color);
+        imagefill($tmpimage, 0, 0, $backgroundColor);
 
-        $dst_x = (int) (0.5 * ($new_width - $optimalwidth));
-        $dst_y = (int) (0.5 * ($new_height - $optimalheight));
+        $dstX = (int) (0.5 * ($newWidth - $optimalwidth));
+        $dstY = (int) (0.5 * ($newHeight - $optimalheight));
         imagecopyresampled(
             $tmpimage,
             $this->imageResized,
-            $dst_x,
-            $dst_y,
+            $dstX,
+            $dstY,
             0,
             0,
             $optimalwidth,
@@ -228,81 +228,81 @@ class Image
     /**
      * Convert hexa string to rbg
      *
-     * @param string $hex_string Hexadecimal string
+     * @param string $hexString Hexadecimal string
      *
      * @return array
      */
-    public function hex2rgb($hex_string)
+    public function hex2rgb($hexString)
     {
-        $hex_string = preg_replace('/[^0-9A-Fa-f]/', '', $hex_string); // Gets a proper hex string
-        $rgb_array  = array();
-        if (strlen($hex_string) == 6) {
-            $color_val          = hexdec($hex_string);
-            $rgb_array['red']   = 0xFF & ($color_val >> 0x10);
-            $rgb_array['green'] = 0xFF & ($color_val >> 0x8);
-            $rgb_array['blue']  = 0xFF & $color_val;
-        } elseif (strlen($hex_string) == 3) {
-            $rgb_array['red']   = hexdec(str_repeat(substr($hex_string, 0, 1), 2));
-            $rgb_array['green'] = hexdec(str_repeat(substr($hex_string, 1, 1), 2));
-            $rgb_array['blue']  = hexdec(str_repeat(substr($hex_string, 2, 1), 2));
+        $hexString = preg_replace('/[^0-9A-Fa-f]/', '', $hexString); // Gets a proper hex string
+        $rgbArray  = array();
+        if (strlen($hexString) == 6) {
+            $colorVal          = hexdec($hexString);
+            $rgbArray['red']   = 0xFF & ($colorVal >> 0x10);
+            $rgbArray['green'] = 0xFF & ($colorVal >> 0x8);
+            $rgbArray['blue']  = 0xFF & $colorVal;
+        } elseif (strlen($hexString) == 3) {
+            $rgbArray['red']   = hexdec(str_repeat(substr($hexString, 0, 1), 2));
+            $rgbArray['green'] = hexdec(str_repeat(substr($hexString, 1, 1), 2));
+            $rgbArray['blue']  = hexdec(str_repeat(substr($hexString, 2, 1), 2));
         } else {
             return false;
         }
 
-        return $rgb_array;
+        return $rgbArray;
     }
 
     /**
      * Get fixed height
      *
-     * @param integer $new_height New height
+     * @param integer $newHeight New height
      *
      * @return integer
      */
-    protected function getSizeByFixedHeight($new_height)
+    protected function getSizeByFixedHeight($newHeight)
     {
-        $ratio     = $this->width / $this->height;
-        $new_width = $new_height * $ratio;
+        $ratio    = $this->width / $this->height;
+        $newWidth = $newHeight * $ratio;
 
-        return floor($new_width);
+        return floor($newWidth);
     }
 
     /**
      * Get fixed width
      *
-     * @param integer $new_width New width
+     * @param integer $newWidth New width
      *
      * @return integer
      */
-    protected function getSizeByFixedWidth($new_width)
+    protected function getSizeByFixedWidth($newWidth)
     {
-        $ratio      = $this->height / $this->width;
-        $new_height = $new_width * $ratio;
+        $ratio     = $this->height / $this->width;
+        $newHeight = $newWidth * $ratio;
 
-        return floor($new_height);
+        return floor($newHeight);
     }
 
     /**
      * Crop image
      *
-     * @param integer $new_width  New width
-     * @param integer $new_height New height
-     * @param integer $source_x   Source x
-     * @param integer $source_y   Source y
+     * @param integer $newWidth  New width
+     * @param integer $newHeight New height
+     * @param integer $sourceX   Source x
+     * @param integer $sourceY   Source y
      *
      * @return \Gc\Media\Image
      */
-    protected function crop($new_width, $new_height, $source_x = 0, $source_y = 0)
+    protected function crop($newWidth, $newHeight, $sourceX = 0, $sourceY = 0)
     {
         $crop               = $this->imageResized;
-        $this->imageResized = imagecreatetruecolor($new_width, $new_height);
+        $this->imageResized = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresampled(
             $this->imageResized,
             $this->image,
             0,
             0,
-            $source_x,
-            $source_y,
+            $sourceX,
+            $sourceY,
             $this->width,
             $this->height,
             $this->width,
@@ -315,39 +315,39 @@ class Image
     /**
      * Save image
      *
-     * @param string  $save_path     Save path
-     * @param integer $image_quality Image quality default is 90
+     * @param string  $savePath     Save path
+     * @param integer $imageQuality Image quality default is 90
      *
      * @return boolean
      */
-    public function save($save_path, $image_quality = 90)
+    public function save($savePath, $imageQuality = 90)
     {
         if (empty($this->image) or empty($this->imageResized)) {
             return false;
         }
 
-        $extension = strrchr($save_path, '.');
+        $extension = strrchr($savePath, '.');
         $extension = strtolower($extension);
         $return    = false;
         switch($extension) {
             case '.jpg':
             case '.jpeg':
                 if (imagetypes() & IMG_JPG) {
-                    $return = imagejpeg($this->imageResized, $save_path, $image_quality);
+                    $return = imagejpeg($this->imageResized, $savePath, $imageQuality);
                 }
                 break;
             case '.gif':
                 if (imagetypes() & IMG_GIF) {
-                    $return = imagegif($this->imageResized, $save_path);
+                    $return = imagegif($this->imageResized, $savePath);
                 }
                 break;
             case '.png':
-                $scale_quality = round(($image_quality / 100) * 9);
+                $scaleQuality = round(($imageQuality / 100) * 9);
 
-                $invert_scale_quality = 9 - $scale_quality;
+                $invertScaleQuality = 9 - $scaleQuality;
 
                 if (imagetypes() & IMG_PNG) {
-                     $return = imagepng($this->imageResized, $save_path, $invert_scale_quality);
+                     $return = imagepng($this->imageResized, $savePath, $invertScaleQuality);
                 }
                 break;
             default:

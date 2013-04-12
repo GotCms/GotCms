@@ -40,31 +40,31 @@ $config = array(
 );
 
 try {
-    $db_adapter = new DbAdapter($config['db']);
-    $db_adapter->getDriver()->getConnection()->connect();
+    $dbAdapter = new DbAdapter($config['db']);
+    $dbAdapter->getDriver()->getConnection()->connect();
 } catch (Exception $e) {
     echo 'Can\'t connect to database exiting.' . PHP_EOL;
     exit;
 }
 
-\Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($db_adapter);
+\Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
 Registry::set('Configuration', $config);
-Registry::set('Db', $db_adapter);
+Registry::set('Db', $dbAdapter);
 
 /**
  * Install database
  */
-$resource    = $db_adapter->getDriver()->getConnection()->getResource();
-$driver_name = str_replace('pdo_', '', $config['db']['driver']);
-$resource->exec(file_get_contents(sprintf($gc_root . '/data/install/sql/database-%s.sql', $driver_name)));
-$resource->exec(file_get_contents($gc_root . '/data/install/sql/data.sql'));
+$resource   = $dbAdapter->getDriver()->getConnection()->getResource();
+$driverName = str_replace('pdo_', '', $config['db']['driver']);
+$resource->exec(file_get_contents(sprintf($gcRoot . '/data/install/sql/database-%s.sql', $driverName)));
+$resource->exec(file_get_contents($gcRoot . '/data/install/sql/data.sql'));
 //Create role
 $ini   = new \Zend\Config\Reader\Ini();
-$roles = $ini->fromFile($gc_root . '/data/install/scripts/roles.ini');
+$roles = $ini->fromFile($gcRoot . '/data/install/scripts/roles.ini');
 
 try {
     foreach ($roles['role'] as $key => $value) {
-        $statement = $db_adapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
+        $statement = $dbAdapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
         $statement->execute();
     }
 } catch (Exception $e) {
@@ -73,23 +73,23 @@ try {
 
 //resources
 $ini       = new \Zend\Config\Reader\Ini();
-$resources = $ini->fromFile($gc_root . '/data/install/scripts/resources.ini');
+$resources = $ini->fromFile($gcRoot . '/data/install/scripts/resources.ini');
 
 foreach ($resources as $key => $value) {
-    $statement = $db_adapter->createStatement("INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')");
+    $statement = $dbAdapter->createStatement("INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')");
     $statement->execute();
 
-    $statement      = $db_adapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
-    $result         = $statement->execute();
-    $last_insert_id = $result->current();
-    $last_insert_id = $last_insert_id['id'];
+    $statement    = $dbAdapter->createStatement("SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'");
+    $result       = $statement->execute();
+    $lastInsertId = $result->current();
+    $lastInsertId = $lastInsertId['id'];
 
     $permissions = array();
     foreach ($value as $k => $v) {
         if (!in_array($k, $permissions)) {
-            $statement = $db_adapter->createStatement(
+            $statement = $dbAdapter->createStatement(
                 "INSERT INTO user_acl_permission (permission, user_acl_resource_id)
-                VALUES ('" . $k . "', '" . $last_insert_id . "')"
+                VALUES ('" . $k . "', '" . $lastInsertId . "')"
             );
             $statement->execute();
             $permissions[] = $k;
@@ -98,30 +98,30 @@ foreach ($resources as $key => $value) {
 }
 
 foreach ($resources as $key => $value) {
-    $statement               = $db_adapter->createStatement(
+    $statement            = $dbAdapter->createStatement(
         "SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'"
     );
-    $result                  = $statement->execute();
-    $last_resource_insert_id = $result->current();
-    $last_resource_insert_id = $last_resource_insert_id['id'];
+    $result               = $statement->execute();
+    $lastResourceInsertId = $result->current();
+    $lastResourceInsertId = $lastResourceInsertId['id'];
 
     foreach ($value as $k => $v) {
-        $statement      = $db_adapter->createStatement(
+        $statement    = $dbAdapter->createStatement(
             "SELECT id FROM user_acl_permission
             WHERE permission =  '" . $k . "'
-                AND user_acl_resource_id = '" . $last_resource_insert_id . "'"
+                AND user_acl_resource_id = '" . $lastResourceInsertId . "'"
         );
-        $result         = $statement->execute();
-        $last_insert_id = $result->current();
-        $last_insert_id = $last_insert_id['id'];
+        $result       = $statement->execute();
+        $lastInsertId = $result->current();
+        $lastInsertId = $lastInsertId['id'];
 
-        $statement = $db_adapter->createStatement("SELECT id FROM user_acl_role WHERE name = '" . $v . "'");
+        $statement = $dbAdapter->createStatement("SELECT id FROM user_acl_role WHERE name = '" . $v . "'");
         $result    = $statement->execute();
         $role      = $result->current();
         if (!empty($role['id'])) {
-            $statement = $db_adapter->createStatement(
+            $statement = $dbAdapter->createStatement(
                 "INSERT INTO user_acl (user_acl_role_id, user_acl_permission_id)
-                VALUES ('" . $role['id'] . "', " . $last_insert_id . ')'
+                VALUES ('" . $role['id'] . "', " . $lastInsertId . ')'
             );
             $statement->execute();
         }

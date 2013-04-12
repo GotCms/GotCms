@@ -49,13 +49,13 @@ class Collection extends AbstractTable
     /**
      * Initiliaze tab collection
      *
-     * @param integer $document_type_id Optional document type id
+     * @param integer $documentTypeId Optional document type id
      *
      * @return \Gc\Tab\Collection
      */
-    public function load($document_type_id = null)
+    public function load($documentTypeId = null)
     {
-        $this->setDocumentTypeId($document_type_id);
+        $this->setDocumentTypeId($documentTypeId);
 
         return $this;
     }
@@ -63,16 +63,16 @@ class Collection extends AbstractTable
     /**
      * Return all tabs from collection
      *
-     * @param boolean $force_reload Force reload collection
+     * @param boolean $forceReload Force reload collection
      *
      * @return array
      */
-    public function getTabs($force_reload = false)
+    public function getTabs($forceReload = false)
     {
-        $tabs             = $this->getData('tabs');
-        $document_type_id = $this->getDocumentTypeId();
-        if (empty($tabs) or $force_reload == true) {
-            if (!empty($document_type_id)) {
+        $tabs           = $this->getData('tabs');
+        $documentTypeId = $this->getDocumentTypeId();
+        if (empty($tabs) or $forceReload == true) {
+            if (!empty($documentTypeId)) {
                 $rows = $this->fetchAll(
                     $this->select(
                         function (Select $select) {
@@ -99,16 +99,16 @@ class Collection extends AbstractTable
     /**
      * Return all tabs from collection
      *
-     * @param integer $document_type_id Document type id
+     * @param integer $documentTypeId Document type id
      *
      * @return array
      */
-    public function getImportableTabs($document_type_id)
+    public function getImportableTabs($documentTypeId)
     {
         $rows = $this->fetchAll(
             $this->select(
-                function (Select $select) use ($document_type_id) {
-                    $select->where->notEqualTo('document_type_id', $document_type_id);
+                function (Select $select) use ($documentTypeId) {
+                    $select->where->notEqualTo('document_type_id', $documentTypeId);
                 }
             )
         );

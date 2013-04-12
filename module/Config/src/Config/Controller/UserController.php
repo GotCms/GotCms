@@ -50,7 +50,7 @@ class UserController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $_aclPage
+     * @var array $aclPage
      */
     protected $aclPage = array('resource' => 'Config', 'permission' => 'user');
 
@@ -61,9 +61,9 @@ class UserController extends Action
      */
     public function indexAction()
     {
-        $user_collection = new User\Collection();
+        $userCollection = new User\Collection();
 
-        return array('users' => $user_collection->getUsers());
+        return array('users' => $userCollection->getUsers());
     }
 
     /**
@@ -74,13 +74,13 @@ class UserController extends Action
     public function loginAction()
     {
         $this->layout()->setTemplate('layouts/one-page.phtml');
-        $login_form = new UserLogin();
+        $loginForm = new UserLogin();
 
         $post = $this->getRequest()->getPost();
-        if ($this->getRequest()->isPost() and $login_form->setData($post->toArray()) and $login_form->isValid()) {
-            $user_model = new User\Model();
-            $redirect   = $login_form->getValue('redirect');
-            if ($user_id = $user_model->authenticate($post->get('login'), $post->get('password'))) {
+        if ($this->getRequest()->isPost() and $loginForm->setData($post->toArray()) and $loginForm->isValid()) {
+            $userModel = new User\Model();
+            $redirect  = $loginForm->getValue('redirect');
+            if ($userId = $userModel->authenticate($post->get('login'), $post->get('password'))) {
                 if (!empty($redirect)) {
                     return $this->redirect()->toUrl(base64_decode($redirect));
                 }
@@ -92,9 +92,9 @@ class UserController extends Action
             return $this->redirect()->toRoute('userLogin', array('redirect' => $redirect));
         }
 
-        $login_form->get('redirect')->setValue($this->getRouteMatch()->getParam('redirect'));
+        $loginForm->get('redirect')->setValue($this->getRouteMatch()->getParam('redirect'));
 
-        return array('form' => $login_form);
+        return array('form' => $loginForm);
     }
 
     /**
@@ -105,14 +105,14 @@ class UserController extends Action
     public function forgotPasswordAction()
     {
         $this->layout()->setTemplate('layouts/one-page.phtml');
-        $forgot_password_form = new UserForgotForm();
-        $id                   = $this->getRouteMatch()->getParam('id');
-        $key                  = $this->getRouteMatch()->getParam('key');
+        $forgotPasswordForm = new UserForgotForm();
+        $id                 = $this->getRouteMatch()->getParam('id');
+        $key                = $this->getRouteMatch()->getParam('key');
         if (!empty($id) and !empty($key)) {
-            $user_model = User\Model::fromId($id);
-            if ($user_model->getRetrievePasswordKey() == $key
-                and strtotime('-1 hour') < strtotime($user_model->getRetrieveUpdatedAt())) {
-                $forgot_password_form->setAttribute(
+            $userModel = User\Model::fromId($id);
+            if ($userModel->getRetrievePasswordKey() == $key
+                and strtotime('-1 hour') < strtotime($userModel->getRetrieveUpdatedAt())) {
+                $forgotPasswordForm->setAttribute(
                     'action',
                     $this->url()->fromRoute(
                         'userForgotPasswordKey',
@@ -123,44 +123,44 @@ class UserController extends Action
                     )
                 );
 
-                $forgot_password_form->initResetForm();
+                $forgotPasswordForm->initResetForm();
                 if ($this->getRequest()->isPost()) {
                     $post = $this->getRequest()->getPost();
-                    $forgot_password_form->getInputFilter()
+                    $forgotPasswordForm->getInputFilter()
                         ->get('password_confirm')
                         ->getValidatorChain()
                         ->addValidator(new Identical($post['password']));
-                    $forgot_password_form->setData($post->toArray());
-                    if ($forgot_password_form->isValid()) {
-                        $user_model->setPassword($forgot_password_form->getValue('password'));
-                        $user_model->setRetrievePasswordKey(null);
-                        $user_model->setRetrieveUpdatedAt(null);
-                        $user_model->save();
+                    $forgotPasswordForm->setData($post->toArray());
+                    if ($forgotPasswordForm->isValid()) {
+                        $userModel->setPassword($forgotPasswordForm->getValue('password'));
+                        $userModel->setRetrievePasswordKey(null);
+                        $userModel->setRetrieveUpdatedAt(null);
+                        $userModel->save();
                     }
 
                     return $this->redirect()->toRoute('admin');
                 }
 
-                return array('form' => $forgot_password_form);
+                return array('form' => $forgotPasswordForm);
             }
 
             return $this->redirect()->toRoute('admin');
         } else {
-            $forgot_password_form->setAttribute('action', $this->url()->fromRoute('userForgotPassword'));
-            $forgot_password_form->initEmail();
+            $forgotPasswordForm->setAttribute('action', $this->url()->fromRoute('userForgotPassword'));
+            $forgotPasswordForm->initEmail();
             if ($this->getRequest()->isPost()) {
                 $post = $this->getRequest()->getPost();
-                $forgot_password_form->setData($post->toArray());
-                if ($forgot_password_form->isValid()) {
-                    $user_model = new User\Model();
-                    if ($user_model->sendForgotPasswordEmail($forgot_password_form->getValue('email'))) {
+                $forgotPasswordForm->setData($post->toArray());
+                if ($forgotPasswordForm->isValid()) {
+                    $userModel = new User\Model();
+                    if ($userModel->sendForgotPasswordEmail($forgotPasswordForm->getValue('email'))) {
                         return $this->redirect()->toRoute('admin');
                     }
                 }
             }
         }
 
-        return array('form' => $forgot_password_form);
+        return array('form' => $forgotPasswordForm);
     }
 
     /**
@@ -193,13 +193,13 @@ class UserController extends Action
                 ->addValidator(new Identical(empty($post['password']) ? null : $post['password']));
 
             if ($form->isValid()) {
-                $user_model = new User\Model();
-                $user_model->setData($post);
-                $user_model->setPassword($post['password']);
-                $user_model->save();
+                $userModel = new User\Model();
+                $userModel->setData($post);
+                $userModel->setPassword($post['password']);
+                $userModel->save();
                 $this->flashMessenger()->addSuccessMessage('User saved!');
 
-                return $this->redirect()->toRoute('userEdit', array('id' => $user_model->getId()));
+                return $this->redirect()->toRoute('userEdit', array('id' => $userModel->getId()));
             }
 
             $this->useFlashMessenger();
@@ -231,17 +231,17 @@ class UserController extends Action
      */
     public function editAction()
     {
-        $user_id    = $this->getRouteMatch()->getParam('id');
-        $user_model = User\Model::fromId($user_id);
+        $userId    = $this->getRouteMatch()->getParam('id');
+        $userModel = User\Model::fromId($userId);
 
-        if (empty($user_model)) {
+        if (empty($userModel)) {
             $this->flashMessenger()->addErrorMessage("Can't edit this user");
             return $this->redirect()->toRoute('userList');
         }
 
         $form = new UserForm();
-        $form->setAttribute('action', $this->url()->fromRoute('userEdit', array('id' => $user_id)));
-        $form->loadValues($user_model);
+        $form->setAttribute('action', $this->url()->fromRoute('userEdit', array('id' => $userId)));
+        $form->loadValues($userModel);
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
             if (!empty($post['password'])) {
@@ -254,14 +254,14 @@ class UserController extends Action
 
             $form->setData($post);
             if ($form->isValid()) {
-                $user_model->addData($post);
+                $userModel->addData($post);
                 if (!empty($post['password'])) {
-                    $user_model->setPassword($post['password']);
+                    $userModel->setPassword($post['password']);
                 }
 
-                $user_model->save();
+                $userModel->save();
                 $this->flashMessenger()->addSuccessMessage('This user has been saved');
-                return $this->redirect()->toRoute('userEdit', array('id' => $user_id));
+                return $this->redirect()->toRoute('userEdit', array('id' => $userId));
             }
 
             $this->flashMessenger()->addErrorMessage('User can not be saved');

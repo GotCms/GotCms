@@ -86,11 +86,71 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $this->object->getEvent()->setRouteMatch(new RouteMatch(array('controller' => 'controller')));
         $this->object->dispatch(Registry::get('Application')->getRequest(), null);
 
-        $route_match = new RouteMatch(array());
-        $route_match->setMatchedRouteName('content');
-        $this->object->getEvent()->setRouteMatch($route_match);
+        $routeMatch = new RouteMatch(array());
+        $routeMatch->setMatchedRouteName('content');
+        $this->object->getEvent()->setRouteMatch($routeMatch);
         $this->object->onDispatch(Registry::get('Application')->getMvcEvent());
+    }
 
+    /**
+     * Test
+     *
+     * @covers Gc\Mvc\Controller\Action::onDispatch
+     * @covers Gc\Mvc\Controller\Action::init
+     * @covers Gc\Mvc\Controller\Action::_construct
+     *
+     * @return void
+     */
+    public function testOnDispatchWithoutIdentityAndUserLoginRoute()
+    {
+        $routeMatch = new RouteMatch(
+            array(
+                'module' => 'Config',
+                'controller' => 'UserController',
+                'action' => 'login',
+            )
+        );
+        $routeMatch->setMatchedRouteName('userLogin');
+        $this->object->getEvent()->setRouteMatch($routeMatch);
+        $this->object->dispatch(Registry::get('Application')->getRequest());
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Mvc\Controller\Action::onDispatch
+     * @covers Gc\Mvc\Controller\Action::init
+     * @covers Gc\Mvc\Controller\Action::_construct
+     *
+     * @return void
+     */
+    public function testOnDispatchWithoutIdentityAndLoginPage()
+    {
+        $this->object->getEvent()->setRouteMatch(new RouteMatch(array('controller' => 'controller')));
+        $this->object->dispatch(Registry::get('Application')->getRequest(), null);
+
+        $routeMatch = new RouteMatch(array());
+        $routeMatch->setMatchedRouteName('content');
+        $this->object->getEvent()->setRouteMatch($routeMatch);
+        $this->object->onDispatch(Registry::get('Application')->getMvcEvent());
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Mvc\Controller\Action::onDispatch
+     * @covers Gc\Mvc\Controller\Action::init
+     * @covers Gc\Mvc\Controller\Action::_construct
+     *
+     * @return void
+     */
+    public function testOnDispatchWithoutConfigFile()
+    {
+        $orig = GC_APPLICATION_PATH . '/config/autoload/global.php';
+        $new  = GC_APPLICATION_PATH . '/config/autoload/fake-global.php';
+        rename($orig, $new);
+        $this->object->dispatch(Registry::get('Application')->getRequest(), null);
+        rename($new, $orig);
     }
 
     /**
@@ -104,7 +164,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnDispatchWithIdentity()
     {
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
@@ -114,18 +174,18 @@ class ActionTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $user_model->setPassword('password-test');
-        $user_model->save();
-        $user_model->authenticate('login-test', 'password-test');
+        $userModel->setPassword('password-test');
+        $userModel->save();
+        $userModel->authenticate('login-test', 'password-test');
 
 
-        $route_match = new RouteMatch(array());
-        $route_match->setMatchedRouteName('renderWebsite');
-        $this->object->getEvent()->setRouteMatch($route_match);
+        $routeMatch = new RouteMatch(array());
+        $routeMatch->setMatchedRouteName('renderWebsite');
+        $this->object->getEvent()->setRouteMatch($routeMatch);
         $this->object->dispatch(Registry::get('Application')->getRequest(), null);
         $this->object->onDispatch(Registry::get('Application')->getMvcEvent());
 
-        $user_model->delete();
+        $userModel->delete();
     }
 
     /**

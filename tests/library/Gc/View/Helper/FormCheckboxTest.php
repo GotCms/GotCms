@@ -104,7 +104,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testRenderWithoutElementCheckboxr()
+    public function testRenderWithoutElementCheckbox()
     {
         $this->setExpectedException('Zend\Form\Exception\InvalidArgumentException');
         $this->object->render(new Element\Text('bar'));
@@ -148,6 +148,22 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     {
         $this->element->setValue('checked');
         $this->element->setAttribute('id', 'bar');
+        $this->element->setAttribute('class', 'input-checkbox');
+        $markup = $this->object->render($this->element);
+        $this->assertContains('checked="checked"', $markup);
+        $this->assertContains('class="input-checkbox"', $markup);
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\View\Helper\FormCheckbox::render
+     *
+     * @return void
+     */
+    public function testRenderWithClass()
+    {
+        $this->element->setValue('checked');
         $this->element->setAttribute('class', 'input-checkbox');
         $markup = $this->object->render($this->element);
         $this->assertContains('checked="checked"', $markup);

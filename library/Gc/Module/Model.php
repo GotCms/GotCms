@@ -53,18 +53,18 @@ class Model extends AbstractTable
     /**
      * Initiliaze module from name
      *
-     * @param array $module_name Module name
+     * @param array $moduleName Module name
      *
      * @return \Gc\Module\Model
      */
-    public static function fromName($module_name)
+    public static function fromName($moduleName)
     {
-        $module_table = new Model();
-        $row          = $module_table->fetchRow($module_table->select(array('name' => $module_name)));
+        $moduleTable = new Model();
+        $row         = $moduleTable->fetchRow($moduleTable->select(array('name' => $moduleName)));
         if (!empty($row)) {
-            $module_table->setData((array) $row);
-            $module_table->setOrigData();
-            return $module_table;
+            $moduleTable->setData((array) $row);
+            $moduleTable->setOrigData();
+            return $moduleTable;
         } else {
             return false;
         }
@@ -79,28 +79,28 @@ class Model extends AbstractTable
      */
     public static function fromArray(array $array)
     {
-        $module_table = new Model();
-        $module_table->setData($array);
-        $module_table->setOrigData();
+        $moduleTable = new Model();
+        $moduleTable->setData($array);
+        $moduleTable->setOrigData();
 
-        return $module_table;
+        return $moduleTable;
     }
 
     /**
      * Initiliaze module from id
      *
-     * @param array $module_id Module id
+     * @param array $moduleId Module id
      *
      * @return \Gc\Module\Model
      */
-    public static function fromId($module_id)
+    public static function fromId($moduleId)
     {
-        $module_table = new Model();
-        $row          = $module_table->fetchRow($module_table->select(array('id' => (int) $module_id)));
+        $moduleTable = new Model();
+        $row         = $moduleTable->fetchRow($moduleTable->select(array('id' => (int) $moduleId)));
         if (!empty($row)) {
-            $module_table->setData((array) $row);
-            $module_table->setOrigData();
-            return $module_table;
+            $moduleTable->setData((array) $row);
+            $moduleTable->setOrigData();
+            return $moduleTable;
         } else {
             return false;
         }
@@ -114,18 +114,18 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array(
+        $arraySave = array(
             'name' => $this->getName(),
         );
 
         try {
-            $module_id = $this->getId();
-            if (empty($module_id)) {
-                $array_save['created_at'] = new Expression('NOW()');
-                $this->insert($array_save);
+            $moduleId = $this->getId();
+            if (empty($moduleId)) {
+                $arraySave['created_at'] = new Expression('NOW()');
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => $this->getId()));
+                $this->update($arraySave, array('id' => $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
@@ -148,10 +148,10 @@ class Model extends AbstractTable
     public function delete()
     {
         $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
-        $module_id = $this->getId();
-        if (!empty($module_id)) {
+        $moduleId = $this->getId();
+        if (!empty($moduleId)) {
             try {
-                parent::delete(array('id' => $module_id));
+                parent::delete(array('id' => $moduleId));
             } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }

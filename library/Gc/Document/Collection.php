@@ -50,14 +50,14 @@ class Collection extends AbstractTable implements IterableInterface
     /**
      * Load document collection
      *
-     * @param integer $parent_id Parent id
+     * @param integer $parentId Parent id
      *
      * @return \Gc\Document\Collection
      */
-    public function load($parent_id = null)
+    public function load($parentId = null)
     {
-        if ($parent_id !== null) {
-            $this->setData('parent_id', $parent_id);
+        if ($parentId !== null) {
+            $this->setData('parent_id', $parentId);
             $this->setDocuments();
         }
 
@@ -71,9 +71,9 @@ class Collection extends AbstractTable implements IterableInterface
      */
     protected function setDocuments()
     {
-        $parent_id = $this->getParentId();
+        $parentId = $this->getParentId();
 
-        if (!empty($parent_id)) {
+        if (!empty($parentId)) {
             $rows = $this->fetchAll(
                 $this->select(
                     function (Select $select) {

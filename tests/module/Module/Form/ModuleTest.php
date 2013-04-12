@@ -75,16 +75,16 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $module_model = ModuleModel::fromArray(
+        $moduleModel = ModuleModel::fromArray(
             array(
                 'name' => 'Sitemap'
             )
         );
 
-        $module_model->save();
+        $moduleModel->save();
 
         $this->assertNull($this->object->init());
 
-        $module_model->delete();
+        $moduleModel->delete();
     }
 }

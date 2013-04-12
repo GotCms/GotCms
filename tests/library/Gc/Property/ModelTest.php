@@ -280,7 +280,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveValue()
     {
-        $document_model = DocumentModel::fromArray(
+        $documentModel = DocumentModel::fromArray(
             array(
                 'name' => 'DocumentTest',
                 'url_key' => 'document-test',
@@ -294,8 +294,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
                 'parent_id' => 0,
             )
         );
-        $document_model->save();
-        $this->object->setDocumentId($document_model->getId());
+        $documentModel->save();
+        $this->object->setDocumentId($documentModel->getId());
         $this->assertTrue($this->object->saveValue());
         $this->object->isRequired(true);
         $this->assertFalse($this->object->saveValue());
@@ -420,7 +420,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromIdentifier()
     {
-        $document_model = DocumentModel::fromArray(
+        $documentModel = DocumentModel::fromArray(
             array(
                 'name' => 'DocumentTest',
                 'url_key' => 'document-test',
@@ -434,10 +434,10 @@ class ModelTest extends \PHPUnit_Framework_TestCase
                 'parent_id' => 0,
             )
         );
-        $document_model->save();
+        $documentModel->save();
         $this->assertInstanceOf(
             'Gc\Property\Model',
-            Model::fromIdentifier($this->object->getIdentifier(), $document_model->getId())
+            Model::fromIdentifier($this->object->getIdentifier(), $documentModel->getId())
         );
     }
 }

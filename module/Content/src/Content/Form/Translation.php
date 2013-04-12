@@ -52,8 +52,8 @@ class Translation extends AbstractForm
      */
     public function init()
     {
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'source' => array(
                     'name' => 'source',
@@ -65,20 +65,20 @@ class Translation extends AbstractForm
             )
         );
 
-        $this->setInputFilter($input_filter);
+        $this->setInputFilter($inputFilter);
 
         $source = new Element\Text('source');
         $source->setAttribute('label', 'Name')
             ->setAttribute('class', 'input-text');
 
-        $locale_list = array(
+        $localeList = array(
             'fr_FR' => 'Français',
             'en_GB' => 'English',
         );
 
         $locale = new Element\Select('locale');
         $locale->setAttribute('label', 'Url key')
-            ->setValueOptions($locale_list);
+            ->setValueOptions($localeList);
 
         $this->add($source);
         $this->add($locale);

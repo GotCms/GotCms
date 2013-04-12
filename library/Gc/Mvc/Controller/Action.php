@@ -100,9 +100,9 @@ class Action extends AbstractActionController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $result_response = $this->_construct();
-        if (!empty($result_response)) {
-            return $result_response;
+        $resultResponse = $this->_construct();
+        if (!empty($resultResponse)) {
+            return $resultResponse;
         }
 
         $this->init();
@@ -126,21 +126,21 @@ class Action extends AbstractActionController
      */
     protected function _construct()
     {
-        $module     = $this->getRouteMatch()->getParam('module');
-        $route_name = $this->getRouteMatch()->getMatchedRouteName();
+        $module    = $this->getRouteMatch()->getParam('module');
+        $routeName = $this->getRouteMatch()->getMatchedRouteName();
 
         /**
          * Installation check, and check on removal of the install directory.
          */
         if (!file_exists(GC_APPLICATION_PATH . '/config/autoload/global.php')
-            and !in_array($route_name, $this->installerRoutes)
+            and !in_array($routeName, $this->installerRoutes)
         ) {
             return $this->redirect()->toRoute('install');
-        } elseif (!in_array($route_name, $this->installerRoutes)) {
+        } elseif (!in_array($routeName, $this->installerRoutes)) {
             $auth = $this->getAuth();
             if (!$auth->hasIdentity()) {
                 if (!in_array(
-                    $route_name,
+                    $routeName,
                     array(
                         'userLogin',
                         'userForgotPassword',
@@ -155,48 +155,48 @@ class Action extends AbstractActionController
                     );
                 }
             } else {
-                $user_model = $auth->getIdentity();
+                $userModel = $auth->getIdentity();
 
-                $this->acl   = new Acl($user_model);
-                $permissions = $user_model->getRole(true)->getUserPermissions();
-                if ($route_name != 'userForbidden') {
+                $this->acl   = new Acl($userModel);
+                $permissions = $userModel->getRole(true)->getUserPermissions();
+                if ($routeName != 'userForbidden') {
                     if (!empty($this->aclPage)) {
-                        $is_allowed = false;
+                        $isAllowed = false;
                         if ($this->aclPage['resource'] == 'Modules') {
-                            $module_id = $this->getRouteMatch()->getParam('m');
-                            if (empty($module_id)) {
-                                $action     = $this->getRouteMatch()->getParam('action');
-                                $action     = ($action === 'index' ? 'list' : $action);
-                                $is_allowed = $this->acl->isAllowed(
-                                    $user_model->getRole()->getName(),
+                            $moduleId = $this->getRouteMatch()->getParam('m');
+                            if (empty($moduleId)) {
+                                $action    = $this->getRouteMatch()->getParam('action');
+                                $action    = ($action === 'index' ? 'list' : $action);
+                                $isAllowed = $this->acl->isAllowed(
+                                    $userModel->getRole()->getName(),
                                     $this->aclPage['resource'],
                                     $action
                                 );
                             } else {
-                                $module_model = ModuleModel::fromId($module_id);
-                                if (!empty($module_model)) {
-                                    $is_allowed = $this->acl->isAllowed(
-                                        $user_model->getRole()->getName(),
+                                $moduleModel = ModuleModel::fromId($moduleId);
+                                if (!empty($moduleModel)) {
+                                    $isAllowed = $this->acl->isAllowed(
+                                        $userModel->getRole()->getName(),
                                         $this->aclPage['resource'],
-                                        $module_model->getName()
+                                        $moduleModel->getName()
                                     );
                                 }
                             }
                         } else {
-                            $is_allowed = $this->acl->isAllowed(
-                                $user_model->getRole()->getName(),
+                            $isAllowed = $this->acl->isAllowed(
+                                $userModel->getRole()->getName(),
                                 $this->aclPage['resource'],
                                 $this->aclPage['permission']
                             );
                         }
 
-                        if (!$is_allowed) {
+                        if (!$isAllowed) {
                             return $this->redirect()->toRoute('userForbidden');
                         }
                     }
 
                 }
-                $this->layout()->adminUser = $user_model;
+                $this->layout()->adminUser = $userModel;
             }
         }
 
@@ -204,14 +204,14 @@ class Action extends AbstractActionController
         $this->layout()->version = \Gc\Version::VERSION;
 
         $this->useFlashMessenger(false);
-        if (!in_array($route_name, $this->installerRoutes)
-            and !in_array($route_name, array('userLogin', 'userForgotPassword', 'renderWebsite'))
+        if (!in_array($routeName, $this->installerRoutes)
+            and !in_array($routeName, array('userLogin', 'userForgotPassword', 'renderWebsite'))
         ) {
             /**
              * Prepare all resources
              */
-            $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
-            $headscript    = $helper_broker->get('HeadScript');
+            $helperBroker = $this->getServiceLocator()->get('ViewHelperManager');
+            $headscript   = $helperBroker->get('HeadScript');
             $headscript
                 ->appendFile('/backend/js/libs/modernizr-2.6.2.min.js', 'text/javascript')
                 ->appendFile('/backend/js/libs/jquery-1.9.1.js', 'text/javascript')
@@ -229,7 +229,7 @@ class Action extends AbstractActionController
                 ->appendFile('/backend/js/generic-classes.js', 'text/javascript')
                 ->appendFile('/backend/js/gotcms.js', 'text/javascript');
 
-            $headlink = $helper_broker->get('HeadLink');
+            $headlink = $helperBroker->get('HeadLink');
             $headlink
                 ->appendStylesheet('/backend/css/normalize.css')
                 ->appendStylesheet('/backend/js/libs/codemirror/lib/codemirror.css')
@@ -292,39 +292,39 @@ class Action extends AbstractActionController
      */
     public function returnJson(array $data)
     {
-        $json_model = new JsonModel();
-        $json_model->setVariables($data);
-        $json_model->setTerminal(true);
+        $jsonModel = new JsonModel();
+        $jsonModel->setVariables($data);
+        $jsonModel->setTerminal(true);
 
-        return $json_model;
+        return $jsonModel;
     }
 
     /**
      * Initiliaze flash messenger
      *
-     * @param boolean $force_display Force display
+     * @param boolean $forceDisplay Force display
      *
      * @return void
      */
-    public function useFlashMessenger($force_display = true)
+    public function useFlashMessenger($forceDisplay = true)
     {
-        $flash_messenger = $this->flashMessenger();
-        $flash_messages  = array();
+        $flashMessenger = $this->flashMessenger();
+        $flashMessages  = array();
         foreach (array('error', 'success', 'info', 'warning') as $namespace) {
-            $flash_namespace = $flash_messenger->setNameSpace($namespace);
-            if ($force_display) {
-                if ($flash_namespace->hasCurrentMessages()) {
-                    $flash_messages[$namespace] = $flash_namespace->getCurrentMessages();
-                    $flash_namespace->clearCurrentMessages();
+            $flashNamespace = $flashMessenger->setNameSpace($namespace);
+            if ($forceDisplay) {
+                if ($flashNamespace->hasCurrentMessages()) {
+                    $flashMessages[$namespace] = $flashNamespace->getCurrentMessages();
+                    $flashNamespace->clearCurrentMessages();
                 }
             } else {
-                if ($flash_namespace->hasMessages()) {
-                    $flash_messages[$namespace] = $flash_namespace->getMessages();
+                if ($flashNamespace->hasMessages()) {
+                    $flashMessages[$namespace] = $flashNamespace->getMessages();
                 }
             }
         }
 
-        $this->layout()->flashMessages = $flash_messages;
+        $this->layout()->flashMessages = $flashMessages;
     }
 
     /**

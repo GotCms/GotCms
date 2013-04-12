@@ -65,7 +65,7 @@ class Observer extends AbstractObserver
         if (file_exists($sitemap->getFilePath())) {
             $document = $event->getParam('object');
             if ($document->hasDataChangedFor('url_key')) {
-                $old_url_key = $document->getUrlKey();
+                $oldUrlKey = $document->getUrlKey();
                 $document->setUrlKey($document->getOrigData('url_key'));
                 $content = file_get_contents($sitemap->getFilePath());
                 $xml     = simplexml_load_string($content);
@@ -83,7 +83,7 @@ class Observer extends AbstractObserver
                     $xml->asXml($sitemap->getFilePath());
                 }
 
-                $document->setUrlKey($old_url_key);
+                $document->setUrlKey($oldUrlKey);
             }
         } else {
             file_put_contents($sitemap->getFilePath(), $sitemap->generate());
@@ -101,8 +101,8 @@ class Observer extends AbstractObserver
     {
         $sitemap = new Sitemap();
         if (file_exists($sitemap->getFilePath())) {
-            $document    = $event->getParam('object');
-            $old_url_key = $document->getUrlKey();
+            $document  = $event->getParam('object');
+            $oldUrlKey = $document->getUrlKey();
             $document->setUrlKey($document->getOrigData('url_key'));
             $content = file_get_contents($sitemap->getFilePath());
             $xml     = simplexml_load_string($content);
@@ -119,7 +119,7 @@ class Observer extends AbstractObserver
                 $xml->asXml($sitemap->getFilePath());
             }
 
-            $document->setUrlKey($old_url_key);
+            $document->setUrlKey($oldUrlKey);
         }
     }
 }

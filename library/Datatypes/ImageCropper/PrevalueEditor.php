@@ -46,14 +46,14 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function save()
     {
-        $post          = $this->getRequest()->getPost();
-        $mime_list     = $post->get('mime_list');
-        $sizes_data    = $post->get('size');
-        $resize_option = $post->get('resize_option');
-        $background    = $post->get('background');
-        $sizes         = array();
-        if (!empty($sizes_data) and is_array($sizes_data)) {
-            foreach ($sizes_data as $idx => $size) {
+        $post         = $this->getRequest()->getPost();
+        $mimeList     = $post->get('mime_list');
+        $sizesData    = $post->get('size');
+        $resizeOption = $post->get('resize_option');
+        $background   = $post->get('background');
+        $sizes        = array();
+        if (!empty($sizesData) and is_array($sizesData)) {
+            foreach ($sizesData as $idx => $size) {
                 if (empty($size['name']) or empty($size['height']) or empty($size['width'])) {
                     continue;
                 }
@@ -66,8 +66,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $this->setConfig(
             array(
                 'background' => $background,
-                'resize_option' => $resize_option,
-                'mime_list' => empty($mime_list) ? array() : $mime_list,
+                'resize_option' => $resizeOption,
+                'mime_list' => empty($mimeList) ? array() : $mimeList,
                 'size' => $sizes
             )
         );
@@ -82,24 +82,24 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $config = $this->getConfig();
 
-        $resize_option = new Element\Select('resize_option');
-        $resize_option->setValue(empty($config['resize_option']) ? 'auto' : $config['resize_option']);
-        $resize_option->setAttribute('id', 'resize-option');
-        $resize_option->setLabel('Resize option');
-        $resize_option->setValueOptions(
+        $resizeOption = new Element\Select('resize_option');
+        $resizeOption->setValue(empty($config['resize_option']) ? 'auto' : $config['resize_option']);
+        $resizeOption->setAttribute('id', 'resize-option');
+        $resizeOption->setLabel('Resize option');
+        $resizeOption->setValueOptions(
             array(
                 'auto' => 'auto',
                 'crop' => 'crop',
             )
         );
 
-        $background_option = new Element\Text('background');
-        $background_option->setValue(empty($config['background']) ? '' : $config['background']);
-        $background_option->setAttribute('id', 'background');
-        $background_option->setLabel('Background color');
+        $backgroundOption = new Element\Text('background');
+        $backgroundOption->setValue(empty($config['background']) ? '' : $config['background']);
+        $backgroundOption->setAttribute('id', 'background');
+        $backgroundOption->setLabel('Background color');
 
-        $mime_list = new Element\MultiCheckbox('mime_list');
-        $array     = array(
+        $mimeList = new Element\MultiCheckbox('mime_list');
+        $array    = array(
             'image/gif',
             'image/jpeg',
             'image/png',
@@ -118,51 +118,51 @@ class PrevalueEditor extends AbstractPrevalueEditor
             );
         }
 
-        $mime_list->setValueOptions($options);
-        $size_elements = array();
-        $idx           = 0;
+        $mimeList->setValueOptions($options);
+        $sizeElements = array();
+        $idx          = 0;
         if (!empty($config['size'])) {
             foreach ($config['size'] as $idx => $size) {
-                $element_size_name = new Element\Text('size[' . $idx . '][name]');
-                $element_size_name->setValue($size['name']);
-                $element_size_name->setAttribute('id', 'name' . $idx);
-                $element_size_name->setLabel('Name');
+                $elementSizeName = new Element\Text('size[' . $idx . '][name]');
+                $elementSizeName->setValue($size['name']);
+                $elementSizeName->setAttribute('id', 'name' . $idx);
+                $elementSizeName->setLabel('Name');
 
-                $element_width = new Element\Text('size[' . $idx . '][width]');
-                $element_width->setValue($size['width']);
-                $element_width->setAttribute('id', 'width' . $idx);
-                $element_width->setLabel('Width');
+                $elementWidth = new Element\Text('size[' . $idx . '][width]');
+                $elementWidth->setValue($size['width']);
+                $elementWidth->setAttribute('id', 'width' . $idx);
+                $elementWidth->setLabel('Width');
 
-                $element_height = new Element\Text('size[' . $idx . '][height]');
-                $element_height->setValue($size['height']);
-                $element_height->setAttribute('id', 'height' . $idx);
-                $element_height->setLabel('Height');
-                $size_elements[] = array($element_size_name, $element_width, $element_height);
+                $elementHeight = new Element\Text('size[' . $idx . '][height]');
+                $elementHeight->setValue($size['height']);
+                $elementHeight->setAttribute('id', 'height' . $idx);
+                $elementHeight->setLabel('Height');
+                $sizeElements[] = array($elementSizeName, $elementWidth, $elementHeight);
             }
 
             $idx++;
         }
 
-        $element_size_name = new Element\Text('size[#{idx}][name]');
-        $element_size_name->setAttribute('id', 'name#{idx}');
-        $element_size_name->setLabel('Name');
+        $elementSizeName = new Element\Text('size[#{idx}][name]');
+        $elementSizeName->setAttribute('id', 'name#{idx}');
+        $elementSizeName->setLabel('Name');
 
-        $element_width = new Element\Text('size[#{idx}][width]');
-        $element_width->setLabel('Width');
-        $element_width->setAttribute('id', 'width#{idx}');
-        $element_height = new Element\Text('size[#{idx}][height]');
-        $element_height->setLabel('Height');
-        $element_height->setAttribute('id', 'height#{idx}');
-        $template = array($element_size_name, $element_width, $element_height);
+        $elementWidth = new Element\Text('size[#{idx}][width]');
+        $elementWidth->setLabel('Width');
+        $elementWidth->setAttribute('id', 'width#{idx}');
+        $elementHeight = new Element\Text('size[#{idx}][height]');
+        $elementHeight->setLabel('Height');
+        $elementHeight->setAttribute('id', 'height#{idx}');
+        $template = array($elementSizeName, $elementWidth, $elementHeight);
 
         return $this->addPath(__DIR__)->render(
             'upload-prevalue.phtml',
             array(
                 'elements' => array(
-                    'resize-option' => $resize_option,
-                    'background' => $background_option,
-                    'mime' => $mime_list,
-                    'size' => $size_elements,
+                    'resize-option' => $resizeOption,
+                    'background' => $backgroundOption,
+                    'mime' => $mimeList,
+                    'size' => $sizeElements,
                     'size-template' => $template
                 )
             )

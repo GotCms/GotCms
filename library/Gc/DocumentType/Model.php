@@ -75,13 +75,13 @@ class Model extends AbstractTable
     /**
      * Add view
      *
-     * @param integer $view_id View id
+     * @param integer $viewId View id
      *
      * @return \Gc\DocumentType\Model
      */
-    public function addView($view_id)
+    public function addView($viewId)
     {
-        $this->views[] = $view_id;
+        $this->views[] = $viewId;
         return $this;
     }
 
@@ -109,10 +109,10 @@ class Model extends AbstractTable
     public function getTabs()
     {
         if ($this->getData('tabs') === null) {
-            $tabs_collection = new Tab\Collection();
-            $tabs_collection->load($this->getId());
+            $tabsCollection = new Tab\Collection();
+            $tabsCollection->load($this->getId());
 
-            $this->setData('tabs', $tabs_collection->getTabs());
+            $this->setData('tabs', $tabsCollection->getTabs());
         }
 
         return $this->getData('tabs');
@@ -126,10 +126,10 @@ class Model extends AbstractTable
     public function getAvailableViews()
     {
         if ($this->getData('availableviews') === null) {
-            $views_collection = new View\Collection();
-            $views_collection->init($this->getId());
+            $viewsCollection = new View\Collection();
+            $viewsCollection->init($this->getId());
 
-            $this->setData('availableviews', $views_collection);
+            $this->setData('availableviews', $viewsCollection);
         }
 
         return $this->getData('availableviews');
@@ -169,7 +169,7 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array(
+        $arraySave = array(
             'name' => $this->getName(),
             'updated_at' => new Expression('NOW()'),
             'description' => $this->getDescription(),
@@ -181,11 +181,11 @@ class Model extends AbstractTable
         try {
             $id = $this->getId();
             if (empty($id)) {
-                $array_save['created_at'] = new Expression('NOW()');
-                $this->insert($array_save);
+                $arraySave['created_at'] = new Expression('NOW()');
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int) $this->getId()));
+                $this->update($arraySave, array('id' => (int) $this->getId()));
             }
 
             if (!empty($this->views)) {
@@ -193,14 +193,14 @@ class Model extends AbstractTable
                 $delete->from('document_type_view');
                 $delete->where(array('document_type_id' => (int) $this->getId()));
                 $this->execute($delete);
-                foreach ($this->views as $view_id) {
-                    if (empty($view_id)) {
+                foreach ($this->views as $viewId) {
+                    if (empty($viewId)) {
                         continue;
                     }
 
                     $insert = new Sql\Insert();
                     $insert->into('document_type_view')
-                        ->values(array('document_type_id' => $this->getId(), 'view_id' => $view_id));
+                        ->values(array('document_type_id' => $this->getId(), 'view_id' => $viewId));
                     $this->execute($insert);
                 }
             }
@@ -211,10 +211,10 @@ class Model extends AbstractTable
             $this->execute($delete);
             $dependencies = $this->getDependencies();
             if (!empty($dependencies)) {
-                foreach ($dependencies as $children_id) {
+                foreach ($dependencies as $childrenId) {
                     $insert = new Sql\Insert();
                     $insert->into('document_type_dependency')
-                        ->values(array('parent_id' => $this->getId(), 'children_id' => $children_id));
+                        ->values(array('parent_id' => $this->getId(), 'children_id' => $childrenId));
                     $this->execute($insert);
                 }
             }
@@ -239,14 +239,14 @@ class Model extends AbstractTable
     public function delete()
     {
         $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
-        $document_type_id = $this->getId();
-        if (!empty($document_type_id)) {
-            $tab_collection = new Tab\Collection();
-            $tab_collection->load($document_type_id);
-            $tab_collection->delete();
+        $documentTypeId = $this->getId();
+        if (!empty($documentTypeId)) {
+            $tabCollection = new Tab\Collection();
+            $tabCollection->load($documentTypeId);
+            $tabCollection->delete();
             $table  = new TableGateway('document_type_view', $this->getAdapter());
-            $result = $table->delete(array('document_type_id' => (int) $document_type_id));
-            parent::delete(array('id' => $document_type_id));
+            $result = $table->delete(array('document_type_id' => (int) $documentTypeId));
+            parent::delete(array('id' => $documentTypeId));
             $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
             unset($this);
 
@@ -267,30 +267,30 @@ class Model extends AbstractTable
      */
     public static function fromArray(array $array)
     {
-        $document_type_table = new Model();
-        $document_type_table->setData($array);
-        $document_type_table->setOrigData();
+        $documentTypeTable = new Model();
+        $documentTypeTable->setData($array);
+        $documentTypeTable->setOrigData();
 
-        return $document_type_table;
+        return $documentTypeTable;
     }
 
     /**
      * Get model from id
      *
-     * @param integer $document_type_id Document type id
+     * @param integer $documentTypeId Document type id
      *
      * @return \Gc\DocumentType\Model
      */
-    public static function fromId($document_type_id)
+    public static function fromId($documentTypeId)
     {
-        $document_type_table = new Model();
-        $row                 = $document_type_table->fetchRow(
-            $document_type_table->select(array('id' => (int) $document_type_id))
+        $documentTypeTable = new Model();
+        $row               = $documentTypeTable->fetchRow(
+            $documentTypeTable->select(array('id' => (int) $documentTypeId))
         );
         if (!empty($row)) {
-            $document_type_table->setData((array) $row);
-            $document_type_table->setOrigData();
-            return $document_type_table;
+            $documentTypeTable->setData((array) $row);
+            $documentTypeTable->setOrigData();
+            return $documentTypeTable;
         } else {
             return false;
         }

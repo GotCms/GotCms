@@ -166,15 +166,15 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditAction()
     {
-        $script_model = ScriptModel::fromArray(
+        $scriptModel = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',
                 'identifier' => 'ScriptIdentifier'
             )
         );
-        $script_model->save();
+        $scriptModel->save();
 
-        $this->dispatch('/admin/development/script/edit/' . $script_model->getId());
+        $this->dispatch('/admin/development/script/edit/' . $scriptModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -182,7 +182,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('scriptEdit');
 
-        $script_model->delete();
+        $scriptModel->delete();
     }
 
     /**
@@ -194,16 +194,16 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithInvalidPostData()
     {
-        $script_model = ScriptModel::fromArray(
+        $scriptModel = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',
                 'identifier' => 'ScriptIdentifier'
             )
         );
-        $script_model->save();
+        $scriptModel->save();
 
         $this->dispatch(
-            '/admin/development/script/edit/' . $script_model->getId(),
+            '/admin/development/script/edit/' . $scriptModel->getId(),
             'POST',
             array(
             )
@@ -215,7 +215,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('scriptEdit');
 
-        $script_model->delete();
+        $scriptModel->delete();
     }
 
     /**
@@ -227,16 +227,16 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithPostData()
     {
-        $script_model = ScriptModel::fromArray(
+        $scriptModel = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',
                 'identifier' => 'ScriptIdentifier'
             )
         );
-        $script_model->save();
+        $scriptModel->save();
 
         $this->dispatch(
-            '/admin/development/script/edit/' . $script_model->getId(),
+            '/admin/development/script/edit/' . $scriptModel->getId(),
             'POST',
             array(
                 'name' => 'ScriptName',
@@ -251,7 +251,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('scriptEdit');
 
-        $script_model->delete();
+        $scriptModel->delete();
     }
 
     /**
@@ -263,15 +263,15 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteAction()
     {
-        $script_model = ScriptModel::fromArray(
+        $scriptModel = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',
                 'identifier' => 'ScriptIdentifier'
             )
         );
-        $script_model->save();
+        $scriptModel->save();
 
-        $this->dispatch('/admin/development/script/delete/' . $script_model->getId());
+        $this->dispatch('/admin/development/script/delete/' . $scriptModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -279,7 +279,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('scriptDelete');
 
-        $script_model->delete();
+        $scriptModel->delete();
     }
 
     /**
@@ -309,7 +309,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadAction()
     {
-        $_FILES = array(
+        $files = array(
             'upload' => array(
                 'name' => __DIR__ . '/_files/upload.phtml',
                 'type' => 'plain/text',
@@ -319,15 +319,15 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
             )
         );
 
-        $script_model = ScriptModel::fromArray(
+        $scriptModel = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',
                 'identifier' => 'ScriptIdentifier'
             )
         );
-        $script_model->save();
+        $scriptModel->save();
 
-        $this->dispatch('/admin/development/script/upload/' . $script_model->getId());
+        $this->dispatch('/admin/development/script/upload/' . $scriptModel->getId());
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -335,7 +335,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('scriptUpload');
 
-        $script_model->delete();
+        $scriptModel->delete();
     }
 
     /**
@@ -347,7 +347,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadActionWithoutId()
     {
-        $_FILES = array(
+        $files = array(
             'upload' => array(
                 'name' => array(
                     'upload.phtml',
@@ -377,13 +377,13 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
             ),
         );
 
-        $script_model = ScriptModel::fromArray(
+        $scriptModel = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',
                 'identifier' => 'upload'
             )
         );
-        $script_model->save();
+        $scriptModel->save();
 
         $this->dispatch('/admin/development/script/upload');
         $this->assertResponseStatusCode(302);
@@ -393,7 +393,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('scriptUpload');
 
-        $script_model->delete();
+        $scriptModel->delete();
     }
 
     /**
@@ -405,7 +405,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadActionWithEmptyFilesData()
     {
-        $_FILES = array('upload' => array());
+        $files = array('upload' => array());
         $this->dispatch('/admin/development/script/upload');
         $this->assertResponseStatusCode(302);
 
@@ -442,16 +442,16 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDownloadAction()
     {
-        $script_model = ScriptModel::fromArray(
+        $scriptModel = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',
                 'identifier' => 'ScriptIdentifier',
                 'content' => 'Test',
             )
         );
-        $script_model->save();
+        $scriptModel->save();
 
-        $this->dispatch('/admin/development/script/download/' . $script_model->getId());
+        $this->dispatch('/admin/development/script/download/' . $scriptModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -459,7 +459,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('scriptDownload');
 
-        $script_model->delete();
+        $scriptModel->delete();
     }
 
     /**
@@ -471,15 +471,15 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDownloadActionWithEmptyContent()
     {
-        $script_model = ScriptModel::fromArray(
+        $scriptModel = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',
                 'identifier' => 'ScriptIdentifier',
             )
         );
-        $script_model->save();
+        $scriptModel->save();
 
-        $this->dispatch('/admin/development/script/download/' . $script_model->getId());
+        $this->dispatch('/admin/development/script/download/' . $scriptModel->getId());
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -487,7 +487,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('scriptDownload');
 
-        $script_model->delete();
+        $scriptModel->delete();
     }
 
     /**
@@ -517,14 +517,14 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDownloadActionWithoutId()
     {
-        $script_model = ScriptModel::fromArray(
+        $scriptModel = ScriptModel::fromArray(
             array(
                 'name' => 'ScriptName',
                 'identifier' => 'ScriptIdentifier',
                 'content' => 'Content',
             )
         );
-        $script_model->save();
+        $scriptModel->save();
 
         $this->dispatch('/admin/development/script/download');
         $this->assertResponseStatusCode(200);
@@ -534,6 +534,6 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('scriptDownload');
 
-        $script_model->delete();
+        $scriptModel->delete();
     }
 }

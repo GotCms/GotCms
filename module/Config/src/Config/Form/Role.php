@@ -50,8 +50,8 @@ class Role extends AbstractForm
      */
     public function init()
     {
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'name' => array(
                     'required' => true,
@@ -68,7 +68,7 @@ class Role extends AbstractForm
             )
         );
 
-        $this->setInputFilter($input_filter);
+        $this->setInputFilter($inputFilter);
 
         $this->add(new Element\Text('name'));
         $this->add(new Element\Text('description'));
@@ -77,24 +77,24 @@ class Role extends AbstractForm
     /**
      * Initialize permissions
      *
-     * @param array $user_permissions Optional
+     * @param array $userPermissions Optional
      *
      * @return \Config\Form\Role
      */
-    public function initPermissions($user_permissions = array())
+    public function initPermissions($userPermissions = array())
     {
-        $filter            = $this->getInputFilter();
-        $permissions_table = new Permission\Collection();
-        $resources         = $permissions_table->getPermissions();
-        $element           = new Element('permissions');
+        $filter           = $this->getInputFilter();
+        $permissionsTable = new Permission\Collection();
+        $resources        = $permissionsTable->getPermissions();
+        $element          = new Element('permissions');
 
         $data = $resources;
         foreach ($resources as $resource => $permissions) {
-            foreach ($permissions as $permission_id => $permission) {
-                $data[$resource][$permission_id] = array('name' => $permission, 'value' => false);
-                if (!empty($user_permissions[$resource])
-                    and array_key_exists($permission_id, $user_permissions[$resource])) {
-                    $data[$resource][$permission_id]['value'] = true;
+            foreach ($permissions as $permissionId => $permission) {
+                $data[$resource][$permissionId] = array('name' => $permission, 'value' => false);
+                if (!empty($userPermissions[$resource])
+                    and array_key_exists($permissionId, $userPermissions[$resource])) {
+                    $data[$resource][$permissionId]['value'] = true;
                 }
             }
         }

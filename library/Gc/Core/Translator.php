@@ -151,14 +151,14 @@ class Translator extends AbstractTable
                 return false;
             }
 
-            $source_id = $row['id'];
+            $sourceId = $row['id'];
         } else {
             $row = $instance->fetchRow($instance->select(array('source' => $source)));
             if (!empty($row)) {
-                $source_id = $row['id'];
+                $sourceId = $row['id'];
             } else {
                 $instance->insert(array('source' => $source));
-                $source_id = $instance->getLastInsertId();
+                $sourceId = $instance->getLastInsertId();
             }
         }
 
@@ -184,7 +184,7 @@ class Translator extends AbstractTable
                         array(
                             'destination' => $destination['value'],
                             'locale' => $destination['locale'],
-                            'core_translate_id' => $source_id,
+                            'core_translate_id' => $sourceId,
                         )
                     );
 

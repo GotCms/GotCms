@@ -66,8 +66,8 @@ class Document extends AbstractForm
      */
     public function init()
     {
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'document-name' => array(
                     'name' => 'document-name',
@@ -97,28 +97,28 @@ class Document extends AbstractForm
             )
         );
 
-        $this->setInputFilter($input_filter);
+        $this->setInputFilter($inputFilter);
 
         $name = new Element\Text('document-name');
         $name->setAttribute('label', 'Name')
             ->setAttribute('id', 'name')
             ->setAttribute('class', 'input-text');
 
-        $url_key = new Element\Text('document-url_key');
-        $url_key->setAttribute('label', 'Url key')
+        $urlKey = new Element\Text('document-url_key');
+        $urlKey->setAttribute('label', 'Url key')
             ->setAttribute('id', 'url_key')
             ->setAttribute('class', 'input-text');
 
-        $document_type = new Element\Select('document_type');
-        $document_type->setAttribute('label', 'Document Type')
+        $documentType = new Element\Select('document_type');
+        $documentType->setAttribute('label', 'Document Type')
             ->setAttribute('id', 'document_type')
             ->setValueOptions(array('' => 'Select document type'));
 
         $parent = new Element\Hidden('parent');
 
         $this->add($name);
-        $this->add($url_key);
-        $this->add($document_type);
+        $this->add($urlKey);
+        $this->add($documentType);
         $this->add($parent);
     }
 
@@ -139,8 +139,8 @@ class Document extends AbstractForm
             $condition .= sprintf(' AND id != %d', $this->documentId);
         }
 
-        $input_filter = $this->getInputFilter();
-        $validators   = $input_filter->get('document-url_key')->getValidatorChain()->getValidators();
+        $inputFilter = $this->getInputFilter();
+        $validators  = $inputFilter->get('document-url_key')->getValidatorChain()->getValidators();
 
         foreach ($validators as $validator) {
             if ($validator['instance'] instanceof Validator\Db\NoRecordExists) {
@@ -172,30 +172,30 @@ class Document extends AbstractForm
 
         $this->add($status);
 
-        $show_in_nav = new Element\Checkbox('document-show_in_nav');
-        $show_in_nav->setAttribute('label', 'Show in nav')
+        $showInNav = new Element\Checkbox('document-show_in_nav');
+        $showInNav->setAttribute('label', 'Show in nav')
             ->setValue($document->showInNav())
             ->setAttribute('id', 'show_in_nav')
             ->setAttribute('class', 'input-checkbox')
             ->setCheckedValue(1);
 
-        $this->add($show_in_nav);
+        $this->add($showInNav);
 
-        $document_type    = $document->getDocumentType();
-        $views_collection = $document_type->getAvailableViews();
-        $select           = $views_collection->getSelect();
+        $documentType    = $document->getDocumentType();
+        $viewsCollection = $documentType->getAvailableViews();
+        $select          = $viewsCollection->getSelect();
 
         if (empty($select)) {
-            $view_model = View\Model::fromId($document->getDocumentType()->getDefaultViewId());
-            if (!empty($view_model)) {
-                $select = array($view_model->getId() => $view_model->getName());
+            $viewModel = View\Model::fromId($document->getDocumentType()->getDefaultViewId());
+            if (!empty($viewModel)) {
+                $select = array($viewModel->getId() => $viewModel->getName());
             } else {
                 $select = array();
             }
         }
 
-        $input_filter_factory = $this->getInputFilter();
-        $input_filter         = $input_filter_factory->add(
+        $inputFilterFactory = $this->getInputFilter();
+        $inputFilter        = $inputFilterFactory->add(
             array(
                 'name' => 'document-view',
                 'required' => true,
@@ -214,14 +214,14 @@ class Document extends AbstractForm
 
         $this->add($view);
 
-        $layouts_collection = new Layout\Collection();
-        $layout             = new Element\Select('document-layout');
-        $layout->setValueOptions($layouts_collection->getSelect())
+        $layoutsCollection = new Layout\Collection();
+        $layout            = new Element\Select('document-layout');
+        $layout->setValueOptions($layoutsCollection->getSelect())
             ->setValue((string) $document->getLayoutId())
             ->setAttribute('id', 'layout')
             ->setAttribute('label', 'Layout');
 
-        $input_filter = $input_filter_factory->add(
+        $inputFilter = $inputFilterFactory->add(
             array(
                 'name' => 'document-layout',
                 'required' => true,
@@ -237,9 +237,9 @@ class Document extends AbstractForm
         $this->remove('parent');
 
 
-        $more_information = new Element\Hidden('more_information');
-        $more_information->setAttribute('content', '');
-        $this->add($more_information);
+        $moreInformation = new Element\Hidden('more_information');
+        $moreInformation->setAttribute('content', '');
+        $this->add($moreInformation);
 
         $this->parentId   = $document->getParentId();
         $this->documentId = $document->getId();

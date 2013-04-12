@@ -48,19 +48,19 @@ class Files extends Object
      */
     public function export()
     {
-        $tmp_file = tempnam(sys_get_temp_dir(), 'Gc');
+        $tmpFile = tempnam(sys_get_temp_dir(), 'Gc');
         $this->zip(
             array(
                 GC_APPLICATION_PATH . '/public/frontend',
                 GC_APPLICATION_PATH . '/public/media',
             ),
-            $tmp_file
+            $tmpFile
         );
 
-        $zip_content = file_get_contents($tmp_file);
-        unlink($tmp_file);
+        $zipContent = file_get_contents($tmpFile);
+        unlink($tmpFile);
 
-        return $zip_content;
+        return $zipContent;
     }
 
     /**
@@ -86,7 +86,7 @@ class Files extends Object
                     RecursiveIteratorIterator::SELF_FIRST
                 );
 
-                $directory_name = dirname($source);
+                $directoryName = dirname($source);
                 foreach ($files as $file) {
                     $file = str_replace('\\', '/', $file);
 
@@ -98,9 +98,9 @@ class Files extends Object
                     $file = realpath($file);
 
                     if (is_dir($file) === true) {
-                        $zip->addEmptyDir(str_replace($directory_name . '/', '', $file . '/'));
+                        $zip->addEmptyDir(str_replace($directoryName . '/', '', $file . '/'));
                     } elseif (is_file($file) === true) {
-                        $zip->addFromString(str_replace($directory_name . '/', '', $file), file_get_contents($file));
+                        $zip->addFromString(str_replace($directoryName . '/', '', $file), file_get_contents($file));
                     }
                 }
             }

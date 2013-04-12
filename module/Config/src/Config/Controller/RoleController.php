@@ -44,7 +44,7 @@ class RoleController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $_aclPage
+     * @var array $aclPage
      */
     protected $aclPage = array('resource' => 'Config', 'permission' => 'role');
 
@@ -55,9 +55,9 @@ class RoleController extends Action
      */
     public function indexAction()
     {
-        $role_collection = new Role\Collection();
-        $roles           = array();
-        foreach ($role_collection->getRoles() as $role) {
+        $roleCollection = new Role\Collection();
+        $roles          = array();
+        foreach ($roleCollection->getRoles() as $role) {
             if ($role->getName() !== Role\Model::PROTECTED_NAME) {
                 $roles[] = $role;
             }
@@ -81,11 +81,11 @@ class RoleController extends Action
             $post = $this->getRequest()->getPost()->toArray();
             $form->setData($post);
             if ($form->isValid()) {
-                $role_model = new Role\Model();
-                $role_model->addData($form->getInputFilter()->getValues());
-                $role_model->save();
+                $roleModel = new Role\Model();
+                $roleModel->addData($form->getInputFilter()->getValues());
+                $roleModel->save();
                 $this->flashMessenger()->addSuccessMessage('Role saved!');
-                return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_model->getId()));
+                return $this->redirect()->toRoute('userRoleEdit', array('id' => $roleModel->getId()));
             }
 
             $this->flashMessenger()->addErrorMessage('Role can not saved!');
@@ -102,8 +102,8 @@ class RoleController extends Action
      */
     public function deleteAction()
     {
-        $role_model = Role\Model::fromId($this->getRouteMatch()->getParam('id'));
-        if (!empty($role_model) and $role_model->getName() !== Role\Model::PROTECTED_NAME and $role_model->delete()) {
+        $roleModel = Role\Model::fromId($this->getRouteMatch()->getParam('id'));
+        if (!empty($roleModel) and $roleModel->getName() !== Role\Model::PROTECTED_NAME and $roleModel->delete()) {
             return $this->returnJson(array('success' => true, 'message' => 'Role has been deleted'));
         }
 
@@ -117,27 +117,27 @@ class RoleController extends Action
      */
     public function editAction()
     {
-        $role_id = $this->getRouteMatch()->getParam('id');
+        $roleId = $this->getRouteMatch()->getParam('id');
 
-        $role_model = Role\Model::fromId($role_id);
-        if (empty($role_model) or $role_model->getName() === Role\Model::PROTECTED_NAME) {
+        $roleModel = Role\Model::fromId($roleId);
+        if (empty($roleModel) or $roleModel->getName() === Role\Model::PROTECTED_NAME) {
             $this->flashMessenger()->addErrorMessage("Can't edit this role");
             return $this->redirect()->toRoute('userRole');
         }
 
         $form = new RoleForm();
-        $form->initPermissions($role_model->getUserPermissions());
-        $form->setAttribute('action', $this->url()->fromRoute('userRoleEdit', array('id' => $role_id)));
-        $form->loadValues($role_model);
+        $form->initPermissions($roleModel->getUserPermissions());
+        $form->setAttribute('action', $this->url()->fromRoute('userRoleEdit', array('id' => $roleId)));
+        $form->loadValues($roleModel);
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
             $form->setData($post);
             if ($form->isValid()) {
-                $role_model->addData($form->getInputFilter()->getValues());
-                $role_model->save();
+                $roleModel->addData($form->getInputFilter()->getValues());
+                $roleModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('Role saved!');
-                return $this->redirect()->toRoute('userRoleEdit', array('id' => $role_id));
+                return $this->redirect()->toRoute('userRoleEdit', array('id' => $roleId));
             }
 
             $this->flashMessenger()->addErrorMessage('Role can not saved!');

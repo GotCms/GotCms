@@ -52,7 +52,7 @@ class DocumentController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $_aclPage
+     * @var array $aclPage
      */
     protected $aclPage = array('resource' => 'Content', 'permission' => 'document');
 
@@ -78,12 +78,12 @@ class DocumentController extends Action
             'refresh' => 'documentRefreshTreeview',
         );
 
-        $array_routes = array();
+        $arrayRoutes = array();
         foreach ($routes as $key => $route) {
-            $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
+            $arrayRoutes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
         }
 
-        $this->layout()->setVariable('routes', Json::encode($array_routes));
+        $this->layout()->setVariable('routes', Json::encode($arrayRoutes));
     }
 
     /**
@@ -93,26 +93,26 @@ class DocumentController extends Action
      */
     public function createAction()
     {
-        $document_form = new Form\Document();
-        $document_form->setAttribute('action', $this->url()->fromRoute('documentCreate'));
-        $parent_id = $this->getRouteMatch()->getParam('id');
+        $documentForm = new Form\Document();
+        $documentForm->setAttribute('action', $this->url()->fromRoute('documentCreate'));
+        $parentId = $this->getRouteMatch()->getParam('id');
 
-        $document_type_collection = new DocumentType\Collection();
-        $document_type_element    = $document_form->get('document_type');
-        if (empty($parent_id)) {
-            $document_type_element->setValueOptions(
-                array('' => 'Select document type') + $document_type_collection->getSelect()
+        $documentTypeCollection = new DocumentType\Collection();
+        $documentTypeElement    = $documentForm->get('document_type');
+        if (empty($parentId)) {
+            $documentTypeElement->setValueOptions(
+                array('' => 'Select document type') + $documentTypeCollection->getSelect()
             );
         } else {
-            $document_form->get('parent')->setValue($parent_id);
-            $document_type_collection->init(DocumentModel::fromId($parent_id)->getDocumentTypeId());
-            $document_type_element->setValueOptions(
-                array('' => 'Select document type') + $document_type_collection->getSelect()
+            $documentForm->get('parent')->setValue($parentId);
+            $documentTypeCollection->init(DocumentModel::fromId($parentId)->getDocumentTypeId());
+            $documentTypeElement->setValueOptions(
+                array('' => 'Select document type') + $documentTypeCollection->getSelect()
             );
         }
 
         if ($this->getRequest()->isPost()) {
-            $document_form->getInputFilter()->add(
+            $documentForm->getInputFilter()->add(
                 array(
                     'required' => true,
                     'validators' => array(
@@ -123,20 +123,20 @@ class DocumentController extends Action
                 ),
                 'document_type'
             );
-            $document_form->setData($this->getRequest()->getPost()->toArray());
-            if (!$document_form->isValid()) {
+            $documentForm->setData($this->getRequest()->getPost()->toArray());
+            if (!$documentForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Invalid document data');
                 $this->useFlashMessenger();
             } else {
-                $document_name    = $document_form->getValue('document-name');
-                $document_url_key = $document_form->getValue('document-url_key');
-                $document_type_id = $document_form->getValue('document_type');
-                $parent_id        = $document_form->getValue('parent');
-                $document         = new DocumentModel();
-                $document->setName($document_name)
-                    ->setDocumentTypeId($document_type_id)
-                    ->setParentId($parent_id)
-                    ->setUrlKey(!empty($document_url_key) ? $document_url_key : $this->checkUrlKey($document_name))
+                $documentName   = $documentForm->getValue('document-name');
+                $documentUrlKey = $documentForm->getValue('document-url_key');
+                $documentTypeId = $documentForm->getValue('document_type');
+                $parentId       = $documentForm->getValue('parent');
+                $document       = new DocumentModel();
+                $document->setName($documentName)
+                    ->setDocumentTypeId($documentTypeId)
+                    ->setParentId($parentId)
+                    ->setUrlKey(!empty($documentUrlKey) ? $documentUrlKey : $this->checkUrlKey($documentName))
                     ->setUserId($this->getAuth()->getIdentity()->getId());
 
                 $document->save();
@@ -145,7 +145,7 @@ class DocumentController extends Action
             }
         }
 
-        return array('form' => $document_form);
+        return array('form' => $documentForm);
     }
 
     /**
@@ -188,65 +188,65 @@ class DocumentController extends Action
      */
     public function editAction()
     {
-        $document_id = $this->getRouteMatch()->getParam('id');
-        $document    = DocumentModel::fromId($document_id);
+        $documentId = $this->getRouteMatch()->getParam('id');
+        $document   = DocumentModel::fromId($documentId);
         if (empty($document)) {
             $this->flashMessenger()->addErrorMessage('Document does not exists !');
             return $this->redirect()->toRoute('content');
         } else {
-            $document_form = new ZendForm\Form();
-            $document_form->setAttribute(
+            $documentForm = new ZendForm\Form();
+            $documentForm->setAttribute(
                 'action',
-                $this->url()->fromRoute('documentEdit', array('id' => $document_id))
+                $this->url()->fromRoute('documentEdit', array('id' => $documentId))
             );
-            $this->layout()->setVariable('documentId', $document_id);
-            $document_type_id = $document->getDocumentTypeId();
-            $layout_id        = $this->getRouteMatch()->getParam('layout_id', '');
+            $this->layout()->setVariable('documentId', $documentId);
+            $documentTypeId = $document->getDocumentTypeId();
+            $layoutId       = $this->getRouteMatch()->getParam('layout_id', '');
 
             if ($this->getRequest()->isPost()) {
-                $has_error     = false;
-                $document_vars = $this->getRequest()->getPost()->toArray();
-                $old_url_key   = $document->getUrlKey();
+                $hasError     = false;
+                $documentVars = $this->getRequest()->getPost()->toArray();
+                $oldUrlKey    = $document->getUrlKey();
                 $document->setName(
-                    empty($document_vars['document-name']) ?
+                    empty($documentVars['document-name']) ?
                     $document->getName() :
-                    $document_vars['document-name']
+                    $documentVars['document-name']
                 );
                 $document->setStatus(
-                    empty($document_vars['document-status']) ?
+                    empty($documentVars['document-status']) ?
                     DocumentModel::STATUS_DISABLE :
                     DocumentModel::STATUS_ENABLE
                 );
                 $document->showInNav(
-                    empty($document_vars['document-show_in_nav']) ?
+                    empty($documentVars['document-show_in_nav']) ?
                     false :
-                    $document_vars['document-show_in_nav']
+                    $documentVars['document-show_in_nav']
                 );
                 $document->setLayoutId(
-                    empty($document_vars['document-layout']) ?
+                    empty($documentVars['document-layout']) ?
                     false :
-                    $document_vars['document-layout']
+                    $documentVars['document-layout']
                 );
                 $document->setViewId(
-                    empty($document_vars['document-view']) ?
+                    empty($documentVars['document-view']) ?
                     $document->getViewId() :
-                    $document_vars['document-view']
+                    $documentVars['document-view']
                 );
                 $document->setUrlKey(
-                    empty($document_vars['document-url_key']) ?
+                    empty($documentVars['document-url_key']) ?
                     '' :
-                    $document_vars['document-url_key']
+                    $documentVars['document-url_key']
                 );
             }
 
-            $tabs       = $this->loadTabs($document_type_id);
-            $tabs_array = array();
-            $datatypes  = array();
+            $tabs      = $this->loadTabs($documentTypeId);
+            $tabsArray = array();
+            $datatypes = array();
 
             $idx = 1;
             foreach ($tabs as $tab) {
-                $tabs_array[] = $tab->getName();
-                $properties   = $this->loadProperties($document_type_id, $tab->getId(), $document->getId());
+                $tabsArray[] = $tab->getName();
+                $properties  = $this->loadProperties($documentTypeId, $tab->getId(), $document->getId());
 
                 $fieldset = new ZendForm\Fieldset('tabs-' . $idx);
                 if ($this->getRequest()->isPost()) {
@@ -256,11 +256,11 @@ class DocumentController extends Action
                         foreach ($properties as $property) {
                             $property->setDocumentId($document->getId())->loadValue();
                             if (!Datatype\Model::saveEditor($property, $document)) {
-                                $has_error = true;
+                                $hasError = true;
                             }
                         }
 
-                        if ($has_error) {
+                        if ($hasError) {
                             $connection->rollBack();
                         } else {
                             $connection->commit();
@@ -274,40 +274,40 @@ class DocumentController extends Action
                     AbstractForm::addContent($fieldset, Datatype\Model::loadEditor($property, $document));
                 }
 
-                $document_form->add($fieldset);
+                $documentForm->add($fieldset);
                 $idx++;
             }
 
-            $tabs_array[] = 'Document information';
+            $tabsArray[] = 'Document information';
 
-            $form_document_add = new Form\Document();
-            $form_document_add->load($document);
-            $form_document_add->setAttribute('name', 'tabs-' . $idx);
+            $formDocumentAdd = new Form\Document();
+            $formDocumentAdd->load($document);
+            $formDocumentAdd->setAttribute('name', 'tabs-' . $idx);
 
-            $document_form->add($form_document_add);
+            $documentForm->add($formDocumentAdd);
 
             if ($this->getRequest()->isPost()) {
-                $form_document_add->setData($this->getRequest()->getPost()->toArray());
+                $formDocumentAdd->setData($this->getRequest()->getPost()->toArray());
 
-                if ($has_error or !$form_document_add->isValid()) {
+                if ($hasError or !$formDocumentAdd->isValid()) {
                     $document->setStatus(DocumentModel::STATUS_DISABLE);
-                    $document->setUrlKey($old_url_key);
+                    $document->setUrlKey($oldUrlKey);
                     $this->flashMessenger()->addErrorMessage(
                         'This document cannot be saved because one or more properties values are required !'
                     );
                     $this->useFlashMessenger();
                 } else {
                     $this->flashMessenger()->addSuccessMessage('Document saved !');
-                    $document->addData($form_document_add->getInputFilter()->getValues());
+                    $document->addData($formDocumentAdd->getInputFilter()->getValues());
                     $document->save();
 
-                    return $this->redirect()->toRoute('documentEdit', array('id' => $document_id));
+                    return $this->redirect()->toRoute('documentEdit', array('id' => $documentId));
                 }
             }
 
-            $tabs = new Component\Tabs($tabs_array);
+            $tabs = new Component\Tabs($tabsArray);
 
-            return array('form' => $document_form, 'tabs' => $tabs, 'document' => $document);
+            return array('form' => $documentForm, 'tabs' => $tabs, 'document' => $document);
         }
     }
 
@@ -318,8 +318,8 @@ class DocumentController extends Action
      */
     public function copyAction()
     {
-        $document_id = $this->getRouteMatch()->getParam('id');
-        if (empty($document_id)) {
+        $documentId = $this->getRouteMatch()->getParam('id');
+        if (empty($documentId)) {
             return $this->returnJson(array('success' => false));
         }
 
@@ -328,7 +328,7 @@ class DocumentController extends Action
             unset($session['document-cut']);
         }
 
-        $session['document-copy'] = $document_id;
+        $session['document-copy'] = $documentId;
         return $this->returnJson(array('success' => true));
     }
 
@@ -339,8 +339,8 @@ class DocumentController extends Action
      */
     public function cutAction()
     {
-        $document_id = $this->getRouteMatch()->getParam('id');
-        if (empty($document_id)) {
+        $documentId = $this->getRouteMatch()->getParam('id');
+        if (empty($documentId)) {
             return $this->returnJson(array('success' => false));
         }
 
@@ -349,7 +349,7 @@ class DocumentController extends Action
             unset($session['document-copy']);
         }
 
-        $session['document-cut'] = $document_id;
+        $session['document-cut'] = $documentId;
         return $this->returnJson(array('success' => true));
     }
 
@@ -360,11 +360,11 @@ class DocumentController extends Action
      */
     public function pasteAction()
     {
-        $parent_id = $this->getRouteMatch()->getParam('id', null);
-        $session   = $this->getSession();
-        if (!empty($parent_id)) {
-            $parent_document = DocumentModel::fromId($parent_id);
-            if (empty($parent_document)) {
+        $parentId = $this->getRouteMatch()->getParam('id', null);
+        $session  = $this->getSession();
+        if (!empty($parentId)) {
+            $parentDocument = DocumentModel::fromId($parentId);
+            if (empty($parentDocument)) {
                 return $this->returnJson(array('success' => false));
             }
         }
@@ -375,26 +375,26 @@ class DocumentController extends Action
                 return $this->returnJson(array('success' => false));
             }
 
-            if (!empty($parent_document)) {
-                $available_children = $parent_document->getDocumentType()->getDependencies();
-                if (!in_array($document->getDocumentType()->getId(), $available_children)) {
+            if (!empty($parentDocument)) {
+                $availableChildren = $parentDocument->getDocumentType()->getDependencies();
+                if (!in_array($document->getDocumentType()->getId(), $availableChildren)) {
                     return $this->returnJson(array('success' => false));
                 }
             }
 
-            $search_document = DocumentModel::fromUrlKey($document->getUrlKey(), $parent_id);
-            if (!empty($search_document)) {
+            $searchDocument = DocumentModel::fromUrlKey($document->getUrlKey(), $parentId);
+            if (!empty($searchDocument)) {
                 return $this->returnJson(array('success' => false));
             }
 
-            $document->setParentId($parent_id);
+            $document->setParentId($parentId);
             $document->save();
             unset($session['document-cut']);
             return $this->returnJson(array('success' => true));
         } elseif (!empty($session['document-copy'])) {
-            $url_key         = $this->getRequest()->getQuery('url_key');
-            $search_document = DocumentModel::fromUrlKey($url_key, $parent_id);
-            if (!empty($search_document)) {
+            $urlKey         = $this->getRequest()->getQuery('url_key');
+            $searchDocument = DocumentModel::fromUrlKey($urlKey, $parentId);
+            if (!empty($searchDocument)) {
                 return $this->returnJson(array('success' => false));
             }
 
@@ -403,35 +403,35 @@ class DocumentController extends Action
                 return $this->returnJson(array('success' => false));
             }
 
-            if (!empty($parent_document)) {
-                $available_children = $parent_document->getDocumentType()->getDependencies();
-                if (!in_array($document->getDocumentType()->getId(), $available_children)) {
+            if (!empty($parentDocument)) {
+                $availableChildren = $parentDocument->getDocumentType()->getDependencies();
+                if (!in_array($document->getDocumentType()->getId(), $availableChildren)) {
                     return $this->returnJson(array('success' => false));
                 }
             }
 
-            $copy_document            = new DocumentModel();
-            $copy_document_properties = new Property\Collection();
-            $copy_document_properties->load(null, null, $document->getId());
+            $copyDocument           = new DocumentModel();
+            $copyDocumentProperties = new Property\Collection();
+            $copyDocumentProperties->load(null, null, $document->getId());
 
-            $copy_document->addData($document->getData());
-            $copy_document->setId(null);
-            $copy_document->setParentId($parent_id);
-            $copy_document->setName($this->getRequest()->getQuery('name'));
-            $copy_document->setUrlKey($url_key);
-            $copy_document->save();
+            $copyDocument->addData($document->getData());
+            $copyDocument->setId(null);
+            $copyDocument->setParentId($parentId);
+            $copyDocument->setName($this->getRequest()->getQuery('name'));
+            $copyDocument->setUrlKey($urlKey);
+            $copyDocument->save();
 
-            foreach ($copy_document_properties->getProperties() as $property) {
+            foreach ($copyDocumentProperties->getProperties() as $property) {
                 $value = $property->getValueModel();
                 if (empty($value)) {
                     continue;
                 }
 
-                $copy_property = new Property\Value\Model();
-                $copy_property->addData($value->getData());
-                $copy_property->setId(null);
-                $copy_property->setDocumentId($copy_document->getId());
-                $copy_property->save();
+                $copyProperty = new Property\Value\Model();
+                $copyProperty->addData($value->getData());
+                $copyProperty->setId(null);
+                $copyProperty->setDocumentId($copyDocument->getId());
+                $copyProperty->save();
             }
 
             return $this->returnJson(array('success' => true));
@@ -447,18 +447,18 @@ class DocumentController extends Action
      */
     public function refreshTreeviewAction()
     {
-        $document_id = $this->getRouteMatch()->getParam('id', 0);
-        if (empty($document_id)) {
+        $documentId = $this->getRouteMatch()->getParam('id', 0);
+        if (empty($documentId)) {
             $documents = new DocumentCollection();
-            $documents->load($document_id);
-            $documents_list = $documents->getChildren();
+            $documents->load($documentId);
+            $documentsList = $documents->getChildren();
         } else {
-            $documents      = DocumentModel::fromId($document_id);
-            $documents_list = $documents->getChildren();
+            $documents     = DocumentModel::fromId($documentId);
+            $documentsList = $documents->getChildren();
         }
 
 
-        return $this->returnJson(array('treeview' => Component\TreeView::render($documents_list, false)));
+        return $this->returnJson(array('treeview' => Component\TreeView::render($documentsList, false)));
     }
 
     /**
@@ -471,11 +471,11 @@ class DocumentController extends Action
         $order = $this->getRequest()->getPost()->get('order');
         $list  = explode(',', str_replace('document_', '', $order));
 
-        foreach ($list as $order => $document_id) {
-            $document_model = DocumentModel::fromId($document_id);
-            if (!empty($document_model)) {
-                $document_model->setSortOrder($order);
-                $document_model->save();
+        foreach ($list as $order => $documentId) {
+            $documentModel = DocumentModel::fromId($documentId);
+            if (!empty($documentModel)) {
+                $documentModel->setSortOrder($order);
+                $documentModel->save();
             }
         }
 
@@ -507,14 +507,14 @@ class DocumentController extends Action
     /**
      * Load tabs from document type
      *
-     * @param integer $document_type_id Document type id
+     * @param integer $documentTypeId Document type id
      *
      * @return \Gc\Tab\Collection
      */
-    protected function loadTabs($document_type_id)
+    protected function loadTabs($documentTypeId)
     {
-        $document_type = DocumentType\Model::fromId($document_type_id);
-        $tabs          = $document_type->getTabs();
+        $documentType = DocumentType\Model::fromId($documentTypeId);
+        $tabs         = $documentType->getTabs();
 
         return $tabs;
     }
@@ -522,16 +522,16 @@ class DocumentController extends Action
     /**
      * Load properties from document type, tab and document
      *
-     * @param integer $document_type_id Document type id
-     * @param integer $tab_id           Tab id
-     * @param integer $document_id      Document id
+     * @param integer $documentTypeId Document type id
+     * @param integer $tabId          Tab id
+     * @param integer $documentId     Document id
      *
      * @return \Gc\Property\Collection
      */
-    protected function loadProperties($document_type_id, $tab_id, $document_id)
+    protected function loadProperties($documentTypeId, $tabId, $documentId)
     {
         $properties = new Property\Collection();
-        $properties->load($document_type_id, $tab_id, $document_id);
+        $properties->load($documentTypeId, $tabId, $documentId);
 
         return $properties->getProperties();
     }

@@ -81,17 +81,17 @@ class Info extends Object
     /**
      * Initialize file from path
      *
-     * @param string $file_path File path
+     * @param string $filePath File path
      *
      * @return boolean
      */
-    public function fromFile($file_path)
+    public function fromFile($filePath)
     {
-        if (!empty($file_path) and $file_path == $this->getFilename()) {
+        if (!empty($filePath) and $filePath == $this->getFilename()) {
             return true;
-        } elseif ($file_path != $this->getFilename() and file_exists($file_path)) {
-            $this->setFilename($file_path);
-            $this->setInfos($this->getReader()->fromFile($file_path));
+        } elseif ($filePath != $this->getFilename() and file_exists($filePath)) {
+            $this->setFilename($filePath);
+            $this->setInfos($this->getReader()->fromFile($filePath));
 
             return true;
         }

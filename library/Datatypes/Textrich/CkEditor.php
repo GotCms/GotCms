@@ -64,14 +64,14 @@ class CkEditor extends Object
      */
     public function getToolbarAsJs()
     {
-        $js                = '';
-        $all_toolbar_items = $this->getAllToolbarItems();
-        $toolbar_items     = $this->getToolbarItems();
-        foreach ($all_toolbar_items as $group) {
+        $js              = '';
+        $allToolbarItems = $this->getAllToolbarItems();
+        $toolbarItems    = $this->getToolbarItems();
+        foreach ($allToolbarItems as $group) {
             if (!empty($group['items']) and is_array($group['items'])) {
                 $content = array();
                 foreach ($group['items'] as $item) {
-                    if (!empty($toolbar_items[$item])) {
+                    if (!empty($toolbarItems[$item])) {
                         $content[] = $item;
                     }
                 }
@@ -242,23 +242,23 @@ class CkEditor extends Object
      */
     public function getAllItems()
     {
-        $elements      = array();
-        $items         = $this->getAllToolbarItems();
-        $toolbar_items = $this->getToolbarItems();
+        $elements     = array();
+        $items        = $this->getAllToolbarItems();
+        $toolbarItems = $this->getToolbarItems();
         foreach ($items as $group) {
             if (!empty($group['items']) and is_array($group['items'])) {
                 $fieldset = new \Zend\Form\Fieldset($group['name']);
-                foreach ($group['items'] as $idx_item => $item) {
+                foreach ($group['items'] as $idxItem => $item) {
                     if ($item == '-') {
                         continue;
                     }
 
                     $element = new Element\Checkbox('toolbar-items[' . $item . ']');
-                    $element->setAttribute('id', 'i' . $group['name'] . $idx_item)
+                    $element->setAttribute('id', 'i' . $group['name'] . $idxItem)
                         ->setCheckedValue(1)
                         ->setAttribute('label', $item);
 
-                    if (!empty($toolbar_items[$item])) {
+                    if (!empty($toolbarItems[$item])) {
                         $element->setValue(1);
                     }
 

@@ -73,24 +73,24 @@ class Acl extends ZendAcl\Acl
     /**
      * Initiliaze Acl
      *
-     * @param UserModel $user_model User model
+     * @param UserModel $userModel User model
      *
      * @return void
      */
-    public function __construct(UserModel $user_model)
+    public function __construct(UserModel $userModel)
     {
         $this->roleTable = new RoleModel();
         $this->roleResource();
-        $this->user = $user_model;
+        $this->user = $userModel;
 
         $select = new Select();
         $select->from('user_acl_role')
             ->join('user', 'user.user_acl_role_id = user_acl_role.id');
         $select->where->equalTo('user.id', $this->user->getId());
-        $user_role = $this->roleTable->fetchRow($select);
+        $userRole = $this->roleTable->fetchRow($select);
 
-        $this->userRole     = empty($user_role['role_id']) ? 0 : $user_role['role_id'];
-        $this->userRoleName = empty($user_role['name']) ? null : $user_role['name'];
+        $this->userRole     = empty($userRole['role_id']) ? 0 : $userRole['role_id'];
+        $this->userRoleName = empty($userRole['name']) ? null : $userRole['name'];
     }
 
     /**
@@ -173,14 +173,14 @@ class Acl extends ZendAcl\Acl
     /**
      * Get role id from role name
      *
-     * @param string $role_name Role name
+     * @param string $roleName Role name
      *
      * @return array|\Zend\Db\ResultSet\RowObjectInterface
      */
-    public function getRoleId($role_name)
+    public function getRoleId($roleName)
     {
         return $this->roleTable->fetchRow(
-            $this->roleTable->select(array('name' => $role_name))
+            $this->roleTable->select(array('name' => $roleName))
         );
     }
 

@@ -126,17 +126,17 @@ class Updater extends Object
     /**
      * Rollback if problem with database
      *
-     * @param string $current_version Current version
+     * @param string $currentVersion Current version
      *
      * @return void
      */
-    public function rollback($current_version)
+    public function rollback($currentVersion)
     {
         if (empty($this->adapter)) {
             return false;
         }
 
-        return $this->adapter->rollback($current_version);
+        return $this->adapter->rollback($currentVersion);
     }
 
     /**
@@ -152,14 +152,14 @@ class Updater extends Object
 
         $configuration = Registry::get('Configuration');
         $files         = array();
-        $update_path   = GC_APPLICATION_PATH . '/data/update';
-        $path          = glob($update_path . '/*');
+        $updatePath    = GC_APPLICATION_PATH . '/data/update';
+        $path          = glob($updatePath . '/*');
         foreach ($path as $file) {
-            $version = str_replace($update_path . '/v', '', $file);
+            $version = str_replace($updatePath . '/v', '', $file);
             if (version_compare($version, Version::VERSION, '>')) {
-                $file_list = glob(sprintf($file . '/%s/*.sql', $configuration['db']['driver']));
-                if (!empty($file_list)) {
-                    $files[] = $file_list;
+                $fileList = glob(sprintf($file . '/%s/*.sql', $configuration['db']['driver']));
+                if (!empty($fileList)) {
+                    $files[] = $fileList;
                 }
             }
         }
@@ -169,8 +169,8 @@ class Updater extends Object
         }
 
         $sql = '';
-        foreach ($files as $file_list) {
-            foreach ($file_list as $filename) {
+        foreach ($files as $fileList) {
+            foreach ($fileList as $filename) {
                 $sql .= file_get_contents($filename) . PHP_EOL;
             }
         }
@@ -201,15 +201,15 @@ class Updater extends Object
             return false;
         }
 
-        $files       = array();
-        $update_path = GC_APPLICATION_PATH . '/data/update';
-        $path        = glob($update_path . '/*');
+        $files      = array();
+        $updatePath = GC_APPLICATION_PATH . '/data/update';
+        $path       = glob($updatePath . '/*');
         foreach ($path as $file) {
-            $version = str_replace($update_path . '/v', '', $file);
+            $version = str_replace($updatePath . '/v', '', $file);
             if (version_compare($version, Version::VERSION, '>')) {
-                $file_list = glob($file . '/*.php');
-                if (!empty($file_list)) {
-                    $files[] = $file_list;
+                $fileList = glob($file . '/*.php');
+                if (!empty($fileList)) {
+                    $files[] = $fileList;
                 }
             }
         }
@@ -219,8 +219,8 @@ class Updater extends Object
         }
 
         $script = new Script();
-        foreach ($files as $file_list) {
-            foreach ($file_list as $filename) {
+        foreach ($files as $fileList) {
+            foreach ($fileList as $filename) {
                 try {
                     $this->adapter->addMessage($script->execute($filename));
                 } catch (\Exception $e) {

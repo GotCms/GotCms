@@ -49,13 +49,13 @@ class Collection extends AbstractTable
     /**
      * Load document type collection
      *
-     * @param integer $parent_id Parent id
+     * @param integer $parentId Parent id
      *
      * @return void
      */
-    public function init($parent_id = null)
+    public function init($parentId = null)
     {
-        $this->setParentId($parent_id);
+        $this->setParentId($parentId);
         $this->setDocumentTypes();
     }
 
@@ -69,14 +69,14 @@ class Collection extends AbstractTable
         $rows = $this->fetchAll(
             $this->select(
                 function (Select $select) {
-                    $parent_id = $this->getParentId();
-                    if (!empty($parent_id)) {
+                    $parentId = $this->getParentId();
+                    if (!empty($parentId)) {
                         $select->join(
                             array('dtd' => 'document_type_dependency'),
                             'dtd.children_id = document_type.id',
                             array()
                         );
-                        $select->where->equalTo('dtd.parent_id', $parent_id);
+                        $select->where->equalTo('dtd.parent_id', $parentId);
                     }
 
                     $select->order('name ASC');
@@ -84,12 +84,12 @@ class Collection extends AbstractTable
             )
         );
 
-        $document_types = array();
+        $documentTypes = array();
         foreach ($rows as $row) {
-            $document_types[] = Model::fromArray((array) $row);
+            $documentTypes[] = Model::fromArray((array) $row);
         }
 
-        $this->setData('document_types', $document_types);
+        $this->setData('document_types', $documentTypes);
     }
 
     /**
@@ -99,11 +99,11 @@ class Collection extends AbstractTable
      */
     public function getSelect()
     {
-        $select         = array();
-        $document_types = $this->getDocumentTypes();
+        $select        = array();
+        $documentTypes = $this->getDocumentTypes();
 
-        foreach ($document_types as $document_type) {
-            $select[$document_type->getId()] = $document_type->getName();
+        foreach ($documentTypes as $documentType) {
+            $select[$documentType->getId()] = $documentType->getName();
         }
 
         return $select;

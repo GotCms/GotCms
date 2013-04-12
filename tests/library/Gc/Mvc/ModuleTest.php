@@ -99,7 +99,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testPrepareException()
     {
         Stream::register();
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'Layout Name',
                 'identifier' => 'Layout identifier',
@@ -108,10 +108,10 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $layout_model->save();
-        Config::setValue('site_exception_layout', $layout_model->getId());
+        $layoutModel->save();
+        Config::setValue('site_exception_layout', $layoutModel->getId());
         $this->assertNull($this->object->prepareException(Registry::get('Application')->getMvcEvent()));
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 
     /**
@@ -150,9 +150,9 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $old_database      = Registry::get('Db');
-        $old_configuration = Registry::get('Configuration');
-        $old_adapter       = GlobalAdapterFeature::getStaticAdapter();
+        $oldDatabase      = Registry::get('Db');
+        $oldConfiguration = Registry::get('Configuration');
+        $oldAdapter       = GlobalAdapterFeature::getStaticAdapter();
 
         if (!Config::getValue('session_lifetime')) {
             Config::getInstance()->insert(
@@ -177,8 +177,8 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         Registry::getInstance()->offsetUnset('Configuration');
         $this->assertNull($this->object->init(Registry::get('Application')->getServiceManager()->get('ModuleManager')));
 
-        Registry::set('Db', $old_database);
-        Registry::set('Configuration', $old_configuration);
-        GlobalAdapterFeature::setStaticAdapter($old_adapter);
+        Registry::set('Db', $oldDatabase);
+        Registry::set('Configuration', $oldConfiguration);
+        GlobalAdapterFeature::setStaticAdapter($oldAdapter);
     }
 }

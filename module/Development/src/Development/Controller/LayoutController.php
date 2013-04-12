@@ -46,7 +46,7 @@ class LayoutController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $_aclPage
+     * @var array $aclPage
      */
     protected $aclPage = array('resource' => 'Development', 'permission' => 'layout');
 
@@ -68,29 +68,29 @@ class LayoutController extends Action
      */
     public function createAction()
     {
-        $layout_form = new LayoutForm();
-        $layout_form->setAttribute('action', $this->url()->fromRoute('layoutCreate'));
+        $layoutForm = new LayoutForm();
+        $layoutForm->setAttribute('action', $this->url()->fromRoute('layoutCreate'));
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
-            $layout_form->setData($data);
-            if (!$layout_form->isValid()) {
+            $layoutForm->setData($data);
+            if (!$layoutForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save layout');
                 $this->useFlashMessenger();
             } else {
-                $layout_model = new Layout\Model();
-                $layout_model->setName($layout_form->getValue('name'));
-                $layout_model->setIdentifier($layout_form->getValue('identifier'));
-                $layout_model->setDescription($layout_form->getValue('description'));
-                $layout_model->setContent($layout_form->getValue('content'));
-                $layout_model->save();
+                $layoutModel = new Layout\Model();
+                $layoutModel->setName($layoutForm->getValue('name'));
+                $layoutModel->setIdentifier($layoutForm->getValue('identifier'));
+                $layoutModel->setDescription($layoutForm->getValue('description'));
+                $layoutModel->setContent($layoutForm->getValue('content'));
+                $layoutModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This layout has been created');
-                return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_model->getId()));
+                return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutModel->getId()));
             }
         }
 
-        return array('form' => $layout_form);
+        return array('form' => $layoutForm);
     }
 
     /**
@@ -100,36 +100,36 @@ class LayoutController extends Action
      */
     public function editAction()
     {
-        $layout_id    = $this->getRouteMatch()->getParam('id', null);
-        $layout_model = Layout\Model::fromId($layout_id);
-        if (empty($layout_id) or empty($layout_model)) {
+        $layoutId    = $this->getRouteMatch()->getParam('id', null);
+        $layoutModel = Layout\Model::fromId($layoutId);
+        if (empty($layoutId) or empty($layoutModel)) {
             return $this->redirect()->toRoute('layoutList');
         }
 
-        $layout_form = new LayoutForm();
-        $layout_form->setAttribute('action', $this->url()->fromRoute('layoutEdit', array('id' => $layout_id)));
-        $layout_form->loadValues($layout_model);
+        $layoutForm = new LayoutForm();
+        $layoutForm->setAttribute('action', $this->url()->fromRoute('layoutEdit', array('id' => $layoutId)));
+        $layoutForm->loadValues($layoutModel);
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
 
-            $layout_form->setData($data);
-            if (!$layout_form->isValid()) {
+            $layoutForm->setData($data);
+            if (!$layoutForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save layout');
                 $this->useFlashMessenger();
             } else {
-                $layout_model->setName($layout_form->getValue('name'));
-                $layout_model->setIdentifier($layout_form->getValue('identifier'));
-                $layout_model->setDescription($layout_form->getValue('description'));
-                $layout_model->setContent($layout_form->getValue('content'));
-                $layout_model->save();
+                $layoutModel->setName($layoutForm->getValue('name'));
+                $layoutModel->setIdentifier($layoutForm->getValue('identifier'));
+                $layoutModel->setDescription($layoutForm->getValue('description'));
+                $layoutModel->setContent($layoutForm->getValue('content'));
+                $layoutModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This layout has been saved');
-                return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+                return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
             }
         }
 
-        return array('form' => $layout_form, 'layoutId' => $layout_id);
+        return array('form' => $layoutForm, 'layoutId' => $layoutId);
     }
 
     /**
@@ -154,27 +154,27 @@ class LayoutController extends Action
      */
     public function uploadAction()
     {
-        $layout_id = $this->getRouteMatch()->getParam('id', null);
-        if (!empty($layout_id)) {
-            $layout = Layout\Model::fromId($layout_id);
-            if (empty($layout)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
+        $layoutId = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($layoutId)) {
+            $layout = Layout\Model::fromId($layoutId);
+            if (empty($layout)or empty($files['upload']['tmp_name']) or $files['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload layout');
-                return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+                return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
             }
 
-            $layout->setContent(file_get_contents($_FILES['upload']['tmp_name']));
+            $layout->setContent(file_get_contents($files['upload']['tmp_name']));
             $layout->save();
 
             $this->flashMessenger()->addSuccessMessage('Layout updated');
-            return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+            return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
         } else {
-            if (empty($_FILES['upload'])) {
+            if (empty($files['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload layouts');
                 return $this->redirect()->toRoute('layoutList');
             }
 
-            foreach ($_FILES['upload']['name'] as $idx => $name) {
-                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+            foreach ($files['upload']['name'] as $idx => $name) {
+                if ($files['upload']['error'][$idx] != UPLOAD_ERR_OK) {
                     continue;
                 }
 
@@ -184,7 +184,7 @@ class LayoutController extends Action
                     continue;
                 }
 
-                $layout->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
+                $layout->setContent(file_get_contents($files['upload']['tmp_name'][$idx]));
                 $layout->save();
             }
 
@@ -200,31 +200,31 @@ class LayoutController extends Action
      */
     public function downloadAction()
     {
-        $layout_id = $this->getRouteMatch()->getParam('id', null);
-        if (!empty($layout_id)) {
-            $layout = Layout\Model::fromId($layout_id);
+        $layoutId = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($layoutId)) {
+            $layout = Layout\Model::fromId($layoutId);
             if (empty($layout)) {
                 $this->flashMessenger()->addErrorMessage('This layout can not be download');
-                return $this->redirect()->toRoute('layoutEdit', array('id' => $layout_id));
+                return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
             }
 
             $content  = $layout->getContent();
             $filename = $layout->getIdentifier() . 'phtml';
         } else {
-            $layouts      = new Layout\Collection();
-            $children     = $layouts->getLayouts();
-            $zip          = new ZipArchive;
-            $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
-            $res          = $zip->open($tmp_filename, ZipArchive::CREATE);
+            $layouts     = new Layout\Collection();
+            $children    = $layouts->getLayouts();
+            $zip         = new ZipArchive;
+            $tmpFilename = tempnam(sys_get_temp_dir(), 'zip');
+            $res         = $zip->open($tmpFilename, ZipArchive::CREATE);
             if ($res === true) {
                 foreach ($children as $child) {
                     $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
                 }
 
                 $zip->close();
-                $content  = file_get_contents($tmp_filename);
+                $content  = file_get_contents($tmpFilename);
                 $filename = 'layout.zip';
-                unlink($tmp_filename);
+                unlink($tmpFilename);
             }
         }
 

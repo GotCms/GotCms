@@ -54,7 +54,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    protected $parentModel;
+    protected $parentmodel;
 
     /**
      * @var ViewModel
@@ -481,8 +481,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPropertyWithOutId()
     {
-        $fake_model = new Model();
-        $this->assertFalse($fake_model->getProperty('fakeproperty'));
+        $fakeModel = new Model();
+        $this->assertFalse($fakeModel->getProperty('fakeproperty'));
     }
 
     /**

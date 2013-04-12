@@ -60,12 +60,12 @@ class Documents extends AbstractHelper
                 $elements = $documents->load($data)->getDocuments();
             } elseif (is_array($data)) {
                 $elements = array();
-                foreach ($data as $document_id) {
-                    if (empty($document_id) or !is_numeric($document_id)) {
+                foreach ($data as $documentId) {
+                    if (empty($documentId) or !is_numeric($documentId)) {
                         continue;
                     }
 
-                    $document = DocumentModel::fromId($document_id);
+                    $document = DocumentModel::fromId($documentId);
                     if (!empty($document)) {
                         $elements[] = $document;
                     }

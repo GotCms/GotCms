@@ -136,17 +136,17 @@ class DocumentType extends AbstractForm
         $fieldsets->add(new Element\Text('name'));
         $fieldsets->add(new Element\Text('description'));
 
-        $icon_id    = new Element\Select('icon_id');
+        $iconId     = new Element\Select('icon_id');
         $collection = new Icon\Collection();
-        $icon_id->setValueOptions($collection->getIcons());
-        $fieldsets->add($icon_id);
+        $iconId->setValueOptions($collection->getIcons());
+        $fieldsets->add($iconId);
 
-        $document_type_collection = new DocumentTypeCollection();
-        $select                   = $document_type_collection->getSelect();
+        $documentTypeCollection = new DocumentTypeCollection();
+        $select                 = $documentTypeCollection->getSelect();
         if (!empty($select)) {
             $dependency = new Element\MultiCheckbox('infos[dependency]');
             $dependency->setAttribute('class', 'input-checkbox');
-            $dependency->setValueOptions($document_type_collection->getSelect());
+            $dependency->setValueOptions($documentTypeCollection->getSelect());
             $fieldsets->add($dependency);
         }
 
@@ -169,14 +169,14 @@ class DocumentType extends AbstractForm
 
         $fieldsets = new FieldSet('views');
 
-        $available_views = new Element\Select('available_views');
-        $available_views->setAttribute('multiple', 'multiple');
-        $available_views->setValueOptions(array('' => '') + $this->viewCollection->getSelect());
-        $fieldsets->add($available_views);
+        $availableViews = new Element\Select('available_views');
+        $availableViews->setAttribute('multiple', 'multiple');
+        $availableViews->setValueOptions(array('' => '') + $this->viewCollection->getSelect());
+        $fieldsets->add($availableViews);
 
-        $default_view = new Element\Select('default_view');
-        $default_view->setValueOptions($this->viewCollection->getSelect());
-        $fieldsets->add($default_view);
+        $defaultView = new Element\Select('default_view');
+        $defaultView->setValueOptions($this->viewCollection->getSelect());
+        $fieldsets->add($defaultView);
 
         $this->add($fieldsets);
 
@@ -260,7 +260,7 @@ class DocumentType extends AbstractForm
         $required->setValue(1)
             ->setAttribute('id', 'required')
             ->setAttribute('class', 'input-checkbox');
-        $property_id = new Element\Hidden('property_id');
+        $propertyId = new Element\Hidden('property_id');
 
         if ($property instanceof Property\Model) {
             $name->setValue($property->getName());
@@ -269,8 +269,8 @@ class DocumentType extends AbstractForm
             $datatype->setValue($property->getDatatypeId());
             $description->setValue($property->getDescription());
             $required->setCheckedValue($property->isRequired());
-            $property_id->setValue($property->getId());
-            $property_fieldset_name = $property->getId();
+            $propertyId->setValue($property->getId());
+            $propertyFieldsetName = $property->getId();
         } elseif (is_array($property)) {
             $name->setValue($property['name']);
             $identifier->setValue($property['identifier']);
@@ -278,19 +278,19 @@ class DocumentType extends AbstractForm
             $datatype->setValue($property['datatype']);
             $description->setValue($property['description']);
             $required->setCheckedValue(!empty($property['is_required']));
-            $property_id->setValue(str_replace('property', '', $property['id']));
-            $property_fieldset_name = $property['id'];
+            $propertyId->setValue(str_replace('property', '', $property['id']));
+            $propertyFieldsetName = $property['id'];
         }
 
-        $property_form = new FieldSet($property_fieldset_name);
-        $property_form->add($property_id);
-        $property_form->add($name);
-        $property_form->add($identifier);
-        $property_form->add($tab);
-        $property_form->add($datatype);
-        $property_form->add($description);
-        $property_form->add($required);
-        $fieldsets->add($property_form);
+        $propertyForm = new FieldSet($propertyFieldsetName);
+        $propertyForm->add($propertyId);
+        $propertyForm->add($name);
+        $propertyForm->add($identifier);
+        $propertyForm->add($tab);
+        $propertyForm->add($datatype);
+        $propertyForm->add($description);
+        $propertyForm->add($required);
+        $fieldsets->add($propertyForm);
 
         $this->getInputFilter()->get('properties')->add(
             array(
@@ -337,7 +337,7 @@ class DocumentType extends AbstractForm
                     'allow_empty' => false,
                 )
             ),
-            $property_fieldset_name
+            $propertyFieldsetName
         );
 
         return $this;
@@ -357,10 +357,10 @@ class DocumentType extends AbstractForm
 
         $fieldsets = new FieldSet('tabs');
 
-        $tabs_list      = new Element\Select('tabs_list');
-        $tab_collection = new Tab\Collection();
-        $tabs_list->setValueOptions($tab_collection->getTabs());
-        $fieldsets->add($tabs_list);
+        $tabsList      = new Element\Select('tabs_list');
+        $tabCollection = new Tab\Collection();
+        $tabsList->setValueOptions($tabCollection->getTabs());
+        $fieldsets->add($tabsList);
         $this->add($fieldsets);
         $this->getInputFilter()->add(array('type'   => 'Zend\InputFilter\InputFilter'), 'tabs');
 
@@ -386,26 +386,26 @@ class DocumentType extends AbstractForm
 
         $description = new Element\Text('description');
 
-        $tab_id = new Element\Hidden('tab_id');
+        $tabId = new Element\Hidden('tab_id');
 
         if ($tab instanceof Tab\Model) {
             $name->setValue($tab->getName());
             $description->setValue($tab->getDescription());
-            $tab_id->setValue($tab->getId());
-            $tab_fieldset_name = $tab->getId();
+            $tabId->setValue($tab->getId());
+            $tabFieldsetName = $tab->getId();
 
         } elseif (is_array($tab)) {
             $name->setValue($tab['name']);
             $description->setValue($tab['description']);
-            $tab_id->setValue(str_replace('tab', '', $tab['id']));
-            $tab_fieldset_name = $tab['id'];
+            $tabId->setValue(str_replace('tab', '', $tab['id']));
+            $tabFieldsetName = $tab['id'];
         }
 
-        $tab_form = new FieldSet($tab_fieldset_name);
-        $fieldsets->add($tab_form);
-        $tab_form->add($name);
-        $tab_form->add($description);
-        $tab_form->add($tab_id);
+        $tabForm = new FieldSet($tabFieldsetName);
+        $fieldsets->add($tabForm);
+        $tabForm->add($name);
+        $tabForm->add($description);
+        $tabForm->add($tabId);
 
         //Input filter
 
@@ -427,7 +427,7 @@ class DocumentType extends AbstractForm
                     ),
                 ),
             ),
-            $tab_fieldset_name
+            $tabFieldsetName
         );
 
         return $this;
@@ -444,27 +444,27 @@ class DocumentType extends AbstractForm
     public function setValues($element)
     {
         if ($element instanceof DocumentTypeModel) {
-            $infos_form = $this->getInfos();
-            $infos_form->get('name')->setValue($element->getName());
-            $infos_form->get('description')->setValue($element->getDescription());
-            $infos_form->get('icon_id')->setValue($element->getIconId());
-            $dependency = $infos_form->get('infos[dependency]');
+            $infosForm = $this->getInfos();
+            $infosForm->get('name')->setValue($element->getName());
+            $infosForm->get('description')->setValue($element->getDescription());
+            $infosForm->get('icon_id')->setValue($element->getIconId());
+            $dependency = $infosForm->get('infos[dependency]');
             if (!empty($dependency)) {
                 $dependency->setValue($element->getDependencies());
             }
 
-            $views_form = $this->getViews();
-            $views_form->get('default_view')->setValue($element->getDefaultViewId());
-            $views_collection = $element->getAvailableViews();
+            $viewsForm = $this->getViews();
+            $viewsForm->get('default_view')->setValue($element->getDefaultViewId());
+            $viewsCollection = $element->getAvailableViews();
 
-            $views_form->get('available_views')->setValue($views_collection->getSelect());
+            $viewsForm->get('available_views')->setValue($viewsCollection->getSelect());
 
-            $tabs           = $element->getTabs();
-            $tab_collection = new Tab\Collection();
-            $this->getTabs()->get('tabs_list')->setValueOptions($tab_collection->getImportableTabs($element->getId()));
+            $tabs          = $element->getTabs();
+            $tabCollection = new Tab\Collection();
+            $this->getTabs()->get('tabs_list')->setValueOptions($tabCollection->getImportableTabs($element->getId()));
 
             $session = $element;
-            foreach ($tabs as $tab_id => $tab) {
+            foreach ($tabs as $tabId => $tab) {
                 $this->addTab($tab);
                 $properties = $tab->getProperties();
                 foreach ($properties as $property) {
@@ -476,23 +476,23 @@ class DocumentType extends AbstractForm
                 return;
             }
 
-            $tab_select = array();
-            foreach ($element['tabs'] as $tab_id => $tab) {
+            $tabSelect = array();
+            foreach ($element['tabs'] as $tabId => $tab) {
                 if (!is_array($tab)) {
                     continue;
                 }
 
-                $tab['id'] = $tab_id;
+                $tab['id'] = $tabId;
                 $this->addTab($tab);
-                $tab_select[$tab_id] = $tab['name'];
+                $tabSelect[$tabId] = $tab['name'];
             }
 
-            foreach ($element['properties'] as $property_id => $property) {
+            foreach ($element['properties'] as $propertyId => $property) {
                 if (!is_array($property)) {
                     continue;
                 }
 
-                $property['id'] = $property_id;
+                $property['id'] = $propertyId;
                 $this->addProperty($property);
             }
         }

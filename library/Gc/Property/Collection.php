@@ -49,17 +49,17 @@ class Collection extends AbstractTable
     /**
      * Load property
      *
-     * @param integer $document_type_id Optional
-     * @param integer $tab_id           Optional
-     * @param integer $document_id      Optional
+     * @param integer $documentTypeId Optional
+     * @param integer $tabId          Optional
+     * @param integer $documentId     Optional
      *
      * @return \Gc\Property\Collection
      */
-    public function load($document_type_id = null, $tab_id = null, $document_id = null)
+    public function load($documentTypeId = null, $tabId = null, $documentId = null)
     {
-        $this->setDocumentTypeId($document_type_id);
-        $this->setTabId($tab_id);
-        $this->setDocumentId($document_id);
+        $this->setDocumentTypeId($documentTypeId);
+        $this->setTabId($tabId);
+        $this->setDocumentId($documentId);
 
         $this->getProperties(true);
 
@@ -69,13 +69,13 @@ class Collection extends AbstractTable
     /**
      * Get properties
      *
-     * @param boolean $force_reload to initiliaze properties
+     * @param boolean $forceReload to initiliaze properties
      *
      * @return array
      */
-    public function getProperties($force_reload = false)
+    public function getProperties($forceReload = false)
     {
-        if ($this->getData('properties') == null or $force_reload) {
+        if ($this->getData('properties') == null or $forceReload) {
             $select = new Select();
             $select->from('tab')
                 ->columns(array())
@@ -111,12 +111,12 @@ class Collection extends AbstractTable
 
             $properties = array();
             foreach ($rows as $row) {
-                $property_model = Model::fromArray((array) $row);
+                $propertyModel = Model::fromArray((array) $row);
                 if ($this->getDocumentId() !== null) {
-                    $property_model->setDocumentId($this->getDocumentId());
+                    $propertyModel->setDocumentId($this->getDocumentId());
                 }
 
-                $properties[] = $property_model;
+                $properties[] = $propertyModel;
             }
 
             $this->setData('properties', $properties);

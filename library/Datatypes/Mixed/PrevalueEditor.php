@@ -52,7 +52,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $datatypes = $post->get('datatypes');
         $model     = $post->get('add-model');
         if (!empty($datatypes)) {
-            foreach ($datatypes as $datatype_id => $datatype) {
+            foreach ($datatypes as $datatypeId => $datatype) {
                 foreach ($datatype as $name => $value) {
                     $post->set($name, $value);
                 }
@@ -60,7 +60,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
                 //Get datatypes
                 $object = $this->loadDatatype($datatype['name']);
                 $object->getPrevalueEditor()->save();
-                $datatypes[$datatype_id] = array(
+                $datatypes[$datatypeId] = array(
                     'name' => $datatype['name'],
                     'label' => $datatype['label'],
                     'config' => $object->getPrevalueEditor()->getDatatype()->getConfig()
@@ -85,42 +85,42 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $config = $this->getConfig();
 
-        $path     = GC_APPLICATION_PATH . '/library/Datatypes/';
-        $list_dir = glob($path . '*', GLOB_ONLYDIR);
-        $options  = array();
-        foreach ($list_dir as $dir) {
+        $path    = GC_APPLICATION_PATH . '/library/Datatypes/';
+        $listDir = glob($path . '*', GLOB_ONLYDIR);
+        $options = array();
+        foreach ($listDir as $dir) {
             $dir           = str_replace($path, '', $dir);
             $options[$dir] = $dir;
         }
 
         $datatypes = empty($config['datatypes']) ? array() : $config['datatypes'];
-        foreach ($datatypes as $datatype_id => $datatype_config) {
+        foreach ($datatypes as $datatypeId => $datatypeConfig) {
             //Get datatypes
-            $object = $this->loadDatatype($datatype_config['name']);
+            $object = $this->loadDatatype($datatypeConfig['name']);
             //Force configuration
             $object->getPrevalueEditor()->setConfig(
-                empty($datatype_config['config']) ? null : serialize($datatype_config['config'])
+                empty($datatypeConfig['config']) ? null : serialize($datatypeConfig['config'])
             );
 
             //Initiliaze prefix
-            $prefix = 'datatypes[' . $datatype_id . ']';
+            $prefix = 'datatypes[' . $datatypeId . ']';
 
             //Create form
             $fieldset = new Fieldset();
             $hidden   = new Element\Hidden();
             $hidden->setName($prefix . '[name]');
-            $hidden->setValue($datatype_config['name']);
+            $hidden->setValue($datatypeConfig['name']);
             $fieldset->add($hidden);
             $label = new Element\Text();
             $label->setName($prefix . '[label]');
             $label->setAttribute('class', 'input-text');
             $label->setAttribute('label', 'Label');
-            $label->setAttribute('id', 'label' . $datatype_id);
-            $label->setValue(empty($datatype_config['label']) ? '' : $datatype_config['label']);
+            $label->setAttribute('id', 'label' . $datatypeId);
+            $label->setValue(empty($datatypeConfig['label']) ? '' : $datatypeConfig['label']);
             $fieldset->add($label);
 
             AbstractForm::addContent($fieldset, $object->getPrevalueEditor()->load(), $prefix);
-            $datatypes[$datatype_id]['fieldset'] = $fieldset;
+            $datatypes[$datatypeId]['fieldset'] = $fieldset;
         }
 
 

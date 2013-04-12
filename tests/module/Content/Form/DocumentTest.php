@@ -141,7 +141,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         );
         $layout->save();
 
-        $documentType = DocumentTypeModel::fromArray(
+        $documenttype = DocumentTypeModel::fromArray(
             array(
                 'name' => 'DocumentType',
                 'description' => 'description',
@@ -150,9 +150,9 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
                 'user_id' => $user->getId(),
             )
         );
-        $documentType->save();
-        $documentType->setDependencies(array($documentType->getId()));
-        $documentType->save();
+        $documenttype->save();
+        $documenttype->setDependencies(array($documenttype->getId()));
+        $documenttype->save();
 
         $datatype = DatatypeModel::fromArray(
             array(
@@ -166,7 +166,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             array(
                 'name' => 'test',
                 'description' => 'test',
-                'document_type_id' => $documentType->getId(),
+                'document_type_id' => $documenttype->getId(),
             )
         );
         $tab->save();
@@ -189,7 +189,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
                 'url_key' => '',
                 'status' => DocumentModel::STATUS_ENABLE,
                 'user_id' => $user->getId(),
-                'document_type_id' => $documentType->getId(),
+                'document_type_id' => $documenttype->getId(),
                 'view_id' => $view->getId(),
                 'layout_id' => $layout->getId(),
                 'parent_id' => null,
@@ -202,14 +202,14 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->object->isValid());
 
         $document->delete();
-        $documentType->delete();
+        $documenttype->delete();
         $property->delete();
         $tab->delete();
         $view->delete();
         $layout->delete();
         $user->delete();
         $datatype->delete();
-        unset($documentType);
+        unset($documenttype);
         unset($document);
         unset($property);
         unset($tab);

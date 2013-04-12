@@ -46,7 +46,7 @@ class TranslationController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $_aclPage
+     * @var array $aclPage
      */
     protected $aclPage = array('resource' => 'Content', 'permission' => 'translation');
 
@@ -72,12 +72,12 @@ class TranslationController extends Action
             'refresh' => 'documentRefreshTreeview',
         );
 
-        $array_routes = array();
+        $arrayRoutes = array();
         foreach ($routes as $key => $route) {
-            $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
+            $arrayRoutes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
         }
 
-        $this->layout()->setVariable('routes', Json::encode($array_routes));
+        $this->layout()->setVariable('routes', Json::encode($arrayRoutes));
     }
 
     /**
@@ -87,28 +87,28 @@ class TranslationController extends Action
      */
     public function createAction()
     {
-        $translation_form = new Form\Translation();
-        $translation_form->setAttribute('action', $this->url()->fromRoute('translationCreate'));
+        $translationForm = new Form\Translation();
+        $translationForm->setAttribute('action', $this->url()->fromRoute('translationCreate'));
 
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();
-            $translation_form->setData($post->toArray());
-            if (!$translation_form->isValid()) {
+            $translationForm->setData($post->toArray());
+            if (!$translationForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Invalid data sent !');
                 $this->useFlashMessenger();
             } else {
                 $source = $post->get('source');
                 $data   = array();
-                foreach ($post->get('destination') as $destination_id => $destination) {
-                    $data[$destination_id] = array('value' => $destination);
+                foreach ($post->get('destination') as $destinationId => $destination) {
+                    $data[$destinationId] = array('value' => $destination);
                 }
 
-                foreach ($post->get('locale') as $locale_id => $locale) {
-                    if (empty($data[$locale_id])) {
+                foreach ($post->get('locale') as $localeId => $locale) {
+                    if (empty($data[$localeId])) {
                         continue;
                     }
 
-                    $data[$locale_id]['locale'] = $locale;
+                    $data[$localeId]['locale'] = $locale;
                 }
 
                 $this->flashMessenger()->addSuccessMessage('Translation saved !');
@@ -117,7 +117,7 @@ class TranslationController extends Action
             }
         }
 
-        return array('form' => $translation_form);
+        return array('form' => $translationForm);
     }
 
     /**
@@ -127,18 +127,18 @@ class TranslationController extends Action
      */
     public function indexAction()
     {
-        $translation_form = new Form\Translation();
-        $translation_form->setAttribute('action', $this->url()->fromRoute('translationList'));
+        $translationForm = new Form\Translation();
+        $translationForm->setAttribute('action', $this->url()->fromRoute('translationList'));
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();
             if (empty($post['source']) or empty($post['destination'])) {
                 return $this->redirect()->toRoute('translationList');
             }
 
-            foreach ($post['source'] as $source_id => $source) {
-                Translator::getInstance()->update(array('source' => $source), sprintf('id = %d', $source_id));
-                if (!empty($post['destination'][$source_id])) {
-                    Translator::setValue($source_id, $post['destination'][$source_id]);
+            foreach ($post['source'] as $sourceId => $source) {
+                Translator::getInstance()->update(array('source' => $source), sprintf('id = %d', $sourceId));
+                if (!empty($post['destination'][$sourceId])) {
+                    Translator::setValue($sourceId, $post['destination'][$sourceId]);
                 }
             }
 
@@ -148,7 +148,7 @@ class TranslationController extends Action
             return $this->redirect()->toRoute('translationList');
         }
 
-        return array('form' => $translation_form, 'values' => Translator::getValues());
+        return array('form' => $translationForm, 'values' => Translator::getValues());
     }
 
     /**
@@ -168,11 +168,11 @@ class TranslationController extends Action
             $data[$value['locale']][$value['source']] = $value['destination'];
         }
 
-        $translate_path   = GC_APPLICATION_PATH . '/data/translation/%s.php';
-        $template_content = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/language.tpl.php');
+        $translatePath   = GC_APPLICATION_PATH . '/data/translation/%s.php';
+        $templateContent = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/language.tpl.php');
 
         foreach ($data as $locale => $values) {
-            file_put_contents(sprintf($translate_path, $locale), sprintf($template_content, var_export($values, true)));
+            file_put_contents(sprintf($translatePath, $locale), sprintf($templateContent, var_export($values, true)));
         }
     }
 }

@@ -132,19 +132,19 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Load Datatype
      *
-     * @param Model   $datatype    Datatype
-     * @param integer $document_id Document id
+     * @param Model   $datatype   Datatype
+     * @param integer $documentId Document id
      *
      * @return mixed
      */
-    public function load($datatype = null, $document_id = null)
+    public function load($datatype = null, $documentId = null)
     {
         if (empty($datatype)) {
             return false;
         }
 
         $this->setData('datatype_model', $datatype);
-        $this->setData('document_id', $document_id);
+        $this->setData('document_id', $documentId);
     }
 
     /**
@@ -185,18 +185,18 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Get upload url path
      *
-     * @param integer $property_id Property id
+     * @param integer $propertyId Property id
      *
      * @return string
      */
-    public function getUploadUrl($property_id)
+    public function getUploadUrl($propertyId)
     {
         $router = Registry::get('Application')->getMvcEvent()->getRouter();
 
         return $router->assemble(
             array(
                 'document_id' => $this->getDocumentId(),
-                'property_id' => $property_id
+                'property_id' => $propertyId
             ),
             array('name' => 'mediaUpload')
         );

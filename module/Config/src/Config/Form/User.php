@@ -50,8 +50,8 @@ class User extends AbstractForm
      */
     public function init()
     {
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'email' => array(
                     'required' => true,
@@ -91,17 +91,17 @@ class User extends AbstractForm
             )
         );
 
-        $this->setInputFilter($input_filter);
+        $this->setInputFilter($inputFilter);
 
-        $role            = new Element\Select('user_acl_role_id');
-        $role_collection = new RoleCollection();
-        $roles_list      = $role_collection->getRoles();
-        $select_options  = array();
-        foreach ($roles_list as $role_model) {
-            $select_options[$role_model->getId()] = $role_model->getName();
+        $role           = new Element\Select('user_acl_role_id');
+        $roleCollection = new RoleCollection();
+        $rolesList      = $roleCollection->getRoles();
+        $selectOptions  = array();
+        foreach ($rolesList as $roleModel) {
+            $selectOptions[$roleModel->getId()] = $roleModel->getName();
         }
 
-        $role->setValueOptions($select_options);
+        $role->setValueOptions($selectOptions);
 
         $this->add(new Element('email'));
         $this->add(new Element('login'));

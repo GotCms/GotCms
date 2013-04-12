@@ -96,7 +96,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testLoginActionWithPostData()
     {
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
@@ -105,8 +105,8 @@ class UserControllerTest extends AbstractHttpControllerTestCase
                 'user_acl_role_id' => 1,
             )
         );
-        $user_model->setPassword('passwordtest');
-        $user_model->save();
+        $userModel->setPassword('passwordtest');
+        $userModel->save();
 
         $this->dispatch(
             '/admin/user/login',
@@ -123,7 +123,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userLogin');
 
-        $user_model->delete();
+        $userModel->delete();
     }
 
     /**
@@ -135,7 +135,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testLoginActionWithPostAndRedirectData()
     {
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
@@ -144,8 +144,8 @@ class UserControllerTest extends AbstractHttpControllerTestCase
                 'user_acl_role_id' => 1,
             )
         );
-        $user_model->setPassword('passwordtest');
-        $user_model->save();
+        $userModel->setPassword('passwordtest');
+        $userModel->save();
 
         $this->dispatch(
             '/admin/user/login/L2FkbWlu',
@@ -163,7 +163,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userLogin');
 
-        $user_model->delete();
+        $userModel->delete();
     }
 
     /**
@@ -219,7 +219,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testForgotPasswordActionWithPostData()
     {
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
@@ -228,8 +228,8 @@ class UserControllerTest extends AbstractHttpControllerTestCase
                 'user_acl_role_id' => 1,
             )
         );
-        $user_model->setPassword('passwordtest');
-        $user_model->save();
+        $userModel->setPassword('passwordtest');
+        $userModel->save();
 
         $this->dispatch(
             '/admin/config/user/forgot-password',
@@ -245,7 +245,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userForgotPassword');
 
-        $user_model->delete();
+        $userModel->delete();
     }
 
     /**
@@ -370,7 +370,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteAction()
     {
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
@@ -379,10 +379,10 @@ class UserControllerTest extends AbstractHttpControllerTestCase
                 'user_acl_role_id' => 2,
             )
         );
-        $user_model->setPassword('passwordtest');
-        $user_model->save();
+        $userModel->setPassword('passwordtest');
+        $userModel->save();
 
-        $this->dispatch('/admin/config/user/delete/' . $user_model->getId());
+        $this->dispatch('/admin/config/user/delete/' . $userModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Config');
@@ -390,7 +390,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userDelete');
 
-        $user_model->delete();
+        $userModel->delete();
     }
 
     /**
@@ -438,7 +438,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditAction()
     {
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
@@ -447,10 +447,10 @@ class UserControllerTest extends AbstractHttpControllerTestCase
                 'user_acl_role_id' => 2,
             )
         );
-        $user_model->setPassword('passwordtest');
-        $user_model->save();
+        $userModel->setPassword('passwordtest');
+        $userModel->save();
 
-        $this->dispatch('/admin/config/user/edit/' . $user_model->getId());
+        $this->dispatch('/admin/config/user/edit/' . $userModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Config');
@@ -458,7 +458,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userEdit');
 
-        $user_model->delete();
+        $userModel->delete();
     }
 
     /**
@@ -470,7 +470,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithInvalidPostData()
     {
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
@@ -479,11 +479,11 @@ class UserControllerTest extends AbstractHttpControllerTestCase
                 'user_acl_role_id' => 2,
             )
         );
-        $user_model->setPassword('passwordtest');
-        $user_model->save();
+        $userModel->setPassword('passwordtest');
+        $userModel->save();
 
         $this->dispatch(
-            '/admin/config/user/edit/' . $user_model->getId(),
+            '/admin/config/user/edit/' . $userModel->getId(),
             'POST',
             array(
             )
@@ -495,7 +495,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userEdit');
 
-        $user_model->delete();
+        $userModel->delete();
     }
 
     /**
@@ -507,7 +507,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithPostData()
     {
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
@@ -516,11 +516,11 @@ class UserControllerTest extends AbstractHttpControllerTestCase
                 'user_acl_role_id' => 2,
             )
         );
-        $user_model->setPassword('passwordtest');
-        $user_model->save();
+        $userModel->setPassword('passwordtest');
+        $userModel->save();
 
         $this->dispatch(
-            '/admin/config/user/edit/' . $user_model->getId(),
+            '/admin/config/user/edit/' . $userModel->getId(),
             'POST',
             array(
                 'lastname' => 'Test',
@@ -539,7 +539,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userEdit');
 
-        $user_model->delete();
+        $userModel->delete();
     }
 
     /**

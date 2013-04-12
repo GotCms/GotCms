@@ -47,8 +47,8 @@ class UserLogin extends AbstractForm
      */
     public function init()
     {
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'login' => array(
                     'required' => true,
@@ -65,7 +65,7 @@ class UserLogin extends AbstractForm
             )
         );
 
-        $this->setInputFilter($input_filter);
+        $this->setInputFilter($inputFilter);
 
         $this->add(new Element('login'));
         $this->add(new Element('password'));

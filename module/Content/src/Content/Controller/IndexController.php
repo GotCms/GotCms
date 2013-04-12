@@ -63,12 +63,12 @@ class IndexController extends Action
             'refresh' => 'documentRefreshTreeview',
         );
 
-        $array_routes = array();
+        $arrayRoutes = array();
         foreach ($routes as $key => $route) {
-            $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
+            $arrayRoutes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
         }
 
-        $this->layout()->setVariable('routes', Json::encode($array_routes));
+        $this->layout()->setVariable('routes', Json::encode($arrayRoutes));
     }
 
     /**

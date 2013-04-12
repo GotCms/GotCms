@@ -32,28 +32,28 @@ if (file_exists('vendor/autoload.php')) {
     $loader = include 'vendor/autoload.php';
 }
 
-$zf_path = false;
+$zfPath = false;
 
 if (getenv('ZF2_PATH')) { // Support for ZF2_PATH environment variable or git submodule
-    $zf_path = getenv('ZF2_PATH');
+    $zfPath = getenv('ZF2_PATH');
 } elseif (get_cfg_var('zf2_path')) { // Support for zf2_path directive value
-    $zf_path = get_cfg_var('zf2_path');
+    $zfPath = get_cfg_var('zf2_path');
 } elseif (is_dir('vendor/Zend')) {
-    $zf_path = 'vendor';
+    $zfPath = 'vendor';
 }
 
-if ($zf_path) {
+if ($zfPath) {
     // Get application stack configuration
     $configuration = include 'config/application.config.php';
     if (isset($loader)) {
-        $loader->add('Zend', $zf_path);
+        $loader->add('Zend', $zfPath);
         foreach ($configuration['autoloader']['namespaces'] as $name => $path) {
             $loader->add($name, dirname($path));
         }
 
         $loader->register();
     } else {
-        include $zf_path . '/Zend/Loader/AutoloaderFactory.php';
+        include $zfPath . '/Zend/Loader/AutoloaderFactory.php';
         Zend\Loader\AutoloaderFactory::factory(
             array(
                 'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],

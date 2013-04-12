@@ -77,28 +77,28 @@ class Model extends AbstractTable
      */
     public static function fromArray(array $array)
     {
-        $datatype_table = new Model();
-        $datatype_table->setData($array);
-        $datatype_table->setOrigData();
+        $datatypeTable = new Model();
+        $datatypeTable->setData($array);
+        $datatypeTable->setOrigData();
 
-        return $datatype_table;
+        return $datatypeTable;
     }
 
     /**
      * Get model from id
      *
-     * @param integer $datatype_id Datatype id
+     * @param integer $datatypeId Datatype id
      *
      * @return false|\Gc\Datatype\Model
      */
-    public static function fromId($datatype_id)
+    public static function fromId($datatypeId)
     {
-        $datatype_table = new Model();
-        $row            = $datatype_table->fetchRow($datatype_table->select(array('id' => (int) $datatype_id)));
+        $datatypeTable = new Model();
+        $row           = $datatypeTable->fetchRow($datatypeTable->select(array('id' => (int) $datatypeId)));
         if (!empty($row)) {
-            $datatype_table->setData((array) $row);
-            $datatype_table->setOrigData();
-            return $datatype_table;
+            $datatypeTable->setData((array) $row);
+            $datatypeTable->setOrigData();
+            return $datatypeTable;
         } else {
             return false;
         }
@@ -112,7 +112,7 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array(
+        $arraySave = array(
             'name' => $this->getName(),
             'prevalue_value' => serialize($this->getPrevalueValue()),
             'model' => $this->getModel(),
@@ -121,10 +121,10 @@ class Model extends AbstractTable
         try {
             $id = $this->getId();
             if (empty($id)) {
-                $this->insert($array_save);
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => $this->getId()));
+                $this->update($arraySave, array('id' => $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
@@ -228,18 +228,18 @@ class Model extends AbstractTable
     /**
      * Load Datatype
      *
-     * @param integer $datatype_id Datatype id
-     * @param integer $document_id Optional document id
+     * @param integer $datatypeId Datatype id
+     * @param integer $documentId Optional document id
      *
      * @return \Gc\Datatype\AbstractDatatype
      */
-    public static function loadDatatype($datatype_id, $document_id = null)
+    public static function loadDatatype($datatypeId, $documentId = null)
     {
-        $datatype = Model::fromId($datatype_id);
+        $datatype = Model::fromId($datatypeId);
         $class    = 'Datatypes\\' . $datatype->getModel() . '\Datatype';
 
         $object = new $class();
-        $object->load($datatype, $document_id);
+        $object->load($datatype, $documentId);
         return $object;
     }
 }

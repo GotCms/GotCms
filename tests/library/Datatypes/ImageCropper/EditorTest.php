@@ -418,10 +418,10 @@ class EditorTest extends \PHPUnit_Framework_TestCase
                 unlink($file);
             }
 
-            $tmp_dir = $dir;
-            while ($tmp_dir != GC_MEDIA_PATH . '/files') {
-                rmdir($tmp_dir);
-                $tmp_dir = realpath(dirname($tmp_dir));
+            $tmpDir = $dir;
+            while ($tmpDir != GC_MEDIA_PATH . '/files') {
+                rmdir($tmpDir);
+                $tmpDir = realpath(dirname($tmpDir));
             }
         }
     }

@@ -111,8 +111,8 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'name' => array(
                     'required' => true,
@@ -131,7 +131,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->object->setInputFilter($input_filter);
+        $this->object->setInputFilter($inputFilter);
         $this->object->add(new Element\Text('name'));
 
         $this->assertInstanceOf('Gc\Form\AbstractForm', $this->object->loadValues($model));

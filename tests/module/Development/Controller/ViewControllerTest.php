@@ -166,15 +166,15 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditAction()
     {
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
                 'identifier' => 'ViewIdentifier'
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
-        $this->dispatch('/admin/development/view/edit/' . $view_model->getId());
+        $this->dispatch('/admin/development/view/edit/' . $viewModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -182,7 +182,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('viewEdit');
 
-        $view_model->delete();
+        $viewModel->delete();
     }
 
     /**
@@ -194,16 +194,16 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithInvalidPostData()
     {
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
                 'identifier' => 'ViewIdentifier'
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
         $this->dispatch(
-            '/admin/development/view/edit/' . $view_model->getId(),
+            '/admin/development/view/edit/' . $viewModel->getId(),
             'POST',
             array(
             )
@@ -215,7 +215,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('viewEdit');
 
-        $view_model->delete();
+        $viewModel->delete();
     }
 
     /**
@@ -227,16 +227,16 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithPostData()
     {
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
                 'identifier' => 'ViewIdentifier'
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
         $this->dispatch(
-            '/admin/development/view/edit/' . $view_model->getId(),
+            '/admin/development/view/edit/' . $viewModel->getId(),
             'POST',
             array(
                 'name' => 'ViewName',
@@ -251,7 +251,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('viewEdit');
 
-        $view_model->delete();
+        $viewModel->delete();
     }
 
     /**
@@ -263,15 +263,15 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteAction()
     {
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
                 'identifier' => 'ViewIdentifier'
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
-        $this->dispatch('/admin/development/view/delete/' . $view_model->getId());
+        $this->dispatch('/admin/development/view/delete/' . $viewModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -279,7 +279,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('viewDelete');
 
-        $view_model->delete();
+        $viewModel->delete();
     }
 
     /**
@@ -309,7 +309,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadAction()
     {
-        $_FILES = array(
+        $files = array(
             'upload' => array(
                 'name' => __DIR__ . '/_files/upload.phtml',
                 'type' => 'plain/text',
@@ -319,15 +319,15 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
             )
         );
 
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
                 'identifier' => 'ViewIdentifier'
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
-        $this->dispatch('/admin/development/view/upload/' . $view_model->getId());
+        $this->dispatch('/admin/development/view/upload/' . $viewModel->getId());
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -335,7 +335,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('viewUpload');
 
-        $view_model->delete();
+        $viewModel->delete();
     }
 
     /**
@@ -347,7 +347,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadActionWithoutId()
     {
-        $_FILES = array(
+        $files = array(
             'upload' => array(
                 'name' => array(
                     'upload.phtml',
@@ -377,13 +377,13 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
             ),
         );
 
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
                 'identifier' => 'upload'
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
         $this->dispatch('/admin/development/view/upload');
         $this->assertResponseStatusCode(302);
@@ -393,7 +393,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('viewUpload');
 
-        $view_model->delete();
+        $viewModel->delete();
     }
 
     /**
@@ -405,7 +405,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadActionWithEmptyFilesData()
     {
-        $_FILES = array('upload' => array());
+        $files = array('upload' => array());
         $this->dispatch('/admin/development/view/upload');
         $this->assertResponseStatusCode(302);
 
@@ -442,16 +442,16 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDownloadAction()
     {
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
                 'identifier' => 'ViewIdentifier',
                 'content' => 'Test',
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
-        $this->dispatch('/admin/development/view/download/' . $view_model->getId());
+        $this->dispatch('/admin/development/view/download/' . $viewModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -459,7 +459,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('viewDownload');
 
-        $view_model->delete();
+        $viewModel->delete();
     }
 
     /**
@@ -471,15 +471,15 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDownloadActionWithEmptyContent()
     {
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
                 'identifier' => 'ViewIdentifier',
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
-        $this->dispatch('/admin/development/view/download/' . $view_model->getId());
+        $this->dispatch('/admin/development/view/download/' . $viewModel->getId());
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -487,7 +487,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('viewDownload');
 
-        $view_model->delete();
+        $viewModel->delete();
     }
 
     /**
@@ -517,14 +517,14 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDownloadActionWithoutId()
     {
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'ViewName',
                 'identifier' => 'ViewIdentifier',
                 'content' => 'Content',
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
         $this->dispatch('/admin/development/view/download');
         $this->assertResponseStatusCode(200);
@@ -534,6 +534,6 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('viewDownload');
 
-        $view_model->delete();
+        $viewModel->delete();
     }
 }

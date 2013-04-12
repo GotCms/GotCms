@@ -53,7 +53,7 @@ abstract class AbstractTable extends Object
     static protected $tables = array();
 
     /**
-     * Initialize constructor and save instance of \Zend\Db\TableGateway\TableGateway($_name) in self::$tables
+     * Initialize constructor and save instance of \Zend\Db\TableGateway\TableGateway($name) in self::$tables
      *
      * @return void
      */
@@ -101,14 +101,14 @@ abstract class AbstractTable extends Object
     public function fetchRow($query, $parameters = null)
     {
         if ($query instanceof ResultSet) {
-            $result_set = $query;
+            $resultSet = $query;
         } else {
-            $result_set = new ResultSet();
-            $result_set->initialize($this->execute($query, $parameters));
+            $resultSet = new ResultSet();
+            $resultSet->initialize($this->execute($query, $parameters));
         }
 
-        $result = $result_set->getDataSource()->getResource()->fetch(PDO::FETCH_ASSOC);
-        $result_set->getDataSource()->getResource()->closeCursor();
+        $result = $resultSet->getDataSource()->getResource()->fetch(PDO::FETCH_ASSOC);
+        $resultSet->getDataSource()->getResource()->closeCursor();
 
         return $result;
     }
@@ -124,14 +124,14 @@ abstract class AbstractTable extends Object
     public function fetchAll($query, $parameters = null)
     {
         if ($query instanceof ResultSet) {
-            $result_set = $query;
+            $resultSet = $query;
         } else {
-            $result_set = new ResultSet();
-            $result_set->initialize($this->execute($query, $parameters));
+            $resultSet = new ResultSet();
+            $resultSet->initialize($this->execute($query, $parameters));
         }
 
-        $result = $result_set->getDataSource()->getResource()->fetchAll(PDO::FETCH_ASSOC);
-        $result_set->getDataSource()->getResource()->closeCursor();
+        $result = $resultSet->getDataSource()->getResource()->fetchAll(PDO::FETCH_ASSOC);
+        $resultSet->getDataSource()->getResource()->closeCursor();
 
         return $result;
     }
@@ -147,14 +147,14 @@ abstract class AbstractTable extends Object
     public function fetchOne($query, $parameters = null)
     {
         if ($query instanceof ResultSet) {
-            $result_set = $query;
+            $resultSet = $query;
         } else {
-            $result_set = new ResultSet();
-            $result_set->initialize($this->execute($query, $parameters));
+            $resultSet = new ResultSet();
+            $resultSet->initialize($this->execute($query, $parameters));
         }
 
-        $result = $result_set->getDataSource()->getResource()->fetchColumn();
-        $result_set->getDataSource()->getResource()->closeCursor();
+        $result = $resultSet->getDataSource()->getResource()->fetchColumn();
+        $resultSet->getDataSource()->getResource()->closeCursor();
 
         return $result;
     }
@@ -182,19 +182,19 @@ abstract class AbstractTable extends Object
     /**
      * Get last insert id
      *
-     * @param string $table_name Optional table name
+     * @param string $tableName Optional table name
      *
      * @return integer
      */
-    public function getLastInsertId($table_name = null)
+    public function getLastInsertId($tableName = null)
     {
-        $table_name = empty($table_name) ? $this->name : $table_name;
+        $tableName = empty($tableName) ? $this->name : $tableName;
         if ($this->getDriverName() == 'pdo_pgsql') {
-            $row = $this->fetchRow(sprintf("SELECT currval('%s_id_seq') AS value", $table_name));
+            $row = $this->fetchRow(sprintf("SELECT currval('%s_id_seq') AS value", $tableName));
             return $row['value'];
         }
 
-        return $this->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue($table_name);
+        return $this->getAdapter()->getDriver()->getConnection()->getLastGeneratedValue($tableName);
     }
 
     /**

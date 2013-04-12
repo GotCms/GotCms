@@ -75,7 +75,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetVisitorId()
     {
-        $_SERVER['HTTPuser_AGENT']       = 'Mozilla/5.0 (X11; Linux x86_64; ' .
+        $_SERVER['HTTP_USER_AGENT']      = 'Mozilla/5.0 (X11; Linux x86_64; ' .
             'rv:10.0.11) Gecko/20100101 Firefox/10.0.11 Iceweasel/10.0.11';
         $_SERVER['HTTP_ACCEPT_CHARSET']  = null;
         $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en-us,en;q=0.5';
@@ -94,7 +94,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetVisitorIdWithWrongData()
     {
-        $_SERVER['HTTPuser_AGENT']       = null;
+        $_SERVER['HTTP_USER_AGENT']      = null;
         $_SERVER['HTTP_ACCEPT_CHARSET']  = null;
         $_SERVER['HTTP_ACCEPT_LANGUAGE'] = null;
         $_SERVER['SERVER_ADDR']          = '127.0.0.1';

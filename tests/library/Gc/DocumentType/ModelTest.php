@@ -75,7 +75,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    protected $documentTypeChildren;
+    protected $documentTypechildren;
 
     /**
      * Sets up the fixture, for example, opens a network connection.

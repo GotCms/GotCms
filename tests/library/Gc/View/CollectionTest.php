@@ -188,8 +188,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $model         = Model::fromIdentifier('identifier-collection-test');
-        $document_type = DocumentTypeModel::fromArray(
+        $model        = Model::fromIdentifier('identifier-collection-test');
+        $documentType = DocumentTypeModel::fromArray(
             array(
                 'name' => 'Document type name',
                 'description' => 'Document type description',
@@ -199,12 +199,12 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $document_type->save();
-        $this->object->init($document_type->getId());
+        $documentType->save();
+        $this->object->init($documentType->getId());
         $this->object->addElement($model);
 
         $this->assertTrue($this->object->save());
-        $document_type->delete();
+        $documentType->delete();
     }
 
     /**
@@ -229,8 +229,8 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $model         = Model::fromIdentifier('identifier-collection-test');
-        $document_type = DocumentTypeModel::fromArray(
+        $model        = Model::fromIdentifier('identifier-collection-test');
+        $documentType = DocumentTypeModel::fromArray(
             array(
                 'name' => 'Document type name',
                 'description' => 'Document type description',
@@ -240,13 +240,13 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $document_type->save();
-        $this->object->init($document_type->getId());
+        $documentType->save();
+        $this->object->init($documentType->getId());
         $this->object->addElement($model);
         $this->object->save();
 
         $this->assertTrue($this->object->delete());
-        $document_type->delete();
+        $documentType->delete();
     }
 
     /**

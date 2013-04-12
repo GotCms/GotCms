@@ -75,7 +75,7 @@ class FormCheckbox extends ZendFormCheckbox
         $attributes['name']  = $name;
         $attributes['type']  = $this->getInputType();
         $attributes['value'] = $element->getCheckedValue();
-        $closing_bracket     = $this->getInlineClosingBracket();
+        $closingBracket      = $this->getInlineClosingBracket();
 
         if ($element->isChecked()) {
             $attributes['checked'] = 'checked';
@@ -85,7 +85,7 @@ class FormCheckbox extends ZendFormCheckbox
             $rendered = sprintf(
                 '<input %s%s',
                 $this->createAttributesString($attributes),
-                $closing_bracket
+                $closingBracket
             );
         } else {
             if ($element->getAttribute('id') == '') {
@@ -96,7 +96,7 @@ class FormCheckbox extends ZendFormCheckbox
             $rendered = sprintf(
                 '<div class="input-checkbox"><input %s%s<label for="%s"></label></div>',
                 $this->createAttributesString($attributes),
-                $closing_bracket,
+                $closingBracket,
                 $element->getAttribute('id')
             );
         }

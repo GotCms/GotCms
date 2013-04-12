@@ -132,19 +132,19 @@ class CmsController extends Action
      */
     public function updateAction()
     {
-        $version_is_latest = Version::isLatest();
-        $latest_version    = Version::getLatest();
-        $session           = $this->getSession();
+        $versionIsLatest = Version::isLatest();
+        $latestVersion   = Version::getLatest();
+        $session         = $this->getSession();
 
         if ($this->getRequest()->isPost()) {
             $updater = new Updater();
-            if (!$updater->load($this->getRequest()->getPost()->get('adapter')) or $version_is_latest) {
+            if (!$updater->load($this->getRequest()->getPost()->get('adapter')) or $versionIsLatest) {
                 $this->flashMessenger()->addErrorMessage('Can\'t set adapter');
                 return $this->redirect()->toRoute('cmsUpdate');
             }
 
-            $current_version = Version::VERSION;
-            $output          = '';
+            $currentVersion = Version::VERSION;
+            $output         = '';
             if ($updater->update()) {
                 //Fetch content
                 if ($updater->upgrade()) {
@@ -152,12 +152,12 @@ class CmsController extends Action
                     //Update database
                     if (!$updater->updateDatabase()) {
                         //Upgrade cms
-                        $updater->rollback($current_version);
+                        $updater->rollback($currentVersion);
                     } else {
                         $updater->executeScripts();
                         $session['updateOutput'] = $updater->getMessages();
 
-                        $this->flashMessenger()->addSuccessMessage(sprintf('Cms update to %s', $latest_version));
+                        $this->flashMessenger()->addSuccessMessage(sprintf('Cms update to %s', $latestVersion));
                         return $this->redirect()->toRoute('cmsUpdate');
                     }
                 }
@@ -171,23 +171,23 @@ class CmsController extends Action
         }
 
         if (!empty($session['updateOutput'])) {
-            $update_output = $session['updateOutput'];
+            $updateOutput = $session['updateOutput'];
             unset($session['updateOutput']);
         }
 
         //Check modules and datatypes
-        $datatypes_errors = array();
-        $this->checkVersion(glob(GC_APPLICATION_PATH . '/library/Datatypes/*'), 'datatype', $datatypes_errors);
-        $modules_errors = array();
-        $this->checkVersion(glob(GC_APPLICATION_PATH . '/library/Modules/*'), 'module', $modules_errors);
+        $datatypesErrors = array();
+        $this->checkVersion(glob(GC_APPLICATION_PATH . '/library/Datatypes/*'), 'datatype', $datatypesErrors);
+        $modulesErrors = array();
+        $this->checkVersion(glob(GC_APPLICATION_PATH . '/library/Modules/*'), 'module', $modulesErrors);
 
         return array(
-            'gitProject' => file_exists(GC_APPLICATION_PATH . '/.git'),
-            'isLatest' => $version_is_latest,
-            'latestVersion' => $latest_version,
-            'datatypesErrors' => $datatypes_errors,
-            'modulesErrors' => $modules_errors,
-            'updateOutput' => empty($update_output) ? '' : $update_output,
+            'gitProject'      => file_exists(GC_APPLICATION_PATH . '/.git'),
+            'isLatest'        => $versionIsLatest,
+            'latestVersion'   => $latestVersion,
+            'datatypesErrors' => $datatypesErrors,
+            'modulesErrors'   => $modulesErrors,
+            'updateOutput'    => empty($updateOutput) ? '' : $updateOutput,
         );
     }
 
@@ -203,7 +203,7 @@ class CmsController extends Action
      */
     protected function checkVersion(array $directories, $type, array &$errors)
     {
-        $latest_version = Version::getLatest();
+        $latestVersion = Version::getLatest();
         foreach ($directories as $directory) {
             if (is_dir($directory)) {
                 $filename = $directory . '/' . $type . '.info';
@@ -214,11 +214,11 @@ class CmsController extends Action
                     if (!empty($infos['version'])) {
                         preg_match('~(?<operator>[>=]*)(?<version>.+)~', $infos['version'], $matches);
                         if (empty($matches['operator'])) {
-                            if (version_compare($latest_version, $matches['version']) === 1) {
+                            if (version_compare($latestVersion, $matches['version']) === 1) {
                                 $errors[] = basename($directory);
                             }
                         } else {
-                            if (!version_compare($latest_version, $matches['version'], $matches['operator'])) {
+                            if (!version_compare($latestVersion, $matches['version'], $matches['operator'])) {
                                 $errors[] = $directory;
                             }
                         }

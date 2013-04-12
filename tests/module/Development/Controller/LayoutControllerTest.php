@@ -166,15 +166,15 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditAction()
     {
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'identifier' => 'LayoutIdentifier'
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
-        $this->dispatch('/admin/development/layout/edit/' . $layout_model->getId());
+        $this->dispatch('/admin/development/layout/edit/' . $layoutModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -182,7 +182,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('layoutEdit');
 
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 
     /**
@@ -194,16 +194,16 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithInvalidPostData()
     {
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'identifier' => 'LayoutIdentifier'
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
         $this->dispatch(
-            '/admin/development/layout/edit/' . $layout_model->getId(),
+            '/admin/development/layout/edit/' . $layoutModel->getId(),
             'POST',
             array(
             )
@@ -215,7 +215,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('layoutEdit');
 
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 
     /**
@@ -227,16 +227,16 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithPostData()
     {
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'identifier' => 'LayoutIdentifier'
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
         $this->dispatch(
-            '/admin/development/layout/edit/' . $layout_model->getId(),
+            '/admin/development/layout/edit/' . $layoutModel->getId(),
             'POST',
             array(
                 'name' => 'LayoutName',
@@ -251,7 +251,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('layoutEdit');
 
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 
     /**
@@ -263,15 +263,15 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteAction()
     {
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'identifier' => 'LayoutIdentifier'
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
-        $this->dispatch('/admin/development/layout/delete/' . $layout_model->getId());
+        $this->dispatch('/admin/development/layout/delete/' . $layoutModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -279,7 +279,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('layoutDelete');
 
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 
     /**
@@ -309,7 +309,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadAction()
     {
-        $_FILES = array(
+        $files = array(
             'upload' => array(
                 'name' => __DIR__ . '/_files/upload.phtml',
                 'type' => 'plain/text',
@@ -319,15 +319,15 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
             )
         );
 
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'identifier' => 'LayoutIdentifier'
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
-        $this->dispatch('/admin/development/layout/upload/' . $layout_model->getId());
+        $this->dispatch('/admin/development/layout/upload/' . $layoutModel->getId());
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -335,7 +335,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('layoutUpload');
 
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 
     /**
@@ -347,7 +347,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadActionWithoutId()
     {
-        $_FILES = array(
+        $files = array(
             'upload' => array(
                 'name' => array(
                     'upload.phtml',
@@ -377,13 +377,13 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
             ),
         );
 
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'identifier' => 'upload'
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
         $this->dispatch('/admin/development/layout/upload');
         $this->assertResponseStatusCode(302);
@@ -393,7 +393,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('layoutUpload');
 
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 
     /**
@@ -405,7 +405,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadActionWithEmptyFilesData()
     {
-        $_FILES = array('upload' => array());
+        $files = array('upload' => array());
         $this->dispatch('/admin/development/layout/upload');
         $this->assertResponseStatusCode(302);
 
@@ -442,16 +442,16 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDownloadAction()
     {
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'identifier' => 'LayoutIdentifier',
                 'content' => 'Test',
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
-        $this->dispatch('/admin/development/layout/download/' . $layout_model->getId());
+        $this->dispatch('/admin/development/layout/download/' . $layoutModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
@@ -459,7 +459,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('layoutDownload');
 
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 
     /**
@@ -471,15 +471,15 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDownloadActionWithEmptyContent()
     {
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'identifier' => 'LayoutIdentifier',
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
-        $this->dispatch('/admin/development/layout/download/' . $layout_model->getId());
+        $this->dispatch('/admin/development/layout/download/' . $layoutModel->getId());
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
@@ -487,7 +487,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('layoutDownload');
 
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 
     /**
@@ -517,14 +517,14 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDownloadActionWithoutId()
     {
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'LayoutName',
                 'identifier' => 'LayoutIdentifier',
                 'content' => 'Content',
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
         $this->dispatch('/admin/development/layout/download');
         $this->assertResponseStatusCode(200);
@@ -534,6 +534,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('layoutDownload');
 
-        $layout_model->delete();
+        $layoutModel->delete();
     }
 }

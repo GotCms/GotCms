@@ -239,7 +239,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveEditor()
     {
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'View Name',
                 'identifier' => 'View identifier',
@@ -247,9 +247,9 @@ class ModelTest extends \PHPUnit_Framework_TestCase
                 'content' => 'View Content'
             )
         );
-        $view_model->save();
+        $viewModel->save();
 
-        $layout_model = LayoutModel::fromArray(
+        $layoutModel = LayoutModel::fromArray(
             array(
                 'name' => 'Layout Name',
                 'identifier' => 'Layout identifier',
@@ -257,9 +257,9 @@ class ModelTest extends \PHPUnit_Framework_TestCase
                 'content' => 'Layout Content'
             )
         );
-        $layout_model->save();
+        $layoutModel->save();
 
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'User test',
                 'firstname' => 'User test',
@@ -268,51 +268,51 @@ class ModelTest extends \PHPUnit_Framework_TestCase
                 'user_acl_role_id' => 1,
             )
         );
-        $user_model->setPassword('test');
-        $user_model->save();
+        $userModel->setPassword('test');
+        $userModel->save();
 
-        $document_type_model = DocumentTypeModel::fromArray(
+        $documentTypeModel = DocumentTypeModel::fromArray(
             array(
                 'name' => 'Document Type Name',
                 'description' => 'Document Type description',
                 'icon_id' => 1,
-                'defaultview_id' => $view_model->getId(),
-                'user_id' => $user_model->getId(),
+                'defaultview_id' => $viewModel->getId(),
+                'user_id' => $userModel->getId(),
             )
         );
-        $document_type_model->save();
+        $documentTypeModel->save();
 
-        $tab_model = TabModel::fromArray(
+        $tabModel = TabModel::fromArray(
             array(
                 'name' => 'TabTest',
                 'description' => 'TabTest',
                 'sort_order' => 1,
-                'document_type_id' => $document_type_model->getId(),
+                'document_type_id' => $documentTypeModel->getId(),
             )
         );
-        $tab_model->save();
+        $tabModel->save();
 
-        $document_model = DocumentModel::fromArray(
+        $documentModel = DocumentModel::fromArray(
             array(
                 'name' => 'DocumentTest',
                 'url_key' => 'document-test',
                 'status' => DocumentModel::STATUS_ENABLE,
                 'sort_order' => 1,
                 'show_in_nav' => true,
-                'user_id' => $user_model->getId(),
-                'document_type_id' => $document_type_model->getId(),
-                'view_id' => $view_model->getId(),
-                'layout_id' => $layout_model->getId(),
+                'user_id' => $userModel->getId(),
+                'document_type_id' => $documentTypeModel->getId(),
+                'view_id' => $viewModel->getId(),
+                'layout_id' => $layoutModel->getId(),
                 'parent_id' => 0,
             )
         );
-        $document_model->save();
+        $documentModel->save();
 
-        $property_model = PropertyModel::fromArray(
+        $propertyModel = PropertyModel::fromArray(
             array(
                 'datatype_id' => $this->object->getId(),
-                'document_id' => $document_model->getId(),
-                'tab_id' => $tab_model->getId(),
+                'document_id' => $documentModel->getId(),
+                'tab_id' => $tabModel->getId(),
                 'name' => 'PropertyTest',
                 'identifier' => 'PropertyTest',
                 'description' => 'PropertyTest',
@@ -320,18 +320,18 @@ class ModelTest extends \PHPUnit_Framework_TestCase
                 'sort_order' => 1,
             )
         );
-        $property_model->save();
+        $propertyModel->save();
 
-        $this->assertFalse(Model::saveEditor($property_model));
-        $property_model->isRequired(false);
-        $this->assertTrue(Model::saveEditor($property_model));
+        $this->assertFalse(Model::saveEditor($propertyModel));
+        $propertyModel->isRequired(false);
+        $this->assertTrue(Model::saveEditor($propertyModel));
 
-        $property_model->delete();
-        $document_model->delete();
-        $tab_model->delete();
-        $document_type_model->delete();
-        $view_model->delete();
-        $layout_model->delete();
+        $propertyModel->delete();
+        $documentModel->delete();
+        $tabModel->delete();
+        $documentTypeModel->delete();
+        $viewModel->delete();
+        $layoutModel->delete();
     }
 
     /**

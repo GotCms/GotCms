@@ -184,9 +184,9 @@ abstract class Object
         // accept a/b/c as ['a']['b']['c']
         // Not  !== false no need '/a/b always return null
         if (strpos($key, '/')) {
-            $key_array = explode('/', $key);
-            $data      = $this->data;
-            foreach ($key_array as $i => $k) {
+            $keyArray = explode('/', $key);
+            $data     = $this->data;
+            foreach ($keyArray as $i => $k) {
                 if ($k === '') {
                     return $default;
                 }
@@ -261,16 +261,16 @@ abstract class Object
             return $this->data;
         }
 
-        $array_result = array();
+        $arrayResult = array();
         foreach ($array as $attribute) {
             if (isset($this->data[$attribute])) {
-                $array_result[$attribute] = $this->data[$attribute];
+                $arrayResult[$attribute] = $this->data[$attribute];
             } else {
-                $array_result[$attribute] = null;
+                $arrayResult[$attribute] = null;
             }
         }
 
-        return $array_result;
+        return $arrayResult;
     }
 
     /**
@@ -288,44 +288,44 @@ abstract class Object
     /**
      * Convert object attributes to XML
      *
-     * @param array   $array        Array of required attributes
-     * @param string  $root_name    Name of the root element
-     * @param boolean $add_open_tag Insert <?xml>
-     * @param boolean $add_cdata    Insert CDATA[]
+     * @param array   $array      Array of required attributes
+     * @param string  $rootName   Name of the root element
+     * @param boolean $addOpenTag Insert <?xml>
+     * @param boolean $addCdata   Insert CDATA[]
      *
      * @return string
      */
     protected function __toXml(
         array $array = array(),
-        $root_name = 'item',
-        $add_open_tag = false,
-        $add_cdata = true
+        $rootName = 'item',
+        $addOpenTag = false,
+        $addCdata = true
     ) {
         $xml = '';
-        if ($add_open_tag) {
+        if ($addOpenTag) {
             $xml .= '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
         }
 
-        if (!empty($root_name)) {
-            $xml .= '<' . $root_name . '>' . PHP_EOL;
+        if (!empty($rootName)) {
+            $xml .= '<' . $rootName . '>' . PHP_EOL;
         }
 
-        $xml_model = new SimpleXMLElement('<node></node>');
+        $xmlModel  = new SimpleXMLElement('<node></node>');
         $arraydata = $this->toArray($array);
 
-        foreach ($arraydata as $field_name => $field_value) {
-            if ($add_cdata === true) {
-                $field_value = '<![CDATA[' . $field_value . ']]>';
+        foreach ($arraydata as $fieldName => $fieldValue) {
+            if ($addCdata === true) {
+                $fieldValue = '<![CDATA[' . $fieldValue . ']]>';
             } else {
-                $field_value = htmlentities($field_value);
+                $fieldValue = htmlentities($fieldValue);
             }
 
-            $xml .= '<' . $field_name . '>' . $field_value . '</' . $field_name . '>' . PHP_EOL;
+            $xml .= '<' . $fieldName . '>' . $fieldValue . '</' . $fieldName . '>' . PHP_EOL;
         }
 
-        if (!empty($root_name)) {
+        if (!empty($rootName)) {
 
-            $xml .= '</' . $root_name . '>' . PHP_EOL;
+            $xml .= '</' . $rootName . '>' . PHP_EOL;
         }
 
         return $xml;
@@ -334,16 +334,16 @@ abstract class Object
     /**
      * Public wrapper for __toXml
      *
-     * @param array   $array        Data
-     * @param string  $root_name    Root name
-     * @param boolean $add_open_tag Insert <?xml>
-     * @param boolean $add_cdata    Insert CDATA[]
+     * @param array   $array      Data
+     * @param string  $rootName   Root name
+     * @param boolean $addOpenTag Insert <?xml>
+     * @param boolean $addCdata   Insert CDATA[]
      *
      * @return string
      */
-    public function toXml(array $array = array(), $root_name = 'item', $add_open_tag = false, $add_cdata = true)
+    public function toXml(array $array = array(), $rootName = 'item', $addOpenTag = false, $addCdata = true)
     {
-        return $this->__toXml($array, $root_name, $add_open_tag, $add_cdata);
+        return $this->__toXml($array, $rootName, $addOpenTag, $addCdata);
     }
 
     /**

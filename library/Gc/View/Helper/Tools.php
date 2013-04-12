@@ -43,15 +43,15 @@ class Tools extends AbstractHelper
     /**
      * Tools helper.
      *
-     * @param string $function_name Function name
-     * @param mixed  $value         Value
+     * @param string $functionName Function name
+     * @param mixed  $value        Value
      *
      * @return mixed
      */
-    public function __invoke($function_name, $value)
+    public function __invoke($functionName, $value)
     {
         $data = false;
-        switch($function_name) {
+        switch($functionName) {
             case 'unserialize':
                 $data = @unserialize($value);
                 break;

@@ -39,6 +39,8 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as ZendAbstractH
 class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
 {
     /**
+     * User model
+     *
      * @var Gc\User\Model
      */
     protected $user;

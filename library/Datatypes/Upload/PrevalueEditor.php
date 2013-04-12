@@ -46,14 +46,14 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function save()
     {
-        $post        = $this->getRequest()->getPost();
-        $mime_list   = $post->get('mime_list');
-        $is_multiple = $post->get('is_multiple');
+        $post       = $this->getRequest()->getPost();
+        $mimeList   = $post->get('mime_list');
+        $isMultiple = $post->get('is_multiple');
 
         $this->setConfig(
             array(
-                'mime_list' => empty($mime_list) ? array() : $mime_list,
-                'is_multiple' => empty($is_multiple) ? false : true
+                'mime_list'   => empty($mimeList) ? array() : $mimeList,
+                'is_multiple' => empty($isMultiple) ? false : true
             )
         );
     }
@@ -67,8 +67,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $config = $this->getConfig();
 
-        $is_multiple = new Element\Checkbox('is_multiple');
-        $is_multiple->setAttributes(
+        $isMultiple = new Element\Checkbox('is_multiple');
+        $isMultiple->setAttributes(
             array(
                 'label' => 'Is Multiple',
                 'value' => isset($config['is_multiple']) ? $config['is_multiple'] : '',
@@ -77,8 +77,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
             )
         );
 
-        $mime_list = new Element\MultiCheckbox('mime_list');
-        $array     = array(
+        $mimeList = new Element\MultiCheckbox('mime_list');
+        $array    = array(
             'image/gif',
             'image/jpeg',
             'image/png',
@@ -101,7 +101,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'audio/vnd.rn-realaudio',
             'audio/x-wav'
         );
-        $options   = array();
+        $options  = array();
         foreach ($array as $mime) {
             $options[] = array(
                 'value' => $mime,
@@ -113,8 +113,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
                     ) ? false : true,
             );
         }
-        $mime_list->setValueOptions($options);
+        $mimeList->setValueOptions($options);
 
-        return array($is_multiple, $mime_list);
+        return array($isMultiple, $mimeList);
     }
 }

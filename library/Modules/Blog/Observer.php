@@ -59,9 +59,9 @@ class Observer extends AbstractObserver
      */
     public function dashboard(Event $event)
     {
-        $comment_model         = new Comment();
-        $unactive_comment_list = $comment_model->getList(null, false);
-        $active_comment_list   = $comment_model->getList(null, true);
+        $commentModel        = new Comment();
+        $unactiveCommentList = $commentModel->getList(null, false);
+        $activeCommentList   = $commentModel->getList(null, true);
 
         $widgets = $event->getParam('widgets');
 
@@ -70,8 +70,8 @@ class Observer extends AbstractObserver
         $widgets['test']['content'] = $this->addPath(__DIR__ . '/views')->render(
             'dashboard.phtml',
             array(
-                'unactiveComments' => count($unactive_comment_list),
-                'activeComments'   => count($active_comment_list),
+                'unactiveComments' => count($unactiveCommentList),
+                'activeComments'   => count($activeCommentList),
             )
         );
 

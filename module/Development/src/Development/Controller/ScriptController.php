@@ -46,7 +46,7 @@ class ScriptController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $_aclPage
+     * @var array $aclPage
      */
     protected $aclPage = array('resource' => 'Development', 'permission' => 'script');
 
@@ -57,8 +57,8 @@ class ScriptController extends Action
      */
     public function indexAction()
     {
-        $script_collection = new Script\Collection();
-        return array('scripts' => $script_collection->getScripts());
+        $scriptCollection = new Script\Collection();
+        return array('scripts' => $scriptCollection->getScripts());
     }
 
     /**
@@ -68,29 +68,29 @@ class ScriptController extends Action
      */
     public function createAction()
     {
-        $script_form = new ScriptForm();
-        $script_form->setAttribute('action', $this->url()->fromRoute('scriptCreate'));
+        $scriptForm = new ScriptForm();
+        $scriptForm->setAttribute('action', $this->url()->fromRoute('scriptCreate'));
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
-            $script_form->setData($data);
-            if (!$script_form->isValid()) {
+            $scriptForm->setData($data);
+            if (!$scriptForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save script');
                 $this->useFlashMessenger();
             } else {
-                $script_model = new Script\Model();
-                $script_model->setName($script_form->getValue('name'));
-                $script_model->setIdentifier($script_form->getValue('identifier'));
-                $script_model->setDescription($script_form->getValue('description'));
-                $script_model->setContent($script_form->getValue('content'));
-                $script_model->save();
+                $scriptModel = new Script\Model();
+                $scriptModel->setName($scriptForm->getValue('name'));
+                $scriptModel->setIdentifier($scriptForm->getValue('identifier'));
+                $scriptModel->setDescription($scriptForm->getValue('description'));
+                $scriptModel->setContent($scriptForm->getValue('content'));
+                $scriptModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This script has been created');
-                return $this->redirect()->toRoute('scriptEdit', array('id' => $script_model->getId()));
+                return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptModel->getId()));
             }
         }
 
-        return array('form' => $script_form);
+        return array('form' => $scriptForm);
     }
 
     /**
@@ -100,35 +100,35 @@ class ScriptController extends Action
      */
     public function editAction()
     {
-        $script_id    = $this->getRouteMatch()->getParam('id', null);
-        $script_model = Script\Model::fromId($script_id);
-        if (empty($script_id) or empty($script_model)) {
+        $scriptId    = $this->getRouteMatch()->getParam('id', null);
+        $scriptModel = Script\Model::fromId($scriptId);
+        if (empty($scriptId) or empty($scriptModel)) {
             return $this->redirect()->toRoute('scriptList');
         }
 
-        $script_form = new ScriptForm();
-        $script_form->setAttribute('action', $this->url()->fromRoute('scriptEdit', array('id' => $script_id)));
-        $script_form->loadValues($script_model);
+        $scriptForm = new ScriptForm();
+        $scriptForm->setAttribute('action', $this->url()->fromRoute('scriptEdit', array('id' => $scriptId)));
+        $scriptForm->loadValues($scriptModel);
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
-            $script_form->setData($data);
-            if (!$script_form->isValid()) {
+            $scriptForm->setData($data);
+            if (!$scriptForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save script');
                 $this->useFlashMessenger();
             } else {
-                $script_model->setName($script_form->getValue('name'));
-                $script_model->setIdentifier($script_form->getValue('identifier'));
-                $script_model->setDescription($script_form->getValue('description'));
-                $script_model->setContent($script_form->getValue('content'));
-                $script_model->save();
+                $scriptModel->setName($scriptForm->getValue('name'));
+                $scriptModel->setIdentifier($scriptForm->getValue('identifier'));
+                $scriptModel->setDescription($scriptForm->getValue('description'));
+                $scriptModel->setContent($scriptForm->getValue('content'));
+                $scriptModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This script has been saved');
-                return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+                return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
             }
         }
 
-        return array('form' => $script_form, 'scriptId' => $script_id);
+        return array('form' => $scriptForm, 'scriptId' => $scriptId);
     }
 
     /**
@@ -153,27 +153,27 @@ class ScriptController extends Action
      */
     public function uploadAction()
     {
-        $script_id = $this->getRouteMatch()->getParam('id', null);
-        if (!empty($script_id)) {
-            $script = Script\Model::fromId($script_id);
-            if (empty($script)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
+        $scriptId = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($scriptId)) {
+            $script = Script\Model::fromId($scriptId);
+            if (empty($script)or empty($files['upload']['tmp_name']) or $files['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload script');
-                return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+                return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
             }
 
-            $script->setContent(file_get_contents($_FILES['upload']['tmp_name']));
+            $script->setContent(file_get_contents($files['upload']['tmp_name']));
             $script->save();
 
             $this->flashMessenger()->addSuccessMessage('Script updated');
-            return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+            return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
         } else {
-            if (empty($_FILES['upload'])) {
+            if (empty($files['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload scripts');
                 return $this->redirect()->toRoute('scriptList');
             }
 
-            foreach ($_FILES['upload']['name'] as $idx => $name) {
-                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+            foreach ($files['upload']['name'] as $idx => $name) {
+                if ($files['upload']['error'][$idx] != UPLOAD_ERR_OK) {
                     continue;
                 }
 
@@ -183,7 +183,7 @@ class ScriptController extends Action
                     continue;
                 }
 
-                $script->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
+                $script->setContent(file_get_contents($files['upload']['tmp_name'][$idx]));
                 $script->save();
             }
 
@@ -199,31 +199,31 @@ class ScriptController extends Action
      */
     public function downloadAction()
     {
-        $script_id = $this->getRouteMatch()->getParam('id', null);
-        if (!empty($script_id)) {
-            $script = Script\Model::fromId($script_id);
+        $scriptId = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($scriptId)) {
+            $script = Script\Model::fromId($scriptId);
             if (empty($script)) {
                 $this->flashMessenger()->addErrorMessage('This script can not be download');
-                return $this->redirect()->toRoute('scriptEdit', array('id' => $script_id));
+                return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
             }
 
             $content  = $script->getContent();
             $filename = $script->getIdentifier() . 'phtml';
         } else {
-            $scripts      = new Script\Collection();
-            $children     = $scripts->getScripts();
-            $zip          = new ZipArchive;
-            $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
-            $res          = $zip->open($tmp_filename, ZipArchive::CREATE);
+            $scripts     = new Script\Collection();
+            $children    = $scripts->getScripts();
+            $zip         = new ZipArchive;
+            $tmpFilename = tempnam(sys_get_temp_dir(), 'zip');
+            $res         = $zip->open($tmpFilename, ZipArchive::CREATE);
             if ($res === true) {
                 foreach ($children as $child) {
                     $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
                 }
 
                 $zip->close();
-                $content  = file_get_contents($tmp_filename);
+                $content  = file_get_contents($tmpFilename);
                 $filename = 'scripts.zip';
-                unlink($tmp_filename);
+                unlink($tmpFilename);
             }
         }
 

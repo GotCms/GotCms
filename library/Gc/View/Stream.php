@@ -222,7 +222,8 @@ class Stream
     /**
      * Register stream wrapper
      *
-     * @param string $name Name
+     * @param string  $name      Name
+     * @param boolean $overwrite Overwrite wrapper
      *
      * @return void
      */

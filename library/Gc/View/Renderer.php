@@ -59,11 +59,11 @@ class Renderer extends Object
     public function render($name, array $data = array())
     {
         $this->checkRenderer();
-        $view_model = new ViewModel();
-        $view_model->setTemplate($name);
-        $view_model->setVariables($data);
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate($name);
+        $viewModel->setVariables($data);
 
-        return $this->renderer->render($view_model);
+        return $this->renderer->render($viewModel);
     }
 
     /**

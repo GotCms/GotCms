@@ -59,13 +59,13 @@ class Collection extends AbstractTable
     /**
      * Set layout collection
      *
-     * @param boolean $force_reload Force reload
+     * @param boolean $forceReload Force reload
      *
      * @return \Gc\Layout\Collection
      */
-    public function getLayouts($force_reload = false)
+    public function getLayouts($forceReload = false)
     {
-        if ($force_reload or $this->getData('layouts') === null) {
+        if ($forceReload or $this->getData('layouts') === null) {
             $rows = $this->fetchAll(
                 $this->select(
                     function (Select $select) {

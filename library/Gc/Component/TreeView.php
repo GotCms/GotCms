@@ -51,12 +51,12 @@ class TreeView
     /**
      * Render treeview html
      *
-     * @param array   $treeview_data Contains data as array
-     * @param boolean $init          Initialize
+     * @param array   $treeviewData Contains data as array
+     * @param boolean $init         Initialize
      *
      * @return string
      */
-    public static function render(array $treeview_data = null, $init = true)
+    public static function render(array $treeviewData = null, $init = true)
     {
         $html = '';
         if ($init) {
@@ -65,36 +65,36 @@ class TreeView
 
         $html .= '<ul>';
 
-        foreach ($treeview_data as $iterator) {
+        foreach ($treeviewData as $iterator) {
             if (!$iterator instanceof IterableInterface) {
                 continue;
             }
 
-            $children     = $iterator->getChildren();
-            $has_children = !empty($children);
-            $html        .= '<li id="' . $iterator->getIterableId() . '"';
+            $children    = $iterator->getChildren();
+            $hasChildren = !empty($children);
+            $html       .= '<li id="' . $iterator->getIterableId() . '"';
 
-            if ($has_children) {
-                $rel             = ' class="folder"';
-                $ins             = '<ins class="jstree-icon">&nbsp;</ins>';
-                $render_children = self::render($children, false);
+            if ($hasChildren) {
+                $rel            = ' class="folder"';
+                $ins            = '<ins class="jstree-icon">&nbsp;</ins>';
+                $renderChildren = self::render($children, false);
             } else {
-                $render_children = '';
-                $rel             = ' class="default"';
-                $ins             = '';
+                $renderChildren = '';
+                $rel            = ' class="default"';
+                $ins            = '';
             }
 
 
-            $html        .= $rel . '>' . $ins;
-            $id           = $iterator->getId();
-            $is_published = null;
+            $html       .= $rel . '>' . $ins;
+            $id          = $iterator->getId();
+            $isPublished = null;
             if (method_exists($iterator, 'isPublished')) {
-                $is_published = $iterator->isPublished();
+                $isPublished = $iterator->isPublished();
             }
 
             $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '')
                 . 'href="' . $iterator->getEditUrl() . '"'
-                . ($is_published === false ? ' class="not-published"' : '') . '>';
+                . ($isPublished === false ? ' class="not-published"' : '') . '>';
 
             if ($iterator->getIcon() == 'folder') {
                 $html .= '<ins
@@ -107,7 +107,7 @@ class TreeView
             }
 
             $html .= $iterator->getName() . '</a>';
-            $html .= $render_children;
+            $html .= $renderChildren;
             $html .= '</li>';
         }
 

@@ -77,8 +77,8 @@ class Partial extends ZendPartial
             if (is_array($values)) {
                 $view->vars()->assign($values);
             } elseif (is_object($values)) {
-                if (null !== ($object_key = $this->getObjectKey())) {
-                    $view->vars()->offsetSet($object_key, $values);
+                if (null !== ($objectKey = $this->getObjectKey())) {
+                    $view->vars()->offsetSet($objectKey, $values);
                 } elseif (method_exists($values, 'toArray')) {
                     $view->vars()->assign($values->toArray());
                 } else {
@@ -101,14 +101,14 @@ class Partial extends ZendPartial
                 Stream::register();
             }
 
-            $view_model = ViewModel::fromIdentifier($name);
-            if (empty($view_model)) {
+            $viewModel = ViewModel::fromIdentifier($name);
+            if (empty($viewModel)) {
                 return false;
             }
 
             $name .= '-view.gc-stream';
 
-            file_put_contents('zend.view://' . $name, $view_model->getContent());
+            file_put_contents('zend.view://' . $name, $viewModel->getContent());
 
             return $view->render($name);
         }

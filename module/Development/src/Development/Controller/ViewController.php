@@ -46,7 +46,7 @@ class ViewController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $_aclPage
+     * @var array $aclPage
      */
     protected $aclPage = array('resource' => 'Development', 'permission' => 'view');
 
@@ -57,8 +57,8 @@ class ViewController extends Action
      */
     public function indexAction()
     {
-        $view_collection = new View\Collection();
-        return array('views' => $view_collection->getViews());
+        $viewCollection = new View\Collection();
+        return array('views' => $viewCollection->getViews());
     }
 
     /**
@@ -68,29 +68,29 @@ class ViewController extends Action
      */
     public function createAction()
     {
-        $view_form = new ViewForm();
-        $view_form->setAttribute('action', $this->url()->fromRoute('viewCreate'));
+        $viewForm = new ViewForm();
+        $viewForm->setAttribute('action', $this->url()->fromRoute('viewCreate'));
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
-            $view_form->setData($data);
-            if (!$view_form->isValid()) {
+            $viewForm->setData($data);
+            if (!$viewForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save view');
                 $this->useFlashMessenger();
             } else {
-                $view_model = new View\Model();
-                $view_model->setName($view_form->getValue('name'));
-                $view_model->setIdentifier($view_form->getValue('identifier'));
-                $view_model->setDescription($view_form->getValue('description'));
-                $view_model->setContent($view_form->getValue('content'));
-                $view_model->save();
+                $viewModel = new View\Model();
+                $viewModel->setName($viewForm->getValue('name'));
+                $viewModel->setIdentifier($viewForm->getValue('identifier'));
+                $viewModel->setDescription($viewForm->getValue('description'));
+                $viewModel->setContent($viewForm->getValue('content'));
+                $viewModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This view has been created');
-                return $this->redirect()->toRoute('viewEdit', array('id' => $view_model->getId()));
+                return $this->redirect()->toRoute('viewEdit', array('id' => $viewModel->getId()));
             }
         }
 
-        return array('form' => $view_form);
+        return array('form' => $viewForm);
     }
 
     /**
@@ -100,35 +100,35 @@ class ViewController extends Action
      */
     public function editAction()
     {
-        $view_id    = $this->getRouteMatch()->getParam('id', null);
-        $view_model = View\Model::fromId($view_id);
-        if (empty($view_id) or empty($view_model)) {
+        $viewId    = $this->getRouteMatch()->getParam('id', null);
+        $viewModel = View\Model::fromId($viewId);
+        if (empty($viewId) or empty($viewModel)) {
             return $this->redirect()->toRoute('viewList');
         }
 
-        $view_form = new ViewForm();
-        $view_form->setAttribute('action', $this->url()->fromRoute('viewEdit', array('id' => $view_id)));
-        $view_form->loadValues($view_model);
+        $viewForm = new ViewForm();
+        $viewForm->setAttribute('action', $this->url()->fromRoute('viewEdit', array('id' => $viewId)));
+        $viewForm->loadValues($viewModel);
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
-            $view_form->setData($data);
-            if (!$view_form->isValid()) {
+            $viewForm->setData($data);
+            if (!$viewForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save view');
                 $this->useFlashMessenger();
             } else {
-                $view_model->setName($view_form->getValue('name'));
-                $view_model->setIdentifier($view_form->getValue('identifier'));
-                $view_model->setDescription($view_form->getValue('description'));
-                $view_model->setContent($view_form->getValue('content'));
-                $view_model->save();
+                $viewModel->setName($viewForm->getValue('name'));
+                $viewModel->setIdentifier($viewForm->getValue('identifier'));
+                $viewModel->setDescription($viewForm->getValue('description'));
+                $viewModel->setContent($viewForm->getValue('content'));
+                $viewModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This view has been saved');
-                return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+                return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
             }
         }
 
-        return array('form' => $view_form, 'viewId' => $view_id);
+        return array('form' => $viewForm, 'viewId' => $viewId);
     }
 
     /**
@@ -153,26 +153,26 @@ class ViewController extends Action
      */
     public function uploadAction()
     {
-        $view_id = $this->getRouteMatch()->getParam('id', null);
-        if (!empty($view_id)) {
-            $view = View\Model::fromId($view_id);
-            if (empty($view)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
+        $viewId = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($viewId)) {
+            $view = View\Model::fromId($viewId);
+            if (empty($view)or empty($files['upload']['tmp_name']) or $files['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload view');
-                return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+                return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
             }
 
-            $view->setContent(file_get_contents($_FILES['upload']['tmp_name']));
+            $view->setContent(file_get_contents($files['upload']['tmp_name']));
             $view->save();
             $this->flashMessenger()->addSuccessMessage('View updated');
-            return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+            return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
         } else {
-            if (empty($_FILES['upload'])) {
+            if (empty($files['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload views');
                 return $this->redirect()->toRoute('viewList');
             }
 
-            foreach ($_FILES['upload']['name'] as $idx => $name) {
-                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+            foreach ($files['upload']['name'] as $idx => $name) {
+                if ($files['upload']['error'][$idx] != UPLOAD_ERR_OK) {
                     continue;
                 }
 
@@ -182,7 +182,7 @@ class ViewController extends Action
                     continue;
                 }
 
-                $view->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
+                $view->setContent(file_get_contents($files['upload']['tmp_name'][$idx]));
                 $view->save();
             }
 
@@ -198,31 +198,31 @@ class ViewController extends Action
      */
     public function downloadAction()
     {
-        $view_id = $this->getRouteMatch()->getParam('id', null);
-        if (!empty($view_id)) {
-            $view = View\Model::fromId($view_id);
+        $viewId = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($viewId)) {
+            $view = View\Model::fromId($viewId);
             if (empty($view)) {
                 $this->flashMessenger()->addErrorMessage('This view can not be download');
-                return $this->redirect()->toRoute('viewEdit', array('id' => $view_id));
+                return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
             }
 
             $content  = $view->getContent();
             $filename = $view->getIdentifier() . 'phtml';
         } else {
-            $views        = new View\Collection();
-            $children     = $views->getViews();
-            $zip          = new ZipArchive;
-            $tmp_filename = tempnam(sys_get_temp_dir(), 'zip');
-            $res          = $zip->open($tmp_filename, ZipArchive::CREATE);
+            $views       = new View\Collection();
+            $children    = $views->getViews();
+            $zip         = new ZipArchive;
+            $tmpFilename = tempnam(sys_get_temp_dir(), 'zip');
+            $res         = $zip->open($tmpFilename, ZipArchive::CREATE);
             if ($res === true) {
                 foreach ($children as $child) {
                     $zip->addFromString($child->getIdentifier() . '.phtml', $child->getContent());
                 }
 
                 $zip->close();
-                $content  = file_get_contents($tmp_filename);
+                $content  = file_get_contents($tmpFilename);
                 $filename = 'views.zip';
-                unlink($tmp_filename);
+                unlink($tmpFilename);
             }
         }
 

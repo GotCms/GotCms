@@ -250,9 +250,9 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDataWithIndexAndObjectValue()
     {
-        $new_object = $this->getMockForAbstractClass('Gc\Core\Object');
-        $new_object->setData('b', 'c');
-        $this->object->setData('a', $new_object);
+        $newObject = $this->getMockForAbstractClass('Gc\Core\Object');
+        $newObject->setData('b', 'c');
+        $this->object->setData('a', $newObject);
         $this->assertEquals('c', $this->object->getData('a', 'b'));
     }
 
@@ -265,9 +265,9 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDataWithIndexAndDifferentObjectValue()
     {
-        $new_object    = new stdClass();
-        $new_object->b = 'c';
-        $this->object->setData('a', $new_object);
+        $newObject    = new stdClass();
+        $newObject->b = 'c';
+        $this->object->setData('a', $newObject);
         $this->assertNull($this->object->getData('a', 'b'));
     }
 

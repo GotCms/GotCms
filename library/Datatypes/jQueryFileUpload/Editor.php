@@ -49,33 +49,33 @@ class Editor extends AbstractEditor
      */
     public function save()
     {
-        $file_class = new File();
-        $file_class->load($this->getProperty(), $this->getDatatype()->getDocument());
+        $fileClass = new File();
+        $fileClass->load($this->getProperty(), $this->getDatatype()->getDocument());
 
-        $post         = $this->getRequest()->getPost();
-        $values       = $post->get($this->getName(), array());
-        $parameters   = $this->getConfig();
-        $array_values = array();
+        $post        = $this->getRequest()->getPost();
+        $values      = $post->get($this->getName(), array());
+        $parameters  = $this->getConfig();
+        $arrayValues = array();
         if (!empty($values) and is_array($values)) {
             foreach ($values as $idx => $value) {
                 if (empty($value['name'])) {
                     continue;
                 }
 
-                $file = $file_class->getPath() . '/' . $value['name'];
+                $file = $fileClass->getPath() . '/' . $value['name'];
                 if (file_exists($file)) {
                     $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
                     $finfo = finfo_open($const); // return mimetype extension
                     if (!in_array(finfo_file($finfo, $file), $parameters['mime_list'])) {
                         unlink($file);
                     } else {
-                        $file_info      = @getimagesize($file);
-                        $array_values[] = array(
+                        $fileInfo      = @getimagesize($file);
+                        $arrayValues[] = array(
                             'value' => $value['name'],
-                            'width' => empty($file_info[0]) ? 0 : $file_info[0],
-                            'height' => empty($file_info[1]) ? 0 : $file_info[1],
-                            'html' => empty($file_info[2]) ? '' : $file_info[2],
-                            'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
+                            'width' => empty($fileInfo[0]) ? 0 : $fileInfo[0],
+                            'height' => empty($fileInfo[1]) ? 0 : $fileInfo[1],
+                            'html' => empty($fileInfo[2]) ? '' : $fileInfo[2],
+                            'mime' => empty($fileInfo['mime']) ? '' : $fileInfo['mime'],
                         );
                     }
 
@@ -83,10 +83,10 @@ class Editor extends AbstractEditor
                 }
             }
 
-            $return_values = serialize($array_values);
+            $returnValues = serialize($arrayValues);
         }
 
-        $this->setValue(empty($return_values) ? null : $return_values);
+        $this->setValue(empty($returnValues) ? null : $returnValues);
     }
 
     /**
@@ -100,28 +100,28 @@ class Editor extends AbstractEditor
         $options    = empty($parameters['options']) ? array() : $parameters['options'];
 
         $this->initScript();
-        $file_list = array();
-        $files     = unserialize($this->getValue());
+        $fileList = array();
+        $files    = unserialize($this->getValue());
         if (!empty($files)) {
-            $file_class = new File();
-            $file_class->load($this->getProperty(), $this->getDatatype()->getDocument());
-            foreach ($files as $file_data) {
-                $file_object                = new StdClass();
-                $file_object->name          = $file_data['value'];
-                $file_object->filename      = $file_data['value'];
-                $file_object->thumbnail_url = $file_data['value'];
+            $fileClass = new File();
+            $fileClass->load($this->getProperty(), $this->getDatatype()->getDocument());
+            foreach ($files as $fileData) {
+                $fileObject                = new StdClass();
+                $fileObject->name          = $fileData['value'];
+                $fileObject->filename      = $fileData['value'];
+                $fileObject->thumbnail_url = $fileData['value'];
 
-                $router                   = Registry::get('Application')->getMvcEvent()->getRouter();
-                $file_object->delete_url  = $router->assemble(
+                $router                  = Registry::get('Application')->getMvcEvent()->getRouter();
+                $fileObject->delete_url  = $router->assemble(
                     array(
                         'document_id' => $this->getDatatype()->getDocument()->getId(),
                         'property_id' => $this->getProperty()->getId(),
-                        'file' => base64_encode($file_data['value'])
+                        'file' => base64_encode($fileData['value'])
                     ),
                     array('name' => 'mediaRemove')
                 );
-                $file_object->delete_type = 'DELETE';
-                $file_list[]              = $file_object;
+                $fileObject->delete_type = 'DELETE';
+                $fileList[]              = $fileObject;
             }
         }
 
@@ -131,7 +131,7 @@ class Editor extends AbstractEditor
                 'property' => $this->getProperty(),
                 'uploadUrl' => $this->getUploadUrl(),
                 'name' => $this->getName(),
-                'files' => json_encode($file_list),
+                'files' => json_encode($fileList),
                 'options' => $options
             )
         );

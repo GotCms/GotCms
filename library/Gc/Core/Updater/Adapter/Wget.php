@@ -73,10 +73,10 @@ class Wget extends AbstractAdapter
 
         $zip = new ZipArchive;
         if ($zip->open($filename)) {
-            $directory_name = $zip->getNameIndex(0);
+            $directoryName = $zip->getNameIndex(0);
             $zip->extractTo($this->getTmpPath());
             $zip->close();
-            rename($this->getTmpPath() . '/' . $directory_name, $this->getTmpPath() . '/v' . $this->getLatestVersion());
+            rename($this->getTmpPath() . '/' . $directoryName, $this->getTmpPath() . '/v' . $this->getLatestVersion());
 
             unlink($filename);
 
@@ -93,10 +93,10 @@ class Wget extends AbstractAdapter
      */
     public function upgrade()
     {
-        $backup_filename = $this->getTmpPath() . '/backup.zip';
+        $backupFilename = $this->getTmpPath() . '/backup.zip';
         //Create backup
-        if (file_exists($backup_filename)) {
-            unlink($backup_filename);
+        if (file_exists($backupFilename)) {
+            unlink($backupFilename);
         }
 
         if (File::isWritable(
@@ -105,7 +105,7 @@ class Wget extends AbstractAdapter
         )
         ) {
             $zip = new ZipArchive();
-            if ($zip->open($backup_filename, ZipArchive::CREATE)) {
+            if ($zip->open($backupFilename, ZipArchive::CREATE)) {
                 $this->addDirectoryToZip(
                     $zip,
                     GC_APPLICATION_PATH,
@@ -152,27 +152,27 @@ class Wget extends AbstractAdapter
     /**
      * Add directory and children to zip
      *
-     * @param ZipArchive $zip               Zip
-     * @param string     $directory         Directory
-     * @param array      $exclude_directory Exclude directory
+     * @param ZipArchive $zip              Zip
+     * @param string     $directory        Directory
+     * @param array      $excludeDirectory Exclude directory
      *
      * @return ZipArchive
      */
-    protected function addDirectoryToZip(ZipArchive $zip, $directory, $exclude_directory = array())
+    protected function addDirectoryToZip(ZipArchive $zip, $directory, $excludeDirectory = array())
     {
-        $new_folder = str_replace(GC_APPLICATION_PATH, '', $directory);
-        $zip->addEmptyDir($new_folder);
+        $newFolder = str_replace(GC_APPLICATION_PATH, '', $directory);
+        $zip->addEmptyDir($newFolder);
         $files = glob($directory . '/*');
         foreach ($files as $file) {
-            if (in_array($file, $exclude_directory)) {
+            if (in_array($file, $excludeDirectory)) {
                 continue;
             }
 
             if (is_dir($file)) {
-                $zip = $this->addDirectoryToZip($zip, $file, $exclude_directory);
+                $zip = $this->addDirectoryToZip($zip, $file, $excludeDirectory);
             } else {
-                $new_file = str_replace(GC_APPLICATION_PATH, '', $file);
-                $zip->addFile($file, $new_file);
+                $newFile = str_replace(GC_APPLICATION_PATH, '', $file);
+                $zip->addFile($file, $newFile);
             }
         }
 

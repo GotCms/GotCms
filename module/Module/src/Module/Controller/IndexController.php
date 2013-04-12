@@ -81,16 +81,16 @@ class IndexController extends Action
                 $this->flashMessenger()->addErrorMessage('Invalid module');
                 $this->useFlashMessenger();
             } else {
-                $module_name = $form->getInputFilter()->get('module')->getValue();
-                $object      = $this->loadBootstrap($module_name);
+                $moduleName = $form->getInputFilter()->get('module')->getValue();
+                $object     = $this->loadBootstrap($moduleName);
 
                 if (!$object->install()) {
                     $this->flashMessenger()->addErrorMessage('Can not install this module');
                     return $this->redirect()->toRoute('module');
                 } else {
-                    $module_model = new ModuleModel();
-                    $module_model->setName($module_name);
-                    $module_model->save();
+                    $moduleModel = new ModuleModel();
+                    $moduleModel->setName($moduleName);
+                    $moduleModel->save();
 
                     $select = new Sql\Select();
                     $select->from('user_acl_resource')
@@ -101,26 +101,26 @@ class IndexController extends Action
                     $insert->into('user_acl_permission')
                         ->values(
                             array(
-                                'permission' => $module_name,
-                                'user_acl_resource_id' => $module_model->fetchOne($select),
+                                'permission' => $moduleName,
+                                'user_acl_resource_id' => $moduleModel->fetchOne($select),
                             )
                         );
 
-                    $module_model->execute($insert);
+                    $moduleModel->execute($insert);
 
                     $insert = new Sql\Insert();
                     $insert->into('user_acl')
                         ->values(
                             array(
-                                'user_acl_permission_id' => $module_model->getLastInsertId('user_acl_permission'),
+                                'user_acl_permission_id' => $moduleModel->getLastInsertId('user_acl_permission'),
                                 'user_acl_role_id' => 1, //Administrator role
                             )
                         );
 
-                    $module_model->execute($insert);
+                    $moduleModel->execute($insert);
 
                     $this->flashMessenger()->addSuccessMessage('Module installed');
-                    return $this->redirect()->toRoute('moduleEdit', array('m' => $module_model->getId()));
+                    return $this->redirect()->toRoute('moduleEdit', array('m' => $moduleModel->getId()));
                 }
             }
 
@@ -136,30 +136,30 @@ class IndexController extends Action
      */
     public function uninstallAction()
     {
-        $module_id    = $this->getRouteMatch()->getParam('id');
-        $module_model = ModuleModel::fromId($module_id);
-        if (!empty($module_model)) {
-            $object = $this->loadBootstrap($module_model->getName());
+        $moduleId    = $this->getRouteMatch()->getParam('id');
+        $moduleModel = ModuleModel::fromId($moduleId);
+        if (!empty($moduleModel)) {
+            $object = $this->loadBootstrap($moduleModel->getName());
 
             if ($object->uninstall()) {
                 $select = new Sql\Select();
                 $select->from('user_acl_permission')
                     ->columns(array('id'))
-                    ->where->equalTo('permission', $module_model->getName());
+                    ->where->equalTo('permission', $moduleModel->getName());
 
-                $user_acl_permission_id = $module_model->fetchOne($select);
+                $userAclPermissionId = $moduleModel->fetchOne($select);
 
                 $delete = new Sql\Delete();
                 $delete->from('user_acl');
-                $delete->where->equalTo('user_acl_permission_id', $user_acl_permission_id);
-                $module_model->execute($delete);
+                $delete->where->equalTo('user_acl_permission_id', $userAclPermissionId);
+                $moduleModel->execute($delete);
 
                 $delete = new Sql\Delete();
                 $delete->from('user_acl_permission');
-                $delete->where->equalTo('id', $user_acl_permission_id);
-                $module_model->execute($delete);
+                $delete->where->equalTo('id', $userAclPermissionId);
+                $moduleModel->execute($delete);
 
-                $module_model->delete();
+                $moduleModel->delete();
 
                 return $this->returnJson(array('success' => true, 'message' => 'Module uninstalled'));
             }
@@ -175,39 +175,39 @@ class IndexController extends Action
      */
     public function editAction()
     {
-        $module_id       = $this->getRouteMatch()->getParam('m');
-        $controller_name = $this->getRouteMatch()->getParam('mc', 'index');
-        $action_name     = $this->getRouteMatch()->getParam('ma', 'index');
-        $module_model    = ModuleModel::fromId($module_id);
+        $moduleId       = $this->getRouteMatch()->getParam('m');
+        $controllerName = $this->getRouteMatch()->getParam('mc', 'index');
+        $actionName     = $this->getRouteMatch()->getParam('ma', 'index');
+        $moduleModel    = ModuleModel::fromId($moduleId);
 
         /**
          * Bootstrap event
          */
-        $object = $this->loadBootstrap($module_model->getName());
+        $object = $this->loadBootstrap($moduleModel->getName());
         $object->init($this->getEvent());
 
         /**
          * Load controller and execute action
          */
-        $controller_class = sprintf(
+        $controllerClass = sprintf(
             '\\Modules\\%s\\Controller\\%s',
-            $module_model->getName(),
-            ucfirst($controller_name) . 'Controller'
+            $moduleModel->getName(),
+            ucfirst($controllerName) . 'Controller'
         );
 
-        if (!class_exists($controller_class)) {
+        if (!class_exists($controllerClass)) {
             return false;
         }
 
-        $action = $this->getMethodFromAction($action_name);
+        $action = $this->getMethodFromAction($actionName);
 
-        $controller_object = new $controller_class($this->getRequest(), $this->getResponse());
-        $controller_object->setEvent($this->getEvent());
-        if (!method_exists($controller_object, $action)) {
+        $controllerObject = new $controllerClass($this->getRequest(), $this->getResponse());
+        $controllerObject->setEvent($this->getEvent());
+        if (!method_exists($controllerObject, $action)) {
             return false;
         }
 
-        $result = $controller_object->$action();
+        $result = $controllerObject->$action();
 
         if ($result instanceof Response) {
             return $result;
@@ -221,11 +221,11 @@ class IndexController extends Action
         }
 
         //Change defaut template path
-        $result->setTemplate(sprintf('%s/views/%s/%s', $module_model->getName(), $controller_name, $action_name));
+        $result->setTemplate(sprintf('%s/views/%s/%s', $moduleModel->getName(), $controllerName, $actionName));
 
-        $filename = sprintf(GC_APPLICATION_PATH . '/library/Modules/%s/views/menu.phtml', $module_model->getName());
+        $filename = sprintf(GC_APPLICATION_PATH . '/library/Modules/%s/views/menu.phtml', $moduleModel->getName());
         if (file_exists($filename)) {
-            $this->layout()->setVariable('moduleMenu', sprintf('%s/views/menu.phtml', $module_model->getName()));
+            $this->layout()->setVariable('moduleMenu', sprintf('%s/views/menu.phtml', $moduleModel->getName()));
         }
 
         return $result;
@@ -234,13 +234,13 @@ class IndexController extends Action
     /**
      * Load bootstrap from module name
      *
-     * @param string $module_name Module name
+     * @param string $moduleName Module name
      *
      * @return \Gc\Module\AbstractModule
      */
-    protected function loadBootstrap($module_name)
+    protected function loadBootstrap($moduleName)
     {
-        $class_name = sprintf('\\Modules\\%s\\Bootstrap', $module_name, $module_name);
-        return new $class_name();
+        $className = sprintf('\\Modules\\%s\\Bootstrap', $moduleName, $moduleName);
+        return new $className();
     }
 }

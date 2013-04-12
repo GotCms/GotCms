@@ -45,7 +45,7 @@ class DatatypeController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $_aclPage
+     * @var array $aclPage
      */
     protected $aclPage = array('resource' => 'Development', 'permission' => 'datatype');
 
@@ -68,17 +68,17 @@ class DatatypeController extends Action
      */
     public function createAction()
     {
-        $datatype      = new Datatype\Model();
-        $datatype_form = new DatatypeForm();
-        $datatype_form->setAttribute('action', $this->url()->fromRoute('datatypeCreate'));
+        $datatype     = new Datatype\Model();
+        $datatypeForm = new DatatypeForm();
+        $datatypeForm->setAttribute('action', $this->url()->fromRoute('datatypeCreate'));
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
-            $datatype_form->setData($post);
-            if (!$datatype_form->isValid()) {
+            $datatypeForm->setData($post);
+            if (!$datatypeForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save datatype');
                 $this->useFlashMessenger();
             } else {
-                $datatype->addData($datatype_form->getInputFilter()->getValues());
+                $datatype->addData($datatypeForm->getInputFilter()->getValues());
                 try {
                     $id = $datatype->save();
                     $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
@@ -89,7 +89,7 @@ class DatatypeController extends Action
             }
         }
 
-        return array('form' => $datatype_form);
+        return array('form' => $datatypeForm);
     }
 
     /**
@@ -99,15 +99,15 @@ class DatatypeController extends Action
      */
     public function editAction()
     {
-        $datatype_model = Datatype\Model::fromId($this->getRouteMatch()->getParam('id'));
-        if (empty($datatype_model)) {
+        $datatypeModel = Datatype\Model::fromId($this->getRouteMatch()->getParam('id'));
+        if (empty($datatypeModel)) {
             return $this->redirect()->toRoute('datatypeList');
         }
 
         $datatype = Datatype\Model::loadDatatype($this->getRouteMatch()->getParam('id'));
 
-        $datatype_form = new DatatypeForm();
-        $datatype_form->setAttribute(
+        $datatypeForm = new DatatypeForm();
+        $datatypeForm->setAttribute(
             'action',
             $this->url()->fromRoute(
                 'datatypeEdit',
@@ -115,38 +115,38 @@ class DatatypeController extends Action
             )
         );
 
-        DatatypeForm::addContent($datatype_form, Datatype\Model::loadPrevalueEditor($datatype));
-        $datatype_form->loadValues($datatype_model);
+        DatatypeForm::addContent($datatypeForm, Datatype\Model::loadPrevalueEditor($datatype));
+        $datatypeForm->loadValues($datatypeModel);
 
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
-            $datatype_form->setData($post);
-            if (!$datatype_form->isValid()) {
+            $datatypeForm->setData($post);
+            if (!$datatypeForm->isValid()) {
                 $this->flashMessenger()->addErrorMessage('Can not save datatype');
                 $this->useFlashMessenger();
             } else {
-                if ($datatype_model->getModel() != $datatype_form->getValue('model')) {
-                    $datatype_model->setPrevalueValue(array());
+                if ($datatypeModel->getModel() != $datatypeForm->getValue('model')) {
+                    $datatypeModel->setPrevalueValue(array());
                 } else {
-                    $datatype_model->setPrevalueValue(Datatype\Model::savePrevalueEditor($datatype));
+                    $datatypeModel->setPrevalueValue(Datatype\Model::savePrevalueEditor($datatype));
                 }
 
                 try {
-                    $datatype_model->addData($datatype_form->getInputFilter()->getValues());
-                    if ($datatype_model->save()) {
+                    $datatypeModel->addData($datatypeForm->getInputFilter()->getValues());
+                    if ($datatypeModel->save()) {
                         $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
-                        return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
+                        return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatypeModel->getId()));
                     }
                 } catch (Exception $e) {
                     throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
 
                 $this->flashMessenger()->addErrorMessage('Error during editing.');
-                return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatype_model->getId()));
+                return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatypeModel->getId()));
             }
         }
 
-        return array('form' => $datatype_form, 'infos' => $datatype->getInfos());
+        return array('form' => $datatypeForm, 'infos' => $datatype->getInfos());
     }
 
     /**

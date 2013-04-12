@@ -83,7 +83,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
-        $user_model = UserModel::fromArray(
+        $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
@@ -92,10 +92,10 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
                 'user_acl_role_id' => 1,
             )
         );
-        $user_model->setPassword('test-user-model-password');
-        $user_model->save();
+        $userModel->setPassword('test-user-model-password');
+        $userModel->save();
 
-        $view_model = ViewModel::fromArray(
+        $viewModel = ViewModel::fromArray(
             array(
                 'name' => 'View',
                 'identifier' => 'ViewIdentifier',
@@ -104,25 +104,25 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $view_model->save();
+        $viewModel->save();
 
-        $document_type_model = DocumentTypeModel::fromArray(
+        $documentTypeModel = DocumentTypeModel::fromArray(
             array(
                 'name' => 'DocumentType',
                 'description' => 'description',
                 'icon_id' => 1,
-                'default_view_id' => $view_model->getId(),
-                'user_id' => $user_model->getId(),
+                'default_view_id' => $viewModel->getId(),
+                'user_id' => $userModel->getId(),
             )
         );
-        $document_type_model->save();
+        $documentTypeModel->save();
 
         $form = new DocumentType;
         $this->assertNull($form->init());
 
-        $view_model->delete();
-        $document_type_model->delete();
-        $user_model->delete();
+        $viewModel->delete();
+        $documentTypeModel->delete();
+        $userModel->delete();
     }
 
     /**
@@ -159,7 +159,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddPropertyWithPropertyModel()
     {
-        $property_model = PropertyModel::fromArray(
+        $propertyModel = PropertyModel::fromArray(
             array(
                 'name' => 'Name',
                 'description' => 'Description',
@@ -170,7 +170,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
                 'id' => 1
             )
         );
-        $this->assertInstanceOf('Development\Form\DocumentType', $this->object->addProperty($property_model));
+        $this->assertInstanceOf('Development\Form\DocumentType', $this->object->addProperty($propertyModel));
     }
 
     /**
@@ -217,7 +217,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddTabWithTabModel()
     {
-        $tab_model = TabModel::fromArray(
+        $tabModel = TabModel::fromArray(
             array(
                 'id' => 1,
                 'name' => 'Name',
@@ -226,7 +226,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
                 'document_type_id' => 1,
             )
         );
-        $this->assertInstanceOf('Development\Form\DocumentType', $this->object->addTab($tab_model));
+        $this->assertInstanceOf('Development\Form\DocumentType', $this->object->addTab($tabModel));
     }
 
     /**
@@ -250,7 +250,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValues()
     {
-        $document_type_model = DocumentTypeModel::fromarray(
+        $documentTypeModel = DocumentTypeModel::fromarray(
             array(
                 'name' => 'Name',
                 'description' => 'Description',
@@ -258,7 +258,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->object->setValues($document_type_model);
+        $this->object->setValues($documentTypeModel);
     }
 
     /**

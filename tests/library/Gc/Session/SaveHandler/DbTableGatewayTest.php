@@ -52,7 +52,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    protected $testArray;
+    protected $testarray;
 
     /**
      * @var TableGateway
@@ -69,7 +69,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $tablegateway_config = new DbTableGatewayOptions(
+        $tablegatewayConfig = new DbTableGatewayOptions(
             array(
                 'idColumn'   => 'id',
                 'nameColumn' => 'name',
@@ -83,7 +83,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
             'core_session',
             \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter()
         );
-        $this->object  = new DbTableGateway($this->adapter, $tablegateway_config);
+        $this->object  = new DbTableGateway($this->adapter, $tablegatewayConfig);
 
         $this->testArray = array('foo' => 'bar', 'bar' => array('foo' => 'bar'));
     }

@@ -58,8 +58,8 @@ class CommentForm extends AbstractPlugin
             $post = $request->getPost();
             $this->getForm()->setData($post);
             if ($this->getForm()->isValid()) {
-                $comment_table = new Blog\Model\Comment();
-                if ($comment_table->add(
+                $commentTable = new Blog\Model\Comment();
+                if ($commentTable->add(
                     $this->getForm()->getInputFilter()->getValues(),
                     $this->layout()->currentDocument->getId()
                 )

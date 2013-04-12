@@ -50,15 +50,15 @@ class Model extends AbstractTable
     /**
      * Initiliaze Tab
      *
-     * @param integer $tab_id           Optional tab id
-     * @param integer $document_type_id Optional document type id
+     * @param integer $tabId          Optional tab id
+     * @param integer $documentTypeId Optional document type id
      *
      * @return \Gc\Tab\Model
      */
-    public function load($tab_id = null, $document_type_id = null)
+    public function load($tabId = null, $documentTypeId = null)
     {
-        $this->setId((int) $tab_id);
-        $this->setDocumentTypeId((int) $document_type_id);
+        $this->setId((int) $tabId);
+        $this->setDocumentTypeId((int) $documentTypeId);
 
         $select = $this->select(
             function (Select $select) {
@@ -93,7 +93,7 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
-        $array_save = array(
+        $arraySave = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'sort_order' => $this->getSortOrder(),
@@ -103,10 +103,10 @@ class Model extends AbstractTable
         try {
             $id = $this->getId();
             if (empty($id)) {
-                $this->insert($array_save);
+                $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
-                $this->update($array_save, array('id' => (int) $this->getId()));
+                $this->update($arraySave, array('id' => (int) $this->getId()));
             }
 
             $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
@@ -129,13 +129,13 @@ class Model extends AbstractTable
     public function delete()
     {
         $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
-        $tab_id = $this->getId();
-        if (!empty($tab_id)) {
+        $tabId = $this->getId();
+        if (!empty($tabId)) {
             try {
-                $properties_collection = new Property\Collection();
-                $properties_collection->load(null, $tab_id);
-                $properties_collection->delete();
-                parent::delete(array('id' => $tab_id));
+                $propertiesCollection = new Property\Collection();
+                $propertiesCollection->load(null, $tabId);
+                $propertiesCollection->delete();
+                parent::delete(array('id' => $tabId));
             } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
@@ -160,28 +160,28 @@ class Model extends AbstractTable
      */
     public static function fromArray(array $array)
     {
-        $tab_table = new Model();
-        $tab_table->setData($array);
-        $tab_table->setOrigData();
+        $tabTable = new Model();
+        $tabTable->setData($array);
+        $tabTable->setOrigData();
 
-        return $tab_table;
+        return $tabTable;
     }
 
     /**
      * Initialize from id
      *
-     * @param integer $tab_id Tab id
+     * @param integer $tabId Tab id
      *
      * @return \Gc\Tab\Model
      */
-    public static function fromId($tab_id)
+    public static function fromId($tabId)
     {
-        $tab_table = new Model();
-        $row       = $tab_table->fetchRow($tab_table->select(array('id' => (int) $tab_id)));
+        $tabTable = new Model();
+        $row      = $tabTable->fetchRow($tabTable->select(array('id' => (int) $tabId)));
         if (!empty($row)) {
-            $tab_table->setData((array) $row);
-            $tab_table->setOrigData();
-            return $tab_table;
+            $tabTable->setData((array) $row);
+            $tabTable->setOrigData();
+            return $tabTable;
         } else {
             return false;
         }
@@ -209,10 +209,10 @@ class Model extends AbstractTable
     public function getProperties()
     {
         if ($this->getData('properties') === null) {
-            $properties_collection = new Property\Collection();
-            $properties_collection->load($this->getDocumentTypeId(), $this->getId());
+            $propertiesCollection = new Property\Collection();
+            $propertiesCollection->load($this->getDocumentTypeId(), $this->getId());
 
-            $this->setData('properties', $properties_collection->getProperties());
+            $this->setData('properties', $propertiesCollection->getProperties());
         }
 
         return $this->getData('properties');

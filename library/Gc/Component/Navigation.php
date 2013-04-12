@@ -99,12 +99,12 @@ class Navigation
     /**
      * Render navigation
      *
-     * @param array  $documents  Let of \Gc\Document\Model
-     * @param string $parent_url Parent url
+     * @param array  $documents Let of \Gc\Document\Model
+     * @param string $parentUrl Parent url
      *
      * @return array
      */
-    public function render(array $documents = null, $parent_url = null)
+    public function render(array $documents = null, $parentUrl = null)
     {
         $navigation = array();
         if ($documents === null && !empty($this->documents)) {
@@ -117,7 +117,7 @@ class Navigation
                 $data            = array();
                 $data['label']   = $document->getName();
                 $data['uri']     = $this->getBasePath()
-                    . ($parent_url !== null ? $parent_url . '/' : '')
+                    . ($parentUrl !== null ? $parentUrl . '/' : '')
                     . $document->getUrlKey();
                 $data['visible'] = $document->showInNav();
                 $data['active']  = $data['uri'] == $this->requestUri;
@@ -125,7 +125,7 @@ class Navigation
                 if (!empty($children) && is_array($children)) {
                     $data['pages'] = $this->render(
                         $children,
-                        (empty($parent_url) ? null : $parent_url . '/') . $document->getUrlKey()
+                        (empty($parentUrl) ? null : $parentUrl . '/') . $document->getUrlKey()
                     );
                 }
 

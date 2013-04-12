@@ -77,14 +77,14 @@ final class Version
             $content             = @file_get_contents($url);
 
             if (!empty($content)) {
-                $api_response = Json::decode($content, Json::TYPE_ARRAY);
+                $apiResponse = Json::decode($content, Json::TYPE_ARRAY);
 
                 // Simplify the API response into a simple array of version numbers
                 $tags = array_map(
                     function ($tag) {
                         return substr($tag['ref'], 11); // Reliable because we're filtering on 'refs/tags/v'
                     },
-                    $api_response
+                    $apiResponse
                 );
 
                 // Fetch the latest version number from the array

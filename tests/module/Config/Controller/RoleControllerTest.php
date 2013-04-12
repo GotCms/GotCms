@@ -144,15 +144,15 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
      */
     public function testDeleteAction()
     {
-        $role_model = RoleModel::fromArray(
+        $roleModel = RoleModel::fromArray(
             array(
                 'name'        => 'RoleTest',
                 'description' => 'Description',
             )
         );
-        $role_model->save();
+        $roleModel->save();
 
-        $this->dispatch('/admin/config/user/role/delete/' . $role_model->getId());
+        $this->dispatch('/admin/config/user/role/delete/' . $roleModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Config');
@@ -188,15 +188,15 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditAction()
     {
-        $role_model = RoleModel::fromArray(
+        $roleModel = RoleModel::fromArray(
             array(
                 'name'        => 'RoleTest',
                 'description' => 'Description',
             )
         );
-        $role_model->save();
+        $roleModel->save();
 
-        $this->dispatch('/admin/config/user/role/edit/' . $role_model->getId());
+        $this->dispatch('/admin/config/user/role/edit/' . $roleModel->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Config');
@@ -204,7 +204,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('RoleController');
         $this->assertMatchedRouteName('userRoleEdit');
 
-        $role_model->delete();
+        $roleModel->delete();
     }
 
     /**
@@ -216,16 +216,16 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithPostData()
     {
-        $role_model = RoleModel::fromArray(
+        $roleModel = RoleModel::fromArray(
             array(
                 'name'        => 'RoleTest',
                 'description' => 'Description',
             )
         );
-        $role_model->save();
+        $roleModel->save();
 
         $this->dispatch(
-            '/admin/config/user/role/edit/' . $role_model->getId(),
+            '/admin/config/user/role/edit/' . $roleModel->getId(),
             'POST',
             array(
                 'name'        => 'RoleTest',
@@ -239,7 +239,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('RoleController');
         $this->assertMatchedRouteName('userRoleEdit');
 
-        $role_model->delete();
+        $roleModel->delete();
     }
 
     /**
@@ -251,16 +251,16 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithWrongPostData()
     {
-        $role_model = RoleModel::fromArray(
+        $roleModel = RoleModel::fromArray(
             array(
                 'name'        => 'RoleTest',
                 'description' => 'Description',
             )
         );
-        $role_model->save();
+        $roleModel->save();
 
         $this->dispatch(
-            '/admin/config/user/role/edit/' . $role_model->getId(),
+            '/admin/config/user/role/edit/' . $roleModel->getId(),
             'POST',
             array(
             )
@@ -272,7 +272,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('RoleController');
         $this->assertMatchedRouteName('userRoleEdit');
 
-        $role_model->delete();
+        $roleModel->delete();
     }
 
     /**

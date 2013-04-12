@@ -53,7 +53,7 @@ class MediaController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $_aclPage
+     * @var array $aclPage
      */
     protected $aclPage = array('resource' => 'Content', 'permission' => 'media');
 
@@ -79,12 +79,12 @@ class MediaController extends Action
             'refresh' => 'documentRefreshTreeview',
         );
 
-        $array_routes = array();
+        $arrayRoutes = array();
         foreach ($routes as $key => $route) {
-            $array_routes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
+            $arrayRoutes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
         }
 
-        $this->layout()->setVariable('routes', Json::encode($array_routes));
+        $this->layout()->setVariable('routes', Json::encode($arrayRoutes));
     }
 
     /**
@@ -95,8 +95,8 @@ class MediaController extends Action
     public function indexAction()
     {
 
-        $helper_broker = $this->getServiceLocator()->get('ViewHelperManager');
-        $headscript    = $helper_broker->get('HeadScript');
+        $helperBroker = $this->getServiceLocator()->get('ViewHelperManager');
+        $headscript   = $helperBroker->get('HeadScript');
         $headscript->appendFile('/backend/js/libs/elfinder.min.js', 'text/javascript');
 
         $language = preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale());
@@ -120,11 +120,11 @@ class MediaController extends Action
             return $this->returnJson(array('error' => true));
         }
 
-        $file_class = new File();
-        $file_class->load($property, $document);
+        $fileClass = new File();
+        $fileClass->load($property, $document);
         $files = array();
-        if ($file_class->upload()) {
-            $files = $file_class->getFiles();
+        if ($fileClass->upload()) {
+            $files = $fileClass->getFiles();
         }
 
         if (!empty($files)) {
@@ -147,10 +147,10 @@ class MediaController extends Action
             return $this->returnJson(array('error' => true));
         }
 
-        $file       = base64_decode($this->getRouteMatch()->getParam('file'));
-        $file_class = new File();
-        $file_class->load($property, $document);
-        return $this->returnJson(array($file_class->remove($file)));
+        $file      = base64_decode($this->getRouteMatch()->getParam('file'));
+        $fileClass = new File();
+        $fileClass->load($property, $document);
+        return $this->returnJson(array($fileClass->remove($file)));
     }
 
     /**

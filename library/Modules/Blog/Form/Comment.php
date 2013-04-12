@@ -48,9 +48,9 @@ class Comment extends AbstractForm
      */
     public function init()
     {
-        $show_email = new Element\Checkbox('show_email');
-        $show_email->setAttribute('label', 'Show email');
-        $show_email->setAttribute('required', 'required');
+        $showEmail = new Element\Checkbox('show_email');
+        $showEmail->setAttribute('label', 'Show email');
+        $showEmail->setAttribute('required', 'required');
         $username = new Element\Text('username');
         $username->setAttribute('label', 'Username');
         $username->setAttribute('required', 'required');
@@ -61,7 +61,7 @@ class Comment extends AbstractForm
         $message->setAttribute('label', 'Message');
         $message->setAttribute('required', 'required');
 
-        $captcha_image = new CaptchaImage(
+        $captchaImage = new CaptchaImage(
             array(
                 'font' => GC_APPLICATION_PATH . '/data/fonts/arial.ttf',
                 'width' => 250,
@@ -71,23 +71,23 @@ class Comment extends AbstractForm
             )
         );
 
-        $captcha_image->setImgDir(GC_APPLICATION_PATH . '/public/frontend/tmp');
-        $captcha_image->setImgUrl('/frontend/tmp');
+        $captchaImage->setImgDir(GC_APPLICATION_PATH . '/public/frontend/tmp');
+        $captchaImage->setImgUrl('/frontend/tmp');
 
         $captcha = new Element\Captcha('captcha');
         $captcha->setAttribute('label', 'Please verify you are human');
-        $captcha->setCaptcha($captcha_image);
+        $captcha->setCaptcha($captchaImage);
         $captcha->setAttribute('required', 'required');
         $captcha->setAttribute('id', 'captcha');
 
-        $this->add($show_email);
+        $this->add($showEmail);
         $this->add($username);
         $this->add($email);
         $this->add($message);
         $this->add($captcha);
 
-        $input_filter_factory = new InputFilterFactory();
-        $input_filter         = $input_filter_factory->createInputFilter(
+        $inputFilterFactory = new InputFilterFactory();
+        $inputFilter        = $inputFilterFactory->createInputFilter(
             array(
                 'show_email' => array(
                     'name' => 'show_email',
@@ -112,6 +112,6 @@ class Comment extends AbstractForm
             )
         );
 
-        $this->setInputFilter($input_filter);
+        $this->setInputFilter($inputFilter);
     }
 }

@@ -51,34 +51,34 @@ class Editor extends AbstractEditor
         $parameters = $this->getConfig();
         $data       = array();
         if (!empty($_FILES[$this->getName()]['name'])) {
-            $_OLD_FILES = $_FILES;
-            $file       = $_FILES[$this->getName()];
+            $oldFiles = $_FILES;
+            $file     = $_FILES[$this->getName()];
             //Ignore others data
             $_FILES                   = array();
             $_FILES[$this->getName()] = $file;
 
-            $file_class = new File();
-            $file_class->load($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
-            $file_class->upload();
-            $files = $file_class->getFiles();
+            $fileClass = new File();
+            $fileClass->load($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
+            $fileClass->upload();
+            $files = $fileClass->getFiles();
 
             if (!empty($files)) {
                 foreach ($files as $file) {
                     $name = $file->filename;
-                    $file = $file_class->getPath() . '/' . $name;
+                    $file = $fileClass->getPath() . '/' . $name;
                     if (file_exists($file)) {
                         $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
                         $finfo = finfo_open($const); // return mimetype extension
                         if (!in_array(finfo_file($finfo, $file), $parameters['mime_list'])) {
                             unlink($file);
                         } else {
-                            $file_info = @getimagesize($file);
-                            $data[]    = array(
+                            $fileInfo = @getimagesize($file);
+                            $data[]   = array(
                                 'value' => $name,
-                                'width' => empty($file_info[0]) ? 0 : $file_info[0],
-                                'height' => empty($file_info[1]) ? 0 : $file_info[1],
-                                'html' => empty($file_info[2]) ? '' : $file_info[2],
-                                'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
+                                'width' => empty($fileInfo[0]) ? 0 : $fileInfo[0],
+                                'height' => empty($fileInfo[1]) ? 0 : $fileInfo[1],
+                                'html' => empty($fileInfo[2]) ? '' : $fileInfo[2],
+                                'mime' => empty($fileInfo['mime']) ? '' : $fileInfo['mime'],
                             );
                         }
 
@@ -90,7 +90,7 @@ class Editor extends AbstractEditor
             }
 
             //Restore file data
-            $_FILES = $_OLD_FILES;
+            $_FILES = $oldFiles;
         } else {
             $data = $this->getRequest()->getPost()->get($this->getName() . '-hidden');
         }
@@ -114,15 +114,15 @@ class Editor extends AbstractEditor
             $upload->setName($upload->getName() . '[]');
         }
 
-        $hidden_upload = new Element\Hidden($this->getName() . '-hidden');
-        $value         = $this->getValue();
+        $hiddenUpload = new Element\Hidden($this->getName() . '-hidden');
+        $value        = $this->getValue();
         if (!empty($value)) {
-            $hidden_upload->setValue($value);
+            $hiddenUpload->setValue($value);
         }
 
         return array(
             $upload,
-            $hidden_upload,
+            $hiddenUpload,
             $this->addPath(__DIR__)->render(
                 'upload-editor.phtml',
                 array(

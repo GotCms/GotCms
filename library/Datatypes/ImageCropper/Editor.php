@@ -48,63 +48,63 @@ class Editor extends AbstractEditor
      */
     public function save()
     {
-        $post        = $this->getRequest()->getPost();
-        $parameters  = $this->getConfig();
-        $data        = array();
-        $image_model = new Image();
-        $file_class  = new File();
-        $file_class->load($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
-        $background_color = empty($parameters['background']) ? '#000000' : $parameters['background'];
+        $post       = $this->getRequest()->getPost();
+        $parameters = $this->getConfig();
+        $data       = array();
+        $imageModel = new Image();
+        $fileClass  = new File();
+        $fileClass->load($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
+        $backgroundColor = empty($parameters['background']) ? '#000000' : $parameters['background'];
 
         if (!empty($_FILES[$this->getName()]['name'])) {
-            $_OLD_FILES = $_FILES;
-            $file       = $_FILES[$this->getName()];
+            $oldFiles = $_FILES;
+            $file     = $_FILES[$this->getName()];
             //Ignore others data
             $_FILES                   = array();
             $_FILES[$this->getName()] = $file;
 
-            $file_class->upload();
-            $files = $file_class->getFiles();
+            $fileClass->upload();
+            $files = $fileClass->getFiles();
 
             if (!empty($files) and is_array($files)) {
                 foreach ($files as $file) {
                     $name = $file->filename;
-                    $file = $file_class->getPath() . $name;
+                    $file = $fileClass->getPath() . $name;
                     if (file_exists($file)) {
                         $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
                         $finfo = finfo_open($const); // return mimetype extension
                         if (!in_array(finfo_file($finfo, $file), $parameters['mime_list'])) {
                             unlink($file);
                         } else {
-                            $file_info        = @getimagesize($file);
+                            $fileInfo         = @getimagesize($file);
                             $data['original'] = array(
                                 'value' => $name,
-                                'width' => empty($file_info[0]) ? 0 : $file_info[0],
-                                'height' => empty($file_info[1]) ? 0 : $file_info[1],
-                                'html' => empty($file_info[2]) ? '' : $file_info[2],
-                                'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
+                                'width' => empty($fileInfo[0]) ? 0 : $fileInfo[0],
+                                'height' => empty($fileInfo[1]) ? 0 : $fileInfo[1],
+                                'html' => empty($fileInfo[2]) ? '' : $fileInfo[2],
+                                'mime' => empty($fileInfo['mime']) ? '' : $fileInfo['mime'],
                             );
 
-                            $image_model->open($file);
+                            $imageModel->open($file);
 
                             foreach ($parameters['size'] as $size) {
-                                $image_model->open($file);
-                                $image_model->resize(
+                                $imageModel->open($file);
+                                $imageModel->resize(
                                     $size['width'],
                                     $size['height'],
                                     empty($parameters['resize_option']) ? 'auto' : $parameters['resize_option'],
-                                    $background_color
+                                    $backgroundColor
                                 );
-                                $size_filename = preg_replace('~\.([a-zA-Z]+)$~', '-' . $size['name'] . '.$1', $name);
-                                $image_model->save($file_class->getPath() . $size_filename);
+                                $sizeFilename = preg_replace('~\.([a-zA-Z]+)$~', '-' . $size['name'] . '.$1', $name);
+                                $imageModel->save($fileClass->getPath() . $sizeFilename);
 
-                                $file_info           = @getimagesize($file_class->getPath() . $size_filename);
+                                $fileInfo            = @getimagesize($fileClass->getPath() . $sizeFilename);
                                 $data[$size['name']] = array(
-                                    'value' => $size_filename,
-                                    'width' => empty($file_info[0]) ? 0 : $file_info[0],
-                                    'height' => empty($file_info[1]) ? 0 : $file_info[1],
-                                    'html' => empty($file_info[2]) ? '' : $file_info[2],
-                                    'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
+                                    'value' => $sizeFilename,
+                                    'width' => empty($fileInfo[0]) ? 0 : $fileInfo[0],
+                                    'height' => empty($fileInfo[1]) ? 0 : $fileInfo[1],
+                                    'html' => empty($fileInfo[2]) ? '' : $fileInfo[2],
+                                    'mime' => empty($fileInfo['mime']) ? '' : $fileInfo['mime'],
                                     'x' => 0,
                                     'y' => 0,
                                 );
@@ -117,7 +117,7 @@ class Editor extends AbstractEditor
             }
 
             //Restore file data
-            $_FILES = $_OLD_FILES;
+            $_FILES = $oldFiles;
         } else {
             $data = $post->get($this->getName() . '-hidden');
             $data = unserialize($data);
@@ -131,27 +131,27 @@ class Editor extends AbstractEditor
                         $filename = !empty($data[$size['name']]['value']) ?
                             $data[$size['name']]['value'] :
                             preg_replace('~\.([a-zA-Z]+)$~', '-' . $size['name'] . '.$1', $data['original']['value']);
-                        $image_model->open($file_class->getPath() . $data['original']['value']);
-                        $image_model->resize(
+                        $imageModel->open($fileClass->getPath() . $data['original']['value']);
+                        $imageModel->resize(
                             $size['width'],
                             $size['height'],
                             empty($parameters['resize_option']) ? 'auto' : $parameters['resize_option'],
-                            $background_color,
+                            $backgroundColor,
                             $x,
                             $y
                         );
-                        $image_model->save($file_class->getPath() . $filename);
+                        $imageModel->save($fileClass->getPath() . $filename);
                         if (!empty($data[$size['name']]['value'])) {
                             $data[$size['name']]['x'] = $x;
                             $data[$size['name']]['y'] = $y;
                         } else {
-                            $file_info           = @getimagesize($file_class->getPath() . $filename);
+                            $fileInfo            = @getimagesize($fileClass->getPath() . $filename);
                             $data[$size['name']] = array(
                                 'value' => $filename,
-                                'width' => empty($file_info[0]) ? 0 : $file_info[0],
-                                'height' => empty($file_info[1]) ? 0 : $file_info[1],
-                                'html' => empty($file_info[2]) ? '' : $file_info[2],
-                                'mime' => empty($file_info['mime']) ? '' : $file_info['mime'],
+                                'width' => empty($fileInfo[0]) ? 0 : $fileInfo[0],
+                                'height' => empty($fileInfo[1]) ? 0 : $fileInfo[1],
+                                'html' => empty($fileInfo[2]) ? '' : $fileInfo[2],
+                                'mime' => empty($fileInfo['mime']) ? '' : $fileInfo['mime'],
                                 'x' => 0,
                                 'y' => 0,
                             );
@@ -198,10 +198,10 @@ class Editor extends AbstractEditor
         $upload     = new Element\File($this->getName());
         $upload->setAttribute('label', $property->getName());
 
-        $hidden_upload = new Element\Hidden($this->getName() . '-hidden');
-        $value         = $this->getValue();
+        $hiddenUpload = new Element\Hidden($this->getName() . '-hidden');
+        $value        = $this->getValue();
         if (!empty($value)) {
-            $hidden_upload->setValue($value);
+            $hiddenUpload->setValue($value);
             $value = unserialize($value);
             if (is_array($value)) {
                 foreach ($value as $name => $file) {
@@ -232,7 +232,7 @@ class Editor extends AbstractEditor
 
         return array(
             $upload,
-            $hidden_upload,
+            $hiddenUpload,
             $this->addPath(__DIR__)->render(
                 'upload-editor.phtml',
                 array(

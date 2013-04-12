@@ -57,7 +57,7 @@ function move_uploaded_file($filename, $destination)
  */
 namespace Gc\Core\Updater\Adapter;
 
-function exec($command, &$output = array(), &$return_var = null)
+function exec($command, &$output = array(), &$returnVar = null)
 {
     $output = array();
     return '';
@@ -92,7 +92,7 @@ function glob($pattern, $flags = 0)
  */
 namespace Modules\Backup\Model;
 
-function exec($command, &$output = array(), &$return_var = null)
+function exec($command, &$output = array(), &$returnVar = null)
 {
     $output = array();
     return '';

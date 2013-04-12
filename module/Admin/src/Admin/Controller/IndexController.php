@@ -55,31 +55,31 @@ class IndexController extends Action
         $data['versionIsLatest'] = Version::isLatest();
         $data['versionLatest']   = Version::getLatest();
 
-        $content_stats                     = array();
-        $documents                         = new Collection();
-        $content_stats['online_documents'] = array(
+        $documents                        = new Collection();
+        $contentStats                     = array();
+        $contentStats['online_documents'] = array(
             'count' => count($documents->getAvailableDocuments()),
             'label' => 'Online documents',
             'route' => 'content',
         );
 
-        $content_stats['total_documents'] = array(
+        $contentStats['total_documents'] = array(
             'count' => count($documents->select()->toArray()),
             'label' => 'Total documents',
             'route' => 'content',
         );
 
-        $data['contentStats'] = $content_stats;
+        $data['contentStats'] = $contentStats;
 
-        $visitor_model     = new Visitor();
+        $visitorModel      = new Visitor();
         $data['userStats'] = array(
             'total_visitors' => array(
-                'count' => $visitor_model->getTotalVisitors(),
+                'count' => $visitorModel->getTotalVisitors(),
                 'label' => 'Total visitors',
                 'route' => 'statistics',
             ),
             'total_visits' => array(
-                'count' => $visitor_model->getTotalPageViews(),
+                'count' => $visitorModel->getTotalPageViews(),
                 'label' => 'Total page views',
                 'route' => 'statistics',
             ),
