@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Gc
- * @package  Library
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc
+ * @package    Library
+ * @subpackage Test\PHPUnit\Controller
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 namespace Gc\Test\PHPUnit\Controller;
@@ -32,9 +33,9 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as ZendAbstractH
 /**
  * Exception is the base class for all Exceptions.
  *
- * @category   Gc_Library
- * @package    Test
- * @subpackage PHPUnit\Controller
+ * @category   Gc
+ * @package    Library
+ * @subpackage Test\PHPUnit\Controller
  */
 class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
 {

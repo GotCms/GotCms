@@ -17,11 +17,12 @@
  *
  * PHP Version >=5.3
  *
- * @category Gc_Application
- * @package  Admin
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    Admin
+ * @subpackage Module
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 namespace Admin;
 
@@ -30,8 +31,9 @@ use Gc\Mvc;
 /**
  * Admin module
  *
- * @category Gc_Application
- * @package  Admin
+ * @category   Gc_Application
+ * @package    Admin
+ * @subpackage Module
  */
 class Module extends Mvc\Module
 {

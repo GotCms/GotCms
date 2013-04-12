@@ -18,7 +18,7 @@
  * PHP Version >=5.3
  *
  * @category   Gc_Library
- * @package    Datatype
+ * @package    Datatypes
  * @subpackage DatePicker
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
@@ -34,7 +34,7 @@ use Gc\Property\Model as PropertyModel;
  * Manage DatePicker datatype
  *
  * @category   Gc_Library
- * @package    Datatype
+ * @package    Datatypes
  * @subpackage DatePicker
  */
 class Datatype extends AbstractDatatype

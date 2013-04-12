@@ -18,7 +18,7 @@
  * PHP Version >=5.3
  *
  * @category   Gc_Library
- * @package    Datatype
+ * @package    Datatypes
  * @subpackage Mixed
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
@@ -36,7 +36,7 @@ use Zend\Form\Fieldset;
  * Editor for Mixed datatype
  *
  * @category   Gc_Library
- * @package    Datatype
+ * @package    Datatypes
  * @subpackage Mixed
  */
 class Editor extends AbstractEditor

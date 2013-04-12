@@ -18,7 +18,7 @@
  * PHP Version >=5.3
  *
  * @category   Gc_Application
- * @package    Config
+ * @package    Content
  * @subpackage Module
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
@@ -32,7 +32,7 @@ use Gc\Mvc;
  * Content module
  *
  * @category   Gc_Application
- * @package    Config
+ * @package    Content
  * @subpackage Module
  */
 class Module extends Mvc\Module
