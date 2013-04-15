@@ -77,6 +77,7 @@ class Module extends AbstractForm
         $module = new Element\Select('module');
         $module->setAttribute('label', 'Module')
             ->setAttribute('id', 'module')
+            ->setAttribute('class', 'input-select')
             ->setAttribute('modules_info', $modulesInfos)
             ->setValueOptions($options);
         $this->add($module);

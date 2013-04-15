@@ -101,7 +101,8 @@ class User extends AbstractForm
             $selectOptions[$roleModel->getId()] = $roleModel->getName();
         }
 
-        $role->setValueOptions($selectOptions);
+        $role->setValueOptions($selectOptions)
+            ->setAttribute('class', 'input-select');
 
         $this->add(new Element('email'));
         $this->add(new Element('login'));

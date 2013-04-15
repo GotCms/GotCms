@@ -60,7 +60,7 @@
                     <td>
                         <div>
                             <?php $locales = $this->form->get('locale')->getValueOptions(); ?>
-                            <select name="locale[<?php echo $i; ?>]">
+                            <select class="input-select" name="locale[<?php echo $i; ?>]">
                                 <?php foreach ($locales as $locale_value => $locale_label): ?>
                                     <option value="<?php echo $this->escapeHtml($locale_value); ?>"><?php echo $this->escapeHtml($locale_label); ?></option>
                                 <?php endforeach; ?>

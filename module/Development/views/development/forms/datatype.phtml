@@ -44,7 +44,7 @@
     </div>
     <div>
         <label class="required" for="model"><?php echo $this->escapeHtml($this->translate('Model')); ?></label>
-        <select class="input-select" id="model" name="model">
+        <select class="input-select" class="input-select" id="model" name="model">
             <?php $options = $this->form->get('model')->getValueOptions(); ?>
             <?php foreach ($options as $option_id => $option_value): ?>
                 <option <?php if ($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo $this->escapeHtml($option_value); ?>"><?php echo $this->escapeHtml($option_value); ?></option>

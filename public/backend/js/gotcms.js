@@ -30,6 +30,9 @@ var Gc = (function($)
     $document.ready(function() {
         Gc.initialize();
         Gc.notification();
+        if ($().dropDown !== undefined) {
+            $('.input-select').dropDown();
+        }
     });
 
     return {
@@ -228,7 +231,7 @@ var Gc = (function($)
                                     '<label class="optional" for="properties-datatype-#{tab}-#{id}">' + Translator.translate('Datatype') + '</label>' +
                                 '</dt>' +
                                 '<dd id="datatype-element-#{tab}-#{id}">' +
-                                    '<select class="select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
+                                    '<select class="input-select select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
                                     '</select>' +
                                 '</dd>' +
                                 '<dt id="description-label-#{tab}-#{id}">' +
@@ -268,6 +271,7 @@ var Gc = (function($)
                             $('#properties-required-' + $data.tab + '-' + $data.id).prop('checked', $isRequired.prop('checked'));
 
                             $this.refreshProperties($tabs);
+                            $('.input-select').dropDown();
                         }
                     });
                 }
@@ -612,7 +616,7 @@ var Gc = (function($)
                 '</td>' +
                 '<td>' +
                     '<div>' +
-                        '<select name="locale[#{id}]">';
+                        '<select class="input-select" name="locale[#{id}]">';
                             $.each(this.getOption('locale'), function(key, value)
                             {
                                 $template += '<option value="' + key + '">' + value + '</option>';
@@ -630,6 +634,7 @@ var Gc = (function($)
 
                 $table_trad.find('.add-translate').removeClass('add-translate').addClass('delete-translate').html(Translator.translate('Delete'));
                 $table_trad.children('tbody').append($t.evaluate({id: $idx}));
+                $('.input-select').dropDown();
                 $idx++;
             });
 

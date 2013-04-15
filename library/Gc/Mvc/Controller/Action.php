@@ -226,6 +226,7 @@ class Action extends AbstractActionController
                 ->appendFile('/backend/js/libs/codemirror/mode/php/php.js', 'text/javascript')
                 ->appendFile('/backend/js/libs/jquery.jstree.js', 'text/javascript')
                 ->appendFile('/backend/js/libs/jquery.contextMenu.js', 'text/javascript')
+                ->appendFile('/backend/js/libs/dropdown.js', 'text/javascript')
                 ->appendFile('/backend/js/generic-classes.js', 'text/javascript')
                 ->appendFile('/backend/js/gotcms.js', 'text/javascript');
 
@@ -237,6 +238,7 @@ class Action extends AbstractActionController
                 ->appendStylesheet('/backend/css/jquery.treeview.css')
                 ->appendStylesheet('/backend/css/elfinder.min.css')
                 ->appendStylesheet('/backend/css/jquery.contextMenu.css')
+                ->appendStylesheet('/backend/css/dropdown.css')
                 ->appendStylesheet('/backend/css/style.css');
         }
     }

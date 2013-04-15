@@ -58,7 +58,7 @@
             </div>
             <div>
                 <label for="infos-icon_id" class="optional"><?php echo $this->escapeHtml($this->translate('Icon')); ?></label>
-                <select name="infos[icon_id]" id="infos-icon_id">
+                <select class="input-select" name="infos[icon_id]" id="infos-icon_id">
                     <?php $icons = $infos_form->get('icon_id')->getValueOptions(); ?>
                     <?php foreach ($icons as $option): ?>
                         <option value="<?php echo $option->getId(); ?>"<?php if ($infos_form->get('icon_id')->getValue() == $option->getId()): ?> selected="selected"<?php endif; ?> style="background:url(<?php echo $this->escapeHtml($option->getUrl()); ?>) no-repeat; padding-left:20px;"><?php echo $this->escapeHtml($option->getName()); ?> </option>
@@ -82,7 +82,7 @@
         <div id="tabs-2">
             <div>
                 <label for="views-default_view" class="required"><?php echo $this->escapeHtml($this->translate('Default view')); ?></label>
-                <select name="views[default_view]" id="views-default_view">
+                <select class="input-select" name="views[default_view]" id="views-default_view">
                     <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
                     <?php $default_view = $views_form->get('default_view'); ?>
                     <?php $default_view_option = $default_view->getValueOptions(); ?>
@@ -95,7 +95,7 @@
             </div>
             <div>
                 <label for="views-available_views" class="optional"><?php echo $this->escapeHtml($this->translate('Add view')); ?></label>
-                <select name="views[available_views][]" id="views-available_views" multiple="multiple">
+                <select class="input-select" name="views[available_views][]" id="views-available_views" multiple="multiple">
                     <?php $available_views = $views_form->get('available_views'); ?>
                     <?php $default_view_option = $available_views->getValueOptions(); ?>
                     <?php $values = $available_views->getValue(); ?>
@@ -121,7 +121,7 @@
                 </div>
                 <div>
                     <label for="properties-tab" class="required"><?php echo $this->escapeHtml($this->translate('Tab')); ?></label>
-                    <select name="properties[tab]" id="properties-tab" class="select-tab">
+                    <select name="properties[tab]" id="properties-tab" class="input-select select-tab">
                         <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
                         <?php foreach ($tabs_form as $tab_form): ?>
                             <option value="<?php echo $tab_form->get('tab_id')->getValue(); ?>"><?php echo $tab_form->get('name')->getValue(); ?></option>
@@ -131,7 +131,7 @@
 
                 <div>
                     <label for="properties-datatype" class="required"><?php echo $this->escapeHtml($this->translate('Datatype')); ?></label>
-                    <select name="properties[datatype]" id="properties-datatype" class="select-datatype">
+                    <select name="properties[datatype]" id="properties-datatype" class="input-select select-datatype">
                         <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
                         <?php foreach ($datatypes_options as $datatype_id => $datatype_name): ?>
                             <option value="<?php echo $datatype_id; ?>"><?php echo $this->escapeHtml($datatype_name); ?> </option>
@@ -205,7 +205,7 @@
                                                     <label class="optional" for="properties-datatype-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Datatype')); ?></label>
                                                 </dt>
                                                 <dd>
-                                                    <select class="select-datatype" id="properties-datatype-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][datatype]">
+                                                    <select class="input-select select-datatype" id="properties-datatype-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][datatype]">
                                                         <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
                                                         <?php foreach ($datatypes_options as $datatype_id => $datatype_name): ?>
                                                             <option value="<?php echo $datatype_id; ?>"<?php if ($datatype_id == $property->get('datatype')->getValue()): ?> selected="selected"<?php endif; ?>><?php echo $this->escapeHtml($datatype_name); ?> </option>
@@ -273,7 +273,7 @@
             <div id="import-tab">
                 <?php $tabs_list = $this->form->get('tabs')->get('tabs_list')->getValueOptions(); ?>
                 <?php if (!empty($tabs_list)): ?>
-                    <select id="import-tabs">
+                    <select class="input-select" id="import-tabs">
                         <?php foreach ($tabs_list as $tab): ?>
                             <option value="<?php echo $this->escapeHtml($tab->getId()); ?>"><?php echo $this->escapeHtml($tab->getName()); ?> (<?php echo $this->escapeHtml($tab->getDocumentType()->getName()); ?>)</option>
                         <?php endforeach; ?>

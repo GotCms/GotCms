@@ -79,15 +79,18 @@ class Config extends AbstractForm
         $documentCollection->load(0);
         $offlineDocument = new Element\Select('site_offline_document');
         $offlineDocument->setAttribute('label', 'Offline document')
+            ->setAttribute('class', 'input-select')
             ->setValueOptions(array('Select document') + $documentCollection->getSelect());
 
         $layoutCollection = new Layout\Collection();
         $layoutNotFound   = new Element\Select('site_404_layout');
         $layoutNotFound->setAttribute('label', '404 layout')
+            ->setAttribute('class', 'input-select')
             ->setValueOptions(array('Select document') + $layoutCollection->getSelect());
 
         $layoutException = new Element\Select('site_exception_layout');
         $layoutException->setAttribute('label', 'Exception layout')
+            ->setAttribute('class', 'input-select')
             ->setValueOptions(array('Select document') + $layoutCollection->getSelect());
 
         $generalFieldset->add($name);
@@ -166,6 +169,7 @@ class Config extends AbstractForm
 
         $sessionHandler = new Element\Select('session_handler');
         $sessionHandler->setAttribute('label', 'Session handler')
+            ->setAttribute('class', 'input-select')
             ->setValueOptions(array('0' => 'Files', '1' => 'Database'));
 
         $sessionFieldset->add($cookieDomain);
@@ -192,7 +196,8 @@ class Config extends AbstractForm
             ->setAttribute('id', 'cache-active');
 
         $cacheHandler = new Element\Select('cache_handler');
-        $cacheHandler->setAttribute('label', 'Cache handler');
+        $cacheHandler->setAttribute('class', 'input-select')
+            ->setAttribute('label', 'Cache handler');
         $handlerWhitelist = array('filesystem' => 'FileSystem');
         if (extension_loaded('apc')) {
             $handlerWhitelist['apc'] = 'Apc';
@@ -322,6 +327,7 @@ class Config extends AbstractForm
         $localeFieldset = new Fieldset('locale');
         $locale         = new Element\Select('locale');
         $locale->setAttribute('label', 'Server locale')
+            ->setAttribute('class', 'input-select')
             ->setValueOptions($localeList);
 
         $localeFieldset->add($locale);
