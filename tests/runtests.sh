@@ -3,6 +3,11 @@
 : ${PHPUNIT_OPTS:="--verbose"}
 : ${PHPUNIT_GROUPS:=}
 
+if [[ pwd != pwd"/tests/" ]]
+then
+	cd `pwd`"/tests/"
+fi
+
 while [ -n "$1" ] ; do
   case "$1" in
     ALL|all)
