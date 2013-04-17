@@ -105,12 +105,13 @@ class Model extends AbstractTable
         $userEmail = trim($userEmail);
         $validator = new EmailAddress();
         if ($validator->isValid($userEmail)) {
+            $userId = $this->getId();
             $select = $this->select(
-                function (Select $select) use ($userEmail) {
+                function (Select $select) use ($userEmail, $userId) {
                     $select->where->equalTo('email', $userEmail);
 
-                    if ($this->getId() != null) {
-                        $select->where->notEqualTo('id', $this->getId());
+                    if (!empty($userId)) {
+                        $select->where->notEqualTo('id', $userId);
                     }
                 }
             );

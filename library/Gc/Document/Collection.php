@@ -76,8 +76,8 @@ class Collection extends AbstractTable implements IterableInterface
         if (!empty($parentId)) {
             $rows = $this->fetchAll(
                 $this->select(
-                    function (Select $select) {
-                        $select->where->equalTo('parent_id', $this->getParentId());
+                    function (Select $select) use ($parentId) {
+                        $select->where->equalTo('parent_id', $parentId);
                         $select->order('sort_order ASC');
                         $select->order('name ASC');
                     }

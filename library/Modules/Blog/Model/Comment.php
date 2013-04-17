@@ -77,14 +77,15 @@ class Comment extends AbstractTable
      */
     public function getList($documentId = null, $isActive = true)
     {
+        $driverName = $this->getDriverName();
         return $this->select(
-            function (Select $select) use ($documentId, $isActive) {
+            function (Select $select) use ($documentId, $isActive, $driverName) {
                 if (!empty($documentId)) {
                     $select->where->equalTo('document_id', $documentId);
                 }
 
                 if (!is_null($isActive)) {
-                    if ($this->getDriverName() == 'pdo_pgsql') {
+                    if ($driverName == 'pdo_pgsql') {
                         $select->where->equalTo('is_active', empty($isActive) ? 'false' : 'true');
                     } else {
                         $select->where->equalTo('is_active', (int) $isActive);

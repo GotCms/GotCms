@@ -212,11 +212,12 @@ class Visitor extends AbstractTable
      */
     public function getNbPagesViews($sort)
     {
-        $sort = $this->checkSort($sort);
+        $sort   = $this->checkSort($sort);
+        $object = $this;
 
         $rows = $this->fetchAll(
             $this->select(
-                function (Select $select) use ($sort) {
+                function (Select $select) use ($sort, $object) {
                     $select->columns(
                         array(
                             'date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)),
@@ -225,7 +226,7 @@ class Visitor extends AbstractTable
                     );
                     $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
 
-                    $this->groupByDate($sort, $select);
+                    $object->groupByDate($sort, $select);
                     $select->order('date ASC');
                     $select->group(array('date'));
                 }
@@ -310,11 +311,12 @@ class Visitor extends AbstractTable
      */
     public function getNbVisitors($sort)
     {
-        $sort = $this->checkSort($sort);
+        $sort   = $this->checkSort($sort);
+        $object = $this;
 
         $rows = $this->fetchAll(
             $this->select(
-                function (Select $select) use ($sort) {
+                function (Select $select) use ($sort, $object) {
                     $select->columns(
                         array(
                             'date' => new Expression(sprintf('EXTRACT(%s FROM lu.visit_at)', $sort)),
@@ -323,7 +325,7 @@ class Visitor extends AbstractTable
                     );
                     $select->join(array('lu' => 'log_url'), 'lu.log_visitor_id = log_visitor.id', array());
 
-                    $this->groupByDate($sort, $select);
+                    $object->groupByDate($sort, $select);
                     $select->order('date ASC');
                     $select->group(array('date'));
                 }
