@@ -67,10 +67,10 @@ class Collection extends AbstractTable
     protected function setDocumentTypes()
     {
         $parentId = $this->getParentId();
-        $rows = $this->fetchAll(
+        $rows     = $this->fetchAll(
             $this->select(
                 function (Select $select) use ($parentId) {
-                    if (!empty($parentId)) {
+                    if ($parentId !== null) {
                         $select->join(
                             array('dtd' => 'document_type_dependency'),
                             'dtd.children_id = document_type.id',

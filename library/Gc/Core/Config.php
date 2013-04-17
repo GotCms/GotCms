@@ -109,7 +109,7 @@ class Config extends AbstractTable
             return $rows;
         }
 
-        return null;
+        return array();
     }
 
     /**

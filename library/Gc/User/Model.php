@@ -110,7 +110,7 @@ class Model extends AbstractTable
                 function (Select $select) use ($userEmail, $userId) {
                     $select->where->equalTo('email', $userEmail);
 
-                    if (!empty($userId)) {
+                    if ($userId !== null) {
                         $select->where->notEqualTo('id', $userId);
                     }
                 }

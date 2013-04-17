@@ -771,7 +771,9 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
             )
         );
 
-        CoreConfig::getInstance()->delete('1 =1');
+        $config    = CoreConfig::getInstance();
+        $oldValues = $config->getValues();
+        $config->delete('1 = 1');
         $this->getRequest()->getHeaders()->addHeaderLine('X_REQUESTED_WITH: XMLHttpRequest');
         $this->dispatch(
             '/install/complete',
@@ -787,6 +789,14 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
         $this->assertMatchedRouteName('installComplete');
+
+        foreach ($oldValues as $value) {
+            $identifier = $config->fetchRow($config->select(array('identifier' => $value['identifier'])));
+            if (empty($identifier)) {
+                unset($value['id']);
+                $config->insert($value);
+            }
+        }
     }
 
     /**

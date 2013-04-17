@@ -24,7 +24,7 @@
  * @link     http://www.got-cms.com
  */
 
-define('TESTS_GENERATE_REPORT', FALSE);
+define('TESTS_GENERATE_REPORT', false);
 define('GC_DATABASE_DRIVER', '');
 define('GC_DATABASE_USERNAME', '');
 define('GC_DATABASE_PASSWORD', '');

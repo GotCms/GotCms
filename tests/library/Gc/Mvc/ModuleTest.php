@@ -163,7 +163,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
             );
         }
 
-        if (!Config::getValue('session_lifetime')) {
+        if (!Config::getValue('cookie_domain')) {
             Config::getInstance()->insert(
                 array(
                     'identifier' => 'cookie_domain',

@@ -63,11 +63,11 @@ class Model extends AbstractTable
 
         $select = $this->select(
             function (Select $select) use ($documentTypeId, $tabId) {
-                if (!empty($documentTypeId)) {
+                if ($documentTypeId !== null) {
                     $select->where->equalTo('document_type_id', $documentTypeId);
                 }
 
-                if (!empty($tabId)) {
+                if ($tabId !== null) {
                     $select->where->equalTo('id', $tabId);
                 }
             }

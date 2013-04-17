@@ -84,15 +84,6 @@ if (!class_exists('Zend\Loader\AutoloaderFactory')) {
     );
 }
 
-
-// Run application
-\Zend\Console\Console::overrideIsConsole(false);
-$application = \Zend\Mvc\Application::init($configuration);
-$application->getMvcEvent()->getRouter()->setRequestUri($application->getRequest()->getUri());
-$application->getRequest()->setBasePath('http://got-cms.com');
-\Gc\Registry::set('Application', $application);
-//Remove all event observer
-\Gc\Event\StaticEventManager::resetInstance();
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load
  * the default configuration.
@@ -103,12 +94,19 @@ if (is_readable($gcTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
     include_once $gcTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
 }
 
+require_once 'config/prepare-database.php';
+require_once 'config/override-php-functions.php';
 
-require_once 'prepare-database.php';
+// Run application
+\Zend\Console\Console::overrideIsConsole(false);
+$application = \Zend\Mvc\Application::init($configuration);
+$application->getMvcEvent()->getRouter()->setRequestUri($application->getRequest()->getUri());
+$application->getRequest()->setBasePath('http://got-cms.com');
+\Gc\Registry::set('Application', $application);
+//Remove all event observer
+\Gc\Event\StaticEventManager::resetInstance();
 
 /*
  * Unset global variables that are no longer needed.
  */
 unset($gcRoot, $gcLibrary, $gcTests, $path);
-
-require_once 'override-php-functions.php';

@@ -52,6 +52,13 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        $collection = new Collection();
+        foreach ($collection->getUsers() as $user) {
+            $user->delete();
+        }
+
+        unset($collection);
+
         $this->object = Model::fromArray(
             array(
                 'lastname' => 'Test',

@@ -17,16 +17,19 @@
  *
  * PHP Version >=5.3
  *
- * @category Gc_Test
- * @package  Bootstrap
+ * @category Gc_Application
+ * @package  Config
  * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
 
-define('TESTS_GENERATE_REPORT', false);
-define('GC_DATABASE_DRIVER', 'pdo_mysql');
-define('GC_DATABASE_USERNAME', 'travis');
-define('GC_DATABASE_PASSWORD', '');
-define('GC_DATABASE_DATABASE', 'gotcms_tests');
-define('GC_DATABASE_HOSTNAME', 'localhost');
+return array(
+    'db' => array(
+        'driver' => GC_DATABASE_DRIVER,
+        'username' => GC_DATABASE_USERNAME,
+        'password' => GC_DATABASE_PASSWORD,
+        'database' => GC_DATABASE_DATABASE,
+        'hostname' => GC_DATABASE_HOSTNAME,
+    ),
+);

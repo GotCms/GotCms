@@ -126,7 +126,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         $values = $this->object->getValues();
         $this->object->delete('1 = 1');
-        $this->assertNull($this->object->getValues());
+        $this->assertInternalType('array', $this->object->getValues());
 
         //restore data
         foreach ($values as $value) {

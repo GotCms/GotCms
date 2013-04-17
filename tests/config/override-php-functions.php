@@ -111,7 +111,7 @@ class elFinderConnector
 }
 
 /**
- * Override Installer file_exists functions
+ * Override Installer
  */
 namespace Application\Controller;
 
@@ -119,8 +119,6 @@ function file_exists($string)
 {
     return false;
 }
-
-namespace Application\Controller;
 
 function file_get_contents($filename)
 {
@@ -130,4 +128,15 @@ function file_get_contents($filename)
 function file_put_contents($filename, $content)
 {
     return true;
+}
+
+
+/**
+ * Override Gc\Mvc
+ */
+namespace Gc\Mvc;
+
+function glob($pattern, $flags = 0)
+{
+    return array(GC_APPLICATION_PATH . '/tests/config/global.php');
 }

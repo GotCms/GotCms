@@ -62,13 +62,9 @@ $resource->exec(file_get_contents($gcRoot . '/data/install/sql/data.sql'));
 $ini   = new \Zend\Config\Reader\Ini();
 $roles = $ini->fromFile($gcRoot . '/data/install/scripts/roles.ini');
 
-try {
-    foreach ($roles['role'] as $key => $value) {
-        $statement = $dbAdapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
-        $statement->execute();
-    }
-} catch (Exception $e) {
-    return $this->_returnJson(array('messages' => $e->getMessage()));
+foreach ($roles['role'] as $key => $value) {
+    $statement = $dbAdapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
+    $statement->execute();
 }
 
 //resources
