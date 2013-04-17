@@ -2,5 +2,6 @@
 *
 # Except this file
 !.gitignore
+!.github.tags
 !files
 
