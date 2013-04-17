@@ -96,24 +96,12 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testLoginActionWithPostData()
     {
-        $userModel = UserModel::fromArray(
-            array(
-                'lastname' => 'Test',
-                'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
-                'login' => 'testlogin',
-                'user_acl_role_id' => 1,
-            )
-        );
-        $userModel->setPassword('passwordtest');
-        $userModel->save();
-
         $this->dispatch(
             '/admin/user/login',
             'POST',
             array(
-                'login' => 'testlogin',
-                'password' => 'passwordtest'
+                'login' => $this->user->getLogin(),
+                'password' => 'test-user-model-password'
             )
         );
         $this->assertResponseStatusCode(302);
@@ -122,8 +110,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userLogin');
-
-        $userModel->delete();
     }
 
     /**
@@ -135,24 +121,12 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testLoginActionWithPostAndRedirectData()
     {
-        $userModel = UserModel::fromArray(
-            array(
-                'lastname' => 'Test',
-                'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
-                'login' => 'testlogin',
-                'user_acl_role_id' => 1,
-            )
-        );
-        $userModel->setPassword('passwordtest');
-        $userModel->save();
-
         $this->dispatch(
             '/admin/user/login/L2FkbWlu',
             'POST',
             array(
-                'login' => 'testlogin',
-                'password' => 'passwordtest',
+                'login' => $this->user->getLogin(),
+                'password' => 'test-user-model-password',
                 'redirect' => 'L2FkbWlu'
             )
         );
@@ -162,8 +136,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userLogin');
-
-        $userModel->delete();
     }
 
     /**
@@ -374,7 +346,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
+                'email' => 'test@got-cms.com',
                 'login' => 'testlogin',
                 'user_acl_role_id' => 2,
             )
@@ -438,27 +410,13 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditAction()
     {
-        $userModel = UserModel::fromArray(
-            array(
-                'lastname' => 'Test',
-                'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
-                'login' => 'testlogin',
-                'user_acl_role_id' => 2,
-            )
-        );
-        $userModel->setPassword('passwordtest');
-        $userModel->save();
-
-        $this->dispatch('/admin/config/user/edit/' . $userModel->getId());
+        $this->dispatch('/admin/config/user/edit/' . $this->user->getId());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userEdit');
-
-        $userModel->delete();
     }
 
     /**
@@ -470,20 +428,8 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testEditActionWithInvalidPostData()
     {
-        $userModel = UserModel::fromArray(
-            array(
-                'lastname' => 'Test',
-                'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
-                'login' => 'testlogin',
-                'user_acl_role_id' => 2,
-            )
-        );
-        $userModel->setPassword('passwordtest');
-        $userModel->save();
-
         $this->dispatch(
-            '/admin/config/user/edit/' . $userModel->getId(),
+            '/admin/config/user/edit/' . $this->user->getId(),
             'POST',
             array(
             )
@@ -494,8 +440,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
         $this->assertMatchedRouteName('userEdit');
-
-        $userModel->delete();
     }
 
     /**
@@ -511,7 +455,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
+                'email' => 'pierre.rambaud86@got-cms.com',
                 'login' => 'testlogin',
                 'user_acl_role_id' => 2,
             )
@@ -525,7 +469,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
             array(
                 'lastname' => 'Test',
                 'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
+                'email' => 'pierre.rambaud86@got-cms.com',
                 'login' => 'testlogin',
                 'user_acl_role_id' => 2,
                 'password' => 'test',

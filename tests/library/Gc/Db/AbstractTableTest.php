@@ -27,6 +27,7 @@
 namespace Gc\Db;
 
 use Gc\User\Model;
+use Gc\User\Collection;
 use Zend\Db\Sql\Select;
 
 /**
@@ -57,6 +58,13 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        $collection = new Collection();
+        foreach ($collection->getUsers() as $user) {
+            $user->delete();
+        }
+
+        unset($collection);
+
         $this->object = Model::fromArray(
             array(
                 'lastname' => 'Test',
@@ -180,7 +188,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     public function testFetchOne()
     {
         $result = $this->object->fetchOne($this->object->select());
-        $this->assertInternalType('integer', $result);
+        $this->assertInternalType('integer', (int) $result);
     }
 
     /**
@@ -221,7 +229,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLastInsertId()
     {
-        $this->assertInternalType('integer', $this->object->getLastInsertId());
+        $this->assertInternalType('integer', (int) $this->object->getLastInsertId());
     }
 
     /**

@@ -164,7 +164,17 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->document->delete();
+        $this->documentType->delete();
+        $this->user->delete();
+        $this->view->delete();
+        $this->layout->delete();
         unset($this->object);
+        unset($this->layout);
+        unset($this->view);
+        unset($this->user);
+        unset($this->documentType);
+        unset($this->document);
     }
 
     /**

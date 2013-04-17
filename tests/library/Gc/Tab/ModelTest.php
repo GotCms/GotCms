@@ -28,6 +28,7 @@ namespace Gc\Tab;
 
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
+use Gc\Registry;
 use Gc\User\Model as UserModel;
 use Gc\View\Model as ViewModel;
 
@@ -199,7 +200,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertInternalType('integer', $this->object->save());
+        $this->assertInternalType('integer', (int) $this->object->save());
     }
 
     /**
@@ -211,6 +212,14 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithWrongValues()
     {
+        /**
+         * Mysql does not generate exception
+         */
+        $configuration = Registry::get('Configuration');
+        if ($configuration['db']['driver'] == 'pdo_mysql') {
+            return;
+        }
+
         $this->setExpectedException('\Gc\Exception');
         $this->object->setDocumentTypeId('undefined');
         $this->assertFalse($this->object->save());
@@ -240,6 +249,14 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteWithWrongValues()
     {
+        /**
+         * Mysql does not generate exception
+         */
+        $configuration = Registry::get('Configuration');
+        if ($configuration['db']['driver'] == 'pdo_mysql') {
+            return;
+        }
+
         $this->setExpectedException('\Gc\Exception');
         $model = new Model();
         $model->setId('undefined');

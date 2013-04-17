@@ -156,7 +156,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testSetValue()
     {
         $this->object->insert(array('identifier' => 'string_identifier', 'value' => 'string_result_insert_value'));
-        $this->assertTrue((bool) $this->object->setValue('string_identifier', 'string_result_insert_value'));
+        $this->assertTrue((bool) $this->object->setValue('string_identifier', 'string_result_insert_new_value'));
         $this->object->delete(array('identifier' => 'string_identifier'));
     }
 

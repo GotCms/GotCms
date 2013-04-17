@@ -214,18 +214,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         );
         $viewModel->save();
 
-        $userModel = UserModel::fromArray(
-            array(
-                'lastname' => 'Test',
-                'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
-                'login' => 'testlogin',
-                'user_acl_role_id' => 1,
-            )
-        );
-        $userModel->setPassword('passwordtest');
-        $userModel->save();
-
         $datatypeModel = DatatypeModel::fromArray(
             array(
                 'name' => 'DatatypeTest',
@@ -239,7 +227,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
                 'name' => 'TestDocumentType',
                 'icon_id' => 3,
                 'default_view_id' => $viewModel->getId(),
-                'user_id' => $userModel->getId()
+                'user_id' => $this->user->getId()
             )
         );
         $documentTypeModel->save();
@@ -276,7 +264,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $propertyModel->delete();
         $tabModel->delete();
         $viewModel->delete();
-        $userModel->delete();
         $datatypeModel->delete();
     }
 
@@ -298,18 +285,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         );
         $viewModel->save();
 
-        $userModel = UserModel::fromArray(
-            array(
-                'lastname' => 'Test',
-                'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
-                'login' => 'testlogin',
-                'user_acl_role_id' => 1,
-            )
-        );
-        $userModel->setPassword('passwordtest');
-        $userModel->save();
-
         $datatypeModel = DatatypeModel::fromArray(
             array(
                 'name' => 'DatatypeTest',
@@ -323,7 +298,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
                 'name' => 'TestDocumentType',
                 'icon_id' => 3,
                 'default_view_id' => $viewModel->getId(),
-                'user_id' => $userModel->getId()
+                'user_id' => $this->user->getId()
             )
         );
         $documentTypeModel->save();
@@ -398,7 +373,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $propertyModel->delete();
         $tabModel->delete();
         $viewModel->delete();
-        $userModel->delete();
         $datatypeModel->delete();
     }
 
@@ -420,24 +394,12 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         );
         $viewModel->save();
 
-        $userModel = UserModel::fromArray(
-            array(
-                'lastname' => 'Test',
-                'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
-                'login' => 'testlogin',
-                'user_acl_role_id' => 1,
-            )
-        );
-        $userModel->setPassword('passwordtest');
-        $userModel->save();
-
         $documentTypeModel = DocumentTypeModel::fromArray(
             array(
                 'name' => 'TestDocumentType',
                 'icon_id' => 3,
                 'default_view_id' => $viewModel->getId(),
-                'user_id' => $userModel->getId()
+                'user_id' => $this->user->getId()
             )
         );
         $documentTypeModel->save();
@@ -457,7 +419,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
         $documentTypeModel->delete();
         $viewModel->delete();
-        $userModel->delete();
     }
 
     /**
@@ -496,24 +457,12 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         );
         $viewModel->save();
 
-        $userModel = UserModel::fromArray(
-            array(
-                'lastname' => 'Test',
-                'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
-                'login' => 'testlogin',
-                'user_acl_role_id' => 1,
-            )
-        );
-        $userModel->setPassword('passwordtest');
-        $userModel->save();
-
         $documentTypeModel = DocumentTypeModel::fromArray(
             array(
                 'name' => 'TestDocumentType',
                 'icon_id' => 3,
                 'default_view_id' => $viewModel->getId(),
-                'user_id' => $userModel->getId()
+                'user_id' => $this->user->getId()
             )
         );
         $documentTypeModel->save();
@@ -528,7 +477,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
         $documentTypeModel->delete();
         $viewModel->delete();
-        $userModel->delete();
     }
 
     /**

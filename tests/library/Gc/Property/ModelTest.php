@@ -30,6 +30,7 @@ use Gc\Datatype\Model as DatatypeModel;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
+use Gc\Registry;
 use Gc\User\Model as UserModel;
 use Gc\View\Model as ViewModel;
 use Gc\Tab\Model as TabModel;
@@ -310,7 +311,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertInternalType('integer', $this->object->save());
+        $this->assertInternalType('integer', (int) $this->object->save());
     }
 
     /**
@@ -322,6 +323,14 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithWrongValues()
     {
+        /**
+         * Mysql does not generate exception
+         */
+        $configuration = Registry::get('Configuration');
+        if ($configuration['db']['driver'] == 'pdo_mysql') {
+            return;
+        }
+
         $this->setExpectedException('Gc\Exception');
         $this->object->setIdentifier(null);
         $this->assertFalse($this->object->save());

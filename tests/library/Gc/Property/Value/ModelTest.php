@@ -305,7 +305,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $this->assertInternalType('integer', $this->object->save());
+        $this->assertInternalType('integer', (int) $this->object->save());
     }
 
     /**

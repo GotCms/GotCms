@@ -180,7 +180,11 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     {
         Stream::register();
 
-        file_put_contents('zend.view://test-updater', 'SELECT * FROM core_config_data');
+        file_put_contents(
+            'zend.view://test-updater',
+            'INSERT INTO core_config_data (identifier, value) VALUES (1, 1);' .
+            'INSERT INTO core_config_data (identifier, value) VALUES (2, 2);'
+        );
         $this->object->load('git');
         $this->assertTrue($this->object->updateDatabase());
     }

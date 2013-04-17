@@ -178,10 +178,10 @@ class Updater extends Object
         $resource = Registry::get('Db')->getDriver()->getConnection()->getResource();
         try {
             $resource->beginTransaction();
-            $resource->exec($sql);
+            $stmt = $resource->exec($sql);
             $resource->commit();
         } catch (\Exception $e) {
-            $resource->rollback();
+            $resource->rollBack();
             $this->setError($e->getMessage());
 
             return false;

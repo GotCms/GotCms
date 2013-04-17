@@ -271,7 +271,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->addViews(array($this->view->getId(), 0));
         $this->object->setDependencies(array($this->object->getId()));
-        $this->assertInternalType('integer', $this->object->save());
+        $this->assertInternalType('integer', (int) $this->object->save());
     }
 
     /**

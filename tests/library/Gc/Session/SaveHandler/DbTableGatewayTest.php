@@ -85,7 +85,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
         );
         $this->object  = new DbTableGateway($this->adapter, $tablegatewayConfig);
 
-        $this->testArray = array('foo' => 'bar', 'bar' => array('foo' => 'bar'));
+        $this->testArray = array('foo' => 'bar', 'bar' => array('foo' => uniqid()));
     }
 
     /**

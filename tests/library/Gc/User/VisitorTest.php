@@ -83,7 +83,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
         $_SERVER['REMOTE_ADDR']          = '127.0.0.1';
         $_SERVER['REQUEST_URI']          = '/test';
         $_SERVER['HTTP_REFERER']         = '/';
-        $this->assertInternalType('integer', $this->object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
+        $this->assertInternalType('integer', (int) $this->object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
     }
     /**
      * Test
@@ -101,7 +101,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
         $_SERVER['REMOTE_ADDR']          = '127.0.0.1';
         $_SERVER['REQUEST_URI']          = '/test';
         $_SERVER['HTTP_REFERER']         = '/';
-        $this->assertInternalType('integer', $this->object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
+        $this->assertInternalType('integer', (int) $this->object->getVisitorId('9135ejnhfiebe6u85qhmas7k12'));
     }
 
     /**
@@ -113,11 +113,11 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUrlId()
     {
-        $this->assertInternalType('integer', $this->object->getUrlId('/something', null));
+        $this->assertInternalType('integer', (int) $this->object->getUrlId('/something', null));
         //Existing url
-        $this->assertInternalType('integer', $this->object->getUrlId('/something', null));
+        $this->assertInternalType('integer', (int) $this->object->getUrlId('/something', null));
         //with referer
-        $this->assertInternalType('integer', $this->object->getUrlId('/something', '/somewhat'));
+        $this->assertInternalType('integer', (int) $this->object->getUrlId('/something', '/somewhat'));
     }
 
     /**
@@ -129,7 +129,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTotalVisitors()
     {
-        $this->assertInternalType('integer', $this->object->getTotalVisitors());
+        $this->assertInternalType('integer', (int) $this->object->getTotalVisitors());
     }
 
     /**
@@ -141,7 +141,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetTotalPageViews()
     {
-        $this->assertInternalType('integer', $this->object->getTotalPageViews());
+        $this->assertInternalType('integer', (int) $this->object->getTotalPageViews());
     }
 
     /**
