@@ -15,6 +15,7 @@ env:
 
 before_install:
   - cp tests/TestConfiguration.travis-${DB}.php tests/TestConfiguration.php
+  - cp tests/config/global.php config/autoload/global.php
   - cp data/install/translation/fr_FR.php data/translation/en_GB.php
   - cp data/install/translation/fr_FR.php data/translation/fr_FR.php
 
