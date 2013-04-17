@@ -25,8 +25,8 @@
  */
 
 define('TESTS_GENERATE_REPORT', FALSE);
-define('GC_DATABASE_DRIVER', '');
-define('GC_DATABASE_USERNAME', '');
+define('GC_DATABASE_DRIVER', 'pdo_mysql');
+define('GC_DATABASE_USERNAME', 'travis');
 define('GC_DATABASE_PASSWORD', '');
-define('GC_DATABASE_DATABASE', '');
-define('GC_DATABASE_HOSTNAME', '');
+define('GC_DATABASE_DATABASE', 'gotcms_tests');
+define('GC_DATABASE_HOSTNAME', 'localhost');

@@ -1,0 +1,24 @@
+language: php
+
+php:
+  - 5.3.3
+  - 5.3
+  - 5.4
+  - 5.5
+
+matrix:
+  allow_failures:
+    - php: 5.5
+env:
+  - DB=mysql
+  - DB=pgsql
+
+before_install:
+  - cp tests/TestConfiguration.travis-$[DB}.php tests/TestConfiguration.php
+
+before_script:
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS gotcms_tests;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE gotcms_tests;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE IF NOT EXISTS gotcms_tests;'; fi"
+
+script: ./tests/runtests.sh
