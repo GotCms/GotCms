@@ -1,0 +1,74 @@
+[
+  {
+    "ref": "refs/tags/v0.1",
+    "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/v0.1",
+    "object": {
+      "sha": "00e11cc09c219fe5be9db328c2655c2c2984f32a",
+      "type": "tag",
+      "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/tags/00e11cc09c219fe5be9db328c2655c2c2984f32a"
+    }
+  },
+  {
+    "ref": "refs/tags/v0.1.1",
+    "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/v0.1.1",
+    "object": {
+      "sha": "4e1c105b7cf463443ec57b138abcb3e5387a4287",
+      "type": "tag",
+      "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/tags/4e1c105b7cf463443ec57b138abcb3e5387a4287"
+    }
+  },
+  {
+    "ref": "refs/tags/v0.1.2",
+    "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/v0.1.2",
+    "object": {
+      "sha": "f8a3b55dc67959ab0b7c13f307119c430a4d8c2f",
+      "type": "tag",
+      "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/tags/f8a3b55dc67959ab0b7c13f307119c430a4d8c2f"
+    }
+  },
+  {
+    "ref": "refs/tags/v0.1.3",
+    "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/v0.1.3",
+    "object": {
+      "sha": "a9c1fe716c343d9db996cf1da825eb7a80017ec8",
+      "type": "tag",
+      "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/tags/a9c1fe716c343d9db996cf1da825eb7a80017ec8"
+    }
+  },
+  {
+    "ref": "refs/tags/v0.1.4",
+    "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/v0.1.4",
+    "object": {
+      "sha": "1872e4fdb53973a82358082bc54c71871a0b5ad1",
+      "type": "tag",
+      "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/tags/1872e4fdb53973a82358082bc54c71871a0b5ad1"
+    }
+  },
+  {
+    "ref": "refs/tags/v0.1.5",
+    "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/v0.1.5",
+    "object": {
+      "sha": "4a390a653a3974de9bb81cc5451e698d5b613c51",
+      "type": "tag",
+      "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/tags/4a390a653a3974de9bb81cc5451e698d5b613c51"
+    }
+  },
+  {
+    "ref": "refs/tags/v0.1a",
+    "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/v0.1a",
+    "object": {
+      "sha": "111f9010cdc69ec97543e7737cf8e1d3d5710367",
+      "type": "tag",
+      "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/tags/111f9010cdc69ec97543e7737cf8e1d3d5710367"
+    }
+  },
+  {
+    "ref": "refs/tags/v0.1b",
+    "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/v0.1b",
+    "object": {
+      "sha": "0a8d10ba20ef7f05a146b1b8b01bf29e71ad5a59",
+      "type": "tag",
+      "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/tags/0a8d10ba20ef7f05a146b1b8b01bf29e71ad5a59"
+    }
+  }
+]
