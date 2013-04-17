@@ -410,7 +410,7 @@ class Visitor extends AbstractTable
      *
      * @return void
      */
-    protected function groupByDate($sort, Select &$select)
+    public function groupByDate($sort, Select &$select)
     {
         if ($this->getDriverName() == 'pdo_pgsql') {
             switch($sort) {
