@@ -29,6 +29,7 @@ namespace Development\Form;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Property\Model as PropertyModel;
 use Gc\Tab\Model as TabModel;
+use Gc\User\Collection as UserCollection;
 use Gc\User\Model as UserModel;
 use Gc\View\Model as ViewModel;
 
@@ -83,6 +84,13 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testInit()
     {
+        $collection = new UserCollection();
+        foreach ($collection->getUsers() as $user) {
+            $user->delete();
+        }
+
+        unset($collection);
+
         $userModel = UserModel::fromArray(
             array(
                 'lastname' => 'Test',

@@ -130,7 +130,6 @@ function file_put_contents($filename, $content)
     return true;
 }
 
-
 /**
  * Override Gc\Mvc
  */
@@ -139,4 +138,22 @@ namespace Gc\Mvc;
 function glob($pattern, $flags = 0)
 {
     return array(GC_APPLICATION_PATH . '/tests/config/global.php');
+}
+/**
+ * Override Zend\Mail\Transport
+ */
+namespace Zend\Mail\Transport;
+
+function mail($to, $subject, $message, $additional_headers = null, $additional_parameters = null)
+{
+    return true;
+}
+/**
+ * Override Zend\Mail\Transport
+ */
+namespace Gc;
+
+function file_get_contents($filename)
+{
+    return \file_get_contents(GC_MEDIA_PATH . '/github.tags');
 }
