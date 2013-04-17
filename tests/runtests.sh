@@ -3,11 +3,7 @@
 : ${PHPUNIT_OPTS:="--verbose"}
 : ${PHPUNIT_GROUPS:=}
 
-if [[ pwd != pwd"/tests/" ]]
-then
-	cd `pwd`"/tests/"
-fi
-
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 while [ -n "$1" ] ; do
   case "$1" in
     ALL|all)
