@@ -139,6 +139,7 @@ function glob($pattern, $flags = 0)
 {
     return array(GC_APPLICATION_PATH . '/tests/config/global.php');
 }
+
 /**
  * Override Zend\Mail\Transport
  */
@@ -148,6 +149,7 @@ function mail($to, $subject, $message, $additional_headers = null, $additional_p
 {
     return true;
 }
+
 /**
  * Override Zend\Mail\Transport
  */
