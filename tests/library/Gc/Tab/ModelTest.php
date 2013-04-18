@@ -212,12 +212,9 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithWrongValues()
     {
-        /**
-         * Mysql does not generate exception
-         */
         $configuration = Registry::get('Configuration');
         if ($configuration['db']['driver'] == 'pdo_mysql') {
-            return;
+            $this->markTestSkipped('Mysql does not thrown exception.');
         }
 
         $this->setExpectedException('\Gc\Exception');
@@ -249,12 +246,9 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteWithWrongValues()
     {
-        /**
-         * Mysql does not generate exception
-         */
         $configuration = Registry::get('Configuration');
         if ($configuration['db']['driver'] == 'pdo_mysql') {
-            return;
+            $this->markTestSkipped('Mysql does not thrown exception.');
         }
 
         $this->setExpectedException('\Gc\Exception');

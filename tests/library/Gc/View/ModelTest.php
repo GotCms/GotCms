@@ -260,12 +260,9 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteWithWrongId()
     {
-        /**
-         * Mysql does not generate exception
-         */
         $configuration = Registry::get('Configuration');
         if ($configuration['db']['driver'] == 'pdo_mysql') {
-            return;
+            $this->markTestSkipped('Mysql does not thrown exception.');
         }
 
         $this->setExpectedException('Gc\Exception');
