@@ -15,7 +15,7 @@ Please read the [LICENSE.txt](LICENSE.txt) file for the exact license details th
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 
-### Installation
+### Download
 
 Composer:
 
@@ -63,6 +63,7 @@ Make sure read and write access are available by apache user/group for these dir
 - public/media
 - data/cache
 
+
 ###Required
 
 - An HTTP server
@@ -75,6 +76,7 @@ Make sure read and write access are available by apache user/group for these dir
 - A database supported by PDO.
     - MySQL
     - PostgreSQL
+
 
 ### Recommended
 
