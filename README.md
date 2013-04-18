@@ -4,25 +4,34 @@ Master status: [![Build Status](https://travis-ci.org/PierreRambaud/GotCms.png?b
 
 ## About GotCms
 
-GotCms is a content management system based on [Zend Framework 2.1.4](http://framework.zend.com/).
+GotCms is a content management system based on [Zend Framework 2.1.5](http://framework.zend.com/).
 
 This product has been made available under the terms of the GNU GPL version 3.
 Please read the [LICENSE.txt](LICENSE.txt) file for the exact license details that apply to GotCms.
 
-## Updates in 0.1.5
+## Release information
+
+### Updates in 0.1.5
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 
-## Usage
+### Installation
 
-Installation via composer:
+Composer:
 
     $ curl -s https://getcomposer.org/installer | php
     $ php composer.phar install
 
-Installation via Git:
+Git:
 
     $ git clone https://github.com/PierreRambaud/GotCms.git
+
+Zip archive:
+
+[https://github.com/PierreRambaud/GotCms/archive/v0.1.5.zip](https://github.com/PierreRambaud/GotCms/archive/v0.1.5.zip)
+
+
+### Apache configuration
 
 If you want to use VirtualHost, copy the .htaccess content otherwise check if "AllowOverride" is set to "All".
 
@@ -54,7 +63,7 @@ Make sure read and write access are available by apache user/group for these dir
 - public/media
 - data/cache
 
-##Required
+###Required
 
 - An HTTP server
 - Php version >= 5.3.3
@@ -67,7 +76,7 @@ Make sure read and write access are available by apache user/group for these dir
     - MySQL
     - PostgreSQL
 
-## Recommended
+### Recommended
 
 Actually only tested with Apache HTTP server.
 Php configuration:
@@ -79,7 +88,7 @@ Php configuration:
 - Session Auto Start: Off
 
 
-## Installation
+### Installation
 
 Go to the website, it will redirect you to /install.
 Please follow instructions, there'are only five steps:
@@ -96,12 +105,12 @@ After you can manage your website, create documents, documents types, datatypes,
 All contents are stored in database and works with stream wrapper.
 
 
-## Contributing
+### Contributing
 
 If you wish to contribute to GotCms, please read the
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
 
-## Notes
+### Notes
 
 Please visits the best framework ever : [Zend Framework 2](http://framework.zend.com/)
