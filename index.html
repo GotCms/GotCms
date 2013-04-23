@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Gotcms : GotCms is a Cms based on Zend Framework 2 and PosgreSQL / MySQL" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Gotcms</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/PierreRambaud/GotCms">View on GitHub</a>
+
+          <h1 id="project_title">Gotcms</h1>
+          <h2 id="project_tagline">GotCms is a Cms based on Zend Framework 2 and PosgreSQL / MySQL</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/PierreRambaud/GotCms/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/PierreRambaud/GotCms/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>GotCms - Information</h1>
+
+<p>Master status: <a href="https://travis-ci.org/PierreRambaud/GotCms"><img src="https://travis-ci.org/PierreRambaud/GotCms.png?branch=master" alt="Build Status"></a></p>
+
+<h2>About GotCms</h2>
+
+<p>GotCms is a content management system based on <a href="http://framework.zend.com/">Zend Framework 2.1.5</a>.</p>
+
+<p>This product has been made available under the terms of the GNU GPL version 3.
+Please read the <a href="LICENSE.txt">LICENSE.txt</a> file for the exact license details that apply to GotCms.</p>
+
+<h2>Release information</h2>
+
+<h3>Updates in 0.1.5</h3>
+
+<p>Please see <a href="CHANGELOG.md">CHANGELOG.md</a>.</p>
+
+<h3>Download</h3>
+
+<p>Composer:</p>
+
+<pre><code>$ curl -s https://getcomposer.org/installer | php
+$ php composer.phar install
+</code></pre>
+
+<p>Git:</p>
+
+<pre><code>$ git clone https://github.com/PierreRambaud/GotCms.git
+</code></pre>
+
+<p>Zip archive:</p>
+
+<p><a href="https://github.com/PierreRambaud/GotCms/archive/0.1.5.zip">https://github.com/PierreRambaud/GotCms/archive/0.1.5.zip</a></p>
+
+<h3>Apache configuration</h3>
+
+<p>If you want to use VirtualHost, copy the .htaccess content otherwise check if "AllowOverride" is set to "All".</p>
+
+<p>Example of VirtualHost:</p>
+
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerAdmin admin@got-cms.com
+    ServerName got-cms.com
+    ServerAlias www.got-cms.com
+    DocumentRoot /var/www/got-cms/public
+    &lt;Directory /var/www/got-cms/public&gt;
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride None
+        Order allow,deny
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} -s [OR]
+        RewriteCond %{REQUEST_FILENAME} -l [OR]
+        RewriteCond %{REQUEST_FILENAME} -d
+        RewriteRule ^.*$ - [NC,L]
+        RewriteRule ^.*$ index.php [NC,L]
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>Make sure read and write access are available by apache user/group for these directories:</p>
+
+<ul>
+<li>config/autoload</li>
+<li>public/frontend</li>
+<li>public/media</li>
+<li>data/cache</li>
+</ul><h3>Required</h3>
+
+<ul>
+<li>An HTTP server</li>
+<li>Php version &gt;= 5.3.3</li>
+<li>XML support</li>
+<li>PDO support</li>
+<li>Intl support</li>
+<li>Mbstring support</li>
+<li>Json support</li>
+<li>A database supported by PDO.
+
+<ul>
+<li>MySQL</li>
+<li>PostgreSQL</li>
+</ul>
+</li>
+</ul><h3>Recommended</h3>
+
+<p>Actually only tested with Apache HTTP server.
+Php configuration:</p>
+
+<ul>
+<li>Display Errors: Off</li>
+<li>File Uploads: On</li>
+<li>Magic Quotes Runtime: Off</li>
+<li>Magic Quotes GPC: Off</li>
+<li>Register Globals: Off</li>
+<li>Session Auto Start: Off</li>
+</ul><h3>Installation</h3>
+
+<p>Go to the website, it will redirect you to /install.
+Please follow instructions, there'are only five steps:</p>
+
+<ul>
+<li>Language</li>
+<li>License</li>
+<li>Pre-configuration</li>
+<li>Database connection</li>
+<li>Configuration</li>
+</ul><p>Adminstration is accessible with /admin in URL.</p>
+
+<p>After you can manage your website, create documents, documents types, datatypes, views, layouts, scripts, ...</p>
+
+<p>All contents are stored in database and works with stream wrapper.</p>
+
+<h3>Contributing</h3>
+
+<p>If you wish to contribute to GotCms, please read the
+<a href="CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+
+<h3>Notes</h3>
+
+<p>Please visits the best framework ever : <a href="http://framework.zend.com/">Zend Framework 2</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Gotcms maintained by <a href="https://github.com/PierreRambaud">PierreRambaud</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-33900751-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
