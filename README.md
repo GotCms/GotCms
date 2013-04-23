@@ -93,18 +93,18 @@ Php configuration:
 ### Installation
 
 Go to the website, it will redirect you to /install.
-Please follow instructions, there'are only five steps:
+Please follow instructions, there are only five steps:
 - Language
 - License
 - Pre-configuration
 - Database connection
 - Configuration
 
-Adminstration is accessible with /admin in URL.
+Administration page is accessible by typing /admin after your installation path (i.e : http://yourdomain.tld/admin)
 
-After you can manage your website, create documents, documents types, datatypes, views, layouts, scripts, ...
+Then you can manage your website, create documents, documents types, datatypes, views, layouts, scripts, ...
 
-All contents are stored in database and works with stream wrapper.
+All contents are stored in database.
 
 
 ### Contributing
