@@ -82,7 +82,7 @@ final class Version
                 // Simplify the API response into a simple array of version numbers
                 $tags = array_map(
                     function ($tag) {
-                        return substr($tag['ref'], 11); // Reliable because we're filtering on 'refs/tags/v'
+                        return substr($tag['ref'], 10); // Reliable because we're filtering on 'refs/tags/'
                     },
                     $apiResponse
                 );

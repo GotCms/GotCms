@@ -28,7 +28,7 @@ Git:
 
 Zip archive:
 
-[https://github.com/PierreRambaud/GotCms/archive/v0.1.5.zip](https://github.com/PierreRambaud/GotCms/archive/v0.1.5.zip)
+[https://github.com/PierreRambaud/GotCms/archive/0.1.5.zip](https://github.com/PierreRambaud/GotCms/archive/0.1.5.zip)
 
 
 ### Apache configuration
