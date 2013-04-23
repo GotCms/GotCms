@@ -61,12 +61,12 @@
                 <td><?php echo $this->escapeHtml($view->getDescription()); ?></td>
                 <td class="a-center">
                     <a href="<?php echo $this->url('viewEdit', array('id' => $view->getId())); ?>" class="edit-line">
-                        <img src="<?php echo $this->cdn('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
+                        <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>
                 <td class="a-center">
                     <a href="<?php echo $this->url('viewDelete', array('id' => $view->getId())); ?>" class="delete-line">
-                        <img src="<?php echo $this->cdn('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
+                        <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
                     </a>
                 </td>
             </tr>

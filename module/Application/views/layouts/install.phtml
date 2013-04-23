@@ -42,15 +42,15 @@
     <?php
     echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
     echo $this->headScript()
-        ->appendFile($this->cdn('/backend/js/libs/modernizr-2.6.2.min.js'), 'text/javascript')
-        ->appendFile($this->cdn('/backend/js/libs/jquery-1.9.1.js'), 'text/javascript')
-        ->appendFile($this->cdn('/backend/js/plugins.js'), 'text/javascript')
-        ->appendFile($this->cdn('/backend/js/generic-classes.js'), 'text/javascript')
-        ->appendFile($this->cdn('/backend/js/gotcms.js'), 'text/javascript');
+        ->appendFile($this->cdnBackend('/backend/js/libs/modernizr-2.6.2.min.js'), 'text/javascript')
+        ->appendFile($this->cdnBackend('/backend/js/libs/jquery-1.9.1.js'), 'text/javascript')
+        ->appendFile($this->cdnBackend('/backend/js/plugins.js'), 'text/javascript')
+        ->appendFile($this->cdnBackend('/backend/js/generic-classes.js'), 'text/javascript')
+        ->appendFile($this->cdnBackend('/backend/js/gotcms.js'), 'text/javascript');
 
     echo $this->HeadLink()
-        ->appendStylesheet($this->cdn('/backend/css/style.css'))
-        ->appendStylesheet($this->cdn('/backend/css/install.css'));
+        ->appendStylesheet($this->cdnBackend('/backend/css/style.css'))
+        ->appendStylesheet($this->cdnBackend('/backend/css/install.css'));
     ?>
 </head>
 <body>

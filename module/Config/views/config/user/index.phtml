@@ -54,12 +54,12 @@
                 <td><?php echo $this->escapeHtml($user->getLogin()); ?></td>
                 <td class="a-center">
                     <a href="<?php echo $this->url('userEdit', array('id' => $user->getId())); ?>" class="edit-line">
-                        <img src="<?php echo $this->cdn('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
+                        <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>
                 <td class="a-center">
                     <a href="<?php echo $this->url('userDelete', array('id' => $user->getId())); ?>" class="delete-line">
-                        <img src="<?php echo $this->cdn('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
+                        <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
                     </a>
                 </td>
             </tr>

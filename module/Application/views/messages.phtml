@@ -32,7 +32,7 @@
         <?php foreach ($messages as $message): ?>
             <div class="notification <?php echo $type; ?>">
                 <a class="close" href="#">
-                    <img alt="<?php echo $this->escapeHtml($this->translate('Close')); ?>" title="<?php echo $this->escapeHtml($this->translate('Close this notification')); ?>" src="<?php echo $this->cdn('backend/images/close-small.png'); ?>">
+                    <img alt="<?php echo $this->escapeHtml($this->translate('Close')); ?>" title="<?php echo $this->escapeHtml($this->translate('Close this notification')); ?>" src="<?php echo $this->cdnBackend('backend/images/close-small.png'); ?>">
                 </a>
                 <div>
                     <?php echo $this->escapeHtml($this->translate($message)); ?>
