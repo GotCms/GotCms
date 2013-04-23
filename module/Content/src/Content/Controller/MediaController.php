@@ -97,11 +97,15 @@ class MediaController extends Action
 
         $helperBroker = $this->getServiceLocator()->get('ViewHelperManager');
         $headscript   = $helperBroker->get('HeadScript');
-        $headscript->appendFile('/backend/js/libs/elfinder.min.js', 'text/javascript');
+        $cdn          = $helperBroker->get('CdnBackend');
+        $headscript->appendFile($cdn('/backend/js/libs/elfinder.min.js'), 'text/javascript');
 
         $language = preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale());
         if ($language != 'en') {
-            $headscript->appendFile(sprintf('/backend/js/libs/i18n/elfinder.%s.js', $language), 'text/javascript');
+            $headscript->appendFile(
+                $cdn(sprintf('/backend/js/libs/i18n/elfinder.%s.js', $language)),
+                'text/javascript'
+            );
         }
 
         return array('language' => preg_replace('~(.*)_.*~', '$1', Registry::get('Translator')->getLocale()));

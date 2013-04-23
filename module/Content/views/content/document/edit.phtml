@@ -28,7 +28,7 @@
 
 ?>
 <form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post" enctype="multipart/form-data">
-    <input id="input-save" type="image" alt="<?php echo $this->escapeHtml($this->translate('Save')); ?>" src="<?php echo $this->basePath('backend/images/save.png'); ?>">
+    <input id="input-save" type="image" alt="<?php echo $this->escapeHtml($this->translate('Save')); ?>" src="<?php echo $this->cdn('backend/images/save.png'); ?>">
 
     <div id="tabs" style="margin-bottom:20px">
         <?php echo $this->tabs; ?>

@@ -152,7 +152,7 @@ footer a:hover {text-decoration:underline;}
 .input-submit:active {position: relative;top: 1px;background: -moz-linear-gradient(center top , #000000, #444444) repeat scroll 0 0 transparent;color: #666666;}
 
 .simple-form {overflow:hidden;min-height: 400px;}
-.simple-form label {width:150px;display:inline-block;height:35px;}
+.simple-form label {width:250px;display:inline-block;height:35px;}
 .simple-form a,
 .simple-form a:visited {color:#FFFFFF;}
 

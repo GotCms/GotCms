@@ -46,6 +46,7 @@ use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container as SessionContainer;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
 use Zend\Session\SessionManager;
+use Zend\Uri\Http as Uri;
 
 /**
  * Generic Module
@@ -96,46 +97,15 @@ abstract class Module
             \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
             Registry::set('Translator', $translator);
 
-            $uri      = '';
-            $uriClass = $event->getRequest()->getUri();
-            if ($uriClass->getScheme()) {
-                $uri .= $uriClass->getScheme() . ':';
-            }
-
-            if ($uriClass->getHost() !== null) {
-                $uri .= '//';
-                $uri .= $uriClass->getHost();
-                if ($uriClass->getPort() and $uriClass->getPort() != 80) {
-                    $uri .= ':' . $uriClass->getPort();
-                }
-            }
-
-            $event->getRequest()->setBasePath($uri);
             $event->getApplication()->getEventManager()->attach(
                 MvcEvent::EVENT_RENDER_ERROR,
                 array($this, 'prepareException')
             );
-        }
-    }
 
-    /**
-     * Initialize Render error event
-     *
-     * @param Event $event Event
-     *
-     * @return void
-     */
-    public function prepareException($event)
-    {
-        if ($event->getApplication()->getMvcEvent()->getRouteMatch()->getMatchedRouteName() === 'renderWebsite') {
-            $layout = Layout\Model::fromId(CoreConfig::getValue('site_exception_layout'));
-            if (!empty($layout)) {
-                $templatePathStack = $event->getApplication()->getServiceManager()->get(
-                    'Zend\View\Resolver\TemplatePathStack'
-                );
-                $templatePathStack->setUseStreamWrapper(true);
-                file_put_contents($templatePathStack->resolve(RenderController::LAYOUT_NAME), $layout->getContent());
-            }
+            $event->getApplication()->getEventManager()->attach(
+                MvcEvent::EVENT_RENDER_ERROR,
+                array($this, 'prepareException')
+            );
         }
     }
 
@@ -271,7 +241,66 @@ abstract class Module
                             $object->init();
                         }
                     }
+
+                    $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
+                    $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_ROUTE, array($this, 'checkSsl'), -10);
                 }
+            }
+        }
+    }
+
+    /**
+     * Initialize Render error event
+     *
+     * @param Event $event Event
+     *
+     * @return void
+     */
+    public function prepareException($event)
+    {
+        if ($event->getApplication()->getMvcEvent()->getRouteMatch()->getMatchedRouteName() === 'renderWebsite') {
+            $layout = Layout\Model::fromId(CoreConfig::getValue('site_exception_layout'));
+            if (!empty($layout)) {
+                $templatePathStack = $event->getApplication()->getServiceManager()->get(
+                    'Zend\View\Resolver\TemplatePathStack'
+                );
+                $templatePathStack->setUseStreamWrapper(true);
+                file_put_contents($templatePathStack->resolve(RenderController::LAYOUT_NAME), $layout->getContent());
+            }
+        }
+    }
+
+    /**
+     * Check if ssl is forced or not
+     *
+     * @param Zend\EventManager\EventInterface $event Mvc event
+     *
+     * @return null|Zend\Http\PhpEnvironment\Response
+     */
+    public function checkSsl(Zend\EventManager\EventInterface $event)
+    {
+        $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
+        if ((CoreConfig::getValue('force_frontend_ssl') and $matchedRouteName === 'renderWebsite') or
+            (CoreConfig::getValue('force_backend_ssl') and $matchedRouteName !== 'renderWebsite')
+        ) {
+            $request = $event->getRequest();
+            $uri     = $request->getUri();
+            if ($uri->getScheme() !== 'https') {
+                if ($matchedRouteName === 'renderWebsite') {
+                    $sslUri = new Uri(CoreConfig::getValue('secure_frontend_base_path'));
+                } else {
+                    $sslUri = new Uri(CoreConfig::getValue('secure_backend_base_path'));
+                }
+
+                $uri->setPort($sslUri->getPort());
+                $uri->setHost($sslUri->getHost());
+                $uri->setScheme($sslUri->getScheme());
+                $response = $event->getResponse();
+                $response->setStatusCode(302);
+                $response->getHeaders()->addHeaderLine('Location', $request->getUri());
+                $event->stopPropagation();
+
+                return $response;
             }
         }
     }

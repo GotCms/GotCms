@@ -67,6 +67,8 @@ return array(
     ),
     'view_helpers' => array(
         'invokables' => array(
+            'cdn'               => 'Gc\View\Helper\Cdn',
+            'cdnBackend'        => 'Gc\View\Helper\CdnBackend',
             'documents'         => 'Gc\View\Helper\Documents',
             'document'          => 'Gc\View\Helper\Document',
             'formCheckbox'      => 'Gc\View\Helper\FormCheckbox',

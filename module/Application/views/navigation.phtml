@@ -32,7 +32,7 @@ if(!empty($this->adminUser))
 ?>
 <div class="part<?php if ($this->active == 'admin'): ?> active<?php endif; ?>">
     <a href="<?php echo $this->url('admin'); ?>">
-        <img src="<?php echo $this->basePath('backend/images/icones/accueil.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Dashboard')); ?>">
+        <img src="<?php echo $this->cdn('backend/images/icones/accueil.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Dashboard')); ?>">
         <p>
             <?php echo $this->escapeHtml($this->translate('Dashboard')); ?><br>
             <?php echo $this->escapeHtml($this->translate('Administration Panel')); ?>
@@ -43,7 +43,7 @@ if(!empty($this->adminUser))
 <?php if (!empty($permissions['Content'])): ?>
     <div class="part<?php if ($this->active == 'content'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('content'); ?>">
-            <img src="<?php echo $this->basePath('backend/images/icones/content.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
+            <img src="<?php echo $this->cdn('backend/images/icones/content.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
             <p>
                 <?php echo $this->escapeHtml($this->translate('Content')); ?><br>
                 <?php echo $this->escapeHtml($this->translate('Manage content')); ?>
@@ -67,7 +67,7 @@ if(!empty($this->adminUser))
 <?php if (!empty($permissions['Modules'])): ?>
     <div class="part<?php if ($this->active == 'module'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('module'); ?>">
-            <img src="<?php echo $this->basePath('backend/images/icones/module.png'); ?>" width="35" height="39" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
+            <img src="<?php echo $this->cdn('backend/images/icones/module.png'); ?>" width="35" height="39" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
             <p>
                 <?php echo $this->escapeHtml($this->translate('Modules')); ?><br>
                 <?php echo $this->escapeHtml($this->translate('Manage modules')); ?>
@@ -79,7 +79,7 @@ if(!empty($this->adminUser))
 <?php if (!empty($permissions['Stats'])): ?>
     <div class="part<?php if ($this->active == 'statistics'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('statistics'); ?>">
-            <img src="<?php echo $this->basePath('backend/images/icones/stat.png'); ?>" width="32" height="32" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Stats')); ?>">
+            <img src="<?php echo $this->cdn('backend/images/icones/stat.png'); ?>" width="32" height="32" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Stats')); ?>">
             <p>
                 <?php echo $this->escapeHtml($this->translate('Stats')); ?><br>
                 <?php echo $this->escapeHtml($this->translate('Website statistics')); ?>
@@ -91,7 +91,7 @@ if(!empty($this->adminUser))
 <?php if (!empty($permissions['Config'])): ?>
     <div class="part<?php if ($this->active == 'config'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('config'); ?>">
-            <img src="<?php echo $this->basePath('backend/images/icones/config.png'); ?>" width="35" height="40" class="icone" alt="<?php echo $this->escapeHtml($this->translate('System')); ?>">
+            <img src="<?php echo $this->cdn('backend/images/icones/config.png'); ?>" width="35" height="40" class="icone" alt="<?php echo $this->escapeHtml($this->translate('System')); ?>">
             <p>
                 <?php echo $this->escapeHtml($this->translate('Configuration')); ?><br>
                 <?php echo $this->escapeHtml($this->translate('System configuration')); ?>
@@ -103,7 +103,7 @@ if(!empty($this->adminUser))
 <?php if (!empty($this->adminUser)): ?>
     <div id="logout" class="part">
         <a href="<?php echo $this->url('userLogout'); ?>">
-            <img src="<?php echo $this->basePath('backend/images/icones/logout.png'); ?>" width="40" height="40" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Log out')); ?>">
+            <img src="<?php echo $this->cdn('backend/images/icones/logout.png'); ?>" width="40" height="40" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Log out')); ?>">
             <p>
                 <?php echo $this->escapeHtml(sprintf($this->translate('Welcome %s'), $this->adminUser->getName())); ?><br>
                 <?php echo $this->escapeHtml($this->translate('Click to logout')); ?>

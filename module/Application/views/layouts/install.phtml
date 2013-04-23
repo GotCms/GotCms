@@ -42,15 +42,15 @@
     <?php
     echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
     echo $this->headScript()
-        ->appendFile('/backend/js/libs/modernizr-2.6.2.min.js', 'text/javascript')
-        ->appendFile('/backend/js/libs/jquery-1.9.1.js', 'text/javascript')
-        ->appendFile('/backend/js/plugins.js', 'text/javascript')
-        ->appendFile('/backend/js/generic-classes.js', 'text/javascript')
-        ->appendFile('/backend/js/gotcms.js', 'text/javascript');
+        ->appendFile($this->cdn('/backend/js/libs/modernizr-2.6.2.min.js'), 'text/javascript')
+        ->appendFile($this->cdn('/backend/js/libs/jquery-1.9.1.js'), 'text/javascript')
+        ->appendFile($this->cdn('/backend/js/plugins.js'), 'text/javascript')
+        ->appendFile($this->cdn('/backend/js/generic-classes.js'), 'text/javascript')
+        ->appendFile($this->cdn('/backend/js/gotcms.js'), 'text/javascript');
 
     echo $this->HeadLink()
-        ->appendStylesheet('/backend/css/style.css')
-        ->appendStylesheet('/backend/css/install.css');
+        ->appendStylesheet($this->cdn('/backend/css/style.css'))
+        ->appendStylesheet($this->cdn('/backend/css/install.css'));
     ?>
 </head>
 <body>

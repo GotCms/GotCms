@@ -28,7 +28,7 @@
 
 ?>
 <form autocomplete="off" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
-    <input type="image" src="<?php echo $this->basePath('backend/images/save.png'); ?>" value="1" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
+    <input type="image" src="<?php echo $this->cdn('backend/images/save.png'); ?>" value="1" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
     <table id="table-translation-edit" class="table-list">
         <colgroup>
             <col width="43%">

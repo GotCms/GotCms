@@ -212,34 +212,35 @@ class Action extends AbstractActionController
              */
             $helperBroker = $this->getServiceLocator()->get('ViewHelperManager');
             $headscript   = $helperBroker->get('HeadScript');
+            $cdn          = $helperBroker->get('CdnBackend');
             $headscript
-                ->appendFile('/backend/js/libs/modernizr-2.6.2.min.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/jquery-1.9.1.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/jquery.browser.js', 'text/javascript')
-                ->appendFile('/backend/js/plugins.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/jquery-ui-1.10.1.custom.min.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/codemirror/lib/codemirror.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/codemirror/mode/xml/xml.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/codemirror/mode/javascript/javascript.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/codemirror/mode/css/css.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/codemirror/mode/clike/clike.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/codemirror/mode/php/php.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/jquery.jstree.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/jquery.contextMenu.js', 'text/javascript')
-                ->appendFile('/backend/js/libs/dropdown.js', 'text/javascript')
-                ->appendFile('/backend/js/generic-classes.js', 'text/javascript')
-                ->appendFile('/backend/js/gotcms.js', 'text/javascript');
+                ->appendFile($cdn('/backend/js/libs/modernizr-2.6.2.min.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/jquery-1.9.1.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/jquery.browser.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/plugins.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/jquery-ui-1.10.1.custom.min.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/codemirror/lib/codemirror.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/codemirror/mode/xml/xml.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/codemirror/mode/javascript/javascript.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/codemirror/mode/css/css.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/codemirror/mode/clike/clike.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/codemirror/mode/php/php.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/jquery.jstree.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/jquery.contextMenu.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/libs/dropdown.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/generic-classes.js'), 'text/javascript')
+                ->appendFile($cdn('/backend/js/gotcms.js'), 'text/javascript');
 
             $headlink = $helperBroker->get('HeadLink');
             $headlink
-                ->appendStylesheet('/backend/css/normalize.css')
-                ->appendStylesheet('/backend/js/libs/codemirror/lib/codemirror.css')
-                ->appendStylesheet('/backend/css/jquery-ui-1.10.1.custom.css')
-                ->appendStylesheet('/backend/css/jquery.treeview.css')
-                ->appendStylesheet('/backend/css/elfinder.min.css')
-                ->appendStylesheet('/backend/css/jquery.contextMenu.css')
-                ->appendStylesheet('/backend/css/dropdown.css')
-                ->appendStylesheet('/backend/css/style.css');
+                ->appendStylesheet($cdn('/backend/css/normalize.css'))
+                ->appendStylesheet($cdn('/backend/js/libs/codemirror/lib/codemirror.css'))
+                ->appendStylesheet($cdn('/backend/css/jquery-ui-1.10.1.custom.css'))
+                ->appendStylesheet($cdn('/backend/css/jquery.treeview.css'))
+                ->appendStylesheet($cdn('/backend/css/elfinder.min.css'))
+                ->appendStylesheet($cdn('/backend/css/jquery.contextMenu.css'))
+                ->appendStylesheet($cdn('/backend/css/dropdown.css'))
+                ->appendStylesheet($cdn('/backend/css/style.css'));
         }
     }
 

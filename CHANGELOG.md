@@ -6,6 +6,7 @@
 - Add specific layout for exception in front (https://github.com/PierreRambaud/GotCms/issues/44)
 - Update to latest GotSniffs version (https://github.com/PierreRambaud/GotCms/issues/46)
 - Update to Zend Framework 2.1.5
+- Urls configuration (backend, frontend and cdn) (https://github.com/PierreRambaud/GotCms/issues/40)
 
 ##0.1.5 (08 Apr 2013):
 - Git updater failed (https://github.com/PierreRambaud/GotCms/issues/24)
