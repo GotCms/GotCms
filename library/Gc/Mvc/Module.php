@@ -280,28 +280,44 @@ abstract class Module
     public function checkSsl(Zend\EventManager\EventInterface $event)
     {
         $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
-        if ((CoreConfig::getValue('force_frontend_ssl') and $matchedRouteName === 'renderWebsite') or
-            (CoreConfig::getValue('force_backend_ssl') and $matchedRouteName !== 'renderWebsite')
-        ) {
-            $request = $event->getRequest();
-            $uri     = $request->getUri();
-            if ($uri->getScheme() !== 'https') {
-                if ($matchedRouteName === 'renderWebsite') {
-                    $sslUri = new Uri(CoreConfig::getValue('secure_frontend_base_path'));
-                } else {
-                    $sslUri = new Uri(CoreConfig::getValue('secure_backend_base_path'));
-                }
+        $request          = $event->getRequest();
+        $uri              = $request->getUri();
 
-                $uri->setPort($sslUri->getPort());
-                $uri->setHost($sslUri->getHost());
-                $uri->setScheme($sslUri->getScheme());
-                $response = $event->getResponse();
-                $response->setStatusCode(302);
-                $response->getHeaders()->addHeaderLine('Location', $request->getUri());
-                $event->stopPropagation();
-
-                return $response;
+        if ($matchedRouteName === 'renderWebsite') {
+            if ($uri->getScheme() === 'https' or CoreConfig::getValue('force_frontend_ssl')) {
+                $newUri = new Uri(CoreConfig::getValue('secure_frontend_base_path'));
+                $newUri->setScheme('https');
+            } else {
+                $newUri = new Uri(CoreConfig::getValue('unsecure_frontend_base_path'));
             }
+        } else {
+            if ($uri->getScheme() === 'https' or CoreConfig::getValue('force_backend_ssl')) {
+                $newUri = new Uri(CoreConfig::getValue('secure_backend_base_path'));
+                $newUri->setScheme('https');
+            } else {
+                $newUri = new Uri(CoreConfig::getValue('unsecure_backend_base_path'));
+            }
+        }
+
+        if (!empty($newUri) and $newUri->isValid() and
+            ($newUri->getHost() != '' and $uri->getHost() != $newUri->getHost()) or
+            ($newUri->getScheme() != '' and $uri->getScheme() != $newUri->getScheme())
+        ) {
+            $uri->setPort($newUri->getPort());
+            if ($newUri->getHost() != '') {
+                $uri->setHost($newUri->getHost());
+            }
+
+            if ($newUri->getScheme() != '') {
+                $uri->setScheme($newUri->getScheme());
+            }
+
+            $response = $event->getResponse();
+            $response->setStatusCode(302);
+            $response->getHeaders()->addHeaderLine('Location', $request->getUri());
+            $event->stopPropagation();
+
+            return $response;
         }
     }
 }

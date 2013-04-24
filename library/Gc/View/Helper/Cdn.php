@@ -29,6 +29,7 @@ namespace Gc\View\Helper;
 
 use Gc\Core\Config as CoreConfig;
 use Zend\View\Helper\AbstractHelper;
+use Gc\Registry;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router.
@@ -56,7 +57,8 @@ class Cdn extends AbstractHelper
     public function __invoke($path)
     {
         if ($this->basePath === null) {
-            if (CoreConfig::getValue('force_frontend_ssl')) {
+            $scheme = Registry::get('Application')->getRequest()->getUri()->getScheme();
+            if (CoreConfig::getValue('force_frontend_ssl') or $scheme === 'https') {
                 $basePath = CoreConfig::getValue('secure_cdn_base_path');
             } else {
                 $basePath = CoreConfig::getValue('unsecure_cdn_base_path');

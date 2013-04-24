@@ -46,10 +46,18 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Module
-     *
-     * @return void
      */
     protected $object;
+
+    /**
+     * @var Zend\Uri\Http
+     */
+    protected $uri;
+
+    /**
+     * @var Zend\Mvc\MvcEvent
+     */
+    protected $mvcEvent;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -60,7 +68,9 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         include_once __DIR__ . '/ModuleUnit.php';
-        $this->object = new ModuleUnit;
+        $this->object   = new ModuleUnit;
+        $this->uri      = Registry::get('Application')->getRequest()->getUri();
+        $this->mvcEvent = Registry::get('Application')->getMvcEvent();
     }
 
     /**
@@ -73,7 +83,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->object);
     }
-
     /**
      * Test
      *
@@ -84,9 +93,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testOnBootstrap()
     {
         Registry::getInstance()->offsetUnset('Translator');
-        $uri = Registry::get('Application')->getRequest()->getUri();
-        $uri->setHost('got-cms.com');
-        $uri->setPort(443);
         $this->assertNull($this->object->onBootstrap(Registry::get('Application')->getMvcEvent()));
     }
 
@@ -112,7 +118,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         $layoutModel->save();
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('renderWebsite');
-        Registry::get('Application')->getMvcEvent()->setRouteMatch($routeMatch);
+        $this->mvcEvent->setRouteMatch($routeMatch);
         CoreConfig::setValue('site_exception_layout', $layoutModel->getId());
         $this->assertNull($this->object->prepareException(Registry::get('Application')->getMvcEvent()));
         $layoutModel->delete();
@@ -128,11 +134,15 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testCheckSslWithFrontendRoute()
     {
         CoreConfig::setValue('force_frontend_ssl', 1);
+        CoreConfig::setValue('secure_frontend_base_path', 'https://got-cms.com');
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('renderWebsite');
-        Registry::get('Application')->getMvcEvent()->setRouteMatch($routeMatch);
-        $result = $this->object->checkSsl(Registry::get('Application')->getMvcEvent());
+        $this->mvcEvent->setRouteMatch($routeMatch);
+        $oldScheme = $this->uri->getScheme();
+        $result    = $this->object->checkSsl($this->mvcEvent);
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+        $this->uri->setScheme($oldScheme);
+        CoreConfig::setValue('secure_frontend_base_path', '');
     }
 
     /**
@@ -147,12 +157,11 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         CoreConfig::setValue('force_frontend_ssl', 1);
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('renderWebsite');
-        Registry::get('Application')->getMvcEvent()->setRouteMatch($routeMatch);
-        $uri       = Registry::get('Application')->getRequest()->getUri();
-        $oldScheme = $uri->getScheme();
-        $uri->setScheme('https');
-        $this->assertNull($this->object->checkSsl(Registry::get('Application')->getMvcEvent()));
-        $uri->setScheme($oldScheme);
+        $this->mvcEvent->setRouteMatch($routeMatch);
+        $oldScheme = $this->uri->getScheme();
+        $this->uri->setScheme('https');
+        $this->assertNull($this->object->checkSsl($this->mvcEvent));
+        $this->uri->setScheme($oldScheme);
     }
 
     /**
@@ -167,8 +176,33 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         CoreConfig::setValue('force_frontend_ssl', 0);
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('renderWebsite');
-        Registry::get('Application')->getMvcEvent()->setRouteMatch($routeMatch);
-        $this->assertNull($this->object->checkSsl(Registry::get('Application')->getMvcEvent()));
+        $this->mvcEvent->setRouteMatch($routeMatch);
+        $oldScheme = $this->uri->getScheme();
+        $this->uri->setScheme('http');
+        $this->assertNull($this->object->checkSsl($this->mvcEvent));
+        $this->uri->setScheme($oldScheme);
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Mvc\Module::checkSsl
+     *
+     * @return void
+     */
+    public function testCheckSslWithithForceBackendRoute()
+    {
+        CoreConfig::setValue('force_backend_ssl', 0);
+        $routeMatch = new RouteMatch(
+            array(
+                'module' => 'Config',
+                'controller' => 'UserController',
+                'action' => 'login',
+            )
+        );
+        $routeMatch->setMatchedRouteName('userLogin');
+        $this->mvcEvent->setRouteMatch($routeMatch);
+        $this->assertNull($this->object->checkSsl($this->mvcEvent));
     }
 
     /**
@@ -181,6 +215,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testCheckSslWithBackendRoute()
     {
         CoreConfig::setValue('force_backend_ssl', 1);
+        CoreConfig::setValue('secure_backend_base_path', 'https://got-cms.com');
         $routeMatch = new RouteMatch(
             array(
                 'module' => 'Config',
@@ -189,9 +224,12 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
             )
         );
         $routeMatch->setMatchedRouteName('userLogin');
-        Registry::get('Application')->getMvcEvent()->setRouteMatch($routeMatch);
-        $result = $this->object->checkSsl(Registry::get('Application')->getMvcEvent());
+        $this->mvcEvent->setRouteMatch($routeMatch);
+        $oldScheme = $this->uri->getScheme();
+        $result    = $this->object->checkSsl($this->mvcEvent);
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+        $this->uri->setScheme($oldScheme);
+        CoreConfig::setValue('secure_backend_base_path', '');
     }
 
     /**
