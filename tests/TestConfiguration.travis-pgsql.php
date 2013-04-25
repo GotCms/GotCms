@@ -24,7 +24,6 @@
  * @link     http://www.got-cms.com
  */
 
-define('TESTS_GENERATE_REPORT', false);
 define('GC_DATABASE_DRIVER', 'pdo_pgsql');
 define('GC_DATABASE_USERNAME', 'postgres');
 define('GC_DATABASE_PASSWORD', '');

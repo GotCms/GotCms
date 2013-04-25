@@ -1,0 +1,6 @@
+<phpunit bootstrap="./Bootstrap.php" colors="true">
+    <testsuite name="GotCms Test Suite">
+        <directory suffix="Test.php" phpVersion="5.3.3" phpVersionOperator=">=">./library/</directory>
+        <directory suffix="Test.php" phpVersion="5.3.3" phpVersionOperator=">=">./module/</directory>
+    </testsuite>
+</phpunit>

@@ -16,6 +16,7 @@ To run tests:
 - Make sure you have a recent version of PHPUnit installed; 3.7.0
   minimally.
 - Enter the `tests/` subdirectory.
+- Copy `phpunit.xml.dist` file to `phpunit.xml`
 - Copy `TestConfiguration.php.dist` file to `TestConfiguration.php`
 - Edit `TestConfiguration.php` to enable database connection.
 

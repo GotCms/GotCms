@@ -15,6 +15,7 @@ env:
 
 before_install:
   - cp tests/TestConfiguration.travis-${DB}.php tests/TestConfiguration.php
+  - cp tests/phpunit.travis.xml tests/phpunit.xml
   - cp tests/config/global.php config/autoload/global.php
 
 before_script:

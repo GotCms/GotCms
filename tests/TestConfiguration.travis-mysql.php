@@ -24,7 +24,6 @@
  * @link     http://www.got-cms.com
  */
 
-define('TESTS_GENERATE_REPORT', false);
 define('GC_DATABASE_DRIVER', 'pdo_mysql');
 define('GC_DATABASE_USERNAME', 'travis');
 define('GC_DATABASE_PASSWORD', '');
