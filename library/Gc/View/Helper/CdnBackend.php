@@ -57,11 +57,14 @@ class CdnBackend extends AbstractHelper
     public function __invoke($path)
     {
         if ($this->basePath === null) {
-            $scheme = Registry::get('Application')->getRequest()->getUri()->getScheme();
-            if (CoreConfig::getValue('force_backend_ssl') or $scheme === 'https') {
-                $basePath = CoreConfig::getValue('secure_cdn_base_path');
-            } else {
-                $basePath = CoreConfig::getValue('unsecure_cdn_base_path');
+            $basePath = '';
+            if (Registry::isRegistered('Db')) {
+                $scheme = Registry::get('Application')->getRequest()->getUri()->getScheme();
+                if (CoreConfig::getValue('force_backend_ssl') or $scheme === 'https') {
+                    $basePath = CoreConfig::getValue('secure_cdn_base_path');
+                } else {
+                    $basePath = CoreConfig::getValue('unsecure_cdn_base_path');
+                }
             }
 
             $this->basePath = rtrim($basePath, '/');

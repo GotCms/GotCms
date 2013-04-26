@@ -92,20 +92,15 @@ abstract class Module
 
             if (Registry::isRegistered('Db')) {
                 $translator->setLocale(CoreConfig::getValue('locale'));
+
+                $event->getApplication()->getEventManager()->attach(
+                    MvcEvent::EVENT_RENDER_ERROR,
+                    array($this, 'prepareException')
+                );
             }
 
             \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
             Registry::set('Translator', $translator);
-
-            $event->getApplication()->getEventManager()->attach(
-                MvcEvent::EVENT_RENDER_ERROR,
-                array($this, 'prepareException')
-            );
-
-            $event->getApplication()->getEventManager()->attach(
-                MvcEvent::EVENT_RENDER_ERROR,
-                array($this, 'prepareException')
-            );
         }
     }
 
