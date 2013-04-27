@@ -46,9 +46,11 @@
         ->appendFile($this->cdnBackend('/backend/js/libs/jquery-1.9.1.js'), 'text/javascript')
         ->appendFile($this->cdnBackend('/backend/js/plugins.js'), 'text/javascript')
         ->appendFile($this->cdnBackend('/backend/js/generic-classes.js'), 'text/javascript')
+        ->appendFile($this->cdnBackend('/backend/js/libs/dropdown.js'), 'text/javascript')
         ->appendFile($this->cdnBackend('/backend/js/gotcms.js'), 'text/javascript');
 
     echo $this->HeadLink()
+        ->appendStylesheet($this->cdnBackend('/backend/css/dropdown.css'))
         ->appendStylesheet($this->cdnBackend('/backend/css/style.css'))
         ->appendStylesheet($this->cdnBackend('/backend/css/install.css'));
     ?>

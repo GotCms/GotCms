@@ -25,20 +25,6 @@ header h1, #main-installer .content, footer {margin:0 auto;}
 .button:hover {text-decoration: none;background: -moz-linear-gradient(center top , #444444, #000000) repeat scroll 0 0 transparent;}
 .button:active {position: relative;top: 1px;background: -moz-linear-gradient(center top , #000000, #444444) repeat scroll 0 0 transparent;color: #666666;}
 
-
-.install-body table {overflow:hidden;border:1px solid #d3d3d3;background:#fefefe;width:100%;margin:5% auto 0;-moz-border-radius:5px; /* FF1+ */-webkit-border-radius:5px; /* Saf3-4 */border-radius:5px;-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);}
-.install-body th, td {padding:8px 18px; text-align:center; }
-.install-body th {padding-top:12px; text-shadow: 1px 1px 1px #fff; background:#e8eaeb;}
-.install-body td {border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;}
-.install-body tr:nth-child(2n+1) td{background:#f6f6f6;}
-.install-body td:first-child, .install-body th:first-child {text-align:left}
-.install-body td:last-child, .install-body th:last-child {border-right:none;}
-.install-body td {background: -moz-linear-gradient(100% 25% 90deg, #fefefe, #f9f9f9);background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f9f9f9), to(#fefefe));}.install-body tr.odd-row td {background: -moz-linear-gradient(100% 25% 90deg, #f6f6f6, #f1f1f1);background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f1f1f1), to(#f6f6f6));}
-.install-body th {background: -moz-linear-gradient(100% 20% 90deg, #e8eaeb, #ededed);background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#ededed), to(#e8eaeb));}
-.install-body tr:first-child th.first {moz-border-radius-topleft:5px;-webkit-border-top-left-radius:5px; /* Saf3-4 */}
-.install-body tr:first-child th.last {-moz-border-radius-topright:5px;-webkit-border-top-right-radius:5px; /* Saf3-4 */}
-.install-body tr:last-child td.first {-moz-border-radius-bottomleft:5px;-webkit-border-bottom-left-radius:5px; /* Saf3-4 */}
-.install-body tr:last-child td.last {-moz-border-radius-bottomright:5px;-webkit-border-bottom-right-radius:5px; /* Saf3-4 */}
 .install-body tr td.error,
 .install-body tr td.warning,
 .install-body tr td.success {background-repeat:no-repeat;background-position:5px 50%}

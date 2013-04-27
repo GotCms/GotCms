@@ -8,6 +8,7 @@
 - Update to Zend Framework 2.1.5
 - Urls configuration (backend, frontend and cdn) (https://github.com/PierreRambaud/GotCms/issues/40)
 - Translator is not loaded during installation (https://github.com/PierreRambaud/GotCms/issues/49)
+- Add style on table elements (https://github.com/PierreRambaud/GotCms/issues/48)
 
 ##0.1.5 (08 Apr 2013):
 - Git updater failed (https://github.com/PierreRambaud/GotCms/issues/24)

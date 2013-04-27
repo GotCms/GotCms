@@ -787,7 +787,7 @@ var Gc = (function($)
         initTableList: function()
         {
             var $this = this;
-            $('.table-list > tbody').find('td').on('click', function(e) {
+            $('.clickable > tbody').find('td').on('click', function(e) {
                 if(e.target.tagName !== 'IMG' && e.target.tagName !== 'A') {
                     $(this).parent().find('.edit-line')[0].click();
                 }

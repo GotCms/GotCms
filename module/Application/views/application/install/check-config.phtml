@@ -35,7 +35,7 @@
 <div class="install-body">
     <div class="m">
         <fieldset>
-            <table>
+            <table class="table-list">
                 <tbody>
                     <?php foreach ($this->phpData as $data): ?>
                         <tr>
@@ -104,16 +104,16 @@
 <div class="install-body">
     <div class="m">
         <fieldset>
-            <table>
+            <table class="table-list">
                 <thead>
                 <tr>
-                    <th class="toggle">
+                    <th>
                         <?php echo $this->escapeHtml($this->translate('Directive')); ?>
                     </th>
-                    <th class="toggle">
+                    <th>
                         <?php echo $this->escapeHtml($this->translate('Recommended')); ?>
                     </th>
-                    <th class="toggle">
+                    <th>
                         <?php echo $this->escapeHtml($this->translate('Actual')); ?>
                     </th>
                 </tr>
