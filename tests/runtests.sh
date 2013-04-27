@@ -1,6 +1,6 @@
 :
 : ${PHPUNIT:="phpunit"}
-: ${PHPUNIT_OPTS:="--verbose"}
+: ${PHPUNIT_OPTS:="-d zend.enable_gc=0 --verbose"}
 : ${PHPUNIT_GROUPS:=}
 
 cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
