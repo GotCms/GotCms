@@ -60,13 +60,15 @@ class Install extends AbstractForm
     public function lang()
     {
         $countryAvailable = array(
-            'fr_FR' => 'Français',
             'en_GB' => 'English',
+            'fr_FR' => 'Français',
         );
 
         $lang = new Element\Select('lang');
         $lang->setAttribute('size', 10)
-            ->setValueOptions($countryAvailable);
+            ->setValueOptions($countryAvailable)
+            ->setValue('en_GB')
+            ->setAttribute('class', 'input-select');
 
         $inputFilter = $this->getInputFilter();
         $inputFilter->add(
@@ -131,7 +133,8 @@ class Install extends AbstractForm
 
         $driver = new Element\Select('driver');
         $driver->setValueOptions($data)
-            ->setAttribute('label', 'Driver');
+            ->setAttribute('label', 'Driver')
+            ->setAttribute('class', 'input-select');
 
         $hostname = new Element\Text('hostname');
         $hostname->setValue('localhost')
@@ -264,8 +267,9 @@ class Install extends AbstractForm
         }
 
         $template = new Element\Select('template');
-        $template->setAttribute('label', 'Default template');
-        $template->setValueOptions($options);
+        $template->setAttribute('label', 'Default template')
+            ->setAttribute('class', 'input-select')
+            ->setValueOptions($options);
 
 
         $this->add($siteName);

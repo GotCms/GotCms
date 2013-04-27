@@ -77,6 +77,11 @@ class InstallController extends Action
         //Force locale to translator
         $session = $this->getSession();
         if (!empty($session['install']['lang'])) {
+            Registry::get('Translator')->addTranslationFilePattern(
+                'phparray',
+                GC_APPLICATION_PATH . '/data/install/translation',
+                '%s.php'
+            );
             Registry::get('Translator')->setLocale($session['install']['lang']);
         }
     }
@@ -194,32 +199,32 @@ class InstallController extends Action
 
         $phpDirective   = array();
         $phpDirective[] = array(
-            'label' => 'Display Errors',
+            'label' => 'Display Errors (display_errors)',
             'needed' => false,
             'value' => ini_get('display_errors') == true
         );
         $phpDirective[] = array(
-            'label' => 'File Uploads',
+            'label' => 'File Uploads (file_uploads)',
             'needed' => true,
             'value' => ini_get('file_uploads') == true
         );
         $phpDirective[] = array(
-            'label' => 'Magic Quotes Runtime',
+            'label' => 'Magic Quotes Runtime (magic_quote_runtime)',
             'needed' => false,
             'value' => ini_get('magic_quote_runtime') == true
         );
         $phpDirective[] = array(
-            'label' => 'Magic Quotes GPC',
+            'label' => 'Magic Quotes GPC (magic_quote_gpc)',
             'needed' => false,
             'value' => ini_get('magic_quote_gpc') == true
         );
         $phpDirective[] = array(
-            'label' => 'Register Globals',
+            'label' => 'Register Globals (register_globals)',
             'needed' => false,
             'value' => ini_get('register_globals') == true
         );
         $phpDirective[] = array(
-            'label' => 'Session Auto Start',
+            'label' => 'Session Auto Start (session.auto_start)',
             'needed' => false,
             'value' => ini_get('session.auto_start') == true
         );
