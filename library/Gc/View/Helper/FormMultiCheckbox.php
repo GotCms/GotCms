@@ -129,8 +129,6 @@ class FormMultiCheckbox extends ZendFormMultiCheckbox
                 );
             } else {
                 $inputAttributes['id'] = 'checkbox-' . uniqid();
-
-                unset($attributes['class']);
                 $input = sprintf(
                     '<div class="input-checkbox"><input %s%s<label for="%s"></label></div>',
                     $this->createAttributesString($inputAttributes),
