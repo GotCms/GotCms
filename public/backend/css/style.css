@@ -156,7 +156,7 @@ footer a:hover {text-decoration:underline;}
 
 #dialog {display:none;}
 #development-form label {display: inline-block;width: 150px;height:25px;}
-#development-form .wrapper-dropdown-select .dropdown li label {display:block; width:auto;height:19px;}
+#development-form .wrapper-dropdown-select .dropdown li label {display:block; width:auto;height:19px;line-height:19px;}
 #development-form input[type="text"], #development-form select {width:250px;}
 
 #table-trad tbody td{text-align:center;vertical-align:middle}

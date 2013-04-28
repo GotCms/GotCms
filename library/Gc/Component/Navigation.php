@@ -117,7 +117,7 @@ class Navigation
                 $data            = array();
                 $data['label']   = $document->getName();
                 $data['uri']     = $this->getBasePath()
-                    . ($parentUrl !== null ? $parentUrl . '/' : '')
+                    . ($parentUrl !== null ? ltrim($parentUrl, '/') . '/' : '')
                     . $document->getUrlKey();
                 $data['visible'] = $document->showInNav();
                 $data['active']  = $data['uri'] == $this->requestUri;
