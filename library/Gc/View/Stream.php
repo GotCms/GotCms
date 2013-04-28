@@ -45,7 +45,7 @@ class Stream
      *
      * @var int
      */
-    protected $position = 0;
+    protected static $position = array();
 
     /**
      * Current stream path.
@@ -87,13 +87,14 @@ class Stream
      */
     public function stream_open($path, $mode, $options, &$openedpath)
     {
-        $this->mode     = $mode;
-        $path           = str_replace('zend.view://', '', $path);
-        $this->path     = $path;
-        $this->position = 0;
-        if (empty(self::$data[$path])) {
-            self::$data[$path] = null;
+        $this->mode                  = $mode;
+        $this->path                  = str_replace('zend.view://', '', $path);
+        self::$position[$this->path] = 0;
+        if (empty(self::$data[$this->path]) or $this->mode == 'wb') {
+            self::$data[$this->path]     = null;
+            self::$position[$this->path] = 0;
         }
+
 
         return true;
     }
@@ -107,8 +108,8 @@ class Stream
      */
     public function stream_read($count)
     {
-        $ret             = substr(self::$data[$this->path], $this->position, $count);
-        $this->position += strlen($ret);
+        $ret                          = substr(self::$data[$this->path], self::$position[$this->path], $count);
+        self::$position[$this->path] += strlen($ret);
 
         return $ret;
     }
@@ -122,15 +123,11 @@ class Stream
      */
     public function stream_write($data)
     {
-        if ($this->mode == 'wb') {
-            self::$data[$this->path] = null;
-            $this->position          = 0;
-        }
+        $left  = substr(self::$data[$this->path], 0, self::$position[$this->path]);
+        $right = substr(self::$data[$this->path], self::$position[$this->path] + strlen($data));
 
-        $left                    = substr(self::$data[$this->path], 0, $this->position);
-        $right                   = substr(self::$data[$this->path], $this->position + strlen($data));
-        self::$data[$this->path] = $left . $data . $right;
-        $this->position         += strlen($left . $data);
+        self::$data[$this->path]      = $left . $data . $right;
+        self::$position[$this->path] += strlen($left . $data);
 
         return strlen($data);
     }
@@ -142,7 +139,7 @@ class Stream
      */
     public function stream_tell()
     {
-        return $this->position;
+        return self::$position[$this->path];
     }
 
     /**
@@ -152,7 +149,7 @@ class Stream
      */
     public function stream_eof()
     {
-        return $this->position >= strlen(self::$data[$this->path]);
+        return self::$position[$this->path] >= strlen(self::$data[$this->path]);
     }
 
     /**
@@ -178,7 +175,7 @@ class Stream
         switch ($whence) {
             case SEEK_SET:
                 if ($offset < strlen(self::$data[$this->path]) and $offset >= 0) {
-                    $this->position = $offset;
+                    self::$position[$this->path] = $offset;
                     return true;
                 } else {
                     return false;
@@ -186,7 +183,7 @@ class Stream
                 break;
             case SEEK_CUR:
                 if ($offset >= 0) {
-                    $this->position += $offset;
+                    self::$position[$this->path] += $offset;
                     return true;
                 } else {
                     return false;
@@ -194,7 +191,7 @@ class Stream
                 break;
             case SEEK_END:
                 if (strlen(self::$data[$this->path]) + $offset >= 0) {
-                    $this->position = strlen(self::$data[$this->path]) + $offset;
+                    self::$position[$this->path] = strlen(self::$data[$this->path]) + $offset;
                     return true;
                 } else {
                     return false;

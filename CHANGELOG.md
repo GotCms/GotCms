@@ -10,6 +10,7 @@
 - Translator is not loaded during installation (https://github.com/PierreRambaud/GotCms/issues/49)
 - Add style on table elements (https://github.com/PierreRambaud/GotCms/issues/48)
 - Bug with postgresql during installation (https://github.com/PierreRambaud/GotCms/issues/51)
+- View Stream bug with huge content length (https://github.com/PierreRambaud/GotCms/issues/52)
 
 ##0.1.5 (08 Apr 2013):
 - Git updater failed (https://github.com/PierreRambaud/GotCms/issues/24)
