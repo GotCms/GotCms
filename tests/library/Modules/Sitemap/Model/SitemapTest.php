@@ -29,6 +29,7 @@ namespace Modules\Sitemap\Model;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
+use Gc\Registry;
 use Gc\User\Model as UserModel;
 use Gc\View\Model as ViewModel;
 
@@ -199,5 +200,22 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
     public function testGenerate()
     {
         $this->assertInternalType('string', $this->object->generate());
+    }
+
+    /**
+     * Test
+     *
+     * @covers Modules\Sitemap\Model\Sitemap::generate
+     * @covers Modules\Sitemap\Model\Sitemap::generateXml
+     *
+     * @return void
+     */
+    public function testGenerateWithEmptyBasePath()
+    {
+        $request  = Registry::get('Application')->getRequest();
+        $basePath = $request->getBasePath();
+        $request->setBasePath('');
+        $this->assertInternalType('string', $this->object->generate());
+        $request->setBasePath($basePath);
     }
 }
