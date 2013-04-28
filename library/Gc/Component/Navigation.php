@@ -65,10 +65,10 @@ class Navigation
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($documentId = 0)
     {
         $documents = new Document\Collection();
-        $documents->load(0);
+        $documents->load($documentId);
         $this->documents  = $documents->getDocuments();
         $this->requestUri = Registry::get('Application')->getRequest()->getRequestUri();
     }
@@ -107,7 +107,7 @@ class Navigation
     public function render(array $documents = null, $parentUrl = null)
     {
         $navigation = array();
-        if ($documents === null && !empty($this->documents)) {
+        if ($documents === null && !is_null($this->documents)) {
             $documents = $this->documents;
         }
 
