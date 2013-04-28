@@ -81,7 +81,7 @@ class DocumentTypeController extends Action
             $form->setData($postData);
             $form->setValues($postData);
             if (!$form->isValid()) {
-                $this->flashMessenger()->addErrorMessage('Can not document type');
+                $this->flashMessenger()->addErrorMessage('Can not save document type');
                 $this->useFlashMessenger();
             } else {
                 $propertyCollection = new Property\Collection();
@@ -236,7 +236,7 @@ class DocumentTypeController extends Action
             $form->setData($postData);
             $form->setValues($postData);
             if (!$form->isValid()) {
-                $this->flashMessenger()->addErrorMessage('Can not document type');
+                $this->flashMessenger()->addErrorMessage('Can not save document type');
                 $this->useFlashMessenger();
             } else {
                 $propertyCollection = new Property\Collection();

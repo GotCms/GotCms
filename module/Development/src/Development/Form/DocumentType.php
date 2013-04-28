@@ -335,7 +335,7 @@ class DocumentType extends AbstractForm
                 'required' => array(
                     'name' => 'required',
                     'required' => false,
-                    'allow_empty' => false,
+                    'allow_empty' => true,
                 )
             ),
             $propertyFieldsetName
