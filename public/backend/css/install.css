@@ -28,6 +28,6 @@ header h1, #main-installer .content, footer {margin:0 auto;}
 .install-body tr td.error,
 .install-body tr td.warning,
 .install-body tr td.success {background-repeat:no-repeat;background-position:5px 50%}
-.install-body tr td.error {background-image:url(../images/notification/error.png);}
-.install-body tr td.success {background-image:url(../images/notification/success.png);}
-.install-body tr td.warning {background-image:url(../images/notification/warning.png);}
+.install-body tr td.error {background-image:url(../images/notification/error.png);background-color:#DF8F8F;}
+.install-body tr td.success {background-image:url(../images/notification/success.png);background-color:#9ADF8F;}
+.install-body tr td.warning {background-image:url(../images/notification/warning.png);background-color:#E6DB55;}
