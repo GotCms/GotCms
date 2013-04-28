@@ -109,6 +109,9 @@
             } else {
                 blocOpt = $(settings.templateOption);
                 blocOpt.children('span').append(text);
+                if (opt.attr('style') !== undefined) {
+                    blocOpt.attr('style', opt.attr('style'));
+                }
             }
 
             if (opt.prop('selected') === true) {

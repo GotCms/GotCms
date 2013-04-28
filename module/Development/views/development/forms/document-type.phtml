@@ -61,7 +61,7 @@
                 <select class="input-select" name="infos[icon_id]" id="infos-icon_id">
                     <?php $icons = $infos_form->get('icon_id')->getValueOptions(); ?>
                     <?php foreach ($icons as $option): ?>
-                        <option value="<?php echo $option->getId(); ?>"<?php if ($infos_form->get('icon_id')->getValue() == $option->getId()): ?> selected="selected"<?php endif; ?> style="background:url(<?php echo $this->escapeHtml($option->getUrl()); ?>) no-repeat; padding-left:20px;"><?php echo $this->escapeHtml($option->getName()); ?> </option>
+                        <option value="<?php echo $option->getId(); ?>"<?php if ($infos_form->get('icon_id')->getValue() == $option->getId()): ?> selected="selected"<?php endif; ?> style="background:url(<?php echo $this->escapeHtml($option->getUrl()); ?>) no-repeat scroll 2px 6px transparent; padding-left:20px;"><?php echo $this->escapeHtml($option->getName()); ?> </option>
                     <?php endforeach; ?>
                 </select>
 
