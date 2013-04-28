@@ -117,6 +117,7 @@ class DocumentType extends AbstractForm
                 'description' => array(
                     'name' => 'description',
                     'required' => false,
+                    'allow_empty' => true,
                 ),
                 'icon_id' => array(
                     'name' => 'icon_id',
@@ -126,7 +127,7 @@ class DocumentType extends AbstractForm
                 'dependency' => array(
                     'name' => 'dependency',
                     'required' => false,
-                    'allow_empty' => false,
+                    'allow_empty' => true,
                 ),
             ),
             'infos'
@@ -194,7 +195,7 @@ class DocumentType extends AbstractForm
                 'available_views' => array(
                     'name' => 'available_views',
                     'required' => false,
-                    'allow_empty' => false,
+                    'allow_empty' => true,
                 ),
             ),
             'views'
@@ -330,7 +331,7 @@ class DocumentType extends AbstractForm
                 'description' => array(
                     'name' => 'description',
                     'required' => false,
-                    'allow_empty' => false,
+                    'allow_empty' => true,
                 ),
                 'required' => array(
                     'name' => 'required',
