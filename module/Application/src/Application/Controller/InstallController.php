@@ -77,11 +77,6 @@ class InstallController extends Action
         //Force locale to translator
         $session = $this->getSession();
         if (!empty($session['install']['lang'])) {
-            Registry::get('Translator')->addTranslationFilePattern(
-                'phparray',
-                GC_APPLICATION_PATH . '/data/install/translation',
-                '%s.php'
-            );
             Registry::get('Translator')->setLocale($session['install']['lang']);
         }
     }
@@ -199,32 +194,32 @@ class InstallController extends Action
 
         $phpDirective   = array();
         $phpDirective[] = array(
-            'label' => 'Display Errors (display_errors)',
+            'label' => 'Display Errors',
             'needed' => false,
             'value' => ini_get('display_errors') == true
         );
         $phpDirective[] = array(
-            'label' => 'File Uploads (file_uploads)',
+            'label' => 'File Uploads',
             'needed' => true,
             'value' => ini_get('file_uploads') == true
         );
         $phpDirective[] = array(
-            'label' => 'Magic Quotes Runtime (magic_quote_runtime)',
+            'label' => 'Magic Quotes Runtime',
             'needed' => false,
             'value' => ini_get('magic_quote_runtime') == true
         );
         $phpDirective[] = array(
-            'label' => 'Magic Quotes GPC (magic_quote_gpc)',
+            'label' => 'Magic Quotes GPC',
             'needed' => false,
             'value' => ini_get('magic_quote_gpc') == true
         );
         $phpDirective[] = array(
-            'label' => 'Register Globals (register_globals)',
+            'label' => 'Register Globals',
             'needed' => false,
             'value' => ini_get('register_globals') == true
         );
         $phpDirective[] = array(
-            'label' => 'Session Auto Start (session.auto_start)',
+            'label' => 'Session Auto Start',
             'needed' => false,
             'value' => ini_get('session.auto_start') == true
         );
@@ -535,7 +530,7 @@ class InstallController extends Action
                                     )
                                     VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
                             } else {
-                                $sqlString = 'INSERT INTO \"user\"
+                                $sqlString = 'INSERT INTO "user"
                                     (
                                         created_at,
                                         updated_at,
