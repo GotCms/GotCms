@@ -245,7 +245,7 @@ var Gc = (function($)
                                 '</dt>' +
                                 '<dd id="required-element-#{tab}-#{id}">' +
                                     '<div class="input-checkbox">' +
-                                        '<input type="checkbox" name="properties[#{tab}-#{id}][required]" class="input-checkbox" id="properties-required-#{tab}-#{id}" value="1">' +
+                                        '<input type="checkbox" name="properties[property#{id}][required]" class="input-checkbox" id="properties-required-#{tab}-#{id}" value="1">' +
                                         '<label for="properties-required-#{tab}-#{id}"></label>' +
                                     '</div>' +
                                 '</dd>' +
