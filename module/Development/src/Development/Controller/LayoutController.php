@@ -157,24 +157,24 @@ class LayoutController extends Action
         $layoutId = $this->getRouteMatch()->getParam('id', null);
         if (!empty($layoutId)) {
             $layout = Layout\Model::fromId($layoutId);
-            if (empty($layout)or empty($files['upload']['tmp_name']) or $files['upload']['error'] != UPLOAD_ERR_OK) {
+            if (empty($layout)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload layout');
                 return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
             }
 
-            $layout->setContent(file_get_contents($files['upload']['tmp_name']));
+            $layout->setContent(file_get_contents($_FILES['upload']['tmp_name']));
             $layout->save();
 
             $this->flashMessenger()->addSuccessMessage('Layout updated');
             return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
         } else {
-            if (empty($files['upload'])) {
+            if (empty($_FILES['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload layouts');
                 return $this->redirect()->toRoute('layoutList');
             }
 
-            foreach ($files['upload']['name'] as $idx => $name) {
-                if ($files['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+            foreach ($_FILES['upload']['name'] as $idx => $name) {
+                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
                     continue;
                 }
 
@@ -184,7 +184,7 @@ class LayoutController extends Action
                     continue;
                 }
 
-                $layout->setContent(file_get_contents($files['upload']['tmp_name'][$idx]));
+                $layout->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
                 $layout->save();
             }
 

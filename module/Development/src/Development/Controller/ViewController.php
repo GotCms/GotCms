@@ -156,23 +156,23 @@ class ViewController extends Action
         $viewId = $this->getRouteMatch()->getParam('id', null);
         if (!empty($viewId)) {
             $view = View\Model::fromId($viewId);
-            if (empty($view)or empty($files['upload']['tmp_name']) or $files['upload']['error'] != UPLOAD_ERR_OK) {
+            if (empty($view)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload view');
                 return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
             }
 
-            $view->setContent(file_get_contents($files['upload']['tmp_name']));
+            $view->setContent(file_get_contents($_FILES['upload']['tmp_name']));
             $view->save();
             $this->flashMessenger()->addSuccessMessage('View updated');
             return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
         } else {
-            if (empty($files['upload'])) {
+            if (empty($_FILES['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload views');
                 return $this->redirect()->toRoute('viewList');
             }
 
-            foreach ($files['upload']['name'] as $idx => $name) {
-                if ($files['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+            foreach ($_FILES['upload']['name'] as $idx => $name) {
+                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
                     continue;
                 }
 
@@ -182,7 +182,7 @@ class ViewController extends Action
                     continue;
                 }
 
-                $view->setContent(file_get_contents($files['upload']['tmp_name'][$idx]));
+                $view->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
                 $view->save();
             }
 

@@ -156,24 +156,24 @@ class ScriptController extends Action
         $scriptId = $this->getRouteMatch()->getParam('id', null);
         if (!empty($scriptId)) {
             $script = Script\Model::fromId($scriptId);
-            if (empty($script)or empty($files['upload']['tmp_name']) or $files['upload']['error'] != UPLOAD_ERR_OK) {
+            if (empty($script)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload script');
                 return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
             }
 
-            $script->setContent(file_get_contents($files['upload']['tmp_name']));
+            $script->setContent(file_get_contents($_FILES['upload']['tmp_name']));
             $script->save();
 
             $this->flashMessenger()->addSuccessMessage('Script updated');
             return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
         } else {
-            if (empty($files['upload'])) {
+            if (empty($_FILES['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload scripts');
                 return $this->redirect()->toRoute('scriptList');
             }
 
-            foreach ($files['upload']['name'] as $idx => $name) {
-                if ($files['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+            foreach ($_FILES['upload']['name'] as $idx => $name) {
+                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
                     continue;
                 }
 
@@ -183,7 +183,7 @@ class ScriptController extends Action
                     continue;
                 }
 
-                $script->setContent(file_get_contents($files['upload']['tmp_name'][$idx]));
+                $script->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
                 $script->save();
             }
 
