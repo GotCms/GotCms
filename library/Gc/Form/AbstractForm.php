@@ -153,7 +153,9 @@ abstract class AbstractForm extends Form
             if (!empty($prefix)) {
                 $randId   = mt_rand();
                 $elements = preg_replace('~name="(.+)(\[.*\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
+                $elements = preg_replace('~name\\\x3D\\\x22(.+)(\\\x5B.*\\\x5D)?\\\x22~iU', 'name\\\x3D\\\x22' . $prefix . '\\\x5B$1\\\x5D$2', $elements);
                 $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $randId . '"', $elements);
+                $elements = preg_replace('~id\\\x3D\\\x22"(.+)\\\x22~iU', 'id\\\x3D\\\x22${1}' . $randId . '\\\x22', $elements);
                 $elements = preg_replace(
                     '~(?:(?!(?<=value=)))("|\')#(.+)("|\')~iU',
                     '${1}#${2}' . $randId . '${3}',

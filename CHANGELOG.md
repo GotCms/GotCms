@@ -1,5 +1,8 @@
 # CHANGELOG13
 
+##0.1.8 (-- --- 2013):
+- Problem with replacement and mixed datatype (https://github.com/PierreRambaud/GotCms/issues/55)
+
 ##0.1.7 (30 Apr 2013):
 - Get latest version can failed on certain php version (https://github.com/PierreRambaud/GotCms/issues/53)
 - Missing version modification in Gc\Version (https://github.com/PierreRambaud/GotCms/issues/54)
