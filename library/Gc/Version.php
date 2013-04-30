@@ -27,6 +27,7 @@
 namespace Gc;
 
 use Zend\Json\Json;
+use Zend\Http\Client;
 
 /**
  * Class to store and retrieve version
@@ -39,7 +40,7 @@ final class Version
     /**
      * GotCms version identification - see compareVersion()
      */
-    const VERSION = '0.1.6';
+    const VERSION = '0.1.5';
 
     /**
      * The latest stable version GotCms available
@@ -73,8 +74,25 @@ final class Version
     {
         if (null === self::$latestVersion) {
             self::$latestVersion = 'not available';
-            $url                 = 'https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/';
-            $content             = @file_get_contents($url);
+            $url                 = 'https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags';
+            try
+            {
+                $client = new Client(
+                    $url,
+                    array(
+                        'timeout'      => 2,
+                        'ssltransport' => STREAM_CRYPTO_METHOD_TLS_CLIENT,
+                        'sslverifypeer' => false
+                    )
+                );
+
+                $response = $client->send();
+                if ($response->isSuccess()) {
+                    $content = $response->getBody();
+                }
+            } catch (Exception $e) {
+                //don't care
+            }
 
             if (!empty($content)) {
                 $apiResponse = Json::decode($content, Json::TYPE_ARRAY);
