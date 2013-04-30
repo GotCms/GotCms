@@ -1,7 +1,8 @@
 # CHANGELOG13
 
-##0.1.7 (-- --- 2013):
+##0.1.7 (30 Apr 2013):
 - Get latest version can failed on certain php version (https://github.com/PierreRambaud/GotCms/issues/53)
+- Missing version modification in Gc\Version (https://github.com/PierreRambaud/GotCms/issues/54)
 
 ##0.1.6 (30 Apr 2013):
 - Only last key is required to display document (https://github.com/PierreRambaud/GotCms/issues/42)
