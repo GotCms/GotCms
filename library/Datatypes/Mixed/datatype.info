@@ -1,4 +1,4 @@
 author = Pierre Rambaud
 date = 2012
-version = ">=0.1.5"
+version = ">=0.1.6"
 description = "You can combine existing datatypes into a single property. It allow contributor to add several type of content."
