@@ -111,8 +111,8 @@ var Gc = (function($)
                             $tabs = $('#tabs');
                             $e = $('<li class="clearfix">' +
                                 '<div class="hide floatL">' +
-                                    '<input type="text" name="tabs[tab' + $data.id + '][name]" value="' + $name.val() + '">' +
-                                    '<input type="text" name="tabs[tab' + $data.id + '][description]" value="' + $description.val() + '">' +
+                                    '<input type="text" class="input-text" name="tabs[tab' + $data.id + '][name]" value="' + $name.val() + '">' +
+                                    '<input type="text" class="input-text" name="tabs[tab' + $data.id + '][description]" value="' + $description.val() + '">' +
                                 '</div>' +
                                 '<div class="floatL">' +
                                     '<span>' + $name.val() + '</span> <span>' + $description.val() + '</span>' +
@@ -219,13 +219,13 @@ var Gc = (function($)
                                     '<label class="optional" for="properties-name-#{tab}-#{id}">' + Translator.translate('Name') + '</label>' +
                                 '</dt>' +
                                 '<dd id="name-element-#{tab}-#{id}">' +
-                                    '<input type="text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">' +
+                                    '<input type="text" class="input-text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">' +
                                 '</dd>' +
                                 '<dt id="identifier-label-#{tab}-#{id}">' +
                                     '<label class="optional" for="properties-identifier-#{tab}-#{id}">' + Translator.translate('Identifier') + '</label>' +
                                 '</dt>' +
                                 '<dd id="identifier-element-#{tab}-#{id}">' +
-                                    '<input type="text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">' +
+                                    '<input type="text" class="input-text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">' +
                                 '</dd>' +
                                 '<dt id="datatype-label-#{tab}-#{id}">' +
                                     '<label class="optional" for="properties-datatype-#{tab}-#{id}">' + Translator.translate('Datatype') + '</label>' +
@@ -238,7 +238,7 @@ var Gc = (function($)
                                     '<label class="optional" for="properties-description-#{tab}-#{id}">' + Translator.translate('Description') + '</label>' +
                                 '</dt>' +
                                 '<dd id="description-element-#{tab}-#{id}">' +
-                                    '<input type="text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">' +
+                                    '<input type="text" class="input-text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">' +
                                 '</dd>' +
                                 '<dt id="required-label-#{tab}-#{id}">' +
                                     '<label class="optional" for="properties-required-#{tab}-#{id}">' + Translator.translate('Required') + '</label>' +
@@ -558,11 +558,11 @@ var Gc = (function($)
                 '<fieldset>' +
                     '<div>' +
                         '<label for="name">' + Translator.translate('Name') + '</label>' +
-                        '<input type="text" name="name" id="copy-name" class="text ui-widget-content ui-corner-all" />' +
+                        '<input type="text" name="name" id="copy-name" class="input-text ui-widget-content ui-corner-all" />' +
                     '</div>' +
                     '<div>' +
                         '<label for="email">' + Translator.translate('Url key') + '</label>' +
-                        '<input type="text" name="url-key" id="copy-url-key" value="" class="text ui-widget-content ui-corner-all" />' +
+                        '<input type="text" name="url-key" id="copy-url-key" value="" class="input-text ui-widget-content ui-corner-all" />' +
                     '</div>' +
                '</fieldset>' +
             '</div>';
@@ -611,7 +611,7 @@ var Gc = (function($)
             $template = '<tr>' +
                 '<td>' +
                     '<div>' +
-                        '<input type="text" name="destination[#{id}]" size="73">' +
+                        '<input type="text" class="input-text" name="destination[#{id}]" size="73">' +
                     '</div>' +
                 '</td>' +
                 '<td>' +
