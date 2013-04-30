@@ -28,7 +28,6 @@ namespace Gc;
 
 use Zend\Json\Json;
 use Zend\Http\Client;
-use Exception;
 
 /**
  * Class to store and retrieve version
@@ -91,7 +90,7 @@ final class Version
                 if ($response->isSuccess()) {
                     $content = $response->getBody();
                 }
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 //Try to retrieve with file_get_contents
                 $content = @file_get_contents($url);
             }
