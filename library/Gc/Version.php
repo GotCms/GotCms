@@ -91,7 +91,11 @@ final class Version
                     $content = $response->getBody();
                 }
             } catch (\Exception $e) {
-                //Try to retrieve with file_get_contents
+                //Don't care
+            }
+
+            //Try to retrieve with file_get_contents
+            if (empty($content)) {
                 $content = @file_get_contents($url);
             }
 
