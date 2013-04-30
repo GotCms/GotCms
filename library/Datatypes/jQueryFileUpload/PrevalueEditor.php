@@ -69,6 +69,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $fieldset      = new \Zend\Form\Fieldset('Available options');
         $element       = new Element\MultiCheckbox('options');
         $element->setAttribute('selected', $optionsValues);
+        $element->setAttribute('class', 'input-checkbox');
 
         $element->setValueOptions(
             array(
@@ -120,6 +121,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             );
         }
         $element->setValueOptions($options);
+        $element->setAttribute('class', 'input-checkbox');
 
         $fieldset = new \Zend\Form\Fieldset('Mime list');
         $fieldset->add($element);

@@ -80,8 +80,13 @@
         });
 
         $('.delete').on('click', function () {
-            $id = $(this).parent().attr('id').replace('tabs-', '');
-            $('#tabs').tabs('remove', $id);
+            $parent = $(this).closest('.ui-tabs-panel');
+            $('#tabs').find('li[aria-controls="' + $parent.attr('id') + '"]').remove();
+            $parent.remove();
+            // Refresh the tabs widget
+            $('#tabs').tabs('refresh');
+
+            return false;
         });
     </script>
 <?php endif; ?>

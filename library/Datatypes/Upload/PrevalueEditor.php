@@ -72,7 +72,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             array(
                 'label' => 'Is Multiple',
                 'value' => isset($config['is_multiple']) ? $config['is_multiple'] : '',
-                'class' => 'input-text',
+                'class' => 'input-checkbox',
                 'id' => 'is_multiple',
             )
         );
@@ -101,6 +101,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'audio/vnd.rn-realaudio',
             'audio/x-wav'
         );
+
         $options  = array();
         foreach ($array as $mime) {
             $options[] = array(
@@ -113,6 +114,8 @@ class PrevalueEditor extends AbstractPrevalueEditor
                     ) ? false : true,
             );
         }
+
+        $mimeList->setAttribute('class', 'input-checkbox');
         $mimeList->setValueOptions($options);
 
         return array($isMultiple, $mimeList);
