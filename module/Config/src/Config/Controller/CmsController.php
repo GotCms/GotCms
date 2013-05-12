@@ -211,8 +211,8 @@ class CmsController extends Action
 
                 if ($info->fromFile($filename) === true) {
                     $infos = $info->getInfos();
-                    if (!empty($infos['version'])) {
-                        preg_match('~(?<operator>[>=]*)(?<version>.+)~', $infos['version'], $matches);
+                    if (!empty($infos['cms_version'])) {
+                        preg_match('~(?<operator>[>=]*)(?<version>.+)~', $infos['cms_version'], $matches);
                         if (empty($matches['operator'])) {
                             if (version_compare($latestVersion, $matches['version']) === 1) {
                                 $errors[] = basename($directory);
