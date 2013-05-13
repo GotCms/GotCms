@@ -37,6 +37,7 @@ use Gc\View\Stream;
  * @category   Gc
  * @package    Library
  * @subpackage View\Helper
+ * @example In view: $this->tools('unserialize', 'a:1:{i:0;s:4:"test";}');
  */
 class Tools extends AbstractHelper
 {

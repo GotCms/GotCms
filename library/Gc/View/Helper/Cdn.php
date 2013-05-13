@@ -32,11 +32,12 @@ use Zend\View\Helper\AbstractHelper;
 use Gc\Registry;
 
 /**
- * Helper for making easy links and getting urls that depend on the routes and router.
+ * Generate url with specific base path for cdn frontend stored in database.
  *
  * @category   Gc_Library
  * @package    Library
  * @subpackage View\Helper
+ * @example In view: $this->cdn('path/to/file');
  */
 class Cdn extends AbstractHelper
 {
@@ -48,7 +49,7 @@ class Cdn extends AbstractHelper
     protected $basePath = null;
 
     /**
-     * Generates an url given the name of a route.
+     * Generates an url with the given path.
      *
      * @param string $path Path
      *

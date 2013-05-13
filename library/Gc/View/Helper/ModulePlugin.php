@@ -34,12 +34,12 @@ use Gc\Module\AbstractPlugin;
 use Gc\Registry;
 
 /**
- * Retrieve script from identifier
+ * Execute plugin module
  *
  * @category   Gc
  * @package    Library
  * @subpackage View\Helper
- * @example In view: $this->script('identifier');
+ * @example In view: $this->modulePlugin('blog', 'comment-list', $parameters);
  */
 class ModulePlugin extends AbstractHelper
 {

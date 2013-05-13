@@ -30,11 +30,12 @@ namespace Gc\View\Helper;
 use Zend\View\Helper\AbstractHelper;
 
 /**
- * Helper for making easy links and getting urls that depend on the routes and router.
+ * Generate module url.
  *
  * @category   Gc_Library
  * @package    Library
  * @subpackage View\Helper
+ * @example In view: $this->moduleUrl($controller, $action, $queryParams, $options);
  */
 class ModuleUrl extends AbstractHelper
 {

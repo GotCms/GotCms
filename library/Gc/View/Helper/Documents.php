@@ -37,6 +37,7 @@ use Gc\Document\Model as DocumentModel;
  * @category   Gc
  * @package    Library
  * @subpackage View\Helper
+ * @example In view: $this->documents('identifier');
  */
 class Documents extends AbstractHelper
 {
@@ -45,6 +46,7 @@ class Documents extends AbstractHelper
      * $data can be mixed
      * if data is an array, return all documents
      * if data is numeric, return all documents with parent_id equal to $data
+     * if data is string, return all documents with parent's url key equal to $data
      *
      * @param mixed $data Data
      *
