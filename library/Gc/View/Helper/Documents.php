@@ -58,14 +58,17 @@ class Documents extends AbstractHelper
         } else {
             if (is_numeric($data)) {
                 $elements = $documents->load($data)->getDocuments();
+            } elseif (is_string($data)) {
+                $document = DocumentModel::fromUrlKey($data);
+                $elements = $document->getChildren();
             } elseif (is_array($data)) {
                 $elements = array();
                 foreach ($data as $documentId) {
-                    if (empty($documentId) or !is_numeric($documentId)) {
+                    if (empty($documentId)) {
                         continue;
                     }
 
-                    $document = DocumentModel::fromId($documentId);
+                    $document = $this->getView()->document($documentId);
                     if (!empty($document)) {
                         $elements[] = $document;
                     }
