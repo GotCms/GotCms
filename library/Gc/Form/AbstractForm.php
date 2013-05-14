@@ -50,7 +50,7 @@ abstract class AbstractForm extends Form
      *
      * @const IDENTIFIER_PATTERN
      */
-    const IDENTIFIER_PATTERN = '~^[a-zA-Z0-9_-]+$~';
+    const IDENTIFIER_PATTERN = '~^[a-zA-Z0-9._-]+$~';
 
     /**
      * Constructor
