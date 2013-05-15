@@ -99,7 +99,7 @@ abstract class Module
                 );
             }
 
-            \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
+            \Zend\Validator\AbstractValidator::setDefaultTranslator(new \Zend\Mvc\I18n\Translator($translator));
             Registry::set('Translator', $translator);
         }
     }
