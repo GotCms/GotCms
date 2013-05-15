@@ -4,7 +4,7 @@ Master status: [![Build Status](https://travis-ci.org/PierreRambaud/GotCms.png?b
 
 ## About GotCms
 
-GotCms is a content management system based on [Zend Framework 2.1.5](http://framework.zend.com/).
+GotCms is a content management system based on [Zend Framework 2.2.0](http://framework.zend.com/).
 
 This product has been made available under the terms of the GNU GPL version 3.
 Please read the [LICENSE.txt](LICENSE.txt) file for the exact license details that apply to GotCms.
