@@ -38,6 +38,13 @@ use Gc\View\Stream;
 class UpdaterTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Execute scripts file
+     *
+     * @var string
+     */
+    protected $fileName;
+
+    /**
      * @var Updater
      *
      * @return void
@@ -52,7 +59,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Updater;
+        $this->object   = new Updater;
+        $this->fileName = GC_APPLICATION_PATH . '/tests/library/Gc/Core/_files/test.php';
     }
 
     /**
@@ -231,7 +239,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->object->updateDatabase());
     }
 
-
     /**
      * Test
      *
@@ -243,5 +250,62 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->load('git');
         $this->assertInternalType('array', $this->object->getMessages());
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Core\Updater::executeScripts
+     *
+     * @return void
+     */
+    public function testExecuteScriptsWithoutAdapter()
+    {
+        $this->assertFalse($this->object->executeScripts());
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Core\Updater::executeScripts
+     *
+     * @return void
+     */
+    public function testExecuteScriptsWithEmptyFiles()
+    {
+        file_put_contents($this->fileName, '');
+        $this->object->load('git');
+        $this->assertTrue($this->object->executeScripts());
+        unlink($this->fileName);
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Core\Updater::executeScripts
+     *
+     * @return void
+     */
+    public function testExecuteScriptsWithError()
+    {
+        file_put_contents($this->fileName, '<?php echo $test->test;');
+        $this->object->load('git');
+        $this->assertTrue($this->object->executeScripts());
+        unlink($this->fileName);
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Core\Updater::executeScripts
+     *
+     * @return void
+     */
+    public function testExecuteScripts()
+    {
+        file_put_contents($this->fileName, '<?php echo "test";');
+        $this->object->load('git');
+        $this->assertTrue($this->object->executeScripts());
+        unlink($this->fileName);
     }
 }

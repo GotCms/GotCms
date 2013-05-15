@@ -63,7 +63,6 @@ function exec($command, &$output = array(), &$returnVar = null)
     return '';
 }
 
-
 /**
  * Override updater
  */
@@ -82,6 +81,24 @@ function glob($pattern, $flags = 0)
         }
 
         return array('zend.view://test-updater');
+    }
+
+    $scriptPath = GC_APPLICATION_PATH . '/tests/library/Gc/Core/_files/test.php';
+    if (file_exists($scriptPath) and in_array($pattern, array(GC_APPLICATION_PATH . '/data/update/*', '999/*.php'))) {
+        $content = file_get_contents($scriptPath);
+        if ($pattern == GC_APPLICATION_PATH . '/data/update/*') {
+            if (empty($content)) {
+                return array('0');
+            }
+
+            return array(999);
+        } else {
+            if (empty($content)) {
+                return array();
+            }
+
+            return array($scriptPath);
+        }
     }
 
     return array('9999.999.999');
