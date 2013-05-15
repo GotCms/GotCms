@@ -63,6 +63,8 @@ class Navigation
     /**
      * Constructor, initialize documents
      *
+     * @param integer $documentId Document id
+     *
      * @return void
      */
     public function __construct($documentId = 0)

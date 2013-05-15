@@ -101,7 +101,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $mimeList = new Element\MultiCheckbox('mime_list');
         $mimeList->setAttribute('class', 'input-checkbox');
-        $array    = array(
+        $array = array(
             'image/gif',
             'image/jpeg',
             'image/png',

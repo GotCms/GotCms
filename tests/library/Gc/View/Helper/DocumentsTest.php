@@ -154,6 +154,7 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
         $this->document->save();
 
         $this->object = new Documents;
+
         $view = new View();
         $view->resolver()->addPath(__DIR__ . '/_files/views');
         $view->setHelperPluginManager(Registry::get('Application')->getServiceManager()->get('viewhelpermanager'));

@@ -102,7 +102,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             'audio/x-wav'
         );
 
-        $options  = array();
+        $options = array();
         foreach ($array as $mime) {
             $options[] = array(
                 'value' => $mime,
