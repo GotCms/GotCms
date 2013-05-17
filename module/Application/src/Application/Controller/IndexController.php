@@ -163,7 +163,7 @@ class IndexController extends Action
                     $children    = null;
                     $key         = array();
                     $hasDocument = false;
-                    $parentId    = 0;
+                    $parentId    = null;
 
                     foreach ($explodePath as $urlKey) {
                         $document    = null;

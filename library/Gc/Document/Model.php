@@ -180,11 +180,11 @@ class Model extends AbstractTable implements IterableInterface
      *
      * @return \Gc\Document\Model
      */
-    public static function fromUrlKey($urlKey, $parentId = null)
+    public static function fromUrlKey($urlKey, $parentId = false)
     {
         $documentTable = new Model();
         $sqlData       = array('url_key' => $urlKey);
-        if (!empty($parentId)) {
+        if ($parentId !== false) {
             $sqlData['parent_id'] = $parentId;
         }
 
