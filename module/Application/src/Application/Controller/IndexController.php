@@ -126,7 +126,7 @@ class IndexController extends Action
         $this->viewPath   = $templatePathStack->resolve(self::VIEW_NAME);
         $this->layoutPath = $templatePathStack->resolve(self::LAYOUT_NAME);
 
-        $path = $this->getRouteMatch()->getParam('path');
+        $path = ltrim($this->getRouteMatch()->getParam('path'), '/');
 
         $cacheIsEnable = (CoreConfig::getValue('cache_is_active') == 1 and !$isPreview);
         if ($cacheIsEnable) {
