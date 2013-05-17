@@ -29,6 +29,7 @@ namespace Datatypes\Textrich;
 
 use Gc\Core\Object;
 use Zend\Form\Element;
+use Zend\Form\Fieldset;
 
 /**
  * Ckeditor class to generate html for Ckeditor plugin
@@ -247,7 +248,7 @@ class CkEditor extends Object
         $toolbarItems = $this->getToolbarItems();
         foreach ($items as $group) {
             if (!empty($group['items']) and is_array($group['items'])) {
-                $fieldset = new \Zend\Form\Fieldset($group['name']);
+                $fieldset = new Fieldset($group['name']);
                 foreach ($group['items'] as $idxItem => $item) {
                     if ($item == '-') {
                         continue;

@@ -29,6 +29,7 @@ namespace Datatypes\jQueryFileUpload;
 
 use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
 use Zend\Form\Element;
+use Zend\Form\Fieldset;
 
 /**
  * Prevalue Editor for Upload datatype
@@ -66,7 +67,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $elements   = array();
 
         $optionsValues = !empty($parameters['options']) ? $parameters['options'] : array();
-        $fieldset      = new \Zend\Form\Fieldset('Available options');
+        $fieldset      = new Fieldset('Available options');
         $element       = new Element\MultiCheckbox('options');
         $element->setAttribute('selected', $optionsValues);
         $element->setAttribute('class', 'input-checkbox');
@@ -123,7 +124,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $element->setValueOptions($options);
         $element->setAttribute('class', 'input-checkbox');
 
-        $fieldset = new \Zend\Form\Fieldset('Mime list');
+        $fieldset = new Fieldset('Mime list');
         $fieldset->add($element);
         $elements[] = $fieldset;
 

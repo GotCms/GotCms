@@ -33,19 +33,19 @@ use Gc\Layout;
 use Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway;
 use Gc\Registry;
 use Gc\Module\Collection as ModuleCollection;
-use Zend;
 use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Config\Reader\Ini;
 use Zend\EventManager\Event;
-use Zend\I18n\Translator\Translator;
+use Zend\EventManager\EventInterface;
+use Zend\Mvc\I18n\Translator;
 use Zend\ModuleManager\ModuleManager;
-use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container as SessionContainer;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
-use Zend\Session\SessionManager;
+use Zend\Validator\AbstractValidator;
 use Zend\Uri\Http as Uri;
 
 /**
@@ -99,7 +99,7 @@ abstract class Module
                 );
             }
 
-            \Zend\Validator\AbstractValidator::setDefaultTranslator(new \Zend\Mvc\I18n\Translator($translator));
+            AbstractValidator::setDefaultTranslator(new Translator($translator));
             Registry::set('Translator', $translator);
         }
     }
@@ -197,7 +197,7 @@ abstract class Module
 
                 if (!empty($config['db'])) {
                     $dbAdapter = new DbAdapter($config['db']);
-                    \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
+                    GlobalAdapterFeature::setStaticAdapter($dbAdapter);
 
                     Registry::set('Configuration', $config);
                     Registry::set('Db', $dbAdapter);
@@ -272,7 +272,7 @@ abstract class Module
      *
      * @return null|Zend\Http\PhpEnvironment\Response
      */
-    public function checkSsl(Zend\EventManager\EventInterface $event)
+    public function checkSsl(EventInterface $event)
     {
         $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
         $request          = $event->getRequest();

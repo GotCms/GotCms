@@ -27,12 +27,14 @@
 
 namespace Gc\Form;
 
+use Gc\Exception;
+use Gc\Db\AbstractTable;
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Form\Form;
 use Zend\Form\Fieldset;
 use Zend\Form\Element;
 use Zend\InputFilter\InputFilter;
-use Gc\Exception;
-use Gc\Db\AbstractTable;
+use Zend\Validator\Db\NoRecordExists;
 
 /**
  * Abstract Form overload Zend\Form\Form
@@ -81,7 +83,7 @@ abstract class AbstractForm extends Form
      */
     public function getAdapter()
     {
-        return \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter();
+        return GlobalAdapterFeature::getStaticAdapter();
     }
 
     /**
@@ -106,7 +108,7 @@ abstract class AbstractForm extends Form
                     $validators = $inputFilter->get($elementName)->getValidatorChain()->getValidators();
 
                     foreach ($validators as $validator) {
-                        if ($validator['instance'] instanceof \Zend\Validator\Db\NoRecordExists) {
+                        if ($validator['instance'] instanceof NoRecordExists) {
                             $validator['instance']->setExclude(array('field' => 'id', 'value' => $table->getId()));
                         }
                     }
