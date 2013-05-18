@@ -210,7 +210,7 @@ abstract class Module
                     $sessionConfig->setStorageOption('gc_maxlifetime', CoreConfig::getValue('session_lifetime'));
                     $sessionConfig->setStorageOption('cookie_path', CoreConfig::getValue('cookie_path'));
                     $sessionConfig->setStorageOption('cookie_domain', CoreConfig::getValue('cookie_domain'));
-                    $sessionManager = SessionContainer::setDefaultManager(new SessionManager($sessionConfig));
+                    SessionContainer::setDefaultManager(new SessionManager($sessionConfig));
 
                     if (CoreConfig::getValue('session_handler') == CoreConfig::SESSION_DATABASE) {
                         $tablegatewayConfig = new DbTableGatewayOptions(
@@ -227,6 +227,8 @@ abstract class Module
                             new TableGateway('core_session', $dbAdapter),
                             $tablegatewayConfig
                         );
+
+                        $sessionManager = SessionContainer::getDefaultManager();
                         $sessionManager->setSaveHandler($sessionTable)->start();
                     }
 
