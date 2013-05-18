@@ -205,6 +205,19 @@ class Config extends AbstractForm
             'session_handler'
         );
 
+        $sessionPath = new Element\Text('session_path');
+        $sessionPath->setAttribute('label', 'Session path')
+            ->setAttribute('class', 'input-text');
+        $sessionFieldset->add($sessionPath);
+
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'session_path',
+                'required' => false,
+            ),
+            'session_path'
+        );
+
         $sessionLifetime = new Element\Text('session_lifetime');
         $sessionLifetime->setAttribute('label', 'Session lifetime')
             ->setAttribute('class', 'input-text');

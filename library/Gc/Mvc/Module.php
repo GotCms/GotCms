@@ -42,6 +42,7 @@ use Zend\EventManager\EventInterface;
 use Zend\Mvc\I18n\Translator;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\MvcEvent;
+use Zend\Session\SessionManager;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container as SessionContainer;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
@@ -202,11 +203,14 @@ abstract class Module
                     Registry::set('Configuration', $config);
                     Registry::set('Db', $dbAdapter);
 
-                    $sessionManager = SessionContainer::getDefaultManager();
-                    $sessionConfig  = $sessionManager->getConfig();
+                    $sessionConfig = new SessionConfig();
+                    $sessionConfig->setStorageOption('gc_probability', 1);
+                    $sessionConfig->setStorageOption('gc_divisor', 1);
+                    $sessionConfig->setStorageOption('save_path', CoreConfig::getValue('session_path'));
                     $sessionConfig->setStorageOption('gc_maxlifetime', CoreConfig::getValue('session_lifetime'));
                     $sessionConfig->setStorageOption('cookie_path', CoreConfig::getValue('cookie_path'));
                     $sessionConfig->setStorageOption('cookie_domain', CoreConfig::getValue('cookie_domain'));
+                    $sessionManager = SessionContainer::setDefaultManager(new SessionManager($sessionConfig));
 
                     if (CoreConfig::getValue('session_handler') == CoreConfig::SESSION_DATABASE) {
                         $tablegatewayConfig = new DbTableGatewayOptions(
