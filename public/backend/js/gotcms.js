@@ -51,9 +51,16 @@ var Gc = (function($)
             return this._options.get($key);
         },
 
-        setHtmlMessage: function($message)
+        setHtmlMessage: function($message, $class)
         {
-            $('.html-message').html($message);
+            var $template = new Template('<div class="notification #{type}">' +
+                '<a href="#" class="close">' +
+                    '<img src="/backend/images/close-small.png" title="Close this notification" alt="Close">' +
+                '</a>' +
+                '<div>#{message}</div>' +
+            '</div>');
+
+            $('.html-message').html($template.evaluate({message: $message, type: $class}));
         },
 
         isEmpty: function($element)
@@ -83,7 +90,8 @@ var Gc = (function($)
                 }
             });
 
-            var $this = this;
+            var $this = this,
+                $originalPosition;
             $('.tabs').tabs();
 
             /**
@@ -91,7 +99,21 @@ var Gc = (function($)
              */
             $('#tabs').sortable({
                 placeholder: 'ui-state-highlight',
-                distance: 10
+                distance: 10,
+                start: function(event, ui) {
+                    $originalPosition = ui.item.index();
+                },
+                stop: function(event, ui) {
+                    var $tabsNav = $('#properties-tabs-content > .ui-tabs-nav').find('li'),
+                    $newPosition = ui.item.index(),
+                    $row = $tabsNav.eq($originalPosition).detach();
+
+                    if ($newPosition == $tabsNav.length) {
+                        $tabsNav.eq($newPosition - 1).after($row);
+                    } else {
+                        $tabsNav.eq($newPosition).before($row);
+                    }
+                }
             });
 
             $('#tabs-add').on('click', function() {
@@ -99,13 +121,13 @@ var Gc = (function($)
                 $name = $('#tabs-addname');
                 $description = $('#tabs-adddescription');
                 if($this.isEmpty($name.val()) || $this.isEmpty($description.val())) {
-                    $this.setHtmlMessage(Translator.translate('Please fill all fields'));
+                    $this.setHtmlMessage(Translator.translate('Please fill all fields'), 'error');
                 } else {
                     $.post($addTabUrl,
                     {name: $name.val(), description: $description.val()},
                     function($data) {
                         if($data.message !== undefined) {
-                            $this.setHtmlMessage($data.message);
+                            $this.setHtmlMessage($data.message, 'error');
                         } else {
                             var $tabs, $e, $tab_content;
                             $tabs = $('#tabs');
@@ -129,6 +151,7 @@ var Gc = (function($)
                             $tabs.append($e);
 
                             $('.select-tab').append(new Option($name.val(),$data.id));
+                            $('.select-tab').dropDown('refresh')
 
                             if($('#properties-tabs-content').html() !== null) {
                                 $tab_content = $('#properties-tabs-content');
@@ -154,6 +177,7 @@ var Gc = (function($)
                 var $button = $(this);
                 $.post($deleteTabUrl, {tab: $button.val()}, function($data) {
                     $('.select-tab').find('option[value="' + $button.val() + '"]').remove();
+                    $('.select-tab').dropDown('refresh');
                     var $tabs = $('#properties-tabs-content');
                     $button.parent().remove();
                     var $tab = $tabs.find('a[href="#tabs-properties-' + $button.val() + '"]').parent();
@@ -163,7 +187,7 @@ var Gc = (function($)
                     $('#tabs-properties-' + $button.val()).remove();
                     // Refresh the tabs widget
                     $tabs.tabs('refresh');
-                    $this.setHtmlMessage($data.message);
+                    $this.setHtmlMessage($data.message, 'success');
                 });
             });
 
@@ -198,7 +222,7 @@ var Gc = (function($)
                 $isRequired = $('#properties-required');
 
                 if($this.isEmpty($identifier.val()) || $this.isEmpty($name.val()) || $this.isEmpty($tab.val()) || $this.isEmpty($datatype.val())) {
-                    $this.setHtmlMessage(Translator.translate('Please fill all fields'));
+                    $this.setHtmlMessage(Translator.translate('Please fill all fields'), 'error');
                 } else {
                     $.post($addPropertyUrl, {
                         name:             $name.val(),
@@ -210,9 +234,8 @@ var Gc = (function($)
                     },
                     function($data) {
                         if($data.success === false) {
-                            $this.setHtmlMessage($data.message);
+                            $this.setHtmlMessage($data.message, 'error');
                         } else {
-                            $this.setHtmlMessage('');
                             var $c = new Template('<div><h3><a href="#secion#{id}">#{name} (#{identifier})</a></h3>' +
                                 '<dl>' +
                                 '<dt id="name-label-#{tab}-#{id}">' +
@@ -286,9 +309,10 @@ var Gc = (function($)
                     if($data.success === true) {
                         $button.parent().parent().parent().remove();
                         $('.connected-sortable').accordion(Gc.getOption('accordion-option'));
+                        $this.setHtmlMessage($data.message, 'success');
+                    } else {
+                        $this.setHtmlMessage($data.message, 'error');
                     }
-
-                    $this.setHtmlMessage($data.message);
                 });
             });
 
