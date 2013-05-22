@@ -8,6 +8,7 @@
 - Update to Zend Framework 2.2.0 ([https://github.com/PierreRambaud/GotCms/issues/60](https://github.com/PierreRambaud/GotCms/issues/60))
 - Document parent are ignored in IndexController ([https://github.com/PierreRambaud/GotCms/issues/63](https://github.com/PierreRambaud/GotCms/issues/63))
 - Session lifetime not working ([https://github.com/PierreRambaud/GotCms/issues/64](https://github.com/PierreRambaud/GotCms/issues/64))
+- Missing dot in downloaded files name ([https://github.com/PierreRambaud/GotCms/issues/65](https://github.com/PierreRambaud/GotCms/issues/65))
 
 ##0.1.7 (30 Apr 2013):
 - Get latest version can failed on certain php version ([https://github.com/PierreRambaud/GotCms/issues/53](https://github.com/PierreRambaud/GotCms/issues/53))

@@ -209,7 +209,7 @@ class LayoutController extends Action
             }
 
             $content  = $layout->getContent();
-            $filename = $layout->getIdentifier() . 'phtml';
+            $filename = $layout->getIdentifier() . '.phtml';
         } else {
             $layouts     = new Layout\Collection();
             $children    = $layouts->getLayouts();

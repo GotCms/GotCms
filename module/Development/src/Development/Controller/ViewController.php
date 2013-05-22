@@ -207,7 +207,7 @@ class ViewController extends Action
             }
 
             $content  = $view->getContent();
-            $filename = $view->getIdentifier() . 'phtml';
+            $filename = $view->getIdentifier() . '.phtml';
         } else {
             $views       = new View\Collection();
             $children    = $views->getViews();

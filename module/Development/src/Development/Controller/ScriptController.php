@@ -208,7 +208,7 @@ class ScriptController extends Action
             }
 
             $content  = $script->getContent();
-            $filename = $script->getIdentifier() . 'phtml';
+            $filename = $script->getIdentifier() . '.phtml';
         } else {
             $scripts     = new Script\Collection();
             $children    = $scripts->getScripts();
