@@ -366,8 +366,8 @@ var Gc = (function($)
                     var $tab_id = $item.find('a').attr('href').replace('#tabs-properties-', '');
 
                     ui.draggable.hide('slow', function() {
-                        $tabs.tabs('select', $tab_items.index( $item ) );
-                        $(this).appendTo( $list ).show('slow');
+                        $tabs.tabs('option', 'active', $tab_items.index($item));
+                        $(this).appendTo($list).show('slow');
                         $(this).find('.property-tab-id').val($tab_id);
                     });
                 },
