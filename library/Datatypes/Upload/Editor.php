@@ -86,6 +86,10 @@ class Editor extends AbstractEditor
                     }
                 }
 
+                if (empty($parameters['is_multiple']) and !empty($data[0])) {
+                    $data = $data[0];
+                }
+
                 $data = serialize($data);
             }
 
@@ -108,6 +112,7 @@ class Editor extends AbstractEditor
         $parameters = $this->getConfig();
         $property   = $this->getProperty();
         $upload     = new Element\File($this->getName());
+        $value      = $this->getValue();
         $upload->setAttribute('label', $property->getName());
         if (!empty($parameters['is_multiple'])) {
             $upload->setAttribute('multiple', 'multiple');
@@ -115,7 +120,6 @@ class Editor extends AbstractEditor
         }
 
         $hiddenUpload = new Element\Hidden($this->getName() . '-hidden');
-        $value        = $this->getValue();
         if (!empty($value)) {
             $hiddenUpload->setValue($value);
         }
@@ -127,7 +131,8 @@ class Editor extends AbstractEditor
                 'upload-editor.phtml',
                 array(
                     'files' => $value,
-                    'id' => $this->getName()
+                    'id' => $this->getName(),
+                    'isMultiple' => $parameters['is_multiple']
                 )
             )
         );
