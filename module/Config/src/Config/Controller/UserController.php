@@ -73,6 +73,15 @@ class UserController extends Action
      */
     public function loginAction()
     {
+        if ($this->getAuth()->hasIdentity()) {
+            $redirect = $this->getRouteMatch()->getParam('redirect');
+            if (!empty($redirect)) {
+                return $this->redirect()->toUrl(base64_decode($redirect));
+            }
+
+            return $this->redirect()->toRoute('admin');
+        }
+
         $this->layout()->setTemplate('layouts/one-page.phtml');
         $loginForm = new UserLogin();
 

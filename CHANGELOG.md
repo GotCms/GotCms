@@ -11,6 +11,7 @@
 - Missing dot in downloaded files name ([https://github.com/PierreRambaud/GotCms/issues/65](https://github.com/PierreRambaud/GotCms/issues/65))
 - No such method 'select' for tabs widget instance ([https://github.com/PierreRambaud/GotCms/issues/66](https://github.com/PierreRambaud/GotCms/issues/66))
 - Bug javascript ([https://github.com/PierreRambaud/GotCms/issues/67](https://github.com/PierreRambaud/GotCms/issues/67))
+- No need to stay on login page if user has Identity ([https://github.com/PierreRambaud/GotCms/issues/68](https://github.com/PierreRambaud/GotCms/issues/68))
 
 ##0.1.7 (30 Apr 2013):
 - Get latest version can failed on certain php version ([https://github.com/PierreRambaud/GotCms/issues/53](https://github.com/PierreRambaud/GotCms/issues/53))
