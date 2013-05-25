@@ -142,6 +142,11 @@
                 return false;
             });
 
+            obj.find('input').on('click',function(event) {
+                $(this).closest('li').click();
+                event.stopImmediatePropagation();
+            });
+
             obj.find('li:not(.optgroup)').on('click',function(event) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -325,4 +330,3 @@
 
     };
 })(jQuery);
-
