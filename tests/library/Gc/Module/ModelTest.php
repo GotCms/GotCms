@@ -224,20 +224,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::install
-     * @covers Gc\Module\Model::loadBootstrap
-     *
-     * @return void
-     */
-    public function testInstall()
-    {
-        $this->assertInternalType('integer', Model::install('Blog'));
-        Model::uninstall('Blog');
-    }
-
-    /**
-     * Test
-     *
      * @covers Gc\Module\Model::uninstall
      * @covers Gc\Module\Model::loadBootstrap
      *
@@ -251,14 +237,15 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
+     * @covers Gc\Module\Model::install
      * @covers Gc\Module\Model::uninstall
      * @covers Gc\Module\Model::loadBootstrap
      *
      * @return void
      */
-    public function testUnInstall()
+    public function testInstallAndUninstall()
     {
-        Model::install('Blog');
+        $this->assertInternalType('integer', (int) Model::install('Blog'));
         $this->assertTrue(Model::uninstall('Blog'));
     }
 }

@@ -288,7 +288,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
      */
     public function testExecuteScriptsWithError()
     {
-        file_put_contents($this->fileName, '<?php echo $test->test;');
+        file_put_contents($this->fileName, '<?php throw new Exception("Error");');
         $this->object->load('git');
         $this->assertTrue($this->object->executeScripts());
         unlink($this->fileName);

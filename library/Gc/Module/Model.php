@@ -225,7 +225,7 @@ class Model extends AbstractTable
      */
     public static function uninstall($moduleName)
     {
-        $model  = Model::fromName($moduleName);
+        $model = Model::fromName($moduleName);
         if (empty($model) or !$model->loadBootstrap($moduleName)->uninstall()) {
             return false;
         }

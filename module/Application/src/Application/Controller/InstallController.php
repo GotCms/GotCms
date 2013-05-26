@@ -565,7 +565,7 @@ class InstallController extends Action
                             $templatePath = GC_APPLICATION_PATH . sprintf('/data/install/design/%s', $template);
                             $info         = new Info();
                             $info->fromFile($templatePath . '/design.info');
-                            $filePath     = sprintf('%s/sql/%s.sql', $templatePath, $sqlType);
+                            $filePath = sprintf('%s/sql/%s.sql', $templatePath, $sqlType);
                             if (!file_exists($filePath)) {
                                 return $this->returnJson(
                                     array(
@@ -581,7 +581,7 @@ class InstallController extends Action
 
                             $designInfos = $info->getInfos();
                             if (!empty($designInfos['modules'])) {
-                                foreach($designInfos['modules'] as $module) {
+                                foreach ($designInfos['modules'] as $module) {
                                     ModuleModel::install($module);
                                 }
                             }

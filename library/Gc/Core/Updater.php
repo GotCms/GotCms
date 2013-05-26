@@ -224,6 +224,7 @@ class Updater extends Object
                 try {
                     $this->adapter->addMessage($script->execute($filename));
                 } catch (\Exception $e) {
+                    ob_get_clean();
                     $this->setError($e->getMessage());
                 }
             }

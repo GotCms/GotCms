@@ -82,7 +82,7 @@ class IndexController extends Action
                 $this->useFlashMessenger();
             } else {
                 $moduleName = $form->getInputFilter()->get('module')->getValue();
-                if (($moduleId = ModuleModel::install($moduleName)) === FALSE) {
+                if (($moduleId = ModuleModel::install($moduleName)) === false) {
                     $this->flashMessenger()->addErrorMessage('Can not install this module');
                     return $this->redirect()->toRoute('module');
                 } else {
