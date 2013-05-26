@@ -38,3 +38,18 @@
         <?php echo $this->formElementErrors($element); ?>
     </div>
 <?php endforeach; ?>
+
+<?php foreach($this->form->get('template')->getAttribute('data') as $designName => $data): ?>
+    <div class="template-list">
+        <div class="hide" id="tpl-<?php echo $this->escapeHtml($designName); ?>">
+            <?php echo $data; ?>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<script type="text/javascript">
+    $('#template').on('change', function() {
+        $('.template-list > div').hide();
+        $('#tpl-' + $(this).val()).show();
+    });
+</script>

@@ -82,45 +82,12 @@ class IndexController extends Action
                 $this->useFlashMessenger();
             } else {
                 $moduleName = $form->getInputFilter()->get('module')->getValue();
-                $object     = $this->loadBootstrap($moduleName);
-
-                if (!$object->install()) {
+                if (($moduleId = ModuleModel::install($moduleName)) === FALSE) {
                     $this->flashMessenger()->addErrorMessage('Can not install this module');
                     return $this->redirect()->toRoute('module');
                 } else {
-                    $moduleModel = new ModuleModel();
-                    $moduleModel->setName($moduleName);
-                    $moduleModel->save();
-
-                    $select = new Sql\Select();
-                    $select->from('user_acl_resource')
-                        ->columns(array('id'))
-                        ->where->equalTo('resource', 'Modules');
-
-                    $insert = new Sql\Insert();
-                    $insert->into('user_acl_permission')
-                        ->values(
-                            array(
-                                'permission' => $moduleName,
-                                'user_acl_resource_id' => $moduleModel->fetchOne($select),
-                            )
-                        );
-
-                    $moduleModel->execute($insert);
-
-                    $insert = new Sql\Insert();
-                    $insert->into('user_acl')
-                        ->values(
-                            array(
-                                'user_acl_permission_id' => $moduleModel->getLastInsertId('user_acl_permission'),
-                                'user_acl_role_id' => 1, //Administrator role
-                            )
-                        );
-
-                    $moduleModel->execute($insert);
-
                     $this->flashMessenger()->addSuccessMessage('Module installed');
-                    return $this->redirect()->toRoute('moduleEdit', array('m' => $moduleModel->getId()));
+                    return $this->redirect()->toRoute('moduleEdit', array('m' => $moduleId));
                 }
             }
 
@@ -138,31 +105,8 @@ class IndexController extends Action
     {
         $moduleId    = $this->getRouteMatch()->getParam('id');
         $moduleModel = ModuleModel::fromId($moduleId);
-        if (!empty($moduleModel)) {
-            $object = $this->loadBootstrap($moduleModel->getName());
-
-            if ($object->uninstall()) {
-                $select = new Sql\Select();
-                $select->from('user_acl_permission')
-                    ->columns(array('id'))
-                    ->where->equalTo('permission', $moduleModel->getName());
-
-                $userAclPermissionId = $moduleModel->fetchOne($select);
-
-                $delete = new Sql\Delete();
-                $delete->from('user_acl');
-                $delete->where->equalTo('user_acl_permission_id', $userAclPermissionId);
-                $moduleModel->execute($delete);
-
-                $delete = new Sql\Delete();
-                $delete->from('user_acl_permission');
-                $delete->where->equalTo('id', $userAclPermissionId);
-                $moduleModel->execute($delete);
-
-                $moduleModel->delete();
-
-                return $this->returnJson(array('success' => true, 'message' => 'Module uninstalled'));
-            }
+        if (!empty($moduleModel) and ModuleModel::uninstall($moduleModel->getName())) {
+            return $this->returnJson(array('success' => true, 'message' => 'Module uninstalled'));
         }
 
         return $this->returnJson(array('success' => false, 'message' => 'Can\'t uninstall module'));

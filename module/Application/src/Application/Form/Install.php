@@ -28,6 +28,7 @@
 namespace Application\Form;
 
 use Gc\Form\AbstractForm;
+use Gc\Media\Info;
 use Zend\Validator\Db;
 use Zend\Form\Element;
 use Zend\InputFilter\InputFilter;
@@ -261,14 +262,23 @@ class Install extends AbstractForm
         $path    = GC_APPLICATION_PATH . '/data/install/design/';
         $listDir = glob($path . '*', GLOB_ONLYDIR);
         $options = array('' => 'Select template');
+        $renderOptions = array();
         foreach ($listDir as $dir) {
             $dir           = str_replace($path, '', $dir);
             $options[$dir] = $dir;
+            $info = new Info();
+            $info->fromFile($path . $dir . '/design.info');
+            $designInfos = $info->getInfos();
+            if (!empty($designInfos)) {
+                $renderOptions[$dir] = $info->render();
+            }
         }
 
         $template = new Element\Select('template');
         $template->setAttribute('label', 'Default template')
             ->setAttribute('class', 'input-select')
+            ->setAttribute('id', 'template')
+            ->setAttribute('data', $renderOptions)
             ->setValueOptions($options);
 
 

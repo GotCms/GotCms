@@ -1,0 +1,252 @@
+/*
+	Arcana 2.0 by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
+
+/*********************************************************************************/
+/* Mobile (<= 480px)                                                             */
+/*********************************************************************************/
+
+/* Basic */
+
+	body
+	{
+		font-size: 12pt;
+	}
+
+/* Reusable */
+
+	.button
+	{
+		padding: 0.25em 1.1em 0.3em 1.1em;
+	}
+
+	.divider
+	{
+		display: none;
+	}
+
+	.cta-box
+	{
+		padding: 1em 0 1.25em 0;
+		font-size: 1.6em;
+		letter-spacing: -1px;
+		margin: 1em;
+	}
+
+		.cta-box span
+		{
+			display: block;
+			margin: 0 0 0.75em 0;
+			padding: 0 1em 0 1em;
+		}
+
+	.highlight-box
+	{
+		padding: 1.25em 1em 1.25em 1em;
+		margin: 1em;
+	}
+
+		.highlight-box h2
+		{
+			font-size: 1.6em;
+			letter-spacing: -1px;
+		}
+		
+		.highlight-box span
+		{
+			font-size: 1em;
+		}	
+
+	.thumbnails
+	{
+	}
+
+		.thumbnails .thumbnail
+		{
+			border-top: solid 1px #e5e5e5;
+			padding-top: 2em;
+			margin-top: 2em;
+		}
+
+		.thumbnails .first
+		{
+			border-top: 0;
+			padding-top: 0;
+			margin-top: 0;
+		}
+
+/* Wrappers */
+
+	#header-wrapper {
+		display: none;
+	}
+
+	#main-wrapper {
+		background: #fff;
+		padding: 0 0 0.25em 0;
+		margin-top: 44px;
+	}
+
+		#main-wrapper section, #main-wrapper article {
+			margin: 2px 1em 2px 1em;
+			padding: 1.5em 0 1.5em 0;
+			border-bottom: solid 1px #e5e5e5;
+			border-top: solid 1px #e5e5e5;
+		}
+
+		#main-wrapper section.first, #main-wrapper article.first {
+			border-top: none;
+		}
+
+		#main-wrapper section.last, #main-wrapper article.last {
+			border-bottom: none;
+		}
+		
+	#footer-wrapper {
+		padding: 1em 0 0.25em 0;
+		box-shadow: inset 0px 10px 60px 0px rgba(0,0,0,0.15);
+	}
+
+		#footer-wrapper section {
+			margin: 2px 1em 2px 1em;
+			padding: 1.5em 0 1.5em 0;
+			border-bottom: solid 1px #d0d0d0;
+			border-top: solid 1px #d0d0d0;
+		}
+
+		#footer-wrapper section.first {
+			border-top: none;
+		}
+
+		#footer-wrapper section.last {
+			border-bottom: none;
+		}
+
+		#footer-wrapper li {
+			line-height: 2.5em;
+		}
+
+		#footer-wrapper a
+		{
+			text-decoration: none;
+			color: #525252;
+		}
+
+/* Banner */
+
+	#banner
+	{
+		width: 100%;
+		margin: 0 0 1em 0;
+		position: relative;
+		top: -0.25em;
+	}
+
+		#banner a
+		{
+		}
+
+			#banner a img
+			{
+				width: 100%;
+				display: block;
+			}
+
+		#banner .caption
+		{
+			background: #1e1e1e url('images/bg3.png') top left repeat-x;
+			font-size: 1.25em;
+			line-height: 1.5em;
+			color: #aaa;
+			text-align: center;
+			text-shadow: -1px -1px 1px rgba(0,0,0,1);
+			padding: 0.75em 1.5em 1em 1.5em;
+		}
+
+			#banner .caption span
+			{
+				display: block;
+				margin: 0 0 0.75em 0;
+			}
+		
+				#banner .caption span strong
+				{
+					color: #ffffff;
+				}
+
+			#banner .caption .button
+			{
+				border: solid 1px #001916;
+				display: inline-block;
+			}
+
+/* Copyright */
+
+	#copyright
+	{
+		text-align: center;
+		color: #868686;
+		padding: 2em;
+	}
+
+		#copyright a
+		{
+			color: #868686;
+		}
+
+/* Mobile UI */
+	
+	#titleBar
+	{
+		background: url('images/header.png') 0px -35px;
+		box-shadow: inset 0px 15px 30px 0px rgba(255,255,255,0.1);
+	}
+
+		#titleBar .title
+		{
+			color: #fff;
+			text-shadow: -1px -1px 1px rgba(0,0,0,1);
+			line-height: 44px;
+			font-size: 1.5em;
+			text-align: center;
+		}
+		
+			#titleBar .title h1
+			{
+				color: #fff;
+			}
+
+		#titleBar .toggle
+		{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: url('images/mobileUI-site-nav-opener-bg.svg') top center no-repeat;
+			text-indent: -9999em;
+			width: 60px;
+			height: 60px;
+			opacity: 0.5;
+		}
+
+		#titleBar .toggle:active
+		{
+			opacity: 1.0;
+		}
+
+	#navPanel
+	{
+		background: #1e1e1e url('images/bg3.png') top left repeat-x;
+		box-shadow: inset -5px 0px 60px 0px rgba(0,0,0,0.25);
+		padding: 1em 0 1em 0;
+	}
+
+		#navPanel .link
+		{
+			text-shadow: -1px -1px 0 rgba(0,0,0,0.25);
+			color: #fff;
+			text-decoration: none;
+			font-size: 1.4em;
+			padding: 0.5em 1em 0.5em 1em;
+		}

@@ -111,6 +111,30 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
+     * @covers Gc\Module\Model::fromName
+     *
+     * @return void
+     */
+    public function testFromName()
+    {
+        $this->assertInstanceOf('Gc\Module\Model', Model::fromName($this->object->getName()));
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Module\Model::fromName
+     *
+     * @return void
+     */
+    public function testFromWrongName()
+    {
+        $this->assertFalse(Model::fromName('undefined'));
+    }
+
+    /**
+     * Test
+     *
      * @covers Gc\Module\Model::save
      *
      * @return void
@@ -182,5 +206,59 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     {
         $model = new Model();
         $this->assertFalse($model->delete());
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Module\Model::install
+     * @covers Gc\Module\Model::loadBootstrap
+     *
+     * @return void
+     */
+    public function testInstallWithInvalidData()
+    {
+        $this->assertFalse(Model::install('Test'));
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Module\Model::install
+     * @covers Gc\Module\Model::loadBootstrap
+     *
+     * @return void
+     */
+    public function testInstall()
+    {
+        $this->assertInternalType('integer', Model::install('Blog'));
+        Model::uninstall('Blog');
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Module\Model::uninstall
+     * @covers Gc\Module\Model::loadBootstrap
+     *
+     * @return void
+     */
+    public function testUnInstallWithInvalidData()
+    {
+        $this->assertFalse(Model::uninstall('Test'));
+    }
+
+    /**
+     * Test
+     *
+     * @covers Gc\Module\Model::uninstall
+     * @covers Gc\Module\Model::loadBootstrap
+     *
+     * @return void
+     */
+    public function testUnInstall()
+    {
+        Model::install('Blog');
+        $this->assertTrue(Model::uninstall('Blog'));
     }
 }

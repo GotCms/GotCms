@@ -31,6 +31,7 @@ use Gc\Db\AbstractTable;
 use Gc\ModuleType;
 use Gc\Media\Icon;
 use Gc\View;
+use Zend\Db\Sql;
 use Zend\Db\Sql\Predicate\Expression;
 
 /**
@@ -165,5 +166,106 @@ class Model extends AbstractTable
         $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
 
         return false;
+    }
+
+    /**
+     * Install module
+     *
+     * @param string $moduleName Module Name
+     *
+     * @return boolean|integer
+     */
+    public static function install($moduleName)
+    {
+        $model  = new Model();
+        $object = $model->loadBootstrap($moduleName);
+        if (empty($object) or !$object->install()) {
+            return false;
+        }
+
+        $model->setName($moduleName);
+        $model->save();
+
+        $select = new Sql\Select();
+        $select->from('user_acl_resource')
+            ->columns(array('id'))
+            ->where->equalTo('resource', 'Modules');
+
+        $insert = new Sql\Insert();
+        $insert->into('user_acl_permission')
+            ->values(
+                array(
+                    'permission' => $moduleName,
+                    'user_acl_resource_id' => $model->fetchOne($select),
+                )
+            );
+
+        $model->execute($insert);
+
+        $insert = new Sql\Insert();
+        $insert->into('user_acl')
+            ->values(
+                array(
+                    'user_acl_permission_id' => $model->getLastInsertId('user_acl_permission'),
+                    'user_acl_role_id' => 1, //Administrator role
+                )
+            );
+
+        $model->execute($insert);
+
+        return $model->getId();
+    }
+
+    /**
+     * Uninstall from module name
+     *
+     * @param string $moduleName Module name
+     *
+     * @return boolean
+     */
+    public static function uninstall($moduleName)
+    {
+        $model  = Model::fromName($moduleName);
+        if (empty($model) or !$model->loadBootstrap($moduleName)->uninstall()) {
+            return false;
+        }
+
+        $select = new Sql\Select();
+        $select->from('user_acl_permission')
+            ->columns(array('id'))
+            ->where->equalTo('permission', $moduleName);
+
+        $userAclPermissionId = $model->fetchOne($select);
+
+        $delete = new Sql\Delete();
+        $delete->from('user_acl');
+        $delete->where->equalTo('user_acl_permission_id', $userAclPermissionId);
+        $model->execute($delete);
+
+        $delete = new Sql\Delete();
+        $delete->from('user_acl_permission');
+        $delete->where->equalTo('id', $userAclPermissionId);
+        $model->execute($delete);
+
+        $model->delete();
+
+        return true;
+    }
+
+    /**
+     * Load bootstrap from module name
+     *
+     * @param string $moduleName Module name
+     *
+     * @return \Gc\Module\AbstractModule
+     */
+    protected function loadBootstrap($moduleName)
+    {
+        $className = sprintf('\\Modules\\%s\\Bootstrap', $moduleName, $moduleName);
+        if (!class_exists($className)) {
+            return false;
+        }
+
+        return new $className();
     }
 }

@@ -46,7 +46,11 @@ class Info extends Object
      *
      * @var array
      */
-    protected $optionsArray = array('database_compatibility' => 'Database compatibility');
+    protected $optionsArray = array(
+        'database_compatibility' => 'Database compatibility',
+        'previews'               => 'Previews',
+        'modules'                => 'Required modules'
+    );
 
     /**
      * Available string options
@@ -54,11 +58,11 @@ class Info extends Object
      * @var array
      */
     protected $optionsString = array(
-        'author' => 'Author',
-        'date' => 'Date',
+        'author'      => 'Author',
+        'date'        => 'Date',
         'description' => 'Description',
         'cms_version' => 'GotCms version',
-        'version' => 'Version'
+        'version'     => 'Version'
     );
 
     /**
@@ -66,7 +70,9 @@ class Info extends Object
      *
      * @var array
      */
-    protected $optionsLinks = array('website' => 'Website url');
+    protected $optionsLinks = array(
+        'website' => 'Website url'
+    );
 
     /**
      * Initialize reader

@@ -27,9 +27,11 @@
 
 namespace Application\Controller;
 
-use Gc\Mvc\Controller\Action;
-use Gc\Media\File;
 use Gc\Core;
+use Gc\Media\File;
+use Gc\Media\Info;
+use Gc\Module\Model as ModuleModel;
+use Gc\Mvc\Controller\Action;
 use Gc\Registry;
 use Gc\Version;
 use Application\Form\Install;
@@ -343,6 +345,9 @@ class InstallController extends Action
 
                 $dbAdapter = new DbAdapter($session['install']['db']);
                 $dbAdapter->getDriver()->getConnection()->connect();
+                Registry::set('Db', $dbAdapter);
+                GlobalAdapterFeature::setStaticAdapter($dbAdapter);
+                Registry::set('Configuration', array('db' => $session['install']['db']));
 
                 $step    = $this->getRequest()->getPost()->get('step');
                 $sqlType = str_replace('pdo_', '', $session['install']['db']['driver']);
@@ -401,8 +406,6 @@ class InstallController extends Action
                                 $session['install']['lang']
                             );
                             if (file_exists($languageFilename)) {
-                                GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-                                Registry::set('Configuration', array('db' => $session['install']['db']));
                                 $langConfig = include $languageFilename;
                                 foreach ($langConfig as $source => $destination) {
                                     Core\Translator::setValue(
@@ -560,7 +563,9 @@ class InstallController extends Action
                         case 'it':
                             $template     = $session['install']['configuration']['template'];
                             $templatePath = GC_APPLICATION_PATH . sprintf('/data/install/design/%s', $template);
-                            $filePath     = sprintf('%s/%s.sql', $templatePath, $sqlType);
+                            $info         = new Info();
+                            $info->fromFile($templatePath . '/design.info');
+                            $filePath     = sprintf('%s/sql/%s.sql', $templatePath, $sqlType);
                             if (!file_exists($filePath)) {
                                 return $this->returnJson(
                                     array(
@@ -572,6 +577,13 @@ class InstallController extends Action
                                         )
                                     )
                                 );
+                            }
+
+                            $designInfos = $info->getInfos();
+                            if (!empty($designInfos['modules'])) {
+                                foreach($designInfos['modules'] as $module) {
+                                    ModuleModel::install($module);
+                                }
                             }
 
                             $sql = file_get_contents($filePath);

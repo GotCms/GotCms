@@ -6,75 +6,75 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: datatype_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: datatype_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('datatype_id_seq', 5, true);
 
 
 --
--- Name: document_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: document_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('document_id_seq', 3, true);
 
 
 --
--- Name: document_type_dependency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: document_type_dependency_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('document_type_dependency_id_seq', 1, false);
 
 
 --
--- Name: document_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: document_type_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('document_type_id_seq', 3, true);
 
 
 --
--- Name: document_type_view_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: document_type_view_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('document_type_view_id_seq', 1, false);
 
 
 --
--- Name: layout_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: layout_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('layout_id_seq', 1, true);
 
 --
--- Name: property_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: property_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('property_id_seq', 14, true);
 
 
 --
--- Name: property_value_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: property_value_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('property_value_id_seq', 14, true);
 
 
 --
--- Name: script_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: script_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('script_id_seq', 1, true);
 
 
 --
--- Name: tab_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: tab_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('tab_id_seq', 8, true);
 
 --
--- Name: view_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
+-- Name: view_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('view_id_seq', 6, true);
