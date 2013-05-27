@@ -284,12 +284,13 @@ class Model extends AbstractTable implements IterableInterface
     public function getUrl()
     {
         $parent = $this->getParent();
-        $path   = '/' . $this->getUrlKey();
+        $path   = $this->getUrlKey();
+
         if (!empty($parent)) {
-            $path = $parent->getUrl() . $path;
+            $path = $parent->getUrl() . '/' . $path;
         }
 
-        return $path;
+        return '/' . ltrim($path, '/');
     }
 
     /**
