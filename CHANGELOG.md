@@ -1,6 +1,6 @@
 # CHANGELOG13
 
-##0.1.8 (-- --- 2013):
+##0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/PierreRambaud/GotCms/issues/55](https://github.com/PierreRambaud/GotCms/issues/55))
 - Use cms_version instead version ([https://github.com/PierreRambaud/GotCms/issues/57](https://github.com/PierreRambaud/GotCms/issues/57))
 - Optimize the helper "documents" ([https://github.com/PierreRambaud/GotCms/issues/58](https://github.com/PierreRambaud/GotCms/issues/58))
