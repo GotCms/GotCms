@@ -47,7 +47,7 @@ class Document extends AbstractHelper
      *
      * @return \Gc\Document\Model
      */
-    public function __invoke($identifier)
+    public function __invoke($identifier = '')
     {
         if (is_numeric($identifier)) {
             return DocumentModel::fromId($identifier);
