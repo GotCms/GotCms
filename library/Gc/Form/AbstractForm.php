@@ -135,7 +135,7 @@ abstract class AbstractForm extends Form
             return;
         }
 
-        if ($datatypeId === null) {
+        if (!empty($prefix) and $datatypeId === null) {
             $datatypeId = mt_rand();
         }
 
