@@ -259,3 +259,9 @@
     padding: 0;
     width: 100%;
 }
+
+.notification {border-radius:6px 6px 6px 6px;border: 1px solid;font-size: 13px;margin: 0 0 15px;padding: 0;position: relative;width: 99.8%;padding:5px}
+.warning {background: #FFFBCC;border-color: #E6DB55;color: #666452;}
+.information {background: #DBE3FF;border-color: #A2B4EE;color: #585B66;}
+.success {background: #D5FFCE;border-color: #9ADF8F;color: #556652;}
+.error {background: #FFCECE;border-color: #DF8F8F;color: #665252;}
