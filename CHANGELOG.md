@@ -1,5 +1,8 @@
 # CHANGELOG13
 
+##0.1.9 (-- --- 2013):
+- Can't update cms with git ([https://github.com/PierreRambaud/GotCms/issues/76](https://github.com/PierreRambaud/GotCms/issues/76))
+
 ##0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/PierreRambaud/GotCms/issues/55](https://github.com/PierreRambaud/GotCms/issues/55))
 - Use cms_version instead version ([https://github.com/PierreRambaud/GotCms/issues/57](https://github.com/PierreRambaud/GotCms/issues/57))

@@ -63,12 +63,12 @@ class Wget extends AbstractAdapter
         exec(
             'wget -P '
             . $this->getTmpPath()
-            . ' --no-check-certificate https://api.github.com/repos/PierreRambaud/GotCms/zipball/v'
+            . ' --no-check-certificate https://api.github.com/repos/PierreRambaud/GotCms/zipball/'
             . $this->getLatestVersion()
             . ' 2>&1',
             $output
         );
-        rename($this->getTmpPath() . 'v' . $this->getLatestVersion(), $filename);
+        rename($this->getTmpPath() . '/' . $this->getLatestVersion(), $filename);
         $this->addMessage(implode(PHP_EOL, $output));
 
         $zip = new ZipArchive;
