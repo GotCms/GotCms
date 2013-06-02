@@ -14,6 +14,7 @@
 - No need to stay on login page if user has Identity ([https://github.com/PierreRambaud/GotCms/issues/68](https://github.com/PierreRambaud/GotCms/issues/68))
 - Upload datatype must return an simple array if isn't multiple ([https://github.com/PierreRambaud/GotCms/issues/69](https://github.com/PierreRambaud/GotCms/issues/69))
 - Home page can't display children ([https://github.com/PierreRambaud/GotCms/issues/70](https://github.com/PierreRambaud/GotCms/issues/70))
+- Mixed datatype has problems when datatype return more than one element ([https://github.com/PierreRambaud/GotCms/issues/75](https://github.com/PierreRambaud/GotCms/issues/75))
 
 ##0.1.7 (30 Apr 2013):
 - Get latest version can failed on certain php version ([https://github.com/PierreRambaud/GotCms/issues/53](https://github.com/PierreRambaud/GotCms/issues/53))

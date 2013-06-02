@@ -129,15 +129,20 @@ abstract class AbstractForm extends Form
      * @static
      * @return void
      */
-    public static function addContent(Fieldset $form, $elements, $prefix = null)
+    public static function addContent(Fieldset $form, $elements, $prefix = null, $datatypeId = null)
     {
         if (empty($elements)) {
             return;
         }
 
+        if ($datatypeId === null) {
+            $datatypeId = mt_rand();
+        }
+
         if (is_array($elements)) {
+            $randId = mt_rand();
             foreach ($elements as $element) {
-                self::addContent($form, $element, $prefix);
+                self::addContent($form, $element, $prefix, $randId);
             }
         } elseif ($elements instanceof Element) {
             if (!empty($prefix)) {
@@ -146,29 +151,28 @@ abstract class AbstractForm extends Form
                     $id = $elements->getAttribute('name');
                 }
 
-                $elements->setAttribute('id', $id . mt_rand());
+                $elements->setAttribute('id', $id . $datatypeId);
                 $elements->setAttribute('name', $prefix . '[' . $elements->getAttribute('name') . ']');
             }
 
             $form->add($elements);
         } elseif (is_string($elements)) {
             if (!empty($prefix)) {
-                $randId   = mt_rand();
                 $elements = preg_replace('~name="(.+)(\[.*\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
                 $elements = preg_replace(
                     '~name\\\x3D\\\x22(.+)(\\\x5B.*\\\x5D)?\\\x22~iU',
                     'name\\\x3D\\\x22' . $prefix . '\\\x5B$1\\\x5D$2',
                     $elements
                 );
-                $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $randId . '"', $elements);
+                $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $datatypeId . '"', $elements);
                 $elements = preg_replace(
                     '~id\\\x3D\\\x22"(.+)\\\x22~iU',
-                    'id\\\x3D\\\x22${1}' . $randId . '\\\x22',
+                    'id\\\x3D\\\x22${1}' . $datatypeId . '\\\x22',
                     $elements
                 );
                 $elements = preg_replace(
                     '~(?:(?!(?<=value=)))("|\')#(.+)("|\')~iU',
-                    '${1}#${2}' . $randId . '${3}',
+                    '${1}#${2}' . $datatypeId . '${3}',
                     $elements
                 );
             }
