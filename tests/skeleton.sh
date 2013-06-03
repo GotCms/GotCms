@@ -2,7 +2,7 @@
 
 if [[ $# -lt 2 ]]
 then
-    echo >&2 "You must specify a directory and filename name!"
+    echo >&2 "You must specify a directory and filename!"
 else
     if [[ "$2" == "all" ]]
     then
@@ -25,7 +25,7 @@ else
         DEEP=`echo $FILENAME | sed 's/\// /g' | sed 's/\\//\/ /g' | wc -w`
         if [[ $DEEP -lt 2 ]]
         then
-            echo >&2 "Filename name $FILENAME invalid. Exiting.."
+            echo >&2 "filename $FILENAME invalid. Exiting.."
         else
             CLASS_SRC=`echo "${FILENAME%.*}" | sed 's/\\//\\\\/g'`
             FILE_TEST_SRC="${FILENAME%.*}Test"$EXT
