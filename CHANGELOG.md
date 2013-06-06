@@ -2,6 +2,7 @@
 
 ##0.1.9 (-- --- 2013):
 - Can't update cms with git ([https://github.com/PierreRambaud/GotCms/issues/76](https://github.com/PierreRambaud/GotCms/issues/76))
+- Add Zend Validate translations ([https://github.com/PierreRambaud/GotCms/issues/77](https://github.com/PierreRambaud/GotCms/issues/77))
 
 ##0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/PierreRambaud/GotCms/issues/55](https://github.com/PierreRambaud/GotCms/issues/55))
