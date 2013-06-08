@@ -86,7 +86,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Admin');
         $this->assertControllerName('AdminController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('dashboardSave');
+        $this->assertMatchedRouteName('admin/dashboard-save');
     }
 
     /**
@@ -108,7 +108,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Admin');
         $this->assertControllerName('AdminController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('dashboardSave');
+        $this->assertMatchedRouteName('admin/dashboard-save');
     }
 
     /**
@@ -131,6 +131,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Admin');
         $this->assertControllerName('AdminController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('dashboardSave');
+        $this->assertMatchedRouteName('admin/dashboard-save');
     }
 }

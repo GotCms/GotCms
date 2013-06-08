@@ -58,13 +58,13 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexAction()
     {
-        $this->dispatch('/admin/development/datatype/list');
+        $this->dispatch('/admin/development/datatype');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeList');
+        $this->assertMatchedRouteName('development/datatype');
     }
 
     /**
@@ -82,7 +82,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeCreate');
+        $this->assertMatchedRouteName('development/datatype/create');
     }
 
     /**
@@ -104,7 +104,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeCreate');
+        $this->assertMatchedRouteName('development/datatype/create');
     }
 
     /**
@@ -120,7 +120,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
             '/admin/development/datatype/create',
             'POST',
             array(
-                'name' => 'DatatypeCreateTest',
+                'name' => 'development/datatype/createTest',
                 'model' => 'Textstring',
             )
         );
@@ -129,7 +129,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeCreate');
+        $this->assertMatchedRouteName('development/datatype/create');
     }
 
     /**
@@ -147,7 +147,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeEdit');
+        $this->assertMatchedRouteName('development/datatype/edit');
     }
 
     /**
@@ -173,7 +173,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeEdit');
+        $this->assertMatchedRouteName('development/datatype/edit');
 
         $datatypeModel->delete();
     }
@@ -205,7 +205,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeEdit');
+        $this->assertMatchedRouteName('development/datatype/edit');
 
         $datatypeModel->delete();
     }
@@ -240,7 +240,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeEdit');
+        $this->assertMatchedRouteName('development/datatype/edit');
 
         $datatypeModel->delete();
     }
@@ -268,7 +268,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeDelete');
+        $this->assertMatchedRouteName('development/datatype/delete');
 
         $datatypeModel->delete();
     }
@@ -288,6 +288,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DatatypeController');
         $this->assertControllerClass('DatatypeController');
-        $this->assertMatchedRouteName('datatypeDelete');
+        $this->assertMatchedRouteName('development/datatype/delete');
     }
 }

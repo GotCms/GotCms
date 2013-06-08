@@ -28,10 +28,10 @@
 
 $routes = array(
     'install',
-    'installLicense',
-    'installCheckConfig',
-    'installDatabase',
-    'installConfiguration',
+    'install/license',
+    'install/check-config',
+    'install/database',
+    'install/configuration',
 );
 $step = array_search($this->currentRoute, $routes);
 if(empty($this->currentRoute))

@@ -75,7 +75,7 @@ class RoleController extends Action
     {
         $form = new RoleForm();
         $form->initPermissions();
-        $form->setAttribute('action', $this->url()->fromRoute('userRoleCreate'));
+        $form->setAttribute('action', $this->url()->fromRoute('config/user/role/create'));
 
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
@@ -85,7 +85,7 @@ class RoleController extends Action
                 $roleModel->addData($form->getInputFilter()->getValues());
                 $roleModel->save();
                 $this->flashMessenger()->addSuccessMessage('Role saved!');
-                return $this->redirect()->toRoute('userRoleEdit', array('id' => $roleModel->getId()));
+                return $this->redirect()->toRoute('config/user/role/edit', array('id' => $roleModel->getId()));
             }
 
             $this->flashMessenger()->addErrorMessage('Role can not saved!');
@@ -122,12 +122,12 @@ class RoleController extends Action
         $roleModel = Role\Model::fromId($roleId);
         if (empty($roleModel) or $roleModel->getName() === Role\Model::PROTECTED_NAME) {
             $this->flashMessenger()->addErrorMessage("Can't edit this role");
-            return $this->redirect()->toRoute('userRole');
+            return $this->redirect()->toRoute('config/user/role');
         }
 
         $form = new RoleForm();
         $form->initPermissions($roleModel->getUserPermissions());
-        $form->setAttribute('action', $this->url()->fromRoute('userRoleEdit', array('id' => $roleId)));
+        $form->setAttribute('action', $this->url()->fromRoute('config/user/role/edit', array('id' => $roleId)));
         $form->loadValues($roleModel);
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
@@ -137,7 +137,7 @@ class RoleController extends Action
                 $roleModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('Role saved!');
-                return $this->redirect()->toRoute('userRoleEdit', array('id' => $roleId));
+                return $this->redirect()->toRoute('config/user/role/edit', array('id' => $roleId));
             }
 
             $this->flashMessenger()->addErrorMessage('Role can not saved!');

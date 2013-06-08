@@ -45,12 +45,12 @@
             <tr>
                 <td><?php echo $this->escapeHtml($datatype->getName()); ?></td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('datatypeEdit', array('id' => $datatype->getId())); ?>" class="edit-line">
+                    <a href="<?php echo $this->url('development/datatype/edit', array('id' => $datatype->getId())); ?>" class="edit-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('datatypeDelete', array('id' => $datatype->getId())); ?>" class="delete-line">
+                    <a href="<?php echo $this->url('development/datatype/delete', array('id' => $datatype->getId())); ?>" class="delete-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
                     </a>
                 </td>

@@ -133,17 +133,6 @@ abstract class Module
     {
         if (empty($this->config)) {
             $config = include $this->getDir() . '/config/module.config.php';
-            $ini    = new Ini();
-            $routes = $ini->fromFile($this->getDir() . '/config/routes.ini');
-            $routes = $routes['production'];
-            if (empty($config['router']['routes'])) {
-                $config['router']['routes'] = array();
-            }
-
-            if (!empty($routes['routes'])) {
-                $config['router']['routes'] += $routes['routes'];
-            }
-
             if (Registry::isRegistered('Db')) {
                 if (isset($config['view_manager']['display_exceptions']) and CoreConfig::getValue('debug_is_active')) {
                     $config['view_manager']['display_not_found_reason'] = true;
@@ -259,7 +248,7 @@ abstract class Module
      */
     public function prepareException($event)
     {
-        if ($event->getApplication()->getMvcEvent()->getRouteMatch()->getMatchedRouteName() === 'renderWebsite') {
+        if ($event->getApplication()->getMvcEvent()->getRouteMatch()->getMatchedRouteName() === 'cms') {
             $layout = Layout\Model::fromId(CoreConfig::getValue('site_exception_layout'));
             if (!empty($layout)) {
                 $templatePathStack = $event->getApplication()->getServiceManager()->get(
@@ -284,7 +273,7 @@ abstract class Module
         $request          = $event->getRequest();
         $uri              = $request->getUri();
 
-        if ($matchedRouteName === 'renderWebsite') {
+        if ($matchedRouteName === 'cms') {
             if ($uri->getScheme() === 'https' or CoreConfig::getValue('force_frontend_ssl')) {
                 $newUri = new Uri(CoreConfig::getValue('secure_frontend_base_path'));
                 $newUri->setScheme('https');

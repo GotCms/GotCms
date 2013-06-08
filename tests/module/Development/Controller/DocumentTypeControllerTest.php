@@ -64,13 +64,13 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexAction()
     {
-        $this->dispatch('/admin/development/document-type/list');
+        $this->dispatch('/admin/development/document-type');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeList');
+        $this->assertMatchedRouteName('development/document-type');
     }
 
     /**
@@ -88,7 +88,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeCreate');
+        $this->assertMatchedRouteName('development/document-type/create');
     }
 
     /**
@@ -115,7 +115,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeCreate');
+        $this->assertMatchedRouteName('development/document-type/create');
     }
 
     /**
@@ -188,7 +188,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeCreate');
+        $this->assertMatchedRouteName('development/document-type/create');
 
         $viewModel->delete();
         $datatypeModel->delete();
@@ -256,7 +256,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeEdit');
+        $this->assertMatchedRouteName('development/document-type/edit');
 
         $documentTypeModel->delete();
         $propertyModel->delete();
@@ -365,7 +365,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeEdit');
+        $this->assertMatchedRouteName('development/document-type/edit');
 
         $documentTypeModel->delete();
         $propertyModel->delete();
@@ -413,7 +413,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeEdit');
+        $this->assertMatchedRouteName('development/document-type/edit');
 
         $documentTypeModel->delete();
         $viewModel->delete();
@@ -434,7 +434,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeEdit');
+        $this->assertMatchedRouteName('development/document-type/edit');
     }
 
     /**
@@ -471,7 +471,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeDelete');
+        $this->assertMatchedRouteName('development/document-type/delete');
 
         $documentTypeModel->delete();
         $viewModel->delete();
@@ -492,7 +492,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('documentTypeDelete');
+        $this->assertMatchedRouteName('development/document-type/delete');
     }
 
     /**
@@ -510,7 +510,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('importTab');
+        $this->assertMatchedRouteName('development/document-type/import-tab');
     }
 
     /**
@@ -528,7 +528,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('addTab');
+        $this->assertMatchedRouteName('development/document-type/add-tab');
     }
 
     /**
@@ -553,7 +553,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('addTab');
+        $this->assertMatchedRouteName('development/document-type/add-tab');
     }
 
     /**
@@ -589,7 +589,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('addTab');
+        $this->assertMatchedRouteName('development/document-type/add-tab');
     }
 
     /**
@@ -624,7 +624,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('deleteTab');
+        $this->assertMatchedRouteName('development/document-type/delete-tab');
     }
 
     /**
@@ -642,7 +642,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('deleteTab');
+        $this->assertMatchedRouteName('development/document-type/delete-tab');
     }
 
     /**
@@ -666,7 +666,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('deleteTab');
+        $this->assertMatchedRouteName('development/document-type/delete-tab');
     }
 
     /**
@@ -717,7 +717,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('addProperty');
+        $this->assertMatchedRouteName('development/document-type/add-property');
     }
 
     /**
@@ -770,7 +770,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('addProperty');
+        $this->assertMatchedRouteName('development/document-type/add-property');
     }
 
     /**
@@ -800,7 +800,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('addProperty');
+        $this->assertMatchedRouteName('development/document-type/add-property');
     }
 
     /**
@@ -818,7 +818,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('addProperty');
+        $this->assertMatchedRouteName('development/document-type/add-property');
     }
 
     /**
@@ -866,7 +866,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('deleteProperty');
+        $this->assertMatchedRouteName('development/document-type/delete-property');
     }
 
     /**
@@ -893,6 +893,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('DocumentTypeController');
         $this->assertControllerClass('DocumentTypeController');
-        $this->assertMatchedRouteName('deleteProperty');
+        $this->assertMatchedRouteName('development/document-type/delete-property');
     }
 }

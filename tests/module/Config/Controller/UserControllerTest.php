@@ -60,13 +60,13 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexAction()
     {
-        $this->dispatch('/admin/config/user/list');
+        $this->dispatch('/admin/config/user');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userList');
+        $this->assertMatchedRouteName('config/user');
     }
 
     /**
@@ -81,13 +81,13 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $auth = new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
         $auth->clearIdentity();
 
-        $this->dispatch('/admin/user/login');
+        $this->dispatch('/admin/config/user/login');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userlogin');
+        $this->assertMatchedRouteName('config/user/login');
     }
 
     /**
@@ -99,13 +99,13 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testLoginActionWithIdentity()
     {
-        $this->dispatch('/admin/user/login');
+        $this->dispatch('/admin/config/user/login');
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userlogin');
+        $this->assertMatchedRouteName('config/user/login');
     }
 
     /**
@@ -117,14 +117,14 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testLoginActionWithIdentityAndRedirect()
     {
-        ///admin/development/view/list
-        $this->dispatch('/admin/user/login/L2FkbWluL2RldmVsb3BtZW50L3ZpZXcvbGlzdA==');
+        ///admin/development/view
+        $this->dispatch('/admin/config/user/login/L2FkbWluL2RldmVsb3BtZW50L3ZpZXcvbGlzdA==');
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userlogin');
+        $this->assertMatchedRouteName('config/user/login');
     }
 
     /**
@@ -140,7 +140,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $auth->clearIdentity();
 
         $this->dispatch(
-            '/admin/user/login',
+            '/admin/config/user/login',
             'POST',
             array(
                 'login' => $this->user->getLogin(),
@@ -152,7 +152,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userLogin');
+        $this->assertMatchedRouteName('config/user/login');
     }
 
     /**
@@ -168,7 +168,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $auth->clearIdentity();
 
         $this->dispatch(
-            '/admin/user/login/L2FkbWlu',
+            '/admin/config/user/login/L2FkbWlu',
             'POST',
             array(
                 'login' => $this->user->getLogin(),
@@ -181,7 +181,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userLogin');
+        $this->assertMatchedRouteName('config/user/login');
     }
 
     /**
@@ -197,7 +197,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $auth->clearIdentity();
 
         $this->dispatch(
-            '/admin/user/login/L2FkbWlu',
+            '/admin/config/user/login/L2FkbWlu',
             'POST',
             array(
                 'login' => 'testlogin',
@@ -210,7 +210,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userLogin');
+        $this->assertMatchedRouteName('config/user/login');
     }
 
     /**
@@ -228,7 +228,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userForgotPassword');
+        $this->assertMatchedRouteName('config/user/forgot-password');
     }
 
     /**
@@ -264,7 +264,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userForgotPassword');
+        $this->assertMatchedRouteName('config/user/forgot-password');
 
         $userModel->delete();
     }
@@ -290,7 +290,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userForgotPassword');
+        $this->assertMatchedRouteName('config/user/forgot-password');
     }
 
     /**
@@ -302,13 +302,13 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testLogoutAction()
     {
-        $this->dispatch('/admin/user/logout');
+        $this->dispatch('/admin/config/user/logout');
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userLogout');
+        $this->assertMatchedRouteName('config/user/logout');
     }
 
     /**
@@ -326,7 +326,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userCreate');
+        $this->assertMatchedRouteName('config/user/create');
     }
 
     /**
@@ -349,7 +349,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userCreate');
+        $this->assertMatchedRouteName('config/user/create');
     }
 
     /**
@@ -379,7 +379,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userCreate');
+        $this->assertMatchedRouteName('config/user/create');
     }
 
     /**
@@ -409,7 +409,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userDelete');
+        $this->assertMatchedRouteName('config/user/delete');
 
         $userModel->delete();
     }
@@ -429,7 +429,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userDelete');
+        $this->assertMatchedRouteName('config/user/delete');
     }
 
     /**
@@ -447,7 +447,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userEdit');
+        $this->assertMatchedRouteName('config/user/edit');
     }
 
     /**
@@ -465,7 +465,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userEdit');
+        $this->assertMatchedRouteName('config/user/edit');
     }
 
     /**
@@ -488,7 +488,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userEdit');
+        $this->assertMatchedRouteName('config/user/edit');
     }
 
     /**
@@ -530,7 +530,7 @@ class UserControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userEdit');
+        $this->assertMatchedRouteName('config/user/edit');
 
         $userModel->delete();
     }
@@ -544,12 +544,12 @@ class UserControllerTest extends AbstractHttpControllerTestCase
      */
     public function testForbiddenAction()
     {
-        $this->dispatch('/admin/user/forbidden-access');
+        $this->dispatch('/admin/config/user/forbidden-access');
         $this->assertResponseStatusCode(403);
 
         $this->assertModuleName('Config');
         $this->assertControllerName('UserController');
         $this->assertControllerClass('UserController');
-        $this->assertMatchedRouteName('userForbidden');
+        $this->assertMatchedRouteName('config/user/forbidden');
     }
 }

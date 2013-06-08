@@ -98,7 +98,7 @@ class UserController extends Action
             }
 
             $this->flashMessenger()->addErrorMessage('Can not connect');
-            return $this->redirect()->toRoute('userLogin', array('redirect' => $redirect));
+            return $this->redirect()->toRoute('config/user/login', array('redirect' => $redirect));
         }
 
         $loginForm->get('redirect')->setValue($this->getRouteMatch()->getParam('redirect'));
@@ -124,7 +124,7 @@ class UserController extends Action
                 $forgotPasswordForm->setAttribute(
                     'action',
                     $this->url()->fromRoute(
-                        'userForgotPasswordKey',
+                        'config/user/forgot-password-key',
                         array(
                             'id' => $id,
                             'key' => $key
@@ -155,7 +155,7 @@ class UserController extends Action
 
             return $this->redirect()->toRoute('admin');
         } else {
-            $forgotPasswordForm->setAttribute('action', $this->url()->fromRoute('userForgotPassword'));
+            $forgotPasswordForm->setAttribute('action', $this->url()->fromRoute('config/user/forgot-password'));
             $forgotPasswordForm->initEmail();
             if ($this->getRequest()->isPost()) {
                 $post = $this->getRequest()->getPost();
@@ -191,7 +191,7 @@ class UserController extends Action
     public function createAction()
     {
         $form = new UserForm();
-        $form->setAttribute('action', $this->url()->fromRoute('userCreate'));
+        $form->setAttribute('action', $this->url()->fromRoute('config/user/create'));
         $form->passwordRequired();
         $post = $this->getRequest()->getPost()->toArray();
         if ($this->getRequest()->isPost()) {
@@ -208,7 +208,7 @@ class UserController extends Action
                 $userModel->save();
                 $this->flashMessenger()->addSuccessMessage('User saved!');
 
-                return $this->redirect()->toRoute('userEdit', array('id' => $userModel->getId()));
+                return $this->redirect()->toRoute('config/user/edit', array('id' => $userModel->getId()));
             }
 
             $this->useFlashMessenger();
@@ -245,11 +245,11 @@ class UserController extends Action
 
         if (empty($userModel)) {
             $this->flashMessenger()->addErrorMessage("Can't edit this user");
-            return $this->redirect()->toRoute('userList');
+            return $this->redirect()->toRoute('config/user');
         }
 
         $form = new UserForm();
-        $form->setAttribute('action', $this->url()->fromRoute('userEdit', array('id' => $userId)));
+        $form->setAttribute('action', $this->url()->fromRoute('config/user/edit', array('id' => $userId)));
         $form->loadValues($userModel);
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
@@ -270,7 +270,7 @@ class UserController extends Action
 
                 $userModel->save();
                 $this->flashMessenger()->addSuccessMessage('This user has been saved');
-                return $this->redirect()->toRoute('userEdit', array('id' => $userId));
+                return $this->redirect()->toRoute('config/user/edit', array('id' => $userId));
             }
 
             $this->flashMessenger()->addErrorMessage('User can not be saved');

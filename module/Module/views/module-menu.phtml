@@ -34,7 +34,7 @@
 
 <ul>
     <?php if (in_array('install', $permissions['Modules'])):?>
-        <li><a href="<?php echo $this->url('moduleInstall'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <li><a href="<?php echo $this->url('module/install'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
     <?php endif; ?>
 
     <li><a href="<?php echo $this->url('module'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>

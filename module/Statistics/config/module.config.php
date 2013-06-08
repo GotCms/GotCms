@@ -35,4 +35,20 @@ return array(
             'statistics' => __DIR__ . '/../views',
         ),
     ),
+    'router' => array(
+        'routes' => array(
+            'statistics' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/admin/statistics',
+                    'defaults' =>
+                    array (
+                        'module'     => 'statistics',
+                        'controller' => 'StatisticsController',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+        ),
+    ),
 );

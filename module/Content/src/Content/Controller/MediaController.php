@@ -70,13 +70,13 @@ class MediaController extends Action
         $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
 
         $routes = array(
-            'edit' => 'documentEdit',
-            'new' => 'documentCreate',
-            'delete' => 'documentDelete',
-            'copy' => 'documentCopy',
-            'cut' => 'documentCut',
-            'paste' => 'documentPaste',
-            'refresh' => 'documentRefreshTreeview',
+            'edit' => 'content/document/edit',
+            'new' => 'content/document/create',
+            'delete' => 'content/document/delete',
+            'copy' => 'content/document/copy',
+            'cut' => 'content/document/cut',
+            'paste' => 'content/document/paste',
+            'refresh' => 'content/document/refresh-treeview',
         );
 
         $arrayRoutes = array();

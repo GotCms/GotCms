@@ -33,10 +33,10 @@ $config = empty($permissions['Config']) ? array() : $permissions['Config'];
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing configuration')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('configGeneral'); ?>" title=""><?php echo $this->escapeHtml($this->translate('General')); ?></a></li>
-        <li><a href="<?php echo $this->url('configSystem'); ?>" title=""><?php echo $this->escapeHtml($this->translate('System')); ?></a></li>
-        <li><a href="<?php echo $this->url('configServer'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Server')); ?></a></li>
-        <li><a href="<?php echo $this->url('cmsUpdate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Update')); ?></a></li>
+        <li><a href="<?php echo $this->url('config/general'); ?>" title=""><?php echo $this->escapeHtml($this->translate('General')); ?></a></li>
+        <li><a href="<?php echo $this->url('config/system'); ?>" title=""><?php echo $this->escapeHtml($this->translate('System')); ?></a></li>
+        <li><a href="<?php echo $this->url('config/server'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Server')); ?></a></li>
+        <li><a href="<?php echo $this->url('config/cms-update'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Update')); ?></a></li>
     </ul>
 <?php endif; ?>
 
@@ -44,8 +44,8 @@ $config = empty($permissions['Config']) ? array() : $permissions['Config'];
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Users')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('userList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-        <li><a href="<?php echo $this->url('userCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
+        <li><a href="<?php echo $this->url('config/user'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <li><a href="<?php echo $this->url('config/user/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
     </ul>
 <?php endif; ?>
 
@@ -53,7 +53,7 @@ $config = empty($permissions['Config']) ? array() : $permissions['Config'];
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Roles')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('userRole'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-        <li><a href="<?php echo $this->url('userRoleCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
+        <li><a href="<?php echo $this->url('config/user/role'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <li><a href="<?php echo $this->url('config/user/role/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
     </ul>
 <?php endif; ?>

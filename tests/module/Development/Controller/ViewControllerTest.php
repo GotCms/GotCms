@@ -58,13 +58,13 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexAction()
     {
-        $this->dispatch('/admin/development/view/list');
+        $this->dispatch('/admin/development/view');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewList');
+        $this->assertMatchedRouteName('development/view');
     }
 
     /**
@@ -82,7 +82,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewCreate');
+        $this->assertMatchedRouteName('development/view/create');
     }
 
     /**
@@ -106,7 +106,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewCreate');
+        $this->assertMatchedRouteName('development/view/create');
     }
 
     /**
@@ -132,7 +132,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewCreate');
+        $this->assertMatchedRouteName('development/view/create');
 
         ViewModel::fromIdentifier('Identifier')->delete();
     }
@@ -152,7 +152,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewEdit');
+        $this->assertMatchedRouteName('development/view/edit');
     }
 
     /**
@@ -178,7 +178,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewEdit');
+        $this->assertMatchedRouteName('development/view/edit');
 
         $viewModel->delete();
     }
@@ -211,7 +211,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewEdit');
+        $this->assertMatchedRouteName('development/view/edit');
 
         $viewModel->delete();
     }
@@ -247,7 +247,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewEdit');
+        $this->assertMatchedRouteName('development/view/edit');
 
         $viewModel->delete();
     }
@@ -275,7 +275,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewDelete');
+        $this->assertMatchedRouteName('development/view/delete');
 
         $viewModel->delete();
     }
@@ -295,7 +295,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewDelete');
+        $this->assertMatchedRouteName('development/view/delete');
     }
 
     /**
@@ -331,7 +331,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewUpload');
+        $this->assertMatchedRouteName('development/view/upload');
 
         $viewModel->delete();
     }
@@ -389,7 +389,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewUpload');
+        $this->assertMatchedRouteName('development/view/upload');
 
         $viewModel->delete();
     }
@@ -410,7 +410,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewUpload');
+        $this->assertMatchedRouteName('development/view/upload');
     }
 
     /**
@@ -428,7 +428,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewUpload');
+        $this->assertMatchedRouteName('development/view/upload');
     }
 
     /**
@@ -455,7 +455,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewDownload');
+        $this->assertMatchedRouteName('development/view/download');
 
         $viewModel->delete();
     }
@@ -483,7 +483,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewDownload');
+        $this->assertMatchedRouteName('development/view/download');
 
         $viewModel->delete();
     }
@@ -503,7 +503,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewDownload');
+        $this->assertMatchedRouteName('development/view/download');
     }
 
     /**
@@ -530,7 +530,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ViewController');
         $this->assertControllerClass('ViewController');
-        $this->assertMatchedRouteName('viewDownload');
+        $this->assertMatchedRouteName('development/view/download');
 
         $viewModel->delete();
     }

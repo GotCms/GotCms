@@ -70,7 +70,7 @@ class DocumentTypeController extends Action
     public function createAction()
     {
         $form = new DocumentTypeForm();
-        $form->setAttribute('action', $this->url()->fromRoute('documentTypeCreate', array()));
+        $form->setAttribute('action', $this->url()->fromRoute('development/document-type/create', array()));
         $request = $this->getRequest();
         $session = $this->getSession();
 
@@ -156,7 +156,7 @@ class DocumentTypeController extends Action
                     $documentType->getAdapter()->getDriver()->getConnection()->commit();
 
                     $this->flashMessenger()->addSuccessMessage('This document type has been saved');
-                    return $this->redirect()->toRoute('documentTypeEdit', array('id' => $documentType->getId()));
+                    return $this->redirect()->toRoute('development/document-type/edit', array('id' => $documentType->getId()));
                 } catch (Exception $e) {
                     $documentType->getAdapter()->getDriver()->getConnection()->rollBack();
                     throw new \Gc\Exception('Error Processing Request ' . print_r($e, true), 1);
@@ -177,11 +177,11 @@ class DocumentTypeController extends Action
         $documentTypeId = $this->getRouteMatch()->getParam('id');
         $documentType   = DocumentType\Model::fromId($documentTypeId);
         if (empty($documentType)) {
-            return $this->redirect()->toRoute('documentTypeCreate');
+            return $this->redirect()->toRoute('development/document-type/create');
         }
 
         $form = new DocumentTypeForm();
-        $form->setAttribute('action', $this->url()->fromRoute('documentTypeEdit', array('id' => $documentTypeId)));
+        $form->setAttribute('action', $this->url()->fromRoute('development/document-type/edit', array('id' => $documentTypeId)));
         $request = $this->getRequest();
         $session = $this->getSession();
 
@@ -333,7 +333,7 @@ class DocumentTypeController extends Action
                     $documentType->getAdapter()->getDriver()->getConnection()->commit();
 
                     $this->flashMessenger()->addSuccessMessage('This document type has been saved');
-                    return $this->redirect()->toRoute('documentTypeEdit', array('id' => $documentTypeId));
+                    return $this->redirect()->toRoute('development/document-type/edit', array('id' => $documentTypeId));
                 } catch (Exception $e) {
                     $documentType->getAdapter()->getDriver()->getConnection()->rollBack();
                     throw new \Gc\Exception('Error Processing Request ' . print_r($e, true), 1);

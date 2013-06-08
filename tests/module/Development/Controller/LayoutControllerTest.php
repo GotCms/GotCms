@@ -58,13 +58,13 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexAction()
     {
-        $this->dispatch('/admin/development/layout/list');
+        $this->dispatch('/admin/development/layout');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutList');
+        $this->assertMatchedRouteName('development/layout');
     }
 
     /**
@@ -82,7 +82,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutCreate');
+        $this->assertMatchedRouteName('development/layout/create');
     }
 
     /**
@@ -106,7 +106,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutCreate');
+        $this->assertMatchedRouteName('development/layout/create');
     }
 
     /**
@@ -132,7 +132,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutCreate');
+        $this->assertMatchedRouteName('development/layout/create');
 
         LayoutModel::fromIdentifier('Identifier')->delete();
     }
@@ -152,7 +152,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutEdit');
+        $this->assertMatchedRouteName('development/layout/edit');
     }
 
     /**
@@ -178,7 +178,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutEdit');
+        $this->assertMatchedRouteName('development/layout/edit');
 
         $layoutModel->delete();
     }
@@ -211,7 +211,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutEdit');
+        $this->assertMatchedRouteName('development/layout/edit');
 
         $layoutModel->delete();
     }
@@ -247,7 +247,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutEdit');
+        $this->assertMatchedRouteName('development/layout/edit');
 
         $layoutModel->delete();
     }
@@ -275,7 +275,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutDelete');
+        $this->assertMatchedRouteName('development/layout/delete');
 
         $layoutModel->delete();
     }
@@ -295,7 +295,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutDelete');
+        $this->assertMatchedRouteName('development/layout/delete');
     }
 
     /**
@@ -331,7 +331,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutUpload');
+        $this->assertMatchedRouteName('development/layout/upload');
 
         $layoutModel->delete();
     }
@@ -389,7 +389,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutUpload');
+        $this->assertMatchedRouteName('development/layout/upload');
 
         $layoutModel->delete();
     }
@@ -410,7 +410,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutUpload');
+        $this->assertMatchedRouteName('development/layout/upload');
     }
 
     /**
@@ -428,7 +428,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutUpload');
+        $this->assertMatchedRouteName('development/layout/upload');
     }
 
     /**
@@ -455,7 +455,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutDownload');
+        $this->assertMatchedRouteName('development/layout/download');
 
         $layoutModel->delete();
     }
@@ -483,7 +483,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutDownload');
+        $this->assertMatchedRouteName('development/layout/download');
 
         $layoutModel->delete();
     }
@@ -503,7 +503,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutDownload');
+        $this->assertMatchedRouteName('development/layout/download');
     }
 
     /**
@@ -530,7 +530,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('LayoutController');
         $this->assertControllerClass('LayoutController');
-        $this->assertMatchedRouteName('layoutDownload');
+        $this->assertMatchedRouteName('development/layout/download');
 
         $layoutModel->delete();
     }

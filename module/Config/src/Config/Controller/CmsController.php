@@ -140,7 +140,7 @@ class CmsController extends Action
             $updater = new Updater();
             if (!$updater->load($this->getRequest()->getPost()->get('adapter')) or $versionIsLatest) {
                 $this->flashMessenger()->addErrorMessage('Can\'t set adapter');
-                return $this->redirect()->toRoute('cmsUpdate');
+                return $this->redirect()->toRoute('config/cms-update');
             }
 
             $currentVersion = Version::VERSION;
@@ -158,7 +158,7 @@ class CmsController extends Action
                         $session['updateOutput'] = $updater->getMessages();
 
                         $this->flashMessenger()->addSuccessMessage(sprintf('Cms update to %s', $latestVersion));
-                        return $this->redirect()->toRoute('cmsUpdate');
+                        return $this->redirect()->toRoute('config/cms-update');
                     }
                 }
             }
@@ -167,7 +167,7 @@ class CmsController extends Action
                 $this->flashMessenger()->addErrorMessage($message);
             }
 
-            return $this->redirect()->toRoute('cmsUpdate');
+            return $this->redirect()->toRoute('config/cms-update');
         }
 
         if (!empty($session['updateOutput'])) {

@@ -56,11 +56,11 @@ class Action extends AbstractActionController
      */
     protected $installerRoutes = array(
         'install',
-        'installCheckConfig',
-        'installLicense',
-        'installDatabase',
-        'installConfiguration',
-        'installComplete'
+        'install/check-config',
+        'install/license',
+        'install/database',
+        'install/configuration',
+        'install/complete'
     );
 
     /**
@@ -142,15 +142,15 @@ class Action extends AbstractActionController
                 if (!in_array(
                     $routeName,
                     array(
-                        'userLogin',
-                        'userForgotPassword',
-                        'userForgotPasswordKey',
-                        'renderWebsite'
+                        'config/user/login',
+                        'config/user/forgot-password',
+                        'config/user/forgot-password-key',
+                        'cms'
                     )
                 )
                 ) {
                     return $this->redirect()->toRoute(
-                        'userLogin',
+                        'config/user/login',
                         array('redirect' => base64_encode($this->getRequest()->getRequestUri()))
                     );
                 }
@@ -159,7 +159,7 @@ class Action extends AbstractActionController
 
                 $this->acl   = new Acl($userModel);
                 $permissions = $userModel->getRole(true)->getUserPermissions();
-                if ($routeName != 'userForbidden') {
+                if ($routeName != 'user/config/forbidden') {
                     if (!empty($this->aclPage)) {
                         $isAllowed = false;
                         if ($this->aclPage['resource'] == 'Modules') {
@@ -191,7 +191,7 @@ class Action extends AbstractActionController
                         }
 
                         if (!$isAllowed) {
-                            return $this->redirect()->toRoute('userForbidden');
+                            return $this->redirect()->toRoute('user/config/forbidden');
                         }
                     }
 
@@ -205,7 +205,7 @@ class Action extends AbstractActionController
 
         $this->useFlashMessenger(false);
         if (!in_array($routeName, $this->installerRoutes)
-            and !in_array($routeName, array('userLogin', 'userForgotPassword', 'renderWebsite'))
+            and !in_array($routeName, array('config/user/login', 'config/user/forgot-password', 'cms'))
         ) {
             /**
              * Prepare all resources

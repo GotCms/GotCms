@@ -64,7 +64,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('TranslationController');
         $this->assertControllerClass('TranslationController');
-        $this->assertMatchedRouteName('translationCreate');
+        $this->assertMatchedRouteName('content/translation/create');
     }
 
     /**
@@ -97,7 +97,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('TranslationController');
         $this->assertControllerClass('TranslationController');
-        $this->assertMatchedRouteName('translationCreate');
+        $this->assertMatchedRouteName('content/translation/create');
     }
 
     /**
@@ -121,7 +121,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('TranslationController');
         $this->assertControllerClass('TranslationController');
-        $this->assertMatchedRouteName('translationCreate');
+        $this->assertMatchedRouteName('content/translation/create');
     }
 
     /**
@@ -140,7 +140,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('TranslationController');
         $this->assertControllerClass('TranslationController');
-        $this->assertMatchedRouteName('translationList');
+        $this->assertMatchedRouteName('content/translation');
     }
 
     /**
@@ -166,7 +166,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('TranslationController');
         $this->assertControllerClass('TranslationController');
-        $this->assertMatchedRouteName('translationList');
+        $this->assertMatchedRouteName('content/translation');
     }
 
     /**
@@ -232,6 +232,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('TranslationController');
         $this->assertControllerClass('TranslationController');
-        $this->assertMatchedRouteName('translationList');
+        $this->assertMatchedRouteName('content/translation');
     }
 }

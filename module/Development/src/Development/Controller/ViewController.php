@@ -69,7 +69,7 @@ class ViewController extends Action
     public function createAction()
     {
         $viewForm = new ViewForm();
-        $viewForm->setAttribute('action', $this->url()->fromRoute('viewCreate'));
+        $viewForm->setAttribute('action', $this->url()->fromRoute('development/view/create'));
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
@@ -86,7 +86,7 @@ class ViewController extends Action
                 $viewModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This view has been created');
-                return $this->redirect()->toRoute('viewEdit', array('id' => $viewModel->getId()));
+                return $this->redirect()->toRoute('development/view/edit', array('id' => $viewModel->getId()));
             }
         }
 
@@ -103,11 +103,11 @@ class ViewController extends Action
         $viewId    = $this->getRouteMatch()->getParam('id', null);
         $viewModel = View\Model::fromId($viewId);
         if (empty($viewId) or empty($viewModel)) {
-            return $this->redirect()->toRoute('viewList');
+            return $this->redirect()->toRoute('development/view');
         }
 
         $viewForm = new ViewForm();
-        $viewForm->setAttribute('action', $this->url()->fromRoute('viewEdit', array('id' => $viewId)));
+        $viewForm->setAttribute('action', $this->url()->fromRoute('development/view/edit', array('id' => $viewId)));
         $viewForm->loadValues($viewModel);
 
         if ($this->getRequest()->isPost()) {
@@ -124,7 +124,7 @@ class ViewController extends Action
                 $viewModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This view has been saved');
-                return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
+                return $this->redirect()->toRoute('development/view/edit', array('id' => $viewId));
             }
         }
 
@@ -158,17 +158,17 @@ class ViewController extends Action
             $view = View\Model::fromId($viewId);
             if (empty($view)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload view');
-                return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
+                return $this->redirect()->toRoute('development/view/edit', array('id' => $viewId));
             }
 
             $view->setContent(file_get_contents($_FILES['upload']['tmp_name']));
             $view->save();
             $this->flashMessenger()->addSuccessMessage('View updated');
-            return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
+            return $this->redirect()->toRoute('development/view/edit', array('id' => $viewId));
         } else {
             if (empty($_FILES['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload views');
-                return $this->redirect()->toRoute('viewList');
+                return $this->redirect()->toRoute('development/view');
             }
 
             foreach ($_FILES['upload']['name'] as $idx => $name) {
@@ -187,7 +187,7 @@ class ViewController extends Action
             }
 
             $this->flashMessenger()->addSuccessMessage('Views updated');
-            return $this->redirect()->toRoute('viewList');
+            return $this->redirect()->toRoute('development/view');
         }
     }
 
@@ -203,7 +203,7 @@ class ViewController extends Action
             $view = View\Model::fromId($viewId);
             if (empty($view)) {
                 $this->flashMessenger()->addErrorMessage('This view can not be download');
-                return $this->redirect()->toRoute('viewEdit', array('id' => $viewId));
+                return $this->redirect()->toRoute('development/view/edit', array('id' => $viewId));
             }
 
             $content  = $view->getContent();
@@ -228,7 +228,7 @@ class ViewController extends Action
 
         if (empty($content) or empty($filename)) {
             $this->flashMessenger()->addErrorMessage('Can not save views');
-            return $this->redirect()->toRoute('viewList');
+            return $this->redirect()->toRoute('development/view');
         }
 
         $headers = new Headers();

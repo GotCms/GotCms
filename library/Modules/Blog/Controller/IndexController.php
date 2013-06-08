@@ -78,7 +78,7 @@ class IndexController extends AbstractController
         $documentId = $this->getRequest()->getQuery()->get('id');
         $document   = DocumentModel::fromId($documentId);
         if (empty($document)) {
-            return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), true);
+            return $this->redirect()->toRoute('module/edit', array('mc' => 'index', 'ma' => 'index'), array(), true);
         }
 
         $model       = new Model\Comment();
@@ -105,7 +105,7 @@ class IndexController extends AbstractController
             }
 
             return $this->redirect()->toRoute(
-                'moduleEdit',
+                'module/edit',
                 array(
                     'mc' => 'index',
                     'ma' => 'document-comment'

@@ -59,6 +59,6 @@ class IndexController extends AbstractController
         $sitemap = new Model\Sitemap();
         file_put_contents($sitemap->getFilePath(), $sitemap->generate());
 
-        return $this->redirect()->toRoute('moduleEdit', array('mc' => 'index', 'ma' => 'index'), array(), true);
+        return $this->redirect()->toRoute('module/edit', array('mc' => 'index', 'ma' => 'index'), array(), true);
     }
 }

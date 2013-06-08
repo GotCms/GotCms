@@ -58,13 +58,13 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexAction()
     {
-        $this->dispatch('/admin/config/user/roles');
+        $this->dispatch('/admin/config/user/role');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRole');
+        $this->assertMatchedRouteName('config/user/role');
     }
 
     /**
@@ -82,7 +82,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRoleCreate');
+        $this->assertMatchedRouteName('config/user/role/create');
     }
 
     /**
@@ -107,7 +107,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRoleCreate');
+        $this->assertMatchedRouteName('config/user/role/create');
     }
 
     /**
@@ -130,7 +130,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRoleCreate');
+        $this->assertMatchedRouteName('config/user/role/create');
     }
 
     /**
@@ -156,7 +156,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRoleDelete');
+        $this->assertMatchedRouteName('config/user/role/delete');
     }
 
     /**
@@ -174,7 +174,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRoleDelete');
+        $this->assertMatchedRouteName('config/user/role/delete');
     }
 
     /**
@@ -200,7 +200,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRoleEdit');
+        $this->assertMatchedRouteName('config/user/role/edit');
 
         $roleModel->delete();
     }
@@ -235,7 +235,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRoleEdit');
+        $this->assertMatchedRouteName('config/user/role/edit');
 
         $roleModel->delete();
     }
@@ -268,7 +268,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRoleEdit');
+        $this->assertMatchedRouteName('config/user/role/edit');
 
         $roleModel->delete();
     }
@@ -288,6 +288,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('RoleController');
         $this->assertControllerClass('RoleController');
-        $this->assertMatchedRouteName('userRoleEdit');
+        $this->assertMatchedRouteName('config/user/role/edit');
     }
 }

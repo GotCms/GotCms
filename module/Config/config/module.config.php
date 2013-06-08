@@ -40,4 +40,233 @@ return array(
             'config' => __DIR__ . '/../views',
         ),
     ),
+    'router' => array(
+        'routes' => array(
+            'config' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/admin/config',
+                    'defaults' =>
+                    array (
+                        'module'     => 'config',
+                        'controller' => 'ConfigController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes'  => array(
+                    'user' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/user',
+                            'defaults' =>
+                            array (
+                                'module'     => 'config',
+                                'controller' => 'UserController',
+                                'action'     => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes'  => array(
+                            'forbidden' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/forbidden-access',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'config',
+                                        'controller' => 'UserController',
+                                        'action'     => 'forbidden',
+                                    ),
+                                ),
+                            ),
+                            'login' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/login[/:redirect]',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'Config',
+                                        'controller' => 'UserController',
+                                        'action'     => 'login',
+                                    ),
+                                ),
+                            ),
+                            'logout' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/logout',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'config',
+                                        'controller' => 'UserController',
+                                        'action'     => 'logout',
+                                    ),
+                                ),
+                            ),
+                            'forgot-password' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/forgot-password',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'config',
+                                        'controller' => 'UserController',
+                                        'action'     => 'forgot-password',
+                                    ),
+                                ),
+                            ),
+                            'forgot-password-key' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/forgot-password/:id/:key',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'config',
+                                        'controller' => 'UserController',
+                                        'action'     => 'forgot-password',
+                                    ),
+                                ),
+                            ),
+                            'create' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/create',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'config',
+                                        'controller' => 'UserController',
+                                        'action'     => 'create',
+                                    ),
+                                ),
+                            ),
+                            'edit' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/edit/:id',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'config',
+                                        'controller' => 'UserController',
+                                        'action'     => 'edit',
+                                    ),
+                                ),
+                            ),
+                            'delete' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/delete/:id',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'config',
+                                        'controller' => 'UserController',
+                                        'action'     => 'delete',
+                                    ),
+                                ),
+                            ),
+                            'role' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/role',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'config',
+                                        'controller' => 'RoleController',
+                                        'action'     => 'index',
+                                    ),
+                                ),
+                                'may_terminate' => true,
+                                'child_routes'  => array(
+                                    'create' => array(
+                                        'type'    => 'Literal',
+                                        'options' => array(
+                                            'route'    => '/create',
+                                            'defaults' =>
+                                            array (
+                                                'module'     => 'config',
+                                                'controller' => 'RoleController',
+                                                'action'     => 'create',
+                                            ),
+                                        ),
+                                    ),
+                                    'edit' => array(
+                                        'type'    => 'Segment',
+                                        'options' => array(
+                                            'route'    => '/edit/:id',
+                                            'defaults' =>
+                                            array (
+                                                'module'     => 'config',
+                                                'controller' => 'RoleController',
+                                                'action'     => 'edit',
+                                            ),
+                                        ),
+                                    ),
+                                    'delete' => array(
+                                        'type'    => 'Segment',
+                                        'options' => array(
+                                            'route'    => '/delete/:id',
+                                            'defaults' =>
+                                            array (
+                                                'module'     => 'config',
+                                                'controller' => 'RoleController',
+                                                'action'     => 'delete',
+                                            ),
+                                        ),
+                                    ),
+                                )
+                            ),
+                        )
+                    ),
+                    'general' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/general',
+                            'defaults' =>
+                            array (
+                                'module'     => 'config',
+                                'controller' => 'CmsController',
+                                'action'     => 'editGeneral',
+                            ),
+                        ),
+                    ),
+                    'system' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/system',
+                            'defaults' =>
+                            array (
+                                'module'     => 'config',
+                                'controller' => 'CmsController',
+                                'action'     => 'editSystem',
+                            ),
+                        ),
+                    ),
+                    'server' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/server',
+                            'defaults' =>
+                            array (
+                                'module'     => 'config',
+                                'controller' => 'CmsController',
+                                'action'     => 'editServer',
+                            ),
+                        ),
+                    ),
+                    'cms-update' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/update',
+                            'defaults' =>
+                            array (
+                                'module'     => 'config',
+                                'controller' => 'CmsController',
+                                'action'     => 'update',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    )
 );

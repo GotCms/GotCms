@@ -69,7 +69,7 @@ class ScriptController extends Action
     public function createAction()
     {
         $scriptForm = new ScriptForm();
-        $scriptForm->setAttribute('action', $this->url()->fromRoute('scriptCreate'));
+        $scriptForm->setAttribute('action', $this->url()->fromRoute('development/script/create'));
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
@@ -86,7 +86,7 @@ class ScriptController extends Action
                 $scriptModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This script has been created');
-                return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptModel->getId()));
+                return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptModel->getId()));
             }
         }
 
@@ -103,11 +103,11 @@ class ScriptController extends Action
         $scriptId    = $this->getRouteMatch()->getParam('id', null);
         $scriptModel = Script\Model::fromId($scriptId);
         if (empty($scriptId) or empty($scriptModel)) {
-            return $this->redirect()->toRoute('scriptList');
+            return $this->redirect()->toRoute('development/script');
         }
 
         $scriptForm = new ScriptForm();
-        $scriptForm->setAttribute('action', $this->url()->fromRoute('scriptEdit', array('id' => $scriptId)));
+        $scriptForm->setAttribute('action', $this->url()->fromRoute('development/script/edit', array('id' => $scriptId)));
         $scriptForm->loadValues($scriptModel);
 
         if ($this->getRequest()->isPost()) {
@@ -124,7 +124,7 @@ class ScriptController extends Action
                 $scriptModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This script has been saved');
-                return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
+                return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptId));
             }
         }
 
@@ -158,18 +158,18 @@ class ScriptController extends Action
             $script = Script\Model::fromId($scriptId);
             if (empty($script)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload script');
-                return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
+                return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptId));
             }
 
             $script->setContent(file_get_contents($_FILES['upload']['tmp_name']));
             $script->save();
 
             $this->flashMessenger()->addSuccessMessage('Script updated');
-            return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
+            return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptId));
         } else {
             if (empty($_FILES['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload scripts');
-                return $this->redirect()->toRoute('scriptList');
+                return $this->redirect()->toRoute('development/script');
             }
 
             foreach ($_FILES['upload']['name'] as $idx => $name) {
@@ -188,7 +188,7 @@ class ScriptController extends Action
             }
 
             $this->flashMessenger()->addSuccessMessage('Scripts updated');
-            return $this->redirect()->toRoute('scriptList');
+            return $this->redirect()->toRoute('development/script');
         }
     }
 
@@ -204,7 +204,7 @@ class ScriptController extends Action
             $script = Script\Model::fromId($scriptId);
             if (empty($script)) {
                 $this->flashMessenger()->addErrorMessage('This script can not be download');
-                return $this->redirect()->toRoute('scriptEdit', array('id' => $scriptId));
+                return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptId));
             }
 
             $content  = $script->getContent();
@@ -229,7 +229,7 @@ class ScriptController extends Action
 
         if (empty($content) or empty($filename)) {
             $this->flashMessenger()->addErrorMessage('Can not save scripts');
-            return $this->redirect()->toRoute('scriptList');
+            return $this->redirect()->toRoute('development/script');
         }
 
         $headers = new Headers();

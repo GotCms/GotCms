@@ -65,7 +65,7 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
         $this->object = new ModuleUrl;
         $router       = new Router();
         $router->addRoute(
-            'moduleEdit',
+            'module/edit',
             array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(

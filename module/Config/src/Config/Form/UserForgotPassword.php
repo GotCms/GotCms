@@ -42,7 +42,7 @@ use Zend\InputFilter\InputFilter;
 class UserForgotPassword extends AbstractForm
 {
     /**
-     * Initialize UserForgotPassword form
+     * Initialize config/user/forgot-password form
      *
      * @return void
      */
@@ -52,7 +52,7 @@ class UserForgotPassword extends AbstractForm
     }
 
     /**
-     * Initialize UserForgotPassword email form
+     * Initialize config/user/forgot-password email form
      *
      * @return void
      */
@@ -74,7 +74,7 @@ class UserForgotPassword extends AbstractForm
         $this->add(new Element\Text('email'));
     }
     /**
-     * Initialize UserForgotPassword reset form
+     * Initialize config/user/forgot-password reset form
      *
      * @return void
      */

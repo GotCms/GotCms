@@ -34,8 +34,8 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Document types')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('documentTypeCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('documentTypeList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/document-type/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/document-type'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
     </ul>
 <?php endif; ?>
 
@@ -43,8 +43,8 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Views')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('viewCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('viewList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/view/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/view'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
     </ul>
 <?php endif; ?>
 
@@ -52,8 +52,8 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Layouts')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('layoutCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('layoutList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/layout/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/layout'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
     </ul>
 <?php endif; ?>
 
@@ -61,8 +61,8 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Scripts')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('scriptCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('scriptList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/script/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/script'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
     </ul>
 <?php endif; ?>
 
@@ -70,7 +70,7 @@ $development = empty($permissions['Development']) ? array() : $permissions['Deve
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Datatypes')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('datatypeCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('datatypeList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/datatype/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <li><a href="<?php echo $this->url('development/datatype'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
     </ul>
 <?php endif; ?>

@@ -36,4 +36,35 @@ return array(
             'admin' => __DIR__ . '/../views',
         ),
     ),
+    'router' => array(
+        'routes' => array(
+            'admin' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/admin',
+                    'defaults' =>
+                    array (
+                        'module'     => 'admin',
+                        'controller' => 'AdminController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes'  => array(
+                    'dashboard-save' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/dashboard/save',
+                            'defaults' =>
+                            array (
+                                'module'     => 'config',
+                                'controller' => 'AdminController',
+                                'action'     => 'save-dashboard',
+                            ),
+                        ),
+                    ),
+                )
+            ),
+        ),
+    )
 );

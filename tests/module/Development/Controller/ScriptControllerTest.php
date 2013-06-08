@@ -58,13 +58,13 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexAction()
     {
-        $this->dispatch('/admin/development/script/list');
+        $this->dispatch('/admin/development/script');
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptList');
+        $this->assertMatchedRouteName('development/script');
     }
 
     /**
@@ -82,7 +82,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptCreate');
+        $this->assertMatchedRouteName('development/script/create');
     }
 
     /**
@@ -106,7 +106,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptCreate');
+        $this->assertMatchedRouteName('development/script/create');
     }
 
     /**
@@ -132,7 +132,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptCreate');
+        $this->assertMatchedRouteName('development/script/create');
 
         ScriptModel::fromIdentifier('Identifier')->delete();
     }
@@ -152,7 +152,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptEdit');
+        $this->assertMatchedRouteName('development/script/edit');
     }
 
     /**
@@ -178,7 +178,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptEdit');
+        $this->assertMatchedRouteName('development/script/edit');
 
         $scriptModel->delete();
     }
@@ -211,7 +211,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptEdit');
+        $this->assertMatchedRouteName('development/script/edit');
 
         $scriptModel->delete();
     }
@@ -247,7 +247,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptEdit');
+        $this->assertMatchedRouteName('development/script/edit');
 
         $scriptModel->delete();
     }
@@ -275,7 +275,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptDelete');
+        $this->assertMatchedRouteName('development/script/delete');
 
         $scriptModel->delete();
     }
@@ -295,7 +295,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptDelete');
+        $this->assertMatchedRouteName('development/script/delete');
     }
 
     /**
@@ -331,7 +331,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptUpload');
+        $this->assertMatchedRouteName('development/script/upload');
 
         $scriptModel->delete();
     }
@@ -389,7 +389,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptUpload');
+        $this->assertMatchedRouteName('development/script/upload');
 
         $scriptModel->delete();
     }
@@ -410,7 +410,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptUpload');
+        $this->assertMatchedRouteName('development/script/upload');
     }
 
     /**
@@ -428,7 +428,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptUpload');
+        $this->assertMatchedRouteName('development/script/upload');
     }
 
     /**
@@ -455,7 +455,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptDownload');
+        $this->assertMatchedRouteName('development/script/download');
 
         $scriptModel->delete();
     }
@@ -483,7 +483,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptDownload');
+        $this->assertMatchedRouteName('development/script/download');
 
         $scriptModel->delete();
     }
@@ -503,7 +503,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptDownload');
+        $this->assertMatchedRouteName('development/script/download');
     }
 
     /**
@@ -530,7 +530,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Development');
         $this->assertControllerName('ScriptController');
         $this->assertControllerClass('ScriptController');
-        $this->assertMatchedRouteName('scriptDownload');
+        $this->assertMatchedRouteName('development/script/download');
 
         $scriptModel->delete();
     }

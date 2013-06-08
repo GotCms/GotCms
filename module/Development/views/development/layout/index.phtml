@@ -27,10 +27,10 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<a href="<?php echo $this->url('layoutDownload'); ?>"><?php echo $this->escapeHtml($this->translate('Download all files')); ?></a>
+<a href="<?php echo $this->url('development/layout/download'); ?>"><?php echo $this->escapeHtml($this->translate('Download all files')); ?></a>
 <a href="#" id="upload-link"><?php echo $this->escapeHtml($this->translate('Upload file')); ?></a>
 
-<form class="hide" id="form-content" action="<?php echo $this->url('layoutUpload'); ?>" method="post" enctype="multipart/form-data">
+<form class="hide" id="form-content" action="<?php echo $this->url('development/layout/upload'); ?>" method="post" enctype="multipart/form-data">
     <p><?php echo $this->escapeHtml($this->translate('Files as: identifier.phtml')); ?></p>
     <input type="file" name="upload[]" multiple="multiple">
     <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
@@ -57,12 +57,12 @@
                 <td><?php echo $this->escapeHtml($layout->getName()); ?></td>
                 <td><?php echo $this->escapeHtml($layout->getDescription()); ?></td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('layoutEdit', array('id' => $layout->getId())); ?>" class="edit-line">
+                    <a href="<?php echo $this->url('development/layout/edit', array('id' => $layout->getId())); ?>" class="edit-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('layoutDelete', array('id' => $layout->getId())); ?>" class="delete-line">
+                    <a href="<?php echo $this->url('development/layout/delete', array('id' => $layout->getId())); ?>" class="delete-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
                     </a>
                 </td>

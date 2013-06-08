@@ -198,7 +198,7 @@ abstract class AbstractDatatype extends AbstractTable
                 'document_id' => $this->getDocumentId(),
                 'property_id' => $propertyId
             ),
-            array('name' => 'mediaUpload')
+            array('name' => 'content/media/upload')
         );
     }
 

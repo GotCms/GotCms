@@ -36,7 +36,7 @@ namespace Config\Form;
 class UserForgotPasswordTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var UserForgotPassword
+     * @var config/user/forgot-password
      */
     protected $object;
 
@@ -48,7 +48,7 @@ class UserForgotPasswordTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new UserForgotPassword;
+        $this->object = new UserForgotPassword();
     }
 
     /**

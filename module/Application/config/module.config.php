@@ -80,4 +80,89 @@ return array(
             'modulePlugin'      => 'Gc\View\Helper\ModulePlugin',
         ),
     ),
+    'router' => array(
+        'routes' => array(
+            'cms' => array(
+                'type'    => 'Regex',
+                'options' => array(
+                    'regex' => '^/(?!admin?/)(?<path>.*)',
+                    'defaults' => array(
+                        'module'     =>'application',
+                        'controller' => 'IndexController',
+                        'action'     => 'index',
+                    ),
+                    'spec' => '/%path%',
+                ),
+            ),
+            'install' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/install',
+                    'defaults' => array(
+                        'module'     =>'application',
+                        'controller' => 'InstallController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes'  => array(
+                    'check-config' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/check-server-configuration',
+                            'defaults' => array(
+                                'module'     =>'application',
+                                'controller' => 'InstallController',
+                                'action'     => 'check-config',
+                            ),
+                        ),
+                    ),
+                    'license' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/license',
+                            'defaults' => array(
+                                'module'     =>'application',
+                                'controller' => 'InstallController',
+                                'action'     => 'license',
+                            ),
+                        ),
+                    ),
+                    'database' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/database-configuration',
+                            'defaults' => array(
+                                'module'     =>'application',
+                                'controller' => 'InstallController',
+                                'action'     => 'database',
+                            ),
+                        ),
+                    ),
+                    'configuration' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/configuration',
+                            'defaults' => array(
+                                'module'     =>'application',
+                                'controller' => 'InstallController',
+                                'action'     => 'configuration',
+                            ),
+                        ),
+                    ),
+                    'complete' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/complete',
+                            'defaults' => array(
+                                'module'     => 'application',
+                                'controller' => 'InstallController',
+                                'action'     => 'complete',
+                            ),
+                        ),
+                    ),
+                )
+            ),
+        ),
+    )
 );

@@ -118,7 +118,7 @@ class Editor extends AbstractEditor
                         'property_id' => $this->getProperty()->getId(),
                         'file' => base64_encode($fileData['value'])
                     ),
-                    array('name' => 'mediaRemove')
+                    array('name' => 'content/media/remove')
                 );
                 $fileObject->delete_type = 'DELETE';
                 $fileList[]              = $fileObject;

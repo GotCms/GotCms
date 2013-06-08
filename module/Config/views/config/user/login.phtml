@@ -26,7 +26,7 @@
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 ?>
-<form id="one-page-form" action="<?php echo $this->url('userLogin'); ?>" method="post">
+<form id="one-page-form" action="<?php echo $this->url('config/user/login'); ?>" method="post">
     <h1><?php echo $this->escapeHtml($this->translate('Log In')); ?></h1>
     <fieldset id="inputs">
         <input name="login" id="login" type="text" placeholder="<?php echo $this->escapeHtml($this->translate('Login')); ?>" autofocus required>
@@ -35,6 +35,6 @@
     </fieldset>
     <fieldset id="actions">
         <input type="submit" id="submit" value="<?php echo $this->escapeHtml($this->translate('Log In')); ?>">
-        <a href="<?php echo $this->url('userForgotPassword'); ?>"><?php echo $this->escapeHtml($this->translate('Forgot your password?')); ?></a>
+        <a href="<?php echo $this->url('config/user/forgot-password'); ?>"><?php echo $this->escapeHtml($this->translate('Forgot your password?')); ?></a>
     </fieldset>
 </form>

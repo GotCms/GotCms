@@ -50,7 +50,7 @@
             $('#' + $data[$step]).addClass('progress');
 
             $.ajax({
-                url: '<?php echo $this->escapeJs($this->url('installComplete')); ?>',
+                url: '<?php echo $this->escapeJs($this->url('install/complete')); ?>',
                 dataType: 'json',
                 data: {step: $data[$step]},
                 type: 'POST',

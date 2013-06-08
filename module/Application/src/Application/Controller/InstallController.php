@@ -100,7 +100,7 @@ class InstallController extends Action
                 $session            = $this->getSession();
                 $session['install'] = array('lang' => $this->installForm->getInputFilter()->getValue('lang'));
 
-                return $this->redirect()->toRoute('installLicense');
+                return $this->redirect()->toRoute('install/license');
             }
         }
 
@@ -122,7 +122,7 @@ class InstallController extends Action
             $postData = $this->getRequest()->getPost()->toArray();
             $this->installForm->setData($postData);
             if ($this->installForm->isValid()) {
-                return $this->redirect()->toRoute('installCheckConfig');
+                return $this->redirect()->toRoute('install/check-config');
             }
         }
 
@@ -239,10 +239,10 @@ class InstallController extends Action
             }
 
             if ($continue) {
-                return $this->redirect()->toRoute('installDatabase');
+                return $this->redirect()->toRoute('install/database');
             } else {
                 $this->flashMessenger()->addErrorMessage('All parameters must be set to "Yes"');
-                return $this->redirect()->toRoute('installCheckConfig');
+                return $this->redirect()->toRoute('install/check-config');
             }
         }
 
@@ -289,7 +289,7 @@ class InstallController extends Action
                     $install['db']      = $config;
                     $session['install'] = $install;
 
-                    return $this->redirect()->toRoute('installConfiguration');
+                    return $this->redirect()->toRoute('install/configuration');
                 } catch (Exception $e) {
                     $messages[] = 'Can\'t connect to database';
                     $messages[] = $e->getMessage();
@@ -322,7 +322,7 @@ class InstallController extends Action
                 $install['configuration'] = $values;
                 $session['install']       = $install;
 
-                return $this->redirect()->toRoute('installComplete');
+                return $this->redirect()->toRoute('install/complete');
             }
         }
 
@@ -660,14 +660,14 @@ class InstallController extends Action
         //Higher than 4
         if ($step > 4) {
             if (empty($session['install']['db'])) {
-                return $this->redirect()->toRoute('installDatabase');
+                return $this->redirect()->toRoute('install/database');
             }
         }
 
         //Higher than 5
         if ($step > 5) {
             if (empty($session['install']['configuration'])) {
-                return $this->redirect()->toRoute('installConfiguration');
+                return $this->redirect()->toRoute('install/configuration');
             }
         }
     }

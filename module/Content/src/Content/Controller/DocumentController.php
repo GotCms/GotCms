@@ -69,13 +69,13 @@ class DocumentController extends Action
         $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
 
         $routes = array(
-            'edit' => 'documentEdit',
-            'new' => 'documentCreate',
-            'delete' => 'documentDelete',
-            'copy' => 'documentCopy',
-            'cut' => 'documentCut',
-            'paste' => 'documentPaste',
-            'refresh' => 'documentRefreshTreeview',
+            'edit' => 'content/document/edit',
+            'new' => 'content/document/create',
+            'delete' => 'content/document/delete',
+            'copy' => 'content/document/copy',
+            'cut' => 'content/document/cut',
+            'paste' => 'content/document/paste',
+            'refresh' => 'content/document/refresh-treeview',
         );
 
         $arrayRoutes = array();
@@ -94,7 +94,7 @@ class DocumentController extends Action
     public function createAction()
     {
         $documentForm = new Form\Document();
-        $documentForm->setAttribute('action', $this->url()->fromRoute('documentCreate'));
+        $documentForm->setAttribute('action', $this->url()->fromRoute('content/document/create'));
         $parentId = $this->getRouteMatch()->getParam('id');
 
         $documentTypeCollection = new DocumentType\Collection();
@@ -141,7 +141,7 @@ class DocumentController extends Action
 
                 $document->save();
                 $this->flashMessenger()->addSuccessMessage('Document successfuly add');
-                $this->redirect()->toRoute('documentEdit', array('id' => $document->getId()));
+                $this->redirect()->toRoute('content/document/edit', array('id' => $document->getId()));
             }
         }
 
@@ -197,7 +197,7 @@ class DocumentController extends Action
             $documentForm = new ZendForm\Form();
             $documentForm->setAttribute(
                 'action',
-                $this->url()->fromRoute('documentEdit', array('id' => $documentId))
+                $this->url()->fromRoute('content/document/edit', array('id' => $documentId))
             );
             $this->layout()->setVariable('documentId', $documentId);
             $documentTypeId = $document->getDocumentTypeId();
@@ -301,7 +301,7 @@ class DocumentController extends Action
                     $document->addData($formDocumentAdd->getInputFilter()->getValues());
                     $document->save();
 
-                    return $this->redirect()->toRoute('documentEdit', array('id' => $documentId));
+                    return $this->redirect()->toRoute('content/document/edit', array('id' => $documentId));
                 }
             }
 

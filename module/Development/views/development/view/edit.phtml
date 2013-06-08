@@ -27,10 +27,10 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<a href="<?php echo $this->url('viewDownload', array('id' => $this->viewId)); ?>"><?php echo $this->escapeHtml($this->translate('Download file')); ?></a>
+<a href="<?php echo $this->url('development/view/download', array('id' => $this->viewId)); ?>"><?php echo $this->escapeHtml($this->translate('Download file')); ?></a>
 <a href="#" id="upload-link"><?php echo $this->escapeHtml($this->translate('Upload file')); ?></a>
 
-<form class="hide" id="form-content" action="<?php echo $this->url('viewUpload', array('id' => $this->viewId)); ?>" method="post" enctype="multipart/form-data">
+<form class="hide" id="form-content" action="<?php echo $this->url('development/view/upload', array('id' => $this->viewId)); ?>" method="post" enctype="multipart/form-data">
     <input type="file" name="upload">
     <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
 </form>

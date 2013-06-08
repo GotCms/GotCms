@@ -36,4 +36,59 @@ return array(
             'modules' => GC_APPLICATION_PATH . '/library/Modules',
         ),
     ),
+    'router' => array(
+        'routes' => array(
+            'module'     => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/admin/module',
+                    'defaults' =>
+                    array (
+                        'module'     => 'module',
+                        'controller' => 'ModuleController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes'  => array(
+                    'edit' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:m[/:mc[/:ma]]',
+                            'defaults' =>
+                            array (
+                                'module'     => 'module',
+                                'controller' => 'ModuleController',
+                                'action'     => 'edit',
+                            ),
+                        ),
+                    ),
+                    'install' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/install',
+                            'defaults' =>
+                            array (
+                                'module'     => 'module',
+                                'controller' => 'ModuleController',
+                                'action'     => 'install',
+                            ),
+                        ),
+                    ),
+                    'uninstall' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/uninstall/:id',
+                            'defaults' =>
+                            array (
+                                'module'     => 'module',
+                                'controller' => 'ModuleController',
+                                'action'     => 'uninstall',
+                            ),
+                        ),
+                    ),
+                )
+            ),
+        ),
+    )
 );

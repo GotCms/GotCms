@@ -48,13 +48,13 @@
             <tr>
                 <td><?php echo $this->escapeHtml($module->getName()); ?></td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('moduleEdit', array('m' => $module->getId())); ?>" class="edit-line">
+                    <a href="<?php echo $this->url('module/edit', array('m' => $module->getId())); ?>" class="edit-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>
                 <td class="a-center">
                     <?php if (in_array('uninstall', $permissions['Modules'])):?>
-                        <a href="<?php echo $this->url('moduleUninstall', array('id' => $module->getId())); ?>" class="delete-line">
+                        <a href="<?php echo $this->url('module/uninstall', array('id' => $module->getId())); ?>" class="delete-line">
                             <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Uninstall')); ?>">
                         </a>
                     <?php endif; ?>

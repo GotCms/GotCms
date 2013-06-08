@@ -87,7 +87,7 @@ class IndexController extends Action
                     return $this->redirect()->toRoute('module');
                 } else {
                     $this->flashMessenger()->addSuccessMessage('Module installed');
-                    return $this->redirect()->toRoute('moduleEdit', array('m' => $moduleId));
+                    return $this->redirect()->toRoute('module/edit', array('m' => $moduleId));
                 }
             }
 

@@ -206,7 +206,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentCreate');
+        $this->assertMatchedRouteName('content/document/create');
     }
 
     /**
@@ -234,7 +234,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentCreate');
+        $this->assertMatchedRouteName('content/document/create');
     }
 
     /**
@@ -259,7 +259,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentCreate');
+        $this->assertMatchedRouteName('content/document/create');
     }
 
     /**
@@ -293,7 +293,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentCreateWParent');
+        $this->assertMatchedRouteName('content/document/create-w-parent');
 
         $document->delete();
     }
@@ -314,7 +314,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentDelete');
+        $this->assertMatchedRouteName('content/document/delete');
     }
 
     /**
@@ -333,7 +333,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentDelete');
+        $this->assertMatchedRouteName('content/document/delete');
     }
 
     /**
@@ -354,7 +354,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentEdit');
+        $this->assertMatchedRouteName('content/document/edit');
     }
 
     /**
@@ -385,7 +385,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentEdit');
+        $this->assertMatchedRouteName('content/document/edit');
     }
 
     /**
@@ -411,7 +411,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentEdit');
+        $this->assertMatchedRouteName('content/document/edit');
     }
 
     /**
@@ -432,7 +432,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentEdit');
+        $this->assertMatchedRouteName('content/document/edit');
     }
 
     /**
@@ -457,7 +457,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentCopy');
+        $this->assertMatchedRouteName('content/document/copy');
     }
 
     /**
@@ -476,7 +476,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentCopy');
+        $this->assertMatchedRouteName('content/document/copy');
     }
 
     /**
@@ -501,7 +501,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentCut');
+        $this->assertMatchedRouteName('content/document/cut');
     }
 
     /**
@@ -520,7 +520,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentCut');
+        $this->assertMatchedRouteName('content/document/cut');
     }
 
     /**
@@ -539,7 +539,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentPaste');
+        $this->assertMatchedRouteName('content/document/paste');
     }
 
     /**
@@ -558,7 +558,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentPaste');
+        $this->assertMatchedRouteName('content/document/paste');
     }
 
     /**
@@ -583,7 +583,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentPaste');
+        $this->assertMatchedRouteName('content/document/paste');
     }
 
     /**
@@ -622,7 +622,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentPaste');
+        $this->assertMatchedRouteName('content/document/paste');
         $document->delete();
     }
 
@@ -662,7 +662,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentPaste');
+        $this->assertMatchedRouteName('content/document/paste');
         $document->delete();
     }
 
@@ -682,7 +682,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentPaste');
+        $this->assertMatchedRouteName('content/document/paste');
     }
 
     /**
@@ -701,7 +701,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentRefreshTreeview');
+        $this->assertMatchedRouteName('content/document/refresh-treeview');
     }
 
     /**
@@ -720,7 +720,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentRefreshTreeview');
+        $this->assertMatchedRouteName('content/document/refresh-treeview');
     }
 
     /**
@@ -745,6 +745,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('DocumentController');
         $this->assertControllerClass('DocumentController');
-        $this->assertMatchedRouteName('documentSortOrder');
+        $this->assertMatchedRouteName('content/document/sort');
     }
 }

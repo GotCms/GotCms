@@ -47,12 +47,12 @@
                 <td><?php echo $this->escapeHtml($role->getName()); ?></td>
                 <td><?php echo $this->escapeHtml($role->getDescription()); ?></td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('userRoleEdit', array('id' => $role->getId())); ?>" class="edit-line">
+                    <a href="<?php echo $this->url('config/user/role/edit', array('id' => $role->getId())); ?>" class="edit-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>">
                     </a>
                 </td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('userRoleDelete', array('id' => $role->getId())); ?>" class="delete-line">
+                    <a href="<?php echo $this->url('config/user/role/delete', array('id' => $role->getId())); ?>" class="delete-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
                     </a>
                 </td>

@@ -64,7 +64,7 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('MediaController');
         $this->assertControllerClass('MediaController');
-        $this->assertMatchedRouteName('media');
+        $this->assertMatchedRouteName('content/media');
     }
 
     /**
@@ -103,7 +103,7 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('MediaController');
         $this->assertControllerClass('MediaController');
-        $this->assertMatchedRouteName('mediaRemove');
+        $this->assertMatchedRouteName('content/media/remove');
     }
 
     /**
@@ -122,6 +122,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Content');
         $this->assertControllerName('MediaController');
         $this->assertControllerClass('MediaController');
-        $this->assertMatchedRouteName('mediaConnector');
+        $this->assertMatchedRouteName('content/media/connector');
     }
 }

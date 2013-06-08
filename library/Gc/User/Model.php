@@ -299,7 +299,7 @@ class Model extends AbstractTable
                 ),
                 array(
                     'force_canonical' => true,
-                    'name'            => 'userForgotPasswordKey'
+                    'name'            => 'config/user/forgot-password-key'
                 )
             );
 

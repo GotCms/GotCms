@@ -102,7 +102,7 @@ if(!empty($this->adminUser))
 
 <?php if (!empty($this->adminUser)): ?>
     <div id="logout" class="part">
-        <a href="<?php echo $this->url('userLogout'); ?>">
+        <a href="<?php echo $this->url('config/user/logout'); ?>">
             <img src="<?php echo $this->cdnBackend('backend/images/icones/logout.png'); ?>" width="40" height="40" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Log out')); ?>">
             <p>
                 <?php echo $this->escapeHtml(sprintf($this->translate('Welcome %s'), $this->adminUser->getName())); ?><br>

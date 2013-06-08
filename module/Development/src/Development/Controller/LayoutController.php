@@ -69,7 +69,7 @@ class LayoutController extends Action
     public function createAction()
     {
         $layoutForm = new LayoutForm();
-        $layoutForm->setAttribute('action', $this->url()->fromRoute('layoutCreate'));
+        $layoutForm->setAttribute('action', $this->url()->fromRoute('development/layout/create'));
 
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
@@ -86,7 +86,7 @@ class LayoutController extends Action
                 $layoutModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This layout has been created');
-                return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutModel->getId()));
+                return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutModel->getId()));
             }
         }
 
@@ -103,11 +103,11 @@ class LayoutController extends Action
         $layoutId    = $this->getRouteMatch()->getParam('id', null);
         $layoutModel = Layout\Model::fromId($layoutId);
         if (empty($layoutId) or empty($layoutModel)) {
-            return $this->redirect()->toRoute('layoutList');
+            return $this->redirect()->toRoute('development/layout');
         }
 
         $layoutForm = new LayoutForm();
-        $layoutForm->setAttribute('action', $this->url()->fromRoute('layoutEdit', array('id' => $layoutId)));
+        $layoutForm->setAttribute('action', $this->url()->fromRoute('development/layout/edit', array('id' => $layoutId)));
         $layoutForm->loadValues($layoutModel);
 
         if ($this->getRequest()->isPost()) {
@@ -125,7 +125,7 @@ class LayoutController extends Action
                 $layoutModel->save();
 
                 $this->flashMessenger()->addSuccessMessage('This layout has been saved');
-                return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
+                return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutId));
             }
         }
 
@@ -159,18 +159,18 @@ class LayoutController extends Action
             $layout = Layout\Model::fromId($layoutId);
             if (empty($layout)or empty($_FILES['upload']['tmp_name']) or $_FILES['upload']['error'] != UPLOAD_ERR_OK) {
                 $this->flashMessenger()->addErrorMessage('Can not upload layout');
-                return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
+                return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutId));
             }
 
             $layout->setContent(file_get_contents($_FILES['upload']['tmp_name']));
             $layout->save();
 
             $this->flashMessenger()->addSuccessMessage('Layout updated');
-            return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
+            return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutId));
         } else {
             if (empty($_FILES['upload'])) {
                 $this->flashMessenger()->addErrorMessage('Can not upload layouts');
-                return $this->redirect()->toRoute('layoutList');
+                return $this->redirect()->toRoute('development/layout');
             }
 
             foreach ($_FILES['upload']['name'] as $idx => $name) {
@@ -189,7 +189,7 @@ class LayoutController extends Action
             }
 
             $this->flashMessenger()->addSuccessMessage('Layouts updated');
-            return $this->redirect()->toRoute('layoutList');
+            return $this->redirect()->toRoute('development/layout');
         }
     }
 
@@ -205,7 +205,7 @@ class LayoutController extends Action
             $layout = Layout\Model::fromId($layoutId);
             if (empty($layout)) {
                 $this->flashMessenger()->addErrorMessage('This layout can not be download');
-                return $this->redirect()->toRoute('layoutEdit', array('id' => $layoutId));
+                return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutId));
             }
 
             $content  = $layout->getContent();
@@ -230,7 +230,7 @@ class LayoutController extends Action
 
         if (empty($content) or empty($filename)) {
             $this->flashMessenger()->addErrorMessage('Can not save layouts');
-            return $this->redirect()->toRoute('layoutList');
+            return $this->redirect()->toRoute('development/layout');
         }
 
         $headers = new Headers();

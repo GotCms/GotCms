@@ -39,7 +39,7 @@ $content = empty($permissions['Content']) ? array() : $permissions['Content'];
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing resources')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('media'); ?>" title=""><?php echo $this->escapeHtml($this->translate('File manager')); ?></a></li>
+        <li><a href="<?php echo $this->url('content/media'); ?>" title=""><?php echo $this->escapeHtml($this->translate('File manager')); ?></a></li>
     </ul>
 <?php endif; ?>
 
@@ -47,7 +47,7 @@ $content = empty($permissions['Content']) ? array() : $permissions['Content'];
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing translation')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('translationCreate'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('translationList'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Edit')); ?></a></li>
+        <li><a href="<?php echo $this->url('content/translation/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <li><a href="<?php echo $this->url('content/translation'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Edit')); ?></a></li>
     </ul>
 <?php endif; ?>

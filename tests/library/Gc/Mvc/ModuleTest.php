@@ -115,7 +115,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
         $layoutModel->save();
         $routeMatch = new RouteMatch(array());
-        $routeMatch->setMatchedRouteName('renderWebsite');
+        $routeMatch->setMatchedRouteName('cms');
         $this->mvcEvent->setRouteMatch($routeMatch);
         CoreConfig::setValue('site_exception_layout', $layoutModel->getId());
         $this->assertNull($this->object->prepareException(Registry::get('Application')->getMvcEvent()));
@@ -134,7 +134,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         CoreConfig::setValue('force_frontend_ssl', 1);
         CoreConfig::setValue('secure_frontend_base_path', 'https://got-cms.com');
         $routeMatch = new RouteMatch(array());
-        $routeMatch->setMatchedRouteName('renderWebsite');
+        $routeMatch->setMatchedRouteName('cms');
         $this->mvcEvent->setRouteMatch($routeMatch);
         $oldScheme = $this->uri->getScheme();
         $result    = $this->object->checkSsl($this->mvcEvent);
@@ -154,7 +154,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     {
         CoreConfig::setValue('force_frontend_ssl', 1);
         $routeMatch = new RouteMatch(array());
-        $routeMatch->setMatchedRouteName('renderWebsite');
+        $routeMatch->setMatchedRouteName('cms');
         $this->mvcEvent->setRouteMatch($routeMatch);
         $oldScheme = $this->uri->getScheme();
         $this->uri->setScheme('https');
@@ -173,7 +173,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     {
         CoreConfig::setValue('force_frontend_ssl', 0);
         $routeMatch = new RouteMatch(array());
-        $routeMatch->setMatchedRouteName('renderWebsite');
+        $routeMatch->setMatchedRouteName('cms');
         $this->mvcEvent->setRouteMatch($routeMatch);
         $oldScheme = $this->uri->getScheme();
         $this->uri->setScheme('http');
@@ -198,7 +198,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
                 'action' => 'login',
             )
         );
-        $routeMatch->setMatchedRouteName('userLogin');
+        $routeMatch->setMatchedRouteName('config/user/login');
         $this->mvcEvent->setRouteMatch($routeMatch);
         $this->assertNull($this->object->checkSsl($this->mvcEvent));
     }
@@ -221,7 +221,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
                 'action' => 'login',
             )
         );
-        $routeMatch->setMatchedRouteName('userLogin');
+        $routeMatch->setMatchedRouteName('config/user/login');
         $this->mvcEvent->setRouteMatch($routeMatch);
         $oldScheme = $this->uri->getScheme();
         $result    = $this->object->checkSsl($this->mvcEvent);

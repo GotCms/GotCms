@@ -69,7 +69,7 @@ class ModuleUrl extends AbstractHelper
             $params['mc'] = $controllerName;
         }
 
-        $url = $this->getView()->url('moduleEdit', $params, $options, $reuseMatchedParams);
+        $url = $this->getView()->url('module/edit', $params, $options, $reuseMatchedParams);
 
         if (!empty($queryParams)) {
             $urlParams = array();

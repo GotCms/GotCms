@@ -173,7 +173,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installLicense');
+        $this->assertMatchedRouteName('install/license');
     }
 
     /**
@@ -207,7 +207,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installLicense');
+        $this->assertMatchedRouteName('install/license');
     }
 
     /**
@@ -241,7 +241,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installLicense');
+        $this->assertMatchedRouteName('install/license');
     }
 
     /**
@@ -269,7 +269,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installCheckConfig');
+        $this->assertMatchedRouteName('install/check-config');
     }
 
     /**
@@ -302,7 +302,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installCheckConfig');
+        $this->assertMatchedRouteName('install/check-config');
     }
 
     /**
@@ -330,7 +330,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installDatabase');
+        $this->assertMatchedRouteName('install/database');
     }
 
     /**
@@ -368,7 +368,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installDatabase');
+        $this->assertMatchedRouteName('install/database');
     }
 
     /**
@@ -406,7 +406,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installDatabase');
+        $this->assertMatchedRouteName('install/database');
     }
 
     /**
@@ -439,7 +439,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installDatabase');
+        $this->assertMatchedRouteName('install/database');
     }
 
     /**
@@ -474,7 +474,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installConfiguration');
+        $this->assertMatchedRouteName('install/configuration');
     }
 
     /**
@@ -522,7 +522,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installConfiguration');
+        $this->assertMatchedRouteName('install/configuration');
     }
 
     /**
@@ -562,7 +562,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installConfiguration');
+        $this->assertMatchedRouteName('install/configuration');
     }
 
     /**
@@ -589,7 +589,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installConfiguration');
+        $this->assertMatchedRouteName('install/configuration');
     }
 
     /**
@@ -617,7 +617,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installConfiguration');
+        $this->assertMatchedRouteName('install/configuration');
     }
 
     /**
@@ -652,7 +652,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installComplete');
+        $this->assertMatchedRouteName('install/complete');
     }
 
     /**
@@ -690,7 +690,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installComplete');
+        $this->assertMatchedRouteName('install/complete');
     }
 
     /**
@@ -740,7 +740,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installComplete');
+        $this->assertMatchedRouteName('install/complete');
 
         Registry::set('Db', $dbAdapter);
         GlobalAdapterFeature::setStaticAdapter($dbAdapter);
@@ -798,7 +798,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installComplete');
+        $this->assertMatchedRouteName('install/complete');
 
         foreach ($oldValues as $value) {
             $identifier = $config->fetchRow($config->select(array('identifier' => $value['identifier'])));
@@ -861,7 +861,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installComplete');
+        $this->assertMatchedRouteName('install/complete');
 
         Registry::set('Db', $dbAdapter);
         GlobalAdapterFeature::setStaticAdapter($dbAdapter);
@@ -915,7 +915,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('InstallController');
         $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('installComplete');
+        $this->assertMatchedRouteName('install/complete');
 
         Registry::set('Db', $dbAdapter);
         GlobalAdapterFeature::setStaticAdapter($dbAdapter);

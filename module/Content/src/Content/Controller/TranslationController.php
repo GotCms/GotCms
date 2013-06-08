@@ -63,13 +63,13 @@ class TranslationController extends Action
         $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
 
         $routes = array(
-            'edit' => 'documentEdit',
-            'new' => 'documentCreate',
-            'delete' => 'documentDelete',
-            'copy' => 'documentCopy',
-            'cut' => 'documentCut',
-            'paste' => 'documentPaste',
-            'refresh' => 'documentRefreshTreeview',
+            'edit' => 'content/document/edit',
+            'new' => 'content/document/create',
+            'delete' => 'content/document/delete',
+            'copy' => 'content/document/copy',
+            'cut' => 'content/document/cut',
+            'paste' => 'content/document/paste',
+            'refresh' => 'content/document/refresh-treeview',
         );
 
         $arrayRoutes = array();
@@ -88,7 +88,7 @@ class TranslationController extends Action
     public function createAction()
     {
         $translationForm = new Form\Translation();
-        $translationForm->setAttribute('action', $this->url()->fromRoute('translationCreate'));
+        $translationForm->setAttribute('action', $this->url()->fromRoute('content/translation/create'));
 
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();
@@ -113,7 +113,7 @@ class TranslationController extends Action
 
                 $this->flashMessenger()->addSuccessMessage('Translation saved !');
                 Translator::setValue($source, $data);
-                return $this->redirect()->toRoute('translationCreate');
+                return $this->redirect()->toRoute('content/translation/create');
             }
         }
 
@@ -128,11 +128,11 @@ class TranslationController extends Action
     public function indexAction()
     {
         $translationForm = new Form\Translation();
-        $translationForm->setAttribute('action', $this->url()->fromRoute('translationList'));
+        $translationForm->setAttribute('action', $this->url()->fromRoute('content/translation'));
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();
             if (empty($post['source']) or empty($post['destination'])) {
-                return $this->redirect()->toRoute('translationList');
+                return $this->redirect()->toRoute('content/translation');
             }
 
             foreach ($post['source'] as $sourceId => $source) {
@@ -145,7 +145,7 @@ class TranslationController extends Action
             $this->generateCache();
 
             $this->flashMessenger()->addSuccessMessage('Translation saved !');
-            return $this->redirect()->toRoute('translationList');
+            return $this->redirect()->toRoute('content/translation');
         }
 
         return array('form' => $translationForm, 'values' => Translator::getValues());

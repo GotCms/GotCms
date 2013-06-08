@@ -83,7 +83,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Module');
         $this->assertControllerName('ModuleController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('moduleinstall');
+        $this->assertMatchedRouteName('module/install');
     }
 
     /**
@@ -107,7 +107,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Module');
         $this->assertControllerName('ModuleController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('moduleinstall');
+        $this->assertMatchedRouteName('module/install');
     }
 
     /**
@@ -132,7 +132,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Module');
         $this->assertControllerName('ModuleController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('moduleinstall');
+        $this->assertMatchedRouteName('module/install');
 
         ModuleModel::fromName('Sitemap')->delete();
     }
@@ -154,7 +154,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Module');
         $this->assertControllerName('ModuleController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('moduleUninstall');
+        $this->assertMatchedRouteName('module/uninstall');
     }
 
     /**
@@ -183,7 +183,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Module');
         $this->assertControllerName('ModuleController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('moduleUninstall');
+        $this->assertMatchedRouteName('module/uninstall');
 
         $moduleModel->delete();
     }
@@ -238,7 +238,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Module');
         $this->assertControllerName('ModuleController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('moduleEdit');
+        $this->assertMatchedRouteName('module/edit');
 
         $moduleModel->delete();
     }

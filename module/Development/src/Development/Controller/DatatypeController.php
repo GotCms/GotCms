@@ -70,7 +70,7 @@ class DatatypeController extends Action
     {
         $datatype     = new Datatype\Model();
         $datatypeForm = new DatatypeForm();
-        $datatypeForm->setAttribute('action', $this->url()->fromRoute('datatypeCreate'));
+        $datatypeForm->setAttribute('action', $this->url()->fromRoute('development/datatype/create'));
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost()->toArray();
             $datatypeForm->setData($post);
@@ -82,7 +82,7 @@ class DatatypeController extends Action
                 try {
                     $id = $datatype->save();
                     $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
-                    return $this->redirect()->toRoute('datatypeEdit', array('id' => $id));
+                    return $this->redirect()->toRoute('development/datatype/edit', array('id' => $id));
                 } catch (Exception $e) {
                     throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
@@ -101,7 +101,7 @@ class DatatypeController extends Action
     {
         $datatypeModel = Datatype\Model::fromId($this->getRouteMatch()->getParam('id'));
         if (empty($datatypeModel)) {
-            return $this->redirect()->toRoute('datatypeList');
+            return $this->redirect()->toRoute('development/datatype');
         }
 
         $datatype = Datatype\Model::loadDatatype($this->getRouteMatch()->getParam('id'));
@@ -110,7 +110,7 @@ class DatatypeController extends Action
         $datatypeForm->setAttribute(
             'action',
             $this->url()->fromRoute(
-                'datatypeEdit',
+                'development/datatype/edit',
                 array('id' => $this->getRouteMatch()->getParam('id'))
             )
         );
@@ -135,14 +135,14 @@ class DatatypeController extends Action
                     $datatypeModel->addData($datatypeForm->getInputFilter()->getValues());
                     if ($datatypeModel->save()) {
                         $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
-                        return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatypeModel->getId()));
+                        return $this->redirect()->toRoute('development/datatype/edit', array('id' => $datatypeModel->getId()));
                     }
                 } catch (Exception $e) {
                     throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
                 }
 
                 $this->flashMessenger()->addErrorMessage('Error during editing.');
-                return $this->redirect()->toRoute('datatypeEdit', array('id' => $datatypeModel->getId()));
+                return $this->redirect()->toRoute('development/datatype/edit', array('id' => $datatypeModel->getId()));
             }
         }
 

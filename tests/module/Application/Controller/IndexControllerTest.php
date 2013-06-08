@@ -208,7 +208,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('IndexController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('renderWebsite');
+        $this->assertMatchedRouteName('cms');
 
         $document->delete();
         unset($document);
@@ -252,7 +252,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('IndexController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('renderWebsite');
+        $this->assertMatchedRouteName('cms');
 
         $document->delete();
         unset($document);
@@ -298,7 +298,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('IndexController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('renderWebsite');
+        $this->assertMatchedRouteName('cms');
 
         $document->delete();
         unset($document);
@@ -341,7 +341,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('IndexController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('renderWebsite');
+        $this->assertMatchedRouteName('cms');
 
         $document->delete();
         unset($document);
@@ -385,7 +385,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('IndexController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('renderWebsite');
+        $this->assertMatchedRouteName('cms');
 
         $document->delete();
         unset($document);
@@ -412,7 +412,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('IndexController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('renderWebsite');
+        $this->assertMatchedRouteName('cms');
     }
 
     /**
@@ -437,6 +437,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Application');
         $this->assertControllerName('IndexController');
         $this->assertControllerClass('IndexController');
-        $this->assertMatchedRouteName('renderWebsite');
+        $this->assertMatchedRouteName('cms');
     }
 }

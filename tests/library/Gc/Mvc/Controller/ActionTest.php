@@ -108,7 +108,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
                 'action' => 'login',
             )
         );
-        $routeMatch->setMatchedRouteName('userLogin');
+        $routeMatch->setMatchedRouteName('config/user/login');
         $this->object->getEvent()->setRouteMatch($routeMatch);
         $this->object->dispatch(Registry::get('Application')->getRequest());
     }
@@ -178,7 +178,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
 
         $routeMatch = new RouteMatch(array());
-        $routeMatch->setMatchedRouteName('renderWebsite');
+        $routeMatch->setMatchedRouteName('cms');
         $this->object->getEvent()->setRouteMatch($routeMatch);
         $this->object->dispatch(Registry::get('Application')->getRequest(), null);
         $this->object->onDispatch(Registry::get('Application')->getMvcEvent());

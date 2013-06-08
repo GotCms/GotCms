@@ -64,7 +64,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('CmsController');
         $this->assertControllerClass('CmsController');
-        $this->assertMatchedRouteName('configGeneral');
+        $this->assertMatchedRouteName('config/general');
     }
 
     /**
@@ -83,7 +83,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('CmsController');
         $this->assertControllerClass('CmsController');
-        $this->assertMatchedRouteName('configSystem');
+        $this->assertMatchedRouteName('config/system');
     }
 
     /**
@@ -102,7 +102,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('CmsController');
         $this->assertControllerClass('CmsController');
-        $this->assertMatchedRouteName('configServer');
+        $this->assertMatchedRouteName('config/server');
     }
 
     /**
@@ -128,7 +128,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('CmsController');
         $this->assertControllerClass('CmsController');
-        $this->assertMatchedRouteName('configServer');
+        $this->assertMatchedRouteName('config/server');
     }
 
     /**
@@ -151,7 +151,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('CmsController');
         $this->assertControllerClass('CmsController');
-        $this->assertMatchedRouteName('configServer');
+        $this->assertMatchedRouteName('config/server');
     }
 
     /**
@@ -170,7 +170,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('CmsController');
         $this->assertControllerClass('CmsController');
-        $this->assertMatchedRouteName('cmsUpdate');
+        $this->assertMatchedRouteName('config/cms-update');
     }
 
     /**
@@ -195,6 +195,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
         $this->assertModuleName('Config');
         $this->assertControllerName('CmsController');
         $this->assertControllerClass('CmsController');
-        $this->assertMatchedRouteName('cmsUpdate');
+        $this->assertMatchedRouteName('config/cms-update');
     }
 }
