@@ -204,44 +204,6 @@ class Action extends AbstractActionController
         $this->layout()->version = \Gc\Version::VERSION;
 
         $this->useFlashMessenger(false);
-        if (!in_array($routeName, $this->installerRoutes)
-            and !in_array($routeName, array('config/user/login', 'config/user/forgot-password', 'cms'))
-        ) {
-            /**
-             * Prepare all resources
-             */
-            $helperBroker = $this->getServiceLocator()->get('ViewHelperManager');
-            $headscript   = $helperBroker->get('HeadScript');
-            $cdn          = $helperBroker->get('CdnBackend');
-            $headscript
-                ->appendFile($cdn('/backend/js/libs/modernizr-2.6.2.min.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/jquery-1.9.1.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/jquery.browser.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/plugins.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/jquery-ui-1.10.1.custom.min.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/codemirror/lib/codemirror.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/codemirror/mode/xml/xml.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/codemirror/mode/javascript/javascript.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/codemirror/mode/css/css.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/codemirror/mode/clike/clike.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/codemirror/mode/php/php.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/jquery.jstree.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/jquery.contextMenu.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/libs/dropdown.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/generic-classes.js'), 'text/javascript')
-                ->appendFile($cdn('/backend/js/gotcms.js'), 'text/javascript');
-
-            $headlink = $helperBroker->get('HeadLink');
-            $headlink
-                ->appendStylesheet($cdn('/backend/css/normalize.css'))
-                ->appendStylesheet($cdn('/backend/js/libs/codemirror/lib/codemirror.css'))
-                ->appendStylesheet($cdn('/backend/css/jquery-ui-1.10.1.custom.css'))
-                ->appendStylesheet($cdn('/backend/css/jquery.treeview.css'))
-                ->appendStylesheet($cdn('/backend/css/elfinder.min.css'))
-                ->appendStylesheet($cdn('/backend/css/jquery.contextMenu.css'))
-                ->appendStylesheet($cdn('/backend/css/dropdown.css'))
-                ->appendStylesheet($cdn('/backend/css/style.css'));
-        }
     }
 
     /**

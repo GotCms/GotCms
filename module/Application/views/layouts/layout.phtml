@@ -33,14 +33,42 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="">
-  <title><?php echo $this->escapeHtml($this->translate('Admin panel')); ?> - GotCms</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <title><?php echo $this->escapeHtml($this->translate('Admin panel')); ?> - GotCms</title>
 
-  <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width">
     <?php
     echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
+    $this->headScript()
+        ->prependFile($this->cdnBackend('/backend/js/gotcms.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/generic-classes.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/dropdown.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/jquery.contextMenu.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/jquery.jstree.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/codemirror/mode/php/php.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/codemirror/mode/clike/clike.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/codemirror/mode/css/css.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/codemirror/mode/javascript/javascript.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/codemirror/mode/xml/xml.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/codemirror/lib/codemirror.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/jquery-ui-1.10.1.custom.min.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/plugins.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/jquery.browser.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/jquery-1.9.1.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/modernizr-2.6.2.min.js'), 'text/javascript');
+
+    $this->headLink()
+        ->prependStylesheet($this->cdnBackend('/backend/css/style.css'))
+        ->prependStylesheet($this->cdnBackend('/backend/css/dropdown.css'))
+        ->prependStylesheet($this->cdnBackend('/backend/css/normalize.css'))
+        ->prependStylesheet($this->cdnBackend('/backend/css/jquery.contextMenu.css'))
+        ->prependStylesheet($this->cdnBackend('/backend/css/elfinder.min.css'))
+        ->prependStylesheet($this->cdnBackend('/backend/css/jquery.treeview.css'))
+        ->prependStylesheet($this->cdnBackend('/backend/js/libs/codemirror/lib/codemirror.css'))
+        ->prependStylesheet($this->cdnBackend('/backend/css/jquery-ui-1.10.1.custom.css'));
+
     echo $this->headScript();
 
     echo $this->HeadLink();
