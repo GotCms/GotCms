@@ -135,7 +135,10 @@ class DatatypeController extends Action
                     $datatypeModel->addData($datatypeForm->getInputFilter()->getValues());
                     if ($datatypeModel->save()) {
                         $this->flashMessenger()->addSuccessMessage('This datatype has been saved');
-                        return $this->redirect()->toRoute('development/datatype/edit', array('id' => $datatypeModel->getId()));
+                        return $this->redirect()->toRoute(
+                            'development/datatype/edit',
+                            array('id' => $datatypeModel->getId())
+                        );
                     }
                 } catch (Exception $e) {
                     throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);

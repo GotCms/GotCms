@@ -172,7 +172,7 @@ class IndexController extends Action
                             $documentTmp = Document\Model::fromUrlKey($urlKey, $parentId);
                             //Test for home as parent_id
                             if (empty($documentTmp) and ($homeDocument = Document\Model::fromUrlKey('')) !== false) {
-                                $documentTmp  = Document\Model::fromUrlKey($urlKey, $homeDocument->getId());
+                                $documentTmp = Document\Model::fromUrlKey($urlKey, $homeDocument->getId());
                             }
                         }
 

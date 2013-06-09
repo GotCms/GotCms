@@ -107,7 +107,10 @@ class ScriptController extends Action
         }
 
         $scriptForm = new ScriptForm();
-        $scriptForm->setAttribute('action', $this->url()->fromRoute('development/script/edit', array('id' => $scriptId)));
+        $scriptForm->setAttribute(
+            'action',
+            $this->url()->fromRoute('development/script/edit', array('id' => $scriptId))
+        );
         $scriptForm->loadValues($scriptModel);
 
         if ($this->getRequest()->isPost()) {

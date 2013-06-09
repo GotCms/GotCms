@@ -107,7 +107,10 @@ class LayoutController extends Action
         }
 
         $layoutForm = new LayoutForm();
-        $layoutForm->setAttribute('action', $this->url()->fromRoute('development/layout/edit', array('id' => $layoutId)));
+        $layoutForm->setAttribute(
+            'action',
+            $this->url()->fromRoute('development/layout/edit', array('id' => $layoutId))
+        );
         $layoutForm->loadValues($layoutModel);
 
         if ($this->getRequest()->isPost()) {

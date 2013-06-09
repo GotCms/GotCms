@@ -122,9 +122,10 @@ abstract class AbstractForm extends Form
     /**
      * Add content to form
      *
-     * @param Fieldset $form     Form
-     * @param mixed    $elements Elements
-     * @param string   $prefix   Add belong to for each elements
+     * @param Fieldset $form       Form
+     * @param mixed    $elements   Elements
+     * @param string   $prefix     Add belong to for each elements
+     * @param integer  $datatypeId Datatype id
      *
      * @static
      * @return void
