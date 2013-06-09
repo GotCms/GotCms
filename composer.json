@@ -8,7 +8,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
-        "squizlabs/php_codesniffer": "1.4.*"
+        "squizlabs/php_codesniffer": "1.4.*",
+        "satooshi/php-coveralls": "dev-master"
     },
     "authors": [
         {

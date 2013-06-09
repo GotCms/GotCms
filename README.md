@@ -1,6 +1,6 @@
 # GotCms - Information
 
-Master status: [![Build Status](https://travis-ci.org/PierreRambaud/GotCms.png?branch=master)](https://travis-ci.org/PierreRambaud/GotCms)
+Master status: [![Build Status](https://travis-ci.org/PierreRambaud/GotCms.png?branch=master)](https://travis-ci.org/PierreRambaud/GotCms)[![Coverage Status](https://coveralls.io/repos/PierreRambaud/GotCms/badge.png)](https://coveralls.io/r/PierreRambaud/GotCms)
 
 ## About GotCms
 

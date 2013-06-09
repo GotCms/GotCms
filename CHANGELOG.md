@@ -5,6 +5,7 @@
 - Add Zend Validate translations ([https://github.com/PierreRambaud/GotCms/issues/77](https://github.com/PierreRambaud/GotCms/issues/77))
 - Optimize routes ([https://github.com/PierreRambaud/GotCms/issues/79](https://github.com/PierreRambaud/GotCms/issues/79))
 - Remove headscript and headlink from Abstract Action ([https://github.com/PierreRambaud/GotCms/issues/80](https://github.com/PierreRambaud/GotCms/issues/80))
+- Adding coveralls ([https://github.com/PierreRambaud/GotCms/issues/81](https://github.com/PierreRambaud/GotCms/issues/81))
 
 ##0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/PierreRambaud/GotCms/issues/55](https://github.com/PierreRambaud/GotCms/issues/55))

@@ -56,32 +56,47 @@ define('GC_MEDIA_PATH', GC_APPLICATION_PATH . '/tests/media');
  * Setup autoloading
  */
 
+$zfPath = false;
+
+if (getenv('ZF2_PATH')) { // Support for ZF2_PATH environment variable or git submodule
+    $zfPath = getenv('ZF2_PATH');
+} elseif (get_cfg_var('zf2_path')) { // Support for zf2_path directive value
+    $zfPath = get_cfg_var('zf2_path');
+} elseif (is_dir('vendor/Zend')) {
+    $zfPath = 'vendor';
+}
+
 // Composer autoloading
 if (file_exists($gcRoot . '/vendor/autoload.php')) {
     $loader = include $gcRoot . '/vendor/autoload.php';
 }
 
-// Support for ZF2_PATH environment variable or git submodule
+if (!class_exists('Zend\Loader\AutoloaderFactory')) {
+    throw new RuntimeException(
+        'Unable to load ZF2. Run `php composer.phar install` ' .
+        'or define a ZF2_PATH environment variable.'
+    );
+}
 
-if ($zfPath = getenv('ZF2_PATH') ?: (is_dir($zfLibrary) ? $zfLibrary : false)) {
+// Get application stack configuration
+if ($zfPath) {
     // Get application stack configuration
     $configuration = include_once $gcRoot . '/config/application.config.php';
     if (isset($loader)) {
-        $loader->add('Zend', $zfPath . '/Zend');
+        $loader->add('Zend', $zfPath);
+        foreach ($configuration['autoloader']['namespaces'] as $name => $path) {
+            $loader->add($name, dirname($path));
+        }
+
+        $loader->register();
     } else {
-        include_once $zfLibrary . '/Zend/Loader/AutoloaderFactory.php';
-        \Zend\Loader\AutoloaderFactory::factory(
+        include $zfPath . '/Zend/Loader/AutoloaderFactory.php';
+        Zend\Loader\AutoloaderFactory::factory(
             array(
                 'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
             )
         );
     }
-}
-
-if (!class_exists('Zend\Loader\AutoloaderFactory')) {
-    throw new RuntimeException(
-        'Unable to load ZF2. Run `php composer.phar install` or define a ZF2_PATH environment variable.'
-    );
 }
 
 /*
