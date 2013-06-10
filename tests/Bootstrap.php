@@ -84,7 +84,7 @@ if ($zfPath) {
         $loader->register();
     } else {
         include $zfPath . '/Zend/Loader/AutoloaderFactory.php';
-        Zend\Loader\AutoloaderFactory::factory(
+        \Zend\Loader\AutoloaderFactory::factory(
             array(
                 'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
             )
