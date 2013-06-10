@@ -36,12 +36,10 @@ use Gc\Module\Collection as ModuleCollection;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Config\Reader\Ini;
-use Zend\EventManager\Event;
 use Zend\EventManager\EventInterface;
 use Zend\Mvc\I18n\Translator;
-use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceManager;
 use Zend\Session\SessionManager;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container as SessionContainer;
@@ -78,32 +76,6 @@ abstract class Module
      * @var array
      */
     protected $config;
-
-    /**
-     * On boostrap event
-     *
-     * @param Event $event Event
-     *
-     * @return void
-     */
-    public function onBootstrap(Event $event)
-    {
-        if (!Registry::isRegistered('Translator')) {
-            $translator = $event->getApplication()->getServiceManager()->get('translator');
-
-            if (Registry::isRegistered('Db')) {
-                $translator->setLocale(CoreConfig::getValue('locale'));
-
-                $event->getApplication()->getEventManager()->attach(
-                    MvcEvent::EVENT_RENDER_ERROR,
-                    array($this, 'prepareException')
-                );
-            }
-
-            AbstractValidator::setDefaultTranslator(new Translator($translator));
-            Registry::set('Translator', $translator);
-        }
-    }
 
     /**
      * Get autoloader config
@@ -167,74 +139,121 @@ abstract class Module
     }
 
     /**
-     * initiliaze database connexion for every modules
+     * On boostrap event
      *
-     * @param ModuleManager $moduleManager Module manager
+     * @param Event $event Event
      *
      * @return void
      */
-    public function init(ModuleManager $moduleManager)
+    public function onBootstrap(EventInterface $event)
     {
         if (!Registry::isRegistered('Configuration')) {
-            $configPaths = $moduleManager->getEvent()->getConfigListener()->getOptions()->getConfigGlobPaths();
-            if (!empty($configPaths)) {
-                $config = array();
-                foreach ($configPaths as $path) {
-                    foreach (glob(realpath(__DIR__ . '/../../../') . '/' . $path, GLOB_BRACE) as $filename) {
-                        $config += include $filename;
-                    }
-                }
+            $application    = $event->getApplication();
+            $config         = $application->getConfig();
+            $serviceManager = $application->getServiceManager();
+            Registry::set('Configuration', $config);
 
-                if (!empty($config['db'])) {
-                    $dbAdapter = new DbAdapter($config['db']);
-                    GlobalAdapterFeature::setStaticAdapter($dbAdapter);
+            $dbAdapter = $this->initDatabase($config);
+            $this->initSession($serviceManager, $dbAdapter);
+            $this->initTranslator($serviceManager);
+            $this->initObserverModules();
 
-                    Registry::set('Configuration', $config);
-                    Registry::set('Db', $dbAdapter);
+            $sharedEvents = $application->getEventManager()->getSharedManager();
+            $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_ROUTE, array($this, 'checkSsl'), -10);
 
-                    $sessionConfig = new SessionConfig();
-                    $sessionConfig->setStorageOption('gc_probability', 1);
-                    $sessionConfig->setStorageOption('gc_divisor', 1);
-                    $sessionConfig->setStorageOption('save_path', CoreConfig::getValue('session_path'));
-                    $sessionConfig->setStorageOption('gc_maxlifetime', CoreConfig::getValue('session_lifetime'));
-                    $sessionConfig->setStorageOption('cookie_path', CoreConfig::getValue('cookie_path'));
-                    $sessionConfig->setStorageOption('cookie_domain', CoreConfig::getValue('cookie_domain'));
-                    SessionContainer::setDefaultManager(new SessionManager($sessionConfig));
+            $application->getEventManager()->attach(
+                MvcEvent::EVENT_RENDER_ERROR,
+                array($this, 'prepareException')
+            );
+        }
+    }
 
-                    if (CoreConfig::getValue('session_handler') == CoreConfig::SESSION_DATABASE) {
-                        $tablegatewayConfig = new DbTableGatewayOptions(
-                            array(
-                                'idColumn'   => 'id',
-                                'nameColumn' => 'name',
-                                'modifiedColumn' => 'updated_at',
-                                'lifetimeColumn' => 'lifetime',
-                                'dataColumn' => 'data',
-                            )
-                        );
+    /**
+     * Initialize database
+     *
+     * @param $config array Configuration
+     *
+     * @return void
+     */
+    public function initDatabase(array $config)
+    {
+        $dbAdapter = new DbAdapter($config['db']);
+        GlobalAdapterFeature::setStaticAdapter($dbAdapter);
+        Registry::set('Db', $dbAdapter);
 
-                        $sessionTable = new SessionTableGateway(
-                            new TableGateway('core_session', $dbAdapter),
-                            $tablegatewayConfig
-                        );
+        return $dbAdapter;
+    }
 
-                        $sessionManager = SessionContainer::getDefaultManager();
-                        $sessionManager->setSaveHandler($sessionTable)->start();
-                    }
+    /**
+     * Initialize Session data
+     *
+     * @param ServiceManager $sessionManager Service manager
+     *
+     * @return void
+     */
+    public function initSession(ServiceManager $sessionManager, DbAdapter $dbAdapter)
+    {
+        $sessionConfig = new SessionConfig();
+        $sessionConfig->setStorageOption('gc_probability', 1);
+        $sessionConfig->setStorageOption('gc_divisor', 1);
+        $sessionConfig->setStorageOption('save_path', CoreConfig::getValue('session_path'));
+        $sessionConfig->setStorageOption('gc_maxlifetime', CoreConfig::getValue('session_lifetime'));
+        $sessionConfig->setStorageOption('cookie_path', CoreConfig::getValue('cookie_path'));
+        $sessionConfig->setStorageOption('cookie_domain', CoreConfig::getValue('cookie_domain'));
+        SessionContainer::setDefaultManager(new SessionManager($sessionConfig));
 
-                    //Initialize Observers
-                    $moduleCollection = new ModuleCollection();
-                    $modules          = $moduleCollection->getModules();
-                    foreach ($modules as $module) {
-                        $className = sprintf('\\Modules\\%s\\Observer', $module->getName());
-                        if (class_exists($className)) {
-                            $object = new $className();
-                            $object->init();
-                        }
-                    }
+        if (CoreConfig::getValue('session_handler') == CoreConfig::SESSION_DATABASE) {
+            $tablegatewayConfig = new DbTableGatewayOptions(
+                array(
+                    'idColumn'   => 'id',
+                    'nameColumn' => 'name',
+                    'modifiedColumn' => 'updated_at',
+                    'lifetimeColumn' => 'lifetime',
+                    'dataColumn' => 'data',
+                )
+            );
 
-                    $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
-                    $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_ROUTE, array($this, 'checkSsl'), -10);
-                }
+            $sessionTable = new SessionTableGateway(
+                new TableGateway('core_session', $dbAdapter),
+                $tablegatewayConfig
+            );
+
+            $sessionManager = SessionContainer::getDefaultManager();
+            $sessionManager->setSaveHandler($sessionTable)->start();
+        }
+    }
+
+    /**
+     * Initialize translator data
+     *
+     * @param $serviceManager ServiceManager Service manager
+     *
+     * @return void
+     */
+    public function initTranslator(ServiceManager $serviceManager)
+    {
+        $translator = $serviceManager->get('translator');
+        $translator->setLocale(CoreConfig::getValue('locale'));
+
+        AbstractValidator::setDefaultTranslator(new Translator($translator));
+        Registry::set('Translator', $translator);
+    }
+
+    /**
+     * Initialize modules events
+     *
+     * @return void
+     */
+    public function initObserverModules()
+    {
+        //Initialize Observers
+        $moduleCollection = new ModuleCollection();
+        $modules          = $moduleCollection->getModules();
+        foreach ($modules as $module) {
+            $className = sprintf('\\Modules\\%s\\Observer', $module->getName());
+            if (class_exists($className)) {
+                $object = new $className();
+                $object->init();
             }
         }
     }

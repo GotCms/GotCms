@@ -85,13 +85,45 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      * Test
      *
      * @covers Gc\Mvc\Module::onBootstrap
+     * @covers Gc\Mvc\Module::initDatabase
+     * @covers Gc\Mvc\Module::initSession
+     * @covers Gc\Mvc\Module::initTranslator
+     * @covers Gc\Mvc\Module::initObserverModules
      *
      * @return void
      */
     public function testOnBootstrap()
     {
-        Registry::getInstance()->offsetUnset('Translator');
+        $oldDatabase      = Registry::get('Db');
+        $oldConfiguration = Registry::get('Configuration');
+        $oldAdapter       = GlobalAdapterFeature::getStaticAdapter();
+
+        if (!CoreConfig::getValue('session_lifetime')) {
+            CoreConfig::getInstance()->insert(
+                array(
+                    'identifier' => 'session_lifetime',
+                    'value'      => 3600,
+                )
+            );
+        }
+
+        if (!CoreConfig::getValue('cookie_domain')) {
+            CoreConfig::getInstance()->insert(
+                array(
+                    'identifier' => 'cookie_domain',
+                    'value'      => 'got-cms.com',
+                )
+            );
+        }
+
+        CoreConfig::setValue('session_handler', CoreConfig::SESSION_DATABASE);
+
+        Registry::getInstance()->offsetUnset('Configuration');
         $this->assertNull($this->object->onBootstrap(Registry::get('Application')->getMvcEvent()));
+
+        Registry::set('Db', $oldDatabase);
+        Registry::set('Configuration', $oldConfiguration);
+        GlobalAdapterFeature::setStaticAdapter($oldAdapter);
     }
 
     /**
@@ -255,46 +287,5 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     {
         CoreConfig::setValue('debug_is_active', 1);
         $this->assertInternalType('array', $this->object->getConfig());
-    }
-
-    /**
-     * Test
-     *
-     * @covers Gc\Mvc\Module::init
-     *
-     * @return void
-     */
-    public function testInit()
-    {
-        $oldDatabase      = Registry::get('Db');
-        $oldConfiguration = Registry::get('Configuration');
-        $oldAdapter       = GlobalAdapterFeature::getStaticAdapter();
-
-        if (!CoreConfig::getValue('session_lifetime')) {
-            CoreConfig::getInstance()->insert(
-                array(
-                    'identifier' => 'session_lifetime',
-                    'value'      => 3600,
-                )
-            );
-        }
-
-        if (!CoreConfig::getValue('cookie_domain')) {
-            CoreConfig::getInstance()->insert(
-                array(
-                    'identifier' => 'cookie_domain',
-                    'value'      => 'got-cms.com',
-                )
-            );
-        }
-
-        CoreConfig::setValue('session_handler', CoreConfig::SESSION_DATABASE);
-
-        Registry::getInstance()->offsetUnset('Configuration');
-        $this->assertNull($this->object->init(Registry::get('Application')->getServiceManager()->get('ModuleManager')));
-
-        Registry::set('Db', $oldDatabase);
-        Registry::set('Configuration', $oldConfiguration);
-        GlobalAdapterFeature::setStaticAdapter($oldAdapter);
     }
 }
