@@ -236,7 +236,6 @@ abstract class Module
         $translator->setLocale(CoreConfig::getValue('locale'));
 
         AbstractValidator::setDefaultTranslator(new Translator($translator));
-        Registry::set('Translator', $translator);
     }
 
     /**

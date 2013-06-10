@@ -286,7 +286,7 @@ class Model extends AbstractTable
             $user->setRetrieveUpdatedAt(new Expression('NOW()'));
             $user->save();
 
-            $message  = Registry::get('Translator')
+            $message  = Registry::get('Application')->getServiceManager()->get('translator')
                 ->translate(
                     'To reset your password follow this link but be careful ' .
                     'you only have one hour before the link expires:'

@@ -79,7 +79,7 @@ class InstallController extends Action
         //Force locale to translator
         $session = $this->getSession();
         if (!empty($session['install']['lang'])) {
-            Registry::get('Translator')->setLocale($session['install']['lang']);
+            Registry::get('Application')->getServiceManager()->get('translator')->setLocale($session['install']['lang']);
         }
     }
 

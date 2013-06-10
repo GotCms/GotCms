@@ -61,7 +61,7 @@ class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
     {
         $this->element = new Element\MultiCheckbox('foo');
         $this->object  = new FormMultiCheckbox;
-        $this->object->setTranslator(Registry::get('Translator'));
+        $this->object->setTranslator(Registry::get('Application')->getServiceManager()->get('translator'));
     }
 
     /**
