@@ -1,6 +1,6 @@
 #.coveralls.yml
 
 service_name: travis-ci
-coverage_clover: tests/logs/clover.xml
-json_path: tests/logs/coveralls-upload.json
+coverage_clover: ./tests/logs/clover.xml
+json_path: ./tests/logs/coveralls-upload.json
 src_dir: ./
