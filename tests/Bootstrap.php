@@ -71,13 +71,6 @@ if (file_exists($gcRoot . '/vendor/autoload.php')) {
     $loader = include $gcRoot . '/vendor/autoload.php';
 }
 
-if (!class_exists('Zend\Loader\AutoloaderFactory')) {
-    throw new RuntimeException(
-        'Unable to load ZF2. Run `php composer.phar install` ' .
-        'or define a ZF2_PATH environment variable.'
-    );
-}
-
 // Get application stack configuration
 if ($zfPath) {
     // Get application stack configuration
@@ -97,6 +90,13 @@ if ($zfPath) {
             )
         );
     }
+}
+
+if (!class_exists('Zend\Loader\AutoloaderFactory')) {
+    throw new RuntimeException(
+        'Unable to load ZF2. Run `php composer.phar install` ' .
+        'or define a ZF2_PATH environment variable.'
+    );
 }
 
 /*
