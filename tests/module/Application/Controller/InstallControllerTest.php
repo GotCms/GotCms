@@ -703,7 +703,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     public function testCompleteActionDatabase()
     {
         $dbAdapter     = Registry::get('Db');
-        $configuration = Registry::get('Configuration');
 
         $session = new SessionContainer();
         $session->offsetSet(
@@ -744,7 +743,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
         Registry::set('Db', $dbAdapter);
         GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-        Registry::set('Configuration', $configuration);
     }
 
     /**
@@ -757,7 +755,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     public function testCompleteActionData()
     {
         $dbAdapter     = Registry::get('Db');
-        $configuration = Registry::get('Configuration');
 
         $session = new SessionContainer();
         $session->offsetSet(
@@ -810,7 +807,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
         Registry::set('Db', $dbAdapter);
         GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-        Registry::set('Configuration', $configuration);
     }
 
     /**
@@ -823,7 +819,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     public function testCompleteActionTemplate()
     {
         $dbAdapter     = Registry::get('Db');
-        $configuration = Registry::get('Configuration');
 
         $session = new SessionContainer();
         $session->offsetSet(
@@ -865,7 +860,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
         Registry::set('Db', $dbAdapter);
         GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-        Registry::set('Configuration', $configuration);
     }
 
     /**
@@ -878,7 +872,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     public function testCompleteActionConfiguration()
     {
         $dbAdapter     = Registry::get('Db');
-        $configuration = Registry::get('Configuration');
 
         $session = new SessionContainer();
         $session->offsetSet(
@@ -919,6 +912,5 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
         Registry::set('Db', $dbAdapter);
         GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-        Registry::set('Configuration', $configuration);
     }
 }

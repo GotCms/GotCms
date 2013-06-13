@@ -214,7 +214,7 @@ abstract class AbstractTable extends Object
      */
     public function getDriverName()
     {
-        $configuration = Registry::get('Configuration');
+        $configuration = Registry::get('Application')->getConfig();
         return $configuration['db']['driver'];
     }
 }

@@ -111,6 +111,7 @@ if (is_readable($gcTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
 
 require_once 'config/prepare-database.php';
 require_once 'config/override-php-functions.php';
+$dbAdapter = Registry::get('Db');
 
 // Run application
 \Zend\Console\Console::overrideIsConsole(false);
@@ -121,6 +122,8 @@ $application->getRequest()->setBasePath('http://got-cms.com');
 //Remove all event observer
 \Gc\Event\StaticEventManager::resetInstance();
 
+\Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
+Registry::set('Db', $dbAdapter);
 /*
  * Unset global variables that are no longer needed.
  */

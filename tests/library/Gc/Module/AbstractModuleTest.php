@@ -89,7 +89,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDriverName()
     {
-        $configuration = Registry::get('Configuration');
+        $configuration = Registry::get('Application')->getConfig();
         $class         = $this->getMethod('getDriverName');
         $this->assertEquals($configuration['db']['driver'], $class->invokeArgs($this->object, array()));
     }

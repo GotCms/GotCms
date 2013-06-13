@@ -24,7 +24,7 @@
  * @link     http://www.got-cms.com
  */
 
-use Gc\Core\Config as GcConfig;
+use Gc\Core\Config as CoreConfig;
 use Gc\Registry;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\TableGateway\TableGateway;
@@ -48,8 +48,8 @@ try {
 }
 
 \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-Registry::set('Configuration', $config);
 Registry::set('Db', $dbAdapter);
+CoreConfig::getInstance();
 
 /**
  * Install database

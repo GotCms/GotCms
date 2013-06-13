@@ -78,7 +78,7 @@ abstract class AbstractModule
      */
     protected function getDriverName()
     {
-         $configuration = Registry::get('Configuration');
+         $configuration = Registry::get('Application')->getConfig();
          return $configuration['db']['driver'];
     }
 }

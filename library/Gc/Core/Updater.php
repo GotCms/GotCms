@@ -150,7 +150,7 @@ class Updater extends Object
             return false;
         }
 
-        $configuration = Registry::get('Configuration');
+        $configuration = Registry::get('Application')->getConfig();
         $files         = array();
         $updatePath    = GC_APPLICATION_PATH . '/data/update';
         $path          = glob($updatePath . '/*');

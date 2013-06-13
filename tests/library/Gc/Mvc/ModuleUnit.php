@@ -33,7 +33,7 @@ namespace Gc\Mvc;
  * @category Gc_Tests
  * @package  Library
  */
-class ModuleUnit extends Module
+class ModuleUnit extends \Application\Module
 {
     /**
      * Module directory path

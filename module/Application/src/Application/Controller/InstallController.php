@@ -347,7 +347,6 @@ class InstallController extends Action
                 $dbAdapter->getDriver()->getConnection()->connect();
                 Registry::set('Db', $dbAdapter);
                 GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-                Registry::set('Configuration', array('db' => $session['install']['db']));
 
                 $step    = $this->getRequest()->getPost()->get('step');
                 $sqlType = str_replace('pdo_', '', $session['install']['db']['driver']);

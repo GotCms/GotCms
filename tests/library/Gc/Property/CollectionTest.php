@@ -294,7 +294,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testSaveWithWrongValues()
     {
-        $configuration = Registry::get('Configuration');
+        $configuration = Registry::get('Application')->getConfig();
         if ($configuration['db']['driver'] == 'pdo_mysql') {
             $this->markTestSkipped('Mysql does not thrown exception.');
         }

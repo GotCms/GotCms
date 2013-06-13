@@ -59,7 +59,7 @@ class IndexController extends AbstractController
      */
     public function downloadDatabaseAction()
     {
-        $configuration = Registry::get('Configuration');
+        $configuration = Registry::get('Application')->getConfig();
         switch($configuration['db']['driver']) {
             case 'pdo_pgsql':
                 $model = new Model\Database\Pgsql();

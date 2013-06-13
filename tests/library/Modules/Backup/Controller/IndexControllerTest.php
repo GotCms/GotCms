@@ -102,7 +102,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDownloadDatabaseActionWithPgsql()
     {
-        $configuration = Registry::get('Configuration');
+        $configuration = Registry::get('Application')->getConfig();
         if ($configuration['db']['driver'] != 'pdo_pgsql') {
             $this->markTestSkipped('Download the database depends on Pgsql');
         }
@@ -119,7 +119,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDownloadActionWithMysql()
     {
-        $configuration = Registry::get('Configuration');
+        $configuration = Registry::get('Application')->getConfig();
         if ($configuration['db']['driver'] != 'pdo_mysql') {
             $this->markTestSkipped('Download the database depends on Mysql');
         }
