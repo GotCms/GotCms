@@ -46,6 +46,7 @@ use Zend\Session\Container as SessionContainer;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
 use Zend\Validator\AbstractValidator;
 use Zend\Uri\Http as Uri;
+
 /**
  * Application module
  *
@@ -104,7 +105,7 @@ class Module extends Mvc\Module
     /**
      * Initialize database
      *
-     * @param $config array Configuration
+     * @param array $config Configuration
      *
      * @return void
      */
@@ -121,6 +122,7 @@ class Module extends Mvc\Module
      * Initialize Session data
      *
      * @param ServiceManager $sessionManager Service manager
+     * @param DbAdapter      $dbAdapter      Database adapter
      *
      * @return void
      */
@@ -159,7 +161,7 @@ class Module extends Mvc\Module
     /**
      * Initialize translator data
      *
-     * @param $serviceManager ServiceManager Service manager
+     * @param ServiceManager $serviceManager Service manager
      *
      * @return void
      */
