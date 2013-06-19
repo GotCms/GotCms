@@ -59,7 +59,7 @@ abstract class AbstractTable extends Object
      */
     public function __construct()
     {
-        if (!empty($this->name) and !in_array($this->name, self::$tables)) {
+        if (!empty($this->name) and !array_key_exists($this->name, self::$tables)) {
             self::$tables[$this->name] = new TableGateway\TableGateway(
                 $this->name,
                 TableGateway\Feature\GlobalAdapterFeature::getStaticAdapter()
