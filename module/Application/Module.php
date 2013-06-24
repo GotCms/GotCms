@@ -80,24 +80,26 @@ class Module extends Mvc\Module
             $config         = $application->getConfig();
             $serviceManager = $application->getServiceManager();
 
-            $dbAdapter = $this->initDatabase($config);
-            $this->initSession($serviceManager, $dbAdapter);
-            $this->initTranslator($serviceManager);
-            $this->initObserverModules();
+            if (isset($config['db'])) {
+                $dbAdapter = $this->initDatabase($config);
+                $this->initSession($serviceManager, $dbAdapter);
+                $this->initTranslator($serviceManager);
+                $this->initObserverModules();
 
-            $sharedEvents = $application->getEventManager()->getSharedManager();
-            $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_ROUTE, array($this, 'checkSsl'), -10);
+                $sharedEvents = $application->getEventManager()->getSharedManager();
+                $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_ROUTE, array($this, 'checkSsl'), -10);
 
-            $application->getEventManager()->attach(
-                MvcEvent::EVENT_RENDER_ERROR,
-                array($this, 'prepareException')
-            );
+                $application->getEventManager()->attach(
+                    MvcEvent::EVENT_RENDER_ERROR,
+                    array($this, 'prepareException')
+                );
 
-            if (CoreConfig::getValue('debug_is_active')) {
-                $viewManager = $serviceManager->get('ViewManager');
-                $viewManager->getRouteNotFoundStrategy()->setDisplayExceptions(true);
-                $viewManager->getRouteNotFoundStrategy()->setDisplayNotFoundReason(true);
-                $viewManager->getExceptionStrategy()->setDisplayExceptions(true);
+                if (CoreConfig::getValue('debug_is_active')) {
+                    $viewManager = $serviceManager->get('ViewManager');
+                    $viewManager->getRouteNotFoundStrategy()->setDisplayExceptions(true);
+                    $viewManager->getRouteNotFoundStrategy()->setDisplayNotFoundReason(true);
+                    $viewManager->getExceptionStrategy()->setDisplayExceptions(true);
+                }
             }
         }
     }
