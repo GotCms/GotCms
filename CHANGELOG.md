@@ -8,6 +8,7 @@
 - Adding coveralls ([https://github.com/PierreRambaud/GotCms/issues/81](https://github.com/PierreRambaud/GotCms/issues/81))
 - Replace Gc\Registry by Service Manager ([https://github.com/PierreRambaud/GotCms/issues/78](https://github.com/PierreRambaud/GotCms/issues/78))
 - Update to Zend Framework 2.2.1 ([https://github.com/PierreRambaud/GotCms/issues/83](https://github.com/PierreRambaud/GotCms/issues/83))
+- Automatically open the treeview ([https://github.com/PierreRambaud/GotCms/issues/84](https://github.com/PierreRambaud/GotCms/issues/84))
 
 ##0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/PierreRambaud/GotCms/issues/55](https://github.com/PierreRambaud/GotCms/issues/55))

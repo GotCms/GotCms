@@ -420,10 +420,16 @@ var Gc = (function($)
 
         initDocumentMenu: function($document_id, $update_document_url)
         {
-            var $this = this;
+            var $this = this,
+            initialOpen = $('#document_' + $document_id).closest('li').prop('id');
+
+            if (initialOpen === undefined) {
+                initialOpen = 'documents';
+            }
+
             $('#browser').jstree({
                 'plugins' : ['themes','html_data'],
-                'core' : { 'initially_open' : [ $('#document_' + $document_id).parent().parent('li').prop('id') ] }
+                'core' : { 'initially_open' : [ initialOpen ] }
             }).bind('refresh.jstree', function() {
                 $this.sortableMenu($update_document_url);
             }).bind('loaded.jstree', function() {
