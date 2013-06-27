@@ -25,6 +25,8 @@
  * @link       http://www.got-cms.com
  */
 
+use Gc\View\Helper;
+
 return array(
     'controllers' => array(
         'invokables' => array(
@@ -66,16 +68,30 @@ return array(
         ),
     ),
     'view_helpers' => array(
+        'factories' => array(
+            'cdn'               => function ($pm) {
+                return new Helper\Cdn($pm->getServiceLocator()->get('request'));
+            },
+            'cdnBackend'               => function ($pm) {
+                $serviceLocator = $pm->getServiceLocator();
+                $configuration = $serviceLocator->get('Config');
+                return new Helper\CdnBackend($serviceLocator->get('request'), isset($configuration['db']));
+            },
+            'script'               => function ($pm) {
+                $serviceLocator = $pm->getServiceLocator();
+                $request       = $serviceLocator->get('Request');
+                $response      = $serviceLocator->get('Response');
+                $pluginManager = $serviceLocator->get('ControllerPluginManager');
+                return new Helper\CdnBackend($request, $response, $pluginManager);
+            },
+        ),
         'invokables' => array(
-            'cdn'               => 'Gc\View\Helper\Cdn',
-            'cdnBackend'        => 'Gc\View\Helper\CdnBackend',
             'documents'         => 'Gc\View\Helper\Documents',
             'document'          => 'Gc\View\Helper\Document',
             'formCheckbox'      => 'Gc\View\Helper\FormCheckbox',
             'formMultiCheckbox' => 'Gc\View\Helper\FormMultiCheckbox',
             'moduleUrl'         => 'Gc\View\Helper\ModuleUrl',
             'partial'           => 'Gc\View\Helper\Partial',
-            'script'            => 'Gc\View\Helper\Script',
             'tools'             => 'Gc\View\Helper\Tools',
             'modulePlugin'      => 'Gc\View\Helper\ModulePlugin',
         ),

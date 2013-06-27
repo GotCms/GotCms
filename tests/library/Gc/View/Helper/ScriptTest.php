@@ -28,6 +28,7 @@ namespace Gc\View\Helper;
 
 use Gc\Script\Model as ScriptModel;
 use Gc\Document\Model as DocumentModel;
+use Gc\Registry;
 use Zend\View\Renderer\PhpRenderer as View;
 use Zend\View\Model\ViewModel;
 
@@ -58,6 +59,8 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
+     * @covers Gc\View\Helper\Script
+     *
      * @return void
      */
     protected function setUp()
@@ -71,7 +74,12 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->script->save();
-        $this->object = new Script;
+
+        $application   = Registry::get('Application');
+        $request       = $application->getRequest();
+        $response      = $application->getResponse();
+        $pluginManager = $application->getServiceManager()->get('ControllerPluginManager');
+        $this->object = new Script($request, $response, $pluginManager);
     }
 
     /**

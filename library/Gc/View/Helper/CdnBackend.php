@@ -29,7 +29,7 @@ namespace Gc\View\Helper;
 
 use Gc\Core\Config as CoreConfig;
 use Zend\View\Helper\AbstractHelper;
-use Gc\Registry;
+use Zend\Http\PhpEnvironment\Request;
 
 /**
  * Generate url with specific base path for cdn backend stored in database.
@@ -49,6 +49,32 @@ class CdnBackend extends AbstractHelper
     protected $basePath = null;
 
     /**
+     * Request
+     *
+     * @var Request
+     */
+    protected $request = null;
+
+    /**
+     * If database is active
+     *
+     * @var boolean
+     */
+    protected $databaseActive = null;
+
+    /**
+     * Constructor
+     *
+     * @param Request $request Http request
+     */
+    public function __construct(Request $request, $databaseActive)
+    {
+        $this->request        = $request;
+        $this->databaseActive = (bool) $databaseActive;
+    }
+
+
+    /**
      * Generates an url with the given path.
      *
      * @param string $path Path
@@ -59,8 +85,8 @@ class CdnBackend extends AbstractHelper
     {
         if ($this->basePath === null) {
             $basePath = '';
-            if (Registry::isRegistered('Db')) {
-                $scheme = Registry::get('Application')->getRequest()->getUri()->getScheme();
+            if ($this->databaseActive) {
+                $scheme = $this->request->getUri()->getScheme();
                 if (CoreConfig::getValue('force_backend_ssl') or $scheme === 'https') {
                     $basePath = CoreConfig::getValue('secure_cdn_base_path');
                 } else {
