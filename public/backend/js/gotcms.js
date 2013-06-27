@@ -421,7 +421,16 @@ var Gc = (function($)
         initDocumentMenu: function($document_id, $update_document_url)
         {
             var $this = this,
-            initialOpen = $('#document_' + $document_id).closest('li').prop('id');
+            initialDocument = $('#document_' + $document_id).closest('li'),
+            initialOpen = undefined;
+
+            if (initialDocument.length > 0) {
+                if (initialDocument.children('ul').length > 0) {
+                    initialOpen = initialDocument.prop('id');
+                } else {
+                    initialOpen = initialDocument.parent().closest('li').prop('id');
+                }
+            }
 
             if (initialOpen === undefined) {
                 initialOpen = 'documents';
