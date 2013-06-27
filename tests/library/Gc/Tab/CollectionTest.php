@@ -170,7 +170,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection::load
+     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -182,7 +182,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection::getTabs
+     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -195,7 +195,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection::getTabs
+     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -207,7 +207,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection::getImportableTabs
+     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -219,7 +219,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection::setTabs
+     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -242,7 +242,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection::addTab
+     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -263,7 +263,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection::save
+     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -286,7 +286,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection::delete
+     * @covers Gc\Tab\Collection
      *
      * @return void
      */

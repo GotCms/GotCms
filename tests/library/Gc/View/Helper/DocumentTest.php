@@ -67,7 +67,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Document::__invoke
+     * @covers Gc\View\Helper\Document
      *
      * @return void
      */
@@ -79,7 +79,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Document::__invoke
+     * @covers Gc\View\Helper\Document
      *
      * @return void
      */

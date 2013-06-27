@@ -79,7 +79,7 @@ class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\FormMultiCheckbox::renderOptions
+     * @covers Gc\View\Helper\FormMultiCheckbox
      *
      * @return void
      */
@@ -99,7 +99,7 @@ class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\FormMultiCheckbox::renderOptions
+     * @covers Gc\View\Helper\FormMultiCheckbox
      *
      * @return void
      */

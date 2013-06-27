@@ -48,7 +48,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::__construct
+     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */
@@ -88,7 +88,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::getConfig
+     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */
@@ -100,7 +100,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::setConfig
+     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::getRequest
+     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */
@@ -125,7 +125,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::getDatatype
+     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */
@@ -137,7 +137,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::render
+     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */
@@ -150,7 +150,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::addPath
+     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */
@@ -162,7 +162,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor::getHelper
+     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */

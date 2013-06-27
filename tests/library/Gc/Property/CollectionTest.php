@@ -215,7 +215,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Collection::load
+     * @covers Gc\Property\Collection
      *
      * @return void
      */
@@ -227,7 +227,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Collection::getProperties
+     * @covers Gc\Property\Collection
      *
      * @return void
      */
@@ -260,7 +260,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Collection::setProperties
+     * @covers Gc\Property\Collection
      *
      * @return void
      */
@@ -275,7 +275,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Collection::save
+     * @covers Gc\Property\Collection
      *
      * @return void
      */
@@ -288,7 +288,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Collection::save
+     * @covers Gc\Property\Collection
      *
      * @return void
      */
@@ -308,7 +308,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Collection::delete
+     * @covers Gc\Property\Collection
      *
      * @return void
      */

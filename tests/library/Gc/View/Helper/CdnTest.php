@@ -50,6 +50,8 @@ class CdnTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
+     * @covers Gc\View\Helper\Script
+     *
      * @return void
      */
     protected function setUp()
@@ -71,7 +73,7 @@ class CdnTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Cdn::__invoke
+     * @covers Gc\View\Helper\Cdn
      *
      * @return void
      */
@@ -85,7 +87,7 @@ class CdnTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Cdn::__invoke
+     * @covers Gc\View\Helper\Cdn
      *
      * @return void
      */

@@ -46,8 +46,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Event\StaticEventManager::setInstance
-     * @covers Gc\Event\StaticEventManager::__construct
+     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -71,7 +70,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager::getInstance
+     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -85,7 +84,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager::setInstance
+     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -98,7 +97,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager::hasInstance
+     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -110,7 +109,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager::resetInstance
+     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -123,7 +122,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager::getEvent
+     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -135,7 +134,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager::getEvent
+     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -156,7 +155,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager::trigger
+     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -176,7 +175,7 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager::trigger
+     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */

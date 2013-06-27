@@ -72,11 +72,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::init
-     * @covers Development\Form\DocumentType::getInfos
-     * @covers Development\Form\DocumentType::getProperties
-     * @covers Development\Form\DocumentType::getTabs
-     * @covers Development\Form\DocumentType::getViews
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -134,7 +130,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::addProperty
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -159,7 +155,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::addProperty
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -182,7 +178,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::addProperty
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -194,7 +190,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::addTab
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -217,7 +213,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::addTab
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -238,7 +234,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::addTab
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -250,7 +246,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::setValues
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -270,7 +266,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::setValues
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -307,7 +303,7 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType::setValues
+     * @covers Development\Form\DocumentType
      *
      * @return void
      */

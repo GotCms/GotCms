@@ -64,8 +64,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::setParams
-     * @covers Gc\Module\AbstractPlugin::getParam
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -78,8 +77,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::setParam
-     * @covers Gc\Module\AbstractPlugin::getParam
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -92,8 +90,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::getParam
-     * @covers Gc\Module\AbstractPlugin::setParam
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -107,8 +104,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::render
-     * @covers Gc\Module\AbstractPlugin::addPath
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -120,7 +116,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::addPath
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -132,7 +128,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::getRequest
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -144,7 +140,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::getResponse
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -156,7 +152,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::plugin
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -168,7 +164,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::__call
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -180,7 +176,7 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin::__call
+     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */

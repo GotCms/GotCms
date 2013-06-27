@@ -181,7 +181,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Observer::init
+     * @covers Modules\Sitemap\Observer
      *
      * @return void
      */
@@ -193,7 +193,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Observer::addElement
+     * @covers Modules\Sitemap\Observer
      *
      * @return void
      */
@@ -209,7 +209,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Observer::removeElement
+     * @covers Modules\Sitemap\Observer
      *
      * @return void
      */

@@ -65,7 +65,7 @@ class ViewTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\View::init
+     * @covers Development\Form\View
      *
      * @return void
      */

@@ -88,7 +88,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\ImageCropper\PrevalueEditor::save
+     * @covers Datatypes\ImageCropper\PrevalueEditor
      *
      * @return void
      */
@@ -128,7 +128,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\ImageCropper\PrevalueEditor::load
+     * @covers Datatypes\ImageCropper\PrevalueEditor
      *
      * @return void
      */

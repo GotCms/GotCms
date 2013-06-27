@@ -83,8 +83,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Collection::init
-     * @covers Gc\Module\Collection::setModules
+     * @covers Gc\Module\Collection
      *
      * @return void
      */
@@ -96,7 +95,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Collection::getSelect
+     * @covers Gc\Module\Collection
      *
      * @return void
      */

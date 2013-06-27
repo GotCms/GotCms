@@ -69,9 +69,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Module::getAutoloaderConfig
-     * @covers Gc\Mvc\Module::getDir
-     * @covers Gc\Mvc\Module::getNamespace
+     * @covers Gc\Mvc\Module
      *
      * @return void
      */
@@ -83,7 +81,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Module::getConfig
+     * @covers Gc\Mvc\Module
      *
      * @return void
      */

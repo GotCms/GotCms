@@ -55,9 +55,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::indexAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -83,9 +81,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::indexAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -117,9 +113,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::indexAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -151,9 +145,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::licenseAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -179,9 +171,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::licenseAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -213,9 +203,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::licenseAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -247,9 +235,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::checkConfigAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -275,9 +261,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::checkConfigAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -308,9 +292,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::databaseAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -336,9 +318,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::databaseAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -374,9 +354,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::databaseAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -412,9 +390,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::databaseAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -445,9 +421,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::configurationAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -480,9 +454,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::configurationAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -528,9 +500,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::configurationAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -568,9 +538,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::completeAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -595,9 +563,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::completeAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -623,9 +589,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::completeAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -658,9 +622,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::init
-     * @covers Application\Controller\InstallController::checkInstall
-     * @covers Application\Controller\InstallController::completeAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -696,7 +658,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::completeAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -748,7 +710,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::completeAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -812,7 +774,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::completeAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -865,7 +827,7 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController::completeAction
+     * @covers Application\Controller\InstallController
      *
      * @return void
      */

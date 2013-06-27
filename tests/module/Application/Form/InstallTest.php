@@ -65,7 +65,7 @@ class InstallTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Form\Install::init
+     * @covers Application\Form\Install
      *
      * @return void
      */
@@ -77,7 +77,7 @@ class InstallTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Form\Install::lang
+     * @covers Application\Form\Install
      *
      * @return void
      */
@@ -89,7 +89,7 @@ class InstallTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Form\Install::license
+     * @covers Application\Form\Install
      *
      * @return void
      */
@@ -101,7 +101,7 @@ class InstallTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Form\Install::database
+     * @covers Application\Form\Install
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class InstallTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Form\Install::configuration
+     * @covers Application\Form\Install
      *
      * @return void
      */

@@ -99,7 +99,7 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModuleUrl::__invoke
+     * @covers Gc\View\Helper\ModuleUrl
      *
      * @return void
      */
@@ -112,7 +112,7 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModuleUrl::__invoke
+     * @covers Gc\View\Helper\ModuleUrl
      *
      * @return void
      */
@@ -124,7 +124,7 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModuleUrl::__invoke
+     * @covers Gc\View\Helper\ModuleUrl
      *
      * @return void
      */

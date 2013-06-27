@@ -269,7 +269,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\ImageCropper\Editor::save
+     * @covers Datatypes\ImageCropper\Editor
      *
      * @return void
      */
@@ -293,7 +293,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\ImageCropper\Editor::save
+     * @covers Datatypes\ImageCropper\Editor
      *
      * @return void
      */
@@ -318,7 +318,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\ImageCropper\Editor::save
+     * @covers Datatypes\ImageCropper\Editor
      *
      * @return void
      */
@@ -361,7 +361,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\ImageCropper\Editor::load
+     * @covers Datatypes\ImageCropper\Editor
      *
      * @return void
      */

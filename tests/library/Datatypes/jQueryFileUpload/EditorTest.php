@@ -244,7 +244,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\jQueryFileUpload\Editor::save
+     * @covers Datatypes\jQueryFileUpload\Editor
      *
      * @return void
      */
@@ -286,8 +286,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\jQueryFileUpload\Editor::load
-     * @covers Datatypes\jQueryFileUpload\Editor::initScript
+     * @covers Datatypes\jQueryFileUpload\Editor
      *
      * @return void
      */

@@ -46,7 +46,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Media\Info::init
+     * @covers Gc\Media\Info
      *
      * @return void
      */
@@ -69,7 +69,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Info::fromFile
+     * @covers Gc\Media\Info
      *
      * @return void
      */
@@ -83,7 +83,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Info::fromFile
+     * @covers Gc\Media\Info
      *
      * @return void
      */
@@ -95,7 +95,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Info::render
+     * @covers Gc\Media\Info
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class InfoTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Info::render
+     * @covers Gc\Media\Info
      *
      * @return void
      */

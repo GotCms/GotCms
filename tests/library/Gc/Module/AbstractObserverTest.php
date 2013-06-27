@@ -70,7 +70,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractObserver::events
+     * @covers Gc\Module\AbstractObserver
      *
      * @return void
      */
@@ -82,7 +82,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractObserver::getAdapter
+     * @covers Gc\Module\AbstractObserver
      *
      * @return void
      */
@@ -95,7 +95,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractObserver::getDriverName
+     * @covers Gc\Module\AbstractObserver
      *
      * @return void
      */
@@ -109,7 +109,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractObserver::render
+     * @covers Gc\Module\AbstractObserver
      *
      * @return void
      */
@@ -121,7 +121,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractObserver::addPath
+     * @covers Gc\Module\AbstractObserver
      *
      * @return void
      */

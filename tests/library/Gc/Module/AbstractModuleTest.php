@@ -70,7 +70,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractModule::getAdapter
+     * @covers Gc\Module\AbstractModule
      *
      * @return void
      */
@@ -83,7 +83,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractModule::getDriverName
+     * @covers Gc\Module\AbstractModule
      *
      * @return void
      */

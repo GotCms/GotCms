@@ -88,7 +88,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Boolean\PrevalueEditor::save
+     * @covers Datatypes\Boolean\PrevalueEditor
      *
      * @return void
      */
@@ -100,7 +100,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Boolean\PrevalueEditor::load
+     * @covers Datatypes\Boolean\PrevalueEditor
      *
      * @return void
      */

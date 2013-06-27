@@ -153,8 +153,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Collection::init
-     * @covers Gc\DocumentType\Collection::setDocumentTypes
+     * @covers Gc\DocumentType\Collection
      *
      * @return void
      */
@@ -167,7 +166,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Collection::getSelect
+     * @covers Gc\DocumentType\Collection
      *
      * @return void
      */

@@ -100,8 +100,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Session\SaveHandler\DbTableGateway::read
-     * @covers Gc\Session\SaveHandler\DbTableGateway::write
+     * @covers Gc\Session\SaveHandler\DbTableGateway
      *
      * @return void
      */
@@ -123,8 +122,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Session\SaveHandler\DbTableGateway::read
-     * @covers Gc\Session\SaveHandler\DbTableGateway::write
+     * @covers Gc\Session\SaveHandler\DbTableGateway
      *
      * @return void
      */
@@ -145,7 +143,7 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Session\SaveHandler\DbTableGateway::write
+     * @covers Gc\Session\SaveHandler\DbTableGateway
      *
      * @return void
      */

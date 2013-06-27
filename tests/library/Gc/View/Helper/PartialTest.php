@@ -87,8 +87,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Partial::__invoke
-     * @covers Gc\View\Helper\Partial::cloneView
+     * @covers Gc\View\Helper\Partial
      *
      * @return void
      */

@@ -69,7 +69,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model::save
+     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -88,7 +88,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model::save
+     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model::save
+     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -125,8 +125,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model::delete
-     * @covers Gc\User\Role\Model::save
+     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -142,7 +141,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model::delete
+     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -155,7 +154,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model::fromArray
+     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -167,7 +166,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model::fromId
+     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -179,7 +178,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model::fromId
+     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -191,7 +190,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model::getUserPermissions
+     * @covers Gc\User\Role\Model
      *
      * @return void
      */

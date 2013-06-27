@@ -65,7 +65,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\User::init
+     * @covers Config\Form\User
      *
      * @return void
      */
@@ -77,7 +77,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\User::passwordRequired
+     * @covers Config\Form\User
      *
      * @return void
      */

@@ -80,7 +80,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Collection::getScripts
+     * @covers Gc\Script\Collection
      *
      * @return void
      */

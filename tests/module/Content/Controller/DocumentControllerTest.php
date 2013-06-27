@@ -192,9 +192,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::checkUrlKey
-     * @covers Content\Controller\DocumentController::createAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -212,9 +210,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::checkUrlKey
-     * @covers Content\Controller\DocumentController::createAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -240,9 +236,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::checkUrlKey
-     * @covers Content\Controller\DocumentController::createAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -265,9 +259,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::checkUrlKey
-     * @covers Content\Controller\DocumentController::createAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -301,8 +293,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::deleteAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -320,8 +311,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::deleteAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -339,10 +329,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::loadTabs
-     * @covers Content\Controller\DocumentController::loadProperties
-     * @covers Content\Controller\DocumentController::editAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -360,10 +347,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::loadTabs
-     * @covers Content\Controller\DocumentController::loadProperties
-     * @covers Content\Controller\DocumentController::editAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -391,10 +375,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::loadTabs
-     * @covers Content\Controller\DocumentController::loadProperties
-     * @covers Content\Controller\DocumentController::editAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -417,10 +398,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::loadTabs
-     * @covers Content\Controller\DocumentController::loadProperties
-     * @covers Content\Controller\DocumentController::editAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -438,8 +416,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::copyAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -463,8 +440,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::copyAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -482,8 +458,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::cutAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -507,8 +482,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::cutAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -526,8 +500,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::pasteAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -545,8 +518,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::pasteAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -564,8 +536,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::pasteAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -589,8 +560,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::pasteAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -629,8 +599,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::pasteAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -669,8 +638,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::pasteAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -688,8 +656,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::refreshTreeviewAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -707,8 +674,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::refreshTreeviewAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -726,8 +692,7 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController::init
-     * @covers Content\Controller\DocumentController::sortOrderAction
+     * @covers Content\Controller\DocumentController
      *
      * @return void
      */

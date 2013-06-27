@@ -213,7 +213,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\ImageCropper\Datatype::getEditor
+     * @covers Datatypes\ImageCropper\Datatype
      *
      * @return void
      */
@@ -225,7 +225,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\ImageCropper\Datatype::getPrevalueEditor
+     * @covers Datatypes\ImageCropper\Datatype
      *
      * @return void
      */

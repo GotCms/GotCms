@@ -86,7 +86,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::setPrevalueValue
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -101,7 +101,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::fromArray
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -123,7 +123,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::fromId
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -137,7 +137,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::save
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -160,7 +160,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::save
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -180,7 +180,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::delete
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -192,7 +192,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::delete
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -205,7 +205,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::delete
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -225,7 +225,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::savePrevalueEditor
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -237,7 +237,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::saveEditor
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -341,7 +341,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::loadPrevalueEditor
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -356,7 +356,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::loadEditor
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -375,7 +375,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model::loadDatatype
+     * @covers Gc\Datatype\Model
      *
      * @return void
      */

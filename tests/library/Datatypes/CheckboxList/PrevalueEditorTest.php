@@ -88,7 +88,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\CheckboxList\PrevalueEditor::save
+     * @covers Datatypes\CheckboxList\PrevalueEditor
      *
      * @return void
      */
@@ -101,7 +101,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\CheckboxList\PrevalueEditor::load
+     * @covers Datatypes\CheckboxList\PrevalueEditor
      *
      * @return void
      */

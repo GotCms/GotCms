@@ -246,7 +246,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Value\Model::load
+     * @covers Gc\Property\Value\Model
      *
      * @return void
      */
@@ -261,7 +261,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Value\Model::fromArray
+     * @covers Gc\Property\Value\Model
      *
      * @return void
      */
@@ -273,7 +273,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Value\Model::fromId
+     * @covers Gc\Property\Value\Model
      *
      * @return void
      */
@@ -285,7 +285,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Value\Model::fromId
+     * @covers Gc\Property\Value\Model
      *
      * @return void
      */
@@ -297,7 +297,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Value\Model::save
+     * @covers Gc\Property\Value\Model
      *
      * @return void
      */
@@ -309,7 +309,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Value\Model::save
+     * @covers Gc\Property\Value\Model
      *
      * @return void
      */

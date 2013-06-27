@@ -51,8 +51,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\TranslationController::createAction
-     * @covers Content\Controller\TranslationController::init
+     * @covers Content\Controller\TranslationController
      *
      * @return void
      */
@@ -70,8 +69,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\TranslationController::createAction
-     * @covers Content\Controller\TranslationController::init
+     * @covers Content\Controller\TranslationController
      *
      * @return void
      */
@@ -103,8 +101,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\TranslationController::createAction
-     * @covers Content\Controller\TranslationController::init
+     * @covers Content\Controller\TranslationController
      *
      * @return void
      */
@@ -127,8 +124,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\TranslationController::indexAction
-     * @covers Content\Controller\TranslationController::init
+     * @covers Content\Controller\TranslationController
      *
      * @return void
      */
@@ -146,8 +142,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\TranslationController::indexAction
-     * @covers Content\Controller\TranslationController::init
+     * @covers Content\Controller\TranslationController
      *
      * @return void
      */
@@ -172,9 +167,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\TranslationController::indexAction
-     * @covers Content\Controller\TranslationController::init
-     * @covers Content\Controller\TranslationController::generateCache
+     * @covers Content\Controller\TranslationController
      *
      * @return void
      */

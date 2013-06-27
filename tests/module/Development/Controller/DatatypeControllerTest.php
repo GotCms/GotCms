@@ -52,7 +52,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::indexAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -70,7 +70,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::createAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -88,7 +88,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::createAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -110,7 +110,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::createAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -135,7 +135,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::editAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -153,7 +153,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::editAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -181,7 +181,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::editAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -213,7 +213,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::editAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -248,7 +248,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::deleteAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -276,7 +276,7 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController::deleteAction
+     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */

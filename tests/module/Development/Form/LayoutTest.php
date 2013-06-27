@@ -65,7 +65,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\Layout::init
+     * @covers Development\Form\Layout
      *
      * @return void
      */

@@ -88,7 +88,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\jQueryFileUpload\PrevalueEditor::save
+     * @covers Datatypes\jQueryFileUpload\PrevalueEditor
      *
      * @return void
      */
@@ -100,7 +100,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\jQueryFileUpload\PrevalueEditor::load
+     * @covers Datatypes\jQueryFileUpload\PrevalueEditor
      *
      * @return void
      */

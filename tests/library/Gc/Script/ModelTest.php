@@ -69,7 +69,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::init
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -82,7 +82,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::fromArray
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -103,7 +103,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::fromId
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -126,7 +126,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::fromId
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -139,7 +139,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::fromIdentifier
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -161,7 +161,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::fromIdentifier
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -174,7 +174,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::save
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -197,7 +197,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::save
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -218,7 +218,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::delete
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -239,7 +239,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::delete
+     * @covers Gc\Script\Model
      *
      * @return void
      */
@@ -252,7 +252,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Script\Model::delete
+     * @covers Gc\Script\Model
      *
      * @return void
      */

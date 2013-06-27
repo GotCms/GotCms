@@ -87,8 +87,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Collection::init
-     * @covers Gc\Datatype\Collection::setDatatypes
+     * @covers Gc\Datatype\Collection
      *
      * @return void
      */
@@ -101,7 +100,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Collection::getDatatypes
+     * @covers Gc\Datatype\Collection
      *
      * @return void
      */
@@ -113,7 +112,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Collection::getSelect
+     * @covers Gc\Datatype\Collection
      *
      * @return void
      */

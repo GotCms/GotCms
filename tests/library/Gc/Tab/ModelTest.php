@@ -80,7 +80,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Tab\Model::save
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -165,7 +165,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::load
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -180,7 +180,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::load
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -192,7 +192,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::save
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -204,7 +204,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::save
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -223,7 +223,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::delete
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -238,7 +238,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::delete
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -258,7 +258,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::fromArray
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -270,7 +270,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::fromId
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -282,7 +282,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::fromId
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -294,7 +294,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::getDocumentType
+     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -306,7 +306,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model::getProperties
+     * @covers Gc\Tab\Model
      *
      * @return void
      */

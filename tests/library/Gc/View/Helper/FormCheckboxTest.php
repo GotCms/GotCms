@@ -83,7 +83,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\FormCheckbox::render
+     * @covers Gc\View\Helper\FormCheckbox
      *
      * @return void
      */
@@ -98,7 +98,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\FormCheckbox::render
+     * @covers Gc\View\Helper\FormCheckbox
      *
      * @return void
      */
@@ -111,7 +111,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\FormCheckbox::render
+     * @covers Gc\View\Helper\FormCheckbox
      *
      * @return void
      */
@@ -124,7 +124,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\FormCheckbox::render
+     * @covers Gc\View\Helper\FormCheckbox
      *
      * @return void
      */
@@ -138,7 +138,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\FormCheckbox::render
+     * @covers Gc\View\Helper\FormCheckbox
      *
      * @return void
      */
@@ -155,7 +155,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\FormCheckbox::render
+     * @covers Gc\View\Helper\FormCheckbox
      *
      * @return void
      */

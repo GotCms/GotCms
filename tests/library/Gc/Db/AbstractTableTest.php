@@ -50,7 +50,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Db\AbstractTable::__construct
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -92,7 +92,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::__call
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -104,7 +104,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::fetchRow
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -117,7 +117,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::fetchRow
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -132,7 +132,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::fetchAll
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -145,7 +145,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::fetchAll
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -160,7 +160,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::fetchOne
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -178,8 +178,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::fetchOne
-     * @covers Gc\Db\AbstractTable::__call
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -192,8 +191,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::fetchOne
-     * @covers Gc\Db\AbstractTable::__call
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -206,7 +204,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::execute
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -221,7 +219,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::getLastInsertId
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -233,7 +231,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::events
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -245,7 +243,7 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable::getDriverName
+     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */

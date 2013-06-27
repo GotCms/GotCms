@@ -213,7 +213,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\RadioButtonList\Datatype::getEditor
+     * @covers Datatypes\RadioButtonList\Datatype
      *
      * @return void
      */
@@ -225,7 +225,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\RadioButtonList\Datatype::getPrevalueEditor
+     * @covers Datatypes\RadioButtonList\Datatype
      *
      * @return void
      */

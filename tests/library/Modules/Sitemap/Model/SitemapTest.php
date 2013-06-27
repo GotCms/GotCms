@@ -180,7 +180,7 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Model\Sitemap::init
+     * @covers Modules\Sitemap\Model\Sitemap
      *
      * @return void
      */
@@ -192,8 +192,7 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Model\Sitemap::generate
-     * @covers Modules\Sitemap\Model\Sitemap::generateXml
+     * @covers Modules\Sitemap\Model\Sitemap
      *
      * @return void
      */
@@ -205,8 +204,7 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Model\Sitemap::generate
-     * @covers Modules\Sitemap\Model\Sitemap::generateXml
+     * @covers Modules\Sitemap\Model\Sitemap
      *
      * @return void
      */

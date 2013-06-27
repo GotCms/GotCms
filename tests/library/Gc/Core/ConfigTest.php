@@ -67,7 +67,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config::getInstance
+     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -79,7 +79,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config::getValue
+     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -93,7 +93,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config::getValue
+     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config::getValues
+     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -116,7 +116,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config::getValues
+     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -135,7 +135,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config::setValue
+     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -147,7 +147,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config::setValue
+     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -161,7 +161,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config::setValue
+     * @covers Gc\Core\Config
      *
      * @return void
      */

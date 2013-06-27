@@ -31,7 +31,6 @@ use Zend\View\Helper\AbstractHelper;
 use Gc\Exception;
 use Gc\Module\Model as ModuleModel;
 use Gc\Module\AbstractPlugin;
-use Gc\Registry;
 
 /**
  * Execute plugin module

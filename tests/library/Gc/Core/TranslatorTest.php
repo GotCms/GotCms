@@ -67,7 +67,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator::getValue
+     * @covers Gc\Core\Translator
      *
      * @return void
      */
@@ -88,7 +88,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator::getValues
+     * @covers Gc\Core\Translator
      *
      * @return void
      */
@@ -101,7 +101,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator::getValues
+     * @covers Gc\Core\Translator
      *
      * @return void
      */
@@ -114,7 +114,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator::setValue
+     * @covers Gc\Core\Translator
      *
      * @return void
      */
@@ -138,7 +138,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator::setValue
+     * @covers Gc\Core\Translator
      *
      * @return void
      */
@@ -171,7 +171,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator::setValue
+     * @covers Gc\Core\Translator
      *
      * @return void
      */
@@ -203,7 +203,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator::setValue
+     * @covers Gc\Core\Translator
      *
      * @return void
      */

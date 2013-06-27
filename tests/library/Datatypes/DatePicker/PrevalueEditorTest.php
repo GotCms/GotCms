@@ -88,7 +88,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\DatePicker\PrevalueEditor::save
+     * @covers Datatypes\DatePicker\PrevalueEditor
      *
      * @return void
      */
@@ -100,7 +100,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\DatePicker\PrevalueEditor::load
+     * @covers Datatypes\DatePicker\PrevalueEditor
      *
      * @return void
      */

@@ -65,7 +65,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\Config::init
+     * @covers Config\Form\Config
      *
      * @return void
      */
@@ -77,7 +77,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\Config::initGeneral
+     * @covers Config\Form\Config
      *
      * @return void
      */
@@ -89,7 +89,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\Config::initSystem
+     * @covers Config\Form\Config
      *
      * @return void
      */
@@ -101,7 +101,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\Config::initServer
+     * @covers Config\Form\Config
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\Config::setValues
+     * @covers Config\Form\Config
      *
      * @return void
      */

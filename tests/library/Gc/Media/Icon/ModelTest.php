@@ -69,7 +69,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model::fromArray
+     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -81,7 +81,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model::fromId
+     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -93,7 +93,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model::fromId
+     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model::save
+     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -125,7 +125,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model::save
+     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -138,7 +138,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model::delete
+     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -158,7 +158,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model::delete
+     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -170,7 +170,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model::delete
+     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */

@@ -67,7 +67,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor::getVisitorId
+     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -86,7 +86,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor::getVisitorId
+     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor::getUrlId
+     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -121,7 +121,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor::getTotalVisitors
+     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -133,7 +133,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor::getTotalPageViews
+     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -145,10 +145,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor::getNbPagesViews
-     * @covers Gc\User\Visitor::sortData
-     * @covers Gc\User\Visitor::checkSort
-     * @covers Gc\User\Visitor::groupByDate
+     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -164,10 +161,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor::getNbVisitors
-     * @covers Gc\User\Visitor::sortData
-     * @covers Gc\User\Visitor::checkSort
-     * @covers Gc\User\Visitor::groupByDate
+     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -183,10 +177,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor::getUrlsViews
-     * @covers Gc\User\Visitor::sortData
-     * @covers Gc\User\Visitor::checkSort
-     * @covers Gc\User\Visitor::groupByDate
+     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -202,10 +193,7 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor::getReferers
-     * @covers Gc\User\Visitor::sortData
-     * @covers Gc\User\Visitor::checkSort
-     * @covers Gc\User\Visitor::groupByDate
+     * @covers Gc\User\Visitor
      *
      * @return void
      */

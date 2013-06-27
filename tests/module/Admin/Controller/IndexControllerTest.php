@@ -52,7 +52,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Admin\Controller\IndexController::indexAction
+     * @covers Admin\Controller\IndexController
      *
      * @return void
      */
@@ -70,7 +70,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Admin\Controller\IndexController::saveDashboardAction
+     * @covers Admin\Controller\IndexController
      *
      * @return void
      */
@@ -92,7 +92,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Admin\Controller\IndexController::saveDashboardAction
+     * @covers Admin\Controller\IndexController
      *
      * @return void
      */
@@ -114,7 +114,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Admin\Controller\IndexController::saveDashboardAction
+     * @covers Admin\Controller\IndexController
      *
      * @return void
      */

@@ -84,11 +84,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module::onBootstrap
-     * @covers Application\Module::initDatabase
-     * @covers Application\Module::initSession
-     * @covers Application\Module::initTranslator
-     * @covers Application\Module::initObserverModules
+     * @covers Application\Module
      *
      * @return void
      */
@@ -110,7 +106,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module::prepareException
+     * @covers Application\Module
      *
      * @return void
      */
@@ -138,7 +134,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module::checkSsl
+     * @covers Application\Module
      *
      * @return void
      */
@@ -159,7 +155,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module::checkSsl
+     * @covers Application\Module
      *
      * @return void
      */
@@ -178,7 +174,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module::checkSsl
+     * @covers Application\Module
      *
      * @return void
      */
@@ -197,7 +193,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module::checkSsl
+     * @covers Application\Module
      *
      * @return void
      */
@@ -219,7 +215,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module::checkSsl
+     * @covers Application\Module
      *
      * @return void
      */

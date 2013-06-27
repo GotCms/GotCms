@@ -52,7 +52,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::indexAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -70,7 +70,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::createAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -88,7 +88,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::createAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::createAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -136,7 +136,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::deleteAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -162,7 +162,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::deleteAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -180,7 +180,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::editAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -208,7 +208,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::editAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -243,7 +243,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::editAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -276,7 +276,7 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController::editAction
+     * @covers Config\Controller\RoleController
      *
      * @return void
      */

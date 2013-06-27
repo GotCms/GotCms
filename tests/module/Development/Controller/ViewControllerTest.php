@@ -52,7 +52,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::indexAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -70,7 +70,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::createAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -88,7 +88,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::createAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -112,7 +112,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::createAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -140,7 +140,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::editAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -158,7 +158,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::editAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -186,7 +186,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::editAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -219,7 +219,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::editAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -255,7 +255,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::deleteAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -283,7 +283,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::deleteAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -301,7 +301,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::uploadAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -339,7 +339,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::uploadAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -397,7 +397,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::uploadAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -416,7 +416,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::uploadAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -434,7 +434,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::downloadAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -463,7 +463,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::downloadAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -491,7 +491,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::downloadAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */
@@ -509,7 +509,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\ViewController::downloadAction
+     * @covers Development\Controller\ViewController
      *
      * @return void
      */

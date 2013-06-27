@@ -66,7 +66,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Model\Database\Pgsql::export
+     * @covers Modules\Backup\Model\Database\Pgsql
      *
      * @return void
      */
@@ -87,7 +87,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Model\Database\Pgsql::export
+     * @covers Modules\Backup\Model\Database\Pgsql
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Model\Database\Pgsql::export
+     * @covers Modules\Backup\Model\Database\Pgsql
      *
      * @return void
      */

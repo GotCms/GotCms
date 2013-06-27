@@ -95,7 +95,7 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Component\TreeView::__construct
+     * @covers Gc\Component\TreeView
      *
      * @return void
      */
@@ -211,7 +211,7 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Component\TreeView::render
+     * @covers Gc\Component\TreeView
      *
      * @return void
      */

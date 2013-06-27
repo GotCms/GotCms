@@ -71,7 +71,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::load
+     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -93,7 +93,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::getPath
+     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::getDirectory
+     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -132,7 +132,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::getFileTransfer
+     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -144,7 +144,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::upload
+     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -160,8 +160,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::upload
-     * @covers Gc\Media\File::remove
+     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -187,7 +186,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::remove
+     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -199,7 +198,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::copyDirectory
+     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -214,7 +213,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::isWritable
+     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -227,7 +226,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File::isWritable
+     * @covers Gc\Media\File
      *
      * @return void
      */

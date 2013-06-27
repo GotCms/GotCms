@@ -67,7 +67,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Collection::init
+     * @covers Gc\User\Role\Collection
      *
      * @return void
      */
@@ -80,7 +80,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Collection::getRoles
+     * @covers Gc\User\Role\Collection
      *
      * @return void
      */

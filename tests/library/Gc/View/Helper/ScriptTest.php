@@ -98,7 +98,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script::__invoke
+     * @covers Gc\View\Helper\Script
      *
      * @return void
      */
@@ -114,7 +114,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script::getParam
+     * @covers Gc\View\Helper\Script
      *
      * @return void
      */
@@ -130,7 +130,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script::getDocument
+     * @covers Gc\View\Helper\Script
      *
      * @return void
      */
@@ -149,7 +149,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script::getRequest
+     * @covers Gc\View\Helper\Script
      *
      * @return void
      */
@@ -161,7 +161,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script::getResponse
+     * @covers Gc\View\Helper\Script
      *
      * @return void
      */
@@ -173,7 +173,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script::plugin
+     * @covers Gc\View\Helper\Script
      *
      * @return void
      */
@@ -185,7 +185,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script::__call
+     * @covers Gc\View\Helper\Script
      *
      * @return void
      */
@@ -197,7 +197,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script::__call
+     * @covers Gc\View\Helper\Script
      *
      * @return void
      */

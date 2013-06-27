@@ -67,8 +67,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Permission\Collection::init
-     * @covers Gc\User\Permission\Collection::getPermissions
+     * @covers Gc\User\Permission\Collection
      *
      * @return void
      */
@@ -81,7 +80,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Permission\Collection::getPermissions
+     * @covers Gc\User\Permission\Collection
      *
      * @return void
      */

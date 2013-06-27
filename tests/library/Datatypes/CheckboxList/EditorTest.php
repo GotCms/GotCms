@@ -216,7 +216,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\CheckboxList\Editor::save
+     * @covers Datatypes\CheckboxList\Editor
      *
      * @return void
      */
@@ -230,7 +230,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\CheckboxList\Editor::load
+     * @covers Datatypes\CheckboxList\Editor
      *
      * @return void
      */

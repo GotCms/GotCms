@@ -88,7 +88,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::authenticate
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -101,7 +101,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::authenticate
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::setEmail
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -125,7 +125,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::setEmail
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -137,7 +137,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::setPassword
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -151,7 +151,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::save
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -163,7 +163,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::save
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -183,7 +183,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::delete
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -196,7 +196,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::delete
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -208,7 +208,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::delete
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -228,7 +228,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::fromArray
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -251,7 +251,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::fromId
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -266,7 +266,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::fromId
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -278,7 +278,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::getRole
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -290,7 +290,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::sendForgotPasswordEmail
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -302,7 +302,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::sendForgotPasswordEmail
+     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -314,7 +314,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model::getName
+     * @covers Gc\User\Model
      *
      * @return void
      */

@@ -217,7 +217,7 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Plugin\CommentForm::init
+     * @covers Modules\Blog\Plugin\CommentForm
      *
      * @return void
      */
@@ -228,7 +228,7 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Plugin\CommentForm::__invoke
+     * @covers Modules\Blog\Plugin\CommentForm
      *
      * @return void
      */
@@ -240,8 +240,7 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Plugin\CommentForm::__invoke
-     * @covers Modules\Blog\Plugin\CommentForm::getForm
+     * @covers Modules\Blog\Plugin\CommentForm
      *
      * @return void
      */

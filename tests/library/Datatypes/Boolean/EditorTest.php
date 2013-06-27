@@ -216,7 +216,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Boolean\Editor::save
+     * @covers Datatypes\Boolean\Editor
      *
      * @return void
      */
@@ -230,7 +230,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Boolean\Editor::load
+     * @covers Datatypes\Boolean\Editor
      *
      * @return void
      */

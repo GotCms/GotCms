@@ -55,7 +55,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Registry::__construct
+     * @covers Gc\Registry
      *
      * @return void
      */
@@ -80,9 +80,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry::getInstance
-     * @covers Gc\Registry::init
-     * @covers Gc\Registry::unsetInstance
+     * @covers Gc\Registry
      *
      * @return void
      */
@@ -95,7 +93,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry::setInstance
+     * @covers Gc\Registry
      *
      * @return void
      */
@@ -109,7 +107,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry::setInstance
+     * @covers Gc\Registry
      *
      * @return void
      */
@@ -122,7 +120,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry::get
+     * @covers Gc\Registry
      *
      * @return void
      */
@@ -135,7 +133,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry::get
+     * @covers Gc\Registry
      *
      * @return void
      */
@@ -148,7 +146,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry::set
+     * @covers Gc\Registry
      *
      * @return void
      */
@@ -161,7 +159,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry::isRegistered
+     * @covers Gc\Registry
      *
      * @return void
      */
@@ -174,7 +172,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry::isRegistered
+     * @covers Gc\Registry
      *
      * @return void
      */
@@ -187,7 +185,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry::offsetExists
+     * @covers Gc\Registry
      *
      * @return void
      */

@@ -69,7 +69,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */
@@ -84,7 +84,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */
@@ -97,7 +97,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */
@@ -129,7 +129,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */
@@ -144,7 +144,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */
@@ -158,7 +158,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */
@@ -178,7 +178,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack::resolve
+     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */

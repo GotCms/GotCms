@@ -65,7 +65,7 @@ class TranslationTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Content\Form\Translation::init
+     * @covers Content\Form\Translation
      *
      * @return void
      */

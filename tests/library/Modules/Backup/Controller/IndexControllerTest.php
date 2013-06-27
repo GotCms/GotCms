@@ -84,7 +84,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Controller\IndexController::indexAction
+     * @covers Modules\Backup\Controller\IndexController
      *
      * @return void
      */
@@ -96,7 +96,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Controller\IndexController::downloadDatabaseAction
+     * @covers Modules\Backup\Controller\IndexController
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Controller\IndexController::downloadDatabaseAction
+     * @covers Modules\Backup\Controller\IndexController
      *
      * @return void
      */
@@ -130,7 +130,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Controller\IndexController::downloadFilesAction
+     * @covers Modules\Backup\Controller\IndexController
      *
      * @return void
      */

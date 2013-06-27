@@ -213,7 +213,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\jQueryFileUpload\Datatype::getEditor
+     * @covers Datatypes\jQueryFileUpload\Datatype
      *
      * @return void
      */
@@ -225,7 +225,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\jQueryFileUpload\Datatype::getPrevalueEditor
+     * @covers Datatypes\jQueryFileUpload\Datatype
      *
      * @return void
      */

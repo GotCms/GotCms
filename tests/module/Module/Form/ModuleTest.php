@@ -67,7 +67,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Module\Form\Module::init
+     * @covers Module\Form\Module
      *
      * @return void
      */

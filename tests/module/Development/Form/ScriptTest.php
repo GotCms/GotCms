@@ -65,7 +65,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\Script::init
+     * @covers Development\Form\Script
      *
      * @return void
      */

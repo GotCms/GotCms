@@ -247,7 +247,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Upload\Editor::save
+     * @covers Datatypes\Upload\Editor
      *
      * @return void
      */
@@ -284,7 +284,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Upload\Editor::save
+     * @covers Datatypes\Upload\Editor
      *
      * @return void
      */
@@ -310,7 +310,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Upload\Editor::save
+     * @covers Datatypes\Upload\Editor
      *
      * @return void
      */
@@ -347,7 +347,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Upload\Editor::load
+     * @covers Datatypes\Upload\Editor
      *
      * @return void
      */

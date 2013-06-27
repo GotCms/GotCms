@@ -53,7 +53,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController::indexAction
+     * @covers Module\Controller\IndexController
      *
      * @return void
      */
@@ -71,7 +71,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController::installAction
+     * @covers Module\Controller\IndexController
      *
      * @return void
      */
@@ -89,7 +89,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController::installAction
+     * @covers Module\Controller\IndexController
      *
      * @return void
      */
@@ -113,8 +113,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController::installAction
-     * @covers Module\Controller\IndexController::loadBootstrap
+     * @covers Module\Controller\IndexController
      *
      * @return void
      */
@@ -140,7 +139,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController::uninstallAction
+     * @covers Module\Controller\IndexController
      *
      * @return void
      */
@@ -160,8 +159,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController::uninstallAction
-     * @covers Module\Controller\IndexController::loadBootstrap
+     * @covers Module\Controller\IndexController
      *
      * @return void
      */
@@ -191,7 +189,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController::editAction
+     * @covers Module\Controller\IndexController
      *
      * @return void
      */

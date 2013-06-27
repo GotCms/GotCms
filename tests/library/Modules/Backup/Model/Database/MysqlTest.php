@@ -66,7 +66,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Model\Database\Mysql::export
+     * @covers Modules\Backup\Model\Database\Mysql
      *
      * @return void
      */
@@ -87,7 +87,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Model\Database\Mysql::export
+     * @covers Modules\Backup\Model\Database\Mysql
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Model\Database\Mysql::export
+     * @covers Modules\Backup\Model\Database\Mysql
      *
      * @return void
      */

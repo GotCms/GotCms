@@ -195,7 +195,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::init
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -209,7 +209,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getView
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -221,7 +221,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getDocumentType
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -233,7 +233,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::showInNav
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -246,7 +246,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::isPublished
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -259,7 +259,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::fromArray
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -272,7 +272,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::fromId
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -285,7 +285,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::fromId
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -298,7 +298,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::fromUrlKey
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -311,7 +311,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::fromUrlKey
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -324,7 +324,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::save
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -336,7 +336,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::save
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -362,7 +362,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::delete
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -374,7 +374,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::delete
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -387,7 +387,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::delete
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -407,7 +407,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getUrl
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -419,7 +419,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getName
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -431,7 +431,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getId
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -443,7 +443,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getParent
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -455,7 +455,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getChildren
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -467,7 +467,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getAvailableChildren
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -479,7 +479,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getProperty
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -492,7 +492,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getProperty
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -504,7 +504,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getIcon
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -515,7 +515,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getIcon
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -528,7 +528,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getIterableId
+     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -540,7 +540,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model::getEditUrl
+     * @covers Gc\Document\Model
      *
      * @return void
      */

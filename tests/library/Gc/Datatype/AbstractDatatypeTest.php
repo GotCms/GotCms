@@ -88,7 +88,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::getInfos
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -100,7 +100,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::load
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -113,7 +113,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::load
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -125,7 +125,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::getConfig
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -137,7 +137,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::getConfig
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -150,7 +150,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::setConfig
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -163,7 +163,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::getUploadUrl
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -175,7 +175,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::getHelper
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -187,7 +187,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::getProperty
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -199,7 +199,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::setProperty
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -212,7 +212,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::getName
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -224,7 +224,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::addPath
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -236,8 +236,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::addPath
-     * @covers Gc\Datatype\AbstractDatatype::render
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -250,7 +249,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype::getDocument
+     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */

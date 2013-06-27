@@ -213,7 +213,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\DatePicker\Datatype::getEditor
+     * @covers Datatypes\DatePicker\Datatype
      *
      * @return void
      */
@@ -225,7 +225,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\DatePicker\Datatype::getPrevalueEditor
+     * @covers Datatypes\DatePicker\Datatype
      *
      * @return void
      */

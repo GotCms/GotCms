@@ -216,7 +216,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Textarea\Editor::save
+     * @covers Datatypes\Textarea\Editor
      *
      * @return void
      */
@@ -230,7 +230,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Textarea\Editor::load
+     * @covers Datatypes\Textarea\Editor
      *
      * @return void
      */

@@ -50,7 +50,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Core\Object::__construct
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -73,7 +73,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::init
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -86,7 +86,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::setId
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -100,7 +100,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::addData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -113,9 +113,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::setData
-     * @covers Gc\Core\Object::__call
-     * @covers Gc\Core\Object::underscore
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -128,9 +126,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::setData
-     * @covers Gc\Core\Object::__call
-     * @covers Gc\Core\Object::underscore
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -143,9 +139,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::unsetData
-     * @covers Gc\Core\Object::__call
-     * @covers Gc\Core\Object::underscore
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -159,7 +153,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::unsetData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -173,9 +167,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getData
-     * @covers Gc\Core\Object::__call
-     * @covers Gc\Core\Object::underscore
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -188,7 +180,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::__call
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -201,7 +193,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -215,7 +207,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -228,7 +220,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -241,7 +233,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -256,7 +248,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -271,7 +263,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -283,7 +275,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -296,7 +288,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -311,9 +303,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::hasData
-     * @covers Gc\Core\Object::__call
-     * @covers Gc\Core\Object::underscore
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -327,7 +317,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::hasData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -339,8 +329,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::toArray
-     * @covers Gc\Core\Object::__toArray
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -353,8 +342,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::toArray
-     * @covers Gc\Core\Object::__toArray
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -367,7 +355,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::toXml
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -381,8 +369,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::toXml
-     * @covers Gc\Core\Object::__toXml
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -398,8 +385,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::toJson
-     * @covers Gc\Core\Object::__toJson
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -412,7 +398,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::toString
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -425,7 +411,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::toString
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -438,7 +424,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::offsetSet
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -451,7 +437,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::offsetExists
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -464,7 +450,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::offsetUnset
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -478,9 +464,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getOrigData
-     * @covers Gc\Core\Object::__call
-     * @covers Gc\Core\Object::underscore
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -493,7 +477,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::getOrigData
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -506,9 +490,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::hasDataChangedFor
-     * @covers Gc\Core\Object::__call
-     * @covers Gc\Core\Object::underscore
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -522,9 +504,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::setOrigData
-     * @covers Gc\Core\Object::__call
-     * @covers Gc\Core\Object::underscore
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -537,9 +517,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::setOrigData
-     * @covers Gc\Core\Object::__call
-     * @covers Gc\Core\Object::underscore
+     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -554,7 +532,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object::offsetGet
+     * @covers Gc\Core\Object
      *
      * @return void
      */

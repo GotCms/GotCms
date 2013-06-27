@@ -190,8 +190,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Model\Comment::getDocumentList
-     * @covers Modules\Blog\Model\Comment::add
+     * @covers Modules\Blog\Model\Comment
      *
      * @return void
      */
@@ -209,7 +208,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Model\Comment::getList
+     * @covers Modules\Blog\Model\Comment
      *
      * @return void
      */
@@ -221,7 +220,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Model\Comment::add
+     * @covers Modules\Blog\Model\Comment
      *
      * @return void
      */
@@ -238,7 +237,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Model\Comment::add
+     * @covers Modules\Blog\Model\Comment
      *
      * @return void
      */

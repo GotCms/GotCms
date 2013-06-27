@@ -67,8 +67,8 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Adapter\AbstractAdapter::getLatestVersion
-     * @covers Gc\Version::getLatest
+     * @covers Gc\Core\Updater\Adapter\AbstractAdapter
+     * @covers Gc\Version
      *
      * @return void
      */
@@ -80,7 +80,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Adapter\AbstractAdapter::addMessage
+     * @covers Gc\Core\Updater\Adapter\AbstractAdapter
      *
      * @return void
      */
@@ -92,7 +92,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Adapter\AbstractAdapter::getMessages
+     * @covers Gc\Core\Updater\Adapter\AbstractAdapter
      *
      * @return void
      */

@@ -67,7 +67,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Tools::__invoke
+     * @covers Gc\View\Helper\Tools
      *
      * @return void
      */
@@ -79,7 +79,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Tools::__invoke
+     * @covers Gc\View\Helper\Tools
      *
      * @return void
      */
@@ -91,7 +91,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Tools::__invoke
+     * @covers Gc\View\Helper\Tools
      *
      * @return void
      */
@@ -106,7 +106,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Tools::__invoke
+     * @covers Gc\View\Helper\Tools
      *
      * @return void
      */
@@ -118,7 +118,7 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Tools::__invoke
+     * @covers Gc\View\Helper\Tools
      *
      * @return void
      */

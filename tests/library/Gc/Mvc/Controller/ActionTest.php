@@ -73,9 +73,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::onDispatch
-     * @covers Gc\Mvc\Controller\Action::init
-     * @covers Gc\Mvc\Controller\Action::_construct
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -93,9 +91,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::onDispatch
-     * @covers Gc\Mvc\Controller\Action::init
-     * @covers Gc\Mvc\Controller\Action::_construct
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -116,9 +112,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::onDispatch
-     * @covers Gc\Mvc\Controller\Action::init
-     * @covers Gc\Mvc\Controller\Action::_construct
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -136,9 +130,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::onDispatch
-     * @covers Gc\Mvc\Controller\Action::init
-     * @covers Gc\Mvc\Controller\Action::_construct
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -154,9 +146,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::onDispatch
-     * @covers Gc\Mvc\Controller\Action::init
-     * @covers Gc\Mvc\Controller\Action::_construct
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -189,7 +179,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::getRouteMatch
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -202,7 +192,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::getSession
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -214,7 +204,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::getAuth
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -226,7 +216,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::returnJson
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -238,7 +228,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::events
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -250,7 +240,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action::useFlashMessenger
+     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */

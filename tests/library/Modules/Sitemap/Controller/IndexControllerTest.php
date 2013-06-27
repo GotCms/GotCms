@@ -84,7 +84,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Controller\IndexController::indexAction
+     * @covers Modules\Sitemap\Controller\IndexController
      * @todo   Implement testIndexAction().
      *
      * @return void
@@ -97,7 +97,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Controller\IndexController::generateAction
+     * @covers Modules\Sitemap\Controller\IndexController
      * @todo   Implement testGenerateAction().
      *
      * @return void

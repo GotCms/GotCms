@@ -59,9 +59,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream::stream_open
-     * @covers Gc\View\Stream::stream_seek
-     * @covers Gc\View\Stream::url_stat
+     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -74,13 +72,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream::stream_open
-     * @covers Gc\View\Stream::stream_read
-     * @covers Gc\View\Stream::stream_write
-     * @covers Gc\View\Stream::stream_eof
-     * @covers Gc\View\Stream::stream_stat
-     * @covers Gc\View\Stream::stream_seek
-     * @covers Gc\View\Stream::url_stat
+     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -93,13 +85,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream::stream_open
-     * @covers Gc\View\Stream::stream_read
-     * @covers Gc\View\Stream::stream_write
-     * @covers Gc\View\Stream::stream_eof
-     * @covers Gc\View\Stream::stream_stat
-     * @covers Gc\View\Stream::stream_seek
-     * @covers Gc\View\Stream::url_stat
+     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -112,11 +98,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream::stream_open
-     * @covers Gc\View\Stream::stream_write
-     * @covers Gc\View\Stream::stream_tell
-     * @covers Gc\View\Stream::stream_seek
-     * @covers Gc\View\Stream::url_stat
+     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -130,11 +112,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream::stream_open
-     * @covers Gc\View\Stream::stream_write
-     * @covers Gc\View\Stream::stream_tell
-     * @covers Gc\View\Stream::stream_seek
-     * @covers Gc\View\Stream::url_stat
+     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -148,11 +126,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream::stream_open
-     * @covers Gc\View\Stream::stream_write
-     * @covers Gc\View\Stream::stream_tell
-     * @covers Gc\View\Stream::stream_seek
-     * @covers Gc\View\Stream::url_stat
+     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -166,13 +140,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream::stream_open
-     * @covers Gc\View\Stream::stream_read
-     * @covers Gc\View\Stream::stream_write
-     * @covers Gc\View\Stream::stream_tell
-     * @covers Gc\View\Stream::stream_eof
-     * @covers Gc\View\Stream::stream_seek
-     * @covers Gc\View\Stream::url_stat
+     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -190,7 +158,7 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream::register
+     * @covers Gc\View\Stream
      *
      * @return void
      */

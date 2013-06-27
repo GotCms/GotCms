@@ -100,13 +100,7 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin::__invoke
-     * @covers Gc\View\Helper\ModulePlugin::has
-     * @covers Gc\View\Helper\ModulePlugin::get
-     * @covers Gc\View\Helper\ModulePlugin::canCreate
-     * @covers Gc\View\Helper\ModulePlugin::create
-     * @covers Gc\View\Helper\ModulePlugin::validatePlugin
-     * @covers Gc\View\Helper\ModulePlugin::toCamelCase
+     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */
@@ -119,8 +113,7 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin::validatePlugin
-     * @covers Gc\View\Helper\ModulePlugin::get
+     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */
@@ -132,7 +125,7 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin::validatePlugin
+     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */
@@ -145,7 +138,7 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin::get
+     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */
@@ -159,7 +152,7 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin::canCreate
+     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */
@@ -173,8 +166,7 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin::create
-     * @covers Gc\View\Helper\ModulePlugin::canCreate
+     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */
@@ -188,7 +180,7 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin::has
+     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */

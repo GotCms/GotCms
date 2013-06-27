@@ -64,7 +64,7 @@ class AbstractHttpControllerTestCaseTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase::init
+     * @covers Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase
      *
      * @return void
      */
@@ -77,7 +77,7 @@ class AbstractHttpControllerTestCaseTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase::tearDown
+     * @covers Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase
      *
      * @return void
      */

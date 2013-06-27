@@ -65,7 +65,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\Datatype::init
+     * @covers Development\Form\Datatype
      *
      * @return void
      */

@@ -75,7 +75,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::fromArray
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -87,7 +87,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::fromId
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -99,7 +99,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::fromId
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -111,7 +111,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::fromName
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -123,7 +123,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::fromName
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -135,7 +135,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::save
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -147,7 +147,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::save
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -166,7 +166,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::delete
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -178,7 +178,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::delete
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -198,7 +198,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::delete
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -211,8 +211,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::install
-     * @covers Gc\Module\Model::loadBootstrap
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -224,8 +223,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::uninstall
-     * @covers Gc\Module\Model::loadBootstrap
+     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -237,9 +235,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model::install
-     * @covers Gc\Module\Model::uninstall
-     * @covers Gc\Module\Model::loadBootstrap
+     * @covers Gc\Module\Model
      *
      * @return void
      */

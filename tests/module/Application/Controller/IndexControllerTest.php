@@ -173,12 +173,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController::indexAction
-     * @covers Application\Controller\IndexController::loadTabs
-     * @covers Application\Controller\IndexController::loadProperties
-     * @covers Application\Controller\IndexController::explodePath
-     * @covers Application\Controller\IndexController::isSerialized
-     * @covers Application\Controller\IndexController::enableCache
+     * @covers Application\Controller\IndexController
      *
      * @return void
      */
@@ -217,12 +212,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController::indexAction
-     * @covers Application\Controller\IndexController::loadTabs
-     * @covers Application\Controller\IndexController::loadProperties
-     * @covers Application\Controller\IndexController::explodePath
-     * @covers Application\Controller\IndexController::isSerialized
-     * @covers Application\Controller\IndexController::enableCache
+     * @covers Application\Controller\IndexController
      *
      * @return void
      */
@@ -261,12 +251,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController::indexAction
-     * @covers Application\Controller\IndexController::loadTabs
-     * @covers Application\Controller\IndexController::loadProperties
-     * @covers Application\Controller\IndexController::explodePath
-     * @covers Application\Controller\IndexController::isSerialized
-     * @covers Application\Controller\IndexController::enableCache
+     * @covers Application\Controller\IndexController
      *
      * @return void
      */
@@ -307,12 +292,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController::indexAction
-     * @covers Application\Controller\IndexController::loadTabs
-     * @covers Application\Controller\IndexController::loadProperties
-     * @covers Application\Controller\IndexController::explodePath
-     * @covers Application\Controller\IndexController::isSerialized
-     * @covers Application\Controller\IndexController::enableCache
+     * @covers Application\Controller\IndexController
      *
      * @return void
      */
@@ -351,12 +331,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController::indexAction
-     * @covers Application\Controller\IndexController::loadTabs
-     * @covers Application\Controller\IndexController::loadProperties
-     * @covers Application\Controller\IndexController::explodePath
-     * @covers Application\Controller\IndexController::isSerialized
-     * @covers Application\Controller\IndexController::enableCache
+     * @covers Application\Controller\IndexController
      *
      * @return void
      */
@@ -395,12 +370,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController::indexAction
-     * @covers Application\Controller\IndexController::loadTabs
-     * @covers Application\Controller\IndexController::loadProperties
-     * @covers Application\Controller\IndexController::explodePath
-     * @covers Application\Controller\IndexController::isSerialized
-     * @covers Application\Controller\IndexController::enableCache
+     * @covers Application\Controller\IndexController
      *
      * @return void
      */
@@ -418,12 +388,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController::indexAction
-     * @covers Application\Controller\IndexController::loadTabs
-     * @covers Application\Controller\IndexController::loadProperties
-     * @covers Application\Controller\IndexController::explodePath
-     * @covers Application\Controller\IndexController::isSerialized
-     * @covers Application\Controller\IndexController::enableCache
+     * @covers Application\Controller\IndexController
      *
      * @return void
      */

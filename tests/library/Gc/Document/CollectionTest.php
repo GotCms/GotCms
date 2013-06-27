@@ -209,8 +209,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::load
-     * @covers Gc\Document\Collection::setDocuments
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -223,8 +222,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::load
-     * @covers Gc\Document\Collection::setDocuments
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -237,7 +235,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getAvailableDocuments
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -249,7 +247,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getSelect
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -262,7 +260,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getParent
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -275,7 +273,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getChildren
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -288,7 +286,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getAvailableChildren
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -301,7 +299,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getId
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -313,7 +311,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getIcon
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -325,7 +323,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getIterableId
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -337,7 +335,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getName
+     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -349,7 +347,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection::getEditUrl
+     * @covers Gc\Document\Collection
      *
      * @return void
      */

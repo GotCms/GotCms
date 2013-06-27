@@ -88,7 +88,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\RadioButtonList\PrevalueEditor::save
+     * @covers Datatypes\RadioButtonList\PrevalueEditor
      *
      * @return void
      */
@@ -101,7 +101,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\RadioButtonList\PrevalueEditor::load
+     * @covers Datatypes\RadioButtonList\PrevalueEditor
      *
      * @return void
      */

@@ -77,8 +77,8 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::init
-     * @covers Gc\Version::getLatest
+     * @covers Gc\Core\Updater
+     * @covers Gc\Version
      *
      * @return void
      */
@@ -90,7 +90,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::load
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -103,7 +103,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::update
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -116,7 +116,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::update
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -128,7 +128,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::upgrade
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -141,7 +141,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::rollback
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -154,7 +154,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::rollback
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -166,7 +166,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::upgrade
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -178,7 +178,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::updateDatabase
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -198,7 +198,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::updateDatabase
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -214,7 +214,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::updateDatabase
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -230,7 +230,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::updateDatabase
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -242,7 +242,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::getMessages
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -255,7 +255,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::executeScripts
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -267,7 +267,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::executeScripts
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -282,7 +282,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::executeScripts
+     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -297,7 +297,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater::executeScripts
+     * @covers Gc\Core\Updater
      *
      * @return void
      */

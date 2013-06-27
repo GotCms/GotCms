@@ -65,7 +65,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\Role::init
+     * @covers Config\Form\Role
      *
      * @return void
      */
@@ -77,7 +77,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\Role::initPermissions
+     * @covers Config\Form\Role
      *
      * @return void
      */

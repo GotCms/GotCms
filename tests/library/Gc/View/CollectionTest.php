@@ -82,7 +82,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::init
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -95,7 +95,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::getViews
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -109,7 +109,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::getViews
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -123,7 +123,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::getSelect
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -137,7 +137,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::addElement
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -151,7 +151,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::clearElements
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -166,7 +166,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::getElements
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -180,7 +180,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::save
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -208,7 +208,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::save
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -221,7 +221,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::delete
+     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -250,7 +250,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection::delete
+     * @covers Gc\View\Collection
      *
      * @return void
      */

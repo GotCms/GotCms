@@ -67,8 +67,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Collection::init
-     * @covers Gc\Media\Icon\Collection::getIcons
+     * @covers Gc\Media\Icon\Collection
      *
      * @return void
      */
@@ -80,7 +79,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Collection::getIcons
+     * @covers Gc\Media\Icon\Collection
      *
      * @return void
      */
@@ -92,7 +91,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Collection::getSelect
+     * @covers Gc\Media\Icon\Collection
      *
      * @return void
      */

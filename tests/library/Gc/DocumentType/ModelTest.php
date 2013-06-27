@@ -188,7 +188,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::getUser
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -200,7 +200,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::addView
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -212,7 +212,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::addViews
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -225,7 +225,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::getTabs
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -237,7 +237,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::getAvailableViews
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -249,7 +249,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::getDependencies
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -261,7 +261,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::save
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -275,7 +275,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::save
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -297,7 +297,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::delete
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -309,7 +309,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::delete
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -322,7 +322,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::fromArray
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -335,7 +335,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::fromId
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -348,7 +348,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model::fromId
+     * @covers Gc\DocumentType\Model
      *
      * @return void
      */

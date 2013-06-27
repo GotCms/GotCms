@@ -76,7 +76,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::__construct
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -88,7 +88,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::open
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -103,10 +103,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::resize
-     * @covers Gc\Media\Image::getSizeByFixedWidth
-     * @covers Gc\Media\Image::getSizeByFixedHeight
-     * @covers Gc\Media\Image::hex2rgb
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -121,9 +118,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::resize
-     * @covers Gc\Media\Image::crop
-     * @covers Gc\Media\Image::hex2rgb
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -136,10 +131,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::resize
-     * @covers Gc\Media\Image::getSizeByFixedWidth
-     * @covers Gc\Media\Image::getSizeByFixedHeight
-     * @covers Gc\Media\Image::hex2rgb
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -152,7 +144,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::resize
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -164,7 +156,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::hex2rgb
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -176,7 +168,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::hex2rgb
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -188,7 +180,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::hex2rgb
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -200,7 +192,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::save
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -212,7 +204,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::save
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -228,7 +220,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::save
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -244,7 +236,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::save
+     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -260,7 +252,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image::save
+     * @covers Gc\Media\Image
      *
      * @return void
      */

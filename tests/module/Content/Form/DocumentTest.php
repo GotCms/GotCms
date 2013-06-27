@@ -74,7 +74,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Content\Form\Document::init
+     * @covers Content\Form\Document
      *
      * @return void
      */
@@ -86,7 +86,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Content\Form\Document::isValid
+     * @covers Content\Form\Document
      *
      * @return void
      */
@@ -99,8 +99,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Content\Form\Document::load
-     * @covers Content\Form\Document::isValid
+     * @covers Content\Form\Document
      *
      * @return void
      */

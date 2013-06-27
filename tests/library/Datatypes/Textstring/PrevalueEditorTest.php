@@ -88,7 +88,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Textstring\PrevalueEditor::save
+     * @covers Datatypes\Textstring\PrevalueEditor
      *
      * @return void
      */
@@ -100,7 +100,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Textstring\PrevalueEditor::load
+     * @covers Datatypes\Textstring\PrevalueEditor
      *
      * @return void
      */

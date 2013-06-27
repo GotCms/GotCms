@@ -64,7 +64,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Script::execute
+     * @covers Gc\Core\Updater\Script
      *
      * @return void
      */

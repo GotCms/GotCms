@@ -53,7 +53,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Component\Tabs::__construct
+     * @covers Gc\Component\Tabs
      *
      * @return void
      */
@@ -76,7 +76,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Component\Tabs::render
+     * @covers Gc\Component\Tabs
      *
      * @return void
      */
@@ -162,7 +162,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Component\Tabs::render
+     * @covers Gc\Component\Tabs
      *
      * @return void
      */
@@ -174,7 +174,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Component\Tabs::render
+     * @covers Gc\Component\Tabs
      *
      * @return void
      */
@@ -187,7 +187,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Component\Tabs::__toString
+     * @covers Gc\Component\Tabs
      *
      * @return void
      */
@@ -200,7 +200,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Component\Tabs::__toString
+     * @covers Gc\Component\Tabs
      *
      * @return void
      */
@@ -213,7 +213,7 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Component\Tabs::setData
+     * @covers Gc\Component\Tabs
      *
      * @return void
      */

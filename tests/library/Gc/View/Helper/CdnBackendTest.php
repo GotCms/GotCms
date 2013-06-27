@@ -73,7 +73,7 @@ class CdnBackendTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\CdnBackend::__invoke
+     * @covers Gc\View\Helper\CdnBackend
      *
      * @return void
      */
@@ -87,7 +87,7 @@ class CdnBackendTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\CdnBackend::__invoke
+     * @covers Gc\View\Helper\CdnBackend
      *
      * @return void
      */

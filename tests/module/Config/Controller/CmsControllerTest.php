@@ -51,8 +51,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController::editGeneralAction
-     * @covers Config\Controller\CmsController::editAction
+     * @covers Config\Controller\CmsController
      *
      * @return void
      */
@@ -70,8 +69,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController::editSystemAction
-     * @covers Config\Controller\CmsController::editAction
+     * @covers Config\Controller\CmsController
      *
      * @return void
      */
@@ -89,8 +87,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController::editServerAction
-     * @covers Config\Controller\CmsController::editAction
+     * @covers Config\Controller\CmsController
      *
      * @return void
      */
@@ -108,7 +105,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController::editAction
+     * @covers Config\Controller\CmsController
      *
      * @return void
      */
@@ -134,7 +131,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController::editAction
+     * @covers Config\Controller\CmsController
      *
      * @return void
      */
@@ -157,8 +154,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController::updateAction
-     * @covers Config\Controller\CmsController::checkVersion
+     * @covers Config\Controller\CmsController
      *
      * @return void
      */
@@ -176,8 +172,7 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController::updateAction
-     * @covers Config\Controller\CmsController::checkVersion
+     * @covers Config\Controller\CmsController
      *
      * @return void
      */

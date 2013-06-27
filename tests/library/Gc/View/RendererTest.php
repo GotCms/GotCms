@@ -65,8 +65,7 @@ class RendererTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Renderer::render
-     * @covers Gc\View\Renderer::checkRenderer
+     * @covers Gc\View\Renderer
      *
      * @return void
      */
@@ -78,8 +77,7 @@ class RendererTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Renderer::addPath
-     * @covers Gc\View\Renderer::checkRenderer
+     * @covers Gc\View\Renderer
      *
      * @return void
      */
