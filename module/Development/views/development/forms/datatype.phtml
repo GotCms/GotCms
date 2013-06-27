@@ -54,8 +54,8 @@
         <?php echo $this->formElementErrors($this->form->get('model')); ?>
     </div>
 
-    <?php $fieldset = $this->form->get('prevalue-editor'); ?>
-    <?php if (!empty($fieldset)): ?>
+    <?php if ($this->form->has('prevalue-editor')): ?>
+        <?php $fieldset = $this->form->get('prevalue-editor'); ?>
         <?php foreach ($fieldset->getElements() as $element): ?>
             <div>
                 <?php $content = $element->getAttribute('content'); ?>

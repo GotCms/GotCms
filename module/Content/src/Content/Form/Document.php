@@ -130,9 +130,8 @@ class Document extends AbstractForm
      */
     public function isValid()
     {
-        $parent = $this->get('parent');
-        if (!empty($parent)) {
-            $this->parentId = $parent->getValue();
+        if ($this->has('parent')) {
+            $this->parentId = $this->get('parent')->getValue();
         }
 
         $condition = sprintf('parent_id = %d', $this->parentId);

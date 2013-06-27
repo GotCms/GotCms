@@ -67,8 +67,8 @@
 
                 <?php echo $this->formElementErrors($this->form->get('infos')->get('icon_id')); ?>
             </div>
-            <?php $dependency = $infos_form->get('infos[dependency]'); ?>
-            <?php if (!empty($dependency)): ?>
+            <?php if ($infos_form->has('infos[dependency]')): ?>
+                <?php $dependency = $infos_form->get('infos[dependency]'); ?>
                 <div>
                     <label><?php echo $this->escapeHtml($this->translate('Available children')); ?></label>
 
