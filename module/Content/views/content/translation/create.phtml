@@ -73,12 +73,13 @@
         </table>
     </div>
 
-    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
+    <input type="submit" class="input-submit" id="input-save" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
 </form>
 
 <script type="text/javascript">
 $(document).ready(function(){
     Gc.setOption('locale', $.parseJSON('<?php echo $this->json($locales); ?>'));
     Gc.initTranslator();
+    Gc.saveCommand();
 });
 </script>

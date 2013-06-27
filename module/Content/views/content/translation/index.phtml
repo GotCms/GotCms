@@ -28,7 +28,7 @@
 
 ?>
 <form autocomplete="off" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
-    <input type="image" src="<?php echo $this->cdnBackend('backend/images/save.png'); ?>" value="1" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
+    <input id="input-save" type="image" src="<?php echo $this->cdnBackend('backend/images/save.png'); ?>" value="1" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
     <table id="table-translation-edit" class="table-list clickable">
         <colgroup>
             <col width="43%">
@@ -88,5 +88,6 @@
 $(document).ready(function(){
     Gc.setOption('locale', $.parseJSON('<?php echo $this->json($this->form->get('locale')->getValueOptions()); ?>'));
     Gc.initTraslationList();
+    Gc.saveCommand();
 });
 </script>
