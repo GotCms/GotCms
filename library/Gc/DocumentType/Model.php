@@ -65,7 +65,7 @@ class Model extends AbstractTable
      */
     public function getUser()
     {
-        if ($this->getData('user') === null AND $this->getUserId() != null) {
+        if ($this->getData('user') === null and $this->getUserId() != null) {
             $this->setData('user', User\Model::fromId($this->getUserId()));
         }
 

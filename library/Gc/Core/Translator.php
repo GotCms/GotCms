@@ -58,7 +58,7 @@ class Translator extends AbstractTable
      */
     public function getValue($source, $locale = null)
     {
-        $select   = new Select();
+        $select = new Select();
         $select->from('core_translate')
             ->columns(array('src_id' => 'id', 'source'))
             ->join(
@@ -89,7 +89,7 @@ class Translator extends AbstractTable
      */
     public function getValues($locale = null, $limit = null)
     {
-        $select   = new Select();
+        $select = new Select();
         $select->from('core_translate')
             ->columns(array('src_id' => 'id', 'source'))
             ->join(

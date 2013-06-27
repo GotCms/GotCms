@@ -162,8 +162,8 @@ class TranslationController extends Action
     protected function generateCache()
     {
         $translator = new Translator();
-        $values = $translator->getValues();
-        $data   = array();
+        $values     = $translator->getValues();
+        $data       = array();
         foreach ($values as $value) {
             if (empty($data[$value['locale']])) {
                 $data[$value['locale']] = array();
