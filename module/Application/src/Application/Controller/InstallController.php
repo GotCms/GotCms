@@ -407,9 +407,10 @@ class InstallController extends Action
                                 $session['install']['lang']
                             );
                             if (file_exists($languageFilename)) {
+                                $translator = new Core\Translator;
                                 $langConfig = include $languageFilename;
                                 foreach ($langConfig as $source => $destination) {
-                                    Core\Translator::setValue(
+                                    $translator->setValue(
                                         $source,
                                         array(
                                             array(

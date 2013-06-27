@@ -67,18 +67,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator::getInstance
-     *
-     * @return void
-     */
-    public function testGetInstance()
-    {
-        $this->assertInstanceOf('Gc\Core\Translator', Translator::getInstance());
-    }
-
-    /**
-     * Test
-     *
      * @covers Gc\Core\Translator::getValue
      *
      * @return void

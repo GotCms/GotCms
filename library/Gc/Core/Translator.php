@@ -49,27 +49,6 @@ class Translator extends AbstractTable
     protected $name = 'core_translate';
 
     /**
-     * Singleton for Translator
-     *
-     * @var \Gc\Core\Translator $instance
-     */
-    static protected $instance = null;
-
-    /**
-     * Get instance of \Gc\Core\Translator
-     *
-     * @return \Gc\Core\Translator
-     */
-    public static function getInstance()
-    {
-        if (empty(static::$instance)) {
-            static::$instance = new self();
-        }
-
-        return static::$instance;
-    }
-
-    /**
      * Get config value
      *
      * @param string $source Source
@@ -77,9 +56,8 @@ class Translator extends AbstractTable
      *
      * @return string value
      */
-    public static function getValue($source, $locale = null)
+    public function getValue($source, $locale = null)
     {
-        $instance = self::getInstance();
         $select   = new Select();
         $select->from('core_translate')
             ->columns(array('src_id' => 'id', 'source'))
@@ -98,7 +76,7 @@ class Translator extends AbstractTable
             $select->where(array('core_translate_locale.locale' => $locale));
         }
 
-        return $instance->fetchRow($select);
+        return $this->fetchRow($select);
     }
 
     /**
@@ -109,9 +87,8 @@ class Translator extends AbstractTable
      *
      * @return array
      */
-    public static function getValues($locale = null, $limit = null)
+    public function getValues($locale = null, $limit = null)
     {
-        $instance = self::getInstance();
         $select   = new Select();
         $select->from('core_translate')
             ->columns(array('src_id' => 'id', 'source'))
@@ -131,7 +108,7 @@ class Translator extends AbstractTable
 
         $select->order('core_translate.source ASC');
 
-        return $instance->fetchAll($select);
+        return $this->fetchAll($select);
     }
 
     /**
@@ -142,23 +119,22 @@ class Translator extends AbstractTable
      *
      * @return boolean
      */
-    public static function setValue($source, array $destinations)
+    public function setValue($source, array $destinations)
     {
-        $instance = self::getInstance();
         if (is_numeric($source)) {
-            $row = $instance->fetchRow($instance->select(array('id' => $source)));
+            $row = $this->fetchRow($this->select(array('id' => $source)));
             if (empty($row)) {
                 return false;
             }
 
             $sourceId = $row['id'];
         } else {
-            $row = $instance->fetchRow($instance->select(array('source' => $source)));
+            $row = $this->fetchRow($this->select(array('source' => $source)));
             if (!empty($row)) {
                 $sourceId = $row['id'];
             } else {
-                $instance->insert(array('source' => $source));
-                $sourceId = $instance->getLastInsertId();
+                $this->insert(array('source' => $source));
+                $sourceId = $this->getLastInsertId();
             }
         }
 
@@ -176,7 +152,7 @@ class Translator extends AbstractTable
                 );
                 $update->where->equalTo('id', $destination['dst_id']);
 
-                $instance->execute($update);
+                $this->execute($update);
             } else {
                 $insert = new Insert();
                 $insert->into('core_translate_locale')
@@ -188,7 +164,7 @@ class Translator extends AbstractTable
                         )
                     );
 
-                $instance->execute($insert);
+                $this->execute($insert);
             }
         }
 
