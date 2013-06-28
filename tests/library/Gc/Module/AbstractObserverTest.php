@@ -26,7 +26,6 @@
 
 namespace Gc\Module;
 
-use Gc\Registry;
 use ReflectionClass;
 
 /**
@@ -54,6 +53,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = $this->getMockForAbstractClass('Gc\Module\AbstractObserver');
+        $this->object->setServiceManager($this->getMock('Zend\ServiceManager\ServiceManager'));
     }
 
     /**
@@ -101,9 +101,8 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDriverName()
     {
-        $configuration = Registry::get('Application')->getConfig();
         $class         = $this->getMethod('getDriverName');
-        $this->assertEquals($configuration['db']['driver'], $class->invokeArgs($this->object, array()));
+        $this->assertNull($class->invokeArgs($this->object, array()));
     }
 
     /**

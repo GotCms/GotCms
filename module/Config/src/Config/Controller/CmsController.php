@@ -33,6 +33,7 @@ use Gc\Core\Updater;
 use Gc\Media\Info;
 use Gc\Version;
 use Config\Form\Config as configForm;
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 
 /**
  * Cms controller
@@ -145,12 +146,14 @@ class CmsController extends Action
 
             $currentVersion = Version::VERSION;
             $output         = '';
+            //Fetch content
             if ($updater->update()) {
-                //Fetch content
+                //Upgrade cms
                 if ($updater->upgrade()) {
-                    //Upgrade cms
                     //Update database
-                    if (!$updater->updateDatabase()) {
+                    $configuration = $this->getServiceLocator()->get('Config');
+                    $dbAdapter     = GlobalAdapterFeature::getStaticAdapter();
+                    if (!$updater->updateDatabase($configuration, $dbAdapter)) {
                         //Upgrade cms
                         $updater->rollback($currentVersion);
                     } else {

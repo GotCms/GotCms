@@ -144,13 +144,12 @@ class Updater extends Object
      *
      * @return boolean
      */
-    public function updateDatabase()
+    public function updateDatabase($configuration, $dbAdapter)
     {
         if (empty($this->adapter)) {
             return false;
         }
 
-        $configuration = Registry::get('Application')->getConfig();
         $files         = array();
         $updatePath    = GC_APPLICATION_PATH . '/data/update';
         $path          = glob($updatePath . '/*');
@@ -175,7 +174,7 @@ class Updater extends Object
             }
         }
 
-        $resource = Registry::get('Db')->getDriver()->getConnection()->getResource();
+        $resource = $dbAdapter->getDriver()->getConnection()->getResource();
         try {
             $resource->beginTransaction();
             $stmt = $resource->exec($sql);

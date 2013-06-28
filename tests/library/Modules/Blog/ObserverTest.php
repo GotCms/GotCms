@@ -54,6 +54,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = new Observer;
+        $this->object->setServiceManager($this->getMock('Zend\ServiceManager\ServiceManager'));
     }
 
     /**

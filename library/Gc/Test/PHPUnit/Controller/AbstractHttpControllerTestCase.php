@@ -82,5 +82,6 @@ class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
     public function tearDown()
     {
         $this->user->delete();
+        unset($this->user);
     }
 }

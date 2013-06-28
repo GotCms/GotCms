@@ -198,7 +198,7 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerate()
     {
-        $this->assertInternalType('string', $this->object->generate());
+        $this->assertInternalType('string', $this->object->generate(Registry::get('Application')->getRequest()));
     }
 
     /**
@@ -213,7 +213,7 @@ class SitemapTest extends \PHPUnit_Framework_TestCase
         $request  = Registry::get('Application')->getRequest();
         $basePath = $request->getBasePath();
         $request->setBasePath('');
-        $this->assertInternalType('string', $this->object->generate());
+        $this->assertInternalType('string', $this->object->generate($request));
         $request->setBasePath($basePath);
     }
 }

@@ -29,8 +29,9 @@ namespace Gc\Module;
 
 use Gc\Registry;
 use Gc\View\Renderer;
-use Zend\EventManager\Event;
 use Gc\Event\StaticEventManager;
+use Zend\EventManager\Event;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Abstract obverser bootstrap
@@ -72,7 +73,7 @@ abstract class AbstractObserver
      */
     protected function getDriverName()
     {
-         $configuration = Registry::get('Application')->getConfig();
+         $configuration = $this->serviceManager->get('Config');
          return $configuration['db']['driver'];
     }
 
@@ -84,6 +85,27 @@ abstract class AbstractObserver
     public function events()
     {
         return StaticEventManager::getInstance();
+    }
+
+    /**
+     * Retrieve event manager
+     *
+     * @return \Gc\Event\StaticEventManager
+     */
+    public function setServiceManager(ServiceManager $serviceManager)
+    {
+        $this->serviceManager = $serviceManager;
+        return $this;
+    }
+
+    /**
+     * Retrieve event manager
+     *
+     * @return \Gc\Event\StaticEventManager
+     */
+    public function getServiceManager()
+    {
+        return $this->serviceManager;
     }
 
     /**

@@ -32,6 +32,7 @@ use Gc\Registry;
 use Gc\Component\IterableInterface;
 use Gc\Document\Collection as DocumentCollection;
 use Gc\Document\Model as DocumentModel;
+use Zend\Http\PhpEnvironment\Request;
 
 /**
  * Sitemap comment table
@@ -57,7 +58,7 @@ class Sitemap extends Object
      *
      * @return string
      */
-    public function generate()
+    public function generate(Request $request)
     {
         $collection = new DocumentCollection();
         $documents  = array();
@@ -66,7 +67,7 @@ class Sitemap extends Object
             $documents[] = DocumentModel::fromArray((array) $row);
         }
 
-        return $this->generateXml($documents);
+        return $this->generateXml($documents, $request);
     }
 
     /**
@@ -76,7 +77,7 @@ class Sitemap extends Object
      *
      * @return string
      */
-    protected function generateXml($documents)
+    protected function generateXml($documents, Request $request)
     {
         $xml  = '<?xml version="1.0" encoding="UTF-8"?>';
         $xml .= '<urlset
@@ -85,7 +86,6 @@ class Sitemap extends Object
             xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
 
-        $request = Registry::get('Application')->getRequest();
         $url     = $request->getBasePath();
         if (empty($url)) {
             $url = $request->getUri()->toString();

@@ -154,6 +154,7 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
 
         $this->document->save();
         $this->object = new Observer;
+        $this->object->setServiceManager(Registry::get('Application')->getServiceManager());
     }
 
     /**

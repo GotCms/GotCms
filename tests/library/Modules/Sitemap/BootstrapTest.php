@@ -86,24 +86,11 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testInstall()
-    {
-        $this->assertTrue($this->object->install());
-        $this->assertTrue($this->object->uninstall());
-    }
-
-    /**
-     * Test
-     *
-     * @covers Modules\Sitemap\Bootstrap
-     *
-     * @return void
-     */
-    public function testUninstall()
+    public function testInstallAndUninstall()
     {
         $this->assertTrue($this->object->install());
         $sitemap = new Model\Sitemap();
-        file_put_contents($sitemap->getFilePath(), $sitemap->generate());
+        file_put_contents($sitemap->getFilePath(), $sitemap->generate(Registry::get('Application')->getRequest()));
         $this->assertTrue($this->object->uninstall());
     }
 }

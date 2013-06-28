@@ -241,6 +241,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstallAndUninstall()
     {
+        Model::uninstall('Blog');
         $this->assertInternalType('integer', (int) Model::install('Blog'));
         $this->assertTrue(Model::uninstall('Blog'));
     }
