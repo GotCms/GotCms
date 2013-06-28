@@ -259,7 +259,7 @@ class DocumentType extends AbstractForm
 
         $description = new Element\Text('description');
         $required    = new Element\Checkbox('required');
-        $required->setValue(1)
+        $required->setCheckedValue('1')
             ->setAttribute('id', 'required')
             ->setAttribute('class', 'input-checkbox');
         $propertyId = new Element\Hidden('property_id');
@@ -279,7 +279,7 @@ class DocumentType extends AbstractForm
             $tab->setValue($property['tab']);
             $datatype->setValue($property['datatype']);
             $description->setValue($property['description']);
-            $required->setCheckedValue(!empty($property['is_required']));
+            $required->setValue((string) !empty($property['is_required']));
             $propertyId->setValue(str_replace('property', '', $property['id']));
             $propertyFieldsetName = $property['id'];
         }
