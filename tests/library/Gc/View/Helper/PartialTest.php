@@ -87,8 +87,6 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Partial
-     *
      * @return void
      */
     public function testInvoke()

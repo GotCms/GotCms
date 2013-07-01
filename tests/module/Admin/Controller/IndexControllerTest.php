@@ -52,8 +52,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Admin\Controller\IndexController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -69,8 +67,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Admin\Controller\IndexController
      *
      * @return void
      */
@@ -92,8 +88,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Admin\Controller\IndexController
-     *
      * @return void
      */
     public function testSaveDashboardActionWithDashboardParam()
@@ -113,8 +107,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Admin\Controller\IndexController
      *
      * @return void
      */

@@ -65,8 +65,6 @@ class UserForgotPasswordTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\UserForgotPassword
-     *
      * @return void
      */
     public function testInit()
@@ -77,8 +75,6 @@ class UserForgotPasswordTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\UserForgotPassword
-     *
      * @return void
      */
     public function testInitEmail()
@@ -88,8 +84,6 @@ class UserForgotPasswordTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Config\Form\UserForgotPassword
      *
      * @return void
      */

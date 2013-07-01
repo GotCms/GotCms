@@ -67,8 +67,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config
-     *
      * @return void
      */
     public function testGetInstance()
@@ -78,8 +76,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -93,8 +89,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config
-     *
      * @return void
      */
     public function testGetValueWithEmptyIdentifier()
@@ -105,8 +99,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config
-     *
      * @return void
      */
     public function testGetValues()
@@ -115,8 +107,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * Test
-     *
-     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -135,8 +125,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Config
-     *
      * @return void
      */
     public function testSetValueWithFakeIdentifier()
@@ -146,8 +134,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Config
      *
      * @return void
      */
@@ -160,8 +146,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Config
      *
      * @return void
      */

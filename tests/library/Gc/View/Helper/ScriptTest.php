@@ -59,8 +59,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\View\Helper\Script
-     *
      * @return void
      */
     protected function setUp()
@@ -98,8 +96,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script
-     *
      * @return void
      */
     public function testInvoke()
@@ -114,8 +110,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script
-     *
      * @return void
      */
     public function testGetParam()
@@ -129,8 +123,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Helper\Script
      *
      * @return void
      */
@@ -149,8 +141,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script
-     *
      * @return void
      */
     public function testGetRequest()
@@ -160,8 +150,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Helper\Script
      *
      * @return void
      */
@@ -173,8 +161,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script
-     *
      * @return void
      */
     public function testPlugin()
@@ -185,8 +171,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Script
-     *
      * @return void
      */
     public function testCall()
@@ -196,8 +180,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Helper\Script
      *
      * @return void
      */

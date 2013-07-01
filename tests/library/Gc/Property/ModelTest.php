@@ -205,8 +205,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Model
-     *
      * @return void
      */
     public function testIsRequired()
@@ -221,8 +219,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Model
-     *
      * @return void
      */
     public function testSetValue()
@@ -233,8 +229,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Model
-     *
      * @return void
      */
     public function testLoadValue()
@@ -244,8 +238,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Property\Model
      *
      * @return void
      */
@@ -259,8 +251,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Model
-     *
      * @return void
      */
     public function testGetValueModel()
@@ -270,8 +260,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Property\Model
      *
      * @return void
      */
@@ -301,8 +289,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Model
-     *
      * @return void
      */
     public function testSave()
@@ -312,8 +298,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Property\Model
      *
      * @return void
      */
@@ -332,8 +316,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Model
-     *
      * @return void
      */
     public function testDelete()
@@ -343,8 +325,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Property\Model
      *
      * @return void
      */
@@ -356,8 +336,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Property\Model
      *
      * @return void
      */
@@ -380,8 +358,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Model
-     *
      * @return void
      */
     public function testFromId()
@@ -391,8 +367,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Property\Model
      *
      * @return void
      */
@@ -404,8 +378,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Property\Model
-     *
      * @return void
      */
     public function testFromIdentifierWithNoDocumentId()
@@ -415,8 +387,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Property\Model
      *
      * @return void
      */

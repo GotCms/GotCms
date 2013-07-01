@@ -73,8 +73,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action
-     *
      * @return void
      */
     public function testOnDispatchWithoutIdentity()
@@ -90,8 +88,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -112,8 +108,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action
-     *
      * @return void
      */
     public function testOnDispatchWithoutIdentityAndLoginPage()
@@ -130,8 +124,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action
-     *
      * @return void
      */
     public function testOnDispatchWithoutConfigFile()
@@ -145,8 +137,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -179,8 +169,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action
-     *
      * @return void
      */
     public function testGetRouteMatch()
@@ -192,8 +180,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action
-     *
      * @return void
      */
     public function testGetSession()
@@ -203,8 +189,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */
@@ -216,8 +200,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action
-     *
      * @return void
      */
     public function testReturnJson()
@@ -228,8 +210,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Controller\Action
-     *
      * @return void
      */
     public function testEvents()
@@ -239,8 +219,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Mvc\Controller\Action
      *
      * @return void
      */

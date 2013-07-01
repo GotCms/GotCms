@@ -69,8 +69,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model
-     *
      * @return void
      */
     public function testSave()
@@ -88,8 +86,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model
-     *
      * @return void
      */
     public function testSaveWithoutId()
@@ -104,8 +100,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -125,8 +119,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model
-     *
      * @return void
      */
     public function testDelete()
@@ -141,8 +133,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model
-     *
      * @return void
      */
     public function testFakeDelete()
@@ -154,8 +144,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model
-     *
      * @return void
      */
     public function testFromArray()
@@ -165,8 +153,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Role\Model
      *
      * @return void
      */
@@ -178,8 +164,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Role\Model
-     *
      * @return void
      */
     public function testFromFakeId()
@@ -189,8 +173,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Role\Model
      *
      * @return void
      */

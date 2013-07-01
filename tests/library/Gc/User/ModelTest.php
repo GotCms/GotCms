@@ -88,8 +88,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testAuthenticate()
@@ -101,8 +99,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testFakeAuthenticate()
@@ -112,8 +108,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -125,8 +119,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testSetFakeEmail()
@@ -136,8 +128,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -151,8 +141,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testSave()
@@ -162,8 +150,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -183,8 +169,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testDeleteWithoutId()
@@ -196,8 +180,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testDelete()
@@ -207,8 +189,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -227,8 +207,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -251,8 +229,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testFromId()
@@ -266,8 +242,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testFromFakeId()
@@ -277,8 +251,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Model
      *
      * @return void
      */
@@ -290,8 +262,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testSendForgotPasswordWithWrongEmail()
@@ -302,8 +272,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Model
-     *
      * @return void
      */
     public function testSendForgotPasswordWithEmail()
@@ -313,8 +281,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Model
      *
      * @return void
      */

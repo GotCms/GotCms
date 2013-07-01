@@ -101,8 +101,6 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Session\SaveHandler\DbTableGateway
-     *
      * @return void
      */
     public function testReadWrite()
@@ -124,8 +122,6 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Session\SaveHandler\DbTableGateway
-     *
      * @return void
      */
     public function testReadWithLifetimeExpired()
@@ -144,8 +140,6 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Session\SaveHandler\DbTableGateway
      *
      * @return void
      */

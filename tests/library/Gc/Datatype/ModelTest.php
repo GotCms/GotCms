@@ -86,8 +86,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model
-     *
      * @return void
      */
     public function testSetPrevalueValue()
@@ -100,8 +98,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -123,8 +119,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model
-     *
      * @return void
      */
     public function testFromId()
@@ -136,8 +130,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -160,8 +152,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model
-     *
      * @return void
      */
     public function testSaveWithWrongValues()
@@ -180,8 +170,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model
-     *
      * @return void
      */
     public function testDelete()
@@ -191,8 +179,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -204,8 +190,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -225,8 +209,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model
-     *
      * @return void
      */
     public function testSavePrevalueEditor()
@@ -236,8 +218,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -341,8 +321,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\Model
-     *
      * @return void
      */
     public function testLoadPrevalueEditor()
@@ -355,8 +333,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\Model
      *
      * @return void
      */
@@ -374,8 +350,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\Model
      *
      * @return void
      */

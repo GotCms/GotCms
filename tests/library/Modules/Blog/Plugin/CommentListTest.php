@@ -221,8 +221,6 @@ class CommentListTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Plugin\CommentList
-     *
      * @return void
      */
     public function testInit()
@@ -231,8 +229,6 @@ class CommentListTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Blog\Plugin\CommentList
      *
      * @return void
      */

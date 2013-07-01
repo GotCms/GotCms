@@ -67,9 +67,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Adapter\AbstractAdapter
-     * @covers Gc\Version
-     *
      * @return void
      */
     public function testGetLatestVersion()
@@ -80,8 +77,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Adapter\AbstractAdapter
-     *
      * @return void
      */
     public function testAddMessage()
@@ -91,8 +86,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater\Adapter\AbstractAdapter
      *
      * @return void
      */

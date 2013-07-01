@@ -58,8 +58,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -76,8 +74,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testCreateAction()
@@ -93,8 +89,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -120,8 +114,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -197,8 +189,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testEditAction()
@@ -267,8 +257,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -377,8 +365,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testEditActionWithInvalidPostData()
@@ -422,8 +408,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testEditActionWithWrongId()
@@ -439,8 +423,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -480,8 +462,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testDeleteActionWithWrongId()
@@ -497,8 +477,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -516,8 +494,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testAddTabAction()
@@ -533,8 +509,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -558,8 +532,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -595,8 +567,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testDeleteTabAction()
@@ -630,8 +600,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testDeleteTabActionWithoutPostData()
@@ -647,8 +615,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -671,8 +637,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -722,8 +686,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -776,8 +738,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testAddPropertyActionWithEmptyTab()
@@ -806,8 +766,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DocumentTypeController
-     *
      * @return void
      */
     public function testAddPropertyActionWithoutPostData()
@@ -823,8 +781,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */
@@ -871,8 +827,6 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DocumentTypeController
      *
      * @return void
      */

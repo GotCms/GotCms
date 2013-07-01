@@ -65,8 +65,6 @@ class RendererTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Renderer
-     *
      * @return void
      */
     public function testRender()
@@ -76,8 +74,6 @@ class RendererTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Renderer
      *
      * @return void
      */

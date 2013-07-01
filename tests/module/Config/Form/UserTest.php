@@ -65,8 +65,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\User
-     *
      * @return void
      */
     public function testInit()
@@ -76,8 +74,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Config\Form\User
      *
      * @return void
      */

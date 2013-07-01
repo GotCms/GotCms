@@ -182,8 +182,6 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Observer
-     *
      * @return void
      */
     public function testInit()
@@ -193,8 +191,6 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Sitemap\Observer
      *
      * @return void
      */
@@ -209,8 +205,6 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Sitemap\Observer
      *
      * @return void
      */

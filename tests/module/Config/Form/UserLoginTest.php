@@ -65,8 +65,6 @@ class UserLoginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Config\Form\UserLogin
-     *
      * @return void
      */
     public function testInit()

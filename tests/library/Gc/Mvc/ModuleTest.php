@@ -69,8 +69,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Mvc\Module
-     *
      * @return void
      */
     public function testGetAutoloaderConfig()
@@ -80,8 +78,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Mvc\Module
      *
      * @return void
      */

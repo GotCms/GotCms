@@ -67,8 +67,6 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Document
-     *
      * @return void
      */
     public function testInvokeFromId()
@@ -78,8 +76,6 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Helper\Document
      *
      * @return void
      */

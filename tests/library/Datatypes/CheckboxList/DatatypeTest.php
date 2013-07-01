@@ -213,8 +213,6 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\CheckboxList\Datatype
-     *
      * @return void
      */
     public function testGetEditor()
@@ -224,8 +222,6 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Datatypes\CheckboxList\Datatype
      *
      * @return void
      */

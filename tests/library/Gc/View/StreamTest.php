@@ -59,8 +59,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream
-     *
      * @return void
      */
     public function testStreamOpen()
@@ -71,8 +69,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -85,8 +81,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream
-     *
      * @return void
      */
     public function testStreamWrite()
@@ -97,8 +91,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -112,8 +104,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream
-     *
      * @return void
      */
     public function testStreamSeekCur()
@@ -126,8 +116,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Stream
-     *
      * @return void
      */
     public function testStreamSeekEnd()
@@ -139,8 +127,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Stream
      *
      * @return void
      */
@@ -157,8 +143,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Stream
      *
      * @return void
      */

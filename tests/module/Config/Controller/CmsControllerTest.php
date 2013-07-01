@@ -51,8 +51,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController
-     *
      * @return void
      */
     public function testEditGeneralAction()
@@ -68,8 +66,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\CmsController
      *
      * @return void
      */
@@ -87,8 +83,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController
-     *
      * @return void
      */
     public function testEditServerAction()
@@ -104,8 +98,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\CmsController
      *
      * @return void
      */
@@ -131,8 +123,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController
-     *
      * @return void
      */
     public function testEditActionWithInvalidForm()
@@ -154,8 +144,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\CmsController
-     *
      * @return void
      */
     public function testUpdateAction()
@@ -171,8 +159,6 @@ class CmsControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\CmsController
      *
      * @return void
      */

@@ -195,8 +195,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testInit()
@@ -209,8 +207,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testGetView()
@@ -221,8 +217,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testGetDocumentType()
@@ -232,8 +226,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -246,8 +238,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testIsPublished()
@@ -258,8 +248,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -272,8 +260,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testFromId()
@@ -284,8 +270,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -298,8 +282,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testFromUrlKey()
@@ -310,8 +292,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -324,8 +304,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testSave()
@@ -335,8 +313,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -362,8 +338,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testDelete()
@@ -373,8 +347,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -386,8 +358,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -407,8 +377,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testGetUrl()
@@ -418,8 +386,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -431,8 +397,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testGetId()
@@ -442,8 +406,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -455,8 +417,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testGetChildren()
@@ -467,8 +427,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testGetAvailableChilren()
@@ -478,8 +436,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -492,8 +448,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testGetProperty()
@@ -504,8 +458,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testGetIcon()
@@ -514,8 +466,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */
@@ -528,8 +478,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Model
-     *
      * @return void
      */
     public function testGetIterableId()
@@ -539,8 +487,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Model
      *
      * @return void
      */

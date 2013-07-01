@@ -52,8 +52,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\LayoutController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -70,8 +68,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\LayoutController
-     *
      * @return void
      */
     public function testCreateAction()
@@ -87,8 +83,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\LayoutController
      *
      * @return void
      */
@@ -111,8 +105,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\LayoutController
      *
      * @return void
      */
@@ -140,8 +132,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\LayoutController
-     *
      * @return void
      */
     public function testEditActionWithInvalidId()
@@ -157,8 +147,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\LayoutController
      *
      * @return void
      */
@@ -185,8 +173,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\LayoutController
      *
      * @return void
      */
@@ -218,8 +204,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\LayoutController
      *
      * @return void
      */
@@ -255,8 +239,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\LayoutController
-     *
      * @return void
      */
     public function testDeleteAction()
@@ -283,8 +265,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\LayoutController
-     *
      * @return void
      */
     public function testDeleteActionWithInvalidId()
@@ -300,8 +280,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\LayoutController
      *
      * @return void
      */
@@ -338,8 +316,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\LayoutController
      *
      * @return void
      */
@@ -397,8 +373,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\LayoutController
-     *
      * @return void
      */
     public function testUploadActionWithEmptyFilesData()
@@ -416,8 +390,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\LayoutController
-     *
      * @return void
      */
     public function testUploadActionWithInvalidId()
@@ -433,8 +405,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\LayoutController
      *
      * @return void
      */
@@ -463,8 +433,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\LayoutController
-     *
      * @return void
      */
     public function testDownloadActionWithEmptyContent()
@@ -491,8 +459,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\LayoutController
-     *
      * @return void
      */
     public function testDownloadActionWithInvalidId()
@@ -508,8 +474,6 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\LayoutController
      *
      * @return void
      */

@@ -67,8 +67,6 @@ class WgetTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Adapter\Wget
-     *
      * @return void
      */
     public function testUpdate()
@@ -80,8 +78,6 @@ class WgetTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Adapter\Wget
-     *
      * @return void
      */
     public function testUpgrade()
@@ -92,8 +88,6 @@ class WgetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater\Adapter\Wget
      *
      * @return void
      */

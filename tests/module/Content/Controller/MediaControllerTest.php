@@ -51,8 +51,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\MediaController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -69,8 +67,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\MediaController
-     *
      * @return void
      */
     public function testUploadAction()
@@ -83,8 +79,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\MediaController
      *
      * @return void
      */
@@ -107,8 +101,6 @@ class MediaControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\MediaController
      *
      * @return void
      */

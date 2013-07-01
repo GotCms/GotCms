@@ -72,8 +72,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType
-     *
      * @return void
      */
     public function testInit()
@@ -130,8 +128,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType
-     *
      * @return void
      */
     public function testAddProperty()
@@ -155,8 +151,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType
-     *
      * @return void
      */
     public function testAddPropertyWithPropertyModel()
@@ -178,8 +172,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType
-     *
      * @return void
      */
     public function testAddPropertyWithoutValidData()
@@ -189,8 +181,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -213,8 +203,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType
-     *
      * @return void
      */
     public function testAddTabWithTabModel()
@@ -234,8 +222,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Development\Form\DocumentType
-     *
      * @return void
      */
     public function testAddTabWithoutValidData()
@@ -245,8 +231,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -265,8 +249,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Development\Form\DocumentType
      *
      * @return void
      */
@@ -302,8 +284,6 @@ class DocumentTypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Development\Form\DocumentType
      *
      * @return void
      */

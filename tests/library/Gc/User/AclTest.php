@@ -52,8 +52,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\User\Acl
-     *
      * @return void
      */
     protected function setUp()
@@ -89,8 +87,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Acl
-     *
      * @return void
      */
     public function testListRoles()
@@ -100,8 +96,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Acl
      *
      * @return void
      */
@@ -113,8 +107,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Acl
-     *
      * @return void
      */
     public function testListResources()
@@ -124,8 +116,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Acl
      *
      * @return void
      */

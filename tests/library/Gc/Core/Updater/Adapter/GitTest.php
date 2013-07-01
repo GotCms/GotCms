@@ -67,8 +67,6 @@ class GitTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Adapter\Git
-     *
      * @return void
      */
     public function testUpdate()
@@ -79,9 +77,6 @@ class GitTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater\Adapter\Git
-     * @covers Gc\Version
-     *
      * @return void
      */
     public function testUpgrade()
@@ -91,8 +86,6 @@ class GitTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater\Adapter\Git
      *
      * @return void
      */

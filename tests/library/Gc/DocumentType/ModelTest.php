@@ -188,8 +188,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model
-     *
      * @return void
      */
     public function testGetUser()
@@ -200,8 +198,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model
-     *
      * @return void
      */
     public function testAddView()
@@ -211,8 +207,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -225,8 +219,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model
-     *
      * @return void
      */
     public function testGetTabs()
@@ -236,8 +228,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -249,8 +239,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model
-     *
      * @return void
      */
     public function testGetDependencies()
@@ -260,8 +248,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -274,8 +260,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -297,8 +281,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model
-     *
      * @return void
      */
     public function testDelete()
@@ -308,8 +290,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\DocumentType\Model
      *
      * @return void
      */
@@ -322,8 +302,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model
-     *
      * @return void
      */
     public function testFromArray()
@@ -335,8 +313,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\DocumentType\Model
-     *
      * @return void
      */
     public function testFromId()
@@ -347,8 +323,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\DocumentType\Model
      *
      * @return void
      */

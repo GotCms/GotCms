@@ -67,8 +67,6 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Textrich\CkEditor
-     *
      * @return void
      */
     public function testSetParameters()
@@ -83,8 +81,6 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Textrich\CkEditor
-     *
      * @return void
      */
     public function testGetToolbarAsJs()
@@ -96,8 +92,6 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Textrich\CkEditor
-     *
      * @return void
      */
     public function testGetAllToolbarItems()
@@ -107,8 +101,6 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Datatypes\Textrich\CkEditor
      *
      * @return void
      */

@@ -52,8 +52,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -70,8 +68,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController
-     *
      * @return void
      */
     public function testCreateAction()
@@ -87,8 +83,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -113,8 +107,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController
-     *
      * @return void
      */
     public function testCreateActionWithWrongPostData()
@@ -135,8 +127,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -162,8 +152,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController
-     *
      * @return void
      */
     public function testDeleteActionWithWrongId()
@@ -179,8 +167,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -207,8 +193,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\RoleController
      *
      * @return void
      */
@@ -243,8 +227,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\RoleController
-     *
      * @return void
      */
     public function testEditActionWithWrongPostData()
@@ -275,8 +257,6 @@ class RoleControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\RoleController
      *
      * @return void
      */

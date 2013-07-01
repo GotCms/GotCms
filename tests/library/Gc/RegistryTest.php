@@ -55,8 +55,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Registry
-     *
      * @return void
      */
     protected function setUp()
@@ -80,8 +78,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry
-     *
      * @return void
      */
     public function testGetInstance()
@@ -92,8 +88,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Registry
      *
      * @return void
      */
@@ -107,8 +101,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry
-     *
      * @return void
      */
     public function testSetInstanceWithRegistryAlreadyInitialized()
@@ -119,8 +111,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Registry
      *
      * @return void
      */
@@ -133,8 +123,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry
-     *
      * @return void
      */
     public function testGetFakeData()
@@ -145,8 +133,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Registry
      *
      * @return void
      */
@@ -159,8 +145,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry
-     *
      * @return void
      */
     public function testIsRegisteredWithData()
@@ -172,8 +156,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Registry
-     *
      * @return void
      */
     public function testIsRegisteredWithoutData()
@@ -184,8 +166,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Registry
      *
      * @return void
      */

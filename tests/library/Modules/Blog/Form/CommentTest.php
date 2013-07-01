@@ -67,8 +67,6 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Form\Comment
-     *
      * @return void
      */
     public function testInit()

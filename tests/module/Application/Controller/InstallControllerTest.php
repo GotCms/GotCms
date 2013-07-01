@@ -55,8 +55,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -80,8 +78,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -113,8 +109,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testIndexActionWithInvalidPostData()
@@ -145,8 +139,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testLicenseAction()
@@ -170,8 +162,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -203,8 +193,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testLicenseActionWithInvalidPostData()
@@ -235,8 +223,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testCheckConfigAction()
@@ -260,8 +246,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -292,8 +276,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testDatabaseAction()
@@ -317,8 +299,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -354,8 +334,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testDatabaseActionWithPostDataAndWrongIdentity()
@@ -390,8 +368,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testDatabaseActionWithInvalidPostData()
@@ -420,8 +396,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -453,8 +427,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -500,8 +472,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testConfigurationActionWithInvalidPostData()
@@ -538,8 +508,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testCheckInstallSecondStep()
@@ -562,8 +530,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -588,8 +554,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -621,8 +585,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -657,8 +619,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -708,8 +668,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */
@@ -772,8 +730,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\InstallController
-     *
      * @return void
      */
     public function testCompleteActionTemplate()
@@ -823,8 +779,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\InstallController
      *
      * @return void
      */

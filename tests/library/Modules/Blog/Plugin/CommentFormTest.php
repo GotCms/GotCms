@@ -217,8 +217,6 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Plugin\CommentForm
-     *
      * @return void
      */
     public function testInit()
@@ -227,8 +225,6 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Blog\Plugin\CommentForm
      *
      * @return void
      */
@@ -239,8 +235,6 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Blog\Plugin\CommentForm
      *
      * @return void
      */

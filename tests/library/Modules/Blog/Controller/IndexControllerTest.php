@@ -194,8 +194,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Controller\IndexController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -205,8 +203,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Blog\Controller\IndexController
      *
      * @return void
      */
@@ -219,8 +215,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Controller\IndexController
-     *
      * @return void
      */
     public function testDocumentComment()
@@ -231,8 +225,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Blog\Controller\IndexController
      *
      * @return void
      */

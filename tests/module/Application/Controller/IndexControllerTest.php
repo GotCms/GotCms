@@ -173,8 +173,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -212,8 +210,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController
-     *
      * @return void
      */
     public function testIndexActionWithUrlKey()
@@ -250,8 +246,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\IndexController
      *
      * @return void
      */
@@ -292,8 +286,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController
-     *
      * @return void
      */
     public function testIndexActionWithExistingCache()
@@ -330,8 +322,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\IndexController
      *
      * @return void
      */
@@ -370,8 +360,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Application\Controller\IndexController
-     *
      * @return void
      */
     public function testIndexActionWith404Page()
@@ -387,8 +375,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Application\Controller\IndexController
      *
      * @return void
      */

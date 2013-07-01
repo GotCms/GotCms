@@ -185,8 +185,6 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\Documents
-     *
      * @return void
      */
     public function testInvoke()
@@ -196,8 +194,6 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Helper\Documents
      *
      * @return void
      */

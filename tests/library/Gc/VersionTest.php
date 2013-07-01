@@ -67,8 +67,6 @@ class VersionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Version
-     *
      * @return void
      */
     public function testCompareVersion()
@@ -79,8 +77,6 @@ class VersionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Version
-     *
      * @return void
      */
     public function testGetLatest()
@@ -90,8 +86,6 @@ class VersionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Version
      *
      * @return void
      */

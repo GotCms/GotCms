@@ -237,8 +237,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Textrich\Editor
-     *
      * @return void
      */
     public function testSave()
@@ -251,8 +249,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Textrich\Editor
-     *
      * @return void
      */
     public function testLoad()
@@ -262,8 +258,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Datatypes\Textrich\Editor
      *
      * @return void
      */

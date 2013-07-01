@@ -64,8 +64,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin
-     *
      * @return void
      */
     public function testSetParams()
@@ -77,8 +75,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin
-     *
      * @return void
      */
     public function testSetParam()
@@ -89,8 +85,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -104,8 +98,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin
-     *
      * @return void
      */
     public function testRender()
@@ -115,8 +107,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -128,8 +118,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin
-     *
      * @return void
      */
     public function testGetRequest()
@@ -139,8 +127,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */
@@ -152,8 +138,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin
-     *
      * @return void
      */
     public function testPlugin()
@@ -164,8 +148,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractPlugin
-     *
      * @return void
      */
     public function testCall()
@@ -175,8 +157,6 @@ class AbstractPluginTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\AbstractPlugin
      *
      * @return void
      */

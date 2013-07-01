@@ -79,9 +79,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     * @covers Gc\Version
-     *
      * @return void
      */
     public function testInit()
@@ -91,8 +88,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -105,8 +100,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     *
      * @return void
      */
     public function testUpdate()
@@ -118,8 +111,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     *
      * @return void
      */
     public function testUpdateWithoutAdapter()
@@ -129,8 +120,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -143,8 +132,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     *
      * @return void
      */
     public function testRollback()
@@ -156,8 +143,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     *
      * @return void
      */
     public function testRollbackWithoutAdapter()
@@ -168,8 +153,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     *
      * @return void
      */
     public function testUpgradeWithoutAdapter()
@@ -179,8 +162,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -201,8 +182,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     *
      * @return void
      */
     public function testUpdateDatabaseWithEmptyFiles()
@@ -217,8 +196,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -235,8 +212,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     *
      * @return void
      */
     public function testUpdateDatabaseWithoutAdapter()
@@ -247,8 +222,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -261,8 +234,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     *
      * @return void
      */
     public function testExecuteScriptsWithoutAdapter()
@@ -272,8 +243,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater
      *
      * @return void
      */
@@ -288,8 +257,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Updater
-     *
      * @return void
      */
     public function testExecuteScriptsWithError()
@@ -302,8 +269,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Updater
      *
      * @return void
      */

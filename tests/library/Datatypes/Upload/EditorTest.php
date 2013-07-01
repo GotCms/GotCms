@@ -247,8 +247,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Upload\Editor
-     *
      * @return void
      */
     public function testSave()
@@ -284,8 +282,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\Upload\Editor
-     *
      * @return void
      */
     public function testSaveWithEmptyFilesVar()
@@ -309,8 +305,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Datatypes\Upload\Editor
      *
      * @return void
      */
@@ -346,8 +340,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Datatypes\Upload\Editor
      *
      * @return void
      */

@@ -192,8 +192,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testCreateAction()
@@ -209,8 +207,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -236,8 +232,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testCreateActionWithInvalidPostData()
@@ -258,8 +252,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -293,8 +285,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testDeleteAction()
@@ -310,8 +300,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -329,8 +317,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testEditAction()
@@ -346,8 +332,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -375,8 +359,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testEditActionWithInvalidPostData()
@@ -398,8 +380,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testEditActionWithWrongId()
@@ -415,8 +395,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -440,8 +418,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testCopyActionWithWrongId()
@@ -457,8 +433,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -482,8 +456,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testCutActionWithWrongId()
@@ -499,8 +471,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -518,8 +488,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testPasteActionWithWrongId()
@@ -535,8 +503,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -559,8 +525,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -599,8 +563,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testPasteActionWithCutSession()
@@ -638,8 +600,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testPasteActionWithEmptyParent()
@@ -655,8 +615,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */
@@ -674,8 +632,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\DocumentController
-     *
      * @return void
      */
     public function testRefreshTreeviewActionWithEmptyDocument()
@@ -691,8 +647,6 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\DocumentController
      *
      * @return void
      */

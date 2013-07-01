@@ -50,8 +50,6 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Form\AbstractForm
-     *
      * @return void
      */
     protected function setUp()
@@ -73,8 +71,6 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Form\AbstractForm
-     *
      * @return void
      */
     public function testInit()
@@ -85,8 +81,6 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Form\AbstractForm
-     *
      * @return void
      */
     public function testGetAdapter()
@@ -96,8 +90,6 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Form\AbstractForm
      *
      * @return void
      */
@@ -138,8 +130,6 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Form\AbstractForm
-     *
      * @return void
      */
     public function testAddContent()
@@ -153,8 +143,6 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Form\AbstractForm
-     *
      * @return void
      */
     public function testAddContentWithWrongParameters()
@@ -165,8 +153,6 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Form\AbstractForm
      *
      * @return void
      */

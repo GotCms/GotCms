@@ -52,8 +52,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -70,8 +68,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController
-     *
      * @return void
      */
     public function testCreateAction()
@@ -87,8 +83,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -109,8 +103,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -135,8 +127,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController
-     *
      * @return void
      */
     public function testEditActionWithWrongId()
@@ -152,8 +142,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -180,8 +168,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -212,8 +198,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */
@@ -248,8 +232,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Development\Controller\DatatypeController
-     *
      * @return void
      */
     public function testDeleteAction()
@@ -275,8 +257,6 @@ class DatatypeControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Development\Controller\DatatypeController
      *
      * @return void
      */

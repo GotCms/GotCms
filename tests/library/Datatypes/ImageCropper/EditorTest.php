@@ -269,8 +269,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\ImageCropper\Editor
-     *
      * @return void
      */
     public function testSave()
@@ -292,8 +290,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Datatypes\ImageCropper\Editor
      *
      * @return void
      */
@@ -317,8 +313,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Datatypes\ImageCropper\Editor
      *
      * @return void
      */
@@ -360,8 +354,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Datatypes\ImageCropper\Editor
      *
      * @return void
      */

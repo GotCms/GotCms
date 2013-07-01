@@ -69,8 +69,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack
-     *
      * @return void
      */
     public function testNormalResolve()
@@ -84,8 +82,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack
-     *
      * @return void
      */
     public function testWithoutPaths()
@@ -96,8 +92,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */
@@ -113,8 +107,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack
-     *
      * @return void
      */
     public function testResolveWithLfiProtection()
@@ -129,8 +121,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack
-     *
      * @return void
      */
     public function testResolveWithStream()
@@ -144,8 +134,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Resolver\TemplatePathStack
-     *
      * @return void
      */
     public function testResolveWithStreamAndNoStreamWrapperActive()
@@ -157,8 +145,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */
@@ -177,8 +163,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Resolver\TemplatePathStack
      *
      * @return void
      */

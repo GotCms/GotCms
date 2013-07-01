@@ -46,8 +46,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Event\StaticEventManager
-     *
      * @return void
      */
     protected function setUp()
@@ -70,8 +68,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager
-     *
      * @return void
      */
     public function testGetInstance()
@@ -84,8 +80,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager
-     *
      * @return void
      */
     public function testSetInstance()
@@ -97,8 +91,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager
-     *
      * @return void
      */
     public function testHasInstance()
@@ -108,8 +100,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -122,8 +112,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager
-     *
      * @return void
      */
     public function testGetEventWithoutRegisteredEvent()
@@ -133,8 +121,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */
@@ -155,8 +141,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Event\StaticEventManager
-     *
      * @return void
      */
     public function testTrigger()
@@ -174,8 +158,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Event\StaticEventManager
      *
      * @return void
      */

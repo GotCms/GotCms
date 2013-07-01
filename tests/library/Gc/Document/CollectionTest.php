@@ -209,8 +209,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection
-     *
      * @return void
      */
     public function testLoad()
@@ -221,8 +219,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -235,8 +231,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection
-     *
      * @return void
      */
     public function testGetAvailableDocuments()
@@ -246,8 +240,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -260,8 +252,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection
-     *
      * @return void
      */
     public function testGetParent()
@@ -272,8 +262,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -286,8 +274,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection
-     *
      * @return void
      */
     public function testGetAvailableChilren()
@@ -299,8 +285,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection
-     *
      * @return void
      */
     public function testGetId()
@@ -310,8 +294,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Collection
      *
      * @return void
      */
@@ -323,8 +305,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection
-     *
      * @return void
      */
     public function testGetIterableId()
@@ -335,8 +315,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Document\Collection
-     *
      * @return void
      */
     public function testGetName()
@@ -346,8 +324,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Document\Collection
      *
      * @return void
      */

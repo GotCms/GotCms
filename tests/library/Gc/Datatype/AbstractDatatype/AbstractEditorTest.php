@@ -88,8 +88,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
-     *
      * @return void
      */
     protected function setUp()
@@ -197,8 +195,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
-     *
      * @return void
      */
     public function testGetValue()
@@ -209,8 +205,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
      *
      * @return void
      */
@@ -223,8 +217,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
-     *
      * @return void
      */
     public function testGetConfig()
@@ -234,8 +226,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
      *
      * @return void
      */
@@ -247,8 +237,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
      *
      * @return void
      */
@@ -263,8 +251,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
-     *
      * @return void
      */
     public function testGetName()
@@ -274,8 +260,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
      *
      * @return void
      */
@@ -287,8 +271,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
-     *
      * @return void
      */
     public function testGetDatatype()
@@ -299,8 +281,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
-     *
      * @return void
      */
     public function testGetRequest()
@@ -310,8 +290,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
      *
      * @return void
      */
@@ -324,8 +302,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
-     *
      * @return void
      */
     public function testAddPath()
@@ -335,8 +311,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractEditor
      *
      * @return void
      */

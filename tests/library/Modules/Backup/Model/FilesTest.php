@@ -65,8 +65,6 @@ class FilesTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Model\Files
-     *
      * @return void
      */
     public function testExport()

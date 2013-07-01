@@ -85,8 +85,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Controller\IndexController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -96,8 +94,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Backup\Controller\IndexController
      *
      * @return void
      */
@@ -114,8 +110,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Backup\Controller\IndexController
-     *
      * @return void
      */
     public function testDownloadActionWithMysql()
@@ -130,8 +124,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Backup\Controller\IndexController
      *
      * @return void
      */

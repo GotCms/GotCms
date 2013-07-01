@@ -94,8 +94,6 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Component\Navigation
-     *
      * @return void
      */
     protected function setUp()
@@ -211,8 +209,6 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Component\Navigation
-     *
      * @return void
      */
     public function testSetBasePath()
@@ -224,8 +220,6 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Component\Navigation
-     *
      * @return void
      */
     public function testGetBasePath()
@@ -236,8 +230,6 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Component\Navigation
      *
      * @return void
      */

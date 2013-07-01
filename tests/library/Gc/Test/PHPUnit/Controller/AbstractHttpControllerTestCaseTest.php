@@ -64,8 +64,6 @@ class AbstractHttpControllerTestCaseTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase
-     *
      * @return void
      */
     public function testInit()
@@ -76,8 +74,6 @@ class AbstractHttpControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase
      *
      * @return void
      */

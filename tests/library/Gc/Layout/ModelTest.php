@@ -69,8 +69,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Layout\Model
-     *
      * @return void
      */
     public function testInit()
@@ -81,8 +79,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Layout\Model
      *
      * @return void
      */
@@ -102,8 +98,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Layout\Model
      *
      * @return void
      */
@@ -126,8 +120,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Layout\Model
-     *
      * @return void
      */
     public function testFromFakeId()
@@ -138,8 +130,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Layout\Model
      *
      * @return void
      */
@@ -161,8 +151,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Layout\Model
-     *
      * @return void
      */
     public function testFromFakeIdentifier()
@@ -173,8 +161,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Layout\Model
      *
      * @return void
      */
@@ -197,8 +183,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Layout\Model
-     *
      * @return void
      */
     public function testSaveWithWrongValues()
@@ -217,8 +201,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Layout\Model
      *
      * @return void
      */
@@ -239,8 +221,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Layout\Model
-     *
      * @return void
      */
     public function testDeleteWithoutId()
@@ -251,8 +231,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Layout\Model
      *
      * @return void
      */

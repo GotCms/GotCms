@@ -67,8 +67,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator
-     *
      * @return void
      */
     public function testGetValue()
@@ -88,8 +86,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator
-     *
      * @return void
      */
     public function testGetValues()
@@ -101,8 +97,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator
-     *
      * @return void
      */
     public function testGetValuesWithLimit()
@@ -113,8 +107,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Translator
      *
      * @return void
      */
@@ -137,8 +129,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Translator
      *
      * @return void
      */
@@ -171,8 +161,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Translator
-     *
      * @return void
      */
     public function testSetValueWithSourceId()
@@ -202,8 +190,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Translator
      *
      * @return void
      */

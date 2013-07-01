@@ -100,8 +100,6 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin
-     *
      * @return void
      */
     public function testInvoke()
@@ -113,8 +111,6 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin
-     *
      * @return void
      */
     public function testValidatePlugin()
@@ -124,8 +120,6 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */
@@ -137,8 +131,6 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */
@@ -152,8 +144,6 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin
-     *
      * @return void
      */
     public function testCanCreate()
@@ -166,8 +156,6 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModulePlugin
-     *
      * @return void
      */
     public function testCreate()
@@ -179,8 +167,6 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Helper\ModulePlugin
      *
      * @return void
      */

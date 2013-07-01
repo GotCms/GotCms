@@ -76,8 +76,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image
-     *
      * @return void
      */
     public function testConstructor()
@@ -87,8 +85,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -103,8 +99,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image
-     *
      * @return void
      */
     public function testResizeWithUndefinedOption()
@@ -118,8 +112,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image
-     *
      * @return void
      */
     public function testResizeWithCropOption()
@@ -130,8 +122,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -144,8 +134,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image
-     *
      * @return void
      */
     public function testResizeWithNoImage()
@@ -155,8 +143,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -168,8 +154,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image
-     *
      * @return void
      */
     public function testHex2rgbWith3Chars()
@@ -179,8 +163,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -192,8 +174,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image
-     *
      * @return void
      */
     public function testSaveWithNoImage()
@@ -203,8 +183,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Image
      *
      * @return void
      */
@@ -220,8 +198,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image
-     *
      * @return void
      */
     public function testSaveWithGif ()
@@ -236,8 +212,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Image
-     *
      * @return void
      */
     public function testSaveWithJpg()
@@ -251,8 +225,6 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Image
      *
      * @return void
      */

@@ -170,8 +170,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection
-     *
      * @return void
      */
     public function testLoad()
@@ -181,8 +179,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -195,8 +191,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection
-     *
      * @return void
      */
     public function testGetTabs()
@@ -207,8 +201,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection
-     *
      * @return void
      */
     public function testGetImportableTabs()
@@ -218,8 +210,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -242,8 +232,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Collection
-     *
      * @return void
      */
     public function testAddTab()
@@ -262,8 +250,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Tab\Collection
      *
      * @return void
      */
@@ -285,8 +271,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Tab\Collection
      *
      * @return void
      */

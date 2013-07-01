@@ -80,8 +80,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Tab\Model
-     *
      * @return void
      */
     protected function setUp()
@@ -165,8 +163,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model
-     *
      * @return void
      */
     public function testLoad()
@@ -180,8 +176,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model
-     *
      * @return void
      */
     public function testLoadWithWrongValues()
@@ -192,8 +186,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model
-     *
      * @return void
      */
     public function testSave()
@@ -203,8 +195,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -223,8 +213,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model
-     *
      * @return void
      */
     public function testDelete()
@@ -237,8 +225,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -258,8 +244,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model
-     *
      * @return void
      */
     public function testFromArray()
@@ -269,8 +253,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Tab\Model
      *
      * @return void
      */
@@ -282,8 +264,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model
-     *
      * @return void
      */
     public function testFromIdWithWrongValues()
@@ -294,8 +274,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Tab\Model
-     *
      * @return void
      */
     public function testGetDocumentType()
@@ -305,8 +283,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Tab\Model
      *
      * @return void
      */

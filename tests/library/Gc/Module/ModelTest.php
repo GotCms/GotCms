@@ -75,8 +75,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model
-     *
      * @return void
      */
     public function testFromArray()
@@ -86,8 +84,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -99,8 +95,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model
-     *
      * @return void
      */
     public function testFromWrongId()
@@ -110,8 +104,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -123,8 +115,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model
-     *
      * @return void
      */
     public function testFromWrongName()
@@ -135,8 +125,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model
-     *
      * @return void
      */
     public function testSave()
@@ -146,8 +134,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -166,8 +152,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model
-     *
      * @return void
      */
     public function testDelete()
@@ -177,8 +161,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\Model
      *
      * @return void
      */
@@ -198,8 +180,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model
-     *
      * @return void
      */
     public function testDeleteWithNoId()
@@ -211,8 +191,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model
-     *
      * @return void
      */
     public function testInstallWithInvalidData()
@@ -223,8 +201,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Model
-     *
      * @return void
      */
     public function testUnInstallWithInvalidData()
@@ -234,8 +210,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\Model
      *
      * @return void
      */

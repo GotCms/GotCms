@@ -88,8 +88,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype
-     *
      * @return void
      */
     public function testGetInfos()
@@ -99,8 +97,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -113,8 +109,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype
-     *
      * @return void
      */
     public function testLoadWithEmptyDatatype()
@@ -125,8 +119,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype
-     *
      * @return void
      */
     public function testGetConfig()
@@ -136,8 +128,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -150,8 +140,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype
-     *
      * @return void
      */
     public function testSetConfig()
@@ -163,8 +151,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype
-     *
      * @return void
      */
     public function testGetUploadUrl()
@@ -174,8 +160,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -187,8 +171,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype
-     *
      * @return void
      */
     public function testGetProperty()
@@ -198,8 +180,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -212,8 +192,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype
-     *
      * @return void
      */
     public function testGetName()
@@ -223,8 +201,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */
@@ -236,8 +212,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype
-     *
      * @return void
      */
     public function testRender()
@@ -248,8 +222,6 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype
      *
      * @return void
      */

@@ -51,8 +51,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\TranslationController
-     *
      * @return void
      */
     public function testCreateAction()
@@ -68,8 +66,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\TranslationController
      *
      * @return void
      */
@@ -101,8 +97,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\TranslationController
-     *
      * @return void
      */
     public function testCreateActionWithInvalidPostData()
@@ -124,8 +118,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\TranslationController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -141,8 +133,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\TranslationController
      *
      * @return void
      */
@@ -166,8 +156,6 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Content\Controller\TranslationController
      *
      * @return void
      */

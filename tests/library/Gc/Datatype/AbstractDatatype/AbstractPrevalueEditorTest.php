@@ -48,8 +48,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
-     *
      * @return void
      */
     protected function setUp()
@@ -88,8 +86,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
-     *
      * @return void
      */
     public function testGetConfig()
@@ -99,8 +95,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */
@@ -113,8 +107,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
-     *
      * @return void
      */
     public function testGetRequest()
@@ -125,8 +117,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
-     *
      * @return void
      */
     public function testGetDatatype()
@@ -136,8 +126,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */
@@ -150,8 +138,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
-     *
      * @return void
      */
     public function testAddPath()
@@ -161,8 +147,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
      *
      * @return void
      */

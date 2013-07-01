@@ -67,8 +67,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor
-     *
      * @return void
      */
     public function testGetVisitorId()
@@ -85,8 +83,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * Test
-     *
-     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -105,8 +101,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor
-     *
      * @return void
      */
     public function testGetUrlId()
@@ -121,8 +115,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor
-     *
      * @return void
      */
     public function testGetTotalVisitors()
@@ -133,8 +125,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor
-     *
      * @return void
      */
     public function testGetTotalPageViews()
@@ -144,8 +134,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Visitor
      *
      * @return void
      */
@@ -161,8 +149,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor
-     *
      * @return void
      */
     public function testGetNbVisitors()
@@ -177,8 +163,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\User\Visitor
-     *
      * @return void
      */
     public function testGetUrlsViews()
@@ -192,8 +176,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\User\Visitor
      *
      * @return void
      */

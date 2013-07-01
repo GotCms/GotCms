@@ -86,8 +86,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module
-     *
      * @return void
      */
     public function testOnBootstrap()
@@ -105,8 +103,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Application\Module
      *
      * @return void
      */
@@ -134,8 +130,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module
-     *
      * @return void
      */
     public function testCheckSslWithFrontendRoute()
@@ -155,8 +149,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module
-     *
      * @return void
      */
     public function testCheckSslWithFrontendRouteAndAlreadyHttps()
@@ -174,8 +166,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Application\Module
-     *
      * @return void
      */
     public function testCheckSslWithoutForceRoute()
@@ -192,8 +182,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Application\Module
      *
      * @return void
      */
@@ -214,8 +202,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Application\Module
      *
      * @return void
      */

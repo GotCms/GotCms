@@ -82,8 +82,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection
-     *
      * @return void
      */
     public function testInit()
@@ -94,8 +92,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -109,8 +105,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection
-     *
      * @return void
      */
     public function testGetViews()
@@ -122,8 +116,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -137,8 +129,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection
-     *
      * @return void
      */
     public function testAddElement()
@@ -150,8 +140,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -166,8 +154,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection
-     *
      * @return void
      */
     public function testGetElements()
@@ -179,8 +165,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -208,8 +192,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Collection
-     *
      * @return void
      */
     public function testSaveFailed()
@@ -220,8 +202,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Collection
      *
      * @return void
      */
@@ -249,8 +229,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Collection
      *
      * @return void
      */

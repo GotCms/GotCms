@@ -70,8 +70,6 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\AbstractModule
-     *
      * @return void
      */
     public function testGetAdapter()
@@ -82,8 +80,6 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Module\AbstractModule
      *
      * @return void
      */

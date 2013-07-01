@@ -51,8 +51,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Content\Controller\IndexController
-     *
      * @return void
      */
     public function testIndexAction()

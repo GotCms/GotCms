@@ -80,8 +80,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Layout\Collection
-     *
      * @return void
      */
     public function testInit()
@@ -94,8 +92,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Layout\Collection
-     *
      * @return void
      */
     public function testGetLayouts()
@@ -106,8 +102,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Layout\Collection
      *
      * @return void
      */

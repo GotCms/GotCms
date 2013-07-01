@@ -99,8 +99,6 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModuleUrl
-     *
      * @return void
      */
     public function testRoute()
@@ -112,8 +110,6 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\View\Helper\ModuleUrl
-     *
      * @return void
      */
     public function testRouteWithControllerAndAction()
@@ -123,8 +119,6 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\View\Helper\ModuleUrl
      *
      * @return void
      */

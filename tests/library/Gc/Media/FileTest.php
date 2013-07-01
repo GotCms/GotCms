@@ -71,8 +71,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File
-     *
      * @return void
      */
     public function testInit()
@@ -93,8 +91,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File
-     *
      * @return void
      */
     public function testGetPath()
@@ -104,8 +100,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -132,8 +126,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File
-     *
      * @return void
      */
     public function testGetFileTransfer()
@@ -143,8 +135,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -159,8 +149,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -186,8 +174,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File
-     *
      * @return void
      */
     public function testRemove()
@@ -197,8 +183,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\File
      *
      * @return void
      */
@@ -213,8 +197,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\File
-     *
      * @return void
      */
     public function testIsWritable()
@@ -225,8 +207,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\File
      *
      * @return void
      */

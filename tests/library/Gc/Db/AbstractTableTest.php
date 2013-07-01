@@ -50,8 +50,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Db\AbstractTable
-     *
      * @return void
      */
     protected function setUp()
@@ -92,8 +90,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable
-     *
      * @return void
      */
     public function testCall()
@@ -103,8 +99,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -116,8 +110,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -132,8 +124,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable
-     *
      * @return void
      */
     public function testFetchAll()
@@ -144,8 +134,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -159,8 +147,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -178,8 +164,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable
-     *
      * @return void
      */
     public function testFetchOne()
@@ -191,8 +175,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable
-     *
      * @return void
      */
     public function testFetchOneWitthFakeOption()
@@ -203,8 +185,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */
@@ -219,8 +199,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable
-     *
      * @return void
      */
     public function testGetLastInsertId()
@@ -231,8 +209,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Db\AbstractTable
-     *
      * @return void
      */
     public function testEvents()
@@ -242,8 +218,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Db\AbstractTable
      *
      * @return void
      */

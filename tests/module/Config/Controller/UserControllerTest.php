@@ -54,8 +54,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\UserController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -71,8 +69,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -93,8 +89,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\UserController
-     *
      * @return void
      */
     public function testLoginActionWithIdentity()
@@ -110,8 +104,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -129,8 +121,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -157,8 +147,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -187,8 +175,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\UserController
-     *
      * @return void
      */
     public function testLoginActionWithWrongPostData()
@@ -216,8 +202,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\UserController
-     *
      * @return void
      */
     public function testForgotPasswordAction()
@@ -233,8 +217,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -272,8 +254,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\UserController
-     *
      * @return void
      */
     public function testForgotPasswordActionWithInvalidPostData()
@@ -296,8 +276,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\UserController
-     *
      * @return void
      */
     public function testLogoutAction()
@@ -314,8 +292,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\UserController
-     *
      * @return void
      */
     public function testCreateAction()
@@ -331,8 +307,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -354,8 +328,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -384,8 +356,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -417,8 +387,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\UserController
-     *
      * @return void
      */
     public function testDeleteActionWithWrongId()
@@ -434,8 +402,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -453,8 +419,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Config\Controller\UserController
-     *
      * @return void
      */
     public function testEditAction()
@@ -470,8 +434,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -493,8 +455,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */
@@ -537,8 +497,6 @@ class UserControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Config\Controller\UserController
      *
      * @return void
      */

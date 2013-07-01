@@ -50,8 +50,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     protected function setUp()
@@ -73,8 +71,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testInit()
@@ -85,8 +81,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -100,8 +94,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testAddData()
@@ -112,8 +104,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -126,8 +116,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testSetAllData()
@@ -138,8 +126,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -153,8 +139,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testUnsetAllData()
@@ -167,8 +151,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testGetData()
@@ -180,8 +162,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testFakeMethod()
@@ -192,8 +172,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -207,8 +185,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testGetDataWithFakeIndex()
@@ -220,8 +196,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testGetDataWithIndexAndStringValue()
@@ -232,8 +206,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -248,8 +220,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testGetDataWithIndexAndDifferentObjectValue()
@@ -263,8 +233,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testGetDataWithUndefinedKeyAndIndex()
@@ -274,8 +242,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -287,8 +253,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -303,8 +267,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testHasData()
@@ -317,8 +279,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testHasFakeData()
@@ -328,8 +288,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -342,8 +300,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testToArrayWithParameters()
@@ -354,8 +310,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -368,8 +322,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -385,8 +337,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testToJson()
@@ -397,8 +347,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -411,8 +359,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testToStringWithFormat()
@@ -423,8 +369,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -437,8 +381,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testOffsetExists()
@@ -449,8 +391,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -464,8 +404,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testGetOrigData()
@@ -477,8 +415,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testGetAllOrigData()
@@ -489,8 +425,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -504,8 +438,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Core\Object
-     *
      * @return void
      */
     public function testSetOrigData()
@@ -516,8 +448,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */
@@ -531,8 +461,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Core\Object
      *
      * @return void
      */

@@ -216,8 +216,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Datatypes\RadioButtonList\Editor
-     *
      * @return void
      */
     public function testSave()
@@ -229,8 +227,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Datatypes\RadioButtonList\Editor
      *
      * @return void
      */

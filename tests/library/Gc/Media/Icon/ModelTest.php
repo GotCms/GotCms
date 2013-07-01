@@ -69,8 +69,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model
-     *
      * @return void
      */
     public function testFromArray()
@@ -80,8 +78,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -93,8 +89,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model
-     *
      * @return void
      */
     public function testFromWithWrongId()
@@ -104,8 +98,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -125,8 +117,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model
-     *
      * @return void
      */
     public function testSaveWithWrongValues()
@@ -137,8 +127,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */
@@ -158,8 +146,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Media\Icon\Model
-     *
      * @return void
      */
     public function testDeleteWithNoData()
@@ -169,8 +155,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Gc\Media\Icon\Model
      *
      * @return void
      */

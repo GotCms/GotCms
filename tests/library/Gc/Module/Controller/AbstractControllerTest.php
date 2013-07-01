@@ -60,8 +60,6 @@ class AbstractControllerTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Gc\Module\Controller\AbstractController
-     *
      * @return void
      */
     public function testConstruct()

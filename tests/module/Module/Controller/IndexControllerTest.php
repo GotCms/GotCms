@@ -53,8 +53,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController
-     *
      * @return void
      */
     public function testIndexAction()
@@ -71,8 +69,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController
-     *
      * @return void
      */
     public function testInstallAction()
@@ -88,8 +84,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Module\Controller\IndexController
      *
      * @return void
      */
@@ -112,8 +106,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Module\Controller\IndexController
      *
      * @return void
      */
@@ -139,8 +131,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     /**
      * Test
      *
-     * @covers Module\Controller\IndexController
-     *
      * @return void
      */
     public function testUninstallActionWithInvalidData()
@@ -158,8 +148,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Module\Controller\IndexController
      *
      * @return void
      */
@@ -188,8 +176,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     /**
      * Test
-     *
-     * @covers Module\Controller\IndexController
      *
      * @return void
      */

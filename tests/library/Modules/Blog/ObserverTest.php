@@ -72,8 +72,6 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Blog\Observer
-     *
      * @return void
      */
     public function testInit()
@@ -83,8 +81,6 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Blog\Observer
      *
      * @return void
      */
