@@ -105,7 +105,9 @@ class Model extends AbstractTable
         $scriptTable = new Model();
         $row         = $scriptTable->fetchRow($scriptTable->select(array('identifier' => $identifier)));
         if (!empty($row)) {
-            return $scriptTable->setData((array) $row);
+            $scriptTable->setData((array) $row);
+            $scriptTable->setOrigData();
+            return $scriptTable;
         } else {
             return false;
         }

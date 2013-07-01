@@ -85,6 +85,7 @@ class Model extends AbstractTable
         if ($result->isValid()) {
             $data = $authAdapter->getResultRowObject(null, 'password');
             $this->setData((array) $data);
+            $this->setOrigData();
             $auth->getStorage()->write($this);
 
             return true;
