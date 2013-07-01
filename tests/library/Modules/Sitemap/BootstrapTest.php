@@ -70,8 +70,6 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
     /**
      * Test
      *
-     * @covers Modules\Sitemap\Bootstrap
-     *
      * @return void
      */
     public function testInit()
@@ -81,8 +79,6 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     *
-     * @covers Modules\Sitemap\Bootstrap
      *
      * @return void
      */
