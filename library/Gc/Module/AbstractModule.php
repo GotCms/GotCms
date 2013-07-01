@@ -27,6 +27,7 @@
 
 namespace Gc\Module;
 
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\EventManager\Event;
 use Gc\Registry;
 
@@ -68,7 +69,7 @@ abstract class AbstractModule
      */
     protected function getAdapter()
     {
-        return Registry::get('Db');
+        return GlobalAdapterFeature::getStaticAdapter();
     }
 
     /**

@@ -147,15 +147,6 @@ function file_put_contents($filename, $content)
     return true;
 }
 
-/**
- * Override Gc\Mvc
- */
-namespace Gc\Mvc;
-
-function glob($pattern, $flags = 0)
-{
-    return array(GC_APPLICATION_PATH . '/tests/config/global.php');
-}
 
 /**
  * Override Zend\Mail\Transport

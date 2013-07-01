@@ -75,31 +75,29 @@ class Module extends Mvc\Module
      */
     public function onBootstrap(EventInterface $event)
     {
-        if (!Registry::isRegistered('Db')) {
-            $application    = $event->getApplication();
-            $config         = $application->getConfig();
-            $serviceManager = $application->getServiceManager();
+        $application    = $event->getApplication();
+        $config         = $application->getConfig();
+        $serviceManager = $application->getServiceManager();
 
-            if (isset($config['db'])) {
-                $dbAdapter = $this->initDatabase($config);
-                $this->initSession($serviceManager, $dbAdapter);
-                $this->initTranslator($serviceManager);
-                $this->initObserverModules();
+        if (isset($config['db'])) {
+            $dbAdapter = $this->initDatabase($config);
+            $this->initSession($serviceManager, $dbAdapter);
+            $this->initTranslator($serviceManager);
+            $this->initObserverModules($serviceManager);
 
-                $sharedEvents = $application->getEventManager()->getSharedManager();
-                $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_ROUTE, array($this, 'checkSsl'), -10);
+            $sharedEvents = $application->getEventManager()->getSharedManager();
+            $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_ROUTE, array($this, 'checkSsl'), -10);
 
-                $application->getEventManager()->attach(
-                    MvcEvent::EVENT_RENDER_ERROR,
-                    array($this, 'prepareException')
-                );
+            $application->getEventManager()->attach(
+                MvcEvent::EVENT_RENDER_ERROR,
+                array($this, 'prepareException')
+            );
 
-                if (CoreConfig::getValue('debug_is_active')) {
-                    $viewManager = $serviceManager->get('ViewManager');
-                    $viewManager->getRouteNotFoundStrategy()->setDisplayExceptions(true);
-                    $viewManager->getRouteNotFoundStrategy()->setDisplayNotFoundReason(true);
-                    $viewManager->getExceptionStrategy()->setDisplayExceptions(true);
-                }
+            if (CoreConfig::getValue('debug_is_active')) {
+                $viewManager = $serviceManager->get('ViewManager');
+                $viewManager->getRouteNotFoundStrategy()->setDisplayExceptions(true);
+                $viewManager->getRouteNotFoundStrategy()->setDisplayNotFoundReason(true);
+                $viewManager->getExceptionStrategy()->setDisplayExceptions(true);
             }
         }
     }
@@ -115,7 +113,6 @@ class Module extends Mvc\Module
     {
         $dbAdapter = new DbAdapter($config['db']);
         GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-        Registry::set('Db', $dbAdapter);
 
         return $dbAdapter;
     }
@@ -180,7 +177,7 @@ class Module extends Mvc\Module
      *
      * @return void
      */
-    public function initObserverModules()
+    public function initObserverModules(ServiceManager $serviceManager)
     {
         //Initialize Observers
         $moduleCollection = new ModuleCollection();
@@ -189,6 +186,7 @@ class Module extends Mvc\Module
             $className = sprintf('\\Modules\\%s\\Observer', $module->getName());
             if (class_exists($className)) {
                 $object = new $className();
+                $object->setServiceManager($serviceManager);
                 $object->init();
             }
         }

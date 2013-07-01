@@ -65,6 +65,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
             Registry::get('Application')->getRequest(),
             Registry::get('Application')->getResponse()
         );
+        $this->object->setServiceLocator(Registry::get('Application')->getServiceManager());
 
     }
 

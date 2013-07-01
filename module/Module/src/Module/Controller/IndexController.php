@@ -146,10 +146,13 @@ class IndexController extends Action
         $action = $this->getMethodFromAction($actionName);
 
         $controllerObject = new $controllerClass($this->getRequest(), $this->getResponse());
-        $controllerObject->setEvent($this->getEvent());
         if (!method_exists($controllerObject, $action)) {
             return false;
         }
+
+        $controllerObject->setEvent($this->getEvent());
+        $controllerObject->setServiceLocator($this->getServiceLocator());
+        $controllerObject->setPluginManager($this->getPluginManager());
 
         $result = $controllerObject->$action();
 

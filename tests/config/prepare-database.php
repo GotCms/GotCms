@@ -48,7 +48,6 @@ try {
 }
 
 \Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-Registry::set('Db', $dbAdapter);
 CoreConfig::getInstance();
 
 /**

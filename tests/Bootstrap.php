@@ -75,6 +75,9 @@ if (file_exists($gcRoot . '/vendor/autoload.php')) {
 if ($zfPath) {
     // Get application stack configuration
     $configuration = include_once $gcRoot . '/config/application.config.php';
+    $configuration['module_listener_options']['config_glob_paths'] = array(
+        'tests/config/global.php',
+    );
     if (isset($loader)) {
         $loader->add('Zend', $zfPath);
         foreach ($configuration['autoloader']['namespaces'] as $name => $path) {
@@ -111,9 +114,9 @@ if (is_readable($gcTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
 
 require_once 'config/prepare-database.php';
 require_once 'config/override-php-functions.php';
-$dbAdapter = Registry::get('Db');
 
 // Run application
+
 \Zend\Console\Console::overrideIsConsole(false);
 $application = \Zend\Mvc\Application::init($configuration);
 $application->getMvcEvent()->getRouter()->setRequestUri($application->getRequest()->getUri());
@@ -121,9 +124,6 @@ $application->getRequest()->setBasePath('http://got-cms.com');
 \Gc\Registry::set('Application', $application);
 //Remove all event observer
 \Gc\Event\StaticEventManager::resetInstance();
-
-\Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-Registry::set('Db', $dbAdapter);
 /*
  * Unset global variables that are no longer needed.
  */

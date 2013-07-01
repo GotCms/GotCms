@@ -347,7 +347,6 @@ class InstallController extends Action
 
                 $dbAdapter = new DbAdapter($session['install']['db']);
                 $dbAdapter->getDriver()->getConnection()->connect();
-                Registry::set('Db', $dbAdapter);
                 GlobalAdapterFeature::setStaticAdapter($dbAdapter);
 
                 $step    = $this->getRequest()->getPost()->get('step');

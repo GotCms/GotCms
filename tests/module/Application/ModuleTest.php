@@ -78,6 +78,8 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        CoreConfig::setValue('force_frontend_ssl', 0);
+        CoreConfig::setValue('force_backend_ssl', 0);
         unset($this->object);
     }
 
@@ -90,7 +92,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnBootstrap()
     {
-        $oldDatabase      = Registry::get('Db');
         $oldAdapter       = GlobalAdapterFeature::getStaticAdapter();
         CoreConfig::setValue('debug_is_active', 1);
         CoreConfig::setValue('session_lifetime', 3600);
@@ -99,7 +100,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($this->object->onBootstrap(Registry::get('Application')->getMvcEvent()));
 
-        Registry::set('Db', $oldDatabase);
         GlobalAdapterFeature::setStaticAdapter($oldAdapter);
     }
 

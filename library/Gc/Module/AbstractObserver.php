@@ -30,6 +30,7 @@ namespace Gc\Module;
 use Gc\Registry;
 use Gc\View\Renderer;
 use Gc\Event\StaticEventManager;
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\EventManager\Event;
 use Zend\ServiceManager\ServiceManager;
 
@@ -50,6 +51,13 @@ abstract class AbstractObserver
     protected $renderer;
 
     /**
+     * ServiceManager
+     *
+     * @var \Zend\ServiceManager\ServiceManager
+     */
+    protected $serviceManager;
+
+    /**
      * Initialize observer
      *
      * @return void
@@ -63,7 +71,7 @@ abstract class AbstractObserver
      */
     protected function getAdapter()
     {
-        return Registry::get('Db');
+        return GlobalAdapterFeature::getStaticAdapter();
     }
 
     /**
