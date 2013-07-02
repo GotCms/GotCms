@@ -56,6 +56,8 @@ class Sitemap extends Object
     /**
      * Generate Xml accessor
      *
+     * @param Request $request Request
+     *
      * @return string
      */
     public function generate(Request $request)
@@ -73,7 +75,8 @@ class Sitemap extends Object
     /**
      * Generate Xml
      *
-     * @param array $documents Array with all documents
+     * @param array   $documents Array with all documents
+     * @param Request $request   Request
      *
      * @return string
      */
@@ -86,7 +89,7 @@ class Sitemap extends Object
             xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
 
-        $url     = $request->getBasePath();
+        $url = $request->getBasePath();
         if (empty($url)) {
             $url = $request->getUri()->toString();
         }

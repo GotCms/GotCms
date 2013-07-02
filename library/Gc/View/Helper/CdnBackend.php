@@ -65,7 +65,8 @@ class CdnBackend extends AbstractHelper
     /**
      * Constructor
      *
-     * @param Request $request Http request
+     * @param Request $request        Http request
+     * @param boolean $databaseActive Check if database is active
      */
     public function __construct(Request $request, $databaseActive)
     {

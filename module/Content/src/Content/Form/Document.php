@@ -168,7 +168,7 @@ class Document extends AbstractForm
             ->setValue($document->isPublished())
             ->setAttribute('id', 'status')
             ->setAttribute('class', 'input-checkbox')
-            ->setCheckedValue((string)DocumentModel::STATUS_ENABLE);
+            ->setCheckedValue((string) DocumentModel::STATUS_ENABLE);
 
         $this->add($status);
 
@@ -177,7 +177,7 @@ class Document extends AbstractForm
             ->setValue($document->showInNav())
             ->setAttribute('id', 'show_in_nav')
             ->setAttribute('class', 'input-checkbox')
-            ->setCheckedValue((string)DocumentModel::STATUS_ENABLE);
+            ->setCheckedValue((string) DocumentModel::STATUS_ENABLE);
 
         $this->add($showInNav);
 

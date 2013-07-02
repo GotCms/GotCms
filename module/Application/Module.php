@@ -175,6 +175,8 @@ class Module extends Mvc\Module
     /**
      * Initialize modules events
      *
+     * @param ServiceManager $serviceManager Service manager
+     *
      * @return void
      */
     public function initObserverModules(ServiceManager $serviceManager)

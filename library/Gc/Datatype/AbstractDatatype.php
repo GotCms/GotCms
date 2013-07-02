@@ -252,9 +252,7 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Get helper manager
      *
-     * @param string $name Name
-     *
-     * @return object
+     * @return HelperPluginManager
      */
     public function getHelperManager()
     {
@@ -356,6 +354,8 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Set request object
      *
+     * @param Request $request Request
+     *
      * @return \Gc\Datatype\AbstractDatatype
      */
     public function setRequest(Request $request)
@@ -376,6 +376,8 @@ abstract class AbstractDatatype extends AbstractTable
 
     /**
      * Set request object
+     *
+     * @param Treeroutestack $router Router
      *
      * @return \Gc\Datatype\AbstractDatatype
      */

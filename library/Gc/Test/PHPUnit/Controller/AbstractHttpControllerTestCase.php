@@ -70,6 +70,7 @@ class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
 
         $this->user->authenticate('test-user-model', 'test-user-model-password');
         $configuration = include GC_APPLICATION_PATH . '/config/application.config.php';
+
         $configuration['module_listener_options']['config_glob_paths'] = array(
             'tests/config/global.php',
         );

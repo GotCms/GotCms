@@ -31,6 +31,7 @@ use Gc\Core\Updater\Adapter;
 use Gc\Core\Updater\Script;
 use Gc\Registry;
 use Gc\Version;
+use Zend\Db\Adapter\Adapter as DbAdapter;
 
 /**
  * Update cms
@@ -142,6 +143,9 @@ class Updater extends Object
     /**
      * Update database
      *
+     * @param array     $configuration Configuration
+     * @param DbAdapter $dbAdapter     Database adapter
+     *
      * @return boolean
      */
     public function updateDatabase($configuration, $dbAdapter)
@@ -150,9 +154,9 @@ class Updater extends Object
             return false;
         }
 
-        $files         = array();
-        $updatePath    = GC_APPLICATION_PATH . '/data/update';
-        $path          = glob($updatePath . '/*');
+        $files      = array();
+        $updatePath = GC_APPLICATION_PATH . '/data/update';
+        $path       = glob($updatePath . '/*');
         foreach ($path as $file) {
             $version = str_replace($updatePath . '/v', '', $file);
             if (version_compare($version, Version::VERSION, '>')) {

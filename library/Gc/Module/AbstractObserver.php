@@ -98,6 +98,8 @@ abstract class AbstractObserver
     /**
      * Retrieve event manager
      *
+     * @param ServiceManager $serviceManager Service manager
+     *
      * @return \Gc\Event\StaticEventManager
      */
     public function setServiceManager(ServiceManager $serviceManager)

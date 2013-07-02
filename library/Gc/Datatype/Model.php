@@ -183,7 +183,8 @@ class Model extends AbstractTable
     /**
      * Save editor
      *
-     * @param PropertyModel $property Property
+     * @param ServiceManager $serviceManager Service manager
+     * @param PropertyModel  $property       Property
      *
      * @return mixed
      */
@@ -215,7 +216,8 @@ class Model extends AbstractTable
     /**
      * Load editor
      *
-     * @param PropertyModel $property Property
+     * @param ServiceManager $serviceManager Service manager
+     * @param PropertyModel  $property       Property
      *
      * @return mixed
      */
@@ -229,8 +231,9 @@ class Model extends AbstractTable
     /**
      * Load Datatype
      *
-     * @param integer $datatypeId Datatype id
-     * @param integer $documentId Optional document id
+     * @param ServiceManager $serviceManager Service manager
+     * @param integer        $datatypeId     Datatype id
+     * @param integer        $documentId     Optional document id
      *
      * @return \Gc\Datatype\AbstractDatatype
      */
