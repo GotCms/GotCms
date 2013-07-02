@@ -142,6 +142,9 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $class  = 'Datatypes\\' . $name . '\Datatype';
         $object = new $class();
+        $object->setRequest($this->getRequest());
+        $object->setHelperManager($this->getHelperManager());
+        $object->setRouter($this->getRouter());
         $object->load($this->getDatatype(), $this->getDocumentId());
         return $object;
     }

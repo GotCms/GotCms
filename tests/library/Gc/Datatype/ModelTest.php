@@ -213,7 +213,15 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testSavePrevalueEditor()
     {
-        $this->assertInternalType('array', Model::savePrevalueEditor(Model::loadDatatype($this->object->getId())));
+        $this->assertInternalType(
+            'array',
+            Model::savePrevalueEditor(
+                Model::loadDatatype(
+                    Registry::get('Application')->getServiceManager(),
+                    $this->object->getId()
+                )
+            )
+        );
     }
 
     /**
@@ -306,9 +314,9 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         );
         $propertyModel->save();
 
-        $this->assertFalse(Model::saveEditor($propertyModel));
+        $this->assertFalse(Model::saveEditor(Registry::get('Application')->getServiceManager(), $propertyModel));
         $propertyModel->isRequired(false);
-        $this->assertTrue(Model::saveEditor($propertyModel));
+        $this->assertTrue(Model::saveEditor(Registry::get('Application')->getServiceManager(), $propertyModel));
 
         $propertyModel->delete();
         $documentModel->delete();
@@ -327,7 +335,12 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             'Zend\Form\Fieldset',
-            Model::loadPrevalueEditor(Model::loadDatatype($this->object->getId()))
+            Model::loadPrevalueEditor(
+                Model::loadDatatype(
+                    Registry::get('Application')->getServiceManager(),
+                    $this->object->getId()
+                )
+            )
         );
     }
 
@@ -345,7 +358,13 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             )
         );
         //Specific to Textstring editor
-        $this->assertInstanceOf('Zend\Form\Element\Text', Model::loadEditor($model));
+        $this->assertInstanceOf(
+            'Zend\Form\Element\Text',
+            Model::loadEditor(
+                Registry::get('Application')->getServiceManager(),
+                $model
+            )
+        );
     }
 
     /**
@@ -355,6 +374,12 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadDatatype()
     {
-        $this->assertInstanceOf('Gc\Datatype\AbstractDatatype', Model::loadDatatype($this->object->getId()));
+        $this->assertInstanceOf(
+            'Gc\Datatype\AbstractDatatype',
+            Model::loadDatatype(
+                Registry::get('Application')->getServiceManager(),
+                $this->object->getId()
+            )
+        );
     }
 }

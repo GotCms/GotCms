@@ -103,11 +103,31 @@ abstract class AbstractPrevalueEditor extends Object
     /**
      * Get request object
      *
-     * @return \Zend\Http\Request
+     * @return \Zend\Http\PhpEnvironment\Request
      */
     public function getRequest()
     {
-        return Registry::get('Application')->getRequest();
+        return $this->getDatatype()->getRequest();
+    }
+
+    /**
+     * Get helper manager object
+     *
+     * @return \Zend\View\HelperPluginManager
+     */
+    public function getHelperManager()
+    {
+        return $this->getDatatype()->getHelperManager();
+    }
+
+    /**
+     * Get router object
+     *
+     * @return \Zend\Mvc\Router\Http\TreeRouteStack
+     */
+    public function getRouter()
+    {
+        return $this->getDatatype()->getRouter();
     }
 
     /**

@@ -255,7 +255,7 @@ class DocumentController extends Action
                         $connection->beginTransaction();
                         foreach ($properties as $property) {
                             $property->setDocumentId($document->getId())->loadValue();
-                            if (!Datatype\Model::saveEditor($property, $document)) {
+                            if (!Datatype\Model::saveEditor($this->getServiceLocator(), $property, $document)) {
                                 $hasError = true;
                             }
                         }
@@ -271,7 +271,10 @@ class DocumentController extends Action
                 }
 
                 foreach ($properties as $property) {
-                    AbstractForm::addContent($fieldset, Datatype\Model::loadEditor($property, $document));
+                    AbstractForm::addContent(
+                        $fieldset,
+                        Datatype\Model::loadEditor($this->getServiceLocator(), $property, $document)
+                    );
                 }
 
                 $documentForm->add($fieldset);

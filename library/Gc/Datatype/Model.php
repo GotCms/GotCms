@@ -32,6 +32,7 @@ use Gc\Form\AbstractForm;
 use Gc\Property\Model as PropertyModel;
 use Datatypes;
 use Zend\Form\Fieldset;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Datatype Model
@@ -186,9 +187,9 @@ class Model extends AbstractTable
      *
      * @return mixed
      */
-    public static function saveEditor(PropertyModel $property)
+    public static function saveEditor(ServiceManager $serviceManager, PropertyModel $property)
     {
-        $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
+        $datatype = self::loadDatatype($serviceManager, $property->getDatatypeId(), $property->getDocumentId());
         $datatype->getEditor($property)->save();
         if (!$property->saveValue()) {
             return false;
@@ -218,9 +219,9 @@ class Model extends AbstractTable
      *
      * @return mixed
      */
-    public static function loadEditor(PropertyModel $property)
+    public static function loadEditor(ServiceManager $serviceManager, PropertyModel $property)
     {
-        $datatype = self::loadDatatype($property->getDatatypeId(), $property->getDocumentId());
+        $datatype = self::loadDatatype($serviceManager, $property->getDatatypeId(), $property->getDocumentId());
 
         return $datatype->getEditor($property)->load();
     }
@@ -233,13 +234,16 @@ class Model extends AbstractTable
      *
      * @return \Gc\Datatype\AbstractDatatype
      */
-    public static function loadDatatype($datatypeId, $documentId = null)
+    public static function loadDatatype(ServiceManager $serviceManager, $datatypeId, $documentId = null)
     {
         $datatype = Model::fromId($datatypeId);
         $class    = 'Datatypes\\' . $datatype->getModel() . '\Datatype';
 
         $object = new $class();
-        $object->load($datatype, $documentId);
+        $object->setRequest($serviceManager->get('Request'))
+            ->setRouter($serviceManager->get('Router'))
+            ->setHelperManager($serviceManager->get('viewhelpermanager'))
+            ->load($datatype, $documentId);
         return $object;
     }
 }

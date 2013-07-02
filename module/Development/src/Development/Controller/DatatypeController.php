@@ -104,7 +104,7 @@ class DatatypeController extends Action
             return $this->redirect()->toRoute('development/datatype');
         }
 
-        $datatype = Datatype\Model::loadDatatype($this->getRouteMatch()->getParam('id'));
+        $datatype = Datatype\Model::loadDatatype($this->getServiceLocator(), $this->getRouteMatch()->getParam('id'));
 
         $datatypeForm = new DatatypeForm();
         $datatypeForm->setAttribute(

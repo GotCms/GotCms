@@ -34,6 +34,9 @@ use Gc\View\Renderer;
 use Gc\Property;
 use Gc\Registry;
 use ReflectionObject;
+use Zend\Http\PhpEnvironment\Request;
+use Zend\Mvc\Router\Http\TreeRouteStack;
+use Zend\View\HelperPluginManager;
 
 /**
  * Abstract Datatype is used to call
@@ -79,6 +82,27 @@ abstract class AbstractDatatype extends AbstractTable
      * @var \Gc\View\Renderer
      */
     protected $renderer;
+
+    /**
+     * Request
+     *
+     * @var \Zend\Http\PhpEnvironment\Request
+     */
+    protected $request;
+
+    /**
+     * Request
+     *
+     * @var \Zend\Http\PhpEnvironment\Request
+     */
+    protected $router;
+
+    /**
+     * Request
+     *
+     * @var \Zend\Http\PhpEnvironment\Request
+     */
+    protected $helperManager;
 
     /**
      * Configuration
@@ -191,9 +215,7 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getUploadUrl($propertyId)
     {
-        $router = Registry::get('Application')->getMvcEvent()->getRouter();
-
-        return $router->assemble(
+        return $this->router->assemble(
             array(
                 'document_id' => $this->getDocumentId(),
                 'property_id' => $propertyId
@@ -211,11 +233,32 @@ abstract class AbstractDatatype extends AbstractTable
      */
     public function getHelper($name)
     {
-        if ($this->getHelperBroker() === null) {
-            $this->setHelperBroker(Registry::get('Application')->getServiceManager()->get('viewhelpermanager'));
-        }
+        return $this->helperManager->get($name);
+    }
 
-        return $this->getHelperBroker()->get($name);
+    /**
+     * Set helper manager
+     *
+     * @param HelperPluginManager $helperManager Helper manager
+     *
+     * @return \Gc\Datatype\AbstractDatatype
+     */
+    public function setHelperManager(HelperPluginManager $helperManager)
+    {
+        $this->helperManager = $helperManager;
+        return $this;
+    }
+
+    /**
+     * Get helper manager
+     *
+     * @param string $name Name
+     *
+     * @return object
+     */
+    public function getHelperManager()
+    {
+        return $this->helperManager;
     }
 
     /**
@@ -298,5 +341,47 @@ abstract class AbstractDatatype extends AbstractTable
         }
 
         return $this->getData('document');
+    }
+
+    /**
+     * Get request object
+     *
+     * @return \Zend\Http\PhpEnvironment\Request
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * Set request object
+     *
+     * @return \Gc\Datatype\AbstractDatatype
+     */
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+
+    /**
+     * Get request object
+     *
+     * @return Zend\Mvc\Router\Http\TreeRouteStack
+     */
+    public function getRouter()
+    {
+        return $this->router;
+    }
+
+    /**
+     * Set request object
+     *
+     * @return \Gc\Datatype\AbstractDatatype
+     */
+    public function setRouter(TreeRouteStack $router)
+    {
+        $this->router = $router;
+        return $this;
     }
 }
