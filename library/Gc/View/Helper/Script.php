@@ -34,7 +34,6 @@ use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\PluginManager;
 use Zend\View\Helper\AbstractHelper;
 
-
 /**
  * Retrieve script from identifier
  *
