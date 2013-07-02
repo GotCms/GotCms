@@ -100,7 +100,7 @@ class Action extends AbstractActionController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $resultResponse = $this->_construct();
+        $resultResponse = $this->construct();
         if (!empty($resultResponse)) {
             return $resultResponse;
         }
@@ -124,7 +124,7 @@ class Action extends AbstractActionController
      *
      * @return void
      */
-    protected function _construct()
+    protected function construct()
     {
         $module    = $this->getRouteMatch()->getParam('module');
         $routeName = $this->getRouteMatch()->getMatchedRouteName();
