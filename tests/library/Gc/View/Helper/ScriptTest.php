@@ -77,7 +77,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
         $request       = $application->getRequest();
         $response      = $application->getResponse();
         $pluginManager = $application->getServiceManager()->get('ControllerPluginManager');
-        $this->object = new Script($request, $response, $pluginManager);
+        $this->object  = new Script($request, $response, $pluginManager);
     }
 
     /**

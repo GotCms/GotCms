@@ -86,7 +86,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetId()
     {
-        $class         = $this->getMethod('setId');
+        $class = $this->getMethod('setId');
         $class->invokeArgs($this->object, array('id' => 1));
         $this->assertEquals(1, $this->object->getId());
     }

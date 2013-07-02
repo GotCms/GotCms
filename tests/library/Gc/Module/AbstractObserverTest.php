@@ -95,7 +95,7 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDriverName()
     {
-        $class         = $this->getMethod('getDriverName');
+        $class = $this->getMethod('getDriverName');
         $this->assertNull($class->invokeArgs($this->object, array()));
     }
 

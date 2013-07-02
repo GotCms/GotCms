@@ -45,7 +45,7 @@ abstract class AbstractPlugin
      *
      * @var array
      */
-    protected $__params = array();
+    protected $pluginParameters = array();
 
     /**
      * Renderer
@@ -73,7 +73,7 @@ abstract class AbstractPlugin
      */
     public function setParams(array $array)
     {
-        $this->__params = $array;
+        $this->pluginParameters = $array;
 
         return $this;
     }
@@ -88,7 +88,7 @@ abstract class AbstractPlugin
      */
     public function setParam($key, $value)
     {
-        $this->__params[$key] = $value;
+        $this->pluginParameters[$key] = $value;
 
         return $this;
     }
@@ -102,8 +102,8 @@ abstract class AbstractPlugin
      */
     public function getParam($name)
     {
-        if (isset($this->__params[$name])) {
-            return $this->__params[$name];
+        if (isset($this->pluginParameters[$name])) {
+            return $this->pluginParameters[$name];
         }
 
         return null;

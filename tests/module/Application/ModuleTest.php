@@ -65,7 +65,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Module;
+        $this->object   = new Module;
         $this->uri      = Registry::get('Application')->getRequest()->getUri();
         $this->mvcEvent = Registry::get('Application')->getMvcEvent();
     }
@@ -90,7 +90,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnBootstrap()
     {
-        $oldAdapter       = GlobalAdapterFeature::getStaticAdapter();
+        $oldAdapter = GlobalAdapterFeature::getStaticAdapter();
         CoreConfig::setValue('debug_is_active', 1);
         CoreConfig::setValue('session_lifetime', 3600);
         CoreConfig::setValue('cookie_domain', 'got-cms.com');

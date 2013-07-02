@@ -83,7 +83,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     * @todo   Implement testIndexAction().
      *
      * @return void
      */
@@ -94,7 +93,6 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test
-     * @todo   Implement testGenerateAction().
      *
      * @return void
      */

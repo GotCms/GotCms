@@ -61,7 +61,7 @@ class ModulePlugin extends AbstractHelper
      *
      * @var array
      */
-    protected $__params = array();
+    protected $modulePluginParameters = array();
 
     /**
      * Execute plugin module.
@@ -78,7 +78,7 @@ class ModulePlugin extends AbstractHelper
             return false;
         }
 
-        $this->__params = $params;
+        $this->modulePluginParameters = $params;
 
         $instance = $this->get($moduleName, $pluginName);
         if (is_callable($instance)) {

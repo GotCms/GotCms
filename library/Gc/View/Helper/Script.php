@@ -49,7 +49,7 @@ class Script extends AbstractHelper
      *
      * @var array
      */
-    protected $__params = array();
+    protected $helperScriptParameters = array();
 
     /**
      * Http Request
@@ -103,8 +103,8 @@ class Script extends AbstractHelper
             return false;
         }
 
-        $this->__params = $params;
-        $name           = $identifier . '-script.gc-stream';
+        $this->helperScriptParameters = $params;
+        $name                         = $identifier . '-script.gc-stream';
 
         file_put_contents('gc.script://' . $name, $script->getContent());
 
@@ -120,8 +120,8 @@ class Script extends AbstractHelper
      */
     public function getParam($name)
     {
-        if (isset($this->__params[$name])) {
-            return $this->__params[$name];
+        if (isset($this->helperScriptParameters[$name])) {
+            return $this->helperScriptParameters[$name];
         }
 
         return null;

@@ -70,7 +70,7 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
         $this->datatype->save();
 
         $this->object = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
-        $application = Registry::get('Application');
+        $application  = Registry::get('Application');
         $this->object->setRequest($application->getServiceManager()->get('Request'));
         $this->object->setRouter($application->getServiceManager()->get('Router'));
         $this->object->setHelperManager($application->getServiceManager()->get('viewhelpermanager'));

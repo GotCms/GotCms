@@ -63,7 +63,7 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
         $this->datatype->save();
 
         $mockDatatype = $this->getMockForAbstractClass('Gc\Datatype\AbstractDatatype');
-        $application = Registry::get('Application');
+        $application  = Registry::get('Application');
         $mockDatatype->setRequest($application->getServiceManager()->get('Request'));
         $mockDatatype->setRouter($application->getServiceManager()->get('Router'));
         $mockDatatype->setHelperManager($application->getServiceManager()->get('viewhelpermanager'));

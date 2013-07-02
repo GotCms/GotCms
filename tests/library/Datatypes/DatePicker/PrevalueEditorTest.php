@@ -68,7 +68,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->datatype->save();
-        $datatype = new Datatype();
+        $datatype    = new Datatype();
         $application = Registry::get('Application');
         $datatype->setRequest($application->getServiceManager()->get('Request'));
         $datatype->setRouter($application->getServiceManager()->get('Router'));

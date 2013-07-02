@@ -624,9 +624,8 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
      */
     public function testCompleteActionDatabase()
     {
-        $dbAdapter     = GlobalAdapterFeature::getStaticAdapter();
-
-        $session = new SessionContainer();
+        $dbAdapter = GlobalAdapterFeature::getStaticAdapter();
+        $session   = new SessionContainer();
         $session->offsetSet(
             'install',
             array(
@@ -673,9 +672,8 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
      */
     public function testCompleteActionData()
     {
-        $dbAdapter     = GlobalAdapterFeature::getStaticAdapter();
-
-        $session = new SessionContainer();
+        $dbAdapter = GlobalAdapterFeature::getStaticAdapter();
+        $session   = new SessionContainer();
         $session->offsetSet(
             'install',
             array(
@@ -734,9 +732,8 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
      */
     public function testCompleteActionTemplate()
     {
-        $dbAdapter     = GlobalAdapterFeature::getStaticAdapter();
-
-        $session = new SessionContainer();
+        $dbAdapter = GlobalAdapterFeature::getStaticAdapter();
+        $session   = new SessionContainer();
         $session->offsetSet(
             'install',
             array(
@@ -784,9 +781,8 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
      */
     public function testCompleteActionConfiguration()
     {
-        $dbAdapter     = GlobalAdapterFeature::getStaticAdapter();
-
-        $session = new SessionContainer();
+        $dbAdapter = GlobalAdapterFeature::getStaticAdapter();
+        $session   = new SessionContainer();
         $session->offsetSet(
             'install',
             array(

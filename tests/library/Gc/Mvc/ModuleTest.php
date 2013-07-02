@@ -52,7 +52,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         include_once __DIR__ . '/ModuleUnit.php';
-        $this->object   = new ModuleUnit;
+        $this->object = new ModuleUnit;
     }
 
     /**
