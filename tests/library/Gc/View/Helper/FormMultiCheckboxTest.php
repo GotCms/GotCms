@@ -40,14 +40,10 @@ class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var FormMultiCheckbox
-     *
-     * @return void
      */
     protected $object;
     /**
      * @var Element\Checkbox
-     *
-     * @return void
      */
     protected $element;
 

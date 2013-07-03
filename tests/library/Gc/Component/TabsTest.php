@@ -44,8 +44,6 @@ class TabsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Tabs
-     *
-     * @return void
      */
     protected $object;
 

@@ -37,8 +37,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Translator
-     *
-     * @return void
      */
     protected $object;
 

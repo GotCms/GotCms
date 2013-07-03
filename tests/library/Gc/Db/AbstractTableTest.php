@@ -41,8 +41,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractTable
-     *
-     * @return void
      */
     protected $object;
 

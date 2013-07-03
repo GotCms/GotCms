@@ -37,8 +37,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractAdapter
-     *
-     * @return void
      */
     protected $object;
 

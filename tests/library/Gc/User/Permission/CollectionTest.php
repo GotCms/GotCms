@@ -37,8 +37,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Collection
-     *
-     * @return void
      */
     protected $object;
 

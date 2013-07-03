@@ -37,8 +37,6 @@ class StaticEventManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var StaticEventManager
-     *
-     * @return void
      */
     protected $object;
 

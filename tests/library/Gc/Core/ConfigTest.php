@@ -37,8 +37,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Config
-     *
-     * @return void
      */
     protected $object;
 

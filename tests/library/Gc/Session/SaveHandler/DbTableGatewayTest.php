@@ -41,22 +41,16 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var DbTableGateway
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var array
-     *
-     * @return void
      */
     protected $testarray;
 
     /**
      * @var TableGateway
-     *
-     * @return void
      */
     protected $adapter;
 

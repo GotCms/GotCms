@@ -41,8 +41,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var File
-     *
-     * @return void
      */
     protected $object;
 

@@ -42,8 +42,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Action
-     *
-     * @return void
      */
     protected $object;
 

@@ -37,8 +37,6 @@ class VisitorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Visitor
-     *
-     * @return void
      */
     protected $object;
 

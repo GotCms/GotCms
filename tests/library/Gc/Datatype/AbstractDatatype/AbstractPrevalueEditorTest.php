@@ -40,8 +40,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractPrevalueEditor
-     *
-     * @return void
      */
     protected $object;
 

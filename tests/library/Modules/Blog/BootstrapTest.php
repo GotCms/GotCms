@@ -39,8 +39,6 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Blog
-     *
-     * @return void
      */
     protected $object;
 

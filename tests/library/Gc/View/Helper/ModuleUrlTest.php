@@ -42,15 +42,11 @@ class ModuleUrlTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ModuleUrl
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var Router
-     *
-     * @return void
      */
     protected $router;
 

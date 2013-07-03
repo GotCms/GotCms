@@ -37,8 +37,6 @@ class VersionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Version
-     *
-     * @return void
      */
     protected $object;
 

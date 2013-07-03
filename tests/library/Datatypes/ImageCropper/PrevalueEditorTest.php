@@ -40,15 +40,11 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var PrevalueEditor
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var DatatypeModel
-     *
-     * @return void
      */
     protected $datatype;
 

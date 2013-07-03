@@ -39,15 +39,11 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Registry
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var Registry
-     *
-     * @return void
      */
     protected $oldinstance;
 

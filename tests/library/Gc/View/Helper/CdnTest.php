@@ -41,8 +41,6 @@ class CdnTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var FormCheckbox
-     *
-     * @return void
      */
     protected $object;
 

@@ -38,8 +38,6 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Bootstrap
-     *
-     * @return void
      */
     protected $object;
 

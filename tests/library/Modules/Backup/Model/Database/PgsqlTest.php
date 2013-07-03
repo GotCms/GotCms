@@ -36,8 +36,6 @@ class PgsqlTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Pgsql
-     *
-     * @return void
      */
     protected $object;
 

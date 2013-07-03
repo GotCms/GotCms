@@ -37,8 +37,6 @@ class InfoTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Info
-     *
-     * @return void
      */
     protected $object;
 

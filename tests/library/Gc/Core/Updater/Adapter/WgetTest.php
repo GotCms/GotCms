@@ -37,8 +37,6 @@ class WgetTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Wget
-     *
-     * @return void
      */
     protected $object;
 

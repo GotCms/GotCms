@@ -45,57 +45,41 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Datatype
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var DatatypeModel
-     *
-     * @return void
      */
     protected $datatype;
 
     /**
      * @var PropertyModel
-     *
-     * @return void
      */
     protected $property;
 
     /**
      * @var ViewModel
-     *
-     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
-     *
-     * @return void
      */
     protected $layout;
 
     /**
      * @var TabModel
-     *
-     * @return void
      */
     protected $tab;
 
     /**
      * @var UserModel
-     *
-     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
-     *
-     * @return void
      */
      protected $documentType;
 

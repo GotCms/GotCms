@@ -37,15 +37,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Image
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var string
-     *
-     * @return void
      */
     protected $directory;
 

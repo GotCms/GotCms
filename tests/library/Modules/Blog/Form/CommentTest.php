@@ -37,8 +37,6 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Comment
-     *
-     * @return void
      */
     protected $object;
 

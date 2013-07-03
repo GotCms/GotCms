@@ -40,8 +40,6 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractModule
-     *
-     * @return void
      */
     protected $object;
 

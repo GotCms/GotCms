@@ -48,8 +48,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @var Updater
-     *
-     * @return void
      */
     protected $object;
 

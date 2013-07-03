@@ -40,15 +40,11 @@ class AbstractDatatypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractDatatype
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var DatatypeModel
-     *
-     * @return void
      */
     protected $datatype;
 

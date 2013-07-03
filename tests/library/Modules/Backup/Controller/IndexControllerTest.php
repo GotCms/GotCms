@@ -39,15 +39,11 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var IndexController
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var Bootstrap
-     *
-     * @return void
      */
     protected $boostrap;
 

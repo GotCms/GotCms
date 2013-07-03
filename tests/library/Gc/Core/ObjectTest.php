@@ -41,8 +41,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Object
-     *
-     * @return void
      */
     protected $object;
 

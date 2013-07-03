@@ -37,8 +37,6 @@ class ToolsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Tools
-     *
-     * @return void
      */
     protected $object;
 

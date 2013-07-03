@@ -41,8 +41,6 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractForm
-     *
-     * @return void
      */
     protected $object;
 

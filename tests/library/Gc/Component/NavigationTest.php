@@ -43,50 +43,36 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Navigation
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
-     *
-     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
-     *
-     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
-     *
-     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
-     *
-     * @return void
      */
     protected $documentType;
 
     /**
      * @var DocumentModel
-     *
-     * @return void
      */
     protected $document;
 
     /**
      * @var DocumentModel
-     *
-     * @return void
      */
     protected $documentChildren;
 

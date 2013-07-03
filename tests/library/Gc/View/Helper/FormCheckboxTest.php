@@ -39,14 +39,10 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var FormCheckbox
-     *
-     * @return void
      */
     protected $object;
     /**
      * @var Element\Checkbox
-     *
-     * @return void
      */
     protected $element;
 

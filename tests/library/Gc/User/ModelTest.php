@@ -39,8 +39,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Model
-     *
-     * @return void
      */
     protected $object;
 

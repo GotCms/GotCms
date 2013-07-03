@@ -37,8 +37,6 @@ class MailTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Mail
-     *
-     * @return void
      */
     protected $object;
 

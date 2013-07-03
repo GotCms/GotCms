@@ -36,8 +36,6 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Mysql
-     *
-     * @return void
      */
     protected $object;
 

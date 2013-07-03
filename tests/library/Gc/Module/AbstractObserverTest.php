@@ -39,8 +39,6 @@ class AbstractObserverTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractObserver
-     *
-     * @return void
      */
     protected $object;
 

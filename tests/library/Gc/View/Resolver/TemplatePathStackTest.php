@@ -39,8 +39,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var TemplatePathStack
-     *
-     * @return void
      */
     protected $object;
 

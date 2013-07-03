@@ -37,14 +37,10 @@ class AclTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Acl
-     *
-     * @return void
      */
     protected $object;
     /**
      * @var Model
-     *
-     * @return void
      */
     protected $user;
 

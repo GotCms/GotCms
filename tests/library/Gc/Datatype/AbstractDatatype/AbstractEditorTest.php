@@ -45,43 +45,31 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var AbstractEditor
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var TabModel
-     *
-     * @return void
      */
     protected $tab;
 
     /**
      * @var UserModel
-     *
-     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
-     *
-     * @return void
      */
      protected $documentType;
 
     /**
      * @var PropertyModel
-     *
-     * @return void
      */
     protected $property;
 
     /**
      * @var ViewModel
-     *
-     * @return void
      */
     protected $view;
 

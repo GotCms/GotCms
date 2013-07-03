@@ -41,15 +41,11 @@ class PartialTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Partial
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var ViewModel
-     *
-     * @return void
      */
     protected $view;
 

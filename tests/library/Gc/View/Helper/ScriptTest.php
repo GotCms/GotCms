@@ -43,15 +43,11 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Script
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var ScriptModel
-     *
-     * @return void
      */
     protected $script;
 

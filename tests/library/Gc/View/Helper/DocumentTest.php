@@ -37,8 +37,6 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Document
-     *
-     * @return void
      */
     protected $object;
 

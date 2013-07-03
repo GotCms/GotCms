@@ -44,50 +44,36 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Comment
-     *
-     * @return void
      */
     protected $object;
 
     /**
      * @var Bootstrap
-     *
-     * @return void
      */
     protected $boostrap;
 
     /**
      * @var DocumentModel
-     *
-     * @return void
      */
     protected $document;
 
     /**
      * @var ViewModel
-     *
-     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
-     *
-     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
-     *
-     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
-     *
-     * @return void
      */
     protected $documentType;
 

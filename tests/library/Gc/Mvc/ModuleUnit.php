@@ -39,8 +39,6 @@ class ModuleUnit extends \Application\Module
      * Module directory path
      *
      * @var string
-     *
-     * @return void
      */
     protected $directory = __DIR__;
 
@@ -48,8 +46,6 @@ class ModuleUnit extends \Application\Module
      * Module
      *
      * @var string
-     *
-     * @return void
      */
     protected $namespace = __namespace__;
 }

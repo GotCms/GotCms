@@ -40,8 +40,6 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Observer
-     *
-     * @return void
      */
     protected $object;
 
