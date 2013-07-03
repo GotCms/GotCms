@@ -150,19 +150,19 @@ class InstallController extends Action
 
         $serverData   = array();
         $serverData[] = array(
-            'label' => GC_FRONTEND_PATH,
+            'label' => '/'.basename(dirname(GC_FRONTEND_PATH)).'/'.basename(GC_FRONTEND_PATH),
             'value' => File::isWritable(GC_FRONTEND_PATH)
         );
         $serverData[] = array(
-            'label' => GC_APPLICATION_PATH.'/config/autoload',
+            'label' => '/config/autoload',
             'value' => File::isWritable(GC_APPLICATION_PATH . '/config/autoload')
         );
         $serverData[] = array(
-            'label' => GC_APPLICATION_PATH .'/data/cache',
+            'label' => '/data/cache',
             'value' => is_writable(GC_APPLICATION_PATH . '/data/cache')
         );
         $serverData[] = array(
-            'label' => GC_MEDIA_PATH,
+            'label' => '/'.basename(dirname(GC_MEDIA_PATH)).'/'.basename(GC_MEDIA_PATH),
             'value' => File::isWritable(GC_MEDIA_PATH)
         );
 
@@ -349,7 +349,7 @@ class InstallController extends Action
 
                 $dbAdapter = new DbAdapter($session['install']['db']);
                 $dbAdapter->getDriver()->getConnection()->connect();
-                Registry::set('Db', $dbAdapter);
+
                 GlobalAdapterFeature::setStaticAdapter($dbAdapter);
 
                 $step    = $this->getRequest()->getPost()->get('step');
@@ -627,11 +627,12 @@ class InstallController extends Action
 
                             return $this->returnJson(
                                 array(
-                                    'message' => 'Installation complete. Please refresh or go to /admin page to manage your website.'
+                                    'message' => 'Installation complete.
+                                    Please refresh or go to /admin page to manage your website.'
                                 )
                             );
                             break;
-                    }
+                                                }
                 } catch (Exception $e) {
                     return $this->returnJson(array('success' => false, 'message' => $e->getMessage()));
                 }
