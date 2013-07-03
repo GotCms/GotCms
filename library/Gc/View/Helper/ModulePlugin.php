@@ -89,6 +89,22 @@ class ModulePlugin extends AbstractHelper
     }
 
     /**
+     * Returns param from name.
+     *
+     * @param string $name Parameter name
+     *
+     * @return mixed
+     */
+    public function getParam($name)
+    {
+        if (isset($this->modulePluginParameters[$name])) {
+            return $this->modulePluginParameters[$name];
+        }
+
+        return null;
+    }
+
+    /**
      * Validate the plugin
      *
      * Any plugin is considered valid in this context.

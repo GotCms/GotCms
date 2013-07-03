@@ -113,6 +113,18 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
+    public function testGetParameter()
+    {
+        $this->object->__invoke('Blog', 'CommentForm', array('test' => 'test'));
+        $this->assertEquals('test', $this->object->getParam('test'));
+        $this->assertNull($this->object->getParam('fake-test'));
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
     public function testValidatePlugin()
     {
         $this->assertTrue($this->object->validatePlugin($this->object->get('Blog', 'CommentForm')));
