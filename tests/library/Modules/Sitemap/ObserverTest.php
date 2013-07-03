@@ -46,44 +46,43 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Observer
      *
-     * @return void
      */
     protected $object;
 
     /**
      * @var Model
      *
-     * @return void
      */
     protected $document;
 
     /**
      * @var ViewModel
      *
-     * @return void
      */
     protected $view;
 
     /**
      * @var LayoutModel
      *
-     * @return void
      */
     protected $layout;
 
     /**
      * @var UserModel
      *
-     * @return void
      */
     protected $user;
 
     /**
      * @var DocumentTypeModel
      *
-     * @return void
      */
     protected $documentType;
+
+    /**
+     * @var string
+     */
+    protected $filePath;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -153,8 +152,11 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->document->save();
+        $this->document->setOrigData();
         $this->object = new Observer;
         $this->object->setServiceManager(Registry::get('Application')->getServiceManager());
+
+        $this->filePath = GC_MEDIA_PATH . '/sitemap.xml';
     }
 
     /**
@@ -177,6 +179,9 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
         unset($this->view);
         unset($this->object);
         StaticEventManager::resetInstance();
+        if (file_exists($this->filePath)) {
+            unlink($this->filePath);
+        }
     }
 
     /**
@@ -200,6 +205,41 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
         $mvcEvent->setParam('object', $this->document);
         $this->document->setUrlKey('new-url-key');
         $this->assertNull($this->object->addElement($mvcEvent));
+        //Test existing Element
+        $this->assertNull($this->object->addElement($mvcEvent));
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testAddElementWithAnXml()
+    {
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' .
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ' .
+            'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+            'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 ' .
+            'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">' .
+            '</urlset>';
+        file_put_contents($this->filePath, $xml);
+        $mvcEvent = Registry::get('Application')->getMvcEvent();
+        $mvcEvent->setParam('object', $this->document);
+        $this->document->setUrlKey('new-url-key');
+        $this->assertNull($this->object->addElement($mvcEvent));
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testAddElementWithUnpublisedDocument()
+    {
+        $this->document->setStatus(DocumentModel::STATUS_DISABLE);
+        $mvcEvent = Registry::get('Application')->getMvcEvent();
+        $mvcEvent->setParam('object', $this->document);
+        $this->document->setUrlKey('new-url-key');
         $this->assertNull($this->object->addElement($mvcEvent));
     }
 
@@ -212,6 +252,9 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
     {
         $mvcEvent = Registry::get('Application')->getMvcEvent();
         $mvcEvent->setParam('object', $this->document);
+        //Create xml
+        $this->assertNull($this->object->addElement($mvcEvent));
+        //Delete Element
         $this->assertNull($this->object->removeElement($mvcEvent));
     }
 }

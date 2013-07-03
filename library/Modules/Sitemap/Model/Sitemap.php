@@ -90,13 +90,9 @@ class Sitemap extends Object
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
 
         $url = $request->getBasePath();
-        if (empty($url)) {
-            $url = $request->getUri()->toString();
-        }
-
         foreach ($documents as $document) {
             $xml .= '<url>';
-            $xml .= '<loc>' . $url . $document->getUrl() . '</loc>';
+            $xml .= '<loc><![CDATA[' . $url . $document->getUrl() . ']]></loc>';
             $xml .= '<lastmod>' . date('Y-m-d\TH:i:s\Z', strtotime($document->getUpdatedAt())) . '</lastmod>';
             $xml .= '<changefreq>weekly</changefreq>';
             $xml .= '<priority>0.5</priority>';
