@@ -63,6 +63,7 @@ class Install extends AbstractForm
         $countryAvailable = array(
             'en_GB' => 'English',
             'fr_FR' => 'Français',
+            'ru_RU' => 'Русский',
         );
 
         $lang = new Element\Select('lang');

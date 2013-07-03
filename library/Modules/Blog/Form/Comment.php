@@ -71,7 +71,7 @@ class Comment extends AbstractForm
             )
         );
 
-        $captchaImage->setImgDir(GC_APPLICATION_PATH . '/public/frontend/tmp');
+        $captchaImage->setImgDir(GC_FRONTEND_PATH . '/tmp');
         $captchaImage->setImgUrl('/frontend/tmp');
 
         $captcha = new Element\Captcha('captcha');

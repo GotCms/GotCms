@@ -23,9 +23,11 @@
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
-
+$publicdir = '/'.basename($_SERVER[DOCUMENT_ROOT]);
 define('GC_APPLICATION_PATH', getcwd());
-define('GC_MEDIA_PATH', GC_APPLICATION_PATH . '/public/media');
+define('GC_MEDIA_PATH', GC_APPLICATION_PATH .$publicdir. '/media');
+define('GC_FRONTEND_PATH', GC_APPLICATION_PATH .$publicdir. '/frontend');
+
 
 // Composer autoloading
 if (file_exists('vendor/autoload.php')) {
