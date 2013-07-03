@@ -150,19 +150,19 @@ class InstallController extends Action
 
         $serverData   = array();
         $serverData[] = array(
-            'label' => '/public/frontend',
-            'value' => File::isWritable(GC_APPLICATION_PATH . '/public/frontend')
+            'label' => GC_FRONTEND_PATH,
+            'value' => File::isWritable(GC_FRONTEND_PATH)
         );
         $serverData[] = array(
-            'label' => '/config/autoload',
+            'label' => GC_APPLICATION_PATH.'/config/autoload',
             'value' => File::isWritable(GC_APPLICATION_PATH . '/config/autoload')
         );
         $serverData[] = array(
-            'label' => '/data/cache',
+            'label' => GC_APPLICATION_PATH .'/data/cache',
             'value' => is_writable(GC_APPLICATION_PATH . '/data/cache')
         );
         $serverData[] = array(
-            'label' => '/public/media',
+            'label' => GC_MEDIA_PATH,
             'value' => File::isWritable(GC_MEDIA_PATH)
         );
 
@@ -233,9 +233,11 @@ class InstallController extends Action
             $continue = true;
             foreach (array($serverData, $phpData) as $configs) {
                 foreach ($configs as $config) {
-                    if ($config['value'] !== true) {
-                        $continue = false;
-                        break 2;
+                    if ($config['label'] !== 'Intl') {
+                        if ($config['value'] !== true) {
+                            $continue = false;
+                            break 2;
+                        }
                     }
                 }
             }
@@ -347,6 +349,7 @@ class InstallController extends Action
 
                 $dbAdapter = new DbAdapter($session['install']['db']);
                 $dbAdapter->getDriver()->getConnection()->connect();
+                Registry::set('Db', $dbAdapter);
                 GlobalAdapterFeature::setStaticAdapter($dbAdapter);
 
                 $step    = $this->getRequest()->getPost()->get('step');
@@ -590,7 +593,7 @@ class InstallController extends Action
                             $sql = file_get_contents($filePath);
                             $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
 
-                            File::copyDirectory($templatePath . '/frontend', GC_APPLICATION_PATH . '/public/frontend');
+                            File::copyDirectory($templatePath . '/frontend', GC_FRONTEND_PATH);
                             if (file_exists($templatePath . '/files')) {
                                 File::copyDirectory($templatePath . '/files', GC_MEDIA_PATH . '/files');
                             }
@@ -624,8 +627,7 @@ class InstallController extends Action
 
                             return $this->returnJson(
                                 array(
-                                    'message' => 'Installation complete.
-                                    Please refresh or go to /admin page to manage your website.'
+                                    'message' => 'Installation complete. Please refresh or go to /admin page to manage your website.'
                                 )
                             );
                             break;

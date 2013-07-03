@@ -98,7 +98,7 @@ class MediaController extends Action
         $helperBroker = $this->getServiceLocator()->get('ViewHelperManager');
         $headscript   = $helperBroker->get('HeadScript');
         $cdn          = $helperBroker->get('CdnBackend');
-        $translator   = $this->getServiceLocator()->get('translator');
+        $translator   = Registry::get('Application')->getServiceManager()->get('translator');
         $headscript->appendFile($cdn('/backend/js/libs/elfinder.min.js'), 'text/javascript');
 
         $language = preg_replace('~(.*)_.*~', '$1', $translator->getLocale());
@@ -169,7 +169,7 @@ class MediaController extends Action
             'roots' => array(
                 array(
                     'driver'        => 'LocalFileSystem',
-                    'path'          => GC_APPLICATION_PATH . '/public/frontend/',
+                    'path'          => GC_FRONTEND_PATH,
                     'tmbPath'       => 'thumbnails',
                     'URL'           => '/frontend/',
                     'accessControl' => 'access',

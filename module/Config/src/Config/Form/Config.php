@@ -397,6 +397,7 @@ class Config extends AbstractForm
     {
         //Local settings
         $localeList = array(
+            'ru_RU' => 'Русский',
             'fr_FR' => 'Français',
             'en_GB' => 'English',
         );

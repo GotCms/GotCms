@@ -72,6 +72,7 @@ class Translation extends AbstractForm
             ->setAttribute('class', 'input-text');
 
         $localeList = array(
+            'ru_RU' => 'Русский',
             'fr_FR' => 'Français',
             'en_GB' => 'English',
         );
