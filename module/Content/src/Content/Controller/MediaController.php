@@ -169,7 +169,7 @@ class MediaController extends Action
             'roots' => array(
                 array(
                     'driver'        => 'LocalFileSystem',
-                    'path'          => GC_APPLICATION_PATH . '/public/frontend/',
+                    'path'          => GC_APPLICATION_PATH . GC_DOCUMENT_ROOT . '/frontend/',
                     'tmbPath'       => 'thumbnails',
                     'URL'           => '/frontend/',
                     'accessControl' => 'access',
