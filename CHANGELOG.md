@@ -12,6 +12,7 @@
 - Sitemap not working properly ([https://github.com/PierreRambaud/GotCms/issues/87](https://github.com/PierreRambaud/GotCms/issues/87))
 - Bug in translations with select box ([https://github.com/PierreRambaud/GotCms/issues/88](https://github.com/PierreRambaud/GotCms/issues/88))
 - Save all translations during installation ([https://github.com/PierreRambaud/GotCms/issues/90](https://github.com/PierreRambaud/GotCms/issues/90))
+- Bug with Gc\Db\AbstractTable during installation ([https://github.com/PierreRambaud/GotCms/issues/91](https://github.com/PierreRambaud/GotCms/issues/91))
 
 ##0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/PierreRambaud/GotCms/issues/55](https://github.com/PierreRambaud/GotCms/issues/55))
