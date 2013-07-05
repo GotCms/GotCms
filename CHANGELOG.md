@@ -10,6 +10,7 @@
 - Update to Zend Framework 2.2.1 ([https://github.com/PierreRambaud/GotCms/issues/83](https://github.com/PierreRambaud/GotCms/issues/83))
 - Automatically open the treeview ([https://github.com/PierreRambaud/GotCms/issues/84](https://github.com/PierreRambaud/GotCms/issues/84))
 - Sitemap not working properly ([https://github.com/PierreRambaud/GotCms/issues/87](https://github.com/PierreRambaud/GotCms/issues/87))
+- Bug in translations with select box ([https://github.com/PierreRambaud/GotCms/issues/88](https://github.com/PierreRambaud/GotCms/issues/88))
 
 ##0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/PierreRambaud/GotCms/issues/55](https://github.com/PierreRambaud/GotCms/issues/55))
