@@ -670,66 +670,6 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
      *
      * @return void
      */
-    public function testCompleteActionData()
-    {
-        $dbAdapter = GlobalAdapterFeature::getStaticAdapter();
-        $session   = new SessionContainer();
-        $session->offsetSet(
-            'install',
-            array(
-                'lang' => 'fr_FR',
-                'db' => array(
-                    'driver' => GC_DATABASE_DRIVER,
-                    'username' => GC_DATABASE_USERNAME,
-                    'dbname' => GC_DATABASE_DATABASE,
-                    'hostname' => GC_DATABASE_HOSTNAME,
-                    'password' => GC_DATABASE_PASSWORD,
-                ),
-                'configuration' => array(
-                    'site_name' => 'GotCms',
-                    'site_is_offline' => 0,
-                    'admin_email' => 'pierre.rambaud86@gmail.com',
-                    'admin_firstname' => 'Pierre',
-                    'admin_lastname' => 'Rambaud'
-                )
-            )
-        );
-
-        $config    = CoreConfig::getInstance();
-        $oldValues = $config->getValues();
-        $config->delete('1 = 1');
-        $this->getRequest()->getHeaders()->addHeaderLine('X_REQUESTED_WITH: XMLHttpRequest');
-        $this->dispatch(
-            '/install/complete',
-            'POST',
-            array(
-                'step' => 'i-d'
-            )
-        );
-
-        $this->assertResponseStatusCode(200);
-
-        $this->assertModuleName('Application');
-        $this->assertControllerName('InstallController');
-        $this->assertControllerClass('InstallController');
-        $this->assertMatchedRouteName('install/complete');
-
-        foreach ($oldValues as $value) {
-            $identifier = $config->fetchRow($config->select(array('identifier' => $value['identifier'])));
-            if (empty($identifier)) {
-                unset($value['id']);
-                $config->insert($value);
-            }
-        }
-
-        GlobalAdapterFeature::setStaticAdapter($dbAdapter);
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
     public function testCompleteActionTemplate()
     {
         $dbAdapter = GlobalAdapterFeature::getStaticAdapter();
