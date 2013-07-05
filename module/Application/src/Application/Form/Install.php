@@ -58,16 +58,11 @@ class Install extends AbstractForm
      *
      * @return void
      */
-    public function lang()
+    public function lang($config)
     {
-        $countryAvailable = array(
-            'en_GB' => 'English',
-            'fr_FR' => 'Français',
-        );
-
         $lang = new Element\Select('lang');
         $lang->setAttribute('size', 10)
-            ->setValueOptions($countryAvailable)
+            ->setValueOptions($config['locales'])
             ->setValue('en_GB')
             ->setAttribute('class', 'input-select');
 

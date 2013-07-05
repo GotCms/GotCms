@@ -393,20 +393,15 @@ class Config extends AbstractForm
      *
      * @return \Config\Form\Config
      */
-    public function initServer()
+    public function initServer($config)
     {
         //Local settings
-        $localeList = array(
-            'fr_FR' => 'Français',
-            'en_GB' => 'English',
-        );
-
         $localeFieldset = new Fieldset('locale');
         $localeFieldset->setLabel('Locale');
         $locale = new Element\Select('locale');
         $locale->setAttribute('label', 'Server locale')
             ->setAttribute('class', 'input-select')
-            ->setValueOptions($localeList);
+            ->setValueOptions($config['locales']);
         $localeFieldset->add($locale);
 
         $this->getInputFilter()->add(

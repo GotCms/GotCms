@@ -88,6 +88,7 @@ class TranslationController extends Action
     public function createAction()
     {
         $translationForm = new Form\Translation();
+        $translationForm->prepareForm($this->getServiceLocator()->get('Config'));
         $translationForm->setAttribute('action', $this->url()->fromRoute('content/translation/create'));
 
         if ($this->getRequest()->isPost()) {
@@ -129,6 +130,7 @@ class TranslationController extends Action
     public function indexAction()
     {
         $translationForm = new Form\Translation();
+        $translationForm->prepareForm($this->getServiceLocator()->get('Config'));
         $translationForm->setAttribute('action', $this->url()->fromRoute('content/translation'));
         if ($this->getRequest()->isPost()) {
             $post = $this->getRequest()->getPost();

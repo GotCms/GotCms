@@ -50,7 +50,7 @@ class Translation extends AbstractForm
      *
      * @return void
      */
-    public function init()
+    public function prepareForm($config)
     {
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter        = $inputFilterFactory->createInputFilter(
@@ -71,14 +71,9 @@ class Translation extends AbstractForm
         $source->setAttribute('label', 'Name')
             ->setAttribute('class', 'input-text');
 
-        $localeList = array(
-            'fr_FR' => 'Français',
-            'en_GB' => 'English',
-        );
-
         $locale = new Element\Select('locale');
         $locale->setAttribute('label', 'Url key')
-            ->setValueOptions($localeList);
+            ->setValueOptions($config['locales']);
 
         $this->add($source);
         $this->add($locale);

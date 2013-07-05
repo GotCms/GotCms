@@ -90,7 +90,7 @@ class CmsController extends Action
     public function editServerAction()
     {
         $this->form = new configForm();
-        $this->form->initServer();
+        $this->form->initServer($this->getServiceLocator()->get('Config'));
         return $this->forward()->dispatch('CmsController', array('action' => 'edit'));
     }
 

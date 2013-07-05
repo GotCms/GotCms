@@ -177,8 +177,13 @@ return array(
                             ),
                         ),
                     ),
-                )
+                ),
             ),
         ),
+    ),
+
+    'locales' => array(
+        'en_GB' => 'English',
+        'fr_FR' => 'Français',
     )
 );

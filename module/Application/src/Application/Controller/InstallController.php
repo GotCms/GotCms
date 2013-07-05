@@ -93,7 +93,7 @@ class InstallController extends Action
     public function indexAction()
     {
         $this->checkInstall(1);
-        $this->installForm->lang();
+        $this->installForm->lang($this->getServiceLocator()->get('Config'));
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
