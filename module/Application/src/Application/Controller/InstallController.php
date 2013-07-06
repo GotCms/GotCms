@@ -401,24 +401,23 @@ class InstallController extends Action
                             );
 
 
-                            $languageFilename = sprintf(
-                                GC_APPLICATION_PATH . '/data/install/translation/%s.php',
-                                $session['install']['lang']
-                            );
-                            if (file_exists($languageFilename)) {
-                                $translator = new Core\Translator;
-                                $langConfig = include $languageFilename;
+                            //Save all languages in database
+                            $languagesFilename = glob(GC_APPLICATION_PATH . '/data/install/translation/*.php');
+                            $translator = new Core\Translator;
+                            foreach ($languagesFilename as $language) {
+                                $langConfig = include $language;
                                 foreach ($langConfig as $source => $destination) {
                                     $translator->setValue(
                                         $source,
                                         array(
                                             array(
-                                                'locale' => $session['install']['lang']
-                                                , 'value' => $destination
+                                                'locale' => $session['install']['lang'],
+                                                'value' => $destination
                                             )
                                         )
                                     );
                                 }
+                                copy($language, GC_APPLICATION_PATH . '/data/translation/' . basename($language));
                             }
 
                             $sql = file_get_contents(GC_APPLICATION_PATH . '/data/install/sql/data.sql');
