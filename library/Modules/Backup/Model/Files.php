@@ -51,8 +51,8 @@ class Files extends Object
         $tmpFile = tempnam(sys_get_temp_dir(), 'Gc');
         $this->zip(
             array(
-                GC_APPLICATION_PATH . '/public/frontend',
-                GC_APPLICATION_PATH . '/public/media',
+                GC_APPLICATION_PATH . GC_DOCUMENT_ROOT . '/frontend',
+                GC_APPLICATION_PATH . GC_DOCUMENT_ROOT . '/media',
             ),
             $tmpFile
         );
