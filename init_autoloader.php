@@ -25,8 +25,8 @@
  */
 
 define('GC_APPLICATION_PATH', getcwd());
-define('GC_DOCUMENT_ROOT', '/' . basename($_SERVER[DOCUMENT_ROOT]));
-define('GC_MEDIA_PATH', GC_APPLICATION_PATH . GC_DOCUMENT_ROOT . '/media');
+define('GC_PUBLIC_PATH', GC_APPLICATION_PATH . '/' . basename($_SERVER['DOCUMENT_ROOT']));
+define('GC_MEDIA_PATH', GC_PUBLIC_PATH . '/media');
 
 // Composer autoloading
 if (file_exists('vendor/autoload.php')) {

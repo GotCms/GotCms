@@ -150,8 +150,8 @@ class InstallController extends Action
 
         $serverData   = array();
         $serverData[] = array(
-            'label' => GC_DOCUMENT_ROOT . '/frontend',
-            'value' => File::isWritable(GC_APPLICATION_PATH . GC_DOCUMENT_ROOT . '/frontend')
+            'label' => '/' . basename(GC_PUBLIC_PATH) . '/frontend',
+            'value' => File::isWritable(GC_PUBLIC_PATH . '/frontend')
         );
         $serverData[] = array(
             'label' => '/config/autoload',
@@ -162,7 +162,7 @@ class InstallController extends Action
             'value' => is_writable(GC_APPLICATION_PATH . '/data/cache')
         );
         $serverData[] = array(
-            'label' => GC_DOCUMENT_ROOT . '/media',
+            'label' => basename(GC_PUBLIC_PATH) . '/media',
             'value' => File::isWritable(GC_MEDIA_PATH)
         );
 
@@ -589,7 +589,7 @@ class InstallController extends Action
                             $sql = file_get_contents($filePath);
                             $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
 
-                            File::copyDirectory($templatePath . '/frontend', GC_APPLICATION_PATH . GC_DOCUMENT_ROOT . '/frontend');
+                            File::copyDirectory($templatePath . '/frontend', GC_PUBLIC_PATH . '/frontend');
                             if (file_exists($templatePath . '/files')) {
                                 File::copyDirectory($templatePath . '/files', GC_MEDIA_PATH . '/files');
                             }

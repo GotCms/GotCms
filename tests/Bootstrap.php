@@ -37,7 +37,7 @@ error_reporting(E_ALL | E_STRICT);
 require_once 'PHPUnit/Autoload.php';
 chdir(dirname(__DIR__));
 $gcRoot    = getcwd();
-$gcDocumentRoot = '/public';
+$gcPublic  = '/public';
 $zfLibrary = $gcRoot . '/vendor';
 $gcLibrary = $gcRoot . '/library';
 $gcTests   = $gcRoot . '/tests';
@@ -52,7 +52,7 @@ $path = array(
 
 set_include_path(implode(PATH_SEPARATOR, $path));
 define('GC_APPLICATION_PATH', $gcRoot);
-define('GC_DOCUMENT_ROOT', $gcDocumentRoot);
+define('GC_PUBLIC_PATH', $gcRoot . $gcPublic);
 define('GC_MEDIA_PATH', GC_APPLICATION_PATH . '/tests/media');
 /**
  * Setup autoloading
