@@ -287,268 +287,268 @@ return array (
     'Database configuration' => 'Конфигурация базы данных',
 
     // Zend\I18n\Validator\Alnum
-    "Invalid type given. String, integer or float expected" => "Alnum. Неверный тип данных, ожидается string, integer или float",
-    "The input contains characters which are non alphabetic and no digits" => "Alnum. Ввод содержит сиволы отличающиеся от текстовой и цифровой информации",
-    "The input is an empty string" => "Alnum. Введена пустая строка",
+    "Invalid type given. String, integer or float expected" => "Неверный тип данных, ожидается строка, целое число или число с плавающей точкой",
+    "The input contains characters which are non alphabetic and no digits" => "Ввод содержит сиволы отличающиеся от текстовой и цифровой информации",
+    "The input is an empty string" => "Введена пустая строка",
 
     // Zend\I18n\Validator\Alpha
-    "Invalid type given. String expected" => "Alpha. Неверный тип, ожидается string ",
-    "The input contains non alphabetic characters" => "Alpha. Ввод содержит не символьную информацию",
-    "The input is an empty string" => "Alpha. Введена пустая строка empty",
+    "Invalid type given. String expected" => "Неверный тип, ожидается строка",
+    "The input contains non alphabetic characters" => "Ввод содержит не символьную информацию",
+    //"The input is an empty string" => "Введена пустая строка",
 
     // Zend\I18n\Validator\Float
-    "Invalid type given. String, integer or float expected" => "Float. Неверный тип данных, ожидается float",
-    "The input does not appear to be a float" => "Float. Ввод не принадлежит float",
+    //"Invalid type given. String, integer or float expected" => "Неверный тип данных, ожидается строка, целое число или число с плавающей точкой",
+    "The input does not appear to be a float" => "Ввод не принадлежит числу с плавающей точкой",
 
     // Zend\I18n\Validator\Int
-    "Invalid type given. String or integer expected" => "Int. Неверный тип данных, ожидается integer",
-    "The input does not appear to be an integer" => "Int. Ввод не принадлежит integer",
+    "Invalid type given. String or integer expected" => "Неверный тип данных, ожидается строка или целое число",
+    "The input does not appear to be an integer" => "Ввод не принадлежит целому числу",
 
     // Zend\I18n\Validator\PostCode
-    "Invalid type given. String or integer expected" => "PostCode. Неверный тип данных PostCode, ожидается string или integer",
-    "The input does not appear to be a postal code" => "PostCode. Это не почтовый адрес",
-    "An exception has been raised while validating the input" => "PostCode. Вызвано исключение exception при проверке введенных данных",
+    //"Invalid type given. String or integer expected" => "Неверный тип данных, ожидается строка или целое число",
+    "The input does not appear to be a postal code" => "Ввод содержит не почтовый адрес",
+    "An exception has been raised while validating the input" => "Вызвано исключение при проверке введенных данных",
 
     // Zend\Validator\Barcode
-    "The input failed checksum validation" => 'Barcode. Ошибка проверки контрольной суммы checksum',
-    "The input contains invalid characters" => "Barcode. Ввод содержит неверные символы",
-    "The input should have a length of %length% characters" => "Barcode. Длинна строки length должна быть %length% символов",
-    "Invalid type given. String expected" => "Barcode. Неверный тип, ожидается string",
+    "The input failed checksum validation" => 'Ошибка проверки контрольной суммы',
+    "The input contains invalid characters" => "Ввод содержит неверные символы",
+    "The input should have a length of %length% characters" => "Длинна строки должна быть %length% символов",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
 
     // Zend\Validator\Between
-    "The input is not between '%min%' and '%max%', inclusively" => "Between. Ввод не входит диапазон от '%min%' до '%max%'",
-    "The input is not strictly between '%min%' and '%max%'" => "Between. Ввод должен быть строго в диапазоне от '%min%' до '%max%'",
+    "The input is not between '%min%' and '%max%', inclusively" => "Ввод не входит диапазон от '%min%' до '%max%'",
+    "The input is not strictly between '%min%' and '%max%'" => "Ввод должен быть строго в диапазоне от '%min%' до '%max%'",
 
     // Zend\Validator\Callback
-    "The input is not valid" => "Callback. Не верное значение ввода",
-    "An exception has been raised within the callback" => "Callback. Вызвано исключение exception в функции обратного вызова callback",
+    "The input is not valid" => "Не верное значение ввода",
+    "An exception has been raised within the callback" => "Вызвано исключение в функции обратного вызова",
 
     // Zend\Validator\CreditCard
-    "The input seems to contain an invalid checksum" => "CreditCard. Не верное значение контрольной суммы checksum",
-    "The input must contain only digits" => "CreditCard. Ввод должен содержать только цифры",
-    "Invalid type given. String expected" => "CreditCard. Неверный тип. Ожидается string",
-    "The input contains an invalid amount of digits" => "CreditCard. Ввод содержит недопустимое количество цифр",
-    "The input is not from an allowed institute" => "CreditCard. Ввод содержит непристойные выражения, типа мат.",
-    "The input seems to be an invalid creditcard number" => "CreditCard. Ввод содержит Неверный номер кредитной карты",
-    "An exception has been raised while validating the input" => "CreditCard. Вызвано исключение exception при провере вводимой информации",
+    "The input seems to contain an invalid checksum" => "Ввод наверное содержит не верное значение контрольной суммы",
+    "The input must contain only digits" => "Ввод должен содержать только цифры",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
+    "The input contains an invalid amount of digits" => "Ввод содержит недопустимое количество цифр",
+    "The input is not from an allowed institute" => "Ввод содержит недопустимое выражение",
+    "The input seems to be an invalid creditcard number" => "Ввод содержит не верный номер кредитной карты",
+    //"An exception has been raised while validating the input" => "Вызвано исключение при проверке введенных данных",
 
     // Zend\Validator\Csrf
-    "The form submitted did not originate from the expected site" => "Csrf. Фарма подтверждения не пренадлежит ожидаемому сайту site",
+    "The form submitted did not originate from the expected site" => "Фарма подтверждения не пренадлежит ожидаемому сайту",
 
     // Zend\Validator\Date
-    "Invalid type given. String, integer, array or DateTime expected" => "Date. Неверный тип данных. Ожидается string, array или DataTime",
-    "The input does not appear to be a valid date" => "Date. Ввод содержит не верное значение date",
-    "The input does not fit the date format '%format%'" => "Date. Не соответствует формату '%format%'",
+    "Invalid type given. String, integer, array or DateTime expected" => "Неверный тип данных. Ожидается строка, массив или дата и время",
+    "The input does not appear to be a valid date" => "Ввод содержит не верное значение даты",
+    "The input does not fit the date format '%format%'" => "Не соответствует формату '%format%'",
 
     // Zend\Validator\DateStep
-    "Invalid type given. String, integer, array or DateTime expected" => "DateStep. Неверный тип. Ожидается string, integer или DataTime",
-    "The input does not appear to be a valid date" => "DateStep. Ввод содержит не верное значение date",
-    "The input is not a valid step" => "DateStep. Не верное значение step",
+    "Invalid type given. String, integer, array or DateTime expected" => "Неверный тип. Ожидается строка, целое число или дата и время",
+    //"The input does not appear to be a valid date" => "Ввод содержит не верное значение даты",
+    "The input is not a valid step" => "Не верное значение периода",
 
     // Zend\Validator\Db_AbstractDb
-    "No record matching the input was found" => "Db_AbstractDb. Не найдено ни одного соответсвия record",
-    "A record matching the input was found" => "Db_AbstractDb. Соответсвие record найдено",
+    "No record matching the input was found" => "Не найдено ни одной соответствующей записи",
+    "A record matching the input was found" => "Соответсвие записи найдено",
 
     // Zend\Validator\Digits
-    "The input must contain only digits" => "Digits. Ввод должен содержать только цифры",
-    "The input is an empty string" => "Digits. Ввод не должен быть пустым",
-    "Invalid type given. String, integer or float expected" => "Digits. Неверный тип. Ожидается string, integer или float",
+    //"The input must contain only digits" => "Ввод должен содержать только цифры",
+    //"The input is an empty string" => "Введена пустая строка",
+    //"Invalid type given. String, integer or float expected" => "Неверный тип данных, ожидается строка, целое число или число с плавающей точкой",
 
     // Zend\Validator\EmailAddress
-    "Invalid type given. String expected" => "EmailAddress. Неверный тип. Ожидается string",
-    "The input is not a valid email address. Use the basic format local-part@hostname" => "EmailAddress. Не верное значение адреса email. Используйте формат: local-part@hostname",
-    "'%hostname%' is not a valid hostname for the email address" => "EmailAddress. Не верное значение хоста hostname '%hostname%' для адреса email",
-    "'%hostname%' does not appear to have any valid MX or A records for the email address" => "EmailAddress. Не верное значение MX  или записи A для адреса email'%hostname%' email",
-    "'%hostname%' is not in a routable network segment. The email address should not be resolved from public network" => "EmailAddress. '%hostname%' - Адрес не найден в маршрутах сегмента сети route.Не возможно определить email адрес в сети публичного доступа public.",
-    "'%localPart%' can not be matched against dot-atom format" => "EmailAddress. '%localPart%' не соответствует dot-atom формату",
-    "'%localPart%' can not be matched against quoted-string format" => "EmailAddress. '%localPart%' не соответствует quoted-string формату",
-    "'%localPart%' is not a valid local part for the email address" => "EmailAddress. '%localPart%' не соответствует local формату в адресе email",
-    "The input exceeds the allowed length" => "EmailAddress. Превышение допустимой длины length",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
+    "The input is not a valid email address. Use the basic format local-part@hostname" => "Не верное значение адреса email. Используйте формат: local-part@hostname",
+    "'%hostname%' is not a valid hostname for the email address" => "Не верное значение хоста '%hostname%' для адреса email",
+    "'%hostname%' does not appear to have any valid MX or A records for the email address" => "'%hostname%' - Не верное значение MX или записи A для адреса email",
+    "'%hostname%' is not in a routable network segment. The email address should not be resolved from public network" => "'%hostname%' - Адрес не найден в маршрутах сегмента сети. Не возможно определить email адрес в сети публичного доступа.",
+    "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' не соответствует dot-atom формату",
+    "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' строка не соответствует формату кавычек",
+    "'%localPart%' is not a valid local part for the email address" => "'%localPart%' не соответствует local формату в адресе email",
+    "The input exceeds the allowed length" => "Превышение допустимой длины",
 
     // Zend\Validator\Explode
-    "Invalid type given. String expected" => "Explode. Ожидается string",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
 
     // Zend\Validator\File\Count
-    "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Count. Слишком много файлов. Максимально допустимое  количество '%max%', определено количество '%count%'",
-    "Too few files, minimum '%min%' are expected but '%count%' are given" => "Count. Слишком мало файлов. Минимально допустимое количество '%min%', определено количество '%count%'",
+    "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Слишком много файлов. Максимально допустимое  количество '%max%', определено количество '%count%'",
+    "Too few files, minimum '%min%' are expected but '%count%' are given" => "Слишком мало файлов. Минимально допустимое количество '%min%', определено количество '%count%'",
 
     // Zend\Validator\File\Crc32
-    "File '%value%' does not match the given crc32 hashes" => "Crc32. Файла '%value%' не соответствует контрольной сумме CRC32",
-    "A crc32 hash could not be evaluated for the given file" => "Crc32. Контрольная сумма CRC32 не может быть вычеслена для данного файла",
-    "File '%value%' is not readable or does not exist" => "Crc32. Файл '%value%' недоступен для чтения или не существует",
+    "File '%value%' does not match the given crc32 hashes" => "Файла '%value%' не соответствует контрольной сумме CRC32",
+    "A crc32 hash could not be evaluated for the given file" => "Контрольная сумма CRC32 не может быть вычеслена для данного файла",
+    "File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\ExcludeExtension
-    "File '%value%' has a false extension" => "ExcludeExtension. Файл '%value%' имее не верное расширение",
-    "File '%value%' is not readable or does not exist" => "ExcludeExtension. Файл '%value%' недоступен для чтения или не существует",
+    "File '%value%' has a false extension" => "Файл '%value%' имеет не верное расширение",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\Exists
-    "File '%value%' does not exist" => "Exists. Файл '%value%' не существует",
+    "File '%value%' does not exist" => "Файл '%value%' не существует",
 
     // Zend\Validator\File\Extension
-    "File '%value%' has a false extension" => "Extension. Файл '%value%' имее не верное расширение",
-    "File '%value%' is not readable or does not exist" => "Extension. Файл '%value%' недоступен для чтения или не существует",
+    //"File '%value%' has a false extension" => "Файл '%value%' имеет не верное расширение",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\FilesSize
-    "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "FilesSize. Все файлы в сумме должны иметь максимальный размер '%max%', определен размер '%size%'",
-    "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "FilesSize. Все файлы в сумме должны иметь минимальный размер '%min%', определен размер '%size%'",
-    "One or more files can not be read" => "FilesSize. Один или более файлов не могут быть прочитаны",
+    "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Все файлы в сумме должны иметь максимальный размер '%max%', определен размер '%size%'",
+    "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "Все файлы в сумме должны иметь минимальный размер '%min%', определен размер '%size%'",
+    "One or more files can not be read" => "Один или более файлов не могут быть прочитаны",
 
     // Zend\Validator\File\Hash
-    "File '%value%' does not match the given hashes" => "Hash. Файл '%value%' не соответствует контрольной сумме",
-    "A hash could not be evaluated for the given file" => "Hash. Контрольная сумма не может быть вычеслена для данного файла",
-    "File '%value%' is not readable or does not exist" => "Hash. Файл '%value%' недоступен для чтения или не существует",
+    "File '%value%' does not match the given hashes" => "Файл '%value%' не соответствует контрольной сумме",
+    "A hash could not be evaluated for the given file" => "Контрольная сумма не может быть вычеслена для данного файла",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\ImageSize
-    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "ImageSize. Максимально допустимая ширина изображения для '%value%' не должна превышать '%maxwidth%', определено'%width%'",
-    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "ImageSize. Минимально допустимая ширина изображения для '%value%' не должна быть меньше '%minwidth%', определено '%width%'",
-    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "ImageSize. Максимально допустимая высота изображения для '%value%' не должна превышать '%maxheight%', определено '%height%'",
-    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "ImageSize. Минимально допустимая высота изображения для '%value%' не должна быть меньше '%minheight%', определено '%height%'",
-    "The size of image '%value%' could not be detected" => "ImageSize. La taille de l'image '%value%' n'a pas pu être détectée",
-    "File '%value%' is not readable or does not exist" => "ImageSize. Файл '%value%' недоступен для чтения или не существует",
+    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "Максимально допустимая ширина изображения для '%value%' не должна превышать '%maxwidth%', определено'%width%'",
+    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "Минимально допустимая ширина изображения для '%value%' не должна быть меньше '%minwidth%', определено '%width%'",
+    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "Максимально допустимая высота изображения для '%value%' не должна превышать '%maxheight%', определено '%height%'",
+    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "Минимально допустимая высота изображения для '%value%' не должна быть меньше '%minheight%', определено '%height%'",
+    "The size of image '%value%' could not be detected" => "Не возможно определить размер изображения '%value%'",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\IsCompressed
-    "File '%value%' is not compressed, '%type%' detected" => "IsCompressed. Файл '%value%' не сжат, определено '%type%'",
-    "The mimetype of file '%value%' could not be detected" => "IsCompressed. Тип MIME файла '%value%' не может быть определен",
-    "File '%value%' is not readable or does not exist" => "IsCompressed. Файл '%value%' недоступен для чтения или не существует",
+    "File '%value%' is not compressed, '%type%' detected" => "Файл '%value%' не сжат, определено '%type%'",
+    "The mimetype of file '%value%' could not be detected" => "Тип MIME файла '%value%' не может быть определен",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\IsImage
-    "File '%value%' is no image, '%type%' detected" => "IsImage. Файл '%value%' не является изображением, определено '%type%'",
-    "The mimetype of file '%value%' could not be detected" => "IsImage. Тип MIME файла '%value%' не может быть определен",
-    "File '%value%' is not readable or does not exist" => "IsImage. Файл '%value%' недоступен для чтения или не существует",
+    "File '%value%' is no image, '%type%' detected" => "Файл '%value%' не является изображением, определено '%type%'",
+    //"The mimetype of file '%value%' could not be detected" => "Тип MIME файла '%value%' не может быть определен",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\Md5
-    "File '%value%' does not match the given md5 hashes" => "Md5. Файла '%value%' не соответствует контрольной сумме MD5",
-    "A md5 hash could not be evaluated for the given file" => "Md5. Контрольная сумма MD5 не может быть вычеслена для данного файла",
-    "File '%value%' is not readable or does not exist" => "Md5. Файл '%value%' недоступен для чтения или не существует",
+    "File '%value%' does not match the given md5 hashes" => "Файла '%value%' не соответствует контрольной сумме MD5",
+    "A md5 hash could not be evaluated for the given file" => "Контрольная сумма MD5 не может быть вычеслена для данного файла",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\MimeType
-    "File '%value%' has a false mimetype of '%type%'" => "MimeType. Файл '%value%' Неверный тип MIME : '%type%'",
-    "The mimetype of file '%value%' could not be detected" => "MimeType. Тип MIME для файла '%value%' не может быть определен",
-    "File '%value%' is not readable or does not exist" => "MimeType. Файл '%value%' недоступен для чтения или не существует",
+    "File '%value%' has a false mimetype of '%type%'" => "Файл '%value%' Неверный тип MIME '%type%'",
+    //"The mimetype of file '%value%' could not be detected" => "Тип MIME файла '%value%' не может быть определен",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\NotExists
-    "File '%value%' exists" => "NotExists. Файл '%value%' существует.",
+    "File '%value%' exists" => "Файл '%value%' существует.",
 
     // Zend\Validator\File\Sha1
-    "File '%value%' does not match the given sha1 hashes" => "Sha1. Файл '%value%' не соответствует контрольной сумме SHA1",
-    "A sha1 hash could not be evaluated for the given file" => "Sha1. Контрольная сумма SHA1 не может быть вычеслена для данного файла",
-    "File '%value%' is not readable or does not exist" => "Sha1.  Файл '%value%' недоступен для чтения или не существует",
+    "File '%value%' does not match the given sha1 hashes" => "Файл '%value%' не соответствует контрольной сумме SHA1",
+    "A sha1 hash could not be evaluated for the given file" => "Контрольная сумма SHA1 не может быть вычеслена для данного файла",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\Size
-    "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "Size. Максимально допустимый размер файла '%value%' не должен превышать '%max%', определено '%size%'",
-    "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "Size. Минимально допустимый размер файла '%value%' не должен быть меньше '%min%', определено '%size%'",
-    "File '%value%' is not readable or does not exist" => "Size. Файл '%value%' недоступен для чтения или не существует",
+    "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "Максимально допустимый размер файла '%value%' не должен превышать '%max%', определено '%size%'",
+    "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "Минимально допустимый размер файла '%value%' не должен быть меньше '%min%', определено '%size%'",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\File\Upload
-    "File '%value%' exceeds the defined ini size" => "Upload. Файл '%value%' превышает определенный размер INI настройки",
-    "File '%value%' exceeds the defined form size" => "Upload. Файл '%value%' превышает определенный размер form настройки",
-    "File '%value%' was only partially uploaded" => "Upload. Файл '%value%' только частичная загрузка",
-    "File '%value%' was not uploaded" => "Upload. Файл '%value%' не может быть загружен",
-    "No temporary directory was found for file '%value%'" => "Upload. Временная директория для файла '%value%' не найдена",
-    "File '%value%' can't be written" => "Upload. Файл '%value%' не может быть записан",
-    "A PHP extension returned an error while uploading the file '%value%'" => "Upload. Расширение PHP вернуло ошибку при загрузке файла '%value%'",
-    "File '%value%' was illegally uploaded. This could be a possible attack" => "Upload. Файл '%value%' был загружен нелегально. Это может быть возможной атакой",
-    "File '%value%' was not found" => "Upload. Файл '%value%' не найден",
-    "Unknown error while uploading file '%value%'" => "Upload. Неизвестная ошибка при загрузке файла '%value%'",
+    "File '%value%' exceeds the defined ini size" => "Файл '%value%' превышает определенный размер INI настройки",
+    "File '%value%' exceeds the defined form size" => "Файл '%value%' превышает определенный размер form настройки",
+    "File '%value%' was only partially uploaded" => "Файл '%value%' только частичная загрузка",
+    "File '%value%' was not uploaded" => "Файл '%value%' не может быть загружен",
+    "No temporary directory was found for file '%value%'" => "Временная директория для файла '%value%' не найдена",
+    "File '%value%' can't be written" => "Файл '%value%' не может быть записан",
+    "A PHP extension returned an error while uploading the file '%value%'" => "Расширение PHP вернуло ошибку при загрузке файла '%value%'",
+    "File '%value%' was illegally uploaded. This could be a possible attack" => "Файл '%value%' был загружен нелегально. Возможно это атака",
+    "File '%value%' was not found" => "Файл '%value%' не найден",
+    "Unknown error while uploading file '%value%'" => "Неизвестная ошибка при загрузке файла '%value%'",
 
     // Zend\Validator\File\UploadFile
-    "File exceeds the defined ini size" => "UploadFile. Файл '%value%' превышает определенный размер INI настройки",
-    "File exceeds the defined form size" => "UploadFile. Файл '%value%' превышает определенный размер form настройки",
-    "File was only partially uploaded" => "UploadFile. Файл только частичная загрузка",
-    "File was not uploaded" => "UploadFile. Файл не может быть загружен",
-    "No temporary directory was found for file" => "UploadFile. Временная директория для файла не найдена",
-    "File can't be written" => "UploadFile. Файл не может быть записан",
-    "A PHP extension returned an error while uploading the file" => "UploadFile. Расширение PHP вернуло ошибку при загрузке файла",
-    "File was illegally uploaded. This could be a possible attack" => "UploadFile. Файл был загружен нелегально. Это может быть возможной атакой",
-    "File was not found" => "UploadFile. Файл не найден",
-    "Unknown error while uploading file" => "UploadFile. Неизвестная ошибка при загрузке файла",
+    "File exceeds the defined ini size" => "Файл '%value%' превышает определенный размер INI настройки",
+    "File exceeds the defined form size" => "Файл '%value%' превышает определенный размер form настройки",
+    "File was only partially uploaded" => "Файл только частичная загрузка",
+    "File was not uploaded" => "Файл не может быть загружен",
+    "No temporary directory was found for file" => "Временная директория для файла не найдена",
+    "File can't be written" => "Файл не может быть записан",
+    "A PHP extension returned an error while uploading the file" => "Расширение PHP вернуло ошибку при загрузке файла",
+    "File was illegally uploaded. This could be a possible attack" => "Файл был загружен нелегально. Возможно это атака",
+    "File was not found" => "Файл не найден",
+    "Unknown error while uploading file" => "Неизвестная ошибка при загрузке файла",
 
     // Zend\Validator\File\WordCount
-    "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "WordCount. Слишком много слов, максимально допустимое значение '%max%', определено '%count%'",
-    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "WordCount. Слишком мало слов, минимально допустимое значение'%min%', определено '%count%'",
-    "File '%value%' is not readable or does not exist" => "WordCount. Файл '%value%' недоступен для чтения или не существует",
+    "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Слишком много слов, максимально допустимое значение '%max%', определено '%count%'",
+    "Too few words, minimum '%min%' are expected but '%count%' were counted" => "Слишком мало слов, минимально допустимое значение'%min%', определено '%count%'",
+    //"File '%value%' is not readable or does not exist" => "Файл '%value%' недоступен для чтения или не существует",
 
     // Zend\Validator\GreaterThan
-    "The input is not greater than '%min%'" => "GreaterThan. Ведено значение не большее чем '%min%'",
-    "The input is not greater or equal than '%min%'" => "GreaterThan. Введено значение не большее или равное '%min%'",
+    "The input is not greater than '%min%'" => "Ведено значение не большее чем '%min%'",
+    "The input is not greater or equal than '%min%'" => "Введено значение не большее или равное '%min%'",
 
     // Zend\Validator\Hex
-    "Invalid type given. String expected" => "Hex. Неверный тип. Ожидается string",
-    "The input contains non-hexadecimal characters" => "Hex. Ввод содержит не шестнацатеричное значение",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
+    "The input contains non-hexadecimal characters" => "Ввод содержит не шестнацатеричное значение",
 
     // Zend\Validator\Hostname
-    "The input appears to be a DNS hostname but the given punycode notation cannot be decoded" => "Hostname. Ввод является DNS именем хоста но данные Punycode обозначения не могут быть расшифрованы",
-    "Invalid type given. String expected" => "Hostname. Неверный тип. Ожидается string",
-    "The input appears to be a DNS hostname but contains a dash in an invalid position" => "Hostname. Ввод является DNS именем хоста но содержит тире в неверном месте",
-    "The input does not match the expected structure for a DNS hostname" => "Hostname. Не соответствует ожидаемой структуре DNS хоста",
-    "The input appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "Hostname. Ввод является DNS именем хоста но не соответствует схеме TLD '%tld%'",
-    "The input does not appear to be a valid local network name" => "Hostname. Воод содержит неверное имя локальной сети",
-    "The input does not appear to be a valid URI hostname" => "Hostname. Воод содержит неверное URI имя хоста",
-    "The input appears to be an IP address, but IP addresses are not allowed" => "Hostname. Ввод является IP адресом хоста, но этот IP адрес не доступен",
-    "The input appears to be a local network name but local network names are not allowed" => "Hostname. Ввод является локальным адресом сети, но этот локальный адрес не доступен",
-    "The input appears to be a DNS hostname but cannot extract TLD part" => "Hostname. Ввод является DNS именем хоста но не может быть извлечена TLD часть",
-    "The input appears to be a DNS hostname but cannot match TLD against known list" => "Hostname. Ввод является DNS именем хоста но не возможно сравнить TLD с известным списком",
+    "The input appears to be a DNS hostname but the given punycode notation cannot be decoded" => "Ввод является DNS именем хоста но данные Punycode обозначения не могут быть расшифрованы",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
+    "The input appears to be a DNS hostname but contains a dash in an invalid position" => "Ввод является DNS именем хоста но содержит тире в неверном месте",
+    "The input does not match the expected structure for a DNS hostname" => "Не соответствует ожидаемой структуре DNS хоста",
+    "The input appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "Ввод является DNS именем хоста но не соответствует схеме TLD '%tld%'",
+    "The input does not appear to be a valid local network name" => "Ввод содержит неверное имя локальной сети",
+    "The input does not appear to be a valid URI hostname" => "Воод содержит неверное URI имя хоста",
+    "The input appears to be an IP address, but IP addresses are not allowed" => "Ввод является IP адресом хоста, но этот IP адрес не доступен",
+    "The input appears to be a local network name but local network names are not allowed" => "Ввод является локальным адресом сети, но этот локальный адрес не доступен",
+    "The input appears to be a DNS hostname but cannot extract TLD part" => "Ввод является DNS именем хоста но не может быть извлечена TLD часть",
+    "The input appears to be a DNS hostname but cannot match TLD against known list" => "Ввод является DNS именем хоста но не возможно сравнить TLD с известным списком",
 
     // Zend\Validator\Iban
-    "Unknown country within the IBAN" => "Iban. Неизвестная страна в IBAN",
-    "Countries outside the Single Euro Payments Area (SEPA) are not supported" => "Iban. Страны, не входящие в Единоге Европейское Платежное пространство (SEPA) не поддерживаются",
-    "The input has a false IBAN format" => "Iban. Ввод содержит не верный формат IBAN",
-    "The input has failed the IBAN check" => "Iban. Ввод содержит ошибку в IBAN",
+    "Unknown country within the IBAN" => "Неизвестная страна в IBAN",
+    "Countries outside the Single Euro Payments Area (SEPA) are not supported" => "Страны, не входящие в Единое Европейское Платежное пространство (SEPA) не поддерживаются",
+    "The input has a false IBAN format" => "Ввод содержит не верный формат IBAN",
+    "The input has failed the IBAN check" => "Ввод содержит ошибку в IBAN",
 
     // Zend\Validator\Identical
-    "The two given tokens do not match" => "Identical. Два значения не совпадают",
-    "No token was provided to match against" => "Identical. Не предоставлены значения для сравнения",
+    "The two given tokens do not match" => "Два значения не совпадают",
+    "No token was provided to match against" => "Не предоставлены значения для сравнения",
 
     // Zend\Validator\InArray
-    "The input was not found in the haystack" => "InArray. Ввод не найден",
+    "The input was not found in the haystack" => "Ввод не найден в массиве",
 
     // Zend\Validator\Ip
-    "Invalid type given. String expected" => "Ip. Неверный тип. Ожидается string",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
     "The input does not appear to be a valid IP address" => "Ввод содержит неверный IP адрес",
 
     // Zend\Validator\Isbn
-    "Invalid type given. String or integer expected" => "Isbn. неверный тип. Ожидается string или integer",
-    "The input is not a valid ISBN number" => "Isbn. Ввод содержит неверный ISBN момер",
+    //"Invalid type given. String or integer expected" => "Неверный тип данных, ожидается строка или целое число",
+    "The input is not a valid ISBN number" => "Ввод содержит неверный ISBN момер",
 
     // Zend\Validator\LessThan
-    "The input is not less than '%max%'" => "LessThan. Введено значение не меньшее '%max%'",
-    "The input is not less or equal than '%max%'" => "LessThan. Введено значение не меньшее или равное '%max%'",
+    "The input is not less than '%max%'" => "Введено значение не меньшее '%max%'",
+    "The input is not less or equal than '%max%'" => "Введено значение не меньшее или равное '%max%'",
 
     // Zend\Validator\NotEmpty
-    "Value is required and can't be empty" => "NotEmpty. Значение не может быть пустым empty",
-    "Invalid type given. String, integer, float, boolean or array expected" => "NotEmpty. Неверный тип.Ожидается string, integr, float, boolean или array",
+    "Value is required and can't be empty" => "Значение не может быть пустым",
+    "Invalid type given. String, integer, float, boolean or array expected" => "Неверный тип.Ожидается строка, целое число, число с плавающей точкой, логическое значение или массив",
 
     // Zend\Validator\Regex
-    "Invalid type given. String, integer or float expected" => "Regex. Неверный тип.Ожидается string, integr или float",
-    "The input does not match against pattern '%pattern%'" => "Regex. Ввод не соответствует схеме регулярных выражений '%pattern%'",
-    "There was an internal error while using the pattern '%pattern%'" => "Regex. Произошла внутрення ошибка при использовании схемы регулярного вырожения '%pattern%'",
+    //"Invalid type given. String, integer or float expected" => "Неверный тип данных, ожидается строка, целое число или число с плавающей точкой",
+    "The input does not match against pattern '%pattern%'" => "Ввод не соответствует схеме регулярных выражений '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "Произошла внутрення ошибка при использовании схемы регулярного вырожения '%pattern%'",
 
     // Zend\Validator\Sitemap_Changefreq
-    "The input is not a valid sitemap changefreq" => "Sitemap_Changefreq. Неверный sitemap changefreq",
-    "Invalid type given. String expected" => "Sitemap_Changefreq. Неверный тип. Ожидается string",
+    "The input is not a valid sitemap changefreq" => "Неверное значение карты сайта changefreq",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
 
     // Zend\Validator\Sitemap_Lastmod
-    "The input is not a valid sitemap lastmod" => "Sitemap_Lastmod. Неверный sitemap lastmod",
-    "Invalid type given. String expected" => "Sitemap_Lastmod. Неверный тип. Ожидается string",
+    "The input is not a valid sitemap lastmod" => "Неверное значение карты сайта lastmod",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
 
     // Zend\Validator\Sitemap_Loc
-    "The input is not a valid sitemap location" => "Sitemap_Loc. Неверный sitemap location",
-    "Invalid type given. String expected" => "Sitemap_Loc. Неверный тип. Ожидается string",
+    "The input is not a valid sitemap location" => "Неверное значение карты сайта location",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
 
     // Zend\Validator\Sitemap_Priority
-    "The input is not a valid sitemap priority" => "Sitemap_Priority. L'entrée n'est pas une priorité de sitemap valide",
-    "Invalid type given. Numeric string, integer or float expected" => "Sitemap_Priority. Неверный тип. Ожидается string, integer или float",
+    "The input is not a valid sitemap priority" => "Неверное значение карты сайта priority",
+    "Invalid type given. Numeric string, integer or float expected" => "Неверный тип. Ожидается строка, целое число или число с плавающей точкой",
 
     // Zend\Validator\Step
-    "Invalid value given. Scalar expected" => "Step. Неверный тип. Ожидается scalar",
-    "The input is not a valid step" => "Step. Неверный step",
+    "Invalid value given. Scalar expected" => "Неверный тип. Ожидается скалярное выражение",
+    //"The input is not a valid step" => "Не верное значение периода",
 
     // Zend\Validator\StringLength
-    "Invalid type given. String expected" => "StringLength. Неверный тип. Ожидается string",
-    "The input is less than %min% characters long" => "StringLength. Введено значение меньшее %min% символов",
-    "The input is more than %max% characters long" => "StringLength. Введено значение большее %max% символов",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
+    "The input is less than %min% characters long" => "Введено значение меньшее %min% символов",
+    "The input is more than %max% characters long" => "Введено значение большее %max% символов",
 
     // Zend\Validator\Uri
-    "Invalid type given. String expected" => "Uri. Неверный тип. Ожидается string",
-    "The input does not appear to be a valid Uri" => "Uri. Неверный URI",
+    //"Invalid type given. String expected" => "Неверный тип, ожидается строка",
+    "The input does not appear to be a valid Uri" => "Неверный URI",
 );
