@@ -113,8 +113,8 @@ class Wget extends AbstractAdapter
                         GC_APPLICATION_PATH . '/.git',
                         GC_APPLICATION_PATH . '/data/tmp',
                         GC_APPLICATION_PATH . '/data/cache',
-                        GC_APPLICATION_PATH . '/public/frontend',
-                        GC_APPLICATION_PATH . '/public/media/files',
+                        GC_APPLICATION_PATH . GC_DOCUMENT_ROOT . '/frontend',
+                        GC_APPLICATION_PATH . GC_DOCUMENT_ROOT . '/media/files',
                     )
                 );
 
