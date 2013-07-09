@@ -24,8 +24,7 @@ INSERT INTO view VALUES (6, '2012-10-25 19:57:05', '2013-05-26 13:26:11.897632',
         <?php endforeach; ?>
     <?php endforeach; ?>
 <?php endif; ?>', 'Flash messages displayer');
-INSERT INTO view VALUES (9, '2013-05-22 19:32:25.295636', '2013-05-26 13:26:11.910965', 'Footer', 'footer', '<?php use Gc\Core\Config; ?>
-<div id="footer-wrapper">
+INSERT INTO view VALUES (9, '2013-05-22 19:32:25.295636', '2013-05-26 13:26:11.910965', 'Footer', 'footer', '<div id="footer-wrapper">
     <footer class="container" id="site-footer">
         <div class="row">
             <div class="4u">
@@ -73,7 +72,7 @@ INSERT INTO view VALUES (9, '2013-05-22 19:32:25.295636', '2013-05-26 13:26:11.9
         <div class="row">
             <div class="12u">
                 <div id="copyright">
-                    &copy; <?php echo $this->escapeHtml(Config::getValue(''site_name'')); ?>. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a> | Images: <a href="http://fotogrph.com">fotogrph</a>
+                    &copy; <?php echo $this->escapeHtml($this->config()->get(''site_name'')); ?>. All rights reserved. | Design: <a href="http://html5up.net">HTML5 UP</a> | Images: <a href="http://fotogrph.com">fotogrph</a>
                 </div>
             </div>
         </div>
@@ -87,7 +86,7 @@ INSERT INTO view VALUES (8, '2013-05-22 19:29:56.943005', '2013-05-26 13:26:11.9
         $this->navigation($container);
         $document = $this->layout()->currentDocument;
 
-        echo $this->navigation()->menu()->setMaxDepth(0)->setUlClass(''sf-menu navigation''); 
+        echo $this->navigation()->menu()->setMaxDepth(0)->setUlClass(''sf-menu navigation'');
     ?>
 </nav>
 ', 'Header');
@@ -127,8 +126,8 @@ INSERT INTO view VALUES (3, '2012-09-19 19:32:56', '2013-05-26 13:26:11.884399',
                 <article class="first last">
                     <h2>Contact</h2>
                     <?php echo $this->partial(''flash-messages''); ?>
-                    <?php 
-                        $return = $this->script(''contact''); 
+                    <?php
+                        $return = $this->script(''contact'');
                         $number_1 = mt_rand(1, 9);
                         $number_2 = mt_rand(1, 9);
                         $answer = substr(sha1($number_1+$number_2),5,10);
@@ -207,7 +206,7 @@ INSERT INTO view VALUES (2, '2012-09-19 19:29:50', '2013-05-26 13:26:11.840543',
 
                 function sortObjects($a, $b)
                 {
-                    if($a->getCreatedAt() == $b->getCreatedAt()) 
+                    if($a->getCreatedAt() == $b->getCreatedAt())
                     {
                         return 0;
                     }
@@ -253,7 +252,7 @@ INSERT INTO view VALUES (2, '2012-09-19 19:29:50', '2013-05-26 13:26:11.840543',
                             </div>
                         </article>
                     <?php endforeach; ?>
-                    
+
                 <?php endif; ?>
                 <?php echo $this->paginationControl($paginator, ''sliding'', ''paginator'', array(''path'' => $this->currentDocument->getUrl()));?>
             </div>
@@ -295,7 +294,7 @@ INSERT INTO view VALUES (11, '2013-05-24 19:02:58.584746', '2013-05-26 13:26:11.
                             <h2 class="title"><?php echo $this->escapeHtml($this->title); ?></h2>
                             <?php $parent = $this->currentDocument->getParent(); ?>
                             <p class="sub">
-                                <a href="<?php echo $this->escapeHtml($parent->getUrl()); ?>"><?php echo $this->escapeHtml($parent->getName()); ?></a> &bull; <?php echo $this->escapeHtml(date(''Y-m-d'', strtotime($this->published_at))); ?> 
+                                <a href="<?php echo $this->escapeHtml($parent->getUrl()); ?>"><?php echo $this->escapeHtml($parent->getName()); ?></a> &bull; <?php echo $this->escapeHtml(date(''Y-m-d'', strtotime($this->published_at))); ?>
                                 <?php if(!empty($nb_comments)): ?>
                                     &bull; <a href="#comments_list">
                                         <?php if($nb_comments == 1): ?>
@@ -385,8 +384,7 @@ INSERT INTO document_type VALUES (1, '2012-09-20 22:01:55', '2013-05-26 13:29:33
 -- Data for Name: layout; Type: TABLE DATA; Schema: public; Owner: got
 --
 
-INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-05-24 08:24:49.350913', 'Main', 'main', '<?php use Gc\Core\Config; ?>
-<!DOCTYPE html>
+INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-05-24 08:24:49.350913', 'Main', 'main', '<!DOCTYPE html>
 <!--
     Arcana 2.0 by HTML5 UP
     html5up.net | @n33co
@@ -417,7 +415,7 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-05-24 08:24:49.350913
                 <div class="row">
                     <div class="12u">
                         <div id="logo">
-                            <h1><?php echo $this->escapeHtml(Config::getValue(''site_name'')); ?></h1>
+                            <h1><?php echo $this->escapeHtml($this->config()->get(''site_name'')); ?></h1>
                         </div>
                         <?php echo $this->partial(''header''); ?>
                     </div>

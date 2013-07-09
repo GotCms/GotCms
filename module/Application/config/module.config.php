@@ -25,6 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
+use Gc\Core\Config as CoreConfig;
 use Gc\View\Helper;
 
 return array(
@@ -71,6 +72,9 @@ return array(
         'factories' => array(
             'cdn'               => function ($pm) {
                 return new Helper\Cdn($pm->getServiceLocator()->get('request'));
+            },
+            'config'            => function ($pm) {
+                return new Helper\Config(new CoreConfig);
             },
             'cdnBackend'               => function ($pm) {
                 $serviceLocator = $pm->getServiceLocator();
