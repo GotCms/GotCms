@@ -48,10 +48,16 @@
                                         <?php echo $this->escapeHtml($this->translate('Yes')); ?>
                                     </span>
                                 </td>
-                            <?php else: ?>
+                            <?php elseif ($data['value'] === false): ?>
                                 <td class="error">
                                     <span>
                                         <?php echo $this->escapeHtml($this->translate('No')); ?>
+                                    </span>
+                                </td>
+                            <?php else: ?>
+                                <td class="warning">
+                                    <span>
+                                        <?php echo $this->escapeHtml($this->translate('Care')); ?>
                                     </span>
                                 </td>
                             <?php endif; ?>
