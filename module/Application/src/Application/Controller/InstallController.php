@@ -179,9 +179,10 @@ class InstallController extends Action
             'label' => 'Xml',
             'value' => extension_loaded('xml')
         );
+        
         $phpData[] = array(
             'label' => 'Intl',
-            'value' => extension_loaded('intl')
+            'value' => extension_loaded('intl') ? true : null
         );
         $phpData[] = array(
             'label' => 'Database (Mysql, Pgsql)',
@@ -233,7 +234,7 @@ class InstallController extends Action
             $continue = true;
             foreach (array($serverData, $phpData) as $configs) {
                 foreach ($configs as $config) {
-                    if ($config['value'] !== true) {
+                    if ($config['value'] === false) {
                         $continue = false;
                         break 2;
                     }
