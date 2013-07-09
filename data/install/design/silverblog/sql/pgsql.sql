@@ -19,8 +19,8 @@ INSERT INTO view VALUES (3, '2012-09-19 19:32:56', '2013-06-02 12:22:18.37399', 
         <div id="leftcontainer">
             <h2>Contact Me</h2>
                 <?php echo $this->partial(''flash-messages''); ?>
-                <?php 
-                    $return = $this->script(''contact''); 
+                <?php
+                    $return = $this->script(''contact'');
                     $number_1 = mt_rand(1, 9);
                     $number_2 = mt_rand(1, 9);
                     $answer = substr(sha1($number_1+$number_2),5,10);
@@ -182,7 +182,7 @@ INSERT INTO view VALUES (11, '2013-05-24 19:02:58.584746', '2013-06-02 12:22:18.
                         <div>
                             <?php $parent = $this->currentDocument->getParent(); ?>
                             <p class="sub">
-                                <a href="<?php echo $this->escapeHtml($parent->getUrl()); ?>"><?php echo $this->escapeHtml($parent->getName()); ?></a> &bull; <?php echo $this->escapeHtml(date(''Y-m-d'', strtotime($this->published_at))); ?> 
+                                <a href="<?php echo $this->escapeHtml($parent->getUrl()); ?>"><?php echo $this->escapeHtml($parent->getName()); ?></a> &bull; <?php echo $this->escapeHtml(date(''Y-m-d'', strtotime($this->published_at))); ?>
                                 <?php if(!empty($nb_comments)): ?>
                                     &bull; <a href="#comments_list">
                                         <?php if($nb_comments == 1): ?>
@@ -317,13 +317,12 @@ INSERT INTO document_type VALUES (6, '2013-05-24 08:57:15.489668', '2013-06-02 1
 -- Data for Name: layout; Type: TABLE DATA; Schema: public;
 --
 
-INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-06-02 12:26:50.037182', 'Main', 'main', '<?php use Gc\Core\Config; ?>
-<!doctype html>
+INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-06-02 12:26:50.037182', 'Main', 'main', '<!doctype html>
 
 <html lang="en-US">
 <head>
 <meta charset="UTF-8" />
-<title><?php echo $this->escapeHtml($this->pageTitle); ?> - <?php echo $this->escapeHtml(Config::getValue(''site_name'')); ?></title>
+<title><?php echo $this->escapeHtml($this->pageTitle); ?> - <?php echo $this->escapeHtml($this->config()->get(''site_name'')); ?></title>
 <link href="<?php echo $this->cdn(''/frontend/css/style.css''); ?>" rel="stylesheet" type="text/css">
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -346,13 +345,13 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-06-02 12:26:50.037182
                 $this->navigation($container);
                 $document = $this->layout()->currentDocument;
 
-                echo $this->navigation()->menu()->setMaxDepth(0)->setUlClass(''sf-menu navigation''); 
+                echo $this->navigation()->menu()->setMaxDepth(0)->setUlClass(''sf-menu navigation'');
             ?>
         </nav>
     </section>
 
     <header id="pageheader">
-        <h1><a href="<?php echo $this->document()->getUrl(); ?>"><?php echo $this->escapeHtml(Config::getValue(''site_name'')); ?></a></h1>
+        <h1><a href="<?php echo $this->document()->getUrl(); ?>"><?php echo $this->escapeHtml($this->config()->get(''site_name'')); ?></a></h1>
     </header>
     <div id="contents">
         <section id="main">
@@ -367,10 +366,10 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-06-02 12:26:50.037182
 <footer id="pagefooter">
     <div id="footerwrap">
         <div class="copyright">
-            <?php echo date(''Y''); ?> &copy; <?php echo $this->escapeHtml(Config::getValue(''site_name'')); ?>
+            <?php echo date(''Y''); ?> &copy; <?php echo $this->escapeHtml($this->config()->get(''site_name'')); ?>
         </div>
         <div class="credit">
-            <a href="http://cssheaven.org" title="Downlaod Free CSS Templates">Website Template</a> by CSSHeaven.org 
+            <a href="http://cssheaven.org" title="Downlaod Free CSS Templates">Website Template</a> by CSSHeaven.org
         </div>
     </div>
 </footer>
