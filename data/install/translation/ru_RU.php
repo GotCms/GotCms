@@ -183,6 +183,7 @@ return array (
     'Pre-installation check for GotCms %s' => 'Проверка перед установкой GotCms %s',
     'Please make sure all parameters are set to "Yes" before continue installation' => 'Для правильной установки системы, параметры НЕ должны иметь значение  "Нет".',
     'Yes' => 'Да',
+    'No' => 'Нет',    
     'On' => 'Включено',
     'Off' => 'Отключено',
     'Recommended' => 'Рекомендовано',
