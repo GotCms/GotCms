@@ -409,12 +409,13 @@ class InstallController extends Action
                             $translator = new Core\Translator;
                             foreach ($languagesFilename as $language) {
                                 $langConfig = include $language;
+                                $locale = basename($language, '.php'); 
                                 foreach ($langConfig as $source => $destination) {
                                     $translator->setValue(
                                         $source,
                                         array(
                                             array(
-                                                'locale' => $session['install']['lang'],
+                                                'locale' => $locale,
                                                 'value' => $destination
                                             )
                                         )
