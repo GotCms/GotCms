@@ -82,11 +82,7 @@ return array(
                 return new Helper\CdnBackend($serviceLocator->get('request'), isset($configuration['db']));
             },
             'script'               => function ($pm) {
-                $serviceLocator = $pm->getServiceLocator();
-                $request       = $serviceLocator->get('Request');
-                $response      = $serviceLocator->get('Response');
-                $pluginManager = $serviceLocator->get('ControllerPluginManager');
-                return new Helper\CdnBackend($request, $response, $pluginManager);
+                return new Helper\Script($pm->getServiceLocator());
             },
         ),
         'invokables' => array(

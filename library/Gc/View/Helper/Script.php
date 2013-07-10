@@ -32,6 +32,7 @@ use Gc\View\Stream;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\PluginManager;
+use Zend\ServiceManager\ServiceManager;
 use Zend\View\Helper\AbstractHelper;
 
 /**
@@ -73,17 +74,23 @@ class Script extends AbstractHelper
     protected $pluginManager;
 
     /**
+     * Service manager
+     *
+     * @var ServiceManager
+     */
+    protected $serviceManager;
+
+    /**
      * Constructor
      *
-     * @param Request       $request       Http Request
-     * @param Response      $response      Http Response
-     * @param PluginManager $pluginManager Controller plugin manager
+     * @param ServiceManager $serviceManager Service manager
      */
-    public function __construct(Request $request, Response $response, PluginManager $pluginManager)
+    public function __construct(ServiceManager $serviceManager)
     {
-        $this->request       = $request;
-        $this->response      = $response;
-        $this->pluginManager = $pluginManager;
+        $this->request        = $serviceManager->get('Request');
+        $this->response       = $serviceManager->get('Response');
+        $this->pluginManager  = $serviceManager->get('ControllerPluginManager');
+        $this->serviceManager = $serviceManager;
     }
 
     /**
@@ -155,6 +162,16 @@ class Script extends AbstractHelper
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * Retrieve serviceManager instance
+     *
+     * @return ServiceManager
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceManager;
     }
 
     /**

@@ -16,6 +16,7 @@
 - Add russian translation ([https://github.com/PierreRambaud/GotCms/issues/89](https://github.com/PierreRambaud/GotCms/issues/89))
 - Add Core\Config helper ([https://github.com/PierreRambaud/GotCms/issues/85](https://github.com/PierreRambaud/GotCms/issues/85))
 - Intl is no longer required ([https://github.com/PierreRambaud/GotCms/issues/97](https://github.com/PierreRambaud/GotCms/issues/97))
+- Script not working ([https://github.com/PierreRambaud/GotCms/issues/100](https://github.com/PierreRambaud/GotCms/issues/100))
 
 ##0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/PierreRambaud/GotCms/issues/55](https://github.com/PierreRambaud/GotCms/issues/55))

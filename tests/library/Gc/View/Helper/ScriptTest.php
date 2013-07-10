@@ -69,11 +69,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
         );
         $this->script->save();
 
-        $application   = Registry::get('Application');
-        $request       = $application->getRequest();
-        $response      = $application->getResponse();
-        $pluginManager = $application->getServiceManager()->get('ControllerPluginManager');
-        $this->object  = new Script($request, $response, $pluginManager);
+        $this->object  = new Script(Registry::get('Application')->getServiceManager());
     }
 
     /**
@@ -152,6 +148,16 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     public function testGetResponse()
     {
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $this->object->getResponse());
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testGetServiceLocator()
+    {
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $this->object->getServiceLocator());
     }
 
     /**
