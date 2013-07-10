@@ -167,9 +167,12 @@ class Module extends Mvc\Module
     public function initTranslator(ServiceManager $serviceManager)
     {
         $translator = $serviceManager->get('translator');
-        $translator->setLocale(CoreConfig::getValue('locale'));
+        $locale = CoreConfig::getValue('locale');
+        if (!empty($locale)) {
+            $translator->setLocale(CoreConfig::getValue('locale'));
+        }
 
-        AbstractValidator::setDefaultTranslator(new Translator($translator));
+        AbstractValidator::setDefaultTranslator($translator);
     }
 
     /**

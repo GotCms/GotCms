@@ -79,8 +79,15 @@ class InstallController extends Action
         //Force locale to translator
         $session = $this->getSession();
         if (!empty($session['install']['lang'])) {
-            $this->getServiceLocator()->get('translator')->setLocale(
+            $translator = $this->getServiceLocator()->get('translator');
+            $translator->setLocale(
                 $session['install']['lang']
+            );
+
+            $translator->addTranslationFilePattern(
+                'phparray',
+                GC_APPLICATION_PATH . '/data/install/translation',
+                '%s.php'
             );
         }
     }
@@ -178,10 +185,6 @@ class InstallController extends Action
         $phpData[] = array(
             'label' => 'Xml',
             'value' => extension_loaded('xml')
-        );
-        $phpData[] = array(
-            'label' => 'Intl',
-            'value' => extension_loaded('intl')
         );
         $phpData[] = array(
             'label' => 'Database (Mysql, Pgsql)',

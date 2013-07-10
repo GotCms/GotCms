@@ -70,7 +70,6 @@ Make sure read and write access are available by apache user/group for these dir
 - Php version >= 5.3.3
 - XML support
 - PDO support
-- Intl support
 - Mbstring support
 - Json support
 - A database supported by PDO.
