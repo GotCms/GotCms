@@ -406,10 +406,10 @@ class InstallController extends Action
 
                             //Save all languages in database
                             $languagesFilename = glob(GC_APPLICATION_PATH . '/data/install/translation/*.php');
-                            $translator = new Core\Translator;
+                            $translator        = new Core\Translator;
                             foreach ($languagesFilename as $language) {
                                 $langConfig = include $language;
-                                $locale = basename($language, '.php'); 
+                                $locale     = basename($language, '.php');
                                 foreach ($langConfig as $source => $destination) {
                                     $translator->setValue(
                                         $source,

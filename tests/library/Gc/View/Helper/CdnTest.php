@@ -76,8 +76,8 @@ class CdnTest extends \PHPUnit_Framework_TestCase
     public function testInvokeSecure()
     {
         $coreConfig = Registry::get('Application')->getServiceManager()->get('CoreConfig');
-        $basePath = $coreConfig->setValue('force_frontend_ssl', 1);
-        $basePath = $coreConfig->setValue('secure_cdn_base_path', 'https://got-cms.com');
+        $basePath   = $coreConfig->setValue('force_frontend_ssl', 1);
+        $basePath   = $coreConfig->setValue('secure_cdn_base_path', 'https://got-cms.com');
         $this->assertEquals('https://got-cms.com/test', $this->object->__invoke('test'));
     }
 
@@ -89,8 +89,8 @@ class CdnTest extends \PHPUnit_Framework_TestCase
     public function testInvokeUnsecure()
     {
         $coreConfig = Registry::get('Application')->getServiceManager()->get('CoreConfig');
-        $basePath = $coreConfig->setValue('force_frontend_ssl', 0);
-        $basePath = $coreConfig->setValue('unsecure_cdn_base_path', 'http://got-cms.com');
+        $basePath   = $coreConfig->setValue('force_frontend_ssl', 0);
+        $basePath   = $coreConfig->setValue('unsecure_cdn_base_path', 'http://got-cms.com');
         $this->assertEquals('http://got-cms.com/test', $this->object->__invoke('test'));
     }
 }

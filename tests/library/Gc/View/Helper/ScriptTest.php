@@ -69,7 +69,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
         );
         $this->script->save();
 
-        $this->object  = new Script(Registry::get('Application')->getServiceManager());
+        $this->object = new Script(Registry::get('Application')->getServiceManager());
     }
 
     /**

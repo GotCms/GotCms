@@ -292,6 +292,7 @@ class Model extends AbstractTable
                     'To reset your password follow this link but be careful ' .
                     'you only have one hour before the link expires:'
                 );
+
             $message .= '<br>';
             $message .= Registry::get('Application')->getMvcEvent()->getRouter()->assemble(
                 array(

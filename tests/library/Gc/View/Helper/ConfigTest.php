@@ -53,19 +53,33 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->object = new Config(Registry::get('Application')->getServiceManager()->get('CoreConfig'));
     }
 
+    /**
+     * Test
+     *
+     * @return void
+     */
     public function testInvokeMustReturnSelfInstance()
     {
         $this->assertInstanceOf('Gc\View\Helper\Config', $this->object->__invoke());
     }
 
+    /**
+     * Test
+     *
+     * @return void
+     */
     public function testSetDataMustReturnInteger()
     {
         $this->assertInternalType('integer', $this->object->set('debug_is_active', '1'));
     }
 
-    public function  testGetDataShouldReturnValue()
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testGetDataShouldReturnValue()
     {
         $this->assertInternalType('string', $this->object->get('debug_is_active'));
     }
 }
-

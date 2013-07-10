@@ -77,6 +77,7 @@ if (file_exists($gcRoot . '/vendor/autoload.php')) {
 if ($zfPath) {
     // Get application stack configuration
     $configuration = include_once $gcRoot . '/config/application.config.php';
+
     $configuration['module_listener_options']['config_glob_paths'] = array(
         'tests/config/global.php',
     );

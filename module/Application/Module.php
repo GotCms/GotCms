@@ -80,7 +80,7 @@ class Module extends Mvc\Module
         $serviceManager = $application->getServiceManager();
 
         if (isset($config['db'])) {
-            $dbAdapter  = $this->initDatabase($config);
+            $dbAdapter = $this->initDatabase($config);
             $this->initSession($serviceManager, $dbAdapter);
             $this->initTranslator($serviceManager);
             $this->initObserverModules($serviceManager);
@@ -210,7 +210,7 @@ class Module extends Mvc\Module
     {
         if ($event->getApplication()->getMvcEvent()->getRouteMatch()->getMatchedRouteName() === 'cms') {
             $coreConfig = $event->getApplication()->getServiceManager()->get('CoreConfig');
-            $layout = Layout\Model::fromId($coreConfig->getValue('site_exception_layout'));
+            $layout     = Layout\Model::fromId($coreConfig->getValue('site_exception_layout'));
             if (!empty($layout)) {
                 $templatePathStack = $event->getApplication()->getServiceManager()->get(
                     'Zend\View\Resolver\TemplatePathStack'

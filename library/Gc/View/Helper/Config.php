@@ -81,7 +81,7 @@ class Config extends AbstractHelper
     /**
      * Get data
      *
-     * @param string $identifier
+     * @param string $identifier Identifier
      *
      * @return boolean|string
      */
@@ -90,4 +90,3 @@ class Config extends AbstractHelper
         return $this->config->getValue($identifier);
     }
 }
-

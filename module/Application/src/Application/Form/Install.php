@@ -56,6 +56,8 @@ class Install extends AbstractForm
     /**
      * Language form
      *
+     * @param array $config Configuration
+     *
      * @return void
      */
     public function lang($config)

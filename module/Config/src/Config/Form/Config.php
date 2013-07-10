@@ -391,6 +391,8 @@ class Config extends AbstractForm
     /**
      * Initialize Server sub form
      *
+     * @param array $config Configuration
+     *
      * @return \Config\Form\Config
      */
     public function initServer($config)

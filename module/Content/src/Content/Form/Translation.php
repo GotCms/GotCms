@@ -48,6 +48,8 @@ class Translation extends AbstractForm
     /**
      * Initialize Form
      *
+     * @param array $config Configuration
+     *
      * @return void
      */
     public function prepareForm($config)

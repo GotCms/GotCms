@@ -101,7 +101,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitServer()
     {
-        $this->assertInstanceOf('Config\Form\Config', $this->object->initServer(Registry::get('Application')->getConfig()));
+        $this->assertInstanceOf(
+            'Config\Form\Config',
+            $this->object->initServer(Registry::get('Application')->getConfig())
+        );
     }
 
     /**
