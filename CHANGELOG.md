@@ -21,7 +21,7 @@
 
 ### Potential Breakage
 `Gc\Core\Config` singleton will not working anymore. You must used in view or layout, the config helper `$this->config()->get()`
-and for the Script you must used `$this->getServiceLocator()->get('CoreConfig')`.
+and for scripts you must used `$this->getServiceLocator()->get('CoreConfig')`.
 
 
 ##0.1.8 (02 Jun 2013):
