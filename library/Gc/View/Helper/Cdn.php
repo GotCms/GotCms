@@ -56,13 +56,21 @@ class Cdn extends AbstractHelper
     protected $request = null;
 
     /**
+     * Core config data
+     *
+     * @var CoreConfig
+     */
+    protected $config = null;
+
+    /**
      * Constructor
      *
      * @param Request $request Http request
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, CoreConfig $config)
     {
         $this->request = $request;
+        $this->config  = $config;
     }
 
     /**
@@ -76,10 +84,10 @@ class Cdn extends AbstractHelper
     {
         if ($this->basePath === null) {
             $scheme = $this->request->getUri()->getScheme();
-            if (CoreConfig::getValue('force_frontend_ssl') or $scheme === 'https') {
-                $basePath = CoreConfig::getValue('secure_cdn_base_path');
+            if ($this->config->getValue('force_frontend_ssl') or $scheme === 'https') {
+                $basePath = $this->config->getValue('secure_cdn_base_path');
             } else {
-                $basePath = CoreConfig::getValue('unsecure_cdn_base_path');
+                $basePath = $this->config->getValue('unsecure_cdn_base_path');
             }
 
             $this->basePath = rtrim($basePath, '/');

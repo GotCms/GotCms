@@ -58,6 +58,11 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     protected $mvcEvent;
 
     /**
+     * @var CoreConfig
+     */
+    protected $config;
+
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      *
@@ -68,6 +73,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         $this->object   = new Module;
         $this->uri      = Registry::get('Application')->getRequest()->getUri();
         $this->mvcEvent = Registry::get('Application')->getMvcEvent();
+        $this->config   = Registry::get('Application')->getServiceManager()->get('CoreConfig');
     }
 
     /**
@@ -78,8 +84,8 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        CoreConfig::setValue('force_frontend_ssl', 0);
-        CoreConfig::setValue('force_backend_ssl', 0);
+        $this->config->setValue('force_frontend_ssl', 0);
+        $this->config->setValue('force_backend_ssl', 0);
         unset($this->object);
     }
 
@@ -91,10 +97,10 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testOnBootstrap()
     {
         $oldAdapter = GlobalAdapterFeature::getStaticAdapter();
-        CoreConfig::setValue('debug_is_active', 1);
-        CoreConfig::setValue('session_lifetime', 3600);
-        CoreConfig::setValue('cookie_domain', 'got-cms.com');
-        CoreConfig::setValue('session_handler', CoreConfig::SESSION_DATABASE);
+        $this->config->setValue('debug_is_active', 1);
+        $this->config->setValue('session_lifetime', 3600);
+        $this->config->setValue('cookie_domain', 'got-cms.com');
+        $this->config->setValue('session_handler', CoreConfig::SESSION_DATABASE);
 
         $this->assertNull($this->object->onBootstrap(Registry::get('Application')->getMvcEvent()));
 
@@ -122,7 +128,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('cms');
         $this->mvcEvent->setRouteMatch($routeMatch);
-        CoreConfig::setValue('site_exception_layout', $layoutModel->getId());
+        $this->config->setValue('site_exception_layout', $layoutModel->getId());
         $this->assertNull($this->object->prepareException(Registry::get('Application')->getMvcEvent()));
         $layoutModel->delete();
     }
@@ -134,8 +140,8 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckSslWithFrontendRoute()
     {
-        CoreConfig::setValue('force_frontend_ssl', 1);
-        CoreConfig::setValue('secure_frontend_base_path', 'https://got-cms.com');
+        $this->config->setValue('force_frontend_ssl', 1);
+        $this->config->setValue('secure_frontend_base_path', 'https://got-cms.com');
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('cms');
         $this->mvcEvent->setRouteMatch($routeMatch);
@@ -143,7 +149,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         $result    = $this->object->checkSsl($this->mvcEvent);
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
         $this->uri->setScheme($oldScheme);
-        CoreConfig::setValue('secure_frontend_base_path', '');
+        $this->config->setValue('secure_frontend_base_path', '');
     }
 
     /**
@@ -153,7 +159,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckSslWithFrontendRouteAndAlreadyHttps()
     {
-        CoreConfig::setValue('force_frontend_ssl', 1);
+        $this->config->setValue('force_frontend_ssl', 1);
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('cms');
         $this->mvcEvent->setRouteMatch($routeMatch);
@@ -170,7 +176,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckSslWithoutForceRoute()
     {
-        CoreConfig::setValue('force_frontend_ssl', 0);
+        $this->config->setValue('force_frontend_ssl', 0);
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('cms');
         $this->mvcEvent->setRouteMatch($routeMatch);
@@ -187,7 +193,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckSslWithithForceBackendRoute()
     {
-        CoreConfig::setValue('force_backend_ssl', 0);
+        $this->config->setValue('force_backend_ssl', 0);
         $routeMatch = new RouteMatch(
             array(
                 'module' => 'Config',
@@ -207,8 +213,8 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckSslWithBackendRoute()
     {
-        CoreConfig::setValue('force_backend_ssl', 1);
-        CoreConfig::setValue('secure_backend_base_path', 'https://got-cms.com');
+        $this->config->setValue('force_backend_ssl', 1);
+        $this->config->setValue('secure_backend_base_path', 'https://got-cms.com');
         $routeMatch = new RouteMatch(
             array(
                 'module' => 'Config',
@@ -222,6 +228,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         $result    = $this->object->checkSsl($this->mvcEvent);
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
         $this->uri->setScheme($oldScheme);
-        CoreConfig::setValue('secure_backend_base_path', '');
+        $this->config->setValue('secure_backend_base_path', '');
     }
 }

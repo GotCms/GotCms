@@ -26,7 +26,6 @@
 
 namespace Application\Controller;
 
-use Gc\Core\Config as CoreConfig;
 use Gc\Registry;
 use Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;

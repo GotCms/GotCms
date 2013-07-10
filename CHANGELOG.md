@@ -17,6 +17,12 @@
 - Add Core\Config helper ([https://github.com/PierreRambaud/GotCms/issues/85](https://github.com/PierreRambaud/GotCms/issues/85))
 - Intl is no longer required ([https://github.com/PierreRambaud/GotCms/issues/97](https://github.com/PierreRambaud/GotCms/issues/97))
 - Script not working ([https://github.com/PierreRambaud/GotCms/issues/100](https://github.com/PierreRambaud/GotCms/issues/100))
+- Remove Gc\Core\Config singleton ([https://github.com/PierreRambaud/GotCms/issues/99](https://github.com/PierreRambaud/GotCms/issues/99))
+
+### Potential Breakage
+`Gc\Core\Config` singleton will not working anymore. You must used in view or layout, the config helper `$this->config()->get()`
+and for the Script you must used `$this->getServiceLocator()->get('CoreConfig')`.
+
 
 ##0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/PierreRambaud/GotCms/issues/55](https://github.com/PierreRambaud/GotCms/issues/55))

@@ -323,7 +323,7 @@ if($request->isPost())
     {
         $mail = new \Gc\Mail(''utf-8'', $message);
         $mail->setFrom($email, $name);
-        $mail->addTo(\Gc\Core\Config::getValue(''mail_from''));
+        $mail->addTo($this->getServiceLocator()->get(''CoreConfig'')->getValue(''mail_from''));
         $mail->send();
         $this->flashMessenger()->addSuccessMessage(''Message sent'');
         $this->redirect()->toUrl(''/contact'');

@@ -80,7 +80,7 @@ class Module extends Mvc\Module
         $serviceManager = $application->getServiceManager();
 
         if (isset($config['db'])) {
-            $dbAdapter = $this->initDatabase($config);
+            $dbAdapter  = $this->initDatabase($config);
             $this->initSession($serviceManager, $dbAdapter);
             $this->initTranslator($serviceManager);
             $this->initObserverModules($serviceManager);
@@ -93,7 +93,7 @@ class Module extends Mvc\Module
                 array($this, 'prepareException')
             );
 
-            if (CoreConfig::getValue('debug_is_active')) {
+            if ($serviceManager->get('CoreConfig')->getValue('debug_is_active')) {
                 $viewManager = $serviceManager->get('ViewManager');
                 $viewManager->getRouteNotFoundStrategy()->setDisplayExceptions(true);
                 $viewManager->getRouteNotFoundStrategy()->setDisplayNotFoundReason(true);
@@ -120,23 +120,24 @@ class Module extends Mvc\Module
     /**
      * Initialize Session data
      *
-     * @param ServiceManager $sessionManager Service manager
+     * @param ServiceManager $serviceManager Service manager
      * @param DbAdapter      $dbAdapter      Database adapter
      *
      * @return void
      */
-    public function initSession(ServiceManager $sessionManager, DbAdapter $dbAdapter)
+    public function initSession(ServiceManager $serviceManager, DbAdapter $dbAdapter)
     {
+        $coreConfig    = $serviceManager->get('CoreConfig');
         $sessionConfig = new SessionConfig();
         $sessionConfig->setStorageOption('gc_probability', 1);
         $sessionConfig->setStorageOption('gc_divisor', 1);
-        $sessionConfig->setStorageOption('save_path', CoreConfig::getValue('session_path'));
-        $sessionConfig->setStorageOption('gc_maxlifetime', CoreConfig::getValue('session_lifetime'));
-        $sessionConfig->setStorageOption('cookie_path', CoreConfig::getValue('cookie_path'));
-        $sessionConfig->setStorageOption('cookie_domain', CoreConfig::getValue('cookie_domain'));
+        $sessionConfig->setStorageOption('save_path', $coreConfig->getValue('session_path'));
+        $sessionConfig->setStorageOption('gc_maxlifetime', $coreConfig->getValue('session_lifetime'));
+        $sessionConfig->setStorageOption('cookie_path', $coreConfig->getValue('cookie_path'));
+        $sessionConfig->setStorageOption('cookie_domain', $coreConfig->getValue('cookie_domain'));
         SessionContainer::setDefaultManager(new SessionManager($sessionConfig));
 
-        if (CoreConfig::getValue('session_handler') == CoreConfig::SESSION_DATABASE) {
+        if ($coreConfig->getValue('session_handler') == CoreConfig::SESSION_DATABASE) {
             $tablegatewayConfig = new DbTableGatewayOptions(
                 array(
                     'idColumn'   => 'id',
@@ -166,10 +167,11 @@ class Module extends Mvc\Module
      */
     public function initTranslator(ServiceManager $serviceManager)
     {
+        $coreConfig = $serviceManager->get('CoreConfig');
         $translator = $serviceManager->get('translator');
-        $locale = CoreConfig::getValue('locale');
+        $locale     = $coreConfig->getValue('locale');
         if (!empty($locale)) {
-            $translator->setLocale(CoreConfig::getValue('locale'));
+            $translator->setLocale($coreConfig->getValue('locale'));
         }
 
         AbstractValidator::setDefaultTranslator($translator);
@@ -207,7 +209,8 @@ class Module extends Mvc\Module
     public function prepareException($event)
     {
         if ($event->getApplication()->getMvcEvent()->getRouteMatch()->getMatchedRouteName() === 'cms') {
-            $layout = Layout\Model::fromId(CoreConfig::getValue('site_exception_layout'));
+            $coreConfig = $event->getApplication()->getServiceManager()->get('CoreConfig');
+            $layout = Layout\Model::fromId($coreConfig->getValue('site_exception_layout'));
             if (!empty($layout)) {
                 $templatePathStack = $event->getApplication()->getServiceManager()->get(
                     'Zend\View\Resolver\TemplatePathStack'
@@ -227,23 +230,24 @@ class Module extends Mvc\Module
      */
     public function checkSsl(EventInterface $event)
     {
+        $coreConfig       = $event->getApplication()->getServiceManager()->get('CoreConfig');
         $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
         $request          = $event->getRequest();
         $uri              = $request->getUri();
 
         if ($matchedRouteName === 'cms') {
-            if ($uri->getScheme() === 'https' or CoreConfig::getValue('force_frontend_ssl')) {
-                $newUri = new Uri(CoreConfig::getValue('secure_frontend_base_path'));
+            if ($uri->getScheme() === 'https' or $coreConfig->getValue('force_frontend_ssl')) {
+                $newUri = new Uri($coreConfig->getValue('secure_frontend_base_path'));
                 $newUri->setScheme('https');
             } else {
-                $newUri = new Uri(CoreConfig::getValue('unsecure_frontend_base_path'));
+                $newUri = new Uri($coreConfig->getValue('unsecure_frontend_base_path'));
             }
         } else {
-            if ($uri->getScheme() === 'https' or CoreConfig::getValue('force_backend_ssl')) {
-                $newUri = new Uri(CoreConfig::getValue('secure_backend_base_path'));
+            if ($uri->getScheme() === 'https' or $coreConfig->getValue('force_backend_ssl')) {
+                $newUri = new Uri($coreConfig->getValue('secure_backend_base_path'));
                 $newUri->setScheme('https');
             } else {
-                $newUri = new Uri(CoreConfig::getValue('unsecure_backend_base_path'));
+                $newUri = new Uri($coreConfig->getValue('unsecure_backend_base_path'));
             }
         }
 

@@ -28,7 +28,6 @@
 namespace Gc\User;
 
 use Gc\Db\AbstractTable;
-use Gc\Core\Config;
 use Gc\Mail;
 use Gc\Registry;
 use Zend\Authentication\Adapter;
@@ -287,7 +286,8 @@ class Model extends AbstractTable
             $user->setRetrieveUpdatedAt(new Expression('NOW()'));
             $user->save();
 
-            $message  = Registry::get('Application')->getServiceManager()->get('translator')
+            $serviceManager = Registry::get('Application')->getServiceManager();
+            $message        = $serviceManager->get('translator')
                 ->translate(
                     'To reset your password follow this link but be careful ' .
                     'you only have one hour before the link expires:'
@@ -304,7 +304,12 @@ class Model extends AbstractTable
                 )
             );
 
-            $mail = new Mail('utf-8', $message, Config::getValue('mail_from'), $user->getEmail());
+            $mail = new Mail(
+                'utf-8',
+                $message,
+                $serviceManager->get('CoreConfig')->getValue('mail_from'),
+                $user->getEmail()
+            );
             $mail->send();
             return true;
         }

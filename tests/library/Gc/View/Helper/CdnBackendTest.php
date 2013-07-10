@@ -26,7 +26,6 @@
 
 namespace Gc\View\Helper;
 
-use Gc\Core\Config as CoreConfig;
 use Zend\Form\Element;
 use Gc\Registry;
 
@@ -52,7 +51,11 @@ class CdnBackendTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new CdnBackend(Registry::get('Application')->getRequest(), true);
+        $this->object = new CdnBackend(
+            Registry::get('Application')->getRequest(),
+            Registry::get('Application')->getServiceManager()->get('CoreConfig'),
+            true
+        );
     }
 
     /**
@@ -73,8 +76,9 @@ class CdnBackendTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvokeSecure()
     {
-        $basePath = CoreConfig::setValue('force_backend_ssl', 1);
-        $basePath = CoreConfig::setValue('secure_cdn_base_path', 'https://got-cms.com');
+        $coreConfig = Registry::get('Application')->getServiceManager()->get('CoreConfig');
+        $basePath   = $coreConfig->setValue('force_backend_ssl', 1);
+        $basePath   = $coreConfig->setValue('secure_cdn_base_path', 'https://got-cms.com');
         $this->assertEquals('https://got-cms.com/test', $this->object->__invoke('test'));
     }
 
@@ -85,8 +89,9 @@ class CdnBackendTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvokeUnsecure()
     {
-        $basePath = CoreConfig::setValue('force_backend_ssl', 0);
-        $basePath = CoreConfig::setValue('unsecure_cdn_base_path', 'http://got-cms.com');
+        $coreConfig = Registry::get('Application')->getServiceManager()->get('CoreConfig');
+        $basePath   = $coreConfig->setValue('force_backend_ssl', 0);
+        $basePath   = $coreConfig->setValue('unsecure_cdn_base_path', 'http://got-cms.com');
         $this->assertEquals('http://got-cms.com/test', $this->object->__invoke('test'));
     }
 }

@@ -63,14 +63,22 @@ class CdnBackend extends AbstractHelper
     protected $databaseActive = null;
 
     /**
+     * Core config data
+     *
+     * @var CoreConfig
+     */
+    protected $config = null;
+
+    /**
      * Constructor
      *
      * @param Request $request        Http request
      * @param boolean $databaseActive Check if database is active
      */
-    public function __construct(Request $request, $databaseActive)
+    public function __construct(Request $request, CoreConfig $config, $databaseActive)
     {
         $this->request        = $request;
+        $this->config         = $config;
         $this->databaseActive = (bool) $databaseActive;
     }
 
@@ -88,10 +96,10 @@ class CdnBackend extends AbstractHelper
             $basePath = '';
             if ($this->databaseActive) {
                 $scheme = $this->request->getUri()->getScheme();
-                if (CoreConfig::getValue('force_backend_ssl') or $scheme === 'https') {
-                    $basePath = CoreConfig::getValue('secure_cdn_base_path');
+                if ($this->config->getValue('force_backend_ssl') or $scheme === 'https') {
+                    $basePath = $this->config->getValue('secure_cdn_base_path');
                 } else {
-                    $basePath = CoreConfig::getValue('unsecure_cdn_base_path');
+                    $basePath = $this->config->getValue('unsecure_cdn_base_path');
                 }
             }
 

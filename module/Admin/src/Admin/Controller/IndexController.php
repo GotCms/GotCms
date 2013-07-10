@@ -29,7 +29,6 @@ namespace Admin\Controller;
 
 use Gc\Mvc\Controller\Action;
 use Gc\Document\Collection;
-use Gc\Core\Config;
 use Gc\User\Visitor;
 use Gc\Version;
 use Zend\Json\Json;
@@ -85,7 +84,8 @@ class IndexController extends Action
             ),
         );
 
-        $widgets                   = @unserialize(Config::getValue('dashboard_widgets'));
+        $coreConfig                = $this->getServiceLocator()->get('CoreConfig');
+        $widgets                   = @unserialize($coreConfig->getValue('dashboard_widgets'));
         $data['dashboardSortable'] = !empty($widgets['sortable']) ? Json::encode($widgets['sortable']) : '{}';
         $data['dashboardWelcome']  = !empty($widgets['welcome']);
 
@@ -102,9 +102,10 @@ class IndexController extends Action
      */
     public function saveDashboardAction()
     {
-        $params = $this->getRequest()->getPost()->toArray();
+        $coreConfig = $this->getServiceLocator()->get('CoreConfig');
+        $params     = $this->getRequest()->getPost()->toArray();
 
-        $config = @unserialize(Config::getValue('dashboard_widgets'));
+        $config = @unserialize($coreConfig->getValue('dashboard_widgets'));
 
         if (empty($config)) {
             $config = array();
@@ -116,7 +117,7 @@ class IndexController extends Action
             $config['sortable'] = $params;
         }
 
-        Config::setValue('dashboard_widgets', serialize($config));
+        $coreConfig->setValue('dashboard_widgets', serialize($config));
 
         return $this->returnJson(array('success' => true));
     }

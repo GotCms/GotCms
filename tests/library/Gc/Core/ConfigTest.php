@@ -67,16 +67,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testGetInstance()
-    {
-        $this->assertInstanceOf('Gc\Core\Config', Config::getInstance());
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
     public function testGetValue()
     {
         $this->object->insert(array('identifier' => 'string_test', 'value' => 'string_result'));

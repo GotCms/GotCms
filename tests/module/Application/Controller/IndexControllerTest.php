@@ -26,6 +26,7 @@
 
 namespace Application\Controller;
 
+use Gc\Registry;
 use Gc\Core\Config as CoreConfig;
 use Gc\Datatype\Model as DatatypeModel;
 use Gc\Document\Model as DocumentModel;
@@ -72,6 +73,11 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      * @var PropertyModel
      */
     protected $property;
+
+    /**
+     * @var CoreConfig
+     */
+    protected $config;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -144,6 +150,8 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
             )
         );
         $this->property->save();
+
+        $this->config = Registry::get('Application')->getServiceManager()->get('CoreConfig');
     }
 
     /**
@@ -251,8 +259,8 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexActionWithCache()
     {
-        $enableCache = CoreConfig::setValue('cache_is_active', 1);
-        $enableCache = CoreConfig::setValue('cache_handler', 'filesystem');
+        $enableCache = $this->config->setValue('cache_is_active', 1);
+        $enableCache = $this->config->setValue('cache_handler', 'filesystem');
         $document    = DocumentModel::fromArray(
             array(
                 'name' => 'test',
@@ -290,8 +298,8 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexActionWithExistingCache()
     {
-        $enableCache = CoreConfig::setValue('cache_is_active', 1);
-        $enableCache = CoreConfig::setValue('cache_handler', 'filesystem');
+        $enableCache = $this->config->setValue('cache_is_active', 1);
+        $enableCache = $this->config->setValue('cache_handler', 'filesystem');
         $document    = DocumentModel::fromArray(
             array(
                 'name' => 'test',
@@ -317,7 +325,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         $document->delete();
         unset($document);
-        $enableCache = CoreConfig::setValue('cache_is_active', 0);
+        $enableCache = $this->config->setValue('cache_is_active', 0);
     }
 
     /**
@@ -354,7 +362,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
         $document->delete();
         unset($document);
-        $enableCache = CoreConfig::setValue('cache_is_active', 0);
+        $enableCache = $this->config->setValue('cache_is_active', 0);
     }
 
     /**
@@ -380,7 +388,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexActionWith404PageAndNotEmptyContent()
     {
-        CoreConfig::setValue('site_404_layout', $this->layout->getId());
+        $this->config->setValue('site_404_layout', $this->layout->getId());
         $this->layout->setContent('test');
         $this->dispatch('/404Page');
         $this->assertResponseStatusCode(404);

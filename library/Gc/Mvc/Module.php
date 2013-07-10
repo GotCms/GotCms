@@ -27,8 +27,6 @@
 
 namespace Gc\Mvc;
 
-use Gc\Core\Config as CoreConfig;
-
 /**
  * Generic Module
  *

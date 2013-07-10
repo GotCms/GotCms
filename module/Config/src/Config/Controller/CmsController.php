@@ -28,7 +28,6 @@
 namespace Config\Controller;
 
 use Gc\Mvc\Controller\Action;
-use Gc\Core\Config;
 use Gc\Core\Updater;
 use Gc\Media\Info;
 use Gc\Version;
@@ -101,7 +100,8 @@ class CmsController extends Action
      */
     public function editAction()
     {
-        $values = Config::getValues();
+        $coreConfig = $this->getServiceLocator()->get('CoreConfig');
+        $values     = $coreConfig->getValues();
         $this->form->setValues($values);
 
         if ($this->getRequest()->isPost()) {
@@ -114,7 +114,7 @@ class CmsController extends Action
                 $inputs = $this->form->getInputFilter()->getValidInput();
                 foreach ($inputs as $input) {
                     if (method_exists($input, 'getName')) {
-                        Config::setValue($input->getName(), $input->getValue());
+                        $coreConfig->setValue($input->getName(), $input->getValue());
                     }
                 }
 

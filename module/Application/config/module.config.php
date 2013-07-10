@@ -38,7 +38,10 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
-        ),
+            'CoreConfig' => function ($sm) {
+                return new CoreConfig();
+            }
+        )
     ),
     'translator' => array(
         'locale' => 'en_GB',
@@ -70,18 +73,25 @@ return array(
     ),
     'view_helpers' => array(
         'factories' => array(
-            'cdn'               => function ($pm) {
-                return new Helper\Cdn($pm->getServiceLocator()->get('request'));
+            'cdn'        => function ($pm) {
+                return new Helper\Cdn(
+                    $pm->getServiceLocator()->get('request'),
+                    $pm->getServiceLocator()->get('CoreConfig')
+                );
             },
-            'config'            => function ($pm) {
-                return new Helper\Config(new CoreConfig);
-            },
-            'cdnBackend'               => function ($pm) {
+            'cdnBackend' => function ($pm) {
                 $serviceLocator = $pm->getServiceLocator();
-                $configuration = $serviceLocator->get('Config');
-                return new Helper\CdnBackend($serviceLocator->get('request'), isset($configuration['db']));
+                $configuration  = $serviceLocator->get('Config');
+                return new Helper\CdnBackend(
+                    $serviceLocator->get('request'),
+                    $serviceLocator->get('CoreConfig'),
+                    isset($configuration['db'])
+                );
             },
-            'script'               => function ($pm) {
+            'config'     => function ($pm) {
+                return new Helper\Config($pm->getServiceLocator()->get('CoreConfig'));
+            },
+            'script'     => function ($pm) {
                 return new Helper\Script($pm->getServiceLocator());
             },
         ),

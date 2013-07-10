@@ -57,27 +57,6 @@ class Config extends AbstractTable
     protected $name = 'core_config_data';
 
     /**
-     * Singleton for Config
-     *
-     * @var \Gc\Core\Config $instance
-     */
-    static protected $instance = null;
-
-    /**
-     * Get instance of \Gc\Core\Config
-     *
-     * @return \Gc\Core\Config
-     */
-    public static function getInstance()
-    {
-        if (empty(static::$instance)) {
-            static::$instance = new self();
-        }
-
-        return static::$instance;
-    }
-
-    /**
      * Get config value
      *
      * @param string $data  Data
@@ -85,10 +64,9 @@ class Config extends AbstractTable
      *
      * @return string value
      */
-    public static function getValue($data, $field = 'identifier')
+    public function getValue($data, $field = 'identifier')
     {
-        $instance = self::getInstance();
-        $row      = $instance->fetchRow($instance->select(array($field => $data)));
+        $row = $this->fetchRow($this->select(array($field => $data)));
         if (!empty($row)) {
             return $row['value'];
         }
@@ -101,10 +79,9 @@ class Config extends AbstractTable
      *
      * @return array
      */
-    public static function getValues()
+    public function getValues()
     {
-        $instance = self::getInstance();
-        $rows     = $instance->fetchAll($instance->select());
+        $rows = $this->fetchAll($this->select());
         if (!empty($rows)) {
             return $rows;
         }
@@ -120,17 +97,16 @@ class Config extends AbstractTable
      *
      * @return boolean
      */
-    public static function setValue($identifier, $value)
+    public function setValue($identifier, $value)
     {
         if (empty($identifier)) {
             return false;
         }
 
-        $instance = self::getInstance();
-        $row      = $instance->fetchRow($instance->select(array('identifier' => $identifier)));
+        $row = $this->fetchRow($this->select(array('identifier' => $identifier)));
         if (!empty($row)) {
             $where = new Where();
-            return $instance->update(array('value' => $value), $where->equalTo('identifier', $identifier));
+            return $this->update(array('value' => $value), $where->equalTo('identifier', $identifier));
         }
 
         return false;

@@ -28,7 +28,6 @@
 namespace Application\Controller;
 
 use Gc\Mvc\Controller\Action;
-use Gc\Core\Config as CoreConfig;
 use Gc\Component;
 use Gc\Document;
 use Gc\DocumentType;
@@ -93,11 +92,12 @@ class IndexController extends Action
      */
     public function indexAction()
     {
-        $visitor   = new Visitor();
-        $session   = $this->getSession();
-        $sessionId = $this->getSession()->getDefaultManager()->getId();
-        $isAdmin   = $this->getAuth()->hasIdentity();
-        $isPreview = ($isAdmin and $this->getRequest()->getQuery()->get('preview') === 'true');
+        $visitor    = new Visitor();
+        $session    = $this->getSession();
+        $sessionId  = $this->getSession()->getDefaultManager()->getId();
+        $isAdmin    = $this->getAuth()->hasIdentity();
+        $isPreview  = ($isAdmin and $this->getRequest()->getQuery()->get('preview') === 'true');
+        $coreConfig = $this->getServiceLocator()->get('CoreConfig');
 
         //Don't log preview
         if (!$isPreview and !$isAdmin) {
@@ -110,10 +110,10 @@ class IndexController extends Action
 
         $this->events()->trigger('Front', 'preDispatch', null, array('object' => $this));
 
-        if (CoreConfig::getValue('site_is_offline') == 1) {
+        if ($coreConfig->getValue('site_is_offline') == 1) {
             //Site is offline
             if (!$isAdmin) {
-                $document = Document\Model::fromId(CoreConfig::getValue('site_offline_document'));
+                $document = Document\Model::fromId($coreConfig->getValue('site_offline_document'));
                 if (empty($document)) {
                     die('Site offline');
                 }
@@ -128,7 +128,7 @@ class IndexController extends Action
 
         $path = ltrim($this->getRouteMatch()->getParam('path'), '/');
 
-        $cacheIsEnable = (CoreConfig::getValue('cache_is_active') == 1 and !$isPreview);
+        $cacheIsEnable = ($coreConfig->getValue('cache_is_active') == 1 and !$isPreview);
         if ($cacheIsEnable) {
             $this->enableCache();
             $cacheKey = ('page'
@@ -206,7 +206,7 @@ class IndexController extends Action
             if (empty($document)) {
                 // 404
                 $this->getResponse()->setStatusCode(404);
-                $layout = Layout\Model::fromId(CoreConfig::getValue('site_404_layout'));
+                $layout = Layout\Model::fromId($coreConfig->getValue('site_404_layout'));
                 if (!empty($layout)) {
                     $layoutContent = $layout->getContent();
                 } else {
@@ -346,8 +346,9 @@ class IndexController extends Action
      */
     protected function enableCache()
     {
-        $cacheTtl     = (int) CoreConfig::getValue('cache_lifetime');
-        $cacheHandler = CoreConfig::getValue('cache_handler');
+        $coreConfig   = $this->getServiceLocator()->get('CoreConfig');
+        $cacheTtl     = (int) $coreConfig->getValue('cache_lifetime');
+        $cacheHandler = $coreConfig->getValue('cache_handler');
 
         if (!in_array($cacheHandler, array('apc', 'memcached', 'filesystem'))) {
             $cacheHandler = 'filesystem';
