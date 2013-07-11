@@ -18,6 +18,7 @@
 - Intl is no longer required ([https://github.com/PierreRambaud/GotCms/issues/97](https://github.com/PierreRambaud/GotCms/issues/97))
 - Script not working ([https://github.com/PierreRambaud/GotCms/issues/100](https://github.com/PierreRambaud/GotCms/issues/100))
 - Remove Gc\Core\Config singleton ([https://github.com/PierreRambaud/GotCms/issues/99](https://github.com/PierreRambaud/GotCms/issues/99))
+- Refactoring exception ([https://github.com/PierreRambaud/GotCms/issues/32](https://github.com/PierreRambaud/GotCms/issues/32))
 
 ### Potential Breakage
 `Gc\Core\Config` singleton will not working anymore. You must used in view or layout, the config helper `$this->config()->get()`

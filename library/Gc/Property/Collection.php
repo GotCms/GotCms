@@ -161,8 +161,6 @@ class Collection extends AbstractTable
         } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage());
         }
-
-        return false;
     }
 
     /**
@@ -182,7 +180,5 @@ class Collection extends AbstractTable
         } catch (\Exception $e) {
             throw new \Gc\Exception($e->getMessage());
         }
-
-        return false;
     }
 }

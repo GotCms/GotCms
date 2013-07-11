@@ -145,12 +145,9 @@ class Model extends AbstractTable
 
             return $this->getId();
         } catch (\Exception $e) {
+            $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
-
-        $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
-
-        return false;
     }
 
     /**
