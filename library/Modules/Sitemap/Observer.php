@@ -49,8 +49,8 @@ class Observer extends AbstractObserver
      */
     public function init()
     {
-        $this->events()->attach('Gc\Document\Model', 'afterSave', array($this, 'addElement'));
-        $this->events()->attach('Gc\Document\Model', 'afterDelete', array($this, 'removeElement'));
+        $this->events()->attach('Gc\Document\Model', 'after.save', array($this, 'addElement'));
+        $this->events()->attach('Gc\Document\Model', 'after.delete', array($this, 'removeElement'));
     }
 
     /**

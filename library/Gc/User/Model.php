@@ -81,15 +81,18 @@ class Model extends AbstractTable
         $auth   = new AuthenticationService(new Storage\Session(self::BACKEND_AUTH_NAMESPACE));
         $result = $auth->authenticate($authAdapter);
 
+        $this->events()->trigger(__CLASS__, 'before.auth', null, array('object' => $this));
         if ($result->isValid()) {
             $data = $authAdapter->getResultRowObject(null, 'password');
             $this->setData((array) $data);
             $this->setOrigData();
             $auth->getStorage()->write($this);
+            $this->events()->trigger(__CLASS__, 'after.auth', null, array('object' => $this));
 
             return true;
         }
 
+        $this->events()->trigger(__CLASS__, 'after.auth.failed', null, array('object' => $this, 'login' => $login));
         return false;
     }
 
@@ -147,7 +150,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.save', null, array('object' => $this));
         $arraySave = array(
             'firstname' => $this->getFirstname(),
             'lastname' => $this->getLastname(),
@@ -174,11 +177,11 @@ class Model extends AbstractTable
                 $this->update($arraySave, array('id' => $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
 
             return $this->getId();
         } catch (\Exception $e) {
-            $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save.failed', null, array('object' => $this));
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -190,7 +193,7 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.delete', null, array('object' => $this));
         $id = $this->getId();
         if (!empty($id)) {
             try {
@@ -199,13 +202,13 @@ class Model extends AbstractTable
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.delete', null, array('object' => $this));
             unset($this);
 
             return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'after.delete.failed', null, array('object' => $this));
 
         return false;
     }
@@ -238,12 +241,15 @@ class Model extends AbstractTable
     {
         $userTable = new Model();
         $row       = $userTable->fetchRow($userTable->select(array('id' => (int) $userId)));
+        $userTable->events()->trigger(__CLASS__, 'before.load', null, array('object' => $userTable));
         if (!empty($row)) {
             $userTable->setData((array) $row);
             $userTable->unsetData('password');
             $userTable->setOrigData();
+            $userTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $userTable));
             return $userTable;
         } else {
+            $userTable->events()->trigger(__CLASS__, 'after.load.failed', null, array('object' => $userTable));
             return false;
         }
     }

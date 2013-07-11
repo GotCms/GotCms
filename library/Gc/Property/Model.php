@@ -160,7 +160,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.save', null, array('object' => $this));
         $arraySave = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
@@ -185,11 +185,11 @@ class Model extends AbstractTable
                 $this->update($arraySave, array('id' => (int) $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
 
             return $this->getId();
         } catch (\Exception $e) {
-            $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save.failed', null, array('object' => $this));
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -201,7 +201,7 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.delete', null, array('object' => $this));
         $id = $this->getId();
         if (!empty($id)) {
             try {
@@ -212,12 +212,12 @@ class Model extends AbstractTable
                 throw new \Gc\Exception($e->getMessage());
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.delete', null, array('object' => $this));
 
             return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'after.delete.failed', null, array('object' => $this));
 
         return false;
     }
@@ -249,11 +249,14 @@ class Model extends AbstractTable
     {
         $propertyTable = new Model();
         $row           = $propertyTable->fetchRow($propertyTable->select(array('id' => (int) $propertyId)));
+        $propertyTable->events()->trigger(__CLASS__, 'before.load', null, array('object' => $propertyTable));
         if (!empty($row)) {
             $propertyTable->setData((array) $row);
             $propertyTable->setOrigData();
+            $propertyTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $propertyTable));
             return $propertyTable;
         } else {
+            $propertyTable->events()->trigger(__CLASS__, 'after.load.failed', null, array('object' => $propertyTable));
             return false;
         }
     }
@@ -280,13 +283,16 @@ class Model extends AbstractTable
                 }
             )
         );
+        $propertyTable->events()->trigger(__CLASS__, 'before.load', null, array('object' => $propertyTable));
 
         if (!empty($row)) {
             $propertyTable->setData((array) $row);
             $propertyTable->setDocumentId($documentId);
             $propertyTable->setOrigData();
+            $propertyTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $propertyTable));
             return $propertyTable;
         } else {
+            $propertyTable->events()->trigger(__CLASS__, 'after.load.failed', null, array('object' => $propertyTable));
             return false;
         }
     }

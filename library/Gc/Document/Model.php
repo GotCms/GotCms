@@ -163,11 +163,14 @@ class Model extends AbstractTable implements IterableInterface
     {
         $documentTable = new Model();
         $row           = $documentTable->fetchRow($documentTable->select(array('id' => (int) $documentId)));
+        $documentTable->events()->trigger(__CLASS__, 'before.load', null, array('object' => $documentTable));
         if (!empty($row)) {
             $documentTable->setData((array) $row);
             $documentTable->setOrigData();
+            $documentTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $documentTable));
             return $documentTable;
         } else {
+            $documentTable->events()->trigger(__CLASS__, 'after.load.failed', null, array('object' => $documentTable));
             return false;
         }
     }
@@ -184,6 +187,7 @@ class Model extends AbstractTable implements IterableInterface
     {
         $documentTable = new Model();
         $sqlData       = array('url_key' => $urlKey);
+        $documentTable->events()->trigger(__CLASS__, 'before.load', null, array('object' => $documentTable));
         if ($parentId !== false) {
             $sqlData['parent_id'] = $parentId;
         }
@@ -192,8 +196,10 @@ class Model extends AbstractTable implements IterableInterface
         if (!empty($row)) {
             $documentTable->setData((array) $row);
             $documentTable->setOrigData();
+            $documentTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $documentTable));
             return $documentTable;
         } else {
+            $documentTable->events()->trigger(__CLASS__, 'after.load.failed', null, array('object' => $documentTable));
             return false;
         }
     }
@@ -205,7 +211,7 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'beforeSave', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.save', null, array('object' => $this));
         $arraySave = array(
             'name' => $this->getName(),
             'url_key' => $this->getUrlKey(),
@@ -235,11 +241,11 @@ class Model extends AbstractTable implements IterableInterface
                 $this->update($arraySave, array('id' => $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'afterSave', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
 
             return $this->getId();
         } catch (\Exception $e) {
-            $this->events()->trigger(__CLASS__, 'afterSaveFailed', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save.failed', null, array('object' => $this));
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -251,7 +257,7 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'beforeDelete', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.delete', null, array('object' => $this));
         $documentId = $this->getId();
         if (!empty($documentId)) {
             try {
@@ -262,13 +268,13 @@ class Model extends AbstractTable implements IterableInterface
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'afterDelete', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.delete', null, array('object' => $this));
             unset($this);
 
             return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'afterDeleteFailed', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'after.delete.failed', null, array('object' => $this));
 
         return false;
     }
