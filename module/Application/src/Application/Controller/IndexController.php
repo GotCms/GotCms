@@ -95,7 +95,7 @@ class IndexController extends Action
         $visitor    = new Visitor();
         $session    = $this->getSession();
         $sessionId  = $this->getSession()->getDefaultManager()->getId();
-        $isAdmin    = $this->getAuth()->hasIdentity();
+        $isAdmin    = $this->getServiceLocator()->get('Auth')->hasIdentity();
         $isPreview  = ($isAdmin and $this->getRequest()->getQuery()->get('preview') === 'true');
         $coreConfig = $this->getServiceLocator()->get('CoreConfig');
 

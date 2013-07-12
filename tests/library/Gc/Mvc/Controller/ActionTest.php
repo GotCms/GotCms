@@ -55,6 +55,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     {
         $this->object = new Action;
         $this->object->setEvent(Registry::get('Application')->getMvcEvent());
+        $this->object->setServiceLocator(Registry::get('Application')->getServiceManager());
     }
 
     /**
@@ -183,16 +184,6 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testGetSession()
     {
         $this->assertInstanceOf('Zend\Session\Container', $this->object->getSession());
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testGetAuth()
-    {
-        $this->assertInstanceOf('Zend\Authentication\AuthenticationService', $this->object->getAuth());
     }
 
     /**

@@ -73,7 +73,7 @@ class UserController extends Action
      */
     public function loginAction()
     {
-        if ($this->getAuth()->hasIdentity()) {
+        if ($this->getServiceLocator()->get('Auth')->hasIdentity()) {
             $redirect = $this->getRouteMatch()->getParam('redirect');
             if (!empty($redirect)) {
                 return $this->redirect()->toUrl(base64_decode($redirect));
@@ -179,7 +179,7 @@ class UserController extends Action
      */
     public function logoutAction()
     {
-        $this->getAuth()->clearIdentity();
+        $this->getServiceLocator()->get('Auth')->clearIdentity();
         return $this->redirect()->toRoute('admin');
     }
 

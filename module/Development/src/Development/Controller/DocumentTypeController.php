@@ -98,7 +98,7 @@ class DocumentTypeController extends Action
                         'icon_id'         => $infosSubform->getValue('icon_id'),
                         'description'     => $infosSubform->getValue('description'),
                         'default_view_id' => $viewsSubform->getValue('default_view'),
-                        'user_id'         => $this->getAuth()->getIdentity()->getId(),
+                        'user_id'         => $this->getServiceLocator()->get('Auth')->getIdentity()->getId(),
                     )
                 );
 

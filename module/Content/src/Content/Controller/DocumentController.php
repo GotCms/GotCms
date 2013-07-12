@@ -137,7 +137,7 @@ class DocumentController extends Action
                     ->setDocumentTypeId($documentTypeId)
                     ->setParentId($parentId)
                     ->setUrlKey(!empty($documentUrlKey) ? $documentUrlKey : $this->checkUrlKey($documentName))
-                    ->setUserId($this->getAuth()->getIdentity()->getId());
+                    ->setUserId($this->getServiceLocator()->get('Auth')->getIdentity()->getId());
 
                 $document->save();
                 $this->flashMessenger()->addSuccessMessage('Document successfuly add');

@@ -26,7 +26,10 @@
  */
 
 use Gc\Core\Config as CoreConfig;
+use Gc\User\Model as UserModel;
 use Gc\View\Helper;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Storage;
 
 return array(
     'controllers' => array(
@@ -40,6 +43,9 @@ return array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
             'CoreConfig' => function ($sm) {
                 return new CoreConfig();
+            },
+            'Auth' => function ($sm) {
+                return new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
             }
         )
     ),

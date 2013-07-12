@@ -29,16 +29,12 @@ namespace Gc\Mvc\Controller;
 
 use Gc\Event\StaticEventManager;
 use Gc\Module\Model as ModuleModel;
-use Gc\User\Model as UserModel;
 use Gc\User\Acl;
 use Gc\Registry;
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Storage;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Container as SessionContainer;
 use Zend\View\Model\JsonModel;
-use Zend\I18n\Translator\Translator;
 
 /**
  * Extension of AbstractActionController
@@ -62,13 +58,6 @@ class Action extends AbstractActionController
         'install/configuration',
         'install/complete'
     );
-
-    /**
-     * Authentication service
-     *
-     * @var \Zend\Authentication\AuthenticationService
-     */
-    protected $auth = null;
 
     /**
      * RouteMatch
@@ -137,7 +126,7 @@ class Action extends AbstractActionController
         ) {
             return $this->redirect()->toRoute('install');
         } elseif (!in_array($routeName, $this->installerRoutes)) {
-            $auth = $this->getAuth();
+            $auth = $this->getServiceLocator()->get('Auth');
             if (!$auth->hasIdentity()) {
                 if (!in_array(
                     $routeName,
@@ -232,20 +221,6 @@ class Action extends AbstractActionController
         }
 
         return $this->session;
-    }
-
-    /**
-     * Get authentication
-     *
-     * @return \Zend\Authentication\AuthenticationService
-     */
-    public function getAuth()
-    {
-        if ($this->auth === null) {
-            $this->auth = new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
-        }
-
-        return $this->auth;
     }
 
     /**
