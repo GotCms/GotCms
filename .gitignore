@@ -1,2 +1,58 @@
+# IDE files
 .project
 .settings
+
+# Configuration and Data
+config/autoload/*
+data/cache/*
+data/tmp/*
+data/translation/*
+sessions/*
+
+# Frontend
+public/frontend/*
+!public/frontend/tmp
+public/frontend/tmp/*
+public/media/*
+!public/media/files
+!public/media/icons
+public/media/files/*
+
+# Datatypes
+library/Datatypes/*
+!library/Datatypes/Boolean
+!library/Datatypes/CheckboxList
+!library/Datatypes/DatePicker
+!library/Datatypes/ImageCropper
+!library/Datatypes/Mixed
+!library/Datatypes/RadioButtonList
+!library/Datatypes/Textarea
+!library/Datatypes/Textrich
+!library/Datatypes/Textstring
+!library/Datatypes/Upload
+!library/Datatypes/jQueryFileUpload
+
+# Modules
+library/Modules/*
+!library/Modules/ActivityLog
+!library/Modules/Backup
+!library/Modules/Blog
+!library/Modules/Sitemap
+
+# Test
+tests/TestConfiguration.php
+tests/phpunit.xml
+tests/library/Gc/Core/_files/*
+!tests/logs
+tests/logs/*
+tests/media/*
+!tests/media/files
+tests/media/files/test/*
+!tests/media/github.tags
+
+
+# Vendor
+vendor/*
+!vendor/elFinder
+!vendor/SVGGraph
+!vendor/Zend
