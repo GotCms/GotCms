@@ -2,7 +2,7 @@
 *
 # Except this file
 !.gitignore
+!.ActivityLog
 !Backup
 !Blog
 !Sitemap
-
