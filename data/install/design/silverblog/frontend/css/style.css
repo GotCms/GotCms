@@ -1,0 +1,135 @@
+* {padding:0; margin:0;}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted #ccc;
+    cursor:help;
+}
+
+.clear {
+ clear:both;
+}
+.clear:after {
+ display:block;
+ visibility:hidden;
+ clear:both;
+ height:0;
+ content: ".";
+}
+h1, h2, h3 {font-family:Arial, Helvetica, sans-serif; }
+ul {list-style:none;}
+a {color:#1496d9; text-decoration:none;}
+h1 a {color:#000;}
+h1 a:hover {color:#1496d9; text-decoration:none;}
+body {background: #fff url(../images/bodybg.jpg) repeat-x; font-family:Verdana, Geneva, sans-serif; font-size:62.5%; color:#444;}
+#bodywrap {width:1000px; margin:0 auto; background:url(../images/wrapbg.jpg) center top no-repeat; min-height:400px; padding:0 10px;}
+#pagetop {height:34px; padding:0 20px;}
+#pagetop #siteinfo {display:block; height:32px; line-height:30px; float:left; color:#ccc; font-style:italic; font-size:1.1em;}
+#sitenav {float:right; height:34px;}
+#sitenav a {color:#ccc!important;}
+#sitenav li {display:inline; font-size:1.1em;}
+#sitenav li a {display:block; float:left; height:33px; line-height:30px; padding:0 25px;}
+#sitenav li a:hover {color:#fff!important;}
+#sitenav li.active a {background:url(../images/activemenu.png) center bottom no-repeat; color:#fff!important;}
+#pageheader {height:118px; padding:0 20px;}
+#pageheader h1 {display:block; font:normal 3.6em Arial, Helvetica, sans-serif!important; color:#000; text-shadow:#fff 1px 1px 1px; float:left; padding:35px 0 0 0;}
+#pageheader h1 span {color:#aaa;}
+#search {float:right; background:url(../images/searchbg.png) 0 40px no-repeat; width:261px; height:26px; padding:45px 5px 5px 5px;}
+#search .searchfield {float:left;}
+#search .searchbtn {float:right;}
+.searchfield input {display:block; background:transparent!important; border:none!important; width:170px; padding:0 10px; color:#333; line-height:24px; height:26px;}
+#contents {padding:18px 20px; background:url(../images/sidebarbg.jpg) 649px 0 repeat-y; min-height:200px;}
+#main {width:615px; float:left;}
+#sidebar {float:right; width:310px; padding-top:5px;}
+#featured {background:url(../images/featureheaderbg.png) 0 0 no-repeat; height:247px; margin-bottom:10px; position:relative; color:#eee;}
+#normalheader {background: url(../images/normalheader2.jpg) 0 0 no-repeat; height:150px; margin-bottom:10px;}
+#normalheader.header2 {background:url(../images/normalheader.jpg) no-repeat;}
+#featured p {font-size:1.2em; line-height:18px; font-weight:normal;}
+#featured .ftheading {position:absolute; right:0; top:-5px; z-index:800; background:url(../images/featuredheading.png) no-repeat; height:117px; width:115px; text-indent:-4000px;}
+#featured h3 {display:block; font:bold 1.8em Arial, Helvetica, sans-serif; color:#fff; margin-bottom:10px;}
+#featured a {color:#fff; text-decoration:underline!important;}
+#featured .ftwrap {padding:45px 35px 0 35px;}
+.ftwrap .ftimg {float:left; background:url(../images/imgthumb.png) no-repeat; width:220px; height:144px;  padding:13px 0 0 13px;}
+.ftwrap .fttxt { margin-left:260px; padding-top:15px; padding-right:25px;}
+
+.mainheading, #leftcontainer h2 {font:bold 1.8em "Trebuchet MS", Arial, Helvetica, sans-serif; color:#666; padding:10px 0; border-bottom:solid 1px #ddd; margin-bottom:15px;}
+#leftcontainer {padding: 0 10px;}
+.post p {font-size:1.2em; line-height:18px; margin-bottom:10px;}
+.post header {margin-bottom:10px;}
+.post h3,#comments h3 {font:bold 1.6em Arial, Helvetica, sans-serif; color:#000; margin-bottom:5px;}
+.post h3 a {color:#333; text-decoration:none;}
+.post header .postinfo {font-size:1.1em; color:#777;}
+.post footer {border: solid 1px; border-color:#ddd #fff #ddd #fff; padding:3px; font-size:1.1em; color:#777;}
+
+.post footer {height:15px; line-height:15px;}
+.post footer span {margin:0 65px 0 0;}
+.post footer a {color:#333;}
+.post {margin-bottom:20px;}
+#sidebar h2 {font:bold 1.8em "Trebuchet MS", Arial, Helvetica, sans-serif; color:#000; margin-bottom:10px;}
+
+#sidebar p {font-size:1.2em; line-height:18px; margin-bottom:20px;}
+#sidebar ul {font-size:1.1em; font-style:italic; margin-bottom:20px;}
+#sidebar ul li {display:block; height:24px; text-align:right; border-bottom:solid 1px #cdcdcd; line-height:24px;}
+#sidebar ul li a { line-height:24px; height:24px; background:url(../images/ulli.png) left center no-repeat; padding:0 0 0 20px; display:block; color:#666; float:left; width:220px; text-align:left;}
+#sidebarwrap {padding:0 20px;}
+#sidebar ul li a:hover {color:#000;}
+#pagefooter {background:url(../images/footerbg.jpg) repeat-x; height:89px;}
+#footerwrap {width:940px; margin:0 auto; color:#ccc; padding-top:35px;}
+#footerwrap .copyright {float:left; width:60%; font-size:1.1em;}
+#footerwrap .credit {float:right; width:35%; font-size:1em; color:#999!important; text-align:right;}
+#footerwrap a {color:#fff;}
+.wp-pagenavi {background:url(../images/pagenavibg.gif) no-repeat; height:26px; width:553px; margin:0 auto 10px auto; padding-left:20px; padding-right:20px; font-size:1.2em; text-align:center; padding-top:2px;}
+.wp-pagenavi span, .wp-pagenavi a { display:inline-block; height:24px; line-height:24px; margin:0 4px; color:#555; padding:0 8px;}
+.wp-pagenavi a:hover {background:url(../images/pagenaviactivebg.png) repeat-x; color:#000;}
+.wp-pagenavi .current {background:url(../images/pagenaviactivebg.png) repeat-x; color:#000;}
+
+.entry .avatar {height:45px; margin-bottom:10px;}
+.commentlist {list-style:none;}
+.commentlist .comment {border:solid 1px #ddd; padding:10px; margin-bottom:10px;}
+.comment .author_name img {float:left;}
+.comment .comment_text {font-size:1.1em; line-height:18px; }
+.comment .author_name {display:block; }
+.author_name span, .author_name time {display:block;}
+
+.entry .entry {margin:10px;}
+.commentreply {font-size:1.1em; height:18px; line-height:18px; text-align:right;}
+#commentform {padding:10px; background:#f4f4f4; border:solid 1px #ddd;}
+.form  {padding:10px;}
+#commentform p, .form p {display:block; margin-bottom:10px!important; font-size:1.2em;}
+#username, #captcha, #email,.textfield input, .input-text{display:block; width:550px; height:25px; line-height:24px; border:solid 1px #ccc;}
+#message,.text-area textarea, textarea.input-text {display:block; width:550px; height:250px; border:solid 1px #ccc;}
+#captcha:hover,#username:hover,#email:hover,#message:hover,.textfield input:hover, .text-area textarea:hover {border:solid 1px #444;}
+#captcha:focus,#username:focus,#email:focus,#message:focus,.textfield input:focus, .text-area textarea:focus {border:solid 1px #333;}
+#submit,.button {background:url(/frontend/images/submit.png) no-repeat;border: medium none;color: transparent;height: 30px;margin-top: 15px;width: 97px;cursor:pointer;}
+.post blockquote {display:block; padding-left:15px;}
+.post blockquote p {display:block; padding-left:10px; border-left:solid 3px #ddd; font: italic 1.4em Georgia, "Times New Roman", Times, serif; color:#222; line-height:22px;}
+.post img.alignleft  {float:left; border:solid 1px #ddd; padding:10px; display:block; margin:0 10px 5px 0;}
+.post img.alignright  {float:right; border:solid 1px #ddd; padding:10px; display:block; margin:0 0 5px 10px;}
+.post ul, .post ol {font-size:1.2em; line-height:18px; margin-bottom:15px; padding-left:20px;}
+.post ul li {display:block; background:url(../images/ulli.png) 0 6px no-repeat; padding-left:25px; margin-bottom:10px;}
+.post h4 {font:bold 1.4em "Trebuchet MS", Arial, Helvetica, sans-serif; color:#000; margin-bottom:10px;}
+.post h2 {display:block; font:1.8em "Trebuchet MS", Arial, Helvetica, sans-serif; color:#000;}
+.post a:hover {color:#000; text-decoration:underline;}
+
+.notification {border-radius:6px 6px 6px 6px;border: 1px solid;font-size: 13px;margin: 0 0 15px;padding: 0;position: relative;width: 99.8%;padding:5px}
+.warning {background: #FFFBCC;border-color: #E6DB55;color: #666452;}
+.information {background: #DBE3FF;border-color: #A2B4EE;color: #585B66;}
+.success {background: #D5FFCE;border-color: #9ADF8F;color: #556652;}
+.error {background: #FFCECE;border-color: #DF8F8F;color: #665252;}
