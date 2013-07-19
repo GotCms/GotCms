@@ -291,7 +291,12 @@ class Model extends AbstractTable
             $documentTypeTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $documentTypeTable));
             return $documentTypeTable;
         } else {
-            $documentTypeTable->events()->trigger(__CLASS__, 'after.load.failed', null, array('object' => $documentTypeTable));
+            $documentTypeTable->events()->trigger(
+                __CLASS__,
+                'after.load.failed',
+                null,
+                array('object' => $documentTypeTable)
+            );
             return false;
         }
     }

@@ -49,6 +49,11 @@ class Renderer extends Object
      */
     protected $renderer;
 
+    /**
+     * Directly initiliaze the renderer
+     *
+     * @return void
+     */
     public function init()
     {
         $this->checkRenderer();
