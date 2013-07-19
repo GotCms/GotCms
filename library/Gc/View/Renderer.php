@@ -31,6 +31,7 @@ use Gc\Registry;
 use Gc\Core\Object;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
+use Gc\View\Resolver\TemplatePathStack;
 
 /**
  * Abstract obverser bootstrap
@@ -48,6 +49,11 @@ class Renderer extends Object
      */
     protected $renderer;
 
+    public function init()
+    {
+        $this->checkRenderer();
+    }
+
     /**
      * Render template
      *
@@ -58,7 +64,6 @@ class Renderer extends Object
      */
     public function render($name, array $data = array())
     {
-        $this->checkRenderer();
         $viewModel = new ViewModel();
         $viewModel->setTemplate($name);
         $viewModel->setVariables($data);
@@ -71,7 +76,7 @@ class Renderer extends Object
      *
      * @param string $dir Directory
      *
-     * @return \Gc\Module\AbstractObserver
+     * @return \Gc\View\Renderer
      */
     public function addPath($dir)
     {
@@ -85,7 +90,7 @@ class Renderer extends Object
      * Check renderer, create if not exists
      * Copy helper plugin manager from application service manager
      *
-     * @return \Gc\Module\AbstractObserver
+     * @return \Gc\View\Renderer
      */
     protected function checkRenderer()
     {
@@ -94,6 +99,29 @@ class Renderer extends Object
             $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
             $this->renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
         }
+
+        return $this;
+    }
+
+    /**
+     * Retrieve php renderer
+     *
+     * @return PhpRenderer
+     */
+    public function getRenderer()
+    {
+        return $this->renderer;
+    }
+
+    /**
+     * Use view stream
+     *
+     * @return \Gc\View\Renderer
+     */
+    public function useStreamWrapper()
+    {
+        $this->renderer->setResolver(new TemplatePathStack());
+        $this->renderer->resolver()->setUseStreamWrapper(true);
 
         return $this;
     }

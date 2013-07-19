@@ -81,4 +81,24 @@ class RendererTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('Gc\View\Renderer', $this->object->addPath(__DIR__));
     }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testGetRenderer()
+    {
+        $this->assertInstanceOf('Zend\View\Renderer\PhpRenderer', $this->object->getRenderer());
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testUseStreamWrapper()
+    {
+        $this->assertInstanceOf('Gc\View\Renderer', $this->object->useStreamWrapper());
+    }
 }
