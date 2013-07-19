@@ -20,6 +20,7 @@ before_install:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --prefer-source --no-interaction
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo "short_open_tag = On" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 
 before_script:
