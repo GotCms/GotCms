@@ -167,7 +167,12 @@ class IndexController extends Action
             $result = new ViewModel();
         }
 
-        //Change defaut template path
+        //Change defaut template path stack
+        $config      = $this->getServiceLocator()->get('Config');
+        $modulesPath = $config['view_manager']['template_path_stack']['modules'];
+        $viewsPath   = sprintf('%s/%s/views', $modulesPath, $moduleModel->getName());
+        $this->getServiceLocator()->get('ViewTemplatePathStack')->addPath($viewsPath);
+
         $result->setTemplate(sprintf('%s/views/%s/%s', $moduleModel->getName(), $controllerName, $actionName));
 
         $filename = sprintf(GC_APPLICATION_PATH . '/library/Modules/%s/views/menu.phtml', $moduleModel->getName());

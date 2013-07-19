@@ -1,0 +1,65 @@
+<?php
+/**
+ * This source file is part of GotCms.
+ *
+ * GotCms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GotCms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category   Gc_Library
+ * @package    Modules
+ * @subpackage ActivityLog\Design
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
+ */
+?>
+<?php
+$paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($this->events));
+$paginator->setItemCountPerPage(50);
+$paginator->setCurrentPageNumber(empty($_GET['page']) ? 1 : (int)$_GET['page']);
+?>
+
+<?php echo $this->paginationControl($paginator, 'Sliding', 'index/paginator.phtml', array('path' => $this->moduleUrl())); ?>
+<table class="table-list">
+    <colgroup>
+        <col width="10%">
+        <col width="80%">
+        <col width="10%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Created at')); ?></th>
+            <th class="a-left"><?php echo $this->escapeHtml($this->translate('Event')); ?></th>
+            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($paginator as $event): ?>
+            <tr>
+                <td class="a-center"><?php echo date('Y-m-d H:i:s', strtotime($event->getCreatedAt())); ?></td>
+                <td class="a-left"><?php echo $event->getContent(); ?></td>
+                <td class="a-center">
+                    <a href="<?php echo $this->moduleUrl('remove-event', 'index', array('id' => $event->getId())); ?>" class="delete-line">
+                        <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    Gc.initTableList();
+</script>

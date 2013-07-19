@@ -20,6 +20,7 @@
 - Remove Gc\Core\Config singleton ([https://github.com/PierreRambaud/GotCms/issues/99](https://github.com/PierreRambaud/GotCms/issues/99))
 - Refactoring exception ([https://github.com/PierreRambaud/GotCms/issues/32](https://github.com/PierreRambaud/GotCms/issues/32))
 - Refactoring events ([https://github.com/PierreRambaud/GotCms/issues/101](https://github.com/PierreRambaud/GotCms/issues/101))
+- Log module ([https://github.com/PierreRambaud/GotCms/issues/33](https://github.com/PierreRambaud/GotCms/issues/33))
 
 ### Potential Breakage
 `Gc\Core\Config` singleton will not working anymore. You must used in view or layout, the config helper `$this->config()->get()`
