@@ -1,4 +1,4 @@
-# CHANGELOG13
+# CHANGELOG
 
 ##0.1.9 (-- --- 2013):
 - Can't update cms with git ([https://github.com/PierreRambaud/GotCms/issues/76](https://github.com/PierreRambaud/GotCms/issues/76))
