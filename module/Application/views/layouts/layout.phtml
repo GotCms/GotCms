@@ -99,21 +99,23 @@
         © <?php echo $this->escapeHtml(date('Y')); ?> <a href="http://www.got-cms.com">GotCms <?php echo $this->version; ?></a>
     </footer>
 
-    <script type="text/javascript">
-        <?php if (!empty($this->routes)): ?>
-            $(document).ready(function() {
-                Gc.setOption('routes', $.parseJSON('<?php echo $this->escapeJs($this->routes); ?>'));
-                Gc.initDocumentMenu(<?php echo (int)$this->documentId; ?>, '<?php echo $this->escapeJs($this->url('content/document/sort')); ?>');
-            });
-        <?php endif; ?>
+    <?php if (!empty($this->routes) or !empty($this->moduleRoutes)): ?>
+        <script type="text/javascript">
+            <?php if (!empty($this->routes)): ?>
+                $(document).ready(function() {
+                    Gc.setOption('routes', $.parseJSON('<?php echo $this->escapeJs($this->routes); ?>'));
+                    Gc.initDocumentMenu(<?php echo (int)$this->documentId; ?>, '<?php echo $this->escapeJs($this->url('content/document/sort')); ?>');
+                });
+            <?php endif; ?>
 
-        <?php if (!empty($this->moduleRoutes)): ?>
-            $(document).ready(function() {
-                Gc.setOption('moduleRoutes', $.parseJSON('<?php echo $this->escapeJs($this->moduleRoutes); ?>'));
-                Gc.initModuleMenu(<?php echo (int)$this->moduleId; ?>);
-            });
-        <?php endif; ?>
-    </script>
+            <?php if (!empty($this->moduleRoutes)): ?>
+                $(document).ready(function() {
+                    Gc.setOption('moduleRoutes', $.parseJSON('<?php echo $this->escapeJs($this->moduleRoutes); ?>'));
+                    Gc.initModuleMenu(<?php echo (int)$this->moduleId; ?>);
+                });
+            <?php endif; ?>
+        </script>
+    <?php endif; ?>
 
     <div id="dialog" title="">
         <p>
