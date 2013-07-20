@@ -1,5 +1,8 @@
 # CHANGELOG
 
+##0.2.0 (-- --- 2013):
+- User without user acl can't log out ([https://github.com/PierreRambaud/GotCms/issues/107](https://github.com/PierreRambaud/GotCms/issues/107107))
+
 ##0.1.9 (20 Jul 2013):
 - Can't update cms with git ([https://github.com/PierreRambaud/GotCms/issues/76](https://github.com/PierreRambaud/GotCms/issues/76))
 - Add Zend Validate translations ([https://github.com/PierreRambaud/GotCms/issues/77](https://github.com/PierreRambaud/GotCms/issues/77))

@@ -145,10 +145,8 @@ class Action extends AbstractActionController
                 }
             } else {
                 $userModel = $auth->getIdentity();
-
-                $this->acl   = new Acl($userModel);
-                $permissions = $userModel->getRole(true)->getUserPermissions();
-                if ($routeName != 'user/config/forbidden') {
+                if (!in_array($routeName, array('config/user/forbidden', 'config/user/logout'))) {
+                    $this->acl   = new Acl($userModel);
                     if (!empty($this->aclPage)) {
                         $isAllowed = false;
                         if ($this->aclPage['resource'] == 'Modules') {
@@ -180,7 +178,7 @@ class Action extends AbstractActionController
                         }
 
                         if (!$isAllowed) {
-                            return $this->redirect()->toRoute('user/config/forbidden');
+                            return $this->redirect()->toRoute('config/user/forbidden');
                         }
                     }
                 }
