@@ -193,7 +193,7 @@ footer a:hover {text-decoration:underline;}
 .dashboard h3 {text-shadow: 1px 1px 1px #FFFFFF;}
 .widget-column {width:48%;padding: 5px;min-height:50px;}
 .widget-box {background-color: #F5F5F5;background-image: -moz-linear-gradient(center top , #F9F9F9, #F5F5F5);border-color: #C2C2C2;border-radius: 3px 3px 3px 3px;min-width: 255px;position: relative;border-style: solid;border-width: 1px;line-height: 1;margin-bottom: 20px;padding: 0;}
-.widget-box h3 {color: #FFFFFF;border-bottom-color: #DFDFDF;text-shadow: 0 1px 0 #FFFFFF;background-color: #F1F1F1;background-image: -moz-linear-gradient(center top , #656565, #000000);}
+.widget-box h3 {color: #FFFFFF;border-bottom-color: #DFDFDF;text-shadow: 0 1px 0 #FFFFFF;background-color: -moz-linear-gradient(center top , #656565, #000000) -webkit-linear-gradient(top,#656565,#000000);}
 .widget-box .inside {font-size: 12px;}
 .widget-box p.sub {padding: 5px;margin:0; color: #8F8F8F; font-size: 14px;}
 .widget-box .table {margin: 0pt; padding: 0pt; position: relative;border-top: 1px solid #ECECEC; width: 45%;}
