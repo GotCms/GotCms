@@ -36,6 +36,10 @@
     "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/0.1.8"
 },
 {
+    "ref": "refs/tags/0.1.9",
+    "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/0.1.9"
+},
+{
     "ref": "refs/tags/0.1.0a",
     "url": "https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags/0.1.0a"
 },

@@ -11,7 +11,7 @@ Please read the [LICENSE.txt](LICENSE.txt) file for the exact license details th
 
 ## Release information
 
-### Updates in 0.1.8
+### Updates in 0.1.9
 
 Please see [CHANGELOG.md](CHANGELOG.md).
 
@@ -28,7 +28,7 @@ Git:
 
 Zip archive:
 
-[https://github.com/PierreRambaud/GotCms/archive/0.1.8.zip](https://github.com/PierreRambaud/GotCms/archive/0.1.8.zip)
+[https://github.com/PierreRambaud/GotCms/archive/0.1.9.zip](https://github.com/PierreRambaud/GotCms/archive/0.1.9.zip)
 
 
 ### Apache configuration

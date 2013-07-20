@@ -1,6 +1,6 @@
 # CHANGELOG
 
-##0.1.9 (-- --- 2013):
+##0.1.9 (20 Jul 2013):
 - Can't update cms with git ([https://github.com/PierreRambaud/GotCms/issues/76](https://github.com/PierreRambaud/GotCms/issues/76))
 - Add Zend Validate translations ([https://github.com/PierreRambaud/GotCms/issues/77](https://github.com/PierreRambaud/GotCms/issues/77))
 - Optimize routes ([https://github.com/PierreRambaud/GotCms/issues/79](https://github.com/PierreRambaud/GotCms/issues/79))
