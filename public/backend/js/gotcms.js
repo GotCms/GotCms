@@ -840,8 +840,8 @@ var Gc = (function($)
 
         saveCommand: function()
         {
-            $window.on('keypress', function(event) {
-                if(!(event.which === 115 && event.ctrlKey) && !(event.which === 19)) {
+            $document.on('keydown', function(event) {
+                if(!(event.which === 83 && event.ctrlKey) && !(event.which === 19)) {
                     return true;
                 }
 
