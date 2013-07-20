@@ -40,8 +40,13 @@ use Zend\EventManager\Event;
  */
 class Observer extends AbstractObserver
 {
+    /**
+     * Template model
+     *
+     * @var Template
+     */
     protected $template;
-    protected $templates = array();
+
     /**
      * Boostrap
      *

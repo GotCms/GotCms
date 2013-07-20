@@ -377,7 +377,7 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Set request object
      *
-     * @param Treeroutestack $router Router
+     * @param TreeRouteStack $router Router
      *
      * @return \Gc\Datatype\AbstractDatatype
      */

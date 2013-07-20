@@ -69,7 +69,7 @@ class Module extends Mvc\Module
     /**
      * On boostrap event
      *
-     * @param Event $event Event
+     * @param EventInterface $event Event
      *
      * @return void
      */
@@ -224,7 +224,7 @@ class Module extends Mvc\Module
     /**
      * Check if ssl is forced or not
      *
-     * @param Zend\EventManager\EventInterface $event Mvc event
+     * @param EventInterface $event Mvc event
      *
      * @return null|Zend\Http\PhpEnvironment\Response
      */

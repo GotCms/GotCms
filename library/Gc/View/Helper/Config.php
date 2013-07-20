@@ -41,6 +41,8 @@ use Zend\View\Helper\AbstractHelper;
 class Config extends AbstractHelper
 {
     /**
+     * Core config model
+     *
      * @var Gc\Core\Config
      */
     protected $config;
