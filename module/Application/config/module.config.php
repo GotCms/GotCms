@@ -90,8 +90,7 @@ return array(
                 $configuration  = $serviceLocator->get('Config');
                 return new Helper\CdnBackend(
                     $serviceLocator->get('request'),
-                    $serviceLocator->get('CoreConfig'),
-                    isset($configuration['db'])
+                    isset($configuration['db']) ? $serviceLocator->get('CoreConfig') : null
                 );
             },
             'config'     => function ($pm) {

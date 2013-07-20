@@ -76,11 +76,11 @@ class CdnBackend extends AbstractHelper
      * @param CoreConfig $config         Core config
      * @param boolean    $databaseActive Check if database is active
      */
-    public function __construct(Request $request, CoreConfig $config, $databaseActive)
+    public function __construct(Request $request, CoreConfig $config = null)
     {
         $this->request        = $request;
         $this->config         = $config;
-        $this->databaseActive = (bool) $databaseActive;
+        $this->databaseActive = !empty($config);
     }
 
 

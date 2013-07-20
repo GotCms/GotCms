@@ -81,8 +81,8 @@ abstract class AbstractObserver
      */
     protected function getDriverName()
     {
-         $configuration = $this->serviceManager->get('Config');
-         return $configuration['db']['driver'];
+        $parameters = $this->getAdapter()->getDriver()->getConnection()->getConnectionParameters();
+        return $parameters['driver'];
     }
 
     /**
