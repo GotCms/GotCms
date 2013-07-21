@@ -7,8 +7,7 @@ INSERT INTO view VALUES (6, '2012-10-25 19:57:05', '2013-05-26 13:26:11.897632',
         <?php endforeach; ?>
     <?php endforeach; ?>
 <?php endif; ?>', 'Flash messages displayer');
-INSERT INTO view VALUES (9, '2013-05-22 19:32:25.295636', '2013-05-26 13:26:11.910965', 'Footer', 'footer', '<?php use Gc\\Core\\Config; ?>
-<div id="footer-wrapper">
+INSERT INTO view VALUES (9, '2013-05-22 19:32:25.295636', '2013-05-26 13:26:11.910965', 'Footer', 'footer', '<div id="footer-wrapper">
     <footer class="container" id="site-footer">
         <div class="row">
             <div class="4u">
@@ -361,8 +360,7 @@ INSERT INTO document_type VALUES (5, '2013-05-24 08:56:17.202506', '2013-05-25 1
 INSERT INTO document_type VALUES (1, '2012-09-20 22:01:55', '2013-05-26 13:29:33.312101', 'Home', 'Home page', 1, 1, 1);
 
 
-INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-05-24 08:24:49.350913', 'Main', 'main', '<?php use Gc\\Core\\Config; ?>
-<!DOCTYPE html>
+INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-05-24 08:24:49.350913', 'Main', 'main', '<!DOCTYPE html>
 <!--
     Arcana 2.0 by HTML5 UP
     html5up.net | @n33co

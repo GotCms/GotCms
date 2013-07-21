@@ -311,8 +311,7 @@ INSERT INTO document_type VALUES (3, '2012-09-20 22:06:37', '2013-06-02 11:58:48
 INSERT INTO document_type VALUES (6, '2013-05-24 08:57:15.489668', '2013-06-02 12:06:43.23561', 'Blog', 'Blog', 24, 1, 1);
 
 
-INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-06-02 12:26:50.037182', 'Main', 'main', '<?php use Gc\\Core\\Config; ?>
-<!doctype html>
+INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-06-02 12:26:50.037182', 'Main', 'main', '<!doctype html>
 
 <html lang="en-US">
 <head>
