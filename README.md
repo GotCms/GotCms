@@ -1,19 +1,22 @@
 # GotCms - Information
 
-Master status: [![Build Status](https://travis-ci.org/PierreRambaud/GotCms.png?branch=master)](https://travis-ci.org/PierreRambaud/GotCms)[![Coverage Status](https://coveralls.io/repos/PierreRambaud/GotCms/badge.png)](https://coveralls.io/r/PierreRambaud/GotCms)
-[![Latest Stable Version](https://poser.pugx.org/PierreRambaud/GotCms/v/stable.png)](https://packagist.org/packages/PierreRambaud/GotCms) [![Latest Unstable Version](https://poser.pugx.org/PierreRambaud/GotCms/v/unstable.png)](https://packagist.org/packages/PierreRambaud/GotCms)
+Master status: [![Build Status](https://travis-ci.org/PierreRambaud/GotCms.png?branch=master)](https://travis-ci.org/PierreRambaud/GotCms)
+[![Coverage Status](https://coveralls.io/repos/PierreRambaud/GotCms/badge.png)](https://coveralls.io/r/PierreRambaud/GotCms)
+[![Latest Stable Version](https://poser.pugx.org/PierreRambaud/GotCms/v/stable.png)](https://packagist.org/packages/PierreRambaud/GotCms)
+[![Latest Unstable Version](https://poser.pugx.org/PierreRambaud/GotCms/v/unstable.png)](https://packagist.org/packages/PierreRambaud/GotCms)
+
 ## About GotCms
 
-GotCms is a content management system based on [Zend Framework 2.2.0](http://framework.zend.com/).
-
-This product has been made available under the terms of the GNU GPL version 3.
-Please read the [LICENSE.txt](LICENSE.txt) file for the exact license details that apply to GotCms.
+* GotCms is a **Content Management System** (CMS) based on [Zend Framework 2.2.0](http://framework.zend.com/) which enables you to build websites and powerful online applications.
+* GotCms [Official site](http://www.got-cms.com)
+* This product has been made available under the terms of the GNU General Public License version 3.
+* Please read the [LICENSE.txt](https://github.com/PierreRambaud/GotCms/blob/master/LICENSE.txt) file for the exact license details that apply to GotCms.
 
 ## Release information
 
 ### Updates in 0.1.9
 
-Please see [CHANGELOG.md](CHANGELOG.md).
+Please see [CHANGELOG.md](https://github.com/PierreRambaud/GotCms/blob/master/CHANGELOG.md).
 
 ### Download
 
@@ -109,7 +112,7 @@ All contents are stored in database.
 ### Contributing
 
 If you wish to contribute to GotCms, please read the
-[CONTRIBUTING.md](CONTRIBUTING.md).
+[CONTRIBUTING.md](https://github.com/PierreRambaud/GotCms/blob/master/CONTRIBUTING.md).
 
 
 ### Notes
