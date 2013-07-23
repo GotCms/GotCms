@@ -72,8 +72,8 @@ class CdnBackend extends AbstractHelper
     /**
      * Constructor
      *
-     * @param Request    $request        Http request
-     * @param CoreConfig $config         Core config
+     * @param Request    $request Http request
+     * @param CoreConfig $config  Core config
      */
     public function __construct(Request $request, CoreConfig $config = null)
     {

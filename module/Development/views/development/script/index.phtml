@@ -60,14 +60,18 @@
                 <td><?php echo $this->escapeHtml($script->getIdentifier()); ?></td>
                 <td><?php echo $this->escapeHtml($script->getDescription()); ?></td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('development/script/edit', array('id' => $script->getId())); ?>" class="edit-line">
-                        <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
-                    </a>
+                    <?php if($this->acl('development', 'script/edit')): ?>
+                        <a href="<?php echo $this->url('development/script/edit', array('id' => $script->getId())); ?>" class="edit-line">
+                            <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
+                        </a>
+                    <?php endif; ?>
                 </td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('development/script/delete', array('id' => $script->getId())); ?>" class="delete-line">
-                        <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
-                    </a>
+                    <?php if($this->acl('development', 'script/delete')): ?>
+                        <a href="<?php echo $this->url('development/script/delete', array('id' => $script->getId())); ?>" class="delete-line">
+                            <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
+                        </a>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>

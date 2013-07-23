@@ -208,6 +208,7 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
                 'source' => $source,
             )
         );
+
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Content');

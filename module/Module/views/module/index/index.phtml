@@ -27,9 +27,6 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-
-<?php $permissions = $this->layout()->adminUser->getRole()->getUserPermissions(); ?>
-
 <table class="table-list clickable">
     <colgroup>
         <col width="90%">
@@ -53,7 +50,7 @@
                     </a>
                 </td>
                 <td class="a-center">
-                    <?php if (in_array('uninstall', $permissions['Modules'])):?>
+                    <?php if ($this->acl('modules', 'uninstall')):?>
                         <a href="<?php echo $this->url('module/uninstall', array('id' => $module->getId())); ?>" class="delete-line">
                             <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Uninstall')); ?>">
                         </a>

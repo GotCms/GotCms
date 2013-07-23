@@ -47,9 +47,9 @@ class DocumentTypeController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $aclPage
+     * @var array
      */
-    protected $aclPage = array('resource' => 'Development', 'permission' => 'document-type');
+    protected $aclPage = array('resource' => 'development', 'permission' => 'document-type');
 
     /**
      * List all document types

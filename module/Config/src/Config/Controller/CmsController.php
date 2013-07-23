@@ -55,7 +55,7 @@ class CmsController extends Action
      *
      * @var array
      */
-    protected $aclPage = array('resource' => 'Config', 'permission' => 'system');
+    protected $aclPage = array('resource' => 'settings', 'permission' => 'config');
 
     /**
      * Generate general configuration form

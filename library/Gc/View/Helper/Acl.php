@@ -17,40 +17,52 @@
  *
  * PHP Version >=5.3
  *
- * @category   Gc_Application
- * @package    Development
- * @subpackage Controller
+ * @category   Gc_Library
+ * @package    Library
+ * @subpackage View\Helper
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace Development\Controller;
+namespace Gc\View\Helper;
 
-use Gc\Mvc\Controller\Action;
+use Gc\User\Model as UserModel;
+use Zend\View\Helper\AbstractHelper;
 
 /**
- * Index controller
+ * Generate url with specific base path for cdn frontend stored in database.
  *
- * @category   Gc_Application
- * @package    Development
- * @subpackage Controller
+ * @category   Gc_Library
+ * @package    Library
+ * @subpackage View\Helper
+ * @example In view: $this->cdn('path/to/file');
  */
-class IndexController extends Action
+class Acl extends AbstractHelper
 {
     /**
-     * Contains information about acl
+     * Constructor
      *
-     * @var array
+     * @param UserModel $user User model to retrieve Acl, role name and check permission
+     *
+     * @return void
      */
-    protected $aclPage = array('resource' => 'development', 'permission' => 'index');
+    public function __construct(UserModel $user)
+    {
+        $this->acl      = $user->getAcl();
+        $this->roleName = $user->getRole()->getName();
+    }
 
     /**
-     * Display text
+     * Check acl
      *
-     * @return \Zend\View\Model\ViewModel
+     * @param string $resource   Resource name
+     * @param string $permission Permission name
+     *
+     * @return void
      */
-    public function indexAction()
+    public function __invoke($resource, $permission)
     {
+        return $this->acl->isAllowed($this->roleName, $resource, $permission);
     }
 }

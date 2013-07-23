@@ -53,9 +53,9 @@ class MediaController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $aclPage
+     * @var array
      */
-    protected $aclPage = array('resource' => 'Content', 'permission' => 'media');
+    protected $aclPage = array('resource' => 'content', 'permission' => 'media');
 
     /**
      * Initialize Content Index Controller

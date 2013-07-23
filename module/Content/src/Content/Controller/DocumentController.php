@@ -52,9 +52,9 @@ class DocumentController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $aclPage
+     * @var array
      */
-    protected $aclPage = array('resource' => 'Content', 'permission' => 'document');
+    protected $aclPage = array('resource' => 'content', 'permission' => 'document');
 
     /**
      * Initialize Document Controller

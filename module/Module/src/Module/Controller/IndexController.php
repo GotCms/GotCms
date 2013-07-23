@@ -51,9 +51,9 @@ class IndexController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $aclPage
+     * @var array
      */
-    protected $aclPage = array('resource' => 'Modules');
+    protected $aclPage = array('resource' => 'modules');
 
     /**
      * List all modules

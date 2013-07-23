@@ -189,7 +189,7 @@ class Model extends AbstractTable
         $select = new Sql\Select();
         $select->from('user_acl_resource')
             ->columns(array('id'))
-            ->where->equalTo('resource', 'Modules');
+            ->where->equalTo('resource', 'modules');
 
         $insert = new Sql\Insert();
         $insert->into('user_acl_permission')

@@ -39,6 +39,13 @@ use Gc\Mvc\Controller\Action;
 class IndexController extends Action
 {
     /**
+     * Contains information about acl
+     *
+     * @var array
+     */
+    protected $aclPage = array('resource' => 'settings', 'permission' => 'index');
+
+    /**
      * Display text
      *
      * @return \Zend\View\Model\ViewModel|array

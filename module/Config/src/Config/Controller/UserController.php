@@ -48,11 +48,18 @@ use DateTime;
 class UserController extends Action
 {
     /**
+     * Contains information about acl resource
+     *
+     * @var array
+     */
+    protected $aclResource = 'Settings';
+
+    /**
      * Contains information about acl
      *
-     * @var array $aclPage
+     * @var array
      */
-    protected $aclPage = array('resource' => 'Config', 'permission' => 'user');
+    protected $aclPage = array('resource' => 'settings', 'permission' => 'user');
 
     /**
      * List all roles

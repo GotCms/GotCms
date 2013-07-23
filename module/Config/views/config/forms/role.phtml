@@ -39,22 +39,32 @@
 
 
     <?php $permissions = $this->form->getValue('permissions'); ?>
-    <div id="elements">
+    <dl id="role-list">
         <?php foreach ($permissions as $resource => $permissions): ?>
-            <h3><?php echo $this->escapeHtml($this->translate($resource)); ?></h3>
-            <?php foreach ($permissions as $permission_id => $permission): ?>
-                <div>
-                    <label class="optional" for="permissions-<?php echo (int)$permission_id; ?>">
-                        <?php echo $this->escapeHtml($this->translate($permission['name'])); ?>
-                    </label>
-                    <div class="input-checkbox">
-                        <input type="checkbox" class="input-checkbox" value="1" <?php if ($permission['value']): ?>checked="checked" <?php endif; ?>id="permissions-<?php echo (int)$permission_id; ?>" name="permissions[<?php echo (int)$permission_id; ?>]">
-                        <label for="permissions-<?php echo (int)$permission_id; ?>"></label>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+            <dt><h2><?php echo $this->escapeHtml($this->translate(ucfirst($resource))); ?></h2></dt>
+            <dd>
+                <dl>
+                    <?php foreach ($permissions as $name => $perms): ?>
+                        <?php if (count($perms) > 1): ?>
+                            <dt><h3><?php echo $this->escapeHtml($this->translate(ucfirst($name))); ?></h3></dt>
+                        <?php endif; ?>
+
+                        <?php foreach($perms as $permission) :?>
+                            <dd>
+                                <label class="optional" for="permissions-<?php echo (int)$permission['id']; ?>">
+                                    <?php echo $this->escapeHtml($this->translate($permission['name'])); ?>
+                                </label>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" class="input-checkbox" value="1" <?php if ($permission['value']): ?>checked="checked" <?php endif; ?>id="permissions-<?php echo (int)$permission['id']; ?>" name="permissions[<?php echo (int)$permission['id']; ?>]">
+                                    <label for="permissions-<?php echo (int)$permission['id']; ?>"></label>
+                                </div>
+                            </dd>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </dl>
+            </dd>
         <?php endforeach; ?>
-    </div>
+    </dl>
 
     <input id="input-save" type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
 </form>
@@ -62,5 +72,6 @@
 <script type="text/javascript">
 $(function(){
     Gc.saveCommand();
+    Gc.initRoles();
 });
 </script>

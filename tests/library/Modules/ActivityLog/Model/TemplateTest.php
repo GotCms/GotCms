@@ -83,8 +83,9 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithHelperVariable()
     {
         $template = '<?= $this->event->getParam(\'user\')->getName() ?> has saved the user model ' .
-            '<a href="<?= $this->url(\'config/user/edit\', array(\'id\' => $this->event->getParam(\'object\')->getId())) ?>"><?= $this->event->getParam(\'object\')->getId() ?></a>';
-        $result = 'Pierre Rambaud has saved the user model ' .
+            '<a href="<?= $this->url(\'config/user/edit\', array(\'id\' => $this->event->getParam' .
+            '(\'object\')->getId())) ?>"><?= $this->event->getParam(\'object\')->getId() ?></a>';
+        $result   = 'Pierre Rambaud has saved the user model ' .
             '<a href="/admin/config/user/edit/1">1</a>';
 
         $event = new Event();
@@ -92,7 +93,7 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
         $user->setFirstname('Pierre');
         $user->setLastname('Rambaud');
         $event->setParam('user', $user);
-        $user  = new UserModel();
+        $user = new UserModel();
         $user->setData('id', 1);
         $event->setParam('object', $user);
 
@@ -134,7 +135,7 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testAddEventShouldReturnNUll()
+    public function testAddEventShouldReturnNull()
     {
         $this->assertNull($this->object->addEvent('test', 1, null));
     }

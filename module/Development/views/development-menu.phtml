@@ -26,51 +26,73 @@
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
-$permissions = $this->layout()->adminUser->getRole()->getUserPermissions();
-$development = empty($permissions['Development']) ? array() : $permissions['Development'];
 ?>
-
-<?php if (in_array('document-type', $development)): ?>
+<?php if ($this->acl('development', 'document-type')): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Document types')); ?> ::..</h2>
 
     <ul>
-        <li><a href="<?php echo $this->url('development/document-type/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('development/document-type'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php if ($this->acl('development', 'document-type/create')): ?>
+            <li><a href="<?php echo $this->url('development/document-type/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
+        <?php endif; ?>
+
+        <?php if ($this->acl('development', 'document-type/list')): ?>
+            <li><a href="<?php echo $this->url('development/document-type'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php endif; ?>
     </ul>
 <?php endif; ?>
 
-<?php if (in_array('view', $development)): ?>
+<?php if ($this->acl('development', 'view')): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Views')); ?> ::..</h2>
 
     <ul>
+        <?php if ($this->acl('development', 'view/create')): ?>
         <li><a href="<?php echo $this->url('development/view/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('development/view'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php endif; ?>
+
+        <?php if ($this->acl('development', 'view/list')): ?>
+            <li><a href="<?php echo $this->url('development/view'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php endif; ?>
     </ul>
 <?php endif; ?>
 
-<?php if (in_array('layout', $development)): ?>
+<?php if ($this->acl('development', 'layout')): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Layouts')); ?> ::..</h2>
 
     <ul>
+        <?php if ($this->acl('development', 'layout/create')): ?>
         <li><a href="<?php echo $this->url('development/layout/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('development/layout'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php endif; ?>
+
+        <?php if ($this->acl('development', 'layout/list')): ?>
+            <li><a href="<?php echo $this->url('development/layout'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php endif; ?>
     </ul>
 <?php endif; ?>
 
-<?php if (in_array('script', $development)): ?>
+<?php if ($this->acl('development', 'script')): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Scripts')); ?> ::..</h2>
 
     <ul>
+        <?php if ($this->acl('development', 'script/create')): ?>
         <li><a href="<?php echo $this->url('development/script/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('development/script'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php endif; ?>
+
+        <?php if ($this->acl('development', 'script/list')): ?>
+            <li><a href="<?php echo $this->url('development/script'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php endif; ?>
     </ul>
 <?php endif; ?>
 
-<?php if (in_array('datatype', $development)): ?>
+<?php if ($this->acl('development', 'datatype')): ?>
     <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Datatypes')); ?> ::..</h2>
 
     <ul>
+        <?php if ($this->acl('development', 'datatype/create')): ?>
         <li><a href="<?php echo $this->url('development/datatype/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('development/datatype'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php endif; ?>
+
+        <?php if ($this->acl('development', 'datatype/list')): ?>
+            <li><a href="<?php echo $this->url('development/datatype'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
+        <?php endif; ?>
     </ul>
 <?php endif; ?>

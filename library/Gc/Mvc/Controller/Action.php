@@ -30,6 +30,8 @@ namespace Gc\Mvc\Controller;
 use Gc\Event\StaticEventManager;
 use Gc\Module\Model as ModuleModel;
 use Gc\User\Acl;
+use Gc\User\Model as UserModel;
+use Gc\User\Role\Model as RoleModel;
 use Gc\Registry;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
@@ -72,13 +74,6 @@ class Action extends AbstractActionController
      * @var \Zend\Session\Storage\SessionStorage
      */
     protected $session = null;
-
-    /**
-     * User acl
-     *
-     * @var \Gc\User\Acl
-     */
-    protected $acl = null;
 
     /**
      * Execute the request
@@ -146,41 +141,7 @@ class Action extends AbstractActionController
             } else {
                 $userModel = $auth->getIdentity();
                 if (!in_array($routeName, array('config/user/forbidden', 'config/user/logout'))) {
-                    $this->acl   = new Acl($userModel);
-                    if (!empty($this->aclPage)) {
-                        $isAllowed = false;
-                        if ($this->aclPage['resource'] == 'Modules') {
-                            $moduleId = $this->getRouteMatch()->getParam('m');
-                            if (empty($moduleId)) {
-                                $action    = $this->getRouteMatch()->getParam('action');
-                                $action    = ($action === 'index' ? 'list' : $action);
-                                $isAllowed = $this->acl->isAllowed(
-                                    $userModel->getRole()->getName(),
-                                    $this->aclPage['resource'],
-                                    $action
-                                );
-                            } else {
-                                $moduleModel = ModuleModel::fromId($moduleId);
-                                if (!empty($moduleModel)) {
-                                    $isAllowed = $this->acl->isAllowed(
-                                        $userModel->getRole()->getName(),
-                                        $this->aclPage['resource'],
-                                        $moduleModel->getName()
-                                    );
-                                }
-                            }
-                        } else {
-                            $isAllowed = $this->acl->isAllowed(
-                                $userModel->getRole()->getName(),
-                                $this->aclPage['resource'],
-                                $this->aclPage['permission']
-                            );
-                        }
-
-                        if (!$isAllowed) {
-                            return $this->redirect()->toRoute('config/user/forbidden');
-                        }
-                    }
+                    $this->checkAcl($userModel);
                 }
 
                 $this->layout()->adminUser = $userModel;
@@ -273,5 +234,51 @@ class Action extends AbstractActionController
     public function events()
     {
         return StaticEventManager::getInstance();
+    }
+
+    /**
+     * Check user acl
+     *
+     * @param UserModel $userModel User model
+     *
+     * @return void|Zend\Http\Response
+     */
+    protected function checkAcl(UserModel $userModel)
+    {
+        if (!empty($this->aclPage) and $userModel->getRole()->getName() !== RoleModel::PROTECTED_NAME) {
+            $isAllowed  = false;
+            $permission = null;
+            $acl        = $userModel->getAcl(true);
+            if ($this->aclPage['resource'] == 'modules') {
+                $moduleId = $this->getRouteMatch()->getParam('m');
+                if (empty($moduleId)) {
+                    $action     = $this->getRouteMatch()->getParam('action');
+                    $permission = ($action === 'index' ? 'list' : $action);
+                } else {
+                    $moduleModel = ModuleModel::fromId($moduleId);
+                    if (!empty($moduleModel)) {
+                        $permission = $moduleModel->getName();
+                    }
+                }
+            } else {
+                $permission = empty($this->aclPage['permission']) ?
+                    null :
+                    $this->aclPage['permission'];
+                if ($this->aclPage['permission'] != 'index' and
+                    !in_array($this->aclPage['resource'], array('content', 'stats'))
+                ) {
+                    $action      = $this->getRouteMatch()->getParam('action');
+                    $permission .= (!empty($permission) ? '/' : '') . ($action === 'index' ? 'list' : $action);
+                }
+            }
+
+            if (!$acl->isAllowed(
+                $userModel->getRole()->getName(),
+                $this->aclPage['resource'],
+                $permission
+            )) {
+                return $this->redirect()->toRoute('config/user/forbidden');
+            }
+        }
     }
 }

@@ -88,14 +88,35 @@ class Role extends AbstractForm
         $resources        = $permissionsTable->getPermissions();
         $element          = new Element('permissions');
 
-        $data = $resources;
+        $data = array();
         foreach ($resources as $resource => $permissions) {
+            if (empty($data[$resource])) {
+                $data[$resource] = array();
+            }
+
             foreach ($permissions as $permissionId => $permission) {
-                $data[$resource][$permissionId] = array('name' => $permission, 'value' => false);
+                $path = explode('/', $permission);
+                if (count($path) > 1) {
+                    $name = $path[0];
+                } else {
+                    $name = $permission;
+                }
+
+
+                $array = array(
+                    'id' => $permissionId,
+                    'name' => empty($path[1]) ? $permission : $path[1],
+                    'value' => false
+                );
                 if (!empty($userPermissions[$resource])
                     and array_key_exists($permissionId, $userPermissions[$resource])) {
-                    $data[$resource][$permissionId]['value'] = true;
+                    $array['value'] = true;
                 }
+
+                if (empty($data[$resource][$name])) {
+                    $data[$resource][$name] = array();
+                }
+                $data[$resource][$name][] = $array;
             }
         }
 

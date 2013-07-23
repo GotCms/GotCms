@@ -866,6 +866,13 @@ var Gc = (function($)
                     return false;
                 }
             });
+        },
+
+        initRoles: function()
+        {
+            $('#role-list').find('h3,h2').on('click', function() {
+                $(this).closest('dt').nextUntil('dt').find('input[type="checkbox"]').prop('checked', true);
+            });
         }
     };
 })(jQuery);

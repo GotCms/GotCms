@@ -273,6 +273,23 @@ class Model extends AbstractTable
     }
 
     /**
+     * Get User Role
+     *
+     * @param boolean $forceReload Force reload
+     *
+     * @return \Gc\User\Role\Model
+     */
+    public function getAcl($forceReload = false)
+    {
+        $role = $this->getData('acl');
+        if (empty($role) or !empty($forceReload)) {
+            $this->setData('acl', new Acl($this));
+        }
+
+        return $this->getData('acl');
+    }
+
+    /**
      * Send new password
      *
      * @param string $email Email address

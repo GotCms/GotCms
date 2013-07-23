@@ -80,8 +80,8 @@ class Acl extends ZendAcl\Acl
     public function __construct(UserModel $userModel)
     {
         $this->roleTable = new RoleModel();
+        $this->user      = $userModel;
         $this->roleResource();
-        $this->user = $userModel;
 
         $select = new Select();
         $select->from('user_acl_role')
@@ -133,30 +133,19 @@ class Acl extends ZendAcl\Acl
     protected function roleResource()
     {
         $this->initResources();
-        $select = new Select();
-        $select->from('user_acl_role')
-            ->columns(
-                array(
-                    'name'
-                ),
-                true
-            )
-            ->join('user_acl', 'user_acl.user_acl_role_id = user_acl_role.id', array())
-            ->join(
-                'user_acl_permission',
-                'user_acl_permission.id = user_acl.user_acl_permission_id',
-                array('permission')
-            )
-            ->join(
-                'user_acl_resource',
-                'user_acl_resource.id = user_acl_permission.user_acl_resource_id',
-                array('resource')
-            );
 
-        $acl = $this->roleTable->fetchAll($select);
+        $userRole  = $this->user->getRole();
+        $resources = $userRole->getUserPermissions();
+        foreach ($resources as $resource => $permissions) {
+            $this->allow($userRole->getName(), $resource, 'index');
+            foreach ($permissions as $permission) {
+                if (strpos($permission, '/') !== false) {
+                    $path = explode('/', $permission);
+                    $this->allow($userRole->getName(), $resource, $path[0]);
+                }
 
-        foreach ($acl as $key => $value) {
-            $this->allow($value['name'], $value['resource'], $value['permission']);
+                $this->allow($userRole->getName(), $resource, $permission);
+            }
         }
     }
 

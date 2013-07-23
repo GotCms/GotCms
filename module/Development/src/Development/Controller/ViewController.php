@@ -46,9 +46,9 @@ class ViewController extends Action
     /**
      * Contains information about acl
      *
-     * @var array $aclPage
+     * @var array
      */
-    protected $aclPage = array('resource' => 'Development', 'permission' => 'view');
+    protected $aclPage = array('resource' => 'development', 'permission' => 'view');
 
     /**
      * List all views

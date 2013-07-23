@@ -173,26 +173,38 @@ class Model extends AbstractTable
         $userPermissions = $this->getData('user_permissions');
         if (empty($userPermissions)) {
             $select = new Select();
-            $select->from('user_acl_role')
-                ->join(
-                    'user_acl',
-                    'user_acl.user_acl_role_id = user_acl_role.id',
-                    array()
-                )->join(
-                    'user_acl_permission',
-                    'user_acl_permission.id = user_acl.user_acl_permission_id',
-                    array(
-                        'userPermissionId' => 'id',
-                        'permission'
-                    )
-                )->join(
-                    'user_acl_resource',
-                    'user_acl_resource.id = user_acl_permission.user_acl_resource_id',
-                    array('resource')
-                )->where->equalTo('user_acl_role.id', $this->getId());
+            if ($this->getName() === self::PROTECTED_NAME) {
+                $select->from('user_acl_resource')
+                    ->join(
+                        'user_acl_permission',
+                        'user_acl_resource.id = user_acl_permission.user_acl_resource_id',
+                        array(
+                            'userPermissionId' => 'id',
+                            'permission'
+                        )
+                    );
+            } else {
+                $select->from('user_acl_role')
+                    ->join(
+                        'user_acl',
+                        'user_acl.user_acl_role_id = user_acl_role.id',
+                        array()
+                    )->join(
+                        'user_acl_permission',
+                        'user_acl_permission.id = user_acl.user_acl_permission_id',
+                        array(
+                            'userPermissionId' => 'id',
+                            'permission'
+                        )
+                    )->join(
+                        'user_acl_resource',
+                        'user_acl_resource.id = user_acl_permission.user_acl_resource_id',
+                        array('resource')
+                    );
+                $select->where->equalTo('user_acl_role.id', $this->getId());
+            }
 
-            $permissions = $this->fetchAll($select);
-
+            $permissions     = $this->fetchAll($select);
             $userPermissions = array();
             foreach ($permissions as $permission) {
                 if (empty($userPermissions[$permission['resource']])) {

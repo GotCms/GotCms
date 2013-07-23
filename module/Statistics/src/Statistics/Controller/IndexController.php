@@ -40,6 +40,13 @@ use SVGGraph;
 class IndexController extends Action
 {
     /**
+     * Contains information about acl
+     *
+     * @var array
+     */
+    protected $aclPage = array('resource' => 'stats', 'permission' => 'all');
+
+    /**
      * Display statistics for visitors
      *
      * @return \Zend\View\Model\ViewModel

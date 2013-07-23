@@ -139,12 +139,22 @@ function file_exists($string)
 
 function file_get_contents($filename)
 {
-    return 'SELECT 1';
+    return 'DELETE FROM core_config_data WHERE id = "test";';
 }
 
 function file_put_contents($filename, $content)
 {
     return true;
+}
+
+function copy($source, $destination)
+{
+    return true;
+}
+
+function glob($path)
+{
+    return array(GC_MEDIA_PATH . '/fr_FR.php');
 }
 
 

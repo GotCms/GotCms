@@ -54,9 +54,12 @@ $resource   = $dbAdapter->getDriver()->getConnection()->getResource();
 $driverName = str_replace('pdo_', '', $config['db']['driver']);
 $resource->exec(file_get_contents(sprintf($gcRoot . '/data/install/sql/database-%s.sql', $driverName)));
 $resource->exec(file_get_contents($gcRoot . '/data/install/sql/data.sql'));
+
+$config = new \Gc\Core\Config();
+$config->setValue('debug_is_active', 1);
+
 //Create role
-$ini   = new \Zend\Config\Reader\Ini();
-$roles = $ini->fromFile($gcRoot . '/data/install/scripts/roles.ini');
+$roles = include_once $gcRoot . '/data/install/acl/roles.php';
 
 foreach ($roles['role'] as $key => $value) {
     $statement = $dbAdapter->createStatement("INSERT INTO user_acl_role (name) VALUES ('" . $value . "')");
@@ -64,9 +67,7 @@ foreach ($roles['role'] as $key => $value) {
 }
 
 //resources
-$ini       = new \Zend\Config\Reader\Ini();
-$resources = $ini->fromFile($gcRoot . '/data/install/scripts/resources.ini');
-
+$resources = include_once $gcRoot . '/data/install/acl/resources.php';
 foreach ($resources as $key => $value) {
     $statement = $dbAdapter->createStatement("INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')");
     $statement->execute();

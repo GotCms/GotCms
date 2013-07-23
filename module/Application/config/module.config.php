@@ -79,6 +79,11 @@ return array(
     ),
     'view_helpers' => array(
         'factories' => array(
+            'acl'        => function ($pm) {
+                return new Helper\Acl(
+                    $pm->getServiceLocator()->get('auth')->getIdentity()
+                );
+            },
             'cdn'        => function ($pm) {
                 return new Helper\Cdn(
                     $pm->getServiceLocator()->get('request'),

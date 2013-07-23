@@ -1,0 +1,53 @@
+<?php
+return array(
+    'settings' => array(
+        'user/list' => '',
+        'user/create' => '',
+        'user/edit' => '',
+        'user/delete' => '',
+        'config/system' => '',
+        'config/general' => '',
+        'config/server' => '',
+        'config/update' => '',
+        'role/list' => '',
+        'role/create' => '',
+        'role/edit' => '',
+        'role/delete' => '',
+    ),
+    'content' => array(
+        'media' => 'Writer',
+        'document' => 'Writer',
+        'translation' => 'Writer',
+    ),
+    'development' => array(
+        'view/list' => '',
+        'view/create' => '',
+        'view/edit' => '',
+        'view/delete' => '',
+        'layout/list' => '',
+        'layout/create' => '',
+        'layout/edit' => '',
+        'layout/delete' => '',
+        'datatype/list' => '',
+        'datatype/create' => '',
+        'datatype/edit' => '',
+        'datatype/delete' => '',
+        'document-type/list' => '',
+        'document-type/create' => '',
+        'document-type/edit' => '',
+        'document-type/delete' => '',
+        'script/list' => '',
+        'script/create' => '',
+        'script/edit' => '',
+        'script/delete' => '',
+    ),
+    'modules' => array(
+        'list' => '',
+        'install' => '',
+        'uninstall' => '',
+    ),
+    'stats' => array(
+        'all' => '',
+    ),
+);
+

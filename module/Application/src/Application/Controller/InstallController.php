@@ -431,8 +431,7 @@ class InstallController extends Action
                         //Create user and roles
                         case 'c-uar':
                             //Create role
-                            $ini   = new Ini();
-                            $roles = $ini->fromFile(GC_APPLICATION_PATH . '/data/install/scripts/roles.ini');
+                            $roles = include GC_APPLICATION_PATH . '/data/install/acl/roles.php';
 
                             try {
                                 foreach ($roles['role'] as $key => $value) {
@@ -446,8 +445,7 @@ class InstallController extends Action
                             }
 
                             //resources
-                            $ini       = new Ini();
-                            $resources = $ini->fromFile(GC_APPLICATION_PATH . '/data/install/scripts/resources.ini');
+                            $resources = include GC_APPLICATION_PATH . '/data/install/acl/resources.php';
 
                             try {
                                 foreach ($resources as $key => $value) {

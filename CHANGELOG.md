@@ -4,6 +4,11 @@
 - User without user acl can't log out ([https://github.com/PierreRambaud/GotCms/issues/107](https://github.com/PierreRambaud/GotCms/issues/107))
 - Css in chrome ([https://github.com/PierreRambaud/GotCms/issues/108](https://github.com/PierreRambaud/GotCms/issues/108))
 - Ctrl + S not working on chrome ([https://github.com/PierreRambaud/GotCms/issues/109](https://github.com/PierreRambaud/GotCms/issues/109))
+- Add more Acl options ([https://github.com/PierreRambaud/GotCms/issues/104](https://github.com/PierreRambaud/GotCms/issues/104))
+
+### Potential Breakage
+All acl have been changed, and if you added new roles, you must redefined them after the update.
+
 
 ##0.1.9 (20 Jul 2013):
 - Can't update cms with git ([https://github.com/PierreRambaud/GotCms/issues/76](https://github.com/PierreRambaud/GotCms/issues/76))

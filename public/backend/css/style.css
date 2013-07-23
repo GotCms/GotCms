@@ -238,6 +238,10 @@ footer a:hover {text-decoration:underline;}
 .clickable tbody tr:hover td{background-color:#D6D6D6 !important}
 .clickable tbody tr {cursor:pointer;}
 
+#role-list h3,
+#role-list h2{cursor:pointer;}
+
+
 @media screen and (max-width: 1420px) {
     header .part{padding:0 10px 0 0px;}
 }

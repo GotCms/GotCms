@@ -40,7 +40,7 @@ if(!empty($this->adminUser))
     </a>
 </div>
 
-<?php if (!empty($permissions['Content'])): ?>
+<?php if (!empty($permissions['content'])): ?>
     <div class="part<?php if ($this->active == 'content'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('content'); ?>">
             <img src="<?php echo $this->cdnBackend('backend/images/icones/content.png'); ?>" width="36" height="36" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
@@ -52,7 +52,7 @@ if(!empty($this->adminUser))
     </div>
 <?php endif; ?>
 
-<?php if (!empty($permissions['Development'])): ?>
+<?php if (!empty($permissions['development'])): ?>
     <div class="part<?php if ($this->active == 'development'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('development'); ?>">
             <img src="<?php echo $this->cdnBackend('backend/images/icones/development.png'); ?>" width="35" height="40" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
@@ -64,7 +64,7 @@ if(!empty($this->adminUser))
     </div>
 <?php endif; ?>
 
-<?php if (!empty($permissions['Modules'])): ?>
+<?php if (!empty($permissions['modules'])): ?>
     <div class="part<?php if ($this->active == 'module'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('module'); ?>">
             <img src="<?php echo $this->cdnBackend('backend/images/icones/module.png'); ?>" width="35" height="39" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
@@ -76,7 +76,7 @@ if(!empty($this->adminUser))
     </div>
 <?php endif; ?>
 
-<?php if (!empty($permissions['Stats'])): ?>
+<?php if (!empty($permissions['stats'])): ?>
     <div class="part<?php if ($this->active == 'statistics'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('statistics'); ?>">
             <img src="<?php echo $this->cdnBackend('backend/images/icones/stat.png'); ?>" width="32" height="32" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Stats')); ?>">
@@ -88,7 +88,7 @@ if(!empty($this->adminUser))
     </div>
 <?php endif; ?>
 
-<?php if (!empty($permissions['Config'])): ?>
+<?php if (!empty($permissions['settings'])): ?>
     <div class="part<?php if ($this->active == 'config'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('config'); ?>">
             <img src="<?php echo $this->cdnBackend('backend/images/icones/config.png'); ?>" width="35" height="40" class="icone" alt="<?php echo $this->escapeHtml($this->translate('System')); ?>">

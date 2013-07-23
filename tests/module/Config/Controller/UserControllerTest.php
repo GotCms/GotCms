@@ -343,9 +343,10 @@ class UserControllerTest extends AbstractHttpControllerTestCase
                 'login' => 'dazd',
                 'password' => 'azdazd',
                 'password_confirm' => 'azdazd',
-                'user_acl_role_id' => 3,
+                'user_acl_role_id' => 2,
             )
         );
+
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Config');

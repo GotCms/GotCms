@@ -129,9 +129,14 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     {
         $orig = GC_APPLICATION_PATH . '/config/autoload/global.php';
         $new  = GC_APPLICATION_PATH . '/config/autoload/fake-global.php';
-        rename($orig, $new);
+        if (file_exists($orig)) {
+            rename($orig, $new);
+        }
+
         $this->object->dispatch(Registry::get('Application')->getRequest(), null);
-        rename($new, $orig);
+        if (file_exists($new)) {
+            rename($new, $orig);
+        }
     }
 
     /**

@@ -45,14 +45,18 @@
             <tr>
                 <td><?php echo $this->escapeHtml($datatype->getName()); ?></td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('development/datatype/edit', array('id' => $datatype->getId())); ?>" class="edit-line">
-                        <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
-                    </a>
+                    <?php if($this->acl('development', 'datatype/edit')): ?>
+                        <a href="<?php echo $this->url('development/datatype/edit', array('id' => $datatype->getId())); ?>" class="edit-line">
+                            <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
+                        </a>
+                    <?php endif; ?>
                 </td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('development/datatype/delete', array('id' => $datatype->getId())); ?>" class="delete-line">
-                        <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
-                    </a>
+                    <?php if($this->acl('development', 'datatype/delete')): ?>
+                        <a href="<?php echo $this->url('development/datatype/delete', array('id' => $datatype->getId())); ?>" class="delete-line">
+                            <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
+                        </a>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php endforeach; ?>
