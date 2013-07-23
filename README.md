@@ -1,7 +1,7 @@
 # GotCms - Information
 
 Master status: [![Build Status](https://travis-ci.org/PierreRambaud/GotCms.png?branch=master)](https://travis-ci.org/PierreRambaud/GotCms)[![Coverage Status](https://coveralls.io/repos/PierreRambaud/GotCms/badge.png)](https://coveralls.io/r/PierreRambaud/GotCms)
-
+[![Latest Stable Version](https://poser.pugx.org/PierreRambaud/GotCms/v/stable.png)](https://packagist.org/packages/PierreRambaud/GotCms) [![Latest Unstable Version](https://poser.pugx.org/PierreRambaud/GotCms/v/unstable.png)](https://packagist.org/packages/PierreRambaud/GotCms)
 ## About GotCms
 
 GotCms is a content management system based on [Zend Framework 2.2.0](http://framework.zend.com/).
