@@ -5,6 +5,7 @@
 - Css in chrome ([https://github.com/PierreRambaud/GotCms/issues/108](https://github.com/PierreRambaud/GotCms/issues/108))
 - Ctrl + S not working on chrome ([https://github.com/PierreRambaud/GotCms/issues/109](https://github.com/PierreRambaud/GotCms/issues/109))
 - Add more Acl options ([https://github.com/PierreRambaud/GotCms/issues/104](https://github.com/PierreRambaud/GotCms/issues/104))
+- Update to Zend Framework 2.2.2 ([https://github.com/PierreRambaud/GotCms/issues/110](https://github.com/PierreRambaud/GotCms/issues/110))
 
 ### Potential Breakage
 All acl have been changed, and if you added new roles, you must redefined them after the update.
