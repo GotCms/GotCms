@@ -249,7 +249,7 @@ class IndexController extends Action
             }
 
             if ($cacheIsEnable && !empty($document)) {
-                $this->cache->addItem(
+                $this->cache->setItem(
                     $cacheKey,
                     array(
                         'view_model' => $viewModel,
