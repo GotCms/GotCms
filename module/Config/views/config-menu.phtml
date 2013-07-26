@@ -43,7 +43,7 @@
             <li><a href="<?php echo $this->url('config/server'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Server')); ?></a></li>
         <?php endif; ?>
 
-        <?php if ($this->acl('settings', 'config/cms-update')): ?>
+        <?php if ($this->acl('settings', 'config/update')): ?>
             <li><a href="<?php echo $this->url('config/cms-update'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Update')); ?></a></li>
         <?php endif; ?>
     </ul>
