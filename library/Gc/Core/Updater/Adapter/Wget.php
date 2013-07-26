@@ -63,7 +63,7 @@ class Wget extends AbstractAdapter
         exec(
             'wget -P '
             . $this->getTmpPath()
-            . ' --no-check-certificate https://api.github.com/repos/PierreRambaud/GotCms/zipball/'
+            . ' --no-check-certificate https://api.github.com/repos/GotCms/GotCms/zipball/'
             . $this->getLatestVersion()
             . ' 2>&1',
             $output

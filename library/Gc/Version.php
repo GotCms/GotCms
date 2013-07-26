@@ -74,7 +74,7 @@ final class Version
     {
         if (null === self::$latestVersion) {
             self::$latestVersion = 'not available';
-            $url                 = 'https://api.github.com/repos/PierreRambaud/GotCms/git/refs/tags';
+            $url                 = 'https://api.github.com/repos/GotCms/GotCms/git/refs/tags';
             try {
                 $client = new Client(
                     $url,
