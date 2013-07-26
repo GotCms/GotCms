@@ -6,7 +6,7 @@ If you wish to contribute to GotCms, please be sure to
 read to the following resource:
 
  -  Coding Standards:
-    https://github.com/PierreRambaud/GotSniffs
+    https://github.com/GotCms/GotSniffs
 
 
 ## RUNNING TESTS
