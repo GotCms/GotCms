@@ -146,7 +146,7 @@ class TranslationController extends Action
                 }
             }
 
-            $this->generateCache();
+            $translator->generateCache();
 
             $this->flashMessenger()->addSuccessMessage('Translation saved !');
             return $this->redirect()->toRoute('content/translation');
@@ -154,31 +154,5 @@ class TranslationController extends Action
 
         $translator = new Translator();
         return array('form' => $translationForm, 'values' => $translator->getValues());
-    }
-
-    /**
-     * Generate php array file as cache
-     *
-     * @return void
-     */
-    protected function generateCache()
-    {
-        $translator = new Translator();
-        $values     = $translator->getValues();
-        $data       = array();
-        foreach ($values as $value) {
-            if (empty($data[$value['locale']])) {
-                $data[$value['locale']] = array();
-            }
-
-            $data[$value['locale']][$value['source']] = $value['destination'];
-        }
-
-        $translatePath   = GC_APPLICATION_PATH . '/data/translation/%s.php';
-        $templateContent = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/language.tpl.php');
-
-        foreach ($data as $locale => $values) {
-            file_put_contents(sprintf($translatePath, $locale), sprintf($templateContent, var_export($values, true)));
-        }
     }
 }

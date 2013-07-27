@@ -104,6 +104,11 @@ function glob($pattern, $flags = 0)
     return array('9999.999.999');
 }
 
+function file_put_contents($filename, $content)
+{
+    return true;
+}
+
 /**
  * Override Git adapter
  */

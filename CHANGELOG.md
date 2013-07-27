@@ -7,6 +7,7 @@
 - Add more Acl options ([https://github.com/GotCms/GotCms/issues/104](https://github.com/GotCms/GotCms/issues/104))
 - Update to Zend Framework 2.2.2 ([https://github.com/GotCms/GotCms/issues/110](https://github.com/GotCms/GotCms/issues/110))
 - Bug with memcached ([https://github.com/GotCms/GotCms/issues/111](https://github.com/GotCms/GotCms/issues/111))
+- Add method to regenerate translations during module installation ([https://github.com/GotCms/GotCms/issues/106](https://github.com/GotCms/GotCms/issues/106))
 
 ### Potential Breakage
 All acl have been changed, and if you added new roles, you must redefined them after the update.
