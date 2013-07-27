@@ -178,8 +178,8 @@ class Translator extends AbstractTable
      */
     public function generateCache()
     {
-        $values     = $this->getValues();
-        $data       = array();
+        $values = $this->getValues();
+        $data   = array();
         foreach ($values as $value) {
             if (empty($data[$value['locale']])) {
                 $data[$value['locale']] = array();

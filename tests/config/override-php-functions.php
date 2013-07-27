@@ -104,9 +104,13 @@ function glob($pattern, $flags = 0)
     return array('9999.999.999');
 }
 
-function file_put_contents($filename, $content)
+function file_put_contents($filename, $data, $flags = 0, $context = null)
 {
-    return true;
+    if (strpos($filename, GC_APPLICATION_PATH . '/data/translation') !== false) {
+        return true;
+    }
+
+    return \file_put_contents($filename, $data, $flags, $context);
 }
 
 /**
