@@ -8,6 +8,7 @@
 - Update to Zend Framework 2.2.2 ([https://github.com/GotCms/GotCms/issues/110](https://github.com/GotCms/GotCms/issues/110))
 - Bug with memcached ([https://github.com/GotCms/GotCms/issues/111](https://github.com/GotCms/GotCms/issues/111))
 - Add method to regenerate translations during module installation ([https://github.com/GotCms/GotCms/issues/106](https://github.com/GotCms/GotCms/issues/106))
+- Flash messages for login and forgot password ([https://github.com/GotCms/GotCms/issues/114](https://github.com/GotCms/GotCms/issues/114))
 
 ### Potential Breakage
 All acl have been changed, and if you added new roles, you must redefined them after the update.

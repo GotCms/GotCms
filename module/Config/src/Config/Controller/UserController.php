@@ -152,9 +152,10 @@ class UserController extends Action
                         $userModel->setRetrievePasswordKey(null);
                         $userModel->setRetrieveUpdatedAt(null);
                         $userModel->save();
+                        $this->flashMessenger()->addSuccessMessage('Password changed!');
                     }
 
-                    return $this->redirect()->toRoute('admin');
+                    return $this->redirect()->toRoute('config/user/login');
                 }
 
                 return array('form' => $forgotPasswordForm);
@@ -170,7 +171,8 @@ class UserController extends Action
                 if ($forgotPasswordForm->isValid()) {
                     $userModel = new User\Model();
                     if ($userModel->sendForgotPasswordEmail($forgotPasswordForm->getValue('email'))) {
-                        return $this->redirect()->toRoute('admin');
+                        $this->flashMessenger()->addSuccessMessage('Message sent, you have one hour to change your password!');
+                        return $this->redirect()->toRoute('config/user/login');
                     }
                 }
             }

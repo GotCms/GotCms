@@ -54,6 +54,7 @@
     ?>
 </head>
 <body>
+    <?php echo $this->partial('messages.phtml', array('messages' => $this->flashMessages)); ?>
     <?php echo $this->content; ?>
 </body>
 </html>
