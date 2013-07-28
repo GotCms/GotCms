@@ -72,9 +72,10 @@ Make sure read and write access are available by apache user/group for these dir
 - An HTTP server
 - Php version >= 5.3.3
 - XML support
-- PDO support
+- FileInfo support
 - Mbstring support
 - Json support
+- PDO support
 - A database supported by PDO.
     - MySQL
     - PostgreSQL

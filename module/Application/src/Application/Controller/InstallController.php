@@ -179,12 +179,16 @@ class InstallController extends Action
             'value' => PHP_VERSION_ID > 50303
         );
         $phpData[] = array(
-            'label' => 'Pdo',
-            'value' => extension_loaded('pdo')
-        );
-        $phpData[] = array(
             'label' => 'Xml',
             'value' => extension_loaded('xml')
+        );
+        $phpData[] = array(
+            'label' => 'Fileinfo',
+            'value' => extension_loaded('fileinfo')
+        );
+        $phpData[] = array(
+            'label' => 'Pdo',
+            'value' => extension_loaded('pdo')
         );
         $phpData[] = array(
             'label' => 'Database (Mysql, Pgsql)',
