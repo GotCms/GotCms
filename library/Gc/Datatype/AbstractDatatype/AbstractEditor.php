@@ -30,7 +30,6 @@ namespace Gc\Datatype\AbstractDatatype;
 use Gc\Core\Object;
 use Gc\Datatype;
 use Gc\Registry;
-use Zend\EventManager\StaticEventManager;
 
 /**
  * Abstract Editor class

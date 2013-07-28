@@ -34,7 +34,8 @@ use Zend\View\Renderer\PhpRenderer;
 use Gc\View\Resolver\TemplatePathStack;
 
 /**
- * Abstract obverser bootstrap
+ * Renderer may help you to use view model and
+ * display view
  *
  * @category   Gc
  * @package    Library
