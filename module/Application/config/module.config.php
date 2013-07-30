@@ -26,27 +26,31 @@
  */
 
 use Gc\Core\Config as CoreConfig;
+use Gc\Module\Collection as ModuleCollection;
 use Gc\User\Model as UserModel;
 use Gc\View\Helper;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage;
+use Zend\ModuleManager\Listener;
+use Zend\ModuleManager\ModuleManager;
 
 return array(
     'controllers' => array(
         'invokables' => array(
-            'IndexController' => 'Application\Controller\IndexController',
+            'IndexController'   => 'Application\Controller\IndexController',
             'InstallController' => 'Application\Controller\InstallController',
         ),
     ),
     'service_manager' => array(
         'factories' => array(
-            'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'Auth' => function ($sm) {
+                return new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
+            },
             'CoreConfig' => function ($sm) {
                 return new CoreConfig();
             },
-            'Auth' => function ($sm) {
-                return new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
-            }
+            'CustomModules' => 'Gc\Mvc\Service\ModuleManagerFactory',
+            'translator'    => 'Zend\Mvc\Service\TranslatorServiceFactory',
         )
     ),
     'translator' => array(

@@ -48,15 +48,6 @@ class StaticEventManager extends SharedEventManager
     protected static $instance;
 
     /**
-     * Singleton
-     *
-     * @return void
-     */
-    protected function __construct()
-    {
-    }
-
-    /**
      * Retrieve instance
      *
      * @return StaticEventManager

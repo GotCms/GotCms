@@ -26,7 +26,7 @@
 
 namespace Modules\Blog\Plugin;
 
-use Modules\Blog\Bootstrap;
+use Modules\Blog\Module;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
@@ -175,7 +175,7 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
         $this->module->save();
 
 
-        $this->boostrap = new Bootstrap();
+        $this->boostrap = new Module();
         $this->boostrap->install();
     }
 

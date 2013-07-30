@@ -171,7 +171,9 @@ class UserController extends Action
                 if ($forgotPasswordForm->isValid()) {
                     $userModel = new User\Model();
                     if ($userModel->sendForgotPasswordEmail($forgotPasswordForm->getValue('email'))) {
-                        $this->flashMessenger()->addSuccessMessage('Message sent, you have one hour to change your password!');
+                        $this->flashMessenger()->addSuccessMessage(
+                            'Message sent, you have one hour to change your password!'
+                        );
                         return $this->redirect()->toRoute('config/user/login');
                     }
                 }

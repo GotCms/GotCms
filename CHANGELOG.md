@@ -10,6 +10,9 @@
 - Add method to regenerate translations during module installation ([https://github.com/GotCms/GotCms/issues/106](https://github.com/GotCms/GotCms/issues/106))
 - Flash messages for login and forgot password ([https://github.com/GotCms/GotCms/issues/114](https://github.com/GotCms/GotCms/issues/114))
 - php_fileinfo is required ([https://github.com/GotCms/GotCms/issues/115](https://github.com/GotCms/GotCms/issues/115))
+- Update module ([https://github.com/GotCms/GotCms/issues/113](https://github.com/GotCms/GotCms/issues/113))
+- Add module.config.php for custom modules ([https://github.com/GotCms/GotCms/issues/105](https://github.com/GotCms/GotCms/issues/105))
+- Bug ActivityLog Module ([https://github.com/GotCms/GotCms/issues/116](https://github.com/GotCms/GotCms/issues/116))
 
 ### Potential Breakage
 All acl have been changed, and if you added new roles, you must redefined them after the update.

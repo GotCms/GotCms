@@ -27,10 +27,11 @@
 
 namespace Modules\Sitemap;
 
-use Gc\Module\AbstractObserver;
+use Gc\Module\AbstractModule;
 use Gc\Registry;
 use Modules\Sitemap\Model\Sitemap;
-use Zend\EventManager\Event;
+use Zend\EventManager\EventInterface as Event;
+use Zend\ServiceManager\ServiceManager;
 use SimpleXMLElement;
 
 /**
@@ -40,15 +41,50 @@ use SimpleXMLElement;
  * @package    Modules
  * @subpackage Sitemap
  */
-class Observer extends AbstractObserver
+class Module extends AbstractModule
 {
+    /**
+     * Get module configuration
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return include __DIR__ . '/config/module.config.php';
+    }
+
+    /**
+     * Service manager
+     *
+     * @var ServiceManager
+     */
+    protected $serviceManager;
+
+    /**
+     * Uninstall module
+     *
+     * @return boolean
+     */
+    public function uninstall()
+    {
+        $sitemap = new Sitemap();
+        if (file_exists($sitemap->getFilePath())) {
+            @unlink($sitemap->getFilePath());
+        }
+
+        return true;
+    }
+
     /**
      * Boostrap
      *
+     * @param Event $e Event
+     *
      * @return void
      */
-    public function init()
+    public function onBootstrap(Event $e)
     {
+        $this->serviceManager = $e->getApplication()->getServiceManager();
         $this->events()->attach('Gc\Document\Model', 'after.save', array($this, 'addElement'));
         $this->events()->attach('Gc\Document\Model', 'after.delete', array($this, 'removeElement'));
     }

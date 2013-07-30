@@ -26,7 +26,7 @@
 
 namespace Modules\Blog\Controller;
 
-use Modules\Blog\Bootstrap;
+use Modules\Blog\Module;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
@@ -49,7 +49,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
-     * @var Bootstrap
+     * @var Module
      */
     protected $boostrap;
 
@@ -147,7 +147,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->document->save();
 
-        $this->boostrap = new Bootstrap();
+        $this->boostrap = new Module();
         $this->boostrap->install();
         $this->object = new IndexController(
             Registry::get('Application')->getRequest(),

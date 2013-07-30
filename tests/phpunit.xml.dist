@@ -29,6 +29,7 @@
             <directory suffix=".php">../library/</directory>
             <directory suffix=".php">../module/</directory>
             <exclude>
+                <directory suffix=".config.php">../library/</directory>
                 <directory suffix=".config.php">../module/</directory>
                 <directory suffix="classmap.php">../module/</directory>
                 <directory suffix="function.php">../module/</directory>

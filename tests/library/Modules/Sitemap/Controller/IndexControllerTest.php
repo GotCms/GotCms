@@ -26,7 +26,7 @@
 
 namespace Modules\Sitemap\Controller;
 
-use Modules\Sitemap\Bootstrap;
+use Modules\Sitemap\Module;
 use Gc\Registry;
 
 /**
@@ -44,7 +44,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
-     * @var Bootstrap
+     * @var Module
      */
     protected $boostrap;
 
@@ -56,7 +56,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->boostrap = new Bootstrap();
+        $this->boostrap = new Module();
         $this->boostrap->install();
         $this->object = new IndexController(
             Registry::get('Application')->getRequest(),

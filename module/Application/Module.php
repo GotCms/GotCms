@@ -32,7 +32,6 @@ use Gc\Core\Config as CoreConfig;
 use Gc\Layout;
 use Gc\Registry;
 use Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway;
-use Gc\Module\Collection as ModuleCollection;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\I18n\Translator;
@@ -83,7 +82,7 @@ class Module extends Mvc\Module
             $dbAdapter = $this->initDatabase($config);
             $this->initSession($serviceManager, $dbAdapter);
             $this->initTranslator($serviceManager);
-            $this->initObserverModules($serviceManager);
+            $serviceManager->get('CustomModules');
 
             $sharedEvents = $application->getEventManager()->getSharedManager();
             $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_ROUTE, array($this, 'checkSsl'), -10);
@@ -175,28 +174,6 @@ class Module extends Mvc\Module
         }
 
         AbstractValidator::setDefaultTranslator($translator);
-    }
-
-    /**
-     * Initialize modules events
-     *
-     * @param ServiceManager $serviceManager Service manager
-     *
-     * @return void
-     */
-    public function initObserverModules(ServiceManager $serviceManager)
-    {
-        //Initialize Observers
-        $moduleCollection = new ModuleCollection();
-        $modules          = $moduleCollection->getModules();
-        foreach ($modules as $module) {
-            $className = sprintf('\\Modules\\%s\\Observer', $module->getName());
-            if (class_exists($className)) {
-                $object = new $className();
-                $object->setServiceManager($serviceManager);
-                $object->init();
-            }
-        }
     }
 
     /**

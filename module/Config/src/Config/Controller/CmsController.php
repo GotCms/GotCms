@@ -33,6 +33,7 @@ use Gc\Media\Info;
 use Gc\Version;
 use Config\Form\Config as configForm;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
+use Exception;
 
 /**
  * Cms controller
@@ -138,7 +139,8 @@ class CmsController extends Action
         $session         = $this->getSession();
 
         if ($this->getRequest()->isPost()) {
-            $updater = new Updater();
+            $updater         = new Updater();
+            $versionIsLatest = false;
             if (!$updater->load($this->getRequest()->getPost()->get('adapter')) or $versionIsLatest) {
                 $this->flashMessenger()->addErrorMessage('Can\'t set adapter');
                 return $this->redirect()->toRoute('config/cms-update');
@@ -150,11 +152,23 @@ class CmsController extends Action
             if ($updater->update()) {
                 //Upgrade cms
                 if ($updater->upgrade()) {
+                    //Update modules
+                    $modules = $this->getServiceLocator()->get('CustomModules')->getLoadedModules();
+                    foreach ($modules as $module) {
+                        if (method_exists($module, 'update')) {
+                            try {
+                                $module->update($latestVersion);
+                            } catch (Exception $e) {
+                                //don't care
+                            }
+                        }
+                    }
+
                     //Update database
                     $configuration = $this->getServiceLocator()->get('Config');
                     $dbAdapter     = GlobalAdapterFeature::getStaticAdapter();
                     if (!$updater->updateDatabase($configuration, $dbAdapter)) {
-                        //Upgrade cms
+                        //Rollback cms
                         $updater->rollback($currentVersion);
                     } else {
                         $updater->executeScripts();

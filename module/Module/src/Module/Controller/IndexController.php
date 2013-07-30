@@ -82,7 +82,8 @@ class IndexController extends Action
                 $this->useFlashMessenger();
             } else {
                 $moduleName = $form->getInputFilter()->get('module')->getValue();
-                if (($moduleId = ModuleModel::install($moduleName)) === false) {
+                $moduleId   = ModuleModel::install($this->getServiceLocator()->get('CustomModules'), $moduleName);
+                if ($moduleId === false) {
                     $this->flashMessenger()->addErrorMessage('Can not install this module');
                     return $this->redirect()->toRoute('module');
                 } else {
@@ -104,9 +105,13 @@ class IndexController extends Action
     public function uninstallAction()
     {
         $moduleId    = $this->getRouteMatch()->getParam('id');
+        $modules     = $this->getServiceLocator()->get('CustomModules');
         $moduleModel = ModuleModel::fromId($moduleId);
-        if (!empty($moduleModel) and ModuleModel::uninstall($moduleModel->getName())) {
-            return $this->returnJson(array('success' => true, 'message' => 'Module uninstalled'));
+        if (!empty($moduleModel)) {
+            $module = $modules->getModule('Modules\\' . $moduleModel->getName());
+            if (ModuleModel::uninstall($module, $moduleModel)) {
+                return $this->returnJson(array('success' => true, 'message' => 'Module uninstalled'));
+            }
         }
 
         return $this->returnJson(array('success' => false, 'message' => 'Can\'t uninstall module'));
@@ -124,11 +129,15 @@ class IndexController extends Action
         $actionName     = $this->getRouteMatch()->getParam('ma', 'index');
         $moduleModel    = ModuleModel::fromId($moduleId);
 
+        if (empty($moduleModel)) {
+            return $this->redirect()->toRoute('module');
+        }
+
         /**
          * Bootstrap event
          */
-        $object = $this->loadBootstrap($moduleModel->getName());
-        $object->init($this->getEvent());
+        $modules = $this->getServiceLocator()->get('CustomModules');
+        $object  = $modules->getModule('Modules\\' . $moduleModel->getName());
 
         /**
          * Load controller and execute action
@@ -168,12 +177,18 @@ class IndexController extends Action
         }
 
         //Change defaut template path stack
-        $config      = $this->getServiceLocator()->get('Config');
-        $modulesPath = $config['view_manager']['template_path_stack']['modules'];
-        $viewsPath   = sprintf('%s/%s/views', $modulesPath, $moduleModel->getName());
-        $this->getServiceLocator()->get('ViewTemplatePathStack')->addPath($viewsPath);
+        $paths        = $this->getServiceLocator()->get('ViewTemplatePathStack')->getPaths()->toArray();
+        $selectedPath = null;
+        $string       = 'Modules/' . $moduleModel->getName();
+        foreach ($paths as $path) {
+            if (strpos($path, $string) !== false) {
+                $paths = explode('Modules', realpath($path));
+                $selectedPath = $paths[1];
+                break;
+            }
+        }
 
-        $result->setTemplate(sprintf('%s/views/%s/%s', $moduleModel->getName(), $controllerName, $actionName));
+        $result->setTemplate(sprintf('%s/%s/%s', $selectedPath, $controllerName, $actionName));
 
         $filename = sprintf(GC_APPLICATION_PATH . '/library/Modules/%s/views/menu.phtml', $moduleModel->getName());
         if (file_exists($filename)) {
@@ -181,18 +196,5 @@ class IndexController extends Action
         }
 
         return $result;
-    }
-
-    /**
-     * Load bootstrap from module name
-     *
-     * @param string $moduleName Module name
-     *
-     * @return \Gc\Module\AbstractModule
-     */
-    protected function loadBootstrap($moduleName)
-    {
-        $className = sprintf('\\Modules\\%s\\Bootstrap', $moduleName, $moduleName);
-        return new $className();
     }
 }

@@ -17,57 +17,18 @@
  *
  * PHP Version >=5.3
  *
- * @category   Gc_Library
- * @package    Modules
- * @subpackage Backup
+ * @category   Gc_Application
+ * @package    Application
+ * @subpackage Config
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Backup;
-
-use Gc\Module\AbstractModule;
-use Zend\EventManager\Event;
-
-/**
- * Backup module bootstrap
- *
- * @category   Gc_Library
- * @package    Modules
- * @subpackage Backup
- */
-class Bootstrap extends AbstractModule
-{
-    /**
-     * Boostrap
-     *
-     * @param Event $e Event
-     *
-     * @return void
-     */
-    public function init(Event $e)
-    {
-
-    }
-
-    /**
-     * Install module
-     *
-     * @return boolean
-     */
-    public function install()
-    {
-        return true;
-    }
-
-    /**
-     * Uninstall module
-     *
-     * @return boolean
-     */
-    public function uninstall()
-    {
-        return true;
-    }
-}
+return array(
+    'view_manager' => array(
+        'template_path_stack' => array(
+            'sitemap' => __DIR__ . '/../views',
+        ),
+    ),
+);

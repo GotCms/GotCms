@@ -26,8 +26,9 @@
 
 namespace Modules\Sitemap;
 
-use Gc\Event\StaticEventManager;
 use Gc\Registry;
+use Modules\Sitemap\Model;
+use Gc\Event\StaticEventManager;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
@@ -41,10 +42,10 @@ use Gc\View\Model as ViewModel;
  * @category Gc_Tests
  * @package  Modules
  */
-class ObserverTest extends \PHPUnit_Framework_TestCase
+class ModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Observer
+     * @var Module
      *
      */
     protected $object;
@@ -153,10 +154,11 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
 
         $this->document->save();
         $this->document->setOrigData();
-        $this->object = new Observer;
-        $this->object->setServiceManager(Registry::get('Application')->getServiceManager());
 
         $this->filePath = GC_MEDIA_PATH . '/sitemap.xml';
+
+        $this->object = new Module;
+        $this->object->onBootstrap(Registry::get('Application')->getMvcEvent());
     }
 
     /**
@@ -189,9 +191,22 @@ class ObserverTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testInit()
+    public function testGetConfig()
     {
-        $this->assertNull($this->object->init());
+        $this->assertInternalType('array', $this->object->getConfig());
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testInstallAndUninstall()
+    {
+        $this->assertTrue($this->object->install());
+        $sitemap = new Model\Sitemap();
+        file_put_contents($sitemap->getFilePath(), $sitemap->generate(Registry::get('Application')->getRequest()));
+        $this->assertTrue($this->object->uninstall());
     }
 
     /**

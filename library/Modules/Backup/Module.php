@@ -19,69 +19,33 @@
  *
  * @category   Gc_Library
  * @package    Modules
- * @subpackage Blog
+ * @subpackage Backup
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Blog;
+namespace Modules\Backup;
 
 use Gc\Module\AbstractModule;
 use Zend\EventManager\Event;
 
 /**
- * Blog module bootstrap
+ * Backup module bootstrap
  *
  * @category   Gc_Library
  * @package    Modules
- * @subpackage Blog
+ * @subpackage Backup
  */
-class Bootstrap extends AbstractModule
+class Module extends AbstractModule
 {
     /**
-     * Boostrap
+     * Get module configuration
      *
-     * @param Event $e Event
-     *
-     * @return void
+     * @return array
      */
-    public function init(Event $e)
+    public function getConfig()
     {
-
-    }
-
-    /**
-     * Install module
-     *
-     * @return boolean
-     */
-    public function install()
-    {
-        $pdoResource = $this->getAdapter()->getDriver()->getConnection()->getResource();
-        $pdoResource->exec(
-            file_get_contents(
-                __DIR__ . sprintf('/sql/install-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
-            )
-        );
-
-        return true;
-    }
-
-    /**
-     * Uninstall module
-     *
-     * @return boolean
-     */
-    public function uninstall()
-    {
-        $pdoResource = $this->getAdapter()->getDriver()->getConnection()->getResource();
-        $pdoResource->exec(
-            file_get_contents(
-                __DIR__ . sprintf('/sql/uninstall-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
-            )
-        );
-
-        return true;
+        return include __DIR__ . '/config/module.config.php';
     }
 }

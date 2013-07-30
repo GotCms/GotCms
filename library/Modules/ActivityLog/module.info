@@ -1,7 +1,7 @@
 author = Pierre Rambaud
 date = 2012
-version = "0.1"
-cms_version = ">=0.1.9"
+version = "0.2"
+cms_version = ">=0.2.0"
 description = "This extension records all admin user activity and displays it in the backend."
 database_compatibility[] = "mysql"
 database_compatibility[] = "pgsql"

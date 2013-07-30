@@ -17,63 +17,18 @@
  *
  * PHP Version >=5.3
  *
- * @category   Gc_Library
- * @package    Modules
- * @subpackage Sitemap
+ * @category   Gc_Application
+ * @package    Application
+ * @subpackage Config
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Sitemap;
-
-use Gc\Module\AbstractModule;
-use Zend\EventManager\Event;
-use Modules\Sitemap\Model;
-
-/**
- * Sitemap module bootstrap
- *
- * @category   Gc_Library
- * @package    Modules
- * @subpackage Sitemap
- */
-class Bootstrap extends AbstractModule
-{
-    /**
-     * Boostrap
-     *
-     * @param Event $e Event
-     *
-     * @return void
-     */
-    public function init(Event $e)
-    {
-
-    }
-
-    /**
-     * Install module
-     *
-     * @return boolean
-     */
-    public function install()
-    {
-        return true;
-    }
-
-    /**
-     * Uninstall module
-     *
-     * @return boolean
-     */
-    public function uninstall()
-    {
-        $sitemap = new Model\Sitemap();
-        if (file_exists($sitemap->getFilePath())) {
-            @unlink($sitemap->getFilePath());
-        }
-
-        return true;
-    }
-}
+return array(
+    'view_manager' => array(
+        'template_path_stack' => array(
+            'backup' => __DIR__ . '/../views',
+        ),
+    ),
+);

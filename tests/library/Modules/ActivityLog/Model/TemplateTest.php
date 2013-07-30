@@ -27,7 +27,7 @@
 namespace Modules\ActivityLog\Model;
 
 use Gc\User\Model as UserModel;
-use Modules\ActivityLog\Bootstrap;
+use Modules\ActivityLog\Module;
 use Zend\EventManager\Event;
 
 /**
@@ -45,7 +45,7 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
-     * @var Bootstrap
+     * @var Module
      */
     protected $boostrap;
 
@@ -57,7 +57,7 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->boostrap = new Bootstrap();
+        $this->boostrap = new Module();
         $this->boostrap->install();
         $this->object = new Template;
     }

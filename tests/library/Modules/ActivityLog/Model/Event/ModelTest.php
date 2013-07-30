@@ -26,7 +26,7 @@
 
 namespace Modules\ActivityLog\Model\Event;
 
-use Modules\ActivityLog\Bootstrap;
+use Modules\ActivityLog\Module;
 use Gc\User\Model as UserModel;
 use Gc\Registry;
 
@@ -45,7 +45,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
-     * @var Bootstrap
+     * @var Module
      */
     protected $boostrap;
 
@@ -57,7 +57,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->boostrap = new Bootstrap();
+        $this->boostrap = new Module();
         $this->boostrap->install();
         $this->object = new Model;
     }

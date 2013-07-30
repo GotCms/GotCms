@@ -26,7 +26,7 @@
 
 namespace Modules\Blog\Model;
 
-use Modules\Blog\Bootstrap;
+use Modules\Blog\Module;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
@@ -48,7 +48,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
-     * @var Bootstrap
+     * @var Module
      */
     protected $boostrap;
 
@@ -146,7 +146,7 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 
         $this->document->save();
 
-        $this->boostrap = new Bootstrap();
+        $this->boostrap = new Module();
         $this->boostrap->install();
         $this->object = new Comment;
     }

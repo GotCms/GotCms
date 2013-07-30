@@ -33,6 +33,7 @@ use Gc\Media\Icon;
 use Gc\View;
 use Zend\Db\Sql;
 use Zend\Db\Sql\Predicate\Expression;
+use Zend\ModuleManager\ModuleManager;
 
 /**
  * Module Model
@@ -171,18 +172,24 @@ class Model extends AbstractTable
     /**
      * Install module
      *
-     * @param string $moduleName Module Name
+     * @param ModuleManager $moduleManager Module manager
+     * @param string        $moduleName    Module Name
      *
      * @return boolean|integer
      */
-    public static function install($moduleName)
+    public static function install(ModuleManager $moduleManager, $moduleName)
     {
-        $model  = new Model();
-        $object = $model->loadBootstrap($moduleName);
+        try {
+            $object = $moduleManager->loadModule('Modules\\' . $moduleName);
+        } catch (\Exception $e) {
+            //Don't care
+        }
+
         if (empty($object) or !$object->install()) {
             return false;
         }
 
+        $model = new Model();
         $model->setName($moduleName);
         $model->save();
 
@@ -219,21 +226,21 @@ class Model extends AbstractTable
     /**
      * Uninstall from module name
      *
-     * @param string $moduleName Module name
+     * @param AbstractModule $module Module
+     * @param Model          $model  Module model
      *
      * @return boolean
      */
-    public static function uninstall($moduleName)
+    public static function uninstall($module, $model)
     {
-        $model = Model::fromName($moduleName);
-        if (empty($model) or !$model->loadBootstrap($moduleName)->uninstall()) {
+        if (empty($model) or !$module->uninstall()) {
             return false;
         }
 
         $select = new Sql\Select();
         $select->from('user_acl_permission')
             ->columns(array('id'))
-            ->where->equalTo('permission', $moduleName);
+            ->where->equalTo('permission', $model->getName());
 
         $userAclPermissionId = $model->fetchOne($select);
 
@@ -250,22 +257,5 @@ class Model extends AbstractTable
         $model->delete();
 
         return true;
-    }
-
-    /**
-     * Load bootstrap from module name
-     *
-     * @param string $moduleName Module name
-     *
-     * @return \Gc\Module\AbstractModule
-     */
-    protected function loadBootstrap($moduleName)
-    {
-        $className = sprintf('\\Modules\\%s\\Bootstrap', $moduleName, $moduleName);
-        if (!class_exists($className)) {
-            return false;
-        }
-
-        return new $className();
     }
 }

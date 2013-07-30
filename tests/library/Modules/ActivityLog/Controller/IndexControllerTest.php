@@ -26,7 +26,7 @@
 
 namespace Modules\ActivityLog\Controller;
 
-use Modules\ActivityLog\Bootstrap;
+use Modules\ActivityLog\Module;
 use Modules\ActivityLog\Model\Event\Model;
 use Gc\Registry;
 
@@ -45,7 +45,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
-     * @var Bootstrap
+     * @var Module
      */
     protected $boostrap;
 
@@ -57,7 +57,7 @@ class IndexControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->boostrap = new Bootstrap();
+        $this->boostrap = new Module();
         $this->boostrap->install();
         $this->object = new IndexController(
             Registry::get('Application')->getRequest(),

@@ -19,36 +19,75 @@
  *
  * @category   Gc_Library
  * @package    Modules
- * @subpackage ActivityLog
+ * @subpackage Blog
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\ActivityLog;
+namespace Modules\Blog;
 
+use Modules\Blog\Model\Comment;
 use Gc\Module\AbstractModule;
-use Zend\EventManager\Event;
+use Zend\EventManager\EventInterface as Event;
 
 /**
- * Activity log module bootstrap
+ * Blog module bootstrap
  *
  * @category   Gc_Library
  * @package    Modules
- * @subpackage ActivityLog
+ * @subpackage Blog
  */
-class Bootstrap extends AbstractModule
+class Module extends AbstractModule
 {
     /**
-     * Boostrapazdazd
+     * Get module configuration
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return include __DIR__ . '/config/module.config.php';
+    }
+
+    /**
+     * Boostrap
      *
      * @param Event $e Event
      *
      * @return void
      */
-    public function init(Event $e)
+    public function onBootstrap(Event $e)
     {
+        $this->events()->attach('Admin\Controller\IndexController', 'dashboard', array($this, 'dashboard'));
+    }
 
+    /**
+     * Display widget dashboard
+     *
+     * @param \Zend\EventManager\Event $event Event
+     *
+     * @return void
+     */
+    public function dashboard(Event $event)
+    {
+        $commentModel        = new Comment();
+        $unactiveCommentList = $commentModel->getList(null, false);
+        $activeCommentList   = $commentModel->getList(null, true);
+
+        $widgets = $event->getParam('widgets');
+
+        $widgets['test']['id']      = 'blog';
+        $widgets['test']['title']   = 'Blog information';
+        $widgets['test']['content'] = $this->addPath(__DIR__ . '/views')->render(
+            'dashboard.phtml',
+            array(
+                'unactiveComments' => count($unactiveCommentList),
+                'activeComments'   => count($activeCommentList),
+            )
+        );
+
+        $event->setParam('widgets', $widgets);
     }
 
     /**
@@ -61,7 +100,7 @@ class Bootstrap extends AbstractModule
         $pdoResource = $this->getAdapter()->getDriver()->getConnection()->getResource();
         $pdoResource->exec(
             file_get_contents(
-                __DIR__ . sprintf('/sql/install-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
+                __DIR__ . sprintf('/data/sql/install-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
             )
         );
 
@@ -78,7 +117,7 @@ class Bootstrap extends AbstractModule
         $pdoResource = $this->getAdapter()->getDriver()->getConnection()->getResource();
         $pdoResource->exec(
             file_get_contents(
-                __DIR__ . sprintf('/sql/uninstall-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
+                __DIR__ . sprintf('/data/sql/uninstall-%s.sql', str_replace('pdo_', '', $this->getDriverName()))
             )
         );
 
