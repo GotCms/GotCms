@@ -23,7 +23,7 @@ Please see [CHANGELOG.md](https://github.com/GotCms/GotCms/blob/master/CHANGELOG
 Composer:
 
     $ curl -s https://getcomposer.org/installer | php
-    $ php composer.phar install
+    $ php composer.phar create-project gotcms/gotcms path/ 0.1.9
 
 Git:
 
