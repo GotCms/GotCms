@@ -108,7 +108,7 @@ var Gc = (function($)
                     $newPosition = ui.item.index(),
                     $row = $tabsNav.eq($originalPosition).detach();
 
-                    if ($newPosition == $tabsNav.length) {
+                    if ($newPosition === $tabsNav.length) {
                         $tabsNav.eq($newPosition - 1).after($row);
                     } else {
                         $tabsNav.eq($newPosition).before($row);
@@ -151,7 +151,7 @@ var Gc = (function($)
                             $tabs.append($e);
 
                             $('.select-tab').append(new Option($name.val(),$data.id));
-                            $('.select-tab').dropDown('refresh')
+                            $('.select-tab').dropDown('refresh');
 
                             if($('#properties-tabs-content').html() !== null) {
                                 $tab_content = $('#properties-tabs-content');
@@ -422,7 +422,7 @@ var Gc = (function($)
         {
             var $this = this,
             initialDocument = $('#document_' + $document_id).closest('li'),
-            initialOpen = undefined;
+            initialOpen;
 
             if (initialDocument.length > 0) {
                 if (initialDocument.children('ul').length > 0) {
