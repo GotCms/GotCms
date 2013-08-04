@@ -80,8 +80,8 @@ class Module extends Mvc\Module
 
         if (isset($config['db'])) {
             $dbAdapter = $this->initDatabase($config);
-            $this->initSession($serviceManager, $dbAdapter);
             $this->initTranslator($serviceManager);
+            $this->initSession($serviceManager, $dbAdapter);
             $serviceManager->get('CustomModules');
 
             $sharedEvents = $application->getEventManager()->getSharedManager();
@@ -167,10 +167,10 @@ class Module extends Mvc\Module
     public function initTranslator(ServiceManager $serviceManager)
     {
         $coreConfig = $serviceManager->get('CoreConfig');
-        $translator = $serviceManager->get('translator');
+        $translator = $serviceManager->get('MvcTranslator');
         $locale     = $coreConfig->getValue('locale');
         if (!empty($locale)) {
-            $translator->setLocale($coreConfig->getValue('locale'));
+            $translator->setLocale($locale);
         }
 
         AbstractValidator::setDefaultTranslator($translator);
