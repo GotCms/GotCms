@@ -682,7 +682,7 @@ var Gc = (function($)
             });
         },
 
-        initTraslationList: function()
+        initTranslationList: function()
         {
             $('#table-translation-edit > tbody > tr').on('click', function(e) {
                 if($.inArray(e.target.type, ['text', 'select-one']) !== -1) {
@@ -872,6 +872,24 @@ var Gc = (function($)
         {
             $('#role-list').find('h3,h2').on('click', function() {
                 $(this).closest('dt').nextUntil('dt').find('input[type="checkbox"]').prop('checked', true);
+            });
+        },
+
+        checkDataChanged: function()
+        {
+            var $form = $('.simple-form'),
+            $originalData = $form.serialize();
+
+            $document.on('click', '#input-save', function() {
+                $(this).closest('form').data('formBeingSaved', true);
+            });
+
+            $window.on('beforeunload', function() {
+                if ($('#input-save').closest('form').data('formBeingSaved') !== true) {
+                    if ($form.serialize() !== $originalData) {
+                        return true;
+                    }
+                }
             });
         }
     };

@@ -89,7 +89,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
     Gc.setOption('locale', $.parseJSON('<?php echo $this->json($this->form->get('locale')->getValueOptions()); ?>'));
-    Gc.initTraslationList();
+    Gc.initTranslationList();
     Gc.saveCommand();
+    Gc.checkDataChanged();
 });
 </script>

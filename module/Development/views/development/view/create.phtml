@@ -29,6 +29,7 @@
 ?>
 <?php echo $this->partial('development/forms/view.phtml', array('form' => $this->form)); ?>
 <script type="text/javascript">
-Gc.initCodeMirror('view-content');
-Gc.saveCommand();
+    Gc.initCodeMirror('view-content');
+    Gc.saveCommand();
+    Gc.checkDataChanged();
 </script>

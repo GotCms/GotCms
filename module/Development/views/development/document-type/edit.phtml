@@ -34,5 +34,6 @@
 $(function(){
     Gc.initDocumentType('<?php echo $this->url('development/document-type/add-tab') ?>', '<?php echo $this->url('development/document-type/add-property') ?>', '<?php echo $this->url('development/document-type/delete-tab') ?>', '<?php echo $this->url('development/document-type/delete-property') ?>', '<?php echo $this->url('development/document-type/import-tab') ?>');
     Gc.saveCommand();
+    Gc.checkDataChanged();
 });
 </script>
