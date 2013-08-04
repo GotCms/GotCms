@@ -587,8 +587,9 @@ class InstallController extends Action
 
                             $designInfos = $info->getInfos();
                             if (!empty($designInfos['modules'])) {
+                                $modules = $this->getServiceLocator()->get('CustomModules');
                                 foreach ($designInfos['modules'] as $module) {
-                                    ModuleModel::install($module);
+                                    ModuleModel::install($modules, $module);
                                 }
                             }
 
