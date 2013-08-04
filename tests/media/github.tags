@@ -40,6 +40,10 @@
     "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/0.1.9"
 },
 {
+    "ref": "refs/tags/0.2.0",
+    "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/0.2.0"
+},
+{
     "ref": "refs/tags/0.1.0a",
     "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/0.1.0a"
 },
