@@ -84,8 +84,11 @@ class Module extends Mvc\Module
             $this->initSession($serviceManager, $dbAdapter);
             $serviceManager->get('CustomModules');
 
-            $sharedEvents = $application->getEventManager()->getSharedManager();
-            $sharedEvents->attach('Zend\Mvc\Application', MvcEvent::EVENT_ROUTE, array($this, 'checkSsl'), -10);
+            $application->getEventManager()->attach(
+                MvcEvent::EVENT_ROUTE,
+                array($this, 'checkSsl'),
+                -10
+            );
 
             $application->getEventManager()->attach(
                 MvcEvent::EVENT_RENDER_ERROR,

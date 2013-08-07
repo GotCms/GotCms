@@ -1,5 +1,8 @@
 # CHANGELOG
 
+##0.2.1 (-- --- 2013):
+- Force ssl not working ([https://github.com/GotCms/GotCms/issues/123](https://github.com/GotCms/GotCms/issues/123))
+
 ##0.2.0 (04 Aug 2013):
 - User without user acl can't log out ([https://github.com/GotCms/GotCms/issues/107](https://github.com/GotCms/GotCms/issues/107))
 - Css in chrome ([https://github.com/GotCms/GotCms/issues/108](https://github.com/GotCms/GotCms/issues/108))
