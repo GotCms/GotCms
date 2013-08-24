@@ -53,10 +53,10 @@
         ->prependFile($this->cdnBackend('/backend/js/libs/codemirror/mode/javascript/javascript.js'), 'text/javascript')
         ->prependFile($this->cdnBackend('/backend/js/libs/codemirror/mode/xml/xml.js'), 'text/javascript')
         ->prependFile($this->cdnBackend('/backend/js/libs/codemirror/lib/codemirror.js'), 'text/javascript')
-        ->prependFile($this->cdnBackend('/backend/js/libs/jquery-ui-1.10.1.custom.min.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/jquery-ui-1.10.3.custom.min.js'), 'text/javascript')
         ->prependFile($this->cdnBackend('/backend/js/plugins.js'), 'text/javascript')
         ->prependFile($this->cdnBackend('/backend/js/libs/jquery.browser.js'), 'text/javascript')
-        ->prependFile($this->cdnBackend('/backend/js/libs/jquery-1.9.1.js'), 'text/javascript')
+        ->prependFile($this->cdnBackend('/backend/js/libs/jquery-1.10.2.min.js'), 'text/javascript')
         ->prependFile($this->cdnBackend('/backend/js/libs/modernizr-2.6.2.min.js'), 'text/javascript');
 
     $this->headLink()
@@ -67,7 +67,7 @@
         ->prependStylesheet($this->cdnBackend('/backend/css/elfinder.min.css'))
         ->prependStylesheet($this->cdnBackend('/backend/css/jquery.treeview.css'))
         ->prependStylesheet($this->cdnBackend('/backend/js/libs/codemirror/lib/codemirror.css'))
-        ->prependStylesheet($this->cdnBackend('/backend/css/jquery-ui-1.10.1.custom.css'));
+        ->prependStylesheet($this->cdnBackend('/backend/css/jquery-ui-1.10.3.custom.min.css'));
 
     echo $this->headScript();
 
