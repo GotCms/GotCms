@@ -75,6 +75,13 @@ if (file_exists($gcRoot . '/vendor/autoload.php')) {
 
 // Get application stack configuration
 if ($zfPath) {
+    // Get application stack configuration
+    $configuration = include_once $gcRoot . '/config/application.config.php';
+
+    $configuration['module_listener_options']['config_glob_paths'] = array(
+        'tests/config/global.php',
+    );
+
     //Load all custom modules
     $path       = GC_APPLICATION_PATH . '/library/Modules/';
     $modules    = glob($path . '*', GLOB_ONLYDIR);
@@ -82,12 +89,6 @@ if ($zfPath) {
         $configuration['autoloader']['namespaces'][str_replace($path, '', $directory)] = $directory;
     }
 
-    // Get application stack configuration
-    $configuration = include_once $gcRoot . '/config/application.config.php';
-
-    $configuration['module_listener_options']['config_glob_paths'] = array(
-        'tests/config/global.php',
-    );
     if (isset($loader)) {
         $loader->add('Zend', $zfPath);
         foreach ($configuration['autoloader']['namespaces'] as $name => $path) {
