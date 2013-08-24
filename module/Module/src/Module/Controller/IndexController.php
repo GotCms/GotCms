@@ -33,8 +33,8 @@ use Gc\Module\Collection as ModuleCollection;
 use Gc\Module\Model as ModuleModel;
 use Gc\User\Role\Model as RoleModel;
 use Module\Form\Module as ModuleForm;
-use Modules;
 use Zend\Db\Sql;
+use Zend\Filter;
 use Zend\Json\Json;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ViewModel;
@@ -63,6 +63,15 @@ class IndexController extends Action
     public function indexAction()
     {
         $collection = new ModuleCollection();
+        $filter     = new Filter\Word\CamelCaseToSeparator;
+        $filter->setSeparator('-');
+        $filterChain = new Filter\FilterChain();
+        $filterChain->attach($filter)
+            ->attach(new Filter\StringToLower());
+
+        foreach ($collection->getModules() as $module) {
+            $module->setData('route', $filterChain->filter($module->getName()));
+        }
 
         return array('modules' => $collection->getModules());
     }
@@ -88,7 +97,7 @@ class IndexController extends Action
                     return $this->redirect()->toRoute('module');
                 } else {
                     $this->flashMessenger()->addSuccessMessage('Module installed');
-                    return $this->redirect()->toRoute('module/edit', array('m' => $moduleId));
+                    return $this->redirect()->toRoute('module');
                 }
             }
 
@@ -108,93 +117,12 @@ class IndexController extends Action
         $modules     = $this->getServiceLocator()->get('CustomModules');
         $moduleModel = ModuleModel::fromId($moduleId);
         if (!empty($moduleModel)) {
-            $module = $modules->getModule('Modules\\' . $moduleModel->getName());
+            $module = $modules->getModule($moduleModel->getName());
             if (ModuleModel::uninstall($module, $moduleModel)) {
                 return $this->returnJson(array('success' => true, 'message' => 'Module uninstalled'));
             }
         }
 
         return $this->returnJson(array('success' => false, 'message' => 'Can\'t uninstall module'));
-    }
-
-    /**
-     * Load module
-     *
-     * @return \Zend\View\Model\ViewModel
-     */
-    public function editAction()
-    {
-        $moduleId       = $this->getRouteMatch()->getParam('m');
-        $controllerName = $this->getRouteMatch()->getParam('mc', 'index');
-        $actionName     = $this->getRouteMatch()->getParam('ma', 'index');
-        $moduleModel    = ModuleModel::fromId($moduleId);
-
-        if (empty($moduleModel)) {
-            return $this->redirect()->toRoute('module');
-        }
-
-        /**
-         * Bootstrap event
-         */
-        $modules = $this->getServiceLocator()->get('CustomModules');
-        $object  = $modules->getModule('Modules\\' . $moduleModel->getName());
-
-        /**
-         * Load controller and execute action
-         */
-        $controllerClass = sprintf(
-            '\\Modules\\%s\\Controller\\%s',
-            $moduleModel->getName(),
-            ucfirst($controllerName) . 'Controller'
-        );
-
-        if (!class_exists($controllerClass)) {
-            return false;
-        }
-
-        $action = $this->getMethodFromAction($actionName);
-
-        $controllerObject = new $controllerClass($this->getRequest(), $this->getResponse());
-        if (!method_exists($controllerObject, $action)) {
-            return false;
-        }
-
-        $controllerObject->setEvent($this->getEvent());
-        $controllerObject->setServiceLocator($this->getServiceLocator());
-        $controllerObject->setPluginManager($this->getPluginManager());
-
-        $result = $controllerObject->$action();
-
-        if ($result instanceof Response) {
-            return $result;
-        }
-
-        if (!empty($result) and is_array($result)) {
-            $model  = new ViewModel();
-            $result = $model->setVariables($result);
-        } elseif (empty($result)) {
-            $result = new ViewModel();
-        }
-
-        //Change defaut template path stack
-        $paths        = $this->getServiceLocator()->get('ViewTemplatePathStack')->getPaths()->toArray();
-        $selectedPath = null;
-        $string       = 'Modules/' . $moduleModel->getName();
-        foreach ($paths as $path) {
-            if (strpos($path, $string) !== false) {
-                $paths = explode('Modules', realpath($path));
-                $selectedPath = $paths[1];
-                break;
-            }
-        }
-
-        $result->setTemplate(sprintf('%s/%s/%s', $selectedPath, $controllerName, $actionName));
-
-        $filename = sprintf(GC_APPLICATION_PATH . '/library/Modules/%s/views/menu.phtml', $moduleModel->getName());
-        if (file_exists($filename)) {
-            $this->layout()->setVariable('moduleMenu', sprintf('%s/views/menu.phtml', $moduleModel->getName()));
-        }
-
-        return $result;
     }
 }

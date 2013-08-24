@@ -45,7 +45,7 @@
             <tr>
                 <td><?php echo $this->escapeHtml($module->getName()); ?></td>
                 <td class="a-center">
-                    <a href="<?php echo $this->url('module/edit', array('m' => $module->getId())); ?>" class="edit-line">
+                    <a href="<?php echo $this->url('module/' . $module->getRoute()); ?>" class="edit-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>

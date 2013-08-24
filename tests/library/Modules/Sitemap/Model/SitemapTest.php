@@ -24,7 +24,7 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Modules\Sitemap\Model;
+namespace Sitemap\Model;
 
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;

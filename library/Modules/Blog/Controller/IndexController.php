@@ -25,11 +25,11 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Blog\Controller;
+namespace Blog\Controller;
 
 use Gc\Module\Controller\AbstractController;
 use Gc\Document\Model as DocumentModel;
-use Modules\Blog\Model;
+use Blog\Model;
 
 /**
  * IndexController
@@ -75,10 +75,10 @@ class IndexController extends AbstractController
      */
     public function documentCommentAction()
     {
-        $documentId = $this->getRequest()->getQuery()->get('id');
+        $documentId = $this->params()->fromRoute('id');
         $document   = DocumentModel::fromId($documentId);
         if (empty($document)) {
-            return $this->redirect()->toRoute('module/edit', array('mc' => 'index', 'ma' => 'index'), array(), true);
+            return $this->redirect()->toRoute('module/blog');
         }
 
         $model       = new Model\Comment();
@@ -105,13 +105,10 @@ class IndexController extends AbstractController
             }
 
             return $this->redirect()->toRoute(
-                'module/edit',
+                'module/blog/document-comment',
                 array(
-                    'mc' => 'index',
-                    'ma' => 'document-comment'
-                ),
-                array(),
-                true
+                    'id' => $documentId,
+                )
             );
         }
 

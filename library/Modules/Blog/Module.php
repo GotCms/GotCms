@@ -25,9 +25,9 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Blog;
+namespace Blog;
 
-use Modules\Blog\Model\Comment;
+use Blog\Model\Comment;
 use Gc\Module\AbstractModule;
 use Zend\EventManager\EventInterface as Event;
 

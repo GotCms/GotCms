@@ -25,6 +25,8 @@
  */
 namespace Gc;
 
+use Zend\Loader\AutoloaderFactory;
+
 /*
  * Set error reporting to the level to which Es code must comply.
  */
@@ -90,7 +92,7 @@ if ($zfPath) {
         $loader->register();
     } else {
         include $zfPath . '/Zend/Loader/AutoloaderFactory.php';
-        \Zend\Loader\AutoloaderFactory::factory(
+        AutoloaderFactory::factory(
             array(
                 'Zend\Loader\StandardAutoloader' => $configuration['autoloader'],
             )
@@ -98,6 +100,19 @@ if ($zfPath) {
     }
 }
 
+//Load all modules
+$autoloader = AutoloaderFactory::getRegisteredAutoloader(AutoloaderFactory::STANDARD_AUTOLOADER);
+$path       = GC_APPLICATION_PATH . '/library/Modules/';
+$modules    = glob($path . '*', GLOB_ONLYDIR);
+foreach ($modules as $directory) {
+    $module = str_replace($path, '', $directory);
+    $autoloader->registerNamespace(
+        $module,
+        $directory
+    );
+}
+
+$autoloader->register();
 if (!class_exists('Zend\Loader\AutoloaderFactory')) {
     throw new RuntimeException(
         'Unable to load ZF2. Run `php composer.phar install` ' .

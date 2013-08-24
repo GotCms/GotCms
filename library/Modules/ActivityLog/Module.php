@@ -25,9 +25,9 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\ActivityLog;
+namespace ActivityLog;
 
-use Modules\ActivityLog\Model\Template;
+use ActivityLog\Model\Template;
 use Gc\Module\AbstractModule;
 use Zend\EventManager\EventInterface as Event;
 use Zend\Http\PhpEnvironment\RemoteAddress;

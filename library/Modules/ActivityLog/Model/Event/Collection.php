@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\ActivityLog\Model\Event;
+namespace ActivityLog\Model\Event;
 
 use Gc\Db\AbstractTable;
 use Zend\Db\Sql\Select;

@@ -25,12 +25,12 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Backup\Controller;
+namespace Backup\Controller;
 
 use Gc\Module\Controller\AbstractController;
 use Gc\Document\Model as DocumentModel;
 use Gc\Registry;
-use Modules\Backup\Model;
+use Backup\Model;
 use Zend\Http\Headers;
 
 /**
@@ -69,7 +69,7 @@ class IndexController extends AbstractController
                 break;
         }
 
-        $content  = $model->export($this->getRequest()->getPost()->get('what'));
+        $content  = $model->export($this->params()->fromPost('what'));
         $filename = 'database-backup-' . date('Y-m-d') . '.sql.gz';
 
         $headers = new Headers();

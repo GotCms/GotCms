@@ -26,9 +26,43 @@
  */
 
 return array(
+    'controllers' => array(
+        'invokables' => array(
+            'BlogController' => 'Blog\Controller\IndexController',
+        ),
+    ),
     'view_manager' => array(
         'template_path_stack' => array(
             'blog' => __DIR__ . '/../views',
+        ),
+    ),
+    'router' => array(
+        'routes' => array(
+            'blog' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route' => '/blog',
+                    'defaults' => array(
+                        'module'     =>'Blog',
+                        'controller' => 'BlogController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'document-comment' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route' => '/document-comment/:id',
+                            'defaults' => array(
+                                'module'     =>'Blog',
+                                'controller' => 'BlogController',
+                                'action'     => 'document-comment',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
 );

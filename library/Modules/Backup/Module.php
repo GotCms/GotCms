@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Backup;
+namespace Backup;
 
 use Gc\Module\AbstractModule;
 use Zend\EventManager\Event;

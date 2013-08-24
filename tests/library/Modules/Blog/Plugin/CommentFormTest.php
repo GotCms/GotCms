@@ -24,9 +24,9 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Modules\Blog\Plugin;
+namespace Blog\Plugin;
 
-use Modules\Blog\Module;
+use Blog\Module;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;

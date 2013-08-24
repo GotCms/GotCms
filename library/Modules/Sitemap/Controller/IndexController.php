@@ -25,11 +25,11 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Sitemap\Controller;
+namespace Sitemap\Controller;
 
 use Gc\Module\Controller\AbstractController;
 use Gc\Document\Model as DocumentModel;
-use Modules\Sitemap\Model;
+use Sitemap\Model;
 
 /**
  * IndexController
@@ -59,6 +59,6 @@ class IndexController extends AbstractController
         $sitemap = new Model\Sitemap();
         file_put_contents($sitemap->getFilePath(), $sitemap->generate($this->getRequest()));
 
-        return $this->redirect()->toRoute('module/edit', array('mc' => 'index', 'ma' => 'index'), array(), true);
+        return $this->redirect()->toRoute('module/sitemap');
     }
 }

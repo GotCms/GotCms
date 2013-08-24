@@ -25,11 +25,11 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Sitemap;
+namespace Sitemap;
 
 use Gc\Module\AbstractModule;
 use Gc\Registry;
-use Modules\Sitemap\Model\Sitemap;
+use Sitemap\Model\Sitemap;
 use Zend\EventManager\EventInterface as Event;
 use Zend\ServiceManager\ServiceManager;
 use SimpleXMLElement;

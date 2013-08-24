@@ -54,7 +54,6 @@ return array(
             'elFinder'  => __DIR__ . '/../vendor/elFinder',
             'Datatypes' => __DIR__ . '/../library/Datatypes',
             'Gc'        => __DIR__ . '/../library/Gc',
-            'Modules'   => __DIR__ . '/../library/Modules',
         ),
         'autoregister_zf' => true,
     ),

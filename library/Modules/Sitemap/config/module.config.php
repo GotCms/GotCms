@@ -26,9 +26,43 @@
  */
 
 return array(
+    'controllers' => array(
+        'invokables' => array(
+            'SitemapController' => 'Sitemap\Controller\IndexController',
+        ),
+    ),
     'view_manager' => array(
         'template_path_stack' => array(
             'sitemap' => __DIR__ . '/../views',
+        ),
+    ),
+    'router' => array(
+        'routes' => array(
+            'sitemap' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route' => '/sitemap',
+                    'defaults' => array(
+                        'module'     =>'Sitemap',
+                        'controller' => 'SitemapController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'generate' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route' => '/generate',
+                            'defaults' => array(
+                                'module'     =>'Sitemap',
+                                'controller' => 'SitemapController',
+                                'action'     => 'generate',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
 );

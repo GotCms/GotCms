@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Blog\Form;
+namespace Blog\Form;
 
 use Gc\Form\AbstractForm;
 use Zend\Form\Element;

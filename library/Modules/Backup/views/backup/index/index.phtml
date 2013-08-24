@@ -31,7 +31,7 @@
 
 <section>
     <h2><?php echo $this->escapeHtml($this->translate('Database')); ?></h2>
-    <form action="<?php echo $this->moduleUrl('download-database', 'index'); ?>" method="post">
+    <form action="<?php echo $this->url('module/backup/download-database'); ?>" method="post">
         <div>
             <input id="what1" type="radio" checked="checked" value="dataonly" name="what">
             <label for="what1"><?php echo $this->escapeHtml($this->translate('Data only')); ?></label>
@@ -52,7 +52,7 @@
 
 <section>
     <h2><?php echo $this->escapeHtml($this->translate('Files')); ?></h2>
-    <form action="<?php echo $this->moduleUrl('download-files', 'index'); ?>" method="post">
+    <form action="<?php echo $this->url('module/backup/download-files'); ?>" method="post">
         <div>
             <input id="input-save" class="input-submit" type="submit" name="submit" value="<?php echo $this->escapeHtml($this->translate('Download')); ?>">
         </div>

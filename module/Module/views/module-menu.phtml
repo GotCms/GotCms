@@ -37,6 +37,6 @@
     <li><a href="<?php echo $this->url('module'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
 </ul>
 
-<?php if (!empty($this->moduleMenu)): ?>
-    <?php echo $this->partial($this->moduleMenu); ?>
+<?php if (!empty($this->layout()->moduleMenu)): ?>
+    <?php echo $this->partial($this->layout()->moduleMenu . '.phtml'); ?>
 <?php endif; ?>

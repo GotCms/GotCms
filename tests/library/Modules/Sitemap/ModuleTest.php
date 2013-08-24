@@ -24,10 +24,10 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Modules\Sitemap;
+namespace Sitemap;
 
 use Gc\Registry;
-use Modules\Sitemap\Model;
+use Sitemap\Model;
 use Gc\Event\StaticEventManager;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;

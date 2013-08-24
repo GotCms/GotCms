@@ -28,6 +28,7 @@
  * Override upload functions
  */
 namespace Gc\Media\File;
+
 namespace Zend\File\Transfer\Adapter;
 
 function is_uploaded_file($filename)
@@ -116,7 +117,7 @@ function file_put_contents($filename, $data, $flags = 0, $context = null)
 /**
  * Override Git adapter
  */
-namespace Modules\Backup\Model;
+namespace Backup\Model;
 
 function exec($command, &$output = array(), &$returnVar = null)
 {

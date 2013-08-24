@@ -81,6 +81,16 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
+    public function testUpdate()
+    {
+        $this->assertTrue($this->object->update('version'));
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
     public function testGetDriverName()
     {
         $configuration = Registry::get('Application')->getConfig();

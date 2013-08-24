@@ -180,7 +180,7 @@ class Model extends AbstractTable
     public static function install(ModuleManager $moduleManager, $moduleName)
     {
         try {
-            $object = $moduleManager->loadModule('Modules\\' . $moduleName);
+            $object = $moduleManager->loadModule($moduleName);
         } catch (\Exception $e) {
             //Don't care
         }

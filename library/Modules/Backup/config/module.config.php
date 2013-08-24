@@ -26,9 +26,54 @@
  */
 
 return array(
+    'controllers' => array(
+        'invokables' => array(
+            'BackupController' => 'Backup\Controller\IndexController',
+        ),
+    ),
     'view_manager' => array(
         'template_path_stack' => array(
             'backup' => __DIR__ . '/../views',
+        ),
+    ),
+    'router' => array(
+        'routes' => array(
+            'backup' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route' => '/backup',
+                    'defaults' => array(
+                        'module'     =>'Backup',
+                        'controller' => 'BackupController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'download-database' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route' => '/download-database',
+                            'defaults' => array(
+                                'module'     =>'Backup',
+                                'controller' => 'BackupController',
+                                'action'     => 'download-database',
+                            ),
+                        ),
+                    ),
+                    'download-files' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route' => '/download-files',
+                            'defaults' => array(
+                                'module'     =>'Backup',
+                                'controller' => 'BackupController',
+                                'action'     => 'download-files',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
 );

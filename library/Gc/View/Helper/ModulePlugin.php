@@ -202,7 +202,7 @@ class ModulePlugin extends AbstractHelper
         }
 
         if (ModuleModel::fromName($moduleName)) {
-            $className = 'Modules\\' . $moduleName . '\\Plugin\\' . $pluginName;
+            $className = $moduleName . '\\Plugin\\' . $pluginName;
             if (class_exists($className)) {
                 return true;
             }
@@ -232,7 +232,7 @@ class ModulePlugin extends AbstractHelper
                 $this->instances[$moduleName] = array();
             }
 
-            $className = 'Modules\\' . $moduleName . '\\Plugin\\' . $pluginName;
+            $className = $moduleName . '\\Plugin\\' . $pluginName;
             $plugin    = new $className();
             if ($this->validatePlugin($plugin)) {
                 $this->instances[$moduleName][$pluginName] = $plugin;

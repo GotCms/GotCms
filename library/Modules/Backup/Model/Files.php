@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Backup\Model;
+namespace Backup\Model;
 
 use Gc\Core\Object;
 use ZipArchive;

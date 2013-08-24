@@ -33,7 +33,6 @@ return array(
     'view_manager' => array(
         'template_path_stack' => array(
             'module'  => __DIR__ . '/../views',
-            'modules' => GC_APPLICATION_PATH . '/library/Modules',
         ),
     ),
     'router' => array(
@@ -51,24 +50,11 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes'  => array(
-                    'edit' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/:m[/:mc[/:ma]]',
-                            'defaults' =>
-                            array (
-                                'module'     => 'module',
-                                'controller' => 'ModuleController',
-                                'action'     => 'edit',
-                            ),
-                        ),
-                    ),
                     'install' => array(
                         'type'    => 'Literal',
                         'options' => array(
                             'route'    => '/install',
-                            'defaults' =>
-                            array (
+                            'defaults' => array(
                                 'module'     => 'module',
                                 'controller' => 'ModuleController',
                                 'action'     => 'install',
@@ -79,8 +65,7 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             'route'    => '/uninstall/:id',
-                            'defaults' =>
-                            array (
+                            'defaults' => array(
                                 'module'     => 'module',
                                 'controller' => 'ModuleController',
                                 'action'     => 'uninstall',

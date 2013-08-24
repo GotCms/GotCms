@@ -181,7 +181,7 @@ INSERT INTO view VALUES (2, '2012-09-19 19:29:50', '2013-05-26 13:26:11.840543',
             <?php echo $this->partial(''blog-categories''); ?>
             <div class="9u skel-cell-mainContent">
                 <?php
-                $comment_table = new \Modules\Blog\Model\Comment();
+                $comment_table = new \Blog\Model\Comment();
 
                 $posts = $this->currentDocument->getAvailableChildren();
                 foreach($posts as $child)
@@ -283,7 +283,7 @@ INSERT INTO view VALUES (11, '2013-05-24 19:02:58.584746', '2013-05-26 13:26:11.
                     return;
                 }
 
-                $comment_table = new \Modules\Blog\Model\Comment();
+                $comment_table = new \Blog\Model\Comment();
                 $comments = $comment_table->getList($this->currentDocument->getId());
                 $nb_comments = count($comments);
                 ?>

@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\ActivityLog\Model\Event;
+namespace ActivityLog\Model\Event;
 
 use Gc\Db\AbstractTable;
 use Gc\User\Model as UserModel;
@@ -52,7 +52,7 @@ class Model extends AbstractTable
      *
      * @param array $array Data
      *
-     * @return \Modules\ActivityLog\Model\Event\Model
+     * @return \ActivityLog\Model\Event\Model
      */
     public static function fromArray(array $array)
     {
@@ -68,7 +68,7 @@ class Model extends AbstractTable
      *
      * @param integer $id Event id
      *
-     * @return boolean|\Modules\ActivityLog\Model\Event\Model
+     * @return boolean|\ActivityLog\Model\Event\Model
      */
     public static function fromId($id)
     {

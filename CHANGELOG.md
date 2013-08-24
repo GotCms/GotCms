@@ -2,6 +2,14 @@
 
 ##0.2.1 (-- --- 2013):
 - Force ssl not working ([https://github.com/GotCms/GotCms/issues/123](https://github.com/GotCms/GotCms/issues/123))
+- Allow routes in custom Modules ([https://github.com/GotCms/GotCms/issues/122](https://github.com/GotCms/GotCms/issues/122))
+
+### Potential Breakage
+All acl have been changed, and if you added new roles, you must redefined them after the update.
+If you added custom modules, be sure you have changed the namespace of them with removing "Modules\".
+More, you must add route name with the name of the module.
+Example:
+Module ActivityLog must have root activity-log
 
 ##0.2.0 (04 Aug 2013):
 - User without user acl can't log out ([https://github.com/GotCms/GotCms/issues/107](https://github.com/GotCms/GotCms/issues/107))

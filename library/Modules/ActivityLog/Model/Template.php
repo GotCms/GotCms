@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\ActivityLog\Model;
+namespace ActivityLog\Model;
 
 use Gc\Db\AbstractTable;
 use Gc\View\Renderer;

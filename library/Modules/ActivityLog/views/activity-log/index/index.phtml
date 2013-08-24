@@ -31,7 +31,7 @@ $paginator->setItemCountPerPage(50);
 $paginator->setCurrentPageNumber(empty($_GET['page']) ? 1 : (int)$_GET['page']);
 ?>
 
-<?php echo $this->paginationControl($paginator, 'Sliding', 'index/paginator.phtml', array('path' => $this->moduleUrl())); ?>
+<?php echo $this->paginationControl($paginator, 'Sliding', 'activity-log/index/paginator.phtml', array('path' => $this->url())); ?>
 <table class="table-list">
     <colgroup>
         <col width="10%">
@@ -51,7 +51,7 @@ $paginator->setCurrentPageNumber(empty($_GET['page']) ? 1 : (int)$_GET['page']);
                 <td class="a-center"><?php echo date('Y-m-d H:i:s', strtotime($event->getCreatedAt())); ?></td>
                 <td class="a-left"><?php echo $event->getContent(); ?></td>
                 <td class="a-center">
-                    <a href="<?php echo $this->moduleUrl('remove-event', 'index', array('id' => $event->getId())); ?>" class="delete-line">
+                    <a href="<?php echo $this->url('module/activity-log/remove-event', array('id' => $event->getId())); ?>" class="delete-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>

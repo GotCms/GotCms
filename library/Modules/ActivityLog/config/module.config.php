@@ -26,9 +26,43 @@
  */
 
 return array(
+    'controllers' => array(
+        'invokables' => array(
+            'ActivityLogController' => 'ActivityLog\Controller\IndexController',
+        ),
+    ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'activitylog' => __DIR__ . '/../views',
+            'activity-log' => __DIR__ . '/../views',
+        ),
+    ),
+    'router' => array(
+        'routes' => array(
+            'activity-log' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route' => '/activity-log',
+                    'defaults' => array(
+                        'module'     =>'ActivityLog',
+                        'controller' => 'ActivityLogController',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'remove-event' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route' => '/remove-event/:id',
+                            'defaults' => array(
+                                'module'     =>'ActivityLog',
+                                'controller' => 'ActivityLogController',
+                                'action'     => 'remove-event',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
 );

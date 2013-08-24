@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 ?>
-<form id="comment-post-form" class="simple-form" action="<?php echo $this->moduleUrl('document-comment', 'index', array('id' => $document->getId())); ?>" method="post">
+<form id="comment-post-form" class="simple-form" action="<?php echo $this->url('module/blog/document-comment', array('id' => $document->getId())); ?>" method="post">
     <table class="table-list">
         <thead>
             <tr>

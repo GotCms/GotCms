@@ -24,10 +24,10 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Modules\ActivityLog\Model;
+namespace ActivityLog\Model;
 
 use Gc\User\Model as UserModel;
-use Modules\ActivityLog\Module;
+use ActivityLog\Module;
 use Zend\EventManager\Event;
 
 /**

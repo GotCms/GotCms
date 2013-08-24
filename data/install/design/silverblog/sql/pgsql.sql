@@ -171,7 +171,7 @@ INSERT INTO view VALUES (11, '2013-05-24 19:02:58.584746', '2013-06-02 12:22:18.
                     return;
                 }
 
-                $comment_table = new \Modules\Blog\Model\Comment();
+                $comment_table = new \Blog\Model\Comment();
                 $comments = $comment_table->getList($this->currentDocument->getId());
                 $nb_comments = count($comments);
                 ?>
@@ -228,7 +228,7 @@ INSERT INTO view VALUES (1, '2012-09-19 19:29:04', '2013-06-02 12:22:18.410393',
 <div id="leftcontainer">
     <h2 class="mainheading">Latest from the blog</h2>
     <?php
-    $comment_table = new \Modules\Blog\Model\Comment();
+    $comment_table = new \Blog\Model\Comment();
     $posts = $this->currentDocument->getAvailableChildren();
     foreach ($posts as $child) {
         $children = $child->getChildren();

@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Backup\Model\Database;
+namespace Backup\Model\Database;
 
 use Gc\Db\AbstractTable;
 use Gc\Document\Model as DocumentModel;

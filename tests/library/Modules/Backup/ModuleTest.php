@@ -23,7 +23,7 @@
  * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link     http://www.got-cms.com
  */
-namespace Modules\Backup;
+namespace Backup;
 
 use Gc\Registry;
 

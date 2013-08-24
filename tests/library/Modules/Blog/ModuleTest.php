@@ -24,7 +24,7 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Modules\Blog;
+namespace Blog;
 
 use Gc\Registry;
 

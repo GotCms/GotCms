@@ -25,10 +25,10 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Blog\Plugin;
+namespace Blog\Plugin;
 
 use Gc\Module\AbstractPlugin;
-use Modules\Blog;
+use Blog;
 
 /**
  * Blog comment table
@@ -42,7 +42,7 @@ class CommentForm extends AbstractPlugin
     /**
      * Form
      *
-     * @var \Modules\Blog\Form\Comment
+     * @var \Blog\Form\Comment
      */
     protected $form;
 
@@ -82,7 +82,7 @@ class CommentForm extends AbstractPlugin
     /**
      * Set form
      *
-     * @return \Modules\Blog\Plugin\Form
+     * @return \Blog\Plugin\Form
      */
     public function getForm()
     {

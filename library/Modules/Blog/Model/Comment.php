@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\Blog\Model;
+namespace Blog\Model;
 
 use Gc\Db\AbstractTable;
 use Gc\Document\Model as DocumentModel;

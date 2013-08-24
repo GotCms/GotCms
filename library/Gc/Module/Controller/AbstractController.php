@@ -27,9 +27,7 @@
 
 namespace Gc\Module\Controller;
 
-use Zend\Stdlib\RequestInterface as Request;
-use Zend\Stdlib\ResponseInterface as Response;
-use Zend\Mvc\Controller\AbstractActionController;
+use Gc\Mvc\Controller\Action;
 
 /**
  * Abstract module controller
@@ -38,19 +36,20 @@ use Zend\Mvc\Controller\AbstractActionController;
  * @package    Library
  * @subpackage Module\Controller
  */
-abstract class AbstractController extends AbstractActionController
+abstract class AbstractController extends Action
 {
     /**
-     * Construct controller with request and response
-     *
-     * @param Request  $request  Request
-     * @param Response $response Response
+     * Constructor initiliaze module menu
      *
      * @return void
      */
-    public function __construct(Request $request, Response $response)
+    protected function construct()
     {
-        $this->request  = $request;
-        $this->response = $response;
+        $result = parent::construct();
+        if (!empty($result)) {
+            return $result;
+        }
+
+        $this->layout()->module = 'module';
     }
 }

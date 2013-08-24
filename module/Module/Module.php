@@ -27,6 +27,9 @@
 namespace Module;
 
 use Gc\Mvc;
+use Zend\EventManager\EventInterface;
+use Zend\Filter;
+use Zend\Mvc\MvcEvent;
 
 /**
  * Module Statistics.
@@ -50,4 +53,47 @@ class Module extends Mvc\Module
      * @var string
      */
     protected $namespace = __NAMESPACE__;
+
+    /**
+     * On boostrap event
+     *
+     * @param EventInterface $event Event
+     *
+     * @return void
+     */
+    public function onBootstrap(EventInterface $event)
+    {
+        $application = $event->getApplication();
+        $application->getEventManager()->attach(
+            MvcEvent::EVENT_DISPATCH,
+            array($this, 'loadMenu'),
+            -10
+        );
+    }
+
+    /**
+     * Load menu if module has view with name "menu.phtml"
+     *
+     * @param EventInterface $event Event
+     *
+     * @return void
+     */
+    public function loadMenu(EventInterface $event)
+    {
+        $filter = new Filter\Word\CamelCaseToSeparator;
+        $filter->setSeparator('-');
+        $filterChain = new Filter\FilterChain();
+        $filterChain->attach($filter)
+            ->attach(new Filter\StringToLower());
+        $template = $filterChain->filter($event->getRouteMatch()->getParam('module')) . '/menu';
+
+        $resolver = $event
+            ->getApplication()
+            ->getServiceManager()
+            ->get('Zend\View\Resolver\TemplatePathStack');
+
+        if (false !== $resolver->resolve($template)) {
+            $event->getTarget()->layout()->setVariable('moduleMenu', $template);
+        }
+    }
 }

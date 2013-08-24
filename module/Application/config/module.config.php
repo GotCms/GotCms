@@ -114,7 +114,6 @@ return array(
             'document'          => 'Gc\View\Helper\Document',
             'formCheckbox'      => 'Gc\View\Helper\FormCheckbox',
             'formMultiCheckbox' => 'Gc\View\Helper\FormMultiCheckbox',
-            'moduleUrl'         => 'Gc\View\Helper\ModuleUrl',
             'partial'           => 'Gc\View\Helper\Partial',
             'tools'             => 'Gc\View\Helper\Tools',
             'modulePlugin'      => 'Gc\View\Helper\ModulePlugin',

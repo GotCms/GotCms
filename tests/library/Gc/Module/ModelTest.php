@@ -205,7 +205,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testUnInstallWithInvalidData()
     {
         $modules = Registry::get('Application')->getServiceManager()->get('CustomModules');
-        $this->assertFalse(Model::uninstall($modules->getModule('Modules\Test'), Model::fromName('Test')));
+        $this->assertFalse(Model::uninstall($modules->getModule('Test'), Model::fromName('Test')));
     }
 
     /**
@@ -216,8 +216,8 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testInstallAndUninstall()
     {
         $modules = Registry::get('Application')->getServiceManager()->get('CustomModules');
-        Model::uninstall($modules->getModule('Modules\Blog'), Model::fromName('Blog'));
+        Model::uninstall($modules->getModule('Blog'), Model::fromName('Blog'));
         $this->assertInternalType('integer', (int) Model::install($modules, 'Blog'));
-        $this->assertTrue(Model::uninstall($modules->getModule('Modules\Blog'), Model::fromName('Blog')));
+        $this->assertTrue(Model::uninstall($modules->getModule('Blog'), Model::fromName('Blog')));
     }
 }

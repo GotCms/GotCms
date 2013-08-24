@@ -24,9 +24,9 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Modules\ActivityLog\Model\Event;
+namespace ActivityLog\Model\Event;
 
-use Modules\ActivityLog\Module;
+use ActivityLog\Module;
 use Gc\User\Model as UserModel;
 use Gc\Registry;
 
@@ -82,7 +82,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromArray()
     {
-        $this->assertInstanceOf('Modules\ActivityLog\Model\Event\Model', $this->object->fromArray(array()));
+        $this->assertInstanceOf('ActivityLog\Model\Event\Model', $this->object->fromArray(array()));
     }
 
     /**
@@ -158,7 +158,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         $this->object->setContent('test');
         $this->object->setTemplateId(1);
         $this->object->save();
-        $this->assertInstanceOf('Modules\ActivityLog\Model\Event\Model', $this->object->fromId(1));
+        $this->assertInstanceOf('ActivityLog\Model\Event\Model', $this->object->fromId(1));
         $this->object->delete();
     }
 

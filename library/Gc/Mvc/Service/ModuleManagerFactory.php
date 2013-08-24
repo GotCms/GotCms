@@ -34,6 +34,8 @@ use Zend\ModuleManager\ModuleManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+use Zend\Loader\AutoloaderFactory;
+
 /**
  * Create modules via service
  *
@@ -63,9 +65,17 @@ class ModuleManagerFactory implements FactoryInterface
         $moduleCollection = new ModuleCollection();
         $modules          = $moduleCollection->getModules();
         $array            = array();
+        $autoloader       = AutoloaderFactory::getRegisteredAutoloader(AutoloaderFactory::STANDARD_AUTOLOADER);
+
         foreach ($modules as $module) {
-            $array[] = 'Modules\\' . $module->getName();
+            $array[] = $module->getName();
+            $autoloader->registerNamespace(
+                $module->getName(),
+                GC_APPLICATION_PATH . '/library/Modules/' . $module->getName()
+            );
         }
+
+        $autoloader->register();
 
         $application   = $serviceLocator->get('Application');
         $configuration = $serviceLocator->get('ApplicationConfig');
@@ -148,16 +158,23 @@ class ModuleManagerFactory implements FactoryInterface
         $moduleManager->getEventManager()->attachAggregate($serviceListener);
         $moduleManager->loadModules();
 
+
         $config = $moduleManager->getEvent()->getConfigListener()->getMergedConfig(false);
+        if (isset($config['router']['routes'])) {
+            $router = $serviceLocator->get('Router');
+            $routes = isset($config['router']['routes']) ? $config['router']['routes'] : array();
+            $router->getRoute('module')->addRoutes($routes);
+        }
+
         if (is_array($config) && isset($config['view_manager'])) {
             $templatePathStack = $serviceLocator->get('ViewTemplatePathStack');
-            $config            = $config['view_manager'];
-            if (is_array($config)) {
-                if (isset($config['template_path_stack'])) {
-                    $templatePathStack->addPaths($config['template_path_stack']);
+            $viewManagerConfig = $config['view_manager'];
+            if (is_array($viewManagerConfig)) {
+                if (isset($viewManagerConfig['template_path_stack'])) {
+                    $templatePathStack->addPaths($viewManagerConfig['template_path_stack']);
                 }
-                if (isset($config['default_template_suffix'])) {
-                    $templatePathStack->setDefaultSuffix($config['default_template_suffix']);
+                if (isset($viewManagerConfig['default_template_suffix'])) {
+                    $templatePathStack->setDefaultSuffix($viewManagerConfig['default_template_suffix']);
                 }
             }
         }

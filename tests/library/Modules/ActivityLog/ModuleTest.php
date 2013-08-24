@@ -24,7 +24,7 @@
  * @link     http://www.got-cms.com
  */
 
-namespace Modules\ActivityLog;
+namespace ActivityLog;
 
 use Gc\Event\StaticEventManager;
 use Gc\Registry;

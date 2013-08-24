@@ -25,10 +25,10 @@
  * @link       http://www.got-cms.com
  */
 
-namespace Modules\ActivityLog\Controller;
+namespace ActivityLog\Controller;
 
 use Gc\Module\Controller\AbstractController;
-use Modules\ActivityLog\Model\Event;
+use ActivityLog\Model\Event;
 use Zend\View\Model\JsonModel;
 
 /**
@@ -60,7 +60,7 @@ class IndexController extends AbstractController
      */
     public function removeEventAction()
     {
-        $model   = Event\Model::fromId($this->getRequest()->getQuery()->get('id'));
+        $model   = Event\Model::fromId($this->params()->fromRoute('id'));
         $success = false;
         if (!empty($model)) {
             $model->delete();
