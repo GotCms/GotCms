@@ -15,6 +15,6 @@
 
 /* SITE */
   Standards: HTML5, CSS3
-  Components: Modernizr 2.6.1, CkEditor 3.6.3, jQuery 1.10.2, jQuery Ui 1.10.3, jQuery DateTimePicker, CodeMirror 3.16, elFinder, Jcrop, Zend Framework 2.2.3
+  Components: Modernizr 2.6.1, CkEditor 3.6.3, jQuery 1.10.2, jQuery Ui 1.10.3, jQuery DateTimePicker, CodeMirror 3.16, elFinder, Jcrop, Zend Framework 2.2.4
   Software: PostgreSQL, MySQL, PHP5, Apache2
 
