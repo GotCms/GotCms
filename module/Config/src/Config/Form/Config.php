@@ -324,67 +324,6 @@ class Config extends AbstractForm
 
         $this->add($cacheFieldset);
 
-        //Web settings
-        $webFieldset = new Fieldset('web');
-        $webFieldset->setLabel('Web');
-
-        $forceBackendSsl = new Element\Checkbox('force_backend_ssl');
-        $forceBackendSsl->setAttribute('label', 'Force backend SSL')
-            ->setAttribute('class', 'input-checkbox')
-            ->setAttribute('id', 'force-backend-ssl');
-        $webFieldset->add($forceBackendSsl);
-
-        $this->getInputFilter()->add(
-            array(
-                'name' => 'force_backend_ssl',
-                'required' => false,
-            ),
-            'force_backend_ssl'
-        );
-
-        $forceFrontendSsl = new Element\Checkbox('force_frontend_ssl');
-        $forceFrontendSsl->setAttribute('label', 'Force frontend SSL')
-            ->setAttribute('class', 'input-checkbox')
-            ->setAttribute('id', 'force-frontend-ssl');
-        $webFieldset->add($forceFrontendSsl);
-
-        $this->getInputFilter()->add(
-            array(
-                'name' => 'force_frontend_ssl',
-                'required' => false,
-            ),
-            'force_frontend_ssl'
-        );
-
-        $pathFields = array(
-            'Unsecure backend base path'  => 'unsecure_backend_base_path',
-            'Unsecure frontend base path' => 'unsecure_frontend_base_path',
-            'Secure backend base path' => 'secure_backend_base_path',
-            'Secure frontend base path' => 'secure_frontend_base_path',
-            'Unsecure cdn base path' => 'unsecure_cdn_base_path',
-            'Secure cdn base path' => 'secure_cdn_base_path',
-        );
-
-        foreach ($pathFields as $label => $identifier) {
-            $field = new Element\Text($identifier);
-            $field->setAttribute('label', $label)
-                ->setAttribute('class', 'input-text');
-            $webFieldset->add($field);
-
-            $this->getInputFilter()->add(
-                array(
-                    'name' => $identifier,
-                    'required' => false,
-                    'validators' => array(
-                        array('name' => 'uri'),
-                    ),
-                ),
-                $identifier
-            );
-        }
-
-        $this->add($webFieldset);
-
         return $this;
     }
 
@@ -455,6 +394,67 @@ class Config extends AbstractForm
         );
 
         $this->add($mailFieldset);
+
+        //Web settings
+        $webFieldset = new Fieldset('web');
+        $webFieldset->setLabel('Web');
+
+        $forceBackendSsl = new Element\Checkbox('force_backend_ssl');
+        $forceBackendSsl->setAttribute('label', 'Force backend SSL')
+            ->setAttribute('class', 'input-checkbox')
+            ->setAttribute('id', 'force-backend-ssl');
+        $webFieldset->add($forceBackendSsl);
+
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'force_backend_ssl',
+                'required' => false,
+            ),
+            'force_backend_ssl'
+        );
+
+        $forceFrontendSsl = new Element\Checkbox('force_frontend_ssl');
+        $forceFrontendSsl->setAttribute('label', 'Force frontend SSL')
+            ->setAttribute('class', 'input-checkbox')
+            ->setAttribute('id', 'force-frontend-ssl');
+        $webFieldset->add($forceFrontendSsl);
+
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'force_frontend_ssl',
+                'required' => false,
+            ),
+            'force_frontend_ssl'
+        );
+
+        $pathFields = array(
+            'Unsecure backend base path'  => 'unsecure_backend_base_path',
+            'Unsecure frontend base path' => 'unsecure_frontend_base_path',
+            'Secure backend base path' => 'secure_backend_base_path',
+            'Secure frontend base path' => 'secure_frontend_base_path',
+            'Unsecure cdn base path' => 'unsecure_cdn_base_path',
+            'Secure cdn base path' => 'secure_cdn_base_path',
+        );
+
+        foreach ($pathFields as $label => $identifier) {
+            $field = new Element\Text($identifier);
+            $field->setAttribute('label', $label)
+                ->setAttribute('class', 'input-text');
+            $webFieldset->add($field);
+
+            $this->getInputFilter()->add(
+                array(
+                    'name' => $identifier,
+                    'required' => false,
+                    'validators' => array(
+                        array('name' => 'uri'),
+                    ),
+                ),
+                $identifier
+            );
+        }
+
+        $this->add($webFieldset);
 
         return $this;
     }
