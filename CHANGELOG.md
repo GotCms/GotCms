@@ -5,6 +5,7 @@
 - Allow routes in custom Modules ([https://github.com/GotCms/GotCms/issues/122](https://github.com/GotCms/GotCms/issues/122))
 - Update jQuery, jQuery ui and CodeMirror ([https://github.com/GotCms/GotCms/issues/125](https://github.com/GotCms/GotCms/issues/125))
 - Update to Zend Framework 2.2.4 ([https://github.com/GotCms/GotCms/issues/126](https://github.com/GotCms/GotCms/issues/126))
+- Add admin helper ([https://github.com/GotCms/GotCms/issues/127](https://github.com/GotCms/GotCms/issues/127))
 
 ### Potential Breakage
 All acl have been changed, and if you added new roles, you must redefined them after the update.

@@ -139,12 +139,9 @@ class Action extends AbstractActionController
                     );
                 }
             } else {
-                $userModel = $auth->getIdentity();
                 if (!in_array($routeName, array('config/user/forbidden', 'config/user/logout'))) {
-                    $this->checkAcl($userModel);
+                    $this->checkAcl($auth->getIdentity());
                 }
-
-                $this->layout()->adminUser = $userModel;
             }
         }
 

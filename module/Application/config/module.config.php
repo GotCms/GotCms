@@ -88,6 +88,11 @@ return array(
                     $pm->getServiceLocator()->get('auth')->getIdentity()
                 );
             },
+            'admin'        => function ($pm) {
+                return new Helper\Admin(
+                    $pm->getServiceLocator()->get('auth')
+                );
+            },
             'cdn'        => function ($pm) {
                 return new Helper\Cdn(
                     $pm->getServiceLocator()->get('request'),

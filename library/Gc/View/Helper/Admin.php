@@ -27,8 +27,8 @@
 
 namespace Gc\View\Helper;
 
-use Gc\User\Acl as UserAcl;
 use Gc\User\Model as UserModel;
+use Zend\Authentication\AuthenticationService;
 use Zend\View\Helper\AbstractHelper;
 
 /**
@@ -39,22 +39,8 @@ use Zend\View\Helper\AbstractHelper;
  * @subpackage View\Helper
  * @example In view: $this->cdn('path/to/file');
  */
-class Acl extends AbstractHelper
+class Admin extends AbstractHelper
 {
-    /**
-     * User Acl
-     *
-     * @var UserAcl
-     */
-    protected $acl;
-
-    /**
-     * Role name
-     *
-     * @var string
-     */
-    protected $roleName;
-
     /**
      * Constructor
      *
@@ -62,10 +48,9 @@ class Acl extends AbstractHelper
      *
      * @return void
      */
-    public function __construct(UserModel $user)
+    public function __construct(AuthenticationService $auth)
     {
-        $this->acl      = $user->getAcl();
-        $this->roleName = $user->getRole()->getName();
+        $this->auth = $auth;
     }
 
     /**
@@ -74,10 +59,14 @@ class Acl extends AbstractHelper
      * @param string $resource   Resource name
      * @param string $permission Permission name
      *
-     * @return boolean
+     * @return UserModel|boolean
      */
-    public function __invoke($resource, $permission)
+    public function __invoke()
     {
-        return $this->acl->isAllowed($this->roleName, $resource, $permission);
+        if ($this->auth->hasIdentity()) {
+            return $this->auth->getIdentity();
+        }
+
+        return false;
     }
 }

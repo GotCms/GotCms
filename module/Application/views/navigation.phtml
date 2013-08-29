@@ -25,9 +25,9 @@
  * @link        http://www.got-cms.com
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
-if(!empty($this->adminUser))
+if($this->admin())
 {
-    $permissions = $this->adminUser->getRole()->getUserPermissions();
+    $permissions = $this->admin()->getRole()->getUserPermissions();
 }
 ?>
 <div class="part<?php if ($this->active == 'admin'): ?> active<?php endif; ?>">
@@ -100,12 +100,12 @@ if(!empty($this->adminUser))
     </div>
 <?php endif; ?>
 
-<?php if (!empty($this->adminUser)): ?>
+<?php if ($this->admin()): ?>
     <div id="logout" class="part">
         <a href="<?php echo $this->url('config/user/logout'); ?>">
             <img src="<?php echo $this->cdnBackend('backend/images/icones/logout.png'); ?>" width="40" height="40" class="icone" alt="<?php echo $this->escapeHtml($this->translate('Log out')); ?>">
             <p>
-                <?php echo $this->escapeHtml(sprintf($this->translate('Welcome %s'), $this->adminUser->getName())); ?><br>
+                <?php echo $this->escapeHtml(sprintf($this->translate('Welcome %s'), $this->admin()->getName())); ?><br>
                 <?php echo $this->escapeHtml($this->translate('Click to logout')); ?>
             </p>
         </a>

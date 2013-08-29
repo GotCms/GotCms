@@ -76,7 +76,7 @@
 </head>
 <body<?php if (!empty($this->module)): ?> id="module-<?php echo $this->escapeHtml($this->module); ?>"<?php endif; ?>>
     <header class="gradient-black">
-        <?php echo $this->partial('navigation.phtml', array('active' => $this->module, 'adminUser' => $this->adminUser)); ?>
+        <?php echo $this->partial('navigation.phtml', array('active' => $this->module)); ?>
     </header>
 
     <div id="main">
