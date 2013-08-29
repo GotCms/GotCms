@@ -14,4 +14,3 @@
 .wrapper-dropdown-select.active {border-radius: 5px 5px 0 0;background: #000;box-shadow: none;border-bottom: none;color: white;}
 .wrapper-dropdown-select.active:after {border-color: #C2C2C2 transparent;}
 .wrapper-dropdown-select.active .dropdown {border-bottom: 1px solid rgba(0,0,0,0.2);max-height: 150px;overflow: auto;}
-

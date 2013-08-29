@@ -205,8 +205,6 @@ footer a:hover {text-decoration:underline;}
 .sortable-placeholder{border-width:1px;border-style:dashed;margin-bottom:20px;}
 
 #import-tab {margin:10px;}
-
-#properties-tabs-content dd {float:left;}
 #properties-tabs-content dt {float:left;clear:both;height:35px;line-height:35px;}
 #properties-tabs-content .input-checkbox{margin-top: 7px;}
 #datatype-infos a {color:#000000;}
@@ -240,6 +238,8 @@ footer a:hover {text-decoration:underline;}
 
 #role-list h3,
 #role-list h2{cursor:pointer;}
+
+.ui-accordion .ui-accordion-content {overflow:visible;}
 
 
 @media screen and (max-width: 1420px) {
