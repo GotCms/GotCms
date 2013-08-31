@@ -132,25 +132,30 @@ class Install extends AbstractForm
         $driver = new Element\Select('driver');
         $driver->setValueOptions($data)
             ->setAttribute('label', 'Driver')
+            ->setAttribute('id', 'driver')
             ->setAttribute('class', 'input-select');
 
         $hostname = new Element\Text('hostname');
         $hostname->setValue('localhost')
             ->setAttribute('class', 'input-text')
+            ->setAttribute('id', 'hostname')
             ->setAttribute('label', 'Hostname');
 
         $username = new Element\Text('username');
         $username->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text')
+            ->setAttribute('id', 'username')
             ->setAttribute('label', 'Username');
 
         $password = new Element\Password('password');
-        $password->setAttribute('class', 'input-text');
-        $password->setAttribute('label', 'Password');
+        $password->setAttribute('class', 'input-text')
+            ->setAttribute('id', 'password')
+            ->setAttribute('label', 'Password');
 
         $dbname = new Element\Text('dbname');
-        $dbname->setAttribute('class', 'input-text');
-        $dbname->setAttribute('label', 'Db Name');
+        $dbname->setAttribute('class', 'input-text')
+            ->setAttribute('id', 'dbname')
+            ->setAttribute('label', 'Db Name');
 
         $this->add($driver);
         $this->add($hostname);
@@ -221,6 +226,7 @@ class Install extends AbstractForm
     {
         $siteName = new Element\Text('site_name');
         $siteName->setAttribute('label', 'Site name')
+            ->setAttribute('id', 'site_name')
             ->setAttribute('class', 'input-text');
 
         $siteIsOffline = new Element\Checkbox('site_is_offline');
@@ -232,28 +238,34 @@ class Install extends AbstractForm
         $adminEmail = new Element\Text('admin_email');
         $adminEmail->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text')
+            ->setAttribute('id', 'admin_email')
             ->setAttribute('label', 'Email');
 
         $adminFirstname = new Element\Text('admin_firstname');
         $adminFirstname->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text')
+            ->setAttribute('id', 'admin_firstname')
             ->setAttribute('label', 'Firstname');
 
         $adminLastname = new Element\Text('admin_lastname');
         $adminLastname->setAttribute('type', 'text')
             ->setAttribute('class', 'input-text')
+            ->setAttribute('id', 'admin_lastname')
             ->setAttribute('label', 'Lastname');
 
         $adminLogin = new Element\Text('admin_login');
         $adminLogin->setAttribute('label', 'Login')
+            ->setAttribute('id', 'admin_login')
             ->setAttribute('class', 'input-text');
 
         $adminPassword = new Element\Password('admin_password');
         $adminPassword->setAttribute('label', 'Admin password')
+            ->setAttribute('id', 'admin_password')
             ->setAttribute('class', 'input-text');
 
         $adminPasswordConfirm = new Element\Password('admin_passowrd_confirm');
         $adminPasswordConfirm->setAttribute('label', 'Confirm admin password')
+            ->setAttribute('id', 'admin_passowrd_confirm')
             ->setAttribute('class', 'input-text');
 
         $path          = GC_APPLICATION_PATH . '/data/install/design/';

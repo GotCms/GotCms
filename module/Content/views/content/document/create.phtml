@@ -33,7 +33,7 @@
         <div>
             <?php $label = $element->getAttribute('label'); ?>
             <?php if (!empty($label)): ?>
-                <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+                <label class="required" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
             <?php endif; ?>
 
             <?php echo $this->formElement($element); ?>

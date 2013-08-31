@@ -32,7 +32,7 @@
 <?php $elements = $this->form->getElements(); ?>
 <?php foreach ($elements as $element): ?>
     <div>
-        <label class="required" for="name"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+        <label class="required" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
         <?php echo $this->formElement($element); ?>
         <?php echo $this->formElementErrors($element); ?>

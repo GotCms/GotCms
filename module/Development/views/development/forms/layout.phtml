@@ -29,25 +29,25 @@
 ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <div>
-        <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+        <label class="required" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
 
         <?php echo $this->formElementErrors($this->form->get('name')); ?>
     </div>
     <div>
-        <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
+        <label class="required" for="identifier"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('identifier')); ?>" id="identifier" name="identifier">
 
         <?php echo $this->formElementErrors($this->form->get('identifier')); ?>
     </div>
     <div>
-        <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+        <label class="required" for="description"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
         <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('description')); ?>" id="description" name="description">
 
         <?php echo $this->formElementErrors($this->form->get('description')); ?>
     </div>
     <div>
-        <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Content')); ?></label>
+        <label class="required" for="layout-content"><?php echo $this->escapeHtml($this->translate('Content')); ?></label>
         <textarea cols="80" rows="24" id="layout-content" name="content"><?php echo $this->escapeHtml($this->form->getValue('content')); ?></textarea>
 
         <?php echo $this->formElementErrors($this->form->get('content')); ?>
