@@ -1,5 +1,8 @@
 # CHANGELOG
 
+##1.0.0 (-- --- 2013):
+- Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))
+
 ##0.2.1 (01 Sep 2013):
 - Force ssl not working ([https://github.com/GotCms/GotCms/issues/123](https://github.com/GotCms/GotCms/issues/123))
 - Allow routes in custom Modules ([https://github.com/GotCms/GotCms/issues/122](https://github.com/GotCms/GotCms/issues/122))
