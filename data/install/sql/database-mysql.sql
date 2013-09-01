@@ -156,7 +156,7 @@ CREATE TABLE `user_acl_role` (
     `description` VARCHAR(255),
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`name`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `user_acl` (
     `id` INT NOT NULL AUTO_INCREMENT,
@@ -224,7 +224,7 @@ CREATE TABLE `core_config_data` (
     `value` VARCHAR(255),
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`identifier`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `core_session` (
     `id` VARCHAR(255) NOT NULL,
