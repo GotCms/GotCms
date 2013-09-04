@@ -122,7 +122,7 @@
                 <span>
                     <?php echo $this->escapeHtml(sprintf($this->translate('You use GotCms %s'), $this->version)); ?>
                     <?php if (!$this->versionIsLatest): ?>
-                        <a class="button" href="<?php echo $this->url(config/cms-update); ?>"><?php echo $this->escapeHtml(sprintf($this->translate('Update to GotCms %s'), $this->versionLatest)); ?></a>
+                        <a class="button" href="<?php echo $this->url('config/cms-update'); ?>"><?php echo $this->escapeHtml(sprintf($this->translate('Update to GotCms %s'), $this->versionLatest)); ?></a>
                     <?php endif; ?>
                 </span>
             </div>
