@@ -545,7 +545,7 @@ var Gc = (function($)
                                 return true;
 
                             case 'delete':
-                                $this.showDialogConfirm($url, $element.parent());
+                                $this.showDeleteDialog($url, $element.parent());
                                 return true;
 
                             case 'quit':
@@ -579,36 +579,43 @@ var Gc = (function($)
             });
         },
 
-        showDialogConfirm: function($url, $element_to_remove)
+        showDeleteDialog: function($url, $element_to_remove)
         {
-            var $buttons = {};
-            $buttons[Translator.translate('Confirm')] = function() {
-                $.get($url, function(data) {
-                    if(data.success === true) {
-                        $element_to_remove.remove();
-                    }
-                });
-
-                $(this).dialog('close');
-
-                return true;
-            };
-
-            $buttons[Translator.translate('Cancel')] = function() {
-                $(this).dialog('close');
-
-                return false;
-            };
-
-            $('#dialog').attr('title', Translator.translate('Delete element')).dialog({
-                bgiframe        : false,
-                resizable       : false,
-                modal           : true,
-                overlay         : {
+            $('#dialog').dialog({
+                bgiframe :  false,
+                resizable : false,
+                modal :     true,
+                title:      '<div class="widget-header widget-header-small"><h4><i class="glyphicon glyphicon-warning-sign"></i>' + Translator.translate('Delete element') + '</h4></div>',
+                overlay     : {
                     backgroundColor: '#000',
                     opacity: 0.5
                 },
-                buttons         :$buttons
+                buttons: [
+                    {
+                        'text':  Translator.translate('Cancel'),
+                        'class': "btn btn-warning",
+                        'click': function() {
+                            $(this).dialog('close');
+
+                            return false;
+                        }
+                    },
+                    {
+                        'text':  Translator.translate('Confirm'),
+                        'class': "btn btn-danger btn-mini",
+                        'click': function() {
+                            $.get($url, function(data) {
+                                if(data.success === true) {
+                                    $element_to_remove.remove();
+                                }
+                            });
+
+                            $(this).dialog('close');
+
+                            return true;
+                        }
+                    }
+                ]
             });
         },
 
@@ -856,7 +863,7 @@ var Gc = (function($)
             });
 
             $('.delete-line').on('click', function() {
-                $this.showDialogConfirm($(this).attr('href'), $(this).parent().parent());
+                $this.showDeleteDialog($(this).attr('href'), $(this).parent().parent());
                 return false;
             });
         },
