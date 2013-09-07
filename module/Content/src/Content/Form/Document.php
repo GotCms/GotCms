@@ -102,12 +102,12 @@ class Document extends AbstractForm
         $name = new Element\Text('document-name');
         $name->setAttribute('label', 'Name')
             ->setAttribute('id', 'name')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
 
         $urlKey = new Element\Text('document-url_key');
         $urlKey->setAttribute('label', 'Url key')
             ->setAttribute('id', 'url_key')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
 
         $documentType = new Element\Select('document_type');
         $documentType->setAttribute('label', 'Document Type')

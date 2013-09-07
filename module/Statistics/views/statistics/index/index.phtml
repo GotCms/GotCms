@@ -25,8 +25,9 @@
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 ?>
-<h1><?php echo $this->escapeHtml($this->translate('Statistics')); ?></h1>
-
+<div class="page-header">
+    <h1><?php echo $this->escapeHtml($this->translate('Statistics')); ?></h1>
+</div>
 <div class="tabs">
     <ul>
         <?php foreach ($this->groups as $type => $data): ?>

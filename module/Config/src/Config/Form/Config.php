@@ -69,7 +69,7 @@ class Config extends AbstractForm
         $name = new Element\Text('site_name');
         $name->setAttribute('label', 'Site name')
             ->setAttribute('id', 'site_name')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
         $generalFieldset->add($name);
 
         $this->getInputFilter()->add(
@@ -163,7 +163,7 @@ class Config extends AbstractForm
         $cookieDomain = new Element\Text('cookie_domain');
         $cookieDomain->setAttribute('label', 'Cookie domain')
             ->setAttribute('id', 'cookie_domain')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
         $sessionFieldset->add($cookieDomain);
 
         $this->getInputFilter()->add(
@@ -180,7 +180,7 @@ class Config extends AbstractForm
         $cookiePath = new Element\Text('cookie_path');
         $cookiePath->setAttribute('label', 'Cookie path')
             ->setAttribute('id', 'cookie_path')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
         $sessionFieldset->add($cookiePath);
 
         $this->getInputFilter()->add(
@@ -215,7 +215,7 @@ class Config extends AbstractForm
         $sessionPath = new Element\Text('session_path');
         $sessionPath->setAttribute('label', 'Session path')
             ->setAttribute('id', 'session_path')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
         $sessionFieldset->add($sessionPath);
 
         $this->getInputFilter()->add(
@@ -229,7 +229,7 @@ class Config extends AbstractForm
         $sessionLifetime = new Element\Text('session_lifetime');
         $sessionLifetime->setAttribute('label', 'Session lifetime')
             ->setAttribute('id', 'session_lifetime')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
         $sessionFieldset->add($sessionLifetime);
 
         $this->getInputFilter()->add(
@@ -320,7 +320,7 @@ class Config extends AbstractForm
         $cacheLifetime = new Element\Text('cache_lifetime');
         $cacheLifetime->setAttribute('label', 'Cache lifetime')
             ->setAttribute('id', 'cache_lifetime')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
         $cacheFieldset->add($cacheLifetime);
 
         $this->getInputFilter()->add(
@@ -378,7 +378,7 @@ class Config extends AbstractForm
         $mailFrom = new Element\Text('mail_from');
         $mailFrom->setAttribute('label', 'From E-mail')
             ->setAttribute('id', 'mail_from')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
         $mailFieldset->add($mailFrom);
 
         $this->getInputFilter()->add(
@@ -395,7 +395,7 @@ class Config extends AbstractForm
         $mailFromName = new Element\Text('mail_from_name');
         $mailFromName->setAttribute('label', 'From name')
             ->setAttribute('id', 'mail_from_name')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
         $mailFieldset->add($mailFromName);
 
         $this->getInputFilter()->add(
@@ -458,7 +458,7 @@ class Config extends AbstractForm
             $field = new Element\Text($identifier);
             $field->setAttribute('label', $label)
                 ->setAttribute('id', $identifier)
-                ->setAttribute('class', 'input-text');
+                ->setAttribute('class', 'form-control');
             $webFieldset->add($field);
 
             $this->getInputFilter()->add(

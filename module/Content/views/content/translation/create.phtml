@@ -28,7 +28,7 @@
 
 ?>
 <form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
-    <div>
+    <div class="form-group">
         <label for="source">
             <?php echo $this->escapeHtml($this->translate('Source')); ?>
         </label>
@@ -47,33 +47,29 @@
                 <tr>
                     <th><?php echo $this->escapeHtml($this->translate('Destination')); ?></th>
                     <th><?php echo $this->escapeHtml($this->translate('Locale')); ?></th>
-                    <th><?php echo $this->escapeHtml($this->translate('Add')); ?></th>
+                    <th><?php echo $this->escapeHtml($this->translate('Create')); ?></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        <div>
-                            <input class="input-text" type="text" name="destination[<?php echo $i; ?>]" size="73">
-                        </div>
+                        <input class="form-control" type="text" name="destination[<?php echo $i; ?>]" size="73">
                     </td>
                     <td>
-                        <div>
-                            <?php $locales = $this->form->get('locale')->getValueOptions(); ?>
-                            <select class="input-select" name="locale[<?php echo $i; ?>]">
-                                <?php foreach ($locales as $locale_value => $locale_label): ?>
-                                    <option value="<?php echo $this->escapeHtml($locale_value); ?>"><?php echo $this->escapeHtml($locale_label); ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                        <?php $locales = $this->form->get('locale')->getValueOptions(); ?>
+                        <select class="input-select" name="locale[<?php echo $i; ?>]">
+                            <?php foreach ($locales as $locale_value => $locale_label): ?>
+                                <option value="<?php echo $this->escapeHtml($locale_value); ?>"><?php echo $this->escapeHtml($locale_label); ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </td>
-                    <td><span class="button-add add-translate"><?php echo $this->escapeHtml($this->translate('Add')); ?></span></td>
+                    <td><span class="button-add add-translate"><?php echo $this->escapeHtml($this->translate('Create')); ?></span></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <input type="submit" class="input-submit" id="input-save" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
+    <input type="submit" class="btn btn-warning" id="input-save" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
 </form>
 
 <script type="text/javascript">

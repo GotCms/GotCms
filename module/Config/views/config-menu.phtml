@@ -27,52 +27,107 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+
+<ul class="nav nav-list">
 <?php if ($this->acl('settings', 'config')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing configuration')); ?> ::..</h2>
-
-    <ul>
-        <?php if ($this->acl('settings', 'config/general')): ?>
-            <li><a href="<?php echo $this->url('config/general'); ?>" title=""><?php echo $this->escapeHtml($this->translate('General')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('settings', 'config/system')): ?>
-            <li><a href="<?php echo $this->url('config/system'); ?>" title=""><?php echo $this->escapeHtml($this->translate('System')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('settings', 'config/server')): ?>
-            <li><a href="<?php echo $this->url('config/server'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Server')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('settings', 'config/update')): ?>
-            <li><a href="<?php echo $this->url('config/cms-update'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Update')); ?></a></li>
-        <?php endif; ?>
-    </ul>
+    <li>
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-book"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Configuration')); ?></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="submenu">
+            <?php if ($this->acl('settings', 'config/general')): ?>
+                <li>
+                    <a href="<?php echo $this->url('config/general'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('General')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if ($this->acl('settings', 'config/system')): ?>
+                <li>
+                    <a href="<?php echo $this->url('config/system'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('System')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if ($this->acl('settings', 'config/server')): ?>
+                <li>
+                    <a href="<?php echo $this->url('config/server'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Server')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if ($this->acl('settings', 'config/update')): ?>
+                <li>
+                    <a href="<?php echo $this->url('config/cms-update'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Update')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </li>
 <?php endif; ?>
 
 <?php if ($this->acl('settings', 'user')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Users')); ?> ::..</h2>
+    <li>
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-book"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Users')); ?></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="submenu">
+            <?php if ($this->acl('settings', 'user/create')): ?>
+                <li>
+                    <a href="<?php echo $this->url('config/user/create'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Create')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
 
-    <ul>
-        <?php if ($this->acl('settings', 'user/list')): ?>
-            <li><a href="<?php echo $this->url('config/user'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('settings', 'user/create')): ?>
-            <li><a href="<?php echo $this->url('config/user/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
-        <?php endif; ?>
-    </ul>
+            <?php if ($this->acl('settings', 'user/list')): ?>
+                <li>
+                    <a href="<?php echo $this->url('config/user'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('List')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </li>
 <?php endif; ?>
 
 <?php if ($this->acl('settings', 'role')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Roles')); ?> ::..</h2>
+    <li>
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-book"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Roles')); ?></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="submenu">
+            <?php if ($this->acl('settings', 'role/create')): ?>
+                <li>
+                    <a href="<?php echo $this->url('config/user/role/create'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Create')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
 
-    <ul>
-        <?php if ($this->acl('settings', 'role/list')): ?>
-            <li><a href="<?php echo $this->url('config/user/role'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('settings', 'role/create')): ?>
-            <li><a href="<?php echo $this->url('config/user/role/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Create')); ?></a></li>
-        <?php endif; ?>
-    </ul>
+            <?php if ($this->acl('settings', 'role/list')): ?>
+                <li>
+                    <a href="<?php echo $this->url('config/user/role'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('List')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </li>
 <?php endif; ?>
+</ul>

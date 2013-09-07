@@ -33,7 +33,7 @@
 <form class="hide" id="form-content" action="<?php echo $this->url('development/layout/upload'); ?>" method="post" enctype="multipart/form-data">
     <p><?php echo $this->escapeHtml($this->translate('Files as: identifier.phtml')); ?></p>
     <input type="file" name="upload[]" multiple="multiple">
-    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
+    <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
 </form>
 
 <table class="table-list clickable">

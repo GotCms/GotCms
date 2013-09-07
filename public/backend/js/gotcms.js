@@ -29,6 +29,7 @@ var Gc = (function($)
 
     $document.ready(function() {
         Gc.initialize();
+        Gc.initializeMenu();
         Gc.notification();
         if ($().dropDown !== undefined) {
             $('.input-select').dropDown();
@@ -39,6 +40,28 @@ var Gc = (function($)
         initialize: function()
         {
             this._options = new Hash();
+        },
+
+        initializeMenu: function() {
+            var $slideDuration = 600;
+            $(document).on('click', '.menu-toggle', function() {
+                var $parent = $(this).parent();
+                if (!$parent.hasClass('open')) {
+                    $(this).next('.submenu')
+                        .stop(true, true)
+                        .fadeIn({ duration: $slideDuration, queue: false })
+                        .slideDown($slideDuration, function() {
+                            $(this).parent().toggleClass('open');
+                        });
+                } else {
+                    $(this).next('.submenu')
+                        .stop(true, true)
+                        .fadeOut({ duration: $slideDuration, queue: false })
+                        .slideUp($slideDuration, function() {
+                            $(this).parent().toggleClass('open');
+                        });
+                }
+            });
         },
 
         setOption: function($key, $value)
@@ -759,7 +782,7 @@ var Gc = (function($)
                 connectWith: '.widget-column',
                 placeholder: 'sortable-placeholder',
                 helper: 'clone',
-                handle: 'h3',
+                handle: '.widget-header',
                 tolerance: 'pointer',
                 opacity: 0.4,
                 distance: 10,

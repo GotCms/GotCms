@@ -30,7 +30,7 @@
 
 <form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
     <?php $element = $this->form->get('module'); ?>
-    <div>
+    <div class="form-group">
         <label class="required" for="module"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
         <?php echo $this->formElement($element); ?>
@@ -46,7 +46,7 @@
         <?php endif; ?>
     </div>
 
-    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
+    <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
 </form>
 <script type="text/javascript">
     Gc.installModule();

@@ -69,16 +69,12 @@ return array(
         'doctype'                   => 'HTML5',
         'not_found_template'        => 'error/404',
         'exception_template'        => 'error/index',
-        'template_map' => array(
-            'layout/layout'     => __DIR__ . '/../views/layouts/layout.phtml',
-            'error/404'         => __DIR__ . '/../views/error/404.phtml',
-            'error/index'       => __DIR__ . '/../views/error/index.phtml',
-        ),
         'template_path_stack' => array(
             'application' => __DIR__ . '/../views',
         ),
-        'strategies' => array(
-            'ViewJsonStrategy',
+        'template_map' => array(
+            'error/404'     => __DIR__ . '/../views/error/404.phtml',
+            'error/index'   => __DIR__ . '/../views/error/index.phtml',
         ),
     ),
     'view_helpers' => array(

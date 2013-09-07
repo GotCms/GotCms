@@ -30,7 +30,7 @@
 <form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
     <?php $elements = $this->form->getElements(); ?>
     <?php foreach ($elements as $element): ?>
-        <div>
+        <div class="form-group">
             <?php $label = $element->getAttribute('label'); ?>
             <?php if (!empty($label)): ?>
                 <label class="required" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
@@ -39,7 +39,7 @@
             <?php echo $this->formElement($element); ?>
         </div>
     <?php endforeach; ?>
-    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
+    <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
 </form>
 <script type="text/javascript">
     jQuery('#tabs').tabs();

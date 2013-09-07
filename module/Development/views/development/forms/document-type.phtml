@@ -44,19 +44,19 @@
             <li><a href="#tabs-4"><?php echo $this->escapeHtml($this->translate('Tabs')); ?></a></li>
         </ul>
         <div id="tabs-1">
-            <div>
+            <div class="form-group">
                 <label for="infos-name" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-                <input class="input-text" type="text" name="infos[name]" id="infos-name" value="<?php echo $infos_form->get('name')->getValue(); ?>">
+                <input class="form-control" type="text" name="infos[name]" id="infos-name" value="<?php echo $infos_form->get('name')->getValue(); ?>">
 
                 <?php echo $this->formElementErrors($this->form->get('infos')->get('name')); ?>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="infos-description" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
-                <input class="input-text" type="text" name="infos[description]" id="infos-description" value="<?php echo $infos_form->get('description')->getValue(); ?>">
+                <input class="form-control" type="text" name="infos[description]" id="infos-description" value="<?php echo $infos_form->get('description')->getValue(); ?>">
 
                 <?php echo $this->formElementErrors($this->form->get('infos')->get('description')); ?>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="infos-icon_id" class="optional"><?php echo $this->escapeHtml($this->translate('Icon')); ?></label>
                 <select class="input-select" name="infos[icon_id]" id="infos-icon_id">
                     <?php $icons = $infos_form->get('icon_id')->getValueOptions(); ?>
@@ -69,7 +69,7 @@
             </div>
             <?php if ($infos_form->has('infos[dependency]')): ?>
                 <?php $dependency = $infos_form->get('infos[dependency]'); ?>
-                <div>
+                <div class="form-group">
                     <label><?php echo $this->escapeHtml($this->translate('Available children')); ?></label>
 
                     <?php echo $this->formElement($infos_form->get('infos[dependency]')); ?>
@@ -80,7 +80,7 @@
         </div>
 
         <div id="tabs-2">
-            <div>
+            <div class="form-group">
                 <label for="views-default_view" class="required"><?php echo $this->escapeHtml($this->translate('Default view')); ?></label>
                 <select class="input-select" name="views[default_view]" id="views-default_view">
                     <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
@@ -93,7 +93,7 @@
 
                 <?php echo $this->formElementErrors($this->form->get('views')->get('default_view')); ?>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="views-available_views" class="optional"><?php echo $this->escapeHtml($this->translate('Add view')); ?></label>
                 <select class="input-select" name="views[available_views][]" id="views-available_views" multiple="multiple">
                     <?php $available_views = $views_form->get('available_views'); ?>
@@ -111,15 +111,15 @@
         <div id="tabs-3">
             <button id="display-property" class="button-add"><?php echo $this->escapeHtml($this->translate('Show / Hide form create datatype')); ?></button>
             <div class="hide">
-                <div>
+                <div class="form-group">
                     <label for="properties-name" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-                    <input class="input-text" type="text" name="properties[name]" id="properties-name" value="">
+                    <input class="form-control" type="text" name="properties[name]" id="properties-name" value="">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="properties-identifier" class="optional"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
-                    <input class="input-text" type="text" name="properties[identifier]" id="properties-identifier" value="">
+                    <input class="form-control" type="text" name="properties[identifier]" id="properties-identifier" value="">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="properties-tab" class="required"><?php echo $this->escapeHtml($this->translate('Tab')); ?></label>
                     <select name="properties[tab]" id="properties-tab" class="input-select select-tab">
                         <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
@@ -129,7 +129,7 @@
                     </select>
                 </div>
 
-                <div>
+                <div class="form-group">
                     <label for="properties-datatype" class="required"><?php echo $this->escapeHtml($this->translate('Datatype')); ?></label>
                     <select name="properties[datatype]" id="properties-datatype" class="input-select select-datatype">
                         <option value=""><?php echo $this->escapeHtml($this->translate('-- Select --')); ?></option>
@@ -138,19 +138,19 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="properties-description" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
-                    <input class="input-text" type="text" name="properties[description]" id="properties-description" value="">
+                    <input class="form-control" type="text" name="properties[description]" id="properties-description" value="">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="properties-required" class="optional"><?php echo $this->escapeHtml($this->translate('Required')); ?></label>
                     <div class="input-checkbox">
                         <input type="checkbox" name="properties[required]" class="input-checkbox" id="properties-required" value="1">
                         <label for="properties-required"></label>
                     </div>
                 </div>
-                <div>
-                    <button name="properties[add]" id="property-add" type="button" class="button-add button-add-property"><?php echo $this->escapeHtml($this->translate('Add')); ?></button>
+                <div class="form-group">
+                    <button name="properties[add]" id="property-add" type="button" class="button-add button-add-property"><?php echo $this->escapeHtml($this->translate('Create')); ?></button>
                 </div>
             </div>
             <div>
@@ -185,7 +185,7 @@
                                                     <label class="optional" for="properties-name-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
                                                 </dt>
                                                 <dd>
-                                                    <input class="input-text" type="text" value="<?php echo $this->escapeHtml($property->get('name')->getValue()); ?>" id="properties-name-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][name]">
+                                                    <input class="form-control" type="text" value="<?php echo $this->escapeHtml($property->get('name')->getValue()); ?>" id="properties-name-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][name]">
 
                                                     <?php if ($this->form->get('properties')->has($property_form_id)): ?>
                                                         <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('name')); ?>
@@ -195,7 +195,7 @@
                                                     <label class="optional" for="properties-identifier-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
                                                 </dt>
                                                 <dd>
-                                                    <input class="input-text" type="text" value="<?php echo $this->escapeHtml($property->get('identifier')->getValue()); ?>" id="properties-identifier-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][identifier]">
+                                                    <input class="form-control" type="text" value="<?php echo $this->escapeHtml($property->get('identifier')->getValue()); ?>" id="properties-identifier-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][identifier]">
 
                                                     <?php if ($this->form->get('properties')->has($property_form_id)): ?>
                                                         <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('identifier')); ?>
@@ -220,7 +220,7 @@
                                                     <label class="optional" for="properties-description-<?php echo $property_id; ?>"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
                                                 </dt>
                                                 <dd>
-                                                    <input class="input-text" type="text" value="<?php echo $this->escapeHtml($property->get('description')->getValue()); ?>" id="properties-description-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][description]">
+                                                    <input class="form-control" type="text" value="<?php echo $this->escapeHtml($property->get('description')->getValue()); ?>" id="properties-description-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][description]">
 
                                                     <?php if ($this->form->get('properties')->has($property_form_id)): ?>
                                                         <?php echo $this->formElementErrors($this->form->get('properties')->get($property_form_id)->get('description')); ?>
@@ -258,15 +258,15 @@
         </div>
 
         <div id="tabs-4">
-            <div>
+            <div class="form-group">
                 <label for="tabs-addname" class="optional"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-                <input class="input-text" type="text" name="tabs[addname]" id="tabs-addname" value="">
+                <input class="form-control" type="text" name="tabs[addname]" id="tabs-addname" value="">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="tabs-adddescription" class="optional"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
-                <input class="input-text" type="text" name="tabs[adddescription]" id="tabs-adddescription" value="">
+                <input class="form-control" type="text" name="tabs[adddescription]" id="tabs-adddescription" value="">
             </div>
-            <div>
+            <div class="form-group">
                 <button name="tabs[add]" id="tabs-add" type="button" class="button-add button-add-tab"><?php echo $this->escapeHtml($this->translate('Add Tab')); ?></button>
             </div>
 
@@ -282,7 +282,7 @@
                 <button id="import-tab-button" class="button-add"><?php echo $this->escapeHtml($this->translate('Import tab')); ?></button>
             </div>
 
-            <div>
+            <div class="form-group">
                 <h3><?php echo $this->escapeHtml($this->translate('Tabs')); ?></h3>
                 <ul id="tabs" class="sortable ui-sortable">
                 <?php foreach ($tabs_form as $tab_form): ?>
@@ -291,8 +291,8 @@
                         <?php $description = $tab_form->get('description')->getValue(); ?>
                         <?php $tab_id = 'tab'.$tab_form->get('tab_id')->getValue(); ?>
                         <div class="hide floatL">
-                            <input class="input-text" type="text" value="<?php echo $name; ?>" name="tabs[<?php echo $tab_id; ?>][name]">
-                            <input class="input-text" type="text" value="<?php echo $description; ?>" name="tabs[<?php echo $tab_id; ?>][description]">
+                            <input class="form-control" type="text" value="<?php echo $name; ?>" name="tabs[<?php echo $tab_id; ?>][name]">
+                            <input class="form-control" type="text" value="<?php echo $description; ?>" name="tabs[<?php echo $tab_id; ?>][description]">
                         </div>
                         <div class="floatL">
                             <span><?php echo $name; ?></span>

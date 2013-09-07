@@ -27,43 +27,43 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 ?>
 <form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
-    <div>
+    <div class="form-group">
         <label class="required" for="email"><?php echo $this->escapeHtml($this->translate('Email')); ?></label>
-        <input type="email" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('email')); ?>" id="email" name="email">
+        <input type="email" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('email')); ?>" id="email" name="email">
 
         <?php echo $this->formElementErrors($this->form->get('email')); ?>
     </div>
-    <div>
+    <div class="form-group">
         <label class="optional" for="login"><?php echo $this->escapeHtml($this->translate('Login')); ?></label>
-        <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('login')); ?>" id="login" name="login">
+        <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('login')); ?>" id="login" name="login">
 
         <?php echo $this->formElementErrors($this->form->get('login')); ?>
     </div>
-    <div>
+    <div class="form-group">
         <label class="required" for="password"><?php echo $this->escapeHtml($this->translate('Password')); ?></label>
-        <input type="password" autocomplete="off" class="input-text" value="" id="password" name="password">
+        <input type="password" autocomplete="off" class="form-control" value="" id="password" name="password">
 
         <?php echo $this->formElementErrors($this->form->get('password')); ?>
     </div>
-    <div>
+    <div class="form-group">
         <label class="required" for="password_confirm"><?php echo $this->escapeHtml($this->translate('Password Confirm')); ?></label>
-        <input type="password" autocomplete="off" class="input-text" value="" id="password_confirm" name="password_confirm">
+        <input type="password" autocomplete="off" class="form-control" value="" id="password_confirm" name="password_confirm">
 
         <?php echo $this->formElementErrors($this->form->get('password_confirm')); ?>
     </div>
-    <div>
+    <div class="form-group">
         <label class="required" for="lastname"><?php echo $this->escapeHtml($this->translate('Lastname')); ?></label>
-        <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('lastname')); ?>" id="lastname" name="lastname">
+        <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('lastname')); ?>" id="lastname" name="lastname">
 
         <?php echo $this->formElementErrors($this->form->get('lastname')); ?>
     </div>
-    <div>
+    <div class="form-group">
         <label class="required" for="firstname"><?php echo $this->escapeHtml($this->translate('Firstname')); ?></label>
-        <input type="text" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('firstname')); ?>" id="firstname" name="firstname">
+        <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('firstname')); ?>" id="firstname" name="firstname">
 
         <?php echo $this->formElementErrors($this->form->get('firstname')); ?>
     </div>
-    <div>
+    <div class="form-group">
         <label class="required" for="user_acl_role_id"><?php echo $this->escapeHtml($this->translate('Role')); ?></label>
         <select class="input-select" id="user_acl_role_id" name="user_acl_role_id">
             <?php $options = $this->form->get('user_acl_role_id')->getValueOptions(); ?>
@@ -74,8 +74,8 @@
 
         <?php echo $this->formElementErrors($this->form->get('user_acl_role_id')); ?>
     </div>
-    <div>
-        <input id="input-save" type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+    <div class="form-group">
+        <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
     </div>
 </form>
 

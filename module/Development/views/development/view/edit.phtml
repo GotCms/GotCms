@@ -32,7 +32,7 @@
 
 <form class="hide" id="form-content" action="<?php echo $this->url('development/view/upload', array('id' => $this->viewId)); ?>" method="post" enctype="multipart/form-data">
     <input type="file" name="upload">
-    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
+    <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
 </form>
 
 <?php echo $this->partial('development/forms/view.phtml', array('form' => $this->form)); ?>

@@ -27,72 +27,150 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+
+<ul class="nav nav-list">
 <?php if ($this->acl('development', 'document-type')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Document types')); ?> ::..</h2>
+    <li>
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-book"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Document types')); ?></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="submenu">
+            <?php if ($this->acl('development', 'document-type/create')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/document-type/create'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Create')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
 
-    <ul>
-        <?php if ($this->acl('development', 'document-type/create')): ?>
-            <li><a href="<?php echo $this->url('development/document-type/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('development', 'document-type/list')): ?>
-            <li><a href="<?php echo $this->url('development/document-type'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-        <?php endif; ?>
-    </ul>
+            <?php if ($this->acl('development', 'document-type/list')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/document-type'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('List')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </li>
 <?php endif; ?>
 
 <?php if ($this->acl('development', 'view')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Views')); ?> ::..</h2>
+    <li>
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-book"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Views')); ?></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="submenu">
+            <?php if ($this->acl('development', 'view/create')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/view/create'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Create')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
 
-    <ul>
-        <?php if ($this->acl('development', 'view/create')): ?>
-        <li><a href="<?php echo $this->url('development/view/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('development', 'view/list')): ?>
-            <li><a href="<?php echo $this->url('development/view'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-        <?php endif; ?>
-    </ul>
+            <?php if ($this->acl('development', 'view/list')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/view'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('List')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </li>
 <?php endif; ?>
 
 <?php if ($this->acl('development', 'layout')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Layouts')); ?> ::..</h2>
+    <li>
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-book"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Layouts')); ?></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="submenu">
+            <?php if ($this->acl('development', 'layout/create')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/layout/create'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Create')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
 
-    <ul>
-        <?php if ($this->acl('development', 'layout/create')): ?>
-        <li><a href="<?php echo $this->url('development/layout/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('development', 'layout/list')): ?>
-            <li><a href="<?php echo $this->url('development/layout'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-        <?php endif; ?>
-    </ul>
+            <?php if ($this->acl('development', 'layout/list')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/layout'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('List')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </li>
 <?php endif; ?>
 
 <?php if ($this->acl('development', 'script')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Scripts')); ?> ::..</h2>
+    <li>
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-book"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Scripts')); ?></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="submenu">
+            <?php if ($this->acl('development', 'script/create')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/script/create'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Create')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
 
-    <ul>
-        <?php if ($this->acl('development', 'script/create')): ?>
-        <li><a href="<?php echo $this->url('development/script/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('development', 'script/list')): ?>
-            <li><a href="<?php echo $this->url('development/script'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-        <?php endif; ?>
-    </ul>
+            <?php if ($this->acl('development', 'script/list')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/script'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('List')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </li>
 <?php endif; ?>
 
 <?php if ($this->acl('development', 'datatype')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing Datatypes')); ?> ::..</h2>
+    <li>
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-book"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Datatypes')); ?></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="submenu">
+            <?php if ($this->acl('development', 'datatype/create')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/datatype/create'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Create')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
 
-    <ul>
-        <?php if ($this->acl('development', 'datatype/create')): ?>
-        <li><a href="<?php echo $this->url('development/datatype/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <?php endif; ?>
-
-        <?php if ($this->acl('development', 'datatype/list')): ?>
-            <li><a href="<?php echo $this->url('development/datatype'); ?>" title=""><?php echo $this->escapeHtml($this->translate('List')); ?></a></li>
-        <?php endif; ?>
-    </ul>
+            <?php if ($this->acl('development', 'datatype/list')): ?>
+                <li>
+                    <a href="<?php echo $this->url('development/datatype'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('List')); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </li>
 <?php endif; ?>
+</ul>

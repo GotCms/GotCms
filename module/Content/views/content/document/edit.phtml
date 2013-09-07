@@ -39,7 +39,7 @@
             <div id="<?php echo $this->escapeHtml($tab_id); ?>">
                 <?php $elements = $fieldset->getElements(); ?>
                 <?php foreach ($elements as $element): ?>
-                    <div>
+                    <div class="form-group">
                         <?php if ($element->getName() == 'more_information'): ?>
                             <label><?php echo $this->escapeHtml($this->translate('Preview')); ?></label>
 

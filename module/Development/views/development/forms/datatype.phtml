@@ -36,13 +36,13 @@
         </div>
     <?php endif; ?>
 
-    <div>
+    <div class="form-group">
         <label class="required" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-        <input type="name" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
+        <input type="name" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
 
         <?php echo $this->formElementErrors($this->form->get('name')); ?>
     </div>
-    <div>
+    <div class="form-group">
         <label class="required" for="model"><?php echo $this->escapeHtml($this->translate('Model')); ?></label>
         <select class="input-select" class="input-select" id="model" name="model">
             <?php $options = $this->form->get('model')->getValueOptions(); ?>
@@ -52,7 +52,7 @@
         </select>
 
         <?php echo $this->formElementErrors($this->form->get('model')); ?>
-    </div>
+    </div class="form-group">
 
     <?php if ($this->form->has('prevalue-editor')): ?>
         <?php $fieldset = $this->form->get('prevalue-editor'); ?>
@@ -80,8 +80,8 @@
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <div>
-        <input type="submit" id="input-save" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+    <div class="form-group">
+        <input type="submit" id="input-save" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
     </div>
 </form>
 

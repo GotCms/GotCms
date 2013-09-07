@@ -34,7 +34,7 @@
             <h3><?php echo $this->escapeHtml($this->translate($fieldset->getLabel())); ?></h3>
             <div>
                 <?php foreach ($fieldset->getElements() as $element): ?>
-                    <div>
+                    <div class="form-group">
                         <label class="required" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
                         <?php echo $this->formElement($element); ?>
@@ -45,7 +45,7 @@
     </div>
 
 
-    <input id="input-save" type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+    <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
 </form>
 
 <script type="text/javascript">

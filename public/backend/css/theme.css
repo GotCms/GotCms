@@ -1,8 +1,0 @@
-/**
- * MacOS X like theme for elFinder.
- * Required jquery ui "smoothness" theme.
- *
- * @author Dmitry (dio) Levashov
- **/
-
-.elfinder-contextmenu .ui-state-hover .elfinder-contextmenu-arrow { background-image:url('../images/elfinder/arrows-active.png'); }

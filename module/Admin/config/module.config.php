@@ -26,6 +26,11 @@
  */
 
 return array(
+    'service_manager' => array(
+        'factories' => array(
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+        )
+    ),
     'controllers' => array(
         'invokables' => array(
             'AdminController' => 'Admin\Controller\IndexController',
@@ -34,6 +39,12 @@ return array(
     'view_manager' => array(
         'template_path_stack' => array(
             'admin' => __DIR__ . '/../views',
+        ),
+        'template_map' => array(
+            'layout/layout' => __DIR__ . '/../views/layouts/layout.phtml',
+        ),
+        'strategies' => array(
+            'ViewJsonStrategy',
         ),
     ),
     'router' => array(
@@ -66,5 +77,197 @@ return array(
                 )
             ),
         ),
+    ),
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Dashboard',
+                'route' => 'admin',
+                'pages' => array(
+                    array(
+                        'label' => 'Content',
+                        'route' => 'content',
+                        'pages' => array(
+                            array(
+                                'label' => 'Translations',
+                                'route' => 'content/translation',
+                                'pages' => array(
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'content/translation/create',
+                                    )
+                                )
+                            ),
+                            array(
+                                'label' => 'File manager',
+                                'route' => 'content/media',
+                            ),
+                            array(
+                                'label' => 'Document',
+                                'route' => 'content/document',
+                                'pages' => array(
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'content/document/create',
+                                    ),
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'content/document/create-w-parent',
+                                    ),
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'content/document/create',
+                                    ),
+                                    array(
+                                        'label' => 'Edit',
+                                        'route' => 'content/document/edit',
+                                    ),
+                                ),
+                            ),
+                        )
+                    ),
+                    array(
+                        'label' => 'Development',
+                        'route' => 'development',
+                        'pages' => array(
+                            array(
+                                'label' => 'Document type',
+                                'route' => 'development/document-type',
+                                'pages' => array(
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'development/document-type/create',
+                                    ),
+                                    array(
+                                        'label' => 'Edit',
+                                        'route' => 'development/document-type/edit',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'label' => 'View',
+                                'route' => 'development/view',
+                                'pages' => array(
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'development/view/create',
+                                    ),
+                                    array(
+                                        'label' => 'Edit',
+                                        'route' => 'development/view/edit',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'label' => 'Layout',
+                                'route' => 'development/layout',
+                                'pages' => array(
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'development/layout/create',
+                                    ),
+                                    array(
+                                        'label' => 'Edit',
+                                        'route' => 'development/layout/edit',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'label' => 'Script',
+                                'route' => 'development/script',
+                                'pages' => array(
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'development/script/create',
+                                    ),
+                                    array(
+                                        'label' => 'Edit',
+                                        'route' => 'development/script/edit',
+                                    ),
+                                ),
+                            ),
+                            array(
+                                'label' => 'Datatypes',
+                                'route' => 'development/datatype',
+                                'pages' => array(
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'development/datatype/create',
+                                    ),
+                                    array(
+                                        'label' => 'Edit',
+                                        'route' => 'development/datatype/edit',
+                                    ),
+                                ),
+                            ),
+                        )
+                    ),
+                    array(
+                        'label' => 'Modules',
+                        'route' => 'module',
+                        'pages' => array(
+                            array(
+                                'label' => 'Install',
+                                'route' => 'module/install',
+                            ),
+                        )
+                    ),
+                    array(
+                        'label' => 'Statistics',
+                        'route' => 'statistics',
+                    ),
+                    array(
+                        'label' => 'Config',
+                        'route' => 'config',
+                        'pages' => array(
+                            array(
+                                'label' => 'General',
+                                'route' => 'config/general',
+                            ),
+                            array(
+                                'label' => 'General',
+                                'route' => 'config/system',
+                            ),
+                            array(
+                                'label' => 'General',
+                                'route' => 'config/server',
+                            ),
+                            array(
+                                'label' => 'General',
+                                'route' => 'config/cms-update',
+                            ),
+                            array(
+                                'label' => 'User',
+                                'route' => 'config/user',
+                                'pages' => array(
+                                    array(
+                                        'label' => 'Create',
+                                        'route' => 'config/user/create',
+                                    ),
+                                    array(
+                                        'label' => 'Edit',
+                                        'route' => 'config/user/edit',
+                                    ),
+                                    array(
+                                        'label' => 'Role',
+                                        'route' => 'config/user/role',
+                                        'pages' => array(
+                                            array(
+                                                'label' => 'Create',
+                                                'route' => 'config/user/role/create',
+                                            ),
+                                            array(
+                                                'label' => 'Edit',
+                                                'route' => 'config/user/role/edit',
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                )
+            ),
+        )
     )
 );
