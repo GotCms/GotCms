@@ -31,9 +31,6 @@ var Gc = (function($)
         Gc.initialize();
         Gc.initializeMenu();
         Gc.notification();
-        if ($().dropDown !== undefined) {
-            $('.input-select').dropDown();
-        }
     });
 
     return {
@@ -174,7 +171,6 @@ var Gc = (function($)
                             $tabs.append($e);
 
                             $('.select-tab').append(new Option($name.val(),$data.id));
-                            $('.select-tab').dropDown('refresh');
 
                             if($('#properties-tabs-content').html() !== null) {
                                 $tab_content = $('#properties-tabs-content');
@@ -200,7 +196,6 @@ var Gc = (function($)
                 var $button = $(this);
                 $.post($deleteTabUrl, {tab: $button.val()}, function($data) {
                     $('.select-tab').find('option[value="' + $button.val() + '"]').remove();
-                    $('.select-tab').dropDown('refresh');
                     var $tabs = $('#properties-tabs-content');
                     $button.parent().remove();
                     var $tab = $tabs.find('a[href="#tabs-properties-' + $button.val() + '"]').parent();
@@ -277,7 +272,7 @@ var Gc = (function($)
                                     '<label class="optional" for="properties-datatype-#{tab}-#{id}">' + Translator.translate('Datatype') + '</label>' +
                                 '</dt>' +
                                 '<dd id="datatype-element-#{tab}-#{id}">' +
-                                    '<select class="input-select select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
+                                    '<select class="form-control select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
                                     '</select>' +
                                 '</dd>' +
                                 '<dt id="description-label-#{tab}-#{id}">' +
@@ -317,7 +312,6 @@ var Gc = (function($)
                             $('#properties-required-' + $data.tab + '-' + $data.id).prop('checked', $isRequired.prop('checked'));
 
                             $this.refreshProperties($tabs);
-                            $('.input-select').dropDown();
                         }
                     });
                 }
@@ -685,7 +679,7 @@ var Gc = (function($)
                 '</td>' +
                 '<td>' +
                     '<div>' +
-                        '<select class="input-select" name="locale[#{id}]">';
+                        '<select class="form-control" name="locale[#{id}]">';
                             $.each(this.getOption('locale'), function(key, value)
                             {
                                 $template += '<option value="' + key + '">' + value + '</option>';
@@ -703,7 +697,6 @@ var Gc = (function($)
 
                 $table_trad.find('.add-translate').removeClass('add-translate').addClass('delete-translate').html(Translator.translate('Delete'));
                 $table_trad.children('tbody').append($t.evaluate({id: $idx}));
-                $('.input-select').dropDown();
                 $idx++;
             });
 

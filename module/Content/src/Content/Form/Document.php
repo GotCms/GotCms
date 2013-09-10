@@ -112,7 +112,7 @@ class Document extends AbstractForm
         $documentType = new Element\Select('document_type');
         $documentType->setAttribute('label', 'Document Type')
             ->setAttribute('id', 'document_type')
-            ->setAttribute('class', 'input-select')
+            ->setAttribute('class', 'form-control')
             ->setValueOptions(array('' => 'Select document type'));
 
         $parent = new Element\Hidden('parent');
@@ -214,7 +214,7 @@ class Document extends AbstractForm
         $view->setValueOptions(array('' => 'Select view') + $select)
             ->setValue((string) $viewSelected)
             ->setAttribute('id', 'view')
-            ->setAttribute('class', 'input-select')
+            ->setAttribute('class', 'form-control')
             ->setAttribute('label', 'View');
 
         $this->add($view);
@@ -224,7 +224,7 @@ class Document extends AbstractForm
         $layout->setValueOptions($layoutsCollection->getSelect())
             ->setValue((string) $document->getLayoutId())
             ->setAttribute('id', 'layout')
-            ->setAttribute('class', 'input-select')
+            ->setAttribute('class', 'form-control')
             ->setAttribute('label', 'Layout');
 
         $inputFilter = $inputFilterFactory->add(

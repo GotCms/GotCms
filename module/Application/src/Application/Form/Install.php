@@ -66,7 +66,7 @@ class Install extends AbstractForm
         $lang->setAttribute('size', 10)
             ->setValueOptions($config['locales'])
             ->setValue('en_GB')
-            ->setAttribute('class', 'input-select');
+            ->setAttribute('class', 'form-control');
 
         $inputFilter = $this->getInputFilter();
         $inputFilter->add(
@@ -133,7 +133,7 @@ class Install extends AbstractForm
         $driver->setValueOptions($data)
             ->setAttribute('label', 'Driver')
             ->setAttribute('id', 'driver')
-            ->setAttribute('class', 'input-select');
+            ->setAttribute('class', 'form-control');
 
         $hostname = new Element\Text('hostname');
         $hostname->setValue('localhost')
@@ -285,7 +285,7 @@ class Install extends AbstractForm
 
         $template = new Element\Select('template');
         $template->setAttribute('label', 'Default template')
-            ->setAttribute('class', 'input-select')
+            ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'template')
             ->setAttribute('data', $renderOptions)
             ->setValueOptions($options);

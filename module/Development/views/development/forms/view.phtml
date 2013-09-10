@@ -27,32 +27,36 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<form class="simple-form form-horizontal" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <div class="form-group">
-        <label class="required" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-        <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
+        <label class="required control-label col-lg-2" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
+            <?php echo $this->formElementErrors($this->form->get('name')); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="required control-label col-lg-2" for="identifier"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('identifier')); ?>" id="identifier" name="identifier">
+            <?php echo $this->formElementErrors($this->form->get('identifier')); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="required control-label col-lg-2" for="description"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('description')); ?>" id="description" name="description">
+            <?php echo $this->formElementErrors($this->form->get('description')); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="required control-label col-lg-2" for="view-content"><?php echo $this->escapeHtml($this->translate('Content')); ?></label>
+        <div class="col-lg-10">
+            <textarea cols="80" rows="24" id="view-content" name="content"><?php echo $this->escapeHtml($this->form->getValue('content')); ?></textarea>
+            <?php echo $this->formElementErrors($this->form->get('content')); ?>
+        </div>
+    </div>
 
-        <?php echo $this->formElementErrors($this->form->get('name')); ?>
-    </div>
-    <div class="form-group">
-        <label class="required" for="identifier"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
-        <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('identifier')); ?>" id="identifier" name="identifier">
+    <input type="submit" id="input-save" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
 
-        <?php echo $this->formElementErrors($this->form->get('identifier')); ?>
-    </div>
-    <div class="form-group">
-        <label class="required" for="description"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
-        <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('description')); ?>" id="description" name="description">
-
-        <?php echo $this->formElementErrors($this->form->get('description')); ?>
-    </div>
-    <div class="form-group">
-        <label class="required" for="view-content"><?php echo $this->escapeHtml($this->translate('Content')); ?></label>
-        <textarea cols="80" rows="24" id="view-content" name="content"><?php echo $this->escapeHtml($this->form->getValue('content')); ?></textarea>
-
-        <?php echo $this->formElementErrors($this->form->get('content')); ?>
-    </div>
-    <div class="form-group">
-        <input type="submit" id="input-save" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
-    </div>
 </form>

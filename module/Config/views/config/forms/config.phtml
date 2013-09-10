@@ -26,7 +26,7 @@
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 ?>
-<form class="simple-form" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<form class="simple-form form-horizontal" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <?php $fieldsets = $this->form->getFieldsets(); ?>
 
     <div id="accordion">
@@ -35,9 +35,11 @@
             <div>
                 <?php foreach ($fieldset->getElements() as $element): ?>
                     <div class="form-group">
-                        <label class="required" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+                        <label class="required control-label col-lg-2" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
-                        <?php echo $this->formElement($element); ?>
+                        <div class="col-lg-10">
+                            <?php echo $this->formElement($element); ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>

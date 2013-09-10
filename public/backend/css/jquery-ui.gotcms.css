@@ -93,7 +93,7 @@
 .ui-accordion .ui-accordion-header .ui-accordion-header-icon {text-indent: 0;margin-top: 0;position: absolute;left: 10px;top: 7px;}
 .ui-accordion .ui-accordion-header .ui-accordion-header-icon:before {display: inline;font-family: 'Glyphicons Halflings';-webkit-font-smoothing: antialiased;font-size: 12px;content: "\e080";}
 .ui-accordion .ui-accordion-header.ui-state-active .ui-accordion-header-icon:before {content: "\e114";font-weight: normal;}
-.ui-accordion .ui-accordion-content {border: 1px solid #855D10;border-top-width: 0;padding: 11px 16px;}
+.ui-accordion .ui-accordion-content {background:#FFFFFF;height:auto !important;border: 1px solid #855D10;border-top-width: 0;padding: 11px 16px;}
 .ui-tabs .ui-tabs-nav {padding: 0;border-bottom: 1px solid #CCCCCC;}
 .ui-tabs .ui-tabs-nav li.ui-state-default>a {background-color: #f9f9f9;border: 1px solid #CCCCCC;border-bottom-width: 0;color: #999;line-height: 16px;margin-right: -1px;z-index: 11;padding: 8px 12px;position: relative;top: 2px;}
 .ui-tabs .ui-tabs-nav li>a:focus {outline: 0;}

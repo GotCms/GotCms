@@ -84,7 +84,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
 
         $resizeOption = new Element\Select('resize_option');
         $resizeOption->setValue(empty($config['resize_option']) ? 'auto' : $config['resize_option']);
-        $resizeOption->setAttribute('class', 'input-select');
+        $resizeOption->setAttribute('class', 'form-control');
         $resizeOption->setAttribute('id', 'resize-option');
         $resizeOption->setLabel('Resize option');
         $resizeOption->setValueOptions(

@@ -102,7 +102,7 @@ class Config extends AbstractForm
         $documentCollection->load(0);
         $offlineDocument = new Element\Select('site_offline_document');
         $offlineDocument->setAttribute('label', 'Offline document')
-            ->setAttribute('class', 'input-select')
+            ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'site_offline_document')
             ->setValueOptions(array('Select document') + $documentCollection->getSelect());
         $generalFieldset->add($offlineDocument);
@@ -118,7 +118,7 @@ class Config extends AbstractForm
         $layoutCollection = new Layout\Collection();
         $layoutNotFound   = new Element\Select('site_404_layout');
         $layoutNotFound->setAttribute('label', '404 layout')
-            ->setAttribute('class', 'input-select')
+            ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'site_404_layout')
             ->setValueOptions(array('Select document') + $layoutCollection->getSelect());
         $generalFieldset->add($layoutNotFound);
@@ -133,7 +133,7 @@ class Config extends AbstractForm
 
         $layoutException = new Element\Select('site_exception_layout');
         $layoutException->setAttribute('label', 'Exception layout')
-            ->setAttribute('class', 'input-select')
+            ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'site_exception_layout')
             ->setValueOptions(array('Select document') + $layoutCollection->getSelect());
         $generalFieldset->add($layoutException);
@@ -196,7 +196,7 @@ class Config extends AbstractForm
 
         $sessionHandler = new Element\Select('session_handler');
         $sessionHandler->setAttribute('label', 'Session handler')
-            ->setAttribute('class', 'input-select')
+            ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'session_handler')
             ->setValueOptions(array('0' => 'Files', '1' => 'Database'));
         $sessionFieldset->add($sessionHandler);
@@ -291,7 +291,7 @@ class Config extends AbstractForm
         );
 
         $cacheHandler = new Element\Select('cache_handler');
-        $cacheHandler->setAttribute('class', 'input-select')
+        $cacheHandler->setAttribute('class', 'form-control')
             ->setAttribute('id', 'cache_handler')
             ->setAttribute('label', 'Cache handler');
         $handlerWhitelist = array('filesystem' => 'FileSystem');
@@ -355,7 +355,7 @@ class Config extends AbstractForm
         $locale = new Element\Select('locale');
         $locale->setAttribute('label', 'Server locale')
             ->setAttribute('id', 'locale')
-            ->setAttribute('class', 'input-select')
+            ->setAttribute('class', 'form-control')
             ->setValueOptions($config['locales']);
         $localeFieldset->add($locale);
 
