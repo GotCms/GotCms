@@ -28,7 +28,10 @@
 
 ?>
 <form autocomplete="off" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
-    <input id="input-save" type="image" src="<?php echo $this->cdnBackend('backend/images/save.png'); ?>" value="1" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
+    <button class="btn btn-warning btn-sm" id="input-save" type="submit">
+        <i class="glyphicon glyphicon-floppy-disk"></i>
+        <?php echo $this->escapeHtml($this->translate('Save and publish')); ?>
+    </button>
     <table id="table-translation-edit" class="table clickable table-striped table-hover">
         <colgroup>
             <col width="43%">

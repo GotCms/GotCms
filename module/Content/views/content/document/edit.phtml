@@ -28,8 +28,10 @@
 
 ?>
 <form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post" enctype="multipart/form-data">
-    <input id="input-save" type="image" alt="<?php echo $this->escapeHtml($this->translate('Save')); ?>" src="<?php echo $this->cdnBackend('backend/images/save.png'); ?>">
-
+    <button class="btn-in-tab btn btn-warning btn-sm" id="input-save" type="submit">
+        <i class="glyphicon glyphicon-floppy-disk"></i>
+        <?php echo $this->escapeHtml($this->translate('Save')); ?>
+    </button>
     <div id="tabs" style="margin-bottom:20px">
         <?php echo $this->tabs; ?>
 

@@ -3,6 +3,8 @@
 a {color:#855D10;}
 a:hover, a:focus {color:#E8B10D}
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family:'Open Sans';}
+.btn-in-tab {position: absolute;right: 17px;top: 7px;z-index: 1;}
+.simple-form{position:relative;}
 /************** Body ***********/
 body:before {background-color:#FFFFFF;bottom:0;content:"";display:block;left:0;position:fixed;right:0;top:0;z-index:-1;}
 body {background-color:#E4E6E9;color:#393939;font-family:'Open Sans';font-size:13px;min-height:100%;padding-bottom:0;padding-top:70px;padding-top:86px;}
@@ -173,7 +175,7 @@ header .pull-right {margin-top:10px;}
 .list-handle:hover{color:#855D10;background:#F0F0F0;}
 .ui-state-highlight {margin:5px 0;padding:0;min-height:30px;background:#F0F0F0;border:2px dashed #CCCCCC;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
 
-/************** List ***********/
+/************** Elfinder ***********/
 .elfinder .elfinder-button {height:24px;width:24px;}
 #elfinder {font-size:16px;}.elfinder .elfinder-button-search {width:202px}
 .std42-dialog, .std42-dialog .ui-widget-content {background-color:#F0F0F0;background-image:none;background-clip:content-box;}
