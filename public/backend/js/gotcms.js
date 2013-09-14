@@ -667,14 +667,22 @@ var Gc = (function($)
                         $template += '</select>' +
                     '</div>' +
                 '</td>' +
-                '<td><span class="button-add add-translate">' + Translator.translate('Add') + '</span></td>' +
+                '<td>' +
+                    '<span class="btn btn-default add-translate">' +
+                        '<i class="glyphicon glyphicon-plus"></i>&nbsp;' +
+                        Translator.translate('Add') +
+                    '</span>' +
+                '</td>' +
             '</tr>';
 
             $document.on('click', '.add-translate', function() {
                 var $t = new Template($template),
                 $table_trad = $('#table-trad');
 
-                $table_trad.find('.add-translate').removeClass('add-translate').addClass('delete-translate').html(Translator.translate('Delete'));
+                $table_trad.find('.add-translate')
+                    .removeClass('add-translate')
+                    .addClass('delete-translate')
+                    .html('<i class="glyphicon glyphicon-minus"></i> ' + Translator.translate('Delete'));
                 $table_trad.children('tbody').append($t.evaluate({id: $idx}));
                 $idx++;
             });

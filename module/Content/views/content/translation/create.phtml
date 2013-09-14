@@ -63,7 +63,12 @@
                             <?php endforeach; ?>
                         </select>
                     </td>
-                    <td><span class="button-add add-translate"><?php echo $this->escapeHtml($this->translate('Create')); ?></span></td>
+                    <td>
+                        <span class="btn btn-default add-translate">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <?php echo $this->escapeHtml($this->translate('Add')); ?>
+                        </span>
+                    </td>
                 </tr>
             </tbody>
         </table>

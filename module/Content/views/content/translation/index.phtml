@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="hide">
-                            <select name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][locale]">
+                            <select class="form-control" name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][locale]">
                                 <?php foreach ($this->form->get('locale')->getValueOptions() as $option_id => $option_value): ?>
                                     <option value="<?php echo $option_id; ?>"<?php if(!empty($value['locale']) and $option_id == $value['locale']): ?> selected="selected"<?php endif; ?>>
                                         <?php echo $this->escapeHtml($option_value); ?>
