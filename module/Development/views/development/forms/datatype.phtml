@@ -27,7 +27,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form class="simple-form form-horizontal" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<form class="relative form-horizontal" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <?php if (!empty($this->infos)): ?>
         <div id="datatype-infos">
             <a href="#"><?php echo $this->escapeHtml($this->translate('Display/Hide informations')); ?></a>

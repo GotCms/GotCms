@@ -27,7 +27,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form form-horizontal" method="post">
+<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative form-horizontal" method="post">
     <?php $elements = $this->form->getElements(); ?>
     <?php foreach ($elements as $element): ?>
         <div class="form-group">

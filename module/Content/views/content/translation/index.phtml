@@ -27,7 +27,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form autocomplete="off" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
+<form autocomplete="off" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative" method="post">
     <button class="btn btn-warning btn-sm" id="input-save" type="submit">
         <i class="glyphicon glyphicon-floppy-disk"></i>
         <?php echo $this->escapeHtml($this->translate('Save and publish')); ?>

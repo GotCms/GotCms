@@ -27,7 +27,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post" enctype="multipart/form-data">
+<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative" method="post" enctype="multipart/form-data">
     <button class="btn-in-tab btn btn-warning btn-sm" id="input-save" type="submit">
         <i class="glyphicon glyphicon-floppy-disk"></i>
         <?php echo $this->escapeHtml($this->translate('Save')); ?>

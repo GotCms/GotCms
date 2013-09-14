@@ -28,7 +28,7 @@
 
 ?>
 
-<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
+<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative" method="post">
     <?php $element = $this->form->get('module'); ?>
     <div class="form-group">
         <label class="required" for="module"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>

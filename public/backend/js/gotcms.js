@@ -887,7 +887,7 @@ var Gc = (function($)
 
         checkDataChanged: function()
         {
-            var $form = $('.simple-form'),
+            var $form = $('form.relative'),
             $originalData = $form.serialize();
 
             $document.on('click', '#input-save', function() {

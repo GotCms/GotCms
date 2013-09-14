@@ -33,7 +33,7 @@
 <?php $properties_forms  = $this->form->get('properties')->getFieldsets(); ?>
 <?php $datatypes_options = $this->form->get('properties')->get('datatypes')->getValueOptions(); ?>
 
-<form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" class="simple-form">
+<form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" class="relative">
     <button class="btn-in-tab btn btn-warning btn-sm" id="input-save" type="submit">
         <i class="glyphicon glyphicon-floppy-disk"></i>
         <?php echo $this->escapeHtml($this->translate('Save')); ?>
