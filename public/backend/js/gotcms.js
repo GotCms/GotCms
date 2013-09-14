@@ -98,18 +98,6 @@ var Gc = (function($)
 
         initDocumentType: function($addTabUrl, $addPropertyUrl, $deleteTabUrl, $deletePropertyUrl, $importTabUrl)
         {
-            $('.button-add').button({
-                icons: {
-                    primary: "ui-icon-plus"
-                }
-            });
-
-            $('.button-delete').button({
-                icons: {
-                    primary: "ui-icon-close"
-                }
-            });
-
             var $this = this,
                 $originalPosition;
             $('.tabs').tabs();
@@ -122,9 +110,10 @@ var Gc = (function($)
                 distance: 10,
                 start: function(event, ui) {
                     $originalPosition = ui.item.index();
+                    $(this).find('.ui-state-highlight').height(ui.item.height() - 4);
                 },
                 stop: function(event, ui) {
-                    var $tabsNav = $('#properties-tabs-content > .ui-tabs-nav').find('li'),
+                    var $tabsNav = $('#properties-tabs-content > .ui-tabs-nav').find('.row'),
                     $newPosition = ui.item.index(),
                     $row = $tabsNav.eq($originalPosition).detach();
 
@@ -151,22 +140,24 @@ var Gc = (function($)
                         } else {
                             var $tabs, $e, $tab_content;
                             $tabs = $('#tabs');
-                            $e = $('<li class="clearfix">' +
-                                '<div class="hide floatL">' +
-                                    '<input type="text" class="input-text" name="tabs[tab' + $data.id + '][name]" value="' + $name.val() + '">' +
-                                    '<input type="text" class="input-text" name="tabs[tab' + $data.id + '][description]" value="' + $description.val() + '">' +
+                            $e = $('<li class="list-item">' +
+                                '<div class="list-handle">' +
+                                    '<i class="glyphicon glyphicon-move"></i>' +
+                                    '<div class="col-lg-10">' +
+                                        '<div class="col-lg-6">' +
+                                            '<input type="text" class="form-control" name="tabs[tab' + $data.id + '][name]" value="' + $name.val() + '">' +
+                                        '</div>' +
+                                        '<div class="col-lg-6">' +
+                                            '<input type="text" class="form-control" name="tabs[tab' + $data.id + '][description]" value="' + $description.val() + '">' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="col-lg-1">' +
+                                        '<button type="button" value="' + $data.id + '" class="delete-tab btn btn-danger">' +
+                                            '<i class="glyphicon glyphicon-remove"></i> ' + Translator.translate('Delete') +
+                                        '</button>' +
+                                    '</div>' +
                                 '</div>' +
-                                '<div class="floatL">' +
-                                    '<span>' + $name.val() + '</span> <span>' + $description.val() + '</span>' +
-                                '</div>' +
-                                '<button type="button" value="' + $data.id + '" class="button-delete delete-tab floatR">' + Translator.translate('Delete') + '</button>' +
                             '</li>');
-
-                            $e.find('.button-delete').button({
-                                icons: {
-                                    primary: "ui-icon-close"
-                                }
-                            });
 
                             $tabs.append($e);
 
@@ -182,14 +173,6 @@ var Gc = (function($)
                         }
                     });
                 }
-            });
-
-            $(document).on('click', '#tabs > li', function(event) {
-                if(event.target.type === 'text') {
-                    return false;
-                }
-
-                $(this).find('div').toggleClass('hide').height('auto');
             });
 
             $(document).on('click', '.delete-tab', function() {
@@ -215,9 +198,8 @@ var Gc = (function($)
 
             $('#display-property').on('click', function() {
                 $(this).next().toggleClass('hide');
-                $(this).find('.ui-icon').toggleClass('ui-icon-minus');
-                $(this).find('.ui-icon').toggleClass('ui-icon-plus');
-                return false;
+                $(this).find('.glyphicon').toggleClass('glyphicon-minus');
+                $(this).find('.glyphicon').toggleClass('glyphicon-plus');
             });
 
             var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div></div>'});
@@ -255,55 +237,50 @@ var Gc = (function($)
                             $this.setHtmlMessage($data.message, 'error');
                         } else {
                             var $c = new Template('<div><h3><a href="#secion#{id}">#{name} (#{identifier})</a></h3>' +
-                                '<dl>' +
-                                '<dt id="name-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-name-#{tab}-#{id}">' + Translator.translate('Name') + '</label>' +
-                                '</dt>' +
-                                '<dd id="name-element-#{tab}-#{id}">' +
-                                    '<input type="text" class="input-text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">' +
-                                '</dd>' +
-                                '<dt id="identifier-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-identifier-#{tab}-#{id}">' + Translator.translate('Identifier') + '</label>' +
-                                '</dt>' +
-                                '<dd id="identifier-element-#{tab}-#{id}">' +
-                                    '<input type="text" class="input-text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">' +
-                                '</dd>' +
-                                '<dt id="datatype-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-datatype-#{tab}-#{id}">' + Translator.translate('Datatype') + '</label>' +
-                                '</dt>' +
-                                '<dd id="datatype-element-#{tab}-#{id}">' +
-                                    '<select class="form-control select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
-                                    '</select>' +
-                                '</dd>' +
-                                '<dt id="description-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-description-#{tab}-#{id}">' + Translator.translate('Description') + '</label>' +
-                                '</dt>' +
-                                '<dd id="description-element-#{tab}-#{id}">' +
-                                    '<input type="text" class="input-text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">' +
-                                '</dd>' +
-                                '<dt id="required-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-required-#{tab}-#{id}">' + Translator.translate('Required') + '</label>' +
-                                '</dt>' +
-                                '<dd id="required-element-#{tab}-#{id}">' +
-                                    '<div class="input-checkbox">' +
-                                        '<input type="checkbox" name="properties[property#{id}][required]" class="input-checkbox" id="properties-required-#{tab}-#{id}" value="1">' +
-                                        '<label for="properties-required-#{tab}-#{id}"></label>' +
+                            '<div class="form-horizontal">' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-name-#{tab}-#{id}">' + Translator.translate('Name') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<input type="text" class="form-control" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">' +
                                     '</div>' +
-                                '</dd>' +
-                                '<dd id="required-element-#{tab}-#{id}">' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-identifier-#{tab}-#{id}">' + Translator.translate('Identifier') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<input type="text" class="form-control" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-datatype-#{tab}-#{id}">' + Translator.translate('Datatype') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<select class="form-control select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
+                                        '</select>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-description-#{tab}-#{id}">' + Translator.translate('Description') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<input type="text" class="form-control" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-required-#{tab}-#{id}">' + Translator.translate('Required') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<div class="input-checkbox">' +
+                                            '<input type="checkbox" name="properties[property#{id}][required]" class="input-checkbox" id="properties-required-#{tab}-#{id}" value="1">' +
+                                            '<label for="properties-required-#{tab}-#{id}"></label>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="clearfix">' +
                                     '<input class="property-tab-id" type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">' +
-                                '</dd>' +
-                                '<dd class="cb">' +
-                                    '<button type="button" value="#{id}" class="delete-property button-delete">' + Translator.translate('Delete') + '</button>' +
-                                '</dd>' +
-                            '</dl></div>');
+                                    '<button type="button" value="#{id}" class="delete-property btn btn-danger">' +
+                                        '<i class="glyphicon glyphicon-remove"></i> ' + Translator.translate('Delete') +
+                                    '</button>' +
+                                '</div>' +
+                            '</div></div>');
 
                             $c = $($c.evaluate($data));
-                            $c.find('.button-delete').button({
-                                icons: {
-                                    primary: "ui-icon-close"
-                                }
-                            });
 
                             $('#tabs-properties-' + $tab.val()).children('div:first').append($c);
                             $('.connected-sortable').accordion(Gc.getOption('accordion-option'));
@@ -410,6 +387,8 @@ var Gc = (function($)
                         $tabs.tabs('option', 'active', $tab_items.index($item));
                         $(this).appendTo($list).show('slow');
                         $(this).find('.property-tab-id').val($tab_id);
+                        $(this).attr('style', '');
+                        $('.connected-sortable').accordion('refresh');
                     });
                 },
                 stop: function( event, ui ) {
@@ -621,11 +600,11 @@ var Gc = (function($)
                 '<fieldset>' +
                     '<div>' +
                         '<label for="name">' + Translator.translate('Name') + '</label>' +
-                        '<input type="text" name="name" id="copy-name" class="input-text ui-widget-content ui-corner-all" />' +
+                        '<input type="text" name="name" id="copy-name" class="form-control ui-widget-content ui-corner-all" />' +
                     '</div>' +
                     '<div>' +
                         '<label for="email">' + Translator.translate('Url key') + '</label>' +
-                        '<input type="text" name="url-key" id="copy-url-key" value="" class="input-text ui-widget-content ui-corner-all" />' +
+                        '<input type="text" name="url-key" id="copy-url-key" value="" class="form-control ui-widget-content ui-corner-all" />' +
                     '</div>' +
                '</fieldset>' +
             '</div>';
@@ -674,7 +653,7 @@ var Gc = (function($)
             $template = '<tr>' +
                 '<td>' +
                     '<div>' +
-                        '<input type="text" class="input-text" name="destination[#{id}]" size="73">' +
+                        '<input type="text" class="form-control" name="destination[#{id}]" size="73">' +
                     '</div>' +
                 '</td>' +
                 '<td>' +

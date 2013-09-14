@@ -110,7 +110,6 @@ class Action extends AbstractActionController
      */
     protected function construct()
     {
-        $module    = $this->getRouteMatch()->getParam('module');
         $routeName = $this->getRouteMatch()->getMatchedRouteName();
 
         /**
@@ -145,7 +144,7 @@ class Action extends AbstractActionController
             }
         }
 
-        $this->layout()->module  = strtolower($module);
+        $this->layout()->routeParams = $this->getRouteMatch()->getParams();
         $this->layout()->version = \Gc\Version::VERSION;
 
         $this->useFlashMessenger(false);

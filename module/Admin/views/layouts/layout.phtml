@@ -72,19 +72,21 @@
     echo $this->headScript();
 
     echo $this->HeadLink();
+
+    $module = empty($this->routeParams['module']) ? null : strtolower($this->routeParams['module']);
     ?>
 </head>
-<body<?php if (!empty($this->module)): ?> id="module-<?php echo $this->escapeHtml($this->module); ?>"<?php endif; ?>>
+<body<?php if (!empty($module)): ?> id="module-<?php echo $this->escapeHtml($module); ?>"<?php endif; ?>>
     <header class="navbar navbar-default navbar-fixed-top breadcrumbs-fixed" id="navbar">
-        <?php echo $this->partial('navigation.phtml', array('active' => $this->module)); ?>
+        <?php echo $this->partial('navigation.phtml', array('active' => $module)); ?>
     </header>
 
     <div class="main-container container">
-        <?php if (empty($this->module) or in_array($this->module, array('admin', 'statistics'))): ?>
+        <?php if (empty($module) or in_array($module, array('admin', 'statistics'))): ?>
             <div class="col-lg-12">
         <?php else: ?>
             <div id="sidebar" class="sidebar sidebar-fixed col-lg-2">
-                <?php echo $this->partial($this->module . '-menu.phtml', array('treeview' => $this->treeview, 'moduleMenu' => $this->moduleMenu)); ?>
+                <?php echo $this->partial($module . '-menu.phtml', array('treeview' => $this->treeview, 'moduleMenu' => $this->moduleMenu)); ?>
             </div>
             <div class="col-lg-10 main-content">
         <?php endif; ?>

@@ -27,7 +27,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<table class="table-list clickable">
+<table class="table clickable table-striped table-hover">
     <colgroup>
         <col width="90%">
         <col width="5%">
@@ -36,22 +36,22 @@
     <thead>
         <tr>
             <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($this->datatypes as $datatype): ?>
             <tr>
                 <td><?php echo $this->escapeHtml($datatype->getName()); ?></td>
-                <td class="a-center">
+                <td class="text-center">
                     <?php if($this->acl('development', 'datatype/edit')): ?>
                         <a href="<?php echo $this->url('development/datatype/edit', array('id' => $datatype->getId())); ?>" class="edit-line">
                             <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                         </a>
                     <?php endif; ?>
                 </td>
-                <td class="a-center">
+                <td class="text-center">
                     <?php if($this->acl('development', 'datatype/delete')): ?>
                         <a href="<?php echo $this->url('development/datatype/delete', array('id' => $datatype->getId())); ?>" class="delete-line">
                             <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">

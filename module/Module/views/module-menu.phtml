@@ -29,7 +29,7 @@
 ?>
 <ul class="nav nav-list dropdown">
 <?php if ($this->acl('development', 'document-type')): ?>
-    <li>
+    <li class="open">
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Modules')); ?></span>

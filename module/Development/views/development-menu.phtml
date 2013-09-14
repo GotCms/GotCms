@@ -27,10 +27,10 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-
+<?php $controller = empty($this->layout()->routeParams['controller']) ? null : $this->layout()->routeParams['controller']; ?>
 <ul class="nav nav-list">
 <?php if ($this->acl('development', 'document-type')): ?>
-    <li>
+    <li<?php if ($controller === 'DocumentTypeController'): ?> class="open"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Document types')); ?></span>
@@ -59,7 +59,7 @@
 <?php endif; ?>
 
 <?php if ($this->acl('development', 'view')): ?>
-    <li>
+    <li<?php if ($controller === 'ViewController'): ?> class="open"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Views')); ?></span>
@@ -88,7 +88,7 @@
 <?php endif; ?>
 
 <?php if ($this->acl('development', 'layout')): ?>
-    <li>
+    <li<?php if ($controller === 'LayoutController'): ?> class="open"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Layouts')); ?></span>
@@ -117,7 +117,7 @@
 <?php endif; ?>
 
 <?php if ($this->acl('development', 'script')): ?>
-    <li>
+    <li<?php if ($controller === 'ScriptController'): ?> class="open"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Scripts')); ?></span>
@@ -146,7 +146,7 @@
 <?php endif; ?>
 
 <?php if ($this->acl('development', 'datatype')): ?>
-    <li>
+    <li<?php if ($controller === 'DatatypeController'): ?> class="open"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Datatypes')); ?></span>

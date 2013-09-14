@@ -32,7 +32,7 @@ $paginator->setCurrentPageNumber(empty($_GET['page']) ? 1 : (int)$_GET['page']);
 ?>
 
 <?php echo $this->paginationControl($paginator, 'Sliding', 'activity-log/index/paginator.phtml', array('path' => $this->url())); ?>
-<table class="table-list">
+<table class="table table-striped">
     <colgroup>
         <col width="10%">
         <col width="80%">
@@ -40,17 +40,17 @@ $paginator->setCurrentPageNumber(empty($_GET['page']) ? 1 : (int)$_GET['page']);
     </colgroup>
     <thead>
         <tr>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Created at')); ?></th>
-            <th class="a-left"><?php echo $this->escapeHtml($this->translate('Event')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Created at')); ?></th>
+            <th><?php echo $this->escapeHtml($this->translate('Event')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($paginator as $event): ?>
             <tr>
-                <td class="a-center"><?php echo date('Y-m-d H:i:s', strtotime($event->getCreatedAt())); ?></td>
-                <td class="a-left"><?php echo $event->getContent(); ?></td>
-                <td class="a-center">
+                <td class="text-center"><?php echo date('Y-m-d H:i:s', strtotime($event->getCreatedAt())); ?></td>
+                <td><?php echo $event->getContent(); ?></td>
+                <td class="text-center">
                     <a href="<?php echo $this->url('module/activity-log/remove-event', array('id' => $event->getId())); ?>" class="delete-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>

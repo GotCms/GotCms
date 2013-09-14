@@ -36,7 +36,7 @@
     <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
 </form>
 
-<table class="table-list clickable">
+<table class="table clickable table-striped table-hover">
     <colgroup>
         <col width="40%">
         <col width="50%">
@@ -47,8 +47,8 @@
         <tr>
             <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
             <th><?php echo $this->escapeHtml($this->translate('Description')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -56,14 +56,14 @@
             <tr>
                 <td><?php echo $this->escapeHtml($layout->getName()); ?></td>
                 <td><?php echo $this->escapeHtml($layout->getDescription()); ?></td>
-                <td class="a-center">
+                <td class="text-center">
                     <?php if($this->acl('development', 'layout/edit')): ?>
                         <a href="<?php echo $this->url('development/layout/edit', array('id' => $layout->getId())); ?>" class="edit-line">
                             <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                         </a>
                     <?php endif; ?>
                 </td>
-                <td class="a-center">
+                <td class="text-center">
                     <?php if($this->acl('development', 'layout/delete')): ?>
                         <a href="<?php echo $this->url('development/layout/delete', array('id' => $layout->getId())); ?>" class="delete-line">
                             <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">

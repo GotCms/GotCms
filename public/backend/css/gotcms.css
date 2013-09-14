@@ -30,13 +30,13 @@ header .pull-right {margin-top:10px;}
 /************** Widget box ***********/
 .widget-box {box-shadow: none;margin: 3px 0 10px;padding: 0;}
 .ui-sortable .widget-header {cursor:pointer;}
-.widget-header {border-radius:3px 3px 0 0;border-style: solid;border-width: 1px;min-height: 38px;padding-left: 12px;position: relative;background: none repeat scroll 0 0 #FFC657;border-color: #E8B10D;color: #855D10;}
+.widget-header {border-radius:3px 3px 0 0;border-style: solid;border-width: 1px;min-height: 38px;padding-left: 12px;position: relative;background: none repeat scroll 0 0 #F9F9F9;border-color: #C2C2C2;color: #555555;}
 .widget-header h3 {font-size:15px;margin:0;}
 .widget-header:before, .widget-header:after {content: "";display: table;line-height: 0;}
 .widget-header:after {clear: right;}
 .widget-header > *:first-child {display: inline;line-height: 36px;margin: 0;padding: 0;}
 .widget-header > *:first-child > [class*="glyphicon-"] {display: inline-block;font-weight: normal;margin-right: 5px;}
-.widget-body {border-radius:0 0 3px 3px;background-color: #F2F2F2;border-color: #E8B10D;border-style: none solid solid;border-width: 0 1px 1px;padding: 12px;}
+.widget-body {border-radius:0 0 3px 3px;background-color: #F2F2F2;border-color: #C2C2C2;border-style: none solid solid;border-width: 0 1px 1px;padding: 12px;}
 .widget-column {min-height:40px;}
 .sortable-placeholder {border-style: dashed;border-width: 1px;margin-bottom: 20px;}
 /************** Dialog ***********/
@@ -166,3 +166,10 @@ header .pull-right {margin-top:10px;}
 .input-checkbox label:hover::after {-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";filter: alpha(opacity=30);opacity: 0.3;}
 .input-checkbox input[type=checkbox]:checked + label:after {-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";filter: alpha(opacity=100);opacity: 1;}
 
+/************** List ***********/
+.list {display: block;position: relative;margin: 0;padding: 0;list-style: none;}
+.list-item, .ui-state-highlight {display: block;position: relative;margin: 0;padding: 0;min-height: 20px;line-height: 20px;}
+.list-handle {display: block;min-height: 35px;margin: 5px 0;padding: 4px 12px;background: #F2F2F2;border: 1px solid #CCCCCC;color: #855D10;text-decoration: none;font-weight: bold;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;overflow:hidden;}
+.list-handle > .glyphicon {width: 36px;margin: 0;border-width: 1px 1px 0 0;text-align: center;padding: 0!important;line-height: 35px;height: 35px;cursor: pointer;overflow: hidden;float:left;z-index: 1;}
+.list-handle:hover{color: #855D10;background: #F2F2F2;}
+.ui-state-highlight {margin: 5px 0;padding: 0;min-height: 30px;background: #F2F2F2;border: 2px dashed #CCCCCC;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}

@@ -27,10 +27,10 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php $infos_form = $this->form->get('infos'); ?>
-<?php $views_form = $this->form->get('views'); ?>
-<?php $tabs_form = $this->form->get('tabs')->getFieldsets(); ?>
-<?php $properties_forms = $this->form->get('properties')->getFieldsets(); ?>
+<?php $infos_form        = $this->form->get('infos'); ?>
+<?php $views_form        = $this->form->get('views'); ?>
+<?php $tabs_form         = $this->form->get('tabs')->getFieldsets(); ?>
+<?php $properties_forms  = $this->form->get('properties')->getFieldsets(); ?>
 <?php $datatypes_options = $this->form->get('properties')->get('datatypes')->getValueOptions(); ?>
 
 <form id="development-form" enctype="application/x-www-form-urlencoded" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" class="simple-form">
@@ -114,9 +114,12 @@
             </div>
         </div>
 
-        <div id="tabs-3" class="form-horizontal">
-            <button id="display-property" class="button-add"><?php echo $this->escapeHtml($this->translate('Show / Hide form create datatype')); ?></button>
-            <div class="hide">
+        <div id="tabs-3">
+            <button type="button" id="display-property" class="btn btn-warning">
+                <i class="glyphicon glyphicon-plus"></i>
+                <?php echo $this->escapeHtml($this->translate('Show / Hide form create datatype')); ?>
+            </button>
+            <div class="hide form-horizontal">
                 <div class="form-group">
                     <label for="properties-name" class="required control-label col-lg-2"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
                     <div class="col-lg-10">
@@ -160,13 +163,18 @@
                 </div>
                 <div class="form-group">
                     <label for="properties-required" class="optional control-label col-lg-2"><?php echo $this->escapeHtml($this->translate('Required')); ?></label>
-                    <div class="input-checkbox">
-                        <input type="checkbox" name="properties[required]" class="input-checkbox" id="properties-required" value="1">
-                        <label for="properties-required"></label>
+                    <div class="col-lg-10">
+                        <div class="input-checkbox">
+                            <input type="checkbox" name="properties[required]" class="input-checkbox" id="properties-required" value="1">
+                            <label for="properties-required"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <button name="properties[add]" id="property-add" type="button" class="button-add button-add-property"><?php echo $this->escapeHtml($this->translate('Create')); ?></button>
+                    <button name="properties[add]" id="property-add" type="button" class="btn btn-warning button-add-property">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <?php echo $this->escapeHtml($this->translate('Create')); ?>
+                    </button>
                 </div>
             </div>
             <div>
@@ -257,9 +265,12 @@
                                                     <?php endif; ?>
                                                 </div>
                                             </div>
-                                            <div class="cb">
+                                            <div class="clearfix">
                                                 <input class="property-tab-id" type="hidden" id="properties-tab-<?php echo $property_id; ?>" name="properties[<?php echo $property_form_id; ?>][tab]" value="<?php echo (int)$property->get('tab')->getValue(); ?>">
-                                                <button type="button" value="<?php echo $property_id; ?>" class="button-delete delete-property"><?php echo $this->escapeHtml($this->translate('Delete')); ?></button>
+                                                <button type="button" value="<?php echo $property_id; ?>" class="btn btn-danger delete-property">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                    <?php echo $this->escapeHtml($this->translate('Delete')); ?>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -272,54 +283,79 @@
         </div>
 
         <div id="tabs-4" class="form-horizontal">
-            <div class="form-group">
-                <label for="tabs-addname" class="required control-label col-lg-2"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-                <div class="col-lg-10">
-                    <input class="form-control" type="text" name="tabs[addname]" id="tabs-addname" value="">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label for="tabs-addname" class="required control-label col-lg-2"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+                        <div class="col-lg-10">
+                            <input class="form-control" type="text" name="tabs[addname]" id="tabs-addname" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tabs-adddescription" class="required control-label col-lg-2"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+                        <div class="col-lg-10">
+                            <input class="form-control" type="text" name="tabs[adddescription]" id="tabs-adddescription" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button name="tabs[add]" id="tabs-add" type="button" class="btn btn-warning">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <?php echo $this->escapeHtml($this->translate('Add Tab')); ?>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="tabs-adddescription" class="required control-label col-lg-2"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
-                <div class="col-lg-10">
-                    <input class="form-control" type="text" name="tabs[adddescription]" id="tabs-adddescription" value="">
-                </div>
-            </div>
-            <div class="form-group">
-                <button name="tabs[add]" id="tabs-add" type="button" class="button-add button-add-tab"><?php echo $this->escapeHtml($this->translate('Add Tab')); ?></button>
             </div>
 
             <div id="import-tab">
-                <?php $tabs_list = $this->form->get('tabs')->get('tabs_list')->getValueOptions(); ?>
-                <?php if (!empty($tabs_list)): ?>
-                    <select class="form-control" id="import-tabs">
-                        <?php foreach ($tabs_list as $tab): ?>
-                            <option value="<?php echo $this->escapeHtml($tab->getId()); ?>"><?php echo $this->escapeHtml($tab->getName()); ?> (<?php echo $this->escapeHtml($tab->getDocumentType()->getName()); ?>)</option>
-                        <?php endforeach; ?>
-                    </select>
-                <?php endif; ?>
-                <button id="import-tab-button" class="button-add"><?php echo $this->escapeHtml($this->translate('Import tab')); ?></button>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <?php $tabs_list = $this->form->get('tabs')->get('tabs_list')->getValueOptions(); ?>
+                        <?php if (!empty($tabs_list)): ?>
+                            <select class="form-control" id="import-tabs">
+                                <?php foreach ($tabs_list as $tab): ?>
+                                    <option value="<?php echo $this->escapeHtml($tab->getId()); ?>"><?php echo $this->escapeHtml($tab->getName()); ?> (<?php echo $this->escapeHtml($tab->getDocumentType()->getName()); ?>)</option>
+                                <?php endforeach; ?>
+                            </select>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-lg-2">
+                        <button id="import-tab-button" type="button" class="btn btn-warning">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <?php echo $this->escapeHtml($this->translate('Import tab')); ?>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
                 <h3><?php echo $this->escapeHtml($this->translate('Tabs')); ?></h3>
-                <ul id="tabs" class="sortable ui-sortable">
+                <ol id="tabs" class="sortable list">
                 <?php foreach ($tabs_form as $tab_form): ?>
-                    <li class="clearfix">
-                        <?php $name = $tab_form->get('name')->getValue(); ?>
-                        <?php $description = $tab_form->get('description')->getValue(); ?>
-                        <?php $tab_id = 'tab'.$tab_form->get('tab_id')->getValue(); ?>
-                        <div class="hide floatL">
-                            <input class="form-control" type="text" value="<?php echo $name; ?>" name="tabs[<?php echo $tab_id; ?>][name]">
-                            <input class="form-control" type="text" value="<?php echo $description; ?>" name="tabs[<?php echo $tab_id; ?>][description]">
+                    <?php $name        = $tab_form->get('name')->getValue(); ?>
+                    <?php $description = $tab_form->get('description')->getValue(); ?>
+                    <?php $tab_id      = 'tab'.$tab_form->get('tab_id')->getValue(); ?>
+                    <li class="list-item">
+                        <div class="list-handle">
+                            <i class="glyphicon glyphicon-move"></i>
+                            <div class="col-lg-10">
+                                <div class="col-lg-6">
+                                    <input class="form-control" type="text" value="<?php echo $name; ?>" name="tabs[<?php echo $tab_id; ?>][name]">
+                                </div>
+                                <div class="col-lg-6">
+                                    <input class="form-control" type="text" value="<?php echo $description; ?>" name="tabs[<?php echo $tab_id; ?>][description]">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-1">
+                                <button value="<?php echo (int)$tab_form->get('tab_id')->getValue(); ?>" class="btn btn-danger delete-tab" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                    <?php echo $this->escapeHtml($this->translate('Delete'));?>
+                                </button>
+                            </div>
                         </div>
-                        <div class="floatL">
-                            <span><?php echo $name; ?></span>
-                            <span><?php echo $description; ?></span>
-                        </div>
-                        <button value="<?php echo (int)$tab_form->get('tab_id')->getValue(); ?>" class="button-delete delete-tab floatR" type="button"><?php echo $this->escapeHtml($this->translate('Delete'));?> </button>
                     </li>
                 <?php endforeach; ?>
-                </ul>
+                </ol>
             </div>
         </div>
     </div>

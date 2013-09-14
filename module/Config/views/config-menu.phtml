@@ -27,10 +27,10 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-
+<?php $controller = empty($this->layout()->routeParams['controller']) ? null : $this->layout()->routeParams['controller']; ?>
 <ul class="nav nav-list">
 <?php if ($this->acl('settings', 'config')): ?>
-    <li>
+    <li<?php if ($controller === 'CmsController'): ?> class="open"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Configuration')); ?></span>
@@ -74,7 +74,7 @@
 <?php endif; ?>
 
 <?php if ($this->acl('settings', 'user')): ?>
-    <li>
+    <li<?php if ($controller === 'UserController'): ?> class="open"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Users')); ?></span>
@@ -103,7 +103,7 @@
 <?php endif; ?>
 
 <?php if ($this->acl('settings', 'role')): ?>
-    <li>
+    <li<?php if ($controller === 'RoleController'): ?> class="open"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Roles')); ?></span>
