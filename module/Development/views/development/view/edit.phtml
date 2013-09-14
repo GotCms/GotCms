@@ -27,16 +27,16 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<a href="<?php echo $this->url('development/view/download', array('id' => $this->viewId)); ?>"><?php echo $this->escapeHtml($this->translate('Download file')); ?></a>
-<a href="#" id="upload-link"><?php echo $this->escapeHtml($this->translate('Upload file')); ?></a>
-
-<form class="hide" id="form-content" action="<?php echo $this->url('development/view/upload', array('id' => $this->viewId)); ?>" method="post" enctype="multipart/form-data">
-    <input type="file" name="upload">
-    <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
-</form>
+<?php echo $this->partial(
+    'development/download-upload.phtml',
+    array(
+        'id'            => $this->viewId,
+        'routeDownload' => 'development/view/download',
+        'routeUpload'   => 'development/view/upload',
+    )
+); ?>
 
 <?php echo $this->partial('development/forms/view.phtml', array('form' => $this->form)); ?>
-
 <script type="text/javascript">
     Gc.initCodeMirror('view-content');
     Gc.saveCommand();

@@ -27,14 +27,13 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<a href="<?php echo $this->url('development/layout/download'); ?>"><?php echo $this->escapeHtml($this->translate('Download all files')); ?></a>
-<a href="#" id="upload-link"><?php echo $this->escapeHtml($this->translate('Upload file')); ?></a>
-
-<form class="hide" id="form-content" action="<?php echo $this->url('development/layout/upload'); ?>" method="post" enctype="multipart/form-data">
-    <p><?php echo $this->escapeHtml($this->translate('Files as: identifier.phtml')); ?></p>
-    <input type="file" name="upload[]" multiple="multiple">
-    <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
-</form>
+<?php echo $this->partial(
+    'development/download-upload.phtml',
+    array(
+        'routeDownload' => 'development/layout/download',
+        'routeUpload'   => 'development/layout/upload',
+    )
+); ?>
 
 <table class="table clickable table-striped table-hover">
     <colgroup>

@@ -737,7 +737,7 @@ var Gc = (function($)
         initUploadLink: function()
         {
             $('#upload-link').on('click', function() {
-                $('#form-content').toggle();
+                $('#form-content').toggleClass('hide');
                 return false;
             });
         },
