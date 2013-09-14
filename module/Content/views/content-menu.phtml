@@ -27,15 +27,15 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+<?php $controller = empty($this->layout()->routeParams['controller']) ? null : $this->layout()->routeParams['controller']; ?>
+<?php $action     = empty($this->layout()->routeParams['action']) ? null : $this->layout()->routeParams['action']; ?>
 
 <ul class="nav nav-list">
 <?php if ($this->acl('content', 'document')): ?>
-    <li class="open">
+    <li class="open<?php if ($controller === 'DocumentController'): ?> active<?php endif; ?>">
         <a class="menu-toggle" href="#">
-            <i class="glyphicon glyphicon-desktop"></i>
+            <i class="glyphicon glyphicon-tower"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Documents')); ?></span>
-
-            <b class="arrow glyphicon glyphicon-tower"></b>
         </a>
         <ul class="submenu">
             <li>
@@ -46,7 +46,7 @@
 <?php endif; ?>
 
 <?php if ($this->acl('content', 'media')): ?>
-    <li>
+    <li class="<?php if ($controller === 'MediaController'): ?> active<?php endif; ?>">
         <a href="<?php echo $this->url('content/media'); ?>">
             <i class="glyphicon glyphicon-folder-open"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('File manager')); ?></span>
@@ -55,20 +55,20 @@
 <?php endif; ?>
 
 <?php if ($this->acl('content', 'translation')): ?>
-    <li class="open">
+    <li class="open<?php if ($controller === 'TranslationController'): ?> active<?php endif; ?>">
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Translations')); ?></span>
             <span class="caret"></span>
         </a>
         <ul class="submenu">
-            <li>
+            <li<?php if ($controller === 'TranslationController' and $action === 'create'): ?> class="active"<?php endif; ?>>
                 <a href="<?php echo $this->url('content/translation/create'); ?>">
                     <i class="glyphicon glyphicon-arrow-right"></i>
                     <?php echo $this->escapeHtml($this->translate('Create')); ?>
                 </a>
             </li>
-            <li>
+            <li<?php if ($controller === 'TranslationController' and $action === 'index'): ?> class="active"<?php endif; ?>>
                 <a href="<?php echo $this->url('content/translation'); ?>">
                     <i class="glyphicon glyphicon-arrow-right"></i>
                     <?php echo $this->escapeHtml($this->translate('Edit')); ?>

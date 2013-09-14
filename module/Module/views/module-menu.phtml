@@ -27,9 +27,11 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+<?php $controller = empty($this->layout()->routeParams['controller']) ? null : $this->layout()->routeParams['controller']; ?>
+<?php $action = empty($this->layout()->routeParams['action']) ? null : $this->layout()->routeParams['action']; ?>
 <ul class="nav nav-list dropdown">
 <?php if ($this->acl('development', 'document-type')): ?>
-    <li class="open">
+    <li<?php if ($controller === 'ModuleController'): ?> class="open"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Modules')); ?></span>
@@ -37,7 +39,7 @@
         </a>
         <ul class="submenu">
             <?php if ($this->acl('modules', 'install')): ?>
-                <li>
+                <li<?php if ($controller === 'ModuleController' and $action === 'install'): ?> class="active"<?php endif; ?>>
                     <a href="<?php echo $this->url('module/install'); ?>">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                         <?php echo $this->escapeHtml($this->translate('Install')); ?>
@@ -45,7 +47,7 @@
                 </li>
             <?php endif; ?>
 
-            <li>
+            <li<?php if ($controller === 'ModuleController' and $action === 'index'): ?> class="active"<?php endif; ?>>
                 <a href="<?php echo $this->url('module'); ?>">
                     <i class="glyphicon glyphicon-arrow-right"></i>
                     <?php echo $this->escapeHtml($this->translate('List')); ?>

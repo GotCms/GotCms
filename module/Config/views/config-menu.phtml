@@ -28,9 +28,10 @@
 
 ?>
 <?php $controller = empty($this->layout()->routeParams['controller']) ? null : $this->layout()->routeParams['controller']; ?>
+<?php $action     = empty($this->layout()->routeParams['action']) ? null : $this->layout()->routeParams['action']; ?>
 <ul class="nav nav-list">
 <?php if ($this->acl('settings', 'config')): ?>
-    <li<?php if ($controller === 'CmsController'): ?> class="open"<?php endif; ?>>
+    <li<?php if ($controller === 'CmsController'): ?> class="open active"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Configuration')); ?></span>
@@ -38,7 +39,7 @@
         </a>
         <ul class="submenu">
             <?php if ($this->acl('settings', 'config/general')): ?>
-                <li>
+                <li<?php if ($controller === 'CmsController' and $action === 'editGeneral'): ?> class="active"<?php endif; ?>>
                     <a href="<?php echo $this->url('config/general'); ?>">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                         <?php echo $this->escapeHtml($this->translate('General')); ?>
@@ -46,7 +47,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($this->acl('settings', 'config/system')): ?>
-                <li>
+                <li<?php if ($controller === 'CmsController' and $action === 'editSystem'): ?> class="active"<?php endif; ?>>
                     <a href="<?php echo $this->url('config/system'); ?>">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                         <?php echo $this->escapeHtml($this->translate('System')); ?>
@@ -54,7 +55,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($this->acl('settings', 'config/server')): ?>
-                <li>
+                <li<?php if ($controller === 'CmsController' and $action === 'editServer'): ?> class="active"<?php endif; ?>>
                     <a href="<?php echo $this->url('config/server'); ?>">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                         <?php echo $this->escapeHtml($this->translate('Server')); ?>
@@ -62,7 +63,7 @@
                 </li>
             <?php endif; ?>
             <?php if ($this->acl('settings', 'config/update')): ?>
-                <li>
+                <li<?php if ($controller === 'CmsController' and $action === 'update'): ?> class="active"<?php endif; ?>>
                     <a href="<?php echo $this->url('config/cms-update'); ?>">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                         <?php echo $this->escapeHtml($this->translate('Update')); ?>
@@ -74,7 +75,7 @@
 <?php endif; ?>
 
 <?php if ($this->acl('settings', 'user')): ?>
-    <li<?php if ($controller === 'UserController'): ?> class="open"<?php endif; ?>>
+    <li<?php if ($controller === 'UserController'): ?> class="open active"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Users')); ?></span>
@@ -82,7 +83,7 @@
         </a>
         <ul class="submenu">
             <?php if ($this->acl('settings', 'user/create')): ?>
-                <li>
+                <li<?php if ($controller === 'UserController' and $action === 'create'): ?> class="active"<?php endif; ?>>
                     <a href="<?php echo $this->url('config/user/create'); ?>">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                         <?php echo $this->escapeHtml($this->translate('Create')); ?>
@@ -91,7 +92,7 @@
             <?php endif; ?>
 
             <?php if ($this->acl('settings', 'user/list')): ?>
-                <li>
+                <li<?php if ($controller === 'UserController' and $action === 'index'): ?> class="active"<?php endif; ?>>
                     <a href="<?php echo $this->url('config/user'); ?>">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                         <?php echo $this->escapeHtml($this->translate('List')); ?>
@@ -103,7 +104,7 @@
 <?php endif; ?>
 
 <?php if ($this->acl('settings', 'role')): ?>
-    <li<?php if ($controller === 'RoleController'): ?> class="open"<?php endif; ?>>
+    <li<?php if ($controller === 'RoleController'): ?> class="open active"<?php endif; ?>>
         <a class="menu-toggle" href="#">
             <i class="glyphicon glyphicon-book"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Roles')); ?></span>
@@ -111,7 +112,7 @@
         </a>
         <ul class="submenu">
             <?php if ($this->acl('settings', 'role/create')): ?>
-                <li>
+                <li<?php if ($controller === 'RoleController' and $action === 'create'): ?> class="active"<?php endif; ?>>
                     <a href="<?php echo $this->url('config/user/role/create'); ?>">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                         <?php echo $this->escapeHtml($this->translate('Create')); ?>
@@ -120,7 +121,7 @@
             <?php endif; ?>
 
             <?php if ($this->acl('settings', 'role/list')): ?>
-                <li>
+                <li<?php if ($controller === 'RoleController' and $action === 'index'): ?> class="active"<?php endif; ?>>
                     <a href="<?php echo $this->url('config/user/role'); ?>">
                         <i class="glyphicon glyphicon-arrow-right"></i>
                         <?php echo $this->escapeHtml($this->translate('List')); ?>

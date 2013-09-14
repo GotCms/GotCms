@@ -162,7 +162,6 @@ th[aria-selected=true] {background-color: #eaeef4;background-image: -moz-linear-
 .ui-widget-header {border-radius:3px 3px 0 0;border-style: solid;border-width: 1px;padding-left: 12px;position: relative;background: none repeat scroll 0 0 #F9F9F9;border-color: #C2C2C2;color: #555555;}
 .ui-widget-header h3 {font-size:15px;margin:0;}
 .ui-widget-header:before, .ui-widget-header:after {content: "";display: table;line-height: 0;}
-.ui-widget-header:after {clear: right;}
 .ui-button {color: #ffffff;background-color: #f0ad4e;border-color: #eea236;display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: normal;line-height: 1.428571429;text-align: center;white-space: nowrap;vertical-align: middle;cursor: pointer;border: 1px solid transparent;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;-o-user-select: none;user-select: none;}
 .ui-button:focus {outline: thin dotted #333;outline: 5px auto -webkit-focus-ring-color;outline-offset: -2px;}
 .ui-button:hover,
