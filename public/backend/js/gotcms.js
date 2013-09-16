@@ -68,6 +68,11 @@ var Gc = (function($)
                     $btn.fadeOut();
                 }
             });
+
+            $('.btn-scroll-up').on('click', function() {
+                $('html,body').animate({ scrollTop: 0 }, 'slow');
+                return false;
+            })
         },
 
         setOption: function($key, $value)
