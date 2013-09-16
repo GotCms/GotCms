@@ -39,40 +39,50 @@
         <?php $values = $data['values']; ?>
         <?php $labels = $data['labels']; ?>
         <div id="<?php echo $this->escapeHtml($type); ?>">
-            <div class="floatL">
-                <?php if (!empty($values['pagesviews'])): ?>
-                    <h2><?php echo $this->escapeHtml($this->translate($labels['pagesviews'])); ?></h2>
-                    <?php $this->graph->Values($values['pagesviews']); ?>
-                    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-                    <?php echo $this->graph->FetchJavascript(); ?>
-                <?php endif; ?>
-            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <?php if (!empty($values['pagesviews'])): ?>
+                        <h2><?php echo $this->escapeHtml($this->translate($labels['pagesviews'])); ?></h2>
+                        <?php $this->graph->Values($values['pagesviews']); ?>
+                        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+                        <?php echo $this->graph->FetchJavascript(); ?>
+                    <?php endif; ?>
+                </div>
 
-            <div class="floatL">
-                <?php if (!empty($values['visitors'])): ?>
-                    <h2><?php echo $this->escapeHtml($this->translate($labels['visitors'])); ?></h2>
-                    <?php $this->graph->Values($values['visitors']); ?>
-                    <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
-                    <?php echo $this->graph->FetchJavascript(); ?>
-                <?php endif; ?>
+                <div class="col-lg-6">
+                    <?php if (!empty($values['visitors'])): ?>
+                        <h2><?php echo $this->escapeHtml($this->translate($labels['visitors'])); ?></h2>
+                        <?php $this->graph->Values($values['visitors']); ?>
+                        <?php echo $this->graph->Fetch('Bar3DGraph', false); ?>
+                        <?php echo $this->graph->FetchJavascript(); ?>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <?php foreach (array('urlsviews', 'referers') as $data_name): ?>
                 <div class="cb stats-list">
                     <?php if (!empty($values[$data_name])): ?>
                         <h2><?php echo $this->escapeHtml($this->translate($labels[$data_name])); ?></h2>
-                        <ul>
-                            <?php foreach ($values[$data_name] as $value): ?>
-                                <li>
-                                    <span class="floatL">
-                                        <a href="<?php echo $this->escapeHtml($value['url']); ?>" target="_blank">
-                                            <?php echo $this->escapeHtml($value['url']); ?>
-                                        </a>
-                                    </span>
-                                    <span class="floatR"><?php echo $this->escapeHtml($value['nb']); ?></span>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><?php echo $this->escapeHtml($this->translate('Url')); ?></th>
+                                    <th class="text-center"><?php echo $this->escapeHtml($this->translate('Nb')); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($values[$data_name] as $value): ?>
+                                    <tr>
+                                        <td class="col-lg-11">
+                                            <a href="<?php echo $this->escapeHtml($value['url']); ?>" target="_blank">
+                                                <?php echo $this->escapeHtml($value['url']); ?>
+                                            </a>
+                                        </td>
+                                        <td class="col-lg-1 text-center"><strong><?php echo $this->escapeHtml($value['nb']); ?></strong></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>

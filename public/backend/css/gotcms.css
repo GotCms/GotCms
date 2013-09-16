@@ -6,7 +6,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family:'Open Sans';}
 .relative {position:relative;}
 .table-hover {cursor:pointer;}
 .btn-in-tab {position: absolute;right: 17px;top: 7px;z-index: 1;}
-.btn-scroll-up {border: 0 none;bottom: 0;line-height: 20px;padding-bottom: 4px;position: fixed;right: 0;z-index: 99;}
+.btn-scroll-up {border: 0 none;bottom: 0;line-height: 20px;padding-bottom: 4px;position: fixed;right: 0;z-index: 99;background:#F2F2F2;border: 1px solid #C2C2C2; border-bottom:none; border-right:none;}
 
 /************** Body ***********/
 body:before {background-color:#FFFFFF;bottom:0;content:"";display:block;left:0;position:fixed;right:0;top:0;z-index:-1;}

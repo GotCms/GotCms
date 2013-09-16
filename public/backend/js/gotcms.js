@@ -59,6 +59,15 @@ var Gc = (function($)
                         });
                 }
             });
+
+            $(window).on('scroll', function() {
+                var $btn = $('.btn-scroll-up');
+                if ($(window).scrollTop() != 0 && $btn.is(':not(:visible)')) {
+                    $btn.fadeIn();
+                } else if ($(window).scrollTop() == 0) {
+                    $btn.fadeOut();
+                }
+            });
         },
 
         setOption: function($key, $value)
