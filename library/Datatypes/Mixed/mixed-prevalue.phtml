@@ -69,7 +69,7 @@
                     </div>
                 <?php endforeach; ?>
                 <div style="margin-top:25px;">
-                    <button class="delete"><?php echo $this->escapeHtml($this->translate('Delete this datatype')); ?></button>
+                    <button type="button" class="btn btn-danger delete"><?php echo $this->escapeHtml($this->translate('Delete this datatype')); ?></button>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -77,11 +77,6 @@
 
     <script>
         $('#tabs').tabs();
-        $('.delete').button({
-            icons: {
-                primary: 'ui-icon-minus'
-            }
-        });
 
         $('.delete').on('click', function () {
             $parent = $(this).closest('.ui-tabs-panel');

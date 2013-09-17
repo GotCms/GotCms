@@ -162,13 +162,19 @@ abstract class AbstractForm extends Form
                 $elements = preg_replace('~name="(.+)(\[.*\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
                 $elements = preg_replace(
                     '~name\\\x3D\\\x22(.+)(\\\x5B.*\\\x5D)?\\\x22~iU',
-                    'name\\\x3D\\\x22' . $prefix . '\\\x5B$1\\\x5D$2',
+                    'name\\\x3D\\\x22' . $prefix . '\\\x5B$1\\\x5D$2\\\x22',
                     $elements
                 );
                 $elements = preg_replace('~id="(.+)"~iU', 'id="${1}' . $datatypeId . '"', $elements);
+                $elements = preg_replace('~for="(.+)"~iU', 'for="${1}' . $datatypeId . '"', $elements);
                 $elements = preg_replace(
                     '~id\\\x3D\\\x22"(.+)\\\x22~iU',
                     'id\\\x3D\\\x22${1}' . $datatypeId . '\\\x22',
+                    $elements
+                );
+                $elements = preg_replace(
+                    '~for\\\x3D\\\x22"(.+)\\\x22~iU',
+                    'for\\\x3D\\\x22${1}' . $datatypeId . '\\\x22',
                     $elements
                 );
                 $elements = preg_replace(

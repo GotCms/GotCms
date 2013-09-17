@@ -27,75 +27,86 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="col-lg-2"><?php echo $this->escapeHtml($this->translate($this->elements['mime']->getName())); ?></label>
+        <div class="col-lg-10">
+            <?php echo $this->formElement($this->elements['mime']); ?>
+        </div>
+    </div>
 
-<h3><?php echo $this->escapeHtml($this->translate($this->elements['mime']->getName())); ?></h3>
-<div>
-    <?php echo $this->formElement($this->elements['mime']); ?>
-</div>
+    <div class="form-group">
+        <label class="col-lg-2" for="<?php echo $this->elements['resize-option']->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($this->elements['resize-option']->getName())); ?></label>
+        <div class="col-lg-10">
+            <?php echo $this->formElement($this->elements['resize-option']); ?>
+        </div>
+    </div>
 
-<h3><?php echo $this->escapeHtml($this->translate($this->elements['resize-option']->getName())); ?></h3>
-<div>
-    <?php echo $this->formElement($this->elements['resize-option']); ?>
-</div>
-
-<h3><?php echo $this->escapeHtml($this->translate($this->elements['background']->getName())); ?></h3>
-<div>
-    <?php echo $this->formElement($this->elements['background']); ?>
+    <div class="form-group">
+        <label class="col-lg-2" for="<?php echo $this->elements['background']->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($this->elements['background']->getName())); ?></label>
+        <div class="col-lg-10">
+            <?php echo $this->formElement($this->elements['background']); ?>
+        </div>
+    </div>
 </div>
 
 <h3><?php echo $this->escapeHtml($this->translate('Size')); ?></h3>
-<div id="sizes">
-    <?php if (!empty($this->elements['size'])): ?>
-        <?php foreach ($this->elements['size'] as $size): ?>
-            <div>
-                <?php foreach ($size as $element): ?>
-                    <label style="width:auto" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($element->getLabel()); ?></label>
-                    <?php echo $this->formElement($element); ?>
+<div>
+    <?php if (!empty($this->elements['size'])): ?>        <table class="table" id="sizes">
+            <thead>
+                <tr>
+                    <th><?php echo $this->translate($this->escapeHtml('Name')); ?></th>
+                    <th><?php echo $this->translate($this->escapeHtml('Width')); ?></th>
+                    <th><?php echo $this->translate($this->escapeHtml('Height')); ?></th>
+                    <th><?php echo $this->translate($this->escapeHtml('Action')); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->elements['size'] as $size): ?>
+                    <tr>
+                        <?php foreach ($size as $element): ?>
+                            <td>
+                                <?php echo $this->formElement($element); ?>
+                            </td>
+                        <?php endforeach; ?>
+                        <td>
+                            <button type="button" class="btn btn-danger delete-button">
+                                <i class="glyphicon glyphicon-remove"></i>
+                                <?php echo $this->escapeHtml($this->translate('Delete')); ?>
+                            </button>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
-                <span class="delete-button"><?php echo $this->escapeHtml($this->translate('Delete')); ?></span>
-            </div>
-        <?php endforeach; ?>
+            </tbody>
+        </table>
     <?php endif; ?>
 </div>
 
 <div>
-    <span id="add-size"><?php echo $this->escapeHtml($this->translate('Add')); ?></span>
+    <button type="button" id="add-size" class="btn btn-primary">
+        <i class="glyphicon glyphicon-plus"></i>
+        <?php echo $this->escapeHtml($this->translate('Add')); ?>
+    </button>
 </div>
 
 <script type="text/javascript">
-    $template = new Template('<div>' +
+    $template = new Template('<tr>' +
         <?php foreach ($this->elements['size-template'] as $element): ?>
-            '<label style="width:auto" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeJs($element->getLabel()); ?></label>&nbsp;' +
-            '<?php echo $this->escapeJs($this->formElement($element)); ?>&nbsp;' +
+            '<td>' +
+                '<?php echo $this->escapeJs($this->formElement($element)); ?>&nbsp;' +
+            '</td>' +
         <?php endforeach; ?>
-        '<span class="delete-button"><?php echo $this->escapeJs($this->translate('Delete')); ?></span>' +
-    '</div>');
+        '<td><button type="button" class="btn btn-danger delete-button"><i class="glyphicon glyphicon-remove"></i> <?php echo $this->escapeJs($this->translate('Delete')); ?></button></td>' +
+    '</tr>');
 
     $idx = <?php echo count($this->elements['size']); ?>;
-    $('body').on('click', '#add-size', function () {
+    $(document).on('click', '#add-size', function () {
         $html = $($template.evaluate({idx: $idx}));
-        $html.find('.delete-button').button({
-            icons: {
-                primary: "ui-icon-close"
-            }
-        });
         $('#sizes').append($html);
         $idx++;
     });
 
     $('body').on('click', '.delete-button', function () {
-        $(this).parent().remove();
-    });
-
-    $('.delete-button').button({
-        icons: {
-            primary: "ui-icon-close"
-        }
-    });
-
-    $('#add-size').button({
-        icons: {
-            primary: "ui-icon-plus"
-        }
+        $(this).closest('tr').remove();
     });
 </script>

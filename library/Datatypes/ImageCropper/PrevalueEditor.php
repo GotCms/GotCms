@@ -83,21 +83,22 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $config = $this->getConfig();
 
         $resizeOption = new Element\Select('resize_option');
-        $resizeOption->setValue(empty($config['resize_option']) ? 'auto' : $config['resize_option']);
-        $resizeOption->setAttribute('class', 'form-control');
-        $resizeOption->setAttribute('id', 'resize-option');
-        $resizeOption->setLabel('Resize option');
-        $resizeOption->setValueOptions(
-            array(
-                'auto' => 'auto',
-                'crop' => 'crop',
-            )
-        );
+        $resizeOption->setValue(empty($config['resize_option']) ? 'auto' : $config['resize_option'])
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'resize-option')
+            ->setLabel('Resize option')
+            ->setValueOptions(
+                array(
+                    'auto' => 'auto',
+                    'crop' => 'crop',
+                )
+            );
 
         $backgroundOption = new Element\Text('background');
-        $backgroundOption->setValue(empty($config['background']) ? '' : $config['background']);
-        $backgroundOption->setAttribute('id', 'background');
-        $backgroundOption->setLabel('Background color');
+        $backgroundOption->setValue(empty($config['background']) ? '' : $config['background'])
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'background')
+            ->setLabel('Background color');
 
         $mimeList = new Element\MultiCheckbox('mime_list');
         $mimeList->setAttribute('class', 'input-checkbox');
@@ -126,19 +127,22 @@ class PrevalueEditor extends AbstractPrevalueEditor
         if (!empty($config['size'])) {
             foreach ($config['size'] as $idx => $size) {
                 $elementSizeName = new Element\Text('size[' . $idx . '][name]');
-                $elementSizeName->setValue($size['name']);
-                $elementSizeName->setAttribute('id', 'name' . $idx);
-                $elementSizeName->setLabel('Name');
+                $elementSizeName->setValue($size['name'])
+                    ->setAttribute('class', 'form-control')
+                    ->setAttribute('id', 'name' . $idx)
+                    ->setLabel('Name');
 
                 $elementWidth = new Element\Text('size[' . $idx . '][width]');
-                $elementWidth->setValue($size['width']);
-                $elementWidth->setAttribute('id', 'width' . $idx);
-                $elementWidth->setLabel('Width');
+                $elementWidth->setValue($size['width'])
+                    ->setAttribute('class', 'form-control')
+                    ->setAttribute('id', 'width' . $idx)
+                    ->setLabel('Width');
 
                 $elementHeight = new Element\Text('size[' . $idx . '][height]');
-                $elementHeight->setValue($size['height']);
-                $elementHeight->setAttribute('id', 'height' . $idx);
-                $elementHeight->setLabel('Height');
+                $elementHeight->setValue($size['height'])
+                    ->setAttribute('class', 'form-control')
+                    ->setAttribute('id', 'height' . $idx)
+                    ->setLabel('Height');
                 $sizeElements[] = array($elementSizeName, $elementWidth, $elementHeight);
             }
 
@@ -146,15 +150,18 @@ class PrevalueEditor extends AbstractPrevalueEditor
         }
 
         $elementSizeName = new Element\Text('size[#{idx}][name]');
-        $elementSizeName->setAttribute('id', 'name#{idx}');
-        $elementSizeName->setLabel('Name');
+        $elementSizeName->setAttribute('id', 'name#{idx}')
+            ->setAttribute('class', 'form-control')
+            ->setLabel('Name');
 
         $elementWidth = new Element\Text('size[#{idx}][width]');
-        $elementWidth->setLabel('Width');
-        $elementWidth->setAttribute('id', 'width#{idx}');
+        $elementWidth->setLabel('Width')
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'width#{idx}');
         $elementHeight = new Element\Text('size[#{idx}][height]');
-        $elementHeight->setLabel('Height');
-        $elementHeight->setAttribute('id', 'height#{idx}');
+        $elementHeight->setLabel('Height')
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'height#{idx}');
         $template = array($elementSizeName, $elementWidth, $elementHeight);
 
         return $this->addPath(__DIR__)->render(
