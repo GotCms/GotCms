@@ -34,11 +34,13 @@
 </div>
 
 <?php if (!empty($this->messages)): ?>
-    <ul>
-        <?php foreach ($this->messages as $message): ?>
-            <li><?php echo $this->escapeHtml($this->translate($message)); ?></li>
-        <?php endforeach; ?>
-    </ul>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach ($this->messages as $message): ?>
+                <li><?php echo $this->escapeHtml($this->translate($message)); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 <?php endif; ?>
 
 <?php $elements = $this->form->getElements(); ?>

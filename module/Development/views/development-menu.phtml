@@ -35,26 +35,31 @@ $pages = array(
         'type'       => 'document-type',
         'controller' => 'DocumentTypeController',
         'title'      => 'Document types',
+        'icon'       => 'glyphicon-road',
     ),
     array(
         'type'       => 'view',
         'controller' => 'ViewController',
         'title'      => 'Views',
+        'icon'       => 'glyphicon-tags',
     ),
     array(
         'type'       => 'layout',
         'controller' => 'LayoutController',
         'title'      => 'Layouts',
+        'icon'       => 'glyphicon-screenshot',
     ),
     array(
         'type'       => 'script',
         'controller' => 'ScriptController',
         'title'      => 'Scripts',
+        'icon'       => 'glyphicon-qrcode',
     ),
     array(
         'type'       => 'datatype',
         'controller' => 'DatatypeController',
         'title'      => 'Datatypes',
+        'icon'       => 'glyphicon-hdd',
     ),
 );
 ?>
@@ -63,7 +68,7 @@ $pages = array(
         <?php if ($this->acl('development', $page['type'])): ?>
             <li<?php if ($controller === $page['controller']): ?> class="open active"<?php endif; ?>>
                 <a class="menu-toggle" href="#">
-                    <i class="glyphicon glyphicon-book"></i>
+                    <i class="glyphicon <?php echo $page['icon']; ?>"></i>
                     <span class="menu-text"><?php echo $this->escapeHtml($this->translate($page['title'])); ?></span>
                     <span class="caret"></span>
                 </a>

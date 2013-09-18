@@ -42,39 +42,74 @@ if (empty($this->currentRoute)) {
 <ul class="nav nav-list">
     <li class="open active">
         <a href="#">
-            <i class="glyphicon glyphicon-book"></i>
+            <i class="glyphicon glyphicon-download"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Steps:')); ?></span>
         </a>
         <ul class="submenu">
             <li<?php if ($this->currentRoute == $routes[0]): ?> class="active"<?php elseif($step > 0): ?> class="done"<?php endif; ?>>
-                <a href="<?php if($step > 0): ?><?php echo $this->url('install'); ?><?php else: ?>#<?php endif; ?>">
-                    <i class="glyphicon glyphicon-arrow-right"></i>
-                    <?php echo $this->escapeHtml($this->translate('Language')); ?>
-                </a>
+                <?php if($step > 0): ?>
+                    <a href="<?php echo $this->url('install'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Language')); ?>
+                    </a>
+                <?php else: ?>
+                    <span>
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Language')); ?>
+                    </span>
+                <?php endif; ?>
             </li>
             <li<?php if ($this->currentRoute == $routes[1]): ?> class="active"<?php elseif($step > 1): ?> class="done"<?php endif; ?>>
-                <a href="<?php if($step > 1): ?><?php echo $this->url('install/license'); ?><?php else: ?>#<?php endif; ?>">
-                    <i class="glyphicon glyphicon-arrow-right"></i>
-                    <?php echo $this->escapeHtml($this->translate('License')); ?>
-                </a>
+                <?php if($step > 1): ?>
+                    <a href="<?php echo $this->url('install/license'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('License')); ?>
+                    </a>
+                <?php else: ?>
+                    <span>
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('License')); ?>
+                    </span>
+                <?php endif; ?>
             </li>
             <li<?php if ($this->currentRoute == $routes[2]): ?> class="active"<?php elseif($step > 2): ?> class="done"<?php endif; ?>>
-                <a href="<?php if($step > 2): ?><?php echo $this->url('install/check-config'); ?><?php else: ?>#<?php endif; ?>">
-                    <i class="glyphicon glyphicon-arrow-right"></i>
-                    <?php echo $this->escapeHtml($this->translate('Pre-configuration')); ?>
-                </a>
+                <?php if($step > 2): ?>
+                    <a href="<?php echo $this->url('install/check-config'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Pre-configuration')); ?>
+                    </a>
+                <?php else: ?>
+                    <span>
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Pre-configuration')); ?>
+                    </span>
+                <?php endif; ?>
             </li>
             <li<?php if ($this->currentRoute == $routes[3]): ?> class="active"<?php elseif($step > 3): ?> class="done"<?php endif; ?>>
-                <a href="<?php if($step > 3): ?><?php echo $this->url('install/database'); ?><?php else: ?>#<?php endif; ?>">
-                    <i class="glyphicon glyphicon-arrow-right"></i>
-                    <?php echo $this->escapeHtml($this->translate('Database')); ?>
-                </a>
+                <?php if($step > 3): ?>
+                    <a href="<?php echo $this->url('install/database'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Database')); ?>
+                    </a>
+                <?php else: ?>
+                    <span>
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Database')); ?>
+                    </span>
+                <?php endif; ?>
             </li>
             <li<?php if ($this->currentRoute == $routes[4]): ?> class="active"<?php elseif($step >= 4): ?> class="done"<?php endif; ?>>
-                <a href="<?php if($step > 4): ?><?php echo $this->url('install/configuration'); ?><?php else: ?>#<?php endif; ?>">
-                    <i class="glyphicon glyphicon-arrow-right"></i>
-                    <?php echo $this->escapeHtml($this->translate('Configuration')); ?>
-                </a>
+                <?php if($step > 4): ?>
+                    <a href="<?php echo $this->url('install/configuration'); ?>">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Configuration')); ?>
+                    </a>
+                <?php else: ?>
+                    <span>
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <?php echo $this->escapeHtml($this->translate('Configuration')); ?>
+                    </span>
+                <?php endif; ?>
             </li>
         </ul>
     </li>

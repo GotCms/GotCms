@@ -145,7 +145,7 @@ class Action extends AbstractActionController
         }
 
         $this->layout()->routeParams = $this->getRouteMatch()->getParams();
-        $this->layout()->version = \Gc\Version::VERSION;
+        $this->layout()->version     = \Gc\Version::VERSION;
 
         $this->useFlashMessenger(false);
     }

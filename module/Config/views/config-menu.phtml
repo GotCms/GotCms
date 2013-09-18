@@ -33,7 +33,7 @@
 <?php if ($this->acl('settings', 'config')): ?>
     <li<?php if ($controller === 'CmsController'): ?> class="open active"<?php endif; ?>>
         <a class="menu-toggle" href="#">
-            <i class="glyphicon glyphicon-book"></i>
+            <i class="glyphicon glyphicon-tree-conifer"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Configuration')); ?></span>
             <span class="caret"></span>
         </a>
@@ -77,7 +77,7 @@
 <?php if ($this->acl('settings', 'user')): ?>
     <li<?php if ($controller === 'UserController'): ?> class="open active"<?php endif; ?>>
         <a class="menu-toggle" href="#">
-            <i class="glyphicon glyphicon-book"></i>
+            <i class="glyphicon glyphicon-user"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Users')); ?></span>
             <span class="caret"></span>
         </a>
@@ -106,7 +106,7 @@
 <?php if ($this->acl('settings', 'role')): ?>
     <li<?php if ($controller === 'RoleController'): ?> class="open active"<?php endif; ?>>
         <a class="menu-toggle" href="#">
-            <i class="glyphicon glyphicon-book"></i>
+            <i class="glyphicon glyphicon-tower"></i>
             <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Roles')); ?></span>
             <span class="caret"></span>
         </a>
