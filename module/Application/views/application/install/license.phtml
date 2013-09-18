@@ -27,14 +27,21 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+<div class="page-header position-relative">
+    <h1>
+        <?php echo $this->escapeHtml($this->translate('License')); ?>
+    </h1>
+</div>
 
-<h2><?php echo $this->escapeHtml($this->translate('License')); ?></h2>
+<div class="form-group">
+    <textarea class="form-control" readonly="readonly" rows="20">
+        <?php echo $this->escapeHtml($this->license); ?>
+    </textarea>
+</div>
 
-<textarea class="license" readonly="readonly">
-    <?php echo $this->escapeHtml($this->license); ?>
-</textarea>
-
-<label style="width:auto">
-    <?php echo $this->formElement($this->form->get('accept-license')); ?>
-    <?php echo $this->escapeHtml($this->translate('You must accept this license for continue to install this software.')); ?>
-</label>
+<div class="form-group">
+    <label class="control-label">
+        <?php echo $this->formElement($this->form->get('accept-license')); ?>
+        <?php echo $this->escapeHtml($this->translate('You must accept this license for continue to install this software.')); ?>
+    </label>
+</div>

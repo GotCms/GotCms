@@ -146,17 +146,6 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes'  => array(
-                    'check-config' => array(
-                        'type'    => 'Literal',
-                        'options' => array(
-                            'route'    => '/check-server-configuration',
-                            'defaults' => array(
-                                'module'     =>'application',
-                                'controller' => 'InstallController',
-                                'action'     => 'check-config',
-                            ),
-                        ),
-                    ),
                     'license' => array(
                         'type'    => 'Literal',
                         'options' => array(
@@ -165,6 +154,17 @@ return array(
                                 'module'     =>'application',
                                 'controller' => 'InstallController',
                                 'action'     => 'license',
+                            ),
+                        ),
+                    ),
+                    'check-config' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/check-server-configuration',
+                            'defaults' => array(
+                                'module'     =>'application',
+                                'controller' => 'InstallController',
+                                'action'     => 'check-config',
                             ),
                         ),
                     ),

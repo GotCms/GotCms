@@ -36,8 +36,9 @@ use Gc\Registry;
 use Gc\Version;
 use Application\Form\Install;
 use Zend\Config\Reader\Ini;
-use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
+use Zend\Validator\AbstractValidator;
 use Exception;
 
 /**
@@ -79,16 +80,19 @@ class InstallController extends Action
         //Force locale to translator
         $session = $this->getSession();
         if (!empty($session['install']['lang'])) {
-            $translator = $this->getServiceLocator()->get('translator');
-            $translator->setLocale(
-                $session['install']['lang']
-            );
+            $translator = $this->getServiceLocator()->get('MvcTranslator');
 
             $translator->addTranslationFilePattern(
                 'phparray',
                 GC_APPLICATION_PATH . '/data/install/translation',
                 '%s.php'
             );
+
+            $translator->setLocale(
+                $session['install']['lang']
+            );
+
+            AbstractValidator::setDefaultTranslator($translator);
         }
     }
 
