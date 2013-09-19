@@ -87,10 +87,11 @@
 .ui-dialog .ui-dialog-titlebar-close:hover{opacity:1;text-decoration:none;padding:0;}
 .ui-dialog .ui-dialog-titlebar-close .ui-button-text{text-indent:0;visibility:hidden;}
 .ui-dialog .widget-header .ui-dialog-titlebar-close{right:10px!important;}
-.ui-accordion .ui-accordion-header a{color:#999999;}
-.ui-accordion .ui-accordion-header{color:#999999;font-weight:normal;background-color:#f9f9f9;border:1px solid #C2C2C2;padding:8px 8px 9px 25px;}
-.ui-accordion .ui-accordion-header:hover{color:#E8B10D;background-color:#F0F0F0;}
+.ui-accordion .ui-accordion-header a{color:#555555;}
+.ui-accordion .ui-accordion-header a:hover{text-decoration:none;}
+.ui-accordion .ui-accordion-header{color:#555555;font-weight:normal;background-color:#f9f9f9;border:1px solid #C2C2C2;padding:8px 8px 9px 25px;}
 .ui-accordion .ui-accordion-header.ui-state-active{color:#000000;background-color:#F0F0F0;position:relative;}
+.ui-accordion .ui-accordion-header.ui-state-hover{color:#E8B10D;background-color:#F0F0F0;}
 .ui-accordion .ui-accordion-header .ui-accordion-header-icon{text-indent:0;margin-top:0;position:absolute;left:10px;top:9px;}
 .ui-accordion .ui-accordion-header .ui-accordion-header-icon:before{display:inline;font-family:'Glyphicons Halflings';-webkit-font-smoothing:antialiased;font-size:10px;content:"\e080";}
 .ui-accordion .ui-accordion-header.ui-state-active .ui-accordion-header-icon:before{content:"\e114";font-weight:normal;}
