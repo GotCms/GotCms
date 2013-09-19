@@ -42,7 +42,7 @@
         <label class="required control-label col-lg-2" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
         <div class="col-lg-10">
             <input type="name" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
-            <?php echo $this->formElementErrors($this->form->get('name')); ?>
+            <?php echo $this->formElementErrors($this->form->get('name'), array('class' => 'text-danger')); ?>
         </div>
     </div>
     <div class="form-group">
@@ -56,7 +56,7 @@
             </select>
         </div>
 
-        <?php echo $this->formElementErrors($this->form->get('model')); ?>
+        <?php echo $this->formElementErrors($this->form->get('model'), array('class' => 'text-danger')); ?>
     </div>
 
     <?php if ($this->form->has('prevalue-editor')): ?>
@@ -82,7 +82,7 @@
 
                         <div class="col-lg-10">
                             <?php echo $this->formElement($element); ?>
-                            <?php echo $this->formElementErrors($element); ?>
+                            <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
                         </div>
                     </div>
                 <?php endif; ?>
