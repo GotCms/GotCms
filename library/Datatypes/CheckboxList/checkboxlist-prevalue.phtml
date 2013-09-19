@@ -1,0 +1,51 @@
+
+<div>
+    <div class="col-lg-2">
+        <input type="text" id="addValue" value="" class="form-control">
+    </div>
+    <button type="button" class="btn btn-primary button-add">
+        <i class="glyphicon glyphicon-plus"></i>
+        <?php echo $this->escapeHtml($this->translate('Add')); ?>
+    </button>
+</div>
+
+<h2><?php echo $this->escapeHtml($this->translate('List of values')); ?></h2>
+<ul id="checkboxlist-values" class="list-group col-lg-6">
+    <?php if (is_array($this->parameters)): ?>
+        <?php foreach ($this->parameters as $param => $value): ?>
+            <li class="list-group-item">
+                <div class="col-lg-10">
+                    <input class="form-control" type="text" name="values[]" value="<?php echo $this->escapeHtml($value); ?>">
+                </div>
+                <button type="button" class="btn btn-danger button-delete">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    <?php echo $this->escapeHtml($this->translate('Delete')); ?>
+                </button>
+            </li>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</ul>
+
+<script type="text/javascript">
+    $(document).on('click', '.button-delete', function() {
+        $(this).closest('li').remove();
+        return false;
+    });
+
+    $(document).on('click', '.button-add', function() {
+        if ($('#addValue').val() != "") {
+            $('#checkboxlist-values').append(
+                '<li class="list-group-item">' +
+                    '<div class="col-lg-10">' +
+                        '<input class="form-control" type="text" name="values[]" value="' + $('#addValue').val() + '">' +
+                    '</div>' +
+                    '<button type="button" class="btn btn-danger button-delete">' +
+                        '<i class="glyphicon glyphicon-remove"></i><?php echo $this->escapeJs($this->translate('Delete')); ?>' +
+                    '</button>' +
+                '</li>');
+            $(this).removeClass('ui-state-focus');
+            $('#addValue').val('');
+        }
+        return false;
+    });
+</script>

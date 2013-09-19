@@ -27,21 +27,23 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post" enctype="multipart/form-data">
-    <input id="input-save" type="image" alt="<?php echo $this->escapeHtml($this->translate('Save')); ?>" src="<?php echo $this->cdnBackend('backend/images/save.png'); ?>">
-
+<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative" method="post" enctype="multipart/form-data">
+    <button class="btn-in-tab btn btn-warning btn-sm" id="input-save" type="submit">
+        <i class="glyphicon glyphicon-floppy-disk"></i>
+        <?php echo $this->escapeHtml($this->translate('Save')); ?>
+    </button>
     <div id="tabs" style="margin-bottom:20px">
         <?php echo $this->tabs; ?>
 
         <?php $fieldsets = $this->form->getFieldsets(); ?>
         <?php foreach ($fieldsets as $tab_id => $fieldset): ?>
             <?php $errors = $fieldset->getMessages(); ?>
-            <div id="<?php echo $this->escapeHtml($tab_id); ?>">
+            <div id="<?php echo $this->escapeHtml($tab_id); ?>" class="form-horizontal">
                 <?php $elements = $fieldset->getElements(); ?>
                 <?php foreach ($elements as $element): ?>
-                    <div>
+                    <div class="form-group">
                         <?php if ($element->getName() == 'more_information'): ?>
-                            <label><?php echo $this->escapeHtml($this->translate('Preview')); ?></label>
+                            <label class="control-label col-lg-2"><?php echo $this->escapeHtml($this->translate('Preview')); ?></label>
 
                             <a target="_blank" href="<?php echo $this->escapeHtml($this->document->getUrl()); ?>?preview=true"><?php echo $this->escapeHtml($this->document->getUrl()); ?></a>
                         <?php else: ?>
@@ -53,12 +55,14 @@
                                     <?php $label = $element->getAttribute('label'); ?>
                                     <?php if (!empty($label)): ?>
                                         <?php $id = $element->getAttribute('id'); ?>
-                                        <label class="required"<?php if (!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+                                        <label class="required control-label col-lg-2"<?php if (!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($label)); ?></label>
                                     <?php endif; ?>
                                 <?php endif; ?>
 
-                                <?php echo $this->formElement($element); ?>
-                                <?php echo $this->formElementErrors($element); ?>
+                                <div class="col-lg-10">
+                                    <?php echo $this->formElement($element); ?>
+                                    <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
+                                </div>
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>

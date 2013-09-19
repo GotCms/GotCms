@@ -27,25 +27,54 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php if ($this->acl('content', 'document')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing documents')); ?> ::..</h2>
+<?php $controller = empty($this->layout()->routeParams['controller']) ? null : $this->layout()->routeParams['controller']; ?>
+<?php $action     = empty($this->layout()->routeParams['action']) ? null : $this->layout()->routeParams['action']; ?>
 
-    <?php echo $this->treeview; ?>
+<ul class="nav nav-list">
+<?php if ($this->acl('content', 'document')): ?>
+    <li class="open<?php if ($controller === 'DocumentController'): ?> active<?php endif; ?>">
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-edit"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Documents')); ?></span>
+        </a>
+        <ul class="submenu">
+            <li>
+                <?php echo $this->treeview; ?>
+            </li>
+        </ul>
+    </li>
 <?php endif; ?>
 
 <?php if ($this->acl('content', 'media')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing resources')); ?> ::..</h2>
-
-    <ul>
-        <li><a href="<?php echo $this->url('content/media'); ?>" title=""><?php echo $this->escapeHtml($this->translate('File manager')); ?></a></li>
-    </ul>
+    <li class="<?php if ($controller === 'MediaController'): ?> active<?php endif; ?>">
+        <a href="<?php echo $this->url('content/media'); ?>">
+            <i class="glyphicon glyphicon-folder-open"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('File manager')); ?></span>
+        </a>
+    </li>
 <?php endif; ?>
 
 <?php if ($this->acl('content', 'translation')): ?>
-    <h2>..:: <?php echo $this->escapeHtml($this->translate('Managing translation')); ?> ::..</h2>
-
-    <ul>
-        <li><a href="<?php echo $this->url('content/translation/create'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Add')); ?></a></li>
-        <li><a href="<?php echo $this->url('content/translation'); ?>" title=""><?php echo $this->escapeHtml($this->translate('Edit')); ?></a></li>
-    </ul>
+    <li class="open<?php if ($controller === 'TranslationController'): ?> active<?php endif; ?>">
+        <a class="menu-toggle" href="#">
+            <i class="glyphicon glyphicon-book"></i>
+            <span class="menu-text"><?php echo $this->escapeHtml($this->translate('Translations')); ?></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="submenu">
+            <li<?php if ($controller === 'TranslationController' and $action === 'create'): ?> class="active"<?php endif; ?>>
+                <a href="<?php echo $this->url('content/translation/create'); ?>">
+                    <i class="glyphicon glyphicon-arrow-right"></i>
+                    <?php echo $this->escapeHtml($this->translate('Create')); ?>
+                </a>
+            </li>
+            <li<?php if ($controller === 'TranslationController' and $action === 'index'): ?> class="active"<?php endif; ?>>
+                <a href="<?php echo $this->url('content/translation'); ?>">
+                    <i class="glyphicon glyphicon-arrow-right"></i>
+                    <?php echo $this->escapeHtml($this->translate('Edit')); ?>
+                </a>
+            </li>
+        </ul>
+    </li>
 <?php endif; ?>
+</ul>

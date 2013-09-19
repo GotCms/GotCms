@@ -140,7 +140,7 @@ class DocumentType extends AbstractForm
         $iconId     = new Element\Select('icon_id');
         $collection = new Icon\Collection();
         $iconId->setValueOptions($collection->getIcons())
-            ->setAttribute('class', 'input-select');
+            ->setAttribute('class', 'form-control');
         $fieldsets->add($iconId);
 
         $documentTypeCollection = new DocumentTypeCollection();

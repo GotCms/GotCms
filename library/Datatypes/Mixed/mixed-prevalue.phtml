@@ -27,13 +27,17 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<label for="add-model"><?php echo $this->escapeHtml($this->translate('Add datatype')); ?></label>
-<select name="add-model" id="add-model">
-    <option value=""><?php echo $this->escapeHtml($this->translate('Select an option')); ?></option>
-    <?php foreach ($this->modelOptions as $option_id => $option_value): ?>
-        <option value="<?php echo $this->escapeHtml($option_id); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
-    <?php endforeach; ?>
-</select>
+<div class="form-group">
+    <label class="control-label col-lg-2" for="add-model"><?php echo $this->escapeHtml($this->translate('Add datatype')); ?></label>
+    <div class="col-lg-10">
+        <select class="form-control" name="add-model" id="add-model">
+            <option value=""><?php echo $this->escapeHtml($this->translate('Select an option')); ?></option>
+            <?php foreach ($this->modelOptions as $option_id => $option_value): ?>
+                <option value="<?php echo $this->escapeHtml($option_id); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+</div>
 <?php if (!empty($this->datatypes)): ?>
     <div id="tabs">
         <ul>
@@ -65,7 +69,7 @@
                     </div>
                 <?php endforeach; ?>
                 <div style="margin-top:25px;">
-                    <button class="delete"><?php echo $this->escapeHtml($this->translate('Delete this datatype')); ?></button>
+                    <button type="button" class="btn btn-danger delete"><?php echo $this->escapeHtml($this->translate('Delete this datatype')); ?></button>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -73,11 +77,6 @@
 
     <script>
         $('#tabs').tabs();
-        $('.delete').button({
-            icons: {
-                primary: 'ui-icon-minus'
-            }
-        });
 
         $('.delete').on('click', function () {
             $parent = $(this).closest('.ui-tabs-panel');

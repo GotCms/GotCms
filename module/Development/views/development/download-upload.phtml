@@ -1,0 +1,34 @@
+<?php if (!empty($this->id)): ?>
+    <a class="btn btn-primary" href="<?php echo $this->url($this->routeDownload, array('id' => $this->id)); ?>">
+        <?php echo $this->escapeHtml($this->translate('Download file')); ?>
+    </a>
+    <a class="btn btn-default" href="#" id="upload-link">
+        <?php echo $this->escapeHtml($this->translate('Upload file')); ?>
+    </a>
+
+    <form class="hide form-inline" id="form-content" action="<?php echo $this->url($this->routeUpload, array('id' => $this->id)); ?>" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <input class="form-control" type="file" name="upload">
+        </div>
+        <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
+    </form>
+<?php else: ?>
+
+    <a class="btn btn-primary" href="<?php echo $this->url($this->routeDownload); ?>">
+        <?php echo $this->escapeHtml($this->translate('Download all files')); ?>
+    </a>
+    <a class="btn btn-default" href="#" id="upload-link">
+        <?php echo $this->escapeHtml($this->translate('Upload files')); ?>
+    </a>
+
+    <form class="hide form-inline" id="form-content" action="<?php echo $this->url($this->routeUpload); ?>" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <input class="form-control" type="file" name="upload[]" multiple="multiple">
+            <span class="help-block"><?php echo $this->escapeHtml($this->translate('Files as: identifier.phtml')); ?></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
+            <span class="help-block">&nbsp;</span>
+        </div>
+    </form>
+<?php endif; ?>

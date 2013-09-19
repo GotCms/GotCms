@@ -27,66 +27,74 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form class="simple-form" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<form class="relative form-horizontal" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <?php if (!empty($this->infos)): ?>
         <div id="datatype-infos">
             <a href="#"><?php echo $this->escapeHtml($this->translate('Display/Hide informations')); ?></a>
 
-            <?php echo $this->infos; ?>
+            <div class="hide">
+                <?php echo $this->infos; ?>
+            </div>
         </div>
     <?php endif; ?>
 
-    <div>
-        <label class="required" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
-        <input type="name" class="input-text" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
-
-        <?php echo $this->formElementErrors($this->form->get('name')); ?>
+    <div class="form-group">
+        <label class="required control-label col-lg-2" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+        <div class="col-lg-10">
+            <input type="name" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
+            <?php echo $this->formElementErrors($this->form->get('name'), array('class' => 'text-danger')); ?>
+        </div>
     </div>
-    <div>
-        <label class="required" for="model"><?php echo $this->escapeHtml($this->translate('Model')); ?></label>
-        <select class="input-select" class="input-select" id="model" name="model">
-            <?php $options = $this->form->get('model')->getValueOptions(); ?>
-            <?php foreach ($options as $option_id => $option_value): ?>
-                <option <?php if ($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo $this->escapeHtml($option_value); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
-            <?php endforeach; ?>
-        </select>
+    <div class="form-group">
+        <label class="required control-label col-lg-2" for="model"><?php echo $this->escapeHtml($this->translate('Model')); ?></label>
+        <div class="col-lg-10">
+            <select class="form-control" id="model" name="model">
+                <?php $options = $this->form->get('model')->getValueOptions(); ?>
+                <?php foreach ($options as $option_id => $option_value): ?>
+                    <option <?php if ($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo $this->escapeHtml($option_value); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
 
-        <?php echo $this->formElementErrors($this->form->get('model')); ?>
+        <?php echo $this->formElementErrors($this->form->get('model'), array('class' => 'text-danger')); ?>
     </div>
 
     <?php if ($this->form->has('prevalue-editor')): ?>
         <?php $fieldset = $this->form->get('prevalue-editor'); ?>
         <?php foreach ($fieldset->getElements() as $element): ?>
-            <div>
+            <div class="clearfix">
                 <?php $content = $element->getAttribute('content'); ?>
                 <?php if (!empty($content)): ?>
                     <?php echo $content; ?>
                 <?php else: ?>
-                    <?php $id = $element->getAttribute('id'); ?>
-                    <?php $label = $element->getAttribute('label'); ?>
+                    <div class="form-group">
+                        <?php $id = $element->getAttribute('id'); ?>
+                        <?php $label = $element->getAttribute('label'); ?>
 
-                    <?php if (empty($id)): ?>
-                        <?php $id = 'element' . mt_rand(); ?>
-                        <?php $element->setAttribute('id', $id); ?>
-                    <?php endif; ?>
+                        <?php if (empty($id)): ?>
+                            <?php $id = 'element' . mt_rand(); ?>
+                            <?php $element->setAttribute('id', $id); ?>
+                        <?php endif; ?>
 
-                    <?php if (!empty($label)): ?>
-                        <label class="required" for="<?php echo $this->escapeHtml($this->translate($id)); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
-                    <?php endif; ?>
+                        <?php if (!empty($label)): ?>
+                            <label class="required control-label col-lg-2" for="<?php echo $this->escapeHtml($this->translate($id)); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+                        <?php endif; ?>
 
-                    <?php echo $this->formElement($element); ?>
+                        <div class="col-lg-10">
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
+                        </div>
+                    </div>
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <div>
-        <input type="submit" id="input-save" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
-    </div>
+    <input type="submit" id="input-save" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
 </form>
 
 <script type="text/javascript">
     $('#datatype-infos > a').on('click', function() {
-        $(this).next('dl').toggle();
+        $(this).next('div').toggleClass('hide');
     });
 </script>

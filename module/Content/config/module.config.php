@@ -101,10 +101,10 @@ return array(
                             array (
                                 'module'     => 'content',
                                 'controller' => 'DocumentController',
-                                'action'     => 'create',
+                                'action'     => 'index',
                             ),
                         ),
-                        'may_terminate' => false,
+                        'may_terminate' => true,
                         'child_routes' => array(
                             'create' => array(
                                 'type'    => 'Literal',

@@ -29,16 +29,50 @@ var Gc = (function($)
 
     $document.ready(function() {
         Gc.initialize();
+        Gc.initializeMenu();
         Gc.notification();
-        if ($().dropDown !== undefined) {
-            $('.input-select').dropDown();
-        }
     });
 
     return {
         initialize: function()
         {
             this._options = new Hash();
+        },
+
+        initializeMenu: function() {
+            var $slideDuration = 600;
+            $(document).on('click', '.menu-toggle', function() {
+                var $parent = $(this).parent();
+                if (!$parent.hasClass('open')) {
+                    $(this).next('.submenu')
+                        .stop(true, true)
+                        .fadeIn({ duration: $slideDuration, queue: false })
+                        .slideDown($slideDuration, function() {
+                            $(this).parent().toggleClass('open');
+                        });
+                } else {
+                    $(this).next('.submenu')
+                        .stop(true, true)
+                        .fadeOut({ duration: $slideDuration, queue: false })
+                        .slideUp($slideDuration, function() {
+                            $(this).parent().toggleClass('open');
+                        });
+                }
+            });
+
+            $(window).on('scroll', function() {
+                var $btn = $('.btn-scroll-up');
+                if ($(window).scrollTop() != 0 && $btn.is(':not(:visible)')) {
+                    $btn.fadeIn();
+                } else if ($(window).scrollTop() == 0) {
+                    $btn.fadeOut();
+                }
+            });
+
+            $('.btn-scroll-up').on('click', function() {
+                $('html,body').animate({ scrollTop: 0 }, 'slow');
+                return false;
+            })
         },
 
         setOption: function($key, $value)
@@ -78,18 +112,6 @@ var Gc = (function($)
 
         initDocumentType: function($addTabUrl, $addPropertyUrl, $deleteTabUrl, $deletePropertyUrl, $importTabUrl)
         {
-            $('.button-add').button({
-                icons: {
-                    primary: "ui-icon-plus"
-                }
-            });
-
-            $('.button-delete').button({
-                icons: {
-                    primary: "ui-icon-close"
-                }
-            });
-
             var $this = this,
                 $originalPosition;
             $('.tabs').tabs();
@@ -102,9 +124,10 @@ var Gc = (function($)
                 distance: 10,
                 start: function(event, ui) {
                     $originalPosition = ui.item.index();
+                    $(this).find('.ui-state-highlight').height(ui.item.height() - 4);
                 },
                 stop: function(event, ui) {
-                    var $tabsNav = $('#properties-tabs-content > .ui-tabs-nav').find('li'),
+                    var $tabsNav = $('#properties-tabs-content > .ui-tabs-nav').find('.row'),
                     $newPosition = ui.item.index(),
                     $row = $tabsNav.eq($originalPosition).detach();
 
@@ -131,27 +154,28 @@ var Gc = (function($)
                         } else {
                             var $tabs, $e, $tab_content;
                             $tabs = $('#tabs');
-                            $e = $('<li class="clearfix">' +
-                                '<div class="hide floatL">' +
-                                    '<input type="text" class="input-text" name="tabs[tab' + $data.id + '][name]" value="' + $name.val() + '">' +
-                                    '<input type="text" class="input-text" name="tabs[tab' + $data.id + '][description]" value="' + $description.val() + '">' +
+                            $e = $('<li class="list-item">' +
+                                '<div class="list-handle">' +
+                                    '<i class="glyphicon glyphicon-move"></i>' +
+                                    '<div class="col-lg-10">' +
+                                        '<div class="col-lg-6">' +
+                                            '<input type="text" class="form-control" name="tabs[tab' + $data.id + '][name]" value="' + $name.val() + '">' +
+                                        '</div>' +
+                                        '<div class="col-lg-6">' +
+                                            '<input type="text" class="form-control" name="tabs[tab' + $data.id + '][description]" value="' + $description.val() + '">' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="col-lg-1">' +
+                                        '<button type="button" value="' + $data.id + '" class="delete-tab btn btn-danger">' +
+                                            '<i class="glyphicon glyphicon-remove"></i> ' + Translator.translate('Delete') +
+                                        '</button>' +
+                                    '</div>' +
                                 '</div>' +
-                                '<div class="floatL">' +
-                                    '<span>' + $name.val() + '</span> <span>' + $description.val() + '</span>' +
-                                '</div>' +
-                                '<button type="button" value="' + $data.id + '" class="button-delete delete-tab floatR">' + Translator.translate('Delete') + '</button>' +
                             '</li>');
-
-                            $e.find('.button-delete').button({
-                                icons: {
-                                    primary: "ui-icon-close"
-                                }
-                            });
 
                             $tabs.append($e);
 
                             $('.select-tab').append(new Option($name.val(),$data.id));
-                            $('.select-tab').dropDown('refresh');
 
                             if($('#properties-tabs-content').html() !== null) {
                                 $tab_content = $('#properties-tabs-content');
@@ -165,19 +189,10 @@ var Gc = (function($)
                 }
             });
 
-            $(document).on('click', '#tabs > li', function(event) {
-                if(event.target.type === 'text') {
-                    return false;
-                }
-
-                $(this).find('div').toggleClass('hide').height('auto');
-            });
-
             $(document).on('click', '.delete-tab', function() {
                 var $button = $(this);
                 $.post($deleteTabUrl, {tab: $button.val()}, function($data) {
                     $('.select-tab').find('option[value="' + $button.val() + '"]').remove();
-                    $('.select-tab').dropDown('refresh');
                     var $tabs = $('#properties-tabs-content');
                     $button.parent().remove();
                     var $tab = $tabs.find('a[href="#tabs-properties-' + $button.val() + '"]').parent();
@@ -197,9 +212,8 @@ var Gc = (function($)
 
             $('#display-property').on('click', function() {
                 $(this).next().toggleClass('hide');
-                $(this).find('.ui-icon').toggleClass('ui-icon-minus');
-                $(this).find('.ui-icon').toggleClass('ui-icon-plus');
-                return false;
+                $(this).find('.glyphicon').toggleClass('glyphicon-minus');
+                $(this).find('.glyphicon').toggleClass('glyphicon-plus');
             });
 
             var $tabs = $('#properties-tabs-content').tabs({idPrefix:'tabs-properties', panelTemplate: '<div></div>'});
@@ -237,55 +251,50 @@ var Gc = (function($)
                             $this.setHtmlMessage($data.message, 'error');
                         } else {
                             var $c = new Template('<div><h3><a href="#secion#{id}">#{name} (#{identifier})</a></h3>' +
-                                '<dl>' +
-                                '<dt id="name-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-name-#{tab}-#{id}">' + Translator.translate('Name') + '</label>' +
-                                '</dt>' +
-                                '<dd id="name-element-#{tab}-#{id}">' +
-                                    '<input type="text" class="input-text" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">' +
-                                '</dd>' +
-                                '<dt id="identifier-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-identifier-#{tab}-#{id}">' + Translator.translate('Identifier') + '</label>' +
-                                '</dt>' +
-                                '<dd id="identifier-element-#{tab}-#{id}">' +
-                                    '<input type="text" class="input-text" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">' +
-                                '</dd>' +
-                                '<dt id="datatype-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-datatype-#{tab}-#{id}">' + Translator.translate('Datatype') + '</label>' +
-                                '</dt>' +
-                                '<dd id="datatype-element-#{tab}-#{id}">' +
-                                    '<select class="input-select select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
-                                    '</select>' +
-                                '</dd>' +
-                                '<dt id="description-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-description-#{tab}-#{id}">' + Translator.translate('Description') + '</label>' +
-                                '</dt>' +
-                                '<dd id="description-element-#{tab}-#{id}">' +
-                                    '<input type="text" class="input-text" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">' +
-                                '</dd>' +
-                                '<dt id="required-label-#{tab}-#{id}">' +
-                                    '<label class="optional" for="properties-required-#{tab}-#{id}">' + Translator.translate('Required') + '</label>' +
-                                '</dt>' +
-                                '<dd id="required-element-#{tab}-#{id}">' +
-                                    '<div class="input-checkbox">' +
-                                        '<input type="checkbox" name="properties[property#{id}][required]" class="input-checkbox" id="properties-required-#{tab}-#{id}" value="1">' +
-                                        '<label for="properties-required-#{tab}-#{id}"></label>' +
+                            '<div class="form-horizontal">' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-name-#{tab}-#{id}">' + Translator.translate('Name') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<input type="text" class="form-control" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">' +
                                     '</div>' +
-                                '</dd>' +
-                                '<dd id="required-element-#{tab}-#{id}">' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-identifier-#{tab}-#{id}">' + Translator.translate('Identifier') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<input type="text" class="form-control" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-datatype-#{tab}-#{id}">' + Translator.translate('Datatype') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<select class="form-control select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
+                                        '</select>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-description-#{tab}-#{id}">' + Translator.translate('Description') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<input type="text" class="form-control" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label class="required control-label col-lg-2" for="properties-required-#{tab}-#{id}">' + Translator.translate('Required') + '</label>' +
+                                    '<div class="col-lg-10">' +
+                                        '<div class="input-checkbox">' +
+                                            '<input type="checkbox" name="properties[property#{id}][required]" class="input-checkbox" id="properties-required-#{tab}-#{id}" value="1">' +
+                                            '<label for="properties-required-#{tab}-#{id}"></label>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="clearfix">' +
                                     '<input class="property-tab-id" type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">' +
-                                '</dd>' +
-                                '<dd class="cb">' +
-                                    '<button type="button" value="#{id}" class="delete-property button-delete">' + Translator.translate('Delete') + '</button>' +
-                                '</dd>' +
-                            '</dl></div>');
+                                    '<button type="button" value="#{id}" class="delete-property btn btn-danger">' +
+                                        '<i class="glyphicon glyphicon-remove"></i> ' + Translator.translate('Delete') +
+                                    '</button>' +
+                                '</div>' +
+                            '</div></div>');
 
                             $c = $($c.evaluate($data));
-                            $c.find('.button-delete').button({
-                                icons: {
-                                    primary: "ui-icon-close"
-                                }
-                            });
 
                             $('#tabs-properties-' + $tab.val()).children('div:first').append($c);
                             $('.connected-sortable').accordion(Gc.getOption('accordion-option'));
@@ -294,7 +303,6 @@ var Gc = (function($)
                             $('#properties-required-' + $data.tab + '-' + $data.id).prop('checked', $isRequired.prop('checked'));
 
                             $this.refreshProperties($tabs);
-                            $('.input-select').dropDown();
                         }
                     });
                 }
@@ -393,6 +401,8 @@ var Gc = (function($)
                         $tabs.tabs('option', 'active', $tab_items.index($item));
                         $(this).appendTo($list).show('slow');
                         $(this).find('.property-tab-id').val($tab_id);
+                        $(this).attr('style', '');
+                        $('.connected-sortable').accordion('refresh');
                     });
                 },
                 stop: function( event, ui ) {
@@ -522,7 +532,7 @@ var Gc = (function($)
                                 return true;
 
                             case 'delete':
-                                $this.showDialogConfirm($url, $element.parent());
+                                $this.showDeleteDialog($url, $element.parent());
                                 return true;
 
                             case 'quit':
@@ -556,36 +566,43 @@ var Gc = (function($)
             });
         },
 
-        showDialogConfirm: function($url, $element_to_remove)
+        showDeleteDialog: function($url, $element_to_remove)
         {
-            var $buttons = {};
-            $buttons[Translator.translate('Confirm')] = function() {
-                $.get($url, function(data) {
-                    if(data.success === true) {
-                        $element_to_remove.remove();
-                    }
-                });
-
-                $(this).dialog('close');
-
-                return true;
-            };
-
-            $buttons[Translator.translate('Cancel')] = function() {
-                $(this).dialog('close');
-
-                return false;
-            };
-
-            $('#dialog').attr('title', Translator.translate('Delete element')).dialog({
-                bgiframe        : false,
-                resizable       : false,
-                modal           : true,
-                overlay         : {
+            $('#dialog').dialog({
+                bgiframe :  false,
+                resizable : false,
+                modal :     true,
+                title:      '<div class="widget-header widget-header-small"><h4><i class="glyphicon glyphicon-warning-sign"></i>' + Translator.translate('Delete element') + '</h4></div>',
+                overlay     : {
                     backgroundColor: '#000',
                     opacity: 0.5
                 },
-                buttons         :$buttons
+                buttons: [
+                    {
+                        'text':  Translator.translate('Cancel'),
+                        'class': "btn btn-warning",
+                        'click': function() {
+                            $(this).dialog('close');
+
+                            return false;
+                        }
+                    },
+                    {
+                        'text':  Translator.translate('Confirm'),
+                        'class': "btn btn-danger btn-mini",
+                        'click': function() {
+                            $.get($url, function(data) {
+                                if(data.success === true) {
+                                    $element_to_remove.remove();
+                                }
+                            });
+
+                            $(this).dialog('close');
+
+                            return true;
+                        }
+                    }
+                ]
             });
         },
 
@@ -597,11 +614,11 @@ var Gc = (function($)
                 '<fieldset>' +
                     '<div>' +
                         '<label for="name">' + Translator.translate('Name') + '</label>' +
-                        '<input type="text" name="name" id="copy-name" class="input-text ui-widget-content ui-corner-all" />' +
+                        '<input type="text" name="name" id="copy-name" class="form-control ui-widget-content ui-corner-all" />' +
                     '</div>' +
                     '<div>' +
                         '<label for="email">' + Translator.translate('Url key') + '</label>' +
-                        '<input type="text" name="url-key" id="copy-url-key" value="" class="input-text ui-widget-content ui-corner-all" />' +
+                        '<input type="text" name="url-key" id="copy-url-key" value="" class="form-control ui-widget-content ui-corner-all" />' +
                     '</div>' +
                '</fieldset>' +
             '</div>';
@@ -650,12 +667,12 @@ var Gc = (function($)
             $template = '<tr>' +
                 '<td>' +
                     '<div>' +
-                        '<input type="text" class="input-text" name="destination[#{id}]" size="73">' +
+                        '<input type="text" class="form-control" name="destination[#{id}]" size="73">' +
                     '</div>' +
                 '</td>' +
                 '<td>' +
                     '<div>' +
-                        '<select class="input-select" name="locale[#{id}]">';
+                        '<select class="form-control" name="locale[#{id}]">';
                             $.each(this.getOption('locale'), function(key, value)
                             {
                                 $template += '<option value="' + key + '">' + value + '</option>';
@@ -664,16 +681,23 @@ var Gc = (function($)
                         $template += '</select>' +
                     '</div>' +
                 '</td>' +
-                '<td><span class="button-add add-translate">' + Translator.translate('Add') + '</span></td>' +
+                '<td>' +
+                    '<span class="btn btn-default add-translate">' +
+                        '<i class="glyphicon glyphicon-plus"></i>&nbsp;' +
+                        Translator.translate('Add') +
+                    '</span>' +
+                '</td>' +
             '</tr>';
 
             $document.on('click', '.add-translate', function() {
                 var $t = new Template($template),
                 $table_trad = $('#table-trad');
 
-                $table_trad.find('.add-translate').removeClass('add-translate').addClass('delete-translate').html(Translator.translate('Delete'));
+                $table_trad.find('.add-translate')
+                    .removeClass('add-translate')
+                    .addClass('delete-translate')
+                    .html('<i class="glyphicon glyphicon-minus"></i> ' + Translator.translate('Delete'));
                 $table_trad.children('tbody').append($t.evaluate({id: $idx}));
-                $('.input-select').dropDown();
                 $idx++;
             });
 
@@ -735,7 +759,7 @@ var Gc = (function($)
         initUploadLink: function()
         {
             $('#upload-link').on('click', function() {
-                $('#form-content').toggle();
+                $('#form-content').toggleClass('hide');
                 return false;
             });
         },
@@ -759,7 +783,7 @@ var Gc = (function($)
                 connectWith: '.widget-column',
                 placeholder: 'sortable-placeholder',
                 helper: 'clone',
-                handle: 'h3',
+                handle: '.widget-header',
                 tolerance: 'pointer',
                 opacity: 0.4,
                 distance: 10,
@@ -833,7 +857,7 @@ var Gc = (function($)
             });
 
             $('.delete-line').on('click', function() {
-                $this.showDialogConfirm($(this).attr('href'), $(this).parent().parent());
+                $this.showDeleteDialog($(this).attr('href'), $(this).parent().parent());
                 return false;
             });
         },
@@ -877,7 +901,7 @@ var Gc = (function($)
 
         checkDataChanged: function()
         {
-            var $form = $('.simple-form'),
+            var $form = $('form.relative'),
             $originalData = $form.serialize();
 
             $document.on('click', '#input-save', function() {

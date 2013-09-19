@@ -44,87 +44,89 @@
     </div>
 </div>
 
-<div class="widget-column floatL" id="sortable1">
-    <div class="widget-box" id="fast-links">
-        <h3 class="header gradient-black">
-            <span><?php echo $this->escapeHtml($this->translate('Fast links')); ?></span>
-        </h3>
-        <div class="inside">
-            <ul>
-                <li><a href="<?php echo $this->url('content/document/create'); ?>"><?php echo $this->escapeHtml($this->translate('Create document')); ?></a></li>
-                <li><a href="<?php echo $this->url('config/user'); ?>"><?php echo $this->escapeHtml($this->translate('User list')); ?></a></li>
-                <li><a href="<?php echo $this->url('config/general'); ?>"><?php echo $this->escapeHtml($this->translate('General configuration')); ?></a></li>
-                <li><a href="<?php echo $this->url('content/translation/create'); ?>"><?php echo $this->escapeHtml($this->translate('Add translation')); ?></a></li>
-                <li><a href="<?php echo $this->url('content/media'); ?>"><?php echo $this->escapeHtml($this->translate('File manager')); ?></a></li>
-            </ul>
+<div class="row">
+    <div class="col-sm-6 widget-column" id="sortable1">
+        <div class="widget-box" id="fast-links">
+            <div class="widget-header">
+                <span><?php echo $this->escapeHtml($this->translate('Fast links')); ?></span>
+            </div>
+            <div class="widget-body">
+                <ul>
+                    <li><a href="<?php echo $this->url('content/document/create'); ?>"><?php echo $this->escapeHtml($this->translate('Create document')); ?></a></li>
+                    <li><a href="<?php echo $this->url('config/user'); ?>"><?php echo $this->escapeHtml($this->translate('User list')); ?></a></li>
+                    <li><a href="<?php echo $this->url('config/general'); ?>"><?php echo $this->escapeHtml($this->translate('General configuration')); ?></a></li>
+                    <li><a href="<?php echo $this->url('content/translation/create'); ?>"><?php echo $this->escapeHtml($this->translate('Add translation')); ?></a></li>
+                    <li><a href="<?php echo $this->url('content/media'); ?>"><?php echo $this->escapeHtml($this->translate('File manager')); ?></a></li>
+                </ul>
+            </div>
         </div>
+
+        <?php foreach ($this->customeWidgets as $widget): ?>
+            <?php if (empty($widget['id']) or empty($widget['title']) or empty($widget['content'])): ?>
+                <?php continue; ?>
+            <?php endif; ?>
+            <div class="widget-box" id="<?php echo $this->escapeHtml(!empty($widget['id']) ? $widget['id'] : ''); ?>">
+                <div class="widget-header">
+                    <span><?php echo $this->escapeHtml($this->translate(!empty($widget['title']) ? $widget['title'] : '')); ?></span>
+                </div>
+                <div class="widget-body">
+                    <?php echo !empty($widget['content']) ? $widget['content'] : ''; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 
-    <?php foreach ($this->customeWidgets as $widget): ?>
-        <?php if (empty($widget['id']) or empty($widget['title']) or empty($widget['content'])): ?>
-            <?php continue; ?>
-        <?php endif; ?>
-        <div class="widget-box" id="<?php echo $this->escapeHtml(!empty($widget['id']) ? $widget['id'] : ''); ?>">
-            <h3 class="header gradient-black">
-                <span><?php echo $this->escapeHtml($this->translate(!empty($widget['title']) ? $widget['title'] : '')); ?></span>
-            </h3>
-            <div class="inside">
-                <?php echo !empty($widget['content']) ? $widget['content'] : ''; ?>
+    <div class="col-sm-6 widget-column" id="sortable2">
+        <div class="widget-box" id="stats">
+            <div class="widget-header">
+                <span><?php echo $this->escapeHtml($this->translate('Stats')); ?></span>
             </div>
-        </div>
-    <?php endforeach; ?>
-</div>
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <p class="sub"><?php echo $this->escapeHtml($this->translate('Content')); ?></p>
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                                <?php foreach ($this->contentStats as $stats): ?>
+                                    <tr>
+                                        <td class="first">
+                                            <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $stats['count']; ?></a>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $this->escapeHtml($this->translate($stats['label'])); ?></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <p class="sub"><?php echo $this->escapeHtml($this->translate('Stats')); ?></p>
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                                <?php foreach ($this->userStats as $stats): ?>
+                                    <tr>
+                                        <td class="first">
+                                            <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $stats['count']; ?></a>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $this->escapeHtml($this->translate($stats['label'])); ?></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-<div class="widget-column floatR" id="sortable2">
-    <div class="widget-box" id="stats">
-        <h3 class="header gradient-black">
-            <span><?php echo $this->escapeHtml($this->translate('Stats')); ?></span>
-        </h3>
-        <div class="inside">
-
-            <div class="table floatL">
-                <p class="sub"><?php echo $this->escapeHtml($this->translate('Content')); ?></p>
-                <table>
-                    <tbody>
-                        <?php foreach ($this->contentStats as $stats): ?>
-                            <tr>
-                                <td class="first">
-                                    <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $stats['count']; ?></a>
-                                </td>
-                                <td>
-                                    <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $this->escapeHtml($this->translate($stats['label'])); ?></a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="table floatL">
-                <p class="sub"><?php echo $this->escapeHtml($this->translate('Stats')); ?></p>
-                <table>
-                    <tbody>
-                        <?php foreach ($this->userStats as $stats): ?>
-                            <tr>
-                                <td class="first">
-                                    <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $stats['count']; ?></a>
-                                </td>
-                                <td>
-                                    <a href="<?php echo $this->url($stats['route']); ?>"><?php echo $this->escapeHtml($this->translate($stats['label'])); ?></a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="version">
-                <span>
-                    <?php echo $this->escapeHtml(sprintf($this->translate('You use GotCms %s'), $this->version)); ?>
-                    <?php if (!$this->versionIsLatest): ?>
-                        <a class="button" href="<?php echo $this->url('config/cms-update'); ?>"><?php echo $this->escapeHtml(sprintf($this->translate('Update to GotCms %s'), $this->versionLatest)); ?></a>
-                    <?php endif; ?>
-                </span>
+                <div class="version">
+                    <span>
+                        <?php echo $this->escapeHtml(sprintf($this->translate('You use GotCms %s'), $this->version)); ?>
+                        <?php if (!$this->versionIsLatest): ?>
+                            <a class="button" href="<?php echo $this->url('config/cms-update'); ?>"><?php echo $this->escapeHtml(sprintf($this->translate('Update to GotCms %s'), $this->versionLatest)); ?></a>
+                        <?php endif; ?>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

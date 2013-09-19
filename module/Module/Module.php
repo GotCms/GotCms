@@ -80,20 +80,35 @@ class Module extends Mvc\Module
      */
     public function loadMenu(EventInterface $event)
     {
-        $filter = new Filter\Word\CamelCaseToSeparator;
-        $filter->setSeparator('-');
-        $filterChain = new Filter\FilterChain();
-        $filterChain->attach($filter)
-            ->attach(new Filter\StringToLower());
-        $template = $filterChain->filter($event->getRouteMatch()->getParam('module')) . '/menu';
+        if ($route = $event->getRouter()->getRoute('module')->match($event->getRequest())) {
+            if ($route->getParam('module') === 'module') {
+                return;
+            }
 
-        $resolver = $event
-            ->getApplication()
-            ->getServiceManager()
-            ->get('Zend\View\Resolver\TemplatePathStack');
+            $filter = new Filter\Word\CamelCaseToSeparator;
+            $filter->setSeparator('-');
+            $filterChain = new Filter\FilterChain();
+            $filterChain->attach($filter)
+                ->attach(new Filter\StringToLower());
+            $template = $filterChain->filter($route->getParam('module')) . '/menu';
 
-        if (false !== $resolver->resolve($template)) {
-            $event->getTarget()->layout()->setVariable('moduleMenu', $template);
+            $target   = $event->getTarget();
+            $resolver = $event
+                ->getApplication()
+                ->getServiceManager()
+                ->get('Zend\View\Resolver\TemplatePathStack');
+            $navigation = $target->getServiceLocator()->get('navigation');
+            $navigation->findByRoute('module')->addPage(
+                array(
+                    'label' => $route->getParam('module'),
+                    'route' => $event->getRouteMatch()->getMatchedRouteName(),
+                    'active' => true,
+                )
+            );
+
+            if (false !== $resolver->resolve($template)) {
+                $target->layout()->setVariable('moduleMenu', $template);
+            }
         }
     }
 }

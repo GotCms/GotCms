@@ -27,29 +27,36 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<h2><?php echo $this->escapeHtml($this->translate('Configuration')); ?></h2>
+<div class="page-header position-relative">
+    <h1>
+        <?php echo $this->escapeHtml($this->translate('Configuration')); ?>
+    </h1>
+</div>
 
 <?php $elements = $this->form->getElements(); ?>
-<?php foreach ($elements as $element): ?>
-    <div>
-        <label class="required" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+<div class="form-horizontal">
+    <?php foreach ($elements as $element): ?>
+        <div class="form-group">
+            <label class="control-label required col-lg-2" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+            <div class="col-lg-10">
+                <?php echo $this->formElement($element); ?>
+                <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
 
-        <?php echo $this->formElement($element); ?>
-        <?php echo $this->formElementErrors($element); ?>
-    </div>
-<?php endforeach; ?>
-
-<?php foreach($this->form->get('template')->getAttribute('data') as $designName => $data): ?>
-    <div class="template-list">
+<div class="template-list">
+    <?php foreach($this->form->get('template')->getAttribute('data') as $designName => $data): ?>
         <div class="hide" id="tpl-<?php echo $this->escapeHtml($designName); ?>">
             <?php echo $data; ?>
         </div>
-    </div>
-<?php endforeach; ?>
+    <?php endforeach; ?>
+</div>
 
 <script type="text/javascript">
     $('#template').on('change', function() {
-        $('.template-list > div').hide();
-        $('#tpl-' + $(this).val()).show();
+        $('.template-list > div').addClass('hide');
+        $('#tpl-' + $(this).val()).toggleClass('hide');
     });
 </script>

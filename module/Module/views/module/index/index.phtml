@@ -27,7 +27,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<table class="table-list clickable">
+<table class="table clickable table-striped table-hover">
     <colgroup>
         <col width="90%">
         <col width="5%">
@@ -36,20 +36,20 @@
     <thead>
         <tr>
             <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($this->modules as $module): ?>
             <tr>
                 <td><?php echo $this->escapeHtml($module->getName()); ?></td>
-                <td class="a-center">
+                <td class="text-center">
                     <a href="<?php echo $this->url('module/' . $module->getRoute()); ?>" class="edit-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>
-                <td class="a-center">
+                <td class="text-center">
                     <?php if ($this->acl('modules', 'uninstall')):?>
                         <a href="<?php echo $this->url('module/uninstall', array('id' => $module->getId())); ?>" class="delete-line">
                             <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Uninstall')); ?>">

@@ -94,7 +94,7 @@ class FormCheckbox extends ZendFormCheckbox
 
             unset($attributes['class']);
             $rendered = sprintf(
-                '<div class="input-checkbox"><input %s%s<label for="%s"></label></div>',
+                '<span class="input-checkbox"><input %s%s<label for="%s"></label></span>',
                 $this->createAttributesString($attributes),
                 $closingBracket,
                 $element->getAttribute('id')

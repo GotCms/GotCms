@@ -237,6 +237,12 @@ return array (
     'Script does not exists' => 'Le script n\'existe pas',
     'Git project has been found, make sure you clone with apache user.' => 'Un projet Git a été trouvé, attention à bien le cloner avec l\'utilisateur apache.',
     'Database configuration' => 'Configuration de la base de données',
+    'Login' => 'Identifiant de connexion',
+    'Admin password' => 'Mot de passe administrateur',
+    'Confirm admin password' => 'Confirmation du mot de passe',
+    'Default template' => 'Design par défaut',
+    'The request has been stopped, please refresh the page' => 'La requête a été stoppée, merci de rafraîchir la page',
+    'Installation complete. Please refresh or go to /admin page to manage your website.' => 'Installation terminée. Merci de rafraîchir la page ou d\'aller sur la page /admin afin de gérer votre site internet.',
 
     // Zend\I18n\Validator\Alnum
     "Invalid type given. String, integer or float expected" => "Type invalide. Chaîne, entier ou flottant attendu",

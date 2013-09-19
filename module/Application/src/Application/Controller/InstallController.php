@@ -36,8 +36,9 @@ use Gc\Registry;
 use Gc\Version;
 use Application\Form\Install;
 use Zend\Config\Reader\Ini;
-use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
+use Zend\Validator\AbstractValidator;
 use Exception;
 
 /**
@@ -79,16 +80,19 @@ class InstallController extends Action
         //Force locale to translator
         $session = $this->getSession();
         if (!empty($session['install']['lang'])) {
-            $translator = $this->getServiceLocator()->get('translator');
-            $translator->setLocale(
-                $session['install']['lang']
-            );
+            $translator = $this->getServiceLocator()->get('MvcTranslator');
 
             $translator->addTranslationFilePattern(
                 'phparray',
                 GC_APPLICATION_PATH . '/data/install/translation',
                 '%s.php'
             );
+
+            $translator->setLocale(
+                $session['install']['lang']
+            );
+
+            AbstractValidator::setDefaultTranslator($translator);
         }
     }
 
@@ -362,278 +366,35 @@ class InstallController extends Action
                     switch($step) {
                         //Create database
                         case 'c-db':
-                            $sql = file_get_contents(
-                                GC_APPLICATION_PATH . sprintf('/data/install/sql/database-%s.sql', $sqlType)
-                            );
-                            $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
+                            $this->createDatabase($dbAdapter, $sqlType);
                             break;
 
                         //Insert data
                         case 'i-d':
-                            $configuration = $session['install']['configuration'];
-                            $dbAdapter->query(
-                                "INSERT INTO core_config_data
-                                (identifier, value) VALUES ('site_name', ?);",
-                                array($configuration['site_name'])
-                            );
-                            $dbAdapter->query(
-                                "INSERT INTO core_config_data
-                                (identifier, value) VALUES ('site_is_offline', ?);",
-                                array($configuration['site_is_offline'])
-                            );
-                            $dbAdapter->query(
-                                "INSERT INTO core_config_data
-                                (identifier, value) VALUES ('cookie_domain', ?);",
-                                array($this->getRequest()->getUri()->getHost())
-                            );
-                            $dbAdapter->query(
-                                "INSERT INTO core_config_data
-                                (identifier, value) VALUES ('session_lifetime', '3600');",
-                                array()
-                            );
-                            $dbAdapter->query(
-                                "INSERT INTO core_config_data
-                                (identifier, value) VALUES ('locale', ?);",
-                                array($session['install']['lang'])
-                            );
-                            $dbAdapter->query(
-                                "INSERT INTO core_config_data
-                                (identifier, value) VALUES ('mail_from', ?);",
-                                array($configuration['admin_email'])
-                            );
-                            $dbAdapter->query(
-                                "INSERT INTO core_config_data
-                                (identifier, value) VALUES ('mail_from_name', ?);",
-                                array($configuration['admin_firstname'] . ' ' . $configuration['admin_lastname'])
-                            );
-
-
-                            //Save all languages in database
-                            $languagesFilename = glob(GC_APPLICATION_PATH . '/data/install/translation/*.php');
-                            $translator        = new Core\Translator;
-                            foreach ($languagesFilename as $language) {
-                                $langConfig = include $language;
-                                $locale     = basename($language, '.php');
-                                foreach ($langConfig as $source => $destination) {
-                                    $translator->setValue(
-                                        $source,
-                                        array(
-                                            array(
-                                                'locale' => $locale,
-                                                'value' => $destination
-                                            )
-                                        )
-                                    );
-                                }
-                                copy($language, GC_APPLICATION_PATH . '/data/translation/' . basename($language));
-                            }
-
-                            $sql = file_get_contents(GC_APPLICATION_PATH . '/data/install/sql/data.sql');
-                            $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
+                            $this->insertData($dbAdapter, $session);
                             break;
 
                         //Create user and roles
                         case 'c-uar':
-                            //Create role
-                            $roles = include GC_APPLICATION_PATH . '/data/install/acl/roles.php';
-
-                            try {
-                                foreach ($roles['role'] as $key => $value) {
-                                    $statement = $dbAdapter->createStatement(
-                                        "INSERT INTO user_acl_role (name) VALUES ('" . $value . "')"
-                                    );
-                                    $result    = $statement->execute();
-                                }
-                            } catch (Exception $e) {
-                                return $this->returnJson(array('messages' => $e->getMessage()));
-                            }
-
-                            //resources
-                            $resources = include GC_APPLICATION_PATH . '/data/install/acl/resources.php';
-
-                            try {
-                                foreach ($resources as $key => $value) {
-                                    $statement = $dbAdapter->createStatement(
-                                        "INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')"
-                                    );
-                                    $result    = $statement->execute();
-
-                                    $statement    = $dbAdapter->createStatement(
-                                        "SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'"
-                                    );
-                                    $result       = $statement->execute();
-                                    $lastInsertId = $result->current();
-                                    $lastInsertId = $lastInsertId['id'];
-
-                                    $permissions = array();
-                                    foreach ($value as $k => $v) {
-                                        if (!in_array($k, $permissions)) {
-                                            $statement     = $dbAdapter->createStatement(
-                                                "INSERT INTO user_acl_permission
-                                                (
-                                                    permission,
-                                                    user_acl_resource_id
-                                                )
-                                                VALUES ('" . $k . "', '" . $lastInsertId . "')"
-                                            );
-                                            $result        = $statement->execute();
-                                            $permissions[] = $k;
-                                        }
-                                    }
-                                }
-
-                                foreach ($resources as $key => $value) {
-                                    $statement            = $dbAdapter->createStatement(
-                                        "SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'"
-                                    );
-                                    $result               = $statement->execute();
-                                    $lastResourceInsertId = $result->current();
-                                    $lastResourceInsertId = $lastResourceInsertId['id'];
-
-                                    foreach ($value as $k => $v) {
-                                        $statement    = $dbAdapter->createStatement(
-                                            "SELECT id
-                                            FROM user_acl_permission
-                                            WHERE permission =  '" . $k . "'
-                                                AND user_acl_resource_id = '" . $lastResourceInsertId . "'"
-                                        );
-                                        $result       = $statement->execute();
-                                        $lastInsertId = $result->current();
-                                        $lastInsertId = $lastInsertId['id'];
-
-                                        $statement = $dbAdapter->createStatement(
-                                            "SELECT id FROM user_acl_role WHERE name = '" . $v . "'"
-                                        );
-                                        $result    = $statement->execute();
-                                        $role      = $result->current();
-                                        if (!empty($role['id'])) {
-                                            $statement = $dbAdapter->createStatement(
-                                                "INSERT INTO user_acl
-                                                (
-                                                    user_acl_role_id,
-                                                    user_acl_permission_id
-                                                )
-                                                VALUES ('" . $role['id'] . "', " . $lastInsertId . ')'
-                                            );
-                                            $result    = $statement->execute();
-                                        }
-                                    }
-                                }
-                            } catch (Exception $e) {
-                                return $this->returnJson(array('messages' => $e->getMessage()));
-                            }
-
-                            //Add admin user
-                            $configuration = $session['install']['configuration'];
-                            if ($sqlType == 'mysql') {
-                                $sqlString = 'INSERT INTO `user`
-                                    (
-                                        created_at,
-                                        updated_at,
-                                        lastname,
-                                        firstname,
-                                        email,
-                                        login,
-                                        password,
-                                        user_acl_role_id
-                                    )
-                                    VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
-                            } else {
-                                $sqlString = 'INSERT INTO "user"
-                                    (
-                                        created_at,
-                                        updated_at,
-                                        lastname,
-                                        firstname,
-                                        email,
-                                        login,
-                                        password,
-                                        user_acl_role_id
-                                    )
-                                    VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
-                            }
-
-                            $dbAdapter->query(
-                                $sqlString,
-                                array(
-                                    $configuration['admin_lastname'],
-                                    $configuration['admin_firstname'],
-                                    $configuration['admin_email'],
-                                    $configuration['admin_login'],
-                                    sha1($configuration['admin_password'])
-                                )
+                            $this->createUsersAndRoles(
+                                $dbAdapter,
+                                $session['install']['configuration'],
+                                $sqlType
                             );
                             break;
 
                         //Install template
                         case 'it':
-                            $template     = $session['install']['configuration']['template'];
-                            $templatePath = GC_APPLICATION_PATH . sprintf('/data/install/design/%s', $template);
-                            $info         = new Info();
-                            $info->fromFile($templatePath . '/design.info');
-                            $filePath = sprintf('%s/sql/%s.sql', $templatePath, $sqlType);
-                            if (!file_exists($filePath)) {
-                                return $this->returnJson(
-                                    array(
-                                        'success' => false,
-                                        'message' => sprintf(
-                                            'Could not find data for this template and driver: Driver %s, path %s',
-                                            $sqlType,
-                                            $templatePath
-                                        )
-                                    )
-                                );
-                            }
-
-                            $designInfos = $info->getInfos();
-                            if (!empty($designInfos['modules'])) {
-                                $modules = $this->getServiceLocator()->get('CustomModules');
-                                foreach ($designInfos['modules'] as $module) {
-                                    ModuleModel::install($modules, $module);
-                                }
-                            }
-
-                            $sql = file_get_contents($filePath);
-                            $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
-
-                            File::copyDirectory($templatePath . '/frontend', GC_PUBLIC_PATH . '/frontend');
-                            if (file_exists($templatePath . '/files')) {
-                                File::copyDirectory($templatePath . '/files', GC_MEDIA_PATH . '/files');
-                            }
+                            $this->installTemplate(
+                                $dbAdapter,
+                                $session['install']['configuration']['template'],
+                                $sqlType
+                            );
                             break;
 
                         //Create configuration file
                         case 'c-cf':
-                            $db   = $session['install']['db'];
-                            $file = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/config.tpl.php');
-                            $file = str_replace(
-                                array(
-                                    '__DRIVER__',
-                                    '__USERNAME__',
-                                    '__PASSWORD__',
-                                    '__DATABASE__',
-                                    '__HOSTNAME__',
-                                ),
-                                array(
-                                    $db['driver'],
-                                    $db['username'],
-                                    $db['password'],
-                                    $db['database'],
-                                    $db['hostname'],
-                                ),
-                                $file
-                            );
-
-                            $configFilename = GC_APPLICATION_PATH . '/config/autoload/global.php';
-                            file_put_contents($configFilename, $file);
-                            chmod($configFilename, $this->umask);
-
-                            return $this->returnJson(
-                                array(
-                                    'message' => 'Installation complete.
-                                    Please refresh or go to /admin page to manage your website.'
-                                )
-                            );
+                            return $this->completeInstallation($session['install']['db']);
                             break;
                     }
                 } catch (Exception $e) {
@@ -677,5 +438,317 @@ class InstallController extends Action
                 return $this->redirect()->toRoute('install/configuration');
             }
         }
+    }
+
+    /**
+     * Create database
+     *
+     * @param \Zend\Db\Adapter\Adapter $dbAdapter Database adapter
+     * @param string                   $sqlType   Sql database type
+     *
+     * @return void
+     */
+    protected function createDatabase($dbAdapter, $sqlType)
+    {
+        $sql = file_get_contents(
+            GC_APPLICATION_PATH . sprintf('/data/install/sql/database-%s.sql', $sqlType)
+        );
+        $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
+    }
+
+    /**
+     * Insert data into database
+     *
+     * @param \Zend\Db\Adapter\Adapter $dbAdapter Database adapter
+     * @param array                    $session   Session array
+     *
+     * @return void
+     */
+    protected function insertData($dbAdapter, $session)
+    {
+        $configuration = $session['install']['configuration'];
+        $dbAdapter->query(
+            "INSERT INTO core_config_data
+            (identifier, value) VALUES ('site_name', ?);",
+            array($configuration['site_name'])
+        );
+        $dbAdapter->query(
+            "INSERT INTO core_config_data
+            (identifier, value) VALUES ('site_is_offline', ?);",
+            array($configuration['site_is_offline'])
+        );
+        $dbAdapter->query(
+            "INSERT INTO core_config_data
+            (identifier, value) VALUES ('cookie_domain', ?);",
+            array($this->getRequest()->getUri()->getHost())
+        );
+        $dbAdapter->query(
+            "INSERT INTO core_config_data
+            (identifier, value) VALUES ('session_lifetime', '3600');",
+            array()
+        );
+        $dbAdapter->query(
+            "INSERT INTO core_config_data
+            (identifier, value) VALUES ('locale', ?);",
+            array($session['install']['lang'])
+        );
+        $dbAdapter->query(
+            "INSERT INTO core_config_data
+            (identifier, value) VALUES ('mail_from', ?);",
+            array($configuration['admin_email'])
+        );
+        $dbAdapter->query(
+            "INSERT INTO core_config_data
+            (identifier, value) VALUES ('mail_from_name', ?);",
+            array($configuration['admin_firstname'] . ' ' . $configuration['admin_lastname'])
+        );
+
+        //Save all languages in database
+        $languagesFilename = glob(GC_APPLICATION_PATH . '/data/install/translation/*.php');
+        $translator        = new Core\Translator;
+        foreach ($languagesFilename as $language) {
+            $langConfig = include $language;
+            $locale     = basename($language, '.php');
+            foreach ($langConfig as $source => $destination) {
+                $translator->setValue(
+                    $source,
+                    array(
+                        array(
+                            'locale' => $locale,
+                            'value' => $destination
+                        )
+                    )
+                );
+            }
+            copy($language, GC_APPLICATION_PATH . '/data/translation/' . basename($language));
+        }
+
+        $sql = file_get_contents(GC_APPLICATION_PATH . '/data/install/sql/data.sql');
+        $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
+    }
+
+    /**
+     * Create users and roles
+     *
+     * @param \Zend\Db\Adapter\Adapter $dbAdapter     Database adapter
+     * @param array                    $configuration Configuration
+     * @param string                   $sqlType       Sql database type
+     *
+     * @return void
+     */
+    protected function createUsersAndRoles($dbAdapter, $configuration, $sqlType)
+    {
+        //Create role
+        $roles = include GC_APPLICATION_PATH . '/data/install/acl/roles.php';
+
+        try {
+            foreach ($roles['role'] as $key => $value) {
+                $statement = $dbAdapter->createStatement(
+                    "INSERT INTO user_acl_role (name) VALUES ('" . $value . "')"
+                );
+                $result    = $statement->execute();
+            }
+        } catch (Exception $e) {
+            return $this->returnJson(array('messages' => $e->getMessage()));
+        }
+
+        //resources
+        $resources = include GC_APPLICATION_PATH . '/data/install/acl/resources.php';
+
+        try {
+            foreach ($resources as $key => $value) {
+                $statement = $dbAdapter->createStatement(
+                    "INSERT INTO user_acl_resource (resource) VALUES ('" . $key . "')"
+                );
+                $result    = $statement->execute();
+
+                $statement    = $dbAdapter->createStatement(
+                    "SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'"
+                );
+                $result       = $statement->execute();
+                $lastInsertId = $result->current();
+                $lastInsertId = $lastInsertId['id'];
+
+                $permissions = array();
+                foreach ($value as $k => $v) {
+                    if (!in_array($k, $permissions)) {
+                        $statement     = $dbAdapter->createStatement(
+                            "INSERT INTO user_acl_permission
+                            (
+                                permission,
+                                user_acl_resource_id
+                            )
+                            VALUES ('" . $k . "', '" . $lastInsertId . "')"
+                        );
+                        $result        = $statement->execute();
+                        $permissions[] = $k;
+                    }
+                }
+            }
+
+            foreach ($resources as $key => $value) {
+                $statement            = $dbAdapter->createStatement(
+                    "SELECT id FROM user_acl_resource WHERE resource =  '" . $key . "'"
+                );
+                $result               = $statement->execute();
+                $lastResourceInsertId = $result->current();
+                $lastResourceInsertId = $lastResourceInsertId['id'];
+
+                foreach ($value as $k => $v) {
+                    $statement    = $dbAdapter->createStatement(
+                        "SELECT id
+                        FROM user_acl_permission
+                        WHERE permission =  '" . $k . "'
+                            AND user_acl_resource_id = '" . $lastResourceInsertId . "'"
+                    );
+                    $result       = $statement->execute();
+                    $lastInsertId = $result->current();
+                    $lastInsertId = $lastInsertId['id'];
+
+                    $statement = $dbAdapter->createStatement(
+                        "SELECT id FROM user_acl_role WHERE name = '" . $v . "'"
+                    );
+                    $result    = $statement->execute();
+                    $role      = $result->current();
+                    if (!empty($role['id'])) {
+                        $statement = $dbAdapter->createStatement(
+                            "INSERT INTO user_acl
+                            (
+                                user_acl_role_id,
+                                user_acl_permission_id
+                            )
+                            VALUES ('" . $role['id'] . "', " . $lastInsertId . ')'
+                        );
+                        $result    = $statement->execute();
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            return $this->returnJson(array('messages' => $e->getMessage()));
+        }
+
+        //Add admin user
+        if ($sqlType == 'mysql') {
+            $sqlString = 'INSERT INTO `user`
+                (
+                    created_at,
+                    updated_at,
+                    lastname,
+                    firstname,
+                    email,
+                    login,
+                    password,
+                    user_acl_role_id
+                )
+                VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
+        } else {
+            $sqlString = 'INSERT INTO "user"
+                (
+                    created_at,
+                    updated_at,
+                    lastname,
+                    firstname,
+                    email,
+                    login,
+                    password,
+                    user_acl_role_id
+                )
+                VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, 1)';
+        }
+
+        $dbAdapter->query(
+            $sqlString,
+            array(
+                $configuration['admin_lastname'],
+                $configuration['admin_firstname'],
+                $configuration['admin_email'],
+                $configuration['admin_login'],
+                sha1($configuration['admin_password'])
+            )
+        );
+    }
+
+    /**
+     * Insert data into database
+     *
+     * @param \Zend\Db\Adapter\Adapter $dbAdapter Database adapter
+     * @param string                   $template  Template name
+     * @param string                   $sqlType   Sql database type
+     *
+     * @return void
+     */
+    protected function installTemplate($dbAdapter, $template, $sqlType)
+    {
+        $templatePath = GC_APPLICATION_PATH . sprintf('/data/install/design/%s', $template);
+        $info         = new Info();
+        $info->fromFile($templatePath . '/design.info');
+        $filePath = sprintf('%s/sql/%s.sql', $templatePath, $sqlType);
+        if (!file_exists($filePath)) {
+            return $this->returnJson(
+                array(
+                    'success' => false,
+                    'message' => sprintf(
+                        'Could not find data for this template and driver: Driver %s, path %s',
+                        $sqlType,
+                        $templatePath
+                    )
+                )
+            );
+        }
+
+        $designInfos = $info->getInfos();
+        if (!empty($designInfos['modules'])) {
+            $modules = $this->getServiceLocator()->get('CustomModules');
+            foreach ($designInfos['modules'] as $module) {
+                ModuleModel::install($modules, $module);
+            }
+        }
+
+        $sql = file_get_contents($filePath);
+        $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
+
+        File::copyDirectory($templatePath . '/frontend', GC_PUBLIC_PATH . '/frontend');
+        if (file_exists($templatePath . '/files')) {
+            File::copyDirectory($templatePath . '/files', GC_MEDIA_PATH . '/files');
+        }
+    }
+
+    /**
+     * Insert data into database
+     *
+     * @param array $db Database information
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    protected function completeInstallation(array $db)
+    {
+        $file = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/config.tpl.php');
+        $file = str_replace(
+            array(
+                '__DRIVER__',
+                '__USERNAME__',
+                '__PASSWORD__',
+                '__DATABASE__',
+                '__HOSTNAME__',
+            ),
+            array(
+                $db['driver'],
+                $db['username'],
+                $db['password'],
+                $db['database'],
+                $db['hostname'],
+            ),
+            $file
+        );
+
+        $configFilename = GC_APPLICATION_PATH . '/config/autoload/global.php';
+        file_put_contents($configFilename, $file);
+        chmod($configFilename, $this->umask);
+        $translator      = $this->getServiceLocator()->get('MvcTranslator');
+        $completeMessage = $translator->translate(
+            'Installation complete. ' .
+            'Please refresh or go to /admin page to manage your website.'
+        );
+        return $this->returnJson(array('message' => $completeMessage));
     }
 }

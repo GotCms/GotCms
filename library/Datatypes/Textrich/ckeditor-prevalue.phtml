@@ -30,9 +30,10 @@
 <?php $fieldsets = $this->textrich; ?>
 <span id="ckeditor-select-all" style="cursor:pointer;text-decoration:underline"><?php echo $this->escapeHtml($this->translate('Select all elements')); ?></span>
 
-<div id="elements">
+<div id="elements" class="row">
     <?php foreach ($fieldsets as $fieldset): ?>
         <?php if (!empty($fieldset)): ?>
+            <div class="col-lg-2">
             <h3><?php echo $this->escapeHtml($this->translate($fieldset->getName())); ?></h3>
             <?php foreach ($fieldset->getElements() as $element): ?>
                 <div>
@@ -46,6 +47,7 @@
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
+            </div>
         <?php endif; ?>
     <?php endforeach; ?>
 </div>

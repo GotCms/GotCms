@@ -27,16 +27,15 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<a href="<?php echo $this->url('development/view/download'); ?>"><?php echo $this->escapeHtml($this->translate('Download all files')); ?></a>
-<a href="#" id="upload-link"><?php echo $this->escapeHtml($this->translate('Upload file')); ?></a>
+<?php echo $this->partial(
+    'development/download-upload.phtml',
+    array(
+        'routeDownload' => 'development/view/download',
+        'routeUpload'   => 'development/view/upload',
+    )
+); ?>
 
-<form class="hide" id="form-content" action="<?php echo $this->url('development/view/upload'); ?>" method="post" enctype="multipart/form-data">
-    <p><?php echo $this->escapeHtml($this->translate('Files as: identifier.phtml')); ?></p>
-    <input type="file" name="upload[]" multiple="multiple">
-    <input type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
-</form>
-
-<table class="table-list clickable">
+<table class="table clickable table-striped table-hover">
     <colgroup>
         <col width="30%">
         <col width="20%">
@@ -49,8 +48,8 @@
             <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
             <th><?php echo $this->escapeHtml($this->translate('Identifier')); ?></th>
             <th><?php echo $this->escapeHtml($this->translate('Description')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -59,14 +58,14 @@
                 <td><?php echo $this->escapeHtml($view->getName()); ?></td>
                 <td><?php echo $this->escapeHtml($view->getIdentifier()); ?></td>
                 <td><?php echo $this->escapeHtml($view->getDescription()); ?></td>
-                <td class="a-center">
+                <td class="text-center">
                     <?php if($this->acl('development', 'view/edit')): ?>
                         <a href="<?php echo $this->url('development/view/edit', array('id' => $view->getId())); ?>" class="edit-line">
                             <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                         </a>
                     <?php endif; ?>
                 </td>
-                <td class="a-center">
+                <td class="text-center">
                     <?php if($this->acl('development', 'view/delete')): ?>
                         <a href="<?php echo $this->url('development/view/delete', array('id' => $view->getId())); ?>" class="delete-line">
                             <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">

@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 ?>
-<table class="table-list">
+<table class="table clickable table-striped table-hover">
     <colgroup>
         <col width="90%">
         <col width="10%">
@@ -33,14 +33,14 @@
     <thead>
         <tr>
             <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($this->document_list as $document): ?>
             <tr>
                 <td><?php echo $this->escapeHtml($document->getName()); ?></td>
-                <td class="a-center">
+                <td class="text-center">
                     <a href="<?php echo $this->url('module/blog/document-comment', array('id' => $document->getId())); ?>" class="edit-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>

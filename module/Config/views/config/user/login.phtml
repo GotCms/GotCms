@@ -26,15 +26,43 @@
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 ?>
-<form id="one-page-form" action="<?php echo $this->url('config/user/login'); ?>" method="post">
-    <h1><?php echo $this->escapeHtml($this->translate('Log In')); ?></h1>
-    <fieldset id="inputs">
-        <input name="login" id="login" type="text" placeholder="<?php echo $this->escapeHtml($this->translate('Login')); ?>" autofocus required>
-        <input name="password" id="password" type="password" placeholder="<?php echo $this->escapeHtml($this->translate('Password')); ?>" required>
-        <input name="redirect" id="redirect" type="hidden" value="<?php echo $this->escapeHtml($this->form->get('redirect')->getValue()); ?>">
-    </fieldset>
-    <fieldset id="actions">
-        <input type="submit" id="submit" value="<?php echo $this->escapeHtml($this->translate('Log In')); ?>">
-        <a href="<?php echo $this->url('config/user/forgot-password'); ?>"><?php echo $this->escapeHtml($this->translate('Forgot your password?')); ?></a>
-    </fieldset>
-</form>
+
+<div class="one-page-box visible widget-box no-border">
+    <div class="widget-body">
+        <div class="widget-main">
+            <h4 class="header">
+                <?php echo $this->escapeHtml($this->translate('Log In')); ?>
+            </h4>
+
+            <form id="one-page-form" action="<?php echo $this->url('config/user/login'); ?>" method="post">
+                <fieldset class="has-warning">
+                    <span class="block input-glyphicon input-glyphicon-right">
+                        <input name="login" type="text" class="form-control" placeholder="<?php echo $this->escapeHtml($this->translate('Login')); ?>" autofocus required />
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+
+                    <span class="block input-glyphicon input-glyphicon-right">
+                        <input name="password" type="password" class="form-control" placeholder="<?php echo $this->escapeHtml($this->translate('Password')); ?>" required />
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+
+                    <div class="clearfix buttons">
+                        <input name="redirect" id="redirect" type="hidden" value="<?php echo $this->escapeHtml($this->form->get('redirect')->getValue()); ?>">
+
+                        <button class="pull-right btn btn-small btn-warning">
+                            <i class="glyphicon glyphicon-log-in"></i>
+                            <?php echo $this->escapeHtml($this->translate('Log In')); ?>
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="footer clearfix text-right">
+            <a href="<?php echo $this->url('config/user/forgot-password'); ?>">
+                <i class="glyphicon glyphicon-exclamation-sign"></i>
+                <?php echo $this->escapeHtml($this->translate('Forgot your password?')); ?>
+            </a>
+        </div>
+    </div>
+</div>
