@@ -26,7 +26,7 @@
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 ?>
-<form class="simple-form" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<form class="relative form-horizontal" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" method="post" enctype="application/x-www-form-urlencoded">
     <?php $fieldsets = $this->form->getFieldsets(); ?>
 
     <div id="accordion">
@@ -34,10 +34,13 @@
             <h3><?php echo $this->escapeHtml($this->translate($fieldset->getLabel())); ?></h3>
             <div>
                 <?php foreach ($fieldset->getElements() as $element): ?>
-                    <div>
-                        <label class="required" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+                    <div class="form-group">
+                        <label class="required control-label col-lg-2" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
 
-                        <?php echo $this->formElement($element); ?>
+                        <div class="col-lg-10">
+                            <?php echo $this->formElement($element); ?>
+                            <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -45,7 +48,7 @@
     </div>
 
 
-    <input id="input-save" type="submit" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+    <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
 </form>
 
 <script type="text/javascript">

@@ -57,16 +57,16 @@ class IndexController extends Action
         $visitorModel = new Visitor();
 
         $settings = array(
-          'back_colour' => '#FFF',
-          'stroke_colour' => '#000',
+          'back_colour' => '#FFFFFF',
+          'stroke_colour' => '#C2C2C2',
           'back_stroke_width' => 0,
-          'back_stroke_colour' => '#000',
+          'back_stroke_colour' => '#C2C2C2',
           'axis_colour' => '#333',
           'axis_overlap' => 1,
           'axis_font' => 'Verdana',
           'axis_font_size' => 10,
-          'grid_colour' => '#666',
-          'label_colour' => '#000',
+          'grid_colour' => '#888888',
+          'label_colour' => '#555555',
           'pad_right' => 10,
           'pad_left' => 10,
           'project_angle' => 45,
@@ -74,7 +74,7 @@ class IndexController extends Action
         );
 
         $graph          = new SVGGraph(600, 400, $settings);
-        $graph->colours = array(array('#656565','#959595'));
+        $graph->colours = array(array('#855D10','#855D10'));
         $data           = array();
         $array          = array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR');
 

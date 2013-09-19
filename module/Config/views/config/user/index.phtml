@@ -25,8 +25,9 @@
  * @link        http://www.got-cms.com
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
+
 ?>
-<table class="table-list clickable">
+<table class="table clickable table-striped table-hover">
     <colgroup>
         <col width="20%">
         <col width="20%">
@@ -41,8 +42,8 @@
             <th><?php echo $this->escapeHtml($this->translate('Firstname')); ?></th>
             <th><?php echo $this->escapeHtml($this->translate('Email')); ?></th>
             <th><?php echo $this->escapeHtml($this->translate('Login')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
-            <th class="a-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
+            <th class="text-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -52,12 +53,12 @@
                 <td><?php echo $this->escapeHtml($user->getFirstname()); ?></td>
                 <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
                 <td><?php echo $this->escapeHtml($user->getLogin()); ?></td>
-                <td class="a-center">
+                <td class="text-center">
                     <a href="<?php echo $this->url('config/user/edit', array('id' => $user->getId())); ?>" class="edit-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
                     </a>
                 </td>
-                <td class="a-center">
+                <td class="text-center">
                     <a href="<?php echo $this->url('config/user/delete', array('id' => $user->getId())); ?>" class="delete-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/delete.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Delete')); ?>">
                     </a>

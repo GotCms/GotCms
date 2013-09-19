@@ -102,7 +102,7 @@ class User extends AbstractForm
         }
 
         $role->setValueOptions($selectOptions)
-            ->setAttribute('class', 'input-select');
+            ->setAttribute('class', 'form-control');
 
         $this->add(new Element('email'));
         $this->add(new Element('login'));

@@ -44,7 +44,7 @@ class Admin extends AbstractHelper
     /**
      * Constructor
      *
-     * @param UserModel $user User model to retrieve Acl, role name and check permission
+     * @param AuthenticationService $auth Authentication service
      *
      * @return void
      */
@@ -54,10 +54,7 @@ class Admin extends AbstractHelper
     }
 
     /**
-     * Check acl
-     *
-     * @param string $resource   Resource name
-     * @param string $permission Permission name
+     * Retrieve the current admin
      *
      * @return UserModel|boolean
      */

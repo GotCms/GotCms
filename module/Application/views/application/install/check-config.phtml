@@ -27,119 +27,124 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-
-<h2><?php echo $this->escapeHtml(sprintf($this->translate('Pre-installation check for GotCms %s'), $this->cmsVersion)); ?></h2>
-<div class="install-text">
-    <p><?php echo $this->escapeHtml($this->translate('Please make sure all parameters are set to "Yes" before continue installation')); ?></p>
+<div class="page-header position-relative">
+    <h1>
+        <?php echo $this->escapeHtml(sprintf($this->translate('Pre-installation check for GotCms %s'), $this->cmsVersion)); ?>
+    </h1>
 </div>
-<div class="install-body">
-    <div class="m">
-        <fieldset>
-            <table class="table-list">
-                <tbody>
-                    <?php foreach ($this->phpData as $data): ?>
-                        <tr>
-                            <td class="item">
-                                <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
-                            </td>
-                            <?php if ($data['value'] === true): ?>
-                                <td class="success">
-                                    <span>
-                                        <?php echo $this->escapeHtml($this->translate('Yes')); ?>
-                                    </span>
-                                </td>
-                            <?php else: ?>
-                                <td class="error">
-                                    <span>
-                                        <?php echo $this->escapeHtml($this->translate('No')); ?>
-                                    </span>
-                                </td>
-                            <?php endif; ?>
-                        </tr>
-                    <?php endforeach; ?>
 
-                    <?php if (!empty($this->gitProject)): ?>
-                        <tr>
-                            <td class="item">
-                                <?php echo $this->escapeHtml($this->translate('Git project has been found, make sure you clone with apache user.')); ?>
-                            </td>
-                            <td class="warning">
+<p><?php echo $this->escapeHtml($this->translate('Please make sure all parameters are set to "Yes" before continue installation')); ?></p>
+
+<div class="install-body">
+    <fieldset>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th><?php echo $this->escapeHtml($this->translate('Directive')); ?></th>
+                    <th><?php echo $this->escapeHtml($this->translate('Status')); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->phpData as $data): ?>
+                    <tr>
+                        <td>
+                            <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
+                        </td>
+                        <?php if ($data['value'] === true): ?>
+                            <td class="success">
                                 <span>
-                                    <?php echo $this->escapeHtml($this->translate('Care')); ?>
+                                    <?php echo $this->escapeHtml($this->translate('Yes')); ?>
                                 </span>
                             </td>
-                        </tr>
-                    <?php endif; ?>
-
-                    <?php foreach ($this->serverData as $data): ?>
-                        <tr>
-                            <td class="item">
-                                <?php echo $this->escapeHtml(sprintf($this->translate('%s is writable'), $data['label'])); ?>
+                        <?php else: ?>
+                            <td class="error">
+                                <span>
+                                    <?php echo $this->escapeHtml($this->translate('No')); ?>
+                                </span>
                             </td>
-                            <?php if ($data['value'] === true): ?>
-                                <td class="success">
-                                    <span>
-                                        <?php echo $this->escapeHtml($this->translate('Yes')); ?>
-                                    </span>
-                                </td>
-                            <?php else: ?>
-                                <td class="error">
-                                    <span>
-                                        <?php echo $this->escapeHtml($this->translate('No')); ?>
-                                    </span>
-                                </td>
-                            <?php endif; ?>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </fieldset>
-    </div>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+
+                <?php if (!empty($this->gitProject)): ?>
+                    <tr>
+                        <td>
+                            <?php echo $this->escapeHtml($this->translate('Git project has been found, make sure you clone with apache user.')); ?>
+                        </td>
+                        <td class="warning">
+                            <span>
+                                <?php echo $this->escapeHtml($this->translate('Care')); ?>
+                            </span>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+
+                <?php foreach ($this->serverData as $data): ?>
+                    <tr>
+                        <td>
+                            <?php echo $this->escapeHtml(sprintf($this->translate('%s is writable'), $data['label'])); ?>
+                        </td>
+                        <?php if ($data['value'] === true): ?>
+                            <td class="success">
+                                <span>
+                                    <?php echo $this->escapeHtml($this->translate('Yes')); ?>
+                                </span>
+                            </td>
+                        <?php else: ?>
+                            <td class="error">
+                                <span>
+                                    <?php echo $this->escapeHtml($this->translate('No')); ?>
+                                </span>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </fieldset>
 </div>
 
 <h3><?php echo $this->escapeHtml($this->translate('Recommended settings:')); ?></h3>
-<div class="install-text">
+<p>
     <?php echo $this->escapeHtml($this->translate('These settings are recommended for PHP in order to ensure full compatibility.')); ?>
-</div>
+</p>
 <div class="install-body">
-    <div class="m">
-        <fieldset>
-            <table class="table-list">
-                <thead>
-                <tr>
-                    <th>
-                        <?php echo $this->escapeHtml($this->translate('Directive')); ?>
-                    </th>
-                    <th>
-                        <?php echo $this->escapeHtml($this->translate('Recommended')); ?>
-                    </th>
-                    <th>
-                        <?php echo $this->escapeHtml($this->translate('Actual')); ?>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($this->phpDirective as $data): ?>
-                        <tr>
-                            <td class="item">
-                                <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
-                            </td>
+    <fieldset>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>
+                    <?php echo $this->escapeHtml($this->translate('Directive')); ?>
+                </th>
+                <th>
+                    <?php echo $this->escapeHtml($this->translate('Recommended')); ?>
+                </th>
+                <th>
+                    <?php echo $this->escapeHtml($this->translate('Actual')); ?>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->phpDirective as $data): ?>
+                    <tr>
+                        <td>
+                            <?php echo $this->escapeHtml($this->translate($data['label'])); ?>
+                        </td>
 
-                            <td class="toggle">
-                                <span>
-                                    <?php echo $this->escapeHtml($this->translate($data['needed'] === true ? 'On' : 'Off')); ?>
-                                </span>
-                            </td>
-                            <td>
-                                <span class="green">
-                                    <?php echo $this->escapeHtml($this->translate($data['value'] === true ? 'On' : 'Off')); ?>
-                                </span>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </fieldset>
-    </div>
+                        <td class="toggle">
+                            <span>
+                                <?php echo $this->escapeHtml($this->translate($data['needed'] === true ? 'On' : 'Off')); ?>
+                            </span>
+                        </td>
+                        <td class="<?php if ($data['needed'] === $data['value']): ?>success<?php else: ?>warning<?php endif; ?>">
+                            <span>
+                                <?php echo $this->escapeHtml($this->translate($data['value'] === true ? 'On' : 'Off')); ?>
+                            </span>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </fieldset>
 </div>
 <div class="clr"></div>

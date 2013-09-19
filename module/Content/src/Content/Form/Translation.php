@@ -71,7 +71,7 @@ class Translation extends AbstractForm
 
         $source = new Element\Text('source');
         $source->setAttribute('label', 'Name')
-            ->setAttribute('class', 'input-text');
+            ->setAttribute('class', 'form-control');
 
         $locale = new Element\Select('locale');
         $locale->setAttribute('label', 'Url key')

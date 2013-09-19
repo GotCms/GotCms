@@ -25,7 +25,7 @@
  * @link       http://www.got-cms.com
  */
 ?>
-<form id="comment-post-form" class="simple-form" action="<?php echo $this->url('module/blog/document-comment', array('id' => $document->getId())); ?>" method="post">
+<form id="comment-post-form" class="relative" action="<?php echo $this->url('module/blog/document-comment', array('id' => $document->getId())); ?>" method="post">
     <table class="table-list">
         <thead>
             <tr>
@@ -66,7 +66,7 @@
     </table>
 
     <div>
-        <input type="submit" id="input-save" class="input-submit" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+        <input type="submit" id="input-save" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
     </div>
 </form>
 

@@ -65,7 +65,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             array(
                 'label' => 'Length',
                 'value' => isset($config['length']) ? $config['length'] : '',
-                'class' => 'input-text',
+                'class' => 'form-control',
                 'id' => 'length',
             )
         );

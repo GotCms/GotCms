@@ -27,9 +27,12 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form autocomplete="off" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="simple-form" method="post">
-    <input id="input-save" type="image" src="<?php echo $this->cdnBackend('backend/images/save.png'); ?>" value="1" alt="<?php echo $this->escapeHtml($this->translate('Save and publish')); ?>">
-    <table id="table-translation-edit" class="table-list clickable">
+<form autocomplete="off" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative" method="post">
+    <button class="btn btn-warning btn-sm" id="input-save" type="submit">
+        <i class="glyphicon glyphicon-floppy-disk"></i>
+        <?php echo $this->escapeHtml($this->translate('Save and publish')); ?>
+    </button>
+    <table id="table-translation-edit" class="table clickable table-striped table-hover">
         <colgroup>
             <col width="43%">
             <col width="43%">
@@ -51,7 +54,7 @@
                         </div>
 
                         <div class="hide">
-                            <input class="input-text" type="text" size="40" name="source[<?php echo $value['src_id']; ?>]" value="<?php echo $this->escapeHtml($value['source']); ?>">
+                            <input class="form-control" type="text" size="40" name="source[<?php echo $value['src_id']; ?>]" value="<?php echo $this->escapeHtml($value['source']); ?>">
                         </div>
                     </td>
                     <td>
@@ -60,7 +63,7 @@
                         </div>
 
                         <div class="hide">
-                            <input class="input-text" type="text" size="40" name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][value]" value="<?php echo $this->escapeHtml($value['destination']); ?>">
+                            <input class="form-control" type="text" size="40" name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][value]" value="<?php echo $this->escapeHtml($value['destination']); ?>">
                         </div>
                     </td>
                     <td>
@@ -69,7 +72,7 @@
                         </div>
 
                         <div class="hide">
-                            <select name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][locale]">
+                            <select class="form-control" name="destination[<?php echo $value['src_id']; ?>][<?php echo $value['dst_id']; ?>][locale]">
                                 <?php foreach ($this->form->get('locale')->getValueOptions() as $option_id => $option_value): ?>
                                     <option value="<?php echo $option_id; ?>"<?php if(!empty($value['locale']) and $option_id == $value['locale']): ?> selected="selected"<?php endif; ?>>
                                         <?php echo $this->escapeHtml($option_value); ?>

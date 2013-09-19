@@ -58,7 +58,7 @@ class Datatype extends AbstractForm
         }
 
         $model->setValueOptions($options)
-            ->setAttribute('class', 'input-select');
+            ->setAttribute('class', 'form-control');
 
         $this->add(new Element('name'));
         $this->add($model);

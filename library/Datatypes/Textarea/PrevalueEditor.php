@@ -80,7 +80,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             array(
                 'label' => 'Cols',
                 'value' => isset($config['cols']) ? $config['cols'] : '',
-                'class' => 'input-text',
+                'class' => 'form-control',
             )
         );
 
@@ -89,7 +89,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             array(
                 'label' => 'Rows',
                 'value' => isset($config['rows']) ? $config['rows'] : '',
-                'class' => 'input-text',
+                'class' => 'form-control',
             )
         );
 
@@ -97,7 +97,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $wrap->setAttributes(
             array(
                 'label' => 'Wrap',
-                'class' => 'input-select',
+                'class' => 'form-control',
                 'options' => array('hard' => 'hard', 'off' => 'off', 'soft' => 'soft'),
                 'value' => isset($config['wrap']) ? $config['wrap'] : '',
             )

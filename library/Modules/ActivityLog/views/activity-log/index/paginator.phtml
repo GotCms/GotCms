@@ -1,32 +1,42 @@
-    <?php if ($this->pageCount > 1): ?>
-    <div class="paginationControl">
+<?php if ($this->pageCount > 1): ?>
+    <ul class="pagination">
         <!-- Previous page link -->
         <?php if (isset($this->previous)): ?>
-            <a href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $this->previous; ?>">
-                &lt; Previous
-            </a> |
+            <li>
+                <a href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $this->previous; ?>">
+                    &laquo; Previous
+                </a>
+            </li>
         <?php else: ?>
-            <span class="disabled">&lt; Previous</span> |
+            <li class="disabled">
+                <span>&laquo; Previous</span>
+            </li>
         <?php endif; ?>
 
-        <!-- Numbered page links -->
-        <?php foreach ($this->pagesInRange as $page): ?>
-            <?php if ($page != $this->current): ?>
-                <a href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $page; ?>">
-                    <?php echo $page; ?>
-                </a> |
-            <?php else: ?>
-                <?php echo $page; ?> |
-            <?php endif; ?>
-        <?php endforeach; ?>
+        <li>
+            <!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <a href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $page; ?>">
+                        <?php echo $page; ?>
+                    </a>
+                <?php else: ?>
+                    <span><?php echo $page; ?></span>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </li>
 
         <!-- Next page link -->
         <?php if (isset($this->next)): ?>
-            <a href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $this->next; ?>">
-                Next &gt;
-            </a>
+            <li>
+                <a href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $this->next; ?>">
+                    Next &raquo;
+                </a>
+            </li>
         <?php else: ?>
-            <span class="disabled">Next &gt;</span>
+            <li class="disabled">
+                <span>Next &raquo;</span>
+            </li>
         <?php endif; ?>
-    </div>
+    </ul>
 <?php endif; ?>

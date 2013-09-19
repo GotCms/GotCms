@@ -27,45 +27,62 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
+<div class="page-header position-relative">
+    <h1>
+        <?php echo $this->escapeHtml($this->translate('Installation currently finish')); ?>
+    </h1>
+</div>
 
-<h2><?php echo $this->escapeHtml($this->translate('Installation currently finish')); ?></h2>
-<ul id="installer">
-    <li id="c-db"><?php echo $this->escapeHtml($this->translate('Create database')); ?></li>
-    <li id="i-d"><?php echo $this->escapeHtml($this->translate('Insert data')); ?></li>
-    <li id="c-uar"><?php echo $this->escapeHtml($this->translate('Create users and roles')); ?></li>
-    <li id="it"><?php echo $this->escapeHtml($this->translate('Install template')); ?></li>
-    <li id="c-cf"><?php echo $this->escapeHtml($this->translate('Create configuration file')); ?></li>
+<ul id="installer" class="list-group">
+    <li class="list-group-item" id="c-db"><?php echo $this->escapeHtml($this->translate('Create database')); ?></li>
+    <li class="list-group-item" id="i-d"><?php echo $this->escapeHtml($this->translate('Insert data')); ?></li>
+    <li class="list-group-item" id="c-uar"><?php echo $this->escapeHtml($this->translate('Create users and roles')); ?></li>
+    <li class="list-group-item" id="it"><?php echo $this->escapeHtml($this->translate('Install template')); ?></li>
+    <li class="list-group-item" id="c-cf"><?php echo $this->escapeHtml($this->translate('Create configuration file')); ?></li>
 </ul>
 
-<div id="installation-data">&nbsp;</div>
+<div id="installation-data" class="alert">&nbsp;</div>
 <script type="text/javascript">
     $(document).ready(function() {
-        $data = ['c-db', 'i-d', 'c-uar', 'it', 'c-cf'];
+        var $data = ['c-db', 'i-d', 'c-uar', 'it', 'c-cf'],
+        $progressClass = 'install-in-progress',
+        $completeClass = 'install-complete',
+        $errorClass    = 'install-error',
+        $installHtml   = $('#installation-data');
 
         function nextStep($step) {
             if ($data[$step] == undefined) {
                 return false;
             }
 
-            $('#' + $data[$step]).addClass('progress');
+            var $object = $('#' + $data[$step]);
+            $object.addClass($progressClass);
 
             $.ajax({
-                url: '<?php echo $this->escapeJs($this->url('install/complete')); ?>',
+                url:      '<?php echo $this->escapeJs($this->url('install/complete')); ?>',
                 dataType: 'json',
-                data: {step: $data[$step]},
-                type: 'POST',
-                success: function(data) {
+                data:     {step: $data[$step]},
+                type:     'POST',
+                error:    function() {
+                    $installHtml
+                        .addClass('alert-danger')
+                        .html('<?php echo $this->escapeJs($this->translate('The request has been stopped, please refresh the page')); ?>');
+                    $object.removeClass($progressClass).addClass($errorClass);
+                },
+                success:  function(data) {
                     if (data.success == true) {
-                        $('#' + $data[$step]).removeClass('progress').addClass('complete');
+                        $object.removeClass($progressClass).addClass($completeClass);
                         nextStep(++$step);
                     } else {
+                        $installHtml
+                            .html(data.message);
                         if ($data[$step] == 'c-cf') {
-                            $('#' + $data[$step]).removeClass('progress').addClass('complete');
+                            $installHtml.addClass('alert-success')
+                            $object.removeClass($progressClass).addClass($completeClass);
                         } else {
-                            $('#' + $data[$step]).removeClass('progress').addClass('error');
+                            $installHtml.addClass('alert-danger')
+                            $object.removeClass($progressClass).addClass($errorClass);
                         }
-
-                        $('#installation-data').html(data.message);
                     }
                 }
             });
