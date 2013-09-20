@@ -372,7 +372,7 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-05-24 08:24:49.350913
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="<?php echo $this->escapeHtml($this->metaDescription); ?>" />
         <meta name="keywords" content="<?php echo $this->escapeHtml($this->metaKeywords); ?>" />
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel="stylesheet" />
         <script src="<?php echo $this->cdn(''/frontend/js/jquery-1.9.1.min.js''); ?>"></script>
         <script src="<?php echo $this->cdn(''/frontend/js/config.js''); ?>"></script>
         <script src="<?php echo $this->cdn(''/frontend/js/skel.min.js''); ?>"></script>
