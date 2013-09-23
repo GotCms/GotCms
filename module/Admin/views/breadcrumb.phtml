@@ -1,4 +1,10 @@
 <div id="breadcrumbs" class="breadcrumbs breadcrumbs-fixed">
+    <div id="menu-toggler-container">
+        <span id="menu-toggler" class="hidden-lg">
+            <i class="glyphicon glyphicon-new-window"></i>
+            <span class="menu-toggler-text"><?php echo $this->escapeHtml($this->translate('Menu')); ?></span>
+        </span>
+    </div>
     <ul class="breadcrumb">
         <?php foreach ($this->pages as $key => $page): ?>
             <li>

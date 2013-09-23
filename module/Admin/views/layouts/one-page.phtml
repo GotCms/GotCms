@@ -47,7 +47,6 @@
     echo $this->headScript()
         ->appendFile($this->cdnBackend('/backend/js/vendor/jquery-1.10.2.min.js'), 'text/javascript')
         ->appendFile($this->cdnBackend('/backend/js/bootstrap.min.js'), 'text/javascript')
-        ->appendFile($this->cdnBackend('/backend/js/plugins.js', 'text/javascript'))
         ->appendFile($this->cdnBackend('/backend/js/generic-classes.js', 'text/javascript'))
         ->appendFile($this->cdnBackend('/backend/js/gotcms.js', 'text/javascript'));
 
@@ -61,21 +60,17 @@
     <div class="container">
         <div class="main-content">
             <div class="row">
-                <div class="span12">
+                <div class="col-sm-10 col-lg-12">
                     <div class="login-container">
-                        <div class="row">
-                            <div class="text-center">
-                                <h1>
-                                    <?php echo $this->escapeHtml($this->translate('GotCms Admin')); ?>
-                                </h1>
-                            </div>
+                        <div class="text-center">
+                            <h1>
+                                <?php echo $this->escapeHtml($this->translate('GotCms Admin')); ?>
+                            </h1>
                         </div>
 
                         <?php echo $this->partial('messages.phtml', array('messages' => $this->flashMessages)); ?>
-                        <div class="row">
-                            <div class="relative">
-                                <?php echo $this->content; ?>
-                            </div>
+                        <div class="relative">
+                            <?php echo $this->content; ?>
                         </div>
                     </div>
                 </div>

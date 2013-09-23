@@ -69,6 +69,10 @@ var Gc = (function($)
                 }
             });
 
+            $('#menu-toggler').on('click', function() {
+                $('#sidebar').toggleClass('show');
+            });
+
             $('.btn-scroll-up').on('click', function() {
                 $('html,body').animate({ scrollTop: 0 }, 'slow');
                 return false;

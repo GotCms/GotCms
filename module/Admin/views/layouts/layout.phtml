@@ -85,7 +85,7 @@
         <?php if (empty($module) or in_array($module, array('admin', 'statistics'))): ?>
             <div class="col-lg-12">
         <?php else: ?>
-            <div id="sidebar" class="sidebar sidebar-fixed col-lg-2">
+            <div id="sidebar" class="sidebar sidebar-fixed col-lg-2 visible-lg">
                 <?php echo $this->partial($module . '-menu.phtml', array('treeview' => $this->treeview, 'moduleMenu' => $this->moduleMenu)); ?>
             </div>
             <div class="col-lg-10 main-content">
