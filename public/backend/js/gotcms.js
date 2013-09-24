@@ -40,7 +40,9 @@ var Gc = (function($)
         },
 
         initializeMenu: function() {
-            var $slideDuration = 600;
+            var $slideDuration = 600,
+                $menuToggler = $('#menu-toggler');
+
             $(document).on('click', '.menu-toggle', function() {
                 var $parent = $(this).parent();
                 if (!$parent.hasClass('open')) {
@@ -69,7 +71,11 @@ var Gc = (function($)
                 }
             });
 
-            $('#menu-toggler').on('click', function() {
+            $(document).on('click', ':not(#menu-toggler), :not(#sidebar)', function() {
+                $('#sidebar').toggleClass('show');
+            });
+
+            $menuToggler.on('click', function() {
                 $('#sidebar').toggleClass('show');
             });
 
