@@ -36,16 +36,28 @@
         <div>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <input class="control-form" id="what1" type="radio" checked="checked" value="dataonly" name="what">
-                    <label class="control-label" for="what1"><?php echo $this->escapeHtml($this->translate('Data only')); ?></label>
+                    <div class="radio">
+                        <label>
+                            <input class="control-form" type="radio" checked="checked" value="dataonly" name="what">
+                            <?php echo $this->escapeHtml($this->translate('Data only')); ?>
+                        </label>
+                    </div>
                 </li>
                 <li class="list-group-item">
-                    <input class="control-form" id="what2" type="radio" value="structureonly" name="what">
-                    <label class="control-label" for="what2"><?php echo $this->escapeHtml($this->translate('Structure only')); ?></label>
+                    <div class="radio">
+                        <label>
+                            <input class="control-form" type="radio" checked="checked" value="structureonly" name="what">
+                            <?php echo $this->escapeHtml($this->translate('Structure only')); ?>
+                        </label>
+                    </div>
                 </li>
                 <li class="list-group-item">
-                    <input class="control-form" id="what3" type="radio" value="structureanddata" name="what">
-                    <label class="control-label" for="what3"><?php echo $this->escapeHtml($this->translate('Structure and data')); ?></label>
+                    <div class="radio">
+                        <label>
+                            <input class="control-form" type="radio" checked="checked" value="structureanddata" name="what">
+                            <?php echo $this->escapeHtml($this->translate('Structure and data')); ?>
+                        </label>
+                    </div>
                 </li>
             </ul>
         </div>

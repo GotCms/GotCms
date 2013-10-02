@@ -1,10 +1,15 @@
+<?php
+$module = empty($this->layout()->routeParams['module']) ? null : strtolower($this->layout()->routeParams['module']);
+?>
 <div id="breadcrumbs" class="breadcrumbs breadcrumbs-fixed">
-    <div id="menu-toggler-container">
-        <span id="menu-toggler" class="hidden-lg">
-            <i class="glyphicon glyphicon-new-window"></i>
-            <span class="menu-toggler-text"><?php echo $this->escapeHtml($this->translate('Menu')); ?></span>
-        </span>
-    </div>
+    <?php if (!empty($module) and !in_array($module, array('admin', 'statistics'))): ?>
+        <div id="menu-toggler-container">
+            <span id="menu-toggler" class="hidden-lg">
+                <i class="glyphicon glyphicon-new-window"></i>
+                <span class="menu-toggler-text"><?php echo $this->escapeHtml($this->translate('Menu')); ?></span>
+            </span>
+        </div>
+    <?php endif; ?>
     <ul class="breadcrumb">
         <?php foreach ($this->pages as $key => $page): ?>
             <li>

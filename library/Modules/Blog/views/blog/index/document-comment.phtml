@@ -26,14 +26,14 @@
  */
 ?>
 <form id="comment-post-form" class="relative" action="<?php echo $this->url('module/blog/document-comment', array('id' => $document->getId())); ?>" method="post">
-    <table class="table-list">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th><?php echo $this->escapeHtml($this->translate('Created at')); ?></th>
                 <th><?php echo $this->escapeHtml($this->translate('Username')); ?></th>
                 <th><?php echo $this->escapeHtml($this->translate('Email')); ?></th>
                 <th><?php echo $this->escapeHtml($this->translate('Show email')); ?></th>
-                <th><?php echo $this->escapeHtml($this->translate('Message')); ?><</th>
+                <th><?php echo $this->escapeHtml($this->translate('Message')); ?></th>
                 <th><?php echo $this->escapeHtml($this->translate('Is active')); ?></th>
                 <th><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
             </tr>
@@ -43,22 +43,22 @@
                 <tr>
                     <td><?php echo $this->escapeHtml(date('Y-m-d \a\t h:i:s A', strtotime($comment['created_at']))); ?></td>
                     <td>
-                        <input type="text" name="comment[<?php echo $comment['id']; ?>][username]" value="<?php echo $this->escapeHtml($comment['username']); ?>">
+                        <input class="form-control" type="text" comment[<?php echo $comment['id']; ?>][username]" value="<?php echo $this->escapeHtml($comment['username']); ?>">
                     </td>
                     <td>
-                        <input type="email" name="comment[<?php echo $comment['id']; ?>][email]" value="<?php echo $this->escapeHtml($comment['email']); ?>">
+                        <input class="form-control" type="email" name="comment[<?php echo $comment['id']; ?>][email]" value="<?php echo $this->escapeHtml($comment['email']); ?>">
                     </td>
                     <td>
-                        <input type="checkbox" name="comment[<?php echo $comment['id']; ?>][show_email]" value="1"<?php if (!empty($comment['show_email'])): ?> checked="checked"<?php endif; ?>>
+                        <input class="form-control" type="checkbox" name="comment[<?php echo $comment['id']; ?>][show_email]" value="1"<?php if (!empty($comment['show_email'])): ?> checked="checked"<?php endif; ?>>
                     </td>
                     <td>
-                        <textarea name="comment[<?php echo $comment['id']; ?>][message]"><?php echo $this->escapeHtml($comment['message']); ?></textarea>
+                        <textarea class="form-control" name="comment[<?php echo $comment['id']; ?>][message]"><?php echo $this->escapeHtml($comment['message']); ?></textarea>
                     </td>
                     <td>
-                        <input type="checkbox" name="comment[<?php echo $comment['id']; ?>][is_active]" value="1"<?php if (!empty($comment['is_active'])): ?> checked="checked"<?php endif; ?>>
+                        <input class="form-control" type="checkbox" name="comment[<?php echo $comment['id']; ?>][is_active]" value="1"<?php if (!empty($comment['is_active'])): ?> checked="checked"<?php endif; ?>>
                     </td>
                     <td>
-                        <input class="delete-comment" type="checkbox" name="comment[<?php echo $comment['id']; ?>][delete]" value="1">
+                        <input class="form-control delete-comment" type="checkbox" name="comment[<?php echo $comment['id']; ?>][delete]" value="1">
                     </td>
                 </tr>
             <?php endforeach; ?>

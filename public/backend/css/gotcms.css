@@ -233,12 +233,12 @@ header .pull-right{margin-top:10px;}
 @media only screen and (max-width:979px) {
     .breadcrumbs{position: relative!important;left: auto!important;right: auto!important;top: auto!important;z-index: auto!important;}
     body{padding-top:36px;}
-    .sidebar:before{display:none;}
-    .sidebar{position:absolute;margin-top:44px;}
 }
 
 @media only screen and (max-width:560px){
     body{padding-top:80px;}
+    .sidebar{position:absolute;margin-top:44px;}
+    .sidebar:before{display:none;}
 }
 
 @media only screen and (max-width:315px){
