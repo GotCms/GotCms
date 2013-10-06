@@ -270,7 +270,7 @@ class DocumentType extends AbstractForm
             $tab->setValue($property->getTabId());
             $datatype->setValue($property->getDatatypeId());
             $description->setValue($property->getDescription());
-            $required->setCheckedValue($property->isRequired());
+            $required->setValue((string) $property->isRequired());
             $propertyId->setValue($property->getId());
             $propertyFieldsetName = $property->getId();
         } elseif (is_array($property)) {
@@ -279,7 +279,7 @@ class DocumentType extends AbstractForm
             $tab->setValue($property['tab']);
             $datatype->setValue($property['datatype']);
             $description->setValue($property['description']);
-            $required->setValue((string) !empty($property['is_required']));
+            $required->setValue((string) !empty($property['isRequired']));
             $propertyId->setValue(str_replace('property', '', $property['id']));
             $propertyFieldsetName = $property['id'];
         }

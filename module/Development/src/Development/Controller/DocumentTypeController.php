@@ -221,7 +221,7 @@ class DocumentTypeController extends Action
                         'identifier' => $property->getIdentifier(),
                         'tab' => $property->getTabId(),
                         'description' => $property->getDescription(),
-                        'is_required' => $property->isRequired(),
+                        'isRequired' => $property->isRequired(),
                         'datatype' => $property->getDatatypeId(),
                     );
 
@@ -373,7 +373,7 @@ class DocumentTypeController extends Action
                     'identifier' => $property->getIdentifier(),
                     'description' => $property->getDescription(),
                     'datatype' => $property->getDatatypeId(),
-                    'is_required' => $property->isRequired()
+                    'isRequired' => $property->isRequired()
                 );
             }
 
@@ -492,7 +492,7 @@ class DocumentTypeController extends Action
             $identifier  = $post->get('identifier');
             $tabId       = $post->get('tab');
             $description = $post->get('description');
-            $isRequired  = $post->get('is_required');
+            $isRequired  = $post->get('isRequired');
             $datatypeId  = $post->get('datatype');
 
             $session = $this->getSession();
@@ -528,7 +528,7 @@ class DocumentTypeController extends Action
                 'identifier' => $identifier,
                 'tab' => $tabId,
                 'description' => $description,
-                'is_required' => $isRequired == 1 ? true : false,
+                'isRequired' => $isRequired == 1 ? true : false,
                 'datatype' => $datatypeId,
             );
 

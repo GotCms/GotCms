@@ -256,10 +256,10 @@
                                                 <div class=" col-lg-10">
                                                     <?php
                                                         $value = $property->get('required')->getValue();
-                                                        $checkedValue = $property->get('required')->getAttribute('checkedValue');
+                                                        $checkedValue = $property->get('required')->getCheckedValue();
                                                     ?>
                                                     <div class="input-checkbox">
-                                                        <input type="checkbox" name="properties[<?php echo $property_form_id; ?>][required]" class="input-checkbox" id="properties-required-<?php echo $property_id; ?>" value="<?php echo $value; ?>" <?php if ($value == $checkedValue):?> checked="checked"<?php endif; ?>>
+                                                        <input type="checkbox" name="properties[<?php echo $property_form_id; ?>][required]" class="input-checkbox" id="properties-required-<?php echo $property_id; ?>" value="<?php echo $checkedValue; ?>" <?php if ($value == $checkedValue):?> checked="checked"<?php endif; ?>>
                                                         <label for="properties-required-<?php echo $property_id; ?>"></label>
                                                     </div>
 

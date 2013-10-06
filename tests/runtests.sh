@@ -1,3 +1,4 @@
+#!/bin/bash
 :
 : ${PHPUNIT:="phpunit"}
 : ${PHPUNIT_OPTS:="-d zend.enable_gc=0 --verbose"}

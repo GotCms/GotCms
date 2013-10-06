@@ -7,11 +7,18 @@ read to the following resource:
 
  -  Coding Standards:
     https://github.com/GotCms/GotSniffs
+ -  JsHint:
+    http://www.jshint.com/
 
 
 ## RUNNING TESTS
+To run JsHint tests:
+- Enter the `tests/` subdirectory.
+  ```
+  $ ./jshint.sh
+  ```
 
-To run tests:
+To run PHPUnit tests:
 
 - Make sure you have a recent version of PHPUnit installed; 3.7.0
   minimally.
@@ -23,7 +30,7 @@ To run tests:
 - Execute PHPUnit, providing a path to a component directory for which
   you wish to run tests, or a specific test class file.
 
-  ```sh
+  ```
   $ phpunit library/Gc/Core/ConfigTest.php
   ```
 

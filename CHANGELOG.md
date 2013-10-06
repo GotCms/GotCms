@@ -5,6 +5,7 @@
 - Use of undefined constant update - assumed update ([https://github.com/GotCms/GotCms/issues/133](https://github.com/GotCms/GotCms/issues/133))
 - Rebuild backend design ([https://github.com/GotCms/GotCms/issues/102](https://github.com/GotCms/GotCms/issues/102))
 - Create demo website ([https://github.com/GotCms/GotCms/issues/103](https://github.com/GotCms/GotCms/issues/103))
+- Add JsHint ([https://github.com/GotCms/GotCms/issues/132](https://github.com/GotCms/GotCms/issues/132))
 
 ##0.2.1 (01 Sep 2013):
 - Force ssl not working ([https://github.com/GotCms/GotCms/issues/123](https://github.com/GotCms/GotCms/issues/123))

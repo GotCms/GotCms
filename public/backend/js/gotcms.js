@@ -23,7 +23,7 @@
 
 var Gc = (function($)
 {
-    "use strict";
+    'use strict';
     var $document = $(document),
     $window = $(window);
 
@@ -64,9 +64,9 @@ var Gc = (function($)
 
             $(window).on('scroll', function() {
                 var $btn = $('.btn-scroll-up');
-                if ($(window).scrollTop() != 0 && $btn.is(':not(:visible)')) {
+                if ($(window).scrollTop() !== 0 && $btn.is(':not(:visible)')) {
                     $btn.fadeIn();
-                } else if ($(window).scrollTop() == 0) {
+                } else if ($(window).scrollTop() === 0) {
                     $btn.fadeOut();
                 }
             });
@@ -82,7 +82,7 @@ var Gc = (function($)
             $('.btn-scroll-up').on('click', function() {
                 $('html,body').animate({ scrollTop: 0 }, 'slow');
                 return false;
-            })
+            });
         },
 
         setOption: function($key, $value)
@@ -162,37 +162,41 @@ var Gc = (function($)
                         if($data.message !== undefined) {
                             $this.setHtmlMessage($data.message, 'error');
                         } else {
-                            var $tabs, $e, $tab_content;
+                            var $tabs, $e, $tabContent;
                             $tabs = $('#tabs');
-                            $e = $('<li class="list-item">' +
-                                '<div class="list-handle">' +
-                                    '<i class="glyphicon glyphicon-move"></i>' +
-                                    '<div class="col-lg-10">' +
-                                        '<div class="col-lg-6">' +
-                                            '<input type="text" class="form-control" name="tabs[tab' + $data.id + '][name]" value="' + $name.val() + '">' +
-                                        '</div>' +
-                                        '<div class="col-lg-6">' +
-                                            '<input type="text" class="form-control" name="tabs[tab' + $data.id + '][description]" value="' + $description.val() + '">' +
-                                        '</div>' +
-                                    '</div>' +
-                                    '<div class="col-lg-1">' +
-                                        '<button type="button" value="' + $data.id + '" class="delete-tab btn btn-danger">' +
-                                            '<i class="glyphicon glyphicon-remove"></i> ' + Translator.translate('Delete') +
-                                        '</button>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</li>');
+                            $e = $('<li class="list-item"> \
+    <div class="list-handle"> \
+        <i class="glyphicon glyphicon-move"></i> \
+        <div class="col-lg-10"> \
+            <div class="col-lg-6"> \
+                <input type="text" class="form-control" \
+                name="tabs[tab' + $data.id + '][name]" value="' + $name.val() + '"> \
+            </div> \
+            <div class="col-lg-6"> \
+                <input type="text" class="form-control" \
+                name="tabs[tab' + $data.id + '][description]" value="' + $description.val() + '"> \
+            </div> \
+        </div> \
+        <div class="col-lg-1"> \
+            <button type="button" value="' + $data.id + '" class="delete-tab btn btn-danger"> \
+                <i class="glyphicon glyphicon-remove"></i> ' + Translator.translate('Delete') + '\
+            </button> \
+        </div> \
+    </div> \
+</li>');
 
                             $tabs.append($e);
 
                             $('.select-tab').append(new Option($name.val(),$data.id));
 
                             if($('#properties-tabs-content').html() !== null) {
-                                $tab_content = $('#properties-tabs-content');
-                                $tab_content.append('<div id="tabs-properties-' + $data.id + '"></div>');
-                                $tab_content.children('ul').append('<li><a href="#tabs-properties-' + $data.id + '"> ' + $name.val() + '</a></li>');
-                                $tab_content.tabs('refresh');
-                                $('#tabs-properties-' + $data.id).append('<div class="sortable connected-sortable ui-helper-reset">');
+                                $tabContent = $('#properties-tabs-content');
+                                $tabContent.append('<div id="tabs-properties-' + $data.id + '"></div>');
+                                $tabContent.children('ul').append('<li> \
+                                    <a href="#tabs-properties-' + $data.id + '"> ' + $name.val() + '</a></li>');
+                                $tabContent.tabs('refresh');
+                                $('#tabs-properties-' + $data.id)
+                                    .append('<div class="sortable connected-sortable ui-helper-reset">');
                             }
                         }
                     });
@@ -245,72 +249,91 @@ var Gc = (function($)
                 $description = $('#properties-description'),
                 $isRequired = $('#properties-required');
 
-                if($this.isEmpty($identifier.val()) || $this.isEmpty($name.val()) || $this.isEmpty($tab.val()) || $this.isEmpty($datatype.val())) {
+                if($this.isEmpty($identifier.val()) ||
+                    $this.isEmpty($name.val()) ||
+                    $this.isEmpty($tab.val()) ||
+                    $this.isEmpty($datatype.val())) {
                     $this.setHtmlMessage(Translator.translate('Please fill all fields'), 'error');
                 } else {
                     $.post($addPropertyUrl, {
-                        name:             $name.val(),
-                        identifier:       $identifier.val(),
-                        tab:              $tab.val(),
-                        datatype:         $datatype.val(),
-                        description:      $description.val(),
-                        is_required:      $isRequired.val()
+                        'name':             $name.val(),
+                        'identifier':       $identifier.val(),
+                        'tab':              $tab.val(),
+                        'datatype':         $datatype.val(),
+                        'description':      $description.val(),
+                        'isRequired':       $isRequired.val()
                     },
                     function($data) {
                         if($data.success === false) {
                             $this.setHtmlMessage($data.message, 'error');
                         } else {
-                            var $c = new Template('<div><h3><a href="#secion#{id}">#{name} (#{identifier})</a></h3>' +
-                            '<div class="form-horizontal">' +
-                                '<div class="form-group">' +
-                                    '<label class="required control-label col-lg-2" for="properties-name-#{tab}-#{id}">' + Translator.translate('Name') + '</label>' +
-                                    '<div class="col-lg-10">' +
-                                        '<input type="text" class="form-control" value="#{name}" id="properties-name-#{tab}-#{id}" name="properties[property#{id}][name]">' +
-                                    '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                    '<label class="required control-label col-lg-2" for="properties-identifier-#{tab}-#{id}">' + Translator.translate('Identifier') + '</label>' +
-                                    '<div class="col-lg-10">' +
-                                        '<input type="text" class="form-control" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" name="properties[property#{id}][identifier]">' +
-                                    '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                    '<label class="required control-label col-lg-2" for="properties-datatype-#{tab}-#{id}">' + Translator.translate('Datatype') + '</label>' +
-                                    '<div class="col-lg-10">' +
-                                        '<select class="form-control select-datatype" id="properties-datatype-#{tab}-#{id}" name="properties[property#{id}][datatype]">' +
-                                        '</select>' +
-                                    '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                    '<label class="required control-label col-lg-2" for="properties-description-#{tab}-#{id}">' + Translator.translate('Description') + '</label>' +
-                                    '<div class="col-lg-10">' +
-                                        '<input type="text" class="form-control" value="#{description}" id="properties-description-#{tab}-#{id}" name="properties[property#{id}][description]">' +
-                                    '</div>' +
-                                '</div>' +
-                                '<div class="form-group">' +
-                                    '<label class="required control-label col-lg-2" for="properties-required-#{tab}-#{id}">' + Translator.translate('Required') + '</label>' +
-                                    '<div class="col-lg-10">' +
-                                        '<div class="input-checkbox">' +
-                                            '<input type="checkbox" name="properties[property#{id}][required]" class="input-checkbox" id="properties-required-#{tab}-#{id}" value="1">' +
-                                            '<label for="properties-required-#{tab}-#{id}"></label>' +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>' +
-                                '<div class="clearfix">' +
-                                    '<input class="property-tab-id" type="hidden" id="properties-tab-#{id}" name="properties[property#{id}][tab]" value="#{tab}">' +
-                                    '<button type="button" value="#{id}" class="delete-property btn btn-danger">' +
-                                        '<i class="glyphicon glyphicon-remove"></i> ' + Translator.translate('Delete') +
-                                    '</button>' +
-                                '</div>' +
-                            '</div></div>');
+                            var $c = new Template('<div><h3><a href="#secion#{id}">#{name} (#{identifier})</a></h3> \
+<div class="form-horizontal"> \
+    <div class="form-group"> \
+        <label class="required control-label col-lg-2" for="properties-name-#{tab}-#{id}"> \
+        ' + Translator.translate('Name') + '</label> \
+        <div class="col-lg-10"> \
+            <input type="text" class="form-control" value="#{name}" id="properties-name-#{tab}-#{id}" \
+            name="properties[property#{id}][name]"> \
+        </div> \
+    </div> \
+    <div class="form-group"> \
+        <label class="required control-label col-lg-2" for="properties-identifier-#{tab}-#{id}"> \
+        ' + Translator.translate('Identifier') + '</label> \
+        <div class="col-lg-10"> \
+            <input type="text" class="form-control" value="#{identifier}" id="properties-identifier-#{tab}-#{id}" \
+            name="properties[property#{id}][identifier]"> \
+        </div> \
+    </div> \
+    <div class="form-group"> \
+        <label class="required control-label col-lg-2" for="properties-datatype-#{tab}-#{id}"> \
+        ' + Translator.translate('Datatype') + '</label> \
+        <div class="col-lg-10"> \
+            <select class="form-control select-datatype" id="properties-datatype-#{tab}-#{id}" \
+            name="properties[property#{id}][datatype]"> \
+            </select> \
+        </div> \
+    </div> \
+    <div class="form-group"> \
+        <label class="required control-label col-lg-2" for="properties-description-#{tab}-#{id}"> \
+        ' + Translator.translate('Description') + '</label> \
+        <div class="col-lg-10"> \
+            <input type="text" class="form-control" value="#{description}" id="properties-description-#{tab}-#{id}" \
+            name="properties[property#{id}][description]"> \
+        </div> \
+    </div> \
+    <div class="form-group"> \
+        <label class="required control-label col-lg-2" for="properties-required-#{tab}-#{id}"> \
+        ' + Translator.translate('Required') + '</label> \
+        <div class="col-lg-10"> \
+            <div class="input-checkbox"> \
+                <input type="checkbox" name="properties[property#{id}][required]" class="input-checkbox" \
+            id="properties-required-#{tab}-#{id}" value="1"> \
+                <label for="properties-required-#{tab}-#{id}"></label> \
+            </div> \
+        </div> \
+    </div> \
+    <div class="clearfix"> \
+        <input class="property-tab-id" type="hidden" id="properties-tab-#{id}" \
+            name="properties[property#{id}][tab]" value="#{tab}"> \
+        <button type="button" value="#{id}" class="delete-property btn btn-danger"> \
+            <i class="glyphicon glyphicon-remove"></i> ' + Translator.translate('Delete') + ' \
+        </button> \
+    </div> \
+</div></div>');
 
                             $c = $($c.evaluate($data));
 
                             $('#tabs-properties-' + $tab.val()).children('div:first').append($c);
                             $('.connected-sortable').accordion(Gc.getOption('accordion-option'));
-                            $('#properties-tab-' + $data.tab + '-' + $data.id).html($('#properties-tab').html()).val($data.tab);
-                            $('#properties-datatype-' + $data.tab + '-' + $data.id).html($('#properties-datatype').html()).val($data.datatype);
-                            $('#properties-required-' + $data.tab + '-' + $data.id).prop('checked', $isRequired.prop('checked'));
+                            $('#properties-tab-' + $data.tab + '-' + $data.id)
+                                .html($('#properties-tab')
+                                .html()).val($data.tab);
+                            $('#properties-datatype-' + $data.tab + '-' + $data.id)
+                                .html($('#properties-datatype')
+                                .html()).val($data.datatype);
+                            $('#properties-required-' + $data.tab + '-' + $data.id)
+                                .prop('checked', $isRequired.prop('checked'));
 
                             $this.refreshProperties($tabs);
                         }
@@ -335,20 +358,20 @@ var Gc = (function($)
             });
 
             $('#import-tab-button').on('click', function() {
-                var $tab_id = $('#import-tabs').val();
+                var $tabId = $('#import-tabs').val();
                 //Ajax get tab and properties
-                $.post($importTabUrl, {tab_id: $tab_id}, function($data) {
+                $.post($importTabUrl, {'tab_id': $tabId}, function($data) {
                     if($data.success === true) {
                         $.ajaxSetup({async:false});
                         var $tab = $data.tab,
-                        $tab_name = $('#tabs-addname'),
-                        $tab_description = $('#tabs-adddescription');
+                        $tabName = $('#tabs-addname'),
+                        $tabDescription = $('#tabs-adddescription');
 
-                        $tab_name.val($tab.name);
-                        $tab_description.val($tab.description);
+                        $tabName.val($tab.name);
+                        $tabDescription.val($tab.description);
 
                         $('#tabs-add').click();
-                        $tab_id = $('.select-tab').find('option:last').val();
+                        $tabId = $('.select-tab').find('option:last').val();
                         $.each($tab.properties, function(key, $property)
                         {
                             var $name = $('#properties-name'),
@@ -360,10 +383,10 @@ var Gc = (function($)
 
                             $name.val($property.name);
                             $identifier.val($property.identifier);
-                            $tab.val($tab_id);
+                            $tab.val($tabId);
                             $datatype.val($property.datatype);
                             $description.val($property.description);
-                            $isRequired.val($property.is_required);
+                            $isRequired.val($property.isRequired);
                             $('#property-add').click();
                             $name.val('');
                             $identifier.val('');
@@ -373,8 +396,8 @@ var Gc = (function($)
                             $isRequired.val('');
                         });
 
-                        $tab_name.val('');
-                        $tab_description.val('');
+                        $tabName.val('');
+                        $tabDescription.val('');
                         $.ajaxSetup({async:true});
                     }
                 });
@@ -397,7 +420,7 @@ var Gc = (function($)
                     distance: 10
                 });
 
-            var $tab_items = $('ul:first li', $tabs).droppable({
+            var $tabItems = $('ul:first li', $tabs).droppable({
                 accept: '.connected-sortable div',
                 hoverClass: 'ui-state-hover',
                 tolerance: 'pointer',
@@ -405,12 +428,12 @@ var Gc = (function($)
                     var $item = $(this);
                     var $list = $( $item.find('a').attr('href'))
                         .find('.connected-sortable');
-                    var $tab_id = $item.find('a').attr('href').replace('#tabs-properties-', '');
+                    var $tabId = $item.find('a').attr('href').replace('#tabs-properties-', '');
 
                     ui.draggable.hide('slow', function() {
-                        $tabs.tabs('option', 'active', $tab_items.index($item));
+                        $tabs.tabs('option', 'active', $tabItems.index($item));
                         $(this).appendTo($list).show('slow');
-                        $(this).find('.property-tab-id').val($tab_id);
+                        $(this).find('.property-tab-id').val($tabId);
                         $(this).attr('style', '');
                         $('.connected-sortable').accordion('refresh');
                     });
@@ -423,12 +446,12 @@ var Gc = (function($)
             });
         },
 
-        sortableMenu: function($update_document_url)
+        sortableMenu: function($updateDocumentUrl)
         {
             $('#documents').find('ul').sortable({
                 update: function() {
                     $.ajax({
-                        url: $update_document_url,
+                        url: $updateDocumentUrl,
                         type: 'post',
                         dataType: 'json',
                         data: {order: $(this).sortable('toArray').join()}
@@ -438,10 +461,10 @@ var Gc = (function($)
             });
         },
 
-        initDocumentMenu: function($document_id, $update_document_url)
+        initDocumentMenu: function($documentId, $updateDocumentUrl)
         {
             var $this = this,
-            initialDocument = $('#document_' + $document_id).closest('li'),
+            initialDocument = $('#document_' + $documentId).closest('li'),
             initialOpen;
 
             if (initialDocument.length > 0) {
@@ -460,9 +483,9 @@ var Gc = (function($)
                 'plugins' : ['themes','html_data'],
                 'core' : { 'initially_open' : [ initialOpen ] }
             }).bind('refresh.jstree', function() {
-                $this.sortableMenu($update_document_url);
+                $this.sortableMenu($updateDocumentUrl);
             }).bind('loaded.jstree', function() {
-                $this.sortableMenu($update_document_url);
+                $this.sortableMenu($updateDocumentUrl);
 
                 $.contextMenu({
                     selector: '#browser a',
@@ -483,9 +506,12 @@ var Gc = (function($)
                         $routes,
                         $url,
                         $id,
-                        $display_copy_form;
+                        $displayCopyForm;
 
-                        if($action !== 'refresh' && $action !== 'new' && $action !== 'paste' && $element.parent('li').attr('id') === 'documents') {
+                        if($action !== 'refresh' &&
+                            $action !== 'new' &&
+                            $action !== 'paste' &&
+                            $element.parent('li').attr('id') === 'documents') {
                             return true;
                         }
 
@@ -497,57 +523,60 @@ var Gc = (function($)
                         }
 
                         $url = $url.replace('itemId', $id);
-                        $display_copy_form = true;
+                        $displayCopyForm = true;
 
                         switch($action) {
-                            case 'refresh':
-                                $this.refreshTreeview($url, $id);
+                        case 'refresh':
+                            $this.refreshTreeview($url, $id);
+                            return true;
+                        case 'new':
+                            if(!$this.isEmpty($id)) {
+                                $url += '/parent/' + $id;
+                            }
+                            break;
+                        case 'edit':
+                            break;
+                        case 'copy':
+                            $displayCopyForm = false;
+                            /* falls through */
+                        case 'cut':
+                            $this.setOption('lastAction', $action);
+                            $options.items.paste.disabled = false;
+                            /* falls through */
+                        case 'paste':
+                            if($this.getOption('lastAction') === 'copy' && $displayCopyForm === true) {
+                                $this.showCopyForm($url, $action, $options);
                                 return true;
-                            case 'new':
-                                if(!$this.isEmpty($id)) {
-                                    $url += '/parent/' + $id;
-                                }
-                            break;
-                            case 'edit':
-                            break;
-                            case 'copy':
-                                $display_copy_form = false;
-                            case 'cut':
-                                $this.setOption('lastAction', $action);
-                                $options.items.paste.disabled = false;
-                            case 'paste':
-                                if($this.getOption('lastAction') === 'copy' && $display_copy_form === true) {
-                                    $this.showCopyForm($url, $action, $options);
-                                    return true;
-                                }
+                            }
 
-                                $.ajax({
-                                    url: $url,
-                                    dataType: 'json',
-                                    data: {},
-                                    success: function(data) {
-                                        if(data.success === true) {
-                                            if($action === 'copy' || $action === 'cut') {
-                                                $options.items.paste.disabled = false;
-                                            }
+                            $.ajax({
+                                url: $url,
+                                dataType: 'json',
+                                data: {},
+                                success: function(data) {
+                                    if(data.success === true) {
+                                        if($action === 'copy' || $action === 'cut') {
+                                            $options.items.paste.disabled = false;
+                                        }
 
-                                            if($action === 'paste' && $this.getOption('lastAction') === 'cut') {
-                                                $options.items.paste.disabled = true;
+                                        if($action === 'paste' && $this.getOption('lastAction') === 'cut') {
+                                            $options.items.paste.disabled = true;
 
-                                                $this.refreshTreeview($routes.refresh.replace('itemId', 0), 0);
-                                            }
+                                            $this.refreshTreeview($routes.refresh.replace('itemId', 0), 0);
                                         }
                                     }
-                                });
-                                return true;
+                                }
+                            });
+                            return true;
 
-                            case 'delete':
-                                $this.showDeleteDialog($url, $element.parent());
-                                return true;
+                        case 'delete':
+                            $this.showDeleteDialog($url, $element.parent());
+                            return true;
 
-                            case 'quit':
-                            default:
-                                return true;
+                        case 'quit':
+                        /* falls through */
+                        default:
+                            return true;
                         }
 
                         document.location.href = $url;
@@ -556,19 +585,19 @@ var Gc = (function($)
             });
         },
 
-        refreshTreeview: function($url, $document_id)
+        refreshTreeview: function($url, $documentId)
         {
             var $browser = $('#browser');
             $.ajax({
                 url: $url,
                 data: {},
                 success: function(data) {
-                    if($document_id === 0) {
+                    if($documentId === 0) {
                         $('#documents').children('ul').remove();
                         $('#documents').append(data.treeview);
                     } else {
-                        $('#' + $document_id).next('ul').remove();
-                        $('#' + $document_id).after(data.treeview);
+                        $('#' + $documentId).next('ul').remove();
+                        $('#' + $documentId).after(data.treeview);
                     }
 
                     $browser.jstree('refresh');
@@ -576,13 +605,15 @@ var Gc = (function($)
             });
         },
 
-        showDeleteDialog: function($url, $element_to_remove)
+        showDeleteDialog: function($url, $elementToRemove)
         {
             $('#dialog').dialog({
                 bgiframe :  false,
                 resizable : false,
                 modal :     true,
-                title:      '<div class="widget-header widget-header-small"><h4><i class="glyphicon glyphicon-warning-sign"></i>' + Translator.translate('Delete element') + '</h4></div>',
+                title:      '<div class="widget-header widget-header-small"> \
+                    <h4><i class="glyphicon glyphicon-warning-sign"></i> \
+                    ' + Translator.translate('Delete element') + '</h4></div>',
                 overlay     : {
                     backgroundColor: '#000',
                     opacity: 0.5
@@ -590,7 +621,7 @@ var Gc = (function($)
                 buttons: [
                     {
                         'text':  Translator.translate('Cancel'),
-                        'class': "btn btn-warning",
+                        'class': 'btn btn-warning',
                         'click': function() {
                             $(this).dialog('close');
 
@@ -599,11 +630,11 @@ var Gc = (function($)
                     },
                     {
                         'text':  Translator.translate('Confirm'),
-                        'class': "btn btn-danger btn-mini",
+                        'class': 'btn btn-danger btn-mini',
                         'click': function() {
                             $.get($url, function(data) {
                                 if(data.success === true) {
-                                    $element_to_remove.remove();
+                                    $elementToRemove.remove();
                                 }
                             });
 
@@ -619,32 +650,34 @@ var Gc = (function($)
         showCopyForm: function($url, $action, $options)
         {
             var $this = this,
-            $template = '<div id="copy-dialog-form" title="' + Translator.translate('Copy document') + '">' +
-                '<p class="validateTips">' + Translator.translate('All form fields are required.') + '</p>' +
-                '<fieldset>' +
-                    '<div>' +
-                        '<label for="name">' + Translator.translate('Name') + '</label>' +
-                        '<input type="text" name="name" id="copy-name" class="form-control ui-widget-content ui-corner-all" />' +
-                    '</div>' +
-                    '<div>' +
-                        '<label for="email">' + Translator.translate('Url key') + '</label>' +
-                        '<input type="text" name="url-key" id="copy-url-key" value="" class="form-control ui-widget-content ui-corner-all" />' +
-                    '</div>' +
-               '</fieldset>' +
-            '</div>';
+            $template = '<div id="copy-dialog-form" title="' + Translator.translate('Copy document') + '"> \
+                <p class="validateTips">' + Translator.translate('All form fields are required.') + '</p> \
+                <fieldset> \
+                    <div> \
+                        <label for="name">' + Translator.translate('Name') + '</label> \
+                        <input type="text" name="name" id="copy-name" \
+                        class="form-control ui-widget-content ui-corner-all" /> \
+                    </div> \
+                    <div> \
+                        <label for="email">' + Translator.translate('Url key') + '</label> \
+                        <input type="text" name="url-key" id="copy-url-key" value="" \
+                        class="form-control ui-widget-content ui-corner-all" /> \
+                    </div> \
+               </fieldset> \
+            </div>';
 
             var $buttons = {};
             $buttons[Translator.translate('Copy')] = function() {
-                var $copy_name = $('#copy-name'),
-                $copy_url_key = $('#copy-url-key');
-                if($this.isEmpty($copy_name.val()) || $this.isEmpty($copy_url_key.val())) {
+                var $copyName = $('#copy-name'),
+                $copyUrlKey = $('#copy-url-key');
+                if($this.isEmpty($copyName.val()) || $this.isEmpty($copyUrlKey.val())) {
                     return false;
                 }
 
                 $.ajax({
                     url: $url,
                     dataType: 'json',
-                    data: {name:$copy_name.val(),url_key:$copy_url_key.val()},
+                    data: {'name': $copyName.val(), 'url_key': $copyUrlKey.val()},
                     success: function(data) {
                         if(data.success === true) {
                             if($action === 'paste' && $this.getOption('lastAction') === 'cut') {
@@ -674,40 +707,39 @@ var Gc = (function($)
         initTranslator: function()
         {
             var $idx = 1,
-            $template = '<tr>' +
-                '<td>' +
-                    '<div>' +
-                        '<input type="text" class="form-control" name="destination[#{id}]" size="73">' +
-                    '</div>' +
-                '</td>' +
-                '<td>' +
-                    '<div>' +
-                        '<select class="form-control" name="locale[#{id}]">';
-                            $.each(this.getOption('locale'), function(key, value)
-                            {
-                                $template += '<option value="' + key + '">' + value + '</option>';
-                            });
+            $template = '<tr> \
+                <td> \
+                    <div> \
+                        <input type="text" class="form-control" name="destination[#{id}]" size="73"> \
+                    </div> \
+                </td> \
+                <td> \
+                    <div> \
+                        <select class="form-control" name="locale[#{id}]">';
+            $.each(this.getOption('locale'), function(key, value) {
+                $template += '<option value="' + key + '">' + value + '</option>';
+            });
 
-                        $template += '</select>' +
-                    '</div>' +
-                '</td>' +
-                '<td>' +
-                    '<span class="btn btn-default add-translate">' +
-                        '<i class="glyphicon glyphicon-plus"></i>&nbsp;' +
-                        Translator.translate('Add') +
-                    '</span>' +
-                '</td>' +
-            '</tr>';
+            $template += '</select> \
+                    </div> \
+                </td> \
+                <td> \
+                    <span class="btn btn-default add-translate"> \
+                        <i class="glyphicon glyphicon-plus"></i>&nbsp; \
+                        ' + Translator.translate('Add') + ' \
+                    </span> \
+                </td> \
+            </tr>';
 
             $document.on('click', '.add-translate', function() {
                 var $t = new Template($template),
-                $table_trad = $('#table-trad');
+                $tableTrad = $('#table-trad');
 
-                $table_trad.find('.add-translate')
+                $tableTrad.find('.add-translate')
                     .removeClass('add-translate')
                     .addClass('delete-translate')
                     .html('<i class="glyphicon glyphicon-minus"></i> ' + Translator.translate('Delete'));
-                $table_trad.children('tbody').append($t.evaluate({id: $idx}));
+                $tableTrad.children('tbody').append($t.evaluate({id: $idx}));
                 $idx++;
             });
 
@@ -774,20 +806,20 @@ var Gc = (function($)
             });
         },
 
-        initElFinder: function($connector_url, $language)
+        initElFinder: function($connectorUrl, $language)
         {
             $('#elfinder').elfinder({
                 lang: $language,
-                url : $connector_url
+                url : $connectorUrl
             }).elfinder('instance');
         },
 
-        initDashBoard: function($object, $update_url)
+        initDashBoard: function($object, $updateUrl)
         {
             var $this = this,
             $sortable,
-            $not_connected,
-            $dashboard_nb_update;
+            $notConnected,
+            $dashboardNbUpdate;
 
             $sortable = $('.widget-column').sortable({
                 connectWith: '.widget-column',
@@ -799,7 +831,7 @@ var Gc = (function($)
                 distance: 10,
                 forcePlaceholderSize: true,
                 start : function() {
-                    $dashboard_nb_update = 0;
+                    $dashboardNbUpdate = 0;
                 },
                 receive: function() {
                     $('.widget-column').sortable('refresh');
@@ -808,26 +840,27 @@ var Gc = (function($)
                     var $string = $(this).sortable('toArray').join(),
                     $found = false;
                     if($this.isEmpty($object[$(this).attr('id')])) {
-                        $not_connected = false;
+                        $notConnected = false;
                     } else {
                         $.each($object, function($key, $value) {
-                            if(!$this.isEmpty($object[$key]) && $.inArray(ui.item.attr('id'), $value.split(',')) !== -1) {
+                            if(!$this.isEmpty($object[$key]) &&
+                                $.inArray(ui.item.attr('id'), $value.split(',')) !== -1) {
                                 $found = true;
                             }
                         });
 
                         if($found === false) {
-                            $not_connected = true;
+                            $notConnected = true;
                         } else {
-                            $not_connected = $object[$(this).attr('id')].length === $string.length;
+                            $notConnected = $object[$(this).attr('id')].length === $string.length;
                         }
                     }
 
                     $object[$(this).attr('id')] = $string;
-                    $dashboard_nb_update++;
-                    if($dashboard_nb_update === 2 || $not_connected) {
+                    $dashboardNbUpdate++;
+                    if($dashboardNbUpdate === 2 || $notConnected) {
                         $.ajax({
-                            url: $update_url,
+                            url: $updateUrl,
                             type: 'post',
                             dataType: 'json',
                             data: $object
@@ -837,16 +870,16 @@ var Gc = (function($)
             });
 
             if(!this.isEmpty($object)) {
-                $.each($object, function(sortable_id, elements) {
+                $.each($object, function(sortableId, elements) {
                     $(elements.split(',')).each(function (i, id) {
-                        $("#" + id).appendTo($('#' + sortable_id));
+                        $('#' + id).appendTo($('#' + sortableId));
                     });
                 });
             }
 
             $('.dashboard-close').on('click', function() {
                 $.ajax({
-                    url: $update_url,
+                    url: $updateUrl,
                     type: 'post',
                     dataType: 'json',
                     data: {dashboard: true}
@@ -875,7 +908,7 @@ var Gc = (function($)
         saveCommand: function()
         {
             $document.on('keydown', function(event) {
-                if(!(event.which === 83 && event.ctrlKey) && !(event.which === 19)) {
+                if((event.which === 83 && event.ctrlKey) === false && event.which !== 19) {
                     return true;
                 }
 
@@ -893,10 +926,10 @@ var Gc = (function($)
             });
         },
 
-        initUpdate: function($confirm_text)
+        initUpdate: function($confirmText)
         {
             $('#update-form').on('submit', function() {
-                if(!confirm($confirm_text)) {
+                if(!confirm($confirmText)) {
                     return false;
                 }
             });
