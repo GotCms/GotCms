@@ -27,15 +27,16 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<div style="overflow:hidden">
-    <div class="floatL" style="width:150px">
-        <span><?php echo $this->escapeHtml($this->datatypeName); ?></span>
-    </div>
+
+<div class="col-lg-2 lead">
+    <p><strong><?php echo $this->escapeHtml($this->datatypeName); ?></strong></p>
+</div>
+<div class="col-lg-10">
     <div class="floatL">
         <div id="elements-<?php echo $this->escapeHtml($this->propertyName); ?>">
             <?php if (!empty($this->datatypes)): ?>
                 <?php foreach ($this->datatypes as $line_id => $values): ?>
-                    <div class="element">
+                    <div class="mixed-element">
                         <?php foreach ($values as $datatype_id => $datatype): ?>
                             <?php foreach ($datatype['fieldset']->getElements() as $element): ?>
                                 <div>
@@ -43,26 +44,40 @@
                                     <?php if (!empty($content)): ?>
                                         <?php echo $content; ?>
                                     <?php else: ?>
-                                        <?php if ($element->getAttribute('type') != 'hidden'): ?>
-                                            <?php $id = $element->getAttribute('id'); ?>
-                                            <?php if (!empty($id)): ?>
-                                                <label class="required" for="<?php echo $this->escapeHtml($this->translate($element->getAttribute('id'))); ?>"><?php echo $this->escapeHtml($this->translate($datatype['label'])); ?></label>
-                                            <?php endif; ?>
-                                        <?php endif; ?>
+                                        <?php if ($element->getAttribute('type') == 'hidden'): ?>
+                                            <?php echo $this->formElement($element); ?>
+                                        <?php else: ?>
+                                            <div class="form-group">
+                                                <?php $id = $element->getAttribute('id'); ?>
+                                                <?php if (!empty($id)): ?>
+                                                    <label class="control-label col-lg-2 required" for="<?php echo $this->escapeHtml($this->translate($element->getAttribute('id'))); ?>"><?php echo $this->escapeHtml($this->translate($datatype['label'])); ?></label>
+                                                <?php endif; ?>
 
-                                        <?php echo $this->formElement($element); ?>
+                                                <div class="col-lg-10">
+                                                    <?php echo $this->formElement($element); ?>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                 </div>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
-                        <button class="delete-mixed-element<?php echo $this->propertyName; ?> button-delete<?php echo $this->propertyName; ?>">
-                            <?php echo $this->escapeHtml($this->translate('Delete')); ?>
-                        </button>
+                        <div>
+                            <button class="delete-mixed-element<?php echo $this->propertyName; ?> btn btn-danger">
+                                <i class="glyphicon glyphicon-remove"></i>
+                                <?php echo $this->escapeHtml($this->translate('Delete')); ?>
+                            </button>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
-        <button id="add-element-<?php echo $this->escapeHtml($this->propertyName); ?>"><span><?php echo $this->escapeHtml($this->translate('Add')); ?></span></button>
+        <div>
+            <button class="btn btn-warning" id="add-element-<?php echo $this->escapeHtml($this->propertyName); ?>">
+                <i class="glyphicon glyphicon-plus"></i>
+                <?php echo $this->escapeHtml($this->translate('Add')); ?>
+            </button>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -89,18 +104,14 @@
                         $template += '</div>';
                     <?php endforeach; ?>
                 <?php endforeach; ?>
-                $template += '<button class="delete-mixed-element<?php echo $this->propertyName; ?> button-delete">';
+                $template += '<button class="delete-mixed-element<?php echo $this->propertyName; ?> btn btn-danger">';
+                    $tempalte = '<i class="glyphicon glyphicon-remove"></i>';
                     $template += '<?php echo $this->escapeHtml($this->translate('Delete')); ?>';
                 $template += '</button>';
             $template += '</div>';
 
             $template = new Template($template);
             $content = $($template.evaluate({line: $line_id<?php echo $this->escapeHtml($this->propertyName); ?>}));
-            $content.find('.button-delete').button({
-                icons: {
-                    primary: 'ui-icon-minus'
-                }
-            });
 
             $line_id<?php echo $this->escapeHtml($this->propertyName); ?>++;
             $('#elements-<?php echo $this->escapeHtml($this->propertyName); ?>').append($content);
@@ -109,21 +120,9 @@
         });
 
         $('body').on('click', '.delete-mixed-element<?php echo $this->propertyName; ?>', function () {
-            $(this).parent().remove();
+            $(this).closest('.mixed-element').remove();
 
             return false;
-        });
-
-        $('.button-delete<?php echo $this->propertyName; ?>').button({
-            icons: {
-                primary: 'ui-icon-minus'
-            }
-        });
-
-        $('#add-element-<?php echo $this->propertyName; ?>').button({
-            icons: {
-                primary: 'ui-icon-plus'
-            }
         });
     </script>
 </div>

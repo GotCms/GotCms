@@ -481,7 +481,11 @@ var Gc = (function($)
 
             $('#browser').jstree({
                 'plugins' : ['themes','html_data'],
-                'core' : { 'initially_open' : [ initialOpen ] }
+                'core' : { 'initially_open' : [ initialOpen ] },
+                'themes' : {
+                    'theme' : 'default',
+                    'url' : '/backend/js/vendor/themes/default/style.css',
+                }
             }).bind('refresh.jstree', function() {
                 $this.sortableMenu($updateDocumentUrl);
             }).bind('loaded.jstree', function() {
