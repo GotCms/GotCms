@@ -10,7 +10,8 @@
         "phpunit/phpunit": "3.7.*",
         "squizlabs/php_codesniffer": "1.4.*",
         "satooshi/php-coveralls": "dev-master",
-        "gotcms/gotsniffs": "dev-master"
+        "gotcms/gotsniffs": "dev-master",
+        "packagist/yuicompressor-bin": "dev-master"
     },
     "authors": [
         {
@@ -18,5 +19,9 @@
             "email": "pierre.rambaud86@gmail.com"
         }
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config" : {
+        "bin-dir": "scripts"
+    }
 }

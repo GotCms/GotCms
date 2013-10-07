@@ -56,3 +56,13 @@ vendor/*
 !vendor/elFinder
 !vendor/SVGGraph
 !vendor/Zend
+public/backend/css/gotcms.css
+public/backend/css/gotcms-install.css
+scripts/classmap_generator.php
+scripts/coveralls
+scripts/phpcs
+scripts/phpunit
+scripts/pluginmap_generator.php
+scripts/templatemap_generator.php
+scripts/yuicompressor.jar
+composer.lock

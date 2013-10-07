@@ -45,15 +45,10 @@
     <?php
     echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
     echo $this->headScript()
-        ->appendFile($this->cdnBackend('/backend/js/vendor/jquery-1.10.2.min.js'), 'text/javascript')
-        ->appendFile($this->cdnBackend('/backend/js/bootstrap.min.js'), 'text/javascript')
-        ->appendFile($this->cdnBackend('/backend/js/generic-classes.js', 'text/javascript'))
-        ->appendFile($this->cdnBackend('/backend/js/gotcms.js', 'text/javascript'));
+        ->appendFile($this->cdnBackend('/backend/js/gotcms.min.js'), 'text/javascript');
 
     echo $this->HeadLink()
-        ->appendStylesheet($this->cdnBackend('/backend/css/bootstrap.min.css'))
-        ->appendStylesheet($this->cdnBackend('/backend/css/bootstrap-theme.min.css'))
-        ->appendStylesheet($this->cdnBackend('/backend/css/gotcms.css'));
+        ->appendStylesheet($this->cdnBackend('/backend/css/gotcms.min.css'));
     ?>
 </head>
 <body class="one-page">

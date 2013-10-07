@@ -4,7 +4,7 @@
 : ${PHPUNIT_OPTS:="-d zend.enable_gc=0 --verbose"}
 : ${PHPUNIT_GROUPS:=}
 
-cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../tests"
 while [ -n "$1" ] ; do
   case "$1" in
     ALL|all)

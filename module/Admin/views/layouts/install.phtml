@@ -44,19 +44,10 @@
     <?php
     echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
     $this->headScript()
-        ->prependFile($this->cdnBackend('/backend/js/gotcms.js'), 'text/javascript')
-        ->prependFile($this->cdnBackend('/backend/js/generic-classes.js'), 'text/javascript')
-        ->prependFile($this->cdnBackend('/backend/js/vendor/jquery-ui-1.10.3.custom.min.js'), 'text/javascript')
-        ->prependFile($this->cdnBackend('/backend/js/vendor/jquery.browser.js'), 'text/javascript')
-        ->prependFile($this->cdnBackend('/backend/js/bootstrap.min.js'), 'text/javascript')
-        ->prependFile($this->cdnBackend('/backend/js/vendor/jquery-1.10.2.min.js'), 'text/javascript');
+        ->prependFile($this->cdnBackend('/backend/js/gotcms.min.js'), 'text/javascript');
 
     $this->headLink()
-        ->prependStylesheet($this->cdnBackend('/backend/css/install.css'))
-        ->prependStylesheet($this->cdnBackend('/backend/css/gotcms.css'))
-        ->prependStylesheet($this->cdnBackend('/backend/css/jquery-ui.gotcms.css'))
-        ->prependStylesheet($this->cdnBackend('/backend/css/vendor/jquery-ui-1.10.3.custom.min.css'))
-        ->prependStylesheet($this->cdnBackend('/backend/css/bootstrap.min.css'));
+        ->prependStylesheet($this->cdnBackend('/backend/css/gotcms-install.min.css'));
 
     echo $this->headScript();
 
