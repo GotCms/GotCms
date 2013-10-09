@@ -91,12 +91,12 @@ class Module extends Mvc\Module
             $filterChain->attach($filter)
                 ->attach(new Filter\StringToLower());
             $template = $filterChain->filter($route->getParam('module')) . '/menu';
-
             $target   = $event->getTarget();
             $resolver = $event
                 ->getApplication()
                 ->getServiceManager()
                 ->get('Zend\View\Resolver\TemplatePathStack');
+
             $navigation = $target->getServiceLocator()->get('navigation');
             $navigation->findByRoute('module')->addPage(
                 array(

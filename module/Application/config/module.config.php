@@ -43,14 +43,15 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
-            'Auth' => function ($sm) {
+            'Auth'                  => function ($sm) {
                 return new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
             },
-            'CoreConfig' => function ($sm) {
+            'CoreConfig'            => function ($sm) {
                 return new CoreConfig();
             },
-            'CustomModules' => 'Gc\Mvc\Service\ModuleManagerFactory',
-            'translator'    => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'CustomModules'         => 'Gc\Mvc\Service\ModuleManagerFactory',
+            'translator'            => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'ViewTemplatePathStack' => 'Gc\Mvc\Service\ViewTemplatePathStackFactory',
         )
     ),
     'translator' => array(

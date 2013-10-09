@@ -43,13 +43,6 @@ use Gc\View\Resolver\TemplatePathStack;
 class Partial extends ZendPartial
 {
     /**
-     * Template path stack
-     *
-     * @var TemplatePathStack
-     */
-    protected $resolver;
-
-    /**
      * Check if stream is registered
      *
      * @var TemplatePathStack
@@ -72,7 +65,6 @@ class Partial extends ZendPartial
 
         $view = $this->cloneView();
 
-
         if (!empty($values)) {
             if (is_array($values)) {
                 $view->vars()->assign($values);
@@ -87,31 +79,24 @@ class Partial extends ZendPartial
             }
         }
 
-        if (strpos($name, '.phtml') !== false) {
-            return $view->render($name);
-        } else {
-            if (empty($this->resolver)) {
-                $this->resolver = new TemplatePathStack();
-                $this->resolver->setUseStreamWrapper(true);
-            }
+        if (self::$streamIsRegistered === false) {
+            Stream::register();
+        }
 
-            $view->setResolver($this->resolver);
-
-            if (self::$streamIsRegistered === false) {
-                Stream::register();
-            }
-
-            $viewModel = ViewModel::fromIdentifier($name);
-            if (empty($viewModel)) {
+        $viewModel = ViewModel::fromIdentifier($name);
+        if (empty($viewModel)) {
+            try {
+                $return = $view->render($name);
+                return $return;
+            } catch (\Exception $e) {
                 return false;
             }
-
-            $name .= '-view.gc-stream';
-
-            file_put_contents('zend.view://' . $name, $viewModel->getContent());
-
-            return $view->render($name);
         }
+
+        $name .= '-view.gc-stream';
+        file_put_contents('zend.view://' . $name, $viewModel->getContent());
+
+        return $view->render($name);
     }
 
     /**

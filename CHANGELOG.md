@@ -7,6 +7,7 @@
 - Create demo website ([https://github.com/GotCms/GotCms/issues/103](https://github.com/GotCms/GotCms/issues/103))
 - Add JsHint ([https://github.com/GotCms/GotCms/issues/132](https://github.com/GotCms/GotCms/issues/132))
 - Minify css and js ([https://github.com/GotCms/GotCms/issues/117](https://github.com/GotCms/GotCms/issues/117))
+- Overwrite `Zend\View\Resolver\TemplatePathStack` ([https://github.com/GotCms/GotCms/issues/138](https://github.com/GotCms/GotCms/issues/138))
 
 ##0.2.1 (01 Sep 2013):
 - Force ssl not working ([https://github.com/GotCms/GotCms/issues/123](https://github.com/GotCms/GotCms/issues/123))

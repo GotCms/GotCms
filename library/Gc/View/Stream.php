@@ -88,7 +88,7 @@ class Stream
     public function stream_open($path, $mode, $options, &$openedpath)
     {
         $this->mode                  = $mode;
-        $this->path                  = str_replace('zend.view://', '', $path);
+        $this->path                  = $this->removeWrapperName($path);
         self::$position[$this->path] = 0;
         if (empty(self::$data[$this->path]) or $this->mode == 'wb') {
             self::$data[$this->path]     = null;
@@ -204,16 +204,21 @@ class Stream
 
     /**
      * Retrieve information about a file
-     * Always return false because data come from the database
+     * Always return empty array because data come from the database
      *
      * @param string $path  Path
      * @param int    $flags Flags
      *
-     * @return boolean
+     * @return array
      */
     public function url_stat($path, $flags)
     {
-        return false;
+        $path = $this->removeWrapperName($path);
+        if (!isset(self::$data[$path])) {
+            return false;
+        }
+
+        return array();
     }
 
     /**
@@ -235,5 +240,17 @@ class Stream
         }
 
         stream_wrapper_register($name, 'Gc\View\Stream');
+    }
+
+    /**
+     * Remove stream wrapper name
+     *
+     * @param string $path Path
+     *
+     * @return string
+     */
+    protected function removeWrapperName($path)
+    {
+        return str_replace('zend.view://', '', $path);
     }
 }

@@ -28,6 +28,7 @@ namespace Gc\View\Helper;
 
 use Zend\View\Renderer\PhpRenderer as View;
 use Gc\View\Model as ViewModel;
+use Gc\View\Resolver\TemplatePathStack;
 use stdClass;
 
 /**
@@ -68,6 +69,12 @@ class PartialTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->view->save();
+
+        $view              = new View();
+        $templatePathStack = new TemplatePathStack();
+        $templatePathStack->setUseStreamWrapper(true);
+        $view->setResolver($templatePathStack);
+        $this->object->setView($view);
     }
 
     /**
@@ -95,10 +102,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $view = new View();
-        $view->resolver()->addPath(__DIR__ . '/_files/views');
-        $this->object->setView($view);
-
+        $this->object->getView()->resolver()->addPath(__DIR__ . '/_files/views');
         //With object
         $this->object->partialCounter = true;
         $return                       = $this->object->__invoke('partial-vars.phtml', $model);

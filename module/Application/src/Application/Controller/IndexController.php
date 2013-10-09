@@ -55,28 +55,14 @@ class IndexController extends Action
      *
      * @var string
      */
-    const VIEW_NAME = 'application/index/view-content';
+    const VIEW_PATH = 'application/index/view-content';
 
     /**
      * View filename
      *
      * @var string
      */
-    const LAYOUT_NAME = 'application/index/layout-content';
-
-    /**
-     * View path
-     *
-     * @var string
-     */
-    protected $viewPath;
-
-    /**
-     * View path
-     *
-     * @var string
-     */
-    protected $layoutPath;
+    const LAYOUT_PATH = 'application/index/layout-content';
 
     /**
      * Cache
@@ -121,10 +107,6 @@ class IndexController extends Action
         }
 
         View\Stream::register();
-        $templatePathStack = $this->getServiceLocator()->get('Zend\View\Resolver\TemplatePathStack');
-        $templatePathStack->setUseStreamWrapper(true);
-        $this->viewPath   = $templatePathStack->resolve(self::VIEW_NAME);
-        $this->layoutPath = $templatePathStack->resolve(self::LAYOUT_NAME);
 
         $path = ltrim($this->getRouteMatch()->getParam('path'), '/');
 
@@ -138,10 +120,10 @@ class IndexController extends Action
                 //Retrieve cache value and set data
                 $cacheValue = $this->cache->getItem($cacheKey);
                 $viewModel  = $cacheValue['view_model'];
-                $viewModel->setTemplate(self::VIEW_NAME);
+                $viewModel->setTemplate(self::VIEW_PATH);
                 $viewModel->setVariables($cacheValue['layout_variables']);
                 $this->layout()->setVariables($cacheValue['layout_variables']);
-                $this->layout()->setTemplate(self::LAYOUT_NAME);
+                $this->layout()->setTemplate(self::LAYOUT_PATH);
                 $layoutContent = $cacheValue['layout_content'];
                 $viewContent   = $cacheValue['view_content'];
             }
@@ -149,8 +131,8 @@ class IndexController extends Action
 
         if (empty($viewModel)) {
             $viewModel = new ViewModel();
-            $viewModel->setTemplate(self::VIEW_NAME);
-            $this->layout()->setTemplate(self::LAYOUT_NAME);
+            $viewModel->setTemplate(self::VIEW_PATH);
+            $this->layout()->setTemplate(self::LAYOUT_PATH);
         }
 
         //Cache is disable or cache isn't create
@@ -261,9 +243,9 @@ class IndexController extends Action
             }
         }
 
-        file_put_contents($this->layoutPath, $layoutContent);
+        file_put_contents('zend.view://' . self::LAYOUT_PATH, $layoutContent);
         if (!empty($viewContent)) {
-            file_put_contents($this->viewPath, $viewContent);
+            file_put_contents('zend.view://' . self::VIEW_PATH, $viewContent);
         }
 
         $this->events()->trigger('Front', 'postDispatch');

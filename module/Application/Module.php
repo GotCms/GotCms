@@ -196,7 +196,7 @@ class Module extends Mvc\Module
                     'Zend\View\Resolver\TemplatePathStack'
                 );
                 $templatePathStack->setUseStreamWrapper(true);
-                file_put_contents($templatePathStack->resolve(RenderController::LAYOUT_NAME), $layout->getContent());
+                file_put_contents('zend.view://' . RenderController::LAYOUT_PATH, $layout->getContent());
             }
         }
     }

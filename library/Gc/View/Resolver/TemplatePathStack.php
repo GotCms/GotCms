@@ -62,38 +62,38 @@ class TemplatePathStack extends PathStack
             );
         }
 
-        if (strpos($name, '.phtml') === false) {
-            if ($this->useStreamWrapper()) {
-                // If using a stream wrapper, prepend the spec to the path
-                $filePath = 'zend.view://' . $name;
-                return $filePath;
+        if ($this->useStreamWrapper()) {
+            // If using a stream wrapper, prepend the spec to the path
+            $streamFilePath = 'zend.view://' . $name;
+            if (file_exists($streamFilePath)) {
+                return $streamFilePath;
             }
-        } else {
-            if (!count($this->paths)) {
-                $this->lastLookupFailure = static::FAILURE_NO_PATHS;
-                return false;
-            }
+        }
 
-            // Ensure we have the expected file extension
-            $defaultSuffix = $this->getDefaultSuffix();
-            if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {
-                $name .= '.' . $defaultSuffix;
-            }
+        if (!count($this->paths)) {
+            $this->lastLookupFailure = static::FAILURE_NO_PATHS;
+            return false;
+        }
 
-            foreach ($this->paths as $path) {
-                $file = new SplFileInfo($path . $name);
-                if ($file->isReadable()) {
-                    // Found! Return it.
-                    if (($filePath = $file->getRealPath()) === false && substr($path, 0, 7) === 'phar://') {
-                        // Do not try to expand phar paths (realpath + phars == fail)
-                        $filePath = $path . $name;
-                        if (!file_exists($filePath)) {
-                            break;
-                        }
+        // Ensure we have the expected file extension
+        $defaultSuffix = $this->getDefaultSuffix();
+        if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {
+            $name .= '.' . $defaultSuffix;
+        }
+
+        foreach ($this->paths as $path) {
+            $file = new SplFileInfo($path . $name);
+            if ($file->isReadable()) {
+                // Found! Return it.
+                if (($filePath = $file->getRealPath()) === false && substr($path, 0, 7) === 'phar://') {
+                    // Do not try to expand phar paths (realpath + phars == fail)
+                    $filePath = $path . $name;
+                    if (!file_exists($filePath)) {
+                        break;
                     }
-
-                    return $filePath;
                 }
+
+                return $filePath;
             }
         }
 
