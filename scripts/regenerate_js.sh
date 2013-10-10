@@ -1,7 +1,21 @@
 #!/bin/bash
 
-set -e
 cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source functions.sh
+
+if ! commandExists java
+then
+    echo "Java not found"
+    exit 0
+fi
+
+if [[ ! -f yuicompressor.jar ]]
+then
+    echo "yuicompressor.jar not found"
+    exit 0
+fi
+
 jsDirectory="../public/backend/js"
 
 cat $jsDirectory/vendor/jquery-1.10.2.min.js \

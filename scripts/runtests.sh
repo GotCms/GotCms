@@ -1,26 +1,41 @@
 #!/bin/bash
-:
-: ${PHPUNIT:="phpunit"}
-: ${PHPUNIT_OPTS:="-d zend.enable_gc=0 --verbose"}
-: ${PHPUNIT_GROUPS:=}
 
-cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../tests"
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source functions.sh
+
+if ! commandExists phpunit
+then
+    if ! commandExists ./phpunit
+    then
+        echo "Phpunit not found"
+        exit 0
+    else
+        phpunit="./phpunit"
+    fi
+else
+    phpunit="phpunit"
+fi
+
+phpunit_opts="-d zend.enable_gc=0 --verbose"
+phpunit_groups=
+
 while [ -n "$1" ] ; do
   case "$1" in
     ALL|all)
-     PHPUNIT_GROUPS=""
+     phpunit_groups=""
      break ;;
 
     Gc|Datatypes|Modules|ZfModules)
-     PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}$1"
+     phpunit_groups="${phpunit_groups:+"$phpunit_groups,"}$1"
      shift ;;
     *)
 
-     PHPUNIT_FILE="$1"
+     phpunit_file="$1"
      shift ;;
   esac
 done
 
-set -x
-${PHPUNIT} ${PHPUNIT_OPTS} ${PHPUNIT_GROUPS:+--group $PHPUNIT_GROUPS} ${PHPUNIT_FILE}
+cd "../tests"
+$phpunit $phpunit_opts ${phpunit_groups:+--group $phpunit_groups} $phpunit_file
 
