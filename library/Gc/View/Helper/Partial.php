@@ -83,7 +83,12 @@ class Partial extends ZendPartial
             Stream::register();
         }
 
-        $viewModel = ViewModel::fromIdentifier($name);
+        try {
+            $viewModel = ViewModel::fromIdentifier($name);
+        } catch (\Exception $e) {
+            //don't care
+        }
+
         if (empty($viewModel)) {
             try {
                 $return = $view->render($name);
