@@ -132,7 +132,7 @@ return array (
     'website' => 'ссылка на сайт',
     'Required modules' => 'Необходимые модули',
     'Password Confirm' => 'Подтверждение пароля',
-    'Installation currently finish' => 'Завершение установки',
+    'The installation is being completed' => 'Завершение установки',
     'Create database' => 'Создание базы данных',
     'Insert data' => 'Заполнене базы данных',
     'Create users and roles' => 'Создание пользователей и ролей',
