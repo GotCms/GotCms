@@ -1,0 +1,2 @@
+.mixed-element {position:relative;margin-bottom:5px;border-top:1px solid #CCCCCC;}
+.mixed-element .glyphicon {position:absolute;cursor:pointer;z-index:2;top:10px;}
