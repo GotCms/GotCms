@@ -1,5 +1,5 @@
 author = Pierre Rambaud
 date = 2012
-version = "0.1"
-cms_version = ">=0.1.9"
+version = "0.2"
+cms_version = ">=1.0.0"
 description = "Radio button list"
