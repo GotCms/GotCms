@@ -65,7 +65,7 @@ class Module extends AbstractModule
     /**
      * Display widget dashboard
      *
-     * @param \Zend\EventManager\Event $event Event
+     * @param \Zend\EventManager\EventInterface $event Event
      *
      * @return void
      */

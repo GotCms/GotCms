@@ -92,7 +92,7 @@ class Module extends AbstractModule
     /**
      * Generate xml on save
      *
-     * @param \Zend\EventManager\Event $event Event
+     * @param \Zend\EventManager\EventInterface $event Event
      *
      * @return void
      */
@@ -134,7 +134,7 @@ class Module extends AbstractModule
     /**
      * Remove element on delete
      *
-     * @param \Zend\EventManager\Event $event Event
+     * @param \Zend\EventManager\EventInterface $event Event
      *
      * @return void
      */
