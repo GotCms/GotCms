@@ -42,14 +42,41 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 
     <meta name="viewport" content="width=device-width">
-    <?php
-    echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
-    echo $this->headScript()
-        ->appendFile($this->cdnBackend('/backend/js/gotcms.min.js'), 'text/javascript');
 
-    echo $this->HeadLink()
-        ->appendStylesheet($this->cdnBackend('/backend/css/gotcms.min.css'));
-    ?>
+    <?php echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8'); ?>
+
+    <?php if (!$this->debugIsActive): ?>
+        <?php $this->headScript()->prependFile($this->cdnBackend('/backend/js/gotcms.min.js'), 'text/javascript'); ?>
+        <?php $this->headLink()->prependStylesheet($this->cdnBackend('/backend/css/gotcms.min.css')); ?>
+    <?php else: ?>
+        <?php
+        $this->headScript()
+            ->prependFile($this->cdnBackend('/backend/js/gotcms.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/generic-classes.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/jquery.contextMenu.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/jquery.jstree.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/codemirror/mode/php/php.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/codemirror/mode/clike/clike.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/codemirror/mode/css/css.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/codemirror/mode/javascript/javascript.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/codemirror/mode/xml/xml.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/codemirror/lib/codemirror.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/jquery-ui-1.10.3.custom.min.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/jquery.browser.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/bootstrap.min.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/jquery-1.10.2.min.js'), 'text/javascript');
+        ?>
+        <link rel="stylesheet/less" type="text/css" href="<?php echo $this->cdnBackend('/backend/css/gotcms.less'); ?>" />
+        <script type="text/javascript">
+             var less = less || {};
+             less.env = "development";
+        </script>
+        <script src="<?php echo $this->cdnBackend('/backend/js/vendor/less-1.4.1.min.js'); ?>"></script>
+    <?php endif; ?>
+
+    <?php echo $this->headScript(); ?>
+    <?php echo $this->HeadLink(); ?>
+
 </head>
 <body class="one-page">
     <div class="container">

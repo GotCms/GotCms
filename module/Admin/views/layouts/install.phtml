@@ -41,20 +41,33 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 
-    <?php
-    echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
-    $this->headScript()
-        ->prependFile($this->cdnBackend('/backend/js/gotcms.min.js'), 'text/javascript');
+    <?php echo $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8'); ?>
 
-    $this->headLink()
-        ->prependStylesheet($this->cdnBackend('/backend/css/gotcms-install.min.css'));
+    <?php if (!$this->debugIsActive): ?>
+        <?php $this->headScript()->prependFile($this->cdnBackend('/backend/js/gotcms.min.js'), 'text/javascript'); ?>
+        <?php $this->headLink()->prependStylesheet($this->cdnBackend('/backend/css/gotcms.min.css')); ?>
+    <?php else: ?>
+        <?php
+        $this->headScript()
+            ->prependFile($this->cdnBackend('/backend/js/gotcms.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/generic-classes.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/jquery-ui-1.10.3.custom.min.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/jquery.browser.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/bootstrap.min.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/backend/js/vendor/jquery-1.10.2.min.js'), 'text/javascript');
+        ?>
+        <link rel="stylesheet/less" type="text/css" href="<?php echo $this->cdnBackend('/backend/css/gotcms-install.less'); ?>" />
+        <script type="text/javascript">
+             var less = less || {};
+             less.env = "development";
+        </script>
+        <script src="<?php echo $this->cdnBackend('/backend/js/vendor/less-1.4.1.min.js'); ?>"></script>
+    <?php endif; ?>
 
-    echo $this->headScript();
+    <?php echo $this->headScript(); ?>
+    <?php echo $this->HeadLink(); ?>
 
-    echo $this->HeadLink();
-
-    $module = empty($this->routeParams['module']) ? null : strtolower($this->routeParams['module']);
-    ?>
+    <?php $module = empty($this->routeParams['module']) ? null : strtolower($this->routeParams['module']); ?>
 </head>
 <body class="install">
     <header class="navbar navbar-default navbar-fixed-top breadcrumbs-fixed" id="navbar">
