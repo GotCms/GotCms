@@ -64,7 +64,7 @@ class Editor extends AbstractEditor
 
             if (!empty($files)) {
                 foreach ($files as $file) {
-                    $name = $file->filename;
+                    $name = $file['filename'];
                     $file = $fileClass->getPath() . '/' . $name;
                     if (file_exists($file)) {
                         $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;

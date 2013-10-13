@@ -147,15 +147,14 @@ class File extends Object
             if ($this->getFileTransfer()->receive($fileName)) {
                 $files = $this->getFileTransfer()->getFileInfo($key);
                 foreach ($files as $fileData) {
-                    $fileObject                = new StdClass();
-                    $fileObject->name          = 'New Image Upload Complete:   ' . $fileData['name'];
-                    $fileObject->filename      = $this->getDirectory() . '/' . $fileData['name'];
-                    $fileObject->size          = $fileData['size'];
-                    $fileObject->type          = $fileData['type'];
-                    $fileObject->thumbnail_url = $this->getDirectory() . '/' . $fileData['name'];
-
-                    $router                  = Registry::get('Application')->getMvcEvent()->getRouter();
-                    $fileObject->delete_url  = $router->assemble(
+                    $fileObject                  = array();
+                    $fileObject['name']          = 'New Image Upload Complete:   ' . $fileData['name'];
+                    $fileObject['filename']      = $this->getDirectory() . '/' . $fileData['name'];
+                    $fileObject['size']          = $fileData['size'];
+                    $fileObject['type']          = $fileData['type'];
+                    $fileObject['thumbnail_url'] = $this->getDirectory() . '/' . $fileData['name'];
+                    $router                      = Registry::get('Application')->getMvcEvent()->getRouter();
+                    $fileObject['delete_url']    = $router->assemble(
                         array(
                             'document_id' => $this->getDocument()->getId(),
                             'property_id' => $this->getProperty()->getId(),
@@ -163,8 +162,8 @@ class File extends Object
                         ),
                         array('name' => 'content/media/remove')
                     );
-                    $fileObject->delete_type = 'DELETE';
-                    $data[]                  = $fileObject;
+                    $fileObject['delete_type']   = 'DELETE';
+                    $data[]                      = $fileObject;
                 }
             }
         }

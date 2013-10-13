@@ -27,6 +27,8 @@
 
 namespace Gc\View;
 
+use Zend\Filter\Word\UnderscoreToCamelCase;
+
 /**
  * Stream wrapper to convert markup of mostly-PHP templates into PHP prior to
  * include().
@@ -76,6 +78,24 @@ class Stream
     protected $mode;
 
     /**
+     * Call method
+     *
+     * @param string $method Method
+     * @param array  $args   Arguments
+     *
+     * @return void
+     * @throw RuntimeExeption
+     */
+    public function __call($method, $args)
+    {
+        $filter = new UnderscoreToCamelCase();
+        $method = lcfirst($filter->filter($method));
+        if (method_exists($this, $method)) {
+            return call_user_func_array(array($this, $method), $args);
+        }
+    }
+
+    /**
      * Opens the script file and converts markup.
      *
      * @param string  $path        Path
@@ -85,16 +105,16 @@ class Stream
      *
      * @return boolean
      */
-    public function stream_open($path, $mode, $options, &$openedpath)
+    public function streamOpen($path, $mode, $options, &$openedpath)
     {
-        $this->mode                  = $mode;
-        $this->path                  = $this->removeWrapperName($path);
+        $this->mode = $mode;
+        $this->path = $this->removeWrapperName($path);
+
         self::$position[$this->path] = 0;
         if (empty(self::$data[$this->path]) or $this->mode == 'wb') {
             self::$data[$this->path]     = null;
             self::$position[$this->path] = 0;
         }
-
 
         return true;
     }
@@ -106,9 +126,10 @@ class Stream
      *
      * @return mixed
      */
-    public function stream_read($count)
+    public function streamRead($count)
     {
-        $ret                          = substr(self::$data[$this->path], self::$position[$this->path], $count);
+        $ret = substr(self::$data[$this->path], self::$position[$this->path], $count);
+
         self::$position[$this->path] += strlen($ret);
 
         return $ret;
@@ -121,7 +142,7 @@ class Stream
      *
      * @return integer
      */
-    public function stream_write($data)
+    public function streamWrite($data)
     {
         $left  = substr(self::$data[$this->path], 0, self::$position[$this->path]);
         $right = substr(self::$data[$this->path], self::$position[$this->path] + strlen($data));
@@ -137,7 +158,7 @@ class Stream
      *
      * @return integer
      */
-    public function stream_tell()
+    public function streamTell()
     {
         return self::$position[$this->path];
     }
@@ -147,7 +168,7 @@ class Stream
      *
      * @return boolean
      */
-    public function stream_eof()
+    public function streamEof()
     {
         return self::$position[$this->path] >= strlen(self::$data[$this->path]);
     }
@@ -157,7 +178,7 @@ class Stream
      *
      * @return array
      */
-    public function stream_stat()
+    public function streamStat()
     {
         return $this->stat;
     }
@@ -170,7 +191,7 @@ class Stream
      *
      * @return boolean
      */
-    public function stream_seek($offset, $whence)
+    public function streamSeek($offset, $whence)
     {
         switch ($whence) {
             case SEEK_SET:
@@ -211,7 +232,7 @@ class Stream
      *
      * @return array
      */
-    public function url_stat($path, $flags)
+    public function urlStat($path, $flags)
     {
         $path = $this->removeWrapperName($path);
         if (!isset(self::$data[$path])) {

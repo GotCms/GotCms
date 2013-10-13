@@ -161,7 +161,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $files = $this->object->getFiles();
         if (is_array($files)) {
             foreach ($files as $file) {
-                $this->object->remove($file->filename);
+                $this->object->remove($file['filename']);
             }
         }
 

@@ -106,13 +106,12 @@ class Editor extends AbstractEditor
             $fileClass = new File();
             $fileClass->load($this->getProperty(), $this->getDatatype()->getDocument());
             foreach ($files as $fileData) {
-                $fileObject                = new StdClass();
-                $fileObject->name          = $fileData['value'];
-                $fileObject->filename      = $fileData['value'];
-                $fileObject->thumbnail_url = $fileData['value'];
-
-                $router                  = Registry::get('Application')->getMvcEvent()->getRouter();
-                $fileObject->delete_url  = $router->assemble(
+                $fileObject                  = array();
+                $fileObject['name']          = $fileData['value'];
+                $fileObject['filename']      = $fileData['value'];
+                $fileObject['thumbnail_url'] = $fileData['value'];
+                $router                      = Registry::get('Application')->getMvcEvent()->getRouter();
+                $fileObject['delete_url']    = $router->assemble(
                     array(
                         'document_id' => $this->getDatatype()->getDocument()->getId(),
                         'property_id' => $this->getProperty()->getId(),
@@ -120,8 +119,8 @@ class Editor extends AbstractEditor
                     ),
                     array('name' => 'content/media/remove')
                 );
-                $fileObject->delete_type = 'DELETE';
-                $fileList[]              = $fileObject;
+                $fileObject['delete_type']   = 'DELETE';
+                $fileList[]                  = $fileObject;
             }
         }
 
