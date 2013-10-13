@@ -97,10 +97,10 @@ class Module extends Mvc\Module
 
             if ($serviceManager->get('CoreConfig')->getValue('debug_is_active')) {
                 $viewManager = $serviceManager->get('ViewManager');
-                $viewManager->getViewModel()->debugIsActive = true;
                 $viewManager->getRouteNotFoundStrategy()->setDisplayExceptions(true);
                 $viewManager->getRouteNotFoundStrategy()->setDisplayNotFoundReason(true);
                 $viewManager->getExceptionStrategy()->setDisplayExceptions(true);
+                $viewManager->getViewModel()->debugIsActive = true;
             }
         }
     }
