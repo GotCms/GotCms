@@ -79,6 +79,30 @@ return array(
                                     ),
                                 ),
                             ),
+                            'download' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/download',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'content',
+                                        'controller' => 'TranslationController',
+                                        'action'     => 'download',
+                                    ),
+                                ),
+                            ),
+                            'upload' => array(
+                                'type'    => 'Literal',
+                                'options' => array(
+                                    'route'    => '/upload',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'content',
+                                        'controller' => 'TranslationController',
+                                        'action'     => 'upload',
+                                    ),
+                                ),
+                            ),
                             'search' => array(
                                 'type'    => 'Segment',
                                 'options' => array(

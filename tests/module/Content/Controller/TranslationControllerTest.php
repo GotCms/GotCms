@@ -26,6 +26,7 @@
 
 namespace Content\Controller;
 
+use Gc\Core\Translator;
 use Gc\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 /**
@@ -215,5 +216,113 @@ class TranslationControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('TranslationController');
         $this->assertControllerClass('TranslationController');
         $this->assertMatchedRouteName('content/translation');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testUploadAction()
+    {
+        $_FILES = array(
+            'upload' => array(
+                'name' => array(
+                    'fr_FR.csv',
+                    'azd.csv',
+                    'fr_FR.php',
+                    'en_US.php',
+                    'test.phtml',
+                ),
+                'type' => array(
+                    'text/csv',
+                    'text/csv',
+                    'application/x-php',
+                    'application/x-php',
+                    'text/plain',
+                ),
+                'size' => array(
+                    8,
+                    8,
+                    8,
+                    8,
+                    8,
+                ),
+                'tmp_name' => array(
+                    __DIR__ . '/_files/fr_FR.csv',
+                    __DIR__ . '/_files/azd.csv',
+                    __DIR__ . '/_files/fr_FR.php',
+                    __DIR__ . '/_files/en_US.php',
+                    __DIR__ . '/_files/test.phtml',
+                ),
+                'error' => array(
+                    UPLOAD_ERR_OK,
+                    UPLOAD_ERR_NO_FILE,
+                    UPLOAD_ERR_OK,
+                    UPLOAD_ERR_OK,
+                    UPLOAD_ERR_OK,
+                ),
+            ),
+        );
+
+        $this->dispatch('/admin/content/translation/upload');
+        $this->assertResponseStatusCode(302);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('TranslationController');
+        $this->assertControllerClass('TranslationController');
+        $this->assertMatchedRouteName('content/translation/upload');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testUploadActionWithEmptyFilesData()
+    {
+        $_FILES = array('upload' => array());
+        $this->dispatch('/admin/content/translation/upload');
+        $this->assertResponseStatusCode(302);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('TranslationController');
+        $this->assertControllerClass('TranslationController');
+        $this->assertMatchedRouteName('content/translation/upload');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testDownloadAction()
+    {
+        $this->dispatch('/admin/content/translation/download');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('TranslationController');
+        $this->assertControllerClass('TranslationController');
+        $this->assertMatchedRouteName('content/translation/download');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testDownloadActionWithEmptyContent()
+    {
+        $translator = new Translator();
+        $translator->delete('1 = 1');
+
+        $this->dispatch('/admin/content/translation/download');
+        $this->assertResponseStatusCode(302);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('TranslationController');
+        $this->assertControllerClass('TranslationController');
+        $this->assertMatchedRouteName('content/translation/download');
     }
 }

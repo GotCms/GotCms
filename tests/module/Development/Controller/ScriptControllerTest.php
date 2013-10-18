@@ -285,7 +285,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadAction()
     {
-        $files = array(
+        $_FILES = array(
             'upload' => array(
                 'name' => __DIR__ . '/_files/upload.phtml',
                 'type' => 'plain/text',
@@ -321,7 +321,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadActionWithoutId()
     {
-        $files = array(
+        $_FILES = array(
             'upload' => array(
                 'name' => array(
                     'upload.phtml',
@@ -377,7 +377,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
      */
     public function testUploadActionWithEmptyFilesData()
     {
-        $files = array('upload' => array());
+        $_FILES = array('upload' => array());
         $this->dispatch('/admin/development/script/upload');
         $this->assertResponseStatusCode(302);
 

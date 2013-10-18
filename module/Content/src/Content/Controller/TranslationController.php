@@ -33,6 +33,10 @@ use Content\Form;
 use Gc\Component;
 use Gc\Core\Translator;
 use Zend\Json\Json;
+use Zend\Http\Headers;
+use Exception;
+use ZipArchive;
+use SplFileObject;
 
 /**
  * Translation controller
@@ -154,5 +158,165 @@ class TranslationController extends Action
 
         $translator = new Translator();
         return array('form' => $translationForm, 'values' => $translator->getValues());
+    }
+
+    /**
+     * Upload a file to the server
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function uploadAction()
+    {
+        if (empty($_FILES['upload'])) {
+            $this->flashMessenger()->addErrorMessage('Can not upload translations');
+            return $this->redirect()->toRoute('content/translation');
+        }
+
+        $translator = new Translator();
+        foreach ($_FILES['upload']['tmp_name'] as $idx => $tmpName) {
+            if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+                continue;
+            }
+
+            $fileName = $_FILES['upload']['name'][$idx];
+
+            switch ($_FILES['upload']['type'][$idx]) {
+                case 'text/csv':
+                    try {
+                        $locale = str_replace('.csv', '', $fileName);
+
+                        $file = new SplFileObject($tmpName);
+                        $file->setFlags(SplFileObject::READ_CSV);
+                        foreach ($file as $row) {
+                            if (empty($row[0])) {
+                                continue;
+                            }
+
+                            list($source, $value) = $row;
+                            $this->saveTranslation($translator, $locale, $source, $value);
+                        }
+                    } catch (Exception $e) {
+                        $this->flashMessenger()->addErrorMessage($e->getMessage());
+                        return $this->redirect()->toRoute('content/translation');
+                    }
+
+                    $this->flashMessenger()->addSuccessMessage(sprintf('Translations in %s are updated', $fileName));
+
+                    break;
+                case 'application/x-php':
+                    try {
+                        $locale  = str_replace('.php', '', $fileName);
+                        $content = str_replace(
+                            array(
+                                '<?php',
+                                '<?',
+                                '?>'
+                            ),
+                            array(
+                                '',
+                                '',
+                                '',
+                            ),
+                            file_get_contents($tmpName)
+                        );
+                        if (!$data = @eval($content) or !is_array($data)) {
+                            throw new Exception(sprintf('File %s cannot be read', $fileName));
+                        }
+
+                        foreach ($data as $source => $value) {
+                            $this->saveTranslation($translator, $locale, $source, $value);
+                        }
+                    } catch (Exception $e) {
+                        $this->flashMessenger()->addErrorMessage($e->getMessage());
+                        return $this->redirect()->toRoute('content/translation');
+                    }
+
+                    $this->flashMessenger()->addSuccessMessage(sprintf('Translations in %s are updated', $fileName));
+                    break;
+            }
+        }
+
+        return $this->redirect()->toRoute('content/translation');
+    }
+
+    /**
+     * Save translation
+     *
+     * @param Translator $translator Translator
+     * @param string     $locale     Locale
+     * @param string     $source     Source
+     * @param string     $value      Value
+     *
+     * @return boolean
+     */
+    protected function saveTranslation(Translator $translator, $locale, $source, $value)
+    {
+        return $translator->setValue(
+            $source,
+            array(
+                array(
+                    'locale' => $locale,
+                    'value' => $value
+                )
+            )
+        );
+    }
+
+    /**
+     * Send a file to the browser
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function downloadAction()
+    {
+        $translator  = new Translator();
+        $values      = $translator->getValues();
+        $zip         = new ZipArchive;
+        $tmpFilename = tempnam(sys_get_temp_dir(), 'zip');
+        $res         = $zip->open($tmpFilename, ZipArchive::CREATE);
+        if ($res === true) {
+            $locales = array();
+            foreach ($values as $value) {
+                if (!isset($locales[$value['locale']])) {
+                    $locales[$value['locale']] = array();
+                }
+
+                $locales[$value['locale']][] = sprintf(
+                    '"%s","%s"',
+                    str_replace('"', '"""', $value['source']),
+                    str_replace('"', '"""', $value['destination'])
+                );
+            }
+
+            foreach ($locales as $locale => $content) {
+                $zip->addFromString($locale . '.csv', implode(PHP_EOL, $content));
+            }
+
+            $zip->close();
+            $content  = file_get_contents($tmpFilename);
+            $filename = 'translations.zip';
+            unlink($tmpFilename);
+        }
+
+        if (empty($content) or empty($filename)) {
+            $this->flashMessenger()->addErrorMessage('Can not save translations');
+            return $this->redirect()->toRoute('content/translation');
+        }
+
+        $headers = new Headers();
+        $headers->addHeaderLine('Pragma', 'public')
+            ->addHeaderLine('Cache-control', 'must-revalidate, post-check=0, pre-check=0')
+            ->addHeaderLine('Cache-control', 'private')
+            ->addHeaderLine('Expires', -1)
+            ->addHeaderLine('Content-Type', 'application/octet-stream')
+            ->addHeaderLine('Content-Transfer-Encoding', 'binary')
+            ->addHeaderLine('Content-Length', strlen($content))
+            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $filename);
+
+        $response = $this->getResponse();
+        $response->setHeaders($headers);
+        $response->setContent($content);
+
+        return $response;
     }
 }

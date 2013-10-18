@@ -142,6 +142,16 @@ class Translator extends AbstractTable
             if (empty($destination['locale']) or empty($destination['value'])) {
                 continue;
             }
+
+            $select = new Select();
+            $select->from('core_translate_locale');
+            $select->where->equalTo('locale', $destination['locale']);
+            $select->where->equalTo('core_translate_id', $sourceId);
+            $row =  $this->fetchRow($select);
+            if (!empty($row)) {
+                $destination['dst_id'] = $row['id'];
+            }
+
             if (!empty($destination['dst_id'])) {
                 $update = new Update('core_translate_locale');
                 $update->set(
