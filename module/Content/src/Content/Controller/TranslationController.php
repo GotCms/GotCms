@@ -231,6 +231,7 @@ class TranslationController extends Action
                         return $this->redirect()->toRoute('content/translation');
                     }
 
+                    $translator->generateCache();
                     $this->flashMessenger()->addSuccessMessage(sprintf('Translations in %s are updated', $fileName));
                     break;
             }
