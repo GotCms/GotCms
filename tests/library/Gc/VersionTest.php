@@ -79,7 +79,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLatest()
     {
-        $this->assertEquals('0.2.1', Version::getLatest());
+        $this->assertEquals('1.0.0', Version::getLatest());
     }
 
     /**

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-##1.0.0 (-- --- 2013):
+##1.0.0 (28 Oct 2013):
 - Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))
 - Use of undefined constant update - assumed update ([https://github.com/GotCms/GotCms/issues/133](https://github.com/GotCms/GotCms/issues/133))
 - Rebuild backend design ([https://github.com/GotCms/GotCms/issues/102](https://github.com/GotCms/GotCms/issues/102))

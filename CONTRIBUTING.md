@@ -68,7 +68,7 @@ After install less via npm:
   $ ./scripts/regenerate_css.sh
   ```
 
-After adding yui-compressor in scripts or install it via composer:
+After adding yui-compressor in scripts or installing it via composer:
   ```
   $ ./scripts/regenerate_js.sh
   ```
