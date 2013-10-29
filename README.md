@@ -121,3 +121,7 @@ If you wish to contribute to GotCms, please read the
 ### Notes
 
 Please visits the best framework ever : [Zend Framework 2](http://framework.zend.com/)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/GotCms/gotcms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
