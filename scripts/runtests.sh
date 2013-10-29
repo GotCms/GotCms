@@ -11,7 +11,7 @@ then
         echo "Phpunit not found"
         exit 0
     else
-        phpunit="./phpunit"
+        phpunit="../scripts/phpunit"
     fi
 else
     phpunit="phpunit"
