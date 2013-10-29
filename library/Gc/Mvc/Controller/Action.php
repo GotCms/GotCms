@@ -115,7 +115,8 @@ class Action extends AbstractActionController
         /**
          * Installation check, and check on removal of the install directory.
          */
-        if (!file_exists(GC_APPLICATION_PATH . '/config/autoload/global.php')
+        $config = $this->getServiceLocator()->get('Config');
+        if (!isset($config['db'])
             and !in_array($routeName, $this->installerRoutes)
         ) {
             return $this->redirect()->toRoute('install');
