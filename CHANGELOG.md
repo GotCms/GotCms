@@ -1,5 +1,8 @@
 # CHANGELOG
 
+##1.0.1 (-- --- 2013)
+- Update to Zend Framework 2.2.5 ([https://github.com/GotCms/GotCms/issues/141](https://github.com/GotCms/GotCms/issues/141))
+
 ##1.0.0 (28 Oct 2013):
 - Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))
 - Use of undefined constant update - assumed update ([https://github.com/GotCms/GotCms/issues/133](https://github.com/GotCms/GotCms/issues/133))
