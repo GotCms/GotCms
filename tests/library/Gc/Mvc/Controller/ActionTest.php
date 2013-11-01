@@ -127,8 +127,8 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnDispatchWithoutConfigFile()
     {
-        $orig = GC_APPLICATION_PATH . '/config/autoload/global.php';
-        $new  = GC_APPLICATION_PATH . '/config/autoload/fake-global.php';
+        $orig = GC_APPLICATION_PATH . '/config/autoload/local.php';
+        $new  = GC_APPLICATION_PATH . '/config/autoload/fake-local.php';
         if (file_exists($orig)) {
             rename($orig, $new);
         }

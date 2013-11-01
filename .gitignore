@@ -4,6 +4,7 @@
 
 # Configuration and Data
 config/autoload/*
+!config/autoload/global.php
 data/cache/*
 data/tmp/*
 data/translation/*

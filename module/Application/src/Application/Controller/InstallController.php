@@ -743,7 +743,7 @@ class InstallController extends Action
             $file
         );
 
-        $configFilename = GC_APPLICATION_PATH . '/config/autoload/global.php';
+        $configFilename = GC_APPLICATION_PATH . '/config/autoload/local.php';
         file_put_contents($configFilename, $file);
         chmod($configFilename, $this->umask);
         $translator      = $this->getServiceLocator()->get('MvcTranslator');
