@@ -49,6 +49,11 @@ class InstallControllerTest extends AbstractHttpControllerTestCase
     public function setUp()
     {
         $this->init();
+        $config = $this->getApplicationServiceLocator()->get('Config');
+        unset($config['db']);
+        $this->getApplicationServiceLocator()->setAllowOverride(true);
+        $this->getApplicationServiceLocator()->setService('Config', $config);
+        $this->getApplicationServiceLocator()->setAllowOverride(false);
     }
 
     /**

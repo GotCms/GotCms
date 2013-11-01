@@ -89,7 +89,11 @@ class Action extends AbstractActionController
             return $resultResponse;
         }
 
-        $this->init();
+        $resultResponse = $this->init();
+        if (!empty($resultResponse)) {
+            return $resultResponse;
+        }
+
         return parent::onDispatch($e);
     }
 

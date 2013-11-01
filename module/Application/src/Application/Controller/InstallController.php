@@ -71,11 +71,13 @@ class InstallController extends Action
      */
     public function init()
     {
-        $this->layout()->setTemplate('layouts/install.phtml');
-        $this->installForm = new Install();
-        if (file_exists(GC_APPLICATION_PATH . '/config/autoload/global.php')) {
+        $config = $this->getServiceLocator()->get('Config');
+        if (isset($config['db'])) {
             return $this->redirect()->toUrl('/');
         }
+
+        $this->layout()->setTemplate('layouts/install.phtml');
+        $this->installForm = new Install();
 
         //Force locale to translator
         $session = $this->getSession();
