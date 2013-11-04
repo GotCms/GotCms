@@ -126,7 +126,7 @@ On Windows with wampserver, if you encounter an `403 Forbidden`:
 
 If you have suhosin installed on your server and you can't display pages because stream wrapper isn't register, add the following line in your php.ini:
 ```
-suhosin.executor.include.whitelist zend.view://, gc.script://
+suhosin.executor.include.whitelist = zend.view://, gc.script://
 ```
 
 or in your Apache VirtualHost configuration:
