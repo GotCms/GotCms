@@ -16,9 +16,14 @@ read to the following resource:
 
 
 ## RUNNING TESTS
-To run JsHint tests:
+To run JsHint:
   ```
   $ ./scripts/jshint.sh
+  ```
+
+To run PHP CodeSniffer:
+  ```
+  $ ./scripts/phpcs.sh
   ```
 
 To run PHPUnit tests:

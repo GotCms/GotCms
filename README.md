@@ -20,6 +20,9 @@ Master status: [![Build Status](https://travis-ci.org/GotCms/GotCms.png?branch=m
 
 Please see [CHANGELOG.md](https://github.com/GotCms/GotCms/blob/master/CHANGELOG.md).
 
+
+## Installation
+
 ### Download
 
 Composer:
@@ -47,11 +50,12 @@ Example of VirtualHost:
     ServerAdmin admin@got-cms.com
     ServerName got-cms.com
     ServerAlias www.got-cms.com
-    DocumentRoot /var/www/got-cms/public
-    <Directory /var/www/got-cms/public>
+    DocumentRoot /path/to/got-cms/public
+    <Directory /path/to/got-cms/public>
         Options Indexes FollowSymLinks MultiViews
         AllowOverride None
         Order allow,deny
+        Allow from all
         RewriteEngine On
         RewriteCond %{REQUEST_FILENAME} -s [OR]
         RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -94,8 +98,7 @@ Php configuration:
 - Register Globals: Off
 - Session Auto Start: Off
 
-
-### Installation
+### Instructions
 
 Go to the website, it will redirect you to /install.
 Please follow instructions, there are only five steps:
@@ -111,14 +114,33 @@ Then you can manage your website, create documents, documents types, datatypes, 
 
 All contents are stored in database.
 
+### TROUBLESHOTING
 
-### Contributing
+On Windows with wampserver, if you encounter an `403 Forbidden`:
+
+```
+<Directory "path/to/got-cms">
+    Allow from all
+</Directory>
+```
+
+If you have suhosin installed on your server and you can't display pages because stream wrapper isn't register, add the following line in your php.ini:
+```
+suhosin.executor.include.whitelist zend.view://, gc.script://
+```
+
+or in your Apache VirtualHost configuration:
+```
+php_value suhosin.executor.include.whitelist zend.view://, gc.script://
+```
+
+## Contributing
 
 If you wish to contribute to GotCms, please read the
 [CONTRIBUTING.md](https://github.com/GotCms/GotCms/blob/master/CONTRIBUTING.md).
 
 
-### Notes
+## Notes
 
 Please visits the best framework ever : [Zend Framework 2](http://framework.zend.com/)
 
