@@ -4,6 +4,7 @@
 - Update to Zend Framework 2.2.5 ([https://github.com/GotCms/GotCms/issues/141](https://github.com/GotCms/GotCms/issues/141))
 - Add redirect in init method does nothing ([https://github.com/GotCms/GotCms/issues/142](https://github.com/GotCms/GotCms/issues/142))
 - Installation error: config/autoload is empty ([https://github.com/GotCms/GotCms/issues/134](https://github.com/GotCms/GotCms/issues/134))
+- Unable to find the wrapper ([https://github.com/GotCms/GotCms/issues/144](https://github.com/GotCms/GotCms/issues/144))
 
 ##1.0.0 (28 Oct 2013):
 - Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))

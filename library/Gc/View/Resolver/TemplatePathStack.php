@@ -27,6 +27,7 @@
 
 namespace Gc\View\Resolver;
 
+use Gc\View\Stream;
 use SplFileInfo;
 use Zend\View\Exception;
 use Zend\View\Renderer\RendererInterface as Renderer;
@@ -64,6 +65,7 @@ class TemplatePathStack extends PathStack
 
         if ($this->useStreamWrapper()) {
             // If using a stream wrapper, prepend the spec to the path
+            Stream::register('zend.view', false);
             $streamFilePath = 'zend.view://' . $name;
             if (file_exists($streamFilePath)) {
                 return $streamFilePath;
