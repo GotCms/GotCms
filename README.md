@@ -114,7 +114,7 @@ Then you can manage your website, create documents, documents types, datatypes, 
 
 All contents are stored in database.
 
-### TROUBLESHOTING
+### TROUBLESHOOTING
 
 On Windows with wampserver, if you encounter an `403 Forbidden`:
 
