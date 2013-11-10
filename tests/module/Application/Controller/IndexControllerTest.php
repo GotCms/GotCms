@@ -407,8 +407,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      */
     public function testIndexActionWithOfflineWebsite()
     {
-        $coreConfig = new CoreConfig();
-        $coreConfig->insert(
+        $this->config->insert(
             array(
                 'identifier' => 'site_is_offline',
                 'value' => 1
@@ -421,6 +420,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('IndexController');
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('cms');
-        $coreConfig->setValue('site_is_offline', 0);
+        $this->config->setValue('site_is_offline', 0);
     }
 }

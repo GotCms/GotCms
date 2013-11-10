@@ -54,6 +54,7 @@ tests/library/Gc/Core/_files/*
 !tests/logs
 tests/logs/*
 tests/media/*
+!tests/media/template/
 !tests/media/files
 tests/media/files/test/*
 !tests/media/github.tags

@@ -81,7 +81,7 @@ if ($zfPath) {
     $configuration = include_once $gcRoot . '/config/application.config.php';
 
     $configuration['module_listener_options']['config_glob_paths'] = array(
-        'tests/config/global.php',
+        'tests/config/local.php',
     );
 
     //Load all custom modules

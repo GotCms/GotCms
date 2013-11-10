@@ -72,7 +72,7 @@ class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
         $configuration = include GC_APPLICATION_PATH . '/config/application.config.php';
 
         $configuration['module_listener_options']['config_glob_paths'] = array(
-            'tests/config/global.php',
+            'tests/config/local.php',
         );
 
         $this->setApplicationConfig($configuration);
