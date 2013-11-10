@@ -15,7 +15,7 @@ env:
 
 before_install:
   - cp tests/TestConfiguration.travis-${DB}.php tests/TestConfiguration.php
-  - cp tests/config/global.php config/autoload/global.php
+  - cp tests/config/local.php config/autoload/local.php
   - cp tests/phpunit.xml.dist tests/phpunit.xml
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --prefer-source --no-interaction
