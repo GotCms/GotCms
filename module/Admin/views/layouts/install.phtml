@@ -45,7 +45,7 @@
 
     <?php if (!$this->debugIsActive): ?>
         <?php $this->headScript()->prependFile($this->cdnBackend('/backend/js/gotcms.min.js'), 'text/javascript'); ?>
-        <?php $this->headLink()->prependStylesheet($this->cdnBackend('/backend/css/gotcms.min.css')); ?>
+        <?php $this->headLink()->prependStylesheet($this->cdnBackend('/backend/css/gotcms-install.min.css')); ?>
     <?php else: ?>
         <?php
         $this->headScript()
