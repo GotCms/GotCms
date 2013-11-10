@@ -107,6 +107,13 @@ return array(
             'config'     => function ($pm) {
                 return new Helper\Config($pm->getServiceLocator()->get('CoreConfig'));
             },
+            'partial'     => function ($pm) {
+                $serviceLocator = $pm->getServiceLocator();
+                $configuration  = $serviceLocator->get('Config');
+                return new Helper\Partial(
+                    isset($configuration['db']) ? $serviceLocator->get('CoreConfig') : null
+                );
+            },
             'script'     => function ($pm) {
                 return new Helper\Script($pm->getServiceLocator());
             },
@@ -116,7 +123,6 @@ return array(
             'document'          => 'Gc\View\Helper\Document',
             'formCheckbox'      => 'Gc\View\Helper\FormCheckbox',
             'formMultiCheckbox' => 'Gc\View\Helper\FormMultiCheckbox',
-            'partial'           => 'Gc\View\Helper\Partial',
             'tools'             => 'Gc\View\Helper\Tools',
             'modulePlugin'      => 'Gc\View\Helper\ModulePlugin',
         ),

@@ -91,6 +91,16 @@ class Script extends AbstractHelper
         $this->response       = $serviceManager->get('Response');
         $this->pluginManager  = $serviceManager->get('ControllerPluginManager');
         $this->serviceManager = $serviceManager;
+        $config               = $serviceManager->get('Config');
+        if (!isset($config['db'])) {
+            $this->useStreamWrapper = false;
+        } else {
+            $coreConfig             = $serviceManager->get('CoreConfig');
+            $this->useStreamWrapper = $coreConfig->getValue('stream_wrapper_is_active');
+            if ($this->useStreamWrapper) {
+                Stream::register('gc.script', false);
+            }
+        }
     }
 
     /**
@@ -103,19 +113,19 @@ class Script extends AbstractHelper
      */
     public function __invoke($identifier, $params = array())
     {
-        Stream::register('gc.script', false);
-
         $script = ScriptModel::fromIdentifier($identifier);
         if (empty($script)) {
             return false;
         }
 
         $this->helperScriptParameters = $params;
-        $name                         = $identifier . '-script.gc-stream';
+        $name                         = 'script/' . $identifier;
+        if ($this->useStreamWrapper) {
+            file_put_contents('gc.script://' . $name, $script->getContent());
+            return include 'gc.script://' . $name;
+        }
 
-        file_put_contents('gc.script://' . $name, $script->getContent());
-
-        return include 'gc.script://' . $name;
+        return include GC_TEMPLATE_PATH . '/' . $name . '.phtml';
     }
 
     /**

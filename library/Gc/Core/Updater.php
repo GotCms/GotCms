@@ -158,7 +158,7 @@ class Updater extends Object
         $updatePath = GC_APPLICATION_PATH . '/data/update';
         $path       = glob($updatePath . '/*');
         foreach ($path as $file) {
-            $version = str_replace($updatePath . '/v', '', $file);
+            $version = str_replace($updatePath . '/', '', $file);
             if (version_compare($version, Version::VERSION, '>')) {
                 $fileList = glob(sprintf($file . '/%s/*.sql', $configuration['db']['driver']));
                 if (!empty($fileList)) {
@@ -208,7 +208,7 @@ class Updater extends Object
         $updatePath = GC_APPLICATION_PATH . '/data/update';
         $path       = glob($updatePath . '/*');
         foreach ($path as $file) {
-            $version = str_replace($updatePath . '/v', '', $file);
+            $version = str_replace($updatePath . '/', '', $file);
             if (version_compare($version, Version::VERSION, '>')) {
                 $fileList = glob($file . '/*.php');
                 if (!empty($fileList)) {

@@ -145,6 +145,7 @@ class Model extends AbstractTable
                 $this->update($arraySave, array('id' => (int) $this->getId()));
             }
 
+            file_put_contents($this->getFilePath(), $this->getContent());
             $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
 
             return $this->getId();
@@ -170,6 +171,10 @@ class Model extends AbstractTable
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
+            if (file_exists($this->getFilePath())) {
+                unlink($this->getFilePath());
+            }
+
             $this->events()->trigger(__CLASS__, 'after.delete', null, array('object' => $this));
             unset($this);
 
@@ -179,5 +184,16 @@ class Model extends AbstractTable
         $this->events()->trigger(__CLASS__, 'after.delete.failed', null, array('object' => $this));
 
         return false;
+    }
+
+    /**
+     * Return file path
+     *
+     * @return string
+     */
+    public function getFilePath()
+    {
+        $filename = GC_TEMPLATE_PATH . '/script/%s.phtml';
+        return sprintf($filename, $this->getIdentifier());
     }
 }

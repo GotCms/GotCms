@@ -54,6 +54,8 @@ set_include_path(implode(PATH_SEPARATOR, $path));
 define('GC_APPLICATION_PATH', $gcRoot);
 define('GC_PUBLIC_PATH', $gcRoot . $gcPublic);
 define('GC_MEDIA_PATH', GC_APPLICATION_PATH . '/tests/media');
+define('GC_TEMPLATE_PATH', GC_APPLICATION_PATH . '/tests/media/template');
+
 /**
  * Setup autoloading
  */

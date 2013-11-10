@@ -167,8 +167,10 @@ class ModuleManagerFactory implements FactoryInterface
         }
 
         if (is_array($config) && isset($config['view_manager'])) {
-            $templatePathStack = $serviceLocator->get('ViewTemplatePathStack');
             $viewManagerConfig = $config['view_manager'];
+            $templatePathStack = $serviceLocator->get('ViewTemplatePathStack');
+            $coreConfig        = $serviceLocator->get('CoreConfig');
+            $templatePathStack->setUseStreamWrapper((bool) $coreConfig->getValue('stream_wrapper_is_active'));
             if (is_array($viewManagerConfig)) {
                 if (isset($viewManagerConfig['template_path_stack'])) {
                     $templatePathStack->addPaths($viewManagerConfig['template_path_stack']);

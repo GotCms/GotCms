@@ -144,7 +144,10 @@ class Action extends AbstractActionController
                 }
             } else {
                 if (!in_array($routeName, array('config/user/forbidden', 'config/user/logout'))) {
-                    $this->checkAcl($auth->getIdentity());
+                    $resultResponse = $this->checkAcl($auth->getIdentity());
+                    if (!empty($resultResponse)) {
+                        return $resultResponse;
+                    }
                 }
             }
         }

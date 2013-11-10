@@ -113,6 +113,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
         $model = $this->object->fromId($id);
         $this->assertEquals('string', $model->getIdentifier());
+        $model->delete();
     }
 
     /**
@@ -144,6 +145,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
         $model = $this->object->fromIdentifier('test-identifier');
         $this->assertEquals('Test Identifier', $model->getName());
+        $model->delete();
     }
 
     /**
@@ -176,6 +178,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         //Save again for code coverage
         $model->save();
         $this->assertTrue((bool) $model->getId());
+        $model->delete();
     }
 
     /**

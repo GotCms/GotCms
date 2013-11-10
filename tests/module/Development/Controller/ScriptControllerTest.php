@@ -233,7 +233,7 @@ class ScriptControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ScriptController');
         $this->assertMatchedRouteName('development/script/edit');
 
-        $scriptModel->delete();
+        ScriptModel::fromIdentifier('Identifier')->delete();
     }
 
     /**

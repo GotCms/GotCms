@@ -27,6 +27,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Core\Config as CoreConfig;
 use Zend\View\Helper\Partial as ZendPartial;
 use Gc\View\Model as ViewModel;
 use Gc\View\Stream;
@@ -48,6 +49,26 @@ class Partial extends ZendPartial
      * @var TemplatePathStack
      */
     static protected $streamIsRegistered = false;
+
+    /**
+     * If database is active
+     *
+     * @var boolean
+     */
+    protected $useStreamWrapper = null;
+
+    /**
+     * Constructor
+     *
+     * @param CoreConfig $config Core configuration
+     */
+    public function __construct(CoreConfig $config = null)
+    {
+        $this->useStreamWrapper = false;
+        if (!empty($config)) {
+            $this->useStreamWrapper = $config->getValue('stream_wrapper_is_active');
+        }
+    }
 
     /**
      * Returns script from identifier.
@@ -79,7 +100,7 @@ class Partial extends ZendPartial
             }
         }
 
-        if (self::$streamIsRegistered === false) {
+        if (self::$streamIsRegistered === false and $this->useStreamWrapper) {
             Stream::register();
         }
 
@@ -98,8 +119,10 @@ class Partial extends ZendPartial
             }
         }
 
-        $name .= '-view.gc-stream';
-        file_put_contents('zend.view://' . $name, $viewModel->getContent());
+        $name = 'view/' . $name;
+        if ($this->useStreamWrapper) {
+            file_put_contents('zend.view://' . $name, $viewModel->getContent());
+        }
 
         return $view->render($name);
     }

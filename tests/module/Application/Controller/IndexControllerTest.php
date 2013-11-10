@@ -102,7 +102,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->layout = LayoutModel::fromArray(
             array(
                 'name' => 'View',
-                'identifier' => 'ViewIdentifier',
+                'identifier' => 'LayoutIdentifier',
                 'description' => 'Description',
                 'content' => '',
             )
@@ -152,6 +152,12 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->property->save();
 
         $this->config = Registry::get('Application')->getServiceManager()->get('CoreConfig');
+
+        $this->getApplicationServiceLocator()
+            ->get('ViewTemplatePathStack')
+            ->addPath(GC_TEMPLATE_PATH);
+
+        $this->getApplicationServiceLocator()->get('Auth')->clearIdentity();
     }
 
     /**
@@ -203,7 +209,7 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->property->saveValue();
 
 
-        $this->dispatch('/' . $document->getUrl());
+        $this->dispatch($document->getUrl());
         $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Application');
@@ -212,7 +218,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('cms');
 
         $document->delete();
-        unset($document);
     }
 
     /**
@@ -249,7 +254,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('cms');
 
         $document->delete();
-        unset($document);
     }
 
     /**
@@ -288,7 +292,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('cms');
 
         $document->delete();
-        unset($document);
     }
 
     /**
@@ -324,7 +327,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('cms');
 
         $document->delete();
-        unset($document);
         $enableCache = $this->config->setValue('cache_is_active', 0);
     }
 
@@ -361,7 +363,6 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertMatchedRouteName('cms');
 
         $document->delete();
-        unset($document);
         $enableCache = $this->config->setValue('cache_is_active', 0);
     }
 
@@ -397,5 +398,29 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('IndexController');
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('cms');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testIndexActionWithOfflineWebsite()
+    {
+        $coreConfig = new CoreConfig();
+        $coreConfig->insert(
+            array(
+                'identifier' => 'site_is_offline',
+                'value' => 1
+            )
+        );
+        $this->dispatch('/404Page');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Application');
+        $this->assertControllerName('IndexController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('cms');
+        $coreConfig->setValue('site_is_offline', 0);
     }
 }

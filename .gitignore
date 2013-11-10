@@ -10,6 +10,13 @@ data/tmp/*
 data/translation/*
 sessions/*
 
+module/Development/views/layout/*
+!module/Development/views/layout/.gitignore
+module/Development/views/script/*
+!module/Development/views/script/.gitignore
+module/Development/views/view/*
+!module/Development/views/view/.gitignore
+
 # Frontend
 public/frontend/*
 !public/frontend/tmp

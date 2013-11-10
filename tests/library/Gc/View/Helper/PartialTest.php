@@ -27,6 +27,7 @@
 namespace Gc\View\Helper;
 
 use Zend\View\Renderer\PhpRenderer as View;
+use Gc\Core\Config as CoreConfig;
 use Gc\View\Model as ViewModel;
 use Gc\View\Resolver\TemplatePathStack;
 use stdClass;
@@ -58,7 +59,10 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Partial;
+        $coreConfig = new CoreConfig();
+        $coreConfig->setValue('stream_wrapper_is_active', 1);
+        $this->object = new Partial($coreConfig);
+        $coreConfig->setValue('stream_wrapper_is_active', 0);
 
         $this->view = ViewModel::fromArray(
             array(
@@ -73,6 +77,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
         $view              = new View();
         $templatePathStack = new TemplatePathStack();
         $templatePathStack->setUseStreamWrapper(true);
+        $templatePathStack->addPath(GC_TEMPLATE_PATH);
         $view->setResolver($templatePathStack);
         $this->object->setView($view);
     }
@@ -85,8 +90,10 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        $this->view->delete();
         unset($this->object);
     }
+
     /**
      * Test
      *
@@ -102,7 +109,8 @@ class PartialTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->object->getView()->resolver()->addPath(__DIR__ . '/_files/views');
+        $templatePathStack = $this->object->getView()->resolver();
+        $templatePathStack->addPath(__DIR__ . '/_files/views');
         //With object
         $this->object->partialCounter = true;
         $return                       = $this->object->__invoke('partial-vars.phtml', $model);
@@ -149,6 +157,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertInstanceOf('Gc\View\Helper\Partial', $this->object->__invoke(''));
+
         $this->assertFalse($this->object->__invoke('fake-view-identifier'));
         $this->assertEquals('View Content', $this->object->__invoke('view-identifier'));
     }

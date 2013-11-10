@@ -269,7 +269,7 @@ class Config extends AbstractForm
 
         $this->add($debugFieldset);
 
-        //Debug settings
+        //Cache settings
         $cacheFieldset = new Fieldset('cache');
         $cacheFieldset->setLabel('Cache');
         $cacheIsActive = new Element\Checkbox('cache_is_active');
@@ -336,6 +336,27 @@ class Config extends AbstractForm
         );
 
         $this->add($cacheFieldset);
+
+        //Stream settings
+        $streamFieldset = new Fieldset('stream');
+        $streamFieldset->setLabel('Stream Wrapper');
+
+        $isActive = new Element\Checkbox('stream_wrapper_is_active');
+        $isActive->setAttribute('label', 'Stream wrapper is active')
+            ->setAttribute('class', 'input-checkbox')
+            ->setAttribute('id', 'stream-is-active')
+            ->setCheckedValue('1');
+        $streamFieldset->add($isActive);
+
+        $this->getInputFilter()->add(
+            array(
+                'name' => 'stream_wrapper_is_active',
+                'required' => false,
+            ),
+            'stream_wrapper_is_active'
+        );
+
+        $this->add($streamFieldset);
 
         return $this;
     }

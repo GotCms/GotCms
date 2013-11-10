@@ -82,7 +82,10 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('content');
         $this->object->getEvent()->setRouteMatch($routeMatch);
-        $this->object->onDispatch(Registry::get('Application')->getMvcEvent());
+        $this->assertInstanceOf(
+            'Zend\Http\PhpEnvironment\Response',
+            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
+        );
     }
 
     /**
@@ -101,7 +104,10 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         );
         $routeMatch->setMatchedRouteName('config/user/login');
         $this->object->getEvent()->setRouteMatch($routeMatch);
-        $this->object->dispatch(Registry::get('Application')->getRequest());
+        $this->assertInstanceOf(
+            'Zend\View\Model\ViewModel',
+            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
+        );
     }
 
     /**
@@ -117,7 +123,10 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('content');
         $this->object->getEvent()->setRouteMatch($routeMatch);
-        $this->object->onDispatch(Registry::get('Application')->getMvcEvent());
+        $this->assertInstanceOf(
+            'Zend\Http\PhpEnvironment\Response',
+            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
+        );
     }
 
     /**
@@ -127,16 +136,17 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnDispatchWithoutConfigFile()
     {
-        $orig = GC_APPLICATION_PATH . '/config/autoload/local.php';
-        $new  = GC_APPLICATION_PATH . '/config/autoload/fake-local.php';
-        if (file_exists($orig)) {
-            rename($orig, $new);
-        }
-
-        $this->object->dispatch(Registry::get('Application')->getRequest(), null);
-        if (file_exists($new)) {
-            rename($new, $orig);
-        }
+        $config    = $this->object->getServiceLocator()->get('Config');
+        $oldConfig = $config;
+        unset($config['db']);
+        $this->object->getServiceLocator()->setAllowOverride(true);
+        $this->object->getServiceLocator()->setService('Config', $config);
+        $this->assertInstanceOf(
+            'Zend\Http\PhpEnvironment\Response',
+            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
+        );
+        $this->object->getServiceLocator()->setService('Config', $oldConfig);
+        $this->object->getServiceLocator()->setAllowOverride(false);
     }
 
     /**
@@ -145,6 +155,52 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      * @return void
      */
     public function testOnDispatchWithIdentity()
+    {
+        $userModel = UserModel::fromArray(
+            array(
+                'lastname' => 'Test',
+                'firstname' => 'Test',
+                'email' => 'pierre.rambaud86@gmail.com',
+                'login' => 'login-test',
+                'user_acl_role_id' => 2,
+            )
+        );
+
+        $userModel->setPassword('password-test');
+        $userModel->save();
+        $userModel->authenticate('login-test', 'password-test');
+
+
+        $routeMatch = new RouteMatch(array());
+        $routeMatch->setMatchedRouteName('cms');
+        $this->object->getEvent()->setRouteMatch($routeMatch);
+        $this->object->aclPage = array(
+            'resource' => 'development',
+            'permission' => 'view'
+        );
+        $this->assertInstanceOf(
+            'Zend\Http\PhpEnvironment\Response',
+            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
+        );
+
+        $this->object->aclPage = array(
+            'resource' => 'modules',
+            'permission' => 'view'
+        );
+        $this->assertInstanceOf(
+            'Zend\Http\PhpEnvironment\Response',
+            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
+        );
+
+        $userModel->delete();
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testOnDispatchWithIdentityAndAdminRole()
     {
         $userModel = UserModel::fromArray(
             array(
@@ -164,8 +220,10 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('cms');
         $this->object->getEvent()->setRouteMatch($routeMatch);
-        $this->object->dispatch(Registry::get('Application')->getRequest(), null);
-        $this->object->onDispatch(Registry::get('Application')->getMvcEvent());
+        $this->assertInstanceOf(
+            'Zend\View\Model\ViewModel',
+            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
+        );
 
         $userModel->delete();
     }

@@ -27,7 +27,6 @@
 namespace Application;
 
 use Gc\Mvc;
-use Application\Controller\IndexController as RenderController;
 use Gc\Core\Config as CoreConfig;
 use Gc\Layout;
 use Gc\Registry;
@@ -92,7 +91,8 @@ class Module extends Mvc\Module
 
             $application->getEventManager()->attach(
                 MvcEvent::EVENT_RENDER_ERROR,
-                array($this, 'prepareException')
+                array($this, 'prepareException'),
+                10
             );
 
             if ($serviceManager->get('CoreConfig')->getValue('debug_is_active')) {
@@ -196,8 +196,12 @@ class Module extends Mvc\Module
                 $templatePathStack = $event->getApplication()->getServiceManager()->get(
                     'Zend\View\Resolver\TemplatePathStack'
                 );
-                $templatePathStack->setUseStreamWrapper(true);
-                file_put_contents('zend.view://' . RenderController::LAYOUT_PATH, $layout->getContent());
+
+                $event->getViewModel()->setTemplate('layout/' . $layout->getIdentifier());
+                if ($coreConfig->getValue('stream_wrapper_is_active')) {
+                    $templatePathStack->setUseStreamWrapper(true);
+                    file_put_contents('zend.view://layout/' . $layout->getIdentifier(), $layout->getContent());
+                }
             }
         }
     }

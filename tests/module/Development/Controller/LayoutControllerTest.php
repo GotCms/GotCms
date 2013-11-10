@@ -233,7 +233,7 @@ class LayoutControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('LayoutController');
         $this->assertMatchedRouteName('development/layout/edit');
 
-        $layoutModel->delete();
+        LayoutModel::fromIdentifier('Identifier')->delete();
     }
 
     /**

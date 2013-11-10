@@ -233,7 +233,7 @@ class ViewControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('ViewController');
         $this->assertMatchedRouteName('development/view/edit');
 
-        $viewModel->delete();
+        ViewModel::fromIdentifier('Identifier')->delete();
     }
 
     /**

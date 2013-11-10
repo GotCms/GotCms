@@ -94,19 +94,20 @@ class IndexController extends Action
             }
         }
 
-        $this->events()->trigger('Front', 'preDispatch', null, array('object' => $this));
+        $viewModel = new ViewModel();
+        $this->events()->trigger('Front', 'preDispatch', null, array('object' => $this, 'viewModel' => $viewModel));
 
         if ($coreConfig->getValue('site_is_offline') == 1) {
             //Site is offline
             if (!$isAdmin) {
                 $document = Document\Model::fromId($coreConfig->getValue('site_offline_document'));
                 if (empty($document)) {
-                    die('Site offline');
+                    $viewModel->setTemplate('application/site-is-offline');
+                    $viewModel->setTerminal(true);
+                    return $viewModel;
                 }
             }
         }
-
-        View\Stream::register();
 
         $path = ltrim($this->getRouteMatch()->getParam('path'), '/');
 
@@ -120,19 +121,11 @@ class IndexController extends Action
                 //Retrieve cache value and set data
                 $cacheValue = $this->cache->getItem($cacheKey);
                 $viewModel  = $cacheValue['view_model'];
-                $viewModel->setTemplate(self::VIEW_PATH);
+                $view       = $cacheValue['view'];
+                $layout     = $cacheValue['layout'];
                 $viewModel->setVariables($cacheValue['layout_variables']);
                 $this->layout()->setVariables($cacheValue['layout_variables']);
-                $this->layout()->setTemplate(self::LAYOUT_PATH);
-                $layoutContent = $cacheValue['layout_content'];
-                $viewContent   = $cacheValue['view_content'];
             }
-        }
-
-        if (empty($viewModel)) {
-            $viewModel = new ViewModel();
-            $viewModel->setTemplate(self::VIEW_PATH);
-            $this->layout()->setTemplate(self::LAYOUT_PATH);
         }
 
         //Cache is disable or cache isn't create
@@ -183,16 +176,13 @@ class IndexController extends Action
                 }
             }
 
-
             $variables = array();
             if (empty($document)) {
                 // 404
                 $this->getResponse()->setStatusCode(404);
                 $layout = Layout\Model::fromId($coreConfig->getValue('site_404_layout'));
-                if (!empty($layout)) {
-                    $layoutContent = $layout->getContent();
-                } else {
-                    $layoutContent = '<?php echo $this->content; ?>';
+                if (empty($layout)) {
+                    $viewModel->setTerminal(true);
                 }
             } else {
                 //Get all tabs of document
@@ -225,30 +215,41 @@ class IndexController extends Action
                 //Set view from database
                 $view   = View\Model::fromId($document->getViewId());
                 $layout = Layout\Model::fromId($document->getLayoutId());
-
-                $layoutContent = $layout->getContent();
-                $viewContent   = $view->getContent();
             }
 
             if ($cacheIsEnable && !empty($document)) {
                 $this->cache->setItem(
                     $cacheKey,
                     array(
-                        'view_model' => $viewModel,
+                        'view_model'       => $viewModel,
                         'layout_variables' => $variables,
-                        'layout_content' => $layout->getContent(),
-                        'view_content' => !empty($view) ? $view->getContent() : '',
+                        'layout'           => $layout,
+                        'view'             => $view,
                     )
                 );
             }
         }
 
-        file_put_contents('zend.view://' . self::LAYOUT_PATH, $layoutContent);
-        if (!empty($viewContent)) {
-            file_put_contents('zend.view://' . self::VIEW_PATH, $viewContent);
+        if ($coreConfig->getValue('stream_wrapper_is_active')) {
+            View\Stream::register();
+            if (!empty($layout)) {
+                file_put_contents('zend.view://' . $layout->getIdentifier(), $layout->getContent());
+            }
+
+            if (!empty($view)) {
+                file_put_contents('zend.view://' . $view->getIdentifier(), $view->getContent());
+            }
         }
 
-        $this->events()->trigger('Front', 'postDispatch');
+        if (!empty($layout)) {
+            $this->layout()->setTemplate('layout/' . $layout->getIdentifier());
+        }
+
+        if (!empty($view)) {
+            $viewModel->setTemplate('view/' . $view->getIdentifier());
+        }
+
+        $this->events()->trigger('Front', 'postDispatch', null, array('object' => $this, 'viewModel' => $viewModel));
 
         return $viewModel;
     }
