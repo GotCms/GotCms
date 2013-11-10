@@ -17,6 +17,7 @@ before_install:
   - cp tests/TestConfiguration.travis-${DB}.php tests/TestConfiguration.php
   - cp tests/config/local.php config/autoload/local.php
   - cp tests/phpunit.xml.dist tests/phpunit.xml
+  - chmod -R ug+rw module/Development/views/
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --prefer-source --no-interaction
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
