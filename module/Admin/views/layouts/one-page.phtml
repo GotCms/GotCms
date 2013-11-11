@@ -66,7 +66,7 @@
             ->prependFile($this->cdnBackend('/backend/js/bootstrap.min.js'), 'text/javascript')
             ->prependFile($this->cdnBackend('/backend/js/vendor/jquery-1.10.2.min.js'), 'text/javascript');
         ?>
-        <link rel="stylesheet/less" type="text/css" href="<?php echo $this->cdnBackend('/backend/css/gotcms.less'); ?>" />
+        <link rel="stylesheet" type="text/less" href="<?php echo $this->cdnBackend('/backend/css/gotcms.less'); ?>" />
         <script type="text/javascript">
              var less = less || {};
              less.env = "development";
