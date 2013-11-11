@@ -6,6 +6,7 @@
 - Installation error: config/autoload is empty ([https://github.com/GotCms/GotCms/issues/134](https://github.com/GotCms/GotCms/issues/134))
 - Unable to find the wrapper ([https://github.com/GotCms/GotCms/issues/144](https://github.com/GotCms/GotCms/issues/144))
 - Add the choice between files and stream wrapper ([https://github.com/GotCms/GotCms/issues/147](https://github.com/GotCms/GotCms/issues/147))
+- Bug with cache if there're two instance of GotCms on the same server ([https://github.com/GotCms/GotCms/issues/148](https://github.com/GotCms/GotCms/issues/148))
 
 ##1.0.0 (28 Oct 2013):
 - Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))

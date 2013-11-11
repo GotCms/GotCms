@@ -116,7 +116,7 @@ class IndexController extends Action
             $this->enableCache();
             $cacheKey = ('page'
                 . (empty($path) ? '' : '-'
-                . preg_replace('/[^a-z0-9_\+\-]+/Di', '_', str_replace('/', '-', strtolower($path)))));
+                . $this->toCacheKey($path)));
             if ($this->cache->hasItem($cacheKey)) {
                 //Retrieve cache value and set data
                 $cacheValue = $this->cache->getItem($cacheKey);
@@ -340,8 +340,9 @@ class IndexController extends Action
         switch($cacheHandler) {
             case 'memcached':
                 $cacheOptions = array(
-                    'ttl' => $cacheTtl,
-                    'servers' => array(array(
+                    'ttl'       => $cacheTtl,
+                    'namespace' => $this->toCacheKey($coreConfig->getValue('site_name')),
+                    'servers'   => array(array(
                         'localhost', 11211
                     )),
                 );
@@ -369,5 +370,17 @@ class IndexController extends Action
                 ),
             )
         );
+    }
+
+    /**
+     * Convert string to cache key
+     *
+     * @param string $string String
+     *
+     * @return string
+     */
+    protected function toCacheKey($string)
+    {
+        return preg_replace('/[^a-z0-9_\+\-]+/Di', '_', str_replace('/', '-', strtolower($string)));
     }
 }
