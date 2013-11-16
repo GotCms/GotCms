@@ -233,11 +233,11 @@ class IndexController extends Action
         if ($coreConfig->getValue('stream_wrapper_is_active')) {
             View\Stream::register();
             if (!empty($layout)) {
-                file_put_contents('zend.view://' . $layout->getIdentifier(), $layout->getContent());
+                file_put_contents('zend.view://layout/' . $layout->getIdentifier(), $layout->getContent());
             }
 
             if (!empty($view)) {
-                file_put_contents('zend.view://' . $view->getIdentifier(), $view->getContent());
+                file_put_contents('zend.view://view/' . $view->getIdentifier(), $view->getContent());
             }
         }
 
