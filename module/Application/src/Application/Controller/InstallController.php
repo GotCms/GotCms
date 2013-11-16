@@ -725,6 +725,24 @@ class InstallController extends Action
         if (file_exists($templatePath . '/files')) {
             File::copyDirectory($templatePath . '/files', GC_MEDIA_PATH . '/files');
         }
+
+        //Save layout as file
+        $collection = new Layout\Collection();
+        foreach ($collection->getLayouts() as $layout) {
+            $layout->save();
+        }
+
+        //Save script as file
+        $collection = new Script\Collection();
+        foreach ($collection->getScripts() as $script) {
+            $script->save();
+        }
+
+        //Save view as file
+        $collection = new View\Collection();
+        foreach ($collection->getViews() as $view) {
+            $view->save();
+        }
     }
 
     /**
