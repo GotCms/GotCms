@@ -23,5 +23,5 @@ then
     standard="../vendor/gotcms/gotsniffs/Got/"
 fi
 
-phpcs --standard=$standard ../library/
-phpcs --standard=$standard ../module/
+$phpcs --standard=$standard ../library/
+$phpcs --standard=$standard ../module/
