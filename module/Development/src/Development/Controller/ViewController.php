@@ -165,30 +165,30 @@ class ViewController extends Action
             $view->save();
             $this->flashMessenger()->addSuccessMessage('View updated');
             return $this->redirect()->toRoute('development/view/edit', array('id' => $viewId));
-        } else {
-            if (empty($_FILES['upload'])) {
-                $this->flashMessenger()->addErrorMessage('Can not upload views');
-                return $this->redirect()->toRoute('development/view');
-            }
+        }
 
-            foreach ($_FILES['upload']['name'] as $idx => $name) {
-                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
-                    continue;
-                }
-
-                $identifier = preg_replace('~\.phtml$~', '', $name);
-                $view       = View\Model::fromIdentifier($identifier);
-                if (empty($view)) {
-                    continue;
-                }
-
-                $view->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
-                $view->save();
-            }
-
-            $this->flashMessenger()->addSuccessMessage('Views updated');
+        if (empty($_FILES['upload'])) {
+            $this->flashMessenger()->addErrorMessage('Can not upload views');
             return $this->redirect()->toRoute('development/view');
         }
+
+        foreach ($_FILES['upload']['name'] as $idx => $name) {
+            if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+                continue;
+            }
+
+            $identifier = preg_replace('~\.phtml$~', '', $name);
+            $view       = View\Model::fromIdentifier($identifier);
+            if (empty($view)) {
+                continue;
+            }
+
+            $view->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
+            $view->save();
+        }
+
+        $this->flashMessenger()->addSuccessMessage('Views updated');
+        return $this->redirect()->toRoute('development/view');
     }
 
     /**
@@ -246,5 +246,38 @@ class ViewController extends Action
         $response->setContent($content);
 
         return $response;
+    }
+
+    /**
+     * Update database from files
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function updateAction()
+    {
+        $viewId = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($viewId)) {
+            $view = View\Model::fromId($viewId);
+            if (empty($view)) {
+                $this->flashMessenger()->addErrorMessage('This view can not be update');
+                return $this->redirect()->toRoute('development/view/edit', array('id' => $viewId));
+            }
+
+            $view->setContent($view->getFileContents());
+            $view->save();
+            $this->flashMessenger()->addSuccessMessage('View updated');
+            return $this->redirect()->toRoute('development/view/edit', array('id' => $viewId));
+        } else {
+            $views    = new View\Collection();
+            $children = $views->getViews();
+
+            foreach ($children as $child) {
+                $child->setContent($child->getFileContents());
+                $child->save();
+            }
+        }
+
+        $this->flashMessenger()->addSuccessMessage('Views updated');
+        return $this->redirect()->toRoute('development/view');
     }
 }

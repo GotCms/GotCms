@@ -247,4 +247,23 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         $model->setId('undefined');
         $this->assertFalse($model->delete());
     }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testGetFileContents()
+    {
+        $array = array(
+            'name' => 'Test Identifier',
+            'identifier' => 'test-delete-identifier',
+            'description' => 'Description',
+            'content' => 'Content',
+        );
+        $model = $this->object->fromArray($array);
+        $model->save();
+        $this->assertEquals('Content', $model->getFileContents());
+        $this->assertTrue($model->delete());
+    }
 }

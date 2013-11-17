@@ -68,7 +68,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->script->save();
-
+		$this->useStreamWrapper(1);
         $this->object = new Script(Registry::get('Application')->getServiceManager());
     }
 
@@ -80,6 +80,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+		$this->useStreamWrapper(0);
         unset($this->object);
         $this->script->delete();
         unset($this->script);
@@ -97,6 +98,47 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
         $data = ob_get_clean();
         $this->assertEquals('script Content', $data);
         $this->assertFalse($this->object->__invoke('fake-script-identifier'));
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testInvokeWithoutStreamwrapper()
+    {
+		$this->useStreamWrapper(0);
+        $this->object = new Script(Registry::get('Application')->getServiceManager());
+        ob_start();
+        $this->object->__invoke('script-identifier');
+        $data = ob_get_clean();
+        $this->assertEquals('script Content', $data);
+        $this->assertFalse($this->object->__invoke('fake-script-identifier'));
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testInvokeWithoutConfiguration()
+    {
+    	$serviceManager = Registry::get('Application')->getServiceManager();
+
+        $config    = $serviceManager->get('Config');
+        $oldConfig = $config;
+        unset($config['db']);
+        $serviceManager->setAllowOverride(true);
+        $serviceManager->setService('Config', $config);
+
+        $this->object = new Script(Registry::get('Application')->getServiceManager());
+        ob_start();
+        $this->object->__invoke('script-identifier');
+        $data = ob_get_clean();
+        $this->assertEquals('script Content', $data);
+        $this->assertFalse($this->object->__invoke('fake-script-identifier'));
+
+        $serviceManager->setService('Config', $oldConfig);
     }
 
     /**
@@ -189,4 +231,10 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Params', $this->object->params());
     }
+
+	protected function useStreamWrapper($value = 1)
+	{
+		$coreConfig = Registry::get('Application')->getServiceManager()->get('CoreConfig');
+		$coreConfig->setValue('stream_wrapper_is_active', $value);
+	}
 }

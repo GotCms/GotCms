@@ -198,4 +198,14 @@ class Model extends AbstractTable
         $filename = GC_TEMPLATE_PATH . '/layout/%s.phtml';
         return sprintf($filename, $this->getIdentifier());
     }
+
+    /**
+     * Return file contents
+     *
+     * @return string
+     */
+    public function getFileContents()
+    {
+        return file_get_contents($this->getFilePath());
+    }
 }

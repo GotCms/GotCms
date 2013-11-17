@@ -170,30 +170,30 @@ class LayoutController extends Action
 
             $this->flashMessenger()->addSuccessMessage('Layout updated');
             return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutId));
-        } else {
-            if (empty($_FILES['upload'])) {
-                $this->flashMessenger()->addErrorMessage('Can not upload layouts');
-                return $this->redirect()->toRoute('development/layout');
-            }
+        }
 
-            foreach ($_FILES['upload']['name'] as $idx => $name) {
-                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
-                    continue;
-                }
-
-                $identifier = preg_replace('~\.phtml$~', '', $name);
-                $layout     = Layout\Model::fromIdentifier($identifier);
-                if (empty($layout)) {
-                    continue;
-                }
-
-                $layout->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
-                $layout->save();
-            }
-
-            $this->flashMessenger()->addSuccessMessage('Layouts updated');
+        if (empty($_FILES['upload'])) {
+            $this->flashMessenger()->addErrorMessage('Can not upload layouts');
             return $this->redirect()->toRoute('development/layout');
         }
+
+        foreach ($_FILES['upload']['name'] as $idx => $name) {
+            if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+                continue;
+            }
+
+            $identifier = preg_replace('~\.phtml$~', '', $name);
+            $layout     = Layout\Model::fromIdentifier($identifier);
+            if (empty($layout)) {
+                continue;
+            }
+
+            $layout->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
+            $layout->save();
+        }
+
+        $this->flashMessenger()->addSuccessMessage('Layouts updated');
+        return $this->redirect()->toRoute('development/layout');
     }
 
     /**
@@ -251,5 +251,38 @@ class LayoutController extends Action
         $response->setContent($content);
 
         return $response;
+    }
+
+    /**
+     * Update database from files
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function updateAction()
+    {
+        $layoutId = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($layoutId)) {
+            $layout = Layout\Model::fromId($layoutId);
+            if (empty($layout)) {
+                $this->flashMessenger()->addErrorMessage('This layout can not be update');
+                return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutId));
+            }
+
+            $layout->setContent($layout->getFileContents());
+            $layout->save();
+            $this->flashMessenger()->addSuccessMessage('View updated');
+            return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutId));
+        } else {
+            $layouts  = new Layout\Collection();
+            $children = $layouts->getLayouts();
+
+            foreach ($children as $child) {
+                $child->setContent($child->getFileContents());
+                $child->save();
+            }
+        }
+
+        $this->flashMessenger()->addSuccessMessage('Layouts updated');
+        return $this->redirect()->toRoute('development/layout');
     }
 }

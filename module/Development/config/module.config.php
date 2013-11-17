@@ -146,6 +146,22 @@ return array(
                                     ),
                                 ),
                             ),
+                            'update' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/update[/:id]',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'development',
+                                        'controller' => 'ViewController',
+                                        'action'     => 'update',
+                                    ),
+                                    'constraints' =>
+                                    array (
+                                        'id' => '\d+',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                     'script' => array(
@@ -237,6 +253,22 @@ return array(
                                     ),
                                 ),
                             ),
+                            'update' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/update[/:id]',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'development',
+                                        'controller' => 'ScriptController',
+                                        'action'     => 'update',
+                                    ),
+                                    'constraints' =>
+                                    array (
+                                        'id' => '\d+',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                     'layout' => array(
@@ -321,6 +353,22 @@ return array(
                                         'module'     => 'development',
                                         'controller' => 'LayoutController',
                                         'action'     => 'upload',
+                                    ),
+                                    'constraints' =>
+                                    array (
+                                        'id' => '\d+',
+                                    ),
+                                ),
+                            ),
+                            'update' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/update[/:id]',
+                                    'defaults' =>
+                                    array (
+                                        'module'     => 'development',
+                                        'controller' => 'LayoutController',
+                                        'action'     => 'update',
                                     ),
                                     'constraints' =>
                                     array (

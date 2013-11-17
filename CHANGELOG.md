@@ -8,6 +8,7 @@
 - Add the choice between files and stream wrapper ([https://github.com/GotCms/GotCms/issues/147](https://github.com/GotCms/GotCms/issues/147))
 - Bug with cache if there're two instance of GotCms on the same server ([https://github.com/GotCms/GotCms/issues/148](https://github.com/GotCms/GotCms/issues/148))
 - Active debug breaks some css in admin ([https://github.com/GotCms/GotCms/issues/149](https://github.com/GotCms/GotCms/issues/149))
+- Add button to load content from files when stream wrapper is disabled ([https://github.com/GotCms/GotCms/issues/151](https://github.com/GotCms/GotCms/issues/151))
 
 ##1.0.0 (28 Oct 2013):
 - Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))

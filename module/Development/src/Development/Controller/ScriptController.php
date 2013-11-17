@@ -169,30 +169,30 @@ class ScriptController extends Action
 
             $this->flashMessenger()->addSuccessMessage('Script updated');
             return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptId));
-        } else {
-            if (empty($_FILES['upload'])) {
-                $this->flashMessenger()->addErrorMessage('Can not upload scripts');
-                return $this->redirect()->toRoute('development/script');
-            }
+        }
 
-            foreach ($_FILES['upload']['name'] as $idx => $name) {
-                if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
-                    continue;
-                }
-
-                $identifier = preg_replace('~\.phtml$~', '', $name);
-                $script     = Script\Model::fromIdentifier($identifier);
-                if (empty($script)) {
-                    continue;
-                }
-
-                $script->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
-                $script->save();
-            }
-
-            $this->flashMessenger()->addSuccessMessage('Scripts updated');
+        if (empty($_FILES['upload'])) {
+            $this->flashMessenger()->addErrorMessage('Can not upload scripts');
             return $this->redirect()->toRoute('development/script');
         }
+
+        foreach ($_FILES['upload']['name'] as $idx => $name) {
+            if ($_FILES['upload']['error'][$idx] != UPLOAD_ERR_OK) {
+                continue;
+            }
+
+            $identifier = preg_replace('~\.phtml$~', '', $name);
+            $script     = Script\Model::fromIdentifier($identifier);
+            if (empty($script)) {
+                continue;
+            }
+
+            $script->setContent(file_get_contents($_FILES['upload']['tmp_name'][$idx]));
+            $script->save();
+        }
+
+        $this->flashMessenger()->addSuccessMessage('Scripts updated');
+        return $this->redirect()->toRoute('development/script');
     }
 
     /**
@@ -250,5 +250,38 @@ class ScriptController extends Action
         $response->setContent($content);
 
         return $response;
+    }
+
+    /**
+     * Update database from files
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function updateAction()
+    {
+        $scriptId = $this->getRouteMatch()->getParam('id', null);
+        if (!empty($scriptId)) {
+            $script = Script\Model::fromId($scriptId);
+            if (empty($script)) {
+                $this->flashMessenger()->addErrorMessage('This script can not be update');
+                return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptId));
+            }
+
+            $script->setContent($script->getFileContents());
+            $script->save();
+            $this->flashMessenger()->addSuccessMessage('Script updated');
+            return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptId));
+        } else {
+            $scripts  = new Script\Collection();
+            $children = $scripts->getScripts();
+
+            foreach ($children as $child) {
+                $child->setContent($child->getFileContents());
+                $child->save();
+            }
+        }
+
+        $this->flashMessenger()->addSuccessMessage('Scripts updated');
+        return $this->redirect()->toRoute('development/script');
     }
 }
