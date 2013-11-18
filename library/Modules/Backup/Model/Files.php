@@ -53,6 +53,9 @@ class Files extends Object
             array(
                 GC_PUBLIC_PATH . '/frontend',
                 GC_MEDIA_PATH,
+                GC_TEMPLATE_PATH . '/layout',
+                GC_TEMPLATE_PATH . '/view',
+                GC_TEMPLATE_PATH . '/script',
             ),
             $tmpFile
         );
