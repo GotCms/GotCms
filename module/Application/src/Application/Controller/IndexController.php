@@ -28,9 +28,7 @@
 namespace Application\Controller;
 
 use Gc\Mvc\Controller\Action;
-use Gc\Component;
 use Gc\Document;
-use Gc\DocumentType;
 use Gc\Layout;
 use Gc\Property;
 use Gc\User\Visitor;
@@ -185,27 +183,20 @@ class IndexController extends Action
                     $viewModel->setTerminal(true);
                 }
             } else {
-                //Get all tabs of document
-                $tabs = $this->loadTabs($document->getDocumentTypeId());
-                //get Tabs and Properties to construct property in view
-                foreach ($tabs as $tab) {
-                    $tabsArray[] = $tab->getName();
-                    $properties  = $this->loadProperties(
-                        $document->getDocumentTypeId(),
-                        $tab->getId(),
-                        $document->getId()
-                    );
-                    foreach ($properties as $property) {
-                        $value = $property->getValue();
+                //Load properties from document id
+                $properties = new Property\Collection();
+                $properties->load(null, null, $document->getId());
 
-                        if ($this->isSerialized($value)) {
-                            $value = unserialize($value);
-                        }
+                foreach ($properties->getProperties() as $property) {
+                    $value = $property->getValue();
 
-                        $viewModel->setVariable($property->getIdentifier(), $value);
-                        $this->layout()->setVariable($property->getIdentifier(), $value);
-                        $variables[$property->getIdentifier()] = $value;
+                    if ($this->isSerialized($value)) {
+                        $value = unserialize($value);
                     }
+
+                    $viewModel->setVariable($property->getIdentifier(), $value);
+                    $this->layout()->setVariable($property->getIdentifier(), $value);
+                    $variables[$property->getIdentifier()] = $value;
                 }
 
                 $variables['currentDocument'] = $document;
@@ -252,37 +243,6 @@ class IndexController extends Action
         $this->events()->trigger('Front', 'postDispatch', null, array('object' => $this, 'viewModel' => $viewModel));
 
         return $viewModel;
-    }
-
-    /**
-     * Load tabs
-     *
-     * @param integer $documentTypeId Document type id
-     *
-     * @return Gc\Component\Tab\Collection
-     */
-    protected function loadTabs($documentTypeId)
-    {
-        $documentType = DocumentType\Model::fromId($documentTypeId);
-        return $documentType->getTabs();
-    }
-
-
-    /**
-     * Load properties
-     *
-     * @param integer $documentTypeId Document type id
-     * @param integer $tabId          Tab id
-     * @param integer $documentId     Document id
-     *
-     * @return \Gc\Component\Property\Collection
-     */
-    protected function loadProperties($documentTypeId, $tabId, $documentId)
-    {
-        $properties = new Property\Collection();
-        $properties->load($documentTypeId, $tabId, $documentId);
-
-        return $properties->getProperties();
     }
 
     /**
