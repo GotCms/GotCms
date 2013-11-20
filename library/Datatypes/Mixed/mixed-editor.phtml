@@ -136,12 +136,29 @@
             return false;
         });
 
+        var ckeConfigs<?php echo $this->escapeHtml($this->propertyName); ?> = [];
         $('#elements-<?php echo $this->escapeHtml($this->propertyName); ?>').sortable({
             placeholder: "ui-state-highlight",
             start: function(event, ui) {
                 $originalPosition = ui.item.index();
                 $(this).find('.ui-state-highlight').height(ui.item.height() - 4);
+                //Check if there're textrich and destroy ckeditor for short time
+                $('textarea[class*="textrich"]', ui.item).each(function(){
+                    var tagId         = $(this).attr('id');
+                    var ckeClone      = $(this).next('.cke').clone().addClass('cloned');
+                    ckeConfigs<?php echo $this->escapeHtml($this->propertyName); ?>[tagId] = CKEDITOR.instances[tagId].config;
+                    CKEDITOR.instances[tagId].destroy();
+                    $(this).hide().after(ckeClone);
+                });
             },
+            stop: function(event, ui) {
+                //Check if there're textrich and restore ckeditor
+                $('textarea[class*="textrich"]', ui.item).each(function(){
+                    var tagId = $(this).attr('id');
+                    CKEDITOR.replace(tagId, ckeConfigs<?php echo $this->escapeHtml($this->propertyName); ?>[tagId]);
+                    $(this).next('.cloned').remove();
+                });
+            }
         });
     </script>
 </div>

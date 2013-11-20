@@ -11,6 +11,7 @@
 - Add button to load content from files when stream wrapper is disabled ([https://github.com/GotCms/GotCms/issues/151](https://github.com/GotCms/GotCms/issues/151))
 - Script phpcs.sh not working ([https://github.com/GotCms/GotCms/issues/152](https://github.com/GotCms/GotCms/issues/152))
 - Save view, script and layout via Backup module ([https://github.com/GotCms/GotCms/issues/153](https://github.com/GotCms/GotCms/issues/153))
+- Textrich datatypes failed on sortable and add with mixed datatype ([https://github.com/GotCms/GotCms/issues/154](https://github.com/GotCms/GotCms/issues/154))
 
 ##1.0.0 (28 Oct 2013):
 - Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))

@@ -141,9 +141,12 @@ abstract class AbstractForm extends Form
         }
 
         if (is_array($elements)) {
-            $randId = mt_rand();
+            if (empty($datatypeId)) {
+                $randId = mt_rand();
+            }
+
             foreach ($elements as $element) {
-                self::addContent($form, $element, $prefix, $randId);
+                self::addContent($form, $element, $prefix, $datatypeId);
             }
         } elseif ($elements instanceof Element) {
             if (!empty($prefix)) {

@@ -193,7 +193,7 @@ class Editor extends AbstractEditor
             $hidden->setValue($datatypeConfig['name']);
             $fieldset->add($hidden);
 
-            AbstractForm::addContent($fieldset, $editor->load(), $prefix);
+            AbstractForm::addContent($fieldset, $editor->load(), $prefix, '#{line}');
             $template[$datatypeId]['label']    = empty($datatypeConfig['label']) ? '' : $datatypeConfig['label'];
             $template[$datatypeId]['fieldset'] = $fieldset;
         }
