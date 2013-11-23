@@ -37,5 +37,6 @@ while [ -n "$1" ] ; do
 done
 
 cd "../tests"
+echo $phpunit_opts ${phpunit_groups:+--group $phpunit_groups} $phpunit_file
 $phpunit $phpunit_opts ${phpunit_groups:+--group $phpunit_groups} $phpunit_file
 

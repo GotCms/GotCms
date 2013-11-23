@@ -72,6 +72,17 @@ return array(
                             ),
                         ),
                     ),
+                    'download-content' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route' => '/download-content',
+                            'defaults' => array(
+                                'module'     =>'Backup',
+                                'controller' => 'BackupController',
+                                'action'     => 'download-content',
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),

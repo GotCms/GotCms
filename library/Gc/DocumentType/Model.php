@@ -125,14 +125,14 @@ class Model extends AbstractTable
      */
     public function getAvailableViews()
     {
-        if ($this->getData('availableviews') === null) {
+        if ($this->getData('available_views') === null) {
             $viewsCollection = new View\Collection();
             $viewsCollection->init($this->getId());
 
-            $this->setData('availableviews', $viewsCollection);
+            $this->setData('available_views', $viewsCollection);
         }
 
-        return $this->getData('availableviews');
+        return $this->getData('available_views');
     }
 
     /**

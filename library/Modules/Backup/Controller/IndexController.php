@@ -43,7 +43,7 @@ use Zend\Http\Headers;
 class IndexController extends AbstractController
 {
     /**
-     * Index action, list all documents with comments
+     * Index action
      *
      * @return array
      */
@@ -70,7 +70,7 @@ class IndexController extends AbstractController
         }
 
         $content  = $model->export($this->params()->fromPost('what'));
-        $filename = 'database-backup-' . date('Y-m-d') . '.sql.gz';
+        $filename = 'database-backup-' . date('Y-m-d-H-i-s') . '.sql.gz';
 
         $headers = new Headers();
         $headers->addHeaderLine('Pragma', 'public')
@@ -98,7 +98,40 @@ class IndexController extends AbstractController
     {
         $model    = new Model\Files();
         $content  = $model->export();
-        $filename = 'frontend-backup-' . date('Y-m-d') . '.zip';
+        $filename = 'files-backup-' . date('Y-m-d-H-i-s') . '.zip';
+
+        $headers = new Headers();
+        $headers->addHeaderLine('Pragma', 'public')
+            ->addHeaderLine('Cache-control', 'must-revalidate, post-check=0, pre-check=0')
+            ->addHeaderLine('Cache-control', 'private')
+            ->addHeaderLine('Expires', -1)
+            ->addHeaderLine('Content-Type', 'application/download')
+            ->addHeaderLine('Content-Transfer-Encoding', 'binary')
+            ->addHeaderLine('Content-Length', strlen($content))
+            ->addHeaderLine('Content-Disposition', 'attachment; filename=' . $filename);
+
+        $response = $this->getResponse();
+        $response->setHeaders($headers);
+        $response->setContent($content);
+
+        return $response;
+    }
+
+    /**
+     * Download files as gzip
+     *
+     * @return array
+     */
+    public function downloadContentAction()
+    {
+        $what = $this->getRequest()->getPost()->get('what');
+        if (empty($what) or !is_array($what)) {
+            return $this->redirect()->toRoute('module/backup');
+        }
+
+        $model    = new Model\Content($this->getServiceLocator());
+        $content  = $model->export($what);
+        $filename = 'content-backup-' . date('Y-m-d-H-i-s') . '.xml';
 
         $headers = new Headers();
         $headers->addHeaderLine('Pragma', 'public')

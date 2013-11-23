@@ -31,6 +31,67 @@
 </div>
 
 <section>
+    <h2><?php echo $this->escapeHtml($this->translate('Content')); ?></h2>
+    <form action="<?php echo $this->url('module/backup/download-content'); ?>" method="post">
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="radio">
+                        <label>
+                            <input class="control-form" type="checkbox" checked="checked" value="document" name="what[]">
+                            <?php echo $this->escapeHtml($this->translate('Documents')); ?>
+                        </label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="radio">
+                        <label>
+                            <input class="control-form" type="checkbox" checked="checked" value="document-type" name="what[]">
+                            <?php echo $this->escapeHtml($this->translate('Document types')); ?>
+                        </label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="radio">
+                        <label>
+                            <input class="control-form" type="checkbox" checked="checked" value="datatype" name="what[]">
+                            <?php echo $this->escapeHtml($this->translate('Datatypes')); ?>
+                        </label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="radio">
+                        <label>
+                            <input class="control-form" type="checkbox" checked="checked" value="layout" name="what[]">
+                            <?php echo $this->escapeHtml($this->translate('Layouts')); ?>
+                        </label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="radio">
+                        <label>
+                            <input class="control-form" type="checkbox" checked="checked" value="view" name="what[]">
+                            <?php echo $this->escapeHtml($this->translate('Views')); ?>
+                        </label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="radio">
+                        <label>
+                            <input class="control-form" type="checkbox" checked="checked" value="script" name="what[]">
+                            <?php echo $this->escapeHtml($this->translate('Scripts')); ?>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <input id="input-save" class="btn btn-warning" type="submit" name="submit" value="<?php echo $this->escapeHtml($this->translate('Download')); ?>">
+        </div>
+    </form>
+</section>
+
+<section>
     <h2><?php echo $this->escapeHtml($this->translate('Database')); ?></h2>
     <form action="<?php echo $this->url('module/backup/download-database'); ?>" method="post">
         <div>

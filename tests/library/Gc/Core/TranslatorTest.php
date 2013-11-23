@@ -194,5 +194,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     public function testSetValueWithUndefinedSourceId()
     {
         $this->assertFalse($this->object->setValue(40000000, array()));
+        $this->object->execute('DELETE FROM core_translate');
     }
 }

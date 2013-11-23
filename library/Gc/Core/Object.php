@@ -306,25 +306,44 @@ abstract class Object
             $xml .= '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
         }
 
-        if (!empty($rootName)) {
-            $xml .= '<' . $rootName . '>' . PHP_EOL;
+        if (empty($array)) {
+            $array = $this->toArray();
         }
 
-        $xmlModel  = new SimpleXMLElement('<node></node>');
-        $arraydata = $this->toArray($array);
-
-        foreach ($arraydata as $fieldName => $fieldValue) {
-            if ($addCdata === true) {
-                $fieldValue = '<![CDATA[' . $fieldValue . ']]>';
-            } else {
-                $fieldValue = htmlentities($fieldValue);
+        if (!empty($rootName) and !is_numeric($rootName)) {
+            $xml .= '<' . $rootName;
+            if (isset($array['id'])) {
+                $xml .= ' id="' . $array['id'] . '"';
+                unset($array['id']);
             }
 
-            $xml .= '<' . $fieldName . '>' . $fieldValue . '</' . $fieldName . '>' . PHP_EOL;
+            $xml .= '>' . PHP_EOL;
         }
 
-        if (!empty($rootName)) {
+        foreach ($array as $fieldName => $fieldValue) {
+            if (is_array($fieldValue)) {
+                if (!empty($fieldValue)) {
+                    $xml .= $this->__toXml($fieldValue, $fieldName);
+                    continue;
+                }
+                $fieldValue = '';
+            } elseif (is_object($fieldValue) and method_exists($fieldValue, 'toXml')) {
+                $xml .= $fieldValue->toXml(array(), $fieldValue->name);
+                continue;
+            }
 
+            if ($addCdata === true) {
+                $fieldValue = '<![CDATA[' . $fieldValue . ']]>';
+                $xml       .= '<' . $fieldName . '>' . $fieldValue . '</' . $fieldName . '>' . PHP_EOL;
+
+
+            } else {
+                $fieldValue = htmlentities($fieldValue);
+                $xml       .= '<' . $fieldName . '>' . $fieldValue . '</' . $fieldName . '>' . PHP_EOL;
+            }
+        }
+
+        if (!empty($rootName) and !is_numeric($rootName)) {
             $xml .= '</' . $rootName . '>' . PHP_EOL;
         }
 
@@ -355,9 +374,7 @@ abstract class Object
      */
     protected function __toJson(array $array = array())
     {
-        $arraydata = $this->toArray($array);
-        $json      = Json::encode($arraydata);
-        return $json;
+        return Json::encode($this->toArray($array));
     }
 
     /**
