@@ -23,5 +23,11 @@ then
     standard="../vendor/gotcms/gotsniffs/Got/"
 fi
 
-$phpcs --standard=$standard ../library/
-$phpcs --standard=$standard ../module/
+if [[ $# -gt 0 ]]
+then
+    $phpcs --standard=$standard $*
+else
+    $phpcs --standard=$standard ../library/
+    $phpcs --standard=$standard ../module/
+fi
+
