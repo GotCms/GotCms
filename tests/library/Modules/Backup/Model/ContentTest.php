@@ -216,7 +216,8 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         $xpath = $dom->xpath('/gotcms/document_types/document_type[@id="' . $this->documentType->getId() . '"]/tabs/tab[@id="' . $this->tabModel->getId() . '"]/properties/property[@id="' . $this->property->getId() . '"]/description');
         $this->assertEquals($this->property->getDescription(), (string) $xpath[0]);
         $xpath = $dom->xpath('/gotcms/document_types/document_type[@id="' . $this->documentType->getId() . '"]/tabs/tab[@id="' . $this->tabModel->getId() . '"]/properties/property[@id="' . $this->property->getId() . '"]/required');
-        $this->assertEquals($this->property->getRequired(), (string) $xpath[0]);
+        $this->assertEquals((integer) $this->property->getRequired(), (integer) $xpath[0]);
+        $this->assertEquals((integer) $this->property->getRequired(), (integer) $xpath[0]);
         $xpath = $dom->xpath('/gotcms/document_types/document_type[@id="' . $this->documentType->getId() . '"]/tabs/tab[@id="' . $this->tabModel->getId() . '"]/properties/property[@id="' . $this->property->getId() . '"]/datatype_id');
         $this->assertEquals($this->datatype->getId(), (string) $xpath[0]);
         $xpath = $dom->xpath('/gotcms/document_types/document_type[@id="' . $this->documentType->getId() . '"]/dependencies/id[text()="' . $this->documentType->getId() . '"]');
@@ -412,6 +413,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 
     protected function removeUser()
     {
+        Registry::get('Application')->getServiceManager()->get('Auth')->clearIdentity();
         $this->user->delete();
         unset($this->user);
     }

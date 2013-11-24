@@ -142,7 +142,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
             array(
                 'infos' => array(
                     'icon_id' => 3,
-                    'name' => 'test'
+                    'name' => 'test development'
                 ),
                 'views' => array(
                     'default_view' => $viewModel->getId()
@@ -175,6 +175,7 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
                 ),
             )
         );
+
         $this->assertResponseStatusCode(302);
 
         $this->assertModuleName('Development');
