@@ -327,6 +327,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         $property = $document->getProperty('azd');
         $this->assertInstanceof('Gc\Property\Model', $property);
         $this->assertEquals('string', $property->getValue());
+        $document->delete();
 
         //Delete data
         $properties[0]->delete();

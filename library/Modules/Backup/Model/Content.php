@@ -416,7 +416,7 @@ class Content extends Object
                                     $valueModel->load(
                                         null,
                                         isset($ids['documents'][$documentId]) ? $ids['documents'][$documentId] : $documentId,
-                                        isset($ids['properties'][$propertyId]) ? $ids['documents'][$propertyId] : $propertyId
+                                        isset($ids['properties'][$propertyId]) ? $ids['properties'][$propertyId] : $propertyId
                                     );
                                     $valueModel->setValue((string) $value->value);
                                     $valueModel->save();
