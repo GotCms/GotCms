@@ -280,6 +280,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         $this->createUser();
         $this->createContent();
         $data = $this->object->export($this->what);
+
         $this->removeContent();
 
         $this->assertTrue($this->object->import($data));
@@ -318,15 +319,18 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $tabs);
         $properties = $tabs[0]->getProperties();
         $this->assertCount(1, $properties);
-        $properties[0]->delete();
-        $tabs[0]->delete();
 
 
         //Test document
         $document = DocumentModel::fromUrlKey('');
         $this->assertInstanceOf('Gc\Document\Model', $document);
+        $property = $document->getProperty('azd');
+        $this->assertInstanceof('Gc\Property\Model', $property);
+        $this->assertEquals('string', $property->getValue());
 
         //Delete data
+        $properties[0]->delete();
+        $tabs[0]->delete();
         $datatype->delete();
         $view->delete();
         $script->delete();

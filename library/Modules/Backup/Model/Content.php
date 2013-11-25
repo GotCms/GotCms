@@ -33,7 +33,6 @@ use Gc\Document;
 use Gc\Datatype;
 use Gc\DocumentType;
 use Gc\Layout;
-use Gc\Property\Collection as PropertyCollection;
 use Gc\Script;
 use Gc\Tab;
 use Gc\Property;
@@ -151,7 +150,7 @@ class Content extends Object
                 $xml .= $documentTypesCollection->toXml($documentTypesCollection->getDocumentTypes(), 'document_types');
                 break;
             case 'document':
-                $propertiyCollection = new PropertyCollection();
+                $propertiyCollection = new Property\Collection();
                 $documents           = new Document\Collection();
                 $documents->load(0);
                 foreach ($documents->getDocuments() as $document) {
@@ -226,6 +225,7 @@ class Content extends Object
             'scripts'        => array(),
             'document_types' => array(),
             'documents'      => array(),
+            'properties'     => array(),
         );
 
         foreach ($orders as $children) {
@@ -321,7 +321,7 @@ class Content extends Object
                                             array(
                                                 'name'        => (string) $property->name,
                                                 'description' => (string) $property->description,
-                                                'identifier'  => (integer) $property->identifier,
+                                                'identifier'  => (string) $property->identifier,
                                                 'sort_order'  => (integer) $property->sort_order,
                                                 'tab_id'      => $tabModel->getId(),
                                                 'datatype_id' => $datatypeId,
@@ -329,6 +329,9 @@ class Content extends Object
                                         );
 
                                         $propertyModel->save();
+                                        $propertyAttributes = $property->attributes();
+
+                                        $ids['properties'][(integer) $propertyAttributes['id']] = $propertyModel->getId();
                                     }
                                 }
 
@@ -404,6 +407,20 @@ class Content extends Object
                             if (!empty($model)) {
                                 $model->save();
                                 $ids['documents'][$id] = $model->getId();
+
+                                $values = (array) $child->properties;
+                                foreach ($values as $value) {
+                                    $documentId = (integer) $value->document_id;
+                                    $propertyId = (integer) $value->property_id;
+                                    $valueModel = new Property\Value\Model();
+                                    $valueModel->load(
+                                        null,
+                                        isset($ids['documents'][$documentId]) ? $ids['documents'][$documentId] : $documentId,
+                                        isset($ids['properties'][$propertyId]) ? $ids['documents'][$propertyId] : $propertyId
+                                    );
+                                    $valueModel->setValue((string) $value->value);
+                                    $valueModel->save();
+                                }
                             }
                         } catch (Exception $e) {
                             $errors[] = sprintf(
