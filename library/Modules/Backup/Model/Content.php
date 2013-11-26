@@ -214,7 +214,11 @@ class Content extends Object
     public function import($content)
     {
         try {
-            $xml = new SimpleXMLElement($content);
+            $xml = simplexml_load_string ($content, 'SimpleXmlElement', LIBXML_NOERROR+LIBXML_ERR_FATAL+LIBXML_ERR_NONE);
+            if (false == $xml) {
+                throw new Exception('Can\'t parse Xml');
+            }
+
         } catch (Exception $e) {
             return false;
         }

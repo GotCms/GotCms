@@ -287,7 +287,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 
     public function testImportScript()
     {
-        $this->assertTrue($this->object->import('<xml></xml>'));
+        $this->assertFalse($this->object->import('<xml></xml>'));
         $this->assertFalse($this->object->import(''));
         $this->assertFalse($this->object->import('<a></b>'));
         $this->createUser();

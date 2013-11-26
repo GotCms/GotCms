@@ -174,6 +174,10 @@ class IndexController extends AbstractController
         $resource  = $dbAdapter->getDriver()->getConnection()->getResource();
 
         $result = $model->import(file_get_contents($file['tmp_name']));
+        if ($result === false) {
+            $this->flashMessenger()->addSuccessMessage('File is not an xml');
+            return $this->redirect()->toRoute('module/backup');
+        }
 
         if (is_array($result)) {
             foreach ($result as $message) {
