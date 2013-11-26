@@ -143,6 +143,19 @@ class ContentTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
+    public function testExportwithEmptyContent()
+    {
+        $this->assertEquals(
+            '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL . '<gotcms></gotcms>',
+            $this->object->export($this->what)
+        );
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
     public function testExportWithUndefinedWhatShouldReturnEmptyString()
     {
         $this->assertEquals(
@@ -358,7 +371,24 @@ class ContentTest extends \PHPUnit_Framework_TestCase
                     <default_view_id><![CDATA[' . $this->view->getId() . ']]></default_view_id>
                     <dependencies>
                         <id>531351</id>
+                        <id>0</id>
                     </dependencies>
+                    <available_views>
+                        <id>531351</id>
+                        <id>0</id>
+                    </available_views>
+                    <tabs>
+                        <tab id="test"></tab>
+                        <tab id="10">
+                            <name>test</name>
+                            <description>test</description>
+                            <sort_order>test</sort_order>
+                            <properties>
+                                <property id="test"></property>
+                                <property id="10"></property>
+                            </properties>
+                        </tab>
+                    </tabs>
                 </document_type>
             </document_types>
             <views>
@@ -379,6 +409,10 @@ class ContentTest extends \PHPUnit_Framework_TestCase
             </datatypes>
             <documents>
                 <document id="test">
+                    <properties>
+                        <property_value id="10"></property_value>
+                        <property_value id="10"></property_value>
+                    </properties>
                 </document>
             </documents>
             <fake>

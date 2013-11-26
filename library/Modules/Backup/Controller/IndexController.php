@@ -32,6 +32,7 @@ use Gc\Document\Model as DocumentModel;
 use Gc\Registry;
 use Backup\Model;
 use Zend\Http\Headers;
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 
 /**
  * IndexController
@@ -59,6 +60,11 @@ class IndexController extends AbstractController
      */
     public function downloadDatabaseAction()
     {
+        $what = $this->params()->fromPost('what');
+        if (empty($what)) {
+            return $this->redirect()->toRoute('module/backup');
+        }
+
         $configuration = $this->getServiceLocator()->get('Config');
         switch($configuration['db']['driver']) {
             case 'pdo_pgsql':
@@ -69,7 +75,7 @@ class IndexController extends AbstractController
                 break;
         }
 
-        $content  = $model->export($this->params()->fromPost('what'));
+        $content  = $model->export($what);
         $filename = 'database-backup-' . date('Y-m-d-H-i-s') . '.sql.gz';
 
         $headers = new Headers();
@@ -124,7 +130,7 @@ class IndexController extends AbstractController
      */
     public function downloadContentAction()
     {
-        $what = $this->getRequest()->getPost()->get('what');
+        $what = $this->params()->fromPost('what');
         if (empty($what) or !is_array($what)) {
             return $this->redirect()->toRoute('module/backup');
         }
@@ -148,5 +154,34 @@ class IndexController extends AbstractController
         $response->setContent($content);
 
         return $response;
+    }
+
+    /**
+     * Download files as gzip
+     *
+     * @return array
+     */
+    public function uploadContentAction()
+    {
+        $file = $this->params()->fromFiles('upload');
+
+        if (empty($file) or !isset($file['error']) or $file['error'] != UPLOAD_ERR_OK) {
+            return $this->redirect()->toRoute('module/backup');
+        }
+
+        $dbAdapter = GlobalAdapterFeature::getStaticAdapter();
+        $model     = new Model\Content($this->getServiceLocator());
+        $resource  = $dbAdapter->getDriver()->getConnection()->getResource();
+
+        $result = $model->import(file_get_contents($file['tmp_name']));
+
+        if (is_array($result)) {
+            foreach ($result as $message) {
+                $this->flashMessenger()->addErrorMessage($message);
+            }
+        }
+
+        $this->flashMessenger()->addSuccessMessage('Content updated!');
+        return $this->redirect()->toRoute('module/backup');
     }
 }

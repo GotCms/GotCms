@@ -106,22 +106,47 @@ class Content extends Object
         switch ($type) {
             case 'datatype':
                 $datatypes = new Datatype\Collection();
-                $xml      .= $datatypes->toXml($datatypes->getDatatypes(), 'datatypes');
+                $array     = $datatypes->getDatatypes();
+                if (empty($array)) {
+                    continue;
+                }
+
+                $xml      .= $datatypes->toXml($array, 'datatypes');
                 break;
             case 'view':
                 $views = new View\Collection();
-                $xml  .= $views->toXml($views->getViews(), 'views');
+                $array = $views->getViews();
+                if (empty($array)) {
+                    continue;
+                }
+
+                $xml  .= $views->toXml($array, 'views');
                 break;
             case 'layout':
                 $layouts = new Layout\Collection();
-                $xml    .= $layouts->toXml($layouts->getLayouts(), 'layouts');
+                $array   = $layouts->getLayouts();
+                if (empty($array)) {
+                    continue;
+                }
+
+                $xml    .= $layouts->toXml($array, 'layouts');
                 break;
             case 'script':
                 $scripts = new Script\Collection();
-                $xml    .= $scripts->toXml($scripts->getScripts(), 'scripts');
+                $array   = $scripts->getScripts();
+                if (empty($array)) {
+                    continue;
+                }
+
+                $xml    .= $scripts->toXml($array, 'scripts');
                 break;
             case 'document-type':
                 $documentTypesCollection = new DocumentType\Collection();
+                $array                   = $documentTypesCollection->getDocumentTypes();
+                if (empty($array)) {
+                    continue;
+                }
+
                 foreach ($documentTypesCollection->getDocumentTypes() as $documentType) {
                     //Preload dependencies
                     $children     = array();
@@ -150,9 +175,14 @@ class Content extends Object
                 $xml .= $documentTypesCollection->toXml($documentTypesCollection->getDocumentTypes(), 'document_types');
                 break;
             case 'document':
-                $propertiyCollection = new Property\Collection();
                 $documents           = new Document\Collection();
                 $documents->load(0);
+                $array = $documents->getDocuments();
+                if (empty($array)) {
+                    continue;
+                }
+
+                $propertiyCollection = new Property\Collection();
                 foreach ($documents->getDocuments() as $document) {
                     $array      = array();
                     $properties = $propertiyCollection->load(
@@ -236,19 +266,20 @@ class Content extends Object
                         $attributes = $child->attributes();
                         $id         = (integer) $attributes['id'];
                         $model      = Datatype\Model::fromId($id);
+
                         if ($model === false) {
                             $model = new Datatype\Model();
                         }
 
                         $name          = (string) $child->name;
                         $datatypeModel = (string) $child->model;
-                        $model->setData(
+                        $model->addData(
                             array(
                                 'name'           => empty($name) ? $model->getName() : $name,
-                                'prevalue_value' => (string) $child->prevalue_value,
                                 'model'          => empty($datatypeModel) ? $model->getModel() : $datatypeModel,
                             )
                         );
+                        $model->setPrevalueValue((string) $child->prevalue_value);
 
                         try {
                             if (!empty($model)) {
@@ -281,7 +312,7 @@ class Content extends Object
                             (integer) $child->default_view_id;
 
                         $name = (string) $child->name;
-                        $model->setData(
+                        $model->addData(
                             array(
                                 'name'            => empty($name) ? $model->getName() : $name,
                                 'description'     => (string) $child->description,
@@ -299,9 +330,19 @@ class Content extends Object
                                 $model->save();
 
                                 $tabs = (array) $child->tabs;
+                                if (isset($tabs['tab']) and is_array($tabs['tab'])) {
+                                    $tabs = $tabs['tab'];
+                                }
+
                                 foreach ($tabs as $tab) {
-                                    $tabModel = new Tab\Model();
-                                    $tabModel->setData(
+                                    $tabAttributes = $tab->attributes();
+                                    $tabId         = (integer) $tabAttributes['id'];
+                                    $tabModel      = Tab\Model::fromId($tabId);
+                                    if (empty($tabModel)) {
+                                        $tabModel = new Tab\Model();
+                                    }
+
+                                    $tabModel->addData(
                                         array(
                                             'name' => (string) $tab->name,
                                             'description' => (string) $tab->description,
@@ -312,12 +353,22 @@ class Content extends Object
 
                                     $tabModel->save();
                                     $properties = (array) $tab->properties;
+                                    if (isset($properties['property']) and is_array($properties['property'])) {
+                                        $properties = $properties['property'];
+                                    }
+
                                     foreach ($properties as $property) {
+                                        $propAttributes = $property->attributes();
+                                        $propertyId     = (integer) $propAttributes['id'];
+                                        $propertyModel   = Property\Model::fromId($propertyId);
+                                        if (empty($propertyModel)) {
+                                            $propertyModel = new Property\Model();
+                                        }
+
                                         $datatypeId    = isset($ids['datatypes'][(integer) $property->datatype_id]) ?
                                             $ids['datatypes'][(integer) $property->datatype_id] :
-                                            '';
-                                        $propertyModel = new Property\Model();
-                                        $propertyModel->setData(
+                                            (string) $property->datatype_id;
+                                        $propertyModel->addData(
                                             array(
                                                 'name'        => (string) $property->name,
                                                 'description' => (string) $property->description,
@@ -382,7 +433,7 @@ class Content extends Object
                         $userId         = (integer) $child->user_id;
                         $sortOrder      = (integer) $child->sort_order;
                         $showInNav      = (integer) $child->show_in_nav;
-                        $model->setData(
+                        $model->addData(
                             array(
                                 'name'             => empty($name) ? $model->getName() : $name,
                                 'url_key'          => $urlKey,
@@ -409,6 +460,10 @@ class Content extends Object
                                 $ids['documents'][$id] = $model->getId();
 
                                 $values = (array) $child->properties;
+                                if (isset($values['property_value']) and is_array($values['property_value'])) {
+                                    $values = $values['property_value'];
+                                }
+
                                 foreach ($values as $value) {
                                     $documentId = (integer) $value->document_id;
                                     $propertyId = (integer) $value->property_id;
@@ -452,7 +507,7 @@ class Content extends Object
 
                         $identifier = (string) $child->identifier;
                         $name       = (string) $child->name;
-                        $model->setData(
+                        $model->addData(
                             array(
                                 'name'        => empty($name) ? null : $name,
                                 'identifier'  => empty($identifier) ? null : $identifier,
@@ -489,10 +544,18 @@ class Content extends Object
                 $availableViews     = $documentType['views'];
                 $dependencies       = $documentType['dependencies'];
                 $dependenciesValues = array();
+                if (isset($dependencies['id']) and is_array($dependencies['id'])) {
+                    $dependencies = $dependencies['id'];
+                }
+
                 foreach ($dependencies as $dependency) {
                     $documentTypeId       = isset($ids['document_types'][(integer) $dependency]) ?
                         $ids['document_types'][(integer) $dependency] :
-                        '';
+                        (integer) $dependency;
+                        if (empty($documentTypeId)) {
+                            continue;
+                        }
+
                     $dependenciesValues[] = $documentTypeId;
                 }
 
@@ -502,6 +565,10 @@ class Content extends Object
                     $viewId = isset($ids['views'][(integer) $view]) ?
                         $ids['views'][(integer) $view] :
                         (integer) $view;
+                    if (empty($viewId)) {
+                        continue;
+                    }
+
                     $model->addView($viewId);
                 }
 
@@ -512,7 +579,7 @@ class Content extends Object
                         $translator->translate(
                             'Cannot save dependencies for document type with id (%d)'
                         ),
-                        $model->getId()
+                        $documentTypeId
                     );
                 }
             }

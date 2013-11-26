@@ -89,12 +89,12 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      *
      * @return void
      */
-    public function testDownloadDatabaseActionWithPgsql()
+    public function testDownloadDatabaseAction()
     {
         $this->dispatch(
             '/admin/module/backup/download-database',
             'POST',
-            array('sortable1' => 'fast-links,blog', 'sortable2' => 'stats')
+            array('what' => 'structureonly')
         );
         $this->assertResponseStatusCode(200);
 
@@ -109,7 +109,27 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
      *
      * @return void
      */
-    public function testDownloadFilesActionWithPgsql()
+    public function testDownloadDatabaseWithEmptyWhatShouldRedirect()
+    {
+        $this->dispatch(
+            '/admin/module/backup/download-database',
+            'POST',
+            array('what' => '')
+        );
+        $this->assertResponseStatusCode(302);
+
+        $this->assertModuleName('Backup');
+        $this->assertControllerName('BackupController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('module/backup/download-database');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testDownloadFilesAction()
     {
         $this->dispatch('/admin/module/backup/download-files');
         $this->assertResponseStatusCode(200);
@@ -118,5 +138,88 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerName('BackupController');
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('module/backup/download-files');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testDownloadContentAction()
+    {
+        $this->dispatch(
+            '/admin/module/backup/download-content',
+            'POST',
+            array('what' => array('documents'))
+        );
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Backup');
+        $this->assertControllerName('BackupController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('module/backup/download-content');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testDownloadContentActionWithEmptyWhatShouldRedirect()
+    {
+        $this->dispatch(
+            '/admin/module/backup/download-content',
+            'POST',
+            array('what' => array())
+        );
+        $this->assertResponseStatusCode(302);
+
+        $this->assertModuleName('Backup');
+        $this->assertControllerName('BackupController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('module/backup/download-content');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testUploadWithXml()
+    {
+        $_FILES = array(
+            'upload' => array(
+                'name' =>  'test.xml',
+                'type' => 'text/xml',
+                'size' => 8,
+                'tmp_name' => __DIR__ . '/_files/test.xml',
+                'error' => UPLOAD_ERR_OK,
+            )
+        );
+
+        $this->dispatch('/admin/module/backup/upload-content');
+        $this->assertResponseStatusCode(302);
+
+        $this->assertModuleName('Backup');
+        $this->assertControllerName('BackupController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('module/backup/upload-content');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testUploadActionWithEmptyFilesData()
+    {
+        $_FILES = array('upload' => array());
+        $this->dispatch('/admin/module/backup/upload-content');
+        $this->assertResponseStatusCode(302);
+
+        $this->assertModuleName('Backup');
+        $this->assertControllerName('BackupController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('module/backup/upload-content');
     }
 }

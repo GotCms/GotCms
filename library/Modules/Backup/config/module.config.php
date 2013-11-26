@@ -83,6 +83,17 @@ return array(
                             ),
                         ),
                     ),
+                    'upload-content' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route' => '/upload-content',
+                            'defaults' => array(
+                                'module'     =>'Backup',
+                                'controller' => 'BackupController',
+                                'action'     => 'upload-content',
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),
