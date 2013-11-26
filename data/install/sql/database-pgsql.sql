@@ -82,6 +82,7 @@ CREATE TABLE "layout" (
 "description" character varying
 ) WITH OIDS;
 ALTER TABLE "layout" ADD CONSTRAINT "layout_pk" PRIMARY KEY("id");
+CREATE UNIQUE INDEX "layout_identifier" ON "layout" USING btree ("identifier");
 
 DROP TABLE IF EXISTS "property" CASCADE;
 CREATE TABLE "property" (
@@ -182,6 +183,7 @@ CREATE TABLE "view" (
 "description" character varying
 ) WITH OIDS;
 ALTER TABLE "view" ADD CONSTRAINT "view_pk" PRIMARY KEY("id");
+CREATE UNIQUE INDEX "view_identifier" ON "view" USING btree ("identifier");
 
 DROP TABLE IF EXISTS "script" CASCADE;
 CREATE TABLE "script" (
@@ -194,6 +196,7 @@ CREATE TABLE "script" (
 "description" character varying
 ) WITH OIDS;
 ALTER TABLE "script" ADD CONSTRAINT "script_pk" PRIMARY KEY("id");
+CREATE UNIQUE INDEX "script_identifier" ON "view" USING btree ("identifier");
 
 DROP TABLE IF EXISTS "user_acl_permission" CASCADE;
 CREATE TABLE "user_acl_permission" (
@@ -307,5 +310,6 @@ ALTER TABLE "property_value" ADD CONSTRAINT "fk_property_value_property" FOREIGN
 ALTER TABLE "log_url" ADD CONSTRAINT "fk_log_url_log_visitor" FOREIGN KEY ("log_visitor_id") REFERENCES "log_visitor"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE "log_url" ADD CONSTRAINT "fk_log_url_log_url_info" FOREIGN KEY ("log_url_info_id") REFERENCES "log_url_info"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+
 -- End Relation's declaration
 
