@@ -111,7 +111,7 @@ class Content extends Object
                     continue;
                 }
 
-                $xml      .= $datatypes->toXml($array, 'datatypes');
+                $xml .= $datatypes->toXml($array, 'datatypes');
                 break;
             case 'view':
                 $views = new View\Collection();
@@ -120,7 +120,7 @@ class Content extends Object
                     continue;
                 }
 
-                $xml  .= $views->toXml($array, 'views');
+                $xml .= $views->toXml($array, 'views');
                 break;
             case 'layout':
                 $layouts = new Layout\Collection();
@@ -129,7 +129,7 @@ class Content extends Object
                     continue;
                 }
 
-                $xml    .= $layouts->toXml($array, 'layouts');
+                $xml .= $layouts->toXml($array, 'layouts');
                 break;
             case 'script':
                 $scripts = new Script\Collection();
@@ -138,7 +138,7 @@ class Content extends Object
                     continue;
                 }
 
-                $xml    .= $scripts->toXml($array, 'scripts');
+                $xml .= $scripts->toXml($array, 'scripts');
                 break;
             case 'document-type':
                 $documentTypesCollection = new DocumentType\Collection();
@@ -175,7 +175,7 @@ class Content extends Object
                 $xml .= $documentTypesCollection->toXml($documentTypesCollection->getDocumentTypes(), 'document_types');
                 break;
             case 'document':
-                $documents           = new Document\Collection();
+                $documents = new Document\Collection();
                 $documents->load(0);
                 $array = $documents->getDocuments();
                 if (empty($array)) {
@@ -214,7 +214,11 @@ class Content extends Object
     public function import($content)
     {
         try {
-            $xml = simplexml_load_string ($content, 'SimpleXmlElement', LIBXML_NOERROR+LIBXML_ERR_FATAL+LIBXML_ERR_NONE);
+            $xml = simplexml_load_string(
+                $content,
+                'SimpleXmlElement',
+                LIBXML_NOERROR + LIBXML_ERR_FATAL + LIBXML_ERR_NONE
+            );
             if (false == $xml) {
                 throw new Exception('Can\'t parse Xml');
             }
@@ -364,12 +368,12 @@ class Content extends Object
                                     foreach ($properties as $property) {
                                         $propAttributes = $property->attributes();
                                         $propertyId     = (integer) $propAttributes['id'];
-                                        $propertyModel   = Property\Model::fromId($propertyId);
+                                        $propertyModel  = Property\Model::fromId($propertyId);
                                         if (empty($propertyModel)) {
                                             $propertyModel = new Property\Model();
                                         }
 
-                                        $datatypeId    = isset($ids['datatypes'][(integer) $property->datatype_id]) ?
+                                        $datatypeId = isset($ids['datatypes'][(integer) $property->datatype_id]) ?
                                             $ids['datatypes'][(integer) $property->datatype_id] :
                                             (string) $property->datatype_id;
                                         $propertyModel->addData(
@@ -384,9 +388,7 @@ class Content extends Object
                                         );
 
                                         $propertyModel->save();
-                                        $propertyAttributes = $property->attributes();
-
-                                        $ids['properties'][(integer) $propertyAttributes['id']] = $propertyModel->getId();
+                                        $ids['properties'][$propertyId] = $propertyModel->getId();
                                     }
                                 }
 
@@ -474,8 +476,10 @@ class Content extends Object
                                     $valueModel = new Property\Value\Model();
                                     $valueModel->load(
                                         null,
-                                        isset($ids['documents'][$documentId]) ? $ids['documents'][$documentId] : $documentId,
-                                        isset($ids['properties'][$propertyId]) ? $ids['properties'][$propertyId] : $propertyId
+                                        isset($ids['documents'][$documentId]) ?
+                                        $ids['documents'][$documentId] : $documentId,
+                                        isset($ids['properties'][$propertyId]) ?
+                                        $ids['properties'][$propertyId] : $propertyId
                                     );
                                     $valueModel->setValue((string) $value->value);
                                     $valueModel->save();
@@ -553,12 +557,12 @@ class Content extends Object
                 }
 
                 foreach ($dependencies as $dependency) {
-                    $documentTypeId       = isset($ids['document_types'][(integer) $dependency]) ?
+                    $documentTypeId = isset($ids['document_types'][(integer) $dependency]) ?
                         $ids['document_types'][(integer) $dependency] :
                         (integer) $dependency;
-                        if (empty($documentTypeId)) {
-                            continue;
-                        }
+                    if (empty($documentTypeId)) {
+                        continue;
+                    }
 
                     $dependenciesValues[] = $documentTypeId;
                 }
