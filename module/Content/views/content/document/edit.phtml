@@ -42,7 +42,9 @@
                 <?php foreach ($elements as $element): ?>
                     <div class="form-group">
                         <?php if ($element->getName() == 'more_information'): ?>
-                            <label class="control-label col-lg-2"><?php echo $this->escapeHtml($this->translate('Preview')); ?></label>
+                            <div class="col-lg-2">
+                                <label class="control-label"><?php echo $this->escapeHtml($this->translate('Preview')); ?></label>
+                            </div>
 
                             <div class="col-lg-10">
                                 <a class="btn btn-link" target="_blank" href="<?php echo $this->escapeHtml($this->document->getUrl()); ?>?preview=true"><?php echo $this->escapeHtml($this->document->getUrl()); ?></a>

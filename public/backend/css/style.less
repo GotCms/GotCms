@@ -192,15 +192,16 @@ header .brand:hover, .navbar .brand:focus{
 
 .main-container.container{
     max-width:100%;
+    width:auto;
     background-color:@white;
-    padding:10px 0;
+    padding:0;
     > .col-lg-12 {
-        padding:0;
+        padding-left:260px;
     }
 }
 
 .main-content{
-    margin-left:260px;
+    margin-left:0;
     margin-right:0;
     margin-top:0;
     min-height:100%;
@@ -451,7 +452,8 @@ header .brand:hover, .navbar .brand:focus{
         }
         > [class*="glyphicon-"]{
             left:auto;
-            right:3px;
+            right:9px;
+            top:3px;
         }
     }
 }
@@ -1068,7 +1070,7 @@ header .brand:hover, .navbar .brand:focus{
  * Media Queries
  */
 @media only screen and (max-width:1200px){
-    .main-content{margin-left:0 !important;}
+    .main-content{margin-top:10px;padding-left:0 !important;;}
     .show{display:block !important;}
 }
 
