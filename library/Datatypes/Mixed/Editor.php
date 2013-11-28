@@ -204,6 +204,7 @@ class Editor extends AbstractEditor
             'mixed-editor.phtml',
             array(
                 'datatypeName' => $this->getProperty()->getName(),
+                'datatypeDescription' => $this->getProperty()->getDescription(),
                 'datatypes' => $datatypesElements,
                 'propertyName' => $this->getName(),
                 'templateElements' => $template,

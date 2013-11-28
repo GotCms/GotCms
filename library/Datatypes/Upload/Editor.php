@@ -115,6 +115,7 @@ class Editor extends AbstractEditor
         $value      = $this->getValue();
         $upload->setAttribute('label', $property->getName());
         $upload->setAttribute('class', 'form-control');
+        $upload->setAttribute('description', $property->getDescription());
         if (!empty($parameters['is_multiple'])) {
             $upload->setAttribute('multiple', 'multiple');
             $upload->setName($upload->getName() . '[]');

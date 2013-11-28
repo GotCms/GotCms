@@ -56,7 +56,15 @@
                                     <?php $label = $element->getAttribute('label'); ?>
                                     <?php if (!empty($label)): ?>
                                         <?php $id = $element->getAttribute('id'); ?>
-                                        <label class="required control-label col-lg-2"<?php if (!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+                                        <div class="col-lg-2">
+                                            <label class="required control-label"<?php if (!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>>
+                                                <?php echo $this->escapeHtml($this->translate($label)); ?>
+                                            </label>
+                                            <?php $description = $element->getAttribute('description'); ?>
+                                            <?php if (!empty($description)): ?>
+                                                <p class="help-block"><?php echo $this->escapeHtml($description); ?></p>
+                                            <?php endif; ?>
+                                        </div>
                                     <?php endif; ?>
                                 <?php endif; ?>
 

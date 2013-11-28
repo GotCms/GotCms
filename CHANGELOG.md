@@ -13,6 +13,7 @@
 - Save view, script and layout via Backup module ([https://github.com/GotCms/GotCms/issues/153](https://github.com/GotCms/GotCms/issues/153))
 - Textrich datatypes failed on sortable and add with mixed datatype ([https://github.com/GotCms/GotCms/issues/154](https://github.com/GotCms/GotCms/issues/154))
 - Export / import documents, documents types, datatypes, views, layout and scripts ([https://github.com/GotCms/GotCms/issues/146](https://github.com/GotCms/GotCms/issues/146))
+- Display property description with datatypes ([https://github.com/GotCms/GotCms/issues/156](https://github.com/GotCms/GotCms/issues/156))
 
 ##1.0.0 (28 Oct 2013):
 - Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))

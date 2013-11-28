@@ -67,6 +67,7 @@ class Editor extends AbstractEditor
         $id         = 'datepicker' . $this->property->getId();
         $datepicker = new Element\Text($this->getName());
         $datepicker->setAttribute('label', $this->getProperty()->getName())
+            ->setAttribute('description', $this->getProperty()->getDescription())
             ->setValue($this->getValue())
             ->setAttribute('id', $id);
 

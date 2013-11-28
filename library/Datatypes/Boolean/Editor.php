@@ -61,6 +61,7 @@ class Editor extends AbstractEditor
         $boolean->setAttribute('label', $this->getProperty()->getName());
         $boolean->setAttribute('class', 'input-checkbox');
         $boolean->setAttribute('id', 'boolean' . $this->getProperty()->getId());
+        $boolean->setAttribute('description', $this->getProperty()->getDescription());
         $boolean->setValue($this->getProperty()->getValue());
 
         return $boolean;

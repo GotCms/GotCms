@@ -61,6 +61,7 @@ class Editor extends AbstractEditor
         $property   = $this->getProperty();
         $textstring = new Element\Text($this->getName());
         $textstring->setAttribute('class', 'form-control');
+        $textstring->setAttribute('description', $property->getDescription());
         $textstring->setAttribute('label', $property->getName());
         $textstring->setValue($this->getValue());
         if (!empty($parameters['length'])) {
