@@ -78,7 +78,7 @@
         <div id="sidebar" class="sidebar sidebar-fixed col-lg-2">
             <?php echo $this->partial('application/install/steps.phtml', array('currentRoute' => $this->currentRoute)); ?>
         </div>
-        <div class="col-lg-10 main-content">
+        <div class="col-lg-12 main-content">
             <?php echo $this->partial('messages.phtml', array('messages' => $this->flashMessages)); ?>
             <?php if (empty($this->currentRoute)): ?>
                 <div class="page-content">

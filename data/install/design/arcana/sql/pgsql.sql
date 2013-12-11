@@ -12,7 +12,7 @@ SET search_path = public, pg_catalog;
 
 
 --
--- Data for Name: view; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: view; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO view VALUES (6, '2012-10-25 19:57:05', '2013-05-26 13:26:11.897632', 'Flash messages', 'flash-messages', '<?php if(!empty($this->layout()->flashMessages)): ?>
@@ -369,7 +369,7 @@ INSERT INTO view VALUES (1, '2012-09-19 19:29:04', '2013-05-26 13:26:11.939612',
 
 
 --
--- Data for Name: document_type; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: document_type; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO document_type VALUES (2, '2012-09-20 22:05:53', '2012-10-08 20:44:24', 'Contact', 'Contact form', 11, 3, 1);
@@ -381,7 +381,7 @@ INSERT INTO document_type VALUES (1, '2012-09-20 22:01:55', '2013-05-26 13:29:33
 
 
 --
--- Data for Name: layout; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: layout; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-05-24 08:24:49.350913', 'Main', 'main', '<!DOCTYPE html>
@@ -431,7 +431,7 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-05-24 08:24:49.350913
 ', 'Main layout');
 
 --
--- Data for Name: document; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: document; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO document VALUES (2, '2012-09-20 22:09:06', '2013-05-25 13:58:10.956633', 'About', 'about', 1, 2, true, 1, 3, 4, 1, NULL);
@@ -444,7 +444,7 @@ INSERT INTO document VALUES (7, '2013-05-25 14:00:54.412118', '2013-05-26 13:32:
 INSERT INTO document VALUES (8, '2013-05-25 14:01:26.09229', '2013-05-26 13:32:27.671487', 'Article 2', 'article-about-something', 1, 0, false, 1, 4, 11, 1, 6);
 
 --
--- Data for Name: datatype; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: datatype; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO datatype VALUES (1, 'Text field', 'N;', 'Textstring');
@@ -456,119 +456,16 @@ INSERT INTO datatype VALUES (7, 'ImageCropperRelay', 'a:4:{s:10:"background";s:7
 
 
 --
--- Name: datatype_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('datatype_id_seq', 7, true);
-
-
---
--- Name: datatypes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('datatypes_id_seq', 1, false);
-
-
---
--- Name: document_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('document_id_seq', 8, true);
-
-
---
--- Data for Name: document_type_dependency; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: document_type_dependency; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO document_type_dependency VALUES (2, 6, 5);
 INSERT INTO document_type_dependency VALUES (4, 5, 4);
 
 
---
--- Name: document_type_dependency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('document_type_dependency_id_seq', 4, true);
-
 
 --
--- Name: document_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('document_type_id_seq', 6, true);
-
-
---
--- Data for Name: document_type_view; Type: TABLE DATA; Schema: public; Owner: got
---
-
-
-
---
--- Name: document_type_view_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('document_type_view_id_seq', 1, false);
-
-
---
--- Name: document_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('document_types_id_seq', 1, false);
-
-
---
--- Name: documents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('documents_id_seq', 1, false);
-
-
---
--- Name: icon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('icon_id_seq', 24, true);
-
-
---
--- Name: icons_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('icons_id_seq', 1, false);
-
-
---
--- Name: layout_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('layout_id_seq', 1, true);
-
-
---
--- Name: layouts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('layouts_id_seq', 1, false);
-
-
---
--- Name: properties_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('properties_id_seq', 1, false);
-
-
---
--- Name: properties_value_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('properties_value_id_seq', 1, false);
-
-
---
--- Data for Name: tab; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: tab; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO tab VALUES (7, 'Title and meta', 'Meta description', NULL, 2);
@@ -585,7 +482,7 @@ INSERT INTO tab VALUES (5, 'Title and meta', 'Meta description', 3, 1);
 
 
 --
--- Data for Name: property; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: property; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO property VALUES (6, 'Meta description', 'metaDescription', 'Description', false, NULL, 7, 1);
@@ -632,14 +529,7 @@ INSERT INTO property VALUES (19, 'Fourth content', 'blockContent4', 'Fourth bloc
 
 
 --
--- Name: property_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('property_id_seq', 42, true);
-
-
---
--- Data for Name: property_value; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: property_value; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO property_value VALUES (11, 3, 6, '\x436f6e74616374');
@@ -699,14 +589,7 @@ INSERT INTO property_value VALUES (50, 8, 26, '\x3c703e0d0a0953757370656e6469737
 
 
 --
--- Name: property_value_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('property_value_id_seq', 55, true);
-
-
---
--- Data for Name: script; Type: TABLE DATA; Schema: public; Owner: got
+-- Data for Name: script; Type: TABLE DATA; Schema: public
 --
 
 INSERT INTO script VALUES (1, '2012-09-20 22:26:23', '2012-09-20 22:26:23', 'Contact', 'contact', '<?php
@@ -736,42 +619,6 @@ if($request->isPost())
     }
 }
 ', 'Contact ');
-
-
---
--- Name: script_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('script_id_seq', 1, true);
-
-
---
--- Name: tab_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('tab_id_seq', 15, true);
-
-
---
--- Name: tabs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('tabs_id_seq', 1, false);
-
-
---
--- Name: view_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('view_id_seq', 11, true);
-
-
---
--- Name: views_id_seq; Type: SEQUENCE SET; Schema: public; Owner: got
---
-
-SELECT pg_catalog.setval('views_id_seq', 1, false);
-
 
 --
 -- PostgreSQL database dump complete
