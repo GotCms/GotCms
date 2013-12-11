@@ -1,6 +1,6 @@
 # CHANGELOG
 
-##1.0.1 (-- --- 2013)
+##1.1.0 (11 Dec 2013)
 - Update to Zend Framework 2.2.5 ([https://github.com/GotCms/GotCms/issues/141](https://github.com/GotCms/GotCms/issues/141))
 - Add redirect in init method does nothing ([https://github.com/GotCms/GotCms/issues/142](https://github.com/GotCms/GotCms/issues/142))
 - Installation error: config/autoload is empty ([https://github.com/GotCms/GotCms/issues/134](https://github.com/GotCms/GotCms/issues/134))
@@ -16,6 +16,10 @@
 - Display property description with datatypes ([https://github.com/GotCms/GotCms/issues/156](https://github.com/GotCms/GotCms/issues/156))
 - Update bootstrap and lessjs ([https://github.com/GotCms/GotCms/issues/157](https://github.com/GotCms/GotCms/issues/157))
 - Bug with arcana template ([https://github.com/GotCms/GotCms/issues/158](https://github.com/GotCms/GotCms/issues/158))
+
+### Potential Breakage
+With the issue `Installation error: config/autoload is empty`, you must copy `config/autoload/global.php` to `config/autoload/local.php`
+before update.
 
 ##1.0.0 (28 Oct 2013):
 - Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))
