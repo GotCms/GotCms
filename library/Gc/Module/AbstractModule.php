@@ -158,7 +158,7 @@ abstract class AbstractModule
      *
      * @param string $dir Directory
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return \Gc\Module\AbstractModule
      */
     public function addPath($dir)
     {

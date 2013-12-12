@@ -131,7 +131,7 @@ abstract class AbstractPlugin
      *
      * @param string $dir Directory
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return \Gc\Module\AbstractPlugin
      */
     public function addPath($dir)
     {
