@@ -94,8 +94,14 @@ class DocumentController extends Action
     public function createAction()
     {
         $documentForm = new Form\Document();
-        $documentForm->setAttribute('action', $this->url()->fromRoute('content/document/create'));
-        $parentId = $this->getRouteMatch()->getParam('id');
+        $parentId     = $this->getRouteMatch()->getParam('id');
+        if (!empty($parentId)) {
+            $routeName = 'content/document/create-w-parent';
+        } else {
+            $routeName = 'content/document/create';
+        }
+
+        $documentForm->setAttribute('action', $this->url()->fromRoute($routeName, array('id' => $parentId)));
 
         $documentTypeCollection = new DocumentType\Collection();
         $documentTypeElement    = $documentForm->get('document_type');
