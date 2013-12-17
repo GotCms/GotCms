@@ -802,11 +802,17 @@ var Gc = (function($)
             });
         },
 
-        initUploadLink: function()
+        initUploadLink: function($confirmText)
         {
             $('#upload-link').on('click', function() {
                 $('#form-content').toggleClass('hide');
                 return false;
+            });
+
+            $('.btn-info.update-content').on('click', function () {
+                if(!confirm($confirmText)) {
+                    return false;
+                }
             });
         },
 

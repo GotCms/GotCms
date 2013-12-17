@@ -225,15 +225,15 @@ return array(
                                 'route' => 'config/general',
                             ),
                             array(
-                                'label' => 'General',
+                                'label' => 'System',
                                 'route' => 'config/system',
                             ),
                             array(
-                                'label' => 'General',
+                                'label' => 'Server',
                                 'route' => 'config/server',
                             ),
                             array(
-                                'label' => 'General',
+                                'label' => 'Update',
                                 'route' => 'config/cms-update',
                             ),
                             array(

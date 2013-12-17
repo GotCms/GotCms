@@ -198,6 +198,7 @@ return array (
     'Tab' => 'Onglets',
     'Download all files' => 'Télécharger tous les fichiers',
     'Upload file' => 'Envoyer un fichier',
+    'Update content' => 'Mettre à jour le contenu',
     'Files as: identifier.phtml' => 'Fichier au format : identifiant.phtml',
     'Files with locale name and csv or php extensions: fr_FR.php, en_GB.csv, &c...' => 'Fichiers avec la locale comme nom et l\'extension csv ou php : fr_FR.php, en_GB.php, etc...',
     'Upload' => 'Envoyer',
@@ -245,6 +246,8 @@ return array (
     'The request has been stopped, please refresh the page' => 'La requête a été stoppée, merci de rafraîchir la page',
     'Installation complete. Please refresh or go to /admin page to manage your website.' => 'Installation terminée. Merci de rafraîchir la page ou d\'aller sur la page /admin afin de gérer votre site internet.',
     'The installation is being completed' => 'L\'installation est en train de se terminer',
+    'Dashboard' => 'Tableau de bord',
+    'General' => 'Général',
 
     // Zend\I18n\Validator\Alnum
     "Invalid type given. String, integer or float expected" => "Type invalide. Chaîne, entier ou flottant attendu",

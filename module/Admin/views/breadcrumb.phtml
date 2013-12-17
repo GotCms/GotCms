@@ -18,12 +18,12 @@ $module = empty($this->layout()->routeParams['module']) ? null : strtolower($thi
                 <?php endif; ?>
 
                 <?php if ($key < count($this->pages) - 1): ?>
-                    <a href="<?php echo $page->getHref(); ?>"><?php echo $page->getLabel(); ?></a>
+                    <a href="<?php echo $page->getHref(); ?>"><?php echo $this->escapeHtml($this->translate($page->getLabel())); ?></a>
                     <span class="divider">
                         <i class="glyphicon glyphicon-chevron-right arrow-icon"></i>
                     </span>
                 <?php else: ?>
-                    <?php echo $page->getLabel(); ?>
+                    <?php echo $this->escapeHtml($this->translate($page->getLabel())); ?>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
