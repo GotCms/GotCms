@@ -147,6 +147,11 @@ function file_exists($string)
     return false;
 }
 
+function ini_set($string, $value)
+{
+    return true;
+}
+
 function file_get_contents($filename)
 {
     return 'DELETE FROM core_config_data WHERE id = "test";';
