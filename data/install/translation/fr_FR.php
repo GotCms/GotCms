@@ -199,6 +199,7 @@ return array (
     'Download all files' => 'Télécharger tous les fichiers',
     'Upload file' => 'Envoyer un fichier',
     'Files as: identifier.phtml' => 'Fichier au format : identifiant.phtml',
+    'Files with locale name and csv or php extensions: fr_FR.php, en_GB.csv, &c...' => 'Fichiers avec la locale comme nom et l\'extension csv ou php : fr_FR.php, en_GB.php, etc...',
     'Upload' => 'Envoyer',
     'Download file' => 'Télécharger le fichier',
     '%d active comment(s)' => '%d commentaire(s) actif(s)',

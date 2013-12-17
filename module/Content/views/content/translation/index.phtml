@@ -38,7 +38,7 @@
     <form class="hide form-inline" id="form-content" action="<?php echo $this->url('content/translation/upload'); ?>" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <input class="form-control" type="file" name="upload[]" multiple="multiple">
-            <span class="help-block"><?php echo $this->escapeHtml($this->translate('Files as: identifier.phtml')); ?></span>
+            <span class="help-block"><?php echo $this->escapeHtml($this->translate('Files with locale name and csv or php extensions: fr_FR.php, en_GB.csv, &c...')); ?></span>
         </div>
         <div class="form-group">
             <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Upload')); ?>">
