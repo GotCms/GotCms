@@ -368,6 +368,7 @@ class InstallController extends Action
      */
     public function completeAction()
     {
+        ini_set('max_execution_time', 100);
         $this->checkInstall(6);
         if ($this->getRequest()->isXmlHttpRequest()) {
             if ($this->getRequest()->isPost()) {

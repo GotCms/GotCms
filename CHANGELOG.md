@@ -2,6 +2,7 @@
 
 ##1.2.0 (-- --- ----)
 - Can not select "Document Type" on creating children page ([https://github.com/GotCms/GotCms/issues/161](https://github.com/GotCms/GotCms/issues/161))
+- Cannot install on Windows due to the max_execution_time directive ([https://github.com/GotCms/GotCms/issues/129](https://github.com/GotCms/GotCms/issues/129))
 
 ##1.1.0 (11 Dec 2013)
 - Update to Zend Framework 2.2.5 ([https://github.com/GotCms/GotCms/issues/141](https://github.com/GotCms/GotCms/issues/141))
