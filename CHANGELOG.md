@@ -6,6 +6,7 @@
 - Wordings ([https://github.com/GotCms/GotCms/issues/163](https://github.com/GotCms/GotCms/issues/163))
 - Add verification before update content ([https://github.com/GotCms/GotCms/issues/164](https://github.com/GotCms/GotCms/issues/164))
 - Css is broken on statistics module ([https://github.com/GotCms/GotCms/issues/166](https://github.com/GotCms/GotCms/issues/166))
+- Photoartwork theme not working properly ([https://github.com/GotCms/GotCms/issues/168](https://github.com/GotCms/GotCms/issues/168))
 
 ##1.1.0 (11 Dec 2013)
 - Update to Zend Framework 2.2.5 ([https://github.com/GotCms/GotCms/issues/141](https://github.com/GotCms/GotCms/issues/141))

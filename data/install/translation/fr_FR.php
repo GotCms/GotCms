@@ -248,6 +248,14 @@ return array (
     'The installation is being completed' => 'L\'installation est en train de se terminer',
     'Dashboard' => 'Tableau de bord',
     'General' => 'Général',
+    'Install' => 'Installation',
+    'Select an option' => 'Sélectionner une option',
+    'Create database' => 'Création de la base de données',
+    'Insert data' => 'Insertion des données',
+    'Create users and roles' => 'Création des utilisateurs et des rôles',
+    'Install template' => 'Installation du template',
+    'Create configuration file' => 'Création du fichier de configuration',
+
 
     // Zend\I18n\Validator\Alnum
     "Invalid type given. String, integer or float expected" => "Type invalide. Chaîne, entier ou flottant attendu",
