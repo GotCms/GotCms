@@ -611,7 +611,12 @@ var Gc = (function($)
 
         showDeleteDialog: function($url, $elementToRemove)
         {
-            $('#dialog').dialog({
+            var $string = 'These items will be permanently deleted and cannot be recovered. Are you sure?',
+            $template = '<div id="dialog" title=""> \
+                    <p>' + Translator.translate($string) + '</p> \
+                </div>';
+
+            $($template).dialog({
                 bgiframe :  false,
                 resizable : false,
                 modal :     true,
@@ -654,7 +659,7 @@ var Gc = (function($)
         showCopyForm: function($url, $action, $options)
         {
             var $this = this,
-            $template = '<div id="copy-dialog-form" title="' + Translator.translate('Copy document') + '"> \
+            $template = '<div id="copy-dialog-form" title=""> \
                 <p class="validateTips">' + Translator.translate('All form fields are required.') + '</p> \
                 <fieldset> \
                     <div> \
@@ -671,39 +676,52 @@ var Gc = (function($)
             </div>';
 
             var $buttons = {};
-            $buttons[Translator.translate('Copy')] = function() {
-                var $copyName = $('#copy-name'),
-                $copyUrlKey = $('#copy-url-key');
-                if($this.isEmpty($copyName.val()) || $this.isEmpty($copyUrlKey.val())) {
-                    return false;
-                }
-
-                $.ajax({
-                    url: $url,
-                    dataType: 'json',
-                    data: {'name': $copyName.val(), 'url_key': $copyUrlKey.val()},
-                    success: function(data) {
-                        if(data.success === true) {
-                            if($action === 'paste' && $this.getOption('lastAction') === 'cut') {
-                                $options.items.paste.disabled = true;
-                            }
-
-                            $this.refreshTreeview($this.getOption('routes').refresh.replace('itemId', 0), 0);
-                        }
+            $buttons[Translator.translate('Copy')] = {
+                'text':  Translator.translate('Copy'),
+                'class': 'btn btn-danger btn-mini',
+                'click': function() {
+                    var $copyName = $('#copy-name'),
+                    $copyUrlKey = $('#copy-url-key');
+                    if($this.isEmpty($copyName.val()) || $this.isEmpty($copyUrlKey.val())) {
+                        return false;
                     }
-                });
 
-                $(this).dialog('close');
+                    $.ajax({
+                        url: $url,
+                        dataType: 'json',
+                        data: {'name': $copyName.val(), 'url_key': $copyUrlKey.val()},
+                        success: function(data) {
+                            if(data.success === true) {
+                                if($action === 'paste' && $this.getOption('lastAction') === 'cut') {
+                                    $options.items.paste.disabled = true;
+                                }
+
+                                $this.refreshTreeview($this.getOption('routes').refresh.replace('itemId', 0), 0);
+                            }
+                        }
+                    });
+
+                    $(this).dialog('close');
+                }
             };
 
-            $buttons[Translator.translate('Cancel')] = function() {
-                $(this).dialog('close');
+            $buttons[Translator.translate('Cancel')] = {
+                'text':  Translator.translate('Cancel'),
+                'class': 'btn btn-warning',
+                'click': function() {
+                    $(this).dialog('close');
+
+                    return false;
+                }
             };
 
             $('#copy-dialog-form').remove();
 
             $($template).dialog({
                 modal: true,
+                title:      '<div class="widget-header widget-header-small"> \
+                    <h4><i class="glyphicon glyphicon-warning-sign"></i> \
+                    ' + Translator.translate('Copy document') + '</h4></div>',
                 buttons: $buttons
             });
         },
@@ -802,17 +820,49 @@ var Gc = (function($)
             });
         },
 
-        initUploadLink: function($confirmText)
+        initUploadLink: function()
         {
-            $('#upload-link').on('click', function() {
-                $('#form-content').toggleClass('hide');
+            var $buttons = {},
+            $string = 'These items will be permanently updated and cannot be recovered. Are you sure?',
+            $template = '<div id="dialog" title=""> \
+                    <p>' + Translator.translate($string) + '</p> \
+                </div>';
+
+            $buttons[Translator.translate('Confirm')] = {
+                'text':  Translator.translate('Confirm'),
+                'class': 'btn btn-danger btn-mini',
+                'click': function() {
+                    document.location.href = $('.btn-info.update-content').prop('href');
+
+                    $(this).dialog('close');
+                }
+            };
+
+            $buttons[Translator.translate('Cancel')] = {
+                'text':  Translator.translate('Cancel'),
+                'class': 'btn btn-warning',
+                'click': function() {
+                    $(this).dialog('close');
+
+                    return false;
+                }
+            };
+
+            $('.btn-info.update-content').on('click', function () {
+                $($template).dialog({
+                    modal: true,
+                    title:      '<div class="widget-header widget-header-small"> \
+                        <h4><i class="glyphicon glyphicon-warning-sign"></i> \
+                        ' + Translator.translate('Update content') + '</h4></div>',
+                    buttons: $buttons
+                });
+
                 return false;
             });
 
-            $('.btn-info.update-content').on('click', function () {
-                if(!confirm($confirmText)) {
-                    return false;
-                }
+            $('#upload-link').on('click', function() {
+                $('#form-content').toggleClass('hide');
+                return false;
             });
         },
 
