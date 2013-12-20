@@ -63,16 +63,36 @@ class Navigation
     /**
      * Constructor, initialize documents
      *
-     * @param integer $documentId Document id
+     * @param integer $documentId   Document id
+     * @param boolean $activeBranch Use active branch or not
      *
      * @return void
      */
-    public function __construct($documentId = 0)
+    public function __construct($documentId = 0, $activeBranch = false)
     {
         $documents = new Document\Collection();
         $documents->load($documentId);
-        $this->documents  = $documents->getDocuments();
-        $this->requestUri = Registry::get('Application')->getRequest()->getUri()->getPath();
+        $this->documents       = $documents->getDocuments();
+        $this->requestUri      = Registry::get('Application')->getRequest()->getUri()->getPath();
+        $this->useActiveBranch = (bool) $activeBranch;
+    }
+
+
+    /**
+     * Constructor, initialize documents
+     *
+     * @param boolean $boolean Set the branch is active or only one page
+     *
+     * @return mixte
+     */
+    public function useActiveBranch($boolean = null)
+    {
+        if ($boolean === null) {
+            return $this->useActiveBranch;
+        }
+
+        $this->useActiveBranch = (bool) $boolean;
+        return $this;
     }
 
     /**
@@ -123,12 +143,15 @@ class Navigation
                     . $document->getUrlKey();
                 $data['visible'] = $document->showInNav();
                 $data['active']  = $data['uri'] == $this->requestUri;
-
                 if (!empty($children) && is_array($children)) {
                     $data['pages'] = $this->render(
                         $children,
                         (empty($parentUrl) ? null : $parentUrl . '/') . $document->getUrlKey()
                     );
+
+                    if ($this->useActiveBranch()) {
+                        $data['active'] = ($data['active'] or $this->hasActiveChildren($data['pages']));
+                    }
                 }
 
                 $navigation['document-' . $document->getId()] = $data;
@@ -136,5 +159,28 @@ class Navigation
         }
 
         return $navigation;
+    }
+
+
+    /**
+     * Check if page has active children
+     *
+     * @param array $pages List of pages as array
+     *
+     * @return boolean
+     */
+    protected function hasActiveChildren($pages)
+    {
+        foreach ($pages as $page) {
+            if (!empty($page['active'])) {
+                return true;
+            }
+
+            if (!empty($page['pages'])) {
+                return $this->hasActiveChildren($page['pages']);
+            }
+        }
+
+        return false;
     }
 }
