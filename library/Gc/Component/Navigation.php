@@ -72,7 +72,7 @@ class Navigation
         $documents = new Document\Collection();
         $documents->load($documentId);
         $this->documents  = $documents->getDocuments();
-        $this->requestUri = Registry::get('Application')->getRequest()->getRequestUri();
+        $this->requestUri = Registry::get('Application')->getRequest()->getUri()->getPath();
     }
 
     /**
