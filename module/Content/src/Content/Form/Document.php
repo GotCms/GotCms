@@ -186,15 +186,14 @@ class Document extends AbstractForm
         $select          = $viewsCollection->getSelect();
         $viewSelected    = $document->getViewId();
 
-        if (empty($select)) {
-            $viewModel = View\Model::fromId($document->getDocumentType()->getDefaultViewId());
-            if (!empty($viewModel)) {
-                $select = array($viewModel->getId() => $viewModel->getName());
-                if (empty($viewSelected)) {
-                    $viewSelected = $viewModel->getId();
-                }
-            } else {
-                $select = array();
+        $viewModel = View\Model::fromId($document->getDocumentType()->getDefaultViewId());
+        if (!empty($viewModel)) {
+            $select = array_merge(
+                $select,
+                array($viewModel->getId() => $viewModel->getName())
+            );
+            if (empty($viewSelected)) {
+                $viewSelected = $viewModel->getId();
             }
         }
 
@@ -211,7 +210,7 @@ class Document extends AbstractForm
         );
 
         $view = new Element\Select('document-view');
-        $view->setValueOptions(array('' => 'Select view') + $select)
+        $view->setValueOptions($select)
             ->setValue((string) $viewSelected)
             ->setAttribute('id', 'view')
             ->setAttribute('class', 'form-control')
