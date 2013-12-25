@@ -32,6 +32,7 @@ use Gc\Document\Collection;
 use Gc\User\Visitor;
 use Gc\Version;
 use Zend\Json\Json;
+use Zend\View\Model\ViewModel;
 
 /**
  * Index controller for admin module
@@ -45,7 +46,7 @@ class IndexController extends Action
     /**
      * Display dashboard
      *
-     * @return void
+     * @return array
      */
     public function indexAction()
     {
@@ -120,5 +121,17 @@ class IndexController extends Action
         $coreConfig->setValue('dashboard_widgets', serialize($config));
 
         return $this->returnJson(array('success' => true));
+    }
+
+    /**
+     * Display dashboard
+     *
+     * @return ViewModel
+     */
+    public function translatorAction()
+    {
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
     }
 }

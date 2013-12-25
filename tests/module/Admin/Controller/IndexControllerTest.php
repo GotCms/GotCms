@@ -125,4 +125,20 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         $this->assertControllerClass('IndexController');
         $this->assertMatchedRouteName('admin/dashboard-save');
     }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testtranslatorAction()
+    {
+        $this->dispatch('/admin/translator.js');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Admin');
+        $this->assertControllerName('AdminController');
+        $this->assertControllerClass('IndexController');
+        $this->assertMatchedRouteName('admin/translator.js');
+    }
 }

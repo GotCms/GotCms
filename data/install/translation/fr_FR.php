@@ -122,6 +122,7 @@ return array (
     'Tabs' => 'Onglets',
     'There\'s lot of Helper you can use. Those Zend Framework and GotCms, refer to documentation if you want more information.' => 'Il y a beaucoup d\'aides de vues que vous pouvez utiliser. Ceux de Zend Framework et ceux de GotCms. Référez vous à la documentation si vous voulez plus d\'informations.',
     'These items will be permanently deleted and cannot be recovered. Are you sure?' => 'Ces éléments vont être définitevement supprimés et ne pourront pas être restaurés. Êtes-vous sûr ?',
+    'These items will be permanently updated and cannot be recovered. Are you sure?' => 'Ces éléments vont être définitevement mis à jours et ne pourront pas être restaurés. Êtes-vous sûr ?',
     'This is a document pattern. Sort by tabs, insert datatypes and specify availables views.' => 'Il s\'agit d\'un modèle de document. Trié par onglets, insérer des types de données et spécifiez les vues disponibles.',
     'Total documents' => 'Documents au total',
     'Translations' => 'Traductions',
@@ -249,12 +250,19 @@ return array (
     'Dashboard' => 'Tableau de bord',
     'General' => 'Général',
     'Install' => 'Installation',
+    'Refresh' => 'Rafraîchir',
     'Select an option' => 'Sélectionner une option',
     'Create database' => 'Création de la base de données',
     'Insert data' => 'Insertion des données',
     'Create users and roles' => 'Création des utilisateurs et des rôles',
     'Install template' => 'Installation du template',
     'Create configuration file' => 'Création du fichier de configuration',
+    'Copy document' => 'Copier le document',
+    'All form fields are required' => 'Tous les champs sont obligatoires',
+    'Please fill all fields' => 'Merci de remplir tous les champs',
+    'Delete element' => 'Supprimer l\'élément',
+    'Cancel' => 'Annuler',
+    'Confirm' => 'Confirmer',
 
 
     // Zend\I18n\Validator\Alnum

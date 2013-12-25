@@ -50,6 +50,7 @@
         <?php
         $this->headScript()
             ->prependFile($this->cdnBackend('/backend/js/gotcms.js'), 'text/javascript')
+            ->prependFile($this->cdnBackend('/admin/translator.js'), 'text/javascript')
             ->prependFile($this->cdnBackend('/backend/js/generic-classes.js'), 'text/javascript')
             ->prependFile($this->cdnBackend('/backend/js/vendor/jquery.contextMenu.js'), 'text/javascript')
             ->prependFile($this->cdnBackend('/backend/js/vendor/jquery.jstree.js'), 'text/javascript')

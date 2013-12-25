@@ -68,9 +68,20 @@ return array(
                             'route'    => '/dashboard/save',
                             'defaults' =>
                             array (
-                                'module'     => 'config',
+                                'module'     => 'admin',
                                 'controller' => 'AdminController',
                                 'action'     => 'save-dashboard',
+                            ),
+                        ),
+                    ),
+                    'translator.js' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/translator.js',
+                            'defaults' => array(
+                                'module'     =>'admin',
+                                'controller' => 'AdminController',
+                                'action'     => 'translator',
                             ),
                         ),
                     ),
