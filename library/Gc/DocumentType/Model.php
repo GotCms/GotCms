@@ -188,21 +188,19 @@ class Model extends AbstractTable
                 $this->update($arraySave, array('id' => (int) $this->getId()));
             }
 
-            if (!empty($this->views)) {
-                $delete = new Sql\Delete();
-                $delete->from('document_type_view');
-                $delete->where(array('document_type_id' => (int) $this->getId()));
-                $this->execute($delete);
-                foreach ($this->views as $viewId) {
-                    if (empty($viewId)) {
-                        continue;
-                    }
-
-                    $insert = new Sql\Insert();
-                    $insert->into('document_type_view')
-                        ->values(array('document_type_id' => $this->getId(), 'view_id' => $viewId));
-                    $this->execute($insert);
+            $delete = new Sql\Delete();
+            $delete->from('document_type_view');
+            $delete->where(array('document_type_id' => (int) $this->getId()));
+            $this->execute($delete);
+            foreach ($this->views as $viewId) {
+                if (empty($viewId)) {
+                    continue;
                 }
+
+                $insert = new Sql\Insert();
+                $insert->into('document_type_view')
+                    ->values(array('document_type_id' => $this->getId(), 'view_id' => $viewId));
+                $this->execute($insert);
             }
 
             $delete = new Sql\Delete();

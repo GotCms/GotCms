@@ -10,6 +10,7 @@
 - Change some confirm box into jQuery ui Dialog ([https://github.com/GotCms/GotCms/issues/167](https://github.com/GotCms/GotCms/issues/167))
 - Add parameter to force the branch to be active on Gc\Component\Navigation ([https://github.com/GotCms/GotCms/issues/169](https://github.com/GotCms/GotCms/issues/169))
 - Fail merge between available view et default view in content edition ([https://github.com/GotCms/GotCms/issues/171](https://github.com/GotCms/GotCms/issues/171))
+- Document type does not allow empty available views ([https://github.com/GotCms/GotCms/issues/170](https://github.com/GotCms/GotCms/issues/170))
 
 ##1.1.0 (11 Dec 2013)
 - Update to Zend Framework 2.2.5 ([https://github.com/GotCms/GotCms/issues/141](https://github.com/GotCms/GotCms/issues/141))
