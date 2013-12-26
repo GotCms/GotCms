@@ -47,7 +47,7 @@
     </form>
 </div>
 
-<form autocomplete="off" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative" method="post">
+<?php echo $this->form()->openTag($this->form); ?>
     <button class="btn btn-warning btn-sm" id="input-save" type="submit">
         <i class="glyphicon glyphicon-floppy-disk"></i>
         <?php echo $this->escapeHtml($this->translate('Save and publish')); ?>
@@ -107,7 +107,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-</form>
+<?php echo $this->form()->closeTag($this->form); ?>
 
 <script type="text/javascript">
 $(document).ready(function(){

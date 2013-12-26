@@ -62,7 +62,7 @@ class Editor extends AbstractEditor
         $textarea = new Element\Textarea($this->getName());
         $textarea->setAttribute('class', 'form-control');
         $textarea->setAttribute('description', $property->getDescription());
-        $textarea->setAttribute('label', $this->getProperty()->getName());
+        $textarea->setLabel($this->getProperty()->getName());
         $textarea->setValue($this->getValue());
 
         $config = empty($config) ? array() : $config;

@@ -31,9 +31,11 @@
     <?php $elements = $this->form->getElements(); ?>
     <?php foreach ($elements as $element): ?>
         <div class="form-group">
-            <?php $label = $element->getAttribute('label'); ?>
+            <?php $label = $element->getLabel(); ?>
             <?php if (!empty($label)): ?>
-                <label class="required control-label col-lg-2" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+                <div class="col-lg-2">
+                    <?php echo $this->formLabel($element); ?>
+                </div>
             <?php endif; ?>
 
             <div class="col-lg-10">

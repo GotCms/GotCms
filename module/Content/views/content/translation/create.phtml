@@ -27,11 +27,9 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative" method="post">
+<?php echo $this->form()->openTag($this->form); ?>
     <div class="form-group">
-        <label for="source">
-            <?php echo $this->escapeHtml($this->translate('Source')); ?>
-        </label>
+        <?php echo $this->formLabel($this->form->get('source')); ?>
         <?php echo $this->formElement($this->form->get('source')); ?>
     </div>
 
@@ -39,9 +37,9 @@
         <?php $i = 0; ?>
         <table id="table-trad" class="table clickable table-striped table-hover">
             <colgroup>
-                <col width="525">
-                <col width="159">
-                <col>
+                <col class="col-lg-8">
+                <col width="col-lg-2">
+                <col width="col-lg-2">
             </colgroup>
             <thead>
                 <tr>
@@ -75,7 +73,7 @@
     </div>
 
     <input type="submit" class="btn btn-warning" id="input-save" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
-</form>
+<?php echo $this->form()->closeTag($this->form); ?>
 
 <script type="text/javascript">
 $(document).ready(function(){

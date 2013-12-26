@@ -63,7 +63,7 @@ class Editor extends AbstractEditor
         }
 
         $element->setLabel($this->getName());
-        $element->setAttribute('label', $this->getProperty()->getName());
+        $element->setLabel($this->getProperty()->getName());
         $element->setAttribute('description', $this->getProperty()->getDescription());
         $element->setValue($this->getValue());
 

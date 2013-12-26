@@ -27,7 +27,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative" method="post" enctype="multipart/form-data">
+<?php echo $this->form()->openTag($this->form); ?>
     <button class="btn-in-tab btn btn-warning btn-sm" id="input-save" type="submit">
         <i class="glyphicon glyphicon-floppy-disk"></i>
         <?php echo $this->escapeHtml($this->translate('Save')); ?>
@@ -55,16 +55,12 @@
                                 <?php echo $content; ?>
                             <?php else: ?>
                                 <?php if ($element->getAttribute('type') != 'hidden'): ?>
-                                    <?php $label = $element->getAttribute('label'); ?>
-                                    <?php if (!empty($label)): ?>
-                                        <?php $id = $element->getAttribute('id'); ?>
+                                    <?php if ($element->getLabel()): ?>
                                         <div class="col-lg-2">
-                                            <label class="required control-label"<?php if (!empty($id)): ?> for="<?php echo $this->escapeHtml($id); ?>"<?php endif; ?>>
-                                                <?php echo $this->escapeHtml($this->translate($label)); ?>
-                                            </label>
+                                            <?php echo $this->formLabel($element); ?>
                                             <?php $description = $element->getAttribute('description'); ?>
                                             <?php if (!empty($description)): ?>
-                                                <p class="help-block"><?php echo $this->escapeHtml($description); ?></p>
+                                                <p class="help-block"><?php echo $this->escapeHtml($this->translate($description)); ?></p>
                                             <?php endif; ?>
                                         </div>
                                     <?php endif; ?>
@@ -81,7 +77,7 @@
             </div>
         <?php endforeach; ?>
     </div>
-</form>
+<?php echo $this->form()->closeTag($this->form); ?>
 
 <script type="text/javascript">
 $(function(){

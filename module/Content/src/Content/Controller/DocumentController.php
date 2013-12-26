@@ -201,10 +201,13 @@ class DocumentController extends Action
             return $this->redirect()->toRoute('content');
         } else {
             $documentForm = new ZendForm\Form();
+            $documentForm->setAttribute('enctype', 'multipart/form-data');
+            $documentForm->setAttribute('class', 'relative');
             $documentForm->setAttribute(
                 'action',
                 $this->url()->fromRoute('content/document/edit', array('id' => $documentId))
             );
+
             $this->layout()->setVariable('documentId', $documentId);
             $documentTypeId = $document->getDocumentTypeId();
             $layoutId       = $this->getRouteMatch()->getParam('layout_id', '');

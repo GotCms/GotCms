@@ -75,7 +75,7 @@ class Editor extends AbstractEditor
 
         $id       = 'textrich' . $this->getProperty()->getId();
         $textrich = new Element\Textarea($this->getName());
-        $textrich->setAttribute('label', $this->getProperty()->getName());
+        $textrich->setLabel($this->getProperty()->getName());
         $textrich->setAttribute('description', $this->getProperty()->getDescription());
         $textrich->setAttribute('id', $id);
         $textrich->setAttribute('class', $id);

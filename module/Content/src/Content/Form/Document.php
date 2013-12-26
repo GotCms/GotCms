@@ -100,17 +100,20 @@ class Document extends AbstractForm
         $this->setInputFilter($inputFilter);
 
         $name = new Element\Text('document-name');
-        $name->setAttribute('label', 'Name')
+        $name->setLabel('Name')
+            ->setLabelAttributes(array('class' => 'required control-label'))
             ->setAttribute('id', 'name')
             ->setAttribute('class', 'form-control');
 
         $urlKey = new Element\Text('document-url_key');
-        $urlKey->setAttribute('label', 'Url key')
+        $urlKey->setLabel('Url key')
+            ->setLabelAttributes(array('class' => 'required control-label'))
             ->setAttribute('id', 'url_key')
             ->setAttribute('class', 'form-control');
 
         $documentType = new Element\Select('document_type');
-        $documentType->setAttribute('label', 'Document Type')
+        $documentType->setLabel('Document Type')
+            ->setLabelAttributes(array('class' => 'required control-label'))
             ->setAttribute('id', 'document_type')
             ->setAttribute('class', 'form-control')
             ->setValueOptions(array('' => 'Select document type'));
@@ -164,7 +167,7 @@ class Document extends AbstractForm
         $this->get('document-url_key')->setValue($document->getUrlKey());
 
         $status = new Element\Checkbox('document-status');
-        $status->setAttribute('label', 'Publish')
+        $status->setLabel('Publish')
             ->setValue($document->isPublished())
             ->setAttribute('id', 'status')
             ->setAttribute('class', 'input-checkbox')
@@ -173,7 +176,7 @@ class Document extends AbstractForm
         $this->add($status);
 
         $showInNav = new Element\Checkbox('document-show_in_nav');
-        $showInNav->setAttribute('label', 'Show in nav')
+        $showInNav->setLabel('Show in nav')
             ->setValue($document->showInNav())
             ->setAttribute('id', 'show_in_nav')
             ->setAttribute('class', 'input-checkbox')
@@ -214,7 +217,7 @@ class Document extends AbstractForm
             ->setValue((string) $viewSelected)
             ->setAttribute('id', 'view')
             ->setAttribute('class', 'form-control')
-            ->setAttribute('label', 'View');
+            ->setLabel('View');
 
         $this->add($view);
 
@@ -224,7 +227,7 @@ class Document extends AbstractForm
             ->setValue((string) $document->getLayoutId())
             ->setAttribute('id', 'layout')
             ->setAttribute('class', 'form-control')
-            ->setAttribute('label', 'Layout');
+            ->setLabel('Layout');
 
         $inputFilter = $inputFilterFactory->add(
             array(

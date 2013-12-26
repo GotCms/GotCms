@@ -58,7 +58,7 @@ class Editor extends AbstractEditor
     public function load()
     {
         $boolean = new Element\Checkbox($this->getName());
-        $boolean->setAttribute('label', $this->getProperty()->getName());
+        $boolean->setLabel($this->getProperty()->getName());
         $boolean->setAttribute('class', 'input-checkbox');
         $boolean->setAttribute('id', 'boolean' . $this->getProperty()->getId());
         $boolean->setAttribute('description', $this->getProperty()->getDescription());

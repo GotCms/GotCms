@@ -258,7 +258,7 @@ class CkEditor extends Object
                     $element->setAttribute('id', 'i' . $group['name'] . $idxItem)
                         ->setCheckedValue(1)
                         ->setAttribute('class', 'input-checkbox')
-                        ->setAttribute('label', $item);
+                        ->setLabel($item);
 
                     if (!empty($toolbarItems[$item])) {
                         $element->setValue(1);
