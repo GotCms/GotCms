@@ -119,7 +119,7 @@ class AbstractFormContent extends AbstractForm
             array(
                 'label' => 'Description',
                 'label_attributes' => array(
-                    'class' => 'required control-label col-lg-2',
+                    'class' => 'control-label col-lg-2',
                 )
             )
         );
@@ -132,7 +132,7 @@ class AbstractFormContent extends AbstractForm
             array(
                 'label' => 'Content',
                 'label_attributes' => array(
-                    'class' => 'required control-label col-lg-2',
+                    'class' => 'control-label col-lg-2',
                 )
             )
         );
