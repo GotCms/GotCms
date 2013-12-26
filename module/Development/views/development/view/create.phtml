@@ -27,9 +27,4 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<?php echo $this->partial('development/forms/view.phtml', array('form' => $this->form)); ?>
-<script type="text/javascript">
-    Gc.initCodeMirror('view-content');
-    Gc.saveCommand();
-    Gc.checkDataChanged();
-</script>
+<?php echo $this->partial('development/forms/content.phtml', array('form' => $this->form)); ?>

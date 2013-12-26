@@ -37,9 +37,4 @@
     )
 ); ?>
 
-<?php echo $this->partial('development/forms/layout.phtml', array('form' => $this->form)); ?>
-<script type="text/javascript">
-    Gc.initCodeMirror('layout-content');
-    Gc.saveCommand();
-    Gc.checkDataChanged();
-</script>
+<?php echo $this->partial('development/forms/content.phtml', array('form' => $this->form)); ?>

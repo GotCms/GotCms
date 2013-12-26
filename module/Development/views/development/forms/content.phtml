@@ -27,35 +27,41 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form class="relative form-horizontal" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<?php echo $this->form()->openTag($this->form); ?>
     <div class="form-group">
-        <label class="required control-label col-lg-2" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+        <?php echo $this->formLabel($this->form->get('name')); ?>
         <div class="col-lg-10">
-            <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
+            <?php echo $this->formElement($this->form->get('name')); ?>
             <?php echo $this->formElementErrors($this->form->get('name'), array('class' => 'text-danger')); ?>
         </div>
     </div>
     <div class="form-group">
-        <label class="required control-label col-lg-2" for="identifier"><?php echo $this->escapeHtml($this->translate('Identifier')); ?></label>
+        <?php echo $this->formLabel($this->form->get('identifier')); ?>
         <div class="col-lg-10">
-            <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('identifier')); ?>" id="identifier" name="identifier">
+            <?php echo $this->formElement($this->form->get('identifier')); ?>
             <?php echo $this->formElementErrors($this->form->get('identifier'), array('class' => 'text-danger')); ?>
         </div>
     </div>
     <div class="form-group">
-        <label class="required control-label col-lg-2" for="description"><?php echo $this->escapeHtml($this->translate('Description')); ?></label>
+        <?php echo $this->formLabel($this->form->get('description')); ?>
         <div class="col-lg-10">
-            <input type="text" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('description')); ?>" id="description" name="description">
+            <?php echo $this->formElement($this->form->get('description')); ?>
             <?php echo $this->formElementErrors($this->form->get('description'), array('class' => 'text-danger')); ?>
         </div>
     </div>
     <div class="form-group">
-        <label class="required control-label col-lg-2" for="script-content"><?php echo $this->escapeHtml($this->translate('Content')); ?></label>
+        <?php echo $this->formLabel($this->form->get('content')); ?>
         <div class="col-lg-10">
-            <textarea cols="80" rows="24" id="script-content" name="content"><?php echo $this->escapeHtml($this->form->getValue('content')); ?></textarea>
+            <?php echo $this->formElement($this->form->get('content')); ?>
             <?php echo $this->formElementErrors($this->form->get('content'), array('class' => 'text-danger')); ?>
         </div>
     </div>
 
     <input type="submit" id="input-save" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
-</form>
+<?php echo $this->form()->closeTag($this->form); ?>
+
+<script type="text/javascript">
+    Gc.initCodeMirror('content');
+    Gc.saveCommand();
+    Gc.checkDataChanged();
+</script>

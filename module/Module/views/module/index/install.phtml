@@ -28,12 +28,12 @@
 
 ?>
 
-<form action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" class="relative" method="post">
+<?php echo $this->form()->openTag($this->form); ?>
     <?php $element = $this->form->get('module'); ?>
     <div class="form-group">
-        <label class="required" for="module"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
-
+        <?php echo $this->formLabel($element); ?>
         <?php echo $this->formElement($element); ?>
+
         <?php $modules_info = $element->getAttribute('modules_info'); ?>
         <?php if (!empty($modules_info)): ?>
             <div id="modules">
@@ -47,7 +47,7 @@
     </div>
 
     <input type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
-</form>
+<?php echo $this->form()->closeTag($this->form); ?>
 <script type="text/javascript">
     Gc.installModule();
 </script>

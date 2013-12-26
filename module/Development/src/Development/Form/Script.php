@@ -27,11 +27,6 @@
 
 namespace Development\Form;
 
-use Gc\Form\AbstractForm;
-use Zend\Validator\Db;
-use Zend\Form\Element;
-use Zend\InputFilter\Factory as InputFilterFactory;
-
 /**
  * Script form
  *
@@ -39,57 +34,7 @@ use Zend\InputFilter\Factory as InputFilterFactory;
  * @package    Development
  * @subpackage Form
  */
-class Script extends AbstractForm
+class Script extends AbstractFormContent
 {
-    /**
-     * Initialize form
-     *
-     * @return void
-     */
-    public function init()
-    {
-        $inputFilterFactory = new InputFilterFactory();
-        $inputFilter        = $inputFilterFactory->createInputFilter(
-            array(
-                'name' => array(
-                    'required' => true,
-                    'validators' => array(
-                        array('name' => 'not_empty'),
-                        array(
-                            'name' => 'db\\no_record_exists',
-                            'options' => array(
-                                'table' => 'script',
-                                'field' => 'name',
-                                'adapter' => $this->getAdapter(),
-                            ),
-                        ),
-                    ),
-                ),
-                'identifier' => array(
-                    'required' => true,
-                    'validators' => array(
-                        array('name' => 'not_empty'),
-                        array('name' => 'regex', 'options' => array(
-                            'pattern' => parent::IDENTIFIER_PATTERN
-                        )),
-                        array(
-                            'name' => 'db\\no_record_exists',
-                            'options' => array(
-                                'table' => 'script',
-                                'field' => 'identifier',
-                                'adapter' => $this->getAdapter(),
-                            ),
-                        ),
-                    ),
-                ),
-            )
-        );
-
-        $this->setInputFilter($inputFilter);
-
-        $this->add(new Element('name'));
-        $this->add(new Element('identifier'));
-        $this->add(new Element('description'));
-        $this->add(new Element('content'));
-    }
+    protected $tableName = 'script';
 }

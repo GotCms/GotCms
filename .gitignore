@@ -45,6 +45,9 @@ library/Modules/*
 !library/Modules/ActivityLog
 !library/Modules/Backup
 !library/Modules/Blog
+!library/Modules/Multilingual
+!library/Modules/Search
+!library/Modules/Social
 !library/Modules/Sitemap
 
 # Test

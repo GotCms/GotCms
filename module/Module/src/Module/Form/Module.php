@@ -49,6 +49,8 @@ class Module extends AbstractForm
      */
     public function init()
     {
+        $this->setAttribute('class', 'relative');
+
         $fileInfo = new Info();
         $path     = GC_APPLICATION_PATH . '/library/Modules/';
         $listDir  = glob($path . '*', GLOB_ONLYDIR);
@@ -75,8 +77,15 @@ class Module extends AbstractForm
         }
 
         $module = new Element\Select('module');
-        $module->setAttribute('label', 'Module')
-            ->setAttribute('id', 'module')
+        $module->setOptions(
+            array(
+                'label' => 'Module',
+                'label_attributes' => array(
+                    'class' => 'required'
+                )
+            )
+        );
+        $module->setAttribute('id', 'module')
             ->setAttribute('class', 'form-control')
             ->setAttribute('modules_info', $modulesInfos)
             ->setValueOptions($options);
