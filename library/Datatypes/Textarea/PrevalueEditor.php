@@ -78,28 +78,49 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $cols = new Element\Text('cols');
         $cols->setAttributes(
             array(
-                'label' => 'Cols',
                 'value' => isset($config['cols']) ? $config['cols'] : '',
                 'class' => 'form-control',
+            )
+        );
+        $cols->setOptions(
+            array(
+                'label' => 'Cols',
+                'label_attributes' => array(
+                    'class' => 'required control-label col-lg-2'
+                )
             )
         );
 
         $rows = new Element\Text('rows');
         $rows->setAttributes(
             array(
-                'label' => 'Rows',
                 'value' => isset($config['rows']) ? $config['rows'] : '',
                 'class' => 'form-control',
+            )
+        );
+        $rows->setOptions(
+            array(
+                'label' => 'Rows',
+                'label_attributes' => array(
+                    'class' => 'required control-label col-lg-2'
+                )
             )
         );
 
         $wrap = new Element\Select('wrap');
         $wrap->setAttributes(
             array(
-                'label' => 'Wrap',
                 'class' => 'form-control',
                 'options' => array('hard' => 'hard', 'off' => 'off', 'soft' => 'soft'),
                 'value' => isset($config['wrap']) ? $config['wrap'] : '',
+            )
+        );
+        $wrap->setOptions(
+            array(
+                'label' => 'Wrap',
+                'label_attributes' => array(
+                    'class' => 'required control-label col-lg-2'
+                )
             )
         );
 

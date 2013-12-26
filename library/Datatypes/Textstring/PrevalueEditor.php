@@ -63,10 +63,17 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $length = new Element\Text('length');
         $length->setAttributes(
             array(
-                'label' => 'Length',
                 'value' => isset($config['length']) ? $config['length'] : '',
                 'class' => 'form-control',
                 'id' => 'length',
+            )
+        );
+        $length->setOptions(
+            array(
+                'label' => 'Length',
+                'label_attributes' => array(
+                    'class' => 'required control-label col-lg-2'
+                )
             )
         );
 

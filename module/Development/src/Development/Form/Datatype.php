@@ -48,6 +48,24 @@ class Datatype extends AbstractForm
      */
     public function init()
     {
+        $this->setAttribute('class', 'relative form-horizontal');
+        $this->setAttribute('enctype', 'application/x-www-form-urlencoded');
+
+
+
+        $name = new Element\Text('name');
+        $name->setOptions(
+            array(
+                'label' => 'Name',
+                'label_attributes' => array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            )
+        );
+        $name->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'name');
+        $this->add($name);
+
         $model   = new Element\Select('model');
         $path    = GC_APPLICATION_PATH . '/library/Datatypes/';
         $listDir = glob($path . '*', GLOB_ONLYDIR);
@@ -57,10 +75,16 @@ class Datatype extends AbstractForm
             $options[$dir] = $dir;
         }
 
+        $model->setOptions(
+            array(
+                'label' => 'Model',
+                'label_attributes' => array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            )
+        );
         $model->setValueOptions($options)
             ->setAttribute('class', 'form-control');
-
-        $this->add(new Element('name'));
         $this->add($model);
 
         $inputFilterFactory = new InputFilterFactory();

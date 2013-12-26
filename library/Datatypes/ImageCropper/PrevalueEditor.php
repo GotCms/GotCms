@@ -87,6 +87,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'resize-option')
             ->setLabel('Resize option')
+            ->setLabelAttributes(array('class' => 'col-lg-2'))
             ->setValueOptions(
                 array(
                     'auto' => 'auto',
@@ -98,10 +99,13 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $backgroundOption->setValue(empty($config['background']) ? '' : $config['background'])
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'background')
-            ->setLabel('Background color');
+            ->setLabel('Background color')
+            ->setLabelAttributes(array('class' => 'col-lg-2'));
 
         $mimeList = new Element\MultiCheckbox('mime_list');
-        $mimeList->setAttribute('class', 'input-checkbox');
+        $mimeList->setAttribute('class', 'input-checkbox')
+            ->setLabel('Mime list')
+            ->setLabelAttributes(array('class' => 'col-lg-2'));
         $array = array(
             'image/gif',
             'image/jpeg',

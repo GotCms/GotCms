@@ -70,10 +70,17 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $isMultiple = new Element\Checkbox('is_multiple');
         $isMultiple->setAttributes(
             array(
-                'label' => 'Is Multiple',
                 'value' => isset($config['is_multiple']) ? $config['is_multiple'] : '',
                 'class' => 'input-checkbox',
                 'id' => 'is_multiple',
+            )
+        );
+        $isMultiple->setOptions(
+            array(
+                'label' => 'Is Multiple',
+                'label_attributes' => array(
+                    'class' => 'required control-label col-lg-2'
+                )
             )
         );
 

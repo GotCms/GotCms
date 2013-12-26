@@ -27,7 +27,7 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<form class="relative form-horizontal" action="<?php echo $this->form->getAttribute('action'); ?>" method="post" enctype="application/x-www-form-urlencoded">
+<?php echo $this->form()->openTag($this->form); ?>
     <?php if (!empty($this->infos)): ?>
         <div id="datatype-infos">
             <a href="#"><?php echo $this->escapeHtml($this->translate('Display/Hide informations')); ?></a>
@@ -39,24 +39,18 @@
     <?php endif; ?>
 
     <div class="form-group">
-        <label class="required control-label col-lg-2" for="name"><?php echo $this->escapeHtml($this->translate('Name')); ?></label>
+        <?php echo $this->formLabel($this->form->get('name')); ?>
         <div class="col-lg-10">
-            <input type="name" class="form-control" value="<?php echo $this->escapeHtml($this->form->getValue('name')); ?>" id="name" name="name">
+            <?php echo $this->formElement($this->form->get('name')); ?>
             <?php echo $this->formElementErrors($this->form->get('name'), array('class' => 'text-danger')); ?>
         </div>
     </div>
     <div class="form-group">
-        <label class="required control-label col-lg-2" for="model"><?php echo $this->escapeHtml($this->translate('Model')); ?></label>
+        <?php echo $this->formLabel($this->form->get('model')); ?>
         <div class="col-lg-10">
-            <select class="form-control" id="model" name="model">
-                <?php $options = $this->form->get('model')->getValueOptions(); ?>
-                <?php foreach ($options as $option_id => $option_value): ?>
-                    <option <?php if ($option_id == $this->form->getValue('model')): ?>selected="selected" <?php endif; ?>label="<?php echo $this->escapeHtml($this->translate($option_value)); ?>" value="<?php echo $this->escapeHtml($option_value); ?>"><?php echo $this->escapeHtml($option_value); ?></option>
-                <?php endforeach; ?>
-            </select>
+            <?php echo $this->formSelect()->setTranslatorEnabled(false)->render($this->form->get('model')); ?>
+            <?php echo $this->formElementErrors($this->form->get('model'), array('class' => 'text-danger')); ?>
         </div>
-
-        <?php echo $this->formElementErrors($this->form->get('model'), array('class' => 'text-danger')); ?>
     </div>
 
     <?php if ($this->form->has('prevalue-editor')): ?>
@@ -69,15 +63,14 @@
                 <?php else: ?>
                     <div class="form-group">
                         <?php $id = $element->getAttribute('id'); ?>
-                        <?php $label = $element->getAttribute('label'); ?>
 
                         <?php if (empty($id)): ?>
                             <?php $id = 'element' . mt_rand(); ?>
                             <?php $element->setAttribute('id', $id); ?>
                         <?php endif; ?>
 
-                        <?php if (!empty($label)): ?>
-                            <label class="required control-label col-lg-2" for="<?php echo $this->escapeHtml($this->translate($id)); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
+                        <?php if ($element->getLabel()): ?>
+                            <?php echo $this->formLabel($element); ?>
                         <?php endif; ?>
 
                         <div class="col-lg-10">
@@ -91,10 +84,13 @@
     <?php endif; ?>
 
     <input type="submit" id="input-save" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
-</form>
+<?php echo $this->form()->closeTag($this->form); ?>
 
 <script type="text/javascript">
     $('#datatype-infos > a').on('click', function() {
         $(this).next('div').toggleClass('hide');
     });
+
+    Gc.saveCommand();
+    Gc.checkDataChanged();
 </script>

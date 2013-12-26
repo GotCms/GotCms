@@ -114,7 +114,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
             $label = new Element\Text();
             $label->setName($prefix . '[label]');
             $label->setAttribute('class', 'form-control');
-            $label->setAttribute('label', 'Label');
+            $label->setLabel('Label');
             $label->setAttribute('id', 'label' . $datatypeId);
             $label->setValue(empty($datatypeConfig['label']) ? '' : $datatypeConfig['label']);
             $fieldset->add($label);

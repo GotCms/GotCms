@@ -51,16 +51,16 @@
         <?php foreach ($this->datatypes as $datatype_id => $datatype): ?>
             <div id="tabs-<?php echo $datatype_id; ?>">
                 <?php foreach ($datatype['fieldset']->getElements() as $element): ?>
-                    <div>
+                    <div class="clearfix">
                         <?php $content = $element->getAttribute('content'); ?>
                         <?php if (!empty($content)): ?>
                             <?php echo $content; ?>
                         <?php else: ?>
-                            <?php $label = $element->getAttribute('label'); ?>
+                            <?php $label = $element->getLabel(); ?>
                             <?php if (!empty($label)): ?>
                                 <?php $id = $element->getAttribute('id'); ?>
                                 <?php if (!empty($id)): ?>
-                                    <label class="required" for="<?php echo $this->escapeHtml($this->translate($element->getAttribute('id'))); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+                                    <label class="required" for="<?php echo $this->escapeHtml($this->translate($element->getAttribute('id'))); ?>"><?php echo $this->escapeHtml($this->translate($label)); ?></label>
                                 <?php endif; ?>
                             <?php endif; ?>
 

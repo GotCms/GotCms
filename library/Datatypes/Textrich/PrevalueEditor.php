@@ -59,7 +59,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     {
         $parameters = $this->getConfig();
         $ckeditor   = new CkEditor();
-        if (empty($parameters)) {
+        if (empty($parameters) or !is_array($parameters)) {
             $parameters = array();
         }
 
