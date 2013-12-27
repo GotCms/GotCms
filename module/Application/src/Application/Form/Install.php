@@ -131,7 +131,12 @@ class Install extends AbstractForm
 
         $driver = new Element\Select('driver');
         $driver->setValueOptions($data)
-            ->setAttribute('label', 'Driver')
+            ->setLabel('Driver')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            )
             ->setAttribute('id', 'driver')
             ->setAttribute('class', 'form-control');
 
@@ -139,23 +144,43 @@ class Install extends AbstractForm
         $hostname->setValue('localhost')
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'hostname')
-            ->setAttribute('label', 'Hostname');
+            ->setLabel('Hostname')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            );
 
         $username = new Element\Text('username');
         $username->setAttribute('type', 'text')
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'username')
-            ->setAttribute('label', 'Username');
+            ->setLabel('Username')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            );
 
         $password = new Element\Password('password');
         $password->setAttribute('class', 'form-control')
             ->setAttribute('id', 'password')
-            ->setAttribute('label', 'Password');
+            ->setLabel('Password')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            );
 
         $dbname = new Element\Text('dbname');
         $dbname->setAttribute('class', 'form-control')
             ->setAttribute('id', 'dbname')
-            ->setAttribute('label', 'Db Name');
+            ->setLabel('Db Name')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            );
 
         $this->add($driver);
         $this->add($hostname);
@@ -225,12 +250,22 @@ class Install extends AbstractForm
     public function configuration()
     {
         $siteName = new Element\Text('site_name');
-        $siteName->setAttribute('label', 'Site name')
+        $siteName->setLabel('Site name')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            )
             ->setAttribute('id', 'site_name')
             ->setAttribute('class', 'form-control');
 
         $siteIsOffline = new Element\Checkbox('site_is_offline');
-        $siteIsOffline->setAttribute('label', 'Is offline')
+        $siteIsOffline->setLabel('Is offline')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            )
             ->setAttribute('class', 'input-checkbox')
             ->setAttribute('id', 'is-offline')
             ->setCheckedValue('1');
@@ -239,32 +274,62 @@ class Install extends AbstractForm
         $adminEmail->setAttribute('type', 'text')
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'admin_email')
-            ->setAttribute('label', 'Email');
+            ->setLabel('Email')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            );
 
         $adminFirstname = new Element\Text('admin_firstname');
         $adminFirstname->setAttribute('type', 'text')
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'admin_firstname')
-            ->setAttribute('label', 'Firstname');
+            ->setLabel('Firstname')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            );
 
         $adminLastname = new Element\Text('admin_lastname');
         $adminLastname->setAttribute('type', 'text')
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'admin_lastname')
-            ->setAttribute('label', 'Lastname');
+            ->setLabel('Lastname')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            );
 
         $adminLogin = new Element\Text('admin_login');
-        $adminLogin->setAttribute('label', 'Login')
+        $adminLogin->setLabel('Login')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            )
             ->setAttribute('id', 'admin_login')
             ->setAttribute('class', 'form-control');
 
         $adminPassword = new Element\Password('admin_password');
-        $adminPassword->setAttribute('label', 'Admin password')
+        $adminPassword->setLabel('Admin password')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            )
             ->setAttribute('id', 'admin_password')
             ->setAttribute('class', 'form-control');
 
         $adminPasswordConfirm = new Element\Password('admin_passowrd_confirm');
-        $adminPasswordConfirm->setAttribute('label', 'Confirm admin password')
+        $adminPasswordConfirm->setLabel('Confirm admin password')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            )
             ->setAttribute('id', 'admin_passowrd_confirm')
             ->setAttribute('class', 'form-control');
 
@@ -284,7 +349,12 @@ class Install extends AbstractForm
         }
 
         $template = new Element\Select('template');
-        $template->setAttribute('label', 'Default template')
+        $template->setLabel('Default template')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label required col-lg-2',
+                )
+            )
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'template')
             ->setAttribute('data', $renderOptions)
