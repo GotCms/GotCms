@@ -103,6 +103,10 @@ class CmsController extends Action
     {
         $coreConfig = $this->getServiceLocator()->get('CoreConfig');
         $values     = $coreConfig->getValues();
+        $this->form->setAttribute(
+            'action',
+            $this->url()->fromRoute($this->getRouteMatch()->getMatchedRouteName())
+        );
         $this->form->setValues($values);
 
         if ($this->getRequest()->isPost()) {

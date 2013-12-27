@@ -54,6 +54,7 @@ class Config extends AbstractForm
     public function init()
     {
         $this->setInputFilter(new InputFilter());
+        $this->setAttribute('class', 'relative form-horizontal');
     }
 
     /**
@@ -67,7 +68,12 @@ class Config extends AbstractForm
         $generalFieldset = new Fieldset('general');
         $generalFieldset->setLabel('General');
         $name = new Element\Text('site_name');
-        $name->setAttribute('label', 'Site name')
+        $name->setLabel('Site name')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'site_name')
             ->setAttribute('class', 'form-control');
         $generalFieldset->add($name);
@@ -84,7 +90,12 @@ class Config extends AbstractForm
         );
 
         $isOffline = new Element\Checkbox('site_is_offline');
-        $isOffline->setAttribute('label', 'Is offline')
+        $isOffline->setLabel('Is offline')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('class', 'input-checkbox')
             ->setAttribute('id', 'site-offiline')
             ->setCheckedValue('1');
@@ -101,7 +112,12 @@ class Config extends AbstractForm
         $documentCollection = new Document\Collection();
         $documentCollection->load(0);
         $offlineDocument = new Element\Select('site_offline_document');
-        $offlineDocument->setAttribute('label', 'Offline document')
+        $offlineDocument->setLabel('Offline document')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'site_offline_document')
             ->setValueOptions(array('Select document') + $documentCollection->getSelect());
@@ -117,7 +133,12 @@ class Config extends AbstractForm
 
         $layoutCollection = new Layout\Collection();
         $layoutNotFound   = new Element\Select('site_404_layout');
-        $layoutNotFound->setAttribute('label', '404 layout')
+        $layoutNotFound->setLabel('404 layout')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'site_404_layout')
             ->setValueOptions(array('Select document') + $layoutCollection->getSelect());
@@ -132,7 +153,12 @@ class Config extends AbstractForm
         );
 
         $layoutException = new Element\Select('site_exception_layout');
-        $layoutException->setAttribute('label', 'Exception layout')
+        $layoutException->setLabel('Exception layout')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'site_exception_layout')
             ->setValueOptions(array('Select document') + $layoutCollection->getSelect());
@@ -161,7 +187,7 @@ class Config extends AbstractForm
         $sessionFieldset = new Fieldset('session');
         $sessionFieldset->setLabel('Session');
         $cookieDomain = new Element\Text('cookie_domain');
-        $cookieDomain->setAttribute('label', 'Cookie domain')
+        $cookieDomain->setLabel('Cookie domain')
             ->setAttribute('id', 'cookie_domain')
             ->setAttribute('class', 'form-control');
         $sessionFieldset->add($cookieDomain);
@@ -178,7 +204,12 @@ class Config extends AbstractForm
         );
 
         $cookiePath = new Element\Text('cookie_path');
-        $cookiePath->setAttribute('label', 'Cookie path')
+        $cookiePath->setLabel('Cookie path')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'cookie_path')
             ->setAttribute('class', 'form-control');
         $sessionFieldset->add($cookiePath);
@@ -195,7 +226,12 @@ class Config extends AbstractForm
         );
 
         $sessionHandler = new Element\Select('session_handler');
-        $sessionHandler->setAttribute('label', 'Session handler')
+        $sessionHandler->setLabel('Session handler')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'session_handler')
             ->setValueOptions(array('0' => 'Files', '1' => 'Database'));
@@ -213,7 +249,12 @@ class Config extends AbstractForm
         );
 
         $sessionPath = new Element\Text('session_path');
-        $sessionPath->setAttribute('label', 'Session path')
+        $sessionPath->setLabel('Session path')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'session_path')
             ->setAttribute('class', 'form-control');
         $sessionFieldset->add($sessionPath);
@@ -227,7 +268,12 @@ class Config extends AbstractForm
         );
 
         $sessionLifetime = new Element\Text('session_lifetime');
-        $sessionLifetime->setAttribute('label', 'Session lifetime')
+        $sessionLifetime->setLabel('Session lifetime')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'session_lifetime')
             ->setAttribute('class', 'form-control');
         $sessionFieldset->add($sessionLifetime);
@@ -250,7 +296,12 @@ class Config extends AbstractForm
         $debugFieldset = new Fieldset('debug');
         $debugFieldset->setLabel('Debug');
         $debugIsActive = new Element\Checkbox('debug_is_active');
-        $debugIsActive->setAttribute('label', 'Debug is active')
+        $debugIsActive->setLabel('Debug is active')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'debug_is_active')
             ->setAttribute('id', 'input-checkbox')
             ->setAttribute('class', 'input-checkbox');
@@ -273,7 +324,12 @@ class Config extends AbstractForm
         $cacheFieldset = new Fieldset('cache');
         $cacheFieldset->setLabel('Cache');
         $cacheIsActive = new Element\Checkbox('cache_is_active');
-        $cacheIsActive->setAttribute('label', 'Cache is active')
+        $cacheIsActive->setLabel('Cache is active')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'cache_is_active')
             ->setAttribute('class', 'input-checkbox')
             ->setAttribute('id', 'cache-active');
@@ -293,7 +349,12 @@ class Config extends AbstractForm
         $cacheHandler = new Element\Select('cache_handler');
         $cacheHandler->setAttribute('class', 'form-control')
             ->setAttribute('id', 'cache_handler')
-            ->setAttribute('label', 'Cache handler');
+            ->setLabel('Cache handler')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            );
         $handlerWhitelist = array('filesystem' => 'FileSystem');
         if (extension_loaded('apc')) {
             $handlerWhitelist['apc'] = 'Apc';
@@ -318,7 +379,12 @@ class Config extends AbstractForm
         );
 
         $cacheLifetime = new Element\Text('cache_lifetime');
-        $cacheLifetime->setAttribute('label', 'Cache lifetime')
+        $cacheLifetime->setLabel('Cache lifetime')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'cache_lifetime')
             ->setAttribute('class', 'form-control');
         $cacheFieldset->add($cacheLifetime);
@@ -342,7 +408,12 @@ class Config extends AbstractForm
         $streamFieldset->setLabel('Stream Wrapper');
 
         $isActive = new Element\Checkbox('stream_wrapper_is_active');
-        $isActive->setAttribute('label', 'Stream wrapper is active')
+        $isActive->setLabel('Stream wrapper is active')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('class', 'input-checkbox')
             ->setAttribute('id', 'stream-is-active')
             ->setCheckedValue('1');
@@ -374,7 +445,12 @@ class Config extends AbstractForm
         $localeFieldset = new Fieldset('locale');
         $localeFieldset->setLabel('Locale');
         $locale = new Element\Select('locale');
-        $locale->setAttribute('label', 'Server locale')
+        $locale->setLabel('Server locale')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'locale')
             ->setAttribute('class', 'form-control')
             ->setValueOptions($config['locales']);
@@ -397,7 +473,12 @@ class Config extends AbstractForm
         $mailFieldset = new Fieldset('mail');
         $mailFieldset->setLabel('Mail');
         $mailFrom = new Element\Text('mail_from');
-        $mailFrom->setAttribute('label', 'From E-mail')
+        $mailFrom->setLabel('From E-mail')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'mail_from')
             ->setAttribute('class', 'form-control');
         $mailFieldset->add($mailFrom);
@@ -414,7 +495,12 @@ class Config extends AbstractForm
         );
 
         $mailFromName = new Element\Text('mail_from_name');
-        $mailFromName->setAttribute('label', 'From name')
+        $mailFromName->setLabel('From name')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'mail_from_name')
             ->setAttribute('class', 'form-control');
         $mailFieldset->add($mailFromName);
@@ -437,7 +523,12 @@ class Config extends AbstractForm
         $webFieldset->setLabel('Web');
 
         $forceBackendSsl = new Element\Checkbox('force_backend_ssl');
-        $forceBackendSsl->setAttribute('label', 'Force backend SSL')
+        $forceBackendSsl->setLabel('Force backend SSL')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'force_backend_ssl')
             ->setAttribute('class', 'input-checkbox')
             ->setAttribute('id', 'force-backend-ssl');
@@ -452,7 +543,12 @@ class Config extends AbstractForm
         );
 
         $forceFrontendSsl = new Element\Checkbox('force_frontend_ssl');
-        $forceFrontendSsl->setAttribute('label', 'Force frontend SSL')
+        $forceFrontendSsl->setLabel('Force frontend SSL')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'force_frontend_ssl')
             ->setAttribute('class', 'input-checkbox')
             ->setAttribute('id', 'force-frontend-ssl');
@@ -477,7 +573,12 @@ class Config extends AbstractForm
 
         foreach ($pathFields as $label => $identifier) {
             $field = new Element\Text($identifier);
-            $field->setAttribute('label', $label)
+            $field->setLabel($label)
+                ->setLabelAttributes(
+                    array(
+                        'class' => 'required control-label col-lg-2'
+                    )
+                )
                 ->setAttribute('id', $identifier)
                 ->setAttribute('class', 'form-control');
             $webFieldset->add($field);

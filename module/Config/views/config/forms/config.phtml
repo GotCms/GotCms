@@ -26,7 +26,8 @@
  */
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 ?>
-<form class="relative form-horizontal" action="<?php echo $this->escapeHtml($this->form->getAttribute('action')); ?>" method="post" enctype="application/x-www-form-urlencoded">
+
+<?php echo $this->form()->openTag($this->form); ?>
     <?php $fieldsets = $this->form->getFieldsets(); ?>
 
     <div id="accordion">
@@ -35,7 +36,7 @@
             <div>
                 <?php foreach ($fieldset->getElements() as $element): ?>
                     <div class="form-group">
-                        <label class="required control-label col-lg-2" for="<?php echo $element->getAttribute('id'); ?>"><?php echo $this->escapeHtml($this->translate($element->getAttribute('label'))); ?></label>
+                        <?php echo $this->formLabel($element); ?>
 
                         <div class="col-lg-10">
                             <?php echo $this->formElement($element); ?>
@@ -47,9 +48,8 @@
         <?php endforeach; ?>
     </div>
 
-
     <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
-</form>
+<?php echo $this->form()->closeTag($this->form); ?>
 
 <script type="text/javascript">
 $(function(){
