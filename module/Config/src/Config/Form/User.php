@@ -165,7 +165,7 @@ class User extends AbstractForm
             ->setAttribute('id', 'firstname');
         $this->add($firstname);
 
-        $role           = new Element\Select('user_acl_role_id');
+        $role = new Element\Select('user_acl_role_id');
         $role->setLabel('Role')
             ->setLabelAttributes(
                 array(
