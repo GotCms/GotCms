@@ -49,17 +49,21 @@ class Comment extends AbstractForm
     public function init()
     {
         $showEmail = new Element\Checkbox('show_email');
-        $showEmail->setAttribute('label', 'Show email');
-        $showEmail->setAttribute('required', 'required');
+        $showEmail->setLabel('Show email');
+        $showEmail->setAttribute('required', 'required')
+            ->setAttribute('id', 'show-email');
         $username = new Element\Text('username');
-        $username->setAttribute('label', 'Username');
-        $username->setAttribute('required', 'required');
+        $username->setLabel('Username');
+        $username->setAttribute('required', 'required')
+            ->setAttribute('id', 'username');
         $email = new Element\Text('email');
-        $email->setAttribute('label', 'Email');
-        $email->setAttribute('required', 'required');
+        $email->setLabel('Email');
+        $email->setAttribute('required', 'required')
+            ->setAttribute('id', 'email');
         $message = new Element\Textarea('message');
-        $message->setAttribute('label', 'Message');
-        $message->setAttribute('required', 'required');
+        $message->setLabel('Message');
+        $message->setAttribute('required', 'required')
+            ->setAttribute('id', 'message');
 
         $captchaImage = new CaptchaImage(
             array(
@@ -75,10 +79,10 @@ class Comment extends AbstractForm
         $captchaImage->setImgUrl('/frontend/tmp');
 
         $captcha = new Element\Captcha('captcha');
-        $captcha->setAttribute('label', 'Please verify you are human');
-        $captcha->setCaptcha($captchaImage);
-        $captcha->setAttribute('required', 'required');
-        $captcha->setAttribute('id', 'captcha');
+        $captcha->setLabel('Please verify you are human')
+            ->setCaptcha($captchaImage)
+            ->setAttribute('required', 'required')
+            ->setAttribute('id', 'captcha');
 
         $this->add($showEmail);
         $this->add($username);

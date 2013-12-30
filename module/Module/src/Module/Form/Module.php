@@ -77,14 +77,12 @@ class Module extends AbstractForm
         }
 
         $module = new Element\Select('module');
-        $module->setOptions(
-            array(
-                'label' => 'Module',
-                'label_attributes' => array(
+        $module->setLabel('Module')
+            ->setLabelAttributes(
+                array(
                     'class' => 'required'
                 )
-            )
-        );
+            );
         $module->setAttribute('id', 'module')
             ->setAttribute('class', 'form-control')
             ->setAttribute('modules_info', $modulesInfos)

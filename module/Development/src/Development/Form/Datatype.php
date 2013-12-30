@@ -54,14 +54,12 @@ class Datatype extends AbstractForm
 
 
         $name = new Element\Text('name');
-        $name->setOptions(
-            array(
-                'label' => 'Name',
-                'label_attributes' => array(
+        $name->setLabel('Name')
+            ->setLabelAttributes(
+                array(
                     'class' => 'required control-label col-lg-2',
                 )
-            )
-        );
+            );
         $name->setAttribute('class', 'form-control')
             ->setAttribute('id', 'name');
         $this->add($name);

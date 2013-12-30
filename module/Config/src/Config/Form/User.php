@@ -59,7 +59,8 @@ class User extends AbstractForm
                         array('name' => 'not_empty'),
                         array('name' => 'email_address'),
                     ),
-                ), 'login' => array(
+                ),
+                'login' => array(
                     'required' => true,
                     'validators' => array(
                         array('name' => 'not_empty'),
@@ -72,17 +73,20 @@ class User extends AbstractForm
                             ),
                         ),
                     ),
-                ), 'lastname' => array(
+                ),
+                'lastname' => array(
                     'required' => true,
                     'validators' => array(
                         array('name' => 'not_empty'),
                     ),
-                ), 'firstname' => array(
+                ),
+                'firstname' => array(
                     'required' => true,
                     'validators' => array(
                         array('name' => 'not_empty'),
                     ),
-                ), 'user_acl_role_id' => array(
+                ),
+                'user_acl_role_id' => array(
                     'required' => true,
                     'validators' => array(
                         array('name' => 'not_empty'),
@@ -93,7 +97,81 @@ class User extends AbstractForm
 
         $this->setInputFilter($inputFilter);
 
+        $email = new Element\Text('email');
+        $email->setLabel('Email')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'email');
+        $this->add($email);
+
+        $login = new Element\Text('login');
+        $login->setLabel('Login')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'login');
+        $this->add($login);
+
+        $password = new Element\Password('password');
+        $password->setLabel('Password')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('autocomplete', 'off')
+            ->setAttribute('id', 'password');
+        $this->add($password);
+
+        $passwordConfirm = new Element\Password('password_confirm');
+        $passwordConfirm->setLabel('Password Confirm')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('autocomplete', 'off')
+            ->setAttribute('id', 'password_confirm');
+        $this->add($passwordConfirm);
+
+        $lastname = new Element\Text('lastname');
+        $lastname->setLabel('Lastname')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'lastname');
+        $this->add($lastname);
+
+        $firstname = new Element\Text('firstname');
+        $firstname->setLabel('Firstname')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'firstname');
+        $this->add($firstname);
+
         $role           = new Element\Select('user_acl_role_id');
+        $role->setLabel('Role')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            );
         $roleCollection = new RoleCollection();
         $rolesList      = $roleCollection->getRoles();
         $selectOptions  = array();
@@ -104,12 +182,7 @@ class User extends AbstractForm
         $role->setValueOptions($selectOptions)
             ->setAttribute('class', 'form-control');
 
-        $this->add(new Element('email'));
-        $this->add(new Element('login'));
-        $this->add(new Element('password'));
-        $this->add(new Element('password_confirm'));
-        $this->add(new Element('lastname'));
-        $this->add(new Element('firstname'));
+
         $this->add($role);
     }
 

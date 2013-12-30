@@ -70,8 +70,27 @@ class Role extends AbstractForm
 
         $this->setInputFilter($inputFilter);
 
-        $this->add(new Element\Text('name'));
-        $this->add(new Element\Text('description'));
+        $name = new Element\Text('name');
+        $name->setLabel('Name')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'name');
+        $this->add($name);
+
+        $description = new Element\Text('description');
+        $description->setLabel('Description')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'optional control-label col-lg-2',
+                )
+            )
+            ->setAttribute('class', 'form-control')
+            ->setAttribute('id', 'description');
+        $this->add($description);
     }
 
     /**

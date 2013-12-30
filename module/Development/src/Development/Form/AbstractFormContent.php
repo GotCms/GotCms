@@ -89,53 +89,45 @@ class AbstractFormContent extends AbstractForm
         $this->setInputFilter($inputFilter);
 
         $name = new Element\Text('name');
-        $name->setOptions(
-            array(
-                'label' => 'Name',
-                'label_attributes' => array(
+        $name->setLabel('Name')
+            ->setLabelAttributes(
+                array(
                     'class' => 'required control-label col-lg-2',
                 )
-            )
-        );
+            );
         $name->setAttribute('class', 'form-control')
             ->setAttribute('id', 'name');
         $this->add($name);
 
         $identifier = new Element\Text('identifier');
-        $identifier->setOptions(
-            array(
-                'label' => 'Identifier',
-                'label_attributes' => array(
+        $identifier->setLabel('Identifier')
+            ->setLabelAttributes(
+                array(
                     'class' => 'required control-label col-lg-2',
                 )
-            )
-        );
+            );
         $identifier->setAttribute('class', 'form-control')
             ->setAttribute('id', 'identifier');
         $this->add($identifier);
 
         $description = new Element\Text('description');
-        $description->setOptions(
-            array(
-                'label' => 'Description',
-                'label_attributes' => array(
+        $description->setLabel('Description')
+            ->setLabelAttributes(
+                array(
                     'class' => 'control-label col-lg-2',
                 )
-            )
-        );
+            );
         $description->setAttribute('class', 'form-control')
             ->setAttribute('id', 'description');
         $this->add($description);
 
         $content = new Element\Textarea('content');
-        $content->setOptions(
-            array(
-                'label' => 'Content',
-                'label_attributes' => array(
+        $content->setLabel('Content')
+            ->setLabelAttributes(
+                array(
                     'class' => 'control-label col-lg-2',
                 )
-            )
-        );
+            );
         $content->setAttribute('cols', '80')
             ->setAttribute('rows', '24')
             ->setAttribute('id', 'content');

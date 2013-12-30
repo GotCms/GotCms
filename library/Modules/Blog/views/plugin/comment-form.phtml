@@ -3,22 +3,22 @@
     <div class="hr dotted clearfix">&nbsp;</div>
     <ul>
         <li class="clearfix">
-            <label for="username"><?php echo $this->escapeHtml($this->translate('Your Name')); ?></label>
+            <?php echo $this->formLabel($this->form->get('username')); ?>
             <input id="username" name="username" type="text" required="required" value="<?php echo $this->escapeHtml($this->form->getValue('username')); ?>">
         </li>
         <li class="clearfix">
-            <label for="email"><?php echo $this->escapeHtml($this->translate('Your Email')); ?></label>
+            <?php echo $this->formLabel($this->form->get('email')); ?>
             <input id="email" name="email" type="text" required="required" value="<?php echo $this->escapeHtml($this->form->getValue('email')); ?>">
         </li>
         <li class="clearfix">
-            <label for="show_email"><?php echo $this->escapeHtml($this->translate('Show email')); ?></label>
+            <?php echo $this->formLabel($this->form->get('show_email')); ?>
             <div id="show-email">
                 <input type="checkbox" checked="checked" value="1" id="show_email" name="show_email">
                 <label for="show_email"></label>
             </div>
         </li>
         <li class="clearfix">
-            <label for="message"><?php echo $this->escapeHtml($this->translate('Comment')); ?></label>
+            <?php echo $this->formLabel($this->form->get('message')); ?>
             <textarea id="message" name="message" rows="3" cols="40" required="required"><?php echo $this->escapeHtml($this->form->getValue('message')); ?></textarea>
         </li>
         <li class="clearfix">
