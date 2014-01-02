@@ -111,12 +111,7 @@ class Partial extends ZendPartial
         }
 
         if (empty($viewModel)) {
-            try {
-                $return = $view->render($name);
-                return $return;
-            } catch (\Exception $e) {
-                return false;
-            }
+            return $view->render($name);
         }
 
         $name = 'view/' . $name;

@@ -157,8 +157,9 @@ class PartialTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertInstanceOf('Gc\View\Helper\Partial', $this->object->__invoke(''));
-
-        $this->assertFalse($this->object->__invoke('fake-view-identifier'));
         $this->assertEquals('View Content', $this->object->__invoke('view-identifier'));
+
+        $this->setExpectedException('Zend\View\Exception\RuntimeException');
+        $this->assertFalse($this->object->__invoke('fake-view-identifier'));
     }
 }
