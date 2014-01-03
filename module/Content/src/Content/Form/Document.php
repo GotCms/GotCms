@@ -191,14 +191,18 @@ class Document extends AbstractForm
 
         $viewModel = View\Model::fromId($document->getDocumentType()->getDefaultViewId());
         if (!empty($viewModel)) {
-            $select = array_merge(
-                $select,
-                array($viewModel->getId() => $viewModel->getName())
-            );
+            $select = $select + array($viewModel->getId() => $viewModel->getName());
             if (empty($viewSelected)) {
                 $viewSelected = $viewModel->getId();
             }
         }
+
+        $view = new Element\Select('document-view');
+        $view->setValueOptions($select)
+            ->setValue((string) $viewSelected)
+            ->setAttribute('id', 'view')
+            ->setAttribute('class', 'form-control')
+            ->setLabel('View');
 
         $inputFilterFactory = $this->getInputFilter();
         $inputFilter        = $inputFilterFactory->add(
@@ -211,13 +215,6 @@ class Document extends AbstractForm
             ),
             'document-view'
         );
-
-        $view = new Element\Select('document-view');
-        $view->setValueOptions($select)
-            ->setValue((string) $viewSelected)
-            ->setAttribute('id', 'view')
-            ->setAttribute('class', 'form-control')
-            ->setLabel('View');
 
         $this->add($view);
 
