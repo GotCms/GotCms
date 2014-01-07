@@ -146,10 +146,26 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
 
         $this->document->save();
 
+        $this->documentTwo = DocumentModel::fromArray(
+            array(
+                'name' => 'Document name',
+                'url_key' => 'other-url',
+                'status' => DocumentModel::STATUS_ENABLE,
+                'show_in_nav' => true,
+                'user_id' => $this->user->getId(),
+                'document_type_id' => $this->documentType->getId(),
+                'view_id' => $this->view->getId(),
+                'layout_id' => $this->layout->getId(),
+                'parent_id' => 0
+            )
+        );
+
+        $this->documentTwo->save();
+
         $this->documentChildren = DocumentModel::fromArray(
             array(
                 'name' => 'Document name',
-                'url_key' => 'url-key',
+                'url_key' => 'children-key',
                 'status' => DocumentModel::STATUS_ENABLE,
                 'show_in_nav' => true,
                 'user_id' => $this->user->getId(),
@@ -162,7 +178,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
 
         $this->documentChildren->save();
 
-        $this->documentSecondChildren = DocumentModel::fromArray(
+        $this->documentThirdChildren = DocumentModel::fromArray(
             array(
                 'name' => 'Document name',
                 'url_key' => 'url-key',
@@ -176,9 +192,39 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
             )
         );
 
+        $this->documentThirdChildren->save();
+
+        $this->documentSecondChildren = DocumentModel::fromArray(
+            array(
+                'name' => 'Document name',
+                'url_key' => 'second-child-key',
+                'status' => DocumentModel::STATUS_ENABLE,
+                'show_in_nav' => true,
+                'user_id' => $this->user->getId(),
+                'document_type_id' => $this->documentType->getId(),
+                'view_id' => $this->view->getId(),
+                'layout_id' => $this->layout->getId(),
+                'parent_id' => $this->documentChildren->getId()
+            )
+        );
+
         $this->documentSecondChildren->save();
-        $this->object = new Navigation;
-        $this->object->useActiveBranch(true);
+
+        $this->documentForthChildren = DocumentModel::fromArray(
+            array(
+                'name' => 'Document name',
+                'url_key' => 'forth-child-key',
+                'status' => DocumentModel::STATUS_ENABLE,
+                'show_in_nav' => true,
+                'user_id' => $this->user->getId(),
+                'document_type_id' => $this->documentType->getId(),
+                'view_id' => $this->view->getId(),
+                'layout_id' => $this->layout->getId(),
+                'parent_id' => $this->documentThirdChildren->getId()
+            )
+        );
+
+        $this->documentForthChildren->save();
     }
 
     /**
@@ -192,11 +238,20 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $this->document->delete();
         unset($this->document);
 
+        $this->documentTwo->delete();
+        unset($this->documentTwo);
+
         $this->documentChildren->delete();
         unset($this->documentChildren);
 
         $this->documentSecondChildren->delete();
         unset($this->documentSecondChildren);
+
+        $this->documentThirdChildren->delete();
+        unset($this->documentThirdChildren);
+
+        $this->documentForthChildren->delete();
+        unset($this->documentForthChildren);
 
         $this->view->delete();
         unset($this->view);
@@ -220,6 +275,8 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetBasePath()
     {
+        $this->object = new Navigation;
+        $this->object->useActiveBranch(true);
         $this->object->setBasePath('/base/path');
         $this->assertEquals('/base/path', $this->object->getBasePath());
     }
@@ -231,6 +288,8 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetBasePath()
     {
+        $this->object = new Navigation;
+        $this->object->useActiveBranch(true);
         $this->object->setBasePath('/base/path');
         $this->assertEquals('/base/path', $this->object->getBasePath());
     }
@@ -242,7 +301,9 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        Registry::get('Application')->getRequest()->getUri()->setPath('/url-key/url-key');
+        Registry::get('Application')->getRequest()->getUri()->setPath('/url-key/children-key');
+        $this->object = new Navigation;
+        $this->object->useActiveBranch(true);
         $array = $this->object->render();
         $this->assertTrue(count($array) > 0);
     }
@@ -255,6 +316,8 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithNoActivePage()
     {
         Registry::get('Application')->getRequest()->getUri()->setPath('/other-uri');
+        $this->object = new Navigation;
+        $this->object->useActiveBranch(true);
         $array = $this->object->render();
         $this->assertTrue(count($array) > 0);
     }
@@ -267,6 +330,22 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     public function testRenderWithChildrenActivePage()
     {
         Registry::get('Application')->getRequest()->getUri()->setPath('/url-key/url-key/url-key');
+        $this->object = new Navigation;
+        $this->object->useActiveBranch(true);
+        $array = $this->object->render();
+        $this->assertTrue(count($array) > 0);
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testRenderWithChildrenActivePageOnTheForthDocument()
+    {
+        Registry::get('Application')->getRequest()->getUri()->setPath('/url-key/children-key/second-child-key');
+        $this->object = new Navigation;
+        $this->object->useActiveBranch(true);
         $array = $this->object->render();
         $this->assertTrue(count($array) > 0);
     }
