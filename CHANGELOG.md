@@ -14,6 +14,7 @@
 - Translator with javascript have missing translations ([https://github.com/GotCms/GotCms/issues/165](https://github.com/GotCms/GotCms/issues/165))
 - Rebuild all forms ([https://github.com/GotCms/GotCms/issues/172](https://github.com/GotCms/GotCms/issues/172))
 - currentDocument must be an helper instead of variable ([https://github.com/GotCms/GotCms/issues/173](https://github.com/GotCms/GotCms/issues/173))
+- setValue method should allow user to add custom settings in core_config_data table ([https://github.com/GotCms/GotCms/issues/178](https://github.com/GotCms/GotCms/issues/178))
 
 ##1.1.0 (11 Dec 2013)
 - Update to Zend Framework 2.2.5 ([https://github.com/GotCms/GotCms/issues/141](https://github.com/GotCms/GotCms/issues/141))

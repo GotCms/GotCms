@@ -115,9 +115,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testSetValueWithFakeIdentifier()
+    public function testSetValueWithNewIdentifier()
     {
-        $this->assertFalse($this->object->setValue('fake_identifier', 'fake_value'));
+        $this->assertInternalType('integer', $this->object->setValue('fake_identifier', 'fake_value'));
     }
 
     /**

@@ -107,8 +107,13 @@ class Config extends AbstractTable
         if (!empty($row)) {
             $where = new Where();
             return $this->update(array('value' => $value), $where->equalTo('identifier', $identifier));
+        } else {
+            return $this->insert(
+                array(
+                    'value' => $value,
+                    'identifier' => $identifier,
+                )
+            );
         }
-
-        return false;
     }
 }
