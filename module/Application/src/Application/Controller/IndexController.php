@@ -123,6 +123,7 @@ class IndexController extends Action
                 $layout     = $cacheValue['layout'];
                 $viewModel->setVariables($cacheValue['layout_variables']);
                 $this->layout()->setVariables($cacheValue['layout_variables']);
+                $this->getServiceLocator()->get('ViewHelperManager')->get('CurrentDocument')->set($cacheValue['currentDocument']);
             }
         }
 
@@ -222,6 +223,7 @@ class IndexController extends Action
                         'layout_variables' => $variables,
                         'layout'           => $layout,
                         'view'             => $view,
+                        'currentDocument'  => $document,
                     )
                 );
             }
