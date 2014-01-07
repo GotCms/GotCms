@@ -59,7 +59,7 @@ INSERT INTO view VALUES (5, '2012-09-20 22:12:33', '2012-09-20 22:21:24', 'Navig
 $component = new \\Gc\\Component\\Navigation();
 $container = new \\Zend\\Navigation\\Navigation($component->render());
 $this->navigation($container);
-$document = $this->layout()->currentDocument;
+$document = $this->currentDocument();
 
 echo $this->navigation()->menu()->setUlClass(''sf-menu navigation'');', 'Navigation');
 INSERT INTO view VALUES (6, '2012-10-25 19:57:05', '2012-10-25 20:27:48', 'Flash messages', 'flash-messages', '<?php if(!empty($this->layout()->flashMessages)): ?>

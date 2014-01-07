@@ -68,7 +68,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->script->save();
-		$this->useStreamWrapper(1);
+        $this->useStreamWrapper(1);
         $this->object = new Script(Registry::get('Application')->getServiceManager());
     }
 
@@ -80,7 +80,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-		$this->useStreamWrapper(0);
+        $this->useStreamWrapper(0);
         unset($this->object);
         $this->script->delete();
         unset($this->script);
@@ -107,7 +107,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvokeWithoutStreamwrapper()
     {
-		$this->useStreamWrapper(0);
+        $this->useStreamWrapper(0);
         $this->object = new Script(Registry::get('Application')->getServiceManager());
         ob_start();
         $this->object->__invoke('script-identifier');
@@ -123,7 +123,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvokeWithoutConfiguration()
     {
-    	$serviceManager = Registry::get('Application')->getServiceManager();
+        $serviceManager = Registry::get('Application')->getServiceManager();
 
         $config    = $serviceManager->get('Config');
         $oldConfig = $config;
@@ -164,11 +164,13 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     {
         $parent = new ViewModel();
         $parent->setTemplate('layout');
-        $view = new View();
+        $view     = new View();
+        $renderer = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+        $view->setHelperPluginManager($renderer->getHelperPluginManager());
         $view->plugin('view_model')->setRoot($parent);
         $view->resolver()->addPath(__DIR__ . '/_files/views');
         $this->object->setView($view);
-        $this->object->getView()->layout()->currentDocument = new DocumentModel();
+        $view->plugin('CurrentDocument')->set(new DocumentModel());
         $this->assertInstanceOf('Gc\Document\Model', $this->object->getDocument());
     }
 
@@ -232,9 +234,9 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Params', $this->object->params());
     }
 
-	protected function useStreamWrapper($value = 1)
-	{
-		$coreConfig = Registry::get('Application')->getServiceManager()->get('CoreConfig');
-		$coreConfig->setValue('stream_wrapper_is_active', $value);
-	}
+    protected function useStreamWrapper($value = 1)
+    {
+        $coreConfig = Registry::get('Application')->getServiceManager()->get('CoreConfig');
+        $coreConfig->setValue('stream_wrapper_is_active', $value);
+    }
 }

@@ -151,7 +151,7 @@ class Script extends AbstractHelper
      */
     public function getDocument()
     {
-        return $this->getView()->layout()->currentDocument;
+        return $this->getView()->currentDocument();
     }
 
     /**

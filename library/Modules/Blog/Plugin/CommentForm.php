@@ -59,9 +59,12 @@ class CommentForm extends AbstractPlugin
             $this->getForm()->setData($post);
             if ($this->getForm()->isValid()) {
                 $commentTable = new Blog\Model\Comment();
+                $document     = $this->getServiceLocator()
+                    ->get('Zend\View\Renderer\PhpRenderer')
+                    ->plugin('CurrentDocument');
                 if ($commentTable->add(
                     $this->getForm()->getInputFilter()->getValues(),
-                    $this->layout()->currentDocument->getId()
+                    $document()->getId()
                 )
                 ) {
                     $this->flashMessenger()->addSuccessMessage('Message sent');

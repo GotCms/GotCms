@@ -199,9 +199,15 @@ class IndexController extends Action
                     $variables[$property->getIdentifier()] = $value;
                 }
 
+                /**
+                 * @Deprecated no longer available, will be removed in 1.3.0
+                 * use currentDocument() helper instead of variable
+                 */
                 $variables['currentDocument'] = $document;
                 $viewModel->setVariable('currentDocument', $document);
                 $this->layout()->setVariable('currentDocument', $document);
+
+                $this->getServiceLocator()->get('ViewHelperManager')->get('CurrentDocument')->set($document);
 
                 //Set view from database
                 $view   = View\Model::fromId($document->getViewId());

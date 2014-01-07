@@ -180,7 +180,6 @@ class CommentListTest extends \PHPUnit_Framework_TestCase
         $this->object->plugin('layout')->setController(
             $this->getMockForAbstractClass('\Zend\Mvc\Controller\AbstractController')
         );
-        $this->object->layout()->currentDocument = $this->renderer->layout()->currentDocument;
     }
 
     /**

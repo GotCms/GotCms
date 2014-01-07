@@ -157,11 +157,13 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
 
         $this->renderer = new PhpRenderer();
         $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
-        $this->renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
+        $this->renderer->setHelperPluginManager($renderer->getHelperPluginManager());
 
-        $this->renderer->layout()->currentDocument = DocumentModel::fromArray(
-            array(
-                'id' => $this->document->getId(),
+        $this->renderer->plugin('CurrentDocument')->set(
+            DocumentModel::fromArray(
+                array(
+                    'id' => $this->document->getId(),
+                )
             )
         );
 
@@ -245,7 +247,14 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->object->plugin('redirect')->getController()->setEvent(Registry::get('Application')->getMvcEvent());
-        $this->object->layout()->currentDocument = $this->renderer->layout()->currentDocument;
+        $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+        $renderer->plugin('CurrentDocument')->set(
+            DocumentModel::fromArray(
+                array(
+                    'id' => $this->document->getId(),
+                )
+            )
+        );
 
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter        = $inputFilterFactory->createInputFilter(

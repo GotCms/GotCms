@@ -65,11 +65,13 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
     {
         $this->renderer = new PhpRenderer();
         $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
-        $this->renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
+        $this->renderer->setHelperPluginManager($renderer->getHelperPluginManager());
 
-        $this->renderer->layout()->currentDocument = DocumentModel::fromArray(
-            array(
-                'id' => 1,
+        $this->renderer->plugin('currentDocument')->set(
+            DocumentModel::fromArray(
+                array(
+                    'id' => 1,
+                )
             )
         );
 

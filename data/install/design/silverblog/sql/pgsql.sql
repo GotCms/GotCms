@@ -97,7 +97,7 @@ INSERT INTO view VALUES (7, '2013-05-20 15:52:38.647561', '2013-06-02 12:22:18.4
 
 ', 'Paginator control');
 INSERT INTO view VALUES (12, '2013-05-27 08:55:24.70931', '2013-06-02 12:22:18.464786', 'Sidebar', 'sidebar', '<div id="sidebarwrap">
-    <?php $sidebarElements = $this->tools(''unserialize'', $this->currentDocument->getProperty(''sidebarElements'')->getValue()); ?>
+    <?php $sidebarElements = $this->tools(''unserialize'', $this->currentDocument()->getProperty(''sidebarElements'')->getValue()); ?>
     <?php if (empty($sidebarElements)): //Take home value if page does not have one ?>
         <?php $sidebarElements = $this->tools(''unserialize'', $this->document()->getProperty(''sidebarElements'')->getValue()); ?>
     <?php endif; ?>
@@ -172,7 +172,7 @@ INSERT INTO view VALUES (11, '2013-05-24 19:02:58.584746', '2013-06-02 12:22:18.
                 }
 
                 $comment_table = new \Blog\Model\Comment();
-                $comments = $comment_table->getList($this->currentDocument->getId());
+                $comments = $comment_table->getList($this->currentDocument()->getId());
                 $nb_comments = count($comments);
                 ?>
 
@@ -180,7 +180,7 @@ INSERT INTO view VALUES (11, '2013-05-24 19:02:58.584746', '2013-06-02 12:22:18.
                     <h2 class="mainheading"><?php echo $this->escapeHtml($this->title); ?></h2>
                     <article class="post">
                         <div>
-                            <?php $parent = $this->currentDocument->getParent(); ?>
+                            <?php $parent = $this->currentDocument()->getParent(); ?>
                             <p class="sub">
                                 <a href="<?php echo $this->escapeHtml($parent->getUrl()); ?>"><?php echo $this->escapeHtml($parent->getName()); ?></a> &bull; <?php echo $this->escapeHtml(date(''Y-m-d'', strtotime($this->published_at))); ?>
                                 <?php if(!empty($nb_comments)): ?>
@@ -229,7 +229,7 @@ INSERT INTO view VALUES (1, '2012-09-19 19:29:04', '2013-06-02 12:22:18.410393',
     <h2 class="mainheading">Latest from the blog</h2>
     <?php
     $comment_table = new \Blog\Model\Comment();
-    $posts = $this->currentDocument->getAvailableChildren();
+    $posts = $this->currentDocument()->getAvailableChildren();
     foreach ($posts as $child) {
         $children = $child->getChildren();
         if(!empty($children)) {
@@ -296,7 +296,7 @@ INSERT INTO view VALUES (1, '2012-09-19 19:29:04', '2013-06-02 12:22:18.410393',
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <?php echo $this->paginationControl($paginator, ''sliding'', ''paginator'', array(''path'' => $this->currentDocument->getUrl()));?>
+    <?php echo $this->paginationControl($paginator, ''sliding'', ''paginator'', array(''path'' => $this->currentDocument()->getUrl()));?>
     <div class="clear"></div>
 </div>
 ', 'Home page content');
@@ -343,7 +343,7 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-06-02 12:26:50.037182
                 $component = new \Gc\Component\Navigation();
                 $container = new \Zend\Navigation\Navigation($component->render());
                 $this->navigation($container);
-                $document = $this->layout()->currentDocument;
+                $document = $this->currentDocument();
 
                 echo $this->navigation()->menu()->setMaxDepth(0)->setUlClass(''sf-menu navigation'');
             ?>
@@ -358,7 +358,7 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-06-02 12:26:50.037182
             <?php echo $this->content; ?>
         </section>
         <section id="sidebar">
-            <?php echo $this->partial(''sidebar'', array(''currentDocument'' => $this->currentDocument)); ?>
+            <?php echo $this->partial(''sidebar'', array(''currentDocument'' => $this->currentDocument())); ?>
         </section>
         <div class="clear"></div>
     </div>

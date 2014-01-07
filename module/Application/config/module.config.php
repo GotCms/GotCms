@@ -119,12 +119,13 @@ return array(
             },
         ),
         'invokables' => array(
+            'currentDocument'   => 'Gc\View\Helper\CurrentDocument',
             'documents'         => 'Gc\View\Helper\Documents',
             'document'          => 'Gc\View\Helper\Document',
             'formCheckbox'      => 'Gc\View\Helper\FormCheckbox',
             'formMultiCheckbox' => 'Gc\View\Helper\FormMultiCheckbox',
-            'tools'             => 'Gc\View\Helper\Tools',
             'modulePlugin'      => 'Gc\View\Helper\ModulePlugin',
+            'tools'             => 'Gc\View\Helper\Tools',
         ),
     ),
     'router' => array(

@@ -1,4 +1,4 @@
-<form id="comment_form" action="<?php echo $this->escapeHtml($this->layout()->currentDocument->getUrl()); ?>" method="post">
+<form id="comment_form" action="<?php echo $this->escapeHtml($this->currentDocument()->getUrl()); ?>" method="post">
     <h3><?php echo $this->escapeHtml($this->translate('Add a comment')); ?></h3>
     <div class="hr dotted clearfix">&nbsp;</div>
     <ul>

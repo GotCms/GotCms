@@ -84,7 +84,7 @@ INSERT INTO view VALUES (8, '2013-05-22 19:29:56.943005', '2013-05-26 13:26:11.9
         $component = new \Gc\Component\Navigation();
         $container = new \Zend\Navigation\Navigation($component->render());
         $this->navigation($container);
-        $document = $this->layout()->currentDocument;
+        $document = $this->currentDocument();
 
         echo $this->navigation()->menu()->setMaxDepth(0)->setUlClass(''sf-menu navigation'');
     ?>
@@ -183,7 +183,7 @@ INSERT INTO view VALUES (2, '2012-09-19 19:29:50', '2013-05-26 13:26:11.840543',
                 <?php
                 $comment_table = new \Blog\Model\Comment();
 
-                $posts = $this->currentDocument->getAvailableChildren();
+                $posts = $this->currentDocument()->getAvailableChildren();
                 foreach($posts as $child)
                 {
                     $children = $child->getChildren();
@@ -254,7 +254,7 @@ INSERT INTO view VALUES (2, '2012-09-19 19:29:50', '2013-05-26 13:26:11.840543',
                     <?php endforeach; ?>
 
                 <?php endif; ?>
-                <?php echo $this->paginationControl($paginator, ''sliding'', ''paginator'', array(''path'' => $this->currentDocument->getUrl()));?>
+                <?php echo $this->paginationControl($paginator, ''sliding'', ''paginator'', array(''path'' => $this->currentDocument()->getUrl()));?>
             </div>
         </div>
     </div>
@@ -284,7 +284,7 @@ INSERT INTO view VALUES (11, '2013-05-24 19:02:58.584746', '2013-05-26 13:26:11.
                 }
 
                 $comment_table = new \Blog\Model\Comment();
-                $comments = $comment_table->getList($this->currentDocument->getId());
+                $comments = $comment_table->getList($this->currentDocument()->getId());
                 $nb_comments = count($comments);
                 ?>
 
@@ -292,7 +292,7 @@ INSERT INTO view VALUES (11, '2013-05-24 19:02:58.584746', '2013-05-26 13:26:11.
                     <article class="first">
                         <div>
                             <h2 class="title"><?php echo $this->escapeHtml($this->title); ?></h2>
-                            <?php $parent = $this->currentDocument->getParent(); ?>
+                            <?php $parent = $this->currentDocument()->getParent(); ?>
                             <p class="sub">
                                 <a href="<?php echo $this->escapeHtml($parent->getUrl()); ?>"><?php echo $this->escapeHtml($parent->getName()); ?></a> &bull; <?php echo $this->escapeHtml(date(''Y-m-d'', strtotime($this->published_at))); ?>
                                 <?php if(!empty($nb_comments)): ?>

@@ -17,53 +17,51 @@
  *
  * PHP Version >=5.3
  *
- * @category   Gc_Library
- * @package    Modules
- * @subpackage Blog\Model
+ * @category   Gc
+ * @package    Library
+ * @subpackage View\Helper
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace Blog\Plugin;
+namespace Gc\View\Helper;
 
-use Gc\Module\AbstractPlugin;
-use Blog;
+use Zend\View\Helper\AbstractHelper;
+use Gc\Document\Model as DocumentModel;
 
 /**
- * Blog comment table
+ * Retrieve document from id or url_key
  *
- * @category   Gc_Library
- * @package    Modules
- * @subpackage Blog\Model
+ * @category   Gc
+ * @package    Library
+ * @subpackage View\Helper
+ * @example In view: $this->document('mypage/mysubpage'); or $this->document(1);
  */
-class CommentList extends AbstractPlugin
+class CurrentDocument extends AbstractHelper
 {
-    /**
-     * Form
-     *
-     * @var \Blog\Form\Comment
-     */
-    protected $form;
+    protected $document;
 
     /**
-     * Invoke form
+     * Set current document.
      *
-     * @return void
+     * @param DocumentModel $document Document model
+     *
+     * @return \Gc\View\Helper\CurrentDocument
+     */
+    public function set(DocumentModel $document)
+    {
+        $this->document = $document;
+        return $this;
+    }
+
+    /**
+     * Returns current document.
+     *
+     * @return \Gc\Document\Model
      */
     public function __invoke()
     {
-        $commentTable = new Blog\Model\Comment();
-        $document     = $this->getServiceLocator()
-            ->get('Zend\View\Renderer\PhpRenderer')
-            ->plugin('CurrentDocument');
-        $comments     = $commentTable->getList($document()->getId());
-
-        return $this->addPath(__DIR__ . '/../views')->render(
-            'plugin/comment-list.phtml',
-            array(
-                'comments' => $comments,
-            )
-        );
+        return $this->document;
     }
 }

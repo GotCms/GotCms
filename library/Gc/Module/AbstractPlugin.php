@@ -164,7 +164,6 @@ abstract class AbstractPlugin
         return Registry::get('Application')->getResponse();
     }
 
-
     /**
      * Get plugin instance
      *
@@ -176,6 +175,16 @@ abstract class AbstractPlugin
     public function plugin($name, array $options = null)
     {
         return Registry::get('Application')->getServiceManager()->get('controllerPluginManager')->get($name, $options);
+    }
+
+    /**
+     * Get service locator
+     *
+     * @return \Zend\ServiceManager\ServiceManager
+     */
+    public function getServiceLocator()
+    {
+        return Registry::get('Application')->getServiceManager();
     }
 
     /**
