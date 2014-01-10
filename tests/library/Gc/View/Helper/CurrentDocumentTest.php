@@ -49,8 +49,7 @@ class CurrentDocumentTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new CurrentDocument;
-        $this->object->set(new Model);
+        $this->object = new CurrentDocument(new Model);
     }
 
     /**

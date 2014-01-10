@@ -155,17 +155,21 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
 
         $this->document->save();
 
+        $serviceManager = Registry::get('Application')->getServiceManager();
         $this->renderer = new PhpRenderer();
-        $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+        $renderer       = $serviceManager->get('Zend\View\Renderer\PhpRenderer');
         $this->renderer->setHelperPluginManager($renderer->getHelperPluginManager());
 
-        $this->renderer->plugin('CurrentDocument')->set(
+        $serviceManager->setAllowOverride(true);
+        $serviceManager->setService(
+            'currentDocument',
             DocumentModel::fromArray(
                 array(
-                    'id' => $this->document->getId(),
+                    'id' => 1,
                 )
             )
         );
+        $serviceManager->setAllowOverride(false);
 
         $this->object = new CommentForm;
 
@@ -247,14 +251,14 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->object->plugin('redirect')->getController()->setEvent(Registry::get('Application')->getMvcEvent());
-        $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
-        $renderer->plugin('CurrentDocument')->set(
-            DocumentModel::fromArray(
-                array(
-                    'id' => $this->document->getId(),
-                )
-            )
+        $serviceManager = Registry::get('Application')->getServiceManager();
+        $renderer       = $serviceManager->get('Zend\View\Renderer\PhpRenderer');
+        $serviceManager->setAllowOverride(true);
+        $serviceManager->setService(
+            'currentDocument',
+            $this->document
         );
+        $serviceManager->setAllowOverride(false);
 
         $inputFilterFactory = new InputFilterFactory();
         $inputFilter        = $inputFilterFactory->createInputFilter(

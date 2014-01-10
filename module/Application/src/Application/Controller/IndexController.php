@@ -123,56 +123,15 @@ class IndexController extends Action
                 $layout     = $cacheValue['layout'];
                 $viewModel->setVariables($cacheValue['layout_variables']);
                 $this->layout()->setVariables($cacheValue['layout_variables']);
-                $this->getServiceLocator()->get('ViewHelperManager')->get('CurrentDocument')->set($cacheValue['currentDocument']);
             }
         }
 
         //Cache is disable or cache isn't create
         if (empty($cacheValue)) {
-            if (empty($document)) {
-                if (empty($path)) {
-                    $document = Document\Model::fromUrlKey('');
-                } else {
-                    $explodePath = $this->explodePath($path);
-                    $children    = null;
-                    $key         = array();
-                    $hasDocument = false;
-                    $parentId    = null;
-
-                    foreach ($explodePath as $urlKey) {
-                        $document    = null;
-                        $documentTmp = null;
-                        if ($hasDocument === false) {
-                            $documentTmp = Document\Model::fromUrlKey($urlKey, $parentId);
-                            //Test for home as parent_id
-                            if (empty($documentTmp) and ($homeDocument = Document\Model::fromUrlKey('')) !== false) {
-                                $documentTmp = Document\Model::fromUrlKey($urlKey, $homeDocument->getId());
-                            }
-                        }
-
-                        if ((is_array($children)
-                            and !empty($children)
-                            and !in_array($documentTmp, $children)
-                            and $children !== null)
-                            or $documentTmp === null) {
-                            $hasDocument = true;
-                        } else {
-                            if (empty($documentTmp)) {
-                                break;
-                            } else {
-                                if (!$documentTmp->isPublished()) {
-                                    if (!$isPreview) {
-                                        break;
-                                    }
-                                }
-
-                                $document = $documentTmp;
-                                $parentId = $document->getId();
-                                $children = $document->getChildren();
-                            }
-                        }
-                    }
-                }
+            try {
+                $document = $this->getServiceLocator()->get('CurrentDocument');
+            } catch (Exception $e) {
+                //Don't care, page is just not found
             }
 
             $variables = array();
@@ -207,8 +166,6 @@ class IndexController extends Action
                 $variables['currentDocument'] = $document;
                 $viewModel->setVariable('currentDocument', $document);
                 $this->layout()->setVariable('currentDocument', $document);
-
-                $this->getServiceLocator()->get('ViewHelperManager')->get('CurrentDocument')->set($document);
 
                 //Set view from database
                 $view   = View\Model::fromId($document->getViewId());
@@ -251,23 +208,6 @@ class IndexController extends Action
         $this->events()->trigger('Front', 'postDispatch', null, array('object' => $this, 'viewModel' => $viewModel));
 
         return $viewModel;
-    }
-
-    /**
-     * Explode path
-     *
-     * @param string $path Url path
-     *
-     * @return void
-     */
-    protected function explodePath($path)
-    {
-        $explodePath = explode('/', $path);
-        if (preg_match('/\/$/', $path)) {
-            array_pop($explodePath);
-        }
-
-        return $explodePath;
     }
 
     /**

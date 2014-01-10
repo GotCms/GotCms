@@ -69,7 +69,18 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
         );
         $this->script->save();
         $this->useStreamWrapper(1);
-        $this->object = new Script(Registry::get('Application')->getServiceManager());
+        $serviceManager = Registry::get('Application')->getServiceManager();
+        $this->object   = new Script($serviceManager);
+        $serviceManager->setAllowOverride(true);
+        $serviceManager->setService(
+            'currentDocument',
+            DocumentModel::fromArray(
+                array(
+                    'id' => 1,
+                )
+            )
+        );
+        $serviceManager->setAllowOverride(false);
     }
 
     /**
@@ -170,7 +181,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
         $view->plugin('view_model')->setRoot($parent);
         $view->resolver()->addPath(__DIR__ . '/_files/views');
         $this->object->setView($view);
-        $view->plugin('CurrentDocument')->set(new DocumentModel());
         $this->assertInstanceOf('Gc\Document\Model', $this->object->getDocument());
     }
 

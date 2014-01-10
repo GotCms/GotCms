@@ -90,13 +90,13 @@ return array(
                     $pm->getServiceLocator()->get('auth')
                 );
             },
-            'cdn'        => function ($pm) {
+            'cdn'             => function ($pm) {
                 return new Helper\Cdn(
                     $pm->getServiceLocator()->get('request'),
                     $pm->getServiceLocator()->get('CoreConfig')
                 );
             },
-            'cdnBackend' => function ($pm) {
+            'cdnBackend'      => function ($pm) {
                 $serviceLocator = $pm->getServiceLocator();
                 $configuration  = $serviceLocator->get('Config');
                 return new Helper\CdnBackend(
@@ -104,22 +104,24 @@ return array(
                     isset($configuration['db']) ? $serviceLocator->get('CoreConfig') : null
                 );
             },
-            'config'     => function ($pm) {
+            'config'          => function ($pm) {
                 return new Helper\Config($pm->getServiceLocator()->get('CoreConfig'));
             },
-            'partial'     => function ($pm) {
+            'currentDocument' => function ($pm) {
+                return new Helper\CurrentDocument($pm->getServiceLocator()->get('CurrentDocument'));
+            },
+            'partial'         => function ($pm) {
                 $serviceLocator = $pm->getServiceLocator();
                 $configuration  = $serviceLocator->get('Config');
                 return new Helper\Partial(
                     isset($configuration['db']) ? $serviceLocator->get('CoreConfig') : null
                 );
             },
-            'script'     => function ($pm) {
+            'script'          => function ($pm) {
                 return new Helper\Script($pm->getServiceLocator());
             },
         ),
         'invokables' => array(
-            'currentDocument'   => 'Gc\View\Helper\CurrentDocument',
             'documents'         => 'Gc\View\Helper\Documents',
             'document'          => 'Gc\View\Helper\Document',
             'formCheckbox'      => 'Gc\View\Helper\FormCheckbox',

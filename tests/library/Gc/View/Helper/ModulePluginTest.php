@@ -63,20 +63,22 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        $serviceManager = Registry::get('Application')->getServiceManager();
         $this->renderer = new PhpRenderer();
-        $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
+        $renderer       = $serviceManager->get('Zend\View\Renderer\PhpRenderer');
         $this->renderer->setHelperPluginManager($renderer->getHelperPluginManager());
 
-        $this->renderer->plugin('currentDocument')->set(
+        $serviceManager->setAllowOverride(true);
+        $serviceManager->setService(
+            'currentDocument',
             DocumentModel::fromArray(
                 array(
                     'id' => 1,
                 )
             )
         );
-
+        $serviceManager->setAllowOverride(false);
         $this->object = $this->renderer->plugin('modulePlugin');
-
         $this->module = ModuleModel::fromArray(
             array(
                 'name' => 'Blog',

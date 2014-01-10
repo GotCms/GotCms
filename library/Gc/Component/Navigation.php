@@ -177,7 +177,7 @@ class Navigation
             }
 
             if (!empty($page['pages'])) {
-                if($this->hasActiveChildren($page['pages'])) {
+                if ($this->hasActiveChildren($page['pages'])) {
                     return true;
                 }
             }

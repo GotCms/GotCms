@@ -27,6 +27,7 @@
 namespace Application;
 
 use Gc\Mvc;
+use Gc\Document;
 use Gc\Core\Config as CoreConfig;
 use Gc\Layout;
 use Gc\Registry;
@@ -86,6 +87,12 @@ class Module extends Mvc\Module
             $application->getEventManager()->attach(
                 MvcEvent::EVENT_ROUTE,
                 array($this, 'checkSsl'),
+                -10
+            );
+
+            $application->getEventManager()->attach(
+                MvcEvent::EVENT_ROUTE,
+                array($this, 'checkDocument'),
                 -10
             );
 
@@ -256,5 +263,82 @@ class Module extends Mvc\Module
 
             return $response;
         }
+    }
+
+    /**
+     * Check for document from route
+     *
+     * @param EventInterface $event Mvc Event
+     *
+     * @return void
+     */
+    public function checkDocument(EventInterface $event)
+    {
+        $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
+        if ($matchedRouteName === 'cms') {
+            $path = ltrim($event->getRouteMatch()->getParam('path'), '/');
+            if (empty($path)) {
+                $document = Document\Model::fromUrlKey('');
+            } else {
+                $explodePath = $this->explodePath($path);
+                $children    = null;
+                $key         = array();
+                $hasDocument = false;
+                $parentId    = null;
+
+                foreach ($explodePath as $urlKey) {
+                    $document    = null;
+                    $documentTmp = null;
+                    if ($hasDocument === false) {
+                        $documentTmp = Document\Model::fromUrlKey($urlKey, $parentId);
+                        //Test for home as parent_id
+                        if (empty($documentTmp) and ($homeDocument = Document\Model::fromUrlKey('')) !== false) {
+                            $documentTmp = Document\Model::fromUrlKey($urlKey, $homeDocument->getId());
+                        }
+                    }
+
+                    if ((is_array($children)
+                        and !empty($children)
+                        and !in_array($documentTmp, $children)
+                        and $children !== null)
+                        or $documentTmp === null) {
+                        $hasDocument = true;
+                    } else {
+                        if (empty($documentTmp)) {
+                            break;
+                        } else {
+                            if (!$documentTmp->isPublished()) {
+                                if (!$isPreview) {
+                                    break;
+                                }
+                            }
+
+                            $document = $documentTmp;
+                            $parentId = $document->getId();
+                            $children = $document->getChildren();
+                        }
+                    }
+                }
+            }
+
+            $event->getApplication()->getServiceManager()->setService('CurrentDocument', $document);
+        }
+    }
+
+    /**
+     * Explode path
+     *
+     * @param string $path Url path
+     *
+     * @return void
+     */
+    protected function explodePath($path)
+    {
+        $explodePath = explode('/', $path);
+        if (preg_match('/\/$/', $path)) {
+            array_pop($explodePath);
+        }
+
+        return $explodePath;
     }
 }

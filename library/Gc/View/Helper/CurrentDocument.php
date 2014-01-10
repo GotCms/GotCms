@@ -49,7 +49,7 @@ class CurrentDocument extends AbstractHelper
      *
      * @return \Gc\View\Helper\CurrentDocument
      */
-    public function set(DocumentModel $document)
+    public function __construct(DocumentModel $document)
     {
         $this->document = $document;
         return $this;
