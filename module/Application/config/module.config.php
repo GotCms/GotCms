@@ -108,7 +108,7 @@ return array(
                 return new Helper\Config($pm->getServiceLocator()->get('CoreConfig'));
             },
             'currentDocument' => function ($pm) {
-                return new Helper\CurrentDocument($pm->getServiceLocator()->get('CurrentDocument'));
+                return new Helper\CurrentDocument($pm->getServiceLocator());
             },
             'partial'         => function ($pm) {
                 $serviceLocator = $pm->getServiceLocator();

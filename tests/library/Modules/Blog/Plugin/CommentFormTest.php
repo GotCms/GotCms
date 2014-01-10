@@ -163,16 +163,10 @@ class CommentFormTest extends \PHPUnit_Framework_TestCase
         $serviceManager->setAllowOverride(true);
         $serviceManager->setService(
             'currentDocument',
-            DocumentModel::fromArray(
-                array(
-                    'id' => 1,
-                )
-            )
+            $this->document
         );
         $serviceManager->setAllowOverride(false);
-
         $this->object = new CommentForm;
-
         $this->module = ModuleModel::fromArray(
             array(
                 'name' => 'Blog',

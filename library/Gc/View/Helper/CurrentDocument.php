@@ -27,8 +27,9 @@
 
 namespace Gc\View\Helper;
 
-use Zend\View\Helper\AbstractHelper;
 use Gc\Document\Model as DocumentModel;
+use Zend\View\Helper\AbstractHelper;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Retrieve document from id or url_key
@@ -40,7 +41,12 @@ use Gc\Document\Model as DocumentModel;
  */
 class CurrentDocument extends AbstractHelper
 {
-    protected $document;
+    /**
+     * Service manager
+     *
+     * @var ServiceManager
+     */
+    protected $serviceManager;
 
     /**
      * Set current document.
@@ -49,10 +55,9 @@ class CurrentDocument extends AbstractHelper
      *
      * @return \Gc\View\Helper\CurrentDocument
      */
-    public function __construct(DocumentModel $document)
+    public function __construct(ServiceManager $serviceManager)
     {
-        $this->document = $document;
-        return $this;
+        $this->serviceManager = $serviceManager;
     }
 
     /**
@@ -62,6 +67,6 @@ class CurrentDocument extends AbstractHelper
      */
     public function __invoke()
     {
-        return $this->document;
+        return $this->serviceManager->get('CurrentDocument');
     }
 }
