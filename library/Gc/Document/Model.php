@@ -284,7 +284,7 @@ class Model extends AbstractTable implements IterableInterface
      *
      * @return string
      */
-    public function getUrl()
+    public function getUrl($forceCanonical = false)
     {
         $parent = $this->getParent();
         $path   = $this->getUrlKey();
@@ -293,7 +293,13 @@ class Model extends AbstractTable implements IterableInterface
             $path = $parent->getUrl() . '/' . $path;
         }
 
-        return '/' . ltrim($path, '/');
+        $url = '/' . ltrim($path, '/');
+        if ($forceCanonical) {
+            $serverUrl = Registry::get('Application')->getServiceManager()->get('ViewHelperManager')->get('ServerUrl');
+            $url       = $serverUrl() . $url;
+        }
+
+        return $url;
     }
 
     /**

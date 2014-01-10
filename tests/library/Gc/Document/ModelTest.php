@@ -370,6 +370,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     public function testGetUrl()
     {
         $this->assertEquals('/parent/url-key', $this->object->getUrl());
+        $this->assertEquals('http:///parent/url-key', $this->object->getUrl(true));
     }
 
     /**
