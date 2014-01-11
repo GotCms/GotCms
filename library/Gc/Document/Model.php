@@ -282,6 +282,8 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Get document url
      *
+     * @param boolean $forceCanonical Force canonical url
+     *
      * @return string
      */
     public function getUrl($forceCanonical = false)

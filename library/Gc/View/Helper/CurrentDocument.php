@@ -51,9 +51,9 @@ class CurrentDocument extends AbstractHelper
     /**
      * Set current document.
      *
-     * @param DocumentModel $document Document model
+     * @param ServiceManager $serviceManager Service Manager
      *
-     * @return \Gc\View\Helper\CurrentDocument
+     * @return void
      */
     public function __construct(ServiceManager $serviceManager)
     {
