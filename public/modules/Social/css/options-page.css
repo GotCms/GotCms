@@ -1,0 +1,305 @@
+h3.page-title {
+    float: left;
+}
+ul.nav-tab-wrapper {
+    height: 57px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 0;
+    float: left;
+    width: 92%;
+}
+ul.nav-tab-wrapper li:first-child {
+    margin-left: 10px;
+}
+ul.nav-tab-wrapper li {
+    float: left;
+    border-bottom: none;
+    padding: 14px 24px;
+    margin: 0;
+    /*border-bottom: 1px solid #CCCCCC;*/
+}
+ul.nav-tab-wrapper li a{
+    text-decoration:none;
+    color:#464646;
+}
+ul.nav-tab-wrapper li h2.nav-tab-wrapper{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+ul.nav-tab-wrapper li.ui-tabs-selected{
+    -moz-border-radius: 5px 5px 0 0;
+    border-top:1px solid #ccc;
+    border-left:1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 13px;
+    height: 29px;
+}
+li.ui-tabs-active{
+    -moz-border-radius: 5px 5px 0 0 !important;
+    border-top:1px solid #ccc !important;
+    border-left:1px solid #ccc !important;
+    border-right: 1px solid #ccc !important;
+    border-bottom: 1px solid #fff !important;
+    padding-bottom: 13px !important;
+}
+.select_row {
+    line-height: 32px;
+        padding-left:20px;
+}
+.select_row .radio {
+    display: inline-block;
+    line-height: 32px;
+    float: left;
+}
+.radio input[type="radio"] {
+    cursor: pointer;
+}
+.select_row label {
+    line-height: 32px;
+    padding-left: 10px;
+    display: inline-block;
+    width: 90%;
+}
+.select_row img {
+    border: none;
+}
+
+.clear {
+    height: 1px;
+}
+.mt20 { margin-top: 20px !important; }
+
+.description {
+    margin-bottom: 20px;
+}
+.form-table {
+    border-collapse: collapse;
+}
+.form-table td{
+    padding: 5px;
+}
+.form-table fieldset {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+.form-table fieldset .clear {
+    height: 10px;
+}
+
+.submit {
+    padding-top: 20px;
+}
+.submit a {
+    margin-left: 20px;
+}
+.form-table tr th h2{
+    width: 240px;
+}
+.org {
+    color: #FE6D4C !important;
+}
+.helv {
+    font-family: "Open Sans",Helvetica,arial,sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: -0.05em;
+    margin: 0px;
+}
+h3.helv {
+    font-size: 24px;
+    padding: 10px;
+}
+.more-info{
+ float: left;
+ width: 200px;
+}
+p.submit {
+clear: both;
+}
+#tabs{
+    display:block;
+    height: 100%;
+    padding-bottom: 20px;
+}
+.ui-tabs-panel{
+}
+.wrap{
+width: 100%;
+}
+span.code_name{
+width: 140px;
+margin: 15px;
+}
+.get_the_code{
+clear:both;
+padding-bottom: 10px;
+height: 40px;
+}
+.get_the_code img{
+float: right;
+}
+.form-table .hidden{
+display: none;
+}
+h2.placeholder{
+font-size: 1px;
+padding: 1px;
+margin: 0px;
+height: 2px;
+}
+.page-header img.header-img{
+float: left;
+height: 36px;
+padding: 14px 6px 15px 0;
+width: 36px;
+}
+/*AddThis Version Notification*/
+.addthis-notification {
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 5px 0 15px;
+    padding: 1em 0.6em 1em 0.6em;
+    font-size: 16px;
+    float:left;
+    width:97%;
+    height: 30px;
+    line-height: 30px;
+}
+.addthis-notification a {
+    color: #45B3EF;
+    font-size: 12px;
+}
+.addthis-warning-message {
+    background-color: #FDF7E2;
+    border-color: #EFE9D5;
+    color: #C49855;
+}
+.addthis-success-message {
+    background-color: #DDEFD7;
+    border-color: #D0E2C9;
+    color: #6A9B58;
+}
+.addthis-title {
+    color: #000;
+    font-size: 36px;
+    padding-left: 3px;
+    font-family: "HelveticaNeueBold","HelveticaNeue-Bold","Helvetica Neue", Helvetica, "open sans",arial,sans-serif;
+    font-weight: normal;
+}
+.addthis-plugin-name {
+    color: gray;
+    font-size: 36px;
+    font-weight: normal;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "open sans",arial,sans-serif;
+}
+
+.enable-sharing-tool {
+    padding-bottom: 12px;
+}
+#wpbody-content {
+    font-family: Arial;
+
+}
+.sharing-buttons-search {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+}
+.btn-search-rslt {
+    float: left;
+    width: 96%;
+    border-bottom: 1px solid #CCC;
+    height: 22px;
+    padding: 3px;
+}
+.service-name {
+    font-size: 13px;
+}
+.at300bs {
+    background: url(//ct1.addthis.com/static/r07/widget056.gif) no-repeat left;
+    overflow: hidden;
+    display: block;
+    background-position: 0 0;
+    height: 16px;
+    width: 16px;
+    line-height: 16px!important;
+    float: left;
+}
+.at300bs:hover {
+    opacity: .8;
+}
+.disabled-service {
+    opacity: .5;
+    cursor: default !important;
+}
+.personalizedMessage {
+    line-height: 20px;
+}
+.simple #personalizedMessage { left:627px; }
+/*sortable*/
+.connectedSortable {
+    height: 170px;
+    overflow: auto;
+    margin: 0;
+    padding: 10px 0 0 0;
+}
+.connectedSortable .ui-state-default, .connectedSortable .ui-state-highlight {
+    border-bottom: 1px solid #CCC;
+    padding-left: 10px;
+    height: 32px;
+    float: left;
+    width: 95%;
+    margin-bottom: 0;
+    padding-top: 10px;
+    cursor: move;
+}
+#above_sortable2, #below_sortable2 {
+    height: 215px;
+}
+.addthis_counter.addthis_bubble_style {
+background: url(../images/counters.gif) no-repeat!important;
+}
+.addthis_counter.addthis_bubble_style {
+display: block;
+margin: 0 0 0 -2px;
+text-align: center;
+font-weight: bold;
+font-family: arial,helvetica,sans-serif;
+color: #000;
+background-repeat: no-repeat;
+background-position: 0 -64px!important;
+padding: 0 0 0 4px;
+height: 16px;
+width: 32px!important;
+}
+.addthis_32x32_style .addthis_counter.addthis_bubble_style {
+    height: 32px;
+width: 60px!important;
+background-position: 0 -32px!important;
+}
+
+.stick {
+    position:fixed;
+    top:50px;
+    width:500px;
+}
+.addthis_widget_button_set, .below_button_set {
+    position:relative;
+}
+.popover {
+    width: 375px;
+    line-height: 20px;
+}
+.customize-message-section {
+    font-size: 11px;
+    text-decoration: none;
+}

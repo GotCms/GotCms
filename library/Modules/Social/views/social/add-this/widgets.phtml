@@ -1,0 +1,85 @@
+<button type="button" class="btn btn-info" id="widget-add">
+    <i class="glyphicon glyphicon-plus"></i>
+    <?php echo $this->escapeHtml($this->translate('Add new widget')); ?>
+</button>
+
+<div class="widget-add-block" style="display:none;">
+    <?php $this->form->addWidget('widget-add'); ?>
+    <?php $this->form->setAttribute('action', $this->url('module/social/addthis/add-widget')); ?>
+    <?php echo $this->form()->openTag($this->form); ?>
+    <fieldset class="widget">
+        <legend><?php echo $this->escapeHtml($this->translate('New widget')); ?></legend>
+        <?php echo $this->partial('social/add-this/widget', array('fieldset' => $this->form->get('widget-add'))); ?>
+    </fieldset>
+
+    <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+    <?php echo $this->form()->closeTag($this->form); ?>
+</div>
+
+<?php if ($this->widgets): ?>
+    <?php $this->form->setAttribute('action', $this->url('module/social/addthis')); ?>
+    <?php echo $this->form()->openTag($this->form); ?>
+        <div id="widgets-tabs">
+            <ul>
+                <?php foreach ($this->widgets as $idx => $widget): ?>
+                    <li><a href="#widgets-tabs-<?php echo $idx; ?>"><?php echo $this->escapeHtml($this->translate($widget['name'])); ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+            <?php foreach ($this->widgets as $idx => $widget): ?>
+                <div id="widgets-tabs-<?php echo $idx; ?>">
+                    <?php echo $this->partial('social/add-this/widget', array('fieldset' => $this->form->get('widget-' . $idx))); ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+
+    <?php echo $this->form()->closeTag($this->form); ?>
+<?php endif; ?>
+
+<script type="text/javascript">
+$(function() {
+    var $tabs = $('#widgets-tabs').tabs();
+
+    $('#widget-add').on('click', function() {
+        $block = $('.widget-add-block');
+        if ($block.is(':visible')) {
+            $block.fadeToggle('fast', null, function() {
+                $tabs.closest('form').fadeToggle('fast');
+            });
+        } else {
+            $tabs.closest('form').fadeToggle('fast', null, function() {
+                $block.fadeToggle('fast');
+            });
+        }
+    });
+
+    $('.delete-widget').on('click', function() {
+        var id = $(this).val().replace('widget-', '');
+        var $tab = $tabs.find('a[href="#widgets-tabs-' + id + '"]').parent();
+        var $index = $('li', $tabs).index($tab);
+        $tabs.find('.ui-tabs-nav li:eq(' + $index + ')').remove();
+        $('#widgets-tabs-' + id).remove();
+        // Refresh the tabs widget
+        $tabs.tabs('refresh');
+    });
+
+    $('#tabs input[type="radio"],.widget-add-block input[type="radio"]').on('click', function() {
+        var $this = $(this),
+        $block = $this.closest('.addthis-widget').find('.custom_string_field');
+        if ($this.is(':checked') && $this.val() == 'custom_string') {
+            $block.fadeIn();
+        } else {
+            $block.fadeOut();
+        }
+    });
+
+    $('.addthis-widget').addthisWidget();
+});
+</script>
+
+
+
+<script type="text/javascript">
+    window.page = 'sharing-buttons';
+</script>

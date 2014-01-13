@@ -11,7 +11,8 @@
         "squizlabs/php_codesniffer": "1.4.*",
         "satooshi/php-coveralls": "dev-master",
         "gotcms/gotsniffs": "dev-master",
-        "packagist/yuicompressor-bin": "dev-master"
+        "packagist/yuicompressor-bin": "dev-master",
+        "mockery/mockery": "dev-master@dev"
     },
     "authors": [
         {

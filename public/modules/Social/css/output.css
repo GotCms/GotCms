@@ -1,0 +1,10 @@
+.entry-content .addthis_toolbox, .entry-content .addthis_button, .entry-header .addthis_toolbox, .entry-header .addthis_button {
+	margin:10px 0 10px 0;
+}
+.addthis_button_tweet {
+	min-width: 83px;
+	float:left;
+}
+.atwidget iframe {
+	max-width:none;
+}

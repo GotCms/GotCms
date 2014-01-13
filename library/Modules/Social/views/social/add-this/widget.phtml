@@ -1,0 +1,113 @@
+<?php $imgLocationBase = '/modules/Social/images/'; ?>
+<div class="addthis-widget" id="<?php echo $this->fieldset->getName(); ?>">
+    <?php foreach ($this->fieldset->getElements() as $element): ?>
+        <?php if ($element->getAttribute('type')  === 'radio'): ?>
+            <?php $radioValue = $element->getValue(); ?>
+            <div class="form-group">
+                <?php echo $this->formLabel($element); ?>
+                <div class="col-lg-10">
+                    <?php foreach ($element->getValueOptions() as $option_value => $option): ?>
+                        <div class="form-group">
+                            <label class="control-label">
+                                <input<?php echo $element->getValue() === $option_value ? ' checked="checked"' : ''; ?> type="radio" value="<?php echo $option_value; ?>" name="<?php echo $element->getName(); ?>" />
+                                <?php if (empty($option['options']['img'])): ?>
+                                    <?php echo $option['name']; ?>
+                                <?php else: ?>
+                                    <img alt="<?php echo $option['name']; ?>" src="<?php echo $imgLocationBase . $option['options']['img']; ?>">
+                                <?php endif; ?>
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
+
+                    <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
+                    <div class="addthis_widget_button_set select_row">
+                        <div class="addthis_widget_custom_btns">
+                            <div class="addthis-widget-smart-sharing-container">
+                                <p class="customizedMessage mb40 personalizedMessage customize-message-section customize-your-buttons" style="display:none;">
+                                    Your buttons are currently customized.  <a href="#" class="addthis-widget-customize-sharing-link customize-your-buttons">Show customization.</a>
+                                </p>
+                                <p class="mb40 ownButtonsMessage personalizedMessage customize-message-section customize-your-buttons">
+                                    AddThis boosts sharing by automatically showing the right buttons to each user based on their location and activity across the web.  <a href="#" class="addthis-widget-customize-sharing-link customize-your-buttons">Disable and select your own buttons.</a>
+                                </p>
+                                <p class="mb40 smart-sharing-link customize-message-section">Your buttons are currently customized. <a href="#" class="addthis-widget-customize-sharing-link smart-sharing-link">Let AddThis choose instead and boost sharing</a>
+                                    <span class="row-right" data-content="Smartest sharing buttons on the web. Automated to show each user the services that they use most based on their location and activity across the web." data-original-title="Smart Sharing."> (<a href="#">?</a>)</span>
+                                </p>
+
+                                <div class="smart-sharing-inner-container"<?php echo $radioValue == 'custom_string' ? 'style="display:none";' : '' ;?>>
+                                    <p class="hide">
+                                        <label>
+                                              <input type="radio" checked="checked" name="addthis-widget-sharing" class="addthis-widget-enable-smart-sharing" value="addthis-widget-enable-smart-sharing"/> Use Smart Buttons <strong>(Recommended)</strong>
+                                        </label>
+                                        <label>
+                                              <input type="radio" name="addthis-widget-sharing" class="addthis-widget-disable-smart-sharing"> Customize your buttons
+                                        </label>
+                                    </p>
+                                    <div class="customize-buttons">
+                                        <div class="sharing-buttons">
+                                              <h4 class="sortable-heading">Button Options</h4>
+                                              <input type="text" class="sharing-buttons-search" placeholder="Find a service" maxlength="20" size="30" style="width: 230px; height: 41px; margin: 0;">
+                                              <ul class="sortable"></ul>
+                                        </div>
+                                        <div class="selected-services">
+                                              <h4 class="sortable-heading">Selected Buttons</h4>
+                                              <ul class="sortable" data-type="addthisButtons"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="vertical-drag">
+                                        <i class="icon-arrow-up"></i>
+                                        <i class="icon-arrow-down"></i>
+                                        <p>Drag up or down to reorder services</p>
+                                    </div>
+                                    <div class="horizontal-drag">
+                                        <i class="icon-arrow-right"></i>
+                                        <p>Drag across to add service</p>
+                                    </div>
+                                    <a href="#" class="restore-default-options" style="float: left; padding-left: 100px;">Restore default options</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php elseif ($element->getAttribute('type') === 'textarea'): ?>
+            <div class="custom_string_field"<?php echo $radioValue != 'custom_string' ? 'style="display:none";' : '' ;?>>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <?php echo $this->escapeHtml($this->translate('This text box allows you to enter any AddThis markup that you wish.')); ?><br>
+                        <?php echo $this->escapeHtml($this->translate('To see examples of what you can do, visit')); ?>
+                        <a href="https://www.addthis.com/get/sharing">AddThis.com Sharing Tools</a>
+                        <?php echo $this->escapeHtml($this->translate('and select any sharing tool. You can also check out our')); ?>
+                        <a href="http://support.addthis.com/customer/portal/articles/381263-addthis-client-api#rendering-decoration">Client API</a>.<br>
+                        <?php echo $this->escapeHtml($this->translate('For any help you may need, please visit')); ?>
+                        <a href="http://support.addthis.com">AddThis Support</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <?php echo $this->formLabel($element); ?>
+
+                    <div class="col-lg-10">
+                        <?php echo $this->formElement($element); ?>
+                        <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
+                    </div>
+                </div>
+            </div>
+        <?php elseif ($element->getAttribute('type') === 'hidden'): ?>
+            <?php echo $this->formElement($element); ?>
+        <?php else: ?>
+            <div class="form-group">
+                <?php echo $this->formLabel($element); ?>
+
+                <div class="col-lg-10">
+                    <?php echo $this->formElement($element); ?>
+                    <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+
+    <?php if ($this->fieldset->getName() != 'widget-add'): ?>
+        <button type="button" class="delete-widget btn btn-danger" value="<?php echo $this->fieldset->getName(); ?>">
+            <?php echo $this->escapeHtml($this->translate('Delete')); ?>
+        </button>
+    <?php endif; ?>
+</div>

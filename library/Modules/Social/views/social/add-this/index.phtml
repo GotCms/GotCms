@@ -1,0 +1,73 @@
+<?php
+/**
+ * This source file is part of GotCms.
+ *
+ * GotCms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GotCms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category   Gc_Library
+ * @package    Modules
+ * @subpackage Social\Design
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
+ */
+?>
+<?php $this->headScript()
+    ->appendFile($this->cdnBackend('/modules/Social/js/core-1.1.1.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/options-page.32.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/lr.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/jquery.qtip.min.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/jqueryui.sortable.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/jquery.selectBoxIt.min.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/jquery.messagebox.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/jquery.atjax.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/lodash-0.10.0.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/addthis.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/modules/Social/js/common.js'), 'text/javascript'); ?>
+
+<?php $this->headLink()
+    ->appendStylesheet($this->cdnBackend('/modules/Social/css/addthis.css'))
+    ->appendStylesheet($this->cdnBackend('/modules/Social/css/options-page.css'))
+    ->appendStylesheet($this->cdnBackend('/modules/Social/css/output.css'))
+    ->appendStylesheet('https://ct1.addthis.com/static/r07/widget114.css')
+    ->appendStylesheet('https://ct1.addthis.com/static/r07/widgetbig056.css'); ?>
+
+<div class="page-header">
+    <h1><?php echo $this->escapeHtml($this->translate('AddThis')); ?></h1>
+</div>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-0"><?php echo $this->escapeHtml($this->translate('Configuration')); ?></a></li>
+        <li><a href="#tabs-1"><?php echo $this->escapeHtml($this->translate('Widgets')); ?></a></li>
+    </ul>
+
+    <div id="tabs-0">
+        <?php echo $this->partial('social/add-this/config', array('object' => $this->addThis, 'form' => $this->form)); ?>
+    </div>
+    <div id="tabs-1">
+        <?php echo $this->partial('social/add-this/widgets', array('widgets' => $this->addThis->getWidgets(), 'form' => $this->form)); ?>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+    $('#tabs').tabs();
+});
+/* <![CDATA[ */
+var addthis_params = {"img_base":"/modules/Social/images/"};
+/* ]]> */
+</script>
