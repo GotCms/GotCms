@@ -148,6 +148,11 @@ class Model extends AbstractTable
                 $this->update($arraySave, array('id' => (int) $this->getId()));
             }
 
+            $oldFilename = sprintf(GC_TEMPLATE_PATH . '/view/%s.phtml', $this->getOrigData('identifier'));
+            if (file_exists($oldFilename)) {
+                unlink($oldFilename);
+            }
+
             file_put_contents($this->getFilePath(), $this->getContent());
             $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
 
