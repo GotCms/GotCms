@@ -188,6 +188,11 @@ class Config extends AbstractForm
         $sessionFieldset->setLabel('Session');
         $cookieDomain = new Element\Text('cookie_domain');
         $cookieDomain->setLabel('Cookie domain')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
             ->setAttribute('id', 'cookie_domain')
             ->setAttribute('class', 'form-control');
         $sessionFieldset->add($cookieDomain);
