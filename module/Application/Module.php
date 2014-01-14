@@ -145,7 +145,8 @@ class Module extends Mvc\Module
         $sessionConfig->setStorageOption('gc_maxlifetime', $coreConfig->getValue('session_lifetime'));
         $sessionConfig->setStorageOption('cookie_path', $coreConfig->getValue('cookie_path'));
         $sessionConfig->setStorageOption('cookie_domain', $coreConfig->getValue('cookie_domain'));
-        SessionContainer::setDefaultManager(new SessionManager($sessionConfig));
+        $sessionManager = new SessionManager($sessionConfig);
+        SessionContainer::setDefaultManager($sessionManager);
 
         if ($coreConfig->getValue('session_handler') == CoreConfig::SESSION_DATABASE) {
             $tablegatewayConfig = new DbTableGatewayOptions(
@@ -163,9 +164,10 @@ class Module extends Mvc\Module
                 $tablegatewayConfig
             );
 
-            $sessionManager = SessionContainer::getDefaultManager();
-            $sessionManager->setSaveHandler($sessionTable)->start();
+            $sessionManager->setSaveHandler($sessionTable);
         }
+
+        $sessionManager->start();
     }
 
     /**
