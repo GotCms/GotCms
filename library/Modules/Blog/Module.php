@@ -77,9 +77,9 @@ class Module extends AbstractModule
 
         $widgets = $event->getParam('widgets');
 
-        $widgets['test']['id']      = 'blog';
-        $widgets['test']['title']   = 'Blog information';
-        $widgets['test']['content'] = $this->addPath(__DIR__ . '/views')->render(
+        $widgets['blog']['id']      = 'blog';
+        $widgets['blog']['title']   = 'Blog information';
+        $widgets['blog']['content'] = $this->addPath(__DIR__ . '/views')->render(
             'dashboard.phtml',
             array(
                 'unactiveComments' => count($unactiveCommentList),
