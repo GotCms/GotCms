@@ -217,7 +217,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testAddElement()
     {
         $mvcEvent = Registry::get('Application')->getMvcEvent();
-        $mvcEvent->setParam('object', $this->document);
+        $mvcEvent->setTarget($this->document);
         $this->document->setUrlKey('new-url-key');
         $this->assertNull($this->object->addElement($mvcEvent));
         //Test existing Element
@@ -239,7 +239,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
             '</urlset>';
         file_put_contents($this->filePath, $xml);
         $mvcEvent = Registry::get('Application')->getMvcEvent();
-        $mvcEvent->setParam('object', $this->document);
+        $mvcEvent->setTarget($this->document);
         $this->document->setUrlKey('new-url-key');
         $this->assertNull($this->object->addElement($mvcEvent));
     }
@@ -253,7 +253,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     {
         $this->document->setStatus(DocumentModel::STATUS_DISABLE);
         $mvcEvent = Registry::get('Application')->getMvcEvent();
-        $mvcEvent->setParam('object', $this->document);
+        $mvcEvent->setTarget($this->document);
         $this->document->setUrlKey('new-url-key');
         $this->assertNull($this->object->addElement($mvcEvent));
     }
@@ -266,7 +266,7 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     public function testRemoveElement()
     {
         $mvcEvent = Registry::get('Application')->getMvcEvent();
-        $mvcEvent->setParam('object', $this->document);
+        $mvcEvent->setTarget($this->document);
         //Create xml
         $this->assertNull($this->object->addElement($mvcEvent));
         //Delete Element

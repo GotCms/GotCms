@@ -98,7 +98,7 @@ class Module extends AbstractModule
      */
     public function addElement(Event $event)
     {
-        $document = $event->getParam('object');
+        $document = $event->getTarget();
         if (!$document->isPublished()) {
             $this->removeElement($event);
             return;
@@ -144,7 +144,7 @@ class Module extends AbstractModule
         $xml     = $this->getXml($sitemap);
         if ($xml !== null) {
             $request   = $this->serviceManager->get('Request');
-            $document  = $event->getParam('object');
+            $document  = $event->getTarget();
             $oldUrlKey = $document->getUrlKey();
             $document->setUrlKey($document->getOrigData('url_key'));
             $obj = $this->getDoc($xml, $request->getBasePath(), $document->getUrl());
