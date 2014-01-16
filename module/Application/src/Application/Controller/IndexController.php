@@ -93,7 +93,7 @@ class IndexController extends Action
         }
 
         $viewModel = new ViewModel();
-        $this->events()->trigger('Front', 'preDispatch', null, array('object' => $this, 'viewModel' => $viewModel));
+        $this->events()->trigger('Front', 'preDispatch', $this, array('viewModel' => $viewModel));
 
         if ($coreConfig->getValue('site_is_offline') == 1) {
             //Site is offline
@@ -205,7 +205,7 @@ class IndexController extends Action
             $viewModel->setTemplate('view/' . $view->getIdentifier());
         }
 
-        $this->events()->trigger('Front', 'postDispatch', null, array('object' => $this, 'viewModel' => $viewModel));
+        $this->events()->trigger('Front', 'postDispatch', $this, array('viewModel' => $viewModel));
 
         return $viewModel;
     }

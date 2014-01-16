@@ -123,7 +123,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'before.save', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.save', $this);
         $arraySave = array(
             'value' => ($this->getDriverName() == 'pdo_pgsql') ? pg_escape_bytea($this->getValue()) : $this->getValue(),
             'document_id' => $this->getDocumentId(),
@@ -139,11 +139,11 @@ class Model extends AbstractTable
                 $this->update($arraySave, array('id' => $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save', $this);
 
             return $this->getId();
         } catch (\Exception $e) {
-            $this->events()->trigger(__CLASS__, 'after.save.failed', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save.failed', $this);
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
     }

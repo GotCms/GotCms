@@ -157,7 +157,7 @@ class Collection extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'before.save', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.save', $this);
         if (!empty($this->data['document_type_id'])) {
             $this->delete();
 
@@ -169,12 +169,12 @@ class Collection extends AbstractTable
                 $this->execute($insert);
             }
 
-            $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save', $this);
 
             return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'after.save.failed', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'after.save.failed', $this);
 
         return false;
     }
@@ -186,16 +186,16 @@ class Collection extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'before.delete', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.delete', $this);
         if (!empty($this->data['document_type_id'])) {
             $table = new TableGateway('document_type_view', $this->getAdapter());
             $table->delete(array('document_type_id' => $this->getDocumentTypeId()));
-            $this->events()->trigger(__CLASS__, 'after.delete', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.delete', $this);
 
             return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'after.delete.failed', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'after.delete.failed', $this);
 
         return false;
     }

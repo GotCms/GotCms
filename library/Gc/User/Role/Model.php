@@ -61,7 +61,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'before.save', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.save', $this);
         $arraySave = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
@@ -93,11 +93,11 @@ class Model extends AbstractTable
                 }
             }
 
-            $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save', $this);
 
             return $this->getId();
         } catch (\Exception $e) {
-            $this->events()->trigger(__CLASS__, 'after.save.failed', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save.failed', $this);
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -109,17 +109,17 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'before.delete', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.delete', $this);
         $id = $this->getId();
         if (!empty($id)) {
             parent::delete(array('id' => $id));
-            $this->events()->trigger(__CLASS__, 'after.delete', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.delete', $this);
             unset($this);
 
             return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'after.delete.failed', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'after.delete.failed', $this);
 
         return false;
     }
@@ -151,14 +151,14 @@ class Model extends AbstractTable
     {
         $roleTable = new Model();
         $row       = $roleTable->fetchRow($roleTable->select(array('id' => (int) $userRoleId)));
-        $roleTable->events()->trigger(__CLASS__, 'before.load', null, array('object' => $roleTable));
+        $roleTable->events()->trigger(__CLASS__, 'before.load', $roleTable);
         if (!empty($row)) {
             $roleTable->setData((array) $row);
             $roleTable->setOrigData();
-            $roleTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $roleTable));
+            $roleTable->events()->trigger(__CLASS__, 'after.load', $roleTable);
             return $roleTable;
         } else {
-            $roleTable->events()->trigger(__CLASS__, 'after.load.failed', null, array('object' => $roleTable));
+            $roleTable->events()->trigger(__CLASS__, 'after.load.failed', $roleTable);
             return false;
         }
     }

@@ -93,7 +93,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'before.save', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.save', $this);
         $arraySave = array(
             'name' => $this->getName(),
             'description' => $this->getDescription(),
@@ -110,11 +110,11 @@ class Model extends AbstractTable
                 $this->update($arraySave, array('id' => (int) $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save', $this);
 
             return $this->getId();
         } catch (\Exception $e) {
-            $this->events()->trigger(__CLASS__, 'after.save.failed', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save.failed', $this);
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -126,7 +126,7 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'before.delete', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.delete', $this);
         $tabId = $this->getId();
         if (!empty($tabId)) {
             try {
@@ -138,13 +138,13 @@ class Model extends AbstractTable
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'after.delete', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.delete', $this);
             unset($this);
 
             return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'after.delete.failed', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'after.delete.failed', $this);
 
         return false;
     }
@@ -176,14 +176,14 @@ class Model extends AbstractTable
     {
         $tabTable = new Model();
         $row      = $tabTable->fetchRow($tabTable->select(array('id' => (int) $tabId)));
-        $tabTable->events()->trigger(__CLASS__, 'before.load', null, array('object' => $tabTable));
+        $tabTable->events()->trigger(__CLASS__, 'before.load', $tabTable);
         if (!empty($row)) {
             $tabTable->setData((array) $row);
             $tabTable->setOrigData();
-            $tabTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $tabTable));
+            $tabTable->events()->trigger(__CLASS__, 'after.load', $tabTable);
             return $tabTable;
         } else {
-            $tabTable->events()->trigger(__CLASS__, 'after.load.failed', null, array('object' => $tabTable));
+            $tabTable->events()->trigger(__CLASS__, 'after.load.failed', $tabTable);
             return false;
         }
     }

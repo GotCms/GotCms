@@ -168,7 +168,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'before.save', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.save', $this);
         $arraySave = array(
             'name' => $this->getName(),
             'updated_at' => new Expression('NOW()'),
@@ -217,11 +217,11 @@ class Model extends AbstractTable
                 }
             }
 
-            $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save', $this);
 
             return $this->getId();
         } catch (\Exception $e) {
-            $this->events()->trigger(__CLASS__, 'after.save.failed', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save.failed', $this);
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -233,7 +233,7 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'before.delete', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.delete', $this);
         $documentTypeId = $this->getId();
         if (!empty($documentTypeId)) {
             $tabCollection = new Tab\Collection();
@@ -242,13 +242,13 @@ class Model extends AbstractTable
             $table  = new TableGateway('document_type_view', $this->getAdapter());
             $result = $table->delete(array('document_type_id' => (int) $documentTypeId));
             parent::delete(array('id' => $documentTypeId));
-            $this->events()->trigger(__CLASS__, 'after.delete', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.delete', $this);
             unset($this);
 
             return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'after.delete.failed', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'after.delete.failed', $this);
 
         return false;
     }
@@ -282,18 +282,17 @@ class Model extends AbstractTable
         $row               = $documentTypeTable->fetchRow(
             $documentTypeTable->select(array('id' => (int) $documentTypeId))
         );
-        $documentTypeTable->events()->trigger(__CLASS__, 'before.load', null, array('object' => $documentTypeTable));
+        $documentTypeTable->events()->trigger(__CLASS__, 'before.load', $documentTypeTable);
         if (!empty($row)) {
             $documentTypeTable->setData((array) $row);
             $documentTypeTable->setOrigData();
-            $documentTypeTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $documentTypeTable));
+            $documentTypeTable->events()->trigger(__CLASS__, 'after.load', $documentTypeTable);
             return $documentTypeTable;
         } else {
             $documentTypeTable->events()->trigger(
                 __CLASS__,
                 'after.load.failed',
-                null,
-                array('object' => $documentTypeTable)
+                $documentTypeTable
             );
             return false;
         }

@@ -99,14 +99,14 @@ class Model extends AbstractTable
     {
         $moduleTable = new Model();
         $row         = $moduleTable->fetchRow($moduleTable->select(array('id' => (int) $moduleId)));
-        $moduleTable->events()->trigger(__CLASS__, 'before.load', null, array('object' => $moduleTable));
+        $moduleTable->events()->trigger(__CLASS__, 'before.load', $moduleTable);
         if (!empty($row)) {
             $moduleTable->setData((array) $row);
             $moduleTable->setOrigData();
-            $moduleTable->events()->trigger(__CLASS__, 'after.load', null, array('object' => $moduleTable));
+            $moduleTable->events()->trigger(__CLASS__, 'after.load', $moduleTable);
             return $moduleTable;
         } else {
-            $moduleTable->events()->trigger(__CLASS__, 'after.load.failed', null, array('object' => $moduleTable));
+            $moduleTable->events()->trigger(__CLASS__, 'after.load.failed', $moduleTable);
             return false;
         }
     }
@@ -118,7 +118,7 @@ class Model extends AbstractTable
      */
     public function save()
     {
-        $this->events()->trigger(__CLASS__, 'before.save', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.save', $this);
         $arraySave = array(
             'name' => $this->getName(),
         );
@@ -133,11 +133,11 @@ class Model extends AbstractTable
                 $this->update($arraySave, array('id' => $this->getId()));
             }
 
-            $this->events()->trigger(__CLASS__, 'after.save', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save', $this);
 
             return $this->getId();
         } catch (\Exception $e) {
-            $this->events()->trigger(__CLASS__, 'after.save.failed', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.save.failed', $this);
             throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -149,7 +149,7 @@ class Model extends AbstractTable
      */
     public function delete()
     {
-        $this->events()->trigger(__CLASS__, 'before.delete', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'before.delete', $this);
         $moduleId = $this->getId();
         if (!empty($moduleId)) {
             try {
@@ -158,13 +158,13 @@ class Model extends AbstractTable
                 throw new \Gc\Exception($e->getMessage(), $e->getCode(), $e);
             }
 
-            $this->events()->trigger(__CLASS__, 'after.delete', null, array('object' => $this));
+            $this->events()->trigger(__CLASS__, 'after.delete', $this);
             unset($this);
 
             return true;
         }
 
-        $this->events()->trigger(__CLASS__, 'after.delete.failed', null, array('object' => $this));
+        $this->events()->trigger(__CLASS__, 'after.delete.failed', $this);
 
         return false;
     }

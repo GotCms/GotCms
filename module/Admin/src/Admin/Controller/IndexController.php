@@ -91,7 +91,7 @@ class IndexController extends Action
         $data['dashboardWelcome']  = !empty($widgets['welcome']);
 
         $data['customeWidgets'] = array();
-        $this->events()->trigger(__CLASS__, 'dashboard', null, array('widgets' => &$data['customeWidgets']));
+        $this->events()->trigger(__CLASS__, 'dashboard', $this, array('widgets' => &$data['customeWidgets']));
 
         return $data;
     }
