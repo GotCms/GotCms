@@ -392,6 +392,11 @@ class InstallController extends Action
                             $this->insertData($dbAdapter, $session);
                             break;
 
+                        //Insert data
+                        case 'i-t':
+                            $this->insertTranslations();
+                            break;
+
                         //Create user and roles
                         case 'c-uar':
                             $this->createUsersAndRoles(
@@ -521,6 +526,17 @@ class InstallController extends Action
             array($configuration['admin_firstname'] . ' ' . $configuration['admin_lastname'])
         );
 
+        $sql = file_get_contents(GC_APPLICATION_PATH . '/data/install/sql/data.sql');
+        $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
+    }
+
+    /**
+     * Insert translations into database
+     *
+     * @return void
+     */
+    protected function insertTranslations()
+    {
         //Save all languages in database
         $languagesFilename = glob(GC_APPLICATION_PATH . '/data/install/translation/*.php');
         $translator        = new Core\Translator;
@@ -538,11 +554,9 @@ class InstallController extends Action
                     )
                 );
             }
+
             copy($language, GC_APPLICATION_PATH . '/data/translation/' . basename($language));
         }
-
-        $sql = file_get_contents(GC_APPLICATION_PATH . '/data/install/sql/data.sql');
-        $dbAdapter->getDriver()->getConnection()->getResource()->exec($sql);
     }
 
     /**

@@ -254,6 +254,7 @@ return array (
     'Select an option' => 'Sélectionner une option',
     'Create database' => 'Création de la base de données',
     'Insert data' => 'Insertion des données',
+    'Insert translations' => 'Insertion des traductions',
     'Create users and roles' => 'Création des utilisateurs et des rôles',
     'Install template' => 'Installation du template',
     'Create configuration file' => 'Création du fichier de configuration',

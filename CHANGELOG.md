@@ -17,6 +17,7 @@
 - setValue method should allow user to add custom settings in core_config_data table ([https://github.com/GotCms/GotCms/issues/178](https://github.com/GotCms/GotCms/issues/178))
 - Social module ([https://github.com/GotCms/GotCms/issues/155](https://github.com/GotCms/GotCms/issues/155))
 - Refactoring events ([https://github.com/GotCms/GotCms/issues/181](https://github.com/GotCms/GotCms/issues/181))
+- While installing data, the installer stopped ([https://github.com/GotCms/GotCms/issues/177](https://github.com/GotCms/GotCms/issues/177))
 
 ### Potential Breakage
 With the issue `Refactoring events`, now you can't do `getParam('object')` when you attach an event.

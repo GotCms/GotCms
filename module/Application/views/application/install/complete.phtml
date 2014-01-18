@@ -36,6 +36,7 @@
 <ul id="installer" class="list-group">
     <li class="list-group-item" id="c-db"><?php echo $this->escapeHtml($this->translate('Create database')); ?></li>
     <li class="list-group-item" id="i-d"><?php echo $this->escapeHtml($this->translate('Insert data')); ?></li>
+    <li class="list-group-item" id="i-t"><?php echo $this->escapeHtml($this->translate('Insert translations')); ?></li>
     <li class="list-group-item" id="c-uar"><?php echo $this->escapeHtml($this->translate('Create users and roles')); ?></li>
     <li class="list-group-item" id="it"><?php echo $this->escapeHtml($this->translate('Install template')); ?></li>
     <li class="list-group-item" id="c-cf"><?php echo $this->escapeHtml($this->translate('Create configuration file')); ?></li>
@@ -44,7 +45,7 @@
 <div id="installation-data" class="alert">&nbsp;</div>
 <script type="text/javascript">
     $(document).ready(function() {
-        var $data = ['c-db', 'i-d', 'c-uar', 'it', 'c-cf'],
+        var $data = ['c-db', 'i-d', 'i-t', 'c-uar', 'it', 'c-cf'],
         $progressClass = 'install-in-progress',
         $completeClass = 'install-complete',
         $errorClass    = 'install-error',
