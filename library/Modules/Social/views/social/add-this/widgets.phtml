@@ -1,9 +1,11 @@
-<button type="button" class="btn btn-info" id="widget-add">
-    <i class="glyphicon glyphicon-plus"></i>
-    <?php echo $this->escapeHtml($this->translate('Add new widget')); ?>
-</button>
+<?php if ($this->widgets): ?>
+    <button type="button" class="btn btn-info" id="widget-add-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <?php echo $this->escapeHtml($this->translate('Add new widget')); ?>
+    </button>
+<?php endif; ?>
 
-<div class="widget-add-block" style="display:none;">
+<div class="widget-add-block"<?php if ($this->widgets): ?> style="display:none;"<?php endif; ?>>
     <?php $this->form->addWidget('widget-add'); ?>
     <?php $this->form->setAttribute('action', $this->url('module/social/addthis/add-widget')); ?>
     <?php echo $this->form()->openTag($this->form); ?>
@@ -12,7 +14,7 @@
         <?php echo $this->partial('social/add-this/widget', array('fieldset' => $this->form->get('widget-add'))); ?>
     </fieldset>
 
-    <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+    <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" name="submit">
     <?php echo $this->form()->closeTag($this->form); ?>
 </div>
 
@@ -32,7 +34,7 @@
             <?php endforeach; ?>
         </div>
 
-        <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" id="submit" name="submit">
+        <input id="input-save" type="submit" class="btn btn-warning" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>" name="submit">
 
     <?php echo $this->form()->closeTag($this->form); ?>
 <?php endif; ?>
@@ -41,7 +43,7 @@
 $(function() {
     var $tabs = $('#widgets-tabs').tabs();
 
-    $('#widget-add').on('click', function() {
+    $('#widget-add-button').on('click', function() {
         $block = $('.widget-add-block');
         if ($block.is(':visible')) {
             $block.fadeToggle('fast', null, function() {

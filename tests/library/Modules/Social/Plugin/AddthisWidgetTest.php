@@ -163,8 +163,6 @@ class AddThisWidgetTest extends \PHPUnit_Framework_TestCase
                 )
             );
 
-        $this->object = new AddThisWidget($this->addthis);
-
         $serviceManager = Registry::get('Application')->getServiceManager();
         $serviceManager->setAllowOverride(true);
         $serviceManager->setService('CurrentDocument', DocumentModel::fromArray(
@@ -174,7 +172,13 @@ class AddThisWidgetTest extends \PHPUnit_Framework_TestCase
                 'name' => 'Test',
             )
         ));
+        $serviceManager->setService(
+            'AddThisModel',
+             $this->addthis
+        );
         $serviceManager->setAllowOverride(false);
+
+        $this->object = new AddThisWidget();
     }
 
     public function testInvokeWithWrongSettings()

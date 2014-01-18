@@ -94,11 +94,13 @@ class AddThisController extends AbstractController
         }
 
 
+        $this->form->prepareWidgets();
         if ($this->params('isForwarded') != 'config') {
             $this->form->prepareConfig();
         }
-        if ($this->params('isForwarded') != 'widgets') {
-            $this->form->prepareWidgets();
+
+        if ($this->params('isForwarded')) {
+            $this->useFlashMessenger();
         }
 
         return array(
@@ -128,7 +130,6 @@ class AddThisController extends AbstractController
         }
 
         $this->flashMessenger()->addErrorMessage('Cannot saved widget');
-        $this->useFlashMessenger();
         return $this->forward()->dispatch(
             'AddThisController',
             array(

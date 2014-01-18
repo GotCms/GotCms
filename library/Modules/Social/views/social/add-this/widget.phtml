@@ -1,6 +1,7 @@
 <?php $imgLocationBase = '/modules/Social/images/'; ?>
 <div class="addthis-widget" id="<?php echo $this->fieldset->getName(); ?>">
     <?php foreach ($this->fieldset->getElements() as $element): ?>
+        <?php $element->setName(sprintf('%s[%s]', $fieldset->getName(), $element->getName())); ?>
         <?php if ($element->getAttribute('type')  === 'radio'): ?>
             <?php $radioValue = $element->getValue(); ?>
             <div class="form-group">
@@ -70,7 +71,7 @@
                 </div>
             </div>
         <?php elseif ($element->getAttribute('type') === 'textarea'): ?>
-            <div class="custom_string_field"<?php echo $radioValue != 'custom_string' ? 'style="display:none";' : '' ;?>>
+            <div class="custom_string_field"<?php echo $radioValue != 'custom_string' ? ' style="display:none"' : '' ;?>>
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
                         <?php echo $this->escapeHtml($this->translate('This text box allows you to enter any AddThis markup that you wish.')); ?><br>

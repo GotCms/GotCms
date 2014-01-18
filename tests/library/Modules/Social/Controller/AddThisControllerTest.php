@@ -180,10 +180,10 @@ class AddThisControllerTest extends AbstractHttpControllerTestCase
      *
      * @return void
      */
-    public function testAddWidgetActionWithInValidPostData()
+    public function testAddWidgetActionWithInvalidPostData()
     {
         $postData = array(
-            'widget-0' => array(
+            'widget-add' => array(
                 'name' => '',
                 'identifier' => '',
                 'settings' => '',
@@ -197,7 +197,8 @@ class AddThisControllerTest extends AbstractHttpControllerTestCase
             'POST',
             $postData
         );
-        $this->assertResponseStatusCode(302);
+        $this->assertResponseStatusCode(200);
+
 
         $this->assertModuleName('Social');
         $this->assertControllerName('AddThisController');
@@ -265,7 +266,7 @@ class AddThisControllerTest extends AbstractHttpControllerTestCase
             'POST',
             $postData
         );
-        $this->assertResponseStatusCode(302);
+        $this->assertResponseStatusCode(200);
 
         $this->assertModuleName('Social');
         $this->assertControllerName('AddThisController');
