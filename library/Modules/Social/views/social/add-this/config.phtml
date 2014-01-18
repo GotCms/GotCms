@@ -1,10 +1,12 @@
 <?php $this->form->setAttribute('action', $this->url('module/social/addthis/config')); ?>
 <?php echo $this->form()->openTag($this->form); ?>
-    <?php foreach ($this->form->get('config')->getElements() as $element): ?>
+    <?php $fieldset = $this->form->get('config'); ?>
+    <?php foreach ($fieldset->getElements() as $element): ?>
         <div class="form-group">
             <?php echo $this->formLabel($element); ?>
 
             <div class="col-lg-10">
+                <?php $element->setName(sprintf('%s[%s]', $fieldset->getName(), $element->getName())); ?>
                 <?php echo $this->formElement($element); ?>
                 <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
             </div>

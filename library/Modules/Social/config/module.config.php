@@ -32,6 +32,13 @@ return array(
             'AddThisController' => 'Social\Controller\AddThisController',
         ),
     ),
+    'service_manager' => array(
+        'factories' => array(
+            'AddThisModel' => function ($sm) {
+                return new \Social\Model\AddThis($sm->get('CoreConfig'));
+            },
+        )
+    ),
     'view_manager' => array(
         'template_path_stack' => array(
             'social' => __DIR__ . '/../views',

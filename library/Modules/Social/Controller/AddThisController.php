@@ -50,11 +50,11 @@ class AddThisController extends AbstractController
      */
     public function init()
     {
-        $this->form  = new Form\AddThis();
-        $this->model = new Model\AddThis(
-            $this->getServiceLocator()->get('CoreConfig')
-        );
-        $this->form->setModel($this->model);
+        if (!$this->params('isForwarded')) {
+            $this->form  = new Form\AddThis();
+            $this->model = $this->getServiceLocator()->get('AddThisModel');
+            $this->form->setModel($this->model);
+        }
     }
     /**
      * Index action
@@ -63,7 +63,7 @@ class AddThisController extends AbstractController
      */
     public function indexAction()
     {
-        if ($this->getRequest()->isPost()) {
+        if ($this->getRequest()->isPost() and !$this->params('isForwarded')) {
             $postData = $this->getRequest()->getPost()->toArray();
             $this->form->setData($postData);
             foreach ($postData as $idx => $post) {
@@ -82,8 +82,14 @@ class AddThisController extends AbstractController
             return $this->redirect()->toRoute('module/social/addthis');
         }
 
-        $this->form->prepareConfig();
-        $this->form->prepareWidgets();
+
+        if ($this->params('isForwarded') != 'config') {
+            $this->form->prepareConfig();
+        }
+        if ($this->params('isForwarded') != 'widgets') {
+            $this->form->prepareWidgets();
+        }
+
         return array(
             'addThis' => $this->model,
             'form'    => $this->form
@@ -111,7 +117,14 @@ class AddThisController extends AbstractController
         }
 
         $this->flashMessenger()->addErrorMessage('Cannot saved widget');
-        return $this->redirect()->toRoute('module/social/addthis');
+        $this->useFlashMessenger();
+        return $this->forward()->dispatch(
+            'AddThisController',
+            array(
+                'action' => 'index',
+                'isForwarded' => 'widgets'
+            )
+        );
     }
 
     /**
@@ -122,19 +135,36 @@ class AddThisController extends AbstractController
     public function configAction()
     {
         $this->form->prepareConfig();
-
         $postData = $this->getRequest()->getPost()->toArray();
         $this->form->setData($postData);
 
         if ($this->getRequest()->isPost()) {
             if ($this->form->isValid()) {
-                $this->model->setConfig($this->form->getData());
+                $data = $this->form->getData();
+                if (!empty($data['config']['username']) and
+                    !empty($data['config']['password']) and
+                    !empty($data['config']['profile_id'])
+                ) {
+                    $data['config']['valide_credential'] = true;
+                }
+
+                $data['config']['valide_credential'] = false;
+
+                $this->model->setConfig($data);
                 $this->flashMessenger()->addSuccessMessage('Configuration saved');
                 return $this->redirect()->toRoute('module/social/addthis');
             }
         }
 
+
         $this->flashMessenger()->addErrorMessage('Cannot saved configuration');
-        return $this->redirect()->toRoute('module/social/addthis');
+        $this->useFlashMessenger();
+        return $this->forward()->dispatch(
+            'AddThisController',
+            array(
+                'action' => 'index',
+                'isForwarded' => 'config'
+            )
+        );
     }
 }

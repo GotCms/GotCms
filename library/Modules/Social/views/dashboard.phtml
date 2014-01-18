@@ -1,0 +1,81 @@
+<?php if ($this->noData): ?>
+    <p>
+        <?php echo $this->escapeHtml($this->translate("We haven't recorded any sharing events in the last month for this site.")); ?>
+        <?php echo $this->escapeHtml($this->translate('This could be because you just installed addthis.')); ?>
+    </p>
+    <p><?php echo $this->escapeHtml($this->translate('If you want some ideas for increasing your sharing, check out:')); ?></p>
+    <ul>
+        <li><a href="//www.addthis.com//blog/">The AddThis Blog</a></li>
+        <li><a href="//www.addthis.com//blog/2010/11/09/3-tips-for-getting-the-most-shares/">Three tips for getting the most shares</a></li>
+        <li><a href="//www.addthis.com/forum/">The AddThis Forum</a></li>
+    <ul>
+<?php elseif ($this->unauthorized): ?>
+    <p><?php echo $this->escapeHtml($this->translate("I'm sorry, but we seemed to encounter an error. Please ensure that your password, username and profile id are correct.")); ?></p>
+<?php elseif ($this->error): ?>
+    <p><?php echo $this->escapeHtml($this->translate('There was an error retrieving your stats from the AddThis servers.  Please wait and try again in a few moments.')); ?></p>
+<?php else: ?>
+    <div id="at_tabs">
+        <ul>
+            <li><a href="#tab0">Yesterday</a></li>
+            <li><a href="#tab1">Last Week</a></li>
+            <li><a href="#tab2">Last Month</a></li>
+        </ul>
+        <?php foreach (array('yesterday', 'lastweek', 'lastmonth') as $tab => $timePeriod): ?>
+            <?php $stats = $this->get($timePeriod); ?>
+            <?php $viral = ($stats['viral'] != 'n/a') ? number_format($stats['viral'], 2) . '%' : $stats['viral']; ?>
+            <div id="tab<?php echo $tab; ?>">
+
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col width="33%"/>
+                        <col width="33%"/>
+                        <col width="33%"/>
+                    </colgroup>
+                    <tr>
+                        <td><div class="text-center"><h3><?php echo $stats['shares']; ?></h3>Shares</div></td>
+                        <td><div class="text-center"><h3><?php echo $stats['clickbacks']; ?></h3>Clicks</div></td>
+                        <td><div class="text-center"><h3><?php echo $viral; ?></h3>Viral Lift</div></td>
+                    </tr>
+                </table>
+            </div>
+        <?php endforeach ;?>
+    </div>
+    <?php $count = count($this->shareurls); ?>
+    <?php if (!empty($count)): ?>
+    <div id="tstab1">
+        <h5> Most Shared URLs (last month) </h5>
+        <ul>
+            <?php for($i = 0; ( $i < 5 && $i < $count ); $i++): ?>
+                <?php $url = array_shift($shareurls); ?>
+                <?php $displayUrl = str_replace(array('http://', 'https://', $this->domain), '',$url->url); ?>
+                <li>
+                    <span class="col-lg-10"><?php echo $displayUrl; ?></span>
+                    <span class="col-lg-2"><?php echo $url->shares; ?></span>
+                </li>
+            <?php endfor; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+
+    <?php $count = count($this->clickbackurls); ?>
+    <?php if (!empty($count)): ?>
+    <div id="tstab2">
+        <h5> Most Clicked URLs (last month) </h5>
+        <ul>
+            <?php for($i = 0; (  $i < 5 && $i < $count ); $i++): ?>
+                <?php $url = array_shift($clickbackurls); ?>
+                <?php $displayUrl = str_replace(array('http://', 'https://', $this->domain), '',$url->url); ?>
+                <li>
+                    <span class="col-lg-10"><?php echo $displayUrl; ?></span>
+                    <span class="col-lg-2"><?php echo $url->clickbacks; ?></span>
+                </li>
+            <?php endfor; ?>
+        </ul>
+    </div>
+    <?php endif; ?>
+    <p><a class="button rbutton" href="//www.addthis.com/analytics/summary?domain=<?php echo rawurlencode($this->domain); ?>">View More Analytics</a></p>
+
+    <script type="text/javascript">
+        $('#at_tabs').tabs();
+    </script>
+<?php endif; ?>

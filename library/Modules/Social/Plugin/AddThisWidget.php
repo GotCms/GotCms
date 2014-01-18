@@ -52,19 +52,12 @@ class AddThisWidget extends AbstractPlugin
     /**
      * Constructor, prepare addthis widget and configuration
      *
-     * @param AddThis $addthis AddThis model class
-     *
      * @return void
      */
-    public function __construct(AddThis $addthis = null)
+    public function __construct()
     {
-        if ($addthis === null) {
-            $this->addthis = new AddThis($this->getServiceLocator()->get('CoreConfig'));
-        } else {
-            $this->addthis = $addthis;
-        }
-
-        $this->config = $this->addthis->getConfig();
+        $this->addthis = $this->getServiceLocator()->get('AddThisModel');
+        $this->config  = $this->addthis->getConfig();
     }
 
     /**

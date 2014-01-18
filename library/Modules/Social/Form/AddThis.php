@@ -28,11 +28,12 @@
 namespace Social\Form;
 
 use Gc\Form\AbstractForm;
+use Social\Model;
 use Zend\Form\Element;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Zend\Form\FormInterface;
 use Zend\Form\Fieldset;
-use Social\Model;
+use Zend\Http\Client;
 
 /**
  * Comment form
@@ -76,9 +77,7 @@ class AddThis extends AbstractForm
         $options  = $this->getModel()->getConfig();
         $fieldset = new Fieldset('config');
 
-        $language = new Element\Select(
-            $this->setNameAsArray('config', 'language')
-        );
+        $language = new Element\Select('language');
         $language->setLabel('Language')
             ->setLabelAttributes(
                 array(
@@ -90,9 +89,7 @@ class AddThis extends AbstractForm
             ->setValue($options['language']);
         $fieldset->add($language);
 
-        $ga = new Element\Text(
-            $this->setNameAsArray('config', 'data_ga_property_id')
-        );
+        $ga = new Element\Text('data_ga_property_id');
         $ga->setLabel('Google Analytics property ID')
             ->setLabelAttributes(
                 array(
@@ -103,9 +100,7 @@ class AddThis extends AbstractForm
             ->setValue($options['data_ga_property_id']);
         $fieldset->add($ga);
 
-        $showOnDashboard = new Element\Checkbox(
-            $this->setNameAsArray('config', 'show_stats')
-        );
+        $showOnDashboard = new Element\Checkbox('show_stats');
         $showOnDashboard->setLabel('Show stats on dashboard')
             ->setLabelAttributes(
                 array(
@@ -117,9 +112,7 @@ class AddThis extends AbstractForm
             ->setValue($options['show_stats']);
         $fieldset->add($showOnDashboard);
 
-        $profileId = new Element\Text(
-            $this->setNameAsArray('config', 'profile_id')
-        );
+        $profileId = new Element\Text('profile_id');
         $profileId->setLabel('AddThis Profile ID')
             ->setLabelAttributes(
                 array(
@@ -130,9 +123,7 @@ class AddThis extends AbstractForm
             ->setValue($options['profile_id']);
         $fieldset->add($profileId);
 
-        $username = new Element\Text(
-            $this->setNameAsArray('config', 'username')
-        );
+        $username = new Element\Text('username');
         $username->setLabel('AddThis Username')
             ->setLabelAttributes(
                 array(
@@ -143,9 +134,7 @@ class AddThis extends AbstractForm
             ->setValue($options['username']);
         $fieldset->add($username);
 
-        $password = new Element\Password(
-            $this->setNameAsArray('config', 'password')
-        );
+        $password = new Element\Password('password');
         $password->setLabel('AddThis Password')
             ->setLabelAttributes(
                 array(
@@ -156,9 +145,7 @@ class AddThis extends AbstractForm
             ->setValue($options['password']);
         $fieldset->add($password);
 
-        $dataTrackClickback = new Element\Checkbox(
-            $this->setNameAsArray('config', 'data_track_clickback')
-        );
+        $dataTrackClickback = new Element\Checkbox('data_track_clickback');
         $dataTrackClickback->setLabel('Track clickback')
             ->setLabelAttributes(
                 array(
@@ -170,9 +157,7 @@ class AddThis extends AbstractForm
             ->setValue($options['data_track_clickback']);
         $fieldset->add($dataTrackClickback);
 
-        $dataTrackAddressbar = new Element\Checkbox(
-            $this->setNameAsArray('config', 'data_track_addressbar')
-        );
+        $dataTrackAddressbar = new Element\Checkbox('data_track_addressbar');
         $dataTrackAddressbar->setLabel('Track adressbar')
             ->setLabelAttributes(
                 array(
@@ -184,9 +169,7 @@ class AddThis extends AbstractForm
             ->setValue($options['data_track_addressbar']);
         $fieldset->add($dataTrackAddressbar);
 
-        $jsonConfig = new Element\Textarea(
-            $this->setNameAsArray('config', 'config_json')
-        );
+        $jsonConfig = new Element\Textarea('config_json');
         $jsonConfig->setLabel('Json config')
             ->setLabelAttributes(
                 array(
@@ -215,6 +198,23 @@ class AddThis extends AbstractForm
                 'profile_id' => array(
                     'name' => 'profile_id',
                     'required' => false,
+                    'validators' => array(
+                        array(
+                            'name' => 'Callback',
+                            'options' => array(
+                                'messages' => array(
+                                    \Zend\Validator\Callback::INVALID_VALUE => 'Can not connect to addthis api',
+                                ),
+                                'callback' => function ($value, $context = array()) {
+                                    if (empty($context['username']) or empty($context['password'])) {
+                                        return false;
+                                    }
+
+                                    return true;
+                                }
+                            )
+                        ),
+                    ),
                 ),
                 'show_stats' => array(
                     'name' => 'show_stats',
@@ -223,10 +223,61 @@ class AddThis extends AbstractForm
                 'password' => array(
                     'name' => 'password',
                     'required' => false,
+                    'validators' => array(
+                        array(
+                            'name' => 'Callback',
+                            'options' => array(
+                                'messages' => array(
+                                    \Zend\Validator\Callback::INVALID_VALUE => 'Can not connect to addthis api',
+                                ),
+                                'callback' => function ($value, $context = array()) {
+                                    if (empty($context['username']) or empty($context['profile_id'])) {
+                                        return false;
+                                    }
+
+                                    return true;
+                                }
+                            )
+                        ),
+                    ),
                 ),
                 'username' => array(
                     'name' => 'username',
                     'required' => false,
+                    'validators' => array(
+                        array(
+                            'name' => 'Callback',
+                            'options' => array(
+                                'messages' => array(
+                                    \Zend\Validator\Callback::INVALID_VALUE => 'Can not connect to addthis api',
+                                ),
+                                'callback' => function ($value, $context = array()) {
+                                    $client = new Client(
+                                        'https://api.addthis.com/analytics/1.0/pub/shares.json',
+                                        array(
+                                            'sslverifypeer' => false,
+                                        )
+                                    );
+                                    $client->setParameterGet(
+                                        array(
+                                            'username' => $context['username'],
+                                            'password' => $context['password'],
+                                            'pubid'    => $context['profile_id'],
+                                        )
+                                    );
+                                    try {
+                                        $response = $client->send();
+                                        if ($response->isSuccess() == 200) {
+                                            return true;
+                                        }
+                                    } catch (\Exception $e) {
+                                    }
+
+                                    return false;
+                                }
+                            )
+                        ),
+                    ),
                 ),
                 'data_track_clickback' => array(
                     'name' => 'data_track_clickback',
@@ -258,9 +309,7 @@ class AddThis extends AbstractForm
         $fieldset = new Fieldset($fieldsetName);
         $this->add($fieldset);
 
-        $name = new Element\Text(
-            $this->setNameAsArray($fieldsetName, 'name')
-        );
+        $name = new Element\Text('name');
         $name->setLabel('Name')
             ->setLabelAttributes(
                 array(
@@ -271,9 +320,7 @@ class AddThis extends AbstractForm
             ->setValue(isset($values['name']) ? $values['name'] : '');
         $fieldset->add($name);
 
-        $identifier = new Element\Text(
-            $this->setNameAsArray($fieldsetName, 'identifier')
-        );
+        $identifier = new Element\Text('identifier');
         $identifier->setLabel('Identifier')
             ->setLabelAttributes(
                 array(
@@ -284,9 +331,7 @@ class AddThis extends AbstractForm
             ->setValue(isset($values['identifier']) ? $values['identifier'] : '');
         $fieldset->add($identifier);
 
-        $radio = new Element\Radio(
-            $this->setNameAsArray($fieldsetName, 'settings')
-        );
+        $radio = new Element\Radio('settings');
         $radio->setLabel('Sharing Tool')
             ->setLabelAttributes(
                 array(
@@ -307,9 +352,7 @@ class AddThis extends AbstractForm
         $radio->setValueOptions($radioValues);
         $fieldset->add($radio);
 
-        $customString = new Element\Textarea(
-            $this->setNameAsArray($fieldsetName, 'custom_string')
-        );
+        $customString = new Element\Textarea('custom_string');
         $customString->setLabel('Custom string')
             ->setLabelAttributes(
                 array(
@@ -322,9 +365,7 @@ class AddThis extends AbstractForm
 
         $this->add($fieldset);
 
-        $chosenList = new Element\Hidden(
-            $this->setNameAsArray($fieldsetName, 'chosen_list')
-        );
+        $chosenList = new Element\Hidden('chosen_list');
         $chosenList->setValue(isset($values['chosen_list']) ? $values['chosen_list'] : '');
         $fieldset->add($chosenList);
 
@@ -363,19 +404,6 @@ class AddThis extends AbstractForm
             ),
             $fieldsetName
         );
-    }
-
-    /**
-     * Set name as array for elements name
-     *
-     * @param string $fieldsetName Fieldset name
-     * @param string $name         Name
-     *
-     * @return string
-     */
-    protected function setNameAsArray($fieldsetName, $name)
-    {
-        return sprintf('%s[%s]', $fieldsetName, $name);
     }
 
     /**
