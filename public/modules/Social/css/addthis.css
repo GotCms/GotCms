@@ -16,12 +16,6 @@
     margin-right:5px;
 }
 
-#dashboard_addthis p.sub, #dashboard_addthis .table, #dashboard_addthis .versions {
-    gin:-12px;
-}
-#dashboard_addthis .inside {
-    t-size:11px;
-}
 #dashboard_addthis p.sub {
     color:#777777;
     font-family:Georgia,"Times New Roman","Bitstream Charter",Times,serif;
