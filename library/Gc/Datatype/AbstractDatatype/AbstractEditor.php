@@ -88,7 +88,7 @@ abstract class AbstractEditor extends Object
     /**
      * Abstract function for save Editor
      *
-     * @param Datatype\AbstractDatatype $datatypeAbstract Datatype
+     * @param mixed $datatypeAbstract Datatype
      *
      * @return void
      */
@@ -179,7 +179,7 @@ abstract class AbstractEditor extends Object
     /**
      * Get datatype
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     public function getDatatype()
     {

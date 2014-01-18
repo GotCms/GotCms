@@ -40,11 +40,15 @@ use Social\Model\AddThis;
 class AddThisWidget extends AbstractPlugin
 {
     /**
+     * Configuration
+     *
      * @var array
      */
     protected $config;
 
     /**
+     * AddThis model
+     *
      * @var AddThis
      */
     protected $addthis;

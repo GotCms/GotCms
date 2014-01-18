@@ -36,5 +36,10 @@ namespace Development\Form;
  */
 class Script extends AbstractFormContent
 {
+    /**
+     * Table name
+     *
+     * @var string
+     */
     protected $tableName = 'script';
 }

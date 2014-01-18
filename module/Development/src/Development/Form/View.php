@@ -36,5 +36,10 @@ namespace Development\Form;
  */
 class View extends AbstractFormContent
 {
+    /**
+     * Table name
+     *
+     * @var string
+     */
     protected $tableName = 'view';
 }

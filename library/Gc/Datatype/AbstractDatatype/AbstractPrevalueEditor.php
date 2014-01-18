@@ -67,7 +67,7 @@ abstract class AbstractPrevalueEditor extends Object
     /**
      * Abstract function for save Editor
      *
-     * @param \Gc\Datatype\AbstractDatatype $datatypeAbstract Datatype
+     * @param mixed $datatypeAbstract Datatype
      *
      * @return void
      */
@@ -133,7 +133,7 @@ abstract class AbstractPrevalueEditor extends Object
     /**
      * Get current datatype
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     public function getDatatype()
     {

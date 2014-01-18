@@ -170,7 +170,7 @@ class Model extends AbstractTable
     /**
      * Save prevalue editor
      *
-     * @param AbstractDatatype $datatype Datatype
+     * @param mixed $datatype Datatype
      *
      * @return Model
      */
@@ -202,7 +202,7 @@ class Model extends AbstractTable
     /**
      * Load prevalue editor
      *
-     * @param AbstractDatatype $datatype Datatype
+     * @param mixed $datatype Datatype
      *
      * @return mixed
      */
@@ -235,7 +235,7 @@ class Model extends AbstractTable
      * @param integer        $datatypeId     Datatype id
      * @param integer        $documentId     Optional document id
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     public static function loadDatatype(ServiceManager $serviceManager, $datatypeId, $documentId = null)
     {

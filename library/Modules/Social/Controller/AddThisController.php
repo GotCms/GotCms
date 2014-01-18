@@ -40,7 +40,18 @@ use Social\Form;
  */
 class AddThisController extends AbstractController
 {
+    /**
+     * AddThis form
+     *
+     * @var Form\AddThis
+     */
     protected $form;
+
+    /**
+     * AddThis model
+     *
+     * @var Model\AddThis
+     */
     protected $model;
 
     /**

@@ -197,7 +197,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param mixed $value Value
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     public function setConfig($value)
     {
@@ -241,7 +241,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param HelperPluginManager $helperManager Helper manager
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     public function setHelperManager(HelperPluginManager $helperManager)
     {
@@ -274,7 +274,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param \Gc\Property\Model $property Property
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     public function setProperty($property)
     {
@@ -314,7 +314,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param string $dir Directory
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     public function addPath($dir)
     {
@@ -356,7 +356,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param Request $request Request
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     public function setRequest(Request $request)
     {
@@ -379,7 +379,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param TreeRouteStack $router Router
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     public function setRouter(TreeRouteStack $router)
     {

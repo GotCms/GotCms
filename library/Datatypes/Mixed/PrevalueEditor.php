@@ -136,7 +136,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
      *
      * @param string $name Datatype name
      *
-     * @return \Gc\Datatype\AbstractDatatype
+     * @return mixed
      */
     protected function loadDatatype($name)
     {
