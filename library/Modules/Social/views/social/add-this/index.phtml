@@ -52,14 +52,14 @@
 <div id="tabs">
     <ul>
         <li><a href="#tabs-0"><?php echo $this->escapeHtml($this->translate('Configuration')); ?></a></li>
-        <li><a href="#tabs-1"><?php echo $this->escapeHtml($this->translate('Widgets')); ?></a></li>
+        <li><a href="#tabs-1"><?php echo $this->escapeHtml($this->translate('Share Widgets')); ?></a></li>
     </ul>
 
     <div id="tabs-0">
         <?php echo $this->partial('social/add-this/config', array('object' => $this->addThis, 'form' => $this->form)); ?>
     </div>
     <div id="tabs-1">
-        <?php echo $this->partial('social/add-this/widgets', array('widgets' => $this->addThis->getWidgets(), 'form' => $this->form)); ?>
+        <?php echo $this->partial('social/add-this/share-widgets', array('widgets' => $this->addThis->getWidgets(), 'form' => $this->form)); ?>
     </div>
 </div>
 
