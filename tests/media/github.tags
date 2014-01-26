@@ -14,5 +14,9 @@
 {
     "ref": "refs/tags/1.1.0",
     "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/1.1.0"
+},
+{
+    "ref": "refs/tags/1.2.0",
+    "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/1.2.0"
 }
 ]

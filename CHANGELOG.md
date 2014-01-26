@@ -1,6 +1,6 @@
 # CHANGELOG
 
-##1.2.0 (-- --- ----)
+##1.2.0 (26 Jan 2014)
 - Can not select "Document Type" on creating children page ([https://github.com/GotCms/GotCms/issues/161](https://github.com/GotCms/GotCms/issues/161))
 - Cannot install on Windows due to the max_execution_time directive ([https://github.com/GotCms/GotCms/issues/129](https://github.com/GotCms/GotCms/issues/129))
 - Wordings ([https://github.com/GotCms/GotCms/issues/163](https://github.com/GotCms/GotCms/issues/163))
