@@ -205,6 +205,12 @@ class IndexController extends Action
             $viewModel->setTemplate('view/' . $view->getIdentifier());
         }
 
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            if ($this->params()->fromQuery('terminate_layout') or $this->params()->fromPost('terminate_layout')) {
+                $viewModel->setTerminal(true);
+            }
+        }
+
         $this->events()->trigger('Front', 'postDispatch', $this, array('viewModel' => $viewModel));
 
         return $viewModel;
