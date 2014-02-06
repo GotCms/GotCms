@@ -32,5 +32,4 @@ before_script:
 script: ./scripts/runtests.sh
 
 after_script:
-  - php vendor/bin/coveralls -v --exclude-no-stmt
-
+  - php scripts/coveralls -v --exclude-no-stmt
