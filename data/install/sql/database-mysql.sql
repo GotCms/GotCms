@@ -183,6 +183,7 @@ CREATE TABLE `user` (
     `retrieve_password_key` VARCHAR(40) DEFAULT NULL,
     `retrieve_updated_at` DATETIME DEFAULT NULL,
     `user_acl_role_id` INT NOT NULL DEFAULT 0,
+	`active` BOOLEAN NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
