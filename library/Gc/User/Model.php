@@ -74,6 +74,7 @@ class Model extends AbstractTable
         $authAdapter->setTableName($this->name);
         $authAdapter->setIdentityColumn('login');
         $authAdapter->setCredentialColumn('password');
+		$authAdapter->setCredentialTreatment('? AND active = TRUE');
 
         $authAdapter->setIdentity($login);
         $authAdapter->setCredential(sha1($password));
@@ -158,6 +159,7 @@ class Model extends AbstractTable
             'login' => $this->getLogin(),
             'updated_at' => new Expression('NOW()'),
             'user_acl_role_id' => $this->getUserAclRoleId(),
+			'active' => $this->getActive(),
             'retrieve_password_key' => $this->getRetrievePasswordKey(),
             'retrieve_updated_at' => $this->getRetrieveUpdatedAt(),
         );

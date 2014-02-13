@@ -92,6 +92,12 @@ class User extends AbstractForm
                         array('name' => 'not_empty'),
                     ),
                 ),
+				'active' => array(
+            				'required' => true,
+            				'validators' => array(
+            						array('name' => 'not_empty'),
+            				),
+            		),
             )
         );
 
@@ -164,6 +170,12 @@ class User extends AbstractForm
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'firstname');
         $this->add($firstname);
+		
+		 $active = new Element\Text('active');
+         $active->setLabel('Active')
+         ->setAttribute('class', 'form-control')
+         ->setAttribute('id', 'active');
+         $this->add($active);
 
         $role = new Element\Select('user_acl_role_id');
         $role->setLabel('Role')

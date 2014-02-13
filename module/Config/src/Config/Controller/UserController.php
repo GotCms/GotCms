@@ -104,7 +104,7 @@ class UserController extends Action
                 return $this->redirect()->toRoute('admin');
             }
 
-            $this->flashMessenger()->addErrorMessage('Can not connect');
+            $this->flashMessenger()->addErrorMessage('Can not connect or Your accout disabled');
             return $this->redirect()->toRoute('config/user/login', array('redirect' => $redirect));
         }
 
