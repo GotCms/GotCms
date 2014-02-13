@@ -182,6 +182,7 @@ CREATE TABLE `user` (
     `password` VARCHAR(255) NOT NULL,
     `retrieve_password_key` VARCHAR(40) DEFAULT NULL,
     `retrieve_updated_at` DATETIME DEFAULT NULL,
+    `active` BOOLEAN DEFAULT true,
     `user_acl_role_id` INT NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`email`)
@@ -315,4 +316,3 @@ ALTER TABLE `log_url` ADD CONSTRAINT `fk_log_url_log_visitor` FOREIGN KEY (`log_
 
 ALTER TABLE `log_url` ADD CONSTRAINT `fk_log_url_log_url_info` FOREIGN KEY (`log_url_info_id`) REFERENCES `log_url_info`(`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 -- End Relation's declaration
-

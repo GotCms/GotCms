@@ -62,6 +62,7 @@ class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
                 'email' => 'test@test.com',
                 'login' => 'test-user-model',
                 'user_acl_role_id' => 1,
+                'active' => true
             )
         );
 

@@ -163,6 +163,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
                 'email' => 'pierre.rambaud86@gmail.com',
                 'login' => 'login-test',
                 'user_acl_role_id' => 2,
+                'active' => true
             )
         );
 

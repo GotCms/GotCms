@@ -104,7 +104,7 @@ class UserController extends Action
                 return $this->redirect()->toRoute('admin');
             }
 
-            $this->flashMessenger()->addErrorMessage('Can not connect or Your accout disabled');
+            $this->flashMessenger()->addErrorMessage('Can not connect');
             return $this->redirect()->toRoute('config/user/login', array('redirect' => $redirect));
         }
 
@@ -275,6 +275,12 @@ class UserController extends Action
             $form->setData($post);
             if ($form->isValid()) {
                 $userModel->addData($post);
+                $userModel->setActive(
+                    empty($post['active']) ?
+                    false :
+                    $post['active']
+                );
+
                 if (!empty($post['password'])) {
                     $userModel->setPassword($post['password']);
                 }

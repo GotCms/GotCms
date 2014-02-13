@@ -69,18 +69,13 @@
             <?php echo $this->formElementErrors($this->form->get('firstname'), array('class' => 'text-danger')); ?>
         </div>
     </div>
-	<div class="form-group">
-		<div class="form-inline">
-    	    <label class="required control-label col-lg-2" for="description"><?php echo $this->escapeHtml($this->translate('Active')); ?></label>
-				<div class="radio">
-					<label><input type="radio" name="active" id="active" value="1" <?php if ($this->form->getValue('active')) echo "checked";?>> Yes  </label>
-				</div>
-				<div class="radio">
- 					<label><input type="radio" name="active" id="active" value="0" <?php if (!$this->form->getValue('active')) echo "checked";?>> No </label>
- 				</div>
-  		 <?php echo $this->formElementErrors($this->form->get('active'), array('class' => 'text-danger')); ?>           
-		</div>
-	</div>
+    <div class="form-group">
+        <?php echo $this->formLabel($this->form->get('active')); ?>
+        <div class="col-lg-10">
+            <?php echo $this->formElement($this->form->get('active')); ?>
+            <?php echo $this->formElementErrors($this->form->get('active'), array('class' => 'text-danger')); ?>
+        </div>
+    </div>
     <div class="form-group">
         <?php echo $this->formLabel($this->form->get('user_acl_role_id')); ?>
         <div class="col-lg-10">

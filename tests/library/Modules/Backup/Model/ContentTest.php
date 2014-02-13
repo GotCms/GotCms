@@ -442,6 +442,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
                 'email' => 'test@test.com',
                 'login' => 'test-user-login',
                 'user_acl_role_id' => 1,
+                'active' => true,
             )
         );
 

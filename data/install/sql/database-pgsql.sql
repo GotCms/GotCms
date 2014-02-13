@@ -168,6 +168,7 @@ CREATE TABLE "user" (
 "password" character varying NOT NULL,
 "retrieve_password_key" character varying(40) DEFAULT NULL,
 "retrieve_updated_at" timestamp without time zone DEFAULT NULL,
+"active" boolean NOT NULL DEFAULT true,
 "user_acl_role_id" integer NOT NULL DEFAULT 0
 ) WITH OIDS;
 ALTER TABLE "user" ADD CONSTRAINT "user_pk" PRIMARY KEY("id");
@@ -312,4 +313,3 @@ ALTER TABLE "log_url" ADD CONSTRAINT "fk_log_url_log_visitor" FOREIGN KEY ("log_
 ALTER TABLE "log_url" ADD CONSTRAINT "fk_log_url_log_url_info" FOREIGN KEY ("log_url_info_id") REFERENCES "log_url_info"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 -- End Relation's declaration
-

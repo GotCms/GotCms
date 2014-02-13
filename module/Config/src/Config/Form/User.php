@@ -92,12 +92,9 @@ class User extends AbstractForm
                         array('name' => 'not_empty'),
                     ),
                 ),
-				'active' => array(
-            				'required' => true,
-            				'validators' => array(
-            						array('name' => 'not_empty'),
-            				),
-            		),
+                'active' => array(
+                    'allow_empty' => true,
+                ),
             )
         );
 
@@ -170,12 +167,18 @@ class User extends AbstractForm
             ->setAttribute('class', 'form-control')
             ->setAttribute('id', 'firstname');
         $this->add($firstname);
-		
-		 $active = new Element\Text('active');
-         $active->setLabel('Active')
-         ->setAttribute('class', 'form-control')
-         ->setAttribute('id', 'active');
-         $this->add($active);
+
+        $active = new Element\Checkbox('active');
+        $active->setLabel('Is active')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'required control-label col-lg-2'
+                )
+            )
+            ->setAttribute('class', 'input-checkbox')
+            ->setAttribute('id', 'active')
+            ->setCheckedValue('1');
+        $this->add($active);
 
         $role = new Element\Select('user_acl_role_id');
         $role->setLabel('Role')

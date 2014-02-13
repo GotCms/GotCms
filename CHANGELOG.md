@@ -2,6 +2,7 @@
 
 ##1.3.0 (-- --- 2014)
 - Remove layout when using ajax requests ([https://github.com/GotCms/GotCms/issues/185](https://github.com/GotCms/GotCms/issues/185))
+- Add disable user function ([https://github.com/GotCms/GotCms/issues/195](https://github.com/GotCms/GotCms/issues/195))
 
 ##1.2.0 (26 Jan 2014)
 - Can not select "Document Type" on creating children page ([https://github.com/GotCms/GotCms/issues/161](https://github.com/GotCms/GotCms/issues/161))
