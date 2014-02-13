@@ -31,8 +31,9 @@
     <colgroup>
         <col width="20%">
         <col width="20%">
-        <col width="30%">
+        <col width="25%">
         <col width="20%">
+		<col width="5%">
         <col width="5%">
         <col width="5%">
     </colgroup>
@@ -42,6 +43,7 @@
             <th><?php echo $this->escapeHtml($this->translate('Firstname')); ?></th>
             <th><?php echo $this->escapeHtml($this->translate('Email')); ?></th>
             <th><?php echo $this->escapeHtml($this->translate('Login')); ?></th>
+			<th><?php echo $this->escapeHtml($this->translate('Active')); ?></th>
             <th class="text-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
             <th class="text-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
         </tr>
@@ -53,6 +55,7 @@
                 <td><?php echo $this->escapeHtml($user->getFirstname()); ?></td>
                 <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
                 <td><?php echo $this->escapeHtml($user->getLogin()); ?></td>
+				<td class="text-center"><?php echo $this->escapeHtml($user->getActive()); ?></td>
                 <td class="text-center">
                     <a href="<?php echo $this->url('config/user/edit', array('id' => $user->getId())); ?>" class="edit-line">
                         <img src="<?php echo $this->cdnBackend('backend/images/icones/edit.png'); ?>" alt="<?php echo $this->escapeHtml($this->translate('Edit')); ?>" />
