@@ -208,7 +208,7 @@ var Gc = (function($)
                 $.post($deleteTabUrl, {tab: $button.val()}, function($data) {
                     $('.select-tab').find('option[value="' + $button.val() + '"]').remove();
                     var $tabs = $('#properties-tabs-content');
-                    $button.parent().remove();
+                    $button.closest('.list-item').remove();
                     var $tab = $tabs.find('a[href="#tabs-properties-' + $button.val() + '"]').parent();
                     var $index = $('li', $tabs).index($tab);
 
