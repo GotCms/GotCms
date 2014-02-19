@@ -1,0 +1,14 @@
+<div id="<?php echo $this->id; ?>" class="input-group date col-lg-3 col-md-6 col-sm-6">
+    <?php echo $this->formElement($this->element); ?>
+    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#<?php echo $this->id; ?>").datetimepicker({
+            format: "YYYY/MM/DD hh:mm:ss",
+            useSeconds: true
+        });
+    });
+</script>

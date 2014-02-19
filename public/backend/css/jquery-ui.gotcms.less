@@ -170,8 +170,11 @@
     .ui-datepicker-prev-hover, .ui-datepicker-next-hover{
         top:2px;
     }
+    .ui-datepicker-prev:before{
+        content:"\e091"
+    }
     .ui-datepicker-next:before{
-        content:"\f061"
+        content:"\e092"
     }
     .ui-datepicker-prev-hover{
         left:2px;
@@ -192,13 +195,17 @@
         }
         > a{
             &:hover{
-                background-color:#EEEEEE;
+                background-color:@gray94;
             }
             &.ui-state-highlight{
-                background-color:#d5e5ef;
+                background-color:@lightOrange;
+                border:1px dashed @gray60;
+                min-height:22px;
+                padding:1px;
+                margin:0;
             }
             &.ui-state-active{
-                background-color:#2283c5;
+                background-color:@orange;
                 color:@white;
             }
             &.ui-priority-secondary{
@@ -215,10 +222,12 @@
         }
         .ui-datepicker-buttonpane{
             background-color:#DDDDDD;
+            overflow:hidden;
             height:1px;
         }
     }
 }
+
 
 .ui-widget-overlay{
     background:rgba(0, 0, 0, 0.25);
@@ -757,4 +766,3 @@ th[aria-selected=true]{
 .ui-icon-gripsmall-diagonal-se:before{
     content: "\e096";
 }
-

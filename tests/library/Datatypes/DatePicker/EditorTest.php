@@ -221,6 +221,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->assertInternalType('array', $this->object->load());
+        $this->assertInternalType('string', $this->object->load());
     }
 }

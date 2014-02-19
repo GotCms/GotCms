@@ -56,35 +56,30 @@ class Editor extends AbstractEditor
      */
     public function load()
     {
+        $this->getHelper('headlink')->appendStylesheet(
+            '/datatypes/DatePicker/css/bootstrap-datetimepicker.min.css'
+        );
         $this->getHelper('headscript')->appendFile(
-            '/datatypes/DatePicker/jquery-ui-timepicker-addon.js',
+            '/datatypes/DatePicker/js/moment.min.js',
             'text/javascript'
         );
         $this->getHelper('headscript')->appendFile(
-            '/datatypes/DatePicker/jquery-ui-sliderAccess.js',
+            '/datatypes/DatePicker/js/bootstrap-datetimepicker.min.js',
             'text/javascript'
         );
         $id         = 'datepicker' . $this->property->getId();
         $datepicker = new Element\Text($this->getName());
         $datepicker->setLabel($this->getProperty()->getName())
             ->setAttribute('description', $this->getProperty()->getDescription())
-            ->setValue($this->getValue())
-            ->setAttribute('id', $id);
+            ->setAttribute('class', 'form-control')
+            ->setValue($this->getValue());
 
-        $script = '<script type="text/javascript">
-            $(function () {
-                $("#' . $id . '").datetimepicker({
-                    showOn: "button",
-                    addSliderAccess: true,
-                    sliderAccessArgs: { touchonly: false },
-                    buttonImage: "/datatypes/DatePicker/calendar.gif",
-                    buttonImageOnly: true,
-                    timeFormat: "hh:mm:ss",
-                    dateFormat: "yy/mm/dd"
-                });
-            });
-        </script>';
-
-        return array($datepicker, $script);
+        return $this->addPath(__DIR__)->render(
+            'datepicker-editor.phtml',
+            array(
+                'id' => $id,
+                'element' => $datepicker,
+            )
+        );
     }
 }
