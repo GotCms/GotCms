@@ -4,6 +4,7 @@
 - Remove layout when using ajax requests ([https://github.com/GotCms/GotCms/issues/185](https://github.com/GotCms/GotCms/issues/185))
 - Add disable user function ([https://github.com/GotCms/GotCms/issues/195](https://github.com/GotCms/GotCms/issues/195))
 - Can't delete a tab in Document Type ([https://github.com/GotCms/GotCms/issues/205](https://github.com/GotCms/GotCms/issues/205))
+- Preview not working anymore ([https://github.com/GotCms/GotCms/issues/207](https://github.com/GotCms/GotCms/issues/207))
 
 
 ##1.2.0 (26 Jan 2014)

@@ -278,7 +278,9 @@ class Module extends Mvc\Module
     {
         $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
         if ($matchedRouteName === 'cms') {
-            $path = ltrim($event->getRouteMatch()->getParam('path'), '/');
+            $isAdmin   = $event->getApplication()->getServiceManager()->get('Auth')->hasIdentity();
+            $isPreview = ($isAdmin and $event->getRequest()->getQuery()->get('preview') === 'true');
+            $path      = ltrim($event->getRouteMatch()->getParam('path'), '/');
             if (empty($path)) {
                 $document = Document\Model::fromUrlKey('');
             } else {
