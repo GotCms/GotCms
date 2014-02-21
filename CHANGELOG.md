@@ -6,6 +6,7 @@
 - Can't delete a tab in Document Type ([https://github.com/GotCms/GotCms/issues/205](https://github.com/GotCms/GotCms/issues/205))
 - Preview not working anymore ([https://github.com/GotCms/GotCms/issues/207](https://github.com/GotCms/GotCms/issues/207))
 - DatePicker datatype is broken ([https://github.com/GotCms/GotCms/issues/206](https://github.com/GotCms/GotCms/issues/206))
+- Image is not uploading when using simple image data type ([https://github.com/GotCms/GotCms/issues/209](https://github.com/GotCms/GotCms/issues/209))
 
 
 ##1.2.0 (26 Jan 2014)

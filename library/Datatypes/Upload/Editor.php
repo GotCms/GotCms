@@ -118,7 +118,7 @@ class Editor extends AbstractEditor
         $upload->setAttribute('description', $property->getDescription());
         if (!empty($parameters['is_multiple'])) {
             $upload->setAttribute('multiple', 'multiple');
-            $upload->setName($upload->getName() . '[]');
+            $upload->setName($upload->getName());
         }
 
         $hiddenUpload = new Element\Hidden($this->getName() . '-hidden');
