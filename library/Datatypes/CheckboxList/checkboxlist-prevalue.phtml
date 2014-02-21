@@ -1,27 +1,47 @@
-
-<div>
-    <div class="col-lg-2">
+<div class="form-group">
+    <label class="col-lg-1" for="addKey"><?php echo $this->escapeHtml($this->translate('Key')); ?></label>
+    <div class="col-lg-5">
+        <input type="text" id="addKey" value="" class="form-control">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-lg-1" for="addValue"><?php echo $this->escapeHtml($this->translate('Value')); ?></label>
+    <div class="col-lg-5">
         <input type="text" id="addValue" value="" class="form-control">
     </div>
-    <button type="button" class="btn btn-primary button-add">
-        <i class="glyphicon glyphicon-plus"></i>
-        <?php echo $this->escapeHtml($this->translate('Add')); ?>
-    </button>
 </div>
+<button type="button" class="btn btn-primary button-add">
+    <i class="glyphicon glyphicon-plus"></i>
+        <?php echo $this->escapeHtml($this->translate('Add')); ?>
+</button>
 
 <h2><?php echo $this->escapeHtml($this->translate('List of values')); ?></h2>
 <ul id="checkboxlist-values" class="list-group col-lg-6">
+    <li class="list-group-item">
+        <div class="col-lg-5">
+            <p class="text-info"><?php echo $this->escapeHtml($this->translate('Key')); ?></p>
+        </div>
+        <div class="col-lg-5">
+            <p class="text-info"><?php echo $this->escapeHtml($this->translate('Value')); ?></p>
+        </div>
+        <p><?php echo $this->escapeHtml($this->translate('Delete')); ?></p>
+    </li>
+    <?php $idx = 0; ?>
     <?php if (is_array($this->parameters)): ?>
-        <?php foreach ($this->parameters as $param => $value): ?>
+        <?php foreach ($this->parameters as $key => $value): ?>
             <li class="list-group-item">
-                <div class="col-lg-10">
-                    <input class="form-control" type="text" name="values[]" value="<?php echo $this->escapeHtml($value); ?>">
+                <div class="col-lg-5">
+                    <input class="form-control" type="text" name="list[<?php echo $idx; ?>][key]" value="<?php echo $this->escapeHtml($key); ?>">
+                </div>
+                <div class="col-lg-5">
+                    <input class="form-control" type="text" name="list[<?php echo $idx; ?>][value]" value="<?php echo $this->escapeHtml($value); ?>">
                 </div>
                 <button type="button" class="btn btn-danger button-delete">
                     <i class="glyphicon glyphicon-remove"></i>
                     <?php echo $this->escapeHtml($this->translate('Delete')); ?>
                 </button>
             </li>
+            <?php $idx++; ?>
         <?php endforeach; ?>
     <?php endif; ?>
 </ul>
@@ -32,12 +52,16 @@
         return false;
     });
 
+    $idx = <?php echo $idx; ?>;
     $(document).on('click', '.button-add', function() {
         if ($('#addValue').val() != "") {
             $('#checkboxlist-values').append(
                 '<li class="list-group-item">' +
-                    '<div class="col-lg-10">' +
-                        '<input class="form-control" type="text" name="values[]" value="' + $('#addValue').val() + '">' +
+                    '<div class="col-lg-5">' +
+                        '<input class="form-control" type="text" name="list[' + $idx + '][key]" value="' + $('#addKey').val() + '">' +
+                    '</div>' +
+                    '<div class="col-lg-5">' +
+                        '<input class="form-control" type="text" name="list[' + $idx + '][value]" value="' + $('#addValue').val() + '">' +
                     '</div>' +
                     '<button type="button" class="btn btn-danger button-delete">' +
                         '<i class="glyphicon glyphicon-remove"></i><?php echo $this->escapeJs($this->translate('Delete')); ?>' +
@@ -45,6 +69,8 @@
                 '</li>');
             $(this).removeClass('ui-state-focus');
             $('#addValue').val('');
+            $('#addKey').val('');
+            $idx++;
         }
         return false;
     });

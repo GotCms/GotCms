@@ -7,6 +7,7 @@
 - Preview not working anymore ([https://github.com/GotCms/GotCms/issues/207](https://github.com/GotCms/GotCms/issues/207))
 - DatePicker datatype is broken ([https://github.com/GotCms/GotCms/issues/206](https://github.com/GotCms/GotCms/issues/206))
 - Image is not uploading when using simple image data type ([https://github.com/GotCms/GotCms/issues/209](https://github.com/GotCms/GotCms/issues/209))
+- Checkboxlist and Radiobuttonlist datatypes should have a key/value pairs ([https://github.com/GotCms/GotCms/issues/211](https://github.com/GotCms/GotCms/issues/211))
 
 
 ##1.2.0 (26 Jan 2014)
