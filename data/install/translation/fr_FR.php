@@ -289,6 +289,11 @@ return array (
     "The input does not appear to be a postal code" => "L'entrée ne semble pas être un code postal valide",
     "An exception has been raised while validating the input" => "Une exception a été levée lors de la validation de l'entrée",
     "Mandatory" => "Obligatoire",
+    "Publish" => "Publier",
+    "Show in nav" => "Afficher dans la navigation",
+    "View" => "Vue",
+    "Layout" => "Gabarit",
+    "Preview" => "Prévisualiser",
 
     // Zend\Validator\Barcode
     "The input failed checksum validation" => "L'entrée n'a pas passé la validation de la somme de contrôle",
