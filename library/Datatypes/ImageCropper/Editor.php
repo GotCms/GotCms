@@ -198,6 +198,7 @@ class Editor extends AbstractEditor
         $upload     = new Element\File($this->getName());
         $upload->setAttribute('class', 'form-control');
         $upload->setAttribute('description', $property->getDescription());
+        $upload->setAttribute('required', $property->isRequired());
         $upload->setLabel($property->getName());
 
         $hiddenUpload = new Element\Hidden($this->getName() . '-hidden');

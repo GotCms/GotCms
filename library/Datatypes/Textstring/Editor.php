@@ -64,6 +64,7 @@ class Editor extends AbstractEditor
         $textstring->setAttribute('description', $property->getDescription());
         $textstring->setLabel($property->getName());
         $textstring->setValue($this->getValue());
+        $textstring->setAttribute('required', $property->isRequired());
         if (!empty($parameters['length'])) {
             $textstring->setAttribute('maxlength', $parameters['length']);
         }

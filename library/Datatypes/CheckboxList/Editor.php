@@ -71,6 +71,7 @@ class Editor extends AbstractEditor
         $element->setLabel($this->getName());
         $element->setLabel($this->getProperty()->getName());
         $element->setAttribute('description', $this->getProperty()->getDescription());
+        $element->setAttribute('required', $this->getProperty()->isRequired());
         $element->setAttribute('class', 'input-checkbox');
 
         $element->setValue($this->getValue());

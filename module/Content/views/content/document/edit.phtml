@@ -58,6 +58,10 @@
                                     <?php if ($element->getLabel()): ?>
                                         <div class="col-lg-2">
                                             <?php echo $this->formLabel($element); ?>
+                                            <?php if ($element->getAttribute('required')): ?>
+                                                <p class="text-danger pull-right">(<?php echo $this->escapeHtml($this->translate('Mandatory')); ?>)</p>
+                                            <?php endif; ?>
+
                                             <?php $description = $element->getAttribute('description'); ?>
                                             <?php if (!empty($description)): ?>
                                                 <p class="help-block"><?php echo $this->escapeHtml($this->translate($description)); ?></p>

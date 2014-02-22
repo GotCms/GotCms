@@ -197,7 +197,7 @@ class DocumentController extends Action
         $documentId = $this->getRouteMatch()->getParam('id');
         $document   = DocumentModel::fromId($documentId);
         if (empty($document)) {
-            $this->flashMessenger()->addErrorMessage('Document does not exists !');
+            $this->flashMessenger()->addErrorMessage('Document does not exists!');
             return $this->redirect()->toRoute('content');
         } else {
             $documentForm = new ZendForm\Form();

@@ -67,11 +67,12 @@ class Editor extends AbstractEditor
             '/datatypes/DatePicker/js/bootstrap-datetimepicker.min.js',
             'text/javascript'
         );
-        $id         = 'datepicker' . $this->property->getId();
+        $id         = 'datepicker' . $this->getProperty()->getId();
         $datepicker = new Element\Text($this->getName());
         $datepicker->setLabel($this->getProperty()->getName())
             ->setAttribute('description', $this->getProperty()->getDescription())
             ->setAttribute('class', 'form-control')
+            ->setAttribute('required', $this->getProperty()->isRequired())
             ->setValue($this->getValue());
 
         return $this->addPath(__DIR__)->render(

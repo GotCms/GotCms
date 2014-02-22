@@ -288,6 +288,7 @@ return array (
     "Invalid type given. String or integer expected" => "Type invalid. Chaîne ou entier attendu",
     "The input does not appear to be a postal code" => "L'entrée ne semble pas être un code postal valide",
     "An exception has been raised while validating the input" => "Une exception a été levée lors de la validation de l'entrée",
+    "Mandatory" => "Obligatoire",
 
     // Zend\Validator\Barcode
     "The input failed checksum validation" => "L'entrée n'a pas passé la validation de la somme de contrôle",
