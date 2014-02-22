@@ -503,15 +503,10 @@ class DocumentController extends Action
      */
     protected function checkUrlKey($string)
     {
-        $replace = array(
-            ' ',
-            'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'
-        );
-        $to      = array(
-            '-',
-            'aaaaaceeeeiiiinooooouuuuyyaaaaaceeeeiiiinooooouuuuy'
-        );
+        $replace = 'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ';
+        $to      = 'aaaaaceeeeiiiinooooouuuuyyaaaaaceeeeiiiinooooouuuuy';
         $string  = strtolower(str_replace($replace, $to, trim($string)));
+        $string  = preg_replace('~[^a-zA-Z0-9-]~', '-', $string);
 
         return $string;
     }
