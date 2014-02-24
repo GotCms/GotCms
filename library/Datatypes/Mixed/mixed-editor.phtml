@@ -41,7 +41,7 @@
                         <i class="glyphicon glyphicon-move"></i>
                         <?php foreach ($values as $datatype_id => $datatype): ?>
                             <?php foreach ($datatype['fieldset']->getElements() as $element): ?>
-                                <div>
+                                <div class="clearfix">
                                     <?php $content = $element->getAttribute('content'); ?>
                                     <?php if (!empty($content)): ?>
                                         <?php echo $content; ?>
