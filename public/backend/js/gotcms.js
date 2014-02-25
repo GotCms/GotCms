@@ -493,17 +493,29 @@ var Gc = (function($)
 
                 $.contextMenu({
                     selector: '#browser a',
-                    items: {
-                        'new': {name: Translator.translate('New'), icon: 'add'},
-                        'edit': {name: Translator.translate('Edit'), icon: 'edit'},
-                        'delete': {name: Translator.translate('Delete'), icon: 'delete'},
-                        'sep1': '---------',
-                        'cut': {name: Translator.translate('Cut'), icon: 'cut'},
-                        'copy': {name: Translator.translate('Copy'), icon: 'copy'},
-                        'paste': {name: Translator.translate('Paste'), icon: 'paste', disabled: true},
-                        'sep2': '---------',
-                        'refresh': {name: Translator.translate('Refresh'), icon: 'refresh'},
-                        'quit': {name: Translator.translate('Quit'), icon: 'quit'}
+                    build: function($trigger, $e) {
+                        var $items = {
+                            'new': {name: Translator.translate('New'), icon: 'add'},
+                            'edit': {name: Translator.translate('Edit'), icon: 'edit'},
+                            'delete': {name: Translator.translate('Delete'), icon: 'delete'},
+                            'publish': {name: Translator.translate('Publish'), icon: 'publish'},
+                            'unpublish': {name: Translator.translate('Unpublish'), icon: 'unpublish'},
+                            'sep1': '---------',
+                            'cut': {name: Translator.translate('Cut'), icon: 'cut'},
+                            'copy': {name: Translator.translate('Copy'), icon: 'copy'},
+                            'paste': {name: Translator.translate('Paste'), icon: 'paste', disabled: true},
+                            'sep2': '---------',
+                            'refresh': {name: Translator.translate('Refresh'), icon: 'refresh'},
+                            'quit': {name: Translator.translate('Quit'), icon: 'quit'}
+                        };
+
+                        if ($trigger.hasClass('not-published')) {
+                            delete($items.unpublish);
+                        } else {
+                            delete($items.publish);
+                        }
+
+                        return {items: $items};
                     },
                     callback: function($action, $options) {
                         var $element = $(this),
@@ -573,6 +585,24 @@ var Gc = (function($)
                             });
                             return true;
 
+                        case 'publish':
+                        case 'unpublish':
+                            $.ajax({
+                                url: $url,
+                                dataType: 'json',
+                                data: {},
+                                success: function (data) {
+                                    if (data.success === true) {
+                                        if ($action === 'publish') {
+                                            $element.removeClass('not-published')
+                                        } else {
+                                            $element.addClass('not-published')
+                                        }
+                                    }
+                                }
+                            });
+
+                            return true;
                         case 'delete':
                             $this.showDeleteDialog($url, $element.parent());
                             return true;

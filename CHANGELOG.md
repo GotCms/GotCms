@@ -8,7 +8,8 @@
 - DatePicker datatype is broken ([https://github.com/GotCms/GotCms/issues/206](https://github.com/GotCms/GotCms/issues/206))
 - Image is not uploading when using simple image data type ([https://github.com/GotCms/GotCms/issues/209](https://github.com/GotCms/GotCms/issues/209))
 - Checkboxlist and Radiobuttonlist datatypes should have a key/value pairs ([https://github.com/GotCms/GotCms/issues/211](https://github.com/GotCms/GotCms/issues/211))
-- Add text in document when property is required ([https://github.com/GotCms/GotCms/issues/212](https://github.com/GotCms/GotCms/issues/2b12))
+- Add text in document when property is required ([https://github.com/GotCms/GotCms/issues/212](https://github.com/GotCms/GotCms/issues/212))
+- Add button to publish / unpublish in the context menu ([https://github.com/GotCms/GotCms/issues/214](https://github.com/GotCms/GotCms/issues/214))
 
 
 ##1.2.0 (26 Jan 2014)

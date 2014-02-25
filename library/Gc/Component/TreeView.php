@@ -38,16 +38,6 @@ use Gc\Component\IterableInterface;
  */
 class TreeView
 {
-
-    /**
-     * Treeview constructor
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
-
     /**
      * Render treeview html
      *

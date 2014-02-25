@@ -98,6 +98,8 @@
 .context-menu-item.icon-add { background-image: url(../../images/contextmenu/page_white_add.png); }
 .context-menu-item.icon-quit { background-image: url(../../images/contextmenu/door.png); }
 .context-menu-item.icon-refresh { background-image: url(../../images/contextmenu/refresh.png); }
+.context-menu-item.icon-publish { background-image: url(../../images/contextmenu/publish.png); }
+.context-menu-item.icon-unpublish { background-image: url(../../images/contextmenu/unpublish.png); }
 
 /* vertically align inside labels */
 .context-menu-input > label > * { vertical-align: top; }

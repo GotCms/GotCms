@@ -25,6 +25,8 @@
  * @link       http://www.got-cms.com
  */
 
+use Gc\Document\Model as DocumentModel;
+
 return array(
     'controllers' => array(
         'invokables' => array(
@@ -238,7 +240,33 @@ return array(
                                     ),
                                 ),
                             ),
-                        )
+                            'publish' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                'route'    => '/publish/:id',
+                                'defaults' =>
+                                    array (
+                                        'module'     => 'content',
+                                        'controller' => 'DocumentController',
+                                        'action'     => 'status',
+                                        'status'     => DocumentModel::STATUS_ENABLE,
+                                    ),
+                                ),
+                            ),
+                            'unpublish' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                'route'    => '/unpublish/:id',
+                                'defaults' =>
+                                    array (
+                                        'module'     => 'content',
+                                        'controller' => 'DocumentController',
+                                        'action'     => 'status',
+                                        'status'     => DocumentModel::STATUS_DISABLE,
+                                    ),
+                                ),
+                            ),
+                        ),
                     ),
                     'media' => array(
                         'type'    => 'Segment',

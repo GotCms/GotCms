@@ -75,7 +75,8 @@ class DocumentController extends Action
             'copy' => 'content/document/copy',
             'cut' => 'content/document/cut',
             'paste' => 'content/document/paste',
-            'refresh' => 'content/document/refresh-treeview',
+            'publish' => 'content/document/publish',
+            'unpublish' => 'content/document/unpublish',
         );
 
         $arrayRoutes = array();
@@ -450,6 +451,26 @@ class DocumentController extends Action
         } else {
             return $this->returnJson(array('success' => false));
         }
+    }
+
+    /**
+     * Defined status to document
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function statusAction()
+    {
+        $status     = $this->getRouteMatch()->getParam('status', null);
+        $documentId = $this->getRouteMatch()->getParam('id', null);
+        $document   = DocumentModel::fromId($documentId);
+        if (empty($document) or $status === null) {
+            return $this->returnJson(array('success' => false));
+        }
+
+        $document->setStatus($status);
+        $document->save();
+
+        return $this->returnJson(array('success' => true));
     }
 
     /**

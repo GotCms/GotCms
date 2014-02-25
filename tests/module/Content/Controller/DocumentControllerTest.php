@@ -490,6 +490,61 @@ class DocumentControllerTest extends AbstractHttpControllerTestCase
      *
      * @return void
      */
+    public function testPublishActionWithDisableDocument()
+    {
+        $this->document->setStatus(DocumentModel::STATUS_DISABLE);
+        $this->document->save();
+
+        $this->dispatch('/admin/content/document/publish/' . $this->document->getId());
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('DocumentController');
+        $this->assertControllerClass('DocumentController');
+        $this->assertMatchedRouteName('content/document/publish');
+        $document = DocumentModel::fromId($this->document->getId());
+        $this->assertTrue($document->isPublished());
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testUnpublishActionWithEnableDocument()
+    {
+        $this->dispatch('/admin/content/document/unpublish/' . $this->document->getId());
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('DocumentController');
+        $this->assertControllerClass('DocumentController');
+        $this->assertMatchedRouteName('content/document/unpublish');
+        $document = DocumentModel::fromId($this->document->getId());
+        $this->assertFalse($document->isPublished());
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testStatusActionWithWrongId()
+    {
+        $this->dispatch('/admin/content/document/publish/999');
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Content');
+        $this->assertControllerName('DocumentController');
+        $this->assertControllerClass('DocumentController');
+        $this->assertMatchedRouteName('content/document/publish');
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
     public function testPasteActionWithWrongId()
     {
         $this->dispatch('/admin/content/document/paste/999');
