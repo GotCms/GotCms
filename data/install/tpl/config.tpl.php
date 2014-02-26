@@ -30,6 +30,9 @@ return array(
         'username' => '__USERNAME__',
         'password' => '__PASSWORD__',
         'database' => '__DATABASE__',
-        'hostname' => '__HOSTNAME__'
+        'hostname' => '__HOSTNAME__',
+        'driver_options' => array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
+        ),
     ),
 );
