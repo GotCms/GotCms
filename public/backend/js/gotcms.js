@@ -571,7 +571,7 @@ var Gc = (function($)
                                 data: {},
                                 success: function(data) {
                                     if(data.success === true) {
-                                        if($action === 'copy' || $action === 'cut') {
+                                        if($action === 'copy' || $action === 'cut') {
                                             $options.items.paste.disabled = false;
                                         }
 
@@ -712,7 +712,7 @@ var Gc = (function($)
                 'click': function() {
                     var $copyName = $('#copy-name'),
                     $copyUrlKey = $('#copy-url-key');
-                    if($this.isEmpty($copyName.val()) || $this.isEmpty($copyUrlKey.val())) {
+                    if($this.isEmpty($copyName.val()) || $this.isEmpty($copyUrlKey.val())) {
                         return false;
                     }
 
