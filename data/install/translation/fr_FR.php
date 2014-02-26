@@ -165,6 +165,8 @@ return array (
     'translation' => 'traduction',
     'view' => 'vue',
     'layout' => 'gabarit',
+    "404 layout" => "Gabarit de la page 404",
+    "Exception layout" => "Gabarit de la page d'exception",
     'datatype' => 'type de données',
     'document-type' => 'type de document',
     'You already have the latest version' => 'Vous avez déjà la dernière version',
@@ -195,6 +197,7 @@ return array (
     'Statistics' => 'Statistiques',
     'Uninstall' => 'Désinstaller',
     '-- Select --' => '-- Sélectionner --',
+    "Select document" => "Sélectionner un document",
     'Show / Hide form create datatype' => 'Afficher / Cacher le formulaire',
     'Tab' => 'Onglets',
     'Download all files' => 'Télécharger tous les fichiers',
@@ -264,6 +267,15 @@ return array (
     'Delete element' => 'Supprimer l\'élément',
     'Cancel' => 'Annuler',
     'Confirm' => 'Confirmer',
+    'Mandatory' => 'Obligatoire',
+    'Publish' => 'Publier',
+    'Show in nav' => 'Afficher dans la navigation',
+    'View' => 'Vue',
+    'Layout' => 'Gabarit',
+    'Previewy' => 'Prévisualiser',
+    'Stream wrapper' => 'Gestionnaire de flux',
+    'Stream wrapper is active' => 'Le gestionnaire de flux (stream wrapper) est activé',
+    'Session path' => 'Chemin de session',
 
 
     // Zend\I18n\Validator\Alnum
@@ -288,12 +300,6 @@ return array (
     "Invalid type given. String or integer expected" => "Type invalid. Chaîne ou entier attendu",
     "The input does not appear to be a postal code" => "L'entrée ne semble pas être un code postal valide",
     "An exception has been raised while validating the input" => "Une exception a été levée lors de la validation de l'entrée",
-    "Mandatory" => "Obligatoire",
-    "Publish" => "Publier",
-    "Show in nav" => "Afficher dans la navigation",
-    "View" => "Vue",
-    "Layout" => "Gabarit",
-    "Preview" => "Prévisualiser",
 
     // Zend\Validator\Barcode
     "The input failed checksum validation" => "L'entrée n'a pas passé la validation de la somme de contrôle",
