@@ -10,6 +10,7 @@
 - Checkboxlist and Radiobuttonlist datatypes should have a key/value pairs ([https://github.com/GotCms/GotCms/issues/211](https://github.com/GotCms/GotCms/issues/211))
 - Add text in document when property is required ([https://github.com/GotCms/GotCms/issues/212](https://github.com/GotCms/GotCms/issues/212))
 - Add button to publish / unpublish in the context menu ([https://github.com/GotCms/GotCms/issues/214](https://github.com/GotCms/GotCms/issues/214))
+- Import tab does not copy required fields statments ([https://github.com/GotCms/GotCms/issues/216](https://github.com/GotCms/GotCms/issues/216))
 
 
 ##1.2.0 (26 Jan 2014)

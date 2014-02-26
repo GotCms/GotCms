@@ -386,14 +386,14 @@ var Gc = (function($)
                             $tab.val($tabId);
                             $datatype.val($property.datatype);
                             $description.val($property.description);
-                            $isRequired.val($property.isRequired);
+                            $isRequired.prop('checked', $property.isRequired);
                             $('#property-add').click();
                             $name.val('');
                             $identifier.val('');
                             $tab.val('');
                             $datatype.val('');
                             $description.val('');
-                            $isRequired.val('');
+                            $isRequired.prop('checked', false);
                         });
 
                         $tabName.val('');
