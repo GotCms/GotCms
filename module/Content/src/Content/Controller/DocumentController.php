@@ -291,7 +291,7 @@ class DocumentController extends Action
                 $idx++;
             }
 
-            $tabsArray[] = 'Document information';
+            $tabsArray[] = $this->getServiceLocator()->get('MvcTranslator')->translate('Document information');
 
             $formDocumentAdd = new Form\Document();
             $formDocumentAdd->load($document);
