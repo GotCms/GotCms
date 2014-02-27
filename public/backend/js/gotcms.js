@@ -493,7 +493,7 @@ var Gc = (function($)
 
                 $.contextMenu({
                     selector: '#browser a',
-                    build: function($trigger, $e) {
+                    build: function($trigger) {
                         var $items = {
                             'new': {name: Translator.translate('New'), icon: 'add'},
                             'edit': {name: Translator.translate('Edit'), icon: 'edit'},
@@ -594,9 +594,9 @@ var Gc = (function($)
                                 success: function (data) {
                                     if (data.success === true) {
                                         if ($action === 'publish') {
-                                            $element.removeClass('not-published')
+                                            $element.removeClass('not-published');
                                         } else {
-                                            $element.addClass('not-published')
+                                            $element.addClass('not-published');
                                         }
                                     }
                                 }
@@ -1053,7 +1053,7 @@ var Gc = (function($)
         keepAlive: function($url) {
             setInterval(function () {
                 $.get($url);
-            }, 60 * 1000)
+            }, 60 * 1000);
         }
     };
 })(jQuery);
