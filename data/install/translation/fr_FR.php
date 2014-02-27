@@ -276,6 +276,7 @@ return array (
     'Stream wrapper' => 'Gestionnaire de flux',
     'Stream wrapper is active' => 'Le gestionnaire de flux (stream wrapper) est activé',
     'Session path' => 'Chemin de session',
+    'Document information' => 'Information sur le document',
 
 
     // Zend\I18n\Validator\Alnum
