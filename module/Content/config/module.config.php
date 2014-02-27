@@ -123,12 +123,6 @@ return array(
                         'type'    => 'Literal',
                         'options' => array(
                             'route'    => '/document',
-                            'defaults' =>
-                            array (
-                                'module'     => 'content',
-                                'controller' => 'DocumentController',
-                                'action'     => 'index',
-                            ),
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(

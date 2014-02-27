@@ -12,6 +12,7 @@
 - Add button to publish / unpublish in the context menu ([https://github.com/GotCms/GotCms/issues/214](https://github.com/GotCms/GotCms/issues/214))
 - Import tab does not copy required fields statments ([https://github.com/GotCms/GotCms/issues/216](https://github.com/GotCms/GotCms/issues/216))
 - Add ajax request to keep connection alive ([https://github.com/GotCms/GotCms/issues/217](https://github.com/GotCms/GotCms/issues/217))
+- admin/content/document display exception ([https://github.com/GotCms/GotCms/issues/219](https://github.com/GotCms/GotCms/issues/219))
 
 
 ##1.2.0 (26 Jan 2014)
