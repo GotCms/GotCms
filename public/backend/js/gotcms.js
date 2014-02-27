@@ -1048,6 +1048,12 @@ var Gc = (function($)
                     }
                 }
             });
+        },
+
+        keepAlive: function($url) {
+            setInterval(function () {
+                $.get($url);
+            }, 60 * 1000)
         }
     };
 })(jQuery);

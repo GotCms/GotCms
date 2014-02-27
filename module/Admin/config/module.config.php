@@ -85,6 +85,17 @@ return array(
                             ),
                         ),
                     ),
+                    'keep-alive' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/keep-alive',
+                            'defaults' => array(
+                                'module'     =>'admin',
+                                'controller' => 'AdminController',
+                                'action'     => 'keep-alive',
+                            ),
+                        ),
+                    ),
                 )
             ),
         ),

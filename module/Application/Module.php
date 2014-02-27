@@ -140,7 +140,7 @@ class Module extends Mvc\Module
         $coreConfig    = $serviceManager->get('CoreConfig');
         $sessionConfig = new SessionConfig();
         $sessionConfig->setStorageOption('gc_probability', 1);
-        $sessionConfig->setStorageOption('gc_divisor', 1);
+        $sessionConfig->setStorageOption('gc_divisor', 100);
         $sessionConfig->setStorageOption('save_path', $coreConfig->getValue('session_path'));
         $sessionConfig->setStorageOption('gc_maxlifetime', $coreConfig->getValue('session_lifetime'));
         $sessionConfig->setStorageOption('cookie_path', $coreConfig->getValue('cookie_path'));

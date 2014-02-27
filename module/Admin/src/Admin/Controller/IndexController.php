@@ -124,7 +124,7 @@ class IndexController extends Action
     }
 
     /**
-     * Display dashboard
+     * Translator js action
      *
      * @return ViewModel
      */
@@ -133,5 +133,16 @@ class IndexController extends Action
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         return $viewModel;
+    }
+
+
+    /**
+     * Keep alive connection action
+     *
+     * @return ViewModel
+     */
+    public function keepAliveAction()
+    {
+        return $this->returnJson(array('success' => true));
     }
 }
