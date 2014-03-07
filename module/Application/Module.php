@@ -84,11 +84,11 @@ class Module extends Mvc\Module
             $this->initSession($serviceManager, $dbAdapter);
             $serviceManager->get('CustomModules');
 
-            $documentListener = $serviceManager->get('Gc\Listener\DocumentListener');
+            $documentListener = $serviceManager->get('Gc\Mvc\Listener\DocumentListener');
             $application->getEventManager()->attach($documentListener);
-            $sslListener = $serviceManager->get('Gc\Listener\SslListener');
+            $sslListener = $serviceManager->get('Gc\Mvc\Listener\SslListener');
             $application->getEventManager()->attach($sslListener);
-            $exceptionListener = $serviceManager->get('Gc\Listener\ExceptionListener');
+            $exceptionListener = $serviceManager->get('Gc\Mvc\Listener\ExceptionListener');
             $application->getEventManager()->attach($exceptionListener);
 
             if ($serviceManager->get('CoreConfig')->getValue('debug_is_active')) {
