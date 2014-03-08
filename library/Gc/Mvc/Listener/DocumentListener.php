@@ -70,7 +70,8 @@ class DocumentListener extends AbstractListenerAggregate
     {
         $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
         if ($matchedRouteName === 'cms') {
-            $isAdmin   = $event->getApplication()->getServiceManager()->get('Auth')->hasIdentity();
+            $serviceManager = $event->getApplication()->getServiceManager();
+            $isAdmin   = $serviceManager->get('Auth')->hasIdentity();
             $isPreview = ($isAdmin and $event->getRequest()->getQuery()->get('preview') === 'true');
             $path      = ltrim($event->getRouteMatch()->getParam('path'), '/');
             if (empty($path)) {
@@ -117,7 +118,7 @@ class DocumentListener extends AbstractListenerAggregate
                 }
             }
 
-            $event->getApplication()->getServiceManager()->setService('CurrentDocument', $document);
+            $serviceManager->setService('CurrentDocument', empty($document) ? false : $document);
         }
     }
 
