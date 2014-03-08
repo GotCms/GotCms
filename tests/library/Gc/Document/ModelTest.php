@@ -207,6 +207,16 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
+    public function testGetLayout()
+    {
+        $this->assertInstanceOf('Gc\Layout\Model', $this->object->getLayout());
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
     public function testGetDocumentType()
     {
         $this->assertInstanceOf('Gc\DocumentType\Model', $this->object->getDocumentType());

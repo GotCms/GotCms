@@ -168,8 +168,8 @@ class IndexController extends Action
                 $this->layout()->setVariable('currentDocument', $document);
 
                 //Set view from database
-                $view   = View\Model::fromId($document->getViewId());
-                $layout = Layout\Model::fromId($document->getLayoutId());
+                $view   = $document->getView();
+                $layout = $document->getLayout();
             }
 
             if ($cacheIsEnable && !empty($document)) {

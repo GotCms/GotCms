@@ -34,6 +34,7 @@ use Gc\Media\Icon;
 use Gc\Property\Model as PropertyModel;
 use Gc\Registry;
 use Gc\View;
+use Gc\Layout;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Predicate\Expression;
 
@@ -77,6 +78,23 @@ class Model extends AbstractTable implements IterableInterface
         }
 
         $this->getChildren();
+    }
+
+    /**
+     * get View Model
+     *
+     * @return \Gc\View\Model
+     */
+    public function getLayout()
+    {
+        if ($this->getData('layout') == null) {
+            $view = Layout\Model::fromId($this->getLayoutId());
+            if ($view !== null) {
+                $this->setData('layout', $view);
+            }
+        }
+
+        return $this->getData('layout');
     }
 
     /**
