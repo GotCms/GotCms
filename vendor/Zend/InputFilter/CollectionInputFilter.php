@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -47,6 +47,11 @@ class CollectionInputFilter extends InputFilter
      * @var array
      */
     protected $collectionRawValues = array();
+
+    /*
+     * @var array
+     */
+    protected $collectionMessages = array();
 
     /**
      * @var BaseInputFilter
@@ -159,11 +164,16 @@ class CollectionInputFilter extends InputFilter
             if ($this->isRequired) {
                 $valid = false;
             }
-            return $valid;
         }
 
         if (count($this->collectionData) < $this->getCount()) {
             $valid = false;
+        }
+
+        if (empty($this->collectionData)) {
+            $this->clearValues();
+            $this->clearRawValues();
+            return $valid;
         }
 
         $inputs = $this->validationGroup ?: array_keys($this->inputs);
@@ -174,7 +184,7 @@ class CollectionInputFilter extends InputFilter
             $this->data = $data;
             $this->populate();
 
-            if ($this->validateInputs($inputs)) {
+            if ($this->validateInputs($inputs, $data)) {
                 $this->collectionValidInputs[$key] = $this->validInputs;
             } else {
                 $this->collectionInvalidInputs[$key] = $this->invalidInputs;
@@ -183,6 +193,7 @@ class CollectionInputFilter extends InputFilter
 
             $values    = array();
             $rawValues = array();
+            $messages = array();
             foreach ($inputs as $name) {
                 $input = $this->inputs[$name];
 
@@ -193,9 +204,17 @@ class CollectionInputFilter extends InputFilter
                 }
                 $values[$name]    = $input->getValue($this->data);
                 $rawValues[$name] = $input->getRawValue();
+                $tmpMessages = $input->getMessages();
+                if (!empty($tmpMessages)) {
+                    $messages[$name] =  $tmpMessages;
+                }
             }
             $this->collectionValues[$key]    = $values;
             $this->collectionRawValues[$key] = $rawValues;
+
+            if (!empty($messages)) {
+                $this->collectionMessages[$key] = $messages;
+            }
         }
 
         return $valid;
@@ -255,16 +274,30 @@ class CollectionInputFilter extends InputFilter
     }
 
     /**
+     * Clear collectionValues
+     *
+     * @access public
+     */
+    public function clearValues()
+    {
+        return $this->collectionValues = array();
+    }
+
+    /**
+     * Clear collectionRawValues
+     *
+     * @access public
+     */
+    public function clearRawValues()
+    {
+        return $this->collectionRawValues = array();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getMessages()
     {
-        $messages = array();
-        foreach ($this->getInvalidInput() as $key => $inputs) {
-            foreach ($inputs as $name => $input) {
-                $messages[$key][$name] = $input->getMessages();
-            }
-        }
-        return $messages;
+        return $this->collectionMessages;
     }
 }

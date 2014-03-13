@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -333,7 +333,11 @@ class HeadStyle extends Placeholder\Container\AbstractStandalone
             . '</style>';
 
         if (null == $escapeStart && null == $escapeEnd) {
-            $html = '<!--[if ' . $item->attributes['conditional'] . ']> ' . $html . '<![endif]-->';
+            // inner wrap with comment end and start if !IE
+            if (str_replace(' ', '', $item->attributes['conditional']) === '!IE') {
+                $html = '<!-->' . $html . '<!--';
+            }
+            $html = '<!--[if ' . $item->attributes['conditional'] . ']>' . $html . '<![endif]-->';
         }
 
         return $html;
