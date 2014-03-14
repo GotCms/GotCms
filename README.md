@@ -3,7 +3,7 @@
 Master status: [![Build Status](https://travis-ci.org/GotCms/GotCms.png?branch=master)](https://travis-ci.org/GotCms/GotCms)
 [![Coverage Status](https://coveralls.io/repos/GotCms/GotCms/badge.png)](https://coveralls.io/r/GotCms/GotCms)
 [![Latest Stable Version](https://poser.pugx.org/GotCms/GotCms/v/stable.png)](https://packagist.org/packages/GotCms/GotCms)
-[![Latest Unstable Version](https://poser.pugx.org/GotCms/GotCms/v/unstable.png)](https://packagist.org/packages/GotCms/GotCms)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GotCms/GotCms/badges/quality-score.png?s=fa6f300890dac808070c12b50a9f7d19859ca9ec)](https://scrutinizer-ci.com/g/GotCms/GotCms/)
 
 ## About GotCms
 
