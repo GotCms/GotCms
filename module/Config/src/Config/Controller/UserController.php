@@ -96,7 +96,7 @@ class UserController extends Action
         if ($this->getRequest()->isPost() and $loginForm->setData($post->toArray()) and $loginForm->isValid()) {
             $userModel = new User\Model();
             $redirect  = $loginForm->getValue('redirect');
-            if ($userId = $userModel->authenticate($post->get('login'), $post->get('password'))) {
+            if ($userModel->authenticate($post->get('login'), $post->get('password'))) {
                 if (!empty($redirect)) {
                     return $this->redirect()->toUrl(base64_decode($redirect));
                 }

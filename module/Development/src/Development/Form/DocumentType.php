@@ -465,7 +465,6 @@ class DocumentType extends AbstractForm
             $tabCollection = new Tab\Collection();
             $this->getTabs()->get('tabs_list')->setValueOptions($tabCollection->getImportableTabs($element->getId()));
 
-            $session = $element;
             foreach ($tabs as $tabId => $tab) {
                 $this->addTab($tab);
                 $properties = $tab->getProperties();

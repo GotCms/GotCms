@@ -85,8 +85,6 @@ class IndexController extends Action
             }
         }
 
-        $path = ltrim($this->getRouteMatch()->getParam('path'), '/');
-
         try {
             $document = $this->getServiceLocator()->get('CurrentDocument');
         } catch (Exception $e) {

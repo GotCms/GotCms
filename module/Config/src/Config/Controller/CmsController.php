@@ -151,7 +151,7 @@ class CmsController extends Action
             }
 
             $currentVersion = Version::VERSION;
-            $output         = '';
+
             //Fetch content
             if ($updater->update()) {
                 //Upgrade cms

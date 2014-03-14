@@ -418,7 +418,6 @@ class InstallController extends Action
                         //Create configuration file
                         case 'c-cf':
                             return $this->completeInstallation($session['install']['db']);
-                            break;
                     }
                 } catch (Exception $e) {
                     return $this->returnJson(array('success' => false, 'message' => $e->getMessage()));

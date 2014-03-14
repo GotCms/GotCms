@@ -102,7 +102,6 @@ class Role extends AbstractForm
      */
     public function initPermissions($userPermissions = array())
     {
-        $filter           = $this->getInputFilter();
         $permissionsTable = new Permission\Collection();
         $resources        = $permissionsTable->getPermissions();
         $element          = new Element('permissions');

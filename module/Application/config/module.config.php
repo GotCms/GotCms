@@ -43,10 +43,10 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
-            'Auth'                  => function ($sm) {
+            'Auth'                  => function () {
                 return new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
             },
-            'CoreConfig'            => function ($sm) {
+            'CoreConfig'            => function () {
                 return new CoreConfig();
             },
             'Cache'                         => 'Gc\Mvc\Factory\CacheFactory',

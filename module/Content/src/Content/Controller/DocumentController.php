@@ -211,12 +211,11 @@ class DocumentController extends Action
 
             $this->layout()->setVariable('documentId', $documentId);
             $documentTypeId = $document->getDocumentTypeId();
-            $layoutId       = $this->getRouteMatch()->getParam('layout_id', '');
+            $hasError       = false;
+            $oldUrlKey      = $document->getUrlKey();
 
             if ($this->getRequest()->isPost()) {
-                $hasError     = false;
                 $documentVars = $this->getRequest()->getPost()->toArray();
-                $oldUrlKey    = $document->getUrlKey();
                 $document->setName(
                     empty($documentVars['document-name']) ?
                     $document->getName() :
@@ -251,7 +250,6 @@ class DocumentController extends Action
 
             $tabs      = $this->loadTabs($documentTypeId);
             $tabsArray = array();
-            $datatypes = array();
 
             $idx = 1;
             foreach ($tabs as $tab) {

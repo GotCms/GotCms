@@ -205,7 +205,7 @@ class Document extends AbstractForm
             ->setLabel('View');
 
         $inputFilterFactory = $this->getInputFilter();
-        $inputFilter        = $inputFilterFactory->add(
+        $inputFilterFactory->add(
             array(
                 'name' => 'document-view',
                 'required' => true,
@@ -226,7 +226,7 @@ class Document extends AbstractForm
             ->setAttribute('class', 'form-control')
             ->setLabel('Layout');
 
-        $inputFilter = $inputFilterFactory->add(
+        $inputFilterFactory->add(
             array(
                 'name' => 'document-layout',
                 'required' => true,

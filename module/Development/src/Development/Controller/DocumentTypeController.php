@@ -84,13 +84,12 @@ class DocumentTypeController extends Action
                 $this->flashMessenger()->addErrorMessage('Can not save document type');
                 $this->useFlashMessenger();
             } else {
-                $propertyCollection = new Property\Collection();
-                $input              = $form->getInputFilter();
-                $infosSubform       = $input->get('infos');
-                $viewsSubform       = $input->get('views');
-                $tabsSubform        = $input->get('tabs');
-                $propertiesSubform  = $input->get('properties');
-                $documentType       = new DocumentType\Model();
+                $input             = $form->getInputFilter();
+                $infosSubform      = $input->get('infos');
+                $viewsSubform      = $input->get('views');
+                $tabsSubform       = $input->get('tabs');
+                $propertiesSubform = $input->get('properties');
+                $documentType      = new DocumentType\Model();
 
                 $documentType->addData(
                     array(
@@ -113,7 +112,6 @@ class DocumentTypeController extends Action
                     $documentType->setDependencies($infosSubform->getValue('dependency'));
                     $documentType->save();
 
-                    $tabsArray    = array();
                     $existingTabs = array();
                     $idx          = 0;
 
@@ -275,7 +273,6 @@ class DocumentTypeController extends Action
                     $documentType->setDependencies($infosSubform->getValue('dependency'));
                     $documentType->save();
 
-                    $tabsArray    = array();
                     $existingTabs = array();
                     $idx          = 0;
 

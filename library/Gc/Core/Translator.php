@@ -199,7 +199,7 @@ class Translator extends AbstractTable
         }
 
         $translatePath   = GC_APPLICATION_PATH . '/data/translation/%s.php';
-        $templateContent = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/language.tpl.php');
+        $templateContent = file_get_contents(GC_APPLICATION_PATH . '/data/install/tpl/language.php.tpl');
 
         foreach ($data as $locale => $values) {
             file_put_contents(sprintf($translatePath, $locale), sprintf($templateContent, var_export($values, true)));
