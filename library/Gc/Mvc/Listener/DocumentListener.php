@@ -28,10 +28,12 @@
 namespace Gc\Mvc\Listener;
 
 use Gc\Document;
+use Gc\User\Visitor;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\Session\Container as SessionContainer;
 
 /**
  * Document Listener
@@ -54,7 +56,7 @@ class DocumentListener extends AbstractListenerAggregate
     {
         $this->listeners[] = $events->attach(
             MvcEvent::EVENT_ROUTE,
-            array($this, 'check'),
+            array($this, 'onRoute'),
             -10
         );
     }
@@ -66,14 +68,14 @@ class DocumentListener extends AbstractListenerAggregate
      *
      * @return void
      */
-    public function check(EventInterface $event)
+    public function onRoute(EventInterface $event)
     {
         $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
         if ($matchedRouteName === 'cms') {
             $serviceManager = $event->getApplication()->getServiceManager();
-            $isAdmin   = $serviceManager->get('Auth')->hasIdentity();
-            $isPreview = ($isAdmin and $event->getRequest()->getQuery()->get('preview') === 'true');
-            $path      = ltrim($event->getRouteMatch()->getParam('path'), '/');
+            $isAdmin        = $serviceManager->get('Auth')->hasIdentity();
+            $isPreview      = ($isAdmin and $event->getRequest()->getQuery()->get('preview') === 'true');
+            $path           = ltrim($event->getRouteMatch()->getParam('path'), '/');
             if (empty($path)) {
                 $document = Document\Model::fromUrlKey('');
             } else {
@@ -95,10 +97,10 @@ class DocumentListener extends AbstractListenerAggregate
                     }
 
                     if ((is_array($children)
-                        and !empty($children)
-                        and !in_array($documentTmp, $children)
-                        and $children !== null)
-                        or $documentTmp === null) {
+                    and !empty($children)
+                    and !in_array($documentTmp, $children)
+                    and $children !== null)
+                    or $documentTmp === null) {
                         $hasDocument = true;
                     } else {
                         if (empty($documentTmp)) {
@@ -115,6 +117,19 @@ class DocumentListener extends AbstractListenerAggregate
                             $children = $document->getChildren();
                         }
                     }
+                }
+            }
+
+            //Don't log preview
+            if (!$isPreview and !$isAdmin) {
+                try {
+                    $visitor   = new Visitor();
+                    $session   = new SessionContainer();
+                    $sessionId = $session->getDefaultManager()->getId();
+
+                    $session->visitorId = $visitor->getVisitorId($sessionId);
+                } catch (Exception $e) {
+                    //don't care
                 }
             }
 

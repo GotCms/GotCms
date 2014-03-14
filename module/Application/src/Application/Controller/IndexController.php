@@ -34,7 +34,6 @@ use Gc\Property;
 use Gc\User\Visitor;
 use Gc\View;
 use Zend\Config\Reader\Xml;
-use Zend\Cache\StorageFactory as CacheStorage;
 use Zend\Navigation\Navigation;
 use Zend\View\Model\ViewModel;
 use Exception;
@@ -63,40 +62,19 @@ class IndexController extends Action
     const LAYOUT_PATH = 'application/index/layout-content';
 
     /**
-     * Cache
-     *
-     * @var Filesystem
-     */
-    protected $cache;
-
-    /**
      * Generate frontend from url key
      *
      * @return \Zend\View\Model\ViewModel|array
      */
     public function indexAction()
     {
-        $visitor    = new Visitor();
-        $session    = $this->getSession();
-        $sessionId  = $this->getSession()->getDefaultManager()->getId();
-        $isAdmin    = $this->getServiceLocator()->get('Auth')->hasIdentity();
-        $isPreview  = ($isAdmin and $this->getRequest()->getQuery()->get('preview') === 'true');
         $coreConfig = $this->getServiceLocator()->get('CoreConfig');
-
-        //Don't log preview
-        if (!$isPreview and !$isAdmin) {
-            try {
-                $session->visitorId = $visitor->getVisitorId($sessionId);
-            } catch (Exception $e) {
-                //don't care
-            }
-        }
 
         $viewModel = new ViewModel();
         $this->events()->trigger('Front', 'preDispatch', $this, array('viewModel' => $viewModel));
 
         if ($coreConfig->getValue('site_is_offline') == 1) {
-            //Site is offline
+            $isAdmin = $this->getServiceLocator()->get('Auth')->hasIdentity();
             if (!$isAdmin) {
                 $document = Document\Model::fromId($coreConfig->getValue('site_offline_document'));
                 if (empty($document)) {
@@ -109,81 +87,48 @@ class IndexController extends Action
 
         $path = ltrim($this->getRouteMatch()->getParam('path'), '/');
 
-        $cacheIsEnable = ($coreConfig->getValue('cache_is_active') == 1 and !$isPreview);
-        if ($cacheIsEnable) {
-            $this->enableCache();
-            $cacheKey = ('page'
-                . (empty($path) ? '' : '-'
-                . $this->toCacheKey($path)));
-            if ($this->cache->hasItem($cacheKey)) {
-                //Retrieve cache value and set data
-                $cacheValue = $this->cache->getItem($cacheKey);
-                $viewModel  = $cacheValue['view_model'];
-                $view       = $cacheValue['view'];
-                $layout     = $cacheValue['layout'];
-                $viewModel->setVariables($cacheValue['layout_variables']);
-                $this->layout()->setVariables($cacheValue['layout_variables']);
-            }
+        try {
+            $document = $this->getServiceLocator()->get('CurrentDocument');
+        } catch (Exception $e) {
+            //Don't care, page is just not found
         }
 
-        //Cache is disable or cache isn't create
-        if (empty($cacheValue)) {
-            try {
-                $document = $this->getServiceLocator()->get('CurrentDocument');
-            } catch (Exception $e) {
-                //Don't care, page is just not found
+        $variables = array();
+        if (empty($document)) {
+            // 404
+            $this->getResponse()->setStatusCode(404);
+            $layout = Layout\Model::fromId($coreConfig->getValue('site_404_layout'));
+            if (empty($layout)) {
+                $viewModel->setTerminal(true);
             }
+        } else {
+            //Load properties from document id
+            $properties = new Property\Collection();
+            $properties->load(null, null, $document->getId());
 
-            $variables = array();
-            if (empty($document)) {
-                // 404
-                $this->getResponse()->setStatusCode(404);
-                $layout = Layout\Model::fromId($coreConfig->getValue('site_404_layout'));
-                if (empty($layout)) {
-                    $viewModel->setTerminal(true);
-                }
-            } else {
-                //Load properties from document id
-                $properties = new Property\Collection();
-                $properties->load(null, null, $document->getId());
+            foreach ($properties->getProperties() as $property) {
+                $value = $property->getValue();
 
-                foreach ($properties->getProperties() as $property) {
-                    $value = $property->getValue();
-
-                    if ($this->isSerialized($value)) {
-                        $value = unserialize($value);
-                    }
-
-                    $viewModel->setVariable($property->getIdentifier(), $value);
-                    $this->layout()->setVariable($property->getIdentifier(), $value);
-                    $variables[$property->getIdentifier()] = $value;
+                if ($this->isSerialized($value)) {
+                    $value = unserialize($value);
                 }
 
-                /**
-                 * @Deprecated no longer available, will be removed in 1.3.0
-                 * use currentDocument() helper instead of variable
-                 */
-                $variables['currentDocument'] = $document;
-                $viewModel->setVariable('currentDocument', $document);
-                $this->layout()->setVariable('currentDocument', $document);
-
-                //Set view from database
-                $view   = $document->getView();
-                $layout = $document->getLayout();
+                $viewModel->setVariable($property->getIdentifier(), $value);
+                $this->layout()->setVariable($property->getIdentifier(), $value);
+                $variables[$property->getIdentifier()] = $value;
             }
 
-            if ($cacheIsEnable && !empty($document)) {
-                $this->cache->setItem(
-                    $cacheKey,
-                    array(
-                        'view_model'       => $viewModel,
-                        'layout_variables' => $variables,
-                        'layout'           => $layout,
-                        'view'             => $view,
-                        'currentDocument'  => $document,
-                    )
-                );
-            }
+            /**
+             * @Deprecated no longer available, will be removed in 1.3.0
+             * use currentDocument() helper instead of variable
+             */
+            $variables['currentDocument'] = $document;
+            $viewModel->setVariable('currentDocument', $document);
+            $this->layout()->setVariable('currentDocument', $document);
+
+            //Set view from database
+            $view   = $document->getView();
+            $layout = $document->getLayout();
         }
 
         if ($coreConfig->getValue('stream_wrapper_is_active')) {
@@ -234,67 +179,5 @@ class IndexController extends Action
         }
 
         return false;
-    }
-
-    /**
-     * Enable cache
-     *
-     * @return void
-     */
-    protected function enableCache()
-    {
-        $coreConfig   = $this->getServiceLocator()->get('CoreConfig');
-        $cacheTtl     = (int) $coreConfig->getValue('cache_lifetime');
-        $cacheHandler = $coreConfig->getValue('cache_handler');
-
-        if (!in_array($cacheHandler, array('apc', 'memcached', 'filesystem'))) {
-            $cacheHandler = 'filesystem';
-        }
-
-        switch($cacheHandler) {
-            case 'memcached':
-                $cacheOptions = array(
-                    'ttl'       => $cacheTtl,
-                    'namespace' => $this->toCacheKey($coreConfig->getValue('site_name')),
-                    'servers'   => array(array(
-                        'localhost', 11211
-                    )),
-                );
-                break;
-            case 'apc':
-            default:
-                $cacheOptions = array(
-                    'ttl' => $cacheTtl,
-                );
-                break;
-        }
-
-        $this->cache = CacheStorage::factory(
-            array(
-                'adapter' => array(
-                    'name' => $cacheHandler,
-                    'options' => $cacheOptions,
-                ),
-                'plugins' => array(
-                    // Don't throw exceptions on cache errors
-                    'exception_handler' => array(
-                        'throw_exceptions' => false
-                    ),
-                    'Serializer'
-                ),
-            )
-        );
-    }
-
-    /**
-     * Convert string to cache key
-     *
-     * @param string $string String
-     *
-     * @return string
-     */
-    protected function toCacheKey($string)
-    {
-        return preg_replace('/[^a-z0-9_\+\-]+/Di', '_', str_replace('/', '-', strtolower($string)));
     }
 }

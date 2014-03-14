@@ -49,12 +49,14 @@ return array(
             'CoreConfig'            => function ($sm) {
                 return new CoreConfig();
             },
-            'Gc\Listener\CacheListener'     => 'Gc\Mvc\Service\CacheFactory',
-            'CustomModules'                 => 'Gc\Mvc\Service\ModuleManagerFactory',
+            'Cache'                         => 'Gc\Mvc\Factory\CacheFactory',
+            'CacheService'                  => 'Gc\Mvc\Factory\CacheServiceFactory',
+            'CustomModules'                 => 'Gc\Mvc\Factory\ModuleManagerFactory',
             'translator'                    => 'Zend\Mvc\Service\TranslatorServiceFactory',
-            'ViewTemplatePathStack'         => 'Gc\Mvc\Service\ViewTemplatePathStackFactory',
+            'ViewTemplatePathStack'         => 'Gc\Mvc\Factory\ViewTemplatePathStackFactory',
         ),
         'invokables' => array(
+            'Gc\Mvc\Listener\CacheListener'     => 'Gc\Mvc\Listener\CacheListener',
             'Gc\Mvc\Listener\DocumentListener'  => 'Gc\Mvc\Listener\DocumentListener',
             'Gc\Mvc\Listener\ExceptionListener' => 'Gc\Mvc\Listener\ExceptionListener',
             'Gc\Mvc\Listener\SslListener'       => 'Gc\Mvc\Listener\SslListener',

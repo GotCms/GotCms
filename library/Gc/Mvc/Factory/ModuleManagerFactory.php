@@ -19,13 +19,13 @@
  *
  * @category   Gc
  * @package    Library
- * @subpackage Mvc\Service
+ * @subpackage Mvc\Factory
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace Gc\Mvc\Service;
+namespace Gc\Mvc\Factory;
 
 use Gc\Module\Collection as ModuleCollection;
 use Zend\ModuleManager\Listener;
@@ -41,7 +41,7 @@ use Zend\Loader\AutoloaderFactory;
  *
  * @category   Gc
  * @package    Library
- * @subpackage Mvc\Service
+ * @subpackage Mvc\Factory
  */
 class ModuleManagerFactory implements FactoryInterface
 {

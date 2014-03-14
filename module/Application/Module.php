@@ -86,6 +86,8 @@ class Module extends Mvc\Module
 
             $documentListener = $serviceManager->get('Gc\Mvc\Listener\DocumentListener');
             $application->getEventManager()->attach($documentListener);
+            $cacheListener = $serviceManager->get('Gc\Mvc\Listener\CacheListener');
+            $application->getEventManager()->attach($cacheListener);
             $sslListener = $serviceManager->get('Gc\Mvc\Listener\SslListener');
             $application->getEventManager()->attach($sslListener);
             $exceptionListener = $serviceManager->get('Gc\Mvc\Listener\ExceptionListener');
