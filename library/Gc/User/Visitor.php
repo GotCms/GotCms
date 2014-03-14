@@ -65,7 +65,7 @@ class Visitor extends AbstractTable
         $acceptLanguage = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? null : $_SERVER['HTTP_ACCEPT_LANGUAGE'];
         $serverAddr     = empty($_SERVER['SERVER_ADDR']) ? null : $_SERVER['SERVER_ADDR'];
         $remoteAddr     = empty($_SERVER['REMOTE_ADDR']) ? null : $_SERVER['REMOTE_ADDR'];
-        $requestUri     = empty($_SERVER['REQUEST_URI']) ? null : $_SERVER['REQUEST_URI'];
+        $requestUri     = empty($_SERVER['REQUEST_URI']) ? '' : $_SERVER['REQUEST_URI'];
         $referer        = empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER'];
 
         if (!empty($requestUri)) {
