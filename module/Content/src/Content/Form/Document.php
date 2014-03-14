@@ -28,7 +28,6 @@
 namespace Content\Form;
 
 use Gc\Document\Model as DocumentModel;
-use Gc\DocumentType;
 use Gc\Form\AbstractForm;
 use Gc\Layout;
 use Gc\View;

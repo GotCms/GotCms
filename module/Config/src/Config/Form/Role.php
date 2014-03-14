@@ -31,8 +31,6 @@ use Gc\Form\AbstractForm;
 use Gc\User\Permission;
 use Zend\Form\Element;
 use Zend\InputFilter\Factory as InputFilterFactory;
-use Zend\Validator\Db;
-use Zend\Validator\Identical;
 
 /**
  * Role form

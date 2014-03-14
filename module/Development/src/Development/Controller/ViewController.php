@@ -31,7 +31,6 @@ use Gc\Mvc\Controller\Action;
 use Development\Form\View as ViewForm;
 use Gc\View;
 use Zend\Http\Headers;
-use Zend\File\Transfer\Adapter\Http as FileTransfer;
 use ZipArchive;
 
 /**

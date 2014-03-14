@@ -33,10 +33,8 @@ use Config\Form\UserForgotPassword as UserForgotForm;
 use Gc\Mvc\Controller\Action;
 use Gc\User;
 use Gc\User\Role;
-use Zend\Http\Request;
 use Zend\View\Model\ViewModel;
 use Zend\Validator\Identical;
-use DateTime;
 
 /**
  * User controller

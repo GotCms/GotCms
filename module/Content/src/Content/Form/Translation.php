@@ -27,12 +27,7 @@
 
 namespace Content\Form;
 
-use Gc\Document\Model as DocumentModel;
-use Gc\DocumentType;
 use Gc\Form\AbstractForm;
-use Gc\Layout;
-use Gc\View;
-use Zend\Validator;
 use Zend\Form\Element;
 use Zend\InputFilter\Factory as InputFilterFactory;
 

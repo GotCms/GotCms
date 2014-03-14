@@ -32,7 +32,6 @@ use Gc\Media\Info;
 use Zend\Validator\Db;
 use Zend\Form\Element;
 use Zend\InputFilter\InputFilter;
-use Zend\Locale\Locale;
 
 /**
  * Install form

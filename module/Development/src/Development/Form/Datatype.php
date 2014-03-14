@@ -28,7 +28,6 @@
 namespace Development\Form;
 
 use Gc\Form\AbstractForm;
-use Zend\Validator\Db;
 use Zend\Form\Element;
 use Zend\InputFilter\Factory as InputFilterFactory;
 

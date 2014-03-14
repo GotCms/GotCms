@@ -3,7 +3,6 @@
 use Gc\Layout;
 use Gc\Script;
 use Gc\View;
-use Exception;
 
 echo 'Rename configuration file...' . PHP_EOL;
 rename(

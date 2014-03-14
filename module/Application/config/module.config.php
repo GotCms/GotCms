@@ -26,13 +26,11 @@
  */
 
 use Gc\Core\Config as CoreConfig;
-use Gc\Module\Collection as ModuleCollection;
 use Gc\User\Model as UserModel;
 use Gc\View\Helper;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage;
 use Zend\ModuleManager\Listener;
-use Zend\ModuleManager\ModuleManager;
 
 return array(
     'controllers' => array(

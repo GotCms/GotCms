@@ -29,8 +29,6 @@ namespace Config\Form;
 
 use Gc\Form\AbstractForm;
 use Gc\User\Role\Collection as RoleCollection;
-use Zend\Validator\Db;
-use Zend\Validator;
 use Zend\Form\Element;
 use Zend\InputFilter\Factory as InputFilterFactory;
 

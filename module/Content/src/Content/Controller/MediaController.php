@@ -33,13 +33,9 @@ use Gc\Document;
 use Gc\Document\Collection as DocumentCollection;
 use Gc\Media\File;
 use Gc\Property;
-use Gc\Registry;
 use elFinder\elFinder;
 use elFinder\elFinderConnector;
-use elFinder\elFinderVolumeDriver;
-use elFinder\elFinderLocalFileSystem;
 use Zend\Json\Json;
-use Zend\File\Transfer\Adapter\Http as FileTransfer;
 
 /**
  * Media controller

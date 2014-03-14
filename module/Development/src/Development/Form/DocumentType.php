@@ -35,7 +35,6 @@ use Gc\Media\Icon;
 use Gc\Property;
 use Gc\Tab;
 use Gc\View\Collection as ViewCollection;
-use Zend\Validator\Db;
 use Zend\Form\Element;
 use Zend\InputFilter\InputFilter;
 use Zend\Form\FieldSet;
@@ -441,7 +440,7 @@ class DocumentType extends AbstractForm
      *
      * @param mixed $element \Gc\DocumentType\Model | array
      *
-     * @return \Developpement\Form\DocumentType
+     * @return null|DocumentType
      */
     public function setValues($element)
     {
