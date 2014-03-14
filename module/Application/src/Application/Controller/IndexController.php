@@ -31,10 +31,7 @@ use Gc\Mvc\Controller\Action;
 use Gc\Document;
 use Gc\Layout;
 use Gc\Property;
-use Gc\User\Visitor;
 use Gc\View;
-use Zend\Config\Reader\Xml;
-use Zend\Navigation\Navigation;
 use Zend\View\Model\ViewModel;
 use Exception;
 
@@ -64,7 +61,7 @@ class IndexController extends Action
     /**
      * Generate frontend from url key
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return ViewModel
      */
     public function indexAction()
     {

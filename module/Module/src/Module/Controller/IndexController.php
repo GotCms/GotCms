@@ -27,16 +27,11 @@
 
 namespace Module\Controller;
 
-use Gc\Component;
 use Gc\Mvc\Controller\Action;
 use Gc\Module\Collection as ModuleCollection;
 use Gc\Module\Model as ModuleModel;
-use Gc\User\Role\Model as RoleModel;
 use Module\Form\Module as ModuleForm;
-use Zend\Db\Sql;
 use Zend\Filter;
-use Zend\Json\Json;
-use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\ViewModel;
 
 /**

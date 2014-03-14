@@ -27,24 +27,18 @@
 namespace Application;
 
 use Gc\Mvc;
-use Gc\Document;
 use Gc\Core\Config as CoreConfig;
-use Gc\Layout;
-use Gc\Registry;
 use Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Mvc\I18n\Translator;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\EventManager\EventInterface;
-use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Session\SessionManager;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container as SessionContainer;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
 use Zend\Validator\AbstractValidator;
-use Zend\Uri\Http as Uri;
 
 /**
  * Application module
@@ -108,7 +102,7 @@ class Module extends Mvc\Module
      *
      * @param array $config Configuration
      *
-     * @return void
+     * @return DbAdapter
      */
     public function initDatabase(array $config)
     {

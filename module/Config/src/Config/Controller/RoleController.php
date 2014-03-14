@@ -28,7 +28,6 @@
 namespace Config\Controller;
 
 use Gc\Mvc\Controller\Action;
-use Gc\User;
 use Gc\User\Role;
 use Config\Form\Role as RoleForm;
 

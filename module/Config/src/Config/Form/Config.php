@@ -30,12 +30,9 @@ namespace Config\Form;
 use Gc\Form\AbstractForm;
 use Gc\Document;
 use Gc\Layout;
-use Gc\User\Permission;
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilter;
-use Zend\Validator\Db;
-use Zend\Validator\Identical;
 
 /**
  * Config form
