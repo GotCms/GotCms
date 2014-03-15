@@ -92,7 +92,7 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Request
      *
-     * @var \Zend\Mvc\Router\Http\TreeRouteStack
+     * @var TreeRouteStack
      */
     protected $router;
 
