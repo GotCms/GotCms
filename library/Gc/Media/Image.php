@@ -294,7 +294,6 @@ class Image
      */
     protected function crop($newWidth, $newHeight, $sourceX = 0, $sourceY = 0)
     {
-        $crop               = $this->imageResized;
         $this->imageResized = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresampled(
             $this->imageResized,

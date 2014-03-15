@@ -265,7 +265,6 @@ class Content extends Object
         );
 
         foreach ($orders as $children) {
-            $class = null;
             switch ($children['name']) {
                 case 'datatypes':
                     foreach ($children['children'] as $child) {
@@ -447,6 +446,7 @@ class Content extends Object
                                 'icon_id'          => (integer) $child->icon_id,
                                 'view_id'          => $viewId,
                                 'parent_id'        => $parentId,
+                                'user_id'          => $userId,
                                 'layout_id'        => $layoutId,
                                 'document_type_id' => empty($documentTypeId) ?
                                     $model->getDocumentTypeId() :

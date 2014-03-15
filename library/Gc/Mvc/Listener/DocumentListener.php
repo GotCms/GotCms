@@ -81,7 +81,6 @@ class DocumentListener extends AbstractListenerAggregate
             } else {
                 $explodePath = $this->explodePath($path);
                 $children    = null;
-                $key         = array();
                 $hasDocument = false;
                 $parentId    = null;
 

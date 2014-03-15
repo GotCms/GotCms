@@ -87,7 +87,7 @@ class DbTableGateway extends ZendDbTableGateway
             )
         );
 
-        if ($row = $rows->current()) {
+        if ($rows->current()) {
             return (bool) $this->tableGateway->update(
                 $data,
                 array(

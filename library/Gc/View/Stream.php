@@ -100,12 +100,10 @@ class Stream
      *
      * @param string  $path        Path
      * @param string  $mode        Mode
-     * @param integer $options     Options
-     * @param string  &$openedpath Opened path
      *
      * @return boolean
      */
-    public function streamOpen($path, $mode, $options, &$openedpath)
+    public function streamOpen($path, $mode)
     {
         $this->mode = $mode;
         $this->path = $this->removeWrapperName($path);
@@ -201,7 +199,6 @@ class Stream
                 } else {
                     return false;
                 }
-                break;
             case SEEK_CUR:
                 if ($offset >= 0) {
                     self::$position[$this->path] += $offset;
@@ -209,7 +206,6 @@ class Stream
                 } else {
                     return false;
                 }
-                break;
             case SEEK_END:
                 if (strlen(self::$data[$this->path]) + $offset >= 0) {
                     self::$position[$this->path] = strlen(self::$data[$this->path]) + $offset;
@@ -217,7 +213,6 @@ class Stream
                 } else {
                     return false;
                 }
-                break;
             default:
                 return false;
         }
@@ -228,11 +223,10 @@ class Stream
      * Always return empty array because data come from the database
      *
      * @param string $path  Path
-     * @param int    $flags Flags
      *
      * @return array
      */
-    public function urlStat($path, $flags)
+    public function urlStat($path)
     {
         $path = $this->removeWrapperName($path);
         if (!isset(self::$data[$path])) {

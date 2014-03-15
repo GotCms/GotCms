@@ -136,7 +136,6 @@ class Model extends AbstractTable
         );
 
         try {
-            $id = $this->getId();
             if ($this->getId() == null) {
                 $arraySave['created_at'] = new Expression('NOW()');
                 $this->insert($arraySave);

@@ -98,7 +98,6 @@ class Model extends AbstractTable
         );
 
         try {
-            $id = $this->getId();
             if ($this->getId() == null) {
                 $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());

@@ -70,7 +70,7 @@ class Model extends AbstractTable
      */
     public function authenticate($login, $password)
     {
-        $authAdapter = new Adapter\DbTable($this->getAdapter());
+        $authAdapter = new Adapter\DbTable\CredentialTreatmentAdapter($this->getAdapter());
         $authAdapter->setTableName($this->name);
         $authAdapter->setIdentityColumn('login');
         $authAdapter->setCredentialColumn('password');

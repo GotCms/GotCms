@@ -97,42 +97,6 @@ class Module extends AbstractModule
             return false;
         }
 
-        $_services = array(
-            'netvibes'     => 'Netvibes',
-            'google'       => 'Google Reader',
-            'yahoo'        => 'Yahoo',
-            'rojo'         => 'Rojo',
-            'aol'          => 'AOL',
-            'newsgator-on' => 'Newsgator Online',
-            'pluck-on'     => 'Pluck Online',
-            'bloglines'    => 'Bloglines',
-            'feedlounge'   => 'Feedlounge',
-            'newsburst'    => 'Newsburst',
-            'msn'          => 'MSN',
-            'winlive'      => 'Windows Live',
-            'technorati'   => 'Technorati',
-            'pageflakes'   => 'Pageflakes',
-            'newsalloy'    => 'News Alloy',
-            'feedreader'   => 'FeedReader',
-            'mymsn'        => 'My MSN',
-            'newsisfree'   => 'Newsisfree',
-            'feeddemon'    => 'FeedDemon',
-            'netnewswire'  => 'NetNewWire',
-            'pluck'        => 'Pluck',
-            'newsgator'    => 'NewsGator',
-            'sharpreader'  => 'SharpReader',
-            'awasu'        => 'Awasu',
-            'myearthlink'  => 'myEarthLink',
-            'rss'          => 'Direct Feed Link',
-            'googlebuzz'   => 'Google Buzz',
-            'youtube'      => 'YouTube',
-            'facebook'     => 'Facebook',
-            'flickr'       => 'Flickr',
-            'twitter'      => 'Twitter',
-            'linkedin'     => 'LinkedIn'
-        );
-
-
         $document = DocumentModel::fromUrlKey('');
         $domain   = parse_url($document->getUrl(true), PHP_URL_HOST);
 

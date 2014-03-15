@@ -64,16 +64,8 @@ class Visitor extends AbstractTable
         $acceptLanguage = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? null : $_SERVER['HTTP_ACCEPT_LANGUAGE'];
         $serverAddr     = empty($_SERVER['SERVER_ADDR']) ? null : $_SERVER['SERVER_ADDR'];
         $remoteAddr     = empty($_SERVER['REMOTE_ADDR']) ? null : $_SERVER['REMOTE_ADDR'];
-        $requestUri     = empty($_SERVER['REQUEST_URI']) ? '' : $_SERVER['REQUEST_URI'];
-        $referer        = empty($_SERVER['HTTP_REFERER']) ? null : $_SERVER['HTTP_REFERER'];
-
-        if (!empty($requestUri)) {
-            $requestUri = substr($requestUri, 0, 255);
-        }
-
-        if (!empty($referer)) {
-            $referer = substr($referer, 0, 255);
-        }
+        $requestUri     = empty($_SERVER['REQUEST_URI']) ? '' : substr($_SERVER['REQUEST_URI'], 0 ,255);
+        $referer        = empty($_SERVER['HTTP_REFERER']) ? null : substr($_SERVER['HTTP_REFERER'], 0, 255);
 
         if (!ctype_print($userAgent)) {
             $userAgent = null;
@@ -88,8 +80,8 @@ class Visitor extends AbstractTable
         }
 
         $validator  = new ValidateIp();
-        $serverAddr = $validator->isValid($serverAddr, 'ip') ? ip2long($serverAddr) : null;
-        $remoteAddr = $validator->isValid($remoteAddr, 'ip') ? ip2long($remoteAddr) : null;
+        $serverAddr = $validator->isValid($serverAddr) ? ip2long($serverAddr) : null;
+        $remoteAddr = $validator->isValid($remoteAddr) ? ip2long($remoteAddr) : null;
 
         $urlId = $this->getUrlId($requestUri, $referer);
 

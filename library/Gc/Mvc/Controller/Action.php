@@ -248,7 +248,6 @@ class Action extends AbstractActionController
     protected function checkAcl(UserModel $userModel)
     {
         if (!empty($this->aclPage) and $userModel->getRole()->getName() !== RoleModel::PROTECTED_NAME) {
-            $isAllowed  = false;
             $permission = null;
             $acl        = $userModel->getAcl(true);
             if ($this->aclPage['resource'] == 'modules') {

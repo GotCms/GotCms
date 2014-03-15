@@ -428,21 +428,17 @@ abstract class Object
                 $key  = $this->underscore(substr($method, 3));
                 $data = $this->getData($key, isset($args[0]) ? $args[0] : null);
                 return $data;
-                break;
             case 'set':
                 $key    = $this->underscore(substr($method, 3));
                 $result = $this->setData($key, isset($args[0]) ? $args[0] : null);
                 return $result;
-                break;
             case 'uns':
                 $key    = $this->underscore(substr($method, 3));
                 $result = $this->unsetData($key);
                 return $result;
-                break;
             case 'has':
                 $key = $this->underscore(substr($method, 3));
                 return isset($this->data[$key]);
-                break;
         }
 
         throw new \Gc\Exception('Invalid method ' . get_class($this) . '::' . $method . '(' . print_r($args, 1) . ')');

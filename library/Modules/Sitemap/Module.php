@@ -117,11 +117,11 @@ class Module extends AbstractModule
                 $obj[0]->loc     = $location;
                 $obj[0]->lastmod = $lastmod;
             } else {
-                $url        = $xml->addChild('url');
-                $loc        = $url->addChild('loc', $location);
-                $lastmod    = $url->addChild('lastmod', $lastmod);
-                $changefreq = $url->addChild('changefreq', 'weekly');
-                $priority   = $url->addChild('priority', '0.5');
+                $url = $xml->addChild('url');
+                $url->addChild('loc', $location);
+                $url->addChild('lastmod', $lastmod);
+                $url->addChild('changefreq', 'weekly');
+                $url->addChild('priority', '0.5');
             }
 
             $xml->asXml($sitemap->getFilePath());

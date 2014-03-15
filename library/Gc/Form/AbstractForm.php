@@ -99,7 +99,6 @@ abstract class AbstractForm extends Form
         if (is_array($data)) {
             foreach ($data as $elementName => $elementValue) {
                 if ($this->has($elementName)) {
-                    $element = $this->get($elementName);
                     $this->get($elementName)->setValue($elementValue);
                 }
 
@@ -140,10 +139,6 @@ abstract class AbstractForm extends Form
         }
 
         if (is_array($elements)) {
-            if (empty($datatypeId)) {
-                $randId = mt_rand();
-            }
-
             foreach ($elements as $element) {
                 self::addContent($form, $element, $prefix, $datatypeId);
             }

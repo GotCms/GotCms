@@ -180,7 +180,7 @@ class Updater extends Object
         $resource = $dbAdapter->getDriver()->getConnection()->getResource();
         try {
             $resource->beginTransaction();
-            $stmt = $resource->exec($sql);
+            $resource->exec($sql);
             $resource->commit();
         } catch (\Exception $e) {
             $resource->rollBack();

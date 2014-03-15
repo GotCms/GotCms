@@ -47,7 +47,6 @@ class Editor extends AbstractEditor
      */
     public function save()
     {
-        $value      = $this->getRequest()->getPost()->get($this->getName());
         $parameters = $this->getConfig();
         $data       = array();
         if (!empty($_FILES[$this->getName()]['name'])) {

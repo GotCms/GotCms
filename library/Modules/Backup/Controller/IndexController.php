@@ -169,7 +169,6 @@ class IndexController extends AbstractController
 
         $dbAdapter = GlobalAdapterFeature::getStaticAdapter();
         $model     = new Model\Content($this->getServiceLocator());
-        $resource  = $dbAdapter->getDriver()->getConnection()->getResource();
 
         $result = $model->import(file_get_contents($file['tmp_name']));
         if ($result === false) {
