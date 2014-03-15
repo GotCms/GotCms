@@ -41,7 +41,7 @@ abstract class AbstractController extends Action
     /**
      * Constructor initiliaze module menu
      *
-     * @return void
+     * @return \Zend\Http\Response|null
      */
     protected function construct()
     {

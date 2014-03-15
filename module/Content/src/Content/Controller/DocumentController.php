@@ -158,7 +158,7 @@ class DocumentController extends Action
     /**
      * Delete document
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return \Zend\View\Model\JsonModel
      */
     public function deleteAction()
     {

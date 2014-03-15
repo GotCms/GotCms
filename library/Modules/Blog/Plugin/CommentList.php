@@ -49,7 +49,7 @@ class CommentList extends AbstractPlugin
     /**
      * Invoke form
      *
-     * @return void
+     * @return string
      */
     public function __invoke()
     {

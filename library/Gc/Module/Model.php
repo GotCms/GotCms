@@ -28,9 +28,6 @@
 namespace Gc\Module;
 
 use Gc\Db\AbstractTable;
-use Gc\ModuleType;
-use Gc\Media\Icon;
-use Gc\View;
 use Zend\Db\Sql;
 use Zend\Db\Sql\Predicate\Expression;
 use Zend\ModuleManager\ModuleManager;

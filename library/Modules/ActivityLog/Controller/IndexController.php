@@ -56,7 +56,7 @@ class IndexController extends AbstractController
     /**
      * Remove event
      *
-     * @return array
+     * @return JsonModel
      */
     public function removeEventAction()
     {

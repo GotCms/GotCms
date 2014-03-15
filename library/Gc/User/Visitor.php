@@ -32,7 +32,6 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Insert;
 use Zend\Db\Sql\Predicate\Expression;
 use Zend\Db\TableGateway;
-use Zend\Uri\Uri;
 use Zend\Validator\Ip as ValidateIp;
 
 /**

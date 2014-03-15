@@ -33,7 +33,6 @@ use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Form\Form;
 use Zend\Form\Fieldset;
 use Zend\Form\Element;
-use Zend\InputFilter\InputFilter;
 use Zend\Validator\Db\NoRecordExists;
 
 /**

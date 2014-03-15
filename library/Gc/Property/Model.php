@@ -126,7 +126,7 @@ class Model extends AbstractTable
     /**
      * Return property value model
      *
-     * @return mixed
+     * @return Value\Model
      */
     public function getValueModel()
     {
@@ -227,7 +227,7 @@ class Model extends AbstractTable
      *
      * @param array $array Data
      *
-     * @return void
+     * @return Model
      */
     public static function fromArray(array $array)
     {
@@ -265,7 +265,7 @@ class Model extends AbstractTable
      * Initiliaze model from identifier
      *
      * @param string $identifier Identifier
-     * @param id     $documentId Document id
+     * @param integer     $documentId Document id
      *
      * @return \Gc\Property\Model
      */

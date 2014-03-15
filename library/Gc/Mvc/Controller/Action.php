@@ -29,10 +29,8 @@ namespace Gc\Mvc\Controller;
 
 use Gc\Event\StaticEventManager;
 use Gc\Module\Model as ModuleModel;
-use Gc\User\Acl;
 use Gc\User\Model as UserModel;
 use Gc\User\Role\Model as RoleModel;
-use Gc\Registry;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Container as SessionContainer;
@@ -110,7 +108,7 @@ class Action extends AbstractActionController
     /**
      * Constructor
      *
-     * @return void
+     * @return \Zend\Http\Response|null
      */
     protected function construct()
     {
@@ -245,7 +243,7 @@ class Action extends AbstractActionController
      *
      * @param UserModel $userModel User model
      *
-     * @return void|Zend\Http\Response
+     * @return \Zend\Http\Response|null
      */
     protected function checkAcl(UserModel $userModel)
     {

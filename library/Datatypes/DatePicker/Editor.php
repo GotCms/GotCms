@@ -52,7 +52,7 @@ class Editor extends AbstractEditor
     /**
      * Load datepicker editor
      *
-     * @return mixed
+     * @return string
      */
     public function load()
     {

@@ -49,7 +49,7 @@ class ViewTemplatePathStackFactory implements FactoryInterface
      *
      * @param ServiceLocatorInterface $serviceLocator Service Locator
      *
-     * @return ViewResolver\TemplatePathStack
+     * @return TemplatePathStack
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

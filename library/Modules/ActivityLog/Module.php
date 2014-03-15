@@ -31,7 +31,6 @@ use ActivityLog\Model\Template;
 use Gc\Module\AbstractModule;
 use Zend\EventManager\EventInterface as Event;
 use Zend\Http\PhpEnvironment\RemoteAddress;
-use Zend\ModuleManager\ModuleManager;
 
 /**
  * Activity log module bootstrap

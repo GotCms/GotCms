@@ -28,7 +28,6 @@
 namespace Sitemap\Controller;
 
 use Gc\Module\Controller\AbstractController;
-use Gc\Document\Model as DocumentModel;
 use Sitemap\Model;
 
 /**

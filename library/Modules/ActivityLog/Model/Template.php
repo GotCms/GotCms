@@ -83,7 +83,7 @@ class Template extends AbstractTable
      * @param EventManager\Event $event    Event
      * @param string             $template Template
      *
-     * @return array
+     * @return string
      */
     public function render(EventManager\Event $event, $template)
     {

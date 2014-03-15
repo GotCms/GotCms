@@ -32,7 +32,6 @@ use Gc\Document\Model as DocumentModel;
 use Gc\Media\Info;
 use Gc\View\Renderer;
 use Gc\Property;
-use Gc\Registry;
 use ReflectionObject;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Mvc\Router\Http\TreeRouteStack;
@@ -137,7 +136,7 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Return datatype informations
      *
-     * @return array
+     * @return false|string
      */
     public function getInfos()
     {
@@ -159,7 +158,7 @@ abstract class AbstractDatatype extends AbstractTable
      * @param Model   $datatype   Datatype
      * @param integer $documentId Document id
      *
-     * @return mixed
+     * @return false|null
      */
     public function load($datatype = null, $documentId = null)
     {
@@ -197,7 +196,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param mixed $value Value
      *
-     * @return mixed
+     * @return AbstractDatatype
      */
     public function setConfig($value)
     {
@@ -241,7 +240,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param HelperPluginManager $helperManager Helper manager
      *
-     * @return mixed
+     * @return AbstractDatatype
      */
     public function setHelperManager(HelperPluginManager $helperManager)
     {
@@ -274,7 +273,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param \Gc\Property\Model $property Property
      *
-     * @return mixed
+     * @return AbstractDatatype
      */
     public function setProperty($property)
     {
@@ -314,7 +313,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param string $dir Directory
      *
-     * @return mixed
+     * @return AbstractDatatype
      */
     public function addPath($dir)
     {
@@ -356,7 +355,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param Request $request Request
      *
-     * @return mixed
+     * @return AbstractDatatype
      */
     public function setRequest(Request $request)
     {
@@ -379,7 +378,7 @@ abstract class AbstractDatatype extends AbstractTable
      *
      * @param TreeRouteStack $router Router
      *
-     * @return mixed
+     * @return AbstractDatatype
      */
     public function setRouter(TreeRouteStack $router)
     {

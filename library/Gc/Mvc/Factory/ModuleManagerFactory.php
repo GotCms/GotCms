@@ -33,7 +33,6 @@ use Zend\ModuleManager\ModuleEvent;
 use Zend\ModuleManager\ModuleManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-
 use Zend\Loader\AutoloaderFactory;
 
 /**

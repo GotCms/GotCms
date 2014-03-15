@@ -27,11 +27,9 @@
 
 namespace Gc\Mvc\Listener;
 
-use Zend\Cache\StorageFactory as CacheStorage;
 use Zend\Http\PhpEnvironment\Request as HttpRequest;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\EventInterface;
 use Zend\Mvc\MvcEvent;
 
 /**
@@ -118,7 +116,7 @@ class CacheListener extends AbstractListenerAggregate
      *
      * @param MvcEvent $e Mvc Event
      *
-     * @return void
+     * @return boolean
      */
     protected function cacheIsActive(MvcEvent $e)
     {

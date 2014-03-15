@@ -124,7 +124,7 @@ class Stream
      *
      * @param integer $count Count
      *
-     * @return mixed
+     * @return string
      */
     public function streamRead($count)
     {
@@ -189,7 +189,7 @@ class Stream
      * @param integer $offset Offset
      * @param integer $whence Whence
      *
-     * @return boolean
+     * @return boolean|null
      */
     public function streamSeek($offset, $whence)
     {

@@ -27,7 +27,6 @@
 
 namespace Gc\Core;
 
-use SimpleXMLElement;
 use Zend\Json\Json;
 
 /**
@@ -104,7 +103,7 @@ abstract class Object
      *
      * @param array $array Data
      *
-     * @return void
+     * @return Object
      */
     public function addData(array $array)
     {

@@ -51,7 +51,7 @@ class Wget extends AbstractAdapter
     /**
      * Update
      *
-     * @return string
+     * @return boolean
      */
     public function update()
     {
@@ -89,7 +89,7 @@ class Wget extends AbstractAdapter
     /**
      * Upgrade
      *
-     * @return string
+     * @return boolean
      */
     public function upgrade()
     {
@@ -136,7 +136,7 @@ class Wget extends AbstractAdapter
      *
      * @param string $version Version
      *
-     * @return string
+     * @return boolean
      */
     public function rollback($version)
     {
@@ -154,7 +154,7 @@ class Wget extends AbstractAdapter
      *
      * @param ZipArchive $zip              Zip
      * @param string     $directory        Directory
-     * @param array      $excludeDirectory Exclude directory
+     * @param string[]      $excludeDirectory Exclude directory
      *
      * @return ZipArchive
      */

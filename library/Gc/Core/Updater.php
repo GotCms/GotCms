@@ -29,7 +29,6 @@ namespace Gc\Core;
 
 use Gc\Core\Updater\Adapter;
 use Gc\Core\Updater\Script;
-use Gc\Registry;
 use Gc\Version;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 

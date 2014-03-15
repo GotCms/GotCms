@@ -61,7 +61,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     /**
      * Load upload prevalue editor
      *
-     * @return mixed
+     * @return Element\Checkbox[]
      */
     public function load()
     {

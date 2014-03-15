@@ -30,7 +30,6 @@ namespace Gc\User;
 use Gc\User\Role\Model as RoleModel;
 use Gc\User\Model as UserModel;
 use Zend\Permissions\Acl as ZendAcl;
-use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 
 /**

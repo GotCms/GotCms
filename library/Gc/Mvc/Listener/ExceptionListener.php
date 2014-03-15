@@ -30,7 +30,6 @@ namespace Gc\Mvc\Listener;
 use Gc\Layout;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\EventInterface;
 use Zend\Mvc\MvcEvent;
 
 /**

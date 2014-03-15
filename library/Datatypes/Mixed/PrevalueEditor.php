@@ -79,7 +79,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     /**
      * Load mixed prevalue editor
      *
-     * @return mixed
+     * @return string
      */
     public function load()
     {

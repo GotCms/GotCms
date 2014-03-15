@@ -29,7 +29,6 @@ namespace Gc\Db;
 
 use Gc\Core\Object;
 use Gc\Event\StaticEventManager;
-use Gc\Registry;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway;
 use PDO;

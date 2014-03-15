@@ -169,7 +169,7 @@ class Collection extends AbstractTable
     /**
      * Delete tabs
      *
-     * @return void
+     * @return boolean
      */
     public function delete()
     {

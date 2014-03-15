@@ -111,7 +111,7 @@ class ModulePlugin extends AbstractHelper
      *
      * @param mixed $plugin Plugin
      *
-     * @return void
+     * @return boolean
      * @throws Exception
      */
     public function validatePlugin($plugin)
@@ -214,7 +214,7 @@ class ModulePlugin extends AbstractHelper
     /**
      * Create plugin
      *
-     * @param string|array $moduleName Module name
+     * @param string $moduleName Module name
      * @param string       $pluginName Plugin name
      *
      * @return bool|\Gc\Module\AbstractPlugin
@@ -246,7 +246,7 @@ class ModulePlugin extends AbstractHelper
     /**
      * Check if plugin exists
      *
-     * @param string|array $moduleName Module name
+     * @param string $moduleName Module name
      * @param string       $pluginName Plugin name
      *
      * @return bool

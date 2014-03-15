@@ -85,7 +85,7 @@ class CommentForm extends AbstractPlugin
     /**
      * Set form
      *
-     * @return \Blog\Plugin\Form
+     * @return Blog\Form\Comment
      */
     public function getForm()
     {

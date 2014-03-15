@@ -39,7 +39,7 @@ class Git extends AbstractAdapter
     /**
      * Update
      *
-     * @return string
+     * @return boolean
      */
     public function update()
     {
@@ -53,7 +53,7 @@ class Git extends AbstractAdapter
     /**
      * Upgrade
      *
-     * @return string
+     * @return boolean
      */
     public function upgrade()
     {
@@ -69,7 +69,7 @@ class Git extends AbstractAdapter
      *
      * @param string $version Version to checkout
      *
-     * @return string
+     * @return boolean
      */
     public function rollback($version)
     {

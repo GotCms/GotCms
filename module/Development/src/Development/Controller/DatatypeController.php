@@ -155,7 +155,7 @@ class DatatypeController extends Action
     /**
      * Delete datatype
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return \Zend\View\Model\JsonModel
      */
     public function deleteAction()
     {

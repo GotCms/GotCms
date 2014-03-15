@@ -152,7 +152,7 @@ class LayoutController extends Action
     /**
      * Upload a file to the server
      *
-     * @return \Zend\View\Model\ViewModel
+     * @return \Zend\Http\Response
      */
     public function uploadAction()
     {
@@ -198,7 +198,7 @@ class LayoutController extends Action
     /**
      * Send a file to the browser
      *
-     * @return \Zend\View\Model\ViewModel
+     * @return \Zend\Stdlib\ResponseInterface
      */
     public function downloadAction()
     {
@@ -255,7 +255,7 @@ class LayoutController extends Action
     /**
      * Update database from files
      *
-     * @return \Zend\View\Model\ViewModel
+     * @return \Zend\Http\Response
      */
     public function updateAction()
     {

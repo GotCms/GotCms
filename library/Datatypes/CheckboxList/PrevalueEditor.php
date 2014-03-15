@@ -59,7 +59,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     /**
      * Load Checkbox List prevalue editor
      *
-     * @return void
+     * @return string
      */
     public function load()
     {

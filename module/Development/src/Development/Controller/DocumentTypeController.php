@@ -394,7 +394,7 @@ class DocumentTypeController extends Action
     /**
      * Delete Document type
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return \Zend\View\Model\JsonModel
      */
     public function deleteAction()
     {

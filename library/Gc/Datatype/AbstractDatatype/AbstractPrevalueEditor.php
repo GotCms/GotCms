@@ -28,7 +28,6 @@
 namespace Gc\Datatype\AbstractDatatype;
 
 use Gc\Core\Object;
-use Gc\Registry;
 use Gc\Datatype;
 
 /**
@@ -67,7 +66,7 @@ abstract class AbstractPrevalueEditor extends Object
     /**
      * Abstract function for save Editor
      *
-     * @param mixed $datatypeAbstract Datatype
+     * @param  $datatypeAbstract Datatype
      *
      * @return void
      */

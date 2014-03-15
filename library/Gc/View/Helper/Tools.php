@@ -28,8 +28,6 @@
 namespace Gc\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
-use Gc\Script\Model as ScriptModel;
-use Gc\View\Stream;
 
 /**
  * Tools helper

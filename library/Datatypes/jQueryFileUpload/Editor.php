@@ -30,8 +30,6 @@ namespace Datatypes\jQueryFileUpload;
 use Gc\Datatype\AbstractDatatype\AbstractEditor;
 use Gc\Media\File;
 use Gc\Registry;
-use Zend\Form\Element;
-use StdClass;
 
 /**
  * Editor for Upload datatype
@@ -92,7 +90,7 @@ class Editor extends AbstractEditor
     /**
      * Load upload editor
      *
-     * @return mixed
+     * @return string
      */
     public function load()
     {

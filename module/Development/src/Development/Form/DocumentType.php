@@ -234,7 +234,7 @@ class DocumentType extends AbstractForm
      *
      * @param mixed $property \Gc\Property\Model|array
      *
-     * @return \Developpement\Form\DocumentType
+     * @return DocumentType
      */
     public function addProperty($property)
     {
@@ -373,7 +373,7 @@ class DocumentType extends AbstractForm
      *
      * @param mixed $tab \Gc\Tab\Model|array
      *
-     * @return \Developpement\Form\DocumentType
+     * @return DocumentType
      */
     public function addTab($tab)
     {

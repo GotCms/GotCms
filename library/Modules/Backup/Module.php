@@ -28,7 +28,6 @@
 namespace Backup;
 
 use Gc\Module\AbstractModule;
-use Zend\EventManager\Event;
 
 /**
  * Backup module bootstrap

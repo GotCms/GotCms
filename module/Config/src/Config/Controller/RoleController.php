@@ -97,7 +97,7 @@ class RoleController extends Action
     /**
      * Delete role
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return \Zend\View\Model\JsonModel
      */
     public function deleteAction()
     {

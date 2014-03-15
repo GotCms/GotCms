@@ -27,7 +27,6 @@
 
 namespace Gc\Module;
 
-use Gc\Core\Object;
 use Gc\View\Renderer;
 use Gc\Registry;
 
@@ -69,7 +68,7 @@ abstract class AbstractPlugin
      *
      * @param array $array List of parameters
      *
-     * @return Gc\Module\AbstractPlugin
+     * @return AbstractPlugin
      */
     public function setParams(array $array)
     {
@@ -84,7 +83,7 @@ abstract class AbstractPlugin
      * @param string $key   Key
      * @param string $value Value
      *
-     * @return Gc\Module\AbstractPlugin
+     * @return AbstractPlugin
      */
     public function setParam($key, $value)
     {

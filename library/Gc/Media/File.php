@@ -28,12 +28,9 @@
 namespace Gc\Media;
 
 use Gc\Core\Object;
-use Gc\Datatype;
 use Gc\Registry;
 use Gc\Property\Model as PropertyModel;
 use Gc\Document\Model as DocumentModel;
-use StdClass;
-use Zend\EventManager\StaticEventManager;
 use Zend\File\Transfer\Adapter\Http as FileTransfer;
 
 /**
@@ -233,7 +230,7 @@ class File extends Object
      * Test is_writable recursively
      *
      * @param string $directory        Directory start
-     * @param array  $excludeDirectory Exclude directory
+     * @param string[]  $excludeDirectory Exclude directory
      *
      * @return boolean
      */

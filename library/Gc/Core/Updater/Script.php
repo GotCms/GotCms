@@ -27,7 +27,6 @@
 
 namespace Gc\Core\Updater;
 
-use Gc\Registry;
 use Gc\Core\Object;
 
 /**
@@ -45,7 +44,7 @@ class Script extends Object
      *
      * @param string $filename Filename
      *
-     * @return mixed
+     * @return string
      */
     public function execute($filename)
     {

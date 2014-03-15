@@ -154,7 +154,7 @@ class Model extends AbstractTable
      *
      * @param array $array Data
      *
-     * @return void
+     * @return Model
      */
     public static function fromArray(array $array)
     {

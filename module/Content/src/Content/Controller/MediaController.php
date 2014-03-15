@@ -111,7 +111,7 @@ class MediaController extends Action
     /**
      * Upload file action
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return \Zend\View\Model\JsonModel
      */
     public function uploadAction()
     {
@@ -138,7 +138,7 @@ class MediaController extends Action
     /**
      * Delete file
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return \Zend\View\Model\JsonModel
      */
     public function removeAction()
     {

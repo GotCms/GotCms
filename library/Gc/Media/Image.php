@@ -230,7 +230,7 @@ class Image
      *
      * @param string $hexString Hexadecimal string
      *
-     * @return array
+     * @return resource
      */
     public function hex2rgb($hexString)
     {
@@ -257,7 +257,7 @@ class Image
      *
      * @param integer $newHeight New height
      *
-     * @return integer
+     * @return double
      */
     protected function getSizeByFixedHeight($newHeight)
     {
@@ -272,7 +272,7 @@ class Image
      *
      * @param integer $newWidth New width
      *
-     * @return integer
+     * @return double
      */
     protected function getSizeByFixedWidth($newWidth)
     {

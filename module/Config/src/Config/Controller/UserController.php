@@ -184,7 +184,7 @@ class UserController extends Action
     /**
      * Logout action
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return \Zend\Http\Response
      */
     public function logoutAction()
     {
@@ -230,7 +230,7 @@ class UserController extends Action
     /**
      * Delete user
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return \Zend\View\Model\JsonModel
      */
     public function deleteAction()
     {

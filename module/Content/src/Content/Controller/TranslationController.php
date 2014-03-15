@@ -163,7 +163,7 @@ class TranslationController extends Action
     /**
      * Upload a file to the server
      *
-     * @return \Zend\View\Model\ViewModel
+     * @return \Zend\Http\Response
      */
     public function uploadAction()
     {
@@ -266,7 +266,7 @@ class TranslationController extends Action
     /**
      * Send a file to the browser
      *
-     * @return \Zend\View\Model\ViewModel
+     * @return \Zend\Stdlib\ResponseInterface
      */
     public function downloadAction()
     {

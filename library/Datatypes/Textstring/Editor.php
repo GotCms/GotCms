@@ -53,7 +53,7 @@ class Editor extends AbstractEditor
     /**
      * Load textstring editor
      *
-     * @return mixed
+     * @return Element\Text
      */
     public function load()
     {

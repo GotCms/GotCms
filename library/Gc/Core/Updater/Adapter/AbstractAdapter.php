@@ -84,7 +84,7 @@ abstract class AbstractAdapter extends Object
      *
      * @param string $message Message
      *
-     * @return \Gc\Core\Updater\Adapter
+     * @return AbstractAdapter
      */
     public function addMessage($message)
     {

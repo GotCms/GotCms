@@ -28,7 +28,6 @@
 namespace Datatypes\Textrich;
 
 use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
-use Zend\Form\Element;
 
 /**
  * Prevalue Editor for Textrich datatype
@@ -53,7 +52,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     /**
      * Load Textrich prevalue editor
      *
-     * @return mixed
+     * @return string
      */
     public function load()
     {

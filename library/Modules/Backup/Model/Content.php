@@ -28,7 +28,6 @@
 namespace Backup\Model;
 
 use Gc\Core\Object;
-
 use Gc\Document;
 use Gc\Datatype;
 use Gc\DocumentType;
@@ -37,7 +36,6 @@ use Gc\Script;
 use Gc\Tab;
 use Gc\Property;
 use Gc\View;
-use SimpleXMLElement;
 use Exception;
 use Zend\ServiceManager\ServiceManager;
 

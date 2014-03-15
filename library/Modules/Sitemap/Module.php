@@ -28,7 +28,6 @@
 namespace Sitemap;
 
 use Gc\Module\AbstractModule;
-use Gc\Registry;
 use Sitemap\Model\Sitemap;
 use Zend\EventManager\EventInterface as Event;
 use Zend\ServiceManager\ServiceManager;
@@ -163,7 +162,7 @@ class Module extends AbstractModule
      *
      * @param Sitemap $sitemap Sitemap model
      *
-     * @return void|false|SimpleXMLElement
+     * @return SimpleXMLElement|null
      */
     protected function getXml(Sitemap $sitemap)
     {

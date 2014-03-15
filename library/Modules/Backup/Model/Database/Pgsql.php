@@ -28,9 +28,6 @@
 namespace Backup\Model\Database;
 
 use Gc\Db\AbstractTable;
-use Gc\Document\Model as DocumentModel;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Predicate\Expression;
 
 /**
  * Blog comment table

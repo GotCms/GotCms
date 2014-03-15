@@ -30,8 +30,6 @@ namespace Social\Form;
 use Gc\Form\AbstractForm;
 use Social\Model;
 use Zend\Form\Element;
-use Zend\InputFilter\Factory as InputFilterFactory;
-use Zend\Form\FormInterface;
 use Zend\Form\Fieldset;
 use Zend\Http\Client;
 
@@ -409,9 +407,9 @@ class AddThis extends AbstractForm
     /**
      * Set model
      *
-     * @param Social\Model\AddThis $model AddThis model
+     * @param Model\AddThis $model AddThis model
      *
-     * @return Social\Form\AddThis
+     * @return AddThis
      */
     public function setModel(Model\AddThis $model)
     {
@@ -423,7 +421,7 @@ class AddThis extends AbstractForm
     /**
      * Return addthis model
      *
-     * @return Social\Model\AddThis
+     * @return Model\AddThis
      */
     public function getModel()
     {

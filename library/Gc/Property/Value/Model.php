@@ -52,7 +52,7 @@ class Model extends AbstractTable
      * @param integer $documentId Optional document id
      * @param integer $propertyId Optional property id
      *
-     * @return \Gc\Property\Model\Value
+     * @return Model
      */
     public function load($valueId = null, $documentId = null, $propertyId = null)
     {

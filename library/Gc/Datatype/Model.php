@@ -74,7 +74,7 @@ class Model extends AbstractTable
      *
      * @param array $array Data
      *
-     * @return void
+     * @return Model
      */
     public static function fromArray(array $array)
     {
@@ -90,7 +90,7 @@ class Model extends AbstractTable
      *
      * @param integer $datatypeId Datatype id
      *
-     * @return false|\Gc\Datatype\Model
+     * @return AbstractTable
      */
     public static function fromId($datatypeId)
     {
@@ -170,7 +170,7 @@ class Model extends AbstractTable
     /**
      * Save prevalue editor
      *
-     * @param mixed $datatype Datatype
+     * @param AbstractDatatype $datatype Datatype
      *
      * @return Model
      */
@@ -186,7 +186,7 @@ class Model extends AbstractTable
      * @param ServiceManager $serviceManager Service manager
      * @param PropertyModel  $property       Property
      *
-     * @return mixed
+     * @return boolean
      */
     public static function saveEditor(ServiceManager $serviceManager, PropertyModel $property)
     {
@@ -202,9 +202,9 @@ class Model extends AbstractTable
     /**
      * Load prevalue editor
      *
-     * @param mixed $datatype Datatype
+     * @param AbstractDatatype $datatype Datatype
      *
-     * @return mixed
+     * @return Fieldset
      */
     public static function loadPrevalueEditor(AbstractDatatype $datatype)
     {

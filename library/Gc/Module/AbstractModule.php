@@ -28,7 +28,6 @@
 namespace Gc\Module;
 
 use Gc\Event\StaticEventManager;
-use Gc\Registry;
 use Gc\View\Renderer;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\EventManager\EventInterface as Event;

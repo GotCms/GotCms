@@ -53,7 +53,7 @@ class Editor extends AbstractEditor
     /**
      * Load Boolean editor
      *
-     * @return mixed
+     * @return Element\Checkbox
      */
     public function load()
     {

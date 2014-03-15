@@ -28,8 +28,6 @@
 namespace Backup\Controller;
 
 use Gc\Module\Controller\AbstractController;
-use Gc\Document\Model as DocumentModel;
-use Gc\Registry;
 use Backup\Model;
 use Zend\Http\Headers;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
@@ -56,7 +54,7 @@ class IndexController extends AbstractController
     /**
      * Download database as gzip
      *
-     * @return array
+     * @return \Zend\Stdlib\ResponseInterface
      */
     public function downloadDatabaseAction()
     {
@@ -98,7 +96,7 @@ class IndexController extends AbstractController
     /**
      * Download files as gzip
      *
-     * @return array
+     * @return \Zend\Stdlib\ResponseInterface
      */
     public function downloadFilesAction()
     {
@@ -126,7 +124,7 @@ class IndexController extends AbstractController
     /**
      * Download files as gzip
      *
-     * @return array
+     * @return \Zend\Stdlib\ResponseInterface
      */
     public function downloadContentAction()
     {
@@ -159,7 +157,7 @@ class IndexController extends AbstractController
     /**
      * Download files as gzip
      *
-     * @return array
+     * @return \Zend\Http\Response
      */
     public function uploadContentAction()
     {

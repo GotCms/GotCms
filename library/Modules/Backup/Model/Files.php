@@ -69,7 +69,7 @@ class Files extends Object
     /**
      * Generate zip archive
      *
-     * @param array  $sources     Array of folders
+     * @param string[]  $sources     Array of folders
      * @param string $destination Zip file name
      *
      * @return boolean

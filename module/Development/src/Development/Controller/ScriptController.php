@@ -136,7 +136,7 @@ class ScriptController extends Action
     /**
      * Delete Script
      *
-     * @return \Zend\Script\Model\ScriptModel
+     * @return \Zend\View\Model\JsonModel
      */
     public function deleteAction()
     {
@@ -151,7 +151,7 @@ class ScriptController extends Action
     /**
      * Upload a file to the server
      *
-     * @return \Zend\View\Model\ViewModel
+     * @return \Zend\Http\Response
      */
     public function uploadAction()
     {
@@ -197,7 +197,7 @@ class ScriptController extends Action
     /**
      * Send a file to the browser
      *
-     * @return \Zend\View\Model\ViewModel
+     * @return \Zend\Stdlib\ResponseInterface
      */
     public function downloadAction()
     {
@@ -254,7 +254,7 @@ class ScriptController extends Action
     /**
      * Update database from files
      *
-     * @return \Zend\View\Model\ViewModel
+     * @return \Zend\Http\Response
      */
     public function updateAction()
     {

@@ -27,7 +27,6 @@
 
 namespace Gc\View\Helper;
 
-use Gc\Document\Model as DocumentModel;
 use Zend\View\Helper\AbstractHelper;
 use Zend\ServiceManager\ServiceManager;
 

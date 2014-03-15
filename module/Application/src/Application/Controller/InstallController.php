@@ -68,7 +68,7 @@ class InstallController extends Action
     /**
      * Initialize Installer
      *
-     * @return void
+     * @return \Zend\Http\Response|null
      */
     public function init()
     {
@@ -563,7 +563,7 @@ class InstallController extends Action
      * @param array                    $configuration Configuration
      * @param string                   $sqlType       Sql database type
      *
-     * @return void
+     * @return \Zend\View\Model\JsonModel|null
      */
     protected function createUsersAndRoles($dbAdapter, $configuration, $sqlType)
     {
@@ -704,7 +704,7 @@ class InstallController extends Action
      * @param string                   $template  Template name
      * @param string                   $sqlType   Sql database type
      *
-     * @return void
+     * @return \Zend\View\Model\JsonModel|null
      */
     protected function installTemplate($dbAdapter, $template, $sqlType)
     {

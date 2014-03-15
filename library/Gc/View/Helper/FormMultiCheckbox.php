@@ -27,9 +27,7 @@
 
 namespace Gc\View\Helper;
 
-use Zend\Form\ElementInterface;
 use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement;
-use Zend\Form\Exception;
 use Zend\Form\View\Helper\FormMultiCheckbox as ZendFormMultiCheckbox;
 
 /**

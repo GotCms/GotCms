@@ -30,11 +30,6 @@ namespace Social\Model;
 use Gc\Core\Object;
 use Gc\Core\Config as CoreConfig;
 use Gc\Exception;
-use Gc\Registry;
-use Gc\Component\IterableInterface;
-use Gc\Document\Collection as DocumentCollection;
-use Gc\Document\Model as DocumentModel;
-use Zend\Http\PhpEnvironment\Request;
 
 /**
  * AddThis comment table

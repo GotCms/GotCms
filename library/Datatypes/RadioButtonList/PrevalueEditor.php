@@ -59,7 +59,7 @@ class PrevalueEditor extends AbstractPrevalueEditor
     /**
      * Load Radiobutton List prevalue editor
      *
-     * @return void
+     * @return string
      */
     public function load()
     {

@@ -68,7 +68,7 @@ class Module extends AbstractModule
      *
      * @param Event $e Event
      *
-     * @return mixed
+     * @return false|null
      */
     public function dashboard(Event $e)
     {

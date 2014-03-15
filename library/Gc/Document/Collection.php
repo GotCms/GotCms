@@ -156,7 +156,7 @@ class Collection extends AbstractTable implements IterableInterface
     /** (non-PHPdoc)
      *
      * @see include \Gc\Component\IterableInterface#getParent()
-     * @return mixed
+     * @return boolean
      */
     public function getParent()
     {
@@ -176,7 +176,7 @@ class Collection extends AbstractTable implements IterableInterface
     /** (non-PHPdoc)
      *
      * @see include \Gc\Component\IterableInterface#getId()
-     * @return mixed
+     * @return boolean
      */
     public function getId()
     {

@@ -28,8 +28,6 @@
 namespace Sitemap\Model;
 
 use Gc\Core\Object;
-use Gc\Registry;
-use Gc\Component\IterableInterface;
 use Gc\Document\Collection as DocumentCollection;
 use Gc\Document\Model as DocumentModel;
 use Zend\Http\PhpEnvironment\Request;

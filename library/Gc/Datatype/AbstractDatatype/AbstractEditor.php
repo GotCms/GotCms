@@ -29,7 +29,6 @@ namespace Gc\Datatype\AbstractDatatype;
 
 use Gc\Core\Object;
 use Gc\Datatype;
-use Gc\Registry;
 
 /**
  * Abstract Editor class
@@ -88,7 +87,7 @@ abstract class AbstractEditor extends Object
     /**
      * Abstract function for save Editor
      *
-     * @param mixed $datatypeAbstract Datatype
+     * @param  $datatypeAbstract Datatype
      *
      * @return void
      */
@@ -138,7 +137,7 @@ abstract class AbstractEditor extends Object
      *
      * @param mixed $value Value
      *
-     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
+     * @return AbstractEditor
      */
     public function setConfig($value)
     {
@@ -234,7 +233,7 @@ abstract class AbstractEditor extends Object
      *
      * @param string $dir Directory
      *
-     * @return \Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor
+     * @return AbstractEditor
      */
     public function addPath($dir)
     {
