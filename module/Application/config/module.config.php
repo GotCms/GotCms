@@ -47,11 +47,10 @@ return array(
             'CoreConfig'            => function () {
                 return new CoreConfig();
             },
-            'Cache'                         => 'Gc\Mvc\Factory\CacheFactory',
-            'CacheService'                  => 'Gc\Mvc\Factory\CacheServiceFactory',
-            'CustomModules'                 => 'Gc\Mvc\Factory\ModuleManagerFactory',
-            'translator'                    => 'Zend\Mvc\Service\TranslatorServiceFactory',
-            'ViewTemplatePathStack'         => 'Gc\Mvc\Factory\ViewTemplatePathStackFactory',
+            'Cache'                 => 'Gc\Mvc\Factory\CacheFactory',
+            'CacheService'          => 'Gc\Mvc\Factory\CacheServiceFactory',
+            'CustomModules'         => 'Gc\Mvc\Factory\ModuleManagerFactory',
+            'ViewTemplatePathStack' => 'Gc\Mvc\Factory\ViewTemplatePathStackFactory',
         ),
         'invokables' => array(
             'Gc\Mvc\Listener\CacheListener'     => 'Gc\Mvc\Listener\CacheListener',

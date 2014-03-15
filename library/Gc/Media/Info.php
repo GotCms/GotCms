@@ -117,7 +117,7 @@ class Info extends Object
             return false;
         }
 
-        $translator = Registry::get('Application')->getServiceManager()->get('translator');
+        $translator = Registry::get('Application')->getServiceManager()->get('MvcTranslator');
         $escaper    = Registry::get('Application')
             ->getServiceManager()
             ->get('ViewManager')

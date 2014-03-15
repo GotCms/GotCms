@@ -253,7 +253,7 @@ class Content extends Object
         ksort($orders);
 
         $errors     = array();
-        $translator = $this->serviceLocator->get('Translator');
+        $translator = $this->serviceLocator->get('MvcTranslator');
         $ids        = array(
             'datatypes'      => array(),
             'views'          => array(),

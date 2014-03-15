@@ -314,7 +314,7 @@ class Model extends AbstractTable
             $user->save();
 
             $serviceManager = Registry::get('Application')->getServiceManager();
-            $message        = $serviceManager->get('translator')
+            $message        = $serviceManager->get('MvcTranslator')
                 ->translate(
                     'To reset your password follow this link but be careful ' .
                     'you only have one hour before the link expires:'
