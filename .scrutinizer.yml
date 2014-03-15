@@ -1,0 +1,40 @@
+filter:
+    excluded_paths:
+        - 'vendor/*'
+        - 'tests/*'
+tools:
+    php_analyzer:
+        enabled: true
+        extensions:
+            - php
+        filter:
+            excluded_paths:
+                - 'vendor/*'
+                - 'tests/*'
+    php_cpd:
+        enabled: true
+        names:
+            - '*.php'
+        min_lines: 5
+        min_tokens: 70
+        filter:
+            excluded_paths:
+                - 'vendor/*'
+                - 'tests/*'
+    php_pdepend:
+        enabled: true
+        configuration_file: null
+        suffixes:
+            - php
+        filter:
+            excluded_paths:
+                - 'vendor/*'
+                - 'tests/*'
+                - 'app/*'
+            paths: {  }
+changetracking:
+    bug_patterns:
+        - '\bfix(?:es|ed)?\b'
+    feature_patterns:
+        - '\badd(?:s|ed)?\b'
+        - '\bimplement(?:s|ed)?\b'
