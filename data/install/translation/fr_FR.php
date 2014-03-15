@@ -202,6 +202,7 @@ return array (
     'Tab' => 'Onglets',
     'Download all files' => 'Télécharger tous les fichiers',
     'Upload file' => 'Envoyer un fichier',
+    'Upload files' => 'Envoyer des fichiers',
     'Update content' => 'Mettre à jour le contenu',
     'Files as: identifier.phtml' => 'Fichier au format : identifiant.phtml',
     'Files with locale name and csv or php extensions: fr_FR.php, en_GB.csv, &c...' => 'Fichiers avec la locale comme nom et l\'extension csv ou php : fr_FR.php, en_GB.php, etc...',
@@ -222,7 +223,8 @@ return array (
     'This view has been saved' => 'La vue a été sauvegardée',
     'This user has been saved' => 'L\'utilisateur a été sauvegardé',
     'This datatype has been saved' => 'Le type de donnée a été sauvegardé',
-    'This document type has been saved' => 'Type de document a été sauvegardé',
+    'This document type has been saved' => 'Le type de document a été sauvegardé',
+    'This document has been saved' => 'Le document a été sauvegardé',
     'Configuration saved' => 'Configuration sauvegardée',
     'User can not be saved' => 'L\'utilisateur ne peut être sauvegardé',
     'User does not exists' => 'L\'utilisateur n\'existe pas',
@@ -277,6 +279,14 @@ return array (
     'Stream wrapper is active' => 'Le gestionnaire de flux (stream wrapper) est activé',
     'Session path' => 'Chemin de session',
     'Document information' => 'Information sur le document',
+    'Force backend SSL' => 'Forcer le ssl sur l\'admin',
+    'Force backend SSL' => 'Forcer le ssl sur le site',
+    'Unsecure backend base path' => 'Chemin non sécurisé pour l\'admin',
+    'Unsecure frontend base path' => 'Chemin non sécurisé le site',
+    'Secure backend base path' => 'Chemin sécurisé pour l\'admin',
+    'Secure frontend base path' => 'Chemin sécursié pour le site',
+    'Unsecure cdn base path' => 'Chemin sécurisé pour le cdn',
+    'Secure cdn base path' => 'Chemin sécurisé pour le cdn',
 
 
     // Zend\I18n\Validator\Alnum

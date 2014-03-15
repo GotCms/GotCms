@@ -147,7 +147,7 @@ class DocumentController extends Action
                     ->setUserId($this->getServiceLocator()->get('Auth')->getIdentity()->getId());
 
                 $document->save();
-                $this->flashMessenger()->addSuccessMessage('Document successfuly add');
+                $this->flashMessenger()->addSuccessMessage('This document has been saved');
                 $this->redirect()->toRoute('content/document/edit', array('id' => $document->getId()));
             }
         }
@@ -308,7 +308,7 @@ class DocumentController extends Action
                     );
                     $this->useFlashMessenger();
                 } else {
-                    $this->flashMessenger()->addSuccessMessage('Document saved !');
+                    $this->flashMessenger()->addSuccessMessage('This document has been saved');
                     $document->addData($formDocumentAdd->getInputFilter()->getValues());
                     $document->save();
 
