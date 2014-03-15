@@ -417,6 +417,8 @@ class Content extends Object
                             if (empty($model)) {
                                 $model = new Document\Model();
                             }
+                        } else {
+                            $id = $model->getId();
                         }
 
                         $documentTypeId = isset($ids['document_types'][(integer) $child->document_type_id]) ?

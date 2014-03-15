@@ -41,6 +41,13 @@ use Zend\InputFilter\Factory as InputFilterFactory;
 class AbstractFormContent extends AbstractForm
 {
     /**
+     * Table name
+     *
+     * @return void
+     */
+    protected $tableName;
+
+    /**
      * Initialize form
      *
      * @return void

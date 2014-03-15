@@ -54,7 +54,7 @@ class Model extends AbstractTable
     /**
      * List of view id
      *
-     * @var integer
+     * @var array
      */
     protected $views = array();
 

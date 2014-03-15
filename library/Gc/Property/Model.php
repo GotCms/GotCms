@@ -206,8 +206,8 @@ class Model extends AbstractTable
         if (!empty($id)) {
             try {
                 parent::delete(array('id' => (int) $id));
-                $table  = new TableGateway('property_value', $this->getAdapter());
-                $result = $table->delete(array('property_id' => (int) $id));
+                $table = new TableGateway('property_value', $this->getAdapter());
+                $table->delete(array('property_id' => (int) $id));
             } catch (\Exception $e) {
                 throw new \Gc\Exception($e->getMessage());
             }

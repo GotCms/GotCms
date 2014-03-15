@@ -44,7 +44,7 @@ class Acl extends AbstractHelper
     /**
      * User Acl
      *
-     * @var UserAcl
+     * @var \Gc\User\Role\Model
      */
     protected $acl;
 
