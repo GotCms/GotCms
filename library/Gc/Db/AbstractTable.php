@@ -45,6 +45,13 @@ use PDO;
 abstract class AbstractTable extends Object
 {
     /**
+     * Abstract name
+     *
+     * @var null
+     */
+    protected $name;
+
+    /**
      * AbstractTable collection
      *
      * @var array \Zend\Db\TableGateway\TableGateway

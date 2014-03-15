@@ -27,6 +27,7 @@
 
 namespace Gc\Mvc\Listener;
 
+use Exception;
 use Gc\Document;
 use Gc\User\Visitor;
 use Zend\EventManager\AbstractListenerAggregate;

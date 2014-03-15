@@ -81,7 +81,7 @@ class CkEditor extends Object
                     $js .= '[\'' . implode('\', \'', $content) . '\'], ';
                 }
             } else {
-                if (strlen($group) > 0) {
+                if (is_string($group) and strlen($group) > 0) {
                     $js .= '[\'/\'], ';
                 }
             }

@@ -158,7 +158,7 @@ class Editor extends AbstractEditor
                         }
                     }
 
-                    foreach ($data as $name => $value) {
+                    foreach ($data as $name => $file) {
                         if ($name == 'original') {
                             continue;
                         }

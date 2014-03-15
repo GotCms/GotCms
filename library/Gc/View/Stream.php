@@ -187,7 +187,7 @@ class Stream
      * @param integer $offset Offset
      * @param integer $whence Whence
      *
-     * @return boolean|null
+     * @return boolean
      */
     public function streamSeek($offset, $whence)
     {

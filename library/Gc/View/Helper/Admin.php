@@ -42,6 +42,13 @@ use Zend\View\Helper\AbstractHelper;
 class Admin extends AbstractHelper
 {
     /**
+     * Authentication
+     *
+     * @var AuthenticationService
+     */
+    protected $auth;
+
+    /**
      * Constructor
      *
      * @param AuthenticationService $auth Authentication service

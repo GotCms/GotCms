@@ -121,7 +121,7 @@ class Model extends AbstractTable
     /**
      * Get available views
      *
-     * @return array \Gc\View\Collection
+     * @return \Gc\View\Collection
      */
     public function getAvailableViews()
     {

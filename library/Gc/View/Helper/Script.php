@@ -81,6 +81,13 @@ class Script extends AbstractHelper
     protected $serviceManager;
 
     /**
+     * Use stream wrapper
+     *
+     * @var boolean
+     */
+    protected $useStreamWrapper;
+
+    /**
      * Constructor
      *
      * @param ServiceManager $serviceManager Service manager

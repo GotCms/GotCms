@@ -46,7 +46,7 @@ class TreeView
      *
      * @return string
      */
-    public static function render(array $treeviewData = null, $init = true)
+    public static function render(array $treeviewData = array(), $init = true)
     {
         $html = '';
         if ($init) {

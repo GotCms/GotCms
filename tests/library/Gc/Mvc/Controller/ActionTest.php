@@ -175,18 +175,23 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('cms');
         $this->object->getEvent()->setRouteMatch($routeMatch);
-        $this->object->aclPage = array(
-            'resource' => 'development',
-            'permission' => 'view'
+
+        $this->object->setAcl(
+            array(
+                'resource' => 'development',
+                'permission' => 'view'
+            )
         );
         $this->assertInstanceOf(
             'Zend\Http\PhpEnvironment\Response',
             $this->object->dispatch(Registry::get('Application')->getRequest(), null)
         );
 
-        $this->object->aclPage = array(
-            'resource' => 'modules',
-            'permission' => 'view'
+        $this->object->setAcl(
+            array(
+                'resource' => 'modules',
+                'permission' => 'view'
+            )
         );
         $this->assertInstanceOf(
             'Zend\Http\PhpEnvironment\Response',

@@ -133,9 +133,9 @@ class ContentTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testExportWithEmptyParameterShouldReturnFalse()
+    public function testExportWithEmptyParameterShouldReturnEmptyString()
     {
-        $this->assertFalse($this->object->export(array()));
+        $this->assertEqual('', $this->object->export(array()));
     }
 
     /**

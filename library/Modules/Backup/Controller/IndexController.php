@@ -30,7 +30,6 @@ namespace Backup\Controller;
 use Gc\Module\Controller\AbstractController;
 use Backup\Model;
 use Zend\Http\Headers;
-use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 
 /**
  * IndexController
@@ -63,6 +62,7 @@ class IndexController extends AbstractController
             return $this->redirect()->toRoute('module/backup');
         }
 
+        $model         = null;
         $configuration = $this->getServiceLocator()->get('Config');
         switch($configuration['db']['driver']) {
             case 'pdo_pgsql':
@@ -71,6 +71,10 @@ class IndexController extends AbstractController
             case 'pdo_mysql':
                 $model = new Model\Database\Mysql();
                 break;
+        }
+
+        if (empty($model)) {
+            return $this->redirect()->toRoute('module/backup');
         }
 
         $content  = $model->export($what);

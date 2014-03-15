@@ -58,7 +58,14 @@ class Navigation
      *
      * @var string
      */
-     protected $requestUri;
+    protected $requestUri;
+
+    /**
+     * Use active branch
+     *
+     * @var boolean
+     */
+    protected $useActiveBranch;
 
     /**
      * Constructor, initialize documents
@@ -131,6 +138,10 @@ class Navigation
         $navigation = array();
         if ($documents === null && !is_null($this->documents)) {
             $documents = $this->documents;
+        }
+
+        if (!is_array($documents)) {
+            return $navigation;
         }
 
         foreach ($documents as $document) {

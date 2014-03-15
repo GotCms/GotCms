@@ -426,7 +426,7 @@ class DocumentController extends Action
             $copyDocumentProperties->load(null, null, $document->getId());
 
             $copyDocument->addData($document->getData());
-            $copyDocument->setId(null);
+            $copyDocument->setData('id', null);
             $copyDocument->setParentId($parentId);
             $copyDocument->setName($this->getRequest()->getQuery('name'));
             $copyDocument->setUrlKey($urlKey);
@@ -440,7 +440,7 @@ class DocumentController extends Action
 
                 $copyProperty = new Property\Value\Model();
                 $copyProperty->addData($value->getData());
-                $copyProperty->setId(null);
+                $copyProperty->setData('id', null);
                 $copyProperty->setDocumentId($copyDocument->getId());
                 $copyProperty->save();
             }

@@ -54,6 +54,7 @@ class Documents extends AbstractHelper
      */
     public function __invoke($data = null)
     {
+        $elements  = array();
         $documents = new DocumentCollection();
         if (empty($data)) {
             $elements = $documents->load(0)->getDocuments();
@@ -64,7 +65,6 @@ class Documents extends AbstractHelper
                 $document = DocumentModel::fromUrlKey($data);
                 $elements = $document->getChildren();
             } elseif (is_array($data)) {
-                $elements = array();
                 foreach ($data as $documentId) {
                     if (empty($documentId)) {
                         continue;

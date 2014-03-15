@@ -61,7 +61,7 @@ class Collection extends AbstractTable
      *
      * @param boolean $forceReload Force reload
      *
-     * @return \Gc\Layout\Collection
+     * @return array
      */
     public function getLayouts($forceReload = false)
     {

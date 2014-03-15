@@ -74,6 +74,13 @@ class Action extends AbstractActionController
     protected $session = null;
 
     /**
+     * Abstract acl
+     *
+     * @var null
+     */
+    protected $aclPage;
+
+    /**
      * Execute the request
      *
      * @param MvcEvent $e Mvc Event
@@ -281,5 +288,17 @@ class Action extends AbstractActionController
                 return $this->redirect()->toRoute('config/user/forbidden');
             }
         }
+    }
+
+    /**
+     * Override aclPage property
+     *
+     * @param array $array Array for acl pages
+     *
+     * @return void
+     */
+    public function setAcl(array $array)
+    {
+        $this->aclPage = $array;
     }
 }

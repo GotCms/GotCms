@@ -92,14 +92,14 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Request
      *
-     * @var \Zend\Http\PhpEnvironment\Request
+     * @var \Zend\Mvc\Router\Http\TreeRouteStack
      */
     protected $router;
 
     /**
      * Request
      *
-     * @var \Zend\Http\PhpEnvironment\Request
+     * @var \Zend\View\HelperPluginManager
      */
     protected $helperManager;
 

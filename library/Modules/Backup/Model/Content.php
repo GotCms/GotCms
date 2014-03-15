@@ -77,7 +77,7 @@ class Content extends Object
     public function export(array $what)
     {
         if (empty($what)) {
-            return false;
+            return '';
         }
 
         $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
@@ -409,7 +409,7 @@ class Content extends Object
                 case 'documents':
                     foreach ($children['children'] as $child) {
                         $urlKey = (string) $child->url_key;
-                        $model  = Document\Model::fromUrlKey($id);
+                        $model  = Document\Model::fromUrlKey($urlKey);
                         if (empty($model)) {
                             $attributes = $child->attributes();
                             $id         = (integer) $attributes['id'];
@@ -585,7 +585,7 @@ class Content extends Object
                         $translator->translate(
                             'Cannot save dependencies for document type with id (%d)'
                         ),
-                        $documentTypeId
+                        empty($documentTypeId) ? 0 : $documentTypeId
                     );
                 }
             }

@@ -79,6 +79,7 @@ class IndexController extends Action
         $array          = array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR');
 
         foreach ($array as $type => $sqlValue) {
+            $label = '';
             switch($type) {
                 case 'hours':
                     $label = 'This day';
