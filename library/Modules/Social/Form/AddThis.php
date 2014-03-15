@@ -43,6 +43,13 @@ use Zend\Http\Client;
 class AddThis extends AbstractForm
 {
     /**
+     * AddThis model
+     *
+     * @return Model\AddThis
+     */
+    protected $model;
+
+    /**
      * Init Module form
      *
      * @return void
@@ -269,6 +276,7 @@ class AddThis extends AbstractForm
                                             return true;
                                         }
                                     } catch (\Exception $e) {
+                                        //don't care
                                     }
 
                                     return false;
