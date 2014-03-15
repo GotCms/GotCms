@@ -98,8 +98,8 @@ class Stream
     /**
      * Opens the script file and converts markup.
      *
-     * @param string  $path        Path
-     * @param string  $mode        Mode
+     * @param string $path Path
+     * @param string $mode Mode
      *
      * @return boolean
      */
@@ -196,33 +196,32 @@ class Stream
                 if ($offset < strlen(self::$data[$this->path]) and $offset >= 0) {
                     self::$position[$this->path] = $offset;
                     return true;
-                } else {
-                    return false;
                 }
+                break;
             case SEEK_CUR:
                 if ($offset >= 0) {
                     self::$position[$this->path] += $offset;
                     return true;
-                } else {
-                    return false;
                 }
+                break;
             case SEEK_END:
                 if (strlen(self::$data[$this->path]) + $offset >= 0) {
                     self::$position[$this->path] = strlen(self::$data[$this->path]) + $offset;
                     return true;
-                } else {
-                    return false;
                 }
+                break;
             default:
                 return false;
         }
+
+        return false;
     }
 
     /**
      * Retrieve information about a file
      * Always return empty array because data come from the database
      *
-     * @param string $path  Path
+     * @param string $path Path
      *
      * @return array
      */

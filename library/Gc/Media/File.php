@@ -229,8 +229,8 @@ class File extends Object
     /**
      * Test is_writable recursively
      *
-     * @param string $directory        Directory start
-     * @param string[]  $excludeDirectory Exclude directory
+     * @param string   $directory        Directory start
+     * @param string[] $excludeDirectory Exclude directory
      *
      * @return boolean
      */

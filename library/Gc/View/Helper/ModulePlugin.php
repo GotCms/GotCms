@@ -215,7 +215,7 @@ class ModulePlugin extends AbstractHelper
      * Create plugin
      *
      * @param string $moduleName Module name
-     * @param string       $pluginName Plugin name
+     * @param string $pluginName Plugin name
      *
      * @return bool|\Gc\Module\AbstractPlugin
      */
@@ -247,7 +247,7 @@ class ModulePlugin extends AbstractHelper
      * Check if plugin exists
      *
      * @param string $moduleName Module name
-     * @param string       $pluginName Plugin name
+     * @param string $pluginName Plugin name
      *
      * @return bool
      */

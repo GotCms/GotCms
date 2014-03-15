@@ -154,7 +154,7 @@ class Wget extends AbstractAdapter
      *
      * @param ZipArchive $zip              Zip
      * @param string     $directory        Directory
-     * @param string[]      $excludeDirectory Exclude directory
+     * @param string[]   $excludeDirectory Exclude directory
      *
      * @return ZipArchive
      */

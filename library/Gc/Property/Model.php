@@ -264,8 +264,8 @@ class Model extends AbstractTable
     /**
      * Initiliaze model from identifier
      *
-     * @param string $identifier Identifier
-     * @param integer     $documentId Document id
+     * @param string  $identifier Identifier
+     * @param integer $documentId Document id
      *
      * @return \Gc\Property\Model
      */

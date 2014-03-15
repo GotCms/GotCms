@@ -239,7 +239,7 @@ class Model extends AbstractTable
             $tabCollection = new Tab\Collection();
             $tabCollection->load($documentTypeId);
             $tabCollection->delete();
-            $table  = new TableGateway('document_type_view', $this->getAdapter());
+            $table = new TableGateway('document_type_view', $this->getAdapter());
             $table->delete(array('document_type_id' => (int) $documentTypeId));
             parent::delete(array('id' => $documentTypeId));
             $this->events()->trigger(__CLASS__, 'after.delete', $this);

@@ -167,9 +167,7 @@ class IndexController extends AbstractController
             return $this->redirect()->toRoute('module/backup');
         }
 
-        $dbAdapter = GlobalAdapterFeature::getStaticAdapter();
-        $model     = new Model\Content($this->getServiceLocator());
-
+        $model  = new Model\Content($this->getServiceLocator());
         $result = $model->import(file_get_contents($file['tmp_name']));
         if ($result === false) {
             $this->flashMessenger()->addSuccessMessage('File is not an xml');
