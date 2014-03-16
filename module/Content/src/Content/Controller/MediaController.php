@@ -27,15 +27,11 @@
 
 namespace Content\Controller;
 
-use Gc\Mvc\Controller\Action;
-use Gc\Component;
 use Gc\Document;
-use Gc\Document\Collection as DocumentCollection;
 use Gc\Media\File;
 use Gc\Property;
 use elFinder\elFinder;
 use elFinder\elFinderConnector;
-use Zend\Json\Json;
 
 /**
  * Media controller

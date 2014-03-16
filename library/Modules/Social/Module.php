@@ -170,6 +170,7 @@ class Module extends AbstractModule
                     $yesterday['shares'] = 0;
                 }
 
+                $lastweek           = array();
                 $decodedLastWeek    = json_decode($stats['sharesweek']->getBody());
                 $lastweek['shares'] = 0;
                 foreach ($decodedLastWeek as $share) {

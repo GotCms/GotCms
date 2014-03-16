@@ -27,11 +27,6 @@
 
 namespace Content\Controller;
 
-use Gc\Mvc\Controller\Action;
-use Gc\Document\Collection as DocumentCollection;
-use Gc\Component;
-use Zend\Json\Json;
-
 /**
  * Index controller
  *
