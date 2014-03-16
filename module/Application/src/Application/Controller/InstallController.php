@@ -176,15 +176,15 @@ class InstallController extends Action
             'value' => is_writable(GC_APPLICATION_PATH . '/data/cache')
         );
         $serverData[] = array(
-            'label' => '/module/Development/views/layout',
+            'label' => '/templates/layout',
             'value' => is_writable(GC_TEMPLATE_PATH . '/layout')
         );
         $serverData[] = array(
-            'label' => '/module/Development/views/view',
+            'label' => '/templates/view',
             'value' => is_writable(GC_TEMPLATE_PATH . '/view')
         );
         $serverData[] = array(
-            'label' => '/module/Development/views/script',
+            'label' => '/templates/script',
             'value' => is_writable(GC_TEMPLATE_PATH . '/script')
         );
         $serverData[] = array(

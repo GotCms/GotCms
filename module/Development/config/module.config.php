@@ -28,17 +28,18 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'DatatypeController'      => 'Development\Controller\DatatypeController',
-            'DevelopmentController'     => 'Development\Controller\IndexController',
-            'DocumentTypeController'  => 'Development\Controller\DocumentTypeController',
-            'LayoutController'        => 'Development\Controller\LayoutController',
-            'ScriptController'          => 'Development\Controller\ScriptController',
-            'ViewController'          => 'Development\Controller\ViewController',
+            'DatatypeController'     => 'Development\Controller\DatatypeController',
+            'DevelopmentController'  => 'Development\Controller\IndexController',
+            'DocumentTypeController' => 'Development\Controller\DocumentTypeController',
+            'LayoutController'       => 'Development\Controller\LayoutController',
+            'ScriptController'       => 'Development\Controller\ScriptController',
+            'ViewController'         => 'Development\Controller\ViewController',
         ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
             'development' => __DIR__ . '/../views',
+            'templates'   =>  GC_APPLICATION_PATH . '/templates',
         ),
     ),
     'router' => array(

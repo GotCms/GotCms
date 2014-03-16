@@ -16,6 +16,7 @@
 - Update to Zend Framework 2.3.0 ([https://github.com/GotCms/GotCms/issues/224](https://github.com/GotCms/GotCms/issues/224))
 - Increase Cache performance ([https://github.com/GotCms/GotCms/issues/223](https://github.com/GotCms/GotCms/issues/223))
 - Stream wrapper should not be activated by default ([https://github.com/GotCms/GotCms/issues/213](https://github.com/GotCms/GotCms/issues/213))
+- Change the path of templates directory ([https://github.com/GotCms/GotCms/issues/228](https://github.com/GotCms/GotCms/issues/228))
 
 
 ##1.2.0 (26 Jan 2014)
