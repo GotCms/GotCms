@@ -27,7 +27,6 @@
 
 namespace Gc\View\Helper;
 
-use Gc\User\Acl as UserAcl;
 use Gc\User\Model as UserModel;
 use Zend\View\Helper\AbstractHelper;
 

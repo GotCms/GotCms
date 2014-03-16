@@ -44,7 +44,7 @@ use Zend\Json\Json;
  * @package    Content
  * @subpackage Controller
  */
-class MediaController extends Action
+class MediaController extends AbstractController
 {
     /**
      * Contains information about acl
@@ -52,36 +52,6 @@ class MediaController extends Action
      * @var array
      */
     protected $aclPage = array('resource' => 'content', 'permission' => 'media');
-
-    /**
-     * Initialize Content Index Controller
-     *
-     * @return void
-     */
-    public function init()
-    {
-        $documents = new DocumentCollection();
-        $documents->load(0);
-
-        $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
-
-        $routes = array(
-            'edit' => 'content/document/edit',
-            'new' => 'content/document/create',
-            'delete' => 'content/document/delete',
-            'copy' => 'content/document/copy',
-            'cut' => 'content/document/cut',
-            'paste' => 'content/document/paste',
-            'refresh' => 'content/document/refresh-treeview',
-        );
-
-        $arrayRoutes = array();
-        foreach ($routes as $key => $route) {
-            $arrayRoutes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
-        }
-
-        $this->layout()->setVariable('routes', Json::encode($arrayRoutes));
-    }
 
     /**
      * File manager action

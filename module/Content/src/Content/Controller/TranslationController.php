@@ -27,12 +27,8 @@
 
 namespace Content\Controller;
 
-use Gc\Mvc\Controller\Action;
-use Gc\Document\Collection as DocumentCollection;
 use Content\Form;
-use Gc\Component;
 use Gc\Core\Translator;
-use Zend\Json\Json;
 use Zend\Http\Headers;
 use Exception;
 use ZipArchive;
@@ -45,7 +41,7 @@ use SplFileObject;
  * @package    Content
  * @subpackage Controller
  */
-class TranslationController extends Action
+class TranslationController extends AbstractController
 {
     /**
      * Contains information about acl
@@ -53,36 +49,6 @@ class TranslationController extends Action
      * @var array
      */
     protected $aclPage = array('resource' => 'content', 'permission' => 'translation');
-
-    /**
-     * Initialize Media Controller
-     *
-     * @return void
-     */
-    public function init()
-    {
-        $documents = new DocumentCollection();
-        $documents->load(0);
-
-        $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
-
-        $routes = array(
-            'edit' => 'content/document/edit',
-            'new' => 'content/document/create',
-            'delete' => 'content/document/delete',
-            'copy' => 'content/document/copy',
-            'cut' => 'content/document/cut',
-            'paste' => 'content/document/paste',
-            'refresh' => 'content/document/refresh-treeview',
-        );
-
-        $arrayRoutes = array();
-        foreach ($routes as $key => $route) {
-            $arrayRoutes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
-        }
-
-        $this->layout()->setVariable('routes', Json::encode($arrayRoutes));
-    }
 
     /**
      * Create Translation

@@ -114,6 +114,7 @@ class Module extends AbstractModule
         );
 
 
+        $stats = array();
         foreach ($requests as $request) {
             $dimension = $metric = $domain = $period = '';
             extract($request);
@@ -146,6 +147,7 @@ class Module extends AbstractModule
             if ($stats['sharesmonth']->getBody() == '[]') {
                 $data = array('noData' => true);
             } else {
+                $yesterday               = array();
                 $shareurls               = json_decode($stats['shares/urlmonth']->getBody());
                 $clickbackurls           = json_decode($stats['clickbacks/urlmonth']->getBody());
                 $yesterday['shares']     = json_decode($stats['sharesday']->getBody());
@@ -185,6 +187,7 @@ class Module extends AbstractModule
                     'n/a';
 
                 $decodedLastMonth    = json_decode($stats['sharesmonth']->getBody());
+                $lastmonth           = array();
                 $lastmonth['shares'] = 0;
                 foreach ($decodedLastMonth as $share) {
                     $lastmonth['shares'] += $share->shares;
@@ -200,6 +203,7 @@ class Module extends AbstractModule
                     $lastmonth['clickbacks'] / $lastmonth['shares'] * 100 . '%' :
                     'n/a';
 
+                $services           = array();
                 $services['shares'] = json_decode($stats['shares/servicemonth']->getBody());
                 if (is_null($services['shares'])) {
                     $services['shares'] = array();

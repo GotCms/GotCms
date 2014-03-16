@@ -27,26 +27,48 @@
 
 namespace Content\Controller;
 
-use Gc\Mvc\Controller\Action;
-use Gc\Document\Collection as DocumentCollection;
 use Gc\Component;
+use Gc\Document\Collection as DocumentCollection;
+use Gc\Mvc\Controller\Action;
 use Zend\Json\Json;
 
 /**
- * Index controller
+ * Document controller
  *
  * @category   Gc_Application
  * @package    Content
  * @subpackage Controller
  */
-class IndexController extends AbstractController
+class AbstractController extends Action
 {
     /**
-     * Display text
+     * Initialize Document Controller
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @return void
      */
-    public function indexAction()
+    public function init()
     {
+        $documents = new DocumentCollection();
+        $documents->load(0);
+
+        $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
+
+        $routes = array(
+            'edit' => 'content/document/edit',
+            'new' => 'content/document/create',
+            'delete' => 'content/document/delete',
+            'copy' => 'content/document/copy',
+            'cut' => 'content/document/cut',
+            'paste' => 'content/document/paste',
+            'publish' => 'content/document/publish',
+            'unpublish' => 'content/document/unpublish',
+        );
+
+        $arrayRoutes = array();
+        foreach ($routes as $key => $route) {
+            $arrayRoutes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
+        }
+
+        $this->layout()->setVariable('routes', Json::encode($arrayRoutes));
     }
 }

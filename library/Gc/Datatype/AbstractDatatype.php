@@ -366,7 +366,7 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Get request object
      *
-     * @return Zend\Mvc\Router\Http\TreeRouteStack
+     * @return TreeRouteStack
      */
     public function getRouter()
     {

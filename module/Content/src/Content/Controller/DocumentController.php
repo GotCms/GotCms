@@ -27,7 +27,6 @@
 
 namespace Content\Controller;
 
-use Gc\Mvc\Controller\Action;
 use Gc\Datatype;
 use Gc\Document\Collection as DocumentCollection;
 use Gc\Document\Model as DocumentModel;
@@ -37,7 +36,6 @@ use Gc\Form\AbstractForm;
 use Content\Form;
 use Gc\Component;
 use Zend\Form as ZendForm;
-use Zend\Json\Json;
 use Exception;
 
 /**
@@ -47,7 +45,7 @@ use Exception;
  * @package    Content
  * @subpackage Controller
  */
-class DocumentController extends Action
+class DocumentController extends AbstractController
 {
     /**
      * Contains information about acl
@@ -55,37 +53,6 @@ class DocumentController extends Action
      * @var array
      */
     protected $aclPage = array('resource' => 'content', 'permission' => 'document');
-
-    /**
-     * Initialize Document Controller
-     *
-     * @return void
-     */
-    public function init()
-    {
-        $documents = new DocumentCollection();
-        $documents->load(0);
-
-        $this->layout()->setVariable('treeview', Component\TreeView::render(array($documents)));
-
-        $routes = array(
-            'edit' => 'content/document/edit',
-            'new' => 'content/document/create',
-            'delete' => 'content/document/delete',
-            'copy' => 'content/document/copy',
-            'cut' => 'content/document/cut',
-            'paste' => 'content/document/paste',
-            'publish' => 'content/document/publish',
-            'unpublish' => 'content/document/unpublish',
-        );
-
-        $arrayRoutes = array();
-        foreach ($routes as $key => $route) {
-            $arrayRoutes[$key] = $this->url()->fromRoute($route, array('id' => 'itemId'));
-        }
-
-        $this->layout()->setVariable('routes', Json::encode($arrayRoutes));
-    }
 
     /**
      * Create document
