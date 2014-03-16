@@ -151,7 +151,7 @@ class AddThisWidget extends AbstractPlugin
             }
         }
 
-        $options = array();
+        $options            = array();
         $addthisIdentifier  = 'addthis:url="' . $url . '" ';
         $addthisIdentifier .= 'addthis:title="' . $title . '"';
         if ($data['settings'] == 'custom_string') {
