@@ -76,7 +76,7 @@ Make sure read and write access are available by apache user/group for these dir
 ###Required
 
 - An HTTP server
-- Php version >= 5.3.3
+- Php version >= 5.3.23
 - XML support
 - FileInfo support
 - Mbstring support

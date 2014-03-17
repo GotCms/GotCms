@@ -15,8 +15,8 @@
     verbose="true"
     colors="true">
     <testsuite name="GotCms Test Suite">
-        <directory suffix="Test.php" phpVersion="5.3.3" phpVersionOperator=">=">./library/</directory>
-        <directory suffix="Test.php" phpVersion="5.3.3" phpVersionOperator=">=">./module/</directory>
+        <directory suffix="Test.php" phpVersion="5.3.23" phpVersionOperator=">=">./library/</directory>
+        <directory suffix="Test.php" phpVersion="5.3.23" phpVersionOperator=">=">./module/</directory>
     </testsuite>
     <logging>
         <log type="coverage-html" target="./logs/coverage" charset="UTF-8"

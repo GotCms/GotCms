@@ -194,8 +194,8 @@ class InstallController extends Action
 
         $phpData   = array();
         $phpData[] = array(
-            'label' => 'Php version >= 5.3.3',
-            'value' => PHP_VERSION_ID >= 50303
+            'label' => 'Php version >= 5.3.23',
+            'value' => PHP_VERSION_ID >= 50323
         );
         $phpData[] = array(
             'label' => 'Xml',
