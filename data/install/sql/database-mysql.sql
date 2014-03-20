@@ -137,14 +137,13 @@ CREATE TABLE `tab` (
 
 CREATE TABLE `core_translate` (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `source` VARCHAR(255) NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `name` (`source`)
+    `source` TEXT NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE `core_translate_locale` (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `destination` VARCHAR(255) NOT NULL,
+    `destination` TEXT NOT NULL,
     `locale` VARCHAR(255) NOT NULL,
     `core_translate_id` INT NOT NULL,
     PRIMARY KEY (`id`)
