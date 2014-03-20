@@ -27,7 +27,7 @@
 
 namespace Gc\Component;
 
-use Gc\Component\IterableInterface;
+use Gc\Registry;
 
 /**
  * Create xml for jQuery treeview
@@ -72,6 +72,10 @@ class TreeView
                 $renderChildren = '';
                 $rel            = ' class="default"';
                 $ins            = '';
+                $requestUri = Registry::get('Application')->getRequest()->getUri()->getPath();
+                if ($requestUri == $iterator->getEditUrl()) {
+                    $rel = ' class="default active"';
+                }
             }
 
 
