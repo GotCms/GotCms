@@ -30,12 +30,21 @@
 <?php $files = $this->tools('unserialize', $this->files); ?>
 <?php if (!empty($files)): ?>
     <div class="pull-right col-lg-10 form-group">
-    <?php if (!$this->isMultiple): ?>
-        <?php $files = array($files); ?>
-    <?php endif; ?>
+      <?php if (!$this->isMultiple): ?>
+          <?php $files = array($files); ?>
+      <?php endif; ?>
 
-    <?php foreach ($files as $file): ?>
-        <a target="_blank" href="<?php echo $this->escapeHtml($file['value']); ?>"><?php echo $this->escapeHtml($file['value']); ?></a><br>
-    <?php endforeach; ?>
+      <?php foreach ($files as $file): ?>
+          <a class="btn btn-link" target="_blank" href="<?php echo $this->escapeHtml($file['value']); ?>"><?php echo $this->escapeHtml($file['value']); ?></a><br>
+      <?php endforeach; ?>
+
+      <button type="button" class="btn btn-danger" id="btn-<?php echo $this->id; ?>"><?php echo $this->escapeHtml($this->translate('Delete')); ?></button><br>
     </div>
+
+    <script type="text/javascript">
+      $('#btn-<?php echo $this->id; ?>').on('click', function() {
+        $('#<?php echo $this->id; ?>-hidden').val('');
+        $(this).closest('.form-group').remove();
+      });
+    </script>
 <?php endif; ?>

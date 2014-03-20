@@ -18,6 +18,7 @@
 - Stream wrapper should not be activated by default ([https://github.com/GotCms/GotCms/issues/213](https://github.com/GotCms/GotCms/issues/213))
 - Change the path of templates directory ([https://github.com/GotCms/GotCms/issues/228](https://github.com/GotCms/GotCms/issues/228))
 - Statement could not be executed (22001 - 1406 - Data too long for column 'destination' at row 1) ([https://github.com/GotCms/GotCms/issues/231](https://github.com/GotCms/GotCms/issues/231))
+- Add button to remove value in upload datatype ([https://github.com/GotCms/GotCms/issues/232](https://github.com/GotCms/GotCms/issues/232))
 
 ##1.2.0 (26 Jan 2014)
 - Can not select "Document Type" on creating children page ([https://github.com/GotCms/GotCms/issues/161](https://github.com/GotCms/GotCms/issues/161))
