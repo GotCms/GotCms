@@ -82,6 +82,7 @@ Make sure read and write access are available by apache user/group for these dir
 - Mbstring support
 - Json support
 - PDO support
+- Intl support
 - A database supported by PDO.
     - MySQL
     - PostgreSQL
