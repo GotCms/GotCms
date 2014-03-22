@@ -42,6 +42,10 @@
     </thead>
     <tbody>
         <?php foreach ($this->modules as $module): ?>
+            <?php if (!$this->acl('modules', $module->getName())): ?>
+                <?php continue; ?>
+            <?php endif; ?>
+
             <tr>
                 <td><?php echo $this->escapeHtml($module->getName()); ?></td>
                 <td class="text-center">
