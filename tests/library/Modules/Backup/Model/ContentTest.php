@@ -204,7 +204,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
         $xpath = $dom->xpath('/gotcms/documents/document[@id="' . $this->document->getId() . '"]/properties/property_value[@id="' . $this->property->getValueModel()->getId() . '"]/property_id');
         $this->assertEquals($this->property->getId(), (string) $xpath[0]);
         $xpath = $dom->xpath('/gotcms/documents/document[@id="' . $this->document->getId() . '"]/properties/property_value[@id="' . $this->property->getValueModel()->getId() . '"]/value');
-        $this->assertEquals($this->property->getValueModel()->getValue(), (string) $xpath[0]);
+        $this->assertEquals(base64_encode($this->property->getValueModel()->getValue()), (string) $xpath[0]);
 
         //Test document types
         $this->assertContains('<document_types>', $result);
