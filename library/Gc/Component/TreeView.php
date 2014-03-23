@@ -72,7 +72,7 @@ class TreeView
                 $renderChildren = '';
                 $rel            = ' class="default"';
                 $ins            = '';
-                $requestUri = Registry::get('Application')->getRequest()->getUri()->getPath();
+                $requestUri     = Registry::get('Application')->getRequest()->getUri()->getPath();
                 if ($requestUri == $iterator->getEditUrl()) {
                     $rel = ' class="default active"';
                 }
