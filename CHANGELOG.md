@@ -20,6 +20,7 @@
 - Statement could not be executed (22001 - 1406 - Data too long for column 'destination' at row 1) ([https://github.com/GotCms/GotCms/issues/231](https://github.com/GotCms/GotCms/issues/231))
 - Add button to remove value in upload datatype ([https://github.com/GotCms/GotCms/issues/232](https://github.com/GotCms/GotCms/issues/232))
 - Intl is required to use Translator ([https://github.com/GotCms/GotCms/issues/229](https://github.com/GotCms/GotCms/issues/229))
+- Backup module does not download all documents ([https://github.com/GotCms/GotCms/issues/233](https://github.com/GotCms/GotCms/issues/233))
 
 ##1.2.0 (26 Jan 2014)
 - Can not select "Document Type" on creating children page ([https://github.com/GotCms/GotCms/issues/161](https://github.com/GotCms/GotCms/issues/161))

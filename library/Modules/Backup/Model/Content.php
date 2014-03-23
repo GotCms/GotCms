@@ -94,11 +94,12 @@ class Content extends Object
     /**
      * Create xml from type
      *
-     * @param string $type Type of element
+     * @param string  $type     Type of element
+     * @param integer $parentId Parent id
      *
      * @return string
      */
-    protected function createXml($type)
+    protected function createXml($type, $parentId = 0)
     {
         $xml = '';
         switch ($type) {
@@ -174,7 +175,7 @@ class Content extends Object
                 break;
             case 'document':
                 $documents = new Document\Collection();
-                $documents->load(0);
+                $documents->load($parentId);
                 $array = $documents->getDocuments();
                 if (empty($array)) {
                     continue;
@@ -193,6 +194,9 @@ class Content extends Object
                     }
 
                     $document->setProperties($array);
+                    if ($document->getChildren()) {
+                        $xml .= $this->createXml('document', $document->getId());
+                    }
                 }
 
                 $xml .= $documents->toXml($documents->getDocuments(), 'documents');
