@@ -94,12 +94,11 @@ class Content extends Object
     /**
      * Create xml from type
      *
-     * @param string  $type     Type of element
-     * @param integer $parentId Parent id
+     * @param string $type Type of element
      *
      * @return string
      */
-    protected function createXml($type, $parentId = 0)
+    protected function createXml($type)
     {
         $xml = '';
         switch ($type) {
@@ -175,14 +174,26 @@ class Content extends Object
                 break;
             case 'document':
                 $documents = new Document\Collection();
-                $documents->load($parentId);
-                $array = $documents->getDocuments();
-                if (empty($array)) {
+                $rows      = $documents->fetchAll(
+                    $documents->select(
+                        function ($select) {
+                            $select->order('sort_order ASC');
+                            $select->order('created_at ASC');
+                        }
+                    )
+                );
+
+                if (empty($rows)) {
                     continue;
                 }
 
+                $documentArray = array();
+                foreach ($rows as $row) {
+                    $documentArray[] = Document\Model::fromArray((array) $row);
+                }
+
                 $propertiyCollection = new Property\Collection();
-                foreach ($documents->getDocuments() as $document) {
+                foreach ($documentArray as $document) {
                     $array      = array();
                     $properties = $propertiyCollection->load(
                         null,
@@ -194,12 +205,10 @@ class Content extends Object
                     }
 
                     $document->setProperties($array);
-                    if ($document->getChildren()) {
-                        $xml .= $this->createXml('document', $document->getId());
-                    }
                 }
 
-                $xml .= $documents->toXml($documents->getDocuments(), 'documents');
+                $xml .= $documents->toXml($documentArray, 'documents');
+
                 break;
         }
 
@@ -430,7 +439,7 @@ class Content extends Object
                             $model->getDocumentTypeId();
                         $viewId         = isset($ids['views'][(integer) $child->view_id]) ?
                             $ids['views'][(integer) $child->view_id] :
-                            $model->getView();
+                            $model->getViewId();
                         $layoutId       = isset($ids['layouts'][(integer) $child->layout_id]) ?
                             $ids['layouts'][(integer) $child->layout_id] :
                             $model->getLayoutId();
