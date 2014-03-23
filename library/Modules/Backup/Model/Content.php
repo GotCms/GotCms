@@ -201,6 +201,8 @@ class Content extends Object
                         $document->getId()
                     )->getProperties();
                     foreach ($properties as $property) {
+                        $value = $property->getValueModel()->getValue();
+                        $property->getValueModel()->setValue(base64_encode($value));
                         $array[] = $property->getValueModel();
                     }
 
@@ -494,7 +496,8 @@ class Content extends Object
                                         isset($ids['properties'][$propertyId]) ?
                                         $ids['properties'][$propertyId] : $propertyId
                                     );
-                                    $valueModel->setValue((string) $value->value);
+
+                                    $valueModel->setValue((string) base64_decode($value->value));
                                     $valueModel->save();
                                 }
                             }
