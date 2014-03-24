@@ -38,14 +38,16 @@
 
 <table class="table clickable table-striped table-hover">
     <colgroup>
+        <col width="30%">
+        <col width="20%">
         <col width="40%">
-        <col width="50%">
         <col width="5%">
         <col width="5%">
     </colgroup>
     <thead>
         <tr>
             <th><?php echo $this->escapeHtml($this->translate('Name')); ?></th>
+            <th><?php echo $this->escapeHtml($this->translate('Identifier')); ?></th>
             <th><?php echo $this->escapeHtml($this->translate('Description')); ?></th>
             <th class="text-center"><?php echo $this->escapeHtml($this->translate('Edit')); ?></th>
             <th class="text-center"><?php echo $this->escapeHtml($this->translate('Delete')); ?></th>
@@ -55,6 +57,7 @@
         <?php foreach ($this->layouts as $layout): ?>
             <tr>
                 <td><?php echo $this->escapeHtml($layout->getName()); ?></td>
+                <td><?php echo $this->escapeHtml($layout->getIdentifier()); ?></td>
                 <td><?php echo $this->escapeHtml($layout->getDescription()); ?></td>
                 <td class="text-center">
                     <?php if($this->acl('development', 'layout/edit')): ?>
