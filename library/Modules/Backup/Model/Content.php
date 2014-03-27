@@ -423,17 +423,15 @@ class Content extends Object
                     break;
                 case 'documents':
                     foreach ($children['children'] as $child) {
-                        $urlKey = (string) $child->url_key;
-                        $model  = Document\Model::fromUrlKey($urlKey);
+                        $urlKey     = (string) $child->url_key;
+                        $model      = Document\Model::fromUrlKey($urlKey);
+                        $attributes = $child->attributes();
+                        $id         = (integer) $attributes['id'];
                         if (empty($model)) {
-                            $attributes = $child->attributes();
-                            $id         = (integer) $attributes['id'];
                             $model      = Document\Model::fromId($id);
                             if (empty($model)) {
                                 $model = new Document\Model();
                             }
-                        } else {
-                            $id = $model->getId();
                         }
 
                         $documentTypeId = isset($ids['document_types'][(integer) $child->document_type_id]) ?
