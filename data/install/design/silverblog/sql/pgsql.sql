@@ -18,51 +18,50 @@ INSERT INTO view VALUES (3, '2012-09-19 19:32:56', '2013-06-02 12:22:18.37399', 
     <section id="main">
         <div id="leftcontainer">
             <h2>Contact Me</h2>
-                <?php echo $this->partial(''flash-messages''); ?>
-                <?php
-                    $return = $this->script(''contact'');
-                    $number_1 = mt_rand(1, 9);
-                    $number_2 = mt_rand(1, 9);
-                    $answer = substr(sha1($number_1+$number_2),5,10);
-                ?>
+            <?php echo $this->partial(''flash-messages''); ?>
+            <?php
+                $return = $this->script(''contact'');
+                $number_1 = mt_rand(1, 9);
+                $number_2 = mt_rand(1, 9);
+                $answer = substr(sha1($number_1+$number_2),5,10);
+            ?>
 
-                <form id="contact" action="<?php echo $this->escapeHtml($this->document(''contact'')->getUrl()); ?>" method="post">
-                    <?php if(!empty($return[''error_message''])): ?>
-                        <div class="notification error"><span><?php echo $this->escapeHtml($return[''error_message'']); ?><span></div>
-                    <?php endif; ?>
+            <form id="contact" action="<?php echo $this->escapeHtml($this->document(''contact'')->getUrl()); ?>" method="post">
+                <?php if(!empty($return[''error_message''])): ?>
+                    <div class="notification error"><span><?php echo $this->escapeHtml($return[''error_message'']); ?><span></div>
+                <?php endif; ?>
 
-                    <div class="form_settings">
-                        <div>
-                            <label>
-                                <span>Name</span>
-                                <input class="input-text" type="text" name="name" value="<?php echo $this->escapeHtml(!empty($return[''name'']) ? $return[''name''] : ''''); ?>">
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <span>Email Address</span>
-                                <input class="input-text" type="text" name="email" value="<?php echo $this->escapeHtml(!empty($return[''email'']) ? $return[''email''] : ''''); ?>">
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <span>Message</span>
-                                <textarea class="input-text" rows="5" cols="50" name="message"><?php echo $this->escapeHtml(!empty($return[''message'']) ? $return[''message''] : ''''); ?></textarea>
-                            </label>
-                        </div>
-                        <div>
-                            <p style="line-height: 1.7em;">
-                                To help prevent spam, please enter the answer to this question:
-                                <span><?php echo $number_1; ?> + <?php echo $number_2; ?> = ?</span>
-                                <input type="text" name="answer" class="input-text"><input type="hidden" name="answer_hash" value="<?php echo $answer; ?>">
-                            </p>
-                        </div>
-                        <div>
-                            <p style="padding-top: 15px"><span>&nbsp;</span><input class="button" type="submit" name="contact_submitted" value="send"></label>
-                        </div>
+                <div class="form_settings">
+                    <div>
+                        <label>
+                            <span>Name</span>
+                            <input class="input-text" type="text" name="name" value="<?php echo $this->escapeHtml(!empty($return[''name'']) ? $return[''name''] : ''''); ?>">
+                        </label>
                     </div>
-                </form>
-            </article>
+                    <div>
+                        <label>
+                            <span>Email Address</span>
+                            <input class="input-text" type="text" name="email" value="<?php echo $this->escapeHtml(!empty($return[''email'']) ? $return[''email''] : ''''); ?>">
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <span>Message</span>
+                            <textarea class="input-text" rows="5" cols="50" name="message"><?php echo $this->escapeHtml(!empty($return[''message'']) ? $return[''message''] : ''''); ?></textarea>
+                        </label>
+                    </div>
+                    <div>
+                        <p style="line-height: 1.7em;">
+                            To help prevent spam, please enter the answer to this question:
+                            <span><?php echo $number_1; ?> + <?php echo $number_2; ?> = ?</span>
+                            <input type="text" name="answer" class="input-text"><input type="hidden" name="answer_hash" value="<?php echo $answer; ?>">
+                        </p>
+                    </div>
+                    <div>
+                        <p style="padding-top: 15px"><span>&nbsp;</span><input class="button" type="submit" name="contact_submitted" value="send"></label>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
 </div>
@@ -163,7 +162,6 @@ INSERT INTO view VALUES (12, '2013-05-27 08:55:24.70931', '2013-06-02 12:22:18.4
 INSERT INTO view VALUES (11, '2013-05-24 19:02:58.584746', '2013-06-02 12:22:18.347423', 'Blog ticket', 'blog-ticket', '<div class="subpage" id="main-wrapper">
     <div class="container">
         <div class="row">
-            <?php echo $this->partial(''blog-categories''); ?>
             <div id="leftcontainer">
                 <?php
                 $return = $this->script(''blog-comment'');
@@ -625,5 +623,3 @@ SELECT pg_catalog.setval('tab_id_seq', 21, true);
 --
 
 SELECT pg_catalog.setval('view_id_seq', 12, true);
-
-
