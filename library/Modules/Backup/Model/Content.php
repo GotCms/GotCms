@@ -428,7 +428,7 @@ class Content extends Object
                         $attributes = $child->attributes();
                         $id         = (integer) $attributes['id'];
                         if (empty($model)) {
-                            $model      = Document\Model::fromId($id);
+                            $model = Document\Model::fromId($id);
                             if (empty($model)) {
                                 $model = new Document\Model();
                             }
