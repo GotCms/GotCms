@@ -44,7 +44,7 @@ class Datatype extends AbstractDatatype
      *
      * @var string
      */
-    protected $name = 'upload';
+    protected $name = 'tinyurl';
 
     /**
      * Retrieve editor
