@@ -77,7 +77,6 @@ class Editor extends AbstractEditor
      */
     public function load()
     {
-        $parameters  = $this->getConfig();
         $property    = $this->getProperty();
         $value       = @unserialize($this->getValue());
         $originalUrl = !empty($value[0]) ? $value[0] : '';

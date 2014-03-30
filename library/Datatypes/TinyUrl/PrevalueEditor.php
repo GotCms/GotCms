@@ -55,6 +55,5 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function load()
     {
-        $config = $this->getConfig();
     }
 }
