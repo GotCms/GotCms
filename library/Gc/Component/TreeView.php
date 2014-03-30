@@ -78,28 +78,9 @@ class TreeView
                 }
             }
 
-
-            $html       .= $rel . '>' . $ins;
-            $id          = $iterator->getId();
-            $isPublished = null;
-            if (method_exists($iterator, 'isPublished')) {
-                $isPublished = $iterator->isPublished();
-            }
-
-            $html .= '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '')
-                . 'href="' . $iterator->getEditUrl() . '"'
-                . ($isPublished === false ? ' class="not-published"' : '') . '>';
-
-            if ($iterator->getIcon() == 'folder') {
-                $html .= '<ins
-                    style="background:url(/media/icons/folder.gif) no-repeat scroll 0 0;"
-                    class="jstree-icon">&nbsp;</ins>';
-            } else {
-                $html .= '<ins
-                    style="background:url(' . $iterator->getIcon() . ') no-repeat scroll 0 0;"
-                    class="jstree-icon">&nbsp;</ins>';
-            }
-
+            $html .= $rel . '>' . $ins;
+            $html .= self::renderLink($iterator);
+            $html .= self::renderIcon($iterator);
             $html .= $iterator->getName() . '</a>';
             $html .= $renderChildren;
             $html .= '</li>';
@@ -112,5 +93,47 @@ class TreeView
         }
 
         return $html;
+    }
+
+    /**
+     * Render Icon
+     *
+     * @param IterableInterface $iterator Document
+     *
+     * @return string
+     */
+    protected static function renderIcon(IterableInterface $iterator)
+    {
+        if ($iterator->getIcon() == 'folder') {
+            $html = '<ins
+                style="background:url(/media/icons/folder.gif) no-repeat scroll 0 0;"
+                class="jstree-icon">&nbsp;</ins>';
+        } else {
+            $html = '<ins
+                style="background:url(' . $iterator->getIcon() . ') no-repeat scroll 0 0;"
+                class="jstree-icon">&nbsp;</ins>';
+        }
+
+        return $html;
+    }
+
+    /**
+     * Render Icon
+     *
+     * @param IterableInterface $iterator Document
+     *
+     * @return string
+     */
+    protected static function renderLink(IterableInterface $iterator)
+    {
+        $id          = $iterator->getId();
+        $isPublished = null;
+        if (method_exists($iterator, 'isPublished')) {
+            $isPublished = $iterator->isPublished();
+        }
+
+        return '<a ' . (!empty($id) ?  'id="' . $id . '" ' : '')
+            . 'href="' . $iterator->getEditUrl() . '"'
+            . ($isPublished === false ? ' class="not-published"' : '') . '>';
     }
 }

@@ -136,16 +136,9 @@ class Navigation
     public function render(array $documents = null, $parentUrl = null)
     {
         $navigation = array();
-        if ($documents === null && !is_null($this->documents)) {
-            $documents = $this->documents;
-        }
-
-        if (!is_array($documents)) {
-            return $navigation;
-        }
+        $documents  = $this->checkDocuments($documents);
 
         foreach ($documents as $document) {
-            $children = $document->getChildren();
             if ($document->isPublished()) {
                 $data            = array();
                 $data['label']   = $document->getName();
@@ -154,16 +147,8 @@ class Navigation
                     . $document->getUrlKey();
                 $data['visible'] = $document->showInNav();
                 $data['active']  = $data['uri'] == $this->requestUri;
-                if (!empty($children) && is_array($children)) {
-                    $data['pages'] = $this->render(
-                        $children,
-                        (empty($parentUrl) ? null : $parentUrl . '/') . $document->getUrlKey()
-                    );
 
-                    if ($this->useActiveBranch()) {
-                        $data['active'] = ($data['active'] or $this->hasActiveChildren($data['pages']));
-                    }
-                }
+                $this->renderChildren($document, $parentUrl, $data);
 
                 $navigation['document-' . $document->getId()] = $data;
             }
@@ -172,7 +157,49 @@ class Navigation
         return $navigation;
     }
 
+    /**
+     * Render children
+     *
+     * @param Document\Model $document  Document model
+     * @param string         $parentUrl Parent url
+     * @param array          &$data     Array
+     *
+     * @return void
+     */
+    protected function renderChildren($document, $parentUrl, &$data)
+    {
+        $children = $document->getChildren();
+        if (!empty($children) && is_array($children)) {
+            $data['pages'] = $this->render(
+                $children,
+                (empty($parentUrl) ? null : $parentUrl . '/') . $document->getUrlKey()
+            );
 
+            if ($this->useActiveBranch()) {
+                $data['active'] = ($data['active'] or $this->hasActiveChildren($data['pages']));
+            }
+        }
+    }
+
+    /**
+     * Check documents
+     *
+     * @param array $documents List of Document\Model
+     *
+     * @return array
+     */
+    protected function checkDocuments($documents)
+    {
+        if ($documents === null && !is_null($this->documents)) {
+            $documents = $this->documents;
+        }
+
+        if (!is_array($documents)) {
+            return array();
+        }
+
+        return $documents;
+    }
     /**
      * Check if page has active children
      *
