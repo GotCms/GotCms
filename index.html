@@ -44,13 +44,13 @@
 <p>Master status: <a href="https://travis-ci.org/GotCms/GotCms"><img src="https://travis-ci.org/GotCms/GotCms.png?branch=master" alt="Build Status"></a>
 <a href="https://coveralls.io/r/GotCms/GotCms"><img src="https://coveralls.io/repos/GotCms/GotCms/badge.png" alt="Coverage Status"></a>
 <a href="https://packagist.org/packages/GotCms/GotCms"><img src="https://poser.pugx.org/GotCms/GotCms/v/stable.png" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/GotCms/GotCms"><img src="https://poser.pugx.org/GotCms/GotCms/v/unstable.png" alt="Latest Unstable Version"></a></p>
+<a href="https://scrutinizer-ci.com/g/GotCms/GotCms/"><img src="https://scrutinizer-ci.com/g/GotCms/GotCms/badges/quality-score.png?s=fa6f300890dac808070c12b50a9f7d19859ca9ec" alt="Scrutinizer Code Quality"></a></p>
 
 <h2>
 <a name="about-gotcms" class="anchor" href="#about-gotcms"><span class="octicon octicon-link"></span></a>About GotCms</h2>
 
 <ul>
-<li>GotCms is a <strong>Content Management System</strong> (CMS) based on <a href="http://framework.zend.com/">Zend Framework 2.2.5</a> which enables you to build websites and powerful online applications.</li>
+<li>GotCms is a <strong>Content Management System</strong> (CMS) based on <a href="http://framework.zend.com/">Zend Framework 2.3.0</a> which enables you to build websites and powerful online applications.</li>
 <li>GotCms <a href="http://got-cms.com">Official site</a>
 </li>
 <li>This product has been made available under the terms of the GNU Lesser General Public License version 3.</li>
@@ -63,9 +63,12 @@
 <a name="release-information" class="anchor" href="#release-information"><span class="octicon octicon-link"></span></a>Release information</h2>
 
 <h3>
-<a name="updates-in-100" class="anchor" href="#updates-in-100"><span class="octicon octicon-link"></span></a>Updates in 1.0.0</h3>
+<a name="updates-in-130" class="anchor" href="#updates-in-130"><span class="octicon octicon-link"></span></a>Updates in 1.3.0</h3>
 
 <p>Please see <a href="https://github.com/GotCms/GotCms/blob/master/CHANGELOG.md">CHANGELOG.md</a>.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <h3>
 <a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>Download</h3>
@@ -73,7 +76,7 @@
 <p>Composer:</p>
 
 <pre><code>$ curl -s https://getcomposer.org/installer | php
-$ php composer.phar create-project gotcms/gotcms path/ 1.0.0
+$ php composer.phar create-project gotcms/gotcms path/ 1.3.0
 </code></pre>
 
 <p>Git:</p>
@@ -83,7 +86,7 @@ $ php composer.phar create-project gotcms/gotcms path/ 1.0.0
 
 <p>Zip archive:</p>
 
-<p><a href="https://github.com/GotCms/GotCms/archive/1.0.0.zip">https://github.com/GotCms/GotCms/archive/1.0.0.zip</a></p>
+<p><a href="https://github.com/GotCms/GotCms/archive/1.3.0.zip">https://github.com/GotCms/GotCms/archive/1.3.0.zip</a></p>
 
 <h3>
 <a name="apache-configuration" class="anchor" href="#apache-configuration"><span class="octicon octicon-link"></span></a>Apache configuration</h3>
@@ -96,11 +99,12 @@ $ php composer.phar create-project gotcms/gotcms path/ 1.0.0
     ServerAdmin admin@got-cms.com
     ServerName got-cms.com
     ServerAlias www.got-cms.com
-    DocumentRoot /var/www/got-cms/public
-    &lt;Directory /var/www/got-cms/public&gt;
+    DocumentRoot /path/to/got-cms/public
+    &lt;Directory /path/to/got-cms/public&gt;
         Options Indexes FollowSymLinks MultiViews
         AllowOverride None
         Order allow,deny
+        Allow from all
         RewriteEngine On
         RewriteCond %{REQUEST_FILENAME} -s [OR]
         RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -123,12 +127,13 @@ $ php composer.phar create-project gotcms/gotcms path/ 1.0.0
 
 <ul>
 <li>An HTTP server</li>
-<li>Php version &gt;= 5.3.3</li>
+<li>Php version &gt;= 5.3.23</li>
 <li>XML support</li>
 <li>FileInfo support</li>
 <li>Mbstring support</li>
 <li>Json support</li>
 <li>PDO support</li>
+<li>Intl support</li>
 <li>A database supported by PDO.
 
 <ul>
@@ -150,7 +155,7 @@ Php configuration:</p>
 <li>Register Globals: Off</li>
 <li>Session Auto Start: Off</li>
 </ul><h3>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+<a name="instructions" class="anchor" href="#instructions"><span class="octicon octicon-link"></span></a>Instructions</h3>
 
 <p>Go to the website, it will redirect you to /install.
 Please follow instructions, there are only five steps:</p>
@@ -168,13 +173,33 @@ Please follow instructions, there are only five steps:</p>
 <p>All contents are stored in database.</p>
 
 <h3>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h3>
+<a name="troubleshooting" class="anchor" href="#troubleshooting"><span class="octicon octicon-link"></span></a>TROUBLESHOOTING</h3>
+
+<p>On Windows with wampserver, if you encounter an <code>403 Forbidden</code>:</p>
+
+<pre><code>&lt;Directory "path/to/got-cms"&gt;
+    Allow from all
+&lt;/Directory&gt;
+</code></pre>
+
+<p>If you have suhosin installed on your server and you can't display pages because stream wrapper isn't register, add the following line in your php.ini:</p>
+
+<pre><code>suhosin.executor.include.whitelist = zend.view://, gc.script://
+</code></pre>
+
+<p>or in your Apache VirtualHost configuration:</p>
+
+<pre><code>php_value suhosin.executor.include.whitelist zend.view://, gc.script://
+</code></pre>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
 <p>If you wish to contribute to GotCms, please read the
 <a href="https://github.com/GotCms/GotCms/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
 
-<h3>
-<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h3>
+<h2>
+<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h2>
 
 <p>Please visits the best framework ever : <a href="http://framework.zend.com/">Zend Framework 2</a></p>
 
