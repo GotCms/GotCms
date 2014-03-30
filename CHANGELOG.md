@@ -21,6 +21,7 @@
 - Add button to remove value in upload datatype ([https://github.com/GotCms/GotCms/issues/232](https://github.com/GotCms/GotCms/issues/232))
 - Intl is required to use Translator ([https://github.com/GotCms/GotCms/issues/229](https://github.com/GotCms/GotCms/issues/229))
 - Backup module does not download all documents ([https://github.com/GotCms/GotCms/issues/233](https://github.com/GotCms/GotCms/issues/233))
+- Add TinyUrl datatype ([https://github.com/GotCms/GotCms/issues/235](https://github.com/GotCms/GotCms/issues/235))
 
 ##1.2.0 (26 Jan 2014)
 - Can not select "Document Type" on creating children page ([https://github.com/GotCms/GotCms/issues/161](https://github.com/GotCms/GotCms/issues/161))

@@ -32,13 +32,14 @@ library/Datatypes/*
 !library/Datatypes/CheckboxList
 !library/Datatypes/DatePicker
 !library/Datatypes/ImageCropper
+!library/Datatypes/jQueryFileUpload
 !library/Datatypes/Mixed
 !library/Datatypes/RadioButtonList
 !library/Datatypes/Textarea
 !library/Datatypes/Textrich
 !library/Datatypes/Textstring
+!library/Datatypes/TinyUrl
 !library/Datatypes/Upload
-!library/Datatypes/jQueryFileUpload
 
 # Modules
 library/Modules/*

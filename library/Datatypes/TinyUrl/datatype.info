@@ -1,0 +1,5 @@
+author = Pierre Rambaud
+date = 2014
+version = "0.1"
+cms_version = ">=1.3.0"
+description = "A custom datatype that generates a shortened URL using tinyurl.com"
