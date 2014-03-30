@@ -184,7 +184,7 @@ class Navigation
     /**
      * Check documents
      *
-     * @param array $documents List of Document\Model
+     * @param mixed $documents List of Document\Model
      *
      * @return array
      */
