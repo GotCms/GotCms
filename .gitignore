@@ -33,6 +33,7 @@ library/Datatypes/*
 !library/Datatypes/DatePicker
 !library/Datatypes/ImageCropper
 !library/Datatypes/jQueryFileUpload
+!library/Datatypes/Markdown
 !library/Datatypes/Mixed
 !library/Datatypes/RadioButtonList
 !library/Datatypes/Textarea
@@ -67,6 +68,7 @@ tests/media/files/test/*
 # Vendor
 vendor/*
 !vendor/elFinder
+!vendor/Parsedown
 !vendor/SVGGraph
 !vendor/Zend
 public/backend/css/gotcms.css

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+##1.4.0 (-- -- 2014)
+- Add Markdown datatype ([https://github.com/GotCms/GotCms/issues/234](https://github.com/GotCms/GotCms/issues/234))
+
 ##1.3.0 (30 Mar 2014)
 - Remove layout when using ajax requests ([https://github.com/GotCms/GotCms/issues/185](https://github.com/GotCms/GotCms/issues/185))
 - Add disable user function ([https://github.com/GotCms/GotCms/issues/195](https://github.com/GotCms/GotCms/issues/195))

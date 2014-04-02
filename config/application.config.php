@@ -52,6 +52,7 @@ return array(
     'autoloader' => array(
         'namespaces' => array(
             'elFinder'  => __DIR__ . '/../vendor/elFinder',
+            'Parsedown' => __DIR__ . '/../vendor/Parsedown',
             'Datatypes' => __DIR__ . '/../library/Datatypes',
             'Gc'        => __DIR__ . '/../library/Gc',
         ),

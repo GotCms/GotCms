@@ -1,0 +1,69 @@
+<?php
+/**
+ * This source file is part of GotCms.
+ *
+ * GotCms is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GotCms is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along
+ * with GotCms. If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ *
+ * PHP Version >=5.3
+ *
+ * @category   Gc_Library
+ * @package    Datatypes
+ * @subpackage Markdown
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
+ */
+/** @var $this \Zend\View\Renderer\PhpRenderer */
+
+?>
+<?php
+$this->headLink()
+    ->appendStylesheet('/datatypes/Markdown/css/solarized-light.css')
+    ->appendStylesheet('/datatypes/Markdown/css/crevasse.css');
+
+$this->headScript()
+    ->appendFile('/datatypes/Markdown/js/jquery.caret.js')
+    ->appendFile('/datatypes/Markdown/js/jquery.scrollTo.min.js')
+    ->appendFile('/datatypes/Markdown/js/marked.js')
+    ->appendFile('/datatypes/Markdown/js/rainbow-custom.min.js')
+    ->appendFile('/datatypes/Markdown/js/crevasse.js');
+?>
+<div class="col-lg-2">
+    <?php echo $this->formLabel($this->textarea); ?>
+</div>
+<div class="col-lg-10" id="markdown<?php echo $this->id; ?>">
+    <ul>
+        <li>
+            <a href="#<?php echo $this->id; ?>-content"><?php echo $this->escapeHtml($this->translate('Write')); ?></a>
+        </li>
+        <li>
+            <a href="#<?php echo $this->id; ?>-preview"><?php echo $this->escapeHtml($this->translate('Preview')); ?></a>
+        </li>
+    </ul>
+
+    <div id="<?php echo $this->id; ?>-content">
+        <?php echo $this->formElement($this->textarea); ?>
+    </div>
+    <div id="<?php echo $this->id; ?>-preview"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function($) {
+        $('#markdown<?php echo $this->id;?>').tabs();
+
+        $('#<?php echo $this->id; ?>').crevasse({
+            previewer: $("#<?php echo $this->id; ?>-preview")
+        });
+    });
+</script>
