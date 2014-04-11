@@ -83,7 +83,7 @@ class DocumentListener extends AbstractListenerAggregate
         if (empty($path)) {
             $document = Document\Model::fromUrlKey('');
         } else {
-            $document = $this->findDocument($path);
+            $document = $this->findDocument($path, $isPreview);
         }
 
         $this->logVisitor($isPreview, $isAdmin);
@@ -93,13 +93,15 @@ class DocumentListener extends AbstractListenerAggregate
     /**
      * Find document from request ui
      *
-     * @param string $path Path from request uri
+     * @param string  $path      Path from request uri
+     * @param boolean $isPreview Is the current page is a preview
      *
      * @return mixed
      */
-    protected function findDocument($path)
+    protected function findDocument($path, $isPreview)
     {
         $explodePath = $this->explodePath($path);
+        $documentTmp = null;
         $children    = null;
         $hasDocument = false;
         $parentId    = null;
