@@ -90,6 +90,13 @@ class DocumentListener extends AbstractListenerAggregate
         $serviceManager->setService('CurrentDocument', empty($document) ? false : $document);
     }
 
+    /**
+     * Find document from request ui
+     *
+     * @param string $path Path from request uri
+     *
+     * @return mixed
+     */
     protected function findDocument($path)
     {
         $explodePath = $this->explodePath($path);
@@ -100,7 +107,10 @@ class DocumentListener extends AbstractListenerAggregate
         foreach ($explodePath as $urlKey) {
             if ($hasDocument === false) {
                 $documentTmp = Document\Model::fromUrlKey($urlKey, $parentId);
-                if (empty($documentTmp) and $parentId === null and ($homeDocument = Document\Model::fromUrlKey('')) !== false) {
+                if (empty($documentTmp) and
+                    $parentId === null and
+                    ($homeDocument = Document\Model::fromUrlKey('')) !== false
+                ) {
                     $documentTmp = Document\Model::fromUrlKey($urlKey, $homeDocument->getId());
                 }
             }
