@@ -32,7 +32,7 @@ use Zend\View\Helper\Partial as ZendPartial;
 use Gc\View\Model as ViewModel;
 use Gc\View\Stream;
 use Gc\View\Resolver\TemplatePathStack;
-use Zend\View\Renderer\RenderererInterface;
+use Zend\View\Renderer\RendererInterface;
 
 /**
  * Retrieve view from identifier
