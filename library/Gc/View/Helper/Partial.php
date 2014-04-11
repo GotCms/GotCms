@@ -32,6 +32,7 @@ use Zend\View\Helper\Partial as ZendPartial;
 use Gc\View\Model as ViewModel;
 use Gc\View\Stream;
 use Gc\View\Resolver\TemplatePathStack;
+use Zend\View\Renderer\RenderererInterface;
 
 /**
  * Retrieve view from identifier
@@ -85,24 +86,7 @@ class Partial extends ZendPartial
         }
 
         $view = $this->cloneView();
-
-        if (!empty($values)) {
-            if (is_array($values)) {
-                $view->vars()->assign($values);
-            } elseif (is_object($values)) {
-                if (null !== ($objectKey = $this->getObjectKey())) {
-                    $view->vars()->offsetSet($objectKey, $values);
-                } elseif (method_exists($values, 'toArray')) {
-                    $view->vars()->assign($values->toArray());
-                } else {
-                    $view->vars()->assign(get_object_vars($values));
-                }
-            }
-        }
-
-        if (self::$streamIsRegistered === false and $this->useStreamWrapper) {
-            Stream::register();
-        }
+        $this->assignVars($view, $values);
 
         try {
             $viewModel = ViewModel::fromIdentifier($name);
@@ -115,7 +99,12 @@ class Partial extends ZendPartial
         }
 
         $name = 'view/' . $name;
+
         if ($this->useStreamWrapper) {
+            if (self::$streamIsRegistered === false) {
+                Stream::register();
+            }
+
             file_put_contents('zend.view://' . $name, $viewModel->getContent());
         }
 
@@ -133,5 +122,30 @@ class Partial extends ZendPartial
         $view->setVars(array());
 
         return $view;
+    }
+
+    /**
+     * Clone the current View
+     *
+     * @param RendererInterface $view   View
+     * @param array             $values Variables to populate in the view
+     *
+     * @return RendererInterface
+     */
+    public function assignVars($view, $values)
+    {
+        if (!empty($values)) {
+            if (is_array($values)) {
+                $view->vars()->assign($values);
+            } elseif (is_object($values)) {
+                if (null !== ($objectKey = $this->getObjectKey())) {
+                    $view->vars()->offsetSet($objectKey, $values);
+                } elseif (method_exists($values, 'toArray')) {
+                    $view->vars()->assign($values->toArray());
+                } else {
+                    $view->vars()->assign(get_object_vars($values));
+                }
+            }
+        }
     }
 }
