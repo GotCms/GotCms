@@ -28,6 +28,8 @@ tools:
             - php
         filter:
             excluded_paths:
+                - 'data/install/translation/*'
+                - 'data/translation/*'
                 - 'vendor/*'
                 - 'tests/*'
                 - 'app/*'

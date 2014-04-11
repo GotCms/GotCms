@@ -202,6 +202,41 @@ class DocumentListenerTest extends \PHPUnit_Framework_TestCase
         $this->deleteDocuments();
     }
 
+    /**
+     * test
+     *
+     * @return void
+     */
+    public function testOnRouteWithHomePage()
+    {
+        $this->createDocuments();
+
+        $route = Mockery::mock('Zend\Mvc\Router\Http\RouteMatch');
+        $route->shouldReceive('getMatchedRouteName')->once()->andReturn('cms');
+        $route->shouldReceive('getParam')->with('path')->once()->andReturn('/children/');
+
+        $events = Mockery::mock('Zend\EventManager\EventInterface');
+        $events->shouldReceive('getRouteMatch')
+            ->once()
+            ->andReturn($route);
+
+        $identity = Mockery::mock('Zend\Authentication\AuthenticationService');
+        $identity->shouldReceive('hasIdentity')->andReturn(false);
+
+        $serviceManager = Mockery::mock('Zend\ServiceManager\ServiceManager');
+        $serviceManager->shouldReceive('get')->with('Auth')->andReturn($identity);
+        $serviceManager->shouldReceive('setService')->with('CurrentDocument', Mockery::any())->once();
+
+        $application = Mockery::mock('Zend\Mvc\Application');
+        $application->shouldReceive('getServiceManager')->once()->andReturn($serviceManager);
+
+        $events->shouldReceive('getApplication')->once()->andReturn($application);
+
+        $this->assertNull($this->object->onRoute($events));
+
+        $this->deleteDocuments();
+    }
+
     protected function createDocuments()
     {
         $this->view = View\Model::fromArray(
@@ -249,6 +284,21 @@ class DocumentListenerTest extends \PHPUnit_Framework_TestCase
 
         $this->documentType->save();
 
+        $this->homeDocument = Document\Model::fromArray(
+            array(
+                'name' => 'Document name',
+                'url_key' => '',
+                'status' => Document\Model::STATUS_ENABLE,
+                'show_in_nav' => true,
+                'user_id' => $this->user->getId(),
+                'document_type_id' => $this->documentType->getId(),
+                'view_id' => $this->view->getId(),
+                'layout_id' => $this->layout->getId(),
+                'parent_id' => 0
+            )
+        );
+        $this->homeDocument->save();
+
         $this->parentDocument = Document\Model::fromArray(
             array(
                 'name' => 'Document name',
@@ -285,6 +335,12 @@ class DocumentListenerTest extends \PHPUnit_Framework_TestCase
     {
         $this->document->delete();
         unset($this->document);
+
+        $this->homeDocument->delete();
+        unset($this->homeDocument);
+
+        $this->parentDocument->delete();
+        unset($this->parentDocument);
 
         $this->view->delete();
         unset($this->view);

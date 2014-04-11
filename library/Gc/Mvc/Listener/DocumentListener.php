@@ -72,71 +72,74 @@ class DocumentListener extends AbstractListenerAggregate
     public function onRoute(EventInterface $event)
     {
         $matchedRouteName = $event->getRouteMatch()->getMatchedRouteName();
-        if ($matchedRouteName === 'cms') {
-            $serviceManager = $event->getApplication()->getServiceManager();
-            $isAdmin        = $serviceManager->get('Auth')->hasIdentity();
-            $isPreview      = ($isAdmin and $event->getRequest()->getQuery()->get('preview') === 'true');
-            $path           = ltrim($event->getRouteMatch()->getParam('path'), '/');
-            if (empty($path)) {
-                $document = Document\Model::fromUrlKey('');
-            } else {
-                $explodePath = $this->explodePath($path);
-                $children    = null;
-                $hasDocument = false;
-                $parentId    = null;
-
-                foreach ($explodePath as $urlKey) {
-                    $document    = null;
-                    $documentTmp = null;
-                    if ($hasDocument === false) {
-                        $documentTmp = Document\Model::fromUrlKey($urlKey, $parentId);
-                        //Test for home as parent_id
-                        if (empty($documentTmp) and ($homeDocument = Document\Model::fromUrlKey('')) !== false) {
-                            $documentTmp = Document\Model::fromUrlKey($urlKey, $homeDocument->getId());
-                        }
-                    }
-
-                    if ((is_array($children)
-                    and !empty($children)
-                    and !in_array($documentTmp, $children)
-                    and $children !== null)
-                    or $documentTmp === null) {
-                        $hasDocument = true;
-                    } else {
-                        if (empty($documentTmp)) {
-                            break;
-                        } else {
-                            if (!$documentTmp->isPublished()) {
-                                if (!$isPreview) {
-                                    break;
-                                }
-                            }
-
-                            $document = $documentTmp;
-                            $parentId = $document->getId();
-                            $children = $document->getChildren();
-                        }
-                    }
-                }
-            }
-
-            //Don't log preview
-            if (!$isPreview and !$isAdmin) {
-                try {
-                    $visitor   = new Visitor();
-                    $session   = new SessionContainer();
-                    $sessionId = $session->getDefaultManager()->getId();
-
-                    $session->visitorId = $visitor->getVisitorId($sessionId);
-                } catch (Exception $e) {
-                    //don't care
-                }
-            }
-
-            $serviceManager->setService('CurrentDocument', empty($document) ? false : $document);
+        if ($matchedRouteName !== 'cms') {
+            return;
         }
+
+        $serviceManager = $event->getApplication()->getServiceManager();
+        $isAdmin        = $serviceManager->get('Auth')->hasIdentity();
+        $isPreview      = ($isAdmin and $event->getRequest()->getQuery()->get('preview') === 'true');
+        $path           = ltrim($event->getRouteMatch()->getParam('path'), '/');
+        if (empty($path)) {
+            $document = Document\Model::fromUrlKey('');
+        } else {
+            $document = $this->findDocument($path);
+        }
+
+        $this->logVisitor($isPreview, $isAdmin);
+        $serviceManager->setService('CurrentDocument', empty($document) ? false : $document);
     }
 
+    protected function findDocument($path)
+    {
+        $explodePath = $this->explodePath($path);
+        $children    = null;
+        $hasDocument = false;
+        $parentId    = null;
+
+        foreach ($explodePath as $urlKey) {
+            if ($hasDocument === false) {
+                $documentTmp = Document\Model::fromUrlKey($urlKey, $parentId);
+                if (empty($documentTmp) and $parentId === null and ($homeDocument = Document\Model::fromUrlKey('')) !== false) {
+                    $documentTmp = Document\Model::fromUrlKey($urlKey, $homeDocument->getId());
+                }
+            }
+
+            if (is_array($children) and !in_array($documentTmp, $children)) {
+                $hasDocument = true;
+            } else {
+                if (!empty($documentTmp) and ($documentTmp->isPublished() or $isPreview)) {
+                    $parentId = $documentTmp->getId();
+                    $children = $documentTmp->getChildren();
+                }
+            }
+        }
+
+        return $documentTmp;
+    }
+
+    /**
+     * Log visitor informations
+     *
+     * @param boolean $isPreview Is the current page is a preview
+     * @param boolean $isAdmin   Is an admin is connected
+     *
+     * @return void
+     */
+    protected function logVisitor($isPreview, $isAdmin)
+    {
+        if (!$isPreview and !$isAdmin) {
+            try {
+                $visitor   = new Visitor();
+                $session   = new SessionContainer();
+                $sessionId = $session->getDefaultManager()->getId();
+
+                $session->visitorId = $visitor->getVisitorId($sessionId);
+            } catch (Exception $e) {
+                //don't care
+            }
+        }
+    }
     /**
      * Explode path
      *
