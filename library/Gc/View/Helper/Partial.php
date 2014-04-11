@@ -79,7 +79,7 @@ class Partial extends ZendPartial
      *
      * @return mixed
      */
-    public function __invoke($name = null, $values = null)
+    public function __invoke($name = null, $values = array())
     {
         if (empty($name)) {
             return $this;
