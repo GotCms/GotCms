@@ -51,6 +51,95 @@ class Visitor extends AbstractTable
     protected $name = 'log_visitor';
 
     /**
+     * Retrieve user Agent
+     *
+     * @return string
+     */
+    protected function getUserAgent()
+    {
+        $userAgent = empty($_SERVER['HTTP_USER_AGENT']) ? null : $_SERVER['HTTP_USER_AGENT'];
+        if (!ctype_print($userAgent)) {
+            $userAgent = null;
+        }
+
+        return $userAgent;
+    }
+
+    /**
+     * Retrieve accept charset
+     *
+     * @return string
+     */
+    protected function getAcceptCharset()
+    {
+        $acceptCharset = empty($_SERVER['HTTP_ACCEPT_CHARSET']) ? null : $_SERVER['HTTP_ACCEPT_CHARSET'];
+        if (!ctype_print($acceptCharset)) {
+            $acceptCharset = null;
+        }
+
+        return $acceptCharset;
+    }
+
+    /**
+     * Retrieve accept language
+     *
+     * @return string
+     */
+    protected function getAcceptLanguage()
+    {
+        $acceptLanguage = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? null : $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        if (!ctype_print($acceptLanguage)) {
+            $acceptLanguage = null;
+        }
+
+        return $acceptLanguage;
+    }
+
+    /**
+     * Retrieve server address
+     *
+     * @return string
+     */
+    protected function getServerAddr()
+    {
+        $serverAddr = empty($_SERVER['SERVER_ADDR']) ? null : $_SERVER['SERVER_ADDR'];
+        $validator  = new ValidateIp();
+        return $validator->isValid($serverAddr) ? ip2long($serverAddr) : null;
+    }
+
+    /**
+     * Retrieve remote address
+     *
+     * @return string
+     */
+    protected function getRemoteAddr()
+    {
+        $remoteAddr = empty($_SERVER['REMOTE_ADDR']) ? null : $_SERVER['REMOTE_ADDR'];
+        $validator  = new ValidateIp();
+        return $validator->isValid($remoteAddr) ? ip2long($remoteAddr) : null;
+    }
+
+    /**
+     * Retrieve request uri
+     *
+     * @return string
+     */
+    protected function getRequestUri()
+    {
+        return empty($_SERVER['REQUEST_URI']) ? '' : substr($_SERVER['REQUEST_URI'], 0, 255);
+    }
+
+    /**
+     * Retrieve referer
+     *
+     * @return string
+     */
+    protected function getReferer()
+    {
+        return empty($_SERVER['HTTP_REFERER']) ? null : substr($_SERVER['HTTP_REFERER'], 0, 255);
+    }
+
+    /**
      * Get visitor id
      *
      * @param string $sessionId Session Id
@@ -59,38 +148,14 @@ class Visitor extends AbstractTable
      */
     public function getVisitorId($sessionId)
     {
-        $userAgent      = empty($_SERVER['HTTP_USER_AGENT']) ? null : $_SERVER['HTTP_USER_AGENT'];
-        $acceptCharset  = empty($_SERVER['HTTP_ACCEPT_CHARSET']) ? null : $_SERVER['HTTP_ACCEPT_CHARSET'];
-        $acceptLanguage = empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? null : $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-        $serverAddr     = empty($_SERVER['SERVER_ADDR']) ? null : $_SERVER['SERVER_ADDR'];
-        $remoteAddr     = empty($_SERVER['REMOTE_ADDR']) ? null : $_SERVER['REMOTE_ADDR'];
-        $requestUri     = empty($_SERVER['REQUEST_URI']) ? '' : substr($_SERVER['REQUEST_URI'], 0, 255);
-        $referer        = empty($_SERVER['HTTP_REFERER']) ? null : substr($_SERVER['HTTP_REFERER'], 0, 255);
-
-        if (!ctype_print($userAgent)) {
-            $userAgent = null;
-        }
-
-        if (!ctype_print($acceptCharset)) {
-            $acceptCharset = null;
-        }
-
-        if (!ctype_print($acceptLanguage)) {
-            $acceptLanguage = null;
-        }
-
-        $validator  = new ValidateIp();
-        $serverAddr = $validator->isValid($serverAddr) ? ip2long($serverAddr) : null;
-        $remoteAddr = $validator->isValid($remoteAddr) ? ip2long($remoteAddr) : null;
-
-        $urlId = $this->getUrlId($requestUri, $referer);
+        $urlId = $this->getUrlId($this->getRequestUri(), $this->getReferer());
 
         $select = new Select();
         $select->from(array('lv' => $this->name))
             ->columns(array('id'))
             ->where->equalTo('session_id', $sessionId)
-            ->equalTo('http_user_agent', empty($userAgent) ? null : $userAgent)
-            ->equalTo('remote_addr', $remoteAddr);
+            ->equalTo('http_user_agent', $this->getUserAgent())
+            ->equalTo('remote_addr', $this->getRemoteAddr());
 
         $visitorId = $this->fetchOne($select);
 
@@ -100,11 +165,11 @@ class Visitor extends AbstractTable
                 ->values(
                     array(
                         'session_id' => $sessionId,
-                        'http_user_agent' => $userAgent,
-                        'http_accept_charset' => $acceptCharset,
-                        'http_accept_language' => $acceptLanguage,
-                        'server_addr' => $serverAddr,
-                        'remote_addr' => $remoteAddr,
+                        'http_user_agent' => $this->getUserAgent(),
+                        'http_accept_charset' => $this->getAcceptCharset(),
+                        'http_accept_language' => $this->getAcceptLanguage(),
+                        'server_addr' => $this->getServerAddr(),
+                        'remote_addr' => $this->getRemoteAddr(),
                     )
                 );
             $this->execute($insert);
