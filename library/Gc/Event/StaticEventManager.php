@@ -114,7 +114,7 @@ class StaticEventManager extends SharedEventManager
      *
      * Can emulate triggerUntil() if the last argument provided is a callback.
      *
-     * @param string|array      $id       Identifier(s) for event emitting component(s)
+     * @param string            $id       Identifier(s) for event emitting component(s)
      * @param string            $event    Event
      * @param string|object     $target   Object calling emit, or symbol describing target (such as static method name)
      * @param array|ArrayAccess $argv     Array of arguments; typically, should be associative

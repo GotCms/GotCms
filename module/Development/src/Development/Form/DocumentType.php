@@ -272,7 +272,7 @@ class DocumentType extends AbstractForm
             $required->setValue((string) $property->isRequired());
             $propertyId->setValue($property->getId());
             $propertyFieldsetName = $property->getId();
-        } elseif (is_array($property)) {
+        } else {
             $name->setValue($property['name']);
             $identifier->setValue($property['identifier']);
             $tab->setValue($property['tab']);
@@ -395,7 +395,7 @@ class DocumentType extends AbstractForm
             $tabId->setValue($tab->getId());
             $tabFieldsetName = $tab->getId();
 
-        } elseif (is_array($tab)) {
+        } else {
             $name->setValue($tab['name']);
             $description->setValue($tab['description']);
             $tabId->setValue(str_replace('tab', '', $tab['id']));

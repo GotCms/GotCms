@@ -105,7 +105,7 @@ class Action extends AbstractActionController
     /**
      * Initiliaze
      *
-     * @return void
+     * @return mixed
      */
     public function init()
     {
