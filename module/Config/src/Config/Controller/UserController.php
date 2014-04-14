@@ -303,6 +303,6 @@ class UserController extends Action
     {
         $this->getResponse()->setStatusCode(403);
         $this->getResponse()->isForbidden(true);
-        $this->layout()->module = null;
+        $this->layout()->setVariable('module', null);
     }
 }

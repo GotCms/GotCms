@@ -157,8 +157,8 @@ class Action extends AbstractActionController
             }
         }
 
-        $this->layout()->routeParams = $this->getRouteMatch()->getParams();
-        $this->layout()->version     = \Gc\Version::VERSION;
+        $this->layout()->setVariable('routeParams', $this->getRouteMatch()->getParams());
+        $this->layout()->setVariable('version', \Gc\Version::VERSION);
 
         $this->useFlashMessenger(false);
     }
@@ -232,7 +232,7 @@ class Action extends AbstractActionController
             }
         }
 
-        $this->layout()->flashMessages = $flashMessages;
+        $this->layout()->setVariable('flashMessages', $flashMessages);
     }
 
     /**

@@ -50,8 +50,8 @@ abstract class AbstractController extends Action
             return $result;
         }
 
-        $routeParams                 = $this->layout()->routeParams;
-        $routeParams['module']       = 'module';
-        $this->layout()->routeParams = $routeParams;
+        $routeParams           = $this->layout()->getVariable('routeParams');
+        $routeParams['module'] = 'module';
+        $this->layout()->setVariable('routeParams', $routeParams);
     }
 }
