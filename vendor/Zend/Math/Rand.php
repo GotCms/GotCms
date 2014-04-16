@@ -39,7 +39,7 @@ abstract class Rand
         if ($length <= 0) {
             return false;
         }
-        $bytes = '';
+
         if (function_exists('openssl_random_pseudo_bytes')
             && ((PHP_VERSION_ID >= 50304)
             || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
@@ -77,7 +77,7 @@ abstract class Rand
      */
     public static function getAlternativeGenerator()
     {
-        if (!is_null(static::$generator)) {
+        if (null !== static::$generator) {
             return static::$generator;
         }
         if (!class_exists('RandomLib\\Factory')) {

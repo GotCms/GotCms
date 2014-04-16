@@ -206,10 +206,6 @@ class InstallController extends Action
             'value' => extension_loaded('fileinfo')
         );
         $phpData[] = array(
-            'label' => 'Intl',
-            'value' => extension_loaded('intl')
-        );
-        $phpData[] = array(
             'label' => 'Pdo',
             'value' => extension_loaded('pdo')
         );

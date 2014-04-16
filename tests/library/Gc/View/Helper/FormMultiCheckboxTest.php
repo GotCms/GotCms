@@ -87,7 +87,7 @@ class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
         $markup = $this->object->render($this->element);
 
         $this->assertContains('type="checkbox"', $markup);
-        $this->assertContains('name="foo[]"', $markup);
+        $this->assertContains('name="foo&#x5B;&#x5D;"', $markup);
     }
 
     /**
@@ -110,6 +110,6 @@ class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
         $markup = $this->object->render($this->element);
 
         $this->assertContains('type="checkbox"', $markup);
-        $this->assertContains('name="foo[]"', $markup);
+        $this->assertContains('name="foo&#x5B;&#x5D;"', $markup);
     }
 }
