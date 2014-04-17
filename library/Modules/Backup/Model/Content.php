@@ -614,7 +614,6 @@ class Content extends Object
         $documentTypes = array();
 
         $errors     = array();
-        $translator = $this->serviceLocator->get('MvcTranslator');
         $ids        = array(
             'datatypes'      => array(),
             'views'          => array(),
