@@ -33,6 +33,7 @@ use Zend\ModuleManager\ModuleEvent;
 use Zend\ModuleManager\ModuleManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 use Zend\Loader\AutoloaderFactory;
 
 /**
@@ -85,6 +86,36 @@ class ModuleManagerFactory implements FactoryInterface
         $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
         $serviceListener  = new Listener\ServiceListener($serviceLocator);
 
+        $this->prepareServices($serviceListener, $serviceLocator);
+
+        $moduleManager = new ModuleManager($array, $application->getEventManager());
+        $moduleManager->getEventManager()->attachAggregate($defaultListeners);
+        $moduleManager->getEventManager()->attachAggregate($serviceListener);
+        $moduleManager->loadModules();
+
+
+        $config = $moduleManager->getEvent()->getConfigListener()->getMergedConfig(false);
+        $this->prepareConfig($serviceLocator, $config);
+
+        foreach ($moduleManager->getLoadedModules() as $module) {
+            if (method_exists($module, 'onBootstrap')) {
+                $module->onBootstrap($application->getMvcEvent());
+            }
+        }
+
+        return $moduleManager;
+    }
+
+    /**
+     * Prepare services
+     *
+     * @param Listener\ServiceListener $serviceListener Service Listener
+     * @param ServiceManager           $serviceLocator  Service Manager
+     *
+     * @return void
+     */
+    protected function prepareServices($serviceListener, $serviceLocator)
+    {
         $serviceListener->addServiceManager(
             $serviceLocator,
             'service_manager',
@@ -151,14 +182,18 @@ class ModuleManagerFactory implements FactoryInterface
             'Zend\ModuleManager\Feature\InputFilterProviderInterface',
             'getInputFilterConfig'
         );
+    }
 
-        $moduleManager = new ModuleManager($array, $application->getEventManager());
-        $moduleManager->getEventManager()->attachAggregate($defaultListeners);
-        $moduleManager->getEventManager()->attachAggregate($serviceListener);
-        $moduleManager->loadModules();
-
-
-        $config = $moduleManager->getEvent()->getConfigListener()->getMergedConfig(false);
+    /**
+     * Prepare services
+     *
+     * @param ServiceManager $serviceLocator  Service Manager
+     * @param array          $config          Configuration
+     *
+     * @return void
+     */
+    protected function prepareConfig($serviceLocator, $config)
+    {
         if (isset($config['router']['routes'])) {
             $router = $serviceLocator->get('Router');
             $routes = isset($config['router']['routes']) ? $config['router']['routes'] : array();
@@ -180,12 +215,5 @@ class ModuleManagerFactory implements FactoryInterface
             }
         }
 
-        foreach ($moduleManager->getLoadedModules() as $module) {
-            if (method_exists($module, 'onBootstrap')) {
-                $module->onBootstrap($application->getMvcEvent());
-            }
-        }
-
-        return $moduleManager;
     }
 }
