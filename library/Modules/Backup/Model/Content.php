@@ -613,8 +613,8 @@ class Content extends Object
         ksort($orders);
         $documentTypes = array();
 
-        $errors     = array();
-        $ids        = array(
+        $errors = array();
+        $ids    = array(
             'datatypes'      => array(),
             'views'          => array(),
             'layouts'        => array(),

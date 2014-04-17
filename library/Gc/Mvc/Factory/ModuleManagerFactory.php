@@ -187,8 +187,8 @@ class ModuleManagerFactory implements FactoryInterface
     /**
      * Prepare services
      *
-     * @param ServiceManager $serviceLocator  Service Manager
-     * @param array          $config          Configuration
+     * @param ServiceManager $serviceLocator Service Manager
+     * @param array          $config         Configuration
      *
      * @return void
      */
