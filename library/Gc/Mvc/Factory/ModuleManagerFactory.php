@@ -69,9 +69,14 @@ class ModuleManagerFactory implements FactoryInterface
 
         foreach ($modules as $module) {
             $array[] = $module->getName();
+            $path    = GC_APPLICATION_PATH . '/library/Modules/' . $module->getName();
+            if (file_exists($path) === false) {
+                $path = GC_APPLICATION_PATH . '/extensions/Modules/' . $module->getName();
+            }
+
             $autoloader->registerNamespace(
                 $module->getName(),
-                GC_APPLICATION_PATH . '/library/Modules/' . $module->getName()
+                $path
             );
         }
 
@@ -80,7 +85,10 @@ class ModuleManagerFactory implements FactoryInterface
         $application   = $serviceLocator->get('Application');
         $configuration = $serviceLocator->get('ApplicationConfig');
 
-        $configuration['module_listener_options']['module_paths'] = array('./library/Modules');
+        $configuration['module_listener_options']['module_paths'] = array(
+            './library/Modules',
+            './extensions/Modules'
+        );
 
         $listenerOptions  = new Listener\ListenerOptions($configuration['module_listener_options']);
         $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);

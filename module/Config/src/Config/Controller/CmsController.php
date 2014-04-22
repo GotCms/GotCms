@@ -198,9 +198,9 @@ class CmsController extends Action
 
         //Check modules and datatypes
         $datatypesErrors = array();
-        $this->checkVersion(glob(GC_APPLICATION_PATH . '/library/Datatypes/*'), 'datatype', $datatypesErrors);
+        $this->checkVersion($this->getServiceLocator()->get('DatatypesList'), 'datatype', $datatypesErrors);
         $modulesErrors = array();
-        $this->checkVersion(glob(GC_APPLICATION_PATH . '/library/Modules/*'), 'module', $modulesErrors);
+        $this->checkVersion($this->getServiceLocator()->get('ModulesList'), 'module', $modulesErrors);
 
         return array(
             'gitProject'      => file_exists(GC_APPLICATION_PATH . '/.git'),

@@ -83,13 +83,10 @@ class PrevalueEditor extends AbstractPrevalueEditor
      */
     public function load()
     {
-        $config = $this->getConfig();
-
-        $path    = GC_APPLICATION_PATH . '/library/Datatypes/';
-        $listDir = glob($path . '*', GLOB_ONLYDIR);
+        $config  = $this->getConfig();
+        $listDir = $this->getDatatype()->getDatatypesList();
         $options = array();
         foreach ($listDir as $dir) {
-            $dir           = str_replace($path, '', $dir);
             $options[$dir] = $dir;
         }
 

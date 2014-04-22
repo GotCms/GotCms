@@ -211,7 +211,7 @@ class CacheService implements EventManagerAwareInterface
         if ($serviceManager->has('CurrentDocument')
             and $serviceManager->get('CurrentDocument')->canBeCached() === false
         ) {
-            return;
+            return false;
         }
 
         return true;

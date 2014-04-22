@@ -50,8 +50,6 @@ class Datatype extends AbstractForm
         $this->setAttribute('class', 'relative form-horizontal');
         $this->setAttribute('enctype', 'application/x-www-form-urlencoded');
 
-
-
         $name = new Element\Text('name');
         $name->setLabel('Name')
             ->setLabelAttributes(
@@ -64,11 +62,8 @@ class Datatype extends AbstractForm
         $this->add($name);
 
         $model   = new Element\Select('model');
-        $path    = GC_APPLICATION_PATH . '/library/Datatypes/';
-        $listDir = glob($path . '*', GLOB_ONLYDIR);
         $options = array();
-        foreach ($listDir as $dir) {
-            $dir           = str_replace($path, '', $dir);
+        foreach ($this->getServiceLocator()->get('DatatypesList') as $dir) {
             $options[$dir] = $dir;
         }
 

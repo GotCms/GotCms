@@ -29,10 +29,12 @@ namespace Gc\Form;
 
 use Gc\Exception;
 use Gc\Db\AbstractTable;
+use Gc\Registry;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Form\Form;
 use Zend\Form\Fieldset;
 use Zend\Form\Element;
+use Zend\ServiceManager\ServiceManager;
 use Zend\Validator\Db\NoRecordExists;
 
 /**
@@ -203,5 +205,15 @@ abstract class AbstractForm extends Form
         }
 
         return null;
+    }
+
+    /**
+     * Retrieve Service Manager
+     *
+     * @return ServiceManager
+     */
+    public function getServiceLocator()
+    {
+        return Registry::get('Application')->getServiceManager();
     }
 }

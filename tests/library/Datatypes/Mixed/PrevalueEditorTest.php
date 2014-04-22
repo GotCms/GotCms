@@ -72,6 +72,7 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
         $datatype->setRequest($application->getServiceManager()->get('Request'));
         $datatype->setRouter($application->getServiceManager()->get('Router'));
         $datatype->setHelperManager($application->getServiceManager()->get('viewhelpermanager'));
+        $datatype->setDatatypesList($application->getServiceManager()->get('DatatypesList'));
         $datatype->load($this->datatype);
         $this->object = $datatype->getPrevalueEditor();
     }

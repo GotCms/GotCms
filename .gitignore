@@ -27,30 +27,16 @@ public/media/*
 public/media/files/*
 
 # Datatypes
-library/Datatypes/*
-!library/Datatypes/Boolean
-!library/Datatypes/CheckboxList
-!library/Datatypes/DatePicker
-!library/Datatypes/ImageCropper
-!library/Datatypes/jQueryFileUpload
-!library/Datatypes/Markdown
-!library/Datatypes/Mixed
-!library/Datatypes/RadioButtonList
-!library/Datatypes/Textarea
-!library/Datatypes/Textrich
-!library/Datatypes/Textstring
-!library/Datatypes/TinyUrl
-!library/Datatypes/Upload
+extensions/Datatypes/*
+!extensions/Datatypes/.gitignore
 
 # Modules
-library/Modules/*
-!library/Modules/ActivityLog
-!library/Modules/Backup
-!library/Modules/Blog
-!library/Modules/Multilingual
-!library/Modules/Search
-!library/Modules/Social
-!library/Modules/Sitemap
+extensions/Modules/*
+!extensions/Modules/.gitignore
+
+# Modules
+extensions/ZfModules/*
+!extensions/ZfModules/.gitignore
 
 # Test
 tests/TestConfiguration.php

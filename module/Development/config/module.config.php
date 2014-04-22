@@ -26,6 +26,58 @@
  */
 
 return array(
+    'service_manager' => array(
+        'factories' => array(
+            'DatatypesList' => function () {
+                $datatypes = array();
+                $origin    = new DirectoryIterator(GC_APPLICATION_PATH . '/library/Datatypes/');
+                foreach ($origin as $dir) {
+                    if ($dir->isDot() or !$dir->isDir()) {
+                        continue;
+                    }
+
+                    $datatypes[$dir->getPathname()] = $dir->getFileName();
+                }
+
+                $extensions = new DirectoryIterator(GC_APPLICATION_PATH . '/extensions/Datatypes/');
+                foreach ($extensions as $dir) {
+                    if ($dir->isDot() or !$dir->isDir()) {
+                        continue;
+                    }
+
+                    $datatypes[$dir->getPathname()] = $dir->getFileName();
+                }
+
+                asort($datatypes);
+
+                return $datatypes;
+            },
+            'ModulesList' => function () {
+                $modules = array();
+                $origin    = new DirectoryIterator(GC_APPLICATION_PATH . '/library/Modules/');
+                foreach ($origin as $dir) {
+                    if ($dir->isDot() or !$dir->isDir()) {
+                        continue;
+                    }
+
+                    $modules[$dir->getPathname()] = $dir->getFileName();
+                }
+
+                $extensions = new DirectoryIterator(GC_APPLICATION_PATH . '/extensions/Modules/');
+                foreach ($extensions as $dir) {
+                    if ($dir->isDot() or !$dir->isDir()) {
+                        continue;
+                    }
+
+                    $modules[$dir->getPathname()] = $dir->getFileName();
+                }
+
+                asort($modules);
+
+                return $modules;
+            }
+        ),
+    ),
     'controllers' => array(
         'invokables' => array(
             'DatatypeController'     => 'Development\Controller\DatatypeController',

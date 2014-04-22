@@ -97,6 +97,13 @@ abstract class AbstractDatatype extends AbstractTable
     protected $router;
 
     /**
+     * Datatypes list
+     *
+     * @var array
+     */
+    protected $datatypesList;
+
+    /**
      * Request
      *
      * @var \Zend\View\HelperPluginManager
@@ -364,7 +371,7 @@ abstract class AbstractDatatype extends AbstractTable
     }
 
     /**
-     * Get request object
+     * Get route object
      *
      * @return TreeRouteStack
      */
@@ -374,7 +381,7 @@ abstract class AbstractDatatype extends AbstractTable
     }
 
     /**
-     * Set request object
+     * Set route object
      *
      * @param TreeRouteStack $router Router
      *
@@ -383,6 +390,29 @@ abstract class AbstractDatatype extends AbstractTable
     public function setRouter(TreeRouteStack $router)
     {
         $this->router = $router;
+        return $this;
+    }
+
+    /**
+     * Get datatypes list object
+     *
+     * @return array
+     */
+    public function getDatatypesList()
+    {
+        return $this->datatypesList;
+    }
+
+    /**
+     * Set datatypes list object
+     *
+     * @param array $array Array of datatypes
+     *
+     * @return AbstractDatatype
+     */
+    public function setDatatypesList(array $array)
+    {
+        $this->datatypesList = $array;
         return $this;
     }
 }

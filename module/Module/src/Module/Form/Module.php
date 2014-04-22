@@ -52,16 +52,13 @@ class Module extends AbstractForm
         $this->setAttribute('class', 'relative');
 
         $fileInfo = new Info();
-        $path     = GC_APPLICATION_PATH . '/library/Modules/';
-        $listDir  = glob($path . '*', GLOB_ONLYDIR);
 
         $modulesInfos = array();
         $options      = array('' => 'Select an option');
-        foreach ($listDir as $dir) {
-            $dir           = str_replace($path, '', $dir);
+        foreach ($this->getServiceLocator()->get('ModulesList') as $path => $dir) {
             $options[$dir] = $dir;
 
-            $configFile = $path . $dir . '/module.info';
+            $configFile = $path . '/module.info';
             if ($fileInfo->fromFile($configFile) === true) {
                 $modulesInfos[$dir] = $fileInfo->render();
             }

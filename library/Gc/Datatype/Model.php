@@ -246,6 +246,7 @@ class Model extends AbstractTable
         $object->setRequest($serviceManager->get('Request'))
             ->setRouter($serviceManager->get('Router'))
             ->setHelperManager($serviceManager->get('viewhelpermanager'))
+            ->setDatatypesList($serviceManager->get('DatatypesList'))
             ->load($datatype, $documentId);
         return $object;
     }

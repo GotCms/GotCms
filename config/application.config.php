@@ -24,16 +24,28 @@
  * @link     http://www.got-cms.com
  */
 
+$modules = array(
+    'Application',
+    'Admin',
+    'Config',
+    'Content',
+    'Development',
+    'Module',
+    'Statistics',
+);
+
+$path       = GC_APPLICATION_PATH . '/extensions/ZfModules/';
+$extensions = new DirectoryIterator($path);
+foreach ($extensions as $dir) {
+    if ($dir->isDot() or !$dir->isDir()) {
+        continue;
+    }
+
+    $modules[] = $dir->getFileName();
+}
+
 return array(
-    'modules' => array(
-        'Application',
-        'Admin',
-        'Config',
-        'Content',
-        'Development',
-        'Module',
-        'Statistics',
-    ),
+    'modules' => $modules,
     'module_listener_options' => array(
         'config_glob_paths'    => array(
             'config/autoload/{,*.}{local,global}.php',
@@ -43,6 +55,7 @@ return array(
         'module_paths' => array(
             './module',
             './vendor',
+            './extensions/ZfModules',
         ),
     ),
     'service_manager' => array(
@@ -55,6 +68,7 @@ return array(
             'Parsedown' => __DIR__ . '/../vendor/Parsedown',
             'Datatypes' => __DIR__ . '/../library/Datatypes',
             'Gc'        => __DIR__ . '/../library/Gc',
+            __DIR__ . '/../extensions/Datatypes',
         ),
         'autoregister_zf' => true,
     ),
