@@ -287,6 +287,7 @@ return array (
     'Secure frontend base path' => 'Chemin sécursié pour le site',
     'Unsecure cdn base path' => 'Chemin sécurisé pour le cdn',
     'Secure cdn base path' => 'Chemin sécurisé pour le cdn',
+    'Can be cached' => 'Peut être mis en cache',
 
 
     // Zend\I18n\Validator\Alnum

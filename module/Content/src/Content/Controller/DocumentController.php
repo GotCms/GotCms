@@ -198,6 +198,11 @@ class DocumentController extends AbstractController
                     false :
                     $documentVars['document-show_in_nav']
                 );
+                $document->canBeCached(
+                    empty($documentVars['document-can_be_cached']) ?
+                    false :
+                    $documentVars['document-can_be_cached']
+                );
                 $document->setLayoutId(
                     empty($documentVars['document-layout']) ?
                     false :

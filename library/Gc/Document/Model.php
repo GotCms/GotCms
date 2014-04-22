@@ -137,12 +137,29 @@ class Model extends AbstractTable implements IterableInterface
      */
     public function showInNav($isShow = null)
     {
-        if (!is_null($isShow)) {
+        if ($isShow !== null) {
             $this->setData('show_in_nav', $isShow);
         }
 
-        return (bool) $this->getData('show_in_nav') != false ? true : false;
+        return (bool) $this->getData('show_in_nav');
     }
+
+    /**
+     * Define if document can be cached
+     *
+     * @param boolean $canBeCached Optional
+     *
+     * @return boolean
+     */
+    public function canBeCached($canBeCached = null)
+    {
+        if ($canBeCached !== null) {
+            $this->setData('can_be_cached', $canBeCached);
+        }
+
+        return (bool) $this->getData('can_be_cached');
+    }
+
 
     /**
      * Test if status is equal to self::STATUS_ENABLE
@@ -244,9 +261,11 @@ class Model extends AbstractTable implements IterableInterface
         );
 
         if ($this->getDriverName() == 'pdo_pgsql') {
-            $arraySave['show_in_nav'] = $this->showInNav() === true ? 'true' : 'false';
+            $arraySave['show_in_nav']   = $this->showInNav() === true ? 'true' : 'false';
+            $arraySave['can_be_cached'] = $this->canBeCached() === true ? 'true' : 'false';
         } else {
-            $arraySave['show_in_nav'] = $this->showInNav() === true ? 1 : 0;
+            $arraySave['show_in_nav']   = $this->showInNav() === true ? 1 : 0;
+            $arraySave['can_be_cached'] = $this->canBeCached() === true ? 1 : 0;
         }
 
         try {

@@ -183,6 +183,15 @@ class Document extends AbstractForm
 
         $this->add($showInNav);
 
+        $canBeCached = new Element\Checkbox('document-can_be_cached');
+        $canBeCached->setLabel('Can be cached')
+            ->setValue($document->canBeCached())
+            ->setAttribute('id', 'can_be_cached')
+            ->setAttribute('class', 'input-checkbox')
+            ->setCheckedValue((string) DocumentModel::STATUS_ENABLE);
+
+        $this->add($canBeCached);
+
         $documentType    = $document->getDocumentType();
         $viewsCollection = $documentType->getAvailableViews();
         $select          = $viewsCollection->getSelect();

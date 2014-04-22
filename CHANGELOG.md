@@ -4,6 +4,7 @@
 - Add Markdown datatype ([https://github.com/GotCms/GotCms/issues/234](https://github.com/GotCms/GotCms/issues/234))
 - Update to Zend Framework 2.3.1 ([https://github.com/GotCms/GotCms/issues/236](https://github.com/GotCms/GotCms/issues/236))
 - Intl is no longer required ([https://github.com/GotCms/GotCms/issues/237](https://github.com/GotCms/GotCms/issues/237))
+- Add Option to ignore cache for specific documents ([https://github.com/GotCms/GotCms/issues/240](https://github.com/GotCms/GotCms/issues/240))
 
 ##1.3.0 (30 Mar 2014)
 - Remove layout when using ajax requests ([https://github.com/GotCms/GotCms/issues/185](https://github.com/GotCms/GotCms/issues/185))

@@ -78,6 +78,7 @@ CREATE TABLE `document` (
     `status` INT NOT NULL DEFAULT 0,
     `sort_order` INT NOT NULL DEFAULT 0,
     `show_in_nav` boolean DEFAULT false,
+    `can_be_cached` boolean DEFAULT true,
     `user_id` INT NOT NULL,
     `document_type_id` integer,
     `view_id` integer,

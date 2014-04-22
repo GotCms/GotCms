@@ -55,6 +55,7 @@ CREATE TABLE "document" (
 "status" integer NOT NULL DEFAULT 0,
 "sort_order" integer NOT NULL DEFAULT 0,
 "show_in_nav" boolean DEFAULT false,
+"can_be_cached" boolean DEFAULT true,
 "user_id" integer NOT NULL,
 "document_type_id" integer,
 "view_id" integer,
