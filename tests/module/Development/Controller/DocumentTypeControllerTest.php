@@ -497,6 +497,82 @@ class DocumentTypeControllerTest extends AbstractHttpControllerTestCase
      *
      * @return void
      */
+    public function testImportTabActionWithPostData()
+    {
+        $viewModel = ViewModel::fromArray(
+            array(
+                'name' => 'Test',
+                'identifier' => 'Test',
+                'content' => 'Test',
+            )
+        );
+        $viewModel->save();
+
+        $datatypeModel = DatatypeModel::fromArray(
+            array(
+                'name' => 'DatatypeTest',
+                'model' => 'Textstring'
+            )
+        );
+        $datatypeModel->save();
+
+        $documentTypeModel = DocumentTypeModel::fromArray(
+            array(
+                'name' => 'TestDocumentType',
+                'icon_id' => 3,
+                'default_view_id' => $viewModel->getId(),
+                'user_id' => $this->user->getId()
+            )
+        );
+        $documentTypeModel->save();
+
+        $tabModel = TabModel::fromArray(
+            array(
+                'name' => 'test',
+                'description' => 'test',
+                'document_type_id' => $documentTypeModel->getId(),
+            )
+        );
+        $tabModel->save();
+
+        $propertyModel = PropertyModel::fromArray(
+            array(
+                'name' => 'test',
+                'identifier' => 'test',
+                'description'=> 'test',
+                'tab_id' => $tabModel->getId(),
+                'datatype_id' => $datatypeModel->getId(),
+            )
+        );
+        $propertyModel->save();
+
+        $this->dispatch(
+            '/admin/development/document-type/import-tab',
+            'POST',
+            array(
+                'tab_id' => $tabModel->getId()
+            )
+        );
+        $this->assertResponseStatusCode(200);
+
+        $this->assertModuleName('Development');
+        $this->assertControllerName('DocumentTypeController');
+        $this->assertControllerClass('DocumentTypeController');
+        $this->assertMatchedRouteName('development/document-type/import-tab');
+
+        $documentTypeModel->delete();
+        $propertyModel->delete();
+        $tabModel->delete();
+        $viewModel->delete();
+        $datatypeModel->delete();
+
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
     public function testAddTabAction()
     {
         $this->dispatch('/admin/development/document-type/create-tab');

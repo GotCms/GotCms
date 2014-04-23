@@ -84,12 +84,10 @@ class DocumentTypeController extends Action
                 $this->flashMessenger()->addErrorMessage('Can not save document type');
                 $this->useFlashMessenger();
             } else {
-                $input             = $form->getInputFilter();
-                $infosSubform      = $input->get('infos');
-                $viewsSubform      = $input->get('views');
-                $tabsSubform       = $input->get('tabs');
-                $propertiesSubform = $input->get('properties');
-                $documentType      = new DocumentType\Model();
+                $input        = $form->getInputFilter();
+                $infosSubform = $input->get('infos');
+                $viewsSubform = $input->get('views');
+                $documentType = new DocumentType\Model();
 
                 $documentType->addData(
                     array(
@@ -112,44 +110,9 @@ class DocumentTypeController extends Action
                     $documentType->setDependencies($infosSubform->getValue('dependency'));
                     $documentType->save();
 
-                    $existingTabs = array();
-                    $idx          = 0;
+                    $existingTabs = $this->saveTabs($input->get('tabs'), $documentType);
+                    $this->saveProperties($input->get('properties'), $existingTabs);
 
-                    foreach ($tabsSubform->getValidInput() as $tabId => $tabValues) {
-                        if (!preg_match('~^tab(\d+)$~', $tabId, $matches)) {
-                            continue;
-                        }
-
-                        $tabId    = $matches[1];
-                        $tabModel = new Tab\Model();
-
-                        $tabModel->setDescription($tabValues->getValue('description'));
-                        $tabModel->setName($tabValues->getValue('name'));
-                        $tabModel->setDocumentTypeId($documentType->getId());
-                        $tabModel->setSortOrder(++$idx);
-                        $tabModel->save();
-                        $existingTabs[$tabId] = $tabModel->getId();
-                    }
-
-                    $idx = 0;
-                    foreach ($propertiesSubform->getValidInput() as $propertyId => $propertyValues) {
-                        if (!preg_match('~^property(\d+)$~', $propertyId, $matches)) {
-                            continue;
-                        }
-
-                        $propertyId    = $matches[1];
-                        $propertyModel = new Property\Model();
-
-                        $propertyModel->setDescription($propertyValues->getValue('description'));
-                        $propertyModel->setName($propertyValues->getValue('name'));
-                        $propertyModel->setIdentifier($propertyValues->getValue('identifier'));
-                        $propertyModel->setTabId($existingTabs[$propertyValues->getValue('tab')]);
-                        $propertyModel->setDatatypeId($propertyValues->getValue('datatype'));
-                        $required = $propertyValues->getValue('required');
-                        $propertyModel->isRequired(!empty($required) ? true : false);
-                        $propertyModel->setSortOrder(++$idx);
-                        $propertyModel->save();
-                    }
 
                     $documentType->getAdapter()->getDriver()->getConnection()->commit();
 
@@ -166,6 +129,79 @@ class DocumentTypeController extends Action
         }
 
         return array('form' => $form);
+    }
+
+    /**
+     * Save tabs
+     *
+     * @param Zend\InputFilter\InputFilter $tabsSubform  Tabs sub form
+     * @param DocumentType\Model           $documentType DocumentType model
+     *
+     * @return array
+     */
+    protected function saveTabs($tabsSubform, $documentType)
+    {
+        $existingTabs = array();
+        $idx          = 0;
+
+        foreach ($tabsSubform->getValidInput() as $tabId => $tabValues) {
+            if (!preg_match('~^tab(\d+)$~', $tabId, $matches)) {
+                continue;
+            }
+
+            $tabId    = $matches[1];
+            $tabModel = Tab\Model::fromId($tabId);
+            if (empty($tabModel) or $tabModel->getDocumentTypeId() != $documentType->getId()) {
+                $tabModel = new Tab\Model();
+            }
+
+            $tabModel->setDescription($tabValues->getValue('description'));
+            $tabModel->setName($tabValues->getValue('name'));
+            $tabModel->setDocumentTypeId($documentType->getId());
+            $tabModel->setSortOrder(++$idx);
+            $tabModel->save();
+            $existingTabs[$tabId] = $tabModel->getId();
+        }
+
+        return $existingTabs;
+    }
+
+    /**
+     * Save properties
+     *
+     * @param Zend\InputFilter\InputFilter $propertiesSubform Properties sub form
+     * @param array                        $existingTabs      Array of tabs
+     *
+     * @return array
+     */
+    protected function saveProperties($propertiesSubform, $existingTabs)
+    {
+        $existingProperties = array();
+        $idx                = 0;
+        foreach ($propertiesSubform->getValidInput() as $propertyId => $propertyValues) {
+            if (!preg_match('~^property(\d+)$~', $propertyId, $matches)) {
+                continue;
+            }
+
+            $propertyId    = $matches[1];
+            $propertyModel = Property\Model::fromId($propertyId);
+            if (empty($propertyModel) or !in_array($propertyModel->getTabId(), $existingTabs)) {
+                $propertyModel = new Property\Model();
+            }
+
+            $propertyModel->setDescription($propertyValues->getValue('description'));
+            $propertyModel->setName($propertyValues->getValue('name'));
+            $propertyModel->setIdentifier($propertyValues->getValue('identifier'));
+            $propertyModel->setTabId($existingTabs[$propertyValues->getValue('tab')]);
+            $propertyModel->setDatatypeId($propertyValues->getValue('datatype'));
+            $required = $propertyValues->getValue('required');
+            $propertyModel->isRequired(!empty($required) ? true : false);
+            $propertyModel->setSortOrder(++$idx);
+            $propertyModel->save();
+            $existingProperties[] = $propertyModel->getId();
+        }
+
+        return $existingProperties;
     }
 
     /**
@@ -195,41 +231,7 @@ class DocumentTypeController extends Action
 
         if (!$request->isPost()) {
             $form->setValues($documentType);
-
-            $documentTypeSession = array(
-                'tabs' => array(),
-                'max-property-id' => 0,
-                'max-tab-id' => 0,
-            );
-
-            foreach ($documentType->getTabs() as $tab) {
-                $documentTypeSession['tabs'][$tab->getId()] = array(
-                    'name' => $tab->getName(),
-                    'description' => $tab->getDescription(),
-                    'properties' => array(),
-                );
-
-                if ($tab->getId() > $documentTypeSession['max-tab-id']) {
-                    $documentTypeSession['max-tab-id'] = $tab->getId();
-                }
-
-                foreach ($tab->getProperties() as $property) {
-                    $documentTypeSession['tabs'][$tab->getId()]['properties'][$property->getId()] = array(
-                        'name' => $property->getName(),
-                        'identifier' => $property->getIdentifier(),
-                        'tab' => $property->getTabId(),
-                        'description' => $property->getDescription(),
-                        'isRequired' => $property->isRequired(),
-                        'datatype' => $property->getDatatypeId(),
-                    );
-
-                    if ($property->getId() > $documentTypeSession['max-property-id']) {
-                        $documentTypeSession['max-property-id'] = $property->getId();
-                    }
-                }
-            }
-
-            $session['document-type'] = $documentTypeSession;
+            $this->prepareDocumentTypeSession($session, $documentType);
         } else {
             $validators = $form->getInputFilter()->get('infos')->get('name')->getValidatorChain()->getValidators();
 
@@ -250,8 +252,6 @@ class DocumentTypeController extends Action
                 $input              = $form->getInputFilter();
                 $infosSubform       = $input->get('infos');
                 $viewsSubform       = $input->get('views');
-                $tabsSubform        = $input->get('tabs');
-                $propertiesSubform  = $input->get('properties');
 
                 $documentType->addData(
                     array(
@@ -273,27 +273,7 @@ class DocumentTypeController extends Action
                     $documentType->setDependencies($infosSubform->getValue('dependency'));
                     $documentType->save();
 
-                    $existingTabs = array();
-                    $idx          = 0;
-
-                    foreach ($tabsSubform->getValidInput() as $tabId => $tabValues) {
-                        if (!preg_match('~^tab(\d+)$~', $tabId, $matches)) {
-                            continue;
-                        }
-
-                        $tabId    = $matches[1];
-                        $tabModel = Tab\Model::fromId($tabId);
-                        if (empty($tabModel) or $tabModel->getDocumentTypeId() != $documentType->getId()) {
-                            $tabModel = new Tab\Model();
-                        }
-
-                        $tabModel->setDescription($tabValues->getValue('description'));
-                        $tabModel->setName($tabValues->getValue('name'));
-                        $tabModel->setDocumentTypeId($documentType->getId());
-                        $tabModel->setSortOrder(++$idx);
-                        $tabModel->save();
-                        $existingTabs[$tabId] = $tabModel->getId();
-                    }
+                    $existingTabs = $this->saveTabs($input->get('tabs'), $documentType);
 
                     $tabCollection = new Tab\Collection();
                     $tabs          = $tabCollection->load($documentType->getId())->getTabs();
@@ -303,30 +283,10 @@ class DocumentTypeController extends Action
                         }
                     }
 
-                    $existingProperties = array();
-                    $idx                = 0;
-                    foreach ($propertiesSubform->getValidInput() as $propertyId => $propertyValues) {
-                        if (!preg_match('~^property(\d+)$~', $propertyId, $matches)) {
-                            continue;
-                        }
-
-                        $propertyId    = $matches[1];
-                        $propertyModel = Property\Model::fromId($propertyId);
-                        if (empty($propertyModel) or !in_array($propertyModel->getTabId(), $existingTabs)) {
-                            $propertyModel = new Property\Model();
-                        }
-
-                        $propertyModel->setDescription($propertyValues->getValue('description'));
-                        $propertyModel->setName($propertyValues->getValue('name'));
-                        $propertyModel->setIdentifier($propertyValues->getValue('identifier'));
-                        $propertyModel->setTabId($existingTabs[$propertyValues->getValue('tab')]);
-                        $propertyModel->setDatatypeId($propertyValues->getValue('datatype'));
-                        $required = $propertyValues->getValue('required');
-                        $propertyModel->isRequired(!empty($required) ? true : false);
-                        $propertyModel->setSortOrder(++$idx);
-                        $propertyModel->save();
-                        $existingProperties[] = $propertyModel->getId();
-                    }
+                    $existingProperties = $this->saveProperties(
+                        $input->get('properties'),
+                        $existingTabs
+                    );
 
                     $propertyCollection = new Property\Collection();
                     $properties         = $propertyCollection->load($documentType->getId())->getProperties();
@@ -351,44 +311,90 @@ class DocumentTypeController extends Action
     }
 
     /**
+     * Prepare document type session
+     *
+     * @param Zend\Session\Container $session      Session container
+     * @param DocumentType\Model     $documentType DocumentType model
+     *
+     * @return array
+     */
+    protected function prepareDocumentTypeSession($session, $documentType)
+    {
+        $documentTypeSession = array(
+            'tabs' => array(),
+            'max-property-id' => 0,
+            'max-tab-id' => 0,
+        );
+
+        foreach ($documentType->getTabs() as $tab) {
+            $documentTypeSession['tabs'][$tab->getId()] = array(
+                'name' => $tab->getName(),
+                'description' => $tab->getDescription(),
+                'properties' => array(),
+            );
+
+            if ($tab->getId() > $documentTypeSession['max-tab-id']) {
+                $documentTypeSession['max-tab-id'] = $tab->getId();
+            }
+
+            foreach ($tab->getProperties() as $property) {
+                $documentTypeSession['tabs'][$tab->getId()]['properties'][$property->getId()] = array(
+                    'name' => $property->getName(),
+                    'identifier' => $property->getIdentifier(),
+                    'tab' => $property->getTabId(),
+                    'description' => $property->getDescription(),
+                    'isRequired' => $property->isRequired(),
+                    'datatype' => $property->getDatatypeId(),
+                );
+
+                if ($property->getId() > $documentTypeSession['max-property-id']) {
+                    $documentTypeSession['max-property-id'] = $property->getId();
+                }
+            }
+        }
+
+        $session['document-type'] = $documentTypeSession;
+    }
+
+    /**
      * Add tab in session
      *
      * @return \Zend\View\Model\JsonModel
      */
     public function importTabAction()
     {
-        if ($this->getRequest()->isPost()) {
-            $tabId          = $this->getRequest()->getPost()->get('tab_id');
-            $tabModel       = Tab\Model::fromId($tabId);
-            $propertiesList = $tabModel->getProperties();
+        if (!$this->getRequest()->isPost()) {
+            return $this->returnJson(array('success' => false, 'message' => 'Error'));
+        }
+
+        $tabId          = $this->getRequest()->getPost()->get('tab_id');
+        $tabModel       = Tab\Model::fromId($tabId);
+        $propertiesList = $tabModel->getProperties();
 
 
-            $properties = array();
-            foreach ($propertiesList as $property) {
-                $properties[] = array(
-                    'name' => $property->getName(),
-                    'identifier' => $property->getIdentifier(),
-                    'description' => $property->getDescription(),
-                    'datatype' => $property->getDatatypeId(),
-                    'isRequired' => $property->isRequired()
-                );
-            }
-
-            $tab = array(
-                'name' => $tabModel->getName(),
-                'description' => $tabModel->getDescription(),
-                'properties' => $properties
-            );
-
-            return $this->returnJson(
-                array(
-                    'success' => true,
-                    'tab' => $tab
-                )
+        $properties = array();
+        foreach ($propertiesList as $property) {
+            $properties[] = array(
+                'name' => $property->getName(),
+                'identifier' => $property->getIdentifier(),
+                'description' => $property->getDescription(),
+                'datatype' => $property->getDatatypeId(),
+                'isRequired' => $property->isRequired()
             );
         }
 
-        return $this->returnJson(array('success' => false, 'message' => 'Error'));
+        $tab = array(
+            'name' => $tabModel->getName(),
+            'description' => $tabModel->getDescription(),
+            'properties' => $properties
+        );
+
+        return $this->returnJson(
+            array(
+                'success' => true,
+                'tab' => $tab
+            )
+        );
     }
 
     /**
@@ -413,43 +419,42 @@ class DocumentTypeController extends Action
      */
     public function addTabAction()
     {
-        if ($this->getRequest()->isPost()) {
-            $session             = $this->getSession();
-            $name                = $this->getRequest()->getPost()->get('name');
-            $description         = $this->getRequest()->getPost()->get('description');
-            $documentTypeSession = $session['document-type'];
-
-            $tabs = empty($documentTypeSession['tabs']) ? array() : $documentTypeSession['tabs'];
-
-            foreach ($tabs as $tab) {
-                if ($name == $tab['name']) {
-                    return $this->returnJson(array('success' => false, 'message' => 'Already exists'));
-                }
-            }
-
-            $lastId    = empty($documentTypeSession['max-tab-id']) ? 0 : $documentTypeSession['max-tab-id'];
-            $currentId = $lastId + 1;
-
-            $documentTypeSession['max-tab-id'] = $currentId;
-            $tabs[$currentId]                  = array(
-                'name' => $name,
-                'description' => $description,
-                'properties' => array()
-            );
-            $documentTypeSession['tabs']       = $tabs;
-            $session['document-type']          = $documentTypeSession;
-
-            return $this->returnJson(
-                array(
-                    'success' => true,
-                    'id' => $currentId,
-                    'name' => $name,
-                    'description' => $description,
-                )
-            );
+        if (!$this->getRequest()->isPost()) {
+            return $this->returnJson(array('success' => false, 'message' => 'Error'));
         }
 
-        return $this->returnJson(array('success' => false, 'message' => 'Error'));
+        $session             = $this->getSession();
+        $name                = $this->getRequest()->getPost()->get('name');
+        $description         = $this->getRequest()->getPost()->get('description');
+        $documentTypeSession = $session['document-type'];
+
+        $tabs = empty($documentTypeSession['tabs']) ? array() : $documentTypeSession['tabs'];
+        foreach ($tabs as $tab) {
+            if ($name == $tab['name']) {
+                return $this->returnJson(array('success' => false, 'message' => 'Already exists'));
+            }
+        }
+
+        $lastId    = empty($documentTypeSession['max-tab-id']) ? 0 : $documentTypeSession['max-tab-id'];
+        $currentId = $lastId + 1;
+
+        $documentTypeSession['max-tab-id'] = $currentId;
+        $tabs[$currentId]                  = array(
+            'name' => $name,
+            'description' => $description,
+            'properties' => array()
+        );
+        $documentTypeSession['tabs']       = $tabs;
+        $session['document-type']          = $documentTypeSession;
+
+        return $this->returnJson(
+            array(
+                'success' => true,
+                'id' => $currentId,
+                'name' => $name,
+                'description' => $description,
+            )
+        );
     }
 
     /**
@@ -483,61 +488,56 @@ class DocumentTypeController extends Action
      */
     public function addPropertyAction()
     {
-        if ($this->getRequest()->isPost()) {
-            $post        = $this->getRequest()->getPost();
-            $name        = $post->get('name');
-            $identifier  = $post->get('identifier');
-            $tabId       = $post->get('tab');
-            $description = $post->get('description');
-            $isRequired  = $post->get('isRequired');
-            $datatypeId  = $post->get('datatype');
-
-            $session = $this->getSession();
-
-            $documentTypeSession = $session['document-type'];
-            $tabs                = $documentTypeSession['tabs'];
-
-            if (empty($documentTypeSession['tabs'][$tabId])) {
-                return $this->returnJson(array('success' => false, 'message' => 'Tab does not exists'));
-            }
-
-            $tab        = $documentTypeSession['tabs'][$tabId];
-            $properties = $tab['properties'];
-
-            foreach ($tabs as $tab) {
-                if (empty($tab['properties'])) {
-                    continue;
-                }
-
-                foreach ($tab['properties'] as $property) {
-                    if (!empty($property['identifier']) and $identifier == $property['identifier']) {
-                        return $this->returnJson(array('success' => false, 'message' => 'Identifier already exists'));
-                    }
-                }
-            }
-
-            $lastId = empty($documentTypeSession['max-property-id']) ? 0 : $documentTypeSession['max-property-id'];
-
-            $currentId                              = $lastId + 1;
-            $documentTypeSession['max-property-id'] = $currentId;
-            $properties[$currentId]                 = array(
-                'name' => $name,
-                'identifier' => $identifier,
-                'tab' => $tabId,
-                'description' => $description,
-                'isRequired' => $isRequired == 1 ? true : false,
-                'datatype' => $datatypeId,
-            );
-
-            $documentTypeSession['tabs'][$tabId]['properties'] = $properties;
-            $session['document-type']                          = $documentTypeSession;
-            $properties[$currentId]['success']                 = true;
-            $properties[$currentId]['id']                      = $currentId;
-
-            return $this->returnJson($properties[$currentId]);
+        if (!$this->getRequest()->isPost()) {
+            return $this->returnJson(array('success' => false, 'message' => 'Error'));
         }
 
-        return $this->returnJson(array('success' => false, 'message' => 'Error'));
+        $post       = $this->getRequest()->getPost();
+        $identifier = $post->get('identifier');
+        $tabId      = $post->get('tab');
+
+        $session             = $this->getSession();
+        $documentTypeSession = $session['document-type'];
+        $tabs                = $documentTypeSession['tabs'];
+
+        if (empty($documentTypeSession['tabs'][$tabId])) {
+            return $this->returnJson(array('success' => false, 'message' => 'Tab does not exists'));
+        }
+
+        $tab        = $documentTypeSession['tabs'][$tabId];
+        $properties = $tab['properties'];
+
+        foreach ($tabs as $tab) {
+            if (empty($tab['properties'])) {
+                continue;
+            }
+
+            foreach ($tab['properties'] as $property) {
+                if (!empty($property['identifier']) and $identifier == $property['identifier']) {
+                    return $this->returnJson(array('success' => false, 'message' => 'Identifier already exists'));
+                }
+            }
+        }
+
+        $lastId = empty($documentTypeSession['max-property-id']) ? 0 : $documentTypeSession['max-property-id'];
+
+        $currentId                              = $lastId + 1;
+        $documentTypeSession['max-property-id'] = $currentId;
+        $properties[$currentId]                 = array(
+            'name'        => $post->get('name'),
+            'identifier'  => $identifier,
+            'tab'         => $tabId,
+            'description' => $post->get('description'),
+            'isRequired'  => $post->get('isRequired') == 1 ? true : false,
+            'datatype'    => $post->get('datatype'),
+        );
+
+        $documentTypeSession['tabs'][$tabId]['properties'] = $properties;
+        $session['document-type']                          = $documentTypeSession;
+        $properties[$currentId]['success']                 = true;
+        $properties[$currentId]['id']                      = $currentId;
+
+        return $this->returnJson($properties[$currentId]);
     }
 
     /**
@@ -557,7 +557,6 @@ class DocumentTypeController extends Action
                 }
 
                 if (array_key_exists($id, $tab['properties'])) {
-
                     $documentTypeSession = $session['document-type'];
                     unset($documentTypeSession['tabs'][$tabId]['properties'][$id]);
                     $session->offsetSet('document-type', $documentTypeSession);
