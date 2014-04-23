@@ -222,7 +222,7 @@ class Content extends Object
      *
      * @param string $content Content
      *
-     * @return mixed
+     * @return \SimpleXMLElement
      */
     protected function loadXml($content)
     {
@@ -242,7 +242,7 @@ class Content extends Object
     /**
      * Get children orders
      *
-     * @param mixed $xml xml data
+     * @param \SimpleXMLElement $xml xml data
      *
      * @return array
      */
