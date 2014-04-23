@@ -29,7 +29,6 @@ namespace Datatypes\Markdown;
 
 use Gc\Datatype\AbstractDatatype\AbstractEditor;
 use Zend\Form\Element;
-use Zend\Validator\Uri;
 use Parsedown\Parsedown;
 
 /**
@@ -62,7 +61,7 @@ class Editor extends AbstractEditor
     /**
      * Load upload editor
      *
-     * @return mixed
+     * @return string
      */
     public function load()
     {

@@ -28,7 +28,6 @@
 namespace Datatypes\Markdown;
 
 use Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor;
-use Zend\Form\Element;
 
 /**
  * Prevalue Editor for Markdown datatype
