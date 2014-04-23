@@ -31,6 +31,7 @@ use Development\Form\DocumentType as DocumentTypeForm;
 use Gc\DocumentType;
 use Gc\Mvc\Controller\Action;
 use Zend\Validator;
+use Zend\Session\Container;
 use Gc\Property;
 use Gc\Tab;
 use Exception;
@@ -313,8 +314,8 @@ class DocumentTypeController extends Action
     /**
      * Prepare document type session
      *
-     * @param Zend\Session\Container $session      Session container
-     * @param DocumentType\Model     $documentType DocumentType model
+     * @param Container          $session      Session container
+     * @param DocumentType\Model $documentType DocumentType model
      *
      * @return array
      */
