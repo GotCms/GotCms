@@ -147,7 +147,7 @@ class CacheService implements EventManagerAwareInterface
      */
     protected function createId(HttpRequest $request)
     {
-        return md5($request->getRequestUri());
+        return md5($request->getServer('HTTPS') . '-' . $request->getRequestUri());
     }
 
     /**
