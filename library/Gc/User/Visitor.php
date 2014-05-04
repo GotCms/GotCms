@@ -98,7 +98,7 @@ class Visitor extends AbstractTable
     /**
      * Retrieve server address
      *
-     * @return string
+     * @return integer|null
      */
     protected function getServerAddr()
     {
@@ -110,7 +110,7 @@ class Visitor extends AbstractTable
     /**
      * Retrieve remote address
      *
-     * @return string
+     * @return integer|null
      */
     protected function getRemoteAddr()
     {
