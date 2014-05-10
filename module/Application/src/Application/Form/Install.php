@@ -322,14 +322,14 @@ class Install extends AbstractForm
             ->setAttribute('id', 'admin_password')
             ->setAttribute('class', 'form-control');
 
-        $adminPasswordConfirm = new Element\Password('admin_passowrd_confirm');
+        $adminPasswordConfirm = new Element\Password('admin_password_confirm');
         $adminPasswordConfirm->setLabel('Confirm admin password')
             ->setLabelAttributes(
                 array(
                     'class' => 'control-label required col-lg-2',
                 )
             )
-            ->setAttribute('id', 'admin_passowrd_confirm')
+            ->setAttribute('id', 'admin_password_confirm')
             ->setAttribute('class', 'form-control');
 
         $path          = GC_APPLICATION_PATH . '/data/install/design/';
