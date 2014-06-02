@@ -7,6 +7,7 @@
 - Add Option to ignore cache for specific documents ([https://github.com/GotCms/GotCms/issues/240](https://github.com/GotCms/GotCms/issues/240))
 - Add directory for extensions ([https://github.com/GotCms/GotCms/issues/239](https://github.com/GotCms/GotCms/issues/239))
 - Cache with SSL shouldn't be the same than without SSL ([https://github.com/GotCms/GotCms/issues/244](https://github.com/GotCms/GotCms/issues/244))
+- Add option to ignore translations step during installation ([https://github.com/GotCms/GotCms/issues/245](https://github.com/GotCms/GotCms/issues/245))
 
 ##1.3.0 (30 Mar 2014)
 - Remove layout when using ajax requests ([https://github.com/GotCms/GotCms/issues/185](https://github.com/GotCms/GotCms/issues/185))

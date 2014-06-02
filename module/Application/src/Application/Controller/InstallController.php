@@ -391,7 +391,7 @@ class InstallController extends Action
 
                         //Insert data
                         case 'i-t':
-                            $this->insertTranslations();
+                            $this->insertTranslations($session['install']['configuration']);
                             break;
 
                         //Create user and roles
@@ -529,10 +529,16 @@ class InstallController extends Action
     /**
      * Insert translations into database
      *
+     * @param array $session Session array
+     *
      * @return void
      */
-    protected function insertTranslations()
+    protected function insertTranslations($session)
     {
+        if (empty($session['copy_translations'])) {
+            return;
+        }
+
         //Save all languages in database
         $languagesFilename = glob(GC_APPLICATION_PATH . '/data/install/translation/*.php');
         $translator        = new Core\Translator;

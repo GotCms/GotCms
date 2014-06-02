@@ -359,6 +359,18 @@ class Install extends AbstractForm
             ->setAttribute('data', $renderOptions)
             ->setValueOptions($options);
 
+        $copyTranslations = new Element\Checkbox('copy_translations');
+        $copyTranslations->setLabel('Copy translations')
+            ->setLabelAttributes(
+                array(
+                    'class' => 'control-label col-lg-2',
+                )
+            )
+            ->setAttribute('class', 'input-checkbox')
+            ->setAttribute('id', 'copy-translations')
+            ->setValue('1')
+            ->setCheckedValue('1');
+
 
         $this->add($siteName);
         $this->add($siteIsOffline);
@@ -369,7 +381,7 @@ class Install extends AbstractForm
         $this->add($adminPassword);
         $this->add($adminPasswordConfirm);
         $this->add($template);
-
+        $this->add($copyTranslations);
 
         $inputFilter = $this->getInputFilter();
         $inputFilter->add(
@@ -450,6 +462,14 @@ class Install extends AbstractForm
                 'required' => true,
             ),
             'template'
+        );
+
+        $inputFilter->add(
+            array(
+                'name' => 'copy_translations',
+                'required' => false,
+            ),
+            'copy_translations'
         );
     }
 }
