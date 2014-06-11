@@ -145,7 +145,6 @@ class TranslationController extends AbstractController
             }
 
             $fileName = $_FILES['upload']['name'][$idx];
-
             switch ($_FILES['upload']['type'][$idx]) {
                 case 'text/csv':
                     try {
@@ -169,6 +168,7 @@ class TranslationController extends AbstractController
                     $this->flashMessenger()->addSuccessMessage(sprintf('Translations in %s are updated', $fileName));
 
                     break;
+                case 'text/php':
                 case 'application/x-php':
                     try {
                         $locale  = str_replace('.php', '', $fileName);
