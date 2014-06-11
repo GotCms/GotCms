@@ -135,6 +135,7 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->object->addContent($this->object, array()));
         $this->assertNull($this->object->addContent($this->object, array(new Element\Text('text'))));
         $this->assertNull($this->object->addContent($this->object, '<input type="text" name="text">', 'prefix'));
+        $this->assertNull($this->object->addContent($this->object, '<input type="text" name="text[test]">', 'prefix'));
         $this->assertNull($this->object->addContent($this->object, new Element\Text('text-element'), 'prefix'));
     }
 

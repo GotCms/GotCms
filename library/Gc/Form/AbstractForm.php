@@ -158,7 +158,11 @@ abstract class AbstractForm extends Form
             $form->add($elements);
         } elseif (is_string($elements)) {
             if (!empty($prefix)) {
-                $elements = preg_replace('~name="(.+)(\[.*\])?"~iU', 'name="' . $prefix . '[$1]$2"', $elements);
+                $elements = preg_replace(
+                    '~name="(.+)((&#x5B;|\[).*(&#x5D;|\]))?"~iU',
+                    'name="' . $prefix . '&#x5B;$1&#x5D;$2"',
+                    $elements
+                );
                 $elements = preg_replace(
                     '~name\\\x3D\\\x22(.+)(\\\x5B.*\\\x5D)?\\\x22~iU',
                     'name\\\x3D\\\x22' . $prefix . '\\\x5B$1\\\x5D$2\\\x22',
