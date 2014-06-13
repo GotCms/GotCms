@@ -27,13 +27,13 @@
 
 namespace Content\Form;
 
+use Gc\Datatype;
 use Gc\Document\Model as DocumentModel;
+use Gc\DocumentType;
 use Gc\Form\AbstractForm;
-use Gc\Layout;
-use Gc\View;
-use Zend\Validator;
-use Zend\Form\Element;
-use Zend\InputFilter\Factory as InputFilterFactory;
+use Gc\Property;
+use Zend\Form as ZendForm;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Document form
@@ -45,218 +45,115 @@ use Zend\InputFilter\Factory as InputFilterFactory;
 class Document extends AbstractForm
 {
     /**
-     * Parent id
+     * Properties cache
      *
-     * @var integer
+     * @var array
      */
-    protected $parentId = null;
+    protected $properties = array();
 
     /**
-     * Document id
+     * Tabs cache
      *
-     * @var integer
+     * @var array
      */
-    protected $documentId = null;
+    protected $tabs = array();
 
     /**
-     * Initialize Form
+     * Initialize document form
+     *
+     * @param string $url Url for the action
      *
      * @return void
      */
-    public function init()
+
+    public function init($url = null)
     {
-        $inputFilterFactory = new InputFilterFactory();
-        $inputFilter        = $inputFilterFactory->createInputFilter(
-            array(
-                'document-name' => array(
-                    'name' => 'document-name',
-                    'required' => true,
-                    'validators' => array(
-                        array('name' => 'not_empty'),
-                    ),
-                ),
-                'document-url_key' => array(
-                    'name' => 'document-url_key',
-                    'required' => false,
-                    'allow_empty' => true,
-                    'validators' => array(
-                        array('name' => 'regex', 'options' => array(
-                            'pattern' => parent::IDENTIFIER_PATTERN
-                        )),
-                        array(
-                            'name' => 'db\\no_record_exists',
-                            'options' => array(
-                                'table' => 'document',
-                                'field' => 'url_key',
-                                'adapter' => $this->getAdapter(),
-                            ),
-                        ),
-                    ),
-                ),
-            )
+        $this->setAttribute('enctype', 'multipart/form-data');
+        $this->setAttribute('class', 'relative');
+        $this->setAttribute(
+            'action',
+            $url
         );
+    }
 
-        $this->setInputFilter($inputFilter);
 
-        $name = new Element\Text('document-name');
-        $name->setLabel('Name')
-            ->setLabelAttributes(array('class' => 'required control-label'))
-            ->setAttribute('id', 'name')
-            ->setAttribute('class', 'form-control');
+    /**
+     * Load tabs from document type
+     *
+     * @param integer $documentTypeId Document type id
+     *
+     * @return \Gc\Tab\Collection
+     */
+    public function loadTabs($documentTypeId)
+    {
+        if (empty($this->tabs[$documentTypeId])) {
+            $documentType = DocumentType\Model::fromId($documentTypeId);
+            $tabs         = $documentType->getTabs();
 
-        $urlKey = new Element\Text('document-url_key');
-        $urlKey->setLabel('Url key')
-            ->setLabelAttributes(array('class' => 'required control-label'))
-            ->setAttribute('id', 'url_key')
-            ->setAttribute('class', 'form-control');
+            $this->tabs[$documentTypeId] = $tabs;
+        }
 
-        $documentType = new Element\Select('document_type');
-        $documentType->setLabel('Document Type')
-            ->setLabelAttributes(array('class' => 'required control-label'))
-            ->setAttribute('id', 'document_type')
-            ->setAttribute('class', 'form-control')
-            ->setValueOptions(array('' => 'Select document type'));
-
-        $parent = new Element\Hidden('parent');
-
-        $this->add($name);
-        $this->add($urlKey);
-        $this->add($documentType);
-        $this->add($parent);
+        return $this->tabs[$documentTypeId];
     }
 
     /**
-     * Check parent validation
+     * Load properties from document type, tab and document
      *
-     * @return boolean
+     * @param integer $documentTypeId Document type id
+     * @param integer $tabId          Tab id
+     * @param integer $documentId     Document id
+     *
+     * @return \Gc\Property\Collection
      */
-    public function isValid()
+    public function loadProperties($documentTypeId, $tabId, $documentId)
     {
-        if ($this->has('parent')) {
-            $this->parentId = $this->get('parent')->getValue();
+        $propertyName = sprintf('%d-%d-%d', $documentTypeId, $tabId, $documentId);
+        if (empty($this->properties[$propertyName])) {
+            $properties = new Property\Collection();
+            $properties->load($documentTypeId, $tabId, $documentId);
+
+            $this->properties[$propertyName] =  $properties->getProperties();
         }
 
-        $condition = sprintf('parent_id = %d', $this->parentId);
-        if (!empty($this->documentId)) {
-            $condition .= sprintf(' AND id != %d', $this->documentId);
-        }
-
-        $inputFilter = $this->getInputFilter();
-        $validators  = $inputFilter->get('document-url_key')->getValidatorChain()->getValidators();
-
-        foreach ($validators as $validator) {
-            if ($validator['instance'] instanceof Validator\Db\NoRecordExists) {
-                $validator['instance']->setExclude($condition);
-            }
-        }
-
-        return parent::isValid();
+        return $this->properties[$propertyName];
     }
 
     /**
-     * Load document form from DocumentModel
+     * Load properties from document type, tab and document
      *
-     * @param DocumentModel $document Document model
+     * @param integer        $documentTypeId Document type id
+     * @param DocumentModel  $document       Document model
+     * @param ServiceManager $serviceLocator Service manager
      *
-     * @return void
+     * @return array
      */
-    public function load(DocumentModel $document)
+    public function load($documentTypeId, DocumentModel $document, ServiceManager $serviceLocator)
     {
-        $this->get('document-name')->setValue($document->getName());
-        $this->get('document-url_key')->setValue($document->getUrlKey());
+        $tabs      = $this->loadTabs($documentTypeId);
+        $tabsArray = array();
 
-        $status = new Element\Checkbox('document-status');
-        $status->setLabel('Publish')
-            ->setValue($document->isPublished())
-            ->setAttribute('id', 'status')
-            ->setAttribute('class', 'input-checkbox')
-            ->setCheckedValue((string) DocumentModel::STATUS_ENABLE);
+        $idx = 1;
+        foreach ($tabs as $tab) {
+            $tabsArray[] = $tab->getName();
+            $properties  = $this->loadProperties($documentTypeId, $tab->getId(), $document->getId());
 
-        $this->add($status);
-
-        $showInNav = new Element\Checkbox('document-show_in_nav');
-        $showInNav->setLabel('Show in nav')
-            ->setValue($document->showInNav())
-            ->setAttribute('id', 'show_in_nav')
-            ->setAttribute('class', 'input-checkbox')
-            ->setCheckedValue((string) DocumentModel::STATUS_ENABLE);
-
-        $this->add($showInNav);
-
-        $canBeCached = new Element\Checkbox('document-can_be_cached');
-        $canBeCached->setLabel('Can be cached')
-            ->setValue($document->canBeCached())
-            ->setAttribute('id', 'can_be_cached')
-            ->setAttribute('class', 'input-checkbox')
-            ->setCheckedValue((string) DocumentModel::STATUS_ENABLE);
-
-        $this->add($canBeCached);
-
-        $documentType    = $document->getDocumentType();
-        $viewsCollection = $documentType->getAvailableViews();
-        $select          = $viewsCollection->getSelect();
-        $viewSelected    = $document->getViewId();
-
-        $viewModel = View\Model::fromId($document->getDocumentType()->getDefaultViewId());
-        if (!empty($viewModel)) {
-            $select = $select + array($viewModel->getId() => $viewModel->getName());
-            if (empty($viewSelected)) {
-                $viewSelected = $viewModel->getId();
+            $fieldset = new ZendForm\Fieldset('tabs-' . $idx);
+            foreach ($properties as $property) {
+                AbstractForm::addContent(
+                    $fieldset,
+                    Datatype\Model::loadEditor($serviceLocator, $property)
+                );
             }
+
+            $this->add($fieldset);
+            $idx++;
         }
 
-        $view = new Element\Select('document-view');
-        $view->setValueOptions($select)
-            ->setValue((string) $viewSelected)
-            ->setAttribute('id', 'view')
-            ->setAttribute('class', 'form-control')
-            ->setLabel('View');
+        $formDocumentAdd = new DocumentInformation();
+        $formDocumentAdd->load($document);
+        $formDocumentAdd->setAttribute('name', 'tabs-' . $idx);
+        $this->add($formDocumentAdd);
 
-        $inputFilterFactory = $this->getInputFilter();
-        $inputFilterFactory->add(
-            array(
-                'name' => 'document-view',
-                'required' => true,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
-            ),
-            'document-view'
-        );
-
-        $this->add($view);
-
-        $layoutsCollection = new Layout\Collection();
-        $layout            = new Element\Select('document-layout');
-        $layout->setValueOptions($layoutsCollection->getSelect())
-            ->setValue((string) $document->getLayoutId())
-            ->setAttribute('id', 'layout')
-            ->setAttribute('class', 'form-control')
-            ->setLabel('Layout');
-
-        $inputFilterFactory->add(
-            array(
-                'name' => 'document-layout',
-                'required' => true,
-                'validators' => array(
-                    array('name' => 'not_empty'),
-                ),
-            ),
-            'document-layout'
-        );
-
-        $this->add($layout);
-        $this->remove('document_type');
-        $this->remove('parent');
-
-
-        $moreInformation = new Element\Hidden('more_information');
-        $moreInformation->setAttribute('content', '');
-        $this->add($moreInformation);
-
-        $this->parentId   = $document->getParentId();
-        $this->documentId = $document->getId();
-
-        $this->loadValues($document);
+        return $tabsArray;
     }
 }

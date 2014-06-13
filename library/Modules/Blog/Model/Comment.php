@@ -70,8 +70,8 @@ class Comment extends AbstractTable
     /**
      * Return all comments in document
      *
-     * @param integer        $documentId Document id
-     * @param null|boolean   $isActive   Is active
+     * @param integer      $documentId Document id
+     * @param null|boolean $isActive   Is active
      *
      * @return array
      */

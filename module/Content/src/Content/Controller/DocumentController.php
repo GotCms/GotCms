@@ -27,15 +27,14 @@
 
 namespace Content\Controller;
 
+use Gc\Component;
 use Gc\Datatype;
+use Gc\DocumentType;
 use Gc\Document\Collection as DocumentCollection;
 use Gc\Document\Model as DocumentModel;
-use Gc\DocumentType;
 use Gc\Property;
 use Gc\Form\AbstractForm;
 use Content\Form;
-use Gc\Component;
-use Zend\Form as ZendForm;
 use Exception;
 
 /**
@@ -61,7 +60,7 @@ class DocumentController extends AbstractController
      */
     public function createAction()
     {
-        $documentForm = new Form\Document();
+        $documentForm = new Form\DocumentInformation();
         $parentId     = $this->getRouteMatch()->getParam('id');
         if (!empty($parentId)) {
             $routeName = 'content/document/create-w-parent';
@@ -168,17 +167,13 @@ class DocumentController extends AbstractController
             $this->flashMessenger()->addErrorMessage('Document does not exists!');
             return $this->redirect()->toRoute('content');
         } else {
-            $documentForm = new ZendForm\Form();
-            $documentForm->setAttribute('enctype', 'multipart/form-data');
-            $documentForm->setAttribute('class', 'relative');
-            $documentForm->setAttribute(
-                'action',
+            $documentForm = new Form\Document();
+            $documentForm->init(
                 $this->url()->fromRoute('content/document/edit', array('id' => $documentId))
             );
 
-            $this->layout()->setVariable('documentId', $documentId);
-            $documentTypeId = $document->getDocumentTypeId();
             $hasError       = false;
+            $documentTypeId = $document->getDocumentTypeId();
             $oldUrlKey      = $document->getUrlKey();
 
             if ($this->getRequest()->isPost()) {
@@ -218,18 +213,10 @@ class DocumentController extends AbstractController
                     '' :
                     $documentVars['document-url_key']
                 );
-            }
 
-            $tabs      = $this->loadTabs($documentTypeId);
-            $tabsArray = array();
-
-            $idx = 1;
-            foreach ($tabs as $tab) {
-                $tabsArray[] = $tab->getName();
-                $properties  = $this->loadProperties($documentTypeId, $tab->getId(), $document->getId());
-
-                $fieldset = new ZendForm\Fieldset('tabs-' . $idx);
-                if ($this->getRequest()->isPost()) {
+                $tabs = $documentForm->loadTabs($documentTypeId);
+                foreach ($tabs as $tab) {
+                    $properties = $documentForm->loadProperties($documentTypeId, $tab->getId(), $document->getId());
                     $connection = $document->getAdapter()->getDriver()->getConnection();
                     try {
                         $connection->beginTransaction();
@@ -249,26 +236,13 @@ class DocumentController extends AbstractController
                         $connection->rollBack();
                     }
                 }
-
-                foreach ($properties as $property) {
-                    AbstractForm::addContent(
-                        $fieldset,
-                        Datatype\Model::loadEditor($this->getServiceLocator(), $property)
-                    );
-                }
-
-                $documentForm->add($fieldset);
-                $idx++;
             }
 
+
+            $tabsArray   = $documentForm->load($documentTypeId, $document, $this->getServiceLocator());
             $tabsArray[] = $this->getServiceLocator()->get('MvcTranslator')->translate('Document information');
 
-            $formDocumentAdd = new Form\Document();
-            $formDocumentAdd->load($document);
-            $formDocumentAdd->setAttribute('name', 'tabs-' . $idx);
-
-            $documentForm->add($formDocumentAdd);
-
+            $formDocumentAdd = $documentForm->get('tabs-' . count($tabsArray));
             if ($this->getRequest()->isPost()) {
                 $formDocumentAdd->setData($this->getRequest()->getPost()->toArray());
 
@@ -288,9 +262,7 @@ class DocumentController extends AbstractController
                 }
             }
 
-            $tabs = new Component\Tabs($tabsArray);
-
-            return array('form' => $documentForm, 'tabs' => $tabs, 'document' => $document);
+            return array('form' => $documentForm, 'tabs' => new Component\Tabs($tabsArray), 'document' => $document);
         }
     }
 
@@ -494,43 +466,82 @@ class DocumentController extends AbstractController
      */
     protected function checkUrlKey($string)
     {
-        $replace = 'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ';
-        $to      = 'aaaaaceeeeiiiinooooouuuuyyaaaaaceeeeiiiinooooouuuuy';
-        $string  = strtolower(str_replace($replace, $to, trim($string)));
-        $string  = preg_replace('~[^a-zA-Z0-9-]~', '-', $string);
+        $charMap = array(
+            'Š'=>'S',
+            'š'=>'s',
+            'Ð'=>'Dj',
+            'Ž'=>'Z',
+            'ž'=>'z',
+            'À'=>'A',
+            'Á'=>'A',
+            'Â'=>'A',
+            'Ã'=>'A',
+            'Ä'=>'Ae',
+            'Å'=>'A',
+            'Æ'=>'A',
+            'Ç'=>'C',
+            'È'=>'E',
+            'É'=>'E',
+            'Ê'=>'E',
+            'Ë'=>'E',
+            'Ì'=>'I',
+            'Í'=>'I',
+            'Î'=>'I',
+            'Ï'=>'I',
+            'Ñ'=>'N',
+            'Ò'=>'O',
+            'Ó'=>'O',
+            'Ô'=>'O',
+            'Õ'=>'O',
+            'Ö'=>'Oe',
+            'Ø'=>'O',
+            'Ü'=>'Ue',
+            'Ù'=>'U',
+            'Ú'=>'U',
+            'Û'=>'U',
+            'Ý'=>'Y',
+            'Þ'=>'B',
+            'ß'=>'ss',
+            'à'=>'a',
+            'á'=>'a',
+            'â'=>'a',
+            'ã'=>'a',
+            'ä'=>'ae',
+            'å'=>'a',
+            'æ'=>'a',
+            'ç'=>'c',
+            'è'=>'e',
+            'é'=>'e',
+            'ê'=>'e',
+            'ë'=>'e',
+            'ì'=>'i',
+            'í'=>'i',
+            'î'=>'i',
+            'ï'=>'i',
+            'ð'=>'o',
+            'ñ'=>'n',
+            'ò'=>'o',
+            'ó'=>'o',
+            'ô'=>'o',
+            'õ'=>'o',
+            'ö'=>'oe',
+            'ø'=>'o',
+            'ü'=>'ue',
+            'ù'=>'u',
+            'ú'=>'u',
+            'û'=>'u',
+            'ý'=>'y',
+            'ý'=>'y',
+            'þ'=>'b',
+            'ÿ'=>'y',
+            'ƒ'=>'f',
+            'Ŕ'=>'R',
+            'ŕ'=>'r'
+        );
+
+        $string = strtr(mb_strtolower($string, 'utf-8'), $charMap);
+        $string = preg_replace('~[^a-zA-Z0-9-]~', '-', $string);
 
         return $string;
-    }
-
-    /**
-     * Load tabs from document type
-     *
-     * @param integer $documentTypeId Document type id
-     *
-     * @return \Gc\Tab\Collection
-     */
-    protected function loadTabs($documentTypeId)
-    {
-        $documentType = DocumentType\Model::fromId($documentTypeId);
-        $tabs         = $documentType->getTabs();
-
-        return $tabs;
-    }
-
-    /**
-     * Load properties from document type, tab and document
-     *
-     * @param integer $documentTypeId Document type id
-     * @param integer $tabId          Tab id
-     * @param integer $documentId     Document id
-     *
-     * @return \Gc\Property\Collection
-     */
-    protected function loadProperties($documentTypeId, $tabId, $documentId)
-    {
-        $properties = new Property\Collection();
-        $properties->load($documentTypeId, $tabId, $documentId);
-
-        return $properties->getProperties();
     }
 }

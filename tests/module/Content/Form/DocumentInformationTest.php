@@ -42,7 +42,7 @@ use Gc\View\Model as ViewModel;
  * @category Gc_Tests
  * @package  ZfModules
  */
-class DocumentTest extends \PHPUnit_Framework_TestCase
+class DocumentInformationTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Document
@@ -57,7 +57,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Document;
+        $this->object = new DocumentInformation;
     }
 
     /**
