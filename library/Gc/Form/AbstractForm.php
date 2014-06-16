@@ -141,9 +141,12 @@ abstract class AbstractForm extends Form
         }
 
         if (is_array($elements)) {
+            $return = array();
             foreach ($elements as $element) {
-                self::addContent($form, $element, $prefix, $datatypeId);
+                $return[] = self::addContent($form, $element, $prefix, $datatypeId);
             }
+
+            return $return;
         } elseif ($elements instanceof Element) {
             if (!empty($prefix)) {
                 $id = $elements->getAttribute('id');
@@ -156,6 +159,7 @@ abstract class AbstractForm extends Form
             }
 
             $form->add($elements);
+            return $elements;
         } elseif (is_string($elements)) {
             if (!empty($prefix)) {
                 $elements = preg_replace(
@@ -190,6 +194,8 @@ abstract class AbstractForm extends Form
             $hiddenElement = new Element('hidden' . uniqid());
             $hiddenElement->setAttribute('content', $elements);
             $form->add($hiddenElement);
+
+            return $hiddenElement;
         } else {
             throw new Exception('Invalid element ' . __CLASS__ . '::' . __METHOD__ . ')');
         }

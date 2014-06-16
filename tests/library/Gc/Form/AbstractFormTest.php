@@ -133,10 +133,19 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     public function testAddContent()
     {
         $this->assertNull($this->object->addContent($this->object, array()));
-        $this->assertNull($this->object->addContent($this->object, array(new Element\Text('text'))));
-        $this->assertNull($this->object->addContent($this->object, '<input type="text" name="text">', 'prefix'));
-        $this->assertNull($this->object->addContent($this->object, '<input type="text" name="text[test]">', 'prefix'));
-        $this->assertNull($this->object->addContent($this->object, new Element\Text('text-element'), 'prefix'));
+        $result = $this->object->addContent($this->object, array(new Element\Text('text')));
+        $this->assertInternalType('array', $result);
+        $this->assertInstanceOf('Zend\Form\Element\text', $result[0]);
+
+        $result = $this->object->addContent($this->object, '<input type="text" name="text">', 'prefix');
+
+        $result = $this->object->addContent($this->object, '<input type="text" name="text[test]">', 'prefix');
+        $this->assertInstanceof('Zend\Form\Element', $result);
+        $this->assertEquals('<input type="text" name="prefix&#x5B;text&#x5D;[test]">', $result->getAttribute('content'));
+
+        $result = $this->object->addContent($this->object, new Element\Text('text-element'), 'prefix');
+        $this->assertInstanceOf('Zend\Form\Element\Text', $result);
+        $this->assertEquals('prefix[text-element]', $result->getName());
     }
 
     /**

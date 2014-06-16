@@ -139,10 +139,18 @@ class Document extends AbstractForm
 
             $fieldset = new ZendForm\Fieldset('tabs-' . $idx);
             foreach ($properties as $property) {
-                AbstractForm::addContent(
+                $elements = AbstractForm::addContent(
                     $fieldset,
                     Datatype\Model::loadEditor($serviceLocator, $property)
                 );
+
+                if (!is_array($elements)) {
+                    $elements = array($elements);
+                }
+
+                foreach ($elements as $element) {
+                    $element->setOption('required', $property->isRequired());
+                }
             }
 
             $this->add($fieldset);

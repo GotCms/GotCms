@@ -58,7 +58,7 @@
                                     <?php if ($element->getLabel()): ?>
                                         <div class="col-lg-2">
                                             <?php echo $this->formLabel($element); ?>
-                                            <?php if ($element->getAttribute('required')): ?>
+                                            <?php if ($element->getOption('required')): ?>
                                                 <p class="text-danger pull-right">(<?php echo $this->escapeHtml($this->translate('Mandatory')); ?>)</p>
                                             <?php endif; ?>
 
