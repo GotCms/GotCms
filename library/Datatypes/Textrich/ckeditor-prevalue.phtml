@@ -29,6 +29,7 @@
 ?>
 <?php $fieldsets = $this->textrich; ?>
 <span id="ckeditor-select-all" style="cursor:pointer;text-decoration:underline"><?php echo $this->escapeHtml($this->translate('Select all elements')); ?></span>
+/ <span id="ckeditor-unselect-all" style="cursor:pointer;text-decoration:underline"><?php echo $this->escapeHtml($this->translate('Unselect all elements')); ?></span>
 
 <div id="elements" class="row">
     <?php foreach ($fieldsets as $fieldset): ?>
@@ -41,8 +42,8 @@
                     <?php if (!empty($content)): ?>
                         <?php echo $content; ?>
                     <?php else: ?>
-                        <?php echo $this->formLabel($element); ?>
                         <?php echo $this->formElement($element); ?>
+                        <?php echo $this->formLabel($element); ?>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
@@ -53,5 +54,8 @@
 <script type="text/javascript">
     $('#ckeditor-select-all').on('click', function () {
         $('#elements').find('input[type="checkbox"]').prop('checked', true);
+    });
+    $('#ckeditor-unselect-all').on('click', function () {
+        $('#elements').find('input[type="checkbox"]').prop('checked', false);
     });
 </script>

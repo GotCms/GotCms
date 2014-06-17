@@ -313,8 +313,8 @@ class Content extends Object
             $datatypeModel = (string) $child->model;
             $model->addData(
                 array(
-                    'name'           => empty($name) ? $model->getName() : $name,
-                    'model'          => empty($datatypeModel) ? $model->getModel() : $datatypeModel,
+                    'name'  => empty($name) ? $model->getName() : $name,
+                    'model' => empty($datatypeModel) ? $model->getModel() : $datatypeModel,
                 )
             );
             $model->setPrevalueValue((string) $child->prevalue_value);
