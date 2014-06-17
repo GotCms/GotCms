@@ -125,6 +125,14 @@ class PrevalueEditor extends AbstractPrevalueEditor
         $mimeList->setAttribute('class', 'input-checkbox');
         $mimeList->setValueOptions($options);
 
-        return array($isMultiple, $mimeList);
+        return array(
+            $isMultiple,
+            $this->addPath(__DIR__)->render(
+                'upload-prevalue.phtml',
+                array(
+                    'mimeList' => $mimeList
+                )
+            )
+        );
     }
 }
