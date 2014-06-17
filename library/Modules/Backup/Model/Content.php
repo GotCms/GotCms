@@ -92,6 +92,117 @@ class Content extends Object
     }
 
     /**
+     * Load resource data
+     *
+     * @param string $type Type of the resource
+     *
+     * @return string
+     */
+    public function createResource($type)
+    {
+        $name      = ucfirst($type);
+        $className = sprintf('Gc\\%s\\Collection', $name);
+        $method    = sprintf('get%ss', $name);
+
+        $class = new $className();
+        $array = $class->$method();
+        if (empty($array)) {
+            return '';
+        }
+
+        return $class->toXml($array, $type . 's');
+    }
+
+    /**
+     * Load Document type data
+     *
+     * @return string
+     */
+    public function createDocumentType()
+    {
+        $documentTypesCollection = new DocumentType\Collection();
+        $array                   = $documentTypesCollection->getDocumentTypes();
+        if (empty($array)) {
+            return '';
+        }
+
+        foreach ($documentTypesCollection->getDocumentTypes() as $documentType) {
+            //Preload dependencies
+            $children     = array();
+            $dependencies = $documentType->getDependencies();
+            foreach ($dependencies as $dependency) {
+                $children[] = array('id' => $dependency);
+            }
+
+            $documentType->setData('dependencies', $children);
+
+            //Preload available views
+            $children       = array();
+            $availableViews = $documentType->getAvailableViews()->getViews();
+            foreach ($availableViews as $view) {
+                $children[] = array('id' => $view->getId());
+            }
+
+            $documentType->setData('available_views', $children);
+
+            foreach ($documentType->getTabs() as $tab) {
+                //Preload Tabs
+                foreach ($tab->getProperties() as $property) {
+                    //Preload Properties
+                }
+            }
+        }
+
+        return $documentTypesCollection->toXml($documentTypesCollection->getDocumentTypes(), 'document_types');
+    }
+
+    /**
+     * Load Document data
+     *
+     * @return string
+     */
+    public function createDocument()
+    {
+        $documents = new Document\Collection();
+        $rows      = $documents->fetchAll(
+            $documents->select(
+                function ($select) {
+                    $select->order('sort_order ASC');
+                    $select->order('created_at ASC');
+                }
+            )
+        );
+
+        if (empty($rows)) {
+            return '';
+        }
+
+        $documentArray = array();
+        foreach ($rows as $row) {
+            $documentArray[] = Document\Model::fromArray((array) $row);
+        }
+
+        $propertiyCollection = new Property\Collection();
+        foreach ($documentArray as $document) {
+            $array      = array();
+            $properties = $propertiyCollection->load(
+                null,
+                null,
+                $document->getId()
+            )->getProperties();
+            foreach ($properties as $property) {
+                $value = $property->getValueModel()->getValue();
+                $property->getValueModel()->setValue(base64_encode($value));
+                $array[] = $property->getValueModel();
+            }
+
+            $document->setProperties($array);
+        }
+
+        return $documents->toXml($documentArray, 'documents');
+    }
+
+    /**
      * Create xml from type
      *
      * @param string $type Type of element
@@ -103,114 +214,16 @@ class Content extends Object
         $xml = '';
         switch ($type) {
             case 'datatype':
-                $datatypes = new Datatype\Collection();
-                $array     = $datatypes->getDatatypes();
-                if (empty($array)) {
-                    continue;
-                }
-
-                $xml .= $datatypes->toXml($array, 'datatypes');
-                break;
             case 'view':
-                $views = new View\Collection();
-                $array = $views->getViews();
-                if (empty($array)) {
-                    continue;
-                }
-
-                $xml .= $views->toXml($array, 'views');
-                break;
             case 'layout':
-                $layouts = new Layout\Collection();
-                $array   = $layouts->getLayouts();
-                if (empty($array)) {
-                    continue;
-                }
-
-                $xml .= $layouts->toXml($array, 'layouts');
-                break;
             case 'script':
-                $scripts = new Script\Collection();
-                $array   = $scripts->getScripts();
-                if (empty($array)) {
-                    continue;
-                }
-
-                $xml .= $scripts->toXml($array, 'scripts');
+                $xml .= $this->createResource($type);
                 break;
             case 'document-type':
-                $documentTypesCollection = new DocumentType\Collection();
-                $array                   = $documentTypesCollection->getDocumentTypes();
-                if (empty($array)) {
-                    continue;
-                }
-
-                foreach ($documentTypesCollection->getDocumentTypes() as $documentType) {
-                    //Preload dependencies
-                    $children     = array();
-                    $dependencies = $documentType->getDependencies();
-                    foreach ($dependencies as $dependency) {
-                        $children[] = array('id' => $dependency);
-                    }
-                    $documentType->setData('dependencies', $children);
-
-                    //Preload available views
-                    $children       = array();
-                    $availableViews = $documentType->getAvailableViews()->getViews();
-                    foreach ($availableViews as $view) {
-                        $children[] = array('id' => $view->getId());
-                    }
-                    $documentType->setData('available_views', $children);
-
-                    foreach ($documentType->getTabs() as $tab) {
-                        //Preload Tabs
-                        foreach ($tab->getProperties() as $property) {
-                            //Preload Properties
-                        }
-                    }
-                }
-
-                $xml .= $documentTypesCollection->toXml($documentTypesCollection->getDocumentTypes(), 'document_types');
+                $xml .= $this->createDocumentType();
                 break;
             case 'document':
-                $documents = new Document\Collection();
-                $rows      = $documents->fetchAll(
-                    $documents->select(
-                        function ($select) {
-                            $select->order('sort_order ASC');
-                            $select->order('created_at ASC');
-                        }
-                    )
-                );
-
-                if (empty($rows)) {
-                    continue;
-                }
-
-                $documentArray = array();
-                foreach ($rows as $row) {
-                    $documentArray[] = Document\Model::fromArray((array) $row);
-                }
-
-                $propertiyCollection = new Property\Collection();
-                foreach ($documentArray as $document) {
-                    $array      = array();
-                    $properties = $propertiyCollection->load(
-                        null,
-                        null,
-                        $document->getId()
-                    )->getProperties();
-                    foreach ($properties as $property) {
-                        $value = $property->getValueModel()->getValue();
-                        $property->getValueModel()->setValue(base64_encode($value));
-                        $array[] = $property->getValueModel();
-                    }
-
-                    $document->setProperties($array);
-                }
-
-                $xml .= $documents->toXml($documentArray, 'documents');
-
+                $xml .= $this->createDocument();
                 break;
         }
 
