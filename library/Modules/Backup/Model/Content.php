@@ -31,11 +31,8 @@ use Gc\Core\Object;
 use Gc\Document;
 use Gc\Datatype;
 use Gc\DocumentType;
-use Gc\Layout;
-use Gc\Script;
 use Gc\Tab;
 use Gc\Property;
-use Gc\View;
 use Exception;
 use Zend\ServiceManager\ServiceManager;
 

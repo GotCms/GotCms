@@ -82,7 +82,7 @@ class Document extends AbstractForm
      *
      * @param integer $documentTypeId Document type id
      *
-     * @return \Gc\Tab\Collection
+     * @return array
      */
     public function loadTabs($documentTypeId)
     {
@@ -103,7 +103,7 @@ class Document extends AbstractForm
      * @param integer $tabId          Tab id
      * @param integer $documentId     Document id
      *
-     * @return \Gc\Property\Collection
+     * @return array
      */
     public function loadProperties($documentTypeId, $tabId, $documentId)
     {
