@@ -206,17 +206,6 @@ class Model extends AbstractTable
 
         $model->execute($insert);
 
-        $insert = new Sql\Insert();
-        $insert->into('user_acl')
-            ->values(
-                array(
-                    'user_acl_permission_id' => $model->getLastInsertId('user_acl_permission'),
-                    'user_acl_role_id' => 1, //Administrator role
-                )
-            );
-
-        $model->execute($insert);
-
         return $model->getId();
     }
 
