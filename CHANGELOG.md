@@ -11,6 +11,7 @@
 - Cannot import translations from text/php file ([https://github.com/GotCms/GotCms/issues/247](https://github.com/GotCms/GotCms/issues/247))
 - Mixed datatype not working since the latest update for Zend Framework ([https://github.com/GotCms/GotCms/issues/248](https://github.com/GotCms/GotCms/issues/248))
 - Refactoring everything that is related to the required fields in the documents ([https://github.com/GotCms/GotCms/issues/215](https://github.com/GotCms/GotCms/issues/215))
+- Remove pg_espace_bytea ([https://github.com/GotCms/GotCms/issues/250](https://github.com/GotCms/GotCms/issues/250))
 
 ##1.3.0 (30 Mar 2014)
 - Remove layout when using ajax requests ([https://github.com/GotCms/GotCms/issues/185](https://github.com/GotCms/GotCms/issues/185))
