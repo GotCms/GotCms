@@ -84,7 +84,7 @@ class CkEditorTest extends \PHPUnit_Framework_TestCase
     public function testGetToolbarAsJs()
     {
         $this->object->setParameters(array('toolbar-items' => array('Source' => '1')));
-        $this->assertEquals("[['Source'], ['/'], ['/'],]", $this->object->getToolbarAsJs());
+        $this->assertEquals("[['Source'],]", $this->object->getToolbarAsJs());
     }
 
     /**

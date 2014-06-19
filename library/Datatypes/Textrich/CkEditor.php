@@ -151,7 +151,6 @@ class CkEditor extends Object
                     'HiddenField'
                 )
             ),
-            '/',
             array(
                 'name' => 'basicstyles',
                 'items' => array(
@@ -207,7 +206,6 @@ class CkEditor extends Object
                     'Iframe'
                 )
             ),
-            '/',
             array(
                 'name' => 'styles',
                 'items' => array(

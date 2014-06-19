@@ -84,7 +84,7 @@ class Editor extends AbstractEditor
         $script = '<script type="text/javascript">
             $(function () {
                 var config = {
-                    skin: "v2",
+                    skin: "moono",
                     toolbar: ' . $ckeditor->getToolbarAsJs() . '
                 };
 
