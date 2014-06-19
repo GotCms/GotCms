@@ -43,7 +43,7 @@ class StaticEventManager extends SharedEventManager
     /**
      * Retrieve StaticEventManager instance
      *
-     * @var StaticEventManagerInterface
+     * @var SharedEventManagerInterface
      */
     protected static $instance;
 
