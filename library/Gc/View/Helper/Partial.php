@@ -67,7 +67,7 @@ class Partial extends ZendPartial
     {
         $this->useStreamWrapper = false;
         if (!empty($config)) {
-            $this->useStreamWrapper = $config->getValue('stream_wrapper_is_active');
+            $this->useStreamWrapper = (bool) $config->getValue('stream_wrapper_is_active');
         }
     }
 

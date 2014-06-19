@@ -44,7 +44,7 @@ class Updater extends Object
     /**
      * Adapter
      *
-     * @var AbstractAdapter
+     * @var Adapter\AbstractAdapter
      */
     protected $adapter;
 

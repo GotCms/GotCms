@@ -43,7 +43,7 @@ class Config extends AbstractHelper
     /**
      * Core config model
      *
-     * @var Gc\Core\Config
+     * @var CoreConfig
      */
     protected $config;
 

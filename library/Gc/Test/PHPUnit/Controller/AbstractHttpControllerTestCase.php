@@ -42,7 +42,7 @@ class AbstractHttpControllerTestCase extends ZendAbstractHttpControllerTestCase
     /**
      * User model
      *
-     * @var Gc\User\Model
+     * @var UserModel
      */
     protected $user;
 

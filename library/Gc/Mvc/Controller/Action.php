@@ -62,21 +62,21 @@ class Action extends AbstractActionController
     /**
      * RouteMatch
      *
-     * @var \Zend\Mvc\Router\Http\RouteMatch
+     * @var \Zend\Mvc\Router\RouteMatch
      */
     protected $routeMatch = null;
 
     /**
      * Session storage
      *
-     * @var \Zend\Session\Storage\SessionStorage
+     * @var \Zend\Session\Container
      */
     protected $session = null;
 
     /**
      * Abstract acl
      *
-     * @var null
+     * @var array
      */
     protected $aclPage;
 

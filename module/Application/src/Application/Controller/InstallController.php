@@ -61,7 +61,7 @@ class InstallController extends Action
     /**
      * Install form
      *
-     * @var Application\Form\Install
+     * @var Install
      */
     protected $installForm;
 

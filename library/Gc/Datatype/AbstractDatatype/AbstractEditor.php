@@ -43,7 +43,7 @@ abstract class AbstractEditor extends Object
     /**
      * Datatype
      *
-     * @var AbstractDatatype
+     * @var Datatype\AbstractDatatype
      */
     protected $datatype;
 
