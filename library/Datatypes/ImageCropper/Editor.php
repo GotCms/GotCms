@@ -229,9 +229,9 @@ class Editor extends AbstractEditor
             }
         }
 
-        $this->getHelper('HeadLink')->appendStylesheet('/datatypes/ImageCropper/jquery.jcrop.min.css');
-        $this->getHelper('HeadLink')->appendStylesheet('/datatypes/ImageCropper/image-cropper.css');
-        $this->getHelper('HeadScript')->appendFile('/datatypes/ImageCropper/jquery.jcrop.min.js');
+        $this->getHelper('HeadLink')->appendStylesheet('/backend/assets/datatypes/imagecropper/jquery.jcrop.min.css');
+        $this->getHelper('HeadLink')->appendStylesheet('/backend/assets/datatypes/imagecropper/image-cropper.css');
+        $this->getHelper('HeadScript')->appendFile('/backend/assets/datatypes/imagecropper/jquery.jcrop.min.js');
 
         return array(
             $upload,

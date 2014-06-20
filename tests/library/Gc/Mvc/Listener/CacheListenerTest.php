@@ -80,7 +80,7 @@ class CacheListenerTest extends \PHPUnit_Framework_TestCase
 
         $events->shouldReceive('attach')
             ->once()
-               ->with(MvcEvent::EVENT_FINISH, array($this->object, 'onFinish'), -100);
+            ->with(MvcEvent::EVENT_FINISH, array($this->object, 'onFinish'), -100);
 
         $this->object->attach($events);
     }
@@ -198,6 +198,7 @@ class CacheListenerTest extends \PHPUnit_Framework_TestCase
                 'preview' => 'true'
             )
         );
+
         $request = Mockery::mock('Zend\Http\PhpEnvironment\Request');
         $request->shouldReceive('getQuery')->once()->andReturn($p);
 

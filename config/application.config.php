@@ -25,7 +25,7 @@
  */
 
 $modules = array(
-    'AsseticBundle',
+    'AssetManager',
     'Application',
     'Admin',
     'Config',

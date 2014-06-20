@@ -93,7 +93,7 @@ class CacheFactoryTest extends \PHPUnit_Framework_TestCase
         try {
             $instance = $this->object->createService($this->serviceLocator);
             $this->assertInstanceOf('Zend\Cache\Storage\Adapter\AbstractAdapter', $instance);
-        } catch(\Zend\Cache\Exception\ExtensionNotLoadedException $e) {
+        } catch (\Zend\Cache\Exception\ExtensionNotLoadedException $e) {
             //don't care
         }
     }
@@ -110,7 +110,7 @@ class CacheFactoryTest extends \PHPUnit_Framework_TestCase
         try {
             $instance = $this->object->createService($this->serviceLocator);
             $this->assertInstanceOf('Zend\Cache\Storage\Adapter\AbstractAdapter', $instance);
-        } catch(\Zend\Cache\Exception\ExtensionNotLoadedException $e) {
+        } catch (\Zend\Cache\Exception\ExtensionNotLoadedException $e) {
             //don't care
         }
     }
