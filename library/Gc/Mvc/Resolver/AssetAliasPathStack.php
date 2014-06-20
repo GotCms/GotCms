@@ -221,8 +221,8 @@ class AssetAliasPathStack implements Resolver\ResolverInterface, Resolver\MimeRe
     protected function loadDatatypesAliases()
     {
         $collection   = new DatatypeCollection();
-        $datatypeList = $this->serviceLocator->get('DatatypesList');
-        foreach ($datatypeList as $path => $model) {
+        $datatypesList = $this->serviceLocator->get('DatatypesList');
+        foreach ($datatypesList as $path => $model) {
             $this->addAlias(
                 'backend/assets/datatypes/' . strtolower($model),
                 $path . '/assets'
@@ -237,6 +237,12 @@ class AssetAliasPathStack implements Resolver\ResolverInterface, Resolver\MimeRe
      */
     protected function loadModulesAliases()
     {
-
+        $modulesList = $this->serviceLocator->get('ModulesList');
+        foreach ($modulesList as $path => $name) {
+            $this->addAlias(
+                'backend/assets/modules/' . strtolower($name),
+                $path . '/assets'
+            );
+        }
     }
 }
