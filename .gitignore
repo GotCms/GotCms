@@ -63,7 +63,7 @@ vendor/*
 !vendor/Parsedown
 !vendor/SVGGraph
 !vendor/Assetic
-!vendor/AsseticBundle
+!vendor/AssetManager
 !vendor/Zend
 public/backend/css/gotcms.css
 public/backend/css/gotcms-install.css
