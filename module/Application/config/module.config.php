@@ -28,11 +28,18 @@
 use Gc\Core\Config as CoreConfig;
 use Gc\User\Model as UserModel;
 use Gc\View\Helper;
+use Gc\Mvc\Resolver\AssetAliasPathStack;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage;
 use Zend\ModuleManager\Listener;
 
 return array(
+    'asset_manager' => array(
+        'resolvers' => array(
+            'AssetAliasPathStack' => 2000,
+        ),
+    ),
+
     'controllers' => array(
         'invokables' => array(
             'IndexController'   => 'Application\Controller\IndexController',
@@ -41,6 +48,9 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
+            'AssetAliasPathStack'        => function ($sm) {
+                return new AssetAliasPathStack($sm);
+            },
             'Auth'                  => function () {
                 return new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
             },
@@ -225,5 +235,5 @@ return array(
         'en_GB' => 'English',
         'fr_FR' => 'Français',
         'ru_RU' => 'Русский',
-    )
+    ),
 );

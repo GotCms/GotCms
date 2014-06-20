@@ -212,7 +212,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $this->object->getRequest()->getPost()->set($this->object->getName(), 'This *is* **markdown**');
         $this->object->save();
         $this->assertEquals(
-            'a:2:{s:8:"markdown";s:49:"<p>This <em>is</em> <strong>markdown</strong></p>"'.
+            'a:2:{s:8:"markdown";s:49:"<p>This <em>is</em> <strong>markdown</strong></p>"' .
             ';s:6:"source";s:22:"This *is* **markdown**";}',
             $this->object->getValue()
         );

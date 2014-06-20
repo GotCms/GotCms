@@ -51,7 +51,7 @@ class CacheServiceFactoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->serviceLocator = Mockery::mock('Zend\ServiceManager\ServiceLocatorInterface');
-        $this->object = new CacheServiceFactory();
+        $this->object         = new CacheServiceFactory();
     }
 
     /**

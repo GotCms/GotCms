@@ -57,14 +57,14 @@ class Editor extends AbstractEditor
     public function load()
     {
         $this->getHelper('headlink')->appendStylesheet(
-            '/datatypes/DatePicker/css/bootstrap-datetimepicker.min.css'
+            '/backend/assets/datatypes/datepicker/css/bootstrap-datetimepicker.min.css'
         );
         $this->getHelper('headscript')->appendFile(
-            '/datatypes/DatePicker/js/moment.min.js',
+            '/backend/assets/datatypes/datepicker/js/moment.min.js',
             'text/javascript'
         );
         $this->getHelper('headscript')->appendFile(
-            '/datatypes/DatePicker/js/bootstrap-datetimepicker.min.js',
+            '/backend/assets/datatypes/datepicker/js/bootstrap-datetimepicker.min.js',
             'text/javascript'
         );
         $id         = 'datepicker' . $this->getProperty()->getId();

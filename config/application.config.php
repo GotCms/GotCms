@@ -25,6 +25,7 @@
  */
 
 $modules = array(
+    'AssetManager',
     'Application',
     'Admin',
     'Config',
@@ -64,6 +65,7 @@ return array(
     ),
     'autoloader' => array(
         'namespaces' => array(
+            'Assetic'  => __DIR__ . '/../vendor/Assetic',
             'elFinder'  => __DIR__ . '/../vendor/elFinder',
             'Parsedown' => __DIR__ . '/../vendor/Parsedown',
             'Datatypes' => __DIR__ . '/../library/Datatypes',

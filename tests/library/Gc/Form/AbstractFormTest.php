@@ -141,7 +141,10 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->object->addContent($this->object, '<input type="text" name="text[test]">', 'prefix');
         $this->assertInstanceof('Zend\Form\Element', $result);
-        $this->assertEquals('<input type="text" name="prefix&#x5B;text&#x5D;[test]">', $result->getAttribute('content'));
+        $this->assertEquals(
+            '<input type="text" name="prefix&#x5B;text&#x5D;[test]">',
+            $result->getAttribute('content')
+        );
 
         $result = $this->object->addContent($this->object, new Element\Text('text-element'), 'prefix');
         $this->assertInstanceOf('Zend\Form\Element\Text', $result);
