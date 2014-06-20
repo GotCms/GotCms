@@ -1,10 +1,10 @@
 <?php
 $module = empty($this->layout()->routeParams['module']) ? null : strtolower($this->layout()->routeParams['module']);
 ?>
-<div id="breadcrumbs" class="breadcrumbs breadcrumbs-fixed">
+<div id="breadcrumbs" class="breadcrumbs">
     <?php if (!empty($module) and !in_array($module, array('admin', 'statistics'))): ?>
-        <div id="menu-toggler-container">
-            <span id="menu-toggler" class="hidden-lg">
+        <div id="menu-toggler-container" class="hidden-lg">
+            <span id="menu-toggler">
                 <i class="glyphicon glyphicon-new-window"></i>
                 <span class="menu-toggler-text"><?php echo $this->escapeHtml($this->translate('Menu')); ?></span>
             </span>
@@ -12,19 +12,21 @@ $module = empty($this->layout()->routeParams['module']) ? null : strtolower($thi
     <?php endif; ?>
     <ul class="breadcrumb">
         <?php foreach ($this->pages as $key => $page): ?>
-            <li>
-                <?php if (empty($key)): ?>
-                    <i class="glyphicon glyphicon-home home-icon"></i>
-                <?php endif; ?>
+            <?php if ($key < count($this->pages) - 1): ?>
+                <li>
+            <?php else: ?>
+                <li class="active">
+            <?php endif; ?>
 
-                <?php if ($key < count($this->pages) - 1): ?>
-                    <a href="<?php echo $page->getHref(); ?>"><?php echo $this->escapeHtml($this->translate($page->getLabel())); ?></a>
-                    <span class="divider">
-                        <i class="glyphicon glyphicon-chevron-right arrow-icon"></i>
-                    </span>
-                <?php else: ?>
-                    <?php echo $this->escapeHtml($this->translate($page->getLabel())); ?>
-                <?php endif; ?>
+            <?php if (empty($key)): ?>
+                <i class="glyphicon glyphicon-home home-icon"></i>
+            <?php endif; ?>
+
+            <?php if ($key < count($this->pages) - 1): ?>
+                <a href="<?php echo $page->getHref(); ?>"><?php echo $this->escapeHtml($this->translate($page->getLabel())); ?></a>
+            <?php else: ?>
+                <?php echo $this->escapeHtml($this->translate($page->getLabel())); ?>
+            <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>
