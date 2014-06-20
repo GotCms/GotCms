@@ -220,7 +220,7 @@ class AssetAliasPathStack implements Resolver\ResolverInterface, Resolver\MimeRe
      */
     protected function loadDatatypesAliases()
     {
-        $collection   = new DatatypeCollection();
+        $collection    = new DatatypeCollection();
         $datatypesList = $this->serviceLocator->get('DatatypesList');
         foreach ($datatypesList as $path => $model) {
             $this->addAlias(
