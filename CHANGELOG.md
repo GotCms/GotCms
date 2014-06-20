@@ -14,6 +14,7 @@
 - Remove pg_espace_bytea ([https://github.com/GotCms/GotCms/issues/250](https://github.com/GotCms/GotCms/issues/250))
 - Installed modules are not listed ([https://github.com/GotCms/GotCms/issues/253](https://github.com/GotCms/GotCms/issues/253))
 - Update CKeditor to the latest version ([https://github.com/GotCms/GotCms/issues/254](https://github.com/GotCms/GotCms/issues/254))
+- Move public data into modules and datatypes ([https://github.com/GotCms/GotCms/issues/252](https://github.com/GotCms/GotCms/issues/252))
 
 ##1.3.0 (30 Mar 2014)
 - Remove layout when using ajax requests ([https://github.com/GotCms/GotCms/issues/185](https://github.com/GotCms/GotCms/issues/185))

@@ -32,9 +32,15 @@ use Gc\Mvc\Resolver\AssetAliasPathStack;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage;
 use Zend\ModuleManager\Listener;
+use AssetManager\Cache\ZendCacheAdapter;
 
 return array(
     'asset_manager' => array(
+        'caching' => array(
+            'default' => array(
+                'cache'     => 'AssetCache',
+            ),
+        ),
         'resolvers' => array(
             'AssetAliasPathStack' => 2000,
         ),
@@ -50,6 +56,17 @@ return array(
         'factories' => array(
             'AssetAliasPathStack'        => function ($sm) {
                 return new AssetAliasPathStack($sm);
+            },
+            'AssetCache'        => function ($sm) {
+                $cacheIsActive = $sm->get('Gc\Mvc\Listener\CacheListener')->cacheIsActive(
+                    $sm->get('Application')->getMvcEvent()
+                );
+
+                if ($cacheIsActive) {
+                     return new ZendCacheAdapter($sm->get('Cache'));
+                }
+
+                return false;
             },
             'Auth'                  => function () {
                 return new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
