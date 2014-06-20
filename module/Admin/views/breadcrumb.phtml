@@ -1,7 +1,7 @@
 <?php
 $module = empty($this->layout()->routeParams['module']) ? null : strtolower($this->layout()->routeParams['module']);
 ?>
-<div id="breadcrumbs" class="breadcrumbs breadcrumbs-fixed">
+<div id="breadcrumbs" class="breadcrumbs">
     <?php if (!empty($module) and !in_array($module, array('admin', 'statistics'))): ?>
         <div id="menu-toggler-container" class="hidden-lg">
             <span id="menu-toggler">

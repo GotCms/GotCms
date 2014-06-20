@@ -79,7 +79,7 @@
     <?php $module = empty($this->routeParams['module']) ? null : strtolower($this->routeParams['module']); ?>
 </head>
 <body<?php if (!empty($module)): ?> id="module-<?php echo $this->escapeHtml($module); ?>"<?php endif; ?>>
-    <header class="navbar navbar-default navbar-fixed-top breadcrumbs-fixed" id="navbar">
+    <header class="navbar navbar-default navbar-fixed-top" id="navbar">
         <?php echo $this->partial('navigation.phtml', array('active' => $module)); ?>
     </header>
 
