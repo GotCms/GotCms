@@ -27,7 +27,6 @@
 
 namespace Gc\Mvc\Resolver;
 
-use Gc\Datatype\Collection as DatatypeCollection;
 use Zend\ServiceManager\ServiceManager;
 use SplFileInfo;
 use Assetic\Asset\FileAsset;
@@ -182,7 +181,7 @@ class AssetAliasPathStack implements Resolver\ResolverInterface, Resolver\MimeRe
      *
      * @param string $name The path to resolve.
      *
-     * @return  \Assetic\Asset\AssetInterface|null Asset instance when found, null when not.
+     * @return  null|FileAsset Asset instance when found, null when not.
      */
     public function resolve($name)
     {
@@ -220,7 +219,6 @@ class AssetAliasPathStack implements Resolver\ResolverInterface, Resolver\MimeRe
      */
     protected function loadDatatypesAliases()
     {
-        $collection    = new DatatypeCollection();
         $datatypesList = $this->serviceLocator->get('DatatypesList');
         foreach ($datatypesList as $path => $model) {
             $this->addAlias(

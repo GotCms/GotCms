@@ -50,7 +50,7 @@ class StaticEventManager extends SharedEventManager
     /**
      * Retrieve instance
      *
-     * @return StaticEventManagerInterface
+     * @return SharedEventManagerInterface
      */
     public static function getInstance()
     {

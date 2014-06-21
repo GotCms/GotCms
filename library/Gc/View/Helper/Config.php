@@ -73,7 +73,7 @@ class Config extends AbstractHelper
      * @param string $identifier Identifier
      * @param string $value      Value
      *
-     * @return boolean|string
+     * @return boolean
      */
     public function set($identifier, $value)
     {
@@ -85,7 +85,7 @@ class Config extends AbstractHelper
      *
      * @param string $identifier Identifier
      *
-     * @return boolean|string
+     * @return string
      */
     public function get($identifier)
     {

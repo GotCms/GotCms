@@ -479,7 +479,7 @@ class InstallController extends Action
      * Insert data into database
      *
      * @param \Zend\Db\Adapter\Adapter $dbAdapter Database adapter
-     * @param array                    $session   Session array
+     * @param \Zend\Session\Container  $session   Session array
      *
      * @return void
      */
