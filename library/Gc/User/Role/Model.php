@@ -166,12 +166,14 @@ class Model extends AbstractTable
     /**
      * Get User permissions
      *
+     * @param boolean $forceReload Force reload permissions
+     *
      * @return array
      */
-    public function getUserPermissions()
+    public function getUserPermissions($forceReload = false)
     {
         $userPermissions = $this->getData('user_permissions');
-        if (empty($userPermissions)) {
+        if (empty($userPermissions) or $forceReload) {
             $select = new Select();
             if ($this->getName() === self::PROTECTED_NAME) {
                 $select->from('user_acl_resource')
