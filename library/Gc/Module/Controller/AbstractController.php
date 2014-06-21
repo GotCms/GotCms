@@ -51,7 +51,7 @@ abstract class AbstractController extends Action
         }
 
         $routeParams           = $this->layout()->getVariable('routeParams');
-        $routeParams['module'] = 'module';
+        $routeParams['module'] = 'gcmodule';
         $this->layout()->setVariable('routeParams', $routeParams);
     }
 }

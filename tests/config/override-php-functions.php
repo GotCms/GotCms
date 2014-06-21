@@ -140,7 +140,7 @@ class elFinderConnector
 /**
  * Override Installer
  */
-namespace Application\Controller;
+namespace GcFrontend\Controller;
 
 function file_exists($string)
 {
