@@ -47,7 +47,7 @@ class CmsController extends Action
     /**
      * Config form
      *
-     * @var \Config\Form\Config $form
+     * @var \GcConfig\Form\Config $form
      */
     protected $form;
 
