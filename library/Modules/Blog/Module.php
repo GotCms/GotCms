@@ -59,7 +59,7 @@ class Module extends AbstractModule
      */
     public function onBootstrap(Event $e)
     {
-        $this->events()->attach('Admin\Controller\IndexController', 'dashboard', array($this, 'dashboard'));
+        $this->events()->attach('GcBackend\Controller\IndexController', 'dashboard', array($this, 'dashboard'));
     }
 
     /**
