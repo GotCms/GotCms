@@ -202,7 +202,7 @@ class User extends AbstractForm
     /**
      * Set if yes or no password is required when user click on Save
      *
-     * @return \Config\Form\User
+     * @return User
      */
     public function passwordRequired()
     {

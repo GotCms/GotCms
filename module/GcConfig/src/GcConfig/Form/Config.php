@@ -57,7 +57,7 @@ class Config extends AbstractForm
     /**
      * Initialize General sub form
      *
-     * @return \Config\Form\Config
+     * @return Config
      */
     public function initGeneral()
     {
@@ -176,7 +176,7 @@ class Config extends AbstractForm
     /**
      * Initialize System sub form
      *
-     * @return \Config\Form\Config
+     * @return Config
      */
     public function initSystem()
     {
@@ -439,7 +439,7 @@ class Config extends AbstractForm
      *
      * @param array $config Configuration
      *
-     * @return \Config\Form\Config
+     * @return Config
      */
     public function initServer($config)
     {
