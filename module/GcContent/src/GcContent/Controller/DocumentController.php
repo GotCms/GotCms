@@ -165,104 +165,105 @@ class DocumentController extends AbstractController
         if (empty($document)) {
             $this->flashMessenger()->addErrorMessage('Document does not exists!');
             return $this->redirect()->toRoute('content');
-        } else {
-            $documentForm = new Form\Document();
-            $documentForm->init(
-                $this->url()->fromRoute('content/document/edit', array('id' => $documentId))
+        }
+
+        $documentForm = new Form\Document();
+        $documentForm->init(
+            $this->url()->fromRoute('content/document/edit', array('id' => $documentId))
+        );
+
+        $hasError       = false;
+        $documentTypeId = $document->getDocumentTypeId();
+        $oldUrlKey      = $document->getUrlKey();
+
+        if ($this->getRequest()->isPost()) {
+            $documentVars = $this->getRequest()->getPost()->toArray();
+            $document->setName(
+                empty($documentVars['document-name']) ?
+                $document->getName() :
+                $documentVars['document-name']
+            );
+            $document->setStatus(
+                empty($documentVars['document-status']) ?
+                DocumentModel::STATUS_DISABLE :
+                DocumentModel::STATUS_ENABLE
+            );
+            $document->showInNav(
+                empty($documentVars['document-show_in_nav']) ?
+                false :
+                $documentVars['document-show_in_nav']
+            );
+            $document->canBeCached(
+                empty($documentVars['document-can_be_cached']) ?
+                false :
+                $documentVars['document-can_be_cached']
+            );
+            $document->setLayoutId(
+                empty($documentVars['document-layout']) ?
+                false :
+                $documentVars['document-layout']
+            );
+            $document->setViewId(
+                empty($documentVars['document-view']) ?
+                $document->getViewId() :
+                $documentVars['document-view']
+            );
+            $document->setUrlKey(
+                empty($documentVars['document-url_key']) ?
+                '' :
+                $documentVars['document-url_key']
             );
 
-            $hasError       = false;
-            $documentTypeId = $document->getDocumentTypeId();
-            $oldUrlKey      = $document->getUrlKey();
-
-            if ($this->getRequest()->isPost()) {
-                $documentVars = $this->getRequest()->getPost()->toArray();
-                $document->setName(
-                    empty($documentVars['document-name']) ?
-                    $document->getName() :
-                    $documentVars['document-name']
-                );
-                $document->setStatus(
-                    empty($documentVars['document-status']) ?
-                    DocumentModel::STATUS_DISABLE :
-                    DocumentModel::STATUS_ENABLE
-                );
-                $document->showInNav(
-                    empty($documentVars['document-show_in_nav']) ?
-                    false :
-                    $documentVars['document-show_in_nav']
-                );
-                $document->canBeCached(
-                    empty($documentVars['document-can_be_cached']) ?
-                    false :
-                    $documentVars['document-can_be_cached']
-                );
-                $document->setLayoutId(
-                    empty($documentVars['document-layout']) ?
-                    false :
-                    $documentVars['document-layout']
-                );
-                $document->setViewId(
-                    empty($documentVars['document-view']) ?
-                    $document->getViewId() :
-                    $documentVars['document-view']
-                );
-                $document->setUrlKey(
-                    empty($documentVars['document-url_key']) ?
-                    '' :
-                    $documentVars['document-url_key']
-                );
-
-                $tabs = $documentForm->loadTabs($documentTypeId);
-                foreach ($tabs as $tab) {
-                    $properties = $documentForm->loadProperties($documentTypeId, $tab->getId(), $document->getId());
-                    $connection = $document->getAdapter()->getDriver()->getConnection();
-                    try {
-                        $connection->beginTransaction();
-                        foreach ($properties as $property) {
-                            $property->setDocumentId($document->getId())->loadValue();
-                            if (!Datatype\Model::saveEditor($this->getServiceLocator(), $property)) {
-                                $hasError = true;
-                            }
+            $tabs = $documentForm->loadTabs($documentTypeId);
+            foreach ($tabs as $tab) {
+                $properties = $documentForm->loadProperties($documentTypeId, $tab->getId(), $document->getId());
+                $connection = $document->getAdapter()->getDriver()->getConnection();
+                try {
+                    $connection->beginTransaction();
+                    foreach ($properties as $property) {
+                        $property->setDocumentId($document->getId())->loadValue();
+                        if (!Datatype\Model::saveEditor($this->getServiceLocator(), $property)) {
+                            $hasError = true;
                         }
-
-                        if ($hasError) {
-                            $connection->rollBack();
-                        } else {
-                            $connection->commit();
-                        }
-                    } catch (Exception $e) {
-                        $connection->rollBack();
                     }
+
+                    if ($hasError) {
+                        $connection->rollBack();
+                    } else {
+                        $connection->commit();
+                    }
+                } catch (Exception $e) {
+                    $connection->rollBack();
                 }
             }
-
-
-            $tabsArray   = $documentForm->load($documentTypeId, $document, $this->getServiceLocator());
-            $tabsArray[] = $this->getServiceLocator()->get('MvcTranslator')->translate('Document information');
-
-            $formDocumentAdd = $documentForm->get('tabs-' . count($tabsArray));
-            if ($this->getRequest()->isPost()) {
-                $formDocumentAdd->setData($this->getRequest()->getPost()->toArray());
-
-                if ($hasError or !$formDocumentAdd->isValid()) {
-                    $document->setStatus(DocumentModel::STATUS_DISABLE);
-                    $document->setUrlKey($oldUrlKey);
-                    $this->flashMessenger()->addErrorMessage(
-                        'This document cannot be saved because one or more properties values are required !'
-                    );
-                    $this->useFlashMessenger();
-                } else {
-                    $this->flashMessenger()->addSuccessMessage('This document has been saved');
-                    $document->addData($formDocumentAdd->getInputFilter()->getValues());
-                    $document->save();
-
-                    return $this->redirect()->toRoute('content/document/edit', array('id' => $documentId));
-                }
-            }
-
-            return array('form' => $documentForm, 'tabs' => new Component\Tabs($tabsArray), 'document' => $document);
         }
+
+
+        $tabsArray   = $documentForm->load($documentTypeId, $document, $this->getServiceLocator());
+        $tabsArray[] = $this->getServiceLocator()->get('MvcTranslator')->translate('Document information');
+
+        $formDocumentAdd = $documentForm->get('tabs-' . count($tabsArray));
+        if ($this->getRequest()->isPost()) {
+            $formDocumentAdd->setData($this->getRequest()->getPost()->toArray());
+
+            if ($hasError or !$formDocumentAdd->isValid()) {
+                $document->setStatus(DocumentModel::STATUS_DISABLE);
+                $document->setUrlKey($oldUrlKey);
+                $this->flashMessenger()->addErrorMessage(
+                    'This document cannot be saved because one or more properties values are required !'
+                );
+                $this->useFlashMessenger();
+            } else {
+                $this->flashMessenger()->addSuccessMessage('This document has been saved');
+                $document->addData($formDocumentAdd->getInputFilter()->getValues());
+                $document->save();
+
+                return $this->redirect()->toRoute('content/document/edit', array('id' => $documentId));
+            }
+        }
+
+        $this->layout()->setVariable('documentId', $documentId);
+        return array('form' => $documentForm, 'tabs' => new Component\Tabs($tabsArray), 'document' => $document);
     }
 
     /**
