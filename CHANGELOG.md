@@ -1,5 +1,8 @@
 # CHANGELOG
 
+##1.4.2 (23 Jun 2014)
+- Unpublished document can be view if we know the url ([https://github.com/GotCms/GotCms/issues/258](https://github.com/GotCms/GotCms/issues/258))
+
 ##1.4.1 (23 Jun 2014)
 - Cache problem with memcached and two websites on the same server ([https://github.com/GotCms/GotCms/issues/256](https://github.com/GotCms/GotCms/issues/256))
 - Document menu is not selected ([https://github.com/GotCms/GotCms/issues/257](https://github.com/GotCms/GotCms/issues/257))

@@ -87,7 +87,10 @@ class DocumentListener extends AbstractListenerAggregate
         }
 
         $this->logVisitor($isPreview, $isAdmin);
-        $serviceManager->setService('CurrentDocument', empty($document) ? false : $document);
+        $serviceManager->setService(
+            'CurrentDocument',
+            (empty($document) or (!$document->isPublished() and !$isPreview)) ? false : $document
+        );
     }
 
     /**
