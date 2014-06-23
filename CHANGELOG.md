@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.0 (-- --- 2014)
+- Missing label for Datepicker datatype ([https://github.com/GotCms/GotCms/issues/259](https://github.com/GotCms/GotCms/issues/259))
+
 ##1.4.2 (23 Jun 2014)
 - Unpublished document can be view if we know the url ([https://github.com/GotCms/GotCms/issues/258](https://github.com/GotCms/GotCms/issues/258))
 
