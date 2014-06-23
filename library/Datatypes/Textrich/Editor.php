@@ -85,7 +85,8 @@ class Editor extends AbstractEditor
             $(function () {
                 var config = {
                     skin: "moono",
-                    toolbar: ' . $ckeditor->getToolbarAsJs() . '
+                    toolbar: ' . $ckeditor->getToolbarAsJs() . ',
+                    allowedContent: true
                 };
 
                 $("#' . $id . '").ckeditor(config)
