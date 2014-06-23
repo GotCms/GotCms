@@ -28,9 +28,15 @@
 
 ?>
 
-<div class="col-lg-2 lead">
-    <p><strong><?php echo $this->escapeHtml($this->datatypeName); ?></strong></p>
-    <p class="help-block"><?php echo $this->escapeHtml($this->datatypeDescription); ?></p>
+<div class="col-lg-2">
+    <label><?php echo $this->escapeHtml($this->property->getName()); ?></label>
+    <?php if ($this->property->isRequired()): ?>
+        <p class="text-danger pull-right">(<?php echo $this->escapeHtml($this->translate('Mandatory')); ?>)</p>
+    <?php endif; ?>
+
+    <?php if ($this->property->getDescription()): ?>
+        <p class="help-block"><?php echo $this->escapeHtml($this->translate($this->property->getDescription())); ?></p>
+    <?php endif; ?>
 </div>
 <div class="col-lg-10">
     <div class="floatL">

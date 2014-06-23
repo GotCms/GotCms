@@ -149,7 +149,12 @@ class Document extends AbstractForm
                 }
 
                 foreach ($elements as $element) {
+                    if (empty($element)) {
+                        continue;
+                    }
+
                     $element->setOption('required', $property->isRequired());
+                    $element->setOption('description', $property->getDescription());
                 }
             }
 

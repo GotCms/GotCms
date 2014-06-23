@@ -71,7 +71,6 @@ class Editor extends AbstractEditor
         $textarea->setAttribute('id', $this->getName());
         $textarea->setAttribute('class', 'form-control');
         $textarea->setAttribute('required', $property->isRequired());
-        $textarea->setAttribute('description', $property->getDescription());
         $textarea->setLabel($this->getProperty()->getName());
         $textarea->setValue(!empty($data['source']) ? $data['source'] : '');
 
@@ -81,6 +80,7 @@ class Editor extends AbstractEditor
                 'textarea' => $textarea,
                 'id'       => $this->getName(),
                 'value'    => $this->getValue(),
+                'property' => $property
             )
         );
     }

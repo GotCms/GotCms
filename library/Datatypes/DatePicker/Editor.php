@@ -70,7 +70,7 @@ class Editor extends AbstractEditor
         $id         = 'datepicker' . $this->getProperty()->getId();
         $datepicker = new Element\Text($this->getName());
         $datepicker->setLabel($this->getProperty()->getName())
-            ->setAttribute('description', $this->getProperty()->getDescription())
+            ->setAttribute('id', $this->getName())
             ->setAttribute('class', 'form-control')
             ->setAttribute('required', $this->getProperty()->isRequired())
             ->setValue($this->getValue());
@@ -80,6 +80,7 @@ class Editor extends AbstractEditor
             array(
                 'id' => $id,
                 'element' => $datepicker,
+                'property' => $this->getProperty()
             )
         );
     }

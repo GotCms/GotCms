@@ -50,26 +50,24 @@
                                 <a class="btn btn-link" target="_blank" href="<?php echo $this->escapeHtml($this->document->getUrl()); ?>?preview=true"><?php echo $this->escapeHtml($this->document->getUrl()); ?></a>
                             </div>
                         <?php else: ?>
+                            <?php if ($element->getLabel()): ?>
+                                <div class="col-lg-2">
+                                    <?php echo $this->formLabel($element); ?>
+                                    <?php if ($element->getOption('required')): ?>
+                                        <p class="text-danger pull-right">(<?php echo $this->escapeHtml($this->translate('Mandatory')); ?>)</p>
+                                    <?php endif; ?>
+
+                                    <?php $description = $element->getOption('description'); ?>
+                                    <?php if (!empty($description)): ?>
+                                        <p class="help-block"><?php echo $this->escapeHtml($this->translate($description)); ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+
                             <?php $content = $element->getAttribute('content'); ?>
                             <?php if (!empty($content)): ?>
                                 <?php echo $content; ?>
                             <?php else: ?>
-                                <?php if ($element->getAttribute('type') != 'hidden'): ?>
-                                    <?php if ($element->getLabel()): ?>
-                                        <div class="col-lg-2">
-                                            <?php echo $this->formLabel($element); ?>
-                                            <?php if ($element->getOption('required')): ?>
-                                                <p class="text-danger pull-right">(<?php echo $this->escapeHtml($this->translate('Mandatory')); ?>)</p>
-                                            <?php endif; ?>
-
-                                            <?php $description = $element->getAttribute('description'); ?>
-                                            <?php if (!empty($description)): ?>
-                                                <p class="help-block"><?php echo $this->escapeHtml($this->translate($description)); ?></p>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-
                                 <div class="col-lg-10">
                                     <?php echo $this->formElement($element); ?>
                                     <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>

@@ -203,8 +203,7 @@ class Editor extends AbstractEditor
         return $this->addPath(__DIR__)->render(
             'mixed-editor.phtml',
             array(
-                'datatypeName' => $this->getProperty()->getName(),
-                'datatypeDescription' => $this->getProperty()->getDescription(),
+                'property' => $this->getProperty(),
                 'datatypes' => $datatypesElements,
                 'propertyName' => $this->getName(),
                 'templateElements' => $template,
