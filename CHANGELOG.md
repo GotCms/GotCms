@@ -1,6 +1,9 @@
 # CHANGELOG
 
-##1.4.0 (-- -- 2014)
+##1.4.1 (-- --- 2014)
+- Cache problem with memcached and two websites on the same server ([https://github.com/GotCms/GotCms/issues/256](https://github.com/GotCms/GotCms/issues/256))
+
+##1.4.0 (23 Jun 2014)
 - Add Markdown datatype ([https://github.com/GotCms/GotCms/issues/234](https://github.com/GotCms/GotCms/issues/234))
 - Update to Zend Framework 2.3.1 ([https://github.com/GotCms/GotCms/issues/236](https://github.com/GotCms/GotCms/issues/236))
 - Intl is no longer required ([https://github.com/GotCms/GotCms/issues/237](https://github.com/GotCms/GotCms/issues/237))
