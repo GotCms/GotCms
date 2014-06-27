@@ -1,5 +1,5 @@
 author = Pierre Rambaud
 date = 2012
-version = "0.3"
-cms_version = ">=1.0.0"
+version = "0.4"
+cms_version = ">=1.4.0"
 description = "Social"

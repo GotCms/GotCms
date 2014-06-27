@@ -143,16 +143,16 @@ class Editor extends AbstractEditor
     {
         $headscript = $this->getHelper('HeadScript');
         $headscript
-            ->appendFile('/datatypes/jQueryFileUpload/load-image.min.js', 'text/javascript')
-            ->appendFile('/datatypes/jQueryFileUpload/canvas-to-blob.min.js', 'text/javascript')
-            ->appendFile('/datatypes/jQueryFileUpload/jquery.iframe-transport.js', 'text/javascript')
-            ->appendFile('/datatypes/jQueryFileUpload/jquery.fileupload.js', 'text/javascript')
-            ->appendFile('/datatypes/jQueryFileUpload/jquery.fileupload-fp.js', 'text/javascript')
-            ->appendFile('/datatypes/jQueryFileUpload/jquery.fileupload-ui.js', 'text/javascript')
-            ->appendFile('/datatypes/jQueryFileUpload/locale.js', 'text/javascript');
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/load-image.min.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/canvas-to-blob.min.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.iframe-transport.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-fp.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-ui.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/locale.js', 'text/javascript');
 
         $headlink = $this->getHelper('HeadLink');
-        $headlink->appendStylesheet('/datatypes/jQueryFileUpload/jquery.fileupload-ui.css')
-            ->appendStylesheet('/datatypes/jQueryFileUpload/jfileupload-bootstrap.css');
+        $headlink->appendStylesheet('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-ui.css')
+            ->appendStylesheet('/backend/assets/datatypes/jqueryfileupload/jfileupload-bootstrap.css');
     }
 }

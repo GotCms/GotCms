@@ -178,7 +178,7 @@ abstract class AbstractEditor extends Object
     /**
      * Get datatype
      *
-     * @return mixed
+     * @return Datatype\AbstractDatatype
      */
     public function getDatatype()
     {

@@ -71,9 +71,9 @@ class Stream
     protected $stat = array();
 
     /**
-     * Stream stats.
+     * Stream mode.
      *
-     * @var array
+     * @var string
      */
     protected $mode;
 

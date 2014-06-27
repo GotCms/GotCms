@@ -118,7 +118,7 @@ class CacheListener extends AbstractListenerAggregate
      *
      * @return boolean
      */
-    protected function cacheIsActive(MvcEvent $e)
+    public function cacheIsActive(MvcEvent $e)
     {
         $serviceManager = $e->getApplication()->getServiceManager();
         $coreConfig     = $serviceManager->get('CoreConfig');

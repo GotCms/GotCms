@@ -132,7 +132,7 @@ abstract class AbstractPrevalueEditor extends Object
     /**
      * Get current datatype
      *
-     * @return mixed
+     * @return Datatype\AbstractDatatype
      */
     public function getDatatype()
     {

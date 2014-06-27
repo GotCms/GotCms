@@ -180,7 +180,7 @@ class Action extends AbstractActionController
     /**
      * Get session storage
      *
-     * @return \Zend\Session\Storage\SessionStorage
+     * @return SessionContainer
      */
     public function getSession()
     {

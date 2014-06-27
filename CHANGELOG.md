@@ -1,6 +1,16 @@
 # CHANGELOG
 
-##1.4.0 (-- -- 2014)
+## 2.0.0 (-- --- 2014)
+- Missing label for Datepicker datatype ([https://github.com/GotCms/GotCms/issues/259](https://github.com/GotCms/GotCms/issues/259))
+
+##1.4.2 (23 Jun 2014)
+- Unpublished document can be view if we know the url ([https://github.com/GotCms/GotCms/issues/258](https://github.com/GotCms/GotCms/issues/258))
+
+##1.4.1 (23 Jun 2014)
+- Cache problem with memcached and two websites on the same server ([https://github.com/GotCms/GotCms/issues/256](https://github.com/GotCms/GotCms/issues/256))
+- Document menu is not selected ([https://github.com/GotCms/GotCms/issues/257](https://github.com/GotCms/GotCms/issues/257))
+
+##1.4.0 (23 Jun 2014)
 - Add Markdown datatype ([https://github.com/GotCms/GotCms/issues/234](https://github.com/GotCms/GotCms/issues/234))
 - Update to Zend Framework 2.3.1 ([https://github.com/GotCms/GotCms/issues/236](https://github.com/GotCms/GotCms/issues/236))
 - Intl is no longer required ([https://github.com/GotCms/GotCms/issues/237](https://github.com/GotCms/GotCms/issues/237))
@@ -14,6 +24,8 @@
 - Remove pg_espace_bytea ([https://github.com/GotCms/GotCms/issues/250](https://github.com/GotCms/GotCms/issues/250))
 - Installed modules are not listed ([https://github.com/GotCms/GotCms/issues/253](https://github.com/GotCms/GotCms/issues/253))
 - Update CKeditor to the latest version ([https://github.com/GotCms/GotCms/issues/254](https://github.com/GotCms/GotCms/issues/254))
+- Move public data into modules and datatypes ([https://github.com/GotCms/GotCms/issues/252](https://github.com/GotCms/GotCms/issues/252))
+- Rename modules ([https://github.com/GotCms/GotCms/issues/251](https://github.com/GotCms/GotCms/issues/251))
 
 ##1.3.0 (30 Mar 2014)
 - Remove layout when using ajax requests ([https://github.com/GotCms/GotCms/issues/185](https://github.com/GotCms/GotCms/issues/185))

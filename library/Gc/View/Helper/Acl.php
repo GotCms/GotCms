@@ -63,7 +63,7 @@ class Acl extends AbstractHelper
      */
     public function __construct(UserModel $user)
     {
-        $this->acl      = $user->getAcl();
+        $this->acl      = $user->getAcl(true);
         $this->roleName = $user->getRole()->getName();
     }
 

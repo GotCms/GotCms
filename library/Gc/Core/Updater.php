@@ -98,7 +98,7 @@ class Updater extends Object
     /**
      * Update
      *
-     * @return void
+     * @return boolean
      */
     public function update()
     {
@@ -112,7 +112,7 @@ class Updater extends Object
     /**
      * Upgrade
      *
-     * @return void
+     * @return boolean
      */
     public function upgrade()
     {
@@ -128,7 +128,7 @@ class Updater extends Object
      *
      * @param string $currentVersion Current version
      *
-     * @return void
+     * @return boolean
      */
     public function rollback($currentVersion)
     {

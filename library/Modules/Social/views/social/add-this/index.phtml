@@ -26,22 +26,22 @@
  */
 ?>
 <?php $this->headScript()
-    ->appendFile($this->cdnBackend('/modules/Social/js/core-1.1.1.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/options-page.32.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/lr.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/jquery.qtip.min.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/jqueryui.sortable.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/jquery.selectBoxIt.min.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/jquery.messagebox.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/jquery.atjax.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/lodash-0.10.0.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/addthis.js'), 'text/javascript')
-    ->appendFile($this->cdnBackend('/modules/Social/js/common.js'), 'text/javascript'); ?>
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/core-1.1.1.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/options-page.32.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/lr.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/jquery.qtip.min.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/jqueryui.sortable.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/jquery.selectBoxIt.min.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/jquery.messagebox.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/jquery.atjax.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/lodash-0.10.0.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/addthis.js'), 'text/javascript')
+    ->appendFile($this->cdnBackend('/backend/assets/modules/social/js/common.js'), 'text/javascript'); ?>
 
 <?php $this->headLink()
-    ->appendStylesheet($this->cdnBackend('/modules/Social/css/addthis.css'))
-    ->appendStylesheet($this->cdnBackend('/modules/Social/css/options-page.css'))
-    ->appendStylesheet($this->cdnBackend('/modules/Social/css/output.css'))
+    ->appendStylesheet($this->cdnBackend('/backend/assets/modules/social/css/addthis.css'))
+    ->appendStylesheet($this->cdnBackend('/backend/assets/modules/social/css/options-page.css'))
+    ->appendStylesheet($this->cdnBackend('/backend/assets/modules/social/css/output.css'))
     ->appendStylesheet('https://ct1.addthis.com/static/r07/widget114.css')
     ->appendStylesheet('https://ct1.addthis.com/static/r07/widgetbig056.css'); ?>
 
@@ -68,6 +68,6 @@ $(function() {
     $('#tabs').tabs();
 });
 /* <![CDATA[ */
-var addthis_params = {"img_base":"/modules/Social/images/"};
+var addthis_params = {"img_base":"/backend/assets/modules/social/images/"};
 /* ]]> */
 </script>

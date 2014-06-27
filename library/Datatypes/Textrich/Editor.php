@@ -57,9 +57,9 @@ class Editor extends AbstractEditor
      */
     public function load()
     {
-        $this->getHelper('headscript')->appendFile('/datatypes/Textrich/ckeditor.js', 'text/javascript');
+        $this->getHelper('headscript')->appendFile('/backend/assets/datatypes/textrich/ckeditor.js', 'text/javascript');
         $this->getHelper('headscript')->appendFile(
-            '/datatypes/Textrich/ckeditor-adapters-jquery.js',
+            '/backend/assets/datatypes/textrich/ckeditor-adapters-jquery.js',
             'text/javascript'
         );
 
@@ -76,7 +76,6 @@ class Editor extends AbstractEditor
         $id       = 'textrich' . $this->getProperty()->getId();
         $textrich = new Element\Textarea($this->getName());
         $textrich->setLabel($this->getProperty()->getName());
-        $textrich->setAttribute('description', $this->getProperty()->getDescription());
         $textrich->setAttribute('id', $id);
         $textrich->setAttribute('class', $id);
         $textrich->setValue($this->getProperty()->getValue());
@@ -85,7 +84,8 @@ class Editor extends AbstractEditor
             $(function () {
                 var config = {
                     skin: "moono",
-                    toolbar: ' . $ckeditor->getToolbarAsJs() . '
+                    toolbar: ' . $ckeditor->getToolbarAsJs() . ',
+                    allowedContent: true
                 };
 
                 $("#' . $id . '").ckeditor(config)

@@ -28,6 +28,7 @@
 namespace Gc\Mvc\Service;
 
 use Zend\Mvc\MvcEvent;
+use Gc\Document\Model as DocumentModel;
 use Gc\Event\CacheEvent;
 use Zend\EventManager\EventManager;
 use Zend\EventManager\EventManagerInterface;
@@ -147,7 +148,14 @@ class CacheService implements EventManagerAwareInterface
      */
     protected function createId(HttpRequest $request)
     {
-        return md5($request->getServer('HTTPS') . '-' . $request->getRequestUri());
+        return md5(
+            sprintf(
+                '%s-%s-%s',
+                $request->getServer('HTTPS'),
+                $request->getServer('HTTP_HOST'),
+                $request->getRequestUri()
+            )
+        );
     }
 
     /**
@@ -208,10 +216,11 @@ class CacheService implements EventManagerAwareInterface
 
         $application    = $event->getApplication();
         $serviceManager = $application->getServiceManager();
-        if ($serviceManager->has('CurrentDocument')
-            and $serviceManager->get('CurrentDocument')->canBeCached() === false
-        ) {
-            return false;
+        if ($serviceManager->has('CurrentDocument')) {
+            $currentDocument = $serviceManager->get('CurrentDocument');
+            if (!$currentDocument instanceof DocumentModel or $currentDocument->canBeCached() === false) {
+                return false;
+            }
         }
 
         return true;

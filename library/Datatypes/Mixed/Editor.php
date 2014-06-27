@@ -198,13 +198,12 @@ class Editor extends AbstractEditor
             $template[$datatypeId]['fieldset'] = $fieldset;
         }
 
-        $this->getHelper('HeadLink')->appendStylesheet('/datatypes/Mixed/mixed.css');
+        $this->getHelper('HeadLink')->appendStylesheet('/backend/assets/datatypes/mixed/mixed.css');
 
         return $this->addPath(__DIR__)->render(
             'mixed-editor.phtml',
             array(
-                'datatypeName' => $this->getProperty()->getName(),
-                'datatypeDescription' => $this->getProperty()->getDescription(),
+                'property' => $this->getProperty(),
                 'datatypes' => $datatypesElements,
                 'propertyName' => $this->getName(),
                 'templateElements' => $template,

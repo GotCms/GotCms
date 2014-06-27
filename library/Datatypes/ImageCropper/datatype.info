@@ -1,5 +1,5 @@
 author = Pierre Rambaud
 date = 2012
 version = "0.2"
-cms_version = ">=1.0.0"
+cms_version = ">1.4.2"
 description = "Allow users to upload image and resize / crop them."

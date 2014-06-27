@@ -57,20 +57,20 @@ class Editor extends AbstractEditor
     public function load()
     {
         $this->getHelper('headlink')->appendStylesheet(
-            '/datatypes/DatePicker/css/bootstrap-datetimepicker.min.css'
+            '/backend/assets/datatypes/datepicker/css/bootstrap-datetimepicker.min.css'
         );
         $this->getHelper('headscript')->appendFile(
-            '/datatypes/DatePicker/js/moment.min.js',
+            '/backend/assets/datatypes/datepicker/js/moment.min.js',
             'text/javascript'
         );
         $this->getHelper('headscript')->appendFile(
-            '/datatypes/DatePicker/js/bootstrap-datetimepicker.min.js',
+            '/backend/assets/datatypes/datepicker/js/bootstrap-datetimepicker.min.js',
             'text/javascript'
         );
         $id         = 'datepicker' . $this->getProperty()->getId();
         $datepicker = new Element\Text($this->getName());
         $datepicker->setLabel($this->getProperty()->getName())
-            ->setAttribute('description', $this->getProperty()->getDescription())
+            ->setAttribute('id', $this->getName())
             ->setAttribute('class', 'form-control')
             ->setAttribute('required', $this->getProperty()->isRequired())
             ->setValue($this->getValue());
@@ -80,6 +80,7 @@ class Editor extends AbstractEditor
             array(
                 'id' => $id,
                 'element' => $datepicker,
+                'property' => $this->getProperty()
             )
         );
     }

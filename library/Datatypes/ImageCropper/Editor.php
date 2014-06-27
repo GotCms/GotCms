@@ -197,7 +197,6 @@ class Editor extends AbstractEditor
         $property   = $this->getProperty();
         $upload     = new Element\File($this->getName());
         $upload->setAttribute('class', 'form-control');
-        $upload->setAttribute('description', $property->getDescription());
         $upload->setAttribute('required', $property->isRequired());
         $upload->setLabel($property->getName());
 
@@ -229,9 +228,9 @@ class Editor extends AbstractEditor
             }
         }
 
-        $this->getHelper('HeadLink')->appendStylesheet('/datatypes/ImageCropper/jquery.jcrop.min.css');
-        $this->getHelper('HeadLink')->appendStylesheet('/datatypes/ImageCropper/image-cropper.css');
-        $this->getHelper('HeadScript')->appendFile('/datatypes/ImageCropper/jquery.jcrop.min.js');
+        $this->getHelper('HeadLink')->appendStylesheet('/backend/assets/datatypes/imagecropper/jquery.jcrop.min.css');
+        $this->getHelper('HeadLink')->appendStylesheet('/backend/assets/datatypes/imagecropper/image-cropper.css');
+        $this->getHelper('HeadScript')->appendFile('/backend/assets/datatypes/imagecropper/jquery.jcrop.min.js');
 
         return array(
             $upload,

@@ -237,6 +237,12 @@ class DocumentListenerTest extends \PHPUnit_Framework_TestCase
         $this->deleteDocuments();
     }
 
+
+    /**
+     * test
+     *
+     * @return void
+     */
     protected function createDocuments()
     {
         $this->view = View\Model::fromArray(

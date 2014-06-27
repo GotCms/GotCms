@@ -134,7 +134,7 @@ class Acl extends ZendAcl\Acl
         $this->initResources();
 
         $userRole  = $this->user->getRole();
-        $resources = $userRole->getUserPermissions();
+        $resources = $userRole->getUserPermissions(true);
         foreach ($resources as $resource => $permissions) {
             $this->allow($userRole->getName(), $resource, 'index');
             foreach ($permissions as $permission) {

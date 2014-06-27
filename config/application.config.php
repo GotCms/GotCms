@@ -25,13 +25,14 @@
  */
 
 $modules = array(
-    'Application',
-    'Admin',
-    'Config',
-    'Content',
-    'Development',
-    'Module',
-    'Statistics',
+    'AssetManager',
+    'GcFrontend',
+    'GcBackend',
+    'GcConfig',
+    'GcContent',
+    'GcDevelopment',
+    'GcModule',
+    'GcStatistics',
 );
 
 $path       = GC_APPLICATION_PATH . '/extensions/ZfModules/';
@@ -64,6 +65,7 @@ return array(
     ),
     'autoloader' => array(
         'namespaces' => array(
+            'Assetic'  => __DIR__ . '/../vendor/Assetic',
             'elFinder'  => __DIR__ . '/../vendor/elFinder',
             'Parsedown' => __DIR__ . '/../vendor/Parsedown',
             'Datatypes' => __DIR__ . '/../library/Datatypes',

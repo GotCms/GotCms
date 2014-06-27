@@ -1,5 +1,5 @@
 author = Pierre Rambaud
 date = 2012
 version = "0.2"
-cms_version = ">=1.0.0"
+cms_version = ">1.4.2"
 description = "You can combine existing datatypes into a single property. It allow contributor to add several type of content."

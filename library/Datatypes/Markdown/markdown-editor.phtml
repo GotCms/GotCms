@@ -29,18 +29,26 @@
 ?>
 <?php
 $this->headLink()
-    ->appendStylesheet('/datatypes/Markdown/css/solarized-light.css')
-    ->appendStylesheet('/datatypes/Markdown/css/crevasse.css');
+    ->appendStylesheet('/backend/assets/datatypes/markdown/css/solarized-light.css')
+    ->appendStylesheet('/backend/assets/datatypes/markdown/css/crevasse.css');
 
 $this->headScript()
-    ->appendFile('/datatypes/Markdown/js/jquery.caret.js')
-    ->appendFile('/datatypes/Markdown/js/jquery.scrollTo.min.js')
-    ->appendFile('/datatypes/Markdown/js/marked.js')
-    ->appendFile('/datatypes/Markdown/js/rainbow-custom.min.js')
-    ->appendFile('/datatypes/Markdown/js/crevasse.js');
+    ->appendFile('/backend/assets/datatypes/markdown/js/jquery.caret.js')
+    ->appendFile('/backend/assets/datatypes/markdown/js/jquery.scrollTo.min.js')
+    ->appendFile('/backend/assets/datatypes/markdown/js/marked.js')
+    ->appendFile('/backend/assets/datatypes/markdown/js/rainbow-custom.min.js')
+    ->appendFile('/backend/assets/datatypes/markdown/js/crevasse.js');
 ?>
 <div class="col-lg-2">
     <?php echo $this->formLabel($this->textarea); ?>
+
+    <?php if ($this->property->isRequired()): ?>
+        <p class="text-danger pull-right">(<?php echo $this->escapeHtml($this->translate('Mandatory')); ?>)</p>
+    <?php endif; ?>
+
+    <?php if ($this->property->getDescription()): ?>
+        <p class="help-block"><?php echo $this->escapeHtml($this->translate($this->property->getDescription())); ?></p>
+    <?php endif; ?>
 </div>
 <div class="col-lg-10" id="markdown<?php echo $this->id; ?>">
     <ul>
