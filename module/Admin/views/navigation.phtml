@@ -59,7 +59,7 @@ if($this->admin())
                     <?php if (!empty($permissions['content'])): ?>
                     <li>
                         <a href="<?php echo $this->url('content'); ?>" class="<?php if ($this->active == 'content'): ?> active<?php endif; ?>" title="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
-                            <span class="glyphicon glyphicon-pencil"></span> <?php echo $this->escapeHtml($this->translate('Content')); ?>
+                            <span class="glyphicon glyphicon-edit"></span> <?php echo $this->escapeHtml($this->translate('Content')); ?>
                         </a>
                     </li>
                     <?php endif; ?>
@@ -67,7 +67,7 @@ if($this->admin())
                     <?php if (!empty($permissions['development'])): ?>
                     <li>
                         <a href="<?php echo $this->url('development'); ?>" class="<?php if ($this->active == 'development'): ?> active<?php endif; ?>" title="<?php echo $this->escapeHtml($this->translate('Development')); ?>">
-                            <span class="glyphicon glyphicon-wrench"></span> <?php echo $this->escapeHtml($this->translate('Development')); ?>
+                            <span class="glyphicon glyphicon-list-alt"></span> <?php echo $this->escapeHtml($this->translate('Development')); ?>
                         </a>
                     </li>
                     <?php endif; ?>
@@ -75,7 +75,7 @@ if($this->admin())
                     <?php if (!empty($permissions['modules'])): ?>
                     <li>
                         <a href="<?php echo $this->url('module'); ?>" class="<?php if ($this->active == 'module'): ?> active<?php endif; ?>" title="<?php echo $this->escapeHtml($this->translate('Modules')); ?>">
-                            <span class="glyphicon glyphicon-cutlery"></span> <?php echo $this->escapeHtml($this->translate('Modules')); ?>
+                            <span class="glyphicon glyphicon-link"></span> <?php echo $this->escapeHtml($this->translate('Modules')); ?>
                         </a>
                     </li>
                     <?php endif; ?>
