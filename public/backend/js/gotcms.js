@@ -71,8 +71,8 @@ var Gc = (function($)
                 }
             });
 
-            $(document).on('click', ':not(#menu-toggler), :not(#sidebar)', function() {
-                $('#sidebar').toggleClass('show');
+            $(document).on('click', ':not(#menu-toggler), :not(#sidebar), :not(.navbar-toggle)', function() {
+                //$('#sidebar').toggleClass('show');
             });
 
             $menuToggler.on('click', function() {
