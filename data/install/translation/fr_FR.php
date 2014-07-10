@@ -26,6 +26,7 @@
 
 return array (
     'Add' => 'Ajouter',
+    '-- Use parent configuration' => '-- Utilisation de la configuration du parent',
     'Add property' => 'Ajouter la propriété',
     'Add Tab' => 'Ajouter un onglet',
     'Add translation' => 'Ajouter des traductions',

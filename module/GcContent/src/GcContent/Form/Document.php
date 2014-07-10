@@ -163,7 +163,7 @@ class Document extends AbstractForm
         }
 
         $formDocumentAdd = new DocumentInformation();
-        $formDocumentAdd->load($document);
+        $formDocumentAdd->load($document, $serviceLocator->get('Config'));
         $formDocumentAdd->setAttribute('name', 'tabs-' . $idx);
         $this->add($formDocumentAdd);
 

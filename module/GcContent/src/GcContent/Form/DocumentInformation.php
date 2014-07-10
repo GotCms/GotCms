@@ -157,10 +157,11 @@ class DocumentInformation extends AbstractForm
      * Load document form from DocumentModel
      *
      * @param DocumentModel $document Document model
+     * @param array         $config   Configuration
      *
      * @return void
      */
-    public function load(DocumentModel $document)
+    public function load(DocumentModel $document, array $config)
     {
         $this->get('document-name')->setValue($document->getName());
         $this->get('document-url_key')->setValue($document->getUrlKey());
@@ -191,6 +192,16 @@ class DocumentInformation extends AbstractForm
             ->setCheckedValue((string) DocumentModel::STATUS_ENABLE);
 
         $this->add($canBeCached);
+
+        array_unshift($config['locales'], '-- Use parent configuration');
+        $locale = new Element\Select('document-locale');
+        $locale->setLabel('Locale')
+            ->setValueOptions($config['locales'])
+            ->setValue($document->getLocale())
+            ->setAttribute('id', 'locale')
+            ->setAttribute('class', 'form-control');
+
+        $this->add($locale);
 
         $documentType    = $document->getDocumentType();
         $viewsCollection = $documentType->getAvailableViews();

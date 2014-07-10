@@ -213,6 +213,11 @@ class DocumentController extends AbstractController
                 '' :
                 $documentVars['document-url_key']
             );
+            $document->setLocale(
+                empty($documentVars['document-locale']) ?
+                null :
+                $documentVars['document-locale']
+            );
 
             $tabs = $documentForm->loadTabs($documentTypeId);
             foreach ($tabs as $tab) {

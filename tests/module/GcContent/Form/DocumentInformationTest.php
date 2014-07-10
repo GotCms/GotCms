@@ -188,7 +188,7 @@ class DocumentInformationTest extends \PHPUnit_Framework_TestCase
         );
         $document->save();
 
-        $this->assertNull($this->object->load($document));
+        $this->assertNull($this->object->load($document, array('locales' => array('en_GB' => 'English'))));
         $this->object->setData(array());
         $this->assertFalse($this->object->isValid());
 

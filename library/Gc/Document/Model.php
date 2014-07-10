@@ -258,6 +258,7 @@ class Model extends AbstractTable implements IterableInterface
             'view_id' => (int) $this->getViewId() == 0 ? null : (int) $this->getViewId(),
             'layout_id' => (int) $this->getLayoutId() == 0 ? null : (int) $this->getLayoutId(),
             'parent_id' => (int) $this->getParentId() == 0 ? null : (int) $this->getParentId(),
+            'locale' => $this->getLocale()
         );
 
         if ($this->getDriverName() == 'pdo_pgsql') {

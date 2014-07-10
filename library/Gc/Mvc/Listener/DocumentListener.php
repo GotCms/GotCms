@@ -35,6 +35,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Container as SessionContainer;
+use Zend\Validator\AbstractValidator;
 
 /**
  * Document Listener
@@ -87,14 +88,25 @@ class DocumentListener extends AbstractListenerAggregate
         }
 
         $this->logVisitor($isPreview, $isAdmin);
-        $serviceManager->setService(
-            'CurrentDocument',
-            (empty($document) or (!$document->isPublished() and !$isPreview)) ? false : $document
-        );
+        if (empty($document) or (!$document->isPublished() and !$isPreview)) {
+            $serviceManager->setService(
+                'CurrentDocument',
+                false
+            );
+        } else {
+            $translator = $serviceManager->get('MvcTranslator');
+            $translator->setLocale($this->getLocale($document));
+            AbstractValidator::setDefaultTranslator($translator);
+
+            $serviceManager->setService(
+                'CurrentDocument',
+                $document
+            );
+        }
     }
 
     /**
-     * Find document from request ui
+     * Find document from request uri
      *
      * @param string  $path      Path from request uri
      * @param boolean $isPreview Is the current page is a preview
@@ -155,6 +167,29 @@ class DocumentListener extends AbstractListenerAggregate
             }
         }
     }
+
+    /**
+     * Get locale according to the locale specified in the document or its parent.
+     *
+     * @param DocumentModel $document Document
+     *
+     * @return void
+     */
+    protected function getLocale($document)
+    {
+        $locale = null;
+        if (!$document->hasLocale()) {
+            $parent = $document->getParent();
+            if ($parent) {
+                $locale = $this->getLocale($parent);
+            }
+        } else {
+            $locale = $document->getLocale();
+        }
+
+        return $locale;
+    }
+
     /**
      * Explode path
      *
