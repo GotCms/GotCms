@@ -79,7 +79,7 @@ CREATE TABLE `document` (
     `sort_order` INT NOT NULL DEFAULT 0,
     `show_in_nav` boolean DEFAULT false,
     `can_be_cached` boolean DEFAULT true,
-    `locale` VARCHAR(255) NOT NULL,
+    `locale` VARCHAR(255) DEFAULT NULL,
     `user_id` INT NOT NULL,
     `document_type_id` integer,
     `view_id` integer,

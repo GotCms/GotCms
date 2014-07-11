@@ -171,7 +171,7 @@ class DocumentListener extends AbstractListenerAggregate
     /**
      * Get locale according to the locale specified in the document or its parent.
      *
-     * @param DocumentModel $document Document
+     * @param Document\Model $document Document
      *
      * @return void
      */
