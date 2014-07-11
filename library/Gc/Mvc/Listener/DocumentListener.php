@@ -111,7 +111,7 @@ class DocumentListener extends AbstractListenerAggregate
      * @param string  $path      Path from request uri
      * @param boolean $isPreview Is the current page is a preview
      *
-     * @return mixed
+     * @return Document\Model
      */
     protected function findDocument($path, $isPreview)
     {

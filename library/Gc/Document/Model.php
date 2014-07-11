@@ -397,7 +397,7 @@ class Model extends AbstractTable implements IterableInterface
     /** (non-PHPdoc)
      *
      * @see include \Gc\Component\IterableInterface#getParent()
-     * @return mixed
+     * @return Model
      */
     public function getParent()
     {
