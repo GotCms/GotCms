@@ -67,7 +67,7 @@ class Comment extends AbstractForm
 
         $captchaImage = new CaptchaImage(
             array(
-                'font' => GC_APPLICATION_PATH . '/data/fonts/arial.ttf',
+                'font' => GC_PUBLIC_PATH . '/backend/fonts/arial.ttf',
                 'width' => 250,
                 'height' => 50,
                 'dotNoiseLevel' => 40,
