@@ -3,6 +3,7 @@
 ## 2.0.0 (-- --- 2014)
 - Missing label for Datepicker datatype ([https://github.com/GotCms/GotCms/issues/259](https://github.com/GotCms/GotCms/issues/259))
 - Add language choice in document information to force translation in document ([https://github.com/GotCms/GotCms/issues/30](https://github.com/GotCms/GotCms/issues/30))
+- Update project with simple php functions ([https://github.com/GotCms/GotCms/issues/18](https://github.com/GotCms/GotCms/issues/18))
 
 ##1.4.2 (23 Jun 2014)
 - Unpublished document can be view if we know the url ([https://github.com/GotCms/GotCms/issues/258](https://github.com/GotCms/GotCms/issues/258))

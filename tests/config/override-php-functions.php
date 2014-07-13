@@ -54,7 +54,7 @@ function move_uploaded_file($filename, $destination)
 }
 
 /**
- * Override Git adapter
+ * Override Updater adapters
  */
 namespace Gc\Core\Updater\Adapter;
 
@@ -63,6 +63,7 @@ function exec($command, &$output = array(), &$returnVar = null)
     $output = array();
     return '';
 }
+
 
 /**
  * Override updater

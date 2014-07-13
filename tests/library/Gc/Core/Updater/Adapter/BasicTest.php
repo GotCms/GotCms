@@ -33,10 +33,10 @@ namespace Gc\Core\Updater\Adapter;
  * @category Gc_Tests
  * @package  Library
  */
-class WgetTest extends \PHPUnit_Framework_TestCase
+class BasicTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Wget
+     * @var Basic
      */
     protected $object;
 
@@ -48,7 +48,7 @@ class WgetTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Wget;
+        $this->object = new Basic;
     }
 
     /**
@@ -67,31 +67,9 @@ class WgetTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testUpdate()
+    public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testUpgrade()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testRollback()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $this->object->init();
+        $this->assertEquals(GC_APPLICATION_PATH . '/data/tmp', $this->object->getTmpPath());
     }
 }

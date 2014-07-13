@@ -32,26 +32,28 @@
             </div>
         <?php endif; ?>
 
-        <?php if (empty($this->gitProject)): ?>
-            <p><?php echo $this->escapeHtml($this->translate("Yout can't update this project because you don't clone it with git")); ?></p>
-        <?php else: ?>
-            <form action="<?php echo $this->url(); ?>" method="post" id="update-form">
-                <ul>
-                    <li>
-                        <label>
-                            <input type="radio" name="adapter" value="git">Git
-                        </label>
-                    </li>
-                </ul>
-
-                <div>
-                    <input id="input-save" class="btn btn-warning" type="submit" name="submit" value="<?php echo $this->escapeHtml($this->translate('Update')); ?>">
+        <form action="<?php echo $this->url(); ?>" method="post" id="update-form">
+            <?php if (empty($this->gitProject)): ?>
+                <p><?php echo $this->escapeHtml($this->translate("Yout can't update this project with git adapter because you don't clone it with git")); ?></p>
+            <?php else: ?>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="adapter" value="git">Git
+                    </label>
                 </div>
-            </form>
-            <script type="text/javascript">
-                Gc.initUpdate('<?php echo $this->escapeJs($this->translate('Do you really want to update GotCms?')); ?>');
-            </script>
-        <?php endif; ?>
+            <?php endif; ?>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="adapter" value="basic">Basic
+                </label>
+            </div>
+
+            <div>
+                <input id="input-save" class="btn btn-warning" type="submit" name="submit" value="<?php echo $this->escapeHtml($this->translate('Update')); ?>">
+            </div>
+        </form>
+        <script type="text/javascript">
+            Gc.initUpdate('<?php echo $this->escapeJs($this->translate('Do you really want to update GotCms?')); ?>');
+        </script>
     <?php endif; ?>
 <?php endif; ?>
-

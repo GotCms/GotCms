@@ -255,4 +255,22 @@ class File extends Object
         closedir($folder);
         return true;
     }
+
+    /**
+     * Use rmdir recursively
+     *
+     * @param string $directory Directory start
+     *
+     * @return boolean
+     */
+    public static function removeDirectory($directory)
+    {
+        $files = array_diff(scandir($directory), array('.','..'));
+        foreach ($files as $file) {
+            $filename = $directory . '/' . $file;
+            is_dir($filename) ? self::removeDirectory($filename) : unlink($filename);
+        }
+
+        return rmdir($directory);
+    }
 }

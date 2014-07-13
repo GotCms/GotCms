@@ -71,20 +71,9 @@ class Updater extends Object
             case 'git':
                 $adapter = new Adapter\Git();
                 break;
-            /**
-             * @TODO Wget
-             *
-            case 'wget':
-                $adapter = new Adapter\Wget();
+            case 'basic':
+                $adapter = new Adapter\Basic();
                 break;
-             */
-            /**
-             * @TODO ftp
-             *
-            case 'ftp':
-                $adapter = new Adapter\Ftp();
-                break;
-             */
         }
 
         if (empty($adapter)) {
