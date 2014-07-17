@@ -146,9 +146,9 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2012-09-20 22:31:50', 'Mai
 -- Data for Name: document
 --
 
-INSERT INTO document VALUES (1, '2012-09-20 22:06:53', '2012-10-08 22:30:43', 'Home', '', 1, 0, true, true, 1, 1, 1, 1, NULL);
-INSERT INTO document VALUES (2, '2012-09-20 22:09:06', '2012-10-08 22:30:55', 'About', 'about', 1, 1, true, true, 1, 3, 4, 1, NULL);
-INSERT INTO document VALUES (3, '2012-09-20 22:09:29', '2012-10-09 08:00:21', 'Contact', 'contact', 1, 2, true, true, 1, 2, 3, 1, NULL);
+INSERT INTO document VALUES (1, '2012-09-20 22:06:53', '2012-10-08 22:30:43', 'Home', '', 1, 0, true, true, NULL, 1, 1, 1, 1, NULL);
+INSERT INTO document VALUES (2, '2012-09-20 22:09:06', '2012-10-08 22:30:55', 'About', 'about', 1, 1, true, true, NULL, 1, 3, 4, 1, NULL);
+INSERT INTO document VALUES (3, '2012-09-20 22:09:29', '2012-10-09 08:00:21', 'Contact', 'contact', 1, 2, true, true, NULL, 1, 2, 3, 1, NULL);
 
 
 --

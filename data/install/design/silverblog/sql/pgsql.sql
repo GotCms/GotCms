@@ -379,13 +379,13 @@ INSERT INTO layout VALUES (1, '2012-09-19 19:28:34', '2013-06-02 12:26:50.037182
 -- Data for Name: document; Type: TABLE DATA; Schema: public;
 --
 
-INSERT INTO document VALUES (3, '2012-09-20 22:09:29', '2013-05-25 13:58:10.973436', 'Contact', 'contact', 1, 3, true, false,1, 2, 3, 1, NULL);
-INSERT INTO document VALUES (2, '2012-09-20 22:09:06', '2013-06-02 12:00:33.863005', 'About', 'about', 1, 2, true, true, 1, 3, 4, 1, NULL);
-INSERT INTO document VALUES (4, '2013-05-25 13:57:47.516331', '2013-06-02 12:07:47.590756', 'Home', '', 1, 1, true, true, 1, 6, 1, 1, NULL);
-INSERT INTO document VALUES (5, '2013-05-25 13:58:49.09857', '2013-05-27 08:53:50.482773', 'First category', 'first-category', 1, 0, true, false, 1, 5, 1, 1, 4);
-INSERT INTO document VALUES (6, '2013-05-25 13:59:05.99698', '2013-05-27 08:53:53.785471', 'Second category', 'second-category', 1, 0, true, false, 1, 5, 1, 1, 4);
-INSERT INTO document VALUES (7, '2013-05-25 14:00:54.412118', '2013-05-26 13:32:18.374819', 'Article 1', 'article-about-something', 1, 0, false, false, 1, 4, 11, 1, 5);
-INSERT INTO document VALUES (8, '2013-05-25 14:01:26.09229', '2013-05-26 13:32:27.671487', 'Article 2', 'article-about-something', 1, 0, false, false, 1, 4, 11, 1, 6);
+INSERT INTO document VALUES (3, '2012-09-20 22:09:29', '2013-05-25 13:58:10.973436', 'Contact', 'contact', 1, 3, true, false, NULL, 1, 2, 3, 1, NULL);
+INSERT INTO document VALUES (2, '2012-09-20 22:09:06', '2013-06-02 12:00:33.863005', 'About', 'about', 1, 2, true, true, NULL, 1, 3, 4, 1, NULL);
+INSERT INTO document VALUES (4, '2013-05-25 13:57:47.516331', '2013-06-02 12:07:47.590756', 'Home', '', 1, 1, true, true, NULL, 1, 6, 1, 1, NULL);
+INSERT INTO document VALUES (5, '2013-05-25 13:58:49.09857', '2013-05-27 08:53:50.482773', 'First category', 'first-category', 1, 0, true, false, NULL, 1, 5, 1, 1, 4);
+INSERT INTO document VALUES (6, '2013-05-25 13:59:05.99698', '2013-05-27 08:53:53.785471', 'Second category', 'second-category', 1, 0, true, false, NULL, 1, 5, 1, 1, 4);
+INSERT INTO document VALUES (7, '2013-05-25 14:00:54.412118', '2013-05-26 13:32:18.374819', 'Article 1', 'article-about-something', 1, 0, false, false, NULL, 1, 4, 11, 1, 5);
+INSERT INTO document VALUES (8, '2013-05-25 14:01:26.09229', '2013-05-26 13:32:27.671487', 'Article 2', 'article-about-something', 1, 0, false, false, NULL, 1, 4, 11, 1, 6);
 
 --
 -- Data for Name: datatype; Type: TABLE DATA; Schema: public;
