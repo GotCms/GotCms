@@ -28,11 +28,9 @@ return array(
     'display_exceptions'    => true,
     'controllers' => array(
         'invokables' => array(
-            'ConfigController'  => 'GcConfig\Controller\IndexController',
-            'UserController'    => 'GcConfig\Controller\UserController',
-            'RoleController'    => 'GcConfig\Controller\RoleController',
-            'RuleController'    => 'GcConfig\Controller\RuleController',
-            'CmsController'     => 'GcConfig\Controller\CmsController',
+            'UserRest'    => 'GcConfig\Controller\User',
+            'RoleRest'    => 'GcConfig\Controller\Role',
+            'ConfigRest'  => 'GcConfig\Controller\Config',
         ),
     ),
     'view_manager' => array(
@@ -43,227 +41,108 @@ return array(
     'router' => array(
         'routes' => array(
             'config' => array(
-                'type'    => 'Literal',
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/admin/config',
-                    'defaults' =>
-                    array (
+                    'route'    => '/admin/config[/:id]',
+                    'defaults' => array(
                         'module'     => 'gcconfig',
-                        'controller' => 'ConfigController',
-                        'action'     => 'index',
+                        'controller' => 'ConfigRest',
                     ),
                 ),
                 'may_terminate' => true,
-                'child_routes'  => array(
+                'child_routes' => array(
                     'user' => array(
-                        'type'    => 'Literal',
+                        'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/user',
-                            'defaults' =>
-                            array (
+                            'route'    => '/admin/config/user[/:id]',
+                            'defaults' => array(
                                 'module'     => 'gcconfig',
-                                'controller' => 'UserController',
-                                'action'     => 'index',
-                            ),
-                        ),
-                        'may_terminate' => true,
-                        'child_routes'  => array(
-                            'forbidden' => array(
-                                'type'    => 'Literal',
-                                'options' => array(
-                                    'route'    => '/forbidden-access',
-                                    'defaults' =>
-                                    array (
-                                        'module'     => 'gcconfig',
-                                        'controller' => 'UserController',
-                                        'action'     => 'forbidden',
-                                    ),
-                                ),
-                            ),
-                            'login' => array(
-                                'type'    => 'Segment',
-                                'options' => array(
-                                    'route'    => '/login[/:redirect]',
-                                    'defaults' =>
-                                    array (
-                                        'module'     => 'gcconfig',
-                                        'controller' => 'UserController',
-                                        'action'     => 'login',
-                                    ),
-                                ),
-                            ),
-                            'logout' => array(
-                                'type'    => 'Literal',
-                                'options' => array(
-                                    'route'    => '/logout',
-                                    'defaults' =>
-                                    array (
-                                        'module'     => 'gcconfig',
-                                        'controller' => 'UserController',
-                                        'action'     => 'logout',
-                                    ),
-                                ),
-                            ),
-                            'forgot-password' => array(
-                                'type'    => 'Literal',
-                                'options' => array(
-                                    'route'    => '/forgot-password',
-                                    'defaults' =>
-                                    array (
-                                        'module'     => 'gcconfig',
-                                        'controller' => 'UserController',
-                                        'action'     => 'forgot-password',
-                                    ),
-                                ),
-                            ),
-                            'forgot-password-key' => array(
-                                'type'    => 'Segment',
-                                'options' => array(
-                                    'route'    => '/forgot-password/:id/:key',
-                                    'defaults' =>
-                                    array (
-                                        'module'     => 'gcconfig',
-                                        'controller' => 'UserController',
-                                        'action'     => 'forgot-password',
-                                    ),
-                                ),
-                            ),
-                            'create' => array(
-                                'type'    => 'Literal',
-                                'options' => array(
-                                    'route'    => '/create',
-                                    'defaults' =>
-                                    array (
-                                        'module'     => 'gcconfig',
-                                        'controller' => 'UserController',
-                                        'action'     => 'create',
-                                    ),
-                                ),
-                            ),
-                            'edit' => array(
-                                'type'    => 'Segment',
-                                'options' => array(
-                                    'route'    => '/edit/:id',
-                                    'defaults' =>
-                                    array (
-                                        'module'     => 'gcconfig',
-                                        'controller' => 'UserController',
-                                        'action'     => 'edit',
-                                    ),
-                                ),
-                            ),
-                            'delete' => array(
-                                'type'    => 'Segment',
-                                'options' => array(
-                                    'route'    => '/delete/:id',
-                                    'defaults' =>
-                                    array (
-                                        'module'     => 'gcconfig',
-                                        'controller' => 'UserController',
-                                        'action'     => 'delete',
-                                    ),
-                                ),
-                            ),
-                            'role' => array(
-                                'type'    => 'Literal',
-                                'options' => array(
-                                    'route'    => '/role',
-                                    'defaults' =>
-                                    array (
-                                        'module'     => 'gcconfig',
-                                        'controller' => 'RoleController',
-                                        'action'     => 'index',
-                                    ),
-                                ),
-                                'may_terminate' => true,
-                                'child_routes'  => array(
-                                    'create' => array(
-                                        'type'    => 'Literal',
-                                        'options' => array(
-                                            'route'    => '/create',
-                                            'defaults' =>
-                                            array (
-                                                'module'     => 'gcconfig',
-                                                'controller' => 'RoleController',
-                                                'action'     => 'create',
-                                            ),
-                                        ),
-                                    ),
-                                    'edit' => array(
-                                        'type'    => 'Segment',
-                                        'options' => array(
-                                            'route'    => '/edit/:id',
-                                            'defaults' =>
-                                            array (
-                                                'module'     => 'gcconfig',
-                                                'controller' => 'RoleController',
-                                                'action'     => 'edit',
-                                            ),
-                                        ),
-                                    ),
-                                    'delete' => array(
-                                        'type'    => 'Segment',
-                                        'options' => array(
-                                            'route'    => '/delete/:id',
-                                            'defaults' =>
-                                            array (
-                                                'module'     => 'gcconfig',
-                                                'controller' => 'RoleController',
-                                                'action'     => 'delete',
-                                            ),
-                                        ),
-                                    ),
-                                )
-                            ),
-                        )
-                    ),
-                    'general' => array(
-                        'type'    => 'Literal',
-                        'options' => array(
-                            'route'    => '/general',
-                            'defaults' =>
-                            array (
-                                'module'     => 'gcconfig',
-                                'controller' => 'CmsController',
-                                'action'     => 'editGeneral',
+                                'controller' => 'UserRest',
                             ),
                         ),
                     ),
-                    'system' => array(
-                        'type'    => 'Literal',
+                    'role' => array(
+                        'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/system',
-                            'defaults' =>
-                            array (
+                            'route'    => '/admin/role[/:id]',
+                            'defaults' => array(
                                 'module'     => 'gcconfig',
-                                'controller' => 'CmsController',
-                                'action'     => 'editSystem',
+                                'controller' => 'UserRest',
                             ),
                         ),
                     ),
-                    'server' => array(
-                        'type'    => 'Literal',
-                        'options' => array(
-                            'route'    => '/server',
-                            'defaults' =>
-                            array (
-                                'module'     => 'gcconfig',
-                                'controller' => 'CmsController',
-                                'action'     => 'editServer',
-                            ),
-                        ),
+                ),
+            ),
+
+            'forgot-password' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/forgot-password',
+                    'defaults' =>
+                    array(
+                        'module'     => 'gcconfig',
+                        'controller' => 'UserRest',
+                        'action'     => 'forgot-password',
                     ),
-                    'cms-update' => array(
-                        'type'    => 'Literal',
-                        'options' => array(
-                            'route'    => '/update',
-                            'defaults' =>
-                            array (
-                                'module'     => 'gcconfig',
-                                'controller' => 'CmsController',
-                                'action'     => 'update',
-                            ),
-                        ),
+                ),
+            ),
+            'forgot-password-key' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/forgot-password/:id/:key',
+                    'defaults' =>
+                    array(
+                        'module'     => 'gcconfig',
+                        'controller' => 'UserRest',
+                        'action'     => 'forgot-password',
+                    ),
+                ),
+            ),
+            'general' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/general',
+                    'defaults' =>
+                    array(
+                        'module'     => 'gcconfig',
+                        'controller' => 'ConfigRest',
+                        'action'     => 'editGeneral',
+                    ),
+                ),
+            ),
+            'system' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/system',
+                    'defaults' =>
+                    array(
+                        'module'     => 'gcconfig',
+                        'controller' => 'ConfigRest',
+                        'action'     => 'editSystem',
+                    ),
+                ),
+            ),
+            'server' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/server',
+                    'defaults' =>
+                    array(
+                        'module'     => 'gcconfig',
+                        'controller' => 'ConfigRest',
+                        'action'     => 'editServer',
+                    ),
+                ),
+            ),
+            'cms-update' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/update',
+                    'defaults' =>
+                    array(
+                        'module'     => 'gcconfig',
+                        'controller' => 'ConfigRest',
+                        'action'     => 'update',
                     ),
                 ),
             ),

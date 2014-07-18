@@ -31,7 +31,7 @@ use Gc\Event\StaticEventManager;
 use Gc\Module\Model as ModuleModel;
 use Gc\User\Model as UserModel;
 use Gc\User\Role\Model as RoleModel;
-use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Container as SessionContainer;
 use Zend\View\Model\JsonModel;
@@ -43,7 +43,7 @@ use Zend\View\Model\JsonModel;
  * @package    Library
  * @subpackage Mvc\Controller
  */
-class Action extends AbstractActionController
+class Action extends AbstractRestfulController
 {
     /**
      * Route available for installer
