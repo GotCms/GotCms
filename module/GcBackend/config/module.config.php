@@ -25,15 +25,28 @@
  * @link       http://www.got-cms.com
  */
 
+use Gc\Core\Config as CoreConfig;
+use Gc\User\Model as UserModel;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Storage;
+
 return array(
     'service_manager' => array(
         'factories' => array(
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'Auth'       => function () {
+                return new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
+            },
+            'CoreConfig' => function () {
+                return new CoreConfig();
+            },
         )
     ),
     'controllers' => array(
         'invokables' => array(
-            'AdminController' => 'GcBackend\Controller\IndexController',
+            'BackendController'  => 'GcBackend\Controller\AuthenticationRestController',
+            'AuthenticationRest' => 'GcBackend\Controller\AuthenticationRestController',
+            'DashboardRest' => 'GcBackend\Controller\DashboardRestController',
         ),
     ),
     'view_manager' => array(
@@ -53,46 +66,41 @@ return array(
                 'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/admin',
-                    'defaults' =>
-                    array (
+                    'defaults' => array(
                         'module'     => 'gcbackend',
-                        'controller' => 'AdminController',
-                        'action'     => 'index',
+                        'controller' => 'BackendController',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes'  => array(
-                    'dashboard-save' => array(
+                    'login' => array(
                         'type'    => 'Literal',
                         'options' => array(
-                            'route'    => '/dashboard/save',
-                            'defaults' =>
-                            array (
+                            'route'    => '/login',
+                            'defaults' => array(
                                 'module'     => 'gcbackend',
-                                'controller' => 'AdminController',
-                                'action'     => 'save-dashboard',
+                                'controller' => 'AuthenticationRest',
                             ),
                         ),
                     ),
-                    'translator.js' => array(
+                    'logout' => array(
                         'type'    => 'Literal',
                         'options' => array(
-                            'route'    => '/translator.js',
+                            'route'    => '/logout',
                             'defaults' => array(
                                 'module'     => 'gcbackend',
-                                'controller' => 'AdminController',
-                                'action'     => 'translator',
+                                'controller' => 'DashboardRest',
                             ),
                         ),
                     ),
-                    'keep-alive' => array(
+
+                    'dashboard' => array(
                         'type'    => 'Literal',
                         'options' => array(
-                            'route'    => '/keep-alive',
+                            'route'    => '/dashboard',
                             'defaults' => array(
                                 'module'     => 'gcbackend',
-                                'controller' => 'AdminController',
-                                'action'     => 'keep-alive',
+                                'controller' => 'DashboardRest',
                             ),
                         ),
                     ),

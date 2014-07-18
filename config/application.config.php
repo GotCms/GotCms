@@ -26,13 +26,13 @@
 
 $modules = array(
     'AssetManager',
-    'GcFrontend',
+    /* 'GcFrontend', */
     'GcBackend',
-    'GcConfig',
-    'GcContent',
-    'GcDevelopment',
-    'GcModule',
-    'GcStatistics',
+    /* 'GcConfig', */
+    /* 'GcContent', */
+    /* 'GcDevelopment', */
+    /* 'GcModule', */
+    /* 'GcStatistics', */
 );
 
 $path       = GC_APPLICATION_PATH . '/extensions/ZfModules/';

@@ -26,6 +26,8 @@
  */
 
 return array(
-    'Admin\Controller\IndexController' => __DIR__ . '/src/Admin/Controller/IndexController.php',
-    'Admin\Module'                     => __DIR__ . '/Module.php',
+    'Admin\Controller\IndexController'      => __DIR__ . '/src/Admin/Controller/IndexController',
+    'Admin\Controller\DashboardRestController'      => __DIR__ . '/src/Admin/Controller/DashboardRestController',
+    'Admin\Controller\AuthenticationRestController' => __DIR__ . '/src/Admin/Controller/AuthenticationRestController',
+    'Admin\Module'                                  => __DIR__ . '/Module.php',
 );

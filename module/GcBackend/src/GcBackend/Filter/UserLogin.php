@@ -18,25 +18,52 @@
  * PHP Version >=5.3
  *
  * @category   Gc_Application
- * @package    Statistics
- * @subpackage Config
+ * @package    GcBackend
+ * @subpackage Filter
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
+namespace GcBackend\Filter;
+
+use Zend\Form\Element;
+use Zend\InputFilter\InputFilter;
+
 /**
- * Autoload for Statistics module
+ * User login form
+ *
+ * @category   Gc_Application
+ * @package    GcBackend
+ * @subpackage Filter
  */
-return function ($class) {
-    static $map;
-    if (!$map) {
-        $map = include __DIR__ . '/autoload_classmap.php';
-    }
+class UserLogin extends InputFilter
+{
+    /**
+     * Initialize user login filter
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->add(
+            array(
+                'name' => 'login',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                )
+            )
+        );
 
-    if (!isset($map[$class])) {
-        return false;
+        $this->add(
+            array(
+                'name' => 'password',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
+                ),
+            )
+        );
     }
-
-    return include $map[$class];
-};
+}
