@@ -41,7 +41,7 @@ use GcBackend\Filter;
 class AuthenticationRestController extends RestAction
 {
     /**
-     * Display dashboard
+     * Authenticate user
      *
      * @return array
      */

@@ -44,105 +44,41 @@ use Zend\View\Model\ViewModel;
 class IndexController extends Action
 {
     /**
-     * Display dashboard
-     *
-     * @return array
-     */
-    public function indexAction()
-    {
-        $data                    = array();
-        $data['version']         = Version::VERSION;
-        $data['versionIsLatest'] = Version::isLatest();
-        $data['versionLatest']   = Version::getLatest();
-
-        $documents                        = new Collection();
-        $contentStats                     = array();
-        $contentStats['online_documents'] = array(
-            'count' => count($documents->getAvailableDocuments()),
-            'label' => 'Online documents',
-            'route' => 'content',
-        );
-
-        $contentStats['total_documents'] = array(
-            'count' => count($documents->select()->toArray()),
-            'label' => 'Total documents',
-            'route' => 'content',
-        );
-
-        $data['contentStats'] = $contentStats;
-
-        $visitorModel      = new Visitor();
-        $data['userStats'] = array(
-            'total_visitors' => array(
-                'count' => $visitorModel->getTotalVisitors(),
-                'label' => 'Total visitors',
-                'route' => 'statistics',
-            ),
-            'total_visits' => array(
-                'count' => $visitorModel->getTotalPageViews(),
-                'label' => 'Total page views',
-                'route' => 'statistics',
-            ),
-        );
-
-        $coreConfig                = $this->getServiceLocator()->get('CoreConfig');
-        $widgets                   = @unserialize($coreConfig->getValue('dashboard_widgets'));
-        $data['dashboardSortable'] = !empty($widgets['sortable']) ? Json::encode($widgets['sortable']) : '{}';
-        $data['dashboardWelcome']  = !empty($widgets['welcome']);
-
-        $data['customeWidgets'] = array();
-        $this->events()->trigger(__CLASS__, 'dashboard', $this, array('widgets' => &$data['customeWidgets']));
-
-        return $data;
-    }
-
-    /**
-     * Save dashboard
-     *
-     * @return \Zend\View\Model\JsonModel
-     */
-    public function saveDashboardAction()
-    {
-        $coreConfig = $this->getServiceLocator()->get('CoreConfig');
-        $params     = $this->getRequest()->getPost()->toArray();
-
-        $config = @unserialize($coreConfig->getValue('dashboard_widgets'));
-
-        if (empty($config)) {
-            $config = array();
-        }
-
-        if (!empty($params['dashboard'])) {
-            $config['welcome'] = false;
-        } else {
-            $config['sortable'] = $params;
-        }
-
-        $coreConfig->setValue('dashboard_widgets', serialize($config));
-
-        return $this->returnJson(array('success' => true));
-    }
-
-    /**
      * Translator js action
+     * @TODO
      *
      * @return ViewModel
      */
     public function translatorAction()
     {
-        $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
-        return $viewModel;
-    }
+        $translator = $this->getServiceLocator()->get('MvcTranslator');
 
-
-    /**
-     * Keep alive connection action
-     *
-     * @return ViewModel
-     */
-    public function keepAliveAction()
-    {
-        return $this->returnJson(array('success' => true));
+        return array(
+            'Please fill all fields' => $translator->translate('Please fill all fields'),
+            'Delete' => $translator->translate('Delete'),
+            'Name' => $translator->translate('Name'),
+            'Identifier' => $translator->translate('Identifier'),
+            'Datatype' => $translator->translate('Datatype'),
+            'Description' => $translator->translate('Description'),
+            'Required' => $translator->translate('Required'),
+            'Delete' => $translator->translate('Delete'),
+            'New' => $translator->translate('New'),
+            'Edit' => $translator->translate('Edit'),
+            'Cut' => $translator->translate('Cut'),
+            'Copy' => $translator->translate('Copy'),
+            'Paste' => $translator->translate('Paste'),
+            'Refresh' => $translator->translate('Refresh'),
+            'Quit' => $translator->translate('Quit'),
+            'These items will be permanently deleted and cannot be recovered. Are you sure?' => $translator->translate('These items will be permanently deleted and cannot be recovered. Are you sure?'),
+            'Delete element' => $translator->translate('Delete element'),
+            'Cancel' => $translator->translate('Cancel'),
+            'Confirm' => $translator->translate('Confirm'),
+            'All form fields are required' => $translator->translate('All form fields are required'),
+            'Url key' => $translator->translate('Url key'),
+            'Copy document' => $translator->translate('Copy document'),
+            'Add' => $translator->translate('Add'),
+            'These items will be permanently updated and cannot be recovered. Are you sure?' => $translator->translate('These items will be permanently updated and cannot be recovered. Are you sure?'),
+            'Update content' => $translator->translate('Update content')
+        );
     }
 }
