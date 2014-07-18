@@ -31,7 +31,7 @@ use Gc\Event\StaticEventManager;
 use Gc\Module\Model as ModuleModel;
 use Gc\User\Model as UserModel;
 use Gc\User\Role\Model as RoleModel;
-use Zend\Mvc\Controller\AbstractController;
+use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Container as SessionContainer;
 use Zend\View\Model\JsonModel;
@@ -43,7 +43,7 @@ use Zend\View\Model\JsonModel;
  * @package    Library
  * @subpackage Mvc\Controller
  */
-class Action extends AbstractController
+class RestAction extends AbstractRestfulController
 {
     /**
      * Route available for installer
@@ -113,7 +113,7 @@ class Action extends AbstractController
     }
 
     /**
-     * Constructor
+     * Custom Constructor
      *
      * @return \Zend\Http\Response|null
      */
@@ -142,10 +142,7 @@ class Action extends AbstractController
                     )
                 )
                 ) {
-                    return $this->redirect()->toRoute(
-                        'config/user/login',
-                        array('redirect' => base64_encode($this->getRequest()->getRequestUri()))
-                    );
+                    return $this->unauthorized();
                 }
             } else {
                 if (!in_array($routeName, array('config/user/forbidden', 'config/user/logout'))) {
@@ -300,5 +297,13 @@ class Action extends AbstractController
     public function setAcl(array $array)
     {
         $this->aclPage = $array;
+    }
+
+    public function unauthorized($message = null)
+    {
+        $this->response->setStatusCode(403);
+        return array(
+            'content' => empty($message) ? 'Unauthorized' : $message
+        );
     }
 }

@@ -27,7 +27,7 @@
 
 namespace GcConfig\Controller;
 
-use Gc\Mvc\Controller\Action;
+use Gc\Mvc\Controller\RestAction;
 use Gc\Core\Updater;
 use Gc\Media\Info;
 use Gc\Version;
@@ -42,7 +42,7 @@ use Exception;
  * @package    GcConfig
  * @subpackage Controller
  */
-class CmsController extends Action
+class ConfigRestController extends RestAction
 {
     /**
      * Config form

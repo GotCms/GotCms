@@ -17,20 +17,20 @@
  *
  * PHP Version >=5.3
  *
- * @category Gc
- * @package  Config
- * @author   Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
- * @license  GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @link     http://www.got-cms.com
+ * @category   Gc_Application
+ * @package    GcConfig
+ * @subpackage Config
+ * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
+ * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @link       http://www.got-cms.com
  */
 
 return array(
-    'display_exceptions'    => true,
     'controllers' => array(
         'invokables' => array(
-            'UserRest'    => 'GcConfig\Controller\User',
-            'RoleRest'    => 'GcConfig\Controller\Role',
-            'ConfigRest'  => 'GcConfig\Controller\Config',
+            'UserRest'    => 'GcConfig\Controller\UserRestController',
+            'RoleRest'    => 'GcConfig\Controller\RoleRestController',
+            'ConfigRest'  => 'GcConfig\Controller\ConfigRestController',
         ),
     ),
     'view_manager' => array(
@@ -43,8 +43,11 @@ return array(
             'config' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/admin/config[/:id]',
-                    'defaults' => array(
+                    'route'       => '/admin/config[/:id]',
+                    'constraints' => array(
+                        'id' => '[0-9]+'
+                    ),
+                    'defaults'    => array(
                         'module'     => 'gcconfig',
                         'controller' => 'ConfigRest',
                     ),
@@ -54,8 +57,11 @@ return array(
                     'user' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/admin/config/user[/:id]',
-                            'defaults' => array(
+                            'route'       => '/user[/:id]',
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                            'defaults'    => array(
                                 'module'     => 'gcconfig',
                                 'controller' => 'UserRest',
                             ),
@@ -64,8 +70,11 @@ return array(
                     'role' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/admin/role[/:id]',
-                            'defaults' => array(
+                            'route'       => '/role[/:id]',
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                            'defaults'    => array(
                                 'module'     => 'gcconfig',
                                 'controller' => 'UserRest',
                             ),
