@@ -96,6 +96,8 @@ class DashboardRestController extends RestAction
     /**
      * Save dashboard
      *
+     * @param array $data Data returns
+     *
      * @return \Zend\View\Model\JsonModel
      */
     public function create($data)
@@ -117,5 +119,4 @@ class DashboardRestController extends RestAction
 
         return array('success' => true);
     }
-
 }

@@ -126,12 +126,4 @@ class RestAction extends AbstractRestfulController
     {
         return StaticEventManager::getInstance();
     }
-
-    public function unauthorized($message = null)
-    {
-        $this->response->setStatusCode(403);
-        return array(
-            'content' => empty($message) ? 'Unauthorized' : $message
-        );
-    }
 }

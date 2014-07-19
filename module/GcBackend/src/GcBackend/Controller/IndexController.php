@@ -45,6 +45,7 @@ class IndexController extends Action
 {
     /**
      * Translator js action
+     *
      * @TODO
      *
      * @return ViewModel
@@ -69,7 +70,9 @@ class IndexController extends Action
             'Paste' => $translator->translate('Paste'),
             'Refresh' => $translator->translate('Refresh'),
             'Quit' => $translator->translate('Quit'),
-            'These items will be permanently deleted and cannot be recovered. Are you sure?' => $translator->translate('These items will be permanently deleted and cannot be recovered. Are you sure?'),
+            'These items will be permanently deleted and cannot be recovered. Are you sure?' => $translator->translate(
+                'These items will be permanently deleted and cannot be recovered. Are you sure?'
+            ),
             'Delete element' => $translator->translate('Delete element'),
             'Cancel' => $translator->translate('Cancel'),
             'Confirm' => $translator->translate('Confirm'),
@@ -77,7 +80,9 @@ class IndexController extends Action
             'Url key' => $translator->translate('Url key'),
             'Copy document' => $translator->translate('Copy document'),
             'Add' => $translator->translate('Add'),
-            'These items will be permanently updated and cannot be recovered. Are you sure?' => $translator->translate('These items will be permanently updated and cannot be recovered. Are you sure?'),
+            'These items will be permanently updated and cannot be recovered. Are you sure?' => $translator->translate(
+                'These items will be permanently updated and cannot be recovered. Are you sure?'
+            ),
             'Update content' => $translator->translate('Update content')
         );
     }

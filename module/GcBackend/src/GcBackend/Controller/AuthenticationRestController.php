@@ -43,6 +43,8 @@ class AuthenticationRestController extends RestAction
     /**
      * Authenticate user
      *
+     * @param array $data Data returns
+     *
      * @return array
      */
     public function create($data)

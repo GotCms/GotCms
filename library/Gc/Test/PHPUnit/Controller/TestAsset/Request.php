@@ -41,13 +41,13 @@ class Request extends HttpRequest
     /**
      * Override the method setter, to allow arbitrary HTTP methods
      *
-     * @param  string $method
+     * @param string $method Method to use
+     *
      * @return Request
      */
     public function setMethod($method)
     {
-        $method = strtoupper($method);
-        $this->method = $method;
+        $this->method = strtoupper($method);
         return $this;
     }
 }

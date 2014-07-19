@@ -42,8 +42,9 @@ use Zend\Session\Container as SessionContainer;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
 use Zend\View\Model\JsonModel;
 use Zend\Validator\AbstractValidator;
+
 /**
- * Admin module
+ * Gc Backend module
  *
  * @category   Gc_Application
  * @package    GcBackend
@@ -61,6 +62,13 @@ class Module extends Mvc\Module
      */
     protected $namespace = __NAMESPACE__;
 
+    /**
+     * Bootstrap module
+     *
+     * @param MvcEvent $e Mvc Event
+     *
+     * @return void
+     */
     public function onBootstrap(MvcEvent $e)
     {
         $application    = $e->getApplication();
@@ -76,21 +84,52 @@ class Module extends Mvc\Module
 
             $createJsonModelListener = new CreateJsonModelListener();
             $sharedEvents            = $eventManager->getSharedManager();
-            $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createJsonModelListener, 'createJsonModelFromArray'), -70);
-            $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createJsonModelListener, 'createJsonModelFromNull'), -70);
+            $sharedEvents->attach(
+                'Zend\Stdlib\DispatchableInterface',
+                MvcEvent::EVENT_DISPATCH,
+                array($createJsonModelListener, 'createJsonModelFromArray'),
+                -70
+            );
+            $sharedEvents->attach(
+                'Zend\Stdlib\DispatchableInterface',
+                MvcEvent::EVENT_DISPATCH,
+                array($createJsonModelListener, 'createJsonModelFromNull'),
+                -70
+            );
         }
     }
 
+    /**
+     * Insert errors into JsonModel on dispatch
+     *
+     * @param MvcEvent $e Mvc Event
+     *
+     * @return JsonModel
+     */
     public function onDispatchError(MvcEvent $e)
     {
         return $this->getJsonModelError($e);
     }
 
+    /**
+     * Insert errors into JsonModel on error
+     *
+     * @param MvcEvent $e Mvc Event
+     *
+     * @return JsonModel
+     */
     public function onRenderError(MvcEvent $e)
     {
         return $this->getJsonModelError($e);
     }
 
+    /**
+     * Insert errors into JsonModel
+     *
+     * @param MvcEvent $e Mvc Event
+     *
+     * @return JsonModel
+     */
     public function getJsonModelError(MvcEvent $e)
     {
         $error = $e->getError();
@@ -98,8 +137,7 @@ class Module extends Mvc\Module
             return;
         }
 
-        $response = $e->getResponse();
-        $exception = $e->getParam('exception');
+        $exception     = $e->getParam('exception');
         $exceptionJson = array();
         if ($exception) {
             $exceptionJson = array(

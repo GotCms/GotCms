@@ -50,15 +50,28 @@ class AbstractRestControllerTestCase extends TestCase
     protected $routeMatch;
     protected $event;
 
+    /**
+     * Initialize events
+     *
+     * @return void
+     */
     public function setUp()
     {
-        $this->request = new TestAsset\Request();
+        $this->request  = new TestAsset\Request();
         $this->response = new Response();
-        $this->event = new MvcEvent;
+        $this->event    = new MvcEvent;
         $this->controller->setEvent($this->event);
         $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
     }
 
+
+    /**
+     * Set up route
+     *
+     * @param string $routeName Route name
+     *
+     * @return void
+     */
     public function setUpRoute($routeName)
     {
         $this->routeMatch = new RouteMatch(array());
