@@ -46,6 +46,20 @@ use Zend\View\Model\JsonModel;
 class RestAction extends AbstractRestfulController
 {
     /**
+     * RouteMatch
+     *
+     * @var \Zend\Mvc\Router\RouteMatch
+     */
+    protected $routeMatch = null;
+
+    /**
+     * Session storage
+     *
+     * @var \Zend\Session\Container
+     */
+    protected $session = null;
+
+    /**
      * Return matched route
      *
      * @return \Zend\Mvc\Router\Http\RouteMatch
