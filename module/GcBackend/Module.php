@@ -77,8 +77,8 @@ class Module extends Mvc\Module
             $createJsonModelListener = new CreateJsonModelListener();
             $sharedEvents            = $eventManager->getSharedManager();
             $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createJsonModelListener, 'createJsonModelFromArray'), -70);
+            $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($createJsonModelListener, 'createJsonModelFromNull'), -70);
         }
-
     }
 
     public function onDispatchError(MvcEvent $e)

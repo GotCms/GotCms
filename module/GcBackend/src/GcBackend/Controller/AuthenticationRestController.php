@@ -49,13 +49,13 @@ class AuthenticationRestController extends RestAction
     {
         $auth = $this->getServiceLocator()->get('Auth');
         if ($auth->hasIdentity()) {
-            return array('identity' => $auth->getIdentity()->toArray());
+            return $auth->getIdentity()->toArray();
         }
 
         $loginFilter = new Filter\UserLogin();
         if ($loginFilter->setData($data) and $loginFilter->isValid()) {
             $userModel = new User\Model();
-            if ($userModel->authenticate($data['login'], $data['password'])) {
+            if ($userModel->authenticate($loginFilter->getValue('login'), $loginFilter->getValue('password'))) {
                 return $userModel->toArray();
             }
         }

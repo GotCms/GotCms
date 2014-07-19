@@ -26,6 +26,7 @@
  */
 
 use Gc\Core\Config as CoreConfig;
+use Gc\View\Helper;
 use Gc\User\Model as UserModel;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage;
@@ -58,6 +59,58 @@ return array(
         ),
         'strategies' => array(
             'ViewJsonStrategy',
+        ),
+    ),
+    'view_helpers' => array(
+        'factories' => array(
+            'acl' => function ($pm) {
+                return new Helper\Acl(
+                    $pm->getServiceLocator()->get('auth')->getIdentity()
+                );
+            },
+            'admin' => function ($pm) {
+                return new Helper\Admin(
+                    $pm->getServiceLocator()->get('auth')
+                );
+            },
+            'cdn' => function ($pm) {
+                return new Helper\Cdn(
+                    $pm->getServiceLocator()->get('request'),
+                    $pm->getServiceLocator()->get('CoreConfig')
+                );
+            },
+            'cdnBackend' => function ($pm) {
+                $serviceLocator = $pm->getServiceLocator();
+                $configuration = $serviceLocator->get('Config');
+                return new Helper\CdnBackend(
+                    $serviceLocator->get('request'),
+                    isset($configuration['db']) ? $serviceLocator->get('CoreConfig') : null
+                );
+            },
+            'config' => function ($pm) {
+                return new Helper\Config($pm->getServiceLocator()->get('CoreConfig'));
+            },
+            'currentDocument' => function ($pm) {
+                return new Helper\CurrentDocument($pm->getServiceLocator());
+            },
+            'partial' => function ($pm) {
+                $serviceLocator = $pm->getServiceLocator();
+                $configuration = $serviceLocator->get('Config');
+                return new Helper\Partial(
+                    isset($configuration['db']) ? $serviceLocator->get('CoreConfig') : null
+                );
+            },
+            'script' => function ($pm) {
+                return new Helper\Script($pm->getServiceLocator());
+            },
+        ),
+        'invokables' => array(
+            'documents' => 'Gc\View\Helper\Documents',
+            'document' => 'Gc\View\Helper\Document',
+            'formCheckbox' => 'Gc\View\Helper\FormCheckbox',
+            'formMultiCheckbox' => 'Gc\View\Helper\FormMultiCheckbox',
+            'modulePlugin' => 'Gc\View\Helper\ModulePlugin',
+            'tools' => 'Gc\View\Helper\Tools',
         ),
     ),
     'router' => array(

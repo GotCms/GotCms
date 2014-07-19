@@ -30,7 +30,7 @@ $modules = array(
     'GcBackend',
     /* 'GcConfig', */
     /* 'GcContent', */
-    /* 'GcDevelopment', */
+    'GcDevelopment',
     /* 'GcModule', */
     /* 'GcStatistics', */
 );

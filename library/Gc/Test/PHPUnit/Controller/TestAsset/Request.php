@@ -18,17 +18,36 @@
  * PHP Version >=5.3
  *
  * @category   Gc
- * @package    GcBackend
- * @subpackage Config
+ * @package    Library
+ * @subpackage Test\PHPUnit\Controller\TestAsset
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-return array(
-    'Admin\Controller\IndexController'              => __DIR__ . '/src/Admin/Controller/IndexController.php',
-    'Admin\Controller\DashboardRestController'      => __DIR__ . '/src/Admin/Controller/DashboardRestController.php',
-    'Admin\Controller\AuthenticationRestController' => __DIR__ . '/src/Admin/Controller/AuthenticationRestController.php',
-    'Admin\Module'                                  => __DIR__ . '/Module.php',
-    'Admin\Filter\UserLogin'                        => __DIR__ . '/src/Admin/Filter/UserLogin.php'
-);
+namespace Gc\Test\PHPUnit\Controller\TestAsset;
+
+use Zend\Http\Request as HttpRequest;
+
+/**
+ * Override the method setter
+ *
+ * @category   Gc
+ * @package    Library
+ * @subpackage Test\PHPUnit\Controller\TestAsset
+ */
+class Request extends HttpRequest
+{
+    /**
+     * Override the method setter, to allow arbitrary HTTP methods
+     *
+     * @param  string $method
+     * @return Request
+     */
+    public function setMethod($method)
+    {
+        $method = strtoupper($method);
+        $this->method = $method;
+        return $this;
+    }
+}
