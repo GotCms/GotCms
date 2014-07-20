@@ -27,8 +27,11 @@
 
 namespace GcBackend\Controller;
 
+use Gc\Document\Collection;
 use Gc\Mvc\Controller\RestAction;
 use Gc\User;
+use Gc\User\Visitor;
+use Gc\Version;
 use GcBackend\Filter;
 
 /**
@@ -87,8 +90,8 @@ class DashboardRestController extends RestAction
         $data['dashboardSortable'] = !empty($widgets['sortable']) ? Json::encode($widgets['sortable']) : '{}';
         $data['dashboardWelcome']  = !empty($widgets['welcome']);
 
-        $data['customeWidgets'] = array();
-        $this->events()->trigger(__CLASS__, 'dashboard', $this, array('widgets' => &$data['customeWidgets']));
+        $data['customWidgets'] = array();
+        $this->events()->trigger(__CLASS__, 'dashboard', $this, array('widgets' => &$data['customWidgets']));
 
         return $data;
     }
