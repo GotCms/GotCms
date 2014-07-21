@@ -59,7 +59,12 @@ class CreateJsonModelListener extends AbstractListenerAggregate
      */
     public function createJsonModelFromArray(MvcEvent $e)
     {
-        $model = new JsonModel($e->getResult());
+        $result = $e->getResult();
+        if (!ArrayUtils::hasStringKeys($result, true)) {
+            return;
+        }
+
+        $model = new JsonModel($result);
         $e->setResult($model);
     }
 

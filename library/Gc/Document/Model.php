@@ -36,7 +36,6 @@ use Gc\Registry;
 use Gc\View;
 use Gc\Layout;
 use Zend\Db\TableGateway\TableGateway;
-use Zend\Db\Sql\Predicate\Expression;
 
 /**
  * Document Model
@@ -247,10 +246,11 @@ class Model extends AbstractTable implements IterableInterface
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'before.save', $this);
+        $this->setUpdatedAt(date('Y-m-d H:i:s'));
         $arraySave = array(
             'name' => $this->getName(),
             'url_key' => $this->getUrlKey(),
-            'updated_at' => new Expression('NOW()'),
+            'updated_at' => $this->getUpdatedAt(),
             'status' => ($this->getStatus() === null ? self::STATUS_DISABLE : $this->getStatus()),
             'sort_order' => (int) $this->getSortOrder(),
             'user_id' => (int) $this->getUserId(),
@@ -272,7 +272,8 @@ class Model extends AbstractTable implements IterableInterface
         try {
             $documentId = $this->getId();
             if (empty($documentId)) {
-                $arraySave['created_at'] = new Expression('NOW()');
+                $this->setCreatedAt($this->getUpdatedAt());
+                $arraySave['created_at'] = $this->getCreatedAt();
                 $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {

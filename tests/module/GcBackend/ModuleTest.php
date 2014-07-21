@@ -89,7 +89,11 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
         $this->config->setValue('cookie_domain', 'got-cms.com');
         $this->config->setValue('session_handler', CoreConfig::SESSION_DATABASE);
 
-        $this->assertNull($this->object->onBootstrap(Registry::get('Application')->getMvcEvent()));
+        $mvcEvent = Registry::get('Application')->getMvcEvent();
+        $serviceManager = $mvcEvent->getApplication()->getServiceManager();
+        $serviceManager->setAllowOverride(true);
+        $serviceManager->setService('DbAdapter', null);
+        $this->assertNull($this->object->onBootstrap($mvcEvent));
 
         GlobalAdapterFeature::setStaticAdapter($oldAdapter);
     }

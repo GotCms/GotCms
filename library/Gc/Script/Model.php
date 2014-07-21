@@ -28,7 +28,6 @@
 namespace Gc\Script;
 
 use Gc\Db\AbstractTable;
-use Zend\Db\Sql\Predicate\Expression;
 
 /**
  * Script Model
@@ -127,17 +126,19 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'before.save', $this);
+        $this->setUpdatedAt(date('Y-m-d H:i:s'));
         $arraySave = array(
             'name' => $this->getName(),
             'identifier' => $this->getIdentifier(),
             'description' => $this->getDescription(),
             'content' => $this->getContent(),
-            'updated_at' => new Expression('NOW()'),
+            'updated_at'  => $this->getUpdatedAt(),
         );
 
         try {
             if ($this->getId() == null) {
-                $arraySave['created_at'] = new Expression('NOW()');
+                $this->setCreatedAt($this->getUpdatedAt());
+                $arraySave['created_at'] = $this->getCreatedAt();
                 $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {

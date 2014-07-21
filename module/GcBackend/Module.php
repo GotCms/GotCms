@@ -75,8 +75,8 @@ class Module extends Mvc\Module
         $config         = $application->getConfig();
         $eventManager   = $application->getEventManager();
         $serviceManager = $application->getServiceManager();
-        if (isset($config['db'])) {
-            $dbAdapter = $this->initDatabase($config);
+        if (isset($config['db']) and !$serviceManager->has('DbAdapter')) {
+            $dbAdapter = $this->initDatabase($serviceManager, $config);
             $this->initTranslator($serviceManager);
             $this->initSession($serviceManager, $dbAdapter);
             $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'onDispatchError'), 0);
@@ -167,13 +167,15 @@ class Module extends Mvc\Module
     /**
      * Initialize database
      *
-     * @param array $config Configuration
+     * @param ServiceManager $serviceManager Service manager
+     * @param array          $config         Configuration
      *
      * @return DbAdapter
      */
-    public function initDatabase(array $config)
+    public function initDatabase(ServiceManager $serviceManager, array $config)
     {
         $dbAdapter = new DbAdapter($config['db']);
+        $serviceManager->setService('DbAdapter', $dbAdapter);
         GlobalAdapterFeature::setStaticAdapter($dbAdapter);
 
         return $dbAdapter;

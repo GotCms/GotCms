@@ -152,12 +152,13 @@ class Model extends AbstractTable
     public function save()
     {
         $this->events()->trigger(__CLASS__, 'before.save', $this);
+        $this->setUpdatedAt(date('Y-m-d H:i:s'));
         $arraySave = array(
             'firstname' => $this->getFirstname(),
             'lastname' => $this->getLastname(),
             'email' => $this->getEmail(),
             'login' => $this->getLogin(),
-            'updated_at' => new Expression('NOW()'),
+            'updated_at'  => $this->getUpdatedAt(),
             'user_acl_role_id' => $this->getUserAclRoleId(),
             'retrieve_password_key' => $this->getRetrievePasswordKey(),
             'retrieve_updated_at' => $this->getRetrieveUpdatedAt(),
@@ -175,9 +176,9 @@ class Model extends AbstractTable
         }
 
         try {
-            $id = $this->getId();
-            if (empty($id)) {
-                $arraySave['created_at'] = new Expression('NOW()');
+            if ($this->getId() === null) {
+                $this->setCreatedAt($this->getUpdatedAt());
+                $arraySave['created_at'] = $this->getCreatedAt();
                 $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());
             } else {
