@@ -54,7 +54,7 @@ class Model extends AbstractTable
     /**
      * Set prevalue value
      *
-     * @param mixed $value Value
+     * @param string $value Value
      *
      * @return \Gc\Datatype\Model
      */

@@ -30,8 +30,6 @@ namespace GcDevelopment\Controller;
 use Gc\Mvc\Controller\RestAction;
 use GcDevelopment\Filter\View as ViewFilter;
 use Gc\View;
-use Zend\Http\Headers;
-use ZipArchive;
 
 /**
  * View controller

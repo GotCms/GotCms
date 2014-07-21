@@ -27,7 +27,6 @@
 
 namespace GcBackend\Filter;
 
-use Zend\Form\Element;
 use Zend\InputFilter\InputFilter;
 
 /**

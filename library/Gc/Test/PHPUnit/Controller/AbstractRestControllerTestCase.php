@@ -28,7 +28,6 @@
 namespace Gc\Test\PHPUnit\Controller;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Gc\User\Model as UserModel;
 use Gc\Registry;
 use Zend\Http\Response;
 use Zend\Mvc\MvcEvent;

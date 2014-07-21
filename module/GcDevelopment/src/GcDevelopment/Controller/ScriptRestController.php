@@ -30,8 +30,6 @@ namespace GcDevelopment\Controller;
 use Gc\Mvc\Controller\RestAction;
 use GcDevelopment\Filter\Script as ScriptFilter;
 use Gc\Script;
-use Zend\Http\Headers;
-use ZipArchive;
 
 /**
  * Script controller
@@ -57,7 +55,7 @@ class ScriptRestController extends RestAction
     public function getList()
     {
         $scriptCollection = new Script\Collection();
-        $return         = array();
+        $return           = array();
         foreach ($scriptCollection->getScripts() as $script) {
             $return[] = $script->toArray();
         }

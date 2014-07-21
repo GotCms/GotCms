@@ -28,7 +28,6 @@
 namespace Gc\View;
 
 use Gc\Db\AbstractTable;
-use Zend\Db\Sql\Predicate\Expression;
 
 /**
  * Class for manage View

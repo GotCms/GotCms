@@ -29,10 +29,8 @@ namespace GcBackend\Controller;
 
 use Gc\Document\Collection;
 use Gc\Mvc\Controller\RestAction;
-use Gc\User;
 use Gc\User\Visitor;
 use Gc\Version;
-use GcBackend\Filter;
 
 /**
  * Index controller for admin module

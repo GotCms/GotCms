@@ -33,7 +33,6 @@ use Gc\Session\SaveHandler\DbTableGateway as SessionTableGateway;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Adapter\Adapter as DbAdapter;
-use Zend\EventManager\EventInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Session\SessionManager;

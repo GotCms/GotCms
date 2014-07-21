@@ -30,8 +30,6 @@ namespace GcDevelopment\Controller;
 use Gc\Mvc\Controller\RestAction;
 use GcDevelopment\Filter\Layout as LayoutFilter;
 use Gc\Layout;
-use Zend\Http\Headers;
-use ZipArchive;
 
 /**
  * Layout controller
@@ -57,7 +55,7 @@ class LayoutRestController extends RestAction
     public function getList()
     {
         $layoutCollection = new Layout\Collection();
-        $return         = array();
+        $return           = array();
         foreach ($layoutCollection->getLayouts() as $layout) {
             $return[] = $layout->toArray();
         }
