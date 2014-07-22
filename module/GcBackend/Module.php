@@ -34,7 +34,7 @@ use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Session\SessionManager;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container as SessionContainer;
@@ -166,12 +166,12 @@ class Module extends Mvc\Module
     /**
      * Initialize database
      *
-     * @param ServiceManager $serviceManager Service manager
-     * @param array          $config         Configuration
+     * @param ServiceLocatorInterface $serviceManager Service manager
+     * @param array                   $config         Configuration
      *
      * @return DbAdapter
      */
-    public function initDatabase(ServiceManager $serviceManager, array $config)
+    public function initDatabase(ServiceLocatorInterface $serviceManager, array $config)
     {
         $dbAdapter = new DbAdapter($config['db']);
         $serviceManager->setService('DbAdapter', $dbAdapter);
@@ -183,12 +183,12 @@ class Module extends Mvc\Module
     /**
      * Initialize Session data
      *
-     * @param ServiceManager $serviceManager Service manager
-     * @param DbAdapter      $dbAdapter      Database adapter
+     * @param ServiceLocatorInterface $serviceManager Service manager
+     * @param DbAdapter               $dbAdapter      Database adapter
      *
      * @return void
      */
-    public function initSession(ServiceManager $serviceManager, DbAdapter $dbAdapter)
+    public function initSession(ServiceLocatorInterface $serviceManager, DbAdapter $dbAdapter)
     {
         $coreConfig    = $serviceManager->get('CoreConfig');
         $sessionConfig = new SessionConfig();
@@ -226,11 +226,11 @@ class Module extends Mvc\Module
     /**
      * Initialize translator data
      *
-     * @param ServiceManager $serviceManager Service manager
+     * @param ServiceLocatorInterface $serviceManager Service manager
      *
      * @return void
      */
-    public function initTranslator(ServiceManager $serviceManager)
+    public function initTranslator(ServiceLocatorInterface $serviceManager)
     {
         $coreConfig = $serviceManager->get('CoreConfig');
         $translator = $serviceManager->get('MvcTranslator');
