@@ -212,8 +212,8 @@ class Model extends AbstractTable implements IterableInterface
     /**
      * Initiliaze from url and parent
      *
-     * @param string        $urlKey   Url key
-     * @param integer|null  $parentId Parent id
+     * @param string       $urlKey   Url key
+     * @param integer|null $parentId Parent id
      *
      * @return \Gc\Document\Model
      */

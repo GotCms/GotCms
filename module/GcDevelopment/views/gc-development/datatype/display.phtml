@@ -1,0 +1,29 @@
+<?php if ($this->form->has('prevalue-editor')): ?>
+    <?php $fieldset = $this->form->get('prevalue-editor'); ?>
+    <?php foreach ($fieldset->getElements() as $element): ?>
+        <div class="clearfix">
+            <?php $content = $element->getAttribute('content'); ?>
+            <?php if (!empty($content)): ?>
+                <?php echo $content; ?>
+            <?php else: ?>
+            <div class="form-group">
+                <?php $id = $element->getAttribute('id'); ?>
+
+                <?php if (empty($id)): ?>
+                    <?php $id = 'element' . mt_rand(); ?>
+                    <?php $element->setAttribute('id', $id); ?>
+                <?php endif; ?>
+
+                <?php if ($element->getLabel()): ?>
+                    <?php echo $this->formLabel($element); ?>
+                <?php endif; ?>
+
+                <div class="col-lg-10">
+                    <?php echo $this->formElement($element); ?>
+                    <?php echo $this->formElementErrors($element, array('class' => 'text-danger')); ?>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
