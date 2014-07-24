@@ -49,7 +49,7 @@ class DatatypeRestController extends RestAction
     protected $aclPage = array('resource' => 'development', 'permission' => 'datatype');
 
     /**
-     * List all views
+     * List all datatypeModels
      *
      * @return \Zend\Datatype\Model\DatatypeModel
      */
@@ -163,5 +163,22 @@ class DatatypeRestController extends RestAction
                 array('form' => $datatypeForm)
             )
         );
+    }
+
+    /**
+     * Delete datatype
+     *
+     * @param integer $id Id of the datatype
+     *
+     * @return array
+     */
+    public function delete($id)
+    {
+        $datatypeModel = Datatype\Model::fromId($id);
+        if (!empty($datatypeModel) and $datatypeModel->delete()) {
+            return array('success' => true, 'content' => 'This datatype has been deleted.');
+        }
+
+        return $this->notFoundAction();
     }
 }

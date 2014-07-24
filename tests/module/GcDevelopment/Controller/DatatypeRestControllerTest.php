@@ -313,4 +313,45 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
             $result->prevalue_editor
         );
     }
+
+
+    /**
+     * Test delete datatype with wrong id
+     *
+     * @return void
+     */
+    public function testDeleteDatatypeWithWrongId()
+    {
+        $this->setUpRoute('admin/development/datatype');
+        $this->request->setMethod('DELETE');
+        $this->routeMatch->setParam('id', 1);
+
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertEquals('Page not found', $result->content);
+        $this->assertEquals('Page not found.', $result->message);
+    }
+
+    /**
+     * Test delete datatype
+     *
+     * @return void
+     */
+    public function testDeleteDatatype()
+    {
+        $datatype = Datatype\Model::fromArray(
+            array(
+                'name' => 'Test',
+                'model' => 'Textstring'
+            )
+        );
+        $datatype->save();
+
+        $this->setUpRoute('admin/development/datatype');
+        $this->request->setMethod('DELETE');
+        $this->routeMatch->setParam('id', $datatype->getId());
+
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertTrue($result->success);
+        $this->assertEquals('This datatype has been deleted.', $result->content);
+    }
 }
