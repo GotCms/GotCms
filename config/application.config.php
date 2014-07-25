@@ -32,7 +32,7 @@ $modules = array(
     /* 'GcContent', */
     'GcDevelopment',
     /* 'GcModule', */
-    /* 'GcStatistics', */
+    'GcStatistics',
 );
 
 $path       = GC_APPLICATION_PATH . '/extensions/ZfModules/';
