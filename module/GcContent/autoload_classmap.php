@@ -26,9 +26,12 @@
  */
 
 return array(
-    'GcContent\Controller\DocumentRestController'    => __DIR__ . '/src/GcContent/Controller/DocumentRestController.php',
-    'GcContent\Controller\MediaRestController'       => __DIR__ . '/src/GcContent/Controller/MediaRestController.php',
-    'GcContent\Controller\TranslationRestController' => __DIR__ . '/src/GcContent/Controller/TranslationRestController.php',
+    'GcContent\Controller\DocumentRestController'    =>
+        __DIR__ . '/src/GcContent/Controller/DocumentRestController.php',
+    'GcContent\Controller\MediaRestController'       =>
+        __DIR__ . '/src/GcContent/Controller/MediaRestController.php',
+    'GcContent\Controller\TranslationRestController' =>
+        __DIR__ . '/src/GcContent/Controller/TranslationRestController.php',
     'GcContent\Module'                               => __DIR__ . '/Module.php',
     'GcContent\Filter\Document'                      => __DIR__ . '/src/GcContent/Filter/Document.php',
     'GcContent\Filter\Translation'                   => __DIR__ . '/src/GcContent/Filter/Translation.php',

@@ -18,98 +18,62 @@
  * PHP Version >=5.3
  *
  * @category   Gc_Application
- * @package    GcDevelopment
+ * @package    GcContent
  * @subpackage Filter
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace GcDevelopment\Filter;
+namespace GcContent\Filter;
 
-use Zend\Db\Adapter\Adapter;
 use Zend\InputFilter\InputFilter;
 
 /**
  * Script form
  *
  * @category   Gc_Application
- * @package    GcDevelopment
+ * @package    GcContent
  * @subpackage Filter
  */
-abstract class AbstractFilterContent extends InputFilter
+class Translation extends InputFilter
 {
-    /**
-     * Identifier pattern constante
-     *
-     * @const IDENTIFIER_PATTERN
-     */
-    const IDENTIFIER_PATTERN = '~^[a-zA-Z0-9._-]+$~';
-
-    /**
-     * Table name
-     *
-     * @return void
-     */
-    protected $tableName;
-
     /**
      * Initialize form
      *
-     * @param Adapter $dbAdapter Database Adapter
+     * @param array $config Project configuration
      *
      * @return void
      */
-    public function __construct(Adapter $dbAdapter)
+    public function __construct(array $config)
     {
         $this->add(
             array(
-                'name' => 'name',
+                'name' => 'source',
                 'required' => true,
                 'validators' => array(
                     array('name' => 'not_empty'),
-                    array(
-                        'name' => 'db\\no_record_exists',
-                        'options' => array(
-                            'table' => $this->tableName,
-                            'field' => 'name',
-                            'adapter' => $dbAdapter,
-                        ),
-                    ),
                 )
             )
         );
 
         $this->add(
             array(
-                'name' => 'identifier',
+                'name' => 'destination',
                 'required' => true,
                 'validators' => array(
                     array('name' => 'not_empty'),
-                    array('name' => 'regex', 'options' => array('pattern' => self::IDENTIFIER_PATTERN)),
-                    array(
-                        'name' => 'db\\no_record_exists',
-                        'options' => array(
-                            'table' => $this->tableName,
-                            'field' => 'identifier',
-                            'adapter' => $dbAdapter,
-                        ),
-                    ),
+                )
+            )
+        );
+
+        $this->add(
+            array(
+                'name' => 'locale',
+                'required' => true,
+                'validators' => array(
+                    array('name' => 'not_empty'),
                 ),
-            )
-        );
-
-        $this->add(
-            array(
-                'name' => 'content',
-                'required' => false
-            )
-        );
-
-        $this->add(
-            array(
-                'name' => 'description',
-                'required' => false
             )
         );
     }

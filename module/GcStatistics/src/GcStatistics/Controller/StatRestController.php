@@ -53,8 +53,8 @@ class StatRestController extends RestAction
     public function getList()
     {
         $visitorModel = new Visitor();
-        $data           = array();
-        $array          = array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR');
+        $data         = array();
+        $array        = array('hours' => 'HOUR', 'days' => 'DAY', 'months' => 'MONTH', 'years' => 'YEAR');
 
         foreach ($array as $type => $sqlValue) {
             $label = '';

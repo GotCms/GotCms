@@ -26,6 +26,7 @@
  */
 namespace GcContent\Controller;
 
+use GcContent\Filter\Translation as TranslationFilter;
 use Gc\Core\Translator;
 use Gc\Mvc\Controller\RestAction;
 
@@ -54,5 +55,49 @@ class TranslationRestController extends RestAction
     {
         $translator = new Translator();
         return array('translations' => $translator->getValues());
+    }
+
+    /**
+     * Create translation
+     *
+     * @param array $data Data to used to create translation
+     *
+     * @return array
+     */
+    public function create($data)
+    {
+        $translationFilter = new TranslationFilter($this->getServiceLocator()->get('Config'));
+        $translationFilter->setData($data);
+        if ($translationFilter->isValid()) {
+            $source = $translationFilter->getValue('source');
+            $data   = array();
+            foreach ($translationFilter->getValue('destination') as $destinationId => $destination) {
+                if (empty($destination)) {
+                    continue;
+                }
+
+                $data[$destinationId] = array('value' => $destination);
+            }
+
+            foreach ($translationFilter->getValue('locale') as $localeId => $locale) {
+                if (empty($data[$localeId])) {
+                    continue;
+                }
+
+                if (empty($locale)) {
+                    unset($data[$localeId]);
+                    continue;
+                }
+
+                $data[$localeId]['locale'] = $locale;
+            }
+
+            $this->flashMessenger()->addSuccessMessage('Translation saved !');
+            $translator = new Translator();
+            $translator->setValue($source, $data);
+            return array($source => $data);
+        }
+
+        return array('content' => 'Invalid data', 'errors' => $translationFilter->getMessages());
     }
 }

@@ -51,7 +51,7 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
     }
 
     /**
-     * Test get layouts
+     * Test get translations
      *
      * @return void
      */
@@ -70,5 +70,71 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals('word', $result->translations[0]['source']);
         $this->assertEquals('mot', $result->translations[0]['destination']);
+    }
+
+    /**
+     * Test create translation with empty data
+     *
+     * @return void
+     */
+    public function testCreateTranslationWithEmptyData()
+    {
+        $this->setUpRoute('admin/content/translation');
+        $this->request->setMethod('POST');
+        $post = $this->request->getPost();
+        $post->fromArray(
+            array(
+                'source' => ''
+            )
+        );
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertEquals('Invalid data', $result->content);
+        $this->assertEquals(
+            array(
+                'source' => array(
+                    'isEmpty' => "Value is required and can't be empty",
+                ),
+                'destination' =>  array(
+                    'isEmpty' => "Value is required and can't be empty",
+                ),
+                'locale' =>  array(
+                    'isEmpty' => "Value is required and can't be empty",
+                )
+            ),
+            $result->errors
+        );
+    }
+
+    /**
+     * Test create translation with valid data
+     *
+     * @return void
+     */
+    public function testCreateTranslationValidData()
+    {
+        $this->setUpRoute('admin/content/translation');
+        $this->request->setMethod('POST');
+        $post = $this->request->getPost();
+        $post->fromArray(
+            array(
+                'source' => 'word',
+                'destination' => array(
+                    'mot',
+                    'fake',
+                    ''
+                ),
+                'locale' => array(
+                    'fr_FR',
+                    '',
+                    25 => 'fr_FR'
+
+                )
+            )
+        );
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertInternalType('array', $result->word);
+        $this->assertEquals('fr_FR', $result->word[0]['locale']);
+        $this->assertEquals('mot', $result->word[0]['value']);
+        $this->assertArrayNotHasKey('1', $result->word);
     }
 }

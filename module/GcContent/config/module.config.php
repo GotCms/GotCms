@@ -58,7 +58,7 @@ return array(
                     'translation' => array(
                         'type'    => 'Literal',
                         'options' => array(
-                            'route'    => '/translation',
+                            'route'    => '/translation[/:id]',
                             'defaults' =>
                             array (
                                 'module'     => 'gccontent',
