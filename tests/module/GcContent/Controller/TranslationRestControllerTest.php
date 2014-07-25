@@ -24,9 +24,10 @@
  * @link     http://www.got-cms.com
  */
 
-namespace GcStatistics\Controller;
+namespace GcContent\Controller;
 
 use Gc\Test\PHPUnit\Controller\AbstractRestControllerTestCase;
+use Gc\Core\Translator;
 
 /**
  * Test layout rest api
@@ -35,12 +36,18 @@ use Gc\Test\PHPUnit\Controller\AbstractRestControllerTestCase;
  * @category Gc_Tests
  * @package  ZfModules
  */
-class StatRestControllerTest extends AbstractRestControllerTestCase
+class TranslationRestControllerTest extends AbstractRestControllerTestCase
 {
     public function setUp()
     {
-        $this->controller = new StatRestController;
+        $this->controller = new TranslationRestController;
+        $this->translator = new Translator;
         parent::setUp();
+    }
+
+    public function tearDown()
+    {
+        $this->translator->delete('1=1');
     }
 
     /**
@@ -50,12 +57,18 @@ class StatRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetList()
     {
-        $this->setUpRoute('admin/development/stat');
+        $this->translator->setValue(
+            'word',
+            array(
+                array(
+                    'locale' => 'fr_FR',
+                    'value' => 'mot'
+                )
+            )
+        );
+        $this->setUpRoute('admin/content/translation');
         $result = $this->controller->dispatch($this->request, $this->response);
-        $vars = $result->getVariables();
-        $this->assertArrayHasKey('days', $vars);
-        $this->assertArrayHasKey('months', $vars);
-        $this->assertArrayHasKey('years', $vars);
-        $this->assertArrayHasKey('hours', $vars);
+        $this->assertEquals('word', $result->translations[0]['source']);
+        $this->assertEquals('mot', $result->translations[0]['destination']);
     }
 }
