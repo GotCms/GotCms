@@ -61,7 +61,6 @@ tests/media/templates/view/*
 vendor/*
 !vendor/elFinder
 !vendor/Parsedown
-!vendor/SVGGraph
 !vendor/Assetic
 !vendor/AssetManager
 !vendor/Zend
