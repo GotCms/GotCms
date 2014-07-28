@@ -122,7 +122,9 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
                 )
             )
         );
-        $this->assertTrue($result);
+        $this->assertEquals('parameters', $result['source']);
+        $this->assertEquals('paramètres', $result['destinations'][0]['value']);
+        $this->assertEquals('fr_FR', $result['destinations'][0]['locale']);
     }
 
     /**
@@ -153,7 +155,9 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertTrue($result);
+        $this->assertEquals('parameters', $result['source']);
+        $this->assertEquals('parametri', $result['destinations'][0]['value']);
+        $this->assertEquals('it_IT', $result['destinations'][0]['locale']);
     }
 
     /**
@@ -183,7 +187,9 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertTrue($result);
+        $this->assertEquals('parameters', $result['source']);
+        $this->assertEquals('parametri', $result['destinations'][0]['value']);
+        $this->assertEquals('it_IT', $result['destinations'][0]['locale']);
     }
 
     /**

@@ -121,46 +121,33 @@ class Translator extends AbstractTable
      */
     public function setValue($source, array $destinations)
     {
-        if (is_numeric($source)) {
-            $row = $this->fetchRow($this->select(array('id' => $source)));
-            if (empty($row)) {
-                return false;
-            }
-
-            $sourceId = $row['id'];
-        } else {
-            $row = $this->fetchRow($this->select(array('source' => $source)));
-            if (!empty($row)) {
-                $sourceId = $row['id'];
-            } else {
-                $this->insert(array('source' => $source));
-                $sourceId = $this->getLastInsertId();
-            }
+        if (($source = $this->findSource($source)) === false) {
+            return false;
         }
+
+        $data = array(
+            'source' => $source['value'],
+            'source_id' => $source['id'],
+            'destinations' => array()
+        );
 
         foreach ($destinations as $destination) {
             if (empty($destination['locale']) or empty($destination['value'])) {
                 continue;
             }
 
-            $select = new Select();
-            $select->from('core_translate_locale');
-            $select->where->equalTo('locale', $destination['locale']);
-            $select->where->equalTo('core_translate_id', $sourceId);
-            $row =  $this->fetchRow($select);
-            if (!empty($row)) {
-                $destination['dst_id'] = $row['id'];
-            }
 
-            if (!empty($destination['dst_id'])) {
-                $update = new Update('core_translate_locale');
+            $row = $this->findDestination($source['id'], $destination['locale']);
+            if (!empty($row['id'])) {
+                $destinationId = $row['id'];
+                $update        = new Update('core_translate_locale');
                 $update->set(
                     array(
                         'destination' => $destination['value'],
                         'locale' => $destination['locale']
                     )
                 );
-                $update->where->equalTo('id', $destination['dst_id']);
+                $update->where->equalTo('id', $destinationId);
 
                 $this->execute($update);
             } else {
@@ -170,15 +157,78 @@ class Translator extends AbstractTable
                         array(
                             'destination' => $destination['value'],
                             'locale' => $destination['locale'],
-                            'core_translate_id' => $sourceId,
+                            'core_translate_id' => $source['id'],
                         )
                     );
 
                 $this->execute($insert);
+                $destinationId = $this->getLastInsertId();
             }
+
+            $data['destinations'][] = array(
+                'id' => $destinationId,
+                'value' => $destination['value'],
+                'locale' => $destination['locale']
+            );
         }
 
-        return true;
+        return $data;
+    }
+
+
+    /**
+     * Find destination from source id and locale
+     *
+     * @param string $sourceId Source id
+     * @param string $locale   Locale
+     *
+     * @return mixed
+     */
+    public function findDestination($sourceId, $locale)
+    {
+        $select = new Select();
+        $select->from('core_translate_locale');
+        $select->where->equalTo('locale', $locale);
+        $select->where->equalTo('core_translate_id', $sourceId);
+
+        return $this->fetchRow($select);
+    }
+
+    /**
+     * Find source from string or numeric
+     *
+     * @param string $source Source
+     *
+     * @return integer
+     */
+    public function findSource($source)
+    {
+        if (is_numeric($source)) {
+            $row = $this->fetchRow($this->select(array('id' => $source)));
+            if (empty($row)) {
+                return false;
+            }
+
+            $data = array(
+                'id' => $row['id'],
+                'value' => $row['source']
+            );
+        } else {
+            $row = $this->fetchRow($this->select(array('source' => $source)));
+            if (!empty($row)) {
+                $sourceId = $row['id'];
+            } else {
+                $this->insert(array('source' => $source));
+                $sourceId = $this->getLastInsertId();
+            }
+
+            $data = array(
+                'value' => $source,
+                'id' => $sourceId
+            );
+        }
+
+        return $data;
     }
 
     /**

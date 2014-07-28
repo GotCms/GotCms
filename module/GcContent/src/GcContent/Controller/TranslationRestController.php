@@ -94,8 +94,7 @@ class TranslationRestController extends RestAction
 
             $this->flashMessenger()->addSuccessMessage('Translation saved !');
             $translator = new Translator();
-            $translator->setValue($source, $data);
-            return array($source => $data);
+            return array('translation' => $translator->setValue($source, $data));
         }
 
         return array('content' => 'Invalid data', 'errors' => $translationFilter->getMessages());

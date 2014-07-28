@@ -20,6 +20,7 @@ fi
 phpunit_opts="-d zend.enable_gc=0 --verbose"
 phpunit_groups=
 
+cd ../
 while [ -n "$1" ] ; do
   case "$1" in
     ALL|all)
@@ -31,12 +32,16 @@ while [ -n "$1" ] ; do
      shift ;;
     *)
 
-     phpunit_file="$1"
+    if [[ ! -f "$(pwd)/$1" ]]
+    then
+      phpunit_opts="${phpunit_opts:+"$phpunit_opts "}$1"
+    else
+      phpunit_file="${phpunit_file:+"$phpunit_file "}$1"
+    fi
      shift ;;
   esac
 done
 
-cd "../tests"
-echo $phpunit_opts ${phpunit_groups:+--group $phpunit_groups} $phpunit_file
+cd "tests"
+echo $phpunit $phpunit_opts ${phpunit_groups:+--group $phpunit_groups} $phpunit_file
 $phpunit $phpunit_opts ${phpunit_groups:+--group $phpunit_groups} $phpunit_file
-

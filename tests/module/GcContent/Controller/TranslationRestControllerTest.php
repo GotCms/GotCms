@@ -132,9 +132,10 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
             )
         );
         $result = $this->controller->dispatch($this->request, $this->response);
-        $this->assertInternalType('array', $result->word);
-        $this->assertEquals('fr_FR', $result->word[0]['locale']);
-        $this->assertEquals('mot', $result->word[0]['value']);
-        $this->assertArrayNotHasKey('1', $result->word);
+        $translation = $result->translation;
+        $this->assertInternalType('array', $translation);
+        $this->assertEquals('word', $translation['source']);
+        $this->assertEquals('fr_FR', $translation['destinations'][0]['locale']);
+        $this->assertEquals('mot', $translation['destinations'][0]['value']);
     }
 }
