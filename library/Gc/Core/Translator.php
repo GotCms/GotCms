@@ -127,7 +127,7 @@ class Translator extends AbstractTable
 
         $data = array(
             'source' => $source['value'],
-            'source_id' => $source['id'],
+            'id' => $source['id'],
             'destinations' => array()
         );
 

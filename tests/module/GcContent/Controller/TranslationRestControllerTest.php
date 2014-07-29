@@ -57,7 +57,7 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetList()
     {
-        $this->translator->setValue(
+        $translation = $this->translator->setValue(
             'word',
             array(
                 array(
@@ -67,9 +67,12 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
             )
         );
         $this->setUpRoute('admin/content/translation');
-        $result = $this->controller->dispatch($this->request, $this->response);
-        $this->assertEquals('word', $result->translations[0]['source']);
-        $this->assertEquals('mot', $result->translations[0]['destination']);
+        $result       = $this->controller->dispatch($this->request, $this->response);
+        $translations = $result->translations;
+        $this->assertInternalType('array', $translations);
+        $this->assertEquals('word', $translations[$translation['id']]['source']);
+        $this->assertEquals('fr_FR', $translations[$translation['id']]['destinations'][0]['locale']);
+        $this->assertEquals('mot', $translations[$translation['id']]['destinations'][0]['value']);
     }
 
     /**

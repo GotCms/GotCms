@@ -47,8 +47,7 @@ return array(
                 'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/admin/content',
-                    'defaults' =>
-                    array (
+                    'defaults' => array(
                         'module'     => 'gccontent',
                         'controller' => 'ContentRest',
                     ),
@@ -56,11 +55,10 @@ return array(
                 'may_terminate' => true,
                 'child_routes' => array(
                     'translation' => array(
-                        'type'    => 'Literal',
+                        'type'    => 'Segment',
                         'options' => array(
                             'route'    => '/translation[/:id]',
-                            'defaults' =>
-                            array (
+                            'defaults' => array(
                                 'module'     => 'gccontent',
                                 'controller' => 'TranslationRest',
                             ),

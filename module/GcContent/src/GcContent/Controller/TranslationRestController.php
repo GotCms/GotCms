@@ -53,8 +53,28 @@ class TranslationRestController extends RestAction
      */
     public function getList()
     {
-        $translator = new Translator();
-        return array('translations' => $translator->getValues());
+        $translator   = new Translator();
+        $translations = $translator->getValues();
+        $data         = array();
+
+        foreach ($translations as $translation) {
+            if (empty($data[$translation['src_id']])) {
+                $data[$translation['src_id']] = array(
+                    'source' => $translation['source'],
+                    'id' => $translation['src_id'],
+                    'destinations' => array()
+
+                );
+            }
+
+            $data[$translation['src_id']]['destinations'][] = array(
+                'id' => $translation['dst_id'],
+                'value' => $translation['destination'],
+                'locale' => $translation['locale'],
+            );
+        }
+
+        return array('translations' => $data);
     }
 
     /**
