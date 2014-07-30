@@ -122,7 +122,7 @@ class Model extends AbstractTable
         try {
             $moduleId = $this->getId();
             if (empty($moduleId)) {
-                $this->setCreatedAt($this->getUpdatedAt());
+                $this->setCreatedAt(date('Y-m-d H:i:s'));
                 $arraySave['created_at'] = $this->getCreatedAt();
                 $this->insert($arraySave);
                 $this->setId($this->getLastInsertId());

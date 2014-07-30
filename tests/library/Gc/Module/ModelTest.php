@@ -66,8 +66,10 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->object->delete();
-        unset($this->object);
+        $collection = new Collection();
+        foreach ($collection->getModules() as $module) {
+            $module->delete();
+        }
     }
 
     /**
@@ -193,6 +195,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstallWithInvalidData()
     {
+        $this->object->delete();
         $modules = Registry::get('Application')->getServiceManager()->get('CustomModules');
         $this->assertFalse(Model::install($modules, 'Test'));
     }

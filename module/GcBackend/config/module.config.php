@@ -41,6 +41,9 @@ return array(
             'CoreConfig' => function () {
                 return new CoreConfig();
             },
+            'Cache' => 'Gc\Mvc\Factory\CacheFactory',
+            'CacheService' => 'Gc\Mvc\Factory\CacheServiceFactory',
+            'CustomModules' => 'Gc\Mvc\Factory\ModuleManagerFactory',
         )
     ),
     'controllers' => array(

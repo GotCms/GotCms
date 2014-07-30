@@ -57,14 +57,173 @@ return array(
                     'translation' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/translation[/:id]',
-                            'defaults' => array(
+                            'route'       => '/translation[/:id]',
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                            'defaults'    => array(
                                 'module'     => 'gccontent',
                                 'controller' => 'TranslationRest',
                             ),
                         ),
+                        'may_terminate' => true,
+                        'child_routes'  => array(
+                            'search' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'       => '/search[/:id]',
+                                    'constraints' => array(
+                                        'id' => '[0-9]+'
+                                    ),
+                                    'defaults'    => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'TranslationSearchRest',
+                                    ),
+                                ),
+                            )
+                        ),
                     ),
-                )
+                    'document' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'       => '/document[/:id]',
+                            'constraints' => array(
+                                'id' => '[0-9]+'
+                            ),
+                            'defaults'    => array(
+                                'module'     => 'gccontent',
+                                'controller' => 'DocumentRest',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes'  => array(
+                            'copy' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'       => '/copy[/:id]',
+                                    'constraints' => array(
+                                        'id' => '[0-9]+'
+                                    ),
+                                    'defaults'    => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'DocumentCopyRest',
+                                    ),
+                                ),
+                            ),
+                            'paste' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'       => '/paste[/:id]',
+                                    'constraints' => array(
+                                        'id' => '[0-9]+'
+                                    ),
+                                    'defaults'    => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'DocumentPasteRest',
+                                    ),
+                                ),
+                            ),
+                            'cut' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'       => '/cut[/:id]',
+                                    'constraints' => array(
+                                        'id' => '[0-9]+'
+                                    ),
+                                    'defaults'    => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'DocumentCutRest',
+                                    ),
+                                ),
+                            ),
+                            'sort' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'       => '/sort',
+                                    'constraints' => array(
+                                        'id' => '[0-9]+'
+                                    ),
+                                    'defaults'    => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'DocumentSortRest',
+                                    ),
+                                ),
+                            ),
+                            'publish' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'       => '/publish[/:id]',
+                                    'constraints' => array(
+                                        'id' => '[0-9]+'
+                                    ),
+                                    'defaults'    => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'DocumentPublishRest',
+                                    ),
+                                ),
+                            ),
+                            'unpublish' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'       => '/cut[/:id]',
+                                    'constraints' => array(
+                                        'id' => '[0-9]+'
+                                    ),
+                                    'defaults'    => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'DocumentUnpublishRest',
+                                    ),
+                                ),
+                            )
+                        ),
+                    ),
+                    'media' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/media',
+                            'defaults' => array(
+                                'module'     => 'gccontent',
+                                'controller' => 'MediaController',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'connector' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/connector',
+                                    'defaults' => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'MediaController',
+                                        'action'     => 'connector',
+                                    ),
+                                ),
+                            ),
+                            'upload' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/upload/document/:document_id/property/:property_id',
+                                    'defaults' => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'MediaController',
+                                        'action'     => 'upload',
+                                    ),
+                                ),
+                            ),
+                            'remove' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/remove/document/:document_id/property/:property_id/:file/',
+                                    'defaults' => array(
+                                        'module'     => 'gccontent',
+                                        'controller' => 'MediaController',
+                                        'action'     => 'remove',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             ),
         ),
     )

@@ -464,7 +464,7 @@ class Model extends AbstractTable implements IterableInterface
             ->getRouter()
             ->assemble(
                 array('id' => $this->getId()),
-                array('name' => 'content/document/edit')
+                array('name' => 'content/document')
             );
     }
 }
