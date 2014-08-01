@@ -139,7 +139,6 @@ class DatatypeRestController extends RestAction
         return array('content' => 'Invalid data', 'errors' => $datatypeFilter->getMessages());
     }
 
-
     /**
      * Get Datatype informations
      *
