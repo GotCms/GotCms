@@ -86,7 +86,7 @@ class TranslationRestController extends RestAction
      */
     public function create($data)
     {
-        $translationFilter = new TranslationFilter($this->getServiceLocator()->get('Config'));
+        $translationFilter = new TranslationFilter();
         $translationFilter->setData($data);
         if ($translationFilter->isValid()) {
             $source = $translationFilter->getValue('source');
@@ -112,9 +112,38 @@ class TranslationRestController extends RestAction
                 $data[$localeId]['locale'] = $locale;
             }
 
-            $this->flashMessenger()->addSuccessMessage('Translation saved !');
             $translator = new Translator();
             return array('translation' => $translator->setValue($source, $data));
+        }
+
+        return array('content' => 'Invalid data', 'errors' => $translationFilter->getMessages());
+    }
+
+    /**
+     * Edit translation
+     *
+     * @param array $data Data to used to create translation
+     *
+     * @return array
+     */
+    public function patchList($data)
+    {
+        $translationFilter = new TranslationFilter();
+        $translationFilter->get('locale')->setRequired(false);
+        $translationFilter->setData($data);
+        if ($translationFilter->isValid()) {
+            $translator   = new Translator();
+            $sources      = $translationFilter->getValue('source');
+            $destinations = $translationFilter->getValue('destination');
+            $return       = array();
+            foreach ($sources as $sourceId => $source) {
+                $translator->update(array('source' => $source), sprintf('id = %d', $sourceId));
+                if (!empty($destinations[$sourceId]) and !empty($destinations[$sourceId]['locale'])) {
+                    $return[] = $translator->setValue($sourceId, array($destinations[$sourceId]));
+                }
+            }
+
+            return array('translations' => $return);
         }
 
         return array('content' => 'Invalid data', 'errors' => $translationFilter->getMessages());

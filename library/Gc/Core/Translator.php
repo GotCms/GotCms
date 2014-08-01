@@ -136,8 +136,7 @@ class Translator extends AbstractTable
                 continue;
             }
 
-
-            $row = $this->findDestination($source['id'], $destination['locale']);
+            $row = $this->findDestination($destination, $source['id']);
             if (!empty($row['id'])) {
                 $destinationId = $row['id'];
                 $update        = new Update('core_translate_locale');
@@ -179,17 +178,21 @@ class Translator extends AbstractTable
     /**
      * Find destination from source id and locale
      *
+     * @param array  $destination Destination informations
      * @param string $sourceId Source id
-     * @param string $locale   Locale
      *
      * @return mixed
      */
-    public function findDestination($sourceId, $locale)
+    public function findDestination($destination, $sourceId)
     {
         $select = new Select();
         $select->from('core_translate_locale');
-        $select->where->equalTo('locale', $locale);
-        $select->where->equalTo('core_translate_id', $sourceId);
+        if (!empty($destination['dst_id'])) {
+            $select->where->equalTo('id', $destination['dst_id']);
+        } else {
+            $select->where->equalTo('locale', $destination['locale']);
+            $select->where->equalTo('core_translate_id', $sourceId);
+        }
 
         return $this->fetchRow($select);
     }

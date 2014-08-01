@@ -141,4 +141,82 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
         $this->assertEquals('fr_FR', $translation['destinations'][0]['locale']);
         $this->assertEquals('mot', $translation['destinations'][0]['value']);
     }
+
+    /**
+     * Test update translation with empty data
+     *
+     * @return void
+     */
+    public function testUpdateTranslationWithEmptyData()
+    {
+        $this->setUpRoute('admin/content/translation');
+        $this->request->setMethod('PATCH');
+        $this->request->setContent(
+            http_build_query(
+                array(
+                    'source' => ''
+                )
+            )
+        );
+
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $this->assertEquals('Invalid data', $result->content);
+        $this->assertEquals(
+            array(
+                'source' => array(
+                    'isEmpty' => "Value is required and can't be empty",
+                ),
+                'destination' =>  array(
+                    'isEmpty' => "Value is required and can't be empty",
+                )
+            ),
+            $result->errors
+        );
+    }
+
+    /**
+     * Test create translation with valid data
+     *
+     * @return void
+     */
+    public function testUpdateTranslationValidData()
+    {
+        $translation = $this->translator->setValue(
+            'word',
+            array(
+                array(
+                    'locale' => 'fr_FR',
+                    'value' => 'mot'
+                )
+            )
+        );
+
+        $this->setUpRoute('admin/content/translation');
+        $this->request->setMethod('PATCH');
+        $this->request->setContent(
+            http_build_query(
+                array(
+                    'source' => array(
+                        $translation['id'] => 'words',
+                        2 => 'Other things'
+                    ),
+                    'destination' => array(
+                        $translation['id'] => array(
+                            'value' => 'mots',
+                            'dst_id' => $translation['destinations'][0]['id'],
+                            'locale' => 'fr_FR'
+
+                        )
+                    )
+                )
+            )
+        );
+
+        $result = $this->controller->dispatch($this->request, $this->response);
+        $translations = $result->translations;
+        $this->assertInternalType('array', $translations);
+        $this->assertEquals('words', $translations[0]['source']);
+        $this->assertEquals('mots', $translations[0]['destinations'][0]['value']);
+        $this->assertEquals('fr_FR', $translations[0]['destinations'][0]['locale']);
+    }
 }

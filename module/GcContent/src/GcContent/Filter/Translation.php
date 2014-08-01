@@ -41,11 +41,10 @@ class Translation extends InputFilter
     /**
      * Initialize form
      *
-     * @param array $config Project configuration
      *
      * @return void
      */
-    public function __construct(array $config)
+    public function __construct()
     {
         $this->add(
             array(

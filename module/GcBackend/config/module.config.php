@@ -171,189 +171,147 @@ return array(
                 'route' => 'admin',
                 'pages' => array(
                     array(
-                        'label' => 'Content',
-                        'route' => 'content',
-                        'pages' => array(
-                            array(
-                                'label' => 'Translations',
-                                'route' => 'content/translation',
-                                'pages' => array(
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'content/translation/create',
-                                    )
-                                )
-                            ),
-                            array(
-                                'label' => 'File manager',
-                                'route' => 'content/media',
-                            ),
-                            array(
-                                'label' => 'Document',
-                                'route' => 'content/document',
-                                'pages' => array(
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'content/document/create',
-                                    ),
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'content/document/create-w-parent',
-                                    ),
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'content/document/create',
-                                    ),
-                                    array(
-                                        'label' => 'Edit',
-                                        'route' => 'content/document/edit',
-                                    ),
-                                ),
-                            ),
-                        )
-                    ),
-                    array(
-                        'label' => 'Development',
-                        'route' => 'development',
-                        'pages' => array(
-                            array(
-                                'label' => 'Document type',
-                                'route' => 'development/document-type',
-                                'pages' => array(
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'development/document-type/create',
-                                    ),
-                                    array(
-                                        'label' => 'Edit',
-                                        'route' => 'development/document-type/edit',
-                                    ),
-                                ),
-                            ),
-                            array(
-                                'label' => 'View',
-                                'route' => 'development/view',
-                                'pages' => array(
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'development/view/create',
-                                    ),
-                                    array(
-                                        'label' => 'Edit',
-                                        'route' => 'development/view/edit',
-                                    ),
-                                ),
-                            ),
-                            array(
-                                'label' => 'Layout',
-                                'route' => 'development/layout',
-                                'pages' => array(
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'development/layout/create',
-                                    ),
-                                    array(
-                                        'label' => 'Edit',
-                                        'route' => 'development/layout/edit',
-                                    ),
-                                ),
-                            ),
-                            array(
-                                'label' => 'Script',
-                                'route' => 'development/script',
-                                'pages' => array(
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'development/script/create',
-                                    ),
-                                    array(
-                                        'label' => 'Edit',
-                                        'route' => 'development/script/edit',
-                                    ),
-                                ),
-                            ),
-                            array(
-                                'label' => 'Datatypes',
-                                'route' => 'development/datatype',
-                                'pages' => array(
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'development/datatype/create',
-                                    ),
-                                    array(
-                                        'label' => 'Edit',
-                                        'route' => 'development/datatype/edit',
-                                    ),
-                                ),
-                            ),
-                        )
-                    ),
-                    array(
-                        'label' => 'Modules',
-                        'route' => 'module',
-                        'pages' => array(
-                            array(
-                                'label' => 'Install',
-                                'route' => 'module/install',
-                            ),
-                        )
-                    ),
-                    array(
-                        'label' => 'Statistics',
-                        'route' => 'statistics',
-                    ),
-                    array(
-                        'label' => 'Config',
-                        'route' => 'config',
-                        'pages' => array(
-                            array(
-                                'label' => 'General',
-                                'route' => 'config/general',
-                            ),
-                            array(
-                                'label' => 'System',
-                                'route' => 'config/system',
-                            ),
-                            array(
-                                'label' => 'Server',
-                                'route' => 'config/server',
-                            ),
-                            array(
-                                'label' => 'Update',
-                                'route' => 'config/cms-update',
-                            ),
-                            array(
-                                'label' => 'User',
-                                'route' => 'config/user',
-                                'pages' => array(
-                                    array(
-                                        'label' => 'Create',
-                                        'route' => 'config/user/create',
-                                    ),
-                                    array(
-                                        'label' => 'Edit',
-                                        'route' => 'config/user/edit',
-                                    ),
-                                    array(
-                                        'label' => 'Role',
-                                        'route' => 'config/user/role',
-                                        'pages' => array(
-                                            array(
-                                                'label' => 'Create',
-                                                'route' => 'config/user/role/create',
-                                            ),
-                                            array(
-                                                'label' => 'Edit',
-                                                'route' => 'config/user/role/edit',
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
                     ),
                 )
             ),
         )
-    )
+    ),
+
+    'locales' => array(
+        'af' => 'Afrikaans',
+        'ak' => 'Akan',
+        'sq' => 'Shqip',
+        'am' => 'አማርኛ',
+        'ar' => 'العربية',
+        'hy' => 'Հայերեն',
+        'rup_MK' => 'Armãneashce',
+        'as' => 'অসমীয়া',
+        'az' => 'Azərbaycan dili',
+        'az_TR' => 'Azərbaycan Türkcəsi',
+        'ba' => 'башҡорт теле',
+        'eu' => 'Euskara',
+        'bel' => 'Беларуская мова',
+        'bn_BD' => 'বাংলা',
+        'bs_BA' => 'Bosanski',
+        'bg_BG' => 'Български',
+        'my_MM' => 'ဗမာစာ',
+        'ca' => 'Català',
+        'bal' => 'Català (Balear)',
+        'zh_CN' => '中文',
+        'zh_HK' => '香港中文版',
+        'zh_TW' => '中文',
+        'co' => 'corsu',
+        'hr' => 'Hrvatski',
+        'cs_CZ' => 'čeština‎',
+        'da_DK' => 'Dansk',
+        'dv' => 'ދިވެހި',
+        'nl_NL' => 'Nederlands',
+        'nl_BE' => 'Nederlands (België)',
+        'en_US' => 'English',
+        'en_AU' => 'English (Australia)',
+        'en_CA' => 'English (Canada)',
+        'en_GB' => 'English (UK)',
+        'eo' => 'Esperanto',
+        'et' => 'Eesti',
+        'fo' => 'føroyskt',
+        'fi' => 'Suomi',
+        'fr_BE' => 'Français de Belgique',
+        'fr_FR' => 'Français',
+        'fy' => 'Frysk',
+        'fuc' => 'Pulaar',
+        'gl_ES' => 'Galego',
+        'ka_GE' => 'ქართული',
+        'de_DE' => 'Deutsch',
+        'el' => 'Ελληνικά',
+        'gn' => 'Avañe\'ẽ',
+        'haw_US' => 'Ōlelo Hawaiʻi',
+        'haz' => 'هزاره گی',
+        'he_IL' => 'עִבְרִית',
+        'hi_IN' => 'हिन्दी',
+        'hu_HU' => 'Magyar',
+        'is_IS' => 'Íslenska',
+        'id_ID' => 'Bahasa Indonesia',
+        'ga' => 'Gaelige',
+        'it_IT' => 'Italiano',
+        'ja' => '日本語',
+        'jv_ID' => 'Basa Jawa',
+        'kn' => 'ಕನ್ನಡ',
+        'kk' => 'Қазақ тілі',
+        'km' => 'ភាសាខ្មែរ',
+        'kin' => 'Kinyarwanda',
+        'ky_KY' => 'кыргыз тили',
+        'ko_KR' => '한국어',
+        'ckb' => 'كوردی‎',
+        'lo' => 'ພາສາລາວ',
+        'lv' => 'latviešu valoda',
+        'li' => 'Limburgs',
+        'lt_LT' => 'Lietuvių kalba',
+        'lb_LU' => 'Lëtzebuergesch',
+        'mk_MK' => 'македонски јазик',
+        'mg_MG' => 'Malagasy',
+        'ms_MY' => 'Bahasa Melayu',
+        'ml_IN' => 'മലയാളം',
+        'mr' => 'मराठी',
+        'xmf' => 'მარგალური ნინა',
+        'mn' => 'Монгол',
+        'me_ME' => 'Crnogorski jezik',
+        'ne_NP' => 'नेपाली',
+        'nb_NO' => 'Norsk bokmål',
+        'nn_NO' => 'Norsk nynorsk',
+        'os' => 'Ирон',
+        'ps' => 'پښتو',
+        'fa_IR' => 'فارسی',
+        'fa_AF' => '(فارسی (افغانستان',
+        'pl_PL' => 'Polski',
+        'pt_BR' => 'Português do Brasil',
+        'pt_PT' => 'Português',
+        'pa_IN' => 'ਪੰਜਾਬੀ',
+        'rhg' => 'Rohingya',
+        'ro_RO' => 'Română',
+        'ru_RU' => 'Русский',
+        'ru_UA' => 'украї́нська мо́ва',
+        'rue' => 'Русиньскый',
+        'sah' => 'Sakha',
+        'sa_IN' => 'भारतम्',
+        'srd' => 'sardu',
+        'gd' => 'Gàidhlig',
+        'sr_RS' => 'Српски језик',
+        'sd_PK' => 'سندھ',
+        'si_LK' => 'සිංහල',
+        'sk_SK' => 'Slovenčina',
+        'sl_SI' => 'slovenščina',
+        'so_SO' => 'Afsoomaali',
+        'azb' => 'گؤنئی آذربایجان',
+        'es_AR' => 'Español de Argentina',
+        'es_CL' => 'Español de Chile',
+        'es_CO' => 'Español de Colombia',
+        'es_MX' => 'Español de México',
+        'es_PE' => 'Español de Perú',
+        'es_PR' => 'Español de Puerto Rico',
+        'es_ES' => 'Español',
+        'es_VE' => 'Español de Venezuela',
+        'su_ID' => 'Basa Sunda',
+        'sw' => 'Kiswahili',
+        'sv_SE' => 'Svenska',
+        'gsw' => 'Schwyzerdütsch',
+        'tl' => 'Tagalog',
+        'tg' => 'тоҷикӣ',
+        'tzm' => 'ⵜⴰⵎⴰⵣⵉⵖⵜ',
+        'ta_IN' => 'தமிழ்',
+        'ta_LK' => 'தமிழ்',
+        'tt_RU' => 'Татар теле',
+        'te' => 'తెలుగు',
+        'th' => 'ไทย',
+        'bo' => 'བོད་སྐད',
+        'tir' => 'ትግርኛ',
+        'tr_TR' => 'Türkçe',
+        'tuk' => 'Türkmençe',
+        'ug_CN' => 'Uyƣurqə',
+        'uk' => 'Українська',
+        'ur' => 'اردو',
+        'uz_UZ' => 'O‘zbekcha',
+        'vi' => 'Tiếng Việt',
+        'wa' => 'Walon',
+        'cy' => 'Cymraeg',
+    ),
 );
