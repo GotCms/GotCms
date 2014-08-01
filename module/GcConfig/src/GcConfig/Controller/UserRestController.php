@@ -30,8 +30,6 @@ namespace GcConfig\Controller;
 use GcConfig\Filter\User as UserFilter;
 use Gc\Mvc\Controller\RestAction;
 use Gc\User;
-use Gc\User\Role;
-use Zend\View\Model\ViewModel;
 use Zend\Validator\Identical;
 
 /**

@@ -28,7 +28,6 @@
 namespace GcConfig\Filter;
 
 use Gc\InputFilter\AbstractInputFilter;
-use Gc\User\Role\Collection as RoleCollection;
 use Zend\Db\Adapter\Adapter;
 
 /**
