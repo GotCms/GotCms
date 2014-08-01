@@ -29,9 +29,7 @@ before_script:
 
 script:
   - ./scripts/phpcs.sh
-  - ./scripts/runtests.sh Datatypes
-  - ./scripts/runtests.sh Gc
-  - ./scripts/runtests.sh ZfModules
+  - ./scripts/runtests.sh
 
 after_script:
   - php scripts/coveralls -v --exclude-no-stmt
