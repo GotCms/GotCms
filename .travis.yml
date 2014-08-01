@@ -4,10 +4,14 @@ php:
   - 5.3
   - 5.4
   - 5.5
+  - 5.6
+  - hhvm
 
 matrix:
+  fast_finish: true
   allow_failures:
-    - php: 5.5
+    - php: hhvm
+
 env:
   - DB=mysql
   - DB=pgsql
@@ -20,7 +24,6 @@ before_install:
   - php composer.phar install --dev --prefer-source --no-interaction
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - echo "short_open_tag = On" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-
 
 before_script:
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS gotcms_tests;' -U postgres; fi"

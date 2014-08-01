@@ -28,8 +28,6 @@
 namespace GcBackend\Controller;
 
 use Gc\Mvc\Controller\RestAction;
-use Gc\User;
-use GcBackend\Filter;
 
 /**
  * Index controller for admin module

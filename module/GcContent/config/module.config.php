@@ -25,8 +25,6 @@
  * @link       http://www.got-cms.com
  */
 
-use Gc\Document\Model as DocumentModel;
-
 return array(
     'controllers' => array(
         'invokables' => array(

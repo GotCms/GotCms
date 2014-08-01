@@ -28,8 +28,6 @@
 namespace GcDevelopment\Form;
 
 use Gc\Form\AbstractForm;
-use Zend\Form\Element;
-use Zend\InputFilter\Factory as InputFilterFactory;
 
 /**
  * Datatype form
