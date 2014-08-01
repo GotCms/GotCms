@@ -48,9 +48,10 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'BackendController'  => 'GcBackend\Controller\AuthenticationRestController',
-            'AuthenticationRest' => 'GcBackend\Controller\AuthenticationRestController',
-            'DashboardRest' => 'GcBackend\Controller\DashboardRestController',
+            'BackendController'    => 'GcBackend\Controller\AuthenticationRestController',
+            'AuthenticationRest'   => 'GcBackend\Controller\AuthenticationRestController',
+            'DeauthenticationRest' => 'GcBackend\Controller\DeauthenticationRestController',
+            'DashboardRest'        => 'GcBackend\Controller\DashboardRestController',
         ),
     ),
     'view_manager' => array(
@@ -145,7 +146,7 @@ return array(
                             'route'    => '/logout',
                             'defaults' => array(
                                 'module'     => 'gcbackend',
-                                'controller' => 'DashboardRest',
+                                'controller' => 'DeauthenticationRest',
                             ),
                         ),
                     ),

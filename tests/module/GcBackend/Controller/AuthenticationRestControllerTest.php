@@ -27,6 +27,7 @@
 namespace GcBackend\Controller;
 
 use Gc\Test\PHPUnit\Controller\AbstractRestControllerTestCase;
+use Gc\User\Collection as UserCollection;
 use Gc\User\Model as UserModel;
 
 /**
@@ -42,6 +43,19 @@ class AuthenticationRestControllerTest extends AbstractRestControllerTestCase
     {
         $this->controller = new AuthenticationRestController;
         parent::setUp();
+    }
+
+    public function tearDown()
+    {
+        $collection = new UserCollection();
+        foreach ($collection->getUsers() as $user) {
+            $user->delete();
+        }
+
+        $auth = $this->controller->getServiceLocator()->get('Auth');
+        if ($auth->hasIdentity()) {
+            $auth->clearIdentity();
+        }
     }
 
     /**
@@ -119,7 +133,5 @@ class AuthenticationRestControllerTest extends AbstractRestControllerTestCase
         $this->assertEquals($user->getFirstname(), $result->firstname);
         $this->assertEquals($user->getLogin(), $result->login);
         $this->assertEquals((bool) $user->getActive(), (bool) $result->active);
-
-        $user->delete();
     }
 }
