@@ -179,7 +179,7 @@ class Translator extends AbstractTable
      * Find destination from source id and locale
      *
      * @param array  $destination Destination informations
-     * @param string $sourceId Source id
+     * @param string $sourceId    Source id
      *
      * @return mixed
      */

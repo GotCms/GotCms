@@ -27,7 +27,11 @@ before_script:
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE gotcms_tests;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE IF NOT EXISTS gotcms_tests;'; fi"
 
-script: ./scripts/runtests.sh
+script:
+  - ./scripts/phpcs.sh
+  - ./scripts/runtests.sh Datatypes
+  - ./scripts/runtests.sh Gc
+  - ./scripts/runtests.sh ZfModules
 
 after_script:
   - php scripts/coveralls -v --exclude-no-stmt

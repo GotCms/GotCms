@@ -41,7 +41,6 @@ class Translation extends InputFilter
     /**
      * Initialize form
      *
-     *
      * @return void
      */
     public function __construct()

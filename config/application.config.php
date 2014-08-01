@@ -28,7 +28,7 @@ $modules = array(
     'AssetManager',
     /* 'GcFrontend', */
     'GcBackend',
-    /* 'GcConfig', */
+    'GcConfig',
     'GcContent',
     'GcDevelopment',
     /* 'GcModule', */
