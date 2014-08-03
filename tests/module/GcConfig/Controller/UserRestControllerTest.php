@@ -155,7 +155,7 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
                 'login' => 'GoT',
                 'password' => 'test',
                 'password_confirm' => 'test',
-                'user_acl_role_id' => 2,
+                'user_acl_role_id' => 1,
             )
         );
 
@@ -164,7 +164,7 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
         $this->assertEquals('Rambaud', $result->lastname);
         $this->assertEquals('GoT', $result->login);
         $this->assertEquals('pierre.rambaud86@gmail.com', $result->email);
-        $this->assertEquals(2, $result->user_acl_role_id);
+        $this->assertEquals(1, $result->user_acl_role_id);
         $this->assertNull($result->password);
     }
 
