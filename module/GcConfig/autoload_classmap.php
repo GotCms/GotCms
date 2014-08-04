@@ -26,11 +26,14 @@
  */
 
 return array(
-    'GcConfig\Controller\CmsRestController'  => __DIR__ . '/src/GcConfig/Controller/CmsRestController.php',
-    'GcConfig\Controller\RoleRestController' => __DIR__ . '/src/GcConfig/Controller/RoleRestController.php',
-    'GcConfig\Controller\UserRestController' => __DIR__ . '/src/GcConfig/Controller/UserRestController.php',
-    'GcConfig\Module'                        => __DIR__ . '/Module.php',
-    'GcConfig\Filter\Role'                   => __DIR__ . '/src/GcConfig/Filter/Role.php',
-    'GcConfig\Filter\User'                   => __DIR__ . '/src/GcConfig/Filter/User.php',
-    'GcConfig\Filter\UserForgotPassword'     => __DIR__ . '/src/GcConfig/Filter/UserForgotPassword.php',
+    'GcConfig\Controller\ConfigRestController' => __DIR__ . '/src/GcConfig/Controller/ConfigRestController.php',
+    'GcConfig\Controller\RoleRestController'   => __DIR__ . '/src/GcConfig/Controller/RoleRestController.php',
+    'GcConfig\Controller\UserRestController'   => __DIR__ . '/src/GcConfig/Controller/UserRestController.php',
+    'GcConfig\Module'                          => __DIR__ . '/Module.php',
+    'GcConfig\Filter\SystemConfig'             => __DIR__ . '/src/GcConfig/Filter/SystemConfig.php',
+    'GcConfig\Filter\GeneralConfig'            => __DIR__ . '/src/GcConfig/Filter/GeneralConfig.php',
+    'GcConfig\Filter\ServerConfig'             => __DIR__ . '/src/GcConfig/Filter/ServerConfig.php',
+    'GcConfig\Filter\Role'                     => __DIR__ . '/src/GcConfig/Filter/Role.php',
+    'GcConfig\Filter\User'                     => __DIR__ . '/src/GcConfig/Filter/User.php',
+    'GcConfig\Filter\UserForgotPassword'       => __DIR__ . '/src/GcConfig/Filter/UserForgotPassword.php',
 );

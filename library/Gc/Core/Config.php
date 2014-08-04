@@ -57,16 +57,34 @@ class Config extends AbstractTable
     protected $name = 'core_config_data';
 
     /**
+     * Get config row
+     *
+     * @param string $data  Data
+     * @param string $field Optional database field, by default 'identifier'
+     *
+     * @return mixed
+     */
+    public function get($data, $field = 'identifier')
+    {
+        $row = $this->fetchRow($this->select(array($field => $data)));
+        if (!empty($row)) {
+            return $row;
+        }
+
+        return null;
+    }
+
+    /**
      * Get config value
      *
      * @param string $data  Data
      * @param string $field Optional database field, by default 'identifier'
      *
-     * @return string value
+     * @return mixed
      */
     public function getValue($data, $field = 'identifier')
     {
-        $row = $this->fetchRow($this->select(array($field => $data)));
+        $row = $this->get($data, $field);
         if (!empty($row)) {
             return $row['value'];
         }

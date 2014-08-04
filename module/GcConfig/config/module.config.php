@@ -57,8 +57,7 @@ return array(
                         'type'    => 'Literal',
                         'options' => array(
                             'route'    => '/user[/:id]',
-                            'defaults' =>
-                            array (
+                            'defaults' => array(
                                 'module'     => 'gcconfig',
                                 'controller' => 'UserRest',
                             ),
@@ -69,8 +68,7 @@ return array(
                                 'type'    => 'Literal',
                                 'options' => array(
                                     'route'    => '/forgot-password',
-                                    'defaults' =>
-                                    array (
+                                    'defaults' => array(
                                         'module'     => 'gcconfig',
                                         'controller' => 'UserRestController',
                                         'action'     => 'forgot-password',
@@ -81,8 +79,7 @@ return array(
                                 'type'    => 'Segment',
                                 'options' => array(
                                     'route'    => '/forgot-password/:id/:key',
-                                    'defaults' =>
-                                    array (
+                                    'defaults' => array(
                                         'module'     => 'gcconfig',
                                         'controller' => 'UserRestController',
                                         'action'     => 'forgot-password',
@@ -93,8 +90,7 @@ return array(
                                 'type'    => 'Literal',
                                 'options' => array(
                                     'route'    => '/role[/:id]',
-                                    'defaults' =>
-                                    array (
+                                    'defaults' => array(
                                         'module'     => 'gcconfig',
                                         'controller' => 'RoleRest',
                                     ),
@@ -103,35 +99,35 @@ return array(
                         )
                     ),
                     'general' => array(
-                        'type'    => 'Literal',
+                        'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/general',
-                            'defaults' =>
-                            array (
+                            'route'    => '/general[/:id]',
+                            'defaults' => array(
                                 'module'     => 'gcconfig',
                                 'controller' => 'ConfigRest',
+                                'type'       => 'general',
                             ),
                         ),
                     ),
                     'system' => array(
-                        'type'    => 'Literal',
+                        'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/system',
-                            'defaults' =>
-                            array (
+                            'route'    => '/system[/:id]',
+                            'defaults' => array(
                                 'module'     => 'gcconfig',
                                 'controller' => 'ConfigRest',
+                                'type'       => 'system',
                             ),
                         ),
                     ),
                     'server' => array(
-                        'type'    => 'Literal',
+                        'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/server',
-                            'defaults' =>
-                            array (
+                            'route'    => '/server[/:id]',
+                            'defaults' => array(
                                 'module'     => 'gcconfig',
                                 'controller' => 'ConfigRest',
+                                'type'       => 'server',
                             ),
                         ),
                     ),
@@ -139,8 +135,7 @@ return array(
                         'type'    => 'Literal',
                         'options' => array(
                             'route'    => '/update',
-                            'defaults' =>
-                            array (
+                            'defaults' => array(
                                 'module'     => 'gcconfig',
                                 'controller' => 'UpdateRest',
                             ),

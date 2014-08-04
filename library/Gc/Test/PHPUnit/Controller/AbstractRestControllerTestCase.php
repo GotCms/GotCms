@@ -68,12 +68,13 @@ class AbstractRestControllerTestCase extends TestCase
      * Set up route
      *
      * @param string $routeName Route name
+     * @param array  $params    Optional parameters
      *
      * @return void
      */
-    public function setUpRoute($routeName)
+    public function setUpRoute($routeName, array $params = array())
     {
-        $this->routeMatch = new RouteMatch(array());
+        $this->routeMatch = new RouteMatch($params);
         $this->routeMatch->setMatchedRouteName($routeName);
         $this->event->setRouteMatch($this->routeMatch);
     }
