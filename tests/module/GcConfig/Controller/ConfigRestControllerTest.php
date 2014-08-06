@@ -135,7 +135,6 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
                 'id' => 1000
             )
         );
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -157,7 +156,6 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
                 'id' => 'cache_lifetime'
             )
         );
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
         $this->request->setContent(
@@ -194,7 +192,6 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
                 'id' => 'cache_lifetime'
             )
         );
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
         $this->request->setContent(

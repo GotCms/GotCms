@@ -136,7 +136,6 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
     public function testCreateWithViewWithInvalidData()
     {
         $this->setUpRoute('admin/development/view');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -169,7 +168,6 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
     public function testCreateWithViewWithValidData()
     {
         $this->setUpRoute('admin/development/view');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -261,7 +259,6 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
         $view->save();
 
         $this->setUpRoute('admin/development/view');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $view->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
@@ -307,7 +304,6 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
         $view->save();
 
         $this->setUpRoute('admin/development/view');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $view->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');

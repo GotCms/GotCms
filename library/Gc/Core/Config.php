@@ -80,7 +80,7 @@ class Config extends AbstractTable
      * @param string $data  Data
      * @param string $field Optional database field, by default 'identifier'
      *
-     * @return mixed
+     * @return string
      */
     public function getValue($data, $field = 'identifier')
     {

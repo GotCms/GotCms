@@ -95,7 +95,6 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
     public function testCreateUserWithInvalidData()
     {
         $this->setUpRoute('admin/config/user');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -144,7 +143,6 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
     public function testCreateUserWithValidData()
     {
         $this->setUpRoute('admin/config/user');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -244,7 +242,6 @@ v     *
     public function testUpdateUserWithoutUser()
     {
         $this->setUpRoute('admin/config/user');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', 1);
 
@@ -262,7 +259,6 @@ v     *
     {
         $user = $this->createUser();
         $this->setUpRoute('admin/config/user');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $user->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
@@ -296,7 +292,6 @@ v     *
     {
         $user = $this->createUser();
         $this->setUpRoute('admin/config/user');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $user->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');

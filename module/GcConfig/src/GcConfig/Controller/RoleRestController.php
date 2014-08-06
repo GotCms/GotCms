@@ -30,7 +30,6 @@ namespace GcConfig\Controller;
 use GcConfig\Filter\Role as RoleFilter;
 use Gc\Mvc\Controller\RestAction;
 use Gc\User\Role;
-use Zend\Validator\Identical;
 
 /**
  * User\Role controller

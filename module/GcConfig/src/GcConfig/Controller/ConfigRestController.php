@@ -130,7 +130,7 @@ class ConfigRestController extends RestAction
     /**
      * Get config filter class
      *
-     * @return \Gc\InputFilter\AbstractInputFilter
+     * @return AbstractConfigFilter
      */
     public function getConfigFilter()
     {

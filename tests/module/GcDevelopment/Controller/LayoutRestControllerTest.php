@@ -136,7 +136,6 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
     public function testCreateWithLayoutWithInvalidData()
     {
         $this->setUpRoute('admin/development/layout');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -169,7 +168,6 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
     public function testCreateWithLayoutWithValidData()
     {
         $this->setUpRoute('admin/development/layout');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -261,7 +259,6 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
         $layout->save();
 
         $this->setUpRoute('admin/development/layout');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $layout->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
@@ -307,7 +304,6 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
         $layout->save();
 
         $this->setUpRoute('admin/development/layout');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $layout->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');

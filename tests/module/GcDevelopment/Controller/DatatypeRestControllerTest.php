@@ -100,7 +100,6 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
     public function testCreateWithDatatypeWithInvalidData()
     {
         $this->setUpRoute('admin/development/datatype');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -132,7 +131,6 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
     public function testCreateWithDatatypeWithValidData()
     {
         $this->setUpRoute('admin/development/datatype');
-        $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(

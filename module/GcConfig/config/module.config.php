@@ -24,7 +24,16 @@
  * @link     http://www.got-cms.com
  */
 
+use Gc\Core\Updater;
+
 return array(
+    'service_manager' => array(
+        'factories' => array(
+            'CoreUpdater' => function () {
+                return new Updater();
+            }
+        )
+    ),
     'controllers' => array(
         'invokables' => array(
             'ConfigController' => 'GcConfig\Controller\IndexController',
