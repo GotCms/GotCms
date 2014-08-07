@@ -101,7 +101,6 @@ class ModuleManagerFactory implements FactoryInterface
         $moduleManager->getEventManager()->attachAggregate($serviceListener);
         $moduleManager->loadModules();
 
-
         $config = $moduleManager->getEvent()->getConfigListener()->getMergedConfig(false);
         $this->prepareConfig($serviceLocator, $config);
 
@@ -222,6 +221,5 @@ class ModuleManagerFactory implements FactoryInterface
                 }
             }
         }
-
     }
 }
