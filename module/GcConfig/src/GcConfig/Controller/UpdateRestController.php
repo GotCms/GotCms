@@ -144,7 +144,7 @@ class UpdateRestController extends RestAction
      *
      * @return void
      */
-    protected function checkVersion(array $directories, $type, array &$errors)
+    public function checkVersion(array $directories, $type, array &$errors)
     {
         foreach ($directories as $path => $directoryName) {
             if (is_dir($path)) {
@@ -170,7 +170,7 @@ class UpdateRestController extends RestAction
      *
      * @return void
      */
-    protected function checkCmsVersion($directoryName, array $infos, array &$errors)
+    public function checkCmsVersion($directoryName, array $infos, array &$errors)
     {
         preg_match('~(?<operator>[>=]*)(?<version>.+)~', $infos['cms_version'], $matches);
         if (empty($matches['operator'])) {

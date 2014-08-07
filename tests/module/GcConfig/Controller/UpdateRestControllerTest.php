@@ -228,4 +228,20 @@ class UpdateRestControllerTest extends AbstractRestControllerTestCase
         $property->setAccessible(true);
         $property->setValue($version);
     }
+
+    /**
+     * Test cms version
+     *
+     * @return void
+     */
+    public function testCheckCmsVersion()
+    {
+        $errors = array();
+        $this->controller->checkCmsVersion('test', array('cms_version' => '0.0.1'), $errors);
+        $this->assertEquals(array('test'), $errors);
+
+        $errors = array();
+        $this->controller->checkCmsVersion('test', array('cms_version' => '>=0.0.1'), $errors);
+        $this->assertEquals(array(), $errors);
+    }
 }
