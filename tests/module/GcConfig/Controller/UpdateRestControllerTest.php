@@ -69,8 +69,8 @@ class UpdateRestControllerTest extends AbstractRestControllerTestCase
         $this->assertTrue($result->isLatest);
         $this->assertTrue($result->gitProject);
         $this->assertEquals(Version::VERSION, $result->latestVersion);
-        $this->assertEquals(array(), $result->datatypesErrors);
-        $this->assertEquals(array(), $result->modulesErrors);
+        $this->assertInternalType('array', $result->datatypesErrors);
+        $this->assertInternalType('array', $result->modulesErrors);
     }
 
     /**

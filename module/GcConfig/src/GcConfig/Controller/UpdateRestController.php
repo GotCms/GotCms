@@ -28,8 +28,10 @@
 namespace GcConfig\Controller;
 
 use Gc\Mvc\Controller\RestAction;
+use Gc\Media\Info;
 use Gc\Version;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
+use Exception;
 
 /**
  * Config controller
@@ -144,14 +146,14 @@ class UpdateRestController extends RestAction
      */
     protected function checkVersion(array $directories, $type, array &$errors)
     {
-        foreach ($directories as $directory) {
-            if (is_dir($directory)) {
-                $filename = $directory . '/' . $type . '.info';
+        foreach ($directories as $path => $directoryName) {
+            if (is_dir($path)) {
+                $filename = $path . '/' . $type . '.info';
                 $info     = new Info();
                 if ($info->fromFile($filename) === true) {
                     $infos = $info->getInfos();
                     if (!empty($infos['cms_version'])) {
-                        $this->checkCmsVersion($infos, $errors);
+                        $this->checkCmsVersion($directoryName, $infos, $errors);
                     }
                 }
             }
@@ -162,21 +164,22 @@ class UpdateRestController extends RestAction
      * Check version in info file
      * from $type directory
      *
-     * @param array $infos   File info data
-     * @param array &$errors Insert in this all errors
+     * @param string $directoryName Directory name to use
+     * @param array  $infos         File info data
+     * @param array  &$errors       Insert in this all errors
      *
      * @return void
      */
-    protected function checkCmsVersion(array $infos, array &$errors)
+    protected function checkCmsVersion($directoryName, array $infos, array &$errors)
     {
         preg_match('~(?<operator>[>=]*)(?<version>.+)~', $infos['cms_version'], $matches);
         if (empty($matches['operator'])) {
             if (version_compare(Version::getLatest(), $matches['version']) === 1) {
-                $errors[] = basename($directory);
+                $errors[] = basename($directoryName);
             }
         } else {
             if (!version_compare(Version::getLatest(), $matches['version'], $matches['operator'])) {
-                $errors[] = $directory;
+                $errors[] = $directoryName;
             }
         }
     }
