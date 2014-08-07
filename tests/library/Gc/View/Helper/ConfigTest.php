@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Registry;
 
 /**
@@ -35,7 +36,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
     /**
      * @var Config

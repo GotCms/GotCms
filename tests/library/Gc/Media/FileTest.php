@@ -27,6 +27,7 @@
 
 namespace Gc\Media;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Document\Model as DocumentModel;
 use Gc\Property\Model as PropertyModel;
 
@@ -37,7 +38,7 @@ use Gc\Property\Model as PropertyModel;
  * @category Gc_Tests
  * @package  Library
  */
-class FileTest extends \PHPUnit_Framework_TestCase
+class FileTest extends TestCase
 {
     /**
      * @var File

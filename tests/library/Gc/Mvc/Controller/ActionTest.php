@@ -26,6 +26,7 @@
 
 namespace Gc\Mvc\Controller;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Registry;
 use Gc\User\Model as UserModel;
 use Zend\Http\Request;
@@ -38,7 +39,7 @@ use Zend\Mvc\Router\RouteMatch;
  * @category Gc_Tests
  * @package  Library
  */
-class ActionTest extends \PHPUnit_Framework_TestCase
+class ActionTest extends TestCase
 {
     /**
      * @var Action

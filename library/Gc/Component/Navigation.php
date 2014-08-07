@@ -79,7 +79,7 @@ class Navigation
     {
         $documents = new Document\Collection();
         $documents->load($documentId);
-        $this->documents       = $documents->getDocuments();
+        $this->documents       = $documents->getAll();
         $this->requestUri      = Registry::get('Application')->getRequest()->getUri()->getPath();
         $this->useActiveBranch = (bool) $activeBranch;
     }

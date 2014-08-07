@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\User\Model as UserModel;
 
 /**
@@ -35,7 +36,7 @@ use Gc\User\Model as UserModel;
  * @category Gc_Tests
  * @package  Library
  */
-class AclTest extends \PHPUnit_Framework_TestCase
+class AclTest extends TestCase
 {
     /**
      * @var Document
@@ -69,19 +70,6 @@ class AclTest extends \PHPUnit_Framework_TestCase
         $this->user->save();
 
         $this->object = new Acl($this->user);
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->user->delete();
-        unset($this->user);
-        unset($this->object);
     }
 
     /**

@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Zend\Form\Element;
 use Gc\Registry;
 
@@ -36,7 +37,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class CdnBackendTest extends \PHPUnit_Framework_TestCase
+class CdnBackendTest extends TestCase
 {
     /**
      * @var FormCheckbox
@@ -56,17 +57,6 @@ class CdnBackendTest extends \PHPUnit_Framework_TestCase
             Registry::get('Application')->getServiceManager()->get('CoreConfig'),
             true
         );
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

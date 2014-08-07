@@ -19,63 +19,49 @@
  *
  * @category   Gc
  * @package    Library
- * @subpackage User
+ * @subpackage Test\PHPUnit\Framework
  * @author     Pierre Rambaud (GoT) <pierre.rambaud86@gmail.com>
  * @license    GNU/LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @link       http://www.got-cms.com
  */
 
-namespace Gc\User;
+namespace Gc\Test\PHPUnit\Framework;
 
-use Gc\Db\AbstractTable;
-use Zend\Db\Sql\Select;
+use PHPUnit_Framework_TestCase;
 
 /**
- * Collection of User Model
+ * Override Phpunit framework testcase
  *
  * @category   Gc
  * @package    Library
- * @subpackage User
+ * @subpackage Test\PHPUnit\Framework
  */
-class Collection extends AbstractTable
+class TestCase extends PHPUnit_Framework_TestCase
 {
-    /**
-     * List of \Gc\User\Model
-     *
-     * @var array
-     */
-    protected $users = null;
-
-    /**
-     * Table name
-     *
-     * @var string
-     */
-    protected $name = 'user';
-
-    /**
-     * Get users
-     *
-     * @return array Gc\User\Model
-     */
-    public function getAll($forceReload = false)
+    protected function tearDown()
     {
-        if ($forceReload or $this->users === null) {
-            $select = $this->select(
-                function (Select $select) {
-                    $select->order('lastname');
-                }
-            );
+        $classes = array(
+            '\\Gc\\Document\\Collection',
+            '\\Gc\\DocumentType\\Collection',
+            '\\Gc\\User\\Collection',
+            '\\Gc\\Datatype\\Collection',
+            '\\Gc\\Module\\Collection',
+            '\\Gc\\View\\Collection',
+            '\\Gc\\Layout\\Collection',
+            '\\Gc\\Tab\\Collection',
+            '\\Gc\\Property\\Collection',
+            '\\Gc\\Script\Collection'
+        );
 
-            $rows  = $this->fetchAll($select);
-            $users = array();
-            foreach ($rows as $row) {
-                $users[] = Model::fromArray((array) $row);
-            }
-
-            $this->users = $users;
+        foreach ($classes as $class) {
+            $this->cleanClass(new $class);
         }
+    }
 
-        return $this->users;
+    protected function cleanClass($class)
+    {
+        foreach ($class->getAll(true) as $element) {
+            $element->delete();
+        }
     }
 }

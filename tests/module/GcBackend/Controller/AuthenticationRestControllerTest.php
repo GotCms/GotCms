@@ -48,7 +48,7 @@ class AuthenticationRestControllerTest extends AbstractRestControllerTestCase
     public function tearDown()
     {
         $collection = new UserCollection();
-        foreach ($collection->getUsers() as $user) {
+        foreach ($collection->getAll() as $user) {
             $user->delete();
         }
 

@@ -49,6 +49,13 @@ class Collection extends AbstractTable
     protected $elements = array();
 
     /**
+     * Collection of \Gc\View\Model
+     *
+     * @var array
+     */
+    protected $views = null;
+
+    /**
      * Table name
      *
      * @var string
@@ -65,7 +72,7 @@ class Collection extends AbstractTable
     public function init($documentTypeId = null)
     {
         $this->setDocumentTypeId($documentTypeId);
-        $this->getViews(true);
+        $this->getAll(true);
     }
 
     /**
@@ -75,9 +82,9 @@ class Collection extends AbstractTable
      *
      * @return array
      */
-    public function getViews($forceReload = false)
+    public function getAll($forceReload = false)
     {
-        if ($forceReload) {
+        if ($forceReload or $this->views === null) {
             $select = new Select();
             $select->order(array('name'));
             $select->from('view');
@@ -93,10 +100,10 @@ class Collection extends AbstractTable
                 $views[] = Model::fromArray((array) $row);
             }
 
-            $this->setData('views', $views);
+            $this->views = $views;
         }
 
-        return $this->getData('views');
+        return $this->views;
     }
 
     /**
@@ -107,7 +114,7 @@ class Collection extends AbstractTable
     public function getSelect()
     {
         $select = array();
-        $views  = $this->getViews();
+        $views  = $this->getAll();
 
         foreach ($views as $view) {
             $select[$view->getId()] = $view->getName();

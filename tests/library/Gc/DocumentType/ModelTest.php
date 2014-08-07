@@ -26,6 +26,7 @@
 
 namespace Gc\DocumentType;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Layout\Model as LayoutModel;
 use Gc\User\Model as UserModel;
 use Gc\View\Model as ViewModel;
@@ -38,7 +39,7 @@ use Zend\Db\Sql\Insert;
  * @category Gc_Tests
  * @package  Library
  */
-class ModelTest extends \PHPUnit_Framework_TestCase
+class ModelTest extends TestCase
 {
     /**
      * @var Model
@@ -149,30 +150,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             );
 
         $this->object->execute($insert);
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->documentTypeChildren->delete();
-        unset($this->documentTypeChildren);
-
-        $this->object->delete();
-        unset($this->object);
-
-        $this->view->delete();
-        unset($this->view);
-
-        $this->layout->delete();
-        unset($this->layout);
-
-        $this->user->delete();
-        unset($this->user);
     }
 
     /**

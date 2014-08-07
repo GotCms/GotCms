@@ -26,6 +26,7 @@
 
 namespace Gc\View;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\DocumentType\Model as DocumentTypeModel;
 
 /**
@@ -35,7 +36,7 @@ use Gc\DocumentType\Model as DocumentTypeModel;
  * @category Gc_Tests
  * @package  Library
  */
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
     /**
      * @var Collection
@@ -65,19 +66,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $model = Model::fromIdentifier('identifier-collection-test');
-        $model->delete();
-        unset($this->object);
-    }
-
-    /**
      * Test
      *
      * @return void
@@ -96,7 +84,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetViewsWithDocumentType()
     {
         $this->object->init(1000);
-        $views = $this->object->getViews();
+        $views = $this->object->getAll();
         $this->assertEquals(0, count($views));
     }
 
@@ -108,7 +96,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetViews()
     {
         $this->object->init(null);
-        $views = $this->object->getViews();
+        $views = $this->object->getAll();
         $this->assertTrue(count($views) > 0);
     }
 

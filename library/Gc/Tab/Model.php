@@ -213,7 +213,7 @@ class Model extends AbstractTable
             $propertiesCollection = new Property\Collection();
             $propertiesCollection->load($this->getDocumentTypeId(), $this->getId());
 
-            $this->setData('properties', $propertiesCollection->getProperties());
+            $this->setData('properties', $propertiesCollection->getAll());
         }
 
         return $this->getData('properties');

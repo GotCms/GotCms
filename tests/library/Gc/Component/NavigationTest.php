@@ -26,6 +26,7 @@
 
 namespace Gc\Component;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
@@ -40,7 +41,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class NavigationTest extends \PHPUnit_Framework_TestCase
+class NavigationTest extends TestCase
 {
     /**
      * @var Navigation
@@ -225,47 +226,6 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->documentForthChildren->save();
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->document->delete();
-        unset($this->document);
-
-        $this->documentTwo->delete();
-        unset($this->documentTwo);
-
-        $this->documentChildren->delete();
-        unset($this->documentChildren);
-
-        $this->documentSecondChildren->delete();
-        unset($this->documentSecondChildren);
-
-        $this->documentThirdChildren->delete();
-        unset($this->documentThirdChildren);
-
-        $this->documentForthChildren->delete();
-        unset($this->documentForthChildren);
-
-        $this->view->delete();
-        unset($this->view);
-
-        $this->user->delete();
-        unset($this->user);
-
-        $this->layout->delete();
-        unset($this->layout);
-
-        $this->documentType->delete();
-        unset($this->documentType);
-
-        unset($this->object);
     }
 
     /**

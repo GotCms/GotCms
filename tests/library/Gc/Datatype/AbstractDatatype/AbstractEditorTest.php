@@ -26,6 +26,7 @@
 
 namespace Gc\Datatype\AbstractDatatype;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Datatype\Model as DatatypeModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Property\Model as PropertyModel;
@@ -41,7 +42,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class AbstractEditorTest extends \PHPUnit_Framework_TestCase
+class AbstractEditorTest extends TestCase
 {
     /**
      * @var AbstractEditor
@@ -160,29 +161,6 @@ class AbstractEditorTest extends \PHPUnit_Framework_TestCase
             'Gc\Datatype\AbstractDatatype\AbstractEditor',
             array($mockDatatype)
         );
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->property->delete();
-        $this->datatype->delete();
-        $this->tab->delete();
-        $this->documentType->delete();
-        $this->user->delete();
-        $this->view->delete();
-        unset($this->datatype);
-        unset($this->property);
-        unset($this->documentType);
-        unset($this->tab);
-        unset($this->user);
-        unset($this->view);
-        unset($this->object);
     }
 
     /**

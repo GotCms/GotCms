@@ -26,6 +26,7 @@
 
 namespace Gc\Property;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Datatype\Model as DatatypeModel;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
@@ -42,7 +43,7 @@ use Gc\Tab\Model as TabModel;
  * @category Gc_Tests
  * @package  Library
  */
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
     /**
      * @var Collection
@@ -172,31 +173,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->property->delete();
-        $this->datatype->delete();
-        $this->tab->delete();
-        $this->documentType->delete();
-        $this->user->delete();
-        $this->layout->delete();
-        $this->view->delete();
-        unset($this->property);
-        unset($this->datatype);
-        unset($this->tab);
-        unset($this->documentType);
-        unset($this->user);
-        unset($this->layout);
-        unset($this->view);
-        unset($this->object);
-    }
-
-    /**
      * Test
      *
      * @return void
@@ -232,9 +208,9 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
         $this->object->save();
 
         $this->object->load($this->documentType->getId(), $this->tab->getId(), 1);
-        $this->assertInternalType('array', $this->object->getProperties(true));
+        $this->assertInternalType('array', $this->object->getAll(true));
         $this->object->load();
-        $this->assertInternalType('array', $this->object->getProperties(true));
+        $this->assertInternalType('array', $this->object->getAll(true));
     }
 
     /**

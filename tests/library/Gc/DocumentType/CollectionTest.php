@@ -26,6 +26,7 @@
 
 namespace Gc\DocumentType;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Layout\Model as LayoutModel;
 use Gc\User\Model as UserModel;
 use Gc\View\Model as ViewModel;
@@ -37,7 +38,7 @@ use Gc\View\Model as ViewModel;
  * @category Gc_Tests
  * @package  Library
  */
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
     /**
      * @var Collection
@@ -121,29 +122,6 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
-
-        $this->documentType->delete();
-        unset($this->documentType);
-
-        $this->view->delete();
-        unset($this->view);
-
-        $this->layout->delete();
-        unset($this->layout);
-
-        $this->user->delete();
-        unset($this->user);
-    }
-
-    /**
      * Test
      *
      * @return void
@@ -151,7 +129,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testInit()
     {
         $this->object->init($this->documentType->getId());
-        $this->assertInternalType('array', $this->object->getDocumentTypes());
+        $this->assertInternalType('array', $this->object->getAll());
     }
 
     /**

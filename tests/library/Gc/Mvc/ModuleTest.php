@@ -26,6 +26,7 @@
 
 namespace Gc\Mvc;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Registry;
 
 /**
@@ -35,7 +36,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class ModuleTest extends \PHPUnit_Framework_TestCase
+class ModuleTest extends TestCase
 {
     /**
      * @var Module
@@ -52,17 +53,6 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
     {
         include_once __DIR__ . '/ModuleUnit.php';
         $this->object = new ModuleUnit;
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

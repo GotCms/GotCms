@@ -26,6 +26,7 @@
 
 namespace Gc\Session\SaveHandler;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
@@ -37,7 +38,7 @@ use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
  * @category Gc_Tests
  * @package  Library
  */
-class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
+class DbTableGatewayTest extends TestCase
 {
     /**
      * @var DbTableGateway
@@ -79,17 +80,6 @@ class DbTableGatewayTest extends \PHPUnit_Framework_TestCase
         $this->object  = new DbTableGateway($this->adapter, $tablegatewayConfig);
 
         $this->testArray = array('foo' => 'bar', 'bar' => array('foo' => uniqid()));
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

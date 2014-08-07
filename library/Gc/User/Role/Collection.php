@@ -54,23 +54,13 @@ class Collection extends AbstractTable
     protected $name = 'user_acl_role';
 
     /**
-     * Initiliaze role collection
-     *
-     * @return void
-     */
-    public function init()
-    {
-        $this->getRoles(true);
-    }
-
-    /**
      * Get Roles
      *
      * @param boolean $forceReload Force reload
      *
      * @return array \Gc\User\Role\Model
      */
-    public function getRoles($forceReload = false)
+    public function getAll($forceReload = false)
     {
         if (empty($this->roles) or $forceReload === true) {
             $rows = $this->fetchAll(

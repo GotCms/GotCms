@@ -26,6 +26,7 @@
 
 namespace Gc\Core;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Registry;
 use ReflectionClass;
 use stdClass;
@@ -37,7 +38,7 @@ use stdClass;
  * @category Gc_Tests
  * @package  Library
  */
-class ObjectTest extends \PHPUnit_Framework_TestCase
+class ObjectTest extends TestCase
 {
     /**
      * @var Object
@@ -53,17 +54,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = $this->getMockForAbstractClass('Gc\Core\Object');
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Zend\Form\Element;
 
 /**
@@ -35,7 +36,7 @@ use Zend\Form\Element;
  * @category Gc_Tests
  * @package  Library
  */
-class FormCheckboxTest extends \PHPUnit_Framework_TestCase
+class FormCheckboxTest extends TestCase
 {
     /**
      * @var FormCheckbox
@@ -62,18 +63,6 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
 
         $this->element->setOptions($options);
         $this->object = new FormCheckbox;
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
-        unset($this->element);
     }
 
     /**

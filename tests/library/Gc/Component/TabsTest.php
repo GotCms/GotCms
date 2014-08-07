@@ -26,6 +26,7 @@
 
 namespace Gc\Component;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Document\Collection as DocumentCollection;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
@@ -40,7 +41,7 @@ use Gc\View\Model as ViewModel;
  * @category Gc_Tests
  * @package  Library
  */
-class TabsTest extends \PHPUnit_Framework_TestCase
+class TabsTest extends TestCase
 {
     /**
      * @var Tabs
@@ -56,17 +57,6 @@ class TabsTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = new Tabs(array());
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**
@@ -145,12 +135,6 @@ class TabsTest extends \PHPUnit_Framework_TestCase
             ),
             $this->object->render($collection->getChildren())
         );
-
-        $document->delete();
-        $documentType->delete();
-        $layout->delete();
-        $view->delete();
-        $user->delete();
     }
 
     /**

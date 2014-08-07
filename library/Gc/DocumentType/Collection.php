@@ -40,6 +40,13 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
+     * Collection of \Gc\DocumentType\Model
+     *
+     * @var array
+     */
+    protected $documentTypes = null;
+
+    /**
      * Table name
      *
      * @var string
@@ -56,40 +63,46 @@ class Collection extends AbstractTable
     public function init($parentId = null)
     {
         $this->setParentId($parentId);
-        $this->setDocumentTypes();
+        $this->getAll();
     }
 
     /**
      * Initialize document types
      *
+     * @param boolean $forceReload Force reload documents
+     *
      * @return \Gc\Document\Collection
      */
-    protected function setDocumentTypes()
+    public function getAll($forceReload = false)
     {
-        $parentId = $this->getParentId();
-        $rows     = $this->fetchAll(
-            $this->select(
-                function (Select $select) use ($parentId) {
-                    if ($parentId !== null) {
-                        $select->join(
-                            array('dtd' => 'document_type_dependency'),
-                            'dtd.children_id = document_type.id',
-                            array()
-                        );
-                        $select->where->equalTo('dtd.parent_id', $parentId);
+        if ($forceReload or $this->documentTypes === null) {
+            $parentId = $this->getParentId();
+            $rows     = $this->fetchAll(
+                $this->select(
+                    function (Select $select) use ($parentId) {
+                        if ($parentId !== null) {
+                            $select->join(
+                                array('dtd' => 'document_type_dependency'),
+                                'dtd.children_id = document_type.id',
+                                array()
+                            );
+                            $select->where->equalTo('dtd.parent_id', $parentId);
+                        }
+
+                        $select->order('name ASC');
                     }
+                )
+            );
 
-                    $select->order('name ASC');
-                }
-            )
-        );
+            $documentTypes = array();
+            foreach ($rows as $row) {
+                $documentTypes[] = Model::fromArray((array) $row);
+            }
 
-        $documentTypes = array();
-        foreach ($rows as $row) {
-            $documentTypes[] = Model::fromArray((array) $row);
+            $this->documentTypes = $documentTypes;
         }
 
-        $this->setData('document_types', $documentTypes);
+        return $this->documentTypes;
     }
 
     /**
@@ -99,10 +112,8 @@ class Collection extends AbstractTable
      */
     public function getSelect()
     {
-        $select        = array();
-        $documentTypes = $this->getDocumentTypes();
-
-        foreach ($documentTypes as $documentType) {
+        $select = array();
+        foreach ($this->getAll() as $documentType) {
             $select[$documentType->getId()] = $documentType->getName();
         }
 

@@ -26,6 +26,7 @@
 
 namespace Gc\Mvc\Factory;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Mockery;
 
 /**
@@ -35,7 +36,7 @@ use Mockery;
  * @category Gc_Tests
  * @package  Library
  */
-class CacheFactoryTest extends \PHPUnit_Framework_TestCase
+class CacheFactoryTest extends TestCase
 {
     /**
      * @var CacheListener
@@ -57,17 +58,6 @@ class CacheFactoryTest extends \PHPUnit_Framework_TestCase
         $this->serviceLocator->shouldReceive('get')->with('CoreConfig')->andReturn($this->config);
 
         $this->object = new CacheFactory();
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

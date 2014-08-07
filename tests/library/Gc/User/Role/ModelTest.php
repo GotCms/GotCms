@@ -26,6 +26,7 @@
 
 namespace Gc\User\Role;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Registry;
 
 /**
@@ -35,7 +36,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class ModelTest extends \PHPUnit_Framework_TestCase
+class ModelTest extends TestCase
 {
     /**
      * @var Model
@@ -51,17 +52,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = Model::fromId(1);
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**
@@ -93,7 +83,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         $model->setDescription('Test description2');
 
         $this->assertInternalType('integer', (int) $model->save());
-        $model->delete();
     }
 
     /**

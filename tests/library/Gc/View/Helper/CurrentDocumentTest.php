@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Document\Model;
 use Gc\Registry;
 /**
@@ -35,7 +36,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class CurrentDocumentTest extends \PHPUnit_Framework_TestCase
+class CurrentDocumentTest extends TestCase
 {
     /**
      * @var Document
@@ -63,17 +64,6 @@ class CurrentDocumentTest extends \PHPUnit_Framework_TestCase
         );
         $serviceManager->setAllowOverride(false);
         $this->object = new CurrentDocument($serviceManager);
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

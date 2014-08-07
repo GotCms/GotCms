@@ -40,6 +40,13 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
+     * List of \Gc\Property\Model
+     *
+     * @var array
+     */
+    protected $properties = null;
+
+    /**
      * Table name
      *
      * @var string
@@ -61,7 +68,7 @@ class Collection extends AbstractTable
         $this->setTabId($tabId);
         $this->setDocumentId($documentId);
 
-        $this->getProperties(true);
+        $this->getAll(true);
 
         return $this;
     }
@@ -73,9 +80,9 @@ class Collection extends AbstractTable
      *
      * @return array
      */
-    public function getProperties($forceReload = false)
+    public function getAll($forceReload = false)
     {
-        if ($this->getData('properties') == null or $forceReload) {
+        if ($this->properties == null or $forceReload) {
             $select = new Select();
             $select->from('tab')
                 ->columns(array())
@@ -119,16 +126,16 @@ class Collection extends AbstractTable
                 $properties[] = $propertyModel;
             }
 
-            $this->setData('properties', $properties);
+            $this->properties = $properties;
         }
 
-        return $this->getData('properties');
+        return $this->properties;
     }
 
     /**
      * Set properties
      *
-     * @param array $properties Properties
+     * @param array $properties All
      *
      * @return \Gc\Property\Collection
      */
@@ -139,7 +146,7 @@ class Collection extends AbstractTable
             $array[] = Model::fromArray($property);
         }
 
-        $this->setData('properties', $array);
+        $this->properties = $array;
 
         return $this;
     }
@@ -151,7 +158,7 @@ class Collection extends AbstractTable
      */
     public function save()
     {
-        $properties = $this->getProperties();
+        $properties = $this->getAll();
         try {
             foreach ($properties as $property) {
                 $property->save();
@@ -170,7 +177,7 @@ class Collection extends AbstractTable
      */
     public function delete()
     {
-        $properties = $this->getProperties();
+        $properties = $this->getAll();
         try {
             foreach ($properties as $property) {
                 $property->delete();

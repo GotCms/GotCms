@@ -56,7 +56,7 @@ class ViewRestController extends RestAction
     {
         $viewCollection = new View\Collection();
         $return         = array();
-        foreach ($viewCollection->getViews() as $view) {
+        foreach ($viewCollection->getAll() as $view) {
             $return[] = $view->toArray();
         }
 

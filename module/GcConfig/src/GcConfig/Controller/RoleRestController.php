@@ -63,7 +63,7 @@ class RoleRestController extends RestAction
     {
         $roleCollection = new Role\Collection();
         $return         = array();
-        foreach ($roleCollection->getRoles() as $role) {
+        foreach ($roleCollection->getAll() as $role) {
             $return[] = $role->toArray();
         }
 

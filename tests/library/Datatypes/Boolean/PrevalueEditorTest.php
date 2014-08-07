@@ -26,6 +26,7 @@
 
 namespace Datatypes\Boolean;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Datatype\Model as DatatypeModel;
 use Gc\Registry;
 
@@ -36,7 +37,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Datatypes
  */
-class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
+class PrevalueEditorTest extends TestCase
 {
     /**
      * @var PrevalueEditor

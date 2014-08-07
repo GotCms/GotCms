@@ -49,7 +49,7 @@ class RoleRestControllerTest extends AbstractRestControllerTestCase
     public function tearDown()
     {
         $collection = new Role\Collection;
-        foreach ($collection->getRoles() as $role) {
+        foreach ($collection->getAll() as $role) {
             if ($role->getName() != Role\Model::PROTECTED_NAME) {
                 $role->delete();
             }

@@ -26,6 +26,7 @@
 
 namespace Datatypes\Textarea;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Datatype\Model as DatatypeModel;
 use Gc\Registry;
 
@@ -36,7 +37,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Datatypes
  */
-class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
+class PrevalueEditorTest extends TestCase
 {
     /**
      * @var PrevalueEditor
@@ -71,19 +72,6 @@ class PrevalueEditorTest extends \PHPUnit_Framework_TestCase
         $datatype->setHelperManager($application->getServiceManager()->get('viewhelpermanager'));
         $datatype->load($this->datatype);
         $this->object = $datatype->getPrevalueEditor();
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->datatype->delete();
-        unset($this->datatype);
-        unset($this->object);
     }
 
     /**

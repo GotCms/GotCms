@@ -26,6 +26,7 @@
 
 namespace Gc\Db;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\User\Model;
 use Gc\User\Collection;
 use Zend\Db\Sql\Select;
@@ -37,7 +38,7 @@ use Zend\Db\Sql\Select;
  * @category Gc_Tests
  * @package  Library
  */
-class AbstractTableTest extends \PHPUnit_Framework_TestCase
+class AbstractTableTest extends TestCase
 {
     /**
      * @var AbstractTable
@@ -52,13 +53,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $collection = new Collection();
-        foreach ($collection->getUsers() as $user) {
-            $user->delete();
-        }
-
-        unset($collection);
-
         $this->object = Model::fromArray(
             array(
                 'lastname' => 'Test',
@@ -71,18 +65,6 @@ class AbstractTableTest extends \PHPUnit_Framework_TestCase
 
         $this->object->setPassword('test');
         $this->object->save();
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->object->delete();
-        unset($this->object);
     }
 
     /**

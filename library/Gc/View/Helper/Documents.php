@@ -57,10 +57,10 @@ class Documents extends AbstractHelper
         $elements  = array();
         $documents = new DocumentCollection();
         if (empty($data)) {
-            $elements = $documents->load(0)->getDocuments();
+            $elements = $documents->load(0)->getAll();
         } else {
             if (is_numeric($data)) {
-                $elements = $documents->load($data)->getDocuments();
+                $elements = $documents->load($data)->getAll();
             } elseif (is_string($data)) {
                 $document = DocumentModel::fromUrlKey($data);
                 $elements = $document->getChildren();

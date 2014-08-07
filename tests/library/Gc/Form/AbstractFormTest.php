@@ -26,6 +26,7 @@
 
 namespace Gc\Form;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Zend\Form\Element;
 use Zend\InputFilter\Factory as InputFilterFactory;
 use Gc\User\Model;
@@ -37,7 +38,7 @@ use Gc\User\Model;
  * @category Gc_Tests
  * @package  Library
  */
-class AbstractFormTest extends \PHPUnit_Framework_TestCase
+class AbstractFormTest extends TestCase
 {
     /**
      * @var AbstractForm
@@ -53,17 +54,6 @@ class AbstractFormTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = $this->getMockForAbstractClass('Gc\Form\AbstractForm');
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

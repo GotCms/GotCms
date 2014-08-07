@@ -26,6 +26,7 @@
 
 namespace Gc\Mvc\Resolver;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Mvc\Resolver\AssetAliasPathStack;
 use Gc\Registry;
 use Assetic\Asset;
@@ -37,7 +38,7 @@ use AssetManager\Service\MimeResolver;
  * @category Gc_Tests
  * @package  Library
  */
-class AliasPathStackTest extends \PHPUnit_Framework_TestCase
+class AliasPathStackTest extends TestCase
 {
     public function setUp()
     {

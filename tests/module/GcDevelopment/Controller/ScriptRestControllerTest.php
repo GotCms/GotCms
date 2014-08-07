@@ -48,7 +48,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
     public function tearDown()
     {
         $collection = new Script\Collection;
-        foreach ($collection->getScripts() as $script) {
+        foreach ($collection->getAll() as $script) {
             $script->delete();
         }
     }

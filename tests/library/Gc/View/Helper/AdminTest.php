@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\User\Model as UserModel;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage;
@@ -37,7 +38,7 @@ use Zend\Authentication\Storage;
  * @category Gc_Tests
  * @package  Library
  */
-class AdminTest extends \PHPUnit_Framework_TestCase
+class AdminTest extends TestCase
 {
     /**
      * @var UserModel
@@ -68,19 +69,6 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $auth = new AuthenticationService(new Storage\Session(UserModel::BACKEND_AUTH_NAMESPACE));
 
         $this->object = new Admin($auth);
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->user->delete();
-        unset($this->user);
-        unset($this->object);
     }
 
     /**

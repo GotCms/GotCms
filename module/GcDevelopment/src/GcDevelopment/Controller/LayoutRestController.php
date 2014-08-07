@@ -56,7 +56,7 @@ class LayoutRestController extends RestAction
     {
         $layoutCollection = new Layout\Collection();
         $return           = array();
-        foreach ($layoutCollection->getLayouts() as $layout) {
+        foreach ($layoutCollection->getAll() as $layout) {
             $return[] = $layout->toArray();
         }
 

@@ -118,12 +118,12 @@ class Content extends Object
     public function createDocumentType()
     {
         $documentTypesCollection = new DocumentType\Collection();
-        $array                   = $documentTypesCollection->getDocumentTypes();
+        $array                   = $documentTypesCollection->getAll();
         if (empty($array)) {
             return '';
         }
 
-        foreach ($documentTypesCollection->getDocumentTypes() as $documentType) {
+        foreach ($documentTypesCollection->getAll() as $documentType) {
             //Preload dependencies
             $children     = array();
             $dependencies = $documentType->getDependencies();
@@ -135,7 +135,7 @@ class Content extends Object
 
             //Preload available views
             $children       = array();
-            $availableViews = $documentType->getAvailableViews()->getViews();
+            $availableViews = $documentType->getAvailableViews()->getAll();
             foreach ($availableViews as $view) {
                 $children[] = array('id' => $view->getId());
             }
@@ -150,7 +150,7 @@ class Content extends Object
             }
         }
 
-        return $documentTypesCollection->toXml($documentTypesCollection->getDocumentTypes(), 'document_types');
+        return $documentTypesCollection->toXml($documentTypesCollection->getAll(), 'document_types');
     }
 
     /**
@@ -186,7 +186,7 @@ class Content extends Object
                 null,
                 null,
                 $document->getId()
-            )->getProperties();
+            )->getAll();
             foreach ($properties as $property) {
                 $value = $property->getValueModel()->getValue();
                 $property->getValueModel()->setValue(base64_encode($value));

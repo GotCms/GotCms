@@ -40,6 +40,13 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
+     * List of \Gc\Module\Model
+     *
+     * @var array
+     */
+    protected $modules = null;
+
+    /**
      * Table name
      *
      * @var string
@@ -47,40 +54,30 @@ class Collection extends AbstractTable
     protected $name = 'module';
 
     /**
-     * Initialize collection
+     * get modules
      *
-     * @return \Gc\Module\Collection
+     * @return array
      */
-    public function init()
+    public function getAll($forceReload = false)
     {
-        $this->setModules();
+        if ($forceReload or $this->modules === null) {
+            $rows = $this->fetchAll(
+                $this->select(
+                    function (Select $select) {
+                        $select->order('name ASC');
+                    }
+                )
+            );
 
-        return $this;
-    }
+            $modules = array();
+            foreach ($rows as $row) {
+                $modules[] = Model::fromArray((array) $row);
+            }
 
-    /**
-     * Initialize modules
-     *
-     * @return \Gc\Module\Collection
-     */
-    protected function setModules()
-    {
-        $rows = $this->fetchAll(
-            $this->select(
-                function (Select $select) {
-                    $select->order('name ASC');
-                }
-            )
-        );
-
-        $modules = array();
-        foreach ($rows as $row) {
-            $modules[] = Model::fromArray((array) $row);
+            $this->modules = $modules;
         }
 
-        $this->setData('modules', $modules);
-
-        return $this;
+        return $this->modules;
     }
 
     /**
@@ -91,7 +88,7 @@ class Collection extends AbstractTable
     public function getSelect()
     {
         $select  = array();
-        $modules = $this->getModules();
+        $modules = $this->getAll();
 
         foreach ($modules as $module) {
             $select[$module->getId()] = $module->getName();

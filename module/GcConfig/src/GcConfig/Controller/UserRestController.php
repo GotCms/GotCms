@@ -64,7 +64,7 @@ class UserRestController extends RestAction
     {
         $userCollection = new User\Collection();
         $return         = array();
-        foreach ($userCollection->getUsers() as $user) {
+        foreach ($userCollection->getAll() as $user) {
             $return[] = $user->toArray();
         }
 

@@ -26,6 +26,7 @@
 
 namespace Gc\Datatype;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Datatype\Model as DatatypeModel;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
@@ -43,7 +44,7 @@ use Gc\Tab\Model as TabModel;
  * @category Gc_Tests
  * @package  Library
  */
-class ModelTest extends \PHPUnit_Framework_TestCase
+class ModelTest extends TestCase
 {
     /**
      * @var Model
@@ -67,18 +68,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->object->save();
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->object->delete();
-        unset($this->object);
     }
 
     /**
@@ -144,7 +133,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('integer', (int) $model->save());
         //Test update
         $this->assertInternalType('integer', (int) $model->save());
-        $model->delete();
     }
 
     /**

@@ -54,23 +54,13 @@ class Collection extends AbstractTable
     protected $name = 'user_acl_permission';
 
     /**
-     * Initiliaze permissions
-     *
-     * @return void
-     */
-    public function init()
-    {
-        $this->getPermissions(true);
-    }
-
-    /**
      * Get permissions
      *
      * @param boolean $forceReload Force reload
      *
      * @return array
      */
-    public function getPermissions($forceReload = false)
+    public function getAll($forceReload = false)
     {
         if (empty($this->permissions) or $forceReload === true) {
             $select = new Select();

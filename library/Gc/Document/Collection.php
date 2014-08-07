@@ -41,6 +41,13 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable implements IterableInterface
 {
     /**
+     * Collection of \Gc\Document\Model
+     *
+     * @var array
+     */
+    protected $documents = null;
+
+    /**
      * Table name
      *
      * @var string
@@ -58,44 +65,47 @@ class Collection extends AbstractTable implements IterableInterface
     {
         if ($parentId !== null) {
             $this->setData('parent_id', $parentId);
-            $this->setDocuments();
+            $this->getAll(true);
         }
 
         return $this;
     }
 
     /**
-     * Initialize documents
+     * Get all documents
+     *
+     * @param boolean $forceReload Force reload documents
      *
      * @return \Gc\Document\Collection
      */
-    protected function setDocuments()
+    public function getAll($forceReload = false)
     {
-        $parentId = $this->getParentId();
+        if ($forceReload) {
+            $parentId = $this->getParentId();
+            $rows     = $this->fetchAll(
+                $this->select(
+                    function (Select $select) use ($parentId) {
+                        if (empty($parentId)) {
+                            $select->where->isNull('parent_id');
+                        } else {
+                            $select->where->equalTo('parent_id', $parentId);
+                        }
 
-        $rows = $this->fetchAll(
-            $this->select(
-                function (Select $select) use ($parentId) {
-                    if (empty($parentId)) {
-                        $select->where->isNull('parent_id');
-                    } else {
-                        $select->where->equalTo('parent_id', $parentId);
+                        $select->order('sort_order ASC');
+                        $select->order('created_at ASC');
                     }
+                )
+            );
 
-                    $select->order('sort_order ASC');
-                    $select->order('created_at ASC');
-                }
-            )
-        );
+            $documents = array();
+            foreach ($rows as $row) {
+                $documents[] = Model::fromArray((array) $row);
+            }
 
-        $documents = array();
-        foreach ($rows as $row) {
-            $documents[] = Model::fromArray((array) $row);
+            $this->documents = $documents;
         }
 
-        $this->setData('documents', $documents);
-
-        return $this;
+        return $this->documents;
     }
 
     /**
@@ -144,7 +154,7 @@ class Collection extends AbstractTable implements IterableInterface
     public function getSelect()
     {
         $select    = array();
-        $documents = $this->getDocuments();
+        $documents = $this->getAll();
 
         foreach ($documents as $document) {
             $select[$document->getId()] = $document->getName();
@@ -170,7 +180,7 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getChildren()
     {
-        return $this->getDocuments();
+        return $this->getAll();
     }
 
     /** (non-PHPdoc)

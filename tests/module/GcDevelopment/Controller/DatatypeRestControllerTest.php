@@ -28,7 +28,6 @@ namespace GcDevelopment\Controller;
 
 use Gc\Test\PHPUnit\Controller\AbstractRestControllerTestCase;
 use Gc\Datatype;
-use Gc\Registry;
 use Zend\Json\Json;
 
 /**
@@ -49,7 +48,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
     public function tearDown()
     {
         $collection = new Datatype\Collection;
-        foreach ($collection->getDatatypes() as $datatype) {
+        foreach ($collection->getAll() as $datatype) {
             $datatype->delete();
         }
     }

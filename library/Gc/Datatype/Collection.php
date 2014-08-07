@@ -60,7 +60,7 @@ class Collection extends AbstractTable
      */
     public function init()
     {
-        $this->setDatatypes();
+        $this->load();
     }
 
     /**
@@ -68,7 +68,7 @@ class Collection extends AbstractTable
      *
      * @return \Gc\Datatype\Collection
      */
-    protected function setDatatypes()
+    protected function load()
     {
         $rows = $this->fetchAll(
             $this->select(
@@ -93,7 +93,7 @@ class Collection extends AbstractTable
      *
      * @return array
      */
-    public function getDatatypes()
+    public function getAll()
     {
         return $this->datatypes;
     }
@@ -106,7 +106,7 @@ class Collection extends AbstractTable
     public function getSelect()
     {
         $select    = array();
-        $datatypes = $this->getDatatypes();
+        $datatypes = $this->getAll();
 
         foreach ($datatypes as $datatype) {
             $select[$datatype->getId()] = $datatype->getName();

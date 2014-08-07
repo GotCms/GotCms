@@ -26,6 +26,7 @@
 
 namespace Gc\View\Resolver;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\View\Stream;
 
 /**
@@ -35,7 +36,7 @@ use Gc\View\Stream;
  * @category Gc_Tests
  * @package  Library
  */
-class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
+class TemplatePathStackTest extends TestCase
 {
     /**
      * @var TemplatePathStack
@@ -51,17 +52,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = new TemplatePathStack;
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

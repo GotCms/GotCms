@@ -111,7 +111,7 @@ class Model extends AbstractTable
             $tabsCollection = new Tab\Collection();
             $tabsCollection->load($this->getId());
 
-            $this->setData('tabs', $tabsCollection->getTabs());
+            $this->setData('tabs', $tabsCollection->getAll());
         }
 
         return $this->getData('tabs');

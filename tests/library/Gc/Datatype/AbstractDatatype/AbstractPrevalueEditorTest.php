@@ -26,6 +26,7 @@
 
 namespace Gc\Datatype\AbstractDatatype;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Datatype\Model as DatatypeModel;
 use Gc\Registry;
 
@@ -36,7 +37,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
+class AbstractPrevalueEditorTest extends TestCase
 {
     /**
      * @var AbstractPrevalueEditor
@@ -71,19 +72,6 @@ class AbstractPrevalueEditorTest extends \PHPUnit_Framework_TestCase
             'Gc\Datatype\AbstractDatatype\AbstractPrevalueEditor',
             array($mockDatatype)
         );
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->datatype->delete();
-        unset($this->datatype);
-        unset($this->object);
     }
 
     /**

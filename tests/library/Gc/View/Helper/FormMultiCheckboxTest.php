@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Zend\Form\Element;
 use Gc\Registry;
 
@@ -36,7 +37,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
+class FormMultiCheckboxTest extends TestCase
 {
     /**
      * @var FormMultiCheckbox
@@ -58,18 +59,6 @@ class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
         $this->element = new Element\MultiCheckbox('foo');
         $this->object  = new FormMultiCheckbox;
         $this->object->setTranslator(Registry::get('Application')->getServiceManager()->get('MvcTranslator'));
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
-        unset($this->element);
     }
 
     /**

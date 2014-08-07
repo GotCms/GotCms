@@ -40,6 +40,13 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
+     * List of \Gc\Tab\Model
+     *
+     * @var array
+     */
+    protected $tabs = null;
+
+    /**
      * Table name
      *
      * @var string
@@ -67,11 +74,10 @@ class Collection extends AbstractTable
      *
      * @return array
      */
-    public function getTabs($forceReload = false)
+    public function getAll($forceReload = false)
     {
-        $tabs           = $this->getData('tabs');
-        $documentTypeId = $this->getDocumentTypeId();
-        if (empty($tabs) or $forceReload == true) {
+        if (empty($this->tabs) or $forceReload == true) {
+            $documentTypeId = $this->getDocumentTypeId();
             if (!empty($documentTypeId)) {
                 $rows = $this->fetchAll(
                     $this->select(
@@ -90,10 +96,10 @@ class Collection extends AbstractTable
                 $tabs[] = Model::fromArray((array) $row);
             }
 
-            $this->setData('tabs', $tabs);
+            $this->tabs = $tabs;
         }
 
-        return $this->getData('tabs');
+        return $this->tabs;
     }
 
     /**
@@ -147,7 +153,7 @@ class Collection extends AbstractTable
      */
     public function addTab(array $array)
     {
-        $tabs   = $this->getTabs();
+        $tabs   = $this->getAll();
         $tabs[] = Model::fromArray($array);
 
         $this->setData('tabs', $tabs);
@@ -160,7 +166,7 @@ class Collection extends AbstractTable
      */
     public function save()
     {
-        $tabs = $this->getTabs();
+        $tabs = $this->getAll();
         foreach ($tabs as $tab) {
             $tab->save();
         }
@@ -173,7 +179,7 @@ class Collection extends AbstractTable
      */
     public function delete()
     {
-        $tabs = $this->getTabs();
+        $tabs = $this->getAll();
         foreach ($tabs as $tab) {
             $tab->delete();
         }

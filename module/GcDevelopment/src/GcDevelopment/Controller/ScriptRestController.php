@@ -56,7 +56,7 @@ class ScriptRestController extends RestAction
     {
         $scriptCollection = new Script\Collection();
         $return           = array();
-        foreach ($scriptCollection->getScripts() as $script) {
+        foreach ($scriptCollection->getAll() as $script) {
             $return[] = $script->toArray();
         }
 

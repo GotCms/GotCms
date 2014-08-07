@@ -26,6 +26,7 @@
 
 namespace Datatypes\ImageCropper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Datatype\Model as DatatypeModel;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
@@ -44,7 +45,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Datatypes
  */
-class EditorTest extends \PHPUnit_Framework_TestCase
+class EditorTest extends TestCase
 {
     /**
      * @var Editor
@@ -221,36 +222,6 @@ class EditorTest extends \PHPUnit_Framework_TestCase
                 ),
             )
         );
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $_FILES = array();
-        $_POST  = array();
-        $this->datatype->delete();
-        $this->document->delete();
-        $this->documentType->delete();
-        $this->layout->delete();
-        $this->property->delete();
-        $this->tab->delete();
-        $this->user->delete();
-        $this->view->delete();
-
-        unset($this->datatype);
-        unset($this->document);
-        unset($this->documentType);
-        unset($this->layout);
-        unset($this->property);
-        unset($this->tab);
-        unset($this->user);
-        unset($this->view);
-        unset($this->object);
     }
 
     /**

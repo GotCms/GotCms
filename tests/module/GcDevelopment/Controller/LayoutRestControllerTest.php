@@ -48,7 +48,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
     public function tearDown()
     {
         $collection = new Layout\Collection;
-        foreach ($collection->getLayouts() as $layout) {
+        foreach ($collection->getAll() as $layout) {
             $layout->delete();
         }
     }

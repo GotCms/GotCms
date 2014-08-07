@@ -49,7 +49,7 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
     public function tearDown()
     {
         $collection = new User\Collection;
-        foreach ($collection->getUsers() as $user) {
+        foreach ($collection->getAll() as $user) {
             $user->delete();
         }
     }

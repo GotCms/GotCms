@@ -26,6 +26,7 @@
 
 namespace Datatypes\Textrich;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Datatype\Model as DatatypeModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
@@ -41,7 +42,7 @@ use Gc\View\Model as ViewModel;
  * @category Gc_Tests
  * @package  Datatypes
  */
-class DatatypeTest extends \PHPUnit_Framework_TestCase
+class DatatypeTest extends TestCase
 {
     /**
      * @var Datatype
@@ -166,32 +167,6 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
         );
         $this->property->save();
         $this->object = new Datatype($this->datatype);
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->datatype->delete();
-        $this->documentType->delete();
-        $this->layout->delete();
-        $this->property->delete();
-        $this->tab->delete();
-        $this->user->delete();
-        $this->view->delete();
-
-        unset($this->datatype);
-        unset($this->documentType);
-        unset($this->layout);
-        unset($this->property);
-        unset($this->tab);
-        unset($this->user);
-        unset($this->view);
-        unset($this->object);
     }
 
     /**

@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Document\Model as DocumentModel;
 use Gc\DocumentType\Model as DocumentTypeModel;
 use Gc\Layout\Model as LayoutModel;
@@ -41,7 +42,7 @@ use Zend\View\Renderer\PhpRenderer as View;
  * @category Gc_Tests
  * @package  Library
  */
-class DocumentsTest extends \PHPUnit_Framework_TestCase
+class DocumentsTest extends TestCase
 {
     /**
      * @var Documents
@@ -147,27 +148,6 @@ class DocumentsTest extends \PHPUnit_Framework_TestCase
         $view->resolver()->addPath(__DIR__ . '/_files/views');
         $view->setHelperPluginManager(Registry::get('Application')->getServiceManager()->get('viewhelpermanager'));
         $this->object->setView($view);
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->document->delete();
-        $this->documentType->delete();
-        $this->user->delete();
-        $this->view->delete();
-        $this->layout->delete();
-        unset($this->object);
-        unset($this->layout);
-        unset($this->view);
-        unset($this->user);
-        unset($this->documentType);
-        unset($this->document);
     }
 
     /**

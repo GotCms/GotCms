@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Script\Model as ScriptModel;
 use Gc\Document\Model as DocumentModel;
 use Gc\Registry;
@@ -39,7 +40,7 @@ use Zend\View\Model\ViewModel;
  * @category Gc_Tests
  * @package  Library
  */
-class ScriptTest extends \PHPUnit_Framework_TestCase
+class ScriptTest extends TestCase
 {
     /**
      * @var Script
@@ -92,9 +93,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->useStreamWrapper(0);
-        unset($this->object);
-        $this->script->delete();
-        unset($this->script);
+        parent::tearDown();
     }
 
     /**

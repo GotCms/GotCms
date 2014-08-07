@@ -63,7 +63,7 @@ class ModuleManagerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $moduleCollection = new ModuleCollection();
-        $modules          = $moduleCollection->getModules();
+        $modules          = $moduleCollection->getAll();
         $array            = array();
         $autoloader       = AutoloaderFactory::getRegisteredAutoloader(AutoloaderFactory::STANDARD_AUTOLOADER);
 

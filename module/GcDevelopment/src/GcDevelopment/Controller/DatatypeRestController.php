@@ -57,7 +57,7 @@ class DatatypeRestController extends RestAction
     {
         $datatypeCollection = new Datatype\Collection();
         $return             = array();
-        foreach ($datatypeCollection->getDatatypes() as $datatype) {
+        foreach ($datatypeCollection->getAll() as $datatype) {
             $return[] = $this->getDatatype($datatype);
         }
 

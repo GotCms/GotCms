@@ -48,7 +48,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
     public function tearDown()
     {
         $collection = new View\Collection;
-        foreach ($collection->getViews() as $view) {
+        foreach ($collection->getAll() as $view) {
             $view->delete();
         }
     }

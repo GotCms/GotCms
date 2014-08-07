@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Zend\View\Renderer\PhpRenderer as View;
 use Gc\Core\Config as CoreConfig;
 use Gc\View\Model as ViewModel;
@@ -39,7 +40,7 @@ use stdClass;
  * @category Gc_Tests
  * @package  Library
  */
-class PartialTest extends \PHPUnit_Framework_TestCase
+class PartialTest extends TestCase
 {
     /**
      * @var Partial
@@ -80,18 +81,6 @@ class PartialTest extends \PHPUnit_Framework_TestCase
         $templatePathStack->addPath(GC_TEMPLATE_PATH);
         $view->setResolver($templatePathStack);
         $this->object->setView($view);
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->view->delete();
-        unset($this->object);
     }
 
     /**

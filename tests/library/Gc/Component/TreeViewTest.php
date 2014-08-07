@@ -26,6 +26,7 @@
 
 namespace Gc\Component;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Document\Model as DocumentModel;
 use Gc\Document\Collection as DocumentCollection;
 use Gc\DocumentType\Model as DocumentTypeModel;
@@ -41,7 +42,7 @@ use Gc\Registry;
  * @category Gc_Tests
  * @package  Library
  */
-class TreeViewTest extends \PHPUnit_Framework_TestCase
+class TreeViewTest extends TestCase
 {
     /**
      * @var TreeView
@@ -162,35 +163,6 @@ class TreeViewTest extends \PHPUnit_Framework_TestCase
 
         $this->documentChildren->save();
         $this->object = new TreeView;
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->documentChildren->delete();
-        unset($this->documentChildren);
-
-        $this->document->delete();
-        unset($this->document);
-
-        $this->view->delete();
-        unset($this->view);
-
-        $this->user->delete();
-        unset($this->user);
-
-        $this->layout->delete();
-        unset($this->layout);
-
-        $this->documentType->delete();
-        unset($this->documentType);
-
-        unset($this->object);
     }
 
     /**

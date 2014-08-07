@@ -26,6 +26,7 @@
 
 namespace Gc\Core;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\View\Stream;
 use Gc\Registry;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
@@ -37,7 +38,7 @@ use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
  * @category Gc_Tests
  * @package  Library
  */
-class UpdaterTest extends \PHPUnit_Framework_TestCase
+class UpdaterTest extends TestCase
 {
     /**
      * Execute scripts file
@@ -61,17 +62,6 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     {
         $this->object   = new Updater;
         $this->fileName = GC_APPLICATION_PATH . '/tests/library/Gc/Core/_files/test.php';
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

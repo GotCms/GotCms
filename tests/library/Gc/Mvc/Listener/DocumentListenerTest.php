@@ -26,6 +26,7 @@
 
 namespace Gc\Mvc\Listener;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Document;
 use Gc\DocumentType;
 use Gc\User;
@@ -42,7 +43,7 @@ use Zend\Validator\AbstractValidator;
  * @category Gc_Tests
  * @package  Library
  */
-class DocumentListenerTest extends \PHPUnit_Framework_TestCase
+class DocumentListenerTest extends TestCase
 {
     /**
      * @var DocumentListener
@@ -59,17 +60,6 @@ class DocumentListenerTest extends \PHPUnit_Framework_TestCase
     {
 
         $this->object = new DocumentListener();
-    }
-
-    /**
-     * tears down the fixture, for example, closes a network connection.
-     * this method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function teardown()
-    {
-        unset($this->object);
     }
 
     /**
@@ -206,7 +196,6 @@ class DocumentListenerTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->object->onRoute($events));
         AbstractValidator::setDefaultTranslator(null);
 
-        $this->deleteDocuments();
     }
 
     /**
@@ -240,8 +229,6 @@ class DocumentListenerTest extends \PHPUnit_Framework_TestCase
         $events->shouldReceive('getApplication')->once()->andReturn($application);
 
         $this->assertNull($this->object->onRoute($events));
-
-        $this->deleteDocuments();
     }
 
 
@@ -342,29 +329,5 @@ class DocumentListenerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->document->save();
-    }
-
-    protected function deleteDocuments()
-    {
-        $this->document->delete();
-        unset($this->document);
-
-        $this->homeDocument->delete();
-        unset($this->homeDocument);
-
-        $this->parentDocument->delete();
-        unset($this->parentDocument);
-
-        $this->view->delete();
-        unset($this->view);
-
-        $this->layout->delete();
-        unset($this->layout);
-
-        $this->documentType->delete();
-        unset($this->documentType);
-
-        $this->user->delete();
-        unset($this->user);
     }
 }

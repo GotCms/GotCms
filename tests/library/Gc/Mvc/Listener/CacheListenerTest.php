@@ -27,6 +27,7 @@
 namespace Gc\Mvc\Listener;
 
 use Mockery;
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Zend\Mvc\MvcEvent;
 
 /**
@@ -36,7 +37,7 @@ use Zend\Mvc\MvcEvent;
  * @category Gc_Tests
  * @package  Library
  */
-class CacheListenerTest extends \PHPUnit_Framework_TestCase
+class CacheListenerTest extends TestCase
 {
     /**
      * @var CacheListener
@@ -53,17 +54,6 @@ class CacheListenerTest extends \PHPUnit_Framework_TestCase
     {
 
         $this->object = new CacheListener();
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        unset($this->object);
     }
 
     /**

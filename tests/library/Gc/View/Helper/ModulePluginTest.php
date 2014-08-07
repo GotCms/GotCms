@@ -26,6 +26,7 @@
 
 namespace Gc\View\Helper;
 
+use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Document\Model as DocumentModel;
 use Gc\Module\Model as ModuleModel;
 use Gc\Registry;
@@ -38,7 +39,7 @@ use Zend\View\Renderer\PhpRenderer;
  * @category Gc_Tests
  * @package  Library
  */
-class ModulePluginTest extends \PHPUnit_Framework_TestCase
+class ModulePluginTest extends TestCase
 {
     /**
      * @var ModulePlugin
@@ -85,20 +86,6 @@ class ModulePluginTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->module->save();
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->module->delete();
-        unset($this->module);
-        unset($this->renderer);
-        unset($this->object);
     }
 
     /**
