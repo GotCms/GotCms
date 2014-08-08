@@ -56,13 +56,30 @@ class AbstractRestControllerTestCase extends TestCase
      */
     public function setUp()
     {
+        $this->reloadApplication();
         $this->request  = new TestAsset\Request();
         $this->response = new Response();
-        $this->event    = new MvcEvent;
+        $this->event    = Registry::get('Application')->getMvcEvent();
         $this->controller->setEvent($this->event);
         $this->controller->setServiceLocator(Registry::get('Application')->getServiceManager());
+        $auth = $this->controller->getServiceLocator()->get('Auth');
+        if ($auth->hasIdentity()) {
+            $auth->clearIdentity();
+        }
     }
 
+    public function reloadApplication()
+    {
+        $configuration = include GC_APPLICATION_PATH . '/config/application.config.php';
+        $configuration['module_listener_options']['config_glob_paths'] = array(
+            'tests/config/local.php',
+        );
+
+        $application = \Zend\Mvc\Application::init($configuration);
+        $application->getMvcEvent()->getRouter()->setRequestUri($application->getRequest()->getUri());
+        $application->getRequest()->setBasePath('http://got-cms.com');
+        Registry::set('Application', $application);
+    }
 
     /**
      * Set up route

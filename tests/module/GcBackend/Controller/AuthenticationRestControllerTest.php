@@ -51,11 +51,6 @@ class AuthenticationRestControllerTest extends AbstractRestControllerTestCase
         foreach ($collection->getAll() as $user) {
             $user->delete();
         }
-
-        $auth = $this->controller->getServiceLocator()->get('Auth');
-        if ($auth->hasIdentity()) {
-            $auth->clearIdentity();
-        }
     }
 
     /**

@@ -232,7 +232,6 @@ class Model extends AbstractTable
     {
         $userTable = new Model();
         $userTable->setData($array);
-        $userTable->unsetData('password');
         $userTable->setOrigData();
 
         return $userTable;

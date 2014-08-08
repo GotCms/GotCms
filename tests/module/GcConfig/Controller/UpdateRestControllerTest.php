@@ -212,6 +212,7 @@ class UpdateRestControllerTest extends AbstractRestControllerTestCase
     protected function mockService()
     {
         $service = Mockery::mock('Gc\Core\Updater');
+        $this->controller->getServiceLocator()->setAllowOverride(true);
         $this->controller->getServiceLocator()->setService('CoreUpdater', $service);
         return $service;
     }
