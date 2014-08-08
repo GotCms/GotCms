@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * List of \Gc\User\Model
-     *
-     * @var array
-     */
-    protected $users = null;
-
-    /**
      * Table name
      *
      * @var string
@@ -62,7 +55,8 @@ class Collection extends AbstractTable
      */
     public function getAll($forceReload = false)
     {
-        if ($forceReload or $this->users === null) {
+        $users = $this->getData('users');
+        if ($forceReload or empty($users)) {
             $select = $this->select(
                 function (Select $select) {
                     $select->order('lastname');
@@ -75,9 +69,9 @@ class Collection extends AbstractTable
                 $users[] = Model::fromArray((array) $row);
             }
 
-            $this->users = $users;
+            $this->setData('users', $users);
         }
 
-        return $this->users;
+        return $this->getData('users');
     }
 }

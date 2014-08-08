@@ -257,19 +257,43 @@ abstract class Object
     public function __toArray(array $array = array())
     {
         if (empty($array)) {
-            return $this->data;
+            $array = $this->data;
         }
 
         $arrayResult = array();
-        foreach ($array as $attribute) {
-            if (isset($this->data[$attribute])) {
-                $arrayResult[$attribute] = $this->data[$attribute];
+        foreach ($array as $key => $value) {
+            $data = $this->retrieveKey($key, $value);
+            if (!empty($data)) {
+                if (is_object($this->data[$data]) and method_exists($this->data[$data], 'toArray')) {
+                    $arrayResult[$data] = $this->data[$data]->toArray();
+                } else {
+                    $arrayResult[$data] = $this->data[$data];
+                }
             } else {
-                $arrayResult[$attribute] = null;
+                $arrayResult[$value] = null;
             }
         }
 
         return $arrayResult;
+    }
+
+    /**
+     * Retrieve key in $data
+     *
+     * @param string $key   Key
+     * @param string $value Value
+     *
+     * @return string|null
+     */
+    protected function retrieveKey($key, $value)
+    {
+        if (array_key_exists($key, $this->data)) {
+            return $key;
+        } elseif (array_key_exists($value, $this->data)) {
+            return $value;
+        }
+
+        return null;
     }
 
     /**

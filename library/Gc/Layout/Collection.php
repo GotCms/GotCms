@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * Collection of \Gc\Layout\Model
-     *
-     * @var array
-     */
-    protected $layouts = null;
-
-    /**
      * Table name
      *
      * @var string
@@ -72,7 +65,8 @@ class Collection extends AbstractTable
      */
     public function getAll($forceReload = false)
     {
-        if ($forceReload or $this->layouts === null) {
+        $layouts = $this->getData('layouts');
+        if ($forceReload or empty($layouts)) {
             $rows = $this->fetchAll(
                 $this->select(
                     function (Select $select) {
@@ -86,10 +80,10 @@ class Collection extends AbstractTable
                 $layouts[] = Model::fromArray((array) $row);
             }
 
-            $this->layouts = $layouts;
+            $this->setData('layouts', $layouts);
         }
 
-        return $this->layouts;
+        return $this->getData('layouts');
     }
 
     /**

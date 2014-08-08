@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * Collection of \Gc\Script\Model
-     *
-     * @var array
-     */
-    protected $scripts = null;
-
-    /**
      * Table name
      *
      * @var string
@@ -62,7 +55,8 @@ class Collection extends AbstractTable
      */
     public function getAll($forceReload = false)
     {
-        if ($forceReload or $this->scripts === null) {
+        $scripts = $this->getData('scripts');
+        if ($forceReload or empty($scripts)) {
             $rows = $this->fetchAll(
                 $this->select(
                     function (Select $select) {
@@ -76,9 +70,9 @@ class Collection extends AbstractTable
                 $scripts[] = Model::fromArray((array) $row);
             }
 
-            $this->scripts = $scripts;
+            $this->setData('scripts', $scripts);
         }
 
-        return $this->scripts;
+        return $this->getData('scripts');
     }
 }

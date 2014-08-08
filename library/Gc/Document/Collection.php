@@ -41,13 +41,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable implements IterableInterface
 {
     /**
-     * Collection of \Gc\Document\Model
-     *
-     * @var array
-     */
-    protected $documents = null;
-
-    /**
      * Table name
      *
      * @var string
@@ -102,10 +95,10 @@ class Collection extends AbstractTable implements IterableInterface
                 $documents[] = Model::fromArray((array) $row);
             }
 
-            $this->documents = $documents;
+            $this->setData('documents', $documents);
         }
 
-        return $this->documents;
+        return $this->getData('documents');
     }
 
     /**

@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * List of \Gc\Property\Model
-     *
-     * @var array
-     */
-    protected $properties = null;
-
-    /**
      * Table name
      *
      * @var string
@@ -82,7 +75,8 @@ class Collection extends AbstractTable
      */
     public function getAll($forceReload = false)
     {
-        if ($this->properties == null or $forceReload) {
+        $properties = $this->getData('properties');
+        if ($forceReload or empty($properties)) {
             $select = new Select();
             $select->from('tab')
                 ->columns(array())
@@ -126,10 +120,10 @@ class Collection extends AbstractTable
                 $properties[] = $propertyModel;
             }
 
-            $this->properties = $properties;
+            $this->setData('properties', $properties);
         }
 
-        return $this->properties;
+        return $this->getData('properties');
     }
 
     /**
@@ -146,7 +140,7 @@ class Collection extends AbstractTable
             $array[] = Model::fromArray($property);
         }
 
-        $this->properties = $array;
+        $this->setData('properties', $array);
 
         return $this;
     }

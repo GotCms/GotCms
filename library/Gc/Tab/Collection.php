@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * List of \Gc\Tab\Model
-     *
-     * @var array
-     */
-    protected $tabs = null;
-
-    /**
      * Table name
      *
      * @var string
@@ -76,7 +69,8 @@ class Collection extends AbstractTable
      */
     public function getAll($forceReload = false)
     {
-        if (empty($this->tabs) or $forceReload == true) {
+        $tabs = $this->getData('tabs');
+        if ($forceReload or empty($tabs)) {
             $documentTypeId = $this->getDocumentTypeId();
             if (!empty($documentTypeId)) {
                 $rows = $this->fetchAll(
@@ -96,10 +90,10 @@ class Collection extends AbstractTable
                 $tabs[] = Model::fromArray((array) $row);
             }
 
-            $this->tabs = $tabs;
+            $this->setData('tabs', $tabs);
         }
 
-        return $this->tabs;
+        return $this->getData('tabs');
     }
 
     /**
@@ -166,8 +160,7 @@ class Collection extends AbstractTable
      */
     public function save()
     {
-        $tabs = $this->getAll();
-        foreach ($tabs as $tab) {
+        foreach ($this->getAll() as $tab) {
             $tab->save();
         }
     }
@@ -179,8 +172,7 @@ class Collection extends AbstractTable
      */
     public function delete()
     {
-        $tabs = $this->getAll();
-        foreach ($tabs as $tab) {
+        foreach ($this->getAll() as $tab) {
             $tab->delete();
         }
 

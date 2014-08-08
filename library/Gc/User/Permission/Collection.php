@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * List of permissions
-     *
-     * @var array
-     */
-    protected $permissions = array();
-
-    /**
      * Table name
      *
      * @var string
@@ -62,7 +55,8 @@ class Collection extends AbstractTable
      */
     public function getAll($forceReload = false)
     {
-        if (empty($this->permissions) or $forceReload === true) {
+        $permissions = $this->getData('permissions');
+        if ($forceReload or empty($permissions)) {
             $select = new Select();
             $select->from('user_acl_permission')
                 ->columns(
@@ -87,9 +81,9 @@ class Collection extends AbstractTable
                 $permissions[$permission['resource']][$permission['id']] = $permission['permission'];
             }
 
-            $this->permissions = $permissions;
+            $this->setData('permissions', $permissions);
         }
 
-        return $this->permissions;
+        return $this->getData('permissions');
     }
 }

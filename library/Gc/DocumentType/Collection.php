@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * Collection of \Gc\DocumentType\Model
-     *
-     * @var array
-     */
-    protected $documentTypes = null;
-
-    /**
      * Table name
      *
      * @var string
@@ -75,7 +68,8 @@ class Collection extends AbstractTable
      */
     public function getAll($forceReload = false)
     {
-        if ($forceReload or $this->documentTypes === null) {
+        $documentTypes = $this->getData('documentTypes');
+        if ($forceReload or empty($documentTypes)) {
             $parentId = $this->getParentId();
             $rows     = $this->fetchAll(
                 $this->select(
@@ -99,10 +93,10 @@ class Collection extends AbstractTable
                 $documentTypes[] = Model::fromArray((array) $row);
             }
 
-            $this->documentTypes = $documentTypes;
+            $this->setData('documentTypes', $documentTypes);
         }
 
-        return $this->documentTypes;
+        return $this->getData('documentTypes');
     }
 
     /**

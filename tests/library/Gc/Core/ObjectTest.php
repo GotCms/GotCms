@@ -28,6 +28,7 @@ namespace Gc\Core;
 
 use Gc\Test\PHPUnit\Framework\TestCase;
 use Gc\Registry;
+use Gc\View\Model as ViewModel;
 use ReflectionClass;
 use stdClass;
 
@@ -282,7 +283,9 @@ class ObjectTest extends TestCase
     public function testToArray()
     {
         $this->object->setData('k', 'v');
-        $this->assertArrayHasKey('k', $this->object->toArray());
+        $result = $this->object->toArray();
+        $this->assertArrayHasKey('k', $result);
+        $this->assertEquals('v', $result['k']);
     }
 
     /**
@@ -293,7 +296,32 @@ class ObjectTest extends TestCase
     public function testToArrayWithParameters()
     {
         $this->object->setData('k', 'v');
-        $this->assertArrayHasKey('k2', $this->object->toArray(array('k', 'k2')));
+        $result = $this->object->toArray(array('k', 'k2'));
+        $this->assertArrayHasKey('k', $result);
+        $this->assertEquals('v', $result['k']);
+        $this->assertArrayHasKey('k2', $result);
+        $this->assertNull($result['k2']);
+    }
+
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testToArrayWithObjectInData()
+    {
+        $view = ViewModel::fromArray(
+            array(
+                'test' => 'value'
+            )
+        );
+        $this->object->setData('object', $view);
+        $result = $this->object->toArray();
+        $this->assertArrayHasKey('object', $result);
+        $this->assertEquals($view->toArray(), $result['object']);
+        $result = $this->object->toArray(array('object'));
+        $this->assertArrayHasKey('object', $result);
+        $this->assertEquals($view->toArray(), $result['object']);
     }
 
     /**

@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * List of \Gc\Module\Model
-     *
-     * @var array
-     */
-    protected $modules = null;
-
-    /**
      * Table name
      *
      * @var string
@@ -62,7 +55,8 @@ class Collection extends AbstractTable
      */
     public function getAll($forceReload = false)
     {
-        if ($forceReload or $this->modules === null) {
+        $modules = $this->getData('modules');
+        if ($forceReload or empty($modules)) {
             $rows = $this->fetchAll(
                 $this->select(
                     function (Select $select) {
@@ -76,10 +70,10 @@ class Collection extends AbstractTable
                 $modules[] = Model::fromArray((array) $row);
             }
 
-            $this->modules = $modules;
+            $this->setData('modules', $modules);
         }
 
-        return $this->modules;
+        return $this->getData('modules');
     }
 
     /**

@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * Collection of \Gc\Datatype\Model
-     *
-     * @var array
-     */
-    protected $datatypes;
-
-    /**
      * Table name
      *
      * @var string
@@ -83,7 +76,7 @@ class Collection extends AbstractTable
             $datatypes[] = Model::fromArray((array) $row);
         }
 
-        $this->datatypes = $datatypes;
+        $this->setData('datatypes', $datatypes);
 
         return $this;
     }
@@ -95,7 +88,7 @@ class Collection extends AbstractTable
      */
     public function getAll()
     {
-        return $this->datatypes;
+        return $this->getData('datatypes');
     }
 
     /**

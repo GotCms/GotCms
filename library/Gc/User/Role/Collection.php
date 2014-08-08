@@ -40,13 +40,6 @@ use Zend\Db\Sql\Select;
 class Collection extends AbstractTable
 {
     /**
-     * List of roles
-     *
-     * @var array
-     */
-    protected $roles;
-
-    /**
      * Table name
      *
      * @var string
@@ -62,7 +55,8 @@ class Collection extends AbstractTable
      */
     public function getAll($forceReload = false)
     {
-        if (empty($this->roles) or $forceReload === true) {
+        $roles = $this->getData('roles');
+        if ($forceReload or empty($roles)) {
             $rows = $this->fetchAll(
                 $this->select(
                     function (Select $select) {
@@ -76,9 +70,9 @@ class Collection extends AbstractTable
                 $roles[] = Model::fromArray((array) $row);
             }
 
-            $this->roles = $roles;
+            $this->setData('roles', $roles);
         }
 
-        return $this->roles;
+        return $this->getData('roles');
     }
 }
