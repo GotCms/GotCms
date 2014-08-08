@@ -68,9 +68,15 @@ class AbstractRestControllerTestCase extends TestCase
         }
     }
 
+    /**
+     * Reload application config
+     *
+     * @return void
+     */
     public function reloadApplication()
     {
         $configuration = include GC_APPLICATION_PATH . '/config/application.config.php';
+
         $configuration['module_listener_options']['config_glob_paths'] = array(
             'tests/config/local.php',
         );

@@ -38,6 +38,11 @@ use PHPUnit_Framework_TestCase;
  */
 class TestCase extends PHPUnit_Framework_TestCase
 {
+    /**
+     * Tear down to  clean database
+     *
+     * @return void
+     */
     protected function tearDown()
     {
         $classes = array(
@@ -58,6 +63,13 @@ class TestCase extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Clean collection
+     *
+     * @param mixed $class Collection class
+     *
+     * @return void
+     */
     protected function cleanClass($class)
     {
         foreach ($class->getAll(true) as $element) {

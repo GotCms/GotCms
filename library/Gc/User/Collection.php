@@ -56,6 +56,8 @@ class Collection extends AbstractTable
     /**
      * Get users
      *
+     * @param boolean $forceReload Force reload collection
+     *
      * @return array Gc\User\Model
      */
     public function getAll($forceReload = false)

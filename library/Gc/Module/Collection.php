@@ -56,6 +56,8 @@ class Collection extends AbstractTable
     /**
      * get modules
      *
+     * @param boolean $forceReload Force reload collection
+     *
      * @return array
      */
     public function getAll($forceReload = false)
