@@ -30,7 +30,6 @@ namespace Gc\Test\PHPUnit\Controller;
 use PHPUnit_Framework_TestCase as TestCase;
 use Gc\Registry;
 use Zend\Http\Response;
-use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 
 /**

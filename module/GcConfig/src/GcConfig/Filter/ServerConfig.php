@@ -39,7 +39,7 @@ class ServerConfig extends AbstractConfigFilter
     /**
      * Initialize Server sub form
      *
-     * @return Config
+     * @return ServerConfig
      */
     public function __construct()
     {
