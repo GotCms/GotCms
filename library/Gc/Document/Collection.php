@@ -69,7 +69,7 @@ class Collection extends AbstractTable implements IterableInterface
      *
      * @param boolean $forceReload Force reload documents
      *
-     * @return \Gc\Document\Collection
+     * @return array
      */
     public function getAll($forceReload = false)
     {
@@ -128,9 +128,8 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getAvailableChildren()
     {
-        $children = $this->getChildren();
-        $array    = array();
-        foreach ($children as $child) {
+        $array = array();
+        foreach ($this->getChildren() as $child) {
             if ($child->isPublished()) {
                 $array[] = $child;
             }
@@ -146,10 +145,8 @@ class Collection extends AbstractTable implements IterableInterface
      */
     public function getSelect()
     {
-        $select    = array();
-        $documents = $this->getAll();
-
-        foreach ($documents as $document) {
+        $select = array();
+        foreach ($this->getAll() as $document) {
             $select[$document->getId()] = $document->getName();
         }
 

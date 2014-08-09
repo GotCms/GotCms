@@ -64,7 +64,7 @@ class Collection extends AbstractTable
      *
      * @param boolean $forceReload Force reload documents
      *
-     * @return \Gc\Document\Collection
+     * @return array
      */
     public function getAll($forceReload = false)
     {
