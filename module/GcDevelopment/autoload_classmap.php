@@ -26,23 +26,25 @@
  */
 
 return array(
-    'Development\Controller\IndexController'            =>
-        __DIR__ . '/src/Development/Controller/IndexController.php',
-    'Development\Controller\DocumentTypeRestController' =>
-        __DIR__ . '/src/Development/Controller/DocumentTypeRestController.php',
-    'Development\Controller\DatatypeRestController'     =>
-        __DIR__ . '/src/Development/Controller/DatatypeRestController.php',
-    'Development\Controller\LayoutRestController'       =>
-        __DIR__ . '/src/Development/Controller/LayoutRestController.php',
-    'Development\Controller\ViewRestController'         =>
-        __DIR__ . '/src/Development/Controller/ViewRestController.php',
-    'Development\Controller\ScriptRestController'       =>
-        __DIR__ . '/src/Development/Controller/ScriptRestController.php',
-    'Development\Module'                                =>
+    'GcDevelopment\Controller\IndexController'            =>
+        __DIR__ . '/src/GcDevelopment/Controller/IndexController.php',
+    'GcDevelopment\Controller\DocumentTypeRestController' =>
+        __DIR__ . '/src/GcDevelopment/Controller/DocumentTypeRestController.php',
+    'GcDevelopment\Controller\DatatypeRestController'     =>
+        __DIR__ . '/src/GcDevelopment/Controller/DatatypeRestController.php',
+    'GcDevelopment\Controller\LayoutRestController'       =>
+        __DIR__ . '/src/GcDevelopment/Controller/LayoutRestController.php',
+    'GcDevelopment\Controller\ViewRestController'         =>
+        __DIR__ . '/src/GcDevelopment/Controller/ViewRestController.php',
+    'GcDevelopment\Controller\ScriptRestController'       =>
+        __DIR__ . '/src/GcDevelopment/Controller/ScriptRestController.php',
+    'GcDevelopment\Controller\ScriptRestController'       =>
+        __DIR__ . '/src/GcDevelopment/Controller/PropertyRestController.php',
+    'GcDevelopment\Module'                                =>
         __DIR__ . '/Module.php',
-    'Development\Filter\Datatype'                       => __DIR__ . '/src/Development/Filter/Datatype.php',
-    'Development\Filter\DocumentType'                   => __DIR__ . '/src/Development/Filter/DocumentType.php',
-    'Development\Filter\Layout'                         => __DIR__ . '/src/Development/Filter/Layout.php',
-    'Development\Filter\Script'                         => __DIR__ . '/src/Development/Filter/Script.php',
-    'Development\Filter\View'                           => __DIR__ . '/src/Development/Filter/View.php',
+    'GcDevelopment\Filter\Datatype'                       => __DIR__ . '/src/GcDevelopment/Filter/Datatype.php',
+    'GcDevelopment\Filter\DocumentType'                   => __DIR__ . '/src/GcDevelopment/Filter/DocumentType.php',
+    'GcDevelopment\Filter\Layout'                         => __DIR__ . '/src/GcDevelopment/Filter/Layout.php',
+    'GcDevelopment\Filter\Script'                         => __DIR__ . '/src/GcDevelopment/Filter/Script.php',
+    'GcDevelopment\Filter\View'                           => __DIR__ . '/src/GcDevelopment/Filter/View.php',
 );
