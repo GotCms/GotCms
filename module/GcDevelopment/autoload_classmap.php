@@ -38,8 +38,6 @@ return array(
         __DIR__ . '/src/GcDevelopment/Controller/ViewRestController.php',
     'GcDevelopment\Controller\ScriptRestController'       =>
         __DIR__ . '/src/GcDevelopment/Controller/ScriptRestController.php',
-    'GcDevelopment\Controller\ScriptRestController'       =>
-        __DIR__ . '/src/GcDevelopment/Controller/PropertyRestController.php',
     'GcDevelopment\Module'                                =>
         __DIR__ . '/Module.php',
     'GcDevelopment\Filter\Datatype'                       => __DIR__ . '/src/GcDevelopment/Filter/Datatype.php',
