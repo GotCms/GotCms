@@ -150,6 +150,16 @@ return array(
                             ),
                         ),
                     ),
+                    'forgot-password' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/password-reset[/:id][/:key]',
+                            'defaults' => array(
+                                'module'     => 'gcbackend',
+                                'controller' => 'ForgotPasswordRest',
+                            ),
+                        ),
+                    ),
 
                     'dashboard' => array(
                         'type'    => 'Literal',
