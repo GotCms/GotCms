@@ -41,6 +41,13 @@ use Zend\Validator\Identical;
  */
 class ForgotPasswordRestController extends RestAction
 {
+    /**
+     * Demand a password reset
+     *
+     * @param array $data Data to used
+     *
+     * @return array
+     */
     public function create($data)
     {
         $forgotPasswordFilter = new ForgotPasswordFilter();
@@ -59,9 +66,12 @@ class ForgotPasswordRestController extends RestAction
     }
 
     /**
-     * Forgot password action
+     * Reset password
      *
-     * @return \Zend\View\Model\ViewModel|array
+     * @param integer $id   Identifier
+     * @param array   $data Data to used
+     *
+     * @return array
      */
     public function update($id, $data)
     {
@@ -73,8 +83,8 @@ class ForgotPasswordRestController extends RestAction
                 and strtotime('-1 hour') < strtotime($userModel->getRetrieveUpdatedAt())) {
                 $forgotPasswordFilter->initResetPassword();
                 $forgotPasswordFilter->get('password_confirm')
-                                     ->getValidatorChain()
-                                     ->addValidator(new Identical($data['password']));
+                    ->getValidatorChain()
+                    ->addValidator(new Identical($data['password']));
                 $forgotPasswordFilter->setData($data);
                 if ($forgotPasswordFilter->isValid()) {
                     $userModel->setPassword($forgotPasswordFilter->getValue('password'));
