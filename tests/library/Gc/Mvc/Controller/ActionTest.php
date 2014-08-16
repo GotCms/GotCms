@@ -103,7 +103,7 @@ class ActionTest extends TestCase
                 'action' => 'login',
             )
         );
-        $routeMatch->setMatchedRouteName('admin/login');
+        $routeMatch->setMatchedRouteName('backend/login');
         $this->object->getEvent()->setRouteMatch($routeMatch);
         $this->assertInstanceOf(
             'Zend\View\Model\ViewModel',

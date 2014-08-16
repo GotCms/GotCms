@@ -60,7 +60,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetListWithoutDatatypes()
     {
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array(), $result->datatypes);
     }
@@ -82,7 +82,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
 
         $datatype = Datatype\Model::fromId($datatype->getId());
 
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertInternalType('array', $result->datatypes);
         $this->assertEquals($datatype->getInfos(), $result->datatypes[0]['infos']);
@@ -98,7 +98,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateWithDatatypeWithInvalidData()
     {
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -129,7 +129,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateWithDatatypeWithValidData()
     {
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -151,7 +151,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetWithWrongId()
     {
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->routeMatch->setParam('id', 1);
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -176,7 +176,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
 
         $datatype = Datatype\Model::fromId($datatype->getId());
 
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->routeMatch->setParam('id', $datatype->getId());
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -192,7 +192,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testUpdateWithWrongId()
     {
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->routeMatch->setParam('id', 1);
         $this->request->setMethod('PUT');
 
@@ -218,7 +218,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
 
         $datatype = Datatype\Model::fromId($datatype->getId());
 
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->routeMatch->setParam('id', $datatype->getId());
         $this->request->setMethod('PUT');
         $this->request->setContent(
@@ -258,7 +258,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
 
         $datatype = Datatype\Model::fromId($datatype->getId());
 
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->routeMatch->setParam('id', $datatype->getId());
         $this->request->setMethod('PUT');
         $post = $this->request->setContent(
@@ -293,7 +293,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
 
         $datatype = Datatype\Model::fromId($datatype->getId());
 
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->routeMatch->setParam('id', $datatype->getId());
         $this->request->setMethod('PUT');
         $post = $this->request->setContent(
@@ -319,7 +319,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testDeleteDatatypeWithWrongId()
     {
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1);
 
@@ -343,7 +343,7 @@ class DatatypeRestControllerTest extends AbstractRestControllerTestCase
         );
         $datatype->save();
 
-        $this->setUpRoute('admin/development/datatype');
+        $this->setUpRoute('development/datatype');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', $datatype->getId());
 

@@ -52,7 +52,7 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetServerListConfigs()
     {
-        $this->setUpRoute('admin/config/server', array('type' => 'server'));
+        $this->setUpRoute('config/server', array('type' => 'server'));
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertInternalType('array', $result->configs);
     }
@@ -64,7 +64,7 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetGeneralListConfigs()
     {
-        $this->setUpRoute('admin/config/general', array('type' => 'general'));
+        $this->setUpRoute('config/general', array('type' => 'general'));
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertInternalType('array', $result->configs);
     }
@@ -76,7 +76,7 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetSystemListConfigs()
     {
-        $this->setUpRoute('admin/config/system', array('type' => 'system'));
+        $this->setUpRoute('config/system', array('type' => 'system'));
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertInternalType('array', $result->configs);
     }
@@ -89,7 +89,7 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
     public function testGetConfigWithWrongId()
     {
         $this->setUpRoute(
-            'admin/config/system',
+            'config/system',
             array(
                 'type' => 'system',
                 'id' => 1000
@@ -108,7 +108,7 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
     public function testGetConfig()
     {
         $this->setUpRoute(
-            'admin/config/system',
+            'config/system',
             array(
                 'type' => 'system',
                 'id' => 'session_handler'
@@ -129,7 +129,7 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
     public function testUpdateConfigWithWrongConfigId()
     {
         $this->setUpRoute(
-            'admin/config/system',
+            'config/system',
             array(
                 'type' => 'system',
                 'id' => 1000
@@ -150,7 +150,7 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
     public function testUpdateConfigWithInvalidData()
     {
         $this->setUpRoute(
-            'admin/config/system',
+            'config/system',
             array(
                 'type' => 'system',
                 'id' => 'cache_lifetime'
@@ -186,7 +186,7 @@ class ConfigRestControllerTest extends AbstractRestControllerTestCase
     public function testUpdateConfigWithValidData()
     {
         $this->setUpRoute(
-            'admin/config/system',
+            'config/system',
             array(
                 'type' => 'system',
                 'id' => 'cache_lifetime'

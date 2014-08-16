@@ -50,7 +50,7 @@ class StatRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetList()
     {
-        $this->setUpRoute('admin/development/stat');
+        $this->setUpRoute('statistics');
         $result = $this->controller->dispatch($this->request, $this->response);
         $vars = $result->getVariables();
         $this->assertArrayHasKey('days', $vars);

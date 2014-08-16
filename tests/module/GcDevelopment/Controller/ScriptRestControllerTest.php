@@ -60,7 +60,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetListWithoutScripts()
     {
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array(), $result->scripts);
     }
@@ -83,7 +83,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
 
         $script = Script\Model::fromId($script->getId());
 
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array($script->toArray()), $result->scripts);
     }
@@ -95,7 +95,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetWithWrongId()
     {
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $this->routeMatch->setParam('id', 1);
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -121,7 +121,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
 
         $script = Script\Model::fromId($script->getId());
 
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $this->routeMatch->setParam('id', $script->getId());
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -135,7 +135,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateWithScriptWithInvalidData()
     {
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -167,7 +167,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateWithScriptWithValidData()
     {
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -192,7 +192,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testDeleteScriptWithWrongId()
     {
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1);
 
@@ -208,7 +208,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testUpdateScriptWithWrongId()
     {
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', 1);
 
@@ -233,7 +233,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
         );
         $script->save();
 
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', $script->getId());
 
@@ -258,7 +258,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
         );
         $script->save();
 
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $script->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
@@ -303,7 +303,7 @@ class ScriptRestControllerTest extends AbstractRestControllerTestCase
         );
         $script->save();
 
-        $this->setUpRoute('admin/development/script');
+        $this->setUpRoute('development/script');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $script->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');

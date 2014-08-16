@@ -44,7 +44,7 @@ return array(
             'content' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/content',
+                    'route'    => '/backend/content',
                     'defaults' => array(
                         'module'     => 'gccontent',
                         'controller' => 'ContentRest',

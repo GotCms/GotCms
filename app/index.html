@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+  <head lang="en">
+    <meta charset="UTF-8">
+    <title>Angular-Skeleton</title>
+
+    <!-- build:css(.tmp) assets/css/app.min.css -->
+    <link rel="stylesheet" href="assets/css/app.css"/>
+    <!-- endbuild -->
+  </head>
+  <body>
+
+    <ul class="inline-list">
+      <li><a id="home-link" href="#/">Go to index</a></li>
+      <li><a id="foo-link" href="#/foo">Go to foo</a></li>
+    </ul>
+
+    <ng-view></ng-view>
+
+    <!-- build:js assets/js/lib.min.js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js assets/js/app.min.js -->
+    <script src="components/app.js"></script>
+    <script src="components/route/src/route.js"></script>
+    <script src="components/route/src/routeConfig.js"></script>
+    <script src="components/home/src/home.js"></script>
+    <script src="components/home/src/homeCtrl.js"></script>
+    <script src="components/foo/src/foo.js"></script>
+    <script src="components/foo/src/fooCtrl.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>

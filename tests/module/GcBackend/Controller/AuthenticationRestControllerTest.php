@@ -60,7 +60,7 @@ class AuthenticationRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testLoginWithoutCredentials()
     {
-        $this->setUpRoute('admin/login');
+        $this->setUpRoute('backend/login');
         $this->request->setMethod('POST');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals('Can not connect', $result->content);
@@ -73,7 +73,7 @@ class AuthenticationRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testLoginWithWrongCredentials()
     {
-        $this->setUpRoute('admin/login');
+        $this->setUpRoute('backend/login');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -106,7 +106,7 @@ class AuthenticationRestControllerTest extends AbstractRestControllerTestCase
         $user->setPassword('test');
         $user->save();
 
-        $this->setUpRoute('admin/login');
+        $this->setUpRoute('backend/login');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -122,7 +122,7 @@ class AuthenticationRestControllerTest extends AbstractRestControllerTestCase
         $this->assertEquals((bool) $user->getActive(), (bool) $result->active);
 
         //Test with already an identity should return same result
-        $this->setUpRoute('admin/login');
+        $this->setUpRoute('backend/login');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals($user->getLastname(), $result->lastname);
         $this->assertEquals($user->getFirstname(), $result->firstname);

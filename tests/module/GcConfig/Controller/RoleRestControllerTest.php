@@ -64,7 +64,7 @@ class RoleRestControllerTest extends AbstractRestControllerTestCase
     public function testGetListRoles()
     {
         $this->createRole();
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertInternalType('array', $result->roles);
         $this->assertEquals('Administrator', $result->roles[0]['name']);
@@ -79,7 +79,7 @@ class RoleRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateUserWithInvalidData()
     {
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -107,7 +107,7 @@ class RoleRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateUserWithValidData()
     {
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -129,7 +129,7 @@ class RoleRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetWithWrongId()
     {
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $this->routeMatch->setParam('id', 1000);
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -145,7 +145,7 @@ class RoleRestControllerTest extends AbstractRestControllerTestCase
     public function testGetWithGoodId()
     {
         $role = $this->createRole();
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $this->routeMatch->setParam('id', $role->getId());
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -160,7 +160,7 @@ v     *
      */
     public function testDeleteRoleWithWrongId()
     {
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1000);
 
@@ -177,7 +177,7 @@ v     *
     public function testDeleteRole()
     {
         $role = $this->createRole();
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', $role->getId());
 
@@ -193,7 +193,7 @@ v     *
      */
     public function testUpdateRoleWithoutUser()
     {
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', 1000);
 
@@ -210,7 +210,7 @@ v     *
     public function testUpdateRoleWithInvalidData()
     {
         $role = $this->createRole();
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $role->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
@@ -242,7 +242,7 @@ v     *
     public function testUpdateRoleWithValidData()
     {
         $role = $this->createRole();
-        $this->setUpRoute('admin/config/user/role');
+        $this->setUpRoute('config/user/role');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $role->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');

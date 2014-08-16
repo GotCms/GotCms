@@ -101,7 +101,7 @@ return array(
             'development' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/development',
+                    'route'    => '/backend/development',
                     'defaults' => array(
                         'module'     => 'gcdevelopment',
                         'controller' => 'DevelopmentController',

@@ -60,7 +60,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetListWithoutLayouts()
     {
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array(), $result->layouts);
     }
@@ -83,7 +83,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
 
         $layout = Layout\Model::fromId($layout->getId());
 
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array($layout->toArray()), $result->layouts);
     }
@@ -95,7 +95,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetWithWrongId()
     {
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $this->routeMatch->setParam('id', 1);
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -121,7 +121,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
 
         $layout = Layout\Model::fromId($layout->getId());
 
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $this->routeMatch->setParam('id', $layout->getId());
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -135,7 +135,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateWithLayoutWithInvalidData()
     {
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -167,7 +167,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateWithLayoutWithValidData()
     {
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -192,7 +192,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testDeleteLayoutWithWrongId()
     {
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1);
 
@@ -208,7 +208,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testUpdateLayoutWithWrongId()
     {
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', 1);
 
@@ -233,7 +233,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
         );
         $layout->save();
 
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', $layout->getId());
 
@@ -258,7 +258,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
         );
         $layout->save();
 
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $layout->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
@@ -303,7 +303,7 @@ class LayoutRestControllerTest extends AbstractRestControllerTestCase
         );
         $layout->save();
 
-        $this->setUpRoute('admin/development/layout');
+        $this->setUpRoute('development/layout');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $layout->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');

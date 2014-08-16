@@ -60,7 +60,7 @@ class ForgotPasswordRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testForgotPasswordWithoutCredentials()
     {
-        $this->setUpRoute('admin/password-reset');
+        $this->setUpRoute('backend/password-reset');
         $this->request->setMethod('POST');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals('Invalid data', $result->content);
@@ -81,7 +81,7 @@ class ForgotPasswordRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testForgotPasswordWithWrongCredentials()
     {
-        $this->setUpRoute('admin/password-reset');
+        $this->setUpRoute('backend/password-reset');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -113,7 +113,7 @@ class ForgotPasswordRestControllerTest extends AbstractRestControllerTestCase
         $user->setPassword('test');
         $user->save();
 
-        $this->setUpRoute('admin/password-reset');
+        $this->setUpRoute('backend/password-reset');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -132,7 +132,7 @@ class ForgotPasswordRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testResetPasswordWithoutKey()
     {
-        $this->setUpRoute('admin/password-reset');
+        $this->setUpRoute('backend/password-reset');
         $this->routeMatch->setParam('id', '100000');
         $this->request->setMethod('PUT');
         $post = $this->request->setContent(
@@ -151,7 +151,7 @@ class ForgotPasswordRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testResetPasswordWithWrongKeyAndId()
     {
-        $this->setUpRoute('admin/password-reset');
+        $this->setUpRoute('backend/password-reset');
         $this->routeMatch->setParam('id', '1000');
         $this->routeMatch->setParam('key', 'abcde');
         $this->request->setMethod('PUT');
@@ -186,7 +186,7 @@ class ForgotPasswordRestControllerTest extends AbstractRestControllerTestCase
         $user->setRetrieveUpdatedAt(date('Y-m-d H:i:s'));
         $user->save();
 
-        $this->setUpRoute('admin/password-reset');
+        $this->setUpRoute('backend/password-reset');
         $this->routeMatch->setParam('id', $user->getId());
         $this->routeMatch->setParam('key', 'abcde');
         $this->request->setMethod('PUT');
@@ -228,7 +228,7 @@ class ForgotPasswordRestControllerTest extends AbstractRestControllerTestCase
         $user->setRetrieveUpdatedAt(date('Y-m-d H:i:s'));
         $user->save();
 
-        $this->setUpRoute('admin/password-reset');
+        $this->setUpRoute('backend/password-reset');
         $this->routeMatch->setParam('id', $user->getId());
         $this->routeMatch->setParam('key', 'abcde');
         $this->request->setMethod('PUT');

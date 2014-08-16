@@ -51,7 +51,7 @@ class DashboardRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetList()
     {
-        $this->setUpRoute('admin/dashboard');
+        $this->setUpRoute('backend/dashboard');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('version', $result->getVariables());
         $this->assertArrayHasKey('versionIsLatest', $result->getVariables());
@@ -70,7 +70,7 @@ class DashboardRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateToRemoveWelcomeMessage()
     {
-        $this->setUpRoute('admin/dashboard');
+        $this->setUpRoute('backend/dashboard');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -89,7 +89,7 @@ class DashboardRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateToUpdateDashboard()
     {
-        $this->setUpRoute('admin/dashboard');
+        $this->setUpRoute('backend/dashboard');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(

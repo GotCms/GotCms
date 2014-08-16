@@ -144,7 +144,7 @@ class AbstractDatatypeTest extends TestCase
      */
     public function testGetUploadUrl()
     {
-        $this->assertEquals('/admin/content/media/upload/document/1/property/1', $this->object->getUploadUrl(1));
+        $this->assertEquals('/backend/content/media/upload/document/1/property/1', $this->object->getUploadUrl(1));
     }
 
     /**

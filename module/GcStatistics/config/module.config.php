@@ -40,7 +40,7 @@ return array(
             'statistics' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/statistics',
+                    'route'    => '/backend/statistics',
                     'defaults' => array(
                         'module'     => 'gcstatistics',
                         'controller' => 'StatisticsRest',

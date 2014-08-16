@@ -65,7 +65,7 @@ class DeauthenticationRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testLogoutWithoutAuthentication()
     {
-        $this->setUpRoute('admin/logout');
+        $this->setUpRoute('backend/logout');
         $this->request->setMethod('POST');
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -95,7 +95,7 @@ class DeauthenticationRestControllerTest extends AbstractRestControllerTestCase
         $userModel->save();
         $userModel->authenticate('login-test', 'password-test');
 
-        $this->setUpRoute('admin/logout');
+        $this->setUpRoute('backend/logout');
         $this->request->setMethod('POST');
 
         $result = $this->controller->dispatch($this->request, $this->response);

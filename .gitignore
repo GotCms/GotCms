@@ -73,4 +73,10 @@ scripts/phpunit
 scripts/pluginmap_generator.php
 scripts/templatemap_generator.php
 scripts/yuicompressor.jar
+
+
 composer.lock
+app/bower_components
+node_modules
+npm-debug.log
+.tmp

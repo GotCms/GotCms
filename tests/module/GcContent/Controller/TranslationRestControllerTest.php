@@ -66,7 +66,7 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
                 )
             )
         );
-        $this->setUpRoute('admin/content/translation');
+        $this->setUpRoute('content/translation');
         $result       = $this->controller->dispatch($this->request, $this->response);
         $translations = $result->translations;
         $this->assertInternalType('array', $translations);
@@ -82,7 +82,7 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateTranslationWithEmptyData()
     {
-        $this->setUpRoute('admin/content/translation');
+        $this->setUpRoute('content/translation');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -115,7 +115,7 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateTranslationValidData()
     {
-        $this->setUpRoute('admin/content/translation');
+        $this->setUpRoute('content/translation');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -149,7 +149,7 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testUpdateTranslationWithEmptyData()
     {
-        $this->setUpRoute('admin/content/translation');
+        $this->setUpRoute('content/translation');
         $this->request->setMethod('PATCH');
         $this->request->setContent(
             http_build_query(
@@ -191,7 +191,7 @@ class TranslationRestControllerTest extends AbstractRestControllerTestCase
             )
         );
 
-        $this->setUpRoute('admin/content/translation');
+        $this->setUpRoute('content/translation');
         $this->request->setMethod('PATCH');
         $this->request->setContent(
             http_build_query(

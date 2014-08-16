@@ -60,7 +60,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetListWithoutViews()
     {
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array(), $result->views);
     }
@@ -83,7 +83,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
 
         $view = View\Model::fromId($view->getId());
 
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array($view->toArray()), $result->views);
     }
@@ -95,7 +95,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetWithWrongId()
     {
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $this->routeMatch->setParam('id', 1);
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -121,7 +121,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
 
         $view = View\Model::fromId($view->getId());
 
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $this->routeMatch->setParam('id', $view->getId());
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -135,7 +135,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateWithViewWithInvalidData()
     {
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -167,7 +167,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateWithViewWithValidData()
     {
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -192,7 +192,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testDeleteViewWithWrongId()
     {
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1);
 
@@ -208,7 +208,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testUpdateViewWithWrongId()
     {
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', 1);
 
@@ -233,7 +233,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
         );
         $view->save();
 
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', $view->getId());
 
@@ -258,7 +258,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
         );
         $view->save();
 
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $view->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
@@ -303,7 +303,7 @@ class ViewRestControllerTest extends AbstractRestControllerTestCase
         );
         $view->save();
 
-        $this->setUpRoute('admin/development/view');
+        $this->setUpRoute('development/view');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $view->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');

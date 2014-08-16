@@ -1,0 +1,30 @@
+{
+    "name": "angular-gotcms",
+    "private": true,
+    "version": "0.1.0",
+    "authors": [
+        "Pierre Rambaud"
+    ],
+    "description": "GotCms angularJS application",
+    "keywords": [
+        "angularjs",
+        "gotcms"
+    ],
+    "license": "LGPLv3",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "~1.2.20",
+        "angular-route": "~1.2.20",
+        "bootstrap-sass-official": "~3.2.0"
+    },
+    "devDependencies": {
+        "angular-scenario": "~1.2.20",
+        "angular-mocks": "~1.2.20"
+    }
+}

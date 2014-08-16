@@ -214,7 +214,7 @@ class AbstractEditorTest extends TestCase
     public function testGetUploadUrl()
     {
         $this->assertEquals(
-            '/admin/content/media/upload/document/1/property/' . $this->property->getId(),
+            '/backend/content/media/upload/document/1/property/' . $this->property->getId(),
             $this->object->getUploadUrl()
         );
     }

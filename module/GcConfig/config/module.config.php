@@ -53,7 +53,7 @@ return array(
             'config' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/admin/config',
+                    'route'    => '/backend/config',
                     'defaults' =>
                     array (
                         'module'     => 'gcconfig',

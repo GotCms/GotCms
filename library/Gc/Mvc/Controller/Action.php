@@ -67,20 +67,6 @@ class Action extends AbstractActionController
     protected $routeMatch = null;
 
     /**
-     * Session storage
-     *
-     * @var \Zend\Session\Container
-     */
-    protected $session = null;
-
-    /**
-     * Abstract acl
-     *
-     * @var array
-     */
-    protected $aclPage;
-
-    /**
      * Execute the request
      *
      * @param MvcEvent $e Mvc Event
@@ -113,54 +99,18 @@ class Action extends AbstractActionController
     }
 
     /**
-     * Constructor
+     * Installation check, and check on removal of the install directory.
      *
      * @return \Zend\Http\Response|null
      */
     protected function construct()
     {
-        $routeName = $this->getRouteMatch()->getMatchedRouteName();
-
-        /**
-         * Installation check, and check on removal of the install directory.
-         */
         $config = $this->getServiceLocator()->get('Config');
         if (!isset($config['db'])
-            and !in_array($routeName, $this->installerRoutes)
+            and !in_array($this->getRouteMatch()->getMatchedRouteName(), $this->installerRoutes)
         ) {
             return $this->redirect()->toRoute('install');
-        } elseif (!in_array($routeName, $this->installerRoutes)) {
-            $auth = $this->getServiceLocator()->get('Auth');
-            if (!$auth->hasIdentity()) {
-                if (!in_array(
-                    $routeName,
-                    array(
-                        'admin/login',
-                        'config/user/forgot-password',
-                        'config/user/forgot-password-key',
-                        'cms'
-                    )
-                )
-                ) {
-                    return $this->redirect()->toRoute(
-                        'admin/login',
-                        array('redirect' => base64_encode($this->getRequest()->getRequestUri()))
-                    );
-                }
-            } else {
-                if (!in_array($routeName, array('config/user/forbidden', 'config/user/logout'))) {
-                    $resultResponse = $this->checkAcl($auth->getIdentity());
-                    if (!empty($resultResponse)) {
-                        return $resultResponse;
-                    }
-                }
-            }
         }
-
-        $this->layout()->setVariable('routeParams', $this->getRouteMatch()->getParams());
-        $this->layout()->setVariable('version', \Gc\Version::VERSION);
-
-        $this->useFlashMessenger(false);
     }
 
     /**
@@ -175,130 +125,5 @@ class Action extends AbstractActionController
         }
 
         return $this->routeMatch;
-    }
-
-    /**
-     * Get session storage
-     *
-     * @return SessionContainer
-     */
-    public function getSession()
-    {
-        if ($this->session === null) {
-            $this->session = new SessionContainer();
-        }
-
-        return $this->session;
-    }
-
-    /**
-     * Return json model
-     *
-     * @param array $data Data
-     *
-     * @return \Zend\View\Model\JsonModel
-     */
-    public function returnJson(array $data)
-    {
-        $jsonModel = new JsonModel();
-        $jsonModel->setVariables($data);
-        $jsonModel->setTerminal(true);
-
-        return $jsonModel;
-    }
-
-    /**
-     * Initiliaze flash messenger
-     *
-     * @param boolean $forceDisplay Force display
-     *
-     * @return void
-     */
-    public function useFlashMessenger($forceDisplay = true)
-    {
-        $flashMessenger = $this->flashMessenger();
-        $flashMessages  = array();
-        foreach (array('error', 'success', 'info', 'warning') as $namespace) {
-            $flashNamespace = $flashMessenger->setNameSpace($namespace);
-            if ($forceDisplay) {
-                if ($flashNamespace->hasCurrentMessages()) {
-                    $flashMessages[$namespace] = $flashNamespace->getCurrentMessages();
-                    $flashNamespace->clearCurrentMessages();
-                }
-            } else {
-                if ($flashNamespace->hasMessages()) {
-                    $flashMessages[$namespace] = $flashNamespace->getMessages();
-                }
-            }
-        }
-
-        $this->layout()->setVariable('flashMessages', $flashMessages);
-    }
-
-    /**
-     * Retrieve event manager
-     *
-     * @return \Gc\Event\StaticEventManager
-     */
-    public function events()
-    {
-        return StaticEventManager::getInstance();
-    }
-
-    /**
-     * Check user acl
-     *
-     * @param UserModel $userModel User model
-     *
-     * @return \Zend\Http\Response|null
-     */
-    protected function checkAcl(UserModel $userModel)
-    {
-        if (!empty($this->aclPage) and $userModel->getRole()->getName() !== RoleModel::PROTECTED_NAME) {
-            $permission = null;
-            $acl        = $userModel->getAcl(true);
-            if ($this->aclPage['resource'] == 'modules') {
-                $moduleId = $this->getRouteMatch()->getParam('m');
-                if (empty($moduleId)) {
-                    $action     = $this->getRouteMatch()->getParam('action');
-                    $permission = ($action === 'index' ? 'list' : $action);
-                } else {
-                    $moduleModel = ModuleModel::fromId($moduleId);
-                    if (!empty($moduleModel)) {
-                        $permission = $moduleModel->getName();
-                    }
-                }
-            } else {
-                $permission = empty($this->aclPage['permission']) ?
-                    null :
-                    $this->aclPage['permission'];
-                if ($this->aclPage['permission'] != 'index' and
-                    !in_array($this->aclPage['resource'], array('content', 'stats'))
-                ) {
-                    $action      = $this->getRouteMatch()->getParam('action');
-                    $permission .= (!empty($permission) ? '/' : '') . ($action === 'index' ? 'list' : $action);
-                }
-            }
-
-            if (!$acl->isAllowed(
-                $userModel->getRole()->getName(),
-                $this->aclPage['resource'],
-                $permission
-            )) {
-                return $this->redirect()->toRoute('config/user/forbidden');
-            }
-        }
-    }
-
-    /**
-     * Override aclPage property
-     *
-     * @param array $array Array for acl pages
-     *
-     * @return void
-     */
-    public function setAcl(array $array)
-    {
-        $this->aclPage = $array;
     }
 }

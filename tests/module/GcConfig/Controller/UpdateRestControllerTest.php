@@ -64,7 +64,7 @@ class UpdateRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetUpdateInfos()
     {
-        $this->setUpRoute('admin/config/update');
+        $this->setUpRoute('config/update');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertTrue($result->isLatest);
         $this->assertTrue($result->gitProject);
@@ -81,7 +81,7 @@ class UpdateRestControllerTest extends AbstractRestControllerTestCase
     public function testUpdateWithWrongAdapter()
     {
         $mock = $this->mockService();
-        $this->setUpRoute('admin/config/update');
+        $this->setUpRoute('config/update');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -105,7 +105,7 @@ class UpdateRestControllerTest extends AbstractRestControllerTestCase
     {
         $this->changeLatestVersion('10.0.0');
         $mock = $this->mockService();
-        $this->setUpRoute('admin/config/update');
+        $this->setUpRoute('config/update');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -130,7 +130,7 @@ class UpdateRestControllerTest extends AbstractRestControllerTestCase
     {
         $this->changeLatestVersion('10.0.0');
         $mock = $this->mockService();
-        $this->setUpRoute('admin/config/update');
+        $this->setUpRoute('config/update');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -156,7 +156,7 @@ class UpdateRestControllerTest extends AbstractRestControllerTestCase
     {
         $this->changeLatestVersion('10.0.0');
         $mock = $this->mockService();
-        $this->setUpRoute('admin/config/update');
+        $this->setUpRoute('config/update');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -184,7 +184,7 @@ class UpdateRestControllerTest extends AbstractRestControllerTestCase
     {
         $this->changeLatestVersion('10.0.0');
         $mock = $this->mockService();
-        $this->setUpRoute('admin/config/update');
+        $this->setUpRoute('config/update');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(

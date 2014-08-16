@@ -26,10 +26,10 @@
  */
 
 return array(
-    'Admin\Controller\IndexController'              => __DIR__ . '/src/Admin/Controller/IndexController.php',
-    'Admin\Controller\DashboardRestController'      => __DIR__ . '/src/Admin/Controller/DashboardRestController.php',
-    'Admin\Controller\AuthenticationRestController' =>
-        __DIR__ . '/src/Admin/Controller/AuthenticationRestController.php',
-    'Admin\Module'                                  => __DIR__ . '/Module.php',
-    'Admin\Filter\UserLogin'                        => __DIR__ . '/src/Admin/Filter/UserLogin.php'
+    'GcBackend\Controller\DashboardRestController'      => __DIR__ . '/src/GcBackend/Controller/DashboardRestController.php',
+    'GcBackend\Controller\AuthenticationRestController' =>
+        __DIR__ . '/src/GcBackend/Controller/AuthenticationRestController.php',
+    'GcBackend\Module'                                  => __DIR__ . '/Module.php',
+    'GcBackend\Filter\UserLogin'                        => __DIR__ . '/src/GcBackend/Filter/UserLogin.php',
+    'GcBackend\Filter\ForgotPassword'                   => __DIR__ . '/src/GcBackend/Filter/ForgotPassword.php'
 );

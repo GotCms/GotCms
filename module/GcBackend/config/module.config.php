@@ -48,7 +48,6 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'BackendController'    => 'GcBackend\Controller\AuthenticationRestController',
             'AuthenticationRest'   => 'GcBackend\Controller\AuthenticationRestController',
             'DeauthenticationRest' => 'GcBackend\Controller\DeauthenticationRestController',
             'DashboardRest'        => 'GcBackend\Controller\DashboardRestController',
@@ -111,8 +110,6 @@ return array(
         'invokables' => array(
             'documents' => 'Gc\View\Helper\Documents',
             'document' => 'Gc\View\Helper\Document',
-            'formCheckbox' => 'Gc\View\Helper\FormCheckbox',
-            'formMultiCheckbox' => 'Gc\View\Helper\FormMultiCheckbox',
             'modulePlugin' => 'Gc\View\Helper\ModulePlugin',
             'tools' => 'Gc\View\Helper\Tools',
         ),
@@ -122,7 +119,7 @@ return array(
             'admin' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/admin',
+                    'route'    => '/backend',
                     'defaults' => array(
                         'module'     => 'gcbackend',
                         'controller' => 'BackendController',

@@ -61,7 +61,7 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetListWithoutUsers()
     {
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array(), $result->users);
     }
@@ -75,7 +75,7 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
     {
         $user = $this->createUser();
 
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertInternalType('array', $result->users);
         $this->assertEquals('Rambaud', $result->users[0]['lastname']);
@@ -94,7 +94,7 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateUserWithInvalidData()
     {
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -142,7 +142,7 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testCreateUserWithValidData()
     {
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $this->request->setMethod('POST');
         $post = $this->request->getPost();
         $post->fromArray(
@@ -173,7 +173,7 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
      */
     public function testGetWithWrongId()
     {
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $this->routeMatch->setParam('id', 1);
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -189,7 +189,7 @@ class UserRestControllerTest extends AbstractRestControllerTestCase
     public function testGetWithGoodId()
     {
         $user = $this->createUser();
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $this->routeMatch->setParam('id', $user->getId());
 
         $result = $this->controller->dispatch($this->request, $this->response);
@@ -208,7 +208,7 @@ v     *
      */
     public function testDeleteUserWithWrongId()
     {
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1);
 
@@ -225,7 +225,7 @@ v     *
     public function testDeleteUser()
     {
         $user = $this->createUser();
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', $user->getId());
 
@@ -241,7 +241,7 @@ v     *
      */
     public function testUpdateUserWithoutUser()
     {
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', 1);
 
@@ -258,7 +258,7 @@ v     *
     public function testUpdateUserWithInvalidData()
     {
         $user = $this->createUser();
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $user->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
@@ -291,7 +291,7 @@ v     *
     public function testUpdateUserWithValidData()
     {
         $user = $this->createUser();
-        $this->setUpRoute('admin/config/user');
+        $this->setUpRoute('config/user');
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', $user->getId());
         $this->request->getHeaders()->addHeaderLine('Content-Type: application/json');
