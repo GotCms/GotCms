@@ -108,7 +108,7 @@ Please follow instructions, there are only five steps:
 - Database connection
 - Configuration
 
-Administration page is accessible by typing /admin after your installation path (i.e : http://yourdomain.tld/admin)
+Administration page is accessible by typing /backend after your installation path (i.e : http://yourdomain.tld/backend)
 
 Then you can manage your website, create documents, documents types, datatypes, views, layouts, scripts, ...
 

@@ -116,6 +116,16 @@ return array(
     ),
     'router' => array(
         'routes' => array(
+            'install' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/install',
+                    'defaults' => array(
+                        'module'     => 'gcbackend',
+                        'controller' => 'InstallController',
+                    ),
+                ),
+            ),
             'admin' => array(
                 'type'    => 'Literal',
                 'options' => array(

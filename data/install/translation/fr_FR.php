@@ -251,7 +251,7 @@ return array (
     'Confirm admin password' => 'Confirmation du mot de passe',
     'Default template' => 'Design par défaut',
     'The request has been stopped, please refresh the page' => 'La requête a été stoppée, merci de rafraîchir la page',
-    'Installation complete. Please refresh or go to /admin page to manage your website.' => 'Installation terminée. Merci de rafraîchir la page ou d\'aller sur la page /admin afin de gérer votre site internet.',
+    'Installation complete. Please refresh or go to /backend page to manage your website.' => 'Installation terminée. Merci de rafraîchir la page ou d\'aller sur la page /backend afin de gérer votre site internet.',
     'The installation is being completed' => 'L\'installation est en train de se terminer',
     'Dashboard' => 'Tableau de bord',
     'General' => 'Général',

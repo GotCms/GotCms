@@ -75,42 +75,14 @@ class Action extends AbstractActionController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $resultResponse = $this->construct();
-        if (!empty($resultResponse)) {
-            return $resultResponse;
-        }
-
-        $resultResponse = $this->init();
-        if (!empty($resultResponse)) {
-            return $resultResponse;
-        }
-
-        return parent::onDispatch($e);
-    }
-
-    /**
-     * Initiliaze
-     *
-     * @return mixed
-     */
-    public function init()
-    {
-
-    }
-
-    /**
-     * Installation check, and check on removal of the install directory.
-     *
-     * @return \Zend\Http\Response|null
-     */
-    protected function construct()
-    {
         $config = $this->getServiceLocator()->get('Config');
         if (!isset($config['db'])
             and !in_array($this->getRouteMatch()->getMatchedRouteName(), $this->installerRoutes)
         ) {
             return $this->redirect()->toRoute('install');
         }
+
+        return parent::onDispatch($e);
     }
 
     /**

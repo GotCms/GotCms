@@ -138,7 +138,7 @@ return array (
     'Create users and roles' => 'Создание пользователей и ролей',
     'Install template' => 'Установка шаблона',
     'Create configuration file' => 'Создание файла конфигурации',
-    'Installation complete. Please refresh or go to /admin page to manage your website.' => 'Установка завершена. Обновите страницу или перейдите на страницу "ваш сайт"/admin для управления сайтом',
+    'Installation complete. Please refresh or go to /backend page to manage your website.' => 'Установка завершена. Обновите страницу или перейдите на страницу "ваш сайт" /backend для управления сайтом',
     'Paste' => 'Вставить',
     'Properties' => 'Свойства',
     'Quit' => 'Выход',

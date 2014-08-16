@@ -57,6 +57,9 @@ class ActionTest extends TestCase
         $this->object = new Action;
         $this->object->setEvent(Registry::get('Application')->getMvcEvent());
         $this->object->setServiceLocator(Registry::get('Application')->getServiceManager());
+        $this->config    = $this->object->getServiceLocator()->get('Config');
+        $this->oldConfig = $this->object->getServiceLocator()->get('Config');
+        $this->object->getServiceLocator()->setAllowOverride(true);
     }
 
     /**
@@ -67,7 +70,7 @@ class ActionTest extends TestCase
      */
     protected function tearDown()
     {
-        unset($this->object);
+        $this->object->getServiceLocator()->setService('Config', $this->oldConfig);
     }
 
     /**
@@ -75,155 +78,8 @@ class ActionTest extends TestCase
      *
      * @return void
      */
-    public function testOnDispatchWithoutIdentity()
+    public function testOnDispatch()
     {
-        $this->object->getEvent()->setRouteMatch(new RouteMatch(array('controller' => 'controller')));
-        $this->object->dispatch(Registry::get('Application')->getRequest(), null);
-
-        $routeMatch = new RouteMatch(array());
-        $routeMatch->setMatchedRouteName('content');
-        $this->object->getEvent()->setRouteMatch($routeMatch);
-        $this->assertInstanceOf(
-            'Zend\Http\PhpEnvironment\Response',
-            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
-        );
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testOnDispatchWithoutIdentityAndUserLoginRoute()
-    {
-        $routeMatch = new RouteMatch(
-            array(
-                'module' => 'Config',
-                'controller' => 'UserController',
-                'action' => 'login',
-            )
-        );
-        $routeMatch->setMatchedRouteName('backend/login');
-        $this->object->getEvent()->setRouteMatch($routeMatch);
-        $this->assertInstanceOf(
-            'Zend\View\Model\ViewModel',
-            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
-        );
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testOnDispatchWithoutIdentityAndLoginPage()
-    {
-        $this->object->getEvent()->setRouteMatch(new RouteMatch(array('controller' => 'controller')));
-        $this->object->dispatch(Registry::get('Application')->getRequest(), null);
-
-        $routeMatch = new RouteMatch(array());
-        $routeMatch->setMatchedRouteName('content');
-        $this->object->getEvent()->setRouteMatch($routeMatch);
-        $this->assertInstanceOf(
-            'Zend\Http\PhpEnvironment\Response',
-            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
-        );
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    /* public function testOnDispatchWithoutConfigFile() */
-    /* { */
-    /*     $config    = $this->object->getServiceLocator()->get('Config'); */
-    /*     $oldConfig = $config; */
-    /*     unset($config['db']); */
-    /*     $this->object->getServiceLocator()->setAllowOverride(true); */
-    /*     $this->object->getServiceLocator()->setService('Config', $config); */
-    /*     $this->assertInstanceOf( */
-    /*         'Zend\Http\PhpEnvironment\Response', */
-    /*         $this->object->dispatch(Registry::get('Application')->getRequest(), null) */
-    /*     ); */
-    /*     $this->object->getServiceLocator()->setService('Config', $oldConfig); */
-    /*     $this->object->getServiceLocator()->setAllowOverride(false); */
-    /* } */
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    /* public function testOnDispatchWithIdentity() */
-    /* { */
-    /*     $userModel = UserModel::fromArray( */
-    /*         array( */
-    /*             'lastname' => 'Test', */
-    /*             'firstname' => 'Test', */
-    /*             'email' => 'pierre.rambaud86@gmail.com', */
-    /*             'login' => 'login-test', */
-    /*             'user_acl_role_id' => 2, */
-    /*             'active' => true */
-    /*         ) */
-    /*     ); */
-
-    /*     $userModel->setPassword('password-test'); */
-    /*     $userModel->save(); */
-    /*     $userModel->authenticate('login-test', 'password-test'); */
-
-
-    /*     $routeMatch = new RouteMatch(array()); */
-    /*     $routeMatch->setMatchedRouteName('cms'); */
-    /*     $this->object->getEvent()->setRouteMatch($routeMatch); */
-
-    /*     $this->object->setAcl( */
-    /*         array( */
-    /*             'resource' => 'development', */
-    /*             'permission' => 'view' */
-    /*         ) */
-    /*     ); */
-    /*     $this->assertInstanceOf( */
-    /*         'Zend\Http\PhpEnvironment\Response', */
-    /*         $this->object->dispatch(Registry::get('Application')->getRequest(), null) */
-    /*     ); */
-
-    /*     $this->object->setAcl( */
-    /*         array( */
-    /*             'resource' => 'modules', */
-    /*             'permission' => 'view' */
-    /*         ) */
-    /*     ); */
-    /*     $this->assertInstanceOf( */
-    /*         'Zend\Http\PhpEnvironment\Response', */
-    /*         $this->object->dispatch(Registry::get('Application')->getRequest(), null) */
-    /*     ); */
-
-    /*     $userModel->delete(); */
-    /* } */
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testOnDispatchWithIdentityAndAdminRole()
-    {
-        $userModel = UserModel::fromArray(
-            array(
-                'lastname' => 'Test',
-                'firstname' => 'Test',
-                'email' => 'pierre.rambaud86@gmail.com',
-                'login' => 'login-test',
-                'user_acl_role_id' => 1,
-            )
-        );
-
-        $userModel->setPassword('password-test');
-        $userModel->save();
-        $userModel->authenticate('login-test', 'password-test');
-
-
         $routeMatch = new RouteMatch(array());
         $routeMatch->setMatchedRouteName('cms');
         $this->object->getEvent()->setRouteMatch($routeMatch);
@@ -231,8 +87,25 @@ class ActionTest extends TestCase
             'Zend\View\Model\ViewModel',
             $this->object->dispatch(Registry::get('Application')->getRequest(), null)
         );
+    }
 
-        $userModel->delete();
+    /**
+     * Test
+     *
+     * @return void
+     */
+    public function testOnDispatchWithoutConfig()
+    {
+        unset($this->config['db']);
+        $this->object->getServiceLocator()->setService('Config', $this->config);
+
+        $routeMatch = new RouteMatch(array());
+        $routeMatch->setMatchedRouteName('cms');
+        $this->object->getEvent()->setRouteMatch($routeMatch);
+        $this->assertInstanceOf(
+            'Zend\Http\PhpEnvironment\Response',
+            $this->object->dispatch(Registry::get('Application')->getRequest(), null)
+        );
     }
 
     /**
@@ -246,45 +119,4 @@ class ActionTest extends TestCase
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $this->object->getRouteMatch());
     }
 
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testGetSession()
-    {
-        $this->assertInstanceOf('Zend\Session\Container', $this->object->getSession());
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testReturnJson()
-    {
-        $this->assertInstanceOf('Zend\View\Model\JsonModel', $this->object->returnJson(array()));
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testEvents()
-    {
-        $this->assertInstanceOf('Gc\Event\StaticEventManager', $this->object->events());
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testUseflashMessenger()
-    {
-        $this->object->flashMessenger()->addInfoMessage('Test');
-        $this->assertNull($this->object->useFlashMessenger(false));
-        $this->assertNull($this->object->useFlashMessenger(true));
-    }
 }
