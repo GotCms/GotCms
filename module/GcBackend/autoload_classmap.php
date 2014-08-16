@@ -26,7 +26,8 @@
  */
 
 return array(
-    'GcBackend\Controller\DashboardRestController'      => __DIR__ . '/src/GcBackend/Controller/DashboardRestController.php',
+    'GcBackend\Controller\DashboardRestController'      =>
+        __DIR__ . '/src/GcBackend/Controller/DashboardRestController.php',
     'GcBackend\Controller\AuthenticationRestController' =>
         __DIR__ . '/src/GcBackend/Controller/AuthenticationRestController.php',
     'GcBackend\Module'                                  => __DIR__ . '/Module.php',
