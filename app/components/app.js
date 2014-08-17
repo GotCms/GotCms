@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module("GotCms", [
+    "ngResource",
     "ngRoute",
-    "GotCms.Route",
-    "GotCms.Home",
+    "GotCms.GcBackend",
     "GotCms.Foo"
 ]);

@@ -1,15 +1,15 @@
 "use strict";
 
-describe("Home module", function () {
+describe("GcBackend module", function () {
 
-    beforeEach(module("GotCms.Home"));
+    beforeEach(module("GotCms.GcBackend"));
 
-    describe("HomeCtrl", function() {
+    describe("GcBackendCtrl", function() {
         var scope, ctrl;
 
         beforeEach(inject(function($rootScope, $controller) {
             scope = $rootScope.$new();
-            ctrl  = $controller("HomeCtrl", {$scope: scope});
+            ctrl  = $controller("GcBackendCtrl", {$scope: scope});
         }));
 
         it('ensure the title is set', function() {

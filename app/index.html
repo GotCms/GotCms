@@ -1,21 +1,35 @@
-<!DOCTYPE html>
-<html ng-app="MyApp">
-  <head lang="en">
-    <meta charset="UTF-8">
-    <title>Angular-Skeleton</title>
+<!doctype html>
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="utf-8">
+    <meta name="description" content="">
+    <title>Admin panel - GotCms</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- build:css(.tmp) assets/css/app.min.css -->
     <link rel="stylesheet" href="assets/css/app.css"/>
+    <link rel="stylesheet" href="assets/bootstrap-sass-official/assets/stylesheets/bootstrap.css"/>
     <!-- endbuild -->
   </head>
   <body>
+    <header>
+      <ng-include src="'components/gcbackend/partials/navigation.html'"></ng-include>
+    </header>
 
-    <ul class="inline-list">
-      <li><a id="home-link" href="#/">Go to index</a></li>
-      <li><a id="foo-link" href="#/foo">Go to foo</a></li>
-    </ul>
+    <div class="main-container container">
+      <div class="col-lg-12">
+        <ng-include src="'components/gcbackend/partials/messages.html'"></ng-include>
+        <div class="page-content">
+          <ng-view></ng-view>
+        </div>
+      </div>
+    </div>
 
-    <ng-view></ng-view>
+    <a class="btn-scroll-up btn btn-small btn-inverse" id="btn-scroll-up" href="#">
+      <i class="glyphicon glyphicon-open"></i>
+    </a>
 
     <!-- build:js assets/js/lib.min.js -->
     <script src="bower_components/angular/angular.js"></script>
@@ -24,10 +38,9 @@
 
     <!-- build:js assets/js/app.min.js -->
     <script src="components/app.js"></script>
-    <script src="components/route/src/route.js"></script>
-    <script src="components/route/src/routeConfig.js"></script>
-    <script src="components/home/src/home.js"></script>
-    <script src="components/home/src/homeCtrl.js"></script>
+    <script src="components/gcbackend/src/gcbackend.js"></script>
+    <script src="components/gcbackend/src/route.js"></script>
+    <script src="components/gcbackend/src/gcbackendCtrl.js"></script>
     <script src="components/foo/src/foo.js"></script>
     <script src="components/foo/src/fooCtrl.js"></script>
     <!-- endbuild -->

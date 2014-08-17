@@ -11,12 +11,17 @@ var gulp       = require("gulp"),
     uglify     = require("gulp-uglify"),
     sass       = require("gulp-sass"),
     minifyCss  = require("gulp-minify-css"),
+    rename     = require("gulp-rename"),
     usemin     = require("gulp-usemin"),
     karma      = require("karma").server,
     spawn      = require("child_process").spawn,
     readline   = require("readline");
 
 var appConf = {
+    root: {
+        dev: ".tmp/assets",
+        integration: "public/backend"
+    },
     servers: {
         dev: {
             root: ["app", ".tmp"],
@@ -29,10 +34,20 @@ var appConf = {
         }
     },
     files: {
+        all: [
+            ".tmp/assets/**/*.*",
+            "!.tmp/assets/**/*.{js,css}"
+        ],
         html: ["app/**/*.html"],
         sass: [
             "app/assets/**/*.scss",
             "app/bower_components/**/*.scss"
+        ],
+        fonts: [
+            "app/**/*.eot",
+            "app/**/*.ttf",
+            "app/**/*.svg",
+            "app/**/*.woff",
         ],
         img: ["app/assets/**/*.{png,jpg,jpeg}"],
         js: {
@@ -73,8 +88,12 @@ gulp.task("integrationServer", function() {
     connect.server(appConf.servers.integration);
 });
 
-gulp.task("clean", function(callback) {
-    del([".tmp", "public/backend"], callback);
+gulp.task("cleanTmp", function(callback) {
+    del([".tmp"], callback);
+});
+
+gulp.task("cleanBackend", function(callback) {
+    del([appConf.root.integration], callback);
 });
 
 gulp.task("html", function() {
@@ -84,13 +103,23 @@ gulp.task("html", function() {
 
 gulp.task("images", function() {
     return gulp.src(appConf.files.img)
+        .pipe(gulp.dest(appConf.root.dev))
         .pipe(connect.reload());
 });
 
-gulp.task("sass", ["clean"], function() {
+gulp.task("sass", ["cleanTmp"], function() {
     return gulp.src(appConf.files.sass)
         .pipe(sass())
-        .pipe(gulp.dest(".tmp/assets/"))
+        .pipe(gulp.dest(appConf.root.dev))
+        .pipe(connect.reload());
+});
+
+gulp.task("fonts", ["cleanTmp"], function() {
+    return gulp.src(appConf.files.fonts)
+        .pipe(rename(function(path) {
+            path.dirname = path.dirname.replace('bower_components', '');
+        }))
+        .pipe(gulp.dest(appConf.root.dev))
         .pipe(connect.reload());
 });
 
@@ -110,7 +139,9 @@ gulp.task("watch", function() {
     gulp.watch(appConf.files.js.all, ["jshint"]);
     gulp.watch(appConf.files.js.test, ["karma"]);
     gulp.watch(appConf.files.js.src, ["js"]);
+    gulp.watch(appConf.files.fonts, ["fonts"]);
     gulp.watch(appConf.files.img, ["images"]);
+    gulp.watch(appConf.files.fonts, ["fonts"]);
     gulp.watch(appConf.files.sass, ["sass"]);
 });
 
@@ -147,13 +178,22 @@ gulp.task("e2e", ["build", "integrationServer"], function() {
     });
 });
 
-gulp.task("build", ["sass"], function() {
+gulp.task("build", ["cleanBackend", "sass", "fonts", "images"], function() {
+    gulp.src(appConf.files.all)
+        .pipe(rename(function(path) {
+            path.dirname = path.dirname.replace(/^([^\/]*)(.*)$/, '$2');
+        }))
+        .pipe(gulp.dest(appConf.root.integration));
+
+    gulp.src(appConf.files.img)
+        .pipe(gulp.dest(appConf.root.integration + '/assets'));
+
     return gulp.src(appConf.files.html)
         .pipe(usemin({
             css: [minifyCss(), rev()],
             js: [uglify(), rev()]
         }))
-        .pipe(gulp.dest("public/backend/"));
+        .pipe(gulp.dest(appConf.root.integration));
 });
 
-gulp.task("default", ["devServer", "watch", "images", "sass", "js", "html"]);
+gulp.task("default", ["devServer", "watch", "images", "sass", "fonts", "js", "html"]);

@@ -1,22 +1,35 @@
-<!DOCTYPE html>
-<html ng-app="MyApp">
-  <head lang="en">
-    <meta charset="UTF-8">
-    <title>Angular-Skeleton</title>
+<!doctype html>
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="utf-8">
+    <meta name="description" content="">
+    <title>Admin panel - GotCms</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="assets/css/app.min-cf9257a0.css"/>
+    <link rel="stylesheet" href="assets/css/app.min-37d99243.css"/>
   </head>
   <body>
+    <header>
+      <ng-include src="'components/gcbackend/partials/navigation.html'"></ng-include>
+    </header>
 
-    <ul class="inline-list">
-      <li><a id="home-link" href="#/">Go to index</a></li>
-      <li><a id="foo-link" href="#/foo">Go to foo</a></li>
-    </ul>
+    <div class="main-container container">
+      <div class="col-lg-12">
+        <ng-include src="'components/gcbackend/partials/messages.html'"></ng-include>
+        <div class="page-content">
+          <ng-view></ng-view>
+        </div>
+      </div>
+    </div>
 
-    <ng-view></ng-view>
+    <a class="btn-scroll-up btn btn-small btn-inverse" id="btn-scroll-up" href="#">
+      <i class="glyphicon glyphicon-open"></i>
+    </a>
 
     <script src="assets/js/lib.min-170adfdd.js"></script>
 
-    <script src="assets/js/app.min-6e1e40b7.js"></script>
+    <script src="assets/js/app.min-6757da6e.js"></script>
   </body>
 </html>
