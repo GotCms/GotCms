@@ -70,6 +70,7 @@ var karmaConf = {
         "app/bower_components/angular/angular.js",
         "app/bower_components/angular-route/angular-route.js",
         "app/bower_components/angular-mocks/angular-mocks.js",
+        "app/bower_components/angular-http-auth/src/http-auth-interceptor.js",
         "app/components/app.js",
         "app/components/**/src/*.js",
         "app/components/**/tests/*.spec.js"
@@ -89,7 +90,7 @@ gulp.task("integrationServer", function() {
 });
 
 gulp.task("cleanTmp", function(callback) {
-    del([".tmp"], callback);
+    del([".tmp"], {"sync": true}, callback);
 });
 
 gulp.task("cleanBackend", function(callback) {
@@ -101,7 +102,7 @@ gulp.task("html", function() {
         .pipe(connect.reload());
 });
 
-gulp.task("images", function() {
+gulp.task("images", ["cleanTmp"], function() {
     return gulp.src(appConf.files.img)
         .pipe(gulp.dest(appConf.root.dev))
         .pipe(connect.reload());
@@ -141,8 +142,8 @@ gulp.task("watch", function() {
     gulp.watch(appConf.files.js.src, ["js"]);
     gulp.watch(appConf.files.fonts, ["fonts"]);
     gulp.watch(appConf.files.img, ["images"]);
-    gulp.watch(appConf.files.fonts, ["fonts"]);
     gulp.watch(appConf.files.sass, ["sass"]);
+    gulp.watch(appConf.files.fonts, ["fonts"]);
 });
 
 gulp.task("webdriver-start", function() {

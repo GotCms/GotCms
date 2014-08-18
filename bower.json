@@ -19,9 +19,13 @@
         "tests"
     ],
     "dependencies": {
-        "angular": "~1.2.20",
-        "angular-route": "~1.2.20",
-        "bootstrap-sass-official": "~3.2.0"
+        "angular": "~1.2.x",
+        "angular-route": "~1.2.x",
+        "angular-resource": "~1.2.x",
+        "angular-http-auth": "~1.2.x",
+        "angular-mocks": "~1.2.x",
+        "bootstrap-sass-official": "~3.2.0",
+        "angular-bootstrap": "~0.11.0"
     },
     "devDependencies": {
         "angular-scenario": "~1.2.20",
