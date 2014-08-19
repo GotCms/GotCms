@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="GotCms">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="assets/bootstrap-sass-official/assets/stylesheets/bootstrap.css"/>
     <!-- endbuild -->
   </head>
-  <body ng-class="{page: 'one-page'}[pageType]">
+  <body ng-class="{onePage: 'one-page'}[pageType]">
     <ng-switch on="pageType">
       <div ng-switch-when="one-page">
         <div class="container">
@@ -68,8 +68,6 @@
     <script src="components/gcbackend/src/gcbackend.js"></script>
     <script src="components/gcbackend/src/route.js"></script>
     <script src="components/gcbackend/src/gcbackendCtrl.js"></script>
-    <script src="components/foo/src/foo.js"></script>
-    <script src="components/foo/src/fooCtrl.js"></script>
     <!-- endbuild -->
   </body>
 </html>

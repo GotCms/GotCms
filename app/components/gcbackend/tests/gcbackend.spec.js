@@ -11,9 +11,5 @@ describe("GcBackend module", function () {
             scope = $rootScope.$new();
             ctrl  = $controller("GcBackendCtrl", {$scope: scope});
         }));
-
-        it('ensure the title is set', function() {
-            expect(ctrl.title).toBe("This is the home view!");
-        });
     });
 });

@@ -2,6 +2,7 @@
 
 var gcbackend = angular.module("GotCms.GcBackend");
 
-gcbackend.controller("GcBackendCtrl", [function() {
-    this.title = "This is the home view!";
-}]);
+gcbackend.controller("GcBackendCtrl", function($scope) {
+    $scope.title = "test";
+    $scope.pageType = "onePage";
+});

@@ -8,12 +8,19 @@ route.config([
         $routeProvider
             .when("/", {
                 controller: "GcBackendCtrl",
+                action: "admin",
                 templateUrl: "components/gcbackend/partials/index.html"
             })
             .when("/login", {
                 controller: "GcBackendLoginCtrl",
-                templateUrl: "components/foo/partials/login.html"
+                action: "login",
+                templateUrl: "components/gcbackend/partials/login.html"
             })
-            .otherwise({redirectTo: "/"});
+            .when("/404", {
+                controller: "GcBackend404Ctrl",
+                controllerAs: "404",
+                templateUrl: "components/gcbackend/partials/404.html"
+            })
+            .otherwise({redirectTo: "/404"});
     }
 ]);
