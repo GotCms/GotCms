@@ -11,14 +11,6 @@ angular.module("GotCms", [
 angular.module("GotCms").config(["$provide", "$httpProvider", function ($provide, $httpProvider) {
     $provide.factory('httpInterceptor', ["$q", function ($q) {
         return {
-            request: function (config) {
-                /** @TODO get backend url **/
-                if (!/^\/?(components|languages)/.test(config.url)) {
-                    config.url = 'http://got-cms.dev/' + config.url.replace(/^\//g, '');
-                }
-
-                return config;
-            },
             response: function (response) {
                 return response || $q.when(response);
             },

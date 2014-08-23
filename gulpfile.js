@@ -6,6 +6,7 @@ var gulp       = require("gulp"),
     _          = require("lodash"),
     del        = require("del"),
     connect    = require("gulp-connect"),
+    rewrite    = require("connect-modrewrite"),
     jshint     = require("gulp-jshint"),
     stylish    = require("jshint-stylish"),
     uglify     = require("gulp-uglify"),
@@ -25,6 +26,13 @@ var appConf = {
     servers: {
         dev: {
             root: ["app", ".tmp"],
+            middleware: function() {
+                return [
+                    rewrite([
+                        '^/?(backend/.*)$ http://got-cms.dev/$1 [P]'
+                    ])
+                ];
+            },
             port: 8000,
             livereload: true
         },
@@ -136,7 +144,7 @@ gulp.task("js", ["karma"], function() {
         .pipe(connect.reload());
 });
 
-gulp.task("languages", ["cleanTmp"], function() {
+gulp.task("languages", function() {
     return gulp.src(appConf.files.languages)
         .pipe(connect.reload());
 });
