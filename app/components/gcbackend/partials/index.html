@@ -1,1 +1,93 @@
-<h1>This is {{ title }}</h1>
+<div class="dashboard" ng-class="{hide: dashboardWelcome == false}" id="dashboard">
+  <a href="#close" class="dashboard-close floatR">{{ 'CLOSE' | translate }}</a>
+
+  <div class="dashboard-content">
+    <h3>{{ 'WELCOME_MESSAGE' | translate }}</h3>
+    <p class="about-description">{{ 'WELCOME_INTRODUCTIONN' | translate }}</p>
+    <div class="dashboard-column-container">
+
+      <p class="dashboard-dismiss">
+        {{ 'You know what you do?' | translate }}
+        <a href="#close" class="dashboard-close">{{ 'CLOSE' | translate }}</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 widget-column">
+    <div class="widget-box" id="fast-links">
+      <div class="widget-header">
+        <span>{{ 'FAST_LINKS' | translate }}</span>
+      </div>
+      <div class="widget-body">
+        <ul>
+          <li><a href="#/content/document/create">{{ 'CREATE_DOCUMENT' | translate }}</a></li>
+          <li><a href="#/config/user">{{ 'USER_LIST' | translate }}</a></li>
+          <li><a href="#/config/general">{{ 'GENERAL_CONFIG' | translate }}</a></li>
+          <li><a href="#/content/translation/create">{{ 'ADD_TRANSLATION' | translate }}</a></li>
+          <li><a href="#/content/media">{{ 'FILE_MANAGER' | translate }}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div ng-repeat="widget in widgets">
+      <div ng-if="widget.id && widget.title && widget.content" class="widget-box" id="{{ widget.id }}">
+        <div class="widget-header">
+          <span>{{ widget.title | translate }}</span>
+        </div>
+        <div class="widget-body">
+          {{ widget.content }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 widget-column">
+    <div class="widget-box" id="stats">
+      <div class="widget-header">
+        <span>{{ 'STATS' | translate }}</span>
+      </div>
+      <div class="widget-body">
+        <div class="row">
+          <div class="col-lg-6 col-sm-12">
+            <p class="sub">{{ 'CONTENT' | translate }}</p>
+            <table class="table table-striped table-bordered">
+              <tbody>
+                <tr ng-repeat="stat in contentStats">
+                  <td class="first">
+                    {{ stat.count }}
+                  </td>
+                  <td>
+                    {{ stat.label }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <p class="sub">{{ 'STATS' | translate }}</p>
+            <table class="table table-striped table-bordered">
+              <tbody>
+                <tr ng-repeat="stat in userStats">
+                  <td class="first">
+                    {{ stat.count }}
+                  </td>
+                  <td>
+                    {{ stat.label }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="version">
+          <span>
+            {{ 'GOTCMS_VERSION' | translate:{value: version} }}
+            <a ng-if="!versionIsLatest" class="button" href="config/cms-update">{{ 'GOTCMS_UPDATE' | translate:{value: value} }}</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

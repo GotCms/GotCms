@@ -1,8 +1,1 @@
-<div class="notification type">
-  <a class="close" href="#">
-    <img alt="Close" title="Close this notification" src="assets/img/close-small.png">
-  </a>
-  <div>
-    Messages
-  </div>
-</div>
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>

@@ -8,14 +8,16 @@
     <title>Admin panel - GotCms</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
     <!-- build:css(.tmp) assets/css/app.min.css -->
-    <link rel="stylesheet" href="assets/css/app.css"/>
     <link rel="stylesheet" href="assets/bootstrap-sass-official/assets/stylesheets/bootstrap.css"/>
+    <link rel="stylesheet" href="assets/css/app.css"/>
     <!-- endbuild -->
   </head>
-  <body ng-class="{onePage: 'one-page'}[pageType]">
+  <body id="module-{{ moduleName }}" ng-class="{'one-page': pageType == 'onePage'}">
     <ng-switch on="pageType">
-      <div ng-switch-when="one-page">
+      <div ng-switch-when="onePage">
         <div class="container">
           <div class="main-content">
             <div class="row">
@@ -42,6 +44,7 @@
 
         <div class="main-container container">
           <div class="col-lg-12">
+            <ng-include src="'components/gcbackend/partials/breadcrumb.html'"></ng-include>
             <ng-include src="'components/gcbackend/partials/messages.html'"></ng-include>
             <div class="page-content">
               <ng-view></ng-view>
@@ -59,6 +62,8 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
     <!-- endbuild -->

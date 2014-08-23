@@ -31,6 +31,7 @@ use Gc\Document\Collection;
 use Gc\Mvc\Controller\RestAction;
 use Gc\User\Visitor;
 use Gc\Version;
+use Zend\Json\Json;
 
 /**
  * Index controller for admin module
@@ -58,13 +59,11 @@ class DashboardRestController extends RestAction
         $contentStats['online_documents'] = array(
             'count' => count($documents->getAvailableDocuments()),
             'label' => 'Online documents',
-            'route' => 'content',
         );
 
         $contentStats['total_documents'] = array(
             'count' => count($documents->select()->toArray()),
             'label' => 'Total documents',
-            'route' => 'content',
         );
 
         $data['contentStats'] = $contentStats;
@@ -74,12 +73,10 @@ class DashboardRestController extends RestAction
             'total_visitors' => array(
                 'count' => $visitorModel->getTotalVisitors(),
                 'label' => 'Total visitors',
-                'route' => 'statistics',
             ),
             'total_visits' => array(
                 'count' => $visitorModel->getTotalPageViews(),
                 'label' => 'Total page views',
-                'route' => 'statistics',
             ),
         );
 

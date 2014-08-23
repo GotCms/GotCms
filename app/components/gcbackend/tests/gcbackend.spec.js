@@ -2,7 +2,7 @@
 
 describe("GcBackend module", function () {
 
-    beforeEach(module("GotCms.GcBackend"));
+    beforeEach(module("GcBackend"));
 
     describe("GcBackendCtrl", function() {
         var scope, ctrl;
@@ -11,5 +11,9 @@ describe("GcBackend module", function () {
             scope = $rootScope.$new();
             ctrl  = $controller("GcBackendCtrl", {$scope: scope});
         }));
+
+        it("should say something", function() {
+
+        });
     });
 });

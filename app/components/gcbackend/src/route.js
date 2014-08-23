@@ -1,6 +1,6 @@
 "use strict";
 
-var route = angular.module("GotCms.GcBackend");
+var route = angular.module("GcBackend");
 
 route.config([
     "$routeProvider",
@@ -8,17 +8,17 @@ route.config([
         $routeProvider
             .when("/", {
                 controller: "GcBackendCtrl",
-                action: "admin",
+                controllerAs: "Dashboard",
                 templateUrl: "components/gcbackend/partials/index.html"
             })
             .when("/login", {
                 controller: "GcBackendLoginCtrl",
-                action: "login",
+                controllerAs: "Login",
                 templateUrl: "components/gcbackend/partials/login.html"
             })
             .when("/404", {
                 controller: "GcBackend404Ctrl",
-                controllerAs: "404",
+                controllerAs: "NotFound",
                 templateUrl: "components/gcbackend/partials/404.html"
             })
             .otherwise({redirectTo: "/404"});

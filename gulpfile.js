@@ -39,6 +39,7 @@ var appConf = {
             "!.tmp/assets/**/*.{js,css}"
         ],
         html: ["app/**/*.html"],
+        languages: ["app/languages/**/*"],
         sass: [
             "app/assets/**/*.scss",
             "app/bower_components/**/*.scss"
@@ -135,8 +136,14 @@ gulp.task("js", ["karma"], function() {
         .pipe(connect.reload());
 });
 
+gulp.task("languages", ["cleanTmp"], function() {
+    return gulp.src(appConf.files.languages)
+        .pipe(connect.reload());
+});
+
 gulp.task("watch", function() {
     gulp.watch(appConf.files.html, ["html"]);
+    gulp.watch(appConf.files.html, ["languages"]);
     gulp.watch(appConf.files.js.all, ["jshint"]);
     gulp.watch(appConf.files.js.test, ["karma"]);
     gulp.watch(appConf.files.js.src, ["js"]);
@@ -179,7 +186,7 @@ gulp.task("e2e", ["build", "integrationServer"], function() {
     });
 });
 
-gulp.task("build", ["cleanBackend", "sass", "fonts", "images"], function() {
+gulp.task("build", ["cleanBackend", "sass", "fonts", "images", "languages"], function() {
     gulp.src(appConf.files.all)
         .pipe(rename(function(path) {
             path.dirname = path.dirname.replace(/^([^\/]*)(.*)$/, '$2');
@@ -188,6 +195,9 @@ gulp.task("build", ["cleanBackend", "sass", "fonts", "images"], function() {
 
     gulp.src(appConf.files.img)
         .pipe(gulp.dest(appConf.root.integration + '/assets'));
+
+    gulp.src(appConf.files.languages)
+        .pipe(gulp.dest(appConf.root.integration + '/languages'));
 
     return gulp.src(appConf.files.html)
         .pipe(usemin({
