@@ -9,7 +9,8 @@ route.config([
             .when("/", {
                 controller: "GcBackendCtrl",
                 controllerAs: "Dashboard",
-                templateUrl: "components/gcbackend/partials/index.html"
+                templateUrl: "components/gcbackend/partials/index.html",
+                label: "DASHBOARD"
             })
             .when("/login", {
                 controller: "GcBackendLoginCtrl",

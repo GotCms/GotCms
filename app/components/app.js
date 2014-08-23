@@ -3,6 +3,7 @@
 angular.module("GotCms", [
     "ngResource",
     "ngRoute",
+    "ng-breadcrumbs",
     "http-auth-interceptor",
     "pascalprecht.translate",
     "GcBackend"

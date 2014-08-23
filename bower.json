@@ -27,7 +27,8 @@
     "bootstrap-sass-official": "~3.2.0",
     "angular-bootstrap": "~0.11.0",
     "angular-translate": "~2.2",
-    "angular-translate-loader-static-files": "~2.2.0"
+    "angular-translate-loader-static-files": "~2.2.0",
+    "ng-breadcrumbs": "~0.1.2"
   },
   "devDependencies": {
     "angular-scenario": "~1.2.20",

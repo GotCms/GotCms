@@ -44,7 +44,23 @@
 
         <div class="main-container container">
           <div class="col-lg-12">
-            <ng-include src="'components/gcbackend/partials/breadcrumb.html'"></ng-include>
+            <div id="breadcrumbs" class="breadcrumbs">
+              <div id="menu-toggler-container" class="hidden-lg">
+                <span id="menu-toggler">
+                  <i class="glyphicon glyphicon-new-window"></i>
+                  <span class="menu-toggler-text">{{ MENU | translate }}</span>
+                </span>
+              </div>
+              <ul class="breadcrumb">
+                <li ng-repeat="bcPage in breadcrumbs.get()">
+                  <i condition="$first" class="glyphicon glyphicon-home home-icon"></i>
+
+                  <a href="{{bcPage.path}}" ng-show="!$last">{{ bcPage.label | translate }}</a>
+                  <span ng-show="$last">{{ bcPage.label }}</span>
+                </li>
+              </ul>
+            </div>
+
             <ng-include src="'components/gcbackend/partials/messages.html'"></ng-include>
             <div class="page-content">
               <ng-view></ng-view>
@@ -65,6 +81,7 @@
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+    <script src="bower_components/ng-breadcrumbs/dist/ng-breadcrumbs.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
     <!-- endbuild -->
 
