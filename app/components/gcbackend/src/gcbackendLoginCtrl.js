@@ -2,6 +2,6 @@
 
 var gcbackend = angular.module("GcBackend");
 
-gcbackend.controller("GcBackendLoginCtrl", ["$rootScope", "$http", function($rootScope, $http) {
+gcbackend.controller("GcBackendLoginCtrl", ["$rootScope", function($rootScope) {
     $rootScope.pageType = "onePage";
 }]);

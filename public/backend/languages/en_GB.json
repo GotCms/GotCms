@@ -46,6 +46,7 @@
     "IS_OFFLINE": "Is offline",
     "LASTNAME": "Lastname",
     "LAYOUTS": "Layouts",
+    "MENU": "Menu",
     "GOTCMS_UPDATE": "Update to GotCms {{ value }}",
     "GOTCMS_VERSION": "You use GotCms {{ value }}",
     "USER_LIST": "User list",

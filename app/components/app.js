@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("GotCms", [
+var gotcms = angular.module("GotCms", [
     "ngResource",
     "ngRoute",
     "ng-breadcrumbs",
@@ -9,7 +9,7 @@ angular.module("GotCms", [
     "GcBackend"
 ]);
 
-angular.module("GotCms").config(["$provide", "$httpProvider", function ($provide, $httpProvider) {
+gotcms.config(["$provide", "$httpProvider", function ($provide, $httpProvider) {
     $provide.factory('httpInterceptor', ["$q", function ($q) {
         return {
             response: function (response) {
@@ -27,11 +27,19 @@ angular.module("GotCms").config(["$provide", "$httpProvider", function ($provide
     $httpProvider.interceptors.push('httpInterceptor');
 }]);
 
-angular.module("GotCms").config(['$translateProvider', function ($translateProvider) {
+gotcms.config(['$translateProvider', function ($translateProvider) {
     $translateProvider.useStaticFilesLoader({
         prefix: 'languages/',
         suffix: '.json'
     });
 
     $translateProvider.preferredLanguage('en_GB');
+}]);
+
+gotcms.directive("gcBreadcrumbs", ["$rootScope", "breadcrumbs", function($rootScope, breadcrumbs) {
+    $rootScope.breadcrumbs = breadcrumbs;
+    return {
+        restrict: "AE",
+        templateUrl: "components/gcbackend/partials/breadcrumbs.html"
+    };
 }]);
