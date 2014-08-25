@@ -6,7 +6,12 @@ var gotcms = angular.module("GotCms", [
     "ng-breadcrumbs",
     "http-auth-interceptor",
     "pascalprecht.translate",
-    "GcBackend"
+    "GcBackend",
+    "GcContent",
+    "GcConfig",
+    "GcDevelopment",
+    "GcModules",
+    "GcStats"
 ]);
 
 gotcms.config(["$provide", "$httpProvider", function ($provide, $httpProvider) {

@@ -7,9 +7,9 @@
   </div>
   <ul class="breadcrumb">
     <li ng-repeat="bcPage in breadcrumbs.get()">
-      <i condition="$first" class="glyphicon glyphicon-home home-icon"></i>
+      <i ng-show="$first" class="glyphicon glyphicon-home home-icon"></i>
       <a href="{{bcPage.path}}" ng-show="!$last">{{ bcPage.label | translate }}</a>
-      <span ng-show="$last">{{ bcPage.label }}</span>
+      <span ng-show="$last">{{ bcPage.label | translate }}</span>
     </li>
   </ul>
 </div>

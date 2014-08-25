@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gotcms-main-menu">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">{{ 'TOGGLE_NAV' | translate }}</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="#/admin" class="navbar-brand">
+      <a href="#/" class="navbar-brand">
         <span class="glyphicon glyphicon-flash"></span>
         GotCms Admin
       </a>
@@ -16,41 +16,41 @@
     <div class="collapse navbar-collapse" id="gotcms-main-menu">
       <ul class="nav navbar-nav">
         <li>
-          <a href="#/admin" title="Dashboard">
-            <span class="glyphicon glyphicon-dashboard"></span> Dashboard
+          <a href="#/" title="{{ 'DASHBOARD' | translate }}">
+            <span class="glyphicon glyphicon-dashboard"></span> {{ 'DASHBOARD' | translate }}
           </a>
         </li>
         <li>
-          <a href="#/content" title="Content">
-            <span class="glyphicon glyphicon-edit"></span> Content
+          <a href="#/content" title="{{ 'CONTENT' | translate }}">
+            <span class="glyphicon glyphicon-edit"></span> {{ 'CONTENT' | translate }}
           </a>
         </li>
         <li>
-          <a href="#/development" title="Development">
-            <span class="glyphicon glyphicon-list-alt"></span> Development
+          <a href="#/development" title="{{ 'DEVELOPMENT' | translate }}">
+            <span class="glyphicon glyphicon-list-alt"></span> {{ 'DEVELOPMENT' | translate }}
           </a>
         </li>
         <li>
-          <a href="#/module" title="Modules">
-            <span class="glyphicon glyphicon-link"></span> Modules
+          <a href="#/module" title="{{ 'MODULES' | translate }}">
+            <span class="glyphicon glyphicon-link"></span> {{ 'MODULES' | translate }}
           </a>
         </li>
         <li>
-          <a href="#/statistics" title="Stats">
-            <span class="glyphicon glyphicon-stats"></span> Stats
+          <a href="#/statistics" title="{{ 'STATS' | translate }}">
+            <span class="glyphicon glyphicon-stats"></span> {{ 'STATS' | translate }}
           </a>
         </li>
         <li>
-          <a href="#/config" title="Configuration">
-            <span class="glyphicon glyphicon-cog"></span> Configuration
+          <a href="#/config" title="{{ 'CONFIG' | translate }}">
+            <span class="glyphicon glyphicon-cog"></span> {{ 'CONFIG' | translate }}
           </a>
         </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="#/config/user/logout" class="" title="Logout">
-            <span class="glyphicon glyphicon-off"></span> Logout
+          <a href="#/logout" class="" title="{{ 'LOGOUT' | translate }}">
+            <span class="glyphicon glyphicon-off"></span> {{ 'LOGOUT' | translate }}
           </a>
         </li>
       </ul>
