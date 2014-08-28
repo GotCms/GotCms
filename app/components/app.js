@@ -15,7 +15,7 @@ var gotcms = angular.module("GotCms", [
 ]);
 
 gotcms.config(["$provide", "$httpProvider", function ($provide, $httpProvider) {
-    $provide.factory('httpInterceptor', ["$q", function ($q) {
+    $provide.factory("httpInterceptor", ["$q", function ($q) {
         return {
             response: function (response) {
                 return response || $q.when(response);
@@ -29,16 +29,16 @@ gotcms.config(["$provide", "$httpProvider", function ($provide, $httpProvider) {
             }
         };
     }]);
-    $httpProvider.interceptors.push('httpInterceptor');
+    $httpProvider.interceptors.push("httpInterceptor");
 }]);
 
-gotcms.config(['$translateProvider', function ($translateProvider) {
+gotcms.config(["$translateProvider", function ($translateProvider) {
     $translateProvider.useStaticFilesLoader({
-        prefix: 'languages/',
-        suffix: '.json'
+        prefix: "languages/",
+        suffix: ".json"
     });
 
-    $translateProvider.preferredLanguage('en_GB');
+    $translateProvider.preferredLanguage("en_GB");
 }]);
 
 gotcms.directive("gcBreadcrumbs", ["$rootScope", "breadcrumbs", function($rootScope, breadcrumbs) {

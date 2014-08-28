@@ -6,10 +6,10 @@
     </span>
   </div>
   <ul class="breadcrumb">
-    <li ng-repeat="bcPage in breadcrumbs.get()">
+    <li ng-repeat="bcPage in breadcrumbs.get()" ng-class="{active: $last}">
       <i ng-show="$first" class="glyphicon glyphicon-home home-icon"></i>
-      <a href="{{bcPage.path}}" ng-show="!$last">{{ bcPage.label | translate }}</a>
-      <span ng-show="$last">{{ bcPage.label | translate }}</span>
+      <a href="{{bcPage.path}}" ng-show="!$last"> {{ bcPage.label | translate }}</a>
+      <span ng-show="$last"> {{ bcPage.label | translate }}</span>
     </li>
   </ul>
 </div>

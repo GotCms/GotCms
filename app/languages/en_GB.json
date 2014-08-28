@@ -15,9 +15,16 @@
     "COOKIE_PATH": "Cookie path",
     "COPY": "Copy",
     "CONTENT_TEXT_INDEX": "You can create, edit, copy, cut and paste document by right-clicking on Website or children documents.",
+    "CONTENT_VIEWS": "Create, edit, and delete views. Insert in document types, if you want to get and use property write: $this->propertyIdentifier",
+    "CONTENT_VIEWS2": "There's lot of Helper you can use. Those Zend Framework and GotCms, refer to documentation if you want more information.",
+    "CONTENT_LAYOUTS": "Work like views, you can get properties, use helpers, and if you want to integrate children (view) write: $this->content.",
+    "CONTENT_DATATYPES": "Data can be stored in. Create your own datatype, edit configuration and insert it in document type.",
+    "CONTENT_DOCUMENT_TYPES": "This is a document pattern. Sort by tabs, insert datatypes and specify availables views.",
+    "CONTENT_SCRIPTS": "Work like Zend Framework controllers, you can get the request, response and controller plugins.",
     "CONFIG": "Configuration",
     "CREATE": "Create",
     "CREATE_DOCUMENT": "Create document",
+    "CREATE_DEVELOPMENT": "Make the M.V.C be with you",
     "CREATE_WEBSITE": "Create your own website",
     "CREATE_EDIT_DELETE_USERS": "Create, edit, and delete users.",
     "CREATE_EDIT_DELETE_VIEWS": "Create, edit, and delete views.",
@@ -60,5 +67,8 @@
     "USE_PARENT_CONFIG": "-- Use parent configuration",
     "STATS": "Statistics",
     "TOGGLE_NAV": "Toggle navigation",
-    "TRANSLATIONS": "Translations"
+    "TRANSLATIONS": "Translations",
+    "VIEWS": "Views",
+    "SCRIPTS": "Scripts"
+
 }
