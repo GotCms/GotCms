@@ -95,7 +95,7 @@ function Template($body)
         $.each($data, function(index, value)
         {
             var $regexp,
-                $exp = '#\\{' + index + '\\}';
+                $exp = '(#|&#x23;)(\\{|&#x7B;)' + index + '(\\}|&#x7D;)';
 
             $regexp = new RegExp($exp, "gi");
             $content = $content.replace($regexp, value);
