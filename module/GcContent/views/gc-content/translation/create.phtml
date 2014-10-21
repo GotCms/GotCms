@@ -77,7 +77,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-    Gc.setOption('locale', $.parseJSON('<?php echo $this->json($locales); ?>'));
+    Gc.setOption('locale', $.parseJSON('<?php echo $this->escapeJs($this->json($locales)); ?>'));
     Gc.initTranslator();
     Gc.saveCommand();
     Gc.checkDataChanged();
