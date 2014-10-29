@@ -12,7 +12,6 @@ Master status: [![Build Status](https://travis-ci.org/GotCms/GotCms.png?branch=m
 * This product has been made available under the terms of the GNU Lesser General Public License version 3.
 * Please read the [LICENSE.txt](https://github.com/GotCms/GotCms/blob/master/LICENSE.txt) file for the exact license details that apply to GotCms.
 * See [features](http://got-cms.com/discover/features)
-* Try out [online demo](http://got-cms.com/discover/demo)
 
 ## Release information
 
