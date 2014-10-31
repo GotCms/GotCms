@@ -79,6 +79,7 @@ final class Version
                 $client = new Client(
                     $url,
                     array(
+                        'adatper' => 'Zend\Http\Client\Adapter\Curl',
                         'timeout'      => 2,
                         'ssltransport' => STREAM_CRYPTO_METHOD_TLS_CLIENT,
                         'sslverifypeer' => false

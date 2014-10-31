@@ -80,6 +80,7 @@ Make sure read and write access are available by apache user/group for these dir
 - FileInfo support
 - Mbstring support
 - Json support
+- Curl support
 - PDO support
 - A database supported by PDO.
     - MySQL
