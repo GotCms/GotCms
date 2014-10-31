@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.5.1 (-- --- 2014)
+- Update to Zend Framework 2.3.3 ([https://github.com/GotCms/GotCms/issues/270](https://github.com/GotCms/GotCms/issues/270))
+
 ## 1.5.0 (30 Oct 2014)
 - Missing label for Datepicker datatype ([https://github.com/GotCms/GotCms/issues/259](https://github.com/GotCms/GotCms/issues/259))
 - Add language choice in document information to force translation in document ([https://github.com/GotCms/GotCms/issues/30](https://github.com/GotCms/GotCms/issues/30))
