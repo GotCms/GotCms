@@ -16,7 +16,7 @@
                         <div class="comment-meta commentmetadata"><?php echo $this->escapeHtml(date('Y-m-d \a\t h:i:s A', strtotime($comment['created_at']))); ?></div>
                     </div>
                     <div class="comment_text">
-                        <p><?php echo $this->escapeHtml($comment['message']); ?></p>
+                        <p><?php echo nl2br($this->escapeHtml($comment['message'])); ?></p>
                     </div>
                 </div>
             </li>
