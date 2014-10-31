@@ -62,6 +62,7 @@ class AbstractController extends Action
             'paste' => 'content/document/paste',
             'publish' => 'content/document/publish',
             'unpublish' => 'content/document/unpublish',
+            'refresh' => 'content/document/refresh-treeview',
         );
 
         $arrayRoutes = array();

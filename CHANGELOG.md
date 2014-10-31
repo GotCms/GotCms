@@ -3,6 +3,7 @@
 ## 1.5.1 (-- --- 2014)
 - Update to Zend Framework 2.3.3 ([https://github.com/GotCms/GotCms/issues/270](https://github.com/GotCms/GotCms/issues/270))
 - Use curl support for Zend\Http\Client connection ([https://github.com/GotCms/GotCms/issues/271](https://github.com/GotCms/GotCms/issues/271))
+- Cut option not working ([https://github.com/GotCms/GotCms/issues/272](https://github.com/GotCms/GotCms/issues/272))
 
 ## 1.5.0 (30 Oct 2014)
 - Missing label for Datepicker datatype ([https://github.com/GotCms/GotCms/issues/259](https://github.com/GotCms/GotCms/issues/259))

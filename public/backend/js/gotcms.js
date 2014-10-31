@@ -505,11 +505,14 @@ var Gc = (function($)
                             'sep1': '---------',
                             'cut': {name: Translator.translate('Cut'), icon: 'cut'},
                             'copy': {name: Translator.translate('Copy'), icon: 'copy'},
-                            'paste': {name: Translator.translate('Paste'), icon: 'paste', disabled: true},
+                            'paste': {name: Translator.translate('Paste'), icon: 'paste',
+                                      disabled: ($this.getOption('lastAction') === 'paste' ||
+                                                 $this.getOption('lastAction') === undefined)},
                             'sep2': '---------',
                             'refresh': {name: Translator.translate('Refresh'), icon: 'refresh'},
                             'quit': {name: Translator.translate('Quit'), icon: 'quit'}
                         };
+
 
                         if ($trigger.hasClass('not-published')) {
                             delete($items.unpublish);
@@ -559,7 +562,6 @@ var Gc = (function($)
                             /* falls through */
                         case 'cut':
                             $this.setOption('lastAction', $action);
-                            $options.items.paste.disabled = false;
                             /* falls through */
                         case 'paste':
                             if($this.getOption('lastAction') === 'copy' && $displayCopyForm === true) {
@@ -573,13 +575,7 @@ var Gc = (function($)
                                 data: {},
                                 success: function(data) {
                                     if(data.success === true) {
-                                        if($action === 'copy' || $action === 'cut') {
-                                            $options.items.paste.disabled = false;
-                                        }
-
                                         if($action === 'paste' && $this.getOption('lastAction') === 'cut') {
-                                            $options.items.paste.disabled = true;
-
                                             $this.refreshTreeview($routes.refresh.replace('itemId', 0), 0);
                                         }
                                     }
