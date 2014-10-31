@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.5.1 (-- --- 2014)
+## 1.5.1 (31 Oct 2014)
 - Update to Zend Framework 2.3.3 ([https://github.com/GotCms/GotCms/issues/270](https://github.com/GotCms/GotCms/issues/270))
 - Use curl support for Zend\Http\Client connection ([https://github.com/GotCms/GotCms/issues/271](https://github.com/GotCms/GotCms/issues/271))
 - Cut option not working ([https://github.com/GotCms/GotCms/issues/272](https://github.com/GotCms/GotCms/issues/272))
