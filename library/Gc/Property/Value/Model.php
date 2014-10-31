@@ -125,10 +125,15 @@ class Model extends AbstractTable
     {
         $this->events()->trigger(__CLASS__, 'before.save', $this);
         $arraySave = array(
-            'value' => $this->getValue(),
             'document_id' => $this->getDocumentId(),
             'property_id' => $this->getPropertyId(),
         );
+
+        if ($this->getDriverName() == 'pdo_pgsql') {
+            $arraySave['value'] = pg_escape_bytea($this->getValue());
+        } else {
+            $arraySave['value'] = $this->getValue();
+        }
 
         try {
             $id = $this->getId();
