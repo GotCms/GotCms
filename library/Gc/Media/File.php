@@ -237,6 +237,10 @@ class File extends Object
     public static function isWritable($directory, $excludeDirectory = array())
     {
         $folder = opendir($directory);
+        if (!is_resource($folder)) {
+            return false;
+        }
+
         while (false !== ($file = readdir($folder))) {
             $path = $directory . '/' . $file;
             if (!in_array($file, array('.', '..')) and !in_array($path, $excludeDirectory)) {
