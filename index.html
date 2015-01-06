@@ -39,7 +39,7 @@
         </div>
 
         <h1>
-<a name="gotcms---information" class="anchor" href="#gotcms---information"><span class="octicon octicon-link"></span></a>GotCms - Information</h1>
+<a id="gotcms---information" class="anchor" href="#gotcms---information" aria-hidden="true"><span class="octicon octicon-link"></span></a>GotCms - Information</h1>
 
 <p>Master status: <a href="https://travis-ci.org/GotCms/GotCms"><img src="https://travis-ci.org/GotCms/GotCms.png?branch=master" alt="Build Status"></a>
 <a href="https://coveralls.io/r/GotCms/GotCms"><img src="https://coveralls.io/repos/GotCms/GotCms/badge.png" alt="Coverage Status"></a>
@@ -47,36 +47,36 @@
 <a href="https://scrutinizer-ci.com/g/GotCms/GotCms/"><img src="https://scrutinizer-ci.com/g/GotCms/GotCms/badges/quality-score.png?s=fa6f300890dac808070c12b50a9f7d19859ca9ec" alt="Scrutinizer Code Quality"></a></p>
 
 <h2>
-<a name="about-gotcms" class="anchor" href="#about-gotcms"><span class="octicon octicon-link"></span></a>About GotCms</h2>
+<a id="about-gotcms" class="anchor" href="#about-gotcms" aria-hidden="true"><span class="octicon octicon-link"></span></a>About GotCms</h2>
 
 <ul>
-<li>GotCms is a <strong>Content Management System</strong> (CMS) based on <a href="http://framework.zend.com/">Zend Framework 2.3.0</a> which enables you to build websites and powerful online applications.</li>
+<li>GotCms is a <strong>Content Management System</strong> (CMS) based on <a href="http://framework.zend.com/">Zend Framework 2.3.3</a> which enables you to build websites and powerful online applications.</li>
 <li>GotCms <a href="http://got-cms.com">Official site</a>
 </li>
 <li>This product has been made available under the terms of the GNU Lesser General Public License version 3.</li>
 <li>Please read the <a href="https://github.com/GotCms/GotCms/blob/master/LICENSE.txt">LICENSE.txt</a> file for the exact license details that apply to GotCms.</li>
 <li>See <a href="http://got-cms.com/discover/features">features</a>
 </li>
-<li>Try out <a href="http://got-cms.com/discover/demo">online demo</a>
-</li>
-</ul><h2>
-<a name="release-information" class="anchor" href="#release-information"><span class="octicon octicon-link"></span></a>Release information</h2>
+</ul>
+
+<h2>
+<a id="release-information" class="anchor" href="#release-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Release information</h2>
 
 <h3>
-<a name="updates-in-130" class="anchor" href="#updates-in-130"><span class="octicon octicon-link"></span></a>Updates in 1.3.0</h3>
+<a id="updates-in-151" class="anchor" href="#updates-in-151" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updates in 1.5.1</h3>
 
 <p>Please see <a href="https://github.com/GotCms/GotCms/blob/master/CHANGELOG.md">CHANGELOG.md</a>.</p>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <h3>
-<a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>Download</h3>
+<a id="download" class="anchor" href="#download" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download</h3>
 
 <p>Composer:</p>
 
 <pre><code>$ curl -s https://getcomposer.org/installer | php
-$ php composer.phar create-project gotcms/gotcms path/ 1.3.0
+$ php composer.phar create-project gotcms/gotcms path/ 1.5.1
 </code></pre>
 
 <p>Git:</p>
@@ -86,10 +86,10 @@ $ php composer.phar create-project gotcms/gotcms path/ 1.3.0
 
 <p>Zip archive:</p>
 
-<p><a href="https://github.com/GotCms/GotCms/archive/1.3.0.zip">https://github.com/GotCms/GotCms/archive/1.3.0.zip</a></p>
+<p><a href="https://github.com/GotCms/GotCms/archive/1.5.1.zip">https://github.com/GotCms/GotCms/archive/1.5.1.zip</a></p>
 
 <h3>
-<a name="apache-configuration" class="anchor" href="#apache-configuration"><span class="octicon octicon-link"></span></a>Apache configuration</h3>
+<a id="apache-configuration" class="anchor" href="#apache-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Apache configuration</h3>
 
 <p>If you want to use VirtualHost, copy the .htaccess content otherwise check if "AllowOverride" is set to "All".</p>
 
@@ -122,8 +122,10 @@ $ php composer.phar create-project gotcms/gotcms path/ 1.3.0
 <li>public/frontend</li>
 <li>public/media</li>
 <li>data/cache</li>
-</ul><h3>
-<a name="required" class="anchor" href="#required"><span class="octicon octicon-link"></span></a>Required</h3>
+</ul>
+
+<h3>
+<a id="required" class="anchor" href="#required" aria-hidden="true"><span class="octicon octicon-link"></span></a>Required</h3>
 
 <ul>
 <li>An HTTP server</li>
@@ -132,8 +134,8 @@ $ php composer.phar create-project gotcms/gotcms path/ 1.3.0
 <li>FileInfo support</li>
 <li>Mbstring support</li>
 <li>Json support</li>
+<li>Curl support</li>
 <li>PDO support</li>
-<li>Intl support</li>
 <li>A database supported by PDO.
 
 <ul>
@@ -141,8 +143,10 @@ $ php composer.phar create-project gotcms/gotcms path/ 1.3.0
 <li>PostgreSQL</li>
 </ul>
 </li>
-</ul><h3>
-<a name="recommended" class="anchor" href="#recommended"><span class="octicon octicon-link"></span></a>Recommended</h3>
+</ul>
+
+<h3>
+<a id="recommended" class="anchor" href="#recommended" aria-hidden="true"><span class="octicon octicon-link"></span></a>Recommended</h3>
 
 <p>Actually only tested with Apache HTTP server.
 Php configuration:</p>
@@ -154,8 +158,10 @@ Php configuration:</p>
 <li>Magic Quotes GPC: Off</li>
 <li>Register Globals: Off</li>
 <li>Session Auto Start: Off</li>
-</ul><h3>
-<a name="instructions" class="anchor" href="#instructions"><span class="octicon octicon-link"></span></a>Instructions</h3>
+</ul>
+
+<h3>
+<a id="instructions" class="anchor" href="#instructions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instructions</h3>
 
 <p>Go to the website, it will redirect you to /install.
 Please follow instructions, there are only five steps:</p>
@@ -166,14 +172,16 @@ Please follow instructions, there are only five steps:</p>
 <li>Pre-configuration</li>
 <li>Database connection</li>
 <li>Configuration</li>
-</ul><p>Administration page is accessible by typing /admin after your installation path (i.e : <a href="http://yourdomain.tld/admin">http://yourdomain.tld/admin</a>)</p>
+</ul>
+
+<p>Administration page is accessible by typing /admin after your installation path (i.e : <a href="http://yourdomain.tld/admin">http://yourdomain.tld/admin</a>)</p>
 
 <p>Then you can manage your website, create documents, documents types, datatypes, views, layouts, scripts, ...</p>
 
 <p>All contents are stored in database.</p>
 
 <h3>
-<a name="troubleshooting" class="anchor" href="#troubleshooting"><span class="octicon octicon-link"></span></a>TROUBLESHOOTING</h3>
+<a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><span class="octicon octicon-link"></span></a>TROUBLESHOOTING</h3>
 
 <p>On Windows with wampserver, if you encounter an <code>403 Forbidden</code>:</p>
 
@@ -193,17 +201,15 @@ Please follow instructions, there are only five steps:</p>
 </code></pre>
 
 <h2>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
 <p>If you wish to contribute to GotCms, please read the
 <a href="https://github.com/GotCms/GotCms/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
 
 <h2>
-<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
 
 <p>Please visits the best framework ever : <a href="http://framework.zend.com/">Zend Framework 2</a></p>
-
-<p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/GotCms/gotcms/trend.png" alt="Bitdeli Badge"></a></p>
       </section>
 
     </div>
