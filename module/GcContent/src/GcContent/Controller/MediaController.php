@@ -95,7 +95,7 @@ class MediaController extends AbstractController
         }
 
         if (!empty($files)) {
-            return $this->returnJson($files);
+            return $this->returnJson(array('files' => $files));
         }
 
         return $this->returnJson(array('error' => true));

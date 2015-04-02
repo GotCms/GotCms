@@ -3,6 +3,8 @@
 ## 1.5.2 (02 Apr 2015)
 - Configuration file failed when mysql driver isn't installed
 - Update to Zend Framework 2.4.0 ([https://github.com/GotCms/GotCms/issues/280](https://github.com/GotCms/GotCms/issues/280))
+- jQueryFileUpload - image upload error ([https://github.com/GotCms/GotCms/issues/276](https://github.com/GotCms/GotCms/issues/276))
+
 
 ## 1.5.1 (31 Oct 2014)
 - Update to Zend Framework 2.3.3 ([https://github.com/GotCms/GotCms/issues/270](https://github.com/GotCms/GotCms/issues/270))

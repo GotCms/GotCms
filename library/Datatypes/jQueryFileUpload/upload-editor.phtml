@@ -27,45 +27,56 @@
  /** @var $this \Zend\View\Renderer\PhpRenderer */
 
 ?>
-<div id="<?php echo $this->name; ?>">
-    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+<div class="col-lg-2">
+    <label><?php echo $this->escapeHtml($this->translate($this->property->getName())); ?></label>
+    <?php if ($this->property->isRequired()): ?>
+        <p class="text-danger pull-right">(<?php echo $this->escapeHtml($this->translate('Mandatory')); ?>)</p>
+    <?php endif; ?>
+
+    <?php if ($this->property->getDescription()): ?>
+        <p class="help-block"><?php echo $this->escapeHtml($this->translate($this->property->getDescription())); ?></p>
+    <?php endif; ?>
+</div>
+
+<div class="col-lg-10">
+  <div id="<?php echo $this->name; ?>">
     <div class="row fileupload-buttonbar">
-        <div class="span7">
-            <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="btn btn-success fileinput-button">
-                <i class="icon-plus icon-white"></i>
-                <span><?php echo $this->escapeHtml($this->translate('Add files...')); ?></span>
-                <input class="control-form" type="file" name="files[]" multiple autocomplete="off">
-            </span>
-            <button type="submit" class="btn btn-primary start">
-                <i class="icon-upload icon-white"></i>
-                <span><?php echo $this->escapeHtml($this->translate('Start upload')); ?></span>
-            </button>
-            <button type="reset" class="btn btn-warning cancel">
-                <i class="icon-ban-circle icon-white"></i>
-                <span><?php echo $this->escapeHtml($this->translate('Cancel upload')); ?></span>
-            </button>
-            <button type="button" class="btn btn-danger delete">
-                <i class="icon-trash icon-white"></i>
-                <span><?php echo $this->escapeHtml($this->translate('Delete')); ?></span>
-            </button>
-            <input type="checkbox" class="toggle">
+      <div class="span7">
+        <span class="btn btn-success fileinput-button">
+          <i class="glyphicon glyphicon-plus"></i>
+          <span><?php echo $this->escapeHtml($this->translate('Add files...')); ?></span>
+          <input class="control-form" type="file" name="files[]" multiple autocomplete="off">
+        </span>
+        <button type="submit" class="btn btn-primary start">
+          <i class="glyphicon glyphicon-upload"></i>
+         <span><?php echo $this->escapeHtml($this->translate('Start upload')); ?></span>
+        </button>
+        <button type="reset" class="btn btn-warning cancel">
+          <i class="glyphicon glyphicon-ban-circle"></i>
+          <span><?php echo $this->escapeHtml($this->translate('Cancel upload')); ?></span>
+        </button>
+        <button type="button" class="btn btn-danger delete">
+          <i class="glyphicon glyphicon-trash"></i>
+          <span><?php echo $this->escapeHtml($this->translate('Delete')); ?></span>
+        </button>
+
+        <input type="checkbox" class="toggle">
+        <span class="fileupload-process"></span>
+      </div>
+
+      <div class="col-lg-5 fileupload-progress fade">
+        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar progress-bar-success" style="width:0%;"></div>
         </div>
-        <!-- The global progress information -->
-        <div class="span5 fileupload-progress fade">
-            <!-- The global progress bar -->
-            <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                <div class="bar" style="width:0%;"></div>
-            </div>
-            <!-- The extended global progress information -->
-            <div class="progress-extended">&nbsp;</div>
-        </div>
+        <div class="progress-extended">&nbsp;</div>
+      </div>
     </div>
-    <!-- The loading indicator is shown during file processing -->
+
     <div class="fileupload-loading"></div>
     <br>
-    <!-- The table listing the files available for upload/download -->
+
     <table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -80,6 +91,7 @@
 
             previewMaxWidth:        80,
             previewMaxHeight:       80,
+            previewCrop:            true,
             url:                    '<?php echo $this->escapeJs($this->uploadUrl); ?>',
             uploadTemplateId:       null,
             downloadTemplateId:     null,
@@ -162,14 +174,14 @@
         });
 
         // Load existing files:
-        $('#<?php echo $this->name; ?>').each(function () {
+        $('#<?php echo $this->name; ?>').each(function() {
             var $this = $(this);
             var result = $.parseJSON('<?php echo $this->files; ?>');
             if (result && result.length) {
                 <?php if (empty($this->options['maxNumberOfFiles'])): ?>
                     $this.fileupload('option', 'maxNumberOfFiles', 0);
                 <?php endif; ?>
-                $this.fileupload('option', 'done').call(this, null, {result: result});
+                $this.fileupload('option', 'done').call($this, $.Event(null), {result: {files: result}});
             }
         });
 

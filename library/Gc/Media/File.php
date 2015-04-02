@@ -141,7 +141,12 @@ class File extends Object
                 )
             );
 
-            if ($this->getFileTransfer()->receive($fileName)) {
+            $validator = $this->getFileTransfer()->getValidator('Upload');
+            if (!empty($validator)) {
+                $validator->setFiles($this->getFileTransfer()->getFileInfo($fileName))->getFiles();
+            }
+
+            if ($this->getFileTransfer()->receive($key)) {
                 $files = $this->getFileTransfer()->getFileInfo($key);
                 foreach ($files as $fileData) {
                     $fileObject                  = array();

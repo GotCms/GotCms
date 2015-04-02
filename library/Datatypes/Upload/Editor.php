@@ -60,7 +60,6 @@ class Editor extends AbstractEditor
             $fileClass->load($this->getProperty(), $this->getDatatype()->getDocument(), $this->getName());
             $fileClass->upload();
             $files = $fileClass->getFiles();
-
             if (!empty($files)) {
                 foreach ($files as $file) {
                     $name = $file['filename'];

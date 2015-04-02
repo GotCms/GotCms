@@ -146,13 +146,16 @@ class Editor extends AbstractEditor
             ->appendFile('/backend/assets/datatypes/jqueryfileupload/load-image.min.js', 'text/javascript')
             ->appendFile('/backend/assets/datatypes/jqueryfileupload/canvas-to-blob.min.js', 'text/javascript')
             ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.iframe-transport.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/locale.js', 'text/javascript')
             ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload.js', 'text/javascript')
-            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-fp.js', 'text/javascript')
-            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-ui.js', 'text/javascript')
-            ->appendFile('/backend/assets/datatypes/jqueryfileupload/locale.js', 'text/javascript');
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-process.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-image.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-audio.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-video.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-validate.js', 'text/javascript')
+            ->appendFile('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-ui.js', 'text/javascript');
 
         $headlink = $this->getHelper('HeadLink');
-        $headlink->appendStylesheet('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload-ui.css')
-            ->appendStylesheet('/backend/assets/datatypes/jqueryfileupload/jfileupload-bootstrap.css');
+        $headlink->appendStylesheet('/backend/assets/datatypes/jqueryfileupload/jquery.fileupload.css');
     }
 }
