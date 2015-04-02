@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.5.2 (02 Apr 2015)
+- Configuration file failed when mysql driver isn't installed
+
 ## 1.5.1 (31 Oct 2014)
 - Update to Zend Framework 2.3.3 ([https://github.com/GotCms/GotCms/issues/270](https://github.com/GotCms/GotCms/issues/270))
 - Use curl support for Zend\Http\Client connection ([https://github.com/GotCms/GotCms/issues/271](https://github.com/GotCms/GotCms/issues/271))

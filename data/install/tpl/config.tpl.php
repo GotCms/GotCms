@@ -24,15 +24,20 @@
  * @link     http://www.got-cms.com
  */
 
-return array(
+$db = array(
     'db' => array(
         'driver' => '__DRIVER__',
         'username' => '__USERNAME__',
         'password' => '__PASSWORD__',
         'database' => '__DATABASE__',
         'hostname' => '__HOSTNAME__',
-        'driver_options' => array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
-        ),
     ),
 );
+
+if ('__DRIVER__' == 'pdo_mysql') {
+    $db['driver_options'] = array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
+    );
+}
+
+return $db;
