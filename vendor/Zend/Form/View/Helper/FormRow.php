@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -11,6 +11,7 @@ namespace Zend\Form\View\Helper;
 
 use Zend\Form\Element\Button;
 use Zend\Form\Element\MonthSelect;
+use Zend\Form\Element\Captcha;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\LabelAwareInterface;
@@ -91,10 +92,8 @@ class FormRow extends AbstractHelper
             return $this;
         }
 
-        if ($labelPosition !== null) {
-            $this->setLabelPosition($labelPosition);
-        } elseif ($this->labelPosition === null) {
-            $this->setLabelPosition(self::LABEL_PREPEND);
+        if (is_null($labelPosition)) {
+            $labelPosition = $this->getLabelPosition();
         }
 
         if ($renderErrors !== null) {
@@ -105,17 +104,18 @@ class FormRow extends AbstractHelper
             $this->setPartial($partial);
         }
 
-        return $this->render($element);
+        return $this->render($element, $labelPosition);
     }
 
     /**
      * Utility form helper that renders a label (if it exists), an element and errors
      *
      * @param  ElementInterface $element
+     * @param  null|string      $labelPosition
      * @throws \Zend\Form\Exception\DomainException
      * @return string
      */
-    public function render(ElementInterface $element)
+    public function render(ElementInterface $element, $labelPosition = null)
     {
         $escapeHtmlHelper    = $this->getEscapeHtmlHelper();
         $labelHelper         = $this->getLabelHelper();
@@ -125,12 +125,14 @@ class FormRow extends AbstractHelper
         $label           = $element->getLabel();
         $inputErrorClass = $this->getInputErrorClass();
 
+        if (is_null($labelPosition)) {
+            $labelPosition = $this->labelPosition;
+        }
+
         if (isset($label) && '' !== $label) {
             // Translate the label
             if (null !== ($translator = $this->getTranslator())) {
-                $label = $translator->translate(
-                    $label, $this->getTranslatorTextDomain()
-                );
+                $label = $translator->translate($label, $this->getTranslatorTextDomain());
             }
         }
 
@@ -147,7 +149,7 @@ class FormRow extends AbstractHelper
                 'element'           => $element,
                 'label'             => $label,
                 'labelAttributes'   => $this->labelAttributes,
-                'labelPosition'     => $this->labelPosition,
+                'labelPosition'     => $labelPosition,
                 'renderErrors'      => $this->renderErrors,
             );
 
@@ -163,7 +165,6 @@ class FormRow extends AbstractHelper
         // hidden elements do not need a <label> -https://github.com/zendframework/zf2/issues/5607
         $type = $element->getAttribute('type');
         if (isset($label) && '' !== $label && $type !== 'hidden') {
-
             $labelAttributes = array();
 
             if ($element instanceof LabelAwareInterface) {
@@ -183,11 +184,13 @@ class FormRow extends AbstractHelper
             if ($type === 'multi_checkbox'
                 || $type === 'radio'
                 || $element instanceof MonthSelect
+                || $element instanceof Captcha
             ) {
                 $markup = sprintf(
                     '<fieldset><legend>%s</legend>%s</fieldset>',
                     $label,
-                    $elementString);
+                    $elementString
+                );
             } else {
                 // Ensure element and label will be separated if element has an `id`-attribute.
                 // If element has label option `always_wrap` it will be nested in any case.
@@ -213,7 +216,11 @@ class FormRow extends AbstractHelper
                     $labelOpen = $labelClose = $label = '';
                 }
 
-                switch ($this->labelPosition) {
+                if ($element instanceof LabelAwareInterface && $element->getLabelOption('label_position')) {
+                    $labelPosition = $element->getLabelOption('label_position');
+                }
+
+                switch ($labelPosition) {
                     case self::LABEL_PREPEND:
                         $markup = $labelOpen . $label . $elementString . $labelClose;
                         break;

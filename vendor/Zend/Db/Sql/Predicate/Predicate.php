@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -60,9 +60,9 @@ class Predicate extends PredicateSet
         if ($this->unnest == null) {
             throw new RuntimeException('Not nested');
         }
-        $unnset       = $this->unnest;
+        $unnest       = $this->unnest;
         $this->unnest = null;
-        return $unnset;
+        return $unnest;
     }
 
     /**
@@ -376,6 +376,27 @@ class Predicate extends PredicateSet
         $this->addPredicate(
             new Between($identifier, $minValue, $maxValue),
             ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
+        );
+        $this->nextPredicateCombineOperator = null;
+
+        return $this;
+    }
+
+    /**
+     * Use given predicate directly
+     *
+     * Contrary to {@link addPredicate()} this method respects formerly set
+     * AND / OR combination operator, thus allowing generic predicates to be
+     * used fluently within where chains as any other concrete predicate.
+     *
+     * @param  PredicateInterface $predicate
+     * @return Predicate
+     */
+    public function predicate(PredicateInterface $predicate)
+    {
+        $this->addPredicate(
+            $predicate,
+            $this->nextPredicateCombineOperator ?: $this->defaultCombination
         );
         $this->nextPredicateCombineOperator = null;
 

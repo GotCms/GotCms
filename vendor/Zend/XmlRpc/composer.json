@@ -8,11 +8,10 @@
     ],
     "homepage": "https://github.com/zendframework/zf2",
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Zend\\XmlRpc\\": ""
         }
     },
-    "target-dir": "Zend/XmlRpc",
     "require": {
         "php": ">=5.3.23",
         "zendframework/zend-http": "self.version",
@@ -20,6 +19,9 @@
         "zendframework/zend-server": "self.version",
         "zendframework/zend-stdlib": "self.version",
         "zendframework/zendxml": "1.*"
+    },
+    "suggest": {
+        "zendframework/zend-cache": "To support Zend\\XmlRpc\\Server\\Cache usage"
     },
     "extra": {
         "branch-alias": {

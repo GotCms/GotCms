@@ -3,18 +3,17 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Mvc;
 
 use ArrayObject;
+use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\Exception\InvalidControllerException;
 use Zend\Stdlib\ArrayUtils;
-
 
 /**
  * Default dispatch listener
@@ -38,13 +37,8 @@ use Zend\Stdlib\ArrayUtils;
  * The return value of dispatching the controller is placed into the result
  * property of the MvcEvent, and returned.
  */
-class DispatchListener implements ListenerAggregateInterface
+class DispatchListener extends AbstractListenerAggregate
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
     /**
      * Attach listeners to an event manager
      *
@@ -56,21 +50,6 @@ class DispatchListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, array($this, 'onDispatch'));
         if (function_exists('zend_monitor_custom_event_ex')) {
             $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'reportMonitorEvent'));
-        }
-    }
-
-    /**
-     * Detach listeners from an event manager
-     *
-     * @param  EventManagerInterface $events
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
         }
     }
 
@@ -240,7 +219,7 @@ class DispatchListener implements ListenerAggregateInterface
         $results = $events->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $event);
         $return  = $results->last();
         if (! $return) {
-            $return = $event->getResult();
+            return $event->getResult();
         }
 
         return $return;

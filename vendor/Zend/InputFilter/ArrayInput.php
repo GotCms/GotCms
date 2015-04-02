@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -50,11 +50,18 @@ class ArrayInput extends Input
      */
     public function isValid($context = null)
     {
-        $this->injectNotEmptyValidator();
+        if (!$this->continueIfEmpty() && !$this->allowEmpty()) {
+            $this->injectNotEmptyValidator();
+        }
         $validator = $this->getValidatorChain();
         $values    = $this->getValue();
         $result    = true;
         foreach ($values as $value) {
+            $empty = ($value === null || $value === '' || $value === array());
+            if ($empty && $this->allowEmpty() && !$this->continueIfEmpty()) {
+                $result = true;
+                continue;
+            }
             $result = $validator->isValid($value, $context);
             if (!$result) {
                 if ($this->hasFallback()) {

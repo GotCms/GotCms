@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -270,14 +270,13 @@ class Client implements ServerClient
                     $this->setTypemap($value);
                     break;
 
-                // Not used now
-                // case 'connection_timeout':
-                //     $this->connectionTimeout = $value;
-                //    break;
+                case 'connectiontimeout':
+                case 'connection_timeout':
+                    $this->connectionTimeout = $value;
+                    break;
 
                 default:
                     throw new Exception\InvalidArgumentException('Unknown SOAP client option');
-                    break;
             }
         }
 
@@ -311,7 +310,7 @@ class Client implements ServerClient
         $options['local_cert']     = $this->getHttpsCertificate();
         $options['passphrase']     = $this->getHttpsCertPassphrase();
         $options['compression']    = $this->getCompressionOptions();
-        //$options['connection_timeout'] = $this->connectionTimeout;
+        $options['connection_timeout'] = $this->connectionTimeout;
         $options['stream_context'] = $this->getStreamContext();
         $options['cache_wsdl']     = $this->getWSDLCache();
         $options['features']       = $this->getSoapFeatures();
@@ -985,7 +984,7 @@ class Client implements ServerClient
      * @param  int    $oneWay
      * @return mixed
      */
-    public function _doRequest(Client\Common $client, $request, $location,$action, $version, $oneWay = null)
+    public function _doRequest(Client\Common $client, $request, $location, $action, $version, $oneWay = null)
     {
         // Perform request as is
         if ($oneWay === null) {

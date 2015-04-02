@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -92,7 +92,7 @@ class Fault
         if (empty($message) && isset($this->internal[$code])) {
             $message = $this->internal[$code];
         } elseif (empty($message)) {
-            $message = 'Unknown error';
+            $message = $this->internal[404];
         }
         $this->setMessage($message);
     }
@@ -233,7 +233,7 @@ class Fault
             if (isset($this->internal[$code])) {
                 $message = $this->internal[$code];
             } else {
-                $message = 'Unknown Error';
+                $message = $this->internal[404];
             }
         }
 

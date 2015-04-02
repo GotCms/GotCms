@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -112,6 +112,10 @@ class ServerUrl extends AbstractHelper
         }
 
         if (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT']) {
+            if ($this->isReversedProxy()) {
+                $this->setPort(443);
+                return;
+            }
             $this->setPort($_SERVER['SERVER_PORT']);
             return;
         }
@@ -132,6 +136,7 @@ class ServerUrl extends AbstractHelper
             case (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] === true)):
             case (isset($_SERVER['HTTP_SCHEME']) && ($_SERVER['HTTP_SCHEME'] == 'https')):
             case (443 === $this->getPort()):
+            case $this->isReversedProxy():
                 $scheme = 'https';
                 break;
             default:
@@ -140,6 +145,11 @@ class ServerUrl extends AbstractHelper
         }
 
         $this->setScheme($scheme);
+    }
+
+    protected function isReversedProxy()
+    {
+        return isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https';
     }
 
     /**

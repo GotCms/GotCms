@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -177,6 +177,21 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         return $methods;
     }
 
+    public function getTraits()
+    {
+        $vals = array();
+        $traits = parent::getTraits();
+        if (! $traits) {
+            return;
+        }
+
+        foreach ($traits as $trait) {
+            $vals[] = new ClassReflection($trait->getName());
+        }
+
+        return $vals;
+    }
+
     /**
      * Get parent reflection class of reflected class
      *
@@ -230,11 +245,17 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
         return $zendReflections;
     }
 
+    /**
+     * @return string
+     */
     public function toString()
     {
         return parent::__toString();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return parent::__toString();

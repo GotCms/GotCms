@@ -200,7 +200,7 @@ class UpdaterTest extends \PHPUnit_Framework_TestCase
     public function testUpdateDatabaseWithSqlError()
     {
         Stream::register();
-        file_put_contents('zend.view://test-updater', 'SELECT FROM core_config_data');
+        file_put_contents('zend.view://test-updater', 'SELECT something FROM core_config_data');
 
         $this->object->load('git');
         $configuration = Registry::get('Application')->getServiceManager()->get('Config');

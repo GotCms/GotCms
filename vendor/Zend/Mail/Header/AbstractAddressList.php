@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -57,7 +57,7 @@ abstract class AbstractAddressList implements HeaderInterface
         }
         // split value on ","
         $fieldValue = str_replace(Headers::FOLDING, ' ', $fieldValue);
-        $values     = explode(',', $fieldValue);
+        $values     = str_getcsv($fieldValue, ',');
         array_walk(
             $values,
             function (&$value) {
@@ -67,29 +67,7 @@ abstract class AbstractAddressList implements HeaderInterface
 
         $addressList = $header->getAddressList();
         foreach ($values as $address) {
-            // split values into name/email
-            if (!preg_match('/^((?P<name>.*?)<(?P<namedEmail>[^>]+)>|(?P<email>.+))$/', $address, $matches)) {
-                // Should we raise an exception here?
-                continue;
-            }
-            $name = null;
-            if (isset($matches['name'])) {
-                $name  = trim($matches['name']);
-            }
-            if (empty($name)) {
-                $name = null;
-            }
-
-            if (isset($matches['namedEmail'])) {
-                $email = $matches['namedEmail'];
-            }
-            if (isset($matches['email'])) {
-                $email = $matches['email'];
-            }
-            $email = trim($email); // we may have leading whitespace
-
-            // populate address list
-            $addressList->add($email, $name);
+            $addressList->addFromString($address);
         }
         return $header;
     }
