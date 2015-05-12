@@ -4,7 +4,7 @@
     "license" : "LGPL-3.0",
     "require": {
         "php": ">=5.3.23",
-        "zendframework/zendframework": "2.4.0",
+        "zendframework/zendframework": "2.4.2",
         "rwoverdijk/assetmanager": "1.4.1"
     },
     "require-dev": {
