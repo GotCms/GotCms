@@ -5,8 +5,6 @@ Master status: [![Build Status](https://travis-ci.org/GotCms/GotCms.png?branch=m
 [![Latest Stable Version](https://poser.pugx.org/GotCms/GotCms/v/stable.png)](https://packagist.org/packages/GotCms/GotCms)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GotCms/GotCms/badges/quality-score.png?s=fa6f300890dac808070c12b50a9f7d19859ca9ec)](https://scrutinizer-ci.com/g/GotCms/GotCms/)
 
-**Looking for maintainer. Submit a new issue if interested.**
-
 ## About GotCms
 
 * GotCms is a **Content Management System** (CMS) based on [Zend Framework 2](http://framework.zend.com/) which enables you to build websites and powerful online applications.
