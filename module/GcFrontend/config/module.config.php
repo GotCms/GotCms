@@ -269,9 +269,6 @@ return array(
         'ca' => 'Català',
         'bal' => 'Català (Balear)',
         'zh_CN' => '中文',
-
-        'zh_HK' => '香港中文版	',
-
         'zh_TW' => '中文',
         'co' => 'corsu',
         'hr' => 'Hrvatski',
