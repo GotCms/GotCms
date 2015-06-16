@@ -60,8 +60,6 @@ abstract class AbstractTable extends Object
 
     /**
      * Initialize constructor and save instance of \Zend\Db\TableGateway\TableGateway($name) in self::$tables
-     *
-     * @return void
      */
     public function __construct()
     {

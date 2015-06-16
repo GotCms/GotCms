@@ -44,8 +44,6 @@ class Mail extends Message
      * @param string $message  Message
      * @param string $from     From
      * @param string $to       To
-     *
-     * @return void
      */
     public function __construct($encoding = null, $message = null, $from = null, $to = null)
     {

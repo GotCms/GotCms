@@ -162,8 +162,6 @@ class Registry extends ArrayObject
      *
      * @param array   $array data array
      * @param integer $flags ArrayObject flags
-     *
-     * @return Registry
      */
     public function __construct($array = array(), $flags = parent::ARRAY_AS_PROPS)
     {

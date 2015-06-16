@@ -67,8 +67,6 @@ abstract class AbstractPrevalueEditor extends Object
      * Abstract function for save Editor
      *
      * @param Datatype\AbstractDatatype $datatypeAbstract Datatype
-     *
-     * @return void
      */
     public function __construct(Datatype\AbstractDatatype $datatypeAbstract)
     {

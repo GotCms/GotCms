@@ -75,8 +75,6 @@ class Image
      * Initialize object
      *
      * @param string $filename filename
-     *
-     * @return void
      */
     public function __construct($filename = null)
     {

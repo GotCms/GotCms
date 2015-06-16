@@ -72,8 +72,6 @@ class Navigation
      *
      * @param integer $documentId   Document id
      * @param boolean $activeBranch Use active branch or not
-     *
-     * @return void
      */
     public function __construct($documentId = 0, $activeBranch = false)
     {

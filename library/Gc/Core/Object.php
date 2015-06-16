@@ -78,8 +78,6 @@ abstract class Object
 
     /**
      * Initialize constructor
-     *
-     * @return void
      */
     public function __construct()
     {

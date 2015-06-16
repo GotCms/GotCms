@@ -63,8 +63,6 @@ class CacheService implements EventManagerAwareInterface
      * Constructor
      *
      * @param \Zend\Cache\Storage\StorageInterface $cacheStorage Cache storage
-     *
-     * @return void
      */
     public function __construct(StorageInterface $cacheStorage)
     {
