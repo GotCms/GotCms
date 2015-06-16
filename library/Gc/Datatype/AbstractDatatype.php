@@ -180,7 +180,7 @@ abstract class AbstractDatatype extends AbstractTable
     /**
      * Return configuration
      *
-     * @return void
+     * @return array
      */
     public function getConfig()
     {

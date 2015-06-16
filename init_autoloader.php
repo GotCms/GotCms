@@ -44,7 +44,7 @@ if (getenv('ZF2_PATH')) { // Support for ZF2_PATH environment variable or git su
     $zfPath = 'vendor';
 }
 
-if ($zfPath) {
+if (!empty($zfPath)) {
     // Get application stack configuration
     $configuration = include 'config/application.config.php';
     if (isset($loader)) {
