@@ -226,32 +226,32 @@ class InstallController extends Action
         $phpDirective[] = array(
             'label' => 'Display Errors',
             'needed' => false,
-            'value' => ini_get('display_errors') == true
+            'value' => ini_get('display_errors') === true
         );
         $phpDirective[] = array(
             'label' => 'File Uploads',
             'needed' => true,
-            'value' => ini_get('file_uploads') == true
+            'value' => ini_get('file_uploads') === true
         );
         $phpDirective[] = array(
             'label' => 'Magic Quotes Runtime',
             'needed' => false,
-            'value' => ini_get('magic_quote_runtime') == true
+            'value' => ini_get('magic_quote_runtime') === true
         );
         $phpDirective[] = array(
             'label' => 'Magic Quotes GPC',
             'needed' => false,
-            'value' => ini_get('magic_quote_gpc') == true
+            'value' => ini_get('magic_quote_gpc') === true
         );
         $phpDirective[] = array(
             'label' => 'Register Globals',
             'needed' => false,
-            'value' => ini_get('register_globals') == true
+            'value' => ini_get('register_globals') === true
         );
         $phpDirective[] = array(
             'label' => 'Session Auto Start',
             'needed' => false,
-            'value' => ini_get('session.auto_start') == true
+            'value' => ini_get('session.auto_start') === true
         );
 
         if ($this->getRequest()->isPost()) {

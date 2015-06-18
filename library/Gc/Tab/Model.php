@@ -205,7 +205,7 @@ class Model extends AbstractTable
     /**
      * Return properties
      *
-     * @return \Gc\Property\Collection
+     * @return array
      */
     public function getProperties()
     {
