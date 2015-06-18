@@ -81,8 +81,6 @@ class AddThis extends Object
      * Constructor
      *
      * @param CoreConfig $configTable Config table
-     *
-     * @return void
      */
     public function __construct(CoreConfig $configTable = null)
     {

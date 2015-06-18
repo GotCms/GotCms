@@ -55,8 +55,6 @@ class AddThisWidget extends AbstractPlugin
 
     /**
      * Constructor, prepare addthis widget and configuration
-     *
-     * @return void
      */
     public function __construct()
     {

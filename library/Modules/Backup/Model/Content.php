@@ -56,8 +56,6 @@ class Content extends Object
      * Initialize serviceManager
      *
      * @param ServiceManager $serviceLocator Service Manager
-     *
-     * @return void
      */
     public function __construct(ServiceManager $serviceLocator)
     {

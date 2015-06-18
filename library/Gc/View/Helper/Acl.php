@@ -58,8 +58,6 @@ class Acl extends AbstractHelper
      * Constructor
      *
      * @param UserModel $user User model to retrieve Acl, role name and check permission
-     *
-     * @return void
      */
     public function __construct(UserModel $user)
     {

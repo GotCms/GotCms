@@ -73,8 +73,6 @@ class Acl extends ZendAcl\Acl
      * Initiliaze Acl
      *
      * @param UserModel $userModel User model
-     *
-     * @return void
      */
     public function __construct(UserModel $userModel)
     {

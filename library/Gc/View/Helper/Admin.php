@@ -52,8 +52,6 @@ class Admin extends AbstractHelper
      * Constructor
      *
      * @param AuthenticationService $auth Authentication service
-     *
-     * @return void
      */
     public function __construct(AuthenticationService $auth)
     {

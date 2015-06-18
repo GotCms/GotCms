@@ -55,7 +55,7 @@ class Updater extends Object
      */
     public function init()
     {
-        $this->setUpdateDirectory(GC_APPLICATION_PATH . '/data/update/' . Version::getLatest());
+        $this->setData('update_directory', GC_APPLICATION_PATH . '/data/update/' . Version::getLatest());
     }
 
     /**
