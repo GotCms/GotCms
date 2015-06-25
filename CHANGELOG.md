@@ -2,6 +2,7 @@
 
 ## 1.6.0 (-- --- 2015)
 - Remove StreamWrapper ([https://github.com/GotCms/GotCms/issues/288](https://github.com/GotCms/GotCms/issues/288))
+- [Bug] Translation editor error ([https://github.com/GotCms/GotCms/issues/284](https://github.com/GotCms/GotCms/issues/284))
 
 ## 1.5.3 (31 May 2015)
 - Update to Zend Framework 2.4.2 ([https://github.com/GotCms/GotCms/issues/281](https://github.com/GotCms/GotCms/issues/281))
