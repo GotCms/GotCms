@@ -80,7 +80,7 @@ CREATE TABLE "layout" (
 "updated_at" timestamp without time zone NOT NULL,
 "name" character varying NOT NULL,
 "identifier" character varying NOT NULL,
-"content" text,
+
 "description" character varying
 ) WITH OIDS;
 ALTER TABLE "layout" ADD CONSTRAINT "layout_pk" PRIMARY KEY("id");
@@ -182,7 +182,6 @@ CREATE TABLE "view" (
 "updated_at" timestamp without time zone NOT NULL,
 "name" character varying NOT NULL,
 "identifier" character varying,
-"content" text,
 "description" character varying
 ) WITH OIDS;
 ALTER TABLE "view" ADD CONSTRAINT "view_pk" PRIMARY KEY("id");
@@ -195,7 +194,7 @@ CREATE TABLE "script" (
 "updated_at" timestamp without time zone NOT NULL,
 "name" character varying NOT NULL,
 "identifier" character varying,
-"content" text,
+
 "description" character varying
 ) WITH OIDS;
 ALTER TABLE "script" ADD CONSTRAINT "script_pk" PRIMARY KEY("id");

@@ -104,6 +104,7 @@ class Renderer extends Object
             $this->renderer = new PhpRenderer();
             $renderer       = Registry::get('Application')->getServiceManager()->get('Zend\View\Renderer\PhpRenderer');
             $this->renderer->setHelperPluginManager(clone $renderer->getHelperPluginManager());
+            $this->renderer->setResolver(new TemplatePathStack());
         }
 
         return $this;
@@ -117,18 +118,5 @@ class Renderer extends Object
     public function getRenderer()
     {
         return $this->renderer;
-    }
-
-    /**
-     * Use view stream
-     *
-     * @return \Gc\View\Renderer
-     */
-    public function useStreamWrapper()
-    {
-        $this->renderer->setResolver(new TemplatePathStack());
-        $this->renderer->resolver()->setUseStreamWrapper(true);
-
-        return $this;
     }
 }

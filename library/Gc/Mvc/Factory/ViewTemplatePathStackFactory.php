@@ -56,8 +56,6 @@ class ViewTemplatePathStackFactory implements FactoryInterface
         $config = $serviceLocator->get('Config');
 
         $templatePathStack = new TemplatePathStack();
-        $templatePathStack->setUseStreamWrapper(true);
-
         if (is_array($config) && isset($config['view_manager'])) {
             $config = $config['view_manager'];
             if (is_array($config)) {

@@ -70,6 +70,9 @@ class Model extends AbstractTable
         $viewTable = new Model();
         $viewTable->setData($array);
         $viewTable->setOrigData();
+        if (empty($array['content'])) {
+            $viewTable->setContent($viewTable->getContent());
+        }
 
         return $viewTable;
     }
@@ -88,8 +91,7 @@ class Model extends AbstractTable
         $current   = $row->current();
         $viewTable->events()->trigger(__CLASS__, 'before.load', $viewTable);
         if (!empty($current)) {
-            $viewTable->setData((array) $current);
-            $viewTable->setOrigData();
+            $viewTable = self::fromArray((array) $current);
             $viewTable->events()->trigger(__CLASS__, 'after.load', $viewTable);
             return $viewTable;
         } else {
@@ -112,8 +114,7 @@ class Model extends AbstractTable
         $current   = $row->current();
         $viewTable->events()->trigger(__CLASS__, 'before.load', $viewTable);
         if (!empty($current)) {
-            $viewTable->setData((array) $current);
-            $viewTable->setOrigData();
+            $viewTable = self::fromArray((array) $current);
             $viewTable->events()->trigger(__CLASS__, 'after.load', $viewTable);
             return $viewTable;
         } else {
@@ -134,7 +135,6 @@ class Model extends AbstractTable
             'name'        => $this->getName(),
             'identifier'  => $this->getIdentifier(),
             'description' => $this->getDescription(),
-            'content'     => $this->getContent(),
             'updated_at'  => new Expression('NOW()'),
         );
 
@@ -152,7 +152,7 @@ class Model extends AbstractTable
                 unlink($oldFilename);
             }
 
-            file_put_contents($this->getFilePath(), $this->getContent());
+            file_put_contents($this->getFilePath(), $this->getData('content'));
             $this->events()->trigger(__CLASS__, 'after.save', $this);
 
             return $this->getId();
@@ -209,8 +209,12 @@ class Model extends AbstractTable
      *
      * @return string
      */
-    public function getFileContents()
+    public function getContent()
     {
-        return file_get_contents($this->getFilePath());
+        if (file_exists($this->getFilePath())) {
+            return file_get_contents($this->getFilePath());
+        } else {
+            return '';
+        }
     }
 }

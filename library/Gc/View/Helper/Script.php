@@ -28,7 +28,6 @@
 namespace Gc\View\Helper;
 
 use Gc\Script\Model as ScriptModel;
-use Gc\View\Stream;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\PluginManager;
@@ -81,13 +80,6 @@ class Script extends AbstractHelper
     protected $serviceManager;
 
     /**
-     * Use stream wrapper
-     *
-     * @var boolean
-     */
-    protected $useStreamWrapper;
-
-    /**
      * Constructor
      *
      * @param ServiceManager $serviceManager Service manager
@@ -98,16 +90,6 @@ class Script extends AbstractHelper
         $this->response       = $serviceManager->get('Response');
         $this->pluginManager  = $serviceManager->get('ControllerPluginManager');
         $this->serviceManager = $serviceManager;
-        $config               = $serviceManager->get('Config');
-        if (!isset($config['db'])) {
-            $this->useStreamWrapper = false;
-        } else {
-            $coreConfig             = $serviceManager->get('CoreConfig');
-            $this->useStreamWrapper = $coreConfig->getValue('stream_wrapper_is_active');
-            if ($this->useStreamWrapper) {
-                Stream::register('gc.script', false);
-            }
-        }
     }
 
     /**
@@ -126,13 +108,7 @@ class Script extends AbstractHelper
         }
 
         $this->helperScriptParameters = $params;
-        $name                         = 'script/' . $identifier;
-        if ($this->useStreamWrapper) {
-            file_put_contents('gc.script://' . $name, $script->getContent());
-            return include 'gc.script://' . $name;
-        }
-
-        return include GC_TEMPLATE_PATH . '/' . $name . '.phtml';
+        return include GC_TEMPLATE_PATH . '/script/' . $identifier . '.phtml';
     }
 
     /**

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title><?php echo $this->escapeHtml($this->pageTitle); ?></title>
+    <meta name="description" content="<?php echo $this->escapeHtml($this->pageDescription); ?>" />
+    <meta name="keywords" content="<?php echo $this->escapeHtml($this->pageKeywords); ?>" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <!-- stylesheets -->
+    <link href="/frontend/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/frontend/css/dark.css" rel="stylesheet" type="text/css" />
+    <!-- modernizr enables HTML5 elements and feature detects -->
+    <script type="text/javascript" src="/frontend/js/modernizr-1.5.min.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <!-- begin header -->
+        <header>
+            <div id="logo"><h1><a href="#">G</a>ot<a href="#">C</a>ms</h1></div>
+            <nav>
+                <?php echo $this->partial('navigation'); ?>
+            </nav>
+        </header>
+        <!-- end header -->
+
+        <!-- begin content -->
+        <div id="site_content">
+            <?php echo $this->content; ?>
+        </div>
+        <!-- end content -->
+
+        <!-- begin footer -->
+        <footer>
+            <p>Copyright &copy; 2012 PhotoArtWork. All Rights Reserved. <a href="http://www.css3templates.co.uk">Design from css3templates.co.uk</a>.</p>
+            <p><img src="/frontend/images/twitter.png" alt="twitter" />&nbsp;<img src="/frontend/images/facebook.png" alt="facebook" />&nbsp;<img src="/frontend/images/rss.png" alt="rss" /></p>
+        </footer>
+        <!-- end footer -->
+
+    </div>
+    <!-- javascript at the bottom for fast page loading -->
+    <script type="text/javascript" src="/frontend/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/frontend/js/jquery.easing-sooper.js"></script>
+    <script type="text/javascript" src="/frontend/js/jquery.sooperfish.js"></script>
+    <?php if(!empty($this->slider)): ?>
+        <script type="text/javascript" src="/frontend/js/image_fade.js"></script>
+    <?php endif; ?>
+    <!-- initialise sooperfish menu -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('ul.sf-menu').sooperfish();
+        });
+    </script>
+</body>
+</html>

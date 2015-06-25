@@ -50,4 +50,3 @@ INSERT INTO core_config_data (identifier, value) VALUES ('unsecure_cdn_base_path
 INSERT INTO core_config_data (identifier, value) VALUES ('secure_cdn_base_path', '');
 INSERT INTO core_config_data (identifier, value) VALUES ('force_backend_ssl', '');
 INSERT INTO core_config_data (identifier, value) VALUES ('force_frontend_ssl', '');
-INSERT INTO core_config_data (identifier, value) VALUES ('stream_wrapper_is_active', '0');

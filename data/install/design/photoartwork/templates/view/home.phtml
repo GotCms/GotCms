@@ -1,0 +1,10 @@
+<?php if(!empty($this->slider)): ?>
+    <ul class="slideshow">
+        <?php foreach($this->slider as $idx => $slide): ?>
+            <?php $image = $this->tools('unserialize', $slide[0]['value']); ?>
+            <?php $text = $slide[1]['value']; ?>
+
+            <li<?php if($idx == 0): ?> class="show"<?php endif; ?>><img width="<?php echo $this->escapeHtml($image['width']); ?>" height="<?php echo $this->escapeHtml($image['height']); ?>" src="<?php echo $this->escapeHtml($image['value']); ?>" alt="<?php echo $this->escapeHtml($text); ?>" /></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

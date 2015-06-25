@@ -72,6 +72,9 @@ class Model extends AbstractTable
         $layoutTable = new Model();
         $layoutTable->setData($array);
         $layoutTable->setOrigData();
+        if (empty($array['content'])) {
+            $layoutTable->setContent($layoutTable->getContent());
+        }
 
         return $layoutTable;
     }
@@ -89,8 +92,7 @@ class Model extends AbstractTable
         $row         = $layoutTable->fetchRow($layoutTable->select(array('id' => (int) $layoutId)));
         $layoutTable->events()->trigger(__CLASS__, 'before.load', $layoutTable);
         if (!empty($row)) {
-            $layoutTable->setData((array) $row);
-            $layoutTable->setOrigData();
+            $layoutTable = self::fromArray((array) $row);
             $layoutTable->events()->trigger(__CLASS__, 'after.load', $layoutTable);
             return $layoutTable;
         } else {
@@ -112,8 +114,7 @@ class Model extends AbstractTable
         $row         = $layoutTable->fetchRow($layoutTable->select(array('identifier' => $identifier)));
         $layoutTable->events()->trigger(__CLASS__, 'before.load', $layoutTable);
         if (!empty($row)) {
-            $layoutTable->setData((array) $row);
-            $layoutTable->setOrigData();
+            $layoutTable = self::fromArray((array) $row);
             $layoutTable->events()->trigger(__CLASS__, 'after.load', $layoutTable);
             return $layoutTable;
         } else {
@@ -133,7 +134,6 @@ class Model extends AbstractTable
         $arraySave = array('name' => $this->getName(),
             'identifier' => $this->getIdentifier(),
             'description' => $this->getDescription(),
-            'content' => $this->getContent(),
             'updated_at' => new Expression('NOW()')
         );
 
@@ -152,7 +152,7 @@ class Model extends AbstractTable
                 unlink($oldFilename);
             }
 
-            file_put_contents($this->getFilePath(), $this->getContent());
+            file_put_contents($this->getFilePath(), $this->getData('content'));
             $this->events()->trigger(__CLASS__, 'after.save', $this);
 
             return $this->getId();
@@ -209,8 +209,12 @@ class Model extends AbstractTable
      *
      * @return string
      */
-    public function getFileContents()
+    public function getContent()
     {
-        return file_get_contents($this->getFilePath());
+        if (file_exists($this->getFilePath())) {
+            return file_get_contents($this->getFilePath());
+        } else {
+            return '';
+        }
     }
 }

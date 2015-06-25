@@ -1,0 +1,10 @@
+<nav id="nav">
+    <?php
+        $component = new \Gc\Component\Navigation();
+        $container = new \Zend\Navigation\Navigation($component->render());
+        $this->navigation($container);
+        $document = $this->currentDocument();
+
+        echo $this->navigation()->menu()->setMaxDepth(0)->setUlClass('sf-menu navigation');
+    ?>
+</nav>

@@ -82,9 +82,12 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderWithHelperVariable()
     {
-        $template = '<?= $this->event->getParam(\'user\')->getName() ?> has saved the user model ' .
+        $template = array();
+        $template['template'] = '<?= $this->event->getParam(\'user\')->getName() ?> has saved the user model ' .
             '<a href="<?= $this->url(\'config/user/edit\', array(\'id\' => $this->event->getParam' .
             '(\'object\')->getId())) ?>"><?= $this->event->getParam(\'object\')->getId() ?></a>';
+        $template['event_identifier'] = 'Gc\\User\\Model';
+        $template['event_name'] = 'on.something';
         $result   = 'Pierre Rambaud has saved the user model ' .
             '<a href="/admin/config/user/edit/1">1</a>';
 

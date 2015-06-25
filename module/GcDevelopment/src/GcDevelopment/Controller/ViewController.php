@@ -246,37 +246,4 @@ class ViewController extends Action
 
         return $response;
     }
-
-    /**
-     * Update database from files
-     *
-     * @return \Zend\Http\Response
-     */
-    public function updateAction()
-    {
-        $viewId = $this->getRouteMatch()->getParam('id', null);
-        if (!empty($viewId)) {
-            $view = View\Model::fromId($viewId);
-            if (empty($view)) {
-                $this->flashMessenger()->addErrorMessage('This view can not be update');
-                return $this->redirect()->toRoute('development/view/edit', array('id' => $viewId));
-            }
-
-            $view->setContent($view->getFileContents());
-            $view->save();
-            $this->flashMessenger()->addSuccessMessage('View updated');
-            return $this->redirect()->toRoute('development/view/edit', array('id' => $viewId));
-        } else {
-            $views    = new View\Collection();
-            $children = $views->getViews();
-
-            foreach ($children as $child) {
-                $child->setContent($child->getFileContents());
-                $child->save();
-            }
-        }
-
-        $this->flashMessenger()->addSuccessMessage('Views updated');
-        return $this->redirect()->toRoute('development/view');
-    }
 }

@@ -1,0 +1,27 @@
+<div class="wp-pagenavi">
+    <?php if ($this->pageCount): ?>
+        <p class="clearfix">
+            <?php if (isset($this->previous)): ?>
+                <a class="float right" href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $this->previous; ?>">
+                    Newer
+                </a>
+            <?php endif; ?>
+
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <a href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $page; ?>">
+                        <?php echo $page; ?>
+                    </a>
+                <?php else: ?>
+                    <span class="current"><?php echo $page; ?></span>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php if (isset($this->next)): ?>
+                <a class="float" href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $this->next; ?>">
+                    Previous
+                </a>
+            <?php endif; ?>
+        </p>
+    <?php endif; ?>
+</div>

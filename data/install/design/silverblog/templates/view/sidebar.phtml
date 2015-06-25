@@ -1,0 +1,63 @@
+<div id="sidebarwrap">
+    <?php $sidebarElements = $this->tools('unserialize', $this->currentDocument()->getProperty('sidebarElements')->getValue()); ?>
+    <?php if (empty($sidebarElements)): //Take home value if page does not have one ?>
+        <?php $sidebarElements = $this->tools('unserialize', $this->document()->getProperty('sidebarElements')->getValue()); ?>
+    <?php endif; ?>
+
+    <?php if (!empty($sidebarElements)): ?>
+        <?php foreach($sidebarElements as $element): ?>
+            <h2><?php echo $this->escapeHtml($element[0]['value']); ?></h2>
+            <?php echo $element[1]['value']; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php $blogChildren = $this->document('')->getAvailableChildren(); ?>
+    <h2>Categories</h2>
+    <ul>
+        <?php foreach($blogChildren as $child): ?>
+            <?php $nbPosts = count($child->getAvailableChildren()); ?>
+            <li><a href="<?php echo $this->escapeHtml($child->getUrl()); ?>"><?php echo $this->escapeHtml($child->getName()); ?></a>(<?php echo $nbPosts; ?>)</li>
+        <?php endforeach; ?>
+    </ul>
+
+    <?php
+    $posts = $blogChildren;
+    foreach ($posts as $child) {
+        $children = $child->getChildren();
+        if (!empty($children)) {
+            foreach ($children as $child) {
+                $posts[] = $child;
+            }
+        }
+    }
+
+    foreach ($posts as $idx => $child) {
+        if ($child->getView()->getIdentifier() != 'blog-ticket') {
+            unset($posts[$idx]);
+        }
+    }
+
+    if (!function_exists('sortObjects')) {
+        function sortObjects($a, $b) {
+            $aPublishedAt = $a->getProperty('published_at')->getValue();
+            $bPublishedAt = $b->getProperty('published_at')->getValue();
+            if ($aPublishedAt == $bPublishedAt) {
+                return 0;
+            }
+
+            return ($aPublishedAt > $bPublishedAt) ? -1 : 1;
+        }
+    }
+
+    usort($posts, 'sortObjects');
+    ?>
+    <h2>Latest Posts</h2>
+    <ul>
+        <?php foreach($posts as $idx => $post): ?>
+            <li><a href="<?php echo $this->escapeHtml($post->getUrl()); ?>"><?php echo $this->escapeHtml($post->getProperty('title')->getValue()); ?></a></li>
+            <?php if ($idx >= 8): ?>
+                <?php break; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </ul>
+</div>

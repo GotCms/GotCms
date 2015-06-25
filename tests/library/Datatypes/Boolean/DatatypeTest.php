@@ -94,7 +94,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
         $this->view = ViewModel::fromArray(
             array(
                 'name' => 'View Name',
-                'identifier' => 'View identifier',
+                'identifier' => 'view-identifier',
                 'description' => 'View Description',
                 'content' => 'View Content'
             )
@@ -104,7 +104,7 @@ class DatatypeTest extends \PHPUnit_Framework_TestCase
         $this->layout = LayoutModel::fromArray(
             array(
                 'name' => 'Layout Name',
-                'identifier' => 'Layout identifier',
+                'identifier' => 'layout-identifier',
                 'description' => 'Layout Description',
                 'content' => 'Layout Content'
             )

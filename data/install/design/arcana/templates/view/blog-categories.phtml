@@ -1,0 +1,10 @@
+<div class="3u">
+    <section>
+        <h3><?php echo $this->escapeHtml($this->translate('Categories')); ?></h3>
+        <ul class="link-list">
+            <?php foreach($this->document('blog')->getAvailableChildren() as $child): ?>
+                <li><a href="<?php echo $this->escapeHtml($child->getUrl()); ?>"><?php echo $this->escapeHtml($child->getName()); ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </section>
+</div>

@@ -251,37 +251,4 @@ class LayoutController extends Action
 
         return $response;
     }
-
-    /**
-     * Update database from files
-     *
-     * @return \Zend\Http\Response
-     */
-    public function updateAction()
-    {
-        $layoutId = $this->getRouteMatch()->getParam('id', null);
-        if (!empty($layoutId)) {
-            $layout = Layout\Model::fromId($layoutId);
-            if (empty($layout)) {
-                $this->flashMessenger()->addErrorMessage('This layout can not be update');
-                return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutId));
-            }
-
-            $layout->setContent($layout->getFileContents());
-            $layout->save();
-            $this->flashMessenger()->addSuccessMessage('View updated');
-            return $this->redirect()->toRoute('development/layout/edit', array('id' => $layoutId));
-        } else {
-            $layouts  = new Layout\Collection();
-            $children = $layouts->getLayouts();
-
-            foreach ($children as $child) {
-                $child->setContent($child->getFileContents());
-                $child->save();
-            }
-        }
-
-        $this->flashMessenger()->addSuccessMessage('Layouts updated');
-        return $this->redirect()->toRoute('development/layout');
-    }
 }

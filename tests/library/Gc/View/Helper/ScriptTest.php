@@ -68,7 +68,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->script->save();
-        $this->useStreamWrapper(1);
         $serviceManager = Registry::get('Application')->getServiceManager();
         $this->object   = new Script($serviceManager);
         $serviceManager->setAllowOverride(true);
@@ -91,7 +90,6 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->useStreamWrapper(0);
         unset($this->object);
         $this->script->delete();
         unset($this->script);
@@ -116,9 +114,8 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testInvokeWithoutStreamwrapper()
+    public function testInvokeWithTemplates()
     {
-        $this->useStreamWrapper(0);
         $this->object = new Script(Registry::get('Application')->getServiceManager());
         ob_start();
         $this->object->__invoke('script-identifier');
@@ -242,11 +239,5 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     public function testCallWithIsCallablePlugin()
     {
         $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Params', $this->object->params());
-    }
-
-    protected function useStreamWrapper($value = 1)
-    {
-        $coreConfig = Registry::get('Application')->getServiceManager()->get('CoreConfig');
-        $coreConfig->setValue('stream_wrapper_is_active', $value);
     }
 }

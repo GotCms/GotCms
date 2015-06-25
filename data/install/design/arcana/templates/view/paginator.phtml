@@ -1,0 +1,15 @@
+<?php if ($this->pageCount): ?>
+    <p class="clearfix">
+        <?php if (isset($this->next)): ?>
+            <a class="button float" href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $this->next; ?>">
+                &lt;&lt; Previous Posts
+            </a>
+        <?php endif; ?>
+
+        <?php if (isset($this->previous)): ?>
+            <a class="button float right" href="<?php echo $this->escapeHtml($this->path); ?>?page=<?php echo $this->previous; ?>">
+                Newer Posts &gt;&gt;
+            </a>
+        <?php endif; ?>
+    </p>
+<?php endif; ?>

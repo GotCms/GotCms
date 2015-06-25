@@ -223,7 +223,7 @@ class File extends Object
             $directory->close();
         } else {
             $result = copy($source, $destination);
-            @chmod($destination, self::FILE_PERMISSION);
+            chmod($destination, self::FILE_PERMISSION);
 
             return $result;
         }

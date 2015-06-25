@@ -101,7 +101,7 @@ CREATE TABLE `layout` (
     `updated_at` DATETIME NOT NULL,
     `name` VARCHAR(255) NOT NULL,
     `identifier` VARCHAR(255) NOT NULL,
-    `content` TEXT,
+
     `description` VARCHAR(255),
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`identifier`)
@@ -195,7 +195,6 @@ CREATE TABLE `view` (
     `updated_at` DATETIME NOT NULL,
     `name` VARCHAR(255) NOT NULL,
     `identifier` VARCHAR(255),
-    `content` TEXT,
     `description` VARCHAR(255),
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`identifier`)
@@ -207,7 +206,7 @@ CREATE TABLE `script` (
     `updated_at` DATETIME NOT NULL,
     `name` VARCHAR(255) NOT NULL,
     `identifier` VARCHAR(255),
-    `content` TEXT,
+
     `description` VARCHAR(255),
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`identifier`)

@@ -87,7 +87,7 @@ class Module extends AbstractModule
                         $event->setParam('user', $remote->getIpAddress());
                     }
 
-                    $content = $this->template->render($event, $template['template']);
+                    $content = $this->template->render($event, $template);
                     $this->template->addEvent($content, $template['id'], $userId);
                 }
             );

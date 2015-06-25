@@ -405,32 +405,6 @@ class Config extends AbstractForm
 
         $this->add($cacheFieldset);
 
-        //Stream settings
-        $streamFieldset = new Fieldset('stream');
-        $streamFieldset->setLabel('Stream Wrapper');
-
-        $isActive = new Element\Checkbox('stream_wrapper_is_active');
-        $isActive->setLabel('Stream wrapper is active')
-            ->setLabelAttributes(
-                array(
-                    'class' => 'required control-label col-lg-2'
-                )
-            )
-            ->setAttribute('class', 'input-checkbox')
-            ->setAttribute('id', 'stream-is-active')
-            ->setCheckedValue('1');
-        $streamFieldset->add($isActive);
-
-        $this->getInputFilter()->add(
-            array(
-                'name' => 'stream_wrapper_is_active',
-                'required' => false,
-            ),
-            'stream_wrapper_is_active'
-        );
-
-        $this->add($streamFieldset);
-
         return $this;
     }
 

@@ -1,0 +1,58 @@
+<!doctype html>
+
+<html lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<title><?php echo $this->escapeHtml($this->pageTitle); ?> - <?php echo $this->escapeHtml($this->config()->get('site_name')); ?></title>
+<link href="<?php echo $this->cdn('/frontend/css/style.css'); ?>" rel="stylesheet" type="text/css">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script src="<?php echo $this->cdn('/frontend/js/belatedPNG.js'); ?>"></script>
+<script>
+    DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+<script src="<?php echo $this->cdn('/frontend/js/jquery-1.4.min.js'); ?>" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="bodywrap">
+    <section id="pagetop">
+        <nav id="sitenav">
+            <?php
+                $component = new \Gc\Component\Navigation();
+                $container = new \Zend\Navigation\Navigation($component->render());
+                $this->navigation($container);
+                $document = $this->currentDocument();
+
+                echo $this->navigation()->menu()->setMaxDepth(0)->setUlClass('sf-menu navigation');
+            ?>
+        </nav>
+    </section>
+
+    <header id="pageheader">
+        <h1><a href="<?php echo $this->document()->getUrl(); ?>"><?php echo $this->escapeHtml($this->config()->get('site_name')); ?></a></h1>
+    </header>
+    <div id="contents">
+        <section id="main">
+            <?php echo $this->content; ?>
+        </section>
+        <section id="sidebar">
+            <?php echo $this->partial('sidebar', array('currentDocument' => $this->currentDocument())); ?>
+        </section>
+        <div class="clear"></div>
+    </div>
+</div>
+<footer id="pagefooter">
+    <div id="footerwrap">
+        <div class="copyright">
+            <?php echo date('Y'); ?> &copy; <?php echo $this->escapeHtml($this->config()->get('site_name')); ?>
+        </div>
+        <div class="credit">
+            <a href="http://cssheaven.org" title="Downlaod Free CSS Templates">Website Template</a> by CSSHeaven.org
+        </div>
+    </div>
+</footer>
+</body>
+</html>

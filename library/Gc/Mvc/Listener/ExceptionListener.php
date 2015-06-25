@@ -75,10 +75,6 @@ class ExceptionListener extends AbstractListenerAggregate
                 );
 
                 $event->getViewModel()->setTemplate('layout/' . $layout->getIdentifier());
-                if ($coreConfig->getValue('stream_wrapper_is_active')) {
-                    $templatePathStack->setUseStreamWrapper(true);
-                    file_put_contents('zend.view://layout/' . $layout->getIdentifier(), $layout->getContent());
-                }
             }
         }
     }

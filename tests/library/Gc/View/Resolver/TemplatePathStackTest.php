@@ -121,45 +121,6 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testResolveWithStream()
-    {
-        Stream::register();
-        $this->object->setUseStreamWrapper(true);
-        file_put_contents('zend.view://foo.bar', PHP_EOL);
-        $markup = $this->object->resolve('foo.bar');
-        $this->assertEquals('zend.view://foo.bar', $markup);
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testResolveWithStreamAndEmptyFile()
-    {
-        Stream::register();
-        $this->object->setUseStreamWrapper(true);
-        $markup = $this->object->resolve('bar.foo');
-        $this->assertFalse($markup);
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
-    public function testResolveWithStreamAndNoStreamWrapperActive()
-    {
-        $markup = $this->object->resolve('foo.bar');
-        $this->assertFalse($markup);
-
-    }
-
-    /**
-     * Test
-     *
-     * @return void
-     */
     public function testResolveWithPharProtocol()
     {
         $path = 'phar://' . __DIR__

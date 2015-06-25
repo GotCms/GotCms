@@ -29,7 +29,6 @@ namespace ActivityLog\Model;
 
 use Gc\Db\AbstractTable;
 use Gc\View\Renderer;
-use Gc\View\Stream;
 use Zend\EventManager;
 
 /**
@@ -54,6 +53,19 @@ class Template extends AbstractTable
      * @var string
      */
     protected $name = 'activity_log_template';
+
+    /**
+     * Initialize adapter
+     *
+     * @return void
+     */
+    public function init()
+    {
+        $this->setTmpPath(GC_APPLICATION_PATH . '/data/tmp/activity-logs');
+        if (file_exists($this->getTmpPath()) === false) {
+            mkdir($this->getTmpPath());
+        }
+    }
 
     /**
      * Return all documents with Event(s)
@@ -81,20 +93,23 @@ class Template extends AbstractTable
      * Render template from event params
      *
      * @param EventManager\Event $event    Event
-     * @param string             $template Template
+     * @param array              $template Template data
      *
      * @return string
      */
     public function render(EventManager\Event $event, $template)
     {
         if (empty($this->renderer)) {
-            Stream::register();
             $this->renderer = new Renderer();
-            $this->renderer->useStreamWrapper();
+            $this->renderer->addPath($this->getTmpPath());
         }
 
-        $name = 'activitylog.event';
-        file_put_contents('zend.view://' . $name, $template);
+        $name = sprintf(
+            'event-%s-%s',
+            str_replace(array('\\', '/'), '-', $template['event_identifier']),
+            $template['event_name']
+        );
+        file_put_contents($this->getTmpPath() . '/' . $name . '.phtml', $template['template']);
 
         return $this->renderer->render($name, array('event' => $event));
     }

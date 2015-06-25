@@ -1,0 +1,85 @@
+<?php if (!empty($this->image)): ?>
+    <section id="featured">
+        <h2 class="ftheading">Featured</h2>
+        <div class="ftwrap">
+            <div class="ftimg">
+                <img src="<?php echo $this->image['value']; ?>" width="<?php echo $this->image['width']; ?>" height="<?php echo $this->image['height']; ?>" alt="">
+            </div>
+            <div class="fttxt"><?php echo $this->content; ?></div>
+        </div>
+    </section>
+<?php endif; ?>
+<div id="leftcontainer">
+    <h2 class="mainheading">Latest from the blog</h2>
+    <?php
+    $comment_table = new \Blog\Model\Comment();
+    $posts = $this->currentDocument()->getAvailableChildren();
+    foreach ($posts as $child) {
+        $children = $child->getChildren();
+        if(!empty($children)) {
+            foreach($children as $child) {
+                $posts[] = $child;
+            }
+        }
+    }
+
+    foreach($posts as $idx => $child) {
+        if($child->getView()->getIdentifier() != 'blog-ticket') {
+            unset($posts[$idx]);
+        }
+    }
+
+    function sortObjects($a, $b) {
+        $aPublishedAt = $a->getProperty('published_at')->getValue();
+        $bPublishedAt = $b->getProperty('published_at')->getValue();
+        if ($aPublishedAt == $bPublishedAt) {
+            return 0;
+        }
+
+        return ($aPublishedAt > $bPublishedAt) ? -1 : 1;
+    }
+
+    usort($posts, 'sortObjects');
+
+    $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($posts));
+    $paginator->setItemCountPerPage(5);
+    $paginator->setCurrentPageNumber(empty($_GET['page']) ? 1 : (int)$_GET['page']);
+    ?>
+
+    <?php if(!empty($posts)): ?>
+        <?php foreach($paginator as $post): ?>
+            <article class="post">
+                <header>
+                    <h3><a href="<?php echo $this->escapeHtml($post->getUrl()); ?>"><?php echo $this->escapeHtml($post->getProperty('title')->getValue()); ?></a></h3>
+                    <p class="postinfo">
+                        <?php $parent = $post->getParent(); ?>
+                        Published on <time><?php echo $this->escapeHtml(date('Y-m-d', strtotime($post->getProperty('published_at')->getValue()))); ?></time> under <a href="<?php echo $this->escapeHtml($parent->getUrl()); ?>"><?php echo $this->escapeHtml($parent->getName()); ?></a>
+                    </p>
+                </header>
+
+                <?php echo $post->getProperty('shortContent')->getValue(); ?>
+
+                <footer>
+                    <span class="author"><?php echo $this->escapeHtml($post->getProperty('authorName')->getValue()); ?></span>
+                    <span class="permalink"><a href="<?php echo $this->escapeHtml($post->getUrl()); ?>">Read Full</a></span>
+                    <?php $comments = $comment_table->getList($post->getId()); ?>
+                    <?php $nb_comments = count($comments); ?>
+                    <?php if(!empty($nb_comments)): ?>
+                        <span class="comments">
+                             &bull; <a href="<?php echo $this->escapeHtml($post->getUrl()); ?>#comments_list">
+                                <?php if($nb_comments == 1): ?>
+                                    1 Comment
+                                <?php else: ?>
+                                    <?php echo $nb_comments; ?> Comments
+                                <?php endif; ?>
+                            </a>
+                        </span>
+                    <?php endif; ?>
+                </footer>
+            </article>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php echo $this->paginationControl($paginator, 'sliding', 'paginator', array('path' => $this->currentDocument()->getUrl()));?>
+    <div class="clear"></div>
+</div>

@@ -1,0 +1,84 @@
+<div class="subpage" id="main-wrapper">
+    <div class="container">
+        <div class="row">
+            <?php echo $this->partial('blog-categories'); ?>
+            <div class="9u skel-cell-mainContent">
+                <?php
+                $comment_table = new \Blog\Model\Comment();
+
+                $posts = $this->currentDocument()->getAvailableChildren();
+                foreach($posts as $child)
+                {
+                    $children = $child->getChildren();
+                    if(!empty($children))
+                    {
+                        foreach($children as $child)
+                        {
+                            $posts[] = $child;
+                        }
+                    }
+                }
+
+                foreach($posts as $idx => $child)
+                {
+                    if($child->getView()->getIdentifier() != 'blog-ticket')
+                    {
+                        unset($posts[$idx]);
+                    }
+                }
+
+                function sortObjects($a, $b)
+                {
+                    if($a->getCreatedAt() == $b->getCreatedAt())
+                    {
+                        return 0;
+                    }
+
+                    return ($a->getCreatedAt() > $b->getCreatedAt()) ? -1 : 1;
+                }
+
+                uasort($posts, 'sortObjects');
+
+                $paginator = new \Zend\Paginator\Paginator(new \Zend\Paginator\Adapter\ArrayAdapter($posts));
+                $paginator->setItemCountPerPage(5);
+                $paginator->setCurrentPageNumber(empty($_GET['page']) ? 1 : (int)$_GET['page']);
+                ?>
+
+                <?php if(!empty($posts)): ?>
+                    <?php foreach($paginator as $post): ?>
+                        <article class="first">
+                            <div>
+                                <h2><a href="<?php echo $this->escapeHtml($post->getUrl()); ?>"><?php echo $this->escapeHtml($post->getProperty('title')->getValue()); ?></a></h2>
+                                <?php $parent = $post->getParent(); ?>
+                                <p class="sub"><a href="<?php echo $this->escapeHtml($parent->getUrl()); ?>"><?php echo $this->escapeHtml($parent->getName()); ?></a> &bull; <?php echo $this->escapeHtml(date('Y-m-d', strtotime($post->getProperty('published_at')->getValue()))); ?>
+                                    <?php $comments = $comment_table->getList($post->getId()); ?>
+                                    <?php $nb_comments = count($comments); ?>
+                                    <?php if(!empty($nb_comments)): ?>
+                                         &bull; <a href="<?php echo $this->escapeHtml($post->getUrl()); ?>#comments_list">
+                                            <?php if($nb_comments == 1): ?>
+                                                1 Comment
+                                            <?php else: ?>
+                                                <?php echo $nb_comments; ?> Comments
+                                            <?php endif; ?>
+                                        </a>
+                                    <?php endif; ?>
+                                </p>
+
+                                <?php $image = $this->tools('unserialize', $post->getProperty('image')->getValue()); ?>
+                                <?php if(!empty($image)): ?>
+                                    <img class="thumb" src="<?php echo $this->escapeHtml($image['570x150']['value']); ?>" alt="" width="570" height="150">
+                                <?php endif; ?>
+
+                                 <?php echo $post->getProperty('shortContent')->getValue(); ?>
+
+                                <p class="clearfix"><a href="<?php echo $this->escapeHtml($post->getUrl()); ?>" class="button right">Read More...</a></p>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+
+                <?php endif; ?>
+                <?php echo $this->paginationControl($paginator, 'sliding', 'paginator', array('path' => $this->currentDocument()->getUrl()));?>
+            </div>
+        </div>
+    </div>
+</div>

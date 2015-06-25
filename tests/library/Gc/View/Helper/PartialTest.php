@@ -76,7 +76,6 @@ class PartialTest extends \PHPUnit_Framework_TestCase
 
         $view              = new View();
         $templatePathStack = new TemplatePathStack();
-        $templatePathStack->setUseStreamWrapper(true);
         $templatePathStack->addPath(GC_TEMPLATE_PATH);
         $view->setResolver($templatePathStack);
         $this->object->setView($view);

@@ -1,0 +1,52 @@
+<div class="subpage" id="main-wrapper">
+    <div class="container">
+        <div class="row">
+            <?php echo $this->partial('blog-categories'); ?>
+            <div class="9u skel-cell-mainContent">
+                <?php
+                $return = $this->script('blog-comment');
+                if ($return === true) {
+                    return;
+                }
+
+                $comment_table = new \Blog\Model\Comment();
+                $comments = $comment_table->getList($this->currentDocument()->getId());
+                $nb_comments = count($comments);
+                ?>
+
+                <?php echo $this->partial('flash-messages'); ?>
+                    <article class="first">
+                        <div>
+                            <h2 class="title"><?php echo $this->escapeHtml($this->title); ?></h2>
+                            <?php $parent = $this->currentDocument()->getParent(); ?>
+                            <p class="sub">
+                                <a href="<?php echo $this->escapeHtml($parent->getUrl()); ?>"><?php echo $this->escapeHtml($parent->getName()); ?></a> &bull; <?php echo $this->escapeHtml(date('Y-m-d', strtotime($this->published_at))); ?>
+                                <?php if(!empty($nb_comments)): ?>
+                                    &bull; <a href="#comments_list">
+                                        <?php if($nb_comments == 1): ?>
+                                            1 Comment
+                                        <?php else: ?>
+                                            <?php echo $nb_comments; ?> Comments
+                                        <?php endif; ?>
+                                    </a>
+                                <?php endif; ?>
+                            </p>
+                            <div class="hr dotted clearfix">&nbsp;</div>
+                            <?php echo $this->content; ?>
+                            <p class="clearfix">
+                                <a href="<?php echo $this->escapeHtml($this->document('blog')->getUrl()); ?>" class="button float">&lt;&lt; Back to Blog</a>
+                                <a href="#comment_form" class="button float right">Discuss this post</a>
+                            </p>
+                        </div>
+                    </article>
+                <div class="hr clearfix">&nbsp;</div>
+
+                <?php echo $this->modulePlugin('Blog', 'comment-list'); ?>
+
+                <div class="hr clearfix">&nbsp;</div>
+
+                <?php echo $this->modulePlugin('Blog', 'comment-form'); ?>
+            </div>
+        </div>
+    </div>
+</div>

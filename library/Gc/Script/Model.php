@@ -70,6 +70,9 @@ class Model extends AbstractTable
         $scriptTable = new Model();
         $scriptTable->setData($array);
         $scriptTable->setOrigData();
+        if (empty($array['content'])) {
+            $scriptTable->setContent($scriptTable->getContent());
+        }
 
         return $scriptTable;
     }
@@ -87,8 +90,7 @@ class Model extends AbstractTable
         $row         = $scriptTable->fetchRow($scriptTable->select(array('id' => (int) $scriptId)));
         $scriptTable->events()->trigger(__CLASS__, 'before.load', $scriptTable);
         if (!empty($row)) {
-            $scriptTable->setData((array) $row);
-            $scriptTable->setOrigData();
+            $scriptTable = self::fromArray((array) $row);
             $scriptTable->events()->trigger(__CLASS__, 'after.load', $scriptTable);
             return $scriptTable;
         } else {
@@ -131,7 +133,6 @@ class Model extends AbstractTable
             'name' => $this->getName(),
             'identifier' => $this->getIdentifier(),
             'description' => $this->getDescription(),
-            'content' => $this->getContent(),
             'updated_at' => new Expression('NOW()'),
         );
 
@@ -149,7 +150,7 @@ class Model extends AbstractTable
                 unlink($oldFilename);
             }
 
-            file_put_contents($this->getFilePath(), $this->getContent());
+            file_put_contents($this->getFilePath(), $this->getData('content'));
             $this->events()->trigger(__CLASS__, 'after.save', $this);
 
             return $this->getId();
@@ -206,8 +207,12 @@ class Model extends AbstractTable
      *
      * @return string
      */
-    public function getFileContents()
+    public function getContent()
     {
-        return file_get_contents($this->getFilePath());
+        if (file_exists($this->getFilePath())) {
+            return file_get_contents($this->getFilePath());
+        } else {
+            return '';
+        }
     }
 }

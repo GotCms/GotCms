@@ -1,0 +1,40 @@
+<div id="main-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="12u">
+                <div id="banner">
+                    <a href="#"><img src="<?php echo $this->cdn($this->banner['value']); ?>" alt="" /></a>
+                    <div class="caption">
+                        <span><?php echo $this->escapeHtml($this->translate($this->bannerTitle)); ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="3u">
+                <section class="first">
+                    <h2><?php echo $this->escapeHtml($this->translate($this->blockTitle1)); ?></h2>
+                    <?php echo $this->translate($this->blockContent1); ?>
+                </section>
+            </div>
+            <div class="3u">
+                <section>
+                    <h2><?php echo $this->escapeHtml($this->translate($this->blockTitle2)); ?></h2>
+                    <?php echo $this->translate($this->blockContent2); ?>
+                </section>
+            </div>
+            <div class="3u">
+                <section>
+                    <h2><?php echo $this->escapeHtml($this->translate($this->blockTitle3)); ?></h2>
+                    <?php echo $this->translate($this->blockContent3); ?>
+                </section>
+            </div>
+            <div class="3u">
+                <section class="last">
+                    <h2><?php echo $this->escapeHtml($this->translate($this->blockTitle4)); ?></h2>
+                    <?php echo $this->translate($this->blockContent4); ?>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

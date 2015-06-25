@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+    Arcana 2.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+        <title><?php echo $this->escapeHtml($this->pageTitle); ?></title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="<?php echo $this->escapeHtml($this->metaDescription); ?>" />
+        <meta name="keywords" content="<?php echo $this->escapeHtml($this->metaKeywords); ?>" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel="stylesheet" />
+        <script src="<?php echo $this->cdn('/frontend/js/jquery-1.9.1.min.js'); ?>"></script>
+        <script src="<?php echo $this->cdn('/frontend/js/config.js'); ?>"></script>
+        <script src="<?php echo $this->cdn('/frontend/js/skel.min.js'); ?>"></script>
+        <script src="<?php echo $this->cdn('/frontend/js/skel-ui.min.js'); ?>"></script>
+        <noscript>
+            <link rel="stylesheet" src="<?php echo $this->cdn('/frontend/css/skel-noscript.css'); ?>"/>
+            <link rel="stylesheet" src="<?php echo $this->cdn('/frontend/css/style.css'); ?>"/>
+            <link rel="stylesheet" src="<?php echo $this->cdn('/frontend/css/style-desktop.css'); ?>"/>
+        </noscript>
+        <!--[if lte IE 9]><link rel="stylesheet" src="<?php echo $this->cdn('/frontend/css/style-ie9.css'); ?>"/><![endif]-->
+        <!--[if lte IE 8]><script src="<?php echo $this->cdn('/frontend/js/html5shiv.js'); ?>"></script><![endif]-->
+    </head>
+    <body>
+        <div id="header-wrapper">
+            <header class="container" id="site-header">
+                <div class="row">
+                    <div class="12u">
+                        <div id="logo">
+                            <h1><?php echo $this->escapeHtml($this->config()->get('site_name')); ?></h1>
+                        </div>
+                        <?php echo $this->partial('header'); ?>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <?php echo $this->content; ?>
+
+        <?php echo $this->partial('footer'); ?>
+    </body>
+</html>

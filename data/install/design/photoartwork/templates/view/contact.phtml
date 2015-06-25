@@ -1,0 +1,22 @@
+<?php echo $this->partial('flash-messages'); ?>
+<?php $return = $this->script('contact'); ?>
+<?php
+$number_1 = mt_rand(1, 9);
+$number_2 = mt_rand(1, 9);
+$answer = substr(sha1($number_1+$number_2),5,10);
+?>
+
+<form id="contact" action="<?php echo $this->escapeHtml($this->document('contact')->getUrl()); ?>" method="post">
+    <?php if(!empty($return['error_message'])): ?>
+        <div class="notification error"><span><?php echo $this->escapeHtml($return['error_message']); ?><span></div>
+    <?php endif; ?>
+
+    <div class="form_settings">
+        <p><span>Name</span><input class="contact" type="text" name="name" value="<?php echo $this->escapeHtml(!empty($return['name']) ? $return['name'] : ''); ?>" /></p>
+        <p><span>Email Address</span><input class="contact" type="text" name="email" value="<?php echo $this->escapeHtml(!empty($return['email']) ? $return['email'] : ''); ?>" /></p>
+        <p><span>Message</span><textarea class="contact textarea" rows="5" cols="50" name="message"><?php echo $this->escapeHtml(!empty($return['message']) ? $return['message'] : ''); ?></textarea></p>
+        <p style="line-height: 1.7em;">To help prevent spam, please enter the answer to this question:</p>
+        <p><span><?php echo $number_1; ?> + <?php echo $number_2; ?> = ?</span><input type="text" name="answer" /><input type="hidden" name="answer_hash" value="<?php echo $answer; ?>" /></p>
+        <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="send" /></p>
+    </div>
+</form>

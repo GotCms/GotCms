@@ -250,37 +250,4 @@ class ScriptController extends Action
 
         return $response;
     }
-
-    /**
-     * Update database from files
-     *
-     * @return \Zend\Http\Response
-     */
-    public function updateAction()
-    {
-        $scriptId = $this->getRouteMatch()->getParam('id', null);
-        if (!empty($scriptId)) {
-            $script = Script\Model::fromId($scriptId);
-            if (empty($script)) {
-                $this->flashMessenger()->addErrorMessage('This script can not be update');
-                return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptId));
-            }
-
-            $script->setContent($script->getFileContents());
-            $script->save();
-            $this->flashMessenger()->addSuccessMessage('Script updated');
-            return $this->redirect()->toRoute('development/script/edit', array('id' => $scriptId));
-        } else {
-            $scripts  = new Script\Collection();
-            $children = $scripts->getScripts();
-
-            foreach ($children as $child) {
-                $child->setContent($child->getFileContents());
-                $child->save();
-            }
-        }
-
-        $this->flashMessenger()->addSuccessMessage('Scripts updated');
-        return $this->redirect()->toRoute('development/script');
-    }
 }

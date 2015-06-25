@@ -1,0 +1,9 @@
+<?php if(!empty($this->layout()->flashMessages)): ?>
+    <?php foreach($this->layout()->flashMessages as $type => $messages):?>
+        <?php foreach($messages as $message): ?>
+            <div class="notification <?php echo $type; ?>">
+             <?php echo $this->escapeHtml($this->translate($message)); ?>
+            </div>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

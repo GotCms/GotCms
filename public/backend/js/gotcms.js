@@ -876,18 +876,6 @@ var Gc = (function($)
                 }
             };
 
-            $('.btn-info.update-content').on('click', function () {
-                $($template).dialog({
-                    modal: true,
-                    title:      '<div class="widget-header widget-header-small"> \
-                        <h4><i class="glyphicon glyphicon-warning-sign"></i> \
-                        ' + Translator.translate('Update content') + '</h4></div>',
-                    buttons: $buttons
-                });
-
-                return false;
-            });
-
             $('#upload-link').on('click', function() {
                 $('#form-content').toggleClass('hide');
                 return false;

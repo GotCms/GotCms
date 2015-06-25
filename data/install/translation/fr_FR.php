@@ -276,8 +276,6 @@ return array (
     'View' => 'Vue',
     'Layout' => 'Gabarit',
     'Previewy' => 'Prévisualiser',
-    'Stream wrapper' => 'Gestionnaire de flux',
-    'Stream wrapper is active' => 'Le gestionnaire de flux (stream wrapper) est activé',
     'Session path' => 'Chemin de session',
     'Document information' => 'Information sur le document',
     'Force backend SSL' => 'Forcer le ssl sur l\'admin',
