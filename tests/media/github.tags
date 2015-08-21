@@ -1,18 +1,14 @@
 [
 {
-    "ref": "refs/tags/1.5.2",
-    "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/1.5.2"
-},
-{
-    "ref": "refs/tags/1.5.3",
-    "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/1.5.3"
-},
-{
     "ref": "refs/tags/1.6.0",
     "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/1.6.0"
 },
 {
     "ref": "refs/tags/1.6.1",
     "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/1.6.1"
+},
+{
+    "ref": "refs/tags/1.6.2",
+    "url": "https://api.github.com/repos/GotCms/GotCms/git/refs/tags/1.6.2"
 }
 ]
