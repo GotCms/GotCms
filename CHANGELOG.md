@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.6.2 (21 Aug 2015)
+- Adapter problem with updater ([https://github.com/GotCms/GotCms/issues/294](https://github.com/GotCms/GotCms/issues/294))
+
 ## 1.6.1 (21 Aug 2015)
 - Update to Zend Framework 2.4.7 ([https://github.com/GotCms/GotCms/issues/293](https://github.com/GotCms/GotCms/issues/293))
 
