@@ -15,7 +15,7 @@ Master status: [![Build Status](https://travis-ci.org/GotCms/GotCms.png?branch=m
 
 ## Release information
 
-### Updates in 1.6.0
+### Updates in 1.6.1
 
 Please see [CHANGELOG.md](https://github.com/GotCms/GotCms/blob/master/CHANGELOG.md).
 
@@ -27,7 +27,7 @@ Please see [CHANGELOG.md](https://github.com/GotCms/GotCms/blob/master/CHANGELOG
 Composer:
 
     $ curl -s https://getcomposer.org/installer | php
-    $ php composer.phar create-project gotcms/gotcms path/ 1.6.0
+    $ php composer.phar create-project gotcms/gotcms path/ 1.6.1
 
 Git:
 
@@ -35,7 +35,7 @@ Git:
 
 Zip archive:
 
-[https://github.com/GotCms/GotCms/archive/1.6.0.zip](https://github.com/GotCms/GotCms/archive/1.6.0.zip)
+[https://github.com/GotCms/GotCms/archive/1.6.1.zip](https://github.com/GotCms/GotCms/archive/1.6.1.zip)
 
 
 ### Apache configuration
