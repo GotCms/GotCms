@@ -1,23 +1,23 @@
-# GotCms (referred to as legacy go to https://github.com/GotCms/GotCms)
+# GotCms
 
-Master status: [![Build Status](https://travis-ci.org/GotCms/GotCms-legacy.png?branch=master)](https://travis-ci.org/GotCms/GotCms-legacy)
-[![Coverage Status](https://coveralls.io/repos/GotCms/GotCms-legacy/badge.png)](https://coveralls.io/r/GotCms/GotCms-legacy)
-[![Latest Stable Version](https://poser.pugx.org/GotCms/GotCms-legacy/v/stable.png)](https://packagist.org/packages/GotCms/GotCms-legacy)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GotCms/GotCms-legacy/badges/quality-score.png?s=fa6f300890dac808070c12b50a9f7d19859ca9ec)](https://scrutinizer-ci.com/g/GotCms/GotCms-legacy/)
+Master status: [![Build Status](https://travis-ci.org/GotCms/GotCms.png?branch=master)](https://travis-ci.org/GotCms/GotCms)
+[![Coverage Status](https://coveralls.io/repos/GotCms/GotCms/badge.png)](https://coveralls.io/r/GotCms/GotCms)
+[![Latest Stable Version](https://poser.pugx.org/GotCms/GotCms/v/stable.png)](https://packagist.org/packages/GotCms/GotCms)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GotCms/GotCms/badges/quality-score.png?s=fa6f300890dac808070c12b50a9f7d19859ca9ec)](https://scrutinizer-ci.com/g/GotCms/GotCms/)
 
 ## About GotCms
 
 * GotCms is a **Content Management System** (CMS) based on [Zend Framework 2](http://framework.zend.com/) which enables you to build websites and powerful online applications.
 * GotCms [Official site](http://got-cms.com)
 * This product has been made available under the terms of the GNU Lesser General Public License version 3.
-* Please read the [LICENSE.txt](https://github.com/GotCms/GotCms-legacy/blob/master/LICENSE.txt) file for the exact license details that apply to GotCms.
+* Please read the [LICENSE.txt](https://github.com/GotCms/GotCms/blob/master/LICENSE.txt) file for the exact license details that apply to GotCms.
 * See [features](http://got-cms.com/discover/features)
 
 ## Release information
 
 ### Updates in 1.6.2
 
-Please see [CHANGELOG.md](https://github.com/GotCms/GotCms-legacy/blob/master/CHANGELOG.md).
+Please see [CHANGELOG.md](https://github.com/GotCms/GotCms/blob/master/CHANGELOG.md).
 
 
 ## Installation
@@ -31,11 +31,11 @@ Composer:
 
 Git:
 
-    $ git clone https://github.com/GotCms/GotCms-legacy.git
+    $ git clone https://github.com/GotCms/GotCms.git
 
 Zip archive:
 
-[https://github.com/GotCms/GotCms-legacy/archive/1.6.2.zip](https://github.com/GotCms/GotCms-legacy/archive/1.6.2.zip)
+[https://github.com/GotCms/GotCms/archive/1.6.2.zip](https://github.com/GotCms/GotCms/archive/1.6.2.zip)
 
 
 ### Apache configuration
@@ -127,7 +127,7 @@ On Windows with wampserver, if you encounter an `403 Forbidden`:
 ## Contributing
 
 If you wish to contribute to GotCms, please read the
-[CONTRIBUTING.md](https://github.com/GotCms/GotCms-legacy/blob/master/CONTRIBUTING.md).
+[CONTRIBUTING.md](https://github.com/GotCms/GotCms/blob/master/CONTRIBUTING.md).
 
 
 ## Notes
