@@ -7,4 +7,4 @@
 
     > not a quote
     - not a list item
-    [not a reference]: http://foo.com
+    [not a reference]: http://foo.co

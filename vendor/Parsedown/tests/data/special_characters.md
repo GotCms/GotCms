@@ -10,4 +10,4 @@ this & that
 
 [reference link][1]
 
-[1]: http://example.com/?a=1&b=2
+[1]: http://example.com/?a=1&b=

@@ -10,4 +10,4 @@ this_is_not_an_emphasis
 
 an empty emphasis __ ** is not an emphasis
 
-*mixed **double and* single asterisk** spans
+*mixed **double and* single asterisk** span

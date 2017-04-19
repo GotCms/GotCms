@@ -72,7 +72,7 @@ Make sure read and write access are available by apache user/group for these dir
 - data/cache
 
 
-###Required
+### Required
 
 - An HTTP server
 - Php version >= 5.3.23

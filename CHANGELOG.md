@@ -33,14 +33,14 @@
 - Button add not working when creating a translation ([https://github.com/GotCms/GotCms/issues/267](https://github.com/GotCms/GotCms/issues/267))
 - Textrich bug in mixed datatype ([https://github.com/GotCms/GotCms/issues/266](https://github.com/GotCms/GotCms/issues/266))
 
-##1.4.2 (23 Jun 2014)
+## 1.4.2 (23 Jun 2014)
 - Unpublished document can be view if we know the url ([https://github.com/GotCms/GotCms/issues/258](https://github.com/GotCms/GotCms/issues/258))
 
-##1.4.1 (23 Jun 2014)
+## 1.4.1 (23 Jun 2014)
 - Cache problem with memcached and two websites on the same server ([https://github.com/GotCms/GotCms/issues/256](https://github.com/GotCms/GotCms/issues/256))
 - Document menu is not selected ([https://github.com/GotCms/GotCms/issues/257](https://github.com/GotCms/GotCms/issues/257))
 
-##1.4.0 (23 Jun 2014)
+## 1.4.0 (23 Jun 2014)
 - Add Markdown datatype ([https://github.com/GotCms/GotCms/issues/234](https://github.com/GotCms/GotCms/issues/234))
 - Update to Zend Framework 2.3.1 ([https://github.com/GotCms/GotCms/issues/236](https://github.com/GotCms/GotCms/issues/236))
 - Intl is no longer required ([https://github.com/GotCms/GotCms/issues/237](https://github.com/GotCms/GotCms/issues/237))
@@ -57,7 +57,7 @@
 - Move public data into modules and datatypes ([https://github.com/GotCms/GotCms/issues/252](https://github.com/GotCms/GotCms/issues/252))
 - Rename modules ([https://github.com/GotCms/GotCms/issues/251](https://github.com/GotCms/GotCms/issues/251))
 
-##1.3.0 (30 Mar 2014)
+## 1.3.0 (30 Mar 2014)
 - Remove layout when using ajax requests ([https://github.com/GotCms/GotCms/issues/185](https://github.com/GotCms/GotCms/issues/185))
 - Add disable user function ([https://github.com/GotCms/GotCms/issues/195](https://github.com/GotCms/GotCms/issues/195))
 - Can't delete a tab in Document Type ([https://github.com/GotCms/GotCms/issues/205](https://github.com/GotCms/GotCms/issues/205))
@@ -80,7 +80,7 @@
 - Backup module does not download all documents ([https://github.com/GotCms/GotCms/issues/233](https://github.com/GotCms/GotCms/issues/233))
 - Add TinyUrl datatype ([https://github.com/GotCms/GotCms/issues/235](https://github.com/GotCms/GotCms/issues/235))
 
-##1.2.0 (26 Jan 2014)
+## 1.2.0 (26 Jan 2014)
 - Can not select "Document Type" on creating children page ([https://github.com/GotCms/GotCms/issues/161](https://github.com/GotCms/GotCms/issues/161))
 - Cannot install on Windows due to the max_execution_time directive ([https://github.com/GotCms/GotCms/issues/129](https://github.com/GotCms/GotCms/issues/129))
 - Wordings ([https://github.com/GotCms/GotCms/issues/163](https://github.com/GotCms/GotCms/issues/163))
@@ -102,7 +102,7 @@
 ### Potential Breakage
 With the issue `Refactoring events`, now you can't do `getParam('object')` when you attach an event.
 
-##1.1.0 (11 Dec 2013)
+## 1.1.0 (11 Dec 2013)
 - Update to Zend Framework 2.2.5 ([https://github.com/GotCms/GotCms/issues/141](https://github.com/GotCms/GotCms/issues/141))
 - Add redirect in init method does nothing ([https://github.com/GotCms/GotCms/issues/142](https://github.com/GotCms/GotCms/issues/142))
 - Installation error: config/autoload is empty ([https://github.com/GotCms/GotCms/issues/134](https://github.com/GotCms/GotCms/issues/134))
@@ -123,7 +123,7 @@ With the issue `Refactoring events`, now you can't do `getParam('object')` when 
 With the issue `Installation error: config/autoload is empty`, you must copy `config/autoload/global.php` to `config/autoload/local.php`
 before update.
 
-##1.0.0 (28 Oct 2013):
+## 1.0.0 (28 Oct 2013):
 - Bug with french translation ([https://github.com/GotCms/GotCms/issues/131](https://github.com/GotCms/GotCms/issues/131))
 - Use of undefined constant update - assumed update ([https://github.com/GotCms/GotCms/issues/133](https://github.com/GotCms/GotCms/issues/133))
 - Rebuild backend design ([https://github.com/GotCms/GotCms/issues/102](https://github.com/GotCms/GotCms/issues/102))
@@ -134,7 +134,7 @@ before update.
 - Add sort for mixed datatype ([https://github.com/GotCms/GotCms/issues/139](https://github.com/GotCms/GotCms/issues/139))
 - Add method to import/export translations ([https://github.com/GotCms/GotCms/issues/130](https://github.com/GotCms/GotCms/issues/130))
 
-##0.2.1 (01 Sep 2013):
+## 0.2.1 (01 Sep 2013):
 - Force ssl not working ([https://github.com/GotCms/GotCms/issues/123](https://github.com/GotCms/GotCms/issues/123))
 - Allow routes in custom Modules ([https://github.com/GotCms/GotCms/issues/122](https://github.com/GotCms/GotCms/issues/122))
 - Update jQuery, jQuery ui and CodeMirror ([https://github.com/GotCms/GotCms/issues/125](https://github.com/GotCms/GotCms/issues/125))
@@ -149,7 +149,7 @@ More, you must add route name with the name of the module.
 Example:
 Module ActivityLog must have root activity-log
 
-##0.2.0 (04 Aug 2013):
+## 0.2.0 (04 Aug 2013):
 - User without user acl can't log out ([https://github.com/GotCms/GotCms/issues/107](https://github.com/GotCms/GotCms/issues/107))
 - Css in chrome ([https://github.com/GotCms/GotCms/issues/108](https://github.com/GotCms/GotCms/issues/108))
 - Ctrl + S not working on chrome ([https://github.com/GotCms/GotCms/issues/109](https://github.com/GotCms/GotCms/issues/109))
@@ -169,7 +169,7 @@ Module ActivityLog must have root activity-log
 All acl have been changed, and if you added new roles, you must redefined them after the update.
 
 
-##0.1.9 (20 Jul 2013):
+## 0.1.9 (20 Jul 2013):
 - Can't update cms with git ([https://github.com/GotCms/GotCms/issues/76](https://github.com/GotCms/GotCms/issues/76))
 - Add Zend Validate translations ([https://github.com/GotCms/GotCms/issues/77](https://github.com/GotCms/GotCms/issues/77))
 - Optimize routes ([https://github.com/GotCms/GotCms/issues/79](https://github.com/GotCms/GotCms/issues/79))
@@ -198,7 +198,7 @@ and for scripts you must used `$this->getServiceLocator()->get('CoreConfig')`.
 Events names have been renamed. You must use the dot separator instead camelCase.
 
 
-##0.1.8 (02 Jun 2013):
+## 0.1.8 (02 Jun 2013):
 - Problem with replacement and mixed datatype ([https://github.com/GotCms/GotCms/issues/55](https://github.com/GotCms/GotCms/issues/55))
 - Use cms_version instead version ([https://github.com/GotCms/GotCms/issues/57](https://github.com/GotCms/GotCms/issues/57))
 - Optimize the helper "documents" ([https://github.com/GotCms/GotCms/issues/58](https://github.com/GotCms/GotCms/issues/58))
@@ -215,11 +215,11 @@ Events names have been renamed. You must use the dot separator instead camelCase
 - Mixed datatype has problems when datatype return more than one element ([https://github.com/GotCms/GotCms/issues/75](https://github.com/GotCms/GotCms/issues/75))
 - Make more themes for installation ([https://github.com/GotCms/GotCms/issues/47](https://github.com/GotCms/GotCms/issues/47))
 
-##0.1.7 (30 Apr 2013):
+## 0.1.7 (30 Apr 2013):
 - Get latest version can failed on certain php version ([https://github.com/GotCms/GotCms/issues/53](https://github.com/GotCms/GotCms/issues/53))
 - Missing version modification in Gc\Version ([https://github.com/GotCms/GotCms/issues/54](https://github.com/GotCms/GotCms/issues/54))
 
-##0.1.6 (30 Apr 2013):
+## 0.1.6 (30 Apr 2013):
 - Only last key is required to display document ([https://github.com/GotCms/GotCms/issues/42](https://github.com/GotCms/GotCms/issues/42))
 - Cache thrown exception ([https://github.com/GotCms/GotCms/issues/43](https://github.com/GotCms/GotCms/issues/43))
 - Add specific layout for exception in front ([https://github.com/GotCms/GotCms/issues/44](https://github.com/GotCms/GotCms/issues/44))
@@ -231,7 +231,7 @@ Events names have been renamed. You must use the dot separator instead camelCase
 - Bug with postgresql during installation ([https://github.com/GotCms/GotCms/issues/51](https://github.com/GotCms/GotCms/issues/51))
 - View Stream bug with huge content length ([https://github.com/GotCms/GotCms/issues/52](https://github.com/GotCms/GotCms/issues/52))
 
-##0.1.5 (08 Apr 2013):
+## 0.1.5 (08 Apr 2013):
 - Git updater failed ([https://github.com/GotCms/GotCms/issues/24](https://github.com/GotCms/GotCms/issues/24))
 - Add translation directory for installation
 - Add captcha for blog module ([https://github.com/GotCms/GotCms/issues/25](https://github.com/GotCms/GotCms/issues/25))
